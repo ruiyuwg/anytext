@@ -24,6 +24,11 @@ export async function list(args: string[]): Promise<void> {
 }
 
 function listLibraries(libraries: Library[]): void {
+  if (libraries.length === 0) {
+    console.log(dim("No libraries available."));
+    return;
+  }
+
   const maxId = Math.max(...libraries.map((l) => l.id.length));
   const maxVer = Math.max(...libraries.map((l) => l.version.length));
 
@@ -38,6 +43,11 @@ function listLibraries(libraries: Library[]): void {
 }
 
 function listTopics(library: Library): void {
+  if (library.topics.length === 0) {
+    console.log(`${heading(library.name)} ${dim(`v${library.version}`)} ${dim("—")} ${dim("0 topics")}`);
+    return;
+  }
+
   const maxId = Math.max(...library.topics.map((t) => t.id.length));
 
   const lines = [

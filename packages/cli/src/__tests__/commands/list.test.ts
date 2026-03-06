@@ -65,6 +65,36 @@ describe("list", () => {
     expect(output).not.toContain("useState");
   });
 
+  it("shows message when no libraries available", async () => {
+    const registry = await import("../../registry.js");
+    vi.mocked(registry.getManifest).mockResolvedValue(
+      makeManifest({ libraries: [] })
+    );
+    const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
+    await list([]);
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("No libraries available"));
+  });
+
+  it("shows message when library has no topics", async () => {
+    const registry = await import("../../registry.js");
+    vi.mocked(registry.getManifest).mockResolvedValue(
+      makeManifest({
+        libraries: [
+          {
+            id: "empty",
+            name: "Empty",
+            description: "No topics",
+            version: "1.0",
+            topics: [],
+          },
+        ],
+      })
+    );
+    const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
+    await list(["empty"]);
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("0 topics"));
+  });
+
   it("exits with error for unknown library", async () => {
     const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
     const exitSpy = vi
