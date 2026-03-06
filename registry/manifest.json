@@ -1,0 +1,70 @@
+{
+  "version": 1,
+  "updatedAt": "2026-03-06",
+  "libraries": [
+    {
+      "id": "hono",
+      "name": "Hono",
+      "description": "Lightweight, ultrafast web framework for the Edge",
+      "version": "4",
+      "topics": [
+        {
+          "id": "getting-started",
+          "title": "Getting Started",
+          "description": "Installation, setup, and basic usage of Hono",
+          "tags": ["install", "setup", "quickstart", "hello world"],
+          "path": "hono/getting-started.md",
+          "tokens": 1800
+        },
+        {
+          "id": "routing",
+          "title": "Routing",
+          "description": "Route definitions, path parameters, method handlers, and grouping",
+          "tags": ["routes", "params", "get", "post", "put", "delete", "groups"],
+          "path": "hono/routing.md",
+          "tokens": 2200
+        },
+        {
+          "id": "context",
+          "title": "Context API",
+          "description": "The Context object (c) — request, response, headers, JSON, HTML, and helpers",
+          "tags": ["context", "request", "response", "c.json", "c.text", "c.html", "c.req", "c.header"],
+          "path": "hono/context.md",
+          "tokens": 2500
+        },
+        {
+          "id": "middleware",
+          "title": "Middleware",
+          "description": "Built-in and custom middleware: CORS, logger, auth, error handling",
+          "tags": ["middleware", "cors", "logger", "bearer", "jwt", "basicAuth", "prettyJSON"],
+          "path": "hono/middleware.md",
+          "tokens": 2800
+        }
+      ]
+    },
+    {
+      "id": "zod",
+      "name": "Zod",
+      "description": "TypeScript-first schema declaration and validation",
+      "version": "3",
+      "topics": [
+        {
+          "id": "schemas",
+          "title": "Defining Schemas",
+          "description": "All schema types: strings, numbers, objects, arrays, enums, unions, and more",
+          "tags": ["z.string", "z.number", "z.object", "z.array", "z.enum", "z.union", "z.literal", "z.optional", "z.nullable"],
+          "path": "zod/schemas.md",
+          "tokens": 3500
+        },
+        {
+          "id": "validation",
+          "title": "Validation & Parsing",
+          "description": "parse, safeParse, refinements, transforms, and error handling",
+          "tags": ["parse", "safeParse", "refine", "transform", "superRefine", "ZodError", "coerce"],
+          "path": "zod/validation.md",
+          "tokens": 2400
+        }
+      ]
+    }
+  ]
+}
