@@ -57,12 +57,12 @@ To retrieve a type from your table schema for `select` and `insert` queries, you
 \<Tabs items={\["PostgreSQL", "MySQL", "SQLite", "SingleStore", "MSSQL", "CockroachDB"]}> <Tab>
 
 ```ts
-import { serial, text, pgTable } from 'drizzle-orm/pg-core';
-import { type InferSelectModel, type InferInsertModel } from 'drizzle-orm'
+import { serial, text, pgTable } from "drizzle-orm/pg-core";
+import { type InferSelectModel, type InferInsertModel } from "drizzle-orm";
 
-const users = pgTable('users', {
-  id: serial('id').primaryKey(),
-  name: text('name').notNull(),
+const users = pgTable("users", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
 });
 
 type SelectUser = typeof users.$inferSelect;
@@ -89,8 +89,8 @@ name: text('name').notNull(),
 type SelectUser = typeof users.$inferSelect;
 type InsertUser = typeof users.$inferInsert;
 // or
-type SelectUser = typeof users.*.$inferSelect;
-type InsertUser = typeof users.*.$inferInsert;
+type SelectUser = typeof users._.$inferSelect;
+type InsertUser = typeof users._.$inferInsert;
 // or
 type SelectUser = InferSelectModel;
 type InsertUser = InferInsertModel;
@@ -131,8 +131,8 @@ name: text('name').notNull(),
 type SelectUser = typeof users.$inferSelect;
 type InsertUser = typeof users.$inferInsert;
 // or
-type SelectUser = typeof users.*.$inferSelect;
-type InsertUser = typeof users.*.$inferInsert;
+type SelectUser = typeof users._.$inferSelect;
+type InsertUser = typeof users._.$inferInsert;
 // or
 type SelectUser = InferSelectModel;
 type InsertUser = InferInsertModel;
@@ -173,8 +173,8 @@ name: text().notNull(),
 type SelectUser = typeof users.$inferSelect;
 type InsertUser = typeof users.$inferInsert;
 // or
-type SelectUser = typeof users.*.$inferSelect;
-type InsertUser = typeof users.*.$inferInsert;
+type SelectUser = typeof users._.$inferSelect;
+type InsertUser = typeof users._.$inferInsert;
 // or
 type SelectUser = InferSelectModel;
 type InsertUser = InferInsertModel;
@@ -195,8 +195,8 @@ const db = drizzle({ logger: true });
 You can change the logs destination by creating a `DefaultLogger` instance and providing a custom `writer` to it:
 
 ```typescript copy
-import { DefaultLogger, LogWriter } from 'drizzle-orm/logger';
-import { drizzle } from 'drizzle-orm/...'; // driver specific
+import { DefaultLogger, LogWriter } from "drizzle-orm/logger";
+import { drizzle } from "drizzle-orm/..."; // driver specific
 
 class MyLogWriter implements LogWriter {
   write(message: string) {
@@ -211,8 +211,8 @@ const db = drizzle({ logger });
 You can also create a custom logger:
 
 ```typescript copy
-import { Logger } from 'drizzle-orm/logger';
-import { drizzle } from 'drizzle-orm/...'; // driver specific
+import { Logger } from "drizzle-orm/logger";
+import { drizzle } from "drizzle-orm/..."; // driver specific
 
 class MyLogger implements Logger {
   logQuery(query: string, params: unknown[]): void {
@@ -231,66 +231,70 @@ It's very useful when you need to keep schemas of different projects in one data
 \<CodeTabs items={\["PostgreSQL", "MySQL", "SQLite", "SingleStore", "MSSQL", "CockroachDB"]}>
 
 ```ts {3}
-import { serial, text, pgTableCreator } from 'drizzle-orm/pg-core';
+import { serial, text, pgTableCreator } from "drizzle-orm/pg-core";
 
 const pgTable = pgTableCreator((name) => `project1_${name}`);
 
-const users = pgTable('users', {
-  id: serial('id').primaryKey(),
-  name: text('name').notNull(),
+const users = pgTable("users", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
 });
 ```
 
 ```ts {3}
-import { int, text, mysqlTableCreator } from 'drizzle-orm/mysql-core';
+import { int, text, mysqlTableCreator } from "drizzle-orm/mysql-core";
 
 const mysqlTable = mysqlTableCreator((name) => `project1_${name}`);
 
-const users = mysqlTable('users', {
-  id: int('id').primaryKey(),
-  name: text('name').notNull(),
+const users = mysqlTable("users", {
+  id: int("id").primaryKey(),
+  name: text("name").notNull(),
 });
 ```
 
 ```ts {3}
-import { int, text, sqliteTableCreator } from 'drizzle-orm/sqlite-core';
+import { int, text, sqliteTableCreator } from "drizzle-orm/sqlite-core";
 
 const sqliteTable = sqliteTableCreator((name) => `project1_${name}`);
 
-const users = sqliteTable('users', {
-  id: int('id').primaryKey(),
-  name: text('name').notNull(),
+const users = sqliteTable("users", {
+  id: int("id").primaryKey(),
+  name: text("name").notNull(),
 });
 ```
 
 ```ts {3}
-import { int, text, singlestoreTableCreator } from 'drizzle-orm/singlestore-core';
+import {
+  int,
+  text,
+  singlestoreTableCreator,
+} from "drizzle-orm/singlestore-core";
 
 const singlestoreTable = singlestoreTableCreator((name) => `project1_${name}`);
 
-const users = singlestoreTable('users', {
-  id: int('id').primaryKey(),
-  name: text('name').notNull(),
+const users = singlestoreTable("users", {
+  id: int("id").primaryKey(),
+  name: text("name").notNull(),
 });
 ```
 
 ```ts {3}
-import { int, text, mssqlTableCreator } from 'drizzle-orm/mssql-core';
+import { int, text, mssqlTableCreator } from "drizzle-orm/mssql-core";
 
 const mssqlTable = mssqlTableCreator((name) => `project1_${name}`);
 
-const users = mssqlTable('users', {
+const users = mssqlTable("users", {
   id: int().primaryKey(),
   name: text().notNull(),
 });
 ```
 
 ```ts {3}
-import { int4, text, cockroachTableCreator } from 'drizzle-orm/cockroach-core';
+import { int4, text, cockroachTableCreator } from "drizzle-orm/cockroach-core";
 
 const pgTable = cockroachTableCreator((name) => `project1_${name}`);
 
-const users = pgTable('users', {
+const users = pgTable("users", {
   id: int4().primaryKey(),
   name: text().notNull(),
 });
@@ -301,13 +305,13 @@ const users = pgTable('users', {
 import { defineConfig } from "drizzle-kit";
 
 export default defineConfig({
-schema: "./src/schema/*",
+schema: "./src/schema/_",
 out: "./drizzle",
 dialect: "mysql",
 dbCredentials: {
-url: process.env.DATABASE\_URL,
+url: process.env.DATABASE_URL,
 }
-tablesFilter: \["project1\_*"],
+tablesFilter: \["project1\__"],
 });
 
 ````
@@ -753,7 +757,7 @@ You can use it with any available type in Drizzle.
 **Few examples**
 
 ```ts
-import { Column, is } from 'drizzle-orm';
+import { Column, is } from "drizzle-orm";
 
 if (is(value, Column)) {
   // value's type is narrowed to Column
@@ -776,7 +780,7 @@ you can provide schema if necessary for types
 
 ```ts
 import { drizzle } from "drizzle-orm/...";
-import * as schema from "./schema"
+import * as schema from "./schema";
 
 const db = drizzle.mock({ schema });
 ```

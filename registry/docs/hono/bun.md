@@ -50,12 +50,12 @@ See the [Bun starter template](https://github.com/honojs/starter/tree/main/templ
 "Hello World" script is below. Almost the same as writing on other platforms.
 
 ```ts
-import { Hono } from 'hono'
+import { Hono } from "hono";
 
-const app = new Hono()
-app.get('/', (c) => c.text('Hello Bun!'))
+const app = new Hono();
+app.get("/", (c) => c.text("Hello Bun!"));
 
-export default app
+export default app;
 ```
 
 If you are setting up Hono on an existing project, the `bun run dev` command expects the "Hello World" script to be placed in `src/index.tx`
@@ -75,16 +75,17 @@ Then, access `http://localhost:3000` in your browser.
 You can specify the port number with exporting the `port`.
 
 ```ts
-import { Hono } from 'hono'
+import { Hono } from "hono";
 
-const app = new Hono()
-app.get('/', (c) => c.text('Hello Bun!'))
+const app = new Hono();
+app.get("/", (c) => c.text("Hello Bun!"));
 
-export default app // [!code --]
-export default { // [!code ++]
+export default app; // [!code --]
+export default {
+  // [!code ++]
   port: 3000, // [!code ++]
   fetch: app.fetch, // [!code ++]
-} // [!code ++]
+}; // [!code ++]
 ```
 
 ## Serve static files
@@ -92,14 +93,14 @@ export default { // [!code ++]
 To serve static files, use `serveStatic` imported from `hono/bun`.
 
 ```ts
-import { serveStatic } from 'hono/bun'
+import { serveStatic } from "hono/bun";
 
-const app = new Hono()
+const app = new Hono();
 
-app.use('/static/*', serveStatic({ root: './' }))
-app.use('/favicon.ico', serveStatic({ path: './favicon.ico' }))
-app.get('/', (c) => c.text('You can access: /static/hello.txt'))
-app.get('*', serveStatic({ path: './static/fallback.txt' }))
+app.use("/static/*", serveStatic({ root: "./" }));
+app.use("/favicon.ico", serveStatic({ path: "./favicon.ico" }));
+app.get("/", (c) => c.text("You can access: /static/hello.txt"));
+app.get("*", serveStatic({ path: "./static/fallback.txt" }));
 ```
 
 For the above code, it will work well with the following directory structure.
@@ -123,13 +124,12 @@ If you want to map `http://localhost:3000/static/*` to `./statics`, you can use 
 
 ```ts
 app.get(
-  '/static/*',
+  "/static/*",
   serveStatic({
-    root: './',
-    rewriteRequestPath: (path) =>
-      path.replace(/^\/static/, '/statics'),
-  })
-)
+    root: "./",
+    rewriteRequestPath: (path) => path.replace(/^\/static/, "/statics"),
+  }),
+);
 ```
 
 ### `mimes`
@@ -138,14 +138,14 @@ You can add MIME types with `mimes`:
 
 ```ts
 app.get(
-  '/static/*',
+  "/static/*",
   serveStatic({
     mimes: {
-      m3u8: 'application/vnd.apple.mpegurl',
-      ts: 'video/mp2t',
+      m3u8: "application/vnd.apple.mpegurl",
+      ts: "video/mp2t",
     },
-  })
-)
+  }),
+);
 ```
 
 ### `onFound`
@@ -154,14 +154,14 @@ You can specify handling when the requested file is found with `onFound`:
 
 ```ts
 app.get(
-  '/static/*',
+  "/static/*",
   serveStatic({
     // ...
     onFound: (_path, c) => {
-      c.header('Cache-Control', `public, immutable, max-age=31536000`)
+      c.header("Cache-Control", `public, immutable, max-age=31536000`);
     },
-  })
-)
+  }),
+);
 ```
 
 ### `onNotFound`
@@ -170,13 +170,13 @@ You can specify handling when the requested file is not found with `onNotFound`:
 
 ```ts
 app.get(
-  '/static/*',
+  "/static/*",
   serveStatic({
     onNotFound: (path, c) => {
-      console.log(`${path} is not found, you access ${c.req.path}`)
+      console.log(`${path} is not found, you access ${c.req.path}`);
     },
-  })
-)
+  }),
+);
 ```
 
 ### `precompressed`
@@ -185,11 +185,11 @@ The `precompressed` option checks if files with extensions like `.br` or `.gz` a
 
 ```ts
 app.get(
-  '/static/*',
+  "/static/*",
   serveStatic({
     precompressed: true,
-  })
-)
+  }),
+);
 ```
 
 ## Testing
@@ -197,16 +197,16 @@ app.get(
 You can use `bun:test` for testing on Bun.
 
 ```ts
-import { describe, expect, it } from 'bun:test'
-import app from '.'
+import { describe, expect, it } from "bun:test";
+import app from ".";
 
-describe('My first test', () => {
-  it('Should return 200 Response', async () => {
-    const req = new Request('http://localhost/')
-    const res = await app.fetch(req)
-    expect(res.status).toBe(200)
-  })
-})
+describe("My first test", () => {
+  it("Should return 200 Response", async () => {
+    const req = new Request("http://localhost/");
+    const res = await app.fetch(req);
+    expect(res.status).toBe(200);
+  });
+});
 ```
 
 Then, run the command.

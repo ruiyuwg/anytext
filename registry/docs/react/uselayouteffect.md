@@ -8,11 +8,11 @@
 useLayoutEffect(setup, dependencies?)
 ```
 
-***
+---
 
-## Reference {/*reference*/}
+## Reference {/_reference_/}
 
-### `useLayoutEffect(setup, dependencies?)` {/*useinsertioneffect*/}
+### `useLayoutEffect(setup, dependencies?)` {/_useinsertioneffect_/}
 
 Call `useLayoutEffect` to perform the layout measurements before the browser repaints the screen:
 
@@ -32,17 +32,17 @@ function Tooltip() {
 
 [See more examples below.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parameters {/_parameters_/}
 
-- `setup`: The function with your Effect's logic. Your setup function may also optionally return a *cleanup* function. Before your [component commits](/learn/render-and-commit#step-3-react-commits-changes-to-the-dom), React will run your setup function. After every commit with changed dependencies, React will first run the cleanup function (if you provided it) with the old values, and then run your setup function with the new values. Before your component is removed from the DOM, React will run your cleanup function.
+- `setup`: The function with your Effect's logic. Your setup function may also optionally return a _cleanup_ function. Before your [component commits](/learn/render-and-commit#step-3-react-commits-changes-to-the-dom), React will run your setup function. After every commit with changed dependencies, React will first run the cleanup function (if you provided it) with the old values, and then run your setup function with the new values. Before your component is removed from the DOM, React will run your cleanup function.
 
 - **optional** `dependencies`: The list of all reactive values referenced inside of the `setup` code. Reactive values include props, state, and all the variables and functions declared directly inside your component body. If your linter is [configured for React](/learn/editor-setup#linting), it will verify that every reactive value is correctly specified as a dependency. The list of dependencies must have a constant number of items and be written inline like `[dep1, dep2, dep3]`. React will compare each dependency with its previous value using the [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) comparison. If you omit this argument, your Effect will re-run after every commit of the component.
 
-#### Returns {/*returns*/}
+#### Returns {/_returns_/}
 
 `useLayoutEffect` returns `undefined`.
 
-#### Caveats {/*caveats*/}
+#### Caveats {/_caveats_/}
 
 - `useLayoutEffect` is a Hook, so you can only call it **at the top level of your component** or your own Hooks. You can't call it inside loops or conditions. If you need that, extract a component and move the Effect there.
 
@@ -56,13 +56,13 @@ function Tooltip() {
 
 - If you trigger a state update inside `useLayoutEffect`, React will execute all remaining Effects immediately including `useEffect`.
 
-***
+---
 
-## Usage {/*usage*/}
+## Usage {/_usage_/}
 
-### Measuring layout before the browser repaints the screen {/*measuring-layout-before-the-browser-repaints-the-screen*/}
+### Measuring layout before the browser repaints the screen {/_measuring-layout-before-the-browser-repaints-the-screen_/}
 
-Most components don't need to know their position and size on the screen to decide what to render. They only return some JSX. Then the browser calculates their *layout* (position and size) and repaints the screen.
+Most components don't need to know their position and size on the screen to decide what to render. They only return some JSX. Then the browser calculates their _layout_ (position and size) and repaints the screen.
 
 Sometimes, that's not enough. Imagine a tooltip that appears next to some element on hover. If there's enough space, the tooltip should appear above the element, but if it doesn't fit, it should appear below. In order to render the tooltip at the right final position, you need to know its height (i.e. whether it fits at the top).
 
@@ -70,7 +70,7 @@ To do this, you need to render in two passes:
 
 1. Render the tooltip anywhere (even with a wrong position).
 2. Measure its height and decide where to place the tooltip.
-3. Render the tooltip *again* in the correct place.
+3. Render the tooltip _again_ in the correct place.
 
 **All of this needs to happen before the browser repaints the screen.** You don't want the user to see the tooltip moving. Call `useLayoutEffect` to perform the layout measurements before the browser repaints the screen:
 
@@ -90,7 +90,7 @@ function Tooltip() {
 
 Here's how this works step by step:
 
-1. `Tooltip` renders with the initial `tooltipHeight = 0`  (so the tooltip may be wrongly positioned).
+1. `Tooltip` renders with the initial `tooltipHeight = 0` (so the tooltip may be wrongly positioned).
 2. React places it in the DOM and runs the code in `useLayoutEffect`.
 3. Your `useLayoutEffect` [measures the height](https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect) of the tooltip content and triggers an immediate re-render.
 4. `Tooltip` renders again with the real `tooltipHeight` (so the tooltip is correctly positioned).
@@ -99,7 +99,7 @@ Here's how this works step by step:
 Hover over the buttons below and see how the tooltip adjusts its position depending on whether it fits:
 
 ```js
-import ButtonWithTooltip from './ButtonWithTooltip.js';
+import ButtonWithTooltip from "./ButtonWithTooltip.js";
 
 export default function App() {
   return (
@@ -117,17 +117,13 @@ export default function App() {
       </ButtonWithTooltip>
       <div style={{ height: 50 }} />
       <ButtonWithTooltip
-        tooltipContent={
-          <div>This tooltip fits above the button</div>
-        }
+        tooltipContent={<div>This tooltip fits above the button</div>}
       >
         Hover over me (tooltip below)
       </ButtonWithTooltip>
       <div style={{ height: 50 }} />
       <ButtonWithTooltip
-        tooltipContent={
-          <div>This tooltip fits above the button</div>
-        }
+        tooltipContent={<div>This tooltip fits above the button</div>}
       >
         Hover over me (tooltip below)
       </ButtonWithTooltip>
@@ -137,8 +133,8 @@ export default function App() {
 ```
 
 ```js src/ButtonWithTooltip.js
-import { useState, useRef } from 'react';
-import Tooltip from './Tooltip.js';
+import { useState, useRef } from "react";
+import Tooltip from "./Tooltip.js";
 
 export default function ButtonWithTooltip({ tooltipContent, ...rest }) {
   const [targetRect, setTargetRect] = useState(null);
@@ -162,20 +158,17 @@ export default function ButtonWithTooltip({ tooltipContent, ...rest }) {
         }}
       />
       {targetRect !== null && (
-        <Tooltip targetRect={targetRect}>
-          {tooltipContent}
-        </Tooltip>
-      )
-    }
+        <Tooltip targetRect={targetRect}>{tooltipContent}</Tooltip>
+      )}
     </>
   );
 }
 ```
 
 ```js src/Tooltip.js active
-import { useRef, useLayoutEffect, useState } from 'react';
-import { createPortal } from 'react-dom';
-import TooltipContainer from './TooltipContainer.js';
+import { useRef, useLayoutEffect, useState } from "react";
+import { createPortal } from "react-dom";
+import TooltipContainer from "./TooltipContainer.js";
 
 export default function Tooltip({ children, targetRect }) {
   const ref = useRef(null);
@@ -184,7 +177,7 @@ export default function Tooltip({ children, targetRect }) {
   useLayoutEffect(() => {
     const { height } = ref.current.getBoundingClientRect();
     setTooltipHeight(height);
-    console.log('Measured tooltip height: ' + height);
+    console.log("Measured tooltip height: " + height);
   }, []);
 
   let tooltipX = 0;
@@ -202,7 +195,7 @@ export default function Tooltip({ children, targetRect }) {
     <TooltipContainer x={tooltipX} y={tooltipY} contentRef={ref}>
       {children}
     </TooltipContainer>,
-    document.body
+    document.body,
   );
 }
 ```
@@ -212,11 +205,11 @@ export default function TooltipContainer({ children, x, y, contentRef }) {
   return (
     <div
       style={{
-        position: 'absolute',
-        pointerEvents: 'none',
+        position: "absolute",
+        pointerEvents: "none",
         left: 0,
         top: 0,
-        transform: `translate3d(${x}px, ${y}px, 0)`
+        transform: `translate3d(${x}px, ${y}px, 0)`,
       }}
     >
       <div ref={contentRef} className="tooltip">
@@ -238,12 +231,12 @@ export default function TooltipContainer({ children, x, y, contentRef }) {
 
 Notice that even though the `Tooltip` component has to render in two passes (first, with `tooltipHeight` initialized to `0` and then with the real measured height), you only see the final result. This is why you need `useLayoutEffect` instead of [`useEffect`](/reference/react/useEffect) for this example. Let's look at the difference in detail below.
 
-#### `useLayoutEffect` blocks the browser from repainting {/*uselayouteffect-blocks-the-browser-from-repainting*/}
+#### `useLayoutEffect` blocks the browser from repainting {/_uselayouteffect-blocks-the-browser-from-repainting_/}
 
 React guarantees that the code inside `useLayoutEffect` and any state updates scheduled inside it will be processed **before the browser repaints the screen.** This lets you render the tooltip, measure it, and re-render the tooltip again without the user noticing the first extra render. In other words, `useLayoutEffect` blocks the browser from painting.
 
 ```js
-import ButtonWithTooltip from './ButtonWithTooltip.js';
+import ButtonWithTooltip from "./ButtonWithTooltip.js";
 
 export default function App() {
   return (
@@ -261,17 +254,13 @@ export default function App() {
       </ButtonWithTooltip>
       <div style={{ height: 50 }} />
       <ButtonWithTooltip
-        tooltipContent={
-          <div>This tooltip fits above the button</div>
-        }
+        tooltipContent={<div>This tooltip fits above the button</div>}
       >
         Hover over me (tooltip below)
       </ButtonWithTooltip>
       <div style={{ height: 50 }} />
       <ButtonWithTooltip
-        tooltipContent={
-          <div>This tooltip fits above the button</div>
-        }
+        tooltipContent={<div>This tooltip fits above the button</div>}
       >
         Hover over me (tooltip below)
       </ButtonWithTooltip>
@@ -281,8 +270,8 @@ export default function App() {
 ```
 
 ```js src/ButtonWithTooltip.js
-import { useState, useRef } from 'react';
-import Tooltip from './Tooltip.js';
+import { useState, useRef } from "react";
+import Tooltip from "./Tooltip.js";
 
 export default function ButtonWithTooltip({ tooltipContent, ...rest }) {
   const [targetRect, setTargetRect] = useState(null);
@@ -306,20 +295,17 @@ export default function ButtonWithTooltip({ tooltipContent, ...rest }) {
         }}
       />
       {targetRect !== null && (
-        <Tooltip targetRect={targetRect}>
-          {tooltipContent}
-        </Tooltip>
-      )
-    }
+        <Tooltip targetRect={targetRect}>{tooltipContent}</Tooltip>
+      )}
     </>
   );
 }
 ```
 
 ```js src/Tooltip.js active
-import { useRef, useLayoutEffect, useState } from 'react';
-import { createPortal } from 'react-dom';
-import TooltipContainer from './TooltipContainer.js';
+import { useRef, useLayoutEffect, useState } from "react";
+import { createPortal } from "react-dom";
+import TooltipContainer from "./TooltipContainer.js";
 
 export default function Tooltip({ children, targetRect }) {
   const ref = useRef(null);
@@ -345,7 +331,7 @@ export default function Tooltip({ children, targetRect }) {
     <TooltipContainer x={tooltipX} y={tooltipY} contentRef={ref}>
       {children}
     </TooltipContainer>,
-    document.body
+    document.body,
   );
 }
 ```
@@ -355,11 +341,11 @@ export default function TooltipContainer({ children, x, y, contentRef }) {
   return (
     <div
       style={{
-        position: 'absolute',
-        pointerEvents: 'none',
+        position: "absolute",
+        pointerEvents: "none",
         left: 0,
         top: 0,
-        transform: `translate3d(${x}px, ${y}px, 0)`
+        transform: `translate3d(${x}px, ${y}px, 0)`,
       }}
     >
       <div ref={contentRef} className="tooltip">
@@ -379,12 +365,12 @@ export default function TooltipContainer({ children, x, y, contentRef }) {
 }
 ```
 
-#### `useEffect` does not block the browser {/*useeffect-does-not-block-the-browser*/}
+#### `useEffect` does not block the browser {/_useeffect-does-not-block-the-browser_/}
 
 Here is the same example, but with [`useEffect`](/reference/react/useEffect) instead of `useLayoutEffect`. If you're on a slower device, you might notice that sometimes the tooltip "flickers" and you briefly see its initial position before the corrected position.
 
 ```js
-import ButtonWithTooltip from './ButtonWithTooltip.js';
+import ButtonWithTooltip from "./ButtonWithTooltip.js";
 
 export default function App() {
   return (
@@ -402,17 +388,13 @@ export default function App() {
       </ButtonWithTooltip>
       <div style={{ height: 50 }} />
       <ButtonWithTooltip
-        tooltipContent={
-          <div>This tooltip fits above the button</div>
-        }
+        tooltipContent={<div>This tooltip fits above the button</div>}
       >
         Hover over me (tooltip below)
       </ButtonWithTooltip>
       <div style={{ height: 50 }} />
       <ButtonWithTooltip
-        tooltipContent={
-          <div>This tooltip fits above the button</div>
-        }
+        tooltipContent={<div>This tooltip fits above the button</div>}
       >
         Hover over me (tooltip below)
       </ButtonWithTooltip>
@@ -422,8 +404,8 @@ export default function App() {
 ```
 
 ```js src/ButtonWithTooltip.js
-import { useState, useRef } from 'react';
-import Tooltip from './Tooltip.js';
+import { useState, useRef } from "react";
+import Tooltip from "./Tooltip.js";
 
 export default function ButtonWithTooltip({ tooltipContent, ...rest }) {
   const [targetRect, setTargetRect] = useState(null);
@@ -447,20 +429,17 @@ export default function ButtonWithTooltip({ tooltipContent, ...rest }) {
         }}
       />
       {targetRect !== null && (
-        <Tooltip targetRect={targetRect}>
-          {tooltipContent}
-        </Tooltip>
-      )
-    }
+        <Tooltip targetRect={targetRect}>{tooltipContent}</Tooltip>
+      )}
     </>
   );
 }
 ```
 
 ```js src/Tooltip.js active
-import { useRef, useEffect, useState } from 'react';
-import { createPortal } from 'react-dom';
-import TooltipContainer from './TooltipContainer.js';
+import { useRef, useEffect, useState } from "react";
+import { createPortal } from "react-dom";
+import TooltipContainer from "./TooltipContainer.js";
 
 export default function Tooltip({ children, targetRect }) {
   const ref = useRef(null);
@@ -486,7 +465,7 @@ export default function Tooltip({ children, targetRect }) {
     <TooltipContainer x={tooltipX} y={tooltipY} contentRef={ref}>
       {children}
     </TooltipContainer>,
-    document.body
+    document.body,
   );
 }
 ```
@@ -496,11 +475,11 @@ export default function TooltipContainer({ children, x, y, contentRef }) {
   return (
     <div
       style={{
-        position: 'absolute',
-        pointerEvents: 'none',
+        position: "absolute",
+        pointerEvents: "none",
         left: 0,
         top: 0,
-        transform: `translate3d(${x}px, ${y}px, 0)`
+        transform: `translate3d(${x}px, ${y}px, 0)`,
       }}
     >
       <div ref={contentRef} className="tooltip">
@@ -523,7 +502,7 @@ export default function TooltipContainer({ children, x, y, contentRef }) {
 To make the bug easier to reproduce, this version adds an artificial delay during rendering. React will let the browser paint the screen before it processes the state update inside `useEffect`. As a result, the tooltip flickers:
 
 ```js
-import ButtonWithTooltip from './ButtonWithTooltip.js';
+import ButtonWithTooltip from "./ButtonWithTooltip.js";
 
 export default function App() {
   return (
@@ -541,17 +520,13 @@ export default function App() {
       </ButtonWithTooltip>
       <div style={{ height: 50 }} />
       <ButtonWithTooltip
-        tooltipContent={
-          <div>This tooltip fits above the button</div>
-        }
+        tooltipContent={<div>This tooltip fits above the button</div>}
       >
         Hover over me (tooltip below)
       </ButtonWithTooltip>
       <div style={{ height: 50 }} />
       <ButtonWithTooltip
-        tooltipContent={
-          <div>This tooltip fits above the button</div>
-        }
+        tooltipContent={<div>This tooltip fits above the button</div>}
       >
         Hover over me (tooltip below)
       </ButtonWithTooltip>
@@ -561,8 +536,8 @@ export default function App() {
 ```
 
 ```js src/ButtonWithTooltip.js
-import { useState, useRef } from 'react';
-import Tooltip from './Tooltip.js';
+import { useState, useRef } from "react";
+import Tooltip from "./Tooltip.js";
 
 export default function ButtonWithTooltip({ tooltipContent, ...rest }) {
   const [targetRect, setTargetRect] = useState(null);
@@ -586,20 +561,17 @@ export default function ButtonWithTooltip({ tooltipContent, ...rest }) {
         }}
       />
       {targetRect !== null && (
-        <Tooltip targetRect={targetRect}>
-          {tooltipContent}
-        </Tooltip>
-      )
-    }
+        <Tooltip targetRect={targetRect}>{tooltipContent}</Tooltip>
+      )}
     </>
   );
 }
 ```
 
 ```js {expectedErrors: {'react-compiler': [10, 11]}} src/Tooltip.js active
-import { useRef, useEffect, useState } from 'react';
-import { createPortal } from 'react-dom';
-import TooltipContainer from './TooltipContainer.js';
+import { useRef, useEffect, useState } from "react";
+import { createPortal } from "react-dom";
+import TooltipContainer from "./TooltipContainer.js";
 
 export default function Tooltip({ children, targetRect }) {
   const ref = useRef(null);
@@ -631,7 +603,7 @@ export default function Tooltip({ children, targetRect }) {
     <TooltipContainer x={tooltipX} y={tooltipY} contentRef={ref}>
       {children}
     </TooltipContainer>,
-    document.body
+    document.body,
   );
 }
 ```
@@ -641,11 +613,11 @@ export default function TooltipContainer({ children, x, y, contentRef }) {
   return (
     <div
       style={{
-        position: 'absolute',
-        pointerEvents: 'none',
+        position: "absolute",
+        pointerEvents: "none",
         left: 0,
         top: 0,
-        transform: `translate3d(${x}px, ${y}px, 0)`
+        transform: `translate3d(${x}px, ${y}px, 0)`,
       }}
     >
       <div ref={contentRef} className="tooltip">
@@ -669,16 +641,16 @@ Edit this example to `useLayoutEffect` and observe that it blocks the paint even
 
 Rendering in two passes and blocking the browser hurts performance. Try to avoid this when you can.
 
-***
+---
 
-## Troubleshooting {/*troubleshooting*/}
+## Troubleshooting {/_troubleshooting_/}
 
-### I'm getting an error: "`useLayoutEffect` does nothing on the server" {/*im-getting-an-error-uselayouteffect-does-nothing-on-the-server*/}
+### I'm getting an error: "`useLayoutEffect` does nothing on the server" {/_im-getting-an-error-uselayouteffect-does-nothing-on-the-server_/}
 
 The purpose of `useLayoutEffect` is to let your component [use layout information for rendering:](#measuring-layout-before-the-browser-repaints-the-screen)
 
 1. Render the initial content.
-2. Measure the layout *before the browser repaints the screen.*
+2. Measure the layout _before the browser repaints the screen._
 3. Render the final content using the layout information you've read.
 
 When you or your framework uses [server rendering](/reference/react-dom/server), your React app renders to HTML on the server for the initial render. This lets you show the initial HTML before the JavaScript code loads.
@@ -699,7 +671,7 @@ However, if you're running into this problem, you have a few different options:
 
 - If you synchronize your component with an external data store and rely on `useLayoutEffect` for different reasons than measuring layout, consider [`useSyncExternalStore`](/reference/react/useSyncExternalStore) instead which [supports server rendering.](/reference/react/useSyncExternalStore#adding-support-for-server-rendering)
 
-***
+---
 
 ## Sitemap
 

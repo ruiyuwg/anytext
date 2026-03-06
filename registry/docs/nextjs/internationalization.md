@@ -16,15 +16,15 @@ It’s recommended to use the user’s language preferences in the browser to se
 For example, using the following libraries, you can look at an incoming `Request` to determine which locale to select, based on the `Headers`, locales you plan to support, and the default locale.
 
 ```js filename="proxy.js"
-import { match } from '@formatjs/intl-localematcher'
-import Negotiator from 'negotiator'
+import { match } from "@formatjs/intl-localematcher";
+import Negotiator from "negotiator";
 
-let headers = { 'accept-language': 'en-US,en;q=0.5' }
-let languages = new Negotiator({ headers }).languages()
-let locales = ['en-US', 'nl-NL', 'nl']
-let defaultLocale = 'en-US'
+let headers = { "accept-language": "en-US,en;q=0.5" };
+let languages = new Negotiator({ headers }).languages();
+let locales = ["en-US", "nl-NL", "nl"];
+let defaultLocale = "en-US";
 
-match(languages, locales, defaultLocale) // -> 'en-US'
+match(languages, locales, defaultLocale); // -> 'en-US'
 ```
 
 Routing can be internationalized by either the sub-path (`/fr/products`) or domain (`my-site.fr/products`). With this information, you can now redirect the user based on the locale inside [Proxy](/docs/app/api-reference/file-conventions/proxy).
@@ -113,32 +113,32 @@ Let’s assume we want to support both English and Dutch content inside our appl
 We can then create a `getDictionary` function to load the translations for the requested locale:
 
 ```ts filename="app/[lang]/dictionaries.ts" switcher
-import 'server-only'
+import "server-only";
 
 const dictionaries = {
-  en: () => import('./dictionaries/en.json').then((module) => module.default),
-  nl: () => import('./dictionaries/nl.json').then((module) => module.default),
-}
+  en: () => import("./dictionaries/en.json").then((module) => module.default),
+  nl: () => import("./dictionaries/nl.json").then((module) => module.default),
+};
 
-export type Locale = keyof typeof dictionaries
+export type Locale = keyof typeof dictionaries;
 
 export const hasLocale = (locale: string): locale is Locale =>
-  locale in dictionaries
+  locale in dictionaries;
 
-export const getDictionary = async (locale: Locale) => dictionaries[locale]()
+export const getDictionary = async (locale: Locale) => dictionaries[locale]();
 ```
 
 ```js filename="app/[lang]/dictionaries.js" switcher
-import 'server-only'
+import "server-only";
 
 const dictionaries = {
-  en: () => import('./dictionaries/en.json').then((module) => module.default),
-  nl: () => import('./dictionaries/nl.json').then((module) => module.default),
-}
+  en: () => import("./dictionaries/en.json").then((module) => module.default),
+  nl: () => import("./dictionaries/nl.json").then((module) => module.default),
+};
 
-export const hasLocale = (locale) => locale in dictionaries
+export const hasLocale = (locale) => locale in dictionaries;
 
-export const getDictionary = async (locale) => dictionaries[locale]()
+export const getDictionary = async (locale) => dictionaries[locale]();
 ```
 
 Given the currently selected language, we can fetch the dictionary inside of a layout or page.
@@ -146,30 +146,30 @@ Given the currently selected language, we can fetch the dictionary inside of a l
 Since `lang` is typed as `string`, using `hasLocale` narrows the type to your supported locales. It also ensures a 404 is returned if a translation is missing, rather than a runtime error.
 
 ```tsx filename="app/[lang]/page.tsx" switcher
-import { notFound } from 'next/navigation'
-import { getDictionary, hasLocale } from './dictionaries'
+import { notFound } from "next/navigation";
+import { getDictionary, hasLocale } from "./dictionaries";
 
-export default async function Page({ params }: PageProps<'/[lang]'>) {
-  const { lang } = await params
+export default async function Page({ params }: PageProps<"/[lang]">) {
+  const { lang } = await params;
 
-  if (!hasLocale(lang)) notFound()
+  if (!hasLocale(lang)) notFound();
 
-  const dict = await getDictionary(lang)
-  return <button>{dict.products.cart}</button> // Add to Cart
+  const dict = await getDictionary(lang);
+  return <button>{dict.products.cart}</button>; // Add to Cart
 }
 ```
 
 ```jsx filename="app/[lang]/page.js" switcher
-import { notFound } from 'next/navigation'
-import { getDictionary, hasLocale } from './dictionaries'
+import { notFound } from "next/navigation";
+import { getDictionary, hasLocale } from "./dictionaries";
 
 export default async function Page({ params }) {
-  const { lang } = await params
+  const { lang } = await params;
 
-  if (!hasLocale(lang)) notFound()
+  if (!hasLocale(lang)) notFound();
 
-  const dict = await getDictionary(lang)
-  return <button>{dict.products.cart}</button> // Add to Cart
+  const dict = await getDictionary(lang);
+  return <button>{dict.products.cart}</button>; // Add to Cart
 }
 ```
 
@@ -181,24 +181,24 @@ To generate static routes for a given set of locales, we can use `generateStatic
 
 ```tsx filename="app/[lang]/layout.tsx" switcher
 export async function generateStaticParams() {
-  return [{ lang: 'en-US' }, { lang: 'de' }]
+  return [{ lang: "en-US" }, { lang: "de" }];
 }
 
 export default async function RootLayout({
   children,
   params,
-}: LayoutProps<'/[lang]'>) {
+}: LayoutProps<"/[lang]">) {
   return (
     <html lang={(await params).lang}>
       <body>{children}</body>
     </html>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/[lang]/layout.js" switcher
 export async function generateStaticParams() {
-  return [{ lang: 'en-US' }, { lang: 'de' }]
+  return [{ lang: "en-US" }, { lang: "de" }];
 }
 
 export default async function RootLayout({ children, params }) {
@@ -206,7 +206,7 @@ export default async function RootLayout({ children, params }) {
     <html lang={(await params).lang}>
       <body>{children}</body>
     </html>
-  )
+  );
 }
 ```
 

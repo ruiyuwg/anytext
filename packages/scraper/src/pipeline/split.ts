@@ -32,7 +32,7 @@ function stringifyNodes(nodes: RootContent[]): string {
 
 export function splitIntoTopics(
   markdown: string,
-  config?: SplitConfig
+  config?: SplitConfig,
 ): ProcessedTopic[] {
   const minTokens = config?.minTokens ?? DEFAULT_MIN_TOKENS;
   const maxTokens = config?.maxTokens ?? DEFAULT_MAX_TOKENS;
@@ -41,7 +41,7 @@ export function splitIntoTopics(
 
   // Determine primary heading depth: use H1 if multiple H1s exist, else H2
   const h1Count = tree.children.filter(
-    (n) => n.type === "heading" && (n as Heading).depth === 1
+    (n) => n.type === "heading" && (n as Heading).depth === 1,
   ).length;
   const primaryDepth = h1Count > 1 ? 1 : 2;
   const subDepth = primaryDepth === 1 ? 2 : 3;
@@ -57,13 +57,21 @@ export function splitIntoTopics(
     if (tokens > maxTokens) {
       let split = false;
       for (let depth = subDepth; depth <= 4; depth++) {
-        const subSections = groupByHeading(section.nodes, depth, section.heading);
+        const subSections = groupByHeading(
+          section.nodes,
+          depth,
+          section.heading,
+        );
         if (subSections.length > 1) {
           // Recursively sub-split any still-oversized sub-sections
           for (const sub of subSections) {
             const subContent = stringifyNodes(sub.nodes);
             if (estimateTokens(subContent) > maxTokens && depth < 4) {
-              const deeperSections = groupByHeading(sub.nodes, depth + 1, sub.heading);
+              const deeperSections = groupByHeading(
+                sub.nodes,
+                depth + 1,
+                sub.heading,
+              );
               if (deeperSections.length > 1) {
                 processed.push(...deeperSections);
               } else {
@@ -136,11 +144,16 @@ export function splitIntoTopics(
 function groupByHeading(
   nodes: RootContent[],
   depth: number,
-  parentHeading: string = ""
+  parentHeading: string = "",
 ): Section[] {
   const sections: Section[] = [];
   let currentParent = parentHeading;
-  let current: Section = { heading: "Introduction", parentHeading: currentParent, depth: 0, nodes: [] };
+  let current: Section = {
+    heading: "Introduction",
+    parentHeading: currentParent,
+    depth: 0,
+    nodes: [],
+  };
 
   for (const node of nodes) {
     if (node.type === "heading" && (node as Heading).depth === depth) {
@@ -157,7 +170,12 @@ function groupByHeading(
       sections.push(current);
       const heading = extractHeadingText(node as Heading);
       currentParent = heading;
-      current = { heading, parentHeading, depth: (node as Heading).depth, nodes: [node] };
+      current = {
+        heading,
+        parentHeading,
+        depth: (node as Heading).depth,
+        nodes: [node],
+      };
     } else {
       current.nodes.push(node);
     }
@@ -170,10 +188,7 @@ function groupByHeading(
   return sections;
 }
 
-function mergeSmallSections(
-  sections: Section[],
-  minTokens: number
-): Section[] {
+function mergeSmallSections(sections: Section[], minTokens: number): Section[] {
   if (sections.length <= 1) return sections;
 
   const result: Section[] = [sections[0]!];

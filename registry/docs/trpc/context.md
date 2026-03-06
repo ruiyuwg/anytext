@@ -11,11 +11,11 @@ When initializing tRPC using `initTRPC`, you should pipe `.context<TContext>()` 
 This will make sure your context is properly typed in your procedures and middlewares.
 
 ```ts twoslash
-import * as trpc from '@trpc/server';
+import * as trpc from "@trpc/server";
 // ---cut---
-import { initTRPC } from '@trpc/server';
-import type { CreateNextContextOptions } from '@trpc/server/adapters/next';
-import { getSession } from 'next-auth/react';
+import { initTRPC } from "@trpc/server";
+import type { CreateNextContextOptions } from "@trpc/server/adapters/next";
+import { getSession } from "next-auth/react";
 
 export const createContext = async (opts: CreateNextContextOptions) => {
   const session = await getSession({ req: opts.req });
@@ -44,9 +44,9 @@ The `createContext()` function must be passed to the handler that is mounting yo
 
 ```ts
 // 1. HTTP request
-import { createHTTPHandler } from '@trpc/server/adapters/standalone';
-import { createContext } from './context';
-import { appRouter } from './router';
+import { createHTTPHandler } from "@trpc/server/adapters/standalone";
+import { createContext } from "./context";
+import { appRouter } from "./router";
 
 const handler = createHTTPHandler({
   router: appRouter,
@@ -56,17 +56,17 @@ const handler = createHTTPHandler({
 
 ```ts
 // 2. Server-side call
-import { createContext } from './context';
-import { createCaller } from './router';
+import { createContext } from "./context";
+import { createCaller } from "./router";
 
 const caller = createCaller(await createContext());
 ```
 
 ```ts
 // 3. servers-side helpers
-import { createServerSideHelpers } from '@trpc/react-query/server';
-import { createContext } from './context';
-import { appRouter } from './router';
+import { createServerSideHelpers } from "@trpc/react-query/server";
+import { createContext } from "./context";
+import { appRouter } from "./router";
 
 const helpers = createServerSideHelpers({
   router: appRouter,
@@ -80,8 +80,8 @@ const helpers = createServerSideHelpers({
 // -------------------------------------------------
 // @filename: context.ts
 // -------------------------------------------------
-import type { CreateNextContextOptions } from '@trpc/server/adapters/next';
-import { getSession } from 'next-auth/react';
+import type { CreateNextContextOptions } from "@trpc/server/adapters/next";
+import { getSession } from "next-auth/react";
 
 /**
  * Creates context for an incoming request
@@ -100,11 +100,10 @@ export type Context = Awaited<ReturnType<typeof createContext>>;
 // -------------------------------------------------
 // @filename: trpc.ts
 // -------------------------------------------------
-import { initTRPC, TRPCError } from '@trpc/server';
-import { Context } from './context';
+import { initTRPC, TRPCError } from "@trpc/server";
+import { Context } from "./context";
 
 const t = initTRPC.context<Context>().create();
-
 
 export const router = t.router;
 
@@ -119,7 +118,7 @@ export const publicProcedure = t.procedure;
 export const protectedProcedure = t.procedure.use(function isAuthed(opts) {
   if (!opts.ctx.session?.user?.email) {
     throw new TRPCError({
-      code: 'UNAUTHORIZED',
+      code: "UNAUTHORIZED",
     });
   }
   return opts.next({
@@ -146,8 +145,8 @@ If that overhead becomes noticeable, an alternative is to keep context smaller a
 ### Example for inner & outer context
 
 ```ts
-import type { CreateNextContextOptions } from '@trpc/server/adapters/next';
-import { getSessionFromCookie, type Session } from './auth';
+import type { CreateNextContextOptions } from "@trpc/server/adapters/next";
+import { getSessionFromCookie, type Session } from "./auth";
 
 /**
  * Defines your inner context shape.
@@ -202,7 +201,7 @@ If you don't want to check `req` or `res` for `undefined` in your procedures all
 ```ts
 export const apiProcedure = publicProcedure.use((opts) => {
   if (!opts.ctx.req || !opts.ctx.res) {
-    throw new Error('You are missing `req` or `res` in your call.');
+    throw new Error("You are missing `req` or `res` in your call.");
   }
   return opts.next({
     ctx: {
@@ -219,8 +218,8 @@ export const apiProcedure = publicProcedure.use((opts) => {
 You can use the context to limit the number of requests that can be batched together.
 
 ```ts twoslash
-import { TRPCError } from '@trpc/server';
-import type { CreateHTTPContextOptions } from '@trpc/server/adapters/standalone';
+import { TRPCError } from "@trpc/server";
+import type { CreateHTTPContextOptions } from "@trpc/server/adapters/standalone";
 
 const MAX_BATCH_SIZE = 10;
 
@@ -228,7 +227,7 @@ const MAX_BATCH_SIZE = 10;
 export async function createContext(opts: CreateHTTPContextOptions) {
   if (opts.info.calls.length > MAX_BATCH_SIZE) {
     throw new TRPCError({
-      code: 'TOO_MANY_REQUESTS',
+      code: "TOO_MANY_REQUESTS",
       message: `Batch size limit of ${MAX_BATCH_SIZE} exceeded`,
     });
   }

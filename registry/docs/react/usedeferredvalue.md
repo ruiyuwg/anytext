@@ -3,22 +3,22 @@
 `useDeferredValue` is a React Hook that lets you defer updating a part of the UI.
 
 ```js
-const deferredValue = useDeferredValue(value)
+const deferredValue = useDeferredValue(value);
 ```
 
-***
+---
 
-## Reference {/*reference*/}
+## Reference {/_reference_/}
 
-### `useDeferredValue(value, initialValue?)` {/*usedeferredvalue*/}
+### `useDeferredValue(value, initialValue?)` {/_usedeferredvalue_/}
 
 Call `useDeferredValue` at the top level of your component to get a deferred version of that value.
 
 ```js
-import { useState, useDeferredValue } from 'react';
+import { useState, useDeferredValue } from "react";
 
 function SearchPage() {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
   const deferredQuery = useDeferredValue(query);
   // ...
 }
@@ -26,16 +26,16 @@ function SearchPage() {
 
 [See more examples below.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parameters {/_parameters_/}
 
 - `value`: The value you want to defer. It can have any type.
 - **optional** `initialValue`: A value to use during the initial render of a component. If this option is omitted, `useDeferredValue` will not defer during the initial render, because there's no previous version of `value` that it can render instead.
 
-#### Returns {/*returns*/}
+#### Returns {/_returns_/}
 
 - `currentValue`: During the initial render, the returned deferred value will be the `initialValue`, or the same as the value you provided. During updates, React will first attempt a re-render with the old value (so it will return the old value), and then try another re-render in the background with the new value (so it will return the updated value).
 
-#### Caveats {/*caveats*/}
+#### Caveats {/_caveats_/}
 
 - When an update is inside a Transition, `useDeferredValue` always returns the new `value` and does not spawn a deferred render, since the update is already deferred.
 
@@ -51,19 +51,19 @@ function SearchPage() {
 
 - The background re-render caused by `useDeferredValue` does not fire Effects until it's committed to the screen. If the background re-render suspends, its Effects will run after the data loads and the UI updates.
 
-***
+---
 
-## Usage {/*usage*/}
+## Usage {/_usage_/}
 
-### Showing stale content while fresh content is loading {/*showing-stale-content-while-fresh-content-is-loading*/}
+### Showing stale content while fresh content is loading {/_showing-stale-content-while-fresh-content-is-loading_/}
 
 Call `useDeferredValue` at the top level of your component to defer updating some part of your UI.
 
 ```js [[1, 5, "query"], [2, 5, "deferredQuery"]]
-import { useState, useDeferredValue } from 'react';
+import { useState, useDeferredValue } from "react";
 
 function SearchPage() {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
   const deferredQuery = useDeferredValue(query);
   // ...
 }
@@ -71,7 +71,7 @@ function SearchPage() {
 
 During the initial render, the deferred value will be the same as the value you provided.
 
-During updates, the deferred value will "lag behind" the latest value. In particular, React will first re-render *without* updating the deferred value, and then try to re-render with the newly received value in the background.
+During updates, the deferred value will "lag behind" the latest value. In particular, React will first re-render _without_ updating the deferred value, and then try to re-render with the newly received value in the background.
 
 **Let's walk through an example to see when this is useful.**
 
@@ -86,16 +86,16 @@ This example assumes you use a Suspense-enabled data source:
 In this example, the `SearchResults` component [suspends](/reference/react/Suspense#displaying-a-fallback-while-content-is-loading) while fetching the search results. Try typing `"a"`, waiting for the results, and then editing it to `"ab"`. The results for `"a"` get replaced by the loading fallback.
 
 ```js src/App.js
-import { Suspense, useState } from 'react';
-import SearchResults from './SearchResults.js';
+import { Suspense, useState } from "react";
+import SearchResults from "./SearchResults.js";
 
 export default function App() {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
   return (
     <>
       <label>
         Search albums:
-        <input value={query} onChange={e => setQuery(e.target.value)} />
+        <input value={query} onChange={(e) => setQuery(e.target.value)} />
       </label>
       <Suspense fallback={<h2>Loading...</h2>}>
         <SearchResults query={query} />
@@ -106,20 +106,24 @@ export default function App() {
 ```
 
 ```js src/SearchResults.js
-import {use} from 'react';
-import { fetchData } from './data.js';
+import { use } from "react";
+import { fetchData } from "./data.js";
 
 export default function SearchResults({ query }) {
-  if (query === '') {
+  if (query === "") {
     return null;
   }
   const albums = use(fetchData(`/search?q=${query}`));
   if (albums.length === 0) {
-    return <p>No matches for <i>"{query}"</i></p>;
+    return (
+      <p>
+        No matches for <i>"{query}"</i>
+      </p>
+    );
   }
   return (
     <ul>
-      {albums.map(album => (
+      {albums.map((album) => (
         <li key={album.id}>
           {album.title} ({album.year})
         </li>
@@ -144,99 +148,115 @@ export function fetchData(url) {
 }
 
 async function getData(url) {
-  if (url.startsWith('/search?q=')) {
-    return await getSearchResults(url.slice('/search?q='.length));
+  if (url.startsWith("/search?q=")) {
+    return await getSearchResults(url.slice("/search?q=".length));
   } else {
-    throw Error('Not implemented');
+    throw Error("Not implemented");
   }
 }
 
 async function getSearchResults(query) {
   // Add a fake delay to make waiting noticeable.
-  await new Promise(resolve => {
+  await new Promise((resolve) => {
     setTimeout(resolve, 1000);
   });
 
-  const allAlbums = [{
-    id: 13,
-    title: 'Let It Be',
-    year: 1970
-  }, {
-    id: 12,
-    title: 'Abbey Road',
-    year: 1969
-  }, {
-    id: 11,
-    title: 'Yellow Submarine',
-    year: 1969
-  }, {
-    id: 10,
-    title: 'The Beatles',
-    year: 1968
-  }, {
-    id: 9,
-    title: 'Magical Mystery Tour',
-    year: 1967
-  }, {
-    id: 8,
-    title: 'Sgt. Pepper\'s Lonely Hearts Club Band',
-    year: 1967
-  }, {
-    id: 7,
-    title: 'Revolver',
-    year: 1966
-  }, {
-    id: 6,
-    title: 'Rubber Soul',
-    year: 1965
-  }, {
-    id: 5,
-    title: 'Help!',
-    year: 1965
-  }, {
-    id: 4,
-    title: 'Beatles For Sale',
-    year: 1964
-  }, {
-    id: 3,
-    title: 'A Hard Day\'s Night',
-    year: 1964
-  }, {
-    id: 2,
-    title: 'With The Beatles',
-    year: 1963
-  }, {
-    id: 1,
-    title: 'Please Please Me',
-    year: 1963
-  }];
+  const allAlbums = [
+    {
+      id: 13,
+      title: "Let It Be",
+      year: 1970,
+    },
+    {
+      id: 12,
+      title: "Abbey Road",
+      year: 1969,
+    },
+    {
+      id: 11,
+      title: "Yellow Submarine",
+      year: 1969,
+    },
+    {
+      id: 10,
+      title: "The Beatles",
+      year: 1968,
+    },
+    {
+      id: 9,
+      title: "Magical Mystery Tour",
+      year: 1967,
+    },
+    {
+      id: 8,
+      title: "Sgt. Pepper's Lonely Hearts Club Band",
+      year: 1967,
+    },
+    {
+      id: 7,
+      title: "Revolver",
+      year: 1966,
+    },
+    {
+      id: 6,
+      title: "Rubber Soul",
+      year: 1965,
+    },
+    {
+      id: 5,
+      title: "Help!",
+      year: 1965,
+    },
+    {
+      id: 4,
+      title: "Beatles For Sale",
+      year: 1964,
+    },
+    {
+      id: 3,
+      title: "A Hard Day's Night",
+      year: 1964,
+    },
+    {
+      id: 2,
+      title: "With The Beatles",
+      year: 1963,
+    },
+    {
+      id: 1,
+      title: "Please Please Me",
+      year: 1963,
+    },
+  ];
 
   const lowerQuery = query.trim().toLowerCase();
-  return allAlbums.filter(album => {
+  return allAlbums.filter((album) => {
     const lowerTitle = album.title.toLowerCase();
     return (
       lowerTitle.startsWith(lowerQuery) ||
-      lowerTitle.indexOf(' ' + lowerQuery) !== -1
-    )
+      lowerTitle.indexOf(" " + lowerQuery) !== -1
+    );
   });
 }
 ```
 
 ```css
-input { margin: 10px; }
+input {
+  margin: 10px;
+}
 ```
 
-A common alternative UI pattern is to *defer* updating the list of results and to keep showing the previous results until the new results are ready. Call `useDeferredValue` to pass a deferred version of the query down:
+A common alternative UI pattern is to _defer_ updating the list of results and to keep showing the previous results until the new results are ready. Call `useDeferredValue` to pass a deferred version of the query down:
 
 ```js {3,11}
 export default function App() {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
   const deferredQuery = useDeferredValue(query);
   return (
     <>
       <label>
         Search albums:
-        <input value={query} onChange={e => setQuery(e.target.value)} />
+        <input value={query} onChange={(e) => setQuery(e.target.value)} />
       </label>
       <Suspense fallback={<h2>Loading...</h2>}>
         <SearchResults query={deferredQuery} />
@@ -251,17 +271,17 @@ The `query` will update immediately, so the input will display the new value. Ho
 Enter `"a"` in the example below, wait for the results to load, and then edit the input to `"ab"`. Notice how instead of the Suspense fallback, you now see the stale result list until the new results have loaded:
 
 ```js src/App.js
-import { Suspense, useState, useDeferredValue } from 'react';
-import SearchResults from './SearchResults.js';
+import { Suspense, useState, useDeferredValue } from "react";
+import SearchResults from "./SearchResults.js";
 
 export default function App() {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
   const deferredQuery = useDeferredValue(query);
   return (
     <>
       <label>
         Search albums:
-        <input value={query} onChange={e => setQuery(e.target.value)} />
+        <input value={query} onChange={(e) => setQuery(e.target.value)} />
       </label>
       <Suspense fallback={<h2>Loading...</h2>}>
         <SearchResults query={deferredQuery} />
@@ -272,20 +292,24 @@ export default function App() {
 ```
 
 ```js src/SearchResults.js
-import {use} from 'react';
-import { fetchData } from './data.js';
+import { use } from "react";
+import { fetchData } from "./data.js";
 
 export default function SearchResults({ query }) {
-  if (query === '') {
+  if (query === "") {
     return null;
   }
   const albums = use(fetchData(`/search?q=${query}`));
   if (albums.length === 0) {
-    return <p>No matches for <i>"{query}"</i></p>;
+    return (
+      <p>
+        No matches for <i>"{query}"</i>
+      </p>
+    );
   }
   return (
     <ul>
-      {albums.map(album => (
+      {albums.map((album) => (
         <li key={album.id}>
           {album.title} ({album.year})
         </li>
@@ -310,110 +334,128 @@ export function fetchData(url) {
 }
 
 async function getData(url) {
-  if (url.startsWith('/search?q=')) {
-    return await getSearchResults(url.slice('/search?q='.length));
+  if (url.startsWith("/search?q=")) {
+    return await getSearchResults(url.slice("/search?q=".length));
   } else {
-    throw Error('Not implemented');
+    throw Error("Not implemented");
   }
 }
 
 async function getSearchResults(query) {
   // Add a fake delay to make waiting noticeable.
-  await new Promise(resolve => {
+  await new Promise((resolve) => {
     setTimeout(resolve, 1000);
   });
 
-  const allAlbums = [{
-    id: 13,
-    title: 'Let It Be',
-    year: 1970
-  }, {
-    id: 12,
-    title: 'Abbey Road',
-    year: 1969
-  }, {
-    id: 11,
-    title: 'Yellow Submarine',
-    year: 1969
-  }, {
-    id: 10,
-    title: 'The Beatles',
-    year: 1968
-  }, {
-    id: 9,
-    title: 'Magical Mystery Tour',
-    year: 1967
-  }, {
-    id: 8,
-    title: 'Sgt. Pepper\'s Lonely Hearts Club Band',
-    year: 1967
-  }, {
-    id: 7,
-    title: 'Revolver',
-    year: 1966
-  }, {
-    id: 6,
-    title: 'Rubber Soul',
-    year: 1965
-  }, {
-    id: 5,
-    title: 'Help!',
-    year: 1965
-  }, {
-    id: 4,
-    title: 'Beatles For Sale',
-    year: 1964
-  }, {
-    id: 3,
-    title: 'A Hard Day\'s Night',
-    year: 1964
-  }, {
-    id: 2,
-    title: 'With The Beatles',
-    year: 1963
-  }, {
-    id: 1,
-    title: 'Please Please Me',
-    year: 1963
-  }];
+  const allAlbums = [
+    {
+      id: 13,
+      title: "Let It Be",
+      year: 1970,
+    },
+    {
+      id: 12,
+      title: "Abbey Road",
+      year: 1969,
+    },
+    {
+      id: 11,
+      title: "Yellow Submarine",
+      year: 1969,
+    },
+    {
+      id: 10,
+      title: "The Beatles",
+      year: 1968,
+    },
+    {
+      id: 9,
+      title: "Magical Mystery Tour",
+      year: 1967,
+    },
+    {
+      id: 8,
+      title: "Sgt. Pepper's Lonely Hearts Club Band",
+      year: 1967,
+    },
+    {
+      id: 7,
+      title: "Revolver",
+      year: 1966,
+    },
+    {
+      id: 6,
+      title: "Rubber Soul",
+      year: 1965,
+    },
+    {
+      id: 5,
+      title: "Help!",
+      year: 1965,
+    },
+    {
+      id: 4,
+      title: "Beatles For Sale",
+      year: 1964,
+    },
+    {
+      id: 3,
+      title: "A Hard Day's Night",
+      year: 1964,
+    },
+    {
+      id: 2,
+      title: "With The Beatles",
+      year: 1963,
+    },
+    {
+      id: 1,
+      title: "Please Please Me",
+      year: 1963,
+    },
+  ];
 
   const lowerQuery = query.trim().toLowerCase();
-  return allAlbums.filter(album => {
+  return allAlbums.filter((album) => {
     const lowerTitle = album.title.toLowerCase();
     return (
       lowerTitle.startsWith(lowerQuery) ||
-      lowerTitle.indexOf(' ' + lowerQuery) !== -1
-    )
+      lowerTitle.indexOf(" " + lowerQuery) !== -1
+    );
   });
 }
 ```
 
 ```css
-input { margin: 10px; }
+input {
+  margin: 10px;
+}
 ```
 
-#### How does deferring a value work under the hood? {/*how-does-deferring-a-value-work-under-the-hood*/}
+#### How does deferring a value work under the hood? {/_how-does-deferring-a-value-work-under-the-hood_/}
 
 You can think of it as happening in two steps:
 
-1. **First, React re-renders with the new `query` (`"ab"`) but with the old `deferredQuery` (still `"a"`).** The `deferredQuery` value, which you pass to the result list, is *deferred:* it "lags behind" the `query` value.
+1. **First, React re-renders with the new `query` (`"ab"`) but with the old `deferredQuery` (still `"a"`).** The `deferredQuery` value, which you pass to the result list, is _deferred:_ it "lags behind" the `query` value.
 
-2. **In the background, React tries to re-render with *both* `query` and `deferredQuery` updated to `"ab"`.** If this re-render completes, React will show it on the screen. However, if it suspends (the results for `"ab"` have not loaded yet), React will abandon this rendering attempt, and retry this re-render again after the data has loaded. The user will keep seeing the stale deferred value until the data is ready.
+2. **In the background, React tries to re-render with _both_ `query` and `deferredQuery` updated to `"ab"`.** If this re-render completes, React will show it on the screen. However, if it suspends (the results for `"ab"` have not loaded yet), React will abandon this rendering attempt, and retry this re-render again after the data has loaded. The user will keep seeing the stale deferred value until the data is ready.
 
 The deferred "background" rendering is interruptible. For example, if you type into the input again, React will abandon it and restart with the new value. React will always use the latest provided value.
 
 Note that there is still a network request per each keystroke. What's being deferred here is displaying results (until they're ready), not the network requests themselves. Even if the user continues typing, responses for each keystroke get cached, so pressing Backspace is instant and doesn't fetch again.
 
-***
+---
 
-### Indicating that the content is stale {/*indicating-that-the-content-is-stale*/}
+### Indicating that the content is stale {/_indicating-that-the-content-is-stale_/}
 
 In the example above, there is no indication that the result list for the latest query is still loading. This can be confusing to the user if the new results take a while to load. To make it more obvious to the user that the result list does not match the latest query, you can add a visual indication when the stale result list is displayed:
 
 ```js {2}
-<div style={{
-  opacity: query !== deferredQuery ? 0.5 : 1,
-}}>
+<div
+  style={{
+    opacity: query !== deferredQuery ? 0.5 : 1,
+  }}
+>
   <SearchResults query={deferredQuery} />
 </div>
 ```
@@ -421,24 +463,28 @@ In the example above, there is no indication that the result list for the latest
 With this change, as soon as you start typing, the stale result list gets slightly dimmed until the new result list loads. You can also add a CSS transition to delay dimming so that it feels gradual, like in the example below:
 
 ```js src/App.js
-import { Suspense, useState, useDeferredValue } from 'react';
-import SearchResults from './SearchResults.js';
+import { Suspense, useState, useDeferredValue } from "react";
+import SearchResults from "./SearchResults.js";
 
 export default function App() {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
   const deferredQuery = useDeferredValue(query);
   const isStale = query !== deferredQuery;
   return (
     <>
       <label>
         Search albums:
-        <input value={query} onChange={e => setQuery(e.target.value)} />
+        <input value={query} onChange={(e) => setQuery(e.target.value)} />
       </label>
       <Suspense fallback={<h2>Loading...</h2>}>
-        <div style={{
-          opacity: isStale ? 0.5 : 1,
-          transition: isStale ? 'opacity 0.2s 0.2s linear' : 'opacity 0s 0s linear'
-        }}>
+        <div
+          style={{
+            opacity: isStale ? 0.5 : 1,
+            transition: isStale
+              ? "opacity 0.2s 0.2s linear"
+              : "opacity 0s 0s linear",
+          }}
+        >
           <SearchResults query={deferredQuery} />
         </div>
       </Suspense>
@@ -448,20 +494,24 @@ export default function App() {
 ```
 
 ```js src/SearchResults.js
-import {use} from 'react';
-import { fetchData } from './data.js';
+import { use } from "react";
+import { fetchData } from "./data.js";
 
 export default function SearchResults({ query }) {
-  if (query === '') {
+  if (query === "") {
     return null;
   }
   const albums = use(fetchData(`/search?q=${query}`));
   if (albums.length === 0) {
-    return <p>No matches for <i>"{query}"</i></p>;
+    return (
+      <p>
+        No matches for <i>"{query}"</i>
+      </p>
+    );
   }
   return (
     <ul>
-      {albums.map(album => (
+      {albums.map((album) => (
         <li key={album.id}>
           {album.title} ({album.year})
         </li>
@@ -486,91 +536,107 @@ export function fetchData(url) {
 }
 
 async function getData(url) {
-  if (url.startsWith('/search?q=')) {
-    return await getSearchResults(url.slice('/search?q='.length));
+  if (url.startsWith("/search?q=")) {
+    return await getSearchResults(url.slice("/search?q=".length));
   } else {
-    throw Error('Not implemented');
+    throw Error("Not implemented");
   }
 }
 
 async function getSearchResults(query) {
   // Add a fake delay to make waiting noticeable.
-  await new Promise(resolve => {
+  await new Promise((resolve) => {
     setTimeout(resolve, 1000);
   });
 
-  const allAlbums = [{
-    id: 13,
-    title: 'Let It Be',
-    year: 1970
-  }, {
-    id: 12,
-    title: 'Abbey Road',
-    year: 1969
-  }, {
-    id: 11,
-    title: 'Yellow Submarine',
-    year: 1969
-  }, {
-    id: 10,
-    title: 'The Beatles',
-    year: 1968
-  }, {
-    id: 9,
-    title: 'Magical Mystery Tour',
-    year: 1967
-  }, {
-    id: 8,
-    title: 'Sgt. Pepper\'s Lonely Hearts Club Band',
-    year: 1967
-  }, {
-    id: 7,
-    title: 'Revolver',
-    year: 1966
-  }, {
-    id: 6,
-    title: 'Rubber Soul',
-    year: 1965
-  }, {
-    id: 5,
-    title: 'Help!',
-    year: 1965
-  }, {
-    id: 4,
-    title: 'Beatles For Sale',
-    year: 1964
-  }, {
-    id: 3,
-    title: 'A Hard Day\'s Night',
-    year: 1964
-  }, {
-    id: 2,
-    title: 'With The Beatles',
-    year: 1963
-  }, {
-    id: 1,
-    title: 'Please Please Me',
-    year: 1963
-  }];
+  const allAlbums = [
+    {
+      id: 13,
+      title: "Let It Be",
+      year: 1970,
+    },
+    {
+      id: 12,
+      title: "Abbey Road",
+      year: 1969,
+    },
+    {
+      id: 11,
+      title: "Yellow Submarine",
+      year: 1969,
+    },
+    {
+      id: 10,
+      title: "The Beatles",
+      year: 1968,
+    },
+    {
+      id: 9,
+      title: "Magical Mystery Tour",
+      year: 1967,
+    },
+    {
+      id: 8,
+      title: "Sgt. Pepper's Lonely Hearts Club Band",
+      year: 1967,
+    },
+    {
+      id: 7,
+      title: "Revolver",
+      year: 1966,
+    },
+    {
+      id: 6,
+      title: "Rubber Soul",
+      year: 1965,
+    },
+    {
+      id: 5,
+      title: "Help!",
+      year: 1965,
+    },
+    {
+      id: 4,
+      title: "Beatles For Sale",
+      year: 1964,
+    },
+    {
+      id: 3,
+      title: "A Hard Day's Night",
+      year: 1964,
+    },
+    {
+      id: 2,
+      title: "With The Beatles",
+      year: 1963,
+    },
+    {
+      id: 1,
+      title: "Please Please Me",
+      year: 1963,
+    },
+  ];
 
   const lowerQuery = query.trim().toLowerCase();
-  return allAlbums.filter(album => {
+  return allAlbums.filter((album) => {
     const lowerTitle = album.title.toLowerCase();
     return (
       lowerTitle.startsWith(lowerQuery) ||
-      lowerTitle.indexOf(' ' + lowerQuery) !== -1
-    )
+      lowerTitle.indexOf(" " + lowerQuery) !== -1
+    );
   });
 }
 ```
 
 ```css
-input { margin: 10px; }
+input {
+  margin: 10px;
+}
 ```
 
-***
+---
 
-### Deferring re-rendering for a part of the UI {/*deferring-re-rendering-for-a-part-of-the-ui*/}
+### Deferring re-rendering for a part of the UI {/_deferring-re-rendering-for-a-part-of-the-ui_/}
 
 You can also apply `useDeferredValue` as a performance optimization. It is useful when a part of your UI is slow to re-render, there's no easy way to optimize it, and you want to prevent it from blocking the rest of the UI.
 
@@ -578,10 +644,10 @@ Imagine you have a text field and a component (like a chart or a long list) that
 
 ```js
 function App() {
-  const [text, setText] = useState('');
+  const [text, setText] = useState("");
   return (
     <>
-      <input value={text} onChange={e => setText(e.target.value)} />
+      <input value={text} onChange={(e) => setText(e.target.value)} />
       <SlowList text={text} />
     </>
   );
@@ -596,17 +662,17 @@ const SlowList = memo(function SlowList({ text }) {
 });
 ```
 
-However, this only helps if the `SlowList` props are *the same* as during the previous render. The problem you're facing now is that it's slow when they're *different,* and when you actually need to show different visual output.
+However, this only helps if the `SlowList` props are _the same_ as during the previous render. The problem you're facing now is that it's slow when they're _different,_ and when you actually need to show different visual output.
 
 Concretely, the main performance problem is that whenever you type into the input, the `SlowList` receives new props, and re-rendering its entire tree makes the typing feel janky. In this case, `useDeferredValue` lets you prioritize updating the input (which must be fast) over updating the result list (which is allowed to be slower):
 
 ```js {3,7}
 function App() {
-  const [text, setText] = useState('');
+  const [text, setText] = useState("");
   const deferredText = useDeferredValue(text);
   return (
     <>
-      <input value={text} onChange={e => setText(e.target.value)} />
+      <input value={text} onChange={(e) => setText(e.target.value)} />
       <SlowList text={deferredText} />
     </>
   );
@@ -615,20 +681,20 @@ function App() {
 
 This does not make re-rendering of the `SlowList` faster. However, it tells React that re-rendering the list can be deprioritized so that it doesn't block the keystrokes. The list will "lag behind" the input and then "catch up". Like before, React will attempt to update the list as soon as possible, but will not block the user from typing.
 
-#### Deferred re-rendering of the list {/*deferred-re-rendering-of-the-list*/}
+#### Deferred re-rendering of the list {/_deferred-re-rendering-of-the-list_/}
 
 In this example, each item in the `SlowList` component is **artificially slowed down** so that you can see how `useDeferredValue` lets you keep the input responsive. Type into the input and notice that typing feels snappy while the list "lags behind" it.
 
 ```js
-import { useState, useDeferredValue } from 'react';
-import SlowList from './SlowList.js';
+import { useState, useDeferredValue } from "react";
+import SlowList from "./SlowList.js";
 
 export default function App() {
-  const [text, setText] = useState('');
+  const [text, setText] = useState("");
   const deferredText = useDeferredValue(text);
   return (
     <>
-      <input value={text} onChange={e => setText(e.target.value)} />
+      <input value={text} onChange={(e) => setText(e.target.value)} />
       <SlowList text={deferredText} />
     </>
   );
@@ -636,21 +702,17 @@ export default function App() {
 ```
 
 ```js {expectedErrors: {'react-compiler': [19, 20]}} src/SlowList.js
-import { memo } from 'react';
+import { memo } from "react";
 
 const SlowList = memo(function SlowList({ text }) {
   // Log once. The actual slowdown is inside SlowItem.
-  console.log('[ARTIFICIALLY SLOW] Rendering 250 <SlowItem />');
+  console.log("[ARTIFICIALLY SLOW] Rendering 250 <SlowItem />");
 
   let items = [];
   for (let i = 0; i < 250; i++) {
     items.push(<SlowItem key={i} text={text} />);
   }
-  return (
-    <ul className="items">
-      {items}
-    </ul>
-  );
+  return <ul className="items">{items}</ul>;
 });
 
 function SlowItem({ text }) {
@@ -659,11 +721,7 @@ function SlowItem({ text }) {
     // Do nothing for 1 ms per item to emulate extremely slow code
   }
 
-  return (
-    <li className="item">
-      Text: {text}
-    </li>
-  )
+  return <li className="item">Text: {text}</li>;
 }
 
 export default SlowList;
@@ -685,21 +743,21 @@ export default SlowList;
 }
 ```
 
-#### Unoptimized re-rendering of the list {/*unoptimized-re-rendering-of-the-list*/}
+#### Unoptimized re-rendering of the list {/_unoptimized-re-rendering-of-the-list_/}
 
 In this example, each item in the `SlowList` component is **artificially slowed down**, but there is no `useDeferredValue`.
 
 Notice how typing into the input feels very janky. This is because without `useDeferredValue`, each keystroke forces the entire list to re-render immediately in a non-interruptible way.
 
 ```js
-import { useState } from 'react';
-import SlowList from './SlowList.js';
+import { useState } from "react";
+import SlowList from "./SlowList.js";
 
 export default function App() {
-  const [text, setText] = useState('');
+  const [text, setText] = useState("");
   return (
     <>
-      <input value={text} onChange={e => setText(e.target.value)} />
+      <input value={text} onChange={(e) => setText(e.target.value)} />
       <SlowList text={text} />
     </>
   );
@@ -707,21 +765,17 @@ export default function App() {
 ```
 
 ```js {expectedErrors: {'react-compiler': [19, 20]}} src/SlowList.js
-import { memo } from 'react';
+import { memo } from "react";
 
 const SlowList = memo(function SlowList({ text }) {
   // Log once. The actual slowdown is inside SlowItem.
-  console.log('[ARTIFICIALLY SLOW] Rendering 250 <SlowItem />');
+  console.log("[ARTIFICIALLY SLOW] Rendering 250 <SlowItem />");
 
   let items = [];
   for (let i = 0; i < 250; i++) {
     items.push(<SlowItem key={i} text={text} />);
   }
-  return (
-    <ul className="items">
-      {items}
-    </ul>
-  );
+  return <ul className="items">{items}</ul>;
 });
 
 function SlowItem({ text }) {
@@ -730,11 +784,7 @@ function SlowItem({ text }) {
     // Do nothing for 1 ms per item to emulate extremely slow code
   }
 
-  return (
-    <li className="item">
-      Text: {text}
-    </li>
-  )
+  return <li className="item">Text: {text}</li>;
 }
 
 export default SlowList;
@@ -758,22 +808,22 @@ export default SlowList;
 
 This optimization requires `SlowList` to be wrapped in [`memo`.](/reference/react/memo) This is because whenever the `text` changes, React needs to be able to re-render the parent component quickly. During that re-render, `deferredText` still has its previous value, so `SlowList` is able to skip re-rendering (its props have not changed). Without [`memo`,](/reference/react/memo) it would have to re-render anyway, defeating the point of the optimization.
 
-#### How is deferring a value different from debouncing and throttling? {/*how-is-deferring-a-value-different-from-debouncing-and-throttling*/}
+#### How is deferring a value different from debouncing and throttling? {/_how-is-deferring-a-value-different-from-debouncing-and-throttling_/}
 
 There are two common optimization techniques you might have used before in this scenario:
 
-- *Debouncing* means you'd wait for the user to stop typing (e.g. for a second) before updating the list.
-- *Throttling* means you'd update the list every once in a while (e.g. at most once a second).
+- _Debouncing_ means you'd wait for the user to stop typing (e.g. for a second) before updating the list.
+- _Throttling_ means you'd update the list every once in a while (e.g. at most once a second).
 
 While these techniques are helpful in some cases, `useDeferredValue` is better suited to optimizing rendering because it is deeply integrated with React itself and adapts to the user's device.
 
 Unlike debouncing or throttling, it doesn't require choosing any fixed delay. If the user's device is fast (e.g. powerful laptop), the deferred re-render would happen almost immediately and wouldn't be noticeable. If the user's device is slow, the list would "lag behind" the input proportionally to how slow the device is.
 
-Also, unlike with debouncing or throttling, deferred re-renders done by `useDeferredValue` are interruptible by default. This means that if React is in the middle of re-rendering a large list, but the user makes another keystroke, React will abandon that re-render, handle the keystroke, and then start rendering in the background again. By contrast, debouncing and throttling still produce a janky experience because they're *blocking:* they merely postpone the moment when rendering blocks the keystroke.
+Also, unlike with debouncing or throttling, deferred re-renders done by `useDeferredValue` are interruptible by default. This means that if React is in the middle of re-rendering a large list, but the user makes another keystroke, React will abandon that re-render, handle the keystroke, and then start rendering in the background again. By contrast, debouncing and throttling still produce a janky experience because they're _blocking:_ they merely postpone the moment when rendering blocks the keystroke.
 
 If the work you're optimizing doesn't happen during rendering, debouncing and throttling are still useful. For example, they can let you fire fewer network requests. You can also use these techniques together.
 
-***
+---
 
 ## Sitemap
 

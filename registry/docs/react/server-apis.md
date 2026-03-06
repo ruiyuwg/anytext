@@ -2,9 +2,9 @@
 
 The `react-dom/server` APIs let you server-side render React components to HTML. These APIs are only used on the server at the top level of your app to generate the initial HTML. A [framework](/learn/creating-a-react-app#full-stack-frameworks) may call them for you. Most of your components don't need to import or use them.
 
-***
+---
 
-## Server APIs for Web Streams {/*server-apis-for-web-streams*/}
+## Server APIs for Web Streams {/_server-apis-for-web-streams_/}
 
 These methods are only available in the environments with [Web Streams](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API), which includes browsers, Deno, and some modern edge runtimes:
 
@@ -13,18 +13,18 @@ These methods are only available in the environments with [Web Streams](https://
 
 Node.js also includes these methods for compatibility, but they are not recommended due to worse performance. Use the [dedicated Node.js APIs](#server-apis-for-nodejs-streams) instead.
 
-***
+---
 
-## Server APIs for Node.js Streams {/*server-apis-for-nodejs-streams*/}
+## Server APIs for Node.js Streams {/_server-apis-for-nodejs-streams_/}
 
 These methods are only available in the environments with [Node.js Streams:](https://nodejs.org/api/stream.html)
 
 - [`renderToPipeableStream`](/reference/react-dom/server/renderToPipeableStream) renders a React tree to a pipeable [Node.js Stream.](https://nodejs.org/api/stream.html)
 - [`resumeToPipeableStream`](/reference/react-dom/server/renderToPipeableStream) resumes [`prerenderToNodeStream`](/reference/react-dom/static/prerenderToNodeStream) to a pipeable [Node.js Stream.](https://nodejs.org/api/stream.html)
 
-***
+---
 
-## Legacy Server APIs for non-streaming environments {/*legacy-server-apis-for-non-streaming-environments*/}
+## Legacy Server APIs for non-streaming environments {/_legacy-server-apis-for-non-streaming-environments_/}
 
 These methods can be used in the environments that don't support streams:
 
@@ -33,7 +33,7 @@ These methods can be used in the environments that don't support streams:
 
 They have limited functionality compared to the streaming APIs.
 
-***
+---
 
 ## Sitemap
 

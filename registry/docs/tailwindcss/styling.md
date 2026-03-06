@@ -55,32 +55,32 @@ Gradient directions: `bg-gradient-to-t` (top), `bg-gradient-to-tr` (top-right), 
 
 ## Border Radius
 
-| Class | Radius |
-|-------|--------|
-| `rounded-none` | 0 |
-| `rounded-sm` | 0.125rem |
-| `rounded` | 0.25rem |
-| `rounded-md` | 0.375rem |
-| `rounded-lg` | 0.5rem |
-| `rounded-xl` | 0.75rem |
-| `rounded-2xl` | 1rem |
-| `rounded-3xl` | 1.5rem |
-| `rounded-full` | 9999px |
+| Class          | Radius   |
+| -------------- | -------- |
+| `rounded-none` | 0        |
+| `rounded-sm`   | 0.125rem |
+| `rounded`      | 0.25rem  |
+| `rounded-md`   | 0.375rem |
+| `rounded-lg`   | 0.5rem   |
+| `rounded-xl`   | 0.75rem  |
+| `rounded-2xl`  | 1rem     |
+| `rounded-3xl`  | 1.5rem   |
+| `rounded-full` | 9999px   |
 
 Per-corner: `rounded-t-lg`, `rounded-r-lg`, `rounded-b-lg`, `rounded-l-lg`, `rounded-tl-lg`, `rounded-tr-lg`, `rounded-bl-lg`, `rounded-br-lg`.
 
 ## Shadows
 
-| Class | Description |
-|-------|-------------|
-| `shadow-sm` | Small shadow |
-| `shadow` | Default shadow |
-| `shadow-md` | Medium shadow |
-| `shadow-lg` | Large shadow |
-| `shadow-xl` | Extra large shadow |
-| `shadow-2xl` | Largest shadow |
-| `shadow-inner` | Inset shadow |
-| `shadow-none` | No shadow |
+| Class          | Description        |
+| -------------- | ------------------ |
+| `shadow-sm`    | Small shadow       |
+| `shadow`       | Default shadow     |
+| `shadow-md`    | Medium shadow      |
+| `shadow-lg`    | Large shadow       |
+| `shadow-xl`    | Extra large shadow |
+| `shadow-2xl`   | Largest shadow     |
+| `shadow-inner` | Inset shadow       |
+| `shadow-none`  | No shadow          |
 
 ```html
 <!-- Colored shadow -->
@@ -101,7 +101,9 @@ Per-corner: `rounded-t-lg`, `rounded-r-lg`, `rounded-b-lg`, `rounded-l-lg`, `rou
 
 ```html
 <!-- Transition -->
-<button class="transition duration-300 ease-in-out hover:scale-105 hover:bg-blue-600">
+<button
+  class="transition duration-300 ease-in-out hover:scale-105 hover:bg-blue-600"
+>
   Smooth hover
 </button>
 
@@ -125,16 +127,22 @@ Per-corner: `rounded-t-lg`, `rounded-r-lg`, `rounded-b-lg`, `rounded-l-lg`, `rou
 <div class="rotate-45">Rotate 45 degrees</div>
 <div class="translate-x-4">Move right 1rem</div>
 <div class="skew-x-6">Skew</div>
-<div class="-translate-y-1/2">Center vertically (with absolute positioning)</div>
+<div class="-translate-y-1/2">
+  Center vertically (with absolute positioning)
+</div>
 ```
 
 ## Filters
 
 ```html
-<img class="blur-sm" src="..." />     <!-- Slight blur -->
-<img class="brightness-75" src="..." /> <!-- Darken -->
-<img class="grayscale" src="..." />     <!-- Grayscale -->
-<img class="saturate-150" src="..." />  <!-- Boost saturation -->
+<img class="blur-sm" src="..." />
+<!-- Slight blur -->
+<img class="brightness-75" src="..." />
+<!-- Darken -->
+<img class="grayscale" src="..." />
+<!-- Grayscale -->
+<img class="saturate-150" src="..." />
+<!-- Boost saturation -->
 
 <!-- Backdrop filters (for overlays) -->
 <div class="backdrop-blur-md bg-white/30">Frosted glass</div>

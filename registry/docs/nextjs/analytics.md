@@ -1,6 +1,6 @@
 # Analytics
 
-Next.js has built-in support for measuring and reporting performance metrics. You can either use the [`useReportWebVitals`](/docs/app/api-reference/functions/use-report-web-vitals) hook to manage reporting yourself, or alternatively, Vercel provides a [managed service](https://vercel.com/analytics?utm_source=next-site\&utm_medium=docs\&utm_campaign=next-website) to automatically collect and visualize metrics for you.
+Next.js has built-in support for measuring and reporting performance metrics. You can either use the [`useReportWebVitals`](/docs/app/api-reference/functions/use-report-web-vitals) hook to manage reporting yourself, or alternatively, Vercel provides a [managed service](https://vercel.com/analytics?utm_source=next-site&utm_medium=docs&utm_campaign=next-website) to automatically collect and visualize metrics for you.
 
 ## Client Instrumentation
 
@@ -10,31 +10,31 @@ To use it, create an `instrumentation-client.js` or `instrumentation-client.ts` 
 
 ```js filename="instrumentation-client.js"
 // Initialize analytics before the app starts
-console.log('Analytics initialized')
+console.log("Analytics initialized");
 
 // Set up global error tracking
-window.addEventListener('error', (event) => {
+window.addEventListener("error", (event) => {
   // Send to your error tracking service
-  reportError(event.error)
-})
+  reportError(event.error);
+});
 ```
 
 ## Build Your Own
 
 ```jsx filename="app/_components/web-vitals.js"
-'use client'
+"use client";
 
-import { useReportWebVitals } from 'next/web-vitals'
+import { useReportWebVitals } from "next/web-vitals";
 
 export function WebVitals() {
   useReportWebVitals((metric) => {
-    console.log(metric)
-  })
+    console.log(metric);
+  });
 }
 ```
 
 ```jsx filename="app/layout.js"
-import { WebVitals } from './_components/web-vitals'
+import { WebVitals } from "./_components/web-vitals";
 
 export default function Layout({ children }) {
   return (
@@ -44,7 +44,7 @@ export default function Layout({ children }) {
         {children}
       </body>
     </html>
-  )
+  );
 }
 ```
 
@@ -67,42 +67,42 @@ experience of a web page. The following web vitals are all included:
 You can handle all the results of these metrics using the `name` property.
 
 ```tsx filename="app/_components/web-vitals.tsx" switcher
-'use client'
+"use client";
 
-import { useReportWebVitals } from 'next/web-vitals'
+import { useReportWebVitals } from "next/web-vitals";
 
 export function WebVitals() {
   useReportWebVitals((metric) => {
     switch (metric.name) {
-      case 'FCP': {
+      case "FCP": {
         // handle FCP results
       }
-      case 'LCP': {
+      case "LCP": {
         // handle LCP results
       }
       // ...
     }
-  })
+  });
 }
 ```
 
 ```jsx filename="app/_components/web-vitals.js" switcher
-'use client'
+"use client";
 
-import { useReportWebVitals } from 'next/web-vitals'
+import { useReportWebVitals } from "next/web-vitals";
 
 export function WebVitals() {
   useReportWebVitals((metric) => {
     switch (metric.name) {
-      case 'FCP': {
+      case "FCP": {
         // handle FCP results
       }
-      case 'LCP': {
+      case "LCP": {
         // handle LCP results
       }
       // ...
     }
-  })
+  });
 }
 ```
 
@@ -113,16 +113,16 @@ real user performance on your site. For example:
 
 ```js
 useReportWebVitals((metric) => {
-  const body = JSON.stringify(metric)
-  const url = 'https://example.com/analytics'
+  const body = JSON.stringify(metric);
+  const url = "https://example.com/analytics";
 
   // Use `navigator.sendBeacon()` if available, falling back to `fetch()`.
   if (navigator.sendBeacon) {
-    navigator.sendBeacon(url, body)
+    navigator.sendBeacon(url, body);
   } else {
-    fetch(url, { body, method: 'POST', keepalive: true })
+    fetch(url, { body, method: "POST", keepalive: true });
   }
-})
+});
 ```
 
 > **Good to know**: If you use [Google Analytics](https://analytics.google.com/analytics/web/), using the
@@ -133,14 +133,14 @@ useReportWebVitals((metric) => {
 > useReportWebVitals((metric) => {
 >   // Use `window.gtag` if you initialized Google Analytics as this example:
 >   // https://github.com/vercel/next.js/blob/canary/examples/with-google-analytics
->   window.gtag('event', metric.name, {
+>   window.gtag("event", metric.name, {
 >     value: Math.round(
->       metric.name === 'CLS' ? metric.value * 1000 : metric.value
+>       metric.name === "CLS" ? metric.value * 1000 : metric.value,
 >     ), // values must be integers
 >     event_label: metric.id, // id unique to current page load
 >     non_interaction: true, // avoids affecting bounce rate.
->   })
-> })
+>   });
+> });
 > ```
 >
 > Read more about [sending results to Google Analytics](https://github.com/GoogleChrome/web-vitals#send-the-results-to-google-analytics).

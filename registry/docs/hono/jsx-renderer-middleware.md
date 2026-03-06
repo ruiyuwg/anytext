@@ -5,8 +5,8 @@ JSX Renderer Middleware allows you to set up the layout when rendering JSX with 
 ## Import
 
 ```ts
-import { Hono } from 'hono'
-import { jsxRenderer, useRequestContext } from 'hono/jsx-renderer'
+import { Hono } from "hono";
+import { jsxRenderer, useRequestContext } from "hono/jsx-renderer";
 ```
 
 ## Usage
@@ -18,12 +18,12 @@ app.get(
   '/page/*',
   jsxRenderer(({ children }) => {
     return (
-      
-        
+
+
           Menu
           {children}
-        
-      
+
+
     )
   })
 )
@@ -41,39 +41,31 @@ If you do not want to add a DOCTYPE at the beginning of the HTML, set the `docTy
 
 ```tsx
 app.use(
-  '*',
+  "*",
   jsxRenderer(
     ({ children }) => {
-      return (
-        
-          {children}
-        
-      )
+      return { children };
     },
-    { docType: false }
-  )
-)
+    { docType: false },
+  ),
+);
 ```
 
 And you can specify the DOCTYPE.
 
 ```tsx
 app.use(
-  '*',
+  "*",
   jsxRenderer(
     ({ children }) => {
-      return (
-        
-          {children}
-        
-      )
+      return { children };
     },
     {
       docType:
         '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">',
-    }
-  )
-)
+    },
+  ),
+);
 ```
 
 ### <Badge type="info" text="optional" /> stream: `boolean` | `Record<string, string>`
@@ -91,12 +83,12 @@ app.get(
   jsxRenderer(
     ({ children }) => {
       return (
-        
-          
+
+
             SSR Streaming
             {children}
-          
-        
+
+
       )
     },
     { stream: true }
@@ -106,8 +98,8 @@ app.get(
 app.get('/', (c) => {
   return c.render(
     loading...}>
-      
-    
+
+
   )
 })
 ```
@@ -132,9 +124,9 @@ The `Layout` component enables nesting the layouts.
 app.use(
   jsxRenderer(({ children }) => {
     return (
-      
+
         {children}
-      
+
     )
   })
 )
@@ -143,10 +135,10 @@ const blog = new Hono()
 blog.use(
   jsxRenderer(({ children, Layout }) => {
     return (
-      
+
         Blog Menu
         {children}
-      
+
     )
   })
 )
@@ -171,9 +163,9 @@ const RequestUrlBadge: FC = () => {
 
 app.get('/page/info', (c) => {
   return c.render(
-    
-      You are accessing: 
-    
+
+      You are accessing:
+
   )
 })
 ```
@@ -212,26 +204,26 @@ app.get(
   '/page/*',
   jsxRenderer(({ children, title }) => {
     return (
-      
-        
+
+
           {title}
-        
-        
+
+
           Menu
           {children}
-        
-      
+
+
     )
   })
 )
 
 app.get('/page/favorites', (c) => {
   return c.render(
-    
-      
+
+
         Eating sushi
         Watching baseball games
-      
+
     ,
     {
       title: 'My favorites',

@@ -41,10 +41,10 @@ To implement resumable streams in your chat application, you need:
 Use the `resume` option in the `useChat` hook to enable stream resumption. When `resume` is true, the hook automatically attempts to reconnect to any active stream for the chat on mount:
 
 ```tsx filename="app/chat/[chatId]/chat.tsx"
-'use client';
+"use client";
 
-import { useChat } from '@ai-sdk/react';
-import { DefaultChatTransport, type UIMessage } from 'ai';
+import { useChat } from "@ai-sdk/react";
+import { DefaultChatTransport, type UIMessage } from "ai";
 
 export function Chat({
   chatData,
@@ -86,16 +86,16 @@ Let's start by creating the POST handler to create the resumable stream.
 The POST handler creates resumable streams using the `consumeSseStream` callback:
 
 ```ts filename="app/api/chat/route.ts"
-import { openai } from '@ai-sdk/openai';
-import { readChat, saveChat } from '@util/chat-store';
+import { openai } from "@ai-sdk/openai";
+import { readChat, saveChat } from "@util/chat-store";
 import {
   convertToModelMessages,
   generateId,
   streamText,
   type UIMessage,
-} from 'ai';
-import { after } from 'next/server';
-import { createResumableStreamContext } from 'resumable-stream';
+} from "ai";
+import { after } from "next/server";
+import { createResumableStreamContext } from "resumable-stream";
 
 export async function POST(req: Request) {
   const {
@@ -115,7 +115,7 @@ export async function POST(req: Request) {
   saveChat({ id, messages, activeStreamId: null });
 
   const result = streamText({
-    model: 'openai/gpt-5-mini',
+    model: "openai/gpt-5-mini",
     messages: await convertToModelMessages(messages),
   });
 
@@ -150,10 +150,10 @@ Create a GET handler at `/api/chat/[id]/stream` that:
 4. Resumes the existing stream if one is found
 
 ```ts filename="app/api/chat/[id]/stream/route.ts"
-import { readChat } from '@util/chat-store';
-import { UI_MESSAGE_STREAM_HEADERS } from 'ai';
-import { after } from 'next/server';
-import { createResumableStreamContext } from 'resumable-stream';
+import { readChat } from "@util/chat-store";
+import { UI_MESSAGE_STREAM_HEADERS } from "ai";
+import { after } from "next/server";
+import { createResumableStreamContext } from "resumable-stream";
 
 export async function GET(
   _: Request,
@@ -203,8 +203,8 @@ The diagram above shows the complete lifecycle of a resumable stream:
 By default, the `useChat` hook makes a GET request to `/api/chat/[id]/stream` when resuming. Customize this endpoint, credentials, and headers, using the `prepareReconnectToStreamRequest` option in `DefaultChatTransport`:
 
 ```tsx filename="app/chat/[chatId]/chat.tsx"
-import { useChat } from '@ai-sdk/react';
-import { DefaultChatTransport } from 'ai';
+import { useChat } from "@ai-sdk/react";
+import { DefaultChatTransport } from "ai";
 
 export function Chat({ chatData, resume }) {
   const { messages, sendMessage } = useChat({
@@ -219,10 +219,10 @@ export function Chat({ chatData, resume }) {
           // Or use a different pattern:
           // api: `/api/streams/${id}/resume`,
           // api: `/api/resume-chat?id=${id}`,
-          credentials: 'include', // Include cookies/auth
+          credentials: "include", // Include cookies/auth
           headers: {
-            Authorization: 'Bearer token',
-            'X-Custom-Header': 'value',
+            Authorization: "Bearer token",
+            "X-Custom-Header": "value",
           },
         };
       },

@@ -69,45 +69,45 @@ This will take you through a series of prompts to setup Jest for your project, i
 Update your config file to use `next/jest`. This transformer has all the necessary configuration options for Jest to work with Next.js:
 
 ```ts filename="jest.config.ts" switcher
-import type { Config } from 'jest'
-import nextJest from 'next/jest.js'
+import type { Config } from "jest";
+import nextJest from "next/jest.js";
 
 const createJestConfig = nextJest({
   // Provide the path to your Next.js app to load next.config.js and .env files in your test environment
-  dir: './',
-})
+  dir: "./",
+});
 
 // Add any custom config to be passed to Jest
 const config: Config = {
-  coverageProvider: 'v8',
-  testEnvironment: 'jsdom',
+  coverageProvider: "v8",
+  testEnvironment: "jsdom",
   // Add more setup options before each test is run
   // setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
-}
+};
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
-export default createJestConfig(config)
+export default createJestConfig(config);
 ```
 
 ```js filename="jest.config.js" switcher
-const nextJest = require('next/jest')
+const nextJest = require("next/jest");
 
 /** @type {import('jest').Config} */
 const createJestConfig = nextJest({
   // Provide the path to your Next.js app to load next.config.js and .env files in your test environment
-  dir: './',
-})
+  dir: "./",
+});
 
 // Add any custom config to be passed to Jest
 const config = {
-  coverageProvider: 'v8',
-  testEnvironment: 'jsdom',
+  coverageProvider: "v8",
+  testEnvironment: "jsdom",
   // Add more setup options before each test is run
   // setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
-}
+};
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
-module.exports = createJestConfig(config)
+module.exports = createJestConfig(config);
 ```
 
 Under the hood, `next/jest` is automatically configuring Jest for you, including:
@@ -131,52 +131,52 @@ Here are the recommended options to configure Jest for Next.js:
 module.exports = {
   collectCoverage: true,
   // on node 14.x coverage provider v8 offers good speed and more or less good report
-  coverageProvider: 'v8',
+  coverageProvider: "v8",
   collectCoverageFrom: [
-    '**/*.{js,jsx,ts,tsx}',
-    '!**/*.d.ts',
-    '!**/node_modules/**',
-    '!<rootDir>/out/**',
-    '!<rootDir>/.next/**',
-    '!<rootDir>/*.config.js',
-    '!<rootDir>/coverage/**',
+    "**/*.{js,jsx,ts,tsx}",
+    "!**/*.d.ts",
+    "!**/node_modules/**",
+    "!<rootDir>/out/**",
+    "!<rootDir>/.next/**",
+    "!<rootDir>/*.config.js",
+    "!<rootDir>/coverage/**",
   ],
   moduleNameMapper: {
     // Handle CSS imports (with CSS modules)
     // https://jestjs.io/docs/webpack#mocking-css-modules
-    '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
+    "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy",
 
     // Handle CSS imports (without CSS modules)
-    '^.+\\.(css|sass|scss)$': '<rootDir>/__mocks__/styleMock.js',
+    "^.+\\.(css|sass|scss)$": "<rootDir>/__mocks__/styleMock.js",
 
     // Handle image imports
     // https://jestjs.io/docs/webpack#handling-static-assets
-    '^.+\\.(png|jpg|jpeg|gif|webp|avif|ico|bmp|svg)$': `<rootDir>/__mocks__/fileMock.js`,
+    "^.+\\.(png|jpg|jpeg|gif|webp|avif|ico|bmp|svg)$": `<rootDir>/__mocks__/fileMock.js`,
 
     // Handle module aliases
-    '^@/components/(.*)$': '<rootDir>/components/$1',
+    "^@/components/(.*)$": "<rootDir>/components/$1",
 
     // Handle @next/font
-    '@next/font/(.*)': `<rootDir>/__mocks__/nextFontMock.js`,
+    "@next/font/(.*)": `<rootDir>/__mocks__/nextFontMock.js`,
     // Handle next/font
-    'next/font/(.*)': `<rootDir>/__mocks__/nextFontMock.js`,
+    "next/font/(.*)": `<rootDir>/__mocks__/nextFontMock.js`,
     // Disable server-only
-    'server-only': `<rootDir>/__mocks__/empty.js`,
+    "server-only": `<rootDir>/__mocks__/empty.js`,
   },
   // Add more setup options before each test is run
   // setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
-  testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/.next/'],
-  testEnvironment: 'jsdom',
+  testPathIgnorePatterns: ["<rootDir>/node_modules/", "<rootDir>/.next/"],
+  testEnvironment: "jsdom",
   transform: {
     // Use babel-jest to transpile tests with the next/babel preset
     // https://jestjs.io/docs/configuration#transform-objectstring-pathtotransformer--pathtotransformer-object
-    '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest', { presets: ['next/babel'] }],
+    "^.+\\.(js|jsx|ts|tsx)$": ["babel-jest", { presets: ["next/babel"] }],
   },
   transformIgnorePatterns: [
-    '/node_modules/',
-    '^.+\\.module\\.(css|sass|scss)$',
+    "/node_modules/",
+    "^.+\\.module\\.(css|sass|scss)$",
   ],
-}
+};
 ```
 
 You can learn more about each configuration option in the [Jest docs](https://jestjs.io/docs/configuration). We also recommend reviewing [`next/jest` configuration](https://github.com/vercel/next.js/blob/e02fe314dcd0ae614c65b505c6daafbdeebb920e/packages/next/src/build/jest/jest.ts) to see how Next.js configures Jest.
@@ -188,11 +188,11 @@ Stylesheets and images aren't used in the tests but importing them may cause err
 Create the mock files referenced in the configuration above - `fileMock.js` and `styleMock.js` - inside a `__mocks__` directory:
 
 ```js filename="__mocks__/fileMock.js"
-module.exports = 'test-file-stub'
+module.exports = "test-file-stub";
 ```
 
 ```js filename="__mocks__/styleMock.js"
-module.exports = {}
+module.exports = {};
 ```
 
 For more information on handling static assets, please refer to the [Jest Docs](https://jestjs.io/docs/webpack#handling-static-assets).
@@ -207,13 +207,13 @@ module.exports = new Proxy(
   {
     get: function getter() {
       return () => ({
-        className: 'className',
-        variable: 'variable',
-        style: { fontFamily: 'fontFamily' },
-      })
+        className: "className",
+        variable: "variable",
+        style: { fontFamily: "fontFamily" },
+      });
     },
-  }
-)
+  },
+);
 ```
 
 ## Optional: Handling Absolute Imports and Module Path Aliases
@@ -245,21 +245,21 @@ moduleNameMapper: {
 `@testing-library/jest-dom` includes a set of convenient [custom matchers](https://github.com/testing-library/jest-dom#custom-matchers) such as `.toBeInTheDocument()` making it easier to write tests. You can import the custom matchers for every test by adding the following option to the Jest configuration file:
 
 ```ts filename="jest.config.ts" switcher
-setupFilesAfterEnv: ['<rootDir>/jest.setup.ts']
+setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"];
 ```
 
 ```js filename="jest.config.js" switcher
-setupFilesAfterEnv: ['<rootDir>/jest.setup.js']
+setupFilesAfterEnv: ["<rootDir>/jest.setup.js"];
 ```
 
 Then, inside `jest.setup`, add the following import:
 
 ```ts filename="jest.setup.ts" switcher
-import '@testing-library/jest-dom'
+import "@testing-library/jest-dom";
 ```
 
 ```js filename="jest.setup.js" switcher
-import '@testing-library/jest-dom'
+import "@testing-library/jest-dom";
 ```
 
 > **Good to know:** [`extend-expect` was removed in `v6.0`](https://github.com/testing-library/jest-dom/releases/tag/v6.0.0), so if you are using `@testing-library/jest-dom` before version 6, you will need to import `@testing-library/jest-dom/extend-expect` instead.
@@ -292,36 +292,36 @@ For example, we can add a test to check if the `<Home />` component successfully
 
 ```jsx filename="pages/index.js
 export default function Home() {
-  return <h1>Home</h1>
+  return <h1>Home</h1>;
 }
 ```
 
 ```jsx filename="__tests__/index.test.js"
-import '@testing-library/jest-dom'
-import { render, screen } from '@testing-library/react'
-import Home from '../pages/index'
+import "@testing-library/jest-dom";
+import { render, screen } from "@testing-library/react";
+import Home from "../pages/index";
 
-describe('Home', () => {
-  it('renders a heading', () => {
-    render(<Home />)
+describe("Home", () => {
+  it("renders a heading", () => {
+    render(<Home />);
 
-    const heading = screen.getByRole('heading', { level: 1 })
+    const heading = screen.getByRole("heading", { level: 1 });
 
-    expect(heading).toBeInTheDocument()
-  })
-})
+    expect(heading).toBeInTheDocument();
+  });
+});
 ```
 
 Optionally, add a [snapshot test](https://jestjs.io/docs/snapshot-testing) to keep track of any unexpected changes in your component:
 
 ```jsx filename="__tests__/snapshot.js"
-import { render } from '@testing-library/react'
-import Home from '../pages/index'
+import { render } from "@testing-library/react";
+import Home from "../pages/index";
 
-it('renders homepage unchanged', () => {
-  const { container } = render(<Home />)
-  expect(container).toMatchSnapshot()
-})
+it("renders homepage unchanged", () => {
+  const { container } = render(<Home />);
+  expect(container).toMatchSnapshot();
+});
 ```
 
 > **Good to know**: Test files should not be included inside the Pages Router because any files inside the Pages Router are considered routes.

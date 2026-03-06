@@ -8,10 +8,10 @@ drizzle-orm @op-engineering/op-sqlite
 
 ```ts
 import { drizzle } from "drizzle-orm/op-sqlite";
-import { open } from '@op-engineering/op-sqlite';
+import { open } from "@op-engineering/op-sqlite";
 
 const opsqlite = open({
-  name: 'myDB',
+  name: "myDB",
 });
 const db = drizzle(opsqlite);
 
@@ -36,12 +36,12 @@ You will need to update `babel.config.js`, `metro.config.js` and `drizzle.config
 
 ```js filename='babel.config.js'
 module.exports = {
-  presets: ['module:@react-native/babel-preset'],
+  presets: ["module:@react-native/babel-preset"],
   plugins: [
     [
-      'inline-import',
+      "inline-import",
       {
-        extensions: ['.sql'],
+        extensions: [".sql"],
       },
     ],
   ],
@@ -49,11 +49,11 @@ module.exports = {
 ```
 
 ```js filename="metro.config.js"
-const { getDefaultConfig } = require('@react-native/metro-config');
+const { getDefaultConfig } = require("@react-native/metro-config");
 
 const config = getDefaultConfig(__dirname);
 
-config.resolver.sourceExts.push('sql');
+config.resolver.sourceExts.push("sql");
 
 module.exports = config;
 ```
@@ -61,13 +61,13 @@ module.exports = config;
 Make sure to have `dialect: 'sqlite'` and `driver: 'expo'` in Drizzle Kit config
 
 ```ts filename="drizzle.config.ts"
-import { defineConfig } from 'drizzle-kit';
+import { defineConfig } from "drizzle-kit";
 
 export default defineConfig({
-	schema: './db/schema.ts',
-	out: './drizzle',
-  dialect: 'sqlite',
-	driver: 'expo', // <--- very important
+  schema: "./db/schema.ts",
+  out: "./drizzle",
+  dialect: "sqlite",
+  driver: "expo", // <--- very important
 });
 ```
 

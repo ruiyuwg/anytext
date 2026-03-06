@@ -8,7 +8,7 @@ Fast refresh is a React feature integrated into Next.js that allows you to live 
   update the code only for that file, and re-render your component. You can edit
   anything in that file, including styles, rendering logic, event handlers, or
   effects.
-- If you edit a file with exports that *aren't* React components, Fast Refresh
+- If you edit a file with exports that _aren't_ React components, Fast Refresh
   will re-run both that file, and the other files importing it. So if both
   `Button.js` and `Modal.js` import `theme.js`, editing `theme.js` will update
   both components.
@@ -43,7 +43,7 @@ If you have [error boundaries](https://react.dev/reference/react/Component#catch
 in your app (which is a good idea for graceful failures in production), they
 will retry rendering on the next edit after a rendering error. This means having
 an error boundary can prevent you from always getting reset to the root app
-state. However, keep in mind that error boundaries shouldn't be *too* granular.
+state. However, keep in mind that error boundaries shouldn't be _too_ granular.
 They are used by React in production, and should always be designed
 intentionally.
 
@@ -55,7 +55,7 @@ local state being reset on every edit to a file:
 
 - Local state is not preserved for class components (only function components
   and Hooks preserve state).
-- The file you're editing might have *other* exports in addition to a React
+- The file you're editing might have _other_ exports in addition to a React
   component.
 - Sometimes, a file would export the result of calling a higher-order component
   like `HOC(WrappedComponent)`. If the returned component is a
@@ -69,7 +69,7 @@ state to be preserved in more cases.
 
 - Fast Refresh preserves React local state in function components (and Hooks) by
   default.
-- Sometimes you might want to *force* the state to be reset, and a component to
+- Sometimes you might want to _force_ the state to be reset, and a component to
   be remounted. For example, this can be handy if you're tweaking an animation
   that only happens on mount. To do this, you can add `// @refresh reset`
   anywhere in the file you're editing. This directive is local to the file, and
@@ -89,7 +89,7 @@ values as long as you don't change their arguments or the order of the Hook
 calls.
 
 Hooks with dependencies—such as `useEffect`, `useMemo`, and `useCallback`—will
-*always* update during Fast Refresh. Their list of dependencies will be ignored
+_always_ update during Fast Refresh. Their list of dependencies will be ignored
 while Fast Refresh is happening.
 
 For example, when you edit `useMemo(() => x * 2, [x])` to

@@ -68,7 +68,7 @@ insert into users (`id`, `last_login`)
 
 export const users = mysqlTable('users', {
 id: serial('id').primaryKey(),
-lastLogin: timestamp('last\_login', { mode: 'date' }).notNull(),
+lastLogin: timestamp('last_login', { mode: 'date' }).notNull(),
 });
 
 ````
@@ -214,20 +214,23 @@ To perform similarity search, you need to create a table with a vector column an
 \<CodeTabs items={\["schema.ts", "migration.sql"]}> <CodeTab>
 
 ```ts copy {10, 13}
-import { index, pgTable, serial, text, vector } from 'drizzle-orm/pg-core';
+import { index, pgTable, serial, text, vector } from "drizzle-orm/pg-core";
 
 export const guides = pgTable(
-  'guides',
+  "guides",
   {
-    id: serial('id').primaryKey(),
-    title: text('title').notNull(),
-    description: text('description').notNull(),
-    url: text('url').notNull(),
-    embedding: vector('embedding', { dimensions: 1536 }),
+    id: serial("id").primaryKey(),
+    title: text("title").notNull(),
+    description: text("description").notNull(),
+    url: text("url").notNull(),
+    embedding: vector("embedding", { dimensions: 1536 }),
   },
   (table) => [
-    index('embeddingIndex').using('hnsw', table.embedding.op('vector_cosine_ops')),
-  ]
+    index("embeddingIndex").using(
+      "hnsw",
+      table.embedding.op("vector_cosine_ops"),
+    ),
+  ],
 );
 ```
 
@@ -250,17 +253,17 @@ The `embedding` column is used to store vector embeddings of the guide descripti
 In this example we will use `OpenAI` model to generate [embeddings](https://platform.openai.com/docs/guides/embeddings) for the description:
 
 ```ts copy
-import OpenAI from 'openai';
+import OpenAI from "openai";
 
 const openai = new OpenAI({
-  apiKey: process.env['OPENAI_API_KEY'],
+  apiKey: process.env["OPENAI_API_KEY"],
 });
 
 export const generateEmbedding = async (value: string): Promise<number[]> => {
-  const input = value.replaceAll('\n', ' ');
+  const input = value.replaceAll("\n", " ");
 
   const { data } = await openai.embeddings.create({
-    model: 'text-embedding-ada-002',
+    model: "text-embedding-ada-002",
     input,
   });
 
@@ -304,24 +307,24 @@ const similarGuides = await findSimilarGuides(description);
 ```json
 [
   {
-    name: 'Drizzle with Turso',
-    url: '/docs/tutorials/drizzle-with-turso',
-    similarity: 0.8642314333984994
+    "name": "Drizzle with Turso",
+    "url": "/docs/tutorials/drizzle-with-turso",
+    "similarity": 0.8642314333984994
   },
   {
-    name: 'Drizzle with Supabase Database',
-    url: '/docs/tutorials/drizzle-with-supabase',
-    similarity: 0.8593631126014918
+    "name": "Drizzle with Supabase Database",
+    "url": "/docs/tutorials/drizzle-with-supabase",
+    "similarity": 0.8593631126014918
   },
   {
-    name: 'Drizzle with Neon Postgres',
-    url: '/docs/tutorials/drizzle-with-neon',
-    similarity: 0.8541051184461372
+    "name": "Drizzle with Neon Postgres",
+    "url": "/docs/tutorials/drizzle-with-neon",
+    "similarity": 0.8541051184461372
   },
   {
-    name: 'Drizzle with Vercel Edge Functions',
-    url: '/docs/tutorials/drizzle-with-vercel-edge-functions',
-    similarity: 0.8481551084241092
+    "name": "Drizzle with Vercel Edge Functions",
+    "url": "/docs/tutorials/drizzle-with-vercel-edge-functions",
+    "similarity": 0.8481551084241092
   }
 ]
 ```

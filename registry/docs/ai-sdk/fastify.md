@@ -20,18 +20,18 @@ set in the `AI_GATEWAY_API_KEY` environment variable.
 You can use the `toUIMessageStream` method to get a UI message stream from the result and then pipe it to the response.
 
 ```ts filename='index.ts'
-import { streamText } from 'ai';
-import Fastify from 'fastify';
+import { streamText } from "ai";
+import Fastify from "fastify";
 
 const fastify = Fastify({ logger: true });
 
-fastify.post('/', async function (request, reply) {
+fastify.post("/", async function (request, reply) {
   const result = streamText({
-    model: 'openai/gpt-4o',
-    prompt: 'Invent a new holiday and describe its traditions.',
+    model: "openai/gpt-4o",
+    prompt: "Invent a new holiday and describe its traditions.",
   });
 
-  reply.header('Content-Type', 'text/plain; charset=utf-8');
+  reply.header("Content-Type", "text/plain; charset=utf-8");
 
   return reply.send(result.toUIMessageStream());
 });
@@ -44,39 +44,39 @@ fastify.listen({ port: 8080 });
 `createUIMessageStream` can be used to send custom data to the client.
 
 ```ts filename='index.ts' highlight="8-11,18"
-import { createUIMessageStream, streamText } from 'ai';
-import Fastify from 'fastify';
+import { createUIMessageStream, streamText } from "ai";
+import Fastify from "fastify";
 
 const fastify = Fastify({ logger: true });
 
-fastify.post('/stream-data', async function (request, reply) {
+fastify.post("/stream-data", async function (request, reply) {
   // immediately start streaming the response
   const stream = createUIMessageStream({
     execute: async ({ writer }) => {
-      writer.write({ type: 'start' });
+      writer.write({ type: "start" });
 
       writer.write({
-        type: 'data-custom',
+        type: "data-custom",
         data: {
-          custom: 'initialized call',
+          custom: "initialized call",
         },
       });
 
       const result = streamText({
-        model: 'openai/gpt-4o',
-        prompt: 'Invent a new holiday and describe its traditions.',
+        model: "openai/gpt-4o",
+        prompt: "Invent a new holiday and describe its traditions.",
       });
 
       writer.merge(result.toUIMessageStream({ sendStart: false }));
     },
-    onError: error => {
+    onError: (error) => {
       // Error messages are masked by default for security reasons.
       // If you want to expose the error message to the client, you can do so here:
       return error instanceof Error ? error.message : String(error);
     },
   });
 
-  reply.header('Content-Type', 'text/plain; charset=utf-8');
+  reply.header("Content-Type", "text/plain; charset=utf-8");
 
   return reply.send(stream);
 });
@@ -89,18 +89,18 @@ fastify.listen({ port: 8080 });
 You can use the `textStream` property to get a text stream from the result and then pipe it to the response.
 
 ```ts filename='index.ts' highlight="15"
-import { streamText } from 'ai';
-import Fastify from 'fastify';
+import { streamText } from "ai";
+import Fastify from "fastify";
 
 const fastify = Fastify({ logger: true });
 
-fastify.post('/', async function (request, reply) {
+fastify.post("/", async function (request, reply) {
   const result = streamText({
-    model: 'openai/gpt-4o',
-    prompt: 'Invent a new holiday and describe its traditions.',
+    model: "openai/gpt-4o",
+    prompt: "Invent a new holiday and describe its traditions.",
   });
 
-  reply.header('Content-Type', 'text/plain; charset=utf-8');
+  reply.header("Content-Type", "text/plain; charset=utf-8");
 
   return reply.send(result.textStream);
 });

@@ -15,7 +15,7 @@ export async function list(args: string[]): Promise<void> {
   if (!library) {
     printError(
       `Unknown library: ${libraryId}`,
-      `Run 'anytext list' to see available libraries.`
+      `Run 'anytext list' to see available libraries.`,
     );
     process.exit(1);
   }
@@ -44,7 +44,9 @@ function listLibraries(libraries: Library[]): void {
 
 function listTopics(library: Library): void {
   if (library.topics.length === 0) {
-    console.log(`${heading(library.name)} ${dim(`v${library.version}`)} ${dim("—")} ${dim("0 topics")}`);
+    console.log(
+      `${heading(library.name)} ${dim(`v${library.version}`)} ${dim("—")} ${dim("0 topics")}`,
+    );
     return;
   }
 

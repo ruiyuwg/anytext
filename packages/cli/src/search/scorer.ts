@@ -90,10 +90,7 @@ function scoreOne(
   return score;
 }
 
-export function scoreTopics(
-  manifest: Manifest,
-  query: string,
-): SearchResult[] {
+export function scoreTopics(manifest: Manifest, query: string): SearchResult[] {
   const rawTokens = tokenize(query);
   const tokens = expandQuery(rawTokens);
   const stemmedTokens = tokens.map(stem);

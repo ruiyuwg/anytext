@@ -88,10 +88,10 @@ Libraries like `@material-ui/icons`, `@phosphor-icons/react`, or `react-icons` c
 
 ```jsx
 // Instead of this:
-import { TriangleIcon } from '@phosphor-icons/react'
+import { TriangleIcon } from "@phosphor-icons/react";
 
 // Do this:
-import { TriangleIcon } from '@phosphor-icons/react/dist/csr/Triangle'
+import { TriangleIcon } from "@phosphor-icons/react/dist/csr/Triangle";
 ```
 
 You can often find what import pattern to use in the documentation for the icon library you're using. This example follows [`@phosphor-icons/react`](https://www.npmjs.com/package/@phosphor-icons/react#import-performance-optimization) recommendation.
@@ -120,9 +120,9 @@ Next.js can automatically optimize imports for certain packages. If you are usin
 ```jsx
 module.exports = {
   experimental: {
-    optimizePackageImports: ['package-name'],
+    optimizePackageImports: ["package-name"],
   },
-}
+};
 ```
 
 Turbopack automatically analyzes imports and optimizes them. It does not require this configuration.
@@ -140,12 +140,12 @@ Tailwind CSS version 3.4.8 or newer will warn you about settings that might slow
    ```jsx
    module.exports = {
      content: [
-       './src/**/*.{js,ts,jsx,tsx}', // Good
+       "./src/**/*.{js,ts,jsx,tsx}", // Good
        // This might be too broad
        // It will match `packages/**/node_modules` too
        // '../../packages/**/*.{js,ts,jsx,tsx}',
      ],
-   }
+   };
    ```
 
 2. Avoid scanning unnecessary files:
@@ -154,9 +154,9 @@ Tailwind CSS version 3.4.8 or newer will warn you about settings that might slow
    module.exports = {
      content: [
        // Better - only scans the 'src' folder
-       '../../packages/ui/src/**/*.{js,ts,jsx,tsx}',
+       "../../packages/ui/src/**/*.{js,ts,jsx,tsx}",
      ],
-   }
+   };
    ```
 
 ### 5. Check custom webpack settings
@@ -206,7 +206,7 @@ module.exports = {
       fullUrl: true,
     },
   },
-}
+};
 ```
 
 [Learn more about fetch logging](/docs/app/api-reference/config/next-config-js/logging).

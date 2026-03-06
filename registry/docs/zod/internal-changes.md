@@ -25,7 +25,7 @@ The second generic `Def` has been entirely removed. Instead the base class now o
 ```ts
 function inferSchema<T extends z.ZodType>(schema: T): T {
   return schema;
-};
+}
 
 inferSchema(z.string()); // z.ZodString
 ```
@@ -62,7 +62,7 @@ The `._def` property is now moved to `._zod.def`. The structure of all internal 
 
 ### drops `ZodEffects`
 
-This doesn't affect the user-facing APIs, but it's an internal change worth highlighting. It's part of a larger restructure of how Zod handles *refinements*.
+This doesn't affect the user-facing APIs, but it's an internal change worth highlighting. It's part of a larger restructure of how Zod handles _refinements_.
 
 Previously both refinements and transformations lived inside a wrapper class called `ZodEffects`. That means adding either one to a schema would wrap the original schema in a `ZodEffects` instance. In Zod 4, refinements now live inside the schemas themselves. More accurately, each schema contains an array of "checks"; the concept of a "check" is new in Zod 4 and generalizes the concept of a refinement to include potentially side-effectful transforms like `z.toLowerCase()`.
 
@@ -71,12 +71,7 @@ This is particularly apparent in the Zod Mini API, which heavily relies on the `
 ```ts
 import * as z from "zod/mini";
 
-z.string().check(
-  z.minLength(10),
-  z.maxLength(100),
-  z.toLowerCase(),
-  z.trim(),
-);
+z.string().check(z.minLength(10), z.maxLength(100), z.toLowerCase(), z.trim());
 ```
 
 ### adds `ZodTransform`
@@ -86,7 +81,7 @@ Meanwhile, transforms have been moved into a dedicated `ZodTransform` class. Thi
 ```ts
 import * as z from "zod";
 
-const schema = z.transform(input => String(input));
+const schema = z.transform((input) => String(input));
 
 schema.parse(12); // => "12"
 ```
@@ -94,7 +89,7 @@ schema.parse(12); // => "12"
 This is primarily used in conjunction with `ZodPipe`. The `.transform()` method now returns an instance of `ZodPipe`.
 
 ```ts
-z.string().transform(val => val); // ZodPipe<ZodString, ZodTransform>
+z.string().transform((val) => val); // ZodPipe<ZodString, ZodTransform>
 ```
 
 ### drops `ZodPreprocess`
@@ -102,7 +97,7 @@ z.string().transform(val => val); // ZodPipe<ZodString, ZodTransform>
 As with `.transform()`, the `z.preprocess()` function now returns a `ZodPipe` instance instead of a dedicated `ZodPreprocess` instance.
 
 ```ts
-z.preprocess(val => val, z.string()); // ZodPipe<ZodTransform, ZodString>
+z.preprocess((val) => val, z.string()); // ZodPipe<ZodTransform, ZodString>
 ```
 
 ### drops `ZodBranded`
@@ -122,8 +117,8 @@ The `.refine()` method used to accept a function as the second argument.
 ```ts
 // no longer supported
 const longString = z.string().refine(
-(val) => val.length > 10,
-(val) => ({ message: `${val} is not more than 10 characters` })
+  (val) => val.length > 10,
+  (val) => ({ message: `${val} is not more than 10 characters` }),
 );
 ```
 
@@ -136,7 +131,7 @@ error: (issue) => `${issue.input} is not more than 10 characters`,
 ``
 */}
 
-{/* 
+{/*
 - No support for `null` or `undefined` in `z.literal`
 - `z.literal(null)`
 - `z.literal(undefined)`
@@ -181,7 +176,7 @@ Huge thanks to [Clerk](https://go.clerk.com/zod-clerk), who supported my work on
 
 ## Versioning
 
-{/*  
+{/*
 **Update** — `zod@4.0.0` has now been published to npm. To upgrad
  */}
 

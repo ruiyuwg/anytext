@@ -74,15 +74,15 @@ email: p.text().unique(),
 <rem/>
 
 <Tag style="font-size: 12px">**Option 2**</Tag>
-> I want to have database schema in my TypeScript codebase, 
-> I don't wanna deal with SQL migration files.  
+> I want to have database schema in my TypeScript codebase,
+> I don't wanna deal with SQL migration files.
 > I want Drizzle to "push" my schema directly to the database
 
 <Callout collapsed="Expand details">
-That's a **codebase first** approach. You have your TypeScript Drizzle schema as a **source of truth** and 
+That's a **codebase first** approach. You have your TypeScript Drizzle schema as a **source of truth** and
 Drizzle lets you push schema changes to the database using [`drizzle-kit push`](/docs/drizzle-kit-push) command.
 
-That's the best approach for rapid prototyping and we've seen dozens of teams 
+That's the best approach for rapid prototyping and we've seen dozens of teams
 and solo developers successfully using it as a primary migrations flow in their production applications.
 
 <Section>
@@ -97,15 +97,15 @@ export const users = p.pgTable("users", {
 ````
 
 ```
-Add column to `users` table                                                                          
-┌──────────────────────────┐                  
-│ + email: text().unique() │                  
-└─┬────────────────────────┘                  
-  │                                           
-  v                                           
-┌──────────────────────────┐                  
-│ ~ drizzle-kit push       │                  
-└─┬────────────────────────┘                  
+Add column to `users` table
+┌──────────────────────────┐
+│ + email: text().unique() │
+└─┬────────────────────────┘
+  │
+  v
+┌──────────────────────────┐
+│ ~ drizzle-kit push       │
+└─┬────────────────────────┘
   │                                           ┌──────────────────────────┐
   └ Pull current datatabase schema ---------> │                          │
                                               │                          │
@@ -115,7 +115,7 @@ Add column to `users` table
                                        │      └──────────────────────────┘
                                        │
   ┌────────────────────────────────────┴──────────────┐
-   ALTER TABLE `users` ADD COLUMN `email` TEXT UNIQUE; 
+   ALTER TABLE `users` ADD COLUMN `email` TEXT UNIQUE;
 ```
 
 </Section>
@@ -145,6 +145,7 @@ email: p.text().unique(),
 });
 
 ```
+
 ```
 
 ┌────────────────────────┐\
@@ -155,11 +156,11 @@ email: p.text().unique(),
 2\. find diff between current and previous schema
 3\. prompt developer for renames if necessary
 ┌ 4. generate SQL migration and persist to file
-│    ┌─┴───────────────────────────────────────┐\
-│      📂 drizzle\
-│      └ 📂 20242409125510\_premium\_mister\_fear
-│        ├ 📜 snapshot.json
-│        └ 📜 migration.sql
+│ ┌─┴───────────────────────────────────────┐\
+│ 📂 drizzle\
+│ └ 📂 20242409125510_premium_mister_fear
+│ ├ 📜 snapshot.json
+│ └ 📜 migration.sql
 v
 
 ````
@@ -174,17 +175,17 @@ CREATE TABLE "users" (
 ````
 
 ```
-┌───────────────────────┐                  
-│ $ drizzle-kit migrate │                  
-└─┬─────────────────────┘                  
-  │                                                         ┌──────────────────────────┐                                         
+┌───────────────────────┐
+│ $ drizzle-kit migrate │
+└─┬─────────────────────┘
+  │                                                         ┌──────────────────────────┐
   └ 1. read migration.sql files in migrations folder        │                          │
     2. fetch migration history from database -------------> │                          │
   ┌ 3. pick previously unapplied migrations <-------------- │         DATABASE         │
   └ 4. apply new migration to the database ---------------> │                          │
                                                             │                          │
                                                             └──────────────────────────┘
-[✓] done!                                                 
+[✓] done!
 ```
 
 </Section>
@@ -219,6 +220,7 @@ email: p.text().unique(),
 });
 
 ```
+
 ```
 
 ┌────────────────────────┐\
@@ -229,11 +231,11 @@ email: p.text().unique(),
 2\. find diff between current and previous schema
 3\. prompt developer for renames if necessary
 ┌ 4. generate SQL migration and persist to file
-│    ┌─┴───────────────────────────────────────┐\
-│      📂 drizzle\
-│      └ 📂 20242409125510\_premium\_mister\_fear
-│        ├ 📜 snapshot.json
-│        └ 📜 migration.sql
+│ ┌─┴───────────────────────────────────────┐\
+│ 📂 drizzle\
+│ └ 📂 20242409125510_premium_mister_fear
+│ ├ 📜 snapshot.json
+│ └ 📜 migration.sql
 v
 
 ````
@@ -249,8 +251,8 @@ CREATE TABLE "users" (
 
 ```ts
 // index.ts
-import { drizzle } from "drizzle-orm/node-postgres"
-import { migrate } from 'drizzle-orm/node-postgres/migrator';
+import { drizzle } from "drizzle-orm/node-postgres";
+import { migrate } from "drizzle-orm/node-postgres/migrator";
 
 const db = drizzle(process.env.DATABASE_URL);
 
@@ -258,18 +260,18 @@ await migrate(db);
 ```
 
 ```
-┌───────────────────────┐                  
-│ npx tsx src/index.ts  │                  
-└─┬─────────────────────┘                  
-  │                                                      
-  ├ 1. init database connection                             ┌──────────────────────────┐                                         
+┌───────────────────────┐
+│ npx tsx src/index.ts  │
+└─┬─────────────────────┘
+  │
+  ├ 1. init database connection                             ┌──────────────────────────┐
   └ 2. read migration.sql files in migrations folder        │                          │
     3. fetch migration history from database -------------> │                          │
   ┌ 4. pick previously unapplied migrations <-------------- │         DATABASE         │
   └ 5. apply new migration to the database ---------------> │                          │
                                                             │                          │
                                                             └──────────────────────────┘
-[✓] done!                                                 
+[✓] done!
 ```
 
 </Section>
@@ -301,6 +303,7 @@ email: p.text().unique(),
 });
 
 ```
+
 ```
 
 ┌────────────────────────┐\
@@ -311,11 +314,11 @@ email: p.text().unique(),
 2\. find diff between current and previous scheama
 3\. prompt developer for renames if necessary
 ┌ 4. generate SQL migration and persist to file
-│    ┌─┴───────────────────────────────────────┐\
-│      📂 drizzle\
-│      └ 📂 20242409125510\_premium\_mister\_fear
-│        ├ 📜 snapshot.json
-│        └ 📜 migration.sql
+│ ┌─┴───────────────────────────────────────┐\
+│ 📂 drizzle\
+│ └ 📂 20242409125510_premium_mister_fear
+│ ├ 📜 snapshot.json
+│ └ 📜 migration.sql
 v
 
 ````
@@ -330,27 +333,27 @@ CREATE TABLE "users" (
 ````
 
 ```
-┌───────────────────────────────────┐                  
-│ (._.) now you run your migrations │           
-└─┬─────────────────────────────────┘  
+┌───────────────────────────────────┐
+│ (._.) now you run your migrations │
+└─┬─────────────────────────────────┘
   │
  directly to the database
   │                                         ┌────────────────────┐
-  ├────────────────────────────────────┬───>│                    │  
-  │                                    │    │      Database      │           
- or via external tools                 │    │                    │   
+  ├────────────────────────────────────┬───>│                    │
+  │                                    │    │      Database      │
+ or via external tools                 │    │                    │
   │                                    │    └────────────────────┘
-  │  ┌────────────────────┐            │      
-  └──│ Bytebase           ├────────────┘         
-     ├────────────────────┤  
+  │  ┌────────────────────┐            │
+  └──│ Bytebase           ├────────────┘
+     ├────────────────────┤
      │ Liquibase          │
-     ├────────────────────┤ 
+     ├────────────────────┤
      │ Atlas              │
-     ├────────────────────┤ 
+     ├────────────────────┤
      │ etc…               │
      └────────────────────┘
 
-[✓] done!                                                 
+[✓] done!
 ```
 
 </Section>
@@ -382,10 +385,11 @@ email: p.text().unique(),
 });
 
 ```
+
 ```
 
 ┌────────────────────────┐\
-│ $ drizzle-kit export   │\
+│ $ drizzle-kit export │\
 └─┬──────────────────────┘\
 │\
 └ 1. read your drizzle schema
@@ -405,18 +409,18 @@ CREATE TABLE "users" (
 ````
 
 ```
-┌───────────────────────────────────┐                  
-│ (._.) now you run your migrations │           
-└─┬─────────────────────────────────┘  
+┌───────────────────────────────────┐
+│ (._.) now you run your migrations │
+└─┬─────────────────────────────────┘
   │
  via Atlas
   │                                    ┌──────────────┐
   │  ┌────────────────────┐            │              │
-  └──│ Atlas              ├───────────>│  Database    │      
-     └────────────────────┘            │              │       
+  └──│ Atlas              ├───────────>│  Database    │
+     └────────────────────┘            │              │
                                        └──────────────┘
 
-[✓] done!                                                 
+[✓] done!
 ```
 
 </Section>

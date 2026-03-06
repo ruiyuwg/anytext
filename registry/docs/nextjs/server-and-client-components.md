@@ -25,16 +25,16 @@ Use **Server Components** when you need:
 For example, the `<Page>` component is a Server Component that fetches data about a post, and passes it as props to the `<LikeButton>` which handles client-side interactivity.
 
 ```tsx filename="app/[id]/page.tsx" highlight={1,17} switcher
-import LikeButton from '@/app/ui/like-button'
-import { getPost } from '@/lib/data'
+import LikeButton from "@/app/ui/like-button";
+import { getPost } from "@/lib/data";
 
 export default async function Page({
   params,
 }: {
-  params: Promise<{ id: string }>
+  params: Promise<{ id: string }>;
 }) {
-  const { id } = await params
-  const post = await getPost(id)
+  const { id } = await params;
+  const post = await getPost(id);
 
   return (
     <div>
@@ -44,16 +44,16 @@ export default async function Page({
         <LikeButton likes={post.likes} />
       </main>
     </div>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/[id]/page.js" highlight={1,12} switcher
-import LikeButton from '@/app/ui/like-button'
-import { getPost } from '@/lib/data'
+import LikeButton from "@/app/ui/like-button";
+import { getPost } from "@/lib/data";
 
 export default async function Page({ params }) {
-  const post = await getPost(params.id)
+  const post = await getPost(params.id);
 
   return (
     <div>
@@ -63,14 +63,14 @@ export default async function Page({ params }) {
         <LikeButton likes={post.likes} />
       </main>
     </div>
-  )
+  );
 }
 ```
 
 ```tsx filename="app/ui/like-button.tsx" highlight={1} switcher
-'use client'
+"use client";
 
-import { useState } from 'react'
+import { useState } from "react";
 
 export default function LikeButton({ likes }: { likes: number }) {
   // ...
@@ -78,9 +78,9 @@ export default function LikeButton({ likes }: { likes: number }) {
 ```
 
 ```jsx filename="app/ui/like-button.js" highlight={1} switcher
-'use client'
+"use client";
 
-import { useState } from 'react'
+import { useState } from "react";
 
 export default function LikeButton({ likes }) {
   // ...
@@ -130,36 +130,36 @@ On subsequent navigations:
 You can create a Client Component by adding the [`"use client"`](https://react.dev/reference/react/use-client) directive at the top of the file, above your imports.
 
 ```tsx filename="app/ui/counter.tsx" highlight={1} switcher
-'use client'
+"use client";
 
-import { useState } from 'react'
+import { useState } from "react";
 
 export default function Counter() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
     <div>
       <p>{count} likes</p>
       <button onClick={() => setCount(count + 1)}>Click me</button>
     </div>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/ui/counter.js" highlight={1} switcher
-'use client'
+"use client";
 
-import { useState } from 'react'
+import { useState } from "react";
 
 export default function Counter() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
     <div>
       <p>{count} likes</p>
       <button onClick={() => setCount(count + 1)}>Click me</button>
     </div>
-  )
+  );
 }
 ```
 
@@ -175,9 +175,9 @@ For example, the `<Layout>` component contains mostly static elements like a log
 
 ```tsx filename="app/layout.tsx" highlight={12} switcher
 // Client Component
-import Search from './search'
+import Search from "./search";
 // Server Component
-import Logo from './logo'
+import Logo from "./logo";
 
 // Layout is a Server Component by default
 export default function Layout({ children }: { children: React.ReactNode }) {
@@ -189,15 +189,15 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       </nav>
       <main>{children}</main>
     </>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/layout.js" highlight={12} switcher
 // Client Component
-import Search from './search'
+import Search from "./search";
 // Server Component
-import Logo from './logo'
+import Logo from "./logo";
 
 // Layout is a Server Component by default
 export default function Layout({ children }) {
@@ -209,12 +209,12 @@ export default function Layout({ children }) {
       </nav>
       <main>{children}</main>
     </>
-  )
+  );
 }
 ```
 
 ```tsx filename="app/ui/search.tsx" highlight={1} switcher
-'use client'
+"use client";
 
 export default function Search() {
   // ...
@@ -222,7 +222,7 @@ export default function Search() {
 ```
 
 ```jsx filename="app/ui/search.js" highlight={1} switcher
-'use client'
+"use client";
 
 export default function Search() {
   // ...
@@ -234,34 +234,34 @@ export default function Search() {
 You can pass data from Server Components to Client Components using props.
 
 ```tsx filename="app/[id]/page.tsx" highlight={1,12} switcher
-import LikeButton from '@/app/ui/like-button'
-import { getPost } from '@/lib/data'
+import LikeButton from "@/app/ui/like-button";
+import { getPost } from "@/lib/data";
 
 export default async function Page({
   params,
 }: {
-  params: Promise<{ id: string }>
+  params: Promise<{ id: string }>;
 }) {
-  const { id } = await params
-  const post = await getPost(id)
+  const { id } = await params;
+  const post = await getPost(id);
 
-  return <LikeButton likes={post.likes} />
+  return <LikeButton likes={post.likes} />;
 }
 ```
 
 ```jsx filename="app/[id]/page.js" highlight={1,7} switcher
-import LikeButton from '@/app/ui/like-button'
-import { getPost } from '@/lib/data'
+import LikeButton from "@/app/ui/like-button";
+import { getPost } from "@/lib/data";
 
 export default async function Page({ params }) {
-  const post = await getPost(params.id)
+  const post = await getPost(params.id);
 
-  return <LikeButton likes={post.likes} />
+  return <LikeButton likes={post.likes} />;
 }
 ```
 
 ```tsx filename="app/ui/like-button.tsx" highlight={1} switcher
-'use client'
+"use client";
 
 export default function LikeButton({ likes }: { likes: number }) {
   // ...
@@ -269,7 +269,7 @@ export default function LikeButton({ likes }: { likes: number }) {
 ```
 
 ```jsx filename="app/ui/like-button.js" highlight={1} switcher
-'use client'
+"use client";
 
 export default function LikeButton({ likes }) {
   // ...
@@ -284,49 +284,49 @@ Alternatively, you can stream data from a Server Component to a Client Component
 
 You can pass Server Components as a prop to a Client Component. This allows you to visually nest server-rendered UI within Client components.
 
-A common pattern is to use `children` to create a *slot* in a `<ClientComponent>`. For example, a `<Cart>` component that fetches data on the server, inside a `<Modal>` component that uses client state to toggle visibility.
+A common pattern is to use `children` to create a _slot_ in a `<ClientComponent>`. For example, a `<Cart>` component that fetches data on the server, inside a `<Modal>` component that uses client state to toggle visibility.
 
 ```tsx filename="app/ui/modal.tsx" switcher
-'use client'
+"use client";
 
 export default function Modal({ children }: { children: React.ReactNode }) {
-  return <div>{children}</div>
+  return <div>{children}</div>;
 }
 ```
 
 ```jsx filename="app/ui/modal.js" switcher
-'use client'
+"use client";
 
 export default function Modal({ children }) {
-  return <div>{children}</div>
+  return <div>{children}</div>;
 }
 ```
 
 Then, in a parent Server Component (e.g.`<Page>`), you can pass a `<Cart>` as the child of the `<Modal>`:
 
 ```tsx filename="app/page.tsx"  highlight={7} switcher
-import Modal from './ui/modal'
-import Cart from './ui/cart'
+import Modal from "./ui/modal";
+import Cart from "./ui/cart";
 
 export default function Page() {
   return (
     <Modal>
       <Cart />
     </Modal>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/page.js" highlight={7} switcher
-import Modal from './ui/modal'
-import Cart from './ui/cart'
+import Modal from "./ui/modal";
+import Cart from "./ui/cart";
 
 export default function Page() {
   return (
     <Modal>
       <Cart />
     </Modal>
-  )
+  );
 }
 ```
 
@@ -339,42 +339,42 @@ In this pattern, all Server Components will be rendered on the server ahead of t
 To use context, create a Client Component that accepts `children`:
 
 ```tsx filename="app/theme-provider.tsx" switcher
-'use client'
+"use client";
 
-import { createContext } from 'react'
+import { createContext } from "react";
 
-export const ThemeContext = createContext({})
+export const ThemeContext = createContext({});
 
 export default function ThemeProvider({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
-  return <ThemeContext.Provider value="dark">{children}</ThemeContext.Provider>
+  return <ThemeContext.Provider value="dark">{children}</ThemeContext.Provider>;
 }
 ```
 
 ```jsx filename="app/theme-provider.js" switcher
-'use client'
+"use client";
 
-import { createContext } from 'react'
+import { createContext } from "react";
 
-export const ThemeContext = createContext({})
+export const ThemeContext = createContext({});
 
 export default function ThemeProvider({ children }) {
-  return <ThemeContext.Provider value="dark">{children}</ThemeContext.Provider>
+  return <ThemeContext.Provider value="dark">{children}</ThemeContext.Provider>;
 }
 ```
 
 Then, import it into a Server Component (e.g. `layout`):
 
 ```tsx filename="app/layout.tsx" switcher
-import ThemeProvider from './theme-provider'
+import ThemeProvider from "./theme-provider";
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html>
@@ -382,12 +382,12 @@ export default function RootLayout({
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/layout.js" switcher
-import ThemeProvider from './theme-provider'
+import ThemeProvider from "./theme-provider";
 
 export default function RootLayout({ children }) {
   return (
@@ -396,7 +396,7 @@ export default function RootLayout({ children }) {
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
-  )
+  );
 }
 ```
 
@@ -411,72 +411,72 @@ You can share fetched data across both Server and Client Components by combining
 Create a cached function that fetches data:
 
 ```ts filename="app/lib/user.ts" switcher
-import { cache } from 'react'
+import { cache } from "react";
 
 export const getUser = cache(async () => {
-  const res = await fetch('https://api.example.com/user')
-  return res.json()
-})
+  const res = await fetch("https://api.example.com/user");
+  return res.json();
+});
 ```
 
 ```js filename="app/lib/user.js" switcher
-import { cache } from 'react'
+import { cache } from "react";
 
 export const getUser = cache(async () => {
-  const res = await fetch('https://api.example.com/user')
-  return res.json()
-})
+  const res = await fetch("https://api.example.com/user");
+  return res.json();
+});
 ```
 
 Create a context provider that stores the promise:
 
 ```tsx filename="app/user-provider.tsx" switcher
-'use client'
+"use client";
 
-import { createContext } from 'react'
+import { createContext } from "react";
 
 type User = {
-  id: string
-  name: string
-}
+  id: string;
+  name: string;
+};
 
-export const UserContext = createContext<Promise<User> | null>(null)
+export const UserContext = createContext<Promise<User> | null>(null);
 
 export default function UserProvider({
   children,
   userPromise,
 }: {
-  children: React.ReactNode
-  userPromise: Promise<User>
+  children: React.ReactNode;
+  userPromise: Promise<User>;
 }) {
-  return <UserContext value={userPromise}>{children}</UserContext>
+  return <UserContext value={userPromise}>{children}</UserContext>;
 }
 ```
 
 ```jsx filename="app/user-provider.js" switcher
-'use client'
+"use client";
 
-import { createContext } from 'react'
+import { createContext } from "react";
 
-export const UserContext = createContext(null)
+export const UserContext = createContext(null);
 
 export default function UserProvider({ children, userPromise }) {
-  return <UserContext value={userPromise}>{children}</UserContext>
+  return <UserContext value={userPromise}>{children}</UserContext>;
 }
 ```
 
 In a layout, pass the promise to the provider without awaiting:
 
 ```tsx filename="app/layout.tsx" switcher
-import UserProvider from './user-provider'
-import { getUser } from './lib/user'
+import UserProvider from "./user-provider";
+import { getUser } from "./lib/user";
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
-  const userPromise = getUser() // Don't await
+  const userPromise = getUser(); // Don't await
 
   return (
     <html>
@@ -484,16 +484,16 @@ export default function RootLayout({
         <UserProvider userPromise={userPromise}>{children}</UserProvider>
       </body>
     </html>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/layout.js" switcher
-import UserProvider from './user-provider'
-import { getUser } from './lib/user'
+import UserProvider from "./user-provider";
+import { getUser } from "./lib/user";
 
 export default function RootLayout({ children }) {
-  const userPromise = getUser() // Don't await
+  const userPromise = getUser(); // Don't await
 
   return (
     <html>
@@ -501,87 +501,87 @@ export default function RootLayout({ children }) {
         <UserProvider userPromise={userPromise}>{children}</UserProvider>
       </body>
     </html>
-  )
+  );
 }
 ```
 
 Client Components use [`use()`](https://react.dev/reference/react/use) to resolve the promise from context, wrapped in `<Suspense>` for fallback UI:
 
 ```tsx filename="app/ui/profile.tsx" switcher
-'use client'
+"use client";
 
-import { use, useContext } from 'react'
-import { UserContext } from '../user-provider'
+import { use, useContext } from "react";
+import { UserContext } from "../user-provider";
 
 export function Profile() {
-  const userPromise = useContext(UserContext)
+  const userPromise = useContext(UserContext);
   if (!userPromise) {
-    throw new Error('useContext must be used within a UserProvider')
+    throw new Error("useContext must be used within a UserProvider");
   }
-  const user = use(userPromise)
-  return <p>Welcome, {user.name}</p>
+  const user = use(userPromise);
+  return <p>Welcome, {user.name}</p>;
 }
 ```
 
 ```jsx filename="app/ui/profile.js" switcher
-'use client'
+"use client";
 
-import { use, useContext } from 'react'
-import { UserContext } from '../user-provider'
+import { use, useContext } from "react";
+import { UserContext } from "../user-provider";
 
 export function Profile() {
-  const userPromise = useContext(UserContext)
+  const userPromise = useContext(UserContext);
   if (!userPromise) {
-    throw new Error('useContext must be used within a UserProvider')
+    throw new Error("useContext must be used within a UserProvider");
   }
-  const user = use(userPromise)
-  return <p>Welcome, {user.name}</p>
+  const user = use(userPromise);
+  return <p>Welcome, {user.name}</p>;
 }
 ```
 
 ```tsx filename="app/page.tsx" switcher
-import { Suspense } from 'react'
-import { Profile } from './ui/profile'
+import { Suspense } from "react";
+import { Profile } from "./ui/profile";
 
 export default function Page() {
   return (
     <Suspense fallback={<div>Loading profile...</div>}>
       <Profile />
     </Suspense>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/page.js" switcher
-import { Suspense } from 'react'
-import { Profile } from './ui/profile'
+import { Suspense } from "react";
+import { Profile } from "./ui/profile";
 
 export default function Page() {
   return (
     <Suspense fallback={<div>Loading profile...</div>}>
       <Profile />
     </Suspense>
-  )
+  );
 }
 ```
 
 Server Components can also call `getUser()` directly:
 
 ```tsx filename="app/dashboard/page.tsx" switcher
-import { getUser } from '../lib/user'
+import { getUser } from "../lib/user";
 
 export default async function DashboardPage() {
-  const user = await getUser() // Cached - same request, no duplicate fetch
-  return <h1>Dashboard for {user.name}</h1>
+  const user = await getUser(); // Cached - same request, no duplicate fetch
+  return <h1>Dashboard for {user.name}</h1>;
 }
 ```
 
 ```jsx filename="app/dashboard/page.js" switcher
-import { getUser } from '../lib/user'
+import { getUser } from "../lib/user";
 
 export default async function DashboardPage() {
-  const user = await getUser() // Cached - same request, no duplicate fetch
-  return <h1>Dashboard for {user.name}</h1>
+  const user = await getUser(); // Cached - same request, no duplicate fetch
+  return <h1>Dashboard for {user.name}</h1>;
 }
 ```
 
@@ -598,13 +598,13 @@ For example, the `<Carousel />` can be imported from the `acme-carousel` package
 If you use `<Carousel />` within a Client Component, it will work as expected:
 
 ```tsx filename="app/gallery.tsx" switcher
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { Carousel } from 'acme-carousel'
+import { useState } from "react";
+import { Carousel } from "acme-carousel";
 
 export default function Gallery() {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div>
@@ -612,18 +612,18 @@ export default function Gallery() {
       {/* Works, since Carousel is used within a Client Component */}
       {isOpen && <Carousel />}
     </div>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/gallery.js" switcher
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { Carousel } from 'acme-carousel'
+import { useState } from "react";
+import { Carousel } from "acme-carousel";
 
 export default function Gallery() {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div>
@@ -631,7 +631,7 @@ export default function Gallery() {
       {/*  Works, since Carousel is used within a Client Component */}
       {isOpen && <Carousel />}
     </div>
-  )
+  );
 }
 ```
 
@@ -640,25 +640,25 @@ However, if you try to use it directly within a Server Component, you'll see an 
 To fix this, you can wrap third-party components that rely on client-only features in your own Client Components:
 
 ```tsx filename="app/carousel.tsx" switcher
-'use client'
+"use client";
 
-import { Carousel } from 'acme-carousel'
+import { Carousel } from "acme-carousel";
 
-export default Carousel
+export default Carousel;
 ```
 
 ```jsx filename="app/carousel.js" switcher
-'use client'
+"use client";
 
-import { Carousel } from 'acme-carousel'
+import { Carousel } from "acme-carousel";
 
-export default Carousel
+export default Carousel;
 ```
 
 Now, you can use `<Carousel />` directly within a Server Component:
 
 ```tsx filename="app/page.tsx" switcher
-import Carousel from './carousel'
+import Carousel from "./carousel";
 
 export default function Page() {
   return (
@@ -667,12 +667,12 @@ export default function Page() {
       {/*  Works, since Carousel is a Client Component */}
       <Carousel />
     </div>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/page.js" switcher
-import Carousel from './carousel'
+import Carousel from "./carousel";
 
 export default function Page() {
   return (
@@ -681,7 +681,7 @@ export default function Page() {
       {/*  Works, since Carousel is a Client Component */}
       <Carousel />
     </div>
-  )
+  );
 }
 ```
 
@@ -697,25 +697,25 @@ JavaScript modules can be shared between both Server and Client Components modul
 
 ```ts filename="lib/data.ts" switcher
 export async function getData() {
-  const res = await fetch('https://external-service.com/data', {
+  const res = await fetch("https://external-service.com/data", {
     headers: {
       authorization: process.env.API_KEY,
     },
-  })
+  });
 
-  return res.json()
+  return res.json();
 }
 ```
 
 ```js filename="lib/data.js" switcher
 export async function getData() {
-  const res = await fetch('https://external-service.com/data', {
+  const res = await fetch("https://external-service.com/data", {
     headers: {
       authorization: process.env.API_KEY,
     },
-  })
+  });
 
-  return res.json()
+  return res.json();
 }
 ```
 
@@ -730,16 +730,16 @@ To prevent accidental usage in Client Components, you can use the [`server-only`
 Then, import the package into a file that contains server-only code:
 
 ```js filename="lib/data.js"
-import 'server-only'
+import "server-only";
 
 export async function getData() {
-  const res = await fetch('https://external-service.com/data', {
+  const res = await fetch("https://external-service.com/data", {
     headers: {
       authorization: process.env.API_KEY,
     },
-  })
+  });
 
-  return res.json()
+  return res.json();
 }
 ```
 

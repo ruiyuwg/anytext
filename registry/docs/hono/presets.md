@@ -12,7 +12,7 @@ Therefore, you can use them interchangeably.
 Usage:
 
 ```ts twoslash
-import { Hono } from 'hono'
+import { Hono } from "hono";
 ```
 
 Routers:
@@ -20,7 +20,7 @@ Routers:
 ```ts
 this.router = new SmartRouter({
   routers: [new RegExpRouter(), new TrieRouter()],
-})
+});
 ```
 
 ## `hono/quick`
@@ -28,7 +28,7 @@ this.router = new SmartRouter({
 Usage:
 
 ```ts twoslash
-import { Hono } from 'hono/quick'
+import { Hono } from "hono/quick";
 ```
 
 Router:
@@ -36,7 +36,7 @@ Router:
 ```ts
 this.router = new SmartRouter({
   routers: [new LinearRouter(), new TrieRouter()],
-})
+});
 ```
 
 ## `hono/tiny`
@@ -44,13 +44,13 @@ this.router = new SmartRouter({
 Usage:
 
 ```ts twoslash
-import { Hono } from 'hono/tiny'
+import { Hono } from "hono/tiny";
 ```
 
 Router:
 
 ```ts
-this.router = new PatternRouter()
+this.router = new PatternRouter();
 ```
 
 ## Which preset should I use?

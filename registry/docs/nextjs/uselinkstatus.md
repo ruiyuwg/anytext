@@ -8,16 +8,16 @@ The `useLinkStatus` hook lets you track the **pending** state of a `<Link>`. Use
 - The destination route is dynamic **and** doesn't include a [`loading.js`](/docs/app/api-reference/file-conventions/loading) file that would allow an instant navigation.
 
 ```tsx filename="app/hint.tsx" switcher
-'use client'
+"use client";
 
-import Link from 'next/link'
-import { useLinkStatus } from 'next/link'
+import Link from "next/link";
+import { useLinkStatus } from "next/link";
 
 function Hint() {
-  const { pending } = useLinkStatus()
+  const { pending } = useLinkStatus();
   return (
-    <span aria-hidden className={`link-hint ${pending ? 'is-pending' : ''}`} />
-  )
+    <span aria-hidden className={`link-hint ${pending ? "is-pending" : ""}`} />
+  );
 }
 
 export default function Header() {
@@ -27,21 +27,21 @@ export default function Header() {
         <span className="label">Dashboard</span> <Hint />
       </Link>
     </header>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/hint.js" switcher
-'use client'
+"use client";
 
-import Link from 'next/link'
-import { useLinkStatus } from 'next/link'
+import Link from "next/link";
+import { useLinkStatus } from "next/link";
 
 function Hint() {
-  const { pending } = useLinkStatus()
+  const { pending } = useLinkStatus();
   return (
-    <span aria-hidden className={`link-hint ${pending ? 'is-pending' : ''}`} />
-  )
+    <span aria-hidden className={`link-hint ${pending ? "is-pending" : ""}`} />
+  );
 }
 
 export default function Header() {
@@ -51,7 +51,7 @@ export default function Header() {
         <span className="label">Dashboard</span> <Hint />
       </Link>
     </header>
-  )
+  );
 }
 ```
 
@@ -76,7 +76,7 @@ Navigation is typically fast. Use `useLinkStatus` as a quick patch when you iden
 ## Parameters
 
 ```tsx
-const { pending } = useLinkStatus()
+const { pending } = useLinkStatus();
 ```
 
 `useLinkStatus` does not take any parameters.
@@ -96,40 +96,40 @@ const { pending } = useLinkStatus()
 Add a subtle, fixed-size hint that doesn’t affect layout to confirm a click when prefetching hasn’t completed.
 
 ```tsx filename="app/components/loading-indicator.tsx" switcher
-'use client'
+"use client";
 
-import { useLinkStatus } from 'next/link'
+import { useLinkStatus } from "next/link";
 
 export default function LoadingIndicator() {
-  const { pending } = useLinkStatus()
+  const { pending } = useLinkStatus();
   return (
-    <span aria-hidden className={`link-hint ${pending ? 'is-pending' : ''}`} />
-  )
+    <span aria-hidden className={`link-hint ${pending ? "is-pending" : ""}`} />
+  );
 }
 ```
 
 ```jsx filename="app/components/loading-indicator.js" switcher
-'use client'
+"use client";
 
-import { useLinkStatus } from 'next/link'
+import { useLinkStatus } from "next/link";
 
 export default function LoadingIndicator() {
-  const { pending } = useLinkStatus()
+  const { pending } = useLinkStatus();
   return (
-    <span aria-hidden className={`link-hint ${pending ? 'is-pending' : ''}`} />
-  )
+    <span aria-hidden className={`link-hint ${pending ? "is-pending" : ""}`} />
+  );
 }
 ```
 
 ```tsx filename="app/shop/layout.tsx" switcher
-import Link from 'next/link'
-import LoadingIndicator from './components/loading-indicator'
+import Link from "next/link";
+import LoadingIndicator from "./components/loading-indicator";
 
 const links = [
-  { href: '/shop/electronics', label: 'Electronics' },
-  { href: '/shop/clothing', label: 'Clothing' },
-  { href: '/shop/books', label: 'Books' },
-]
+  { href: "/shop/electronics", label: "Electronics" },
+  { href: "/shop/clothing", label: "Clothing" },
+  { href: "/shop/books", label: "Books" },
+];
 
 function Menubar() {
   return (
@@ -140,7 +140,7 @@ function Menubar() {
         </Link>
       ))}
     </div>
-  )
+  );
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {
@@ -149,19 +149,19 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <Menubar />
       {children}
     </div>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/shop/layout.js" switcher
-import Link from 'next/link'
-import LoadingIndicator from './components/loading-indicator'
+import Link from "next/link";
+import LoadingIndicator from "./components/loading-indicator";
 
 const links = [
-  { href: '/shop/electronics', label: 'Electronics' },
-  { href: '/shop/clothing', label: 'Clothing' },
-  { href: '/shop/books', label: 'Books' },
-]
+  { href: "/shop/electronics", label: "Electronics" },
+  { href: "/shop/clothing", label: "Clothing" },
+  { href: "/shop/books", label: "Books" },
+];
 
 function Menubar() {
   return (
@@ -172,7 +172,7 @@ function Menubar() {
         </Link>
       ))}
     </div>
-  )
+  );
 }
 
 export default function Layout({ children }) {
@@ -181,7 +181,7 @@ export default function Layout({ children }) {
       <Menubar />
       {children}
     </div>
-  )
+  );
 }
 ```
 

@@ -7,8 +7,8 @@ We have prefixed this as `unstable_` as it's a new API, but you're safe to use i
 ## Usage
 
 ```tsx
-import { createTRPCClient, unstable_localLink } from '@trpc/client';
-import type { AppRouter } from '../server';
+import { createTRPCClient, unstable_localLink } from "@trpc/client";
+import type { AppRouter } from "../server";
 
 const client = createTRPCClient<AppRouter>({
   links: [
@@ -20,7 +20,7 @@ const client = createTRPCClient<AppRouter>({
       },
       onError: (opts) => {
         // Log errors here, similarly to how you would in an API route
-        console.error('Error:', opts.error);
+        console.error("Error:", opts.error);
       },
     }),
   ],
@@ -79,8 +79,8 @@ Optional input/output transformers for serialization/deserialization of data.
 You can import and add the `loggerLink` to the `links` array as such:
 
 ```ts title="client/index.ts"
-import { createTRPCClient, httpBatchLink, loggerLink } from '@trpc/client';
-import type { AppRouter } from '../server';
+import { createTRPCClient, httpBatchLink, loggerLink } from "@trpc/client";
+import type { AppRouter } from "../server";
 
 const client = createTRPCClient<AppRouter>({
   links: [
@@ -90,12 +90,12 @@ const client = createTRPCClient<AppRouter>({
      */
     loggerLink({
       enabled: (opts) =>
-        (process.env.NODE_ENV === 'development' &&
-          typeof window !== 'undefined') ||
-        (opts.direction === 'down' && opts.result instanceof Error),
+        (process.env.NODE_ENV === "development" &&
+          typeof window !== "undefined") ||
+        (opts.direction === "down" && opts.result instanceof Error),
     }),
     httpBatchLink({
-      url: 'http://localhost:3000',
+      url: "http://localhost:3000",
     }),
   ],
 });
@@ -121,7 +121,7 @@ type LoggerLinkOptions<TRouter extends AnyRouter> = {
    * Color mode used in the default logger.
    * @default typeof window === 'undefined' ? 'ansi' : 'css'
    */
-  colorMode?: 'ansi' | 'css';
+  colorMode?: "ansi" | "css";
 };
 ```
 

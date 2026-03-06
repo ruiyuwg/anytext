@@ -92,15 +92,15 @@ The `import` and the final `export default` parts may vary from runtime to runti
 but all of the application code will run the same code everywhere.
 
 ```ts
-import { Hono } from 'hono'
+import { Hono } from "hono";
 
-const app = new Hono()
+const app = new Hono();
 
-app.get('/', (c) => {
-  return c.text('Hello Hono!')
-})
+app.get("/", (c) => {
+  return c.text("Hello Hono!");
+});
 
-export default app
+export default app;
 ```
 
 Start the development server and access `http://localhost:8787` with your browser.
@@ -126,12 +126,12 @@ bun run dev
 Returning JSON is also easy. The following is an example of handling a GET Request to `/api/hello` and returning an `application/json` Response.
 
 ```ts
-app.get('/api/hello', (c) => {
+app.get("/api/hello", (c) => {
   return c.json({
     ok: true,
-    message: 'Hello Hono!',
-  })
-})
+    message: "Hello Hono!",
+  });
+});
 ```
 
 ## Request and Response
@@ -139,21 +139,19 @@ app.get('/api/hello', (c) => {
 Getting a path parameter, URL query value, and appending a Response header is written as follows.
 
 ```ts
-app.get('/posts/:id', (c) => {
-  const page = c.req.query('page')
-  const id = c.req.param('id')
-  c.header('X-Message', 'Hi!')
-  return c.text(`You want to see ${page} of ${id}`)
-})
+app.get("/posts/:id", (c) => {
+  const page = c.req.query("page");
+  const id = c.req.param("id");
+  c.header("X-Message", "Hi!");
+  return c.text(`You want to see ${page} of ${id}`);
+});
 ```
 
 We can easily handle POST, PUT, and DELETE not only GET.
 
 ```ts
-app.post('/posts', (c) => c.text('Created!', 201))
-app.delete('/posts/:id', (c) =>
-  c.text(`${c.req.param('id')} is deleted!`)
-)
+app.post("/posts", (c) => c.text("Created!", 201));
+app.delete("/posts/:id", (c) => c.text(`${c.req.param("id")} is deleted!`));
 ```
 
 ## Return HTML
@@ -168,12 +166,12 @@ const View = () => {
         <h1>Hello Hono!</h1>
       </body>
     </html>
-  )
-}
+  );
+};
 
-app.get('/page', (c) => {
-  return c.html(<View />)
-})
+app.get("/page", (c) => {
+  return c.html(<View />);
+});
 ```
 
 ## Return raw Response
@@ -181,9 +179,9 @@ app.get('/page', (c) => {
 You can also return the raw [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response).
 
 ```ts
-app.get('/', () => {
-  return new Response('Good morning!')
-})
+app.get("/", () => {
+  return new Response("Good morning!");
+});
 ```
 
 ## Using Middleware
@@ -192,21 +190,21 @@ Middleware can do the hard work for you.
 For example, add in Basic Authentication.
 
 ```ts
-import { basicAuth } from 'hono/basic-auth'
+import { basicAuth } from "hono/basic-auth";
 
 // ...
 
 app.use(
-  '/admin/*',
+  "/admin/*",
   basicAuth({
-    username: 'admin',
-    password: 'secret',
-  })
-)
+    username: "admin",
+    password: "secret",
+  }),
+);
 
-app.get('/admin', (c) => {
-  return c.text('You are authorized!')
-})
+app.get("/admin", (c) => {
+  return c.text("You are authorized!");
+});
 ```
 
 There are useful built-in middleware including Bearer and authentication using JWT, CORS and ETag.
@@ -219,14 +217,14 @@ There are Adapters for platform-dependent functions, e.g., handling static files
 For example, to handle WebSocket in Cloudflare Workers, import `hono/cloudflare-workers`.
 
 ```ts
-import { upgradeWebSocket } from 'hono/cloudflare-workers'
+import { upgradeWebSocket } from "hono/cloudflare-workers";
 
 app.get(
-  '/ws',
+  "/ws",
   upgradeWebSocket((c) => {
     // ...
-  })
-)
+  }),
+);
 ```
 
 ## Next step

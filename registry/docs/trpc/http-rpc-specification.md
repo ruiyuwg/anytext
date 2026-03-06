@@ -2,11 +2,11 @@
 
 ## Methods <-> Type mapping
 
-| HTTP Method  | Mapping           | Notes                                                                                                          |
-| ------------ | ----------------- | -------------------------------------------------------------------------------------------------------------- |
-| `GET`        | `.query()`        | Input JSON-stringified in query param.*e.g.* `myQuery?input=${encodeURIComponent(JSON.stringify(input))}` |
-| `POST`       | `.mutation()`     | Input as POST body.                                                                                            |
-| n/a | `.subscription()` | Subscriptions are not supported in HTTP transport                                                     |
+| HTTP Method | Mapping           | Notes                                                                                                     |
+| ----------- | ----------------- | --------------------------------------------------------------------------------------------------------- |
+| `GET`       | `.query()`        | Input JSON-stringified in query param._e.g._ `myQuery?input=${encodeURIComponent(JSON.stringify(input))}` |
+| `POST`      | `.mutation()`     | Input as POST body.                                                                                       |
+| n/a         | `.subscription()` | Subscriptions are not supported in HTTP transport                                                         |
 
 ## Accessing nested procedures
 
@@ -54,8 +54,8 @@ export const appRouter = t.router({
 
 ```tsx title='MyComponent.tsx'
 export function MyComponent() {
-  const post1 = trpc.postById.useQuery('1');
-  const relatedPosts = trpc.relatedPosts.useQuery('1');
+  const post1 = trpc.postById.useQuery("1");
+  const relatedPosts = trpc.relatedPosts.useQuery("1");
 
   return (
     <pre>
@@ -84,8 +84,8 @@ export function MyComponent() {
 ```ts
 encodeURIComponent(
   JSON.stringify({
-    0: '1', // <-- input for `postById`
-    1: '1', // <-- input for `relatedPosts`
+    0: "1", // <-- input for `postById`
+    1: "1", // <-- input for `relatedPosts`
   }),
 );
 ```
@@ -263,7 +263,7 @@ const client = createTRPCClient<AppRouter>({
   links: [
     httpLink({
       url: `http://localhost:3000`,
-      methodOverride: 'POST', // all queries and mutations will be sent to the tRPC Server as POST requests.
+      methodOverride: "POST", // all queries and mutations will be sent to the tRPC Server as POST requests.
     }),
   ],
 });
@@ -277,8 +277,8 @@ You can read more details by drilling into the TypeScript definitions in
 - [/packages/server/src/unstable-core-do-not-import/rpc/codes.ts](https://github.com/trpc/trpc/tree/main/packages/server/src/unstable-core-do-not-import/rpc/codes.ts)
 
 ```ts twoslash
-import { initTRPC } from '@trpc/server';
-import z from 'zod';
+import { initTRPC } from "@trpc/server";
+import z from "zod";
 
 // ---cut---
 const t = initTRPC.create();
@@ -294,7 +294,7 @@ const appRouter = router({
       //      ^?
 
       return `Hello ${input.name}` as const;
-  }),
+    }),
 });
 
 export type AppRouter = typeof appRouter;
@@ -333,19 +333,19 @@ export type AppRouter = typeof appRouter;
 // @target: esnext
 // @include: server
 // @filename: client.ts
-import { createTRPCClient, httpBatchLink } from '@trpc/client';
-import type { AppRouter } from './server';
+import { createTRPCClient, httpBatchLink } from "@trpc/client";
+import type { AppRouter } from "./server";
 
 // ---cut---
 const trpc = createTRPCClient<AppRouter>({
   links: [
     httpBatchLink({
-      url: 'http://localhost:3000',
+      url: "http://localhost:3000",
     }),
   ],
 });
 
-const res = await trpc.greeting.query({ name: 'John' });
+const res = await trpc.greeting.query({ name: "John" });
 //    ^?
 ```
 
@@ -361,7 +361,7 @@ RPC is short for "Remote Procedure Call". It is a way of calling functions on on
 
 ```ts
 // HTTP/REST
-const res = await fetch('/api/users/1');
+const res = await fetch("/api/users/1");
 const user = await res.json();
 
 // RPC

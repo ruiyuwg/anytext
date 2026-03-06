@@ -99,36 +99,36 @@ Use this when you want predictable, explicit operations (`view`, `create`, `upda
 Define a schema and route every request through your own `runMemoryCommand` handler:
 
 ```ts
-import { tool } from 'ai';
-import { z } from 'zod';
+import { tool } from "ai";
+import { z } from "zod";
 
 const memoryInputSchema = z.object({
   command: z
-    .enum(['view', 'create', 'update', 'search'])
+    .enum(["view", "create", "update", "search"])
     .describe(
-      'Memory action: view to read, create to write new content, update to change existing content, search to find relevant lines.',
+      "Memory action: view to read, create to write new content, update to change existing content, search to find relevant lines.",
     ),
   path: z
     .string()
     .optional()
     .describe(
-      'Memory path under /memories, such as /memories/core.md or /memories/notes.md. Required for view, create, and update.',
+      "Memory path under /memories, such as /memories/core.md or /memories/notes.md. Required for view, create, and update.",
     ),
   content: z
     .string()
     .optional()
-    .describe('Text to write for create or update commands.'),
+    .describe("Text to write for create or update commands."),
   mode: z
-    .enum(['append', 'overwrite'])
+    .enum(["append", "overwrite"])
     .optional()
     .describe(
-      'Write mode for update: append adds to existing content, overwrite replaces it. Defaults to overwrite.',
+      "Write mode for update: append adds to existing content, overwrite replaces it. Defaults to overwrite.",
     ),
   query: z
     .string()
     .optional()
     .describe(
-      'Search keywords for the search command. Prefer short focused terms.',
+      "Search keywords for the search command. Prefer short focused terms.",
     ),
 });
 
@@ -142,7 +142,7 @@ Rules:
 - Store durable user facts in /memories/core.md and detailed notes in /memories/notes.md.
 - Keep memory operations invisible in user-facing replies.`,
   inputSchema: memoryInputSchema,
-  execute: async input => {
+  execute: async (input) => {
     try {
       const output = await runMemoryCommand(input);
       return { output };
@@ -160,12 +160,12 @@ This keeps memory operations predictable because the model can only call predefi
 Use this when you want maximum flexibility in reads, writes, and ad-hoc search.
 
 ```ts
-import { tool } from 'ai';
-import { Bash, ReadWriteFs } from 'just-bash';
-import { z } from 'zod';
+import { tool } from "ai";
+import { Bash, ReadWriteFs } from "just-bash";
+import { z } from "zod";
 
 const fs = new ReadWriteFs({ root: process.cwd() });
-const bash = new Bash({ fs, cwd: '/' });
+const bash = new Bash({ fs, cwd: "/" });
 
 const memoryTool = tool({
   description: `Run bash commands only for memory-related tasks.
@@ -196,13 +196,13 @@ Examples:
 - grep -niE "pricing|budget" /.memory/conversations.jsonl
 - tail -n 40 /.memory/conversations.jsonl | jq -c '.role + ": " + .content'`,
   inputSchema: z.object({
-    command: z.string().describe('The bash command to execute.'),
+    command: z.string().describe("The bash command to execute."),
   }),
   execute: async ({ command }) => {
     const unapprovedCommand = findUnapprovedCommand(command);
     if (unapprovedCommand) {
       return {
-        stdout: '',
+        stdout: "",
         stderr: `Blocked unapproved command: ${unapprovedCommand}\n`,
         exitCode: 1,
       };
@@ -229,14 +229,14 @@ The rest of this recipe (agent wiring, `prepareCall`, and run loop) works for ei
 Wire everything together with `ToolLoopAgent`. The `prepareCall` hook reads core memory fresh before every LLM call and injects it into the system prompt:
 
 ```ts
-import { ToolLoopAgent } from 'ai';
+import { ToolLoopAgent } from "ai";
 
 const today = new Date().toISOString().slice(0, 10);
 
 const memoryAgent = new ToolLoopAgent({
-  model: 'anthropic/claude-haiku-4.5',
+  model: "anthropic/claude-haiku-4.5",
   tools: { memory: memoryTool },
-  prepareCall: async settings => {
+  prepareCall: async (settings) => {
     // user-defined function fetches the contents of /.memory/core.md on every turn
     const coreMemory = await readCoreMemory();
     return {
@@ -259,11 +259,11 @@ Because `prepareCall` runs before each generate call in the tool loop, the syste
 Bootstrap the filesystem, record conversations, and run the agent:
 
 ```ts
-const prompt = 'Remember that my favorite editor is Neovim';
+const prompt = "Remember that my favorite editor is Neovim";
 
 // Record the user message
 await appendConversation({
-  role: 'user',
+  role: "user",
   content: prompt,
   timestamp: new Date().toISOString(),
 });
@@ -273,7 +273,7 @@ const result = await memoryAgent.generate({ prompt });
 
 // Record the assistant response
 await appendConversation({
-  role: 'assistant',
+  role: "assistant",
   content: result.text,
   timestamp: new Date().toISOString(),
 });
@@ -297,7 +297,7 @@ A typical interaction looks like this:
 - [just-bash](https://github.com/vercel-labs/just-bash) for the JavaScript-based bash interpreter and AST parser
 - [AI SDK examples](https://github.com/vercel/ai/tree/main/examples) for more agent patterns
 
-***
+---
 
 ## Appendix: Implementation Details
 
@@ -314,14 +314,14 @@ import {
   mkdir,
   readFile,
   writeFile,
-} from 'node:fs/promises';
-import { join, resolve } from 'node:path';
+} from "node:fs/promises";
+import { join, resolve } from "node:path";
 
-const MEMORY_DIR = '.memory';
+const MEMORY_DIR = ".memory";
 const MEMORY_ROOT = resolve(process.cwd(), MEMORY_DIR);
-const CORE_MEMORY_PATH = join(MEMORY_ROOT, 'core.md');
-const NOTES_PATH = join(MEMORY_ROOT, 'notes.md');
-const CONVERSATIONS_PATH = join(MEMORY_ROOT, 'conversations.jsonl');
+const CORE_MEMORY_PATH = join(MEMORY_ROOT, "core.md");
+const NOTES_PATH = join(MEMORY_ROOT, "notes.md");
+const CONVERSATIONS_PATH = join(MEMORY_ROOT, "conversations.jsonl");
 
 const DEFAULT_CORE_MEMORY = `# Core Memory
 - Keep this short.
@@ -336,7 +336,7 @@ async function ensureFile(path: string, content: string): Promise<void> {
   try {
     await access(path);
   } catch {
-    await writeFile(path, content, 'utf8');
+    await writeFile(path, content, "utf8");
   }
 }
 
@@ -344,7 +344,7 @@ async function ensureMemoryFilesystem(): Promise<void> {
   await mkdir(MEMORY_ROOT, { recursive: true });
   await ensureFile(CORE_MEMORY_PATH, DEFAULT_CORE_MEMORY);
   await ensureFile(NOTES_PATH, DEFAULT_NOTES);
-  await ensureFile(CONVERSATIONS_PATH, '');
+  await ensureFile(CONVERSATIONS_PATH, "");
 }
 ```
 
@@ -357,18 +357,18 @@ One helper reads core memory for system prompt injection, the other appends conv
 ```ts
 async function readCoreMemory(): Promise<string> {
   try {
-    return await readFile(CORE_MEMORY_PATH, 'utf8');
+    return await readFile(CORE_MEMORY_PATH, "utf8");
   } catch {
-    return '';
+    return "";
   }
 }
 
 async function appendConversation(entry: {
-  role: 'user' | 'assistant';
+  role: "user" | "assistant";
   content: string;
   timestamp: string;
 }): Promise<void> {
-  await appendFile(CONVERSATIONS_PATH, `${JSON.stringify(entry)}\n`, 'utf8');
+  await appendFile(CONVERSATIONS_PATH, `${JSON.stringify(entry)}\n`, "utf8");
 }
 ```
 
@@ -377,17 +377,17 @@ async function appendConversation(entry: {
 The `runMemoryCommand` function used in Route A maps each action to a filesystem operation. Paths are resolved relative to the memory root, and only known memory files are allowed:
 
 ```ts
-import { readFile, writeFile, appendFile } from 'node:fs/promises';
-import { join, relative } from 'node:path';
+import { readFile, writeFile, appendFile } from "node:fs/promises";
+import { join, relative } from "node:path";
 
-const MEMORY_FILES = ['core.md', 'notes.md', 'conversations.jsonl'];
+const MEMORY_FILES = ["core.md", "notes.md", "conversations.jsonl"];
 
 function resolveMemoryPath(path: string): string {
   const relativePath = path
     .trim()
-    .replace(/^\/?memories\/?/, '')
-    .replace(/^\/?\.memory\/?/, '')
-    .replace(/^\/+/, '');
+    .replace(/^\/?memories\/?/, "")
+    .replace(/^\/?\.memory\/?/, "")
+    .replace(/^\/+/, "");
 
   if (!MEMORY_FILES.includes(relativePath)) {
     throw new Error(`Unsupported memory path: ${path}`);
@@ -397,50 +397,50 @@ function resolveMemoryPath(path: string): string {
 }
 
 async function runMemoryCommand(input: {
-  command: 'view' | 'create' | 'update' | 'search';
+  command: "view" | "create" | "update" | "search";
   path?: string;
   content?: string;
-  mode?: 'append' | 'overwrite';
+  mode?: "append" | "overwrite";
   query?: string;
 }): Promise<string> {
   const { command, path, content, mode, query } = input;
 
   switch (command) {
-    case 'view': {
-      if (!path) throw new Error('path is required for view');
-      return await readFile(resolveMemoryPath(path), 'utf8');
+    case "view": {
+      if (!path) throw new Error("path is required for view");
+      return await readFile(resolveMemoryPath(path), "utf8");
     }
-    case 'create':
-    case 'update': {
-      if (!path) throw new Error('path is required');
-      if (!content) throw new Error('content is required');
+    case "create":
+    case "update": {
+      if (!path) throw new Error("path is required");
+      if (!content) throw new Error("content is required");
       const target = resolveMemoryPath(path);
-      if (mode === 'append') {
-        await appendFile(target, content, 'utf8');
+      if (mode === "append") {
+        await appendFile(target, content, "utf8");
       } else {
-        await writeFile(target, content, 'utf8');
+        await writeFile(target, content, "utf8");
       }
-      return `${command === 'create' ? 'Created' : 'Updated'} ${path}`;
+      return `${command === "create" ? "Created" : "Updated"} ${path}`;
     }
-    case 'search': {
-      if (!query) throw new Error('query is required for search');
+    case "search": {
+      if (!query) throw new Error("query is required for search");
       const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
       const files = path
         ? [resolveMemoryPath(path)]
-        : MEMORY_FILES.map(f => join(MEMORY_ROOT, f));
+        : MEMORY_FILES.map((f) => join(MEMORY_ROOT, f));
       const matches: string[] = [];
 
       for (const filePath of files) {
-        const lines = (await readFile(filePath, 'utf8')).split('\n');
+        const lines = (await readFile(filePath, "utf8")).split("\n");
         for (const [i, line] of lines.entries()) {
           const lower = line.toLowerCase();
-          if (terms.some(t => lower.includes(t))) {
+          if (terms.some((t) => lower.includes(t))) {
             matches.push(`${relative(MEMORY_ROOT, filePath)}:${i + 1}:${line}`);
           }
         }
       }
 
-      return matches.length > 0 ? matches.join('\n') : 'No matches found.';
+      return matches.length > 0 ? matches.join("\n") : "No matches found.";
     }
   }
 }
@@ -456,24 +456,24 @@ import {
   parse,
   type ScriptNode,
   type WordNode,
-} from 'just-bash';
+} from "just-bash";
 
 const approvedCommands = new Set([
-  'cat',
-  'echo',
-  'grep',
-  'jq',
-  'ls',
-  'mkdir',
-  'perl',
-  'sed',
-  'tail',
+  "cat",
+  "echo",
+  "grep",
+  "jq",
+  "ls",
+  "mkdir",
+  "perl",
+  "sed",
+  "tail",
 ]);
 
 function extractLiteralWord(word: WordNode | null): string | null {
   if (!word || word.parts.length !== 1) return null;
   const [part] = word.parts;
-  if (!part || part.type !== 'Literal') return null;
+  if (!part || part.type !== "Literal") return null;
   return part.value;
 }
 
@@ -482,12 +482,12 @@ function collectCommandNames(script: ScriptNode): string[] {
 
   const visitCommand = (command: CommandNode): void => {
     switch (command.type) {
-      case 'SimpleCommand': {
+      case "SimpleCommand": {
         const name = extractLiteralWord(command.name);
         if (name) names.add(name);
         break;
       }
-      case 'If': {
+      case "If": {
         for (const clause of command.clauses) {
           for (const s of clause.condition) visitStatement(s);
           for (const s of clause.body) visitStatement(s);
@@ -497,33 +497,33 @@ function collectCommandNames(script: ScriptNode): string[] {
         }
         break;
       }
-      case 'For':
-      case 'CStyleFor':
-      case 'While':
-      case 'Until':
-      case 'Subshell':
-      case 'Group': {
+      case "For":
+      case "CStyleFor":
+      case "While":
+      case "Until":
+      case "Subshell":
+      case "Group": {
         for (const s of command.body) visitStatement(s);
         break;
       }
-      case 'Case': {
+      case "Case": {
         for (const item of command.items) {
           for (const s of item.body) visitStatement(s);
         }
         break;
       }
-      case 'FunctionDef': {
+      case "FunctionDef": {
         visitCommand(command.body);
         break;
       }
-      case 'ArithmeticCommand':
-      case 'ConditionalCommand':
+      case "ArithmeticCommand":
+      case "ConditionalCommand":
         break;
     }
   };
 
   const visitStatement = (
-    statement: ScriptNode['statements'][number],
+    statement: ScriptNode["statements"][number],
   ): void => {
     for (const pipeline of statement.pipelines) {
       for (const command of pipeline.commands) {
@@ -547,7 +547,7 @@ export function findUnapprovedCommand(commandLine: string): string | null {
     return null;
   }
   const commandNames = collectCommandNames(script);
-  return commandNames.find(name => !approvedCommands.has(name)) ?? null;
+  return commandNames.find((name) => !approvedCommands.has(name)) ?? null;
 }
 ```
 

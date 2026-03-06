@@ -9,16 +9,16 @@ This can be done using [server-side helpers](/docs/client/nextjs/server-side-hel
 ## Fetch data in `getStaticProps`
 
 ```tsx title='pages/posts/[id].tsx'
-import { createServerSideHelpers } from '@trpc/react-query/server';
-import { prisma } from '~/server/context';
-import { appRouter } from '~/server/routers/_app';
-import { trpc } from '~/utils/trpc';
+import { createServerSideHelpers } from "@trpc/react-query/server";
+import { prisma } from "~/server/context";
+import { appRouter } from "~/server/routers/_app";
+import { trpc } from "~/utils/trpc";
 import {
   GetStaticPaths,
   GetStaticPropsContext,
   InferGetStaticPropsType,
-} from 'next';
-import superjson from 'superjson';
+} from "next";
+import superjson from "superjson";
 
 export async function getStaticProps(
   context: GetStaticPropsContext<{ id: string }>,
@@ -56,7 +56,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
       },
     })),
     // https://nextjs.org/docs/pages/api-reference/functions/get-static-paths#fallback-blocking
-    fallback: 'blocking',
+    fallback: "blocking",
   };
 };
 
@@ -66,7 +66,7 @@ export default function PostViewPage(
   const { id } = props;
   const postQuery = trpc.post.byId.useQuery({ id });
 
-  if (postQuery.status !== 'success') {
+  if (postQuery.status !== "success") {
     // won't happen since we're using `fallback: "blocking"`
     return <>Loading...</>;
   }
@@ -74,7 +74,7 @@ export default function PostViewPage(
   return (
     <>
       <h1>{data.title}</h1>
-      <em>Created {data.createdAt.toLocaleDateString('en-us')}</em>
+      <em>Created {data.createdAt.toLocaleDateString("en-us")}</em>
 
       <p>{data.text}</p>
 
@@ -85,7 +85,7 @@ export default function PostViewPage(
 }
 ```
 
-Note that the default behaviour of `react-query` is to refetch the data on the client-side when it mounts, so if you want to *only* fetch the data via `getStaticProps`, you need to set `refetchOnMount` and `refetchOnWindowFocus` to `false` in the query options.
+Note that the default behaviour of `react-query` is to refetch the data on the client-side when it mounts, so if you want to _only_ fetch the data via `getStaticProps`, you need to set `refetchOnMount` and `refetchOnWindowFocus` to `false` in the query options.
 
 This might be preferable if you want to minimize the number of requests to your API, which might be necessary if you're using a third-party rate-limited API for example.
 

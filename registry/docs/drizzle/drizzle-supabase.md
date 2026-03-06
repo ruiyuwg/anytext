@@ -40,7 +40,7 @@ If you decide to use connection pooling via Supabase (described [here](https://s
 import { drizzle } from 'drizzle-orm/postgres-js'
 import postgres from 'postgres'
 
-// Disable prefetch as it is not supported for "Transaction" pool mode 
+// Disable prefetch as it is not supported for "Transaction" pool mode
 const client = postgres(process.env.DATABASE_URL, { prepare: false })
 const db = drizzle({ client });
 
@@ -94,8 +94,8 @@ const response = await db.select().from(...)
 If you need to provide your existing driver:
 
 ```typescript copy"
-import { connect } from '@tidbcloud/serverless';
-import { drizzle } from 'drizzle-orm/tidb-serverless';
+import { connect } from "@tidbcloud/serverless";
+import { drizzle } from "drizzle-orm/tidb-serverless";
 
 const client = connect({ url: process.env.TIDB_URL });
 const db = drizzle({ client });
@@ -132,23 +132,23 @@ drizzle-orm@beta @tursodatabase/database
 #### Step 2 - Initialize the driver and make a query
 
 ```typescript
-import { drizzle } from 'drizzle-orm/tursodatabase/database';
+import { drizzle } from "drizzle-orm/tursodatabase/database";
 
-const db = drizzle('sqlite.db');
+const db = drizzle("sqlite.db");
 
-const result = await db.execute('select 1');
+const result = await db.execute("select 1");
 ```
 
 If you need to provide your existing drivers:
 
 ```typescript
-import { Database } from '@tursodatabase/drivers';
-import { drizzle } from 'drizzle-orm/tursodatabase/database';
+import { Database } from "@tursodatabase/drivers";
+import { drizzle } from "drizzle-orm/tursodatabase/database";
 
-const client = new Database('sqlite.db');
+const client = new Database("sqlite.db");
 const db = drizzle({ client });
 
-const result = await db.execute('select 1');
+const result = await db.execute("select 1");
 ```
 
 #### What's next?

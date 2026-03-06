@@ -34,8 +34,8 @@ Create a set of strongly-typed React hooks from your `AppRouter` type signature 
 // @include: router
 // @filename: utils/trpc.ts
 // ---cut---
-import { createTRPCReact } from '@trpc/react-query';
-import type { AppRouter } from '../server/router';
+import { createTRPCReact } from "@trpc/react-query";
+import type { AppRouter } from "../server/router";
 
 export const trpc = createTRPCReact<AppRouter>();
 ```
@@ -47,10 +47,10 @@ Create a tRPC client, and wrap your application in the tRPC Provider, as below. 
 If you already use React Query in your application, you **should** re-use the `QueryClient` and `QueryClientProvider` you already have.
 
 ```tsx title='App.tsx'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { httpBatchLink } from '@trpc/client';
-import React, { useState } from 'react';
-import { trpc } from './utils/trpc';
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { httpBatchLink } from "@trpc/client";
+import React, { useState } from "react";
+import { trpc } from "./utils/trpc";
 
 export function App() {
   const [queryClient] = useState(() => new QueryClient());
@@ -58,7 +58,7 @@ export function App() {
     trpc.createClient({
       links: [
         httpBatchLink({
-          url: 'http://localhost:3000/trpc',
+          url: "http://localhost:3000/trpc",
 
           // You can pass any HTTP headers you wish here
           async headers() {
@@ -91,24 +91,24 @@ You can now use the tRPC React Query integration to call queries and mutations o
 // @include: router
 // @filename: utils/trpc.ts
 // ---cut---
-import { createTRPCReact } from '@trpc/react-query';
-import type { AppRouter } from '../server/router';
+import { createTRPCReact } from "@trpc/react-query";
+import type { AppRouter } from "../server/router";
 
 export const trpc = createTRPCReact<AppRouter>();
 // @filename: pages/IndexPage.tsx
 import React from "react";
 // ---cut---
-import { trpc } from '../utils/trpc';
+import { trpc } from "../utils/trpc";
 
 export default function IndexPage() {
-  const userQuery = trpc.getUser.useQuery({ id: 'id_bilbo' });
+  const userQuery = trpc.getUser.useQuery({ id: "id_bilbo" });
   const userCreator = trpc.createUser.useMutation();
 
   return (
     <div>
       <p>{userQuery.data?.name}</p>
 
-      <button onClick={() => userCreator.mutate({ name: 'Frodo' })}>
+      <button onClick={() => userCreator.mutate({ name: "Frodo" })}>
         Create Frodo
       </button>
     </div>

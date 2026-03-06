@@ -29,14 +29,14 @@ For example:
 > **Good to know**: In development, `'unsafe-eval'` is required because React uses `eval` to provide enhanced debugging information, such as reconstructing server-side error stacks in the browser. `unsafe-eval` is not required for production. Neither React nor Next.js use `eval` in production by default.
 
 ```ts filename="proxy.ts" switcher
-import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from "next/server";
 
 export function proxy(request: NextRequest) {
-  const nonce = Buffer.from(crypto.randomUUID()).toString('base64')
-  const isDev = process.env.NODE_ENV === 'development'
+  const nonce = Buffer.from(crypto.randomUUID()).toString("base64");
+  const isDev = process.env.NODE_ENV === "development";
   const cspHeader = `
     default-src 'self';
-    script-src 'self' 'nonce-${nonce}' 'strict-dynamic'${isDev ? " 'unsafe-eval'" : ''};
+    script-src 'self' 'nonce-${nonce}' 'strict-dynamic'${isDev ? " 'unsafe-eval'" : ""};
     style-src 'self' 'nonce-${nonce}';
     img-src 'self' blob: data:;
     font-src 'self';
@@ -45,43 +45,43 @@ export function proxy(request: NextRequest) {
     form-action 'self';
     frame-ancestors 'none';
     upgrade-insecure-requests;
-`
+`;
   // Replace newline characters and spaces
   const contentSecurityPolicyHeaderValue = cspHeader
-    .replace(/\s{2,}/g, ' ')
-    .trim()
+    .replace(/\s{2,}/g, " ")
+    .trim();
 
-  const requestHeaders = new Headers(request.headers)
-  requestHeaders.set('x-nonce', nonce)
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set("x-nonce", nonce);
 
   requestHeaders.set(
-    'Content-Security-Policy',
-    contentSecurityPolicyHeaderValue
-  )
+    "Content-Security-Policy",
+    contentSecurityPolicyHeaderValue,
+  );
 
   const response = NextResponse.next({
     request: {
       headers: requestHeaders,
     },
-  })
+  });
   response.headers.set(
-    'Content-Security-Policy',
-    contentSecurityPolicyHeaderValue
-  )
+    "Content-Security-Policy",
+    contentSecurityPolicyHeaderValue,
+  );
 
-  return response
+  return response;
 }
 ```
 
 ```js filename="proxy.js" switcher
-import { NextResponse } from 'next/server'
+import { NextResponse } from "next/server";
 
 export function proxy(request) {
-  const nonce = Buffer.from(crypto.randomUUID()).toString('base64')
-  const isDev = process.env.NODE_ENV === 'development'
+  const nonce = Buffer.from(crypto.randomUUID()).toString("base64");
+  const isDev = process.env.NODE_ENV === "development";
   const cspHeader = `
     default-src 'self';
-    script-src 'self' 'nonce-${nonce}' 'strict-dynamic'${isDev ? " 'unsafe-eval'" : ''};
+    script-src 'self' 'nonce-${nonce}' 'strict-dynamic'${isDev ? " 'unsafe-eval'" : ""};
     style-src 'self' 'nonce-${nonce}';
     img-src 'self' blob: data:;
     font-src 'self';
@@ -90,30 +90,30 @@ export function proxy(request) {
     form-action 'self';
     frame-ancestors 'none';
     upgrade-insecure-requests;
-`
+`;
   // Replace newline characters and spaces
   const contentSecurityPolicyHeaderValue = cspHeader
-    .replace(/\s{2,}/g, ' ')
-    .trim()
+    .replace(/\s{2,}/g, " ")
+    .trim();
 
-  const requestHeaders = new Headers(request.headers)
-  requestHeaders.set('x-nonce', nonce)
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set("x-nonce", nonce);
   requestHeaders.set(
-    'Content-Security-Policy',
-    contentSecurityPolicyHeaderValue
-  )
+    "Content-Security-Policy",
+    contentSecurityPolicyHeaderValue,
+  );
 
   const response = NextResponse.next({
     request: {
       headers: requestHeaders,
     },
-  })
+  });
   response.headers.set(
-    'Content-Security-Policy',
-    contentSecurityPolicyHeaderValue
-  )
+    "Content-Security-Policy",
+    contentSecurityPolicyHeaderValue,
+  );
 
-  return response
+  return response;
 }
 ```
 
@@ -132,14 +132,14 @@ export const config = {
      * - favicon.ico (favicon file)
      */
     {
-      source: '/((?!api|_next/static|_next/image|favicon.ico).*)',
+      source: "/((?!api|_next/static|_next/image|favicon.ico).*)",
       missing: [
-        { type: 'header', key: 'next-router-prefetch' },
-        { type: 'header', key: 'purpose', value: 'prefetch' },
+        { type: "header", key: "next-router-prefetch" },
+        { type: "header", key: "purpose", value: "prefetch" },
       ],
     },
   ],
-}
+};
 ```
 
 ```js filename="proxy.js" switcher
@@ -153,14 +153,14 @@ export const config = {
      * - favicon.ico (favicon file)
      */
     {
-      source: '/((?!api|_next/static|_next/image|favicon.ico).*)',
+      source: "/((?!api|_next/static|_next/image|favicon.ico).*)",
       missing: [
-        { type: 'header', key: 'next-router-prefetch' },
-        { type: 'header', key: 'purpose', value: 'prefetch' },
+        { type: "header", key: "next-router-prefetch" },
+        { type: "header", key: "purpose", value: "prefetch" },
       ],
     },
   ],
-}
+};
 ```
 
 ### How nonces work in Next.js
@@ -184,21 +184,21 @@ Because of this automatic behavior, you don’t need to manually add a nonce to 
 If you're using nonces, you may need to explicitly opt pages into dynamic rendering:
 
 ```tsx filename="app/page.tsx" switcher
-import { connection } from 'next/server'
+import { connection } from "next/server";
 
 export default async function Page() {
   // wait for an incoming request to render this page
-  await connection()
+  await connection();
   // Your page content
 }
 ```
 
 ```jsx filename="app/page.jsx" switcher
-import { connection } from 'next/server'
+import { connection } from "next/server";
 
 export default async function Page() {
   // wait for an incoming request to render this page
-  await connection()
+  await connection();
   // Your page content
 }
 ```
@@ -209,9 +209,9 @@ You can provide the nonce to your page using
 [`getServerSideProps`](/docs/pages/building-your-application/data-fetching/get-server-side-props):
 
 ```tsx filename="pages/index.tsx" switcher
-import Script from 'next/script'
+import Script from "next/script";
 
-import type { GetServerSideProps } from 'next'
+import type { GetServerSideProps } from "next";
 
 export default function Page({ nonce }) {
   return (
@@ -220,17 +220,17 @@ export default function Page({ nonce }) {
       strategy="afterInteractive"
       nonce={nonce}
     />
-  )
+  );
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-  const nonce = req.headers['x-nonce']
-  return { props: { nonce } }
-}
+  const nonce = req.headers["x-nonce"];
+  return { props: { nonce } };
+};
 ```
 
 ```jsx filename="pages/index.jsx" switcher
-import Script from 'next/script'
+import Script from "next/script";
 export default function Page({ nonce }) {
   return (
     <Script
@@ -238,12 +238,12 @@ export default function Page({ nonce }) {
       strategy="afterInteractive"
       nonce={nonce}
     />
-  )
+  );
 }
 
 export async function getServerSideProps({ req }) {
-  const nonce = req.headers['x-nonce']
-  return { props: { nonce } }
+  const nonce = req.headers["x-nonce"];
+  return { props: { nonce } };
 }
 ```
 
@@ -257,27 +257,27 @@ import Document, {
   NextScript,
   DocumentContext,
   DocumentInitialProps,
-} from 'next/document'
+} from "next/document";
 
 interface ExtendedDocumentProps extends DocumentInitialProps {
-  nonce?: string
+  nonce?: string;
 }
 
 class MyDocument extends Document<ExtendedDocumentProps> {
   static async getInitialProps(
-    ctx: DocumentContext
+    ctx: DocumentContext,
   ): Promise<ExtendedDocumentProps> {
-    const initialProps = await Document.getInitialProps(ctx)
-    const nonce = ctx.req?.headers?.['x-nonce'] as string | undefined
+    const initialProps = await Document.getInitialProps(ctx);
+    const nonce = ctx.req?.headers?.["x-nonce"] as string | undefined;
 
     return {
       ...initialProps,
       nonce,
-    }
+    };
   }
 
   render() {
-    const { nonce } = this.props
+    const { nonce } = this.props;
 
     return (
       <Html lang="en">
@@ -287,29 +287,29 @@ class MyDocument extends Document<ExtendedDocumentProps> {
           <NextScript nonce={nonce} />
         </body>
       </Html>
-    )
+    );
   }
 }
 
-export default MyDocument
+export default MyDocument;
 ```
 
 ```jsx filename="pages/_document.jsx" switcher
-import Document, { Html, Head, Main, NextScript } from 'next/document'
+import Document, { Html, Head, Main, NextScript } from "next/document";
 
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
-    const initialProps = await Document.getInitialProps(ctx)
-    const nonce = ctx.req?.headers?.['x-nonce']
+    const initialProps = await Document.getInitialProps(ctx);
+    const nonce = ctx.req?.headers?.["x-nonce"];
 
     return {
       ...initialProps,
       nonce,
-    }
+    };
   }
 
   render() {
-    const { nonce } = this.props
+    const { nonce } = this.props;
 
     return (
       <Html lang="en">
@@ -319,11 +319,11 @@ class MyDocument extends Document {
           <NextScript nonce={nonce} />
         </body>
       </Html>
-    )
+    );
   }
 }
 
-export default MyDocument
+export default MyDocument;
 ```
 
 ## Static vs Dynamic Rendering with CSP
@@ -363,11 +363,11 @@ Consider nonces when:
 For applications that do not require nonces, you can set the CSP header directly in your [`next.config.js`](/docs/app/api-reference/config/next-config-js) file:
 
 ```js filename="next.config.js"
-const isDev = process.env.NODE_ENV === 'development'
+const isDev = process.env.NODE_ENV === "development";
 
 const cspHeader = `
     default-src 'self';
-    script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''};
+    script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""};
     style-src 'self' 'unsafe-inline';
     img-src 'self' blob: data:;
     font-src 'self';
@@ -376,23 +376,23 @@ const cspHeader = `
     form-action 'self';
     frame-ancestors 'none';
     upgrade-insecure-requests;
-`
+`;
 
 module.exports = {
   async headers() {
     return [
       {
-        source: '/(.*)',
+        source: "/(.*)",
         headers: [
           {
-            key: 'Content-Security-Policy',
-            value: cspHeader.replace(/\n/g, ''),
+            key: "Content-Security-Policy",
+            value: cspHeader.replace(/\n/g, ""),
           },
         ],
       },
-    ]
+    ];
   },
-}
+};
 ```
 
 ## Development vs Production Considerations
@@ -405,12 +405,12 @@ In development, you will need to enable `'unsafe-eval'` because React uses `eval
 
 ```ts filename="proxy.ts" switcher
 export function proxy(request: NextRequest) {
-  const nonce = Buffer.from(crypto.randomUUID()).toString('base64')
-  const isDev = process.env.NODE_ENV === 'development'
+  const nonce = Buffer.from(crypto.randomUUID()).toString("base64");
+  const isDev = process.env.NODE_ENV === "development";
 
   const cspHeader = `
     default-src 'self';
-    script-src 'self' 'nonce-${nonce}' 'strict-dynamic' ${isDev ? "'unsafe-eval'" : ''};
+    script-src 'self' 'nonce-${nonce}' 'strict-dynamic' ${isDev ? "'unsafe-eval'" : ""};
     style-src 'self' ${isDev ? "'unsafe-inline'" : `'nonce-${nonce}'`};
     img-src 'self' blob: data:;
     font-src 'self';
@@ -419,7 +419,7 @@ export function proxy(request: NextRequest) {
     form-action 'self';
     frame-ancestors 'none';
     upgrade-insecure-requests;
-`
+`;
 
   // Rest of proxy implementation
 }
@@ -427,12 +427,12 @@ export function proxy(request: NextRequest) {
 
 ```js filename="proxy.js" switcher
 export function proxy(request) {
-  const nonce = Buffer.from(crypto.randomUUID()).toString('base64')
-  const isDev = process.env.NODE_ENV === 'development'
+  const nonce = Buffer.from(crypto.randomUUID()).toString("base64");
+  const isDev = process.env.NODE_ENV === "development";
 
   const cspHeader = `
     default-src 'self';
-    script-src 'self' 'nonce-${nonce}' 'strict-dynamic' ${isDev ? "'unsafe-eval'" : ''};
+    script-src 'self' 'nonce-${nonce}' 'strict-dynamic' ${isDev ? "'unsafe-eval'" : ""};
     style-src 'self' ${isDev ? "'unsafe-inline'" : `'nonce-${nonce}'`};
     img-src 'self' blob: data:;
     font-src 'self';
@@ -441,7 +441,7 @@ export function proxy(request) {
     form-action 'self';
     frame-ancestors 'none';
     upgrade-insecure-requests;
-`
+`;
 
   // Rest of proxy implementation
 }
@@ -462,11 +462,11 @@ Common issues in production:
 When using third-party scripts with CSP, ensure you add the necessary domains and pass the nonce:
 
 ```tsx filename="pages/_app.tsx" switcher
-import type { AppProps } from 'next/app'
-import Script from 'next/script'
+import type { AppProps } from "next/app";
+import Script from "next/script";
 
 export default function App({ Component, pageProps }: AppProps) {
-  const nonce = pageProps.nonce
+  const nonce = pageProps.nonce;
 
   return (
     <>
@@ -477,15 +477,15 @@ export default function App({ Component, pageProps }: AppProps) {
         nonce={nonce}
       />
     </>
-  )
+  );
 }
 ```
 
 ```jsx filename="pages/_app.jsx" switcher
-import Script from 'next/script'
+import Script from "next/script";
 
 export default function App({ Component, pageProps }) {
-  const nonce = pageProps.nonce
+  const nonce = pageProps.nonce;
 
   return (
     <>
@@ -496,7 +496,7 @@ export default function App({ Component, pageProps }) {
         nonce={nonce}
       />
     </>
-  )
+  );
 }
 ```
 
@@ -508,7 +508,7 @@ const cspHeader = `
   script-src 'self' 'nonce-${nonce}' 'strict-dynamic' https://www.googletagmanager.com;
   connect-src 'self' https://www.google-analytics.com;
   img-src 'self' data: https://www.google-analytics.com;
-`
+`;
 ```
 
 ```js filename="proxy.js" switcher
@@ -517,7 +517,7 @@ const cspHeader = `
   script-src 'self' 'nonce-${nonce}' 'strict-dynamic' https://www.googletagmanager.com;
   connect-src 'self' https://www.google-analytics.com;
   img-src 'self' data: https://www.google-analytics.com;
-`
+`;
 ```
 
 ### Common CSP Violations

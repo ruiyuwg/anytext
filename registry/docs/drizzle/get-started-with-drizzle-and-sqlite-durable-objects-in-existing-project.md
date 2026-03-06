@@ -38,7 +38,7 @@ tag = "v1"
 new_sqlite_classes = ["MyDurableObject"]
 
 # We need rules so we can import migrations in the next steps
-[[rules]] 
+[[rules]]
 type = "Text"
 globs = ["**/*.sql"]
 fallthrough = true
@@ -51,14 +51,14 @@ fallthrough = true
 Create a `drizzle.config.ts` file in the root of your project and add the following content:
 
 ```typescript copy filename="drizzle.config.ts"
-import 'dotenv/config';
-import { defineConfig } from 'drizzle-kit';
+import "dotenv/config";
+import { defineConfig } from "drizzle-kit";
 
 export default defineConfig({
-  out: './drizzle',
-  schema: './src/db/schema.ts',
-  dialect: 'sqlite',
-  driver: 'durable-sqlite',
+  out: "./drizzle",
+  schema: "./src/db/schema.ts",
+  dialect: "sqlite",
+  driver: "durable-sqlite",
 });
 ```
 
@@ -77,29 +77,32 @@ You can check [our tutorial](/docs/guides/d1-http-with-drizzle-kit) on how to ge
 #### Step 6 - Connect Drizzle ORM to the database
 
 ```typescript copy
-import { drizzle, type DrizzleSqliteDODatabase } from 'drizzle-orm/durable-sqlite';
-import { DurableObject } from 'cloudflare:workers'
+import {
+  drizzle,
+  type DrizzleSqliteDODatabase,
+} from "drizzle-orm/durable-sqlite";
+import { DurableObject } from "cloudflare:workers";
 
 export class MyDurableObject extends DurableObject {
-	storage: DurableObjectStorage;
-	db: DrizzleSqliteDODatabase;
+  storage: DurableObjectStorage;
+  db: DrizzleSqliteDODatabase;
 
-	constructor(ctx: DurableObjectState, env: Env) {
-		super(ctx, env);
-		this.storage = ctx.storage;
-		this.db = drizzle(this.storage, { logger: false });
-	}
+  constructor(ctx: DurableObjectState, env: Env) {
+    super(ctx, env);
+    this.storage = ctx.storage;
+    this.db = drizzle(this.storage, { logger: false });
+  }
 }
 ```
 
 #### Step 7 - Query the database
 
 ```typescript copy
-import { drizzle, DrizzleSqliteDODatabase } from 'drizzle-orm/durable-sqlite';
-import { DurableObject } from 'cloudflare:workers'
-import { migrate } from 'drizzle-orm/durable-sqlite/migrator';
-import migrations from '../drizzle/migrations';
-import { usersTable } from './db/schema';
+import { drizzle, DrizzleSqliteDODatabase } from "drizzle-orm/durable-sqlite";
+import { DurableObject } from "cloudflare:workers";
+import { migrate } from "drizzle-orm/durable-sqlite/migrator";
+import migrations from "../drizzle/migrations";
+import { usersTable } from "./db/schema";
 
 export class MyDurableObject extends DurableObject {
   storage: DurableObjectStorage;
@@ -146,18 +149,22 @@ export default {
    * @returns The response to be sent back to the client
    */
   async fetch(request: Request, env: Env): Promise {
-    const id: DurableObjectId = env.MY_DURABLE_OBJECT.idFromName('durable-object');
+    const id: DurableObjectId =
+      env.MY_DURABLE_OBJECT.idFromName("durable-object");
     const stub = env.MY_DURABLE_OBJECT.get(id);
 
     // Option A - Maximum performance.
     // Prefer to bundle all the database interaction within a single Durable Object call
     // for maximum performance, since database access is fast within a DO.
     const usersAll = await stub.insertAndList({
-      name: 'John',
+      name: "John",
       age: 30,
-      email: 'john@example.com',
+      email: "john@example.com",
     });
-    console.log('New user created. Getting all users from the database: ', users);
+    console.log(
+      "New user created. Getting all users from the database: ",
+      users,
+    );
     /*
     const users: {
       id: number;
@@ -172,14 +179,14 @@ export default {
     // You can also directly call individual Drizzle queries if they are exposed
     // but keep in mind every query is a round-trip to the Durable Object instance.
     await stub.insert({
-      name: 'John',
+      name: "John",
       age: 30,
-      email: 'john@example.com',
+      email: "john@example.com",
     });
-    console.log('New user created!');
+    console.log("New user created!");
 
     const users = await stub.select();
-    console.log('Getting all users from the database: ', users);
+    console.log("Getting all users from the database: ", users);
     /*
     const users: {
       id: number;
@@ -191,8 +198,8 @@ export default {
     */
 
     return Response.json(users);
-  }
-}
+  },
+};
 ```
 
 #### Step 8 - Run index.ts file
@@ -210,11 +217,11 @@ export default {
 #### Step 11 - Query the database with a new field (optional)
 
 ```typescript copy filename="src/index.ts"
-import { drizzle, DrizzleSqliteDODatabase } from 'drizzle-orm/durable-sqlite';
-import { DurableObject } from 'cloudflare:workers'
-import { migrate } from 'drizzle-orm/durable-sqlite/migrator';
-import migrations from '../drizzle/migrations';
-import { usersTable } from './db/schema';
+import { drizzle, DrizzleSqliteDODatabase } from "drizzle-orm/durable-sqlite";
+import { DurableObject } from "cloudflare:workers";
+import { migrate } from "drizzle-orm/durable-sqlite/migrator";
+import migrations from "../drizzle/migrations";
+import { usersTable } from "./db/schema";
 
 export class MyDurableObject extends DurableObject {
   storage: DurableObjectStorage;
@@ -261,19 +268,23 @@ export default {
    * @returns The response to be sent back to the client
    */
   async fetch(request: Request, env: Env): Promise {
-    const id: DurableObjectId = env.MY_DURABLE_OBJECT.idFromName('durable-object');
+    const id: DurableObjectId =
+      env.MY_DURABLE_OBJECT.idFromName("durable-object");
     const stub = env.MY_DURABLE_OBJECT.get(id);
 
     // Option A - Maximum performance.
     // Prefer to bundle all the database interaction within a single Durable Object call
     // for maximum performance, since database access is fast within a DO.
     const usersAll = await stub.insertAndList({
-      name: 'John',
+      name: "John",
       age: 30,
-      email: 'john@example.com',
-      phone: '123-456-7890',
+      email: "john@example.com",
+      phone: "123-456-7890",
     });
-    console.log('New user created. Getting all users from the database: ', users);
+    console.log(
+      "New user created. Getting all users from the database: ",
+      users,
+    );
     /*
     const users: {
       id: number;
@@ -288,15 +299,15 @@ export default {
     // You can also directly call individual Drizzle queries if they are exposed
     // but keep in mind every query is a round-trip to the Durable Object instance.
     await stub.insert({
-      name: 'John',
+      name: "John",
       age: 30,
-      email: 'john@example.com',
-      phone: '123-456-7890',
+      email: "john@example.com",
+      phone: "123-456-7890",
     });
-    console.log('New user created!');
+    console.log("New user created!");
 
     const users = await stub.select();
-    console.log('Getting all users from the database: ', users);
+    console.log("Getting all users from the database: ", users);
     /*
     const users: {
       id: number;
@@ -308,8 +319,8 @@ export default {
     */
 
     return Response.json(users);
-  }
-}
+  },
+};
 ```
 
 Source: https://orm.drizzle.team/docs/get-started/do-new

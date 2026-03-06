@@ -87,7 +87,7 @@ Piping some schema into a transform is a common pattern, so Zod provides a conve
 
 ````
 ```ts
-const stringToLength = z.string().transform(val => val.length); 
+const stringToLength = z.string().transform(val => val.length);
 ```
 
 
@@ -105,7 +105,7 @@ const idToUser = z
   .string()
   .transform(async (id) => {
     // fetch user from database
-    return db.getUserById(id); 
+    return db.getUserById(id);
   });
 
 const user = await idToUser.parseAsync("abc123");
@@ -118,7 +118,7 @@ const idToUser = z.pipe(
   z.string(),
   z.transform(async (id) => {
     // fetch user from database
-    return db.getUserById(id); 
+    return db.getUserById(id);
   }));
 
 const user = await idToUser.parse("abc123");
@@ -184,17 +184,22 @@ z.parse(randomDefault, undefined); // => 0.7223408162401552
 
 ## Prefaults
 
-In Zod, setting a *default* value will short-circuit the parsing process. If the input is `undefined`, the default value is eagerly returned. As such, the default value must be assignable to the *output type* of the schema.
+In Zod, setting a _default_ value will short-circuit the parsing process. If the input is `undefined`, the default value is eagerly returned. As such, the default value must be assignable to the _output type_ of the schema.
 
 ```ts
-const schema = z.string().transform(val => val.length).default(0);
+const schema = z
+  .string()
+  .transform((val) => val.length)
+  .default(0);
 schema.parse(undefined); // => 0
 ```
 
-Sometimes, it's useful to define a *prefault* ("pre-parse default") value. If the input is `undefined`, the prefault value will be parsed instead. The parsing process is *not* short circuited. As such, the prefault value must be assignable to the *input type* of the schema.
+Sometimes, it's useful to define a _prefault_ ("pre-parse default") value. If the input is `undefined`, the prefault value will be parsed instead. The parsing process is _not_ short circuited. As such, the prefault value must be assignable to the _input type_ of the schema.
 
 ```ts
-z.string().transform(val => val.length).prefault("tuna");
+z.string()
+  .transform((val) => val.length)
+  .prefault("tuna");
 schema.parse(undefined); // => 4
 ```
 
@@ -271,7 +276,7 @@ const pluto: Dog = { name: "pluto" };
 const simba: Cat = pluto; // works fine
 ```
 
-In some cases, it can be desirable to simulate [nominal typing](https://en.wikipedia.org/wiki/Nominal_type_system) inside TypeScript. This can be achieved with *branded types* (also known as "opaque types").
+In some cases, it can be desirable to simulate [nominal typing](https://en.wikipedia.org/wiki/Nominal_type_system) inside TypeScript. This can be achieved with _branded types_ (also known as "opaque types").
 
 ```ts
 const Cat = z.object({ name: z.string() }).brand<"Cat">();
@@ -295,7 +300,7 @@ With this brand, any plain (unbranded) data structures are no longer assignable 
 
 > Note that branded types do not affect the runtime result of `.parse`. It is a static-only construct.
 
-By default, only the *output type* is branded.
+By default, only the _output type_ is branded.
 
 ```ts
 const USD = z.string().brand<"USD">();
@@ -384,12 +389,12 @@ This is a convenience API that returns the following union schema:
 ```ts
 const jsonSchema = z.lazy(() => {
   return z.union([
-    z.string(params), 
-    z.number(), 
-    z.boolean(), 
-    z.null(), 
-    z.array(jsonSchema), 
-    z.record(z.string(), jsonSchema)
+    z.string(params),
+    z.number(),
+    z.boolean(),
+    z.null(),
+    z.array(jsonSchema),
+    z.record(z.string(), jsonSchema),
   ]);
 });
 ```
@@ -401,7 +406,7 @@ Zod provides a `z.function()` utility for defining Zod-validated functions. This
 ```ts
 const MyFunction = z.function({
   input: [z.string()], // parameters (must be an array or a ZodTuple)
-  output: z.number()  // return type
+  output: z.number(), // return type
 });
 
 type MyFunction = z.infer<typeof MyFunction>;
@@ -440,7 +445,7 @@ Use the `.implementAsync()` method to create an async function.
 
 ```ts
 const computeTrimmedLengthAsync = MyFunction.implementAsync(
-  async (input) => input.trim().length
+  async (input) => input.trim().length,
 );
 
 computeTrimmedLengthAsync("sandwich"); // => Promise<8>

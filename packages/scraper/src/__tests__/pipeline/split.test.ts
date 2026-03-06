@@ -3,7 +3,8 @@ import { splitIntoTopics } from "../../pipeline/split.js";
 
 describe("splitIntoTopics", () => {
   it("uses H2 as primary when <= 1 H1", () => {
-    const md = "# Title\n\n## Section A\n\nContent A\n\n## Section B\n\nContent B";
+    const md =
+      "# Title\n\n## Section A\n\nContent A\n\n## Section B\n\nContent B";
     const topics = splitIntoTopics(md, { minTokens: 0, maxTokens: 100000 });
     expect(topics.some((t) => t.title === "Section A")).toBe(true);
     expect(topics.some((t) => t.title === "Section B")).toBe(true);
@@ -45,7 +46,8 @@ describe("splitIntoTopics", () => {
   });
 
   it("merges undersized adjacent sections", () => {
-    const md = "## A\n\nTiny\n\n## B\n\nAlso tiny\n\n## C\n\n" + "x ".repeat(2500);
+    const md =
+      "## A\n\nTiny\n\n## B\n\nAlso tiny\n\n## C\n\n" + "x ".repeat(2500);
     const topics = splitIntoTopics(md, { minTokens: 500, maxTokens: 100000 });
     // A and B should be merged due to being undersized
     expect(topics.length).toBeLessThan(3);
@@ -58,7 +60,8 @@ describe("splitIntoTopics", () => {
   });
 
   it("deduplicates IDs with -2, -3 suffixes", () => {
-    const md = "## Setup\n\nContent A\n\n## Setup\n\nContent B\n\n## Setup\n\nContent C";
+    const md =
+      "## Setup\n\nContent A\n\n## Setup\n\nContent B\n\n## Setup\n\nContent C";
     const topics = splitIntoTopics(md, { minTokens: 0, maxTokens: 100000 });
     const ids = topics.map((t) => t.id);
     expect(ids).toContain("setup");
@@ -74,13 +77,15 @@ describe("splitIntoTopics", () => {
   });
 
   it("extracts first paragraph as description", () => {
-    const md = "## Section\n\nThis is a longer description paragraph.\n\nMore content.";
+    const md =
+      "## Section\n\nThis is a longer description paragraph.\n\nMore content.";
     const topics = splitIntoTopics(md, { minTokens: 0, maxTokens: 100000 });
     expect(topics[0]!.description).toContain("This is a longer description");
   });
 
   it("skips short paragraphs for description", () => {
-    const md = "## Section\n\nShort\n\nThis is a much longer paragraph for description.";
+    const md =
+      "## Section\n\nShort\n\nThis is a much longer paragraph for description.";
     const topics = splitIntoTopics(md, { minTokens: 0, maxTokens: 100000 });
     expect(topics[0]!.description).toContain("longer paragraph");
   });
@@ -139,7 +144,8 @@ describe("splitIntoTopics", () => {
 
   it("handles higher-level heading breaking into new section", () => {
     // H1 appearing mid-stream when primary depth is H2
-    const md = "## Section A\n\nContent A\n\n# New Top\n\n## Section B\n\nContent B";
+    const md =
+      "## Section A\n\nContent A\n\n# New Top\n\n## Section B\n\nContent B";
     const topics = splitIntoTopics(md, { minTokens: 0, maxTokens: 100000 });
     expect(topics.some((t) => t.title === "New Top")).toBe(true);
   });
@@ -206,9 +212,12 @@ describe("splitIntoTopics", () => {
   });
 
   it("drops preamble section starting with 'Start of'", () => {
-    const md = "# Start of Hono documentation\n\nPreamble text\n\n# Routing\n\nRouting content\n\n# Middleware\n\nMiddleware content";
+    const md =
+      "# Start of Hono documentation\n\nPreamble text\n\n# Routing\n\nRouting content\n\n# Middleware\n\nMiddleware content";
     const topics = splitIntoTopics(md, { minTokens: 0, maxTokens: 100000 });
-    expect(topics.every((t) => !t.title.toLowerCase().startsWith("start of"))).toBe(true);
+    expect(
+      topics.every((t) => !t.title.toLowerCase().startsWith("start of")),
+    ).toBe(true);
     expect(topics.some((t) => t.title === "Routing")).toBe(true);
   });
 

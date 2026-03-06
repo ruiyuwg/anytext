@@ -65,29 +65,29 @@ You can choose to configure **E2E Testing** and/or **Component Testing**. Select
 Ensure your `cypress.config` file has the following configuration:
 
 ```ts filename="cypress.config.ts" switcher
-import { defineConfig } from 'cypress'
+import { defineConfig } from "cypress";
 
 export default defineConfig({
   e2e: {
     setupNodeEvents(on, config) {},
   },
-})
+});
 ```
 
 ```js filename="cypress.config.js" switcher
-const { defineConfig } = require('cypress')
+const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
   e2e: {
     setupNodeEvents(on, config) {},
   },
-})
+});
 ```
 
 Then, create two new Next.js files:
 
 ```jsx filename="pages/index.js"
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -95,12 +95,12 @@ export default function Home() {
       <h1>Home</h1>
       <Link href="/about">About</Link>
     </div>
-  )
+  );
 }
 ```
 
 ```jsx filename="pages/about.js"
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function About() {
   return (
@@ -108,28 +108,28 @@ export default function About() {
       <h1>About</h1>
       <Link href="/">Home</Link>
     </div>
-  )
+  );
 }
 ```
 
 Add a test to check your navigation is working correctly:
 
 ```js filename="cypress/e2e/app.cy.js"
-describe('Navigation', () => {
-  it('should navigate to the about page', () => {
+describe("Navigation", () => {
+  it("should navigate to the about page", () => {
     // Start from the index page
-    cy.visit('http://localhost:3000/')
+    cy.visit("http://localhost:3000/");
 
     // Find a link with an href attribute containing "about" and click it
-    cy.get('a[href*="about"]').click()
+    cy.get('a[href*="about"]').click();
 
     // The new url should include "/about"
-    cy.url().should('include', '/about')
+    cy.url().should("include", "/about");
 
     // The new page should contain an h1 with "About"
-    cy.get('h1').contains('About')
-  })
-})
+    cy.get("h1").contains("About");
+  });
+});
 ```
 
 ### Running E2E Tests
@@ -152,49 +152,49 @@ Select **Component Testing** in the Cypress app, then select **Next.js** as your
 Ensure your `cypress.config` file has the following configuration:
 
 ```ts filename="cypress.config.ts" switcher
-import { defineConfig } from 'cypress'
+import { defineConfig } from "cypress";
 
 export default defineConfig({
   component: {
     devServer: {
-      framework: 'next',
-      bundler: 'webpack',
+      framework: "next",
+      bundler: "webpack",
     },
   },
-})
+});
 ```
 
 ```js filename="cypress.config.js" switcher
-const { defineConfig } = require('cypress')
+const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
   component: {
     devServer: {
-      framework: 'next',
-      bundler: 'webpack',
+      framework: "next",
+      bundler: "webpack",
     },
   },
-})
+});
 ```
 
 Assuming the same components from the previous section, add a test to validate a component is rendering the expected output:
 
 ```jsx filename="cypress/component/about.cy.js"
-import AboutPage from '../../pages/about'
+import AboutPage from "../../pages/about";
 
-describe('<AboutPage />', () => {
-  it('should render and display expected content', () => {
+describe("<AboutPage />", () => {
+  it("should render and display expected content", () => {
     // Mount the React component for the About page
-    cy.mount(<AboutPage />)
+    cy.mount(<AboutPage />);
 
     // The new page should contain an h1 with "About page"
-    cy.get('h1').contains('About')
+    cy.get("h1").contains("About");
 
     // Validate that a link with the expected URL is present
     // *Following* the link is better suited to an E2E test
-    cy.get('a[href="/"]').should('be.visible')
-  })
-})
+    cy.get('a[href="/"]').should("be.visible");
+  });
+});
 ```
 
 > **Good to know**:

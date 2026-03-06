@@ -10,9 +10,8 @@ In the below example, `nested1` and `nested2` are equal:
 
 ```ts twoslash title="server/_app.ts"
 // @filename: trpc.ts
-import { initTRPC } from '@trpc/server';
+import { initTRPC } from "@trpc/server";
 const t = initTRPC.create();
-
 
 export const middleware = t.middleware;
 export const publicProcedure = t.procedure;
@@ -20,17 +19,17 @@ export const router = t.router;
 
 // @filename: _app.ts
 // ---cut---
-import * as trpc from '@trpc/server';
-import { publicProcedure, router } from './trpc';
+import * as trpc from "@trpc/server";
+import { publicProcedure, router } from "./trpc";
 
 const appRouter = router({
   // Shorthand plain object for creating a sub-router
   nested1: {
-    proc: publicProcedure.query(() => '...'),
+    proc: publicProcedure.query(() => "..."),
   },
   // Equivalent of:
   nested2: router({
-    proc : publicProcedure.query(() => '...'),
+    proc: publicProcedure.query(() => "..."),
   }),
 });
 ```
@@ -39,20 +38,18 @@ const appRouter = router({
 
 ```ts twoslash title='server.ts'
 // @filename: trpc.ts
-import { initTRPC } from '@trpc/server';
+import { initTRPC } from "@trpc/server";
 const t = initTRPC.create();
-
-
 
 export const router = t.router;
 export const publicProcedure = t.procedure;
 
 // @filename: routers/_app.ts
-import { router } from '../trpc';
-import { z } from 'zod';
+import { router } from "../trpc";
+import { z } from "zod";
 
-import { userRouter } from './user';
-import { postRouter } from './post';
+import { userRouter } from "./user";
+import { postRouter } from "./post";
 
 const appRouter = router({
   user: userRouter, // put procedures under "user" namespace
@@ -64,10 +61,9 @@ const appRouter = router({
 
 export type AppRouter = typeof appRouter;
 
-
 // @filename: routers/post.ts
-import { router, publicProcedure } from '../trpc';
-import { z } from 'zod';
+import { router, publicProcedure } from "../trpc";
+import { z } from "zod";
 export const postRouter = router({
   create: publicProcedure
     .input(
@@ -87,15 +83,14 @@ export const postRouter = router({
 });
 
 // @filename: routers/user.ts
-import { router, publicProcedure } from '../trpc';
-import { z } from 'zod';
+import { router, publicProcedure } from "../trpc";
+import { z } from "zod";
 export const userRouter = router({
   list: publicProcedure.query(() => {
     // [..]
     return [];
   }),
 });
-
 ```
 
 ## Merging with `t.mergeRouters`
@@ -104,28 +99,27 @@ If you prefer having all procedures flat in one single namespace, you can instea
 
 ```ts twoslash title='server.ts'
 // @filename: trpc.ts
-import { initTRPC } from '@trpc/server';
+import { initTRPC } from "@trpc/server";
 const t = initTRPC.create();
-
 
 export const router = t.router;
 export const publicProcedure = t.procedure;
 export const mergeRouters = t.mergeRouters;
 
 // @filename: routers/_app.ts
-import { router, publicProcedure, mergeRouters } from '../trpc';
-import { z } from 'zod';
+import { router, publicProcedure, mergeRouters } from "../trpc";
+import { z } from "zod";
 
-import { userRouter } from './user';
-import { postRouter } from './post';
+import { userRouter } from "./user";
+import { postRouter } from "./post";
 
-const appRouter = mergeRouters(userRouter, postRouter)
+const appRouter = mergeRouters(userRouter, postRouter);
 
 export type AppRouter = typeof appRouter;
 
 // @filename: routers/post.ts
-import { router, publicProcedure } from '../trpc';
-import { z } from 'zod';
+import { router, publicProcedure } from "../trpc";
+import { z } from "zod";
 export const postRouter = router({
   postCreate: publicProcedure
     .input(
@@ -144,17 +138,15 @@ export const postRouter = router({
   }),
 });
 
-
 // @filename: routers/user.ts
-import { router, publicProcedure } from '../trpc';
-import { z } from 'zod';
+import { router, publicProcedure } from "../trpc";
+import { z } from "zod";
 export const userRouter = router({
   userList: publicProcedure.query(() => {
     // [..]
     return [];
   }),
 });
-
 ```
 
 ## Dynamically load routers
@@ -168,7 +160,7 @@ There's no difference in how you use the router after it's been lazy loaded vs. 
 ```ts twoslash
 // @target: esnext
 // @filename: trpc.ts
-import { initTRPC } from '@trpc/server';
+import { initTRPC } from "@trpc/server";
 const t = initTRPC.create();
 
 export const router = t.router;
@@ -176,29 +168,29 @@ export const publicProcedure = t.procedure;
 
 // ---cut---
 // @filename: routers/_app.ts
-import { lazy } from '@trpc/server';
-import { router } from '../trpc';
+import { lazy } from "@trpc/server";
+import { router } from "../trpc";
 
 export const appRouter = router({
   // Option 1: Short-hand lazy load the greeting router if you have exactly 1 export and it is the router
-  greeting: lazy(() => import('./greeting.js')),
+  greeting: lazy(() => import("./greeting.js")),
   // Option 2: Alternative way to lazy load if you have more than 1 export
-  user: lazy(() => import('./user.js').then((m) => m.userRouter)),
+  user: lazy(() => import("./user.js").then((m) => m.userRouter)),
 });
 export type AppRouter = typeof appRouter;
 
 // ----------------------------------------------------
 // @filename: routers/greeting.ts
-import { router, publicProcedure } from '../trpc';
+import { router, publicProcedure } from "../trpc";
 export const greetingRouter = router({
-  hello: publicProcedure.query(() => 'world'),
+  hello: publicProcedure.query(() => "world"),
 });
 
 // ----------------------------------------------------
 // @filename: routers/user.ts
-import { router, publicProcedure } from '../trpc';
+import { router, publicProcedure } from "../trpc";
 
 export const userRouter = router({
-  list: publicProcedure.query(() => ['John', 'Jane', 'Jim']),
+  list: publicProcedure.query(() => ["John", "Jane", "Jim"]),
 });
 ```

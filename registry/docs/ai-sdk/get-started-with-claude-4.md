@@ -27,12 +27,12 @@ The AI SDK abstracts away the differences between model providers, eliminates bo
 At the center of the AI SDK is [AI SDK Core](/docs/ai-sdk-core/overview), which provides a unified API to call any LLM. The code snippet below is all you need to call Claude 4 Sonnet with the AI SDK:
 
 ```ts
-import { anthropic } from '@ai-sdk/anthropic';
-import { generateText } from 'ai';
+import { anthropic } from "@ai-sdk/anthropic";
+import { generateText } from "ai";
 
 const { text, reasoningText, reasoning } = await generateText({
-  model: anthropic('claude-sonnet-4-20250514'),
-  prompt: 'How will quantum computing impact cryptography by 2050?',
+  model: anthropic("claude-sonnet-4-20250514"),
+  prompt: "How will quantum computing impact cryptography by 2050?",
 });
 console.log(text);
 ```
@@ -42,19 +42,19 @@ console.log(text);
 Claude 4 enhances the extended thinking capabilities first introduced in Claude 3.7 Sonnet—the ability to solve complex problems with careful, step-by-step reasoning. Additionally, both Opus 4 and Sonnet 4 can now use tools during extended thinking, allowing Claude to alternate between reasoning and tool use to improve responses. You can enable extended thinking using the `thinking` provider option and specifying a thinking budget in tokens. For interleaved thinking (where Claude can think in between tool calls) you'll need to enable a beta feature using the `anthropic-beta` header:
 
 ```ts
-import { anthropic, AnthropicLanguageModelOptions } from '@ai-sdk/anthropic';
-import { generateText } from 'ai';
+import { anthropic, AnthropicLanguageModelOptions } from "@ai-sdk/anthropic";
+import { generateText } from "ai";
 
 const { text, reasoningText, reasoning } = await generateText({
-  model: anthropic('claude-sonnet-4-20250514'),
-  prompt: 'How will quantum computing impact cryptography by 2050?',
+  model: anthropic("claude-sonnet-4-20250514"),
+  prompt: "How will quantum computing impact cryptography by 2050?",
   providerOptions: {
     anthropic: {
-      thinking: { type: 'enabled', budgetTokens: 15000 },
+      thinking: { type: "enabled", budgetTokens: 15000 },
     } satisfies AnthropicLanguageModelOptions,
   },
   headers: {
-    'anthropic-beta': 'interleaved-thinking-2025-05-14',
+    "anthropic-beta": "interleaved-thinking-2025-05-14",
   },
 });
 
@@ -78,21 +78,21 @@ In a new Next.js application, first install the AI SDK and the Anthropic provide
 Then, create a route handler for the chat endpoint:
 
 ```tsx filename="app/api/chat/route.ts"
-import { anthropic, AnthropicLanguageModelOptions } from '@ai-sdk/anthropic';
-import { streamText, convertToModelMessages, type UIMessage } from 'ai';
+import { anthropic, AnthropicLanguageModelOptions } from "@ai-sdk/anthropic";
+import { streamText, convertToModelMessages, type UIMessage } from "ai";
 
 export async function POST(req: Request) {
   const { messages }: { messages: UIMessage[] } = await req.json();
 
   const result = streamText({
-    model: anthropic('claude-sonnet-4-20250514'),
+    model: anthropic("claude-sonnet-4-20250514"),
     messages: await convertToModelMessages(messages),
     headers: {
-      'anthropic-beta': 'interleaved-thinking-2025-05-14',
+      "anthropic-beta": "interleaved-thinking-2025-05-14",
     },
     providerOptions: {
       anthropic: {
-        thinking: { type: 'enabled', budgetTokens: 15000 },
+        thinking: { type: "enabled", budgetTokens: 15000 },
       } satisfies AnthropicLanguageModelOptions,
     },
   });
@@ -109,48 +109,48 @@ You can forward the model's reasoning tokens to the client with
 Finally, update the root page (`app/page.tsx`) to use the `useChat` hook:
 
 ```tsx filename="app/page.tsx"
-'use client';
+"use client";
 
-import { useChat } from '@ai-sdk/react';
-import { DefaultChatTransport } from 'ai';
-import { useState } from 'react';
+import { useChat } from "@ai-sdk/react";
+import { DefaultChatTransport } from "ai";
+import { useState } from "react";
 
 export default function Page() {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
   const { messages, sendMessage } = useChat({
-    transport: new DefaultChatTransport({ api: '/api/chat' }),
+    transport: new DefaultChatTransport({ api: "/api/chat" }),
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (input.trim()) {
       sendMessage({ text: input });
-      setInput('');
+      setInput("");
     }
   };
 
   return (
     <div className="flex flex-col h-screen max-w-2xl mx-auto p-4">
       <div className="flex-1 overflow-y-auto space-y-4 mb-4">
-        {messages.map(message => (
+        {messages.map((message) => (
           <div
             key={message.id}
             className={`p-3 rounded-lg ${
-              message.role === 'user' ? 'bg-blue-50 ml-auto' : 'bg-gray-50'
+              message.role === "user" ? "bg-blue-50 ml-auto" : "bg-gray-50"
             }`}
           >
             <p className="font-semibold">
-              {message.role === 'user' ? 'You' : 'Claude 4'}
+              {message.role === "user" ? "You" : "Claude 4"}
             </p>
             {message.parts.map((part, index) => {
-              if (part.type === 'text') {
+              if (part.type === "text") {
                 return (
                   <div key={index} className="mt-1">
                     {part.text}
                   </div>
                 );
               }
-              if (part.type === 'reasoning') {
+              if (part.type === "reasoning") {
                 return (
                   <pre
                     key={index}
@@ -173,7 +173,7 @@ export default function Page() {
         <input
           name="prompt"
           value={input}
-          onChange={e => setInput(e.target.value)}
+          onChange={(e) => setInput(e.target.value)}
           className="flex-1 p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
           placeholder="Ask Claude 4 something..."
         />

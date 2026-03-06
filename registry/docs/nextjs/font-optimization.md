@@ -7,34 +7,34 @@ It includes **built-in self-hosting** for any font file. This means you can opti
 To start using `next/font`, import it from [`next/font/local`](#local-fonts) or [`next/font/google`](#google-fonts), call it as a function with the appropriate options, and set the `className` of the element you want to apply the font to. For example:
 
 ```tsx filename="app/layout.tsx" highlight={1,3-5,9} switcher
-import { Geist } from 'next/font/google'
+import { Geist } from "next/font/google";
 
 const geist = Geist({
-  subsets: ['latin'],
-})
+  subsets: ["latin"],
+});
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={geist.className}>
       <body>{children}</body>
     </html>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/layout.js" highlight={1,3-5,9} switcher
-import { Geist } from 'next/font/google'
+import { Geist } from "next/font/google";
 
 const geist = Geist({
-  subsets: ['latin'],
-})
+  subsets: ["latin"],
+});
 
 export default function Layout({ children }) {
   return (
     <html className={geist.className}>
       <body>{children}</body>
     </html>
-  )
+  );
 }
 ```
 
@@ -47,78 +47,78 @@ You can automatically self-host any Google Font. Fonts are included stored as st
 To start using a Google Font, import your chosen font from `next/font/google`:
 
 ```tsx filename="app/layout.tsx" switcher
-import { Geist } from 'next/font/google'
+import { Geist } from "next/font/google";
 
 const geist = Geist({
-  subsets: ['latin'],
-})
+  subsets: ["latin"],
+});
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en" className={geist.className}>
       <body>{children}</body>
     </html>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/layout.js" switcher
-import { Geist } from 'next/font/google'
+import { Geist } from "next/font/google";
 
 const geist = Geist({
-  subsets: ['latin'],
-})
+  subsets: ["latin"],
+});
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={geist.className}>
       <body>{children}</body>
     </html>
-  )
+  );
 }
 ```
 
 We recommend using [variable fonts](https://fonts.google.com/variablefonts) for the best performance and flexibility. But if you can't use a variable font, you will need to specify a weight:
 
 ```tsx filename="app/layout.tsx" highlight={4} switcher
-import { Roboto } from 'next/font/google'
+import { Roboto } from "next/font/google";
 
 const roboto = Roboto({
-  weight: '400',
-  subsets: ['latin'],
-})
+  weight: "400",
+  subsets: ["latin"],
+});
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en" className={roboto.className}>
       <body>{children}</body>
     </html>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/layout.js"  highlight={4} switcher
-import { Roboto } from 'next/font/google'
+import { Roboto } from "next/font/google";
 
 const roboto = Roboto({
-  weight: '400',
-  subsets: ['latin'],
-})
+  weight: "400",
+  subsets: ["latin"],
+});
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={roboto.className}>
       <body>{children}</body>
     </html>
-  )
+  );
 }
 ```
 
@@ -127,38 +127,38 @@ export default function RootLayout({ children }) {
 To use a local font, import your font from `next/font/local` and specify the [`src`](/docs/app/api-reference/components/font#src) of your local font file. Fonts can be stored in the [`public`](/docs/app/api-reference/file-conventions/public-folder) folder or co-located inside the `app` folder. For example:
 
 ```tsx filename="app/layout.tsx" switcher
-import localFont from 'next/font/local'
+import localFont from "next/font/local";
 
 const myFont = localFont({
-  src: './my-font.woff2',
-})
+  src: "./my-font.woff2",
+});
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en" className={myFont.className}>
       <body>{children}</body>
     </html>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/layout.js" switcher
-import localFont from 'next/font/local'
+import localFont from "next/font/local";
 
 const myFont = localFont({
-  src: './my-font.woff2',
-})
+  src: "./my-font.woff2",
+});
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={myFont.className}>
       <body>{children}</body>
     </html>
-  )
+  );
 }
 ```
 
@@ -168,27 +168,27 @@ If you want to use multiple files for a single font family, `src` can be an arra
 const roboto = localFont({
   src: [
     {
-      path: './Roboto-Regular.woff2',
-      weight: '400',
-      style: 'normal',
+      path: "./Roboto-Regular.woff2",
+      weight: "400",
+      style: "normal",
     },
     {
-      path: './Roboto-Italic.woff2',
-      weight: '400',
-      style: 'italic',
+      path: "./Roboto-Italic.woff2",
+      weight: "400",
+      style: "italic",
     },
     {
-      path: './Roboto-Bold.woff2',
-      weight: '700',
-      style: 'normal',
+      path: "./Roboto-Bold.woff2",
+      weight: "700",
+      style: "normal",
     },
     {
-      path: './Roboto-BoldItalic.woff2',
-      weight: '700',
-      style: 'italic',
+      path: "./Roboto-BoldItalic.woff2",
+      weight: "700",
+      style: "italic",
     },
   ],
-})
+});
 ```
 
 ## API Reference

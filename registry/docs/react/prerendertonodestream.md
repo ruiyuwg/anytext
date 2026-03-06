@@ -8,24 +8,24 @@ const {prelude, postponed} = await prerenderToNodeStream(reactNode, options?)
 
 This API is specific to Node.js. Environments with [Web Streams,](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API) like Deno and modern edge runtimes, should use [`prerender`](/reference/react-dom/static/prerender) instead.
 
-***
+---
 
-## Reference {/*reference*/}
+## Reference {/_reference_/}
 
-### `prerenderToNodeStream(reactNode, options?)` {/*prerender*/}
+### `prerenderToNodeStream(reactNode, options?)` {/_prerender_/}
 
 Call `prerenderToNodeStream` to render your app to static HTML.
 
 ```js
-import { prerenderToNodeStream } from 'react-dom/static';
+import { prerenderToNodeStream } from "react-dom/static";
 
 // The route handler syntax depends on your backend framework
-app.use('/', async (request, response) => {
+app.use("/", async (request, response) => {
   const { prelude } = await prerenderToNodeStream(<App />, {
-    bootstrapScripts: ['/main.js'],
+    bootstrapScripts: ["/main.js"],
   });
 
-  response.setHeader('Content-Type', 'text/plain');
+  response.setHeader("Content-Type", "text/plain");
   prelude.pipe(response);
 });
 ```
@@ -34,7 +34,7 @@ On the client, call [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) to 
 
 [See more examples below.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parameters {/_parameters_/}
 
 - `reactNode`: A React node you want to render to HTML. For example, a JSX node like `<App />`. It is expected to represent the entire document, so the App component should render the `<html>` tag.
 
@@ -48,7 +48,7 @@ On the client, call [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) to 
   - **optional** `progressiveChunkSize`: The number of bytes in a chunk. [Read more about the default heuristic.](https://github.com/facebook/react/blob/14c2be8dac2d5482fda8a0906a31d239df8551fc/packages/react-server/src/ReactFizzServer.js#L210-L225)
   - **optional** `signal`: An [abort signal](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal) that lets you [abort prerendering](#aborting-prerendering) and render the rest on the client.
 
-#### Returns {/*returns*/}
+#### Returns {/_returns_/}
 
 `prerenderToNodeStream` returns a Promise:
 
@@ -57,34 +57,34 @@ On the client, call [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) to 
   - `postponed`: a JSON-serializeable, opaque object that can be passed to [`resumeToPipeableStream`](/reference/react-dom/server/resumeToPipeableStream) if `prerenderToNodeStream` did not finish. Otherwise `null` indicating that the `prelude` contains all the content and no resume is necessary.
 - If rendering fails, the Promise will be rejected. [Use this to output a fallback shell.](/reference/react-dom/server/renderToPipeableStream#recovering-from-errors-inside-the-shell)
 
-#### Caveats {/*caveats*/}
+#### Caveats {/_caveats_/}
 
 `nonce` is not an available option when prerendering. Nonces must be unique per request and if you use nonces to secure your application with [CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP) it would be inappropriate and insecure to include the nonce value in the prerender itself.
 
-### When should I use `prerenderToNodeStream`? {/*when-to-use-prerender*/}
+### When should I use `prerenderToNodeStream`? {/_when-to-use-prerender_/}
 
 The static `prerenderToNodeStream` API is used for static server-side generation (SSG). Unlike `renderToString`, `prerenderToNodeStream` waits for all data to load before resolving. This makes it suitable for generating static HTML for a full page, including data that needs to be fetched using Suspense. To stream content as it loads, use a streaming server-side render (SSR) API like [renderToReadableStream](/reference/react-dom/server/renderToReadableStream).
 
 `prerenderToNodeStream` can be aborted and resumed later with `resumeToPipeableStream` to support partial pre-rendering.
 
-***
+---
 
-## Usage {/*usage*/}
+## Usage {/_usage_/}
 
-### Rendering a React tree to a stream of static HTML {/*rendering-a-react-tree-to-a-stream-of-static-html*/}
+### Rendering a React tree to a stream of static HTML {/_rendering-a-react-tree-to-a-stream-of-static-html_/}
 
 Call `prerenderToNodeStream` to render your React tree to static HTML into a [Node.js Stream](https://nodejs.org/api/stream.html):
 
 ```js [[1, 5, "<App />"], [2, 6, "['/main.js']"]]
-import { prerenderToNodeStream } from 'react-dom/static';
+import { prerenderToNodeStream } from "react-dom/static";
 
 // The route handler syntax depends on your backend framework
-app.use('/', async (request, response) => {
+app.use("/", async (request, response) => {
   const { prelude } = await prerenderToNodeStream(<App />, {
-    bootstrapScripts: ['/main.js'],
+    bootstrapScripts: ["/main.js"],
   });
 
-  response.setHeader('Content-Type', 'text/plain');
+  response.setHeader("Content-Type", "text/plain");
   prelude.pipe(response);
 });
 ```
@@ -124,15 +124,15 @@ React will inject the [doctype](https://developer.mozilla.org/en-US/docs/Glossar
 On the client, your bootstrap script should [hydrate the entire `document` with a call to `hydrateRoot`:](/reference/react-dom/client/hydrateRoot#hydrating-an-entire-document)
 
 ```js [[1, 4, "<App />"]]
-import { hydrateRoot } from 'react-dom/client';
-import App from './App.js';
+import { hydrateRoot } from "react-dom/client";
+import App from "./App.js";
 
 hydrateRoot(document, <App />);
 ```
 
 This will attach event listeners to the static server-generated HTML and make it interactive.
 
-#### Reading CSS and JS asset paths from the build output {/*reading-css-and-js-asset-paths-from-the-build-output*/}
+#### Reading CSS and JS asset paths from the build output {/_reading-css-and-js-asset-paths-from-the-build-output_/}
 
 The final asset URLs (like JavaScript and CSS files) are often hashed after the build. For example, instead of `styles.css` you might end up with `styles.123456.css`. Hashing static asset filenames guarantees that every distinct build of the same asset will have a different filename. This is useful because it lets you safely enable long-term caching for static assets: a file with a certain name would never change content.
 
@@ -144,7 +144,7 @@ export default function App({ assetMap }) {
     <html>
       <head>
         <title>My app</title>
-        <link rel="stylesheet" href={assetMap['styles.css']}></link>
+        <link rel="stylesheet" href={assetMap["styles.css"]}></link>
       </head>
       ...
     </html>
@@ -157,16 +157,16 @@ On the server, render `<App assetMap={assetMap} />` and pass your `assetMap` wit
 ```js {1-5,8,9}
 // You'd need to get this JSON from your build tooling, e.g. read it from the build output.
 const assetMap = {
-  'styles.css': '/styles.123456.css',
-  'main.js': '/main.123456.js'
+  "styles.css": "/styles.123456.css",
+  "main.js": "/main.123456.js",
 };
 
-app.use('/', async (request, response) => {
+app.use("/", async (request, response) => {
   const { prelude } = await prerenderToNodeStream(<App />, {
-    bootstrapScripts: [assetMap['/main.js']]
+    bootstrapScripts: [assetMap["/main.js"]],
   });
 
-  response.setHeader('Content-Type', 'text/html');
+  response.setHeader("Content-Type", "text/html");
   prelude.pipe(response);
 });
 ```
@@ -176,18 +176,18 @@ Since your server is now rendering `<App assetMap={assetMap} />`, you need to re
 ```js {9-10}
 // You'd need to get this JSON from your build tooling.
 const assetMap = {
-  'styles.css': '/styles.123456.css',
-  'main.js': '/main.123456.js'
+  "styles.css": "/styles.123456.css",
+  "main.js": "/main.123456.js",
 };
 
-app.use('/', async (request, response) => {
+app.use("/", async (request, response) => {
   const { prelude } = await prerenderToNodeStream(<App />, {
     // Careful: It's safe to stringify() this because this data isn't user-generated.
     bootstrapScriptContent: `window.assetMap = ${JSON.stringify(assetMap)};`,
-    bootstrapScripts: [assetMap['/main.js']],
+    bootstrapScripts: [assetMap["/main.js"]],
   });
 
-  response.setHeader('Content-Type', 'text/html');
+  response.setHeader("Content-Type", "text/html");
   prelude.pipe(response);
 });
 ```
@@ -195,44 +195,44 @@ app.use('/', async (request, response) => {
 In the example above, the `bootstrapScriptContent` option adds an extra inline `<script>` tag that sets the global `window.assetMap` variable on the client. This lets the client code read the same `assetMap`:
 
 ```js {4}
-import { hydrateRoot } from 'react-dom/client';
-import App from './App.js';
+import { hydrateRoot } from "react-dom/client";
+import App from "./App.js";
 
 hydrateRoot(document, <App assetMap={window.assetMap} />);
 ```
 
 Both client and server render `App` with the same `assetMap` prop, so there are no hydration errors.
 
-***
+---
 
-### Rendering a React tree to a string of static HTML {/*rendering-a-react-tree-to-a-string-of-static-html*/}
+### Rendering a React tree to a string of static HTML {/_rendering-a-react-tree-to-a-string-of-static-html_/}
 
 Call `prerenderToNodeStream` to render your app to a static HTML string:
 
 ```js
-import { prerenderToNodeStream } from 'react-dom/static';
+import { prerenderToNodeStream } from "react-dom/static";
 
 async function renderToString() {
-  const {prelude} = await prerenderToNodeStream(<App />, {
-    bootstrapScripts: ['/main.js']
+  const { prelude } = await prerenderToNodeStream(<App />, {
+    bootstrapScripts: ["/main.js"],
   });
 
   return new Promise((resolve, reject) => {
-    let data = '';
-    prelude.on('data', chunk => {
+    let data = "";
+    prelude.on("data", (chunk) => {
       data += chunk;
     });
-    prelude.on('end', () => resolve(data));
-    prelude.on('error', reject);
+    prelude.on("end", () => resolve(data));
+    prelude.on("error", reject);
   });
 }
 ```
 
-This will produce the initial non-interactive HTML output of your React components. On the client, you will need to call [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) to *hydrate* that server-generated HTML and make it interactive.
+This will produce the initial non-interactive HTML output of your React components. On the client, you will need to call [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) to _hydrate_ that server-generated HTML and make it interactive.
 
-***
+---
 
-### Waiting for all data to load {/*waiting-for-all-data-to-load*/}
+### Waiting for all data to load {/_waiting-for-all-data-to-load_/}
 
 `prerenderToNodeStream` waits for all data to load before finishing the static HTML generation and resolving. For example, consider a profile page that shows a cover, a sidebar with friends and photos, and a list of posts:
 
@@ -267,9 +267,9 @@ The exact way you would load data in the `Posts` component above depends on your
 
 Suspense-enabled data fetching without the use of an opinionated framework is not yet supported. The requirements for implementing a Suspense-enabled data source are unstable and undocumented. An official API for integrating data sources with Suspense will be released in a future version of React.
 
-***
+---
 
-### Aborting prerendering {/*aborting-prerendering*/}
+### Aborting prerendering {/_aborting-prerendering_/}
 
 You can force the prerender to "give up" after a timeout:
 
@@ -293,15 +293,15 @@ Any Suspense boundaries with incomplete children will be included in the prelude
 
 This can be used for partial prerendering together with [`resumeToPipeableStream`](/reference/react-dom/server/resumeToPipeableStream) or [`resumeAndPrerenderToNodeStream`](/reference/react-dom/static/resumeAndPrerenderToNodeStream).
 
-## Troubleshooting {/*troubleshooting*/}
+## Troubleshooting {/_troubleshooting_/}
 
-### My stream doesn't start until the entire app is rendered {/*my-stream-doesnt-start-until-the-entire-app-is-rendered*/}
+### My stream doesn't start until the entire app is rendered {/_my-stream-doesnt-start-until-the-entire-app-is-rendered_/}
 
 The `prerenderToNodeStream` response waits for the entire app to finish rendering, including waiting for all Suspense boundaries to resolve, before resolving. It is designed for static site generation (SSG) ahead of time and does not support streaming more content as it loads.
 
 To stream content as it loads, use a streaming server render API like [renderToPipeableStream](/reference/react-dom/server/renderToPipeableStream).
 
-***
+---
 
 ## Sitemap
 

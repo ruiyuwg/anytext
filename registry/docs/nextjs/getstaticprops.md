@@ -3,37 +3,37 @@
 If you export a function called `getStaticProps` (Static Site Generation) from a page, Next.js will pre-render this page at build time using the props returned by `getStaticProps`.
 
 ```tsx filename="pages/index.tsx" switcher
-import type { InferGetStaticPropsType, GetStaticProps } from 'next'
+import type { InferGetStaticPropsType, GetStaticProps } from "next";
 
 type Repo = {
-  name: string
-  stargazers_count: number
-}
+  name: string;
+  stargazers_count: number;
+};
 
 export const getStaticProps = (async (context) => {
-  const res = await fetch('https://api.github.com/repos/vercel/next.js')
-  const repo = await res.json()
-  return { props: { repo } }
+  const res = await fetch("https://api.github.com/repos/vercel/next.js");
+  const repo = await res.json();
+  return { props: { repo } };
 }) satisfies GetStaticProps<{
-  repo: Repo
-}>
+  repo: Repo;
+}>;
 
 export default function Page({
   repo,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  return repo.stargazers_count
+  return repo.stargazers_count;
 }
 ```
 
 ```jsx filename="pages/index.js" switcher
 export async function getStaticProps() {
-  const res = await fetch('https://api.github.com/repos/vercel/next.js')
-  const repo = await res.json()
-  return { props: { repo } }
+  const res = await fetch("https://api.github.com/repos/vercel/next.js");
+  const repo = await res.json();
+  return { props: { repo } };
 }
 
 export default function Page({ repo }) {
-  return repo.stargazers_count
+  return repo.stargazers_count;
 }
 ```
 
@@ -77,7 +77,7 @@ export default function Blog({ posts }) {
         <li>{post.title}</li>
       ))}
     </ul>
-  )
+  );
 }
 
 // This function gets called at build time on server-side.
@@ -86,8 +86,8 @@ export default function Blog({ posts }) {
 export async function getStaticProps() {
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
-  const res = await fetch('https://.../posts')
-  const posts = await res.json()
+  const res = await fetch("https://.../posts");
+  const posts = await res.json();
 
   // By returning { props: { posts } }, the Blog component
   // will receive `posts` as a prop at build time
@@ -95,7 +95,7 @@ export async function getStaticProps() {
     props: {
       posts,
     },
-  }
+  };
 }
 ```
 
@@ -108,7 +108,7 @@ export default function Blog({ posts }) {
         <li>{post.title}</li>
       ))}
     </ul>
-  )
+  );
 }
 
 // This function gets called at build time on server-side.
@@ -117,8 +117,8 @@ export default function Blog({ posts }) {
 export async function getStaticProps() {
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
-  const res = await fetch('https://.../posts')
-  const posts = await res.json()
+  const res = await fetch("https://.../posts");
+  const posts = await res.json();
 
   // By returning { props: { posts } }, the Blog component
   // will receive `posts` as a prop at build time
@@ -126,7 +126,7 @@ export async function getStaticProps() {
     props: {
       posts,
     },
-  }
+  };
 }
 ```
 
@@ -146,29 +146,29 @@ Take the following example. An API route is used to fetch some data from a CMS. 
 // from a `lib/` directory
 export async function loadPosts() {
   // Call an external API endpoint to get posts
-  const res = await fetch('https://.../posts/')
-  const data = await res.json()
+  const res = await fetch("https://.../posts/");
+  const data = await res.json();
 
-  return data
+  return data;
 }
 ```
 
 ```jsx filename="pages/blog.js"
 // pages/blog.js
-import { loadPosts } from '../lib/load-posts'
+import { loadPosts } from "../lib/load-posts";
 
 // This function runs only on the server side
 export async function getStaticProps() {
   // Instead of fetching your `/api` route you can call the same
   // function directly in `getStaticProps`
-  const posts = await loadPosts()
+  const posts = await loadPosts();
 
   // Props returned will be passed to the page component
-  return { props: { posts } }
+  return { props: { posts } };
 }
 ```
 
-Alternatively, if you are **not** using API routes to fetch data, then the [`fetch()`](https://developer.mozilla.org/docs/Web/API/Fetch_API) API *can* be used directly in `getStaticProps` to fetch data.
+Alternatively, if you are **not** using API routes to fetch data, then the [`fetch()`](https://developer.mozilla.org/docs/Web/API/Fetch_API) API _can_ be used directly in `getStaticProps` to fetch data.
 
 To verify what Next.js eliminates from the client-side bundle, you can use the [next-code-elimination tool](https://next-code-elimination.vercel.app/).
 

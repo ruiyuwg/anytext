@@ -65,16 +65,16 @@ The registry is a collection of pre-processed markdown files committed to this r
 
 ## Supported Libraries
 
-| Library | Version | Topics | Source |
-|---------|---------|--------|--------|
-| AI SDK | v4 | 128 | llms.txt |
-| Drizzle ORM | v0.36 | 161 | llms-full.txt |
-| Hono | v4 | 63 | llms-full.txt |
-| Next.js | v15 | 287 | llms-full.txt |
-| React | v19 | 161 | llms.txt |
-| Tailwind CSS | v4 | 6 | manual |
-| tRPC | v11 | 62 | llms-full.txt |
-| Zod | v3 | 28 | llms-full.txt |
+| Library      | Version | Topics | Source        |
+| ------------ | ------- | ------ | ------------- |
+| AI SDK       | v4      | 128    | llms.txt      |
+| Drizzle ORM  | v0.36   | 161    | llms-full.txt |
+| Hono         | v4      | 63     | llms-full.txt |
+| Next.js      | v15     | 287    | llms-full.txt |
+| React        | v19     | 161    | llms.txt      |
+| Tailwind CSS | v4      | 6      | manual        |
+| tRPC         | v11     | 62     | llms-full.txt |
+| Zod          | v3      | 28     | llms-full.txt |
 
 Docs are automatically updated weekly via GitHub Actions. Contributions welcome.
 

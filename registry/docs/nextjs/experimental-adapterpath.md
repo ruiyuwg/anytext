@@ -10,11 +10,11 @@ To use an adapter, specify the path to your adapter module in `experimental.adap
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    adapterPath: require.resolve('./my-adapter.js'),
+    adapterPath: require.resolve("./my-adapter.js"),
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 ## Creating an Adapter
@@ -23,31 +23,31 @@ An adapter is a module that exports an object implementing the `NextAdapter` int
 
 ```typescript
 export interface NextAdapter {
-  name: string
+  name: string;
   modifyConfig?: (
     config: NextConfigComplete,
     ctx: {
-      phase: PHASE_TYPE
-    }
-  ) => Promise<NextConfigComplete> | NextConfigComplete
+      phase: PHASE_TYPE;
+    },
+  ) => Promise<NextConfigComplete> | NextConfigComplete;
   onBuildComplete?: (ctx: {
     routes: {
-      headers: Array<ManifestHeaderRoute>
-      redirects: Array<ManifestRedirectRoute>
+      headers: Array<ManifestHeaderRoute>;
+      redirects: Array<ManifestRedirectRoute>;
       rewrites: {
-        beforeFiles: Array<ManifestRewriteRoute>
-        afterFiles: Array<ManifestRewriteRoute>
-        fallback: Array<ManifestRewriteRoute>
-      }
-      dynamicRoutes: ReadonlyArray<ManifestRoute>
-    }
-    outputs: AdapterOutputs
-    projectDir: string
-    repoRoot: string
-    distDir: string
-    config: NextConfigComplete
-    nextVersion: string
-  }) => Promise<void> | void
+        beforeFiles: Array<ManifestRewriteRoute>;
+        afterFiles: Array<ManifestRewriteRoute>;
+        fallback: Array<ManifestRewriteRoute>;
+      };
+      dynamicRoutes: ReadonlyArray<ManifestRoute>;
+    };
+    outputs: AdapterOutputs;
+    projectDir: string;
+    repoRoot: string;
+    distDir: string;
+    config: NextConfigComplete;
+    nextVersion: string;
+  }) => Promise<void> | void;
 }
 ```
 
@@ -58,17 +58,17 @@ Here's a minimal adapter example:
 ```js filename="my-adapter.js"
 /** @type {import('next').NextAdapter} */
 const adapter = {
-  name: 'my-custom-adapter',
+  name: "my-custom-adapter",
 
   async modifyConfig(config, { phase }) {
     // Modify the Next.js config based on the build phase
-    if (phase === 'phase-production-build') {
+    if (phase === "phase-production-build") {
       return {
         ...config,
         // Add your modifications
-      }
+      };
     }
-    return config
+    return config;
   },
 
   async onBuildComplete({
@@ -81,28 +81,28 @@ const adapter = {
     nextVersion,
   }) {
     // Process the build output
-    console.log('Build completed with', outputs.pages.length, 'pages')
+    console.log("Build completed with", outputs.pages.length, "pages");
 
     // Access different output types
     for (const page of outputs.pages) {
-      console.log('Page:', page.pathname, 'at', page.filePath)
+      console.log("Page:", page.pathname, "at", page.filePath);
     }
 
     for (const apiRoute of outputs.pagesApi) {
-      console.log('API Route:', apiRoute.pathname, 'at', apiRoute.filePath)
+      console.log("API Route:", apiRoute.pathname, "at", apiRoute.filePath);
     }
 
     for (const appPage of outputs.appPages) {
-      console.log('App Page:', appPage.pathname, 'at', appPage.filePath)
+      console.log("App Page:", appPage.pathname, "at", appPage.filePath);
     }
 
     for (const prerender of outputs.prerenders) {
-      console.log('Prerendered:', prerender.pathname)
+      console.log("Prerendered:", prerender.pathname);
     }
   },
-}
+};
 
-module.exports = adapter
+module.exports = adapter;
 ```
 
 ## API Reference
@@ -268,10 +268,10 @@ Static assets and auto-statically optimized pages:
 
 ```typescript
 {
-  type: 'STATIC_FILE'
-  id: string
-  filePath: string
-  pathname: string
+  type: "STATIC_FILE";
+  id: string;
+  filePath: string;
+  pathname: string;
 }
 ```
 
@@ -373,8 +373,8 @@ To configure a Next.js application to allow requests from origins other than the
 
 ```js filename="next.config.js"
 module.exports = {
-  allowedDevOrigins: ['local-origin.dev', '*.local-origin.dev'],
-}
+  allowedDevOrigins: ["local-origin.dev", "*.local-origin.dev"],
+};
 ```
 
 # appDir

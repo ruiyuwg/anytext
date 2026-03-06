@@ -28,15 +28,15 @@ To use this feature you would need to have `drizzle-orm@0.32.0` or higher and `d
 - Cannot specify default values.
 - Expressions cannot reference other generated columns or include subqueries.
 - Schema changes required to modify generated column expressions.
-- Cannot directly use in primary keys, foreign keys, or unique constraints   
+- Cannot directly use in primary keys, foreign keys, or unique constraints
 
-For more info, please check [PostgreSQL](https://www.postgresql.org/docs/current/ddl-generated-columns.html) docs 
+For more info, please check [PostgreSQL](https://www.postgresql.org/docs/current/ddl-generated-columns.html) docs
 
 #### Drizzle side
-In Drizzle you can specify `.generatedAlwaysAs()` function on any column type and add a supported sql query, 
+In Drizzle you can specify `.generatedAlwaysAs()` function on any column type and add a supported sql query,
 that will generate this column data for you.
 
-#### Features 
+#### Features
 This function can accept generated expression in 2 ways:
 
 <Callout type='warning' collapsed="What was changed starting from 1.0.0-beta.12 version">
@@ -153,15 +153,15 @@ CREATE INDEX "idx_content_search" ON "test" USING gin ("content_search");
 - Can specify NOT NULL and other constraints.
 
 **Limitations**
-- Cannot directly insert or update values in a generated column 
+- Cannot directly insert or update values in a generated column
 
 For more info, please check [MySQL Alter Generated](https://dev.mysql.com/doc/refman/8.4/en/alter-table-generated-columns.html) docs and [MySQL create generated](https://dev.mysql.com/doc/refman/8.4/en/create-table-generated-columns.html) docs
 
 #### Drizzle side
-In Drizzle you can specify `.generatedAlwaysAs()` function on any column type and add a supported sql query, 
+In Drizzle you can specify `.generatedAlwaysAs()` function on any column type and add a supported sql query,
 that will generate this column data for you.
 
-#### Features 
+#### Features
 This function can accept generated expression in 2 ways:
 
 <Callout type='warning' collapsed="What was changed starting from 1.0.0-beta.12 version">
@@ -260,15 +260,15 @@ Drizzle Kit will also have limitations for `push` command:
 - Can specify NOT NULL and other constraints.
 
 **Limitations**
-- Cannot directly insert or update values in a generated column 
+- Cannot directly insert or update values in a generated column
 
-For more info, please check [SQLite](https://www.sqlite.org/gencol.html) docs 
+For more info, please check [SQLite](https://www.sqlite.org/gencol.html) docs
 
 #### Drizzle side
-In Drizzle you can specify `.generatedAlwaysAs()` function on any column type and add a supported sql query, 
+In Drizzle you can specify `.generatedAlwaysAs()` function on any column type and add a supported sql query,
 that will generate this column data for you.
 
-#### Features 
+#### Features
 This function can accept generated expression in 2 ways:
 
 <Callout type='warning' collapsed="What was changed starting from 1.0.0-beta.12 version">
@@ -366,10 +366,10 @@ Work in Progress </Tab> <Tab>
 For more info, please check [MSSQL](https://learn.microsoft.com/en-us/sql/relational-databases/tables/specify-computed-columns-in-a-table?view=sql-server-ver17) docs
 
 #### Drizzle side
-In Drizzle you can specify `.generatedAlwaysAs()` function on any column type and add a supported sql query, 
+In Drizzle you can specify `.generatedAlwaysAs()` function on any column type and add a supported sql query,
 that will generate this column data for you.
 
-#### Features 
+#### Features
 This function can accept generated expression in 2 ways:
 
 <Callout type='warning' collapsed="What was changed starting from 1.0.0-beta.12 version">
@@ -403,7 +403,7 @@ export const test = mssqlTable("test", {
 ```sql
 CREATE TABLE [test] (
     [id] int,
-    [gen_name] AS ('hello "world"!') 
+    [gen_name] AS ('hello "world"!')
 );
 ```
 </CodeTab>
@@ -422,7 +422,7 @@ export const test = mssqlTable("test", {
 ```sql
 CREATE TABLE [test] (
 	[first_name] text,
-	[gen_name] AS (concat('hi,', ' ', [test].[first_name], '!')) 
+	[gen_name] AS (concat('hi,', ' ', [test].[first_name], '!'))
 );
 ```
 </CodeTab>
@@ -434,7 +434,7 @@ CREATE TABLE [test] (
     that will generate this column data for you.
 
 ````
-#### Features 
+#### Features
 This function can accept generated expression in 2 ways:
 
 <Callout type='warning' collapsed="What was changed starting from 1.0.0-beta.12 version">

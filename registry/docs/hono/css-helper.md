@@ -7,8 +7,8 @@ You can write CSS in JSX in a JavaScript template literal named `css`. The retur
 ## Import
 
 ```ts
-import { Hono } from 'hono'
-import { css, cx, keyframes, Style } from 'hono/css'
+import { Hono } from "hono";
+import { css, cx, keyframes, Style } from "hono/css";
 ```
 
 ## `css` <Badge style="vertical-align: middle;" type="warning" text="Experimental" />
@@ -23,14 +23,14 @@ app.get('/', (c) => {
     padding: 1rem;
   `
   return c.html(
-    
-      
-        
-      
-      
+
+
+
+
+
         Hello!
-      
-    
+
+
   )
 })
 ```
@@ -43,7 +43,7 @@ const buttonClass = css`
   &:hover {
     background-color: red;
   }
-`
+`;
 ```
 
 ### Extending
@@ -54,17 +54,17 @@ You can extend the CSS definition by embedding the class name.
 const baseClass = css`
   color: white;
   background-color: blue;
-`
+`;
 
 const header1Class = css`
   ${baseClass}
   font-size: 3rem;
-`
+`;
 
 const header2Class = css`
   ${baseClass}
   font-size: 2rem;
-`
+`;
 ```
 
 In addition, the syntax of `${baseClass} {}` enables nesting classes.
@@ -73,21 +73,15 @@ In addition, the syntax of `${baseClass} {}` enables nesting classes.
 const headerClass = css`
   color: white;
   background-color: blue;
-`
+`;
 const containerClass = css`
   ${headerClass} {
     h1 {
       font-size: 3rem;
     }
   }
-`
-return c.render(
-  
-    
-      Hello!
-    
-  
-)
+`;
+return c.render(Hello!);
 ```
 
 ### Global styles
@@ -104,10 +98,10 @@ const globalClass = css`
 `
 
 return c.render(
-  
+
     Hello!
     Today is a good day.
-  
+
 )
 ```
 
@@ -116,19 +110,19 @@ Or you can write CSS in the `<Style />` component with the `css` literal.
 ```tsx
 export const renderer = jsxRenderer(({ children, title }) => {
   return (
-    
-      
+
+
         {css`
           html {
             font-family: Arial, Helvetica, sans-serif;
           }
         `}
         {title}
-      
-      
+
+
         {children}
-      
-    
+
+
   )
 })
 ```
@@ -145,12 +139,12 @@ const fadeInAnimation = keyframes`
   to {
     opacity: 1;
   }
-`
+`;
 const headerClass = css`
   animation-name: ${fadeInAnimation};
   animation-duration: 2s;
-`
-const Header = () => Hello!
+`;
+const Header = () => Hello!;
 ```
 
 ## `cx` <Badge style="vertical-align: middle;" type="warning" text="Experimental" />
@@ -160,19 +154,17 @@ The `cx` composites the two class names.
 ```tsx
 const buttonClass = css`
   border-radius: 10px;
-`
+`;
 const primaryClass = css`
   background: orange;
-`
-const Button = () => (
-  Click!
-)
+`;
+const Button = () => Click!;
 ```
 
 It can also compose simple strings.
 
 ```tsx
-const Header = () => Hi
+const Header = () => Hi;
 ```
 
 ## Usage in combination with [Secure Headers](/docs/middleware/builtin/secure-headers) middleware
@@ -199,15 +191,15 @@ app.get('/', (c) => {
     padding: 1rem;
   `
   return c.html(
-    
-      
+
+
         {/* Set the `nonce` attribute on the css helpers `style` and `script` elements */}
-        
-      
-      
+
+
+
         Hello!
-      
-    
+
+
   )
 })
 ```

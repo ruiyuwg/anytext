@@ -9,16 +9,16 @@
 </div>
 ```
 
-***
+---
 
-## Reference {/*reference*/}
+## Reference {/_reference_/}
 
-### `createPortal(children, domNode, key?)` {/*createportal*/}
+### `createPortal(children, domNode, key?)` {/_createportal_/}
 
 To create a portal, call `createPortal`, passing some JSX, and the DOM node where it should be rendered:
 
 ```js
-import { createPortal } from 'react-dom';
+import { createPortal } from "react-dom";
 
 // ...
 
@@ -26,16 +26,16 @@ import { createPortal } from 'react-dom';
   <p>This child is placed in the parent div.</p>
   {createPortal(
     <p>This child is placed in the document body.</p>,
-    document.body
+    document.body,
   )}
-</div>
+</div>;
 ```
 
 [See more examples below.](#usage)
 
 A portal only changes the physical placement of the DOM node. In every other way, the JSX you render into a portal acts as a child node of the React component that renders it. For example, the child can access the context provided by the parent tree, and events bubble up from children to parents according to the React tree.
 
-#### Parameters {/*parameters*/}
+#### Parameters {/_parameters_/}
 
 - `children`: Anything that can be rendered with React, such as a piece of JSX (e.g. `<div />` or `<SomeComponent />`), a [Fragment](/reference/react/Fragment) (`<>...</>`), a string or a number, or an array of these.
 
@@ -43,34 +43,34 @@ A portal only changes the physical placement of the DOM node. In every other way
 
 - **optional** `key`: A unique string or number to be used as the portal's [key.](/learn/rendering-lists#keeping-list-items-in-order-with-key)
 
-#### Returns {/*returns*/}
+#### Returns {/_returns_/}
 
 `createPortal` returns a React node that can be included into JSX or returned from a React component. If React encounters it in the render output, it will place the provided `children` inside the provided `domNode`.
 
-#### Caveats {/*caveats*/}
+#### Caveats {/_caveats_/}
 
 - Events from portals propagate according to the React tree rather than the DOM tree. For example, if you click inside a portal, and the portal is wrapped in `<div onClick>`, that `onClick` handler will fire. If this causes issues, either stop the event propagation from inside the portal, or move the portal itself up in the React tree.
 
-***
+---
 
-## Usage {/*usage*/}
+## Usage {/_usage_/}
 
-### Rendering to a different part of the DOM {/*rendering-to-a-different-part-of-the-dom*/}
+### Rendering to a different part of the DOM {/_rendering-to-a-different-part-of-the-dom_/}
 
-*Portals* let your components render some of their children into a different place in the DOM. This lets a part of your component "escape" from whatever containers it may be in. For example, a component can display a modal dialog or a tooltip that appears above and outside of the rest of the page.
+_Portals_ let your components render some of their children into a different place in the DOM. This lets a part of your component "escape" from whatever containers it may be in. For example, a component can display a modal dialog or a tooltip that appears above and outside of the rest of the page.
 
 To create a portal, render the result of `createPortal` with some JSX and the DOM node where it should go:
 
 ```js [[1, 8, "<p>This child is placed in the document body.</p>"], [2, 9, "document.body"]]
-import { createPortal } from 'react-dom';
+import { createPortal } from "react-dom";
 
 function MyComponent() {
   return (
-    <div style={{ border: '2px solid black' }}>
+    <div style={{ border: "2px solid black" }}>
       <p>This child is placed in the parent div.</p>
       {createPortal(
         <p>This child is placed in the document body.</p>,
-        document.body
+        document.body,
       )}
     </div>
   );
@@ -82,15 +82,15 @@ React will put the DOM nodes for the JSX you passed inside of the DOM node you p
 Without a portal, the second `<p>` would be placed inside the parent `<div>`, but the portal "teleported" it into the [`document.body`:](https://developer.mozilla.org/en-US/docs/Web/API/Document/body)
 
 ```js
-import { createPortal } from 'react-dom';
+import { createPortal } from "react-dom";
 
 export default function MyComponent() {
   return (
-    <div style={{ border: '2px solid black' }}>
+    <div style={{ border: "2px solid black" }}>
       <p>This child is placed in the parent div.</p>
       {createPortal(
         <p>This child is placed in the document body.</p>,
-        document.body
+        document.body,
       )}
     </div>
   );
@@ -103,9 +103,9 @@ Notice how the second paragraph visually appears outside the parent `<div>` with
 <body>
   <div id="root">
     ...
-      <div style="border: 2px solid black">
-        <p>This child is placed inside the parent div.</p>
-      </div>
+    <div style="border: 2px solid black">
+      <p>This child is placed inside the parent div.</p>
+    </div>
     ...
   </div>
   <p>This child is placed in the document body.</p>
@@ -114,23 +114,23 @@ Notice how the second paragraph visually appears outside the parent `<div>` with
 
 A portal only changes the physical placement of the DOM node. In every other way, the JSX you render into a portal acts as a child node of the React component that renders it. For example, the child can access the context provided by the parent tree, and events still bubble up from children to parents according to the React tree.
 
-***
+---
 
-### Rendering a modal dialog with a portal {/*rendering-a-modal-dialog-with-a-portal*/}
+### Rendering a modal dialog with a portal {/_rendering-a-modal-dialog-with-a-portal_/}
 
 You can use a portal to create a modal dialog that floats above the rest of the page, even if the component that summons the dialog is inside a container with `overflow: hidden` or other styles that interfere with the dialog.
 
 In this example, the two containers have styles that disrupt the modal dialog, but the one rendered into a portal is unaffected because, in the DOM, the modal is not contained within the parent JSX elements.
 
 ```js src/App.js active
-import NoPortalExample from './NoPortalExample';
-import PortalExample from './PortalExample';
+import NoPortalExample from "./NoPortalExample";
+import PortalExample from "./PortalExample";
 
 export default function App() {
   return (
     <>
       <div className="clipping-container">
-        <NoPortalExample  />
+        <NoPortalExample />
       </div>
       <div className="clipping-container">
         <PortalExample />
@@ -141,8 +141,8 @@ export default function App() {
 ```
 
 ```js src/NoPortalExample.js
-import { useState } from 'react';
-import ModalContent from './ModalContent.js';
+import { useState } from "react";
+import ModalContent from "./ModalContent.js";
 
 export default function NoPortalExample() {
   const [showModal, setShowModal] = useState(false);
@@ -151,18 +151,16 @@ export default function NoPortalExample() {
       <button onClick={() => setShowModal(true)}>
         Show modal without a portal
       </button>
-      {showModal && (
-        <ModalContent onClose={() => setShowModal(false)} />
-      )}
+      {showModal && <ModalContent onClose={() => setShowModal(false)} />}
     </>
   );
 }
 ```
 
 ```js src/PortalExample.js active
-import { useState } from 'react';
-import { createPortal } from 'react-dom';
-import ModalContent from './ModalContent.js';
+import { useState } from "react";
+import { createPortal } from "react-dom";
+import ModalContent from "./ModalContent.js";
 
 export default function PortalExample() {
   const [showModal, setShowModal] = useState(false);
@@ -171,10 +169,11 @@ export default function PortalExample() {
       <button onClick={() => setShowModal(true)}>
         Show modal using a portal
       </button>
-      {showModal && createPortal(
-        <ModalContent onClose={() => setShowModal(false)} />,
-        document.body
-      )}
+      {showModal &&
+        createPortal(
+          <ModalContent onClose={() => setShowModal(false)} />,
+          document.body,
+        )}
     </>
   );
 }
@@ -210,7 +209,7 @@ export default function ModalContent({ onClose }) {
   background-color: white;
   border: 2px solid rgb(240, 240, 240);
   border-radius: 12px;
-  position:  absolute;
+  position: absolute;
   width: 250px;
   top: 70px;
   left: calc(50% - 125px);
@@ -222,16 +221,18 @@ It's important to make sure that your app is accessible when using portals. For 
 
 Follow the [WAI-ARIA Modal Authoring Practices](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal) when creating modals. If you use a community package, ensure that it is accessible and follows these guidelines.
 
-***
+---
 
-### Rendering React components into non-React server markup {/*rendering-react-components-into-non-react-server-markup*/}
+### Rendering React components into non-React server markup {/_rendering-react-components-into-non-react-server-markup_/}
 
 Portals can be useful if your React root is only part of a static or server-rendered page that isn't built with React. For example, if your page is built with a server framework like Rails, you can create areas of interactivity within static areas such as sidebars. Compared with having [multiple separate React roots,](/reference/react-dom/client/createRoot#rendering-a-page-partially-built-with-react) portals let you treat the app as a single React tree with shared state even though its parts render to different parts of the DOM.
 
 ```html public/index.html
 <!DOCTYPE html>
 <html>
-  <head><title>My app</title></head>
+  <head>
+    <title>My app</title>
+  </head>
   <body>
     <h1>Welcome to my hybrid app</h1>
     <div class="parent">
@@ -246,32 +247,29 @@ Portals can be useful if your React root is only part of a static or server-rend
 ```
 
 ```js src/index.js
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import App from './App.js';
-import './styles.css';
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App.js";
+import "./styles.css";
 
-const root = createRoot(document.getElementById('root'));
+const root = createRoot(document.getElementById("root"));
 root.render(
   <StrictMode>
     <App />
-  </StrictMode>
+  </StrictMode>,
 );
 ```
 
 ```js src/App.js active
-import { createPortal } from 'react-dom';
+import { createPortal } from "react-dom";
 
-const sidebarContentEl = document.getElementById('sidebar-content');
+const sidebarContentEl = document.getElementById("sidebar-content");
 
 export default function App() {
   return (
     <>
       <MainContent />
-      {createPortal(
-        <SidebarContent />,
-        sidebarContentEl
-      )}
+      {createPortal(<SidebarContent />, sidebarContentEl)}
     </>
   );
 }
@@ -296,7 +294,7 @@ function SidebarContent() {
 }
 
 .sidebar {
-  padding:  12px;
+  padding: 12px;
   background-color: #eee;
   width: 200px;
   height: 200px;
@@ -314,9 +312,9 @@ p {
 }
 ```
 
-***
+---
 
-### Rendering React components into non-React DOM nodes {/*rendering-react-components-into-non-react-dom-nodes*/}
+### Rendering React components into non-React DOM nodes {/_rendering-react-components-into-non-react-dom-nodes_/}
 
 You can also use a portal to manage the content of a DOM node that's managed outside of React. For example, suppose you're integrating with a non-React map widget and you want to render React content inside a popup. To do this, declare a `popupContainer` state variable to store the DOM node you're going to render into:
 
@@ -342,10 +340,8 @@ This lets you use `createPortal` to render React content into `popupContainer` o
 ```js {3-6}
 return (
   <div style={{ width: 250, height: 250 }} ref={containerRef}>
-    {popupContainer !== null && createPortal(
-      <p>Hello from React!</p>,
-      popupContainer
-    )}
+    {popupContainer !== null &&
+      createPortal(<p>Hello from React!</p>, popupContainer)}
   </div>
 );
 ```
@@ -371,9 +367,9 @@ Here is a complete example you can play with:
 ```
 
 ```js src/App.js
-import { useRef, useEffect, useState } from 'react';
-import { createPortal } from 'react-dom';
-import { createMapWidget, addPopupToMapWidget } from './map-widget.js';
+import { useRef, useEffect, useState } from "react";
+import { createPortal } from "react-dom";
+import { createMapWidget, addPopupToMapWidget } from "./map-widget.js";
 
 export default function Map() {
   const containerRef = useRef(null);
@@ -391,44 +387,41 @@ export default function Map() {
 
   return (
     <div style={{ width: 250, height: 250 }} ref={containerRef}>
-      {popupContainer !== null && createPortal(
-        <p>Hello from React!</p>,
-        popupContainer
-      )}
+      {popupContainer !== null &&
+        createPortal(<p>Hello from React!</p>, popupContainer)}
     </div>
   );
 }
 ```
 
 ```js src/map-widget.js
-import 'leaflet/dist/leaflet.css';
-import * as L from 'leaflet';
+import "leaflet/dist/leaflet.css";
+import * as L from "leaflet";
 
 export function createMapWidget(containerDomNode) {
   const map = L.map(containerDomNode);
   map.setView([0, 0], 0);
-  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19,
-    attribution: '© OpenStreetMap'
+    attribution: "© OpenStreetMap",
   }).addTo(map);
   return map;
 }
 
 export function addPopupToMapWidget(map) {
-  const popupDiv = document.createElement('div');
-  L.popup()
-    .setLatLng([0, 0])
-    .setContent(popupDiv)
-    .openOn(map);
+  const popupDiv = document.createElement("div");
+  L.popup().setLatLng([0, 0]).setContent(popupDiv).openOn(map);
   return popupDiv;
 }
 ```
 
 ```css
-button { margin: 5px; }
+button {
+  margin: 5px;
+}
 ```
 
-***
+---
 
 ## Sitemap
 

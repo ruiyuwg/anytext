@@ -30,13 +30,13 @@ cd my-app
 Edit `main.ts`:
 
 ```ts [main.ts]
-import { Hono } from 'hono'
+import { Hono } from "hono";
 
-const app = new Hono()
+const app = new Hono();
 
-app.get('/', (c) => c.text('Hello Deno!'))
+app.get("/", (c) => c.text("Hello Deno!"));
 
-Deno.serve(app.fetch)
+Deno.serve(app.fetch);
 ```
 
 ## 4. Run
@@ -52,8 +52,8 @@ deno task start
 You can specify the port number by updating the arguments of `Deno.serve` in `main.ts`:
 
 ```ts
-Deno.serve(app.fetch) // [!code --]
-Deno.serve({ port: 8787 }, app.fetch) // [!code ++]
+Deno.serve(app.fetch); // [!code --]
+Deno.serve({ port: 8787 }, app.fetch); // [!code ++]
 ```
 
 ## Serve static files
@@ -61,17 +61,17 @@ Deno.serve({ port: 8787 }, app.fetch) // [!code ++]
 To serve static files, use `serveStatic` imported from `hono/deno`.
 
 ```ts
-import { Hono } from 'hono'
-import { serveStatic } from 'hono/deno'
+import { Hono } from "hono";
+import { serveStatic } from "hono/deno";
 
-const app = new Hono()
+const app = new Hono();
 
-app.use('/static/*', serveStatic({ root: './' }))
-app.use('/favicon.ico', serveStatic({ path: './favicon.ico' }))
-app.get('/', (c) => c.text('You can access: /static/hello.txt'))
-app.get('*', serveStatic({ path: './static/fallback.txt' }))
+app.use("/static/*", serveStatic({ root: "./" }));
+app.use("/favicon.ico", serveStatic({ path: "./favicon.ico" }));
+app.get("/", (c) => c.text("You can access: /static/hello.txt"));
+app.get("*", serveStatic({ path: "./static/fallback.txt" }));
 
-Deno.serve(app.fetch)
+Deno.serve(app.fetch);
 ```
 
 For the above code, it will work well with the following directory structure.
@@ -95,13 +95,12 @@ If you want to map `http://localhost:8000/static/*` to `./statics`, you can use 
 
 ```ts
 app.get(
-  '/static/*',
+  "/static/*",
   serveStatic({
-    root: './',
-    rewriteRequestPath: (path) =>
-      path.replace(/^\/static/, '/statics'),
-  })
-)
+    root: "./",
+    rewriteRequestPath: (path) => path.replace(/^\/static/, "/statics"),
+  }),
+);
 ```
 
 ### `mimes`
@@ -110,14 +109,14 @@ You can add MIME types with `mimes`:
 
 ```ts
 app.get(
-  '/static/*',
+  "/static/*",
   serveStatic({
     mimes: {
-      m3u8: 'application/vnd.apple.mpegurl',
-      ts: 'video/mp2t',
+      m3u8: "application/vnd.apple.mpegurl",
+      ts: "video/mp2t",
     },
-  })
-)
+  }),
+);
 ```
 
 ### `onFound`
@@ -126,14 +125,14 @@ You can specify handling when the requested file is found with `onFound`:
 
 ```ts
 app.get(
-  '/static/*',
+  "/static/*",
   serveStatic({
     // ...
     onFound: (_path, c) => {
-      c.header('Cache-Control', `public, immutable, max-age=31536000`)
+      c.header("Cache-Control", `public, immutable, max-age=31536000`);
     },
-  })
-)
+  }),
+);
 ```
 
 ### `onNotFound`
@@ -142,13 +141,13 @@ You can specify handling when the requested file is not found with `onNotFound`:
 
 ```ts
 app.get(
-  '/static/*',
+  "/static/*",
   serveStatic({
     onNotFound: (path, c) => {
-      console.log(`${path} is not found, you access ${c.req.path}`)
+      console.log(`${path} is not found, you access ${c.req.path}`);
     },
-  })
-)
+  }),
+);
 ```
 
 ### `precompressed`
@@ -157,11 +156,11 @@ The `precompressed` option checks if files with extensions like `.br` or `.gz` a
 
 ```ts
 app.get(
-  '/static/*',
+  "/static/*",
   serveStatic({
     precompressed: true,
-  })
-)
+  }),
+);
 ```
 
 ## Deno Deploy
@@ -181,16 +180,16 @@ deno add jsr:@std/assert
 ```
 
 ```ts [hello.ts]
-import { Hono } from 'hono'
-import { assertEquals } from '@std/assert'
+import { Hono } from "hono";
+import { assertEquals } from "@std/assert";
 
-Deno.test('Hello World', async () => {
-  const app = new Hono()
-  app.get('/', (c) => c.text('Please test me'))
+Deno.test("Hello World", async () => {
+  const app = new Hono();
+  app.get("/", (c) => c.text("Please test me"));
 
-  const res = await app.request('http://localhost/')
-  assertEquals(res.status, 200)
-})
+  const res = await app.request("http://localhost/");
+  assertEquals(res.status, 200);
+});
 ```
 
 Then run the command:

@@ -7,16 +7,26 @@ instance, you can leverage the `withReplicas()` function within Drizzle
 \<Tabs items={\["PostgreSQL", "MySQL", "SQLite", "SingleStore", "MSSQL", "CockroachDB"]}> <Tab>
 
 ```ts copy
-import { sql } from 'drizzle-orm';
-import { drizzle } from 'drizzle-orm/node-postgres';
-import { boolean, jsonb, pgTable, serial, text, timestamp, withReplicas } from 'drizzle-orm/pg-core';
+import { sql } from "drizzle-orm";
+import { drizzle } from "drizzle-orm/node-postgres";
+import {
+  boolean,
+  jsonb,
+  pgTable,
+  serial,
+  text,
+  timestamp,
+  withReplicas,
+} from "drizzle-orm/pg-core";
 
-const usersTable = pgTable('users', {
-	id: serial('id' as string).primaryKey(),
-	name: text('name').notNull(),
-	verified: boolean('verified').notNull().default(false),
-	jsonb: jsonb('jsonb').$type<string[]>(),
-	createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+const usersTable = pgTable("users", {
+  id: serial("id" as string).primaryKey(),
+  name: text("name").notNull(),
+  verified: boolean("verified").notNull().default(false),
+  jsonb: jsonb("jsonb").$type<string[]>(),
+  createdAt: timestamp("created_at", { withTimezone: true })
+    .notNull()
+    .defaultNow(),
 });
 
 const primaryDb = drizzle("postgres://user:password@host:port/primary_db");
@@ -42,21 +52,21 @@ verified: boolean('verified').notNull().default(false),
 const primaryClient = await mysql.createConnection({
 host: "host",
 user: "user",
-database: "primary\_db",
+database: "primary_db",
 })
 const primaryDb = drizzle({ client: primaryClient });
 
 const read1Client = await mysql.createConnection({
 host: "host",
 user: "user",
-database: "read\_1",
+database: "read_1",
 })
 const read1 = drizzle({ client: read1Client });
 
 const read2Client = await mysql.createConnection({
 host: "host",
 user: "user",
-database: "read\_2",
+database: "read_2",
 })
 const read2 = drizzle({ client: read2Client });
 
@@ -99,21 +109,21 @@ verified: boolean('verified').notNull().default(false),
 const primaryClient = await mysql.createConnection({
 host: "host",
 user: "user",
-database: "primary\_db",
+database: "primary_db",
 })
 const primaryDb = drizzle({ client: primaryClient });
 
 const read1Client = await mysql.createConnection({
 host: "host",
 user: "user",
-database: "read\_1",
+database: "read_1",
 })
 const read1 = drizzle({ client: read1Client });
 
 const read2Client = await mysql.createConnection({
 host: "host",
 user: "user",
-database: "read\_2",
+database: "read_2",
 })
 const read2 = drizzle({ client: read2Client });
 
@@ -156,9 +166,9 @@ jsonb: jsonb().$type\<string\[]>(),
 createdAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
 });
 
-const primaryDb = drizzle("postgres://user:password@host:port/primary\_db");
-const read1 = drizzle("postgres://user:password@host:port/read\_replica\_1");
-const read2 = drizzle("postgres://user:password@host:port/read\_replica\_2");
+const primaryDb = drizzle("postgres://user:password@host:port/primary_db");
+const read1 = drizzle("postgres://user:password@host:port/read_replica_1");
+const read2 = drizzle("postgres://user:password@host:port/read_replica_2");
 
 const db = withReplicas(primaryDb, \[read1, read2]);
 
@@ -166,7 +176,7 @@ const db = withReplicas(primaryDb, \[read1, read2]);
 </Tab>
 </Tabs>
 
-You can now use the `db` instance the same way you did before. Drizzle will 
+You can now use the `db` instance the same way you did before. Drizzle will
 handle the choice between read replica and the primary instance automatically
 
 ```ts
@@ -194,18 +204,18 @@ Keep in mind that you can implement any type of random selection method for read
 
 ```ts
 const db = withReplicas(primaryDb, [read1, read2], (replicas) => {
-    const weight = [0.7, 0.3];
-    let cumulativeProbability = 0;
-    const rand = Math.random();
+  const weight = [0.7, 0.3];
+  let cumulativeProbability = 0;
+  const rand = Math.random();
 
-    for (const [i, replica] of replicas.entries()) {
-      cumulativeProbability += weight[i]!;
-      if (rand < cumulativeProbability) return replica;
-    }
-    return replicas[0]!
+  for (const [i, replica] of replicas.entries()) {
+    cumulativeProbability += weight[i]!;
+    if (rand < cumulativeProbability) return replica;
+  }
+  return replicas[0]!;
 });
 
-await db.select().from(usersTable)
+await db.select().from(usersTable);
 ```
 
 Source: https://orm.drizzle.team/docs/relations-schema-declaration

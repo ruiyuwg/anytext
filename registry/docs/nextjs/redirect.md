@@ -13,7 +13,7 @@ If a resource doesn't exist, you can use the [`notFound` function](/docs/app/api
 The `redirect` function accepts two arguments:
 
 ```js
-redirect(path, type)
+redirect(path, type);
 ```
 
 | Parameter | Type                                                          | Description                                                 |
@@ -26,11 +26,11 @@ By default, `redirect` will use `push` (adding a new entry to the browser histor
 The `RedirectType` object contains the available options for the `type` parameter.
 
 ```ts
-import { redirect, RedirectType } from 'next/navigation'
+import { redirect, RedirectType } from "next/navigation";
 
-redirect('/redirect-to', RedirectType.replace)
+redirect("/redirect-to", RedirectType.replace);
 // or
-redirect('/redirect-to', RedirectType.push)
+redirect("/redirect-to", RedirectType.push);
 ```
 
 The `type` parameter has no effect when used in Server Components.
@@ -55,24 +55,24 @@ The `type` parameter has no effect when used in Server Components.
 Invoking the `redirect()` function throws a `NEXT_REDIRECT` error and terminates rendering of the route segment in which it was thrown.
 
 ```tsx filename="app/team/[id]/page.tsx" switcher
-import { redirect } from 'next/navigation'
+import { redirect } from "next/navigation";
 
 async function fetchTeam(id: string) {
-  const res = await fetch('https://...')
-  if (!res.ok) return undefined
-  return res.json()
+  const res = await fetch("https://...");
+  if (!res.ok) return undefined;
+  return res.json();
 }
 
 export default async function Profile({
   params,
 }: {
-  params: Promise<{ id: string }>
+  params: Promise<{ id: string }>;
 }) {
-  const { id } = await params
-  const team = await fetchTeam(id)
+  const { id } = await params;
+  const team = await fetchTeam(id);
 
   if (!team) {
-    redirect('/login')
+    redirect("/login");
   }
 
   // ...
@@ -80,20 +80,20 @@ export default async function Profile({
 ```
 
 ```jsx filename="app/team/[id]/page.js" switcher
-import { redirect } from 'next/navigation'
+import { redirect } from "next/navigation";
 
 async function fetchTeam(id) {
-  const res = await fetch('https://...')
-  if (!res.ok) return undefined
-  return res.json()
+  const res = await fetch("https://...");
+  if (!res.ok) return undefined;
+  return res.json();
 }
 
 export default async function Profile({ params }) {
-  const { id } = await params
-  const team = await fetchTeam(id)
+  const { id } = await params;
+  const team = await fetchTeam(id);
 
   if (!team) {
-    redirect('/login')
+    redirect("/login");
   }
 
   // ...
@@ -107,34 +107,34 @@ export default async function Profile({ params }) {
 `redirect` can be directly used in a Client Component.
 
 ```tsx filename="components/client-redirect.tsx" switcher
-'use client'
+"use client";
 
-import { redirect, usePathname } from 'next/navigation'
+import { redirect, usePathname } from "next/navigation";
 
 export function ClientRedirect() {
-  const pathname = usePathname()
+  const pathname = usePathname();
 
-  if (pathname.startsWith('/admin') && !pathname.includes('/login')) {
-    redirect('/admin/login')
+  if (pathname.startsWith("/admin") && !pathname.includes("/login")) {
+    redirect("/admin/login");
   }
 
-  return <div>Login Page</div>
+  return <div>Login Page</div>;
 }
 ```
 
 ```jsx filename="components/client-redirect.jsx" switcher
-'use client'
+"use client";
 
-import { redirect, usePathname } from 'next/navigation'
+import { redirect, usePathname } from "next/navigation";
 
 export function ClientRedirect() {
-  const pathname = usePathname()
+  const pathname = usePathname();
 
-  if (pathname.startsWith('/admin') && !pathname.includes('/login')) {
-    redirect('/admin/login')
+  if (pathname.startsWith("/admin") && !pathname.includes("/login")) {
+    redirect("/admin/login");
   }
 
-  return <div>Login Page</div>
+  return <div>Login Page</div>;
 }
 ```
 
@@ -143,9 +143,9 @@ export function ClientRedirect() {
 `redirect` can be used in a Client Component through a Server Action. If you need to use an event handler to redirect the user, you can use the [`useRouter`](/docs/app/api-reference/functions/use-router) hook.
 
 ```tsx filename="app/client-redirect.tsx" switcher
-'use client'
+"use client";
 
-import { navigate } from './actions'
+import { navigate } from "./actions";
 
 export function ClientRedirect() {
   return (
@@ -153,14 +153,14 @@ export function ClientRedirect() {
       <input type="text" name="id" />
       <button>Submit</button>
     </form>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/client-redirect.jsx" switcher
-'use client'
+"use client";
 
-import { navigate } from './actions'
+import { navigate } from "./actions";
 
 export function ClientRedirect() {
   return (
@@ -168,27 +168,27 @@ export function ClientRedirect() {
       <input type="text" name="id" />
       <button>Submit</button>
     </form>
-  )
+  );
 }
 ```
 
 ```ts filename="app/actions.ts" switcher
-'use server'
+"use server";
 
-import { redirect } from 'next/navigation'
+import { redirect } from "next/navigation";
 
 export async function navigate(data: FormData) {
-  redirect(`/posts/${data.get('id')}`)
+  redirect(`/posts/${data.get("id")}`);
 }
 ```
 
 ```js filename="app/actions.js" switcher
-'use server'
+"use server";
 
-import { redirect } from 'next/navigation'
+import { redirect } from "next/navigation";
 
 export async function navigate(data) {
-  redirect(`/posts/${data.get('id')}`)
+  redirect(`/posts/${data.get("id")}`);
 }
 ```
 
@@ -205,7 +205,7 @@ The introduction of the `307` status code means that the request method is prese
 - `302` - Temporary redirect, will change the request method from `POST` to `GET`
 - `307` - Temporary redirect, will preserve the request method as `POST`
 
-The `redirect()` method uses a `307` by default, instead of a `302` temporary redirect, meaning your requests will *always* be preserved as `POST` requests.
+The `redirect()` method uses a `307` by default, instead of a `302` temporary redirect, meaning your requests will _always_ be preserved as `POST` requests.
 
 [Learn more](https://developer.mozilla.org/docs/Web/HTTP/Redirections) about HTTP Redirects.
 
@@ -241,49 +241,49 @@ refresh(): void;
 ## Examples
 
 ```ts filename="app/actions.ts" switcher
-'use server'
+"use server";
 
-import { refresh } from 'next/cache'
+import { refresh } from "next/cache";
 
 export async function createPost(formData: FormData) {
-  const title = formData.get('title')
-  const content = formData.get('content')
+  const title = formData.get("title");
+  const content = formData.get("content");
 
   // Create the post in your database
   const post = await db.post.create({
     data: { title, content },
-  })
+  });
 
-  refresh()
+  refresh();
 }
 ```
 
 ```js filename="app/actions.js" switcher
-'use server'
+"use server";
 
-import { refresh } from 'next/cache'
+import { refresh } from "next/cache";
 
 export async function createPost(formData) {
-  const title = formData.get('title')
-  const content = formData.get('content')
+  const title = formData.get("title");
+  const content = formData.get("content");
 
   // Create the post in your database
   const post = await db.post.create({
     data: { title, content },
-  })
+  });
 
-  refresh()
+  refresh();
 }
 ```
 
 ### Error when used outside Server Actions
 
 ```ts filename="app/api/posts/route.ts" switcher
-import { refresh } from 'next/cache'
+import { refresh } from "next/cache";
 
 export async function POST() {
   // This will throw an error
-  refresh()
+  refresh();
 }
 ```
 

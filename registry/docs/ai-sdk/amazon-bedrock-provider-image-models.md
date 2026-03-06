@@ -10,19 +10,19 @@ The `amazon.nova-canvas-v1:0` model is available in the `us-east-1`,
 `eu-west-1`, and `ap-northeast-1` regions.
 
 ```ts
-const model = bedrock.image('amazon.nova-canvas-v1:0');
+const model = bedrock.image("amazon.nova-canvas-v1:0");
 ```
 
 You can then generate images with the `generateImage` function:
 
 ```ts
-import { bedrock } from '@ai-sdk/amazon-bedrock';
-import { generateImage } from 'ai';
+import { bedrock } from "@ai-sdk/amazon-bedrock";
+import { generateImage } from "ai";
 
 const { image } = await generateImage({
-  model: bedrock.image('amazon.nova-canvas-v1:0'),
-  prompt: 'A beautiful sunset over a calm ocean',
-  size: '512x512',
+  model: bedrock.image("amazon.nova-canvas-v1:0"),
+  prompt: "A beautiful sunset over a calm ocean",
+  size: "512x512",
   seed: 42,
 });
 ```
@@ -30,20 +30,20 @@ const { image } = await generateImage({
 You can also pass the `providerOptions` object to the `generateImage` function to customize the generation behavior:
 
 ```ts
-import { bedrock } from '@ai-sdk/amazon-bedrock';
-import { generateImage } from 'ai';
+import { bedrock } from "@ai-sdk/amazon-bedrock";
+import { generateImage } from "ai";
 
 const { image } = await generateImage({
-  model: bedrock.image('amazon.nova-canvas-v1:0'),
-  prompt: 'A beautiful sunset over a calm ocean',
-  size: '512x512',
+  model: bedrock.image("amazon.nova-canvas-v1:0"),
+  prompt: "A beautiful sunset over a calm ocean",
+  size: "512x512",
   seed: 42,
   providerOptions: {
     bedrock: {
-      quality: 'premium',
-      negativeText: 'blurry, low quality',
+      quality: "premium",
+      negativeText: "blurry, low quality",
       cfgScale: 7.5,
-      style: 'PHOTOREALISM',
+      style: "PHOTOREALISM",
     },
   },
 });
@@ -51,19 +51,19 @@ const { image } = await generateImage({
 
 The following optional provider options are available for Amazon Nova Canvas:
 
-- **quality** *string*
+- **quality** _string_
 
   The quality level for image generation. Accepts `'standard'` or `'premium'`.
 
-- **negativeText** *string*
+- **negativeText** _string_
 
   Text describing what you don't want in the generated image.
 
-- **cfgScale** *number*
+- **cfgScale** _number_
 
   Controls how closely the generated image adheres to the prompt. Higher values result in images that are more closely aligned to the prompt.
 
-- **style** *string*
+- **style** _string_
 
   Predefined visual style for image generation.
   Accepts one of:
@@ -84,25 +84,25 @@ Amazon Nova Canvas supports several image editing task types. When you provide i
 Create variations of an existing image while maintaining its core characteristics:
 
 ```ts
-const imageBuffer = readFileSync('./input-image.png');
+const imageBuffer = readFileSync("./input-image.png");
 
 const { images } = await generateImage({
-  model: bedrock.image('amazon.nova-canvas-v1:0'),
+  model: bedrock.image("amazon.nova-canvas-v1:0"),
   prompt: {
-    text: 'Modernize the style, photo-realistic, 8k, hdr',
+    text: "Modernize the style, photo-realistic, 8k, hdr",
     images: [imageBuffer],
   },
   providerOptions: {
     bedrock: {
-      taskType: 'IMAGE_VARIATION',
+      taskType: "IMAGE_VARIATION",
       similarityStrength: 0.7, // 0-1, higher = closer to original
-      negativeText: 'bad quality, low resolution',
+      negativeText: "bad quality, low resolution",
     },
   },
 });
 ```
 
-- **similarityStrength** *number*
+- **similarityStrength** _number_
 
   Controls how similar the output is to the input image. Values range from 0 to 1, where higher values produce results closer to the original.
 
@@ -113,17 +113,17 @@ Edit specific parts of an image. You can define the area to modify using either 
 **Using a mask prompt (text-based selection):**
 
 ```ts
-const imageBuffer = readFileSync('./input-image.png');
+const imageBuffer = readFileSync("./input-image.png");
 
 const { images } = await generateImage({
-  model: bedrock.image('amazon.nova-canvas-v1:0'),
+  model: bedrock.image("amazon.nova-canvas-v1:0"),
   prompt: {
-    text: 'a cute corgi dog in the same style',
+    text: "a cute corgi dog in the same style",
     images: [imageBuffer],
   },
   providerOptions: {
     bedrock: {
-      maskPrompt: 'cat', // Describe what to replace
+      maskPrompt: "cat", // Describe what to replace
     },
   },
   seed: 42,
@@ -133,20 +133,20 @@ const { images } = await generateImage({
 **Using a mask image:**
 
 ```ts
-const image = readFileSync('./input-image.png');
-const mask = readFileSync('./mask.png'); // White pixels = area to change
+const image = readFileSync("./input-image.png");
+const mask = readFileSync("./mask.png"); // White pixels = area to change
 
 const { images } = await generateImage({
-  model: bedrock.image('amazon.nova-canvas-v1:0'),
+  model: bedrock.image("amazon.nova-canvas-v1:0"),
   prompt: {
-    text: 'A sunlit indoor lounge area with a pool containing a flamingo',
+    text: "A sunlit indoor lounge area with a pool containing a flamingo",
     images: [image],
     mask: mask,
   },
 });
 ```
 
-- **maskPrompt** *string*
+- **maskPrompt** _string_
 
   A text description of the area to modify. The model will automatically identify and mask the described region.
 
@@ -155,25 +155,25 @@ const { images } = await generateImage({
 Extend an image beyond its original boundaries:
 
 ```ts
-const imageBuffer = readFileSync('./input-image.png');
+const imageBuffer = readFileSync("./input-image.png");
 
 const { images } = await generateImage({
-  model: bedrock.image('amazon.nova-canvas-v1:0'),
+  model: bedrock.image("amazon.nova-canvas-v1:0"),
   prompt: {
-    text: 'A beautiful sunset landscape with mountains',
+    text: "A beautiful sunset landscape with mountains",
     images: [imageBuffer],
   },
   providerOptions: {
     bedrock: {
-      taskType: 'OUTPAINTING',
-      maskPrompt: 'background',
-      outPaintingMode: 'DEFAULT', // or 'PRECISE'
+      taskType: "OUTPAINTING",
+      maskPrompt: "background",
+      outPaintingMode: "DEFAULT", // or 'PRECISE'
     },
   },
 });
 ```
 
-- **outPaintingMode** *string*
+- **outPaintingMode** _string_
 
   Controls how the outpainting is performed. Accepts `'DEFAULT'` or `'PRECISE'`.
 
@@ -182,16 +182,16 @@ const { images } = await generateImage({
 Remove the background from an image:
 
 ```ts
-const imageBuffer = readFileSync('./input-image.png');
+const imageBuffer = readFileSync("./input-image.png");
 
 const { images } = await generateImage({
-  model: bedrock.image('amazon.nova-canvas-v1:0'),
+  model: bedrock.image("amazon.nova-canvas-v1:0"),
   prompt: {
     images: [imageBuffer],
   },
   providerOptions: {
     bedrock: {
-      taskType: 'BACKGROUND_REMOVAL',
+      taskType: "BACKGROUND_REMOVAL",
     },
   },
 });
@@ -204,19 +204,19 @@ needed.
 
 The following additional provider options are available for image editing:
 
-- **taskType** *string*
+- **taskType** _string_
 
   Explicitly set the editing task type. Accepts `'TEXT_IMAGE'` (default for text-only), `'IMAGE_VARIATION'`, `'INPAINTING'`, `'OUTPAINTING'`, or `'BACKGROUND_REMOVAL'`. When images are provided without an explicit taskType, the model defaults to `'IMAGE_VARIATION'` (or `'INPAINTING'` if a mask is provided).
 
-- **maskPrompt** *string*
+- **maskPrompt** _string_
 
   Text description of the area to modify (for inpainting/outpainting). Alternative to providing a mask image.
 
-- **similarityStrength** *number*
+- **similarityStrength** _number_
 
   For `IMAGE_VARIATION`: Controls similarity to the original (0-1).
 
-- **outPaintingMode** *string*
+- **outPaintingMode** _string_
 
   For `OUTPAINTING`: Controls the outpainting behavior (`'DEFAULT'` or `'PRECISE'`).
 
@@ -226,15 +226,15 @@ You can customize the generation behavior with optional options:
 
 ```ts
 await generateImage({
-  model: bedrock.image('amazon.nova-canvas-v1:0'),
-  prompt: 'A beautiful sunset over a calm ocean',
-  size: '512x512',
+  model: bedrock.image("amazon.nova-canvas-v1:0"),
+  prompt: "A beautiful sunset over a calm ocean",
+  size: "512x512",
   seed: 42,
   maxImagesPerCall: 1, // Maximum number of images to generate per API call
 });
 ```
 
-- **maxImagesPerCall** *number*
+- **maxImagesPerCall** _number_
 
   Override the maximum number of images generated per API call. Default can vary
   by model, with 5 as a common default.
@@ -261,12 +261,12 @@ The Amazon Bedrock provider will return the response headers associated with
 network requests made of the Bedrock servers.
 
 ```ts
-import { bedrock } from '@ai-sdk/amazon-bedrock';
-import { generateText } from 'ai';
+import { bedrock } from "@ai-sdk/amazon-bedrock";
+import { generateText } from "ai";
 
 const { text } = await generateText({
-  model: bedrock('meta.llama3-70b-instruct-v1:0'),
-  prompt: 'Write a vegetarian lasagna recipe for 4 people.',
+  model: bedrock("meta.llama3-70b-instruct-v1:0"),
+  prompt: "Write a vegetarian lasagna recipe for 4 people.",
 });
 
 console.log(result.response.headers);
@@ -288,17 +288,17 @@ be useful for correlating Bedrock API calls with requests made by the AI SDK:
 This information is also available with `streamText`:
 
 ```ts
-import { bedrock } from '@ai-sdk/amazon-bedrock';
-import { streamText } from 'ai';
+import { bedrock } from "@ai-sdk/amazon-bedrock";
+import { streamText } from "ai";
 
 const result = streamText({
-  model: bedrock('meta.llama3-70b-instruct-v1:0'),
-  prompt: 'Write a vegetarian lasagna recipe for 4 people.',
+  model: bedrock("meta.llama3-70b-instruct-v1:0"),
+  prompt: "Write a vegetarian lasagna recipe for 4 people.",
 });
 for await (const textPart of result.textStream) {
   process.stdout.write(textPart);
 }
-console.log('Response headers:', (await result.response).headers);
+console.log("Response headers:", (await result.response).headers);
 ```
 
 With sample output as:

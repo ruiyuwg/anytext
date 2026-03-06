@@ -56,30 +56,28 @@ This guide demonstrates how to implement full-text search in PostgreSQL with Dri
 \<CodeTabs items={\["schema.ts", "migration.sql"]}> <CodeTab>
 
 ```ts copy {18,19,20,23}
-import { SQL, sql } from 'drizzle-orm';
-import { index, pgTable, serial, text, customType } from 'drizzle-orm/pg-core';
+import { SQL, sql } from "drizzle-orm";
+import { index, pgTable, serial, text, customType } from "drizzle-orm/pg-core";
 
 export const tsvector = customType<{
-data: string;
+  data: string;
 }>({
-dataType() {
-  return `tsvector`;
-},
+  dataType() {
+    return `tsvector`;
+  },
 });
 
 export const posts = pgTable(
-'posts',
-{
-  id: serial('id').primaryKey(),
-  title: text('title').notNull(),
-  body: text('body').notNull(),
-  bodySearch: tsvector('body_search')
-    .notNull()
-    .generatedAlwaysAs((): SQL => sql`to_tsvector('english', ${posts.body})`),
-},
-(t) => [
-  index('idx_body_search').using('gin', t.bodySearch),
-]
+  "posts",
+  {
+    id: serial("id").primaryKey(),
+    title: text("title").notNull(),
+    body: text("body").notNull(),
+    bodySearch: tsvector("body_search")
+      .notNull()
+      .generatedAlwaysAs((): SQL => sql`to_tsvector('english', ${posts.body})`),
+  },
+  (t) => [index("idx_body_search").using("gin", t.bodySearch)],
 );
 ```
 
@@ -127,7 +125,7 @@ title: "The Beauty of Autumn",
 
 </Section>
 
-This is how you can implement full-text search with generated columns in PostgreSQL with Drizzle ORM.  The `@@` operator is used for direct matches:
+This is how you can implement full-text search with generated columns in PostgreSQL with Drizzle ORM. The `@@` operator is used for direct matches:
 
 <Section>
 ```ts copy {6}
@@ -152,35 +150,33 @@ This is typically used to mark entries coming from different parts of a document
 \<CodeTabs items={\["schema.ts", "migration.sql"]}> <CodeTab>
 
 ```ts copy {18,19,20,21,22,23,24,28}
-import { SQL, sql } from 'drizzle-orm';
-import { index, pgTable, serial, text, customType } from 'drizzle-orm/pg-core';
+import { SQL, sql } from "drizzle-orm";
+import { index, pgTable, serial, text, customType } from "drizzle-orm/pg-core";
 
 export const tsvector = customType<{
-data: string;
+  data: string;
 }>({
-dataType() {
-  return `tsvector`;
-},
+  dataType() {
+    return `tsvector`;
+  },
 });
 
 export const posts = pgTable(
-'posts',
-{
- id: serial('id').primaryKey(),
- title: text('title').notNull(),
- body: text('body').notNull(),
- search: tsvector('search')
-   .notNull()
-   .generatedAlwaysAs(
-      (): SQL =>
-       sql`setweight(to_tsvector('english', ${posts.title}), 'A')
+  "posts",
+  {
+    id: serial("id").primaryKey(),
+    title: text("title").notNull(),
+    body: text("body").notNull(),
+    search: tsvector("search")
+      .notNull()
+      .generatedAlwaysAs(
+        (): SQL =>
+          sql`setweight(to_tsvector('english', ${posts.title}), 'A')
         ||
         setweight(to_tsvector('english', ${posts.body}), 'B')`,
-   ),
-},
-(t) => [
-  index('idx_search').using('gin', t.search),
-],
+      ),
+  },
+  (t) => [index("idx_search").using("gin", t.search)],
 );
 ```
 
@@ -273,12 +269,12 @@ gel migration apply
 Create a `drizzle.config.ts` file in the root of your project and add the following content:
 
 ```typescript copy filename="drizzle.config.ts"
-import { defineConfig } from 'drizzle-kit';
+import { defineConfig } from "drizzle-kit";
 
 export default defineConfig({
-  dialect: 'gel',
+  dialect: "gel",
   // Enable auth schema for drizzle-kit
-  schemaFilter: ['ext::auth', 'public']
+  schemaFilter: ["ext::auth", "public"],
 });
 ```
 
@@ -295,40 +291,64 @@ You'll get more than just the `Identity` table from `ext::auth`. Drizzle will pu
 </Callout>
 
 ```ts
-import { gelTable, uniqueIndex, uuid, text, gelSchema, timestamptz, foreignKey } from "drizzle-orm/gel-core"
-import { sql } from "drizzle-orm"
+import {
+  gelTable,
+  uniqueIndex,
+  uuid,
+  text,
+  gelSchema,
+  timestamptz,
+  foreignKey,
+} from "drizzle-orm/gel-core";
+import { sql } from "drizzle-orm";
 
-export const extauth = gelSchema('ext::auth');
+export const extauth = gelSchema("ext::auth");
 
-export const identityInExtauth = extauth.table('Identity', {
-	id: uuid().default(sql`uuid_generate_v4()`).primaryKey().notNull(),
-	createdAt: timestamptz('created_at').default(sql`(clock_timestamp())`).notNull(),
-	issuer: text().notNull(),
-	modifiedAt: timestamptz('modified_at').notNull(),
-	subject: text().notNull(),
-}, (table) => [
-	uniqueIndex('6bc2dd19-bce4-5810-bb1b-7007afe97a11;schemaconstr').using(
-		'btree',
-		table.id.asc().nullsLast().op('uuid_ops'),
-	),
-]);
+export const identityInExtauth = extauth.table(
+  "Identity",
+  {
+    id: uuid()
+      .default(sql`uuid_generate_v4()`)
+      .primaryKey()
+      .notNull(),
+    createdAt: timestamptz("created_at")
+      .default(sql`(clock_timestamp())`)
+      .notNull(),
+    issuer: text().notNull(),
+    modifiedAt: timestamptz("modified_at").notNull(),
+    subject: text().notNull(),
+  },
+  (table) => [
+    uniqueIndex("6bc2dd19-bce4-5810-bb1b-7007afe97a11;schemaconstr").using(
+      "btree",
+      table.id.asc().nullsLast().op("uuid_ops"),
+    ),
+  ],
+);
 
-export const user = gelTable('User', {
-	id: uuid().default(sql`uuid_generate_v4()`).primaryKey().notNull(),
-	email: text().notNull(),
-	identityId: uuid('identity_id').notNull(),
-	username: text().notNull(),
-}, (table) => [
-	uniqueIndex('d504514c-26a7-11f0-b836-81aa188c0abe;schemaconstr').using(
-		'btree',
-		table.id.asc().nullsLast().op('uuid_ops'),
-	),
-	foreignKey({
-		columns: [table.identityId],
-		foreignColumns: [identityInExtauth.id],
-		name: 'User_fk_identity',
-	}),
-]);
+export const user = gelTable(
+  "User",
+  {
+    id: uuid()
+      .default(sql`uuid_generate_v4()`)
+      .primaryKey()
+      .notNull(),
+    email: text().notNull(),
+    identityId: uuid("identity_id").notNull(),
+    username: text().notNull(),
+  },
+  (table) => [
+    uniqueIndex("d504514c-26a7-11f0-b836-81aa188c0abe;schemaconstr").using(
+      "btree",
+      table.id.asc().nullsLast().op("uuid_ops"),
+    ),
+    foreignKey({
+      columns: [table.identityId],
+      foreignColumns: [identityInExtauth.id],
+      name: "User_fk_identity",
+    }),
+  ],
+);
 ```
 
 🎉 Now you can use the `auth` tables in your queries!
@@ -510,28 +530,34 @@ type Result = {
   </CodeTab>
 
 ```ts copy
-import { integer, pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
+import { integer, pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
 
-export const users = pgTable('users', {
-  id: serial('id').primaryKey(),
-  name: text('name').notNull(),
-  email: text('email').notNull(),
+export const users = pgTable("users", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  email: text("email").notNull(),
 });
 
-export const posts = pgTable('posts', {
-  id: serial('id').primaryKey(),
-  title: text('title').notNull(),
-  content: text('content').notNull(),
-  views: integer('views').notNull().default(0),
-  userId: integer('user_id').notNull().references(() => users.id),
+export const posts = pgTable("posts", {
+  id: serial("id").primaryKey(),
+  title: text("title").notNull(),
+  content: text("content").notNull(),
+  views: integer("views").notNull().default(0),
+  userId: integer("user_id")
+    .notNull()
+    .references(() => users.id),
 });
 
-export const comments = pgTable('comments', {
-  id: serial('id').primaryKey(),
-  postId: integer('post_id').notNull().references(() => posts.id),
-  userId: integer('user_id').notNull().references(() => users.id),
-  content: text('content').notNull(),
-  createdAt: timestamp('created_at').notNull().defaultNow(),
+export const comments = pgTable("comments", {
+  id: serial("id").primaryKey(),
+  postId: integer("post_id")
+    .notNull()
+    .references(() => posts.id),
+  userId: integer("user_id")
+    .notNull()
+    .references(() => users.id),
+  content: text("content").notNull(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 ```
 
@@ -589,7 +615,7 @@ await db.query.posts.findMany({
 // result type
 type Result = {
   title: string;
-}[]
+}[];
 ```
 
 </Section>
@@ -602,7 +628,7 @@ This is how you can include all columns with extra columns using relational quer
 
 await db.query.posts.findMany({
 extras: {
-titleLength: sql<number>`length(${posts.title})`.as('title\_length'),
+titleLength: sql<number>`length(${posts.title})`.as('title_length'),
 },
 });
 
@@ -638,7 +664,7 @@ type Result = {
   id: number;
   title: string;
   views: number;
-}[]
+}[];
 ```
 
 </Section>
@@ -682,35 +708,41 @@ type Result = {
     content: string;
     createdAt: Date;
   }[];
-}[]
+}[];
 ```
 
   </CodeTab>
 
 ```ts copy
-import { relations } from 'drizzle-orm';
-import { integer, pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
+import { relations } from "drizzle-orm";
+import { integer, pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
 
-export const users = pgTable('users', {
-  id: serial('id').primaryKey(),
-  name: text('name').notNull(),
-  email: text('email').notNull(),
+export const users = pgTable("users", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  email: text("email").notNull(),
 });
 
-export const posts = pgTable('posts', {
-  id: serial('id').primaryKey(),
-  title: text('title').notNull(),
-  content: text('content').notNull(),
-  views: integer('views').notNull().default(0),
-  userId: integer('user_id').notNull().references(() => users.id),
+export const posts = pgTable("posts", {
+  id: serial("id").primaryKey(),
+  title: text("title").notNull(),
+  content: text("content").notNull(),
+  views: integer("views").notNull().default(0),
+  userId: integer("user_id")
+    .notNull()
+    .references(() => users.id),
 });
 
-export const comments = pgTable('comments', {
-  id: serial('id').primaryKey(),
-  postId: integer('post_id').notNull().references(() => posts.id),
-  userId: integer('user_id').notNull().references(() => users.id),
-  content: text('content').notNull(),
-  createdAt: timestamp('created_at').notNull().defaultNow(),
+export const comments = pgTable("comments", {
+  id: serial("id").primaryKey(),
+  postId: integer("post_id")
+    .notNull()
+    .references(() => posts.id),
+  userId: integer("user_id")
+    .notNull()
+    .references(() => users.id),
+  content: text("content").notNull(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
 export const usersRelations = relations(users, ({ many }) => ({
@@ -814,7 +846,7 @@ update "table" set "counter" = "counter" + 1 where "id" = 1;
 Drizzle has simple and flexible API, which lets you easily create custom solutions. This is how you do custom increment function:
 
 ```ts copy {4,10,11}
-import { AnyColumn } from 'drizzle-orm';
+import { AnyColumn } from "drizzle-orm";
 
 const increment = (column: AnyColumn, value = 1) => {
   return sql`${column} + ${value}`;
@@ -1227,9 +1259,9 @@ sql`select point(-90.9, 18.7)`,
 ````
 
 ```json
-[ 
-  { 
-    point: '(-90.9,18.7)' 
+[
+  {
+    point: '(-90.9,18.7)'
   }
 ]
 ````
@@ -1239,12 +1271,12 @@ sql`select point(-90.9, 18.7)`,
 This is how you can create table with `point` datatype in Drizzle:
 
 ```ts {6}
-import { pgTable, point, serial, text } from 'drizzle-orm/pg-core';
+import { pgTable, point, serial, text } from "drizzle-orm/pg-core";
 
-export const stores = pgTable('stores', {
-  id: serial('id').primaryKey(),
-  name: text('name').notNull(),
-  location: point('location', { mode: 'xy' }).notNull(),
+export const stores = pgTable("stores", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  location: point("location", { mode: "xy" }).notNull(),
 });
 ```
 
@@ -1253,19 +1285,19 @@ This is how you can insert point data into the table in Drizzle:
 ```ts {4, 10, 16}
 // mode: 'xy'
 await db.insert(stores).values({
-  name: 'Test',
+  name: "Test",
   location: { x: -90.9, y: 18.7 },
 });
 
 // mode: 'tuple'
 await db.insert(stores).values({
-  name: 'Test',
+  name: "Test",
   location: [-90.9, 18.7],
 });
 
 // sql raw
 await db.insert(stores).values({
-  name: 'Test',
+  name: "Test",
   location: sql`point(-90.9, 18.7)`,
 });
 ```
@@ -1283,8 +1315,8 @@ import { getColumns, sql } from 'drizzle-orm';
 import { stores } from './schema';
 
 const point = {
-x: -73.935\_242,
-y: 40.730\_61,
+x: -73.935_242,
+y: 40.730_61,
 };
 
 const sqlDistance = sql`location <-> point(${point.x}, ${point.y})`;
@@ -1370,18 +1402,20 @@ This is how you can create table with `geometry` datatype and spatial index in D
 \<CodeTabs items={\["schema.ts", "migration.sql"]}> <CodeTab>
 
 ```ts copy {8, 11}
-import { geometry, index, pgTable, serial, text } from 'drizzle-orm/pg-core';
+import { geometry, index, pgTable, serial, text } from "drizzle-orm/pg-core";
 
 export const stores = pgTable(
-  'stores',
+  "stores",
   {
-    id: serial('id').primaryKey(),
-    name: text('name').notNull(),
-    location: geometry('location', { type: 'point', mode: 'xy', srid: 4326 }).notNull(),
+    id: serial("id").primaryKey(),
+    name: text("name").notNull(),
+    location: geometry("location", {
+      type: "point",
+      mode: "xy",
+      srid: 4326,
+    }).notNull(),
   },
-  (t) => [
-    index('spatial_index').using('gist', t.location),
-  ]
+  (t) => [index("spatial_index").using("gist", t.location)],
 );
 ```
 
@@ -1403,19 +1437,19 @@ This is how you can insert `geometry` data into the table in Drizzle. `ST_MakePo
 ```ts {4, 10, 16}
 // mode: 'xy'
 await db.insert(stores).values({
-  name: 'Test',
+  name: "Test",
   location: { x: -90.9, y: 18.7 },
 });
 
 // mode: 'tuple'
 await db.insert(stores).values({
-  name: 'Test',
+  name: "Test",
   location: [-90.9, 18.7],
 });
 
 // sql raw
 await db.insert(stores).values({
-  name: 'Test',
+  name: "Test",
   location: sql`ST_SetSRID(ST_MakePoint(-90.9, 18.7), 4326)`,
 });
 ```
@@ -1433,8 +1467,8 @@ import { getColumns, sql } from 'drizzle-orm';
 import { stores } from './schema';
 
 const point = {
-x: -73.935\_242,
-y: 40.730\_61,
+x: -73.935_242,
+y: 40.730_61,
 };
 
 const sqlPoint = sql`ST_SetSRID(ST_MakePoint(${point.x}, ${point.y}), 4326)`;
@@ -1540,27 +1574,30 @@ await db.execute(
 ```
 
 ```json
-[ { match: true } ]
+[{ "match": true }]
 ```
 
 </Section>
 
 As for now, Drizzle doesn't support `tsvector` type natively, so you need to convert your data in the `text` column on the fly. To enhance the performance, you can create a `GIN` index on your column like this:
 
-\<CodeTabs items={\["schema.ts", "migration.sql", "db\_data"]}> <CodeTab>
+\<CodeTabs items={\["schema.ts", "migration.sql", "db_data"]}> <CodeTab>
 
 ```ts copy {10, 11}
-import { index, pgTable, serial, text } from 'drizzle-orm/pg-core';
+import { index, pgTable, serial, text } from "drizzle-orm/pg-core";
 
 export const posts = pgTable(
-  'posts',
+  "posts",
   {
-    id: serial('id').primaryKey(),
-    title: text('title').notNull(),
+    id: serial("id").primaryKey(),
+    title: text("title").notNull(),
   },
   (table) => [
-    index('title_search_index').using('gin', sql`to_tsvector('english', ${table.title})`),
-  ]
+    index("title_search_index").using(
+      "gin",
+      sql`to_tsvector('english', ${table.title})`,
+    ),
+  ],
 );
 ```
 
@@ -1572,8 +1609,8 @@ export const posts = pgTable(
           "title" text NOT NULL
   );
 
-CREATE INDEX IF NOT EXISTS "title\_search\_index" ON "posts"
-USING gin (to\_tsvector('english', "title"));
+CREATE INDEX IF NOT EXISTS "title_search_index" ON "posts"
+USING gin (to_tsvector('english', "title"));
 
 ````
 </CodeTab>
@@ -1660,7 +1697,7 @@ select * from posts
 ````
 
 ```json
-[ { id: 6, title: 'Discovering Hidden Culinary Gems in Italy' } ]
+[{ "id": 6, "title": "Discovering Hidden Culinary Gems in Italy" }]
 ```
 
 </Section>
@@ -1686,7 +1723,7 @@ select * from posts
 ````
 
 ```json
-[ { id: 3, title: 'Top 5 Destinations for a Family Trip' } ]
+[{ "id": 3, "title": "Top 5 Destinations for a Family Trip" }]
 ```
 
 </Section>
@@ -1713,9 +1750,9 @@ select * from posts
 
 ```json
 [
-  { id: 1, title: 'Planning Your First Trip to Europe' },
-  { id: 2, title: "Cultural Insights: Exploring Asia's Heritage" },
-  { id: 3, title: 'Top 5 Destinations for a Family Trip' }
+  { "id": 1, "title": "Planning Your First Trip to Europe" },
+  { "id": 2, "title": "Cultural Insights: Exploring Asia's Heritage" },
+  { "id": 3, "title": "Top 5 Destinations for a Family Trip" }
 ]
 ```
 
@@ -1723,22 +1760,22 @@ select * from posts
 
 To implement full-text search on multiple columns, you can create index on multiple columns and concatenate the columns with `to_tsvector` function:
 
-\<CodeTabs items={\["schema.ts", "migration.sql", "db\_data"]}> <CodeTab>
+\<CodeTabs items={\["schema.ts", "migration.sql", "db_data"]}> <CodeTab>
 
 ```ts copy {12-17}
-import { sql } from 'drizzle-orm';
-import { index, pgTable, serial, text } from 'drizzle-orm/pg-core';
+import { sql } from "drizzle-orm";
+import { index, pgTable, serial, text } from "drizzle-orm/pg-core";
 
 export const posts = pgTable(
-  'posts',
+  "posts",
   {
-    id: serial('id').primaryKey(),
-    title: text('title').notNull(),
-    description: text('description').notNull(),
+    id: serial("id").primaryKey(),
+    title: text("title").notNull(),
+    description: text("description").notNull(),
   },
   (table) => [
-    index('search_index').using(
-      'gin',
+    index("search_index").using(
+      "gin",
       sql`(
           setweight(to_tsvector('english', ${table.title}), 'A') ||
           setweight(to_tsvector('english', ${table.description}), 'B')
@@ -1757,9 +1794,9 @@ export const posts = pgTable(
         "description" text NOT NULL
   );
 
-CREATE INDEX IF NOT EXISTS "search\_index" ON "posts"
-USING gin ((setweight(to\_tsvector('english', "title"), 'A') ||
-setweight(to\_tsvector('english', "description"), 'B')));
+CREATE INDEX IF NOT EXISTS "search_index" ON "posts"
+USING gin ((setweight(to_tsvector('english', "title"), 'A') ||
+setweight(to_tsvector('english', "description"), 'B')));
 
 ````
 </CodeTab>

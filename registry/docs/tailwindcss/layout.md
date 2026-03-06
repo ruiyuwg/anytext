@@ -30,27 +30,27 @@
 
 Key flex classes:
 
-| Class | CSS |
-|-------|-----|
-| `flex` | `display: flex` |
-| `inline-flex` | `display: inline-flex` |
-| `flex-row` | `flex-direction: row` |
-| `flex-col` | `flex-direction: column` |
-| `flex-wrap` | `flex-wrap: wrap` |
-| `items-start` | `align-items: flex-start` |
-| `items-center` | `align-items: center` |
-| `items-end` | `align-items: flex-end` |
-| `items-stretch` | `align-items: stretch` |
-| `justify-start` | `justify-content: flex-start` |
-| `justify-center` | `justify-content: center` |
-| `justify-end` | `justify-content: flex-end` |
+| Class             | CSS                              |
+| ----------------- | -------------------------------- |
+| `flex`            | `display: flex`                  |
+| `inline-flex`     | `display: inline-flex`           |
+| `flex-row`        | `flex-direction: row`            |
+| `flex-col`        | `flex-direction: column`         |
+| `flex-wrap`       | `flex-wrap: wrap`                |
+| `items-start`     | `align-items: flex-start`        |
+| `items-center`    | `align-items: center`            |
+| `items-end`       | `align-items: flex-end`          |
+| `items-stretch`   | `align-items: stretch`           |
+| `justify-start`   | `justify-content: flex-start`    |
+| `justify-center`  | `justify-content: center`        |
+| `justify-end`     | `justify-content: flex-end`      |
 | `justify-between` | `justify-content: space-between` |
-| `gap-4` | `gap: 1rem` |
-| `flex-1` | `flex: 1 1 0%` |
-| `flex-auto` | `flex: 1 1 auto` |
-| `flex-none` | `flex: none` |
-| `grow` | `flex-grow: 1` |
-| `shrink-0` | `flex-shrink: 0` |
+| `gap-4`           | `gap: 1rem`                      |
+| `flex-1`          | `flex: 1 1 0%`                   |
+| `flex-auto`       | `flex: 1 1 auto`                 |
+| `flex-none`       | `flex: none`                     |
+| `grow`            | `flex-grow: 1`                   |
+| `shrink-0`        | `flex-shrink: 0`                 |
 
 ## Grid
 
@@ -138,16 +138,16 @@ Default breakpoints: `sm` 640px, `md` 768px, `lg` 1024px, `xl` 1280px, `2xl` 153
 
 ## Display & Overflow
 
-| Class | CSS |
-|-------|-----|
-| `block` | `display: block` |
-| `inline-block` | `display: inline-block` |
-| `inline` | `display: inline` |
-| `hidden` | `display: none` |
-| `overflow-hidden` | `overflow: hidden` |
-| `overflow-auto` | `overflow: auto` |
-| `overflow-x-auto` | `overflow-x: auto` |
-| `truncate` | `overflow: hidden; text-overflow: ellipsis; white-space: nowrap` |
+| Class             | CSS                                                              |
+| ----------------- | ---------------------------------------------------------------- |
+| `block`           | `display: block`                                                 |
+| `inline-block`    | `display: inline-block`                                          |
+| `inline`          | `display: inline`                                                |
+| `hidden`          | `display: none`                                                  |
+| `overflow-hidden` | `overflow: hidden`                                               |
+| `overflow-auto`   | `overflow: auto`                                                 |
+| `overflow-x-auto` | `overflow-x: auto`                                               |
+| `truncate`        | `overflow: hidden; text-overflow: ellipsis; white-space: nowrap` |
 
 ## Z-Index
 

@@ -80,29 +80,29 @@ export const usersRelations = relations(users, ({ one }) => ({
 }));
 ````
 
-Another example would be a user having a profile information stored in separate table. In this case, because the foreign key is stored in the "profile\_info" table, the user relation have neither fields or references. This tells Typescript that `user.profileInfo` is nullable:
+Another example would be a user having a profile information stored in separate table. In this case, because the foreign key is stored in the "profile_info" table, the user relation have neither fields or references. This tells Typescript that `user.profileInfo` is nullable:
 
 ```typescript copy {9-17}
-import { pgTable, serial, text, integer, jsonb } from 'drizzle-orm/pg-core';
-import { relations } from 'drizzle-orm';
+import { pgTable, serial, text, integer, jsonb } from "drizzle-orm/pg-core";
+import { relations } from "drizzle-orm";
 
-export const users = pgTable('users', {
-	id: serial('id').primaryKey(),
-	name: text('name'),
+export const users = pgTable("users", {
+  id: serial("id").primaryKey(),
+  name: text("name"),
 });
 
 export const usersRelations = relations(users, ({ one }) => ({
-	profileInfo: one(profileInfo),
+  profileInfo: one(profileInfo),
 }));
 
-export const profileInfo = pgTable('profile_info', {
-	id: serial('id').primaryKey(),
-	userId: integer('user_id').references(() => users.id),
-	metadata: jsonb('metadata'),
+export const profileInfo = pgTable("profile_info", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id").references(() => users.id),
+  metadata: jsonb("metadata"),
 });
 
 export const profileInfoRelations = relations(profileInfo, ({ one }) => ({
-	user: one(users, { fields: [profileInfo.userId], references: [users.id] }),
+  user: one(users, { fields: [profileInfo.userId], references: [users.id] }),
 }));
 
 const user = await queryUserWithProfileInfo();
@@ -116,29 +116,29 @@ Drizzle ORM provides you an API to define `one-to-many` relations between tables
 Example of `one-to-many` relation between users and posts they've written:
 
 ```typescript copy {9-11, 19-24}
-import { pgTable, serial, text, integer } from 'drizzle-orm/pg-core';
-import { relations } from 'drizzle-orm';
+import { pgTable, serial, text, integer } from "drizzle-orm/pg-core";
+import { relations } from "drizzle-orm";
 
-export const users = pgTable('users', {
-	id: serial('id').primaryKey(),
-	name: text('name'),
+export const users = pgTable("users", {
+  id: serial("id").primaryKey(),
+  name: text("name"),
 });
 
 export const usersRelations = relations(users, ({ many }) => ({
-	posts: many(posts),
+  posts: many(posts),
 }));
 
-export const posts = pgTable('posts', {
-	id: serial('id').primaryKey(),
-	content: text('content'),
-	authorId: integer('author_id'),
+export const posts = pgTable("posts", {
+  id: serial("id").primaryKey(),
+  content: text("content"),
+  authorId: integer("author_id"),
 });
 
 export const postsRelations = relations(posts, ({ one }) => ({
-	author: one(users, {
-		fields: [posts.authorId],
-		references: [users.id],
-	}),
+  author: one(users, {
+    fields: [posts.authorId],
+    references: [users.id],
+  }),
 }));
 ```
 
@@ -184,21 +184,27 @@ they have to be explicitly defined and store associations between related tables
 Example of `many-to-many` relation between users and groups:
 
 ```typescript copy {9-11, 18-20, 37-46}
-import { relations } from 'drizzle-orm';
-import { integer, pgTable, primaryKey, serial, text } from 'drizzle-orm/pg-core';
+import { relations } from "drizzle-orm";
+import {
+  integer,
+  pgTable,
+  primaryKey,
+  serial,
+  text,
+} from "drizzle-orm/pg-core";
 
-export const users = pgTable('users', {
-  id: serial('id').primaryKey(),
-  name: text('name'),
+export const users = pgTable("users", {
+  id: serial("id").primaryKey(),
+  name: text("name"),
 });
 
 export const usersRelations = relations(users, ({ many }) => ({
   usersToGroups: many(usersToGroups),
 }));
 
-export const groups = pgTable('groups', {
-  id: serial('id').primaryKey(),
-  name: text('name'),
+export const groups = pgTable("groups", {
+  id: serial("id").primaryKey(),
+  name: text("name"),
 });
 
 export const groupsRelations = relations(groups, ({ many }) => ({
@@ -206,18 +212,16 @@ export const groupsRelations = relations(groups, ({ many }) => ({
 }));
 
 export const usersToGroups = pgTable(
-  'users_to_groups',
+  "users_to_groups",
   {
-    userId: integer('user_id')
+    userId: integer("user_id")
       .notNull()
       .references(() => users.id),
-    groupId: integer('group_id')
+    groupId: integer("group_id")
       .notNull()
       .references(() => groups.id),
   },
-  (t) => [
-		primaryKey({ columns: [t.userId, t.groupId] })
-	],
+  (t) => [primaryKey({ columns: [t.userId, t.groupId] })],
 );
 
 export const usersToGroupsRelations = relations(usersToGroups, ({ one }) => ({
@@ -249,22 +253,22 @@ The following two examples will work exactly the same in terms of querying the d
 \<CodeTabs items={\["schema1.ts", "schema2.ts"]}> <CodeTab>
 
 ```ts {15}
-export const users = pgTable('users', {
-	id: serial('id').primaryKey(),
-	name: text('name'),
+export const users = pgTable("users", {
+  id: serial("id").primaryKey(),
+  name: text("name"),
 });
 
 export const usersRelations = relations(users, ({ one, many }) => ({
-	profileInfo: one(users, {
-		fields: [profileInfo.userId],
-		references: [users.id],
-	}),
+  profileInfo: one(users, {
+    fields: [profileInfo.userId],
+    references: [users.id],
+  }),
 }));
 
-export const profileInfo = pgTable('profile_info', {
-	id: serial('id').primaryKey(),
-	userId: integer("user_id"),
-	metadata: jsonb("metadata"),
+export const profileInfo = pgTable("profile_info", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id"),
+  metadata: jsonb("metadata"),
 });
 ```
 
@@ -283,9 +287,9 @@ references: \[users.id],
 }),
 }));
 
-export const profileInfo = pgTable('profile\_info', {
+export const profileInfo = pgTable('profile_info', {
 id: serial('id').primaryKey(),
-userId: integer("user\_id").references(() => users.id),
+userId: integer("user_id").references(() => users.id),
 metadata: jsonb("metadata"),
 });
 
@@ -329,43 +333,55 @@ actions?: {
 In the following example, adding `onDelete: 'cascade'` to the author field on the `posts` schema means that deleting the `user` will also delete all related Post records.
 
 ```typescript {11}
-import { pgTable, serial, text, integer } from 'drizzle-orm/pg-core';
+import { pgTable, serial, text, integer } from "drizzle-orm/pg-core";
 
-export const users = pgTable('users', {
-	id: serial('id').primaryKey(),
-	name: text('name'),
+export const users = pgTable("users", {
+  id: serial("id").primaryKey(),
+  name: text("name"),
 });
 
-export const posts = pgTable('posts', {
-	id: serial('id').primaryKey(),
-	name: text('name'),
-	author: integer('author').references(() => users.id, {onDelete: 'cascade'}).notNull(),
+export const posts = pgTable("posts", {
+  id: serial("id").primaryKey(),
+  name: text("name"),
+  author: integer("author")
+    .references(() => users.id, { onDelete: "cascade" })
+    .notNull(),
 });
 ```
 
 For constraints specified with the `foreignKey` operator, foreign key actions are defined with the syntax:
 
 ```typescript {18-19}
-import { foreignKey, pgTable, serial, text, integer } from 'drizzle-orm/pg-core';
+import {
+  foreignKey,
+  pgTable,
+  serial,
+  text,
+  integer,
+} from "drizzle-orm/pg-core";
 
-export const users = pgTable('users', {
-	id: serial('id').primaryKey(),
-	name: text('name'),
+export const users = pgTable("users", {
+  id: serial("id").primaryKey(),
+  name: text("name"),
 });
 
-export const posts = pgTable('posts', {
-	id: serial('id').primaryKey(),
-	name: text('name'),
-	author: integer('author').notNull(),
-}, (table) => [
-	foreignKey({
-		name: "author_fk",
-		columns: [table.author],
-		foreignColumns: [users.id],
-	})
-		.onDelete('cascade')
-		.onUpdate('cascade')
-]);
+export const posts = pgTable(
+  "posts",
+  {
+    id: serial("id").primaryKey(),
+    name: text("name"),
+    author: integer("author").notNull(),
+  },
+  (table) => [
+    foreignKey({
+      name: "author_fk",
+      columns: [table.author],
+      foreignColumns: [users.id],
+    })
+      .onDelete("cascade")
+      .onUpdate("cascade"),
+  ],
+);
 ```
 
 ### Disambiguating relations
@@ -376,37 +392,37 @@ example, if you define a `posts` table that has the `author` and `reviewer`
 relations.
 
 ```ts {9-12, 21-32}
-import { pgTable, serial, text, integer } from 'drizzle-orm/pg-core';
-import { relations } from 'drizzle-orm';
- 
-export const users = pgTable('users', {
-	id: serial('id').primaryKey(),
-	name: text('name'),
+import { pgTable, serial, text, integer } from "drizzle-orm/pg-core";
+import { relations } from "drizzle-orm";
+
+export const users = pgTable("users", {
+  id: serial("id").primaryKey(),
+  name: text("name"),
 });
- 
+
 export const usersRelations = relations(users, ({ many }) => ({
-	author: many(posts, { relationName: 'author' }),
-	reviewer: many(posts, { relationName: 'reviewer' }),
+  author: many(posts, { relationName: "author" }),
+  reviewer: many(posts, { relationName: "reviewer" }),
 }));
- 
-export const posts = pgTable('posts', {
-	id: serial('id').primaryKey(),
-	content: text('content'),
-	authorId: integer('author_id'),
-	reviewerId: integer('reviewer_id'),
+
+export const posts = pgTable("posts", {
+  id: serial("id").primaryKey(),
+  content: text("content"),
+  authorId: integer("author_id"),
+  reviewerId: integer("reviewer_id"),
 });
- 
+
 export const postsRelations = relations(posts, ({ one }) => ({
-	author: one(users, {
-		fields: [posts.authorId],
-		references: [users.id],
-		relationName: 'author',
-	}),
-	reviewer: one(users, {
-		fields: [posts.reviewerId],
-		references: [users.id],
-		relationName: 'reviewer',
-	}),
+  author: one(users, {
+    fields: [posts.authorId],
+    references: [users.id],
+    relationName: "author",
+  }),
+  reviewer: one(users, {
+    fields: [posts.reviewerId],
+    references: [users.id],
+    relationName: "reviewer",
+  }),
 }));
 ```
 

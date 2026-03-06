@@ -33,7 +33,7 @@ The TypeScript plugin can help with:
 
 The Next.js App Router has **enhanced type safety**. This includes:
 
-1. **No serialization of data between fetching function and page**: You can `fetch` directly in components, layouts, and pages on the server. This data *does not* need to be serialized (converted to a string) to be passed to the client side for consumption in React. Instead, since `app` uses Server Components by default, we can use values like `Date`, `Map`, `Set`, and more without any extra steps. Previously, you needed to manually type the boundary between server and client with Next.js-specific types.
+1. **No serialization of data between fetching function and page**: You can `fetch` directly in components, layouts, and pages on the server. This data _does not_ need to be serialized (converted to a string) to be passed to the client side for consumption in React. Instead, since `app` uses Server Components by default, we can use values like `Date`, `Map`, `Set`, and more without any extra steps. Previously, you needed to manually type the boundary between server and client with Next.js-specific types.
 2. **Streamlined data flow between components**: With the removal of `_app` in favor of root layouts, it is now easier to visualize the data flow between components and pages. Previously, data flowing between individual `pages` and `_app` were difficult to type and could introduce confusing bugs. With [colocated data fetching](/docs/app/getting-started/fetching-data) in the App Router, this is no longer an issue.
 
 [Data Fetching in Next.js](/docs/app/getting-started/fetching-data) now provides as close to end-to-end type safety as possible without being prescriptive about your database or content provider selection.
@@ -42,20 +42,20 @@ We're able to type the response data as you would expect with normal TypeScript.
 
 ```tsx filename="app/page.tsx" switcher
 async function getData() {
-  const res = await fetch('https://api.example.com/...')
+  const res = await fetch("https://api.example.com/...");
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
-  return res.json()
+  return res.json();
 }
 
 export default async function Page() {
-  const name = await getData()
+  const name = await getData();
 
-  return '...'
+  return "...";
 }
 ```
 
-For *complete* end-to-end type safety, this also requires your database or content provider to support TypeScript. This could be through using an [ORM](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping) or type-safe query builder.
+For _complete_ end-to-end type safety, this also requires your database or content provider to support TypeScript. This could be through using an [ORM](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping) or type-safe query builder.
 
 ## Route-Aware Type Helpers
 
@@ -83,13 +83,13 @@ Running `next dev`, `next build`, or [`next typegen`](/docs/app/api-reference/cl
 You can use TypeScript and import types in your Next.js configuration by using `next.config.ts`.
 
 ```ts filename="next.config.ts"
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 Module resolution in `next.config.ts` is currently limited to CommonJS. However, ECMAScript Modules (ESM) syntax is available when [using Node.js native TypeScript resolver](#using-nodejs-native-typescript-resolver-for-nextconfigts) for Node.js v22.10.0 and higher.
@@ -102,9 +102,9 @@ When using the `next.config.js` file, you can add some type checking in your IDE
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   /* config options here */
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 ### Using Node.js Native TypeScript Resolver for `next.config.ts`
@@ -124,17 +124,17 @@ NODE_OPTIONS=--experimental-transform-types next <command>
 Although `next.config.ts` supports native ESM syntax in CommonJS projects, Node.js will still assume `next.config.ts` is a CommonJS file by default, resulting in Node.js reparsing the file as ESM when module syntax is detected. Therefore, we recommend using the `next.config.mts` file for CommonJS projects to explicitly indicate it's an ESM module:
 
 ```ts filename="next.config.mts"
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 // Top-level await and dynamic import are supported
-const flags = await import('./flags.js').then((m) => m.default ?? m)
+const flags = await import("./flags.js").then((m) => m.default ?? m);
 
 const nextConfig: NextConfig = {
   /* config options here */
   typedRoutes: Boolean(flags?.typedRoutes),
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 #### For ESM Projects
@@ -154,13 +154,13 @@ Literal `href` strings are validated, while non-literal `href`s may require a ca
 To opt-into this feature, `typedRoutes` needs to be enabled and the project needs to be using TypeScript.
 
 ```ts filename="next.config.ts"
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   typedRoutes: true,
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 Next.js will generate a link definition in `.next/types` that contains information about all existing routes in your application, which TypeScript can then use to provide feedback in your editor about invalid links.
@@ -169,12 +169,7 @@ Next.js will generate a link definition in `.next/types` that contains informati
 
 ```json filename="tsconfig.json" highlight={4}
 {
-  "include": [
-    "next-env.d.ts",
-    ".next/types/**/*.ts",
-    "**/*.ts",
-    "**/*.tsx"
-  ],
+  "include": ["next-env.d.ts", ".next/types/**/*.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }
 ```
@@ -182,102 +177,102 @@ Next.js will generate a link definition in `.next/types` that contains informati
 Currently, support includes any string literal, including dynamic segments. For non-literal strings, you need to manually cast with `as Route`. The example below shows both `next/link` and `next/navigation` usage:
 
 ```tsx filename="app/example-client.tsx"
-'use client'
+"use client";
 
-import type { Route } from 'next'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import type { Route } from "next";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Example() {
-  const router = useRouter()
-  const slug = 'nextjs'
+  const router = useRouter();
+  const slug = "nextjs";
 
   return (
     <>
       {/* Link: literal and dynamic */}
       <Link href="/about" />
       <Link href={`/blog/${slug}`} />
-      <Link href={('/blog/' + slug) as Route} />
+      <Link href={("/blog/" + slug) as Route} />
       {/* TypeScript error if href is not a valid route */}
       <Link href="/aboot" />
 
       {/* Router: literal and dynamic strings are validated */}
-      <button onClick={() => router.push('/about')}>Push About</button>
+      <button onClick={() => router.push("/about")}>Push About</button>
       <button onClick={() => router.replace(`/blog/${slug}`)}>
         Replace Blog
       </button>
-      <button onClick={() => router.prefetch('/contact')}>
+      <button onClick={() => router.prefetch("/contact")}>
         Prefetch Contact
       </button>
 
       {/* For non-literal strings, cast to Route */}
-      <button onClick={() => router.push(('/blog/' + slug) as Route)}>
+      <button onClick={() => router.push(("/blog/" + slug) as Route)}>
         Push Non-literal Blog
       </button>
     </>
-  )
+  );
 }
 ```
 
 The same applies for redirecting routes defined by proxy:
 
 ```ts filename="proxy.ts"
-import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from "next/server";
 
 export function proxy(request: NextRequest) {
-  if (request.nextUrl.pathname === '/proxy-redirect') {
-    return NextResponse.redirect(new URL('/', request.url))
+  if (request.nextUrl.pathname === "/proxy-redirect") {
+    return NextResponse.redirect(new URL("/", request.url));
   }
 
-  return NextResponse.next()
+  return NextResponse.next();
 }
 ```
 
 ```tsx filename="app/some/page.tsx"
-import type { Route } from 'next'
+import type { Route } from "next";
 
 export default function Page() {
-  return <Link href={'/proxy-redirect' as Route}>Link Text</Link>
+  return <Link href={"/proxy-redirect" as Route}>Link Text</Link>;
 }
 ```
 
 To accept `href` in a custom component wrapping `next/link`, use a generic:
 
 ```tsx
-import type { Route } from 'next'
-import Link from 'next/link'
+import type { Route } from "next";
+import Link from "next/link";
 
 function Card<T extends string>({ href }: { href: Route<T> | URL }) {
   return (
     <Link href={href}>
       <div>My Card</div>
     </Link>
-  )
+  );
 }
 ```
 
 You can also type a simple data structure and iterate to render links:
 
 ```ts filename="components/nav-items.ts"
-import type { Route } from 'next'
+import type { Route } from "next";
 
 type NavItem<T extends string = string> = {
-  href: T
-  label: string
-}
+  href: T;
+  label: string;
+};
 
 export const navItems: NavItem<Route>[] = [
-  { href: '/', label: 'Home' },
-  { href: '/about', label: 'About' },
-  { href: '/blog', label: 'Blog' },
-]
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+  { href: "/blog", label: "Blog" },
+];
 ```
 
 Then, map over the items to render `Link`s:
 
 ```tsx filename="components/nav.tsx"
-import Link from 'next/link'
-import { navItems } from './nav-items'
+import Link from "next/link";
+import { navItems } from "./nav-items";
 
 export function Nav() {
   return (
@@ -288,7 +283,7 @@ export function Nav() {
         </Link>
       ))}
     </nav>
-  )
+  );
 }
 ```
 
@@ -303,15 +298,15 @@ During development, Next.js generates a `.d.ts` file in `.next/types` that conta
 To opt-into this feature, `experimental.typedEnv` needs to be enabled and the project needs to be using TypeScript.
 
 ```ts filename="next.config.ts"
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   experimental: {
     typedEnv: true,
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 > **Good to know**: Types are generated based on the environment variables loaded at development runtime, which excludes variables from `.env.production*` files by default. To include production-specific variables, run `next dev` with `NODE_ENV=production`.
@@ -331,31 +326,31 @@ Since `v10.2.1` Next.js supports [incremental type checking](https://www.typescr
 In some cases, you might want to use a different TypeScript configuration for builds or tooling. To do that, set `typescript.tsconfigPath` in `next.config.ts` to point Next.js to another `tsconfig` file.
 
 ```ts filename="next.config.ts"
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   typescript: {
-    tsconfigPath: 'tsconfig.build.json',
+    tsconfigPath: "tsconfig.build.json",
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 For example, switch to a different config for production builds:
 
 ```ts filename="next.config.ts"
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
-const isProd = process.env.NODE_ENV === 'production'
+const isProd = process.env.NODE_ENV === "production";
 
 const nextConfig: NextConfig = {
   typescript: {
-    tsconfigPath: isProd ? 'tsconfig.build.json' : 'tsconfig.json',
+    tsconfigPath: isProd ? "tsconfig.build.json" : "tsconfig.json",
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 Why you might use a separate `tsconfig` for builds
@@ -392,7 +387,7 @@ If disabled, be sure you are running type checks as part of your build or deploy
 Open `next.config.ts` and enable the `ignoreBuildErrors` option in the [`typescript`](/docs/app/api-reference/config/next-config-js/typescript) config:
 
 ```ts filename="next.config.ts"
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   typescript: {
@@ -402,9 +397,9 @@ const nextConfig: NextConfig = {
     // !! WARN !!
     ignoreBuildErrors: true,
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 > **Good to know**: You can run `tsc --noEmit` to check for TypeScript errors yourself before building. This is useful for CI/CD pipelines where you'd like to check for TypeScript errors before deploying.

@@ -5,16 +5,16 @@ The first argument is the model id, e.g. `gpt-4`.
 The OpenAI chat models support tool calls and some have multi-modal capabilities.
 
 ```ts
-const model = openai.chat('gpt-5');
+const model = openai.chat("gpt-5");
 ```
 
 OpenAI chat models support also some model specific provider options that are not part of the [standard call settings](/docs/ai-sdk-core/settings).
 You can pass them in the `providerOptions` argument:
 
 ```ts
-import { openai, type OpenAILanguageModelChatOptions } from '@ai-sdk/openai';
+import { openai, type OpenAILanguageModelChatOptions } from "@ai-sdk/openai";
 
-const model = openai.chat('gpt-5');
+const model = openai.chat("gpt-5");
 
 await generateText({
   model,
@@ -22,9 +22,9 @@ await generateText({
     openai: {
       logitBias: {
         // optional likelihood for specific tokens
-        '50256': -100,
+        "50256": -100,
       },
-      user: 'test-user', // optional unique user identifier
+      user: "test-user", // optional unique user identifier
     } satisfies OpenAILanguageModelChatOptions,
   },
 });
@@ -32,7 +32,7 @@ await generateText({
 
 The following optional provider options are available for OpenAI chat models:
 
-- **logitBias** *Record\<number, number>*
+- **logitBias** _Record\<number, number>_
 
   Modifies the likelihood of specified tokens appearing in the completion.
 
@@ -46,7 +46,7 @@ The following optional provider options are available for OpenAI chat models:
 
   As an example, you can pass `{"50256": -100}` to prevent the token from being generated.
 
-- **logprobs** *boolean | number*
+- **logprobs** _boolean | number_
 
   Return the log probabilities of the tokens. Including logprobs will increase
   the response size and can slow down response times. However, it can
@@ -58,38 +58,38 @@ The following optional provider options are available for OpenAI chat models:
   Setting to a number will return the log probabilities of the top n
   tokens that were generated.
 
-- **parallelToolCalls** *boolean*
+- **parallelToolCalls** _boolean_
 
   Whether to enable parallel function calling during tool use. Defaults to `true`.
 
-- **user** *string*
+- **user** _string_
 
   A unique identifier representing your end-user, which can help OpenAI to
   monitor and detect abuse. [Learn more](https://platform.openai.com/docs/guides/safety-best-practices/end-user-ids).
 
-- **reasoningEffort** *'minimal' | 'low' | 'medium' | 'high' | 'xhigh'*
+- **reasoningEffort** _'minimal' | 'low' | 'medium' | 'high' | 'xhigh'_
 
   Reasoning effort for reasoning models. Defaults to `medium`. If you use
   `providerOptions` to set the `reasoningEffort` option, this
   model setting will be ignored.
 
-- **maxCompletionTokens** *number*
+- **maxCompletionTokens** _number_
 
   Maximum number of completion tokens to generate. Useful for reasoning models.
 
-- **store** *boolean*
+- **store** _boolean_
 
   Whether to enable persistence in Responses API.
 
-- **metadata** *Record\<string, string>*
+- **metadata** _Record\<string, string>_
 
   Metadata to associate with the request.
 
-- **prediction** *Record\<string, any>*
+- **prediction** _Record\<string, any>_
 
   Parameters for prediction mode.
 
-- **serviceTier** *'auto' | 'flex' | 'priority' | 'default'*
+- **serviceTier** _'auto' | 'flex' | 'priority' | 'default'_
 
   Service tier for the request. Set to 'flex' for 50% cheaper processing
   at the cost of increased latency (available for o3, o4-mini, and gpt-5 models).
@@ -97,32 +97,32 @@ The following optional provider options are available for OpenAI chat models:
 
   Defaults to 'auto'.
 
-- **strictJsonSchema** *boolean*
+- **strictJsonSchema** _boolean_
 
   Whether to use strict JSON schema validation.
   Defaults to `true`.
 
-- **textVerbosity** *'low' | 'medium' | 'high'*
+- **textVerbosity** _'low' | 'medium' | 'high'_
 
   Controls the verbosity of the model's responses. Lower values will result in more concise responses, while higher values will result in more verbose responses.
 
-- **promptCacheKey** *string*
+- **promptCacheKey** _string_
 
   A cache key for manual prompt caching control. Used by OpenAI to cache responses for similar requests to optimize your cache hit rates.
 
-- **promptCacheRetention** *'in\_memory' | '24h'*
+- **promptCacheRetention** _'in_memory' | '24h'_
 
   The retention policy for the prompt cache. Set to `'24h'` to enable extended prompt caching, which keeps cached prefixes active for up to 24 hours. Defaults to `'in_memory'` for standard prompt caching. Note: `'24h'` is currently only available for the 5.1 series of models.
 
-- **safetyIdentifier** *string*
+- **safetyIdentifier** _string_
 
   A stable identifier used to help detect users of your application that may be violating OpenAI's usage policies. The IDs should be a string that uniquely identifies each user.
 
-- **systemMessageMode** *'system' | 'developer' | 'remove'*
+- **systemMessageMode** _'system' | 'developer' | 'remove'_
 
   Override the system message mode for this model. If not specified, the mode is automatically determined based on the model. `system` uses the 'system' role for system messages (default for most models); `developer` uses the 'developer' role (used by reasoning models); `remove` removes system messages entirely.
 
-- **forceReasoning** *boolean*
+- **forceReasoning** _boolean_
 
   Force treating this model as a reasoning model. This is useful for "stealth" reasoning models (e.g. via a custom baseURL) where the model ID is not recognized by the SDK's allowlist. When enabled, the SDK applies reasoning-model parameter compatibility rules and defaults `systemMessageMode` to `developer` unless overridden.
 
@@ -137,27 +137,26 @@ Reasoning models currently only generate text, have several limitations, and are
 They support additional settings and response metadata:
 
 - You can use `providerOptions` to set
-
   - the `reasoningEffort` option (or alternatively the `reasoningEffort` model setting), which determines the amount of reasoning the model performs.
 
 - You can use response `providerMetadata` to access the number of reasoning tokens that the model generated.
 
 ```ts highlight="4,7-11,17"
-import { openai, type OpenAILanguageModelChatOptions } from '@ai-sdk/openai';
-import { generateText } from 'ai';
+import { openai, type OpenAILanguageModelChatOptions } from "@ai-sdk/openai";
+import { generateText } from "ai";
 
 const { text, usage, providerMetadata } = await generateText({
-  model: openai.chat('gpt-5'),
-  prompt: 'Invent a new holiday and describe its traditions.',
+  model: openai.chat("gpt-5"),
+  prompt: "Invent a new holiday and describe its traditions.",
   providerOptions: {
     openai: {
-      reasoningEffort: 'low',
+      reasoningEffort: "low",
     } satisfies OpenAILanguageModelChatOptions,
   },
 });
 
 console.log(text);
-console.log('Usage:', {
+console.log("Usage:", {
   ...usage,
   reasoningTokens: providerMetadata?.openai?.reasoningTokens,
 });
@@ -167,24 +166,23 @@ System messages are automatically converted to OpenAI developer messages for
 reasoning models when supported.
 
 - You can control how system messages are handled by providerOptions `systemMessageMode`:
-
   - `developer`: treat the prompt as a developer message (default for reasoning models).
   - `system`: keep the system message as a system-level instruction.
   - `remove`: remove the system message from the messages.
 
 ```ts highlight="12"
-import { openai, type OpenAILanguageModelChatOptions } from '@ai-sdk/openai';
-import { generateText } from 'ai';
+import { openai, type OpenAILanguageModelChatOptions } from "@ai-sdk/openai";
+import { generateText } from "ai";
 
 const result = await generateText({
-  model: openai.chat('gpt-5'),
+  model: openai.chat("gpt-5"),
   messages: [
-    { role: 'system', content: 'You are a helpful assistant.' },
-    { role: 'user', content: 'Tell me a joke.' },
+    { role: "system", content: "You are a helpful assistant." },
+    { role: "user", content: "Tell me a joke." },
   ],
   providerOptions: {
     openai: {
-      systemMessageMode: 'system',
+      systemMessageMode: "system",
     } satisfies OpenAILanguageModelChatOptions,
   },
 });
@@ -203,12 +201,12 @@ Strict structured outputs are enabled by default.
 You can disable them by setting the `strictJsonSchema` option to `false`.
 
 ```ts highlight="7"
-import { openai, OpenAILanguageModelChatOptions } from '@ai-sdk/openai';
-import { generateText, Output } from 'ai';
-import { z } from 'zod';
+import { openai, OpenAILanguageModelChatOptions } from "@ai-sdk/openai";
+import { generateText, Output } from "ai";
+import { z } from "zod";
 
 const result = await generateText({
-  model: openai.chat('gpt-4o-2024-08-06'),
+  model: openai.chat("gpt-4o-2024-08-06"),
   providerOptions: {
     openai: {
       strictJsonSchema: false,
@@ -225,10 +223,10 @@ const result = await generateText({
       ),
       steps: z.array(z.string()),
     }),
-    schemaName: 'recipe',
-    schemaDescription: 'A recipe for lasagna.',
+    schemaName: "recipe",
+    schemaDescription: "A recipe for lasagna.",
   }),
-  prompt: 'Generate a lasagna recipe.',
+  prompt: "Generate a lasagna recipe.",
 });
 
 console.log(JSON.stringify(result.output, null, 2));
@@ -248,12 +246,12 @@ OpenAI provides logprobs information for completion/chat models.
 You can access it in the `providerMetadata` object.
 
 ```ts highlight="11"
-import { openai, type OpenAILanguageModelChatOptions } from '@ai-sdk/openai';
-import { generateText } from 'ai';
+import { openai, type OpenAILanguageModelChatOptions } from "@ai-sdk/openai";
+import { generateText } from "ai";
 
 const result = await generateText({
-  model: openai.chat('gpt-5'),
-  prompt: 'Write a vegetarian lasagna recipe for 4 people.',
+  model: openai.chat("gpt-5"),
+  prompt: "Write a vegetarian lasagna recipe for 4 people.",
   providerOptions: {
     openai: {
       // this can also be a number,
@@ -275,18 +273,18 @@ You can pass Image files as part of the message content using the 'image' type:
 
 ```ts
 const result = await generateText({
-  model: openai.chat('gpt-5'),
+  model: openai.chat("gpt-5"),
   messages: [
     {
-      role: 'user',
+      role: "user",
       content: [
         {
-          type: 'text',
-          text: 'Please describe the image.',
+          type: "text",
+          text: "Please describe the image.",
         },
         {
-          type: 'image',
-          image: readFileSync('./data/image.png'),
+          type: "image",
+          image: readFileSync("./data/image.png"),
         },
       ],
     },
@@ -313,20 +311,20 @@ You can pass PDF files as part of the message content using the `file` type:
 
 ```ts
 const result = await generateText({
-  model: openai.chat('gpt-5'),
+  model: openai.chat("gpt-5"),
   messages: [
     {
-      role: 'user',
+      role: "user",
       content: [
         {
-          type: 'text',
-          text: 'What is an embedding model?',
+          type: "text",
+          text: "What is an embedding model?",
         },
         {
-          type: 'file',
-          data: readFileSync('./data/ai.pdf'),
-          mediaType: 'application/pdf',
-          filename: 'ai.pdf', // optional
+          type: "file",
+          data: readFileSync("./data/ai.pdf"),
+          mediaType: "application/pdf",
+          filename: "ai.pdf", // optional
         },
       ],
     },
@@ -368,21 +366,21 @@ You can enable predicted outputs by adding the `prediction` option to the `provi
 
 ```ts highlight="15-18"
 const result = streamText({
-  model: openai.chat('gpt-5'),
+  model: openai.chat("gpt-5"),
   messages: [
     {
-      role: 'user',
-      content: 'Replace the Username property with an Email property.',
+      role: "user",
+      content: "Replace the Username property with an Email property.",
     },
     {
-      role: 'user',
+      role: "user",
       content: existingCode,
     },
   ],
   providerOptions: {
     openai: {
       prediction: {
-        type: 'content',
+        type: "content",
         content: existingCode,
       },
     } satisfies OpenAILanguageModelChatOptions,
@@ -410,20 +408,20 @@ You can use the `openai` provider option to set the [image input detail](https:/
 
 ```ts highlight="13-16"
 const result = await generateText({
-  model: openai.chat('gpt-5'),
+  model: openai.chat("gpt-5"),
   messages: [
     {
-      role: 'user',
+      role: "user",
       content: [
-        { type: 'text', text: 'Describe the image in detail.' },
+        { type: "text", text: "Describe the image in detail." },
         {
-          type: 'image',
+          type: "image",
           image:
-            'https://github.com/vercel/ai/blob/main/examples/ai-functions/data/comic-cat.png?raw=true',
+            "https://github.com/vercel/ai/blob/main/examples/ai-functions/data/comic-cat.png?raw=true",
 
           // OpenAI specific options - image detail:
           providerOptions: {
-            openai: { imageDetail: 'low' },
+            openai: { imageDetail: "low" },
           },
         },
       ],
@@ -445,19 +443,19 @@ If you want to store a generation for use in the distillation process, you can a
 This will save the generation to the OpenAI platform for later use in distillation.
 
 ```typescript highlight="9-16"
-import { openai, type OpenAILanguageModelChatOptions } from '@ai-sdk/openai';
-import { generateText } from 'ai';
-import 'dotenv/config';
+import { openai, type OpenAILanguageModelChatOptions } from "@ai-sdk/openai";
+import { generateText } from "ai";
+import "dotenv/config";
 
 async function main() {
   const { text, usage } = await generateText({
-    model: openai.chat('gpt-4o-mini'),
-    prompt: 'Who worked on the original macintosh?',
+    model: openai.chat("gpt-4o-mini"),
+    prompt: "Who worked on the original macintosh?",
     providerOptions: {
       openai: {
         store: true,
         metadata: {
-          custom: 'value',
+          custom: "value",
         },
       } satisfies OpenAILanguageModelChatOptions,
     },
@@ -465,7 +463,7 @@ async function main() {
 
   console.log(text);
   console.log();
-  console.log('Usage:', usage);
+  console.log("Usage:", usage);
 }
 
 main().catch(console.error);
@@ -484,11 +482,11 @@ including `gpt-4o` and `gpt-4o-mini`.
   to an hour.
 
 ```ts highlight="11"
-import { openai } from '@ai-sdk/openai';
-import { generateText } from 'ai';
+import { openai } from "@ai-sdk/openai";
+import { generateText } from "ai";
 
 const { text, usage, providerMetadata } = await generateText({
-  model: openai.chat('gpt-4o-mini'),
+  model: openai.chat("gpt-4o-mini"),
   prompt: `A 1024-token or longer prompt...`,
 });
 
@@ -501,15 +499,15 @@ console.log(`usage:`, {
 To improve cache hit rates, you can manually control caching using the `promptCacheKey` option:
 
 ```ts highlight="7-11"
-import { openai, type OpenAILanguageModelChatOptions } from '@ai-sdk/openai';
-import { generateText } from 'ai';
+import { openai, type OpenAILanguageModelChatOptions } from "@ai-sdk/openai";
+import { generateText } from "ai";
 
 const { text, usage, providerMetadata } = await generateText({
-  model: openai.chat('gpt-5'),
+  model: openai.chat("gpt-5"),
   prompt: `A 1024-token or longer prompt...`,
   providerOptions: {
     openai: {
-      promptCacheKey: 'my-custom-cache-key-123',
+      promptCacheKey: "my-custom-cache-key-123",
     } satisfies OpenAILanguageModelChatOptions,
   },
 });
@@ -523,16 +521,16 @@ console.log(`usage:`, {
 For GPT-5.1 models, you can enable extended prompt caching that keeps cached prefixes active for up to 24 hours:
 
 ```ts highlight="7-12"
-import { openai, type OpenAILanguageModelChatOptions } from '@ai-sdk/openai';
-import { generateText } from 'ai';
+import { openai, type OpenAILanguageModelChatOptions } from "@ai-sdk/openai";
+import { generateText } from "ai";
 
 const { text, usage, providerMetadata } = await generateText({
-  model: openai.chat('gpt-5.1'),
+  model: openai.chat("gpt-5.1"),
   prompt: `A 1024-token or longer prompt...`,
   providerOptions: {
     openai: {
-      promptCacheKey: 'my-custom-cache-key-123',
-      promptCacheRetention: '24h', // Extended caching for GPT-5.1
+      promptCacheKey: "my-custom-cache-key-123",
+      promptCacheRetention: "24h", // Extended caching for GPT-5.1
     } satisfies OpenAILanguageModelChatOptions,
   },
 });
@@ -551,20 +549,20 @@ The `gpt-4o-audio-preview` model is currently in preview and requires at least
 some audio inputs. It will not work with non-audio data.
 
 ```ts highlight="12-14"
-import { openai } from '@ai-sdk/openai';
-import { generateText } from 'ai';
+import { openai } from "@ai-sdk/openai";
+import { generateText } from "ai";
 
 const result = await generateText({
-  model: openai.chat('gpt-4o-audio-preview'),
+  model: openai.chat("gpt-4o-audio-preview"),
   messages: [
     {
-      role: 'user',
+      role: "user",
       content: [
-        { type: 'text', text: 'What is the audio saying?' },
+        { type: "text", text: "What is the audio saying?" },
         {
-          type: 'file',
-          mediaType: 'audio/mpeg',
-          data: readFileSync('./data/galileo.mp3'),
+          type: "file",
+          mediaType: "audio/mpeg",
+          data: readFileSync("./data/galileo.mp3"),
         },
       ],
     },

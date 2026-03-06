@@ -29,11 +29,11 @@ Here are the key strategies for effective prompting:
 ```ts
 // Example with reasoning effort control
 const result = await generateText({
-  model: openai('gpt-5'),
-  prompt: 'Analyze this complex dataset and provide insights.',
+  model: openai("gpt-5"),
+  prompt: "Analyze this complex dataset and provide insights.",
   providerOptions: {
     openai: {
-      reasoningEffort: 'high', // Increases autonomous exploration
+      reasoningEffort: "high", // Increases autonomous exploration
     },
   },
 });
@@ -83,12 +83,12 @@ The AI SDK abstracts away the differences between model providers, eliminates bo
 At the center of the AI SDK is [AI SDK Core](/docs/ai-sdk-core/overview), which provides a unified API to call any LLM. The code snippet below is all you need to call OpenAI GPT-5 with the AI SDK:
 
 ```ts
-import { generateText } from 'ai';
-import { openai } from '@ai-sdk/openai';
+import { generateText } from "ai";
+import { openai } from "@ai-sdk/openai";
 
 const { text } = await generateText({
-  model: openai('gpt-5'),
-  prompt: 'Explain the concept of quantum entanglement.',
+  model: openai("gpt-5"),
+  prompt: "Explain the concept of quantum entanglement.",
 });
 ```
 
@@ -97,12 +97,12 @@ const { text } = await generateText({
 While text generation can be useful, you might want to generate structured JSON data. For example, you might want to extract information from text, classify data, or generate synthetic data. AI SDK Core provides [`generateText`](/docs/reference/ai-sdk-core/generate-text) and [`streamText`](/docs/reference/ai-sdk-core/stream-text) with `Output` to generate structured data, allowing you to constrain model outputs to a specific schema.
 
 ```ts
-import { generateText, Output } from 'ai';
-import { openai } from '@ai-sdk/openai';
-import { z } from 'zod';
+import { generateText, Output } from "ai";
+import { openai } from "@ai-sdk/openai";
+import { z } from "zod";
 
 const { output } = await generateText({
-  model: openai('gpt-5'),
+  model: openai("gpt-5"),
   output: Output.object({
     schema: z.object({
       recipe: z.object({
@@ -114,7 +114,7 @@ const { output } = await generateText({
       }),
     }),
   }),
-  prompt: 'Generate a lasagna recipe.',
+  prompt: "Generate a lasagna recipe.",
 });
 ```
 
@@ -125,27 +125,27 @@ This code snippet will generate a type-safe recipe that conforms to the specifie
 One of GPT-5's new features is verbosity control, allowing you to adjust response length without modifying your prompt:
 
 ```ts
-import { generateText } from 'ai';
-import { openai } from '@ai-sdk/openai';
+import { generateText } from "ai";
+import { openai } from "@ai-sdk/openai";
 
 // Concise response
 const { text: conciseText } = await generateText({
-  model: openai('gpt-5'),
-  prompt: 'Explain quantum computing.',
+  model: openai("gpt-5"),
+  prompt: "Explain quantum computing.",
   providerOptions: {
     openai: {
-      textVerbosity: 'low', // Produces terse, minimal responses
+      textVerbosity: "low", // Produces terse, minimal responses
     },
   },
 });
 
 // Detailed response
 const { text: detailedText } = await generateText({
-  model: openai('gpt-5'),
-  prompt: 'Explain quantum computing.',
+  model: openai("gpt-5"),
+  prompt: "Explain quantum computing.",
   providerOptions: {
     openai: {
-      textVerbosity: 'high', // Produces comprehensive, detailed responses
+      textVerbosity: "high", // Produces comprehensive, detailed responses
     },
   },
 });
@@ -156,15 +156,15 @@ const { text: detailedText } = await generateText({
 GPT-5 can access real-time information through the integrated web search tool:
 
 ```ts
-import { generateText } from 'ai';
-import { openai } from '@ai-sdk/openai';
+import { generateText } from "ai";
+import { openai } from "@ai-sdk/openai";
 
 const result = await generateText({
-  model: openai('gpt-5'),
-  prompt: 'What are the latest developments in AI this week?',
+  model: openai("gpt-5"),
+  prompt: "What are the latest developments in AI this week?",
   tools: {
     web_search: openai.tools.webSearch({
-      searchContextSize: 'high',
+      searchContextSize: "high",
     }),
   },
 });
@@ -178,25 +178,25 @@ const sources = result.sources;
 For transparency into GPT-5's thought process, enable reasoning summaries:
 
 ```ts
-import { openai } from '@ai-sdk/openai';
-import { streamText } from 'ai';
+import { openai } from "@ai-sdk/openai";
+import { streamText } from "ai";
 
 const result = streamText({
-  model: openai('gpt-5'),
+  model: openai("gpt-5"),
   prompt:
-    'Solve this logic puzzle: If all roses are flowers and some flowers fade quickly, do all roses fade quickly?',
+    "Solve this logic puzzle: If all roses are flowers and some flowers fade quickly, do all roses fade quickly?",
   providerOptions: {
     openai: {
-      reasoningSummary: 'detailed', // 'auto' for condensed or 'detailed' for comprehensive
+      reasoningSummary: "detailed", // 'auto' for condensed or 'detailed' for comprehensive
     },
   },
 });
 
 // Stream reasoning and text separately
 for await (const part of result.fullStream) {
-  if (part.type === 'reasoning') {
+  if (part.type === "reasoning") {
     console.log(part.textDelta);
-  } else if (part.type === 'text-delta') {
+  } else if (part.type === "text-delta") {
     process.stdout.write(part.textDelta);
   }
 }
@@ -207,18 +207,18 @@ for await (const part of result.fullStream) {
 GPT-5 supports tool calling out of the box, allowing it to interact with external systems and perform discrete tasks. Here's an example of using tool calling with the AI SDK:
 
 ```ts
-import { generateText, tool } from 'ai';
-import { openai } from '@ai-sdk/openai';
-import { z } from 'zod';
+import { generateText, tool } from "ai";
+import { openai } from "@ai-sdk/openai";
+import { z } from "zod";
 
 const { toolResults } = await generateText({
-  model: openai('gpt-5'),
-  prompt: 'What is the weather like today in San Francisco?',
+  model: openai("gpt-5"),
+  prompt: "What is the weather like today in San Francisco?",
   tools: {
     getWeather: tool({
-      description: 'Get the weather in a location',
+      description: "Get the weather in a location",
       inputSchema: z.object({
-        location: z.string().describe('The location to get the weather for'),
+        location: z.string().describe("The location to get the weather for"),
       }),
       execute: async ({ location }) => ({
         location,
@@ -244,8 +244,8 @@ In a new Next.js application, first install the AI SDK and the OpenAI provider:
 Then, create a route handler for the chat endpoint:
 
 ```tsx filename="app/api/chat/route.ts"
-import { openai } from '@ai-sdk/openai';
-import { convertToModelMessages, streamText, UIMessage } from 'ai';
+import { openai } from "@ai-sdk/openai";
+import { convertToModelMessages, streamText, UIMessage } from "ai";
 
 // Allow responses up to 30 seconds
 export const maxDuration = 30;
@@ -254,7 +254,7 @@ export async function POST(req: Request) {
   const { messages }: { messages: UIMessage[] } = await req.json();
 
   const result = streamText({
-    model: openai('gpt-5'),
+    model: openai("gpt-5"),
     messages: await convertToModelMessages(messages),
   });
 
@@ -265,22 +265,22 @@ export async function POST(req: Request) {
 Finally, update the root page (`app/page.tsx`) to use the `useChat` hook:
 
 ```tsx filename="app/page.tsx"
-'use client';
+"use client";
 
-import { useChat } from '@ai-sdk/react';
-import { useState } from 'react';
+import { useChat } from "@ai-sdk/react";
+import { useState } from "react";
 
 export default function Page() {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
   const { messages, sendMessage } = useChat({});
 
   return (
     <>
-      {messages.map(message => (
+      {messages.map((message) => (
         <div key={message.id}>
-          {message.role === 'user' ? 'User: ' : 'AI: '}
+          {message.role === "user" ? "User: " : "AI: "}
           {message.parts.map((part, index) => {
-            if (part.type === 'text') {
+            if (part.type === "text") {
               return <span key={index}>{part.text}</span>;
             }
             return null;
@@ -288,18 +288,18 @@ export default function Page() {
         </div>
       ))}
       <form
-        onSubmit={e => {
+        onSubmit={(e) => {
           e.preventDefault();
           if (input.trim()) {
             sendMessage({ text: input });
-            setInput('');
+            setInput("");
           }
         }}
       >
         <input
           name="prompt"
           value={input}
-          onChange={e => setInput(e.target.value)}
+          onChange={(e) => setInput(e.target.value)}
         />
         <button type="submit">Submit</button>
       </form>

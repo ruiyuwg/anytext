@@ -56,30 +56,30 @@ went wrong." This is a good practice to avoid leaking information from the
 server.
 
 ```tsx file="app/page.tsx" highlight="7,18-25,31"
-'use client';
+"use client";
 
-import { useChat } from '@ai-sdk/react';
-import { useState } from 'react';
+import { useChat } from "@ai-sdk/react";
+import { useState } from "react";
 
 export default function Chat() {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
   const { messages, sendMessage, error, regenerate } = useChat();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     sendMessage({ text: input });
-    setInput('');
+    setInput("");
   };
 
   return (
     <div>
-      {messages.map(m => (
+      {messages.map((m) => (
         <div key={m.id}>
-          {m.role}:{' '}
+          {m.role}:{" "}
           {m.parts
-            .filter(part => part.type === 'text')
-            .map(part => part.text)
-            .join('')}
+            .filter((part) => part.type === "text")
+            .map((part) => part.text)
+            .join("")}
         </div>
       ))}
 
@@ -95,7 +95,7 @@ export default function Chat() {
       <form onSubmit={handleSubmit}>
         <input
           value={input}
-          onChange={e => setInput(e.target.value)}
+          onChange={(e) => setInput(e.target.value)}
           disabled={error != null}
         />
       </form>
@@ -109,13 +109,13 @@ export default function Chat() {
 Alternatively you can write a custom submit handler that replaces the last message when an error is present.
 
 ```tsx file="app/page.tsx" highlight="17-23,35"
-'use client';
+"use client";
 
-import { useChat } from '@ai-sdk/react';
-import { useState } from 'react';
+import { useChat } from "@ai-sdk/react";
+import { useState } from "react";
 
 export default function Chat() {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
   const { sendMessage, error, messages, setMessages } = useChat();
 
   function customSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -126,25 +126,25 @@ export default function Chat() {
     }
 
     sendMessage({ text: input });
-    setInput('');
+    setInput("");
   }
 
   return (
     <div>
-      {messages.map(m => (
+      {messages.map((m) => (
         <div key={m.id}>
-          {m.role}:{' '}
+          {m.role}:{" "}
           {m.parts
-            .filter(part => part.type === 'text')
-            .map(part => part.text)
-            .join('')}
+            .filter((part) => part.type === "text")
+            .map((part) => part.text)
+            .join("")}
         </div>
       ))}
 
       {error && <div>An error occurred.</div>}
 
       <form onSubmit={customSubmit}>
-        <input value={input} onChange={e => setInput(e.target.value)} />
+        <input value={input} onChange={(e) => setInput(e.target.value)} />
       </form>
     </div>
   );
@@ -157,14 +157,14 @@ Errors can be processed by passing an [`onError`](/docs/reference/ai-sdk-ui/use-
 The callback function receives an error object as an argument.
 
 ```tsx file="app/page.tsx" highlight="6-9"
-import { useChat } from '@ai-sdk/react';
+import { useChat } from "@ai-sdk/react";
 
 export default function Page() {
   const {
     /* ... */
   } = useChat({
     // handle error:
-    onError: error => {
+    onError: (error) => {
       console.error(error);
     },
   });
@@ -178,7 +178,7 @@ You can easily do so by throwing an error in your route handler:
 
 ```ts file="app/api/chat/route.ts"
 export async function POST(req: Request) {
-  throw new Error('This is a test error');
+  throw new Error("This is a test error");
 }
 ```
 

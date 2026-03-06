@@ -25,27 +25,27 @@ drizzle-orm@beta pg
 \<CodeTabs items={\["node-postgres", "node-postgres with config"]}>
 
 ```typescript copy
-// Make sure to install the 'pg' package 
-import { drizzle } from 'drizzle-orm/cockroach';
+// Make sure to install the 'pg' package
+import { drizzle } from "drizzle-orm/cockroach";
 
 const db = drizzle(process.env.DATABASE_URL);
- 
-const result = await db.execute('select 1');
+
+const result = await db.execute("select 1");
 ```
 
 ```typescript copy
-// Make sure to install the 'pg' package 
-import { drizzle } from 'drizzle-orm/cockroach';
+// Make sure to install the 'pg' package
+import { drizzle } from "drizzle-orm/cockroach";
 
 // You can specify any property from the node-postgres connection options
-const db = drizzle({ 
-  connection: { 
+const db = drizzle({
+  connection: {
     connectionString: process.env.DATABASE_URL,
-    ssl: true
-  }
+    ssl: true,
+  },
 });
- 
-const result = await db.execute('select 1');
+
+const result = await db.execute("select 1");
 ```
 
 </CodeTabs>
@@ -53,7 +53,7 @@ const result = await db.execute('select 1');
 If you need to provide your existing driver:
 
 ```typescript copy
-// Make sure to install the 'pg' package 
+// Make sure to install the 'pg' package
 import { drizzle } from "drizzle-orm/cockroach";
 import { Pool } from "pg";
 
@@ -61,8 +61,8 @@ const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
 });
 const db = drizzle({ client: pool });
- 
-const result = await db.execute('select 1');
+
+const result = await db.execute("select 1");
 ```
 
 #### What's next?
@@ -102,12 +102,12 @@ drizzle-orm gel
 \<CodeTabs items={\["gel", "gel with config"]}>
 
 ```typescript copy
-// Make sure to install the 'gel' package 
-import { drizzle } from 'drizzle-orm/gel';
+// Make sure to install the 'gel' package
+import { drizzle } from "drizzle-orm/gel";
 
 const db = drizzle(process.env.DATABASE_URL);
- 
-const result = await db.execute('select 1');
+
+const result = await db.execute("select 1");
 ```
 
 ```typescript copy
@@ -130,14 +130,14 @@ const result = await db.execute("select 1");
 If you need to provide your existing driver:
 
 ```typescript copy
-// Make sure to install the 'gel' package 
+// Make sure to install the 'gel' package
 import { drizzle } from "drizzle-orm/gel";
 import { createClient } from "gel";
 
 const gelClient = createClient();
 const db = drizzle({ client: gelClient });
 
-const result = await db.execute('select 1');
+const result = await db.execute("select 1");
 ```
 
 #### What's next?

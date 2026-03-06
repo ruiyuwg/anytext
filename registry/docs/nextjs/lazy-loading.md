@@ -20,18 +20,18 @@ By default, Server Components are automatically [code split](https://developer.m
 ### Importing Client Components
 
 ```jsx filename="app/page.js"
-'use client'
+"use client";
 
-import { useState } from 'react'
-import dynamic from 'next/dynamic'
+import { useState } from "react";
+import dynamic from "next/dynamic";
 
 // Client Components:
-const ComponentA = dynamic(() => import('../components/A'))
-const ComponentB = dynamic(() => import('../components/B'))
-const ComponentC = dynamic(() => import('../components/C'), { ssr: false })
+const ComponentA = dynamic(() => import("../components/A"));
+const ComponentB = dynamic(() => import("../components/B"));
+const ComponentC = dynamic(() => import("../components/C"), { ssr: false });
 
 export default function ClientComponentExample() {
-  const [showMore, setShowMore] = useState(false)
+  const [showMore, setShowMore] = useState(false);
 
   return (
     <div>
@@ -45,7 +45,7 @@ export default function ClientComponentExample() {
       {/* Load only on the client side */}
       <ComponentC />
     </div>
-  )
+  );
 }
 ```
 
@@ -60,7 +60,7 @@ When using `React.lazy()` and Suspense, Client Components will be [prerendered](
 If you want to disable pre-rendering for a Client Component, you can use the `ssr` option set to `false`:
 
 ```jsx
-const ComponentC = dynamic(() => import('../components/C'), { ssr: false })
+const ComponentC = dynamic(() => import("../components/C"), { ssr: false });
 ```
 
 ### Importing Server Components
@@ -69,17 +69,17 @@ If you dynamically import a Server Component, only the Client Components that ar
 It will also help preload the static assets such as CSS when you're using it in Server Components.
 
 ```jsx filename="app/page.js"
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic";
 
 // Server Component:
-const ServerComponent = dynamic(() => import('../components/ServerComponent'))
+const ServerComponent = dynamic(() => import("../components/ServerComponent"));
 
 export default function ServerComponentExample() {
   return (
     <div>
       <ServerComponent />
     </div>
-  )
+  );
 }
 ```
 
@@ -91,14 +91,14 @@ export default function ServerComponentExample() {
 External libraries can be loaded on demand using the [`import()`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/import) function. This example uses the external library `fuse.js` for fuzzy search. The module is only loaded on the client after the user types in the search input.
 
 ```jsx filename="app/page.js"
-'use client'
+"use client";
 
-import { useState } from 'react'
+import { useState } from "react";
 
-const names = ['Tim', 'Joe', 'Bel', 'Lee']
+const names = ["Tim", "Joe", "Bel", "Lee"];
 
 export default function Page() {
-  const [results, setResults] = useState()
+  const [results, setResults] = useState();
 
   return (
     <div>
@@ -106,33 +106,33 @@ export default function Page() {
         type="text"
         placeholder="Search"
         onChange={async (e) => {
-          const { value } = e.currentTarget
+          const { value } = e.currentTarget;
           // Dynamically load fuse.js
-          const Fuse = (await import('fuse.js')).default
-          const fuse = new Fuse(names)
+          const Fuse = (await import("fuse.js")).default;
+          const fuse = new Fuse(names);
 
-          setResults(fuse.search(value))
+          setResults(fuse.search(value));
         }}
       />
       <pre>Results: {JSON.stringify(results, null, 2)}</pre>
     </div>
-  )
+  );
 }
 ```
 
 ### Adding a custom loading component
 
 ```jsx filename="app/page.js"
-'use client'
+"use client";
 
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic";
 
 const WithCustomLoading = dynamic(
-  () => import('../components/WithCustomLoading'),
+  () => import("../components/WithCustomLoading"),
   {
     loading: () => <p>Loading...</p>,
-  }
-)
+  },
+);
 
 export default function Page() {
   return (
@@ -140,7 +140,7 @@ export default function Page() {
       {/* The loading component will be rendered while  <WithCustomLoading/> is loading */}
       <WithCustomLoading />
     </div>
-  )
+  );
 }
 ```
 
@@ -149,19 +149,19 @@ export default function Page() {
 To dynamically import a named export, you can return it from the Promise returned by [`import()`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/import) function:
 
 ```jsx filename="components/hello.js"
-'use client'
+"use client";
 
 export function Hello() {
-  return <p>Hello!</p>
+  return <p>Hello!</p>;
 }
 ```
 
 ```jsx filename="app/page.js"
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic";
 
 const ClientComponent = dynamic(() =>
-  import('../components/hello').then((mod) => mod.Hello)
-)
+  import("../components/hello").then((mod) => mod.Hello),
+);
 ```
 
 # Development Environment

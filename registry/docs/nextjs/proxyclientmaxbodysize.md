@@ -13,26 +13,26 @@ By default, the maximum body size is **10MB**. If a request body exceeds this li
 Specify the size using a human-readable string format:
 
 ```ts filename="next.config.ts" switcher
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   experimental: {
-    proxyClientMaxBodySize: '1mb',
+    proxyClientMaxBodySize: "1mb",
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 ```js filename="next.config.js" switcher
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    proxyClientMaxBodySize: '1mb',
+    proxyClientMaxBodySize: "1mb",
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 Supported units: `b`, `kb`, `mb`, `gb`
@@ -42,15 +42,15 @@ Supported units: `b`, `kb`, `mb`, `gb`
 Alternatively, specify the size in bytes as a number:
 
 ```ts filename="next.config.ts" switcher
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   experimental: {
     proxyClientMaxBodySize: 1048576, // 1MB in bytes
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 ```js filename="next.config.js" switcher
@@ -59,9 +59,9 @@ const nextConfig = {
   experimental: {
     proxyClientMaxBodySize: 1048576, // 1MB in bytes
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 ## Behavior
@@ -81,30 +81,30 @@ If your application needs to process the full request body, you should either:
 ## Example
 
 ```ts filename="proxy.ts"
-import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from "next/server";
 
 export async function proxy(request: NextRequest) {
   // Next.js automatically buffers the body with the configured size limit
   // You can read the body in proxy...
-  const body = await request.text()
+  const body = await request.text();
 
   // If the body exceeded the limit, only partial data will be available
-  console.log('Body size:', body.length)
+  console.log("Body size:", body.length);
 
-  return NextResponse.next()
+  return NextResponse.next();
 }
 ```
 
 ```ts filename="app/api/upload/route.ts"
-import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   // ...and the body is still available in your route handler
-  const body = await request.text()
+  const body = await request.text();
 
-  console.log('Body in route handler:', body.length)
+  console.log("Body in route handler:", body.length);
 
-  return NextResponse.json({ received: body.length })
+  return NextResponse.json({ received: body.length });
 }
 ```
 

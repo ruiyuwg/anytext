@@ -17,13 +17,13 @@ By default, [`fetch`](/docs/app/api-reference/functions/fetch) requests are not 
 
 ```tsx filename="app/page.tsx" switcher
 export default async function Page() {
-  const data = await fetch('https://...', { cache: 'force-cache' })
+  const data = await fetch("https://...", { cache: "force-cache" });
 }
 ```
 
 ```jsx filename="app/page.jsx" switcher
 export default async function Page() {
-  const data = await fetch('https://...', { cache: 'force-cache' })
+  const data = await fetch("https://...", { cache: "force-cache" });
 }
 ```
 
@@ -33,13 +33,13 @@ To revalidate the data returned by a `fetch` request, you can use the `next.reva
 
 ```tsx filename="app/page.tsx" switcher
 export default async function Page() {
-  const data = await fetch('https://...', { next: { revalidate: 3600 } })
+  const data = await fetch("https://...", { next: { revalidate: 3600 } });
 }
 ```
 
 ```jsx filename="app/page.jsx" switcher
 export default async function Page() {
-  const data = await fetch('https://...', { next: { revalidate: 3600 } })
+  const data = await fetch("https://...", { next: { revalidate: 3600 } });
 }
 ```
 
@@ -51,9 +51,9 @@ You can also tag `fetch` requests to enable on-demand cache invalidation:
 export async function getUserById(id: string) {
   const data = await fetch(`https://...`, {
     next: {
-      tags: ['user'],
+      tags: ["user"],
     },
-  })
+  });
 }
 ```
 
@@ -61,9 +61,9 @@ export async function getUserById(id: string) {
 export async function getUserById(id) {
   const data = await fetch(`https://...`, {
     next: {
-      tags: ['user'],
+      tags: ["user"],
     },
-  })
+  });
 }
 ```
 
@@ -76,26 +76,26 @@ See the [`fetch` API reference](/docs/app/api-reference/functions/fetch) to lear
 With Cache Components, you can use the [`use cache`](/docs/app/api-reference/directives/use-cache) directive to cache any computation, and `cacheTag` to tag it. This works with database queries, file system operations, and other server-side work.
 
 ```tsx filename="app/lib/data.ts" switcher
-import { cacheTag } from 'next/cache'
+import { cacheTag } from "next/cache";
 
 export async function getProducts() {
-  'use cache'
-  cacheTag('products')
+  "use cache";
+  cacheTag("products");
 
-  const products = await db.query('SELECT * FROM products')
-  return products
+  const products = await db.query("SELECT * FROM products");
+  return products;
 }
 ```
 
 ```jsx filename="app/lib/data.js" switcher
-import { cacheTag } from 'next/cache'
+import { cacheTag } from "next/cache";
 
 export async function getProducts() {
-  'use cache'
-  cacheTag('products')
+  "use cache";
+  cacheTag("products");
 
-  const products = await db.query('SELECT * FROM products')
-  return products
+  const products = await db.query("SELECT * FROM products");
+  return products;
 }
 ```
 
@@ -115,20 +115,20 @@ See the [`cacheTag` API reference](/docs/app/api-reference/functions/cacheTag) t
 After tagging your cached data, using [`fetch`](#fetch) with `next.tags`, or the [`cacheTag`](#cachetag) function, you may call `revalidateTag` in a [Route Handler](/docs/app/api-reference/file-conventions/route) or Server Action:
 
 ```tsx filename="app/lib/actions.ts" highlight={1,5} switcher
-import { revalidateTag } from 'next/cache'
+import { revalidateTag } from "next/cache";
 
 export async function updateUser(id: string) {
   // Mutate data
-  revalidateTag('user', 'max') // Recommended: Uses stale-while-revalidate
+  revalidateTag("user", "max"); // Recommended: Uses stale-while-revalidate
 }
 ```
 
 ```jsx filename="app/lib/actions.js" highlight={1,5} switcher
-import { revalidateTag } from 'next/cache'
+import { revalidateTag } from "next/cache";
 
 export async function updateUser(id) {
   // Mutate data
-  revalidateTag('user', 'max') // Recommended: Uses stale-while-revalidate
+  revalidateTag("user", "max"); // Recommended: Uses stale-while-revalidate
 }
 ```
 
@@ -141,44 +141,44 @@ See the [`revalidateTag` API reference](/docs/app/api-reference/functions/revali
 `updateTag` is specifically designed for Server Actions to immediately expire cached data for read-your-own-writes scenarios. Unlike `revalidateTag`, it can only be used within Server Actions and immediately expires the cache entry.
 
 ```tsx filename="app/lib/actions.ts" highlight={1,6} switcher
-import { updateTag } from 'next/cache'
-import { redirect } from 'next/navigation'
+import { updateTag } from "next/cache";
+import { redirect } from "next/navigation";
 
 export async function createPost(formData: FormData) {
   // Create post in database
   const post = await db.post.create({
     data: {
-      title: formData.get('title'),
-      content: formData.get('content'),
+      title: formData.get("title"),
+      content: formData.get("content"),
     },
-  })
+  });
 
   // Immediately expire cache so the new post is visible
-  updateTag('posts')
-  updateTag(`post-${post.id}`)
+  updateTag("posts");
+  updateTag(`post-${post.id}`);
 
-  redirect(`/posts/${post.id}`)
+  redirect(`/posts/${post.id}`);
 }
 ```
 
 ```jsx filename="app/lib/actions.js" highlight={1,6} switcher
-import { updateTag } from 'next/cache'
-import { redirect } from 'next/navigation'
+import { updateTag } from "next/cache";
+import { redirect } from "next/navigation";
 
 export async function createPost(formData) {
   // Create post in database
   const post = await db.post.create({
     data: {
-      title: formData.get('title'),
-      content: formData.get('content'),
+      title: formData.get("title"),
+      content: formData.get("content"),
     },
-  })
+  });
 
   // Immediately expire cache so the new post is visible
-  updateTag('posts')
-  updateTag(`post-${post.id}`)
+  updateTag("posts");
+  updateTag(`post-${post.id}`);
 
-  redirect(`/posts/${post.id}`)
+  redirect(`/posts/${post.id}`);
 }
 ```
 
@@ -218,61 +218,61 @@ See the [`revalidatePath` API reference](/docs/app/api-reference/functions/reval
 `unstable_cache` allows you to cache the result of database queries and other async functions. To use it, wrap `unstable_cache` around the function. For example:
 
 ```ts filename="app/lib/data.ts" switcher
-import { db } from '@/lib/db'
+import { db } from "@/lib/db";
 export async function getUserById(id: string) {
   return db
     .select()
     .from(users)
     .where(eq(users.id, id))
-    .then((res) => res[0])
+    .then((res) => res[0]);
 }
 ```
 
 ```jsx filename="app/lib/data.js" switcher
-import { db } from '@/lib/db'
+import { db } from "@/lib/db";
 
 export async function getUserById(id) {
   return db
     .select()
     .from(users)
     .where(eq(users.id, id))
-    .then((res) => res[0])
+    .then((res) => res[0]);
 }
 ```
 
 ```tsx filename="app/page.tsx" highlight={2,11,13} switcher
-import { unstable_cache } from 'next/cache'
-import { getUserById } from '@/app/lib/data'
+import { unstable_cache } from "next/cache";
+import { getUserById } from "@/app/lib/data";
 
 export default async function Page({
   params,
 }: {
-  params: Promise<{ userId: string }>
+  params: Promise<{ userId: string }>;
 }) {
-  const { userId } = await params
+  const { userId } = await params;
 
   const getCachedUser = unstable_cache(
     async () => {
-      return getUserById(userId)
+      return getUserById(userId);
     },
-    [userId] // add the user ID to the cache key
-  )
+    [userId], // add the user ID to the cache key
+  );
 }
 ```
 
 ```jsx filename="app/page.js" highlight={2,7,9} switcher
-import { unstable_cache } from 'next/cache'
-import { getUserById } from '@/app/lib/data'
+import { unstable_cache } from "next/cache";
+import { getUserById } from "@/app/lib/data";
 
 export default async function Page({ params }) {
-  const { userId } = await params
+  const { userId } = await params;
 
   const getCachedUser = unstable_cache(
     async () => {
-      return getUserById(userId)
+      return getUserById(userId);
     },
-    [userId] // add the user ID to the cache key
-  )
+    [userId], // add the user ID to the cache key
+  );
 }
 ```
 
@@ -284,27 +284,27 @@ The function accepts a third optional object to define how the cache should be r
 ```tsx filename="app/page.tsx" highlight={6-9} switcher
 const getCachedUser = unstable_cache(
   async () => {
-    return getUserById(userId)
+    return getUserById(userId);
   },
   [userId],
   {
-    tags: ['user'],
+    tags: ["user"],
     revalidate: 3600,
-  }
-)
+  },
+);
 ```
 
 ```jsx filename="app/page.js" highlight={6-9} switcher
 const getCachedUser = unstable_cache(
   async () => {
-    return getUserById(userId)
+    return getUserById(userId);
   },
   [userId],
   {
-    tags: ['user'],
+    tags: ["user"],
     revalidate: 3600,
-  }
-)
+  },
+);
 ```
 
 See the [`unstable_cache` API reference](/docs/app/api-reference/functions/unstable_cache) to learn more.
@@ -323,7 +323,7 @@ Learn more about the features mentioned in this page by reading the API Referenc
   - API Reference for the updateTag function.
 - [revalidatePath](/docs/app/api-reference/functions/revalidatePath)
   - API Reference for the revalidatePath function.
-- [unstable\_cache](/docs/app/api-reference/functions/unstable_cache)
-  - API Reference for the unstable\_cache function.
+- [unstable_cache](/docs/app/api-reference/functions/unstable_cache)
+  - API Reference for the unstable_cache function.
 
 # Error Handling

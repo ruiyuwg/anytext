@@ -1,18 +1,18 @@
 # 'Manipulating the DOM with Refs'
 
-React automatically updates the [DOM](https://developer.mozilla.org/docs/Web/API/Document_Object_Model/Introduction) to match your render output, so your components won't often need to manipulate it. However, sometimes you might need access to the DOM elements managed by React--for example, to focus a node, scroll to it, or measure its size and position. There is no built-in way to do those things in React, so you will need a *ref* to the DOM node.
+React automatically updates the [DOM](https://developer.mozilla.org/docs/Web/API/Document_Object_Model/Introduction) to match your render output, so your components won't often need to manipulate it. However, sometimes you might need access to the DOM elements managed by React--for example, to focus a node, scroll to it, or measure its size and position. There is no built-in way to do those things in React, so you will need a _ref_ to the DOM node.
 
 - How to access a DOM node managed by React with the `ref` attribute
 - How the `ref` JSX attribute relates to the `useRef` Hook
 - How to access another component's DOM node
 - In which cases it's safe to modify the DOM managed by React
 
-## Getting a ref to the node {/*getting-a-ref-to-the-node*/}
+## Getting a ref to the node {/_getting-a-ref-to-the-node_/}
 
 To access a DOM node managed by React, first, import the `useRef` Hook:
 
 ```js
-import { useRef } from 'react';
+import { useRef } from "react";
 ```
 
 Then, use it to declare a ref inside your component:
@@ -34,12 +34,12 @@ The `useRef` Hook returns an object with a single property called `current`. Ini
 myRef.current.scrollIntoView();
 ```
 
-### Example: Focusing a text input {/*example-focusing-a-text-input*/}
+### Example: Focusing a text input {/_example-focusing-a-text-input_/}
 
 In this example, clicking the button will focus the input:
 
 ```js
-import { useRef } from 'react';
+import { useRef } from "react";
 
 export default function Form() {
   const inputRef = useRef(null);
@@ -51,9 +51,7 @@ export default function Form() {
   return (
     <>
       <input ref={inputRef} />
-      <button onClick={handleClick}>
-        Focus the input
-      </button>
+      <button onClick={handleClick}>Focus the input</button>
     </>
   );
 }
@@ -68,12 +66,12 @@ To implement this:
 
 While DOM manipulation is the most common use case for refs, the `useRef` Hook can be used for storing other things outside React, like timer IDs. Similarly to state, refs remain between renders. Refs are like state variables that don't trigger re-renders when you set them. Read about refs in [Referencing Values with Refs.](/learn/referencing-values-with-refs)
 
-### Example: Scrolling to an element {/*example-scrolling-to-an-element*/}
+### Example: Scrolling to an element {/_example-scrolling-to-an-element_/}
 
 You can have more than a single ref in a component. In this example, there is a carousel of three images. Each button centers an image by calling the browser [`scrollIntoView()`](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView) method on the corresponding DOM node:
 
 ```js
-import { useRef } from 'react';
+import { useRef } from "react";
 
 export default function CatFriends() {
   const firstCatRef = useRef(null);
@@ -82,40 +80,34 @@ export default function CatFriends() {
 
   function handleScrollToFirstCat() {
     firstCatRef.current.scrollIntoView({
-      behavior: 'smooth',
-      block: 'nearest',
-      inline: 'center'
+      behavior: "smooth",
+      block: "nearest",
+      inline: "center",
     });
   }
 
   function handleScrollToSecondCat() {
     secondCatRef.current.scrollIntoView({
-      behavior: 'smooth',
-      block: 'nearest',
-      inline: 'center'
+      behavior: "smooth",
+      block: "nearest",
+      inline: "center",
     });
   }
 
   function handleScrollToThirdCat() {
     thirdCatRef.current.scrollIntoView({
-      behavior: 'smooth',
-      block: 'nearest',
-      inline: 'center'
+      behavior: "smooth",
+      block: "nearest",
+      inline: "center",
     });
   }
 
   return (
     <>
       <nav>
-        <button onClick={handleScrollToFirstCat}>
-          Neo
-        </button>
-        <button onClick={handleScrollToSecondCat}>
-          Millie
-        </button>
-        <button onClick={handleScrollToThirdCat}>
-          Bella
-        </button>
+        <button onClick={handleScrollToFirstCat}>Neo</button>
+        <button onClick={handleScrollToSecondCat}>Millie</button>
+        <button onClick={handleScrollToThirdCat}>Bella</button>
       </nav>
       <div>
         <ul>
@@ -158,7 +150,7 @@ nav {
 }
 
 button {
-  margin: .25rem;
+  margin: 0.25rem;
 }
 
 ul,
@@ -173,7 +165,7 @@ li {
 }
 ```
 
-#### How to manage a list of refs using a ref callback {/*how-to-manage-a-list-of-refs-using-a-ref-callback*/}
+#### How to manage a list of refs using a ref callback {/_how-to-manage-a-list-of-refs-using-a-ref-callback_/}
 
 In the above examples, there is a predefined number of refs. However, sometimes you might need a ref to each item in the list, and you don't know how many you will have. Something like this **wouldn't work**:
 
@@ -252,9 +244,9 @@ export default function CatFriends() {
 
 function setupCatList() {
   const catCount = 10;
-  const catList = new Array(catCount)
+  const catList = new Array(catCount);
   for (let i = 0; i < catCount; i++) {
-    let imageUrl = '';
+    let imageUrl = "";
     if (i < 5) {
       imageUrl = "https://placecats.com/neo/320/240";
     } else if (i < 8) {
@@ -269,7 +261,6 @@ function setupCatList() {
   }
   return catList;
 }
-
 ```
 
 ```css
@@ -283,7 +274,7 @@ nav {
 }
 
 button {
-  margin: .25rem;
+  margin: 0.25rem;
 }
 
 ul,
@@ -322,14 +313,14 @@ When Strict Mode is enabled, ref callbacks will run twice in development.
 
 Read more about [how this helps find bugs](/reference/react/StrictMode#fixing-bugs-found-by-re-running-ref-callbacks-in-development) in callback refs.
 
-## Accessing another component's DOM nodes {/*accessing-another-components-dom-nodes*/}
+## Accessing another component's DOM nodes {/_accessing-another-components-dom-nodes_/}
 
-Refs are an escape hatch. Manually manipulating *another* component's DOM nodes can make your code fragile.
+Refs are an escape hatch. Manually manipulating _another_ component's DOM nodes can make your code fragile.
 
 You can pass refs from parent component to child components [just like any other prop](/learn/passing-props-to-a-component).
 
 ```js {3-4,9}
-import { useRef } from 'react';
+import { useRef } from "react";
 
 function MyInput({ ref }) {
   return <input ref={ref} />;
@@ -337,7 +328,7 @@ function MyInput({ ref }) {
 
 function MyForm() {
   const inputRef = useRef(null);
-  return <MyInput ref={inputRef} />
+  return <MyInput ref={inputRef} />;
 }
 ```
 
@@ -346,7 +337,7 @@ In the above example, a ref is created in the parent component, `MyForm`, and is
 The `inputRef` created in `MyForm` now points to the `<input>` DOM element returned by `MyInput`. A click handler created in `MyForm` can access `inputRef` and call `focus()` to set the focus on `<input>`.
 
 ```js
-import { useRef } from 'react';
+import { useRef } from "react";
 
 function MyInput({ ref }) {
   return <input ref={ref} />;
@@ -362,15 +353,13 @@ export default function MyForm() {
   return (
     <>
       <MyInput ref={inputRef} />
-      <button onClick={handleClick}>
-        Focus the input
-      </button>
+      <button onClick={handleClick}>Focus the input</button>
     </>
   );
 }
 ```
 
-#### Exposing a subset of the API with an imperative handle {/*exposing-a-subset-of-the-api-with-an-imperative-handle*/}
+#### Exposing a subset of the API with an imperative handle {/_exposing-a-subset-of-the-api-with-an-imperative-handle_/}
 
 In the above example, the ref passed to `MyInput` is passed on to the original DOM input element. This lets the parent component call `focus()` on it. However, this also lets the parent component do something else--for example, change its CSS styles. In uncommon cases, you may want to restrict the exposed functionality. You can do that with [`useImperativeHandle`](/reference/react/useImperativeHandle):
 
@@ -386,7 +375,7 @@ function MyInput({ ref }) {
     },
   }));
   return <input ref={realInputRef} />;
-};
+}
 
 export default function Form() {
   const inputRef = useRef(null);
@@ -406,7 +395,7 @@ export default function Form() {
 
 Here, `realInputRef` inside `MyInput` holds the actual input DOM node. However, [`useImperativeHandle`](/reference/react/useImperativeHandle) instructs React to provide your own special object as the value of a ref to the parent component. So `inputRef.current` inside the `Form` component will only have the `focus` method. In this case, the ref "handle" is not the DOM node, but the custom object you create inside [`useImperativeHandle`](/reference/react/useImperativeHandle) call.
 
-## When React attaches the refs {/*when-react-attaches-the-refs*/}
+## When React attaches the refs {/_when-react-attaches-the-refs_/}
 
 In React, every update is split in [two phases](/learn/render-and-commit#step-3-react-commits-changes-to-the-dom):
 
@@ -419,41 +408,34 @@ React sets `ref.current` during the commit. Before updating the DOM, React sets 
 
 **Usually, you will access refs from event handlers.** If you want to do something with a ref, but there is no particular event to do it in, you might need an Effect. We will discuss Effects on the next pages.
 
-#### Flushing state updates synchronously with flushSync {/*flushing-state-updates-synchronously-with-flush-sync*/}
+#### Flushing state updates synchronously with flushSync {/_flushing-state-updates-synchronously-with-flush-sync_/}
 
-Consider code like this, which adds a new todo and scrolls the screen down to the last child of the list. Notice how, for some reason, it always scrolls to the todo that was *just before* the last added one:
+Consider code like this, which adds a new todo and scrolls the screen down to the last child of the list. Notice how, for some reason, it always scrolls to the todo that was _just before_ the last added one:
 
 ```js
-import { useState, useRef } from 'react';
+import { useState, useRef } from "react";
 
 export default function TodoList() {
   const listRef = useRef(null);
-  const [text, setText] = useState('');
-  const [todos, setTodos] = useState(
-    initialTodos
-  );
+  const [text, setText] = useState("");
+  const [todos, setTodos] = useState(initialTodos);
 
   function handleAdd() {
     const newTodo = { id: nextId++, text: text };
-    setText('');
-    setTodos([ ...todos, newTodo]);
+    setText("");
+    setTodos([...todos, newTodo]);
     listRef.current.lastChild.scrollIntoView({
-      behavior: 'smooth',
-      block: 'nearest'
+      behavior: "smooth",
+      block: "nearest",
     });
   }
 
   return (
     <>
-      <button onClick={handleAdd}>
-        Add
-      </button>
-      <input
-        value={text}
-        onChange={e => setText(e.target.value)}
-      />
+      <button onClick={handleAdd}>Add</button>
+      <input value={text} onChange={(e) => setText(e.target.value)} />
       <ul ref={listRef}>
-        {todos.map(todo => (
+        {todos.map((todo) => (
           <li key={todo.id}>{todo.text}</li>
         ))}
       </ul>
@@ -466,7 +448,7 @@ let initialTodos = [];
 for (let i = 0; i < 20; i++) {
   initialTodos.push({
     id: nextId++,
-    text: 'Todo #' + (i + 1)
+    text: "Todo #" + (i + 1),
   });
 }
 ```
@@ -474,7 +456,7 @@ for (let i = 0; i < 20; i++) {
 The issue is with these two lines:
 
 ```js
-setTodos([ ...todos, newTodo]);
+setTodos([...todos, newTodo]);
 listRef.current.lastChild.scrollIntoView();
 ```
 
@@ -484,7 +466,7 @@ To fix this issue, you can force React to update ("flush") the DOM synchronously
 
 ```js
 flushSync(() => {
-  setTodos([ ...todos, newTodo]);
+  setTodos([...todos, newTodo]);
 });
 listRef.current.lastChild.scrollIntoView();
 ```
@@ -492,39 +474,32 @@ listRef.current.lastChild.scrollIntoView();
 This will instruct React to update the DOM synchronously right after the code wrapped in `flushSync` executes. As a result, the last todo will already be in the DOM by the time you try to scroll to it:
 
 ```js
-import { useState, useRef } from 'react';
-import { flushSync } from 'react-dom';
+import { useState, useRef } from "react";
+import { flushSync } from "react-dom";
 
 export default function TodoList() {
   const listRef = useRef(null);
-  const [text, setText] = useState('');
-  const [todos, setTodos] = useState(
-    initialTodos
-  );
+  const [text, setText] = useState("");
+  const [todos, setTodos] = useState(initialTodos);
 
   function handleAdd() {
     const newTodo = { id: nextId++, text: text };
     flushSync(() => {
-      setText('');
-      setTodos([ ...todos, newTodo]);
+      setText("");
+      setTodos([...todos, newTodo]);
     });
     listRef.current.lastChild.scrollIntoView({
-      behavior: 'smooth',
-      block: 'nearest'
+      behavior: "smooth",
+      block: "nearest",
     });
   }
 
   return (
     <>
-      <button onClick={handleAdd}>
-        Add
-      </button>
-      <input
-        value={text}
-        onChange={e => setText(e.target.value)}
-      />
+      <button onClick={handleAdd}>Add</button>
+      <input value={text} onChange={(e) => setText(e.target.value)} />
       <ul ref={listRef}>
-        {todos.map(todo => (
+        {todos.map((todo) => (
           <li key={todo.id}>{todo.text}</li>
         ))}
       </ul>
@@ -537,12 +512,12 @@ let initialTodos = [];
 for (let i = 0; i < 20; i++) {
   initialTodos.push({
     id: nextId++,
-    text: 'Todo #' + (i + 1)
+    text: "Todo #" + (i + 1),
   });
 }
 ```
 
-## Best practices for DOM manipulation with refs {/*best-practices-for-dom-manipulation-with-refs*/}
+## Best practices for DOM manipulation with refs {/_best-practices-for-dom-manipulation-with-refs_/}
 
 Refs are an escape hatch. You should only use them when you have to "step outside React". Common examples of this include managing focus, scroll position, or calling browser APIs that React does not expose.
 
@@ -553,7 +528,7 @@ To illustrate this problem, this example includes a welcome message and two butt
 Try pressing "Toggle with setState" a few times. The message should disappear and appear again. Then press "Remove from the DOM". This will forcefully remove it. Finally, press "Toggle with setState":
 
 ```js
-import { useState, useRef } from 'react';
+import { useState, useRef } from "react";
 
 export default function Counter() {
   const [show, setShow] = useState(true);
@@ -564,13 +539,15 @@ export default function Counter() {
       <button
         onClick={() => {
           setShow(!show);
-        }}>
+        }}
+      >
         Toggle with setState
       </button>
       <button
         onClick={() => {
           ref.current.remove();
-        }}>
+        }}
+      >
         Remove from the DOM
       </button>
       {show && <p ref={ref}>Hello world</p>}
@@ -591,7 +568,7 @@ After you've manually removed the DOM element, trying to use `setState` to show 
 
 **Avoid changing DOM nodes managed by React.** Modifying, adding children to, or removing children from elements that are managed by React can lead to inconsistent visual results or crashes like above.
 
-However, this doesn't mean that you can't do it at all. It requires caution. **You can safely modify parts of the DOM that React has *no reason* to update.** For example, if some `<div>` is always empty in the JSX, React won't have a reason to touch its children list. Therefore, it is safe to manually add or remove elements there.
+However, this doesn't mean that you can't do it at all. It requires caution. **You can safely modify parts of the DOM that React has _no reason_ to update.** For example, if some `<div>` is always empty in the JSX, React won't have a reason to touch its children list. Therefore, it is safe to manually add or remove elements there.
 
 - Refs are a generic concept, but most often you'll use them to hold DOM elements.
 - You instruct React to put a DOM node into `myRef.current` by passing `<div ref={myRef}>`.
@@ -600,12 +577,12 @@ However, this doesn't mean that you can't do it at all. It requires caution. **Y
 - Avoid changing DOM nodes managed by React.
 - If you do modify DOM nodes managed by React, modify parts that React has no reason to update.
 
-#### Play and pause the video {/*play-and-pause-the-video*/}
+#### Play and pause the video {/_play-and-pause-the-video_/}
 
 In this example, the button toggles a state variable to switch between a playing and a paused state. However, in order to actually play or pause the video, toggling state is not enough. You also need to call [`play()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/play) and [`pause()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/pause) on the DOM element for the `<video>`. Add a ref to it, and make the button work.
 
 ```js
-import { useState, useRef } from 'react';
+import { useState, useRef } from "react";
 
 export default function VideoPlayer() {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -617,9 +594,7 @@ export default function VideoPlayer() {
 
   return (
     <>
-      <button onClick={handleClick}>
-        {isPlaying ? 'Pause' : 'Play'}
-      </button>
+      <button onClick={handleClick}>{isPlaying ? "Pause" : "Play"}</button>
       <video width="250">
         <source
           src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
@@ -627,12 +602,15 @@ export default function VideoPlayer() {
         />
       </video>
     </>
-  )
+  );
 }
 ```
 
 ```css
-button { display: block; margin-bottom: 20px; }
+button {
+  display: block;
+  margin-bottom: 20px;
+}
 ```
 
 For an extra challenge, keep the "Play" button in sync with whether the video is playing even if the user right-clicks the video and plays it using the built-in browser media controls. You might want to listen to `onPlay` and `onPause` on the video to do that.
@@ -640,7 +618,7 @@ For an extra challenge, keep the "Play" button in sync with whether the video is
 Declare a ref and put it on the `<video>` element. Then call `ref.current.play()` and `ref.current.pause()` in the event handler depending on the next state.
 
 ```js
-import { useState, useRef } from 'react';
+import { useState, useRef } from "react";
 
 export default function VideoPlayer() {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -659,9 +637,7 @@ export default function VideoPlayer() {
 
   return (
     <>
-      <button onClick={handleClick}>
-        {isPlaying ? 'Pause' : 'Play'}
-      </button>
+      <button onClick={handleClick}>{isPlaying ? "Pause" : "Play"}</button>
       <video
         width="250"
         ref={ref}
@@ -674,17 +650,20 @@ export default function VideoPlayer() {
         />
       </video>
     </>
-  )
+  );
 }
 ```
 
 ```css
-button { display: block; margin-bottom: 20px; }
+button {
+  display: block;
+  margin-bottom: 20px;
+}
 ```
 
 In order to handle the built-in browser controls, you can add `onPlay` and `onPause` handlers to the `<video>` element and call `setIsPlaying` from them. This way, if the user plays the video using the browser controls, the state will adjust accordingly.
 
-#### Focus the search field {/*focus-the-search-field*/}
+#### Focus the search field {/_focus-the-search-field_/}
 
 Make it so that clicking the "Search" button puts focus into the field.
 
@@ -695,76 +674,81 @@ export default function Page() {
       <nav>
         <button>Search</button>
       </nav>
-      <input
-        placeholder="Looking for something?"
-      />
+      <input placeholder="Looking for something?" />
     </>
   );
 }
 ```
 
 ```css
-button { display: block; margin-bottom: 10px; }
+button {
+  display: block;
+  margin-bottom: 10px;
+}
 ```
 
 Add a ref to the input, and call `focus()` on the DOM node to focus it:
 
 ```js
-import { useRef } from 'react';
+import { useRef } from "react";
 
 export default function Page() {
   const inputRef = useRef(null);
   return (
     <>
       <nav>
-        <button onClick={() => {
-          inputRef.current.focus();
-        }}>
+        <button
+          onClick={() => {
+            inputRef.current.focus();
+          }}
+        >
           Search
         </button>
       </nav>
-      <input
-        ref={inputRef}
-        placeholder="Looking for something?"
-      />
+      <input ref={inputRef} placeholder="Looking for something?" />
     </>
   );
 }
 ```
 
 ```css
-button { display: block; margin-bottom: 10px; }
+button {
+  display: block;
+  margin-bottom: 10px;
+}
 ```
 
-#### Scrolling an image carousel {/*scrolling-an-image-carousel*/}
+#### Scrolling an image carousel {/_scrolling-an-image-carousel_/}
 
 This image carousel has a "Next" button that switches the active image. Make the gallery scroll horizontally to the active image on click. You will want to call [`scrollIntoView()`](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView) on the DOM node of the active image:
 
 ```js
 node.scrollIntoView({
-  behavior: 'smooth',
-  block: 'nearest',
-  inline: 'center'
+  behavior: "smooth",
+  block: "nearest",
+  inline: "center",
 });
 ```
 
-You don't need to have a ref to every image for this exercise. It should be enough to have a ref to the currently active image, or to the list itself. Use `flushSync` to ensure the DOM is updated *before* you scroll.
+You don't need to have a ref to every image for this exercise. It should be enough to have a ref to the currently active image, or to the list itself. Use `flushSync` to ensure the DOM is updated _before_ you scroll.
 
 ```js
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function CatFriends() {
   const [index, setIndex] = useState(0);
   return (
     <>
       <nav>
-        <button onClick={() => {
-          if (index < catList.length - 1) {
-            setIndex(index + 1);
-          } else {
-            setIndex(0);
-          }
-        }}>
+        <button
+          onClick={() => {
+            if (index < catList.length - 1) {
+              setIndex(index + 1);
+            } else {
+              setIndex(0);
+            }
+          }}
+        >
           Next
         </button>
       </nav>
@@ -773,13 +757,9 @@ export default function CatFriends() {
           {catList.map((cat, i) => (
             <li key={cat.id}>
               <img
-                className={
-                  index === i ?
-                    'active' :
-                    ''
-                }
+                className={index === i ? "active" : ""}
                 src={cat.imageUrl}
-                alt={'Cat #' + cat.id}
+                alt={"Cat #" + cat.id}
               />
             </li>
           ))}
@@ -793,7 +773,7 @@ const catCount = 10;
 const catList = new Array(catCount);
 for (let i = 0; i < catCount; i++) {
   const bucket = Math.floor(Math.random() * catCount) % 2;
-  let imageUrl = '';
+  let imageUrl = "";
   switch (bucket) {
     case 0: {
       imageUrl = "https://placecats.com/neo/250/200";
@@ -814,7 +794,6 @@ for (let i = 0; i < catCount; i++) {
     imageUrl,
   };
 }
-
 ```
 
 ```css
@@ -828,7 +807,7 @@ nav {
 }
 
 button {
-  margin: .25rem;
+  margin: 0.25rem;
 }
 
 ul,
@@ -864,8 +843,8 @@ When `index === i`, meaning that the image is the selected one, the `<li>` will 
 Note that the `flushSync` call is necessary to force React to update the DOM before the scroll. Otherwise, `selectedRef.current` would always point at the previously selected item.
 
 ```js
-import { useRef, useState } from 'react';
-import { flushSync } from 'react-dom';
+import { useRef, useState } from "react";
+import { flushSync } from "react-dom";
 
 export default function CatFriends() {
   const selectedRef = useRef(null);
@@ -874,41 +853,33 @@ export default function CatFriends() {
   return (
     <>
       <nav>
-        <button onClick={() => {
-          flushSync(() => {
-            if (index < catList.length - 1) {
-              setIndex(index + 1);
-            } else {
-              setIndex(0);
-            }
-          });
-          selectedRef.current.scrollIntoView({
-            behavior: 'smooth',
-            block: 'nearest',
-            inline: 'center'
-          });
-        }}>
+        <button
+          onClick={() => {
+            flushSync(() => {
+              if (index < catList.length - 1) {
+                setIndex(index + 1);
+              } else {
+                setIndex(0);
+              }
+            });
+            selectedRef.current.scrollIntoView({
+              behavior: "smooth",
+              block: "nearest",
+              inline: "center",
+            });
+          }}
+        >
           Next
         </button>
       </nav>
       <div>
         <ul>
           {catList.map((cat, i) => (
-            <li
-              key={cat.id}
-              ref={index === i ?
-                selectedRef :
-                null
-              }
-            >
+            <li key={cat.id} ref={index === i ? selectedRef : null}>
               <img
-                className={
-                  index === i ?
-                    'active'
-                    : ''
-                }
+                className={index === i ? "active" : ""}
                 src={cat.imageUrl}
-                alt={'Cat #' + cat.id}
+                alt={"Cat #" + cat.id}
               />
             </li>
           ))}
@@ -922,7 +893,7 @@ const catCount = 10;
 const catList = new Array(catCount);
 for (let i = 0; i < catCount; i++) {
   const bucket = Math.floor(Math.random() * catCount) % 2;
-  let imageUrl = '';
+  let imageUrl = "";
   switch (bucket) {
     case 0: {
       imageUrl = "https://placecats.com/neo/250/200";
@@ -943,7 +914,6 @@ for (let i = 0; i < catCount; i++) {
     imageUrl,
   };
 }
-
 ```
 
 ```css
@@ -957,7 +927,7 @@ nav {
 }
 
 button {
-  margin: .25rem;
+  margin: 0.25rem;
 }
 
 ul,
@@ -982,15 +952,15 @@ img {
 }
 ```
 
-#### Focus the search field with separate components {/*focus-the-search-field-with-separate-components*/}
+#### Focus the search field with separate components {/_focus-the-search-field-with-separate-components_/}
 
 Make it so that clicking the "Search" button puts focus into the field. Note that each component is defined in a separate file and shouldn't be moved out of it. How do you connect them together?
 
 You'll need to pass `ref` as a prop to opt into exposing a DOM node from your own component like `SearchInput`.
 
 ```js src/App.js
-import SearchButton from './SearchButton.js';
-import SearchInput from './SearchInput.js';
+import SearchButton from "./SearchButton.js";
+import SearchInput from "./SearchInput.js";
 
 export default function Page() {
   return (
@@ -1006,43 +976,40 @@ export default function Page() {
 
 ```js src/SearchButton.js
 export default function SearchButton() {
-  return (
-    <button>
-      Search
-    </button>
-  );
+  return <button>Search</button>;
 }
 ```
 
 ```js src/SearchInput.js
 export default function SearchInput() {
-  return (
-    <input
-      placeholder="Looking for something?"
-    />
-  );
+  return <input placeholder="Looking for something?" />;
 }
 ```
 
 ```css
-button { display: block; margin-bottom: 10px; }
+button {
+  display: block;
+  margin-bottom: 10px;
+}
 ```
 
 You'll need to add an `onClick` prop to the `SearchButton`, and make the `SearchButton` pass it down to the browser `<button>`. You'll also pass a ref down to `<SearchInput>`, which will forward it to the real `<input>` and populate it. Finally, in the click handler, you'll call `focus` on the DOM node stored inside that ref.
 
 ```js src/App.js
-import { useRef } from 'react';
-import SearchButton from './SearchButton.js';
-import SearchInput from './SearchInput.js';
+import { useRef } from "react";
+import SearchButton from "./SearchButton.js";
+import SearchInput from "./SearchInput.js";
 
 export default function Page() {
   const inputRef = useRef(null);
   return (
     <>
       <nav>
-        <SearchButton onClick={() => {
-          inputRef.current.focus();
-        }} />
+        <SearchButton
+          onClick={() => {
+            inputRef.current.focus();
+          }}
+        />
       </nav>
       <SearchInput ref={inputRef} />
     </>
@@ -1052,30 +1019,24 @@ export default function Page() {
 
 ```js src/SearchButton.js
 export default function SearchButton({ onClick }) {
-  return (
-    <button onClick={onClick}>
-      Search
-    </button>
-  );
+  return <button onClick={onClick}>Search</button>;
 }
 ```
 
 ```js src/SearchInput.js
 export default function SearchInput({ ref }) {
-  return (
-    <input
-      ref={ref}
-      placeholder="Looking for something?"
-    />
-  );
+  return <input ref={ref} placeholder="Looking for something?" />;
 }
 ```
 
 ```css
-button { display: block; margin-bottom: 10px; }
+button {
+  display: block;
+  margin-bottom: 10px;
+}
 ```
 
-***
+---
 
 ## Sitemap
 

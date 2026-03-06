@@ -15,7 +15,7 @@ To enable a static export, change the output mode inside `next.config.js`:
  * @type {import('next').NextConfig}
  */
 const nextConfig = {
-  output: 'export',
+  output: "export",
 
   // Optional: Change links `/me` -> `/me/` and emit `/me.html` -> `/me/index.html`
   // trailingSlash: true,
@@ -25,9 +25,9 @@ const nextConfig = {
 
   // Optional: Change the output directory `out` -> `dist`
   // distDir: 'dist',
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 After running `next build`, Next.js will create an `out` folder with the HTML/CSS/JS assets for your application.
@@ -54,14 +54,14 @@ The majority of core Next.js features needed to build a static site are supporte
 ```js filename="next.config.js"
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  output: "export",
   images: {
-    loader: 'custom',
-    loaderFile: './my-loader.ts',
+    loader: "custom",
+    loaderFile: "./my-loader.ts",
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 This custom loader will define how to fetch images from a remote source. For example, the following loader will construct the URL for Cloudinary:
@@ -72,41 +72,41 @@ export default function cloudinaryLoader({
   width,
   quality,
 }: {
-  src: string
-  width: number
-  quality?: number
+  src: string;
+  width: number;
+  quality?: number;
 }) {
-  const params = ['f_auto', 'c_limit', `w_${width}`, `q_${quality || 'auto'}`]
+  const params = ["f_auto", "c_limit", `w_${width}`, `q_${quality || "auto"}`];
   return `https://res.cloudinary.com/demo/image/upload/${params.join(
-    ','
-  )}${src}`
+    ",",
+  )}${src}`;
 }
 ```
 
 ```js filename="my-loader.js" switcher
 export default function cloudinaryLoader({ src, width, quality }) {
-  const params = ['f_auto', 'c_limit', `w_${width}`, `q_${quality || 'auto'}`]
+  const params = ["f_auto", "c_limit", `w_${width}`, `q_${quality || "auto"}`];
   return `https://res.cloudinary.com/demo/image/upload/${params.join(
-    ','
-  )}${src}`
+    ",",
+  )}${src}`;
 }
 ```
 
 You can then use `next/image` in your application, defining relative paths to the image in Cloudinary:
 
 ```tsx filename="app/page.tsx" switcher
-import Image from 'next/image'
+import Image from "next/image";
 
 export default function Page() {
-  return <Image alt="turtles" src="/turtles.jpg" width={300} height={300} />
+  return <Image alt="turtles" src="/turtles.jpg" width={300} height={300} />;
 }
 ```
 
 ```jsx filename="app/page.js" switcher
-import Image from 'next/image'
+import Image from "next/image";
 
 export default function Page() {
-  return <Image alt="turtles" src="/turtles.jpg" width={300} height={300} />
+  return <Image alt="turtles" src="/turtles.jpg" width={300} height={300} />;
 }
 ```
 

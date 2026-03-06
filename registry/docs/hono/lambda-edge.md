@@ -49,14 +49,14 @@ mkdir lambda
 Edit `lambda/index_edge.ts`.
 
 ```ts
-import { Hono } from 'hono'
-import { handle } from 'hono/lambda-edge'
+import { Hono } from "hono";
+import { handle } from "hono/lambda-edge";
 
-const app = new Hono()
+const app = new Hono();
 
-app.get('/', (c) => c.text('Hello Hono on Lambda@Edge!'))
+app.get("/", (c) => c.text("Hello Hono on Lambda@Edge!"));
 
-export const handler = handle(app)
+export const handler = handle(app);
 ```
 
 ## 3. Deploy
@@ -65,45 +65,45 @@ Edit `bin/my-app.ts`.
 
 ```ts
 #!/usr/bin/env node
-import 'source-map-support/register'
-import * as cdk from 'aws-cdk-lib'
-import { MyAppStack } from '../lib/my-app-stack'
+import "source-map-support/register";
+import * as cdk from "aws-cdk-lib";
+import { MyAppStack } from "../lib/my-app-stack";
 
-const app = new cdk.App()
-new MyAppStack(app, 'MyAppStack', {
+const app = new cdk.App();
+new MyAppStack(app, "MyAppStack", {
   env: {
     account: process.env.CDK_DEFAULT_ACCOUNT,
-    region: 'us-east-1',
+    region: "us-east-1",
   },
-})
+});
 ```
 
 Edit `lambda/cdk-stack.ts`.
 
 ```ts
-import { Construct } from 'constructs'
-import * as cdk from 'aws-cdk-lib'
-import * as cloudfront from 'aws-cdk-lib/aws-cloudfront'
-import * as origins from 'aws-cdk-lib/aws-cloudfront-origins'
-import * as lambda from 'aws-cdk-lib/aws-lambda'
-import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs'
-import * as s3 from 'aws-cdk-lib/aws-s3'
+import { Construct } from "constructs";
+import * as cdk from "aws-cdk-lib";
+import * as cloudfront from "aws-cdk-lib/aws-cloudfront";
+import * as origins from "aws-cdk-lib/aws-cloudfront-origins";
+import * as lambda from "aws-cdk-lib/aws-lambda";
+import { NodejsFunction } from "aws-cdk-lib/aws-lambda-nodejs";
+import * as s3 from "aws-cdk-lib/aws-s3";
 
 export class MyAppStack extends cdk.Stack {
-  public readonly edgeFn: lambda.Function
+  public readonly edgeFn: lambda.Function;
 
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
-    super(scope, id, props)
-    const edgeFn = new NodejsFunction(this, 'edgeViewer', {
-      entry: 'lambda/index_edge.ts',
-      handler: 'handler',
+    super(scope, id, props);
+    const edgeFn = new NodejsFunction(this, "edgeViewer", {
+      entry: "lambda/index_edge.ts",
+      handler: "handler",
       runtime: lambda.Runtime.NODEJS_20_X,
-    })
+    });
 
     // Upload any html
-    const originBucket = new s3.Bucket(this, 'originBucket')
+    const originBucket = new s3.Bucket(this, "originBucket");
 
-    new cloudfront.Distribution(this, 'Cdn', {
+    new cloudfront.Distribution(this, "Cdn", {
       defaultBehavior: {
         origin: new origins.S3Origin(originBucket),
         edgeLambdas: [
@@ -113,7 +113,7 @@ export class MyAppStack extends cdk.Stack {
           },
         ],
       },
-    })
+    });
   }
 }
 ```
@@ -129,32 +129,32 @@ cdk deploy
 If you want to add Basic Auth and continue with request processing after verification, you can use `c.env.callback()`
 
 ```ts
-import { Hono } from 'hono'
-import { basicAuth } from 'hono/basic-auth'
-import type { Callback, CloudFrontRequest } from 'hono/lambda-edge'
-import { handle } from 'hono/lambda-edge'
+import { Hono } from "hono";
+import { basicAuth } from "hono/basic-auth";
+import type { Callback, CloudFrontRequest } from "hono/lambda-edge";
+import { handle } from "hono/lambda-edge";
 
 type Bindings = {
-  callback: Callback
-  request: CloudFrontRequest
-}
+  callback: Callback;
+  request: CloudFrontRequest;
+};
 
-const app = new Hono<{ Bindings: Bindings }>()
+const app = new Hono<{ Bindings: Bindings }>();
 
 app.get(
-  '*',
+  "*",
   basicAuth({
-    username: 'hono',
-    password: 'acoolproject',
-  })
-)
+    username: "hono",
+    password: "acoolproject",
+  }),
+);
 
-app.get('/', async (c, next) => {
-  await next()
-  c.env.callback(null, c.env.request)
-})
+app.get("/", async (c, next) => {
+  await next();
+  c.env.callback(null, c.env.request);
+});
 
-export const handler = handle(app)
+export const handler = handle(app);
 ```
 
 # Netlify
@@ -196,16 +196,16 @@ Move into `my-app`.
 Edit `netlify/edge-functions/index.ts`:
 
 ```ts
-import { Hono } from 'jsr:@hono/hono'
-import { handle } from 'jsr:@hono/hono/netlify'
+import { Hono } from "jsr:@hono/hono";
+import { handle } from "jsr:@hono/hono/netlify";
 
-const app = new Hono()
+const app = new Hono();
 
-app.get('/', (c) => {
-  return c.text('Hello Hono!')
-})
+app.get("/", (c) => {
+  return c.text("Hello Hono!");
+});
 
-export default handle(app)
+export default handle(app);
 ```
 
 ## 3. Run
@@ -229,25 +229,25 @@ netlify deploy --prod
 You can access the Netlify's `Context` through `c.env`:
 
 ```ts
-import { Hono } from 'jsr:@hono/hono'
-import { handle } from 'jsr:@hono/hono/netlify'
+import { Hono } from "jsr:@hono/hono";
+import { handle } from "jsr:@hono/hono/netlify";
 
 // Import the type definition
-import type { Context } from 'https://edge.netlify.com/'
+import type { Context } from "https://edge.netlify.com/";
 
 export type Env = {
   Bindings: {
-    context: Context
-  }
-}
+    context: Context;
+  };
+};
 
-const app = new Hono<Env>()
+const app = new Hono<Env>();
 
-app.get('/country', (c) =>
+app.get("/country", (c) =>
   c.json({
-    'You are in': c.env.context.geo.country?.name,
-  })
-)
+    "You are in": c.env.context.geo.country?.name,
+  }),
+);
 
-export default handle(app)
+export default handle(app);
 ```

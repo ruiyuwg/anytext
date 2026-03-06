@@ -37,27 +37,27 @@ Next.js can support both build time and runtime environment variables.
 You safely read environment variables on the server during dynamic rendering.
 
 ```tsx filename="app/page.ts" switcher
-import { connection } from 'next/server'
+import { connection } from "next/server";
 
 export default async function Component() {
-  await connection()
+  await connection();
   // cookies, headers, and other Dynamic APIs
   // will also opt into dynamic rendering, meaning
   // this env variable is evaluated at runtime
-  const value = process.env.MY_VALUE
+  const value = process.env.MY_VALUE;
   // ...
 }
 ```
 
 ```jsx filename="app/page.js" switcher
-import { connection } from 'next/server'
+import { connection } from "next/server";
 
 export default async function Component() {
-  await connection()
+  await connection();
   // cookies, headers, and other Dynamic APIs
   // will also opt into dynamic rendering, meaning
   // this env variable is evaluated at runtime
-  const value = process.env.MY_VALUE
+  const value = process.env.MY_VALUE;
   // ...
 }
 ```
@@ -96,24 +96,24 @@ To configure the ISR/Data Cache location when self-hosting, you can configure a 
 
 ```jsx filename="next.config.js"
 module.exports = {
-  cacheHandler: require.resolve('./cache-handler.js'),
+  cacheHandler: require.resolve("./cache-handler.js"),
   cacheMaxMemorySize: 0, // disable default in-memory caching
-}
+};
 ```
 
 Then, create `cache-handler.js` in the root of your project, for example:
 
 ```jsx filename="cache-handler.js"
-const cache = new Map()
+const cache = new Map();
 
 module.exports = class CacheHandler {
   constructor(options) {
-    this.options = options
+    this.options = options;
   }
 
   async get(key) {
     // This could be stored anywhere, like durable storage
-    return cache.get(key)
+    return cache.get(key);
   }
 
   async set(key, data, ctx) {
@@ -122,17 +122,17 @@ module.exports = class CacheHandler {
       value: data,
       lastModified: Date.now(),
       tags: ctx.tags,
-    })
+    });
   }
 
   async revalidateTag(tags) {
     // tags is either a string or an array of strings
-    tags = [tags].flat()
+    tags = [tags].flat();
     // Iterate over all entries in the cache
     for (let [key, value] of cache) {
       // If the value's tags include the specified tag, delete this entry
       if (value.tags.some((tag) => tags.includes(tag))) {
-        cache.delete(key)
+        cache.delete(key);
       }
     }
   }
@@ -140,7 +140,7 @@ module.exports = class CacheHandler {
   // If you want to have temporary in memory cache for a single request that is reset
   // before the next request you can leverage this method
   resetRequestCache() {}
-}
+};
 ```
 
 Using a custom cache handler will allow you to ensure consistency across all pods hosting your Next.js application. For instance, you can save the cached values anywhere, like [Redis](https://github.com/vercel/next.js/tree/canary/examples/cache-handler-redis) or AWS S3.
@@ -159,9 +159,9 @@ If you are rebuilding for each stage of your environment, you will need to gener
 module.exports = {
   generateBuildId: async () => {
     // This could be anything, using the latest git hash
-    return process.env.GIT_HASH
+    return process.env.GIT_HASH;
   },
-}
+};
 ```
 
 ## Multi-Server Deployments
@@ -209,7 +209,7 @@ If a mismatch is detected, Next.js triggers a hard navigation (full page reload)
 ```js filename="next.config.js"
 module.exports = {
   deploymentId: process.env.DEPLOYMENT_VERSION,
-}
+};
 ```
 
 > **Good to know:** When the application is reloaded, there may be a loss of application state if it's not designed to persist between page navigations. URL state or local storage would persist, but component state like `useState` would be lost.
@@ -225,17 +225,17 @@ module.exports = {
   async headers() {
     return [
       {
-        source: '/:path*{/}?',
+        source: "/:path*{/}?",
         headers: [
           {
-            key: 'X-Accel-Buffering',
-            value: 'no',
+            key: "X-Accel-Buffering",
+            value: "no",
           },
         ],
       },
-    ]
+    ];
   },
-}
+};
 ```
 
 ## Cache Components

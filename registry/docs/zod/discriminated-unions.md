@@ -7,8 +7,8 @@ type MyResult =
   | { status: "success"; data: string }
   | { status: "failed"; error: string };
 
-function handleResult(result: MyResult){
-  if(result.status === "success"){
+function handleResult(result: MyResult) {
+  if (result.status === "success") {
     result.data; // string
   } else {
     result.error; // string
@@ -16,9 +16,9 @@ function handleResult(result: MyResult){
 }
 ```
 
-You could represent it with a regular `z.union()`. But regular unions are *naive*—they check the input against each option in order and return the first one that passes. This can be slow for large unions.
+You could represent it with a regular `z.union()`. But regular unions are _naive_—they check the input against each option in order and return the first one that passes. This can be slow for large unions.
 
-So Zod provides a `z.discriminatedUnion()` API that uses a *discriminator key* to make parsing more efficient.
+So Zod provides a `z.discriminatedUnion()` API that uses a _discriminator key_ to make parsing more efficient.
 
 ```ts
 const MyResult = z.discriminatedUnion("status", [
@@ -27,7 +27,7 @@ const MyResult = z.discriminatedUnion("status", [
 ]);
 ```
 
-Each option should be an *object schema* whose discriminator prop (`status` in the example above) corresponds to some literal value or set of values, usually `z.enum()`, `z.literal()`, `z.null()`, or `z.undefined()`.
+Each option should be an _object schema_ whose discriminator prop (`status` in the example above) corresponds to some literal value or set of values, usually `z.enum()`, `z.literal()`, `z.null()`, or `z.undefined()`.
 
 {/\*
 

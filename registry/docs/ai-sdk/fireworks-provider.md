@@ -11,37 +11,37 @@ The Fireworks provider is available via the `@ai-sdk/fireworks` module. You can 
 You can import the default provider instance `fireworks` from `@ai-sdk/fireworks`:
 
 ```ts
-import { fireworks } from '@ai-sdk/fireworks';
+import { fireworks } from "@ai-sdk/fireworks";
 ```
 
 If you need a customized setup, you can import `createFireworks` from `@ai-sdk/fireworks`
 and create a provider instance with your settings:
 
 ```ts
-import { createFireworks } from '@ai-sdk/fireworks';
+import { createFireworks } from "@ai-sdk/fireworks";
 
 const fireworks = createFireworks({
-  apiKey: process.env.FIREWORKS_API_KEY ?? '',
+  apiKey: process.env.FIREWORKS_API_KEY ?? "",
 });
 ```
 
 You can use the following optional settings to customize the Fireworks provider instance:
 
-- **baseURL** *string*
+- **baseURL** _string_
 
   Use a different URL prefix for API calls, e.g. to use proxy servers.
   The default prefix is `https://api.fireworks.ai/inference/v1`.
 
-- **apiKey** *string*
+- **apiKey** _string_
 
   API key that is being sent using the `Authorization` header. It defaults to
   the `FIREWORKS_API_KEY` environment variable.
 
-- **headers** *Record\<string,string>*
+- **headers** _Record\<string,string>_
 
   Custom headers to include in the requests.
 
-- **fetch** *(input: RequestInfo, init?: RequestInit) => Promise\<Response>*
+- **fetch** _(input: RequestInfo, init?: RequestInit) => Promise\<Response>_
 
   Custom [fetch](https://developer.mozilla.org/en-US/docs/Web/API/fetch) implementation.
 
@@ -51,7 +51,7 @@ You can create [Fireworks models](https://fireworks.ai/models) using a provider 
 The first argument is the model id, e.g. `accounts/fireworks/models/firefunction-v1`:
 
 ```ts
-const model = fireworks('accounts/fireworks/models/firefunction-v1');
+const model = fireworks("accounts/fireworks/models/firefunction-v1");
 ```
 
 ### Reasoning Models
@@ -60,12 +60,12 @@ Fireworks exposes the thinking of `deepseek-r1` in the generated text using the 
 You can use the `extractReasoningMiddleware` to extract this reasoning and expose it as a `reasoning` property on the result:
 
 ```ts
-import { fireworks } from '@ai-sdk/fireworks';
-import { wrapLanguageModel, extractReasoningMiddleware } from 'ai';
+import { fireworks } from "@ai-sdk/fireworks";
+import { wrapLanguageModel, extractReasoningMiddleware } from "ai";
 
 const enhancedModel = wrapLanguageModel({
-  model: fireworks('accounts/fireworks/models/deepseek-r1'),
-  middleware: extractReasoningMiddleware({ tagName: 'think' }),
+  model: fireworks("accounts/fireworks/models/deepseek-r1"),
+  middleware: extractReasoningMiddleware({ tagName: "think" }),
 });
 ```
 
@@ -76,12 +76,12 @@ You can then use that enhanced model in functions like `generateText` and `strea
 You can use Fireworks language models to generate text with the `generateText` function:
 
 ```ts
-import { fireworks } from '@ai-sdk/fireworks';
-import { generateText } from 'ai';
+import { fireworks } from "@ai-sdk/fireworks";
+import { generateText } from "ai";
 
 const { text } = await generateText({
-  model: fireworks('accounts/fireworks/models/firefunction-v1'),
-  prompt: 'Write a vegetarian lasagna recipe for 4 people.',
+  model: fireworks("accounts/fireworks/models/firefunction-v1"),
+  prompt: "Write a vegetarian lasagna recipe for 4 people.",
 });
 ```
 
@@ -97,15 +97,15 @@ the [standard call settings](/docs/ai-sdk-core/settings). You can pass them in t
 import {
   fireworks,
   type FireworksLanguageModelOptions,
-} from '@ai-sdk/fireworks';
-import { generateText } from 'ai';
+} from "@ai-sdk/fireworks";
+import { generateText } from "ai";
 
 const { text, reasoningText } = await generateText({
-  model: fireworks('accounts/fireworks/models/kimi-k2p5'),
+  model: fireworks("accounts/fireworks/models/kimi-k2p5"),
   providerOptions: {
     fireworks: {
-      thinking: { type: 'enabled', budgetTokens: 4096 },
-      reasoningHistory: 'interleaved',
+      thinking: { type: "enabled", budgetTokens: 4096 },
+      reasoningHistory: "interleaved",
     } satisfies FireworksLanguageModelOptions,
   },
   prompt: 'How many "r"s are in the word "strawberry"?',
@@ -114,22 +114,20 @@ const { text, reasoningText } = await generateText({
 
 The following optional provider options are available for Fireworks chat models:
 
-- **thinking** *object*
+- **thinking** _object_
 
   Configuration for thinking/reasoning models like Kimi K2.5.
-
-  - **type** *'enabled' | 'disabled'*
+  - **type** _'enabled' | 'disabled'_
 
     Whether to enable thinking mode.
 
-  - **budgetTokens** *number*
+  - **budgetTokens** _number_
 
     Maximum number of tokens for thinking (minimum 1024).
 
-- **reasoningHistory** *'disabled' | 'interleaved' | 'preserved'*
+- **reasoningHistory** _'disabled' | 'interleaved' | 'preserved'_
 
   Controls how reasoning history is handled in multi-turn conversations:
-
   - `'disabled'`: Remove reasoning from history
   - `'interleaved'`: Include reasoning between tool calls within a single turn
   - `'preserved'`: Keep all reasoning in history
@@ -140,35 +138,35 @@ You can create models that call the Fireworks completions API using the `.comple
 
 ```ts
 const model = fireworks.completionModel(
-  'accounts/fireworks/models/firefunction-v1',
+  "accounts/fireworks/models/firefunction-v1",
 );
 ```
 
 ### Model Capabilities
 
-| Model                                                      | Image Input         | Object Generation   | Tool Usage          | Tool Streaming      |
-| ---------------------------------------------------------- | ------------------- | ------------------- | ------------------- | ------------------- |
-| `accounts/fireworks/models/firefunction-v1`                |  |  |  |  |
-| `accounts/fireworks/models/deepseek-r1`                    |  |  |  |  |
-| `accounts/fireworks/models/deepseek-v3`                    |  |  |  |  |
-| `accounts/fireworks/models/llama-v3p1-405b-instruct`       |  |  |  |  |
-| `accounts/fireworks/models/llama-v3p1-8b-instruct`         |  |  |  |  |
-| `accounts/fireworks/models/llama-v3p2-3b-instruct`         |  |  |  |  |
-| `accounts/fireworks/models/llama-v3p3-70b-instruct`        |  |  |  |  |
-| `accounts/fireworks/models/mixtral-8x7b-instruct`          |  |  |  |  |
-| `accounts/fireworks/models/mixtral-8x7b-instruct-hf`       |  |  |  |  |
-| `accounts/fireworks/models/mixtral-8x22b-instruct`         |  |  |  |  |
-| `accounts/fireworks/models/qwen2p5-coder-32b-instruct`     |  |  |  |  |
-| `accounts/fireworks/models/qwen2p5-72b-instruct`           |  |  |  |  |
-| `accounts/fireworks/models/qwen-qwq-32b-preview`           |  |  |  |  |
-| `accounts/fireworks/models/qwen2-vl-72b-instruct`          |  |  |  |  |
-| `accounts/fireworks/models/llama-v3p2-11b-vision-instruct` |  |  |  |  |
-| `accounts/fireworks/models/qwq-32b`                        |  |  |  |  |
-| `accounts/fireworks/models/yi-large`                       |  |  |  |  |
-| `accounts/fireworks/models/kimi-k2-instruct`               |  |  |  |  |
-| `accounts/fireworks/models/kimi-k2-thinking`               |  |  |  |  |
-| `accounts/fireworks/models/kimi-k2p5`                      |  |  |  |  |
-| `accounts/fireworks/models/minimax-m2`                     |  |  |  |  |
+| Model                                                      | Image Input | Object Generation | Tool Usage | Tool Streaming |
+| ---------------------------------------------------------- | ----------- | ----------------- | ---------- | -------------- |
+| `accounts/fireworks/models/firefunction-v1`                |             |                   |            |                |
+| `accounts/fireworks/models/deepseek-r1`                    |             |                   |            |                |
+| `accounts/fireworks/models/deepseek-v3`                    |             |                   |            |                |
+| `accounts/fireworks/models/llama-v3p1-405b-instruct`       |             |                   |            |                |
+| `accounts/fireworks/models/llama-v3p1-8b-instruct`         |             |                   |            |                |
+| `accounts/fireworks/models/llama-v3p2-3b-instruct`         |             |                   |            |                |
+| `accounts/fireworks/models/llama-v3p3-70b-instruct`        |             |                   |            |                |
+| `accounts/fireworks/models/mixtral-8x7b-instruct`          |             |                   |            |                |
+| `accounts/fireworks/models/mixtral-8x7b-instruct-hf`       |             |                   |            |                |
+| `accounts/fireworks/models/mixtral-8x22b-instruct`         |             |                   |            |                |
+| `accounts/fireworks/models/qwen2p5-coder-32b-instruct`     |             |                   |            |                |
+| `accounts/fireworks/models/qwen2p5-72b-instruct`           |             |                   |            |                |
+| `accounts/fireworks/models/qwen-qwq-32b-preview`           |             |                   |            |                |
+| `accounts/fireworks/models/qwen2-vl-72b-instruct`          |             |                   |            |                |
+| `accounts/fireworks/models/llama-v3p2-11b-vision-instruct` |             |                   |            |                |
+| `accounts/fireworks/models/qwq-32b`                        |             |                   |            |                |
+| `accounts/fireworks/models/yi-large`                       |             |                   |            |                |
+| `accounts/fireworks/models/kimi-k2-instruct`               |             |                   |            |                |
+| `accounts/fireworks/models/kimi-k2-thinking`               |             |                   |            |                |
+| `accounts/fireworks/models/kimi-k2p5`                      |             |                   |            |                |
+| `accounts/fireworks/models/minimax-m2`                     |             |                   |            |                |
 
 The table above lists popular models. Please see the [Fireworks models
 page](https://fireworks.ai/models) for a full list of available models.
@@ -178,18 +176,18 @@ page](https://fireworks.ai/models) for a full list of available models.
 You can create models that call the Fireworks embeddings API using the `.embeddingModel()` factory method:
 
 ```ts
-const model = fireworks.embeddingModel('nomic-ai/nomic-embed-text-v1.5');
+const model = fireworks.embeddingModel("nomic-ai/nomic-embed-text-v1.5");
 ```
 
 You can use Fireworks embedding models to generate embeddings with the `embed` function:
 
 ```ts
-import { fireworks } from '@ai-sdk/fireworks';
-import { embed } from 'ai';
+import { fireworks } from "@ai-sdk/fireworks";
+import { embed } from "ai";
 
 const { embedding } = await embed({
-  model: fireworks.embeddingModel('nomic-ai/nomic-embed-text-v1.5'),
-  value: 'sunny day at the beach',
+  model: fireworks.embeddingModel("nomic-ai/nomic-embed-text-v1.5"),
+  value: "sunny day at the beach",
 });
 ```
 
@@ -208,13 +206,13 @@ You can create Fireworks image models using the `.image()` factory method.
 For more on image generation with the AI SDK see [generateImage()](/docs/reference/ai-sdk-core/generate-image).
 
 ```ts
-import { fireworks } from '@ai-sdk/fireworks';
-import { generateImage } from 'ai';
+import { fireworks } from "@ai-sdk/fireworks";
+import { generateImage } from "ai";
 
 const { image } = await generateImage({
-  model: fireworks.image('accounts/fireworks/models/flux-1-dev-fp8'),
-  prompt: 'A futuristic cityscape at sunset',
-  aspectRatio: '16:9',
+  model: fireworks.image("accounts/fireworks/models/flux-1-dev-fp8"),
+  prompt: "A futuristic cityscape at sunset",
+  aspectRatio: "16:9",
 });
 ```
 
@@ -235,17 +233,17 @@ prompt-driven — describe what you want to change in the text prompt.
 Transform an existing image using text prompts:
 
 ```ts
-const imageBuffer = readFileSync('./input-image.png');
+const imageBuffer = readFileSync("./input-image.png");
 
 const { images } = await generateImage({
-  model: fireworks.image('accounts/fireworks/models/flux-kontext-pro'),
+  model: fireworks.image("accounts/fireworks/models/flux-kontext-pro"),
   prompt: {
-    text: 'Turn the cat into a golden retriever dog',
+    text: "Turn the cat into a golden retriever dog",
     images: [imageBuffer],
   },
   providerOptions: {
     fireworks: {
-      output_format: 'jpeg',
+      output_format: "jpeg",
     },
   },
 });
@@ -256,15 +254,15 @@ const { images } = await generateImage({
 Apply artistic styles to an image:
 
 ```ts
-const imageBuffer = readFileSync('./input-image.png');
+const imageBuffer = readFileSync("./input-image.png");
 
 const { images } = await generateImage({
-  model: fireworks.image('accounts/fireworks/models/flux-kontext-pro'),
+  model: fireworks.image("accounts/fireworks/models/flux-kontext-pro"),
   prompt: {
-    text: 'Transform this into a watercolor painting style',
+    text: "Transform this into a watercolor painting style",
     images: [imageBuffer],
   },
-  aspectRatio: '1:1',
+  aspectRatio: "1:1",
 });
 ```
 
@@ -282,17 +280,17 @@ For all models supporting size, the following sizes are supported:
 
 `640 x 1536, 768 x 1344, 832 x 1216, 896 x 1152, 1024x1024 (default), 1152 x 896, 1216 x 832, 1344 x 768, 1536 x 640`
 
-| Model                                                        | Dimensions Specification | Image Editing       |
-| ------------------------------------------------------------ | ------------------------ | ------------------- |
-| `accounts/fireworks/models/flux-kontext-pro`                 | Aspect Ratio             |  |
-| `accounts/fireworks/models/flux-kontext-max`                 | Aspect Ratio             |  |
-| `accounts/fireworks/models/flux-1-dev-fp8`                   | Aspect Ratio             |  |
-| `accounts/fireworks/models/flux-1-schnell-fp8`               | Aspect Ratio             |  |
-| `accounts/fireworks/models/playground-v2-5-1024px-aesthetic` | Size                     |  |
-| `accounts/fireworks/models/japanese-stable-diffusion-xl`     | Size                     |  |
-| `accounts/fireworks/models/playground-v2-1024px-aesthetic`   | Size                     |  |
-| `accounts/fireworks/models/SSD-1B`                           | Size                     |  |
-| `accounts/fireworks/models/stable-diffusion-xl-1024-v1-0`    | Size                     |  |
+| Model                                                        | Dimensions Specification | Image Editing |
+| ------------------------------------------------------------ | ------------------------ | ------------- |
+| `accounts/fireworks/models/flux-kontext-pro`                 | Aspect Ratio             |               |
+| `accounts/fireworks/models/flux-kontext-max`                 | Aspect Ratio             |               |
+| `accounts/fireworks/models/flux-1-dev-fp8`                   | Aspect Ratio             |               |
+| `accounts/fireworks/models/flux-1-schnell-fp8`               | Aspect Ratio             |               |
+| `accounts/fireworks/models/playground-v2-5-1024px-aesthetic` | Size                     |               |
+| `accounts/fireworks/models/japanese-stable-diffusion-xl`     | Size                     |               |
+| `accounts/fireworks/models/playground-v2-1024px-aesthetic`   | Size                     |               |
+| `accounts/fireworks/models/SSD-1B`                           | Size                     |               |
+| `accounts/fireworks/models/stable-diffusion-xl-1024-v1-0`    | Size                     |               |
 
 For more details, see the [Fireworks models page](https://fireworks.ai/models).
 

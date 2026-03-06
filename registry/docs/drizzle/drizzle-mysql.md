@@ -72,7 +72,7 @@ const db = drizzle({ client: poolConnection });
 </CodeTabs>
 
 <Callout type="warning" emoji="⚙️">
-  For the built in `migrate` function with DDL migrations we and drivers strongly encourage you to use single `client` connection.  
+  For the built in `migrate` function with DDL migrations we and drivers strongly encourage you to use single `client` connection.
 
 For querying purposes feel free to use either `client` or `pool` based on your business demands. </Callout>
 

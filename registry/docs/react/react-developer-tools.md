@@ -4,7 +4,7 @@ Use React Developer Tools to inspect React [components](/learn/your-first-compon
 
 - How to install React Developer Tools
 
-## Browser extension {/*browser-extension*/}
+## Browser extension {/_browser-extension_/}
 
 The easiest way to debug websites built with React is to install the React Developer Tools browser extension. It is available for several popular browsers:
 
@@ -12,11 +12,11 @@ The easiest way to debug websites built with React is to install the React Devel
 - [Install for **Firefox**](https://addons.mozilla.org/en-US/firefox/addon/react-devtools/)
 - [Install for **Edge**](https://microsoftedge.microsoft.com/addons/detail/react-developer-tools/gpphkfbcpidddadnkolkpfckpihlkkil)
 
-Now, if you visit a website **built with React,** you will see the *Components* and *Profiler* panels.
+Now, if you visit a website **built with React,** you will see the _Components_ and _Profiler_ panels.
 
 ![React Developer Tools extension](/images/docs/react-devtools-extension.png)
 
-### Safari and other browsers {/*safari-and-other-browsers*/}
+### Safari and other browsers {/_safari-and-other-browsers_/}
 
 For other browsers (for example, Safari), install the [`react-devtools`](https://www.npmjs.com/package/react-devtools) npm package:
 
@@ -40,13 +40,15 @@ Then connect your website by adding the following `<script>` tag to the beginnin
 <html>
   <head>
     <script src="http://localhost:8097"></script>
+  </head>
+</html>
 ```
 
 Reload your website in the browser now to view it in developer tools.
 
 ![React Developer Tools standalone](/images/docs/react-devtools-standalone.png)
 
-## Mobile (React Native) {/*mobile-react-native*/}
+## Mobile (React Native) {/_mobile-react-native_/}
 
 To inspect apps built with [React Native](https://reactnative.dev/), you can use [React Native DevTools](https://reactnative.dev/docs/react-native-devtools), the built-in debugger that deeply integrates React Developer Tools. All features work identically to the browser extension, including native element highlighting and selection.
 
@@ -54,7 +56,7 @@ To inspect apps built with [React Native](https://reactnative.dev/), you can use
 
 > For versions of React Native earlier than 0.76, please use the standalone build of React DevTools by following the [Safari and other browsers](#safari-and-other-browsers) guide above.
 
-***
+---
 
 ## Sitemap
 

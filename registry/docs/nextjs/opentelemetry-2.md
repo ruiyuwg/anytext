@@ -8,12 +8,12 @@ We recommend using OpenTelemetry for instrumenting your apps.
 It's a platform-agnostic way to instrument apps that allows you to change your observability provider without changing your code.
 Read [Official OpenTelemetry docs](https://opentelemetry.io/docs/) for more information about OpenTelemetry and how it works.
 
-This documentation uses terms like *Span*, *Trace* or *Exporter* throughout this doc, all of which can be found in [the OpenTelemetry Observability Primer](https://opentelemetry.io/docs/concepts/observability-primer/).
+This documentation uses terms like _Span_, _Trace_ or _Exporter_ throughout this doc, all of which can be found in [the OpenTelemetry Observability Primer](https://opentelemetry.io/docs/concepts/observability-primer/).
 
 Next.js supports OpenTelemetry instrumentation out of the box, which means that we already instrumented Next.js itself.
 
 When you enable OpenTelemetry we will automatically wrap all your code like
-`getStaticProps` in *spans* with helpful attributes.
+`getStaticProps` in _spans_ with helpful attributes.
 
 ## Getting Started
 
@@ -43,18 +43,18 @@ bun add @vercel/otel @opentelemetry/sdk-logs @opentelemetry/api-logs @openteleme
 Next, create a custom [`instrumentation.ts`](/docs/pages/guides/instrumentation) (or `.js`) file in the **root directory** of the project (or inside `src` folder if using one):
 
 ```ts filename="your-project/instrumentation.ts" switcher
-import { registerOTel } from '@vercel/otel'
+import { registerOTel } from "@vercel/otel";
 
 export function register() {
-  registerOTel({ serviceName: 'next-app' })
+  registerOTel({ serviceName: "next-app" });
 }
 ```
 
 ```js filename="your-project/instrumentation.js" switcher
-import { registerOTel } from '@vercel/otel'
+import { registerOTel } from "@vercel/otel";
 
 export function register() {
-  registerOTel({ serviceName: 'next-app' })
+  registerOTel({ serviceName: "next-app" });
 }
 ```
 
@@ -93,50 +93,50 @@ Unlike `@vercel/otel`, `NodeSDK` is not compatible with edge runtime, so you nee
 
 ```ts filename="instrumentation.ts" switcher
 export async function register() {
-  if (process.env.NEXT_RUNTIME === 'nodejs') {
-    await import('./instrumentation.node.ts')
+  if (process.env.NEXT_RUNTIME === "nodejs") {
+    await import("./instrumentation.node.ts");
   }
 }
 ```
 
 ```js filename="instrumentation.js" switcher
 export async function register() {
-  if (process.env.NEXT_RUNTIME === 'nodejs') {
-    await import('./instrumentation.node.js')
+  if (process.env.NEXT_RUNTIME === "nodejs") {
+    await import("./instrumentation.node.js");
   }
 }
 ```
 
 ```ts filename="instrumentation.node.ts" switcher
-import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-http'
-import { resourceFromAttributes } from '@opentelemetry/resources'
-import { NodeSDK } from '@opentelemetry/sdk-node'
-import { SimpleSpanProcessor } from '@opentelemetry/sdk-trace-node'
-import { ATTR_SERVICE_NAME } from '@opentelemetry/semantic-conventions'
+import { OTLPTraceExporter } from "@opentelemetry/exporter-trace-otlp-http";
+import { resourceFromAttributes } from "@opentelemetry/resources";
+import { NodeSDK } from "@opentelemetry/sdk-node";
+import { SimpleSpanProcessor } from "@opentelemetry/sdk-trace-node";
+import { ATTR_SERVICE_NAME } from "@opentelemetry/semantic-conventions";
 
 const sdk = new NodeSDK({
   resource: resourceFromAttributes({
-    [ATTR_SERVICE_NAME]: 'next-app',
+    [ATTR_SERVICE_NAME]: "next-app",
   }),
   spanProcessor: new SimpleSpanProcessor(new OTLPTraceExporter()),
-})
-sdk.start()
+});
+sdk.start();
 ```
 
 ```js filename="instrumentation.node.js" switcher
-import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-http'
-import { resourceFromAttributes } from '@opentelemetry/resources'
-import { NodeSDK } from '@opentelemetry/sdk-node'
-import { SimpleSpanProcessor } from '@opentelemetry/sdk-trace-node'
-import { ATTR_SERVICE_NAME } from '@opentelemetry/semantic-conventions'
+import { OTLPTraceExporter } from "@opentelemetry/exporter-trace-otlp-http";
+import { resourceFromAttributes } from "@opentelemetry/resources";
+import { NodeSDK } from "@opentelemetry/sdk-node";
+import { SimpleSpanProcessor } from "@opentelemetry/sdk-trace-node";
+import { ATTR_SERVICE_NAME } from "@opentelemetry/semantic-conventions";
 
 const sdk = new NodeSDK({
   resource: resourceFromAttributes({
-    [ATTR_SERVICE_NAME]: 'next-app',
+    [ATTR_SERVICE_NAME]: "next-app",
   }),
   spanProcessor: new SimpleSpanProcessor(new OTLPTraceExporter()),
-})
-sdk.start()
+});
+sdk.start();
 ```
 
 Doing this is equivalent to using `@vercel/otel`, but it's possible to modify and extend some features that are not exposed by the `@vercel/otel`. If edge runtime support is necessary, you will have to use `@vercel/otel`.
@@ -200,18 +200,18 @@ bun add @opentelemetry/api
 The following example demonstrates a function that fetches GitHub stars and adds a custom `fetchGithubStars` span to track the fetch request's result:
 
 ```ts
-import { trace } from '@opentelemetry/api'
+import { trace } from "@opentelemetry/api";
 
 export async function fetchGithubStars() {
   return await trace
-    .getTracer('nextjs-example')
-    .startActiveSpan('fetchGithubStars', async (span) => {
+    .getTracer("nextjs-example")
+    .startActiveSpan("fetchGithubStars", async (span) => {
       try {
-        return await getValue()
+        return await getValue();
       } finally {
-        span.end()
+        span.end();
       }
-    })
+    });
 }
 ```
 

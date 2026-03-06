@@ -25,35 +25,35 @@ The Vercel provider is available via the `@ai-sdk/vercel` module. You can instal
 You can import the default provider instance `vercel` from `@ai-sdk/vercel`:
 
 ```ts
-import { vercel } from '@ai-sdk/vercel';
+import { vercel } from "@ai-sdk/vercel";
 ```
 
 If you need a customized setup, you can import `createVercel` from `@ai-sdk/vercel` and create a provider instance with your settings:
 
 ```ts
-import { createVercel } from '@ai-sdk/vercel';
+import { createVercel } from "@ai-sdk/vercel";
 
 const vercel = createVercel({
-  apiKey: process.env.VERCEL_API_KEY ?? '',
+  apiKey: process.env.VERCEL_API_KEY ?? "",
 });
 ```
 
 You can use the following optional settings to customize the Vercel provider instance:
 
-- **baseURL** *string*
+- **baseURL** _string_
 
   Use a different URL prefix for API calls. The default prefix is `https://api.v0.dev/v1`.
 
-- **apiKey** *string*
+- **apiKey** _string_
 
   API key that is being sent using the `Authorization` header. It defaults to
   the `VERCEL_API_KEY` environment variable.
 
-- **headers** *Record\<string,string>*
+- **headers** _Record\<string,string>_
 
   Custom headers to include in the requests.
 
-- **fetch** *(input: RequestInfo, init?: RequestInit) => Promise\<Response>*
+- **fetch** _(input: RequestInfo, init?: RequestInit) => Promise\<Response>_
 
   Custom [fetch](https://developer.mozilla.org/en-US/docs/Web/API/fetch) implementation.
   Defaults to the global `fetch` function.
@@ -65,12 +65,12 @@ You can use the following optional settings to customize the Vercel provider ins
 You can create language models using a provider instance. The first argument is the model ID, for example:
 
 ```ts
-import { vercel } from '@ai-sdk/vercel';
-import { generateText } from 'ai';
+import { vercel } from "@ai-sdk/vercel";
+import { generateText } from "ai";
 
 const { text } = await generateText({
-  model: vercel('v0-1.5-md'),
-  prompt: 'Create a Next.js AI chatbot',
+  model: vercel("v0-1.5-md"),
+  prompt: "Create a Next.js AI chatbot",
 });
 ```
 
@@ -99,11 +99,11 @@ All v0 models have the following capabilities:
 
 ## Model Capabilities
 
-| Model       | Image Input         | Object Generation   | Tool Usage          | Tool Streaming      |
-| ----------- | ------------------- | ------------------- | ------------------- | ------------------- |
-| `v0-1.5-md` |  |  |  |  |
-| `v0-1.5-lg` |  |  |  |  |
-| `v0-1.0-md` |  |  |  |  |
+| Model       | Image Input | Object Generation | Tool Usage | Tool Streaming |
+| ----------- | ----------- | ----------------- | ---------- | -------------- |
+| `v0-1.5-md` |             |                   |            |                |
+| `v0-1.5-lg` |             |                   |            |                |
+| `v0-1.0-md` |             |                   |            |                |
 
 # OpenAI
 
@@ -120,52 +120,52 @@ The OpenAI provider is available in the `@ai-sdk/openai` module. You can install
 You can import the default provider instance `openai` from `@ai-sdk/openai`:
 
 ```ts
-import { openai } from '@ai-sdk/openai';
+import { openai } from "@ai-sdk/openai";
 ```
 
 If you need a customized setup, you can import `createOpenAI` from `@ai-sdk/openai` and create a provider instance with your settings:
 
 ```ts
-import { createOpenAI } from '@ai-sdk/openai';
+import { createOpenAI } from "@ai-sdk/openai";
 
 const openai = createOpenAI({
   // custom settings, e.g.
   headers: {
-    'header-name': 'header-value',
+    "header-name": "header-value",
   },
 });
 ```
 
 You can use the following optional settings to customize the OpenAI provider instance:
 
-- **baseURL** *string*
+- **baseURL** _string_
 
   Use a different URL prefix for API calls, e.g. to use proxy servers.
   The default prefix is `https://api.openai.com/v1`.
 
-- **apiKey** *string*
+- **apiKey** _string_
 
   API key that is being sent using the `Authorization` header.
   It defaults to the `OPENAI_API_KEY` environment variable.
 
-- **name** *string*
+- **name** _string_
 
   The provider name. You can set this when using OpenAI compatible providers
   to change the model provider property. Defaults to `openai`.
 
-- **organization** *string*
+- **organization** _string_
 
   OpenAI Organization.
 
-- **project** *string*
+- **project** _string_
 
   OpenAI project.
 
-- **headers** *Record\<string,string>*
+- **headers** _Record\<string,string>_
 
   Custom headers to include in the requests.
 
-- **fetch** *(input: RequestInfo, init?: RequestInit) => Promise\<Response>*
+- **fetch** _(input: RequestInfo, init?: RequestInit) => Promise\<Response>_
 
   Custom [fetch](https://developer.mozilla.org/en-US/docs/Web/API/fetch) implementation.
   Defaults to the global `fetch` function.
@@ -177,14 +177,14 @@ You can use the following optional settings to customize the OpenAI provider ins
 The OpenAI provider instance is a function that you can invoke to create a language model:
 
 ```ts
-const model = openai('gpt-5');
+const model = openai("gpt-5");
 ```
 
 It automatically selects the correct API based on the model id.
 You can also pass additional settings in the second argument:
 
 ```ts
-const model = openai('gpt-5', {
+const model = openai("gpt-5", {
   // additional settings
 });
 ```
@@ -200,12 +200,12 @@ specify e.g. 'openai.chat')
 You can use OpenAI language models to generate text with the `generateText` function:
 
 ```ts
-import { openai } from '@ai-sdk/openai';
-import { generateText } from 'ai';
+import { openai } from "@ai-sdk/openai";
+import { generateText } from "ai";
 
 const { text } = await generateText({
-  model: openai('gpt-5'),
-  prompt: 'Write a vegetarian lasagna recipe for 4 people.',
+  model: openai("gpt-5"),
+  prompt: "Write a vegetarian lasagna recipe for 4 people.",
 });
 ```
 

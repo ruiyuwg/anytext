@@ -21,13 +21,13 @@ we recommend it only for local development and local databases. To read more abo
 Example
 
 ```ts
-index().on(table.id, table.email) // will work well and name will be autogeneretaed
-index('my_name').on(table.id, table.email) // will work well
+index().on(table.id, table.email); // will work well and name will be autogeneretaed
+index("my_name").on(table.id, table.email); // will work well
 
 // but
 
-index().on(sql`lower(${table.email})`) // error
-index('my_name').on(sql`lower(${table.email})`) // will work well
+index().on(sql`lower(${table.email})`); // error
+index("my_name").on(sql`lower(${table.email})`); // will work well
 ```
 
 2. **Push won't generate statements if these fields(list below) were changed in an existing index:**

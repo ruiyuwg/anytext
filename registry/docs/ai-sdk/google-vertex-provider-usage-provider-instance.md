@@ -3,17 +3,17 @@
 You can import the default provider instance `vertex` from `@ai-sdk/google-vertex`:
 
 ```ts
-import { vertex } from '@ai-sdk/google-vertex';
+import { vertex } from "@ai-sdk/google-vertex";
 ```
 
 If you need a customized setup, you can import `createVertex` from `@ai-sdk/google-vertex` and create a provider instance with your settings:
 
 ```ts
-import { createVertex } from '@ai-sdk/google-vertex';
+import { createVertex } from "@ai-sdk/google-vertex";
 
 const vertex = createVertex({
-  project: 'my-project', // optional
-  location: 'us-central1', // optional
+  project: "my-project", // optional
+  location: "us-central1", // optional
 });
 ```
 
@@ -26,13 +26,13 @@ The Node.js runtime is the default runtime supported by the AI SDK. It supports 
 If you want to customize the Google authentication options you can pass them as options to the `createVertex` function, for example:
 
 ```ts
-import { createVertex } from '@ai-sdk/google-vertex';
+import { createVertex } from "@ai-sdk/google-vertex";
 
 const vertex = createVertex({
   googleAuthOptions: {
     credentials: {
-      client_email: 'my-email',
-      private_key: 'my-private-key',
+      client_email: "my-email",
+      private_key: "my-private-key",
     },
   },
 });
@@ -42,61 +42,59 @@ const vertex = createVertex({
 
 You can use the following optional settings to customize the provider instance:
 
-- **project** *string*
+- **project** _string_
 
   The Google Cloud project ID that you want to use for the API calls.
   It uses the `GOOGLE_VERTEX_PROJECT` environment variable by default.
 
-- **location** *string*
+- **location** _string_
 
   The Google Cloud location that you want to use for the API calls, e.g. `us-central1`.
   It uses the `GOOGLE_VERTEX_LOCATION` environment variable by default.
 
-- **googleAuthOptions** *object*
+- **googleAuthOptions** _object_
 
   Optional. The Authentication options used by the [Google Auth Library](https://github.com/googleapis/google-auth-library-nodejs/). See also the [GoogleAuthOptions](https://github.com/googleapis/google-auth-library-nodejs/blob/08978822e1b7b5961f0e355df51d738e012be392/src/auth/googleauth.ts#L87C18-L87C35) interface.
-
-  - **authClient** *object*
+  - **authClient** _object_
     An `AuthClient` to use.
 
-  - **keyFilename** *string*
+  - **keyFilename** _string_
     Path to a .json, .pem, or .p12 key file.
 
-  - **keyFile** *string*
+  - **keyFile** _string_
     Path to a .json, .pem, or .p12 key file.
 
-  - **credentials** *object*
-    Object containing client\_email and private\_key properties, or the external account client options.
+  - **credentials** _object_
+    Object containing client_email and private_key properties, or the external account client options.
 
-  - **clientOptions** *object*
+  - **clientOptions** _object_
     Options object passed to the constructor of the client.
 
-  - **scopes** *string | string\[]*
+  - **scopes** _string | string\[]_
     Required scopes for the desired API request.
 
-  - **projectId** *string*
+  - **projectId** _string_
     Your project ID.
 
-  - **universeDomain** *string*
+  - **universeDomain** _string_
     The default service domain for a given Cloud universe.
 
-- **headers** *Resolvable\<Record\<string, string | undefined>>*
+- **headers** _Resolvable\<Record\<string, string | undefined>>_
 
   Headers to include in the requests. Can be provided in multiple formats:
-
   - A record of header key-value pairs: `Record<string, string | undefined>`
   - A function that returns headers: `() => Record<string, string | undefined>`
   - An async function that returns headers: `async () => Record<string, string | undefined>`
   - A promise that resolves to headers: `Promise<Record<string, string | undefined>>`
 
-- **fetch** *(input: RequestInfo, init?: RequestInit) => Promise\<Response>*
+- **fetch** _(input: RequestInfo, init?: RequestInit) => Promise\<Response>_
 
   Custom [fetch](https://developer.mozilla.org/en-US/docs/Web/API/fetch) implementation.
   Defaults to the global `fetch` function.
   You can use it as a middleware to intercept requests,
   or to provide a custom fetch implementation for e.g. testing.
 
-- **baseURL** *string*
+- **baseURL** _string_
 
   Optional. Base URL for the Google Vertex API calls e.g. to use proxy servers. By default, it is constructed using the location and project:
   `https://${location}-aiplatform.googleapis.com/v1/projects/${project}/locations/${location}/publishers/google`
@@ -113,7 +111,7 @@ The Edge runtime version of the Google Vertex provider supports Google's [Applic
 You can import the default provider instance `vertex` from `@ai-sdk/google-vertex/edge`:
 
 ```ts
-import { vertex } from '@ai-sdk/google-vertex/edge';
+import { vertex } from "@ai-sdk/google-vertex/edge";
 ```
 
 The `/edge` sub-module is included in the `@ai-sdk/google-vertex` package, so
@@ -123,11 +121,11 @@ you don't need to install it separately. You must import from
 If you need a customized setup, you can import `createVertex` from `@ai-sdk/google-vertex/edge` and create a provider instance with your settings:
 
 ```ts
-import { createVertex } from '@ai-sdk/google-vertex/edge';
+import { createVertex } from "@ai-sdk/google-vertex/edge";
 
 const vertex = createVertex({
-  project: 'my-project', // optional
-  location: 'us-central1', // optional
+  project: "my-project", // optional
+  location: "us-central1", // optional
 });
 ```
 
@@ -143,39 +141,37 @@ These values can be obtained from a service account JSON file from the [Google C
 
 You can use the following optional settings to customize the provider instance:
 
-- **project** *string*
+- **project** _string_
 
   The Google Cloud project ID that you want to use for the API calls.
   It uses the `GOOGLE_VERTEX_PROJECT` environment variable by default.
 
-- **location** *string*
+- **location** _string_
 
   The Google Cloud location that you want to use for the API calls, e.g. `us-central1`.
   It uses the `GOOGLE_VERTEX_LOCATION` environment variable by default.
 
-- **googleCredentials** *object*
+- **googleCredentials** _object_
 
   Optional. The credentials used by the Edge provider for authentication. These credentials are typically set through environment variables and are derived from a service account JSON file.
-
-  - **clientEmail** *string*
+  - **clientEmail** _string_
     The client email from the service account JSON file. Defaults to the contents of the `GOOGLE_CLIENT_EMAIL` environment variable.
 
-  - **privateKey** *string*
+  - **privateKey** _string_
     The private key from the service account JSON file. Defaults to the contents of the `GOOGLE_PRIVATE_KEY` environment variable.
 
-  - **privateKeyId** *string*
+  - **privateKeyId** _string_
     The private key ID from the service account JSON file (optional). Defaults to the contents of the `GOOGLE_PRIVATE_KEY_ID` environment variable.
 
-- **headers** *Resolvable\<Record\<string, string | undefined>>*
+- **headers** _Resolvable\<Record\<string, string | undefined>>_
 
   Headers to include in the requests. Can be provided in multiple formats:
-
   - A record of header key-value pairs: `Record<string, string | undefined>`
   - A function that returns headers: `() => Record<string, string | undefined>`
   - An async function that returns headers: `async () => Record<string, string | undefined>`
   - A promise that resolves to headers: `Promise<Record<string, string | undefined>>`
 
-- **fetch** *(input: RequestInfo, init?: RequestInit) => Promise\<Response>*
+- **fetch** _(input: RequestInfo, init?: RequestInit) => Promise\<Response>_
 
   Custom [fetch](https://developer.mozilla.org/en-US/docs/Web/API/fetch) implementation.
   Defaults to the global `fetch` function.
@@ -187,7 +183,7 @@ You can use the following optional settings to customize the provider instance:
 Express mode provides a simplified authentication method using an API key instead of OAuth or service account credentials. When using express mode, the `project` and `location` settings are not required.
 
 ```ts
-import { createVertex } from '@ai-sdk/google-vertex';
+import { createVertex } from "@ai-sdk/google-vertex";
 
 const vertex = createVertex({
   apiKey: process.env.GOOGLE_VERTEX_API_KEY,
@@ -196,7 +192,7 @@ const vertex = createVertex({
 
 ##### Optional Provider Settings
 
-- **apiKey** *string*
+- **apiKey** _string_
 
   The API key for Google Vertex AI. When provided, the provider uses express mode with API key authentication instead of OAuth.
   It uses the `GOOGLE_VERTEX_API_KEY` environment variable by default.

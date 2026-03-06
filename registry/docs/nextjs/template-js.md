@@ -16,13 +16,13 @@ A template can be defined by exporting a default React component from a `templat
 
 ```tsx filename="app/template.tsx" switcher
 export default function Template({ children }: { children: React.ReactNode }) {
-  return <div>{children}</div>
+  return <div>{children}</div>;
 }
 ```
 
 ```jsx filename="app/template.js" switcher
 export default function Template({ children }) {
-  return <div>{children}</div>
+  return <div>{children}</div>;
 }
 ```
 

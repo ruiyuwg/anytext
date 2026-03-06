@@ -7,7 +7,7 @@ The `cacheLife` option allows you to define **custom cache profiles** when using
 To define a profile, enable the [`cacheComponents` flag](/docs/app/api-reference/config/next-config-js/cacheComponents) and add the cache profile in the `cacheLife` object in the `next.config.js` file. For example, a `blog` profile:
 
 ```ts filename="next.config.ts" switcher
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   cacheComponents: true,
@@ -18,9 +18,9 @@ const nextConfig: NextConfig = {
       expire: 86400, // 1 day
     },
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 ```js filename="next.config.js" switcher
@@ -33,30 +33,30 @@ module.exports = {
       expire: 86400, // 1 day
     },
   },
-}
+};
 ```
 
 You can now use this custom `blog` configuration in your component or function as follows:
 
 ```tsx filename="app/actions.ts" highlight={4,5} switcher
-import { cacheLife } from 'next/cache'
+import { cacheLife } from "next/cache";
 
 export async function getCachedData() {
-  'use cache'
-  cacheLife('blog')
-  const data = await fetch('/api/data')
-  return data
+  "use cache";
+  cacheLife("blog");
+  const data = await fetch("/api/data");
+  return data;
 }
 ```
 
 ```jsx filename="app/actions.js" highlight={4,5} switcher
-import { cacheLife } from 'next/cache'
+import { cacheLife } from "next/cache";
 
 export async function getCachedData() {
-  'use cache'
-  cacheLife('blog')
-  const data = await fetch('/api/data')
-  return data
+  "use cache";
+  cacheLife("blog");
+  const data = await fetch("/api/data");
+  return data;
 }
 ```
 
@@ -85,7 +85,7 @@ View related API references.
 
 # compress
 
-By default, Next.js uses `gzip` to compress rendered content and static files when using `next start` or a custom server. This is an optimization for applications that do not have compression configured. If compression is *already* configured in your application via a custom server, Next.js will not add compression.
+By default, Next.js uses `gzip` to compress rendered content and static files when using `next start` or a custom server. This is an optimization for applications that do not have compression configured. If compression is _already_ configured in your application via a custom server, Next.js will not add compression.
 
 You can check if compression is enabled and which algorithm is used by looking at the [`Accept-Encoding`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Encoding) (browser accepted options) and [`Content-Encoding`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Encoding) (currently used) headers in the response.
 
@@ -96,7 +96,7 @@ To disable **compression**, set the `compress` config option to `false`:
 ```js filename="next.config.js"
 module.exports = {
   compress: false,
-}
+};
 ```
 
 We **do not recommend disabling compression** unless you have compression configured on your server, as compression reduces bandwidth usage and improves the performance of your application. For example, you're using [nginx](https://nginx.org/) and want to switch to `brotli`, set the `compress` option to `false` to allow nginx to handle compression.
@@ -109,8 +109,8 @@ Use the `crossOrigin` option to add a [`crossOrigin` attribute](https://develope
 
 ```js filename="next.config.js"
 module.exports = {
-  crossOrigin: 'anonymous',
-}
+  crossOrigin: "anonymous",
+};
 ```
 
 ## Options
@@ -129,15 +129,15 @@ CSS Chunking is a strategy used to improve the performance of your web applicati
 You can control how CSS files are chunked using the `experimental.cssChunking` option in your `next.config.js` file:
 
 ```tsx filename="next.config.ts" switcher
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const nextConfig = {
   experimental: {
     cssChunking: true, // default
   },
-} satisfies NextConfig
+} satisfies NextConfig;
 
-export default nextConfig
+export default nextConfig;
 ```
 
 ```js filename="next.config.js" switcher
@@ -146,9 +146,9 @@ const nextConfig = {
   experimental: {
     cssChunking: true, // default
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 ## Options

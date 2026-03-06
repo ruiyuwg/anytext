@@ -11,40 +11,40 @@ The Kling AI provider is available in the `@ai-sdk/klingai` module. You can inst
 You can import the default provider instance `klingai` from `@ai-sdk/klingai`:
 
 ```ts
-import { klingai } from '@ai-sdk/klingai';
+import { klingai } from "@ai-sdk/klingai";
 ```
 
 If you need a customized setup, you can import `createKlingAI` from `@ai-sdk/klingai` and create a provider instance with your settings:
 
 ```ts
-import { createKlingAI } from '@ai-sdk/klingai';
+import { createKlingAI } from "@ai-sdk/klingai";
 
 const klingai = createKlingAI({
-  accessKey: 'your-access-key',
-  secretKey: 'your-secret-key',
+  accessKey: "your-access-key",
+  secretKey: "your-secret-key",
 });
 ```
 
 You can use the following optional settings to customize the Kling AI provider instance:
 
-- **accessKey** *string*
+- **accessKey** _string_
 
   Kling AI access key. Defaults to the `KLINGAI_ACCESS_KEY` environment variable.
 
-- **secretKey** *string*
+- **secretKey** _string_
 
   Kling AI secret key. Defaults to the `KLINGAI_SECRET_KEY` environment variable.
 
-- **baseURL** *string*
+- **baseURL** _string_
 
   Use a different URL prefix for API calls, e.g. to use proxy servers.
   The default prefix is `https://api-singapore.klingai.com`.
 
-- **headers** *Record\<string,string>*
+- **headers** _Record\<string,string>_
 
   Custom headers to include in the requests.
 
-- **fetch** *(input: RequestInfo, init?: RequestInit) => Promise\<Response>*
+- **fetch** _(input: RequestInfo, init?: RequestInit) => Promise\<Response>_
 
   Custom [fetch](https://developer.mozilla.org/en-US/docs/Web/API/fetch) implementation.
   You can use it as a middleware to intercept requests,
@@ -67,17 +67,17 @@ for detailed compatibility across models.
 Generate videos from text prompts:
 
 ```ts
-import { klingai, type KlingAIVideoModelOptions } from '@ai-sdk/klingai';
-import { experimental_generateVideo as generateVideo } from 'ai';
+import { klingai, type KlingAIVideoModelOptions } from "@ai-sdk/klingai";
+import { experimental_generateVideo as generateVideo } from "ai";
 
 const { videos } = await generateVideo({
-  model: klingai.video('kling-v2.6-t2v'),
-  prompt: 'A chicken flying into the sunset in the style of 90s anime.',
-  aspectRatio: '16:9',
+  model: klingai.video("kling-v2.6-t2v"),
+  prompt: "A chicken flying into the sunset in the style of 90s anime.",
+  aspectRatio: "16:9",
   duration: 5,
   providerOptions: {
     klingai: {
-      mode: 'std',
+      mode: "std",
     } satisfies KlingAIVideoModelOptions,
   },
 });
@@ -88,22 +88,22 @@ const { videos } = await generateVideo({
 Generate videos from a start frame image with an optional text prompt. The popular start+end frame feature is available via the `imageTail` option:
 
 ```ts
-import { klingai, type KlingAIVideoModelOptions } from '@ai-sdk/klingai';
-import { experimental_generateVideo as generateVideo } from 'ai';
+import { klingai, type KlingAIVideoModelOptions } from "@ai-sdk/klingai";
+import { experimental_generateVideo as generateVideo } from "ai";
 
 const { videos } = await generateVideo({
-  model: klingai.video('kling-v2.6-i2v'),
+  model: klingai.video("kling-v2.6-i2v"),
   prompt: {
-    image: 'https://example.com/start-frame.png',
-    text: 'The cat slowly turns its head and blinks',
+    image: "https://example.com/start-frame.png",
+    text: "The cat slowly turns its head and blinks",
   },
   duration: 5,
   providerOptions: {
     klingai: {
       // Pro mode required for start+end frame control
-      mode: 'pro',
+      mode: "pro",
       // Optional: end frame image
-      imageTail: 'https://example.com/end-frame.png',
+      imageTail: "https://example.com/end-frame.png",
     } satisfies KlingAIVideoModelOptions,
   },
 });
@@ -114,37 +114,37 @@ const { videos } = await generateVideo({
 Generate videos with multiple storyboard shots, each with its own prompt and duration (Kling v3.0+):
 
 ```ts
-import { klingai, type KlingAIVideoModelOptions } from '@ai-sdk/klingai';
-import { experimental_generateVideo as generateVideo } from 'ai';
+import { klingai, type KlingAIVideoModelOptions } from "@ai-sdk/klingai";
+import { experimental_generateVideo as generateVideo } from "ai";
 
 const { videos } = await generateVideo({
-  model: klingai.video('kling-v3.0-t2v'),
-  prompt: '',
-  aspectRatio: '16:9',
+  model: klingai.video("kling-v3.0-t2v"),
+  prompt: "",
+  aspectRatio: "16:9",
   duration: 10,
   providerOptions: {
     klingai: {
-      mode: 'pro',
+      mode: "pro",
       multiShot: true,
-      shotType: 'customize',
+      shotType: "customize",
       multiPrompt: [
         {
           index: 1,
-          prompt: 'A sunrise over a calm ocean, warm golden light.',
-          duration: '4',
+          prompt: "A sunrise over a calm ocean, warm golden light.",
+          duration: "4",
         },
         {
           index: 2,
-          prompt: 'A flock of seagulls take flight from the beach.',
-          duration: '3',
+          prompt: "A flock of seagulls take flight from the beach.",
+          duration: "3",
         },
         {
           index: 3,
-          prompt: 'Waves crash against rocky cliffs at sunset.',
-          duration: '3',
+          prompt: "Waves crash against rocky cliffs at sunset.",
+          duration: "3",
         },
       ],
-      sound: 'on',
+      sound: "on",
     } satisfies KlingAIVideoModelOptions,
   },
 });
@@ -157,20 +157,20 @@ Multi-shot also works with image-to-video by combining a start frame image with 
 Generate video by transferring motion from a reference video to a character image:
 
 ```ts
-import { klingai, type KlingAIVideoModelOptions } from '@ai-sdk/klingai';
-import { experimental_generateVideo as generateVideo } from 'ai';
+import { klingai, type KlingAIVideoModelOptions } from "@ai-sdk/klingai";
+import { experimental_generateVideo as generateVideo } from "ai";
 
 const { videos } = await generateVideo({
-  model: klingai.video('kling-v2.6-motion-control'),
+  model: klingai.video("kling-v2.6-motion-control"),
   prompt: {
-    image: 'https://example.com/character.png',
-    text: 'The character performs a smooth dance move',
+    image: "https://example.com/character.png",
+    text: "The character performs a smooth dance move",
   },
   providerOptions: {
     klingai: {
-      videoUrl: 'https://example.com/reference-motion.mp4',
-      characterOrientation: 'image',
-      mode: 'std',
+      videoUrl: "https://example.com/reference-motion.mp4",
+      characterOrientation: "image",
+      mode: "std",
     } satisfies KlingAIVideoModelOptions,
   },
 });
@@ -183,88 +183,88 @@ The following provider options are available via `providerOptions.klingai`. Opti
 
 #### Common Options
 
-- **mode** *'std' | 'pro'*
+- **mode** _'std' | 'pro'_
 
   Video generation mode. `'std'` is cost-effective. `'pro'` produces higher quality
   but takes longer.
 
-- **pollIntervalMs** *number*
+- **pollIntervalMs** _number_
 
   Polling interval in milliseconds for checking task status. Defaults to 5000.
 
-- **pollTimeoutMs** *number*
+- **pollTimeoutMs** _number_
 
   Maximum wait time in milliseconds for video generation. Defaults to 600000 (10 minutes).
 
 #### Text-to-Video and Image-to-Video Options
 
-- **negativePrompt** *string*
+- **negativePrompt** _string_
 
   A description of what to avoid in the generated video (max 2500 characters).
 
-- **sound** *'on' | 'off'*
+- **sound** _'on' | 'off'_
 
   Whether to generate audio simultaneously. Only V2.6 and subsequent models support this, and requires `mode: 'pro'`.
 
-- **cfgScale** *number*
+- **cfgScale** _number_
 
   Flexibility in video generation. Higher values mean stronger prompt adherence. Range: \[0, 1]. Not supported by V2.x models.
 
-- **cameraControl** *object*
+- **cameraControl** _object_
 
   Camera movement control with a `type` preset (`'simple'`, `'down_back'`, `'forward_up'`, `'right_turn_forward'`, `'left_turn_forward'`) and optional `config` with `horizontal`, `vertical`, `pan`, `tilt`, `roll`, `zoom` values (range: \[-10, 10]).
 
-- **multiShot** *boolean*
+- **multiShot** _boolean_
 
   Enable multi-shot video generation (Kling v3.0+). When true, the video is split into up to 6 storyboard shots with individual prompts and durations.
 
-- **shotType** *'customize' | 'intelligence'*
+- **shotType** _'customize' | 'intelligence'_
 
   Storyboard method for multi-shot generation. `'customize'` uses `multiPrompt` for user-defined shots. `'intelligence'` lets the model auto-segment based on the main prompt. Required when `multiShot` is true.
 
-- **multiPrompt** *Array<{index, prompt, duration}>*
+- **multiPrompt** _Array<{index, prompt, duration}>_
 
   Per-shot details for multi-shot generation. Each shot has an `index` (number), `prompt` (string, max 512 characters), and `duration` (string, in seconds). Shot durations must sum to the total duration. Required when `multiShot` is true and `shotType` is `'customize'`.
 
-- **voiceList** *Array<{voice\_id: string}>*
+- **voiceList** _Array<{voice_id: string}>_
 
   Voice references for voice control (Kling v3.0+). Up to 2 voices. Reference via `<<<voice_1>>>` template syntax in the prompt. Requires `sound: 'on'`. Cannot coexist with `elementList` on the I2V endpoint.
 
 #### Image-to-Video Only Options
 
-- **imageTail** *string*
+- **imageTail** _string_
 
   End frame image for start+end frame control. Accepts an image URL or raw base64-encoded data. Requires `mode: 'pro'` for most models.
 
-- **staticMask** *string*
+- **staticMask** _string_
 
   Static brush mask image for motion brush. Accepts an image URL or raw base64-encoded data.
 
-- **dynamicMasks** *Array*
+- **dynamicMasks** _Array_
 
   Dynamic brush configurations for motion brush. Up to 6 groups, each with a `mask` (image URL or base64) and `trajectories` (array of `{x, y}` coordinates).
 
-- **elementList** *Array<{element\_id: number}>*
+- **elementList** _Array<{element_id: number}>_
 
   Reference elements for element control (Kling v3.0+ I2V). Supports video character elements and multi-image elements. Up to 3 reference elements. Cannot coexist with `voiceList`.
 
 #### Motion Control Only Options
 
-- **videoUrl** *string* (required)
+- **videoUrl** _string_ (required)
 
   URL of the reference motion video. Supports .mp4/.mov, max 100MB, duration 3–30 seconds.
 
-- **characterOrientation** *'image' | 'video'* (required)
+- **characterOrientation** _'image' | 'video'_ (required)
 
   Orientation of the characters in the generated video.
   `'image'` matches the reference image orientation (max 10s video).
   `'video'` matches the reference video orientation (max 30s video).
 
-- **keepOriginalSound** *'yes' | 'no'*
+- **keepOriginalSound** _'yes' | 'no'_
 
   Whether to keep the original sound from the reference video. Defaults to `'yes'`.
 
-- **watermarkEnabled** *boolean*
+- **watermarkEnabled** _boolean_
 
   Whether to generate watermarked results simultaneously.
 

@@ -2,7 +2,7 @@
 
 Validates against calling setState synchronously in an effect, which can lead to re-renders that degrade performance.
 
-## Rule Details {/*rule-details*/}
+## Rule Details {/_rule-details_/}
 
 Setting state immediately inside an effect forces React to restart the entire render cycle. When you update state in an effect, React must re-render your component, apply changes to the DOM, and then run effects again. This creates an extra render pass that could have been avoided by transforming data directly during render or deriving state from props. Transform data at the top level of your component instead. This code will naturally re-run when props or state change without triggering additional render cycles.
 
@@ -10,7 +10,7 @@ Synchronous `setState` calls in effects trigger immediate re-renders before the 
 
 In many cases, you may also not need an effect at all. Please see [You Might Not Need an Effect](/learn/you-might-not-need-an-effect) for more information.
 
-## Common Violations {/*common-violations*/}
+## Common Violations {/_common-violations_/}
 
 This rule catches several patterns where synchronous setState is used unnecessarily:
 
@@ -18,13 +18,13 @@ This rule catches several patterns where synchronous setState is used unnecessar
 - Deriving state from props in effects
 - Transforming data in effects instead of render
 
-### Invalid {/*invalid*/}
+### Invalid {/_invalid_/}
 
 Examples of incorrect code for this rule:
 
 ```js
 // ❌ Synchronous setState in effect
-function Component({data}) {
+function Component({ data }) {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
@@ -43,7 +43,7 @@ function Component() {
 }
 
 // ❌ Transforming data in effect
-function Component({rawData}) {
+function Component({ rawData }) {
   const [processed, setProcessed] = useState([]);
 
   useEffect(() => {
@@ -52,16 +52,16 @@ function Component({rawData}) {
 }
 
 // ❌ Deriving state from props
-function Component({selectedId, items}) {
+function Component({ selectedId, items }) {
   const [selected, setSelected] = useState(null);
 
   useEffect(() => {
-    setSelected(items.find(i => i.id === selectedId));
+    setSelected(items.find((i) => i.id === selectedId));
   }, [selectedId, items]);
 }
 ```
 
-### Valid {/*valid*/}
+### Valid {/_valid_/}
 
 Examples of correct code for this rule:
 
@@ -78,15 +78,15 @@ function Tooltip() {
 }
 
 // ✅ Calculate during render
-function Component({selectedId, items}) {
-  const selected = items.find(i => i.id === selectedId);
+function Component({ selectedId, items }) {
+  const selected = items.find((i) => i.id === selectedId);
   return <div>{selected?.name}</div>;
 }
 ```
 
 **When something can be calculated from the existing props or state, don't put it in state.** Instead, calculate it during rendering. This makes your code faster, simpler, and less error-prone. Learn more in [You Might Not Need an Effect](/learn/you-might-not-need-an-effect).
 
-***
+---
 
 ## Sitemap
 

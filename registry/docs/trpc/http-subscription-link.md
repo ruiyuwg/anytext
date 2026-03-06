@@ -11,13 +11,13 @@ If your client's environment doesn't support EventSource, you need an [EventSour
 To use `httpSubscriptionLink`, you need to use a [splitLink](./splitLink.mdx) to make it explicit that we want to use SSE for subscriptions.
 
 ```ts title="client/index.ts"
-import type { TRPCLink } from '@trpc/client';
+import type { TRPCLink } from "@trpc/client";
 import {
   httpBatchLink,
   httpSubscriptionLink,
   loggerLink,
   splitLink,
-} from '@trpc/client';
+} from "@trpc/client";
 
 const trpcClient = createTRPCClient<AppRouter>({
   /**
@@ -28,7 +28,7 @@ const trpcClient = createTRPCClient<AppRouter>({
     loggerLink(),
     splitLink({
       // uses the httpSubscriptionLink for subscriptions
-      condition: (op) => op.type === 'subscription',
+      condition: (op) => op.type === "subscription",
       true: httpSubscriptionLink({
         url: `/api/trpc`,
       }),
@@ -59,7 +59,7 @@ If the client and server are not on the same domain, you can use `withCredential
 ```tsx
 // [...]
 httpSubscriptionLink({
-  url: 'https://example.com/api/trpc',
+  url: "https://example.com/api/trpc",
   eventSourceOptions() {
     return {
       withCredentials: true, // <---
@@ -80,17 +80,17 @@ import {
   httpBatchLink,
   httpSubscriptionLink,
   splitLink,
-} from '@trpc/client';
-import { EventSourcePolyfill } from 'event-source-polyfill';
-import type { AppRouter } from '../server/index.js';
+} from "@trpc/client";
+import { EventSourcePolyfill } from "event-source-polyfill";
+import type { AppRouter } from "../server/index.js";
 
 // Initialize the tRPC client
 const trpc = createTRPCClient<AppRouter>({
   links: [
     splitLink({
-      condition: (op) => op.type === 'subscription',
+      condition: (op) => op.type === "subscription",
       true: httpSubscriptionLink({
-        url: 'http://localhost:3000',
+        url: "http://localhost:3000",
         // ponyfill EventSource
         EventSource: EventSourcePolyfill,
         // options to pass to the EventSourcePolyfill constructor
@@ -100,14 +100,14 @@ const trpc = createTRPCClient<AppRouter>({
           const signature = await getSignature(op);
           return {
             headers: {
-              authorization: 'Bearer supersecret',
-              'x-signature': signature,
+              authorization: "Bearer supersecret",
+              "x-signature": signature,
             },
           };
         },
       }),
       false: httpBatchLink({
-        url: 'http://localhost:3000',
+        url: "http://localhost:3000",
       }),
     }),
   ],
@@ -129,20 +129,20 @@ import {
   httpSubscriptionLink,
   retryLink,
   splitLink,
-} from '@trpc/client';
+} from "@trpc/client";
 import {
   EventSourcePolyfill,
   EventSourcePolyfillInit,
-} from 'event-source-polyfill';
-import type { AppRouter } from '../server/index.js';
+} from "event-source-polyfill";
+import type { AppRouter } from "../server/index.js";
 
 // Initialize the tRPC client
 const trpc = createTRPCClient<AppRouter>({
   links: [
     splitLink({
-      condition: (op) => op.type === 'subscription',
+      condition: (op) => op.type === "subscription",
       false: httpBatchLink({
-        url: 'http://localhost:3000',
+        url: "http://localhost:3000",
       }),
       true: [
         retryLink({
@@ -152,11 +152,11 @@ const trpc = createTRPCClient<AppRouter>({
             const code = opts.error.data?.code;
             if (!code) {
               // This shouldn't happen as our httpSubscriptionLink will automatically retry within when there's a non-parsable response
-              console.error('No error code found, retrying', opts);
+              console.error("No error code found, retrying", opts);
               return true;
             }
-            if (code === 'UNAUTHORIZED' || code === 'FORBIDDEN') {
-              console.log('Retrying due to 401/403 error');
+            if (code === "UNAUTHORIZED" || code === "FORBIDDEN") {
+              console.log("Retrying due to 401/403 error");
               return true;
             }
             return false;
@@ -191,7 +191,7 @@ const trpc = createTRPCClient<AppRouter>({
 In order to authenticate with `EventSource`, you can define `connectionParams` in `httpSubscriptionLink`. This will be sent as part of the URL, which is why other methods are preferred).
 
 ```ts twoslash title="server/context.ts"
-import type { CreateHTTPContextOptions } from '@trpc/server/adapters/standalone';
+import type { CreateHTTPContextOptions } from "@trpc/server/adapters/standalone";
 
 export const createContext = async (opts: CreateHTTPContextOptions) => {
   const token = opts.info.connectionParams?.token;
@@ -211,25 +211,25 @@ import {
   httpBatchLink,
   httpSubscriptionLink,
   splitLink,
-} from '@trpc/client';
-import type { AppRouter } from '../server/index.js';
+} from "@trpc/client";
+import type { AppRouter } from "../server/index.js";
 
 // Initialize the tRPC client
 const trpc = createTRPCClient<AppRouter>({
   links: [
     splitLink({
-      condition: (op) => op.type === 'subscription',
+      condition: (op) => op.type === "subscription",
       true: httpSubscriptionLink({
-        url: 'http://localhost:3000',
+        url: "http://localhost:3000",
         connectionParams: async () => {
           // Will be serialized as part of the URL
           return {
-            token: 'supersecret',
+            token: "supersecret",
           };
         },
       }),
       false: httpBatchLink({
-        url: 'http://localhost:3000',
+        url: "http://localhost:3000",
       }),
     }),
   ],
@@ -243,7 +243,7 @@ The `httpSubscriptionLink` supports configuring a timeout for inactivity through
 The timeout configuration is set on the server side when initializing tRPC:
 
 ```ts title="server/trpc.ts"
-import { initTRPC } from '@trpc/server';
+import { initTRPC } from "@trpc/server";
 
 export const t = initTRPC.create({
   sse: {
@@ -259,7 +259,7 @@ export const t = initTRPC.create({
 The server can be configured to send periodic ping messages to keep the connection alive and prevent timeout disconnections. This is particularly useful when combined with the `reconnectAfterInactivityMs`-option.
 
 ```ts title="server/trpc.ts"
-import { initTRPC } from '@trpc/server';
+import { initTRPC } from "@trpc/server";
 
 export const t = initTRPC.create({
   sse: {
@@ -297,9 +297,9 @@ import { InstallSnippet } from '@site/src/components/InstallSnippet';
 Add the polyfills to your project before the link is used (e.g. where you add your TRPCReact.Provider):
 
 ```ts title="utils/api.tsx"
-import '@azure/core-asynciterator-polyfill';
-import { RNEventSource } from 'rn-eventsource-reborn';
-import { ReadableStream, TransformStream } from 'web-streams-polyfill';
+import "@azure/core-asynciterator-polyfill";
+import { RNEventSource } from "rn-eventsource-reborn";
+import { ReadableStream, TransformStream } from "web-streams-polyfill";
 
 globalThis.ReadableStream = globalThis.ReadableStream || ReadableStream;
 globalThis.TransformStream = globalThis.TransformStream || TransformStream;

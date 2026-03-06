@@ -7,7 +7,7 @@ TypeScript is a popular way to add type definitions to JavaScript codebases. Out
 - [Common types from `@types/react`](/learn/typescript#useful-types)
 - [Further learning locations](/learn/typescript#further-learning)
 
-## Installation {/*installation*/}
+## Installation {/_installation_/}
 
 All [production-grade React frameworks](/learn/creating-a-react-app#full-stack-frameworks) offer support for using TypeScript. Follow the framework specific guide for installation:
 
@@ -16,7 +16,7 @@ All [production-grade React frameworks](/learn/creating-a-react-app#full-stack-f
 - [Gatsby](https://www.gatsbyjs.com/docs/how-to/custom-configuration/typescript/)
 - [Expo](https://docs.expo.dev/guides/typescript/)
 
-### Adding TypeScript to an existing React project {/*adding-typescript-to-an-existing-react-project*/}
+### Adding TypeScript to an existing React project {/_adding-typescript-to-an-existing-react-project_/}
 
 To install the latest version of React's type definitions:
 
@@ -28,7 +28,7 @@ The following compiler options need to be set in your `tsconfig.json`:
 2. [`jsx`](https://www.typescriptlang.org/tsconfig/#jsx) must be set to one of the valid options. `preserve` should suffice for most applications.
    If you're publishing a library, consult the [`jsx` documentation](https://www.typescriptlang.org/tsconfig/#jsx) on what value to choose.
 
-## TypeScript with React Components {/*typescript-with-react-components*/}
+## TypeScript with React Components {/_typescript-with-react-components_/}
 
 Every file containing JSX must use the `.tsx` file extension. This is a TypeScript-specific extension that tells TypeScript that this file contains JSX.
 
@@ -38,9 +38,7 @@ Taking the [`MyButton` component](/learn#components) from the [Quick Start](/lea
 
 ```tsx src/App.tsx active
 function MyButton({ title }: { title: string }) {
-  return (
-    <button>{title}</button>
-  );
+  return <button>{title}</button>;
 }
 
 export default function MyApp() {
@@ -71,16 +69,14 @@ interface MyButtonProps {
 }
 
 function MyButton({ title, disabled }: MyButtonProps) {
-  return (
-    <button disabled={disabled}>{title}</button>
-  );
+  return <button disabled={disabled}>{title}</button>;
 }
 
 export default function MyApp() {
   return (
     <div>
       <h1>Welcome to my app</h1>
-      <MyButton title="I'm a disabled button" disabled={true}/>
+      <MyButton title="I'm a disabled button" disabled={true} />
     </div>
   );
 }
@@ -93,13 +89,13 @@ export default App = AppTSX;
 
 The type describing your component's props can be as simple or as complex as you need, though they should be an object type described with either a `type` or `interface`. You can learn about how TypeScript describes objects in [Object Types](https://www.typescriptlang.org/docs/handbook/2/objects.html) but you may also be interested in using [Union Types](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types) to describe a prop that can be one of a few different types and the [Creating Types from Types](https://www.typescriptlang.org/docs/handbook/2/types-from-types.html) guide for more advanced use cases.
 
-## Example Hooks {/*example-hooks*/}
+## Example Hooks {/_example-hooks_/}
 
 The type definitions from `@types/react` include types for the built-in Hooks, so you can use them in your components without any additional setup. They are built to take into account the code you write in your component, so you will get [inferred types](https://www.typescriptlang.org/docs/handbook/type-inference.html) a lot of the time and ideally do not need to handle the minutiae of providing the types.
 
 However, we can look at a few examples of how to provide types for Hooks.
 
-### `useState` {/*typing-usestate*/}
+### `useState` {/_typing-usestate_/}
 
 The [`useState` Hook](/reference/react/useState) will re-use the value passed in as the initial state to determine what the type of the value should be. For example:
 
@@ -127,28 +123,30 @@ Or, as recommended in [Principles for structuring state](/learn/choosing-the-sta
 
 ```ts
 type RequestState =
-  | { status: 'idle' }
-  | { status: 'loading' }
-  | { status: 'success', data: any }
-  | { status: 'error', error: Error };
+  | { status: "idle" }
+  | { status: "loading" }
+  | { status: "success"; data: any }
+  | { status: "error"; error: Error };
 
-const [requestState, setRequestState] = useState<RequestState>({ status: 'idle' });
+const [requestState, setRequestState] = useState<RequestState>({
+  status: "idle",
+});
 ```
 
-### `useReducer` {/*typing-usereducer*/}
+### `useReducer` {/_typing-usereducer_/}
 
 The [`useReducer` Hook](/reference/react/useReducer) is a more complex Hook that takes a reducer function and an initial state. The types for the reducer function are inferred from the initial state. You can optionally provide a type argument to the `useReducer` call to provide a type for the state, but it is often better to set the type on the initial state instead:
 
 ```tsx src/App.tsx active
-import {useReducer} from 'react';
+import { useReducer } from "react";
 
 interface State {
-   count: number
-};
+  count: number;
+}
 
 type CounterAction =
   | { type: "reset" }
-  | { type: "setCount"; value: State["count"] }
+  | { type: "setCount"; value: State["count"] };
 
 const initialState: State = { count: 0 };
 
@@ -179,7 +177,6 @@ export default function App() {
     </div>
   );
 }
-
 ```
 
 ```js src/App.js hidden
@@ -197,7 +194,7 @@ We are using TypeScript in a few key places:
 A more explicit alternative to setting the type on `initialState` is to provide a type argument to `useReducer`:
 
 ```ts
-import { stateReducer, State } from './your-reducer-implementation';
+import { stateReducer, State } from "./your-reducer-implementation";
 
 const initialState = { count: 0 };
 
@@ -206,14 +203,14 @@ export default function App() {
 }
 ```
 
-### `useContext` {/*typing-usecontext*/}
+### `useContext` {/_typing-usecontext_/}
 
 The [`useContext` Hook](/reference/react/useContext) is a technique for passing data down the component tree without having to pass props through components. It is used by creating a provider component and often by creating a Hook to consume the value in a child component.
 
 The type of the value provided by the context is inferred from the value passed to the `createContext` call:
 
 ```tsx src/App.tsx active
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState } from "react";
 
 type Theme = "light" | "dark" | "system";
 const ThemeContext = createContext<Theme>("system");
@@ -221,13 +218,13 @@ const ThemeContext = createContext<Theme>("system");
 const useGetTheme = () => useContext(ThemeContext);
 
 export default function MyApp() {
-  const [theme, setTheme] = useState<Theme>('light');
+  const [theme, setTheme] = useState<Theme>("light");
 
   return (
     <ThemeContext value={theme}>
       <MyComponent />
     </ThemeContext>
-  )
+  );
 }
 
 function MyComponent() {
@@ -237,7 +234,7 @@ function MyComponent() {
     <div>
       <p>Current theme: {theme}</p>
     </div>
-  )
+  );
 }
 ```
 
@@ -289,7 +286,7 @@ function MyComponent() {
 }
 ```
 
-### `useMemo` {/*typing-usememo*/}
+### `useMemo` {/_typing-usememo_/}
 
 [React Compiler](/learn/react-compiler) automatically memoizes values and functions, reducing the need for manual `useMemo` calls. You can use the compiler to handle memoization automatically.
 
@@ -300,7 +297,7 @@ The [`useMemo`](/reference/react/useMemo) Hooks will create/re-access a memorize
 const visibleTodos = useMemo(() => filterTodos(todos, tab), [todos, tab]);
 ```
 
-### `useCallback` {/*typing-usecallback*/}
+### `useCallback` {/_typing-usecallback_/}
 
 [React Compiler](/learn/react-compiler) automatically memoizes values and functions, reducing the need for manual `useCallback` calls. You can use the compiler to handle memoization automatically.
 
@@ -335,16 +332,16 @@ export default function Form() {
 }
 ```
 
-## Useful Types {/*useful-types*/}
+## Useful Types {/_useful-types_/}
 
 There is quite an expansive set of types which come from the `@types/react` package, it is worth a read when you feel comfortable with how React and TypeScript interact. You can find them [in React's folder in DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react/index.d.ts). We will cover a few of the more common types here.
 
-### DOM Events {/*typing-dom-events*/}
+### DOM Events {/_typing-dom-events_/}
 
 When working with DOM events in React, the type of the event can often be inferred from the event handler. However, when you want to extract a function to be passed to an event handler, you will need to explicitly set the type of the event.
 
 ```tsx src/App.tsx active
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function Form() {
   const [value, setValue] = useState("Change me");
@@ -373,7 +370,7 @@ When determining the type you are looking for you can first look at the hover in
 
 If you need to use an event that is not included in this list, you can use the `React.SyntheticEvent` type, which is the base type for all events.
 
-### Children {/*typing-children*/}
+### Children {/_typing-children_/}
 
 There are two common paths to describing the children of a component. The first is to use the `React.ReactNode` type, which is a union of all the possible types that can be passed as children in JSX:
 
@@ -397,7 +394,7 @@ Note, that you cannot use TypeScript to describe that the children are a certain
 
 You can see an example of both `React.ReactNode` and `React.ReactElement` with the type-checker in [this TypeScript playground](https://www.typescriptlang.org/play?#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgIilQ3wChSB6CxYmAOmXRgDkIATJOdNJMGAZzgwAFpxAR+8YADswAVwGkZMJFEzpOjDKw4AFHGEEBvUnDhphwADZsi0gFw0mDWjqQBuUgF9yaCNMlENzgAXjgACjADfkctFnYkfQhDAEpQgD44AB42YAA3dKMo5P46C2tbJGkvLIpcgt9-QLi3AEEwMFCItJDMrPTTbIQ3dKywdIB5aU4kKyQQKpha8drhhIGzLLWODbNs3b3s8YAxKBQAcwXpAThMaGWDvbH0gFloGbmrgQfBzYpd1YjQZbEYARkB6zMwO2SHSAAlZlYIBCdtCRkZpHIrFYahQYQD8UYYFA5EhcfjyGYqHAXnJAsIUHlOOUbHYhMIIHJzsI0Qk4P9SLUBuRqXEXEwAKKfRZcNA8PiCfxWACecAAUgBlAAacFm80W-CU11U6h4TgwUv11yShjgJjMLMqDnN9Dilq+nh8pD8AXgCHdMrCkWisVoAet0R6fXqhWKhjKllZVVxMcavpd4Zg7U6Qaj+2hmdG4zeRF10uu-Aeq0LBfLMEe-V+T2L7zLVu+FBWLdLeq+lc7DYFf39deFVOotMCACNOCh1dq219a+30uC8YWoZsRyuEdjkevR8uvoVMdjyTWt4WiSSydXD4NqZP4AymeZE072ZzuUeZQKheQgA).
 
-### Style Props {/*typing-style-props*/}
+### Style Props {/_typing-style-props_/}
 
 When using inline styles in React, you can use `React.CSSProperties` to describe the object passed to the `style` prop. This type is a union of all the possible CSS properties, and is a good way to ensure you are passing valid CSS properties to the `style` prop, and to get auto-complete in your editor.
 
@@ -407,7 +404,7 @@ interface MyComponentProps {
 }
 ```
 
-## Further learning {/*further-learning*/}
+## Further learning {/_further-learning_/}
 
 This guide has covered the basics of using TypeScript with React, but there is a lot more to learn.
 Individual API pages on the docs may contain more in-depth documentation on how to use them with TypeScript.
@@ -422,7 +419,7 @@ We recommend the following resources:
 
 - [TypeScript Community Discord](https://discord.com/invite/typescript) is a great place to ask questions and get help with TypeScript and React issues.
 
-***
+---
 
 ## Sitemap
 

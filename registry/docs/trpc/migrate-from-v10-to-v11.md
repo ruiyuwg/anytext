@@ -6,7 +6,7 @@ import { InstallSnippet } from '@site/src/components/InstallSnippet';
 
 For most users, the migration should be quick & straight-forward.
 
-If the below three steps aren't enough, look through the below document for *"rarely breaking"*.
+If the below three steps aren't enough, look through the below document for _"rarely breaking"_.
 
 ### 1. Install new versions
 
@@ -36,7 +36,7 @@ We now support stopping subscriptions from the server, this means that you can n
 ```ts
 const myRouter = router({
   sub: publicProcedure.subscription(async function* (opts) {
-    for await (const data of on(ee, 'data', {
+    for await (const data of on(ee, "data", {
       signal: opts.signal,
     })) {
       const num = data[0] as number | undefined;
@@ -83,10 +83,10 @@ const router = router({
   embedPromise: publicProcedure.query(() => {
     async function slowThing() {
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      return 'slow';
+      return "slow";
     }
     return {
-      instant: 'instant',
+      instant: "instant",
       slow: slowThing(),
     };
   }),
@@ -236,13 +236,13 @@ You can still access the input by calling `info.calls[index].getRawInput()`.
 
 > This only affects you if you used the experimental formdata features
 
-- experimental\_formDataLink - use httpLink
-- experimental\_parseMultipartFormData - not needed anymore
-- experimental\_isMultipartFormDataRequest - not needed anymore
-- experimental\_composeUploadHandlers - not needed anymore
-- experimental\_createMemoryUploadHandler - not needed anymore
-- experimental\_NodeOnDiskFile and experimental\_createFileUploadHandler - not supported in this first release, open an issue if you need to hold data on disk
-- experimental\_contentTypeHandlers - not needed anymore, but could come back if needed by the community for novel data types
+- experimental_formDataLink - use httpLink
+- experimental_parseMultipartFormData - not needed anymore
+- experimental_isMultipartFormDataRequest - not needed anymore
+- experimental_composeUploadHandlers - not needed anymore
+- experimental_createMemoryUploadHandler - not needed anymore
+- experimental_NodeOnDiskFile and experimental_createFileUploadHandler - not supported in this first release, open an issue if you need to hold data on disk
+- experimental_contentTypeHandlers - not needed anymore, but could come back if needed by the community for novel data types
 
 You can see the new approach in `examples/next-formdata`
 
@@ -286,7 +286,7 @@ Wherever you have a HTTP Link you have to add `transformer: superjson` if you us
 
 ```ts
 httpBatchLink({
-  url: '/api/trpc',
+  url: "/api/trpc",
   transformer: superjson, // <-- add this
 });
 ```
@@ -312,11 +312,11 @@ See [Merging routers](../server/merging-routers.md#inline-sub-router)
 const appRouter = router({
   // Shorthand plain object for creating a sub-router
   nested1: {
-    proc: publicProcedure.query(() => '...'),
+    proc: publicProcedure.query(() => "..."),
   },
   // Equivalent of:
   nested2: router({
-    proc: publicProcedure.query(() => '...'),
+    proc: publicProcedure.query(() => "..."),
   }),
 });
 ```
@@ -404,7 +404,7 @@ export type AppRouter = typeof appRouter;
 // @include: router
 // @filename: utils/trpc.ts
 // ---cut---
-import type { AppRouter } from '../server/router';
+import type { AppRouter } from "../server/router";
 ```
 
 By using `import type` you ensure that the reference will be stripped at compile-time, meaning you don't inadvertently import server-side code into your client. For more information, [see the Typescript docs](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html#type-only-imports-and-export).

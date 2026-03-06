@@ -23,7 +23,7 @@ export function Video() {
       />
       Your browser does not support the video tag.
     </video>
-  )
+  );
 }
 ```
 
@@ -59,7 +59,7 @@ The HTML `<iframe>` tag allows you to embed videos from external platforms like 
 export default function Page() {
   return (
     <iframe src="https://www.youtube.com/embed/19g66ezsKAg" allowFullScreen />
-  )
+  );
 }
 ```
 
@@ -96,9 +96,9 @@ The first step is to create a [Server Component](/docs/app/getting-started/serve
 
 ```jsx filename="app/ui/video-component.jsx"
 export default async function VideoComponent() {
-  const src = await getVideoSrc()
+  const src = await getVideoSrc();
 
-  return <iframe src={src} allowFullScreen />
+  return <iframe src={src} allowFullScreen />;
 }
 ```
 
@@ -107,8 +107,8 @@ export default async function VideoComponent() {
 After creating the Server Component to embed the video, the next step is to [stream](/docs/app/api-reference/file-conventions/loading) the component using [React Suspense](https://react.dev/reference/react/Suspense).
 
 ```jsx filename="app/page.jsx"
-import { Suspense } from 'react'
-import VideoComponent from '../ui/VideoComponent.jsx'
+import { Suspense } from "react";
+import VideoComponent from "../ui/VideoComponent.jsx";
 
 export default function Page() {
   return (
@@ -118,7 +118,7 @@ export default function Page() {
       </Suspense>
       {/* Other content of the page */}
     </section>
-  )
+  );
 }
 ```
 
@@ -132,9 +132,9 @@ This approach results in a better user experience as it prevents the page from b
 For a more engaging and informative loading experience, consider using a loading skeleton as the fallback UI. So instead of showing a simple loading message, you can show a skeleton that resembles the video player like this:
 
 ```jsx filename="app/page.jsx"
-import { Suspense } from 'react'
-import VideoComponent from '../ui/VideoComponent.jsx'
-import VideoSkeleton from '../ui/VideoSkeleton.jsx'
+import { Suspense } from "react";
+import VideoComponent from "../ui/VideoComponent.jsx";
+import VideoSkeleton from "../ui/VideoSkeleton.jsx";
 
 export default function Page() {
   return (
@@ -144,7 +144,7 @@ export default function Page() {
       </Suspense>
       {/* Other content of the page */}
     </section>
-  )
+  );
 }
 ```
 
@@ -159,11 +159,11 @@ Self-hosting videos may be preferable for several reasons:
 
 ### Using Vercel Blob for video hosting
 
-[Vercel Blob](https://vercel.com/docs/storage/vercel-blob?utm_source=next-site\&utm_medium=docs\&utm_campaign=next-website) offers an efficient way to host videos, providing a scalable cloud storage solution that works well with Next.js. Here's how you can host a video using Vercel Blob:
+[Vercel Blob](https://vercel.com/docs/storage/vercel-blob?utm_source=next-site&utm_medium=docs&utm_campaign=next-website) offers an efficient way to host videos, providing a scalable cloud storage solution that works well with Next.js. Here's how you can host a video using Vercel Blob:
 
 **1. Uploading a video to Vercel Blob**
 
-In your Vercel dashboard, navigate to the "Storage" tab and select your [Vercel Blob](https://vercel.com/docs/storage/vercel-blob?utm_source=next-site\&utm_medium=docs\&utm_campaign=next-website) store. In the Blob table's upper-right corner, find and click the "Upload" button. Then, choose the video file you wish to upload. After the upload completes, the video file will appear in the Blob table.
+In your Vercel dashboard, navigate to the "Storage" tab and select your [Vercel Blob](https://vercel.com/docs/storage/vercel-blob?utm_source=next-site&utm_medium=docs&utm_campaign=next-website) store. In the Blob table's upper-right corner, find and click the "Upload" button. Then, choose the video file you wish to upload. After the upload completes, the video file will appear in the Blob table.
 
 Alternatively, you can upload your video using a server action. For detailed instructions, refer to the Vercel documentation on [server-side uploads](https://vercel.com/docs/storage/vercel-blob/server-upload). Vercel also supports [client-side uploads](https://vercel.com/docs/storage/vercel-blob/client-upload). This method may be preferable for certain use cases.
 
@@ -172,30 +172,30 @@ Alternatively, you can upload your video using a server action. For detailed ins
 Once the video is uploaded and stored, you can display it in your Next.js application. Here's an example of how to do this using the `<video>` tag and React Suspense:
 
 ```jsx filename="app/page.jsx"
-import { Suspense } from 'react'
-import { list } from '@vercel/blob'
+import { Suspense } from "react";
+import { list } from "@vercel/blob";
 
 export default function Page() {
   return (
     <Suspense fallback={<p>Loading video...</p>}>
       <VideoComponent fileName="my-video.mp4" />
     </Suspense>
-  )
+  );
 }
 
 async function VideoComponent({ fileName }) {
   const { blobs } = await list({
     prefix: fileName,
     limit: 1,
-  })
-  const { url } = blobs[0]
+  });
+  const { url } = blobs[0];
 
   return (
     <video controls preload="none" aria-label="Video player">
       <source src={url} type="video/mp4" />
       Your browser does not support the video tag.
     </video>
-  )
+  );
 }
 ```
 
@@ -203,16 +203,16 @@ In this approach, the page uses the video's `@vercel/blob` URL to display the vi
 
 ### Adding subtitles to your video
 
-If you have subtitles for your video, you can easily add them using the `<track>` element inside your `<video>` tag. You can fetch the subtitle file from [Vercel Blob](https://vercel.com/docs/storage/vercel-blob?utm_source=next-site\&utm_medium=docs\&utm_campaign=next-website) in a similar way as the video file. Here's how you can update the `<VideoComponent>` to include subtitles.
+If you have subtitles for your video, you can easily add them using the `<track>` element inside your `<video>` tag. You can fetch the subtitle file from [Vercel Blob](https://vercel.com/docs/storage/vercel-blob?utm_source=next-site&utm_medium=docs&utm_campaign=next-website) in a similar way as the video file. Here's how you can update the `<VideoComponent>` to include subtitles.
 
 ```jsx filename="app/page.jsx"
 async function VideoComponent({ fileName }) {
   const { blobs } = await list({
     prefix: fileName,
     limit: 2,
-  })
-  const { url } = blobs[0]
-  const { url: captionsUrl } = blobs[1]
+  });
+  const { url } = blobs[0];
+  const { url: captionsUrl } = blobs[1];
 
   return (
     <video controls preload="none" aria-label="Video player">
@@ -220,7 +220,7 @@ async function VideoComponent({ fileName }) {
       <track src={captionsUrl} kind="subtitles" srcLang="en" label="English" />
       Your browser does not support the video tag.
     </video>
-  )
+  );
 }
 ```
 
@@ -233,13 +233,13 @@ To continue learning more about video optimization and best practices, please re
 - **Understanding video formats and codecs**: Choose the right format and codec, like MP4 for compatibility or WebM for web optimization, for your video needs. For more details, see [Mozilla's guide on video codecs](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Video_codecs).
 - **Video compression**: Use tools like FFmpeg to effectively compress videos, balancing quality with file size. Learn about compression techniques at [FFmpeg's official website](https://www.ffmpeg.org/).
 - **Resolution and bitrate adjustment**: Adjust [resolution and bitrate](https://www.dacast.com/blog/bitrate-vs-resolution/#:~:text=The%20two%20measure%20different%20aspects,yield%20different%20qualities%20of%20video) based on the viewing platform, with lower settings for mobile devices.
-- **Content Delivery Networks (CDNs)**: Utilize a CDN to enhance video delivery speed and manage high traffic. When using some storage solutions, such as Vercel Blob, CDN functionality is automatically handled for you. [Learn more](https://vercel.com/docs/edge-network/overview?utm_source=next-site\&utm_medium=docs\&utm_campaign=next-website) about CDNs and their benefits.
+- **Content Delivery Networks (CDNs)**: Utilize a CDN to enhance video delivery speed and manage high traffic. When using some storage solutions, such as Vercel Blob, CDN functionality is automatically handled for you. [Learn more](https://vercel.com/docs/edge-network/overview?utm_source=next-site&utm_medium=docs&utm_campaign=next-website) about CDNs and their benefits.
 
 Explore these video streaming platforms for integrating video into your Next.js projects:
 
 ### Open source `next-video` component
 
-- Provides a `<Video>` component for Next.js, compatible with various hosting services including [Vercel Blob](https://vercel.com/docs/storage/vercel-blob?utm_source=next-site\&utm_medium=docs\&utm_campaign=next-website), S3, Backblaze, and Mux.
+- Provides a `<Video>` component for Next.js, compatible with various hosting services including [Vercel Blob](https://vercel.com/docs/storage/vercel-blob?utm_source=next-site&utm_medium=docs&utm_campaign=next-website), S3, Backblaze, and Mux.
 - [Detailed documentation](https://next-video.dev/docs) for using `next-video.dev` with different hosting services.
 
 ### Cloudinary Integration

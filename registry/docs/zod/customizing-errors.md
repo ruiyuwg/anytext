@@ -127,7 +127,7 @@ z.set(z.string(), { error: "Bad set!" });
 The `error` param optionally accepts a function. An error customization function is known as an **error map** in Zod terminology. The error map will run at parse time if a validation error occurs.
 
 ```ts
-z.string({ error: ()=>`[${Date.now()}]: Validation failure.` });
+z.string({ error: () => `[${Date.now()}]: Validation failure.` });
 ```
 
 **Note** — In Zod v3, there were separate params for `message` (a string) and `errorMap` (a function). These have been unified in Zod 4 as `error`.
@@ -136,7 +136,8 @@ The error map receives a context object you can use to customize the error messa
 
 ```ts
 z.string({
-  error: (iss) => iss.input === undefined ? "Field is required." : "Invalid input."
+  error: (iss) =>
+    iss.input === undefined ? "Field is required." : "Invalid input.",
 });
 ```
 
@@ -184,17 +185,17 @@ z.int64({
 
 ## Per-parse error customization
 
-To customize errors on a *per-parse* basis, pass an error map into the parse method:
+To customize errors on a _per-parse_ basis, pass an error map into the parse method:
 
 ```ts
 const schema = z.string();
 
 schema.parse(12, {
-  error: iss => "per-parse custom error"
+  error: (iss) => "per-parse custom error",
 });
 ```
 
-This has *lower precedence* than any schema-level custom messages.
+This has _lower precedence_ than any schema-level custom messages.
 
 ```ts
 const schema = z.string({ error: "highest priority" });
@@ -220,7 +221,7 @@ const result = schema.safeParse(12, {
       return `minimum is ${iss.minimum}`;
     }
     // ...
-  }
+  },
 });
 ```
 
@@ -230,8 +231,8 @@ By default, Zod does not include input data in issues. This is to prevent uninte
 
 ```ts
 z.string().parse(12, {
-  reportInput: true
-})
+  reportInput: true,
+});
 
 // ZodError: [
 //   {
@@ -256,7 +257,7 @@ z.config({
 });
 ```
 
-Global error messages have *lower precedence* than schema-level or per-parse error messages.
+Global error messages have _lower precedence_ than schema-level or per-parse error messages.
 
 The `iss` object is a [discriminated union](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#discriminated-unions) of all possible issue types. Use the `code` property to discriminate between them.
 
@@ -308,7 +309,7 @@ import * as z from "zod";
 async function loadLocale(locale: string) {
   const { default: locale } = await import(`zod/v4/locales/${locale}.js`);
   z.config(locale());
-};
+}
 
 await loadLocale("fr");
 ```
@@ -385,7 +386,7 @@ The following locales are available:
 
 ## Error precedence
 
-Below is a quick reference for determining error precedence: if multiple error customizations have been defined, which one takes priority? From *highest to lowest* priority:
+Below is a quick reference for determining error precedence: if multiple error customizations have been defined, which one takes priority? From _highest to lowest_ priority:
 
 1. **Schema-level error** — Any error message "hard coded" into a schema definition.
 
@@ -397,7 +398,7 @@ z.string("Not a string!");
 
 ```ts
 z.string().parse(12, {
-  error: (iss) => "My custom error"
+  error: (iss) => "My custom error",
 });
 ```
 
@@ -405,7 +406,7 @@ z.string().parse(12, {
 
 ```ts
 z.config({
-  customError: (iss) => "My custom error"
+  customError: (iss) => "My custom error",
 });
 ```
 

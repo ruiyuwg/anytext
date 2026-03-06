@@ -5,7 +5,7 @@ The first argument is the model id, e.g. `claude-3-haiku-20240307`.
 Some models have multi-modal capabilities.
 
 ```ts
-const model = anthropic('claude-3-haiku-20240307');
+const model = anthropic("claude-3-haiku-20240307");
 ```
 
 You can also use the following aliases for model creation:
@@ -17,12 +17,12 @@ You can also use the following aliases for model creation:
 You can use Anthropic language models to generate text with the `generateText` function:
 
 ```ts
-import { anthropic } from '@ai-sdk/anthropic';
-import { generateText } from 'ai';
+import { anthropic } from "@ai-sdk/anthropic";
+import { generateText } from "ai";
 
 const { text } = await generateText({
-  model: anthropic('claude-3-haiku-20240307'),
-  prompt: 'Write a vegetarian lasagna recipe for 4 people.',
+  model: anthropic("claude-3-haiku-20240307"),
+  prompt: "Write a vegetarian lasagna recipe for 4 people.",
 });
 ```
 
@@ -32,39 +32,38 @@ and support structured data generation with [`Output`](/docs/reference/ai-sdk-co
 
 The following optional provider options are available for Anthropic models:
 
-- `disableParallelToolUse` *boolean*
+- `disableParallelToolUse` _boolean_
 
   Optional. Disables the use of parallel tool calls. Defaults to `false`.
 
   When set to `true`, the model will only call one tool at a time instead of potentially calling multiple tools in parallel.
 
-- `sendReasoning` *boolean*
+- `sendReasoning` _boolean_
 
   Optional. Include reasoning content in requests sent to the model. Defaults to `true`.
 
   If you are experiencing issues with the model handling requests involving
   reasoning content, you can set this to `false` to omit them from the request.
 
-- `effort` *"high" | "medium" | "low"*
+- `effort` _"high" | "medium" | "low"_
 
   Optional. See [Effort section](#effort) for more details.
 
-- `speed` *"fast" | "standard"*
+- `speed` _"fast" | "standard"_
 
   Optional. See [Fast Mode section](#fast-mode) for more details.
 
-- `thinking` *object*
+- `thinking` _object_
 
   Optional. See [Reasoning section](#reasoning) for more details.
 
-- `toolStreaming` *boolean*
+- `toolStreaming` _boolean_
 
   Whether to enable tool streaming (and structured output streaming). Default to `true`.
 
-- `structuredOutputMode` *"outputFormat" | "jsonTool" | "auto"*
+- `structuredOutputMode` _"outputFormat" | "jsonTool" | "auto"_
 
   Determines how structured outputs are generated. Optional.
-
   - `"outputFormat"`: Use the `output_format` parameter to specify the structured output format.
   - `"jsonTool"`: Use a special `"json"` tool to specify the structured output format.
   - `"auto"`: Use `"outputFormat"` when supported, otherwise fall back to `"jsonTool"` (default).
@@ -75,15 +74,15 @@ Tool call streaming is enabled by default. You can opt out by setting the
 `toolStreaming` provider option to `false`.
 
 ```ts
-import { anthropic } from '@ai-sdk/anthropic';
-import { streamText, tool } from 'ai';
-import { z } from 'zod';
+import { anthropic } from "@ai-sdk/anthropic";
+import { streamText, tool } from "ai";
+import { z } from "zod";
 
 const result = streamText({
-  model: anthropic('claude-sonnet-4-20250514'),
+  model: anthropic("claude-sonnet-4-20250514"),
   tools: {
     writeFile: tool({
-      description: 'Write content to a file',
+      description: "Write content to a file",
       inputSchema: z.object({
         path: z.string(),
         content: z.string(),
@@ -94,7 +93,7 @@ const result = streamText({
       },
     }),
   },
-  prompt: 'Write a short story to story.txt',
+  prompt: "Write a short story to story.txt",
 });
 ```
 
@@ -103,15 +102,15 @@ const result = streamText({
 Anthropic introduced an `effort` option with `claude-opus-4-5` that affects thinking, text responses, and function calls. Effort defaults to `high` and you can set it to `medium` or `low` to save tokens and to lower time-to-last-token latency (TTLT).
 
 ```ts highlight="8-10"
-import { anthropic, AnthropicLanguageModelOptions } from '@ai-sdk/anthropic';
-import { generateText } from 'ai';
+import { anthropic, AnthropicLanguageModelOptions } from "@ai-sdk/anthropic";
+import { generateText } from "ai";
 
 const { text, usage } = await generateText({
-  model: anthropic('claude-opus-4-20250514'),
-  prompt: 'How many people will live in the world in 2040?',
+  model: anthropic("claude-opus-4-20250514"),
+  prompt: "How many people will live in the world in 2040?",
   providerOptions: {
     anthropic: {
-      effort: 'low',
+      effort: "low",
     } satisfies AnthropicLanguageModelOptions,
   },
 });
@@ -125,15 +124,15 @@ console.log(usage); // token usage
 Anthropic supports a [`speed` option](https://code.claude.com/docs/en/fast-mode) for `claude-opus-4-6` that enables faster inference with approximately 2.5x faster output token speeds.
 
 ```ts highlight="8-10"
-import { anthropic, AnthropicLanguageModelOptions } from '@ai-sdk/anthropic';
-import { generateText } from 'ai';
+import { anthropic, AnthropicLanguageModelOptions } from "@ai-sdk/anthropic";
+import { generateText } from "ai";
 
 const { text } = await generateText({
-  model: anthropic('claude-opus-4-6'),
-  prompt: 'Write a short poem about the sea.',
+  model: anthropic("claude-opus-4-6"),
+  prompt: "Write a short poem about the sea.",
   providerOptions: {
     anthropic: {
-      speed: 'fast',
+      speed: "fast",
     } satisfies AnthropicLanguageModelOptions,
   },
 });
@@ -149,15 +148,15 @@ You can enable it using the `thinking` provider option
 and specifying a thinking budget in tokens.
 
 ```ts highlight="4,8-10"
-import { anthropic, AnthropicLanguageModelOptions } from '@ai-sdk/anthropic';
-import { generateText } from 'ai';
+import { anthropic, AnthropicLanguageModelOptions } from "@ai-sdk/anthropic";
+import { generateText } from "ai";
 
 const { text, reasoningText, reasoning } = await generateText({
-  model: anthropic('claude-opus-4-20250514'),
-  prompt: 'How many people will live in the world in 2040?',
+  model: anthropic("claude-opus-4-20250514"),
+  prompt: "How many people will live in the world in 2040?",
   providerOptions: {
     anthropic: {
-      thinking: { type: 'enabled', budgetTokens: 12000 },
+      thinking: { type: "enabled", budgetTokens: 12000 },
     } satisfies AnthropicLanguageModelOptions,
   },
 });
@@ -177,23 +176,23 @@ Anthropic's Context Management feature allows you to automatically manage conver
 You can configure context management using the `contextManagement` provider option:
 
 ```ts highlight="7-20"
-import { anthropic, AnthropicLanguageModelOptions } from '@ai-sdk/anthropic';
-import { generateText } from 'ai';
+import { anthropic, AnthropicLanguageModelOptions } from "@ai-sdk/anthropic";
+import { generateText } from "ai";
 
 const result = await generateText({
-  model: anthropic('claude-sonnet-4-5-20250929'),
-  prompt: 'Continue our conversation...',
+  model: anthropic("claude-sonnet-4-5-20250929"),
+  prompt: "Continue our conversation...",
   providerOptions: {
     anthropic: {
       contextManagement: {
         edits: [
           {
-            type: 'clear_tool_uses_20250919',
-            trigger: { type: 'input_tokens', value: 10000 },
-            keep: { type: 'tool_uses', value: 5 },
-            clearAtLeast: { type: 'input_tokens', value: 1000 },
+            type: "clear_tool_uses_20250919",
+            trigger: { type: "input_tokens", value: 10000 },
+            keep: { type: "tool_uses", value: 5 },
+            clearAtLeast: { type: "input_tokens", value: 1000 },
             clearToolInputs: true,
-            excludeTools: ['important_tool'],
+            excludeTools: ["important_tool"],
           },
         ],
       },
@@ -227,16 +226,16 @@ The `clear_thinking_20251015` edit type removes thinking/reasoning blocks from e
 
 ```ts
 const result = await generateText({
-  model: anthropic('claude-opus-4-20250514'),
-  prompt: 'Continue reasoning...',
+  model: anthropic("claude-opus-4-20250514"),
+  prompt: "Continue reasoning...",
   providerOptions: {
     anthropic: {
-      thinking: { type: 'enabled', budgetTokens: 12000 },
+      thinking: { type: "enabled", budgetTokens: 12000 },
       contextManagement: {
         edits: [
           {
-            type: 'clear_thinking_20251015',
-            keep: { type: 'thinking_turns', value: 2 },
+            type: "clear_thinking_20251015",
+            keep: { type: "thinking_turns", value: 2 },
           },
         ],
       },
@@ -250,24 +249,24 @@ const result = await generateText({
 The `compact_20260112` edit type automatically summarizes earlier conversation context when token limits are reached. This is useful for long-running conversations where you want to preserve the essence of earlier exchanges while staying within token limits.
 
 ```ts highlight="7-19"
-import { anthropic, AnthropicLanguageModelOptions } from '@ai-sdk/anthropic';
-import { streamText } from 'ai';
+import { anthropic, AnthropicLanguageModelOptions } from "@ai-sdk/anthropic";
+import { streamText } from "ai";
 
 const result = streamText({
-  model: anthropic('claude-opus-4-6'),
+  model: anthropic("claude-opus-4-6"),
   messages: conversationHistory,
   providerOptions: {
     anthropic: {
       contextManagement: {
         edits: [
           {
-            type: 'compact_20260112',
+            type: "compact_20260112",
             trigger: {
-              type: 'input_tokens',
+              type: "input_tokens",
               value: 50000, // trigger compaction when input exceeds 50k tokens
             },
             instructions:
-              'Summarize the conversation concisely, preserving key decisions and context.',
+              "Summarize the conversation concisely, preserving key decisions and context.",
             pauseAfterCompaction: false,
           },
         ],
@@ -292,15 +291,15 @@ When using `streamText`, you can detect compaction summaries by checking the `pr
 ```ts
 for await (const part of result.fullStream) {
   switch (part.type) {
-    case 'text-start': {
+    case "text-start": {
       const isCompaction =
-        part.providerMetadata?.anthropic?.type === 'compaction';
+        part.providerMetadata?.anthropic?.type === "compaction";
       if (isCompaction) {
-        console.log('[COMPACTION SUMMARY START]');
+        console.log("[COMPACTION SUMMARY START]");
       }
       break;
     }
-    case 'text-delta': {
+    case "text-delta": {
       process.stdout.write(part.text);
       break;
     }
@@ -315,10 +314,10 @@ When using `useChat` or other UI hooks, compaction summaries appear as regular t
 ```tsx
 {
   message.parts.map((part, index) => {
-    if (part.type === 'text') {
+    if (part.type === "text") {
       const isCompaction =
         (part.providerMetadata?.anthropic as { type?: string } | undefined)
-          ?.type === 'compaction';
+          ?.type === "compaction";
 
       if (isCompaction) {
         return (
@@ -345,15 +344,15 @@ After generation, you can check which edits were applied in the provider metadat
 const metadata = result.providerMetadata?.anthropic?.contextManagement;
 
 if (metadata?.appliedEdits) {
-  metadata.appliedEdits.forEach(edit => {
-    if (edit.type === 'clear_tool_uses_20250919') {
+  metadata.appliedEdits.forEach((edit) => {
+    if (edit.type === "clear_tool_uses_20250919") {
       console.log(`Cleared ${edit.clearedToolUses} tool uses`);
       console.log(`Freed ${edit.clearedInputTokens} tokens`);
-    } else if (edit.type === 'clear_thinking_20251015') {
+    } else if (edit.type === "clear_thinking_20251015") {
       console.log(`Cleared ${edit.clearedThinkingTurns} thinking turns`);
       console.log(`Freed ${edit.clearedInputTokens} tokens`);
-    } else if (edit.type === 'compact_20260112') {
-      console.log('Compaction was applied');
+    } else if (edit.type === "compact_20260112") {
+      console.log("Compaction was applied");
     }
   });
 }
@@ -373,26 +372,26 @@ that resolves to the metadata. Alternatively you can receive it in the
 `onFinish` callback.
 
 ```ts highlight="8,18-20,29-30"
-import { anthropic } from '@ai-sdk/anthropic';
-import { generateText } from 'ai';
+import { anthropic } from "@ai-sdk/anthropic";
+import { generateText } from "ai";
 
-const errorMessage = '... long error message ...';
+const errorMessage = "... long error message ...";
 
 const result = await generateText({
-  model: anthropic('claude-sonnet-4-5'),
+  model: anthropic("claude-sonnet-4-5"),
   messages: [
     {
-      role: 'user',
+      role: "user",
       content: [
-        { type: 'text', text: 'You are a JavaScript expert.' },
+        { type: "text", text: "You are a JavaScript expert." },
         {
-          type: 'text',
+          type: "text",
           text: `Error message: ${errorMessage}`,
           providerOptions: {
-            anthropic: { cacheControl: { type: 'ephemeral' } },
+            anthropic: { cacheControl: { type: "ephemeral" } },
           },
         },
-        { type: 'text', text: 'Explain the error message.' },
+        { type: "text", text: "Explain the error message." },
       ],
     },
   ],
@@ -407,22 +406,22 @@ You can also use cache control on system messages by providing multiple system m
 
 ```ts highlight="3,7-9"
 const result = await generateText({
-  model: anthropic('claude-sonnet-4-5'),
+  model: anthropic("claude-sonnet-4-5"),
   messages: [
     {
-      role: 'system',
-      content: 'Cached system message part',
+      role: "system",
+      content: "Cached system message part",
       providerOptions: {
-        anthropic: { cacheControl: { type: 'ephemeral' } },
+        anthropic: { cacheControl: { type: "ephemeral" } },
       },
     },
     {
-      role: 'system',
-      content: 'Uncached system message part',
+      role: "system",
+      content: "Uncached system message part",
     },
     {
-      role: 'user',
-      content: 'User prompt',
+      role: "user",
+      content: "User prompt",
     },
   ],
 });
@@ -432,21 +431,21 @@ Cache control for tools:
 
 ```ts
 const result = await generateText({
-  model: anthropic('claude-haiku-4-5'),
+  model: anthropic("claude-haiku-4-5"),
   tools: {
     cityAttractions: tool({
       inputSchema: z.object({ city: z.string() }),
       providerOptions: {
         anthropic: {
-          cacheControl: { type: 'ephemeral' },
+          cacheControl: { type: "ephemeral" },
         },
       },
     }),
   },
   messages: [
     {
-      role: 'user',
-      content: 'User prompt',
+      role: "user",
+      content: "User prompt",
     },
   ],
 });
@@ -460,17 +459,17 @@ Here's an example:
 
 ```ts
 const result = await generateText({
-  model: anthropic('claude-haiku-4-5'),
+  model: anthropic("claude-haiku-4-5"),
   messages: [
     {
-      role: 'user',
+      role: "user",
       content: [
         {
-          type: 'text',
-          text: 'Long cached message',
+          type: "text",
+          text: "Long cached message",
           providerOptions: {
             anthropic: {
-              cacheControl: { type: 'ephemeral', ttl: '1h' },
+              cacheControl: { type: "ephemeral", ttl: "1h" },
             },
           },
         },
@@ -527,7 +526,7 @@ Here's how to create it:
 
 ```ts
 const memory = anthropic.tools.memory_20250818({
-  execute: async action => {
+  execute: async (action) => {
     // Implement your memory command execution logic here
     // Return the result of the command execution
   },
@@ -561,7 +560,7 @@ Note: `textEditor_20250429` is deprecated. Use `textEditor_20250728` instead.
 
 Parameters:
 
-- `command` ('view' | 'create' | 'str\_replace' | 'insert' | 'undo\_edit'): The command to run. Note: `undo_edit` is only available in Claude 3.5 Sonnet and earlier models.
+- `command` ('view' | 'create' | 'str_replace' | 'insert' | 'undo_edit'): The command to run. Note: `undo_edit` is only available in Claude 3.5 Sonnet and earlier models.
 - `path` (string): Absolute path to file or directory, e.g. `/repo/file.py` or `/repo`.
 - `file_text` (string, optional): Required for `create` command, with the content of the file to be created.
 - `insert_line` (number, optional): Required for `insert` command. The line number after which to insert the new string.
@@ -587,26 +586,26 @@ const computerTool = anthropic.tools.computer_20251124({
 
     // Example code:
     switch (action) {
-      case 'screenshot': {
+      case "screenshot": {
         // multipart result:
         return {
-          type: 'image',
+          type: "image",
           data: fs
-            .readFileSync('./data/screenshot-editor.png')
-            .toString('base64'),
+            .readFileSync("./data/screenshot-editor.png")
+            .toString("base64"),
         };
       }
-      case 'zoom': {
+      case "zoom": {
         // region is [x1, y1, x2, y2] defining the area to zoom into
         return {
-          type: 'image',
-          data: fs.readFileSync('./data/zoomed-region.png').toString('base64'),
+          type: "image",
+          data: fs.readFileSync("./data/zoomed-region.png").toString("base64"),
         };
       }
       default: {
-        console.log('Action:', action);
-        console.log('Coordinate:', coordinate);
-        console.log('Text:', text);
+        console.log("Action:", action);
+        console.log("Coordinate:", coordinate);
+        console.log("Text:", text);
         return `executed ${action}`;
       }
     }
@@ -614,9 +613,9 @@ const computerTool = anthropic.tools.computer_20251124({
 
   // map to tool result content for LLM consumption:
   toModelOutput({ output }) {
-    return typeof output === 'string'
-      ? [{ type: 'text', text: output }]
-      : [{ type: 'image', data: output.data, mediaType: 'image/png' }];
+    return typeof output === "string"
+      ? [{ type: "text", text: output }]
+      : [{ type: "image", data: output.data, mediaType: "image/png" }];
   },
 });
 ```
@@ -627,7 +626,7 @@ Opus 4, and Sonnet 3.7.
 
 Parameters:
 
-- `action` ('key' | 'type' | 'mouse\_move' | 'left\_click' | 'left\_click\_drag' | 'right\_click' | 'middle\_click' | 'double\_click' | 'screenshot' | 'cursor\_position' | 'zoom'): The action to perform. The `zoom` action is only available with `computer_20251124`.
+- `action` ('key' | 'type' | 'mouse_move' | 'left_click' | 'left_click_drag' | 'right_click' | 'middle_click' | 'double_click' | 'screenshot' | 'cursor_position' | 'zoom'): The action to perform. The `zoom` action is only available with `computer_20251124`.
 - `coordinate` (number\[], optional): Required for `mouse_move` and `left_click_drag` actions. Specifies the (x, y) coordinates.
 - `text` (string, optional): Required for `type` and `key` actions.
 - `region` (number\[], optional): Required for `zoom` action. Specifies `[x1, y1, x2, y2]` coordinates for the area to inspect.
@@ -643,16 +642,16 @@ Anthropic provides a provider-defined web search tool that gives Claude direct a
 You can enable web search using the provider-defined web search tool:
 
 ```ts
-import { anthropic } from '@ai-sdk/anthropic';
-import { generateText } from 'ai';
+import { anthropic } from "@ai-sdk/anthropic";
+import { generateText } from "ai";
 
 const webSearchTool = anthropic.tools.webSearch_20250305({
   maxUses: 5,
 });
 
 const result = await generateText({
-  model: anthropic('claude-opus-4-20250514'),
-  prompt: 'What are the latest developments in AI?',
+  model: anthropic("claude-opus-4-20250514"),
+  prompt: "What are the latest developments in AI?",
   tools: {
     web_search: webSearchTool,
   },
@@ -666,39 +665,39 @@ settings](https://console.anthropic.com/settings/privacy).
 
 The web search tool supports several configuration options:
 
-- **maxUses** *number*
+- **maxUses** _number_
 
   Maximum number of web searches Claude can perform during the conversation.
 
-- **allowedDomains** *string\[]*
+- **allowedDomains** _string\[]_
 
   Optional list of domains that Claude is allowed to search. If provided, searches will be restricted to these domains.
 
-- **blockedDomains** *string\[]*
+- **blockedDomains** _string\[]_
 
   Optional list of domains that Claude should avoid when searching.
 
-- **userLocation** *object*
+- **userLocation** _object_
 
   Optional user location information to provide geographically relevant search results.
 
 ```ts
 const webSearchTool = anthropic.tools.webSearch_20250305({
   maxUses: 3,
-  allowedDomains: ['techcrunch.com', 'wired.com'],
-  blockedDomains: ['example-spam-site.com'],
+  allowedDomains: ["techcrunch.com", "wired.com"],
+  blockedDomains: ["example-spam-site.com"],
   userLocation: {
-    type: 'approximate',
-    country: 'US',
-    region: 'California',
-    city: 'San Francisco',
-    timezone: 'America/Los_Angeles',
+    type: "approximate",
+    country: "US",
+    region: "California",
+    city: "San Francisco",
+    timezone: "America/Los_Angeles",
   },
 });
 
 const result = await generateText({
-  model: anthropic('claude-opus-4-20250514'),
-  prompt: 'Find local news about technology',
+  model: anthropic("claude-opus-4-20250514"),
+  prompt: "Find local news about technology",
   tools: {
     web_search: webSearchTool,
   },
@@ -712,13 +711,13 @@ Anthropic provides a provider-defined web fetch tool that allows Claude to retri
 You can enable web fetch using the provider-defined web fetch tool:
 
 ```ts
-import { anthropic } from '@ai-sdk/anthropic';
-import { generateText } from 'ai';
+import { anthropic } from "@ai-sdk/anthropic";
+import { generateText } from "ai";
 
 const result = await generateText({
-  model: anthropic('claude-sonnet-4-0'),
+  model: anthropic("claude-sonnet-4-0"),
   prompt:
-    'What is this page about? https://en.wikipedia.org/wiki/Maglemosian_culture',
+    "What is this page about? https://en.wikipedia.org/wiki/Maglemosian_culture",
   tools: {
     web_fetch: anthropic.tools.webFetch_20250910({ maxUses: 1 }),
   },
@@ -737,25 +736,25 @@ There are two variants:
 #### Basic Usage
 
 ```ts
-import { anthropic } from '@ai-sdk/anthropic';
-import { generateText, tool } from 'ai';
-import { z } from 'zod';
+import { anthropic } from "@ai-sdk/anthropic";
+import { generateText, tool } from "ai";
+import { z } from "zod";
 
 const result = await generateText({
-  model: anthropic('claude-sonnet-4-5'),
-  prompt: 'What is the weather in San Francisco?',
+  model: anthropic("claude-sonnet-4-5"),
+  prompt: "What is the weather in San Francisco?",
   tools: {
     toolSearch: anthropic.tools.toolSearchBm25_20251119(),
 
     get_weather: tool({
-      description: 'Get the current weather at a specific location',
+      description: "Get the current weather at a specific location",
       inputSchema: z.object({
-        location: z.string().describe('The city and state'),
+        location: z.string().describe("The city and state"),
       }),
       execute: async ({ location }) => ({
         location,
         temperature: 72,
-        condition: 'Sunny',
+        condition: "Sunny",
       }),
       // Defer tool here - Claude discovers these via the tool search tool
       providerOptions: {
@@ -772,8 +771,8 @@ For more precise tool matching, you can use the regex variant:
 
 ```ts
 const result = await generateText({
-  model: anthropic('claude-sonnet-4-5'),
-  prompt: 'Get the weather data',
+  model: anthropic("claude-sonnet-4-5"),
+  prompt: "Get the weather data",
   tools: {
     toolSearch: anthropic.tools.toolSearchRegex_20251119(),
     // ... deferred tools
@@ -788,30 +787,30 @@ Claude will construct regex patterns like `weather|temperature|forecast` to find
 You can implement your own tool search logic (e.g., using embeddings or semantic search) by returning `tool-reference` content blocks via `toModelOutput`:
 
 ```ts
-import { anthropic } from '@ai-sdk/anthropic';
-import { generateText, tool } from 'ai';
-import { z } from 'zod';
+import { anthropic } from "@ai-sdk/anthropic";
+import { generateText, tool } from "ai";
+import { z } from "zod";
 
 const result = await generateText({
-  model: anthropic('claude-sonnet-4-5'),
-  prompt: 'What is the weather in San Francisco?',
+  model: anthropic("claude-sonnet-4-5"),
+  prompt: "What is the weather in San Francisco?",
   tools: {
     // Custom search tool
     searchTools: tool({
-      description: 'Search for tools by keyword',
+      description: "Search for tools by keyword",
       inputSchema: z.object({ query: z.string() }),
       execute: async ({ query }) => {
         // Your custom search logic (embeddings, fuzzy match, etc.)
-        const allTools = ['get_weather', 'get_forecast', 'get_temperature'];
-        return allTools.filter(name => name.includes(query.toLowerCase()));
+        const allTools = ["get_weather", "get_forecast", "get_temperature"];
+        return allTools.filter((name) => name.includes(query.toLowerCase()));
       },
       toModelOutput: ({ output }) => ({
-        type: 'content',
-        value: (output as string[]).map(toolName => ({
-          type: 'custom' as const,
+        type: "content",
+        value: (output as string[]).map((toolName) => ({
+          type: "custom" as const,
           providerOptions: {
             anthropic: {
-              type: 'tool-reference',
+              type: "tool-reference",
               toolName,
             },
           },
@@ -821,7 +820,7 @@ const result = await generateText({
 
     // Deferred tools
     get_weather: tool({
-      description: 'Get the current weather',
+      description: "Get the current weather",
       inputSchema: z.object({ location: z.string() }),
       execute: async ({ location }) => ({ location, temperature: 72 }),
       providerOptions: {
@@ -841,25 +840,25 @@ Anthropic supports connecting to [MCP servers](https://docs.claude.com/en/docs/a
 You can enable this feature with the `mcpServers` provider option:
 
 ```ts
-import { anthropic, AnthropicLanguageModelOptions } from '@ai-sdk/anthropic';
-import { generateText } from 'ai';
+import { anthropic, AnthropicLanguageModelOptions } from "@ai-sdk/anthropic";
+import { generateText } from "ai";
 
 const result = await generateText({
-  model: anthropic('claude-sonnet-4-5'),
+  model: anthropic("claude-sonnet-4-5"),
   prompt: `Call the echo tool with "hello world". what does it respond with back?`,
   providerOptions: {
     anthropic: {
       mcpServers: [
         {
-          type: 'url',
-          name: 'echo',
-          url: 'https://echo.mcp.inevitable.fyi/mcp',
+          type: "url",
+          name: "echo",
+          url: "https://echo.mcp.inevitable.fyi/mcp",
           // optional: authorization token
           authorizationToken: mcpAuthToken,
           // optional: tool configuration
           toolConfiguration: {
             enabled: true,
-            allowedTools: ['echo'],
+            allowedTools: ["echo"],
           },
         },
       ],
@@ -874,23 +873,23 @@ The tool calls and results are dynamic, i.e. the input and output schemas are no
 
 The web fetch tool supports several configuration options:
 
-- **maxUses** *number*
+- **maxUses** _number_
 
   The maxUses parameter limits the number of web fetches performed.
 
-- **allowedDomains** *string\[]*
+- **allowedDomains** _string\[]_
 
   Only fetch from these domains.
 
-- **blockedDomains** *string\[]*
+- **blockedDomains** _string\[]_
 
   Never fetch from these domains.
 
-- **citations** *object*
+- **citations** _object_
 
   Unlike web search where citations are always enabled, citations are optional for web fetch. Set `"citations": {"enabled": true}` to enable Claude to cite specific passages from fetched documents.
 
-- **maxContentTokens** *number*
+- **maxContentTokens** _number_
 
   The maxContentTokens parameter limits the amount of content that will be included in the context.
 
@@ -904,15 +903,15 @@ Web search errors throw exceptions that you can catch:
 ```ts
 try {
   const result = await generateText({
-    model: anthropic('claude-opus-4-20250514'),
-    prompt: 'Search for something',
+    model: anthropic("claude-opus-4-20250514"),
+    prompt: "Search for something",
     tools: {
       web_search: webSearchTool,
     },
   });
 } catch (error) {
-  if (error.message.includes('Web search failed')) {
-    console.log('Search error:', error.message);
+  if (error.message.includes("Web search failed")) {
+    console.log("Search error:", error.message);
     // Handle search error appropriately
   }
 }
@@ -923,16 +922,16 @@ Web search errors are delivered as error parts in the stream:
 
 ```ts
 const result = await streamText({
-  model: anthropic('claude-opus-4-20250514'),
-  prompt: 'Search for something',
+  model: anthropic("claude-opus-4-20250514"),
+  prompt: "Search for something",
   tools: {
     web_search: webSearchTool,
   },
 });
 
 for await (const part of result.textStream) {
-  if (part.type === 'error') {
-    console.log('Search error:', part.error);
+  if (part.type === "error") {
+    console.log("Search error:", part.error);
     // Handle search error appropriately
   }
 }

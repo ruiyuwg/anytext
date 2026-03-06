@@ -8,7 +8,7 @@ import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
 import { Callout } from "fumadocs-ui/components/callout"
 import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
 
-To validate data, you must first define a *schema*. Schemas represent *types*, from simple primitive values to complex nested objects and arrays.
+To validate data, you must first define a _schema_. Schemas represent _types_, from simple primitive values to complex nested objects and arrays.
 
 ## Primitives
 
@@ -30,10 +30,10 @@ z.null();
 To coerce input data to the appropriate type, use `z.coerce` instead:
 
 ```ts
-z.coerce.string();    // String(input)
-z.coerce.number();    // Number(input)
-z.coerce.boolean();   // Boolean(input)
-z.coerce.bigint();    // BigInt(input)
+z.coerce.string(); // String(input)
+z.coerce.number(); // Number(input)
+z.coerce.boolean(); // Boolean(input)
+z.coerce.bigint(); // BigInt(input)
 ```
 
 The coerced variant of these schemas attempts to convert the input value to the appropriate type.
@@ -41,10 +41,10 @@ The coerced variant of these schemas attempts to convert the input value to the 
 ```ts
 const schema = z.coerce.string();
 
-schema.parse("tuna");    // => "tuna"
-schema.parse(42);        // => "42"
-schema.parse(true);      // => "true"
-schema.parse(null);      // => "null"
+schema.parse("tuna"); // => "tuna"
+schema.parse(42); // => "42"
+schema.parse(true); // => "true"
+schema.parse(null); // => "null"
 ```
 
 The input type of these coerced schemas is `unknown` by default. To specify a more specific input type, pass a generic parameter:
@@ -149,21 +149,21 @@ colors.values; // => Set<"red" | "green" | "blue">
 {/\* Zod provides a handful of built-in string validation and transform APIs.
 
 ```ts
-z.string().startsWith("fourscore")
+z.string().startsWith("fourscore");
 ```
 
 ```ts
-z.string().check(z.startsWith("fourscore"))
+z.string().check(z.startsWith("fourscore"));
 ```
 
 All of the APIs documented below support the `error` parameter for customizing the error message.
 
 ```ts
-z.string().startsWith("fourscore", {error: "Nice try, buddy"})
+z.string().startsWith("fourscore", { error: "Nice try, buddy" });
 ```
 
 ```ts
-z.string().check(z.startsWith("fourscore", {error: "Nice try, buddy"}))
+z.string().check(z.startsWith("fourscore", { error: "Nice try, buddy" }));
 ```
 
 \*/}

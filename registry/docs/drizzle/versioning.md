@@ -10,7 +10,7 @@ generators, while maintaining deterministic outputs with a previous version if n
 is particularly useful when you need to rely on existing deterministic data while accessing new functionality.
 
 ```ts
-await seed(db, schema, { version: '2' });
+await seed(db, schema, { version: "2" });
 ```
 
 ## History
@@ -45,13 +45,13 @@ If you are not ready to use latest generator version right away, you can specify
 ##### Use the `firstName` generator of version 1 and the `lastName` generator of version 2
 
 ```ts
-await seed(db, schema, { version: '2' });
+await seed(db, schema, { version: "2" });
 ```
 
 ##### Use the `firstName` generator of version 1 and the `lastName` generator of version 1.
 
 ```ts
-await seed(db, schema, { version: '1' });
+await seed(db, schema, { version: "1" });
 ```
 
 </Callout>
@@ -74,7 +74,7 @@ import { pgTable, interval } from "drizzle-orm/pg-core";
 import { seed } from "drizzle-seed";
 
 const intervals = pgTable("intervals", {
-    interval: interval().unique()
+  interval: interval().unique(),
 });
 
 async function main() {
@@ -98,14 +98,14 @@ import { pgTable, interval, char, varchar, text } from "drizzle-orm/pg-core";
 import { seed } from "drizzle-seed";
 
 const intervals = pgTable("intervals", {
-    interval: interval().unique(),
-    interval1: interval(),
-    interval2: char({ length: 256 }).unique(),
-    interval3: char({ length: 256 }),
-    interval4: varchar().unique(),
-    interval5: varchar(),
-    interval6: text().unique(),
-    interval7: text(),
+  interval: interval().unique(),
+  interval1: interval(),
+  interval2: char({ length: 256 }).unique(),
+  interval3: char({ length: 256 }),
+  interval4: varchar().unique(),
+  interval5: varchar(),
+  interval6: text().unique(),
+  interval7: text(),
 });
 
 async function main() {
@@ -113,17 +113,17 @@ async function main() {
 
   await seed(db, { intervals }).refine((f) => ({
     intervals: {
-        columns: {
-            interval: f.interval({ isUnique: true }),
-            interval1: f.interval({ isUnique: true }),
-            interval2: f.interval({ isUnique: true }),
-            interval3: f.interval({ isUnique: true }),
-            interval4: f.interval({ isUnique: true }),
-            interval5: f.interval({ isUnique: true }),
-            interval6: f.interval({ isUnique: true }),
-            interval7: f.interval({ isUnique: true }),
-        }
-    }
+      columns: {
+        interval: f.interval({ isUnique: true }),
+        interval1: f.interval({ isUnique: true }),
+        interval2: f.interval({ isUnique: true }),
+        interval3: f.interval({ isUnique: true }),
+        interval4: f.interval({ isUnique: true }),
+        interval5: f.interval({ isUnique: true }),
+        interval6: f.interval({ isUnique: true }),
+        interval7: f.interval({ isUnique: true }),
+      },
+    },
   }));
 }
 
@@ -150,7 +150,7 @@ interval9: text(),
 });
 
 async function main() {
-const db = drizzle(process.env.DATABASE\_URL!);
+const db = drizzle(process.env.DATABASE_URL!);
 
 ```
 await seed(db, { intervals }, { version: '2' }).refine((f) => ({
@@ -227,12 +227,12 @@ import { pgTable, char, varchar, text } from "drizzle-orm/pg-core";
 import { seed } from "drizzle-seed";
 
 const strings = pgTable("strings", {
-    string2: char({ length: 256 }).unique(),
-    string3: char({ length: 256 }),
-    string4: varchar().unique(),
-    string5: varchar({ length: 256 }).unique(),
-    string6: varchar({ length: 256 }),
-    string7: text().unique(),
+  string2: char({ length: 256 }).unique(),
+  string3: char({ length: 256 }),
+  string4: varchar().unique(),
+  string5: varchar({ length: 256 }).unique(),
+  string6: varchar({ length: 256 }),
+  string7: text().unique(),
 });
 
 async function main() {
@@ -263,7 +263,7 @@ string8: varbinary({ length: 255 }),
 });
 
 async function main() {
-const db = drizzle(process.env.DATABASE\_URL!);
+const db = drizzle(process.env.DATABASE_URL!);
 
 ```
 await seed(db, { strings });
@@ -309,16 +309,16 @@ import { pgTable, char, varchar, text } from "drizzle-orm/pg-core";
 import { seed } from "drizzle-seed";
 
 const strings = pgTable("strings", {
-    string1: char({ length: 256 }).unique(),
-    string2: char({ length: 256 }),
-    string3: char({ length: 256 }),
-    string4: varchar(),
-    string5: varchar().unique(),
-    string6: varchar({ length: 256 }).unique(),
-    string7: varchar({ length: 256 }),
-    string8: varchar({ length: 256 }),
-    string9: text().unique(),
-    string10: text(),
+  string1: char({ length: 256 }).unique(),
+  string2: char({ length: 256 }),
+  string3: char({ length: 256 }),
+  string4: varchar(),
+  string5: varchar().unique(),
+  string6: varchar({ length: 256 }).unique(),
+  string7: varchar({ length: 256 }),
+  string8: varchar({ length: 256 }),
+  string9: text().unique(),
+  string10: text(),
 });
 
 async function main() {
@@ -326,19 +326,19 @@ async function main() {
 
   await seed(db, { strings }).refine((f) => ({
     strings: {
-        columns: {
-            string1: f.string({ isUnique: true }),
-            string2: f.string(),
-            string3: f.string({ isUnique: true }),
-            string4: f.string({ isUnique: true }),
-            string5: f.string({ isUnique: true }),
-            string6: f.string({ isUnique: true }),
-            string7: f.string(),
-            string8: f.string({ isUnique: true }),
-            string9: f.string({ isUnique: true }),
-            string10: f.string({ isUnique: true }),
-        }
-    }
+      columns: {
+        string1: f.string({ isUnique: true }),
+        string2: f.string(),
+        string3: f.string({ isUnique: true }),
+        string4: f.string({ isUnique: true }),
+        string5: f.string({ isUnique: true }),
+        string6: f.string({ isUnique: true }),
+        string7: f.string(),
+        string8: f.string({ isUnique: true }),
+        string9: f.string({ isUnique: true }),
+        string10: f.string({ isUnique: true }),
+      },
+    },
   }));
 }
 
@@ -369,7 +369,7 @@ string13: text(),
 });
 
 async function main() {
-const db = drizzle(process.env.DATABASE\_URL!);
+const db = drizzle(process.env.DATABASE_URL!);
 
 ```
 await seed(db, { strings }).refine((f) => ({

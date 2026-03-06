@@ -4,20 +4,20 @@
 
 `'use client'` lets you mark what code runs on the client.
 
-***
+---
 
-## Reference {/*reference*/}
+## Reference {/_reference_/}
 
-### `'use client'` {/*use-client*/}
+### `'use client'` {/_use-client_/}
 
 Add `'use client'` at the top of a file to mark the module and its transitive dependencies as client code.
 
 ```js {1}
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { formatDate } from './formatters';
-import Button from './button';
+import { useState } from "react";
+import { formatDate } from "./formatters";
+import Button from "./button";
 
 export default function RichTextEditor({ timestamp, text }) {
   const date = formatDate(timestamp);
@@ -31,7 +31,7 @@ When a file marked with `'use client'` is imported from a Server Component, [com
 
 As dependencies of `RichTextEditor`, `formatDate` and `Button` will also be evaluated on the client regardless of whether their modules contain a `'use client'` directive. Note that a single module may be evaluated on the server when imported from server code and on the client when imported from client code.
 
-#### Caveats {/*caveats*/}
+#### Caveats {/_caveats_/}
 
 - `'use client'` must be at the very beginning of a file, above any imports or other code (comments are OK). They must be written with single or double quotes, but not backticks.
 - When a `'use client'` module is imported from another client-rendered module, the directive has no effect.
@@ -40,7 +40,7 @@ As dependencies of `RichTextEditor`, `formatDate` and `Button` will also be eval
 - Code that is marked for client evaluation is not limited to components. All code that is a part of the Client module sub-tree is sent to and run by the client.
 - When a server evaluated module imports values from a `'use client'` module, the values must either be a React component or [supported serializable prop values](#passing-props-from-server-to-client-components) to be passed to a Client Component. Any other use case will throw an exception.
 
-### How `'use client'` marks client code {/*how-use-client-marks-client-code*/}
+### How `'use client'` marks client code {/_how-use-client-marks-client-code_/}
 
 In a React app, components are often split into separate files, or [modules](/learn/importing-and-exporting-components#exporting-and-importing-a-component).
 
@@ -49,9 +49,9 @@ For apps that use React Server Components, the app is server-rendered by default
 To better illustrate this, consider the following React Server Components app.
 
 ```js src/App.js
-import FancyText from './FancyText';
-import InspirationGenerator from './InspirationGenerator';
-import Copyright from './Copyright';
+import FancyText from "./FancyText";
+import InspirationGenerator from "./InspirationGenerator";
+import Copyright from "./Copyright";
 
 export default function App() {
   return (
@@ -63,25 +63,26 @@ export default function App() {
     </>
   );
 }
-
 ```
 
 ```js src/FancyText.js
-export default function FancyText({title, text}) {
-  return title
-    ? <h1 className='fancy title'>{text}</h1>
-    : <h3 className='fancy cursive'>{text}</h3>
+export default function FancyText({ title, text }) {
+  return title ? (
+    <h1 className="fancy title">{text}</h1>
+  ) : (
+    <h3 className="fancy cursive">{text}</h3>
+  );
 }
 ```
 
 ```js src/InspirationGenerator.js
-'use client';
+"use client";
 
-import { useState } from 'react';
-import inspirations from './inspirations';
-import FancyText from './FancyText';
+import { useState } from "react";
+import inspirations from "./inspirations";
+import FancyText from "./FancyText";
 
-export default function InspirationGenerator({children}) {
+export default function InspirationGenerator({ children }) {
   const [index, setIndex] = useState(0);
   const quote = inspirations[index];
   const next = () => setIndex((index + 1) % inspirations.length);
@@ -98,8 +99,8 @@ export default function InspirationGenerator({children}) {
 ```
 
 ```js src/Copyright.js
-export default function Copyright({year}) {
-  return <p className='small'>©️ {year}</p>;
+export default function Copyright({ year }) {
+  return <p className="small">©️ {year}</p>;
 }
 ```
 
@@ -113,10 +114,10 @@ export default [
 
 ```css
 .fancy {
-  font-family: 'Georgia';
+  font-family: "Georgia";
 }
 .title {
-  color: #007AA3;
+  color: #007aa3;
   text-decoration: underline;
 }
 .cursive {
@@ -144,7 +145,7 @@ We introduce the following definitions:
 
 Working through the example app, `App`, `FancyText` and `Copyright` are all server-rendered and considered Server Components. As `InspirationGenerator.js` and its transitive dependencies are marked as client code, the component `InspirationGenerator` and its child component `FancyText` are Client Components.
 
-#### How is `FancyText` both a Server and a Client Component? {/*how-is-fancytext-both-a-server-and-a-client-component*/}
+#### How is `FancyText` both a Server and a Client Component? {/_how-is-fancytext-both-a-server-and-a-client-component_/}
 
 By the above definitions, the component `FancyText` is both a Server and Client Component, how can that be?
 
@@ -155,14 +156,14 @@ First, let's clarify that the term "component" is not very precise. Here are jus
 ```js
 // This is a definition of a component
 function MyComponent() {
-  return <p>My Component</p>
+  return <p>My Component</p>;
 }
 ```
 
 2. A "component" can also refer to a **component usage** of its definition.
 
 ```js
-import MyComponent from './MyComponent';
+import MyComponent from "./MyComponent";
 
 function App() {
   // This is a usage of a component
@@ -179,17 +180,17 @@ When we talk about Server or Client Components, we are referring to component us
 
 A render tree illustrates component usages.
 
-Back to the question of `FancyText`, we see that the component definition does *not* have a `'use client'` directive and it has two usages.
+Back to the question of `FancyText`, we see that the component definition does _not_ have a `'use client'` directive and it has two usages.
 
 The usage of `FancyText` as a child of `App`, marks that usage as a Server Component. When `FancyText` is imported and called under `InspirationGenerator`, that usage of `FancyText` is a Client Component as `InspirationGenerator` contains a `'use client'` directive.
 
 This means that the component definition for `FancyText` will both be evaluated on the server and also downloaded by the client to render its Client Component usage.
 
-#### Why is `Copyright` a Server Component? {/*why-is-copyright-a-server-component*/}
+#### Why is `Copyright` a Server Component? {/_why-is-copyright-a-server-component_/}
 
 Because `Copyright` is rendered as a child of the Client Component `InspirationGenerator`, you might be surprised that it is a Server Component.
 
-Recall that `'use client'` defines the boundary between server and client code on the *module dependency tree*, not the render tree.
+Recall that `'use client'` defines the boundary between server and client code on the _module dependency tree_, not the render tree.
 
 `'use client'` defines the boundary between server and client code on the module dependency tree.
 
@@ -199,25 +200,25 @@ Client Components can render Server Components because you can pass JSX as props
 
 The takeaway is that a parent-child render relationship between components does not guarantee the same render environment.
 
-### When to use `'use client'` {/*when-to-use-use-client*/}
+### When to use `'use client'` {/_when-to-use-use-client_/}
 
 With `'use client'`, you can determine when components are Client Components. As Server Components are default, here is a brief overview of the advantages and limitations to Server Components to determine when you need to mark something as client rendered.
 
 For simplicity, we talk about Server Components, but the same principles apply to all code in your app that is server run.
 
-#### Advantages of Server Components {/*advantages*/}
+#### Advantages of Server Components {/_advantages_/}
 
 - Server Components can reduce the amount of code sent and run by the client. Only Client modules are bundled and evaluated by the client.
 - Server Components benefit from running on the server. They can access the local filesystem and may experience low latency for data fetches and network requests.
 
-#### Limitations of Server Components {/*limitations*/}
+#### Limitations of Server Components {/_limitations_/}
 
 - Server Components cannot support interaction as event handlers must be registered and triggered by a client.
   - For example, event handlers like `onClick` can only be defined in Client Components.
 - Server Components cannot use most Hooks.
   - When Server Components are rendered, their output is essentially a list of components for the client to render. Server Components do not persist in memory after render and cannot have their own state.
 
-### Serializable types returned by Server Components {/*serializable-types*/}
+### Serializable types returned by Server Components {/_serializable-types_/}
 
 As in any React app, parent components pass data to child components. As they are rendered in different environments, passing data from a Server Component to a Client Component requires extra consideration.
 
@@ -252,16 +253,16 @@ Notably, these are not supported:
 - Objects that are instances of any class (other than the built-ins mentioned) or objects with [a null prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object#null-prototype_objects)
 - Symbols not registered globally, ex. `Symbol('my new symbol')`
 
-## Usage {/*usage*/}
+## Usage {/_usage_/}
 
-### Building with interactivity and state {/*building-with-interactivity-and-state*/}
+### Building with interactivity and state {/_building-with-interactivity-and-state_/}
 
 ```js src/App.js
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
-export default function Counter({initialValue = 0}) {
+export default function Counter({ initialValue = 0 }) {
   const [countValue, setCountValue] = useState(initialValue);
   const increment = () => setCountValue(countValue + 1);
   const decrement = () => setCountValue(countValue - 1);
@@ -280,12 +281,12 @@ As `Counter` requires both the `useState` Hook and event handlers to increment o
 In contrast, a component that renders UI without interaction will not need to be a Client Component.
 
 ```js
-import { readFile } from 'node:fs/promises';
-import Counter from './Counter';
+import { readFile } from "node:fs/promises";
+import Counter from "./Counter";
 
 export default async function CounterContainer() {
-  const initialValue = await readFile('/path/to/counter_value');
-  return <Counter initialValue={initialValue} />
+  const initialValue = await readFile("/path/to/counter_value");
+  return <Counter initialValue={initialValue} />;
 }
 ```
 
@@ -294,33 +295,35 @@ For example, `Counter`'s parent component, `CounterContainer`, does not require 
 There are also components that don't use any server or client-only features and can be agnostic to where they render. In our earlier example, `FancyText` is one such component.
 
 ```js
-export default function FancyText({title, text}) {
-  return title
-    ? <h1 className='fancy title'>{text}</h1>
-    : <h3 className='fancy cursive'>{text}</h3>
+export default function FancyText({ title, text }) {
+  return title ? (
+    <h1 className="fancy title">{text}</h1>
+  ) : (
+    <h3 className="fancy cursive">{text}</h3>
+  );
 }
 ```
 
-In this case, we don't add the `'use client'` directive, resulting in `FancyText`'s *output* (rather than its source code) to be sent to the browser when referenced from a Server Component. As demonstrated in the earlier Inspirations app example, `FancyText` is used as both a Server or Client Component, depending on where it is imported and used.
+In this case, we don't add the `'use client'` directive, resulting in `FancyText`'s _output_ (rather than its source code) to be sent to the browser when referenced from a Server Component. As demonstrated in the earlier Inspirations app example, `FancyText` is used as both a Server or Client Component, depending on where it is imported and used.
 
 But if `FancyText`'s HTML output was large relative to its source code (including dependencies), it might be more efficient to force it to always be a Client Component. Components that return a long SVG path string are one case where it may be more efficient to force a component to be a Client Component.
 
-### Using client APIs {/*using-client-apis*/}
+### Using client APIs {/_using-client-apis_/}
 
 Your React app may use client-specific APIs, such as the browser's APIs for web storage, audio and video manipulation, and device hardware, among [others](https://developer.mozilla.org/en-US/docs/Web/API).
 
 In this example, the component uses [DOM APIs](https://developer.mozilla.org/en-US/docs/Glossary/DOM) to manipulate a [`canvas`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas) element. Since those APIs are only available in the browser, it must be marked as a Client Component.
 
 ```js
-'use client';
+"use client";
 
-import {useRef, useEffect} from 'react';
+import { useRef, useEffect } from "react";
 
 export default function Circle() {
   const ref = useRef(null);
   useLayoutEffect(() => {
     const canvas = ref.current;
-    const context = canvas.getContext('2d');
+    const context = canvas.getContext("2d");
     context.reset();
     context.beginPath();
     context.arc(100, 75, 50, 0, 2 * Math.PI);
@@ -330,7 +333,7 @@ export default function Circle() {
 }
 ```
 
-### Using third-party libraries {/*using-third-party-libraries*/}
+### Using third-party libraries {/_using-third-party-libraries_/}
 
 Often in a React app, you'll leverage third-party libraries to handle common UI patterns or logic.
 
@@ -347,7 +350,7 @@ If these libraries have been updated to be compatible with React Server Componen
 
 [TODO]: <> "Troubleshooting - need use-cases"
 
-***
+---
 
 ## Sitemap
 

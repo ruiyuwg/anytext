@@ -4,21 +4,21 @@ If you want to add some interactivity to your existing project, you don't have t
 
 **You need to install [Node.js](https://nodejs.org/en/) for local development.** Although you can [try React](/learn/installation#try-react) online or with a simple HTML page, realistically most JavaScript tooling you'll want to use for development requires Node.js.
 
-## Using React for an entire subroute of your existing website {/*using-react-for-an-entire-subroute-of-your-existing-website*/}
+## Using React for an entire subroute of your existing website {/_using-react-for-an-entire-subroute-of-your-existing-website_/}
 
 Let's say you have an existing web app at `example.com` built with another server technology (like Rails), and you want to implement all routes starting with `example.com/some-app/` fully with React.
 
 Here's how we recommend to set it up:
 
 1. **Build the React part of your app** using one of the [React-based frameworks](/learn/creating-a-react-app).
-2. **Specify `/some-app` as the *base path*** in your framework's configuration (here's how: [Next.js](https://nextjs.org/docs/app/api-reference/config/next-config-js/basePath), [Gatsby](https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/path-prefix/)).
+2. **Specify `/some-app` as the _base path_** in your framework's configuration (here's how: [Next.js](https://nextjs.org/docs/app/api-reference/config/next-config-js/basePath), [Gatsby](https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/path-prefix/)).
 3. **Configure your server or a proxy** so that all requests under `/some-app/` are handled by your React app.
 
 This ensures the React part of your app can [benefit from the best practices](/learn/build-a-react-app-from-scratch#consider-using-a-framework) baked into those frameworks.
 
 Many React-based frameworks are full-stack and let your React app take advantage of the server. However, you can use the same approach even if you can't or don't want to run JavaScript on the server. In that case, serve the HTML/CSS/JS export ([`next export` output](https://nextjs.org/docs/advanced-features/static-html-export) for Next.js, default for Gatsby) at `/some-app/` instead.
 
-## Using React for a part of your existing page {/*using-react-for-a-part-of-your-existing-page*/}
+## Using React for a part of your existing page {/_using-react-for-a-part-of-your-existing-page_/}
 
 Let's say you have an existing page built with another technology (either a server one like Rails, or a client one like Backbone), and you want to render interactive React components somewhere on that page. That's a common way to integrate React--in fact, it's how most React usage looked at Meta for many years!
 
@@ -29,7 +29,7 @@ You can do this in two steps:
 
 The exact approach depends on your existing page setup, so let's walk through some details.
 
-### Step 1: Set up a modular JavaScript environment {/*step-1-set-up-a-modular-javascript-environment*/}
+### Step 1: Set up a modular JavaScript environment {/_step-1-set-up-a-modular-javascript-environment_/}
 
 A modular JavaScript environment lets you write your React components in individual files, as opposed to writing all of your code in a single file. It also lets you use all the wonderful packages published by other developers on the [npm](https://www.npmjs.com/) registry--including React itself! How you do this depends on your existing setup:
 
@@ -46,7 +46,9 @@ Then add these lines of code at the top of your main JavaScript file (it might b
 ```html public/index.html hidden
 <!DOCTYPE html>
 <html>
-  <head><title>My app</title></head>
+  <head>
+    <title>My app</title>
+  </head>
   <body>
     <!-- Your existing page content (in this example, it gets replaced) -->
     <div id="root"></div>
@@ -55,13 +57,13 @@ Then add these lines of code at the top of your main JavaScript file (it might b
 ```
 
 ```js src/index.js active
-import { createRoot } from 'react-dom/client';
+import { createRoot } from "react-dom/client";
 
 // Clear the existing HTML content
 document.body.innerHTML = '<div id="app"></div>';
 
 // Render your React component instead
-const root = createRoot(document.getElementById('app'));
+const root = createRoot(document.getElementById("app"));
 root.render(<h1>Hello, world</h1>);
 ```
 
@@ -69,18 +71,18 @@ If the entire content of your page was replaced by a "Hello, world!", everything
 
 Integrating a modular JavaScript environment into an existing project for the first time can feel intimidating, but it's worth it! If you get stuck, try our [community resources](/community) or the [Vite Chat](https://chat.vite.dev/).
 
-### Step 2: Render React components anywhere on the page {/*step-2-render-react-components-anywhere-on-the-page*/}
+### Step 2: Render React components anywhere on the page {/_step-2-render-react-components-anywhere-on-the-page_/}
 
 In the previous step, you put this code at the top of your main file:
 
 ```js
-import { createRoot } from 'react-dom/client';
+import { createRoot } from "react-dom/client";
 
 // Clear the existing HTML content
 document.body.innerHTML = '<div id="app"></div>';
 
 // Render your React component instead
-const root = createRoot(document.getElementById('app'));
+const root = createRoot(document.getElementById("app"));
 root.render(<h1>Hello, world</h1>);
 ```
 
@@ -101,7 +103,9 @@ This lets you find that HTML element with [`document.getElementById`](https://de
 ```html public/index.html
 <!DOCTYPE html>
 <html>
-  <head><title>My app</title></head>
+  <head>
+    <title>My app</title>
+  </head>
   <body>
     <p>This paragraph is a part of HTML.</p>
     <nav id="navigation"></nav>
@@ -111,14 +115,14 @@ This lets you find that HTML element with [`document.getElementById`](https://de
 ```
 
 ```js src/index.js active
-import { createRoot } from 'react-dom/client';
+import { createRoot } from "react-dom/client";
 
 function NavigationBar() {
   // TODO: Actually implement a navigation bar
   return <h1>Hello from React!</h1>;
 }
 
-const domNode = document.getElementById('navigation');
+const domNode = document.getElementById("navigation");
 const root = createRoot(domNode);
 root.render(<NavigationBar />);
 ```
@@ -127,11 +131,11 @@ Notice how the original HTML content from `index.html` is preserved, but your ow
 
 When you adopt React in an existing project, it's common to start with small interactive components (like buttons), and then gradually keep "moving upwards" until eventually your entire page is built with React. If you ever reach that point, we recommend migrating to [a React framework](/learn/creating-a-react-app) right after to get the most out of React.
 
-## Using React Native in an existing native mobile app {/*using-react-native-in-an-existing-native-mobile-app*/}
+## Using React Native in an existing native mobile app {/_using-react-native-in-an-existing-native-mobile-app_/}
 
 [React Native](https://reactnative.dev/) can also be integrated into existing native apps incrementally. If you have an existing native app for Android (Java or Kotlin) or iOS (Objective-C or Swift), [follow this guide](https://reactnative.dev/docs/integration-with-existing-apps) to add a React Native screen to it.
 
-***
+---
 
 ## Sitemap
 

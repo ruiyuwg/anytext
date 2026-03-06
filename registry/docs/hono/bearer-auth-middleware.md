@@ -12,8 +12,8 @@ curl -H 'Authorization: Bearer honoiscool' http://localhost:8787/auth/page
 ## Import
 
 ```ts
-import { Hono } from 'hono'
-import { bearerAuth } from 'hono/bearer-auth'
+import { Hono } from "hono";
+import { bearerAuth } from "hono/bearer-auth";
 ```
 
 ## Usage
@@ -22,52 +22,52 @@ import { bearerAuth } from 'hono/bearer-auth'
 > Your `token` must match the regex `/[A-Za-z0-9._~+/-]+=*/`, otherwise a 400 error will be returned. Notably, this regex accommodates both URL-safe Base64- and standard Base64-encoded JWTs. This middleware does not require the bearer token to be a JWT, just that it matches the above regex.
 
 ```ts
-const app = new Hono()
+const app = new Hono();
 
-const token = 'honoiscool'
+const token = "honoiscool";
 
-app.use('/api/*', bearerAuth({ token }))
+app.use("/api/*", bearerAuth({ token }));
 
-app.get('/api/page', (c) => {
-  return c.json({ message: 'You are authorized' })
-})
+app.get("/api/page", (c) => {
+  return c.json({ message: "You are authorized" });
+});
 ```
 
 To restrict to a specific route + method:
 
 ```ts
-const app = new Hono()
+const app = new Hono();
 
-const token = 'honoiscool'
+const token = "honoiscool";
 
-app.get('/api/page', (c) => {
-  return c.json({ message: 'Read posts' })
-})
+app.get("/api/page", (c) => {
+  return c.json({ message: "Read posts" });
+});
 
-app.post('/api/page', bearerAuth({ token }), (c) => {
-  return c.json({ message: 'Created post!' }, 201)
-})
+app.post("/api/page", bearerAuth({ token }), (c) => {
+  return c.json({ message: "Created post!" }, 201);
+});
 ```
 
 To implement multiple tokens (E.g., any valid token can read but create/update/delete are restricted to a privileged token):
 
 ```ts
-const app = new Hono()
+const app = new Hono();
 
-const readToken = 'read'
-const privilegedToken = 'read+write'
-const privilegedMethods = ['POST', 'PUT', 'PATCH', 'DELETE']
+const readToken = "read";
+const privilegedToken = "read+write";
+const privilegedMethods = ["POST", "PUT", "PATCH", "DELETE"];
 
-app.on('GET', '/api/page/*', async (c, next) => {
+app.on("GET", "/api/page/*", async (c, next) => {
   // List of valid tokens
-  const bearer = bearerAuth({ token: [readToken, privilegedToken] })
-  return bearer(c, next)
-})
-app.on(privilegedMethods, '/api/page/*', async (c, next) => {
+  const bearer = bearerAuth({ token: [readToken, privilegedToken] });
+  return bearer(c, next);
+});
+app.on(privilegedMethods, "/api/page/*", async (c, next) => {
   // Single valid privileged token
-  const bearer = bearerAuth({ token: privilegedToken })
-  return bearer(c, next)
-})
+  const bearer = bearerAuth({ token: privilegedToken });
+  return bearer(c, next);
+});
 
 // Define handlers for GET, POST, etc.
 ```
@@ -75,16 +75,16 @@ app.on(privilegedMethods, '/api/page/*', async (c, next) => {
 If you want to verify the value of the token yourself, specify the `verifyToken` option; returning `true` means it is accepted.
 
 ```ts
-const app = new Hono()
+const app = new Hono();
 
 app.use(
-  '/auth-verify-token/*',
+  "/auth-verify-token/*",
   bearerAuth({
     verifyToken: async (token, c) => {
-      return token === 'dynamic-token'
+      return token === "dynamic-token";
     },
-  })
-)
+  }),
+);
 ```
 
 ## Options

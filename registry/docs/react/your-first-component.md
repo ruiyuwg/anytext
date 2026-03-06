@@ -1,12 +1,12 @@
 # Your First Component
 
-*Components* are one of the core concepts of React. They are the foundation upon which you build user interfaces (UI), which makes them the perfect place to start your React journey!
+_Components_ are one of the core concepts of React. They are the foundation upon which you build user interfaces (UI), which makes them the perfect place to start your React journey!
 
 - What a component is
 - What role components play in a React application
 - How to write your first React component
 
-## Components: UI building blocks {/*components-ui-building-blocks*/}
+## Components: UI building blocks {/_components-ui-building-blocks_/}
 
 On the Web, HTML lets us create rich structured documents with its built-in set of tags like `<h1>` and `<li>`:
 
@@ -43,38 +43,35 @@ Just like with HTML tags, you can compose, order and nest components to design w
 
 As your project grows, you will notice that many of your designs can be composed by reusing components you already wrote, speeding up your development. Our table of contents above could be added to any screen with `<TableOfContents />`! You can even jumpstart your project with the thousands of components shared by the React open source community like [Chakra UI](https://chakra-ui.com/) and [Material UI.](https://material-ui.com/)
 
-## Defining a component {/*defining-a-component*/}
+## Defining a component {/_defining-a-component_/}
 
-Traditionally when creating web pages, web developers marked up their content and then added interaction by sprinkling on some JavaScript. This worked great when interaction was a nice-to-have on the web. Now it is expected for many sites and all apps. React puts interactivity first while still using the same technology: **a React component is a JavaScript function that you can *sprinkle with markup*.** Here's what that looks like (you can edit the example below):
+Traditionally when creating web pages, web developers marked up their content and then added interaction by sprinkling on some JavaScript. This worked great when interaction was a nice-to-have on the web. Now it is expected for many sites and all apps. React puts interactivity first while still using the same technology: **a React component is a JavaScript function that you can _sprinkle with markup_.** Here's what that looks like (you can edit the example below):
 
 ```js
 export default function Profile() {
-  return (
-    <img
-      src="https://i.imgur.com/MK3eW3Am.jpg"
-      alt="Katherine Johnson"
-    />
-  )
+  return <img src="https://i.imgur.com/MK3eW3Am.jpg" alt="Katherine Johnson" />;
 }
 ```
 
 ```css
-img { height: 200px; }
+img {
+  height: 200px;
+}
 ```
 
 And here's how to build a component:
 
-### Step 1: Export the component {/*step-1-export-the-component*/}
+### Step 1: Export the component {/_step-1-export-the-component_/}
 
 The `export default` prefix is a [standard JavaScript syntax](https://developer.mozilla.org/docs/web/javascript/reference/statements/export) (not specific to React). It lets you mark the main function in a file so that you can later import it from other files. (More on importing in [Importing and Exporting Components](/learn/importing-and-exporting-components)!)
 
-### Step 2: Define the function {/*step-2-define-the-function*/}
+### Step 2: Define the function {/_step-2-define-the-function_/}
 
 With `function Profile() { }` you define a JavaScript function with the name `Profile`.
 
 React components are regular JavaScript functions, but **their names must start with a capital letter** or they won't work!
 
-### Step 3: Add markup {/*step-3-add-markup*/}
+### Step 3: Add markup {/_step-3-add-markup_/}
 
 The component returns an `<img />` tag with `src` and `alt` attributes. `<img />` is written like HTML, but it is actually JavaScript under the hood! This syntax is called [JSX](/learn/writing-markup-with-jsx), and it lets you embed markup inside JavaScript.
 
@@ -96,18 +93,13 @@ return (
 
 Without parentheses, any code on the lines after `return` [will be ignored](https://stackoverflow.com/questions/2846283/what-are-the-rules-for-javascripts-automatic-semicolon-insertion-asi)!
 
-## Using a component {/*using-a-component*/}
+## Using a component {/_using-a-component_/}
 
 Now that you've defined your `Profile` component, you can nest it inside other components. For example, you can export a `Gallery` component that uses multiple `Profile` components:
 
 ```js
 function Profile() {
-  return (
-    <img
-      src="https://i.imgur.com/MK3eW3As.jpg"
-      alt="Katherine Johnson"
-    />
-  );
+  return <img src="https://i.imgur.com/MK3eW3As.jpg" alt="Katherine Johnson" />;
 }
 
 export default function Gallery() {
@@ -123,10 +115,13 @@ export default function Gallery() {
 ```
 
 ```css
-img { margin: 0 10px 10px 0; height: 90px; }
+img {
+  margin: 0 10px 10px 0;
+  height: 90px;
+}
 ```
 
-### What the browser sees {/*what-the-browser-sees*/}
+### What the browser sees {/_what-the-browser-sees_/}
 
 Notice the difference in casing:
 
@@ -144,7 +139,7 @@ And `Profile` contains even more HTML: `<img />`. In the end, this is what the b
 </section>
 ```
 
-### Nesting and organizing components {/*nesting-and-organizing-components*/}
+### Nesting and organizing components {/_nesting-and-organizing-components_/}
 
 Components are regular JavaScript functions, so you can keep multiple components in the same file. This is convenient when components are relatively small or tightly related to each other. If this file gets crowded, you can always move `Profile` to a separate file. You will learn how to do this shortly on the [page about imports.](/learn/importing-and-exporting-components)
 
@@ -177,13 +172,13 @@ function Profile() {
 
 When a child component needs some data from a parent, [pass it by props](/learn/passing-props-to-a-component) instead of nesting definitions.
 
-#### Components all the way down {/*components-all-the-way-down*/}
+#### Components all the way down {/_components-all-the-way-down_/}
 
 Your React application begins at a "root" component. Usually, it is created automatically when you start a new project. For example, if you use [CodeSandbox](https://codesandbox.io/) or if you use the framework [Next.js](https://nextjs.org/), the root component is defined in `pages/index.js`. In these examples, you've been exporting root components.
 
 Most React apps use components all the way down. This means that you won't only use components for reusable pieces like buttons, but also for larger pieces like sidebars, lists, and ultimately, complete pages! Components are a handy way to organize UI code and markup, even if some of them are only used once.
 
-[React-based frameworks](/learn/creating-a-react-app) take this a step further. Instead of using an empty HTML file and letting React "take over" managing the page with JavaScript, they *also* generate the HTML automatically from your React components. This allows your app to show some content before the JavaScript code loads.
+[React-based frameworks](/learn/creating-a-react-app) take this a step further. Instead of using an empty HTML file and letting React "take over" managing the page with JavaScript, they _also_ generate the HTML automatically from your React components. This allows your app to show some content before the JavaScript code loads.
 
 Still, many websites only use React to [add interactivity to existing HTML pages.](/learn/add-react-to-an-existing-project#using-react-for-a-part-of-your-existing-page) They have many root components instead of a single one for the entire page. You can use as much—or as little—React as you need.
 
@@ -192,27 +187,23 @@ You've just gotten your first taste of React! Let's recap some key points.
 - React lets you create components, **reusable UI elements for your app.**
 - In a React app, every piece of UI is a component.
 - React components are regular JavaScript functions except:
-
   1. Their names always begin with a capital letter.
   2. They return JSX markup.
 
-#### Export the component {/*export-the-component*/}
+#### Export the component {/_export-the-component_/}
 
 This sandbox doesn't work because the root component is not exported:
 
 ```js
 function Profile() {
-  return (
-    <img
-      src="https://i.imgur.com/lICfvbD.jpg"
-      alt="Aklilu Lemma"
-    />
-  );
+  return <img src="https://i.imgur.com/lICfvbD.jpg" alt="Aklilu Lemma" />;
 }
 ```
 
 ```css
-img { height: 181px; }
+img {
+  height: 181px;
+}
 ```
 
 Try to fix it yourself before looking at the solution!
@@ -221,36 +212,35 @@ Add `export default` before the function definition like so:
 
 ```js
 export default function Profile() {
-  return (
-    <img
-      src="https://i.imgur.com/lICfvbD.jpg"
-      alt="Aklilu Lemma"
-    />
-  );
+  return <img src="https://i.imgur.com/lICfvbD.jpg" alt="Aklilu Lemma" />;
 }
 ```
 
 ```css
-img { height: 181px; }
+img {
+  height: 181px;
+}
 ```
 
 You might be wondering why writing `export` alone is not enough to fix this example. You can learn the difference between `export` and `export default` in [Importing and Exporting Components.](/learn/importing-and-exporting-components)
 
-#### Fix the return statement {/*fix-the-return-statement*/}
+#### Fix the return statement {/_fix-the-return-statement_/}
 
 Something isn't right about this `return` statement. Can you fix it?
 
-You may get an "Unexpected token" error while trying to fix this. In that case, check that the semicolon appears *after* the closing parenthesis. Leaving a semicolon inside `return ( )` will cause an error.
+You may get an "Unexpected token" error while trying to fix this. In that case, check that the semicolon appears _after_ the closing parenthesis. Leaving a semicolon inside `return ( )` will cause an error.
 
 ```js
 export default function Profile() {
-  return
-    <img src="https://i.imgur.com/jA8hHMpm.jpg" alt="Katsuko Saruhashi" />;
+  return;
+  <img src="https://i.imgur.com/jA8hHMpm.jpg" alt="Katsuko Saruhashi" />;
 }
 ```
 
 ```css
-img { height: 180px; }
+img {
+  height: 180px;
+}
 ```
 
 You can fix this component by moving the return statement to one line like so:
@@ -262,38 +252,32 @@ export default function Profile() {
 ```
 
 ```css
-img { height: 180px; }
+img {
+  height: 180px;
+}
 ```
 
 Or by wrapping the returned JSX markup in parentheses that open right after `return`:
 
 ```js
 export default function Profile() {
-  return (
-    <img 
-      src="https://i.imgur.com/jA8hHMpm.jpg" 
-      alt="Katsuko Saruhashi" 
-    />
-  );
+  return <img src="https://i.imgur.com/jA8hHMpm.jpg" alt="Katsuko Saruhashi" />;
 }
 ```
 
 ```css
-img { height: 180px; }
+img {
+  height: 180px;
+}
 ```
 
-#### Spot the mistake {/*spot-the-mistake*/}
+#### Spot the mistake {/_spot-the-mistake_/}
 
 Something's wrong with how the `Profile` component is declared and used. Can you spot the mistake? (Try to remember how React distinguishes components from the regular HTML tags!)
 
 ```js
 function profile() {
-  return (
-    <img
-      src="https://i.imgur.com/QIrZWGIs.jpg"
-      alt="Alan L. Hart"
-    />
-  );
+  return <img src="https://i.imgur.com/QIrZWGIs.jpg" alt="Alan L. Hart" />;
 }
 
 export default function Gallery() {
@@ -309,7 +293,10 @@ export default function Gallery() {
 ```
 
 ```css
-img { margin: 0 10px 10px 0; height: 90px; }
+img {
+  margin: 0 10px 10px 0;
+  height: 90px;
+}
 ```
 
 React component names must start with a capital letter.
@@ -318,12 +305,7 @@ Change `function profile()` to `function Profile()`, and then change every `<pro
 
 ```js
 function Profile() {
-  return (
-    <img
-      src="https://i.imgur.com/QIrZWGIs.jpg"
-      alt="Alan L. Hart"
-    />
-  );
+  return <img src="https://i.imgur.com/QIrZWGIs.jpg" alt="Alan L. Hart" />;
 }
 
 export default function Gallery() {
@@ -339,27 +321,26 @@ export default function Gallery() {
 ```
 
 ```css
-img { margin: 0 10px 10px 0; }
+img {
+  margin: 0 10px 10px 0;
+}
 ```
 
-#### Your own component {/*your-own-component*/}
+#### Your own component {/_your-own-component_/}
 
 Write a component from scratch. You can give it any valid name and return any markup. If you're out of ideas, you can write a `Congratulations` component that shows `<h1>Good job!</h1>`. Don't forget to export it!
 
 ```js
 // Write your component below!
-
 ```
 
 ```js
 export default function Congratulations() {
-  return (
-    <h1>Good job!</h1>
-  );
+  return <h1>Good job!</h1>;
 }
 ```
 
-***
+---
 
 ## Sitemap
 

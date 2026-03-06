@@ -24,14 +24,14 @@ You can use the test helpers with the AI Core functions in your unit tests:
 ### generateText
 
 ```ts
-import { generateText } from 'ai';
-import { MockLanguageModelV3 } from 'ai/test';
+import { generateText } from "ai";
+import { MockLanguageModelV3 } from "ai/test";
 
 const result = await generateText({
   model: new MockLanguageModelV3({
     doGenerate: async () => ({
-      content: [{ type: 'text', text: `Hello, world!` }],
-      finishReason: { unified: 'stop', raw: undefined },
+      content: [{ type: "text", text: `Hello, world!` }],
+      finishReason: { unified: "stop", raw: undefined },
       usage: {
         inputTokens: {
           total: 10,
@@ -48,29 +48,29 @@ const result = await generateText({
       warnings: [],
     }),
   }),
-  prompt: 'Hello, test!',
+  prompt: "Hello, test!",
 });
 ```
 
 ### streamText
 
 ```ts
-import { streamText, simulateReadableStream } from 'ai';
-import { MockLanguageModelV3 } from 'ai/test';
+import { streamText, simulateReadableStream } from "ai";
+import { MockLanguageModelV3 } from "ai/test";
 
 const result = streamText({
   model: new MockLanguageModelV3({
     doStream: async () => ({
       stream: simulateReadableStream({
         chunks: [
-          { type: 'text-start', id: 'text-1' },
-          { type: 'text-delta', id: 'text-1', delta: 'Hello' },
-          { type: 'text-delta', id: 'text-1', delta: ', ' },
-          { type: 'text-delta', id: 'text-1', delta: 'world!' },
-          { type: 'text-end', id: 'text-1' },
+          { type: "text-start", id: "text-1" },
+          { type: "text-delta", id: "text-1", delta: "Hello" },
+          { type: "text-delta", id: "text-1", delta: ", " },
+          { type: "text-delta", id: "text-1", delta: "world!" },
+          { type: "text-end", id: "text-1" },
           {
-            type: 'finish',
-            finishReason: { unified: 'stop', raw: undefined },
+            type: "finish",
+            finishReason: { unified: "stop", raw: undefined },
             logprobs: undefined,
             usage: {
               inputTokens: {
@@ -90,22 +90,22 @@ const result = streamText({
       }),
     }),
   }),
-  prompt: 'Hello, test!',
+  prompt: "Hello, test!",
 });
 ```
 
 ### generateText with Output
 
 ```ts
-import { generateText, Output } from 'ai';
-import { MockLanguageModelV3 } from 'ai/test';
-import { z } from 'zod';
+import { generateText, Output } from "ai";
+import { MockLanguageModelV3 } from "ai/test";
+import { z } from "zod";
 
 const result = await generateText({
   model: new MockLanguageModelV3({
     doGenerate: async () => ({
-      content: [{ type: 'text', text: `{"content":"Hello, world!"}` }],
-      finishReason: { unified: 'stop', raw: undefined },
+      content: [{ type: "text", text: `{"content":"Hello, world!"}` }],
+      finishReason: { unified: "stop", raw: undefined },
       usage: {
         inputTokens: {
           total: 10,
@@ -123,33 +123,33 @@ const result = await generateText({
     }),
   }),
   output: Output.object({ schema: z.object({ content: z.string() }) }),
-  prompt: 'Hello, test!',
+  prompt: "Hello, test!",
 });
 ```
 
 ### streamText with Output
 
 ```ts
-import { streamText, Output, simulateReadableStream } from 'ai';
-import { MockLanguageModelV3 } from 'ai/test';
-import { z } from 'zod';
+import { streamText, Output, simulateReadableStream } from "ai";
+import { MockLanguageModelV3 } from "ai/test";
+import { z } from "zod";
 
 const result = streamText({
   model: new MockLanguageModelV3({
     doStream: async () => ({
       stream: simulateReadableStream({
         chunks: [
-          { type: 'text-start', id: 'text-1' },
-          { type: 'text-delta', id: 'text-1', delta: '{ ' },
-          { type: 'text-delta', id: 'text-1', delta: '"content": ' },
-          { type: 'text-delta', id: 'text-1', delta: `"Hello, ` },
-          { type: 'text-delta', id: 'text-1', delta: `world` },
-          { type: 'text-delta', id: 'text-1', delta: `!"` },
-          { type: 'text-delta', id: 'text-1', delta: ' }' },
-          { type: 'text-end', id: 'text-1' },
+          { type: "text-start", id: "text-1" },
+          { type: "text-delta", id: "text-1", delta: "{ " },
+          { type: "text-delta", id: "text-1", delta: '"content": ' },
+          { type: "text-delta", id: "text-1", delta: `"Hello, ` },
+          { type: "text-delta", id: "text-1", delta: `world` },
+          { type: "text-delta", id: "text-1", delta: `!"` },
+          { type: "text-delta", id: "text-1", delta: " }" },
+          { type: "text-end", id: "text-1" },
           {
-            type: 'finish',
-            finishReason: { unified: 'stop', raw: undefined },
+            type: "finish",
+            finishReason: { unified: "stop", raw: undefined },
             logprobs: undefined,
             usage: {
               inputTokens: {
@@ -170,7 +170,7 @@ const result = streamText({
     }),
   }),
   output: Output.object({ schema: z.object({ content: z.string() }) }),
-  prompt: 'Hello, test!',
+  prompt: "Hello, test!",
 });
 ```
 
@@ -182,7 +182,7 @@ debugging, or demonstration purposes.
 Here is a Next example:
 
 ```ts filename="route.ts"
-import { simulateReadableStream } from 'ai';
+import { simulateReadableStream } from "ai";
 
 export async function POST(req: Request) {
   return new Response(
@@ -203,10 +203,10 @@ export async function POST(req: Request) {
     {
       status: 200,
       headers: {
-        'Content-Type': 'text/event-stream',
-        'Cache-Control': 'no-cache',
-        Connection: 'keep-alive',
-        'x-vercel-ai-ui-message-stream': 'v1',
+        "Content-Type": "text/event-stream",
+        "Cache-Control": "no-cache",
+        Connection: "keep-alive",
+        "x-vercel-ai-ui-message-stream": "v1",
       },
     },
   );

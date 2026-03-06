@@ -11,13 +11,13 @@ The Gladia provider is available in the `@ai-sdk/gladia` module. You can install
 You can import the default provider instance `gladia` from `@ai-sdk/gladia`:
 
 ```ts
-import { gladia } from '@ai-sdk/gladia';
+import { gladia } from "@ai-sdk/gladia";
 ```
 
 If you need a customized setup, you can import `createGladia` from `@ai-sdk/gladia` and create a provider instance with your settings:
 
 ```ts
-import { createGladia } from '@ai-sdk/gladia';
+import { createGladia } from "@ai-sdk/gladia";
 
 const gladia = createGladia({
   // custom settings, e.g.
@@ -27,16 +27,16 @@ const gladia = createGladia({
 
 You can use the following optional settings to customize the Gladia provider instance:
 
-- **apiKey** *string*
+- **apiKey** _string_
 
   API key that is being sent using the `Authorization` header.
   It defaults to the `GLADIA_API_KEY` environment variable.
 
-- **headers** *Record\<string,string>*
+- **headers** _Record\<string,string>_
 
   Custom headers to include in the requests.
 
-- **fetch** *(input: RequestInfo, init?: RequestInit) => Promise\<Response>*
+- **fetch** _(input: RequestInfo, init?: RequestInit) => Promise\<Response>_
 
   Custom [fetch](https://developer.mozilla.org/en-US/docs/Web/API/fetch) implementation.
   Defaults to the global `fetch` function.
@@ -55,14 +55,14 @@ const model = gladia.transcription();
 You can also pass additional provider-specific options using the `providerOptions` argument. For example, supplying the `summarize` option will enable summaries for sections of content.
 
 ```ts highlight="7"
-import { experimental_transcribe as transcribe } from 'ai';
-import { gladia } from '@ai-sdk/gladia';
-import { type GladiaTranscriptionModelOptions } from '@ai-sdk/gladia';
-import { readFile } from 'fs/promises';
+import { experimental_transcribe as transcribe } from "ai";
+import { gladia } from "@ai-sdk/gladia";
+import { type GladiaTranscriptionModelOptions } from "@ai-sdk/gladia";
+import { readFile } from "fs/promises";
 
 const result = await transcribe({
   model: gladia.transcription(),
-  audio: await readFile('audio.mp3'),
+  audio: await readFile("audio.mp3"),
   providerOptions: {
     gladia: {
       summarization: true,
@@ -76,202 +76,192 @@ parameter.
 
 The following provider options are available:
 
-- **contextPrompt** *string*
+- **contextPrompt** _string_
 
   Context to feed the transcription model with for possible better accuracy.
   Optional.
 
-- **customVocabulary** *boolean | any\[]*
+- **customVocabulary** _boolean | any\[]_
 
   Custom vocabulary to improve transcription accuracy.
   Optional.
 
-- **customVocabularyConfig** *object*
+- **customVocabularyConfig** _object_
 
   Configuration for custom vocabulary.
   Optional.
+  - **vocabulary** _Array\<string | { value: string, intensity?: number, pronunciations?: string\[], language?: string }>_
+  - **defaultIntensity** _number_
 
-  - **vocabulary** *Array\<string | { value: string, intensity?: number, pronunciations?: string\[], language?: string }>*
-  - **defaultIntensity** *number*
-
-- **detectLanguage** *boolean*
+- **detectLanguage** _boolean_
 
   Whether to automatically detect the language.
   Optional.
 
-- **enableCodeSwitching** *boolean*
+- **enableCodeSwitching** _boolean_
 
   Enable code switching for multilingual audio.
   Optional.
 
-- **codeSwitchingConfig** *object*
+- **codeSwitchingConfig** _object_
 
   Configuration for code switching.
   Optional.
+  - **languages** _string\[]_
 
-  - **languages** *string\[]*
-
-- **language** *string*
+- **language** _string_
 
   Specify the language of the audio.
   Optional.
 
-- **callback** *boolean*
+- **callback** _boolean_
 
   Enable callback when transcription is complete.
   Optional.
 
-- **callbackConfig** *object*
+- **callbackConfig** _object_
 
   Configuration for callback.
   Optional.
+  - **url** _string_
+  - **method** _'POST' | 'PUT'_
 
-  - **url** *string*
-  - **method** *'POST' | 'PUT'*
-
-- **subtitles** *boolean*
+- **subtitles** _boolean_
 
   Generate subtitles from the transcription.
   Optional.
 
-- **subtitlesConfig** *object*
+- **subtitlesConfig** _object_
 
   Configuration for subtitles.
   Optional.
+  - **formats** _Array<'srt' | 'vtt'>_
+  - **minimumDuration** _number_
+  - **maximumDuration** _number_
+  - **maximumCharactersPerRow** _number_
+  - **maximumRowsPerCaption** _number_
+  - **style** _'default' | 'compliance'_
 
-  - **formats** *Array<'srt' | 'vtt'>*
-  - **minimumDuration** *number*
-  - **maximumDuration** *number*
-  - **maximumCharactersPerRow** *number*
-  - **maximumRowsPerCaption** *number*
-  - **style** *'default' | 'compliance'*
-
-- **diarization** *boolean*
+- **diarization** _boolean_
 
   Enable speaker diarization.
   Optional.
 
-- **diarizationConfig** *object*
+- **diarizationConfig** _object_
 
   Configuration for diarization.
   Optional.
+  - **numberOfSpeakers** _number_
+  - **minSpeakers** _number_
+  - **maxSpeakers** _number_
+  - **enhanced** _boolean_
 
-  - **numberOfSpeakers** *number*
-  - **minSpeakers** *number*
-  - **maxSpeakers** *number*
-  - **enhanced** *boolean*
-
-- **translation** *boolean*
+- **translation** _boolean_
 
   Enable translation of the transcription.
   Optional.
 
-- **translationConfig** *object*
+- **translationConfig** _object_
 
   Configuration for translation.
   Optional.
+  - **targetLanguages** _string\[]_
+  - **model** _'base' | 'enhanced'_
+  - **matchOriginalUtterances** _boolean_
 
-  - **targetLanguages** *string\[]*
-  - **model** *'base' | 'enhanced'*
-  - **matchOriginalUtterances** *boolean*
-
-- **summarization** *boolean*
+- **summarization** _boolean_
 
   Enable summarization of the transcription.
   Optional.
 
-- **summarizationConfig** *object*
+- **summarizationConfig** _object_
 
   Configuration for summarization.
   Optional.
+  - **type** _'general' | 'bullet_points' | 'concise'_
 
-  - **type** *'general' | 'bullet\_points' | 'concise'*
-
-- **moderation** *boolean*
+- **moderation** _boolean_
 
   Enable content moderation.
   Optional.
 
-- **namedEntityRecognition** *boolean*
+- **namedEntityRecognition** _boolean_
 
   Enable named entity recognition.
   Optional.
 
-- **chapterization** *boolean*
+- **chapterization** _boolean_
 
   Enable chapterization of the transcription.
   Optional.
 
-- **nameConsistency** *boolean*
+- **nameConsistency** _boolean_
 
   Enable name consistency in the transcription.
   Optional.
 
-- **customSpelling** *boolean*
+- **customSpelling** _boolean_
 
   Enable custom spelling.
   Optional.
 
-- **customSpellingConfig** *object*
+- **customSpellingConfig** _object_
 
   Configuration for custom spelling.
   Optional.
+  - **spellingDictionary** _Record\<string, string\[]>_
 
-  - **spellingDictionary** *Record\<string, string\[]>*
-
-- **structuredDataExtraction** *boolean*
+- **structuredDataExtraction** _boolean_
 
   Enable structured data extraction.
   Optional.
 
-- **structuredDataExtractionConfig** *object*
+- **structuredDataExtractionConfig** _object_
 
   Configuration for structured data extraction.
   Optional.
+  - **classes** _string\[]_
 
-  - **classes** *string\[]*
-
-- **sentimentAnalysis** *boolean*
+- **sentimentAnalysis** _boolean_
 
   Enable sentiment analysis.
   Optional.
 
-- **audioToLlm** *boolean*
+- **audioToLlm** _boolean_
 
   Enable audio to LLM processing.
   Optional.
 
-- **audioToLlmConfig** *object*
+- **audioToLlmConfig** _object_
 
   Configuration for audio to LLM.
   Optional.
+  - **prompts** _string\[]_
 
-  - **prompts** *string\[]*
-
-- **customMetadata** *Record\<string, any>*
+- **customMetadata** _Record\<string, any>_
 
   Custom metadata to include with the request.
   Optional.
 
-- **sentences** *boolean*
+- **sentences** _boolean_
 
   Enable sentence detection.
   Optional.
 
-- **displayMode** *boolean*
+- **displayMode** _boolean_
 
   Enable display mode.
   Optional.
 
-- **punctuationEnhanced** *boolean*
+- **punctuationEnhanced** _boolean_
 
   Enable enhanced punctuation.
   Optional.
 
 ### Model Capabilities
 
-| Model     | Transcription       | Duration            | Segments            | Language            |
-| --------- | ------------------- | ------------------- | ------------------- | ------------------- |
-| `Default` |  |  |  |  |
+| Model     | Transcription | Duration | Segments | Language |
+| --------- | ------------- | -------- | -------- | -------- |
+| `Default` |               |          |          |          |
 
 # LMNT

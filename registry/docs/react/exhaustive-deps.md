@@ -2,17 +2,17 @@
 
 Validates that dependency arrays for React hooks contain all necessary dependencies.
 
-## Rule Details {/*rule-details*/}
+## Rule Details {/_rule-details_/}
 
 React hooks like `useEffect`, `useMemo`, and `useCallback` accept dependency arrays. When a value referenced inside these hooks isn't included in the dependency array, React won't re-run the effect or recalculate the value when that dependency changes. This causes stale closures where the hook uses outdated values.
 
-## Common Violations {/*common-violations*/}
+## Common Violations {/_common-violations_/}
 
 This error often happens when you try to "trick" React about dependencies to control when an effect runs. Effects should synchronize your component with external systems. The dependency array tells React which values the effect uses, so React knows when to re-synchronize.
 
 If you find yourself fighting with the linter, you likely need to restructure your code. See [Removing Effect Dependencies](/learn/removing-effect-dependencies) to learn how.
 
-### Invalid {/*invalid*/}
+### Invalid {/_invalid_/}
 
 Examples of incorrect code for this rule:
 
@@ -33,7 +33,7 @@ useMemo(() => {
 }, [items]); // Missing 'sortOrder'
 ```
 
-### Valid {/*valid*/}
+### Valid {/_valid_/}
 
 Examples of correct code for this rule:
 
@@ -49,9 +49,9 @@ useEffect(() => {
 }, [userId]);
 ```
 
-## Troubleshooting {/*troubleshooting*/}
+## Troubleshooting {/_troubleshooting_/}
 
-### Adding a function dependency causes infinite loops {/*function-dependency-loops*/}
+### Adding a function dependency causes infinite loops {/_function-dependency-loops_/}
 
 You have an effect, but you're creating a new function on every render:
 
@@ -77,7 +77,7 @@ const logItems = () => {
 return <button onClick={logItems}>Log</button>;
 
 // ✅ Or derive during render if there's no side effect
-items.forEach(item => {
+items.forEach((item) => {
   console.log(item);
 });
 ```
@@ -100,7 +100,7 @@ useEffect(() => {
 }, [items]);
 ```
 
-### Running an effect only once {/*effect-on-mount*/}
+### Running an effect only once {/_effect-on-mount_/}
 
 You want to run an effect once on mount, but the linter complains about missing dependencies:
 
@@ -132,7 +132,7 @@ useEffect(() => {
 }, [userId]);
 ```
 
-## Options {/*options*/}
+## Options {/_options_/}
 
 You can configure custom effect hooks using shared ESLint settings (available in `eslint-plugin-react-hooks` 6.1.1 and later):
 
@@ -162,7 +162,7 @@ For backward compatibility, this rule also accepts a rule-level option:
 
 - `additionalHooks`: Regex for hooks that should be checked for exhaustive dependencies. **Note:** If this rule-level option is specified, it takes precedence over the shared `settings` configuration.
 
-***
+---
 
 ## Sitemap
 

@@ -82,28 +82,26 @@ Edit `index.html`:
 ```ts
 function register() {
   navigator.serviceWorker
-    .register('/sw.ts', { scope: '/sw', type: 'module' })
+    .register("/sw.ts", { scope: "/sw", type: "module" })
     .then(
       function (_registration) {
-        console.log('Register Service Worker: Success')
+        console.log("Register Service Worker: Success");
       },
       function (_error) {
-        console.log('Register Service Worker: Error')
-      }
-    )
+        console.log("Register Service Worker: Error");
+      },
+    );
 }
 function start() {
-  navigator.serviceWorker
-    .getRegistrations()
-    .then(function (registrations) {
-      for (const registration of registrations) {
-        console.log('Unregister Service Worker')
-        registration.unregister()
-      }
-      register()
-    })
+  navigator.serviceWorker.getRegistrations().then(function (registrations) {
+    for (const registration of registrations) {
+      console.log("Unregister Service Worker");
+      registration.unregister();
+    }
+    register();
+  });
 }
-start()
+start();
 ```
 
 In `sw.ts`, create an application using Hono and register it to the `fetch` event with the Service Worker adapter’s `handle` function. This allows the Hono application to intercept access to `/sw`.
@@ -111,15 +109,15 @@ In `sw.ts`, create an application using Hono and register it to the `fetch` even
 ```ts
 // To support types
 // https://github.com/microsoft/TypeScript/issues/14877
-declare const self: ServiceWorkerGlobalScope
+declare const self: ServiceWorkerGlobalScope;
 
-import { Hono } from 'hono'
-import { handle } from 'hono/service-worker'
+import { Hono } from "hono";
+import { handle } from "hono/service-worker";
 
-const app = new Hono().basePath('/sw')
-app.get('/', (c) => c.text('Hello World'))
+const app = new Hono().basePath("/sw");
+app.get("/", (c) => c.text("Hello World"));
 
-self.addEventListener('fetch', handle(app))
+self.addEventListener("fetch", handle(app));
 ```
 
 ### Using `fire()`
@@ -127,13 +125,13 @@ self.addEventListener('fetch', handle(app))
 The `fire()` function automatically calls `addEventListener('fetch', handle(app))` for you, making the code more concise.
 
 ```ts
-import { Hono } from 'hono'
-import { fire } from 'hono/service-worker'
+import { Hono } from "hono";
+import { fire } from "hono/service-worker";
 
-const app = new Hono().basePath('/sw')
-app.get('/', (c) => c.text('Hello World'))
+const app = new Hono().basePath("/sw");
+app.get("/", (c) => c.text("Hello World"));
 
-fire(app)
+fire(app);
 ```
 
 ## 3. Run

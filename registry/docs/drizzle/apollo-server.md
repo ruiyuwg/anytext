@@ -5,13 +5,13 @@
 \<CodeTabs items={\['server.ts', 'schema.ts']}> <CodeTab>
 
 ```ts copy {1, 10}
-import { buildSchema } from 'drizzle-graphql';
-import { drizzle } from 'drizzle-orm/...';
-import client from './db';
-import { ApolloServer } from '@apollo/server';
-import { startStandaloneServer } from '@apollo/server/standalone';
+import { buildSchema } from "drizzle-graphql";
+import { drizzle } from "drizzle-orm/...";
+import client from "./db";
+import { ApolloServer } from "@apollo/server";
+import { startStandaloneServer } from "@apollo/server/standalone";
 
-import * as dbSchema from './schema';
+import * as dbSchema from "./schema";
 
 const db = drizzle({ client, schema: dbSchema });
 
@@ -41,7 +41,7 @@ posts: many(posts),
 export const posts = pgTable('posts', {
 id: serial('id').primaryKey(),
 content: text('content').notNull(),
-authorId: integer('author\_id').notNull(),
+authorId: integer('author_id').notNull(),
 });
 
 export const postsRelations = relations(posts, ({ one }) => ({
@@ -96,7 +96,7 @@ posts: many(posts),
 export const posts = pgTable('posts', {
 id: serial('id').primaryKey(),
 content: text('content').notNull(),
-authorId: integer('author\_id').notNull(),
+authorId: integer('author_id').notNull(),
 });
 
 export const postsRelations = relations(posts, ({ one }) => ({
@@ -196,7 +196,7 @@ posts: many(posts),
 export const posts = pgTable('posts', {
 id: serial('id').primaryKey(),
 content: text('content').notNull(),
-authorId: integer('author\_id').notNull(),
+authorId: integer('author_id').notNull(),
 });
 
 export const postsRelations = relations(posts, ({ one }) => ({
@@ -544,7 +544,7 @@ name: text('name').notNull(),
 export const cities = pgTable('cities', {
 id: serial('id').primaryKey(),
 name: text('name').notNull(),
-countryId: integer('country\_id').notNull().references(() => countries.id),
+countryId: integer('country_id').notNull().references(() => countries.id),
 });
 
 ````
@@ -627,9 +627,9 @@ select * from users order by id asc limit 3;
 
 export const users = pgTable('users', {
 id: serial('id').primaryKey(),
-firstName: text('first\_name').notNull(),
-lastName: text('last\_name').notNull(),
-createdAt: timestamp('created\_at').notNull().defaultNow(),
+firstName: text('first_name').notNull(),
+lastName: text('last_name').notNull(),
+createdAt: timestamp('created_at').notNull().defaultNow(),
 });
 
 ````
@@ -665,21 +665,31 @@ createdAt: timestamp('created\_at').notNull().defaultNow(),
 If you need dynamic order by you can do like below:
 
 ```ts copy {6,8}
-const nextUserPage = async (order: 'asc' | 'desc' = 'asc', cursor?: number, pageSize = 3) => {
+const nextUserPage = async (
+  order: "asc" | "desc" = "asc",
+  cursor?: number,
+  pageSize = 3,
+) => {
   await db
     .select()
     .from(users)
     // cursor comparison
-    .where(cursor ? (order === 'asc' ? gt(users.id, cursor) : lt(users.id, cursor)) : undefined)
+    .where(
+      cursor
+        ? order === "asc"
+          ? gt(users.id, cursor)
+          : lt(users.id, cursor)
+        : undefined,
+    )
     .limit(pageSize)
-    .orderBy(order === 'asc' ? asc(users.id) : desc(users.id));
+    .orderBy(order === "asc" ? asc(users.id) : desc(users.id));
 };
 
 await nextUserPage();
-await nextUserPage('asc', 3);
+await nextUserPage("asc", 3);
 // descending order
-await nextUserPage('desc');
-await nextUserPage('desc', 7);
+await nextUserPage("desc");
+await nextUserPage("desc", 7);
 ```
 
 The main idea of this pagination is to use cursor as a pointer to a specific row in a dataset, indicating the end of the previous page. For correct ordering and cursor comparison, cursor should be unique and sequential.
@@ -762,8 +772,8 @@ export const users = pgTable('users', {
 // columns declaration
 },
 (t) => \[
-index('first\_name\_index').on(t.firstName).asc(),
-index('first\_name\_and\_id\_index').on(t.firstName, t.id).asc(),
+index('first_name_index').on(t.firstName).asc(),
+index('first_name_and_id_index').on(t.firstName, t.id).asc(),
 ]);
 
 ````
@@ -854,13 +864,13 @@ import Prerequisites from "@mdx/Prerequisites.astro";
 To use Drizzle kit with Cloudflare D1 HTTP API, you need to configure the `drizzle.config.ts` file like this:
 
 ```ts copy filename="drizzle.config.ts" {7, 9-11}
-import { defineConfig } from 'drizzle-kit';
+import { defineConfig } from "drizzle-kit";
 
 export default defineConfig({
-  schema: './src/schema.ts',
-  out: './migrations',
-  dialect: 'sqlite',
-  driver: 'd1-http',
+  schema: "./src/schema.ts",
+  out: "./migrations",
+  dialect: "sqlite",
+  driver: "d1-http",
   dbCredentials: {
     accountId: process.env.CLOUDFLARE_ACCOUNT_ID!,
     databaseId: process.env.CLOUDFLARE_DATABASE_ID!,
@@ -919,7 +929,7 @@ update "table" set "counter" = "counter" - 1 where "id" = 1;
 Drizzle has simple and flexible API, which lets you easily create custom solutions. This is how you do custom decrement function:
 
 ```ts copy {4,10,11}
-import { AnyColumn } from 'drizzle-orm';
+import { AnyColumn } from "drizzle-orm";
 
 const decrement = (column: AnyColumn, value = 1) => {
   return sql`${column} - ${value}`;

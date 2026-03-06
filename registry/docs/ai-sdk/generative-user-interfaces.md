@@ -22,29 +22,29 @@ Let's create a chat interface that handles text-based conversations and incorpor
 Start with a basic chat implementation using the `useChat` hook:
 
 ```tsx filename="app/page.tsx"
-'use client';
+"use client";
 
-import { useChat } from '@ai-sdk/react';
-import { useState } from 'react';
+import { useChat } from "@ai-sdk/react";
+import { useState } from "react";
 
 export default function Page() {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
   const { messages, sendMessage } = useChat();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     sendMessage({ text: input });
-    setInput('');
+    setInput("");
   };
 
   return (
     <div>
-      {messages.map(message => (
+      {messages.map((message) => (
         <div key={message.id}>
-          <div>{message.role === 'user' ? 'User: ' : 'AI: '}</div>
+          <div>{message.role === "user" ? "User: " : "AI: "}</div>
           <div>
             {message.parts.map((part, index) => {
-              if (part.type === 'text') {
+              if (part.type === "text") {
                 return <span key={index}>{part.text}</span>;
               }
               return null;
@@ -56,7 +56,7 @@ export default function Page() {
       <form onSubmit={handleSubmit}>
         <input
           value={input}
-          onChange={e => setInput(e.target.value)}
+          onChange={(e) => setInput(e.target.value)}
           placeholder="Type a message..."
         />
         <button type="submit">Send</button>
@@ -69,7 +69,7 @@ export default function Page() {
 To handle the chat requests and model responses, set up an API route:
 
 ```ts filename="app/api/chat/route.ts"
-import { streamText, convertToModelMessages, UIMessage, stepCountIs } from 'ai';
+import { streamText, convertToModelMessages, UIMessage, stepCountIs } from "ai";
 __PROVIDER_IMPORT__;
 
 export async function POST(request: Request) {
@@ -77,7 +77,7 @@ export async function POST(request: Request) {
 
   const result = streamText({
     model: __MODEL__,
-    system: 'You are a friendly assistant!',
+    system: "You are a friendly assistant!",
     messages: await convertToModelMessages(messages),
     stopWhen: stepCountIs(5),
   });
@@ -95,17 +95,17 @@ Before enhancing your chat interface with dynamic UI elements, you need to creat
 Create a new file called `ai/tools.ts` with the following content:
 
 ```ts filename="ai/tools.ts"
-import { tool as createTool } from 'ai';
-import { z } from 'zod';
+import { tool as createTool } from "ai";
+import { z } from "zod";
 
 export const weatherTool = createTool({
-  description: 'Display the weather for a location',
+  description: "Display the weather for a location",
   inputSchema: z.object({
-    location: z.string().describe('The location to get the weather for'),
+    location: z.string().describe("The location to get the weather for"),
   }),
   execute: async function ({ location }) {
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    return { weather: 'Sunny', temperature: 75, location };
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    return { weather: "Sunny", temperature: 75, location };
   },
 });
 
@@ -121,16 +121,16 @@ In this file, you've created a tool called `weatherTool`. This tool simulates fe
 Update the API route to include the tool you've defined:
 
 ```ts filename="app/api/chat/route.ts" highlight="3,8,14"
-import { streamText, convertToModelMessages, UIMessage, stepCountIs } from 'ai';
+import { streamText, convertToModelMessages, UIMessage, stepCountIs } from "ai";
 __PROVIDER_IMPORT__;
-import { tools } from '@/ai/tools';
+import { tools } from "@/ai/tools";
 
 export async function POST(request: Request) {
   const { messages }: { messages: UIMessage[] } = await request.json();
 
   const result = streamText({
     model: __MODEL__,
-    system: 'You are a friendly assistant!',
+    system: "You are a friendly assistant!",
     messages: await convertToModelMessages(messages),
     stopWhen: stepCountIs(5),
     tools,
@@ -175,44 +175,44 @@ To check if the model has called a tool, you can check the `parts` array of the 
 Update your `page.tsx` file:
 
 ```tsx filename="app/page.tsx" highlight="4,9,14-15,19-46"
-'use client';
+"use client";
 
-import { useChat } from '@ai-sdk/react';
-import { useState } from 'react';
-import { Weather } from '@/components/weather';
+import { useChat } from "@ai-sdk/react";
+import { useState } from "react";
+import { Weather } from "@/components/weather";
 
 export default function Page() {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
   const { messages, sendMessage } = useChat();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     sendMessage({ text: input });
-    setInput('');
+    setInput("");
   };
 
   return (
     <div>
-      {messages.map(message => (
+      {messages.map((message) => (
         <div key={message.id}>
-          <div>{message.role === 'user' ? 'User: ' : 'AI: '}</div>
+          <div>{message.role === "user" ? "User: " : "AI: "}</div>
           <div>
             {message.parts.map((part, index) => {
-              if (part.type === 'text') {
+              if (part.type === "text") {
                 return <span key={index}>{part.text}</span>;
               }
 
-              if (part.type === 'tool-displayWeather') {
+              if (part.type === "tool-displayWeather") {
                 switch (part.state) {
-                  case 'input-available':
+                  case "input-available":
                     return <div key={index}>Loading weather...</div>;
-                  case 'output-available':
+                  case "output-available":
                     return (
                       <div key={index}>
                         <Weather {...part.output} />
                       </div>
                     );
-                  case 'output-error':
+                  case "output-error":
                     return <div key={index}>Error: {part.errorText}</div>;
                   default:
                     return null;
@@ -228,7 +228,7 @@ export default function Page() {
       <form onSubmit={handleSubmit}>
         <input
           value={input}
-          onChange={e => setInput(e.target.value)}
+          onChange={(e) => setInput(e.target.value)}
           placeholder="Type a message..."
         />
         <button type="submit">Send</button>
@@ -258,13 +258,13 @@ To add more tools, simply define them in your `ai/tools.ts` file:
 ```ts
 // Add a new stock tool
 export const stockTool = createTool({
-  description: 'Get price for a stock',
+  description: "Get price for a stock",
   inputSchema: z.object({
-    symbol: z.string().describe('The stock symbol to get the price for'),
+    symbol: z.string().describe("The stock symbol to get the price for"),
   }),
   execute: async function ({ symbol }) {
     // Simulated API call
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    await new Promise((resolve) => setTimeout(resolve, 2000));
     return { symbol, price: 100 };
   },
 });
@@ -298,62 +298,62 @@ export const Stock = ({ price, symbol }: StockProps) => {
 Finally, update your `page.tsx` file to include the new Stock component:
 
 ```tsx
-'use client';
+"use client";
 
-import { useChat } from '@ai-sdk/react';
-import { useState } from 'react';
-import { Weather } from '@/components/weather';
-import { Stock } from '@/components/stock';
+import { useChat } from "@ai-sdk/react";
+import { useState } from "react";
+import { Weather } from "@/components/weather";
+import { Stock } from "@/components/stock";
 
 export default function Page() {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
   const { messages, sendMessage } = useChat();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     sendMessage({ text: input });
-    setInput('');
+    setInput("");
   };
 
   return (
     <div>
-      {messages.map(message => (
+      {messages.map((message) => (
         <div key={message.id}>
           <div>{message.role}</div>
           <div>
             {message.parts.map((part, index) => {
-              if (part.type === 'text') {
+              if (part.type === "text") {
                 return <span key={index}>{part.text}</span>;
               }
 
-              if (part.type === 'tool-displayWeather') {
+              if (part.type === "tool-displayWeather") {
                 switch (part.state) {
-                  case 'input-available':
+                  case "input-available":
                     return <div key={index}>Loading weather...</div>;
-                  case 'output-available':
+                  case "output-available":
                     return (
                       <div key={index}>
                         <Weather {...part.output} />
                       </div>
                     );
-                  case 'output-error':
+                  case "output-error":
                     return <div key={index}>Error: {part.errorText}</div>;
                   default:
                     return null;
                 }
               }
 
-              if (part.type === 'tool-getStockPrice') {
+              if (part.type === "tool-getStockPrice") {
                 switch (part.state) {
-                  case 'input-available':
+                  case "input-available":
                     return <div key={index}>Loading stock price...</div>;
-                  case 'output-available':
+                  case "output-available":
                     return (
                       <div key={index}>
                         <Stock {...part.output} />
                       </div>
                     );
-                  case 'output-error':
+                  case "output-error":
                     return <div key={index}>Error: {part.errorText}</div>;
                   default:
                     return null;
@@ -370,7 +370,7 @@ export default function Page() {
         <input
           type="text"
           value={input}
-          onChange={e => setInput(e.target.value)}
+          onChange={(e) => setInput(e.target.value)}
         />
         <button type="submit">Send</button>
       </form>

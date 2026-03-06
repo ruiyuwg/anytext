@@ -10,7 +10,7 @@ In Next.js, a **page** is a [React Component](https://react.dev/learn/your-first
 
 ```jsx
 export default function About() {
-  return <div>About</div>
+  return <div>About</div>;
 }
 ```
 
@@ -39,8 +39,8 @@ Next.js supports pages with dynamic routes. For example, if you create a file ca
 The React model allows us to deconstruct a [page](/docs/pages/building-your-application/routing/pages-and-layouts) into a series of components. Many of these components are often reused between pages. For example, you might have the same navigation bar and footer on every page.
 
 ```jsx filename="components/layout.js"
-import Navbar from './navbar'
-import Footer from './footer'
+import Navbar from "./navbar";
+import Footer from "./footer";
 
 export default function Layout({ children }) {
   return (
@@ -49,7 +49,7 @@ export default function Layout({ children }) {
       <main>{children}</main>
       <Footer />
     </>
-  )
+  );
 }
 ```
 
@@ -60,20 +60,20 @@ export default function Layout({ children }) {
 If you only have one layout for your entire application, you can create a [Custom App](/docs/pages/building-your-application/routing/custom-app) and wrap your application with the layout. Since the `<Layout />` component is re-used when changing pages, its component state will be preserved (e.g. input values).
 
 ```jsx filename="pages/_app.js"
-import Layout from '../components/layout'
+import Layout from "../components/layout";
 
 export default function MyApp({ Component, pageProps }) {
   return (
     <Layout>
       <Component {...pageProps} />
     </Layout>
-  )
+  );
 }
 ```
 
 ### Per-Page Layouts
 
-If you need multiple layouts, you can add a property `getLayout` to your page, allowing you to return a React component for the layout. This allows you to define the layout on a *per-page basis*. Since we're returning a function, we can have complex nested layouts if desired.
+If you need multiple layouts, you can add a property `getLayout` to your page, allowing you to return a React component for the layout. This allows you to define the layout on a _per-page basis_. Since we're returning a function, we can have complex nested layouts if desired.
 
 ```jsx filename="pages/index.js"
 
@@ -98,13 +98,13 @@ Page.getLayout = function getLayout(page) {
 ```jsx filename="pages/_app.js"
 export default function MyApp({ Component, pageProps }) {
   // Use the layout defined at the page level, if available
-  const getLayout = Component.getLayout ?? ((page) => page)
+  const getLayout = Component.getLayout ?? ((page) => page);
 
-  return getLayout(<Component {...pageProps} />)
+  return getLayout(<Component {...pageProps} />);
 }
 ```
 
-When navigating between pages, we want to *persist* page state (input values, scroll position, etc.) for a Single-Page Application (SPA) experience.
+When navigating between pages, we want to _persist_ page state (input values, scroll position, etc.) for a Single-Page Application (SPA) experience.
 
 This layout pattern enables state persistence because the React component tree is maintained between page transitions. With the component tree, React can understand which elements have changed to preserve state.
 
@@ -115,72 +115,72 @@ This layout pattern enables state persistence because the React component tree i
 When using TypeScript, you must first create a new type for your pages which includes a `getLayout` function. Then, you must create a new type for your `AppProps` which overrides the `Component` property to use the previously created type.
 
 ```tsx filename="pages/index.tsx" switcher
-import type { ReactElement } from 'react'
-import Layout from '../components/layout'
-import NestedLayout from '../components/nested-layout'
-import type { NextPageWithLayout } from './_app'
+import type { ReactElement } from "react";
+import Layout from "../components/layout";
+import NestedLayout from "../components/nested-layout";
+import type { NextPageWithLayout } from "./_app";
 
 const Page: NextPageWithLayout = () => {
-  return <p>hello world</p>
-}
+  return <p>hello world</p>;
+};
 
 Page.getLayout = function getLayout(page: ReactElement) {
   return (
     <Layout>
       <NestedLayout>{page}</NestedLayout>
     </Layout>
-  )
-}
+  );
+};
 
-export default Page
+export default Page;
 ```
 
 ```jsx filename="pages/index.js" switcher
-import Layout from '../components/layout'
-import NestedLayout from '../components/nested-layout'
+import Layout from "../components/layout";
+import NestedLayout from "../components/nested-layout";
 
 const Page = () => {
-  return <p>hello world</p>
-}
+  return <p>hello world</p>;
+};
 
 Page.getLayout = function getLayout(page) {
   return (
     <Layout>
       <NestedLayout>{page}</NestedLayout>
     </Layout>
-  )
-}
+  );
+};
 
-export default Page
+export default Page;
 ```
 
 ```tsx filename="pages/_app.tsx" switcher
-import type { ReactElement, ReactNode } from 'react'
-import type { NextPage } from 'next'
-import type { AppProps } from 'next/app'
+import type { ReactElement, ReactNode } from "react";
+import type { NextPage } from "next";
+import type { AppProps } from "next/app";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
-  getLayout?: (page: ReactElement) => ReactNode
-}
+  getLayout?: (page: ReactElement) => ReactNode;
+};
 
 type AppPropsWithLayout = AppProps & {
-  Component: NextPageWithLayout
-}
+  Component: NextPageWithLayout;
+};
 
 export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   // Use the layout defined at the page level, if available
-  const getLayout = Component.getLayout ?? ((page) => page)
+  const getLayout = Component.getLayout ?? ((page) => page);
 
-  return getLayout(<Component {...pageProps} />)
+  return getLayout(<Component {...pageProps} />);
 }
 ```
 
 ```jsx filename="pages/_app.js" switcher
 export default function MyApp({ Component, pageProps }) {
   // Use the layout defined at the page level, if available
-  const getLayout = Component.getLayout ?? ((page) => page)
+  const getLayout = Component.getLayout ?? ((page) => page);
 
-  return getLayout(<Component {...pageProps} />)
+  return getLayout(<Component {...pageProps} />);
 }
 ```
 
@@ -189,15 +189,15 @@ export default function MyApp({ Component, pageProps }) {
 Inside your layout, you can fetch data on the client-side using `useEffect` or a library like [SWR](https://swr.vercel.app/). Because this file is not a [Page](/docs/pages/building-your-application/routing/pages-and-layouts), you cannot use `getStaticProps` or `getServerSideProps` currently.
 
 ```jsx filename="components/layout.js"
-import useSWR from 'swr'
-import Navbar from './navbar'
-import Footer from './footer'
+import useSWR from "swr";
+import Navbar from "./navbar";
+import Footer from "./footer";
 
 export default function Layout({ children }) {
-  const { data, error } = useSWR('/api/navigation', fetcher)
+  const { data, error } = useSWR("/api/navigation", fetcher);
 
-  if (error) return <div>Failed to load</div>
-  if (!data) return <div>Loading...</div>
+  if (error) return <div>Failed to load</div>;
+  if (!data) return <div>Loading...</div>;
 
   return (
     <>
@@ -205,7 +205,7 @@ export default function Layout({ children }) {
       <main>{children}</main>
       <Footer />
     </>
-  )
+  );
 }
 ```
 

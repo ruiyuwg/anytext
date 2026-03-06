@@ -7,9 +7,9 @@
 ## Example Procedure
 
 ```tsx title='server/routers/_app.ts'
-import { initTRPC } from '@trpc/server';
-import { z } from 'zod';
-import { Context } from './[trpc]';
+import { initTRPC } from "@trpc/server";
+import { z } from "zod";
+import { Context } from "./[trpc]";
 
 export const t = initTRPC.create();
 
@@ -19,7 +19,7 @@ export const appRouter = t.router({
       z.object({
         limit: z.number().min(1).max(100).nullish(),
         cursor: z.number().nullish(), // <-- "cursor" needs to exist, but can be any type
-        direction: z.enum(['forward', 'backward']), // optional, useful for bi-directional query
+        direction: z.enum(["forward", "backward"]), // optional, useful for bi-directional query
       }),
     )
     .query(async (opts) => {
@@ -30,12 +30,12 @@ export const appRouter = t.router({
         take: limit + 1, // get an extra item at the end which we'll use as next cursor
         where: {
           title: {
-            contains: 'Prisma' /* Optional filter */,
+            contains: "Prisma" /* Optional filter */,
           },
         },
         cursor: cursor ? { myCursor: cursor } : undefined,
         orderBy: {
-          myCursor: 'asc',
+          myCursor: "asc",
         },
       });
       let nextCursor: typeof cursor | undefined = undefined;
@@ -55,7 +55,7 @@ export const appRouter = t.router({
 ## Example React Component
 
 ```tsx title='components/MyComponent.tsx'
-import { trpc } from '../utils/trpc';
+import { trpc } from "../utils/trpc";
 
 export function MyComponent() {
   const myQuery = trpc.infinitePosts.useInfiniteQuery(
@@ -78,7 +78,7 @@ export function MyComponent() {
 This helper gets the currently cached data from an existing infinite query
 
 ```tsx title='components/MyComponent.tsx'
-import { trpc } from '../utils/trpc';
+import { trpc } from "../utils/trpc";
 
 export function MyComponent() {
   const utils = trpc.useUtils();
@@ -98,7 +98,7 @@ export function MyComponent() {
 This helper allows you to update a query's cached data
 
 ```tsx title='components/MyComponent.tsx'
-import { trpc } from '../utils/trpc';
+import { trpc } from "../utils/trpc";
 
 export function MyComponent() {
   const utils = trpc.useUtils();
@@ -119,7 +119,7 @@ export function MyComponent() {
           ...data,
           pages: data.pages.map((page) => ({
             ...page,
-            items: page.items.filter((item) => item.status === 'published'),
+            items: page.items.filter((item) => item.status === "published"),
           })),
         };
       });
@@ -141,8 +141,8 @@ Works like react-query's mutations - [see their docs](https://tanstack.com/query
 Backend code
 
 ```tsx title='server/routers/_app.ts'
-import { initTRPC } from '@trpc/server';
-import { z } from 'zod';
+import { initTRPC } from "@trpc/server";
+import { z } from "zod";
 
 export const t = initTRPC.create();
 
@@ -161,7 +161,7 @@ export const appRouter = t.router({
       return {
         user: {
           name: opts.input.name,
-          role: 'ADMIN',
+          role: "ADMIN",
         },
       };
     }),
@@ -169,13 +169,13 @@ export const appRouter = t.router({
 ```
 
 ```tsx
-import { trpc } from '../utils/trpc';
+import { trpc } from "../utils/trpc";
 
 export function MyComponent() {
   const mutation = trpc.login.useMutation();
 
   const handleLogin = () => {
-    const name = 'John Doe';
+    const name = "John Doe";
 
     mutation.mutate({ name });
   };

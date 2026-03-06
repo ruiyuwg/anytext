@@ -15,21 +15,21 @@ Forms enable you to create and update data in web applications. Next.js provides
 If you would like to redirect the user to a different route after a mutation, you can [`redirect`](/docs/pages/building-your-application/routing/api-routes#response-helpers) to any absolute or relative URL:
 
 ```ts filename="pages/api/submit.ts" switcher
-import type { NextApiRequest, NextApiResponse } from 'next'
+import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
-  const id = await addPost()
-  res.redirect(307, `/post/${id}`)
+  const id = await addPost();
+  res.redirect(307, `/post/${id}`);
 }
 ```
 
 ```js filename="pages/api/submit.js" switcher
 export default async function handler(req, res) {
-  const id = await addPost()
-  res.redirect(307, `/post/${id}`)
+  const id = await addPost();
+  res.redirect(307, `/post/${id}`);
 }
 ```
 
@@ -38,21 +38,21 @@ export default async function handler(req, res) {
 You can set cookies inside an API Route using the `setHeader` method on the response:
 
 ```ts filename="pages/api/cookie.ts" switcher
-import type { NextApiRequest, NextApiResponse } from 'next'
+import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
-  res.setHeader('Set-Cookie', 'username=lee; Path=/; HttpOnly')
-  res.status(200).send('Cookie has been set.')
+  res.setHeader("Set-Cookie", "username=lee; Path=/; HttpOnly");
+  res.status(200).send("Cookie has been set.");
 }
 ```
 
 ```js filename="pages/api/cookie.js" switcher
 export default async function handler(req, res) {
-  res.setHeader('Set-Cookie', 'username=lee; Path=/; HttpOnly')
-  res.status(200).send('Cookie has been set.')
+  res.setHeader("Set-Cookie", "username=lee; Path=/; HttpOnly");
+  res.status(200).send("Cookie has been set.");
 }
 ```
 
@@ -61,20 +61,20 @@ export default async function handler(req, res) {
 You can read cookies inside an API Route using the [`cookies`](/docs/pages/building-your-application/routing/api-routes#request-helpers) request helper:
 
 ```ts filename="pages/api/cookie.ts" switcher
-import type { NextApiRequest, NextApiResponse } from 'next'
+import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
-  const auth = req.cookies.authorization
+  const auth = req.cookies.authorization;
   // ...
 }
 ```
 
 ```js filename="pages/api/cookie.js" switcher
 export default async function handler(req, res) {
-  const auth = req.cookies.authorization
+  const auth = req.cookies.authorization;
   // ...
 }
 ```
@@ -84,21 +84,21 @@ export default async function handler(req, res) {
 You can delete cookies inside an API Route using the `setHeader` method on the response:
 
 ```ts filename="pages/api/cookie.ts" switcher
-import type { NextApiRequest, NextApiResponse } from 'next'
+import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
-  res.setHeader('Set-Cookie', 'username=; Path=/; HttpOnly; Max-Age=0')
-  res.status(200).send('Cookie has been deleted.')
+  res.setHeader("Set-Cookie", "username=; Path=/; HttpOnly; Max-Age=0");
+  res.status(200).send("Cookie has been deleted.");
 }
 ```
 
 ```js filename="pages/api/cookie.js" switcher
 export default async function handler(req, res) {
-  res.setHeader('Set-Cookie', 'username=; Path=/; HttpOnly; Max-Age=0')
-  res.status(200).send('Cookie has been deleted.')
+  res.setHeader("Set-Cookie", "username=; Path=/; HttpOnly; Max-Age=0");
+  res.status(200).send("Cookie has been deleted.");
 }
 ```
 

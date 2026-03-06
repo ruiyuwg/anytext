@@ -5,18 +5,18 @@
 Basic usage:
 
 ```tsx filename="app/page.tsx" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Page() {
-  return <Link href="/dashboard">Dashboard</Link>
+  return <Link href="/dashboard">Dashboard</Link>;
 }
 ```
 
 ```jsx filename="app/page.js" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Page() {
-  return <Link href="/dashboard">Dashboard</Link>
+  return <Link href="/dashboard">Dashboard</Link>;
 }
 ```
 
@@ -39,38 +39,38 @@ The following props can be passed to the `<Link>` component:
 The path or URL to navigate to.
 
 ```tsx filename="app/page.tsx" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 // Navigate to /about?name=test
 export default function Page() {
   return (
     <Link
       href={{
-        pathname: '/about',
-        query: { name: 'test' },
+        pathname: "/about",
+        query: { name: "test" },
       }}
     >
       About
     </Link>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/page.js" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 // Navigate to /about?name=test
 export default function Page() {
   return (
     <Link
       href={{
-        pathname: '/about',
-        query: { name: 'test' },
+        pathname: "/about",
+        query: { name: "test" },
       }}
     >
       About
     </Link>
-  )
+  );
 }
 ```
 
@@ -79,26 +79,26 @@ export default function Page() {
 **Defaults to `false`.** When `true`, `next/link` will replace the current history state instead of adding a new URL into the [browser's history](https://developer.mozilla.org/docs/Web/API/History_API) stack.
 
 ```tsx filename="app/page.tsx" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Page() {
   return (
     <Link href="/dashboard" replace>
       Dashboard
     </Link>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/page.js" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Page() {
   return (
     <Link href="/dashboard" replace>
       Dashboard
     </Link>
-  )
+  );
 }
 ```
 
@@ -111,26 +111,26 @@ When `scroll = {false}`, Next.js will not attempt to scroll to the first Page el
 > **Good to know**: Next.js checks if `scroll: false` before managing scroll behavior. If scrolling is enabled, it identifies the relevant DOM node for navigation and inspects each top-level element. All non-scrollable elements and those without rendered HTML are bypassed, this includes sticky or fixed positioned elements, and non-visible elements such as those calculated with `getBoundingClientRect`. Next.js then continues through siblings until it identifies a scrollable element that is visible in the viewport.
 
 ```tsx filename="app/page.tsx" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Page() {
   return (
     <Link href="/dashboard" scroll={false}>
       Dashboard
     </Link>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/page.js" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Page() {
   return (
     <Link href="/dashboard" scroll={false}>
       Dashboard
     </Link>
-  )
+  );
 }
 ```
 
@@ -145,26 +145,26 @@ The following values can be passed to the `prefetch` prop:
 - `false`: Prefetching will never happen both on entering the viewport and on hover.
 
 ```tsx filename="app/page.tsx" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Page() {
   return (
     <Link href="/dashboard" prefetch={false}>
       Dashboard
     </Link>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/page.js" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Page() {
   return (
     <Link href="/dashboard" prefetch={false}>
       Dashboard
     </Link>
-  )
+  );
 }
 ```
 
@@ -173,7 +173,7 @@ export default function Page() {
 An event handler called during client-side navigation. The handler receives an event object that includes a `preventDefault()` method, allowing you to cancel the navigation if needed.
 
 ```tsx filename="app/page.tsx" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Page() {
   return (
@@ -181,7 +181,7 @@ export default function Page() {
       href="/dashboard"
       onNavigate={(e) => {
         // Only executes during SPA navigation
-        console.log('Navigating...')
+        console.log("Navigating...");
 
         // Optionally prevent navigation
         // e.preventDefault()
@@ -189,12 +189,12 @@ export default function Page() {
     >
       Dashboard
     </Link>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/page.js" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Page() {
   return (
@@ -202,7 +202,7 @@ export default function Page() {
       href="/dashboard"
       onNavigate={(e) => {
         // Only executes during SPA navigation
-        console.log('Navigating...')
+        console.log("Navigating...");
 
         // Optionally prevent navigation
         // e.preventDefault()
@@ -210,7 +210,7 @@ export default function Page() {
     >
       Dashboard
     </Link>
-  )
+  );
 }
 ```
 
@@ -229,12 +229,12 @@ The following examples demonstrate how to use the `<Link>` component in differen
 When linking to [dynamic segments](/docs/app/api-reference/file-conventions/dynamic-routes), you can use [template literals and interpolation](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Template_literals) to generate a list of links. For example, to generate a list of blog posts:
 
 ```tsx filename="app/blog/post-list.tsx" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 interface Post {
-  id: number
-  title: string
-  slug: string
+  id: number;
+  title: string;
+  slug: string;
 }
 
 export default function PostList({ posts }: { posts: Post[] }) {
@@ -246,12 +246,12 @@ export default function PostList({ posts }: { posts: Post[] }) {
         </li>
       ))}
     </ul>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/blog/post-list.js" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function PostList({ posts }) {
   return (
@@ -262,7 +262,7 @@ export default function PostList({ posts }) {
         </li>
       ))}
     </ul>
-  )
+  );
 }
 ```
 
@@ -271,54 +271,54 @@ export default function PostList({ posts }) {
 You can use [`usePathname()`](/docs/app/api-reference/functions/use-pathname) to determine if a link is active. For example, to add a class to the active link, you can check if the current `pathname` matches the `href` of the link:
 
 ```tsx filename="app/ui/nav-links.tsx" switcher
-'use client'
+"use client";
 
-import { usePathname } from 'next/navigation'
-import Link from 'next/link'
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 export function Links() {
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   return (
     <nav>
-      <Link className={`link ${pathname === '/' ? 'active' : ''}`} href="/">
+      <Link className={`link ${pathname === "/" ? "active" : ""}`} href="/">
         Home
       </Link>
 
       <Link
-        className={`link ${pathname === '/about' ? 'active' : ''}`}
+        className={`link ${pathname === "/about" ? "active" : ""}`}
         href="/about"
       >
         About
       </Link>
     </nav>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/ui/nav-links.js" switcher
-'use client'
+"use client";
 
-import { usePathname } from 'next/navigation'
-import Link from 'next/link'
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 export function Links() {
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   return (
     <nav>
-      <Link className={`link ${pathname === '/' ? 'active' : ''}`} href="/">
+      <Link className={`link ${pathname === "/" ? "active" : ""}`} href="/">
         Home
       </Link>
 
       <Link
-        className={`link ${pathname === '/about' ? 'active' : ''}`}
+        className={`link ${pathname === "/about" ? "active" : ""}`}
         href="/about"
       >
         About
       </Link>
     </nav>
-  )
+  );
 }
 ```
 
@@ -342,26 +342,26 @@ If you'd like to scroll to a specific `id` on navigation, you can append your UR
 The default behavior of the `Link` component is to `push` a new URL into the `history` stack. You can use the `replace` prop to prevent adding a new entry, as in the following example:
 
 ```tsx filename="app/page.js" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Page() {
   return (
     <Link href="/about" replace>
       About us
     </Link>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/page.js" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Page() {
   return (
     <Link href="/about" replace>
       About us
     </Link>
-  )
+  );
 }
 ```
 
@@ -372,26 +372,26 @@ The default scrolling behavior of `<Link>` in Next.js **is to maintain scroll po
 However, if the Page is not visible in the viewport, Next.js will scroll to the top of the first Page element. If you'd like to disable this behavior, you can pass `scroll={false}` to the `<Link>` component, or `scroll: false` to `router.push()` or `router.replace()`.
 
 ```jsx filename="app/page.js" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Page() {
   return (
     <Link href="/#hashid" scroll={false}>
       Disables scrolling to the top
     </Link>
-  )
+  );
 }
 ```
 
 ```tsx filename="app/page.tsx" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Page() {
   return (
     <Link href="/#hashid" scroll={false}>
       Disables scrolling to the top
     </Link>
-  )
+  );
 }
 ```
 
@@ -399,11 +399,11 @@ Using `router.push()` or `router.replace()`:
 
 ```jsx
 // useRouter
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
 
-const router = useRouter()
+const router = useRouter();
 
-router.push('/dashboard', { scroll: false })
+router.push("/dashboard", { scroll: false });
 ```
 
 ### Scroll offset with sticky headers
@@ -411,12 +411,12 @@ router.push('/dashboard', { scroll: false })
 Because Next.js skips sticky and fixed positioned elements when finding the scroll target, content may end up behind a sticky header after navigation. For example, if your layout has a sticky header:
 
 ```tsx filename="app/layout.tsx" switcher
-import './globals.css'
+import "./globals.css";
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
@@ -427,12 +427,12 @@ export default function RootLayout({
         {children}
       </body>
     </html>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/layout.js" switcher
-import './globals.css'
+import "./globals.css";
 
 export default function RootLayout({ children }) {
   return (
@@ -444,7 +444,7 @@ export default function RootLayout({ children }) {
         {children}
       </body>
     </html>
-  )
+  );
 }
 ```
 
@@ -465,30 +465,30 @@ It's common to use [Proxy](/docs/app/api-reference/file-conventions/proxy) for a
 For example, if you want to serve a `/dashboard` route that has authenticated and visitor views, you can add the following in your Proxy to redirect the user to the correct page:
 
 ```ts filename="proxy.ts" switcher
-import { NextResponse } from 'next/server'
+import { NextResponse } from "next/server";
 
 export function proxy(request: Request) {
-  const nextUrl = request.nextUrl
-  if (nextUrl.pathname === '/dashboard') {
+  const nextUrl = request.nextUrl;
+  if (nextUrl.pathname === "/dashboard") {
     if (request.cookies.authToken) {
-      return NextResponse.rewrite(new URL('/auth/dashboard', request.url))
+      return NextResponse.rewrite(new URL("/auth/dashboard", request.url));
     } else {
-      return NextResponse.rewrite(new URL('/public/dashboard', request.url))
+      return NextResponse.rewrite(new URL("/public/dashboard", request.url));
     }
   }
 }
 ```
 
 ```js filename="proxy.js" switcher
-import { NextResponse } from 'next/server'
+import { NextResponse } from "next/server";
 
 export function proxy(request) {
-  const nextUrl = request.nextUrl
-  if (nextUrl.pathname === '/dashboard') {
+  const nextUrl = request.nextUrl;
+  if (nextUrl.pathname === "/dashboard") {
     if (request.cookies.authToken) {
-      return NextResponse.rewrite(new URL('/auth/dashboard', request.url))
+      return NextResponse.rewrite(new URL("/auth/dashboard", request.url));
     } else {
-      return NextResponse.rewrite(new URL('/public/dashboard', request.url))
+      return NextResponse.rewrite(new URL("/public/dashboard", request.url));
     }
   }
 }
@@ -497,36 +497,36 @@ export function proxy(request) {
 In this case, you would want to use the following code in your `<Link />` component:
 
 ```tsx filename="app/page.tsx" switcher
-'use client'
+"use client";
 
-import Link from 'next/link'
-import useIsAuthed from './hooks/useIsAuthed' // Your auth hook
+import Link from "next/link";
+import useIsAuthed from "./hooks/useIsAuthed"; // Your auth hook
 
 export default function Page() {
-  const isAuthed = useIsAuthed()
-  const path = isAuthed ? '/auth/dashboard' : '/public/dashboard'
+  const isAuthed = useIsAuthed();
+  const path = isAuthed ? "/auth/dashboard" : "/public/dashboard";
   return (
     <Link as="/dashboard" href={path}>
       Dashboard
     </Link>
-  )
+  );
 }
 ```
 
 ```js filename="app/page.js" switcher
-'use client'
+"use client";
 
-import Link from 'next/link'
-import useIsAuthed from './hooks/useIsAuthed' // Your auth hook
+import Link from "next/link";
+import useIsAuthed from "./hooks/useIsAuthed"; // Your auth hook
 
 export default function Page() {
-  const isAuthed = useIsAuthed()
-  const path = isAuthed ? '/auth/dashboard' : '/public/dashboard'
+  const isAuthed = useIsAuthed();
+  const path = isAuthed ? "/auth/dashboard" : "/public/dashboard";
   return (
     <Link as="/dashboard" href={path}>
       Dashboard
     </Link>
-  )
+  );
 }
 ```
 
@@ -535,179 +535,179 @@ export default function Page() {
 You can use the `onNavigate` prop to block navigation when certain conditions are met, such as when a form has unsaved changes. When you need to block navigation across multiple components in your app (like preventing navigation from any link while a form is being edited), React Context provides a clean way to share this blocking state. First, create a context to track the navigation blocking state:
 
 ```tsx filename="app/contexts/navigation-blocker.tsx" switcher
-'use client'
+"use client";
 
-import { createContext, useState, useContext } from 'react'
+import { createContext, useState, useContext } from "react";
 
 interface NavigationBlockerContextType {
-  isBlocked: boolean
-  setIsBlocked: (isBlocked: boolean) => void
+  isBlocked: boolean;
+  setIsBlocked: (isBlocked: boolean) => void;
 }
 
 export const NavigationBlockerContext =
   createContext<NavigationBlockerContextType>({
     isBlocked: false,
     setIsBlocked: () => {},
-  })
+  });
 
 export function NavigationBlockerProvider({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
-  const [isBlocked, setIsBlocked] = useState(false)
+  const [isBlocked, setIsBlocked] = useState(false);
 
   return (
     <NavigationBlockerContext.Provider value={{ isBlocked, setIsBlocked }}>
       {children}
     </NavigationBlockerContext.Provider>
-  )
+  );
 }
 
 export function useNavigationBlocker() {
-  return useContext(NavigationBlockerContext)
+  return useContext(NavigationBlockerContext);
 }
 ```
 
 ```jsx filename="app/contexts/navigation-blocker.js" switcher
-'use client'
+"use client";
 
-import { createContext, useState, useContext } from 'react'
+import { createContext, useState, useContext } from "react";
 
 export const NavigationBlockerContext = createContext({
   isBlocked: false,
   setIsBlocked: () => {},
-})
+});
 
 export function NavigationBlockerProvider({ children }) {
-  const [isBlocked, setIsBlocked] = useState(false)
+  const [isBlocked, setIsBlocked] = useState(false);
 
   return (
     <NavigationBlockerContext.Provider value={{ isBlocked, setIsBlocked }}>
       {children}
     </NavigationBlockerContext.Provider>
-  )
+  );
 }
 
 export function useNavigationBlocker() {
-  return useContext(NavigationBlockerContext)
+  return useContext(NavigationBlockerContext);
 }
 ```
 
 Create a form component that uses the context:
 
 ```tsx filename="app/components/form.tsx" switcher
-'use client'
+"use client";
 
-import { useNavigationBlocker } from '../contexts/navigation-blocker'
+import { useNavigationBlocker } from "../contexts/navigation-blocker";
 
 export default function Form() {
-  const { setIsBlocked } = useNavigationBlocker()
+  const { setIsBlocked } = useNavigationBlocker();
 
   return (
     <form
       onSubmit={(e) => {
-        e.preventDefault()
-        setIsBlocked(false)
+        e.preventDefault();
+        setIsBlocked(false);
       }}
       onChange={() => setIsBlocked(true)}
     >
       <input type="text" name="name" />
       <button type="submit">Save</button>
     </form>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/components/form.js" switcher
-'use client'
+"use client";
 
-import { useNavigationBlocker } from '../contexts/navigation-blocker'
+import { useNavigationBlocker } from "../contexts/navigation-blocker";
 
 export default function Form() {
-  const { setIsBlocked } = useNavigationBlocker()
+  const { setIsBlocked } = useNavigationBlocker();
 
   return (
     <form
       onSubmit={(e) => {
-        e.preventDefault()
-        setIsBlocked(false)
+        e.preventDefault();
+        setIsBlocked(false);
       }}
       onChange={() => setIsBlocked(true)}
     >
       <input type="text" name="name" />
       <button type="submit">Save</button>
     </form>
-  )
+  );
 }
 ```
 
 Create a custom Link component that blocks navigation:
 
 ```tsx filename="app/components/custom-link.tsx" switcher
-'use client'
+"use client";
 
-import Link from 'next/link'
-import { useNavigationBlocker } from '../contexts/navigation-blocker'
+import Link from "next/link";
+import { useNavigationBlocker } from "../contexts/navigation-blocker";
 
 interface CustomLinkProps extends React.ComponentProps<typeof Link> {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 export function CustomLink({ children, ...props }: CustomLinkProps) {
-  const { isBlocked } = useNavigationBlocker()
+  const { isBlocked } = useNavigationBlocker();
 
   return (
     <Link
       onNavigate={(e) => {
         if (
           isBlocked &&
-          !window.confirm('You have unsaved changes. Leave anyway?')
+          !window.confirm("You have unsaved changes. Leave anyway?")
         ) {
-          e.preventDefault()
+          e.preventDefault();
         }
       }}
       {...props}
     >
       {children}
     </Link>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/components/custom-link.js" switcher
-'use client'
+"use client";
 
-import Link from 'next/link'
-import { useNavigationBlocker } from '../contexts/navigation-blocker'
+import Link from "next/link";
+import { useNavigationBlocker } from "../contexts/navigation-blocker";
 
 export function CustomLink({ children, ...props }) {
-  const { isBlocked } = useNavigationBlocker()
+  const { isBlocked } = useNavigationBlocker();
 
   return (
     <Link
       onNavigate={(e) => {
         if (
           isBlocked &&
-          !window.confirm('You have unsaved changes. Leave anyway?')
+          !window.confirm("You have unsaved changes. Leave anyway?")
         ) {
-          e.preventDefault()
+          e.preventDefault();
         }
       }}
       {...props}
     >
       {children}
     </Link>
-  )
+  );
 }
 ```
 
 Create a navigation component:
 
 ```tsx filename="app/components/nav.tsx" switcher
-'use client'
+"use client";
 
-import { CustomLink as Link } from './custom-link'
+import { CustomLink as Link } from "./custom-link";
 
 export default function Nav() {
   return (
@@ -715,14 +715,14 @@ export default function Nav() {
       <Link href="/">Home</Link>
       <Link href="/about">About</Link>
     </nav>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/components/nav.js" switcher
-'use client'
+"use client";
 
-import { CustomLink as Link } from './custom-link'
+import { CustomLink as Link } from "./custom-link";
 
 export default function Nav() {
   return (
@@ -730,19 +730,19 @@ export default function Nav() {
       <Link href="/">Home</Link>
       <Link href="/about">About</Link>
     </nav>
-  )
+  );
 }
 ```
 
 Finally, wrap your app with the `NavigationBlockerProvider` in the root layout and use the components in your page:
 
 ```tsx filename="app/layout.tsx" switcher
-import { NavigationBlockerProvider } from './contexts/navigation-blocker'
+import { NavigationBlockerProvider } from "./contexts/navigation-blocker";
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
@@ -750,12 +750,12 @@ export default function RootLayout({
         <NavigationBlockerProvider>{children}</NavigationBlockerProvider>
       </body>
     </html>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/layout.js" switcher
-import { NavigationBlockerProvider } from './contexts/navigation-blocker'
+import { NavigationBlockerProvider } from "./contexts/navigation-blocker";
 
 export default function RootLayout({ children }) {
   return (
@@ -764,15 +764,15 @@ export default function RootLayout({ children }) {
         <NavigationBlockerProvider>{children}</NavigationBlockerProvider>
       </body>
     </html>
-  )
+  );
 }
 ```
 
 Then, use the `Nav` and `Form` components in your page:
 
 ```tsx filename="app/page.tsx" switcher
-import Nav from './components/nav'
-import Form from './components/form'
+import Nav from "./components/nav";
+import Form from "./components/form";
 
 export default function Page() {
   return (
@@ -783,13 +783,13 @@ export default function Page() {
         <Form />
       </main>
     </div>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/page.js" switcher
-import Nav from './components/nav'
-import Form from './components/form'
+import Nav from "./components/nav";
+import Form from "./components/form";
 
 export default function Page() {
   return (
@@ -800,7 +800,7 @@ export default function Page() {
         <Form />
       </main>
     </div>
-  )
+  );
 }
 ```
 

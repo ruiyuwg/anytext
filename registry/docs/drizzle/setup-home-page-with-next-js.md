@@ -88,7 +88,7 @@ const Todo: FC = ({
 
   // Rendering the Todo component
   return (
-    
+
       {/* Checkbox for marking the todo as done */}
       <input
         type="checkbox"
@@ -107,21 +107,21 @@ const Todo: FC = ({
         } outline-none read-only:border-transparent focus:border border-gray-200 rounded px-2 py-1 w-full`}
       />
       {/* Action buttons for editing, saving, canceling, and deleting */}
-      
+
         {editing ? (
           <button
             onClick={handleSave}
             className="bg-green-600 text-green-50 rounded px-2 w-14 py-1"
           >
             Save
-          
+
         ) : (
           <button
             onClick={handleEdit}
             className="bg-blue-400 text-blue-50 rounded w-14 px-2 py-1"
           >
             Edit
-          
+
         )}
         {editing ? (
           <button
@@ -129,17 +129,17 @@ const Todo: FC = ({
             className="bg-red-400 w-16 text-red-50 rounded px-2 py-1"
           >
             Close
-          
+
         ) : (
           <button
             onClick={handleDelete}
             className="bg-red-400 w-16 text-red-50 rounded px-2 py-1"
           >
             Delete
-          
+
         )}
-      
-    
+
+
   );
 };
 
@@ -171,7 +171,7 @@ const AddTodo: FC = ({ createTodo }) => {
 
   // Rendering the AddTodo component
   return (
-    
+
       {/* Input field for entering new todo text */}
       <input
         type="text"
@@ -185,8 +185,8 @@ const AddTodo: FC = ({ createTodo }) => {
         onClick={handleAdd}
       >
         Add
-      
-    
+
+
   );
 };
 
@@ -244,9 +244,9 @@ const Todos: FC = ({ todos }) => {
 
   // Rendering the Todo List component
   return (
-    
+
       To-do app
-      
+
         {/* Mapping through todoItems and rendering Todo component for each */}
         {todoItems.map((todo) => (
           <Todo
@@ -257,10 +257,10 @@ const Todos: FC = ({ todos }) => {
             deleteTodoItem={deleteTodoItem}
           />
         ))}
-      
+
       {/* Adding Todo component for creating new todos */}
-      
-    
+
+
   );
 };
 
@@ -281,7 +281,7 @@ import Todos from "@/components/todos";
 
 export default async function Home() {
   const data = await getData();
-  return ;
+  return;
 }
 ```
 
@@ -292,7 +292,7 @@ export default async function Home() {
 This guide uses the following file structure:
 
 ```text
-📦 
+📦
  ├ 📂 migrations
  │  ├ 📂 meta
  │  └ 📜 0000_heavy_doctor_doom.sql

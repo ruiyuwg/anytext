@@ -33,7 +33,7 @@ const db = drizzle({ relations });
 
 const result = await db.query.users.findMany({
 	with: {
-		posts: true			
+		posts: true
 	},
 });
 ```
@@ -111,7 +111,7 @@ import { type AnyPgColumn, boolean, integer, pgTable, primaryKey, text, timestam
 export const users = pgTable('users', {
 id: integer().primaryKey(),
 name: text().notNull(),
-invitedBy: integer('invited\_by').references((): AnyPgColumn => users.id),
+invitedBy: integer('invited_by').references((): AnyPgColumn => users.id),
 });
 
 export const groups = pgTable('groups', {
@@ -120,10 +120,10 @@ name: text().notNull(),
 description: text(),
 });
 
-export const usersToGroups = pgTable('users\_to\_groups', {
+export const usersToGroups = pgTable('users_to_groups', {
 id: integer().primaryKey(),
-userId: integer('user\_id').notNull().references(() => users.id),
-groupId: integer('group\_id').notNull().references(() => groups.id),
+userId: integer('user_id').notNull().references(() => users.id),
+groupId: integer('group_id').notNull().references(() => groups.id),
 }, (t) => \[
 primaryKey(t.userId, t.groupId)
 ]);
@@ -131,23 +131,23 @@ primaryKey(t.userId, t.groupId)
 export const posts = pgTable('posts', {
 id: integer().primaryKey(),
 content: text().notNull(),
-authorId: integer('author\_id').references(() => users.id),
-createdAt: timestamp('created\_at', { withTimezone: true }).notNull().defaultNow(),
+authorId: integer('author_id').references(() => users.id),
+createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
 });
 
 export const comments = pgTable('comments', {
 id: integer().primaryKey(),
 content: text().notNull(),
 creator: integer().references(() => users.id),
-postId: integer('post\_id').references(() => posts.id),
-createdAt: timestamp('created\_at', { withTimezone: true }).notNull().defaultNow(),
+postId: integer('post_id').references(() => posts.id),
+createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
 });
 
-export const commentLikes = pgTable('comment\_likes', {
+export const commentLikes = pgTable('comment_likes', {
 id: integer().primaryKey(),
 creator: integer().references(() => users.id),
-commentId: integer('comment\_id').references(() => comments.id),
-createdAt: timestamp('created\_at', { withTimezone: true }).notNull().defaultNow(),
+commentId: integer('comment_id').references(() => comments.id),
+createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
 });
 
 ````
@@ -251,9 +251,9 @@ const result: {
 
 ```typescript copy
 const posts = await db.query.posts.findMany({
-	with: {
-		comments: true,
-	},
+  with: {
+    comments: true,
+  },
 });
 ```
 
@@ -261,9 +261,9 @@ const posts = await db.query.posts.findMany({
 
 ```typescript copy
 const post = await db.query.posts.findFirst({
-	with: {
-		comments: true,
-	},
+  with: {
+    comments: true,
+  },
 });
 ```
 
@@ -274,13 +274,13 @@ For any nested `with` queries Drizzle will infer types using [Core Type API](/do
 
 ```typescript copy
 const users = await db.query.users.findMany({
-	with: {
-		posts: {
-			with: {
-				comments: true,
-			},
-		},
-	},
+  with: {
+    posts: {
+      with: {
+        comments: true,
+      },
+    },
+  },
 });
 ```
 
@@ -297,13 +297,13 @@ Keep in mind that **a single SQL statement is outputted by Drizzle.** </Callout>
 
 ```typescript copy
 const posts = await db.query.posts.findMany({
-	columns: {
-		id: true,
-		content: true,
-	},
-	with: {
-		comments: true,
-	}
+  columns: {
+    id: true,
+    content: true,
+  },
+  with: {
+    comments: true,
+  },
 });
 ```
 
@@ -311,9 +311,9 @@ const posts = await db.query.posts.findMany({
 
 ```typescript copy
 const posts = await db.query.posts.findMany({
-	columns: {
-		content: false,
-	},
+  columns: {
+    content: false,
+  },
 });
 ```
 
@@ -371,17 +371,17 @@ Just like with **[`partial select`](#partial-select)**, you can include or exclu
 
 ```typescript copy
 const posts = await db.query.posts.findMany({
-	columns: {
-		id: true,
-		content: true,
-	},
-	with: {
-		comments: {
-			columns: {
-				authorId: false
-			}
-		}
-	}
+  columns: {
+    id: true,
+    content: true,
+  },
+  with: {
+    comments: {
+      columns: {
+        authorId: false,
+      },
+    },
+  },
 });
 ```
 
@@ -473,7 +473,7 @@ const response = db.query.users.findMany({
 
 ```sql {3}
 select "users"."id" as "id", "users"."name" as "name"
-from "users" 
+from "users"
 where ("users"."age" = 15)
 ```
 
@@ -549,12 +549,12 @@ id: integer("id").primaryKey(),
 name: text("name"),
 email: text("email").notNull(),
 age: integer("age"),
-createdAt: timestamp("created\_at").defaultNow(),
-lastLogin: timestamp("last\_login"),
-subscriptionEnd: timestamp("subscription\_end"),
-lastActivity: timestamp("last\_activity"),
-preferences: jsonb("preferences"),      // JSON column for user settings/preferences
-interests: text("interests").array(),     // Array column for user interests
+createdAt: timestamp("created_at").defaultNow(),
+lastLogin: timestamp("last_login"),
+subscriptionEnd: timestamp("subscription_end"),
+lastActivity: timestamp("last_activity"),
+preferences: jsonb("preferences"), // JSON column for user settings/preferences
+interests: text("interests").array(), // Array column for user interests
 });
 
 ````
@@ -581,14 +581,14 @@ const response = db.query.users.findMany({
 ````
 
 ```sql
-select "d0"."id" as "id", "d0"."name" as "name", 
-"d0"."email" as "email", "d0"."age" as "age", 
-"d0"."created_at" as "createdAt", "d0"."last_login" as "lastLogin", 
-"d0"."subscription_end" as "subscriptionEnd", "d0"."last_activity" as "lastActivity", 
-"d0"."preferences" as "preferences", "d0"."interests" as "interests" 
-from "users" as "d0" 
-where ((LOWER("d0"."name") LIKE 'john%' or "d0"."name" ilike 'jane%') 
-and ("d0"."preferences"->>'theme' = 'dark' or "d0"."preferences"->>'theme' IS NULL) 
+select "d0"."id" as "id", "d0"."name" as "name",
+"d0"."email" as "email", "d0"."age" as "age",
+"d0"."created_at" as "createdAt", "d0"."last_login" as "lastLogin",
+"d0"."subscription_end" as "subscriptionEnd", "d0"."last_activity" as "lastActivity",
+"d0"."preferences" as "preferences", "d0"."interests" as "interests"
+from "users" as "d0"
+where ((LOWER("d0"."name") LIKE 'john%' or "d0"."name" ilike 'jane%')
+and ("d0"."preferences"->>'theme' = 'dark' or "d0"."preferences"->>'theme' IS NULL)
 and "d0"."age" BETWEEN 25 AND 35)
 ```
 
@@ -605,13 +605,13 @@ With Drizzle Relations, you can filter not only by the table you're querying but
 const usersWithPosts = await db.query.usersTable.findMany({
   where: {
     id: {
-      gt: 10
+      gt: 10,
     },
     posts: {
       content: {
-        like: 'M%'
-      }
-    }
+        like: "M%",
+      },
+    },
   },
 });
 ```
@@ -637,7 +637,7 @@ Drizzle ORM provides `limit` & `offset` API for queries and for the nested entit
 
 ```typescript copy
 await db.query.posts.findMany({
-	limit: 5,
+  limit: 5,
 });
 ```
 
@@ -645,11 +645,11 @@ await db.query.posts.findMany({
 
 ```typescript copy
 await db.query.posts.findMany({
-	with: {
-		comments: {
-			limit: 3,
-		},
-	},
+  with: {
+    comments: {
+      limit: 3,
+    },
+  },
 });
 ```
 
@@ -673,9 +673,9 @@ Find posts with comments from the 5th to the 10th post:
 
 ```typescript copy
 await db.query.posts.findMany({
-	with: {
-		comments: true,
-	},
+  with: {
+    comments: true,
+  },
   limit: 5,
   offset: 5,
 });
@@ -705,14 +705,14 @@ await db.query.posts.findMany({
 **Order by `asc` + `desc`:**
 
 ```typescript copy
-  await db.query.posts.findMany({
-    orderBy: { id: "asc" },
-    with: {
-      comments: {
-        orderBy: { id: "desc" },
-      },
+await db.query.posts.findMany({
+  orderBy: { id: "asc" },
+  with: {
+    comments: {
+      orderBy: { id: "desc" },
     },
-  });
+  },
+});
 ```
 
 You can also use custom `sql` in order by statement:
@@ -820,19 +820,19 @@ const res = await db.query.posts.findMany({
 ```ts
 // result type
 const res: {
-	id: number;
-	createdAt: Date;
-	content: string;
-	authorId: number | null;
-	contentLength: number;
-	comments: {
-			id: number;
-			createdAt: Date;
-			content: string;
-			creator: number | null;
-			postId: number | null;
-			commentSize: number;
-	}[];
+  id: number;
+  createdAt: Date;
+  content: string;
+  authorId: number | null;
+  contentLength: number;
+  comments: {
+    id: number;
+    createdAt: Date;
+    content: string;
+    creator: number | null;
+    postId: number | null;
+    commentSize: number;
+  }[];
 };
 ```
 
@@ -845,25 +845,25 @@ You can also use subqueries within Relational Queries to leverage the power of c
 **Get users with posts and total posts count for each user**
 
 ```ts
-import { posts } from './schema';
-import { eq } from 'drizzle-orm';
+import { posts } from "./schema";
+import { eq } from "drizzle-orm";
 
 await db.query.users.findMany({
   with: {
-    posts: true
+    posts: true,
   },
   extras: {
     totalPostsCount: (table) => db.$count(posts, eq(posts.authorId, table.id)),
-  }
+  },
 });
 ```
 
 ```sql
-select "d0"."id" as "id", "d0"."name" as "name", "posts"."r" as "posts", 
-((select count(*) from "posts" where "posts"."author_id" = "d0"."id")) as "totalPostsCount" 
-from "users" as "d0" 
+select "d0"."id" as "id", "d0"."name" as "name", "posts"."r" as "posts",
+((select count(*) from "posts" where "posts"."author_id" = "d0"."id")) as "totalPostsCount"
+from "users" as "d0"
 left join lateral(
-  select coalesce(json_agg(row_to_json("t".*)), '[]') as "r" 
+  select coalesce(json_agg(row_to_json("t".*)), '[]') as "r"
   from (select "d1"."id" as "id", "d1"."content" as "content", "d1"."author_id" as "authorId" from "posts" as "d1" where "d0"."id" = "d1"."author_id") as "t"
 ) as "posts" on true
 ```

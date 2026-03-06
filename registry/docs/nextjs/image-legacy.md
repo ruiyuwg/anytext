@@ -41,21 +41,21 @@ When using the default [loader](#loader), also consider the following for source
 
 ### width
 
-The `width` property can represent either the *rendered* width or *original* width in pixels, depending on the [`layout`](#layout) and [`sizes`](#sizes) properties.
+The `width` property can represent either the _rendered_ width or _original_ width in pixels, depending on the [`layout`](#layout) and [`sizes`](#sizes) properties.
 
-When using `layout="intrinsic"` or `layout="fixed"` the `width` property represents the *rendered* width in pixels, so it will affect how large the image appears.
+When using `layout="intrinsic"` or `layout="fixed"` the `width` property represents the _rendered_ width in pixels, so it will affect how large the image appears.
 
-When using `layout="responsive"`, `layout="fill"`, the `width` property represents the *original* width in pixels, so it will only affect the aspect ratio.
+When using `layout="responsive"`, `layout="fill"`, the `width` property represents the _original_ width in pixels, so it will only affect the aspect ratio.
 
 The `width` property is required, except for [statically imported images](/docs/pages/api-reference/components/image#src), or those with `layout="fill"`.
 
 ### height
 
-The `height` property can represent either the *rendered* height or *original* height in pixels, depending on the [`layout`](#layout) and [`sizes`](#sizes) properties.
+The `height` property can represent either the _rendered_ height or _original_ height in pixels, depending on the [`layout`](#layout) and [`sizes`](#sizes) properties.
 
-When using `layout="intrinsic"` or `layout="fixed"` the `height` property represents the *rendered* height in pixels, so it will affect how large the image appears.
+When using `layout="intrinsic"` or `layout="fixed"` the `height` property represents the _rendered_ height in pixels, so it will affect how large the image appears.
 
-When using `layout="responsive"`, `layout="fill"`, the `height` property represents the *original* height in pixels, so it will only affect the aspect ratio.
+When using `layout="responsive"`, `layout="fill"`, the `height` property represents the _original_ height in pixels, so it will only affect the aspect ratio.
 
 The `height` property is required, except for [statically imported images](/docs/pages/api-reference/components/image#src), or those with `layout="fill"`.
 
@@ -69,7 +69,7 @@ The layout behavior of the image as the viewport changes size.
 
 | `layout`              | Behavior                                                 | `srcSet`                                                                                                    | `sizes` | Has wrapper and sizer |
 | --------------------- | -------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ------- | --------------------- |
-| `intrinsic` (default) | Scale *down* to fit width of container, up to image size | `1x`, `2x` (based on [imageSizes](#image-sizes))                                                            | N/A     | yes                   |
+| `intrinsic` (default) | Scale _down_ to fit width of container, up to image size | `1x`, `2x` (based on [imageSizes](#image-sizes))                                                            | N/A     | yes                   |
 | `fixed`               | Sized to `width` and `height` exactly                    | `1x`, `2x` (based on [imageSizes](#image-sizes))                                                            | N/A     | yes                   |
 | `responsive`          | Scale to fit width of container                          | `640w`, `750w`, ... `2048w`, `3840w` (based on [imageSizes](#image-sizes) and [deviceSizes](#device-sizes)) | `100vw` | yes                   |
 | `fill`                | Grow in both X and Y axes to fill container              | `640w`, `750w`, ... `2048w`, `3840w` (based on [imageSizes](#image-sizes) and [deviceSizes](#device-sizes)) | `100vw` | yes                   |
@@ -100,11 +100,11 @@ A `loader` is a function returning a URL string for the image, given the followi
 Here is an example of using a custom loader:
 
 ```js
-import Image from 'next/legacy/image'
+import Image from "next/legacy/image";
 
 const myLoader = ({ src, width, quality }) => {
-  return `https://example.com/${src}?w=${width}&q=${quality || 75}`
-}
+  return `https://example.com/${src}?w=${width}&q=${quality || 75}`;
+};
 
 const MyImage = (props) => {
   return (
@@ -115,8 +115,8 @@ const MyImage = (props) => {
       width={500}
       height={500}
     />
-  )
-}
+  );
+};
 ```
 
 ### sizes
@@ -132,7 +132,7 @@ Second, the `sizes` value is parsed and used to trim the values in the automatic
 For example, if you know your styling will cause an image to be full-width on mobile devices, in a 2-column layout on tablets, and a 3-column layout on desktop displays, you should include a sizes property such as the following:
 
 ```js
-import Image from 'next/legacy/image'
+import Image from "next/legacy/image";
 const Example = () => (
   <div className="grid-element">
     <Image
@@ -143,7 +143,7 @@ const Example = () => (
               33vw"
     />
   </div>
-)
+);
 ```
 
 This example `sizes` could have a dramatic effect on performance metrics. Without the `33vw` sizes, the image selected from the server would be 3 times as wide as it needs to be. Because file size is proportional to the square of the width, without `sizes` the user would download an image that's 9 times larger than necessary.
@@ -260,45 +260,45 @@ The Ref must point to a DOM element or a React component that [forwards the Ref]
 **Example pointing to a DOM element**
 
 ```jsx
-import Image from 'next/legacy/image'
-import React from 'react'
+import Image from "next/legacy/image";
+import React from "react";
 
 const Example = () => {
-  const lazyRoot = React.useRef(null)
+  const lazyRoot = React.useRef(null);
 
   return (
-    <div ref={lazyRoot} style={{ overflowX: 'scroll', width: '500px' }}>
+    <div ref={lazyRoot} style={{ overflowX: "scroll", width: "500px" }}>
       <Image lazyRoot={lazyRoot} src="/one.jpg" width="500" height="500" />
       <Image lazyRoot={lazyRoot} src="/two.jpg" width="500" height="500" />
     </div>
-  )
-}
+  );
+};
 ```
 
 **Example pointing to a React component**
 
 ```jsx
-import Image from 'next/legacy/image'
-import React from 'react'
+import Image from "next/legacy/image";
+import React from "react";
 
 const Container = React.forwardRef((props, ref) => {
   return (
-    <div ref={ref} style={{ overflowX: 'scroll', width: '500px' }}>
+    <div ref={ref} style={{ overflowX: "scroll", width: "500px" }}>
       {props.children}
     </div>
-  )
-})
+  );
+});
 
 const Example = () => {
-  const lazyRoot = React.useRef(null)
+  const lazyRoot = React.useRef(null);
 
   return (
     <Container ref={lazyRoot}>
       <Image lazyRoot={lazyRoot} src="/one.jpg" width="500" height="500" />
       <Image lazyRoot={lazyRoot} src="/two.jpg" width="500" height="500" />
     </Container>
-  )
-}
+  );
+};
 ```
 
 [Learn more](https://developer.mozilla.org/docs/Web/API/IntersectionObserver/root)
@@ -310,11 +310,11 @@ When true, the source image will be served as-is from the `src` instead of chang
 This is useful for images that do not benefit from optimization such as small images (less than 1KB), vector images (SVG), or animated images (GIF).
 
 ```js
-import Image from 'next/image'
+import Image from "next/image";
 
 const UnoptimizedImage = (props) => {
-  return <Image {...props} unoptimized />
-}
+  return <Image {...props} unoptimized />;
+};
 ```
 
 Since Next.js 12.3.0, this prop can be assigned to all images by updating `next.config.js` with the following configuration:
@@ -324,7 +324,7 @@ module.exports = {
   images: {
     unoptimized: true,
   },
-}
+};
 ```
 
 ## Other Props
@@ -349,15 +349,15 @@ module.exports = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'example.com',
-        port: '',
-        pathname: '/account123/**',
-        search: '',
+        protocol: "https",
+        hostname: "example.com",
+        port: "",
+        pathname: "/account123/**",
+        search: "",
       },
     ],
   },
-}
+};
 ```
 
 > **Good to know**: The example above will ensure the `src` property of `next/legacy/image` must start with `https://example.com/account123/` and must not have a query string. Any other protocol, hostname, port, or unmatched path will respond with 400 Bad Request.
@@ -369,14 +369,14 @@ module.exports = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: '**.example.com',
-        port: '',
-        search: '',
+        protocol: "https",
+        hostname: "**.example.com",
+        port: "",
+        search: "",
       },
     ],
   },
-}
+};
 ```
 
 > **Good to know**: The example above will ensure the `src` property of `next/legacy/image` must start with `https://img1.example.com` or `https://me.avatar.example.com` or any number of subdomains. It cannot have a port or query string. Any other protocol or unmatched hostname will respond with 400 Bad Request.
@@ -397,13 +397,13 @@ module.exports = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'assets.example.com',
-        search: '?v=1727111025337',
+        protocol: "https",
+        hostname: "assets.example.com",
+        search: "?v=1727111025337",
       },
     ],
   },
-}
+};
 ```
 
 > **Good to know**: The example above will ensure the `src` property of `next/legacy/image` must start with `https://assets.example.com` and must have the exact query string `?v=1727111025337`. Any other protocol or query string will respond with 400 Bad Request.
@@ -421,9 +421,9 @@ Below is an example of the `domains` property in the `next.config.js` file:
 ```js filename="next.config.js"
 module.exports = {
   images: {
-    domains: ['assets.acme.com'],
+    domains: ["assets.acme.com"],
   },
-}
+};
 ```
 
 ### Loader Configuration
@@ -433,10 +433,10 @@ If you want to use a cloud provider to optimize images instead of using the Next
 ```js filename="next.config.js"
 module.exports = {
   images: {
-    loader: 'imgix',
-    path: 'https://example.com/myaccount/',
+    loader: "imgix",
+    path: "https://example.com/myaccount/",
   },
-}
+};
 ```
 
 #### Customizing the Built-in Image Path
@@ -446,9 +446,9 @@ If you want to change or prefix the default path for the built-in Next.js image 
 ```js filename="next.config.js"
 module.exports = {
   images: {
-    path: '/my-prefix/_next/image',
+    path: "/my-prefix/_next/image",
   },
-}
+};
 ```
 
 ### Built-in Loaders
@@ -456,7 +456,7 @@ module.exports = {
 The following Image Optimization cloud providers are included:
 
 - Default: Works automatically with `next dev`, `next start`, or a custom server
-- [Vercel](https://vercel.com): Works automatically when you deploy on Vercel, no configuration necessary. [Learn more](https://vercel.com/docs/concepts/image-optimization?utm_source=next-site\&utm_medium=docs\&utm_campaign=next-website)
+- [Vercel](https://vercel.com): Works automatically when you deploy on Vercel, no configuration necessary. [Learn more](https://vercel.com/docs/concepts/image-optimization?utm_source=next-site&utm_medium=docs&utm_campaign=next-website)
 - [Imgix](https://www.imgix.com): `loader: 'imgix'`
 - [Cloudinary](https://cloudinary.com): `loader: 'cloudinary'`
 - [Akamai](https://www.akamai.com): `loader: 'akamai'`
@@ -481,7 +481,7 @@ module.exports = {
   images: {
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
   },
-}
+};
 ```
 
 ### Image Sizes
@@ -497,7 +497,7 @@ module.exports = {
   images: {
     imageSizes: [32, 48, 64, 96, 128, 256, 384],
   },
-}
+};
 ```
 
 ### Acceptable Formats
@@ -511,9 +511,9 @@ If no configuration is provided, the default below is used.
 ```js filename="next.config.js"
 module.exports = {
   images: {
-    formats: ['image/webp'],
+    formats: ["image/webp"],
   },
-}
+};
 ```
 
 You can enable AVIF support, which will fallback to the original format of the src image if the browser [does not support AVIF](https://caniuse.com/avif):
@@ -521,9 +521,9 @@ You can enable AVIF support, which will fallback to the original format of the s
 ```js filename="next.config.js"
 module.exports = {
   images: {
-    formats: ['image/avif'],
+    formats: ["image/avif"],
   },
-}
+};
 ```
 
 You can also enable both AVIF and WebP formats together. AVIF will be preferred for browsers that support it, with WebP as a fallback:
@@ -531,9 +531,9 @@ You can also enable both AVIF and WebP formats together. AVIF will be preferred 
 ```js filename="next.config.js"
 module.exports = {
   images: {
-    formats: ['image/avif', 'image/webp'],
+    formats: ["image/avif", "image/webp"],
   },
-}
+};
 ```
 
 > **Good to know**:
@@ -572,7 +572,7 @@ module.exports = {
   images: {
     minimumCacheTTL: 14400, // 4 hours
   },
-}
+};
 ```
 
 You can increase the TTL to reduce the number of revalidations and potentially lower cost:
@@ -582,7 +582,7 @@ module.exports = {
   images: {
     minimumCacheTTL: 2678400, // 31 days
   },
-}
+};
 ```
 
 The expiration (or rather Max Age) of the optimized image is defined by either the `minimumCacheTTL` or the upstream image `Cache-Control` header, whichever is larger.
@@ -604,7 +604,7 @@ module.exports = {
   images: {
     disableStaticImages: true,
   },
-}
+};
 ```
 
 ### Dangerously Allow SVG
@@ -619,10 +619,10 @@ However, if you need to serve SVG images with the default Image Optimization API
 module.exports = {
   images: {
     dangerouslyAllowSVG: true,
-    contentDispositionType: 'attachment',
+    contentDispositionType: "attachment",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
-}
+};
 ```
 
 In addition, it is strongly recommended to also set `contentDispositionType` to force the browser to download the image, as well as `contentSecurityPolicy` to prevent scripts embedded in the image from executing.
@@ -638,9 +638,9 @@ You can optionally configure `inline` to allow the browser to render the image w
 ```js filename="next.config.js"
 module.exports = {
   images: {
-    contentDispositionType: 'inline',
+    contentDispositionType: "inline",
   },
-}
+};
 ```
 
 ### Animated Images

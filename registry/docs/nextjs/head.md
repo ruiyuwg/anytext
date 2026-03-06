@@ -3,7 +3,7 @@
 We expose a built-in component for appending elements to the `head` of the page:
 
 ```jsx
-import Head from 'next/head'
+import Head from "next/head";
 
 function IndexPage() {
   return (
@@ -13,10 +13,10 @@ function IndexPage() {
       </Head>
       <p>Hello world!</p>
     </div>
-  )
+  );
 }
 
-export default IndexPage
+export default IndexPage;
 ```
 
 ## Avoid duplicated tags
@@ -24,7 +24,7 @@ export default IndexPage
 To avoid duplicate tags in your `head` you can use the `key` property, which will make sure the tag is only rendered once, as in the following example:
 
 ```jsx
-import Head from 'next/head'
+import Head from "next/head";
 
 function IndexPage() {
   return (
@@ -38,10 +38,10 @@ function IndexPage() {
       </Head>
       <p>Hello world!</p>
     </div>
-  )
+  );
 }
 
-export default IndexPage
+export default IndexPage;
 ```
 
 In this case only the second `<meta property="og:title" />` is rendered. `meta` tags with duplicate `key` attributes are automatically handled.
@@ -70,7 +70,7 @@ You **cannot** use `<Head>` to set attributes on `<html>` or `<body>` tags. This
 The Next.js Image component extends the HTML `<img>` element for automatic image optimization.
 
 ```jsx filename="app/page.js"
-import Image from 'next/image'
+import Image from "next/image";
 
 export default function Page() {
   return (
@@ -80,7 +80,7 @@ export default function Page() {
       height={500}
       alt="Picture of the author"
     />
-  )
+  );
 }
 ```
 

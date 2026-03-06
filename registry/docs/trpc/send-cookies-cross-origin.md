@@ -5,16 +5,16 @@ If your API resides on a different origin than your front-end and you wish to se
 The arguments provided to the fetch function used by tRPC can be modified as follow.
 
 ```ts title='app.ts'
-import { createTRPCClient, httpBatchLink } from '@trpc/client';
+import { createTRPCClient, httpBatchLink } from "@trpc/client";
 
 const client = createTRPCClient<AppRouter>({
   links: [
     httpBatchLink({
-      url: 'YOUR_SERVER_URL',
+      url: "YOUR_SERVER_URL",
       fetch(url, options) {
         return fetch(url, {
           ...options,
-          credentials: 'include',
+          credentials: "include",
         });
       },
     }),
@@ -32,9 +32,9 @@ The headers option can be customized in the config when using the [`httpBatchLin
 
 ```ts title='utils/trpc.ts'
 // Import the router type from your server file
-import type { AppRouter } from '@/server/routers/app';
-import { httpBatchLink } from '@trpc/client';
-import { createTRPCNext } from '@trpc/next';
+import type { AppRouter } from "@/server/routers/app";
+import { httpBatchLink } from "@trpc/client";
+import { createTRPCNext } from "@trpc/next";
 
 let token: string;
 
@@ -51,7 +51,7 @@ export const trpc = createTRPCNext<AppRouter>({
     return {
       links: [
         httpBatchLink({
-          url: 'http://localhost:3000/api/trpc',
+          url: "http://localhost:3000/api/trpc",
           /**
            * Headers will be called on each request.
            */

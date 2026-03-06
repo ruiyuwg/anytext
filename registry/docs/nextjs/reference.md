@@ -23,14 +23,14 @@ An absolute external URL (must be configured with [remotePatterns](#remotepatter
 A static import.
 
 ```jsx
-import profile from './profile.png'
+import profile from "./profile.png";
 
 export default function Page() {
-  return <Image src={profile} />
+  return <Image src={profile} />;
 }
 ```
 
-> **Good to know**: For security reasons, the Image Optimization API using the default [loader](#loader) will *not* forward headers when fetching the `src` image.
+> **Good to know**: For security reasons, the Image Optimization API using the default [loader](#loader) will _not_ forward headers when fetching the `src` image.
 > If the `src` image requires authentication, consider using the [unoptimized](#unoptimized) property to disable Image Optimization.
 
 #### `alt`
@@ -45,7 +45,7 @@ If the image is [purely decorative](https://html.spec.whatwg.org/multipage/image
 
 #### `width` and `height`
 
-The `width` and `height` properties represent the [intrinsic](https://developer.mozilla.org/en-US/docs/Glossary/Intrinsic_Size) image size in pixels. This property is used to infer the correct **aspect ratio** used by browsers to reserve space for the image and avoid layout shift during loading. It does not determine the *rendered size* of the image, which is controlled by CSS.
+The `width` and `height` properties represent the [intrinsic](https://developer.mozilla.org/en-US/docs/Glossary/Intrinsic_Size) image size in pixels. This property is used to infer the correct **aspect ratio** used by browsers to reserve space for the image and avoid layout shift during loading. It does not determine the _rendered size_ of the image, which is controlled by CSS.
 
 ```jsx
 <Image src="/profile.png" width={500} height={500} />
@@ -89,13 +89,13 @@ A custom function used to generate the image URL. The function receives the foll
 - [`quality`](#quality)
 
 ```js
-'use client'
+"use client";
 
-import Image from 'next/image'
+import Image from "next/image";
 
 const imageLoader = ({ src, width, quality }) => {
-  return `https://example.com/${src}?w=${width}&q=${quality || 75}`
-}
+  return `https://example.com/${src}?w=${width}&q=${quality || 75}`;
+};
 
 export default function Page() {
   return (
@@ -106,7 +106,7 @@ export default function Page() {
       width={500}
       height={500}
     />
-  )
+  );
 }
 ```
 
@@ -119,7 +119,7 @@ Alternatively, you can use the [loaderFile](#loaderfile) configuration in `next.
 Define the sizes of the image at different breakpoints. Used by the browser to choose the most appropriate size from the generated `srcset`.
 
 ```jsx
-import Image from 'next/image'
+import Image from "next/image";
 
 export default function Page() {
   return (
@@ -130,7 +130,7 @@ export default function Page() {
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
       />
     </div>
-  )
+  );
 }
 ```
 
@@ -167,14 +167,14 @@ Allows passing CSS styles to the underlying image element.
 
 ```jsx
 const imageStyle = {
-  borderRadius: '50%',
-  border: '1px solid #fff',
-  width: '100px',
-  height: 'auto',
-}
+  borderRadius: "50%",
+  border: "1px solid #fff",
+  width: "100px",
+  height: "auto",
+};
 
 export default function ProfileImage() {
-  return <Image src="..." style={imageStyle} />
+  return <Image src="..." style={imageStyle} />;
 }
 ```
 
@@ -303,12 +303,12 @@ A callback function that is invoked if the image fails to load.
 A boolean that indicates if the image should be optimized. This is useful for images that do not benefit from optimization such as small images (less than 1KB), vector images (SVG), or animated images (GIF).
 
 ```js
-import Image from 'next/image'
+import Image from "next/image";
 
 const UnoptimizedImage = (props) => {
   // Default is false
-  return <Image {...props} unoptimized />
-}
+  return <Image {...props} unoptimized />;
+};
 ```
 
 - `true`: The source image will be served as-is from the `src` instead of changing quality, size, or format.
@@ -321,7 +321,7 @@ module.exports = {
   images: {
     unoptimized: true,
   },
-}
+};
 ```
 
 #### `overrideSrc`
@@ -412,12 +412,12 @@ module.exports = {
   images: {
     localPatterns: [
       {
-        pathname: '/assets/images/**',
-        search: '',
+        pathname: "/assets/images/**",
+        search: "",
       },
     ],
   },
-}
+};
 ```
 
 The example above will ensure the `src` property of `next/image` must start with `/assets/images/` and must not have a query string. Attempting to optimize any other path will respond with `400` Bad Request error.
@@ -431,9 +431,9 @@ Use `remotePatterns` in your `next.config.js` file to allow images from specific
 ```js filename="next.config.js"
 module.exports = {
   images: {
-    remotePatterns: [new URL('https://example.com/account123/**')],
+    remotePatterns: [new URL("https://example.com/account123/**")],
   },
-}
+};
 ```
 
 You can also configure `remotePatterns` using the object:
@@ -443,15 +443,15 @@ module.exports = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'example.com',
-        port: '',
-        pathname: '/account123/**',
-        search: '',
+        protocol: "https",
+        hostname: "example.com",
+        port: "",
+        pathname: "/account123/**",
+        search: "",
       },
     ],
   },
-}
+};
 ```
 
 The example above will ensure the `src` property of `next/image` must start with `https://example.com/account123/` and must not have a query string. Any other protocol, hostname, port, or unmatched path will respond with `400` Bad Request.
@@ -468,14 +468,14 @@ module.exports = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: '**.example.com',
-        port: '',
-        search: '',
+        protocol: "https",
+        hostname: "**.example.com",
+        port: "",
+        search: "",
       },
     ],
   },
-}
+};
 ```
 
 This allows subdomains like `image.example.com`. Query strings and custom ports are still blocked.
@@ -491,13 +491,13 @@ module.exports = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'assets.example.com',
-        search: '?v=1727111025337',
+        protocol: "https",
+        hostname: "assets.example.com",
+        search: "?v=1727111025337",
       },
     ],
   },
-}
+};
 ```
 
 The example above will ensure the `src` property of `next/image` must start with `https://assets.example.com` and must have the exact query string `?v=1727111025337`. Any other protocol or query string will respond with `400` Bad Request.
@@ -509,19 +509,19 @@ The example above will ensure the `src` property of `next/image` must start with
 ```js filename="next.config.js"
 module.exports = {
   images: {
-    loader: 'custom',
-    loaderFile: './my/image/loader.js',
+    loader: "custom",
+    loaderFile: "./my/image/loader.js",
   },
-}
+};
 ```
 
 The path must be relative to the project root. The file must export a default function that returns a URL string:
 
 ```js filename="my/image/loader.js"
-'use client'
+"use client";
 
 export default function myImageLoader({ src, width, quality }) {
-  return `https://example.com/${src}?w=${width}&q=${quality || 75}`
+  return `https://example.com/${src}?w=${width}&q=${quality || 75}`;
 }
 ```
 
@@ -538,9 +538,9 @@ If you want to change or prefix the default path for the Image Optimization API,
 ```js filename="next.config.js"
 module.exports = {
   images: {
-    path: '/my-prefix/_next/image',
+    path: "/my-prefix/_next/image",
   },
-}
+};
 ```
 
 #### `deviceSizes`
@@ -554,7 +554,7 @@ module.exports = {
   images: {
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
   },
-}
+};
 ```
 
 #### `imageSizes`
@@ -568,7 +568,7 @@ module.exports = {
   images: {
     imageSizes: [32, 48, 64, 96, 128, 256, 384],
   },
-}
+};
 ```
 
 `imageSizes` is only used for images which provide a [`sizes`](#sizes) prop, which indicates that the image is less than the full width of the screen. Therefore, the sizes in `imageSizes` should all be smaller than the smallest size in `deviceSizes`.
@@ -584,7 +584,7 @@ module.exports = {
   images: {
     qualities: [75],
   },
-}
+};
 ```
 
 > **Good to know**: This field is required starting with Next.js 16 because unrestricted access could allow malicious actors to optimize more qualities than you intended.
@@ -596,7 +596,7 @@ module.exports = {
   images: {
     qualities: [25, 50, 75, 100],
   },
-}
+};
 ```
 
 In the example above, only four qualities are allowed: 25, 50, 75, and 100.
@@ -613,9 +613,9 @@ If the REST API is visited directly with a quality that does not match a value i
 module.exports = {
   images: {
     // Default
-    formats: ['image/webp'],
+    formats: ["image/webp"],
   },
-}
+};
 ```
 
 Next.js automatically detects the browser's supported image formats via the request's `Accept` header in order to determine the best output format.
@@ -627,9 +627,9 @@ You can enable AVIF support, which will fallback to the original format of the s
 ```js filename="next.config.js"
 module.exports = {
   images: {
-    formats: ['image/avif'],
+    formats: ["image/avif"],
   },
-}
+};
 ```
 
 You can also enable both AVIF and WebP formats together. AVIF will be preferred for browsers that support it, with WebP as a fallback:
@@ -637,9 +637,9 @@ You can also enable both AVIF and WebP formats together. AVIF will be preferred 
 ```js filename="next.config.js"
 module.exports = {
   images: {
-    formats: ['image/avif', 'image/webp'],
+    formats: ["image/avif", "image/webp"],
   },
-}
+};
 ```
 
 > **Good to know**:
@@ -660,7 +660,7 @@ module.exports = {
   images: {
     minimumCacheTTL: 14400, // 4 hours
   },
-}
+};
 ```
 
 You can increase the TTL to reduce the number of revalidations and potentially lower cost:
@@ -670,7 +670,7 @@ module.exports = {
   images: {
     minimumCacheTTL: 2678400, // 31 days
   },
-}
+};
 ```
 
 The expiration (or rather Max Age) of the optimized image is defined by either the `minimumCacheTTL` or the upstream image `Cache-Control` header, whichever is larger.
@@ -692,7 +692,7 @@ module.exports = {
   images: {
     disableStaticImages: true,
   },
-}
+};
 ```
 
 #### `maximumRedirects`
@@ -704,7 +704,7 @@ module.exports = {
   images: {
     maximumRedirects: 3,
   },
-}
+};
 ```
 
 You can configure the number of redirects to follow when fetching remote images. Setting the value to `0` will disable following redirects.
@@ -714,7 +714,7 @@ module.exports = {
   images: {
     maximumRedirects: 0,
   },
-}
+};
 ```
 
 #### `maximumResponseBody`
@@ -726,7 +726,7 @@ module.exports = {
   images: {
     maximumResponseBody: 50_000_000,
   },
-}
+};
 ```
 
 If you know all your source images are small, you can protect memory constrained servers by reducing this to a smaller value such as 5 MB.
@@ -736,7 +736,7 @@ module.exports = {
   images: {
     maximumResponseBody: 5_000_000,
   },
-}
+};
 ```
 
 #### `dangerouslyAllowLocalIP`
@@ -750,7 +750,7 @@ module.exports = {
   images: {
     dangerouslyAllowLocalIP: false,
   },
-}
+};
 ```
 
 If you need to optimize remote images hosted elsewhere in your local network, you can set the value to true.
@@ -760,7 +760,7 @@ module.exports = {
   images: {
     dangerouslyAllowLocalIP: true,
   },
-}
+};
 ```
 
 #### `dangerouslyAllowSVG`
@@ -772,7 +772,7 @@ module.exports = {
   images: {
     dangerouslyAllowSVG: true,
   },
-}
+};
 ```
 
 By default, Next.js does not optimize SVG images for a few reasons:
@@ -792,10 +792,10 @@ In addition, it is strongly recommended to also set `contentDispositionType` to 
 module.exports = {
   images: {
     dangerouslyAllowSVG: true,
-    contentDispositionType: 'attachment',
+    contentDispositionType: "attachment",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
-}
+};
 ```
 
 #### `contentDispositionType`
@@ -805,9 +805,9 @@ module.exports = {
 ```js filename="next.config.js"
 module.exports = {
   images: {
-    contentDispositionType: 'inline',
+    contentDispositionType: "inline",
   },
-}
+};
 ```
 
 #### `contentSecurityPolicy`
@@ -819,7 +819,7 @@ module.exports = {
   images: {
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
-}
+};
 ```
 
 By default, the [loader](#loader) sets the [`Content-Disposition`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition#as_a_response_header_for_the_main_body) header to `attachment` for added protection since the API can serve arbitrary remote images.
@@ -843,9 +843,9 @@ Below is an example of the `domains` property in the `next.config.js` file:
 ```js filename="next.config.js"
 module.exports = {
   images: {
-    domains: ['assets.acme.com'],
+    domains: ["assets.acme.com"],
   },
-}
+};
 ```
 
 ## Functions
@@ -855,14 +855,14 @@ module.exports = {
 The `getImageProps` function can be used to get the props that would be passed to the underlying `<img>` element, and instead pass them to another component, style, canvas, etc.
 
 ```jsx
-import { getImageProps } from 'next/image'
+import { getImageProps } from "next/image";
 
 const { props } = getImageProps({
-  src: 'https://example.com/image.jpg',
-  alt: 'A scenic mountain view',
+  src: "https://example.com/image.jpg",
+  alt: "A scenic mountain view",
   width: 1200,
   height: 800,
-})
+});
 
 function ImageWithCaption() {
   return (
@@ -870,7 +870,7 @@ function ImageWithCaption() {
       <img {...props} />
       <figcaption>A scenic mountain view</figcaption>
     </figure>
-  )
+  );
 }
 ```
 

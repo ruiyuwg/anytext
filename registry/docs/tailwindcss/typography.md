@@ -2,31 +2,31 @@
 
 ## Font Size
 
-| Class | Size | Line Height |
-|-------|------|-------------|
-| `text-xs` | 0.75rem (12px) | 1rem |
-| `text-sm` | 0.875rem (14px) | 1.25rem |
-| `text-base` | 1rem (16px) | 1.5rem |
-| `text-lg` | 1.125rem (18px) | 1.75rem |
-| `text-xl` | 1.25rem (20px) | 1.75rem |
-| `text-2xl` | 1.5rem (24px) | 2rem |
-| `text-3xl` | 1.875rem (30px) | 2.25rem |
-| `text-4xl` | 2.25rem (36px) | 2.5rem |
-| `text-5xl` | 3rem (48px) | 1 |
-| `text-6xl` | 3.75rem (60px) | 1 |
+| Class       | Size            | Line Height |
+| ----------- | --------------- | ----------- |
+| `text-xs`   | 0.75rem (12px)  | 1rem        |
+| `text-sm`   | 0.875rem (14px) | 1.25rem     |
+| `text-base` | 1rem (16px)     | 1.5rem      |
+| `text-lg`   | 1.125rem (18px) | 1.75rem     |
+| `text-xl`   | 1.25rem (20px)  | 1.75rem     |
+| `text-2xl`  | 1.5rem (24px)   | 2rem        |
+| `text-3xl`  | 1.875rem (30px) | 2.25rem     |
+| `text-4xl`  | 2.25rem (36px)  | 2.5rem      |
+| `text-5xl`  | 3rem (48px)     | 1           |
+| `text-6xl`  | 3.75rem (60px)  | 1           |
 
 ## Font Weight
 
-| Class | Weight |
-|-------|--------|
-| `font-thin` | 100 |
-| `font-light` | 300 |
-| `font-normal` | 400 |
-| `font-medium` | 500 |
-| `font-semibold` | 600 |
-| `font-bold` | 700 |
-| `font-extrabold` | 800 |
-| `font-black` | 900 |
+| Class            | Weight |
+| ---------------- | ------ |
+| `font-thin`      | 100    |
+| `font-light`     | 300    |
+| `font-normal`    | 400    |
+| `font-medium`    | 500    |
+| `font-semibold`  | 600    |
+| `font-bold`      | 700    |
+| `font-extrabold` | 800    |
+| `font-black`     | 900    |
 
 ## Font Family
 
@@ -63,7 +63,9 @@ Color palette: `slate`, `gray`, `zinc`, `neutral`, `stone`, `red`, `orange`, `am
 <p class="underline">Underlined</p>
 <p class="line-through">Strikethrough</p>
 <p class="no-underline">Remove underline</p>
-<p class="underline decoration-2 decoration-blue-500 underline-offset-4">Styled underline</p>
+<p class="underline decoration-2 decoration-blue-500 underline-offset-4">
+  Styled underline
+</p>
 ```
 
 ## Text Transform & Spacing
@@ -103,11 +105,11 @@ Color palette: `slate`, `gray`, `zinc`, `neutral`, `stone`, `red`, `orange`, `am
 
 ## Whitespace
 
-| Class | CSS |
-|-------|-----|
-| `whitespace-normal` | `white-space: normal` |
-| `whitespace-nowrap` | `white-space: nowrap` |
-| `whitespace-pre` | `white-space: pre` |
+| Class                 | CSS                     |
+| --------------------- | ----------------------- |
+| `whitespace-normal`   | `white-space: normal`   |
+| `whitespace-nowrap`   | `white-space: nowrap`   |
+| `whitespace-pre`      | `white-space: pre`      |
 | `whitespace-pre-line` | `white-space: pre-line` |
 | `whitespace-pre-wrap` | `white-space: pre-wrap` |
 

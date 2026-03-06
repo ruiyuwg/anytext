@@ -9,7 +9,7 @@ await db.delete(users);
 And you can delete with filters and conditions:
 
 ```typescript copy
-await db.delete(users).where(eq(users.name, 'Dan'));
+await db.delete(users).where(eq(users.name, "Dan"));
 ```
 
 ### Limit
@@ -59,13 +59,15 @@ delete from "users" where "users"."name" = $1 order by "name" asc, "name2" desc;
 You can delete a row and get it back in PostgreSQL and SQLite:
 
 ```typescript copy
-const deletedUser = await db.delete(users)
-  .where(eq(users.name, 'Dan'))
+const deletedUser = await db
+  .delete(users)
+  .where(eq(users.name, "Dan"))
   .returning();
 
 // partial return
-const deletedUserIds: { deletedId: number }[] = await db.delete(users)
-  .where(eq(users.name, 'Dan'))
+const deletedUserIds: { deletedId: number }[] = await db
+  .delete(users)
+  .where(eq(users.name, "Dan"))
   .returning({ deletedId: users.id });
 ```
 
@@ -78,7 +80,10 @@ You can insert a row and get it back in PostgreSQL and SQLite like such:
 await db.insert(users).values({ name: "Dan" }).output();
 
 // partial return
-await db.insert(users).values({ name: "Partial Dan" }).output({ insertedId: users.id });
+await db
+  .insert(users)
+  .values({ name: "Partial Dan" })
+  .output({ insertedId: users.id });
 ```
 
 ## WITH DELETE clause
@@ -105,9 +110,9 @@ id: orders.id
 
 ````
 ```sql
-with "average_amount" as (select avg("amount") as "value" from "orders") 
-delete from "orders" 
-where "orders"."amount" > (select * from "average_amount") 
+with "average_amount" as (select avg("amount") as "value" from "orders")
+delete from "orders"
+where "orders"."amount" > (select * from "average_amount")
 returning "id"
 ````
 

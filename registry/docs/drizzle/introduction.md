@@ -42,13 +42,13 @@ nor a function for 'userId' column in refinements.
 
 ````
 <Callout title='What does it mean?'>
-This means you neither provided the `users` table to the `seed` function schema nor refined the `userId` column generator. 
+This means you neither provided the `users` table to the `seed` function schema nor refined the `userId` column generator.
 As a result, the `userId` column will be filled with Null values.
 </Callout>
 Then you will have two choices:
 - If you're okay with filling the `userId` column with Null values, you can ignore the warning;
 
-- Otherwise, you can [refine](/docs/guides/seeding-with-partially-exposed-tables#refining-the-userid-column-generator) the `userId` column generator. 
+- Otherwise, you can [refine](/docs/guides/seeding-with-partially-exposed-tables#refining-the-userid-column-generator) the `userId` column generator.
 
 ## Refining the `userId` column generator
 Doing so requires the `users` table to already have IDs such as 1 and 2 in the database.
@@ -94,19 +94,21 @@ import Section from "@mdx/Section.astro";
 This guide demonstrates how to select parent rows with the condition of having at least one related child row. Below, there are examples of schema definitions and the corresponding database data:
 
 ```ts copy
-import { integer, pgTable, serial, text } from 'drizzle-orm/pg-core';
+import { integer, pgTable, serial, text } from "drizzle-orm/pg-core";
 
-export const users = pgTable('users', {
-  id: serial('id').primaryKey(),
-  name: text('name').notNull(),
-  email: text('email').notNull(),
+export const users = pgTable("users", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  email: text("email").notNull(),
 });
 
-export const posts = pgTable('posts', {
-  id: serial('id').primaryKey(),
-  title: text('title').notNull(),
-  content: text('content').notNull(),
-  userId: integer('user_id').notNull().references(() => users.id),
+export const posts = pgTable("posts", {
+  id: serial("id").primaryKey(),
+  title: text("title").notNull(),
+  content: text("content").notNull(),
+  userId: integer("user_id")
+    .notNull()
+    .references(() => users.id),
 });
 ```
 
@@ -168,33 +170,33 @@ select users.*, posts.* from users
 // result data, there is no user with id 2 because he has no posts
 [
   {
-    user: { id: 1, name: 'John Doe', email: 'john_doe@email.com' },
+    user: { id: 1, name: "John Doe", email: "john_doe@email.com" },
     post: {
       id: 1,
-      title: 'Post 1',
-      content: 'This is the text of post 1',
-      userId: 1
-    }
+      title: "Post 1",
+      content: "This is the text of post 1",
+      userId: 1,
+    },
   },
   {
-    user: { id: 1, name: 'John Doe', email: 'john_doe@email.com' },
+    user: { id: 1, name: "John Doe", email: "john_doe@email.com" },
     post: {
       id: 2,
-      title: 'Post 2',
-      content: 'This is the text of post 2',
-      userId: 1
-    }
+      title: "Post 2",
+      content: "This is the text of post 2",
+      userId: 1,
+    },
   },
   {
-    user: { id: 3, name: 'Nick Smith', email: 'nick_smith@email.com' },
+    user: { id: 3, name: "Nick Smith", email: "nick_smith@email.com" },
     post: {
       id: 3,
-      title: 'Post 3',
-      content: 'This is the text of post 3',
-      userId: 3
-    }
-  }
-]
+      title: "Post 3",
+      content: "This is the text of post 3",
+      userId: 3,
+    },
+  },
+];
 ```
 
 </Section>
@@ -221,9 +223,9 @@ select * from users where exists (select 1 from posts where posts.user_id = user
 ```ts
 // result data, there is no user with id 2 because he has no posts
 [
-  { id: 1, name: 'John Doe', email: 'john_doe@email.com' },
-  { id: 3, name: 'Nick Smith', email: 'nick_smith@email.com' }
-]
+  { id: 1, name: "John Doe", email: "john_doe@email.com" },
+  { id: 3, name: "Nick Smith", email: "nick_smith@email.com" },
+];
 ```
 
 </Section>

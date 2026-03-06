@@ -25,12 +25,12 @@ The Route Segment options allows you to configure the behavior of a [Page](/docs
 Change the dynamic behavior of a layout or page to fully static or fully dynamic.
 
 ```tsx filename="layout.tsx | page.tsx | route.ts" switcher
-export const dynamic = 'auto'
+export const dynamic = "auto";
 // 'auto' | 'force-dynamic' | 'error' | 'force-static'
 ```
 
 ```js filename="layout.js | page.js | route.js" switcher
-export const dynamic = 'auto'
+export const dynamic = "auto";
 // 'auto' | 'force-dynamic' | 'error' | 'force-static'
 ```
 
@@ -58,11 +58,11 @@ export const dynamic = 'auto'
 Control what happens when a dynamic segment is visited that was not generated with [generateStaticParams](/docs/app/api-reference/functions/generate-static-params).
 
 ```tsx filename="layout.tsx | page.tsx" switcher
-export const dynamicParams = true // true | false
+export const dynamicParams = true; // true | false
 ```
 
 ```js filename="layout.js | page.js | route.js" switcher
-export const dynamicParams = true // true | false
+export const dynamicParams = true; // true | false
 ```
 
 - **`true`** (default): Dynamic segments not included in `generateStaticParams` are generated on demand.
@@ -79,12 +79,12 @@ export const dynamicParams = true // true | false
 Set the default revalidation time for a layout or page. This option does not override the `revalidate` value set by individual `fetch` requests.
 
 ```tsx filename="layout.tsx | page.tsx | route.ts" switcher
-export const revalidate = false
+export const revalidate = false;
 // false | 0 | number
 ```
 
 ```js filename="layout.js | page.js | route.js" switcher
-export const revalidate = false
+export const revalidate = false;
 // false | 0 | number
 ```
 
@@ -96,11 +96,11 @@ export const revalidate = false
 >
 > - The revalidate value needs to be statically analyzable. For example `revalidate = 600` is valid, but `revalidate = 60 * 10` is not.
 > - The revalidate value is not available when using `runtime = 'edge'`.
-> - In Development, Pages are *always* rendered on-demand and are never cached. This allows you to see changes immediately without waiting for a revalidation period to pass.
+> - In Development, Pages are _always_ rendered on-demand and are never cached. This allows you to see changes immediately without waiting for a revalidation period to pass.
 
 #### Revalidation Frequency
 
-- The lowest `revalidate` across each layout and page of a single route will determine the revalidation frequency of the *entire* route. This ensures that child pages are revalidated as frequently as their parent layouts.
+- The lowest `revalidate` across each layout and page of a single route will determine the revalidation frequency of the _entire_ route. This ensures that child pages are revalidated as frequently as their parent layouts.
 - Individual `fetch` requests can set a lower `revalidate` than the route's default `revalidate` to increase the revalidation frequency of the entire route. This allows you to dynamically opt-in to more frequent revalidation for certain routes based on some criteria.
 
 ### `fetchCache`
@@ -112,13 +112,13 @@ By default, Next.js **will cache** any `fetch()` requests that are reachable **b
 `fetchCache` allows you to override the default `cache` option of all `fetch` requests in a layout or page.
 
 ```tsx filename="layout.tsx | page.tsx | route.ts" switcher
-export const fetchCache = 'auto'
+export const fetchCache = "auto";
 // 'auto' | 'default-cache' | 'only-cache'
 // 'force-cache' | 'force-no-store' | 'default-no-store' | 'only-no-store'
 ```
 
 ```js filename="layout.js | page.js | route.js" switcher
-export const fetchCache = 'auto'
+export const fetchCache = "auto";
 // 'auto' | 'default-cache' | 'only-cache'
 // 'force-cache' | 'force-no-store' | 'default-no-store' | 'only-no-store'
 ```
@@ -148,12 +148,12 @@ We recommend using the Node.js runtime for rendering your application. This opti
 > **Good to know**: Using `runtime: 'edge'` is **not supported** for Cache Components.
 
 ```tsx filename="layout.tsx | page.tsx | route.ts" switcher
-export const runtime = 'nodejs'
+export const runtime = "nodejs";
 // 'nodejs' | 'edge'
 ```
 
 ```js filename="layout.js | page.js | route.js" switcher
-export const runtime = 'nodejs'
+export const runtime = "nodejs";
 // 'nodejs' | 'edge'
 ```
 
@@ -163,12 +163,12 @@ export const runtime = 'nodejs'
 ### `preferredRegion`
 
 ```tsx filename="layout.tsx | page.tsx | route.ts" switcher
-export const preferredRegion = 'auto'
+export const preferredRegion = "auto";
 // 'auto' | 'global' | 'home' | ['iad1', 'sfo1']
 ```
 
 ```js filename="layout.js | page.js | route.js" switcher
-export const preferredRegion = 'auto'
+export const preferredRegion = "auto";
 // 'auto' | 'global' | 'home' | ['iad1', 'sfo1']
 ```
 
@@ -187,11 +187,11 @@ Deployment platforms can use `maxDuration` from the Next.js build output to add 
 **Note**: This setting requires Next.js `13.4.10` or higher.
 
 ```tsx filename="layout.tsx | page.tsx | route.ts" switcher
-export const maxDuration = 5
+export const maxDuration = 5;
 ```
 
 ```js filename="layout.js | page.js | route.js" switcher
-export const maxDuration = 5
+export const maxDuration = 5;
 ```
 
 > **Good to know**:

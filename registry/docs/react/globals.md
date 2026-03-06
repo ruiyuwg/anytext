@@ -2,11 +2,11 @@
 
 Validates against assignment/mutation of globals during render, part of ensuring that [side effects must run outside of render](/reference/rules/components-and-hooks-must-be-pure#side-effects-must-run-outside-of-render).
 
-## Rule Details {/*rule-details*/}
+## Rule Details {/_rule-details_/}
 
 Global variables exist outside React's control. When you modify them during render, you break React's assumption that rendering is pure. This can cause components to behave differently in development vs production, break Fast Refresh, and make your app impossible to optimize with features like React Compiler.
 
-### Invalid {/*invalid*/}
+### Invalid {/_invalid_/}
 
 Examples of incorrect code for this rule:
 
@@ -19,21 +19,21 @@ function Component() {
 }
 
 // ❌ Modifying window properties
-function Component({userId}) {
+function Component({ userId }) {
   window.currentUser = userId; // Global mutation
   return <div>User: {userId}</div>;
 }
 
 // ❌ Global array push
 const events = [];
-function Component({event}) {
+function Component({ event }) {
   events.push(event); // Mutating global array
   return <div>Events: {events.length}</div>;
 }
 
 // ❌ Cache manipulation
 const cache = {};
-function Component({id}) {
+function Component({ id }) {
   if (!cache[id]) {
     cache[id] = fetchData(id); // Modifying cache during render
   }
@@ -41,7 +41,7 @@ function Component({id}) {
 }
 ```
 
-### Valid {/*valid*/}
+### Valid {/_valid_/}
 
 Examples of correct code for this rule:
 
@@ -51,14 +51,10 @@ function Component() {
   const [clickCount, setClickCount] = useState(0);
 
   const handleClick = () => {
-    setClickCount(c => c + 1);
+    setClickCount((c) => c + 1);
   };
 
-  return (
-    <button onClick={handleClick}>
-      Clicked: {clickCount} times
-    </button>
-  );
+  return <button onClick={handleClick}>Clicked: {clickCount} times</button>;
 }
 
 // ✅ Use context for global values
@@ -68,7 +64,7 @@ function Component() {
 }
 
 // ✅ Synchronize external state with React
-function Component({title}) {
+function Component({ title }) {
   useEffect(() => {
     document.title = title; // OK in effect
   }, [title]);
@@ -77,7 +73,7 @@ function Component({title}) {
 }
 ```
 
-***
+---
 
 ## Sitemap
 

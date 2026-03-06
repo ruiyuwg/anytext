@@ -6,15 +6,15 @@ The `layout` file is used to define a layout in your Next.js application.
 export default function DashboardLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
-  return <section>{children}</section>
+  return <section>{children}</section>;
 }
 ```
 
 ```jsx filename="app/dashboard/layout.js" switcher
 export default function DashboardLayout({ children }) {
-  return <section>{children}</section>
+  return <section>{children}</section>;
 }
 ```
 
@@ -24,13 +24,13 @@ A **root layout** is the top-most layout in the root `app` directory. It is used
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
       <body>{children}</body>
     </html>
-  )
+  );
 }
 ```
 
@@ -40,7 +40,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>{children}</body>
     </html>
-  )
+  );
 }
 ```
 
@@ -61,16 +61,16 @@ export default async function Layout({
   children,
   params,
 }: {
-  children: React.ReactNode
-  params: Promise<{ team: string }>
+  children: React.ReactNode;
+  params: Promise<{ team: string }>;
 }) {
-  const { team } = await params
+  const { team } = await params;
 }
 ```
 
 ```jsx filename="app/dashboard/[team]/layout.js" switcher
 export default async function Layout({ children, params }) {
-  const { team } = await params
+  const { team } = await params;
 }
 ```
 
@@ -88,14 +88,14 @@ export default async function Layout({ children, params }) {
 You can type layouts with `LayoutProps` to get a strongly typed `params` and named slots inferred from your directory structure. `LayoutProps` is a globally available helper.
 
 ```tsx filename="app/dashboard/layout.tsx"
-export default function Layout(props: LayoutProps<'/dashboard'>) {
+export default function Layout(props: LayoutProps<"/dashboard">) {
   return (
     <section>
       {props.children}
       {/* If you have app/dashboard/@analytics, it appears as a typed slot: */}
       {/* {props.analytics} */}
     </section>
-  )
+  );
 }
 ```
 
@@ -112,13 +112,13 @@ The `app` directory **must** include a **root layout**, which is the top-most la
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html>
       <body>{children}</body>
     </html>
-  )
+  );
 }
 ```
 
@@ -128,7 +128,7 @@ export default function RootLayout({ children }) {
     <html>
       <body>{children}</body>
     </html>
-  )
+  );
 }
 ```
 
@@ -151,22 +151,22 @@ Layouts are cached in the client during navigation to avoid unnecessary server r
 To access the request object, you can use [`headers`](/docs/app/api-reference/functions/headers) and [`cookies`](/docs/app/api-reference/functions/cookies) APIs in [Server Components](/docs/app/getting-started/server-and-client-components) and Functions.
 
 ```tsx filename="app/shop/layout.tsx" switcher
-import { cookies } from 'next/headers'
+import { cookies } from "next/headers";
 
 export default async function Layout({ children }) {
-  const cookieStore = await cookies()
-  const theme = cookieStore.get('theme')
-  return '...'
+  const cookieStore = await cookies();
+  const theme = cookieStore.get("theme");
+  return "...";
 }
 ```
 
 ```jsx filename="app/shop/layout.js" switcher
-import { cookies } from 'next/headers'
+import { cookies } from "next/headers";
 
 export default async function Layout({ children }) {
-  const cookieStore = await cookies()
-  const theme = cookieStore.get('theme')
-  return '...'
+  const cookieStore = await cookies();
+  const theme = cookieStore.get("theme");
+  return "...";
 }
 ```
 
@@ -177,35 +177,35 @@ Layouts do not rerender on navigation, so they cannot access search params which
 To access updated query parameters, you can use the Page [`searchParams`](/docs/app/api-reference/file-conventions/page#searchparams-optional) prop, or read them inside a Client Component using the [`useSearchParams`](/docs/app/api-reference/functions/use-search-params) hook. Since Client Components re-render on navigation, they have access to the latest query parameters.
 
 ```tsx filename="app/ui/search.tsx" switcher
-'use client'
+"use client";
 
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams } from "next/navigation";
 
 export default function Search() {
-  const searchParams = useSearchParams()
+  const searchParams = useSearchParams();
 
-  const search = searchParams.get('search')
+  const search = searchParams.get("search");
 
-  return '...'
+  return "...";
 }
 ```
 
 ```jsx filename="app/ui/search.js" switcher
-'use client'
+"use client";
 
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams } from "next/navigation";
 
 export default function Search() {
-  const searchParams = useSearchParams()
+  const searchParams = useSearchParams();
 
-  const search = searchParams.get('search')
+  const search = searchParams.get("search");
 
-  return '...'
+  return "...";
 }
 ```
 
 ```tsx filename="app/shop/layout.tsx" switcher
-import Search from '@/app/ui/search'
+import Search from "@/app/ui/search";
 
 export default function Layout({ children }) {
   return (
@@ -213,12 +213,12 @@ export default function Layout({ children }) {
       <Search />
       {children}
     </>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/shop/layout.js" switcher
-import Search from '@/app/ui/search'
+import Search from "@/app/ui/search";
 
 export default function Layout({ children }) {
   return (
@@ -226,7 +226,7 @@ export default function Layout({ children }) {
       <Search />
       {children}
     </>
-  )
+  );
 }
 ```
 
@@ -237,53 +237,53 @@ Layouts do not re-render on navigation, so they do not access pathname which wou
 To access the current pathname, you can read it inside a Client Component using the [`usePathname`](/docs/app/api-reference/functions/use-pathname) hook. Since Client Components re-render during navigation, they have access to the latest pathname.
 
 ```tsx filename="app/ui/breadcrumbs.tsx" switcher
-'use client'
+"use client";
 
-import { usePathname } from 'next/navigation'
+import { usePathname } from "next/navigation";
 
 // Simplified breadcrumbs logic
 export default function Breadcrumbs() {
-  const pathname = usePathname()
-  const segments = pathname.split('/')
+  const pathname = usePathname();
+  const segments = pathname.split("/");
 
   return (
     <nav>
       {segments.map((segment, index) => (
         <span key={index}>
-          {' > '}
+          {" > "}
           {segment}
         </span>
       ))}
     </nav>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/ui/breadcrumbs.js" switcher
-'use client'
+"use client";
 
-import { usePathname } from 'next/navigation'
+import { usePathname } from "next/navigation";
 
 // Simplified breadcrumbs logic
 export default function Breadcrumbs() {
-  const pathname = usePathname()
-  const segments = pathname.split('/')
+  const pathname = usePathname();
+  const segments = pathname.split("/");
 
   return (
     <nav>
       {segments.map((segment, index) => (
         <span key={index}>
-          {' > '}
+          {" > "}
           {segment}
         </span>
       ))}
     </nav>
-  )
+  );
 }
 ```
 
 ```tsx filename="app/docs/layout.tsx" switcher
-import { Breadcrumbs } from '@/app/ui/Breadcrumbs'
+import { Breadcrumbs } from "@/app/ui/Breadcrumbs";
 
 export default function Layout({ children }) {
   return (
@@ -291,12 +291,12 @@ export default function Layout({ children }) {
       <Breadcrumbs />
       <main>{children}</main>
     </>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/docs/layout.js" switcher
-import { Breadcrumbs } from '@/app/ui/Breadcrumbs'
+import { Breadcrumbs } from "@/app/ui/Breadcrumbs";
 
 export default function Layout({ children }) {
   return (
@@ -304,7 +304,7 @@ export default function Layout({ children }) {
       <Breadcrumbs />
       <main>{children}</main>
     </>
-  )
+  );
 }
 ```
 
@@ -316,17 +316,17 @@ Alternatively, when using [`fetch`](/docs/app/api-reference/functions/fetch)in N
 
 ```tsx filename="app/lib/data.ts" switcher
 export async function getUser(id: string) {
-  const res = await fetch(`https://.../users/${id}`)
-  return res.json()
+  const res = await fetch(`https://.../users/${id}`);
+  return res.json();
 }
 ```
 
 ```tsx filename="app/dashboard/layout.tsx" switcher
-import { getUser } from '@/app/lib/data'
-import { UserName } from '@/app/ui/user-name'
+import { getUser } from "@/app/lib/data";
+import { UserName } from "@/app/ui/user-name";
 
 export default async function Layout({ children }) {
-  const user = await getUser('1')
+  const user = await getUser("1");
 
   return (
     <>
@@ -336,16 +336,16 @@ export default async function Layout({ children }) {
       </nav>
       {children}
     </>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/dashboard/layout.js" switcher
-import { getUser } from '@/app/lib/data'
-import { UserName } from '@/app/ui/user-name'
+import { getUser } from "@/app/lib/data";
+import { UserName } from "@/app/ui/user-name";
 
 export default async function Layout({ children }) {
-  const user = await getUser('1')
+  const user = await getUser("1");
 
   return (
     <>
@@ -355,37 +355,37 @@ export default async function Layout({ children }) {
       </nav>
       {children}
     </>
-  )
+  );
 }
 ```
 
 ```tsx filename="app/dashboard/page.tsx" switcher
-import { getUser } from '@/app/lib/data'
-import { UserName } from '@/app/ui/user-name'
+import { getUser } from "@/app/lib/data";
+import { UserName } from "@/app/ui/user-name";
 
 export default async function Page() {
-  const user = await getUser('1')
+  const user = await getUser("1");
 
   return (
     <div>
       <h1>Welcome {user.name}</h1>
     </div>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/dashboard/page.js" switcher
-import { getUser } from '@/app/lib/data'
-import { UserName } from '@/app/ui/user-name'
+import { getUser } from "@/app/lib/data";
+import { UserName } from "@/app/ui/user-name";
 
 export default async function Page() {
-  const user = await getUser('1')
+  const user = await getUser("1");
 
   return (
     <div>
       <h1>Welcome {user.name}</h1>
     </div>
-  )
+  );
 }
 ```
 
@@ -394,64 +394,64 @@ export default async function Page() {
 Layouts do not have access to the route segments below itself. To access all route segments, you can use [`useSelectedLayoutSegment`](/docs/app/api-reference/functions/use-selected-layout-segment) or [`useSelectedLayoutSegments`](/docs/app/api-reference/functions/use-selected-layout-segments) in a Client Component.
 
 ```tsx filename="app/ui/nav-link.tsx" switcher
-'use client'
+"use client";
 
-import Link from 'next/link'
-import { useSelectedLayoutSegment } from 'next/navigation'
+import Link from "next/link";
+import { useSelectedLayoutSegment } from "next/navigation";
 
 export default function NavLink({
   slug,
   children,
 }: {
-  slug: string
-  children: React.ReactNode
+  slug: string;
+  children: React.ReactNode;
 }) {
-  const segment = useSelectedLayoutSegment()
-  const isActive = slug === segment
+  const segment = useSelectedLayoutSegment();
+  const isActive = slug === segment;
 
   return (
     <Link
       href={`/blog/${slug}`}
       // Change style depending on whether the link is active
-      style={{ fontWeight: isActive ? 'bold' : 'normal' }}
+      style={{ fontWeight: isActive ? "bold" : "normal" }}
     >
       {children}
     </Link>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/ui/nav-link.js" switcher
-'use client'
+"use client";
 
-import Link from 'next/link'
-import { useSelectedLayoutSegment } from 'next/navigation'
+import Link from "next/link";
+import { useSelectedLayoutSegment } from "next/navigation";
 
 export default function NavLinks({ slug, children }) {
-  const segment = useSelectedLayoutSegment()
-  const isActive = slug === segment
+  const segment = useSelectedLayoutSegment();
+  const isActive = slug === segment;
 
   return (
     <Link
       href={`/blog/${slug}`}
-      style={{ fontWeight: isActive ? 'bold' : 'normal' }}
+      style={{ fontWeight: isActive ? "bold" : "normal" }}
     >
       {children}
     </Link>
-  )
+  );
 }
 ```
 
 ```tsx filename="app/blog/layout.tsx" switcher
-import { NavLink } from './nav-link'
-import getPosts from './get-posts'
+import { NavLink } from "./nav-link";
+import getPosts from "./get-posts";
 
 export default async function Layout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
-  const featuredPosts = await getPosts()
+  const featuredPosts = await getPosts();
   return (
     <div>
       {featuredPosts.map((post) => (
@@ -461,16 +461,16 @@ export default async function Layout({
       ))}
       <div>{children}</div>
     </div>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/blog/layout.js" switcher
-import { NavLink } from './nav-link'
-import getPosts from './get-posts'
+import { NavLink } from "./nav-link";
+import getPosts from "./get-posts";
 
 export default async function Layout({ children }) {
-  const featuredPosts = await getPosts()
+  const featuredPosts = await getPosts();
   return (
     <div>
       {featuredPosts.map((post) => (
@@ -480,7 +480,7 @@ export default async function Layout({ children }) {
       ))}
       <div>{children}</div>
     </div>
-  )
+  );
 }
 ```
 
@@ -491,24 +491,24 @@ export default async function Layout({ children }) {
 You can modify the `<head>` HTML elements such as `title` and `meta` using the [`metadata` object](/docs/app/api-reference/functions/generate-metadata#the-metadata-object) or [`generateMetadata` function](/docs/app/api-reference/functions/generate-metadata#generatemetadata-function).
 
 ```tsx filename="app/layout.tsx" switcher
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Next.js',
-}
+  title: "Next.js",
+};
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return '...'
+  return "...";
 }
 ```
 
 ```jsx filename="app/layout.js" switcher
 export const metadata = {
-  title: 'Next.js',
-}
+  title: "Next.js",
+};
 
 export default function Layout({ children }) {
-  return '...'
+  return "...";
 }
 ```
 
@@ -521,59 +521,59 @@ You can use the [`usePathname`](/docs/app/api-reference/functions/use-pathname) 
 Since `usePathname` is a client hook, you need to extract the nav links into a Client Component, which can be imported into your layout:
 
 ```tsx filename="app/ui/nav-links.tsx" switcher
-'use client'
+"use client";
 
-import { usePathname } from 'next/navigation'
-import Link from 'next/link'
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 export function NavLinks() {
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   return (
     <nav>
-      <Link className={`link ${pathname === '/' ? 'active' : ''}`} href="/">
+      <Link className={`link ${pathname === "/" ? "active" : ""}`} href="/">
         Home
       </Link>
 
       <Link
-        className={`link ${pathname === '/about' ? 'active' : ''}`}
+        className={`link ${pathname === "/about" ? "active" : ""}`}
         href="/about"
       >
         About
       </Link>
     </nav>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/ui/nav-links.js" switcher
-'use client'
+"use client";
 
-import { usePathname } from 'next/navigation'
-import Link from 'next/link'
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 export function Links() {
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   return (
     <nav>
-      <Link className={`link ${pathname === '/' ? 'active' : ''}`} href="/">
+      <Link className={`link ${pathname === "/" ? "active" : ""}`} href="/">
         Home
       </Link>
 
       <Link
-        className={`link ${pathname === '/about' ? 'active' : ''}`}
+        className={`link ${pathname === "/about" ? "active" : ""}`}
         href="/about"
       >
         About
       </Link>
     </nav>
-  )
+  );
 }
 ```
 
 ```tsx filename="app/layout.tsx" switcher
-import { NavLinks } from '@/app/ui/nav-links'
+import { NavLinks } from "@/app/ui/nav-links";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -583,12 +583,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <main>{children}</main>
       </body>
     </html>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/layout.js" switcher
-import { NavLinks } from '@/app/ui/nav-links'
+import { NavLinks } from "@/app/ui/nav-links";
 
 export default function Layout({ children }) {
   return (
@@ -598,7 +598,7 @@ export default function Layout({ children }) {
         <main>{children}</main>
       </body>
     </html>
-  )
+  );
 }
 ```
 
@@ -611,10 +611,10 @@ export default async function DashboardLayout({
   children,
   params,
 }: {
-  children: React.ReactNode
-  params: Promise<{ team: string }>
+  children: React.ReactNode;
+  params: Promise<{ team: string }>;
 }) {
-  const { team } = await params
+  const { team } = await params;
 
   return (
     <section>
@@ -623,13 +623,13 @@ export default async function DashboardLayout({
       </header>
       <main>{children}</main>
     </section>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/dashboard/layout.js" switcher
 export default async function DashboardLayout({ children, params }) {
-  const { team } = await params
+  const { team } = await params;
 
   return (
     <section>
@@ -638,7 +638,7 @@ export default async function DashboardLayout({ children, params }) {
       </header>
       <main>{children}</main>
     </section>
-  )
+  );
 }
 ```
 
@@ -647,26 +647,26 @@ export default async function DashboardLayout({ children, params }) {
 To use `params` in a Client Component (which cannot be `async`), you can use React's [`use`](https://react.dev/reference/react/use) function to read the promise:
 
 ```tsx filename="app/page.tsx" switcher
-'use client'
+"use client";
 
-import { use } from 'react'
+import { use } from "react";
 
 export default function Page({
   params,
 }: {
-  params: Promise<{ slug: string }>
+  params: Promise<{ slug: string }>;
 }) {
-  const { slug } = use(params)
+  const { slug } = use(params);
 }
 ```
 
 ```js filename="app/page.js" switcher
-'use client'
+"use client";
 
-import { use } from 'react'
+import { use } from "react";
 
 export default function Page({ params }) {
-  const { slug } = use(params)
+  const { slug } = use(params);
 }
 ```
 

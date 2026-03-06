@@ -5,8 +5,8 @@ The Streaming Helper provides methods for streaming responses.
 ## Import
 
 ```ts
-import { Hono } from 'hono'
-import { stream, streamText, streamSSE } from 'hono/streaming'
+import { Hono } from "hono";
+import { stream, streamText, streamSSE } from "hono/streaming";
 ```
 
 ## `stream()`
@@ -14,18 +14,18 @@ import { stream, streamText, streamSSE } from 'hono/streaming'
 It returns a simple streaming response as `Response` object.
 
 ```ts
-app.get('/stream', (c) => {
+app.get("/stream", (c) => {
   return stream(c, async (stream) => {
     // Write a process to be executed when aborted.
     stream.onAbort(() => {
-      console.log('Aborted!')
-    })
+      console.log("Aborted!");
+    });
     // Write a Uint8Array.
-    await stream.write(new Uint8Array([0x48, 0x65, 0x6c, 0x6c, 0x6f]))
+    await stream.write(new Uint8Array([0x48, 0x65, 0x6c, 0x6c, 0x6f]));
     // Pipe a readable stream.
-    await stream.pipe(anotherReadableStream)
-  })
-})
+    await stream.pipe(anotherReadableStream);
+  });
+});
 ```
 
 ## `streamText()`
@@ -33,16 +33,16 @@ app.get('/stream', (c) => {
 It returns a streaming response with `Content-Type:text/plain`, `Transfer-Encoding:chunked`, and `X-Content-Type-Options:nosniff` headers.
 
 ```ts
-app.get('/streamText', (c) => {
+app.get("/streamText", (c) => {
   return streamText(c, async (stream) => {
     // Write a text with a new line ('\n').
-    await stream.writeln('Hello')
+    await stream.writeln("Hello");
     // Wait 1 second.
-    await stream.sleep(1000)
+    await stream.sleep(1000);
     // Write a text without a new line.
-    await stream.write(`Hono!`)
-  })
-})
+    await stream.write(`Hono!`);
+  });
+});
 ```
 
 ::: warning
@@ -50,12 +50,12 @@ app.get('/streamText', (c) => {
 If you are developing an application for Cloudflare Workers, a streaming may not work well on Wrangler. If so, add `Identity` for `Content-Encoding` header.
 
 ```ts
-app.get('/streamText', (c) => {
-  c.header('Content-Encoding', 'Identity')
+app.get("/streamText", (c) => {
+  c.header("Content-Encoding", "Identity");
   return streamText(c, async (stream) => {
     // ...
-  })
-})
+  });
+});
 ```
 
 :::
@@ -65,22 +65,22 @@ app.get('/streamText', (c) => {
 It allows you to stream Server-Sent Events (SSE) seamlessly.
 
 ```ts
-const app = new Hono()
-let id = 0
+const app = new Hono();
+let id = 0;
 
-app.get('/sse', async (c) => {
+app.get("/sse", async (c) => {
   return streamSSE(c, async (stream) => {
     while (true) {
-      const message = `It is ${new Date().toISOString()}`
+      const message = `It is ${new Date().toISOString()}`;
       await stream.writeSSE({
         data: message,
-        event: 'time-update',
+        event: "time-update",
         id: String(id++),
-      })
-      await stream.sleep(1000)
+      });
+      await stream.sleep(1000);
     }
-  })
-})
+  });
+});
 ```
 
 ## Error Handling
@@ -89,27 +89,25 @@ The third argument of the streaming helper is an error handler.
 This argument is optional, if you don't specify it, the error will be output as a console error.
 
 ```ts
-app.get('/stream', (c) => {
+app.get("/stream", (c) => {
   return stream(
     c,
     async (stream) => {
       // Write a process to be executed when aborted.
       stream.onAbort(() => {
-        console.log('Aborted!')
-      })
+        console.log("Aborted!");
+      });
       // Write a Uint8Array.
-      await stream.write(
-        new Uint8Array([0x48, 0x65, 0x6c, 0x6c, 0x6f])
-      )
+      await stream.write(new Uint8Array([0x48, 0x65, 0x6c, 0x6c, 0x6f]));
       // Pipe a readable stream.
-      await stream.pipe(anotherReadableStream)
+      await stream.pipe(anotherReadableStream);
     },
     (err, stream) => {
-      stream.writeln('An error occurred!')
-      console.error(err)
-    }
-  )
-})
+      stream.writeln("An error occurred!");
+      console.error(err);
+    },
+  );
+});
 ```
 
 The stream will be automatically closed after the callbacks are executed.

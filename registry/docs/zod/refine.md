@@ -6,10 +6,10 @@ In Zod 3, passing a [type predicate](https://www.typescriptlang.org/docs/handboo
 
 ```ts
 const mySchema = z.unknown().refine((val): val is string => {
-  return typeof val === "string"
+  return typeof val === "string";
 });
 
-type MySchema = z.infer<typeof mySchema>; 
+type MySchema = z.infer<typeof mySchema>;
 // Zod 3: `string`
 // Zod 4: still `unknown`
 ```
@@ -31,7 +31,7 @@ The following horrifying overload has been removed.
 ```ts
 const longString = z.string().refine(
   (val) => val.length > 10,
-  (val) => ({ message: `${val} is not more than 10 characters` })
+  (val) => ({ message: `${val} is not more than 10 characters` }),
 );
 ```
 
@@ -77,7 +77,7 @@ Symbols aren't considered literal values, nor can they be simply compared with `
 Previously all Zod classes defined a static `.create()` method. These are now implemented as standalone factory functions.
 
 ```ts
-z.ZodString.create(); // ❌ 
+z.ZodString.create(); // ❌
 ````
 
 ## `z.record()`
@@ -100,7 +100,7 @@ z.record(z.string(), z.string()); // ✅
 Records have gotten a lot smarter. In Zod 3, passing an enum into `z.record()` as a key schema would result in a partial type
 
 ```ts
-const myRecord = z.record(z.enum(["a", "b", "c"]), z.number()); 
+const myRecord = z.record(z.enum(["a", "b", "c"]), z.number());
 // { a?: number; b?: number; c?: number; }
 ```
 

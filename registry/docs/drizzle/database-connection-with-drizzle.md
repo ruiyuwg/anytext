@@ -3,8 +3,8 @@
 Drizzle ORM runs SQL queries on your database via **database drivers**.
 
 ```ts
-import { drizzle } from "drizzle-orm/node-postgres"
-import { users } from "./schema"
+import { drizzle } from "drizzle-orm/node-postgres";
+import { users } from "./schema";
 
 const db = drizzle(process.env.DATABASE_URL);
 const usersCount = await db.$count(users);
@@ -13,7 +13,7 @@ const usersCount = await db.$count(users);
 ```
                         ┌──────────────────────┐
                         │   db.$count(users)   │ <--- drizzle query
-                        └──────────────────────┘     
+                        └──────────────────────┘
                             │               ʌ
 select count(*) from users -│               │
                             │               │- [{ count: 0 }]
@@ -26,7 +26,7 @@ select count(*) from users -│               │
                             │               │- 01110011 01110101 01110000
                             v               │
                          ┌────────────────────┐
-                         │      Database      │ 
+                         │      Database      │
                          └────────────────────┘
 ```
 
@@ -36,13 +36,13 @@ import { pgTable, integer, text } from "drizzle-orm";
 export const users = pgTable("users", {
   id: integer("id").generateAlwaysAsIdentity(),
   name: text("name"),
-})
+});
 ```
 
 Under the hood Drizzle will create a **node-postgres** driver instance which you can access via `db.$client` if necessary
 
 ```ts
-import { drizzle } from "drizzle-orm/node-postgres"
+import { drizzle } from "drizzle-orm/node-postgres";
 
 const db = drizzle(process.env.DATABASE_URL);
 const pool = db.$client;
@@ -94,7 +94,7 @@ const db = drizzle({ connection: env.DB });
 And yes, we do support runtime specific drivers like [Bun SQLite](/docs/connect-bun-sqlite) or [Expo SQLite](/docs/connect-expo-sqlite):
 
 ```ts
-import { drizzle } from "drizzle-orm/bun-sqlite"
+import { drizzle } from "drizzle-orm/bun-sqlite";
 
 const db = drizzle(); // <--- will create an in-memory db
 const db = drizzle("./sqlite.db");
@@ -171,7 +171,7 @@ links={\[
 ]}
 />
 
-{/\* TODO: @AndriiSherman \["AWS Data API", "/docs/get-started/aws-data-api"],  \*/}
+{/\* TODO: @AndriiSherman \["AWS Data API", "/docs/get-started/aws-data-api"], \*/}
 
 Source: https://orm.drizzle.team/docs/connect-pglite
 

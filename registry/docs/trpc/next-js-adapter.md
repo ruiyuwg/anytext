@@ -12,12 +12,12 @@ tRPC's support for Next.js is far more expansive than just an adapter. This page
 
 
   Next.js Minimal Starter
-  
-    
+
+
       CodeSandbox
       Source
-    
-  
+
+
 ```
 
 ## Next.js example
@@ -25,9 +25,9 @@ tRPC's support for Next.js is far more expansive than just an adapter. This page
 Serving your tRPC router in a Next.js project is straight-forward. Just create an API handler in `pages/api/trpc/[trpc].ts` as shown below:
 
 ```ts title='pages/api/trpc/[trpc].ts'
-import { createNextApiHandler } from '@trpc/server/adapters/next';
-import { createContext } from '../../../server/trpc/context';
-import { appRouter } from '../../../server/trpc/router/_app';
+import { createNextApiHandler } from "@trpc/server/adapters/next";
+import { createContext } from "../../../server/trpc/context";
+import { appRouter } from "../../../server/trpc/router/_app";
 
 // @link https://nextjs.org/docs/api-routes/introduction
 export default createNextApiHandler({
@@ -43,9 +43,9 @@ While you can usually just "set and forget" the API Handler as shown above, some
 The API handler created by `createNextApiHandler` and equivalents in other frameworks is just a function that takes `req` and `res` objects. This means you can also modify those objects before passing them to the handler, for example to [enable CORS](/docs/client/cors).
 
 ```ts title='pages/api/trpc/[trpc].ts'
-import { createNextApiHandler } from '@trpc/server/adapters/next';
-import { createContext } from '../../../server/trpc/context';
-import { appRouter } from '../../../server/trpc/router/_app';
+import { createNextApiHandler } from "@trpc/server/adapters/next";
+import { createContext } from "../../../server/trpc/context";
+import { appRouter } from "../../../server/trpc/router/_app";
 
 // create the API handler, but don't return it yet
 const nextApiHandler = createNextApiHandler({
@@ -59,10 +59,10 @@ export default async function handler(
   res: NextApiResponse,
 ) {
   // We can use the response object to enable CORS
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Request-Method', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
-  res.setHeader('Access-Control-Allow-Headers', '*');
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Request-Method", "*");
+  res.setHeader("Access-Control-Allow-Methods", "OPTIONS, GET");
+  res.setHeader("Access-Control-Allow-Headers", "*");
 
   // If you need to make authenticated CORS calls then
   // remove what is above and uncomment the below code
@@ -75,7 +75,7 @@ export default async function handler(
   // res.setHeader('Referrer-Policy', 'no-referrer');
   // res.setHeader('Access-Control-Allow-Credentials', 'true');
 
-  if (req.method === 'OPTIONS') {
+  if (req.method === "OPTIONS") {
     res.writeHead(200);
     return res.end();
   }

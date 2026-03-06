@@ -13,28 +13,28 @@ The Google provider supports two types of image models:
 [Imagen](https://ai.google.dev/gemini-api/docs/imagen) models are dedicated image generation models.
 
 ```ts
-import { google } from '@ai-sdk/google';
-import { generateImage } from 'ai';
+import { google } from "@ai-sdk/google";
+import { generateImage } from "ai";
 
 const { image } = await generateImage({
-  model: google.image('imagen-4.0-generate-001'),
-  prompt: 'A futuristic cityscape at sunset',
-  aspectRatio: '16:9',
+  model: google.image("imagen-4.0-generate-001"),
+  prompt: "A futuristic cityscape at sunset",
+  aspectRatio: "16:9",
 });
 ```
 
 Further configuration can be done using Google provider options. You can validate the provider options using the `GoogleImageModelOptions` type.
 
 ```ts
-import { google } from '@ai-sdk/google';
-import { GoogleImageModelOptions } from '@ai-sdk/google';
-import { generateImage } from 'ai';
+import { google } from "@ai-sdk/google";
+import { GoogleImageModelOptions } from "@ai-sdk/google";
+import { generateImage } from "ai";
 
 const { image } = await generateImage({
-  model: google.image('imagen-4.0-generate-001'),
+  model: google.image("imagen-4.0-generate-001"),
   providerOptions: {
     google: {
-      personGeneration: 'dont_allow',
+      personGeneration: "dont_allow",
     } satisfies GoogleImageModelOptions,
   },
   // ...
@@ -62,29 +62,29 @@ The following provider options are available for Imagen models:
 [Gemini image models](https://ai.google.dev/gemini-api/docs/image-generation) (e.g. `gemini-2.5-flash-image`) are technically multimodal output language models, but they can be used with the `generateImage()` function for a simpler image generation experience. Internally, the provider calls the language model API with `responseModalities: ['IMAGE']`.
 
 ```ts
-import { google } from '@ai-sdk/google';
-import { generateImage } from 'ai';
+import { google } from "@ai-sdk/google";
+import { generateImage } from "ai";
 
 const { image } = await generateImage({
-  model: google.image('gemini-2.5-flash-image'),
-  prompt: 'A photorealistic image of a cat wearing a wizard hat',
-  aspectRatio: '1:1',
+  model: google.image("gemini-2.5-flash-image"),
+  prompt: "A photorealistic image of a cat wearing a wizard hat",
+  aspectRatio: "1:1",
 });
 ```
 
 Gemini image models also support image editing by providing input images:
 
 ```ts
-import { google } from '@ai-sdk/google';
-import { generateImage } from 'ai';
-import fs from 'node:fs';
+import { google } from "@ai-sdk/google";
+import { generateImage } from "ai";
+import fs from "node:fs";
 
-const sourceImage = fs.readFileSync('./cat.png');
+const sourceImage = fs.readFileSync("./cat.png");
 
 const { image } = await generateImage({
-  model: google.image('gemini-2.5-flash-image'),
+  model: google.image("gemini-2.5-flash-image"),
   prompt: {
-    text: 'Add a small wizard hat to this cat',
+    text: "Add a small wizard hat to this cat",
     images: [sourceImage],
   },
 });
@@ -93,14 +93,14 @@ const { image } = await generateImage({
 You can also use URLs for input images:
 
 ```ts
-import { google } from '@ai-sdk/google';
-import { generateImage } from 'ai';
+import { google } from "@ai-sdk/google";
+import { generateImage } from "ai";
 
 const { image } = await generateImage({
-  model: google.image('gemini-2.5-flash-image'),
+  model: google.image("gemini-2.5-flash-image"),
   prompt: {
-    text: 'Add a small wizard hat to this cat',
-    images: ['https://example.com/cat.png'],
+    text: "Add a small wizard hat to this cat",
+    images: ["https://example.com/cat.png"],
   },
 });
 ```
@@ -115,11 +115,11 @@ details.
 
 #### Gemini Image Model Capabilities
 
-| Model                            | Image Generation    | Image Editing       | Aspect Ratios                                       |
-| -------------------------------- | ------------------- | ------------------- | --------------------------------------------------- |
-| `gemini-2.5-flash-image`         |  |  | 1:1, 2:3, 3:2, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9 |
-| `gemini-3-pro-image-preview`     |  |  | 1:1, 2:3, 3:2, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9 |
-| `gemini-3.1-flash-image-preview` |  |  | 1:1, 2:3, 3:2, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9 |
+| Model                            | Image Generation | Image Editing | Aspect Ratios                                       |
+| -------------------------------- | ---------------- | ------------- | --------------------------------------------------- |
+| `gemini-2.5-flash-image`         |                  |               | 1:1, 2:3, 3:2, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9 |
+| `gemini-3-pro-image-preview`     |                  |               | 1:1, 2:3, 3:2, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9 |
+| `gemini-3.1-flash-image-preview` |                  |               | 1:1, 2:3, 3:2, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9 |
 
 `gemini-3-pro-image-preview` supports additional features including up to 14
 reference images for editing (6 objects, 5 humans), resolution options (1K,

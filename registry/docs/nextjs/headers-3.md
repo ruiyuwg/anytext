@@ -9,21 +9,21 @@ module.exports = {
   async headers() {
     return [
       {
-        source: '/about',
+        source: "/about",
         headers: [
           {
-            key: 'x-custom-header',
-            value: 'my custom header value',
+            key: "x-custom-header",
+            value: "my custom header value",
           },
           {
-            key: 'x-another-custom-header',
-            value: 'my other custom header value',
+            key: "x-another-custom-header",
+            value: "my other custom header value",
           },
         ],
       },
-    ]
+    ];
   },
-}
+};
 ```
 
 `headers` is an async function that expects an array to be returned holding objects with `source` and `headers` properties:
@@ -46,26 +46,26 @@ module.exports = {
   async headers() {
     return [
       {
-        source: '/:path*',
+        source: "/:path*",
         headers: [
           {
-            key: 'x-hello',
-            value: 'there',
+            key: "x-hello",
+            value: "there",
           },
         ],
       },
       {
-        source: '/hello',
+        source: "/hello",
         headers: [
           {
-            key: 'x-hello',
-            value: 'world',
+            key: "x-hello",
+            value: "world",
           },
         ],
       },
-    ]
+    ];
   },
-}
+};
 ```
 
 ## Path Matching
@@ -77,21 +77,21 @@ module.exports = {
   async headers() {
     return [
       {
-        source: '/blog/:slug',
+        source: "/blog/:slug",
         headers: [
           {
-            key: 'x-slug',
-            value: ':slug', // Matched parameters can be used in the value
+            key: "x-slug",
+            value: ":slug", // Matched parameters can be used in the value
           },
           {
-            key: 'x-slug-:slug', // Matched parameters can be used in the key
-            value: 'my other custom header value',
+            key: "x-slug-:slug", // Matched parameters can be used in the key
+            value: "my other custom header value",
           },
         ],
       },
-    ]
+    ];
   },
-}
+};
 ```
 
 The pattern `/blog/:slug` matches `/blog/first-post` and `/blog/post-1` but not a nested path like `/blog/a/b`. Patterns are anchored to the start, `/blog/:slug` will not match `/archive/blog/first-post`.
@@ -109,21 +109,21 @@ module.exports = {
   async headers() {
     return [
       {
-        source: '/blog/:slug*',
+        source: "/blog/:slug*",
         headers: [
           {
-            key: 'x-slug',
-            value: ':slug*', // Matched parameters can be used in the value
+            key: "x-slug",
+            value: ":slug*", // Matched parameters can be used in the value
           },
           {
-            key: 'x-slug-:slug*', // Matched parameters can be used in the key
-            value: 'my other custom header value',
+            key: "x-slug-:slug*", // Matched parameters can be used in the key
+            value: "my other custom header value",
           },
         ],
       },
-    ]
+    ];
   },
-}
+};
 ```
 
 ### Regex Path Matching
@@ -135,17 +135,17 @@ module.exports = {
   async headers() {
     return [
       {
-        source: '/blog/:post(\\d{1,})',
+        source: "/blog/:post(\\d{1,})",
         headers: [
           {
-            key: 'x-post',
-            value: ':post',
+            key: "x-post",
+            value: ":post",
           },
         ],
       },
-    ]
+    ];
   },
-}
+};
 ```
 
 The following characters `(`, `)`, `{`, `}`, `:`, `*`, `+`, `?` are used for regex path matching, so when used in the `source` as non-special values they must be escaped by adding `\\` before them:
@@ -156,17 +156,17 @@ module.exports = {
     return [
       {
         // this will match `/english(default)/something` being requested
-        source: '/english\\(default\\)/:slug',
+        source: "/english\\(default\\)/:slug",
         headers: [
           {
-            key: 'x-header',
-            value: 'value',
+            key: "x-header",
+            value: "value",
           },
         ],
       },
-    ]
+    ];
   },
-}
+};
 ```
 
 ## Header, Cookie, and Query Matching
@@ -186,101 +186,101 @@ module.exports = {
       // if the header `x-add-header` is present,
       // the `x-another-header` header will be applied
       {
-        source: '/:path*',
+        source: "/:path*",
         has: [
           {
-            type: 'header',
-            key: 'x-add-header',
+            type: "header",
+            key: "x-add-header",
           },
         ],
         headers: [
           {
-            key: 'x-another-header',
-            value: 'hello',
+            key: "x-another-header",
+            value: "hello",
           },
         ],
       },
       // if the header `x-no-header` is not present,
       // the `x-another-header` header will be applied
       {
-        source: '/:path*',
+        source: "/:path*",
         missing: [
           {
-            type: 'header',
-            key: 'x-no-header',
+            type: "header",
+            key: "x-no-header",
           },
         ],
         headers: [
           {
-            key: 'x-another-header',
-            value: 'hello',
+            key: "x-another-header",
+            value: "hello",
           },
         ],
       },
       // if the source, query, and cookie are matched,
       // the `x-authorized` header will be applied
       {
-        source: '/specific/:path*',
+        source: "/specific/:path*",
         has: [
           {
-            type: 'query',
-            key: 'page',
+            type: "query",
+            key: "page",
             // the page value will not be available in the
             // header key/values since value is provided and
             // doesn't use a named capture group e.g. (?<page>home)
-            value: 'home',
+            value: "home",
           },
           {
-            type: 'cookie',
-            key: 'authorized',
-            value: 'true',
+            type: "cookie",
+            key: "authorized",
+            value: "true",
           },
         ],
         headers: [
           {
-            key: 'x-authorized',
-            value: ':authorized',
+            key: "x-authorized",
+            value: ":authorized",
           },
         ],
       },
       // if the header `x-authorized` is present and
       // contains a matching value, the `x-another-header` will be applied
       {
-        source: '/:path*',
+        source: "/:path*",
         has: [
           {
-            type: 'header',
-            key: 'x-authorized',
-            value: '(?<authorized>yes|true)',
+            type: "header",
+            key: "x-authorized",
+            value: "(?<authorized>yes|true)",
           },
         ],
         headers: [
           {
-            key: 'x-another-header',
-            value: ':authorized',
+            key: "x-another-header",
+            value: ":authorized",
           },
         ],
       },
       // if the host is `example.com`,
       // this header will be applied
       {
-        source: '/:path*',
+        source: "/:path*",
         has: [
           {
-            type: 'host',
-            value: 'example.com',
+            type: "host",
+            value: "example.com",
           },
         ],
         headers: [
           {
-            key: 'x-another-header',
-            value: ':authorized',
+            key: "x-another-header",
+            value: ":authorized",
           },
         ],
       },
-    ]
+    ];
   },
-}
+};
 ```
 
 ## Headers with basePath support
@@ -289,32 +289,32 @@ When leveraging [`basePath` support](/docs/app/api-reference/config/next-config-
 
 ```js filename="next.config.js"
 module.exports = {
-  basePath: '/docs',
+  basePath: "/docs",
 
   async headers() {
     return [
       {
-        source: '/with-basePath', // becomes /docs/with-basePath
+        source: "/with-basePath", // becomes /docs/with-basePath
         headers: [
           {
-            key: 'x-hello',
-            value: 'world',
+            key: "x-hello",
+            value: "world",
           },
         ],
       },
       {
-        source: '/without-basePath', // is not modified since basePath: false is set
+        source: "/without-basePath", // is not modified since basePath: false is set
         headers: [
           {
-            key: 'x-hello',
-            value: 'world',
+            key: "x-hello",
+            value: "world",
           },
         ],
         basePath: false,
       },
-    ]
+    ];
   },
-}
+};
 ```
 
 ## Headers with i18n support
@@ -324,57 +324,57 @@ When leveraging [`i18n` support](/docs/pages/guides/internationalization) with h
 ```js filename="next.config.js"
 module.exports = {
   i18n: {
-    locales: ['en', 'fr', 'de'],
-    defaultLocale: 'en',
+    locales: ["en", "fr", "de"],
+    defaultLocale: "en",
   },
 
   async headers() {
     return [
       {
-        source: '/with-locale', // automatically handles all locales
+        source: "/with-locale", // automatically handles all locales
         headers: [
           {
-            key: 'x-hello',
-            value: 'world',
+            key: "x-hello",
+            value: "world",
           },
         ],
       },
       {
         // does not handle locales automatically since locale: false is set
-        source: '/nl/with-locale-manual',
+        source: "/nl/with-locale-manual",
         locale: false,
         headers: [
           {
-            key: 'x-hello',
-            value: 'world',
+            key: "x-hello",
+            value: "world",
           },
         ],
       },
       {
         // this matches '/' since `en` is the defaultLocale
-        source: '/en',
+        source: "/en",
         locale: false,
         headers: [
           {
-            key: 'x-hello',
-            value: 'world',
+            key: "x-hello",
+            value: "world",
           },
         ],
       },
       {
         // this gets converted to /(en|fr|de)/(.*) so will not match the top-level
         // `/` or `/fr` routes like /:path* would
-        source: '/(.*)',
+        source: "/(.*)",
         headers: [
           {
-            key: 'x-hello',
-            value: 'world',
+            key: "x-hello",
+            value: "world",
           },
         ],
       },
-    ]
+    ];
   },
-}
+};
 ```
 
 ## Cache-Control
@@ -388,32 +388,32 @@ If you need to revalidate the cache of a page that has been [statically generate
 To cache the response from an [API Route](/docs/pages/building-your-application/routing/api-routes), you can use `res.setHeader`:
 
 ```ts filename="pages/api/hello.ts" switcher
-import type { NextApiRequest, NextApiResponse } from 'next'
+import type { NextApiRequest, NextApiResponse } from "next";
 
 type ResponseData = {
-  message: string
-}
+  message: string;
+};
 
 export default function handler(
   req: NextApiRequest,
-  res: NextApiResponse<ResponseData>
+  res: NextApiResponse<ResponseData>,
 ) {
-  res.setHeader('Cache-Control', 's-maxage=86400')
-  res.status(200).json({ message: 'Hello from Next.js!' })
+  res.setHeader("Cache-Control", "s-maxage=86400");
+  res.status(200).json({ message: "Hello from Next.js!" });
 }
 ```
 
 ```js filename="pages/api/hello.js" switcher
 export default function handler(req, res) {
-  res.setHeader('Cache-Control', 's-maxage=86400')
-  res.status(200).json({ message: 'Hello from Next.js!' })
+  res.setHeader("Cache-Control", "s-maxage=86400");
+  res.status(200).json({ message: "Hello from Next.js!" });
 }
 ```
 
 You can also use caching headers (`Cache-Control`) inside `getServerSideProps` to cache dynamic responses. For example, using [`stale-while-revalidate`](https://web.dev/stale-while-revalidate/).
 
 ```ts filename="pages/index.tsx" switcher
-import { GetStaticProps, GetStaticPaths, GetServerSideProps } from 'next'
+import { GetStaticProps, GetStaticPaths, GetServerSideProps } from "next";
 
 // This value is considered fresh for ten seconds (s-maxage=10).
 // If a request is repeated within the next 10 seconds, the previously
@@ -424,14 +424,14 @@ import { GetStaticProps, GetStaticPaths, GetServerSideProps } from 'next'
 // with a fresh value. If you refresh the page, you will see the new value.
 export const getServerSideProps = (async (context) => {
   context.res.setHeader(
-    'Cache-Control',
-    'public, s-maxage=10, stale-while-revalidate=59'
-  )
+    "Cache-Control",
+    "public, s-maxage=10, stale-while-revalidate=59",
+  );
 
   return {
     props: {},
-  }
-}) satisfies GetServerSideProps
+  };
+}) satisfies GetServerSideProps;
 ```
 
 ```js filename="pages/index.js" switcher
@@ -444,13 +444,13 @@ export const getServerSideProps = (async (context) => {
 // with a fresh value. If you refresh the page, you will see the new value.
 export async function getServerSideProps({ req, res }) {
   res.setHeader(
-    'Cache-Control',
-    'public, s-maxage=10, stale-while-revalidate=59'
-  )
+    "Cache-Control",
+    "public, s-maxage=10, stale-while-revalidate=59",
+  );
 
   return {
     props: {},
-  }
+  };
 }
 ```
 
@@ -579,7 +579,7 @@ module.exports = {
   httpAgentOptions: {
     keepAlive: false,
   },
-}
+};
 ```
 
 # images

@@ -5,23 +5,23 @@ The `useReportWebVitals` hook allows you to report [Core Web Vitals](https://web
 New functions passed to `useReportWebVitals` are called with the available metrics up to that point. To prevent reporting duplicated data, ensure that the callback function reference does not change (as shown in the code examples below).
 
 ```jsx filename="app/_components/web-vitals.js"
-'use client'
+"use client";
 
-import { useReportWebVitals } from 'next/web-vitals'
+import { useReportWebVitals } from "next/web-vitals";
 
 const logWebVitals = (metric) => {
-  console.log(metric)
-}
+  console.log(metric);
+};
 
 export function WebVitals() {
-  useReportWebVitals(logWebVitals)
+  useReportWebVitals(logWebVitals);
 
-  return null
+  return null;
 }
 ```
 
 ```jsx filename="app/layout.js"
-import { WebVitals } from './_components/web-vitals'
+import { WebVitals } from "./_components/web-vitals";
 
 export default function Layout({ children }) {
   return (
@@ -31,7 +31,7 @@ export default function Layout({ children }) {
         {children}
       </body>
     </html>
-  )
+  );
 }
 ```
 
@@ -64,48 +64,48 @@ experience of a web page. The following web vitals are all included:
 You can handle all the results of these metrics using the `name` property.
 
 ```tsx filename="app/components/web-vitals.tsx" switcher
-'use client'
+"use client";
 
-import { useReportWebVitals } from 'next/web-vitals'
+import { useReportWebVitals } from "next/web-vitals";
 
-type ReportWebVitalsCallback = Parameters<typeof useReportWebVitals>[0]
+type ReportWebVitalsCallback = Parameters<typeof useReportWebVitals>[0];
 
 const handleWebVitals: ReportWebVitalsCallback = (metric) => {
   switch (metric.name) {
-    case 'FCP': {
+    case "FCP": {
       // handle FCP results
     }
-    case 'LCP': {
+    case "LCP": {
       // handle LCP results
     }
     // ...
   }
-}
+};
 
 export function WebVitals() {
-  useReportWebVitals(handleWebVitals)
+  useReportWebVitals(handleWebVitals);
 }
 ```
 
 ```jsx filename="app/components/web-vitals.js" switcher
-'use client'
+"use client";
 
-import { useReportWebVitals } from 'next/web-vitals'
+import { useReportWebVitals } from "next/web-vitals";
 
 const handleWebVitals = (metric) => {
   switch (metric.name) {
-    case 'FCP': {
+    case "FCP": {
       // handle FCP results
     }
-    case 'LCP': {
+    case "LCP": {
       // handle LCP results
     }
     // ...
   }
-}
+};
 
 export function WebVitals() {
-  useReportWebVitals(handleWebVitals)
+  useReportWebVitals(handleWebVitals);
 }
 ```
 
@@ -116,18 +116,18 @@ real user performance on your site. For example:
 
 ```js
 function postWebVitals(metric) {
-  const body = JSON.stringify(metric)
-  const url = 'https://example.com/analytics'
+  const body = JSON.stringify(metric);
+  const url = "https://example.com/analytics";
 
   // Use `navigator.sendBeacon()` if available, falling back to `fetch()`.
   if (navigator.sendBeacon) {
-    navigator.sendBeacon(url, body)
+    navigator.sendBeacon(url, body);
   } else {
-    fetch(url, { body, method: 'POST', keepalive: true })
+    fetch(url, { body, method: "POST", keepalive: true });
   }
 }
 
-useReportWebVitals(postWebVitals)
+useReportWebVitals(postWebVitals);
 ```
 
 > **Good to know**: If you use [Google Analytics](https://analytics.google.com/analytics/web/), using the

@@ -9,13 +9,13 @@ In this guide, you will learn how to use the `useCompletion` hook in your applic
 ## Example
 
 ```tsx filename='app/page.tsx'
-'use client';
+"use client";
 
-import { useCompletion } from '@ai-sdk/react';
+import { useCompletion } from "@ai-sdk/react";
 
 export default function Page() {
   const { completion, input, handleInputChange, handleSubmit } = useCompletion({
-    api: '/api/completion',
+    api: "/api/completion",
   });
 
   return (
@@ -34,7 +34,7 @@ export default function Page() {
 ```
 
 ```ts filename='app/api/completion/route.ts'
-import { streamText } from 'ai';
+import { streamText } from "ai";
 __PROVIDER_IMPORT__;
 
 // Allow streaming responses up to 30 seconds
@@ -104,7 +104,7 @@ const { input, setInput } = useCompletion();
 
 return (
   <>
-    <MyCustomInput value={input} onChange={value => setInput(value)} />
+    <MyCustomInput value={input} onChange={(value) => setInput(value)} />
   </>
 );
 ```
@@ -160,14 +160,14 @@ By default, the `useCompletion` hook sends a HTTP POST request to the `/api/comp
 
 ```tsx
 const { messages, input, handleInputChange, handleSubmit } = useCompletion({
-  api: '/api/custom-completion',
+  api: "/api/custom-completion",
   headers: {
-    Authorization: 'your_token',
+    Authorization: "your_token",
   },
   body: {
-    user_id: '123',
+    user_id: "123",
   },
-  credentials: 'same-origin',
+  credentials: "same-origin",
 });
 ```
 

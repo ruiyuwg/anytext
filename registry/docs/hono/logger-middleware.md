@@ -5,17 +5,17 @@ It's a simple logger.
 ## Import
 
 ```ts
-import { Hono } from 'hono'
-import { logger } from 'hono/logger'
+import { Hono } from "hono";
+import { logger } from "hono/logger";
 ```
 
 ## Usage
 
 ```ts
-const app = new Hono()
+const app = new Hono();
 
-app.use(logger())
-app.get('/', (c) => c.text('Hello Hono!'))
+app.use(logger());
+app.get("/", (c) => c.text("Hello Hono!"));
 ```
 
 ## Logging Details
@@ -48,24 +48,24 @@ Setting up a custom `PrintFunc` function to the Logger Middleware:
 
 ```ts
 export const customLogger = (message: string, ...rest: string[]) => {
-  console.log(message, ...rest)
-}
+  console.log(message, ...rest);
+};
 
-app.use(logger(customLogger))
+app.use(logger(customLogger));
 ```
 
 Setting up the custom logger in a route:
 
 ```ts
-app.post('/blog', (c) => {
+app.post("/blog", (c) => {
   // Routing logic
 
-  customLogger('Blog saved:', `Path: ${blog.url},`, `ID: ${blog.id}`)
+  customLogger("Blog saved:", `Path: ${blog.url},`, `ID: ${blog.id}`);
   // Output
   // <-- POST /blog
   // Blog saved: Path: /blog/example, ID: 1
   // --> POST /blog 201 93ms
 
   // Return Context
-})
+});
 ```

@@ -11,10 +11,10 @@ yarn add ws
 ```
 
 ```ts title='server/wsServer.ts'
-import { applyWSSHandler } from '@trpc/server/adapters/ws';
-import ws from 'ws';
-import { appRouter } from './routers/app';
-import { createContext } from './trpc';
+import { applyWSSHandler } from "@trpc/server/adapters/ws";
+import ws from "ws";
+import { appRouter } from "./routers/app";
+import { createContext } from "./trpc";
 
 const wss = new ws.Server({
   port: 3001,
@@ -33,16 +33,16 @@ const handler = applyWSSHandler({
   },
 });
 
-wss.on('connection', (ws) => {
+wss.on("connection", (ws) => {
   console.log(`➕➕ Connection (${wss.clients.size})`);
-  ws.once('close', () => {
+  ws.once("close", () => {
     console.log(`➖➖ Connection (${wss.clients.size})`);
   });
 });
-console.log('✅ WebSocket Server listening on ws://localhost:3001');
+console.log("✅ WebSocket Server listening on ws://localhost:3001");
 
-process.on('SIGTERM', () => {
-  console.log('SIGTERM');
+process.on("SIGTERM", () => {
+  console.log("SIGTERM");
   handler.broadcastReconnectNotification();
   wss.close();
 });
@@ -53,8 +53,8 @@ process.on('SIGTERM', () => {
 You can use [Links](../client/links/overview.md) to route queries and/or mutations to HTTP transport and subscriptions over WebSockets.
 
 ```tsx title='client.ts'
-import { createTRPCClient, createWSClient, wsLink } from '@trpc/client';
-import type { AppRouter } from '../path/to/server/trpc';
+import { createTRPCClient, createWSClient, wsLink } from "@trpc/client";
+import type { AppRouter } from "../path/to/server/trpc";
 
 // create persistent WebSocket connection
 const wsClient = createWSClient({
@@ -78,7 +78,7 @@ If you're doing a web application, you can ignore this section as the cookies ar
 In order to authenticate with WebSockets, you can define `connectionParams` to `createWSClient`. This will be sent as the first message when the client establishes a WebSocket connection.
 
 ```ts twoslash title="server/context.ts"
-import type { CreateWSSContextFnOptions } from '@trpc/server/adapters/ws';
+import type { CreateWSSContextFnOptions } from "@trpc/server/adapters/ws";
 
 export const createContext = async (opts: CreateWSSContextFnOptions) => {
   const token = opts.info.connectionParams?.token;
@@ -93,15 +93,15 @@ export type Context = Awaited<ReturnType<typeof createContext>>;
 ```
 
 ```ts title="client/trpc.ts"
-import { createTRPCClient, createWSClient, wsLink } from '@trpc/client';
-import type { AppRouter } from '~/server/routers/_app';
+import { createTRPCClient, createWSClient, wsLink } from "@trpc/client";
+import type { AppRouter } from "~/server/routers/_app";
 
 const wsClient = createWSClient({
   url: `ws://localhost:3000`,
 
   connectionParams: async () => {
     return {
-      token: 'supersecret',
+      token: "supersecret",
     };
   },
 });
@@ -119,10 +119,10 @@ You can send an initial `lastEventId` when initializing the subscription and it 
 If you're fetching data based on the `lastEventId`, and capturing all events is critical, you may want to use `ReadableStream`'s or a similar pattern as an intermediary as is done in [our full-stack SSE example](https://github.com/trpc/examples-next-sse-chat) to prevent newly emitted events being ignored while yield'ing the original batch based on `lastEventId`.
 
 ```ts
-import EventEmitter, { on } from 'events';
-import { tracked } from '@trpc/server';
-import { z } from 'zod';
-import { publicProcedure, router } from '../trpc';
+import EventEmitter, { on } from "events";
+import { tracked } from "@trpc/server";
+import { z } from "zod";
+import { publicProcedure, router } from "../trpc";
 
 const ee = new EventEmitter();
 
@@ -143,7 +143,7 @@ export const subRouter = router({
         // [...] get the posts since the last event id and yield them
       }
       // listen for new events
-      for await (const [data] of on(ee, 'add', {
+      for await (const [data] of on(ee, "add", {
         // Passing the AbortSignal from the request automatically cancels the event emitter when the subscription is aborted
         signal: opts.signal,
       })) {
@@ -180,7 +180,7 @@ export const subRouter = router({
 
 #### Response
 
-*... below, or an error.*
+_... below, or an error._
 
 ```ts
 {
@@ -221,7 +221,7 @@ export const subRouter = router({
 
 #### Subscription response shape
 
-*... below, or an error.*
+_... below, or an error._
 
 ```ts
 {
@@ -249,7 +249,7 @@ If the connection is initialized with `?connectionParams=1`, the first message h
 ```ts
 {
   data: Record<string, string> | null;
-  method: 'connectionParams';
+  method: "connectionParams";
 }
 ```
 

@@ -17,7 +17,7 @@ You can read more about this template [here](https://docs.expo.dev/more/create-e
 After installing the template and adding the `db` folder, you'll find the following content: In the `db/schema.ts` file with drizzle table definitions. The `drizzle` folder contains SQL migration files and snapshots
 
 ```plaintext
-📦 
+📦
  ├ 📂 assets
  ├ 📂 drizzle
  ├ 📂 db
@@ -44,11 +44,11 @@ After installing the template and adding the `db` folder, you'll find the follow
 Create a `App.tsx` file in the root directory and initialize the connection:
 
 ```ts
-import { open } from '@op-engineering/op-sqlite';
-import { drizzle } from 'drizzle-orm/op-sqlite';
+import { open } from "@op-engineering/op-sqlite";
+import { drizzle } from "drizzle-orm/op-sqlite";
 
 const opsqliteDb = open({
-  name: 'db',
+  name: "db",
 });
 
 const db = drizzle(opsqliteDb);
@@ -76,13 +76,13 @@ export const usersTable = sqliteTable("users_table", {
 Create a `drizzle.config.ts` file in the root of your project and add the following content:
 
 ```ts
-import { defineConfig } from 'drizzle-kit';
+import { defineConfig } from "drizzle-kit";
 
 export default defineConfig({
-  dialect: 'sqlite',
-  driver: 'expo',
-  schema: './db/schema.ts',
-  out: './drizzle',
+  dialect: "sqlite",
+  driver: "expo",
+  schema: "./db/schema.ts",
+  out: "./drizzle",
 });
 ```
 
@@ -91,21 +91,21 @@ export default defineConfig({
 Create a file `metro.config.js` in root folder and add this code inside:
 
 ```js copy filename="metro.config.js"
-const { getDefaultConfig } = require('expo/metro-config');
+const { getDefaultConfig } = require("expo/metro-config");
 /** @type {import('expo/metro-config').MetroConfig} */
 const config = getDefaultConfig(__dirname);
-config.resolver.sourceExts.push('sql');
+config.resolver.sourceExts.push("sql");
 module.exports = config;
 ```
 
 #### Step 7 - Update `babel` config
 
 ```js copy filename="babel.config.js"
-module.exports = function(api) {
+module.exports = function (api) {
   api.cache(true);
   return {
-    presets: ['babel-preset-expo'],
-    plugins: [["inline-import", { "extensions": [".sql"] }]] // <-- add this
+    presets: ["babel-preset-expo"],
+    plugins: [["inline-import", { extensions: [".sql"] }]], // <-- add this
   };
 };
 ```
@@ -164,25 +164,25 @@ export default function App() {
 
   if (error) {
     return (
-      
+
         Migration error: {error.message}
-      
+
     );
   }
 
   if (!success) {
     return (
-      
+
         Migration is in progress...
-      
+
     );
   }
 
   if (items === null || items.length === 0) {
     return (
-      
+
         Empty
-      
+
     );
   }
 
@@ -200,7 +200,7 @@ export default function App() {
       {items.map((item) => (
         {item.email}
       ))}
-    
+
   );
 }
 ```

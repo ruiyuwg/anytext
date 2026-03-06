@@ -71,34 +71,34 @@ Create `src/app.ts`:
 
 ```ts
 // src/app.ts
-import { Hono } from 'hono'
-const app = new Hono()
+import { Hono } from "hono";
+const app = new Hono();
 
-app.get('/', (c) => c.text('Hello Azure Functions!'))
+app.get("/", (c) => c.text("Hello Azure Functions!"));
 
-export default app
+export default app;
 ```
 
 Create `src/functions/httpTrigger.ts`:
 
 ```ts
 // src/functions/httpTrigger.ts
-import { app } from '@azure/functions'
-import { azureHonoHandler } from '@marplex/hono-azurefunc-adapter'
-import honoApp from '../app'
+import { app } from "@azure/functions";
+import { azureHonoHandler } from "@marplex/hono-azurefunc-adapter";
+import honoApp from "../app";
 
-app.http('httpTrigger', {
+app.http("httpTrigger", {
   methods: [
     //Add all your supported HTTP methods here
-    'GET',
-    'POST',
-    'DELETE',
-    'PUT',
+    "GET",
+    "POST",
+    "DELETE",
+    "PUT",
   ],
-  authLevel: 'anonymous',
-  route: '{*proxy}',
+  authLevel: "anonymous",
+  route: "{*proxy}",
   handler: azureHonoHandler(honoApp.fetch),
-})
+});
 ```
 
 ## 4. Run
@@ -128,7 +128,7 @@ bun run start
 ## 5. Deploy
 
 ::: info
-Before you can deploy to Azure, you need to create some resources in your cloud infrastructure. Please visit the Microsoft documentation on [Create supporting Azure resources for your function](https://learn.microsoft.com/en-us/azure/azure-functions/create-first-function-cli-typescript?pivots=nodejs-model-v4\&tabs=windows%2Cazure-cli%2Cbrowser#create-supporting-azure-resources-for-your-function)
+Before you can deploy to Azure, you need to create some resources in your cloud infrastructure. Please visit the Microsoft documentation on [Create supporting Azure resources for your function](https://learn.microsoft.com/en-us/azure/azure-functions/create-first-function-cli-typescript?pivots=nodejs-model-v4&tabs=windows%2Cazure-cli%2Cbrowser#create-supporting-azure-resources-for-your-function)
 :::
 
 Build the project for deployment:
@@ -156,5 +156,5 @@ bun run build
 Deploy your project to the function app in Azure Cloud. Replace `<YourFunctionAppName>` with the name of your app.
 
 ```sh
-func azure functionapp publish 
+func azure functionapp publish
 ```

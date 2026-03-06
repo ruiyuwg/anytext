@@ -4,7 +4,7 @@ Validates against usage of libraries which are incompatible with memoization (ma
 
 These libraries were designed before React's memoization rules were fully documented. They made the correct choices at the time to optimize for ergonomic ways to keep components just the right amount of reactive as app state changes. While these legacy patterns worked, we have since discovered that it's incompatible with React's programming model. We will continue working with library authors to migrate these libraries to use patterns that follow the Rules of React.
 
-## Rule Details {/*rule-details*/}
+## Rule Details {/_rule-details_/}
 
 Some libraries use patterns that aren't supported by React. When the linter detects usages of these APIs from a [known list](https://github.com/facebook/react/blob/main/compiler/packages/babel-plugin-react-compiler/src/HIR/DefaultModuleTypeProvider.ts), it flags them under this rule. This means that React Compiler can automatically skip over components that use these incompatible APIs, in order to avoid breaking your app.
 
@@ -14,7 +14,7 @@ function Form() {
   const { watch } = useForm();
 
   // ❌ This value will never update, even when 'name' field changes
-  const name = useMemo(() => watch('name'), [watch]);
+  const name = useMemo(() => watch("name"), [watch]);
 
   return <div>Name: {name}</div>; // UI appears "frozen"
 }
@@ -22,7 +22,7 @@ function Form() {
 
 React Compiler automatically memoizes values following the Rules of React. If something breaks with manual `useMemo`, it will also break the compiler's automatic optimization. This rule helps identify these problematic patterns.
 
-#### Designing APIs that follow the Rules of React {/*designing-apis-that-follow-the-rules-of-react*/}
+#### Designing APIs that follow the Rules of React {/_designing-apis-that-follow-the-rules-of-react_/}
 
 One question to think about when designing a library API or hook is whether calling the API can be safely memoized with `useMemo`. If it can't, then both manual and React Compiler memoizations will break your user's code.
 
@@ -51,7 +51,7 @@ function Component() {
     <div>
       <input
         value={field.name}
-        onChange={(e) => updateField('name', e.target.value)}
+        onChange={(e) => updateField("name", e.target.value)}
       />
       <p>{greeting}</p>
     </div>
@@ -59,20 +59,20 @@ function Component() {
 }
 ```
 
-### Invalid {/*invalid*/}
+### Invalid {/_invalid_/}
 
 Examples of incorrect code for this rule:
 
 ```js
 // ❌ react-hook-form `watch`
 function Component() {
-  const {watch} = useForm();
-  const value = watch('field'); // Interior mutability
+  const { watch } = useForm();
+  const value = watch("field"); // Interior mutability
   return <div>{value}</div>;
 }
 
 // ❌ TanStack Table `useReactTable`
-function Component({data}) {
+function Component({ data }) {
   const table = useReactTable({
     data,
     columns,
@@ -83,7 +83,7 @@ function Component({data}) {
 }
 ```
 
-#### MobX {/*mobx*/}
+#### MobX {/_mobx_/}
 
 MobX patterns like `observer` also break memoization assumptions, but the linter does not yet detect them. If you rely on MobX and find that your app doesn't work with React Compiler, you may need to use the `"use no memo" directive`.
 
@@ -95,22 +95,22 @@ const Component = observer(() => {
 });
 ```
 
-### Valid {/*valid*/}
+### Valid {/_valid_/}
 
 Examples of correct code for this rule:
 
 ```js
 // ✅ For react-hook-form, use `useWatch`:
 function Component() {
-  const {register, control} = useForm();
+  const { register, control } = useForm();
   const watchedValue = useWatch({
     control,
-    name: 'field'
+    name: "field",
   });
 
   return (
     <>
-      <input {...register('field')} />
+      <input {...register("field")} />
       <div>Current value: {watchedValue}</div>
     </>
   );
@@ -119,7 +119,7 @@ function Component() {
 
 Some other libraries do not yet have alternative APIs that are compatible with React's memoization model. If the linter doesn't automatically skip over your components or hooks that call these APIs, please [file an issue](https://github.com/facebook/react/issues) so we can add it to the linter.
 
-***
+---
 
 ## Sitemap
 

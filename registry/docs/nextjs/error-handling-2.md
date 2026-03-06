@@ -33,19 +33,19 @@ You can create an `ErrorBoundary` class component by extending `React.Component`
 ```jsx
 class ErrorBoundary extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     // Define a state variable to track whether is an error or not
-    this.state = { hasError: false }
+    this.state = { hasError: false };
   }
   static getDerivedStateFromError(error) {
     // Update state so the next render will show the fallback UI
 
-    return { hasError: true }
+    return { hasError: true };
   }
   componentDidCatch(error, errorInfo) {
     // You can use your own error logging service here
-    console.log({ error, errorInfo })
+    console.log({ error, errorInfo });
   }
   render() {
     // Check if the error is thrown
@@ -61,16 +61,16 @@ class ErrorBoundary extends React.Component {
             Try again?
           </button>
         </div>
-      )
+      );
     }
 
     // Return children components in case of no error
 
-    return this.props.children
+    return this.props.children;
   }
 }
 
-export default ErrorBoundary
+export default ErrorBoundary;
 ```
 
 The `ErrorBoundary` component keeps track of an `hasError` state. The value of this state variable is a boolean. When the value of `hasError` is `true`, then the `ErrorBoundary` component will render a fallback UI. Otherwise, it will render the children components.
@@ -79,7 +79,7 @@ After creating an `ErrorBoundary` component, import it in the `pages/_app.js` fi
 
 ```jsx
 // Import the ErrorBoundary component
-import ErrorBoundary from '../components/ErrorBoundary'
+import ErrorBoundary from "../components/ErrorBoundary";
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -87,10 +87,10 @@ function MyApp({ Component, pageProps }) {
     <ErrorBoundary>
       <Component {...pageProps} />
     </ErrorBoundary>
-  )
+  );
 }
 
-export default MyApp
+export default MyApp;
 ```
 
 You can learn more about [Error Boundaries](https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary) in React's documentation.

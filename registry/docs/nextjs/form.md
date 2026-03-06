@@ -1,13 +1,13 @@
 # Form
 
-The `<Form>` component extends the HTML `<form>` element to provide  **client-side navigation** on submission, and **progressive enhancement**.
+The `<Form>` component extends the HTML `<form>` element to provide **client-side navigation** on submission, and **progressive enhancement**.
 
 It's useful for forms that update URL search params as it reduces the boilerplate code needed to achieve the above.
 
 Basic usage:
 
 ```tsx filename="/ui/search.js" switcher
-import Form from 'next/form'
+import Form from "next/form";
 
 export default function Page() {
   return (
@@ -17,12 +17,12 @@ export default function Page() {
       <input name="query" />
       <button type="submit">Submit</button>
     </Form>
-  )
+  );
 }
 ```
 
 ```jsx filename="/ui/search.js" switcher
-import Form from 'next/form'
+import Form from "next/form";
 
 export default function Search() {
   return (
@@ -32,7 +32,7 @@ export default function Search() {
       <input name="query" />
       <button type="submit">Submit</button>
     </Form>
-  )
+  );
 }
 ```
 

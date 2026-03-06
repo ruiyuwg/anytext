@@ -141,7 +141,7 @@ You can use `process.env` to access [Environment Variables](/docs/app/guides/env
 The Edge Runtime has some restrictions including:
 
 - Native Node.js APIs **are not supported**. For example, you can't read or write to the filesystem.
-- `node_modules` *can* be used, as long as they implement ES Modules and do not use native Node.js APIs.
+- `node_modules` _can_ be used, as long as they implement ES Modules and do not use native Node.js APIs.
 - Calling `require` directly is **not allowed**. Use ES Modules instead.
 
 The following JavaScript language features are disabled, and **will not work:**
@@ -153,22 +153,22 @@ The following JavaScript language features are disabled, and **will not work:**
 | [`WebAssembly.compile`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/WebAssembly/compile)         | Compiles a WebAssembly module from a buffer source                  |
 | [`WebAssembly.instantiate`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/WebAssembly/instantiate) | Compiles and instantiates a WebAssembly module from a buffer source |
 
-In rare cases, your code could contain (or import) some dynamic code evaluation statements which *cannot be reached at runtime* and which cannot be removed by treeshaking.
+In rare cases, your code could contain (or import) some dynamic code evaluation statements which _cannot be reached at runtime_ and which cannot be removed by treeshaking.
 You can relax the check to allow specific files with your Proxy configuration:
 
 ```javascript filename="proxy.ts"
 export const config = {
   unstable_allowDynamic: [
     // allows a single file
-    '/lib/utilities.js',
+    "/lib/utilities.js",
     // use a glob to allow anything in the function-bind 3rd party module
-    '**/node_modules/function-bind/**',
+    "**/node_modules/function-bind/**",
   ],
-}
+};
 ```
 
 `unstable_allowDynamic` is a [glob](https://github.com/micromatch/micromatch#matching-features), or an array of globs, ignoring dynamic code evaluation for specific files. The globs are relative to your application root folder.
 
-Be warned that if these statements are executed on the Edge, *they will throw and cause a runtime error*.
+Be warned that if these statements are executed on the Edge, _they will throw and cause a runtime error_.
 
 # Turbopack

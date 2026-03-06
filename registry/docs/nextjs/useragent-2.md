@@ -3,34 +3,34 @@
 The `userAgent` helper extends the [Web Request API](https://developer.mozilla.org/docs/Web/API/Request) with additional properties and methods to interact with the user agent object from the request.
 
 ```ts filename="proxy.ts" switcher
-import { NextRequest, NextResponse, userAgent } from 'next/server'
+import { NextRequest, NextResponse, userAgent } from "next/server";
 
 export function proxy(request: NextRequest) {
-  const url = request.nextUrl
-  const { device } = userAgent(request)
+  const url = request.nextUrl;
+  const { device } = userAgent(request);
 
   // device.type can be: 'mobile', 'tablet', 'console', 'smarttv',
   // 'wearable', 'embedded', or undefined (for desktop browsers)
-  const viewport = device.type || 'desktop'
+  const viewport = device.type || "desktop";
 
-  url.searchParams.set('viewport', viewport)
-  return NextResponse.rewrite(url)
+  url.searchParams.set("viewport", viewport);
+  return NextResponse.rewrite(url);
 }
 ```
 
 ```js filename="proxy.js" switcher
-import { NextResponse, userAgent } from 'next/server'
+import { NextResponse, userAgent } from "next/server";
 
 export function proxy(request) {
-  const url = request.nextUrl
-  const { device } = userAgent(request)
+  const url = request.nextUrl;
+  const { device } = userAgent(request);
 
   // device.type can be: 'mobile', 'tablet', 'console', 'smarttv',
   // 'wearable', 'embedded', or undefined (for desktop browsers)
-  const viewport = device.type || 'desktop'
+  const viewport = device.type || "desktop";
 
-  url.searchParams.set('viewport', viewport)
-  return NextResponse.rewrite(url)
+  url.searchParams.set("viewport", viewport);
+  return NextResponse.rewrite(url);
 }
 ```
 

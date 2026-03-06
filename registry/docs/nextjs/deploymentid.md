@@ -4,8 +4,8 @@ The `deploymentId` option allows you to set an identifier for your deployment. T
 
 ```js filename="next.config.js"
 module.exports = {
-  deploymentId: 'my-deployment-id',
-}
+  deploymentId: "my-deployment-id",
+};
 ```
 
 You can also set the deployment ID using the `NEXT_DEPLOYMENT_ID` environment variable:
@@ -48,7 +48,7 @@ When running multiple instances of your Next.js application behind a load balanc
 ```js filename="next.config.js"
 module.exports = {
   deploymentId: process.env.DEPLOYMENT_VERSION || process.env.GIT_SHA,
-}
+};
 ```
 
 ## Version History

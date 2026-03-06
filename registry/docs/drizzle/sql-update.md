@@ -1,9 +1,7 @@
 # SQL Update
 
 ```typescript copy
-await db.update(users)
-  .set({ name: 'Mr. Dan' })
-  .where(eq(users.name, 'Dan'));
+await db.update(users).set({ name: "Mr. Dan" }).where(eq(users.name, "Dan"));
 ```
 
 The object that you pass to `update` should have keys that match column names in your database schema.
@@ -11,9 +9,10 @@ Values of `undefined` are ignored in the object: to set a column to `null`, pass
 You can pass SQL as a value to be used in the update object, like this:
 
 ```typescript copy
-await db.update(users)
+await db
+  .update(users)
   .set({ updatedAt: sql`NOW()` })
-  .where(eq(users.name, 'Dan'));
+  .where(eq(users.name, "Dan"));
 ```
 
 ### Limit
@@ -63,9 +62,10 @@ update "users" set "verified" = $1 order by "name" asc, "name2" desc;
 You can update a row and get it back in PostgreSQL and SQLite:
 
 ```typescript copy
-const updatedUserId: { updatedId: number }[] = await db.update(users)
-  .set({ name: 'Mr. Dan' })
-  .where(eq(users.name, 'Dan'))
+const updatedUserId: { updatedId: number }[] = await db
+  .update(users)
+  .set({ name: "Mr. Dan" })
+  .where(eq(users.name, "Dan"))
   .returning({ updatedId: users.id });
 ```
 
@@ -77,19 +77,21 @@ You can update a row and get back the row before updated and after:
 ```typescript copy
 type User = typeof users.$inferSelect;
 
-const updatedUserId: User[] = await db.update(users)
-  .set({ name: 'Mr. Dan' })
-  .where(eq(users.name, 'Dan'))
+const updatedUserId: User[] = await db
+  .update(users)
+  .set({ name: "Mr. Dan" })
+  .where(eq(users.name, "Dan"))
   .output();
 ```
 
 To return partial users after update:
 
 ```ts
-const updatedUserId: { inserted: { updatedId: number }}[] = await db.update(users)
-  .set({ name: 'Mr. Dan' })
-  .where(eq(users.name, 'Dan'))
-  .output({ inserted: { updatedId: users.id }});
+const updatedUserId: { inserted: { updatedId: number } }[] = await db
+  .update(users)
+  .set({ name: "Mr. Dan" })
+  .where(eq(users.name, "Dan"))
+  .output({ inserted: { updatedId: users.id } });
 ```
 
 To return rows that were in database before update:
@@ -97,9 +99,10 @@ To return rows that were in database before update:
 ```ts
 type User = typeof users.$inferSelect;
 
-const updatedUserId: { deleted: User }[] = await db.update(users)
-  .set({ name: 'Mr. Dan' })
-  .where(eq(users.name, 'Dan'))
+const updatedUserId: { deleted: User }[] = await db
+  .update(users)
+  .set({ name: "Mr. Dan" })
+  .where(eq(users.name, "Dan"))
   .output({ deleted: true });
 ```
 
@@ -108,9 +111,10 @@ To return both previous and new version on a row:
 ```ts
 type User = typeof users.$inferSelect;
 
-const updatedUserId: { deleted: User, inserted: User }[] = await db.update(users)
-  .set({ name: 'Mr. Dan' })
-  .where(eq(users.name, 'Dan'))
+const updatedUserId: { deleted: User; inserted: User }[] = await db
+  .update(users)
+  .set({ name: "Mr. Dan" })
+  .where(eq(users.name, "Dan"))
   .output({ deleted: true, inserted: true });
 ```
 
@@ -140,9 +144,9 @@ id: products.id
 
 ````
 ```sql
-with "average_price" as (select avg("price") as "value" from "products") 
-update "products" set "cheap" = $1 
-where "products"."price" < (select * from "average_price") 
+with "average_price" as (select avg("price") as "value" from "products")
+update "products" set "cheap" = $1
+where "products"."price" < (select * from "average_price")
 returning "id"
 ````
 
@@ -194,7 +198,7 @@ await db
 ````
 
 ```sql
-update "users" set "city_id" = "c"."id" 
+update "users" set "city_id" = "c"."id"
 from "cities" "c"
 ```
 
@@ -236,15 +240,15 @@ Example: Change `drizzle-kit push:mysql` to `drizzle-kit push`.
 - If you were using `connectionString` or `uri` in `dbCredentials`, you should now use `url`.
 
 ```ts
-import { defineConfig } from "drizzle-kit"
+import { defineConfig } from "drizzle-kit";
 
 export default defineConfig({
-    dialect: "sqlite", // "postgresql" | "mysql"
-    driver: "turso", // optional and used only if `aws-data-api`, `turso`, `d1-http`(WIP) or `expo` are used
-    dbCredentials: {
-        url: ""
-    }
-})
+  dialect: "sqlite", // "postgresql" | "mysql"
+  driver: "turso", // optional and used only if `aws-data-api`, `turso`, `d1-http`(WIP) or `expo` are used
+  dbCredentials: {
+    url: "",
+  },
+});
 ```
 
 #### 3. If you are using PostgreSQL or SQLite and had migrations generated in your project, please run `drizzle-kit up` so Drizzle can upgrade all the snapshots to version 6.
@@ -358,14 +362,14 @@ drizzle-kit migrate
 By default, drizzle-kit will store migration data entries in the `__drizzle_migrations` table and, in the case of PostgreSQL, in a `drizzle` schema. If you want to change this, you will need to specify the modifications in `drizzle.config.ts`.
 
 ```ts
-import { defineConfig } from "drizzle-kit"
+import { defineConfig } from "drizzle-kit";
 
 export default defineConfig({
-    migrations: {
-        table: "migrations",
-        schema: "public"
-    }
-})
+  migrations: {
+    table: "migrations",
+    schema: "public",
+  },
+});
 ```
 
 Source: https://orm.drizzle.team/docs/upgrade-v1

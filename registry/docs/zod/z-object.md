@@ -49,7 +49,7 @@ The `z.unknown()` and `z.any()` types are no longer marked as "key optional" in 
 ```ts
 const mySchema = z.object({
   a: z.any(),
-  b: z.unknown()
+  b: z.unknown(),
 });
 // Zod 3: { a?: any; b?: unknown };
 // Zod 4: { a: any; b: unknown };
@@ -106,7 +106,7 @@ This now behaves identically to `z.array().min(1)`. The inferred type does not c
 ```ts
 const NonEmpty = z.array(z.string()).nonempty();
 
-type NonEmpty = z.infer<typeof NonEmpty>; 
+type NonEmpty = z.infer<typeof NonEmpty>;
 // Zod 3: [string, ...string[]]
 // Zod 4: string[]
 ```

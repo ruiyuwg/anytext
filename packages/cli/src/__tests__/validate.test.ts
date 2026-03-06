@@ -38,7 +38,7 @@ describe("validateManifest", () => {
       validateManifest({
         ...validManifest,
         libraries: [{ ...validLibrary, topics: [] }],
-      })
+      }),
     ).toBe(true);
   });
 
@@ -52,7 +52,7 @@ describe("validateManifest", () => {
             topics: [{ ...validTopic, tags: [] }],
           },
         ],
-      })
+      }),
     ).toBe(true);
   });
 
@@ -86,7 +86,9 @@ describe("validateManifest", () => {
   });
 
   it("rejects non-array libraries", () => {
-    expect(validateManifest({ ...validManifest, libraries: "not array" })).toBe(false);
+    expect(validateManifest({ ...validManifest, libraries: "not array" })).toBe(
+      false,
+    );
   });
 
   it("rejects library with non-string id", () => {
@@ -94,7 +96,7 @@ describe("validateManifest", () => {
       validateManifest({
         ...validManifest,
         libraries: [{ ...validLibrary, id: 123 }],
-      })
+      }),
     ).toBe(false);
   });
 
@@ -103,7 +105,7 @@ describe("validateManifest", () => {
       validateManifest({
         ...validManifest,
         libraries: [{ ...validLibrary, name: null }],
-      })
+      }),
     ).toBe(false);
   });
 
@@ -112,7 +114,7 @@ describe("validateManifest", () => {
       validateManifest({
         ...validManifest,
         libraries: [{ ...validLibrary, description: 42 }],
-      })
+      }),
     ).toBe(false);
   });
 
@@ -121,7 +123,7 @@ describe("validateManifest", () => {
       validateManifest({
         ...validManifest,
         libraries: [{ ...validLibrary, version: 1 }],
-      })
+      }),
     ).toBe(false);
   });
 
@@ -130,13 +132,13 @@ describe("validateManifest", () => {
       validateManifest({
         ...validManifest,
         libraries: [{ ...validLibrary, topics: "not array" }],
-      })
+      }),
     ).toBe(false);
   });
 
   it("rejects library that is not an object", () => {
     expect(
-      validateManifest({ ...validManifest, libraries: ["not an object"] })
+      validateManifest({ ...validManifest, libraries: ["not an object"] }),
     ).toBe(false);
   });
 
@@ -144,10 +146,8 @@ describe("validateManifest", () => {
     expect(
       validateManifest({
         ...validManifest,
-        libraries: [
-          { ...validLibrary, topics: [{ ...validTopic, id: 1 }] },
-        ],
-      })
+        libraries: [{ ...validLibrary, topics: [{ ...validTopic, id: 1 }] }],
+      }),
     ).toBe(false);
   });
 
@@ -158,7 +158,7 @@ describe("validateManifest", () => {
         libraries: [
           { ...validLibrary, topics: [{ ...validTopic, title: true }] },
         ],
-      })
+      }),
     ).toBe(false);
   });
 
@@ -169,7 +169,7 @@ describe("validateManifest", () => {
         libraries: [
           { ...validLibrary, topics: [{ ...validTopic, description: [] }] },
         ],
-      })
+      }),
     ).toBe(false);
   });
 
@@ -177,10 +177,8 @@ describe("validateManifest", () => {
     expect(
       validateManifest({
         ...validManifest,
-        libraries: [
-          { ...validLibrary, topics: [{ ...validTopic, path: 42 }] },
-        ],
-      })
+        libraries: [{ ...validLibrary, topics: [{ ...validTopic, path: 42 }] }],
+      }),
     ).toBe(false);
   });
 
@@ -191,7 +189,7 @@ describe("validateManifest", () => {
         libraries: [
           { ...validLibrary, topics: [{ ...validTopic, tokens: "many" }] },
         ],
-      })
+      }),
     ).toBe(false);
   });
 
@@ -202,7 +200,7 @@ describe("validateManifest", () => {
         libraries: [
           { ...validLibrary, topics: [{ ...validTopic, tags: "not array" }] },
         ],
-      })
+      }),
     ).toBe(false);
   });
 
@@ -213,7 +211,7 @@ describe("validateManifest", () => {
         libraries: [
           { ...validLibrary, topics: [{ ...validTopic, tags: [123] }] },
         ],
-      })
+      }),
     ).toBe(false);
   });
 
@@ -222,7 +220,7 @@ describe("validateManifest", () => {
       validateManifest({
         ...validManifest,
         libraries: [{ ...validLibrary, topics: [42] }],
-      })
+      }),
     ).toBe(false);
   });
 });

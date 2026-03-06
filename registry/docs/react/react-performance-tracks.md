@@ -4,9 +4,9 @@ React Performance tracks are specialized custom entries that appear on the Perfo
 
 These tracks are designed to provide developers with comprehensive insights into their React application's performance by visualizing React-specific events and metrics alongside other critical data sources such as network requests, JavaScript execution, and event loop activity, all synchronized on a unified timeline within the Performance panel for a complete understanding of application behavior.
 
-***
+---
 
-## Usage {/*usage*/}
+## Usage {/_usage_/}
 
 React Performance tracks are only available in development and profiling builds of React:
 
@@ -18,18 +18,18 @@ If enabled, tracks should appear automatically in the traces you record with the
 The profiling instrumentation that powers React Performance tracks adds some additional overhead, so it is disabled in production builds by default.
 Server Components and Server Requests tracks are only available in development builds.
 
-### Using profiling builds {/*using-profiling-builds*/}
+### Using profiling builds {/_using-profiling-builds_/}
 
 In addition to production and development builds, React also includes a special profiling build.
 To use profiling builds, you have to use `react-dom/profiling` instead of `react-dom/client`.
 We recommend that you alias `react-dom/client` to `react-dom/profiling` at build time via bundler aliases instead of manually updating each `react-dom/client` import.
 Your framework might have built-in support for enabling React's profiling build.
 
-***
+---
 
-## Tracks {/*tracks*/}
+## Tracks {/_tracks_/}
 
-### Scheduler {/*scheduler*/}
+### Scheduler {/_scheduler_/}
 
 The Scheduler is an internal React concept used for managing tasks with different priorities. This track consists of 4 subtracks, each representing work of a specific priority:
 
@@ -38,7 +38,7 @@ The Scheduler is an internal React concept used for managing tasks with differen
 - **Suspense** - Work related to Suspense boundaries, such as displaying fallbacks or revealing content.
 - **Idle** - The lowest priority work that is done when there are no other tasks with higher priority.
 
-#### Renders {/*renders*/}
+#### Renders {/_renders_/}
 
 Every render pass consists of multiple phases that you can see on a timeline:
 
@@ -49,7 +49,7 @@ Every render pass consists of multiple phases that you can see on a timeline:
 
 [Learn more about renders and commits](/learn/render-and-commit).
 
-#### Cascading updates {/*cascading-updates*/}
+#### Cascading updates {/_cascading-updates_/}
 
 Cascading updates is one of the patterns for performance regressions. If an update was scheduled during a render pass, React could discard completed work and start a new pass.
 
@@ -57,7 +57,7 @@ In development builds, React can show you which Component scheduled a new update
 
 [Learn more about Effects](/learn/you-might-not-need-an-effect).
 
-### Components {/*components*/}
+### Components {/_components_/}
 
 The Components track visualizes the durations of React components. They are displayed as a flamegraph, where each entry represents the duration of the corresponding component render and all its descendant children components.
 
@@ -74,13 +74,13 @@ Additional events may be displayed during the render and effects phases:
 - Reconnect - Similar to Mount, but limited to cases when [`<Activity>`](/reference/react/Activity) is used.
 - Disconnect - Similar to Unmount, but limited to cases when [`<Activity>`](/reference/react/Activity) is used.
 
-#### Changed props {/*changed-props*/}
+#### Changed props {/_changed-props_/}
 
 In development builds, when you click on a component render entry, you can inspect potential changes in props. You can use this information to identify unnecessary renders.
 
-### Server {/*server*/}
+### Server {/_server_/}
 
-#### Server Requests {/*server-requests*/}
+#### Server Requests {/_server-requests_/}
 
 The Server Requests track visualized all Promises that eventually end up in a React Server Component. This includes any `async` operations like calling `fetch` or async Node.js file operations.
 
@@ -91,7 +91,7 @@ Clicking on spans will show you a stack trace of where the Promise was created a
 
 Rejected Promises are displayed as red with their rejected value.
 
-#### Server Components {/*server-components*/}
+#### Server Components {/_server-components_/}
 
 The Server Components tracks visualize the durations of React Server Components Promises they awaited. Timings are displayed as a flamegraph, where each entry represents the duration of the corresponding component render and all its descendant children components.
 
@@ -102,7 +102,7 @@ Different colors are used to indicate the duration of the component render. The 
 The Server Components track group will always contain a "Primary" track. If React is able to render Server Components concurrently, it will display addititional "Parallel" tracks.
 If more than 8 Server Components are rendered concurrently, React will associate them with the last "Parallel" track instead of adding more tracks.
 
-***
+---
 
 ## Sitemap
 

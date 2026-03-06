@@ -47,7 +47,7 @@ A collection of resources on tRPC.
 | Create JD App - Scaffold a starter project using the JD Stack (SolidStart, tRPC, Tailwind, Prisma)  | https://github.com/OrJDev/create-jd-app                     |
 | Create tRPC App - Create tRPC-powered apps with one command                                         | https://github.com/omar-dulaimi/create-trpc-app             |
 | viteRPC - Monorepo template powered by Vite (Vite, tRPC, Tailwind CSS)                              | https://github.com/mnik01/viteRPC                           |
-| Start UI \[web] - Opinionated frontend starter (tRPC, Prisma, Next.js, Chakra UI)                    | https://github.com/bearstudio/start-ui-web                  |
+| Start UI \[web] - Opinionated frontend starter (tRPC, Prisma, Next.js, Chakra UI)                   | https://github.com/bearstudio/start-ui-web                  |
 | Nx Plugin for AWS - Scaffold a project using tRPC with Nx, and deploy to AWS with CDK or Terraform  | https://awslabs.github.io/nx-plugin-for-aws/en/guides/trpc/ |
 
 ### Library adapters
@@ -121,7 +121,7 @@ A collection of resources on tRPC.
 | [Tianji](https://tianji.msgbyte.com/) - All-in-One Insight Hub. Tianji = Website Analytics + Uptime Monitor + Server Status                    | https://github.com/msgbyte/tianji                   |
 | [Workplacify](https://workplacify.com/) - Desk scheduling software, for hybrid and in-office teams                                             | https://workplacify.com/                            |
 | [Dotfyle](https://dotfyle.com/) - Discover and share Neovim plugins                                                                            | https://dotfyle.com/                                |
-| [ConvoForm](https://www.convoform.com/?utm_source=github\&utm_medium=social\&utm_campaign=trpc) - Create your own AI-Powered conversational form | https://www.convoform.com/                          |
+| [ConvoForm](https://www.convoform.com/?utm_source=github&utm_medium=social&utm_campaign=trpc) - Create your own AI-Powered conversational form | https://www.convoform.com/                          |
 
 # Contributing
 

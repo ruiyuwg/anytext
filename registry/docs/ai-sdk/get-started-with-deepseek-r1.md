@@ -41,56 +41,56 @@ The AI SDK abstracts away the differences between model providers, eliminates bo
 At the center of the AI SDK is [AI SDK Core](/docs/ai-sdk-core/overview), which provides a unified API to call any LLM. The code snippet below is all you need to call DeepSeek R1 with the AI SDK:
 
 ```ts
-import { deepseek } from '@ai-sdk/deepseek';
-import { generateText } from 'ai';
+import { deepseek } from "@ai-sdk/deepseek";
+import { generateText } from "ai";
 
 const { reasoningText, text } = await generateText({
-  model: deepseek('deepseek-reasoner'),
-  prompt: 'Explain quantum entanglement.',
+  model: deepseek("deepseek-reasoner"),
+  prompt: "Explain quantum entanglement.",
 });
 ```
 
 The unified interface also means that you can easily switch between providers by changing just two lines of code. For example, to use DeepSeek R1 via Fireworks:
 
 ```ts
-import { fireworks } from '@ai-sdk/fireworks';
+import { fireworks } from "@ai-sdk/fireworks";
 import {
   generateText,
   wrapLanguageModel,
   extractReasoningMiddleware,
-} from 'ai';
+} from "ai";
 
 // middleware to extract reasoning tokens
 const enhancedModel = wrapLanguageModel({
-  model: fireworks('accounts/fireworks/models/deepseek-r1'),
-  middleware: extractReasoningMiddleware({ tagName: 'think' }),
+  model: fireworks("accounts/fireworks/models/deepseek-r1"),
+  middleware: extractReasoningMiddleware({ tagName: "think" }),
 });
 
 const { reasoningText, text } = await generateText({
   model: enhancedModel,
-  prompt: 'Explain quantum entanglement.',
+  prompt: "Explain quantum entanglement.",
 });
 ```
 
 Or to use Groq's `deepseek-r1-distill-llama-70b` model:
 
 ```ts
-import { groq } from '@ai-sdk/groq';
+import { groq } from "@ai-sdk/groq";
 import {
   generateText,
   wrapLanguageModel,
   extractReasoningMiddleware,
-} from 'ai';
+} from "ai";
 
 // middleware to extract reasoning tokens
 const enhancedModel = wrapLanguageModel({
-  model: groq('deepseek-r1-distill-llama-70b'),
-  middleware: extractReasoningMiddleware({ tagName: 'think' }),
+  model: groq("deepseek-r1-distill-llama-70b"),
+  middleware: extractReasoningMiddleware({ tagName: "think" }),
 });
 
 const { reasoningText, text } = await generateText({
   model: enhancedModel,
-  prompt: 'Explain quantum entanglement.',
+  prompt: "Explain quantum entanglement.",
 });
 ```
 
@@ -107,7 +107,7 @@ You can use DeepSeek R1 with the AI SDK through various providers. Here's a comp
 
 | Provider                                                | Model ID                                                                                                          | Reasoning Tokens    |
 | ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ------------------- |
-| [DeepSeek](/providers/ai-sdk-providers/deepseek)        | [`deepseek-reasoner`](https://api-docs.deepseek.com/guides/reasoning_model)                                       |  |
+| [DeepSeek](/providers/ai-sdk-providers/deepseek)        | [`deepseek-reasoner`](https://api-docs.deepseek.com/guides/reasoning_model)                                       |                     |
 | [Fireworks](/providers/ai-sdk-providers/fireworks)      | [`accounts/fireworks/models/deepseek-r1`](https://fireworks.ai/models/fireworks/deepseek-r1)                      | Requires Middleware |
 | [Groq](/providers/ai-sdk-providers/groq)                | [`deepseek-r1-distill-llama-70b`](https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Llama-70B)               | Requires Middleware |
 | [Azure](/providers/ai-sdk-providers/azure)              | [`DeepSeek-R1`](https://ai.azure.com/explore/models/DeepSeek-R1/version/1/registry/azureml-deepseek#code-samples) | Requires Middleware |
@@ -130,14 +130,14 @@ In a new Next.js application, first install the AI SDK and the DeepSeek provider
 Then, create a route handler for the chat endpoint:
 
 ```tsx filename="app/api/chat/route.ts"
-import { deepseek } from '@ai-sdk/deepseek';
-import { convertToModelMessages, streamText, UIMessage } from 'ai';
+import { deepseek } from "@ai-sdk/deepseek";
+import { convertToModelMessages, streamText, UIMessage } from "ai";
 
 export async function POST(req: Request) {
   const { messages }: { messages: UIMessage[] } = await req.json();
 
   const result = streamText({
-    model: deepseek('deepseek-reasoner'),
+    model: deepseek("deepseek-reasoner"),
     messages: await convertToModelMessages(messages),
   });
 
@@ -153,33 +153,33 @@ You can forward the model's reasoning tokens to the client with
 Finally, update the root page (`app/page.tsx`) to use the `useChat` hook:
 
 ```tsx filename="app/page.tsx"
-'use client';
+"use client";
 
-import { useChat } from '@ai-sdk/react';
-import { useState } from 'react';
+import { useChat } from "@ai-sdk/react";
+import { useState } from "react";
 
 export default function Page() {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
   const { messages, sendMessage } = useChat();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (input.trim()) {
       sendMessage({ text: input });
-      setInput('');
+      setInput("");
     }
   };
 
   return (
     <>
-      {messages.map(message => (
+      {messages.map((message) => (
         <div key={message.id}>
-          {message.role === 'user' ? 'User: ' : 'AI: '}
+          {message.role === "user" ? "User: " : "AI: "}
           {message.parts.map((part, index) => {
-            if (part.type === 'reasoning') {
+            if (part.type === "reasoning") {
               return <pre key={index}>{part.text}</pre>;
             }
-            if (part.type === 'text') {
+            if (part.type === "text") {
               return <span key={index}>{part.text}</span>;
             }
             return null;
@@ -190,7 +190,7 @@ export default function Page() {
         <input
           name="prompt"
           value={input}
-          onChange={e => setInput(e.target.value)}
+          onChange={(e) => setInput(e.target.value)}
         />
         <button type="submit">Submit</button>
       </form>

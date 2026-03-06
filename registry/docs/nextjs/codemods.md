@@ -87,17 +87,17 @@ This codemod removes the `unstable_` prefix from stabilized API.
 For example:
 
 ```ts
-import { unstable_cacheTag as cacheTag } from 'next/cache'
+import { unstable_cacheTag as cacheTag } from "next/cache";
 
-cacheTag()
+cacheTag();
 ```
 
 Transforms into:
 
 ```ts
-import { cacheTag } from 'next/cache'
+import { cacheTag } from "next/cache";
 
-cacheTag()
+cacheTag();
 ```
 
 #### Migrate from deprecated `middleware` convention to `proxy`
@@ -120,20 +120,20 @@ This codemod migrates projects from using the deprecated `middleware` convention
 For example:
 
 ```ts filename="middleware.ts"
-import { NextResponse } from 'next/server'
+import { NextResponse } from "next/server";
 
 export function middleware() {
-  return NextResponse.next()
+  return NextResponse.next();
 }
 ```
 
 Transforms into:
 
 ```ts filename="proxy.ts"
-import { NextResponse } from 'next/server'
+import { NextResponse } from "next/server";
 
 export function proxy() {
-  return NextResponse.next()
+  return NextResponse.next();
 }
 ```
 
@@ -175,31 +175,31 @@ Becomes:
 And creates:
 
 ```js filename="eslint.config.mjs"
-import { dirname } from 'path'
-import { fileURLToPath } from 'url'
-import { FlatCompat } from '@eslint/eslintrc'
+import { dirname } from "path";
+import { fileURLToPath } from "url";
+import { FlatCompat } from "@eslint/eslintrc";
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const compat = new FlatCompat({
   baseDirectory: __dirname,
-})
+});
 
 const eslintConfig = [
-  ...compat.extends('next/core-web-vitals', 'next/typescript'),
+  ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
     ignores: [
-      'node_modules/**',
-      '.next/**',
-      'out/**',
-      'build/**',
-      'next-env.d.ts',
+      "node_modules/**",
+      ".next/**",
+      "out/**",
+      "build/**",
+      "next-env.d.ts",
     ],
   },
-]
+];
 
-export default eslintConfig
+export default eslintConfig;
 ```
 
 ### 15.0
@@ -219,13 +219,13 @@ This codemod transforms [Route Segment Config `runtime`](https://nextjs.org/docs
 For example:
 
 ```ts
-export const runtime = 'experimental-edge'
+export const runtime = "experimental-edge";
 ```
 
 Transforms into:
 
 ```ts
-export const runtime = 'edge'
+export const runtime = "edge";
 ```
 
 #### Migrate to async Dynamic APIs
@@ -244,46 +244,46 @@ When an automatic migration isn't possible, the codemod will either add a typeca
 For example:
 
 ```tsx
-import { cookies, headers } from 'next/headers'
-const token = cookies().get('token')
+import { cookies, headers } from "next/headers";
+const token = cookies().get("token");
 
 function useToken() {
-  const token = cookies().get('token')
-  return token
+  const token = cookies().get("token");
+  return token;
 }
 
 export default function Page() {
-  const name = cookies().get('name')
+  const name = cookies().get("name");
 }
 
 function getHeader() {
-  return headers().get('x-foo')
+  return headers().get("x-foo");
 }
 ```
 
 Transforms into:
 
 ```tsx
-import { use } from 'react'
+import { use } from "react";
 import {
   cookies,
   headers,
   type UnsafeUnwrappedCookies,
   type UnsafeUnwrappedHeaders,
-} from 'next/headers'
-const token = (cookies() as unknown as UnsafeUnwrappedCookies).get('token')
+} from "next/headers";
+const token = (cookies() as unknown as UnsafeUnwrappedCookies).get("token");
 
 function useToken() {
-  const token = use(cookies()).get('token')
-  return token
+  const token = use(cookies()).get("token");
+  return token;
 }
 
 export default async function Page() {
-  const name = (await cookies()).get('name')
+  const name = (await cookies()).get("name");
 }
 
 function getHeader() {
-  return (headers() as unknown as UnsafeUnwrappedHeaders).get('x-foo')
+  return (headers() as unknown as UnsafeUnwrappedHeaders).get("x-foo");
 }
 ```
 
@@ -298,20 +298,20 @@ export default function Page({
   params,
   searchParams,
 }: {
-  params: { slug: string }
-  searchParams: { [key: string]: string | string[] | undefined }
+  params: { slug: string };
+  searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const { value } = searchParams
-  if (value === 'foo') {
+  const { value } = searchParams;
+  if (value === "foo") {
     // ...
   }
 }
 
 export function generateMetadata({ params }: { params: { slug: string } }) {
-  const { slug } = params
+  const { slug } = params;
   return {
     title: `My Page - ${slug}`,
-  }
+  };
 }
 ```
 
@@ -320,24 +320,24 @@ Transforms into:
 ```tsx
 // page.tsx
 export default async function Page(props: {
-  params: Promise<{ slug: string }>
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const searchParams = await props.searchParams
-  const { value } = searchParams
-  if (value === 'foo') {
+  const searchParams = await props.searchParams;
+  const { value } = searchParams;
+  if (value === "foo") {
     // ...
   }
 }
 
 export async function generateMetadata(props: {
-  params: Promise<{ slug: string }>
+  params: Promise<{ slug: string }>;
 }) {
-  const params = await props.params
-  const { slug } = params
+  const params = await props.params;
+  const { slug } = params;
   return {
     title: `My Page - ${slug}`,
-  }
+  };
 }
 ```
 
@@ -357,22 +357,22 @@ This codemod installs `@vercel/functions` and transforms `geo` and `ip` properti
 For example:
 
 ```ts
-import type { NextRequest } from 'next/server'
+import type { NextRequest } from "next/server";
 
 export function GET(req: NextRequest) {
-  const { geo, ip } = req
+  const { geo, ip } = req;
 }
 ```
 
 Transforms into:
 
 ```ts
-import type { NextRequest } from 'next/server'
-import { geolocation, ipAddress } from '@vercel/functions'
+import type { NextRequest } from "next/server";
+import { geolocation, ipAddress } from "@vercel/functions";
 
 export function GET(req: NextRequest) {
-  const geo = geolocation(req)
-  const ip = ipAddress(req)
+  const geo = geolocation(req);
+  const ip = ipAddress(req);
 }
 ```
 
@@ -391,13 +391,13 @@ This codemod moves transforms imports from `next/server` to `next/og` for usage 
 For example:
 
 ```js
-import { ImageResponse } from 'next/server'
+import { ImageResponse } from "next/server";
 ```
 
 Transforms into:
 
 ```js
-import { ImageResponse } from 'next/og'
+import { ImageResponse } from "next/og";
 ```
 
 #### Use `viewport` export
@@ -414,25 +414,25 @@ For example:
 
 ```js
 export const metadata = {
-  title: 'My App',
-  themeColor: 'dark',
+  title: "My App",
+  themeColor: "dark",
   viewport: {
     width: 1,
   },
-}
+};
 ```
 
 Transforms into:
 
 ```js
 export const metadata = {
-  title: 'My App',
-}
+  title: "My App",
+};
 
 export const viewport = {
   width: 1,
-  themeColor: 'dark',
-}
+  themeColor: "dark",
+};
 ```
 
 ### 13.2
@@ -450,13 +450,13 @@ This codemod uninstalls the `@next/font` package and transforms `@next/font` imp
 For example:
 
 ```js
-import { Inter } from '@next/font/google'
+import { Inter } from "@next/font/google";
 ```
 
 Transforms into:
 
 ```js
-import { Inter } from 'next/font/google'
+import { Inter } from "next/font/google";
 ```
 
 ### 13.0
@@ -474,8 +474,8 @@ Safely renames `next/image` imports in existing Next.js 10, 11, or 12 applicatio
 For example:
 
 ```jsx filename="pages/index.js"
-import Image1 from 'next/image'
-import Image2 from 'next/future/image'
+import Image1 from "next/image";
+import Image2 from "next/future/image";
 
 export default function Home() {
   return (
@@ -483,7 +483,7 @@ export default function Home() {
       <Image1 src="/test.jpg" width="200" height="300" />
       <Image2 src="/test.png" width="500" height="400" />
     </div>
-  )
+  );
 }
 ```
 
@@ -491,9 +491,9 @@ Transforms into:
 
 ```jsx filename="pages/index.js"
 // 'next/image' becomes 'next/legacy/image'
-import Image1 from 'next/legacy/image'
+import Image1 from "next/legacy/image";
 // 'next/future/image' becomes 'next/image'
-import Image2 from 'next/image'
+import Image2 from "next/image";
 
 export default function Home() {
   return (
@@ -501,7 +501,7 @@ export default function Home() {
       <Image1 src="/test.jpg" width="200" height="300" />
       <Image2 src="/test.png" width="500" height="400" />
     </div>
-  )
+  );
 }
 ```
 
@@ -582,7 +582,7 @@ For example:
 ```jsx filename="my-component.js"
 export default class Home extends React.Component {
   render() {
-    return <div>Hello World</div>
+    return <div>Hello World</div>;
   }
 }
 ```
@@ -590,10 +590,10 @@ export default class Home extends React.Component {
 Transforms into:
 
 ```jsx filename="my-component.js"
-import React from 'react'
+import React from "react";
 export default class Home extends React.Component {
   render() {
-    return <div>Hello World</div>
+    return <div>Hello World</div>;
   }
 }
 ```
@@ -616,7 +616,7 @@ For example:
 
 ```jsx filename="my-component.js"
 export default function () {
-  return <div>Hello World</div>
+  return <div>Hello World</div>;
 }
 ```
 
@@ -624,7 +624,7 @@ Transforms into:
 
 ```jsx filename="my-component.js"
 export default function MyComponent() {
-  return <div>Hello World</div>
+  return <div>Hello World</div>;
 }
 ```
 
@@ -648,24 +648,24 @@ For example:
 
 ```js
 // Before
-import { withAmp } from 'next/amp'
+import { withAmp } from "next/amp";
 
 function Home() {
-  return <h1>My AMP Page</h1>
+  return <h1>My AMP Page</h1>;
 }
 
-export default withAmp(Home)
+export default withAmp(Home);
 ```
 
 ```js
 // After
 export default function Home() {
-  return <h1>My AMP Page</h1>
+  return <h1>My AMP Page</h1>;
 }
 
 export const config = {
   amp: true,
-}
+};
 ```
 
 ### 6
@@ -683,26 +683,26 @@ Transforms the deprecated automatically injected `url` property on top level pag
 For example:
 
 ```js filename="From"
-import React from 'react'
+import React from "react";
 export default class extends React.Component {
   render() {
-    const { pathname } = this.props.url
-    return <div>Current pathname: {pathname}</div>
+    const { pathname } = this.props.url;
+    return <div>Current pathname: {pathname}</div>;
   }
 }
 ```
 
 ```js filename="To"
-import React from 'react'
-import { withRouter } from 'next/router'
+import React from "react";
+import { withRouter } from "next/router";
 export default withRouter(
   class extends React.Component {
     render() {
-      const { pathname } = this.props.router
-      return <div>Current pathname: {pathname}</div>
+      const { pathname } = this.props.router;
+      return <div>Current pathname: {pathname}</div>;
     }
-  }
-)
+  },
+);
 ```
 
 This is one case. All the cases that are transformed (and tested) can be found in the [`__testfixtures__` directory](https://github.com/vercel/next.js/tree/canary/packages/next-codemod/transforms/__testfixtures__/url-to-withrouter).

@@ -4,14 +4,14 @@ Directives are for use in [React Server Components](/reference/rsc/server-compon
 
 Directives provide instructions to [bundlers compatible with React Server Components](/learn/creating-a-react-app#full-stack-frameworks).
 
-***
+---
 
-## Source code directives {/*source-code-directives*/}
+## Source code directives {/_source-code-directives_/}
 
 - [`'use client'`](/reference/rsc/use-client) lets you mark what code runs on the client.
 - [`'use server'`](/reference/rsc/use-server) marks server-side functions that can be called from client-side code.
 
-***
+---
 
 ## Sitemap
 

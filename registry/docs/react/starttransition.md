@@ -3,22 +3,22 @@
 `startTransition` lets you render a part of the UI in the background.
 
 ```js
-startTransition(action)
+startTransition(action);
 ```
 
-***
+---
 
-## Reference {/*reference*/}
+## Reference {/_reference_/}
 
-### `startTransition(action)` {/*starttransition*/}
+### `startTransition(action)` {/_starttransition_/}
 
 The `startTransition` function lets you mark a state update as a Transition.
 
 ```js {7,9}
-import { startTransition } from 'react';
+import { startTransition } from "react";
 
 function TabContainer() {
-  const [tab, setTab] = useState('about');
+  const [tab, setTab] = useState("about");
 
   function selectTab(nextTab) {
     startTransition(() => {
@@ -31,15 +31,15 @@ function TabContainer() {
 
 [See more examples below.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parameters {/_parameters_/}
 
 - `action`: A function that updates some state by calling one or more [`set` functions](/reference/react/useState#setstate). React calls `action` immediately with no parameters and marks all state updates scheduled synchronously during the `action` function call as Transitions. Any async calls awaited in the `action` will be included in the transition, but currently require wrapping any `set` functions after the `await` in an additional `startTransition` (see [Troubleshooting](/reference/react/useTransition#react-doesnt-treat-my-state-update-after-await-as-a-transition)). State updates marked as Transitions will be [non-blocking](#marking-a-state-update-as-a-non-blocking-transition) and [will not display unwanted loading indicators.](/reference/react/useTransition#preventing-unwanted-loading-indicators).
 
-#### Returns {/*returns*/}
+#### Returns {/_returns_/}
 
 `startTransition` does not return anything.
 
-#### Caveats {/*caveats*/}
+#### Caveats {/_caveats_/}
 
 - `startTransition` does not provide a way to track whether a Transition is pending. To show a pending indicator while the Transition is ongoing, you need [`useTransition`](/reference/react/useTransition) instead.
 
@@ -55,19 +55,19 @@ function TabContainer() {
 
 - If there are multiple ongoing Transitions, React currently batches them together. This is a limitation that may be removed in a future release.
 
-***
+---
 
-## Usage {/*usage*/}
+## Usage {/_usage_/}
 
-### Marking a state update as a non-blocking Transition {/*marking-a-state-update-as-a-non-blocking-transition*/}
+### Marking a state update as a non-blocking Transition {/_marking-a-state-update-as-a-non-blocking-transition_/}
 
-You can mark a state update as a *Transition* by wrapping it in a `startTransition` call:
+You can mark a state update as a _Transition_ by wrapping it in a `startTransition` call:
 
 ```js {7,9}
-import { startTransition } from 'react';
+import { startTransition } from "react";
 
 function TabContainer() {
-  const [tab, setTab] = useState('about');
+  const [tab, setTab] = useState("about");
 
   function selectTab(nextTab) {
     startTransition(() => {
@@ -86,7 +86,7 @@ With a Transition, your UI stays responsive in the middle of a re-render. For ex
 
 [Learn about Transitions and see examples on the `useTransition` page.](/reference/react/useTransition)
 
-***
+---
 
 ## Sitemap
 

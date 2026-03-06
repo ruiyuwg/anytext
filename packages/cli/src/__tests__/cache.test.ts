@@ -46,7 +46,9 @@ describe("getCachedManifest", () => {
   });
 
   it("returns null when meta file missing", () => {
-    vi.mocked(fs.existsSync).mockImplementation((p) => String(p) === MANIFEST_PATH);
+    vi.mocked(fs.existsSync).mockImplementation(
+      (p) => String(p) === MANIFEST_PATH,
+    );
     expect(cache.getCachedManifest()).toBeNull();
   });
 
@@ -126,11 +128,11 @@ describe("cacheManifest", () => {
     expect(fs.mkdirSync).toHaveBeenCalledWith(CACHE_DIR, { recursive: true });
     expect(fs.writeFileSync).toHaveBeenCalledWith(
       MANIFEST_PATH,
-      JSON.stringify(testManifest, null, 2)
+      JSON.stringify(testManifest, null, 2),
     );
     expect(fs.writeFileSync).toHaveBeenCalledWith(
       META_PATH,
-      JSON.stringify({ fetchedAt: Date.now(), registryVersion: 1 })
+      JSON.stringify({ fetchedAt: Date.now(), registryVersion: 1 }),
     );
   });
 
@@ -159,8 +161,13 @@ describe("cacheDoc", () => {
     vi.mocked(fs.existsSync).mockReturnValue(false);
     cache.cacheDoc("react/hooks.md", "# Hooks");
 
-    expect(fs.mkdirSync).toHaveBeenCalledWith(`${DOCS_DIR}/react`, { recursive: true });
-    expect(fs.writeFileSync).toHaveBeenCalledWith(`${DOCS_DIR}/react/hooks.md`, "# Hooks");
+    expect(fs.mkdirSync).toHaveBeenCalledWith(`${DOCS_DIR}/react`, {
+      recursive: true,
+    });
+    expect(fs.writeFileSync).toHaveBeenCalledWith(
+      `${DOCS_DIR}/react/hooks.md`,
+      "# Hooks",
+    );
   });
 });
 
@@ -168,7 +175,10 @@ describe("clearCache", () => {
   it("removes cache dir when it exists", () => {
     vi.mocked(fs.existsSync).mockReturnValue(true);
     cache.clearCache();
-    expect(fs.rmSync).toHaveBeenCalledWith(CACHE_DIR, { recursive: true, force: true });
+    expect(fs.rmSync).toHaveBeenCalledWith(CACHE_DIR, {
+      recursive: true,
+      force: true,
+    });
   });
 
   it("does nothing when cache dir missing", () => {
@@ -191,7 +201,7 @@ describe("getCacheStatus", () => {
     vi.mocked(fs.existsSync).mockReturnValue(true);
     const age30min = Date.now() - 30 * 60 * 1000;
     vi.mocked(fs.readFileSync).mockReturnValue(
-      JSON.stringify({ fetchedAt: age30min, registryVersion: 1 })
+      JSON.stringify({ fetchedAt: age30min, registryVersion: 1 }),
     );
     const status = cache.getCacheStatus();
     expect(status.exists).toBe(true);
@@ -210,7 +220,7 @@ describe("getCacheStatus", () => {
     vi.mocked(fs.existsSync).mockReturnValue(true);
     const age120min = Date.now() - 120 * 60 * 1000;
     vi.mocked(fs.readFileSync).mockReturnValue(
-      JSON.stringify({ fetchedAt: age120min, registryVersion: 1 })
+      JSON.stringify({ fetchedAt: age120min, registryVersion: 1 }),
     );
     const status = cache.getCacheStatus();
     expect(status.exists).toBe(true);

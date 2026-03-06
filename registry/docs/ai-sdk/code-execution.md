@@ -5,15 +5,15 @@ Anthropic provides a provider-defined code execution tool that gives Claude dire
 You can enable code execution using the provider-defined code execution tool:
 
 ```ts
-import { anthropic } from '@ai-sdk/anthropic';
-import { generateText } from 'ai';
+import { anthropic } from "@ai-sdk/anthropic";
+import { generateText } from "ai";
 
 const codeExecutionTool = anthropic.tools.codeExecution_20260120();
 
 const result = await generateText({
-  model: anthropic('claude-opus-4-20250514'),
+  model: anthropic("claude-opus-4-20250514"),
   prompt:
-    'Calculate the mean and standard deviation of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]',
+    "Calculate the mean and standard deviation of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]",
   tools: {
     code_execution: codeExecutionTool,
   },
@@ -34,19 +34,19 @@ Code execution errors are delivered as tool result parts in the response:
 
 ```ts
 const result = await generateText({
-  model: anthropic('claude-opus-4-20250514'),
-  prompt: 'Execute some Python script',
+  model: anthropic("claude-opus-4-20250514"),
+  prompt: "Execute some Python script",
   tools: {
     code_execution: codeExecutionTool,
   },
 });
 
 const toolErrors = result.content?.filter(
-  content => content.type === 'tool-error',
+  (content) => content.type === "tool-error",
 );
 
-toolErrors?.forEach(error => {
-  console.error('Tool execution error:', {
+toolErrors?.forEach((error) => {
+  console.error("Tool execution error:", {
     toolName: error.toolName,
     toolCallId: error.toolCallId,
     error: error.error,
@@ -59,15 +59,15 @@ Code execution errors are delivered as error parts in the stream:
 
 ```ts
 const result = await streamText({
-  model: anthropic('claude-opus-4-20250514'),
-  prompt: 'Execute some Python script',
+  model: anthropic("claude-opus-4-20250514"),
+  prompt: "Execute some Python script",
   tools: {
     code_execution: codeExecutionTool,
   },
 });
 for await (const part of result.textStream) {
-  if (part.type === 'error') {
-    console.log('Code execution error:', part.error);
+  if (part.type === "error") {
+    console.log("Code execution error:", part.error);
     // Handle code execution error appropriately
   }
 }
@@ -83,31 +83,31 @@ To enable programmatic tool calling, use the `allowedCallers` provider option on
 import {
   anthropic,
   forwardAnthropicContainerIdFromLastStep,
-} from '@ai-sdk/anthropic';
-import { generateText, tool, stepCountIs } from 'ai';
-import { z } from 'zod';
+} from "@ai-sdk/anthropic";
+import { generateText, tool, stepCountIs } from "ai";
+import { z } from "zod";
 
 const result = await generateText({
-  model: anthropic('claude-sonnet-4-5'),
+  model: anthropic("claude-sonnet-4-5"),
   stopWhen: stepCountIs(10),
   prompt:
-    'Get the weather for Tokyo, Sydney, and London, then calculate the average temperature.',
+    "Get the weather for Tokyo, Sydney, and London, then calculate the average temperature.",
   tools: {
     code_execution: anthropic.tools.codeExecution_20260120(),
 
     getWeather: tool({
-      description: 'Get current weather data for a city.',
+      description: "Get current weather data for a city.",
       inputSchema: z.object({
-        city: z.string().describe('Name of the city'),
+        city: z.string().describe("Name of the city"),
       }),
       execute: async ({ city }) => {
         // Your weather API implementation
-        return { temp: 22, condition: 'Sunny' };
+        return { temp: 22, condition: "Sunny" };
       },
       // Enable this tool to be called from within code execution
       providerOptions: {
         anthropic: {
-          allowedCallers: ['code_execution_20260120'],
+          allowedCallers: ["code_execution_20260120"],
         },
       },
     }),

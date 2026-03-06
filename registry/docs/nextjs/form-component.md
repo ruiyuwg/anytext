@@ -7,7 +7,7 @@ It's useful for forms that update URL search params as it reduces the boilerplat
 Basic usage:
 
 ```tsx filename="/app/ui/search.tsx" switcher
-import Form from 'next/form'
+import Form from "next/form";
 
 export default function Page() {
   return (
@@ -17,12 +17,12 @@ export default function Page() {
       <input name="query" />
       <button type="submit">Submit</button>
     </Form>
-  )
+  );
 }
 ```
 
 ```jsx filename="/app/ui/search.js" switcher
-import Form from 'next/form'
+import Form from "next/form";
 
 export default function Search() {
   return (
@@ -32,7 +32,7 @@ export default function Search() {
       <input name="query" />
       <button type="submit">Submit</button>
     </Form>
-  )
+  );
 }
 ```
 
@@ -93,7 +93,7 @@ When `action` is a function, the `<Form>` component supports the following prop:
 You can create a search form that navigates to a search results page by passing the path as an `action`:
 
 ```tsx filename="/app/page.tsx" switcher
-import Form from 'next/form'
+import Form from "next/form";
 
 export default function Page() {
   return (
@@ -101,12 +101,12 @@ export default function Page() {
       <input name="query" />
       <button type="submit">Submit</button>
     </Form>
-  )
+  );
 }
 ```
 
 ```jsx filename="/app/page.js" switcher
-import Form from 'next/form'
+import Form from "next/form";
 
 export default function Page() {
   return (
@@ -114,7 +114,7 @@ export default function Page() {
       <input name="query" />
       <button type="submit">Submit</button>
     </Form>
-  )
+  );
 }
 ```
 
@@ -125,26 +125,26 @@ When the user updates the query input field and submits the form, the form data 
 On the results page, you can access the query using the [`searchParams`](/docs/app/api-reference/file-conventions/page#searchparams-optional) `page.js` prop and use it to fetch data from an external source.
 
 ```tsx filename="/app/search/page.tsx" switcher
-import { getSearchResults } from '@/lib/search'
+import { getSearchResults } from "@/lib/search";
 
 export default async function SearchPage({
   searchParams,
 }: {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const results = await getSearchResults((await searchParams).query)
+  const results = await getSearchResults((await searchParams).query);
 
-  return <div>...</div>
+  return <div>...</div>;
 }
 ```
 
 ```jsx filename="/app/search/page.js" switcher
-import { getSearchResults } from '@/lib/search'
+import { getSearchResults } from "@/lib/search";
 
 export default async function SearchPage({ searchParams }) {
-  const results = await getSearchResults((await searchParams).query)
+  const results = await getSearchResults((await searchParams).query);
 
-  return <div>...</div>
+  return <div>...</div>;
 }
 ```
 
@@ -152,13 +152,13 @@ When the `<Form>` becomes visible in the user's viewport, shared UI (such as `la
 
 ```tsx filename="/app/search/loading.tsx" switcher
 export default function Loading() {
-  return <div>Loading...</div>
+  return <div>Loading...</div>;
 }
 ```
 
 ```jsx filename="/app/search/loading.js" switcher
 export default function Loading() {
-  return <div>Loading...</div>
+  return <div>Loading...</div>;
 }
 ```
 
@@ -167,34 +167,34 @@ To cover cases when shared UI hasn't yet loaded, you can show instant feedback t
 First, create a component that displays a loading state when the form is pending:
 
 ```tsx filename="/app/ui/search-button.tsx" switcher
-'use client'
-import { useFormStatus } from 'react-dom'
+"use client";
+import { useFormStatus } from "react-dom";
 
 export default function SearchButton() {
-  const status = useFormStatus()
+  const status = useFormStatus();
   return (
-    <button type="submit">{status.pending ? 'Searching...' : 'Search'}</button>
-  )
+    <button type="submit">{status.pending ? "Searching..." : "Search"}</button>
+  );
 }
 ```
 
 ```jsx filename="/app/ui/search-button.js" switcher
-'use client'
-import { useFormStatus } from 'react-dom'
+"use client";
+import { useFormStatus } from "react-dom";
 
 export default function SearchButton() {
-  const status = useFormStatus()
+  const status = useFormStatus();
   return (
-    <button type="submit">{status.pending ? 'Searching...' : 'Search'}</button>
-  )
+    <button type="submit">{status.pending ? "Searching..." : "Search"}</button>
+  );
 }
 ```
 
 Then, update the search form page to use the `SearchButton` component:
 
 ```tsx filename="/app/page.tsx" switcher
-import Form from 'next/form'
-import { SearchButton } from '@/ui/search-button'
+import Form from "next/form";
+import { SearchButton } from "@/ui/search-button";
 
 export default function Page() {
   return (
@@ -202,13 +202,13 @@ export default function Page() {
       <input name="query" />
       <SearchButton />
     </Form>
-  )
+  );
 }
 ```
 
 ```jsx filename="/app/ui/search-button.js" switcher
-import Form from 'next/form'
-import { SearchButton } from '@/ui/search-button'
+import Form from "next/form";
+import { SearchButton } from "@/ui/search-button";
 
 export default function Page() {
   return (
@@ -216,7 +216,7 @@ export default function Page() {
       <input name="query" />
       <SearchButton />
     </Form>
-  )
+  );
 }
 ```
 
@@ -225,8 +225,8 @@ export default function Page() {
 You can perform mutations by passing a function to the `action` prop.
 
 ```tsx filename="/app/posts/create/page.tsx" switcher
-import Form from 'next/form'
-import { createPost } from '@/posts/actions'
+import Form from "next/form";
+import { createPost } from "@/posts/actions";
 
 export default function Page() {
   return (
@@ -235,13 +235,13 @@ export default function Page() {
       {/* ... */}
       <button type="submit">Create Post</button>
     </Form>
-  )
+  );
 }
 ```
 
 ```jsx filename="/app/posts/create/page.js" switcher
-import Form from 'next/form'
-import { createPost } from '@/posts/actions'
+import Form from "next/form";
+import { createPost } from "@/posts/actions";
 
 export default function Page() {
   return (
@@ -250,7 +250,7 @@ export default function Page() {
       {/* ... */}
       <button type="submit">Create Post</button>
     </Form>
-  )
+  );
 }
 ```
 
@@ -259,66 +259,66 @@ After a mutation, it's common to redirect to the new resource. You can use the [
 > **Good to know**: Since the "destination" of the form submission is not known until the action is executed, `<Form>` cannot automatically prefetch shared UI.
 
 ```tsx filename="/app/posts/actions.ts" switcher
-'use server'
-import { redirect } from 'next/navigation'
+"use server";
+import { redirect } from "next/navigation";
 
 export async function createPost(formData: FormData) {
   // Create a new post
   // ...
 
   // Redirect to the new post
-  redirect(`/posts/${data.id}`)
+  redirect(`/posts/${data.id}`);
 }
 ```
 
 ```jsx filename="/app/posts/actions.js" switcher
-'use server'
-import { redirect } from 'next/navigation'
+"use server";
+import { redirect } from "next/navigation";
 
 export async function createPost(formData) {
   // Create a new post
   // ...
 
   // Redirect to the new post
-  redirect(`/posts/${data.id}`)
+  redirect(`/posts/${data.id}`);
 }
 ```
 
 Then, in the new page, you can fetch data using the `params` prop:
 
 ```tsx filename="/app/posts/[id]/page.tsx" switcher
-import { getPost } from '@/posts/data'
+import { getPost } from "@/posts/data";
 
 export default async function PostPage({
   params,
 }: {
-  params: Promise<{ id: string }>
+  params: Promise<{ id: string }>;
 }) {
-  const { id } = await params
-  const data = await getPost(id)
+  const { id } = await params;
+  const data = await getPost(id);
 
   return (
     <div>
       <h1>{data.title}</h1>
       {/* ... */}
     </div>
-  )
+  );
 }
 ```
 
 ```jsx filename="/app/posts/[id]/page.js" switcher
-import { getPost } from '@/posts/data'
+import { getPost } from "@/posts/data";
 
 export default async function PostPage({ params }) {
-  const { id } = await params
-  const data = await getPost(id)
+  const { id } = await params;
+  const data = await getPost(id);
 
   return (
     <div>
       <h1>{data.title}</h1>
       {/* ... */}
     </div>
-  )
+  );
 }
 ```
 
@@ -331,7 +331,7 @@ See the [Server Actions](/docs/app/getting-started/updating-data) docs for more 
 The Next.js Image component extends the HTML `<img>` element for automatic image optimization.
 
 ```jsx filename="app/page.js"
-import Image from 'next/image'
+import Image from "next/image";
 
 export default function Page() {
   return (
@@ -341,6 +341,6 @@ export default function Page() {
       height={500}
       alt="Picture of the author"
     />
-  )
+  );
 }
 ```

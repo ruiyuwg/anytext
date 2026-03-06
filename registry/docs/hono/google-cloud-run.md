@@ -90,7 +90,6 @@ npm i
 Update the port in `src/index.ts` to be `8080`.
 
 <!-- prettier-ignore -->
-
 ```ts
 import { serve } from '@hono/node-server'
 import { Hono } from 'hono'

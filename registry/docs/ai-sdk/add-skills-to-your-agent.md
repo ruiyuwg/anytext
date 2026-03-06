@@ -66,7 +66,7 @@ Create a generic sandbox interface that provides a consistent way to interact wi
 
 ```ts
 interface Sandbox {
-  readFile(path: string, encoding: 'utf-8'): Promise<string>;
+  readFile(path: string, encoding: "utf-8"): Promise<string>;
   readdir(
     path: string,
     opts: { withFileTypes: true },
@@ -108,7 +108,7 @@ async function discoverSkills(
       const skillFile = `${skillDir}/SKILL.md`;
 
       try {
-        const content = await sandbox.readFile(skillFile, 'utf-8');
+        const content = await sandbox.readFile(skillFile, "utf-8");
         const frontmatter = parseFrontmatter(content);
 
         // First skill with a given name wins (allows project overrides)
@@ -130,7 +130,7 @@ async function discoverSkills(
 
 function parseFrontmatter(content: string) {
   const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---/);
-  if (!match?.[1]) throw new Error('No frontmatter found');
+  if (!match?.[1]) throw new Error("No frontmatter found");
   // Parse YAML using your preferred library
   return yaml.parse(match[1]);
 }
@@ -143,8 +143,8 @@ Include discovered skills in the system prompt so the agent knows what's availab
 ```ts
 function buildSkillsPrompt(skills: SkillMetadata[]): string {
   const skillsList = skills
-    .map(s => `- ${s.name}: ${s.description}`)
-    .join('\n');
+    .map((s) => `- ${s.name}: ${s.description}`)
+    .join("\n");
 
   return `
 ## Skills
@@ -171,9 +171,9 @@ function stripFrontmatter(content: string): string {
 }
 
 const loadSkillTool = tool({
-  description: 'Load a skill to get specialized instructions',
+  description: "Load a skill to get specialized instructions",
   inputSchema: z.object({
-    name: z.string().describe('The skill name to load'),
+    name: z.string().describe("The skill name to load"),
   }),
   execute: async ({ name }, { experimental_context }) => {
     const { sandbox, skills } = experimental_context as {
@@ -181,13 +181,15 @@ const loadSkillTool = tool({
       skills: SkillMetadata[];
     };
 
-    const skill = skills.find(s => s.name.toLowerCase() === name.toLowerCase());
+    const skill = skills.find(
+      (s) => s.name.toLowerCase() === name.toLowerCase(),
+    );
     if (!skill) {
       return { error: `Skill '${name}' not found` };
     }
 
     const skillFile = `${skill.path}/SKILL.md`;
-    const content = await sandbox.readFile(skillFile, 'utf-8');
+    const content = await sandbox.readFile(skillFile, "utf-8");
     const body = stripFrontmatter(content);
 
     return {
@@ -217,16 +219,16 @@ const callOptionsSchema = z.object({
 });
 
 const readFileTool = tool({
-  description: 'Read a file from the filesystem',
+  description: "Read a file from the filesystem",
   inputSchema: z.object({ path: z.string() }),
   execute: async ({ path }, { experimental_context }) => {
     const { sandbox } = experimental_context as { sandbox: Sandbox };
-    return sandbox.readFile(path, 'utf-8');
+    return sandbox.readFile(path, "utf-8");
   },
 });
 
 const bashTool = tool({
-  description: 'Execute a bash command',
+  description: "Execute a bash command",
   inputSchema: z.object({ command: z.string() }),
   execute: async ({ command }, { experimental_context }) => {
     const { sandbox } = experimental_context as { sandbox: Sandbox };
@@ -261,8 +263,8 @@ const sandbox = createSandbox({ workingDirectory: process.cwd() });
 
 // Discover skills at startup
 const skills = await discoverSkills(sandbox, [
-  '.agents/skills',
-  '~/.config/agent/skills',
+  ".agents/skills",
+  "~/.config/agent/skills",
 ]);
 
 // Run the agent

@@ -2,18 +2,19 @@
 
 Validates that components are static, not recreated every render. Components that are recreated dynamically can reset state and trigger excessive re-rendering.
 
-## Rule Details {/*rule-details*/}
+## Rule Details {/_rule-details_/}
 
 Components defined inside other components are recreated on every render. React sees each as a brand new component type, unmounting the old one and mounting the new one, destroying all state and DOM nodes in the process.
 
-### Invalid {/*invalid*/}
+### Invalid {/_invalid_/}
 
 Examples of incorrect code for this rule:
 
 ```js
 // ❌ Component defined inside component
 function Parent() {
-  const ChildComponent = () => { // New component every render!
+  const ChildComponent = () => {
+    // New component every render!
     const [count, setCount] = useState(0);
     return <button onClick={() => setCount(count + 1)}>{count}</button>;
   };
@@ -22,16 +23,15 @@ function Parent() {
 }
 
 // ❌ Dynamic component creation
-function Parent({type}) {
-  const Component = type === 'button'
-    ? () => <button>Click</button>
-    : () => <div>Text</div>;
+function Parent({ type }) {
+  const Component =
+    type === "button" ? () => <button>Click</button> : () => <div>Text</div>;
 
   return <Component />;
 }
 ```
 
-### Valid {/*valid*/}
+### Valid {/_valid_/}
 
 Examples of correct code for this rule:
 
@@ -40,32 +40,30 @@ Examples of correct code for this rule:
 const ButtonComponent = () => <button>Click</button>;
 const TextComponent = () => <div>Text</div>;
 
-function Parent({type}) {
-  const Component = type === 'button'
-    ? ButtonComponent  // Reference existing component
-    : TextComponent;
+function Parent({ type }) {
+  const Component =
+    type === "button"
+      ? ButtonComponent // Reference existing component
+      : TextComponent;
 
   return <Component />;
 }
 ```
 
-## Troubleshooting {/*troubleshooting*/}
+## Troubleshooting {/_troubleshooting_/}
 
-### I need to render different components conditionally {/*conditional-components*/}
+### I need to render different components conditionally {/_conditional-components_/}
 
 You might define components inside to access local state:
 
 ```js {expectedErrors: {'react-compiler': [13]}}
 // ❌ Wrong: Inner component to access parent state
 function Parent() {
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState("light");
 
-  function ThemedButton() { // Recreated every render!
-    return (
-      <button className={theme}>
-        Click me
-      </button>
-    );
+  function ThemedButton() {
+    // Recreated every render!
+    return <button className={theme}>Click me</button>;
   }
 
   return <ThemedButton />;
@@ -76,23 +74,19 @@ Pass data as props instead:
 
 ```js
 // ✅ Better: Pass props to static component
-function ThemedButton({theme}) {
-  return (
-    <button className={theme}>
-      Click me
-    </button>
-  );
+function ThemedButton({ theme }) {
+  return <button className={theme}>Click me</button>;
 }
 
 function Parent() {
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState("light");
   return <ThemedButton theme={theme} />;
 }
 ```
 
 If you find yourself wanting to define components inside other components to access local variables, that's a sign you should be passing props instead. This makes components more reusable and testable.
 
-***
+---
 
 ## Sitemap
 

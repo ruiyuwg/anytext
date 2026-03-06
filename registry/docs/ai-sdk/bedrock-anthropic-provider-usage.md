@@ -9,19 +9,19 @@ For more information on Claude models available on Amazon Bedrock, see [Claude o
 You can import the default provider instance `bedrockAnthropic` from `@ai-sdk/amazon-bedrock/anthropic`:
 
 ```typescript
-import { bedrockAnthropic } from '@ai-sdk/amazon-bedrock/anthropic';
+import { bedrockAnthropic } from "@ai-sdk/amazon-bedrock/anthropic";
 ```
 
 If you need a customized setup, you can import `createBedrockAnthropic` from `@ai-sdk/amazon-bedrock/anthropic` and create a provider instance with your settings:
 
 ```typescript
-import { createBedrockAnthropic } from '@ai-sdk/amazon-bedrock/anthropic';
+import { createBedrockAnthropic } from "@ai-sdk/amazon-bedrock/anthropic";
 
 const bedrockAnthropic = createBedrockAnthropic({
-  region: 'us-east-1', // optional
-  accessKeyId: 'xxxxxxxxx', // optional
-  secretAccessKey: 'xxxxxxxxx', // optional
-  sessionToken: 'xxxxxxxxx', // optional
+  region: "us-east-1", // optional
+  accessKeyId: "xxxxxxxxx", // optional
+  secretAccessKey: "xxxxxxxxx", // optional
+  sessionToken: "xxxxxxxxx", // optional
 });
 ```
 
@@ -29,48 +29,48 @@ const bedrockAnthropic = createBedrockAnthropic({
 
 You can use the following optional settings to customize the Bedrock Anthropic provider instance:
 
-- **region** *string*
+- **region** _string_
 
   The AWS region that you want to use for the API calls.
   It uses the `AWS_REGION` environment variable by default.
 
-- **accessKeyId** *string*
+- **accessKeyId** _string_
 
   The AWS access key ID that you want to use for the API calls.
   It uses the `AWS_ACCESS_KEY_ID` environment variable by default.
 
-- **secretAccessKey** *string*
+- **secretAccessKey** _string_
 
   The AWS secret access key that you want to use for the API calls.
   It uses the `AWS_SECRET_ACCESS_KEY` environment variable by default.
 
-- **sessionToken** *string*
+- **sessionToken** _string_
 
   Optional. The AWS session token that you want to use for the API calls.
   It uses the `AWS_SESSION_TOKEN` environment variable by default.
 
-- **apiKey** *string*
+- **apiKey** _string_
 
   API key for authenticating requests using Bearer token authentication.
   When provided, this will be used instead of AWS SigV4 authentication.
   It uses the `AWS_BEARER_TOKEN_BEDROCK` environment variable by default.
 
-- **baseURL** *string*
+- **baseURL** _string_
 
   Base URL for the Bedrock API calls.
   Useful for custom endpoints or proxy configurations.
 
-- **headers** *Resolvable\<Record\<string, string | undefined>>*
+- **headers** _Resolvable\<Record\<string, string | undefined>>_
 
   Headers to include in the requests.
 
-- **fetch** *(input: RequestInfo, init?: RequestInit) => Promise\<Response>*
+- **fetch** _(input: RequestInfo, init?: RequestInit) => Promise\<Response>_
 
   Custom [fetch](https://developer.mozilla.org/en-US/docs/Web/API/fetch) implementation.
   You can use it as a middleware to intercept requests,
   or to provide a custom fetch implementation for e.g. testing.
 
-- **credentialProvider** *() => PromiseLike\<BedrockCredentials>*
+- **credentialProvider** _() => PromiseLike\<BedrockCredentials>_
 
   The AWS credential provider to use for the Bedrock provider to get dynamic
   credentials similar to the AWS SDK. Setting a provider here will cause its
@@ -83,18 +83,18 @@ You can create models that call the [Anthropic Messages API](https://docs.anthro
 The first argument is the model id, e.g. `us.anthropic.claude-3-5-sonnet-20241022-v2:0`.
 
 ```ts
-const model = bedrockAnthropic('us.anthropic.claude-3-5-sonnet-20241022-v2:0');
+const model = bedrockAnthropic("us.anthropic.claude-3-5-sonnet-20241022-v2:0");
 ```
 
 You can use Bedrock Anthropic language models to generate text with the `generateText` function:
 
 ```ts
-import { bedrockAnthropic } from '@ai-sdk/amazon-bedrock/anthropic';
-import { generateText } from 'ai';
+import { bedrockAnthropic } from "@ai-sdk/amazon-bedrock/anthropic";
+import { generateText } from "ai";
 
 const { text } = await generateText({
-  model: bedrockAnthropic('us.anthropic.claude-3-5-sonnet-20241022-v2:0'),
-  prompt: 'Write a vegetarian lasagna recipe for 4 people.',
+  model: bedrockAnthropic("us.anthropic.claude-3-5-sonnet-20241022-v2:0"),
+  prompt: "Write a vegetarian lasagna recipe for 4 people.",
 });
 ```
 
@@ -104,22 +104,22 @@ In the messages and message parts, you can use the `providerOptions` property to
 You need to set the `anthropic` property in the `providerOptions` object to `{ cacheControl: { type: 'ephemeral' } }` to set a cache control breakpoint.
 
 ```ts
-import { bedrockAnthropic } from '@ai-sdk/amazon-bedrock/anthropic';
-import { generateText } from 'ai';
+import { bedrockAnthropic } from "@ai-sdk/amazon-bedrock/anthropic";
+import { generateText } from "ai";
 
 const result = await generateText({
-  model: bedrockAnthropic('us.anthropic.claude-sonnet-4-5-20250929-v1:0'),
+  model: bedrockAnthropic("us.anthropic.claude-sonnet-4-5-20250929-v1:0"),
   messages: [
     {
-      role: 'system',
-      content: 'You are an expert assistant.',
+      role: "system",
+      content: "You are an expert assistant.",
       providerOptions: {
-        anthropic: { cacheControl: { type: 'ephemeral' } },
+        anthropic: { cacheControl: { type: "ephemeral" } },
       },
     },
     {
-      role: 'user',
-      content: 'Explain quantum computing.',
+      role: "user",
+      content: "Explain quantum computing.",
     },
   ],
 });
@@ -146,20 +146,20 @@ Sonnet v2 does not support these tools.
 #### Bash Tool
 
 ```ts
-import { bedrockAnthropic } from '@ai-sdk/amazon-bedrock/anthropic';
-import { generateText, stepCountIs } from 'ai';
+import { bedrockAnthropic } from "@ai-sdk/amazon-bedrock/anthropic";
+import { generateText, stepCountIs } from "ai";
 
 const result = await generateText({
-  model: bedrockAnthropic('us.anthropic.claude-sonnet-4-5-20250929-v1:0'),
+  model: bedrockAnthropic("us.anthropic.claude-sonnet-4-5-20250929-v1:0"),
   tools: {
     bash: bedrockAnthropic.tools.bash_20241022({
       execute: async ({ command }) => {
         // Implement your bash command execution logic here
-        return [{ type: 'text', text: `Executed: ${command}` }];
+        return [{ type: "text", text: `Executed: ${command}` }];
       },
     }),
   },
-  prompt: 'List the files in my directory.',
+  prompt: "List the files in my directory.",
   stopWhen: stepCountIs(2),
 });
 ```
@@ -167,20 +167,20 @@ const result = await generateText({
 #### Text Editor Tool
 
 ```ts
-import { bedrockAnthropic } from '@ai-sdk/amazon-bedrock/anthropic';
-import { generateText, stepCountIs } from 'ai';
+import { bedrockAnthropic } from "@ai-sdk/amazon-bedrock/anthropic";
+import { generateText, stepCountIs } from "ai";
 
 const result = await generateText({
-  model: bedrockAnthropic('us.anthropic.claude-sonnet-4-5-20250929-v1:0'),
+  model: bedrockAnthropic("us.anthropic.claude-sonnet-4-5-20250929-v1:0"),
   tools: {
     str_replace_editor: bedrockAnthropic.tools.textEditor_20241022({
       execute: async ({ command, path, old_str, new_str, insert_text }) => {
         // Implement your text editing logic here
-        return 'File updated successfully';
+        return "File updated successfully";
       },
     }),
   },
-  prompt: 'Update my README file.',
+  prompt: "Update my README file.",
   stopWhen: stepCountIs(5),
 });
 ```
@@ -188,42 +188,42 @@ const result = await generateText({
 #### Computer Tool
 
 ```ts
-import { bedrockAnthropic } from '@ai-sdk/amazon-bedrock/anthropic';
-import { generateText, stepCountIs } from 'ai';
-import fs from 'fs';
+import { bedrockAnthropic } from "@ai-sdk/amazon-bedrock/anthropic";
+import { generateText, stepCountIs } from "ai";
+import fs from "fs";
 
 const result = await generateText({
-  model: bedrockAnthropic('us.anthropic.claude-sonnet-4-5-20250929-v1:0'),
+  model: bedrockAnthropic("us.anthropic.claude-sonnet-4-5-20250929-v1:0"),
   tools: {
     computer: bedrockAnthropic.tools.computer_20241022({
       displayWidthPx: 1024,
       displayHeightPx: 768,
       execute: async ({ action, coordinate, text }) => {
-        if (action === 'screenshot') {
+        if (action === "screenshot") {
           return {
-            type: 'image',
-            data: fs.readFileSync('./screenshot.png').toString('base64'),
+            type: "image",
+            data: fs.readFileSync("./screenshot.png").toString("base64"),
           };
         }
         return `executed ${action}`;
       },
       toModelOutput({ output }) {
         return {
-          type: 'content',
+          type: "content",
           value: [
-            typeof output === 'string'
-              ? { type: 'text', text: output }
+            typeof output === "string"
+              ? { type: "text", text: output }
               : {
-                  type: 'image-data',
+                  type: "image-data",
                   data: output.data,
-                  mediaType: 'image/png',
+                  mediaType: "image/png",
                 },
           ],
         };
       },
     }),
   },
-  prompt: 'Take a screenshot.',
+  prompt: "Take a screenshot.",
   stopWhen: stepCountIs(3),
 });
 ```
@@ -243,15 +243,15 @@ Anthropic has reasoning support for Claude 3.7 and Claude 4 models on Bedrock, i
 You can enable it using the `thinking` provider option and specifying a thinking budget in tokens.
 
 ```ts
-import { bedrockAnthropic } from '@ai-sdk/amazon-bedrock/anthropic';
-import { generateText } from 'ai';
+import { bedrockAnthropic } from "@ai-sdk/amazon-bedrock/anthropic";
+import { generateText } from "ai";
 
 const { text, reasoningText, reasoning } = await generateText({
-  model: bedrockAnthropic('us.anthropic.claude-sonnet-4-5-20250929-v1:0'),
-  prompt: 'How many people will live in the world in 2040?',
+  model: bedrockAnthropic("us.anthropic.claude-sonnet-4-5-20250929-v1:0"),
+  prompt: "How many people will live in the world in 2040?",
   providerOptions: {
     anthropic: {
-      thinking: { type: 'enabled', budgetTokens: 12000 },
+      thinking: { type: "enabled", budgetTokens: 12000 },
     },
   },
 });
@@ -266,16 +266,16 @@ on how to integrate reasoning into your chatbot.
 
 ### Model Capabilities
 
-| Model                                          | Image Input         | Object Generation   | Tool Usage          | Computer Use        | Reasoning           |
-| ---------------------------------------------- | ------------------- | ------------------- | ------------------- | ------------------- | ------------------- |
-| `us.anthropic.claude-opus-4-6-v1`              |  |  |  |  |  |
-| `us.anthropic.claude-opus-4-5-20251101-v1:0`   |  |  |  |  |  |
-| `us.anthropic.claude-sonnet-4-5-20250929-v1:0` |  |  |  |  |  |
-| `us.anthropic.claude-opus-4-20250514-v1:0`     |  |  |  |  |  |
-| `us.anthropic.claude-sonnet-4-20250514-v1:0`   |  |  |  |  |  |
-| `us.anthropic.claude-opus-4-1-20250805-v1:0`   |  |  |  |  |  |
-| `us.anthropic.claude-haiku-4-5-20251001-v1:0`  |  |  |  |  |  |
-| `us.anthropic.claude-3-5-sonnet-20241022-v2:0` |  |  |  |  |  |
+| Model                                          | Image Input | Object Generation | Tool Usage | Computer Use | Reasoning |
+| ---------------------------------------------- | ----------- | ----------------- | ---------- | ------------ | --------- |
+| `us.anthropic.claude-opus-4-6-v1`              |             |                   |            |              |           |
+| `us.anthropic.claude-opus-4-5-20251101-v1:0`   |             |                   |            |              |           |
+| `us.anthropic.claude-sonnet-4-5-20250929-v1:0` |             |                   |            |              |           |
+| `us.anthropic.claude-opus-4-20250514-v1:0`     |             |                   |            |              |           |
+| `us.anthropic.claude-sonnet-4-20250514-v1:0`   |             |                   |            |              |           |
+| `us.anthropic.claude-opus-4-1-20250805-v1:0`   |             |                   |            |              |           |
+| `us.anthropic.claude-haiku-4-5-20251001-v1:0`  |             |                   |            |              |           |
+| `us.anthropic.claude-3-5-sonnet-20241022-v2:0` |             |                   |            |              |           |
 
 The Bedrock Anthropic provider uses the native InvokeModel API and supports
 all features available in the Anthropic API, except for the Files API and MCP

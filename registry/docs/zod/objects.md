@@ -3,14 +3,14 @@
 To define an object type:
 
 ```ts z.object
-  // all properties are required by default
-  const Person = z.object({
-    name: z.string(),
-    age: z.number(),
-  });
+// all properties are required by default
+const Person = z.object({
+  name: z.string(),
+  age: z.number(),
+});
 
-  type Person = z.infer<typeof Person>;
-  // => { name: string; age: number; }
+type Person = z.infer<typeof Person>;
+// => { name: string; age: number; }
 ```
 
 By default, all properties are required. To make certain properties optional:
@@ -37,7 +37,7 @@ Dog.parse({ name: "Yeller" }); // ✅
 ```
 ````
 
-By default, unrecognized keys are *stripped* from the parsed result:
+By default, unrecognized keys are _stripped_ from the parsed result:
 
 ```ts z.object
 Dog.parse({ name: "Yeller", extraKey: true });
@@ -46,7 +46,7 @@ Dog.parse({ name: "Yeller", extraKey: true });
 
 ### `z.strictObject`
 
-To define a *strict* schema that throws an error when unknown keys are found:
+To define a _strict_ schema that throws an error when unknown keys are found:
 
 ```ts z.object
 const StrictDog = z.strictObject({
@@ -59,7 +59,7 @@ StrictDog.parse({ name: "Yeller", extraKey: true });
 
 ### `z.looseObject`
 
-To define a *loose* schema that allows unknown keys to pass through:
+To define a _loose_ schema that allows unknown keys to pass through:
 
 ```ts z.object
 const LooseDog = z.looseObject({
@@ -72,7 +72,7 @@ LooseDog.parse({ name: "Yeller", extraKey: true });
 
 ### `.catchall()`
 
-To define a *catchall schema* that will be used to validate any unrecognized keys:
+To define a _catchall schema_ that will be used to validate any unrecognized keys:
 
 ````
 ```ts z.object
@@ -162,7 +162,8 @@ This API can be used to overwrite existing fields! Be careful with this power! I
 **Alternative: spread syntax** — You can alternatively avoid `.extend()` altogether by creating a new object schema entirely. This makes the strictness level of the resulting schema visually obvious.
 
 ```ts
-const DogWithBreed = z.object({ // or z.strictObject() or z.looseObject()...
+const DogWithBreed = z.object({
+  // or z.strictObject() or z.looseObject()...
   ...Dog.shape,
   breed: z.string(),
 });
@@ -193,7 +194,7 @@ The `.safeExtend()` method works similarly to `.extend()`, but it won't let you 
 z.object({ a: z.string() }).safeExtend({ a: z.string().min(5) }); // ✅
 z.object({ a: z.string() }).safeExtend({ a: z.any() }); // ✅
 z.object({ a: z.string() }).safeExtend({ a: z.number() });
-//                                       ^  ❌ ZodNumber is not assignable 
+//                                       ^  ❌ ZodNumber is not assignable
 ```
 
 Use `.safeExtend()` to extend schemas that contain refinements. (Regular `.extend()` will throw an error when used on schemas with refinements.)
@@ -313,7 +314,7 @@ const RecipeOptionalIngredients = z.partial(Recipe, {
 
 ### `.required()`
 
-Zod provides an API for making some or all properties *required*, inspired by TypeScript's [`Required`](https://www.typescriptlang.org/docs/handbook/utility-types.html#requiredtype) utility type.
+Zod provides an API for making some or all properties _required_, inspired by TypeScript's [`Required`](https://www.typescriptlang.org/docs/handbook/utility-types.html#requiredtype) utility type.
 
 To make all properties required:
 

@@ -17,8 +17,8 @@ yarn add superjson
 #### 2. Add to your `initTRPC`
 
 ```ts title='routers/router/_app.ts'
-import { initTRPC } from '@trpc/server';
-import superjson from 'superjson';
+import { initTRPC } from "@trpc/server";
+import superjson from "superjson";
 
 export const t = initTRPC.create({
   transformer: superjson,
@@ -32,14 +32,14 @@ export const t = initTRPC.create({
 `createTRPCClient()`:
 
 ```ts title='src/app/_trpc/client.ts'
-import { createTRPCClient } from '@trpc/client';
-import type { AppRouter } from '~/server/routers/_app';
-import superjson from 'superjson';
+import { createTRPCClient } from "@trpc/client";
+import type { AppRouter } from "~/server/routers/_app";
+import superjson from "superjson";
 
 export const client = createTRPCClient<AppRouter>({
   links: [
     httpLink({
-      url: 'http://localhost:3000',
+      url: "http://localhost:3000",
       transformer: superjson,
     }),
   ],
@@ -63,7 +63,7 @@ yarn add superjson devalue
 Here we use `parse` and `stringify` as they [mitigate XSS](https://github.com/Rich-Harris/devalue?tab=readme-ov-file#xss-mitigation).
 
 ```ts title='utils/trpc.ts'
-import { parse, stringify } from 'devalue';
+import { parse, stringify } from "devalue";
 
 // [...]
 
@@ -76,8 +76,8 @@ export const transformer = {
 #### 3. Add to your `initTRPC`
 
 ```ts title='server/routers/_app.ts'
-import { initTRPC } from '@trpc/server';
-import { transformer } from '../../utils/trpc';
+import { initTRPC } from "@trpc/server";
+import { transformer } from "../../utils/trpc";
 
 export const t = initTRPC.create({
   transformer,
@@ -91,14 +91,14 @@ export const t = initTRPC.create({
 `createTRPCClient()`:
 
 ```ts title='src/app/_trpc/client.ts'
-import { createTRPCClient } from '@trpc/client';
-import type { AppRouter } from '~/server/routers/_app';
-import { transformer } from '../../utils/trpc';
+import { createTRPCClient } from "@trpc/client";
+import type { AppRouter } from "~/server/routers/_app";
+import { transformer } from "../../utils/trpc";
 
 export const client = createTRPCClient<AppRouter>({
   links: [
     httpLink({
-      url: 'http://localhost:3000',
+      url: "http://localhost:3000",
       transformer,
     }),
   ],
@@ -160,7 +160,7 @@ The error formatting in your router will be inferred all the way to your client 
 ### Adding custom formatting
 
 ```ts title='server.ts'
-import { initTRPC } from '@trpc/server';
+import { initTRPC } from "@trpc/server";
 
 export const t = initTRPC.context<Context>().create({
   errorFormatter(opts) {
@@ -170,7 +170,7 @@ export const t = initTRPC.context<Context>().create({
       data: {
         ...shape.data,
         zodError:
-          error.code === 'BAD_REQUEST' && error.cause instanceof ZodError
+          error.code === "BAD_REQUEST" && error.cause instanceof ZodError
             ? error.cause.flatten()
             : null,
       },
@@ -186,7 +186,7 @@ export function MyComponent() {
   const mutation = trpc.addPost.useMutation();
 
   useEffect(() => {
-    mutation.mutate({ title: 'example' });
+    mutation.mutate({ title: "example" });
   }, []);
 
   if (mutation.error?.data?.zodError) {
@@ -206,7 +206,7 @@ export function MyComponent() {
 ```ts
 {
   error: TRPCError;
-  type: ProcedureType | 'unknown';
+  type: ProcedureType | "unknown";
   path: string | undefined;
   input: unknown;
   ctx: undefined | TContext;

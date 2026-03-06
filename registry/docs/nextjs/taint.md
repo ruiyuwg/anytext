@@ -12,15 +12,15 @@ The `taint` option enables support for experimental React APIs for tainting obje
 > **Good to know**: Activating this flag also enables the React `experimental` channel for `app` directory.
 
 ```ts filename="next.config.ts" switcher
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   experimental: {
     taint: true,
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 ```js filename="next.config.js" switcher
@@ -29,9 +29,9 @@ const nextConfig = {
   experimental: {
     taint: true,
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 > **Warning:** Do not rely on the taint API as your only mechanism to prevent exposing sensitive data to the client. See our [security recommendations](/blog/security-nextjs-server-components-actions).
@@ -59,17 +59,17 @@ It is recommended to model your data and APIs so that sensitive data is not retu
 In this case, the `getUserDetails` function returns data about a given user. We taint the user object reference, so that it cannot cross a Server-Client boundary. For example, assuming `UserCard` is a Client Component.
 
 ```ts switcher
-import { experimental_taintObjectReference } from 'react'
+import { experimental_taintObjectReference } from "react";
 
 function getUserDetails(id: string): UserDetails {
-  const user = await db.queryUserById(id)
+  const user = await db.queryUserById(id);
 
   experimental_taintObjectReference(
-    'Do not use the entire user info object. Instead, select only the fields you need.',
-    user
-  )
+    "Do not use the entire user info object. Instead, select only the fields you need.",
+    user,
+  );
 
-  return user
+  return user;
 }
 ```
 
@@ -94,31 +94,31 @@ We can still access individual fields from the tainted `userDetails` object.
 export async function ContactPage({
   params,
 }: {
-  params: Promise<{ id: string }>
+  params: Promise<{ id: string }>;
 }) {
-  const { id } = await params
-  const userDetails = await getUserDetails(id)
+  const { id } = await params;
+  const userDetails = await getUserDetails(id);
 
   return (
     <UserCard
       firstName={userDetails.firstName}
       lastName={userDetails.lastName}
     />
-  )
+  );
 }
 ```
 
 ```jsx filename="app/contact/page.js switcher
 export async function ContactPage({ params }) {
-  const { id } = await params
-  const userDetails = await getUserDetails(id)
+  const { id } = await params;
+  const userDetails = await getUserDetails(id);
 
   return (
     <UserCard
       firstName={userDetails.firstName}
       lastName={userDetails.lastName}
     />
-  )
+  );
 }
 ```
 
@@ -128,22 +128,22 @@ Now, passing the entire object to the Client Component will throw an error.
 export async function ContactPage({
   params,
 }: {
-  params: Promise<{ id: string }>
+  params: Promise<{ id: string }>;
 }) {
-  const userDetails = await getUserDetails(id)
+  const userDetails = await getUserDetails(id);
 
   // Throws an error
-  return <UserCard user={userDetails} />
+  return <UserCard user={userDetails} />;
 }
 ```
 
 ```jsx switcher
 export async function ContactPage({ params }) {
-  const { id } = await params
-  const userDetails = await getUserDetails(id)
+  const { id } = await params;
+  const userDetails = await getUserDetails(id);
 
   // Throws an error
-  return <UserCard user={userDetails} />
+  return <UserCard user={userDetails} />;
 }
 ```
 
@@ -154,18 +154,18 @@ In this case, we can access the server configuration by awaiting calls to `confi
 We can taint the `config.SERVICE_API_KEY` value.
 
 ```ts switcher
-import { experimental_taintUniqueValue } from 'react'
+import { experimental_taintUniqueValue } from "react";
 
 function getSystemConfig(): SystemConfig {
-  const config = await config.getConfigDetails()
+  const config = await config.getConfigDetails();
 
   experimental_taintUniqueValue(
-    'Do not pass configuration tokens to the client',
+    "Do not pass configuration tokens to the client",
     config,
-    config.SERVICE_API_KEY
-  )
+    config.SERVICE_API_KEY,
+  );
 
-  return config
+  return config;
 }
 ```
 
@@ -189,9 +189,9 @@ We can still access other properties of the `systemConfig` object.
 
 ```tsx
 export async function Dashboard() {
-  const systemConfig = await getSystemConfig()
+  const systemConfig = await getSystemConfig();
 
-  return <ClientDashboard version={systemConfig.SERVICE_API_VERSION} />
+  return <ClientDashboard version={systemConfig.SERVICE_API_VERSION} />;
 }
 ```
 
@@ -199,11 +199,11 @@ However, passing `SERVICE_API_KEY` to `ClientDashboard` throws an error.
 
 ```tsx
 export async function Dashboard() {
-  const systemConfig = await getSystemConfig()
+  const systemConfig = await getSystemConfig();
   // Someone makes a mistake in a PR
-  const version = systemConfig.SERVICE_API_KEY
+  const version = systemConfig.SERVICE_API_KEY;
 
-  return <ClientDashboard version={version} />
+  return <ClientDashboard version={version} />;
 }
 ```
 
@@ -213,11 +213,11 @@ Whereas, a value derived from a tainted unique value, will be exposed to the cli
 
 ```tsx
 export async function Dashboard() {
-  const systemConfig = await getSystemConfig()
+  const systemConfig = await getSystemConfig();
   // Someone makes a mistake in a PR
-  const version = `version::${systemConfig.SERVICE_API_KEY}`
+  const version = `version::${systemConfig.SERVICE_API_KEY}`;
 
-  return <ClientDashboard version={version} />
+  return <ClientDashboard version={version} />;
 }
 ```
 
@@ -234,7 +234,7 @@ Open `next.config.js` and add the `trailingSlash` config:
 ```js filename="next.config.js"
 module.exports = {
   trailingSlash: true,
-}
+};
 ```
 
 With this option set, URLs like `/about` will redirect to `/about/`.
@@ -263,10 +263,10 @@ Next.js can automatically transpile and bundle dependencies from local packages 
 ```js filename="next.config.js"
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ['package-name'],
-}
+  transpilePackages: ["package-name"],
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 ## Version History

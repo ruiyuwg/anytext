@@ -21,11 +21,11 @@ You can add memory to your agent with the AI SDK in three ways, each with differ
 The [Anthropic Memory Tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool) gives Claude a structured interface for managing a `/memories` directory. Claude reads its memory before starting tasks, creates and updates files as it works, and references them in future conversations.
 
 ```ts
-import { anthropic } from '@ai-sdk/anthropic';
-import { ToolLoopAgent } from 'ai';
+import { anthropic } from "@ai-sdk/anthropic";
+import { ToolLoopAgent } from "ai";
 
 const memory = anthropic.tools.memory_20250818({
-  execute: async action => {
+  execute: async (action) => {
     // `action` contains `command`, `path`, and other fields
     // depending on the command (view, create, str_replace,
     // insert, delete, rename).
@@ -35,12 +35,12 @@ const memory = anthropic.tools.memory_20250818({
 });
 
 const agent = new ToolLoopAgent({
-  model: 'anthropic/claude-haiku-4.5',
+  model: "anthropic/claude-haiku-4.5",
   tools: { memory },
 });
 
 const result = await agent.generate({
-  prompt: 'Remember that my favorite editor is Neovim',
+  prompt: "Remember that my favorite editor is Neovim",
 });
 ```
 
@@ -61,45 +61,45 @@ pnpm add @letta-ai/vercel-ai-sdk-provider
 ```
 
 ```ts
-import { lettaCloud } from '@letta-ai/vercel-ai-sdk-provider';
-import { ToolLoopAgent } from 'ai';
+import { lettaCloud } from "@letta-ai/vercel-ai-sdk-provider";
+import { ToolLoopAgent } from "ai";
 
 const agent = new ToolLoopAgent({
   model: lettaCloud(),
   providerOptions: {
     letta: {
-      agent: { id: 'your-agent-id' },
+      agent: { id: "your-agent-id" },
     },
   },
 });
 
 const result = await agent.generate({
-  prompt: 'Remember that my favorite editor is Neovim',
+  prompt: "Remember that my favorite editor is Neovim",
 });
 ```
 
 You can also use Letta's built-in memory tools alongside custom tools:
 
 ```ts
-import { lettaCloud } from '@letta-ai/vercel-ai-sdk-provider';
-import { ToolLoopAgent } from 'ai';
+import { lettaCloud } from "@letta-ai/vercel-ai-sdk-provider";
+import { ToolLoopAgent } from "ai";
 
 const agent = new ToolLoopAgent({
   model: lettaCloud(),
   tools: {
-    core_memory_append: lettaCloud.tool('core_memory_append'),
-    memory_insert: lettaCloud.tool('memory_insert'),
-    memory_replace: lettaCloud.tool('memory_replace'),
+    core_memory_append: lettaCloud.tool("core_memory_append"),
+    memory_insert: lettaCloud.tool("memory_insert"),
+    memory_replace: lettaCloud.tool("memory_replace"),
   },
   providerOptions: {
     letta: {
-      agent: { id: 'your-agent-id' },
+      agent: { id: "your-agent-id" },
     },
   },
 });
 
 const stream = agent.stream({
-  prompt: 'What do you remember about me?',
+  prompt: "What do you remember about me?",
 });
 ```
 
@@ -114,31 +114,31 @@ pnpm add @mem0/vercel-ai-provider
 ```
 
 ```ts
-import { createMem0 } from '@mem0/vercel-ai-provider';
-import { ToolLoopAgent } from 'ai';
+import { createMem0 } from "@mem0/vercel-ai-provider";
+import { ToolLoopAgent } from "ai";
 
 const mem0 = createMem0({
-  provider: 'openai',
+  provider: "openai",
   mem0ApiKey: process.env.MEM0_API_KEY,
   apiKey: process.env.OPENAI_API_KEY,
 });
 
 const agent = new ToolLoopAgent({
-  model: mem0('gpt-4.1', { user_id: 'user-123' }),
+  model: mem0("gpt-4.1", { user_id: "user-123" }),
 });
 
 const { text } = await agent.generate({
-  prompt: 'Remember that my favorite editor is Neovim',
+  prompt: "Remember that my favorite editor is Neovim",
 });
 ```
 
 Mem0 works across multiple LLM providers (OpenAI, Anthropic, Google, Groq, Cohere). You can also manage memories explicitly:
 
 ```ts
-import { addMemories, retrieveMemories } from '@mem0/vercel-ai-provider';
+import { addMemories, retrieveMemories } from "@mem0/vercel-ai-provider";
 
-await addMemories(messages, { user_id: 'user-123' });
-const context = await retrieveMemories(prompt, { user_id: 'user-123' });
+await addMemories(messages, { user_id: "user-123" });
+const context = await retrieveMemories(prompt, { user_id: "user-123" });
 ```
 
 See the [Mem0 provider documentation](/providers/community-providers/mem0) for full setup and configuration.
@@ -153,8 +153,8 @@ pnpm add @supermemory/tools
 
 ```ts
 __PROVIDER_IMPORT__;
-import { supermemoryTools } from '@supermemory/tools/ai-sdk';
-import { ToolLoopAgent } from 'ai';
+import { supermemoryTools } from "@supermemory/tools/ai-sdk";
+import { ToolLoopAgent } from "ai";
 
 const agent = new ToolLoopAgent({
   model: __MODEL__,
@@ -162,7 +162,7 @@ const agent = new ToolLoopAgent({
 });
 
 const result = await agent.generate({
-  prompt: 'Remember that my favorite editor is Neovim',
+  prompt: "Remember that my favorite editor is Neovim",
 });
 ```
 
@@ -180,22 +180,22 @@ pnpm add @vectorize-io/hindsight-ai-sdk @vectorize-io/hindsight-client
 
 ```ts
 __PROVIDER_IMPORT__;
-import { HindsightClient } from '@vectorize-io/hindsight-client';
-import { createHindsightTools } from '@vectorize-io/hindsight-ai-sdk';
-import { ToolLoopAgent, stepCountIs } from 'ai';
-import { openai } from '@ai-sdk/openai';
+import { HindsightClient } from "@vectorize-io/hindsight-client";
+import { createHindsightTools } from "@vectorize-io/hindsight-ai-sdk";
+import { ToolLoopAgent, stepCountIs } from "ai";
+import { openai } from "@ai-sdk/openai";
 
 const client = new HindsightClient({ baseUrl: process.env.HINDSIGHT_API_URL });
 
 const agent = new ToolLoopAgent({
   model: __MODEL__,
-  tools: createHindsightTools({ client, bankId: 'user-123' }),
+  tools: createHindsightTools({ client, bankId: "user-123" }),
   stopWhen: stepCountIs(10),
-  instructions: 'You are a helpful assistant with long-term memory.',
+  instructions: "You are a helpful assistant with long-term memory.",
 });
 
 const result = await agent.generate({
-  prompt: 'Remember that my favorite editor is Neovim',
+  prompt: "Remember that my favorite editor is Neovim",
 });
 ```
 

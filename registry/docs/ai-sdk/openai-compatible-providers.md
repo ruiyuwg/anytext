@@ -22,59 +22,59 @@ The OpenAI Compatible provider is available via the `@ai-sdk/openai-compatible` 
 To use an OpenAI compatible provider, you can create a custom provider instance with the `createOpenAICompatible` function from `@ai-sdk/openai-compatible`:
 
 ```ts
-import { createOpenAICompatible } from '@ai-sdk/openai-compatible';
+import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
 
 const provider = createOpenAICompatible({
-  name: 'providerName',
+  name: "providerName",
   apiKey: process.env.PROVIDER_API_KEY,
-  baseURL: 'https://api.provider.com/v1',
+  baseURL: "https://api.provider.com/v1",
   includeUsage: true, // Include usage information in streaming responses
 });
 ```
 
 You can use the following optional settings to customize the provider instance:
 
-- **baseURL** *string*
+- **baseURL** _string_
 
   Set the URL prefix for API calls.
 
-- **apiKey** *string*
+- **apiKey** _string_
 
   API key for authenticating requests. If specified, adds an `Authorization`
   header to request headers with the value `Bearer <apiKey>`. This will be added
   before any headers potentially specified in the `headers` option.
 
-- **headers** *Record\<string,string>*
+- **headers** _Record\<string,string>_
 
   Optional custom headers to include in requests. These will be added to request headers
   after any headers potentially added by use of the `apiKey` option.
 
-- **queryParams** *Record\<string,string>*
+- **queryParams** _Record\<string,string>_
 
   Optional custom url query parameters to include in request urls.
 
-- **fetch** *(input: RequestInfo, init?: RequestInit) => Promise\<Response>*
+- **fetch** _(input: RequestInfo, init?: RequestInit) => Promise\<Response>_
 
   Custom [fetch](https://developer.mozilla.org/en-US/docs/Web/API/fetch) implementation.
   Defaults to the global `fetch` function.
   You can use it as a middleware to intercept requests,
   or to provide a custom fetch implementation for e.g. testing.
 
-- **includeUsage** *boolean*
+- **includeUsage** _boolean_
 
   Include usage information in streaming responses. When enabled, usage data will be included in the response metadata for streaming requests. Defaults to `undefined` (`false`).
 
-- **supportsStructuredOutputs** *boolean*
+- **supportsStructuredOutputs** _boolean_
 
   Set to true if the provider supports structured outputs. Only relevant for `provider()`, `provider.chatModel()`, and `provider.languageModel()`.
 
-- **transformRequestBody** *(args: Record\<string, any>) => Record\<string, any>*
+- **transformRequestBody** _(args: Record\<string, any>) => Record\<string, any>_
 
   Optional function to transform the request body before sending it to the API.
   This is useful for proxy providers that may require a different request format
   than the official OpenAI API.
 
-- **metadataExtractor** *MetadataExtractor*
+- **metadataExtractor** _MetadataExtractor_
 
   Optional metadata extractor to capture provider-specific metadata from API responses.
   See [Custom Metadata Extraction](#custom-metadata-extraction) for details.
@@ -85,7 +85,7 @@ You can create provider models using a provider instance.
 The first argument is the model id, e.g. `model-id`.
 
 ```ts
-const model = provider('model-id');
+const model = provider("model-id");
 ```
 
 You can also use the following factory methods:
@@ -110,43 +110,43 @@ Chat models created with this provider support the following capabilities:
 You can use provider language models to generate text with the `generateText` function:
 
 ```ts
-import { createOpenAICompatible } from '@ai-sdk/openai-compatible';
-import { generateText } from 'ai';
+import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
+import { generateText } from "ai";
 
 const provider = createOpenAICompatible({
-  name: 'providerName',
+  name: "providerName",
   apiKey: process.env.PROVIDER_API_KEY,
-  baseURL: 'https://api.provider.com/v1',
+  baseURL: "https://api.provider.com/v1",
 });
 
 const { text } = await generateText({
-  model: provider('model-id'),
-  prompt: 'Write a vegetarian lasagna recipe for 4 people.',
+  model: provider("model-id"),
+  prompt: "Write a vegetarian lasagna recipe for 4 people.",
 });
 ```
 
 ### Including model ids for auto-completion
 
 ```ts
-import { createOpenAICompatible } from '@ai-sdk/openai-compatible';
-import { generateText } from 'ai';
+import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
+import { generateText } from "ai";
 
 type ExampleChatModelIds =
-  | 'meta-llama/Llama-3-70b-chat-hf'
-  | 'meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo'
+  | "meta-llama/Llama-3-70b-chat-hf"
+  | "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo"
   | (string & {});
 
 type ExampleCompletionModelIds =
-  | 'codellama/CodeLlama-34b-Instruct-hf'
-  | 'Qwen/Qwen2.5-Coder-32B-Instruct'
+  | "codellama/CodeLlama-34b-Instruct-hf"
+  | "Qwen/Qwen2.5-Coder-32B-Instruct"
   | (string & {});
 
 type ExampleEmbeddingModelIds =
-  | 'BAAI/bge-large-en-v1.5'
-  | 'bert-base-uncased'
+  | "BAAI/bge-large-en-v1.5"
+  | "bert-base-uncased"
   | (string & {});
 
-type ExampleImageModelIds = 'dall-e-3' | 'stable-diffusion-xl' | (string & {});
+type ExampleImageModelIds = "dall-e-3" | "stable-diffusion-xl" | (string & {});
 
 const model = createOpenAICompatible<
   ExampleChatModelIds,
@@ -154,9 +154,9 @@ const model = createOpenAICompatible<
   ExampleEmbeddingModelIds,
   ExampleImageModelIds
 >({
-  name: 'example',
+  name: "example",
   apiKey: process.env.PROVIDER_API_KEY,
-  baseURL: 'https://api.example.com/v1',
+  baseURL: "https://api.example.com/v1",
 });
 
 // Subsequent calls to e.g. `model.chatModel` will auto-complete the model id
@@ -164,8 +164,8 @@ const model = createOpenAICompatible<
 // strings as well.
 
 const { text } = await generateText({
-  model: model.chatModel('meta-llama/Llama-3-70b-chat-hf'),
-  prompt: 'Write a vegetarian lasagna recipe for 4 people.',
+  model: model.chatModel("meta-llama/Llama-3-70b-chat-hf"),
+  prompt: "Write a vegetarian lasagna recipe for 4 people.",
 });
 ```
 
@@ -180,14 +180,14 @@ You can set these via the optional `queryParams` provider setting. These will be
 added to all requests made by the provider.
 
 ```ts highlight="7-9"
-import { createOpenAICompatible } from '@ai-sdk/openai-compatible';
+import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
 
 const provider = createOpenAICompatible({
-  name: 'providerName',
+  name: "providerName",
   apiKey: process.env.PROVIDER_API_KEY,
-  baseURL: 'https://api.provider.com/v1',
+  baseURL: "https://api.provider.com/v1",
   queryParams: {
-    'api-version': '1.0.0',
+    "api-version": "1.0.0",
   },
 });
 ```
@@ -200,25 +200,25 @@ For example, with the above configuration, API requests would include the query 
 You can create image models using the `.imageModel()` factory method:
 
 ```ts
-const model = provider.imageModel('model-id');
+const model = provider.imageModel("model-id");
 ```
 
 ### Basic Image Generation
 
 ```ts
-import { createOpenAICompatible } from '@ai-sdk/openai-compatible';
-import { generateImage } from 'ai';
+import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
+import { generateImage } from "ai";
 
 const provider = createOpenAICompatible({
-  name: 'providerName',
+  name: "providerName",
   apiKey: process.env.PROVIDER_API_KEY,
-  baseURL: 'https://api.provider.com/v1',
+  baseURL: "https://api.provider.com/v1",
 });
 
 const { images } = await generateImage({
-  model: provider.imageModel('model-id'),
-  prompt: 'A futuristic cityscape at sunset',
-  size: '1024x1024',
+  model: provider.imageModel("model-id"),
+  prompt: "A futuristic cityscape at sunset",
+  size: "1024x1024",
 });
 ```
 
@@ -229,22 +229,22 @@ The OpenAI Compatible provider supports image editing through the `/images/edits
 #### Basic Image Editing
 
 ```ts
-import { createOpenAICompatible } from '@ai-sdk/openai-compatible';
-import { generateImage } from 'ai';
-import fs from 'fs';
+import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
+import { generateImage } from "ai";
+import fs from "fs";
 
 const provider = createOpenAICompatible({
-  name: 'providerName',
+  name: "providerName",
   apiKey: process.env.PROVIDER_API_KEY,
-  baseURL: 'https://api.provider.com/v1',
+  baseURL: "https://api.provider.com/v1",
 });
 
-const imageBuffer = fs.readFileSync('./input-image.png');
+const imageBuffer = fs.readFileSync("./input-image.png");
 
 const { images } = await generateImage({
-  model: provider.imageModel('model-id'),
+  model: provider.imageModel("model-id"),
   prompt: {
-    text: 'Turn the cat into a dog but retain the style of the original image',
+    text: "Turn the cat into a dog but retain the style of the original image",
     images: [imageBuffer],
   },
 });
@@ -255,23 +255,23 @@ const { images } = await generateImage({
 Edit specific parts of an image using a mask:
 
 ```ts
-import { createOpenAICompatible } from '@ai-sdk/openai-compatible';
-import { generateImage } from 'ai';
-import fs from 'fs';
+import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
+import { generateImage } from "ai";
+import fs from "fs";
 
 const provider = createOpenAICompatible({
-  name: 'providerName',
+  name: "providerName",
   apiKey: process.env.PROVIDER_API_KEY,
-  baseURL: 'https://api.provider.com/v1',
+  baseURL: "https://api.provider.com/v1",
 });
 
-const image = fs.readFileSync('./input-image.png');
-const mask = fs.readFileSync('./mask.png');
+const image = fs.readFileSync("./input-image.png");
+const mask = fs.readFileSync("./mask.png");
 
 const { images } = await generateImage({
-  model: provider.imageModel('model-id'),
+  model: provider.imageModel("model-id"),
   prompt: {
-    text: 'A sunlit indoor lounge area with a pool containing a flamingo',
+    text: "A sunlit indoor lounge area with a pool containing a flamingo",
     images: [image],
     mask,
   },
@@ -287,24 +287,24 @@ URL-based images and convert them to the appropriate format.
 You can create embedding models using the `.embeddingModel()` factory method:
 
 ```ts
-const model = provider.embeddingModel('model-id');
+const model = provider.embeddingModel("model-id");
 ```
 
 ### Example
 
 ```ts
-import { createOpenAICompatible } from '@ai-sdk/openai-compatible';
-import { embed } from 'ai';
+import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
+import { embed } from "ai";
 
 const provider = createOpenAICompatible({
-  name: 'providerName',
+  name: "providerName",
   apiKey: process.env.PROVIDER_API_KEY,
-  baseURL: 'https://api.provider.com/v1',
+  baseURL: "https://api.provider.com/v1",
 });
 
 const { embedding } = await embed({
-  model: provider.embeddingModel('text-embedding-model'),
-  value: 'The quick brown fox jumps over the lazy dog',
+  model: provider.embeddingModel("text-embedding-model"),
+  value: "The quick brown fox jumps over the lazy dog",
 });
 ```
 
@@ -312,24 +312,24 @@ const { embedding } = await embed({
 
 The following provider options are available for embedding models via `providerOptions`:
 
-- **dimensions** *number*
+- **dimensions** _number_
 
   The number of dimensions the resulting output embeddings should have.
   Only supported in models that allow dimension configuration.
 
-- **user** *string*
+- **user** _string_
 
   A unique identifier representing your end-user, which can help providers to
   monitor and detect abuse.
 
 ```ts
 const { embedding } = await embed({
-  model: provider.embeddingModel('text-embedding-model'),
-  value: 'The quick brown fox jumps over the lazy dog',
+  model: provider.embeddingModel("text-embedding-model"),
+  value: "The quick brown fox jumps over the lazy dog",
   providerOptions: {
     providerName: {
       dimensions: 512,
-      user: 'user-123',
+      user: "user-123",
     },
   },
 });
@@ -340,24 +340,24 @@ const { embedding } = await embed({
 You can create completion models (for text completion, not chat) using the `.completionModel()` factory method:
 
 ```ts
-const model = provider.completionModel('model-id');
+const model = provider.completionModel("model-id");
 ```
 
 ### Example
 
 ```ts
-import { createOpenAICompatible } from '@ai-sdk/openai-compatible';
-import { generateText } from 'ai';
+import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
+import { generateText } from "ai";
 
 const provider = createOpenAICompatible({
-  name: 'providerName',
+  name: "providerName",
   apiKey: process.env.PROVIDER_API_KEY,
-  baseURL: 'https://api.provider.com/v1',
+  baseURL: "https://api.provider.com/v1",
 });
 
 const { text } = await generateText({
-  model: provider.completionModel('completion-model-id'),
-  prompt: 'The quick brown fox',
+  model: provider.completionModel("completion-model-id"),
+  prompt: "The quick brown fox",
 });
 ```
 
@@ -365,34 +365,34 @@ const { text } = await generateText({
 
 The following provider options are available for completion models via `providerOptions`:
 
-- **echo** *boolean*
+- **echo** _boolean_
 
   Echo back the prompt in addition to the completion.
 
-- **logitBias** *Record\<string, number>*
+- **logitBias** _Record\<string, number>_
 
   Modify the likelihood of specified tokens appearing in the completion.
   Accepts a JSON object that maps tokens (specified by their token ID) to an
   associated bias value from -100 to 100.
 
-- **suffix** *string*
+- **suffix** _string_
 
   The suffix that comes after a completion of inserted text.
 
-- **user** *string*
+- **user** _string_
 
   A unique identifier representing your end-user, which can help providers to
   monitor and detect abuse.
 
 ```ts
 const { text } = await generateText({
-  model: provider.completionModel('completion-model-id'),
-  prompt: 'The quick brown fox',
+  model: provider.completionModel("completion-model-id"),
+  prompt: "The quick brown fox",
   providerOptions: {
     providerName: {
       echo: true,
-      suffix: ' The end.',
-      user: 'user-123',
+      suffix: " The end.",
+      user: "user-123",
     },
   },
 });
@@ -402,20 +402,20 @@ const { text } = await generateText({
 
 The following provider options are available for chat models via `providerOptions`:
 
-- **user** *string*
+- **user** _string_
 
   A unique identifier representing your end-user, which can help the provider to
   monitor and detect abuse.
 
-- **reasoningEffort** *string*
+- **reasoningEffort** _string_
 
   Reasoning effort for reasoning models. The exact values depend on the provider.
 
-- **textVerbosity** *string*
+- **textVerbosity** _string_
 
   Controls the verbosity of the generated text. The exact values depend on the provider.
 
-- **strictJsonSchema** *boolean*
+- **strictJsonSchema** _boolean_
 
   Whether to use strict JSON schema validation. When true, the model uses constrained
   decoding to guarantee schema compliance. Only used when the provider supports
@@ -423,12 +423,12 @@ The following provider options are available for chat models via `providerOption
 
 ```ts
 const { text } = await generateText({
-  model: provider('model-id'),
-  prompt: 'Solve this step by step: What is 15 * 23?',
+  model: provider("model-id"),
+  prompt: "Solve this step by step: What is 15 * 23?",
   providerOptions: {
     providerName: {
-      user: 'user-123',
-      reasoningEffort: 'high',
+      user: "user-123",
+      reasoningEffort: "high",
     },
   },
 });
@@ -442,16 +442,16 @@ For example, if you create a provider instance with the name `providerName`, you
 
 ```ts
 const provider = createOpenAICompatible({
-  name: 'providerName',
+  name: "providerName",
   apiKey: process.env.PROVIDER_API_KEY,
-  baseURL: 'https://api.provider.com/v1',
+  baseURL: "https://api.provider.com/v1",
 });
 
 const { text } = await generateText({
-  model: provider('model-id'),
-  prompt: 'Hello',
+  model: provider("model-id"),
+  prompt: "Hello",
   providerOptions: {
-    providerName: { customOption: 'magic-value' },
+    providerName: { customOption: "magic-value" },
   },
 });
 ```
@@ -482,7 +482,7 @@ Metadata extractors work with both streaming and non-streaming chat completions 
 Here's an example metadata extractor that captures both standard and custom provider data:
 
 ```typescript
-import { MetadataExtractor } from '@ai-sdk/openai-compatible';
+import { MetadataExtractor } from "@ai-sdk/openai-compatible";
 
 const myMetadataExtractor: MetadataExtractor = {
   // Process complete, non-streaming responses
@@ -511,7 +511,7 @@ const myMetadataExtractor: MetadataExtractor = {
 
     return {
       // Process each chunk's raw data
-      processChunk: parsedChunk => {
+      processChunk: (parsedChunk) => {
         if (parsedChunk.server_timing) {
           accumulatedData.timing.push(parsedChunk.server_timing);
         }
@@ -535,9 +535,9 @@ You can provide a metadata extractor when creating your provider instance:
 
 ```typescript
 const provider = createOpenAICompatible({
-  name: 'my-provider',
+  name: "my-provider",
   apiKey: process.env.PROVIDER_API_KEY,
-  baseURL: 'https://api.provider.com/v1',
+  baseURL: "https://api.provider.com/v1",
   metadataExtractor: myMetadataExtractor,
 });
 ```
@@ -546,8 +546,8 @@ The extracted metadata will be included in the response under the `providerMetad
 
 ```typescript
 const { text, providerMetadata } = await generateText({
-  model: provider('model-id'),
-  prompt: 'Hello',
+  model: provider("model-id"),
+  prompt: "Hello",
 });
 
 console.log(providerMetadata.myProvider.customMetric);
@@ -586,7 +586,7 @@ description:
 'Execute Python code in a sandboxed environment using Vercel Sandbox. Run calculations, data processing, and other computational tasks safely in an isolated environment with Python 3.13.',
 packageName: 'ai-sdk-tool-code-execution',
 tags: \['code-execution', 'sandbox'],
-apiKeyEnvName: 'VERCEL\_OIDC\_TOKEN',
+apiKeyEnvName: 'VERCEL_OIDC_TOKEN',
 installCommand: {
 pnpm: 'pnpm add ai-sdk-tool-code-execution',
 npm: 'npm install ai-sdk-tool-code-execution',
@@ -690,7 +690,7 @@ console.log(text);`,
       bun: 'bun add ctx-zip',
     },
     codeExample: `import { generateText, stepCountIs } from 'ai';
-import { createVercelSandboxCodeMode, SANDBOX\_SYSTEM\_PROMPT } from 'ctx-zip';
+import { createVercelSandboxCodeMode, SANDBOX_SYSTEM_PROMPT } from 'ctx-zip';
 
 const { tools } = await createVercelSandboxCodeMode({
 servers: \[
@@ -699,7 +699,7 @@ name: 'vercel',
 url: 'https://mcp.vercel.com',
 useSSE: false,
 headers: {
-Authorization: \`Bearer ${process.env.VERCEL\_API\_KEY}\`,
+Authorization: \`Bearer ${process.env.VERCEL_API_KEY}\`,
 },
 },
 ],
@@ -712,7 +712,7 @@ const { text } = await generateText({
 model: 'openai/gpt-5.2',
 tools,
 stopWhen: stepCountIs(20),
-system: SANDBOX\_SYSTEM\_PROMPT,
+system: SANDBOX_SYSTEM_PROMPT,
 messages: \[
 {
 role: 'user',
@@ -845,7 +845,7 @@ import { CodeInterpreterTools } from 'bedrock-agentcore/code-interpreter/vercel-
 import { BrowserTools } from 'bedrock-agentcore/browser/vercel-ai';
 
 const credentialsProvider = awsCredentialsProvider({
-roleArn: process.env.AWS\_ROLE\_ARN!,
+roleArn: process.env.AWS_ROLE_ARN!,
 });
 
 const codeInterpreter = new CodeInterpreterTools({ credentialsProvider });

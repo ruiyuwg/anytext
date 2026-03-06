@@ -7,31 +7,33 @@ State variables might look like regular JavaScript variables that you can read a
 - Why state does not update immediately after you set it
 - How event handlers access a "snapshot" of the state
 
-## Setting state triggers renders {/*setting-state-triggers-renders*/}
+## Setting state triggers renders {/_setting-state-triggers-renders_/}
 
-You might think of your user interface as changing directly in response to the user event like a click. In React, it works a little differently from this mental model. On the previous page, you saw that [setting state requests a re-render](/learn/render-and-commit#step-1-trigger-a-render) from React. This means that for an interface to react to the event, you need to *update the state*.
+You might think of your user interface as changing directly in response to the user event like a click. In React, it works a little differently from this mental model. On the previous page, you saw that [setting state requests a re-render](/learn/render-and-commit#step-1-trigger-a-render) from React. This means that for an interface to react to the event, you need to _update the state_.
 
 In this example, when you press "send", `setIsSent(true)` tells React to re-render the UI:
 
 ```js
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function Form() {
   const [isSent, setIsSent] = useState(false);
-  const [message, setMessage] = useState('Hi!');
+  const [message, setMessage] = useState("Hi!");
   if (isSent) {
-    return <h1>Your message is on its way!</h1>
+    return <h1>Your message is on its way!</h1>;
   }
   return (
-    <form onSubmit={(e) => {
-      e.preventDefault();
-      setIsSent(true);
-      sendMessage(message);
-    }}>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        setIsSent(true);
+        sendMessage(message);
+      }}
+    >
       <textarea
         placeholder="Message"
         value={message}
-        onChange={e => setMessage(e.target.value)}
+        onChange={(e) => setMessage(e.target.value)}
       />
       <button type="submit">Send</button>
     </form>
@@ -44,7 +46,11 @@ function sendMessage(message) {
 ```
 
 ```css
-label, textarea { margin-bottom: 10px; display: block; }
+label,
+textarea {
+  margin-bottom: 10px;
+  display: block;
+}
 ```
 
 Here's what happens when you click the button:
@@ -55,7 +61,7 @@ Here's what happens when you click the button:
 
 Let's take a closer look at the relationship between state and rendering.
 
-## Rendering takes a snapshot in time {/*rendering-takes-a-snapshot-in-time*/}
+## Rendering takes a snapshot in time {/_rendering-takes-a-snapshot-in-time_/}
 
 ["Rendering"](/learn/render-and-commit#step-2-react-renders-your-components) means that React is calling your component, which is a function. The JSX you return from that function is like a snapshot of the UI in time. Its props, event handlers, and local variables were all calculated **using its state at the time of the render.**
 
@@ -74,7 +80,7 @@ Here's a little experiment to show you how this works. In this example, you migh
 See what happens when you click the "+3" button:
 
 ```js
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function Counter() {
   const [number, setNumber] = useState(0);
@@ -82,31 +88,48 @@ export default function Counter() {
   return (
     <>
       <h1>{number}</h1>
-      <button onClick={() => {
-        setNumber(number + 1);
-        setNumber(number + 1);
-        setNumber(number + 1);
-      }}>+3</button>
+      <button
+        onClick={() => {
+          setNumber(number + 1);
+          setNumber(number + 1);
+          setNumber(number + 1);
+        }}
+      >
+        +3
+      </button>
     </>
-  )
+  );
 }
 ```
 
 ```css
-button { display: inline-block; margin: 10px; font-size: 20px; }
-h1 { display: inline-block; margin: 10px; width: 30px; text-align: center; }
+button {
+  display: inline-block;
+  margin: 10px;
+  font-size: 20px;
+}
+h1 {
+  display: inline-block;
+  margin: 10px;
+  width: 30px;
+  text-align: center;
+}
 ```
 
 Notice that `number` only increments once per click!
 
-**Setting state only changes it for the *next* render.** During the first render, `number` was `0`. This is why, in *that render's* `onClick` handler, the value of `number` is still `0` even after `setNumber(number + 1)` was called:
+**Setting state only changes it for the _next_ render.** During the first render, `number` was `0`. This is why, in _that render's_ `onClick` handler, the value of `number` is still `0` even after `setNumber(number + 1)` was called:
 
 ```js
-<button onClick={() => {
-  setNumber(number + 1);
-  setNumber(number + 1);
-  setNumber(number + 1);
-}}>+3</button>
+<button
+  onClick={() => {
+    setNumber(number + 1);
+    setNumber(number + 1);
+    setNumber(number + 1);
+  }}
+>
+  +3
+</button>
 ```
 
 Here is what this button's click handler tells React to do:
@@ -118,36 +141,44 @@ Here is what this button's click handler tells React to do:
 3. `setNumber(number + 1)`: `number` is `0` so `setNumber(0 + 1)`.
    - React prepares to change `number` to `1` on the next render.
 
-Even though you called `setNumber(number + 1)` three times, in *this render's* event handler `number` is always `0`, so you set the state to `1` three times. This is why, after your event handler finishes, React re-renders the component with `number` equal to `1` rather than `3`.
+Even though you called `setNumber(number + 1)` three times, in _this render's_ event handler `number` is always `0`, so you set the state to `1` three times. This is why, after your event handler finishes, React re-renders the component with `number` equal to `1` rather than `3`.
 
-You can also visualize this by mentally substituting state variables with their values in your code. Since the `number` state variable is `0` for *this render*, its event handler looks like this:
+You can also visualize this by mentally substituting state variables with their values in your code. Since the `number` state variable is `0` for _this render_, its event handler looks like this:
 
 ```js
-<button onClick={() => {
-  setNumber(0 + 1);
-  setNumber(0 + 1);
-  setNumber(0 + 1);
-}}>+3</button>
+<button
+  onClick={() => {
+    setNumber(0 + 1);
+    setNumber(0 + 1);
+    setNumber(0 + 1);
+  }}
+>
+  +3
+</button>
 ```
 
-For the next render, `number` is `1`, so *that render's* click handler looks like this:
+For the next render, `number` is `1`, so _that render's_ click handler looks like this:
 
 ```js
-<button onClick={() => {
-  setNumber(1 + 1);
-  setNumber(1 + 1);
-  setNumber(1 + 1);
-}}>+3</button>
+<button
+  onClick={() => {
+    setNumber(1 + 1);
+    setNumber(1 + 1);
+    setNumber(1 + 1);
+  }}
+>
+  +3
+</button>
 ```
 
 This is why clicking the button again will set the counter to `2`, then to `3` on the next click, and so on.
 
-## State over time {/*state-over-time*/}
+## State over time {/_state-over-time_/}
 
 Well, that was fun. Try to guess what clicking this button will alert:
 
 ```js
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function Counter() {
   const [number, setNumber] = useState(0);
@@ -155,18 +186,31 @@ export default function Counter() {
   return (
     <>
       <h1>{number}</h1>
-      <button onClick={() => {
-        setNumber(number + 5);
-        alert(number);
-      }}>+5</button>
+      <button
+        onClick={() => {
+          setNumber(number + 5);
+          alert(number);
+        }}
+      >
+        +5
+      </button>
     </>
-  )
+  );
 }
 ```
 
 ```css
-button { display: inline-block; margin: 10px; font-size: 20px; }
-h1 { display: inline-block; margin: 10px; width: 30px; text-align: center; }
+button {
+  display: inline-block;
+  margin: 10px;
+  font-size: 20px;
+}
+h1 {
+  display: inline-block;
+  margin: 10px;
+  width: 30px;
+  text-align: center;
+}
 ```
 
 If you use the substitution method from before, you can guess that the alert shows "0":
@@ -176,10 +220,10 @@ setNumber(0 + 5);
 alert(0);
 ```
 
-But what if you put a timer on the alert, so it only fires *after* the component re-rendered? Would it say "0" or "5"? Have a guess!
+But what if you put a timer on the alert, so it only fires _after_ the component re-rendered? Would it say "0" or "5"? Have a guess!
 
 ```js
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function Counter() {
   const [number, setNumber] = useState(0);
@@ -187,20 +231,33 @@ export default function Counter() {
   return (
     <>
       <h1>{number}</h1>
-      <button onClick={() => {
-        setNumber(number + 5);
-        setTimeout(() => {
-          alert(number);
-        }, 3000);
-      }}>+5</button>
+      <button
+        onClick={() => {
+          setNumber(number + 5);
+          setTimeout(() => {
+            alert(number);
+          }, 3000);
+        }}
+      >
+        +5
+      </button>
     </>
-  )
+  );
 }
 ```
 
 ```css
-button { display: inline-block; margin: 10px; font-size: 20px; }
-h1 { display: inline-block; margin: 10px; width: 30px; text-align: center; }
+button {
+  display: inline-block;
+  margin: 10px;
+  font-size: 20px;
+}
+h1 {
+  display: inline-block;
+  margin: 10px;
+  width: 30px;
+  text-align: center;
+}
 ```
 
 Surprised? If you use the substitution method, you can see the "snapshot" of the state passed to the alert.
@@ -214,7 +271,7 @@ setTimeout(() => {
 
 The state stored in React may have changed by the time the alert runs, but it was scheduled using a snapshot of the state at the time the user interacted with it!
 
-**A state variable's value never changes within a render,** even if its event handler's code is asynchronous. Inside *that render's* `onClick`, the value of `number` continues to be `0` even after `setNumber(number + 5)` was called. Its value was "fixed" when React "took the snapshot" of the UI by calling your component.
+**A state variable's value never changes within a render,** even if its event handler's code is asynchronous. Inside _that render's_ `onClick`, the value of `number` continues to be `0` even after `setNumber(number + 5)` was called. Its value was "fixed" when React "took the snapshot" of the UI by calling your component.
 
 Here is an example of how that makes your event handlers less prone to timing mistakes. Below is a form that sends a message with a five-second delay. Imagine this scenario:
 
@@ -224,11 +281,11 @@ Here is an example of how that makes your event handlers less prone to timing mi
 What do you expect the `alert` to display? Would it display, "You said Hello to Alice"? Or would it display, "You said Hello to Bob"? Make a guess based on what you know, and then try it:
 
 ```js
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function Form() {
-  const [to, setTo] = useState('Alice');
-  const [message, setMessage] = useState('Hello');
+  const [to, setTo] = useState("Alice");
+  const [message, setMessage] = useState("Hello");
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -240,10 +297,8 @@ export default function Form() {
   return (
     <form onSubmit={handleSubmit}>
       <label>
-        To:{' '}
-        <select
-          value={to}
-          onChange={e => setTo(e.target.value)}>
+        To:{" "}
+        <select value={to} onChange={(e) => setTo(e.target.value)}>
           <option value="Alice">Alice</option>
           <option value="Bob">Bob</option>
         </select>
@@ -251,7 +306,7 @@ export default function Form() {
       <textarea
         placeholder="Message"
         value={message}
-        onChange={e => setMessage(e.target.value)}
+        onChange={(e) => setMessage(e.target.value)}
       />
       <button type="submit">Send</button>
     </form>
@@ -260,7 +315,11 @@ export default function Form() {
 ```
 
 ```css
-label, textarea { margin-bottom: 10px; display: block; }
+label,
+textarea {
+  margin-bottom: 10px;
+  display: block;
+}
 ```
 
 **React keeps the state values "fixed" within one render's event handlers.** You don't need to worry whether the state has changed while the code is running.
@@ -269,18 +328,18 @@ But what if you wanted to read the latest state before a re-render? You'll want 
 
 - Setting state requests a new render.
 - React stores state outside of your component, as if on a shelf.
-- When you call `useState`, React gives you a snapshot of the state *for that render*.
+- When you call `useState`, React gives you a snapshot of the state _for that render_.
 - Variables and event handlers don't "survive" re-renders. Every render has its own event handlers.
-- Every render (and functions inside it) will always "see" the snapshot of the state that React gave to *that* render.
+- Every render (and functions inside it) will always "see" the snapshot of the state that React gave to _that_ render.
 - You can mentally substitute state in event handlers, similarly to how you think about the rendered JSX.
 - Event handlers created in the past have the state values from the render in which they were created.
 
-#### Implement a traffic light {/*implement-a-traffic-light*/}
+#### Implement a traffic light {/_implement-a-traffic-light_/}
 
 Here is a crosswalk light component that toggles when the button is pressed:
 
 ```js
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function TrafficLight() {
   const [walk, setWalk] = useState(true);
@@ -291,13 +350,13 @@ export default function TrafficLight() {
 
   return (
     <>
-      <button onClick={handleClick}>
-        Change to {walk ? 'Stop' : 'Walk'}
-      </button>
-      <h1 style={{
-        color: walk ? 'darkgreen' : 'darkred'
-      }}>
-        {walk ? 'Walk' : 'Stop'}
+      <button onClick={handleClick}>Change to {walk ? "Stop" : "Walk"}</button>
+      <h1
+        style={{
+          color: walk ? "darkgreen" : "darkred",
+        }}
+      >
+        {walk ? "Walk" : "Stop"}
       </h1>
     </>
   );
@@ -305,7 +364,9 @@ export default function TrafficLight() {
 ```
 
 ```css
-h1 { margin-top: 20px; }
+h1 {
+  margin-top: 20px;
+}
 ```
 
 Add an `alert` to the click handler. When the light is green and says "Walk", clicking the button should say "Stop is next". When the light is red and says "Stop", clicking the button should say "Walk is next".
@@ -315,25 +376,25 @@ Does it make a difference whether you put the `alert` before or after the `setWa
 Your `alert` should look like this:
 
 ```js
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function TrafficLight() {
   const [walk, setWalk] = useState(true);
 
   function handleClick() {
     setWalk(!walk);
-    alert(walk ? 'Stop is next' : 'Walk is next');
+    alert(walk ? "Stop is next" : "Walk is next");
   }
 
   return (
     <>
-      <button onClick={handleClick}>
-        Change to {walk ? 'Stop' : 'Walk'}
-      </button>
-      <h1 style={{
-        color: walk ? 'darkgreen' : 'darkred'
-      }}>
-        {walk ? 'Walk' : 'Stop'}
+      <button onClick={handleClick}>Change to {walk ? "Stop" : "Walk"}</button>
+      <h1
+        style={{
+          color: walk ? "darkgreen" : "darkred",
+        }}
+      >
+        {walk ? "Walk" : "Stop"}
       </h1>
     </>
   );
@@ -341,15 +402,17 @@ export default function TrafficLight() {
 ```
 
 ```css
-h1 { margin-top: 20px; }
+h1 {
+  margin-top: 20px;
+}
 ```
 
-Whether you put it before or after the `setWalk` call makes no difference. That render's value of `walk` is fixed. Calling `setWalk` will only change it for the *next* render, but will not affect the event handler from the previous render.
+Whether you put it before or after the `setWalk` call makes no difference. That render's value of `walk` is fixed. Calling `setWalk` will only change it for the _next_ render, but will not affect the event handler from the previous render.
 
 This line might seem counter-intuitive at first:
 
 ```js
-alert(walk ? 'Stop is next' : 'Walk is next');
+alert(walk ? "Stop is next" : "Walk is next");
 ```
 
 But it makes sense if you read it as: "If the traffic light shows 'Walk now', the message should say 'Stop is next.'" The `walk` variable inside your event handler matches that render's value of `walk` and does not change.
@@ -370,7 +433,7 @@ You can verify that this is correct by applying the substitution method. When `w
 
 So clicking "Change to Stop" queues a render with `walk` set to `false`, and alerts "Stop is next".
 
-***
+---
 
 ## Sitemap
 

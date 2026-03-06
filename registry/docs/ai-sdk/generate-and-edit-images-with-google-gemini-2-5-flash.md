@@ -7,24 +7,24 @@ This guide will show you how to generate and edit images with the AI SDK and Goo
 As Gemini 2.5 Flash Image is a language model with multimodal capabilities, you can use the `generateText` or `streamText` functions (not `generateImage`) to create images. The model determines which modality to respond in based on your prompt and configuration. Here's how to create your first image:
 
 ```ts
-import { generateText } from 'ai';
-import fs from 'node:fs';
-import 'dotenv/config';
+import { generateText } from "ai";
+import fs from "node:fs";
+import "dotenv/config";
 
 async function generateImage() {
   const result = await generateText({
-    model: 'google/gemini-2.5-flash-image',
+    model: "google/gemini-2.5-flash-image",
     prompt:
-      'Create a picture of a nano banana dish in a fancy restaurant with a Gemini theme',
+      "Create a picture of a nano banana dish in a fancy restaurant with a Gemini theme",
   });
 
   // Save generated images
   for (const file of result.files) {
-    if (file.mediaType.startsWith('image/')) {
+    if (file.mediaType.startsWith("image/")) {
       const timestamp = Date.now();
       const fileName = `generated-${timestamp}.png`;
 
-      fs.mkdirSync('output', { recursive: true });
+      fs.mkdirSync("output", { recursive: true });
       await fs.promises.writeFile(`output/${fileName}`, file.uint8Array);
 
       console.log(`Generated and saved image: output/${fileName}`);
@@ -46,28 +46,28 @@ Here are some key points to remember:
 Gemini 2.5 Flash Image excels at editing existing images with natural language instructions. You can add elements, modify styles, or transform images while maintaining their core characteristics:
 
 ```ts
-import { generateText } from 'ai';
-import fs from 'node:fs';
-import 'dotenv/config';
+import { generateText } from "ai";
+import fs from "node:fs";
+import "dotenv/config";
 
 async function editImage() {
   const editResult = await generateText({
-    model: 'google/gemini-2.5-flash-image',
+    model: "google/gemini-2.5-flash-image",
     prompt: [
       {
-        role: 'user',
+        role: "user",
         content: [
           {
-            type: 'text',
-            text: 'Add a small wizard hat to this cat. Keep everything else the same.',
+            type: "text",
+            text: "Add a small wizard hat to this cat. Keep everything else the same.",
           },
           {
-            type: 'image',
+            type: "image",
             // image: DataContent (string | Uint8Array | ArrayBuffer | Buffer) or URL
             image: new URL(
-              'https://raw.githubusercontent.com/vercel/ai/refs/heads/main/examples/ai-functions/data/comic-cat.png',
+              "https://raw.githubusercontent.com/vercel/ai/refs/heads/main/examples/ai-functions/data/comic-cat.png",
             ),
-            mediaType: 'image/jpeg',
+            mediaType: "image/jpeg",
           },
         ],
       },
@@ -76,10 +76,10 @@ async function editImage() {
 
   // Save the edited image
   const timestamp = Date.now();
-  fs.mkdirSync('output', { recursive: true });
+  fs.mkdirSync("output", { recursive: true });
 
   for (const file of editResult.files) {
-    if (file.mediaType.startsWith('image/')) {
+    if (file.mediaType.startsWith("image/")) {
       await fs.promises.writeFile(
         `output/edited-${timestamp}.png`,
         file.uint8Array,

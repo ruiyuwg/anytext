@@ -5,8 +5,8 @@ The Timeout Middleware enables you to easily manage request timeouts in your app
 ## Import
 
 ```ts
-import { Hono } from 'hono'
-import { timeout } from 'hono/timeout'
+import { Hono } from "hono";
+import { timeout } from "hono/timeout";
 ```
 
 ## Usage
@@ -16,30 +16,30 @@ Here's how to use the Timeout Middleware with both default and custom settings:
 Default Settings:
 
 ```ts
-const app = new Hono()
+const app = new Hono();
 
 // Applying a 5-second timeout
-app.use('/api', timeout(5000))
+app.use("/api", timeout(5000));
 
 // Handling a route
-app.get('/api/data', async (c) => {
+app.get("/api/data", async (c) => {
   // Your route handler logic
-  return c.json({ data: 'Your data here' })
-})
+  return c.json({ data: "Your data here" });
+});
 ```
 
 Custom settings:
 
 ```ts
-import { HTTPException } from 'hono/http-exception'
+import { HTTPException } from "hono/http-exception";
 
 // Custom exception factory function
 const customTimeoutException = (context) =>
   new HTTPException(408, {
     message: `Request timeout after waiting ${context.req.headers.get(
-      'Duration'
+      "Duration",
     )} seconds. Please try again later.`,
-  })
+  });
 
 // for Static Exception Message
 // const customTimeoutException = new HTTPException(408, {
@@ -47,13 +47,13 @@ const customTimeoutException = (context) =>
 // });
 
 // Applying a 1-minute timeout with a custom exception
-app.use('/api/long-process', timeout(60000, customTimeoutException))
+app.use("/api/long-process", timeout(60000, customTimeoutException));
 
-app.get('/api/long-process', async (c) => {
+app.get("/api/long-process", async (c) => {
   // Simulate a long process
-  await new Promise((resolve) => setTimeout(resolve, 61000))
-  return c.json({ data: 'This usually takes longer' })
-})
+  await new Promise((resolve) => setTimeout(resolve, 61000));
+  return c.json({ data: "This usually takes longer" });
+});
 ```
 
 ## Notes
@@ -63,34 +63,34 @@ app.get('/api/long-process', async (c) => {
 - The timeout middleware cannot be used with stream Thus, use `stream.close` and `setTimeout` together.
 
 ```ts
-app.get('/sse', async (c) => {
-  let id = 0
-  let running = true
-  let timer: number | undefined
+app.get("/sse", async (c) => {
+  let id = 0;
+  let running = true;
+  let timer: number | undefined;
 
   return streamSSE(c, async (stream) => {
     timer = setTimeout(() => {
-      console.log('Stream timeout reached, closing stream')
-      stream.close()
-    }, 3000) as unknown as number
+      console.log("Stream timeout reached, closing stream");
+      stream.close();
+    }, 3000) as unknown as number;
 
     stream.onAbort(async () => {
-      console.log('Client closed connection')
-      running = false
-      clearTimeout(timer)
-    })
+      console.log("Client closed connection");
+      running = false;
+      clearTimeout(timer);
+    });
 
     while (running) {
-      const message = `It is ${new Date().toISOString()}`
+      const message = `It is ${new Date().toISOString()}`;
       await stream.writeSSE({
         data: message,
-        event: 'time-update',
+        event: "time-update",
         id: String(id++),
-      })
-      await stream.sleep(1000)
+      });
+      await stream.sleep(1000);
     }
-  })
-})
+  });
+});
 ```
 
 ## Middleware Conflicts

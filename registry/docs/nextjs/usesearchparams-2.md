@@ -5,47 +5,47 @@
 `useSearchParams` returns a **read-only** version of the [`URLSearchParams`](https://developer.mozilla.org/docs/Web/API/URLSearchParams) interface.
 
 ```tsx filename="pages/dashboard.tsx" switcher
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams } from "next/navigation";
 
 export default function Dashboard() {
-  const searchParams = useSearchParams()
+  const searchParams = useSearchParams();
 
   if (!searchParams) {
     // Render fallback UI while search params are not yet available
-    return null
+    return null;
   }
 
-  const search = searchParams.get('search')
+  const search = searchParams.get("search");
 
   // URL -> `/dashboard?search=my-project`
   // `search` -> 'my-project'
-  return <>Search: {search}</>
+  return <>Search: {search}</>;
 }
 ```
 
 ```jsx filename="pages/dashboard.js" switcher
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams } from "next/navigation";
 
 export default function Dashboard() {
-  const searchParams = useSearchParams()
+  const searchParams = useSearchParams();
 
   if (!searchParams) {
     // Render fallback UI while search params are not yet available
-    return null
+    return null;
   }
 
-  const search = searchParams.get('search')
+  const search = searchParams.get("search");
 
   // URL -> `/dashboard?search=my-project`
   // `search` -> 'my-project'
-  return <>Search: {search}</>
+  return <>Search: {search}</>;
 }
 ```
 
 ## Parameters
 
 ```tsx
-const searchParams = useSearchParams()
+const searchParams = useSearchParams();
 ```
 
 `useSearchParams` does not take any parameters.
@@ -63,7 +63,7 @@ The interface includes utility methods for reading the URL's query string:
   | `/dashboard?a=1`     | `'1'`                                                                                                           |
   | `/dashboard?a=`      | `''`                                                                                                            |
   | `/dashboard?b=3`     | `null`                                                                                                          |
-  | `/dashboard?a=1&a=2` | `'1'` *- use [`getAll()`](https://developer.mozilla.org/docs/Web/API/URLSearchParams/getAll) to get all values* |
+  | `/dashboard?a=1&a=2` | `'1'` _- use [`getAll()`](https://developer.mozilla.org/docs/Web/API/URLSearchParams/getAll) to get all values_ |
 
 - [`URLSearchParams.has()`](https://developer.mozilla.org/docs/Web/API/URLSearchParams/has): Returns a boolean value indicating if the given parameter exists. For example:
 
@@ -85,38 +85,38 @@ For pages that are [statically optimized](/docs/pages/building-your-application/
 This is because search params cannot be known during static generation as they depend on the request.
 
 ```tsx filename="pages/dashboard.tsx" switcher
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams } from "next/navigation";
 
 export default function Dashboard() {
-  const searchParams = useSearchParams()
+  const searchParams = useSearchParams();
 
   if (!searchParams) {
     // Return a fallback UI while search params are loading
     // This prevents hydration mismatches
-    return <DashboardSkeleton />
+    return <DashboardSkeleton />;
   }
 
-  const search = searchParams.get('search')
+  const search = searchParams.get("search");
 
-  return <>Search: {search}</>
+  return <>Search: {search}</>;
 }
 ```
 
 ```jsx filename="pages/dashboard.js" switcher
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams } from "next/navigation";
 
 export default function Dashboard() {
-  const searchParams = useSearchParams()
+  const searchParams = useSearchParams();
 
   if (!searchParams) {
     // Return a fallback UI while search params are loading
     // This prevents hydration mismatches
-    return <DashboardSkeleton />
+    return <DashboardSkeleton />;
   }
 
-  const search = searchParams.get('search')
+  const search = searchParams.get("search");
 
-  return <>Search: {search}</>
+  return <>Search: {search}</>;
 }
 ```
 
@@ -125,50 +125,50 @@ export default function Dashboard() {
 When using [`getServerSideProps`](/docs/pages/building-your-application/data-fetching/get-server-side-props), the page is server-rendered on each request and `useSearchParams` will return the actual search params immediately:
 
 ```tsx filename="pages/dashboard.tsx" switcher
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams } from "next/navigation";
 
 export default function Dashboard() {
-  const searchParams = useSearchParams()
+  const searchParams = useSearchParams();
 
   // With getServerSideProps, this fallback is never rendered because
   // searchParams is always available on the server. However, keeping
   // the fallback allows this component to be reused on other pages
   // that may not use getServerSideProps.
   if (!searchParams) {
-    return null
+    return null;
   }
 
-  const search = searchParams.get('search')
+  const search = searchParams.get("search");
 
-  return <>Search: {search}</>
+  return <>Search: {search}</>;
 }
 
 export async function getServerSideProps() {
-  return { props: {} }
+  return { props: {} };
 }
 ```
 
 ```jsx filename="pages/dashboard.js" switcher
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams } from "next/navigation";
 
 export default function Dashboard() {
-  const searchParams = useSearchParams()
+  const searchParams = useSearchParams();
 
   // With getServerSideProps, this fallback is never rendered because
   // searchParams is always available on the server. However, keeping
   // the fallback allows this component to be reused on other pages
   // that may not use getServerSideProps.
   if (!searchParams) {
-    return null
+    return null;
   }
 
-  const search = searchParams.get('search')
+  const search = searchParams.get("search");
 
-  return <>Search: {search}</>
+  return <>Search: {search}</>;
 }
 
 export async function getServerSideProps() {
-  return { props: {} }
+  return { props: {} };
 }
 ```
 
@@ -179,25 +179,25 @@ export async function getServerSideProps() {
 You can use the [`useRouter`](/docs/pages/api-reference/functions/use-router) hook to update search params:
 
 ```tsx filename="pages/dashboard.tsx" switcher
-import { useRouter } from 'next/router'
-import { useSearchParams } from 'next/navigation'
-import { useCallback } from 'react'
+import { useRouter } from "next/router";
+import { useSearchParams } from "next/navigation";
+import { useCallback } from "react";
 
 export default function Dashboard() {
-  const router = useRouter()
-  const searchParams = useSearchParams()
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams?.toString())
-      params.set(name, value)
-      return params.toString()
+      const params = new URLSearchParams(searchParams?.toString());
+      params.set(name, value);
+      return params.toString();
     },
-    [searchParams]
-  )
+    [searchParams],
+  );
 
   if (!searchParams) {
-    return null
+    return null;
   }
 
   return (
@@ -205,43 +205,45 @@ export default function Dashboard() {
       <p>Sort By</p>
       <button
         onClick={() => {
-          router.push(router.pathname + '?' + createQueryString('sort', 'asc'))
+          router.push(router.pathname + "?" + createQueryString("sort", "asc"));
         }}
       >
         ASC
       </button>
       <button
         onClick={() => {
-          router.push(router.pathname + '?' + createQueryString('sort', 'desc'))
+          router.push(
+            router.pathname + "?" + createQueryString("sort", "desc"),
+          );
         }}
       >
         DESC
       </button>
     </>
-  )
+  );
 }
 ```
 
 ```jsx filename="pages/dashboard.js" switcher
-import { useRouter } from 'next/router'
-import { useSearchParams } from 'next/navigation'
-import { useCallback } from 'react'
+import { useRouter } from "next/router";
+import { useSearchParams } from "next/navigation";
+import { useCallback } from "react";
 
 export default function Dashboard() {
-  const router = useRouter()
-  const searchParams = useSearchParams()
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
   const createQueryString = useCallback(
     (name, value) => {
-      const params = new URLSearchParams(searchParams?.toString())
-      params.set(name, value)
-      return params.toString()
+      const params = new URLSearchParams(searchParams?.toString());
+      params.set(name, value);
+      return params.toString();
     },
-    [searchParams]
-  )
+    [searchParams],
+  );
 
   if (!searchParams) {
-    return null
+    return null;
   }
 
   return (
@@ -249,20 +251,22 @@ export default function Dashboard() {
       <p>Sort By</p>
       <button
         onClick={() => {
-          router.push(router.pathname + '?' + createQueryString('sort', 'asc'))
+          router.push(router.pathname + "?" + createQueryString("sort", "asc"));
         }}
       >
         ASC
       </button>
       <button
         onClick={() => {
-          router.push(router.pathname + '?' + createQueryString('sort', 'desc'))
+          router.push(
+            router.pathname + "?" + createQueryString("sort", "desc"),
+          );
         }}
       >
         DESC
       </button>
     </>
-  )
+  );
 }
 ```
 
@@ -271,38 +275,38 @@ export default function Dashboard() {
 `useSearchParams` from `next/navigation` works in both the Pages Router and App Router. This allows you to create shared components that work in either context:
 
 ```tsx filename="components/search-bar.tsx" switcher
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams } from "next/navigation";
 
 // This component works in both pages/ and app/
 export function SearchBar() {
-  const searchParams = useSearchParams()
+  const searchParams = useSearchParams();
 
   if (!searchParams) {
     // Fallback for Pages Router during pre-rendering
-    return <input defaultValue="" placeholder="Search..." />
+    return <input defaultValue="" placeholder="Search..." />;
   }
 
-  const search = searchParams.get('search') ?? ''
+  const search = searchParams.get("search") ?? "";
 
-  return <input defaultValue={search} placeholder="Search..." />
+  return <input defaultValue={search} placeholder="Search..." />;
 }
 ```
 
 ```jsx filename="components/search-bar.js" switcher
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams } from "next/navigation";
 
 // This component works in both pages/ and app/
 export function SearchBar() {
-  const searchParams = useSearchParams()
+  const searchParams = useSearchParams();
 
   if (!searchParams) {
     // Fallback for Pages Router during pre-rendering
-    return <input defaultValue="" placeholder="Search..." />
+    return <input defaultValue="" placeholder="Search..." />;
   }
 
-  const search = searchParams.get('search') ?? ''
+  const search = searchParams.get("search") ?? "";
 
-  return <input defaultValue={search} placeholder="Search..." />
+  return <input defaultValue={search} placeholder="Search..." />;
 }
 ```
 

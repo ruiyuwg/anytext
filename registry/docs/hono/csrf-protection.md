@@ -12,63 +12,59 @@ Old browsers that do not send `Origin` headers, or environments that use reverse
 ## Import
 
 ```ts
-import { Hono } from 'hono'
-import { csrf } from 'hono/csrf'
+import { Hono } from "hono";
+import { csrf } from "hono/csrf";
 ```
 
 ## Usage
 
 ```ts
-const app = new Hono()
+const app = new Hono();
 
 // Default: both origin and sec-fetch-site validation
-app.use(csrf())
+app.use(csrf());
 
 // Allow specific origins
-app.use(csrf({ origin: 'https://myapp.example.com' }))
+app.use(csrf({ origin: "https://myapp.example.com" }));
 
 // Allow multiple origins
 app.use(
   csrf({
     origin: [
-      'https://myapp.example.com',
-      'https://development.myapp.example.com',
+      "https://myapp.example.com",
+      "https://development.myapp.example.com",
     ],
-  })
-)
+  }),
+);
 
 // Allow specific sec-fetch-site values
-app.use(csrf({ secFetchSite: 'same-origin' }))
-app.use(csrf({ secFetchSite: ['same-origin', 'none'] }))
+app.use(csrf({ secFetchSite: "same-origin" }));
+app.use(csrf({ secFetchSite: ["same-origin", "none"] }));
 
 // Dynamic origin validation
 // It is strongly recommended that the protocol be verified to ensure a match to `$`.
 // You should *never* do a forward match.
 app.use(
-  '*',
+  "*",
   csrf({
-    origin: (origin) =>
-      /https:\/\/(\w+\.)?myapp\.example\.com$/.test(origin),
-  })
-)
+    origin: (origin) => /https:\/\/(\w+\.)?myapp\.example\.com$/.test(origin),
+  }),
+);
 
 // Dynamic sec-fetch-site validation
 app.use(
   csrf({
     secFetchSite: (secFetchSite, c) => {
       // Always allow same-origin
-      if (secFetchSite === 'same-origin') return true
+      if (secFetchSite === "same-origin") return true;
       // Allow cross-site for webhook endpoints
-      if (
-        secFetchSite === 'cross-site' &&
-        c.req.path.startsWith('/webhook/')
-      ) {
-        return true
+      if (secFetchSite === "cross-site" && c.req.path.startsWith("/webhook/")) {
+        return true;
       }
-      return false
+      return false;
     },
-  })
-)
+  }),
+);
 ```
 
 ## Options

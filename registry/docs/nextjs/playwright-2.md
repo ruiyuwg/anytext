@@ -49,7 +49,7 @@ This will take you through a series of prompts to setup and configure Playwright
 Create two new Next.js pages:
 
 ```tsx filename="pages/index.ts"
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -57,12 +57,12 @@ export default function Home() {
       <h1>Home</h1>
       <Link href="/about">About</Link>
     </div>
-  )
+  );
 }
 ```
 
 ```tsx filename="pages/about.ts"
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function About() {
   return (
@@ -70,25 +70,25 @@ export default function About() {
       <h1>About</h1>
       <Link href="/">Home</Link>
     </div>
-  )
+  );
 }
 ```
 
 Then, add a test to verify that your navigation is working correctly:
 
 ```ts filename="tests/example.spec.ts"
-import { test, expect } from '@playwright/test'
+import { test, expect } from "@playwright/test";
 
-test('should navigate to the about page', async ({ page }) => {
+test("should navigate to the about page", async ({ page }) => {
   // Start from the index page (the baseURL is set via the webServer in the playwright.config.ts)
-  await page.goto('http://localhost:3000/')
+  await page.goto("http://localhost:3000/");
   // Find an element with the text 'About' and click on it
-  await page.click('text=About')
+  await page.click("text=About");
   // The new URL should be "/about" (baseURL is used there)
-  await expect(page).toHaveURL('http://localhost:3000/about')
+  await expect(page).toHaveURL("http://localhost:3000/about");
   // The new page should contain an h1 with "About"
-  await expect(page.locator('h1')).toContainText('About')
-})
+  await expect(page.locator("h1")).toContainText("About");
+});
 ```
 
 > **Good to know**: You can use `page.goto("/")` instead of `page.goto("http://localhost:3000/")`, if you add [`"baseURL": "http://localhost:3000"`](https://playwright.dev/docs/api/class-testoptions#test-options-base-url) to the `playwright.config.ts` [configuration file](https://playwright.dev/docs/test-configuration).

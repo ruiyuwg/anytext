@@ -139,7 +139,7 @@ Since most of the features in the **App Router** and **Pages Router** are comple
 
 ### Shared Pages
 
-To avoid content duplication and risk the content becoming out of sync, we use the `source` field to pull content from one page into another. For example, the `<Link>` component behaves *mostly* the same in **App** and **Pages**. Instead of duplicating the content, we can pull the content from `app/.../link.mdx` into `pages/.../link.mdx`:
+To avoid content duplication and risk the content becoming out of sync, we use the `source` field to pull content from one page into another. For example, the `<Link>` component behaves _mostly_ the same in **App** and **Pages**. Instead of duplicating the content, we can pull the content from `app/.../link.mdx` into `pages/.../link.mdx`:
 
 ```mdx filename="app/.../link.mdx"
 # <Link>
@@ -184,10 +184,10 @@ Code blocks should contain a minimum working example that can be copied and past
 For example, if you're showing how to use the `<Link>` component, you should include the `import` statement and the `<Link>` component itself.
 
 ```tsx filename="app/page.tsx"
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Page() {
-  return <Link href="/about">About</Link>
+  return <Link href="/about">About</Link>;
 }
 ```
 
@@ -200,7 +200,7 @@ Code blocks should have a header that includes the language and the `filename`. 
 ````mdx filename="code-example.mdx"
 ```tsx filename="app/page.tsx"
 export default function Page() {
-  return Hello, Next.js!
+  return (Hello, Next.js!);
 }
 ```
 ````
@@ -231,10 +231,10 @@ When writing JavaScript code blocks, we use the following language and extension
 
 |                                | Language | Extension |
 | ------------------------------ | -------- | --------- |
-| JavaScript files with JSX code | `jsx   | .js       |
-| JavaScript files without JSX   | `js    | .js       |
-| TypeScript files with JSX      | `tsx   | .tsx      |
-| TypeScript files without JSX   | `ts    | .ts       |
+| JavaScript files with JSX code | `jsx     | .js       |
+| JavaScript files without JSX   | `js      | .js       |
+| TypeScript files with JSX      | `tsx     | .tsx      |
+| TypeScript files without JSX   | `ts      | .ts       |
 
 > **Good to know**:
 >
@@ -266,30 +266,30 @@ Code lines can be highlighted. This is useful when you want to draw attention to
 **Single Line:** `highlight={1}`
 
 ```tsx filename="app/page.tsx" {1}
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Page() {
-  return <Link href="/about">About</Link>
+  return <Link href="/about">About</Link>;
 }
 ```
 
 **Multiple Lines:** `highlight={1,3}`
 
 ```tsx filename="app/page.tsx" highlight={1,3}
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Page() {
-  return <Link href="/about">About</Link>
+  return <Link href="/about">About</Link>;
 }
 ```
 
 **Range of Lines:** `highlight={1-5}`
 
 ```tsx filename="app/page.tsx" highlight={1-5}
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Page() {
-  return <Link href="/about">About</Link>
+  return <Link href="/about">About</Link>;
 }
 ```
 
@@ -360,7 +360,7 @@ related:
 
 Diagrams are a great way to explain complex concepts. We use [Figma](https://www.figma.com/) to create diagrams, following Vercel's design guide.
 
-The diagrams currently live in the `/public` folder in our private Next.js site. If you'd like to update or add a diagram, please open a [GitHub issue](https://github.com/vercel/next.js/issues/new?assignees=\&labels=template%3A+documentation\&projects=\&template=4.docs_request.yml\&title=Docs%3A+) with your ideas.
+The diagrams currently live in the `/public` folder in our private Next.js site. If you'd like to update or add a diagram, please open a [GitHub issue](https://github.com/vercel/next.js/issues/new?assignees=&labels=template%3A+documentation&projects=&template=4.docs_request.yml&title=Docs%3A+) with your ideas.
 
 ## Custom Components and HTML
 
@@ -391,7 +391,7 @@ Docs pages are also split into two categories: Conceptual and Reference.
 - **Conceptual** pages are used to explain a concept or feature. They are usually longer and contain more information than reference pages. In the Next.js docs, conceptual pages are found in the **Building Your Application** section.
 - **Reference** pages are used to explain a specific API. They are usually shorter and more focused. In the Next.js docs, reference pages are found in the **API Reference** section.
 
-> **Good to know**: Depending on the page you're contributing to, you may need to follow a different voice and style. For example, conceptual pages are more instructional and use the word *you* to address the user. Reference pages are more technical, they use more imperative words like "create, update, accept" and tend to omit the word *you*.
+> **Good to know**: Depending on the page you're contributing to, you may need to follow a different voice and style. For example, conceptual pages are more instructional and use the word _you_ to address the user. Reference pages are more technical, they use more imperative words like "create, update, accept" and tend to omit the word _you_.
 
 ### Voice
 
@@ -399,21 +399,21 @@ Here are some guidelines to maintain a consistent style and voice across the doc
 
 - Write clear, concise sentences. Avoid tangents.
   - If you find yourself using a lot of commas, consider breaking the sentence into multiple sentences or use a list.
-  - Swap out complex words for simpler ones. For example, *use* instead of *utilize*.
-- Be mindful with the word *this*. It can be ambiguous and confusing, don't be afraid to repeat the subject of the sentence if unclear.
-  - For example, *Next.js uses React* instead of *Next.js uses this*.
+  - Swap out complex words for simpler ones. For example, _use_ instead of _utilize_.
+- Be mindful with the word _this_. It can be ambiguous and confusing, don't be afraid to repeat the subject of the sentence if unclear.
+  - For example, _Next.js uses React_ instead of _Next.js uses this_.
 - Use an active voice instead of passive. An active sentence is easier to read.
-  - For example, *Next.js uses React* instead of *React is used by Next.js*. If you find yourself using words like *was* and *by* you may be using a passive voice.
-- Avoid using words like *easy*, *quick*, *simple*, *just*, etc. This is subjective and can be discouraging to users.
-- Avoid negative words like *don't*, *can't*, *won't*, etc. This can be discouraging to readers.
-  - For example, *"You can use the `Link` component to create links between pages"* instead of *"Don't use the `<a>` tag to create links between pages"*.
+  - For example, _Next.js uses React_ instead of _React is used by Next.js_. If you find yourself using words like _was_ and _by_ you may be using a passive voice.
+- Avoid using words like _easy_, _quick_, _simple_, _just_, etc. This is subjective and can be discouraging to users.
+- Avoid negative words like _don't_, _can't_, _won't_, etc. This can be discouraging to readers.
+  - For example, _"You can use the `Link` component to create links between pages"_ instead of _"Don't use the `<a>` tag to create links between pages"_.
 - Write in second person (you/your). This is more personal and engaging.
-- Use gender-neutral language. Use *developers*, *users*, or *readers*, when referring to the audience.
+- Use gender-neutral language. Use _developers_, _users_, or _readers_, when referring to the audience.
 - If adding code examples, ensure they are properly formatted and working.
 
 While these guidelines are not exhaustive, they should help you get started. If you'd like to dive deeper into technical writing, check out the [Google Technical Writing Course](https://developers.google.com/tech-writing/overview).
 
-***
+---
 
 Thank you for contributing to the docs and being part of the Next.js community!
 

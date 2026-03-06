@@ -9,7 +9,7 @@ const REGISTRY_DIR = path.resolve(
   "..",
   "..",
   "..",
-  "registry"
+  "registry",
 );
 
 export function getRegistryDir(): string {
@@ -35,7 +35,7 @@ export function writeManifest(manifest: Manifest): void {
 
 export function mergeLibrary(
   manifest: Manifest,
-  library: ManifestLibrary
+  library: ManifestLibrary,
 ): Manifest {
   const existing = manifest.libraries.findIndex((l) => l.id === library.id);
   const libraries = [...manifest.libraries];

@@ -2,28 +2,28 @@
 
 Validates against unconditionally setting state during render, which can trigger additional renders and potential infinite render loops.
 
-## Rule Details {/*rule-details*/}
+## Rule Details {/_rule-details_/}
 
 Calling `setState` during render unconditionally triggers another render before the current one finishes. This creates an infinite loop that crashes your app.
 
-## Common Violations {/*common-violations*/}
+## Common Violations {/_common-violations_/}
 
-### Invalid {/*invalid*/}
+### Invalid {/_invalid_/}
 
 ```js {expectedErrors: {'react-compiler': [4]}}
 // ❌ Unconditional setState directly in render
-function Component({value}) {
+function Component({ value }) {
   const [count, setCount] = useState(0);
   setCount(value); // Infinite loop!
   return <div>{count}</div>;
 }
 ```
 
-### Valid {/*valid*/}
+### Valid {/_valid_/}
 
 ```js
 // ✅ Derive during render
-function Component({items}) {
+function Component({ items }) {
   const sorted = [...items].sort(); // Just calculate it in render
   return <ul>{sorted.map(/*...*/)}</ul>;
 }
@@ -31,17 +31,13 @@ function Component({items}) {
 // ✅ Set state in event handler
 function Component() {
   const [count, setCount] = useState(0);
-  return (
-    <button onClick={() => setCount(count + 1)}>
-      {count}
-    </button>
-  );
+  return <button onClick={() => setCount(count + 1)}>{count}</button>;
 }
 
 // ✅ Derive from props instead of setting state
-function Component({user}) {
-  const name = user?.name || '';
-  const email = user?.email || '';
+function Component({ user }) {
+  const name = user?.name || "";
+  const email = user?.email || "";
   return <div>{name}</div>;
 }
 
@@ -51,7 +47,8 @@ function Component({ items }) {
   const [selection, setSelection] = useState(null);
 
   const [prevItems, setPrevItems] = useState(items);
-  if (items !== prevItems) { // This condition makes it valid
+  if (items !== prevItems) {
+    // This condition makes it valid
     setPrevItems(items);
     setSelection(null);
   }
@@ -59,26 +56,22 @@ function Component({ items }) {
 }
 ```
 
-## Troubleshooting {/*troubleshooting*/}
+## Troubleshooting {/_troubleshooting_/}
 
-### I want to sync state to a prop {/*clamp-state-to-prop*/}
+### I want to sync state to a prop {/_clamp-state-to-prop_/}
 
 A common problem is trying to "fix" state after it renders. Suppose you want to keep a counter from exceeding a `max` prop:
 
 ```js
 // ❌ Wrong: clamps during render
-function Counter({max}) {
+function Counter({ max }) {
   const [count, setCount] = useState(0);
 
   if (count > max) {
     setCount(max);
   }
 
-  return (
-    <button onClick={() => setCount(count + 1)}>
-      {count}
-    </button>
-  );
+  return <button onClick={() => setCount(count + 1)}>{count}</button>;
 }
 ```
 
@@ -88,11 +81,11 @@ Instead, it's often better to move this logic to the event (the place where the 
 
 ```js
 // ✅ Clamp when updating
-function Counter({max}) {
+function Counter({ max }) {
   const [count, setCount] = useState(0);
 
   const increment = () => {
-    setCount(current => Math.min(current + 1, max));
+    setCount((current) => Math.min(current + 1, max));
   };
 
   return <button onClick={increment}>{count}</button>;
@@ -103,7 +96,7 @@ Now the setter only runs in response to the click, React finishes the render nor
 
 In rare cases, you may need to adjust state based on information from previous renders. For those, follow [this pattern](https://react.dev/reference/react/useState#storing-information-from-previous-renders) of setting state conditionally.
 
-***
+---
 
 ## Sitemap
 

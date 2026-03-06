@@ -29,8 +29,8 @@ You can also pass in any normal query options to the second parameter of any of 
 ```tsx
 const Component = () => {
   const [post, greeting] = trpc.useQueries((t) => [
-    t.post.byId({ id: '1' }, { enabled: false }),
-    t.greeting({ text: 'world' }),
+    t.post.byId({ id: "1" }, { enabled: false }),
+    t.greeting({ text: "world" }),
   ]);
 
   const onButtonClick = () => {
@@ -53,7 +53,7 @@ You can also pass in an optional React Query context to override the default.
 
 ```tsx
 const [post, greeting] = trpc.useQueries(
-  (t) => [t.post.byId({ id: '1' }), t.greeting({ text: 'world' })],
+  (t) => [t.post.byId({ id: "1" }), t.greeting({ text: "world" })],
   myCustomContext,
 );
 ```

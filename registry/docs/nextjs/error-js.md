@@ -5,21 +5,21 @@ An **error** file allows you to handle unexpected runtime errors and display fal
 ![error.js special file](https://h8DxKfmAPhn8O0p3.public.blob.vercel-storage.com/docs/light/error-special-file.png)
 
 ```tsx filename="app/dashboard/error.tsx" switcher
-'use client' // Error boundaries must be Client Components
+"use client"; // Error boundaries must be Client Components
 
-import { useEffect } from 'react'
+import { useEffect } from "react";
 
 export default function Error({
   error,
   reset,
 }: {
-  error: Error & { digest?: string }
-  reset: () => void
+  error: Error & { digest?: string };
+  reset: () => void;
 }) {
   useEffect(() => {
     // Log the error to an error reporting service
-    console.error(error)
-  }, [error])
+    console.error(error);
+  }, [error]);
 
   return (
     <div>
@@ -33,20 +33,20 @@ export default function Error({
         Try again
       </button>
     </div>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/dashboard/error.js" switcher
-'use client' // Error boundaries must be Client Components
+"use client"; // Error boundaries must be Client Components
 
-import { useEffect } from 'react'
+import { useEffect } from "react";
 
 export default function Error({ error, reset }) {
   useEffect(() => {
     // Log the error to an error reporting service
-    console.error(error)
-  }, [error])
+    console.error(error);
+  }, [error]);
 
   return (
     <div>
@@ -60,7 +60,7 @@ export default function Error({ error, reset }) {
         Try again
       </button>
     </div>
-  )
+  );
 }
 ```
 
@@ -99,26 +99,26 @@ The cause of an error can sometimes be temporary. In these cases, trying again m
 An error component can use the `reset()` function to prompt the user to attempt to recover from the error. When executed, the function will try to re-render the error boundary's contents. If successful, the fallback error component is replaced with the result of the re-render.
 
 ```tsx filename="app/dashboard/error.tsx" switcher
-'use client' // Error boundaries must be Client Components
+"use client"; // Error boundaries must be Client Components
 
 export default function Error({
   error,
   reset,
 }: {
-  error: Error & { digest?: string }
-  reset: () => void
+  error: Error & { digest?: string };
+  reset: () => void;
 }) {
   return (
     <div>
       <h2>Something went wrong!</h2>
       <button onClick={() => reset()}>Try again</button>
     </div>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/dashboard/error.js" switcher
-'use client' // Error boundaries must be Client Components
+"use client"; // Error boundaries must be Client Components
 
 export default function Error({ error, reset }) {
   return (
@@ -126,7 +126,7 @@ export default function Error({ error, reset }) {
       <h2>Something went wrong!</h2>
       <button onClick={() => reset()}>Try again</button>
     </div>
-  )
+  );
 }
 ```
 
@@ -139,14 +139,14 @@ While less common, you can handle errors in the root layout or template using `g
 > **Good to know**: Error boundaries must be [Client Components](/docs/app/getting-started/server-and-client-components#using-client-components), which means that [`metadata` and `generateMetadata`](/docs/app/getting-started/metadata-and-og-images) exports are not supported in `global-error.jsx`. As an alternative, you can use the React [`<title>`](https://react.dev/reference/react-dom/components/title) component.
 
 ```tsx filename="app/global-error.tsx" switcher
-'use client' // Error boundaries must be Client Components
+"use client"; // Error boundaries must be Client Components
 
 export default function GlobalError({
   error,
   reset,
 }: {
-  error: Error & { digest?: string }
-  reset: () => void
+  error: Error & { digest?: string };
+  reset: () => void;
 }) {
   return (
     // global-error must include html and body tags
@@ -156,12 +156,12 @@ export default function GlobalError({
         <button onClick={() => reset()}>Try again</button>
       </body>
     </html>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/global-error.js" switcher
-'use client' // Error boundaries must be Client Components
+"use client"; // Error boundaries must be Client Components
 
 export default function GlobalError({ error, reset }) {
   return (
@@ -172,7 +172,7 @@ export default function GlobalError({ error, reset }) {
         <button onClick={() => reset()}>Try again</button>
       </body>
     </html>
-  )
+  );
 }
 ```
 
@@ -183,38 +183,38 @@ When rendering fails on the client, it can be useful to show the last known serv
 The `GracefullyDegradingErrorBoundary` is an example of a custom error boundary that captures and preserves the current HTML before an error occurs. If a rendering error happens, it re-renders the captured HTML and displays a persistent notification bar to inform the user.
 
 ```tsx filename="app/dashboard/error.tsx" switcher
-'use client'
+"use client";
 
-import React, { Component, ErrorInfo, ReactNode } from 'react'
+import React, { Component, ErrorInfo, ReactNode } from "react";
 
 interface ErrorBoundaryProps {
-  children: ReactNode
-  onError?: (error: Error, errorInfo: ErrorInfo) => void
+  children: ReactNode;
+  onError?: (error: Error, errorInfo: ErrorInfo) => void;
 }
 
 interface ErrorBoundaryState {
-  hasError: boolean
+  hasError: boolean;
 }
 
 export class GracefullyDegradingErrorBoundary extends Component<
   ErrorBoundaryProps,
   ErrorBoundaryState
 > {
-  private contentRef: React.RefObject<HTMLDivElement | null>
+  private contentRef: React.RefObject<HTMLDivElement | null>;
 
   constructor(props: ErrorBoundaryProps) {
-    super(props)
-    this.state = { hasError: false }
-    this.contentRef = React.createRef()
+    super(props);
+    this.state = { hasError: false };
+    this.contentRef = React.createRef();
   }
 
   static getDerivedStateFromError(_: Error): ErrorBoundaryState {
-    return { hasError: true }
+    return { hasError: true };
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     if (this.props.onError) {
-      this.props.onError(error, errorInfo)
+      this.props.onError(error, errorInfo);
     }
   }
 
@@ -227,7 +227,7 @@ export class GracefullyDegradingErrorBoundary extends Component<
             ref={this.contentRef}
             suppressHydrationWarning
             dangerouslySetInnerHTML={{
-              __html: this.contentRef.current?.innerHTML || '',
+              __html: this.contentRef.current?.innerHTML || "",
             }}
           />
           <div className="fixed bottom-0 left-0 right-0 bg-red-600 text-white py-4 px-6 text-center">
@@ -236,35 +236,35 @@ export class GracefullyDegradingErrorBoundary extends Component<
             </p>
           </div>
         </>
-      )
+      );
     }
 
-    return <div ref={this.contentRef}>{this.props.children}</div>
+    return <div ref={this.contentRef}>{this.props.children}</div>;
   }
 }
 
-export default GracefullyDegradingErrorBoundary
+export default GracefullyDegradingErrorBoundary;
 ```
 
 ```jsx filename="app/dashboard/error.js" switcher
-'use client'
+"use client";
 
-import React, { Component, createRef } from 'react'
+import React, { Component, createRef } from "react";
 
 class GracefullyDegradingErrorBoundary extends Component {
   constructor(props) {
-    super(props)
-    this.state = { hasError: false }
-    this.contentRef = createRef()
+    super(props);
+    this.state = { hasError: false };
+    this.contentRef = createRef();
   }
 
   static getDerivedStateFromError(_) {
-    return { hasError: true }
+    return { hasError: true };
   }
 
   componentDidCatch(error, errorInfo) {
     if (this.props.onError) {
-      this.props.onError(error, errorInfo)
+      this.props.onError(error, errorInfo);
     }
   }
 
@@ -277,7 +277,7 @@ class GracefullyDegradingErrorBoundary extends Component {
             ref={this.contentRef}
             suppressHydrationWarning
             dangerouslySetInnerHTML={{
-              __html: this.contentRef.current?.innerHTML || '',
+              __html: this.contentRef.current?.innerHTML || "",
             }}
           />
           <div className="fixed bottom-0 left-0 right-0 bg-red-600 text-white py-4 px-6 text-center">
@@ -286,14 +286,14 @@ class GracefullyDegradingErrorBoundary extends Component {
             </p>
           </div>
         </>
-      )
+      );
     }
 
-    return <div ref={this.contentRef}>{this.props.children}</div>
+    return <div ref={this.contentRef}>{this.props.children}</div>;
   }
 }
 
-export default GracefullyDegradingErrorBoundary
+export default GracefullyDegradingErrorBoundary;
 ```
 
 ## Version History
@@ -317,7 +317,7 @@ export default GracefullyDegradingErrorBoundary
 The **forbidden** file is used to render UI when the [`forbidden`](/docs/app/api-reference/functions/forbidden) function is invoked during authentication. Along with allowing you to customize the UI, Next.js will return a `403` status code.
 
 ```tsx filename="app/forbidden.tsx" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Forbidden() {
   return (
@@ -326,12 +326,12 @@ export default function Forbidden() {
       <p>You are not authorized to access this resource.</p>
       <Link href="/">Return Home</Link>
     </div>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/forbidden.jsx" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Forbidden() {
   return (
@@ -340,7 +340,7 @@ export default function Forbidden() {
       <p>You are not authorized to access this resource.</p>
       <Link href="/">Return Home</Link>
     </div>
-  )
+  );
 }
 ```
 

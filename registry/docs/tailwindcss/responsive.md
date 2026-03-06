@@ -2,15 +2,15 @@
 
 ## Breakpoints
 
-Tailwind uses a mobile-first breakpoint system. Unprefixed utilities apply at all sizes, while prefixed utilities apply at the specified breakpoint *and above*.
+Tailwind uses a mobile-first breakpoint system. Unprefixed utilities apply at all sizes, while prefixed utilities apply at the specified breakpoint _and above_.
 
-| Prefix | Min Width | CSS |
-|--------|-----------|-----|
-| `sm:` | 640px | `@media (min-width: 640px)` |
-| `md:` | 768px | `@media (min-width: 768px)` |
-| `lg:` | 1024px | `@media (min-width: 1024px)` |
-| `xl:` | 1280px | `@media (min-width: 1280px)` |
-| `2xl:` | 1536px | `@media (min-width: 1536px)` |
+| Prefix | Min Width | CSS                          |
+| ------ | --------- | ---------------------------- |
+| `sm:`  | 640px     | `@media (min-width: 640px)`  |
+| `md:`  | 768px     | `@media (min-width: 768px)`  |
+| `lg:`  | 1024px    | `@media (min-width: 1024px)` |
+| `xl:`  | 1280px    | `@media (min-width: 1280px)` |
+| `2xl:` | 1536px    | `@media (min-width: 1536px)` |
 
 ## Usage Pattern
 
@@ -25,14 +25,10 @@ Design for mobile first, then add responsive overrides:
 </div>
 
 <!-- Small text on mobile, larger on bigger screens -->
-<h1 class="text-2xl md:text-4xl lg:text-6xl font-bold">
-  Responsive Heading
-</h1>
+<h1 class="text-2xl md:text-4xl lg:text-6xl font-bold">Responsive Heading</h1>
 
 <!-- Padding scales with screen size -->
-<div class="px-4 md:px-8 lg:px-16">
-  Content with responsive padding
-</div>
+<div class="px-4 md:px-8 lg:px-16">Content with responsive padding</div>
 
 <!-- Hide on mobile, show on md+ -->
 <nav class="hidden md:block">Desktop nav</nav>
@@ -70,7 +66,9 @@ Tailwind supports dark mode via the `dark:` variant. By default it uses the `pre
 </div>
 
 <!-- Dark mode card -->
-<div class="rounded-lg border border-gray-200 bg-white p-6 shadow dark:border-gray-700 dark:bg-gray-800">
+<div
+  class="rounded-lg border border-gray-200 bg-white p-6 shadow dark:border-gray-700 dark:bg-gray-800"
+>
   <p class="text-gray-900 dark:text-gray-100">Card content</p>
 </div>
 ```
@@ -82,15 +80,17 @@ In `tailwind.config.js` (v3) or CSS config (v4):
 ```js
 // tailwind.config.js (v3)
 module.exports = {
-  darkMode: 'class',
-}
+  darkMode: "class",
+};
 ```
 
 Then toggle the `dark` class on the `<html>` element:
 
 ```html
 <html class="dark">
-  <body class="bg-white dark:bg-gray-900">...</body>
+  <body class="bg-white dark:bg-gray-900">
+    ...
+  </body>
 </html>
 ```
 

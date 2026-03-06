@@ -10,35 +10,35 @@ Create a [Route Handler](/docs/app/api-reference/file-conventions/route). It can
 
 ```ts filename="app/api/draft/route.ts" switcher
 export async function GET(request: Request) {
-  return new Response('')
+  return new Response("");
 }
 ```
 
 ```js filename="app/api/draft/route.js" switcher
 export async function GET() {
-  return new Response('')
+  return new Response("");
 }
 ```
 
 Then, import the [`draftMode`](/docs/app/api-reference/functions/draft-mode) function and call the `enable()` method.
 
 ```ts filename="app/api/draft/route.ts" switcher
-import { draftMode } from 'next/headers'
+import { draftMode } from "next/headers";
 
 export async function GET(request: Request) {
-  const draft = await draftMode()
-  draft.enable()
-  return new Response('Draft mode is enabled')
+  const draft = await draftMode();
+  draft.enable();
+  return new Response("Draft mode is enabled");
 }
 ```
 
 ```js filename="app/api/draft/route.js" switcher
-import { draftMode } from 'next/headers'
+import { draftMode } from "next/headers";
 
 export async function GET(request) {
-  const draft = await draftMode()
-  draft.enable()
-  return new Response('Draft mode is enabled')
+  const draft = await draftMode();
+  draft.enable();
+  return new Response("Draft mode is enabled");
 }
 ```
 
@@ -68,72 +68,72 @@ https://<your-site>/api/draft?secret=<token>&slug=<path>
 3. In your Route Handler, check that the secret matches and that the `slug` parameter exists (if not, the request should fail), call `draftMode.enable()` to set the cookie. Then, redirect the browser to the path specified by `slug`:
 
 ```ts filename="app/api/draft/route.ts" switcher
-import { draftMode } from 'next/headers'
-import { redirect } from 'next/navigation'
+import { draftMode } from "next/headers";
+import { redirect } from "next/navigation";
 
 export async function GET(request: Request) {
   // Parse query string parameters
-  const { searchParams } = new URL(request.url)
-  const secret = searchParams.get('secret')
-  const slug = searchParams.get('slug')
+  const { searchParams } = new URL(request.url);
+  const secret = searchParams.get("secret");
+  const slug = searchParams.get("slug");
 
   // Check the secret and next parameters
   // This secret should only be known to this Route Handler and the CMS
-  if (secret !== 'MY_SECRET_TOKEN' || !slug) {
-    return new Response('Invalid token', { status: 401 })
+  if (secret !== "MY_SECRET_TOKEN" || !slug) {
+    return new Response("Invalid token", { status: 401 });
   }
 
   // Fetch the headless CMS to check if the provided `slug` exists
   // getPostBySlug would implement the required fetching logic to the headless CMS
-  const post = await getPostBySlug(slug)
+  const post = await getPostBySlug(slug);
 
   // If the slug doesn't exist prevent draft mode from being enabled
   if (!post) {
-    return new Response('Invalid slug', { status: 401 })
+    return new Response("Invalid slug", { status: 401 });
   }
 
   // Enable Draft Mode by setting the cookie
-  const draft = await draftMode()
-  draft.enable()
+  const draft = await draftMode();
+  draft.enable();
 
   // Redirect to the path from the fetched post
   // We don't redirect to searchParams.slug as that might lead to open redirect vulnerabilities
-  redirect(post.slug)
+  redirect(post.slug);
 }
 ```
 
 ```js filename="app/api/draft/route.js" switcher
-import { draftMode } from 'next/headers'
-import { redirect } from 'next/navigation'
+import { draftMode } from "next/headers";
+import { redirect } from "next/navigation";
 
 export async function GET(request) {
   // Parse query string parameters
-  const { searchParams } = new URL(request.url)
-  const secret = searchParams.get('secret')
-  const slug = searchParams.get('slug')
+  const { searchParams } = new URL(request.url);
+  const secret = searchParams.get("secret");
+  const slug = searchParams.get("slug");
 
   // Check the secret and next parameters
   // This secret should only be known to this Route Handler and the CMS
-  if (secret !== 'MY_SECRET_TOKEN' || !slug) {
-    return new Response('Invalid token', { status: 401 })
+  if (secret !== "MY_SECRET_TOKEN" || !slug) {
+    return new Response("Invalid token", { status: 401 });
   }
 
   // Fetch the headless CMS to check if the provided `slug` exists
   // getPostBySlug would implement the required fetching logic to the headless CMS
-  const post = await getPostBySlug(slug)
+  const post = await getPostBySlug(slug);
 
   // If the slug doesn't exist prevent draft mode from being enabled
   if (!post) {
-    return new Response('Invalid slug', { status: 401 })
+    return new Response("Invalid slug", { status: 401 });
   }
 
   // Enable Draft Mode by setting the cookie
-  const draft = await draftMode()
-  draft.enable()
+  const draft = await draftMode();
+  draft.enable();
 
   // Redirect to the path from the fetched post
   // We don't redirect to searchParams.slug as that might lead to open redirect vulnerabilities
-  redirect(post.slug)
+  redirect(post.slug);
 }
 ```
 
@@ -149,57 +149,57 @@ Furthermore, the value of `isEnabled` will be `true`.
 
 ```tsx filename="app/page.tsx" switcher
 // page that fetches data
-import { draftMode } from 'next/headers'
+import { draftMode } from "next/headers";
 
 async function getData() {
-  const { isEnabled } = await draftMode()
+  const { isEnabled } = await draftMode();
 
   const url = isEnabled
-    ? 'https://draft.example.com'
-    : 'https://production.example.com'
+    ? "https://draft.example.com"
+    : "https://production.example.com";
 
-  const res = await fetch(url)
+  const res = await fetch(url);
 
-  return res.json()
+  return res.json();
 }
 
 export default async function Page() {
-  const { title, desc } = await getData()
+  const { title, desc } = await getData();
 
   return (
     <main>
       <h1>{title}</h1>
       <p>{desc}</p>
     </main>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/page.js" switcher
 // page that fetches data
-import { draftMode } from 'next/headers'
+import { draftMode } from "next/headers";
 
 async function getData() {
-  const { isEnabled } = await draftMode()
+  const { isEnabled } = await draftMode();
 
   const url = isEnabled
-    ? 'https://draft.example.com'
-    : 'https://production.example.com'
+    ? "https://draft.example.com"
+    : "https://production.example.com";
 
-  const res = await fetch(url)
+  const res = await fetch(url);
 
-  return res.json()
+  return res.json();
 }
 
 export default async function Page() {
-  const { title, desc } = await getData()
+  const { title, desc } = await getData();
 
   return (
     <main>
       <h1>{title}</h1>
       <p>{desc}</p>
     </main>
-  )
+  );
 }
 ```
 

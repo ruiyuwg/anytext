@@ -13,8 +13,8 @@ When the user navigates to the chat page without providing a chat ID,
 we need to create a new chat and redirect to the chat page with the new chat ID.
 
 ```tsx filename="app/chat/page.tsx"
-import { redirect } from 'next/navigation';
-import { createChat } from '@util/chat-store';
+import { redirect } from "next/navigation";
+import { createChat } from "@util/chat-store";
 
 export default async function Page() {
   const id = await createChat(); // create a new chat
@@ -28,19 +28,19 @@ and get the chat ID from the database.
 That being said, the function interfaces are designed to be easily replaced with other implementations.
 
 ```tsx filename="util/chat-store.ts"
-import { generateId } from 'ai';
-import { existsSync, mkdirSync } from 'fs';
-import { writeFile } from 'fs/promises';
-import path from 'path';
+import { generateId } from "ai";
+import { existsSync, mkdirSync } from "fs";
+import { writeFile } from "fs/promises";
+import path from "path";
 
 export async function createChat(): Promise<string> {
   const id = generateId(); // generate a unique chat ID
-  await writeFile(getChatFile(id), '[]'); // create an empty chat file
+  await writeFile(getChatFile(id), "[]"); // create an empty chat file
   return id;
 }
 
 function getChatFile(id: string): string {
-  const chatDir = path.join(process.cwd(), '.chats');
+  const chatDir = path.join(process.cwd(), ".chats");
   if (!existsSync(chatDir)) mkdirSync(chatDir, { recursive: true });
   return path.join(chatDir, `${id}.json`);
 }
@@ -53,11 +53,11 @@ When the user navigates to the chat page with a chat ID, we need to load the cha
 The `loadChat` function in our file-based chat store is implemented as follows:
 
 ```tsx filename="util/chat-store.ts"
-import { UIMessage } from 'ai';
-import { readFile } from 'fs/promises';
+import { UIMessage } from "ai";
+import { readFile } from "fs/promises";
 
 export async function loadChat(id: string): Promise<UIMessage[]> {
-  return JSON.parse(await readFile(getChatFile(id), 'utf8'));
+  return JSON.parse(await readFile(getChatFile(id), "utf8"));
 }
 
 // ... rest of the file
@@ -78,19 +78,19 @@ import {
   UIMessage,
   validateUIMessages,
   tool,
-} from 'ai';
-import { z } from 'zod';
-import { loadChat, saveChat } from '@util/chat-store';
-import { openai } from '@ai-sdk/openai';
-import { dataPartsSchema, metadataSchema } from '@util/schemas';
+} from "ai";
+import { z } from "zod";
+import { loadChat, saveChat } from "@util/chat-store";
+import { openai } from "@ai-sdk/openai";
+import { dataPartsSchema, metadataSchema } from "@util/schemas";
 
 // Define your tools
 const tools = {
   weather: tool({
-    description: 'Get weather information',
+    description: "Get weather information",
     parameters: z.object({
       location: z.string(),
-      units: z.enum(['celsius', 'fahrenheit']),
+      units: z.enum(["celsius", "fahrenheit"]),
     }),
     execute: async ({ location, units }) => {
       /* tool implementation */
@@ -118,7 +118,7 @@ export async function POST(req: Request) {
   });
 
   const result = streamText({
-    model: 'openai/gpt-5-mini',
+    model: "openai/gpt-5-mini",
     messages: convertToModelMessages(validatedMessages),
     tools,
   });
@@ -142,8 +142,8 @@ import {
   streamText,
   validateUIMessages,
   TypeValidationError,
-} from 'ai';
-import { type MyUIMessage } from '@/types';
+} from "ai";
+import { type MyUIMessage } from "@/types";
 
 export async function POST(req: Request) {
   const { message, id } = await req.json();
@@ -162,7 +162,7 @@ export async function POST(req: Request) {
   } catch (error) {
     if (error instanceof TypeValidationError) {
       // Log validation error for monitoring
-      console.error('Database messages validation failed:', error);
+      console.error("Database messages validation failed:", error);
       // Could implement message migration or filtering here
       // For now, start with empty history
       validatedMessages = [];
@@ -180,8 +180,8 @@ export async function POST(req: Request) {
 Once messages are loaded from storage, you can display them in your chat UI. Here's how to set up the page component and the chat display:
 
 ```tsx filename="app/chat/[id]/page.tsx"
-import { loadChat } from '@util/chat-store';
-import Chat from '@ui/chat';
+import { loadChat } from "@util/chat-store";
+import Chat from "@ui/chat";
 
 export default async function Page(props: { params: Promise<{ id: string }> }) {
   const { id } = await props.params;
@@ -193,22 +193,22 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
 The chat component uses the `useChat` hook to manage the conversation:
 
 ```tsx filename="ui/chat.tsx" highlight="10-16"
-'use client';
+"use client";
 
-import { UIMessage, useChat } from '@ai-sdk/react';
-import { DefaultChatTransport } from 'ai';
-import { useState } from 'react';
+import { UIMessage, useChat } from "@ai-sdk/react";
+import { DefaultChatTransport } from "ai";
+import { useState } from "react";
 
 export default function Chat({
   id,
   initialMessages,
 }: { id?: string | undefined; initialMessages?: UIMessage[] } = {}) {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
   const { sendMessage, messages } = useChat({
     id, // use the provided chat ID
     messages: initialMessages, // load initial messages
     transport: new DefaultChatTransport({
-      api: '/api/chat',
+      api: "/api/chat",
     }),
   });
 
@@ -216,26 +216,26 @@ export default function Chat({
     e.preventDefault();
     if (input.trim()) {
       sendMessage({ text: input });
-      setInput('');
+      setInput("");
     }
   };
 
   // simplified rendering code, extend as needed:
   return (
     <div>
-      {messages.map(m => (
+      {messages.map((m) => (
         <div key={m.id}>
-          {m.role === 'user' ? 'User: ' : 'AI: '}
+          {m.role === "user" ? "User: " : "AI: "}
           {m.parts
-            .map(part => (part.type === 'text' ? part.text : ''))
-            .join('')}
+            .map((part) => (part.type === "text" ? part.text : ""))
+            .join("")}
         </div>
       ))}
 
       <form onSubmit={handleSubmit}>
         <input
           value={input}
-          onChange={e => setInput(e.target.value)}
+          onChange={(e) => setInput(e.target.value)}
           placeholder="Type a message..."
         />
         <button type="submit">Send</button>
@@ -262,16 +262,16 @@ Storing messages is done in the `onFinish` callback of the `toUIMessageStreamRes
 `onFinish` receives the complete messages including the new AI response as `UIMessage[]`.
 
 ```tsx filename="app/api/chat/route.ts" highlight="6,11-17"
-import { openai } from '@ai-sdk/openai';
-import { saveChat } from '@util/chat-store';
-import { convertToModelMessages, streamText, UIMessage } from 'ai';
+import { openai } from "@ai-sdk/openai";
+import { saveChat } from "@util/chat-store";
+import { convertToModelMessages, streamText, UIMessage } from "ai";
 
 export async function POST(req: Request) {
   const { messages, chatId }: { messages: UIMessage[]; chatId: string } =
     await req.json();
 
   const result = streamText({
-    model: 'openai/gpt-5-mini',
+    model: "openai/gpt-5-mini",
     messages: await convertToModelMessages(messages),
   });
 
@@ -288,8 +288,8 @@ The actual storage of the messages is done in the `saveChat` function, which in
 our file-based chat store is implemented as follows:
 
 ```tsx filename="util/chat-store.ts"
-import { UIMessage } from 'ai';
-import { writeFile } from 'fs/promises';
+import { UIMessage } from "ai";
+import { writeFile } from "fs/promises";
 
 export async function saveChat({
   chatId,
@@ -332,7 +332,7 @@ When implementing persistence, you have two options for generating server-side I
 You can control the ID format by providing ID generators using [`createIdGenerator()`](/docs/reference/ai-sdk-core/create-id-generator):
 
 ```tsx filename="app/api/chat/route.ts" highlight="7-11"
-import { createIdGenerator, streamText } from 'ai';
+import { createIdGenerator, streamText } from "ai";
 
 export async function POST(req: Request) {
   // ...
@@ -344,7 +344,7 @@ export async function POST(req: Request) {
     originalMessages: messages,
     // Generate consistent server-side IDs for persistence:
     generateMessageId: createIdGenerator({
-      prefix: 'msg',
+      prefix: "msg",
       size: 16,
     }),
     onFinish: ({ messages }) => {
@@ -364,7 +364,7 @@ import {
   streamText,
   createUIMessageStream,
   createUIMessageStreamResponse,
-} from 'ai';
+} from "ai";
 
 export async function POST(req: Request) {
   const { messages, chatId } = await req.json();
@@ -373,12 +373,12 @@ export async function POST(req: Request) {
     execute: ({ writer }) => {
       // Write start message part with custom ID
       writer.write({
-        type: 'start',
+        type: "start",
         messageId: generateId(), // Generate server-side ID for persistence
       });
 
       const result = streamText({
-        model: 'openai/gpt-5-mini',
+        model: "openai/gpt-5-mini",
         messages: await convertToModelMessages(messages),
       });
 
@@ -418,15 +418,15 @@ To achieve this, you can provide a `prepareSendMessagesRequest` function to the 
 This function receives the messages and the chat ID, and returns the request body to be sent to the server.
 
 ```tsx filename="ui/chat.tsx" highlight="7-12"
-import { useChat } from '@ai-sdk/react';
-import { DefaultChatTransport } from 'ai';
+import { useChat } from "@ai-sdk/react";
+import { DefaultChatTransport } from "ai";
 
 const {
   // ...
 } = useChat({
   // ...
   transport: new DefaultChatTransport({
-    api: '/api/chat',
+    api: "/api/chat",
     // only send the last message to the server:
     prepareSendMessagesRequest({ messages, id }) {
       return { body: { message: messages[messages.length - 1], id } };
@@ -438,7 +438,7 @@ const {
 On the server, you can then load the previous messages and append the new message to the previous messages. If your messages contain tools, metadata, or custom data parts, you should validate them:
 
 ```tsx filename="app/api/chat/route.ts" highlight="2-11,14-18"
-import { convertToModelMessages, UIMessage, validateUIMessages } from 'ai';
+import { convertToModelMessages, UIMessage, validateUIMessages } from "ai";
 // import your tools and schemas
 
 export async function POST(req: Request) {
@@ -485,8 +485,8 @@ and then save the result as usual.
 meaning that the result is stored even when the client has already disconnected.
 
 ```tsx filename="app/api/chat/route.ts" highlight="19-21"
-import { convertToModelMessages, streamText, UIMessage } from 'ai';
-import { saveChat } from '@util/chat-store';
+import { convertToModelMessages, streamText, UIMessage } from "ai";
+import { saveChat } from "@util/chat-store";
 
 export async function POST(req: Request) {
   const { messages, chatId }: { messages: UIMessage[]; chatId: string } =

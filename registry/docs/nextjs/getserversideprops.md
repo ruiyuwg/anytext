@@ -7,20 +7,20 @@
 You can use `getServerSideProps` by exporting it from a Page Component. The example below shows how you can fetch data from a 3rd party API in `getServerSideProps`, and pass the data to the page as props:
 
 ```tsx filename="pages/index.tsx" switcher
-import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
+import type { InferGetServerSidePropsType, GetServerSideProps } from "next";
 
 type Repo = {
-  name: string
-  stargazers_count: number
-}
+  name: string;
+  stargazers_count: number;
+};
 
 export const getServerSideProps = (async () => {
   // Fetch data from external API
-  const res = await fetch('https://api.github.com/repos/vercel/next.js')
-  const repo: Repo = await res.json()
+  const res = await fetch("https://api.github.com/repos/vercel/next.js");
+  const repo: Repo = await res.json();
   // Pass data to the page via props
-  return { props: { repo } }
-}) satisfies GetServerSideProps<{ repo: Repo }>
+  return { props: { repo } };
+}) satisfies GetServerSideProps<{ repo: Repo }>;
 
 export default function Page({
   repo,
@@ -29,17 +29,17 @@ export default function Page({
     <main>
       <p>{repo.stargazers_count}</p>
     </main>
-  )
+  );
 }
 ```
 
 ```jsx filename="pages/index.js" switcher
 export async function getServerSideProps() {
   // Fetch data from external API
-  const res = await fetch('https://api.github.com/repos/vercel/next.js')
-  const repo = await res.json()
+  const res = await fetch("https://api.github.com/repos/vercel/next.js");
+  const repo = await res.json();
   // Pass data to the page via props
-  return { props: { repo } }
+  return { props: { repo } };
 }
 
 export default function Page({ repo }) {
@@ -47,7 +47,7 @@ export default function Page({ repo }) {
     <main>
       <p>{repo.stargazers_count}</p>
     </main>
-  )
+  );
 }
 ```
 
@@ -92,13 +92,13 @@ You can use caching headers (`Cache-Control`) inside `getServerSideProps` to cac
 // with a fresh value. If you refresh the page, you will see the new value.
 export async function getServerSideProps({ req, res }) {
   res.setHeader(
-    'Cache-Control',
-    'public, s-maxage=10, stale-while-revalidate=59'
-  )
+    "Cache-Control",
+    "public, s-maxage=10, stale-while-revalidate=59",
+  );
 
   return {
     props: {},
-  }
+  };
 }
 ```
 

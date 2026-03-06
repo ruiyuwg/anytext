@@ -2,16 +2,16 @@
 
 The `react-dom` package contains methods that are only supported for the web applications (which run in the browser DOM environment). They are not supported for React Native.
 
-***
+---
 
-## APIs {/*apis*/}
+## APIs {/_apis_/}
 
 These APIs can be imported from your components. They are rarely used:
 
 - [`createPortal`](/reference/react-dom/createPortal) lets you render child components in a different part of the DOM tree.
 - [`flushSync`](/reference/react-dom/flushSync) lets you force React to flush a state update and update the DOM synchronously.
 
-## Resource Preloading APIs {/*resource-preloading-apis*/}
+## Resource Preloading APIs {/_resource-preloading-apis_/}
 
 These APIs can be used to make apps faster by pre-loading resources such as scripts, stylesheets, and fonts as soon as you know you need them, for example before navigating to another page where the resources will be used.
 
@@ -24,18 +24,18 @@ These APIs can be used to make apps faster by pre-loading resources such as scri
 - [`preinit`](/reference/react-dom/preinit) lets you fetch and evaluate an external script or fetch and insert a stylesheet.
 - [`preinitModule`](/reference/react-dom/preinitModule) lets you fetch and evaluate an ESM module.
 
-***
+---
 
-## Entry points {/*entry-points*/}
+## Entry points {/_entry-points_/}
 
 The `react-dom` package provides two additional entry points:
 
 - [`react-dom/client`](/reference/react-dom/client) contains APIs to render React components on the client (in the browser).
 - [`react-dom/server`](/reference/react-dom/server) contains APIs to render React components on the server.
 
-***
+---
 
-## Removed APIs {/*removed-apis*/}
+## Removed APIs {/_removed-apis_/}
 
 These APIs were removed in React 19:
 
@@ -46,7 +46,7 @@ These APIs were removed in React 19:
 - [`renderToNodeStream`](https://18.react.dev/reference/react-dom/server/renderToNodeStream): use [`react-dom/server`](/reference/react-dom/server) APIs instead.
 - [`renderToStaticNodeStream`](https://18.react.dev/reference/react-dom/server/renderToStaticNodeStream): use [`react-dom/server`](/reference/react-dom/server) APIs instead.
 
-***
+---
 
 ## Sitemap
 

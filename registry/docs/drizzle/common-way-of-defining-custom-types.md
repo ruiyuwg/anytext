@@ -22,25 +22,23 @@ import { customType } from 'drizzle-orm/singlestore-core';
 **Integer**
 
 ```typescript copy
-import { customType } from 'drizzle-orm/pg-core';
+import { customType } from "drizzle-orm/pg-core";
 
-const customSerial = customType<{ data: number; }>(
-  {
-    dataType() {
-      return 'integer';
-    },
+const customSerial = customType<{ data: number }>({
+  dataType() {
+    return "integer";
   },
-);
+});
 ```
 
 **Text**
 
 ```typescript copy
-import { customType } from 'drizzle-orm/pg-core';
+import { customType } from "drizzle-orm/pg-core";
 
 const customText = customType<{ data: string }>({
   dataType() {
-    return 'text';
+    return "text";
   },
 });
 ```
@@ -48,11 +46,11 @@ const customText = customType<{ data: string }>({
 **Boolean**
 
 ```typescript copy
-import { customType } from 'drizzle-orm/pg-core';
+import { customType } from "drizzle-orm/pg-core";
 
 const customBoolean = customType<{ data: boolean }>({
   dataType() {
-    return 'boolean';
+    return "boolean";
   },
 });
 ```
@@ -60,12 +58,12 @@ const customBoolean = customType<{ data: boolean }>({
 **Jsonb**
 
 ```typescript copy
-import { customType } from 'drizzle-orm/pg-core';
+import { customType } from "drizzle-orm/pg-core";
 
 const customJsonb = <TData>(name: string) =>
   customType<{ data: TData; driverData: string }>({
     dataType() {
-      return 'jsonb';
+      return "jsonb";
     },
     toDriver(value: TData): string {
       return JSON.stringify(value);
@@ -76,21 +74,18 @@ const customJsonb = <TData>(name: string) =>
 **Timestamp**
 
 ```typescript copy
-import { customType } from 'drizzle-orm/pg-core';
+import { customType } from "drizzle-orm/pg-core";
 
-const customTimestamp = customType<
-  {
-    data: Date;
-    driverData: string;
-    config: { withTimezone: boolean; precision?: number };
-  }
->({
+const customTimestamp = customType<{
+  data: Date;
+  driverData: string;
+  config: { withTimezone: boolean; precision?: number };
+}>({
   dataType(config) {
-    const precision = typeof config.precision !== 'undefined'
-      ? ` (${config.precision})`
-      : '';
+    const precision =
+      typeof config.precision !== "undefined" ? ` (${config.precision})` : "";
     return `timestamp${precision}${
-      config.withTimezone ? ' with time zone' : ''
+      config.withTimezone ? " with time zone" : ""
     }`;
   },
   fromDriver(value: string): Date {
@@ -102,12 +97,13 @@ const customTimestamp = customType<
 Usage for all types will be same as defined functions in Drizzle ORM. For example:
 
 ```typescript copy
-const usersTable = pgTable('users', {
-  id: customSerial('id').primaryKey(),
-  name: customText('name').notNull(),
-  verified: customBoolean('verified').notNull().default(false),
-  jsonb: customJsonb<string[]>('jsonb'),
-  createdAt: customTimestamp('created_at', { withTimezone: true }).notNull()
+const usersTable = pgTable("users", {
+  id: customSerial("id").primaryKey(),
+  name: customText("name").notNull(),
+  verified: customBoolean("verified").notNull().default(false),
+  jsonb: customJsonb<string[]>("jsonb"),
+  createdAt: customTimestamp("created_at", { withTimezone: true })
+    .notNull()
     .default(sql`now()`),
 });
 ```
@@ -231,7 +227,7 @@ export interface CustomTypeParams<T extends CustomTypeValues> {
    *  return new Date(value);
    * },
    * ```
-   * 
+   *
    * It'll cause the returned data to change from:
  	 * ```
  	 * {

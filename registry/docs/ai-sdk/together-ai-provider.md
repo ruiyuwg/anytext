@@ -12,37 +12,37 @@ install it with
 You can import the default provider instance `togetherai` from `@ai-sdk/togetherai`:
 
 ```ts
-import { togetherai } from '@ai-sdk/togetherai';
+import { togetherai } from "@ai-sdk/togetherai";
 ```
 
 If you need a customized setup, you can import `createTogetherAI` from `@ai-sdk/togetherai`
 and create a provider instance with your settings:
 
 ```ts
-import { createTogetherAI } from '@ai-sdk/togetherai';
+import { createTogetherAI } from "@ai-sdk/togetherai";
 
 const togetherai = createTogetherAI({
-  apiKey: process.env.TOGETHER_API_KEY ?? '',
+  apiKey: process.env.TOGETHER_API_KEY ?? "",
 });
 ```
 
 You can use the following optional settings to customize the Together.ai provider instance:
 
-- **baseURL** *string*
+- **baseURL** _string_
 
   Use a different URL prefix for API calls, e.g. to use proxy servers.
   The default prefix is `https://api.together.xyz/v1`.
 
-- **apiKey** *string*
+- **apiKey** _string_
 
   API key that is being sent using the `Authorization` header. It defaults to
   the `TOGETHER_API_KEY` environment variable.
 
-- **headers** *Record\<string,string>*
+- **headers** _Record\<string,string>_
 
   Custom headers to include in the requests.
 
-- **fetch** *(input: RequestInfo, init?: RequestInit) => Promise\<Response>*
+- **fetch** _(input: RequestInfo, init?: RequestInit) => Promise\<Response>_
 
   Custom [fetch](https://developer.mozilla.org/en-US/docs/Web/API/fetch) implementation.
   Defaults to the global `fetch` function.
@@ -54,7 +54,7 @@ You can use the following optional settings to customize the Together.ai provide
 You can create [Together.ai models](https://docs.together.ai/docs/serverless-models) using a provider instance. The first argument is the model id, e.g. `google/gemma-2-9b-it`.
 
 ```ts
-const model = togetherai('google/gemma-2-9b-it');
+const model = togetherai("google/gemma-2-9b-it");
 ```
 
 ### Reasoning Models
@@ -63,12 +63,12 @@ Together.ai exposes the thinking of `deepseek-ai/DeepSeek-R1` in the generated t
 You can use the `extractReasoningMiddleware` to extract this reasoning and expose it as a `reasoning` property on the result:
 
 ```ts
-import { togetherai } from '@ai-sdk/togetherai';
-import { wrapLanguageModel, extractReasoningMiddleware } from 'ai';
+import { togetherai } from "@ai-sdk/togetherai";
+import { wrapLanguageModel, extractReasoningMiddleware } from "ai";
 
 const enhancedModel = wrapLanguageModel({
-  model: togetherai('deepseek-ai/DeepSeek-R1'),
-  middleware: extractReasoningMiddleware({ tagName: 'think' }),
+  model: togetherai("deepseek-ai/DeepSeek-R1"),
+  middleware: extractReasoningMiddleware({ tagName: "think" }),
 });
 ```
 
@@ -79,12 +79,12 @@ You can then use that enhanced model in functions like `generateText` and `strea
 You can use Together.ai language models to generate text with the `generateText` function:
 
 ```ts
-import { togetherai } from '@ai-sdk/togetherai';
-import { generateText } from 'ai';
+import { togetherai } from "@ai-sdk/togetherai";
+import { generateText } from "ai";
 
 const { text } = await generateText({
-  model: togetherai('meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo'),
-  prompt: 'Write a vegetarian lasagna recipe for 4 people.',
+  model: togetherai("meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo"),
+  prompt: "Write a vegetarian lasagna recipe for 4 people.",
 });
 ```
 
@@ -95,16 +95,16 @@ The Together.ai provider also supports [completion models](https://docs.together
 
 ## Model Capabilities
 
-| Model                                               | Image Input         | Object Generation   | Tool Usage          | Tool Streaming      |
-| --------------------------------------------------- | ------------------- | ------------------- | ------------------- | ------------------- |
-| `moonshotai/Kimi-K2.5`                              |  |  |  |  |
-| `Qwen/Qwen3.5-397B-A17B`                            |  |  |  |  |
-| `MiniMaxAI/MiniMax-M2.5`                            |  |  |  |  |
-| `zai-org/GLM-5`                                     |  |  |  |  |
-| `deepseek-ai/DeepSeek-V3.1`                         |  |  |  |  |
-| `openai/gpt-oss-120b`                               |  |  |  |  |
-| `openai/gpt-oss-20b`                                |  |  |  |  |
-| `meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8` |  |  |  |  |
+| Model                                               | Image Input | Object Generation | Tool Usage | Tool Streaming |
+| --------------------------------------------------- | ----------- | ----------------- | ---------- | -------------- |
+| `moonshotai/Kimi-K2.5`                              |             |                   |            |                |
+| `Qwen/Qwen3.5-397B-A17B`                            |             |                   |            |                |
+| `MiniMaxAI/MiniMax-M2.5`                            |             |                   |            |                |
+| `zai-org/GLM-5`                                     |             |                   |            |                |
+| `deepseek-ai/DeepSeek-V3.1`                         |             |                   |            |                |
+| `openai/gpt-oss-120b`                               |             |                   |            |                |
+| `openai/gpt-oss-20b`                                |             |                   |            |                |
+| `meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8` |             |                   |            |                |
 
 The table above lists popular models. Please see the [Together.ai
 docs](https://docs.together.ai/docs/serverless-models) for a full list of
@@ -117,12 +117,12 @@ You can create Together.ai image models using the `.image()` factory method.
 For more on image generation with the AI SDK see [generateImage()](/docs/reference/ai-sdk-core/generate-image).
 
 ```ts
-import { togetherai } from '@ai-sdk/togetherai';
-import { generateImage } from 'ai';
+import { togetherai } from "@ai-sdk/togetherai";
+import { generateImage } from "ai";
 
 const { images } = await generateImage({
-  model: togetherai.image('black-forest-labs/FLUX.1-dev'),
-  prompt: 'A delighted resplendent quetzal mid flight amidst raindrops',
+  model: togetherai.image("black-forest-labs/FLUX.1-dev"),
+  prompt: "A delighted resplendent quetzal mid flight amidst raindrops",
 });
 ```
 
@@ -132,13 +132,13 @@ You can pass optional provider-specific request parameters using the `providerOp
 import {
   togetherai,
   type TogetherAIImageModelOptions,
-} from '@ai-sdk/togetherai';
-import { generateImage } from 'ai';
+} from "@ai-sdk/togetherai";
+import { generateImage } from "ai";
 
 const { images } = await generateImage({
-  model: togetherai.image('black-forest-labs/FLUX.1-dev'),
-  prompt: 'A delighted resplendent quetzal mid flight amidst raindrops',
-  size: '512x512',
+  model: togetherai.image("black-forest-labs/FLUX.1-dev"),
+  prompt: "A delighted resplendent quetzal mid flight amidst raindrops",
+  size: "512x512",
   // Optional additional provider-specific request parameters
   providerOptions: {
     togetherai: {
@@ -150,19 +150,19 @@ const { images } = await generateImage({
 
 The following provider options are available:
 
-- **steps** *number*
+- **steps** _number_
 
   Number of generation steps. Higher values can improve quality.
 
-- **guidance** *number*
+- **guidance** _number_
 
   Guidance scale for image generation.
 
-- **negative\_prompt** *string*
+- **negative_prompt** _string_
 
   Negative prompt to guide what to avoid.
 
-- **disable\_safety\_checker** *boolean*
+- **disable_safety_checker** _boolean_
 
   Disable the safety checker for image generation.
   When true, the API will not reject images flagged as potentially NSFW.
@@ -180,15 +180,15 @@ prompts to specify what you want to change in the image.
 Transform an existing image using text prompts:
 
 ```ts
-const imageBuffer = readFileSync('./input-image.png');
+const imageBuffer = readFileSync("./input-image.png");
 
 const { images } = await generateImage({
-  model: togetherai.image('black-forest-labs/FLUX.1-kontext-pro'),
+  model: togetherai.image("black-forest-labs/FLUX.1-kontext-pro"),
   prompt: {
-    text: 'Turn the cat into a golden retriever dog',
+    text: "Turn the cat into a golden retriever dog",
     images: [imageBuffer],
   },
-  size: '1024x1024',
+  size: "1024x1024",
   providerOptions: {
     togetherai: {
       steps: 28,
@@ -203,12 +203,12 @@ You can also pass image URLs directly:
 
 ```ts
 const { images } = await generateImage({
-  model: togetherai.image('black-forest-labs/FLUX.1-kontext-pro'),
+  model: togetherai.image("black-forest-labs/FLUX.1-kontext-pro"),
   prompt: {
-    text: 'Make the background a lush rainforest',
-    images: ['https://example.com/photo.png'],
+    text: "Make the background a lush rainforest",
+    images: ["https://example.com/photo.png"],
   },
-  size: '1024x1024',
+  size: "1024x1024",
   providerOptions: {
     togetherai: {
       steps: 28,
@@ -259,12 +259,12 @@ You can create Together.ai embedding models using the `.embeddingModel()` factor
 For more on embedding models with the AI SDK see [embed()](/docs/reference/ai-sdk-core/embed).
 
 ```ts
-import { togetherai } from '@ai-sdk/togetherai';
-import { embed } from 'ai';
+import { togetherai } from "@ai-sdk/togetherai";
+import { embed } from "ai";
 
 const { embedding } = await embed({
-  model: togetherai.embeddingModel('togethercomputer/m2-bert-80M-2k-retrieval'),
-  value: 'sunny day at the beach',
+  model: togetherai.embeddingModel("togethercomputer/m2-bert-80M-2k-retrieval"),
+  value: "sunny day at the beach",
 });
 ```
 
@@ -285,19 +285,19 @@ You can create Together.ai reranking models using the `.reranking()` factory met
 For more on reranking with the AI SDK see [rerank()](/docs/reference/ai-sdk-core/rerank).
 
 ```ts
-import { togetherai } from '@ai-sdk/togetherai';
-import { rerank } from 'ai';
+import { togetherai } from "@ai-sdk/togetherai";
+import { rerank } from "ai";
 
 const documents = [
-  'sunny day at the beach',
-  'rainy afternoon in the city',
-  'snowy night in the mountains',
+  "sunny day at the beach",
+  "rainy afternoon in the city",
+  "snowy night in the mountains",
 ];
 
 const { ranking } = await rerank({
-  model: togetherai.reranking('mixedbread-ai/Mxbai-Rerank-Large-V2'),
+  model: togetherai.reranking("mixedbread-ai/Mxbai-Rerank-Large-V2"),
   documents,
-  query: 'talk about rain',
+  query: "talk about rain",
   topN: 2,
 });
 
@@ -314,29 +314,29 @@ Together.ai reranking models support additional provider options for object docu
 import {
   togetherai,
   type TogetherAIRerankingModelOptions,
-} from '@ai-sdk/togetherai';
-import { rerank } from 'ai';
+} from "@ai-sdk/togetherai";
+import { rerank } from "ai";
 
 const documents = [
   {
-    from: 'Paul Doe',
-    subject: 'Follow-up',
-    text: 'We are happy to give you a discount of 20%.',
+    from: "Paul Doe",
+    subject: "Follow-up",
+    text: "We are happy to give you a discount of 20%.",
   },
   {
-    from: 'John McGill',
-    subject: 'Missing Info',
-    text: 'Here is the pricing from Oracle: $5000/month',
+    from: "John McGill",
+    subject: "Missing Info",
+    text: "Here is the pricing from Oracle: $5000/month",
   },
 ];
 
 const { ranking } = await rerank({
-  model: togetherai.reranking('mixedbread-ai/Mxbai-Rerank-Large-V2'),
+  model: togetherai.reranking("mixedbread-ai/Mxbai-Rerank-Large-V2"),
   documents,
-  query: 'Which pricing did we get from Oracle?',
+  query: "Which pricing did we get from Oracle?",
   providerOptions: {
     togetherai: {
-      rankFields: ['from', 'subject', 'text'], // Specify which fields to rank by
+      rankFields: ["from", "subject", "text"], // Specify which fields to rank by
     } satisfies TogetherAIRerankingModelOptions,
   },
 });
@@ -344,7 +344,7 @@ const { ranking } = await rerank({
 
 The following provider options are available:
 
-- **rankFields** *string\[]*
+- **rankFields** _string\[]_
 
   Array of field names to use for ranking when documents are JSON objects. If not specified, all fields are used.
 

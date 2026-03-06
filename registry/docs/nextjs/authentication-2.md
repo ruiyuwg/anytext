@@ -26,27 +26,27 @@ Here are the steps to implement a sign-up and/or login form:
 Consider a login form where users can input their credentials:
 
 ```tsx filename="pages/login.tsx" switcher
-import { FormEvent } from 'react'
-import { useRouter } from 'next/router'
+import { FormEvent } from "react";
+import { useRouter } from "next/router";
 
 export default function LoginPage() {
-  const router = useRouter()
+  const router = useRouter();
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
+    event.preventDefault();
 
-    const formData = new FormData(event.currentTarget)
-    const email = formData.get('email')
-    const password = formData.get('password')
+    const formData = new FormData(event.currentTarget);
+    const email = formData.get("email");
+    const password = formData.get("password");
 
-    const response = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    const response = await fetch("/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
-    })
+    });
 
     if (response.ok) {
-      router.push('/profile')
+      router.push("/profile");
     } else {
       // Handle errors
     }
@@ -58,32 +58,32 @@ export default function LoginPage() {
       <input type="password" name="password" placeholder="Password" required />
       <button type="submit">Login</button>
     </form>
-  )
+  );
 }
 ```
 
 ```jsx filename="pages/login.jsx" switcher
-import { FormEvent } from 'react'
-import { useRouter } from 'next/router'
+import { FormEvent } from "react";
+import { useRouter } from "next/router";
 
 export default function LoginPage() {
-  const router = useRouter()
+  const router = useRouter();
 
   async function handleSubmit(event) {
-    event.preventDefault()
+    event.preventDefault();
 
-    const formData = new FormData(event.currentTarget)
-    const email = formData.get('email')
-    const password = formData.get('password')
+    const formData = new FormData(event.currentTarget);
+    const email = formData.get("email");
+    const password = formData.get("password");
 
-    const response = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    const response = await fetch("/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
-    })
+    });
 
     if (response.ok) {
-      router.push('/profile')
+      router.push("/profile");
     } else {
       // Handle errors
     }
@@ -95,7 +95,7 @@ export default function LoginPage() {
       <input type="password" name="password" placeholder="Password" required />
       <button type="submit">Login</button>
     </form>
-  )
+  );
 }
 ```
 
@@ -104,42 +104,42 @@ The form above has two input fields for capturing the user's email and password.
 You can then call your Authentication Provider's API in the API route to handle authentication:
 
 ```ts filename="pages/api/auth/login.ts" switcher
-import type { NextApiRequest, NextApiResponse } from 'next'
-import { signIn } from '@/auth'
+import type { NextApiRequest, NextApiResponse } from "next";
+import { signIn } from "@/auth";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
   try {
-    const { email, password } = req.body
-    await signIn('credentials', { email, password })
+    const { email, password } = req.body;
+    await signIn("credentials", { email, password });
 
-    res.status(200).json({ success: true })
+    res.status(200).json({ success: true });
   } catch (error) {
-    if (error.type === 'CredentialsSignin') {
-      res.status(401).json({ error: 'Invalid credentials.' })
+    if (error.type === "CredentialsSignin") {
+      res.status(401).json({ error: "Invalid credentials." });
     } else {
-      res.status(500).json({ error: 'Something went wrong.' })
+      res.status(500).json({ error: "Something went wrong." });
     }
   }
 }
 ```
 
 ```js filename="pages/api/auth/login.js" switcher
-import { signIn } from '@/auth'
+import { signIn } from "@/auth";
 
 export default async function handler(req, res) {
   try {
-    const { email, password } = req.body
-    await signIn('credentials', { email, password })
+    const { email, password } = req.body;
+    await signIn("credentials", { email, password });
 
-    res.status(200).json({ success: true })
+    res.status(200).json({ success: true });
   } catch (error) {
-    if (error.type === 'CredentialsSignin') {
-      res.status(401).json({ error: 'Invalid credentials.' })
+    if (error.type === "CredentialsSignin") {
+      res.status(401).json({ error: "Invalid credentials." });
     } else {
-      res.status(500).json({ error: 'Something went wrong.' })
+      res.status(500).json({ error: "Something went wrong." });
     }
   }
 }
@@ -163,41 +163,41 @@ There are two types of sessions:
 You can use [API Routes](/docs/pages/building-your-application/routing/api-routes) to set the session as a cookie on the server:
 
 ```ts filename="pages/api/login.ts" switcher
-import { serialize } from 'cookie'
-import type { NextApiRequest, NextApiResponse } from 'next'
-import { encrypt } from '@/app/lib/session'
+import { serialize } from "cookie";
+import type { NextApiRequest, NextApiResponse } from "next";
+import { encrypt } from "@/app/lib/session";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  const sessionData = req.body
-  const encryptedSessionData = encrypt(sessionData)
+  const sessionData = req.body;
+  const encryptedSessionData = encrypt(sessionData);
 
-  const cookie = serialize('session', encryptedSessionData, {
+  const cookie = serialize("session", encryptedSessionData, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
+    secure: process.env.NODE_ENV === "production",
     maxAge: 60 * 60 * 24 * 7, // One week
-    path: '/',
-  })
-  res.setHeader('Set-Cookie', cookie)
-  res.status(200).json({ message: 'Successfully set cookie!' })
+    path: "/",
+  });
+  res.setHeader("Set-Cookie", cookie);
+  res.status(200).json({ message: "Successfully set cookie!" });
 }
 ```
 
 ```js filename="pages/api/login.js" switcher
-import { serialize } from 'cookie'
-import { encrypt } from '@/app/lib/session'
+import { serialize } from "cookie";
+import { encrypt } from "@/app/lib/session";
 
 export default function handler(req, res) {
-  const sessionData = req.body
-  const encryptedSessionData = encrypt(sessionData)
+  const sessionData = req.body;
+  const encryptedSessionData = encrypt(sessionData);
 
-  const cookie = serialize('session', encryptedSessionData, {
+  const cookie = serialize("session", encryptedSessionData, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
+    secure: process.env.NODE_ENV === "production",
     maxAge: 60 * 60 * 24 * 7, // One week
-    path: '/',
-  })
-  res.setHeader('Set-Cookie', cookie)
-  res.status(200).json({ message: 'Successfully set cookie!' })
+    path: "/",
+  });
+  res.setHeader("Set-Cookie", cookie);
+  res.status(200).json({ message: "Successfully set cookie!" });
 }
 ```
 
@@ -212,45 +212,45 @@ To create and manage database sessions, you'll need to follow these steps:
 **Creating a Session on the Server**:
 
 ```ts filename="pages/api/create-session.ts" switcher
-import db from '../../lib/db'
-import type { NextApiRequest, NextApiResponse } from 'next'
+import db from "../../lib/db";
+import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
   try {
-    const user = req.body
-    const sessionId = generateSessionId()
+    const user = req.body;
+    const sessionId = generateSessionId();
     await db.insertSession({
       sessionId,
       userId: user.id,
       createdAt: new Date(),
-    })
+    });
 
-    res.status(200).json({ sessionId })
+    res.status(200).json({ sessionId });
   } catch (error) {
-    res.status(500).json({ error: 'Internal Server Error' })
+    res.status(500).json({ error: "Internal Server Error" });
   }
 }
 ```
 
 ```js filename="pages/api/create-session.js" switcher
-import db from '../../lib/db'
+import db from "../../lib/db";
 
 export default async function handler(req, res) {
   try {
-    const user = req.body
-    const sessionId = generateSessionId()
+    const user = req.body;
+    const sessionId = generateSessionId();
     await db.insertSession({
       sessionId,
       userId: user.id,
       createdAt: new Date(),
-    })
+    });
 
-    res.status(200).json({ sessionId })
+    res.status(200).json({ sessionId });
   } catch (error) {
-    res.status(500).json({ error: 'Internal Server Error' })
+    res.status(500).json({ error: "Internal Server Error" });
   }
 }
 ```
@@ -282,87 +282,87 @@ However, since Proxy runs on every route, including [prefetched](/docs/app/getti
 For example:
 
 ```tsx filename="proxy.ts" switcher
-import { NextRequest, NextResponse } from 'next/server'
-import { decrypt } from '@/app/lib/session'
-import { cookies } from 'next/headers'
+import { NextRequest, NextResponse } from "next/server";
+import { decrypt } from "@/app/lib/session";
+import { cookies } from "next/headers";
 
 // 1. Specify protected and public routes
-const protectedRoutes = ['/dashboard']
-const publicRoutes = ['/login', '/signup', '/']
+const protectedRoutes = ["/dashboard"];
+const publicRoutes = ["/login", "/signup", "/"];
 
 export default async function proxy(req: NextRequest) {
   // 2. Check if the current route is protected or public
-  const path = req.nextUrl.pathname
-  const isProtectedRoute = protectedRoutes.includes(path)
-  const isPublicRoute = publicRoutes.includes(path)
+  const path = req.nextUrl.pathname;
+  const isProtectedRoute = protectedRoutes.includes(path);
+  const isPublicRoute = publicRoutes.includes(path);
 
   // 3. Decrypt the session from the cookie
-  const cookie = (await cookies()).get('session')?.value
-  const session = await decrypt(cookie)
+  const cookie = (await cookies()).get("session")?.value;
+  const session = await decrypt(cookie);
 
   // 4. Redirect to /login if the user is not authenticated
   if (isProtectedRoute && !session?.userId) {
-    return NextResponse.redirect(new URL('/login', req.nextUrl))
+    return NextResponse.redirect(new URL("/login", req.nextUrl));
   }
 
   // 5. Redirect to /dashboard if the user is authenticated
   if (
     isPublicRoute &&
     session?.userId &&
-    !req.nextUrl.pathname.startsWith('/dashboard')
+    !req.nextUrl.pathname.startsWith("/dashboard")
   ) {
-    return NextResponse.redirect(new URL('/dashboard', req.nextUrl))
+    return NextResponse.redirect(new URL("/dashboard", req.nextUrl));
   }
 
-  return NextResponse.next()
+  return NextResponse.next();
 }
 
 // Routes Proxy should not run on
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|.*\\.png$).*)'],
-}
+  matcher: ["/((?!api|_next/static|_next/image|.*\\.png$).*)"],
+};
 ```
 
 ```js filename="proxy.js" switcher
-import { NextResponse } from 'next/server'
-import { decrypt } from '@/app/lib/session'
-import { cookies } from 'next/headers'
+import { NextResponse } from "next/server";
+import { decrypt } from "@/app/lib/session";
+import { cookies } from "next/headers";
 
 // 1. Specify protected and public routes
-const protectedRoutes = ['/dashboard']
-const publicRoutes = ['/login', '/signup', '/']
+const protectedRoutes = ["/dashboard"];
+const publicRoutes = ["/login", "/signup", "/"];
 
 export default async function proxy(req) {
   // 2. Check if the current route is protected or public
-  const path = req.nextUrl.pathname
-  const isProtectedRoute = protectedRoutes.includes(path)
-  const isPublicRoute = publicRoutes.includes(path)
+  const path = req.nextUrl.pathname;
+  const isProtectedRoute = protectedRoutes.includes(path);
+  const isPublicRoute = publicRoutes.includes(path);
 
   // 3. Decrypt the session from the cookie
-  const cookie = (await cookies()).get('session')?.value
-  const session = await decrypt(cookie)
+  const cookie = (await cookies()).get("session")?.value;
+  const session = await decrypt(cookie);
 
   // 5. Redirect to /login if the user is not authenticated
   if (isProtectedRoute && !session?.userId) {
-    return NextResponse.redirect(new URL('/login', req.nextUrl))
+    return NextResponse.redirect(new URL("/login", req.nextUrl));
   }
 
   // 6. Redirect to /dashboard if the user is authenticated
   if (
     isPublicRoute &&
     session?.userId &&
-    !req.nextUrl.pathname.startsWith('/dashboard')
+    !req.nextUrl.pathname.startsWith("/dashboard")
   ) {
-    return NextResponse.redirect(new URL('/dashboard', req.nextUrl))
+    return NextResponse.redirect(new URL("/dashboard", req.nextUrl));
   }
 
-  return NextResponse.next()
+  return NextResponse.next();
 }
 
 // Routes Proxy should not run on
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|.*\\.png$).*)'],
-}
+  matcher: ["/((?!api|_next/static|_next/image|.*\\.png$).*)"],
+};
 ```
 
 While Proxy can be useful for initial checks, it should not be your only line of defense in protecting your data. The majority of security checks should be performed as close as possible to your data source, see [Data Access Layer](#creating-a-data-access-layer-dal) for more information.
@@ -382,28 +382,28 @@ API Routes in Next.js are essential for handling server-side logic and data mana
 Here's an example of securing an API Route:
 
 ```ts filename="pages/api/route.ts" switcher
-import { NextApiRequest, NextApiResponse } from 'next'
+import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
-  const session = await getSession(req)
+  const session = await getSession(req);
 
   // Check if the user is authenticated
   if (!session) {
     res.status(401).json({
-      error: 'User is not authenticated',
-    })
-    return
+      error: "User is not authenticated",
+    });
+    return;
   }
 
   // Check if the user has the 'admin' role
-  if (session.user.role !== 'admin') {
+  if (session.user.role !== "admin") {
     res.status(401).json({
-      error: 'Unauthorized access: User does not have admin privileges.',
-    })
-    return
+      error: "Unauthorized access: User does not have admin privileges.",
+    });
+    return;
   }
 
   // Proceed with the route for authorized users
@@ -413,22 +413,22 @@ export default async function handler(
 
 ```js filename="pages/api/route.js" switcher
 export default async function handler(req, res) {
-  const session = await getSession(req)
+  const session = await getSession(req);
 
   // Check if the user is authenticated
   if (!session) {
     res.status(401).json({
-      error: 'User is not authenticated',
-    })
-    return
+      error: "User is not authenticated",
+    });
+    return;
   }
 
   // Check if the user has the 'admin' role
-  if (session.user.role !== 'admin') {
+  if (session.user.role !== "admin") {
     res.status(401).json({
-      error: 'Unauthorized access: User does not have admin privileges.',
-    })
-    return
+      error: "Unauthorized access: User does not have admin privileges.",
+    });
+    return;
   }
 
   // Proceed with the route for authorized users
@@ -483,7 +483,7 @@ Next.js includes the `next/babel` preset to your app, which includes everything 
 
 ## Adding Presets and Plugins
 
-To start, you only need to define a `.babelrc` file (or `babel.config.js`) in the root directory of your project. If such a file is found, it will be considered as the *source of truth*, and therefore it needs to define what Next.js needs as well, which is the `next/babel` preset.
+To start, you only need to define a `.babelrc` file (or `babel.config.js`) in the root directory of your project. If such a file is found, it will be considered as the _source of truth_, and therefore it needs to define what Next.js needs as well, which is the `next/babel` preset.
 
 Here's an example `.babelrc` file:
 

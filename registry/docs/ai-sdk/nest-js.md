@@ -13,17 +13,17 @@ The examples show how to implement a Nest.js controller that uses the AI SDK to 
 You can use the `pipeUIMessageStreamToResponse` method to pipe the stream data to the server response.
 
 ```ts filename='app.controller.ts'
-import { Controller, Post, Res } from '@nestjs/common';
-import { streamText } from 'ai';
-import { Response } from 'express';
+import { Controller, Post, Res } from "@nestjs/common";
+import { streamText } from "ai";
+import { Response } from "express";
 
 @Controller()
 export class AppController {
-  @Post('/')
+  @Post("/")
   async root(@Res() res: Response) {
     const result = streamText({
-      model: 'openai/gpt-4o',
-      prompt: 'Invent a new holiday and describe its traditions.',
+      model: "openai/gpt-4o",
+      prompt: "Invent a new holiday and describe its traditions.",
     });
 
     result.pipeUIMessageStreamToResponse(res);
@@ -36,38 +36,38 @@ export class AppController {
 `createUIMessageStream` and `pipeUIMessageStreamToResponse` can be used to send custom data to the client.
 
 ```ts filename='app.controller.ts'
-import { Controller, Post, Res } from '@nestjs/common';
+import { Controller, Post, Res } from "@nestjs/common";
 import {
   createUIMessageStream,
   streamText,
   pipeUIMessageStreamToResponse,
-} from 'ai';
-import { Response } from 'express';
+} from "ai";
+import { Response } from "express";
 
 @Controller()
 export class AppController {
-  @Post('/stream-data')
+  @Post("/stream-data")
   async streamData(@Res() response: Response) {
     const stream = createUIMessageStream({
       execute: ({ writer }) => {
         // write some data
-        writer.write({ type: 'start' });
+        writer.write({ type: "start" });
 
         writer.write({
-          type: 'data-custom',
+          type: "data-custom",
           data: {
-            custom: 'Hello, world!',
+            custom: "Hello, world!",
           },
         });
 
         const result = streamText({
-          model: 'openai/gpt-4o',
-          prompt: 'Invent a new holiday and describe its traditions.',
+          model: "openai/gpt-4o",
+          prompt: "Invent a new holiday and describe its traditions.",
         });
         writer.merge(
           result.toUIMessageStream({
             sendStart: false,
-            onError: error => {
+            onError: (error) => {
               // Error messages are masked by default for security reasons.
               // If you want to expose the error message to the client, you can do so here:
               return error instanceof Error ? error.message : String(error);
@@ -86,17 +86,17 @@ export class AppController {
 You can use the `pipeTextStreamToResponse` method to get a text stream from the result and then pipe it to the response.
 
 ```ts filename='app.controller.ts'
-import { Controller, Post, Res } from '@nestjs/common';
-import { streamText } from 'ai';
-import { Response } from 'express';
+import { Controller, Post, Res } from "@nestjs/common";
+import { streamText } from "ai";
+import { Response } from "express";
 
 @Controller()
 export class AppController {
   @Post()
   async example(@Res() res: Response) {
     const result = streamText({
-      model: 'openai/gpt-4o',
-      prompt: 'Invent a new holiday and describe its traditions.',
+      model: "openai/gpt-4o",
+      prompt: "Invent a new holiday and describe its traditions.",
     });
 
     result.pipeTextStreamToResponse(res);

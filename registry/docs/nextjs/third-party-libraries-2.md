@@ -38,7 +38,7 @@ To load Google Tag Manager for all routes, include the component directly in you
 pass in your GTM container ID:
 
 ```jsx filename="pages/_app.js"
-import { GoogleTagManager } from '@next/third-parties/google'
+import { GoogleTagManager } from "@next/third-parties/google";
 
 export default function MyApp({ Component, pageProps }) {
   return (
@@ -46,17 +46,17 @@ export default function MyApp({ Component, pageProps }) {
       <Component {...pageProps} />
       <GoogleTagManager gtmId="GTM-XYZ" />
     </>
-  )
+  );
 }
 ```
 
 To load Google Tag Manager for a single route, include the component in your page file:
 
 ```jsx filename="pages/index.js"
-import { GoogleTagManager } from '@next/third-parties/google'
+import { GoogleTagManager } from "@next/third-parties/google";
 
 export default function Page() {
-  return <GoogleTagManager gtmId="GTM-XYZ" />
+  return <GoogleTagManager gtmId="GTM-XYZ" />;
 }
 ```
 
@@ -67,18 +67,18 @@ using the `dataLayer` object. For this function to work, the `<GoogleTagManager 
 included in either a parent layout, page, or component, or directly in the same file.
 
 ```jsx filename="pages/index.js"
-import { sendGTMEvent } from '@next/third-parties/google'
+import { sendGTMEvent } from "@next/third-parties/google";
 
 export function EventButton() {
   return (
     <div>
       <button
-        onClick={() => sendGTMEvent({ event: 'buttonClicked', value: 'xyz' })}
+        onClick={() => sendGTMEvent({ event: "buttonClicked", value: "xyz" })}
       >
         Send Event
       </button>
     </div>
-  )
+  );
 }
 ```
 
@@ -123,7 +123,7 @@ To load Google Analytics for all routes, include the component directly in your 
 pass in your measurement ID:
 
 ```jsx filename="pages/_app.js"
-import { GoogleAnalytics } from '@next/third-parties/google'
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 export default function MyApp({ Component, pageProps }) {
   return (
@@ -131,17 +131,17 @@ export default function MyApp({ Component, pageProps }) {
       <Component {...pageProps} />
       <GoogleAnalytics gaId="G-XYZ" />
     </>
-  )
+  );
 }
 ```
 
 To load Google Analytics for a single route, include the component in your page file:
 
 ```jsx filename="pages/index.js"
-import { GoogleAnalytics } from '@next/third-parties/google'
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 export default function Page() {
-  return <GoogleAnalytics gaId="G-XYZ" />
+  return <GoogleAnalytics gaId="G-XYZ" />;
 }
 ```
 
@@ -152,18 +152,18 @@ using the `dataLayer` object. For this function to work, the `<GoogleAnalytics /
 included in either a parent layout, page, or component, or directly in the same file.
 
 ```jsx filename="pages/index.js"
-import { sendGAEvent } from '@next/third-parties/google'
+import { sendGAEvent } from "@next/third-parties/google";
 
 export function EventButton() {
   return (
     <div>
       <button
-        onClick={() => sendGAEvent('event', 'buttonClicked', { value: 'xyz' })}
+        onClick={() => sendGAEvent("event", "buttonClicked", { value: "xyz" })}
       >
         Send Event
       </button>
     </div>
-  )
+  );
 }
 ```
 
@@ -176,9 +176,9 @@ more about event parameters.
 Google Analytics automatically tracks pageviews when the browser history state changes. This means
 that client-side navigations between Next.js routes will send pageview data without any configuration.
 
-To ensure that client-side navigations are being measured correctly, verify that the [*“Enhanced
-Measurement”*](https://support.google.com/analytics/answer/9216061#enable_disable) property is
-enabled in your Admin panel and the *“Page changes based on browser history events”* checkbox is
+To ensure that client-side navigations are being measured correctly, verify that the [_“Enhanced
+Measurement”_](https://support.google.com/analytics/answer/9216061#enable_disable) property is
+enabled in your Admin panel and the _“Page changes based on browser history events”_ checkbox is
 selected.
 
 > **Note**: If you decide to manually send pageview events, make sure to disable the default
@@ -203,7 +203,7 @@ Embed](https://developers.google.com/maps/documentation/embed/embedding-map) to 
 default, it uses the `loading` attribute to lazy-load the embed below the fold.
 
 ```jsx filename="pages/index.js"
-import { GoogleMapsEmbed } from '@next/third-parties/google'
+import { GoogleMapsEmbed } from "@next/third-parties/google";
 
 export default function Page() {
   return (
@@ -214,7 +214,7 @@ export default function Page() {
       mode="place"
       q="Brooklyn+Bridge,New+York,NY"
     />
-  )
+  );
 }
 ```
 
@@ -232,7 +232,7 @@ docs](https://developers.google.com/maps/documentation/embed/embedding-map).
 | `style`           | Optional | Pass styles to the iframe.                                                                          |
 | `allowfullscreen` | Optional | Property to allow certain map parts to go full screen.                                              |
 | `loading`         | Optional | Defaults to lazy. Consider changing if you know your embed will be above the fold.                  |
-| `q`               | Optional | Defines map marker location. *This may be required depending on the map mode*.                      |
+| `q`               | Optional | Defines map marker location. _This may be required depending on the map mode_.                      |
 | `center`          | Optional | Defines the center of the map view.                                                                 |
 | `zoom`            | Optional | Sets initial zoom level of the map.                                                                 |
 | `maptype`         | Optional | Defines type of map tiles to load.                                                                  |
@@ -246,23 +246,25 @@ faster by using [`lite-youtube-embed`](https://github.com/paulirish/lite-youtube
 hood.
 
 ```jsx filename="pages/index.js"
-import { YouTubeEmbed } from '@next/third-parties/google'
+import { YouTubeEmbed } from "@next/third-parties/google";
 
 export default function Page() {
-  return <YouTubeEmbed videoid="ogfYd705cRs" height={400} params="controls=0" />
+  return (
+    <YouTubeEmbed videoid="ogfYd705cRs" height={400} params="controls=0" />
+  );
 }
 ```
 
 #### Options
 
-| Name        | Type     | Description                                                                                                                                                                                                  |
-| ----------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `videoid`   | Required | YouTube video id.                                                                                                                                                                                            |
-| `width`     | Optional | Width of the video container. Defaults to `auto`                                                                                                                                                             |
-| `height`    | Optional | Height of the video container. Defaults to `auto`                                                                                                                                                            |
-| `playlabel` | Optional | A visually hidden label for the play button for accessibility.                                                                                                                                               |
-| `params`    | Optional | The video player params defined [here](https://developers.google.com/youtube/player_parameters#Parameters).  Params are passed as a query param string.  Eg: `params="controls=0&start=10&end=30"` |
-| `style`     | Optional | Used to apply styles to the video container.                                                                                                                                                                 |
+| Name        | Type     | Description                                                                                                                                                                                      |
+| ----------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `videoid`   | Required | YouTube video id.                                                                                                                                                                                |
+| `width`     | Optional | Width of the video container. Defaults to `auto`                                                                                                                                                 |
+| `height`    | Optional | Height of the video container. Defaults to `auto`                                                                                                                                                |
+| `playlabel` | Optional | A visually hidden label for the play button for accessibility.                                                                                                                                   |
+| `params`    | Optional | The video player params defined [here](https://developers.google.com/youtube/player_parameters#Parameters). Params are passed as a query param string. Eg: `params="controls=0&start=10&end=30"` |
+| `style`     | Optional | Used to apply styles to the video container.                                                                                                                                                     |
 
 # Upgrading
 

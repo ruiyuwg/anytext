@@ -10,44 +10,33 @@ If you have a simple Hono application like the following:
 
 ```tsx
 // index.tsx
-const app = new Hono()
+const app = new Hono();
 
-app.get('/', (c) => c.html('Hello, World!'))
+app.get("/", (c) => c.html("Hello, World!"));
 
-app.use('/about', async (c, next) => {
+app.use("/about", async (c, next) => {
   c.setRenderer((content) => {
-    return c.html(
-      
-        
-        
-          {content}
-        
-      
-    )
-  })
-  await next()
-})
+    return c.html({ content });
+  });
+  await next();
+});
 
-app.get('/about', (c) => {
-  return c.render(
-    <>
-      Hono SSG PageHello!
-    </>
-  )
-})
+app.get("/about", (c) => {
+  return c.render(<>Hono SSG PageHello!</>);
+});
 
-export default app
+export default app;
 ```
 
 For Node.js, create a build script like this:
 
 ```ts
 // build.ts
-import app from './index'
-import { toSSG } from 'hono/ssg'
-import fs from 'fs/promises'
+import app from "./index";
+import { toSSG } from "hono/ssg";
+import fs from "fs/promises";
 
-toSSG(app, fs)
+toSSG(app, fs);
 ```
 
 By executing the script, the files will be output as follows:
@@ -75,11 +64,7 @@ The arguments for toSSG are specified in ToSSGInterface.
 
 ```ts
 export interface ToSSGInterface {
-  (
-    app: Hono,
-    fsModule: FileSystemModule,
-    options?: ToSSGOptions
-  ): Promise
+  (app: Hono, fsModule: FileSystemModule, options?: ToSSGOptions): Promise;
 }
 ```
 
@@ -88,11 +73,8 @@ export interface ToSSGInterface {
 
 ```ts
 export interface FileSystemModule {
-  writeFile(path: string, data: string | Uint8Array): Promise
-  mkdir(
-    path: string,
-    options: { recursive: boolean }
-  ): Promise
+  writeFile(path: string, data: string | Uint8Array): Promise;
+  mkdir(path: string, options: { recursive: boolean }): Promise;
 }
 ```
 
@@ -103,17 +85,17 @@ If you want to use SSG on Deno or Bun, a `toSSG` function is provided for each f
 For Deno:
 
 ```ts
-import { toSSG } from 'hono/deno'
+import { toSSG } from "hono/deno";
 
-toSSG(app) // The second argument is an option typed `ToSSGOptions`.
+toSSG(app); // The second argument is an option typed `ToSSGOptions`.
 ```
 
 For Bun:
 
 ```ts
-import { toSSG } from 'hono/bun'
+import { toSSG } from "hono/bun";
 
-toSSG(app) // The second argument is an option typed `ToSSGOptions`.
+toSSG(app); // The second argument is an option typed `ToSSGOptions`.
 ```
 
 ### Options
@@ -122,10 +104,10 @@ Options are specified in the ToSSGOptions interface.
 
 ```ts
 export interface ToSSGOptions {
-  dir?: string
-  concurrency?: number
-  extensionMap?: Record<string, string>
-  plugins?: SSGPlugin[]
+  dir?: string;
+  concurrency?: number;
+  extensionMap?: Record<string, string>;
+  plugins?: SSGPlugin[];
 }
 ```
 
@@ -140,9 +122,9 @@ export interface ToSSGOptions {
 
 ```ts
 export interface ToSSGResult {
-  success: boolean
-  files: string[]
-  error?: Error
+  success: boolean;
+  files: string[];
+  error?: Error;
 }
 ```
 
@@ -163,25 +145,25 @@ The file extension depends on the `Content-Type` returned by each route. For exa
 If you want to customize the file extensions, set the `extensionMap` option.
 
 ```ts
-import { toSSG, defaultExtensionMap } from 'hono/ssg'
+import { toSSG, defaultExtensionMap } from "hono/ssg";
 
 // Save `application/x-html` content with `.html`
 toSSG(app, fs, {
   extensionMap: {
-    'application/x-html': 'html',
+    "application/x-html": "html",
     ...defaultExtensionMap,
   },
-})
+});
 ```
 
 Note that paths ending with a slash are saved as index.ext regardless of the extension.
 
 ```ts
 // save to ./static/html/index.html
-app.get('/html/', (c) => c.html('html'))
+app.get("/html/", (c) => c.html("html"));
 
 // save to ./static/text/index.txt
-app.get('/text/', (c) => c.text('text'))
+app.get("/text/", (c) => c.text("text"));
 ```
 
 ## Middleware
@@ -207,9 +189,9 @@ app.get(
       return c.notFound()
     }
     return c.render(
-      
+
         {shop.name}
-      
+
     )
   }
 )
@@ -220,7 +202,7 @@ app.get(
 Routes with the `disableSSG` middleware set are excluded from static file generation by `toSSG`.
 
 ```ts
-app.get('/api', disableSSG(), (c) => c.text('an-api'))
+app.get("/api", disableSSG(), (c) => c.text("an-api"));
 ```
 
 ### onlySSG
@@ -240,13 +222,13 @@ Plugins allow you to extend the functionality of the static site generation proc
 By default, `toSSG` uses `defaultPlugin` which skips non-200 status responses (like redirects, errors, or 404s). This prevents generating files for unsuccessful responses.
 
 ```ts
-import { toSSG, defaultPlugin } from 'hono/ssg'
+import { toSSG, defaultPlugin } from "hono/ssg";
 
 // defaultPlugin is automatically applied when no plugins specified
-toSSG(app, fs)
+toSSG(app, fs);
 
 // Equivalent to:
-toSSG(app, fs, { plugins: [defaultPlugin] })
+toSSG(app, fs, { plugins: [defaultPlugin] });
 ```
 
 If you specify custom plugins, `defaultPlugin` is **not** automatically included. To keep the default behavior while adding custom plugins, explicitly include it:
@@ -254,7 +236,7 @@ If you specify custom plugins, `defaultPlugin` is **not** automatically included
 ```ts
 toSSG(app, fs, {
   plugins: [defaultPlugin, myCustomPlugin],
-})
+});
 ```
 
 ### Redirect Plugin
@@ -262,17 +244,17 @@ toSSG(app, fs, {
 The `redirectPlugin` generates HTML redirect pages for routes that return HTTP redirect responses (301, 302, 303, 307, 308). The generated HTML includes a `<meta http-equiv="refresh">` tag and a canonical link.
 
 ```ts
-import { toSSG, redirectPlugin, defaultPlugin } from 'hono/ssg'
+import { toSSG, redirectPlugin, defaultPlugin } from "hono/ssg";
 
 toSSG(app, fs, {
   plugins: [redirectPlugin(), defaultPlugin()],
-})
+});
 ```
 
 For example, if your app has:
 
 ```ts
-app.get('/old', (c) => c.redirect('/new'))
+app.get("/old", (c) => c.redirect("/new"));
 ```
 
 The `redirectPlugin` will generate an HTML file at `/old.html` with a meta refresh redirect to `/new`.
@@ -285,11 +267,9 @@ The `redirectPlugin` will generate an HTML file at `/old.html` with a meta refre
 Plugins can use the following hooks to customize the `toSSG` process:
 
 ```ts
-export type BeforeRequestHook = (req: Request) => Request | false
-export type AfterResponseHook = (res: Response) => Response | false
-export type AfterGenerateHook = (
-  result: ToSSGResult
-) => void | Promise
+export type BeforeRequestHook = (req: Request) => Request | false;
+export type AfterResponseHook = (res: Response) => Response | false;
+export type AfterGenerateHook = (result: ToSSGResult) => void | Promise;
 ```
 
 - **BeforeRequestHook**: Called before processing each request. Return `false` to skip the route.
@@ -300,9 +280,9 @@ export type AfterGenerateHook = (
 
 ```ts
 export interface SSGPlugin {
-  beforeRequestHook?: BeforeRequestHook | BeforeRequestHook[]
-  afterResponseHook?: AfterResponseHook | AfterResponseHook[]
-  afterGenerateHook?: AfterGenerateHook | AfterGenerateHook[]
+  beforeRequestHook?: BeforeRequestHook | BeforeRequestHook[];
+  afterResponseHook?: AfterResponseHook | AfterResponseHook[];
+  afterGenerateHook?: AfterGenerateHook | AfterGenerateHook[];
 }
 ```
 
@@ -313,12 +293,12 @@ Filter only GET requests:
 ```ts
 const getOnlyPlugin: SSGPlugin = {
   beforeRequestHook: (req) => {
-    if (req.method === 'GET') {
-      return req
+    if (req.method === "GET") {
+      return req;
     }
-    return false
+    return false;
   },
-}
+};
 ```
 
 Filter by status code:
@@ -327,11 +307,11 @@ Filter by status code:
 const statusFilterPlugin: SSGPlugin = {
   afterResponseHook: (res) => {
     if (res.status === 200 || res.status === 500) {
-      return res
+      return res;
     }
-    return false
+    return false;
   },
-}
+};
 ```
 
 Log generated files:
@@ -340,10 +320,10 @@ Log generated files:
 const logFilesPlugin: SSGPlugin = {
   afterGenerateHook: (result) => {
     if (result.files) {
-      result.files.forEach((file) => console.log(file))
+      result.files.forEach((file) => console.log(file));
     }
   },
-}
+};
 ```
 
 ### Advanced Plugin Example
@@ -352,42 +332,42 @@ Here's an example of creating a sitemap plugin that generates a `sitemap.xml` fi
 
 ```ts
 // plugins.ts
-import fs from 'node:fs/promises'
-import path from 'node:path'
-import type { SSGPlugin } from 'hono/ssg'
-import { DEFAULT_OUTPUT_DIR } from 'hono/ssg'
+import fs from "node:fs/promises";
+import path from "node:path";
+import type { SSGPlugin } from "hono/ssg";
+import { DEFAULT_OUTPUT_DIR } from "hono/ssg";
 
 export const sitemapPlugin = (baseURL: string): SSGPlugin => {
   return {
     afterGenerateHook: (result, fsModule, options) => {
-      const outputDir = options?.dir ?? DEFAULT_OUTPUT_DIR
-      const filePath = path.join(outputDir, 'sitemap.xml')
+      const outputDir = options?.dir ?? DEFAULT_OUTPUT_DIR;
+      const filePath = path.join(outputDir, "sitemap.xml");
       const urls = result.files.map((file) =>
-        new URL(file, baseURL).toString()
-      )
+        new URL(file, baseURL).toString(),
+      );
       const siteMapText = `<?xml version="1.0" encoding="UTF-8"?>
 
-${urls.map((url) => `<url><loc>${url}</loc></url>`).join('\n')}
-`
-      fsModule.writeFile(filePath, siteMapText)
+${urls.map((url) => `<url><loc>${url}</loc></url>`).join("\n")}
+`;
+      fsModule.writeFile(filePath, siteMapText);
     },
-  }
-}
+  };
+};
 ```
 
 Applying plugins:
 
 ```ts
-import app from './index'
-import { toSSG } from 'hono/ssg'
-import { sitemapPlugin } from './plugins'
+import app from "./index";
+import { toSSG } from "hono/ssg";
+import { sitemapPlugin } from "./plugins";
 
 toSSG(app, fs, {
   plugins: [
     getOnlyPlugin,
     statusFilterPlugin,
     logFilesPlugin,
-    sitemapPlugin('https://example.com'),
+    sitemapPlugin("https://example.com"),
   ],
-})
+});
 ```

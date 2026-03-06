@@ -30,11 +30,11 @@ pnpm add @ai-sdk/devtools
 Wrap your language model with the DevTools middleware using [`wrapLanguageModel`](/docs/ai-sdk-core/middleware):
 
 ```ts
-import { wrapLanguageModel, gateway } from 'ai';
-import { devToolsMiddleware } from '@ai-sdk/devtools';
+import { wrapLanguageModel, gateway } from "ai";
+import { devToolsMiddleware } from "@ai-sdk/devtools";
 
 const model = wrapLanguageModel({
-  model: gateway('anthropic/claude-sonnet-4.5'),
+  model: gateway("anthropic/claude-sonnet-4.5"),
   middleware: devToolsMiddleware(),
 });
 ```
@@ -42,11 +42,11 @@ const model = wrapLanguageModel({
 The wrapped model can be used with any AI SDK Core function:
 
 ```ts highlight="4"
-import { generateText } from 'ai';
+import { generateText } from "ai";
 
 const result = await generateText({
   model, // wrapped model with DevTools
-  prompt: 'What cities are in the United States?',
+  prompt: "What cities are in the United States?",
 });
 ```
 

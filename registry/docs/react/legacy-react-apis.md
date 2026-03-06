@@ -2,9 +2,9 @@
 
 These APIs are exported from the `react` package, but they are not recommended for use in newly written code. See the linked individual API pages for the suggested alternatives.
 
-***
+---
 
-## Legacy APIs {/*legacy-apis*/}
+## Legacy APIs {/_legacy-apis_/}
 
 - [`Children`](/reference/react/Children) lets you manipulate and transform the JSX received as the `children` prop. [See alternatives.](/reference/react/Children#alternatives)
 - [`cloneElement`](/reference/react/cloneElement) lets you create a React element using another element as a starting point. [See alternatives.](/reference/react/cloneElement#alternatives)
@@ -15,9 +15,9 @@ These APIs are exported from the `react` package, but they are not recommended f
 - [`isValidElement`](/reference/react/isValidElement) checks whether a value is a React element. Typically used with [`cloneElement`.](/reference/react/cloneElement)
 - [`PureComponent`](/reference/react/PureComponent) is similar to [`Component`,](/reference/react/Component) but it skip re-renders with same props. [See alternatives.](/reference/react/PureComponent#alternatives)
 
-***
+---
 
-## Removed APIs {/*removed-apis*/}
+## Removed APIs {/_removed-apis_/}
 
 These APIs were removed in React 19:
 
@@ -28,7 +28,7 @@ These APIs were removed in React 19:
 - Class Components: [`static propTypes`](https://18.react.dev//reference/react/Component#static-proptypes): use a type system like [TypeScript](https://www.typescriptlang.org/) instead.
 - Class Components: [`this.refs`](https://18.react.dev//reference/react/Component#refs): use [`createRef`](/reference/react/createRef) instead.
 
-***
+---
 
 ## Sitemap
 

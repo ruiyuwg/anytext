@@ -1,4 +1,4 @@
-# AI\_UIMessageStreamError
+# AI_UIMessageStreamError
 
 This error occurs when a UI message stream contains invalid or out-of-sequence chunks.
 
@@ -24,11 +24,11 @@ This error often surfaces when an upstream request fails **before any tokens are
 You can check if an error is an instance of `AI_UIMessageStreamError` using:
 
 ```typescript
-import { UIMessageStreamError } from 'ai';
+import { UIMessageStreamError } from "ai";
 
 if (UIMessageStreamError.isInstance(error)) {
-  console.log('Chunk type:', error.chunkType);
-  console.log('Chunk ID:', error.chunkId);
+  console.log("Chunk type:", error.chunkType);
+  console.log("Chunk ID:", error.chunkId);
   // Handle the error
 }
 ```
@@ -39,9 +39,9 @@ if (UIMessageStreamError.isInstance(error)) {
 
    ```typescript
    // Correct order
-   writer.write({ type: 'text-start', id: 'my-text' });
-   writer.write({ type: 'text-delta', id: 'my-text', delta: 'Hello' });
-   writer.write({ type: 'text-end', id: 'my-text' });
+   writer.write({ type: "text-start", id: "my-text" });
+   writer.write({ type: "text-delta", id: "my-text", delta: "Hello" });
+   writer.write({ type: "text-end", id: "my-text" });
    ```
 
 2. **Verify IDs match**: Ensure the `id` used in `*-delta` and `*-end` chunks matches the `id` used in the corresponding `*-start` chunk.
@@ -50,20 +50,20 @@ if (UIMessageStreamError.isInstance(error)) {
 
    ```typescript
    // When handling errors in custom transports
-   writer.write({ type: 'text-start', id: errorId });
+   writer.write({ type: "text-start", id: errorId });
    writer.write({
-     type: 'text-delta',
+     type: "text-delta",
      id: errorId,
-     delta: 'Request failed...',
+     delta: "Request failed...",
    });
-   writer.write({ type: 'text-end', id: errorId });
+   writer.write({ type: "text-end", id: errorId });
    ```
 
 4. **Check stream producer logic**: Review your streaming implementation to ensure chunks are sent in the correct order, especially when dealing with concurrent operations or merged streams.
 
-# AI\_UnsupportedFunctionalityError
+# AI_UnsupportedFunctionalityError
 
-# AI\_UnsupportedFunctionalityError
+# AI_UnsupportedFunctionalityError
 
 This error occurs when functionality is not supported.
 
@@ -77,7 +77,7 @@ This error occurs when functionality is not supported.
 You can check if an error is an instance of `AI_UnsupportedFunctionalityError` using:
 
 ```typescript
-import { UnsupportedFunctionalityError } from 'ai';
+import { UnsupportedFunctionalityError } from "ai";
 
 if (UnsupportedFunctionalityError.isInstance(error)) {
   // Handle the error

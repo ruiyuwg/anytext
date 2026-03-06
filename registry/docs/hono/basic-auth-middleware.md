@@ -8,60 +8,58 @@ For more information about how the Basic auth scheme works under the hood, see t
 ## Import
 
 ```ts
-import { Hono } from 'hono'
-import { basicAuth } from 'hono/basic-auth'
+import { Hono } from "hono";
+import { basicAuth } from "hono/basic-auth";
 ```
 
 ## Usage
 
 ```ts
-const app = new Hono()
+const app = new Hono();
 
 app.use(
-  '/auth/*',
+  "/auth/*",
   basicAuth({
-    username: 'hono',
-    password: 'acoolproject',
-  })
-)
+    username: "hono",
+    password: "acoolproject",
+  }),
+);
 
-app.get('/auth/page', (c) => {
-  return c.text('You are authorized')
-})
+app.get("/auth/page", (c) => {
+  return c.text("You are authorized");
+});
 ```
 
 To restrict to a specific route + method:
 
 ```ts
-const app = new Hono()
+const app = new Hono();
 
-app.get('/auth/page', (c) => {
-  return c.text('Viewing page')
-})
+app.get("/auth/page", (c) => {
+  return c.text("Viewing page");
+});
 
 app.delete(
-  '/auth/page',
-  basicAuth({ username: 'hono', password: 'acoolproject' }),
+  "/auth/page",
+  basicAuth({ username: "hono", password: "acoolproject" }),
   (c) => {
-    return c.text('Page deleted')
-  }
-)
+    return c.text("Page deleted");
+  },
+);
 ```
 
 If you want to verify the user by yourself, specify the `verifyUser` option; returning `true` means it is accepted.
 
 ```ts
-const app = new Hono()
+const app = new Hono();
 
 app.use(
   basicAuth({
     verifyUser: (username, password, c) => {
-      return (
-        username === 'dynamic-user' && password === 'hono-password'
-      )
+      return username === "dynamic-user" && password === "hono-password";
     },
-  })
-)
+  }),
+);
 ```
 
 ## Options
@@ -97,20 +95,20 @@ A callback function invoked after successful authentication. This allows you to 
 
 ```ts
 app.use(
-  '/auth/*',
+  "/auth/*",
   basicAuth({
-    username: 'hono',
-    password: 'acoolproject',
+    username: "hono",
+    password: "acoolproject",
     onAuthSuccess: (c, username) => {
-      c.set('username', username)
+      c.set("username", username);
     },
-  })
-)
+  }),
+);
 
-app.get('/auth/page', (c) => {
-  const username = c.get('username')
-  return c.text(`Hello, ${username}!`)
-})
+app.get("/auth/page", (c) => {
+  const username = c.get("username");
+  return c.text(`Hello, ${username}!`);
+});
 ```
 
 ## More Options
@@ -125,41 +123,41 @@ This middleware also allows you to pass arbitrary parameters containing objects 
 
 ```ts
 app.use(
-  '/auth/*',
+  "/auth/*",
   basicAuth(
     {
-      username: 'hono',
-      password: 'acoolproject',
+      username: "hono",
+      password: "acoolproject",
       // Define other params in the first object
-      realm: 'www.example.com',
+      realm: "www.example.com",
     },
     {
-      username: 'hono-admin',
-      password: 'super-secure',
+      username: "hono-admin",
+      password: "super-secure",
       // Cannot redefine other params here
     },
     {
-      username: 'hono-user-1',
-      password: 'a-secret',
+      username: "hono-user-1",
+      password: "a-secret",
       // Or here
-    }
-  )
-)
+    },
+  ),
+);
 ```
 
 Or less hardcoded:
 
 ```ts
-import { users } from '../config/users'
+import { users } from "../config/users";
 
 app.use(
-  '/auth/*',
+  "/auth/*",
   basicAuth(
     {
-      realm: 'www.example.com',
+      realm: "www.example.com",
       ...users[0],
     },
-    ...users.slice(1)
-  )
-)
+    ...users.slice(1),
+  ),
+);
 ```

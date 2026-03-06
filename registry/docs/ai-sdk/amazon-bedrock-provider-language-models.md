@@ -4,14 +4,14 @@ You can create models that call the Bedrock API using the provider instance.
 The first argument is the model id, e.g. `meta.llama3-70b-instruct-v1:0`.
 
 ```ts
-const model = bedrock('meta.llama3-70b-instruct-v1:0');
+const model = bedrock("meta.llama3-70b-instruct-v1:0");
 ```
 
 Amazon Bedrock models also support some model specific provider options that are not part of the [standard call settings](/docs/ai-sdk-core/settings).
 You can pass them in the `providerOptions` argument:
 
 ```ts
-const model = bedrock('anthropic.claude-3-sonnet-20240229-v1:0');
+const model = bedrock("anthropic.claude-3-sonnet-20240229-v1:0");
 
 await generateText({
   model,
@@ -28,12 +28,12 @@ Documentation for additional settings based on the selected model can be found w
 You can use Amazon Bedrock language models to generate text with the `generateText` function:
 
 ```ts
-import { bedrock } from '@ai-sdk/amazon-bedrock';
-import { generateText } from 'ai';
+import { bedrock } from "@ai-sdk/amazon-bedrock";
+import { generateText } from "ai";
 
 const { text } = await generateText({
-  model: bedrock('meta.llama3-70b-instruct-v1:0'),
-  prompt: 'Write a vegetarian lasagna recipe for 4 people.',
+  model: bedrock("meta.llama3-70b-instruct-v1:0"),
+  prompt: "Write a vegetarian lasagna recipe for 4 people.",
 });
 ```
 
@@ -48,20 +48,20 @@ Amazon Bedrock supports file inputs in combination with specific models, e.g.
 The Amazon Bedrock provider supports file inputs, e.g. PDF files.
 
 ```ts
-import { bedrock } from '@ai-sdk/amazon-bedrock';
-import { generateText } from 'ai';
+import { bedrock } from "@ai-sdk/amazon-bedrock";
+import { generateText } from "ai";
 
 const result = await generateText({
-  model: bedrock('anthropic.claude-3-haiku-20240307-v1:0'),
+  model: bedrock("anthropic.claude-3-haiku-20240307-v1:0"),
   messages: [
     {
-      role: 'user',
+      role: "user",
       content: [
-        { type: 'text', text: 'Describe the pdf in detail.' },
+        { type: "text", text: "Describe the pdf in detail." },
         {
-          type: 'file',
-          data: readFileSync('./data/ai.pdf'),
-          mediaType: 'application/pdf',
+          type: "file",
+          data: readFileSync("./data/ai.pdf"),
+          mediaType: "application/pdf",
         },
       ],
     },
@@ -74,18 +74,18 @@ const result = await generateText({
 You can use the `bedrock` provider options to utilize [Amazon Bedrock Guardrails](https://aws.amazon.com/bedrock/guardrails/):
 
 ```ts
-import { type AmazonBedrockLanguageModelOptions } from '@ai-sdk/amazon-bedrock';
+import { type AmazonBedrockLanguageModelOptions } from "@ai-sdk/amazon-bedrock";
 
 const result = await generateText({
-  model: bedrock('anthropic.claude-3-sonnet-20240229-v1:0'),
-  prompt: 'Write a story about space exploration.',
+  model: bedrock("anthropic.claude-3-sonnet-20240229-v1:0"),
+  prompt: "Write a story about space exploration.",
   providerOptions: {
     bedrock: {
       guardrailConfig: {
-        guardrailIdentifier: '1abcd2ef34gh',
-        guardrailVersion: '1',
-        trace: 'enabled' as const,
-        streamProcessingMode: 'async',
+        guardrailIdentifier: "1abcd2ef34gh",
+        guardrailVersion: "1",
+        trace: "enabled" as const,
+        streamProcessingMode: "async",
       },
     } satisfies AmazonBedrockLanguageModelOptions,
   },
@@ -110,31 +110,31 @@ Amazon Bedrock supports citations for document-based inputs across compatible mo
 - Models can cite specific parts of documents you provide, making it easier to trace information back to its source (Not Supported Yet)
 
 ```ts
-import { bedrock } from '@ai-sdk/amazon-bedrock';
-import { generateText, Output } from 'ai';
-import { z } from 'zod';
-import fs from 'fs';
+import { bedrock } from "@ai-sdk/amazon-bedrock";
+import { generateText, Output } from "ai";
+import { z } from "zod";
+import fs from "fs";
 
 const result = await generateText({
-  model: bedrock('apac.anthropic.claude-sonnet-4-20250514-v1:0'),
+  model: bedrock("apac.anthropic.claude-sonnet-4-20250514-v1:0"),
   output: Output.object({
     schema: z.object({
-      summary: z.string().describe('Summary of the PDF document'),
-      keyPoints: z.array(z.string()).describe('Key points from the PDF'),
+      summary: z.string().describe("Summary of the PDF document"),
+      keyPoints: z.array(z.string()).describe("Key points from the PDF"),
     }),
   }),
   messages: [
     {
-      role: 'user',
+      role: "user",
       content: [
         {
-          type: 'text',
-          text: 'Summarize this PDF and provide key points.',
+          type: "text",
+          text: "Summarize this PDF and provide key points.",
         },
         {
-          type: 'file',
-          data: readFileSync('./document.pdf'),
-          mediaType: 'application/pdf',
+          type: "file",
+          data: readFileSync("./document.pdf"),
+          mediaType: "application/pdf",
           providerOptions: {
             bedrock: {
               citations: { enabled: true },
@@ -146,7 +146,7 @@ const result = await generateText({
   ],
 });
 
-console.log('Response:', result.output);
+console.log("Response:", result.output);
 ```
 
 ### Cache Points
@@ -178,26 +178,26 @@ documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-cachi
 for details on supported models, regions, and limits.
 
 ```ts
-import { bedrock } from '@ai-sdk/amazon-bedrock';
-import { generateText } from 'ai';
+import { bedrock } from "@ai-sdk/amazon-bedrock";
+import { generateText } from "ai";
 
 const cyberpunkAnalysis =
-  '... literary analysis of cyberpunk themes and concepts ...';
+  "... literary analysis of cyberpunk themes and concepts ...";
 
 const result = await generateText({
-  model: bedrock('anthropic.claude-3-5-sonnet-20241022-v2:0'),
+  model: bedrock("anthropic.claude-3-5-sonnet-20241022-v2:0"),
   messages: [
     {
-      role: 'system',
+      role: "system",
       content: `You are an expert on William Gibson's cyberpunk literature and themes. You have access to the following academic analysis: ${cyberpunkAnalysis}`,
       providerOptions: {
-        bedrock: { cachePoint: { type: 'default' } },
+        bedrock: { cachePoint: { type: "default" } },
       },
     },
     {
-      role: 'user',
+      role: "user",
       content:
-        'What are the key cyberpunk themes that Gibson explores in Neuromancer?',
+        "What are the key cyberpunk themes that Gibson explores in Neuromancer?",
     },
   ],
 });
@@ -214,27 +214,27 @@ console.log(result.providerMetadata?.bedrock?.usage);
 Cache points also work with streaming responses:
 
 ```ts
-import { bedrock } from '@ai-sdk/amazon-bedrock';
-import { streamText } from 'ai';
+import { bedrock } from "@ai-sdk/amazon-bedrock";
+import { streamText } from "ai";
 
 const cyberpunkAnalysis =
-  '... literary analysis of cyberpunk themes and concepts ...';
+  "... literary analysis of cyberpunk themes and concepts ...";
 
 const result = streamText({
-  model: bedrock('anthropic.claude-3-5-sonnet-20241022-v2:0'),
+  model: bedrock("anthropic.claude-3-5-sonnet-20241022-v2:0"),
   messages: [
     {
-      role: 'assistant',
+      role: "assistant",
       content: [
-        { type: 'text', text: 'You are an expert on cyberpunk literature.' },
-        { type: 'text', text: `Academic analysis: ${cyberpunkAnalysis}` },
+        { type: "text", text: "You are an expert on cyberpunk literature." },
+        { type: "text", text: `Academic analysis: ${cyberpunkAnalysis}` },
       ],
-      providerOptions: { bedrock: { cachePoint: { type: 'default' } } },
+      providerOptions: { bedrock: { cachePoint: { type: "default" } } },
     },
     {
-      role: 'user',
+      role: "user",
       content:
-        'How does Gibson explore the relationship between humanity and technology?',
+        "How does Gibson explore the relationship between humanity and technology?",
     },
   ],
 });
@@ -244,7 +244,7 @@ for await (const textPart of result.textStream) {
 }
 
 console.log(
-  'Cache token usage:',
+  "Cache token usage:",
   (await result.providerMetadata)?.bedrock?.usage,
 );
 // Shows cache read/write token usage, e.g.:
@@ -258,15 +258,15 @@ console.log(
 
 The following Bedrock-specific metadata may be returned in `providerMetadata.bedrock`:
 
-- **trace** *(optional)*
+- **trace** _(optional)_
   Guardrail tracing information (when tracing is enabled).
-- **performanceConfig** *(optional)*
+- **performanceConfig** _(optional)_
   Performance configuration, e.g. `{ latency: 'optimized' }`.
-- **serviceTier** *(optional)*
+- **serviceTier** _(optional)_
   Service tier information, e.g. `{ type: 'on-demand' }`.
-- **usage** *(optional)*
+- **usage** _(optional)_
   Cache token usage details including `cacheWriteInputTokens` and `cacheDetails`.
-- **stopSequence** *string | null*
+- **stopSequence** _string | null_
   The stop sequence that triggered the stop, if any.
 
 ## Reasoning
@@ -280,16 +280,16 @@ Amazon Bedrock supports model creator-specific reasoning features:
 import {
   bedrock,
   type AmazonBedrockLanguageModelOptions,
-} from '@ai-sdk/amazon-bedrock';
-import { generateText } from 'ai';
+} from "@ai-sdk/amazon-bedrock";
+import { generateText } from "ai";
 
 // Anthropic example
 const anthropicResult = await generateText({
-  model: bedrock('us.anthropic.claude-sonnet-4-5-20250929-v1:0'),
-  prompt: 'How many people will live in the world in 2040?',
+  model: bedrock("us.anthropic.claude-sonnet-4-5-20250929-v1:0"),
+  prompt: "How many people will live in the world in 2040?",
   providerOptions: {
     bedrock: {
-      reasoningConfig: { type: 'enabled', budgetTokens: 1024 },
+      reasoningConfig: { type: "enabled", budgetTokens: 1024 },
     } satisfies AmazonBedrockLanguageModelOptions,
   },
 });
@@ -299,11 +299,11 @@ console.log(anthropicResult.text); // text response
 
 // Nova 2 example
 const amazonResult = await generateText({
-  model: bedrock('us.amazon.nova-2-lite-v1:0'),
-  prompt: 'How many people will live in the world in 2040?',
+  model: bedrock("us.amazon.nova-2-lite-v1:0"),
+  prompt: "How many people will live in the world in 2040?",
   providerOptions: {
     bedrock: {
-      reasoningConfig: { type: 'enabled', maxReasoningEffort: 'medium' },
+      reasoningConfig: { type: "enabled", maxReasoningEffort: "medium" },
     } satisfies AmazonBedrockLanguageModelOptions,
   },
 });
@@ -323,15 +323,15 @@ Claude Sonnet 4 models on Amazon Bedrock support an extended context window of u
 import {
   bedrock,
   type AmazonBedrockLanguageModelOptions,
-} from '@ai-sdk/amazon-bedrock';
-import { generateText } from 'ai';
+} from "@ai-sdk/amazon-bedrock";
+import { generateText } from "ai";
 
 const result = await generateText({
-  model: bedrock('us.anthropic.claude-sonnet-4-20250514-v1:0'),
-  prompt: 'analyze this large document...',
+  model: bedrock("us.anthropic.claude-sonnet-4-20250514-v1:0"),
+  prompt: "analyze this large document...",
   providerOptions: {
     bedrock: {
-      anthropicBeta: ['context-1m-2025-08-07'],
+      anthropicBeta: ["context-1m-2025-08-07"],
     } satisfies AmazonBedrockLanguageModelOptions,
   },
 });

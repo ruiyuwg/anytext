@@ -48,7 +48,7 @@ darkImage: "https://raw.githubusercontent.com/garden-co/jazz/938f6767e46cdfded60
 
 ## Introduction
 
-Zod is a TypeScript-first validation library. Using Zod, you can define *schemas* you can use to validate data, from a simple `string` to a complex nested object.
+Zod is a TypeScript-first validation library. Using Zod, you can define _schemas_ you can use to validate data, from a simple `string` to a complex nested object.
 
 ```ts
 import * as z from "zod";
@@ -58,7 +58,9 @@ const User = z.object({
 });
 
 // some untrusted data...
-const input = { /* stuff */ };
+const input = {
+  /* stuff */
+};
 
 // the parsed result is validated and type safe!
 const data = User.parse(input);
@@ -90,7 +92,7 @@ Zod provides an MCP server that can be used by agents to search Zod's docs. To a
 
 ## Requirements
 
-Zod is tested against *TypeScript v5.5* and later. Older versions may work but are not officially supported.
+Zod is tested against _TypeScript v5.5_ and later. Older versions may work but are not officially supported.
 
 ### `"strict"`
 

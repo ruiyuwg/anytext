@@ -2,11 +2,11 @@
 
 Validates the compiler [configuration options](/reference/react-compiler/configuration).
 
-## Rule Details {/*rule-details*/}
+## Rule Details {/_rule-details_/}
 
-React Compiler accepts various [configuration options](/reference/react-compiler/configuration)  to control its behavior. This rule validates that your configuration uses correct option names and value types, preventing silent failures from typos or incorrect settings.
+React Compiler accepts various [configuration options](/reference/react-compiler/configuration) to control its behavior. This rule validates that your configuration uses correct option names and value types, preventing silent failures from typos or incorrect settings.
 
-### Invalid {/*invalid*/}
+### Invalid {/_invalid_/}
 
 Examples of incorrect code for this rule:
 
@@ -14,23 +14,29 @@ Examples of incorrect code for this rule:
 // ❌ Unknown option name
 module.exports = {
   plugins: [
-    ['babel-plugin-react-compiler', {
-      compileMode: 'all' // Typo: should be compilationMode
-    }]
-  ]
+    [
+      "babel-plugin-react-compiler",
+      {
+        compileMode: "all", // Typo: should be compilationMode
+      },
+    ],
+  ],
 };
 
 // ❌ Invalid option value
 module.exports = {
   plugins: [
-    ['babel-plugin-react-compiler', {
-      compilationMode: 'everything' // Invalid: use 'all' or 'infer'
-    }]
-  ]
+    [
+      "babel-plugin-react-compiler",
+      {
+        compilationMode: "everything", // Invalid: use 'all' or 'infer'
+      },
+    ],
+  ],
 };
 ```
 
-### Valid {/*valid*/}
+### Valid {/_valid_/}
 
 Examples of correct code for this rule:
 
@@ -38,17 +44,20 @@ Examples of correct code for this rule:
 // ✅ Valid compiler configuration
 module.exports = {
   plugins: [
-    ['babel-plugin-react-compiler', {
-      compilationMode: 'infer',
-      panicThreshold: 'critical_errors'
-    }]
-  ]
+    [
+      "babel-plugin-react-compiler",
+      {
+        compilationMode: "infer",
+        panicThreshold: "critical_errors",
+      },
+    ],
+  ],
 };
 ```
 
-## Troubleshooting {/*troubleshooting*/}
+## Troubleshooting {/_troubleshooting_/}
 
-### Configuration not working as expected {/*config-not-working*/}
+### Configuration not working as expected {/_config-not-working_/}
 
 Your compiler configuration might have typos or incorrect values:
 
@@ -56,15 +65,18 @@ Your compiler configuration might have typos or incorrect values:
 // ❌ Wrong: Common configuration mistakes
 module.exports = {
   plugins: [
-    ['babel-plugin-react-compiler', {
-      // Typo in option name
-      compilationMod: 'all',
-      // Wrong value type
-      panicThreshold: true,
-      // Unknown option
-      optimizationLevel: 'max'
-    }]
-  ]
+    [
+      "babel-plugin-react-compiler",
+      {
+        // Typo in option name
+        compilationMod: "all",
+        // Wrong value type
+        panicThreshold: true,
+        // Unknown option
+        optimizationLevel: "max",
+      },
+    ],
+  ],
 };
 ```
 
@@ -74,16 +86,19 @@ Check the [configuration documentation](/reference/react-compiler/configuration)
 // ✅ Better: Valid configuration
 module.exports = {
   plugins: [
-    ['babel-plugin-react-compiler', {
-      compilationMode: 'all', // or 'infer'
-      panicThreshold: 'none', // or 'critical_errors', 'all_errors'
-      // Only use documented options
-    }]
-  ]
+    [
+      "babel-plugin-react-compiler",
+      {
+        compilationMode: "all", // or 'infer'
+        panicThreshold: "none", // or 'critical_errors', 'all_errors'
+        // Only use documented options
+      },
+    ],
+  ],
 };
 ```
 
-***
+---
 
 ## Sitemap
 

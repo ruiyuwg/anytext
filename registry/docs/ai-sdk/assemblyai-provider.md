@@ -11,13 +11,13 @@ The AssemblyAI provider is available in the `@ai-sdk/assemblyai` module. You can
 You can import the default provider instance `assemblyai` from `@ai-sdk/assemblyai`:
 
 ```ts
-import { assemblyai } from '@ai-sdk/assemblyai';
+import { assemblyai } from "@ai-sdk/assemblyai";
 ```
 
 If you need a customized setup, you can import `createAssemblyAI` from `@ai-sdk/assemblyai` and create a provider instance with your settings:
 
 ```ts
-import { createAssemblyAI } from '@ai-sdk/assemblyai';
+import { createAssemblyAI } from "@ai-sdk/assemblyai";
 
 const assemblyai = createAssemblyAI({
   // custom settings, e.g.
@@ -27,16 +27,16 @@ const assemblyai = createAssemblyAI({
 
 You can use the following optional settings to customize the AssemblyAI provider instance:
 
-- **apiKey** *string*
+- **apiKey** _string_
 
   API key that is being sent using the `Authorization` header.
   It defaults to the `ASSEMBLYAI_API_KEY` environment variable.
 
-- **headers** *Record\<string,string>*
+- **headers** _Record\<string,string>_
 
   Custom headers to include in the requests.
 
-- **fetch** *(input: RequestInfo, init?: RequestInit) => Promise\<Response>*
+- **fetch** _(input: RequestInfo, init?: RequestInit) => Promise\<Response>_
 
   Custom [fetch](https://developer.mozilla.org/en-US/docs/Web/API/fetch) implementation.
   Defaults to the global `fetch` function.
@@ -51,20 +51,20 @@ using the `.transcription()` factory method.
 The first argument is the model id e.g. `best`.
 
 ```ts
-const model = assemblyai.transcription('best');
+const model = assemblyai.transcription("best");
 ```
 
 You can also pass additional provider-specific options using the `providerOptions` argument. For example, supplying the `contentSafety` option will enable content safety filtering.
 
 ```ts highlight="7"
-import { experimental_transcribe as transcribe } from 'ai';
-import { assemblyai } from '@ai-sdk/assemblyai';
-import { type AssemblyAITranscriptionModelOptions } from '@ai-sdk/assemblyai';
-import { readFile } from 'fs/promises';
+import { experimental_transcribe as transcribe } from "ai";
+import { assemblyai } from "@ai-sdk/assemblyai";
+import { type AssemblyAITranscriptionModelOptions } from "@ai-sdk/assemblyai";
+import { readFile } from "fs/promises";
 
 const result = await transcribe({
-  model: assemblyai.transcription('best'),
-  audio: await readFile('audio.mp3'),
+  model: assemblyai.transcription("best"),
+  audio: await readFile("audio.mp3"),
   providerOptions: {
     assemblyai: {
       contentSafety: true,
@@ -75,189 +75,189 @@ const result = await transcribe({
 
 The following provider options are available:
 
-- **audioEndAt** *number*
+- **audioEndAt** _number_
 
   End time of the audio in milliseconds.
   Optional.
 
-- **audioStartFrom** *number*
+- **audioStartFrom** _number_
 
   Start time of the audio in milliseconds.
   Optional.
 
-- **autoChapters** *boolean*
+- **autoChapters** _boolean_
 
   Whether to automatically generate chapters for the transcription.
   Optional.
 
-- **autoHighlights** *boolean*
+- **autoHighlights** _boolean_
 
   Whether to automatically generate highlights for the transcription.
   Optional.
 
-- **boostParam** *enum*
+- **boostParam** _enum_
 
   Boost parameter for the transcription.
   Allowed values: `'low'`, `'default'`, `'high'`.
   Optional.
 
-- **contentSafety** *boolean*
+- **contentSafety** _boolean_
 
   Whether to enable content safety filtering.
   Optional.
 
-- **contentSafetyConfidence** *number*
+- **contentSafetyConfidence** _number_
 
   Confidence threshold for content safety filtering (25-100).
   Optional.
 
-- **customSpelling** *array of objects*
+- **customSpelling** _array of objects_
 
   Custom spelling rules for the transcription.
   Each object has `from` (array of strings) and `to` (string) properties.
   Optional.
 
-- **disfluencies** *boolean*
+- **disfluencies** _boolean_
 
   Whether to include disfluencies (um, uh, etc.) in the transcription.
   Optional.
 
-- **entityDetection** *boolean*
+- **entityDetection** _boolean_
 
   Whether to detect entities in the transcription.
   Optional.
 
-- **filterProfanity** *boolean*
+- **filterProfanity** _boolean_
 
   Whether to filter profanity in the transcription.
   Optional.
 
-- **formatText** *boolean*
+- **formatText** _boolean_
 
   Whether to format the text in the transcription.
   Optional.
 
-- **iabCategories** *boolean*
+- **iabCategories** _boolean_
 
   Whether to include IAB categories in the transcription.
   Optional.
 
-- **languageCode** *string*
+- **languageCode** _string_
 
   Language code for the audio.
   Supports numerous ISO-639-1 and ISO-639-3 language codes.
   Optional.
 
-- **languageConfidenceThreshold** *number*
+- **languageConfidenceThreshold** _number_
 
   Confidence threshold for language detection.
   Optional.
 
-- **languageDetection** *boolean*
+- **languageDetection** _boolean_
 
   Whether to enable language detection.
   Optional.
 
-- **multichannel** *boolean*
+- **multichannel** _boolean_
 
   Whether to process multiple audio channels separately.
   Optional.
 
-- **punctuate** *boolean*
+- **punctuate** _boolean_
 
   Whether to add punctuation to the transcription.
   Optional.
 
-- **redactPii** *boolean*
+- **redactPii** _boolean_
 
   Whether to redact personally identifiable information.
   Optional.
 
-- **redactPiiAudio** *boolean*
+- **redactPiiAudio** _boolean_
 
   Whether to redact PII in the audio file.
   Optional.
 
-- **redactPiiAudioQuality** *enum*
+- **redactPiiAudioQuality** _enum_
 
   Quality of the redacted audio file.
   Allowed values: `'mp3'`, `'wav'`.
   Optional.
 
-- **redactPiiPolicies** *array of enums*
+- **redactPiiPolicies** _array of enums_
 
   Policies for PII redaction, specifying which types of information to redact.
   Supports numerous types like `'person_name'`, `'phone_number'`, etc.
   Optional.
 
-- **redactPiiSub** *enum*
+- **redactPiiSub** _enum_
 
   Substitution method for redacted PII.
   Allowed values: `'entity_name'`, `'hash'`.
   Optional.
 
-- **sentimentAnalysis** *boolean*
+- **sentimentAnalysis** _boolean_
 
   Whether to perform sentiment analysis on the transcription.
   Optional.
 
-- **speakerLabels** *boolean*
+- **speakerLabels** _boolean_
 
   Whether to label different speakers in the transcription.
   Optional.
 
-- **speakersExpected** *number*
+- **speakersExpected** _number_
 
   Expected number of speakers in the audio.
   Optional.
 
-- **speechThreshold** *number*
+- **speechThreshold** _number_
 
   Threshold for speech detection (0-1).
   Optional.
 
-- **summarization** *boolean*
+- **summarization** _boolean_
 
   Whether to generate a summary of the transcription.
   Optional.
 
-- **summaryModel** *enum*
+- **summaryModel** _enum_
 
   Model to use for summarization.
   Allowed values: `'informative'`, `'conversational'`, `'catchy'`.
   Optional.
 
-- **summaryType** *enum*
+- **summaryType** _enum_
 
   Type of summary to generate.
   Allowed values: `'bullets'`, `'bullets_verbose'`, `'gist'`, `'headline'`, `'paragraph'`.
   Optional.
 
-- **webhookAuthHeaderName** *string*
+- **webhookAuthHeaderName** _string_
 
   Name of the authentication header for webhook requests.
   Optional.
 
-- **webhookAuthHeaderValue** *string*
+- **webhookAuthHeaderValue** _string_
 
   Value of the authentication header for webhook requests.
   Optional.
 
-- **webhookUrl** *string*
+- **webhookUrl** _string_
 
   URL to send webhook notifications to.
   Optional.
 
-- **wordBoost** *array of strings*
+- **wordBoost** _array of strings_
 
   List of words to boost in the transcription.
   Optional.
 
 ### Model Capabilities
 
-| Model  | Transcription       | Duration            | Segments            | Language            |
-| ------ | ------------------- | ------------------- | ------------------- | ------------------- |
-| `best` |  |  |  |  |
-| `nano` |  |  |  |  |
+| Model  | Transcription | Duration | Segments | Language |
+| ------ | ------------- | -------- | -------- | -------- |
+| `best` |               |          |          |          |
+| `nano` |               |          |          |          |
 
 # DeepInfra

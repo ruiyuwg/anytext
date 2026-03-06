@@ -49,7 +49,9 @@ export function padEnd(s: string, width: number): string {
 }
 
 export function printError(message: string, suggestion?: string): void {
-  console.error(COLOR ? `\x1b[1;31merror:\x1b[0m ${message}` : `error: ${message}`);
+  console.error(
+    COLOR ? `\x1b[1;31merror:\x1b[0m ${message}` : `error: ${message}`,
+  );
   if (suggestion) {
     console.error(COLOR ? `\x1b[2;3m${suggestion}\x1b[0m` : suggestion);
   }

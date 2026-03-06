@@ -15,22 +15,22 @@ The `'use cache: remote'` directive lets you declaratively specify that a cached
 To use `'use cache: remote'`, enable the [`cacheComponents`](/docs/app/api-reference/config/next-config-js/cacheComponents) flag in your `next.config.ts` file:
 
 ```ts filename="next.config.ts" switcher
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   cacheComponents: true,
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 ```js filename="next.config.js" switcher
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   cacheComponents: true,
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 Then add `'use cache: remote'` to the functions or components where you've determined remote caching is justified. The handler implementation is configured via [`cacheHandlers`](/docs/app/api-reference/config/next-config-js/cacheHandlers), though hosting providers should typically provide this automatically. If you're self-hosting, see the `cacheHandlers` configuration reference to set up your cache storage.
@@ -85,51 +85,51 @@ Both `use cache` and `'use cache: remote'` can't access runtime values like cook
 Be thoughtful about which values you include in cache keys. Each unique value creates a separate cache entry, reducing cache utilization. Consider this example with search filters:
 
 ```tsx filename="app/products/[category]/page.tsx"
-import { Suspense } from 'react'
+import { Suspense } from "react";
 
 export default async function ProductsPage({
   params,
   searchParams,
 }: {
-  params: Promise<{ category: string }>
-  searchParams: Promise<{ minPrice?: string }>
+  params: Promise<{ category: string }>;
+  searchParams: Promise<{ minPrice?: string }>;
 }) {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <ProductList params={params} searchParams={searchParams} />
     </Suspense>
-  )
+  );
 }
 
 async function ProductList({
   params,
   searchParams,
 }: {
-  params: Promise<{ category: string }>
-  searchParams: Promise<{ minPrice?: string }>
+  params: Promise<{ category: string }>;
+  searchParams: Promise<{ minPrice?: string }>;
 }) {
-  const { category } = await params
+  const { category } = await params;
 
-  const { minPrice } = await searchParams
+  const { minPrice } = await searchParams;
 
   // Cache only on category (few unique values)
   // Don't include price filter (many unique values)
-  const products = await getProductsByCategory(category)
+  const products = await getProductsByCategory(category);
 
   // Filter price in memory instead of creating cache entries
   // for every price value
   const filtered = minPrice
     ? products.filter((p) => p.price >= parseFloat(minPrice))
-    : products
+    : products;
 
-  return <div>{/* render filtered products */}</div>
+  return <div>{/* render filtered products */}</div>;
 }
 
 async function getProductsByCategory(category: string) {
-  'use cache: remote'
+  "use cache: remote";
   // Only category is part of the cache key
   // Much better utilization than caching every price filter value
-  return db.products.findByCategory(category)
+  return db.products.findByCategory(category);
 }
 ```
 
@@ -143,26 +143,26 @@ For example, if users have a language preference in their session, extract that 
 - Remote cache `getCMSContent(language)` to create one entry per language
 
 ```tsx filename="app/components/welcome-message.tsx"
-import { cookies } from 'next/headers'
-import { cacheLife } from 'next/cache'
+import { cookies } from "next/headers";
+import { cacheLife } from "next/cache";
 
 export async function WelcomeMessage() {
   // Extract the language preference (not unique per user)
-  const language = (await cookies()).get('language')?.value || 'en'
+  const language = (await cookies()).get("language")?.value || "en";
 
   // Cache based on language (few unique values: en, es, fr, de, etc.)
   // All users who prefer 'en' share the same cache entry
-  const content = await getCMSContent(language)
+  const content = await getCMSContent(language);
 
-  return <div>{content.welcomeMessage}</div>
+  return <div>{content.welcomeMessage}</div>;
 }
 
 async function getCMSContent(language: string) {
-  'use cache: remote'
-  cacheLife({ expire: 3600 })
+  "use cache: remote";
+  cacheLife({ expire: 3600 });
   // Creates ~10-50 cache entries (one per language)
   // instead of thousands (one per user)
-  return cms.getHomeContent(language)
+  return cms.getHomeContent(language);
 }
 ```
 
@@ -186,51 +186,51 @@ Remote caches have specific nesting rules:
 ```tsx
 // VALID: Remote inside remote
 async function outerRemote() {
-  'use cache: remote'
-  const result = await innerRemote()
-  return result
+  "use cache: remote";
+  const result = await innerRemote();
+  return result;
 }
 
 async function innerRemote() {
-  'use cache: remote'
-  return getData()
+  "use cache: remote";
+  return getData();
 }
 
 // VALID: Remote inside regular cache
 async function outerCache() {
-  'use cache'
+  "use cache";
   // The inner remote cache will work when deferred to request time
-  const result = await innerRemote()
-  return result
+  const result = await innerRemote();
+  return result;
 }
 
 async function innerRemote() {
-  'use cache: remote'
-  return getData()
+  "use cache: remote";
+  return getData();
 }
 
 // INVALID: Remote inside private
 async function outerPrivate() {
-  'use cache: private'
-  const result = await innerRemote() // Error!
-  return result
+  "use cache: private";
+  const result = await innerRemote(); // Error!
+  return result;
 }
 
 async function innerRemote() {
-  'use cache: remote'
-  return getData()
+  "use cache: remote";
+  return getData();
 }
 
 // INVALID: Private inside remote
 async function outerRemote() {
-  'use cache: remote'
-  const result = await innerPrivate() // Error!
-  return result
+  "use cache: remote";
+  const result = await innerPrivate(); // Error!
+  return result;
 }
 
 async function innerPrivate() {
-  'use cache: private'
-  return getData()
+  "use cache: private";
+  return getData();
 }
 ```
 
@@ -243,20 +243,20 @@ The following examples demonstrate common patterns for using `'use cache: remote
 Cache product pricing based on the user's currency preference. Since the currency is stored in a cookie, this component renders at request time. Remote caching is valuable here because all users with the same currency share the cached price, and in serverless environments, all instances share the same remote cache.
 
 ```tsx filename="app/product/[id]/page.tsx" switcher
-import { Suspense } from 'react'
-import { cookies } from 'next/headers'
-import { cacheTag, cacheLife } from 'next/cache'
+import { Suspense } from "react";
+import { cookies } from "next/headers";
+import { cacheTag, cacheLife } from "next/cache";
 
 export async function generateStaticParams() {
-  return [{ id: '1' }, { id: '2' }, { id: '3' }]
+  return [{ id: "1" }, { id: "2" }, { id: "3" }];
 }
 
 export default async function ProductPage({
   params,
 }: {
-  params: Promise<{ id: string }>
+  params: Promise<{ id: string }>;
 }) {
-  const { id } = await params
+  const { id } = await params;
 
   return (
     <div>
@@ -265,49 +265,49 @@ export default async function ProductPage({
         <ProductPrice productId={id} />
       </Suspense>
     </div>
-  )
+  );
 }
 
 function ProductDetails({ id }: { id: string }) {
-  return <div>Product: {id}</div>
+  return <div>Product: {id}</div>;
 }
 
 async function ProductPrice({ productId }: { productId: string }) {
   // Reading cookies defers this component to request time
-  const currency = (await cookies()).get('currency')?.value ?? 'USD'
+  const currency = (await cookies()).get("currency")?.value ?? "USD";
 
   // Cache the price per product and currency combination
   // All users with the same currency share this cache entry
-  const price = await getProductPrice(productId, currency)
+  const price = await getProductPrice(productId, currency);
 
   return (
     <div>
       Price: {price} {currency}
     </div>
-  )
+  );
 }
 
 async function getProductPrice(productId: string, currency: string) {
-  'use cache: remote'
-  cacheTag(`product-price-${productId}`)
-  cacheLife({ expire: 3600 }) // 1 hour
+  "use cache: remote";
+  cacheTag(`product-price-${productId}`);
+  cacheLife({ expire: 3600 }); // 1 hour
 
   // Cached per (productId, currency) - few currencies means high cache utilization
-  return db.products.getPrice(productId, currency)
+  return db.products.getPrice(productId, currency);
 }
 ```
 
 ```jsx filename="app/product/[id]/page.js" switcher
-import { Suspense } from 'react'
-import { cookies } from 'next/headers'
-import { cacheTag, cacheLife } from 'next/cache'
+import { Suspense } from "react";
+import { cookies } from "next/headers";
+import { cacheTag, cacheLife } from "next/cache";
 
 export async function generateStaticParams() {
-  return [{ id: '1' }, { id: '2' }, { id: '3' }]
+  return [{ id: "1" }, { id: "2" }, { id: "3" }];
 }
 
 export default async function ProductPage({ params }) {
-  const { id } = await params
+  const { id } = await params;
 
   return (
     <div>
@@ -316,35 +316,35 @@ export default async function ProductPage({ params }) {
         <ProductPrice productId={id} />
       </Suspense>
     </div>
-  )
+  );
 }
 
 function ProductDetails({ id }) {
-  return <div>Product: {id}</div>
+  return <div>Product: {id}</div>;
 }
 
 async function ProductPrice({ productId }) {
   // Reading cookies defers this component to request time
-  const currency = (await cookies()).get('currency')?.value ?? 'USD'
+  const currency = (await cookies()).get("currency")?.value ?? "USD";
 
   // Cache the price per product and currency combination
   // All users with the same currency share this cache entry
-  const price = await getProductPrice(productId, currency)
+  const price = await getProductPrice(productId, currency);
 
   return (
     <div>
       Price: {price} {currency}
     </div>
-  )
+  );
 }
 
 async function getProductPrice(productId, currency) {
-  'use cache: remote'
-  cacheTag(`product-price-${productId}`)
-  cacheLife({ expire: 3600 }) // 1 hour
+  "use cache: remote";
+  cacheTag(`product-price-${productId}`);
+  cacheLife({ expire: 3600 }); // 1 hour
 
   // Cached per (productId, currency) - few currencies means high cache utilization
-  return db.products.getPrice(productId, currency)
+  return db.products.getPrice(productId, currency);
 }
 ```
 
@@ -353,41 +353,41 @@ async function getProductPrice(productId, currency) {
 Cache expensive database queries, reducing load on your database. In this example, we don't access `cookies()`, `headers()`, or `searchParams`. If we had a requirement to not include these stats in the static shell, we could use [`connection()`](/docs/app/api-reference/functions/connection) to explicitly defer to request time:
 
 ```tsx filename="app/dashboard/page.tsx"
-import { Suspense } from 'react'
-import { connection } from 'next/server'
-import { cacheLife, cacheTag } from 'next/cache'
+import { Suspense } from "react";
+import { connection } from "next/server";
+import { cacheLife, cacheTag } from "next/cache";
 
 export default function DashboardPage() {
   return (
     <Suspense fallback={<div>Loading stats...</div>}>
       <DashboardStats />
     </Suspense>
-  )
+  );
 }
 
 async function DashboardStats() {
   // Defer to request time
-  await connection()
+  await connection();
 
-  const stats = await getGlobalStats()
+  const stats = await getGlobalStats();
 
-  return <StatsDisplay stats={stats} />
+  return <StatsDisplay stats={stats} />;
 }
 
 async function getGlobalStats() {
-  'use cache: remote'
-  cacheTag('global-stats')
-  cacheLife({ expire: 60 }) // 1 minute
+  "use cache: remote";
+  cacheTag("global-stats");
+  cacheLife({ expire: 60 }); // 1 minute
 
   // This expensive database query is cached and shared across all users,
   // reducing load on your database
   const stats = await db.analytics.aggregate({
-    total_users: 'count',
-    active_sessions: 'count',
-    revenue: 'sum',
-  })
+    total_users: "count",
+    active_sessions: "count",
+    revenue: "sum",
+  });
 
-  return stats
+  return stats;
 }
 ```
 
@@ -398,9 +398,9 @@ With this setup, your upstream database sees at most one request per minute, reg
 Cache API responses that are fetched during streaming or after dynamic operations:
 
 ```tsx filename="app/feed/page.tsx"
-import { Suspense } from 'react'
-import { connection } from 'next/server'
-import { cacheLife, cacheTag } from 'next/cache'
+import { Suspense } from "react";
+import { connection } from "next/server";
+import { cacheLife, cacheTag } from "next/cache";
 
 export default async function FeedPage() {
   return (
@@ -409,26 +409,26 @@ export default async function FeedPage() {
         <FeedItems />
       </Suspense>
     </div>
-  )
+  );
 }
 
 async function FeedItems() {
   // Defer to request time
-  await connection()
+  await connection();
 
-  const items = await getFeedItems()
+  const items = await getFeedItems();
 
-  return items.map((item) => <FeedItem key={item.id} item={item} />)
+  return items.map((item) => <FeedItem key={item.id} item={item} />);
 }
 
 async function getFeedItems() {
-  'use cache: remote'
-  cacheTag('feed-items')
-  cacheLife({ expire: 120 }) // 2 minutes
+  "use cache: remote";
+  cacheTag("feed-items");
+  cacheLife({ expire: 120 }); // 2 minutes
 
   // This API call is cached, reducing requests to your external service
-  const response = await fetch('https://api.example.com/feed')
-  return response.json()
+  const response = await fetch("https://api.example.com/feed");
+  return response.json();
 }
 ```
 
@@ -437,31 +437,31 @@ async function getFeedItems() {
 Cache expensive computations that occur after dynamic security or feature checks:
 
 ```tsx filename="app/reports/page.tsx"
-import { connection } from 'next/server'
-import { cacheLife } from 'next/cache'
+import { connection } from "next/server";
+import { cacheLife } from "next/cache";
 
 export default async function ReportsPage() {
   // Defer to request time (for security check)
-  await connection()
+  await connection();
 
-  const report = await generateReport()
+  const report = await generateReport();
 
-  return <ReportViewer report={report} />
+  return <ReportViewer report={report} />;
 }
 
 async function generateReport() {
-  'use cache: remote'
-  cacheLife({ expire: 3600 }) // 1 hour
+  "use cache: remote";
+  cacheLife({ expire: 3600 }); // 1 hour
 
   // This expensive computation is cached and shared across all authorized users,
   // avoiding repeated calculations
-  const data = await db.transactions.findMany()
+  const data = await db.transactions.findMany();
 
   return {
     totalRevenue: calculateRevenue(data),
     topProducts: analyzeProducts(data),
     trends: calculateTrends(data),
-  }
+  };
 }
 ```
 
@@ -470,48 +470,48 @@ async function generateReport() {
 Combine static, remote, and private caching for optimal performance:
 
 ```tsx filename="app/product/[id]/page.tsx"
-import { Suspense } from 'react'
-import { connection } from 'next/server'
-import { cookies } from 'next/headers'
-import { cacheLife, cacheTag } from 'next/cache'
+import { Suspense } from "react";
+import { connection } from "next/server";
+import { cookies } from "next/headers";
+import { cacheLife, cacheTag } from "next/cache";
 
 // Static product data - prerendered at build time
 async function getProduct(id: string) {
-  'use cache'
-  cacheTag(`product-${id}`)
+  "use cache";
+  cacheTag(`product-${id}`);
 
   // This is cached at build time and shared across all users
-  return db.products.find({ where: { id } })
+  return db.products.find({ where: { id } });
 }
 
 // Shared pricing data - cached at runtime in remote handler
 async function getProductPrice(id: string) {
-  'use cache: remote'
-  cacheTag(`product-price-${id}`)
-  cacheLife({ expire: 300 }) // 5 minutes
+  "use cache: remote";
+  cacheTag(`product-price-${id}`);
+  cacheLife({ expire: 300 }); // 5 minutes
 
   // This is cached at runtime and shared across all users
-  return db.products.getPrice({ where: { id } })
+  return db.products.getPrice({ where: { id } });
 }
 
 // User-specific recommendations - private cache per user
 async function getRecommendations(productId: string) {
-  'use cache: private'
-  cacheLife({ expire: 60 }) // 1 minute
+  "use cache: private";
+  cacheLife({ expire: 60 }); // 1 minute
 
-  const sessionId = (await cookies()).get('session-id')?.value
+  const sessionId = (await cookies()).get("session-id")?.value;
 
   // This is cached per-user and never shared
   return db.recommendations.findMany({
     where: { productId, sessionId },
-  })
+  });
 }
 
 export default async function ProductPage({ params }) {
-  const { id } = await params
+  const { id } = await params;
 
   // Static product data
-  const product = await getProduct(id)
+  const product = await getProduct(id);
 
   return (
     <div>
@@ -527,7 +527,7 @@ export default async function ProductPage({ params }) {
         <ProductRecommendations productId={id} />
       </Suspense>
     </div>
-  )
+  );
 }
 
 function ProductDetails({ product }) {
@@ -536,28 +536,28 @@ function ProductDetails({ product }) {
       <h1>{product.name}</h1>
       <p>{product.description}</p>
     </div>
-  )
+  );
 }
 
 async function ProductPriceComponent({ productId }) {
   // Defer to request time
-  await connection()
+  await connection();
 
-  const price = await getProductPrice(productId)
-  return <div>Price: ${price}</div>
+  const price = await getProductPrice(productId);
+  return <div>Price: ${price}</div>;
 }
 
 async function ProductRecommendations({ productId }) {
-  const recommendations = await getRecommendations(productId)
-  return <RecommendationsList items={recommendations} />
+  const recommendations = await getRecommendations(productId);
+  return <RecommendationsList items={recommendations} />;
 }
 
 function PriceSkeleton() {
-  return <div>Loading price...</div>
+  return <div>Loading price...</div>;
 }
 
 function RecommendationsSkeleton() {
-  return <div>Loading recommendations...</div>
+  return <div>Loading recommendations...</div>;
 }
 
 function RecommendationsList({ items }) {
@@ -567,7 +567,7 @@ function RecommendationsList({ items }) {
         <li key={item.id}>{item.name}</li>
       ))}
     </ul>
-  )
+  );
 }
 ```
 

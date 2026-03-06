@@ -7,28 +7,28 @@ You can create image models using the `.image()` factory method. The Google Vert
 [Imagen models](https://cloud.google.com/vertex-ai/generative-ai/docs/image/generate-images) generate images using the Imagen on Vertex AI API.
 
 ```ts
-import { vertex } from '@ai-sdk/google-vertex';
-import { generateImage } from 'ai';
+import { vertex } from "@ai-sdk/google-vertex";
+import { generateImage } from "ai";
 
 const { image } = await generateImage({
-  model: vertex.image('imagen-4.0-generate-001'),
-  prompt: 'A futuristic cityscape at sunset',
-  aspectRatio: '16:9',
+  model: vertex.image("imagen-4.0-generate-001"),
+  prompt: "A futuristic cityscape at sunset",
+  aspectRatio: "16:9",
 });
 ```
 
 Further configuration can be done using Google Vertex provider options. You can validate the provider options using the `GoogleVertexImageModelOptions` type.
 
 ```ts
-import { vertex } from '@ai-sdk/google-vertex';
-import { GoogleVertexImageModelOptions } from '@ai-sdk/google-vertex';
-import { generateImage } from 'ai';
+import { vertex } from "@ai-sdk/google-vertex";
+import { GoogleVertexImageModelOptions } from "@ai-sdk/google-vertex";
+import { generateImage } from "ai";
 
 const { image } = await generateImage({
-  model: vertex.image('imagen-4.0-generate-001'),
+  model: vertex.image("imagen-4.0-generate-001"),
   providerOptions: {
     vertex: {
-      negativePrompt: 'pixelated, blurry, low-quality',
+      negativePrompt: "pixelated, blurry, low-quality",
     } satisfies GoogleVertexImageModelOptions,
   },
   // ...
@@ -37,7 +37,7 @@ const { image } = await generateImage({
 
 The following provider options are available:
 
-- **negativePrompt** *string*
+- **negativePrompt** _string_
   A description of what to discourage in the generated images.
 
 - **personGeneration** `allow_adult` | `allow_all` | `dont_allow`
@@ -46,10 +46,10 @@ The following provider options are available:
 - **safetySetting** `block_low_and_above` | `block_medium_and_above` | `block_only_high` | `block_none`
   Whether to block unsafe content. Defaults to `block_medium_and_above`.
 
-- **addWatermark** *boolean*
+- **addWatermark** _boolean_
   Whether to add an invisible watermark to the generated images. Defaults to `true`.
 
-- **storageUri** *string*
+- **storageUri** _string_
   Cloud Storage URI to store the generated images.
 
   Imagen models do not support the `size` parameter. Use the `aspectRatio`
@@ -58,14 +58,14 @@ The following provider options are available:
 Additional information about the images can be retrieved using Google Vertex meta data.
 
 ```ts
-import { vertex } from '@ai-sdk/google-vertex';
-import { GoogleVertexImageModelOptions } from '@ai-sdk/google-vertex';
-import { generateImage } from 'ai';
+import { vertex } from "@ai-sdk/google-vertex";
+import { GoogleVertexImageModelOptions } from "@ai-sdk/google-vertex";
+import { generateImage } from "ai";
 
 const { image, providerMetadata } = await generateImage({
-  model: vertex.image('imagen-4.0-generate-001'),
-  prompt: 'A futuristic cityscape at sunset',
-  aspectRatio: '16:9',
+  model: vertex.image("imagen-4.0-generate-001"),
+  prompt: "A futuristic cityscape at sunset",
+  aspectRatio: "16:9",
 });
 
 console.log(
@@ -85,17 +85,17 @@ Image editing is supported by `imagen-3.0-capability-001`. The
 Insert or replace objects in specific areas using a mask:
 
 ```ts
-import { vertex, GoogleVertexImageModelOptions } from '@ai-sdk/google-vertex';
-import { generateImage } from 'ai';
-import fs from 'fs';
+import { vertex, GoogleVertexImageModelOptions } from "@ai-sdk/google-vertex";
+import { generateImage } from "ai";
+import fs from "fs";
 
-const image = fs.readFileSync('./input-image.png');
-const mask = fs.readFileSync('./mask.png'); // White = edit area
+const image = fs.readFileSync("./input-image.png");
+const mask = fs.readFileSync("./mask.png"); // White = edit area
 
 const { images } = await generateImage({
-  model: vertex.image('imagen-3.0-capability-001'),
+  model: vertex.image("imagen-3.0-capability-001"),
   prompt: {
-    text: 'A sunlit indoor lounge area with a pool containing a flamingo',
+    text: "A sunlit indoor lounge area with a pool containing a flamingo",
     images: [image],
     mask,
   },
@@ -103,8 +103,8 @@ const { images } = await generateImage({
     vertex: {
       edit: {
         baseSteps: 50,
-        mode: 'EDIT_MODE_INPAINT_INSERTION',
-        maskMode: 'MASK_MODE_USER_PROVIDED',
+        mode: "EDIT_MODE_INPAINT_INSERTION",
+        maskMode: "MASK_MODE_USER_PROVIDED",
         maskDilation: 0.01,
       },
     } satisfies GoogleVertexImageModelOptions,
@@ -117,17 +117,17 @@ const { images } = await generateImage({
 Extend an image beyond its original boundaries:
 
 ```ts
-import { vertex, GoogleVertexImageModelOptions } from '@ai-sdk/google-vertex';
-import { generateImage } from 'ai';
-import fs from 'fs';
+import { vertex, GoogleVertexImageModelOptions } from "@ai-sdk/google-vertex";
+import { generateImage } from "ai";
+import fs from "fs";
 
-const image = fs.readFileSync('./input-image.png');
-const mask = fs.readFileSync('./outpaint-mask.png'); // White = extend area
+const image = fs.readFileSync("./input-image.png");
+const mask = fs.readFileSync("./outpaint-mask.png"); // White = extend area
 
 const { images } = await generateImage({
-  model: vertex.image('imagen-3.0-capability-001'),
+  model: vertex.image("imagen-3.0-capability-001"),
   prompt: {
-    text: 'Extend the scene with more of the forest background',
+    text: "Extend the scene with more of the forest background",
     images: [image],
     mask,
   },
@@ -135,8 +135,8 @@ const { images } = await generateImage({
     vertex: {
       edit: {
         baseSteps: 50,
-        mode: 'EDIT_MODE_OUTPAINT',
-        maskMode: 'MASK_MODE_USER_PROVIDED',
+        mode: "EDIT_MODE_OUTPAINT",
+        maskMode: "MASK_MODE_USER_PROVIDED",
       },
     } satisfies GoogleVertexImageModelOptions,
   },
@@ -148,7 +148,6 @@ const { images } = await generateImage({
 The following options are available under `providerOptions.vertex.edit`:
 
 - **mode** - The edit mode to use:
-
   - `EDIT_MODE_INPAINT_INSERTION` - Insert objects into masked areas
   - `EDIT_MODE_INPAINT_REMOVAL` - Remove objects from masked areas
   - `EDIT_MODE_OUTPAINT` - Extend image beyond boundaries
@@ -156,17 +155,16 @@ The following options are available under `providerOptions.vertex.edit`:
   - `EDIT_MODE_PRODUCT_IMAGE` - Product image editing
   - `EDIT_MODE_BGSWAP` - Background swap
 
-- **baseSteps** *number* - Number of sampling steps (35-75). Higher values = better quality but slower.
+- **baseSteps** _number_ - Number of sampling steps (35-75). Higher values = better quality but slower.
 
 - **maskMode** - How to interpret the mask:
-
   - `MASK_MODE_USER_PROVIDED` - Use the provided mask directly
   - `MASK_MODE_DEFAULT` - Default mask mode
   - `MASK_MODE_DETECTION_BOX` - Mask from detected bounding boxes
   - `MASK_MODE_CLOTHING_AREA` - Mask from clothing segmentation
   - `MASK_MODE_PARSED_PERSON` - Mask from person parsing
 
-- **maskDilation** *number* - Percentage (0-1) to grow the mask. Recommended: 0.01.
+- **maskDilation** _number_ - Percentage (0-1) to grow the mask. Recommended: 0.01.
 
   Input images must be provided as `Buffer`, `ArrayBuffer`, `Uint8Array`, or
   base64-encoded strings. URL-based images are not supported for Google Vertex
@@ -188,29 +186,29 @@ The following options are available under `providerOptions.vertex.edit`:
 [Gemini image models](https://cloud.google.com/vertex-ai/generative-ai/docs/models/gemini/2-5-flash-image) (e.g. `gemini-2.5-flash-image`) are multimodal output language models that can be used with `generateImage()` for a simpler image generation experience. Internally, the provider calls the language model API with `responseModalities: ['IMAGE']`.
 
 ```ts
-import { vertex } from '@ai-sdk/google-vertex';
-import { generateImage } from 'ai';
+import { vertex } from "@ai-sdk/google-vertex";
+import { generateImage } from "ai";
 
 const { image } = await generateImage({
-  model: vertex.image('gemini-2.5-flash-image'),
-  prompt: 'A photorealistic image of a cat wearing a wizard hat',
-  aspectRatio: '1:1',
+  model: vertex.image("gemini-2.5-flash-image"),
+  prompt: "A photorealistic image of a cat wearing a wizard hat",
+  aspectRatio: "1:1",
 });
 ```
 
 Gemini image models also support image editing by providing input images:
 
 ```ts
-import { vertex } from '@ai-sdk/google-vertex';
-import { generateImage } from 'ai';
-import fs from 'node:fs';
+import { vertex } from "@ai-sdk/google-vertex";
+import { generateImage } from "ai";
+import fs from "node:fs";
 
-const sourceImage = fs.readFileSync('./cat.png');
+const sourceImage = fs.readFileSync("./cat.png");
 
 const { image } = await generateImage({
-  model: vertex.image('gemini-2.5-flash-image'),
+  model: vertex.image("gemini-2.5-flash-image"),
   prompt: {
-    text: 'Add a small wizard hat to this cat',
+    text: "Add a small wizard hat to this cat",
     images: [sourceImage],
   },
 });
@@ -219,14 +217,14 @@ const { image } = await generateImage({
 You can also use URLs (including `gs://` Cloud Storage URIs) for input images:
 
 ```ts
-import { vertex } from '@ai-sdk/google-vertex';
-import { generateImage } from 'ai';
+import { vertex } from "@ai-sdk/google-vertex";
+import { generateImage } from "ai";
 
 const { image } = await generateImage({
-  model: vertex.image('gemini-2.5-flash-image'),
+  model: vertex.image("gemini-2.5-flash-image"),
   prompt: {
-    text: 'Add a small wizard hat to this cat',
-    images: ['https://example.com/cat.png'],
+    text: "Add a small wizard hat to this cat",
+    images: ["https://example.com/cat.png"],
   },
 });
 ```
@@ -241,11 +239,11 @@ directly with `generateText()`.
 
 ##### Gemini Image Model Capabilities
 
-| Model                            | Image Generation    | Image Editing       | Aspect Ratios                                       |
-| -------------------------------- | ------------------- | ------------------- | --------------------------------------------------- |
-| `gemini-3.1-flash-image-preview` |  |  | 1:1, 2:3, 3:2, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9 |
-| `gemini-3-pro-image-preview`     |  |  | 1:1, 2:3, 3:2, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9 |
-| `gemini-2.5-flash-image`         |  |  | 1:1, 2:3, 3:2, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9 |
+| Model                            | Image Generation | Image Editing | Aspect Ratios                                       |
+| -------------------------------- | ---------------- | ------------- | --------------------------------------------------- |
+| `gemini-3.1-flash-image-preview` |                  |               | 1:1, 2:3, 3:2, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9 |
+| `gemini-3-pro-image-preview`     |                  |               | 1:1, 2:3, 3:2, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9 |
+| `gemini-2.5-flash-image`         |                  |               | 1:1, 2:3, 3:2, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9 |
 
 `gemini-3-pro-image-preview` supports additional features including up to 14
 reference images for editing (6 objects, 5 humans), resolution options (1K,

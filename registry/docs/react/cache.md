@@ -8,21 +8,21 @@
 const cachedFn = cache(fn);
 ```
 
-***
+---
 
-## Reference {/*reference*/}
+## Reference {/_reference_/}
 
-### `cache(fn)` {/*cache*/}
+### `cache(fn)` {/_cache_/}
 
 Call `cache` outside of any components to create a version of the function with caching.
 
 ```js {4,7}
-import {cache} from 'react';
-import calculateMetrics from 'lib/metrics';
+import { cache } from "react";
+import calculateMetrics from "lib/metrics";
 
 const getMetrics = cache(calculateMetrics);
 
-function Chart({data}) {
+function Chart({ data }) {
   const report = getMetrics(data);
   // ...
 }
@@ -32,45 +32,45 @@ When `getMetrics` is first called with `data`, `getMetrics` will call `calculate
 
 [See more examples below.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parameters {/_parameters_/}
 
 - `fn`: The function you want to cache results for. `fn` can take any arguments and return any value.
 
-#### Returns {/*returns*/}
+#### Returns {/_returns_/}
 
 `cache` returns a cached version of `fn` with the same type signature. It does not call `fn` in the process.
 
 When calling `cachedFn` with given arguments, it first checks if a cached result exists in the cache. If a cached result exists, it returns the result. If not, it calls `fn` with the arguments, stores the result in the cache, and returns the result. The only time `fn` is called is when there is a cache miss.
 
-The optimization of caching return values based on inputs is known as [*memoization*](https://en.wikipedia.org/wiki/Memoization). We refer to the function returned from `cache` as a memoized function.
+The optimization of caching return values based on inputs is known as [_memoization_](https://en.wikipedia.org/wiki/Memoization). We refer to the function returned from `cache` as a memoized function.
 
-#### Caveats {/*caveats*/}
+#### Caveats {/_caveats_/}
 
 - React will invalidate the cache for all memoized functions for each server request.
 - Each call to `cache` creates a new function. This means that calling `cache` with the same function multiple times will return different memoized functions that do not share the same cache.
 - `cachedFn` will also cache errors. If `fn` throws an error for certain arguments, it will be cached, and the same error is re-thrown when `cachedFn` is called with those same arguments.
 - `cache` is for use in [Server Components](/reference/rsc/server-components) only.
 
-***
+---
 
-## Usage {/*usage*/}
+## Usage {/_usage_/}
 
-### Cache an expensive computation {/*cache-expensive-computation*/}
+### Cache an expensive computation {/_cache-expensive-computation_/}
 
 Use `cache` to skip duplicate work.
 
 ```js [[1, 7, "getUserMetrics(user)"],[2, 13, "getUserMetrics(user)"]]
-import {cache} from 'react';
-import calculateUserMetrics from 'lib/user';
+import { cache } from "react";
+import calculateUserMetrics from "lib/user";
 
 const getUserMetrics = cache(calculateUserMetrics);
 
-function Profile({user}) {
+function Profile({ user }) {
   const metrics = getUserMetrics(user);
   // ...
 }
 
-function TeamReport({users}) {
+function TeamReport({ users }) {
   for (let user in users) {
     const metrics = getUserMetrics(user);
     // ...
@@ -87,16 +87,16 @@ When `TeamReport` renders its list of `users` and reaches the same `user` object
 
 If `calculateUserMetrics` can be aborted by passing an [`AbortSignal`](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal), you can use [`cacheSignal()`](/reference/react/cacheSignal) to cancel the expensive computation if React has finished rendering. `calculateUserMetrics` may already handle cancellation internally by using `cacheSignal` directly.
 
-##### Calling different memoized functions will read from different caches. {/*pitfall-different-memoized-functions*/}
+##### Calling different memoized functions will read from different caches. {/_pitfall-different-memoized-functions_/}
 
 To access the same cache, components must call the same memoized function.
 
 ```js [[1, 7, "getWeekReport"], [1, 7, "cache(calculateWeekReport)"], [1, 8, "getWeekReport"]]
 // Temperature.js
-import {cache} from 'react';
-import {calculateWeekReport} from './report';
+import { cache } from "react";
+import { calculateWeekReport } from "./report";
 
-export function Temperature({cityData}) {
+export function Temperature({ cityData }) {
   // 🚩 Wrong: Calling `cache` in component creates new `getWeekReport` for each render
   const getWeekReport = cache(calculateWeekReport);
   const report = getWeekReport(cityData);
@@ -106,13 +106,13 @@ export function Temperature({cityData}) {
 
 ```js [[2, 6, "getWeekReport"], [2, 6, "cache(calculateWeekReport)"], [2, 9, "getWeekReport"]]
 // Precipitation.js
-import {cache} from 'react';
-import {calculateWeekReport} from './report';
+import { cache } from "react";
+import { calculateWeekReport } from "./report";
 
 // 🚩 Wrong: `getWeekReport` is only accessible for `Precipitation` component.
 const getWeekReport = cache(calculateWeekReport);
 
-export function Precipitation({cityData}) {
+export function Precipitation({ cityData }) {
   const report = getWeekReport(cityData);
   // ...
 }
@@ -126,27 +126,27 @@ To maximize cache hits and reduce work, the two components should call the same 
 
 ```js [[3, 5, "export default cache(calculateWeekReport)"]]
 // getWeekReport.js
-import {cache} from 'react';
-import {calculateWeekReport} from './report';
+import { cache } from "react";
+import { calculateWeekReport } from "./report";
 
 export default cache(calculateWeekReport);
 ```
 
 ```js [[3, 2, "getWeekReport", 0], [3, 5, "getWeekReport"]]
 // Temperature.js
-import getWeekReport from './getWeekReport';
+import getWeekReport from "./getWeekReport";
 
-export default function Temperature({cityData}) {
-	const report = getWeekReport(cityData);
+export default function Temperature({ cityData }) {
+  const report = getWeekReport(cityData);
   // ...
 }
 ```
 
 ```js [[3, 2, "getWeekReport", 0], [3, 5, "getWeekReport"]]
 // Precipitation.js
-import getWeekReport from './getWeekReport';
+import getWeekReport from "./getWeekReport";
 
-export default function Precipitation({cityData}) {
+export default function Precipitation({ cityData }) {
   const report = getWeekReport(cityData);
   // ...
 }
@@ -154,26 +154,26 @@ export default function Precipitation({cityData}) {
 
 Here, both components call the same memoized function exported from `./getWeekReport.js` to read and write to the same cache.
 
-### Share a snapshot of data {/*take-and-share-snapshot-of-data*/}
+### Share a snapshot of data {/_take-and-share-snapshot-of-data_/}
 
 To share a snapshot of data between components, call `cache` with a data-fetching function like `fetch`. When multiple components make the same data fetch, only one request is made and the data returned is cached and shared across components. All components refer to the same snapshot of data across the server render.
 
 ```js [[1, 4, "city"], [1, 5, "fetchTemperature(city)"], [2, 4, "getTemperature"], [2, 9, "getTemperature"], [1, 9, "city"], [2, 14, "getTemperature"], [1, 14, "city"]]
-import {cache} from 'react';
-import {fetchTemperature} from './api.js';
+import { cache } from "react";
+import { fetchTemperature } from "./api.js";
 
 const getTemperature = cache(async (city) => {
-	return await fetchTemperature(city);
+  return await fetchTemperature(city);
 });
 
-async function AnimatedWeatherCard({city}) {
-	const temperature = await getTemperature(city);
-	// ...
+async function AnimatedWeatherCard({ city }) {
+  const temperature = await getTemperature(city);
+  // ...
 }
 
-async function MinimalWeatherCard({city}) {
-	const temperature = await getTemperature(city);
-	// ...
+async function MinimalWeatherCard({ city }) {
+  const temperature = await getTemperature(city);
+  // ...
 }
 ```
 
@@ -186,15 +186,15 @@ The city acts as a cache key.
 Asynchronous rendering is only supported for Server Components.
 
 ```js [[3, 1, "async"], [3, 2, "await"]]
-async function AnimatedWeatherCard({city}) {
-	const temperature = await getTemperature(city);
-	// ...
+async function AnimatedWeatherCard({ city }) {
+  const temperature = await getTemperature(city);
+  // ...
 }
 ```
 
 To render components that use asynchronous data in Client Components, see [`use()` documentation](/reference/react/use).
 
-### Preload data {/*preload-data*/}
+### Preload data {/_preload-data_/}
 
 By caching a long-running data fetch, you can kick off asynchronous work prior to rendering the component.
 
@@ -203,7 +203,7 @@ const getUser = cache(async (id) => {
   return await db.user.query(id);
 });
 
-async function Profile({id}) {
+async function Profile({ id }) {
   const user = await getUser(id);
   return (
     <section>
@@ -213,7 +213,7 @@ async function Profile({id}) {
   );
 }
 
-function Page({id}) {
+function Page({ id }) {
   // ✅ Good: start fetching the user data
   getUser(id);
   // ... some computational work
@@ -227,11 +227,11 @@ function Page({id}) {
 
 When rendering `Page`, the component calls `getUser` but note that it doesn't use the returned data. This early `getUser` call kicks off the asynchronous database query that occurs while `Page` is doing other computational work and rendering children.
 
-When rendering `Profile`, we call `getUser` again. If the initial `getUser` call has already returned and cached the user data, when `Profile` asks and waits for this data, it can simply read from the cache without requiring another remote procedure call. If the  initial data request hasn't been completed, preloading data in this pattern reduces delay in data-fetching.
+When rendering `Profile`, we call `getUser` again. If the initial `getUser` call has already returned and cached the user data, when `Profile` asks and waits for this data, it can simply read from the cache without requiring another remote procedure call. If the initial data request hasn't been completed, preloading data in this pattern reduces delay in data-fetching.
 
-#### Caching asynchronous work {/*caching-asynchronous-work*/}
+#### Caching asynchronous work {/_caching-asynchronous-work_/}
 
-When evaluating an [asynchronous function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function), you will receive a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) for that work. The promise holds the state of that work (*pending*, *fulfilled*, *failed*) and its eventual settled result.
+When evaluating an [asynchronous function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function), you will receive a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) for that work. The promise holds the state of that work (_pending_, _fulfilled_, _failed_) and its eventual settled result.
 
 In this example, the asynchronous function `fetchData` returns a promise that is awaiting the `fetch`.
 
@@ -254,25 +254,25 @@ In calling `getData` the first time, the promise returned from `fetchData` is ca
 
 Notice that the first `getData` call does not `await` whereas the second does. [`await`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await) is a JavaScript operator that will wait and return the settled result of the promise. The first `getData` call simply initiates the `fetch` to cache the promise for the second `getData` to look-up.
 
-If by the second call the promise is still *pending*, then `await` will pause for the result. The optimization is that while we wait on the `fetch`, React can continue with computational work, thus reducing the wait time for the second call.
+If by the second call the promise is still _pending_, then `await` will pause for the result. The optimization is that while we wait on the `fetch`, React can continue with computational work, thus reducing the wait time for the second call.
 
-If the promise is already settled, either to an error or the *fulfilled* result, `await` will return that value immediately. In both outcomes, there is a performance benefit.
+If the promise is already settled, either to an error or the _fulfilled_ result, `await` will return that value immediately. In both outcomes, there is a performance benefit.
 
-##### Calling a memoized function outside of a component will not use the cache. {/*pitfall-memoized-call-outside-component*/}
+##### Calling a memoized function outside of a component will not use the cache. {/_pitfall-memoized-call-outside-component_/}
 
 ```jsx [[1, 3, "getUser"]]
-import {cache} from 'react';
+import { cache } from "react";
 
 const getUser = cache(async (userId) => {
   return await db.user.query(userId);
 });
 
 // 🚩 Wrong: Calling memoized function outside of component will not memoize.
-getUser('demo-id');
+getUser("demo-id");
 
 async function DemoProfile() {
   // ✅ Good: `getUser` will memoize.
-  const user = await getUser('demo-id');
+  const user = await getUser("demo-id");
   return <Profile user={user} />;
 }
 ```
@@ -281,18 +281,18 @@ React only provides cache access to the memoized function in a component. When c
 
 This is because cache access is provided through a [context](/learn/passing-data-deeply-with-context) which is only accessible from a component.
 
-#### When should I use `cache`, [`memo`](/reference/react/memo), or [`useMemo`](/reference/react/useMemo)? {/*cache-memo-usememo*/}
+#### When should I use `cache`, [`memo`](/reference/react/memo), or [`useMemo`](/reference/react/useMemo)? {/_cache-memo-usememo_/}
 
 All mentioned APIs offer memoization but the difference is what they're intended to memoize, who can access the cache, and when their cache is invalidated.
 
-#### `useMemo` {/*deep-dive-use-memo*/}
+#### `useMemo` {/_deep-dive-use-memo_/}
 
 In general, you should use [`useMemo`](/reference/react/useMemo) for caching an expensive computation in a Client Component across renders. As an example, to memoize a transformation of data within a component.
 
 ```jsx {expectedErrors: {'react-compiler': [4]}} {4}
-'use client';
+"use client";
 
-function WeatherReport({record}) {
+function WeatherReport({ record }) {
   const avgTemp = useMemo(() => calculateAvg(record), record);
   // ...
 }
@@ -312,14 +312,14 @@ In this example, `App` renders two `WeatherReport`s with the same record. Even t
 
 However, `useMemo` does ensure that if `App` re-renders and the `record` object doesn't change, each component instance would skip work and use the memoized value of `avgTemp`. `useMemo` will only cache the last computation of `avgTemp` with the given dependencies.
 
-#### `cache` {/*deep-dive-cache*/}
+#### `cache` {/_deep-dive-cache_/}
 
 In general, you should use `cache` in Server Components to memoize work that can be shared across components.
 
 ```js [[1, 12, "<WeatherReport city={city} />"], [3, 13, "<WeatherReport city={city} />"], [2, 1, "cache(fetchReport)"]]
 const cachedFetchReport = cache(fetchReport);
 
-function WeatherReport({city}) {
+function WeatherReport({ city }) {
   const report = cachedFetchReport(city);
   // ...
 }
@@ -339,14 +339,14 @@ Re-writing the previous example to use `cache`, in this case the second instance
 
 At this time, `cache` should only be used in Server Components and the cache will be invalidated across server requests.
 
-#### `memo` {/*deep-dive-memo*/}
+#### `memo` {/_deep-dive-memo_/}
 
 You should use [`memo`](reference/react/memo) to prevent a component re-rendering if its props are unchanged.
 
 ```js
-'use client';
+"use client";
 
-function WeatherReport({record}) {
+function WeatherReport({ record }) {
   const avgTemp = calculateAvg(record);
   // ...
 }
@@ -368,11 +368,11 @@ In this example, both `MemoWeatherReport` components will call `calculateAvg` wh
 
 Compared to `useMemo`, `memo` memoizes the component render based on props vs. specific computations. Similar to `useMemo`, the memoized component only caches the last render with the last prop values. Once the props change, the cache invalidates and the component re-renders.
 
-***
+---
 
-## Troubleshooting {/*troubleshooting*/}
+## Troubleshooting {/_troubleshooting_/}
 
-### My memoized function still runs even though I've called it with the same arguments {/*memoized-function-still-runs*/}
+### My memoized function still runs even though I've called it with the same arguments {/_memoized-function-still-runs_/}
 
 See prior mentioned pitfalls
 
@@ -386,7 +386,7 @@ If your arguments are not [primitives](https://developer.mozilla.org/en-US/docs/
 When calling a memoized function, React will look up the input arguments to see if a result is already cached. React will use shallow equality of the arguments to determine if there is a cache hit.
 
 ```js
-import {cache} from 'react';
+import { cache } from "react";
 
 const calculateNorm = cache((vector) => {
   // ...
@@ -413,7 +413,7 @@ In this case the two `MapMarker`s look like they're doing the same work and call
 React will call [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) on the input to verify if there is a cache hit.
 
 ```js {3,9}
-import {cache} from 'react';
+import { cache } from "react";
 
 const calculateNorm = cache((x, y, z) => {
   // ...
@@ -440,7 +440,7 @@ One way to address this could be to pass the vector dimensions to `calculateNorm
 Another solution may be to pass the vector object itself as a prop to the component. We'll need to pass the same object to both component instances.
 
 ```js {3,9,14}
-import {cache} from 'react';
+import { cache } from "react";
 
 const calculateNorm = cache((vector) => {
   // ...
@@ -463,7 +463,7 @@ function App() {
 }
 ```
 
-***
+---
 
 ## Sitemap
 

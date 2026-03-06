@@ -7,15 +7,15 @@ The `unauthorized` function throws an error that renders a Next.js 401 error pag
 To start using `unauthorized`, enable the experimental [`authInterrupts`](/docs/app/api-reference/config/next-config-js/authInterrupts) configuration option in your `next.config.js` file:
 
 ```ts filename="next.config.ts" switcher
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   experimental: {
     authInterrupts: true,
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 ```js filename="next.config.js" switcher
@@ -23,20 +23,20 @@ module.exports = {
   experimental: {
     authInterrupts: true,
   },
-}
+};
 ```
 
 `unauthorized` can be invoked in [Server Components](/docs/app/getting-started/server-and-client-components), [Server Functions](/docs/app/getting-started/updating-data), and [Route Handlers](/docs/app/api-reference/file-conventions/route).
 
 ```tsx filename="app/dashboard/page.tsx" switcher
-import { verifySession } from '@/app/lib/dal'
-import { unauthorized } from 'next/navigation'
+import { verifySession } from "@/app/lib/dal";
+import { unauthorized } from "next/navigation";
 
 export default async function DashboardPage() {
-  const session = await verifySession()
+  const session = await verifySession();
 
   if (!session) {
-    unauthorized()
+    unauthorized();
   }
 
   // Render the dashboard for authenticated users
@@ -45,19 +45,19 @@ export default async function DashboardPage() {
       <h1>Welcome to the Dashboard</h1>
       <p>Hi, {session.user.name}.</p>
     </main>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/dashboard/page.js" switcher
-import { verifySession } from '@/app/lib/dal'
-import { unauthorized } from 'next/navigation'
+import { verifySession } from "@/app/lib/dal";
+import { unauthorized } from "next/navigation";
 
 export default async function DashboardPage() {
-  const session = await verifySession()
+  const session = await verifySession();
 
   if (!session) {
-    unauthorized()
+    unauthorized();
   }
 
   // Render the dashboard for authenticated users
@@ -66,7 +66,7 @@ export default async function DashboardPage() {
       <h1>Welcome to the Dashboard</h1>
       <p>Hi, {session.user.name}.</p>
     </main>
-  )
+  );
 }
 ```
 
@@ -81,37 +81,37 @@ export default async function DashboardPage() {
 You can use `unauthorized` function to display the `unauthorized.js` file with a login UI.
 
 ```tsx filename="app/dashboard/page.tsx" switcher
-import { verifySession } from '@/app/lib/dal'
-import { unauthorized } from 'next/navigation'
+import { verifySession } from "@/app/lib/dal";
+import { unauthorized } from "next/navigation";
 
 export default async function DashboardPage() {
-  const session = await verifySession()
+  const session = await verifySession();
 
   if (!session) {
-    unauthorized()
+    unauthorized();
   }
 
-  return <div>Dashboard</div>
+  return <div>Dashboard</div>;
 }
 ```
 
 ```jsx filename="app/dashboard/page.js" switcher
-import { verifySession } from '@/app/lib/dal'
-import { unauthorized } from 'next/navigation'
+import { verifySession } from "@/app/lib/dal";
+import { unauthorized } from "next/navigation";
 
 export default async function DashboardPage() {
-  const session = await verifySession()
+  const session = await verifySession();
 
   if (!session) {
-    unauthorized()
+    unauthorized();
   }
 
-  return <div>Dashboard</div>
+  return <div>Dashboard</div>;
 }
 ```
 
 ```tsx filename="app/unauthorized.tsx" switcher
-import Login from '@/app/components/Login'
+import Login from "@/app/components/Login";
 
 export default function UnauthorizedPage() {
   return (
@@ -120,12 +120,12 @@ export default function UnauthorizedPage() {
       <p>Please log in to access this page.</p>
       <Login />
     </main>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/unauthorized.js" switcher
-import Login from '@/app/components/Login'
+import Login from "@/app/components/Login";
 
 export default function UnauthorizedPage() {
   return (
@@ -134,7 +134,7 @@ export default function UnauthorizedPage() {
       <p>Please log in to access this page.</p>
       <Login />
     </main>
-  )
+  );
 }
 ```
 
@@ -143,18 +143,18 @@ export default function UnauthorizedPage() {
 You can invoke `unauthorized` in Server Actions to ensure only authenticated users can perform specific mutations.
 
 ```ts filename="app/actions/update-profile.ts" switcher
-'use server'
+"use server";
 
-import { verifySession } from '@/app/lib/dal'
-import { unauthorized } from 'next/navigation'
-import db from '@/app/lib/db'
+import { verifySession } from "@/app/lib/dal";
+import { unauthorized } from "next/navigation";
+import db from "@/app/lib/db";
 
 export async function updateProfile(data: FormData) {
-  const session = await verifySession()
+  const session = await verifySession();
 
   // If the user is not authenticated, return a 401
   if (!session) {
-    unauthorized()
+    unauthorized();
   }
 
   // Proceed with mutation
@@ -163,18 +163,18 @@ export async function updateProfile(data: FormData) {
 ```
 
 ```js filename="app/actions/update-profile.js" switcher
-'use server'
+"use server";
 
-import { verifySession } from '@/app/lib/dal'
-import { unauthorized } from 'next/navigation'
-import db from '@/app/lib/db'
+import { verifySession } from "@/app/lib/dal";
+import { unauthorized } from "next/navigation";
+import db from "@/app/lib/db";
 
 export async function updateProfile(data) {
-  const session = await verifySession()
+  const session = await verifySession();
 
   // If the user is not authenticated, return a 401
   if (!session) {
-    unauthorized()
+    unauthorized();
   }
 
   // Proceed with mutation
@@ -187,17 +187,17 @@ export async function updateProfile(data) {
 You can use `unauthorized` in Route Handlers to ensure only authenticated users can access the endpoint.
 
 ```tsx filename="app/api/profile/route.ts" switcher
-import { NextRequest, NextResponse } from 'next/server'
-import { verifySession } from '@/app/lib/dal'
-import { unauthorized } from 'next/navigation'
+import { NextRequest, NextResponse } from "next/server";
+import { verifySession } from "@/app/lib/dal";
+import { unauthorized } from "next/navigation";
 
 export async function GET(req: NextRequest): Promise<NextResponse> {
   // Verify the user's session
-  const session = await verifySession()
+  const session = await verifySession();
 
   // If no session exists, return a 401 and render unauthorized.tsx
   if (!session) {
-    unauthorized()
+    unauthorized();
   }
 
   // Fetch data
@@ -206,15 +206,15 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
 ```
 
 ```jsx filename="app/api/profile/route.js" switcher
-import { verifySession } from '@/app/lib/dal'
-import { unauthorized } from 'next/navigation'
+import { verifySession } from "@/app/lib/dal";
+import { unauthorized } from "next/navigation";
 
 export async function GET() {
-  const session = await verifySession()
+  const session = await verifySession();
 
   // If the user is not authenticated, return a 401 and render unauthorized.tsx
   if (!session) {
-    unauthorized()
+    unauthorized();
   }
 
   // Fetch data
@@ -231,4 +231,4 @@ export async function GET() {
 - [unauthorized.js](/docs/app/api-reference/file-conventions/unauthorized)
   - API reference for the unauthorized.js special file.
 
-# unstable\_cache
+# unstable_cache

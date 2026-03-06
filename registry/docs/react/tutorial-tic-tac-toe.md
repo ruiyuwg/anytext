@@ -11,14 +11,14 @@ The tutorial is divided into several sections:
 - [Completing the game](#completing-the-game) will teach you **the most common techniques** in React development.
 - [Adding time travel](#adding-time-travel) will give you **a deeper insight** into the unique strengths of React.
 
-### What are you building? {/*what-are-you-building*/}
+### What are you building? {/_what-are-you-building_/}
 
 In this tutorial, you'll build an interactive tic-tac-toe game with React.
 
 You can see what it will look like when you're finished here:
 
 ```js src/App.js
-import { useState } from 'react';
+import { useState } from "react";
 
 function Square({ value, onSquareClick }) {
   return (
@@ -35,9 +35,9 @@ function Board({ xIsNext, squares, onPlay }) {
     }
     const nextSquares = squares.slice();
     if (xIsNext) {
-      nextSquares[i] = 'X';
+      nextSquares[i] = "X";
     } else {
-      nextSquares[i] = 'O';
+      nextSquares[i] = "O";
     }
     onPlay(nextSquares);
   }
@@ -45,9 +45,9 @@ function Board({ xIsNext, squares, onPlay }) {
   const winner = calculateWinner(squares);
   let status;
   if (winner) {
-    status = 'Winner: ' + winner;
+    status = "Winner: " + winner;
   } else {
-    status = 'Next player: ' + (xIsNext ? 'X' : 'O');
+    status = "Next player: " + (xIsNext ? "X" : "O");
   }
 
   return (
@@ -91,9 +91,9 @@ export default function Game() {
   const moves = history.map((squares, move) => {
     let description;
     if (move > 0) {
-      description = 'Go to move #' + move;
+      description = "Go to move #" + move;
     } else {
-      description = 'Go to game start';
+      description = "Go to game start";
     }
     return (
       <li key={move}>
@@ -163,7 +163,7 @@ body {
 
 .board-row:after {
   clear: both;
-  content: '';
+  content: "";
   display: table;
 }
 
@@ -186,7 +186,7 @@ We recommend that you check out the tic-tac-toe game above before continuing wit
 
 Once you've played around with the finished tic-tac-toe game, keep scrolling. You'll start with a simpler template in this tutorial. Our next step is to set you up so that you can start building the game.
 
-## Setup for the tutorial {/*setup-for-the-tutorial*/}
+## Setup for the tutorial {/_setup-for-the-tutorial_/}
 
 In the live code editor below, click **Fork** in the top-right corner to open the editor in a new tab using the website CodeSandbox. CodeSandbox lets you write code in your browser and preview how your users will see the app you've created. The new tab should display an empty square and the starter code for this tutorial.
 
@@ -224,7 +224,7 @@ body {
 
 .board-row:after {
   clear: both;
-  content: '';
+  content: "";
   display: table;
 }
 
@@ -251,21 +251,21 @@ You can also follow this tutorial using your local development environment. To d
 
 If you get stuck, don't let this stop you! Follow along online instead and try a local setup again later.
 
-## Overview {/*overview*/}
+## Overview {/_overview_/}
 
 Now that you're set up, let's get an overview of React!
 
-### Inspecting the starter code {/*inspecting-the-starter-code*/}
+### Inspecting the starter code {/_inspecting-the-starter-code_/}
 
 In CodeSandbox you'll see three main sections:
 
 ![CodeSandbox with starter code](../images/tutorial/react-starter-code-codesandbox.png)
 
-1. The *Files* section with a list of files like `App.js`, `index.js`, `styles.css` in `src` folder and a folder called `public`
-2. The *code editor* where you'll see the source code of your selected file
-3. The *browser* section where you'll see how the code you've written will be displayed
+1. The _Files_ section with a list of files like `App.js`, `index.js`, `styles.css` in `src` folder and a folder called `public`
+2. The _code editor_ where you'll see the source code of your selected file
+3. The _browser_ section where you'll see how the code you've written will be displayed
 
-The `App.js` file should be selected in the *Files* section. The contents of that file in the *code editor* should be:
+The `App.js` file should be selected in the _Files_ section. The contents of that file in the _code editor_ should be:
 
 ```jsx
 export default function Square() {
@@ -273,15 +273,15 @@ export default function Square() {
 }
 ```
 
-The *browser* section should be displaying a square with an X in it like this:
+The _browser_ section should be displaying a square with an X in it like this:
 
 ![x-filled square](../images/tutorial/x-filled-square.png)
 
 Now let's have a look at the files in the starter code.
 
-#### `App.js` {/*appjs*/}
+#### `App.js` {/_appjs_/}
 
-The code in `App.js` creates a *component*. In React, a component is a piece of reusable code that represents a part of a user interface. Components are used to render, manage, and update the UI elements in your application. Let's look at the component line by line to see what's going on:
+The code in `App.js` creates a _component_. In React, a component is a piece of reusable code that represents a part of a user interface. Components are used to render, manage, and update the UI elements in your application. Let's look at the component line by line to see what's going on:
 
 ```js {1}
 export default function Square() {
@@ -297,22 +297,22 @@ export default function Square() {
 }
 ```
 
-The second line returns a button. The `return` JavaScript keyword means whatever comes after is returned as a value to the caller of the function. `<button>` is a *JSX element*. A JSX element is a combination of JavaScript code and HTML tags that describes what you'd like to display. `className="square"` is a button property or *prop* that tells CSS how to style the button. `X` is the text displayed inside of the button and `</button>` closes the JSX element to indicate that any following content shouldn't be placed inside the button.
+The second line returns a button. The `return` JavaScript keyword means whatever comes after is returned as a value to the caller of the function. `<button>` is a _JSX element_. A JSX element is a combination of JavaScript code and HTML tags that describes what you'd like to display. `className="square"` is a button property or _prop_ that tells CSS how to style the button. `X` is the text displayed inside of the button and `</button>` closes the JSX element to indicate that any following content shouldn't be placed inside the button.
 
-#### `styles.css` {/*stylescss*/}
+#### `styles.css` {/_stylescss_/}
 
-Click on the file labeled `styles.css` in the *Files* section of CodeSandbox. This file defines the styles for your React app. The first two *CSS selectors* (`*` and `body`) define the style of large parts of your app while the `.square` selector defines the style of any component where the `className` property is set to `square`. In your code, that would match the button from your Square component in the `App.js` file.
+Click on the file labeled `styles.css` in the _Files_ section of CodeSandbox. This file defines the styles for your React app. The first two _CSS selectors_ (`*` and `body`) define the style of large parts of your app while the `.square` selector defines the style of any component where the `className` property is set to `square`. In your code, that would match the button from your Square component in the `App.js` file.
 
-#### `index.js` {/*indexjs*/}
+#### `index.js` {/_indexjs_/}
 
-Click on the file labeled `index.js` in the *Files* section of CodeSandbox. You won't be editing this file during the tutorial but it is the bridge between the component you created in the `App.js` file and the web browser.
+Click on the file labeled `index.js` in the _Files_ section of CodeSandbox. You won't be editing this file during the tutorial but it is the bridge between the component you created in the `App.js` file and the web browser.
 
 ```jsx
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import './styles.css';
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./styles.css";
 
-import App from './App';
+import App from "./App";
 ```
 
 Lines 1-5 bring all the necessary pieces together:
@@ -324,7 +324,7 @@ Lines 1-5 bring all the necessary pieces together:
 
 The remainder of the file brings all the pieces together and injects the final product into `index.html` in the `public` folder.
 
-### Building the board {/*building-the-board*/}
+### Building the board {/_building-the-board_/}
 
 Let's get back to `App.js`. This is where you'll spend the rest of the tutorial.
 
@@ -340,7 +340,7 @@ You'll get this error:
 
 /src/App.js: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX Fragment `<>...</>`?
 
-React components need to return a single JSX element and not multiple adjacent JSX elements like two buttons. To fix this you can use *Fragments* (`<>` and `</>`) to wrap multiple adjacent JSX elements like this:
+React components need to return a single JSX element and not multiple adjacent JSX elements like two buttons. To fix this you can use _Fragments_ (`<>` and `</>`) to wrap multiple adjacent JSX elements like this:
 
 ```js {3-6}
 export default function Square() {
@@ -455,7 +455,7 @@ body {
 
 .board-row:after {
   clear: both;
-  content: '';
+  content: "";
   display: table;
 }
 
@@ -474,7 +474,7 @@ body {
 
 Psssst... That's a lot to type! It's okay to copy and paste code from this page. However, if you're up for a little challenge, we recommend only copying code that you've manually typed at least once yourself.
 
-### Passing data through props {/*passing-data-through-props*/}
+### Passing data through props {/_passing-data-through-props_/}
 
 Next, you'll want to change the value of a square from empty to "X" when the user clicks on the square. With how you've built the board so far you would need to copy-paste the code that updates the square nine times (once for each square you have)! Instead of copy-pasting, React's component architecture allows you to create a reusable component to avoid messy, duplicated code.
 
@@ -523,7 +523,7 @@ Let's take a look:
 
 ![one-filled board](../images/tutorial/board-filled-with-ones.png)
 
-Oh no! You lost the numbered squares you had before. Now each square says "1". To fix this, you will use *props* to pass the value each square should have from the parent component (`Board`) to its child (`Square`).
+Oh no! You lost the numbered squares you had before. Now each square says "1". To fix this, you will use _props_ to pass the value each square should have from the parent component (`Board`) to its child (`Square`).
 
 Update the `Square` component to read the `value` prop that you'll pass from the `Board`:
 
@@ -647,7 +647,7 @@ body {
 
 .board-row:after {
   clear: both;
-  content: '';
+  content: "";
   display: table;
 }
 
@@ -664,32 +664,29 @@ body {
 }
 ```
 
-### Making an interactive component {/*making-an-interactive-component*/}
+### Making an interactive component {/_making-an-interactive-component_/}
 
 Let's fill the `Square` component with an `X` when you click it. Declare a function called `handleClick` inside of the `Square`. Then, add `onClick` to the props of the button JSX element returned from the `Square`:
 
 ```js {2-4,9}
 function Square({ value }) {
   function handleClick() {
-    console.log('clicked!');
+    console.log("clicked!");
   }
 
   return (
-    <button
-      className="square"
-      onClick={handleClick}
-    >
+    <button className="square" onClick={handleClick}>
       {value}
     </button>
   );
 }
 ```
 
-If you click on a square now, you should see a log saying `"clicked!"` in the *Console* tab at the bottom of the *Browser* section in CodeSandbox. Clicking the square more than once will log `"clicked!"` again. Repeated console logs with the same message will not create more lines in the console. Instead, you will see an incrementing counter next to your first `"clicked!"` log.
+If you click on a square now, you should see a log saying `"clicked!"` in the _Console_ tab at the bottom of the _Browser_ section in CodeSandbox. Clicking the square more than once will log `"clicked!"` again. Repeated console logs with the same message will not create more lines in the console. Instead, you will see an incrementing counter next to your first `"clicked!"` log.
 
 If you are following this tutorial using your local development environment, you need to open your browser's Console. For example, if you use the Chrome browser, you can view the Console with the keyboard shortcut **Shift + Ctrl + J** (on Windows/Linux) or **Option + ⌘ + J** (on macOS).
 
-As a next step, you want the Square component to "remember" that it got clicked, and fill it with an "X" mark. To "remember" things, components use *state*.
+As a next step, you want the Square component to "remember" that it got clicked, and fill it with an "X" mark. To "remember" things, components use _state_.
 
 React provides a special function called `useState` that you can call from your component to let it "remember" things. Let's store the current value of the `Square` in state, and change it when the `Square` is clicked.
 
@@ -741,14 +738,11 @@ function Square() {
   const [value, setValue] = useState(null);
 
   function handleClick() {
-    setValue('X');
+    setValue("X");
   }
 
   return (
-    <button
-      className="square"
-      onClick={handleClick}
-    >
+    <button className="square" onClick={handleClick}>
       {value}
     </button>
   );
@@ -764,20 +758,17 @@ Each Square has its own state: the `value` stored in each Square is completely i
 After you've made the above changes, your code will look like this:
 
 ```js src/App.js
-import { useState } from 'react';
+import { useState } from "react";
 
 function Square() {
   const [value, setValue] = useState(null);
 
   function handleClick() {
-    setValue('X');
+    setValue("X");
   }
 
   return (
-    <button
-      className="square"
-      onClick={handleClick}
-    >
+    <button className="square" onClick={handleClick}>
       {value}
     </button>
   );
@@ -834,7 +825,7 @@ body {
 
 .board-row:after {
   clear: both;
-  content: '';
+  content: "";
   display: table;
 }
 
@@ -851,9 +842,9 @@ body {
 }
 ```
 
-### React Developer Tools {/*react-developer-tools*/}
+### React Developer Tools {/_react-developer-tools_/}
 
-React DevTools let you check the props and the state of your React components. You can find the React DevTools tab at the bottom of the *browser* section in CodeSandbox:
+React DevTools let you check the props and the state of your React components. You can find the React DevTools tab at the bottom of the _browser_ section in CodeSandbox:
 
 ![React DevTools in CodeSandbox](../images/tutorial/codesandbox-devtools.png)
 
@@ -861,13 +852,13 @@ To inspect a particular component on the screen, use the button in the top left 
 
 ![Selecting components on the page with React DevTools](../images/tutorial/devtools-select.gif)
 
-For local development, React DevTools is available as a [Chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en), [Firefox](https://addons.mozilla.org/en-US/firefox/addon/react-devtools/), and [Edge](https://microsoftedge.microsoft.com/addons/detail/react-developer-tools/gpphkfbcpidddadnkolkpfckpihlkkil) browser extension. Install it, and the *Components* tab will appear in your browser Developer Tools for sites using React.
+For local development, React DevTools is available as a [Chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en), [Firefox](https://addons.mozilla.org/en-US/firefox/addon/react-devtools/), and [Edge](https://microsoftedge.microsoft.com/addons/detail/react-developer-tools/gpphkfbcpidddadnkolkpfckpihlkkil) browser extension. Install it, and the _Components_ tab will appear in your browser Developer Tools for sites using React.
 
-## Completing the game {/*completing-the-game*/}
+## Completing the game {/_completing-the-game_/}
 
 By this point, you have all the basic building blocks for your tic-tac-toe game. To have a complete game, you now need to alternate placing "X"s and "O"s on the board, and you need a way to determine a winner.
 
-### Lifting state up {/*lifting-state-up*/}
+### Lifting state up {/_lifting-state-up_/}
 
 Currently, each `Square` component maintains a part of the game's state. To check for a winner in a tic-tac-toe game, the `Board` would need to somehow know the state of each of the 9 `Square` components.
 
@@ -892,7 +883,7 @@ export default function Board() {
 `Array(9).fill(null)` creates an array with nine elements and sets each of them to `null`. The `useState()` call around it declares a `squares` state variable that's initially set to that array. Each entry in the array corresponds to the value of a square. When you fill the board in later, the `squares` array will look like this:
 
 ```jsx
-['O', null, 'X', 'X', 'X', 'O', 'O', null, null]
+["O", null, "X", "X", "X", "O", "O", null, null];
 ```
 
 Now your `Board` component needs to pass the `value` prop down to each `Square` that it renders:
@@ -925,7 +916,7 @@ export default function Board() {
 Next, you'll edit the `Square` component to receive the `value` prop from the Board component. This will require removing the Square component's own stateful tracking of `value` and the button's `onClick` prop:
 
 ```js {1,2}
-function Square({value}) {
+function Square({ value }) {
   return <button className="square">{value}</button>;
 }
 ```
@@ -937,7 +928,7 @@ At this point you should see an empty tic-tac-toe board:
 And your code should look like this:
 
 ```js src/App.js
-import { useState } from 'react';
+import { useState } from "react";
 
 function Square({ value }) {
   return <button className="square">{value}</button>;
@@ -995,7 +986,7 @@ body {
 
 .board-row:after {
   clear: both;
-  content: '';
+  content: "";
   display: table;
 }
 
@@ -1079,7 +1070,7 @@ Calling the `setSquares` function lets React know the state of the component has
 
 JavaScript supports [closures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures) which means an inner function (e.g. `handleClick`) has access to variables and functions defined in an outer function (e.g. `Board`). The `handleClick` function can read the `squares` state and call the `setSquares` method because they are both defined inside of the `Board` function.
 
-Now you can add X's to the board...  but only to the upper left square. Your `handleClick` function is hardcoded to update the index for the upper left square (`0`). Let's update `handleClick` to be able to update any square. Add an argument `i` to the `handleClick` function that takes the index of the square to update:
+Now you can add X's to the board... but only to the upper left square. Your `handleClick` function is hardcoded to update the index for the upper left square (`0`). Let's update `handleClick` to be able to update any square. Add an argument `i` to the `handleClick` function that takes the index of the square to update:
 
 ```js {4,6}
 export default function Board() {
@@ -1109,7 +1100,7 @@ Too many re-renders. React limits the number of renders to prevent an infinite l
 
 Why didn't this problem happen earlier?
 
-When you were passing `onSquareClick={handleClick}`, you were passing the `handleClick` function down as a prop. You were not calling it! But now you are *calling* that function right away--notice the parentheses in `handleClick(0)`--and that's why it runs too early. You don't *want* to call `handleClick` until the user clicks!
+When you were passing `onSquareClick={handleClick}`, you were passing the `handleClick` function down as a prop. You were not calling it! But now you are _calling_ that function right away--notice the parentheses in `handleClick(0)`--and that's why it runs too early. You don't _want_ to call `handleClick` until the user clicks!
 
 You could fix this by creating a function like `handleFirstSquareClick` that calls `handleClick(0)`, a function like `handleSecondSquareClick` that calls `handleClick(1)`, and so on. You would pass (rather than call) these functions down as props like `onSquareClick={handleFirstSquareClick}`. This would solve the infinite loop.
 
@@ -1127,7 +1118,7 @@ export default function Board() {
 }
 ```
 
-Notice the new `() =>` syntax. Here, `() => handleClick(0)` is an *arrow function,* which is a shorter way to define functions. When the square is clicked, the code after the `=>` "arrow" will run, calling `handleClick(0)`.
+Notice the new `() =>` syntax. Here, `() => handleClick(0)` is an _arrow function,_ which is a shorter way to define functions. When the square is clicked, the code after the `=>` "arrow" will run, calling `handleClick(0)`.
 
 Now you need to update the other eight squares to call `handleClick` from the arrow functions you pass. Make sure that the argument for each call of the `handleClick` corresponds to the index of the correct square:
 
@@ -1153,7 +1144,7 @@ export default function Board() {
       </div>
     </>
   );
-};
+}
 ```
 
 Now you can again add X's to any square on the board by clicking on them:
@@ -1165,7 +1156,7 @@ But this time all the state management is handled by the `Board` component!
 This is what your code should look like:
 
 ```js src/App.js
-import { useState } from 'react';
+import { useState } from "react";
 
 function Square({ value, onSquareClick }) {
   return (
@@ -1180,7 +1171,7 @@ export default function Board() {
 
   function handleClick(i) {
     const nextSquares = squares.slice();
-    nextSquares[i] = 'X';
+    nextSquares[i] = "X";
     setSquares(nextSquares);
   }
 
@@ -1234,7 +1225,7 @@ body {
 
 .board-row:after {
   clear: both;
-  content: '';
+  content: "";
   display: table;
 }
 
@@ -1263,15 +1254,15 @@ In the end the user sees that the upper left square has changed from empty to ha
 
 The DOM `<button>` element's `onClick` attribute has a special meaning to React because it is a built-in component. For custom components like Square, the naming is up to you. You could give any name to the `Square`'s `onSquareClick` prop or `Board`'s `handleClick` function, and the code would work the same. In React, it's conventional to use `onSomething` names for props which represent events and `handleSomething` for the function definitions which handle those events.
 
-### Why immutability is important {/*why-immutability-is-important*/}
+### Why immutability is important {/_why-immutability-is-important_/}
 
 Note how in `handleClick`, you call `.slice()` to create a copy of the `squares` array instead of modifying the existing array. To explain why, we need to discuss immutability and why immutability is important to learn.
 
-There are generally two approaches to changing data. The first approach is to *mutate* the data by directly changing the data's values. The second approach is to replace the data with a new copy which has the desired changes. Here is what it would look like if you mutated the `squares` array:
+There are generally two approaches to changing data. The first approach is to _mutate_ the data by directly changing the data's values. The second approach is to replace the data with a new copy which has the desired changes. Here is what it would look like if you mutated the `squares` array:
 
 ```jsx
 const squares = [null, null, null, null, null, null, null, null, null];
-squares[0] = 'X';
+squares[0] = "X";
 // Now `squares` is ["X", null, null, null, null, null, null, null, null];
 ```
 
@@ -1279,7 +1270,7 @@ And here is what it would look like if you changed data without mutating the `sq
 
 ```jsx
 const squares = [null, null, null, null, null, null, null, null, null];
-const nextSquares = ['X', null, null, null, null, null, null, null, null];
+const nextSquares = ["X", null, null, null, null, null, null, null, null];
 // Now `squares` is unchanged, but `nextSquares` first element is 'X' rather than `null`
 ```
 
@@ -1289,7 +1280,7 @@ Immutability makes complex features much easier to implement. Later in this tuto
 
 There is also another benefit of immutability. By default, all child components re-render automatically when the state of a parent component changes. This includes even the child components that weren't affected by the change. Although re-rendering is not by itself noticeable to the user (you shouldn't actively try to avoid it!), you might want to skip re-rendering a part of the tree that clearly wasn't affected by it for performance reasons. Immutability makes it very cheap for components to compare whether their data has changed or not. You can learn more about how React chooses when to re-render a component in [the `memo` API reference](/reference/react/memo).
 
-### Taking turns {/*taking-turns*/}
+### Taking turns {/_taking-turns_/}
 
 It's now time to fix a major defect in this tic-tac-toe game: the "O"s cannot be marked on the board.
 
@@ -1336,7 +1327,7 @@ But wait, there's a problem. Try clicking on the same square multiple times:
 
 The `X` is overwritten by an `O`! While this would add a very interesting twist to the game, we're going to stick to the original rules for now.
 
-When you mark a square with an `X` or an `O` you aren't first checking to see if the square already has an `X` or `O` value. You can fix this by *returning early*. You'll check to see if the square already has an `X` or an `O`. If the square is already filled, you will `return` in the `handleClick` function early--before it tries to update the board state.
+When you mark a square with an `X` or an `O` you aren't first checking to see if the square already has an `X` or `O` value. You can fix this by _returning early_. You'll check to see if the square already has an `X` or an `O`. If the square is already filled, you will `return` in the `handleClick` function early--before it tries to update the board state.
 
 ```js {2,3,4}
 function handleClick(i) {
@@ -1351,9 +1342,9 @@ function handleClick(i) {
 Now you can only add `X`'s or `O`'s to empty squares! Here is what your code should look like at this point:
 
 ```js src/App.js
-import { useState } from 'react';
+import { useState } from "react";
 
-function Square({value, onSquareClick}) {
+function Square({ value, onSquareClick }) {
   return (
     <button className="square" onClick={onSquareClick}>
       {value}
@@ -1371,9 +1362,9 @@ export default function Board() {
     }
     const nextSquares = squares.slice();
     if (xIsNext) {
-      nextSquares[i] = 'X';
+      nextSquares[i] = "X";
     } else {
-      nextSquares[i] = 'O';
+      nextSquares[i] = "O";
     }
     setSquares(nextSquares);
     setXIsNext(!xIsNext);
@@ -1429,7 +1420,7 @@ body {
 
 .board-row:after {
   clear: both;
-  content: '';
+  content: "";
   display: table;
 }
 
@@ -1446,7 +1437,7 @@ body {
 }
 ```
 
-### Declaring a winner {/*declaring-a-winner*/}
+### Declaring a winner {/_declaring-a-winner_/}
 
 Now that the players can take turns, you'll want to show when the game is won and there are no more turns to make. To do this you'll add a helper function called `calculateWinner` that takes an array of 9 squares, checks for a winner and returns `'X'`, `'O'`, or `null` as appropriate. Don't worry too much about the `calculateWinner` function; it's not specific to React:
 
@@ -1464,7 +1455,7 @@ function calculateWinner(squares) {
     [1, 4, 7],
     [2, 5, 8],
     [0, 4, 8],
-    [2, 4, 6]
+    [2, 4, 6],
   ];
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
@@ -1512,12 +1503,12 @@ export default function Board() {
 }
 ```
 
-Congratulations! You now have a working tic-tac-toe game. And you've just learned the basics of React too. So *you* are the real winner here. Here is what the code should look like:
+Congratulations! You now have a working tic-tac-toe game. And you've just learned the basics of React too. So _you_ are the real winner here. Here is what the code should look like:
 
 ```js src/App.js
-import { useState } from 'react';
+import { useState } from "react";
 
-function Square({value, onSquareClick}) {
+function Square({ value, onSquareClick }) {
   return (
     <button className="square" onClick={onSquareClick}>
       {value}
@@ -1535,9 +1526,9 @@ export default function Board() {
     }
     const nextSquares = squares.slice();
     if (xIsNext) {
-      nextSquares[i] = 'X';
+      nextSquares[i] = "X";
     } else {
-      nextSquares[i] = 'O';
+      nextSquares[i] = "O";
     }
     setSquares(nextSquares);
     setXIsNext(!xIsNext);
@@ -1546,9 +1537,9 @@ export default function Board() {
   const winner = calculateWinner(squares);
   let status;
   if (winner) {
-    status = 'Winner: ' + winner;
+    status = "Winner: " + winner;
   } else {
-    status = 'Next player: ' + (xIsNext ? 'X' : 'O');
+    status = "Next player: " + (xIsNext ? "X" : "O");
   }
 
   return (
@@ -1622,7 +1613,7 @@ body {
 
 .board-row:after {
   clear: both;
-  content: '';
+  content: "";
   display: table;
 }
 
@@ -1639,11 +1630,11 @@ body {
 }
 ```
 
-## Adding time travel {/*adding-time-travel*/}
+## Adding time travel {/_adding-time-travel_/}
 
 As a final exercise, let's make it possible to "go back in time" to the previous moves in the game.
 
-### Storing a history of moves {/*storing-a-history-of-moves*/}
+### Storing a history of moves {/_storing-a-history-of-moves_/}
 
 If you mutated the `squares` array, implementing time travel would be very difficult.
 
@@ -1656,14 +1647,14 @@ You'll store the past `squares` arrays in another array called `history`, which 
   // Before first move
   [null, null, null, null, null, null, null, null, null],
   // After first move
-  [null, null, null, null, 'X', null, null, null, null],
+  [null, null, null, null, "X", null, null, null, null],
   // After second move
-  [null, null, null, null, 'X', null, null, null, 'O'],
+  [null, null, null, null, "X", null, null, null, "O"],
   // ...
-]
+];
 ```
 
-### Lifting state up, again {/*lifting-state-up-again*/}
+### Lifting state up, again {/_lifting-state-up-again_/}
 
 You will now write a new top-level component called `Game` to display a list of past moves. That's where you will place the `history` state that contains the entire game history.
 
@@ -1782,14 +1773,14 @@ export default function Game() {
 }
 ```
 
-Here, `[...history, nextSquares]` creates a new array that contains all the items in `history`, followed by `nextSquares`. (You can read the `...history` [*spread syntax*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) as "enumerate all the items in `history`".)
+Here, `[...history, nextSquares]` creates a new array that contains all the items in `history`, followed by `nextSquares`. (You can read the `...history` [_spread syntax_](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) as "enumerate all the items in `history`".)
 
 For example, if `history` is `[[null,null,null], ["X",null,null]]` and `nextSquares` is `["X",null,"O"]`, then the new `[...history, nextSquares]` array will be `[[null,null,null], ["X",null,null], ["X",null,"O"]]`.
 
 At this point, you've moved the state to live in the `Game` component, and the UI should be fully working, just as it was before the refactor. Here is what the code should look like at this point:
 
 ```js src/App.js
-import { useState } from 'react';
+import { useState } from "react";
 
 function Square({ value, onSquareClick }) {
   return (
@@ -1806,9 +1797,9 @@ function Board({ xIsNext, squares, onPlay }) {
     }
     const nextSquares = squares.slice();
     if (xIsNext) {
-      nextSquares[i] = 'X';
+      nextSquares[i] = "X";
     } else {
-      nextSquares[i] = 'O';
+      nextSquares[i] = "O";
     }
     onPlay(nextSquares);
   }
@@ -1816,9 +1807,9 @@ function Board({ xIsNext, squares, onPlay }) {
   const winner = calculateWinner(squares);
   let status;
   if (winner) {
-    status = 'Winner: ' + winner;
+    status = "Winner: " + winner;
   } else {
-    status = 'Next player: ' + (xIsNext ? 'X' : 'O');
+    status = "Next player: " + (xIsNext ? "X" : "O");
   }
 
   return (
@@ -1914,7 +1905,7 @@ body {
 
 .board-row:after {
   clear: both;
-  content: '';
+  content: "";
   display: table;
 }
 
@@ -1931,7 +1922,7 @@ body {
 }
 ```
 
-### Showing the past moves {/*showing-the-past-moves*/}
+### Showing the past moves {/_showing-the-past-moves_/}
 
 Since you are recording the tic-tac-toe game's history, you can now display a list of past moves to the player.
 
@@ -1940,7 +1931,7 @@ React elements like `<button>` are regular JavaScript objects; you can pass them
 You already have an array of `history` moves in state, so now you need to transform it to an array of React elements. In JavaScript, to transform one array into another, you can use the [array `map` method:](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)
 
 ```jsx
-[1, 2, 3].map((x) => x * 2) // [2, 4, 6]
+[1, 2, 3].map((x) => x * 2); // [2, 4, 6]
 ```
 
 You'll use `map` to transform your `history` of moves into React elements representing buttons on the screen, and display a list of buttons to "jump" to past moves. Let's `map` over the `history` in the Game component:
@@ -1963,9 +1954,9 @@ export default function Game() {
   const moves = history.map((squares, move) => {
     let description;
     if (move > 0) {
-      description = 'Go to move #' + move;
+      description = "Go to move #" + move;
     } else {
-      description = 'Go to game start';
+      description = "Go to game start";
     }
     return (
       <li>
@@ -1994,7 +1985,7 @@ Warning: Each child in an array or iterator should have a unique "key" prop. Che
 You'll fix this error in the next section.
 
 ```js src/App.js
-import { useState } from 'react';
+import { useState } from "react";
 
 function Square({ value, onSquareClick }) {
   return (
@@ -2011,9 +2002,9 @@ function Board({ xIsNext, squares, onPlay }) {
     }
     const nextSquares = squares.slice();
     if (xIsNext) {
-      nextSquares[i] = 'X';
+      nextSquares[i] = "X";
     } else {
-      nextSquares[i] = 'O';
+      nextSquares[i] = "O";
     }
     onPlay(nextSquares);
   }
@@ -2021,9 +2012,9 @@ function Board({ xIsNext, squares, onPlay }) {
   const winner = calculateWinner(squares);
   let status;
   if (winner) {
-    status = 'Winner: ' + winner;
+    status = "Winner: " + winner;
   } else {
-    status = 'Next player: ' + (xIsNext ? 'X' : 'O');
+    status = "Next player: " + (xIsNext ? "X" : "O");
   }
 
   return (
@@ -2065,9 +2056,9 @@ export default function Game() {
   const moves = history.map((squares, move) => {
     let description;
     if (move > 0) {
-      description = 'Go to move #' + move;
+      description = "Go to move #" + move;
     } else {
-      description = 'Go to game start';
+      description = "Go to game start";
     }
     return (
       <li>
@@ -2137,7 +2128,7 @@ body {
 
 .board-row:after {
   clear: both;
-  content: '';
+  content: "";
   display: table;
 }
 
@@ -2161,7 +2152,7 @@ For each move in the tic-tac-toe game's history, you create a list item `<li>` w
 
 For now, you should see a list of the moves that occurred in the game and an error in the developer tools console. Let's discuss what the "key" error means.
 
-### Picking a key {/*picking-a-key*/}
+### Picking a key {/_picking-a-key_/}
 
 When you render a list, React stores some information about each rendered list item. When you update a list, React needs to determine what has changed. You could have added, removed, re-arranged, or updated the list's items.
 
@@ -2180,7 +2171,7 @@ to
 <li>Alexa: 5 tasks left</li>
 ```
 
-In addition to the updated counts, a human reading this would probably say that you swapped Alexa and Ben's ordering and inserted Claudia between Alexa and Ben. However, React is a computer program and does not know what you intended, so you need to specify a *key* property for each list item to differentiate each list item from its siblings. If your data was from a database, Alexa, Ben, and Claudia's database IDs could be used as keys.
+In addition to the updated counts, a human reading this would probably say that you swapped Alexa and Ben's ordering and inserted Claudia between Alexa and Ben. However, React is a computer program and does not know what you intended, so you need to specify a _key_ property for each list item to differentiate each list item from its siblings. If your data was from a database, Alexa, Ben, and Claudia's database IDs could be used as keys.
 
 ```js {1}
 <li key={user.id}>
@@ -2200,7 +2191,7 @@ If no key is specified, React will report an error and use the array index as a 
 
 Keys do not need to be globally unique; they only need to be unique between components and their siblings.
 
-### Implementing time travel {/*implementing-time-travel*/}
+### Implementing time travel {/_implementing-time-travel_/}
 
 In the tic-tac-toe game's history, each past move has a unique ID associated with it: it's the sequential number of the move. Moves will never be re-ordered, deleted, or inserted in the middle, so it's safe to use the move index as a key.
 
@@ -2218,7 +2209,7 @@ const moves = history.map((squares, move) => {
 ```
 
 ```js src/App.js
-import { useState } from 'react';
+import { useState } from "react";
 
 function Square({ value, onSquareClick }) {
   return (
@@ -2235,9 +2226,9 @@ function Board({ xIsNext, squares, onPlay }) {
     }
     const nextSquares = squares.slice();
     if (xIsNext) {
-      nextSquares[i] = 'X';
+      nextSquares[i] = "X";
     } else {
-      nextSquares[i] = 'O';
+      nextSquares[i] = "O";
     }
     onPlay(nextSquares);
   }
@@ -2245,9 +2236,9 @@ function Board({ xIsNext, squares, onPlay }) {
   const winner = calculateWinner(squares);
   let status;
   if (winner) {
-    status = 'Winner: ' + winner;
+    status = "Winner: " + winner;
   } else {
-    status = 'Next player: ' + (xIsNext ? 'X' : 'O');
+    status = "Next player: " + (xIsNext ? "X" : "O");
   }
 
   return (
@@ -2289,9 +2280,9 @@ export default function Game() {
   const moves = history.map((squares, move) => {
     let description;
     if (move > 0) {
-      description = 'Go to move #' + move;
+      description = "Go to move #" + move;
     } else {
-      description = 'Go to game start';
+      description = "Go to game start";
     }
     return (
       <li key={move}>
@@ -2331,7 +2322,6 @@ function calculateWinner(squares) {
   }
   return null;
 }
-
 ```
 
 ```css src/styles.css
@@ -2362,7 +2352,7 @@ body {
 
 .board-row:after {
   clear: both;
-  content: '';
+  content: "";
   display: table;
 }
 
@@ -2435,9 +2425,9 @@ export default function Game() {
 If you click on any step in the game's history, the tic-tac-toe board should immediately update to show what the board looked like after that step occurred.
 
 ```js src/App.js
-import { useState } from 'react';
+import { useState } from "react";
 
-function Square({value, onSquareClick}) {
+function Square({ value, onSquareClick }) {
   return (
     <button className="square" onClick={onSquareClick}>
       {value}
@@ -2452,9 +2442,9 @@ function Board({ xIsNext, squares, onPlay }) {
     }
     const nextSquares = squares.slice();
     if (xIsNext) {
-      nextSquares[i] = 'X';
+      nextSquares[i] = "X";
     } else {
-      nextSquares[i] = 'O';
+      nextSquares[i] = "O";
     }
     onPlay(nextSquares);
   }
@@ -2462,9 +2452,9 @@ function Board({ xIsNext, squares, onPlay }) {
   const winner = calculateWinner(squares);
   let status;
   if (winner) {
-    status = 'Winner: ' + winner;
+    status = "Winner: " + winner;
   } else {
-    status = 'Next player: ' + (xIsNext ? 'X' : 'O');
+    status = "Next player: " + (xIsNext ? "X" : "O");
   }
 
   return (
@@ -2510,9 +2500,9 @@ export default function Game() {
   const moves = history.map((squares, move) => {
     let description;
     if (move > 0) {
-      description = 'Go to move #' + move;
+      description = "Go to move #" + move;
     } else {
-      description = 'Go to game start';
+      description = "Go to game start";
     }
     return (
       <li key={move}>
@@ -2582,7 +2572,7 @@ body {
 
 .board-row:after {
   clear: both;
-  content: '';
+  content: "";
   display: table;
 }
 
@@ -2599,7 +2589,7 @@ body {
 }
 ```
 
-### Final cleanup {/*final-cleanup*/}
+### Final cleanup {/_final-cleanup_/}
 
 If you look at the code very closely, you may notice that `xIsNext === true` when `currentMove` is even and `xIsNext === false` when `currentMove` is odd. In other words, if you know the value of `currentMove`, then you can always figure out what `xIsNext` should be.
 
@@ -2627,7 +2617,7 @@ export default function Game() {
 
 You no longer need the `xIsNext` state declaration or the calls to `setXIsNext`. Now, there's no chance for `xIsNext` to get out of sync with `currentMove`, even if you make a mistake while coding the components.
 
-### Wrapping up {/*wrapping-up*/}
+### Wrapping up {/_wrapping-up_/}
 
 Congratulations! You've created a tic-tac-toe game that:
 
@@ -2641,7 +2631,7 @@ Nice work! We hope you now feel like you have a decent grasp of how React works.
 Check out the final result here:
 
 ```js src/App.js
-import { useState } from 'react';
+import { useState } from "react";
 
 function Square({ value, onSquareClick }) {
   return (
@@ -2658,9 +2648,9 @@ function Board({ xIsNext, squares, onPlay }) {
     }
     const nextSquares = squares.slice();
     if (xIsNext) {
-      nextSquares[i] = 'X';
+      nextSquares[i] = "X";
     } else {
-      nextSquares[i] = 'O';
+      nextSquares[i] = "O";
     }
     onPlay(nextSquares);
   }
@@ -2668,9 +2658,9 @@ function Board({ xIsNext, squares, onPlay }) {
   const winner = calculateWinner(squares);
   let status;
   if (winner) {
-    status = 'Winner: ' + winner;
+    status = "Winner: " + winner;
   } else {
-    status = 'Next player: ' + (xIsNext ? 'X' : 'O');
+    status = "Next player: " + (xIsNext ? "X" : "O");
   }
 
   return (
@@ -2714,9 +2704,9 @@ export default function Game() {
   const moves = history.map((squares, move) => {
     let description;
     if (move > 0) {
-      description = 'Go to move #' + move;
+      description = "Go to move #" + move;
     } else {
-      description = 'Go to game start';
+      description = "Go to game start";
     }
     return (
       <li key={move}>
@@ -2786,7 +2776,7 @@ body {
 
 .board-row:after {
   clear: both;
-  content: '';
+  content: "";
   display: table;
 }
 
@@ -2813,7 +2803,7 @@ If you have extra time or want to practice your new React skills, here are some 
 
 Throughout this tutorial, you've touched on React concepts including elements, components, props, and state. Now that you've seen how these concepts work when building a game, check out [Thinking in React](/learn/thinking-in-react) to see how the same React concepts work when building an app's UI.
 
-***
+---
 
 ## Sitemap
 

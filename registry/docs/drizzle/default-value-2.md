@@ -11,8 +11,8 @@ a string constant, a blob constant, a signed-number, or any constant expression 
 ```typescript
 import { int, mysqlTable } from "drizzle-orm/mysql-core";
 
-const table = mysqlTable('table', {
-	int: int().default(3),
+const table = mysqlTable("table", {
+  int: int().default(3),
 });
 ```
 
@@ -32,10 +32,10 @@ Note: This value does not affect the `drizzle-kit` behavior, it is only used at 
 
 ```ts
 import { varchar, mysqlTable } from "drizzle-orm/mysql-core";
-import { createId } from '@paralleldrive/cuid2';
+import { createId } from "@paralleldrive/cuid2";
 
-const table = mysqlTable('table', {
-	id: varchar({ length: 128 }).$defaultFn(() => createId()),
+const table = mysqlTable("table", {
+  id: varchar({ length: 128 }).$defaultFn(() => createId()),
 });
 ```
 
@@ -54,8 +54,10 @@ Note: This value does not affect the `drizzle-kit` behavior, it is only used at 
 ```ts
 import { text, mysqlTable } from "drizzle-orm/mysql-core";
 
-const table = mysqlTable('table', {
-    alwaysNull: text().$type<string | null>().$onUpdate(() => null),
+const table = mysqlTable("table", {
+  alwaysNull: text()
+    .$type<string | null>()
+    .$onUpdate(() => null),
 });
 ```
 
@@ -64,8 +66,8 @@ const table = mysqlTable('table', {
 ```typescript
 import { int, mysqlTable } from "drizzle-orm/mysql-core";
 
-const table = mysqlTable('table', {
-	int: int().primaryKey(),
+const table = mysqlTable("table", {
+  int: int().primaryKey(),
 });
 ```
 
@@ -80,8 +82,8 @@ CREATE TABLE `table` (
 ```typescript
 import { int, mysqlTable } from "drizzle-orm/mysql-core";
 
-const table = mysqlTable('table', {
-	int: int().autoincrement(),
+const table = mysqlTable("table", {
+  int: int().autoincrement(),
 });
 ```
 
@@ -114,10 +116,9 @@ If you need `integer autoincrement` please refer to **[serial.](#serial)**
 ```typescript
 import { integer, pgTable } from "drizzle-orm/pg-core";
 
-export const table = pgTable('table', {
-	int: integer()
+export const table = pgTable("table", {
+  int: integer(),
 });
-
 ```
 
 ```sql
@@ -130,11 +131,10 @@ CREATE TABLE "table" (
 import { sql } from "drizzle-orm";
 import { integer, pgTable } from "drizzle-orm/pg-core";
 
-export const table = pgTable('table', {
-	int1: integer().default(10),
-	int2: integer().default(sql`'10'::int`)
+export const table = pgTable("table", {
+  int1: integer().default(10),
+  int2: integer().default(sql`'10'::int`),
 });
-
 ```
 
 ```sql
@@ -154,8 +154,8 @@ If you need `smallint autoincrement` please refer to **[smallserial.](#smallseri
 ```typescript
 import { smallint, pgTable } from "drizzle-orm/pg-core";
 
-export const table = pgTable('table', {
-	smallint: smallint()
+export const table = pgTable("table", {
+  smallint: smallint(),
 });
 ```
 
@@ -169,9 +169,9 @@ CREATE TABLE "table" (
 import { sql } from "drizzle-orm";
 import { smallint, pgTable } from "drizzle-orm/pg-core";
 
-export const table = pgTable('table', {
-	smallint1: smallint().default(10),
-	smallint2: smallint().default(sql`'10'::smallint`)
+export const table = pgTable("table", {
+  smallint1: smallint().default(10),
+  smallint2: smallint().default(sql`'10'::smallint`),
 });
 ```
 
@@ -194,15 +194,15 @@ If you're expecting values above 2^31 but below 2^53, you can utilise `mode: 'nu
 ```typescript
 import { bigint, pgTable } from "drizzle-orm/pg-core";
 
-export const table = pgTable('table', {
-	bigint: bigint({ mode: 'number' })
+export const table = pgTable("table", {
+  bigint: bigint({ mode: "number" }),
 });
 
 // will be inferred as `number`
-bigint: bigint({ mode: 'number' })
+bigint: bigint({ mode: "number" });
 
 // will be inferred as `bigint`
-bigint: bigint({ mode: 'bigint' })
+bigint: bigint({ mode: "bigint" });
 ```
 
 ```sql
@@ -215,9 +215,9 @@ CREATE TABLE "table" (
 import { sql } from "drizzle-orm";
 import { bigint, pgTable } from "drizzle-orm/pg-core";
 
-export const table = pgTable('table', {
-	bigint1: bigint().default(10),
-	bigint2: bigint().default(sql`'10'::bigint`)
+export const table = pgTable("table", {
+  bigint1: bigint().default(10),
+  bigint2: bigint().default(sql`'10'::bigint`),
 });
 ```
 
@@ -238,7 +238,7 @@ For more info please refer to the official PostgreSQL **[docs.](https://www.post
 ```typescript
 import { serial, pgTable } from "drizzle-orm/pg-core";
 
-export const table = pgTable('table', {
+export const table = pgTable("table", {
   serial: serial(),
 });
 ```
@@ -259,7 +259,7 @@ For more info please refer to the official PostgreSQL **[docs.](https://www.post
 ```typescript
 import { smallserial, pgTable } from "drizzle-orm/pg-core";
 
-export const table = pgTable('table', {
+export const table = pgTable("table", {
   smallserial: smallserial(),
 });
 ```
@@ -282,8 +282,8 @@ If you're expecting values above 2^31 but below 2^53, you can utilise `mode: 'nu
 ```typescript
 import { bigserial, pgTable } from "drizzle-orm/pg-core";
 
-export const table = pgTable('table', {
-  bigserial: bigserial({ mode: 'number' }),
+export const table = pgTable("table", {
+  bigserial: bigserial({ mode: "number" }),
 });
 ```
 
@@ -302,10 +302,9 @@ For more info please refer to the official PostgreSQL **[docs.](https://www.post
 ```typescript
 import { boolean, pgTable } from "drizzle-orm/pg-core";
 
-export const table = pgTable('table', {
-	boolean: boolean()
+export const table = pgTable("table", {
+  boolean: boolean(),
 });
-
 ```
 
 ```sql
@@ -323,10 +322,9 @@ For more info please refer to the official PostgreSQL **[docs.](https://www.post
 ```typescript
 import { bytea, pgTable } from "drizzle-orm/pg-core";
 
-export const table = pgTable('table', {
-	bytea: bytea()
+export const table = pgTable("table", {
+  bytea: bytea(),
 });
-
 ```
 
 ```sql
@@ -347,12 +345,12 @@ You can define `{ enum: ["value1", "value2"] }` config to infer `insert` and `se
 ```typescript
 import { text, pgTable } from "drizzle-orm/pg-core";
 
-export const table = pgTable('table', {
-  text: text()
+export const table = pgTable("table", {
+  text: text(),
 });
 
 // will be inferred as text: "value1" | "value2" | null
-text: text({ enum: ["value1", "value2"] })
+text: text({ enum: ["value1", "value2"] });
 ```
 
 ```sql
@@ -431,12 +429,12 @@ For more info please refer to the official PostgreSQL **[docs.](https://www.post
 ```typescript
 import { numeric, pgTable } from "drizzle-orm/pg-core";
 
-export const table = pgTable('table', {
+export const table = pgTable("table", {
   numeric1: numeric(),
   numeric2: numeric({ precision: 100 }),
   numeric3: numeric({ precision: 100, scale: 20 }),
-  numericNum: numeric({ mode: 'number' }),
-  numericBig: numeric({ mode: 'bigint' }),
+  numericNum: numeric({ mode: "number" }),
+  numericBig: numeric({ mode: "bigint" }),
 });
 ```
 
@@ -463,12 +461,12 @@ For more info please refer to the official PostgreSQL **[docs.](https://www.post
 
 ```typescript
 import { sql } from "drizzle-orm";
-import { real, pgTable } from "drizzle-orm/pg-core";  
+import { real, pgTable } from "drizzle-orm/pg-core";
 
-const table = pgTable('table', {
-	real1: real(),
-	real2: real().default(10.10),
-	real3: real().default(sql`'10.10'::real`),
+const table = pgTable("table", {
+  real1: real(),
+  real2: real().default(10.1),
+  real3: real().default(sql`'10.10'::real`),
 });
 ```
 
@@ -491,10 +489,10 @@ For more info please refer to the official PostgreSQL **[docs.](https://www.post
 import { sql } from "drizzle-orm";
 import { doublePrecision, pgTable } from "drizzle-orm/pg-core";
 
-const table = pgTable('table', {
-	double1: doublePrecision(),
-	double2: doublePrecision().default(10.10),
-	double3: doublePrecision().default(sql`'10.10'::double precision`),
+const table = pgTable("table", {
+  double1: doublePrecision(),
+  double2: doublePrecision().default(10.1),
+  double3: doublePrecision().default(sql`'10.10'::double precision`),
 });
 ```
 
@@ -517,10 +515,10 @@ For more info please refer to the official PostgreSQL **[docs.](https://www.post
 import { sql } from "drizzle-orm";
 import { json, pgTable } from "drizzle-orm/pg-core";
 
-const table = pgTable('table', {
-	json1: json(),
-	json2: json().default({ foo: "bar" }),
-	json3: json().default(sql`'{foo: "bar"}'::json`),
+const table = pgTable("table", {
+  json1: json(),
+  json2: json().default({ foo: "bar" }),
+  json3: json().default(sql`'{foo: "bar"}'::json`),
 });
 ```
 
@@ -556,10 +554,10 @@ For more info please refer to the official PostgreSQL **[docs.](https://www.post
 ```typescript
 import { jsonb, pgTable } from "drizzle-orm/pg-core";
 
-const table = pgTable('table', {
-	jsonb1: jsonb(),
-	jsonb2: jsonb().default({ foo: "bar" }),
-	jsonb3: jsonb().default(sql`'{foo: "bar"}'::jsonb`),
+const table = pgTable("table", {
+  jsonb1: jsonb(),
+  jsonb2: jsonb().default({ foo: "bar" }),
+  jsonb3: jsonb().default(sql`'{foo: "bar"}'::jsonb`),
 });
 ```
 
@@ -596,10 +594,10 @@ For more info please refer to the official PostgreSQL **[docs.](https://www.post
 ```ts
 import { uuid, pgTable } from "drizzle-orm/pg-core";
 
-const table = pgTable('table', {
+const table = pgTable("table", {
   uuid1: uuid(),
   uuid2: uuid().defaultRandom(),
-  uuid3: uuid().default('a0ee-bc99-9c0b-4ef8-bb6d-6bb9-bd38-0a11')
+  uuid3: uuid().default("a0ee-bc99-9c0b-4ef8-bb6d-6bb9-bd38-0a11"),
 });
 ```
 
@@ -621,11 +619,11 @@ For more info please refer to the official PostgreSQL **[docs.](https://www.post
 ```typescript
 import { time, pgTable } from "drizzle-orm/pg-core";
 
-const table = pgTable('table', {
+const table = pgTable("table", {
   time1: time(),
   time2: time({ withTimezone: true }),
   time3: time({ precision: 6 }),
-  time4: time({ precision: 6, withTimezone: true })
+  time4: time({ precision: 6, withTimezone: true }),
 });
 ```
 

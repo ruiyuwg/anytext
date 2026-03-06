@@ -22,9 +22,9 @@ export default function Layout({
   team,
   analytics,
 }: {
-  children: React.ReactNode
-  analytics: React.ReactNode
-  team: React.ReactNode
+  children: React.ReactNode;
+  analytics: React.ReactNode;
+  team: React.ReactNode;
 }) {
   return (
     <>
@@ -32,7 +32,7 @@ export default function Layout({
       {team}
       {analytics}
     </>
-  )
+  );
 }
 ```
 
@@ -44,7 +44,7 @@ export default function Layout({ children, team, analytics }) {
       {team}
       {analytics}
     </>
-  )
+  );
 }
 ```
 
@@ -70,7 +70,7 @@ Additionally, since `children` is an implicit slot, you also need to create a `d
 
 ## Behavior
 
-By default, Next.js keeps track of the active *state* (or subpage) for each slot. However, the content rendered within a slot will depend on the type of navigation:
+By default, Next.js keeps track of the active _state_ (or subpage) for each slot. However, the content rendered within a slot will depend on the type of navigation:
 
 - [**Soft Navigation**](/docs/app/getting-started/linking-and-navigating#client-side-transitions): During client-side navigation, Next.js will perform a [partial render](/docs/app/getting-started/linking-and-navigating#client-side-transitions), changing the subpage within the slot, while maintaining the other slot's active subpages, even if they don't match the current URL.
 - **Hard Navigation**: After a full-page load (browser refresh), Next.js cannot determine the active state for the slots that don't match the current URL. Instead, it will render a [`default.js`](#defaultjs) file for the unmatched slots, or `404` if `default.js` doesn't exist.
@@ -86,23 +86,23 @@ By default, Next.js keeps track of the active *state* (or subpage) for each slot
 Both [`useSelectedLayoutSegment`](/docs/app/api-reference/functions/use-selected-layout-segment) and [`useSelectedLayoutSegments`](/docs/app/api-reference/functions/use-selected-layout-segments) accept a `parallelRoutesKey` parameter, which allows you to read the active route segment within a slot.
 
 ```tsx filename="app/layout.tsx" switcher
-'use client'
+"use client";
 
-import { useSelectedLayoutSegment } from 'next/navigation'
+import { useSelectedLayoutSegment } from "next/navigation";
 
 export default function Layout({ auth }: { auth: React.ReactNode }) {
-  const loginSegment = useSelectedLayoutSegment('auth')
+  const loginSegment = useSelectedLayoutSegment("auth");
   // ...
 }
 ```
 
 ```jsx filename="app/layout.js" switcher
-'use client'
+"use client";
 
-import { useSelectedLayoutSegment } from 'next/navigation'
+import { useSelectedLayoutSegment } from "next/navigation";
 
 export default function Layout({ auth }) {
-  const loginSegment = useSelectedLayoutSegment('auth')
+  const loginSegment = useSelectedLayoutSegment("auth");
   // ...
 }
 ```
@@ -116,26 +116,26 @@ You can use Parallel Routes to conditionally render routes based on certain cond
 ![Conditional routes diagram](https://h8DxKfmAPhn8O0p3.public.blob.vercel-storage.com/docs/light/conditional-routes-ui.png)
 
 ```tsx filename="app/dashboard/layout.tsx" switcher
-import { checkUserRole } from '@/lib/auth'
+import { checkUserRole } from "@/lib/auth";
 
 export default function Layout({
   user,
   admin,
 }: {
-  user: React.ReactNode
-  admin: React.ReactNode
+  user: React.ReactNode;
+  admin: React.ReactNode;
 }) {
-  const role = checkUserRole()
-  return role === 'admin' ? admin : user
+  const role = checkUserRole();
+  return role === "admin" ? admin : user;
 }
 ```
 
 ```jsx filename="app/dashboard/layout.js" switcher
-import { checkUserRole } from '@/lib/auth'
+import { checkUserRole } from "@/lib/auth";
 
 export default function Layout({ user, admin }) {
-  const role = checkUserRole()
-  return role === 'admin' ? admin : user
+  const role = checkUserRole();
+  return role === "admin" ? admin : user;
 }
 ```
 
@@ -150,7 +150,7 @@ For example, the `@analytics` slot has two subpages: `/page-views` and `/visitor
 Within `@analytics`, create a [`layout`](/docs/app/api-reference/file-conventions/layout) file to share the tabs between the two pages:
 
 ```tsx filename="app/@analytics/layout.tsx" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -161,12 +161,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       </nav>
       <div>{children}</div>
     </>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/@analytics/layout.js" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Layout({ children }) {
   return (
@@ -177,7 +177,7 @@ export default function Layout({ children }) {
       </nav>
       <div>{children}</div>
     </>
-  )
+  );
 }
 ```
 
@@ -199,18 +199,18 @@ To implement this pattern, start by creating a `/login` route that renders your 
 ![Parallel Routes Diagram](https://h8DxKfmAPhn8O0p3.public.blob.vercel-storage.com/docs/light/parallel-routes-modal-login-page.png)
 
 ```tsx filename="app/login/page.tsx" switcher
-import { Login } from '@/app/ui/login'
+import { Login } from "@/app/ui/login";
 
 export default function Page() {
-  return <Login />
+  return <Login />;
 }
 ```
 
 ```jsx filename="app/login/page.js" switcher
-import { Login } from '@/app/ui/login'
+import { Login } from "@/app/ui/login";
 
 export default function Page() {
-  return <Login />
+  return <Login />;
 }
 ```
 
@@ -218,41 +218,41 @@ Then, inside the `@auth` slot, add [`default.js`](/docs/app/api-reference/file-c
 
 ```tsx filename="app/@auth/default.tsx" switcher
 export default function Default() {
-  return null
+  return null;
 }
 ```
 
 ```jsx filename="app/@auth/default.js" switcher
 export default function Default() {
-  return null
+  return null;
 }
 ```
 
 Inside your `@auth` slot, intercept the `/login` route by importing the `<Modal>` component and its children into the `@auth/(.)login/page.tsx` file, and updating the folder name to `/@auth/(.)login/page.tsx`.
 
 ```tsx filename="app/@auth/(.)login/page.tsx" switcher
-import { Modal } from '@/app/ui/modal'
-import { Login } from '@/app/ui/login'
+import { Modal } from "@/app/ui/modal";
+import { Login } from "@/app/ui/login";
 
 export default function Page() {
   return (
     <Modal>
       <Login />
     </Modal>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/@auth/(.)login/page.js" switcher
-import { Modal } from '@/app/ui/modal'
-import { Login } from '@/app/ui/login'
+import { Modal } from "@/app/ui/modal";
+import { Login } from "@/app/ui/login";
 
 export default function Page() {
   return (
     <Modal>
       <Login />
     </Modal>
-  )
+  );
 }
 ```
 
@@ -268,14 +268,14 @@ Now, you can leverage the Next.js router to open and close the modal. This ensur
 To open the modal, pass the `@auth` slot as a prop to the parent layout and render it alongside the `children` prop.
 
 ```tsx filename="app/layout.tsx" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Layout({
   auth,
   children,
 }: {
-  auth: React.ReactNode
-  children: React.ReactNode
+  auth: React.ReactNode;
+  children: React.ReactNode;
 }) {
   return (
     <>
@@ -285,12 +285,12 @@ export default function Layout({
       <div>{auth}</div>
       <div>{children}</div>
     </>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/layout.js" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Layout({ auth, children }) {
   return (
@@ -301,7 +301,7 @@ export default function Layout({ auth, children }) {
       <div>{auth}</div>
       <div>{children}</div>
     </>
-  )
+  );
 }
 ```
 
@@ -312,55 +312,55 @@ When the user clicks the `<Link>`, the modal will open instead of navigating to 
 You can close the modal by calling `router.back()` or by using the `Link` component.
 
 ```tsx filename="app/ui/modal.tsx" switcher
-'use client'
+"use client";
 
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
 
 export function Modal({ children }: { children: React.ReactNode }) {
-  const router = useRouter()
+  const router = useRouter();
 
   return (
     <>
       <button
         onClick={() => {
-          router.back()
+          router.back();
         }}
       >
         Close modal
       </button>
       <div>{children}</div>
     </>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/ui/modal.js" switcher
-'use client'
+"use client";
 
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
 
 export function Modal({ children }) {
-  const router = useRouter()
+  const router = useRouter();
 
   return (
     <>
       <button
         onClick={() => {
-          router.back()
+          router.back();
         }}
       >
         Close modal
       </button>
       <div>{children}</div>
     </>
-  )
+  );
 }
 ```
 
 When using the `Link` component to navigate away from a page that shouldn't render the `@auth` slot anymore, we need to make sure the parallel route matches to a component that returns `null`. For example, when navigating back to the root page, we create a `@auth/page.tsx` component:
 
 ```tsx filename="app/ui/modal.tsx" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export function Modal({ children }: { children: React.ReactNode }) {
   return (
@@ -368,12 +368,12 @@ export function Modal({ children }: { children: React.ReactNode }) {
       <Link href="/">Close modal</Link>
       <div>{children}</div>
     </>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/ui/modal.js" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export function Modal({ children }) {
   return (
@@ -381,19 +381,19 @@ export function Modal({ children }) {
       <Link href="/">Close modal</Link>
       <div>{children}</div>
     </>
-  )
+  );
 }
 ```
 
 ```tsx filename="app/@auth/page.tsx" switcher
 export default function Page() {
-  return null
+  return null;
 }
 ```
 
 ```jsx filename="app/@auth/page.js" switcher
 export default function Page() {
-  return null
+  return null;
 }
 ```
 
@@ -401,13 +401,13 @@ Or if navigating to any other page (such as `/foo`, `/foo/bar`, etc), you can us
 
 ```tsx filename="app/@auth/[...catchAll]/page.tsx" switcher
 export default function CatchAll() {
-  return null
+  return null;
 }
 ```
 
 ```jsx filename="app/@auth/[...catchAll]/page.js" switcher
 export default function CatchAll() {
-  return null
+  return null;
 }
 ```
 

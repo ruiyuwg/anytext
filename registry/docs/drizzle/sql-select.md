@@ -8,12 +8,12 @@ For the following examples, let's assume you have a `users` table defined like t
 \<Tabs items={\['PostgreSQL', 'MySQL', 'SQLite', 'SingleStore', 'MSSQL', 'CockroachDB']}> <Tab>
 
 ```typescript
-import { pgTable, serial, text } from 'drizzle-orm/pg-core';
+import { pgTable, serial, text } from "drizzle-orm/pg-core";
 
-export const users = pgTable('users', {
-  id: serial('id').primaryKey(),
-  name: text('name').notNull(),
-  age: integer('age'),
+export const users = pgTable("users", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  age: integer("age"),
 });
 ```
 
@@ -154,10 +154,12 @@ If you need to apply runtime transformations to the returned value, you can use 
 Starting from `v1.0.0-beta.1` you can use `.as()` for columns:
 
 ```ts
-const result = await db.select({
-  id: users.id,
-  lowerName: users.name.as("lower"),
-}).from(users);
+const result = await db
+  .select({
+    id: users.id,
+    lowerName: users.name.as("lower"),
+  })
+  .from(users);
 ```
 
 </Callout>
@@ -228,16 +230,18 @@ If you are on pre-1 version(like `0.45.1`) then use `getTableColumns` </Callout>
 \<CodeTabs items={\["example 1", "example 2", "example 3", "example 4"]}>
 
 ```ts
-import { getColumns, sql } from 'drizzle-orm';
+import { getColumns, sql } from "drizzle-orm";
 
-await db.select({
+await db
+  .select({
     ...getColumns(posts),
     titleLength: sql`length(${posts.title})`,
-  }).from(posts);
+  })
+  .from(posts);
 ```
 
 ```ts
-import { getColumns } from 'drizzle-orm';
+import { getColumns } from "drizzle-orm";
 
 const { content, ...rest } = getColumns(posts); // exclude "content" column
 await db.select({ ...rest }).from(posts); // select all other columns
@@ -412,7 +416,7 @@ const searchPosts = async (term?: string) => {
     .where(term ? ilike(posts.title, term) : undefined);
 };
 await searchPosts();
-await searchPosts('AI');
+await searchPosts("AI");
 ```
 
 ```ts
@@ -423,8 +427,8 @@ const searchPosts = async (filters: SQL[]) => {
     .where(and(...filters));
 };
 const filters: SQL[] = [];
-filters.push(ilike(posts.title, 'AI'));
-filters.push(inArray(posts.category, ['Tech', 'Art', 'Science']));
+filters.push(ilike(posts.title, "AI"));
+filters.push(inArray(posts.category, ["Tech", "Art", "Science"]));
 filters.push(gt(posts.views, 200));
 await searchPosts(filters);
 ```
@@ -542,14 +546,18 @@ await getUsers();
 
 ```ts
 const getUsers = async (page = 1, pageSize = 10) => {
-   const sq = db
+  const sq = db
     .select({ id: users.id })
     .from(users)
     .orderBy(users.id)
     .limit(pageSize)
     .offset((page - 1) * pageSize)
-    .as('subquery');
-   await db.select().from(users).innerJoin(sq, eq(users.id, sq.id)).orderBy(users.id);
+    .as("subquery");
+  await db
+    .select()
+    .from(users)
+    .innerJoin(sq, eq(users.id, sq.id))
+    .orderBy(users.id);
 };
 ```
 
@@ -604,7 +612,7 @@ const result = await db.with(sq).select().from(sq);
 
 ````
 ```sql
-with "sq" as (insert into "users" ("id", "name") values (default, 'John') returning "id", "name") 
+with "sq" as (insert into "users" ("id", "name") values (default, 'John') returning "id", "name")
 select "id", "name" from "sq"
 ````
 
@@ -633,7 +641,7 @@ const result = await db.with(sq).select().from(sq);
 
 ````
 ```sql
-with "sq" as (delete from "users" where "users"."name" = $1 returning "id", "name", "age") 
+with "sq" as (delete from "users" where "users"."name" = $1 returning "id", "name", "age")
 select "id", "name", "age" from "sq"
 ````
 
@@ -643,11 +651,13 @@ To select arbitrary SQL values as fields in a CTE and reference them in other CT
 you need to add aliases to them:
 
 ```typescript copy
-
-const sq = db.$with('sq').as(db.select({ 
-  name: sql`upper(${users.name})`.as('name'),
-})
-.from(users));
+const sq = db.$with("sq").as(
+  db
+    .select({
+      name: sql`upper(${users.name})`.as("name"),
+    })
+    .from(users),
+);
 
 const result = await db.with(sq).select({ name: sq.name }).from(sq);
 ```
@@ -760,13 +770,17 @@ select count("id") from "users";
 
 ```ts
 // It's equivalent to writing
-await db.select({ 
-  value: sql`count('*'))`.mapWith(Number) 
-}).from(users);
+await db
+  .select({
+    value: sql`count('*'))`.mapWith(Number),
+  })
+  .from(users);
 
-await db.select({ 
-  value: sql`count(${users.id})`.mapWith(Number) 
-}).from(users);
+await db
+  .select({
+    value: sql`count(${users.id})`.mapWith(Number),
+  })
+  .from(users);
 ```
 
 </Section>
@@ -788,9 +802,11 @@ select count(distinct "id") from "users";
 
 ```ts
 // It's equivalent to writing
-await db.select({ 
-  value: sql`count(${users.id})`.mapWith(Number) 
-}).from(users);
+await db
+  .select({
+    value: sql`count(${users.id})`.mapWith(Number),
+  })
+  .from(users);
 ```
 
 </Section>
@@ -812,9 +828,11 @@ select avg("id") from "users";
 
 ```ts
 // It's equivalent to writing
-await db.select({ 
-  value: sql`avg(${users.id})`.mapWith(String) 
-}).from(users);
+await db
+  .select({
+    value: sql`avg(${users.id})`.mapWith(String),
+  })
+  .from(users);
 ```
 
 </Section>
@@ -836,9 +854,11 @@ select avg(distinct "id") from "users";
 
 ```ts
 // It's equivalent to writing
-await db.select({ 
-  value: sql`avg(distinct ${users.id})`.mapWith(String) 
-}).from(users);
+await db
+  .select({
+    value: sql`avg(distinct ${users.id})`.mapWith(String),
+  })
+  .from(users);
 ```
 
 </Section>
@@ -860,9 +880,11 @@ select sum("id") from "users";
 
 ```ts
 // It's equivalent to writing
-await db.select({ 
-  value: sql`sum(${users.id})`.mapWith(String) 
-}).from(users);
+await db
+  .select({
+    value: sql`sum(${users.id})`.mapWith(String),
+  })
+  .from(users);
 ```
 
 </Section>
@@ -884,9 +906,11 @@ select sum(distinct "id") from "users";
 
 ```ts
 // It's equivalent to writing
-await db.select({ 
-  value: sql`sum(distinct ${users.id})`.mapWith(String) 
-}).from(users);
+await db
+  .select({
+    value: sql`sum(distinct ${users.id})`.mapWith(String),
+  })
+  .from(users);
 ```
 
 </Section>
@@ -908,9 +932,11 @@ select max("id") from "users";
 
 ```ts
 // It's equivalent to writing
-await db.select({ 
-  value: sql`max(${expression})`.mapWith(users.id) 
-}).from(users);
+await db
+  .select({
+    value: sql`max(${expression})`.mapWith(users.id),
+  })
+  .from(users);
 ```
 
 </Section>
@@ -932,9 +958,11 @@ select min("id") from "users";
 
 ```ts
 // It's equivalent to writing
-await db.select({ 
-  value: sql`min(${users.id})`.mapWith(users.id) 
-}).from(users);
+await db
+  .select({
+    value: sql`min(${users.id})`.mapWith(users.id),
+  })
+  .from(users);
 ```
 
 </Section>
@@ -942,42 +970,40 @@ await db.select({
 A more advanced example:
 
 ```typescript copy
-const orders = sqliteTable('order', {
-  id: integer('id').primaryKey(),
-  orderDate: integer('order_date', { mode: 'timestamp' }).notNull(),
-  requiredDate: integer('required_date', { mode: 'timestamp' }).notNull(),
-  shippedDate: integer('shipped_date', { mode: 'timestamp' }),
-  shipVia: integer('ship_via').notNull(),
-  freight: numeric('freight').notNull(),
-  shipName: text('ship_name').notNull(),
-  shipCity: text('ship_city').notNull(),
-  shipRegion: text('ship_region'),
-  shipPostalCode: text('ship_postal_code'),
-  shipCountry: text('ship_country').notNull(),
-  customerId: text('customer_id').notNull(),
-  employeeId: integer('employee_id').notNull(),
+const orders = sqliteTable("order", {
+  id: integer("id").primaryKey(),
+  orderDate: integer("order_date", { mode: "timestamp" }).notNull(),
+  requiredDate: integer("required_date", { mode: "timestamp" }).notNull(),
+  shippedDate: integer("shipped_date", { mode: "timestamp" }),
+  shipVia: integer("ship_via").notNull(),
+  freight: numeric("freight").notNull(),
+  shipName: text("ship_name").notNull(),
+  shipCity: text("ship_city").notNull(),
+  shipRegion: text("ship_region"),
+  shipPostalCode: text("ship_postal_code"),
+  shipCountry: text("ship_country").notNull(),
+  customerId: text("customer_id").notNull(),
+  employeeId: integer("employee_id").notNull(),
 });
 
-const details = sqliteTable('order_detail', {
-  unitPrice: numeric('unit_price').notNull(),
-  quantity: integer('quantity').notNull(),
-  discount: numeric('discount').notNull(),
-  orderId: integer('order_id').notNull(),
-  productId: integer('product_id').notNull(),
+const details = sqliteTable("order_detail", {
+  unitPrice: numeric("unit_price").notNull(),
+  quantity: integer("quantity").notNull(),
+  discount: numeric("discount").notNull(),
+  orderId: integer("order_id").notNull(),
+  productId: integer("product_id").notNull(),
 });
 
-
-db
-  .select({
-    id: orders.id,
-    shippedDate: orders.shippedDate,
-    shipName: orders.shipName,
-    shipCity: orders.shipCity,
-    shipCountry: orders.shipCountry,
-    productsCount: sql`cast(count(${details.productId}) as int)`,
-    quantitySum: sql`sum(${details.quantity})`,
-    totalPrice: sql`sum(${details.quantity} * ${details.unitPrice})`,
-  })
+db.select({
+  id: orders.id,
+  shippedDate: orders.shippedDate,
+  shipName: orders.shipName,
+  shipCity: orders.shipCity,
+  shipCountry: orders.shipCountry,
+  productsCount: sql`cast(count(${details.productId}) as int)`,
+  quantitySum: sql`sum(${details.quantity})`,
+  totalPrice: sql`sum(${details.quantity} * ${details.unitPrice})`,
+})
   .from(orders)
   .leftJoin(details, eq(orders.id, details.orderId))
   .groupBy(orders.id)
@@ -1025,25 +1051,33 @@ The `USE INDEX` hint suggests to the optimizer which indexes to consider when pr
 \<IsSupportedChipGroup chips={{ 'MySQL': true, 'PostgreSQL': false, 'SQLite': false, 'SingleStore': false, 'MSSQL': false, 'CockroachDB': false }} />
 
 ```ts copy
-export const users = mysqlTable('users', {
-	id: int('id').primaryKey(),
-	name: varchar('name', { length: 100 }).notNull(),
-}, () => [usersTableNameIndex]);
+export const users = mysqlTable(
+  "users",
+  {
+    id: int("id").primaryKey(),
+    name: varchar("name", { length: 100 }).notNull(),
+  },
+  () => [usersTableNameIndex],
+);
 
-const usersTableNameIndex = index('users_name_index').on(users.name);
+const usersTableNameIndex = index("users_name_index").on(users.name);
 
-await db.select()
+await db
+  .select()
   .from(users, { useIndex: usersTableNameIndex })
-  .where(eq(users.name, 'David'));
+  .where(eq(users.name, "David"));
 ```
 
 You can also use this option on any join you want
 
 ```ts
-await db.select()
+await db
+  .select()
   .from(users)
-  .leftJoin(posts, eq(posts.userId, users.id), { useIndex: usersTableNameIndex })
-  .where(eq(users.name, 'David'));
+  .leftJoin(posts, eq(posts.userId, users.id), {
+    useIndex: usersTableNameIndex,
+  })
+  .where(eq(users.name, "David"));
 ```
 
 ### Ignore Index
@@ -1053,25 +1087,33 @@ The `IGNORE INDEX` hint tells the optimizer to avoid using specific indexes for 
 \<IsSupportedChipGroup chips={{ 'MySQL': true, 'PostgreSQL': false, 'SQLite': false, 'SingleStore': false, 'MSSQL': false, 'CockroachDB': false }} />
 
 ```ts copy
-export const users = mysqlTable('users', {
-	id: int('id').primaryKey(),
-	name: varchar('name', { length: 100 }).notNull(),
-}, () => [usersTableNameIndex]);
+export const users = mysqlTable(
+  "users",
+  {
+    id: int("id").primaryKey(),
+    name: varchar("name", { length: 100 }).notNull(),
+  },
+  () => [usersTableNameIndex],
+);
 
-const usersTableNameIndex = index('users_name_index').on(users.name);
+const usersTableNameIndex = index("users_name_index").on(users.name);
 
-await db.select()
+await db
+  .select()
   .from(users, { ignoreIndex: usersTableNameIndex })
-  .where(eq(users.name, 'David'));
+  .where(eq(users.name, "David"));
 ```
 
 You can also use this option on any join you want
 
 ```ts
-await db.select()
+await db
+  .select()
   .from(users)
-  .leftJoin(posts, eq(posts.userId, users.id), { useIndex: usersTableNameIndex })
-  .where(eq(users.name, 'David'));
+  .leftJoin(posts, eq(posts.userId, users.id), {
+    useIndex: usersTableNameIndex,
+  })
+  .where(eq(users.name, "David"));
 ```
 
 ### Force Index
@@ -1081,25 +1123,33 @@ The `FORCE INDEX` hint forces the optimizer to use the specified index(es) for t
 \<IsSupportedChipGroup chips={{ 'MySQL': true, 'PostgreSQL': false, 'SQLite': false, 'SingleStore': false, 'MSSQL': false, 'CockroachDB': false }} />
 
 ```ts copy
-export const users = mysqlTable('users', {
-	id: int('id').primaryKey(),
-	name: varchar('name', { length: 100 }).notNull(),
-}, () => [usersTableNameIndex]);
+export const users = mysqlTable(
+  "users",
+  {
+    id: int("id").primaryKey(),
+    name: varchar("name", { length: 100 }).notNull(),
+  },
+  () => [usersTableNameIndex],
+);
 
-const usersTableNameIndex = index('users_name_index').on(users.name);
+const usersTableNameIndex = index("users_name_index").on(users.name);
 
-await db.select()
+await db
+  .select()
   .from(users, { forceIndex: usersTableNameIndex })
-  .where(eq(users.name, 'David'));
+  .where(eq(users.name, "David"));
 ```
 
 You can also use this option on any join you want
 
 ```ts
-await db.select()
+await db
+  .select()
   .from(users)
-  .leftJoin(posts, eq(posts.userId, users.id), { useIndex: usersTableNameIndex })
-  .where(eq(users.name, 'David'));
+  .leftJoin(posts, eq(posts.userId, users.id), {
+    useIndex: usersTableNameIndex,
+  })
+  .where(eq(users.name, "David"));
 ```
 
 Source: https://orm.drizzle.team/docs/sequences

@@ -2,11 +2,11 @@
 
 Hooks are defined using JavaScript functions, but they represent a special type of reusable UI logic with restrictions on where they can be called.
 
-***
+---
 
-## Only call Hooks at the top level {/*only-call-hooks-at-the-top-level*/}
+## Only call Hooks at the top level {/_only-call-hooks-at-the-top-level_/}
 
-Functions whose names start with `use` are called [*Hooks*](/reference/react) in React.
+Functions whose names start with `use` are called [_Hooks_](/reference/react) in React.
 
 **Don’t call Hooks inside loops, conditions, nested functions, or `try`/`catch`/`finally` blocks.** Instead, always use Hooks at the top level of your React function, before any early returns. You can only call Hooks while React is rendering a function component:
 
@@ -101,11 +101,11 @@ function Bad() {
 
 You can use the [`eslint-plugin-react-hooks` plugin](https://www.npmjs.com/package/eslint-plugin-react-hooks) to catch these mistakes.
 
-[Custom Hooks](/learn/reusing-logic-with-custom-hooks) *may* call other Hooks (that's their whole purpose). This works because custom Hooks are also supposed to only be called while a function component is rendering.
+[Custom Hooks](/learn/reusing-logic-with-custom-hooks) _may_ call other Hooks (that's their whole purpose). This works because custom Hooks are also supposed to only be called while a function component is rendering.
 
-***
+---
 
-## Only call Hooks from React functions {/*only-call-hooks-from-react-functions*/}
+## Only call Hooks from React functions {/_only-call-hooks-from-react-functions_/}
 
 Don’t call Hooks from regular JavaScript functions. Instead, you can:
 
@@ -119,12 +119,13 @@ function FriendList() {
   const [onlineStatus, setOnlineStatus] = useOnlineStatus(); // ✅
 }
 
-function setOnlineStatus() { // ❌ Not a component or custom Hook!
+function setOnlineStatus() {
+  // ❌ Not a component or custom Hook!
   const [onlineStatus, setOnlineStatus] = useOnlineStatus();
 }
 ```
 
-***
+---
 
 ## Sitemap
 

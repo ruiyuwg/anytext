@@ -10,47 +10,47 @@ Next.js includes its own server with `next start` by default. If you have an exi
 Take a look at the [following example](https://github.com/vercel/next.js/tree/canary/examples/custom-server) of a custom server:
 
 ```ts filename="server.ts" switcher
-import { createServer } from 'http'
-import next from 'next'
+import { createServer } from "http";
+import next from "next";
 
-const port = parseInt(process.env.PORT || '3000', 10)
-const dev = process.env.NODE_ENV !== 'production'
-const app = next({ dev })
-const handle = app.getRequestHandler()
+const port = parseInt(process.env.PORT || "3000", 10);
+const dev = process.env.NODE_ENV !== "production";
+const app = next({ dev });
+const handle = app.getRequestHandler();
 
 app.prepare().then(() => {
   createServer((req, res) => {
-    handle(req, res)
-  }).listen(port)
+    handle(req, res);
+  }).listen(port);
 
   console.log(
     `> Server listening at http://localhost:${port} as ${
-      dev ? 'development' : process.env.NODE_ENV
-    }`
-  )
-})
+      dev ? "development" : process.env.NODE_ENV
+    }`,
+  );
+});
 ```
 
 ```js filename="server.js" switcher
-import { createServer } from 'http'
-import next from 'next'
+import { createServer } from "http";
+import next from "next";
 
-const port = parseInt(process.env.PORT || '3000', 10)
-const dev = process.env.NODE_ENV !== 'production'
-const app = next({ dev })
-const handle = app.getRequestHandler()
+const port = parseInt(process.env.PORT || "3000", 10);
+const dev = process.env.NODE_ENV !== "production";
+const app = next({ dev });
+const handle = app.getRequestHandler();
 
 app.prepare().then(() => {
   createServer((req, res) => {
-    handle(req, res)
-  }).listen(port)
+    handle(req, res);
+  }).listen(port);
 
   console.log(
     `> Server listening at http://localhost:${port} as ${
-      dev ? 'development' : process.env.NODE_ENV
-    }`
-  )
-})
+      dev ? "development" : process.env.NODE_ENV
+    }`,
+  );
+});
 ```
 
 > `server.js` does not run through the Next.js Compiler or bundling process. Make sure the syntax and source code this file requires are compatible with the current Node.js version you are using. [View an example](https://github.com/vercel/next.js/tree/canary/examples/custom-server).
@@ -70,9 +70,9 @@ To run the custom server, you'll need to update the `scripts` in `package.json` 
 Alternatively, you can set up `nodemon` ([example](https://github.com/vercel/next.js/tree/canary/examples/custom-server)). The custom server uses the following import to connect the server with the Next.js application:
 
 ```js
-import next from 'next'
+import next from "next";
 
-const app = next({})
+const app = next({});
 ```
 
 The above `next` import is a function that receives an object with the following options:
@@ -80,14 +80,14 @@ The above `next` import is a function that receives an object with the following
 | Option       | Type               | Description                                                                         |
 | ------------ | ------------------ | ----------------------------------------------------------------------------------- |
 | `conf`       | `Object`           | The same object you would use in `next.config.js`. Defaults to `{}`                 |
-| `dev`        | `Boolean`          | (*Optional*) Whether or not to launch Next.js in dev mode. Defaults to `false`      |
-| `dir`        | `String`           | (*Optional*) Location of the Next.js project. Defaults to `'.'`                     |
-| `quiet`      | `Boolean`          | (*Optional*) Hide error messages containing server information. Defaults to `false` |
-| `hostname`   | `String`           | (*Optional*) The hostname the server is running behind                              |
-| `port`       | `Number`           | (*Optional*) The port the server is running behind                                  |
-| `httpServer` | `node:http#Server` | (*Optional*) The HTTP Server that Next.js is running behind                         |
-| `turbopack`  | `Boolean`          | (*Optional*) Enable Turbopack (enabled by default)                                  |
-| `webpack`    | `Boolean`          | (*Optional*) Enable webpack                                                         |
+| `dev`        | `Boolean`          | (_Optional_) Whether or not to launch Next.js in dev mode. Defaults to `false`      |
+| `dir`        | `String`           | (_Optional_) Location of the Next.js project. Defaults to `'.'`                     |
+| `quiet`      | `Boolean`          | (_Optional_) Hide error messages containing server information. Defaults to `false` |
+| `hostname`   | `String`           | (_Optional_) The hostname the server is running behind                              |
+| `port`       | `Number`           | (_Optional_) The port the server is running behind                                  |
+| `httpServer` | `node:http#Server` | (_Optional_) The HTTP Server that Next.js is running behind                         |
+| `turbopack`  | `Boolean`          | (_Optional_) Enable Turbopack (enabled by default)                                  |
+| `webpack`    | `Boolean`          | (_Optional_) Enable webpack                                                         |
 
 The returned `app` can then be used to let Next.js handle requests as required.
 
@@ -100,7 +100,7 @@ To disable this behavior and prevent routing based on files in `pages`, open `ne
 ```js filename="next.config.js"
 module.exports = {
   useFileSystemPublicRoutes: false,
-}
+};
 ```
 
 > Note that `useFileSystemPublicRoutes` disables filename routes from SSR; client-side routing may still access those paths. When using this option, you should guard against navigation to routes you do not want programmatically.

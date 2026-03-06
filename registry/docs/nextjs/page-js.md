@@ -7,16 +7,16 @@ export default function Page({
   params,
   searchParams,
 }: {
-  params: Promise<{ slug: string }>
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  return <h1>My Page</h1>
+  return <h1>My Page</h1>;
 }
 ```
 
 ```jsx filename="app/blog/[slug]/page.js" switcher
 export default function Page({ params, searchParams }) {
-  return <h1>My Page</h1>
+  return <h1>My Page</h1>;
 }
 ```
 
@@ -39,15 +39,15 @@ A promise that resolves to an object containing the [dynamic route parameters](/
 export default async function Page({
   params,
 }: {
-  params: Promise<{ slug: string }>
+  params: Promise<{ slug: string }>;
 }) {
-  const { slug } = await params
+  const { slug } = await params;
 }
 ```
 
 ```jsx filename="app/shop/[slug]/page.js" switcher
 export default async function Page({ params }) {
-  const { slug } = await params
+  const { slug } = await params;
 }
 ```
 
@@ -68,39 +68,39 @@ A promise that resolves to an object containing the [search parameters](https://
 export default async function Page({
   searchParams,
 }: {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const filters = (await searchParams).filters
+  const filters = (await searchParams).filters;
 }
 ```
 
 ```jsx filename="app/shop/page.js" switcher
 export default async function Page({ searchParams }) {
-  const filters = (await searchParams).filters
+  const filters = (await searchParams).filters;
 }
 ```
 
 Client Component **pages** can also access `searchParams` using React’s [`use`](https://react.dev/reference/react/use) hook:
 
 ```tsx filename="app/shop/page.tsx" switcher
-'use client'
-import { use } from 'react'
+"use client";
+import { use } from "react";
 
 export default function Page({
   searchParams,
 }: {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const filters = use(searchParams).filters
+  const filters = use(searchParams).filters;
 }
 ```
 
 ```jsx filename="app/page.jsx" switcher
-'use client'
-import { use } from 'react'
+"use client";
+import { use } from "react";
 
 export default function Page({ searchParams }) {
-  const filters = use(searchParams).filters
+  const filters = use(searchParams).filters;
 }
 ```
 
@@ -120,10 +120,10 @@ export default function Page({ searchParams }) {
 You can type pages with `PageProps` to get strongly typed `params` and `searchParams` from the route literal. `PageProps` is a globally available helper.
 
 ```tsx filename="app/blog/[slug]/page.tsx"
-export default async function Page(props: PageProps<'/blog/[slug]'>) {
-  const { slug } = await props.params
-  const query = await props.searchParams
-  return <h1>Blog Post: {slug}</h1>
+export default async function Page(props: PageProps<"/blog/[slug]">) {
+  const { slug } = await props.params;
+  const query = await props.searchParams;
+  return <h1>Blog Post: {slug}</h1>;
 }
 ```
 
@@ -144,17 +144,17 @@ Using [dynamic route segments](/docs/app/api-reference/file-conventions/dynamic-
 export default async function Page({
   params,
 }: {
-  params: Promise<{ slug: string }>
+  params: Promise<{ slug: string }>;
 }) {
-  const { slug } = await params
-  return <h1>Blog Post: {slug}</h1>
+  const { slug } = await params;
+  return <h1>Blog Post: {slug}</h1>;
 }
 ```
 
 ```jsx filename="app/blog/[slug]/page.js" switcher
 export default async function Page({ params }) {
-  const { slug } = await params
-  return <h1>Blog Post: {slug}</h1>
+  const { slug } = await params;
+  return <h1>Blog Post: {slug}</h1>;
 }
 ```
 
@@ -166,9 +166,9 @@ You can use the `searchParams` prop to handle filtering, pagination, or sorting 
 export default async function Page({
   searchParams,
 }: {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const { page = '1', sort = 'asc', query = '' } = await searchParams
+  const { page = "1", sort = "asc", query = "" } = await searchParams;
 
   return (
     <div>
@@ -177,13 +177,13 @@ export default async function Page({
       <p>Current page: {page}</p>
       <p>Sort order: {sort}</p>
     </div>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/shop/page.js" switcher
 export default async function Page({ searchParams }) {
-  const { page = '1', sort = 'asc', query = '' } = await searchParams
+  const { page = "1", sort = "asc", query = "" } = await searchParams;
 
   return (
     <div>
@@ -192,7 +192,7 @@ export default async function Page({ searchParams }) {
       <p>Current page: {page}</p>
       <p>Sort order: {sort}</p>
     </div>
-  )
+  );
 }
 ```
 
@@ -201,30 +201,30 @@ export default async function Page({ searchParams }) {
 To use `searchParams` and `params` in a Client Component (which cannot be `async`), you can use React's [`use`](https://react.dev/reference/react/use) function to read the promise:
 
 ```tsx filename="app/page.tsx" switcher
-'use client'
+"use client";
 
-import { use } from 'react'
+import { use } from "react";
 
 export default function Page({
   params,
   searchParams,
 }: {
-  params: Promise<{ slug: string }>
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const { slug } = use(params)
-  const { query } = use(searchParams)
+  const { slug } = use(params);
+  const { query } = use(searchParams);
 }
 ```
 
 ```js filename="app/page.js" switcher
-'use client'
+"use client";
 
-import { use } from 'react'
+import { use } from "react";
 
 export default function Page({ params, searchParams }) {
-  const { slug } = use(params)
-  const { query } = use(searchParams)
+  const { slug } = use(params);
+  const { query } = use(searchParams);
 }
 ```
 

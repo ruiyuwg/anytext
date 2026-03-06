@@ -56,22 +56,22 @@ The starter repository already includes:
 First, let's take a look at our API route (`api/events.ts`):
 
 ```typescript
-import type { SlackEvent } from '@slack/web-api';
+import type { SlackEvent } from "@slack/web-api";
 import {
   assistantThreadMessage,
   handleNewAssistantMessage,
-} from '../lib/handle-messages';
-import { waitUntil } from '@vercel/functions';
-import { handleNewAppMention } from '../lib/handle-app-mention';
-import { verifyRequest, getBotId } from '../lib/slack-utils';
+} from "../lib/handle-messages";
+import { waitUntil } from "@vercel/functions";
+import { handleNewAppMention } from "../lib/handle-app-mention";
+import { verifyRequest, getBotId } from "../lib/slack-utils";
 
 export async function POST(request: Request) {
   const rawBody = await request.text();
   const payload = JSON.parse(rawBody);
-  const requestType = payload.type as 'url_verification' | 'event_callback';
+  const requestType = payload.type as "url_verification" | "event_callback";
 
   // See https://api.slack.com/events/url_verification
-  if (requestType === 'url_verification') {
+  if (requestType === "url_verification") {
     return new Response(payload.challenge, { status: 200 });
   }
 
@@ -82,18 +82,18 @@ export async function POST(request: Request) {
 
     const event = payload.event as SlackEvent;
 
-    if (event.type === 'app_mention') {
+    if (event.type === "app_mention") {
       waitUntil(handleNewAppMention(event, botUserId));
     }
 
-    if (event.type === 'assistant_thread_started') {
+    if (event.type === "assistant_thread_started") {
       waitUntil(assistantThreadMessage(event));
     }
 
     if (
-      event.type === 'message' &&
+      event.type === "message" &&
       !event.subtype &&
-      event.channel_type === 'im' &&
+      event.channel_type === "im" &&
       !event.bot_id &&
       !event.bot_profile &&
       event.bot_id !== botUserId
@@ -101,10 +101,10 @@ export async function POST(request: Request) {
       waitUntil(handleNewAssistantMessage(event, botUserId));
     }
 
-    return new Response('Success!', { status: 200 });
+    return new Response("Success!", { status: 200 });
   } catch (error) {
-    console.error('Error generating response', error);
-    return new Response('Error generating response', { status: 500 });
+    console.error("Error generating response", error);
+    return new Response("Error generating response", { status: 500 });
   }
 }
 ```
@@ -146,9 +146,9 @@ When a user mentions your bot in a channel, the `app_mention` event is triggered
 Here's the code for the `handleNewAppMention` function:
 
 ```typescript filename="lib/handle-app-mention.ts"
-import { AppMentionEvent } from '@slack/web-api';
-import { client, getThread } from './slack-utils';
-import { generateResponse } from './ai';
+import { AppMentionEvent } from "@slack/web-api";
+import { client, getThread } from "./slack-utils";
+import { generateResponse } from "./ai";
 
 const updateStatusUtil = async (
   initialStatus: string,
@@ -161,7 +161,7 @@ const updateStatusUtil = async (
   });
 
   if (!initialMessage || !initialMessage.ts)
-    throw new Error('Failed to post initial message');
+    throw new Error("Failed to post initial message");
 
   const updateMessage = async (status: string) => {
     await client.chat.update({
@@ -177,14 +177,14 @@ export async function handleNewAppMention(
   event: AppMentionEvent,
   botUserId: string,
 ) {
-  console.log('Handling app mention');
+  console.log("Handling app mention");
   if (event.bot_id || event.bot_id === botUserId || event.bot_profile) {
-    console.log('Skipping app mention');
+    console.log("Skipping app mention");
     return;
   }
 
   const { thread_ts, channel } = event;
-  const updateMessage = await updateStatusUtil('is thinking...', event);
+  const updateMessage = await updateStatusUtil("is thinking...", event);
 
   if (thread_ts) {
     const messages = await getThread(channel, thread_ts, botUserId);
@@ -192,7 +192,7 @@ export async function handleNewAppMention(
     updateMessage(result);
   } else {
     const result = await generateResponse(
-      [{ role: 'user', content: event.text }],
+      [{ role: "user", content: event.text }],
       updateMessage,
     );
     updateMessage(result);
@@ -212,8 +212,8 @@ When a user starts a thread with your assistant, the `assistant_thread_started` 
 Here's the code for the `assistantThreadMessage` function:
 
 ```typescript filename="lib/handle-messages.ts"
-import type { AssistantThreadStartedEvent } from '@slack/web-api';
-import { client } from './slack-utils';
+import type { AssistantThreadStartedEvent } from "@slack/web-api";
+import { client } from "./slack-utils";
 
 export async function assistantThreadMessage(
   event: AssistantThreadStartedEvent,
@@ -233,12 +233,12 @@ export async function assistantThreadMessage(
     thread_ts: thread_ts,
     prompts: [
       {
-        title: 'Get the weather',
-        message: 'What is the current weather in London?',
+        title: "Get the weather",
+        message: "What is the current weather in London?",
       },
       {
-        title: 'Get the news',
-        message: 'What is the latest Premier League news from the BBC?',
+        title: "Get the news",
+        message: "What is the latest Premier League news from the BBC?",
       },
     ],
   });
@@ -258,9 +258,9 @@ For direct messages to your bot, the `message` event is triggered and the event 
 Here's the code for the `handleNewAssistantMessage` function:
 
 ```typescript filename="lib/handle-messages.ts"
-import type { GenericMessageEvent } from '@slack/web-api';
-import { client, getThread } from './slack-utils';
-import { generateResponse } from './ai';
+import type { GenericMessageEvent } from "@slack/web-api";
+import { client, getThread } from "./slack-utils";
+import { generateResponse } from "./ai";
 
 export async function handleNewAssistantMessage(
   event: GenericMessageEvent,
@@ -276,7 +276,7 @@ export async function handleNewAssistantMessage(
 
   const { thread_ts, channel } = event;
   const updateStatus = updateStatusUtil(channel, thread_ts);
-  updateStatus('is thinking...');
+  updateStatus("is thinking...");
 
   const messages = await getThread(channel, thread_ts, botUserId);
   const result = await generateResponse(messages, updateStatus);
@@ -288,16 +288,16 @@ export async function handleNewAssistantMessage(
     unfurl_links: false,
     blocks: [
       {
-        type: 'section',
+        type: "section",
         text: {
-          type: 'mrkdwn',
+          type: "mrkdwn",
           text: result,
         },
       },
     ],
   });
 
-  updateStatus('');
+  updateStatus("");
 }
 ```
 
@@ -310,7 +310,7 @@ The core of our application is the `generateResponse` function in `lib/generate-
 Here's how to implement it:
 
 ```typescript filename="lib/generate-response.ts"
-import { generateText, ModelMessage } from 'ai';
+import { generateText, ModelMessage } from "ai";
 __PROVIDER_IMPORT__;
 
 export const generateResponse = async (
@@ -321,12 +321,12 @@ export const generateResponse = async (
     model: __MODEL__,
     system: `You are a Slack bot assistant. Keep your responses concise and to the point.
     - Do not tag users.
-    - Current date is: ${new Date().toISOString().split('T')[0]}`,
+    - Current date is: ${new Date().toISOString().split("T")[0]}`,
     messages,
   });
 
   // Convert markdown to Slack mrkdwn format
-  return text.replace(/\[(.*?)\]\((.*?)\)/g, '<$2|$1>').replace(/\*\*/g, '*');
+  return text.replace(/\[(.*?)\]\((.*?)\)/g, "<$2|$1>").replace(/\*\*/g, "*");
 };
 ```
 
@@ -341,10 +341,10 @@ This basic implementation:
 The real power of the AI SDK comes from tools that enable your bot to perform actions. Let's add two useful tools:
 
 ```typescript filename="lib/generate-response.ts"
-import { generateText, tool, ModelMessage, stepCountIs } from 'ai';
+import { generateText, tool, ModelMessage, stepCountIs } from "ai";
 __PROVIDER_IMPORT__;
-import { z } from 'zod';
-import { exa } from './utils';
+import { z } from "zod";
+import { exa } from "./utils";
 
 export const generateResponse = async (
   messages: ModelMessage[],
@@ -354,13 +354,13 @@ export const generateResponse = async (
     model: __MODEL__,
     system: `You are a Slack bot assistant. Keep your responses concise and to the point.
     - Do not tag users.
-    - Current date is: ${new Date().toISOString().split('T')[0]}
+    - Current date is: ${new Date().toISOString().split("T")[0]}
     - Always include sources in your final response if you use web search.`,
     messages,
     stopWhen: stepCountIs(10),
     tools: {
       getWeather: tool({
-        description: 'Get the current weather at a location',
+        description: "Get the current weather at a location",
         inputSchema: z.object({
           latitude: z.number(),
           longitude: z.number(),
@@ -383,26 +383,26 @@ export const generateResponse = async (
         },
       }),
       searchWeb: tool({
-        description: 'Use this to search the web for information',
+        description: "Use this to search the web for information",
         inputSchema: z.object({
           query: z.string(),
           specificDomain: z
             .string()
             .nullable()
             .describe(
-              'a domain to search if the user specifies e.g. bbc.com. Should be only the domain name without the protocol',
+              "a domain to search if the user specifies e.g. bbc.com. Should be only the domain name without the protocol",
             ),
         }),
         execute: async ({ query, specificDomain }) => {
           updateStatus?.(`is searching the web for ${query}...`);
           const { results } = await exa.searchAndContents(query, {
-            livecrawl: 'always',
+            livecrawl: "always",
             numResults: 3,
             includeDomains: specificDomain ? [specificDomain] : undefined,
           });
 
           return {
-            results: results.map(result => ({
+            results: results.map((result) => ({
               title: result.title,
               url: result.url,
               snippet: result.text.slice(0, 1000),
@@ -414,14 +414,13 @@ export const generateResponse = async (
   });
 
   // Convert markdown to Slack mrkdwn format
-  return text.replace(/\[(.*?)\]\((.*?)\)/g, '<$2|$1>').replace(/\*\*/g, '*');
+  return text.replace(/\[(.*?)\]\((.*?)\)/g, "<$2|$1>").replace(/\*\*/g, "*");
 };
 ```
 
 In this updated implementation:
 
 1. You added two tools:
-
    - `getWeather`: Fetches weather data for a specified location
    - `searchWeb`: Searches the web for information using the Exa API
 

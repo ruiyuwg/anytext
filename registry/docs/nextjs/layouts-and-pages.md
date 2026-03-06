@@ -10,13 +10,13 @@ A **page** is UI that is rendered on a specific route. To create a page, add a [
 
 ```tsx filename="app/page.tsx" switcher
 export default function Page() {
-  return <h1>Hello Next.js!</h1>
+  return <h1>Hello Next.js!</h1>;
 }
 ```
 
 ```jsx filename="app/page.js" switcher
 export default function Page() {
-  return <h1>Hello Next.js!</h1>
+  return <h1>Hello Next.js!</h1>;
 }
 ```
 
@@ -34,7 +34,7 @@ For example, to create a layout that accepts your index page as child, add a `la
 export default function DashboardLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
@@ -44,7 +44,7 @@ export default function DashboardLayout({
         <main>{children}</main>
       </body>
     </html>
-  )
+  );
 }
 ```
 
@@ -58,7 +58,7 @@ export default function DashboardLayout({ children }) {
         <main>{children}</main>
       </body>
     </html>
-  )
+  );
 }
 ```
 
@@ -83,11 +83,11 @@ To create nested routes, you can nest folders inside each other. For example, to
 
 ```tsx filename="app/blog/page.tsx" switcher
 // Dummy imports
-import { getPosts } from '@/lib/posts'
-import { Post } from '@/ui/post'
+import { getPosts } from "@/lib/posts";
+import { Post } from "@/ui/post";
 
 export default async function Page() {
-  const posts = await getPosts()
+  const posts = await getPosts();
 
   return (
     <ul>
@@ -95,17 +95,17 @@ export default async function Page() {
         <Post key={post.id} post={post} />
       ))}
     </ul>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/blog/[slug]/page.js" switcher
 // Dummy imports
-import { getPosts } from '@/lib/posts'
-import { Post } from '@/ui/post'
+import { getPosts } from "@/lib/posts";
+import { Post } from "@/ui/post";
 
 export default async function Page() {
-  const posts = await getPosts()
+  const posts = await getPosts();
 
   return (
     <ul>
@@ -113,7 +113,7 @@ export default async function Page() {
         <Post key={post.id} post={post} />
       ))}
     </ul>
-  )
+  );
 }
 ```
 
@@ -125,7 +125,7 @@ You can continue nesting folders to create nested routes. For example, to create
 function generateStaticParams() {}
 
 export default function Page() {
-  return <h1>Hello, Blog Post Page!</h1>
+  return <h1>Hello, Blog Post Page!</h1>;
 }
 ```
 
@@ -133,7 +133,7 @@ export default function Page() {
 function generateStaticParams() {}
 
 export default function Page() {
-  return <h1>Hello, Blog Post Page!</h1>
+  return <h1>Hello, Blog Post Page!</h1>;
 }
 ```
 
@@ -151,15 +151,15 @@ For example, to create a layout for the `/blog` route, add a new `layout` file i
 export default function BlogLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
-  return <section>{children}</section>
+  return <section>{children}</section>;
 }
 ```
 
 ```jsx filename="app/blog/layout.js" switcher
 export default function BlogLayout({ children }) {
-  return <section>{children}</section>
+  return <section>{children}</section>;
 }
 ```
 
@@ -175,31 +175,31 @@ To create a dynamic segment, wrap the segment (folder) name in square brackets: 
 export default async function BlogPostPage({
   params,
 }: {
-  params: Promise<{ slug: string }>
+  params: Promise<{ slug: string }>;
 }) {
-  const { slug } = await params
-  const post = await getPost(slug)
+  const { slug } = await params;
+  const post = await getPost(slug);
 
   return (
     <div>
       <h1>{post.title}</h1>
       <p>{post.content}</p>
     </div>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/blog/[slug]/page.js" switcher
 export default async function BlogPostPage({ params }) {
-  const { slug } = await params
-  const post = await getPost(slug)
+  const { slug } = await params;
+  const post = await getPost(slug);
 
   return (
     <div>
       <h1>{post.title}</h1>
       <p>{post.content}</p>
     </div>
-  )
+  );
 }
 ```
 
@@ -215,15 +215,15 @@ In a Server Component **page**, you can access search parameters using the [`sea
 export default async function Page({
   searchParams,
 }: {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const filters = (await searchParams).filters
+  const filters = (await searchParams).filters;
 }
 ```
 
 ```jsx filename="app/page.jsx" switcher
 export default async function Page({ searchParams }) {
-  const filters = (await searchParams).filters
+  const filters = (await searchParams).filters;
 }
 ```
 
@@ -246,10 +246,10 @@ You can use the [`<Link>` component](/docs/app/api-reference/components/link) to
 For example, to generate a list of blog posts, import `<Link>` from `next/link` and pass a `href` prop to the component:
 
 ```tsx filename="app/ui/post.tsx" highlight={1,10} switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default async function Post({ post }) {
-  const posts = await getPosts()
+  const posts = await getPosts();
 
   return (
     <ul>
@@ -259,15 +259,15 @@ export default async function Post({ post }) {
         </li>
       ))}
     </ul>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/ui/post.js" highlight={1,10}  switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default async function Post({ post }) {
-  const posts = await getPosts()
+  const posts = await getPosts();
 
   return (
     <ul>
@@ -277,7 +277,7 @@ export default async function Post({ post }) {
         </li>
       ))}
     </ul>
-  )
+  );
 }
 ```
 
@@ -293,21 +293,21 @@ Next.js exposes utility types that infer `params` and named slots from your rout
 These are globally available helpers, generated when running either `next dev`, `next build` or [`next typegen`](/docs/app/api-reference/cli/next#next-typegen-options).
 
 ```tsx filename="app/blog/[slug]/page.tsx"
-export default async function Page(props: PageProps<'/blog/[slug]'>) {
-  const { slug } = await props.params
-  return <h1>Blog post: {slug}</h1>
+export default async function Page(props: PageProps<"/blog/[slug]">) {
+  const { slug } = await props.params;
+  return <h1>Blog post: {slug}</h1>;
 }
 ```
 
 ```tsx filename="app/dashboard/layout.tsx"
-export default function Layout(props: LayoutProps<'/dashboard'>) {
+export default function Layout(props: LayoutProps<"/dashboard">) {
   return (
     <section>
       {props.children}
       {/* If you have app/dashboard/@analytics, it appears as a typed slot: */}
       {/* {props.analytics} */}
     </section>
-  )
+  );
 }
 ```
 

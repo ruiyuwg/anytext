@@ -19,8 +19,7 @@ vi.mock("../commands/cache.js", () => ({
 }));
 
 vi.mock("../format.js", async (importOriginal) => {
-  const original =
-    await importOriginal<typeof import("../format.js")>();
+  const original = await importOriginal<typeof import("../format.js")>();
   return { ...original };
 });
 
@@ -64,13 +63,17 @@ describe("CLI entry point", () => {
   it("prints version for --version", async () => {
     const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
     await runCLI(["--version"]);
-    expect(logSpy).toHaveBeenCalledWith(expect.stringMatching(/^\d+\.\d+\.\d+/));
+    expect(logSpy).toHaveBeenCalledWith(
+      expect.stringMatching(/^\d+\.\d+\.\d+/),
+    );
   });
 
   it("prints version for -v", async () => {
     const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
     await runCLI(["-v"]);
-    expect(logSpy).toHaveBeenCalledWith(expect.stringMatching(/^\d+\.\d+\.\d+/));
+    expect(logSpy).toHaveBeenCalledWith(
+      expect.stringMatching(/^\d+\.\d+\.\d+/),
+    );
   });
 
   it("prints help for --help", async () => {
@@ -101,7 +104,9 @@ describe("CLI entry point", () => {
 
     await runCLI(["unknown-cmd"]);
 
-    expect(errorSpy).toHaveBeenCalledWith(expect.stringContaining("Unknown command"));
+    expect(errorSpy).toHaveBeenCalledWith(
+      expect.stringContaining("Unknown command"),
+    );
     expect(logSpy).toHaveBeenCalled();
     expect(exitSpy).toHaveBeenCalledWith(1);
   });

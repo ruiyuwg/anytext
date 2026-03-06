@@ -11,12 +11,12 @@ module.exports = {
   async rewrites() {
     return [
       {
-        source: '/about',
-        destination: '/',
+        source: "/about",
+        destination: "/",
       },
-    ]
+    ];
   },
-}
+};
 ```
 
 Rewrites are applied to client-side routing. In the example above, navigating to `<Link href="/about">` will serve content from `/` while keeping the URL as `/about`.
@@ -41,30 +41,30 @@ module.exports = {
         // and before all files including _next/public files which
         // allows overriding page files
         {
-          source: '/some-page',
-          destination: '/somewhere-else',
-          has: [{ type: 'query', key: 'overrideMe' }],
+          source: "/some-page",
+          destination: "/somewhere-else",
+          has: [{ type: "query", key: "overrideMe" }],
         },
       ],
       afterFiles: [
         // These rewrites are checked after pages/public files
         // are checked but before dynamic routes
         {
-          source: '/non-existent',
-          destination: '/somewhere-else',
+          source: "/non-existent",
+          destination: "/somewhere-else",
         },
       ],
       fallback: [
         // These rewrites are checked after both pages/public files
         // and dynamic routes are checked
         {
-          source: '/:path*',
+          source: "/:path*",
           destination: `https://my-old-site.com/:path*`,
         },
       ],
-    }
+    };
   },
-}
+};
 ```
 
 > **Good to know**: rewrites in `beforeFiles` do not check the filesystem/dynamic routes immediately after matching a source, they continue until all `beforeFiles` have been checked.
@@ -77,7 +77,7 @@ The order Next.js routes are checked is:
 4. `beforeFiles` rewrites are checked/applied
 5. static files from the [public directory](/docs/app/api-reference/file-conventions/public-folder), `_next/static` files, and non-dynamic pages are checked/served
 6. `afterFiles` rewrites are checked/applied, if one of these rewrites is matched we check dynamic routes/static files after each match
-7. `fallback` rewrites are checked/applied, these are applied before rendering the 404 page and after dynamic routes/all static assets have been checked. If you use [fallback: true/'blocking'](/docs/pages/api-reference/functions/get-static-paths#fallback-true) in `getStaticPaths`, the fallback `rewrites` defined in your `next.config.js` will *not* be run.
+7. `fallback` rewrites are checked/applied, these are applied before rendering the 404 page and after dynamic routes/all static assets have been checked. If you use [fallback: true/'blocking'](/docs/pages/api-reference/functions/get-static-paths#fallback-true) in `getStaticPaths`, the fallback `rewrites` defined in your `next.config.js` will _not_ be run.
 
 ## Rewrite parameters
 
@@ -88,12 +88,12 @@ module.exports = {
   async rewrites() {
     return [
       {
-        source: '/old-about/:path*',
-        destination: '/about', // The :path parameter isn't used here so will be automatically passed in the query
+        source: "/old-about/:path*",
+        destination: "/about", // The :path parameter isn't used here so will be automatically passed in the query
       },
-    ]
+    ];
   },
-}
+};
 ```
 
 If a parameter is used in the destination none of the parameters will be automatically passed in the query.
@@ -103,12 +103,12 @@ module.exports = {
   async rewrites() {
     return [
       {
-        source: '/docs/:path*',
-        destination: '/:path*', // The :path parameter is used here so will not be automatically passed in the query
+        source: "/docs/:path*",
+        destination: "/:path*", // The :path parameter is used here so will not be automatically passed in the query
       },
-    ]
+    ];
   },
-}
+};
 ```
 
 You can still pass the parameters manually in the query if one is already used in the destination by specifying the query in the `destination`.
@@ -118,15 +118,15 @@ module.exports = {
   async rewrites() {
     return [
       {
-        source: '/:first/:second',
-        destination: '/:first?second=:second',
+        source: "/:first/:second",
+        destination: "/:first?second=:second",
         // Since the :first parameter is used in the destination the :second parameter
         // will not automatically be added in the query although we can manually add it
         // as shown above
       },
-    ]
+    ];
   },
-}
+};
 ```
 
 > **Good to know**: Static pages from [Automatic Static Optimization](/docs/pages/building-your-application/rendering/automatic-static-optimization) or [prerendering](/docs/pages/building-your-application/data-fetching/get-static-props) params from rewrites will be parsed on the client after hydration and provided in the query.
@@ -140,12 +140,12 @@ module.exports = {
   async rewrites() {
     return [
       {
-        source: '/blog/:slug',
-        destination: '/news/:slug', // Matched parameters can be used in the destination
+        source: "/blog/:slug",
+        destination: "/news/:slug", // Matched parameters can be used in the destination
       },
-    ]
+    ];
   },
-}
+};
 ```
 
 The pattern `/blog/:slug` matches `/blog/first-post` and `/blog/post-1` but not `/blog/a/b` (no nested paths). Patterns are anchored to the start: `/blog/:slug` will not match `/archive/blog/first-post`.
@@ -163,12 +163,12 @@ module.exports = {
   async rewrites() {
     return [
       {
-        source: '/blog/:slug*',
-        destination: '/news/:slug*', // Matched parameters can be used in the destination
+        source: "/blog/:slug*",
+        destination: "/news/:slug*", // Matched parameters can be used in the destination
       },
-    ]
+    ];
   },
-}
+};
 ```
 
 ### Regex Path Matching
@@ -180,12 +180,12 @@ module.exports = {
   async rewrites() {
     return [
       {
-        source: '/old-blog/:post(\\d{1,})',
-        destination: '/blog/:post', // Matched parameters can be used in the destination
+        source: "/old-blog/:post(\\d{1,})",
+        destination: "/blog/:post", // Matched parameters can be used in the destination
       },
-    ]
+    ];
   },
-}
+};
 ```
 
 The following characters `(`, `)`, `{`, `}`, `[`, `]`, `|`, `\`, `^`, `.`, `:`, `*`, `+`, `-`, `?`, `$` are used for regex path matching, so when used in the `source` as non-special values they must be escaped by adding `\\` before them:
@@ -196,12 +196,12 @@ module.exports = {
     return [
       {
         // this will match `/english(default)/something` being requested
-        source: '/english\\(default\\)/:slug',
-        destination: '/en-us/:slug',
+        source: "/english\\(default\\)/:slug",
+        destination: "/en-us/:slug",
       },
-    ]
+    ];
   },
-}
+};
 ```
 
 ## Header, Cookie, and Query Matching
@@ -221,76 +221,76 @@ module.exports = {
       // if the header `x-rewrite-me` is present,
       // this rewrite will be applied
       {
-        source: '/:path*',
+        source: "/:path*",
         has: [
           {
-            type: 'header',
-            key: 'x-rewrite-me',
+            type: "header",
+            key: "x-rewrite-me",
           },
         ],
-        destination: '/another-page',
+        destination: "/another-page",
       },
       // if the header `x-rewrite-me` is not present,
       // this rewrite will be applied
       {
-        source: '/:path*',
+        source: "/:path*",
         missing: [
           {
-            type: 'header',
-            key: 'x-rewrite-me',
+            type: "header",
+            key: "x-rewrite-me",
           },
         ],
-        destination: '/another-page',
+        destination: "/another-page",
       },
       // if the source, query, and cookie are matched,
       // this rewrite will be applied
       {
-        source: '/specific/:path*',
+        source: "/specific/:path*",
         has: [
           {
-            type: 'query',
-            key: 'page',
+            type: "query",
+            key: "page",
             // the page value will not be available in the
             // destination since value is provided and doesn't
             // use a named capture group e.g. (?<page>home)
-            value: 'home',
+            value: "home",
           },
           {
-            type: 'cookie',
-            key: 'authorized',
-            value: 'true',
+            type: "cookie",
+            key: "authorized",
+            value: "true",
           },
         ],
-        destination: '/:path*/home',
+        destination: "/:path*/home",
       },
       // if the header `x-authorized` is present and
       // contains a matching value, this rewrite will be applied
       {
-        source: '/:path*',
+        source: "/:path*",
         has: [
           {
-            type: 'header',
-            key: 'x-authorized',
-            value: '(?<authorized>yes|true)',
+            type: "header",
+            key: "x-authorized",
+            value: "(?<authorized>yes|true)",
           },
         ],
-        destination: '/home?authorized=:authorized',
+        destination: "/home?authorized=:authorized",
       },
       // if the host is `example.com`,
       // this rewrite will be applied
       {
-        source: '/:path*',
+        source: "/:path*",
         has: [
           {
-            type: 'host',
-            value: 'example.com',
+            type: "host",
+            value: "example.com",
           },
         ],
-        destination: '/another-page',
+        destination: "/another-page",
       },
-    ]
+    ];
   },
-}
+};
 ```
 
 ## Rewriting to an external URL
@@ -306,16 +306,16 @@ module.exports = {
   async rewrites() {
     return [
       {
-        source: '/blog',
-        destination: 'https://example.com/blog',
+        source: "/blog",
+        destination: "https://example.com/blog",
       },
       {
-        source: '/blog/:slug',
-        destination: 'https://example.com/blog/:slug', // Matched parameters can be used in the destination
+        source: "/blog/:slug",
+        destination: "https://example.com/blog/:slug", // Matched parameters can be used in the destination
       },
-    ]
+    ];
   },
-}
+};
 ```
 
 If you're using `trailingSlash: true`, you also need to insert a trailing slash in the `source` parameter. If the destination server is also expecting a trailing slash it should be included in the `destination` parameter as well.
@@ -326,16 +326,16 @@ module.exports = {
   async rewrites() {
     return [
       {
-        source: '/blog/',
-        destination: 'https://example.com/blog/',
+        source: "/blog/",
+        destination: "https://example.com/blog/",
       },
       {
-        source: '/blog/:path*/',
-        destination: 'https://example.com/blog/:path*/',
+        source: "/blog/:path*/",
+        destination: "https://example.com/blog/:path*/",
       },
-    ]
+    ];
   },
-}
+};
 ```
 
 ### Incremental adoption of Next.js
@@ -350,13 +350,13 @@ module.exports = {
     return {
       fallback: [
         {
-          source: '/:path*',
+          source: "/:path*",
           destination: `https://custom-routes-proxying-endpoint.vercel.app/:path*`,
         },
       ],
-    }
+    };
   },
-}
+};
 ```
 
 ### Rewrites with basePath support
@@ -365,24 +365,24 @@ When leveraging [`basePath` support](/docs/app/api-reference/config/next-config-
 
 ```js filename="next.config.js"
 module.exports = {
-  basePath: '/docs',
+  basePath: "/docs",
 
   async rewrites() {
     return [
       {
-        source: '/with-basePath', // automatically becomes /docs/with-basePath
-        destination: '/another', // automatically becomes /docs/another
+        source: "/with-basePath", // automatically becomes /docs/with-basePath
+        destination: "/another", // automatically becomes /docs/another
       },
       {
         // does not add /docs to /without-basePath since basePath: false is set
         // Note: this cannot be used for internal rewrites e.g. `destination: '/another'`
-        source: '/without-basePath',
-        destination: 'https://example.com',
+        source: "/without-basePath",
+        destination: "https://example.com",
         basePath: false,
       },
-    ]
+    ];
   },
-}
+};
 ```
 
 ## Version History
@@ -400,22 +400,22 @@ module.exports = {
 `sassOptions` allow you to configure the Sass compiler.
 
 ```ts filename="next.config.ts" switcher
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const sassOptions = {
   additionalData: `
     $var: red;
   `,
-}
+};
 
 const nextConfig: NextConfig = {
   sassOptions: {
     ...sassOptions,
-    implementation: 'sass-embedded',
+    implementation: "sass-embedded",
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 ```js filename="next.config.js" switcher
@@ -425,16 +425,16 @@ const sassOptions = {
   additionalData: `
     $var: red;
   `,
-}
+};
 
 const nextConfig = {
   sassOptions: {
     ...sassOptions,
-    implementation: 'sass-embedded',
+    implementation: "sass-embedded",
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 > **Good to know:**
@@ -458,10 +458,10 @@ A list of extra safe origin domains from which Server Actions can be invoked. Ne
 module.exports = {
   experimental: {
     serverActions: {
-      allowedOrigins: ['my-proxy.com', '*.my-proxy.com'],
+      allowedOrigins: ["my-proxy.com", "*.my-proxy.com"],
     },
   },
-}
+};
 ```
 
 ## `bodySizeLimit`
@@ -476,10 +476,10 @@ However, you can configure this limit using the `serverActions.bodySizeLimit` op
 module.exports = {
   experimental: {
     serverActions: {
-      bodySizeLimit: '2mb',
+      bodySizeLimit: "2mb",
     },
   },
-}
+};
 ```
 
 ## Enabling Server Actions (v13)
@@ -492,9 +492,9 @@ const config = {
   experimental: {
     serverActions: true,
   },
-}
+};
 
-module.exports = config
+module.exports = config;
 ```
 
 # serverComponentsHmrCache
@@ -510,15 +510,15 @@ By default, the HMR cache applies to all `fetch` requests, including those with 
 You can disable the HMR cache by setting `serverComponentsHmrCache` to `false` in your `next.config.js` file:
 
 ```ts filename="next.config.ts" switcher
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   experimental: {
     serverComponentsHmrCache: false, // defaults to true
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 ```js filename="next.config.js" switcher
@@ -527,9 +527,9 @@ const nextConfig = {
   experimental: {
     serverComponentsHmrCache: false, // defaults to true
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 > **Good to know:** For better observability, we recommend using the [`logging.fetches`](/docs/app/api-reference/config/next-config-js/logging) option which logs fetch cache hits and misses in the console during development.

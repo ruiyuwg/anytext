@@ -47,9 +47,9 @@ When creating custom hooks around tRPC procedures, it's sometimes necessary to h
 import {
   createTRPCReact,
   type inferReactQueryProcedureOptions,
-} from '@trpc/react-query';
-import type { inferRouterInputs, inferRouterOutputs } from '@trpc/server';
-import type { AppRouter } from './server';
+} from "@trpc/react-query";
+import type { inferRouterInputs, inferRouterOutputs } from "@trpc/server";
+import type { AppRouter } from "./server";
 
 // infer the types for your router
 export type ReactQueryOptions = inferReactQueryProcedureOptions<AppRouter>;
@@ -70,9 +70,9 @@ import {
   type ReactQueryOptions,
   type RouterInputs,
   type RouterOutputs,
-} from './trpc';
+} from "./trpc";
 
-type PostCreateOptions = ReactQueryOptions['post']['create'];
+type PostCreateOptions = ReactQueryOptions["post"]["create"];
 
 function usePostCreate(options?: PostCreateOptions) {
   const utils = trpc.useUtils();
@@ -95,10 +95,10 @@ function usePostCreate(options?: PostCreateOptions) {
 // @filename: usePostById.ts
 // @noErrors
 // ---cut---
-import { ReactQueryOptions, RouterInputs, trpc } from './trpc';
+import { ReactQueryOptions, RouterInputs, trpc } from "./trpc";
 
-type PostByIdOptions = ReactQueryOptions['post']['byId'];
-type PostByIdInput = RouterInputs['post']['byId'];
+type PostByIdOptions = ReactQueryOptions["post"]["byId"];
+type PostByIdInput = RouterInputs["post"]["byId"];
 
 function usePostById(input: PostByIdInput, options?: PostByIdOptions) {
   return trpc.post.byId.useQuery(input, options);
@@ -150,7 +150,7 @@ export MyRouterUtilsLike = UtilsLike<MyRouterType>
 export type AppRouter = typeof appRouter;
 
 // Export your MyRouter types to the client
-export type { MyRouterLike, MyRouterUtilsLike } from './factory';
+export type { MyRouterLike, MyRouterUtilsLike } from "./factory";
 ```
 
 ```tsx twoslash title='frontend/usePostCreate.ts'
@@ -158,7 +158,7 @@ export type { MyRouterLike, MyRouterUtilsLike } from './factory';
 // @include: server
 // @noErrors
 // ---cut---
-import type { MyRouterLike, MyRouterUtilsLike, trpc, useUtils } from './trpc';
+import type { MyRouterLike, MyRouterUtilsLike, trpc, useUtils } from "./trpc";
 
 type MyGenericComponentProps = {
   route: MyRouterLike;
@@ -168,7 +168,7 @@ type MyGenericComponentProps = {
 function MyGenericComponent(props: MyGenericComponentProps) {
   const { route } = props;
   const thing = route.listThings.useQuery({
-    filter: 'qwerty',
+    filter: "qwerty",
   });
 
   const mutation = route.doThing.useMutation({
@@ -179,7 +179,7 @@ function MyGenericComponent(props: MyGenericComponentProps) {
 
   function handleClick() {
     mutation.mutate({
-      name: 'Thing 1',
+      name: "Thing 1",
     });
   }
 

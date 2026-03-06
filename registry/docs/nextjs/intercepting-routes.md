@@ -25,7 +25,7 @@ For example, you can intercept the `photo` segment from within the `feed` segmen
 
 ![Intercepting routes folder structure](https://h8DxKfmAPhn8O0p3.public.blob.vercel-storage.com/docs/light/intercepted-routes-files.png)
 
-> **Good to know:** The `(..)` convention is based on *route segments*, not the file-system. For example, it does not consider `@slot` folders in [Parallel Routes](/docs/app/api-reference/file-conventions/parallel-routes).
+> **Good to know:** The `(..)` convention is based on _route segments_, not the file-system. For example, it does not consider `@slot` folders in [Parallel Routes](/docs/app/api-reference/file-conventions/parallel-routes).
 
 ## Examples
 

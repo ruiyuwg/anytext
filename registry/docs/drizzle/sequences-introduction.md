@@ -14,16 +14,16 @@ export const customSequence = pgSequence("name");
 
 // Sequence with params
 export const customSequence = pgSequence("name", {
-      startWith: 100,
-      maxValue: 10000,
-      minValue: 100,
-      cycle: true,
-      cache: 10,
-      increment: 2
+  startWith: 100,
+  maxValue: 10000,
+  minValue: 100,
+  cycle: true,
+  cache: 10,
+  increment: 2,
 });
 
 // Sequence in custom schema
-export const customSchema = pgSchema('custom_schema');
+export const customSchema = pgSchema("custom_schema");
 export const customSequence = customSchema.sequence("name");
 ```
 
@@ -46,7 +46,7 @@ increment: 2
 });
 
 // Sequence in custom schema
-export const customSchema = cockroachSchema('custom\_schema');
+export const customSchema = cockroachSchema('custom_schema');
 export const customSequence = customSchema.sequence("name");
 
 ````
@@ -63,7 +63,7 @@ import Callout from '@mdx/Callout.astro';
 
 # Set Operations
 
-SQL set operations combine the results of multiple query blocks into a single result. 
+SQL set operations combine the results of multiple query blocks into a single result.
 The SQL standard defines the following three set operations: `UNION`, `INTERSECT`, `EXCEPT`, `UNION ALL`, `INTERSECT ALL`, `EXCEPT ALL`.
 
 ### Union
@@ -119,7 +119,7 @@ Get all names from customers and users tables without duplicates.
         name: varchar('name', { length: 256 }).notNull(),
         address: text('address'),
     });
-    
+
     const customers = pgTable('customers', {
         id: integer('id').primaryKey(),
         name: varchar('name', { length: 256 }).notNull(),
@@ -129,7 +129,7 @@ Get all names from customers and users tables without duplicates.
     ```
     </CodeTab>
   </CodeTabs>
-  </Tab> 
+  </Tab>
   <Tab>
   <CodeTabs items={["import-pattern", "builder-pattern", "schema.ts"]}>
 	<CodeTab>
@@ -177,7 +177,7 @@ Get all names from customers and users tables without duplicates.
         name: varchar('name', { length: 256 }).notNull(),
         address: text('address'),
     });
-    
+
     const customers = mysqlTable('customers', {
         id: int('id').primaryKey(),
         name: varchar('name', { length: 256 }).notNull(),
@@ -187,7 +187,7 @@ Get all names from customers and users tables without duplicates.
     ```
     </CodeTab>
   </CodeTabs>
-  </Tab> 
+  </Tab>
   <Tab>
   <CodeTabs items={["import-pattern", "builder-pattern", "schema.ts"]}>
 	<CodeTab>
@@ -204,7 +204,7 @@ Get all names from customers and users tables without duplicates.
     ```
     ```sql
     (select "name" from "sellers")
-    union 
+    union
     (select "name" from "customers")
     limit ?
     ```
@@ -232,7 +232,7 @@ Get all names from customers and users tables without duplicates.
         name: text('name').notNull(),
         address: text('address'),
     });
-    
+
     const customers = sqliteTable('customers', {
         id: int('id').primaryKey(),
         name: text('name').notNull(),
@@ -242,7 +242,7 @@ Get all names from customers and users tables without duplicates.
     ```
     </CodeTab>
   </CodeTabs>
-  </Tab> 
+  </Tab>
   <Tab>
   <CodeTabs items={["import-pattern", "builder-pattern", "schema.ts"]}>
 	<CodeTab>
@@ -290,7 +290,7 @@ Get all names from customers and users tables without duplicates.
         name: varchar('name', { length: 256 }).notNull(),
         address: text('address'),
     });
-    
+
     const customers = mysqlTable('customers', {
         id: int('id').primaryKey(),
         name: varchar('name', { length: 256 }).notNull(),
@@ -300,7 +300,7 @@ Get all names from customers and users tables without duplicates.
     ```
     </CodeTab>
   </CodeTabs>
-  </Tab> 
+  </Tab>
   <Tab>
   <CodeTabs items={["import-pattern", "builder-pattern", "schema.ts"]}>
 	<CodeTab>
@@ -348,7 +348,7 @@ Get all names from customers and users tables without duplicates.
         name: nvarchar({ length: 256 }).notNull(),
         address: ntext(),
     });
-    
+
     const customers = mssqlTable('customers', {
         id: int().primaryKey(),
         name: nvarchar({ length: 256 }).notNull(),
@@ -358,7 +358,7 @@ Get all names from customers and users tables without duplicates.
     ```
     </CodeTab>
   </CodeTabs>
-  </Tab> 
+  </Tab>
   <Tab>
   <CodeTabs items={["import-pattern", "builder-pattern", "schema.ts"]}>
 	<CodeTab>
@@ -406,7 +406,7 @@ Get all names from customers and users tables without duplicates.
         name: varchar({ length: 256 }).notNull(),
         address: text(),
     });
-    
+
     const customers = cockroachTable('customers', {
         id: int4().primaryKey(),
         name: varchar({ length: 256 }).notNull(),
@@ -416,15 +416,15 @@ Get all names from customers and users tables without duplicates.
     ```
     </CodeTab>
   </CodeTabs>
-  </Tab> 
+  </Tab>
 </Tabs>
 
 ### Union All
 Combine all results from two query blocks into a single result, with duplicates.
 
-Let's consider a scenario where you have two tables, one representing online sales and the other 
+Let's consider a scenario where you have two tables, one representing online sales and the other
 representing in-store sales. In this case, you want to combine the data from both tables into a
-single result set. Since there might be duplicate transactions, 
+single result set. Since there might be duplicate transactions,
 you want to keep all the records and not eliminate duplicates.
 
 <Tabs items={["PostgreSQL", "MySQL", "SQLite", "SingleStore", "MSSQL", "CockroachDB"]}>
@@ -473,7 +473,7 @@ you want to keep all the records and not eliminate duplicates.
         quantitySold: integer('quantity_sold'),
         saleDate: timestamp('sale_date', { mode: 'date' }),
     });
-    
+
     const inStoreSales = pgTable('in_store_sales', {
         transactionId: integer('transaction_id').primaryKey(),
         productId: integer('product_id').unique(),
@@ -483,7 +483,7 @@ you want to keep all the records and not eliminate duplicates.
     ```
     </CodeTab>
   </CodeTabs>
-  </Tab> 
+  </Tab>
 <Tab>
   <CodeTabs items={["import-pattern", "builder-pattern", "schema.ts"]}>
 	<CodeTab>
@@ -515,7 +515,7 @@ you want to keep all the records and not eliminate duplicates.
     ```
     ```sql
     (select `transaction_id` from `online_sales`)
-    union all 
+    union all
     (select `transaction_id` from `in_store_sales`)
     ```
 	</CodeTab>
@@ -529,7 +529,7 @@ you want to keep all the records and not eliminate duplicates.
         quantitySold: int('quantity_sold'),
         saleDate: timestamp('sale_date', { mode: 'date' }),
     });
-    
+
     const inStoreSales = mysqlTable('in_store_sales', {
         transactionId: int('transaction_id').primaryKey(),
         productId: int('product_id').unique(),
@@ -539,7 +539,7 @@ you want to keep all the records and not eliminate duplicates.
     ```
     </CodeTab>
   </CodeTabs>
-  </Tab> 
+  </Tab>
   <Tab>
   <CodeTabs items={["import-pattern", "builder-pattern", "schema.ts"]}>
 	<CodeTab>
@@ -553,8 +553,8 @@ you want to keep all the records and not eliminate duplicates.
     const result = await unionAll(onlineTransactions, inStoreTransactions);
     ```
     ```sql
-    select "transaction_id" from "online_sales" 
-    union all 
+    select "transaction_id" from "online_sales"
+    union all
     select "transaction_id" from "in_store_sales"
     ```
     </CodeTab>
@@ -570,8 +570,8 @@ you want to keep all the records and not eliminate duplicates.
       );
     ```
     ```sql
-    select "transaction_id" from "online_sales" 
-    union all 
+    select "transaction_id" from "online_sales"
+    union all
     select "transaction_id" from "in_store_sales"
     ```
 	</CodeTab>
@@ -585,7 +585,7 @@ you want to keep all the records and not eliminate duplicates.
         quantitySold: int('quantity_sold'),
         saleDate: int('sale_date', { mode: 'timestamp' }),
     });
-    
+
     const inStoreSales = sqliteTable('in_store_sales', {
         transactionId: int('transaction_id').primaryKey(),
         productId: int('product_id').unique(),
@@ -595,7 +595,7 @@ you want to keep all the records and not eliminate duplicates.
     ```
     </CodeTab>
   </CodeTabs>
-  </Tab> 
+  </Tab>
   <Tab>
   <Callout type='warning'>
   UNION ALL with ORDER BY behavior inconsistent with MySQL: SingleStore parses UNION ALL followed by ORDER BY commands differently from MySQL. In SingleStore, the following query is valid. In MySQL, it is invalid.
@@ -630,7 +630,7 @@ you want to keep all the records and not eliminate duplicates.
     ```
     ```sql
     (select `transaction_id` from `online_sales`)
-    union all 
+    union all
     (select `transaction_id` from `in_store_sales`)
     ```
 	</CodeTab>
@@ -644,7 +644,7 @@ you want to keep all the records and not eliminate duplicates.
         quantitySold: int('quantity_sold'),
         saleDate: timestamp('sale_date', { mode: 'date' }),
     });
-    
+
     const inStoreSales = mysqlTable('in_store_sales', {
         transactionId: int('transaction_id').primaryKey(),
         productId: int('product_id').unique(),
@@ -654,7 +654,7 @@ you want to keep all the records and not eliminate duplicates.
     ```
     </CodeTab>
   </CodeTabs>
-  </Tab> 
+  </Tab>
   <Tab>
   <CodeTabs items={["import-pattern", "builder-pattern", "schema.ts"]}>
 	<CodeTab>
@@ -700,7 +700,7 @@ you want to keep all the records and not eliminate duplicates.
         quantitySold: int('quantity_sold'),
         saleDate: timestamp('sale_date', { mode: 'date' }),
     });
-    
+
     const inStoreSales = mysqlTable('in_store_sales', {
         transactionId: int('transaction_id').primaryKey(),
         productId: int('product_id').unique(),
@@ -710,7 +710,7 @@ you want to keep all the records and not eliminate duplicates.
     ```
     </CodeTab>
   </CodeTabs>
-  </Tab> 
+  </Tab>
   <Tab>
   <CodeTabs items={["import-pattern", "builder-pattern", "schema.ts"]}>
 	<CodeTab>
@@ -756,7 +756,7 @@ you want to keep all the records and not eliminate duplicates.
         quantitySold: int4('quantity_sold'),
         saleDate: timestamp('sale_date', { mode: 'date' }),
     });
-    
+
     const inStoreSales = cockroachTable('in_store_sales', {
         transactionId: int4('transaction_id').primaryKey(),
         productId: int4('product_id').unique(),
@@ -766,18 +766,18 @@ you want to keep all the records and not eliminate duplicates.
     ```
     </CodeTab>
   </CodeTabs>
-  </Tab> 
+  </Tab>
 </Tabs>
 
 ### Intersect
 Combine only those rows which the results of two query blocks have in common, omitting any duplicates.
 
-Suppose you have two tables that store information about students' course enrollments. 
+Suppose you have two tables that store information about students' course enrollments.
 You want to find the courses that are common between two different departments,
-but you want distinct course names, and you're not interested in counting multiple 
+but you want distinct course names, and you're not interested in counting multiple
 enrollments of the same course by the same student.
 
-In this scenario, you want to find courses that are common between the two departments but don't want 
+In this scenario, you want to find courses that are common between the two departments but don't want
 to count the same course multiple times even if multiple students from the same department are enrolled in it.
 
 <Tabs items={["PostgreSQL", "MySQL", "SQLite", "SingleStore", "MSSQL", "CockroachDB"]}>
@@ -822,7 +822,7 @@ to count the same course multiple times even if multiple students from the same 
         studentId: integer('student_id'),
         courseName: varchar('course_name').notNull(),
     });
-    
+
     const depB = pgTable('department_b_courses', {
         studentId: integer('student_id'),
         courseName: varchar('course_name').notNull(),
@@ -830,7 +830,7 @@ to count the same course multiple times even if multiple students from the same 
     ```
     </CodeTab>
   </CodeTabs>
-  </Tab> 
+  </Tab>
   <Tab>
     <CodeTabs items={["import-pattern", "builder-pattern", "schema.ts"]}>
 	<CodeTab>
@@ -872,7 +872,7 @@ to count the same course multiple times even if multiple students from the same 
         studentId: int('student_id'),
         courseName: varchar('course_name', { length: 256 }).notNull(),
     });
-    
+
     const depB = mysqlTable('department_b_courses', {
         studentId: int('student_id'),
         courseName: varchar('course_name', { length: 256 }).notNull(),
@@ -880,7 +880,7 @@ to count the same course multiple times even if multiple students from the same 
     ```
     </CodeTab>
   </CodeTabs>
-  </Tab> 
+  </Tab>
   <Tab>
       <CodeTabs items={["import-pattern", "builder-pattern", "schema.ts"]}>
 	<CodeTab>
@@ -909,8 +909,8 @@ to count the same course multiple times even if multiple students from the same 
       .intersect(db.select({ courseName: depB.courseName }).from(depB));
     ```
     ```sql
-    select "course_name" from "department_a_courses" 
-    intersect 
+    select "course_name" from "department_a_courses"
+    intersect
     select "course_name" from "department_b_courses"
     ```
     </CodeTab>
@@ -922,7 +922,7 @@ to count the same course multiple times even if multiple students from the same 
         studentId: int('student_id'),
         courseName: text('course_name').notNull(),
     });
-    
+
     const depB = sqliteTable('department_b_courses', {
         studentId: int('student_id'),
         courseName: text('course_name').notNull(),
@@ -930,7 +930,7 @@ to count the same course multiple times even if multiple students from the same 
     ```
     </CodeTab>
   </CodeTabs>
-  </Tab> 
+  </Tab>
   <Tab>
     <CodeTabs items={["import-pattern", "builder-pattern", "schema.ts"]}>
 	<CodeTab>
@@ -972,7 +972,7 @@ to count the same course multiple times even if multiple students from the same 
         studentId: int('student_id'),
         courseName: varchar('course_name', { length: 256 }).notNull(),
     });
-    
+
     const depB = singlestoreTable('department_b_courses', {
         studentId: int('student_id'),
         courseName: varchar('course_name', { length: 256 }).notNull(),
@@ -980,7 +980,7 @@ to count the same course multiple times even if multiple students from the same 
     ```
     </CodeTab>
   </CodeTabs>
-  </Tab> 
+  </Tab>
   <Tab>
   <CodeTabs items={["import-pattern", "builder-pattern", "schema.ts"]}>
 	<CodeTab>
@@ -1022,7 +1022,7 @@ to count the same course multiple times even if multiple students from the same 
         studentId: int('student_id'),
         courseName: varchar('course_name', { length: 256 }).notNull(),
     });
-    
+
     const depB = mssqlTable('department_b_courses', {
         studentId: int('student_id'),
         courseName: varchar('course_name', { length: 256 }).notNull(),
@@ -1072,7 +1072,7 @@ to count the same course multiple times even if multiple students from the same 
         studentId: int4('student_id'),
         courseName: varchar('course_name').notNull(),
     });
-    
+
     const depB = cockroachTable('department_b_courses', {
         studentId: int4('student_id'),
         courseName: varchar('course_name').notNull(),
@@ -1080,19 +1080,19 @@ to count the same course multiple times even if multiple students from the same 
     ```
     </CodeTab>
   </CodeTabs>
-  </Tab> 
+  </Tab>
 </Tabs>
 
 ### Intersect All
 Combine only those rows which the results of two query blocks have in common, with duplicates.
 
-Let's consider a scenario where you have two tables containing data about customer orders, and you want 
-to identify products that are ordered by both regular customers and VIP customers. In this case, 
-you want to keep track of the quantity of each product, even if it's ordered multiple times by 
+Let's consider a scenario where you have two tables containing data about customer orders, and you want
+to identify products that are ordered by both regular customers and VIP customers. In this case,
+you want to keep track of the quantity of each product, even if it's ordered multiple times by
 different customers.
 
-In this scenario, you want to find products that are ordered by both regular customers and VIP customers, 
-but you want to retain the quantity information, even if the same product is ordered multiple 
+In this scenario, you want to find products that are ordered by both regular customers and VIP customers,
+but you want to retain the quantity information, even if the same product is ordered multiple
 times by different customers.
 
 <Tabs items={["PostgreSQL", "MySQL", "SQLlite", "SingleStore", "MSSQL" ,"CockroachDB"]}>
@@ -1103,12 +1103,12 @@ times by different customers.
     import { intersectAll } from 'drizzle-orm/pg-core'
     import { regularCustomerOrders, vipCustomerOrders } from './schema'
 
-    const regularOrders = db.select({ 
+    const regularOrders = db.select({
         productId: regularCustomerOrders.productId,
         quantityOrdered: regularCustomerOrders.quantityOrdered }
     ).from(regularCustomerOrders);
 
-    const vipOrders = db.select({ 
+    const vipOrders = db.select({
         productId: vipCustomerOrders.productId,
         quantityOrdered: vipCustomerOrders.quantityOrdered }
     ).from(vipCustomerOrders);
@@ -1153,7 +1153,7 @@ times by different customers.
         productId: integer('product_id').notNull(),
         quantityOrdered: integer('quantity_ordered').notNull(),
     });
-    
+
     const vipCustomerOrders = pgTable('vip_customer_orders', {
         customerId: integer('customer_id').primaryKey(),
         productId: integer('product_id').notNull(),
@@ -1162,7 +1162,7 @@ times by different customers.
     ```
     </CodeTab>
   </CodeTabs>
-  </Tab> 
+  </Tab>
   <Tab>
     <CodeTabs items={["import-pattern", "builder-pattern", "schema.ts"]}>
 	<CodeTab>
@@ -1170,12 +1170,12 @@ times by different customers.
     import { intersectAll } from 'drizzle-orm/mysql-core'
     import { regularCustomerOrders, vipCustomerOrders } from './schema'
 
-    const regularOrders = db.select({ 
+    const regularOrders = db.select({
         productId: regularCustomerOrders.productId,
         quantityOrdered: regularCustomerOrders.quantityOrdered }
     ).from(regularCustomerOrders);
 
-    const vipOrders = db.select({ 
+    const vipOrders = db.select({
         productId: vipCustomerOrders.productId,
         quantityOrdered: vipCustomerOrders.quantityOrdered }
     ).from(vipCustomerOrders);
@@ -1209,7 +1209,7 @@ times by different customers.
     ```
     ```sql
     select `product_id`, `quantity_ordered` from `regular_customer_orders`
-    intersect all 
+    intersect all
     select `product_id`, `quantity_ordered` from `vip_customer_orders`
     ```
     </CodeTab>
@@ -1222,7 +1222,7 @@ times by different customers.
         productId: int('product_id').notNull(),
         quantityOrdered: int('quantity_ordered').notNull(),
     });
-    
+
     const vipCustomerOrders = mysqlTable('vip_customer_orders', {
         customerId: int('customer_id').primaryKey(),
         productId: int('product_id').notNull(),
@@ -1234,13 +1234,13 @@ times by different customers.
   </Tab>
   <Tab>
   Not supported by SQLite
-  </Tab> 
+  </Tab>
   <Tab>
   Not supported by SingleStore
-  </Tab> 
+  </Tab>
   <Tab>
   Not supported by MSSQL
-  </Tab> 
+  </Tab>
   <Tab>
   <CodeTabs items={["import-pattern", "builder-pattern", "schema.ts"]}>
 	<CodeTab>
@@ -1248,12 +1248,12 @@ times by different customers.
     import { intersectAll } from 'drizzle-orm/cockroach-core'
     import { regularCustomerOrders, vipCustomerOrders } from './schema'
 
-    const regularOrders = db.select({ 
+    const regularOrders = db.select({
         productId: regularCustomerOrders.productId,
         quantityOrdered: regularCustomerOrders.quantityOrdered }
     ).from(regularCustomerOrders);
 
-    const vipOrders = db.select({ 
+    const vipOrders = db.select({
         productId: vipCustomerOrders.productId,
         quantityOrdered: vipCustomerOrders.quantityOrdered }
     ).from(vipCustomerOrders);
@@ -1298,7 +1298,7 @@ times by different customers.
         productId: int4('product_id').notNull(),
         quantityOrdered: int4('quantity_ordered').notNull(),
     });
-    
+
     const vipCustomerOrders = cockroachTable('vip_customer_orders', {
         customerId: int4('customer_id').primaryKey(),
         productId: int4('product_id').notNull(),
@@ -1307,18 +1307,18 @@ times by different customers.
     ```
     </CodeTab>
   </CodeTabs>
-  </Tab> 
+  </Tab>
 </Tabs>
 
 ### Except
 For two query blocks A and B, return all results from A which are not also present in B, omitting any duplicates.
 
-Suppose you have two tables that store information about employees' project assignments. 
-You want to find the projects that are unique to one department 
+Suppose you have two tables that store information about employees' project assignments.
+You want to find the projects that are unique to one department
 and not shared with another department, excluding duplicates.
 
 In this scenario, you want to identify the projects that are exclusive to one department and
-not shared with the other department. You don't want to count the same project 
+not shared with the other department. You don't want to count the same project
 multiple times, even if multiple employees from the same department are assigned to it.
 
 <Tabs items={["PostgreSQL", "MySQL", "SQLite", "SingleStore", "MSSQL", "CockroachDB"]}>
@@ -1363,7 +1363,7 @@ multiple times, even if multiple employees from the same department are assigned
         employeeId: integer('employee_id'),
         projectsName: varchar('projects_name').notNull(),
     });
-    
+
     const depB = pgTable('department_b_projects', {
         employeeId: integer('employee_id'),
         projectsName: varchar('projects_name').notNull(),
@@ -1371,7 +1371,7 @@ multiple times, even if multiple employees from the same department are assigned
     ```
     </CodeTab>
   </CodeTabs>
-  </Tab> 
+  </Tab>
   <Tab>
   <CodeTabs items={["import-pattern", "builder-pattern", "schema.ts"]}>
 	<CodeTab>
@@ -1406,14 +1406,14 @@ multiple times, even if multiple employees from the same department are assigned
     ```
     </CodeTab>
     <CodeTab>
-	```typescript 
+	```typescript
     import { int, mysqlTable, varchar } from "drizzle-orm/mysql-core";
 
     const depA = mysqlTable('department_a_projects', {
         employeeId: int('employee_id'),
         projectsName: varchar('projects_name', { length: 256 }).notNull(),
     });
-    
+
     const depB = mysqlTable('department_b_projects', {
         employeeId: int('employee_id'),
         projectsName: varchar('projects_name', { length: 256 }).notNull(),
@@ -1421,7 +1421,7 @@ multiple times, even if multiple employees from the same department are assigned
     ```
     </CodeTab>
   </CodeTabs>
-  </Tab> 
+  </Tab>
   <Tab>
   <CodeTabs items={["import-pattern", "builder-pattern", "schema.ts"]}>
 	<CodeTab>
@@ -1435,8 +1435,8 @@ multiple times, even if multiple employees from the same department are assigned
     const result = await except(departmentACourses, departmentBCourses);
     ```
     ```sql
-    select "projects_name" from "department_a_projects" 
-    except 
+    select "projects_name" from "department_a_projects"
+    except
     select "projects_name" from "department_b_projects"
     ```
 	</CodeTab>
@@ -1450,8 +1450,8 @@ multiple times, even if multiple employees from the same department are assigned
         .except(db.select({ courseName: depB.projectsName }).from(depB));
     ```
     ```sql
-    select "projects_name" from "department_a_projects" 
-    except 
+    select "projects_name" from "department_a_projects"
+    except
     select "projects_name" from "department_b_projects"
     ```
     </CodeTab>
@@ -1463,7 +1463,7 @@ multiple times, even if multiple employees from the same department are assigned
         employeeId: int('employee_id'),
         projectsName: text('projects_name').notNull(),
     });
-    
+
     const depB = sqliteTable('department_b_projects', {
         employeeId: int('employee_id'),
         projectsName: text('projects_name').notNull(),
@@ -1471,7 +1471,7 @@ multiple times, even if multiple employees from the same department are assigned
     ```
     </CodeTab>
   </CodeTabs>
-  </Tab> 
+  </Tab>
   <Tab>
   <CodeTabs items={["import-pattern", "builder-pattern", "schema.ts"]}>
 	<CodeTab>
@@ -1506,14 +1506,14 @@ multiple times, even if multiple employees from the same department are assigned
     ```
     </CodeTab>
     <CodeTab>
-	```typescript 
+	```typescript
     import { int, singlestoreTable, varchar } from "drizzle-orm/singlestore-core";
 
     const depA = singlestoreTable('department_a_projects', {
         employeeId: int('employee_id'),
         projectsName: varchar('projects_name', { length: 256 }).notNull(),
     });
-    
+
     const depB = singlestoreTable('department_b_projects', {
         employeeId: int('employee_id'),
         projectsName: varchar('projects_name', { length: 256 }).notNull(),
@@ -1521,7 +1521,7 @@ multiple times, even if multiple employees from the same department are assigned
     ```
     </CodeTab>
   </CodeTabs>
-  </Tab> 
+  </Tab>
   <Tab>
   <CodeTabs items={["import-pattern", "builder-pattern", "schema.ts"]}>
 	<CodeTab>
@@ -1556,14 +1556,14 @@ multiple times, even if multiple employees from the same department are assigned
     ```
     </CodeTab>
     <CodeTab>
-	```typescript 
+	```typescript
     import { int, mssqlTable, nvarchar } from "drizzle-orm/mssql-core";
 
     const depA = mssqlTable('department_a_projects', {
         employeeId: int('employee_id'),
         projectsName: nvarchar('projects_name', { length: 256 }).notNull(),
     });
-    
+
     const depB = mssqlTable('department_b_projects', {
         employeeId: int('employee_id'),
         projectsName: nvarchar('projects_name', { length: 256 }).notNull(),
@@ -1571,7 +1571,7 @@ multiple times, even if multiple employees from the same department are assigned
     ```
     </CodeTab>
   </CodeTabs>
-  </Tab> 
+  </Tab>
   <Tab>
   <CodeTabs items={["import-pattern", "builder-pattern", "schema.ts"]}>
 	<CodeTab>
@@ -1613,7 +1613,7 @@ multiple times, even if multiple employees from the same department are assigned
         employeeId: int4('employee_id'),
         projectsName: varchar('projects_name').notNull(),
     });
-    
+
     const depB = cockroachTable('department_b_projects', {
         employeeId: int4('employee_id'),
         projectsName: varchar('projects_name').notNull(),
@@ -1621,17 +1621,17 @@ multiple times, even if multiple employees from the same department are assigned
     ```
     </CodeTab>
   </CodeTabs>
-  </Tab> 
+  </Tab>
 </Tabs>
 
 ### Except All
 For two query blocks A and B, return all results from A which are not also present in B, with duplicates.
 
-Let's consider a scenario where you have two tables containing data about customer orders, and you want to 
-identify products that are exclusively ordered by regular customers (without VIP customers). 
+Let's consider a scenario where you have two tables containing data about customer orders, and you want to
+identify products that are exclusively ordered by regular customers (without VIP customers).
 In this case, you want to keep track of the quantity of each product, even if it's ordered multiple times by different regular customers.
 
-In this scenario, you want to find products that are exclusively ordered by regular customers and not 
+In this scenario, you want to find products that are exclusively ordered by regular customers and not
 ordered by VIP customers. You want to retain the quantity information, even if the same product is ordered multiple times by different regular customers.
 
 <Tabs items={["PostgreSQL", "MySQL", "SQLite", "SingleStore", "MSSQL", "CockroachDB"]}>
@@ -1642,12 +1642,12 @@ ordered by VIP customers. You want to retain the quantity information, even if t
     import { exceptAll } from 'drizzle-orm/pg-core'
     import { regularCustomerOrders, vipCustomerOrders } from './schema'
 
-    const regularOrders = db.select({ 
+    const regularOrders = db.select({
         productId: regularCustomerOrders.productId,
         quantityOrdered: regularCustomerOrders.quantityOrdered }
     ).from(regularCustomerOrders);
 
-    const vipOrders = db.select({ 
+    const vipOrders = db.select({
         productId: vipCustomerOrders.productId,
         quantityOrdered: vipCustomerOrders.quantityOrdered }
     ).from(vipCustomerOrders);
@@ -1663,7 +1663,7 @@ ordered by VIP customers. You want to retain the quantity information, even if t
     <CodeTab>
     ```ts copy
     import { regularCustomerOrders, vipCustomerOrders } from './schema'
- 
+
     const result = await db
         .select({
           productId: regularCustomerOrders.productId,
@@ -1694,7 +1694,7 @@ ordered by VIP customers. You want to retain the quantity information, even if t
         productId: integer('product_id').notNull(),
         quantityOrdered: integer('quantity_ordered').notNull(),
     });
-    
+
     const vipCustomerOrders = pgTable('vip_customer_orders', {
         customerId: integer('customer_id').primaryKey(),
         productId: integer('product_id').notNull(),
@@ -1703,7 +1703,7 @@ ordered by VIP customers. You want to retain the quantity information, even if t
     ```
     </CodeTab>
   </CodeTabs>
-  </Tab> 
+  </Tab>
   <Tab>
   <CodeTabs items={["import-pattern", "builder-pattern", "schema.ts"]}>
 	<CodeTab>
@@ -1711,12 +1711,12 @@ ordered by VIP customers. You want to retain the quantity information, even if t
     import { exceptAll } from 'drizzle-orm/mysql-core'
     import { regularCustomerOrders, vipCustomerOrders } from './schema'
 
-    const regularOrders = db.select({ 
+    const regularOrders = db.select({
         productId: regularCustomerOrders.productId,
         quantityOrdered: regularCustomerOrders.quantityOrdered }
     ).from(regularCustomerOrders);
 
-    const vipOrders = db.select({ 
+    const vipOrders = db.select({
         productId: vipCustomerOrders.productId,
         quantityOrdered: vipCustomerOrders.quantityOrdered }
     ).from(vipCustomerOrders);
@@ -1732,7 +1732,7 @@ ordered by VIP customers. You want to retain the quantity information, even if t
     <CodeTab>
     ```ts copy
     import { regularCustomerOrders, vipCustomerOrders } from './schema'
- 
+
     const result = await db
         .select({
           productId: regularCustomerOrders.productId,
@@ -1761,7 +1761,7 @@ ordered by VIP customers. You want to retain the quantity information, even if t
         productId: int('product_id').notNull(),
         quantityOrdered: int('quantity_ordered').notNull(),
     });
-    
+
     const vipCustomerOrders = mysqlTable('vip_customer_orders', {
         customerId: int('customer_id').primaryKey(),
         productId: int('product_id').notNull(),
@@ -1770,7 +1770,7 @@ ordered by VIP customers. You want to retain the quantity information, even if t
     ```
     </CodeTab>
   </CodeTabs>
-  </Tab> 
+  </Tab>
   <Tab>
   Not supported by SQLite
   </Tab>
@@ -1787,12 +1787,12 @@ ordered by VIP customers. You want to retain the quantity information, even if t
     import { exceptAll } from 'drizzle-orm/cockroach-core'
     import { regularCustomerOrders, vipCustomerOrders } from './schema'
 
-    const regularOrders = db.select({ 
+    const regularOrders = db.select({
         productId: regularCustomerOrders.productId,
         quantityOrdered: regularCustomerOrders.quantityOrdered }
     ).from(regularCustomerOrders);
 
-    const vipOrders = db.select({ 
+    const vipOrders = db.select({
         productId: vipCustomerOrders.productId,
         quantityOrdered: vipCustomerOrders.quantityOrdered }
     ).from(vipCustomerOrders);
@@ -1808,7 +1808,7 @@ ordered by VIP customers. You want to retain the quantity information, even if t
     <CodeTab>
     ```ts copy
     import { regularCustomerOrders, vipCustomerOrders } from './schema'
- 
+
     const result = await db
         .select({
           productId: regularCustomerOrders.productId,
@@ -1839,7 +1839,7 @@ ordered by VIP customers. You want to retain the quantity information, even if t
         productId: int4('product_id').notNull(),
         quantityOrdered: int4('quantity_ordered').notNull(),
     });
-    
+
     const vipCustomerOrders = cockroachTable('vip_customer_orders', {
         customerId: int4('customer_id').primaryKey(),
         productId: int4('product_id').notNull(),
@@ -1848,7 +1848,7 @@ ordered by VIP customers. You want to retain the quantity information, even if t
     ```
     </CodeTab>
   </CodeTabs>
-  </Tab> 
+  </Tab>
 </Tabs>
 
 
@@ -1865,12 +1865,12 @@ import LinksList from "@mdx/LinksList.astro"
 
 # Drizzle schema
 
-Drizzle lets you define a schema in TypeScript with various models and properties supported by the underlying database. 
+Drizzle lets you define a schema in TypeScript with various models and properties supported by the underlying database.
 When you define your schema, it serves as the source of truth for future modifications in queries (using Drizzle-ORM)
 and migrations (using Drizzle-Kit).
 
-<Callout> 
-If you are using Drizzle-Kit for the migration process, make sure to export all the models defined in your schema files so that Drizzle-Kit can import them and use them in the migration diff process. 
+<Callout>
+If you are using Drizzle-Kit for the migration process, make sure to export all the models defined in your schema files so that Drizzle-Kit can import them and use them in the migration diff process.
 </Callout>
 
 <CodeTabs items={["Using imports", "Using callback", "Using import *"]}>

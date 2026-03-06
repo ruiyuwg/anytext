@@ -2,35 +2,35 @@
 
 Next.js extends the [Web `fetch()` API](https://developer.mozilla.org/docs/Web/API/Fetch_API) to allow each request on the server to set its own persistent caching and revalidation semantics.
 
-In the browser, the `cache` option indicates how a fetch request will interact with the *browser's* HTTP cache. With this extension, `cache` indicates how a *server-side* fetch request will interact with the framework's persistent [Data Cache](/docs/app/guides/caching#data-cache).
+In the browser, the `cache` option indicates how a fetch request will interact with the _browser's_ HTTP cache. With this extension, `cache` indicates how a _server-side_ fetch request will interact with the framework's persistent [Data Cache](/docs/app/guides/caching#data-cache).
 
 You can call `fetch` with `async` and `await` directly within Server Components.
 
 ```tsx filename="app/page.tsx" switcher
 export default async function Page() {
-  let data = await fetch('https://api.vercel.app/blog')
-  let posts = await data.json()
+  let data = await fetch("https://api.vercel.app/blog");
+  let posts = await data.json();
   return (
     <ul>
       {posts.map((post) => (
         <li key={post.id}>{post.title}</li>
       ))}
     </ul>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/page.js" switcher
 export default async function Page() {
-  let data = await fetch('https://api.vercel.app/blog')
-  let posts = await data.json()
+  let data = await fetch("https://api.vercel.app/blog");
+  let posts = await data.json();
   return (
     <ul>
       {posts.map((post) => (
         <li key={post.id}>{post.title}</li>
       ))}
     </ul>
-  )
+  );
 }
 ```
 
@@ -43,7 +43,7 @@ Since Next.js extends the [Web `fetch()` API](https://developer.mozilla.org/docs
 Configure how the request should interact with Next.js [Data Cache](/docs/app/guides/caching#data-cache).
 
 ```ts
-fetch(`https://...`, { cache: 'force-cache' | 'no-store' })
+fetch(`https://...`, { cache: "force-cache" | "no-store" });
 ```
 
 - **`auto no cache`** (default): Next.js fetches the resource from the remote server on every request in development, but will fetch once during `next build` because the route will be statically prerendered. If [Dynamic APIs](/docs/app/guides/caching#dynamic-rendering) are detected on the route, Next.js will fetch the resource on every request.
@@ -55,7 +55,7 @@ fetch(`https://...`, { cache: 'force-cache' | 'no-store' })
 ### `options.next.revalidate`
 
 ```ts
-fetch(`https://...`, { next: { revalidate: false | 0 | number } })
+fetch(`https://...`, { next: { revalidate: false | 0 | number } });
 ```
 
 Set the cache lifetime of a resource (in seconds). [Data Cache](/docs/app/guides/caching#data-cache).
@@ -73,7 +73,7 @@ Set the cache lifetime of a resource (in seconds). [Data Cache](/docs/app/guides
 ### `options.next.tags`
 
 ```ts
-fetch(`https://...`, { next: { tags: ['collection'] } })
+fetch(`https://...`, { next: { tags: ["collection"] } });
 ```
 
 Set the cache tags of a resource. Data can then be revalidated on-demand using [`revalidateTag`](/docs/app/api-reference/functions/revalidateTag). The max length for a custom tag is 256 characters and the max tag items is 128.

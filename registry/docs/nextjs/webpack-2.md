@@ -21,12 +21,12 @@ In order to extend our usage of `webpack`, you can define a function that extend
 module.exports = {
   webpack: (
     config,
-    { buildId, dev, isServer, defaultLoaders, nextRuntime, webpack }
+    { buildId, dev, isServer, defaultLoaders, nextRuntime, webpack },
   ) => {
     // Important: return the modified config
-    return config
+    return config;
   },
-}
+};
 ```
 
 > The `webpack` function is executed three times, twice for the server (nodejs / edge runtime) and once for the client. This allows you to distinguish between client and server configuration using the `isServer` property.
@@ -53,15 +53,15 @@ module.exports = {
       use: [
         options.defaultLoaders.babel,
         {
-          loader: '@mdx-js/loader',
+          loader: "@mdx-js/loader",
           options: pluginOptions.options,
         },
       ],
-    })
+    });
 
-    return config
+    return config;
   },
-}
+};
 ```
 
 #### `nextRuntime`
@@ -87,9 +87,9 @@ Attribution is disabled by default in Next.js but can be enabled **per metric** 
 ```js filename="next.config.js"
 module.exports = {
   experimental: {
-    webVitalsAttribution: ['CLS', 'LCP'],
+    webVitalsAttribution: ["CLS", "LCP"],
   },
-}
+};
 ```
 
 Valid attribution values are all `web-vitals` metrics specified in the [`NextWebVitalsMetric`](https://github.com/vercel/next.js/blob/442378d21dd56d6e769863eb8c2cb521a463a2e0/packages/next/shared/lib/utils.ts#L43) type.

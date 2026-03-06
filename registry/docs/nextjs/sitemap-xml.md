@@ -36,29 +36,29 @@ You can use the `sitemap.(js|ts)` file convention to programmatically **generate
 > **Good to know**: `sitemap.js` is a special Route Handler that is cached by default unless it uses a [Dynamic API](/docs/app/guides/caching#dynamic-apis) or [dynamic config](/docs/app/guides/caching#segment-config-options) option.
 
 ```ts filename="app/sitemap.ts" switcher
-import type { MetadataRoute } from 'next'
+import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: 'https://acme.com',
+      url: "https://acme.com",
       lastModified: new Date(),
-      changeFrequency: 'yearly',
+      changeFrequency: "yearly",
       priority: 1,
     },
     {
-      url: 'https://acme.com/about',
+      url: "https://acme.com/about",
       lastModified: new Date(),
-      changeFrequency: 'monthly',
+      changeFrequency: "monthly",
       priority: 0.8,
     },
     {
-      url: 'https://acme.com/blog',
+      url: "https://acme.com/blog",
       lastModified: new Date(),
-      changeFrequency: 'weekly',
+      changeFrequency: "weekly",
       priority: 0.5,
     },
-  ]
+  ];
 }
 ```
 
@@ -66,24 +66,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
 export default function sitemap() {
   return [
     {
-      url: 'https://acme.com',
+      url: "https://acme.com",
       lastModified: new Date(),
-      changeFrequency: 'yearly',
+      changeFrequency: "yearly",
       priority: 1,
     },
     {
-      url: 'https://acme.com/about',
+      url: "https://acme.com/about",
       lastModified: new Date(),
-      changeFrequency: 'monthly',
+      changeFrequency: "monthly",
       priority: 0.8,
     },
     {
-      url: 'https://acme.com/blog',
+      url: "https://acme.com/blog",
       lastModified: new Date(),
-      changeFrequency: 'weekly',
+      changeFrequency: "weekly",
       priority: 0.5,
     },
-  ]
+  ];
 }
 ```
 
@@ -117,18 +117,18 @@ Output:
 You can use `images` property to create image sitemaps. Learn more details in the [Google Developer Docs](https://developers.google.com/search/docs/crawling-indexing/sitemaps/image-sitemaps).
 
 ```ts filename="app/sitemap.ts" switcher
-import type { MetadataRoute } from 'next'
+import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: 'https://example.com',
-      lastModified: '2021-01-01',
-      changeFrequency: 'weekly',
+      url: "https://example.com",
+      lastModified: "2021-01-01",
+      changeFrequency: "weekly",
       priority: 0.5,
-      images: ['https://example.com/image.jpg'],
+      images: ["https://example.com/image.jpg"],
     },
-  ]
+  ];
 }
 ```
 
@@ -157,24 +157,24 @@ Output:
 You can use `videos` property to create video sitemaps. Learn more details in the [Google Developer Docs](https://developers.google.com/search/docs/crawling-indexing/sitemaps/video-sitemaps).
 
 ```ts filename="app/sitemap.ts" switcher
-import type { MetadataRoute } from 'next'
+import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: 'https://example.com',
-      lastModified: '2021-01-01',
-      changeFrequency: 'weekly',
+      url: "https://example.com",
+      lastModified: "2021-01-01",
+      changeFrequency: "weekly",
       priority: 0.5,
       videos: [
         {
-          title: 'example',
-          thumbnail_loc: 'https://example.com/image.jpg',
-          description: 'this is the description',
+          title: "example",
+          thumbnail_loc: "https://example.com/image.jpg",
+          description: "this is the description",
         },
       ],
     },
-  ]
+  ];
 }
 ```
 
@@ -203,41 +203,41 @@ Output:
 ### Generate a localized Sitemap
 
 ```ts filename="app/sitemap.ts" switcher
-import type { MetadataRoute } from 'next'
+import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: 'https://acme.com',
+      url: "https://acme.com",
       lastModified: new Date(),
       alternates: {
         languages: {
-          es: 'https://acme.com/es',
-          de: 'https://acme.com/de',
+          es: "https://acme.com/es",
+          de: "https://acme.com/de",
         },
       },
     },
     {
-      url: 'https://acme.com/about',
+      url: "https://acme.com/about",
       lastModified: new Date(),
       alternates: {
         languages: {
-          es: 'https://acme.com/es/about',
-          de: 'https://acme.com/de/about',
+          es: "https://acme.com/es/about",
+          de: "https://acme.com/de/about",
         },
       },
     },
     {
-      url: 'https://acme.com/blog',
+      url: "https://acme.com/blog",
       lastModified: new Date(),
       alternates: {
         languages: {
-          es: 'https://acme.com/es/blog',
-          de: 'https://acme.com/de/blog',
+          es: "https://acme.com/es/blog",
+          de: "https://acme.com/de/blog",
         },
       },
     },
-  ]
+  ];
 }
 ```
 
@@ -245,36 +245,36 @@ export default function sitemap(): MetadataRoute.Sitemap {
 export default function sitemap() {
   return [
     {
-      url: 'https://acme.com',
+      url: "https://acme.com",
       lastModified: new Date(),
       alternates: {
         languages: {
-          es: 'https://acme.com/es',
-          de: 'https://acme.com/de',
+          es: "https://acme.com/es",
+          de: "https://acme.com/de",
         },
       },
     },
     {
-      url: 'https://acme.com/about',
+      url: "https://acme.com/about",
       lastModified: new Date(),
       alternates: {
         languages: {
-          es: 'https://acme.com/es/about',
-          de: 'https://acme.com/de/about',
+          es: "https://acme.com/es/about",
+          de: "https://acme.com/de/about",
         },
       },
     },
     {
-      url: 'https://acme.com/blog',
+      url: "https://acme.com/blog",
       lastModified: new Date(),
       alternates: {
         languages: {
-          es: 'https://acme.com/es/blog',
-          de: 'https://acme.com/de/blog',
+          es: "https://acme.com/es/blog",
+          de: "https://acme.com/de/blog",
         },
       },
     },
-  ]
+  ];
 }
 ```
 
@@ -333,51 +333,51 @@ There are two ways you can create multiple sitemaps:
 For example, to split a sitemap using `generateSitemaps`, return an array of objects with the sitemap `id`. Then, use the `id` to generate the unique sitemaps.
 
 ```ts filename="app/product/sitemap.ts" switcher
-import type { MetadataRoute } from 'next'
-import { BASE_URL } from '@/app/lib/constants'
+import type { MetadataRoute } from "next";
+import { BASE_URL } from "@/app/lib/constants";
 
 export async function generateSitemaps() {
   // Fetch the total number of products and calculate the number of sitemaps needed
-  return [{ id: 0 }, { id: 1 }, { id: 2 }, { id: 3 }]
+  return [{ id: 0 }, { id: 1 }, { id: 2 }, { id: 3 }];
 }
 
 export default async function sitemap(props: {
-  id: Promise<string>
+  id: Promise<string>;
 }): Promise<MetadataRoute.Sitemap> {
-  const id = await props.id
+  const id = await props.id;
   // Google's limit is 50,000 URLs per sitemap
-  const start = id * 50000
-  const end = start + 50000
+  const start = id * 50000;
+  const end = start + 50000;
   const products = await getProducts(
-    `SELECT id, date FROM products WHERE id BETWEEN ${start} AND ${end}`
-  )
+    `SELECT id, date FROM products WHERE id BETWEEN ${start} AND ${end}`,
+  );
   return products.map((product) => ({
     url: `${BASE_URL}/product/${product.id}`,
     lastModified: product.date,
-  }))
+  }));
 }
 ```
 
 ```js filename="app/product/sitemap.js" switcher
-import { BASE_URL } from '@/app/lib/constants'
+import { BASE_URL } from "@/app/lib/constants";
 
 export async function generateSitemaps() {
   // Fetch the total number of products and calculate the number of sitemaps needed
-  return [{ id: 0 }, { id: 1 }, { id: 2 }, { id: 3 }]
+  return [{ id: 0 }, { id: 1 }, { id: 2 }, { id: 3 }];
 }
 
 export default async function sitemap(props) {
-  const id = await props.id
+  const id = await props.id;
   // Google's limit is 50,000 URLs per sitemap
-  const start = id * 50000
-  const end = start + 50000
+  const start = id * 50000;
+  const end = start + 50000;
   const products = await getProducts(
-    `SELECT id, date FROM products WHERE id BETWEEN ${start} AND ${end}`
-  )
+    `SELECT id, date FROM products WHERE id BETWEEN ${start} AND ${end}`,
+  );
   return products.map((product) => ({
     url: `${BASE_URL}/product/${product.id}`,
     lastModified: product.date,
-  }))
+  }));
 }
 ```
 
@@ -391,21 +391,21 @@ The default function exported from `sitemap.(xml|ts|js)` should return an array 
 
 ```tsx
 type Sitemap = Array<{
-  url: string
-  lastModified?: string | Date
+  url: string;
+  lastModified?: string | Date;
   changeFrequency?:
-    | 'always'
-    | 'hourly'
-    | 'daily'
-    | 'weekly'
-    | 'monthly'
-    | 'yearly'
-    | 'never'
-  priority?: number
+    | "always"
+    | "hourly"
+    | "daily"
+    | "weekly"
+    | "monthly"
+    | "yearly"
+    | "never";
+  priority?: number;
   alternates?: {
-    languages?: Languages<string>
-  }
-}>
+    languages?: Languages<string>;
+  };
+}>;
 ```
 
 ## Version History

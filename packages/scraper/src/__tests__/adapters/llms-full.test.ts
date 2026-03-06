@@ -53,8 +53,13 @@ describe("llmsFullAdapter", () => {
     const result = await llmsFullAdapter.process(baseSource);
 
     expect(result).toEqual([topic]);
-    expect(fs.rmSync).toHaveBeenCalledWith("/mock/registry/docs/react", { recursive: true, force: true });
-    expect(fs.mkdirSync).toHaveBeenCalledWith("/mock/registry/docs/react", { recursive: true });
+    expect(fs.rmSync).toHaveBeenCalledWith("/mock/registry/docs/react", {
+      recursive: true,
+      force: true,
+    });
+    expect(fs.mkdirSync).toHaveBeenCalledWith("/mock/registry/docs/react", {
+      recursive: true,
+    });
     // rmSync must be called before mkdirSync
     const rmOrder = vi.mocked(fs.rmSync).mock.invocationCallOrder[0]!;
     const mkdirOrder = vi.mocked(fs.mkdirSync).mock.invocationCallOrder[0]!;
@@ -62,7 +67,7 @@ describe("llmsFullAdapter", () => {
     expect(fs.writeFileSync).toHaveBeenCalledWith(
       "/mock/registry/docs/react/hooks.md",
       "# Hooks\n",
-      "utf-8"
+      "utf-8",
     );
   });
 
@@ -75,7 +80,14 @@ describe("llmsFullAdapter", () => {
     vi.mocked(fetchMod.fetchContent).mockResolvedValue("raw");
     vi.mocked(cleanMod.cleanMarkdown).mockResolvedValue("clean");
     vi.mocked(splitMod.splitIntoTopics).mockReturnValue([
-      { id: "hooks", title: "Hooks", description: "desc", tags: [], tokens: 100, content: "original" },
+      {
+        id: "hooks",
+        title: "Hooks",
+        description: "desc",
+        tags: [],
+        tokens: 100,
+        content: "original",
+      },
     ]);
 
     const source: SourceConfig = {
@@ -97,8 +109,22 @@ describe("llmsFullAdapter", () => {
     vi.mocked(fetchMod.fetchContent).mockResolvedValue("raw");
     vi.mocked(cleanMod.cleanMarkdown).mockResolvedValue("clean");
     vi.mocked(splitMod.splitIntoTopics).mockReturnValue([
-      { id: "hooks", title: "Hooks", description: "desc", tags: [], tokens: 100, content: "original" },
-      { id: "state", title: "State", description: "desc", tags: [], tokens: 100, content: "state content" },
+      {
+        id: "hooks",
+        title: "Hooks",
+        description: "desc",
+        tags: [],
+        tokens: 100,
+        content: "original",
+      },
+      {
+        id: "state",
+        title: "State",
+        description: "desc",
+        tags: [],
+        tokens: 100,
+        content: "state content",
+      },
     ]);
 
     const source: SourceConfig = {

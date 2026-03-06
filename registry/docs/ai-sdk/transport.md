@@ -7,7 +7,7 @@ The `useChat` transport system provides fine-grained control over how messages a
 By default, `useChat` uses HTTP POST requests to send messages to `/api/chat`:
 
 ```tsx
-import { useChat } from '@ai-sdk/react';
+import { useChat } from "@ai-sdk/react";
 
 // Uses default HTTP transport
 const { messages, sendMessage } = useChat();
@@ -16,12 +16,12 @@ const { messages, sendMessage } = useChat();
 This is equivalent to:
 
 ```tsx
-import { useChat } from '@ai-sdk/react';
-import { DefaultChatTransport } from 'ai';
+import { useChat } from "@ai-sdk/react";
+import { DefaultChatTransport } from "ai";
 
 const { messages, sendMessage } = useChat({
   transport: new DefaultChatTransport({
-    api: '/api/chat',
+    api: "/api/chat",
   }),
 });
 ```
@@ -31,17 +31,17 @@ const { messages, sendMessage } = useChat({
 Configure the default transport with custom options:
 
 ```tsx
-import { useChat } from '@ai-sdk/react';
-import { DefaultChatTransport } from 'ai';
+import { useChat } from "@ai-sdk/react";
+import { DefaultChatTransport } from "ai";
 
 const { messages, sendMessage } = useChat({
   transport: new DefaultChatTransport({
-    api: '/api/custom-chat',
+    api: "/api/custom-chat",
     headers: {
-      Authorization: 'Bearer your-token',
-      'X-API-Version': '2024-01',
+      Authorization: "Bearer your-token",
+      "X-API-Version": "2024-01",
     },
-    credentials: 'include',
+    credentials: "include",
   }),
 });
 ```
@@ -53,16 +53,16 @@ You can also provide functions that return configuration values. This is useful 
 ```tsx
 const { messages, sendMessage } = useChat({
   transport: new DefaultChatTransport({
-    api: '/api/chat',
+    api: "/api/chat",
     headers: () => ({
       Authorization: `Bearer ${getAuthToken()}`,
-      'X-User-ID': getCurrentUserId(),
+      "X-User-ID": getCurrentUserId(),
     }),
     body: () => ({
       sessionId: getCurrentSessionId(),
       preferences: getUserPreferences(),
     }),
-    credentials: () => 'include',
+    credentials: () => "include",
   }),
 });
 ```
@@ -74,11 +74,11 @@ Transform requests before sending to your API:
 ```tsx
 const { messages, sendMessage } = useChat({
   transport: new DefaultChatTransport({
-    api: '/api/chat',
+    api: "/api/chat",
     prepareSendMessagesRequest: ({ id, messages, trigger, messageId }) => {
       return {
         headers: {
-          'X-Session-ID': id,
+          "X-Session-ID": id,
         },
         body: {
           messages: messages.slice(-10), // Only send last 10 messages
@@ -102,13 +102,13 @@ This is useful for:
 - **Single-process applications**: Desktop or CLI apps where client and agent run together
 
 ```tsx
-import { useChat } from '@ai-sdk/react';
-import { DirectChatTransport, ToolLoopAgent } from 'ai';
+import { useChat } from "@ai-sdk/react";
+import { DirectChatTransport, ToolLoopAgent } from "ai";
 __PROVIDER_IMPORT__;
 
 const agent = new ToolLoopAgent({
   model: __MODEL__,
-  instructions: 'You are a helpful assistant.',
+  instructions: "You are a helpful assistant.",
   tools: {
     weather: weatherTool,
   },
@@ -136,7 +136,7 @@ You can pass additional options to customize the stream output:
 const transport = new DirectChatTransport({
   agent,
   // Pass options to the agent
-  options: { customOption: 'value' },
+  options: { customOption: "value" },
   // Configure what's sent to the client
   sendReasoning: true,
   sendSources: true,

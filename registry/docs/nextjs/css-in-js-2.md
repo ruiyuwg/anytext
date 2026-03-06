@@ -15,10 +15,10 @@ It's possible to use any existing CSS-in-JS solution. The simplest one is inline
 
 ```jsx
 function HiThere() {
-  return <p style={{ color: 'red' }}>hi there</p>
+  return <p style={{ color: "red" }}>hi there</p>;
 }
 
-export default HiThere
+export default HiThere;
 ```
 
 We bundle [styled-jsx](https://github.com/vercel/styled-jsx) to provide support for isolated scoped CSS.
@@ -53,10 +53,10 @@ function HelloWorld() {
         }
       `}</style>
     </div>
-  )
+  );
 }
 
-export default HelloWorld
+export default HelloWorld;
 ```
 
 Please see the [styled-jsx documentation](https://github.com/vercel/styled-jsx) for more examples.

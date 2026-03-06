@@ -7,11 +7,11 @@
 To use `wsLink`, you need to pass it a `TRPCWebSocketClient`, which you can create with `createWSClient`:
 
 ```ts title="client/index.ts"
-import { createTRPCClient, createWSClient, wsLink } from '@trpc/client';
-import type { AppRouter } from '../server';
+import { createTRPCClient, createWSClient, wsLink } from "@trpc/client";
+import type { AppRouter } from "../server";
 
 const wsClient = createWSClient({
-  url: 'ws://localhost:3000',
+  url: "ws://localhost:3000",
 });
 
 const trpcClient = createTRPCClient<AppRouter>({
@@ -123,7 +123,7 @@ By default, tRPC does not cancel requests on unmount. If you want to opt into th
 // ---cut---
 // @filename: utils.ts
 // @noErrors
-import { createTRPCNext } from '@trpc/next';
+import { createTRPCNext } from "@trpc/next";
 
 export const trpc = createTRPCNext<AppRouter>({
   config() {

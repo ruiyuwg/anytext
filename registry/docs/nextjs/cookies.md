@@ -3,22 +3,22 @@
 `cookies` is an **async** function that allows you to read the HTTP incoming request cookies in [Server Components](/docs/app/getting-started/server-and-client-components), and read/write outgoing request cookies in [Server Functions](/docs/app/getting-started/updating-data) or [Route Handlers](/docs/app/api-reference/file-conventions/route).
 
 ```tsx filename="app/page.tsx" switcher
-import { cookies } from 'next/headers'
+import { cookies } from "next/headers";
 
 export default async function Page() {
-  const cookieStore = await cookies()
-  const theme = cookieStore.get('theme')
-  return '...'
+  const cookieStore = await cookies();
+  const theme = cookieStore.get("theme");
+  return "...";
 }
 ```
 
 ```js filename="app/page.js" switcher
-import { cookies } from 'next/headers'
+import { cookies } from "next/headers";
 
 export default async function Page() {
-  const cookieStore = await cookies()
-  const theme = cookieStore.get('theme')
-  return '...'
+  const cookieStore = await cookies();
+  const theme = cookieStore.get("theme");
+  return "...";
 }
 ```
 
@@ -93,22 +93,22 @@ To refresh cached data too, call [`revalidatePath`](/docs/app/api-reference/func
 You can use the `(await cookies()).get('name')` method to get a single cookie:
 
 ```tsx filename="app/page.tsx" switcher
-import { cookies } from 'next/headers'
+import { cookies } from "next/headers";
 
 export default async function Page() {
-  const cookieStore = await cookies()
-  const theme = cookieStore.get('theme')
-  return '...'
+  const cookieStore = await cookies();
+  const theme = cookieStore.get("theme");
+  return "...";
 }
 ```
 
 ```jsx filename="app/page.js" switcher
-import { cookies } from 'next/headers'
+import { cookies } from "next/headers";
 
 export default async function Page() {
-  const cookieStore = await cookies()
-  const theme = cookieStore.get('theme')
-  return '...'
+  const cookieStore = await cookies();
+  const theme = cookieStore.get("theme");
+  return "...";
 }
 ```
 
@@ -117,30 +117,30 @@ export default async function Page() {
 You can use the `(await cookies()).getAll()` method to get all cookies with a matching name. If `name` is unspecified, it returns all the available cookies.
 
 ```tsx filename="app/page.tsx" switcher
-import { cookies } from 'next/headers'
+import { cookies } from "next/headers";
 
 export default async function Page() {
-  const cookieStore = await cookies()
+  const cookieStore = await cookies();
   return cookieStore.getAll().map((cookie) => (
     <div key={cookie.name}>
       <p>Name: {cookie.name}</p>
       <p>Value: {cookie.value}</p>
     </div>
-  ))
+  ));
 }
 ```
 
 ```jsx filename="app/page.js" switcher
-import { cookies } from 'next/headers'
+import { cookies } from "next/headers";
 
 export default async function Page() {
-  const cookieStore = await cookies()
+  const cookieStore = await cookies();
   return cookieStore.getAll().map((cookie) => (
     <div key={cookie.name}>
       <p>Name: {cookie.name}</p>
       <p>Value: {cookie.value}</p>
     </div>
-  ))
+  ));
 }
 ```
 
@@ -149,44 +149,44 @@ export default async function Page() {
 You can use the `(await cookies()).set(name, value, options)` method in a [Server Function](/docs/app/getting-started/updating-data) or [Route Handler](/docs/app/api-reference/file-conventions/route) to set a cookie. The [`options` object](#options) is optional.
 
 ```tsx filename="app/actions.ts" switcher
-'use server'
+"use server";
 
-import { cookies } from 'next/headers'
+import { cookies } from "next/headers";
 
 export async function create(data) {
-  const cookieStore = await cookies()
+  const cookieStore = await cookies();
 
-  cookieStore.set('name', 'lee')
+  cookieStore.set("name", "lee");
   // or
-  cookieStore.set('name', 'lee', { secure: true })
+  cookieStore.set("name", "lee", { secure: true });
   // or
   cookieStore.set({
-    name: 'name',
-    value: 'lee',
+    name: "name",
+    value: "lee",
     httpOnly: true,
-    path: '/',
-  })
+    path: "/",
+  });
 }
 ```
 
 ```js filename="app/actions.js" switcher
-'use server'
+"use server";
 
-import { cookies } from 'next/headers'
+import { cookies } from "next/headers";
 
 export async function create(data) {
-  const cookieStore = await cookies()
+  const cookieStore = await cookies();
 
-  cookieStore.set('name', 'lee')
+  cookieStore.set("name", "lee");
   // or
-  cookieStore.set('name', 'lee', { secure: true })
+  cookieStore.set("name", "lee", { secure: true });
   // or
   cookieStore.set({
-    name: 'name',
-    value: 'lee',
+    name: "name",
+    value: "lee",
     httpOnly: true,
-    path: '/',
-  })
+    path: "/",
+  });
 }
 ```
 
@@ -195,22 +195,22 @@ export async function create(data) {
 You can use the `(await cookies()).has(name)` method to check if a cookie exists:
 
 ```tsx filename="app/page.ts" switcher
-import { cookies } from 'next/headers'
+import { cookies } from "next/headers";
 
 export default async function Page() {
-  const cookieStore = await cookies()
-  const hasCookie = cookieStore.has('theme')
-  return '...'
+  const cookieStore = await cookies();
+  const hasCookie = cookieStore.has("theme");
+  return "...";
 }
 ```
 
 ```jsx filename="app/page.js" switcher
-import { cookies } from 'next/headers'
+import { cookies } from "next/headers";
 
 export default async function Page() {
-  const cookieStore = await cookies()
-  const hasCookie = cookieStore.has('theme')
-  return '...'
+  const cookieStore = await cookies();
+  const hasCookie = cookieStore.has("theme");
+  return "...";
 }
 ```
 
@@ -221,72 +221,72 @@ There are three ways you can delete a cookie.
 Using the `delete()` method:
 
 ```tsx filename="app/actions.ts" switcher
-'use server'
+"use server";
 
-import { cookies } from 'next/headers'
+import { cookies } from "next/headers";
 
 export async function deleteCookie(data) {
-  const cookieStore = await cookies()
-  cookieStore.delete('name')
+  const cookieStore = await cookies();
+  cookieStore.delete("name");
 }
 ```
 
 ```js filename="app/actions.js" switcher
-'use server'
+"use server";
 
-import { cookies } from 'next/headers'
+import { cookies } from "next/headers";
 
 export async function deleteCookie(data) {
-  const cookieStore = await cookies()
-  cookieStore.delete('name')
+  const cookieStore = await cookies();
+  cookieStore.delete("name");
 }
 ```
 
 Setting a new cookie with the same name and an empty value:
 
 ```tsx filename="app/actions.ts" switcher
-'use server'
+"use server";
 
-import { cookies } from 'next/headers'
+import { cookies } from "next/headers";
 
 export async function deleteCookie(data) {
-  const cookieStore = await cookies()
-  cookieStore.set('name', '')
+  const cookieStore = await cookies();
+  cookieStore.set("name", "");
 }
 ```
 
 ```js filename="app/actions.js" switcher
-'use server'
+"use server";
 
-import { cookies } from 'next/headers'
+import { cookies } from "next/headers";
 
 export async function deleteCookie(data) {
-  const cookieStore = await cookies()
-  cookieStore.set('name', '')
+  const cookieStore = await cookies();
+  cookieStore.set("name", "");
 }
 ```
 
 Setting the `maxAge` to 0 will immediately expire a cookie. `maxAge` accepts a value in seconds.
 
 ```tsx filename="app/actions.ts" switcher
-'use server'
+"use server";
 
-import { cookies } from 'next/headers'
+import { cookies } from "next/headers";
 
 export async function deleteCookie(data) {
-  const cookieStore = await cookies()
-  cookieStore.set('name', 'value', { maxAge: 0 })
+  const cookieStore = await cookies();
+  cookieStore.set("name", "value", { maxAge: 0 });
 }
 ```
 
 ```js filename="app/actions.js" switcher
-'use server'
+"use server";
 
-import { cookies } from 'next/headers'
+import { cookies } from "next/headers";
 
 export async function deleteCookie(data) {
-  const cookieStore = await cookies()
-  cookieStore.set('name', 'value', { maxAge: 0 })
+  const cookieStore = await cookies();
+  cookieStore.set("name", "value", { maxAge: 0 });
 }
 ```
 

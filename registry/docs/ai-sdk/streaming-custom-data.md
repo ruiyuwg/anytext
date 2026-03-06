@@ -18,7 +18,7 @@ The data is streamed as part of the response stream using Server-Sent Events.
 First, define your custom message type with data part schemas for type safety:
 
 ```tsx filename="ai/types.ts"
-import { UIMessage } from 'ai';
+import { UIMessage } from "ai";
 
 // Define your custom message type with data part schemas
 export type MyUIMessage = UIMessage<
@@ -27,11 +27,11 @@ export type MyUIMessage = UIMessage<
     weather: {
       city: string;
       weather?: string;
-      status: 'loading' | 'success';
+      status: "loading" | "success";
     };
     notification: {
       message: string;
-      level: 'info' | 'warning' | 'error';
+      level: "info" | "warning" | "error";
     };
   } // data parts type
 >;
@@ -42,15 +42,15 @@ export type MyUIMessage = UIMessage<
 In your server-side route handler, you can create a `UIMessageStream` and then pass it to `createUIMessageStreamResponse`:
 
 ```tsx filename="route.ts"
-import { openai } from '@ai-sdk/openai';
+import { openai } from "@ai-sdk/openai";
 import {
   createUIMessageStream,
   createUIMessageStreamResponse,
   streamText,
   convertToModelMessages,
-} from 'ai';
+} from "ai";
 __PROVIDER_IMPORT__;
-import type { MyUIMessage } from '@/ai/types';
+import type { MyUIMessage } from "@/ai/types";
 
 export async function POST(req: Request) {
   const { messages } = await req.json();
@@ -59,28 +59,28 @@ export async function POST(req: Request) {
     execute: ({ writer }) => {
       // 1. Send initial status (transient - won't be added to message history)
       writer.write({
-        type: 'data-notification',
-        data: { message: 'Processing your request...', level: 'info' },
+        type: "data-notification",
+        data: { message: "Processing your request...", level: "info" },
         transient: true, // This part won't be added to message history
       });
 
       // 2. Send sources (useful for RAG use cases)
       writer.write({
-        type: 'source',
+        type: "source",
         value: {
-          type: 'source',
-          sourceType: 'url',
-          id: 'source-1',
-          url: 'https://weather.com',
-          title: 'Weather Data Source',
+          type: "source",
+          sourceType: "url",
+          id: "source-1",
+          url: "https://weather.com",
+          title: "Weather Data Source",
         },
       });
 
       // 3. Send data parts with loading state
       writer.write({
-        type: 'data-weather',
-        id: 'weather-1',
-        data: { city: 'San Francisco', status: 'loading' },
+        type: "data-weather",
+        id: "weather-1",
+        data: { city: "San Francisco", status: "loading" },
       });
 
       const result = streamText({
@@ -89,19 +89,19 @@ export async function POST(req: Request) {
         onFinish() {
           // 4. Update the same data part (reconciliation)
           writer.write({
-            type: 'data-weather',
-            id: 'weather-1', // Same ID = update existing part
+            type: "data-weather",
+            id: "weather-1", // Same ID = update existing part
             data: {
-              city: 'San Francisco',
-              weather: 'sunny',
-              status: 'success',
+              city: "San Francisco",
+              weather: "sunny",
+              status: "success",
             },
           });
 
           // 5. Send completion notification (transient)
           writer.write({
-            type: 'data-notification',
-            data: { message: 'Request completed', level: 'info' },
+            type: "data-notification",
+            data: { message: "Request completed", level: "info" },
             transient: true, // Won't be added to message history
           });
         },
@@ -127,9 +127,9 @@ Regular data parts are added to the message history and appear in `message.parts
 
 ```tsx
 writer.write({
-  type: 'data-weather',
-  id: 'weather-1', // Optional: enables reconciliation
-  data: { city: 'San Francisco', status: 'loading' },
+  type: "data-weather",
+  id: "weather-1", // Optional: enables reconciliation
+  data: { city: "San Francisco", status: "loading" },
 });
 ```
 
@@ -139,13 +139,13 @@ Sources are useful for RAG implementations where you want to show which document
 
 ```tsx
 writer.write({
-  type: 'source',
+  type: "source",
   value: {
-    type: 'source',
-    sourceType: 'url',
-    id: 'source-1',
-    url: 'https://example.com',
-    title: 'Example Source',
+    type: "source",
+    sourceType: "url",
+    id: "source-1",
+    url: "https://example.com",
+    title: "Example Source",
   },
 });
 ```
@@ -157,8 +157,8 @@ Transient parts are sent to the client but not added to the message history. The
 ```tsx
 // server
 writer.write({
-  type: 'data-notification',
-  data: { message: 'Processing...', level: 'info' },
+  type: "data-notification",
+  data: { message: "Processing...", level: "info" },
   transient: true, // Won't be added to message history
 });
 
@@ -167,7 +167,7 @@ const [notification, setNotification] = useState();
 
 const { messages } = useChat({
   onData: ({ data, type }) => {
-    if (type === 'data-notification') {
+    if (type === "data-notification") {
       setNotification({ message: data.message, level: data.level });
     }
   },
@@ -192,22 +192,22 @@ The reconciliation happens automatically - simply use the same `id` when writing
 The `onData` callback is essential for handling streaming data, especially transient parts:
 
 ```tsx filename="page.tsx"
-import { useChat } from '@ai-sdk/react';
-import type { MyUIMessage } from '@/ai/types';
+import { useChat } from "@ai-sdk/react";
+import type { MyUIMessage } from "@/ai/types";
 
 const { messages } = useChat<MyUIMessage>({
-  api: '/api/chat',
-  onData: dataPart => {
+  api: "/api/chat",
+  onData: (dataPart) => {
     // Handle all data parts as they arrive (including transient parts)
-    console.log('Received data part:', dataPart);
+    console.log("Received data part:", dataPart);
 
     // Handle different data part types
-    if (dataPart.type === 'data-weather') {
-      console.log('Weather update:', dataPart.data);
+    if (dataPart.type === "data-weather") {
+      console.log("Weather update:", dataPart.data);
     }
 
     // Handle transient notifications (ONLY available here, not in message.parts)
-    if (dataPart.type === 'data-notification') {
+    if (dataPart.type === "data-notification") {
       showToast(dataPart.data.message, dataPart.data.level);
     }
   },
@@ -223,14 +223,14 @@ You can filter and render data parts from the message parts array:
 ```tsx filename="page.tsx"
 const result = (
   <>
-    {messages?.map(message => (
+    {messages?.map((message) => (
       <div key={message.id}>
         {/* Render weather data parts */}
         {message.parts
-          .filter(part => part.type === 'data-weather')
+          .filter((part) => part.type === "data-weather")
           .map((part, index) => (
             <div key={index} className="weather-widget">
-              {part.data.status === 'loading' ? (
+              {part.data.status === "loading" ? (
                 <>Getting weather for {part.data.city}...</>
               ) : (
                 <>
@@ -242,14 +242,14 @@ const result = (
 
         {/* Render text content */}
         {message.parts
-          .filter(part => part.type === 'text')
+          .filter((part) => part.type === "text")
           .map((part, index) => (
             <div key={index}>{part.text}</div>
           ))}
 
         {/* Render sources */}
         {message.parts
-          .filter(part => part.type === 'source')
+          .filter((part) => part.type === "source")
           .map((part, index) => (
             <div key={index} className="source">
               Source: <a href={part.url}>{part.title}</a>
@@ -264,21 +264,21 @@ const result = (
 ### Complete Example
 
 ```tsx filename="page.tsx"
-'use client';
+"use client";
 
-import { useChat } from '@ai-sdk/react';
-import { useState } from 'react';
-import type { MyUIMessage } from '@/ai/types';
+import { useChat } from "@ai-sdk/react";
+import { useState } from "react";
+import type { MyUIMessage } from "@/ai/types";
 
 export default function Chat() {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
 
   const { messages, sendMessage } = useChat<MyUIMessage>({
-    api: '/api/chat',
-    onData: dataPart => {
+    api: "/api/chat",
+    onData: (dataPart) => {
       // Handle transient notifications
-      if (dataPart.type === 'data-notification') {
-        console.log('Notification:', dataPart.data.message);
+      if (dataPart.type === "data-notification") {
+        console.log("Notification:", dataPart.data.message);
       }
     },
   });
@@ -286,21 +286,21 @@ export default function Chat() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     sendMessage({ text: input });
-    setInput('');
+    setInput("");
   };
 
   return (
     <>
-      {messages?.map(message => (
+      {messages?.map((message) => (
         <div key={message.id}>
-          {message.role === 'user' ? 'User: ' : 'AI: '}
+          {message.role === "user" ? "User: " : "AI: "}
 
           {/* Render weather data */}
           {message.parts
-            .filter(part => part.type === 'data-weather')
+            .filter((part) => part.type === "data-weather")
             .map((part, index) => (
               <span key={index} className="weather-update">
-                {part.data.status === 'loading' ? (
+                {part.data.status === "loading" ? (
                   <>Getting weather for {part.data.city}...</>
                 ) : (
                   <>
@@ -312,7 +312,7 @@ export default function Chat() {
 
           {/* Render text content */}
           {message.parts
-            .filter(part => part.type === 'text')
+            .filter((part) => part.type === "text")
             .map((part, index) => (
               <div key={index}>{part.text}</div>
             ))}
@@ -322,7 +322,7 @@ export default function Chat() {
       <form onSubmit={handleSubmit}>
         <input
           value={input}
-          onChange={e => setInput(e.target.value)}
+          onChange={(e) => setInput(e.target.value)}
           placeholder="Ask about the weather..."
         />
         <button type="submit">Send</button>
@@ -357,7 +357,7 @@ Message metadata is best for **message-level information** that describes the me
 // Server: Send metadata about the message
 return result.toUIMessageStreamResponse({
   messageMetadata: ({ part }) => {
-    if (part.type === 'finish') {
+    if (part.type === "finish") {
       return {
         model: part.response.modelId,
         totalTokens: part.totalUsage.totalTokens,
@@ -381,9 +381,9 @@ Data parts are best for streaming **dynamic arbitrary data**:
 ```ts
 // Server: Stream data as part of message content
 writer.write({
-  type: 'data-weather',
-  id: 'weather-1',
-  data: { city: 'San Francisco', status: 'loading' },
+  type: "data-weather",
+  id: "weather-1",
+  data: { city: "San Francisco", status: "loading" },
 });
 ```
 

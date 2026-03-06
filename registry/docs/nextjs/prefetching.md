@@ -12,7 +12,7 @@ This guide will explain how prefetching works and show common implementation pat
 
 ## How does prefetching work?
 
-When navigating between routes, the browser requests assets for the page like HTML and JavaScript files. Prefetching is the process of fetching these resources *ahead* of time, before you navigate to a new route.
+When navigating between routes, the browser requests assets for the page like HTML and JavaScript files. Prefetching is the process of fetching these resources _ahead_ of time, before you navigate to a new route.
 
 Next.js automatically splits your application into smaller JavaScript chunks based on routes. Instead of loading all the code upfront like traditional SPAs, only the code needed for the current route is loaded. This reduces the initial load time while other parts of the app are loaded in the background. By the time you click the link, the resources for the new route have already been loaded into the browser cache.
 
@@ -31,18 +31,18 @@ When navigating to the new page, there's no full page reload or browser loading 
 ## Automatic prefetch
 
 ```tsx filename="app/ui/nav-link.tsx" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function NavLink() {
-  return <Link href="/about">About</Link>
+  return <Link href="/about">About</Link>;
 }
 ```
 
 ```jsx filename="app/ui/nav-link.js" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function NavLink() {
-  return <Link href="/about">About</Link>
+  return <Link href="/about">About</Link>;
 }
 ```
 
@@ -58,20 +58,20 @@ Automatic prefetching runs only in production. Disable with `prefetch={false}` o
 To do manual prefetching, import the `useRouter` hook from `next/navigation`, and call `router.prefetch()` to warm routes outside the viewport or in response to analytics, hover, scroll, etc.
 
 ```tsx
-'use client'
+"use client";
 
-import { useRouter } from 'next/navigation'
-import { CustomLink } from '@components/link'
+import { useRouter } from "next/navigation";
+import { CustomLink } from "@components/link";
 
 export function PricingCard() {
-  const router = useRouter()
+  const router = useRouter();
 
   return (
-    <div onMouseEnter={() => router.prefetch('/pricing')}>
+    <div onMouseEnter={() => router.prefetch("/pricing")}>
       {/* other UI elements */}
       <CustomLink href="/pricing">View Pricing</CustomLink>
     </div>
-  )
+  );
 }
 ```
 
@@ -86,19 +86,19 @@ Next.js tries to do the right prefetching by default, but power users can eject 
 For example, you might have to only trigger prefetches on hover, instead of when entering the viewport (the default behavior):
 
 ```tsx
-'use client'
+"use client";
 
-import Link from 'next/link'
-import { useState } from 'react'
+import Link from "next/link";
+import { useState } from "react";
 
 export function HoverPrefetchLink({
   href,
   children,
 }: {
-  href: string
-  children: React.ReactNode
+  href: string;
+  children: React.ReactNode;
 }) {
-  const [active, setActive] = useState(false)
+  const [active, setActive] = useState(false);
 
   return (
     <Link
@@ -108,7 +108,7 @@ export function HoverPrefetchLink({
     >
       {children}
     </Link>
-  )
+  );
 }
 ```
 
@@ -121,42 +121,42 @@ You can extend the `<Link>` component to create your own custom prefetching stra
 Alternatively, you can use [`useRouter`](/docs/app/api-reference/functions/use-router) to recreate some of the native `<Link>` behavior. However, be aware this opts you into maintaining prefetching and cache invalidation.
 
 ```tsx
-'use client'
+"use client";
 
-import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 function ManualPrefetchLink({
   href,
   children,
 }: {
-  href: string
-  children: React.ReactNode
+  href: string;
+  children: React.ReactNode;
 }) {
-  const router = useRouter()
+  const router = useRouter();
 
   useEffect(() => {
-    let cancelled = false
+    let cancelled = false;
     const poll = () => {
-      if (!cancelled) router.prefetch(href, { onInvalidate: poll })
-    }
-    poll()
+      if (!cancelled) router.prefetch(href, { onInvalidate: poll });
+    };
+    poll();
     return () => {
-      cancelled = true
-    }
-  }, [href, router])
+      cancelled = true;
+    };
+  }, [href, router]);
 
   return (
     <a
       href={href}
       onClick={(event) => {
-        event.preventDefault()
-        router.push(href)
+        event.preventDefault();
+        router.push(href);
       }}
     >
       {children}
     </a>
-  )
+  );
 }
 ```
 
@@ -169,15 +169,15 @@ function ManualPrefetchLink({
 You can fully disable prefetching for certain routes for more fine-grained control over resource consumption.
 
 ```tsx
-'use client'
+"use client";
 
-import Link, { LinkProps } from 'next/link'
+import Link, { LinkProps } from "next/link";
 
 function NoPrefetchLink({
   prefetch,
   ...rest
 }: LinkProps & { children: React.ReactNode }) {
-  return <Link {...rest} prefetch={false} />
+  return <Link {...rest} prefetch={false} />;
 }
 ```
 
@@ -219,61 +219,61 @@ To avoid this, you should move side-effects to a `useEffect` hook or a Server Ac
 **Before**:
 
 ```tsx filename="app/dashboard/layout.tsx" switcher
-import { trackPageView } from '@/lib/analytics'
+import { trackPageView } from "@/lib/analytics";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   // This runs during prefetch
-  trackPageView()
+  trackPageView();
 
-  return <div>{children}</div>
+  return <div>{children}</div>;
 }
 ```
 
 ```jsx filename="app/dashboard/layout.js" switcher
-import { trackPageView } from '@/lib/analytics'
+import { trackPageView } from "@/lib/analytics";
 
 export default function Layout({ children }) {
   // This runs during prefetch
-  trackPageView()
+  trackPageView();
 
-  return <div>{children}</div>
+  return <div>{children}</div>;
 }
 ```
 
 **After**:
 
 ```tsx filename="app/ui/analytics-tracker.tsx" switcher
-'use client'
+"use client";
 
-import { useEffect } from 'react'
-import { trackPageView } from '@/lib/analytics'
+import { useEffect } from "react";
+import { trackPageView } from "@/lib/analytics";
 
 export function AnalyticsTracker() {
   useEffect(() => {
-    trackPageView()
-  }, [])
+    trackPageView();
+  }, []);
 
-  return null
+  return null;
 }
 ```
 
 ```jsx filename="app/ui/analytics-tracker.js" switcher
-'use client'
+"use client";
 
-import { useEffect } from 'react'
-import { trackPageView } from '@/lib/analytics'
+import { useEffect } from "react";
+import { trackPageView } from "@/lib/analytics";
 
 export function AnalyticsTracker() {
   useEffect(() => {
-    trackPageView()
-  }, [])
+    trackPageView();
+  }, []);
 
-  return null
+  return null;
 }
 ```
 
 ```tsx filename="app/dashboard/layout.tsx" switcher
-import { AnalyticsTracker } from '@/app/ui/analytics-tracker'
+import { AnalyticsTracker } from "@/app/ui/analytics-tracker";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -281,12 +281,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <AnalyticsTracker />
       {children}
     </div>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/dashboard/layout.js" switcher
-import { AnalyticsTracker } from '@/app/ui/analytics-tracker'
+import { AnalyticsTracker } from "@/app/ui/analytics-tracker";
 
 export default function Layout({ children }) {
   return (
@@ -294,7 +294,7 @@ export default function Layout({ children }) {
       <AnalyticsTracker />
       {children}
     </div>
-  )
+  );
 }
 ```
 
@@ -317,19 +317,19 @@ However, this means static routes will only be fetched on click, and dynamic rou
 To reduce resource usage without disabling prefetch entirely, you can defer prefetching until the user hovers over a link. This targets only links the user is likely to visit.
 
 ```tsx filename="app/ui/hover-prefetch-link.tsx" switcher
-'use client'
+"use client";
 
-import Link from 'next/link'
-import { useState } from 'react'
+import Link from "next/link";
+import { useState } from "react";
 
 export function HoverPrefetchLink({
   href,
   children,
 }: {
-  href: string
-  children: React.ReactNode
+  href: string;
+  children: React.ReactNode;
 }) {
-  const [active, setActive] = useState(false)
+  const [active, setActive] = useState(false);
 
   return (
     <Link
@@ -339,18 +339,18 @@ export function HoverPrefetchLink({
     >
       {children}
     </Link>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/ui/hover-prefetch-link.js" switcher
-'use client'
+"use client";
 
-import Link from 'next/link'
-import { useState } from 'react'
+import Link from "next/link";
+import { useState } from "react";
 
 export function HoverPrefetchLink({ href, children }) {
-  const [active, setActive] = useState(false)
+  const [active, setActive] = useState(false);
 
   return (
     <Link
@@ -360,7 +360,7 @@ export function HoverPrefetchLink({ href, children }) {
     >
       {children}
     </Link>
-  )
+  );
 }
 ```
 

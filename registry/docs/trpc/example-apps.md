@@ -8,7 +8,7 @@ to use [pnpm](https://pnpm.io) as the script runner, so make sure to [install](h
 
 If you wish to use `npm` or `yarn`, make sure to update the relevant `package.json` `scripts` entries in generated example.
 
-***
+---
 
 ### Next.js starter with Prisma, E2E testing, and ESLint (Recommended)
 
@@ -35,7 +35,7 @@ deno init --npm next-app --example https://github.com/trpc/trpc --example-path e
 - Example deploy: [nextjs.trpc.io](https://nextjs.trpc.io)
 - [Source code](https://github.com/trpc/examples-next-prisma-starter)
 
-***
+---
 
 ### create-t3-turbo - T3 Stack with Expo and Turborepo
 
@@ -45,7 +45,7 @@ git clone git@github.com:t3-oss/create-t3-turbo.git
 
 - [Source code](https://github.com/t3-oss/create-t3-turbo)
 
-***
+---
 
 ### Next.js starter with Prisma, E2E testing, ESLint, next-auth, WebSockets, and subscriptions
 
@@ -73,7 +73,7 @@ deno init --npm create-next-app --example https://github.com/trpc/trpc --example
 - [CodeSandbox](https://codesandbox.io/s/github/trpc/trpc/tree/main/examples/next-prisma-websockets-starter?file=/src/pages/index.tsx)
 - [Source code](https://github.com/trpc/examples-next-prisma-websockets-starter)
 
-***
+---
 
 ### Next.js Todo MVC example with SSG and Prisma
 
@@ -101,47 +101,47 @@ deno init --npm next-app --example https://github.com/trpc/trpc --example-path e
 - [CodeSandbox](https://codesandbox.io/s/github/trpc/trpc/tree/main/examples/next-prisma-todomvc?file=/pages/%5Bfilter%5D.tsx)
 - [Source code](https://github.com/trpc/examples-next-prisma-todomvc)
 
-***
+---
 
 ### Minimal (Hello world) server and client in Node.js
 
 - [Source code](https://github.com/trpc/trpc/tree/main/examples/minimal)
 
-***
+---
 
 ### Vanilla standalone server and Node.js procedure calls
 
 - [CodeSandbox](https://codesandbox.io/s/github/trpc/trpc/tree/main/examples/standalone-server)
 - [Source code](https://github.com/trpc/trpc/tree/main/examples/standalone-server)
 
-***
+---
 
 ### Express server and Node.js procedure calls
 
 - [CodeSandbox](https://codesandbox.io/s/github/trpc/trpc/tree/main/examples/express-server)
 - [Source code](https://github.com/trpc/trpc/tree/main/examples/express-server)
 
-***
+---
 
 ### Fastify server with WebSockets and Node.js procedure calls
 
 - [CodeSandbox](https://codesandbox.io/s/github/trpc/trpc/tree/main/examples/fastify-server)
 - [Source code](https://github.com/trpc/trpc/tree/main/examples/fastify-server)
 
-***
+---
 
 ### SvelteKit with Prisma
 
 - [CodeSandbox](https://codesandbox.io/s/github/icflorescu/trpc-sveltekit-example)
 - [Source code](https://github.com/icflorescu/trpc-sveltekit-example)
 
-***
+---
 
 ### TanStack Start (Alpha)
 
 - [Source code](https://github.com/trpc/trpc/tree/main/examples/tanstack-start)
 
-***
+---
 
 ### Sign-In With Ethereum Authentication With Express
 
@@ -151,7 +151,7 @@ git clone git@github.com:codingwithmanny/trpc-siwe-monorepo.git
 
 - [Source code](https://github.com/codingwithmanny/trpc-siwe-monorepo)
 
-***
+---
 
 ### Separate backend & frontend repositories
 

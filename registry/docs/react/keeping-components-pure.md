@@ -1,12 +1,12 @@
 # Keeping Components Pure
 
-Some JavaScript functions are *pure.* Pure functions only perform a calculation and nothing more. By strictly only writing your components as pure functions, you can avoid an entire class of baffling bugs and unpredictable behavior as your codebase grows. To get these benefits, though, there are a few rules you must follow.
+Some JavaScript functions are _pure._ Pure functions only perform a calculation and nothing more. By strictly only writing your components as pure functions, you can avoid an entire class of baffling bugs and unpredictable behavior as your codebase grows. To get these benefits, though, there are a few rules you must follow.
 
 - What purity is and how it helps you avoid bugs
 - How to keep components pure by keeping changes out of the render phase
 - How to use Strict Mode to find mistakes in your components
 
-## Purity: Components as formulas {/*purity-components-as-formulas*/}
+## Purity: Components as formulas {/_purity-components-as-formulas_/}
 
 In computer science (and especially the world of functional programming), [a pure function](https://wikipedia.org/wiki/Pure_function) is a function with the following characteristics:
 
@@ -23,7 +23,7 @@ If x = 3 then y = 6. Always.
 
 If x = 3, y won't sometimes be 9 or –1 or 2.5 depending on the time of day or the state of the stock market.
 
-If y = 2x and x = 3, y will *always* be 6.
+If y = 2x and x = 3, y will _always_ be 6.
 
 If we made this into a JavaScript function, it would look like this:
 
@@ -40,9 +40,11 @@ React is designed around this concept. **React assumes that every component you 
 ```js src/App.js
 function Recipe({ drinkers }) {
   return (
-    <ol>    
+    <ol>
       <li>Boil {drinkers} cups of water.</li>
-      <li>Add {drinkers} spoons of tea and {0.5 * drinkers} spoons of spice.</li>
+      <li>
+        Add {drinkers} spoons of tea and {0.5 * drinkers} spoons of spice.
+      </li>
       <li>Add {0.5 * drinkers} cups of milk to boil and sugar to taste.</li>
     </ol>
   );
@@ -69,9 +71,9 @@ Just like a math formula.
 
 You could think of your components as recipes: if you follow them and don't introduce new ingredients during the cooking process, you will get the same dish every time. That "dish" is the JSX that the component serves to React to [render.](/learn/render-and-commit)
 
-## Side Effects: (un)intended consequences {/*side-effects-unintended-consequences*/}
+## Side Effects: (un)intended consequences {/_side-effects-unintended-consequences_/}
 
-React's rendering process must always be pure. Components should only *return* their JSX, and not *change* any objects or variables that existed before rendering—that would make them impure!
+React's rendering process must always be pure. Components should only _return_ their JSX, and not _change_ any objects or variables that existed before rendering—that would make them impure!
 
 Here is a component that breaks this rule:
 
@@ -95,7 +97,7 @@ export default function TeaSet() {
 }
 ```
 
-This component is reading and writing a `guest` variable declared outside of it. This means that **calling this component multiple times will produce different JSX!** And what's more, if *other* components read `guest`, they will produce different JSX, too, depending on when they were rendered! That's not predictable.
+This component is reading and writing a `guest` variable declared outside of it. This means that **calling this component multiple times will produce different JSX!** And what's more, if _other_ components read `guest`, they will produce different JSX, too, depending on when they were rendered! That's not predictable.
 
 Going back to our formula y = 2x, now even if x = 2, we cannot trust that y = 4. Our tests could fail, our users would be baffled, planes would fall out of the sky—you can see how this would lead to confusing bugs!
 
@@ -121,11 +123,11 @@ Now your component is pure, as the JSX it returns only depends on the `guest` pr
 
 In general, you should not expect your components to be rendered in any particular order. It doesn't matter if you call y = 2x before or after y = 5x: both formulas will resolve independently of each other. In the same way, each component should only "think for itself", and not attempt to coordinate with or depend upon others during rendering. Rendering is like a school exam: each component should calculate JSX on their own!
 
-#### Detecting impure calculations with StrictMode {/*detecting-impure-calculations-with-strict-mode*/}
+#### Detecting impure calculations with StrictMode {/_detecting-impure-calculations-with-strict-mode_/}
 
 Although you might not have used them all yet, in React there are three kinds of inputs that you can read while rendering: [props](/learn/passing-props-to-a-component), [state](/learn/state-a-components-memory), and [context.](/learn/passing-data-deeply-with-context) You should always treat these inputs as read-only.
 
-When you want to *change* something in response to user input, you should [set state](/learn/state-a-components-memory) instead of writing to a variable. You should never change preexisting variables or objects while your component is rendering.
+When you want to _change_ something in response to user input, you should [set state](/learn/state-a-components-memory) instead of writing to a variable. You should never change preexisting variables or objects while your component is rendering.
 
 React offers a "Strict Mode" in which it calls each component's function twice during development. **By calling the component functions twice, Strict Mode helps find components that break these rules.**
 
@@ -133,11 +135,11 @@ Notice how the original example displayed "Guest #2", "Guest #4", and "Guest #6"
 
 Strict Mode has no effect in production, so it won't slow down the app for your users. To opt into Strict Mode, you can wrap your root component into `<React.StrictMode>`. Some frameworks do this by default.
 
-### Local mutation: Your component's little secret {/*local-mutation-your-components-little-secret*/}
+### Local mutation: Your component's little secret {/_local-mutation-your-components-little-secret_/}
 
-In the above example, the problem was that the component changed a *preexisting* variable while rendering. This is often called a **"mutation"** to make it sound a bit scarier. Pure functions don't mutate variables outside of the function's scope or objects that were created before the call—that makes them impure!
+In the above example, the problem was that the component changed a _preexisting_ variable while rendering. This is often called a **"mutation"** to make it sound a bit scarier. Pure functions don't mutate variables outside of the function's scope or objects that were created before the call—that makes them impure!
 
-However, **it's completely fine to change variables and objects that you've *just* created while rendering.** In this example, you create an `[]` array, assign it to a `cups` variable, and then `push` a dozen cups into it:
+However, **it's completely fine to change variables and objects that you've _just_ created while rendering.** In this example, you create an `[]` array, assign it to a `cups` variable, and then `push` a dozen cups into it:
 
 ```js
 function Cup({ guest }) {
@@ -153,21 +155,21 @@ export default function TeaGathering() {
 }
 ```
 
-If the `cups` variable or the `[]` array were created outside the `TeaGathering` function, this would be a huge problem! You would be changing a *preexisting* object by pushing items into that array.
+If the `cups` variable or the `[]` array were created outside the `TeaGathering` function, this would be a huge problem! You would be changing a _preexisting_ object by pushing items into that array.
 
-However, it's fine because you've created them *during the same render*, inside `TeaGathering`. No code outside of `TeaGathering` will ever know that this happened. This is called **"local mutation"**—it's like your component's little secret.
+However, it's fine because you've created them _during the same render_, inside `TeaGathering`. No code outside of `TeaGathering` will ever know that this happened. This is called **"local mutation"**—it's like your component's little secret.
 
-## Where you *can* cause side effects {/*where-you-*can*-cause-side-effects*/}
+## Where you _can_ cause side effects {/*where-you-*can*-cause-side-effects*/}
 
-While functional programming relies heavily on purity, at some point, somewhere, *something* has to change. That's kind of the point of programming! These changes—updating the screen, starting an animation, changing the data—are called **side effects.** They're things that happen *"on the side"*, not during rendering.
+While functional programming relies heavily on purity, at some point, somewhere, _something_ has to change. That's kind of the point of programming! These changes—updating the screen, starting an animation, changing the data—are called **side effects.** They're things that happen _"on the side"_, not during rendering.
 
-In React, **side effects usually belong inside [event handlers.](/learn/responding-to-events)** Event handlers are functions that React runs when you perform some action—for example, when you click a button. Even though event handlers are defined *inside* your component, they don't run *during* rendering! **So event handlers don't need to be pure.**
+In React, **side effects usually belong inside [event handlers.](/learn/responding-to-events)** Event handlers are functions that React runs when you perform some action—for example, when you click a button. Even though event handlers are defined _inside_ your component, they don't run _during_ rendering! **So event handlers don't need to be pure.**
 
 If you've exhausted all other options and can't find the right event handler for your side effect, you can still attach it to your returned JSX with a [`useEffect`](/reference/react/useEffect) call in your component. This tells React to execute it later, after rendering, when side effects are allowed. **However, this approach should be your last resort.**
 
 When possible, try to express your logic with rendering alone. You'll be surprised how far this can take you!
 
-#### Why does React care about purity? {/*why-does-react-care-about-purity*/}
+#### Why does React care about purity? {/_why-does-react-care-about-purity_/}
 
 Writing pure functions takes some habit and discipline. But it also unlocks marvelous opportunities:
 
@@ -185,33 +187,29 @@ Every new React feature we're building takes advantage of purity. From data fetc
 - Strive to express your component's logic in the JSX you return. When you need to "change things", you'll usually want to do it in an event handler. As a last resort, you can `useEffect`.
 - Writing pure functions takes a bit of practice, but it unlocks the power of React's paradigm.
 
-#### Fix a broken clock {/*fix-a-broken-clock*/}
+#### Fix a broken clock {/_fix-a-broken-clock_/}
 
 This component tries to set the `<h1>`'s CSS class to `"night"` during the time from midnight to six hours in the morning, and `"day"` at all other times. However, it doesn't work. Can you fix this component?
 
 You can verify whether your solution works by temporarily changing the computer's timezone. When the current time is between midnight and six in the morning, the clock should have inverted colors!
 
-Rendering is a *calculation*, it shouldn't try to "do" things. Can you express the same idea differently?
+Rendering is a _calculation_, it shouldn't try to "do" things. Can you express the same idea differently?
 
 ```js src/Clock.js active
 export default function Clock({ time }) {
   const hours = time.getHours();
   if (hours >= 0 && hours <= 6) {
-    document.getElementById('time').className = 'night';
+    document.getElementById("time").className = "night";
   } else {
-    document.getElementById('time').className = 'day';
+    document.getElementById("time").className = "day";
   }
-  return (
-    <h1 id="time">
-      {time.toLocaleTimeString()}
-    </h1>
-  );
+  return <h1 id="time">{time.toLocaleTimeString()}</h1>;
 }
 ```
 
 ```js src/App.js hidden
-import { useState, useEffect } from 'react';
-import Clock from './Clock.js';
+import { useState, useEffect } from "react";
+import Clock from "./Clock.js";
 
 function useTime() {
   const [time, setTime] = useState(() => new Date());
@@ -226,9 +224,7 @@ function useTime() {
 
 export default function App() {
   const time = useTime();
-  return (
-    <Clock time={time} />
-  );
+  return <Clock time={time} />;
 }
 ```
 
@@ -254,21 +250,17 @@ export default function Clock({ time }) {
   const hours = time.getHours();
   let className;
   if (hours >= 0 && hours <= 6) {
-    className = 'night';
+    className = "night";
   } else {
-    className = 'day';
+    className = "day";
   }
-  return (
-    <h1 className={className}>
-      {time.toLocaleTimeString()}
-    </h1>
-  );
+  return <h1 className={className}>{time.toLocaleTimeString()}</h1>;
 }
 ```
 
 ```js src/App.js hidden
-import { useState, useEffect } from 'react';
-import Clock from './Clock.js';
+import { useState, useEffect } from "react";
+import Clock from "./Clock.js";
 
 function useTime() {
   const [time, setTime] = useState(() => new Date());
@@ -283,9 +275,7 @@ function useTime() {
 
 export default function App() {
   const time = useTime();
-  return (
-    <Clock time={time} />
-  );
+  return <Clock time={time} />;
 }
 ```
 
@@ -306,7 +296,7 @@ body > * {
 
 In this example, the side effect (modifying the DOM) was not necessary at all. You only needed to return JSX.
 
-#### Fix a broken profile {/*fix-a-broken-profile*/}
+#### Fix a broken profile {/_fix-a-broken-profile_/}
 
 Two `Profile` components are rendered side by side with different data. Press "Collapse" on the first profile, and then "Expand" it. You'll notice that both profiles now show the same person. This is a bug.
 
@@ -315,8 +305,8 @@ Find the cause of the bug and fix it.
 The buggy code is in `Profile.js`. Make sure you read it all from top to bottom!
 
 ```js {expectedErrors: {'react-compiler': [7]}} src/Profile.js
-import Panel from './Panel.js';
-import { getImageUrl } from './utils.js';
+import Panel from "./Panel.js";
+import { getImageUrl } from "./utils.js";
 
 let currentPerson;
 
@@ -327,7 +317,7 @@ export default function Profile({ person }) {
       <Header />
       <Avatar />
     </Panel>
-  )
+  );
 }
 
 function Header() {
@@ -348,14 +338,14 @@ function Avatar() {
 ```
 
 ```js src/Panel.js hidden
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function Panel({ children }) {
   const [open, setOpen] = useState(true);
   return (
     <section className="panel">
       <button onClick={() => setOpen(!open)}>
-        {open ? 'Collapse' : 'Expand'}
+        {open ? "Collapse" : "Expand"}
       </button>
       {open && children}
     </section>
@@ -364,37 +354,39 @@ export default function Panel({ children }) {
 ```
 
 ```js src/App.js
-import Profile from './Profile.js';
+import Profile from "./Profile.js";
 
 export default function App() {
   return (
     <>
-      <Profile person={{
-        imageId: 'lrWQx8l',
-        name: 'Subrahmanyan Chandrasekhar',
-      }} />
-      <Profile person={{
-        imageId: 'MK3eW3A',
-        name: 'Creola Katherine Johnson',
-      }} />
+      <Profile
+        person={{
+          imageId: "lrWQx8l",
+          name: "Subrahmanyan Chandrasekhar",
+        }}
+      />
+      <Profile
+        person={{
+          imageId: "MK3eW3A",
+          name: "Creola Katherine Johnson",
+        }}
+      />
     </>
-  )
-}
-```
-
-```js src/utils.js hidden
-export function getImageUrl(person, size = 's') {
-  return (
-    'https://i.imgur.com/' +
-    person.imageId +
-    size +
-    '.jpg'
   );
 }
 ```
 
+```js src/utils.js hidden
+export function getImageUrl(person, size = "s") {
+  return "https://i.imgur.com/" + person.imageId + size + ".jpg";
+}
+```
+
 ```css
-.avatar { margin: 5px; border-radius: 50%; }
+.avatar {
+  margin: 5px;
+  border-radius: 50%;
+}
 .panel {
   border: 1px solid #aaa;
   border-radius: 6px;
@@ -402,16 +394,19 @@ export function getImageUrl(person, size = 's') {
   padding: 10px;
   width: 200px;
 }
-h1 { margin: 5px; font-size: 18px; }
+h1 {
+  margin: 5px;
+  font-size: 18px;
+}
 ```
 
-The problem is that the `Profile` component writes to a preexisting variable called `currentPerson`, and the `Header` and `Avatar` components read from it. This makes *all three of them* impure and difficult to predict.
+The problem is that the `Profile` component writes to a preexisting variable called `currentPerson`, and the `Header` and `Avatar` components read from it. This makes _all three of them_ impure and difficult to predict.
 
 To fix the bug, remove the `currentPerson` variable. Instead, pass all information from `Profile` to `Header` and `Avatar` via props. You'll need to add a `person` prop to both components and pass it all the way down.
 
 ```js src/Profile.js active
-import Panel from './Panel.js';
-import { getImageUrl } from './utils.js';
+import Panel from "./Panel.js";
+import { getImageUrl } from "./utils.js";
 
 export default function Profile({ person }) {
   return (
@@ -419,7 +414,7 @@ export default function Profile({ person }) {
       <Header person={person} />
       <Avatar person={person} />
     </Panel>
-  )
+  );
 }
 
 function Header({ person }) {
@@ -440,14 +435,14 @@ function Avatar({ person }) {
 ```
 
 ```js src/Panel.js hidden
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function Panel({ children }) {
   const [open, setOpen] = useState(true);
   return (
     <section className="panel">
       <button onClick={() => setOpen(!open)}>
-        {open ? 'Collapse' : 'Expand'}
+        {open ? "Collapse" : "Expand"}
       </button>
       {open && children}
     </section>
@@ -456,37 +451,39 @@ export default function Panel({ children }) {
 ```
 
 ```js src/App.js
-import Profile from './Profile.js';
+import Profile from "./Profile.js";
 
 export default function App() {
   return (
     <>
-      <Profile person={{
-        imageId: 'lrWQx8l',
-        name: 'Subrahmanyan Chandrasekhar',
-      }} />
-      <Profile person={{
-        imageId: 'MK3eW3A',
-        name: 'Creola Katherine Johnson',
-      }} />
+      <Profile
+        person={{
+          imageId: "lrWQx8l",
+          name: "Subrahmanyan Chandrasekhar",
+        }}
+      />
+      <Profile
+        person={{
+          imageId: "MK3eW3A",
+          name: "Creola Katherine Johnson",
+        }}
+      />
     </>
   );
 }
 ```
 
 ```js src/utils.js hidden
-export function getImageUrl(person, size = 's') {
-  return (
-    'https://i.imgur.com/' +
-    person.imageId +
-    size +
-    '.jpg'
-  );
+export function getImageUrl(person, size = "s") {
+  return "https://i.imgur.com/" + person.imageId + size + ".jpg";
 }
 ```
 
 ```css
-.avatar { margin: 5px; border-radius: 50%; }
+.avatar {
+  margin: 5px;
+  border-radius: 50%;
+}
 .panel {
   border: 1px solid #aaa;
   border-radius: 6px;
@@ -494,12 +491,15 @@ export function getImageUrl(person, size = 's') {
   padding: 10px;
   width: 200px;
 }
-h1 { margin: 5px; font-size: 18px; }
+h1 {
+  margin: 5px;
+  font-size: 18px;
+}
 ```
 
 Remember that React does not guarantee that component functions will execute in any particular order, so you can't communicate between them by setting variables. All communication must happen through props.
 
-#### Fix a broken story tray {/*fix-a-broken-story-tray*/}
+#### Fix a broken story tray {/_fix-a-broken-story-tray_/}
 
 The CEO of your company is asking you to add "stories" to your online clock app, and you can't say no. You've written a `StoryTray` component that accepts a list of `stories`, followed by a "Create Story" placeholder.
 
@@ -508,16 +508,14 @@ You implemented the "Create Story" placeholder by pushing one more fake story at
 ```js src/StoryTray.js active
 export default function StoryTray({ stories }) {
   stories.push({
-    id: 'create',
-    label: 'Create Story'
+    id: "create",
+    label: "Create Story",
   });
 
   return (
     <ul>
-      {stories.map(story => (
-        <li key={story.id}>
-          {story.label}
-        </li>
+      {stories.map((story) => (
+        <li key={story.id}>{story.label}</li>
       ))}
     </ul>
   );
@@ -525,16 +523,16 @@ export default function StoryTray({ stories }) {
 ```
 
 ```js {expectedErrors: {'react-compiler': [16]}} src/App.js hidden
-import { useState, useEffect } from 'react';
-import StoryTray from './StoryTray.js';
+import { useState, useEffect } from "react";
+import StoryTray from "./StoryTray.js";
 
 const initialStories = [
-  {id: 0, label: "Ankit's Story" },
-  {id: 1, label: "Taylor's Story" },
+  { id: 0, label: "Ankit's Story" },
+  { id: 1, label: "Taylor's Story" },
 ];
 
 export default function App() {
-  const [stories, setStories] = useState([...initialStories])
+  const [stories, setStories] = useState([...initialStories]);
   const time = useTime();
 
   // HACK: Prevent the memory from growing forever while you read docs.
@@ -546,9 +544,9 @@ export default function App() {
   return (
     <div
       style={{
-        width: '100%',
-        height: '100%',
-        textAlign: 'center',
+        width: "100%",
+        height: "100%",
+        textAlign: "center",
       }}
     >
       <h2>It is {time.toLocaleTimeString()} now.</h2>
@@ -593,9 +591,9 @@ li {
 }
 ```
 
-Notice how whenever the clock updates, "Create Story" is added *twice*. This serves as a hint that we have a mutation during rendering--Strict Mode calls components twice to make these issues more noticeable.
+Notice how whenever the clock updates, "Create Story" is added _twice_. This serves as a hint that we have a mutation during rendering--Strict Mode calls components twice to make these issues more noticeable.
 
-`StoryTray` function is not pure. By calling `push` on the received `stories` array (a prop!), it is mutating an object that was created *before* `StoryTray` started rendering. This makes it buggy and very difficult to predict.
+`StoryTray` function is not pure. By calling `push` on the received `stories` array (a prop!), it is mutating an object that was created _before_ `StoryTray` started rendering. This makes it buggy and very difficult to predict.
 
 The simplest fix is to not touch the array at all, and render "Create Story" separately:
 
@@ -603,10 +601,8 @@ The simplest fix is to not touch the array at all, and render "Create Story" sep
 export default function StoryTray({ stories }) {
   return (
     <ul>
-      {stories.map(story => (
-        <li key={story.id}>
-          {story.label}
-        </li>
+      {stories.map((story) => (
+        <li key={story.id}>{story.label}</li>
       ))}
       <li>Create Story</li>
     </ul>
@@ -615,16 +611,16 @@ export default function StoryTray({ stories }) {
 ```
 
 ```js {expectedErrors: {'react-compiler': [16]}} src/App.js hidden
-import { useState, useEffect } from 'react';
-import StoryTray from './StoryTray.js';
+import { useState, useEffect } from "react";
+import StoryTray from "./StoryTray.js";
 
 const initialStories = [
-  {id: 0, label: "Ankit's Story" },
-  {id: 1, label: "Taylor's Story" },
+  { id: 0, label: "Ankit's Story" },
+  { id: 1, label: "Taylor's Story" },
 ];
 
 export default function App() {
-  const [stories, setStories] = useState([...initialStories])
+  const [stories, setStories] = useState([...initialStories]);
   const time = useTime();
 
   // HACK: Prevent the memory from growing forever while you read docs.
@@ -636,9 +632,9 @@ export default function App() {
   return (
     <div
       style={{
-        width: '100%',
-        height: '100%',
-        textAlign: 'center',
+        width: "100%",
+        height: "100%",
+        textAlign: "center",
       }}
     >
       <h2>It is {time.toLocaleTimeString()} now.</h2>
@@ -677,7 +673,7 @@ li {
 }
 ```
 
-Alternatively, you could create a *new* array (by copying the existing one) before you push an item into it:
+Alternatively, you could create a _new_ array (by copying the existing one) before you push an item into it:
 
 ```js src/StoryTray.js active
 export default function StoryTray({ stories }) {
@@ -686,16 +682,14 @@ export default function StoryTray({ stories }) {
 
   // Does not affect the original array:
   storiesToDisplay.push({
-    id: 'create',
-    label: 'Create Story'
+    id: "create",
+    label: "Create Story",
   });
 
   return (
     <ul>
-      {storiesToDisplay.map(story => (
-        <li key={story.id}>
-          {story.label}
-        </li>
+      {storiesToDisplay.map((story) => (
+        <li key={story.id}>{story.label}</li>
       ))}
     </ul>
   );
@@ -703,16 +697,16 @@ export default function StoryTray({ stories }) {
 ```
 
 ```js {expectedErrors: {'react-compiler': [16]}} src/App.js hidden
-import { useState, useEffect } from 'react';
-import StoryTray from './StoryTray.js';
+import { useState, useEffect } from "react";
+import StoryTray from "./StoryTray.js";
 
 const initialStories = [
-  {id: 0, label: "Ankit's Story" },
-  {id: 1, label: "Taylor's Story" },
+  { id: 0, label: "Ankit's Story" },
+  { id: 1, label: "Taylor's Story" },
 ];
 
 export default function App() {
-  const [stories, setStories] = useState([...initialStories])
+  const [stories, setStories] = useState([...initialStories]);
   const time = useTime();
 
   // HACK: Prevent the memory from growing forever while you read docs.
@@ -724,9 +718,9 @@ export default function App() {
   return (
     <div
       style={{
-        width: '100%',
-        height: '100%',
-        textAlign: 'center',
+        width: "100%",
+        height: "100%",
+        textAlign: "center",
       }}
     >
       <h2>It is {time.toLocaleTimeString()} now.</h2>
@@ -769,7 +763,7 @@ This keeps your mutation local and your rendering function pure. However, you st
 
 It is useful to remember which operations on arrays mutate them, and which don't. For example, `push`, `pop`, `reverse`, and `sort` will mutate the original array, but `slice`, `filter`, and `map` will create a new one.
 
-***
+---
 
 ## Sitemap
 

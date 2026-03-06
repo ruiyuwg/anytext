@@ -36,44 +36,44 @@ Add the PostCSS plugin to your `postcss.config.mjs` file:
 ```js filename="postcss.config.mjs"
 export default {
   plugins: {
-    '@tailwindcss/postcss': {},
+    "@tailwindcss/postcss": {},
   },
-}
+};
 ```
 
 Import Tailwind in your global CSS file:
 
 ```css filename="app/globals.css"
-@import 'tailwindcss';
+@import "tailwindcss";
 ```
 
 Import the CSS file in your root layout:
 
 ```tsx filename="app/layout.tsx" switcher
-import './globals.css'
+import "./globals.css";
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
       <body>{children}</body>
     </html>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/layout.js" switcher
-import './globals.css'
+import "./globals.css";
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>{children}</body>
     </html>
-  )
+  );
 }
 ```
 
@@ -85,7 +85,7 @@ export default function Page() {
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <h1 className="text-4xl font-bold">Welcome to Next.js!</h1>
     </main>
-  )
+  );
 }
 ```
 
@@ -95,7 +95,7 @@ export default function Page() {
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <h1 className="text-4xl font-bold">Welcome to Next.js!</h1>
     </main>
-  )
+  );
 }
 ```
 
@@ -114,18 +114,18 @@ To start using CSS Modules, create a new file with the extension `.module.css` a
 ```
 
 ```tsx filename="app/blog/page.tsx" switcher
-import styles from './blog.module.css'
+import styles from "./blog.module.css";
 
 export default function Page() {
-  return <main className={styles.blog}></main>
+  return <main className={styles.blog}></main>;
 }
 ```
 
 ```jsx filename="app/blog/page.js" switcher
-import styles from './blog.module.css'
+import styles from "./blog.module.css";
 
 export default function Layout() {
-  return <main className={styles.blog}></main>
+  return <main className={styles.blog}></main>;
 }
 ```
 
@@ -145,65 +145,65 @@ body {
 
 ```tsx filename="app/layout.tsx" switcher
 // These styles apply to every route in the application
-import './global.css'
+import "./global.css";
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
       <body>{children}</body>
     </html>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/layout.js" switcher
 // These styles apply to every route in the application
-import './global.css'
+import "./global.css";
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>{children}</body>
     </html>
-  )
+  );
 }
 ```
 
-> **Good to know:** Global styles can be imported into any layout, page, or component inside the `app` directory. However, since Next.js uses React's built-in support for stylesheets to integrate with Suspense, this currently does not remove stylesheets as you navigate between routes which can lead to conflicts. We recommend using global styles for *truly* global CSS (like Tailwind's base styles), [Tailwind CSS](#tailwind-css) for component styling, and [CSS Modules](#css-modules) for custom scoped CSS when needed.
+> **Good to know:** Global styles can be imported into any layout, page, or component inside the `app` directory. However, since Next.js uses React's built-in support for stylesheets to integrate with Suspense, this currently does not remove stylesheets as you navigate between routes which can lead to conflicts. We recommend using global styles for _truly_ global CSS (like Tailwind's base styles), [Tailwind CSS](#tailwind-css) for component styling, and [CSS Modules](#css-modules) for custom scoped CSS when needed.
 
 ## External stylesheets
 
 Stylesheets published by external packages can be imported anywhere in the `app` directory, including colocated components:
 
 ```tsx filename="app/layout.tsx" switcher
-import 'bootstrap/dist/css/bootstrap.css'
+import "bootstrap/dist/css/bootstrap.css";
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
       <body className="container">{children}</body>
     </html>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/layout.js" switcher
-import 'bootstrap/dist/css/bootstrap.css'
+import "bootstrap/dist/css/bootstrap.css";
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="container">{children}</body>
     </html>
-  )
+  );
 }
 ```
 
@@ -216,36 +216,36 @@ Next.js optimizes CSS during production builds by automatically chunking (mergin
 For example, `base-button.module.css` will be ordered before `page.module.css` since `<BaseButton>` is imported before `page.module.css`:
 
 ```tsx filename="page.tsx" switcher
-import { BaseButton } from './base-button'
-import styles from './page.module.css'
+import { BaseButton } from "./base-button";
+import styles from "./page.module.css";
 
 export default function Page() {
-  return <BaseButton className={styles.primary} />
+  return <BaseButton className={styles.primary} />;
 }
 ```
 
 ```jsx filename="page.js" switcher
-import { BaseButton } from './base-button'
-import styles from './page.module.css'
+import { BaseButton } from "./base-button";
+import styles from "./page.module.css";
 
 export default function Page() {
-  return <BaseButton className={styles.primary} />
+  return <BaseButton className={styles.primary} />;
 }
 ```
 
 ```tsx filename="base-button.tsx" switcher
-import styles from './base-button.module.css'
+import styles from "./base-button.module.css";
 
 export function BaseButton() {
-  return <button className={styles.primary} />
+  return <button className={styles.primary} />;
 }
 ```
 
 ```jsx filename="base-button.js" switcher
-import styles from './base-button.module.css'
+import styles from "./base-button.module.css";
 
 export function BaseButton() {
-  return <button className={styles.primary} />
+  return <button className={styles.primary} />;
 }
 ```
 

@@ -319,17 +319,17 @@ you can directly use `sql` operator and explicitly specify view columns schema.
 
 ```ts copy
 // regular view
-const newYorkers = pgView('new_yorkers', {
-  id: serial('id').primaryKey(),
-  name: text('name').notNull(),
-  cityId: integer('city_id').notNull(),
+const newYorkers = pgView("new_yorkers", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  cityId: integer("city_id").notNull(),
 }).as(sql`select * from ${users} where ${eq(users.cityId, 1)}`);
 
 // materialized view
-const newYorkers = pgMaterializedView('new_yorkers', {
-  id: serial('id').primaryKey(),
-  name: text('name').notNull(),
-  cityId: integer('city_id').notNull(),
+const newYorkers = pgMaterializedView("new_yorkers", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  cityId: integer("city_id").notNull(),
 }).as(sql`select * from ${users} where ${eq(users.cityId, 1)}`);
 ```
 
@@ -490,7 +490,7 @@ const newYorkers = cockroachView('new_yorkers')
   });
 
 // materialized view
-const newYorkers2 = cockroachMaterializedView('new\_yorkers')
+const newYorkers2 = cockroachMaterializedView('new_yorkers')
 .withNoData()
 .as((qb) => {
 const sq = qb
@@ -515,48 +515,48 @@ import Callout from '@mdx/Callout.astro';
 import CodeTabs from '@mdx/CodeTabs.astro';
 import YoutubeCards from '@mdx/YoutubeCards.astro';
 
-# Drizzle ORM  
+# Drizzle ORM
 > Drizzle is a good friend who's there for you when necessary and doesn't bother when you need some space.
 
 Drizzle ORM is a headless TypeScript ORM with a head. 🐲
 
-It looks and feels simple, performs on day _1000_ of your project, 
-lets you do things your way, and is there when you need it.  
+It looks and feels simple, performs on day _1000_ of your project,
+lets you do things your way, and is there when you need it.
 
-**It's the only ORM with both [relational](/docs/rqb) and [SQL-like](/docs/select) query APIs**, 
-providing you the best of both worlds when it comes to accessing your relational data. 
+**It's the only ORM with both [relational](/docs/rqb) and [SQL-like](/docs/select) query APIs**,
+providing you the best of both worlds when it comes to accessing your relational data.
 Drizzle is lightweight, performant, typesafe, non-lactose, gluten-free, sober, flexible and **serverless-ready by design**.
 Drizzle is not just a library, it's an experience. 🤩
 
 [![Drizzle bestofjs](@/assets/images/bestofjs.jpg)](https://bestofjs.org/projects/drizzle-orm)
 
-## Headless ORM? 
-First and foremost, Drizzle is a library and a collection of complementary opt-in tools. 
+## Headless ORM?
+First and foremost, Drizzle is a library and a collection of complementary opt-in tools.
 
-**ORM** stands for _object relational mapping_, and developers tend to call Django-like or Spring-like tools an ORM. 
+**ORM** stands for _object relational mapping_, and developers tend to call Django-like or Spring-like tools an ORM.
 We truly believe it's a misconception based on legacy nomenclature, and we call them **data frameworks**.
 
 <Callout type="error" emoji="️💔">
   With data frameworks you have to build projects **around them** and not **with them**.
 </Callout>
 
-**Drizzle** lets you build your project the way you want, without interfering with your project or structure. 
+**Drizzle** lets you build your project the way you want, without interfering with your project or structure.
 
-Using Drizzle you can define and manage database schemas in TypeScript, access your data in a SQL-like 
-or relational way, and take advantage of opt-in tools 
-to push your developer experience _through the roof_. 🤯 
+Using Drizzle you can define and manage database schemas in TypeScript, access your data in a SQL-like
+or relational way, and take advantage of opt-in tools
+to push your developer experience _through the roof_. 🤯
 
 ## Why SQL-like?
 **If you know SQL, you know Drizzle.**
 
-Other ORMs and data frameworks tend to deviate/abstract you away from SQL, which 
-leads to a double learning curve: needing to know both SQL and the framework's API.  
+Other ORMs and data frameworks tend to deviate/abstract you away from SQL, which
+leads to a double learning curve: needing to know both SQL and the framework's API.
 
-Drizzle is the opposite. 
-We embrace SQL and built Drizzle to be SQL-like at its core, so you can have zero to no 
-learning curve and access to the full power of SQL.  
+Drizzle is the opposite.
+We embrace SQL and built Drizzle to be SQL-like at its core, so you can have zero to no
+learning curve and access to the full power of SQL.
 
-We bring all the familiar **[SQL schema](/docs/sql-schema-declaration)**, **[queries](/docs/select)**, 
+We bring all the familiar **[SQL schema](/docs/sql-schema-declaration)**, **[queries](/docs/select)**,
 **[automatic migrations](/docs/migrations)** and **[one more thing](/docs/rqb)**. ✨
 
 <CodeTabs items={["index.ts", "schema.ts", "migration.sql"]}>
@@ -571,15 +571,15 @@ await db
 
 ```typescript copy
 // manage your schema
-export const countries = pgTable('countries', {
-  id: serial('id').primaryKey(),
-  name: varchar('name', { length: 256 }),
+export const countries = pgTable("countries", {
+  id: serial("id").primaryKey(),
+  name: varchar("name", { length: 256 }),
 });
 
-export const cities = pgTable('cities', {
-  id: serial('id').primaryKey(),
-  name: varchar('name', { length: 256 }),
-  countryId: integer('country_id').references(() => countries.id),
+export const cities = pgTable("cities", {
+  id: serial("id").primaryKey(),
+  name: varchar("name", { length: 256 }),
+  countryId: integer("country_id").references(() => countries.id),
 });
 ```
 
@@ -613,9 +613,9 @@ in the most convenient and performant way, and never think about joins and data 
 
 ```ts
 const result = await db.query.users.findMany({
-	with: {
-		posts: true
-	},
+  with: {
+    posts: true,
+  },
 });
 ```
 
@@ -647,9 +647,9 @@ Now go build something awesome with Drizzle and your **[PostgreSQL](/docs/get-st
 
 {/\* tRPC + NextJS App Router = Simple Typesafe APIs
 Jack Herrington 19:17
-https://www.youtube.com/watch?v=qCLV0Iaq9zU */}
-{/* https://www.youtube.com/watch?v=qDunJ0wVIec */}
-{/* https://www.youtube.com/watch?v=NZpPMlSAez0 \*/}
+https://www.youtube.com/watch?v=qCLV0Iaq9zU _/}
+{/_ https://www.youtube.com/watch?v=qDunJ0wVIec _/}
+{/_ https://www.youtube.com/watch?v=NZpPMlSAez0 \*/}
 
 {/\* https://www.youtube.com/watch?v=-A0kMiJqQRY \*/}
 
@@ -667,7 +667,7 @@ description: "Web Dev Simplified",
 time: "56:09"
 },
 {
-id: "i\_mAHOhpBSA",
+id: "i_mAHOhpBSA",
 title: "Drizzle ORM in 100 Seconds",
 description: "Fireship",
 time: "2:55"
@@ -739,7 +739,7 @@ description: "Ben Davis",
 time: "12:18"
 },
 {
-id: "b6VhN\_HHDiQ",
+id: "b6VhN_HHDiQ",
 title: "Build a Multi-Tenanted, Role-Based Access Control System",
 description: "TomDoesTech",
 time: "2:01:29"

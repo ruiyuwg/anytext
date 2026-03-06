@@ -12,37 +12,37 @@ The Replicate provider is available via the `@ai-sdk/replicate` module. You can 
 You can import the default provider instance `replicate` from `@ai-sdk/replicate`:
 
 ```ts
-import { replicate } from '@ai-sdk/replicate';
+import { replicate } from "@ai-sdk/replicate";
 ```
 
 If you need a customized setup, you can import `createReplicate` from `@ai-sdk/replicate`
 and create a provider instance with your settings:
 
 ```ts
-import { createReplicate } from '@ai-sdk/replicate';
+import { createReplicate } from "@ai-sdk/replicate";
 
 const replicate = createReplicate({
-  apiToken: process.env.REPLICATE_API_TOKEN ?? '',
+  apiToken: process.env.REPLICATE_API_TOKEN ?? "",
 });
 ```
 
 You can use the following optional settings to customize the Replicate provider instance:
 
-- **baseURL** *string*
+- **baseURL** _string_
 
   Use a different URL prefix for API calls, e.g. to use proxy servers.
   The default prefix is `https://api.replicate.com/v1`.
 
-- **apiToken** *string*
+- **apiToken** _string_
 
   API token that is being sent using the `Authorization` header. It defaults to
   the `REPLICATE_API_TOKEN` environment variable.
 
-- **headers** *Record\<string,string>*
+- **headers** _Record\<string,string>_
 
   Custom headers to include in the requests.
 
-- **fetch** *(input: RequestInfo, init?: RequestInit) => Promise\<Response>*
+- **fetch** _(input: RequestInfo, init?: RequestInit) => Promise\<Response>_
 
   Custom [fetch](https://developer.mozilla.org/en-US/docs/Web/API/fetch) implementation.
 
@@ -111,34 +111,34 @@ You can also pass any available Replicate model ID as a string if needed.
 ### Basic Usage
 
 ```ts
-import { replicate } from '@ai-sdk/replicate';
-import { generateImage } from 'ai';
-import { writeFile } from 'node:fs/promises';
+import { replicate } from "@ai-sdk/replicate";
+import { generateImage } from "ai";
+import { writeFile } from "node:fs/promises";
 
 const { image } = await generateImage({
-  model: replicate.image('black-forest-labs/flux-schnell'),
-  prompt: 'The Loch Ness Monster getting a manicure',
-  aspectRatio: '16:9',
+  model: replicate.image("black-forest-labs/flux-schnell"),
+  prompt: "The Loch Ness Monster getting a manicure",
+  aspectRatio: "16:9",
 });
 
-await writeFile('image.webp', image.uint8Array);
+await writeFile("image.webp", image.uint8Array);
 
-console.log('Image saved as image.webp');
+console.log("Image saved as image.webp");
 ```
 
 ### Model-specific options
 
 ```ts highlight="9-11"
-import { replicate, type ReplicateImageModelOptions } from '@ai-sdk/replicate';
-import { generateImage } from 'ai';
+import { replicate, type ReplicateImageModelOptions } from "@ai-sdk/replicate";
+import { generateImage } from "ai";
 
 const { image } = await generateImage({
-  model: replicate.image('recraft-ai/recraft-v3'),
-  prompt: 'The Loch Ness Monster getting a manicure',
-  size: '1365x1024',
+  model: replicate.image("recraft-ai/recraft-v3"),
+  prompt: "The Loch Ness Monster getting a manicure",
+  size: "1365x1024",
   providerOptions: {
     replicate: {
-      style: 'realistic_image',
+      style: "realistic_image",
     } satisfies ReplicateImageModelOptions,
   },
 });
@@ -147,14 +147,14 @@ const { image } = await generateImage({
 ### Versioned Models
 
 ```ts
-import { replicate } from '@ai-sdk/replicate';
-import { generateImage } from 'ai';
+import { replicate } from "@ai-sdk/replicate";
+import { generateImage } from "ai";
 
 const { image } = await generateImage({
   model: replicate.image(
-    'bytedance/sdxl-lightning-4step:5599ed30703defd1d160a25a63321b4dec97101d98b4674bcc56e41f62f35637',
+    "bytedance/sdxl-lightning-4step:5599ed30703defd1d160a25a63321b4dec97101d98b4674bcc56e41f62f35637",
   ),
-  prompt: 'The Loch Ness Monster getting a manicure',
+  prompt: "The Loch Ness Monster getting a manicure",
 });
 ```
 
@@ -167,12 +167,12 @@ Replicate supports image editing through various models. Pass input images via `
 Transform an existing image using text prompts:
 
 ```ts
-const imageBuffer = readFileSync('./input-image.png');
+const imageBuffer = readFileSync("./input-image.png");
 
 const { images } = await generateImage({
-  model: replicate.image('black-forest-labs/flux-fill-dev'),
+  model: replicate.image("black-forest-labs/flux-fill-dev"),
   prompt: {
-    text: 'Turn the cat into a golden retriever dog',
+    text: "Turn the cat into a golden retriever dog",
     images: [imageBuffer],
   },
   providerOptions: {
@@ -189,13 +189,13 @@ const { images } = await generateImage({
 Edit specific parts of an image using a mask. For FLUX Fill models, white areas in the mask indicate where the image should be edited:
 
 ```ts
-const image = readFileSync('./input-image.png');
-const mask = readFileSync('./mask.png'); // White = inpaint, black = keep
+const image = readFileSync("./input-image.png");
+const mask = readFileSync("./mask.png"); // White = inpaint, black = keep
 
 const { images } = await generateImage({
-  model: replicate.image('black-forest-labs/flux-fill-pro'),
+  model: replicate.image("black-forest-labs/flux-fill-pro"),
   prompt: {
-    text: 'A sunlit indoor lounge area with a pool containing a flamingo',
+    text: "A sunlit indoor lounge area with a pool containing a flamingo",
     images: [image],
     mask: mask,
   },
@@ -213,16 +213,16 @@ const { images } = await generateImage({
 Flux-2 models support up to 8 input reference images for style transfer, composition, and multi-subject generation:
 
 ```ts
-import { replicate } from '@ai-sdk/replicate';
-import { generateImage } from 'ai';
+import { replicate } from "@ai-sdk/replicate";
+import { generateImage } from "ai";
 
-const reference1 = readFileSync('./style-reference.png');
-const reference2 = readFileSync('./subject-reference.png');
+const reference1 = readFileSync("./style-reference.png");
+const reference2 = readFileSync("./subject-reference.png");
 
 const { images } = await generateImage({
-  model: replicate.image('black-forest-labs/flux-2-pro'),
+  model: replicate.image("black-forest-labs/flux-2-pro"),
   prompt: {
-    text: 'Combine the style and subjects from the reference images',
+    text: "Combine the style and subjects from the reference images",
     images: [reference1, reference2],
   },
 });
@@ -241,13 +241,13 @@ names and capabilities — check the model's documentation on
 
 Common provider options for image generation:
 
-- **maxWaitTimeInSeconds** *number* - Maximum time in seconds to wait for the prediction to complete in sync mode. By default, Replicate uses [sync mode](https://replicate.com/docs/topics/predictions/create-a-prediction#timeout-duration) with a 60-second timeout. Set to a positive number to use a custom duration (e.g., `120` for 2 minutes). When not specified, uses the default 60-second wait.
-- **guidance\_scale** *number* - Guidance scale for classifier-free guidance. Higher values make the output more closely match the prompt.
-- **num\_inference\_steps** *number* - Number of denoising steps. More steps = higher quality but slower.
-- **negative\_prompt** *string* - Negative prompt to guide what to avoid in the generation.
-- **output\_format** *'png' | 'jpg' | 'webp'* - Output image format.
-- **output\_quality** *number (1-100)* - Output image quality. Only applies to jpg and webp.
-- **strength** *number (0-1)* - Strength of the transformation for img2img. Lower values keep more of the original image.
+- **maxWaitTimeInSeconds** _number_ - Maximum time in seconds to wait for the prediction to complete in sync mode. By default, Replicate uses [sync mode](https://replicate.com/docs/topics/predictions/create-a-prediction#timeout-duration) with a 60-second timeout. Set to a positive number to use a custom duration (e.g., `120` for 2 minutes). When not specified, uses the default 60-second wait.
+- **guidance_scale** _number_ - Guidance scale for classifier-free guidance. Higher values make the output more closely match the prompt.
+- **num_inference_steps** _number_ - Number of denoising steps. More steps = higher quality but slower.
+- **negative_prompt** _string_ - Negative prompt to guide what to avoid in the generation.
+- **output_format** _'png' | 'jpg' | 'webp'_ - Output image format.
+- **output_quality** _number (1-100)_ - Output image quality. Only applies to jpg and webp.
+- **strength** _number (0-1)_ - Strength of the transformation for img2img. Lower values keep more of the original image.
 
 For more details, see the [Replicate models page](https://replicate.com/explore).
 

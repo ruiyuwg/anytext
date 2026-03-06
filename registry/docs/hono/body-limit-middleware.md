@@ -8,31 +8,31 @@ If it is not set, it reads the body in the stream and executes an error handler 
 ## Import
 
 ```ts
-import { Hono } from 'hono'
-import { bodyLimit } from 'hono/body-limit'
+import { Hono } from "hono";
+import { bodyLimit } from "hono/body-limit";
 ```
 
 ## Usage
 
 ```ts
-const app = new Hono()
+const app = new Hono();
 
 app.post(
-  '/upload',
+  "/upload",
   bodyLimit({
     maxSize: 50 * 1024, // 50kb
     onError: (c) => {
-      return c.text('overflow :(', 413)
+      return c.text("overflow :(", 413);
     },
   }),
   async (c) => {
-    const body = await c.req.parseBody()
-    if (body['file'] instanceof File) {
-      console.log(`Got file sized: ${body['file'].size}`)
+    const body = await c.req.parseBody();
+    if (body["file"] instanceof File) {
+      console.log(`Got file sized: ${body["file"].size}`);
     }
-    return c.text('pass :)')
-  }
-)
+    return c.text("pass :)");
+  },
+);
 ```
 
 ## Options
@@ -53,10 +53,10 @@ If you want to accept requests larger than 128MiB with Hono and Bun, you need to
 
 ```ts
 export default {
-  port: process.env['PORT'] || 3000,
+  port: process.env["PORT"] || 3000,
   fetch: app.fetch,
   maxRequestBodySize: 1024 * 1024 * 200, // your value here
-}
+};
 ```
 
 or, depending on your setup:
@@ -64,10 +64,10 @@ or, depending on your setup:
 ```ts
 Bun.serve({
   fetch(req, server) {
-    return app.fetch(req, { ip: server.requestIP(req) })
+    return app.fetch(req, { ip: server.requestIP(req) });
   },
   maxRequestBodySize: 1024 * 1024 * 200, // your value here
-})
+});
 ```
 
 # ETag Middleware
@@ -77,19 +77,19 @@ Using this middleware, you can add ETag headers easily.
 ## Import
 
 ```ts
-import { Hono } from 'hono'
-import { etag } from 'hono/etag'
+import { Hono } from "hono";
+import { etag } from "hono/etag";
 ```
 
 ## Usage
 
 ```ts
-const app = new Hono()
+const app = new Hono();
 
-app.use('/etag/*', etag())
-app.get('/etag/abc', (c) => {
-  return c.text('Hono is cool')
-})
+app.use("/etag/*", etag());
+app.get("/etag/abc", (c) => {
+  return c.text("Hono is cool");
+});
 ```
 
 ## The retained headers
@@ -99,16 +99,16 @@ The 304 Response must include the headers that would have been sent in an equiva
 If you want to add the header that is sent, you can use `retainedHeaders` option and `RETAINED_304_HEADERS` strings array variable that includes the default headers:
 
 ```ts
-import { etag, RETAINED_304_HEADERS } from 'hono/etag'
+import { etag, RETAINED_304_HEADERS } from "hono/etag";
 
 // ...
 
 app.use(
-  '/etag/*',
+  "/etag/*",
   etag({
-    retainedHeaders: ['x-message', ...RETAINED_304_HEADERS],
-  })
-)
+    retainedHeaders: ["x-message", ...RETAINED_304_HEADERS],
+  }),
+);
 ```
 
 ## Options
@@ -138,12 +138,12 @@ The Context Storage Middleware stores the Hono `Context` in the `AsyncLocalStora
 ## Import
 
 ```ts
-import { Hono } from 'hono'
+import { Hono } from "hono";
 import {
   contextStorage,
   getContext,
   tryGetContext,
-} from 'hono/context-storage'
+} from "hono/context-storage";
 ```
 
 ## Usage
@@ -153,27 +153,27 @@ The `getContext()` will return the current Context object if the `contextStorage
 ```ts
 type Env = {
   Variables: {
-    message: string
-  }
-}
+    message: string;
+  };
+};
 
-const app = new Hono()
+const app = new Hono();
 
-app.use(contextStorage())
+app.use(contextStorage());
 
 app.use(async (c, next) => {
-  c.set('message', 'Hello!')
-  await next()
-})
+  c.set("message", "Hello!");
+  await next();
+});
 
 // You can access the variable outside the handler.
 const getMessage = () => {
-  return getContext().var.message
-}
+  return getContext().var.message;
+};
 
-app.get('/', (c) => {
-  return c.text(getMessage())
-})
+app.get("/", (c) => {
+  return c.text(getMessage());
+});
 ```
 
 On Cloudflare Workers, you can access the bindings outside the handler.
@@ -181,17 +181,17 @@ On Cloudflare Workers, you can access the bindings outside the handler.
 ```ts
 type Env = {
   Bindings: {
-    KV: KVNamespace
-  }
-}
+    KV: KVNamespace;
+  };
+};
 
-const app = new Hono()
+const app = new Hono();
 
-app.use(contextStorage())
+app.use(contextStorage());
 
 const setKV = (value: string) => {
-  return getContext().env.KV.put('key', value)
-}
+  return getContext().env.KV.put("key", value);
+};
 ```
 
 ## tryGetContext
@@ -199,9 +199,9 @@ const setKV = (value: string) => {
 `tryGetContext()` works like `getContext()`, but returns `undefined` instead of throwing an error when the context is not available:
 
 ```ts
-const context = tryGetContext()
+const context = tryGetContext();
 if (context) {
   // Context is available
-  console.log(context.var.message)
+  console.log(context.var.message);
 }
 ```

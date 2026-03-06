@@ -118,7 +118,7 @@ CREATE UNIQUE INDEX `email_idx` ON `user` (`email`);
 </Section>
 
  Drizzle ORM provides set of all params for index creation:
- 
+
 ```typescript
 // Index declaration reference
 index("name")

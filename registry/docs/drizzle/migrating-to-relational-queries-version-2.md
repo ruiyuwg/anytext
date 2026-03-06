@@ -56,10 +56,10 @@ export const relations = defineRelations(schema, (r) => ({
 
 ```ts
 // index.ts
-import { relations } from "./relations"
-import { drizzle } from "drizzle-orm/..."
+import { relations } from "./relations";
+import { drizzle } from "drizzle-orm/...";
 
-const db = drizzle(process.env.DATABASE_URL, { relations })
+const db = drizzle(process.env.DATABASE_URL, { relations });
 ```
 
 ##### What is different?
@@ -72,13 +72,13 @@ import { relations } from 'drizzle-orm';
 export const users = p.pgTable('users', {
 id: p.integer().primaryKey(),
 name: p.text(),
-invitedBy: p.integer('invited\_by'),
+invitedBy: p.integer('invited_by'),
 });
 
 export const posts = p.pgTable('posts', {
 id: p.integer().primaryKey(),
 content: p.text(),
-authorId: p.integer('author\_id'),
+authorId: p.integer('author_id'),
 });
 
 ````
@@ -162,7 +162,9 @@ export const part = defineRelationsPart(schema, (r) => ({
 and then you can provide it to the db instance
 
 ```ts
-const db = drizzle(process.env.DB_URL, { relations: { ...relations, ...part } })
+const db = drizzle(process.env.DB_URL, {
+  relations: { ...relations, ...part },
+});
 ```
 
 **Define `many` without `one`**
@@ -254,7 +256,7 @@ const db = drizzle(process.env.DATABASE_URL, { mode: "default", schema });
 ```ts
 import { relations } from './relations'
 
-const db = drizzle(process.env.DATABASE\_URL, { relations });
+const db = drizzle(process.env.DATABASE_URL, { relations });
 
 ````
 </Callout>
@@ -305,7 +307,7 @@ export const postsRelation = relations(posts, ({ one }) => ({
 author: one(users, {
 fields: \[posts.authorId],
 references: \[users.id],
-relationName: "author\_post",
+relationName: "author_post",
 }),
 }));
 
@@ -401,7 +403,7 @@ Returned by query object will change from:
 
 ```ts
 {
-	bigint: 5044565289845416000; // Partial data loss due to direct conversion to JSON format
+  bigint: 5044565289845416000; // Partial data loss due to direct conversion to JSON format
 }
 ```
 
@@ -409,7 +411,7 @@ to:
 
 ```ts
 {
-	bigint: "5044565289845416380"; // Data is preserved due to conversion of field to text before JSON-ification
+  bigint: "5044565289845416380"; // Data is preserved due to conversion of field to text before JSON-ification
 }
 ```
 
@@ -457,14 +459,14 @@ name: p.text(),
 });
 
 export const usersToGroups = p.pgTable(
-"users\_to\_groups",
+"users_to_groups",
 {
 userId: p
-.integer("user\_id")
+.integer("user_id")
 .notNull()
 .references(() => users.id),
 groupId: p
-.integer("group\_id")
+.integer("group_id")
 .notNull()
 .references(() => groups.id),
 },
@@ -609,12 +611,12 @@ id: integer("id").primaryKey(),
 name: text("name"),
 email: text("email").notNull(),
 age: integer("age"),
-createdAt: timestamp("created\_at").defaultNow(),
-lastLogin: timestamp("last\_login"),
-subscriptionEnd: timestamp("subscription\_end"),
-lastActivity: timestamp("last\_activity"),
-preferences: jsonb("preferences"),      // JSON column for user settings/preferences
-interests: text("interests").array(),     // Array column for user interests
+createdAt: timestamp("created_at").defaultNow(),
+lastLogin: timestamp("last_login"),
+subscriptionEnd: timestamp("subscription_end"),
+lastActivity: timestamp("last_activity"),
+preferences: jsonb("preferences"), // JSON column for user settings/preferences
+interests: text("interests").array(), // Array column for user interests
 });
 
 ````
@@ -673,13 +675,13 @@ Example: Get all users whose ID>10 and who have at least one post with content s
 const usersWithPosts = await db.query.usersTable.findMany({
   where: {
     id: {
-      gt: 10
+      gt: 10,
     },
     posts: {
       content: {
-        like: 'M%'
-      }
-    }
+        like: "M%",
+      },
+    },
   },
 });
 ```
@@ -729,11 +731,11 @@ Transfer generated relations code from `drizzle/relations.ts` to the file you ar
  │ ├ 📜 migration.sql
  │ ├ 📜 relations.ts ────────┐
  │ └ 📜 schema.ts            |
- ├ 📂 src                    │ 
+ ├ 📂 src                    │
  │ ├ 📂 db                   │
  │ │ ├ 📜 relations.ts <─────┘
- │ │ └ 📜 schema.ts 
- │ └ 📜 index.ts         
+ │ │ └ 📜 schema.ts
+ │ └ 📜 index.ts
  └ …
 ```
 
@@ -810,7 +812,7 @@ const response = db.query.users.findMany({
 
 ```sql {3}
 select "users"."id" as "id", "users"."name" as "name"
-from "users" 
+from "users"
 where ("users"."age" = $1)
 ```
 
@@ -886,12 +888,12 @@ id: integer("id").primaryKey(),
 name: text("name"),
 email: text("email").notNull(),
 age: integer("age"),
-createdAt: timestamp("created\_at").defaultNow(),
-lastLogin: timestamp("last\_login"),
-subscriptionEnd: timestamp("subscription\_end"),
-lastActivity: timestamp("last\_activity"),
-preferences: jsonb("preferences"),      // JSON column for user settings/preferences
-interests: text("interests").array(),     // Array column for user interests
+createdAt: timestamp("created_at").defaultNow(),
+lastLogin: timestamp("last_login"),
+subscriptionEnd: timestamp("subscription_end"),
+lastActivity: timestamp("last_activity"),
+preferences: jsonb("preferences"), // JSON column for user settings/preferences
+interests: text("interests").array(), // Array column for user interests
 });
 
 ````
@@ -918,6 +920,7 @@ const response = db.query.users.findMany({
 ````
 
 ```sql
+
 ```
 
 </CodeTab>
@@ -964,8 +967,8 @@ const response = await db.query.users.findMany({
 After upgrading to Relational Queries v2, your many-to-many relation will look like this:
 
 ```ts
-import * as schema from './schema';
-import { defineRelations } from 'drizzle-orm';
+import * as schema from "./schema";
+import { defineRelations } from "drizzle-orm";
 
 export const relations = defineRelations(schema, (r) => ({
   users: {
@@ -1045,7 +1048,7 @@ await db.query.users.findMany();
 
 ##### Step 3
 
-Define new relations or pull them using [this guide](#how-to-migrate-relations-schema-definition-from-v1-to-v2), 
+Define new relations or pull them using [this guide](#how-to-migrate-relations-schema-definition-from-v1-to-v2),
 then use them in your new queries or migrate your existing queries one by one.
 
 

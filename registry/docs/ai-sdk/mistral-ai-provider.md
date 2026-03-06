@@ -11,14 +11,14 @@ The Mistral provider is available in the `@ai-sdk/mistral` module. You can insta
 You can import the default provider instance `mistral` from `@ai-sdk/mistral`:
 
 ```ts
-import { mistral } from '@ai-sdk/mistral';
+import { mistral } from "@ai-sdk/mistral";
 ```
 
 If you need a customized setup, you can import `createMistral` from `@ai-sdk/mistral`
 and create a provider instance with your settings:
 
 ```ts
-import { createMistral } from '@ai-sdk/mistral';
+import { createMistral } from "@ai-sdk/mistral";
 
 const mistral = createMistral({
   // custom settings
@@ -27,21 +27,21 @@ const mistral = createMistral({
 
 You can use the following optional settings to customize the Mistral provider instance:
 
-- **baseURL** *string*
+- **baseURL** _string_
 
   Use a different URL prefix for API calls, e.g. to use proxy servers.
   The default prefix is `https://api.mistral.ai/v1`.
 
-- **apiKey** *string*
+- **apiKey** _string_
 
   API key that is being sent using the `Authorization` header.
   It defaults to the `MISTRAL_API_KEY` environment variable.
 
-- **headers** *Record\<string,string>*
+- **headers** _Record\<string,string>_
 
   Custom headers to include in the requests.
 
-- **fetch** *(input: RequestInfo, init?: RequestInit) => Promise\<Response>*
+- **fetch** _(input: RequestInfo, init?: RequestInit) => Promise\<Response>_
 
   Custom [fetch](https://developer.mozilla.org/en-US/docs/Web/API/fetch) implementation.
   Defaults to the global `fetch` function.
@@ -55,15 +55,15 @@ The first argument is the model id, e.g. `mistral-large-latest`.
 Some Mistral chat models support tool calls.
 
 ```ts
-const model = mistral('mistral-large-latest');
+const model = mistral("mistral-large-latest");
 ```
 
 Mistral chat models also support additional model settings that are not part of the [standard call settings](/docs/ai-sdk-core/settings).
 You can pass them as an options argument and utilize `MistralLanguageModelOptions` for typing:
 
 ```ts
-import { mistral, type MistralLanguageModelOptions } from '@ai-sdk/mistral';
-const model = mistral('mistral-large-latest');
+import { mistral, type MistralLanguageModelOptions } from "@ai-sdk/mistral";
+const model = mistral("mistral-large-latest");
 
 await generateText({
   model,
@@ -78,33 +78,33 @@ await generateText({
 
 The following optional provider options are available for Mistral models:
 
-- **safePrompt** *boolean*
+- **safePrompt** _boolean_
 
   Whether to inject a safety prompt before all conversations.
 
   Defaults to `false`.
 
-- **documentImageLimit** *number*
+- **documentImageLimit** _number_
 
   Maximum number of images to process in a document.
 
-- **documentPageLimit** *number*
+- **documentPageLimit** _number_
 
   Maximum number of pages to process in a document.
 
-- **strictJsonSchema** *boolean*
+- **strictJsonSchema** _boolean_
 
   Whether to use strict JSON schema validation for structured outputs. Only applies when a schema is provided and only sets the [`strict` flag](https://docs.mistral.ai/api/#tag/chat/operation/chat_completion_v1_chat_completions_post) in addition to using [Custom Structured Outputs](https://docs.mistral.ai/capabilities/structured-output/custom_structured_output/), which is used by default if a schema is provided.
 
   Defaults to `false`.
 
-- **structuredOutputs** *boolean*
+- **structuredOutputs** _boolean_
 
   Whether to use [structured outputs](#structured-outputs). When enabled, tool calls and object generation will be strict and follow the provided schema.
 
   Defaults to `true`.
 
-- **parallelToolCalls** *boolean*
+- **parallelToolCalls** _boolean_
 
   Whether to enable parallel function calling during tool use. When set to false, the model will use at most one tool per response.
 
@@ -116,25 +116,25 @@ Mistral chat models support document OCR for PDF files.
 You can optionally set image and page limits using the provider options.
 
 ```ts
-import { mistral, type MistralLanguageModelOptions } from '@ai-sdk/mistral';
-import { generateText } from 'ai';
+import { mistral, type MistralLanguageModelOptions } from "@ai-sdk/mistral";
+import { generateText } from "ai";
 
 const result = await generateText({
-  model: mistral('mistral-small-latest'),
+  model: mistral("mistral-small-latest"),
   messages: [
     {
-      role: 'user',
+      role: "user",
       content: [
         {
-          type: 'text',
-          text: 'What is an embedding model according to this document?',
+          type: "text",
+          text: "What is an embedding model according to this document?",
         },
         {
-          type: 'file',
+          type: "file",
           data: new URL(
-            'https://github.com/vercel/ai/blob/main/examples/ai-functions/data/ai.pdf?raw=true',
+            "https://github.com/vercel/ai/blob/main/examples/ai-functions/data/ai.pdf?raw=true",
           ),
-          mediaType: 'application/pdf',
+          mediaType: "application/pdf",
         },
       ],
     },
@@ -159,18 +159,18 @@ Mistral offers reasoning models that provide step-by-step thinking capabilities:
 These models return structured reasoning content that the AI SDK extracts automatically. The reasoning is available via the `reasoningText` property in the result:
 
 ```ts
-import { mistral } from '@ai-sdk/mistral';
-import { generateText } from 'ai';
+import { mistral } from "@ai-sdk/mistral";
+import { generateText } from "ai";
 
 const result = await generateText({
-  model: mistral('magistral-small-2507'),
-  prompt: 'What is 15 * 24?',
+  model: mistral("magistral-small-2507"),
+  prompt: "What is 15 * 24?",
 });
 
-console.log('REASONING:', result.reasoningText);
+console.log("REASONING:", result.reasoningText);
 // Output: "Let me calculate this step by step..."
 
-console.log('ANSWER:', result.text);
+console.log("ANSWER:", result.text);
 // Output: "360"
 ```
 
@@ -181,12 +181,12 @@ The SDK automatically parses Mistral's native reasoning format and provides sepa
 You can use Mistral language models to generate text with the `generateText` function:
 
 ```ts
-import { mistral } from '@ai-sdk/mistral';
-import { generateText } from 'ai';
+import { mistral } from "@ai-sdk/mistral";
+import { generateText } from "ai";
 
 const { text } = await generateText({
-  model: mistral('mistral-large-latest'),
-  prompt: 'Write a vegetarian lasagna recipe for 4 people.',
+  model: mistral("mistral-large-latest"),
+  prompt: "Write a vegetarian lasagna recipe for 4 people.",
 });
 ```
 
@@ -200,12 +200,12 @@ Mistral chat models support structured outputs using JSON Schema. You can use `g
 and Zod, Valibot, or raw JSON Schema. The SDK sends your schema via Mistral's `response_format: { type: 'json_schema' }`.
 
 ```ts
-import { mistral } from '@ai-sdk/mistral';
-import { generateText, Output } from 'ai';
-import { z } from 'zod';
+import { mistral } from "@ai-sdk/mistral";
+import { generateText, Output } from "ai";
+import { z } from "zod";
 
 const result = await generateText({
-  model: mistral('mistral-large-latest'),
+  model: mistral("mistral-large-latest"),
   output: Output.object({
     schema: z.object({
       recipe: z.object({
@@ -215,7 +215,7 @@ const result = await generateText({
       }),
     }),
   }),
-  prompt: 'Generate a simple pasta recipe.',
+  prompt: "Generate a simple pasta recipe.",
 });
 
 console.log(JSON.stringify(result.output, null, 2));
@@ -224,12 +224,12 @@ console.log(JSON.stringify(result.output, null, 2));
 You can enable strict JSON Schema validation using a provider option:
 
 ```ts highlight="7-11"
-import { mistral, type MistralLanguageModelOptions } from '@ai-sdk/mistral';
-import { generateText, Output } from 'ai';
-import { z } from 'zod';
+import { mistral, type MistralLanguageModelOptions } from "@ai-sdk/mistral";
+import { generateText, Output } from "ai";
+import { z } from "zod";
 
 const result = await generateText({
-  model: mistral('mistral-large-latest'),
+  model: mistral("mistral-large-latest"),
   providerOptions: {
     mistral: {
       strictJsonSchema: true,
@@ -243,7 +243,7 @@ const result = await generateText({
       ),
     }),
   }),
-  prompt: 'Generate a small shopping list.',
+  prompt: "Generate a small shopping list.",
 });
 ```
 
@@ -254,24 +254,24 @@ the standard structured-output APIs.
 
 ### Model Capabilities
 
-| Model                   | Image Input         | Object Generation   | Tool Usage          | Tool Streaming      |
-| ----------------------- | ------------------- | ------------------- | ------------------- | ------------------- |
-| `pixtral-large-latest`  |  |  |  |  |
-| `mistral-large-latest`  |  |  |  |  |
-| `mistral-medium-latest` |  |  |  |  |
-| `mistral-medium-2508`   |  |  |  |  |
-| `mistral-medium-2505`   |  |  |  |  |
-| `mistral-small-latest`  |  |  |  |  |
-| `magistral-small-2507`  |  |  |  |  |
-| `magistral-medium-2507` |  |  |  |  |
-| `magistral-small-2506`  |  |  |  |  |
-| `magistral-medium-2506` |  |  |  |  |
-| `ministral-3b-latest`   |  |  |  |  |
-| `ministral-8b-latest`   |  |  |  |  |
-| `pixtral-12b-2409`      |  |  |  |  |
-| `open-mistral-7b`       |  |  |  |  |
-| `open-mixtral-8x7b`     |  |  |  |  |
-| `open-mixtral-8x22b`    |  |  |  |  |
+| Model                   | Image Input | Object Generation | Tool Usage | Tool Streaming |
+| ----------------------- | ----------- | ----------------- | ---------- | -------------- |
+| `pixtral-large-latest`  |             |                   |            |                |
+| `mistral-large-latest`  |             |                   |            |                |
+| `mistral-medium-latest` |             |                   |            |                |
+| `mistral-medium-2508`   |             |                   |            |                |
+| `mistral-medium-2505`   |             |                   |            |                |
+| `mistral-small-latest`  |             |                   |            |                |
+| `magistral-small-2507`  |             |                   |            |                |
+| `magistral-medium-2507` |             |                   |            |                |
+| `magistral-small-2506`  |             |                   |            |                |
+| `magistral-medium-2506` |             |                   |            |                |
+| `ministral-3b-latest`   |             |                   |            |                |
+| `ministral-8b-latest`   |             |                   |            |                |
+| `pixtral-12b-2409`      |             |                   |            |                |
+| `open-mistral-7b`       |             |                   |            |                |
+| `open-mixtral-8x7b`     |             |                   |            |                |
+| `open-mixtral-8x22b`    |             |                   |            |                |
 
 The table above lists popular models. Please see the [Mistral
 docs](https://docs.mistral.ai/getting-started/models/models_overview/) for a
@@ -284,18 +284,18 @@ You can create models that call the [Mistral embeddings API](https://docs.mistra
 using the `.embedding()` factory method.
 
 ```ts
-const model = mistral.embedding('mistral-embed');
+const model = mistral.embedding("mistral-embed");
 ```
 
 You can use Mistral embedding models to generate embeddings with the `embed` function:
 
 ```ts
-import { mistral } from '@ai-sdk/mistral';
-import { embed } from 'ai';
+import { mistral } from "@ai-sdk/mistral";
+import { embed } from "ai";
 
 const { embedding } = await embed({
-  model: mistral.embedding('mistral-embed'),
-  value: 'sunny day at the beach',
+  model: mistral.embedding("mistral-embed"),
+  value: "sunny day at the beach",
 });
 ```
 

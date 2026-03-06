@@ -9,8 +9,8 @@ tRPC Link Diagram. Based on Apollo's.
 The below examples are assuming you use Next.js, but the same as below can be added if you use the vanilla tRPC client
 
 ```tsx title='utils/trpc.ts'
-import { httpBatchLink, loggerLink } from '@trpc/client';
-import { createTRPCNext } from '@trpc/next';
+import { httpBatchLink, loggerLink } from "@trpc/client";
+import { createTRPCNext } from "@trpc/next";
 
 export default createTRPCNext<AppRouter>({
   config() {
@@ -39,9 +39,9 @@ A link is a function that follows the `TRPCLink` type. Each link is composed of 
 ### Example
 
 ```tsx title='utils/customLink.ts'
-import { TRPCLink } from '@trpc/client';
-import { observable } from '@trpc/server/observable';
-import type { AppRouter } from '~/server/routers/_app';
+import { TRPCLink } from "@trpc/client";
+import { observable } from "@trpc/server/observable";
+import type { AppRouter } from "~/server/routers/_app";
 
 export const customLink: TRPCLink<AppRouter> = () => {
   // here we just got initialized in the app - this happens once per app
@@ -51,14 +51,14 @@ export const customLink: TRPCLink<AppRouter> = () => {
 
     // each link needs to return an observable which propagates results
     return observable((observer) => {
-      console.log('performing operation:', op);
+      console.log("performing operation:", op);
       const unsubscribe = next(op).subscribe({
         next(value) {
-          console.log('we received value', value);
+          console.log("we received value", value);
           observer.next(value);
         },
         error(err) {
-          console.log('we received error', err);
+          console.log("we received error", err);
           observer.error(err);
         },
         complete() {

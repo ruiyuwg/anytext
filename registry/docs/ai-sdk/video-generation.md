@@ -7,12 +7,12 @@ The AI SDK provides the [`experimental_generateVideo`](/docs/reference/ai-sdk-co
 function to generate videos based on a given prompt using a video model.
 
 ```tsx
-import { experimental_generateVideo as generateVideo } from 'ai';
-import { fal } from '@ai-sdk/fal';
+import { experimental_generateVideo as generateVideo } from "ai";
+import { fal } from "@ai-sdk/fal";
 
 const { video } = await generateVideo({
-  model: fal.video('luma-dream-machine/ray-2'),
-  prompt: 'A cat walking on a treadmill',
+  model: fal.video("luma-dream-machine/ray-2"),
+  prompt: "A cat walking on a treadmill",
 });
 ```
 
@@ -31,13 +31,13 @@ The aspect ratio is specified as a string in the format `{width}:{height}`.
 Models only support a few aspect ratios, and the supported aspect ratios are different for each model and provider.
 
 ```tsx highlight={"7"}
-import { experimental_generateVideo as generateVideo } from 'ai';
-import { fal } from '@ai-sdk/fal';
+import { experimental_generateVideo as generateVideo } from "ai";
+import { fal } from "@ai-sdk/fal";
 
 const { video } = await generateVideo({
-  model: fal.video('luma-dream-machine/ray-2'),
-  prompt: 'A cat walking on a treadmill',
-  aspectRatio: '16:9',
+  model: fal.video("luma-dream-machine/ray-2"),
+  prompt: "A cat walking on a treadmill",
+  aspectRatio: "16:9",
 });
 ```
 
@@ -47,13 +47,13 @@ The resolution is specified as a string in the format `{width}x{height}`.
 Models only support specific resolutions, and the supported resolutions are different for each model and provider.
 
 ```tsx highlight={"7"}
-import { experimental_generateVideo as generateVideo } from 'ai';
-import { google } from '@ai-sdk/google';
+import { experimental_generateVideo as generateVideo } from "ai";
+import { google } from "@ai-sdk/google";
 
 const { video } = await generateVideo({
-  model: google.video('veo-2.0-generate-001'),
-  prompt: 'A serene mountain landscape at sunset',
-  resolution: '1280x720',
+  model: google.video("veo-2.0-generate-001"),
+  prompt: "A serene mountain landscape at sunset",
+  resolution: "1280x720",
 });
 ```
 
@@ -62,12 +62,12 @@ const { video } = await generateVideo({
 Some video models support specifying the duration of the generated video in seconds.
 
 ```tsx highlight={"7"}
-import { experimental_generateVideo as generateVideo } from 'ai';
-import { fal } from '@ai-sdk/fal';
+import { experimental_generateVideo as generateVideo } from "ai";
+import { fal } from "@ai-sdk/fal";
 
 const { video } = await generateVideo({
-  model: fal.video('luma-dream-machine/ray-2'),
-  prompt: 'A timelapse of clouds moving across the sky',
+  model: fal.video("luma-dream-machine/ray-2"),
+  prompt: "A timelapse of clouds moving across the sky",
   duration: 5,
 });
 ```
@@ -77,12 +77,12 @@ const { video } = await generateVideo({
 Some video models allow you to specify the frames per second for the generated video.
 
 ```tsx highlight={"7"}
-import { experimental_generateVideo as generateVideo } from 'ai';
-import { fal } from '@ai-sdk/fal';
+import { experimental_generateVideo as generateVideo } from "ai";
+import { fal } from "@ai-sdk/fal";
 
 const { video } = await generateVideo({
-  model: fal.video('luma-dream-machine/ray-2'),
-  prompt: 'A hummingbird in slow motion',
+  model: fal.video("luma-dream-machine/ray-2"),
+  prompt: "A hummingbird in slow motion",
   fps: 24,
 });
 ```
@@ -92,12 +92,12 @@ const { video } = await generateVideo({
 `experimental_generateVideo` supports generating multiple videos at once:
 
 ```tsx highlight={"7"}
-import { experimental_generateVideo as generateVideo } from 'ai';
-import { google } from '@ai-sdk/google';
+import { experimental_generateVideo as generateVideo } from "ai";
+import { google } from "@ai-sdk/google";
 
 const { videos } = await generateVideo({
-  model: google.video('veo-2.0-generate-001'),
-  prompt: 'A rocket launching into space',
+  model: google.video("veo-2.0-generate-001"),
+  prompt: "A rocket launching into space",
   n: 3, // number of videos to generate
 });
 ```
@@ -111,8 +111,8 @@ If needed, you can override this behavior using the `maxVideosPerCall` setting:
 
 ```tsx
 const { videos } = await generateVideo({
-  model: google.video('veo-2.0-generate-001'),
-  prompt: 'A rocket launching into space',
+  model: google.video("veo-2.0-generate-001"),
+  prompt: "A rocket launching into space",
   maxVideosPerCall: 2, // Override the default batch size
   n: 4, // Will make 2 calls of 2 videos each
 });
@@ -123,14 +123,14 @@ const { videos } = await generateVideo({
 Some video models support generating videos from an input image. You can provide an image using the prompt object:
 
 ```tsx highlight={"7-10"}
-import { experimental_generateVideo as generateVideo } from 'ai';
-import { fal } from '@ai-sdk/fal';
+import { experimental_generateVideo as generateVideo } from "ai";
+import { fal } from "@ai-sdk/fal";
 
 const { video } = await generateVideo({
-  model: fal.video('hunyuan-video'),
+  model: fal.video("hunyuan-video"),
   prompt: {
-    image: 'https://example.com/my-image.png',
-    text: 'Animate this image with gentle motion',
+    image: "https://example.com/my-image.png",
+    text: "Animate this image with gentle motion",
   },
 });
 ```
@@ -139,10 +139,10 @@ You can also provide the image as a base64-encoded string or `Uint8Array`:
 
 ```tsx
 const { video } = await generateVideo({
-  model: fal.video('hunyuan-video'),
+  model: fal.video("hunyuan-video"),
   prompt: {
     image: imageBase64String, // or imageUint8Array
-    text: 'Animate this image',
+    text: "Animate this image",
   },
 });
 ```
@@ -153,12 +153,12 @@ You can provide a seed to the `experimental_generateVideo` function to control t
 If supported by the model, the same seed will always produce the same video.
 
 ```tsx highlight={"7"}
-import { experimental_generateVideo as generateVideo } from 'ai';
-import { fal } from '@ai-sdk/fal';
+import { experimental_generateVideo as generateVideo } from "ai";
+import { fal } from "@ai-sdk/fal";
 
 const { video } = await generateVideo({
-  model: fal.video('luma-dream-machine/ray-2'),
-  prompt: 'A cat walking on a treadmill',
+  model: fal.video("luma-dream-machine/ray-2"),
+  prompt: "A cat walking on a treadmill",
   seed: 1234567890,
 });
 ```
@@ -171,13 +171,13 @@ using the `providerOptions` parameter. The options for the provider
 become request body properties.
 
 ```tsx highlight={"8-10"}
-import { experimental_generateVideo as generateVideo } from 'ai';
-import { fal } from '@ai-sdk/fal';
+import { experimental_generateVideo as generateVideo } from "ai";
+import { fal } from "@ai-sdk/fal";
 
 const { video } = await generateVideo({
-  model: fal.video('luma-dream-machine/ray-2'),
-  prompt: 'A cat walking on a treadmill',
-  aspectRatio: '16:9',
+  model: fal.video("luma-dream-machine/ray-2"),
+  prompt: "A cat walking on a treadmill",
+  aspectRatio: "16:9",
   providerOptions: {
     fal: { loop: true, motionStrength: 0.8 },
   },
@@ -191,12 +191,12 @@ type [`AbortSignal`](https://developer.mozilla.org/en-US/docs/Web/API/AbortSigna
 that you can use to abort the video generation process or set a timeout.
 
 ```ts highlight={"7"}
-import { fal } from '@ai-sdk/fal';
-import { experimental_generateVideo as generateVideo } from 'ai';
+import { fal } from "@ai-sdk/fal";
+import { experimental_generateVideo as generateVideo } from "ai";
 
 const { video } = await generateVideo({
-  model: fal.video('luma-dream-machine/ray-2'),
-  prompt: 'A cat walking on a treadmill',
+  model: fal.video("luma-dream-machine/ray-2"),
+  prompt: "A cat walking on a treadmill",
   abortSignal: AbortSignal.timeout(60000), // Abort after 60 seconds
 });
 ```
@@ -211,12 +211,12 @@ Video generation is an asynchronous process that can take several minutes to com
 You can configure the polling timeout using provider-specific options. Each provider exports a type for its options that you can use with `satisfies` for type safety:
 
 ```tsx highlight={"10-12"}
-import { experimental_generateVideo as generateVideo } from 'ai';
-import { fal, type FalVideoModelOptions } from '@ai-sdk/fal';
+import { experimental_generateVideo as generateVideo } from "ai";
+import { fal, type FalVideoModelOptions } from "@ai-sdk/fal";
 
 const { video } = await generateVideo({
-  model: fal.video('luma-dream-machine/ray-2'),
-  prompt: 'A cinematic timelapse of a city from dawn to dusk',
+  model: fal.video("luma-dream-machine/ray-2"),
+  prompt: "A cinematic timelapse of a city from dawn to dusk",
   duration: 10,
   providerOptions: {
     fal: {
@@ -236,13 +236,13 @@ models and video lengths.
 that you can use to add custom headers to the video generation request.
 
 ```ts highlight={"7"}
-import { fal } from '@ai-sdk/fal';
-import { experimental_generateVideo as generateVideo } from 'ai';
+import { fal } from "@ai-sdk/fal";
+import { experimental_generateVideo as generateVideo } from "ai";
 
 const { video } = await generateVideo({
-  model: fal.video('luma-dream-machine/ray-2'),
-  prompt: 'A cat walking on a treadmill',
-  headers: { 'X-Custom-Header': 'custom-value' },
+  model: fal.video("luma-dream-machine/ray-2"),
+  prompt: "A cat walking on a treadmill",
+  headers: { "X-Custom-Header": "custom-value" },
 });
 ```
 
@@ -252,8 +252,8 @@ If the model returns warnings, e.g. for unsupported parameters, they will be ava
 
 ```tsx
 const { video, warnings } = await generateVideo({
-  model: fal.video('luma-dream-machine/ray-2'),
-  prompt: 'A cat walking on a treadmill',
+  model: fal.video("luma-dream-machine/ray-2"),
+  prompt: "A cat walking on a treadmill",
 });
 ```
 
@@ -262,10 +262,10 @@ const { video, warnings } = await generateVideo({
 Some providers expose additional metadata for the result overall or per video.
 
 ```tsx
-const prompt = 'A cat walking on a treadmill';
+const prompt = "A cat walking on a treadmill";
 
 const { video, providerMetadata } = await generateVideo({
-  model: fal.video('luma-dream-machine/ray-2'),
+  model: fal.video("luma-dream-machine/ray-2"),
   prompt,
 });
 
@@ -285,8 +285,8 @@ When generating multiple videos with `n > 1`, you can also access per-call metad
 
 ```tsx
 const { videos, responses } = await generateVideo({
-  model: google.video('veo-2.0-generate-001'),
-  prompt: 'A rocket launching into space',
+  model: google.video("veo-2.0-generate-001"),
+  prompt: "A rocket launching into space",
   n: 5, // May require multiple API calls
 });
 
@@ -319,15 +319,15 @@ The error preserves the following information to help you log the issue:
 import {
   experimental_generateVideo as generateVideo,
   NoVideoGeneratedError,
-} from 'ai';
+} from "ai";
 
 try {
   await generateVideo({ model, prompt });
 } catch (error) {
   if (NoVideoGeneratedError.isInstance(error)) {
-    console.log('NoVideoGeneratedError');
-    console.log('Cause:', error.cause);
-    console.log('Responses:', error.responses);
+    console.log("NoVideoGeneratedError");
+    console.log("Cause:", error.cause);
+    console.log("Responses:", error.responses);
   }
 }
 ```

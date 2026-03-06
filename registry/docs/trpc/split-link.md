@@ -20,8 +20,8 @@ import {
   httpBatchLink,
   httpLink,
   splitLink,
-} from '@trpc/client';
-import type { AppRouter } from '../server';
+} from "@trpc/client";
+import type { AppRouter } from "../server";
 
 const url = `http://localhost:3000`;
 

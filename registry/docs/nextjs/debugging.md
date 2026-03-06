@@ -162,7 +162,7 @@ Next.js will display a Node.js icon underneath the Next.js version indicator on 
 
 ### Debugging on Windows
 
-Ensure Windows Defender is disabled on your machine. This external service will check *every file read*, which has been reported to greatly increase Fast Refresh time with `next dev`. This is a known issue, not related to Next.js, but it does affect Next.js development.
+Ensure Windows Defender is disabled on your machine. This external service will check _every file read_, which has been reported to greatly increase Fast Refresh time with `next dev`. This is a known issue, not related to Next.js, but it does affect Next.js development.
 
 ## More information
 

@@ -13,37 +13,37 @@ The Hugging Face provider is available via the `@ai-sdk/huggingface` module. You
 You can import the default provider instance `huggingface` from `@ai-sdk/huggingface`:
 
 ```ts
-import { huggingface } from '@ai-sdk/huggingface';
+import { huggingface } from "@ai-sdk/huggingface";
 ```
 
 For custom configuration, you can import `createHuggingFace` and create a provider instance with your settings:
 
 ```ts
-import { createHuggingFace } from '@ai-sdk/huggingface';
+import { createHuggingFace } from "@ai-sdk/huggingface";
 
 const huggingface = createHuggingFace({
-  apiKey: process.env.HUGGINGFACE_API_KEY ?? '',
+  apiKey: process.env.HUGGINGFACE_API_KEY ?? "",
 });
 ```
 
 You can use the following optional settings to customize the Hugging Face provider instance:
 
-- **baseURL** *string*
+- **baseURL** _string_
 
   Use a different URL prefix for API calls, e.g. to use proxy servers.
   The default prefix is `https://router.huggingface.co/v1`.
 
-- **apiKey** *string*
+- **apiKey** _string_
 
   API key that is being sent using the `Authorization` header. It defaults to
   the `HUGGINGFACE_API_KEY` environment variable. You can get your API key
   from [Hugging Face Settings](https://huggingface.co/settings/tokens).
 
-- **headers** *Record\<string,string>*
+- **headers** _Record\<string,string>_
 
   Custom headers to include in the requests.
 
-- **fetch** *(input: RequestInfo, init?: RequestInit) => Promise\<Response>*
+- **fetch** _(input: RequestInfo, init?: RequestInit) => Promise\<Response>_
 
   Custom [fetch](https://developer.mozilla.org/en-US/docs/Web/API/fetch) implementation.
 
@@ -52,21 +52,21 @@ You can use the following optional settings to customize the Hugging Face provid
 You can create language models using a provider instance:
 
 ```ts
-import { huggingface } from '@ai-sdk/huggingface';
-import { generateText } from 'ai';
+import { huggingface } from "@ai-sdk/huggingface";
+import { generateText } from "ai";
 
 const { text } = await generateText({
-  model: huggingface('deepseek-ai/DeepSeek-V3-0324'),
-  prompt: 'Write a vegetarian lasagna recipe for 4 people.',
+  model: huggingface("deepseek-ai/DeepSeek-V3-0324"),
+  prompt: "Write a vegetarian lasagna recipe for 4 people.",
 });
 ```
 
 You can also use the `.responses()` or `.languageModel()` factory methods:
 
 ```ts
-const model = huggingface.responses('deepseek-ai/DeepSeek-V3-0324');
+const model = huggingface.responses("deepseek-ai/DeepSeek-V3-0324");
 // or
-const model = huggingface.languageModel('moonshotai/Kimi-K2-Instruct');
+const model = huggingface.languageModel("moonshotai/Kimi-K2-Instruct");
 ```
 
 Hugging Face language models can be used in the `streamText` function
@@ -79,16 +79,16 @@ You can explore the latest and trending models with their capabilities, context 
 Hugging Face language models support provider-specific options that you can pass via `providerOptions.huggingface`:
 
 ```ts
-import { huggingface } from '@ai-sdk/huggingface';
-import { generateText } from 'ai';
+import { huggingface } from "@ai-sdk/huggingface";
+import { generateText } from "ai";
 
 const { text } = await generateText({
-  model: huggingface('deepseek-ai/DeepSeek-R1'),
-  prompt: 'Explain the theory of relativity.',
+  model: huggingface("deepseek-ai/DeepSeek-R1"),
+  prompt: "Explain the theory of relativity.",
   providerOptions: {
     huggingface: {
-      reasoningEffort: 'high',
-      instructions: 'Respond in a clear and educational manner.',
+      reasoningEffort: "high",
+      instructions: "Respond in a clear and educational manner.",
     },
   },
 });
@@ -96,19 +96,19 @@ const { text } = await generateText({
 
 The following provider options are available:
 
-- **metadata** *Record\<string, string>*
+- **metadata** _Record\<string, string>_
 
   Additional metadata to include with the request.
 
-- **instructions** *string*
+- **instructions** _string_
 
   Instructions for the model. Can be used to provide additional context or guidance.
 
-- **strictJsonSchema** *boolean*
+- **strictJsonSchema** _boolean_
 
   Whether to use strict JSON schema validation for structured outputs. Defaults to `false`.
 
-- **reasoningEffort** *string*
+- **reasoningEffort** _string_
 
   Controls the reasoning effort for reasoning models like DeepSeek-R1. Higher values result in more thorough reasoning.
 
@@ -117,23 +117,23 @@ The following provider options are available:
 For reasoning models like `deepseek-ai/DeepSeek-R1`, you can control the reasoning effort and access the model's reasoning process in the response:
 
 ```ts
-import { huggingface } from '@ai-sdk/huggingface';
-import { streamText } from 'ai';
+import { huggingface } from "@ai-sdk/huggingface";
+import { streamText } from "ai";
 
 const result = streamText({
-  model: huggingface('deepseek-ai/DeepSeek-R1'),
-  prompt: 'How many r letters are in the word strawberry?',
+  model: huggingface("deepseek-ai/DeepSeek-R1"),
+  prompt: "How many r letters are in the word strawberry?",
   providerOptions: {
     huggingface: {
-      reasoningEffort: 'high',
+      reasoningEffort: "high",
     },
   },
 });
 
 for await (const part of result.fullStream) {
-  if (part.type === 'reasoning') {
+  if (part.type === "reasoning") {
     console.log(`Reasoning: ${part.textDelta}`);
-  } else if (part.type === 'text-delta') {
+  } else if (part.type === "text-delta") {
     process.stdout.write(part.textDelta);
   }
 }
@@ -142,21 +142,21 @@ for await (const part of result.fullStream) {
 For non-streaming calls with `generateText`, the reasoning content is available in the `reasoning` field of the response:
 
 ```ts
-import { huggingface } from '@ai-sdk/huggingface';
-import { generateText } from 'ai';
+import { huggingface } from "@ai-sdk/huggingface";
+import { generateText } from "ai";
 
 const result = await generateText({
-  model: huggingface('deepseek-ai/DeepSeek-R1'),
-  prompt: 'What is 25 * 37?',
+  model: huggingface("deepseek-ai/DeepSeek-R1"),
+  prompt: "What is 25 * 37?",
   providerOptions: {
     huggingface: {
-      reasoningEffort: 'medium',
+      reasoningEffort: "medium",
     },
   },
 });
 
-console.log('Reasoning:', result.reasoning);
-console.log('Answer:', result.text);
+console.log("Reasoning:", result.reasoning);
+console.log("Answer:", result.text);
 ```
 
 ### Image Input
@@ -164,20 +164,20 @@ console.log('Answer:', result.text);
 For vision-capable models like `Qwen/Qwen2.5-VL-7B-Instruct`, you can pass images as part of the message content:
 
 ```ts
-import { huggingface } from '@ai-sdk/huggingface';
-import { generateText } from 'ai';
-import { readFileSync } from 'fs';
+import { huggingface } from "@ai-sdk/huggingface";
+import { generateText } from "ai";
+import { readFileSync } from "fs";
 
 const result = await generateText({
-  model: huggingface('Qwen/Qwen2.5-VL-7B-Instruct'),
+  model: huggingface("Qwen/Qwen2.5-VL-7B-Instruct"),
   messages: [
     {
-      role: 'user',
+      role: "user",
       content: [
-        { type: 'text', text: 'Describe this image in detail.' },
+        { type: "text", text: "Describe this image in detail." },
         {
-          type: 'image',
-          image: readFileSync('./image.png'),
+          type: "image",
+          image: readFileSync("./image.png"),
         },
       ],
     },
@@ -196,21 +196,21 @@ You can also pass image URLs:
 
 ## Model Capabilities
 
-| Model                                           | Image Input         | Object Generation   | Tool Usage          | Tool Streaming      |
-| ----------------------------------------------- | ------------------- | ------------------- | ------------------- | ------------------- |
-| `meta-llama/Llama-3.1-8B-Instruct`              |  |  |  |  |
-| `meta-llama/Llama-3.1-70B-Instruct`             |  |  |  |  |
-| `meta-llama/Llama-3.3-70B-Instruct`             |  |  |  |  |
-| `meta-llama/Llama-4-Maverick-17B-128E-Instruct` |  |  |  |  |
-| `deepseek-ai/DeepSeek-V3.1`                     |  |  |  |  |
-| `deepseek-ai/DeepSeek-V3-0324`                  |  |  |  |  |
-| `deepseek-ai/DeepSeek-R1`                       |  |  |  |  |
-| `deepseek-ai/DeepSeek-R1-Distill-Llama-70B`     |  |  |  |  |
-| `Qwen/Qwen3-32B`                                |  |  |  |  |
-| `Qwen/Qwen3-Coder-480B-A35B-Instruct`           |  |  |  |  |
-| `Qwen/Qwen2.5-VL-7B-Instruct`                   |  |  |  |  |
-| `google/gemma-3-27b-it`                         |  |  |  |  |
-| `moonshotai/Kimi-K2-Instruct`                   |  |  |  |  |
+| Model                                           | Image Input | Object Generation | Tool Usage | Tool Streaming |
+| ----------------------------------------------- | ----------- | ----------------- | ---------- | -------------- |
+| `meta-llama/Llama-3.1-8B-Instruct`              |             |                   |            |                |
+| `meta-llama/Llama-3.1-70B-Instruct`             |             |                   |            |                |
+| `meta-llama/Llama-3.3-70B-Instruct`             |             |                   |            |                |
+| `meta-llama/Llama-4-Maverick-17B-128E-Instruct` |             |                   |            |                |
+| `deepseek-ai/DeepSeek-V3.1`                     |             |                   |            |                |
+| `deepseek-ai/DeepSeek-V3-0324`                  |             |                   |            |                |
+| `deepseek-ai/DeepSeek-R1`                       |             |                   |            |                |
+| `deepseek-ai/DeepSeek-R1-Distill-Llama-70B`     |             |                   |            |                |
+| `Qwen/Qwen3-32B`                                |             |                   |            |                |
+| `Qwen/Qwen3-Coder-480B-A35B-Instruct`           |             |                   |            |                |
+| `Qwen/Qwen2.5-VL-7B-Instruct`                   |             |                   |            |                |
+| `google/gemma-3-27b-it`                         |             |                   |            |                |
+| `moonshotai/Kimi-K2-Instruct`                   |             |                   |            |                |
 
 The table above lists popular models. You can explore all available models on
 the [Hugging Face Inference Models](https://huggingface.co/inference/models)

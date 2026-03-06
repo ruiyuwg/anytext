@@ -7,13 +7,13 @@
 You can import and add the `httpBatchLink` to the `links` array as such:
 
 ```ts title="client/index.ts"
-import { createTRPCClient, httpBatchLink } from '@trpc/client';
-import type { AppRouter } from '../server';
+import { createTRPCClient, httpBatchLink } from "@trpc/client";
+import type { AppRouter } from "../server";
 
 const client = createTRPCClient<AppRouter>({
   links: [
     httpBatchLink({
-      url: 'http://localhost:3000',
+      url: "http://localhost:3000",
       // transformer,
     }),
   ],
@@ -80,13 +80,13 @@ When sending batch requests, sometimes the URL can become too large causing HTTP
 > An alternative way of doing this is to
 
 ```ts title="client/index.ts"
-import { createTRPCClient, httpBatchLink } from '@trpc/client';
-import type { AppRouter } from '../server';
+import { createTRPCClient, httpBatchLink } from "@trpc/client";
+import type { AppRouter } from "../server";
 
 const client = createTRPCClient<AppRouter>({
   links: [
     httpBatchLink({
-      url: 'http://localhost:3000',
+      url: "http://localhost:3000",
       maxURLLength: 2083, // a suitable size
       // alternatively, you can make all RPC-calls to be called with POST
       // methodOverride: 'POST',
@@ -100,7 +100,7 @@ const client = createTRPCClient<AppRouter>({
 ### 1. Disable `batching` on your server:
 
 ```ts title="server.ts"
-import { createHTTPServer } from '@trpc/server/adapters/standalone';
+import { createHTTPServer } from "@trpc/server/adapters/standalone";
 
 createHTTPServer({
   // [...]
@@ -122,13 +122,13 @@ export default trpcNext.createNextApiHandler({
 ### 2. Replace `httpBatchLink` with [`httpLink`](./httpLink.md) in your tRPC Client
 
 ```ts title="client/index.ts"
-import { createTRPCClient, httpLink } from '@trpc/client';
-import type { AppRouter } from '../server';
+import { createTRPCClient, httpLink } from "@trpc/client";
+import type { AppRouter } from "../server";
 
 const client = createTRPCClient<AppRouter>({
   links: [
     httpLink({
-      url: 'http://localhost:3000',
+      url: "http://localhost:3000",
     }),
   ],
 });
@@ -137,16 +137,16 @@ const client = createTRPCClient<AppRouter>({
 or, if you're using Next.js:
 
 ```tsx title='utils/trpc.ts'
-import type { AppRouter } from '@/server/routers/app';
-import { httpLink } from '@trpc/client';
-import { createTRPCNext } from '@trpc/next';
+import type { AppRouter } from "@/server/routers/app";
+import { httpLink } from "@trpc/client";
+import { createTRPCNext } from "@trpc/next";
 
 export const trpc = createTRPCNext<AppRouter>({
   config() {
     return {
       links: [
         httpLink({
-          url: '/api/trpc',
+          url: "/api/trpc",
         }),
       ],
     };

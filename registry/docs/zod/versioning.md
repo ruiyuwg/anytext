@@ -12,7 +12,7 @@ To upgrade to Zod 4:
 npm install zod@^4.0.0
 ```
 
-If you are using Zod 4, your existing imports (`"zod/v4"` and `"zod/v4-mini"`) will continue to work forever. However, after upgrading, you can *optionally* rewrite your imports as follows:
+If you are using Zod 4, your existing imports (`"zod/v4"` and `"zod/v4-mini"`) will continue to work forever. However, after upgrading, you can _optionally_ rewrite your imports as follows:
 
 |            | Before          | After        |
 | ---------- | --------------- | ------------ |
@@ -31,7 +31,7 @@ If you are using Zod 4, your existing imports (`"zod/v4"` and `"zod/v4-mini"`) w
 }
 ```
 
-*There should be no other code changes necessary.* No code changes were made between the latest `3.25.x` release and `4.0.0`. This does not require a major version bump.
+_There should be no other code changes necessary._ No code changes were made between the latest `3.25.x` release and `4.0.0`. This does not require a major version bump.
 
 Some notes on subpath versioning
 
@@ -72,8 +72,8 @@ With subpath versioning, we solve this problem. it provides a straightforward wa
 Libraries will need to bump the minimum version of their `"zod"` peer dependency to `zod@^3.25.0`. They can then reference both Zod 3 and Zod 4 in their implementation:
 
 ```ts
-import * as z3 from "zod/v3"
-import * as z4 from "zod/v4"
+import * as z3 from "zod/v3";
+import * as z4 from "zod/v4";
 ```
 
 Later, once there's broad support for v4, we'll bump the major version on `npm` and start exporting Zod 4 from the package root, completing the transition. (This has now happened—see the note at the top of this page.)
@@ -82,15 +82,15 @@ As long as libraries are importing exclusively from the associated subpaths (not
 
 While it may seem unorthodox (at least for people who don't use Go!), this is the only approach I'm aware of that enables a clean, incremental migration path for both Zod's users and the libraries in the broader ecosystem.
 
-***
+---
 
 A deeper dive into why peer dependencies don't work in this situation.
 
-Imagine you're a library trying to build a function `acceptSchema` that accepts a Zod schema. You want to be able to accept Zod 3 or Zod 4 schemas.  In this hypothetical, I'm imagine Zod 4 was published as `zod@4` on npm, no subpaths. Here are your options:
+Imagine you're a library trying to build a function `acceptSchema` that accepts a Zod schema. You want to be able to accept Zod 3 or Zod 4 schemas. In this hypothetical, I'm imagine Zod 4 was published as `zod@4` on npm, no subpaths. Here are your options:
 
 1. Install both zod@3 and zod@4 as `dependencies` simultaneously using npm aliases. This works but you end up including your own copies of both Zod 3 and Zod 4. You have no guarantee that your user's Zod schemas are instances of the same z.ZodType class you're pulling from dependencies (`instanceof` checks will probably fail).
 
-2. Use a peer dependency that spans multiple major versions:  `"zod@>=3.0.0"` …but when developing a library you’d still need to pick a version to develop against. Usually you'd install this as a dev dependency. The onus is on you to painstakingly ensure your code works, character-for-character,  across both versions. This is impossible in the case of Zod 3 & Zod 4 because a number of very fundamental classes have simplified/different generics.
+2. Use a peer dependency that spans multiple major versions: `"zod@>=3.0.0"` …but when developing a library you’d still need to pick a version to develop against. Usually you'd install this as a dev dependency. The onus is on you to painstakingly ensure your code works, character-for-character, across both versions. This is impossible in the case of Zod 3 & Zod 4 because a number of very fundamental classes have simplified/different generics.
 
 3. Optional peer dependencies. i just couldn't find a straight answer about how to reliably determine which peer dep is installed at runtime across all platforms. Many answers online will say "use dynamic imports in a try/catch to check it a package exists". Those folks are assuming you're on the backend because no frontend bundlers have no affordance for this. They'll fail when you try to bundle a dependency that isn't installed. Obviuosly it doesn't matter if you're inside a try/catch during a build step. Also: since we're talking about multiple versions of the same library, you'd need to use npm aliases to differentiate the two versions in your `package.json`. Versions of npm as recent as v10 cannot handle the combination of peer dependencies + npm aliases.
 

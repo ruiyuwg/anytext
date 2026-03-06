@@ -90,7 +90,7 @@ drizzle-orm postres
 #### Step 2 - Initialize the driver and make a query
 
 ```typescript
-// Make sure to install the 'pg' package 
+// Make sure to install the 'pg' package
 import { drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
 
@@ -98,19 +98,19 @@ const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
 });
 const db = drizzle({ client: pool });
- 
-const result = await db.execute('select 1');
+
+const result = await db.execute("select 1");
 ```
 
 ```typescript
 // Make sure to install the 'postgres' package
-import { drizzle } from 'drizzle-orm/postgres-js';
-import postgres from 'postgres';
+import { drizzle } from "drizzle-orm/postgres-js";
+import postgres from "postgres";
 
 const queryClient = postgres(process.env.DATABASE_URL);
 const db = drizzle({ client: queryClient });
 
-const result = await db.execute('select 1');
+const result = await db.execute("select 1");
 ```
 
 #### What's next?
@@ -157,23 +157,23 @@ drizzle-orm@beta @sqlitecloud/drivers
 #### Step 2 - Initialize the driver and make a query
 
 ```typescript
-import { drizzle } from 'drizzle-orm/sqlite-cloud';
+import { drizzle } from "drizzle-orm/sqlite-cloud";
 
 const db = drizzle(process.env.SQLITE_CLOUD_CONNECTION_STRING);
 
-const result = await db.execute('select 1');
+const result = await db.execute("select 1");
 ```
 
 If you need to provide your existing drivers:
 
 ```typescript
-import { Database } from '@sqlitecloud/drivers';
-import { drizzle } from 'drizzle-orm/sqlite-cloud';
+import { Database } from "@sqlitecloud/drivers";
+import { drizzle } from "drizzle-orm/sqlite-cloud";
 
 const client = new Database(process.env.SQLITE_CLOUD_CONNECTION_STRING!);
 const db = drizzle({ client });
 
-const result = await db.execute('select 1');
+const result = await db.execute("select 1");
 ```
 
 #### What's next?

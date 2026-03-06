@@ -3,63 +3,63 @@
 `lazy` lets you defer loading component's code until it is rendered for the first time.
 
 ```js
-const SomeComponent = lazy(load)
+const SomeComponent = lazy(load);
 ```
 
-***
+---
 
-## Reference {/*reference*/}
+## Reference {/_reference_/}
 
-### `lazy(load)` {/*lazy*/}
+### `lazy(load)` {/_lazy_/}
 
 Call `lazy` outside your components to declare a lazy-loaded React component:
 
 ```js
-import { lazy } from 'react';
+import { lazy } from "react";
 
-const MarkdownPreview = lazy(() => import('./MarkdownPreview.js'));
+const MarkdownPreview = lazy(() => import("./MarkdownPreview.js"));
 ```
 
 [See more examples below.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parameters {/_parameters_/}
 
-- `load`: A function that returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) or another *thenable* (a Promise-like object with a `then` method). React will not call `load` until the first time you attempt to render the returned component. After React first calls `load`, it will wait for it to resolve, and then render the resolved value's `.default` as a React component. Both the returned Promise and the Promise's resolved value will be cached, so React will not call `load` more than once. If the Promise rejects, React will `throw` the rejection reason for the nearest Error Boundary to handle.
+- `load`: A function that returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) or another _thenable_ (a Promise-like object with a `then` method). React will not call `load` until the first time you attempt to render the returned component. After React first calls `load`, it will wait for it to resolve, and then render the resolved value's `.default` as a React component. Both the returned Promise and the Promise's resolved value will be cached, so React will not call `load` more than once. If the Promise rejects, React will `throw` the rejection reason for the nearest Error Boundary to handle.
 
-#### Returns {/*returns*/}
+#### Returns {/_returns_/}
 
-`lazy` returns a React component you can render in your tree. While the code for the lazy component is still loading, attempting to render it will *suspend.* Use [`<Suspense>`](/reference/react/Suspense) to display a loading indicator while it's loading.
+`lazy` returns a React component you can render in your tree. While the code for the lazy component is still loading, attempting to render it will _suspend._ Use [`<Suspense>`](/reference/react/Suspense) to display a loading indicator while it's loading.
 
-***
+---
 
-### `load` function {/*load*/}
+### `load` function {/_load_/}
 
-#### Parameters {/*load-parameters*/}
+#### Parameters {/_load-parameters_/}
 
 `load` receives no parameters.
 
-#### Returns {/*load-returns*/}
+#### Returns {/_load-returns_/}
 
-You need to return a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) or some other *thenable* (a Promise-like object with a `then` method). It needs to eventually resolve to an object whose `.default` property is a valid React component type, such as a function, [`memo`](/reference/react/memo), or a [`forwardRef`](/reference/react/forwardRef) component.
+You need to return a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) or some other _thenable_ (a Promise-like object with a `then` method). It needs to eventually resolve to an object whose `.default` property is a valid React component type, such as a function, [`memo`](/reference/react/memo), or a [`forwardRef`](/reference/react/forwardRef) component.
 
-***
+---
 
-## Usage {/*usage*/}
+## Usage {/_usage_/}
 
-### Lazy-loading components with Suspense {/*suspense-for-code-splitting*/}
+### Lazy-loading components with Suspense {/_suspense-for-code-splitting_/}
 
 Usually, you import components with the static [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) declaration:
 
 ```js
-import MarkdownPreview from './MarkdownPreview.js';
+import MarkdownPreview from "./MarkdownPreview.js";
 ```
 
 To defer loading this component's code until it's rendered for the first time, replace this import with:
 
 ```js
-import { lazy } from 'react';
+import { lazy } from "react";
 
-const MarkdownPreview = lazy(() => import('./MarkdownPreview.js'));
+const MarkdownPreview = lazy(() => import("./MarkdownPreview.js"));
 ```
 
 This code relies on [dynamic `import()`,](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import) which might require support from your bundler or framework. Using this pattern requires that the lazy component you're importing was exported as the `default` export.
@@ -76,19 +76,28 @@ Now that your component's code loads on demand, you also need to specify what sh
 In this example, the code for `MarkdownPreview` won't be loaded until you attempt to render it. If `MarkdownPreview` hasn't loaded yet, `Loading` will be shown in its place. Try ticking the checkbox:
 
 ```js src/App.js
-import { useState, Suspense, lazy } from 'react';
-import Loading from './Loading.js';
+import { useState, Suspense, lazy } from "react";
+import Loading from "./Loading.js";
 
-const MarkdownPreview = lazy(() => delayForDemo(import('./MarkdownPreview.js')));
+const MarkdownPreview = lazy(() =>
+  delayForDemo(import("./MarkdownPreview.js")),
+);
 
 export default function MarkdownEditor() {
   const [showPreview, setShowPreview] = useState(false);
-  const [markdown, setMarkdown] = useState('Hello, **world**!');
+  const [markdown, setMarkdown] = useState("Hello, **world**!");
   return (
     <>
-      <textarea value={markdown} onChange={e => setMarkdown(e.target.value)} />
+      <textarea
+        value={markdown}
+        onChange={(e) => setMarkdown(e.target.value)}
+      />
       <label>
-        <input type="checkbox" checked={showPreview} onChange={e => setShowPreview(e.target.checked)} />
+        <input
+          type="checkbox"
+          checked={showPreview}
+          onChange={(e) => setShowPreview(e.target.checked)}
+        />
         Show preview
       </label>
       <hr />
@@ -104,7 +113,7 @@ export default function MarkdownEditor() {
 
 // Add a fixed delay so you can see the loading state
 function delayForDemo(promise) {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     setTimeout(resolve, 2000);
   }).then(() => promise);
 }
@@ -112,12 +121,16 @@ function delayForDemo(promise) {
 
 ```js src/Loading.js
 export default function Loading() {
-  return <p><i>Loading...</i></p>;
+  return (
+    <p>
+      <i>Loading...</i>
+    </p>
+  );
 }
 ```
 
 ```js src/MarkdownPreview.js
-import { Remarkable } from 'remarkable';
+import { Remarkable } from "remarkable";
 
 const md = new Remarkable();
 
@@ -125,7 +138,7 @@ export default function MarkdownPreview({ markdown }) {
   return (
     <div
       className="content"
-      dangerouslySetInnerHTML={{__html: md.render(markdown)}}
+      dangerouslySetInnerHTML={{ __html: md.render(markdown) }}
     />
   );
 }
@@ -154,7 +167,8 @@ label {
   display: block;
 }
 
-input, textarea {
+input,
+textarea {
   margin-bottom: 10px;
 }
 
@@ -167,20 +181,20 @@ This demo loads with an artificial delay. The next time you untick and tick the 
 
 [Learn more about managing loading states with Suspense.](/reference/react/Suspense)
 
-***
+---
 
-## Troubleshooting {/*troubleshooting*/}
+## Troubleshooting {/_troubleshooting_/}
 
-### My `lazy` component's state gets reset unexpectedly {/*my-lazy-components-state-gets-reset-unexpectedly*/}
+### My `lazy` component's state gets reset unexpectedly {/_my-lazy-components-state-gets-reset-unexpectedly_/}
 
-Do not declare `lazy` components *inside* other components:
+Do not declare `lazy` components _inside_ other components:
 
 ```js {4-5}
-import { lazy } from 'react';
+import { lazy } from "react";
 
 function Editor() {
   // 🔴 Bad: This will cause all state to be reset on re-renders
-  const MarkdownPreview = lazy(() => import('./MarkdownPreview.js'));
+  const MarkdownPreview = lazy(() => import("./MarkdownPreview.js"));
   // ...
 }
 ```
@@ -188,17 +202,17 @@ function Editor() {
 Instead, always declare them at the top level of your module:
 
 ```js {3-4}
-import { lazy } from 'react';
+import { lazy } from "react";
 
 // ✅ Good: Declare lazy components outside of your components
-const MarkdownPreview = lazy(() => import('./MarkdownPreview.js'));
+const MarkdownPreview = lazy(() => import("./MarkdownPreview.js"));
 
 function Editor() {
   // ...
 }
 ```
 
-***
+---
 
 ## Sitemap
 

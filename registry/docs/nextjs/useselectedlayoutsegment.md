@@ -5,26 +5,26 @@
 It is useful for navigation UI, such as tabs inside a parent layout that change style depending on the active child segment.
 
 ```tsx filename="app/example-client-component.tsx" switcher
-'use client'
+"use client";
 
-import { useSelectedLayoutSegment } from 'next/navigation'
+import { useSelectedLayoutSegment } from "next/navigation";
 
 export default function ExampleClientComponent() {
-  const segment = useSelectedLayoutSegment()
+  const segment = useSelectedLayoutSegment();
 
-  return <p>Active segment: {segment}</p>
+  return <p>Active segment: {segment}</p>;
 }
 ```
 
 ```jsx filename="app/example-client-component.js" switcher
-'use client'
+"use client";
 
-import { useSelectedLayoutSegment } from 'next/navigation'
+import { useSelectedLayoutSegment } from "next/navigation";
 
 export default function ExampleClientComponent() {
-  const segment = useSelectedLayoutSegment()
+  const segment = useSelectedLayoutSegment();
 
-  return <p>Active segment: {segment}</p>
+  return <p>Active segment: {segment}</p>;
 }
 ```
 
@@ -40,7 +40,7 @@ export default function ExampleClientComponent() {
 const segment = useSelectedLayoutSegment(parallelRoutesKey?: string)
 ```
 
-`useSelectedLayoutSegment` *optionally* accepts a [`parallelRoutesKey`](/docs/app/api-reference/file-conventions/parallel-routes#with-useselectedlayoutsegments), which allows you to read the active route segment within that slot.
+`useSelectedLayoutSegment` _optionally_ accepts a [`parallelRoutesKey`](/docs/app/api-reference/file-conventions/parallel-routes#with-useselectedlayoutsegments), which allows you to read the active route segment within that slot.
 
 ## Returns
 
@@ -70,72 +70,72 @@ For catch-all routes (`[...slug]`), the returned segment contains all matched pa
 You can use `useSelectedLayoutSegment` to create an active link component that changes style depending on the active segment. For example, a featured posts list in the sidebar of a blog:
 
 ```tsx filename="app/blog/blog-nav-link.tsx" switcher
-'use client'
+"use client";
 
-import Link from 'next/link'
-import { useSelectedLayoutSegment } from 'next/navigation'
+import Link from "next/link";
+import { useSelectedLayoutSegment } from "next/navigation";
 
 // This *client* component will be imported into a blog layout
 export default function BlogNavLink({
   slug,
   children,
 }: {
-  slug: string
-  children: React.ReactNode
+  slug: string;
+  children: React.ReactNode;
 }) {
   // Navigating to `/blog/hello-world` will return 'hello-world'
   // for the selected layout segment
-  const segment = useSelectedLayoutSegment()
-  const isActive = slug === segment
+  const segment = useSelectedLayoutSegment();
+  const isActive = slug === segment;
 
   return (
     <Link
       href={`/blog/${slug}`}
       // Change style depending on whether the link is active
-      style={{ fontWeight: isActive ? 'bold' : 'normal' }}
+      style={{ fontWeight: isActive ? "bold" : "normal" }}
     >
       {children}
     </Link>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/blog/blog-nav-link.js" switcher
-'use client'
+"use client";
 
-import Link from 'next/link'
-import { useSelectedLayoutSegment } from 'next/navigation'
+import Link from "next/link";
+import { useSelectedLayoutSegment } from "next/navigation";
 
 // This *client* component will be imported into a blog layout
 export default function BlogNavLink({ slug, children }) {
   // Navigating to `/blog/hello-world` will return 'hello-world'
   // for the selected layout segment
-  const segment = useSelectedLayoutSegment()
-  const isActive = slug === segment
+  const segment = useSelectedLayoutSegment();
+  const isActive = slug === segment;
 
   return (
     <Link
       href={`/blog/${slug}`}
       // Change style depending on whether the link is active
-      style={{ fontWeight: isActive ? 'bold' : 'normal' }}
+      style={{ fontWeight: isActive ? "bold" : "normal" }}
     >
       {children}
     </Link>
-  )
+  );
 }
 ```
 
 ```tsx filename="app/blog/layout.tsx" switcher
 // Import the Client Component into a parent Layout (Server Component)
-import { BlogNavLink } from './blog-nav-link'
-import getFeaturedPosts from './get-featured-posts'
+import { BlogNavLink } from "./blog-nav-link";
+import getFeaturedPosts from "./get-featured-posts";
 
 export default async function Layout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
-  const featuredPosts = await getFeaturedPosts()
+  const featuredPosts = await getFeaturedPosts();
   return (
     <div>
       {featuredPosts.map((post) => (
@@ -145,17 +145,17 @@ export default async function Layout({
       ))}
       <div>{children}</div>
     </div>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/blog/layout.js" switcher
 // Import the Client Component into a parent Layout (Server Component)
-import { BlogNavLink } from './blog-nav-link'
-import getFeaturedPosts from './get-featured-posts'
+import { BlogNavLink } from "./blog-nav-link";
+import getFeaturedPosts from "./get-featured-posts";
 
 export default async function Layout({ children }) {
-  const featuredPosts = await getFeaturedPosts()
+  const featuredPosts = await getFeaturedPosts();
   return (
     <div>
       {featuredPosts.map((post) => (
@@ -165,7 +165,7 @@ export default async function Layout({ children }) {
       ))}
       <div>{children}</div>
     </div>
-  )
+  );
 }
 ```
 

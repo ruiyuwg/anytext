@@ -8,35 +8,35 @@
 
 ```js
 startTransition(() => {
-  addTransitionType('my-transition-type');
+  addTransitionType("my-transition-type");
   setState(newState);
 });
 ```
 
-***
+---
 
-## Reference {/*reference*/}
+## Reference {/_reference_/}
 
-### `addTransitionType` {/*addtransitiontype*/}
+### `addTransitionType` {/_addtransitiontype_/}
 
-#### Parameters {/*parameters*/}
+#### Parameters {/_parameters_/}
 
 - `type`: The type of transition to add. This can be any string.
 
-#### Returns {/*returns*/}
+#### Returns {/_returns_/}
 
 `addTransitionType` does not return anything.
 
-#### Caveats {/*caveats*/}
+#### Caveats {/_caveats_/}
 
 - If multiple transitions are combined, all Transition Types are collected. You can also add more than one type to a Transition.
 - Transition Types are reset after each commit. This means a `<Suspense>` fallback will associate the types after a `startTransition`, but revealing the content does not.
 
-***
+---
 
-## Usage {/*usage*/}
+## Usage {/_usage_/}
 
-### Adding the cause of a transition {/*adding-the-cause-of-a-transition*/}
+### Adding the cause of a transition {/_adding-the-cause-of-a-transition_/}
 
 Call `addTransitionType` inside of `startTransition` to indicate the cause of a transition:
 
@@ -66,9 +66,9 @@ Currently, Transition Types can be used to customize different animations based 
 
 In the future, we plan to support more use cases for using the cause of a transition.
 
-***
+---
 
-### Customize animations using browser view transition types {/*customize-animations-using-browser-view-transition-types*/}
+### Customize animations using browser view transition types {/_customize-animations-using-browser-view-transition-types_/}
 
 When a [`ViewTransition`](/reference/react/ViewTransition) activates from a transition, React adds all the Transition Types as browser [view transition types](https://www.w3.org/TR/css-view-transitions-2/#active-view-transition-pseudo-examples) to the element.
 
@@ -84,7 +84,7 @@ function Component() {
 }
 
 startTransition(() => {
-  addTransitionType('my-transition-type');
+  addTransitionType("my-transition-type");
   setShow(true);
 });
 ```
@@ -97,18 +97,20 @@ startTransition(() => {
 }
 ```
 
-***
+---
 
-### Customize animations using `View Transition` Class {/*customize-animations-using-view-transition-class*/}
+### Customize animations using `View Transition` Class {/_customize-animations-using-view-transition-class_/}
 
 You can customize animations for an activated `ViewTransition` based on type by passing an object to the View Transition Class:
 
 ```js
 function Component() {
   return (
-    <ViewTransition enter={{
-      'my-transition-type': 'my-transition-class',
-    }}>
+    <ViewTransition
+      enter={{
+        "my-transition-type": "my-transition-class",
+      }}
+    >
       <div>Hello</div>
     </ViewTransition>
   );
@@ -116,7 +118,7 @@ function Component() {
 
 // ...
 startTransition(() => {
-  addTransitionType('my-transition-type');
+  addTransitionType("my-transition-type");
   setState(newState);
 });
 ```
@@ -136,9 +138,9 @@ exit={{
 }}>
 ```
 
-***
+---
 
-### Customize animations using `ViewTransition` events {/*customize-animations-using-viewtransition-events*/}
+### Customize animations using `ViewTransition` events {/_customize-animations-using-viewtransition-events_/}
 
 You can imperatively customize animations for an activated `ViewTransition` based on type using View Transition events:
 
@@ -156,7 +158,7 @@ You can imperatively customize animations for an activated `ViewTransition` base
 
 This allows you to pick different imperative Animations based on the cause.
 
-***
+---
 
 ## Sitemap
 

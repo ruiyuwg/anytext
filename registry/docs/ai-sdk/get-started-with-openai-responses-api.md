@@ -17,12 +17,12 @@ The AI SDK abstracts away the differences between model providers, eliminates bo
 At the center of the AI SDK is [AI SDK Core](/docs/ai-sdk-core/overview), which provides a unified API to call any LLM. The code snippet below is all you need to call GPT-4o with the new Responses API using the AI SDK:
 
 ```ts
-import { generateText } from 'ai';
-import { openai } from '@ai-sdk/openai';
+import { generateText } from "ai";
+import { openai } from "@ai-sdk/openai";
 
 const { text } = await generateText({
-  model: openai.responses('gpt-4o'),
-  prompt: 'Explain the concept of quantum entanglement.',
+  model: openai.responses("gpt-4o"),
+  prompt: "Explain the concept of quantum entanglement.",
 });
 ```
 
@@ -31,12 +31,12 @@ const { text } = await generateText({
 While text generation can be useful, you might want to generate structured JSON data. For example, you might want to extract information from text, classify data, or generate synthetic data. AI SDK Core provides [`generateText`](/docs/reference/ai-sdk-core/generate-text) and [`streamText`](/docs/reference/ai-sdk-core/stream-text) with `Output` to generate structured data, allowing you to constrain model outputs to a specific schema.
 
 ```ts
-import { generateText, Output } from 'ai';
-import { openai } from '@ai-sdk/openai';
-import { z } from 'zod';
+import { generateText, Output } from "ai";
+import { openai } from "@ai-sdk/openai";
+import { z } from "zod";
 
 const { output } = await generateText({
-  model: openai.responses('gpt-4o'),
+  model: openai.responses("gpt-4o"),
   output: Output.object({
     schema: z.object({
       recipe: z.object({
@@ -48,7 +48,7 @@ const { output } = await generateText({
       }),
     }),
   }),
-  prompt: 'Generate a lasagna recipe.',
+  prompt: "Generate a lasagna recipe.",
 });
 ```
 
@@ -59,18 +59,18 @@ This code snippet will generate a type-safe recipe that conforms to the specifie
 The Responses API supports tool calling out of the box, allowing it to interact with external systems and perform discrete tasks. Here's an example of using tool calling with the AI SDK:
 
 ```ts
-import { generateText, tool } from 'ai';
-import { openai } from '@ai-sdk/openai';
-import { z } from 'zod';
+import { generateText, tool } from "ai";
+import { openai } from "@ai-sdk/openai";
+import { z } from "zod";
 
 const { text } = await generateText({
-  model: openai.responses('gpt-4o'),
-  prompt: 'What is the weather like today in San Francisco?',
+  model: openai.responses("gpt-4o"),
+  prompt: "What is the weather like today in San Francisco?",
   tools: {
     getWeather: tool({
-      description: 'Get the weather in a location',
+      description: "Get the weather in a location",
       inputSchema: z.object({
-        location: z.string().describe('The location to get the weather for'),
+        location: z.string().describe("The location to get the weather for"),
       }),
       execute: async ({ location }) => ({
         location,
@@ -89,12 +89,12 @@ This example demonstrates how `stopWhen` transforms a single LLM call into an ag
 The Responses API introduces a built-in tool for grounding responses called `webSearch`. With this tool, the model can access the internet to find relevant information for its responses.
 
 ```ts
-import { openai } from '@ai-sdk/openai';
-import { generateText } from 'ai';
+import { openai } from "@ai-sdk/openai";
+import { generateText } from "ai";
 
 const result = await generateText({
-  model: openai.responses('gpt-4o-mini'),
-  prompt: 'What happened in San Francisco last week?',
+  model: openai.responses("gpt-4o-mini"),
+  prompt: "What happened in San Francisco last week?",
   tools: {
     web_search_preview: openai.tools.webSearchPreview(),
   },
@@ -107,18 +107,18 @@ console.log(result.sources);
 The `webSearch` tool also allows you to specify query-specific metadata that can be used to improve the quality of the search results.
 
 ```ts
-import { generateText } from 'ai';
+import { generateText } from "ai";
 
 const result = await generateText({
-  model: openai.responses('gpt-4o-mini'),
-  prompt: 'What happened in San Francisco last week?',
+  model: openai.responses("gpt-4o-mini"),
+  prompt: "What happened in San Francisco last week?",
   tools: {
     web_search_preview: openai.tools.webSearchPreview({
-      searchContextSize: 'high',
+      searchContextSize: "high",
       userLocation: {
-        type: 'approximate',
-        city: 'San Francisco',
-        region: 'California',
+        type: "approximate",
+        city: "San Francisco",
+        region: "California",
       },
     }),
   },
@@ -133,17 +133,17 @@ console.log(result.sources);
 The Responses API also supports connecting to [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) servers. This allows models to call tools exposed by remote MCP servers or service connectors.
 
 ```ts
-import { openai } from '@ai-sdk/openai';
-import { generateText } from 'ai';
+import { openai } from "@ai-sdk/openai";
+import { generateText } from "ai";
 
 const result = await generateText({
-  model: openai.responses('gpt-5-mini'),
-  prompt: 'Search the web for the latest NYC mayoral election results',
+  model: openai.responses("gpt-5-mini"),
+  prompt: "Search the web for the latest NYC mayoral election results",
   tools: {
     mcp: openai.tools.mcp({
-      serverLabel: 'web-search',
-      serverUrl: 'https://mcp.exa.ai/mcp',
-      serverDescription: 'A web-search API for AI agents',
+      serverLabel: "web-search",
+      serverUrl: "https://mcp.exa.ai/mcp",
+      serverDescription: "A web-search API for AI agents",
     }),
   },
 });
@@ -162,17 +162,17 @@ There are two options available to use persistence:
 ### With previousResponseId
 
 ```tsx filename="app/api/chat/route.ts"
-import { openai } from '@ai-sdk/openai';
-import { generateText } from 'ai';
+import { openai } from "@ai-sdk/openai";
+import { generateText } from "ai";
 
 const result1 = await generateText({
-  model: openai.responses('gpt-4o-mini'),
-  prompt: 'Invent a new holiday and describe its traditions.',
+  model: openai.responses("gpt-4o-mini"),
+  prompt: "Invent a new holiday and describe its traditions.",
 });
 
 const result2 = await generateText({
-  model: openai.responses('gpt-4o-mini'),
-  prompt: 'Summarize in 2 sentences',
+  model: openai.responses("gpt-4o-mini"),
+  prompt: "Summarize in 2 sentences",
   providerOptions: {
     openai: {
       previousResponseId: result1.providerMetadata?.openai.responseId as string,
@@ -188,16 +188,16 @@ You can use the [Conversation API](https://platform.openai.com/docs/api-referenc
 Once you have created a conversation, you can continue it:
 
 ```tsx filename="app/api/chat/route.ts"
-import { openai } from '@ai-sdk/openai';
-import { generateText } from 'ai';
+import { openai } from "@ai-sdk/openai";
+import { generateText } from "ai";
 
 const result = await generateText({
-  model: openai.responses('gpt-4o-mini'),
-  prompt: 'Summarize in 2 sentences',
+  model: openai.responses("gpt-4o-mini"),
+  prompt: "Summarize in 2 sentences",
   providerOptions: {
     openai: {
       // The Conversation ID created via the OpenAI API to continue
-      conversation: 'conv_123',
+      conversation: "conv_123",
     },
   },
 });
@@ -208,32 +208,32 @@ const result = await generateText({
 Migrating from the OpenAI Completions API (via the AI SDK) to the new Responses API is simple. To migrate, simply change your provider instance from `openai(modelId)` to `openai.responses(modelId)`:
 
 ```ts
-import { generateText } from 'ai';
-import { openai } from '@ai-sdk/openai';
+import { generateText } from "ai";
+import { openai } from "@ai-sdk/openai";
 
 // Completions API
 const { text } = await generateText({
-  model: openai('gpt-4o'),
-  prompt: 'Explain the concept of quantum entanglement.',
+  model: openai("gpt-4o"),
+  prompt: "Explain the concept of quantum entanglement.",
 });
 
 // Responses API
 const { text } = await generateText({
-  model: openai.responses('gpt-4o'),
-  prompt: 'Explain the concept of quantum entanglement.',
+  model: openai.responses("gpt-4o"),
+  prompt: "Explain the concept of quantum entanglement.",
 });
 ```
 
 When using the Responses API, provider specific options that were previously specified on the model provider instance have now moved to the `providerOptions` object:
 
 ```ts
-import { generateText } from 'ai';
-import { openai } from '@ai-sdk/openai';
+import { generateText } from "ai";
+import { openai } from "@ai-sdk/openai";
 
 // Completions API
 const { text } = await generateText({
-  model: openai('gpt-4o'),
-  prompt: 'Explain the concept of quantum entanglement.',
+  model: openai("gpt-4o"),
+  prompt: "Explain the concept of quantum entanglement.",
   providerOptions: {
     openai: {
       parallelToolCalls: false,
@@ -243,8 +243,8 @@ const { text } = await generateText({
 
 // Responses API
 const { text } = await generateText({
-  model: openai.responses('gpt-4o'),
-  prompt: 'Explain the concept of quantum entanglement.',
+  model: openai.responses("gpt-4o"),
+  prompt: "Explain the concept of quantum entanglement.",
   providerOptions: {
     openai: {
       parallelToolCalls: false,

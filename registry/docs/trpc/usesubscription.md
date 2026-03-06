@@ -55,7 +55,7 @@ type TRPCSubscriptionResult<TOutput, TError> = {
    * - `pending`: connected to the server, receiving data
    * - `error`: an error occurred and the subscription is stopped
    */
-  status: 'idle' | 'connecting' | 'pending' | 'error';
+  status: "idle" | "connecting" | "pending" | "error";
   /**
    * The last data received from the subscription.
    */
@@ -76,7 +76,7 @@ type TRPCSubscriptionResult<TOutput, TError> = {
 ## Example
 
 ```tsx title='components/MyComponent.tsx'
-import { trpc } from '../utils/trpc';
+import { trpc } from "../utils/trpc";
 
 export function MyComponent() {
   const [numbers, setNumbers] = React.useState<number[]>([]);
@@ -100,7 +100,7 @@ export function MyComponent() {
         ))}
       </ul>
 
-      {result.status === 'error' && (
+      {result.status === "error" && (
         <button onClick={() => result.reset()}>
           Something went wrong - restart the subscription
         </button>

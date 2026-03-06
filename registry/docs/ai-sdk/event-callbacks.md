@@ -7,16 +7,16 @@ The AI SDK provides per-call event callbacks that you can pass to `generateText`
 Pass callbacks directly to `generateText` or `streamText`:
 
 ```ts
-import { generateText } from 'ai';
+import { generateText } from "ai";
 
 const result = await generateText({
-  model: openai('gpt-4o'),
-  prompt: 'What is the weather in San Francisco?',
-  experimental_onStart: event => {
-    console.log('Generation started:', event.model.modelId);
+  model: openai("gpt-4o"),
+  prompt: "What is the weather in San Francisco?",
+  experimental_onStart: (event) => {
+    console.log("Generation started:", event.model.modelId);
   },
-  onFinish: event => {
-    console.log('Generation finished:', event.totalUsage);
+  onFinish: (event) => {
+    console.log("Generation finished:", event.totalUsage);
   },
 });
 ```
@@ -26,23 +26,23 @@ const result = await generateText({
 \<PropertiesTable
 content={\[
 {
-name: 'experimental\_onStart',
+name: 'experimental_onStart',
 type: '(event: OnStartEvent) => void | Promise',
 description: 'Called when generation begins, before any LLM calls.',
 },
 {
-name: 'experimental\_onStepStart',
+name: 'experimental_onStepStart',
 type: '(event: OnStepStartEvent) => void | Promise',
 description:
 'Called when a step (LLM call) begins, before the provider is called.',
 },
 {
-name: 'experimental\_onToolCallStart',
+name: 'experimental_onToolCallStart',
 type: '(event: OnToolCallStartEvent) => void | Promise',
 description: "Called when a tool's execute function is about to run.",
 },
 {
-name: 'experimental\_onToolCallFinish',
+name: 'experimental_onToolCallFinish',
 type: '(event: OnToolCallFinishEvent) => void | Promise',
 description: "Called when a tool's execute function completes or errors.",
 },
@@ -68,11 +68,11 @@ Called when the generation operation begins, before any LLM calls are made.
 
 ```ts
 const result = await generateText({
-  model: openai('gpt-4o'),
-  prompt: 'Hello!',
-  experimental_onStart: event => {
-    console.log('Model:', event.model.modelId);
-    console.log('Temperature:', event.temperature);
+  model: openai("gpt-4o"),
+  prompt: "Hello!",
+  experimental_onStart: (event) => {
+    console.log("Model:", event.model.modelId);
+    console.log("Temperature:", event.temperature);
   },
 });
 ```
@@ -208,7 +208,7 @@ type: 'Record\<string, unknown> | undefined',
 description: 'Additional metadata passed to the generation.',
 },
 {
-name: 'experimental\_context',
+name: 'experimental_context',
 type: 'unknown',
 description:
 'User-defined context object that flows through the entire generation lifecycle.',
@@ -222,11 +222,11 @@ Called before each step (LLM call) begins. Useful for tracking multi-step genera
 
 ```ts
 const result = await generateText({
-  model: openai('gpt-4o'),
-  prompt: 'Hello!',
-  experimental_onStepStart: event => {
-    console.log('Step:', event.stepNumber);
-    console.log('Messages:', event.messages.length);
+  model: openai("gpt-4o"),
+  prompt: "Hello!",
+  experimental_onStepStart: (event) => {
+    console.log("Step:", event.stepNumber);
+    console.log("Messages:", event.messages.length);
   },
 });
 ```
@@ -322,7 +322,7 @@ type: 'Record\<string, unknown> | undefined',
 description: 'Additional metadata from telemetry settings.',
 },
 {
-name: 'experimental\_context',
+name: 'experimental_context',
 type: 'unknown',
 description:
 'User-defined context object. May be updated from prepareStep between steps.',
@@ -336,12 +336,12 @@ Called before a tool's `execute` function runs.
 
 ```ts
 const result = await generateText({
-  model: openai('gpt-4o'),
-  prompt: 'What is the weather?',
+  model: openai("gpt-4o"),
+  prompt: "What is the weather?",
   tools: { getWeather },
-  experimental_onToolCallStart: event => {
-    console.log('Tool:', event.toolCall.toolName);
-    console.log('Input:', event.toolCall.input);
+  experimental_onToolCallStart: (event) => {
+    console.log("Tool:", event.toolCall.toolName);
+    console.log("Input:", event.toolCall.input);
   },
 });
 ```
@@ -414,7 +414,7 @@ type: 'Record\<string, unknown> | undefined',
 description: 'Additional metadata from telemetry settings.',
 },
 {
-name: 'experimental\_context',
+name: 'experimental_context',
 type: 'unknown',
 description:
 'User-defined context object flowing through the generation.',
@@ -428,17 +428,17 @@ Called after a tool's `execute` function completes or errors. Uses a discriminat
 
 ```ts
 const result = await generateText({
-  model: openai('gpt-4o'),
-  prompt: 'What is the weather?',
+  model: openai("gpt-4o"),
+  prompt: "What is the weather?",
   tools: { getWeather },
-  experimental_onToolCallFinish: event => {
-    console.log('Tool:', event.toolCall.toolName);
-    console.log('Duration:', event.durationMs, 'ms');
+  experimental_onToolCallFinish: (event) => {
+    console.log("Tool:", event.toolCall.toolName);
+    console.log("Duration:", event.durationMs, "ms");
 
     if (event.success) {
-      console.log('Output:', event.output);
+      console.log("Output:", event.output);
     } else {
-      console.error('Error:', event.error);
+      console.error("Error:", event.error);
     }
   },
 });
@@ -517,7 +517,7 @@ type: 'Record\<string, unknown> | undefined',
 description: 'Additional metadata from telemetry settings.',
 },
 {
-name: 'experimental\_context',
+name: 'experimental_context',
 type: 'unknown',
 description:
 'User-defined context object flowing through the generation.',
@@ -549,12 +549,12 @@ Called after each step (LLM call) completes. Provides the full `StepResult`.
 
 ```ts
 const result = await generateText({
-  model: openai('gpt-4o'),
-  prompt: 'Hello!',
-  onStepFinish: event => {
-    console.log('Step:', event.stepNumber);
-    console.log('Finish reason:', event.finishReason);
-    console.log('Tokens:', event.usage.totalTokens);
+  model: openai("gpt-4o"),
+  prompt: "Hello!",
+  onStepFinish: (event) => {
+    console.log("Step:", event.stepNumber);
+    console.log("Finish reason:", event.finishReason);
+    console.log("Tokens:", event.usage.totalTokens);
   },
 });
 ```
@@ -671,7 +671,7 @@ type: 'Record\<string, unknown> | undefined',
 description: 'Additional metadata from telemetry settings.',
 },
 {
-name: 'experimental\_context',
+name: 'experimental_context',
 type: 'unknown',
 description:
 'User-defined context object flowing through the generation.',
@@ -690,12 +690,12 @@ Called when the entire generation completes (all steps finished). Includes aggre
 
 ```ts
 const result = await generateText({
-  model: openai('gpt-4o'),
-  prompt: 'Hello!',
-  onFinish: event => {
-    console.log('Total steps:', event.steps.length);
-    console.log('Total tokens:', event.totalUsage.totalTokens);
-    console.log('Final text:', event.text);
+  model: openai("gpt-4o"),
+  prompt: "Hello!",
+  onFinish: (event) => {
+    console.log("Total steps:", event.steps.length);
+    console.log("Total tokens:", event.totalUsage.totalTokens);
+    console.log("Final text:", event.text);
   },
 });
 ```
@@ -824,7 +824,7 @@ type: 'Record\<string, unknown> | undefined',
 description: 'Additional metadata from telemetry settings.',
 },
 {
-name: 'experimental\_context',
+name: 'experimental_context',
 type: 'unknown',
 description: 'The final state of the user-defined context object.',
 },
@@ -841,18 +841,18 @@ description: 'Additional provider-specific metadata from the final step.',
 ### Logging and Debugging
 
 ```ts
-import { generateText } from 'ai';
+import { generateText } from "ai";
 
 const result = await generateText({
-  model: openai('gpt-4o'),
-  prompt: 'Hello!',
-  experimental_onStart: event => {
+  model: openai("gpt-4o"),
+  prompt: "Hello!",
+  experimental_onStart: (event) => {
     console.log(`[${new Date().toISOString()}] Generation started`, {
       model: event.model.modelId,
       provider: event.model.provider,
     });
   },
-  onStepFinish: event => {
+  onStepFinish: (event) => {
     console.log(
       `[${new Date().toISOString()}] Step ${event.stepNumber} finished`,
       {
@@ -861,7 +861,7 @@ const result = await generateText({
       },
     );
   },
-  onFinish: event => {
+  onFinish: (event) => {
     console.log(`[${new Date().toISOString()}] Generation complete`, {
       totalSteps: event.steps.length,
       totalTokens: event.totalUsage.totalTokens,
@@ -873,16 +873,16 @@ const result = await generateText({
 ### Tool Execution Monitoring
 
 ```ts
-import { generateText } from 'ai';
+import { generateText } from "ai";
 
 const result = await generateText({
-  model: openai('gpt-4o'),
-  prompt: 'What is the weather?',
+  model: openai("gpt-4o"),
+  prompt: "What is the weather?",
   tools: { getWeather },
-  experimental_onToolCallStart: event => {
+  experimental_onToolCallStart: (event) => {
     console.log(`Tool "${event.toolCall.toolName}" starting...`);
   },
-  experimental_onToolCallFinish: event => {
+  experimental_onToolCallFinish: (event) => {
     if (event.success) {
       console.log(
         `Tool "${event.toolCall.toolName}" completed in ${event.durationMs}ms`,
@@ -900,10 +900,10 @@ Errors thrown inside callbacks are caught and do not break the generation flow. 
 
 ```ts
 const result = await generateText({
-  model: openai('gpt-4o'),
-  prompt: 'Hello!',
+  model: openai("gpt-4o"),
+  prompt: "Hello!",
   experimental_onStart: () => {
-    throw new Error('This error is caught internally');
+    throw new Error("This error is caught internally");
     // Generation continues normally
   },
 });

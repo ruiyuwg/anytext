@@ -1,10 +1,19 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
-import type { SourceConfig, SourcesFile, ManifestLibrary, ProcessedTopic } from "./types.js";
+import type {
+  SourceConfig,
+  SourcesFile,
+  ManifestLibrary,
+  ProcessedTopic,
+} from "./types.js";
 import { llmsFullAdapter } from "./adapters/llms-full.js";
 import { llmsTxtAdapter } from "./adapters/llms-txt.js";
 import { manualAdapter } from "./adapters/manual.js";
-import { readManifest, writeManifest, mergeLibrary } from "./pipeline/manifest.js";
+import {
+  readManifest,
+  writeManifest,
+  mergeLibrary,
+} from "./pipeline/manifest.js";
 
 const adapters = {
   "llms-full": llmsFullAdapter,
@@ -19,7 +28,10 @@ export function loadSources(): SourceConfig[] {
   return parsed.sources;
 }
 
-export async function processSource(source: SourceConfig, dryRun: boolean): Promise<ProcessedTopic[]> {
+export async function processSource(
+  source: SourceConfig,
+  dryRun: boolean,
+): Promise<ProcessedTopic[]> {
   console.log(`\nProcessing ${source.name} (${source.adapter})...`);
 
   const adapter = adapters[source.adapter];
@@ -66,7 +78,7 @@ export async function processSource(source: SourceConfig, dryRun: boolean): Prom
 
 export async function processAll(
   sources: SourceConfig[],
-  dryRun: boolean
+  dryRun: boolean,
 ): Promise<{ total: number; failed: number }> {
   let failed = 0;
   for (const source of sources) {
@@ -74,9 +86,13 @@ export async function processAll(
       await processSource(source, dryRun);
     } catch (err) {
       failed++;
-      console.error(`  ERROR processing ${source.id}: ${(err as Error).message}`);
+      console.error(
+        `  ERROR processing ${source.id}: ${(err as Error).message}`,
+      );
     }
   }
-  console.log(`\nSummary: ${sources.length - failed}/${sources.length} sources processed successfully`);
+  console.log(
+    `\nSummary: ${sources.length - failed}/${sources.length} sources processed successfully`,
+  );
   return { total: sources.length, failed };
 }

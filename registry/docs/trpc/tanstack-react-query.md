@@ -10,14 +10,14 @@ No! The integration is fully optional. You can use `@tanstack/react-query` using
 
 ```ts title='utils/trpc.ts'
 export const trpc = createTRPCClient<AppRouter>({
-  links: [httpBatchLink({ url: 'YOUR_API_URL' })],
+  links: [httpBatchLink({ url: "YOUR_API_URL" })],
 });
 ```
 
 ```tsx title='components/PostList.tsx'
 function PostList() {
   const { data } = useQuery({
-    queryKey: ['posts'],
+    queryKey: ["posts"],
     queryFn: () => trpc.post.list.query(),
   });
   data; // Post[]
@@ -76,10 +76,10 @@ Then, create a tRPC client, and wrap your application in the `TRPCProvider`, as 
 If you already use React Query in your application, you **should** re-use the `QueryClient` and `QueryClientProvider` you already have. You can read more about the QueryClient initialization in the [React Query docs](https://tanstack.com/query/latest/docs/framework/react/guides/advanced-ssr#initial-setup).
 
 ```tsx title='components/App.tsx'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { createTRPCClient, httpBatchLink } from '@trpc/client';
-import { useState } from 'react';
-import { TRPCProvider } from './utils/trpc';
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { createTRPCClient, httpBatchLink } from "@trpc/client";
+import { useState } from "react";
+import { TRPCProvider } from "./utils/trpc";
 
 function makeQueryClient() {
   return new QueryClient({
@@ -96,7 +96,7 @@ function makeQueryClient() {
 let browserQueryClient: QueryClient | undefined = undefined;
 
 function getQueryClient() {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     // Server: always make a new query client
     return makeQueryClient();
   } else {
@@ -115,7 +115,7 @@ export function App() {
     createTRPCClient<AppRouter>({
       links: [
         httpBatchLink({
-          url: 'http://localhost:2022',
+          url: "http://localhost:2022",
         }),
       ],
     }),
@@ -140,15 +140,15 @@ If you want to prefix all queries and mutations with a specific key, see [Query 
 When building an SPA using only client-side rendering with something like Vite, you can create the `QueryClient` and tRPC client outside of React context as singletons.
 
 ```ts title='utils/trpc.ts'
-import { QueryClient } from '@tanstack/react-query';
-import { createTRPCClient, httpBatchLink } from '@trpc/client';
-import { createTRPCOptionsProxy } from '@trpc/tanstack-react-query';
-import type { AppRouter } from '../server/router';
+import { QueryClient } from "@tanstack/react-query";
+import { createTRPCClient, httpBatchLink } from "@trpc/client";
+import { createTRPCOptionsProxy } from "@trpc/tanstack-react-query";
+import type { AppRouter } from "../server/router";
 
 export const queryClient = new QueryClient();
 
 const trpcClient = createTRPCClient<AppRouter>({
-  links: [httpBatchLink({ url: 'http://localhost:2022' })],
+  links: [httpBatchLink({ url: "http://localhost:2022" })],
 });
 
 export const trpc = createTRPCOptionsProxy<AppRouter>({
@@ -158,9 +158,9 @@ export const trpc = createTRPCOptionsProxy<AppRouter>({
 ```
 
 ```tsx title='components/App.tsx'
-import { QueryClientProvider } from '@tanstack/react-query';
-import React from 'react';
-import { queryClient } from './utils/trpc';
+import { QueryClientProvider } from "@tanstack/react-query";
+import React from "react";
+import { queryClient } from "./utils/trpc";
 
 export function App() {
   return (
@@ -176,20 +176,20 @@ export function App() {
 You can now use the tRPC React Query integration to call queries and mutations on your API.
 
 ```tsx title='components/user-list.tsx'
-import { useMutation, useQuery } from '@tanstack/react-query';
-import { useTRPC } from '../utils/trpc';
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { useTRPC } from "../utils/trpc";
 
 export default function UserList() {
   const trpc = useTRPC(); // use `import { trpc } from './utils/trpc'` if you're using the singleton pattern
 
-  const userQuery = useQuery(trpc.getUser.queryOptions({ id: 'id_bilbo' }));
+  const userQuery = useQuery(trpc.getUser.queryOptions({ id: "id_bilbo" }));
   const userCreator = useMutation(trpc.createUser.mutationOptions());
 
   return (
     <div>
       <p>{userQuery.data?.name}</p>
 
-      <button onClick={() => userCreator.mutate({ name: 'Frodo' })}>
+      <button onClick={() => userCreator.mutate({ name: "Frodo" })}>
         Create Frodo
       </button>
     </div>

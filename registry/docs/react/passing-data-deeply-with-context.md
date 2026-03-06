@@ -1,13 +1,13 @@
 # Passing Data Deeply with Context
 
-Usually, you will pass information from a parent component to a child component via props. But passing props can become verbose and inconvenient if you have to pass them through many components in the middle, or if many components in your app need the same information. *Context* lets the parent component make some information available to any component in the tree below it—no matter how deep—without passing it explicitly through props.
+Usually, you will pass information from a parent component to a child component via props. But passing props can become verbose and inconvenient if you have to pass them through many components in the middle, or if many components in your app need the same information. _Context_ lets the parent component make some information available to any component in the tree below it—no matter how deep—without passing it explicitly through props.
 
 - What "prop drilling" is
 - How to replace repetitive prop passing with context
 - Common use cases for context
 - Common alternatives to context
 
-## The problem with passing props {/*the-problem-with-passing-props*/}
+## The problem with passing props {/_the-problem-with-passing-props_/}
 
 [Passing props](/learn/passing-props-to-a-component) is a great way to explicitly pipe data through your UI tree to the components that use it.
 
@@ -19,13 +19,13 @@ Prop drilling
 
 Wouldn't it be great if there were a way to "teleport" data to the components in the tree that need it without passing props? With React's context feature, there is!
 
-## Context: an alternative to passing props {/*context-an-alternative-to-passing-props*/}
+## Context: an alternative to passing props {/_context-an-alternative-to-passing-props_/}
 
 Context lets a parent component provide data to the entire tree below it. There are many uses for context. Here is one example. Consider this `Heading` component that accepts a `level` for its size:
 
 ```js
-import Heading from './Heading.js';
-import Section from './Section.js';
+import Heading from "./Heading.js";
+import Section from "./Section.js";
 
 export default function Page() {
   return (
@@ -43,11 +43,7 @@ export default function Page() {
 
 ```js src/Section.js
 export default function Section({ children }) {
-  return (
-    <section className="section">
-      {children}
-    </section>
-  );
+  return <section className="section">{children}</section>;
 }
 ```
 
@@ -67,7 +63,7 @@ export default function Heading({ level, children }) {
     case 6:
       return <h6>{children}</h6>;
     default:
-      throw Error('Unknown level: ' + level);
+      throw Error("Unknown level: " + level);
   }
 }
 ```
@@ -84,8 +80,8 @@ export default function Heading({ level, children }) {
 Let's say you want multiple headings within the same `Section` to always have the same size:
 
 ```js
-import Heading from './Heading.js';
-import Section from './Section.js';
+import Heading from "./Heading.js";
+import Section from "./Section.js";
 
 export default function Page() {
   return (
@@ -113,11 +109,7 @@ export default function Page() {
 
 ```js src/Section.js
 export default function Section({ children }) {
-  return (
-    <section className="section">
-      {children}
-    </section>
-  );
+  return <section className="section">{children}</section>;
 }
 ```
 
@@ -137,7 +129,7 @@ export default function Heading({ level, children }) {
     case 6:
       return <h6>{children}</h6>;
     default:
-      throw Error('Unknown level: ' + level);
+      throw Error("Unknown level: " + level);
   }
 }
 ```
@@ -185,13 +177,13 @@ Using context in close children
 
 Using context in distant children
 
-### Step 1: Create the context {/*step-1-create-the-context*/}
+### Step 1: Create the context {/_step-1-create-the-context_/}
 
 First, you need to create the context. You'll need to **export it from a file** so that your components can use it:
 
 ```js
-import Heading from './Heading.js';
-import Section from './Section.js';
+import Heading from "./Heading.js";
+import Section from "./Section.js";
 
 export default function Page() {
   return (
@@ -219,11 +211,7 @@ export default function Page() {
 
 ```js src/Section.js
 export default function Section({ children }) {
-  return (
-    <section className="section">
-      {children}
-    </section>
-  );
+  return <section className="section">{children}</section>;
 }
 ```
 
@@ -243,13 +231,13 @@ export default function Heading({ level, children }) {
     case 6:
       return <h6>{children}</h6>;
     default:
-      throw Error('Unknown level: ' + level);
+      throw Error("Unknown level: " + level);
   }
 }
 ```
 
 ```js src/LevelContext.js active
-import { createContext } from 'react';
+import { createContext } from "react";
 
 export const LevelContext = createContext(1);
 ```
@@ -263,15 +251,15 @@ export const LevelContext = createContext(1);
 }
 ```
 
-The only argument to `createContext` is the *default* value. Here, `1` refers to the biggest heading level, but you could pass any kind of value (even an object). You will see the significance of the default value in the next step.
+The only argument to `createContext` is the _default_ value. Here, `1` refers to the biggest heading level, but you could pass any kind of value (even an object). You will see the significance of the default value in the next step.
 
-### Step 2: Use the context {/*step-2-use-the-context*/}
+### Step 2: Use the context {/_step-2-use-the-context_/}
 
 Import the `useContext` Hook from React and your context:
 
 ```js
-import { useContext } from 'react';
-import { LevelContext } from './LevelContext.js';
+import { useContext } from "react";
+import { LevelContext } from "./LevelContext.js";
 ```
 
 Currently, the `Heading` component reads `level` from props:
@@ -316,8 +304,8 @@ Update the JSX so that it's the `Section` that receives it instead:
 As a reminder, this is the markup that you were trying to get working:
 
 ```js
-import Heading from './Heading.js';
-import Section from './Section.js';
+import Heading from "./Heading.js";
+import Section from "./Section.js";
 
 export default function Page() {
   return (
@@ -345,17 +333,13 @@ export default function Page() {
 
 ```js src/Section.js
 export default function Section({ children }) {
-  return (
-    <section className="section">
-      {children}
-    </section>
-  );
+  return <section className="section">{children}</section>;
 }
 ```
 
 ```js src/Heading.js
-import { useContext } from 'react';
-import { LevelContext } from './LevelContext.js';
+import { useContext } from "react";
+import { LevelContext } from "./LevelContext.js";
 
 export default function Heading({ children }) {
   const level = useContext(LevelContext);
@@ -373,13 +357,13 @@ export default function Heading({ children }) {
     case 6:
       return <h6>{children}</h6>;
     default:
-      throw Error('Unknown level: ' + level);
+      throw Error("Unknown level: " + level);
   }
 }
 ```
 
 ```js src/LevelContext.js
-import { createContext } from 'react';
+import { createContext } from "react";
 
 export const LevelContext = createContext(1);
 ```
@@ -393,35 +377,29 @@ export const LevelContext = createContext(1);
 }
 ```
 
-Notice this example doesn't quite work, yet! All the headings have the same size because **even though you're *using* the context, you have not *provided* it yet.** React doesn't know where to get it!
+Notice this example doesn't quite work, yet! All the headings have the same size because **even though you're _using_ the context, you have not _provided_ it yet.** React doesn't know where to get it!
 
 If you don't provide the context, React will use the default value you've specified in the previous step. In this example, you specified `1` as the argument to `createContext`, so `useContext(LevelContext)` returns `1`, setting all those headings to `<h1>`. Let's fix this problem by having each `Section` provide its own context.
 
-### Step 3: Provide the context {/*step-3-provide-the-context*/}
+### Step 3: Provide the context {/_step-3-provide-the-context_/}
 
 The `Section` component currently renders its children:
 
 ```js
 export default function Section({ children }) {
-  return (
-    <section className="section">
-      {children}
-    </section>
-  );
+  return <section className="section">{children}</section>;
 }
 ```
 
 **Wrap them with a context provider** to provide the `LevelContext` to them:
 
 ```js {1,6,8}
-import { LevelContext } from './LevelContext.js';
+import { LevelContext } from "./LevelContext.js";
 
 export default function Section({ level, children }) {
   return (
     <section className="section">
-      <LevelContext value={level}>
-        {children}
-      </LevelContext>
+      <LevelContext value={level}>{children}</LevelContext>
     </section>
   );
 }
@@ -430,8 +408,8 @@ export default function Section({ level, children }) {
 This tells React: "if any component inside this `<Section>` asks for `LevelContext`, give them this `level`." The component will use the value of the nearest `<LevelContext>` in the UI tree above it.
 
 ```js
-import Heading from './Heading.js';
-import Section from './Section.js';
+import Heading from "./Heading.js";
+import Section from "./Section.js";
 
 export default function Page() {
   return (
@@ -458,22 +436,20 @@ export default function Page() {
 ```
 
 ```js src/Section.js
-import { LevelContext } from './LevelContext.js';
+import { LevelContext } from "./LevelContext.js";
 
 export default function Section({ level, children }) {
   return (
     <section className="section">
-      <LevelContext value={level}>
-        {children}
-      </LevelContext>
+      <LevelContext value={level}>{children}</LevelContext>
     </section>
   );
 }
 ```
 
 ```js src/Heading.js
-import { useContext } from 'react';
-import { LevelContext } from './LevelContext.js';
+import { useContext } from "react";
+import { LevelContext } from "./LevelContext.js";
 
 export default function Heading({ children }) {
   const level = useContext(LevelContext);
@@ -491,13 +467,13 @@ export default function Heading({ children }) {
     case 6:
       return <h6>{children}</h6>;
     default:
-      throw Error('Unknown level: ' + level);
+      throw Error("Unknown level: " + level);
   }
 }
 ```
 
 ```js src/LevelContext.js
-import { createContext } from 'react';
+import { createContext } from "react";
 
 export const LevelContext = createContext(1);
 ```
@@ -517,7 +493,7 @@ It's the same result as the original code, but you did not need to pass the `lev
 2. `Section` wraps its children into `<LevelContext value={level}>`.
 3. `Heading` asks the closest value of `LevelContext` above with `useContext(LevelContext)`.
 
-## Using and providing context from the same component {/*using-and-providing-context-from-the-same-component*/}
+## Using and providing context from the same component {/_using-and-providing-context-from-the-same-component_/}
 
 Currently, you still have to specify each section's `level` manually:
 
@@ -535,26 +511,24 @@ export default function Page() {
 Since context lets you read information from a component above, each `Section` could read the `level` from the `Section` above, and pass `level + 1` down automatically. Here is how you could do it:
 
 ```js src/Section.js {5,8}
-import { useContext } from 'react';
-import { LevelContext } from './LevelContext.js';
+import { useContext } from "react";
+import { LevelContext } from "./LevelContext.js";
 
 export default function Section({ children }) {
   const level = useContext(LevelContext);
   return (
     <section className="section">
-      <LevelContext value={level + 1}>
-        {children}
-      </LevelContext>
+      <LevelContext value={level + 1}>{children}</LevelContext>
     </section>
   );
 }
 ```
 
-With this change, you don't need to pass the `level` prop *either* to the `<Section>` or to the `<Heading>`:
+With this change, you don't need to pass the `level` prop _either_ to the `<Section>` or to the `<Heading>`:
 
 ```js
-import Heading from './Heading.js';
-import Section from './Section.js';
+import Heading from "./Heading.js";
+import Section from "./Section.js";
 
 export default function Page() {
   return (
@@ -581,30 +555,28 @@ export default function Page() {
 ```
 
 ```js src/Section.js
-import { useContext } from 'react';
-import { LevelContext } from './LevelContext.js';
+import { useContext } from "react";
+import { LevelContext } from "./LevelContext.js";
 
 export default function Section({ children }) {
   const level = useContext(LevelContext);
   return (
     <section className="section">
-      <LevelContext value={level + 1}>
-        {children}
-      </LevelContext>
+      <LevelContext value={level + 1}>{children}</LevelContext>
     </section>
   );
 }
 ```
 
 ```js src/Heading.js
-import { useContext } from 'react';
-import { LevelContext } from './LevelContext.js';
+import { useContext } from "react";
+import { LevelContext } from "./LevelContext.js";
 
 export default function Heading({ children }) {
   const level = useContext(LevelContext);
   switch (level) {
     case 0:
-      throw Error('Heading must be inside a Section!');
+      throw Error("Heading must be inside a Section!");
     case 1:
       return <h1>{children}</h1>;
     case 2:
@@ -618,13 +590,13 @@ export default function Heading({ children }) {
     case 6:
       return <h6>{children}</h6>;
     default:
-      throw Error('Unknown level: ' + level);
+      throw Error("Unknown level: " + level);
   }
 }
 ```
 
 ```js src/LevelContext.js
-import { createContext } from 'react';
+import { createContext } from "react";
 
 export const LevelContext = createContext(0);
 ```
@@ -642,24 +614,21 @@ Now both `Heading` and `Section` read the `LevelContext` to figure out how "deep
 
 This example uses heading levels because they show visually how nested components can override context. But context is useful for many other use cases too. You can pass down any information needed by the entire subtree: the current color theme, the currently logged in user, and so on.
 
-## Context passes through intermediate components {/*context-passes-through-intermediate-components*/}
+## Context passes through intermediate components {/_context-passes-through-intermediate-components_/}
 
 You can insert as many components as you like between the component that provides context and the one that uses it. This includes both built-in components like `<div>` and components you might build yourself.
 
 In this example, the same `Post` component (with a dashed border) is rendered at two different nesting levels. Notice that the `<Heading>` inside of it gets its level automatically from the closest `<Section>`:
 
 ```js
-import Heading from './Heading.js';
-import Section from './Section.js';
+import Heading from "./Heading.js";
+import Section from "./Section.js";
 
 export default function ProfilePage() {
   return (
     <Section>
       <Heading>My Profile</Heading>
-      <Post
-        title="Hello traveller!"
-        body="Read about my adventures."
-      />
+      <Post title="Hello traveller!" body="Read about my adventures." />
       <AllPosts />
     </Section>
   );
@@ -678,14 +647,8 @@ function RecentPosts() {
   return (
     <Section>
       <Heading>Recent Posts</Heading>
-      <Post
-        title="Flavors of Lisbon"
-        body="...those pastéis de nata!"
-      />
-      <Post
-        title="Buenos Aires in the rhythm of tango"
-        body="I loved it!"
-      />
+      <Post title="Flavors of Lisbon" body="...those pastéis de nata!" />
+      <Post title="Buenos Aires in the rhythm of tango" body="I loved it!" />
     </Section>
   );
 }
@@ -693,43 +656,38 @@ function RecentPosts() {
 function Post({ title, body }) {
   return (
     <Section isFancy={true}>
-      <Heading>
-        {title}
-      </Heading>
-      <p><i>{body}</i></p>
+      <Heading>{title}</Heading>
+      <p>
+        <i>{body}</i>
+      </p>
     </Section>
   );
 }
 ```
 
 ```js src/Section.js
-import { useContext } from 'react';
-import { LevelContext } from './LevelContext.js';
+import { useContext } from "react";
+import { LevelContext } from "./LevelContext.js";
 
 export default function Section({ children, isFancy }) {
   const level = useContext(LevelContext);
   return (
-    <section className={
-      'section ' +
-      (isFancy ? 'fancy' : '')
-    }>
-      <LevelContext value={level + 1}>
-        {children}
-      </LevelContext>
+    <section className={"section " + (isFancy ? "fancy" : "")}>
+      <LevelContext value={level + 1}>{children}</LevelContext>
     </section>
   );
 }
 ```
 
 ```js src/Heading.js
-import { useContext } from 'react';
-import { LevelContext } from './LevelContext.js';
+import { useContext } from "react";
+import { LevelContext } from "./LevelContext.js";
 
 export default function Heading({ children }) {
   const level = useContext(LevelContext);
   switch (level) {
     case 0:
-      throw Error('Heading must be inside a Section!');
+      throw Error("Heading must be inside a Section!");
     case 1:
       return <h1>{children}</h1>;
     case 2:
@@ -743,13 +701,13 @@ export default function Heading({ children }) {
     case 6:
       return <h6>{children}</h6>;
     default:
-      throw Error('Unknown level: ' + level);
+      throw Error("Unknown level: " + level);
   }
 }
 ```
 
 ```js src/LevelContext.js
-import { createContext } from 'react';
+import { createContext } from "react";
 
 export const LevelContext = createContext(0);
 ```
@@ -769,13 +727,13 @@ export const LevelContext = createContext(0);
 
 You didn't do anything special for this to work. A `Section` specifies the context for the tree inside it, so you can insert a `<Heading>` anywhere, and it will have the correct size. Try it in the sandbox above!
 
-**Context lets you write components that "adapt to their surroundings" and display themselves differently depending on *where* (or, in other words, *in which context*) they are being rendered.**
+**Context lets you write components that "adapt to their surroundings" and display themselves differently depending on _where_ (or, in other words, _in which context_) they are being rendered.**
 
 How context works might remind you of [CSS property inheritance.](https://developer.mozilla.org/en-US/docs/Web/CSS/inheritance) In CSS, you can specify `color: blue` for a `<div>`, and any DOM node inside of it, no matter how deep, will inherit that color unless some other DOM node in the middle overrides it with `color: green`. Similarly, in React, the only way to override some context coming from above is to wrap children into a context provider with a different value.
 
-In CSS, different properties like `color` and `background-color` don't override each other. You can set all  `<div>`'s `color` to red without impacting `background-color`. Similarly, **different React contexts don't override each other.** Each context that you make with `createContext()` is completely separate from other ones, and ties together components using and providing *that particular* context. One component may use or provide many different contexts without a problem.
+In CSS, different properties like `color` and `background-color` don't override each other. You can set all `<div>`'s `color` to red without impacting `background-color`. Similarly, **different React contexts don't override each other.** Each context that you make with `createContext()` is completely separate from other ones, and ties together components using and providing _that particular_ context. One component may use or provide many different contexts without a problem.
 
-## Before you use context {/*before-you-use-context*/}
+## Before you use context {/_before-you-use-context_/}
 
 Context is very tempting to use! However, this also means it's too easy to overuse it. **Just because you need to pass some props several levels deep doesn't mean you should put that information into context.**
 
@@ -786,7 +744,7 @@ Here's a few alternatives you should consider before using context:
 
 If neither of these approaches works well for you, consider context.
 
-## Use cases for context {/*use-cases-for-context*/}
+## Use cases for context {/_use-cases-for-context_/}
 
 - **Theming:** If your app lets the user change its appearance (e.g. dark mode), you can put a context provider at the top of your app, and use that context in components that need to adjust their visual look.
 - **Current account:** Many components might need to know the currently logged in user. Putting it in context makes it convenient to read it anywhere in the tree. Some apps also let you operate multiple accounts at the same time (e.g. to leave a comment as a different user). In those cases, it can be convenient to wrap a part of the UI into a nested provider with a different current account value.
@@ -806,7 +764,7 @@ In general, if some information is needed by distant components in different par
 - Context lets you write components that "adapt to their surroundings".
 - Before you use context, try passing props or passing JSX as `children`.
 
-#### Replace prop drilling with context {/*replace-prop-drilling-with-context*/}
+#### Replace prop drilling with context {/_replace-prop-drilling-with-context_/}
 
 In this example, toggling the checkbox changes the `imageSize` prop passed to each `<PlaceImage>`. The checkbox state is held in the top-level `App` component, but each `<PlaceImage>` needs to be aware of it.
 
@@ -815,9 +773,9 @@ Currently, `App` passes `imageSize` to `List`, which passes it to each `Place`, 
 You can declare context in `Context.js`.
 
 ```js src/App.js
-import { useState } from 'react';
-import { places } from './data.js';
-import { getImageUrl } from './utils.js';
+import { useState } from "react";
+import { places } from "./data.js";
+import { getImageUrl } from "./utils.js";
 
 export default function App() {
   const [isLarge, setIsLarge] = useState(false);
@@ -828,7 +786,7 @@ export default function App() {
         <input
           type="checkbox"
           checked={isLarge}
-          onChange={e => {
+          onChange={(e) => {
             setIsLarge(e.target.checked);
           }}
         />
@@ -837,31 +795,25 @@ export default function App() {
       <hr />
       <List imageSize={imageSize} />
     </>
-  )
+  );
 }
 
 function List({ imageSize }) {
-  const listItems = places.map(place =>
+  const listItems = places.map((place) => (
     <li key={place.id}>
-      <Place
-        place={place}
-        imageSize={imageSize}
-      />
+      <Place place={place} imageSize={imageSize} />
     </li>
-  );
+  ));
   return <ul>{listItems}</ul>;
 }
 
 function Place({ place, imageSize }) {
   return (
     <>
-      <PlaceImage
-        place={place}
-        imageSize={imageSize}
-      />
+      <PlaceImage place={place} imageSize={imageSize} />
       <p>
         <b>{place.name}</b>
-        {': ' + place.description}
+        {": " + place.description}
       </p>
     </>
   );
@@ -880,62 +832,77 @@ function PlaceImage({ place, imageSize }) {
 ```
 
 ```js src/Context.js
+
 ```
 
 ```js src/data.js
-export const places = [{
-  id: 0,
-  name: 'Bo-Kaap in Cape Town, South Africa',
-  description: 'The tradition of choosing bright colors for houses began in the late 20th century.',
-  imageId: 'K9HVAGH'
-}, {
-  id: 1, 
-  name: 'Rainbow Village in Taichung, Taiwan',
-  description: 'To save the houses from demolition, Huang Yung-Fu, a local resident, painted all 1,200 of them in 1924.',
-  imageId: '9EAYZrt'
-}, {
-  id: 2, 
-  name: 'Macromural de Pachuca, Mexico',
-  description: 'One of the largest murals in the world covering homes in a hillside neighborhood.',
-  imageId: 'DgXHVwu'
-}, {
-  id: 3, 
-  name: 'Selarón Staircase in Rio de Janeiro, Brazil',
-  description: 'This landmark was created by Jorge Selarón, a Chilean-born artist, as a "tribute to the Brazilian people."',
-  imageId: 'aeO3rpI'
-}, {
-  id: 4, 
-  name: 'Burano, Italy',
-  description: 'The houses are painted following a specific color system dating back to 16th century.',
-  imageId: 'kxsph5C'
-}, {
-  id: 5, 
-  name: 'Chefchaouen, Marocco',
-  description: 'There are a few theories on why the houses are painted blue, including that the color repels mosquitos or that it symbolizes sky and heaven.',
-  imageId: 'rTqKo46'
-}, {
-  id: 6,
-  name: 'Gamcheon Culture Village in Busan, South Korea',
-  description: 'In 2009, the village was converted into a cultural hub by painting the houses and featuring exhibitions and art installations.',
-  imageId: 'ZfQOOzf'
-}];
+export const places = [
+  {
+    id: 0,
+    name: "Bo-Kaap in Cape Town, South Africa",
+    description:
+      "The tradition of choosing bright colors for houses began in the late 20th century.",
+    imageId: "K9HVAGH",
+  },
+  {
+    id: 1,
+    name: "Rainbow Village in Taichung, Taiwan",
+    description:
+      "To save the houses from demolition, Huang Yung-Fu, a local resident, painted all 1,200 of them in 1924.",
+    imageId: "9EAYZrt",
+  },
+  {
+    id: 2,
+    name: "Macromural de Pachuca, Mexico",
+    description:
+      "One of the largest murals in the world covering homes in a hillside neighborhood.",
+    imageId: "DgXHVwu",
+  },
+  {
+    id: 3,
+    name: "Selarón Staircase in Rio de Janeiro, Brazil",
+    description:
+      'This landmark was created by Jorge Selarón, a Chilean-born artist, as a "tribute to the Brazilian people."',
+    imageId: "aeO3rpI",
+  },
+  {
+    id: 4,
+    name: "Burano, Italy",
+    description:
+      "The houses are painted following a specific color system dating back to 16th century.",
+    imageId: "kxsph5C",
+  },
+  {
+    id: 5,
+    name: "Chefchaouen, Marocco",
+    description:
+      "There are a few theories on why the houses are painted blue, including that the color repels mosquitos or that it symbolizes sky and heaven.",
+    imageId: "rTqKo46",
+  },
+  {
+    id: 6,
+    name: "Gamcheon Culture Village in Busan, South Korea",
+    description:
+      "In 2009, the village was converted into a cultural hub by painting the houses and featuring exhibitions and art installations.",
+    imageId: "ZfQOOzf",
+  },
+];
 ```
 
 ```js src/utils.js
 export function getImageUrl(place) {
-  return (
-    'https://i.imgur.com/' +
-    place.imageId +
-    'l.jpg'
-  );
+  return "https://i.imgur.com/" + place.imageId + "l.jpg";
 }
 ```
 
 ```css
-ul { list-style-type: none; padding: 0px 10px; }
-li { 
-  margin-bottom: 10px; 
-  display: grid; 
+ul {
+  list-style-type: none;
+  padding: 0px 10px;
+}
+li {
+  margin-bottom: 10px;
+  display: grid;
   grid-template-columns: auto 1fr;
   gap: 20px;
   align-items: center;
@@ -947,23 +914,21 @@ Remove `imageSize` prop from all the components.
 Create and export `ImageSizeContext` from `Context.js`. Then wrap the List into `<ImageSizeContext value={imageSize}>` to pass the value down, and `useContext(ImageSizeContext)` to read it in the `PlaceImage`:
 
 ```js src/App.js
-import { useState, useContext } from 'react';
-import { places } from './data.js';
-import { getImageUrl } from './utils.js';
-import { ImageSizeContext } from './Context.js';
+import { useState, useContext } from "react";
+import { places } from "./data.js";
+import { getImageUrl } from "./utils.js";
+import { ImageSizeContext } from "./Context.js";
 
 export default function App() {
   const [isLarge, setIsLarge] = useState(false);
   const imageSize = isLarge ? 150 : 100;
   return (
-    <ImageSizeContext
-      value={imageSize}
-    >
+    <ImageSizeContext value={imageSize}>
       <label>
         <input
           type="checkbox"
           checked={isLarge}
-          onChange={e => {
+          onChange={(e) => {
             setIsLarge(e.target.checked);
           }}
         />
@@ -972,15 +937,15 @@ export default function App() {
       <hr />
       <List />
     </ImageSizeContext>
-  )
+  );
 }
 
 function List() {
-  const listItems = places.map(place =>
+  const listItems = places.map((place) => (
     <li key={place.id}>
       <Place place={place} />
     </li>
-  );
+  ));
   return <ul>{listItems}</ul>;
 }
 
@@ -990,7 +955,7 @@ function Place({ place }) {
       <PlaceImage place={place} />
       <p>
         <b>{place.name}</b>
-        {': ' + place.description}
+        {": " + place.description}
       </p>
     </>
   );
@@ -1010,65 +975,79 @@ function PlaceImage({ place }) {
 ```
 
 ```js src/Context.js
-import { createContext } from 'react';
+import { createContext } from "react";
 
 export const ImageSizeContext = createContext(500);
 ```
 
 ```js src/data.js
-export const places = [{
-  id: 0,
-  name: 'Bo-Kaap in Cape Town, South Africa',
-  description: 'The tradition of choosing bright colors for houses began in the late 20th century.',
-  imageId: 'K9HVAGH'
-}, {
-  id: 1, 
-  name: 'Rainbow Village in Taichung, Taiwan',
-  description: 'To save the houses from demolition, Huang Yung-Fu, a local resident, painted all 1,200 of them in 1924.',
-  imageId: '9EAYZrt'
-}, {
-  id: 2, 
-  name: 'Macromural de Pachuca, Mexico',
-  description: 'One of the largest murals in the world covering homes in a hillside neighborhood.',
-  imageId: 'DgXHVwu'
-}, {
-  id: 3, 
-  name: 'Selarón Staircase in Rio de Janeiro, Brazil',
-  description: 'This landmark was created by Jorge Selarón, a Chilean-born artist, as a "tribute to the Brazilian people".',
-  imageId: 'aeO3rpI'
-}, {
-  id: 4, 
-  name: 'Burano, Italy',
-  description: 'The houses are painted following a specific color system dating back to 16th century.',
-  imageId: 'kxsph5C'
-}, {
-  id: 5, 
-  name: 'Chefchaouen, Marocco',
-  description: 'There are a few theories on why the houses are painted blue, including that the color repels mosquitos or that it symbolizes sky and heaven.',
-  imageId: 'rTqKo46'
-}, {
-  id: 6,
-  name: 'Gamcheon Culture Village in Busan, South Korea',
-  description: 'In 2009, the village was converted into a cultural hub by painting the houses and featuring exhibitions and art installations.',
-  imageId: 'ZfQOOzf'
-}];
+export const places = [
+  {
+    id: 0,
+    name: "Bo-Kaap in Cape Town, South Africa",
+    description:
+      "The tradition of choosing bright colors for houses began in the late 20th century.",
+    imageId: "K9HVAGH",
+  },
+  {
+    id: 1,
+    name: "Rainbow Village in Taichung, Taiwan",
+    description:
+      "To save the houses from demolition, Huang Yung-Fu, a local resident, painted all 1,200 of them in 1924.",
+    imageId: "9EAYZrt",
+  },
+  {
+    id: 2,
+    name: "Macromural de Pachuca, Mexico",
+    description:
+      "One of the largest murals in the world covering homes in a hillside neighborhood.",
+    imageId: "DgXHVwu",
+  },
+  {
+    id: 3,
+    name: "Selarón Staircase in Rio de Janeiro, Brazil",
+    description:
+      'This landmark was created by Jorge Selarón, a Chilean-born artist, as a "tribute to the Brazilian people".',
+    imageId: "aeO3rpI",
+  },
+  {
+    id: 4,
+    name: "Burano, Italy",
+    description:
+      "The houses are painted following a specific color system dating back to 16th century.",
+    imageId: "kxsph5C",
+  },
+  {
+    id: 5,
+    name: "Chefchaouen, Marocco",
+    description:
+      "There are a few theories on why the houses are painted blue, including that the color repels mosquitos or that it symbolizes sky and heaven.",
+    imageId: "rTqKo46",
+  },
+  {
+    id: 6,
+    name: "Gamcheon Culture Village in Busan, South Korea",
+    description:
+      "In 2009, the village was converted into a cultural hub by painting the houses and featuring exhibitions and art installations.",
+    imageId: "ZfQOOzf",
+  },
+];
 ```
 
 ```js src/utils.js
 export function getImageUrl(place) {
-  return (
-    'https://i.imgur.com/' +
-    place.imageId +
-    'l.jpg'
-  );
+  return "https://i.imgur.com/" + place.imageId + "l.jpg";
 }
 ```
 
 ```css
-ul { list-style-type: none; padding: 0px 10px; }
-li { 
-  margin-bottom: 10px; 
-  display: grid; 
+ul {
+  list-style-type: none;
+  padding: 0px 10px;
+}
+li {
+  margin-bottom: 10px;
+  display: grid;
   grid-template-columns: auto 1fr;
   gap: 20px;
   align-items: center;
@@ -1077,7 +1056,7 @@ li {
 
 Note how components in the middle don't need to pass `imageSize` anymore.
 
-***
+---
 
 ## Sitemap
 

@@ -17,7 +17,7 @@ export type CacheConfig = {
   /** retain existing TTL when updating a key */
   keepTtl?: boolean;
   /** options for HEXPIRE (hash-field TTL) */
-  hexOptions?: 'NX' | 'XX' | 'GT' | 'LT' | 'nx' | 'xx' | 'gt' | 'lt';
+  hexOptions?: "NX" | "XX" | "GT" | "LT" | "nx" | "xx" | "gt" | "lt";
 };
 ```
 
@@ -202,15 +202,15 @@ If you're expecting values above 2^31 but below 2^53, you can utilize `mode: 'nu
 ```typescript
 import { bigint, cockroachTable } from "drizzle-orm/cockroach-core";
 
-export const table = cockroachTable('table', {
-	bigint: bigint({ mode: 'number' })
+export const table = cockroachTable("table", {
+  bigint: bigint({ mode: "number" }),
 });
 
 // will be inferred as `number`
-bigint: bigint({ mode: 'number' })
+bigint: bigint({ mode: "number" });
 
 // will be inferred as `bigint`
-bigint: bigint({ mode: 'bigint' })
+bigint: bigint({ mode: "bigint" });
 ```
 
 ```sql
@@ -223,9 +223,9 @@ CREATE TABLE "table" (
 import { sql } from "drizzle-orm";
 import { bigint, cockroachTable } from "drizzle-orm/cockroach-core";
 
-export const table = cockroachTable('table', {
-	bigint1: bigint().default(10),
-	bigint2: bigint().default(sql`'10'::bigint`)
+export const table = cockroachTable("table", {
+  bigint1: bigint().default(10),
+  bigint2: bigint().default(sql`'10'::bigint`),
 });
 ```
 
@@ -244,8 +244,8 @@ Small-range signed 2-byte integer
 ```typescript
 import { smallint, cockroachTable } from "drizzle-orm/cockroach-core";
 
-export const table = cockroachTable('table', {
-	smallint: smallint()
+export const table = cockroachTable("table", {
+  smallint: smallint(),
 });
 ```
 
@@ -259,9 +259,9 @@ CREATE TABLE "table" (
 import { sql } from "drizzle-orm";
 import { smallint, cockroachTable } from "drizzle-orm/cockroach-core";
 
-export const table = cockroachTable('table', {
-	smallint1: smallint().default(10),
-	smallint2: smallint().default(sql`'10'::smallint`)
+export const table = cockroachTable("table", {
+  smallint1: smallint().default(10),
+  smallint2: smallint().default(sql`'10'::smallint`),
 });
 ```
 
@@ -279,10 +279,9 @@ Signed 4-byte integer
 ```typescript
 import { int4, cockroachTable } from "drizzle-orm/cockroach-core";
 
-export const table = cockroachTable('table', {
-	int4: int4()
+export const table = cockroachTable("table", {
+  int4: int4(),
 });
-
 ```
 
 ```sql
@@ -295,9 +294,9 @@ CREATE TABLE "table" (
 import { sql } from "drizzle-orm";
 import { int4, cockroachTable } from "drizzle-orm/cockroach-core";
 
-export const table = cockroachTable('table', {
-	int1: int4().default(10),
-	int2: int4().default(sql`'10'::int4`)
+export const table = cockroachTable("table", {
+  int1: int4().default(10),
+  int2: int4().default(sql`'10'::int4`),
 });
 ```
 
@@ -325,10 +324,9 @@ For more info please refer to the official Cockroach **[docs.](https://www.cockr
 ```typescript
 import { bool, cockroachTable } from "drizzle-orm/cockroach-core";
 
-export const table = cockroachTable('table', {
-	boolean: bool()
+export const table = cockroachTable("table", {
+  boolean: bool(),
 });
-
 ```
 
 ```sql
@@ -356,13 +354,13 @@ You can define `{ enum: ["value1", "value2"] }` config to infer `insert` and `se
 ```typescript
 import { string, cockroachTable } from "drizzle-orm/cockroach-core";
 
-export const table = cockroachTable('table', {
+export const table = cockroachTable("table", {
   stringColumn: string(), // equivalent to `text` PostgreSQL type
   stringColumn1: string({ length: 256 }), // equivalent to `varchar(256)` PostgreSQL type
 });
 
 // will be inferred as text: "value1" | "value2" | null
-stringColumn: string({ enum: ["value1", "value2"] })
+stringColumn: string({ enum: ["value1", "value2"] });
 ```
 
 ```sql
@@ -383,12 +381,12 @@ You can define `{ enum: ["value1", "value2"] }` config to infer `insert` and `se
 ```typescript
 import { text, cockroachTable } from "drizzle-orm/cockroach-core";
 
-export const table = cockroachTable('table', {
-  text: text()
+export const table = cockroachTable("table", {
+  text: text(),
 });
 
 // will be inferred as text: "value1" | "value2" | null
-text: text({ enum: ["value1", "value2"] })
+text: text({ enum: ["value1", "value2"] });
 ```
 
 ```sql
@@ -471,12 +469,12 @@ For more info please refer to the official CockroachDB **[docs.](https://www.coc
 ```typescript
 import { decimal, cockroachTable } from "drizzle-orm/cockroach-core";
 
-export const table = cockroachTable('table', {
+export const table = cockroachTable("table", {
   decimal1: decimal(),
   decimal2: decimal({ precision: 100 }),
   decimal3: decimal({ precision: 100, scale: 20 }),
-  decimalNum: decimal({ mode: 'number' }),
-  decimalBig: decimal({ mode: 'bigint' }),
+  decimalNum: decimal({ mode: "number" }),
+  decimalBig: decimal({ mode: "bigint" }),
 });
 ```
 
@@ -502,12 +500,12 @@ For more info please refer to the official CockroachDB **[docs.](https://www.coc
 
 ```typescript
 import { sql } from "drizzle-orm";
-import { float, cockroachTable } from "drizzle-orm/cockroach-core";  
+import { float, cockroachTable } from "drizzle-orm/cockroach-core";
 
-const table = cockroachTable('table', {
-	float1: float(),
-	float2: float().default(10.10),
-	float3: float().default(sql`'10.10'::float`),
+const table = cockroachTable("table", {
+  float1: float(),
+  float2: float().default(10.1),
+  float3: float().default(sql`'10.10'::float`),
 });
 ```
 
@@ -528,12 +526,12 @@ For more info please refer to the official CockroachDB **[docs.](https://www.coc
 
 ```typescript
 import { sql } from "drizzle-orm";
-import { real, cockroachTable } from "drizzle-orm/cockroach-core";  
+import { real, cockroachTable } from "drizzle-orm/cockroach-core";
 
-const table = cockroachTable('table', {
-	real1: real(),
-	real2: real().default(10.10),
-	real3: real().default(sql`'10.10'::real`),
+const table = cockroachTable("table", {
+  real1: real(),
+  real2: real().default(10.1),
+  real3: real().default(sql`'10.10'::real`),
 });
 ```
 
@@ -560,10 +558,10 @@ For more info please refer to the official CockroachDB **[docs.](https://www.coc
 ```typescript
 import { jsonb, cockroachTable } from "drizzle-orm/cockroach-core";
 
-const table = cockroachTable('table', {
-	jsonb1: jsonb(),
-	jsonb2: jsonb().default({ foo: "bar" }),
-	jsonb3: jsonb().default(sql`'{foo: "bar"}'::jsonb`),
+const table = cockroachTable("table", {
+  jsonb1: jsonb(),
+  jsonb2: jsonb().default({ foo: "bar" }),
+  jsonb3: jsonb().default(sql`'{foo: "bar"}'::jsonb`),
 });
 ```
 
@@ -599,10 +597,10 @@ The BIT data types store bit arrays. With BIT, the length is fixed.
 
 The number of bits in a BIT value is determined as follows:
 
-| Type declaration		| Logical size	|
-|:------------------		|:--------------	|
-| BIT						| 1 bit				|
-| BIT(N)					| N bits			|
+| Type declaration | Logical size |
+| :--------------- | :----------- |
+| BIT              | 1 bit        |
+| BIT(N)           | N bits       |
 
 For more info please refer to the official CockroachDB **[docs.](https://www.cockroachlabs.com/docs/stable/bit)**
 
@@ -610,11 +608,11 @@ For more info please refer to the official CockroachDB **[docs.](https://www.coc
 import { sql } from "drizzle-orm";
 import { cockroachTable, bit } from "drizzle-orm/cockroach-core";
 
-export const table = cockroachTable('table', {
-	bit1: bit(),
-	bit2: bit({ length: 15 }),
-	bit3: bit({ length: 15 }).default('10011'),
-	bit4: bit({ length: 15 }).default(sql`'10011'`)
+export const table = cockroachTable("table", {
+  bit1: bit(),
+  bit2: bit({ length: 15 }),
+  bit3: bit({ length: 15 }).default("10011"),
+  bit4: bit({ length: 15 }).default(sql`'10011'`),
 });
 ```
 
@@ -638,10 +636,10 @@ The VARBIT data types store bit arrays. With VARBIT, the length can be variable.
 
 The number of bits in a VARBIT value is determined as follows:
 
-| Type declaration		| Logical size													|
-|:------------------		|:--------------													|
-| VARBIT					| variable with no maximum							|
-| VARBIT(N)					| variable with a maximum of N bits	|
+| Type declaration | Logical size                      |
+| :--------------- | :-------------------------------- |
+| VARBIT           | variable with no maximum          |
+| VARBIT(N)        | variable with a maximum of N bits |
 
 For more info please refer to the official CockroachDB **[docs.](https://www.cockroachlabs.com/docs/stable/bit)**
 
@@ -649,11 +647,11 @@ For more info please refer to the official CockroachDB **[docs.](https://www.coc
 import { sql } from "drizzle-orm";
 import { cockroachTable, bit } from "drizzle-orm/cockroach-core";
 
-export const table = cockroachTable('table', {
-	varbit1: varbit(),
-	varbit2: varbit({ length: 15 }),
-	varbit3: varbit({ length: 15 }).default('10011'),
-	varbit4: varbit({ length: 15 }).default(sql`'10011'`)
+export const table = cockroachTable("table", {
+  varbit1: varbit(),
+  varbit2: varbit({ length: 15 }),
+  varbit3: varbit({ length: 15 }).default("10011"),
+  varbit4: varbit({ length: 15 }).default(sql`'10011'`),
 });
 ```
 
@@ -677,10 +675,10 @@ For more info please refer to the official CockroachDB **[docs.](https://www.coc
 ```ts
 import { uuid, cockroachTable } from "drizzle-orm/cockroach-core";
 
-const table = cockroachTable('table', {
+const table = cockroachTable("table", {
   uuid1: uuid(),
   uuid2: uuid().defaultRandom(),
-  uuid3: uuid().default('a0ee-bc99-9c0b-4ef8-bb6d-6bb9-bd38-0a11')
+  uuid3: uuid().default("a0ee-bc99-9c0b-4ef8-bb6d-6bb9-bd38-0a11"),
 });
 ```
 
@@ -704,11 +702,11 @@ For more info please refer to the official CockroachDB **[docs.](https://www.coc
 ```typescript
 import { time, cockroachTable } from "drizzle-orm/cockroach-core";
 
-const table = cockroachTable('table', {
+const table = cockroachTable("table", {
   time1: time(),
   time2: time({ withTimezone: true }),
   time3: time({ precision: 6 }),
-  time4: time({ precision: 6, withTimezone: true })
+  time4: time({ precision: 6, withTimezone: true }),
 });
 ```
 
@@ -733,11 +731,11 @@ For more info please refer to the official CockroachDB **[docs.](https://www.coc
 import { sql } from "drizzle-orm";
 import { timestamp, cockroachTable } from "drizzle-orm/cockroach-core";
 
-const table = cockroachTable('table', {
+const table = cockroachTable("table", {
   timestamp1: timestamp(),
-	timestamp2: timestamp({ precision: 6, withTimezone: true }),
-	timestamp3: timestamp().defaultNow(),
-	timestamp4: timestamp().default(sql`now()`),
+  timestamp2: timestamp({ precision: 6, withTimezone: true }),
+  timestamp3: timestamp().defaultNow(),
+  timestamp4: timestamp().default(sql`now()`),
 });
 ```
 
@@ -778,8 +776,8 @@ For more info please refer to the official CockroachDB **[docs.](https://www.coc
 ```typescript
 import { date, cockroachTable } from "drizzle-orm/cockroach-core";
 
-const table = cockroachTable('table', {
-	date: date(),
+const table = cockroachTable("table", {
+  date: date(),
 });
 ```
 
@@ -810,12 +808,11 @@ For more info please refer to the official CockroachDB **[docs.](https://www.coc
 ```typescript
 import { interval, cockroachTable } from "drizzle-orm/cockroach-core";
 
-const table = cockroachTable('table', {
-	interval1: interval(),
-  interval2: interval({ fields: 'day' }),
-  interval3: interval({ fields: 'month' , precision: 6 }),
+const table = cockroachTable("table", {
+  interval1: interval(),
+  interval2: interval({ fields: "day" }),
+  interval3: interval({ fields: "month", precision: 6 }),
 });
-
 ```
 
 ```sql
@@ -838,9 +835,9 @@ For more info please refer to the official CockroachDB **[docs.](https://www.coc
 ```typescript
 import { cockroachEnum, cockroachTable } from "drizzle-orm/cockroach-core";
 
-export const moodEnum = cockroachEnum('mood', ['sad', 'ok', 'happy']);
+export const moodEnum = cockroachEnum("mood", ["sad", "ok", "happy"]);
 
-export const table = cockroachTable('table', {
+export const table = cockroachTable("table", {
   mood: moodEnum(),
 });
 ```
@@ -860,13 +857,13 @@ Every column builder has a `.$type()` method, which allows you to customize the 
 This is useful, for example, with unknown or branded types:
 
 ```ts
-type UserId = number & { __brand: 'user_id' };
+type UserId = number & { __brand: "user_id" };
 type Data = {
-	foo: string;
-	bar: number;
+  foo: string;
+  bar: number;
 };
 
-const users = cockroachTable('users', {
+const users = cockroachTable("users", {
   id: int().$type<UserId>().primaryKey(),
   jsonField: json().$type<Data>(),
 });
@@ -886,7 +883,7 @@ PostgreSQL and CockroachDB supports identity columns as a way to automatically g
 **Usage example**
 
 ```ts
-import { pgTable, integer, text } from 'drizzle-orm/pg-core' 
+import { pgTable, integer, text } from "drizzle-orm/pg-core";
 
 export const ingredients = pgTable("ingredients", {
   id: integer().primaryKey().generatedAlwaysAsIdentity({ startWith: 1000 }),

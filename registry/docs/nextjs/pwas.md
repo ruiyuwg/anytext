@@ -17,56 +17,56 @@ Next.js provides built-in support for creating a [web app manifest](/docs/app/ap
 For example, create a `app/manifest.ts` or `app/manifest.json` file:
 
 ```tsx filename="app/manifest.ts" switcher
-import type { MetadataRoute } from 'next'
+import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Next.js PWA',
-    short_name: 'NextPWA',
-    description: 'A Progressive Web App built with Next.js',
-    start_url: '/',
-    display: 'standalone',
-    background_color: '#ffffff',
-    theme_color: '#000000',
+    name: "Next.js PWA",
+    short_name: "NextPWA",
+    description: "A Progressive Web App built with Next.js",
+    start_url: "/",
+    display: "standalone",
+    background_color: "#ffffff",
+    theme_color: "#000000",
     icons: [
       {
-        src: '/icon-192x192.png',
-        sizes: '192x192',
-        type: 'image/png',
+        src: "/icon-192x192.png",
+        sizes: "192x192",
+        type: "image/png",
       },
       {
-        src: '/icon-512x512.png',
-        sizes: '512x512',
-        type: 'image/png',
+        src: "/icon-512x512.png",
+        sizes: "512x512",
+        type: "image/png",
       },
     ],
-  }
+  };
 }
 ```
 
 ```jsx filename="app/manifest.js" switcher
 export default function manifest() {
   return {
-    name: 'Next.js PWA',
-    short_name: 'NextPWA',
-    description: 'A Progressive Web App built with Next.js',
-    start_url: '/',
-    display: 'standalone',
-    background_color: '#ffffff',
-    theme_color: '#000000',
+    name: "Next.js PWA",
+    short_name: "NextPWA",
+    description: "A Progressive Web App built with Next.js",
+    start_url: "/",
+    display: "standalone",
+    background_color: "#ffffff",
+    theme_color: "#000000",
     icons: [
       {
-        src: '/icon-192x192.png',
-        sizes: '192x192',
-        type: 'image/png',
+        src: "/icon-192x192.png",
+        sizes: "192x192",
+        type: "image/png",
       },
       {
-        src: '/icon-512x512.png',
-        sizes: '512x512',
-        type: 'image/png',
+        src: "/icon-512x512.png",
+        sizes: "512x512",
+        type: "image/png",
       },
     ],
-  }
+  };
 }
 ```
 
@@ -90,44 +90,44 @@ Web Push Notifications allow you to re-engage users even when they're not active
 First, let's create the main page component in `app/page.tsx`. We'll break it down into smaller parts for better understanding. First, we’ll add some of the imports and utilities we’ll need. It’s okay that the referenced Server Actions do not yet exist:
 
 ```tsx switcher
-'use client'
+"use client";
 
-import { useState, useEffect } from 'react'
-import { subscribeUser, unsubscribeUser, sendNotification } from './actions'
+import { useState, useEffect } from "react";
+import { subscribeUser, unsubscribeUser, sendNotification } from "./actions";
 
 function urlBase64ToUint8Array(base64String: string) {
-  const padding = '='.repeat((4 - (base64String.length % 4)) % 4)
-  const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/')
+  const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
+  const base64 = (base64String + padding).replace(/-/g, "+").replace(/_/g, "/");
 
-  const rawData = window.atob(base64)
-  const outputArray = new Uint8Array(rawData.length)
+  const rawData = window.atob(base64);
+  const outputArray = new Uint8Array(rawData.length);
 
   for (let i = 0; i < rawData.length; ++i) {
-    outputArray[i] = rawData.charCodeAt(i)
+    outputArray[i] = rawData.charCodeAt(i);
   }
-  return outputArray
+  return outputArray;
 }
 ```
 
 ```jsx switcher
-'use client'
+"use client";
 
-import { useState, useEffect } from 'react'
-import { subscribeUser, unsubscribeUser, sendNotification } from './actions'
+import { useState, useEffect } from "react";
+import { subscribeUser, unsubscribeUser, sendNotification } from "./actions";
 
 function urlBase64ToUint8Array(base64String) {
-  const padding = '='.repeat((4 - (base64String.length % 4)) % 4)
+  const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
   const base64 = (base64String + padding)
-    .replace(/\\-/g, '+')
-    .replace(/_/g, '/')
+    .replace(/\\-/g, "+")
+    .replace(/_/g, "/");
 
-  const rawData = window.atob(base64)
-  const outputArray = new Uint8Array(rawData.length)
+  const rawData = window.atob(base64);
+  const outputArray = new Uint8Array(rawData.length);
 
   for (let i = 0; i < rawData.length; ++i) {
-    outputArray[i] = rawData.charCodeAt(i)
+    outputArray[i] = rawData.charCodeAt(i);
   }
-  return outputArray
+  return outputArray;
 }
 ```
 
@@ -135,56 +135,56 @@ Let’s now add a component to manage subscribing, unsubscribing, and sending pu
 
 ```tsx switcher
 function PushNotificationManager() {
-  const [isSupported, setIsSupported] = useState(false)
+  const [isSupported, setIsSupported] = useState(false);
   const [subscription, setSubscription] = useState<PushSubscription | null>(
-    null
-  )
-  const [message, setMessage] = useState('')
+    null,
+  );
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
-    if ('serviceWorker' in navigator && 'PushManager' in window) {
-      setIsSupported(true)
-      registerServiceWorker()
+    if ("serviceWorker" in navigator && "PushManager" in window) {
+      setIsSupported(true);
+      registerServiceWorker();
     }
-  }, [])
+  }, []);
 
   async function registerServiceWorker() {
-    const registration = await navigator.serviceWorker.register('/sw.js', {
-      scope: '/',
-      updateViaCache: 'none',
-    })
-    const sub = await registration.pushManager.getSubscription()
-    setSubscription(sub)
+    const registration = await navigator.serviceWorker.register("/sw.js", {
+      scope: "/",
+      updateViaCache: "none",
+    });
+    const sub = await registration.pushManager.getSubscription();
+    setSubscription(sub);
   }
 
   async function subscribeToPush() {
-    const registration = await navigator.serviceWorker.ready
+    const registration = await navigator.serviceWorker.ready;
     const sub = await registration.pushManager.subscribe({
       userVisibleOnly: true,
       applicationServerKey: urlBase64ToUint8Array(
-        process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!
+        process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!,
       ),
-    })
-    setSubscription(sub)
-    const serializedSub = JSON.parse(JSON.stringify(sub))
-    await subscribeUser(serializedSub)
+    });
+    setSubscription(sub);
+    const serializedSub = JSON.parse(JSON.stringify(sub));
+    await subscribeUser(serializedSub);
   }
 
   async function unsubscribeFromPush() {
-    await subscription?.unsubscribe()
-    setSubscription(null)
-    await unsubscribeUser()
+    await subscription?.unsubscribe();
+    setSubscription(null);
+    await unsubscribeUser();
   }
 
   async function sendTestNotification() {
     if (subscription) {
-      await sendNotification(message)
-      setMessage('')
+      await sendNotification(message);
+      setMessage("");
     }
   }
 
   if (!isSupported) {
-    return <p>Push notifications are not supported in this browser.</p>
+    return <p>Push notifications are not supported in this browser.</p>;
   }
 
   return (
@@ -209,7 +209,7 @@ function PushNotificationManager() {
         </>
       )}
     </div>
-  )
+  );
 }
 ```
 
@@ -294,19 +294,19 @@ Finally, let’s create a component to show a message for iOS devices to instruc
 
 ```tsx switcher
 function InstallPrompt() {
-  const [isIOS, setIsIOS] = useState(false)
-  const [isStandalone, setIsStandalone] = useState(false)
+  const [isIOS, setIsIOS] = useState(false);
+  const [isStandalone, setIsStandalone] = useState(false);
 
   useEffect(() => {
     setIsIOS(
-      /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream
-    )
+      /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream,
+    );
 
-    setIsStandalone(window.matchMedia('(display-mode: standalone)').matches)
-  }, [])
+    setIsStandalone(window.matchMedia("(display-mode: standalone)").matches);
+  }, []);
 
   if (isStandalone) {
-    return null // Don't show install button if already installed
+    return null; // Don't show install button if already installed
   }
 
   return (
@@ -317,19 +317,19 @@ function InstallPrompt() {
         <p>
           To install this app on your iOS device, tap the share button
           <span role="img" aria-label="share icon">
-            {' '}
-            ⎋{' '}
+            {" "}
+            ⎋{" "}
           </span>
           and then "Add to Home Screen"
           <span role="img" aria-label="plus icon">
-            {' '}
-            ➕{' '}
+            {" "}
+            ➕{" "}
           </span>
           .
         </p>
       )}
     </div>
-  )
+  );
 }
 
 export default function Page() {
@@ -338,7 +338,7 @@ export default function Page() {
       <PushNotificationManager />
       <InstallPrompt />
     </div>
-  )
+  );
 }
 ```
 
@@ -399,50 +399,50 @@ Now, let’s create the Server Actions which this file calls.
 Create a new file to contain your actions at `app/actions.ts`. This file will handle creating subscriptions, deleting subscriptions, and sending notifications.
 
 ```tsx filename="app/actions.ts" switcher
-'use server'
+"use server";
 
-import webpush from 'web-push'
+import webpush from "web-push";
 
 webpush.setVapidDetails(
-  '<mailto:your-email@example.com>',
+  "<mailto:your-email@example.com>",
   process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!,
-  process.env.VAPID_PRIVATE_KEY!
-)
+  process.env.VAPID_PRIVATE_KEY!,
+);
 
-let subscription: PushSubscription | null = null
+let subscription: PushSubscription | null = null;
 
 export async function subscribeUser(sub: PushSubscription) {
-  subscription = sub
+  subscription = sub;
   // In a production environment, you would want to store the subscription in a database
   // For example: await db.subscriptions.create({ data: sub })
-  return { success: true }
+  return { success: true };
 }
 
 export async function unsubscribeUser() {
-  subscription = null
+  subscription = null;
   // In a production environment, you would want to remove the subscription from the database
   // For example: await db.subscriptions.delete({ where: { ... } })
-  return { success: true }
+  return { success: true };
 }
 
 export async function sendNotification(message: string) {
   if (!subscription) {
-    throw new Error('No subscription available')
+    throw new Error("No subscription available");
   }
 
   try {
     await webpush.sendNotification(
       subscription,
       JSON.stringify({
-        title: 'Test Notification',
+        title: "Test Notification",
         body: message,
-        icon: '/icon.png',
-      })
-    )
-    return { success: true }
+        icon: "/icon.png",
+      }),
+    );
+    return { success: true };
   } catch (error) {
-    console.error('Error sending push notification:', error)
-    return { success: false, error: 'Failed to send notification' }
+    console.error("Error sending push notification:", error);
+    return { success: false, error: "Failed to send notification" };
   }
 }
 ```
@@ -540,28 +540,28 @@ VAPID_PRIVATE_KEY=your_private_key_here
 Create a `public/sw.js` file for your service worker:
 
 ```js filename="public/sw.js"
-self.addEventListener('push', function (event) {
+self.addEventListener("push", function (event) {
   if (event.data) {
-    const data = event.data.json()
+    const data = event.data.json();
     const options = {
       body: data.body,
-      icon: data.icon || '/icon.png',
-      badge: '/badge.png',
+      icon: data.icon || "/icon.png",
+      badge: "/badge.png",
       vibrate: [100, 50, 100],
       data: {
         dateOfArrival: Date.now(),
-        primaryKey: '2',
+        primaryKey: "2",
       },
-    }
-    event.waitUntil(self.registration.showNotification(data.title, options))
+    };
+    event.waitUntil(self.registration.showNotification(data.title, options));
   }
-})
+});
 
-self.addEventListener('notificationclick', function (event) {
-  console.log('Notification click received.')
-  event.notification.close()
-  event.waitUntil(clients.openWindow('<https://your-website.com>'))
-})
+self.addEventListener("notificationclick", function (event) {
+  console.log("Notification click received.");
+  event.notification.close();
+  event.waitUntil(clients.openWindow("<https://your-website.com>"));
+});
 ```
 
 This service worker supports custom images and notifications. It handles incoming push events and notification clicks.
@@ -603,42 +603,42 @@ module.exports = {
   async headers() {
     return [
       {
-        source: '/(.*)',
+        source: "/(.*)",
         headers: [
           {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
+            key: "X-Content-Type-Options",
+            value: "nosniff",
           },
           {
-            key: 'X-Frame-Options',
-            value: 'DENY',
+            key: "X-Frame-Options",
+            value: "DENY",
           },
           {
-            key: 'Referrer-Policy',
-            value: 'strict-origin-when-cross-origin',
+            key: "Referrer-Policy",
+            value: "strict-origin-when-cross-origin",
           },
         ],
       },
       {
-        source: '/sw.js',
+        source: "/sw.js",
         headers: [
           {
-            key: 'Content-Type',
-            value: 'application/javascript; charset=utf-8',
+            key: "Content-Type",
+            value: "application/javascript; charset=utf-8",
           },
           {
-            key: 'Cache-Control',
-            value: 'no-cache, no-store, must-revalidate',
+            key: "Cache-Control",
+            value: "no-cache, no-store, must-revalidate",
           },
           {
-            key: 'Content-Security-Policy',
+            key: "Content-Security-Policy",
             value: "default-src 'self'; script-src 'self'",
           },
         ],
       },
-    ]
+    ];
   },
-}
+};
 ```
 
 Let’s go over each of these options:

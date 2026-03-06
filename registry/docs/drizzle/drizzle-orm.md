@@ -4,7 +4,7 @@ Drizzle ORM is a headless TypeScript ORM with a head. 🐲
 
 > Drizzle is a good friend who's there for you when necessary and doesn't bother when you need some space.
 
-It looks and feels simple, performs on day *1000* of your project,\
+It looks and feels simple, performs on day _1000_ of your project,\
 lets you do things your way, and is there when you need it.
 
 **It's the only ORM with both [relational](/docs/rqb) and [SQL-like](/docs/select) query APIs**,
@@ -18,7 +18,7 @@ Drizzle is not just a library, it's an experience. 🤩
 
 First and foremost, Drizzle is a library and a collection of complementary opt-in tools.
 
-**ORM** stands for *object relational mapping*, and developers tend to call Django-like or Spring-like tools an ORM.
+**ORM** stands for _object relational mapping_, and developers tend to call Django-like or Spring-like tools an ORM.
 We truly believe it's a misconception based on legacy nomenclature, and we call them **data frameworks**.
 
 <Callout type="error" emoji="️💔">
@@ -29,7 +29,7 @@ We truly believe it's a misconception based on legacy nomenclature, and we call 
 
 Using Drizzle you can define and manage database schemas in TypeScript, access your data in a SQL-like
 or relational way, and take advantage of opt-in tools
-to push your developer experience *through the roof*. 🤯
+to push your developer experience _through the roof_. 🤯
 
 ## Why SQL-like?
 
@@ -50,23 +50,23 @@ We bring all the familiar **[SQL schema](/docs/sql-schema-declaration)**, **[que
 ```typescript copy
 // Access your data
 await db
-	.select()
-	.from(countries)
-	.leftJoin(cities, eq(cities.countryId, countries.id))
-	.where(eq(countries.id, 10))
+  .select()
+  .from(countries)
+  .leftJoin(cities, eq(cities.countryId, countries.id))
+  .where(eq(countries.id, 10));
 ```
 
 ```typescript copy
 // manage your schema
-export const countries = pgTable('countries', {
-  id: serial('id').primaryKey(),
-  name: varchar('name', { length: 256 }),
+export const countries = pgTable("countries", {
+  id: serial("id").primaryKey(),
+  name: varchar("name", { length: 256 }),
 });
 
-export const cities = pgTable('cities', {
-  id: serial('id').primaryKey(),
-  name: varchar('name', { length: 256 }),
-  countryId: integer('country_id').references(() => countries.id),
+export const cities = pgTable("cities", {
+  id: serial("id").primaryKey(),
+  name: varchar("name", { length: 256 }),
+  countryId: integer("country_id").references(() => countries.id),
 });
 ```
 
@@ -100,9 +100,9 @@ in the most convenient and performant way, and never think about joins and data 
 
 ```ts
 const result = await db.query.users.findMany({
-	with: {
-		posts: true
-	},
+  with: {
+    posts: true,
+  },
 });
 ```
 
@@ -134,9 +134,9 @@ Now go build something awesome with Drizzle and your **[PostgreSQL](/docs/get-st
 
 {/\* tRPC + NextJS App Router = Simple Typesafe APIs
 Jack Herrington 19:17
-https://www.youtube.com/watch?v=qCLV0Iaq9zU */}
-{/* https://www.youtube.com/watch?v=qDunJ0wVIec */}
-{/* https://www.youtube.com/watch?v=NZpPMlSAez0 \*/}
+https://www.youtube.com/watch?v=qCLV0Iaq9zU _/}
+{/_ https://www.youtube.com/watch?v=qDunJ0wVIec _/}
+{/_ https://www.youtube.com/watch?v=NZpPMlSAez0 \*/}
 
 {/\* https://www.youtube.com/watch?v=-A0kMiJqQRY \*/}
 
@@ -154,7 +154,7 @@ description: "Web Dev Simplified",
 time: "56:09"
 },
 {
-id: "i\_mAHOhpBSA",
+id: "i_mAHOhpBSA",
 title: "Drizzle ORM in 100 Seconds",
 description: "Fireship",
 time: "2:55"
@@ -226,7 +226,7 @@ description: "Ben Davis",
 time: "12:18"
 },
 {
-id: "b6VhN\_HHDiQ",
+id: "b6VhN_HHDiQ",
 title: "Build a Multi-Tenanted, Role-Based Access Control System",
 description: "TomDoesTech",
 time: "2:01:29"

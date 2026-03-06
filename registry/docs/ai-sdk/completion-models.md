@@ -5,14 +5,14 @@ The first argument is the model id.
 Currently only `gpt-3.5-turbo-instruct` is supported.
 
 ```ts
-const model = openai.completion('gpt-3.5-turbo-instruct');
+const model = openai.completion("gpt-3.5-turbo-instruct");
 ```
 
 OpenAI completion models support also some model specific settings that are not part of the [standard call settings](/docs/ai-sdk-core/settings).
 You can pass them as an options argument:
 
 ```ts
-const model = openai.completion('gpt-3.5-turbo-instruct');
+const model = openai.completion("gpt-3.5-turbo-instruct");
 
 await model.doGenerate({
   providerOptions: {
@@ -20,10 +20,10 @@ await model.doGenerate({
       echo: true, // optional, echo the prompt in addition to the completion
       logitBias: {
         // optional likelihood for specific tokens
-        '50256': -100,
+        "50256": -100,
       },
-      suffix: 'some text', // optional suffix that comes after a completion of inserted text
-      user: 'test-user', // optional unique user identifier
+      suffix: "some text", // optional suffix that comes after a completion of inserted text
+      user: "test-user", // optional unique user identifier
     } satisfies OpenAILanguageModelCompletionOptions,
   },
 });
@@ -31,11 +31,11 @@ await model.doGenerate({
 
 The following optional provider options are available for OpenAI completion models:
 
-- **echo**: *boolean*
+- **echo**: _boolean_
 
   Echo back the prompt in addition to the completion.
 
-- **logitBias** *Record\<number, number>*
+- **logitBias** _Record\<number, number>_
 
   Modifies the likelihood of specified tokens appearing in the completion.
 
@@ -50,7 +50,7 @@ The following optional provider options are available for OpenAI completion mode
   As an example, you can pass `{"50256": -100}` to prevent the <|endoftext|>
   token from being generated.
 
-- **logprobs** *boolean | number*
+- **logprobs** _boolean | number_
 
   Return the log probabilities of the tokens. Including logprobs will increase
   the response size and can slow down response times. However, it can
@@ -62,37 +62,37 @@ The following optional provider options are available for OpenAI completion mode
   Setting to a number will return the log probabilities of the top n
   tokens that were generated.
 
-- **suffix** *string*
+- **suffix** _string_
 
   The suffix that comes after a completion of inserted text.
 
-- **user** *string*
+- **user** _string_
 
   A unique identifier representing your end-user, which can help OpenAI to
   monitor and detect abuse. [Learn more](https://platform.openai.com/docs/guides/safety-best-practices/end-user-ids).
 
 ### Model Capabilities
 
-| Model                 | Image Input         | Audio Input         | Object Generation   | Tool Usage          |
-| --------------------- | ------------------- | ------------------- | ------------------- | ------------------- |
-| `gpt-5.2-pro`         |  |  |  |  |
-| `gpt-5.2-chat-latest` |  |  |  |  |
-| `gpt-5.2`             |  |  |  |  |
-| `gpt-5.1-codex-mini`  |  |  |  |  |
-| `gpt-5.1-codex`       |  |  |  |  |
-| `gpt-5.1-chat-latest` |  |  |  |  |
-| `gpt-5.1`             |  |  |  |  |
-| `gpt-5-pro`           |  |  |  |  |
-| `gpt-5`               |  |  |  |  |
-| `gpt-5-mini`          |  |  |  |  |
-| `gpt-5-nano`          |  |  |  |  |
-| `gpt-5-codex`         |  |  |  |  |
-| `gpt-5-chat-latest`   |  |  |  |  |
-| `gpt-4.1`             |  |  |  |  |
-| `gpt-4.1-mini`        |  |  |  |  |
-| `gpt-4.1-nano`        |  |  |  |  |
-| `gpt-4o`              |  |  |  |  |
-| `gpt-4o-mini`         |  |  |  |  |
+| Model                 | Image Input | Audio Input | Object Generation | Tool Usage |
+| --------------------- | ----------- | ----------- | ----------------- | ---------- |
+| `gpt-5.2-pro`         |             |             |                   |            |
+| `gpt-5.2-chat-latest` |             |             |                   |            |
+| `gpt-5.2`             |             |             |                   |            |
+| `gpt-5.1-codex-mini`  |             |             |                   |            |
+| `gpt-5.1-codex`       |             |             |                   |            |
+| `gpt-5.1-chat-latest` |             |             |                   |            |
+| `gpt-5.1`             |             |             |                   |            |
+| `gpt-5-pro`           |             |             |                   |            |
+| `gpt-5`               |             |             |                   |            |
+| `gpt-5-mini`          |             |             |                   |            |
+| `gpt-5-nano`          |             |             |                   |            |
+| `gpt-5-codex`         |             |             |                   |            |
+| `gpt-5-chat-latest`   |             |             |                   |            |
+| `gpt-4.1`             |             |             |                   |            |
+| `gpt-4.1-mini`        |             |             |                   |            |
+| `gpt-4.1-nano`        |             |             |                   |            |
+| `gpt-4o`              |             |             |                   |            |
+| `gpt-4o-mini`         |             |             |                   |            |
 
 The table above lists popular models. Please see the [OpenAI
 docs](https://platform.openai.com/docs/models) for a full list of available
@@ -105,23 +105,23 @@ You can create models that call the [OpenAI embeddings API](https://platform.ope
 using the `.embedding()` factory method.
 
 ```ts
-const model = openai.embedding('text-embedding-3-large');
+const model = openai.embedding("text-embedding-3-large");
 ```
 
 OpenAI embedding models support several additional provider options.
 You can pass them as an options argument:
 
 ```ts
-import { openai, type OpenAIEmbeddingModelOptions } from '@ai-sdk/openai';
-import { embed } from 'ai';
+import { openai, type OpenAIEmbeddingModelOptions } from "@ai-sdk/openai";
+import { embed } from "ai";
 
 const { embedding } = await embed({
-  model: openai.embedding('text-embedding-3-large'),
-  value: 'sunny day at the beach',
+  model: openai.embedding("text-embedding-3-large"),
+  value: "sunny day at the beach",
   providerOptions: {
     openai: {
       dimensions: 512, // optional, number of dimensions for the embedding
-      user: 'test-user', // optional unique user identifier
+      user: "test-user", // optional unique user identifier
     } satisfies OpenAIEmbeddingModelOptions,
   },
 });
@@ -129,20 +129,20 @@ const { embedding } = await embed({
 
 The following optional provider options are available for OpenAI embedding models:
 
-- **dimensions**: *number*
+- **dimensions**: _number_
 
   The number of dimensions the resulting output embeddings should have.
   Only supported in text-embedding-3 and later models.
 
-- **user** *string*
+- **user** _string_
 
   A unique identifier representing your end-user, which can help OpenAI to
   monitor and detect abuse. [Learn more](https://platform.openai.com/docs/guides/safety-best-practices/end-user-ids).
 
 ### Model Capabilities
 
-| Model                    | Default Dimensions | Custom Dimensions   |
-| ------------------------ | ------------------ | ------------------- |
-| `text-embedding-3-large` | 3072               |  |
-| `text-embedding-3-small` | 1536               |  |
-| `text-embedding-ada-002` | 1536               |  |
+| Model                    | Default Dimensions | Custom Dimensions |
+| ------------------------ | ------------------ | ----------------- |
+| `text-embedding-3-large` | 3072               |                   |
+| `text-embedding-3-small` | 1536               |                   |
+| `text-embedding-ada-002` | 1536               |                   |

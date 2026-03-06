@@ -7,8 +7,7 @@ vi.mock("../../registry.js", () => ({
 }));
 
 vi.mock("../../format.js", async (importOriginal) => {
-  const original =
-    await importOriginal<typeof import("../../format.js")>();
+  const original = await importOriginal<typeof import("../../format.js")>();
   return { ...original };
 });
 
@@ -57,7 +56,7 @@ describe("list", () => {
             topics: [makeTopic({ tags: [] })],
           },
         ],
-      })
+      }),
     );
     const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
     await list(["lib"]);
@@ -68,11 +67,13 @@ describe("list", () => {
   it("shows message when no libraries available", async () => {
     const registry = await import("../../registry.js");
     vi.mocked(registry.getManifest).mockResolvedValue(
-      makeManifest({ libraries: [] })
+      makeManifest({ libraries: [] }),
     );
     const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
     await list([]);
-    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("No libraries available"));
+    expect(logSpy).toHaveBeenCalledWith(
+      expect.stringContaining("No libraries available"),
+    );
   });
 
   it("shows message when library has no topics", async () => {
@@ -88,7 +89,7 @@ describe("list", () => {
             topics: [],
           },
         ],
-      })
+      }),
     );
     const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
     await list(["empty"]);
@@ -97,14 +98,14 @@ describe("list", () => {
 
   it("exits with error for unknown library", async () => {
     const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
-    const exitSpy = vi
-      .spyOn(process, "exit")
-      .mockImplementation((() => {
-        throw new Error("process.exit");
-      }) as never);
+    const exitSpy = vi.spyOn(process, "exit").mockImplementation((() => {
+      throw new Error("process.exit");
+    }) as never);
 
     await expect(list(["unknown"])).rejects.toThrow("process.exit");
     expect(exitSpy).toHaveBeenCalledWith(1);
-    expect(errorSpy).toHaveBeenCalledWith(expect.stringContaining("Unknown library"));
+    expect(errorSpy).toHaveBeenCalledWith(
+      expect.stringContaining("Unknown library"),
+    );
   });
 });

@@ -2,20 +2,20 @@
 
 > **New** — Introduced in Zod 4.1. Refer to the dedicated [Codecs](/codecs) page for more information.
 
-Codecs are a special kind of schema that implement *bidirectional transformations* between two other schemas.
+Codecs are a special kind of schema that implement _bidirectional transformations_ between two other schemas.
 
 ```ts
 const stringToDate = z.codec(
-  z.iso.datetime(),  // input schema: ISO date string
-  z.date(),          // output schema: Date object
+  z.iso.datetime(), // input schema: ISO date string
+  z.date(), // output schema: Date object
   {
     decode: (isoString) => new Date(isoString), // ISO string → Date
-    encode: (date) => date.toISOString(),       // Date → ISO string
-  }
+    encode: (date) => date.toISOString(), // Date → ISO string
+  },
 );
 ```
 
-A regular `.parse()` operations performs the *forward transform*. It calls the codec's `decode` function.
+A regular `.parse()` operations performs the _forward transform_. It calls the codec's `decode` function.
 
 ```ts
 stringToDate.parse("2024-01-15T10:30:00.000Z"); // => Date
@@ -27,7 +27,7 @@ You can alternatively use the top-level `z.decode()` function. Unlike `.parse()`
 z.decode(stringToDate, "2024-01-15T10:30:00.000Z"); // => Date
 ```
 
-To perform the *reverse transform*, use the inverse: `z.encode()`.
+To perform the _reverse transform_, use the inverse: `z.encode()`.
 
 ```ts
 z.encode(stringToDate, new Date("2024-01-15")); // => "2024-01-15T00:00:00.000Z"

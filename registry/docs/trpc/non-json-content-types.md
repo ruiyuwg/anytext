@@ -9,12 +9,12 @@ While tRPC natively supports several non-json serializable types, your client ma
 `httpLink` supports non-json content types out the box, if you're only using this then your existing setup should work immediately
 
 ```ts
-import { httpLink } from '@trpc/client';
+import { httpLink } from "@trpc/client";
 
 trpc.createClient({
   links: [
     httpLink({
-      url: 'http://localhost:2022',
+      url: "http://localhost:2022",
     }),
   ],
 });
@@ -28,7 +28,7 @@ import {
   httpLink,
   isNonJsonSerializable,
   splitLink,
-} from '@trpc/client';
+} from "@trpc/client";
 
 trpc.createClient({
   links: [
@@ -54,8 +54,8 @@ import {
   httpLink,
   isNonJsonSerializable,
   splitLink,
-} from '@trpc/client';
-import superjson from 'superjson';
+} from "@trpc/client";
+import superjson from "superjson";
 
 trpc.createClient({
   links: [
@@ -90,14 +90,28 @@ If you encounter errors like `Failed to parse body as XXX`, make sure that your 
 // incorrect
 const app = express();
 app.use(express.json()); // this try to parse body before tRPC.
-app.post('/express/hello', (req,res) => {/* ... */ }); // normal express route handler
-app.use('/trpc', trpcExpress.createExpressMiddleware({ /* ... */}))// tRPC fails to parse body
+app.post("/express/hello", (req, res) => {
+  /* ... */
+}); // normal express route handler
+app.use(
+  "/trpc",
+  trpcExpress.createExpressMiddleware({
+    /* ... */
+  }),
+); // tRPC fails to parse body
 
 // correct
 const app = express();
-app.use('/express', express.json()); // do it only in "/express/*" path
-app.post('/express/hello', (req,res) => {/* ... */ });
-app.use('/trpc', trpcExpress.createExpressMiddleware({ /* ... */}))// tRPC can parse body
+app.use("/express", express.json()); // do it only in "/express/*" path
+app.post("/express/hello", (req, res) => {
+  /* ... */
+});
+app.use(
+  "/trpc",
+  trpcExpress.createExpressMiddleware({
+    /* ... */
+  }),
+); // tRPC can parse body
 ```
 
 ### `FormData` Input
@@ -106,10 +120,10 @@ FormData is natively supported, and for more advanced usage you could also combi
 
 ```ts twoslash
 // @target: esnext
-import { initTRPC } from '@trpc/server';
+import { initTRPC } from "@trpc/server";
 // ---cut---
 
-import { z } from 'zod';
+import { z } from "zod";
 
 export const t = initTRPC.create();
 const publicProcedure = t.procedure;
@@ -119,7 +133,7 @@ export const appRouter = t.router({
     const data = opts.input;
     //    ^?
     return {
-      greeting: `Hello ${data.get('name')}`,
+      greeting: `Hello ${data.get("name")}`,
     };
   }),
 });
@@ -133,10 +147,10 @@ tRPC converts many octet content types to a `ReadableStream` which can be consum
 
 ```ts twoslash
 // @target: esnext
-import { initTRPC } from '@trpc/server';
+import { initTRPC } from "@trpc/server";
 // ---cut---
 
-import { octetInputParser } from '@trpc/server/http';
+import { octetInputParser } from "@trpc/server/http";
 
 export const t = initTRPC.create();
 const publicProcedure = t.procedure;

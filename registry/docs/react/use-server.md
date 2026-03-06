@@ -4,17 +4,17 @@
 
 `'use server'` marks server-side functions that can be called from client-side code.
 
-***
+---
 
-## Reference {/*reference*/}
+## Reference {/_reference_/}
 
-### `'use server'` {/*use-server*/}
+### `'use server'` {/_use-server_/}
 
-Add `'use server'` at the top of an async function body to mark the function as callable by the client. We call these functions [*Server Functions*](/reference/rsc/server-functions).
+Add `'use server'` at the top of an async function body to mark the function as callable by the client. We call these functions [_Server Functions_](/reference/rsc/server-functions).
 
 ```js {2}
 async function addToCart(data) {
-  'use server';
+  "use server";
   // ...
 }
 ```
@@ -23,7 +23,7 @@ When calling a Server Function on the client, it will make a network request to 
 
 Instead of individually marking functions with `'use server'`, you can add the directive to the top of a file to mark all exports within that file as Server Functions that can be used anywhere, including imported in client code.
 
-#### Caveats {/*caveats*/}
+#### Caveats {/_caveats_/}
 
 - `'use server'` must be at the very beginning of their function or module; above any other code including imports (comments above directives are OK). They must be written with single or double quotes, not backticks.
 - `'use server'` can only be used in server-side files. The resulting Server Functions can be passed to Client Components through props. See supported [types for serialization](#serializable-parameters-and-return-values).
@@ -33,7 +33,7 @@ Instead of individually marking functions with `'use server'`, you can add the d
 - Server Functions should be called in a [Transition](/reference/react/useTransition). Server Functions passed to [`<form action>`](/reference/react-dom/components/form#props) or [`formAction`](/reference/react-dom/components/input#props) will automatically be called in a transition.
 - Server Functions are designed for mutations that update server-side state; they are not recommended for data fetching. Accordingly, frameworks implementing Server Functions typically process one action at a time and do not have a way to cache the return value.
 
-### Security considerations {/*security*/}
+### Security considerations {/_security_/}
 
 Arguments to Server Functions are fully client-controlled. For security, always treat them as untrusted input, and make sure to validate and escape arguments as appropriate.
 
@@ -41,9 +41,9 @@ In any Server Function, make sure to validate that the logged-in user is allowed
 
 To prevent sending sensitive data from a Server Function, there are experimental taint APIs to prevent unique values and objects from being passed to client code.
 
-See [experimental\_taintUniqueValue](/reference/react/experimental_taintUniqueValue) and [experimental\_taintObjectReference](/reference/react/experimental_taintObjectReference).
+See [experimental_taintUniqueValue](/reference/react/experimental_taintUniqueValue) and [experimental_taintObjectReference](/reference/react/experimental_taintObjectReference).
 
-### Serializable arguments and return values {/*serializable-parameters-and-return-values*/}
+### Serializable arguments and return values {/_serializable-parameters-and-return-values_/}
 
 Since client code calls the Server Function over the network, any arguments passed will need to be serializable.
 
@@ -80,9 +80,9 @@ Notably, these are not supported:
 
 Supported serializable return values are the same as [serializable props](/reference/rsc/use-client#serializable-types) for a boundary Client Component.
 
-## Usage {/*usage*/}
+## Usage {/_usage_/}
 
-### Server Functions in forms {/*server-functions-in-forms*/}
+### Server Functions in forms {/_server-functions-in-forms_/}
 
 The most common use case of Server Functions will be calling functions that mutate data. On the browser, the [HTML form element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form) is the traditional approach for a user to submit a mutation. With React Server Components, React introduces first-class support for Server Functions as Actions in [forms](/reference/react-dom/components/form).
 
@@ -92,8 +92,8 @@ Here is a form that allows a user to request a username.
 // App.js
 
 async function requestUsername(formData) {
-  'use server';
-  const username = formData.get('username');
+  "use server";
+  const username = formData.get("username");
   // ...
 }
 
@@ -111,7 +111,7 @@ In this example `requestUsername` is a Server Function passed to a `<form>`. Whe
 
 By passing a Server Function to the form `action`, React can [progressively enhance](https://developer.mozilla.org/en-US/docs/Glossary/Progressive_Enhancement) the form. This means that forms can be submitted before the JavaScript bundle is loaded.
 
-#### Handling return values in forms {/*handling-return-values*/}
+#### Handling return values in forms {/_handling-return-values_/}
 
 In the username request form, there might be the chance that a username is not available. `requestUsername` should tell us if it fails or not.
 
@@ -119,27 +119,27 @@ To update the UI based on the result of a Server Function while supporting progr
 
 ```js
 // requestUsername.js
-'use server';
+"use server";
 
 export default async function requestUsername(formData) {
-  const username = formData.get('username');
+  const username = formData.get("username");
   if (canRequest(username)) {
     // ...
-    return 'successful';
+    return "successful";
   }
-  return 'failed';
+  return "failed";
 }
 ```
 
 ```js {4,8}, [[2, 2, "'use client'"]]
 // UsernameForm.js
-'use client';
+"use client";
 
-import { useActionState } from 'react';
-import requestUsername from './requestUsername';
+import { useActionState } from "react";
+import requestUsername from "./requestUsername";
 
 function UsernameForm() {
-  const [state, action] = useActionState(requestUsername, null, 'n/a');
+  const [state, action] = useActionState(requestUsername, null, "n/a");
 
   return (
     <>
@@ -155,15 +155,15 @@ function UsernameForm() {
 
 Note that like most Hooks, `useActionState` can only be called in [client code](/reference/rsc/use-client).
 
-### Calling a Server Function outside of `<form>` {/*calling-a-server-function-outside-of-form*/}
+### Calling a Server Function outside of `<form>` {/_calling-a-server-function-outside-of-form_/}
 
 Server Functions are exposed server endpoints and can be called anywhere in client code.
 
 When using a Server Function outside a [form](/reference/react-dom/components/form), call the Server Function in a [Transition](/reference/react/useTransition), which allows you to display a loading indicator, show [optimistic state updates](/reference/react/useOptimistic), and handle unexpected errors. Forms will automatically wrap Server Functions in transitions.
 
 ```js {9-12}
-import incrementLike from './actions';
-import { useState, useTransition } from 'react';
+import incrementLike from "./actions";
+import { useState, useTransition } from "react";
 
 function LikeButton() {
   const [isPending, startTransition] = useTransition();
@@ -179,7 +179,10 @@ function LikeButton() {
   return (
     <>
       <p>Total Likes: {likeCount}</p>
-      <button onClick={onClick} disabled={isPending}>Like</button>;
+      <button onClick={onClick} disabled={isPending}>
+        Like
+      </button>
+      ;
     </>
   );
 }
@@ -187,7 +190,7 @@ function LikeButton() {
 
 ```js
 // actions.js
-'use server';
+"use server";
 
 let likeCount = 0;
 export default async function incrementLike() {
@@ -198,7 +201,7 @@ export default async function incrementLike() {
 
 To read a Server Function return value, you'll need to `await` the promise returned.
 
-***
+---
 
 ## Sitemap
 

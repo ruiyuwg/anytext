@@ -12,14 +12,14 @@ No! The integration is fully optional. You can use `@tanstack/react-query` using
 
 ```ts title='utils/trpc.ts'
 export const trpc = createTRPCClient<AppRouter>({
-  links: [httpBatchLink({ url: 'YOUR_API_URL' })],
+  links: [httpBatchLink({ url: "YOUR_API_URL" })],
 });
 ```
 
 ```tsx title='components/PostList.tsx'
 function PostList() {
   const { data } = useQuery({
-    queryKey: ['posts'],
+    queryKey: ["posts"],
     queryFn: () => trpc.post.list.query(),
   });
   data; // Post[]
@@ -33,10 +33,10 @@ function PostList() {
 This library enables usage directly within React components
 
 ```tsx title='pages/IndexPage.tsx'
-import { trpc } from '../utils/trpc';
+import { trpc } from "../utils/trpc";
 
 export default function IndexPage() {
-  const helloQuery = trpc.hello.useQuery({ name: 'Bob' });
+  const helloQuery = trpc.hello.useQuery({ name: "Bob" });
   const goodbyeMutation = trpc.goodbye.useMutation();
 
   return (

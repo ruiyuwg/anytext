@@ -1,6 +1,6 @@
 ## Refinements
 
-Every Zod schema stores an array of *refinements*. Refinements are a way to perform custom validation that Zod doesn't provide a native API for.
+Every Zod schema stores an array of _refinements_. Refinements are a way to perform custom validation that Zod doesn't provide a native API for.
 
 ### `.refine()`
 
@@ -29,8 +29,8 @@ To customize the error message:
 
 ````
 ```ts
-const myString = z.string().refine((val) => val.length > 8, { 
-  error: "Too short!" 
+const myString = z.string().refine((val) => val.length > 8, {
+  error: "Too short!"
 });
 ```
 
@@ -45,14 +45,14 @@ const myString = z.string().check(
 
 #### `abort`
 
-By default, validation issues from checks are considered *continuable*; that is, Zod will execute *all* checks in sequence, even if one of them causes a validation error. This is usually desirable, as it means Zod can surface as many errors as possible in one go.
+By default, validation issues from checks are considered _continuable_; that is, Zod will execute _all_ checks in sequence, even if one of them causes a validation error. This is usually desirable, as it means Zod can surface as many errors as possible in one go.
 
 ````
 ```ts
 const myString = z.string()
   .refine((val) => val.length > 8, { error: "Too short!" })
   .refine((val) => val === val.toLowerCase(), { error: "Must be lowercase" });
-  
+
 
 const result = myString.safeParse("OH NO");
 result.error?.issues;
@@ -79,7 +79,7 @@ result.error?.issues;
 ```
 ````
 
-To mark a particular refinement as *non-continuable*, use the `abort` parameter. Validation will terminate if the check fails.
+To mark a particular refinement as _non-continuable_, use the `abort` parameter. Validation will terminate if the check fails.
 
 ````
 ```ts
@@ -192,11 +192,11 @@ If you use async refinements, you must use the `.parseAsync` method to parse dat
 
 > **Note** — This is a power user feature and can absolutely be abused in ways that will increase the probability of uncaught errors originating from inside your refinements.
 
-By default, refinements don't run if any *non-continuable* issues have already been encountered. Zod is careful to ensure the type signature of the value is correct before passing it into any refinement functions.
+By default, refinements don't run if any _non-continuable_ issues have already been encountered. Zod is careful to ensure the type signature of the value is correct before passing it into any refinement functions.
 
 ```ts
 const schema = z.string().refine((val) => {
-  return val.length > 8
+  return val.length > 8;
 });
 
 schema.parse(1234); // invalid_type: refinement won't be executed
@@ -370,7 +370,7 @@ const UniqueStringArray = z.array(z.string()).check(
 The `.refine()` API is syntactic sugar atop a more versatile (and verbose) API called `.check()`. You can use this API to create multiple issues in a single refinement or have full control of the generated issue objects.
 
 
-  
+
     ```ts
     const UniqueStringArray = z.array(z.string()).check((ctx) => {
       if (ctx.value.length > 3) {
@@ -396,9 +396,9 @@ The `.refine()` API is syntactic sugar atop a more versatile (and verbose) API c
       }
     });
     ```
-  
 
-  
+
+
     ```ts
     const UniqueStringArray = z.array(z.string()).check((ctx) => {
       // full control of issue objects
@@ -424,5 +424,5 @@ The `.refine()` API is syntactic sugar atop a more versatile (and verbose) API c
       }
     });
     ```
-  
+
 ````

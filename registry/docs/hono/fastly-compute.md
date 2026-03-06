@@ -58,14 +58,14 @@ Edit `src/index.ts`:
 
 ```ts
 // src/index.ts
-import { Hono } from 'hono'
-import { fire } from '@fastly/hono-fastly-compute'
+import { Hono } from "hono";
+import { fire } from "@fastly/hono-fastly-compute";
 
-const app = new Hono()
+const app = new Hono();
 
-app.get('/', (c) => c.text('Hello Fastly!'))
+app.get("/", (c) => c.text("Hello Fastly!"));
 
-fire(app)
+fire(app);
 ```
 
 > \[!NOTE]
@@ -121,20 +121,20 @@ To use these bindings, import `buildFire` instead of `fire` from `@fastly/hono-f
 
 ```ts
 // src/index.ts
-import { buildFire } from '@fastly/hono-fastly-compute'
+import { buildFire } from "@fastly/hono-fastly-compute";
 
 const fire = buildFire({
-  siteData: 'KVStore:site-data', // I have a KV Store named "site-data"
-})
+  siteData: "KVStore:site-data", // I have a KV Store named "site-data"
+});
 
-const app = new Hono<{ Bindings: typeof fire.Bindings }>()
+const app = new Hono<{ Bindings: typeof fire.Bindings }>();
 
-app.put('/upload/:key', async (c, next) => {
+app.put("/upload/:key", async (c, next) => {
   // e.g., Access the KV Store
-  const key = c.req.param('key')
-  await c.env.siteData.put(key, c.req.body)
-  return c.text(`Put ${key} successfully!`)
-})
+  const key = c.req.param("key");
+  await c.env.siteData.put(key, c.req.body);
+  return c.text(`Put ${key} successfully!`);
+});
 
-fire(app)
+fire(app);
 ```

@@ -5,24 +5,24 @@
 > **Good to know**: When [`cacheComponents`](/docs/app/api-reference/config/next-config-js/cacheComponents) is enabled `usePathname` may require a `Suspense` boundary around it if your route has a dynamic param. If you use `generateStaticParams` the `Suspense` boundary is optional
 
 ```tsx filename="app/example-client-component.tsx" switcher
-'use client'
+"use client";
 
-import { usePathname } from 'next/navigation'
+import { usePathname } from "next/navigation";
 
 export default function ExampleClientComponent() {
-  const pathname = usePathname()
-  return <p>Current pathname: {pathname}</p>
+  const pathname = usePathname();
+  return <p>Current pathname: {pathname}</p>;
 }
 ```
 
 ```jsx filename="app/example-client-component.js" switcher
-'use client'
+"use client";
 
-import { usePathname } from 'next/navigation'
+import { usePathname } from "next/navigation";
 
 export default function ExampleClientComponent() {
-  const pathname = usePathname()
-  return <p>Current pathname: {pathname}</p>
+  const pathname = usePathname();
+  return <p>Current pathname: {pathname}</p>;
 }
 ```
 
@@ -44,7 +44,7 @@ To enhance compatibility between routing systems, if your project contains both 
 ## Parameters
 
 ```tsx
-const pathname = usePathname()
+const pathname = usePathname();
 ```
 
 `usePathname` does not take any parameters.
@@ -65,32 +65,32 @@ const pathname = usePathname()
 ### Do something in response to a route change
 
 ```tsx filename="app/example-client-component.tsx" switcher
-'use client'
+"use client";
 
-import { useEffect } from 'react'
-import { usePathname, useSearchParams } from 'next/navigation'
+import { useEffect } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
 
 function ExampleClientComponent() {
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   useEffect(() => {
     // Do something here...
-  }, [pathname, searchParams])
+  }, [pathname, searchParams]);
 }
 ```
 
 ```jsx filename="app/example-client-component.js" switcher
-'use client'
+"use client";
 
-import { useEffect } from 'react'
-import { usePathname, useSearchParams } from 'next/navigation'
+import { useEffect } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
 
 function ExampleClientComponent() {
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   useEffect(() => {
     // Do something here...
-  }, [pathname, searchParams])
+  }, [pathname, searchParams]);
 }
 ```
 
@@ -101,46 +101,46 @@ When a page is pre-rendered, the HTML is generated for the source pathname. If t
 To avoid hydration mismatches, design the UI so that only a small, isolated part depends on the client pathname. Render a stable fallback on the server and update that part after mount.
 
 ```tsx filename="app/example-client-component.tsx" switcher
-'use client'
+"use client";
 
-import { useEffect, useState } from 'react'
-import { usePathname } from 'next/navigation'
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 export default function PathnameBadge() {
-  const pathname = usePathname()
-  const [clientPathname, setClientPathname] = useState('')
+  const pathname = usePathname();
+  const [clientPathname, setClientPathname] = useState("");
 
   useEffect(() => {
-    setClientPathname(pathname)
-  }, [pathname])
+    setClientPathname(pathname);
+  }, [pathname]);
 
   return (
     <p>
       Current pathname: <span>{clientPathname}</span>
     </p>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/example-client-component.js" switcher
-'use client'
+"use client";
 
-import { useEffect, useState } from 'react'
-import { usePathname } from 'next/navigation'
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 export default function PathnameBadge() {
-  const pathname = usePathname()
-  const [clientPathname, setClientPathname] = useState('')
+  const pathname = usePathname();
+  const [clientPathname, setClientPathname] = useState("");
 
   useEffect(() => {
-    setClientPathname(pathname)
-  }, [pathname])
+    setClientPathname(pathname);
+  }, [pathname]);
 
   return (
     <p>
       Current pathname: <span>{clientPathname}</span>
     </p>
-  )
+  );
 }
 ```
 

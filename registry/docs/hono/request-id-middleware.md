@@ -9,8 +9,8 @@ Request ID Middleware generates a unique ID for each request, which you can use 
 ## Import
 
 ```ts
-import { Hono } from 'hono'
-import { requestId } from 'hono/request-id'
+import { Hono } from "hono";
+import { requestId } from "hono/request-id";
 ```
 
 ## Usage
@@ -18,23 +18,23 @@ import { requestId } from 'hono/request-id'
 You can access the Request ID through the `requestId` variable in the handlers and middleware to which the Request ID Middleware is applied.
 
 ```ts
-const app = new Hono()
+const app = new Hono();
 
-app.use('*', requestId())
+app.use("*", requestId());
 
-app.get('/', (c) => {
-  return c.text(`Your request id is ${c.get('requestId')}`)
-})
+app.get("/", (c) => {
+  return c.text(`Your request id is ${c.get("requestId")}`);
+});
 ```
 
 If you want to explicitly specify the type, import `RequestIdVariables` and pass it in the generics of `new Hono()`.
 
 ```ts
-import type { RequestIdVariables } from 'hono/request-id'
+import type { RequestIdVariables } from "hono/request-id";
 
 const app = new Hono<{
-  Variables: RequestIdVariables
-}>()
+  Variables: RequestIdVariables;
+}>();
 ```
 
 ### Set Request ID
@@ -42,20 +42,20 @@ const app = new Hono<{
 You set a custom request ID in the header (default: `X-Request-Id`), the middleware will use that value instead of generating a new one:
 
 ```ts
-const app = new Hono()
+const app = new Hono();
 
-app.use('*', requestId())
+app.use("*", requestId());
 
-app.get('/', (c) => {
-  return c.text(`${c.get('requestId')}`)
-})
+app.get("/", (c) => {
+  return c.text(`${c.get("requestId")}`);
+});
 
-const res = await app.request('/', {
+const res = await app.request("/", {
   headers: {
-    'X-Request-Id': 'your-custom-id',
+    "X-Request-Id": "your-custom-id",
   },
-})
-console.log(await res.text()) // your-custom-id
+});
+console.log(await res.text()); // your-custom-id
 ```
 
 If you want to disable this feature, set [`headerName` option](#headername-string) to an empty string.
@@ -97,7 +97,7 @@ To unify these IDs, use the `generator` function to capture the platform specifi
 
 # Pretty JSON Middleware
 
-Pretty JSON middleware enables "*JSON pretty print*" for JSON response body.
+Pretty JSON middleware enables "_JSON pretty print_" for JSON response body.
 Adding `?pretty` to url query param, the JSON strings are prettified.
 
 ```js
@@ -120,19 +120,19 @@ will be:
 ## Import
 
 ```ts
-import { Hono } from 'hono'
-import { prettyJSON } from 'hono/pretty-json'
+import { Hono } from "hono";
+import { prettyJSON } from "hono/pretty-json";
 ```
 
 ## Usage
 
 ```ts
-const app = new Hono()
+const app = new Hono();
 
-app.use(prettyJSON()) // With options: prettyJSON({ space: 4 })
-app.get('/', (c) => {
-  return c.json({ message: 'Hono!' })
-})
+app.use(prettyJSON()); // With options: prettyJSON({ space: 4 })
+app.get("/", (c) => {
+  return c.json({ message: "Hono!" });
+});
 ```
 
 ## Options

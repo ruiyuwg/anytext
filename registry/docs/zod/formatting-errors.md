@@ -3,7 +3,7 @@
 import { Callout } from "fumadocs-ui/components/callout";
 import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
 
-Zod emphasizes *completeness* and *correctness* in its error reporting. In many cases, it's helpful to convert the `$ZodError` to a more useful format. Zod provides some utilities for this.
+Zod emphasizes _completeness_ and _correctness_ in its error reporting. In many cases, it's helpful to convert the `$ZodError` to a more useful format. Zod provides some utilities for this.
 
 Consider this simple object schema.
 
@@ -28,23 +28,23 @@ const result = schema.safeParse({
 result.error!.issues;
 [
   {
-    expected: 'string',
-    code: 'invalid_type',
-    path: [ 'username' ],
-    message: 'Invalid input: expected string, received number'
+    expected: "string",
+    code: "invalid_type",
+    path: ["username"],
+    message: "Invalid input: expected string, received number",
   },
   {
-    expected: 'number',
-    code: 'invalid_type',
-    path: [ 'favoriteNumbers', 1 ],
-    message: 'Invalid input: expected number, received string'
+    expected: "number",
+    code: "invalid_type",
+    path: ["favoriteNumbers", 1],
+    message: "Invalid input: expected number, received string",
   },
   {
-    code: 'unrecognized_keys',
-    keys: [ 'extraKey' ],
+    code: "unrecognized_keys",
+    keys: ["extraKey"],
     path: [],
-    message: 'Unrecognized key: "extraKey"'
-  }
+    message: 'Unrecognized key: "extraKey"',
+  },
 ];
 ```
 
@@ -139,7 +139,7 @@ formatted?.favoriteNumbers?.[1]?._errors;
 
 ## `z.flattenError()`
 
-While `z.treeifyError()` is useful for traversing a potentially complex nested structure, the majority of schemas are *flat*—just one level deep. In this case, use `z.flattenError()` to retrieve a clean, shallow error object.
+While `z.treeifyError()` is useful for traversing a potentially complex nested structure, the majority of schemas are _flat_—just one level deep. In this case, use `z.flattenError()` to retrieve a clean, shallow error object.
 
 ```ts
 const flattened = z.flattenError(result.error);

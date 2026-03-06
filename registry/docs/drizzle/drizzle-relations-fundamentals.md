@@ -70,46 +70,47 @@ CREATE TABLE OrderItems_Unnormalized (
     PRIMARY KEY (order_id, product_id) -- Composite Primary Key
 );
 
-INSERT INTO OrderItems\_Unnormalized (order\_id, product\_id, product\_name, product\_price, quantity, order\_date) VALUES
+INSERT INTO OrderItems_Unnormalized (order_id, product_id, product_name, product_price, quantity, order_date) VALUES
 (101, 'A123', 'Laptop', 1200.00, 1, '2023-10-27'),
 (101, 'B456', 'Mouse', 25.00, 2, '2023-10-27'),
 (102, 'A123', 'Laptop', 1200.00, 1, '2023-10-28'),
 (103, 'C789', 'Keyboard', 75.00, 1, '2023-10-29');
 
 ```
+
 ```
 
 +------------------------------------------------------------------------------------+
-| OrderItems\_Unnormalized                                                            |
+| OrderItems_Unnormalized |
 +------------------------------------------------------------------------------------+
-| PK (order\_id, product\_id) | product\_name | product\_price | quantity | order\_date   |
+| PK (order_id, product_id) | product_name | product_price | quantity | order_date |
 +------------------------------------------------------------------------------------+
-| 101, A123               | Laptop       | 1200.00       | 1        | 2023-10-27     |
-| 101, B456               | Mouse        | 25.00         | 2        | 2023-10-27     |
-| 102, A123               | Laptop       | 1200.00       | 1        | 2023-10-28     |
-| 103, C789               | Keyboard     | 75.00         | 1        | 2023-10-29     |
+| 101, A123 | Laptop | 1200.00 | 1 | 2023-10-27 |
+| 101, B456 | Mouse | 25.00 | 2 | 2023-10-27 |
+| 102, A123 | Laptop | 1200.00 | 1 | 2023-10-28 |
+| 103, C789 | Keyboard | 75.00 | 1 | 2023-10-29 |
 +------------------------------------------------------------------------------------+
 
 ```
 </Callout>
 
-**Problem**: Notice that `product_name` and `product_price` are repeated whenever the same `product_id` appears in different orders. 
-These attributes are only dependent on `product_id`, which is part of the composite primary key (`order_id`, `product_id`), but not the entire key. 
+**Problem**: Notice that `product_name` and `product_price` are repeated whenever the same `product_id` appears in different orders.
+These attributes are only dependent on `product_id`, which is part of the composite primary key (`order_id`, `product_id`), but not the entire key.
 This is a partial dependency.
 
-To achieve 2NF, we need to remove the partially dependent attributes (`product_name`, `product_price`) and place them in a separate table where they are 
+To achieve 2NF, we need to remove the partially dependent attributes (`product_name`, `product_price`) and place them in a separate table where they are
 fully dependent on the primary key of that new table.
 
 <Callout collapsed="Normalization to 2NF: Visual explanation">
 ```
 
-+-------------------+     1:M     +---------------------------+
-| Products          | <---------- | OrderItems\_2NF            |
-+-------------------+             +---------------------------+
-| PK product\_id     |             | PK (order\_id, product\_id) |
-| product\_name      |             | quantity                  |
-| product\_price     |             | order\_date                |
-+-------------------+             | FK product\_id             |
++-------------------+ 1:M +---------------------------+
+| Products | <---------- | OrderItems_2NF |
++-------------------+ +---------------------------+
+| PK product_id | | PK (order_id, product_id) |
+| product_name | | quantity |
+| product_price | | order_date |
++-------------------+ | FK product_id |
 +---------------------------+
 
 ````
@@ -161,40 +162,41 @@ CREATE TABLE suppliers (
     state VARCHAR(50)
 );
 
-INSERT INTO suppliers (supplier\_id, supplier\_name, zip\_code, city, state) VALUES
+INSERT INTO suppliers (supplier_id, supplier_name, zip_code, city, state) VALUES
 ('S1', 'Acme Corp', '12345', 'Anytown', 'NY'),
 ('S2', 'Beta Inc', '67890', 'Otherville', 'CA'),
 ('S3', 'Gamma Ltd', '12345', 'Anytown', 'NY');
 
 ```
+
 ```
 
 +---------------------------------------------------------------+
-| suppliers                                                     |
+| suppliers |
 +---------------------------------------------------------------+
-| PK supplier\_id | supplier\_name | zip\_code | city      | state |
+| PK supplier_id | supplier_name | zip_code | city | state |
 +---------------------------------------------------------------+
-| S1             | Acme Corp     | 12345    | Anytown    | NY   |
-| S2             | Beta Inc      | 67890    | Otherville | CA   |
-| S3             | Gamma Ltd     | 12345    | Anytown    | NY   |
+| S1 | Acme Corp | 12345 | Anytown | NY |
+| S2 | Beta Inc | 67890 | Otherville | CA |
+| S3 | Gamma Ltd | 12345 | Anytown | NY |
 +---------------------------------------------------------------+
 
 ```
 </Callout>
 
-**Solution**: To achieve 3NF, we remove the attributes dependent on the non-key attribute (`city`, `state` dependent on `zip_code`) and put 
+**Solution**: To achieve 3NF, we remove the attributes dependent on the non-key attribute (`city`, `state` dependent on `zip_code`) and put
 them into a separate table keyed by the non-key attribute itself (`zip_code`).
 
 <Callout collapsed="Normalization to 3NF: Visual explanation">
 ```
 
-+-------------------+     1:M     +--------------------+
-| zip\_codes         | <---------- | suppliers          |
-+-------------------+             +--------------------+
-| PK zip\_code       |             | PK supplier\_id     |
-| city              |             | supplier\_name      |
-| state             |             | FK zip\_code        |
-+-------------------+             +--------------------+
++-------------------+ 1:M +--------------------+
+| zip_codes | <---------- | suppliers |
++-------------------+ +--------------------+
+| PK zip_code | | PK supplier_id |
+| city | | supplier_name |
+| state | | FK zip_code |
++-------------------+ +--------------------+
 
 ````
 ```sql
@@ -340,8 +342,8 @@ to a much larger purpose. Foreign key constraints are fundamentally about:
 We've discussed relationships like `One-to-Many` between Customers and Orders.
 A foreign key is the SQL language's way of telling the database:
 
-> Hey database, I want to enforce a 1-M relationship here. Every value in the customer\_id column of the
-> Orders table must correspond to a valid customer\_id in the Customers table.
+> Hey database, I want to enforce a 1-M relationship here. Every value in the customer_id column of the
+> Orders table must correspond to a valid customer_id in the Customers table.
 
 It's not just a suggestion; it's a constraint the database actively enforces.
 The database becomes relationship-aware because of the foreign key. </Callout>
@@ -360,8 +362,8 @@ If you have an order without a customer, you lose crucial context. Queries becom
 **Example**:
 
 ```
-Without a foreign key, you could accidentally delete a customer from the Customers 
-table while their orders still exist in the Orders table. Suddenly, you have orders that point to 
+Without a foreign key, you could accidentally delete a customer from the Customers
+table while their orders still exist in the Orders table. Suddenly, you have orders that point to
 a customer that no longer exists! A foreign key constraint prevents this data inconsistency.
 ```
 

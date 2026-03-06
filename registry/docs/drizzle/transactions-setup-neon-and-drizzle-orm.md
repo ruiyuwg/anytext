@@ -27,7 +27,7 @@ Create a `drizzle.ts` file in your `src/db` folder and set up your database conf
 
 ```tsx copy filename="src/db/drizzle.ts"
 import { config } from "dotenv";
-import { drizzle } from 'drizzle-orm/neon-http';
+import { drizzle } from "drizzle-orm/neon-http";
 
 config({ path: ".env" }); // or .env.local
 
@@ -55,10 +55,10 @@ Here we define the **`todo`** table with fields **`id`**, **`text`**, and **`don
 Create a `drizzle.config.ts` file in the root of your project and add the following content:
 
 ```typescript copy filename="drizzle.config.ts"
-import { config } from 'dotenv';
+import { config } from "dotenv";
 import { defineConfig } from "drizzle-kit";
 
-config({ path: '.env' });
+config({ path: ".env" });
 
 export default defineConfig({
   schema: "./src/db/schema.ts",
@@ -80,7 +80,7 @@ Generate migrations:
 npx drizzle-kit generate
 ```
 
-These migrations are stored in the `drizzle/migrations`  directory, as specified in your `drizzle.config.ts`. This directory will contain the SQL files necessary to update your database schema and a `meta` folder for storing snapshots of the schema at different migration stages.
+These migrations are stored in the `drizzle/migrations` directory, as specified in your `drizzle.config.ts`. This directory will contain the SQL files necessary to update your database schema and a `meta` folder for storing snapshots of the schema at different migration stages.
 
 Example of a generated migration:
 

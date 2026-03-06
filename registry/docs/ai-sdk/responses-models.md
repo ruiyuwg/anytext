@@ -3,23 +3,23 @@
 You can use the OpenAI responses API with the `openai(modelId)` or `openai.responses(modelId)` factory methods. It is the default API that is used by the OpenAI provider (since AI SDK 5).
 
 ```ts
-const model = openai('gpt-5');
+const model = openai("gpt-5");
 ```
 
 Further configuration can be done using OpenAI provider options.
 You can validate the provider options using the `OpenAILanguageModelResponsesOptions` type.
 
 ```ts
-import { openai, OpenAILanguageModelResponsesOptions } from '@ai-sdk/openai';
-import { generateText } from 'ai';
+import { openai, OpenAILanguageModelResponsesOptions } from "@ai-sdk/openai";
+import { generateText } from "ai";
 
 const result = await generateText({
-  model: openai('gpt-5'), // or openai.responses('gpt-5')
+  model: openai("gpt-5"), // or openai.responses('gpt-5')
   providerOptions: {
     openai: {
       parallelToolCalls: false,
       store: false,
-      user: 'user_123',
+      user: "user_123",
       // ...
     } satisfies OpenAILanguageModelResponsesOptions,
   },
@@ -29,42 +29,42 @@ const result = await generateText({
 
 The following provider options are available:
 
-- **parallelToolCalls** *boolean*
+- **parallelToolCalls** _boolean_
   Whether to use parallel tool calls. Defaults to `true`.
 
-- **store** *boolean*
+- **store** _boolean_
 
   Whether to store the generation. Defaults to `true`.
 
-- **maxToolCalls** *integer*
+- **maxToolCalls** _integer_
   The maximum number of total calls to built-in tools that can be processed in a response.
   This maximum number applies across all built-in tool calls, not per individual tool.
   Any further attempts to call a tool by the model will be ignored.
 
-- **metadata** *Record\<string, string>*
+- **metadata** _Record\<string, string>_
   Additional metadata to store with the generation.
 
-- **conversation** *string*
+- **conversation** _string_
   The ID of the OpenAI Conversation to continue.
   You must create a conversation first via the [OpenAI API](https://platform.openai.com/docs/api-reference/conversations/create).
   Cannot be used in conjunction with `previousResponseId`.
   Defaults to `undefined`.
 
-- **previousResponseId** *string*
+- **previousResponseId** _string_
   The ID of the previous response. You can use it to continue a conversation. Defaults to `undefined`.
 
-- **instructions** *string*
+- **instructions** _string_
   Instructions for the model.
   They can be used to change the system or developer message when continuing a conversation using the `previousResponseId` option.
   Defaults to `undefined`.
 
-- **logprobs** *boolean | number*
+- **logprobs** _boolean | number_
   Return the log probabilities of the tokens. Including logprobs will increase the response size and can slow down response times. However, it can be useful to better understand how the model is behaving. Setting to `true` returns the log probabilities of the tokens that were generated. Setting to a number (1-20) returns the log probabilities of the top n tokens that were generated.
 
-- **user** *string*
+- **user** _string_
   A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse. Defaults to `undefined`.
 
-- **reasoningEffort** *'none' | 'minimal' | 'low' | 'medium' | 'high' | 'xhigh'*
+- **reasoningEffort** _'none' | 'minimal' | 'low' | 'medium' | 'high' | 'xhigh'_
   Reasoning effort for reasoning models. Defaults to `medium`. If you use `providerOptions` to set the `reasoningEffort` option, this model setting will be ignored.
 
   The 'none' type for `reasoningEffort` is only available for OpenAI's GPT-5.1
@@ -72,10 +72,10 @@ The following provider options are available:
   OpenAI's GPT-5.1-Codex-Max model. Setting `reasoningEffort` to 'none' or
   'xhigh' with unsupported models will result in an error.
 
-- **reasoningSummary** *'auto' | 'detailed'*
+- **reasoningSummary** _'auto' | 'detailed'_
   Controls whether the model returns its reasoning process. Set to `'auto'` for a condensed summary, `'detailed'` for more comprehensive reasoning. Defaults to `undefined` (no reasoning summaries). When enabled, reasoning summaries appear in the stream as events with type `'reasoning'` and in non-streaming responses within the `reasoning` field.
 
-- **strictJsonSchema** *boolean*
+- **strictJsonSchema** _boolean_
   Whether to use strict JSON schema validation. Defaults to `true`.
 
   OpenAI structured outputs have several
@@ -86,42 +86,41 @@ The following provider options are available:
   supported. You need to change Zod `.nullish()` and `.optional()` to
   `.nullable()`.
 
-- **serviceTier** *'auto' | 'flex' | 'priority' | 'default'*
+- **serviceTier** _'auto' | 'flex' | 'priority' | 'default'_
   Service tier for the request. Set to 'flex' for 50% cheaper processing
   at the cost of increased latency (available for o3, o4-mini, and gpt-5 models).
   Set to 'priority' for faster processing with Enterprise access (available for gpt-4, gpt-5, gpt-5-mini, o3, o4-mini; gpt-5-nano is not supported).
 
   Defaults to 'auto'.
 
-- **textVerbosity** *'low' | 'medium' | 'high'*
+- **textVerbosity** _'low' | 'medium' | 'high'_
   Controls the verbosity of the model's response. Lower values result in more concise responses,
   while higher values result in more verbose responses. Defaults to `'medium'`.
 
-- **include** *Array\<string>*
+- **include** _Array\<string>_
   Specifies additional content to include in the response. Supported values:
   `['file_search_call.results']` for including file search results in responses.
   `['message.output_text.logprobs']` for logprobs.
   Defaults to `undefined`.
 
-- **truncation** *string*
+- **truncation** _string_
   The truncation strategy to use for the model response.
-
   - Auto: If the input to this Response exceeds the model's context window size, the model will truncate the response to fit the context window by dropping items from the beginning of the conversation.
   - disabled (default): If the input size will exceed the context window size for a model, the request will fail with a 400 error.
 
-- **promptCacheKey** *string*
+- **promptCacheKey** _string_
   A cache key for manual prompt caching control. Used by OpenAI to cache responses for similar requests to optimize your cache hit rates.
 
-- **promptCacheRetention** *'in\_memory' | '24h'*
+- **promptCacheRetention** _'in_memory' | '24h'_
   The retention policy for the prompt cache. Set to `'24h'` to enable extended prompt caching, which keeps cached prefixes active for up to 24 hours. Defaults to `'in_memory'` for standard prompt caching. Note: `'24h'` is currently only available for the 5.1 series of models.
 
-- **safetyIdentifier** *string*
+- **safetyIdentifier** _string_
   A stable identifier used to help detect users of your application that may be violating OpenAI's usage policies. The IDs should be a string that uniquely identifies each user.
 
-- **systemMessageMode** *'system' | 'developer' | 'remove'*
+- **systemMessageMode** _'system' | 'developer' | 'remove'_
   Controls the role of the system message when making requests. By default (when omitted), for models that support reasoning the `system` message is automatically converted to a `developer` message. Setting `systemMessageMode` to `system` passes the system message as a system-level instruction; `developer` passes it as a developer message; `remove` omits the system message from the request.
 
-- **forceReasoning** *boolean*
+- **forceReasoning** _boolean_
   Force treating this model as a reasoning model. This is useful for "stealth" reasoning models (e.g. via a custom baseURL) where the model ID is not recognized by the SDK's allowlist. When enabled, the SDK applies reasoning-model parameter compatibility rules and defaults `systemMessageMode` to `developer` unless overridden.
 
 The OpenAI responses provider also returns provider-specific metadata:
@@ -129,11 +128,11 @@ The OpenAI responses provider also returns provider-specific metadata:
 For Responses models, you can type this metadata using `OpenaiResponsesProviderMetadata`:
 
 ```ts
-import { openai, type OpenaiResponsesProviderMetadata } from '@ai-sdk/openai';
-import { generateText } from 'ai';
+import { openai, type OpenaiResponsesProviderMetadata } from "@ai-sdk/openai";
+import { generateText } from "ai";
 
 const result = await generateText({
-  model: openai('gpt-5'),
+  model: openai("gpt-5"),
 });
 
 const providerMetadata = result.providerMetadata as
@@ -148,11 +147,11 @@ console.log(responseId);
 
 The following OpenAI-specific metadata may be returned:
 
-- **responseId** *string | null | undefined*
+- **responseId** _string | null | undefined_
   The ID of the response. Can be used to continue a conversation.
-- **logprobs** *(optional)*
+- **logprobs** _(optional)_
   Log probabilities of output tokens (when enabled).
-- **serviceTier** *(optional)*
+- **serviceTier** _(optional)_
   Service tier information returned by the API.
 
 #### Reasoning Output
@@ -163,23 +162,23 @@ For reasoning models like `gpt-5`, you can enable reasoning summaries to see the
 import {
   openai,
   type OpenAILanguageModelResponsesOptions,
-} from '@ai-sdk/openai';
-import { streamText } from 'ai';
+} from "@ai-sdk/openai";
+import { streamText } from "ai";
 
 const result = streamText({
-  model: openai('gpt-5'),
-  prompt: 'Tell me about the Mission burrito debate in San Francisco.',
+  model: openai("gpt-5"),
+  prompt: "Tell me about the Mission burrito debate in San Francisco.",
   providerOptions: {
     openai: {
-      reasoningSummary: 'detailed', // 'auto' for condensed or 'detailed' for comprehensive
+      reasoningSummary: "detailed", // 'auto' for condensed or 'detailed' for comprehensive
     } satisfies OpenAILanguageModelResponsesOptions,
   },
 });
 
 for await (const part of result.fullStream) {
-  if (part.type === 'reasoning') {
+  if (part.type === "reasoning") {
     console.log(`Reasoning: ${part.textDelta}`);
-  } else if (part.type === 'text-delta') {
+  } else if (part.type === "text-delta") {
     process.stdout.write(part.textDelta);
   }
 }
@@ -191,19 +190,19 @@ For non-streaming calls with `generateText`, the reasoning summaries are availab
 import {
   openai,
   type OpenAILanguageModelResponsesOptions,
-} from '@ai-sdk/openai';
-import { generateText } from 'ai';
+} from "@ai-sdk/openai";
+import { generateText } from "ai";
 
 const result = await generateText({
-  model: openai('gpt-5'),
-  prompt: 'Tell me about the Mission burrito debate in San Francisco.',
+  model: openai("gpt-5"),
+  prompt: "Tell me about the Mission burrito debate in San Francisco.",
   providerOptions: {
     openai: {
-      reasoningSummary: 'auto',
+      reasoningSummary: "auto",
     } satisfies OpenAILanguageModelResponsesOptions,
   },
 });
-console.log('Reasoning:', result.reasoning);
+console.log("Reasoning:", result.reasoning);
 ```
 
 Learn more about reasoning summaries in the [OpenAI documentation](https://platform.openai.com/docs/guides/reasoning?api-mode=responses#reasoning-summaries).
@@ -221,17 +220,17 @@ through a persistent WebSocket connection.
 Pass the WebSocket fetch to `createOpenAI` via the `fetch` option:
 
 ```ts highlight="2,6-7,15"
-import { createOpenAI } from '@ai-sdk/openai';
-import { createWebSocketFetch } from 'ai-sdk-openai-websocket-fetch';
-import { streamText } from 'ai';
+import { createOpenAI } from "@ai-sdk/openai";
+import { createWebSocketFetch } from "ai-sdk-openai-websocket-fetch";
+import { streamText } from "ai";
 
 // Create a WebSocket-backed fetch instance
 const wsFetch = createWebSocketFetch();
 const openai = createOpenAI({ fetch: wsFetch });
 
 const result = streamText({
-  model: openai('gpt-4.1-mini'),
-  prompt: 'Hello!',
+  model: openai("gpt-4.1-mini"),
+  prompt: "Hello!",
   tools: {
     // ...
   },
@@ -260,15 +259,15 @@ You can control the length and detail of model responses using the `textVerbosit
 import {
   openai,
   type OpenAILanguageModelResponsesOptions,
-} from '@ai-sdk/openai';
-import { generateText } from 'ai';
+} from "@ai-sdk/openai";
+import { generateText } from "ai";
 
 const result = await generateText({
-  model: openai('gpt-5-mini'),
-  prompt: 'Write a poem about a boy and his first pet dog.',
+  model: openai("gpt-5-mini"),
+  prompt: "Write a poem about a boy and his first pet dog.",
   providerOptions: {
     openai: {
-      textVerbosity: 'low', // 'low' for concise, 'medium' (default), or 'high' for verbose
+      textVerbosity: "low", // 'low' for concise, 'medium' (default), or 'high' for verbose
     } satisfies OpenAILanguageModelResponsesOptions,
   },
 });
@@ -286,25 +285,25 @@ The OpenAI responses API supports web search through the `openai.tools.webSearch
 
 ```ts
 const result = await generateText({
-  model: openai('gpt-5'),
-  prompt: 'What happened in San Francisco last week?',
+  model: openai("gpt-5"),
+  prompt: "What happened in San Francisco last week?",
   tools: {
     web_search: openai.tools.webSearch({
       // optional configuration:
       externalWebAccess: true,
-      searchContextSize: 'high',
+      searchContextSize: "high",
       userLocation: {
-        type: 'approximate',
-        city: 'San Francisco',
-        region: 'California',
+        type: "approximate",
+        city: "San Francisco",
+        region: "California",
       },
       filters: {
-        allowedDomains: ['sfchronicle.com', 'sfgate.com'],
+        allowedDomains: ["sfchronicle.com", "sfgate.com"],
       },
     }),
   },
   // Force web search tool (optional):
-  toolChoice: { type: 'tool', toolName: 'web_search' },
+  toolChoice: { type: "tool", toolName: "web_search" },
 });
 
 // URL sources directly from `results`
@@ -312,9 +311,9 @@ const sources = result.sources;
 
 // Or access sources from tool results
 for (const toolResult of result.toolResults) {
-  if (toolResult.toolName === 'web_search') {
-    console.log('Query:', toolResult.output.action.query);
-    console.log('Sources:', toolResult.output.sources);
+  if (toolResult.toolName === "web_search") {
+    console.log("Query:", toolResult.output.action.query);
+    console.log("Sources:", toolResult.output.sources);
     // `sources` is an array of object: { type: 'url', url: string }
   }
 }
@@ -322,11 +321,11 @@ for (const toolResult of result.toolResults) {
 
 The web search tool supports the following configuration options:
 
-- **externalWebAccess** *boolean* - Whether to use external web access for fetching live content. Defaults to `true`.
-- **searchContextSize** *'low' | 'medium' | 'high'* - Controls the amount of context used for the search. Higher values provide more comprehensive results but may have higher latency and cost.
+- **externalWebAccess** _boolean_ - Whether to use external web access for fetching live content. Defaults to `true`.
+- **searchContextSize** _'low' | 'medium' | 'high'_ - Controls the amount of context used for the search. Higher values provide more comprehensive results but may have higher latency and cost.
 - **userLocation** - Optional location information to provide geographically relevant results. Includes `type` (always `'approximate'`), `country`, `city`, `region`, and `timezone`.
 - **filters** - Optional filter configuration to restrict search results.
-  - **allowedDomains** *string\[]* - Array of allowed domains for the search. Subdomains of the provided domains are automatically included.
+  - **allowedDomains** _string\[]_ - Array of allowed domains for the search. Subdomains of the provided domains are automatically included.
 
 For detailed information on configuration options see the [OpenAI Web Search Tool documentation](https://platform.openai.com/docs/guides/tools-web-search?api-mode=responses).
 
@@ -338,20 +337,20 @@ You can force the use of the file search tool by setting the `toolChoice` parame
 
 ```ts
 const result = await generateText({
-  model: openai('gpt-5'),
-  prompt: 'What does the document say about user authentication?',
+  model: openai("gpt-5"),
+  prompt: "What does the document say about user authentication?",
   tools: {
     file_search: openai.tools.fileSearch({
-      vectorStoreIds: ['vs_123'],
+      vectorStoreIds: ["vs_123"],
       // configuration below is optional:
       maxNumResults: 5,
       filters: {
-        key: 'author',
-        type: 'eq',
-        value: 'Jane Smith',
+        key: "author",
+        type: "eq",
+        value: "Jane Smith",
       },
       ranking: {
-        ranker: 'auto',
+        ranker: "auto",
         scoreThreshold: 0.5,
       },
     }),
@@ -359,7 +358,7 @@ const result = await generateText({
   providerOptions: {
     openai: {
       // optional: include results
-      include: ['file_search_call.results'],
+      include: ["file_search_call.results"],
     } satisfies OpenAILanguageModelResponsesOptions,
   },
 });
@@ -416,43 +415,43 @@ Availability is restricted to specific models (for example, `gpt-5` variants).
 You can use the image tool with either `generateText` or `streamText`:
 
 ```ts
-import { openai } from '@ai-sdk/openai';
-import { generateText } from 'ai';
+import { openai } from "@ai-sdk/openai";
+import { generateText } from "ai";
 
 const result = await generateText({
-  model: openai('gpt-5'),
+  model: openai("gpt-5"),
   prompt:
-    'Generate an image of an echidna swimming across the Mozambique channel.',
+    "Generate an image of an echidna swimming across the Mozambique channel.",
   tools: {
-    image_generation: openai.tools.imageGeneration({ outputFormat: 'webp' }),
+    image_generation: openai.tools.imageGeneration({ outputFormat: "webp" }),
   },
 });
 
 for (const toolResult of result.staticToolResults) {
-  if (toolResult.toolName === 'image_generation') {
+  if (toolResult.toolName === "image_generation") {
     const base64Image = toolResult.output.result;
   }
 }
 ```
 
 ```ts
-import { openai } from '@ai-sdk/openai';
-import { streamText } from 'ai';
+import { openai } from "@ai-sdk/openai";
+import { streamText } from "ai";
 
 const result = streamText({
-  model: openai('gpt-5'),
+  model: openai("gpt-5"),
   prompt:
-    'Generate an image of an echidna swimming across the Mozambique channel.',
+    "Generate an image of an echidna swimming across the Mozambique channel.",
   tools: {
     image_generation: openai.tools.imageGeneration({
-      outputFormat: 'webp',
-      quality: 'low',
+      outputFormat: "webp",
+      quality: "low",
     }),
   },
 });
 
 for await (const part of result.fullStream) {
-  if (part.type == 'tool-result' && !part.dynamic) {
+  if (part.type == "tool-result" && !part.dynamic) {
     const base64Image = part.output.result;
   }
 }
@@ -474,17 +473,17 @@ The OpenAI responses API supports the code interpreter tool through the `openai.
 This allows models to write and execute Python code.
 
 ```ts
-import { openai } from '@ai-sdk/openai';
-import { generateText } from 'ai';
+import { openai } from "@ai-sdk/openai";
+import { generateText } from "ai";
 
 const result = await generateText({
-  model: openai('gpt-5'),
-  prompt: 'Write and run Python code to calculate the factorial of 10',
+  model: openai("gpt-5"),
+  prompt: "Write and run Python code to calculate the factorial of 10",
   tools: {
     code_interpreter: openai.tools.codeInterpreter({
       // optional configuration:
       container: {
-        fileIds: ['file-123', 'file-456'], // optional file IDs to make available
+        fileIds: ["file-123", "file-456"], // optional file IDs to make available
       },
     }),
   },
@@ -505,17 +504,17 @@ The code interpreter tool can be configured with:
 The OpenAI responses API supports connecting to [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) servers through the `openai.tools.mcp` tool. This allows models to call tools exposed by remote MCP servers or service connectors.
 
 ```ts
-import { openai } from '@ai-sdk/openai';
-import { generateText } from 'ai';
+import { openai } from "@ai-sdk/openai";
+import { generateText } from "ai";
 
 const result = await generateText({
-  model: openai('gpt-5'),
-  prompt: 'Search the web for the latest news about AI developments',
+  model: openai("gpt-5"),
+  prompt: "Search the web for the latest news about AI developments",
   tools: {
     mcp: openai.tools.mcp({
-      serverLabel: 'web-search',
-      serverUrl: 'https://mcp.exa.ai/mcp',
-      serverDescription: 'A web-search API for AI agents',
+      serverLabel: "web-search",
+      serverUrl: "https://mcp.exa.ai/mcp",
+      serverDescription: "A web-search API for AI agents",
     }),
   },
 });
@@ -523,26 +522,25 @@ const result = await generateText({
 
 The MCP tool can be configured with:
 
-- **serverLabel** *string* (required)
+- **serverLabel** _string_ (required)
 
   A label to identify the MCP server. This label is used in tool calls to distinguish between multiple MCP servers.
 
-- **serverUrl** *string* (required if `connectorId` is not provided)
+- **serverUrl** _string_ (required if `connectorId` is not provided)
 
   The URL for the MCP server. Either `serverUrl` or `connectorId` must be provided.
 
-- **connectorId** *string* (required if `serverUrl` is not provided)
+- **connectorId** _string_ (required if `serverUrl` is not provided)
 
   Identifier for a service connector. Either `serverUrl` or `connectorId` must be provided.
 
-- **serverDescription** *string* (optional)
+- **serverDescription** _string_ (optional)
 
   Optional description of the MCP server that helps the model understand its purpose.
 
-- **allowedTools** *string\[] | object* (optional)
+- **allowedTools** _string\[] | object_ (optional)
 
   Controls which tools from the MCP server are available. Can be:
-
   - An array of tool names: `['tool1', 'tool2']`
   - An object with filters:
     ```ts
@@ -552,25 +550,24 @@ The MCP tool can be configured with:
     }
     ```
 
-- **authorization** *string* (optional)
+- **authorization** _string_ (optional)
 
   OAuth access token for authenticating with the MCP server or connector.
 
-- **headers** *Record\<string, string>* (optional)
+- **headers** _Record\<string, string>_ (optional)
 
   Optional HTTP headers to include in requests to the MCP server.
 
-- **requireApproval** *'always' | 'never' | object* (optional)
+- **requireApproval** _'always' | 'never' | object_ (optional)
 
   Controls which MCP tool calls require user approval before execution. Can be:
-
   - `'always'`: All MCP tool calls require approval
   - `'never'`: No MCP tool calls require approval (default)
   - An object with filters:
     ```ts
     {
       never: {
-        toolNames: ['safe_tool', 'another_safe_tool']; // Skip approval for these tools
+        toolNames: ["safe_tool", "another_safe_tool"]; // Skip approval for these tools
       }
     }
     ```
@@ -592,11 +589,11 @@ The OpenAI responses API support the local shell tool for Codex models through t
 Local shell is a tool that allows agents to run shell commands locally on a machine you or the user provides.
 
 ```ts
-import { openai } from '@ai-sdk/openai';
-import { generateText } from 'ai';
+import { openai } from "@ai-sdk/openai";
+import { generateText } from "ai";
 
 const result = await generateText({
-  model: openai.responses('gpt-5-codex'),
+  model: openai.responses("gpt-5-codex"),
   tools: {
     local_shell: openai.tools.localShell({
       execute: async ({ action }) => {
@@ -605,7 +602,7 @@ const result = await generateText({
       },
     }),
   },
-  prompt: 'List the files in my home directory.',
+  prompt: "List the files in my home directory.",
   stopWhen: stepCountIs(2),
 });
 ```
@@ -626,11 +623,11 @@ The shell tool supports three environment modes that control where commands are 
 When no `environment` is specified (or `type: 'local'` is used), commands are executed locally via your `execute` callback:
 
 ```ts
-import { openai } from '@ai-sdk/openai';
-import { generateText } from 'ai';
+import { openai } from "@ai-sdk/openai";
+import { generateText } from "ai";
 
 const result = await generateText({
-  model: openai('gpt-5.2'),
+  model: openai("gpt-5.2"),
   tools: {
     shell: openai.tools.shell({
       execute: async ({ action }) => {
@@ -639,7 +636,7 @@ const result = await generateText({
       },
     }),
   },
-  prompt: 'List the files in the current directory and show disk usage.',
+  prompt: "List the files in the current directory and show disk usage.",
 });
 ```
 
@@ -649,29 +646,29 @@ Set `environment.type` to `'containerAuto'` to run commands in an OpenAI-hosted 
 
 ```ts
 const result = await generateText({
-  model: openai('gpt-5.2'),
+  model: openai("gpt-5.2"),
   tools: {
     shell: openai.tools.shell({
       environment: {
-        type: 'containerAuto',
+        type: "containerAuto",
         // optional configuration:
-        memoryLimit: '4g',
-        fileIds: ['file-abc123'],
+        memoryLimit: "4g",
+        fileIds: ["file-abc123"],
         networkPolicy: {
-          type: 'allowlist',
-          allowedDomains: ['example.com'],
+          type: "allowlist",
+          allowedDomains: ["example.com"],
         },
       },
     }),
   },
-  prompt: 'Install numpy and compute the eigenvalues of a 3x3 matrix.',
+  prompt: "Install numpy and compute the eigenvalues of a 3x3 matrix.",
 });
 ```
 
 The `containerAuto` environment supports:
 
-- **fileIds** *string\[]* - File IDs to make available in the container
-- **memoryLimit** *'1g' | '4g' | '16g' | '64g'* - Memory limit for the container
+- **fileIds** _string\[]_ - File IDs to make available in the container
+- **memoryLimit** _'1g' | '4g' | '16g' | '64g'_ - Memory limit for the container
 - **networkPolicy** - Network access policy:
   - `{ type: 'disabled' }` — no network access
   - `{ type: 'allowlist', allowedDomains: string[], domainSecrets?: Array<{ domain, name, value }> }` — allow specific domains with optional secrets
@@ -682,16 +679,16 @@ Set `environment.type` to `'containerReference'` to use an existing container by
 
 ```ts
 const result = await generateText({
-  model: openai('gpt-5.2'),
+  model: openai("gpt-5.2"),
   tools: {
     shell: openai.tools.shell({
       environment: {
-        type: 'containerReference',
-        containerId: 'cntr_abc123',
+        type: "containerReference",
+        containerId: "cntr_abc123",
       },
     }),
   },
-  prompt: 'Check the status of running processes.',
+  prompt: "Check the status of running processes.",
 });
 ```
 
@@ -699,8 +696,8 @@ const result = await generateText({
 
 For local execution (default or `type: 'local'`), your execute function must return an output array with results for each command:
 
-- **stdout** *string* - Standard output from the command
-- **stderr** *string* - Standard error from the command
+- **stdout** _string_ - Standard output from the command
+- **stderr** _string_ - Standard error from the command
 - **outcome** - Either `{ type: 'timeout' }` or `{ type: 'exit', exitCode: number }`
 
 ##### Skills
@@ -711,30 +708,30 @@ For local execution (default or `type: 'local'`), your execute function must ret
 
 ```ts
 const result = await generateText({
-  model: openai('gpt-5.2'),
+  model: openai("gpt-5.2"),
   tools: {
     shell: openai.tools.shell({
       environment: {
-        type: 'containerAuto',
+        type: "containerAuto",
         skills: [
           // By reference:
-          { type: 'skillReference', skillId: 'skill_abc123' },
+          { type: "skillReference", skillId: "skill_abc123" },
           // Or inline:
           {
-            type: 'inline',
-            name: 'my-skill',
-            description: 'What this skill does',
+            type: "inline",
+            name: "my-skill",
+            description: "What this skill does",
             source: {
-              type: 'base64',
-              mediaType: 'application/zip',
-              data: readFileSync('./my-skill.zip').toString('base64'),
+              type: "base64",
+              mediaType: "application/zip",
+              data: readFileSync("./my-skill.zip").toString("base64"),
             },
           },
         ],
       },
     }),
   },
-  prompt: 'Use the skill to solve this problem.',
+  prompt: "Use the skill to solve this problem.",
 });
 ```
 
@@ -742,7 +739,7 @@ const result = await generateText({
 
 ```ts
 const result = await generateText({
-  model: openai('gpt-5.2'),
+  model: openai("gpt-5.2"),
   tools: {
     shell: openai.tools.shell({
       execute: async ({ action }) => {
@@ -750,18 +747,18 @@ const result = await generateText({
         return { output: results };
       },
       environment: {
-        type: 'local',
+        type: "local",
         skills: [
           {
-            name: 'my-skill',
-            description: 'What this skill does',
-            path: resolve('path/to/skill-directory'),
+            name: "my-skill",
+            description: "What this skill does",
+            path: resolve("path/to/skill-directory"),
           },
         ],
       },
     }),
   },
-  prompt: 'Use the skill to solve this problem.',
+  prompt: "Use the skill to solve this problem.",
   stopWhen: stepCountIs(5),
 });
 ```
@@ -776,11 +773,11 @@ Instead of just suggesting edits, the model emits patch operations that your app
 enabling iterative, multi-step code editing workflows.
 
 ```ts
-import { openai } from '@ai-sdk/openai';
-import { generateText, stepCountIs } from 'ai';
+import { openai } from "@ai-sdk/openai";
+import { generateText, stepCountIs } from "ai";
 
 const result = await generateText({
-  model: openai('gpt-5.1'),
+  model: openai("gpt-5.1"),
   tools: {
     apply_patch: openai.tools.applyPatch({
       execute: async ({ callId, operation }) => {
@@ -788,15 +785,15 @@ const result = await generateText({
       },
     }),
   },
-  prompt: 'Create a python file that calculates the factorial of a number',
+  prompt: "Create a python file that calculates the factorial of a number",
   stopWhen: stepCountIs(5),
 });
 ```
 
 Your execute function must return:
 
-- **status** *'completed' | 'failed'* - Whether the patch was applied successfully
-- **output** *string* (optional) - Human-readable log text (e.g., results or error messages)
+- **status** _'completed' | 'failed'_ - Whether the patch was applied successfully
+- **output** _string_ (optional) - Human-readable log text (e.g., results or error messages)
 
 #### Custom Tool
 
@@ -808,29 +805,29 @@ Custom tools return a raw string instead of JSON, optionally constrained to a gr
 SQL queries, code snippets, or any output that must match a specific pattern.
 
 ```ts
-import { openai } from '@ai-sdk/openai';
-import { generateText, stepCountIs } from 'ai';
+import { openai } from "@ai-sdk/openai";
+import { generateText, stepCountIs } from "ai";
 
 const result = await generateText({
-  model: openai.responses('gpt-5.2-codex'),
+  model: openai.responses("gpt-5.2-codex"),
   tools: {
     write_sql: openai.tools.customTool({
-      name: 'write_sql',
-      description: 'Write a SQL SELECT query to answer the user question.',
+      name: "write_sql",
+      description: "Write a SQL SELECT query to answer the user question.",
       format: {
-        type: 'grammar',
-        syntax: 'regex',
-        definition: 'SELECT .+',
+        type: "grammar",
+        syntax: "regex",
+        definition: "SELECT .+",
       },
-      execute: async input => {
+      execute: async (input) => {
         // input is a raw string matching the grammar, e.g. "SELECT * FROM users WHERE age > 25"
         const rows = await db.query(input);
         return JSON.stringify(rows);
       },
     }),
   },
-  toolChoice: 'required',
-  prompt: 'Write a SQL query to get all users older than 25.',
+  toolChoice: "required",
+  prompt: "Write a SQL query to get all users older than 25.",
   stopWhen: stepCountIs(3),
 });
 ```
@@ -838,28 +835,28 @@ const result = await generateText({
 Custom tools also work with `streamText`:
 
 ```ts
-import { openai } from '@ai-sdk/openai';
-import { streamText } from 'ai';
+import { openai } from "@ai-sdk/openai";
+import { streamText } from "ai";
 
 const result = streamText({
-  model: openai.responses('gpt-5.2-codex'),
+  model: openai.responses("gpt-5.2-codex"),
   tools: {
     write_sql: openai.tools.customTool({
-      name: 'write_sql',
-      description: 'Write a SQL SELECT query to answer the user question.',
+      name: "write_sql",
+      description: "Write a SQL SELECT query to answer the user question.",
       format: {
-        type: 'grammar',
-        syntax: 'regex',
-        definition: 'SELECT .+',
+        type: "grammar",
+        syntax: "regex",
+        definition: "SELECT .+",
       },
     }),
   },
-  toolChoice: 'required',
-  prompt: 'Write a SQL query to get all users older than 25.',
+  toolChoice: "required",
+  prompt: "Write a SQL query to get all users older than 25.",
 });
 
 for await (const chunk of result.fullStream) {
-  if (chunk.type === 'tool-call') {
+  if (chunk.type === "tool-call") {
     console.log(`Tool: ${chunk.toolName}`);
     console.log(`Input: ${chunk.input}`);
   }
@@ -868,13 +865,13 @@ for await (const chunk of result.fullStream) {
 
 The custom tool can be configured with:
 
-- **name** *string* (required) - The name of the custom tool. Used to identify the tool in tool calls.
-- **description** *string* (optional) - A description of what the tool does, to help the model understand when to use it.
-- **format** *object* (optional) - The output format constraint. Omit for unconstrained text output.
-  - **type** *'grammar' | 'text'* - The format type. Use `'grammar'` for constrained output or `'text'` for explicit unconstrained text.
-  - **syntax** *'regex' | 'lark'* - (grammar only) The grammar syntax. Use `'regex'` for regular expression patterns or `'lark'` for [Lark parser grammar](https://lark-parser.readthedocs.io/).
-  - **definition** *string* - (grammar only) The grammar definition string (a regex pattern or Lark grammar).
-- **execute** *function* (optional) - An async function that receives the raw string input and returns a string result. Enables multi-turn tool calling.
+- **name** _string_ (required) - The name of the custom tool. Used to identify the tool in tool calls.
+- **description** _string_ (optional) - A description of what the tool does, to help the model understand when to use it.
+- **format** _object_ (optional) - The output format constraint. Omit for unconstrained text output.
+  - **type** _'grammar' | 'text'_ - The format type. Use `'grammar'` for constrained output or `'text'` for explicit unconstrained text.
+  - **syntax** _'regex' | 'lark'_ - (grammar only) The grammar syntax. Use `'regex'` for regular expression patterns or `'lark'` for [Lark parser grammar](https://lark-parser.readthedocs.io/).
+  - **definition** _string_ - (grammar only) The grammar definition string (a regex pattern or Lark grammar).
+- **execute** _function_ (optional) - An async function that receives the raw string input and returns a string result. Enables multi-turn tool calling.
 
 #### Image Inputs
 
@@ -883,18 +880,18 @@ You can pass Image files as part of the message content using the 'image' type:
 
 ```ts
 const result = await generateText({
-  model: openai('gpt-5'),
+  model: openai("gpt-5"),
   messages: [
     {
-      role: 'user',
+      role: "user",
       content: [
         {
-          type: 'text',
-          text: 'Please describe the image.',
+          type: "text",
+          text: "Please describe the image.",
         },
         {
-          type: 'image',
-          image: readFileSync('./data/image.png'),
+          type: "image",
+          image: readFileSync("./data/image.png"),
         },
       ],
     },
@@ -930,20 +927,20 @@ You can pass PDF files as part of the message content using the `file` type:
 
 ```ts
 const result = await generateText({
-  model: openai('gpt-5'),
+  model: openai("gpt-5"),
   messages: [
     {
-      role: 'user',
+      role: "user",
       content: [
         {
-          type: 'text',
-          text: 'What is an embedding model?',
+          type: "text",
+          text: "What is an embedding model?",
         },
         {
-          type: 'file',
-          data: readFileSync('./data/ai.pdf'),
-          mediaType: 'application/pdf',
-          filename: 'ai.pdf', // optional
+          type: "file",
+          data: readFileSync("./data/ai.pdf"),
+          mediaType: "application/pdf",
+          filename: "ai.pdf", // optional
         },
       ],
     },
@@ -983,7 +980,7 @@ The OpenAI Responses API supports structured outputs. You can use `generateText`
 
 ```ts
 const result = await generateText({
-  model: openai('gpt-4.1'),
+  model: openai("gpt-4.1"),
   output: Output.object({
     schema: z.object({
       recipe: z.object({
@@ -998,7 +995,7 @@ const result = await generateText({
       }),
     }),
   }),
-  prompt: 'Generate a lasagna recipe.',
+  prompt: "Generate a lasagna recipe.",
 });
 ```
 
@@ -1020,7 +1017,6 @@ This metadata includes the following fields:
   If no annotations are present, this property itself may be omitted (`undefined`).
 
   Each element in `annotations` is a discriminated union with a required `type` field. Supported types include, for example:
-
   - `url_citation`
   - `file_citation`
   - `container_file_citation`
@@ -1034,22 +1030,22 @@ This metadata includes the following fields:
 import {
   openai,
   type OpenaiResponsesTextProviderMetadata,
-} from '@ai-sdk/openai';
-import { generateText } from 'ai';
+} from "@ai-sdk/openai";
+import { generateText } from "ai";
 
 const result = await generateText({
-  model: openai('gpt-4.1-mini'),
+  model: openai("gpt-4.1-mini"),
   prompt:
-    'Create a program that generates five random numbers between 1 and 100 with two decimal places, and show me the execution results. Also save the result to a file.',
+    "Create a program that generates five random numbers between 1 and 100 with two decimal places, and show me the execution results. Also save the result to a file.",
   tools: {
     code_interpreter: openai.tools.codeInterpreter(),
     web_search: openai.tools.webSearch(),
-    file_search: openai.tools.fileSearch({ vectorStoreIds: ['vs_1234'] }), // requires a configured vector store
+    file_search: openai.tools.fileSearch({ vectorStoreIds: ["vs_1234"] }), // requires a configured vector store
   },
 });
 
 for (const part of result.content) {
-  if (part.type === 'text') {
+  if (part.type === "text") {
     const providerMetadata = part.providerMetadata as
       | OpenaiResponsesTextProviderMetadata
       | undefined;
@@ -1059,19 +1055,19 @@ for (const part of result.content) {
     if (!annotations) continue;
     for (const annotation of annotations) {
       switch (annotation.type) {
-        case 'url_citation':
+        case "url_citation":
           // url_citation is returned from web_search and provides:
           // properties: type, url, title, start_index and end_index
           break;
-        case 'file_citation':
+        case "file_citation":
           // file_citation is returned from file_search and provides:
           // properties: type, file_id, filename and index
           break;
-        case 'container_file_citation':
+        case "container_file_citation":
           // container_file_citation is returned from code_interpreter and provides:
           // properties: type, container_id, file_id, filename, start_index and end_index
           break;
-        case 'file_path':
+        case "file_path":
           // file_path provides:
           // properties: type, file_id and index
           break;
@@ -1112,22 +1108,22 @@ import {
   openai,
   type OpenaiResponsesReasoningProviderMetadata,
   type OpenAILanguageModelResponsesOptions,
-} from '@ai-sdk/openai';
-import { generateText } from 'ai';
+} from "@ai-sdk/openai";
+import { generateText } from "ai";
 
 const result = await generateText({
-  model: openai('gpt-5'),
+  model: openai("gpt-5"),
   prompt: 'How many "r"s are in the word "strawberry"?',
   providerOptions: {
     openai: {
       store: false,
-      include: ['reasoning.encrypted_content'],
+      include: ["reasoning.encrypted_content"],
     } satisfies OpenAILanguageModelResponsesOptions,
   },
 });
 
 for (const part of result.content) {
-  if (part.type === 'reasoning') {
+  if (part.type === "reasoning") {
     const providerMetadata = part.providerMetadata as
       | OpenaiResponsesReasoningProviderMetadata
       | undefined;
@@ -1155,40 +1151,40 @@ Each type includes the identifiers required to work with the referenced resource
 import {
   openai,
   type OpenaiResponsesSourceDocumentProviderMetadata,
-} from '@ai-sdk/openai';
-import { generateText } from 'ai';
+} from "@ai-sdk/openai";
+import { generateText } from "ai";
 
 const result = await generateText({
-  model: openai('gpt-4.1-mini'),
+  model: openai("gpt-4.1-mini"),
   prompt:
-    'Create a program that generates five random numbers between 1 and 100 with two decimal places, and show me the execution results. Also save the result to a file.',
+    "Create a program that generates five random numbers between 1 and 100 with two decimal places, and show me the execution results. Also save the result to a file.",
   tools: {
     code_interpreter: openai.tools.codeInterpreter(),
     web_search: openai.tools.webSearch(),
-    file_search: openai.tools.fileSearch({ vectorStoreIds: ['vs_1234'] }), // requires a configured vector store
+    file_search: openai.tools.fileSearch({ vectorStoreIds: ["vs_1234"] }), // requires a configured vector store
   },
 });
 
 for (const part of result.content) {
-  if (part.type === 'source') {
-    if (part.sourceType === 'document') {
+  if (part.type === "source") {
+    if (part.sourceType === "document") {
       const providerMetadata = part.providerMetadata as
         | OpenaiResponsesSourceDocumentProviderMetadata
         | undefined;
       if (!providerMetadata) continue;
       const annotation = providerMetadata.openai;
       switch (annotation.type) {
-        case 'file_citation':
+        case "file_citation":
           // file_citation is returned from file_search and provides:
           // properties: type, fileId and index
           // The filename can be accessed via part.filename.
           break;
-        case 'container_file_citation':
+        case "container_file_citation":
           // container_file_citation is returned from code_interpreter and provides:
           // properties: type, containerId and fileId
           // The filename can be accessed via part.filename.
           break;
-        case 'file_path':
+        case "file_path":
           // file_path provides:
           // properties: type, fileId and index
           break;
@@ -1205,7 +1201,7 @@ for (const part of result.content) {
 ```
 
 Annotations in text parts follow the OpenAI Responses API specification and
-therefore use snake\_case properties (e.g. `file_id`, `container_id`). In
+therefore use snake_case properties (e.g. `file_id`, `container_id`). In
 contrast, `providerMetadata` for source document parts is normalized by the
 SDK to camelCase (e.g. `fileId`, `containerId`). Fields that depend on the
 original text content, such as `start_index` and `end_index`, are omitted, as

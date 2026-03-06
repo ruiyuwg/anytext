@@ -34,17 +34,17 @@ Tags must first be assigned to cached data. You can do this in two ways:
 - Using the [`next.tags`](/docs/app/guides/caching#fetch-optionsnexttags-and-revalidatetag) option with `fetch` for caching external API requests:
 
 ```tsx
-fetch(url, { next: { tags: ['posts'] } })
+fetch(url, { next: { tags: ["posts"] } });
 ```
 
 - Using [`cacheTag`](/docs/app/api-reference/functions/cacheTag) inside cached functions or components with the `'use cache'` directive:
 
 ```tsx
-import { cacheTag } from 'next/cache'
+import { cacheTag } from "next/cache";
 
 async function getData() {
-  'use cache'
-  cacheTag('posts')
+  "use cache";
+  cacheTag("posts");
   // ...
 }
 ```
@@ -68,65 +68,65 @@ The following examples demonstrate how to use `revalidateTag` in different conte
 ### Server Action
 
 ```ts filename="app/actions.ts" switcher
-'use server'
+"use server";
 
-import { revalidateTag } from 'next/cache'
+import { revalidateTag } from "next/cache";
 
 export default async function submit() {
-  await addPost()
-  revalidateTag('posts', 'max')
+  await addPost();
+  revalidateTag("posts", "max");
 }
 ```
 
 ```js filename="app/actions.js" switcher
-'use server'
+"use server";
 
-import { revalidateTag } from 'next/cache'
+import { revalidateTag } from "next/cache";
 
 export default async function submit() {
-  await addPost()
-  revalidateTag('posts', 'max')
+  await addPost();
+  revalidateTag("posts", "max");
 }
 ```
 
 ### Route Handler
 
 ```ts filename="app/api/revalidate/route.ts" switcher
-import type { NextRequest } from 'next/server'
-import { revalidateTag } from 'next/cache'
+import type { NextRequest } from "next/server";
+import { revalidateTag } from "next/cache";
 
 export async function GET(request: NextRequest) {
-  const tag = request.nextUrl.searchParams.get('tag')
+  const tag = request.nextUrl.searchParams.get("tag");
 
   if (tag) {
-    revalidateTag(tag, 'max')
-    return Response.json({ revalidated: true, now: Date.now() })
+    revalidateTag(tag, "max");
+    return Response.json({ revalidated: true, now: Date.now() });
   }
 
   return Response.json({
     revalidated: false,
     now: Date.now(),
-    message: 'Missing tag to revalidate',
-  })
+    message: "Missing tag to revalidate",
+  });
 }
 ```
 
 ```js filename="app/api/revalidate/route.js" switcher
-import { revalidateTag } from 'next/cache'
+import { revalidateTag } from "next/cache";
 
 export async function GET(request) {
-  const tag = request.nextUrl.searchParams.get('tag')
+  const tag = request.nextUrl.searchParams.get("tag");
 
   if (tag) {
-    revalidateTag(tag, 'max')
-    return Response.json({ revalidated: true, now: Date.now() })
+    revalidateTag(tag, "max");
+    return Response.json({ revalidated: true, now: Date.now() });
   }
 
   return Response.json({
     revalidated: false,
     now: Date.now(),
-    message: 'Missing tag to revalidate',
-  })
+    message: "Missing tag to revalidate",
+  });
 }
 ```
 

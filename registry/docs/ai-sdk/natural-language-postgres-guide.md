@@ -245,16 +245,16 @@ In this action, you'll use the `generateText` function with `Output` from the AI
 
 ```ts filename="app/actions.ts"
 /* ...other imports... */
-import { generateText, Output } from 'ai';
-import { z } from 'zod';
+import { generateText, Output } from "ai";
+import { z } from "zod";
 
 /* ...rest of the file... */
 
 export const generateQuery = async (input: string) => {
-  'use server';
+  "use server";
   try {
     const result = await generateText({
-      model: 'openai/gpt-4o',
+      model: "openai/gpt-4o",
       system: `You are a SQL (postgres) ...`, // SYSTEM PROMPT AS ABOVE - OMITTED FOR BREVITY
       prompt: `Generate the query necessary to retrieve the data the user wants: ${input}`,
       output: Output.object({
@@ -266,7 +266,7 @@ export const generateQuery = async (input: string) => {
     return result.output.query;
   } catch (e) {
     console.error(e);
-    throw new Error('Failed to generate query');
+    throw new Error("Failed to generate query");
   }
 };
 ```
@@ -281,7 +281,7 @@ Import the `generateQuery` function and call it with the user's input.
 
 ```typescript filename="app/page.tsx" highlight="21"
 /* ...other imports... */
-import { runGeneratedSQLQuery, generateQuery } from './actions';
+import { runGeneratedSQLQuery, generateQuery } from "./actions";
 
 /* ...rest of the file... */
 
@@ -297,13 +297,13 @@ const handleSubmit = async (suggestion?: string) => {
 
   setLoading(true);
   setLoadingStep(1);
-  setActiveQuery('');
+  setActiveQuery("");
 
   try {
     const query = await generateQuery(question);
 
     if (query === undefined) {
-      toast.error('An error occurred. Please try again.');
+      toast.error("An error occurred. Please try again.");
       setLoading(false);
       return;
     }
@@ -318,7 +318,7 @@ const handleSubmit = async (suggestion?: string) => {
 
     setLoading(false);
   } catch (e) {
-    toast.error('An error occurred. Please try again.');
+    toast.error("An error occurred. Please try again.");
     setLoading(false);
   }
 };
@@ -368,10 +368,10 @@ This action takes two parameters - the original natural language input and the g
 /* ...rest of the file... */
 
 export const explainQuery = async (input: string, sqlQuery: string) => {
-  'use server';
+  "use server";
   try {
     const result = await generateText({
-      model: 'openai/gpt-4o',
+      model: "openai/gpt-4o",
       system: `You are a SQL (postgres) expert. ...`, // SYSTEM PROMPT AS ABOVE - OMITTED FOR BREVITY
       prompt: `Explain the SQL query you generated to retrieve the data the user wanted. Assume the user is not an expert in SQL. Break down the query into steps. Be concise.
 
@@ -384,7 +384,7 @@ export const explainQuery = async (input: string, sqlQuery: string) => {
     return result.text;
   } catch (e) {
     console.error(e);
-    throw new Error('Failed to generate query');
+    throw new Error("Failed to generate query");
   }
 };
 ```
@@ -394,7 +394,7 @@ This action uses the `generateText` function. However, you haven't defined the o
 Update your `lib/types.ts` file to include the schema for the explanations:
 
 ```ts filename="lib/types.ts"
-import { z } from 'zod';
+import { z } from "zod";
 
 /* ...rest of the file... */
 
@@ -410,15 +410,15 @@ This schema defines the structure of the explanation that the model will generat
 
 ```ts filename="app/actions.ts" highlight="2,19,20"
 // other imports
-import { explanationSchema } from '@/lib/types';
+import { explanationSchema } from "@/lib/types";
 
 /* ...rest of the file... */
 
 export const explainQuery = async (input: string, sqlQuery: string) => {
-  'use server';
+  "use server";
   try {
     const result = await generateText({
-      model: 'openai/gpt-4o',
+      model: "openai/gpt-4o",
       system: `You are a SQL (postgres) expert. ...`, // SYSTEM PROMPT AS ABOVE - OMITTED FOR BREVITY
       prompt: `Explain the SQL query you generated to retrieve the data the user wanted. Assume the user is not an expert in SQL. Break down the query into steps. Be concise.
 
@@ -432,7 +432,7 @@ export const explainQuery = async (input: string, sqlQuery: string) => {
     return result.output;
   } catch (e) {
     console.error(e);
-    throw new Error('Failed to generate query');
+    throw new Error("Failed to generate query");
   }
 };
 ```
@@ -446,7 +446,7 @@ Next, update the `query-viewer.tsx` component to display these explanations. The
 
 ```ts filename="components/query-viewer.tsx" highlight="2,10,11"
 /* ...other imports... */
-import { explainQuery } from '@/app/actions';
+import { explainQuery } from "@/app/actions";
 
 /* ...rest of the component... */
 
@@ -500,45 +500,45 @@ export const configSchema = z
     description: z
       .string()
       .describe(
-        'Describe the chart. What is it showing? What is interesting about the way the data is displayed?',
+        "Describe the chart. What is it showing? What is interesting about the way the data is displayed?",
       ),
-    takeaway: z.string().describe('What is the main takeaway from the chart?'),
-    type: z.enum(['bar', 'line', 'area', 'pie']).describe('Type of chart'),
+    takeaway: z.string().describe("What is the main takeaway from the chart?"),
+    type: z.enum(["bar", "line", "area", "pie"]).describe("Type of chart"),
     title: z.string(),
-    xKey: z.string().describe('Key for x-axis or category'),
+    xKey: z.string().describe("Key for x-axis or category"),
     yKeys: z
       .array(z.string())
       .describe(
-        'Key(s) for y-axis values this is typically the quantitative column',
+        "Key(s) for y-axis values this is typically the quantitative column",
       ),
     multipleLines: z
       .boolean()
       .describe(
-        'For line charts only: whether the chart is comparing groups of data.',
+        "For line charts only: whether the chart is comparing groups of data.",
       )
       .optional(),
     measurementColumn: z
       .string()
       .describe(
-        'For line charts only: key for quantitative y-axis column to measure against (eg. values, counts etc.)',
+        "For line charts only: key for quantitative y-axis column to measure against (eg. values, counts etc.)",
       )
       .optional(),
     lineCategories: z
       .array(z.string())
       .describe(
-        'For line charts only: Categories used to compare different lines or data series. Each category represents a distinct line in the chart.',
+        "For line charts only: Categories used to compare different lines or data series. Each category represents a distinct line in the chart.",
       )
       .optional(),
     colors: z
       .record(
-        z.string().describe('Any of the yKeys'),
-        z.string().describe('Color value in CSS format (e.g., hex, rgb, hsl)'),
+        z.string().describe("Any of the yKeys"),
+        z.string().describe("Color value in CSS format (e.g., hex, rgb, hsl)"),
       )
-      .describe('Mapping of data keys to color values for chart elements')
+      .describe("Mapping of data keys to color values for chart elements")
       .optional(),
-    legend: z.boolean().describe('Whether to show legend'),
+    legend: z.boolean().describe("Whether to show legend"),
   })
-  .describe('Chart configuration object');
+  .describe("Chart configuration object");
 
 export type Config = z.infer<typeof configSchema>;
 ```
@@ -555,7 +555,7 @@ Create a new action in `app/actions.ts`:
 
 ```ts
 /* ...other imports... */
-import { Config, configSchema, explanationsSchema, Result } from '@/lib/types';
+import { Config, configSchema, explanationsSchema, Result } from "@/lib/types";
 
 /* ...rest of the file... */
 
@@ -563,12 +563,12 @@ export const generateChartConfig = async (
   results: Result[],
   userQuery: string,
 ) => {
-  'use server';
+  "use server";
 
   try {
     const { output: config } = await generateText({
-      model: 'openai/gpt-4o',
-      system: 'You are a data visualization expert.',
+      model: "openai/gpt-4o",
+      system: "You are a data visualization expert.",
       prompt: `Given the following data from a SQL query result, generate the chart config that best visualises the data and answers the users query.
       For multiple groups use multi-lines.
 
@@ -603,7 +603,7 @@ export const generateChartConfig = async (
     return { config: updatedConfig };
   } catch (e) {
     console.error(e);
-    throw new Error('Failed to generate chart suggestion');
+    throw new Error("Failed to generate chart suggestion");
   }
 };
 ```
@@ -616,7 +616,7 @@ Update the `handleSubmit` function in your root page (`app/page.tsx`) to generat
 
 ```typescript filename="app/page.tsx" highlight="38,39"
 /* ...other imports... */
-import { getCompanies, generateQuery, generateChartConfig } from './actions';
+import { getCompanies, generateQuery, generateChartConfig } from "./actions";
 
 /* ...rest of the file... */
 const handleSubmit = async (suggestion?: string) => {
@@ -631,13 +631,13 @@ const handleSubmit = async (suggestion?: string) => {
 
   setLoading(true);
   setLoadingStep(1);
-  setActiveQuery('');
+  setActiveQuery("");
 
   try {
     const query = await generateQuery(question);
 
     if (query === undefined) {
-      toast.error('An error occurred. Please try again.');
+      toast.error("An error occurred. Please try again.");
       setLoading(false);
       return;
     }
@@ -655,7 +655,7 @@ const handleSubmit = async (suggestion?: string) => {
     const { config } = await generateChartConfig(companies, question);
     setChartConfig(config);
   } catch (e) {
-    toast.error('An error occurred. Please try again.');
+    toast.error("An error occurred. Please try again.");
     setLoading(false);
   }
 };

@@ -31,22 +31,22 @@ bun add -D babel-plugin-react-compiler
 Then, add `reactCompiler` option in `next.config.js`:
 
 ```ts filename="next.config.ts" switcher
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactCompiler: true,
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 ```js filename="next.config.js" switcher
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactCompiler: true,
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 ## Annotations
@@ -54,40 +54,40 @@ module.exports = nextConfig
 You can configure the compiler to run in "opt-in" mode as follows:
 
 ```ts filename="next.config.ts" switcher
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactCompiler: {
-    compilationMode: 'annotation',
+    compilationMode: "annotation",
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 ```js filename="next.config.js" switcher
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactCompiler: {
-    compilationMode: 'annotation',
+    compilationMode: "annotation",
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 Then, you can annotate specific components or hooks with the `"use memo"` directive from React to opt-in:
 
 ```ts filename="app/page.tsx" switcher
 export default function Page() {
-  'use memo'
+  "use memo";
   // ...
 }
 ```
 
 ```js filename="app/page.js" switcher
 export default function Page() {
-  'use memo'
+  "use memo";
   // ...
 }
 ```
@@ -103,7 +103,7 @@ During static rendering, React can emit headers that can be added to the respons
 ```js filename="next.config.js"
 module.exports = {
   reactMaxHeadersLength: 1000,
-}
+};
 ```
 
 > **Good to know**: This option is only available in App Router.
@@ -125,7 +125,7 @@ The Next.js runtime is Strict Mode-compliant. To opt-in to Strict Mode, configur
 ```js filename="next.config.js"
 module.exports = {
   reactStrictMode: true,
-}
+};
 ```
 
 If you or your team are not ready to use Strict Mode in your entire application, that's OK! You can incrementally migrate on a page-by-page basis using `<React.StrictMode>`.

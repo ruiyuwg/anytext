@@ -7,15 +7,15 @@ The `forbidden` function throws an error that renders a Next.js 403 error page. 
 To start using `forbidden`, enable the experimental [`authInterrupts`](/docs/app/api-reference/config/next-config-js/authInterrupts) configuration option in your `next.config.js` file:
 
 ```ts filename="next.config.ts" switcher
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   experimental: {
     authInterrupts: true,
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 ```js filename="next.config.js" switcher
@@ -23,42 +23,42 @@ module.exports = {
   experimental: {
     authInterrupts: true,
   },
-}
+};
 ```
 
 `forbidden` can be invoked in [Server Components](/docs/app/getting-started/server-and-client-components), [Server Functions](/docs/app/getting-started/updating-data), and [Route Handlers](/docs/app/api-reference/file-conventions/route).
 
 ```tsx filename="app/auth/page.tsx" switcher
-import { verifySession } from '@/app/lib/dal'
-import { forbidden } from 'next/navigation'
+import { verifySession } from "@/app/lib/dal";
+import { forbidden } from "next/navigation";
 
 export default async function AdminPage() {
-  const session = await verifySession()
+  const session = await verifySession();
 
   // Check if the user has the 'admin' role
-  if (session.role !== 'admin') {
-    forbidden()
+  if (session.role !== "admin") {
+    forbidden();
   }
 
   // Render the admin page for authorized users
-  return <></>
+  return <></>;
 }
 ```
 
 ```jsx filename="app/auth/page.js" switcher
-import { verifySession } from '@/app/lib/dal'
-import { forbidden } from 'next/navigation'
+import { verifySession } from "@/app/lib/dal";
+import { forbidden } from "next/navigation";
 
 export default async function AdminPage() {
-  const session = await verifySession()
+  const session = await verifySession();
 
   // Check if the user has the 'admin' role
-  if (session.role !== 'admin') {
-    forbidden()
+  if (session.role !== "admin") {
+    forbidden();
   }
 
   // Render the admin page for authorized users
-  return <></>
+  return <></>;
 }
 ```
 
@@ -73,15 +73,15 @@ export default async function AdminPage() {
 You can use `forbidden` to restrict access to certain routes based on user roles. This ensures that users who are authenticated but lack the required permissions cannot access the route.
 
 ```tsx filename="app/admin/page.tsx" switcher
-import { verifySession } from '@/app/lib/dal'
-import { forbidden } from 'next/navigation'
+import { verifySession } from "@/app/lib/dal";
+import { forbidden } from "next/navigation";
 
 export default async function AdminPage() {
-  const session = await verifySession()
+  const session = await verifySession();
 
   // Check if the user has the 'admin' role
-  if (session.role !== 'admin') {
-    forbidden()
+  if (session.role !== "admin") {
+    forbidden();
   }
 
   // Render the admin page for authorized users
@@ -90,20 +90,20 @@ export default async function AdminPage() {
       <h1>Admin Dashboard</h1>
       <p>Welcome, {session.user.name}!</p>
     </main>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/admin/page.js" switcher
-import { verifySession } from '@/app/lib/dal'
-import { forbidden } from 'next/navigation'
+import { verifySession } from "@/app/lib/dal";
+import { forbidden } from "next/navigation";
 
 export default async function AdminPage() {
-  const session = await verifySession()
+  const session = await verifySession();
 
   // Check if the user has the 'admin' role
-  if (session.role !== 'admin') {
-    forbidden()
+  if (session.role !== "admin") {
+    forbidden();
   }
 
   // Render the admin page for authorized users
@@ -112,7 +112,7 @@ export default async function AdminPage() {
       <h1>Admin Dashboard</h1>
       <p>Welcome, {session.user.name}!</p>
     </main>
-  )
+  );
 }
 ```
 
@@ -121,18 +121,18 @@ export default async function AdminPage() {
 When implementing mutations in Server Actions, you can use `forbidden` to only allow users with a specific role to update sensitive data.
 
 ```ts filename="app/actions/update-role.ts" switcher
-'use server'
+"use server";
 
-import { verifySession } from '@/app/lib/dal'
-import { forbidden } from 'next/navigation'
-import db from '@/app/lib/db'
+import { verifySession } from "@/app/lib/dal";
+import { forbidden } from "next/navigation";
+import db from "@/app/lib/db";
 
 export async function updateRole(formData: FormData) {
-  const session = await verifySession()
+  const session = await verifySession();
 
   // Ensure only admins can update roles
-  if (session.role !== 'admin') {
-    forbidden()
+  if (session.role !== "admin") {
+    forbidden();
   }
 
   // Perform the role update for authorized users
@@ -141,18 +141,18 @@ export async function updateRole(formData: FormData) {
 ```
 
 ```js filename="app/actions/update-role.js" switcher
-'use server'
+"use server";
 
-import { verifySession } from '@/app/lib/dal'
-import { forbidden } from 'next/navigation'
-import db from '@/app/lib/db'
+import { verifySession } from "@/app/lib/dal";
+import { forbidden } from "next/navigation";
+import db from "@/app/lib/db";
 
 export async function updateRole(formData) {
-  const session = await verifySession()
+  const session = await verifySession();
 
   // Ensure only admins can update roles
-  if (session.role !== 'admin') {
-    forbidden()
+  if (session.role !== "admin") {
+    forbidden();
   }
 
   // Perform the role update for authorized users

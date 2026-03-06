@@ -13,13 +13,19 @@ vi.mock("node:fs", () => ({
   readFileSync: (...args: unknown[]) => mockReadFileSync(...args),
 }));
 vi.mock("../adapters/llms-full.js", () => ({
-  llmsFullAdapter: { process: (...args: unknown[]) => mockLlmsFullProcess(...args) },
+  llmsFullAdapter: {
+    process: (...args: unknown[]) => mockLlmsFullProcess(...args),
+  },
 }));
 vi.mock("../adapters/llms-txt.js", () => ({
-  llmsTxtAdapter: { process: (...args: unknown[]) => mockLlmsTxtProcess(...args) },
+  llmsTxtAdapter: {
+    process: (...args: unknown[]) => mockLlmsTxtProcess(...args),
+  },
 }));
 vi.mock("../adapters/manual.js", () => ({
-  manualAdapter: { process: (...args: unknown[]) => mockManualProcess(...args) },
+  manualAdapter: {
+    process: (...args: unknown[]) => mockManualProcess(...args),
+  },
 }));
 vi.mock("../pipeline/manifest.js", () => ({
   readManifest: (...args: unknown[]) => mockReadManifest(...args),
@@ -71,8 +77,16 @@ describe("loadSources", () => {
 describe("processSource", () => {
   it("selects llms-full adapter", async () => {
     mockLlmsFullProcess.mockResolvedValue([topic]);
-    mockReadManifest.mockReturnValue({ version: 1, updatedAt: "2025-01-01", libraries: [] });
-    mockMergeLibrary.mockReturnValue({ version: 2, updatedAt: "2025-01-01", libraries: [] });
+    mockReadManifest.mockReturnValue({
+      version: 1,
+      updatedAt: "2025-01-01",
+      libraries: [],
+    });
+    mockMergeLibrary.mockReturnValue({
+      version: 2,
+      updatedAt: "2025-01-01",
+      libraries: [],
+    });
 
     const { processSource } = await import("../scrape.js");
     await processSource(baseSource, false);
@@ -81,8 +95,16 @@ describe("processSource", () => {
 
   it("selects llms-txt adapter", async () => {
     mockLlmsTxtProcess.mockResolvedValue([topic]);
-    mockReadManifest.mockReturnValue({ version: 1, updatedAt: "2025-01-01", libraries: [] });
-    mockMergeLibrary.mockReturnValue({ version: 2, updatedAt: "2025-01-01", libraries: [] });
+    mockReadManifest.mockReturnValue({
+      version: 1,
+      updatedAt: "2025-01-01",
+      libraries: [],
+    });
+    mockMergeLibrary.mockReturnValue({
+      version: 2,
+      updatedAt: "2025-01-01",
+      libraries: [],
+    });
 
     const { processSource } = await import("../scrape.js");
     const source = { ...baseSource, adapter: "llms-txt" as const };
@@ -92,8 +114,16 @@ describe("processSource", () => {
 
   it("selects manual adapter", async () => {
     mockManualProcess.mockResolvedValue([topic]);
-    mockReadManifest.mockReturnValue({ version: 1, updatedAt: "2025-01-01", libraries: [] });
-    mockMergeLibrary.mockReturnValue({ version: 2, updatedAt: "2025-01-01", libraries: [] });
+    mockReadManifest.mockReturnValue({
+      version: 1,
+      updatedAt: "2025-01-01",
+      libraries: [],
+    });
+    mockMergeLibrary.mockReturnValue({
+      version: 2,
+      updatedAt: "2025-01-01",
+      libraries: [],
+    });
 
     const { processSource } = await import("../scrape.js");
     const source = { ...baseSource, adapter: "manual" as const };
@@ -104,7 +134,9 @@ describe("processSource", () => {
   it("throws on unknown adapter", async () => {
     const { processSource } = await import("../scrape.js");
     const source = { ...baseSource, adapter: "unknown" as "llms-full" };
-    await expect(processSource(source, false)).rejects.toThrow("Unknown adapter");
+    await expect(processSource(source, false)).rejects.toThrow(
+      "Unknown adapter",
+    );
   });
 
   it("returns early with empty topics", async () => {
@@ -119,8 +151,16 @@ describe("processSource", () => {
 
   it("updates manifest when not dry-run", async () => {
     mockLlmsFullProcess.mockResolvedValue([topic]);
-    mockReadManifest.mockReturnValue({ version: 1, updatedAt: "2025-01-01", libraries: [] });
-    const updatedManifest = { version: 2, updatedAt: "2025-01-01", libraries: [] };
+    mockReadManifest.mockReturnValue({
+      version: 1,
+      updatedAt: "2025-01-01",
+      libraries: [],
+    });
+    const updatedManifest = {
+      version: 2,
+      updatedAt: "2025-01-01",
+      libraries: [],
+    };
     mockMergeLibrary.mockReturnValue(updatedManifest);
 
     const { processSource } = await import("../scrape.js");
@@ -144,8 +184,16 @@ describe("processAll", () => {
     mockLlmsFullProcess
       .mockRejectedValueOnce(new Error("source1 fail"))
       .mockResolvedValueOnce([topic]);
-    mockReadManifest.mockReturnValue({ version: 1, updatedAt: "2025-01-01", libraries: [] });
-    mockMergeLibrary.mockReturnValue({ version: 2, updatedAt: "2025-01-01", libraries: [] });
+    mockReadManifest.mockReturnValue({
+      version: 1,
+      updatedAt: "2025-01-01",
+      libraries: [],
+    });
+    mockMergeLibrary.mockReturnValue({
+      version: 2,
+      updatedAt: "2025-01-01",
+      libraries: [],
+    });
 
     const { processAll } = await import("../scrape.js");
     const sources = [baseSource, { ...baseSource, id: "react2" }];
@@ -157,8 +205,16 @@ describe("processAll", () => {
 
   it("returns zero failures when all succeed", async () => {
     mockLlmsFullProcess.mockResolvedValue([topic]);
-    mockReadManifest.mockReturnValue({ version: 1, updatedAt: "2025-01-01", libraries: [] });
-    mockMergeLibrary.mockReturnValue({ version: 2, updatedAt: "2025-01-01", libraries: [] });
+    mockReadManifest.mockReturnValue({
+      version: 1,
+      updatedAt: "2025-01-01",
+      libraries: [],
+    });
+    mockMergeLibrary.mockReturnValue({
+      version: 2,
+      updatedAt: "2025-01-01",
+      libraries: [],
+    });
 
     const { processAll } = await import("../scrape.js");
     const result = await processAll([baseSource], false);
@@ -167,12 +223,22 @@ describe("processAll", () => {
 
   it("logs summary line", async () => {
     mockLlmsFullProcess.mockResolvedValue([topic]);
-    mockReadManifest.mockReturnValue({ version: 1, updatedAt: "2025-01-01", libraries: [] });
-    mockMergeLibrary.mockReturnValue({ version: 2, updatedAt: "2025-01-01", libraries: [] });
+    mockReadManifest.mockReturnValue({
+      version: 1,
+      updatedAt: "2025-01-01",
+      libraries: [],
+    });
+    mockMergeLibrary.mockReturnValue({
+      version: 2,
+      updatedAt: "2025-01-01",
+      libraries: [],
+    });
 
     const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
     const { processAll } = await import("../scrape.js");
     await processAll([baseSource], false);
-    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("1/1 sources processed successfully"));
+    expect(logSpy).toHaveBeenCalledWith(
+      expect.stringContaining("1/1 sources processed successfully"),
+    );
   });
 });

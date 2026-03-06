@@ -18,17 +18,17 @@ Open `next.config.js` and add the following `exportPathMap` config:
 module.exports = {
   exportPathMap: async function (
     defaultPathMap,
-    { dev, dir, outDir, distDir, buildId }
+    { dev, dir, outDir, distDir, buildId },
   ) {
     return {
-      '/': { page: '/' },
-      '/about': { page: '/about' },
-      '/p/hello-nextjs': { page: '/post', query: { title: 'hello-nextjs' } },
-      '/p/learn-nextjs': { page: '/post', query: { title: 'learn-nextjs' } },
-      '/p/deploy-nextjs': { page: '/post', query: { title: 'deploy-nextjs' } },
-    }
+      "/": { page: "/" },
+      "/about": { page: "/about" },
+      "/p/hello-nextjs": { page: "/post", query: { title: "hello-nextjs" } },
+      "/p/learn-nextjs": { page: "/post", query: { title: "learn-nextjs" } },
+      "/p/deploy-nextjs": { page: "/post", query: { title: "deploy-nextjs" } },
+    };
   },
-}
+};
 ```
 
 > **Good to know**: the `query` field in `exportPathMap` cannot be used with [automatically statically optimized pages](/docs/pages/building-your-application/rendering/automatic-static-optimization) or [`getStaticProps` pages](/docs/pages/building-your-application/data-fetching/get-static-props) as they are rendered to HTML files at build-time and additional query information cannot be provided during `next export`.
@@ -59,7 +59,7 @@ To switch back and add a trailing slash, open `next.config.js` and enable the `t
 ```js filename="next.config.js"
 module.exports = {
   trailingSlash: true,
-}
+};
 ```
 
 ## Customizing the output directory
@@ -84,9 +84,9 @@ If you are rebuilding for each stage of your environment, you will need to gener
 module.exports = {
   generateBuildId: async () => {
     // This could be anything, using the latest git hash
-    return process.env.GIT_HASH
+    return process.env.GIT_HASH;
   },
-}
+};
 ```
 
 # generateEtags
@@ -100,7 +100,7 @@ Open `next.config.js` and disable the `generateEtags` option:
 ```js filename="next.config.js"
 module.exports = {
   generateEtags: false,
-}
+};
 ```
 
 # headers

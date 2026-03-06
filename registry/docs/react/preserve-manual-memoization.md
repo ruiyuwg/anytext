@@ -2,11 +2,11 @@
 
 Validates that existing manual memoization is preserved by the compiler. React Compiler will only compile components and hooks if its inference [matches or exceeds the existing manual memoization](/learn/react-compiler/introduction#what-should-i-do-about-usememo-usecallback-and-reactmemo).
 
-## Rule Details {/*rule-details*/}
+## Rule Details {/_rule-details_/}
 
 React Compiler preserves your existing `useMemo`, `useCallback`, and `React.memo` calls. If you've manually memoized something, the compiler assumes you had a good reason and won't remove it. However, incomplete dependencies prevent the compiler from understanding your code's data flow and applying further optimizations.
 
-### Invalid {/*invalid*/}
+### Invalid {/_invalid_/}
 
 Examples of incorrect code for this rule:
 
@@ -15,7 +15,7 @@ Examples of incorrect code for this rule:
 function Component({ data, filter }) {
   const filtered = useMemo(
     () => data.filter(filter),
-    [data] // Missing 'filter' dependency
+    [data], // Missing 'filter' dependency
   );
 
   return <List items={filtered} />;
@@ -31,7 +31,7 @@ function Component({ onUpdate, value }) {
 }
 ```
 
-### Valid {/*valid*/}
+### Valid {/_valid_/}
 
 Examples of correct code for this rule:
 
@@ -40,7 +40,7 @@ Examples of correct code for this rule:
 function Component({ data, filter }) {
   const filtered = useMemo(
     () => data.filter(filter),
-    [data, filter] // All dependencies included
+    [data, filter], // All dependencies included
   );
 
   return <List items={filtered} />;
@@ -54,15 +54,15 @@ function Component({ data, filter }) {
 }
 ```
 
-## Troubleshooting {/*troubleshooting*/}
+## Troubleshooting {/_troubleshooting_/}
 
-### Should I remove my manual memoization? {/*remove-manual-memoization*/}
+### Should I remove my manual memoization? {/_remove-manual-memoization_/}
 
 You might wonder if React Compiler makes manual memoization unnecessary:
 
 ```js
 // Do I still need this?
-function Component({items, sortBy}) {
+function Component({ items, sortBy }) {
   const sorted = useMemo(() => {
     return [...items].sort((a, b) => {
       return a[sortBy] - b[sortBy];
@@ -77,7 +77,7 @@ You can safely remove it if using React Compiler:
 
 ```js
 // ✅ Better: Let the compiler optimize
-function Component({items, sortBy}) {
+function Component({ items, sortBy }) {
   const sorted = [...items].sort((a, b) => {
     return a[sortBy] - b[sortBy];
   });
@@ -86,7 +86,7 @@ function Component({items, sortBy}) {
 }
 ```
 
-***
+---
 
 ## Sitemap
 

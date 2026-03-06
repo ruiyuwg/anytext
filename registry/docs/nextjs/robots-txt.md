@@ -19,17 +19,17 @@ Add a `robots.js` or `robots.ts` file that returns a [`Robots` object](#robots-o
 > **Good to know**: `robots.js` is a special Route Handler that is cached by default unless it uses a [Dynamic API](/docs/app/guides/caching#dynamic-apis) or [dynamic config](/docs/app/guides/caching#segment-config-options) option.
 
 ```ts filename="app/robots.ts" switcher
-import type { MetadataRoute } from 'next'
+import type { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
-      userAgent: '*',
-      allow: '/',
-      disallow: '/private/',
+      userAgent: "*",
+      allow: "/",
+      disallow: "/private/",
     },
-    sitemap: 'https://acme.com/sitemap.xml',
-  }
+    sitemap: "https://acme.com/sitemap.xml",
+  };
 }
 ```
 
@@ -37,12 +37,12 @@ export default function robots(): MetadataRoute.Robots {
 export default function robots() {
   return {
     rules: {
-      userAgent: '*',
-      allow: '/',
-      disallow: '/private/',
+      userAgent: "*",
+      allow: "/",
+      disallow: "/private/",
     },
-    sitemap: 'https://acme.com/sitemap.xml',
-  }
+    sitemap: "https://acme.com/sitemap.xml",
+  };
 }
 ```
 
@@ -61,23 +61,23 @@ Sitemap: https://acme.com/sitemap.xml
 You can customize how individual search engine bots crawl your site by passing an array of user agents to the `rules` property. For example:
 
 ```ts filename="app/robots.ts" switcher
-import type { MetadataRoute } from 'next'
+import type { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
-        userAgent: 'Googlebot',
-        allow: ['/'],
-        disallow: '/private/',
+        userAgent: "Googlebot",
+        allow: ["/"],
+        disallow: "/private/",
       },
       {
-        userAgent: ['Applebot', 'Bingbot'],
-        disallow: ['/'],
+        userAgent: ["Applebot", "Bingbot"],
+        disallow: ["/"],
       },
     ],
-    sitemap: 'https://acme.com/sitemap.xml',
-  }
+    sitemap: "https://acme.com/sitemap.xml",
+  };
 }
 ```
 
@@ -86,17 +86,17 @@ export default function robots() {
   return {
     rules: [
       {
-        userAgent: 'Googlebot',
-        allow: ['/'],
-        disallow: ['/private/'],
+        userAgent: "Googlebot",
+        allow: ["/"],
+        disallow: ["/private/"],
       },
       {
-        userAgent: ['Applebot', 'Bingbot'],
-        disallow: ['/'],
+        userAgent: ["Applebot", "Bingbot"],
+        disallow: ["/"],
       },
     ],
-    sitemap: 'https://acme.com/sitemap.xml',
-  }
+    sitemap: "https://acme.com/sitemap.xml",
+  };
 }
 ```
 
@@ -122,20 +122,20 @@ Sitemap: https://acme.com/sitemap.xml
 type Robots = {
   rules:
     | {
-        userAgent?: string | string[]
-        allow?: string | string[]
-        disallow?: string | string[]
-        crawlDelay?: number
+        userAgent?: string | string[];
+        allow?: string | string[];
+        disallow?: string | string[];
+        crawlDelay?: number;
       }
     | Array<{
-        userAgent: string | string[]
-        allow?: string | string[]
-        disallow?: string | string[]
-        crawlDelay?: number
-      }>
-  sitemap?: string | string[]
-  host?: string
-}
+        userAgent: string | string[];
+        allow?: string | string[];
+        disallow?: string | string[];
+        crawlDelay?: number;
+      }>;
+  sitemap?: string | string[];
+  host?: string;
+};
 ```
 
 ## Version History

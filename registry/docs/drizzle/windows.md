@@ -111,7 +111,7 @@ export const list = api(
   async (): Promise<{ users: User[] }> => {
     const result = await orm.select().from(users);
     return { users: result };
-  }
+  },
 );
 
 export const create = api(
@@ -122,7 +122,7 @@ export const create = api(
       .values({ name: req.name, email: req.email })
       .returning();
     return user;
-  }
+  },
 );
 ```
 

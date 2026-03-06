@@ -63,7 +63,7 @@ href: '/cookbook/guides/sonnet-3-7',
 {
 title: 'Get started with Llama 3.1',
 description: 'Get started with Llama 3.1 using the AI SDK.',
-href: '/cookbook/guides/llama-3\_1',
+href: '/cookbook/guides/llama-3_1',
 },
 {
 title: 'Get started with GPT-5',

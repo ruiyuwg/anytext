@@ -69,45 +69,45 @@ This will take you through a series of prompts to setup Jest for your project, i
 Update your config file to use `next/jest`. This transformer has all the necessary configuration options for Jest to work with Next.js:
 
 ```ts filename="jest.config.ts" switcher
-import type { Config } from 'jest'
-import nextJest from 'next/jest.js'
+import type { Config } from "jest";
+import nextJest from "next/jest.js";
 
 const createJestConfig = nextJest({
   // Provide the path to your Next.js app to load next.config.js and .env files in your test environment
-  dir: './',
-})
+  dir: "./",
+});
 
 // Add any custom config to be passed to Jest
 const config: Config = {
-  coverageProvider: 'v8',
-  testEnvironment: 'jsdom',
+  coverageProvider: "v8",
+  testEnvironment: "jsdom",
   // Add more setup options before each test is run
   // setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
-}
+};
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
-export default createJestConfig(config)
+export default createJestConfig(config);
 ```
 
 ```js filename="jest.config.js" switcher
-const nextJest = require('next/jest')
+const nextJest = require("next/jest");
 
 /** @type {import('jest').Config} */
 const createJestConfig = nextJest({
   // Provide the path to your Next.js app to load next.config.js and .env files in your test environment
-  dir: './',
-})
+  dir: "./",
+});
 
 // Add any custom config to be passed to Jest
 const config = {
-  coverageProvider: 'v8',
-  testEnvironment: 'jsdom',
+  coverageProvider: "v8",
+  testEnvironment: "jsdom",
   // Add more setup options before each test is run
   // setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
-}
+};
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
-module.exports = createJestConfig(config)
+module.exports = createJestConfig(config);
 ```
 
 Under the hood, `next/jest` is automatically configuring Jest for you, including:
@@ -150,21 +150,21 @@ moduleNameMapper: {
 `@testing-library/jest-dom` includes a set of convenient [custom matchers](https://github.com/testing-library/jest-dom#custom-matchers) such as `.toBeInTheDocument()` making it easier to write tests. You can import the custom matchers for every test by adding the following option to the Jest configuration file:
 
 ```ts filename="jest.config.ts" switcher
-setupFilesAfterEnv: ['<rootDir>/jest.setup.ts']
+setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"];
 ```
 
 ```js filename="jest.config.js" switcher
-setupFilesAfterEnv: ['<rootDir>/jest.setup.js']
+setupFilesAfterEnv: ["<rootDir>/jest.setup.js"];
 ```
 
 Then, inside `jest.setup`, add the following import:
 
 ```ts filename="jest.setup.ts" switcher
-import '@testing-library/jest-dom'
+import "@testing-library/jest-dom";
 ```
 
 ```js filename="jest.setup.js" switcher
-import '@testing-library/jest-dom'
+import "@testing-library/jest-dom";
 ```
 
 > **Good to know:** [`extend-expect` was removed in `v6.0`](https://github.com/testing-library/jest-dom/releases/tag/v6.0.0), so if you are using `@testing-library/jest-dom` before version 6, you will need to import `@testing-library/jest-dom/extend-expect` instead.
@@ -196,7 +196,7 @@ Your project is now ready to run tests. Create a folder called `__tests__` in yo
 For example, we can add a test to check if the `<Page />` component successfully renders a heading:
 
 ```jsx filename="app/page.js"
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Page() {
   return (
@@ -204,36 +204,36 @@ export default function Page() {
       <h1>Home</h1>
       <Link href="/about">About</Link>
     </div>
-  )
+  );
 }
 ```
 
 ```jsx filename="__tests__/page.test.jsx"
-import '@testing-library/jest-dom'
-import { render, screen } from '@testing-library/react'
-import Page from '../app/page'
+import "@testing-library/jest-dom";
+import { render, screen } from "@testing-library/react";
+import Page from "../app/page";
 
-describe('Page', () => {
-  it('renders a heading', () => {
-    render(<Page />)
+describe("Page", () => {
+  it("renders a heading", () => {
+    render(<Page />);
 
-    const heading = screen.getByRole('heading', { level: 1 })
+    const heading = screen.getByRole("heading", { level: 1 });
 
-    expect(heading).toBeInTheDocument()
-  })
-})
+    expect(heading).toBeInTheDocument();
+  });
+});
 ```
 
 Optionally, add a [snapshot test](https://jestjs.io/docs/snapshot-testing) to keep track of any unexpected changes in your component:
 
 ```jsx filename="__tests__/snapshot.js"
-import { render } from '@testing-library/react'
-import Page from '../app/page'
+import { render } from "@testing-library/react";
+import Page from "../app/page";
 
-it('renders homepage unchanged', () => {
-  const { container } = render(<Page />)
-  expect(container).toMatchSnapshot()
-})
+it("renders homepage unchanged", () => {
+  const { container } = render(<Page />);
+  expect(container).toMatchSnapshot();
+});
 ```
 
 ## Running your tests

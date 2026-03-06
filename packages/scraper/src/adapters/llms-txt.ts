@@ -53,14 +53,20 @@ export const llmsTxtAdapter: Adapter = {
         console.log(`  Processed ${id} (${tokens} tokens)`);
       } catch (err) {
         failedCount++;
-        console.warn(`  Failed to fetch ${link.url}: ${(err as Error).message}`);
+        console.warn(
+          `  Failed to fetch ${link.url}: ${(err as Error).message}`,
+        );
       }
     }
 
     if (links.length > 0 && failedCount / links.length > 0.5) {
-      throw new Error(`Too many failures: ${failedCount}/${links.length} links failed for ${source.id}`);
+      throw new Error(
+        `Too many failures: ${failedCount}/${links.length} links failed for ${source.id}`,
+      );
     }
-    console.log(`  Completed: ${topics.length} processed, ${failedCount} failed out of ${links.length} links`);
+    console.log(
+      `  Completed: ${topics.length} processed, ${failedCount} failed out of ${links.length} links`,
+    );
 
     // Apply overrides
     const finalTopics = topics.map((topic) => {
@@ -143,7 +149,7 @@ function extractInlineCode(markdown: string): string[] {
   const unique = new Set(
     matches
       .map((m) => m.slice(1, -1).trim())
-      .filter((s) => s.length > 0 && s.length < 40)
+      .filter((s) => s.length > 0 && s.length < 40),
   );
   return [...unique];
 }

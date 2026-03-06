@@ -6,11 +6,11 @@
 useImperativeHandle(ref, createHandle, dependencies?)
 ```
 
-***
+---
 
-## Reference {/*reference*/}
+## Reference {/_reference_/}
 
-### `useImperativeHandle(ref, createHandle, dependencies?)` {/*useimperativehandle*/}
+### `useImperativeHandle(ref, createHandle, dependencies?)` {/_useimperativehandle_/}
 
 Call `useImperativeHandle` at the top level of your component to customize the ref handle it exposes:
 
@@ -28,7 +28,7 @@ function MyInput({ ref }) {
 
 [See more examples below.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parameters {/_parameters_/}
 
 - `ref`: The `ref` you received as a prop to the `MyInput` component.
 
@@ -38,28 +38,28 @@ function MyInput({ ref }) {
 
 Starting with React 19, [`ref` is available as a prop.](/blog/2024/12/05/react-19#ref-as-a-prop) In React 18 and earlier, it was necessary to get the `ref` from [`forwardRef`.](/reference/react/forwardRef)
 
-#### Returns {/*returns*/}
+#### Returns {/_returns_/}
 
 `useImperativeHandle` returns `undefined`.
 
-***
+---
 
-## Usage {/*usage*/}
+## Usage {/_usage_/}
 
-### Exposing a custom ref handle to the parent component {/*exposing-a-custom-ref-handle-to-the-parent-component*/}
+### Exposing a custom ref handle to the parent component {/_exposing-a-custom-ref-handle-to-the-parent-component_/}
 
 To expose a DOM node to the parent element, pass in the `ref` prop to the node.
 
 ```js {2}
 function MyInput({ ref }) {
   return <input ref={ref} />;
-};
+}
 ```
 
 With the code above, [a ref to `MyInput` will receive the `<input>` DOM node.](/learn/manipulating-the-dom-with-refs) However, you can expose a custom value instead. To customize the exposed handle, call `useImperativeHandle` at the top level of your component:
 
 ```js {4-8}
-import { useImperativeHandle } from 'react';
+import { useImperativeHandle } from "react";
 
 function MyInput({ ref }) {
   useImperativeHandle(ref, () => {
@@ -69,7 +69,7 @@ function MyInput({ ref }) {
   }, []);
 
   return <input />;
-};
+}
 ```
 
 Note that in the code above, the `ref` is no longer passed to the `<input>`.
@@ -77,7 +77,7 @@ Note that in the code above, the `ref` is no longer passed to the `<input>`.
 For example, suppose you don't want to expose the entire `<input>` DOM node, but you want to expose two of its methods: `focus` and `scrollIntoView`. To do this, keep the real browser DOM in a separate ref. Then use `useImperativeHandle` to expose a handle with only the methods that you want the parent component to call:
 
 ```js {7-14}
-import { useRef, useImperativeHandle } from 'react';
+import { useRef, useImperativeHandle } from "react";
 
 function MyInput({ ref }) {
   const inputRef = useRef(null);
@@ -94,14 +94,14 @@ function MyInput({ ref }) {
   }, []);
 
   return <input ref={inputRef} />;
-};
+}
 ```
 
 Now, if the parent component gets a ref to `MyInput`, it will be able to call the `focus` and `scrollIntoView` methods on it. However, it will not have full access to the underlying `<input>` DOM node.
 
 ```js
-import { useRef } from 'react';
-import MyInput from './MyInput.js';
+import { useRef } from "react";
+import MyInput from "./MyInput.js";
 
 export default function Form() {
   const ref = useRef(null);
@@ -124,7 +124,7 @@ export default function Form() {
 ```
 
 ```js src/MyInput.js
-import { useRef, useImperativeHandle } from 'react';
+import { useRef, useImperativeHandle } from "react";
 
 function MyInput({ ref, ...props }) {
   const inputRef = useRef(null);
@@ -141,7 +141,7 @@ function MyInput({ ref, ...props }) {
   }, []);
 
   return <input {...props} ref={inputRef} />;
-};
+}
 
 export default MyInput;
 ```
@@ -152,15 +152,15 @@ input {
 }
 ```
 
-***
+---
 
-### Exposing your own imperative methods {/*exposing-your-own-imperative-methods*/}
+### Exposing your own imperative methods {/_exposing-your-own-imperative-methods_/}
 
-The methods you expose via an imperative handle don't have to match the DOM methods exactly. For example, this `Post` component exposes a `scrollAndFocusAddComment` method via an imperative handle. This lets the parent `Page` scroll the list of comments *and* focus the input field when you click the button:
+The methods you expose via an imperative handle don't have to match the DOM methods exactly. For example, this `Post` component exposes a `scrollAndFocusAddComment` method via an imperative handle. This lets the parent `Page` scroll the list of comments _and_ focus the input field when you click the button:
 
 ```js
-import { useRef } from 'react';
-import Post from './Post.js';
+import { useRef } from "react";
+import Post from "./Post.js";
 
 export default function Page() {
   const postRef = useRef(null);
@@ -171,9 +171,7 @@ export default function Page() {
 
   return (
     <>
-      <button onClick={handleClick}>
-        Write a comment
-      </button>
+      <button onClick={handleClick}>Write a comment</button>
       <Post ref={postRef} />
     </>
   );
@@ -181,9 +179,9 @@ export default function Page() {
 ```
 
 ```js src/Post.js
-import { useRef, useImperativeHandle } from 'react';
-import CommentList from './CommentList.js';
-import AddComment from './AddComment.js';
+import { useRef, useImperativeHandle } from "react";
+import CommentList from "./CommentList.js";
+import AddComment from "./AddComment.js";
 
 function Post({ ref }) {
   const commentsRef = useRef(null);
@@ -194,7 +192,7 @@ function Post({ ref }) {
       scrollAndFocusAddComment() {
         commentsRef.current.scrollToBottom();
         addCommentRef.current.focus();
-      }
+      },
     };
   }, []);
 
@@ -207,13 +205,13 @@ function Post({ ref }) {
       <AddComment ref={addCommentRef} />
     </>
   );
-};
+}
 
 export default Post;
 ```
 
 ```js src/CommentList.js
-import { useRef, useImperativeHandle } from 'react';
+import { useRef, useImperativeHandle } from "react";
 
 function CommentList({ ref }) {
   const divRef = useRef(null);
@@ -223,7 +221,7 @@ function CommentList({ ref }) {
       scrollToBottom() {
         const node = divRef.current;
         node.scrollTop = node.scrollHeight;
-      }
+      },
     };
   }, []);
 
@@ -243,7 +241,7 @@ export default CommentList;
 ```
 
 ```js src/AddComment.js
-import { useRef, useImperativeHandle } from 'react';
+import { useRef, useImperativeHandle } from "react";
 
 function AddComment({ ref }) {
   return <input placeholder="Add comment..." ref={ref} />;
@@ -262,11 +260,11 @@ export default AddComment;
 }
 ```
 
-**Do not overuse refs.** You should only use refs for *imperative* behaviors that you can't express as props: for example, scrolling to a node, focusing a node, triggering an animation, selecting text, and so on.
+**Do not overuse refs.** You should only use refs for _imperative_ behaviors that you can't express as props: for example, scrolling to a node, focusing a node, triggering an animation, selecting text, and so on.
 
 **If you can express something as a prop, you should not use a ref.** For example, instead of exposing an imperative handle like `{ open, close }` from a `Modal` component, it is better to take `isOpen` as a prop like `<Modal isOpen={isOpen} />`. [Effects](/learn/synchronizing-with-effects) can help you expose imperative behaviors via props.
 
-***
+---
 
 ## Sitemap
 

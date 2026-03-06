@@ -11,19 +11,19 @@ The user can register middleware using `app.use` or using `app.HTTP_METHOD` as w
 
 ```ts
 // match any method, all routes
-app.use(logger())
+app.use(logger());
 
 // specify path
-app.use('/posts/*', cors())
+app.use("/posts/*", cors());
 
 // specify method and path
-app.post('/posts/*', basicAuth())
+app.post("/posts/*", basicAuth());
 ```
 
 If the handler returns `Response`, it will be used for the end-user, and stopping the processing.
 
 ```ts
-app.post('/posts', (c) => c.text('Created!', 201))
+app.post("/posts", (c) => c.text("Created!", 201));
 ```
 
 In this case, four middleware are processed before dispatching like this:
@@ -41,25 +41,25 @@ See below.
 
 ```ts
 app.use(async (_, next) => {
-  console.log('middleware 1 start')
-  await next()
-  console.log('middleware 1 end')
-})
+  console.log("middleware 1 start");
+  await next();
+  console.log("middleware 1 end");
+});
 app.use(async (_, next) => {
-  console.log('middleware 2 start')
-  await next()
-  console.log('middleware 2 end')
-})
+  console.log("middleware 2 start");
+  await next();
+  console.log("middleware 2 end");
+});
 app.use(async (_, next) => {
-  console.log('middleware 3 start')
-  await next()
-  console.log('middleware 3 end')
-})
+  console.log("middleware 3 start");
+  await next();
+  console.log("middleware 3 end");
+});
 
-app.get('/', (c) => {
-  console.log('handler')
-  return c.text('Hello!')
-})
+app.get("/", (c) => {
+  console.log("handler");
+  return c.text("Hello!");
+});
 ```
 
 Result is the following.
@@ -81,23 +81,23 @@ Note that if the handler or any middleware throws, hono will catch it and either
 Hono has built-in middleware.
 
 ```ts
-import { Hono } from 'hono'
-import { poweredBy } from 'hono/powered-by'
-import { logger } from 'hono/logger'
-import { basicAuth } from 'hono/basic-auth'
+import { Hono } from "hono";
+import { poweredBy } from "hono/powered-by";
+import { logger } from "hono/logger";
+import { basicAuth } from "hono/basic-auth";
 
-const app = new Hono()
+const app = new Hono();
 
-app.use(poweredBy())
-app.use(logger())
+app.use(poweredBy());
+app.use(logger());
 
 app.use(
-  '/auth/*',
+  "/auth/*",
   basicAuth({
-    username: 'hono',
-    password: 'acoolproject',
-  })
-)
+    username: "hono",
+    password: "acoolproject",
+  }),
+);
 ```
 
 ::: warning
@@ -105,17 +105,17 @@ In Deno, it is possible to use a different version of middleware than the Hono v
 For example, this code is not working because the version is different.
 
 ```ts
-import { Hono } from 'jsr:@hono/hono@4.4.0'
-import { upgradeWebSocket } from 'jsr:@hono/hono@4.4.5/deno'
+import { Hono } from "jsr:@hono/hono@4.4.0";
+import { upgradeWebSocket } from "jsr:@hono/hono@4.4.5/deno";
 
-const app = new Hono()
+const app = new Hono();
 
 app.get(
-  '/ws',
+  "/ws",
   upgradeWebSocket(() => ({
     // ...
-  }))
-)
+  })),
+);
 ```
 
 :::
@@ -127,17 +127,17 @@ You can write your own middleware directly inside `app.use()`:
 ```ts
 // Custom logger
 app.use(async (c, next) => {
-  console.log(`[${c.req.method}] ${c.req.url}`)
-  await next()
-})
+  console.log(`[${c.req.method}] ${c.req.url}`);
+  await next();
+});
 
 // Add a custom header
-app.use('/message/*', async (c, next) => {
-  await next()
-  c.header('x-message', 'This is middleware!')
-})
+app.use("/message/*", async (c, next) => {
+  await next();
+  c.header("x-message", "This is middleware!");
+});
 
-app.get('/message/hello', (c) => c.text('Hello Middleware!'))
+app.get("/message/hello", (c) => c.text("Hello Middleware!"));
 ```
 
 However, embedding middleware directly within `app.use()` can limit its reusability. Therefore, we can separate our
@@ -147,12 +147,12 @@ To ensure we don't lose type definitions for `context` and `next`, when separati
 [`createMiddleware()`](/docs/helpers/factory#createmiddleware) from Hono's factory. This also allows us to type-safely [access data we've `set` in `Context`](https://hono.dev/docs/api/context#set-get) from downstream handlers.
 
 ```ts
-import { createMiddleware } from 'hono/factory'
+import { createMiddleware } from "hono/factory";
 
 const logger = createMiddleware(async (c, next) => {
-  console.log(`[${c.req.method}] ${c.req.url}`)
-  await next()
-})
+  console.log(`[${c.req.method}] ${c.req.url}`);
+  await next();
+});
 ```
 
 :::info
@@ -170,10 +170,10 @@ Additionally, middleware can be designed to modify responses if necessary:
 
 ```ts
 const stripRes = createMiddleware(async (c, next) => {
-  await next()
-  c.res = undefined
-  c.res = new Response('New Response')
-})
+  await next();
+  c.res = undefined;
+  c.res = new Response("New Response");
+});
 ```
 
 ## Context access inside Middleware arguments
@@ -181,14 +181,14 @@ const stripRes = createMiddleware(async (c, next) => {
 To access the context inside middleware arguments, directly use the context parameter provided by `app.use`. See the example below for clarification.
 
 ```ts
-import { cors } from 'hono/cors'
+import { cors } from "hono/cors";
 
-app.use('*', async (c, next) => {
+app.use("*", async (c, next) => {
   const middleware = cors({
     origin: c.env.CORS_ORIGIN,
-  })
-  return middleware(c, next)
-})
+  });
+  return middleware(c, next);
+});
 ```
 
 ### Extending the Context in Middleware
@@ -196,20 +196,20 @@ app.use('*', async (c, next) => {
 To extend the context inside middleware, use `c.set`. You can make this type-safe by passing a `{ Variables: { yourVariable: YourVariableType } }` generic argument to the `createMiddleware` function.
 
 ```ts
-import { createMiddleware } from 'hono/factory'
+import { createMiddleware } from "hono/factory";
 
 const echoMiddleware = createMiddleware<{
   Variables: {
-    echo: (str: string) => string
-  }
+    echo: (str: string) => string;
+  };
 }>(async (c, next) => {
-  c.set('echo', (str) => str)
-  await next()
-})
+  c.set("echo", (str) => str);
+  await next();
+});
 
-app.get('/echo', echoMiddleware, (c) => {
-  return c.text(c.var.echo('Hello!'))
-})
+app.get("/echo", echoMiddleware, (c) => {
+  return c.text(c.var.echo("Hello!"));
+});
 ```
 
 ## Third-party Middleware

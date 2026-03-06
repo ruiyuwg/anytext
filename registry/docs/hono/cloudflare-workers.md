@@ -68,12 +68,12 @@ bun i
 Edit `src/index.ts` like below.
 
 ```ts
-import { Hono } from 'hono'
-const app = new Hono()
+import { Hono } from "hono";
+const app = new Hono();
 
-app.get('/', (c) => c.text('Hello Cloudflare Workers!'))
+app.get("/", (c) => c.text("Hello Cloudflare Workers!"));
 
-export default app
+export default app;
 ```
 
 ## 3. Run
@@ -136,17 +136,17 @@ That's all!
 
 ## Using Hono with other event handlers
 
-You can integrate Hono with other event handlers (such as `scheduled`) in *Module Worker mode*.
+You can integrate Hono with other event handlers (such as `scheduled`) in _Module Worker mode_.
 
 To do this, export `app.fetch` as the module's `fetch` handler, and then implement other handlers as needed:
 
 ```ts
-const app = new Hono()
+const app = new Hono();
 
 export default {
   fetch: app.fetch,
   scheduled: async (batch, env) => {},
-}
+};
 ```
 
 ## Serve static files
@@ -203,42 +203,42 @@ Refer to [examples](https://github.com/honojs/examples) for setting it up.
 If there is the application below.
 
 ```ts
-import { Hono } from 'hono'
+import { Hono } from "hono";
 
-const app = new Hono()
-app.get('/', (c) => c.text('Please test me!'))
+const app = new Hono();
+app.get("/", (c) => c.text("Please test me!"));
 ```
 
-We can test if it returns "*200 OK*" Response with this code.
+We can test if it returns "_200 OK_" Response with this code.
 
 ```ts
-describe('Test the application', () => {
-  it('Should return 200 response', async () => {
-    const res = await app.request('http://localhost/')
-    expect(res.status).toBe(200)
-  })
-})
+describe("Test the application", () => {
+  it("Should return 200 response", async () => {
+    const res = await app.request("http://localhost/");
+    expect(res.status).toBe(200);
+  });
+});
 ```
 
 ## Bindings
 
-In the Cloudflare Workers, we can bind the environment values, KV namespace, R2 bucket, or Durable Object. You can access them in `c.env`. It will have the types if you pass the "*type definition*" for the bindings to the `Hono` as generics.
+In the Cloudflare Workers, we can bind the environment values, KV namespace, R2 bucket, or Durable Object. You can access them in `c.env`. It will have the types if you pass the "_type definition_" for the bindings to the `Hono` as generics.
 
 ```ts
 type Bindings = {
-  MY_BUCKET: R2Bucket
-  USERNAME: string
-  PASSWORD: string
-}
+  MY_BUCKET: R2Bucket;
+  USERNAME: string;
+  PASSWORD: string;
+};
 
-const app = new Hono<{ Bindings: Bindings }>()
+const app = new Hono<{ Bindings: Bindings }>();
 
 // Access to environment values
-app.put('/upload/:key', async (c, next) => {
-  const key = c.req.param('key')
-  await c.env.MY_BUCKET.put(key, c.req.body)
-  return c.text(`Put ${key} successfully!`)
-})
+app.put("/upload/:key", async (c, next) => {
+  const key = c.req.param("key");
+  await c.env.MY_BUCKET.put(key, c.req.body);
+  return c.text(`Put ${key} successfully!`);
+});
 ```
 
 ## Using Variables in Middleware
@@ -247,24 +247,24 @@ This is the only case for Module Worker mode.
 If you want to use Variables or Secret Variables in Middleware, for example, "username" or "password" in Basic Authentication Middleware, you need to write like the following.
 
 ```ts
-import { basicAuth } from 'hono/basic-auth'
+import { basicAuth } from "hono/basic-auth";
 
 type Bindings = {
-  USERNAME: string
-  PASSWORD: string
-}
+  USERNAME: string;
+  PASSWORD: string;
+};
 
-const app = new Hono<{ Bindings: Bindings }>()
+const app = new Hono<{ Bindings: Bindings }>();
 
 //...
 
-app.use('/auth/*', async (c, next) => {
+app.use("/auth/*", async (c, next) => {
   const auth = basicAuth({
     username: c.env.USERNAME,
     password: c.env.PASSWORD,
-  })
-  return auth(c, next)
-})
+  });
+  return auth(c, next);
+});
 ```
 
 The same is applied to Bearer Authentication Middleware, JWT Authentication, or others.
@@ -329,15 +329,15 @@ By default, `process.env` is not available in Cloudflare Workers, so it is recom
 
 ```ts
 type Bindings = {
-  SECRET_KEY: string
-}
+  SECRET_KEY: string;
+};
 
-const app = new Hono<{ Bindings: Bindings }>()
+const app = new Hono<{ Bindings: Bindings }>();
 
-app.get('/env', (c) => {
-  const SECRET_KEY = c.env.SECRET_KEY
-  return c.text(SECRET_KEY)
-})
+app.get("/env", (c) => {
+  const SECRET_KEY = c.env.SECRET_KEY;
+  return c.text(SECRET_KEY);
+});
 ```
 
 Before you deploy your project to Cloudflare, remember to set the environment variable/secrets in the Cloudflare Workers project's configuration.

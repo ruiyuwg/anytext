@@ -7,7 +7,7 @@ State can hold any kind of JavaScript value, including objects. But you shouldn'
 - What immutability is, and how not to break it
 - How to make object copying less repetitive with Immer
 
-## What's a mutation? {/*whats-a-mutation*/}
+## What's a mutation? {/_whats-a-mutation_/}
 
 You can store any kind of JavaScript value in state.
 
@@ -15,13 +15,13 @@ You can store any kind of JavaScript value in state.
 const [x, setX] = useState(0);
 ```
 
-So far you've been working with numbers, strings, and booleans. These kinds of JavaScript values are "immutable", meaning unchangeable or "read-only". You can trigger a re-render to *replace* a value:
+So far you've been working with numbers, strings, and booleans. These kinds of JavaScript values are "immutable", meaning unchangeable or "read-only". You can trigger a re-render to _replace_ a value:
 
 ```js
 setX(5);
 ```
 
-The `x` state changed from `0` to `5`, but the *number `0` itself* did not change. It's not possible to make any changes to the built-in primitive values like numbers, strings, and booleans in JavaScript.
+The `x` state changed from `0` to `5`, but the _number `0` itself_ did not change. It's not possible to make any changes to the built-in primitive values like numbers, strings, and booleans in JavaScript.
 
 Now consider an object in state:
 
@@ -29,7 +29,7 @@ Now consider an object in state:
 const [position, setPosition] = useState({ x: 0, y: 0 });
 ```
 
-Technically, it is possible to change the contents of *the object itself*. **This is called a mutation:**
+Technically, it is possible to change the contents of _the object itself_. **This is called a mutation:**
 
 ```js
 position.x = 5;
@@ -37,48 +37,55 @@ position.x = 5;
 
 However, although objects in React state are technically mutable, you should treat them **as if** they were immutable--like numbers, booleans, and strings. Instead of mutating them, you should always replace them.
 
-## Treat state as read-only {/*treat-state-as-read-only*/}
+## Treat state as read-only {/_treat-state-as-read-only_/}
 
 In other words, you should **treat any JavaScript object that you put into state as read-only.**
 
 This example holds an object in state to represent the current pointer position. The red dot is supposed to move when you touch or move the cursor over the preview area. But the dot stays in the initial position:
 
 ```js {expectedErrors: {'react-compiler': [11]}}
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function MovingDot() {
   const [position, setPosition] = useState({
     x: 0,
-    y: 0
+    y: 0,
   });
   return (
     <div
-      onPointerMove={e => {
+      onPointerMove={(e) => {
         position.x = e.clientX;
         position.y = e.clientY;
       }}
       style={{
-        position: 'relative',
-        width: '100vw',
-        height: '100vh',
-      }}>
-      <div style={{
-        position: 'absolute',
-        backgroundColor: 'red',
-        borderRadius: '50%',
-        transform: `translate(${position.x}px, ${position.y}px)`,
-        left: -10,
-        top: -10,
-        width: 20,
-        height: 20,
-      }} />
+        position: "relative",
+        width: "100vw",
+        height: "100vh",
+      }}
+    >
+      <div
+        style={{
+          position: "absolute",
+          backgroundColor: "red",
+          borderRadius: "50%",
+          transform: `translate(${position.x}px, ${position.y}px)`,
+          left: -10,
+          top: -10,
+          width: 20,
+          height: 20,
+        }}
+      />
     </div>
   );
 }
 ```
 
 ```css
-body { margin: 0; padding: 0; height: 250px; }
+body {
+  margin: 0;
+  padding: 0;
+  height: 250px;
+}
 ```
 
 The problem is with this bit of code.
@@ -92,7 +99,7 @@ onPointerMove={e => {
 
 This code modifies the object assigned to `position` from [the previous render.](/learn/state-as-a-snapshot#rendering-takes-a-snapshot-in-time) But without using the state setting function, React has no idea that object has changed. So React does not do anything in response. It's like trying to change the order after you've already eaten the meal. While mutating state can work in some cases, we don't recommend it. You should treat the state value you have access to in a render as read-only.
 
-To actually [trigger a re-render](/learn/state-as-a-snapshot#setting-state-triggers-renders) in this case, **create a *new* object and pass it to the state setting function:**
+To actually [trigger a re-render](/learn/state-as-a-snapshot#setting-state-triggers-renders) in this case, **create a _new_ object and pass it to the state setting function:**
 
 ```js
 onPointerMove={e => {
@@ -111,55 +118,62 @@ With `setPosition`, you're telling React:
 Notice how the red dot now follows your pointer when you touch or hover over the preview area:
 
 ```js
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function MovingDot() {
   const [position, setPosition] = useState({
     x: 0,
-    y: 0
+    y: 0,
   });
   return (
     <div
-      onPointerMove={e => {
+      onPointerMove={(e) => {
         setPosition({
           x: e.clientX,
-          y: e.clientY
+          y: e.clientY,
         });
       }}
       style={{
-        position: 'relative',
-        width: '100vw',
-        height: '100vh',
-      }}>
-      <div style={{
-        position: 'absolute',
-        backgroundColor: 'red',
-        borderRadius: '50%',
-        transform: `translate(${position.x}px, ${position.y}px)`,
-        left: -10,
-        top: -10,
-        width: 20,
-        height: 20,
-      }} />
+        position: "relative",
+        width: "100vw",
+        height: "100vh",
+      }}
+    >
+      <div
+        style={{
+          position: "absolute",
+          backgroundColor: "red",
+          borderRadius: "50%",
+          transform: `translate(${position.x}px, ${position.y}px)`,
+          left: -10,
+          top: -10,
+          width: 20,
+          height: 20,
+        }}
+      />
     </div>
   );
 }
 ```
 
 ```css
-body { margin: 0; padding: 0; height: 250px; }
+body {
+  margin: 0;
+  padding: 0;
+  height: 250px;
+}
 ```
 
-#### Local mutation is fine {/*local-mutation-is-fine*/}
+#### Local mutation is fine {/_local-mutation-is-fine_/}
 
-Code like this is a problem because it modifies an *existing* object in state:
+Code like this is a problem because it modifies an _existing_ object in state:
 
 ```js
 position.x = e.clientX;
 position.y = e.clientY;
 ```
 
-But code like this is **absolutely fine** because you're mutating a fresh object you have *just created*:
+But code like this is **absolutely fine** because you're mutating a fresh object you have _just created_:
 
 ```js
 const nextPosition = {};
@@ -173,26 +187,26 @@ In fact, it is completely equivalent to writing this:
 ```js
 setPosition({
   x: e.clientX,
-  y: e.clientY
+  y: e.clientY,
 });
 ```
 
-Mutation is only a problem when you change *existing* objects that are already in state. Mutating an object you've just created is okay because *no other code references it yet.* Changing it isn't going to accidentally impact something that depends on it. This is called a "local mutation". You can even do local mutation [while rendering.](/learn/keeping-components-pure#local-mutation-your-components-little-secret) Very convenient and completely okay!
+Mutation is only a problem when you change _existing_ objects that are already in state. Mutating an object you've just created is okay because _no other code references it yet._ Changing it isn't going to accidentally impact something that depends on it. This is called a "local mutation". You can even do local mutation [while rendering.](/learn/keeping-components-pure#local-mutation-your-components-little-secret) Very convenient and completely okay!
 
-## Copying objects with the spread syntax {/*copying-objects-with-the-spread-syntax*/}
+## Copying objects with the spread syntax {/_copying-objects-with-the-spread-syntax_/}
 
-In the previous example, the `position` object is always created fresh from the current cursor position. But often, you will want to include *existing* data as a part of the new object you're creating. For example, you may want to update *only one* field in a form, but keep the previous values for all other fields.
+In the previous example, the `position` object is always created fresh from the current cursor position. But often, you will want to include _existing_ data as a part of the new object you're creating. For example, you may want to update _only one_ field in a form, but keep the previous values for all other fields.
 
 These input fields don't work because the `onChange` handlers mutate the state:
 
 ```js {expectedErrors: {'react-compiler': [11, 15, 19]}}
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function Form() {
   const [person, setPerson] = useState({
-    firstName: 'Barbara',
-    lastName: 'Hepworth',
-    email: 'bhepworth@sculpture.com'
+    firstName: "Barbara",
+    lastName: "Hepworth",
+    email: "bhepworth@sculpture.com",
   });
 
   function handleFirstNameChange(e) {
@@ -211,29 +225,18 @@ export default function Form() {
     <>
       <label>
         First name:
-        <input
-          value={person.firstName}
-          onChange={handleFirstNameChange}
-        />
+        <input value={person.firstName} onChange={handleFirstNameChange} />
       </label>
       <label>
         Last name:
-        <input
-          value={person.lastName}
-          onChange={handleLastNameChange}
-        />
+        <input value={person.lastName} onChange={handleLastNameChange} />
       </label>
       <label>
         Email:
-        <input
-          value={person.email}
-          onChange={handleEmailChange}
-        />
+        <input value={person.email} onChange={handleEmailChange} />
       </label>
       <p>
-        {person.firstName}{' '}
-        {person.lastName}{' '}
-        ({person.email})
+        {person.firstName} {person.lastName} ({person.email})
       </p>
     </>
   );
@@ -241,8 +244,13 @@ export default function Form() {
 ```
 
 ```css
-label { display: block; }
-input { margin-left: 5px; margin-bottom: 5px; }
+label {
+  display: block;
+}
+input {
+  margin-left: 5px;
+  margin-bottom: 5px;
+}
 ```
 
 For example, this line mutates the state from a past render:
@@ -257,7 +265,7 @@ The reliable way to get the behavior you're looking for is to create a new objec
 setPerson({
   firstName: e.target.value, // New first name from the input
   lastName: person.lastName,
-  email: person.email
+  email: person.email,
 });
 ```
 
@@ -266,7 +274,7 @@ You can use the `...` [object spread](https://developer.mozilla.org/en-US/docs/W
 ```js
 setPerson({
   ...person, // Copy the old fields
-  firstName: e.target.value // But override this one
+  firstName: e.target.value, // But override this one
 });
 ```
 
@@ -275,33 +283,33 @@ Now the form works!
 Notice how you didn't declare a separate state variable for each input field. For large forms, keeping all data grouped in an object is very convenient--as long as you update it correctly!
 
 ```js
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function Form() {
   const [person, setPerson] = useState({
-    firstName: 'Barbara',
-    lastName: 'Hepworth',
-    email: 'bhepworth@sculpture.com'
+    firstName: "Barbara",
+    lastName: "Hepworth",
+    email: "bhepworth@sculpture.com",
   });
 
   function handleFirstNameChange(e) {
     setPerson({
       ...person,
-      firstName: e.target.value
+      firstName: e.target.value,
     });
   }
 
   function handleLastNameChange(e) {
     setPerson({
       ...person,
-      lastName: e.target.value
+      lastName: e.target.value,
     });
   }
 
   function handleEmailChange(e) {
     setPerson({
       ...person,
-      email: e.target.value
+      email: e.target.value,
     });
   }
 
@@ -309,29 +317,18 @@ export default function Form() {
     <>
       <label>
         First name:
-        <input
-          value={person.firstName}
-          onChange={handleFirstNameChange}
-        />
+        <input value={person.firstName} onChange={handleFirstNameChange} />
       </label>
       <label>
         Last name:
-        <input
-          value={person.lastName}
-          onChange={handleLastNameChange}
-        />
+        <input value={person.lastName} onChange={handleLastNameChange} />
       </label>
       <label>
         Email:
-        <input
-          value={person.email}
-          onChange={handleEmailChange}
-        />
+        <input value={person.email} onChange={handleEmailChange} />
       </label>
       <p>
-        {person.firstName}{' '}
-        {person.lastName}{' '}
-        ({person.email})
+        {person.firstName} {person.lastName} ({person.email})
       </p>
     </>
   );
@@ -339,30 +336,35 @@ export default function Form() {
 ```
 
 ```css
-label { display: block; }
-input { margin-left: 5px; margin-bottom: 5px; }
+label {
+  display: block;
+}
+input {
+  margin-left: 5px;
+  margin-bottom: 5px;
+}
 ```
 
 Note that the `...` spread syntax is "shallow"--it only copies things one level deep. This makes it fast, but it also means that if you want to update a nested property, you'll have to use it more than once.
 
-#### Using a single event handler for multiple fields {/*using-a-single-event-handler-for-multiple-fields*/}
+#### Using a single event handler for multiple fields {/_using-a-single-event-handler-for-multiple-fields_/}
 
 You can also use the `[` and `]` braces inside your object definition to specify a property with a dynamic name. Here is the same example, but with a single event handler instead of three different ones:
 
 ```js
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function Form() {
   const [person, setPerson] = useState({
-    firstName: 'Barbara',
-    lastName: 'Hepworth',
-    email: 'bhepworth@sculpture.com'
+    firstName: "Barbara",
+    lastName: "Hepworth",
+    email: "bhepworth@sculpture.com",
   });
 
   function handleChange(e) {
     setPerson({
       ...person,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   }
 
@@ -386,16 +388,10 @@ export default function Form() {
       </label>
       <label>
         Email:
-        <input
-          name="email"
-          value={person.email}
-          onChange={handleChange}
-        />
+        <input name="email" value={person.email} onChange={handleChange} />
       </label>
       <p>
-        {person.firstName}{' '}
-        {person.lastName}{' '}
-        ({person.email})
+        {person.firstName} {person.lastName} ({person.email})
       </p>
     </>
   );
@@ -403,37 +399,42 @@ export default function Form() {
 ```
 
 ```css
-label { display: block; }
-input { margin-left: 5px; margin-bottom: 5px; }
+label {
+  display: block;
+}
+input {
+  margin-left: 5px;
+  margin-bottom: 5px;
+}
 ```
 
 Here, `e.target.name` refers to the `name` property given to the `<input>` DOM element.
 
-## Updating a nested object {/*updating-a-nested-object*/}
+## Updating a nested object {/_updating-a-nested-object_/}
 
 Consider a nested object structure like this:
 
 ```js
 const [person, setPerson] = useState({
-  name: 'Niki de Saint Phalle',
+  name: "Niki de Saint Phalle",
   artwork: {
-    title: 'Blue Nana',
-    city: 'Hamburg',
-    image: 'https://i.imgur.com/Sd1AgUOm.jpg',
-  }
+    title: "Blue Nana",
+    city: "Hamburg",
+    image: "https://i.imgur.com/Sd1AgUOm.jpg",
+  },
 });
 ```
 
 If you wanted to update `person.artwork.city`, it's clear how to do it with mutation:
 
 ```js
-person.artwork.city = 'New Delhi';
+person.artwork.city = "New Delhi";
 ```
 
 But in React, you treat state as immutable! In order to change `city`, you would first need to produce the new `artwork` object (pre-populated with data from the previous one), and then produce the new `person` object which points at the new `artwork`:
 
 ```js
-const nextArtwork = { ...person.artwork, city: 'New Delhi' };
+const nextArtwork = { ...person.artwork, city: "New Delhi" };
 const nextPerson = { ...person, artwork: nextArtwork };
 setPerson(nextPerson);
 ```
@@ -443,32 +444,33 @@ Or, written as a single function call:
 ```js
 setPerson({
   ...person, // Copy other fields
-  artwork: { // but replace the artwork
+  artwork: {
+    // but replace the artwork
     ...person.artwork, // with the same one
-    city: 'New Delhi' // but in New Delhi!
-  }
+    city: "New Delhi", // but in New Delhi!
+  },
 });
 ```
 
 This gets a bit wordy, but it works fine for many cases:
 
 ```js
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function Form() {
   const [person, setPerson] = useState({
-    name: 'Niki de Saint Phalle',
+    name: "Niki de Saint Phalle",
     artwork: {
-      title: 'Blue Nana',
-      city: 'Hamburg',
-      image: 'https://i.imgur.com/Sd1AgUOm.jpg',
-    }
+      title: "Blue Nana",
+      city: "Hamburg",
+      image: "https://i.imgur.com/Sd1AgUOm.jpg",
+    },
   });
 
   function handleNameChange(e) {
     setPerson({
       ...person,
-      name: e.target.value
+      name: e.target.value,
     });
   }
 
@@ -477,8 +479,8 @@ export default function Form() {
       ...person,
       artwork: {
         ...person.artwork,
-        title: e.target.value
-      }
+        title: e.target.value,
+      },
     });
   }
 
@@ -487,8 +489,8 @@ export default function Form() {
       ...person,
       artwork: {
         ...person.artwork,
-        city: e.target.value
-      }
+        city: e.target.value,
+      },
     });
   }
 
@@ -497,8 +499,8 @@ export default function Form() {
       ...person,
       artwork: {
         ...person.artwork,
-        image: e.target.value
-      }
+        image: e.target.value,
+      },
     });
   }
 
@@ -506,66 +508,59 @@ export default function Form() {
     <>
       <label>
         Name:
-        <input
-          value={person.name}
-          onChange={handleNameChange}
-        />
+        <input value={person.name} onChange={handleNameChange} />
       </label>
       <label>
         Title:
-        <input
-          value={person.artwork.title}
-          onChange={handleTitleChange}
-        />
+        <input value={person.artwork.title} onChange={handleTitleChange} />
       </label>
       <label>
         City:
-        <input
-          value={person.artwork.city}
-          onChange={handleCityChange}
-        />
+        <input value={person.artwork.city} onChange={handleCityChange} />
       </label>
       <label>
         Image:
-        <input
-          value={person.artwork.image}
-          onChange={handleImageChange}
-        />
+        <input value={person.artwork.image} onChange={handleImageChange} />
       </label>
       <p>
         <i>{person.artwork.title}</i>
-        {' by '}
+        {" by "}
         {person.name}
         <br />
         (located in {person.artwork.city})
       </p>
-      <img 
-        src={person.artwork.image} 
-        alt={person.artwork.title}
-      />
+      <img src={person.artwork.image} alt={person.artwork.title} />
     </>
   );
 }
 ```
 
 ```css
-label { display: block; }
-input { margin-left: 5px; margin-bottom: 5px; }
-img { width: 200px; height: 200px; }
+label {
+  display: block;
+}
+input {
+  margin-left: 5px;
+  margin-bottom: 5px;
+}
+img {
+  width: 200px;
+  height: 200px;
+}
 ```
 
-#### Objects are not really nested {/*objects-are-not-really-nested*/}
+#### Objects are not really nested {/_objects-are-not-really-nested_/}
 
 An object like this appears "nested" in code:
 
 ```js
 let obj = {
-  name: 'Niki de Saint Phalle',
+  name: "Niki de Saint Phalle",
   artwork: {
-    title: 'Blue Nana',
-    city: 'Hamburg',
-    image: 'https://i.imgur.com/Sd1AgUOm.jpg',
-  }
+    title: "Blue Nana",
+    city: "Hamburg",
+    image: "https://i.imgur.com/Sd1AgUOm.jpg",
+  },
 };
 ```
 
@@ -573,14 +568,14 @@ However, "nesting" is an inaccurate way to think about how objects behave. When 
 
 ```js
 let obj1 = {
-  title: 'Blue Nana',
-  city: 'Hamburg',
-  image: 'https://i.imgur.com/Sd1AgUOm.jpg',
+  title: "Blue Nana",
+  city: "Hamburg",
+  image: "https://i.imgur.com/Sd1AgUOm.jpg",
 };
 
 let obj2 = {
-  name: 'Niki de Saint Phalle',
-  artwork: obj1
+  name: "Niki de Saint Phalle",
+  artwork: obj1,
 };
 ```
 
@@ -588,37 +583,37 @@ The `obj1` object is not "inside" `obj2`. For example, `obj3` could "point" at `
 
 ```js
 let obj1 = {
-  title: 'Blue Nana',
-  city: 'Hamburg',
-  image: 'https://i.imgur.com/Sd1AgUOm.jpg',
+  title: "Blue Nana",
+  city: "Hamburg",
+  image: "https://i.imgur.com/Sd1AgUOm.jpg",
 };
 
 let obj2 = {
-  name: 'Niki de Saint Phalle',
-  artwork: obj1
+  name: "Niki de Saint Phalle",
+  artwork: obj1,
 };
 
 let obj3 = {
-  name: 'Copycat',
-  artwork: obj1
+  name: "Copycat",
+  artwork: obj1,
 };
 ```
 
 If you were to mutate `obj3.artwork.city`, it would affect both `obj2.artwork.city` and `obj1.city`. This is because `obj3.artwork`, `obj2.artwork`, and `obj1` are the same object. This is difficult to see when you think of objects as "nested". Instead, they are separate objects "pointing" at each other with properties.
 
-### Write concise update logic with Immer {/*write-concise-update-logic-with-immer*/}
+### Write concise update logic with Immer {/_write-concise-update-logic-with-immer_/}
 
 If your state is deeply nested, you might want to consider [flattening it.](/learn/choosing-the-state-structure#avoid-deeply-nested-state) But, if you don't want to change your state structure, you might prefer a shortcut to nested spreads. [Immer](https://github.com/immerjs/use-immer) is a popular library that lets you write using the convenient but mutating syntax and takes care of producing the copies for you. With Immer, the code you write looks like you are "breaking the rules" and mutating an object:
 
 ```js
-updatePerson(draft => {
-  draft.artwork.city = 'Lagos';
+updatePerson((draft) => {
+  draft.artwork.city = "Lagos";
 });
 ```
 
 But unlike a regular mutation, it doesn't overwrite the past state!
 
-#### How does Immer work? {/*how-does-immer-work*/}
+#### How does Immer work? {/_how-does-immer-work_/}
 
 The `draft` provided by Immer is a special type of object, called a [Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy), that "records" what you do with it. This is why you can mutate it freely as much as you like! Under the hood, Immer figures out which parts of the `draft` have been changed, and produces a completely new object that contains your edits.
 
@@ -630,38 +625,38 @@ To try Immer:
 Here is the above example converted to Immer:
 
 ```js
-import { useImmer } from 'use-immer';
+import { useImmer } from "use-immer";
 
 export default function Form() {
   const [person, updatePerson] = useImmer({
-    name: 'Niki de Saint Phalle',
+    name: "Niki de Saint Phalle",
     artwork: {
-      title: 'Blue Nana',
-      city: 'Hamburg',
-      image: 'https://i.imgur.com/Sd1AgUOm.jpg',
-    }
+      title: "Blue Nana",
+      city: "Hamburg",
+      image: "https://i.imgur.com/Sd1AgUOm.jpg",
+    },
   });
 
   function handleNameChange(e) {
-    updatePerson(draft => {
+    updatePerson((draft) => {
       draft.name = e.target.value;
     });
   }
 
   function handleTitleChange(e) {
-    updatePerson(draft => {
+    updatePerson((draft) => {
       draft.artwork.title = e.target.value;
     });
   }
 
   function handleCityChange(e) {
-    updatePerson(draft => {
+    updatePerson((draft) => {
       draft.artwork.city = e.target.value;
     });
   }
 
   function handleImageChange(e) {
-    updatePerson(draft => {
+    updatePerson((draft) => {
       draft.artwork.image = e.target.value;
     });
   }
@@ -670,43 +665,28 @@ export default function Form() {
     <>
       <label>
         Name:
-        <input
-          value={person.name}
-          onChange={handleNameChange}
-        />
+        <input value={person.name} onChange={handleNameChange} />
       </label>
       <label>
         Title:
-        <input
-          value={person.artwork.title}
-          onChange={handleTitleChange}
-        />
+        <input value={person.artwork.title} onChange={handleTitleChange} />
       </label>
       <label>
         City:
-        <input
-          value={person.artwork.city}
-          onChange={handleCityChange}
-        />
+        <input value={person.artwork.city} onChange={handleCityChange} />
       </label>
       <label>
         Image:
-        <input
-          value={person.artwork.image}
-          onChange={handleImageChange}
-        />
+        <input value={person.artwork.image} onChange={handleImageChange} />
       </label>
       <p>
         <i>{person.artwork.title}</i>
-        {' by '}
+        {" by "}
         {person.name}
         <br />
         (located in {person.artwork.city})
       </p>
-      <img 
-        src={person.artwork.image} 
-        alt={person.artwork.title}
-      />
+      <img src={person.artwork.image} alt={person.artwork.title} />
     </>
   );
 }
@@ -731,14 +711,22 @@ export default function Form() {
 ```
 
 ```css
-label { display: block; }
-input { margin-left: 5px; margin-bottom: 5px; }
-img { width: 200px; height: 200px; }
+label {
+  display: block;
+}
+input {
+  margin-left: 5px;
+  margin-bottom: 5px;
+}
+img {
+  width: 200px;
+  height: 200px;
+}
 ```
 
 Notice how much more concise the event handlers have become. You can mix and match `useState` and `useImmer` in a single component as much as you like. Immer is a great way to keep the update handlers concise, especially if there's nesting in your state, and copying objects leads to repetitive code.
 
-#### Why is mutating state not recommended in React? {/*why-is-mutating-state-not-recommended-in-react*/}
+#### Why is mutating state not recommended in React? {/_why-is-mutating-state-not-recommended-in-react_/}
 
 There are a few reasons:
 
@@ -752,25 +740,25 @@ In practice, you can often "get away" with mutating state in React, but we stron
 
 - Treat all state in React as immutable.
 - When you store objects in state, mutating them will not trigger renders and will change the state in previous render "snapshots".
-- Instead of mutating an object, create a *new* version of it, and trigger a re-render by setting state to it.
+- Instead of mutating an object, create a _new_ version of it, and trigger a re-render by setting state to it.
 - You can use the `{...obj, something: 'newValue'}` object spread syntax to create copies of objects.
 - Spread syntax is shallow: it only copies one level deep.
 - To update a nested object, you need to create copies all the way up from the place you're updating.
 - To reduce repetitive copying code, use Immer.
 
-#### Fix incorrect state updates {/*fix-incorrect-state-updates*/}
+#### Fix incorrect state updates {/_fix-incorrect-state-updates_/}
 
 This form has a few bugs. Click the button that increases the score a few times. Notice that it does not increase. Then edit the first name, and notice that the score has suddenly "caught up" with your changes. Finally, edit the last name, and notice that the score has disappeared completely.
 
 Your task is to fix all of these bugs. As you fix them, explain why each of them happens.
 
 ```js {expectedErrors: {'react-compiler': [11]}}
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function Scoreboard() {
   const [player, setPlayer] = useState({
-    firstName: 'Ranjani',
-    lastName: 'Shettar',
+    firstName: "Ranjani",
+    lastName: "Shettar",
     score: 10,
   });
 
@@ -787,32 +775,23 @@ export default function Scoreboard() {
 
   function handleLastNameChange(e) {
     setPlayer({
-      lastName: e.target.value
+      lastName: e.target.value,
     });
   }
 
   return (
     <>
       <label>
-        Score: <b>{player.score}</b>
-        {' '}
-        <button onClick={handlePlusClick}>
-          +1
-        </button>
+        Score: <b>{player.score}</b>{" "}
+        <button onClick={handlePlusClick}>+1</button>
       </label>
       <label>
         First name:
-        <input
-          value={player.firstName}
-          onChange={handleFirstNameChange}
-        />
+        <input value={player.firstName} onChange={handleFirstNameChange} />
       </label>
       <label>
         Last name:
-        <input
-          value={player.lastName}
-          onChange={handleLastNameChange}
-        />
+        <input value={player.lastName} onChange={handleLastNameChange} />
       </label>
     </>
   );
@@ -820,19 +799,25 @@ export default function Scoreboard() {
 ```
 
 ```css
-label { display: block; margin-bottom: 10px; }
-input { margin-left: 5px; margin-bottom: 5px; }
+label {
+  display: block;
+  margin-bottom: 10px;
+}
+input {
+  margin-left: 5px;
+  margin-bottom: 5px;
+}
 ```
 
 Here is a version with both bugs fixed:
 
 ```js
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function Scoreboard() {
   const [player, setPlayer] = useState({
-    firstName: 'Ranjani',
-    lastName: 'Shettar',
+    firstName: "Ranjani",
+    lastName: "Shettar",
     score: 10,
   });
 
@@ -853,32 +838,23 @@ export default function Scoreboard() {
   function handleLastNameChange(e) {
     setPlayer({
       ...player,
-      lastName: e.target.value
+      lastName: e.target.value,
     });
   }
 
   return (
     <>
       <label>
-        Score: <b>{player.score}</b>
-        {' '}
-        <button onClick={handlePlusClick}>
-          +1
-        </button>
+        Score: <b>{player.score}</b>{" "}
+        <button onClick={handlePlusClick}>+1</button>
       </label>
       <label>
         First name:
-        <input
-          value={player.firstName}
-          onChange={handleFirstNameChange}
-        />
+        <input value={player.firstName} onChange={handleFirstNameChange} />
       </label>
       <label>
         Last name:
-        <input
-          value={player.lastName}
-          onChange={handleLastNameChange}
-        />
+        <input value={player.lastName} onChange={handleLastNameChange} />
       </label>
     </>
   );
@@ -886,15 +862,20 @@ export default function Scoreboard() {
 ```
 
 ```css
-label { display: block; }
-input { margin-left: 5px; margin-bottom: 5px; }
+label {
+  display: block;
+}
+input {
+  margin-left: 5px;
+  margin-bottom: 5px;
+}
 ```
 
-The problem with `handlePlusClick` was that it mutated the `player` object. As a result, React did not know that there's a reason to re-render, and did not update the score on the screen. This is why, when you edited the first name, the state got updated, triggering a re-render which *also* updated the score on the screen.
+The problem with `handlePlusClick` was that it mutated the `player` object. As a result, React did not know that there's a reason to re-render, and did not update the score on the screen. This is why, when you edited the first name, the state got updated, triggering a re-render which _also_ updated the score on the screen.
 
 The problem with `handleLastNameChange` was that it did not copy the existing `...player` fields into the new object. This is why the score got lost after you edited the last name.
 
-#### Find and fix the mutation {/*find-and-fix-the-mutation*/}
+#### Find and fix the mutation {/_find-and-fix-the-mutation_/}
 
 There is a draggable box on a static background. You can change the box's color using the select input.
 
@@ -905,19 +886,19 @@ Find the bug and fix it.
 If something unexpected changes, there is a mutation. Find the mutation in `App.js` and fix it.
 
 ```js {expectedErrors: {'react-compiler': [17]}} src/App.js
-import { useState } from 'react';
-import Background from './Background.js';
-import Box from './Box.js';
+import { useState } from "react";
+import Background from "./Background.js";
+import Box from "./Box.js";
 
 const initialPosition = {
   x: 0,
-  y: 0
+  y: 0,
 };
 
 export default function Canvas() {
   const [shape, setShape] = useState({
-    color: 'orange',
-    position: initialPosition
+    color: "orange",
+    position: initialPosition,
   });
 
   function handleMove(dx, dy) {
@@ -928,28 +909,19 @@ export default function Canvas() {
   function handleColorChange(e) {
     setShape({
       ...shape,
-      color: e.target.value
+      color: e.target.value,
     });
   }
 
   return (
     <>
-      <select
-        value={shape.color}
-        onChange={handleColorChange}
-      >
+      <select value={shape.color} onChange={handleColorChange}>
         <option value="orange">orange</option>
         <option value="lightpink">lightpink</option>
         <option value="aliceblue">aliceblue</option>
       </select>
-      <Background
-        position={initialPosition}
-      />
-      <Box
-        color={shape.color}
-        position={shape.position}
-        onMove={handleMove}
-      >
+      <Background position={initialPosition} />
+      <Box color={shape.color} position={shape.position} onMove={handleMove}>
         Drag me!
       </Box>
     </>
@@ -958,18 +930,10 @@ export default function Canvas() {
 ```
 
 ```js src/Box.js
-import { useState } from 'react';
+import { useState } from "react";
 
-export default function Box({
-  children,
-  color,
-  position,
-  onMove
-}) {
-  const [
-    lastCoordinates,
-    setLastCoordinates
-  ] = useState(null);
+export default function Box({ children, color, position, onMove }) {
+  const [lastCoordinates, setLastCoordinates] = useState(null);
 
   function handlePointerDown(e) {
     e.target.setPointerCapture(e.pointerId);
@@ -1003,45 +967,51 @@ export default function Box({
       style={{
         width: 100,
         height: 100,
-        cursor: 'grab',
+        cursor: "grab",
         backgroundColor: color,
-        position: 'absolute',
-        border: '1px solid black',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
+        position: "absolute",
+        border: "1px solid black",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
         transform: `translate(
           ${position.x}px,
           ${position.y}px
         )`,
       }}
-    >{children}</div>
+    >
+      {children}
+    </div>
   );
 }
 ```
 
 ```js src/Background.js
-export default function Background({
-  position
-}) {
+export default function Background({ position }) {
   return (
-    <div style={{
-      position: 'absolute',
-      transform: `translate(
+    <div
+      style={{
+        position: "absolute",
+        transform: `translate(
         ${position.x}px,
         ${position.y}px
       )`,
-      width: 250,
-      height: 250,
-      backgroundColor: 'rgba(200, 200, 0, 0.2)',
-    }} />
+        width: 250,
+        height: 250,
+        backgroundColor: "rgba(200, 200, 0, 0.2)",
+      }}
+    />
   );
-};
+}
 ```
 
 ```css
-body { height: 280px; }
-select { margin-bottom: 10px; }
+body {
+  height: 280px;
+}
+select {
+  margin-bottom: 10px;
+}
 ```
 
 The problem was in the mutation inside `handleMove`. It mutated `shape.position`, but that's the same object that `initialPosition` points at. This is why both the shape and the background move. (It's a mutation, so the change doesn't reflect on the screen until an unrelated update--the color change--triggers a re-render.)
@@ -1049,19 +1019,19 @@ The problem was in the mutation inside `handleMove`. It mutated `shape.position`
 The fix is to remove the mutation from `handleMove`, and use the spread syntax to copy the shape. Note that `+=` is a mutation, so you need to rewrite it to use a regular `+` operation.
 
 ```js src/App.js
-import { useState } from 'react';
-import Background from './Background.js';
-import Box from './Box.js';
+import { useState } from "react";
+import Background from "./Background.js";
+import Box from "./Box.js";
 
 const initialPosition = {
   x: 0,
-  y: 0
+  y: 0,
 };
 
 export default function Canvas() {
   const [shape, setShape] = useState({
-    color: 'orange',
-    position: initialPosition
+    color: "orange",
+    position: initialPosition,
   });
 
   function handleMove(dx, dy) {
@@ -1070,35 +1040,26 @@ export default function Canvas() {
       position: {
         x: shape.position.x + dx,
         y: shape.position.y + dy,
-      }
+      },
     });
   }
 
   function handleColorChange(e) {
     setShape({
       ...shape,
-      color: e.target.value
+      color: e.target.value,
     });
   }
 
   return (
     <>
-      <select
-        value={shape.color}
-        onChange={handleColorChange}
-      >
+      <select value={shape.color} onChange={handleColorChange}>
         <option value="orange">orange</option>
         <option value="lightpink">lightpink</option>
         <option value="aliceblue">aliceblue</option>
       </select>
-      <Background
-        position={initialPosition}
-      />
-      <Box
-        color={shape.color}
-        position={shape.position}
-        onMove={handleMove}
-      >
+      <Background position={initialPosition} />
+      <Box color={shape.color} position={shape.position} onMove={handleMove}>
         Drag me!
       </Box>
     </>
@@ -1107,18 +1068,10 @@ export default function Canvas() {
 ```
 
 ```js src/Box.js
-import { useState } from 'react';
+import { useState } from "react";
 
-export default function Box({
-  children,
-  color,
-  position,
-  onMove
-}) {
-  const [
-    lastCoordinates,
-    setLastCoordinates
-  ] = useState(null);
+export default function Box({ children, color, position, onMove }) {
+  const [lastCoordinates, setLastCoordinates] = useState(null);
 
   function handlePointerDown(e) {
     e.target.setPointerCapture(e.pointerId);
@@ -1152,66 +1105,72 @@ export default function Box({
       style={{
         width: 100,
         height: 100,
-        cursor: 'grab',
+        cursor: "grab",
         backgroundColor: color,
-        position: 'absolute',
-        border: '1px solid black',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
+        position: "absolute",
+        border: "1px solid black",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
         transform: `translate(
           ${position.x}px,
           ${position.y}px
         )`,
       }}
-    >{children}</div>
+    >
+      {children}
+    </div>
   );
 }
 ```
 
 ```js src/Background.js
-export default function Background({
-  position
-}) {
+export default function Background({ position }) {
   return (
-    <div style={{
-      position: 'absolute',
-      transform: `translate(
+    <div
+      style={{
+        position: "absolute",
+        transform: `translate(
         ${position.x}px,
         ${position.y}px
       )`,
-      width: 250,
-      height: 250,
-      backgroundColor: 'rgba(200, 200, 0, 0.2)',
-    }} />
+        width: 250,
+        height: 250,
+        backgroundColor: "rgba(200, 200, 0, 0.2)",
+      }}
+    />
   );
-};
+}
 ```
 
 ```css
-body { height: 280px; }
-select { margin-bottom: 10px; }
+body {
+  height: 280px;
+}
+select {
+  margin-bottom: 10px;
+}
 ```
 
-#### Update an object with Immer {/*update-an-object-with-immer*/}
+#### Update an object with Immer {/_update-an-object-with-immer_/}
 
 This is the same buggy example as in the previous challenge. This time, fix the mutation by using Immer. For your convenience, `useImmer` is already imported, so you need to change the `shape` state variable to use it.
 
 ```js {expectedErrors: {'react-compiler': [18]}} src/App.js
-import { useState } from 'react';
-import { useImmer } from 'use-immer';
-import Background from './Background.js';
-import Box from './Box.js';
+import { useState } from "react";
+import { useImmer } from "use-immer";
+import Background from "./Background.js";
+import Box from "./Box.js";
 
 const initialPosition = {
   x: 0,
-  y: 0
+  y: 0,
 };
 
 export default function Canvas() {
   const [shape, setShape] = useState({
-    color: 'orange',
-    position: initialPosition
+    color: "orange",
+    position: initialPosition,
   });
 
   function handleMove(dx, dy) {
@@ -1222,28 +1181,19 @@ export default function Canvas() {
   function handleColorChange(e) {
     setShape({
       ...shape,
-      color: e.target.value
+      color: e.target.value,
     });
   }
 
   return (
     <>
-      <select
-        value={shape.color}
-        onChange={handleColorChange}
-      >
+      <select value={shape.color} onChange={handleColorChange}>
         <option value="orange">orange</option>
         <option value="lightpink">lightpink</option>
         <option value="aliceblue">aliceblue</option>
       </select>
-      <Background
-        position={initialPosition}
-      />
-      <Box
-        color={shape.color}
-        position={shape.position}
-        onMove={handleMove}
-      >
+      <Background position={initialPosition} />
+      <Box color={shape.color} position={shape.position} onMove={handleMove}>
         Drag me!
       </Box>
     </>
@@ -1252,18 +1202,10 @@ export default function Canvas() {
 ```
 
 ```js src/Box.js
-import { useState } from 'react';
+import { useState } from "react";
 
-export default function Box({
-  children,
-  color,
-  position,
-  onMove
-}) {
-  const [
-    lastCoordinates,
-    setLastCoordinates
-  ] = useState(null);
+export default function Box({ children, color, position, onMove }) {
+  const [lastCoordinates, setLastCoordinates] = useState(null);
 
   function handlePointerDown(e) {
     e.target.setPointerCapture(e.pointerId);
@@ -1297,45 +1239,51 @@ export default function Box({
       style={{
         width: 100,
         height: 100,
-        cursor: 'grab',
+        cursor: "grab",
         backgroundColor: color,
-        position: 'absolute',
-        border: '1px solid black',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
+        position: "absolute",
+        border: "1px solid black",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
         transform: `translate(
           ${position.x}px,
           ${position.y}px
         )`,
       }}
-    >{children}</div>
+    >
+      {children}
+    </div>
   );
 }
 ```
 
 ```js src/Background.js
-export default function Background({
-  position
-}) {
+export default function Background({ position }) {
   return (
-    <div style={{
-      position: 'absolute',
-      transform: `translate(
+    <div
+      style={{
+        position: "absolute",
+        transform: `translate(
         ${position.x}px,
         ${position.y}px
       )`,
-      width: 250,
-      height: 250,
-      backgroundColor: 'rgba(200, 200, 0, 0.2)',
-    }} />
+        width: 250,
+        height: 250,
+        backgroundColor: "rgba(200, 200, 0, 0.2)",
+      }}
+    />
   );
-};
+}
 ```
 
 ```css
-body { height: 280px; }
-select { margin-bottom: 10px; }
+body {
+  height: 280px;
+}
+select {
+  margin-bottom: 10px;
+}
 ```
 
 ```json package.json
@@ -1359,52 +1307,43 @@ select { margin-bottom: 10px; }
 This is the solution rewritten with Immer. Notice how the event handlers are written in a mutating fashion, but the bug does not occur. This is because under the hood, Immer never mutates the existing objects.
 
 ```js src/App.js
-import { useImmer } from 'use-immer';
-import Background from './Background.js';
-import Box from './Box.js';
+import { useImmer } from "use-immer";
+import Background from "./Background.js";
+import Box from "./Box.js";
 
 const initialPosition = {
   x: 0,
-  y: 0
+  y: 0,
 };
 
 export default function Canvas() {
   const [shape, updateShape] = useImmer({
-    color: 'orange',
-    position: initialPosition
+    color: "orange",
+    position: initialPosition,
   });
 
   function handleMove(dx, dy) {
-    updateShape(draft => {
+    updateShape((draft) => {
       draft.position.x += dx;
       draft.position.y += dy;
     });
   }
 
   function handleColorChange(e) {
-    updateShape(draft => {
+    updateShape((draft) => {
       draft.color = e.target.value;
     });
   }
 
   return (
     <>
-      <select
-        value={shape.color}
-        onChange={handleColorChange}
-      >
+      <select value={shape.color} onChange={handleColorChange}>
         <option value="orange">orange</option>
         <option value="lightpink">lightpink</option>
         <option value="aliceblue">aliceblue</option>
       </select>
-      <Background
-        position={initialPosition}
-      />
-      <Box
-        color={shape.color}
-        position={shape.position}
-        onMove={handleMove}
-      >
+      <Background position={initialPosition} />
+      <Box color={shape.color} position={shape.position} onMove={handleMove}>
         Drag me!
       </Box>
     </>
@@ -1413,18 +1352,10 @@ export default function Canvas() {
 ```
 
 ```js src/Box.js
-import { useState } from 'react';
+import { useState } from "react";
 
-export default function Box({
-  children,
-  color,
-  position,
-  onMove
-}) {
-  const [
-    lastCoordinates,
-    setLastCoordinates
-  ] = useState(null);
+export default function Box({ children, color, position, onMove }) {
+  const [lastCoordinates, setLastCoordinates] = useState(null);
 
   function handlePointerDown(e) {
     e.target.setPointerCapture(e.pointerId);
@@ -1458,45 +1389,51 @@ export default function Box({
       style={{
         width: 100,
         height: 100,
-        cursor: 'grab',
+        cursor: "grab",
         backgroundColor: color,
-        position: 'absolute',
-        border: '1px solid black',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
+        position: "absolute",
+        border: "1px solid black",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
         transform: `translate(
           ${position.x}px,
           ${position.y}px
         )`,
       }}
-    >{children}</div>
+    >
+      {children}
+    </div>
   );
 }
 ```
 
 ```js src/Background.js
-export default function Background({
-  position
-}) {
+export default function Background({ position }) {
   return (
-    <div style={{
-      position: 'absolute',
-      transform: `translate(
+    <div
+      style={{
+        position: "absolute",
+        transform: `translate(
         ${position.x}px,
         ${position.y}px
       )`,
-      width: 250,
-      height: 250,
-      backgroundColor: 'rgba(200, 200, 0, 0.2)',
-    }} />
+        width: 250,
+        height: 250,
+        backgroundColor: "rgba(200, 200, 0, 0.2)",
+      }}
+    />
   );
-};
+}
 ```
 
 ```css
-body { height: 280px; }
-select { margin-bottom: 10px; }
+body {
+  height: 280px;
+}
+select {
+  margin-bottom: 10px;
+}
 ```
 
 ```json package.json
@@ -1517,7 +1454,7 @@ select { margin-bottom: 10px; }
 }
 ```
 
-***
+---
 
 ## Sitemap
 

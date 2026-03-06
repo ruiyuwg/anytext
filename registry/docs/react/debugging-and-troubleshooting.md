@@ -6,11 +6,11 @@ This guide helps you identify and fix issues when using React Compiler. Learn ho
 - Common patterns that break compilation
 - Step-by-step debugging workflow
 
-## Understanding Compiler Behavior {/*understanding-compiler-behavior*/}
+## Understanding Compiler Behavior {/_understanding-compiler-behavior_/}
 
 React Compiler is designed to handle code that follows the [Rules of React](/reference/rules). When it encounters code that might break these rules, it safely skips optimization rather than risk changing your app's behavior.
 
-### Compiler Errors vs Runtime Issues {/*compiler-errors-vs-runtime-issues*/}
+### Compiler Errors vs Runtime Issues {/_compiler-errors-vs-runtime-issues_/}
 
 **Compiler errors** occur at build time and prevent your code from compiling. These are rare because the compiler is designed to skip problematic code rather than fail.
 
@@ -18,7 +18,7 @@ React Compiler is designed to handle code that follows the [Rules of React](/ref
 
 When debugging runtime issues, focus your efforts on finding Rules of React violations in the affected components that were not detected by the ESLint rule. The compiler relies on your code following these rules, and when they're broken in ways it can't detect, that's when runtime problems occur.
 
-## Common Breaking Patterns {/*common-breaking-patterns*/}
+## Common Breaking Patterns {/_common-breaking-patterns_/}
 
 One of the main ways React Compiler can break your app is if your code was written to rely on memoization for correctness. This means your app depends on specific values being memoized to work properly. Since the compiler may memoize differently than your manual approach, this can lead to unexpected behavior like effects over-firing, infinite loops, or missing updates.
 
@@ -28,11 +28,11 @@ Common scenarios where this occurs:
 - **Dependency arrays that need stable references** - When unstable dependencies cause effects to fire too often or create infinite loops
 - **Conditional logic based on reference checks** - When code uses referential equality checks for caching or optimization
 
-## Debugging Workflow {/*debugging-workflow*/}
+## Debugging Workflow {/_debugging-workflow_/}
 
 Follow these steps when you encounter issues:
 
-### Compiler Build Errors {/*compiler-build-errors*/}
+### Compiler Build Errors {/_compiler-build-errors_/}
 
 If you encounter a compiler error that unexpectedly breaks your build, this is likely a bug in the compiler. Report it to the [facebook/react](https://github.com/facebook/react/issues) repository with:
 
@@ -40,11 +40,11 @@ If you encounter a compiler error that unexpectedly breaks your build, this is l
 - The code that caused the error
 - Your React and compiler versions
 
-### Runtime Issues {/*runtime-issues*/}
+### Runtime Issues {/_runtime-issues_/}
 
 For runtime behavior issues:
 
-### 1. Temporarily Disable Compilation {/*temporarily-disable-compilation*/}
+### 1. Temporarily Disable Compilation {/_temporarily-disable-compilation_/}
 
 Use `"use no memo"` to isolate whether an issue is compiler-related:
 
@@ -59,14 +59,14 @@ If the issue disappears, it's likely related to a Rules of React violation.
 
 You can also try removing manual memoization (useMemo, useCallback, memo) from the problematic component to verify that your app works correctly without any memoization. If the bug still occurs when all memoization is removed, you have a Rules of React violation that needs to be fixed.
 
-### 2. Fix Issues Step by Step {/*fix-issues-step-by-step*/}
+### 2. Fix Issues Step by Step {/_fix-issues-step-by-step_/}
 
 1. Identify the root cause (often memoization-for-correctness)
 2. Test after each fix
 3. Remove `"use no memo"` once fixed
 4. Verify the component shows the ✨ badge in React DevTools
 
-## Reporting Compiler Bugs {/*reporting-compiler-bugs*/}
+## Reporting Compiler Bugs {/_reporting-compiler-bugs_/}
 
 If you believe you've found a compiler bug:
 
@@ -79,12 +79,12 @@ If you believe you've found a compiler bug:
    - Expected vs actual behavior
    - Any error messages
 
-## Next Steps {/*next-steps*/}
+## Next Steps {/_next-steps_/}
 
 - Review the [Rules of React](/reference/rules) to prevent issues
 - Check the [incremental adoption guide](/learn/react-compiler/incremental-adoption) for gradual rollout strategies
 
-***
+---
 
 ## Sitemap
 

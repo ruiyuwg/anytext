@@ -4,12 +4,12 @@ The AI SDK provides the [`generateImage`](/docs/reference/ai-sdk-core/generate-i
 function to generate images based on a given prompt using an image model.
 
 ```tsx
-import { generateImage } from 'ai';
-import { openai } from '@ai-sdk/openai';
+import { generateImage } from "ai";
+import { openai } from "@ai-sdk/openai";
 
 const { image } = await generateImage({
-  model: openai.image('dall-e-3'),
-  prompt: 'Santa Claus driving a Cadillac',
+  model: openai.image("dall-e-3"),
+  prompt: "Santa Claus driving a Cadillac",
 });
 ```
 
@@ -32,13 +32,13 @@ The size is specified as a string in the format `{width}x{height}`.
 Models only support a few sizes, and the supported sizes are different for each model and provider.
 
 ```tsx highlight={"7"}
-import { generateImage } from 'ai';
-import { openai } from '@ai-sdk/openai';
+import { generateImage } from "ai";
+import { openai } from "@ai-sdk/openai";
 
 const { image } = await generateImage({
-  model: openai.image('dall-e-3'),
-  prompt: 'Santa Claus driving a Cadillac',
-  size: '1024x1024',
+  model: openai.image("dall-e-3"),
+  prompt: "Santa Claus driving a Cadillac",
+  size: "1024x1024",
 });
 ```
 
@@ -48,13 +48,13 @@ The aspect ratio is specified as a string in the format `{width}:{height}`.
 Models only support a few aspect ratios, and the supported aspect ratios are different for each model and provider.
 
 ```tsx highlight={"7"}
-import { generateImage } from 'ai';
-import { vertex } from '@ai-sdk/google-vertex';
+import { generateImage } from "ai";
+import { vertex } from "@ai-sdk/google-vertex";
 
 const { image } = await generateImage({
-  model: vertex.image('imagen-4.0-generate-001'),
-  prompt: 'Santa Claus driving a Cadillac',
-  aspectRatio: '16:9',
+  model: vertex.image("imagen-4.0-generate-001"),
+  prompt: "Santa Claus driving a Cadillac",
+  aspectRatio: "16:9",
 });
 ```
 
@@ -63,12 +63,12 @@ const { image } = await generateImage({
 `generateImage` also supports generating multiple images at once:
 
 ```tsx highlight={"7"}
-import { generateImage } from 'ai';
-import { openai } from '@ai-sdk/openai';
+import { generateImage } from "ai";
+import { openai } from "@ai-sdk/openai";
 
 const { images } = await generateImage({
-  model: openai.image('dall-e-2'),
-  prompt: 'Santa Claus driving a Cadillac',
+  model: openai.image("dall-e-2"),
+  prompt: "Santa Claus driving a Cadillac",
   n: 4, // number of images to generate
 });
 ```
@@ -82,8 +82,8 @@ If needed, you can override this behavior using the `maxImagesPerCall` setting w
 
 ```tsx
 const { images } = await generateImage({
-  model: openai.image('dall-e-2'),
-  prompt: 'Santa Claus driving a Cadillac',
+  model: openai.image("dall-e-2"),
+  prompt: "Santa Claus driving a Cadillac",
   maxImagesPerCall: 5, // Override the default batch size
   n: 10, // Will make 2 calls of 5 images each
 });
@@ -95,12 +95,12 @@ You can provide a seed to the `generateImage` function to control the output of 
 If supported by the model, the same seed will always produce the same image.
 
 ```tsx highlight={"7"}
-import { generateImage } from 'ai';
-import { openai } from '@ai-sdk/openai';
+import { generateImage } from "ai";
+import { openai } from "@ai-sdk/openai";
 
 const { image } = await generateImage({
-  model: openai.image('dall-e-3'),
-  prompt: 'Santa Claus driving a Cadillac',
+  model: openai.image("dall-e-3"),
+  prompt: "Santa Claus driving a Cadillac",
   seed: 1234567890,
 });
 ```
@@ -113,15 +113,15 @@ using the `providerOptions` parameter. The options for the provider
 (`openai` in the example below) become request body properties.
 
 ```tsx highlight={"9"}
-import { generateImage } from 'ai';
-import { openai } from '@ai-sdk/openai';
+import { generateImage } from "ai";
+import { openai } from "@ai-sdk/openai";
 
 const { image } = await generateImage({
-  model: openai.image('dall-e-3'),
-  prompt: 'Santa Claus driving a Cadillac',
-  size: '1024x1024',
+  model: openai.image("dall-e-3"),
+  prompt: "Santa Claus driving a Cadillac",
+  size: "1024x1024",
   providerOptions: {
-    openai: { style: 'vivid', quality: 'hd' },
+    openai: { style: "vivid", quality: "hd" },
   },
 });
 ```
@@ -133,12 +133,12 @@ type [`AbortSignal`](https://developer.mozilla.org/en-US/docs/Web/API/AbortSigna
 that you can use to abort the image generation process or set a timeout.
 
 ```ts highlight={"7"}
-import { openai } from '@ai-sdk/openai';
-import { generateImage } from 'ai';
+import { openai } from "@ai-sdk/openai";
+import { generateImage } from "ai";
 
 const { image } = await generateImage({
-  model: openai.image('dall-e-3'),
-  prompt: 'Santa Claus driving a Cadillac',
+  model: openai.image("dall-e-3"),
+  prompt: "Santa Claus driving a Cadillac",
   abortSignal: AbortSignal.timeout(1000), // Abort after 1 second
 });
 ```
@@ -149,13 +149,13 @@ const { image } = await generateImage({
 that you can use to add custom headers to the image generation request.
 
 ```ts highlight={"7"}
-import { openai } from '@ai-sdk/openai';
-import { generateImage } from 'ai';
+import { openai } from "@ai-sdk/openai";
+import { generateImage } from "ai";
 
 const { image } = await generateImage({
-  model: openai.image('dall-e-3'),
-  prompt: 'Santa Claus driving a Cadillac',
-  headers: { 'X-Custom-Header': 'custom-value' },
+  model: openai.image("dall-e-3"),
+  prompt: "Santa Claus driving a Cadillac",
+  headers: { "X-Custom-Header": "custom-value" },
 });
 ```
 
@@ -165,8 +165,8 @@ If the model returns warnings, e.g. for unsupported parameters, they will be ava
 
 ```tsx
 const { image, warnings } = await generateImage({
-  model: openai.image('dall-e-3'),
-  prompt: 'Santa Claus driving a Cadillac',
+  model: openai.image("dall-e-3"),
+  prompt: "Santa Claus driving a Cadillac",
 });
 ```
 
@@ -175,10 +175,10 @@ const { image, warnings } = await generateImage({
 Some providers expose additional meta data for the result overall or per image.
 
 ```tsx
-const prompt = 'Santa Claus driving a Cadillac';
+const prompt = "Santa Claus driving a Cadillac";
 
 const { image, providerMetadata } = await generateImage({
-  model: openai.image('dall-e-3'),
+  model: openai.image("dall-e-3"),
   prompt,
 });
 
@@ -207,15 +207,15 @@ The error preserves the following information to help you log the issue:
 - `cause`: The cause of the error. You can use this for more detailed error handling
 
 ```ts
-import { generateImage, NoImageGeneratedError } from 'ai';
+import { generateImage, NoImageGeneratedError } from "ai";
 
 try {
   await generateImage({ model, prompt });
 } catch (error) {
   if (NoImageGeneratedError.isInstance(error)) {
-    console.log('NoImageGeneratedError');
-    console.log('Cause:', error.cause);
-    console.log('Responses:', error.responses);
+    console.log("NoImageGeneratedError");
+    console.log("Cause:", error.cause);
+    console.log("Responses:", error.responses);
   }
 }
 ```
@@ -228,23 +228,23 @@ You can enhance image models, e.g. to set default values or implement logging, u
 Here is an example that sets a default size when none is provided:
 
 ```ts
-import { generateImage, wrapImageModel } from 'ai';
-import { openai } from '@ai-sdk/openai';
+import { generateImage, wrapImageModel } from "ai";
+import { openai } from "@ai-sdk/openai";
 
 const model = wrapImageModel({
-  model: openai.image('gpt-image-1'),
+  model: openai.image("gpt-image-1"),
   middleware: {
-    specificationVersion: 'v3',
+    specificationVersion: "v3",
     transformParams: async ({ params }) => ({
       ...params,
-      size: params.size ?? '1024x1024',
+      size: params.size ?? "1024x1024",
     }),
   },
 });
 
 const { image } = await generateImage({
   model,
-  prompt: 'Santa Claus driving a Cadillac',
+  prompt: "Santa Claus driving a Cadillac",
 });
 ```
 
@@ -254,16 +254,16 @@ Some language models such as Google `gemini-2.5-flash-image` support multi-modal
 With such models, you can access the generated images using the `files` property of the response.
 
 ```ts
-import { google } from '@ai-sdk/google';
-import { generateText } from 'ai';
+import { google } from "@ai-sdk/google";
+import { generateText } from "ai";
 
 const result = await generateText({
-  model: google('gemini-2.5-flash-image'),
-  prompt: 'Generate an image of a comic cat',
+  model: google("gemini-2.5-flash-image"),
+  prompt: "Generate an image of a comic cat",
 });
 
 for (const file of result.files) {
-  if (file.mediaType.startsWith('image/')) {
+  if (file.mediaType.startsWith("image/")) {
     // The file object provides multiple data formats:
     // Access images as base64 string, Uint8Array binary data, or check type
     // - file.base64: string (data URL format)

@@ -6,20 +6,26 @@ Drizzle has simple and flexible API, which lets you easily create such an index 
 \<CodeTabs items={\["schema.ts", "migration.sql"]}> <CodeTab>
 
 ```ts copy {12,13}
-import { SQL, sql } from 'drizzle-orm';
-import { AnyMySqlColumn, mysqlTable, serial, uniqueIndex, varchar } from 'drizzle-orm/mysql-core';
+import { SQL, sql } from "drizzle-orm";
+import {
+  AnyMySqlColumn,
+  mysqlTable,
+  serial,
+  uniqueIndex,
+  varchar,
+} from "drizzle-orm/mysql-core";
 
 export const users = mysqlTable(
-  'users',
+  "users",
   {
-    id: serial('id').primaryKey(),
-    name: varchar('name', { length: 255 }).notNull(),
-    email: varchar('email', { length: 255 }).notNull(),
+    id: serial("id").primaryKey(),
+    name: varchar("name", { length: 255 }).notNull(),
+    email: varchar("email", { length: 255 }).notNull(),
   },
   (table) => [
     // uniqueIndex('emailUniqueIndex').on(sql`(lower(${table.email}))`),
-    uniqueIndex('emailUniqueIndex').on(lower(table.email)),
-  ]
+    uniqueIndex("emailUniqueIndex").on(lower(table.email)),
+  ],
 );
 
 // custom lower function

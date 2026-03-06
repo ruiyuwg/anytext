@@ -27,7 +27,11 @@ describe("tokenize", () => {
   });
 
   it("deduplicates hyphen parts against existing tokens", () => {
-    expect(tokenize("server server-side")).toEqual(["server", "server-side", "side"]);
+    expect(tokenize("server server-side")).toEqual([
+      "server",
+      "server-side",
+      "side",
+    ]);
   });
 
   it("filters empty parts from leading/trailing hyphens", () => {

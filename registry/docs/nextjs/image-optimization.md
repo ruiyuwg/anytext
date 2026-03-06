@@ -10,18 +10,18 @@ The Next.js [`<Image>`](/docs/app/api-reference/components/image) component exte
 To start using `<Image>`, import it from `next/image` and render it within your component.
 
 ```tsx filename="app/page.tsx" switcher
-import Image from 'next/image'
+import Image from "next/image";
 
 export default function Page() {
-  return <Image src="" alt="" />
+  return <Image src="" alt="" />;
 }
 ```
 
 ```jsx filename="app/page.js" switcher
-import Image from 'next/image'
+import Image from "next/image";
 
 export default function Page() {
-  return <Image src="" alt="" />
+  return <Image src="" alt="" />;
 }
 ```
 
@@ -36,7 +36,7 @@ You can store static files, like images and fonts, under a folder called [`publi
 ![Folder structure showing app and public folders](https://h8DxKfmAPhn8O0p3.public.blob.vercel-storage.com/docs/light/public-folder.png)
 
 ```tsx filename="app/page.tsx" switcher
-import Image from 'next/image'
+import Image from "next/image";
 
 export default function Page() {
   return (
@@ -46,12 +46,12 @@ export default function Page() {
       width={500}
       height={500}
     />
-  )
+  );
 }
 ```
 
 ```jsx filename="app/page.js" switcher
-import Image from 'next/image'
+import Image from "next/image";
 
 export default function Page() {
   return (
@@ -61,15 +61,15 @@ export default function Page() {
       width={500}
       height={500}
     />
-  )
+  );
 }
 ```
 
 If the image is statically imported, Next.js will automatically determine the intrinsic [`width`](/docs/app/api-reference/components/image#width-and-height) and [`height`](/docs/app/api-reference/components/image#width-and-height). These values are used to determine the image ratio and prevent [Cumulative Layout Shift](https://web.dev/articles/cls) while your image is loading.
 
 ```tsx filename="app/page.tsx" switcher
-import Image from 'next/image'
-import ProfileImage from './profile.png'
+import Image from "next/image";
+import ProfileImage from "./profile.png";
 
 export default function Page() {
   return (
@@ -81,13 +81,13 @@ export default function Page() {
       // blurDataURL="data:..." automatically provided
       // placeholder="blur" // Optional blur-up while loading
     />
-  )
+  );
 }
 ```
 
 ```jsx filename="app/page.js" switcher
-import Image from 'next/image'
-import ProfileImage from './profile.png'
+import Image from "next/image";
+import ProfileImage from "./profile.png";
 
 export default function Page() {
   return (
@@ -99,7 +99,7 @@ export default function Page() {
       // blurDataURL="data:..." automatically provided
       // placeholder="blur" // Optional blur-up while loading
     />
-  )
+  );
 }
 ```
 
@@ -108,7 +108,7 @@ export default function Page() {
 To use a remote image, you can provide a URL string for the `src` property.
 
 ```tsx filename="app/page.tsx" switcher
-import Image from 'next/image'
+import Image from "next/image";
 
 export default function Page() {
   return (
@@ -118,12 +118,12 @@ export default function Page() {
       width={500}
       height={500}
     />
-  )
+  );
 }
 ```
 
 ```jsx filename="app/page.js" switcher
-import Image from 'next/image'
+import Image from "next/image";
 
 export default function Page() {
   return (
@@ -133,7 +133,7 @@ export default function Page() {
       width={500}
       height={500}
     />
-  )
+  );
 }
 ```
 
@@ -142,23 +142,23 @@ Since Next.js does not have access to remote files during the build process, you
 To safely allow images from remote servers, you need to define a list of supported URL patterns in [`next.config.js`](/docs/app/api-reference/config/next-config-js). Be as specific as possible to prevent malicious usage. For example, the following configuration will only allow images from a specific AWS S3 bucket:
 
 ```ts filename="next.config.ts" switcher
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const config: NextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 's3.amazonaws.com',
-        port: '',
-        pathname: '/my-bucket/**',
-        search: '',
+        protocol: "https",
+        hostname: "s3.amazonaws.com",
+        port: "",
+        pathname: "/my-bucket/**",
+        search: "",
       },
     ],
   },
-}
+};
 
-export default config
+export default config;
 ```
 
 ```js filename="next.config.js" switcher
@@ -166,15 +166,15 @@ module.exports = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 's3.amazonaws.com',
-        port: '',
-        pathname: '/my-bucket/**',
-        search: '',
+        protocol: "https",
+        hostname: "s3.amazonaws.com",
+        port: "",
+        pathname: "/my-bucket/**",
+        search: "",
       },
     ],
   },
-}
+};
 ```
 
 ## API Reference

@@ -97,15 +97,15 @@ The closest equivalent of the root layout file in a CRA application is `public/i
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
-  return '...'
+  return "...";
 }
 ```
 
 ```jsx filename="app/layout.js" switcher
 export default function RootLayout({ children }) {
-  return '...'
+  return "...";
 }
 ```
 
@@ -115,7 +115,7 @@ Now copy the content of your old `index.html` into this `<RootLayout>` component
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
@@ -130,7 +130,7 @@ export default function RootLayout({
         <div id="root">{children}</div>
       </body>
     </html>
-  )
+  );
 }
 ```
 
@@ -149,7 +149,7 @@ export default function RootLayout({ children }) {
         <div id="root">{children}</div>
       </body>
     </html>
-  )
+  );
 }
 ```
 
@@ -163,7 +163,7 @@ Next.js automatically includes the `<meta charset="UTF-8" />` and `<meta name="v
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
@@ -176,7 +176,7 @@ export default function RootLayout({
         <div id="root">{children}</div>
       </body>
     </html>
-  )
+  );
 }
 ```
 
@@ -193,7 +193,7 @@ export default function RootLayout({ children }) {
         <div id="root">{children}</div>
       </body>
     </html>
-  )
+  );
 }
 ```
 
@@ -203,7 +203,7 @@ Any [metadata files](/docs/app/getting-started/metadata-and-og-images#file-based
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
@@ -215,7 +215,7 @@ export default function RootLayout({
         <div id="root">{children}</div>
       </body>
     </html>
-  )
+  );
 }
 ```
 
@@ -231,24 +231,24 @@ export default function RootLayout({ children }) {
         <div id="root">{children}</div>
       </body>
     </html>
-  )
+  );
 }
 ```
 
 Finally, Next.js can manage your last `<head>` tags with the [Metadata API](/docs/app/getting-started/metadata-and-og-images). Move your final metadata info into an exported [`metadata` object](/docs/app/api-reference/functions/generate-metadata#metadata-object):
 
 ```tsx filename="app/layout.tsx" switcher
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'React App',
-  description: 'Web site created with Next.js.',
-}
+  title: "React App",
+  description: "Web site created with Next.js.",
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
@@ -256,15 +256,15 @@ export default function RootLayout({
         <div id="root">{children}</div>
       </body>
     </html>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/layout.js" switcher
 export const metadata = {
-  title: 'React App',
-  description: 'Web site created with Next.js.',
-}
+  title: "React App",
+  description: "Web site created with Next.js.",
+};
 
 export default function RootLayout({ children }) {
   return (
@@ -273,7 +273,7 @@ export default function RootLayout({ children }) {
         <div id="root">{children}</div>
       </body>
     </html>
-  )
+  );
 }
 ```
 
@@ -286,17 +286,17 @@ Like CRA, Next.js supports [CSS Modules](/docs/app/getting-started/css#css-modul
 If you have a global CSS file, import it into your `app/layout.tsx`:
 
 ```tsx filename="app/layout.tsx" switcher
-import '../index.css'
+import "../index.css";
 
 export const metadata = {
-  title: 'React App',
-  description: 'Web site created with Next.js.',
-}
+  title: "React App",
+  description: "Web site created with Next.js.",
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
@@ -304,7 +304,7 @@ export default function RootLayout({
         <div id="root">{children}</div>
       </body>
     </html>
-  )
+  );
 }
 ```
 
@@ -329,21 +329,21 @@ app
 
 ```tsx filename="app/[[...slug]]/page.tsx" switcher
 export function generateStaticParams() {
-  return [{ slug: [''] }]
+  return [{ slug: [""] }];
 }
 
 export default function Page() {
-  return '...' // We'll update this
+  return "..."; // We'll update this
 }
 ```
 
 ```jsx filename="app/[[...slug]]/page.js" switcher
 export function generateStaticParams() {
-  return [{ slug: [''] }]
+  return [{ slug: [""] }];
 }
 
 export default function Page() {
-  return '...' // We'll update this
+  return "..."; // We'll update this
 }
 ```
 
@@ -356,26 +356,26 @@ Next, we’ll embed your CRA’s root App component inside a [Client Component](
 Create a `client.tsx` (or `client.js`) in `app/[[...slug]]/`:
 
 ```tsx filename="app/[[...slug]]/client.tsx" switcher
-'use client'
+"use client";
 
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic";
 
-const App = dynamic(() => import('../../App'), { ssr: false })
+const App = dynamic(() => import("../../App"), { ssr: false });
 
 export function ClientOnly() {
-  return <App />
+  return <App />;
 }
 ```
 
 ```jsx filename="app/[[...slug]]/client.js" switcher
-'use client'
+"use client";
 
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic";
 
-const App = dynamic(() => import('../../App'), { ssr: false })
+const App = dynamic(() => import("../../App"), { ssr: false });
 
 export function ClientOnly() {
-  return <App />
+  return <App />;
 }
 ```
 
@@ -385,26 +385,26 @@ export function ClientOnly() {
 Now update your `page.tsx` (or `page.js`) to use your new component:
 
 ```tsx filename="app/[[...slug]]/page.tsx" switcher
-import { ClientOnly } from './client'
+import { ClientOnly } from "./client";
 
 export function generateStaticParams() {
-  return [{ slug: [''] }]
+  return [{ slug: [""] }];
 }
 
 export default function Page() {
-  return <ClientOnly />
+  return <ClientOnly />;
 }
 ```
 
 ```jsx filename="app/[[...slug]]/page.js" switcher
-import { ClientOnly } from './client'
+import { ClientOnly } from "./client";
 
 export function generateStaticParams() {
-  return [{ slug: [''] }]
+  return [{ slug: [""] }];
 }
 
 export default function Page() {
-  return <ClientOnly />
+  return <ClientOnly />;
 }
 ```
 
@@ -413,10 +413,10 @@ export default function Page() {
 In CRA, importing an image file returns its public URL as a string:
 
 ```tsx
-import image from './img.png'
+import image from "./img.png";
 
 export default function App() {
-  return <img src={image} />
+  return <img src={image} />;
 }
 ```
 
@@ -430,10 +430,10 @@ Keeping the `<img>` tag will reduce the amount of changes in your application an
 
 ```tsx
 // Before
-import logo from '/logo.png'
+import logo from "/logo.png";
 
 // After
-import logo from '../public/logo.png'
+import logo from "../public/logo.png";
 ```
 
 **Pass the image `src` property instead of the whole image object to your `<img>` tag:**
@@ -513,14 +513,14 @@ You can now remove artifacts that are specific to Create React App:
 If you used the `homepage` field in your CRA `package.json` to serve the app under a specific subpath, you can replicate that in Next.js using the [`basePath` configuration](/docs/app/api-reference/config/next-config-js/basePath) in `next.config.ts`:
 
 ```ts filename="next.config.ts"
-import { NextConfig } from 'next'
+import { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  basePath: '/my-subpath',
+  basePath: "/my-subpath",
   // ...
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 ### Handling a Custom `Service Worker`
@@ -532,18 +532,18 @@ If you used CRA’s service worker (e.g., `serviceWorker.js` from `create-react-
 If your CRA app used the `proxy` field in `package.json` to forward requests to a backend server, you can replicate this with [Next.js rewrites](/docs/app/api-reference/config/next-config-js/rewrites) in `next.config.ts`:
 
 ```ts filename="next.config.ts"
-import { NextConfig } from 'next'
+import { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
-        source: '/api/:path*',
-        destination: 'https://your-backend.com/:path*',
+        source: "/api/:path*",
+        destination: "https://your-backend.com/:path*",
       },
-    ]
+    ];
   },
-}
+};
 ```
 
 ### Custom Webpack
@@ -551,16 +551,16 @@ const nextConfig: NextConfig = {
 If you had a custom webpack or Babel configuration in CRA, you can extend Next.js’s config in `next.config.ts`:
 
 ```ts filename="next.config.ts"
-import { NextConfig } from 'next'
+import { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   webpack: (config, { isServer }) => {
     // Modify the webpack config here
-    return config
+    return config;
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 > **Note**: This will require using Webpack by adding `--webpack` to your `dev` script.

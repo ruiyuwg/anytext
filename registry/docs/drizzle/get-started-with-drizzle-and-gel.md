@@ -10,7 +10,7 @@ Drizzle has native support for Gel connections with the `gel` client.
 This is the basic file structure of the project. In the `src` directory, we have table definition in `index.ts`. In `drizzle` folder there are generated Gel to Drizzle schema
 
 ```plaintext
-📦 
+📦
  ├ 📂 drizzle
  ├ 📂 src
  │ └ 📜 index.ts
@@ -57,7 +57,7 @@ gel migration apply
 Now you should have this file structure
 
 ```plaintext
-📦 
+📦
  ├ 📂 dbschema
  │ ├ 📂 migrations
  │ ├ 📜 default.esdl
@@ -86,10 +86,10 @@ Now you should have this file structure
 Create a `drizzle.config.ts` file in the root of your project and add the following content:
 
 ```typescript copy filename="drizzle.config.ts"
-import { defineConfig } from 'drizzle-kit';
+import { defineConfig } from "drizzle-kit";
 
 export default defineConfig({
-  dialect: 'gel',
+  dialect: "gel",
 });
 ```
 
@@ -101,17 +101,33 @@ drizzle-kit pull </Npx>
 Here is an example of the generated schema.ts file:
 
 ```typescript filename="drizzle/schema.ts"
-import { gelTable, uniqueIndex, uuid, smallint, text } from "drizzle-orm/gel-core"
-import { sql } from "drizzle-orm"
+import {
+  gelTable,
+  uniqueIndex,
+  uuid,
+  smallint,
+  text,
+} from "drizzle-orm/gel-core";
+import { sql } from "drizzle-orm";
 
-export const users = gelTable("users", {
-	id: uuid().default(sql`uuid_generate_v4()`).primaryKey().notNull(),
-	age: smallint(),
-	email: text().notNull(),
-	name: text(),
-}, (table) => [
-	uniqueIndex("a8c6061c-f37f-11ef-9249-0d78f6c1807b;schemaconstr").using("btree", table.id.asc().nullsLast().op("uuid_ops")),
-]);
+export const users = gelTable(
+  "users",
+  {
+    id: uuid()
+      .default(sql`uuid_generate_v4()`)
+      .primaryKey()
+      .notNull(),
+    age: smallint(),
+    email: text().notNull(),
+    name: text(),
+  },
+  (table) => [
+    uniqueIndex("a8c6061c-f37f-11ef-9249-0d78f6c1807b;schemaconstr").using(
+      "btree",
+      table.id.asc().nullsLast().op("uuid_ops"),
+    ),
+  ],
+);
 ```
 
 #### Step 7 - Connect Drizzle ORM to the database

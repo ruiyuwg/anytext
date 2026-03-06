@@ -5,16 +5,16 @@ The `useReportWebVitals` hook allows you to report [Core Web Vitals](https://web
 New functions passed to `useReportWebVitals` are called with the available metrics up to that point. To prevent reporting duplicated data, ensure that the callback function reference does not change (as shown in the code examples below).
 
 ```jsx filename="pages/_app.js"
-import { useReportWebVitals } from 'next/web-vitals'
+import { useReportWebVitals } from "next/web-vitals";
 
 const logWebVitals = (metric) => {
-  console.log(metric)
-}
+  console.log(metric);
+};
 
 function MyApp({ Component, pageProps }) {
-  useReportWebVitals(logWebVitals)
+  useReportWebVitals(logWebVitals);
 
-  return <Component {...pageProps} />
+  return <Component {...pageProps} />;
 }
 ```
 
@@ -45,24 +45,24 @@ experience of a web page. The following web vitals are all included:
 You can handle all the results of these metrics using the `name` property.
 
 ```jsx filename="pages/_app.js"
-import { useReportWebVitals } from 'next/web-vitals'
+import { useReportWebVitals } from "next/web-vitals";
 
 const handleWebVitals = (metric) => {
   switch (metric.name) {
-    case 'FCP': {
+    case "FCP": {
       // handle FCP results
     }
-    case 'LCP': {
+    case "LCP": {
       // handle LCP results
     }
     // ...
   }
-}
+};
 
 function MyApp({ Component, pageProps }) {
-  useReportWebVitals(handleWebVitals)
+  useReportWebVitals(handleWebVitals);
 
-  return <Component {...pageProps} />
+  return <Component {...pageProps} />;
 }
 ```
 
@@ -79,28 +79,28 @@ measure the time it takes for the page to hydrate and render:
 You can handle all the results of these metrics separately:
 
 ```jsx filename="pages/_app.js"
-import { useReportWebVitals } from 'next/web-vitals'
+import { useReportWebVitals } from "next/web-vitals";
 
 function handleCustomMetrics(metric) {
   switch (metric.name) {
-    case 'Next.js-hydration':
+    case "Next.js-hydration":
       // handle hydration results
-      break
-    case 'Next.js-route-change-to-render':
+      break;
+    case "Next.js-route-change-to-render":
       // handle route-change to render results
-      break
-    case 'Next.js-render':
+      break;
+    case "Next.js-render":
       // handle render results
-      break
+      break;
     default:
-      break
+      break;
   }
 }
 
 function MyApp({ Component, pageProps }) {
-  useReportWebVitals(handleCustomMetrics)
+  useReportWebVitals(handleCustomMetrics);
 
-  return <Component {...pageProps} />
+  return <Component {...pageProps} />;
 }
 ```
 
@@ -113,18 +113,18 @@ real user performance on your site. For example:
 
 ```js
 function postWebVitals(metric) {
-  const body = JSON.stringify(metric)
-  const url = 'https://example.com/analytics'
+  const body = JSON.stringify(metric);
+  const url = "https://example.com/analytics";
 
   // Use `navigator.sendBeacon()` if available, falling back to `fetch()`.
   if (navigator.sendBeacon) {
-    navigator.sendBeacon(url, body)
+    navigator.sendBeacon(url, body);
   } else {
-    fetch(url, { body, method: 'POST', keepalive: true })
+    fetch(url, { body, method: "POST", keepalive: true });
   }
 }
 
-useReportWebVitals(postWebVitals)
+useReportWebVitals(postWebVitals);
 ```
 
 > **Good to know**: If you use [Google Analytics](https://analytics.google.com/analytics/web/), using the

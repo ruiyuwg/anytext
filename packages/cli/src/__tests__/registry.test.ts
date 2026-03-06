@@ -67,9 +67,11 @@ describe("getManifest", () => {
   it("fetches and caches manifest when not cached", async () => {
     mockGetCachedManifest.mockReturnValue(null);
 
-    const fetchSpy = vi.spyOn(globalThis, "fetch").mockResolvedValue(
-      new Response(JSON.stringify(testManifest), { status: 200 })
-    );
+    const fetchSpy = vi
+      .spyOn(globalThis, "fetch")
+      .mockResolvedValue(
+        new Response(JSON.stringify(testManifest), { status: 200 }),
+      );
 
     const { getManifest } = await importRegistry();
     const result = await getManifest();
@@ -78,14 +80,16 @@ describe("getManifest", () => {
     expect(mockCacheManifest).toHaveBeenCalledWith(testManifest);
     expect(fetchSpy).toHaveBeenCalledWith(
       expect.any(String),
-      expect.objectContaining({ signal: expect.any(AbortSignal) })
+      expect.objectContaining({ signal: expect.any(AbortSignal) }),
     );
   });
 
   it("propagates timeout error", async () => {
     mockGetCachedManifest.mockReturnValue(null);
 
-    vi.spyOn(globalThis, "fetch").mockRejectedValue(new DOMException("The operation was aborted", "TimeoutError"));
+    vi.spyOn(globalThis, "fetch").mockRejectedValue(
+      new DOMException("The operation was aborted", "TimeoutError"),
+    );
 
     const { getManifest } = await importRegistry();
     await expect(getManifest()).rejects.toThrow("aborted");
@@ -95,7 +99,7 @@ describe("getManifest", () => {
     mockGetCachedManifest.mockReturnValue(null);
 
     vi.spyOn(globalThis, "fetch").mockResolvedValue(
-      new Response("", { status: 404, statusText: "Not Found" })
+      new Response("", { status: 404, statusText: "Not Found" }),
     );
 
     const { getManifest } = await importRegistry();
@@ -118,7 +122,7 @@ describe("getManifest", () => {
     mockValidateManifest.mockReturnValue(false);
 
     vi.spyOn(globalThis, "fetch").mockResolvedValue(
-      new Response(JSON.stringify({ bad: "data" }), { status: 200 })
+      new Response(JSON.stringify({ bad: "data" }), { status: 200 }),
     );
 
     const { getManifest } = await importRegistry();
@@ -128,16 +132,20 @@ describe("getManifest", () => {
   it("uses custom ANYTEXT_REGISTRY_URL", async () => {
     mockGetCachedManifest.mockReturnValue(null);
 
-    const fetchSpy = vi.spyOn(globalThis, "fetch").mockResolvedValue(
-      new Response(JSON.stringify(testManifest), { status: 200 })
-    );
+    const fetchSpy = vi
+      .spyOn(globalThis, "fetch")
+      .mockResolvedValue(
+        new Response(JSON.stringify(testManifest), { status: 200 }),
+      );
 
-    const { getManifest } = await importRegistry("https://custom.example.com/registry");
+    const { getManifest } = await importRegistry(
+      "https://custom.example.com/registry",
+    );
     await getManifest();
 
     expect(fetchSpy).toHaveBeenCalledWith(
       "https://custom.example.com/registry/manifest.json",
-      expect.objectContaining({ signal: expect.any(AbortSignal) })
+      expect.objectContaining({ signal: expect.any(AbortSignal) }),
     );
   });
 });
@@ -156,18 +164,21 @@ describe("getDoc", () => {
   it("fetches and caches doc when not cached", async () => {
     mockGetCachedDoc.mockReturnValue(null);
 
-    const fetchSpy = vi.spyOn(globalThis, "fetch").mockResolvedValue(
-      new Response("# Hooks content", { status: 200 })
-    );
+    const fetchSpy = vi
+      .spyOn(globalThis, "fetch")
+      .mockResolvedValue(new Response("# Hooks content", { status: 200 }));
 
     const { getDoc } = await importRegistry();
     const result = await getDoc("react/hooks.md");
 
     expect(result).toBe("# Hooks content");
-    expect(mockCacheDoc).toHaveBeenCalledWith("react/hooks.md", "# Hooks content");
+    expect(mockCacheDoc).toHaveBeenCalledWith(
+      "react/hooks.md",
+      "# Hooks content",
+    );
     expect(fetchSpy).toHaveBeenCalledWith(
       expect.any(String),
-      expect.objectContaining({ signal: expect.any(AbortSignal) })
+      expect.objectContaining({ signal: expect.any(AbortSignal) }),
     );
   });
 
@@ -175,7 +186,7 @@ describe("getDoc", () => {
     mockGetCachedDoc.mockReturnValue(null);
 
     vi.spyOn(globalThis, "fetch").mockResolvedValue(
-      new Response("", { status: 500, statusText: "Server Error" })
+      new Response("", { status: 500, statusText: "Server Error" }),
     );
 
     const { getDoc } = await importRegistry();

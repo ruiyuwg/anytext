@@ -7,8 +7,8 @@ For instance, we create `src/db/queries` folder and separate files for each oper
 Read more about insert query in the [documentation](/docs/insert).
 
 ```typescript copy filename="src/db/queries/insert.ts" {4, 8}
-import { db } from '../index';
-import { InsertPost, InsertUser, postsTable, usersTable } from '../schema';
+import { db } from "../index";
+import { InsertPost, InsertUser, postsTable, usersTable } from "../schema";
 
 export async function createUser(data: InsertUser) {
   await db.insert(usersTable).values(data);
@@ -29,11 +29,11 @@ Read more about select query in the [documentation](/docs/select).
 If you are on pre-1 version(like `0.45.1`) then use `getTableColumns` </Callout>
 
 ```typescript copy filename="src/db/queries/select.ts" {5, 16, 41}
-import { asc, count, eq, getColumns, gt, sql } from 'drizzle-orm';
-import { db } from '../index';
-import { SelectUser, postsTable, usersTable } from '../schema';
+import { asc, count, eq, getColumns, gt, sql } from "drizzle-orm";
+import { db } from "../index";
+import { SelectUser, postsTable, usersTable } from "../schema";
 
-export async function getUserById(id: SelectUser['id']): Promise<
+export async function getUserById(id: SelectUser["id"]): Promise<
   Array<{
     id: number;
     name: string;
@@ -98,11 +98,14 @@ Alternatively, you can use [relational query syntax](/docs/rqb).
 Read more about update query in the [documentation](/docs/update).
 
 ```typescript copy filename="src/db/queries/update.ts" {5}
-import { eq } from 'drizzle-orm';
-import { db } from '../index';
-import { SelectPost, postsTable } from '../schema';
+import { eq } from "drizzle-orm";
+import { db } from "../index";
+import { SelectPost, postsTable } from "../schema";
 
-export async function updatePost(id: SelectPost['id'], data: Partial<Omit<SelectPost, 'id'>>) {
+export async function updatePost(
+  id: SelectPost["id"],
+  data: Partial<Omit<SelectPost, "id">>,
+) {
   await db.update(postsTable).set(data).where(eq(postsTable.id, id));
 }
 ```
@@ -112,11 +115,11 @@ export async function updatePost(id: SelectPost['id'], data: Partial<Omit<Select
 Read more about delete query in the [documentation](/docs/delete).
 
 ```typescript copy filename="src/db/queries/delete.ts" {5}
-import { eq } from 'drizzle-orm';
-import { db } from '../index';
-import { SelectUser, usersTable } from '../schema';
+import { eq } from "drizzle-orm";
+import { db } from "../index";
+import { SelectUser, usersTable } from "../schema";
 
-export async function deleteUser(id: SelectUser['id']) {
+export async function deleteUser(id: SelectUser["id"]) {
   await db.delete(usersTable).where(eq(usersTable.id, id));
 }
 ```

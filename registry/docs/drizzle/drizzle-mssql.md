@@ -25,27 +25,27 @@ drizzle-orm@beta mssql
 \<CodeTabs items={\["mssql", "mssql with config"]}>
 
 ```typescript copy
-// Make sure to install the 'mssql' package 
-import { drizzle } from 'drizzle-orm/node-mssql';
+// Make sure to install the 'mssql' package
+import { drizzle } from "drizzle-orm/node-mssql";
 
 const db = drizzle(process.env.DATABASE_URL);
- 
-const result = await db.execute('select 1');
+
+const result = await db.execute("select 1");
 ```
 
 ```typescript copy
-// Make sure to install the 'pg' package 
-import { drizzle } from 'drizzle-orm/node-mssql';
+// Make sure to install the 'pg' package
+import { drizzle } from "drizzle-orm/node-mssql";
 
 // You can specify any property from the mssql connection options
-const db = drizzle({ 
-  connection: { 
+const db = drizzle({
+  connection: {
     connectionString: process.env.DATABASE_URL,
-    ssl: true
-  }
+    ssl: true,
+  },
 });
- 
-const result = await db.execute('select 1');
+
+const result = await db.execute("select 1");
 ```
 
 </CodeTabs>
@@ -63,14 +63,14 @@ const response = awaitedClient.query...
 If you need to provide your existing driver:
 
 ```typescript copy
-// Make sure to install the 'mssql' package 
+// Make sure to install the 'mssql' package
 import { drizzle } from "drizzle-orm/node-mssql";
-import type { ConnectionPool } from 'mssql';
+import type { ConnectionPool } from "mssql";
 
 const pool = await mssql.connect(connectionString);
 const db = drizzle({ client: pool });
- 
-const result = await db.execute('select 1');
+
+const result = await db.execute("select 1");
 ```
 
 #### What's next?

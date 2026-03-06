@@ -20,15 +20,15 @@ set in the `AI_GATEWAY_API_KEY` environment variable.
 You can use the `pipeUIMessageStreamToResponse` method to pipe the stream data to the server response.
 
 ```ts filename='index.ts'
-import { streamText } from 'ai';
-import express, { Request, Response } from 'express';
+import { streamText } from "ai";
+import express, { Request, Response } from "express";
 
 const app = express();
 
-app.post('/', async (req: Request, res: Response) => {
+app.post("/", async (req: Request, res: Response) => {
   const result = streamText({
-    model: 'openai/gpt-4o',
-    prompt: 'Invent a new holiday and describe its traditions.',
+    model: "openai/gpt-4o",
+    prompt: "Invent a new holiday and describe its traditions.",
   });
 
   result.pipeUIMessageStreamToResponse(res);
@@ -48,28 +48,28 @@ import {
   createUIMessageStream,
   pipeUIMessageStreamToResponse,
   streamText,
-} from 'ai';
-import express, { Request, Response } from 'express';
+} from "ai";
+import express, { Request, Response } from "express";
 
 const app = express();
 
-app.post('/custom-data-parts', async (req: Request, res: Response) => {
+app.post("/custom-data-parts", async (req: Request, res: Response) => {
   pipeUIMessageStreamToResponse({
     response: res,
     stream: createUIMessageStream({
       execute: async ({ writer }) => {
-        writer.write({ type: 'start' });
+        writer.write({ type: "start" });
 
         writer.write({
-          type: 'data-custom',
+          type: "data-custom",
           data: {
-            custom: 'Hello, world!',
+            custom: "Hello, world!",
           },
         });
 
         const result = streamText({
-          model: 'openai/gpt-4o',
-          prompt: 'Invent a new holiday and describe its traditions.',
+          model: "openai/gpt-4o",
+          prompt: "Invent a new holiday and describe its traditions.",
         });
 
         writer.merge(result.toUIMessageStream({ sendStart: false }));
@@ -88,15 +88,15 @@ app.listen(8080, () => {
 You can send a text stream to the client using `pipeTextStreamToResponse`.
 
 ```ts filename='index.ts'
-import { streamText } from 'ai';
-import express, { Request, Response } from 'express';
+import { streamText } from "ai";
+import express, { Request, Response } from "express";
 
 const app = express();
 
-app.post('/', async (req: Request, res: Response) => {
+app.post("/", async (req: Request, res: Response) => {
   const result = streamText({
-    model: 'openai/gpt-4o',
-    prompt: 'Invent a new holiday and describe its traditions.',
+    model: "openai/gpt-4o",
+    prompt: "Invent a new holiday and describe its traditions.",
   });
 
   result.pipeTextStreamToResponse(res);

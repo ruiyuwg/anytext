@@ -35,11 +35,11 @@ export INFERENCE_URL=$(heroku config:get INFERENCE_URL -a $APP_NAME)
 To use Heroku, you can create a custom provider instance with the `createOpenAICompatible` function from `@ai-sdk/openai-compatible`:
 
 ```ts
-import { createOpenAICompatible } from '@ai-sdk/openai-compatible';
+import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
 
 const heroku = createOpenAICompatible({
-  name: 'heroku',
-  baseURL: process.env.INFERENCE_URL + '/v1',
+  name: "heroku",
+  baseURL: process.env.INFERENCE_URL + "/v1",
   apiKey: process.env.INFERENCE_KEY,
 });
 ```
@@ -52,7 +52,7 @@ You can create Heroku models using a provider instance.
 The first argument is the served model name, e.g. `claude-3-5-haiku`.
 
 ```ts
-const model = heroku('claude-3-5-haiku');
+const model = heroku("claude-3-5-haiku");
 ```
 
 ### Example
@@ -60,18 +60,18 @@ const model = heroku('claude-3-5-haiku');
 You can use Heroku language models to generate text with the `generateText` function:
 
 ```ts
-import { createOpenAICompatible } from '@ai-sdk/openai-compatible';
-import { generateText } from 'ai';
+import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
+import { generateText } from "ai";
 
 const heroku = createOpenAICompatible({
-  name: 'heroku',
-  baseURL: process.env.INFERENCE_URL + '/v1',
+  name: "heroku",
+  baseURL: process.env.INFERENCE_URL + "/v1",
   apiKey: process.env.INFERENCE_KEY,
 });
 
 const { text } = await generateText({
-  model: heroku('claude-3-5-haiku'),
-  prompt: 'Tell me about yourself in one sentence',
+  model: heroku("claude-3-5-haiku"),
+  prompt: "Tell me about yourself in one sentence",
 });
 
 console.log(text);
@@ -80,18 +80,18 @@ console.log(text);
 Heroku language models are also able to generate text in a streaming fashion with the `streamText` function:
 
 ```ts
-import { createOpenAICompatible } from '@ai-sdk/openai-compatible';
-import { streamText } from 'ai';
+import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
+import { streamText } from "ai";
 
 const heroku = createOpenAICompatible({
-  name: 'heroku',
-  baseURL: process.env.INFERENCE_URL + '/v1',
+  name: "heroku",
+  baseURL: process.env.INFERENCE_URL + "/v1",
   apiKey: process.env.INFERENCE_KEY,
 });
 
 const result = streamText({
-  model: heroku('claude-3-5-haiku'),
-  prompt: 'Tell me about yourself in one sentence',
+  model: heroku("claude-3-5-haiku"),
+  prompt: "Tell me about yourself in one sentence",
 });
 
 for await (const message of result.textStream) {

@@ -12,50 +12,50 @@ Example: `Bearer my.token.value` or `Basic my.token.value`
 ## Import
 
 ```ts
-import { Hono } from 'hono'
-import { jwt } from 'hono/jwt'
-import type { JwtVariables } from 'hono/jwt'
+import { Hono } from "hono";
+import { jwt } from "hono/jwt";
+import type { JwtVariables } from "hono/jwt";
 ```
 
 ## Usage
 
 ```ts
 // Specify the variable types to infer the `c.get('jwtPayload')`:
-type Variables = JwtVariables
+type Variables = JwtVariables;
 
-const app = new Hono<{ Variables: Variables }>()
+const app = new Hono<{ Variables: Variables }>();
 
 app.use(
-  '/auth/*',
+  "/auth/*",
   jwt({
-    secret: 'it-is-very-secret',
-    alg: 'HS256',
-  })
-)
+    secret: "it-is-very-secret",
+    alg: "HS256",
+  }),
+);
 
-app.get('/auth/page', (c) => {
-  return c.text('You are authorized')
-})
+app.get("/auth/page", (c) => {
+  return c.text("You are authorized");
+});
 ```
 
 Get payload:
 
 ```ts
-const app = new Hono()
+const app = new Hono();
 
 app.use(
-  '/auth/*',
+  "/auth/*",
   jwt({
-    secret: 'it-is-very-secret',
-    alg: 'HS256',
-    issuer: 'my-trusted-issuer',
-  })
-)
+    secret: "it-is-very-secret",
+    alg: "HS256",
+    issuer: "my-trusted-issuer",
+  }),
+);
 
-app.get('/auth/page', (c) => {
-  const payload = c.get('jwtPayload')
-  return c.json(payload) // eg: { "sub": "1234567890", "name": "John Doe", "iat": 1516239022, "iss": "my-trusted-issuer" }
-})
+app.get("/auth/page", (c) => {
+  const payload = c.get("jwtPayload");
+  return c.json(payload); // eg: { "sub": "1234567890", "name": "John Doe", "iat": 1516239022, "iss": "my-trusted-issuer" }
+});
 ```
 
 ::: tip
@@ -63,13 +63,13 @@ app.get('/auth/page', (c) => {
 `jwt()` is just a middleware function. If you want to use an environment variable (eg: `c.env.JWT_SECRET`), you can use it as follows:
 
 ```js
-app.use('/auth/*', (c, next) => {
+app.use("/auth/*", (c, next) => {
   const jwtMiddleware = jwt({
     secret: c.env.JWT_SECRET,
-    alg: 'HS256',
-  })
-  return jwtMiddleware(c, next)
-})
+    alg: "HS256",
+  });
+  return jwtMiddleware(c, next);
+});
 ```
 
 :::
@@ -96,13 +96,13 @@ The name of the header to look for the JWT token. The default is `Authorization`
 
 ```ts
 app.use(
-  '/auth/*',
+  "/auth/*",
   jwt({
-    secret: 'it-is-very-secret',
-    alg: 'HS256',
-    headerName: 'x-custom-auth-header',
-  })
-)
+    secret: "it-is-very-secret",
+    alg: "HS256",
+    headerName: "x-custom-auth-header",
+  }),
+);
 ```
 
 ### <Badge type="info" text="optional" /> verifyOptions: `VerifyOptions`

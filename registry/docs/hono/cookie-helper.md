@@ -5,7 +5,7 @@ The Cookie Helper provides an easy interface to manage cookies, enabling develop
 ## Import
 
 ```ts
-import { Hono } from 'hono'
+import { Hono } from "hono";
 import {
   deleteCookie,
   getCookie,
@@ -14,7 +14,7 @@ import {
   setSignedCookie,
   generateCookie,
   generateSignedCookie,
-} from 'hono/cookie'
+} from "hono/cookie";
 ```
 
 ## Usage
@@ -22,13 +22,13 @@ import {
 ### Regular cookies
 
 ```ts
-app.get('/cookie', (c) => {
-  setCookie(c, 'cookie_name', 'cookie_value')
-  const yummyCookie = getCookie(c, 'cookie_name')
-  deleteCookie(c, 'cookie_name')
-  const allCookies = getCookie(c)
+app.get("/cookie", (c) => {
+  setCookie(c, "cookie_name", "cookie_value");
+  const yummyCookie = getCookie(c, "cookie_name");
+  deleteCookie(c, "cookie_name");
+  const allCookies = getCookie(c);
   // ...
-})
+});
 ```
 
 ### Signed cookies
@@ -36,20 +36,16 @@ app.get('/cookie', (c) => {
 **NOTE**: Setting and retrieving signed cookies returns a Promise due to the async nature of the WebCrypto API, which is used to create HMAC SHA-256 signatures.
 
 ```ts
-app.get('/signed-cookie', (c) => {
-  const secret = 'secret' // make sure it's a large enough string to be secure
+app.get("/signed-cookie", (c) => {
+  const secret = "secret"; // make sure it's a large enough string to be secure
 
-  await setSignedCookie(c, 'cookie_name0', 'cookie_value', secret)
-  const fortuneCookie = await getSignedCookie(
-    c,
-    secret,
-    'cookie_name0'
-  )
-  deleteCookie(c, 'cookie_name0')
+  await setSignedCookie(c, "cookie_name0", "cookie_value", secret);
+  const fortuneCookie = await getSignedCookie(c, secret, "cookie_name0");
+  deleteCookie(c, "cookie_name0");
   // `getSignedCookie` will return `false` for a specified cookie if the signature was tampered with or is invalid
-  const allSignedCookies = await getSignedCookie(c, secret)
+  const allSignedCookies = await getSignedCookie(c, secret);
   // ...
-})
+});
 ```
 
 ### Cookie Generation
@@ -60,16 +56,16 @@ app.get('/signed-cookie', (c) => {
 
 ```ts
 // Basic cookie generation
-const cookie = generateCookie('delicious_cookie', 'macha')
+const cookie = generateCookie("delicious_cookie", "macha");
 // Returns: 'delicious_cookie=macha; Path=/'
 
 // Cookie with options
-const cookie = generateCookie('delicious_cookie', 'macha', {
-  path: '/',
+const cookie = generateCookie("delicious_cookie", "macha", {
+  path: "/",
   secure: true,
   httpOnly: true,
-  domain: 'example.com',
-})
+  domain: "example.com",
+});
 ```
 
 #### `generateSignedCookie`
@@ -77,22 +73,22 @@ const cookie = generateCookie('delicious_cookie', 'macha', {
 ```ts
 // Basic signed cookie generation
 const signedCookie = await generateSignedCookie(
-  'delicious_cookie',
-  'macha',
-  'secret chocolate chips'
-)
+  "delicious_cookie",
+  "macha",
+  "secret chocolate chips",
+);
 
 // Signed cookie with options
 const signedCookie = await generateSignedCookie(
-  'delicious_cookie',
-  'macha',
-  'secret chocolate chips',
+  "delicious_cookie",
+  "macha",
+  "secret chocolate chips",
   {
-    path: '/',
+    path: "/",
     secure: true,
     httpOnly: true,
-  }
-)
+  },
+);
 ```
 
 **Note**: Unlike `setCookie` and `setSignedCookie`, these functions only generate the cookie strings. You need to manually set them in headers if needed.
@@ -116,32 +112,32 @@ Example:
 
 ```ts
 // Regular cookies
-setCookie(c, 'great_cookie', 'banana', {
-  path: '/',
+setCookie(c, "great_cookie", "banana", {
+  path: "/",
   secure: true,
-  domain: 'example.com',
+  domain: "example.com",
   httpOnly: true,
   maxAge: 1000,
   expires: new Date(Date.UTC(2000, 11, 24, 10, 30, 59, 900)),
-  sameSite: 'Strict',
-})
+  sameSite: "Strict",
+});
 
 // Signed cookies
 await setSignedCookie(
   c,
-  'fortune_cookie',
-  'lots-of-money',
-  'secret ingredient',
+  "fortune_cookie",
+  "lots-of-money",
+  "secret ingredient",
   {
-    path: '/',
+    path: "/",
     secure: true,
-    domain: 'example.com',
+    domain: "example.com",
     httpOnly: true,
     maxAge: 1000,
     expires: new Date(Date.UTC(2000, 11, 24, 10, 30, 59, 900)),
-    sameSite: 'Strict',
-  }
-)
+    sameSite: "Strict",
+  },
+);
 ```
 
 ### `deleteCookie`
@@ -153,17 +149,17 @@ await setSignedCookie(
 Example:
 
 ```ts
-deleteCookie(c, 'banana', {
-  path: '/',
+deleteCookie(c, "banana", {
+  path: "/",
   secure: true,
-  domain: 'example.com',
-})
+  domain: "example.com",
+});
 ```
 
 `deleteCookie` returns the deleted value:
 
 ```ts
-const deletedCookie = deleteCookie(c, 'delicious_cookie')
+const deletedCookie = deleteCookie(c, "delicious_cookie");
 ```
 
 ## `__Secure-` and `__Host-` prefix
@@ -173,39 +169,33 @@ The Cookie helper supports `__Secure-` and `__Host-` prefix for cookies names.
 If you want to verify if the cookie name has a prefix, specify the prefix option.
 
 ```ts
-const securePrefixCookie = getCookie(c, 'yummy_cookie', 'secure')
-const hostPrefixCookie = getCookie(c, 'yummy_cookie', 'host')
+const securePrefixCookie = getCookie(c, "yummy_cookie", "secure");
+const hostPrefixCookie = getCookie(c, "yummy_cookie", "host");
 
 const securePrefixSignedCookie = await getSignedCookie(
   c,
   secret,
-  'fortune_cookie',
-  'secure'
-)
+  "fortune_cookie",
+  "secure",
+);
 const hostPrefixSignedCookie = await getSignedCookie(
   c,
   secret,
-  'fortune_cookie',
-  'host'
-)
+  "fortune_cookie",
+  "host",
+);
 ```
 
 Also, if you wish to specify a prefix when setting the cookie, specify a value for the prefix option.
 
 ```ts
-setCookie(c, 'delicious_cookie', 'macha', {
-  prefix: 'secure', // or `host`
-})
+setCookie(c, "delicious_cookie", "macha", {
+  prefix: "secure", // or `host`
+});
 
-await setSignedCookie(
-  c,
-  'delicious_cookie',
-  'macha',
-  'secret choco chips',
-  {
-    prefix: 'secure', // or `host`
-  }
-)
+await setSignedCookie(c, "delicious_cookie", "macha", "secret choco chips", {
+  prefix: "secure", // or `host`
+});
 ```
 
 ## Following the best practices

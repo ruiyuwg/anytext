@@ -1,11 +1,11 @@
 # Suspense
 
 - Ensure you're on the latest version of React
-- If you use suspense with [tRPC's *automatic* SSR in Next.js](/docs/client/nextjs/ssr), the full page will crash on the server if a query fails, even if you have an `<ErrorBoundary />`
+- If you use suspense with [tRPC's _automatic_ SSR in Next.js](/docs/client/nextjs/ssr), the full page will crash on the server if a query fails, even if you have an `<ErrorBoundary />`
 
 ## Usage
 
-`useSuspenseQuery` & `useSuspenseInfiniteQuery` both return a `[data, query]`-*tuple*, to make it easy to directly use your data and renaming the variable to something descriptive
+`useSuspenseQuery` & `useSuspenseInfiniteQuery` both return a `[data, query]`-_tuple_, to make it easy to directly use your data and renaming the variable to something descriptive
 
 ```twoslash include server
 // @target: esnext
@@ -71,11 +71,11 @@ export const trpc = createTRPCReact<AppRouter>();
 // @include: server
 // ---cut---
 // @filename: pages/index.tsx
-import React from 'react';
-import { trpc } from '../utils/trpc';
+import React from "react";
+import { trpc } from "../utils/trpc";
 
 function PostView() {
-  const [post, postQuery] = trpc.post.byId.useSuspenseQuery({ id: '1' });
+  const [post, postQuery] = trpc.post.byId.useSuspenseQuery({ id: "1" });
   //      ^?
 
   return <>{/* ... */}</>;
@@ -86,8 +86,8 @@ function PostView() {
 
 ```tsx
 // @filename: pages/index.tsx
-import React from 'react';
-import { trpc } from '../utils/trpc';
+import React from "react";
+import { trpc } from "../utils/trpc";
 
 function PostView() {
   const [{ pages }, allPostsQuery] = trpc.post.all.useSuspenseInfiniteQuery(
@@ -140,7 +140,7 @@ const loader = async (params: { id: string }) =>
 ### Component-level prefetching with `usePrefetchQuery`
 
 ```tsx
-import { trpc } from '../utils/trpc';
+import { trpc } from "../utils/trpc";
 
 function PostViewPage(props: { postId: string }) {
   trpc.post.byId.usePrefetchQuery({ id: props.postId });
@@ -156,7 +156,7 @@ function PostViewPage(props: { postId: string }) {
 ### Component-level prefetching with `usePrefetchInfiniteQuery`
 
 ```tsx
-import { trpc } from '../utils/trpc';
+import { trpc } from "../utils/trpc";
 
 // will have to be passed to the child PostView `useSuspenseInfiniteQuery`
 export const getNextPageParam = (lastPage) => lastPage.nextCursor;

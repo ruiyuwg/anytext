@@ -3,14 +3,14 @@
 `useId` is a React Hook for generating unique IDs that can be passed to accessibility attributes.
 
 ```js
-const id = useId()
+const id = useId();
 ```
 
-***
+---
 
-## Reference {/*reference*/}
+## Reference {/_reference_/}
 
-### `useId()` {/*useid*/}
+### `useId()` {/_useid_/}
 
 Call `useId` at the top level of your component to generate a unique ID:
 
@@ -24,15 +24,15 @@ function PasswordField() {
 
 [See more examples below.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parameters {/_parameters_/}
 
 `useId` does not take any parameters.
 
-#### Returns {/*returns*/}
+#### Returns {/_returns_/}
 
 `useId` returns a unique ID string associated with this particular `useId` call in this particular component.
 
-#### Caveats {/*caveats*/}
+#### Caveats {/_caveats_/}
 
 - `useId` is a Hook, so you can only call it **at the top level of your component** or your own Hooks. You can't call it inside loops or conditions. If you need that, extract a new component and move the state into it.
 
@@ -42,13 +42,13 @@ function PasswordField() {
 
 - `useId` currently cannot be used in [async Server Components](/reference/rsc/server-components#async-components-with-server-components).
 
-***
+---
 
-## Usage {/*usage*/}
+## Usage {/_usage_/}
 
 **Do not call `useId` to generate keys in a list.** [Keys should be generated from your data.](/learn/rendering-lists#where-to-get-your-key)
 
-### Generating unique IDs for accessibility attributes {/*generating-unique-ids-for-accessibility-attributes*/}
+### Generating unique IDs for accessibility attributes {/_generating-unique-ids-for-accessibility-attributes_/}
 
 Call `useId` at the top level of your component to generate a unique ID:
 
@@ -78,20 +78,15 @@ In regular HTML, you would write it like this:
 ```html {5,8}
 <label>
   Password:
-  <input
-    type="password"
-    aria-describedby="password-hint"
-  />
+  <input type="password" aria-describedby="password-hint" />
 </label>
-<p id="password-hint">
-  The password should contain at least 18 characters
-</p>
+<p id="password-hint">The password should contain at least 18 characters</p>
 ```
 
 However, hardcoding IDs like this is not a good practice in React. A component may be rendered more than once on the page--but IDs have to be unique! Instead of hardcoding an ID, generate a unique ID with `useId`:
 
 ```js {4,11,14}
-import { useId } from 'react';
+import { useId } from "react";
 
 function PasswordField() {
   const passwordHintId = useId();
@@ -99,10 +94,7 @@ function PasswordField() {
     <>
       <label>
         Password:
-        <input
-          type="password"
-          aria-describedby={passwordHintId}
-        />
+        <input type="password" aria-describedby={passwordHintId} />
       </label>
       <p id={passwordHintId}>
         The password should contain at least 18 characters
@@ -115,7 +107,7 @@ function PasswordField() {
 Now, even if `PasswordField` appears multiple times on the screen, the generated IDs won't clash.
 
 ```js
-import { useId } from 'react';
+import { useId } from "react";
 
 function PasswordField() {
   const passwordHintId = useId();
@@ -123,10 +115,7 @@ function PasswordField() {
     <>
       <label>
         Password:
-        <input
-          type="password"
-          aria-describedby={passwordHintId}
-        />
+        <input type="password" aria-describedby={passwordHintId} />
       </label>
       <p id={passwordHintId}>
         The password should contain at least 18 characters
@@ -148,14 +137,16 @@ export default function App() {
 ```
 
 ```css
-input { margin: 5px; }
+input {
+  margin: 5px;
+}
 ```
 
 [Watch this video](https://www.youtube.com/watch?v=0dNzNcuEuOo) to see the difference in the user experience with assistive technologies.
 
 With [server rendering](/reference/react-dom/server), **`useId` requires an identical component tree on the server and the client**. If the trees you render on the server and the client don't match exactly, the generated IDs won't match.
 
-#### Why is useId better than an incrementing counter? {/*why-is-useid-better-than-an-incrementing-counter*/}
+#### Why is useId better than an incrementing counter? {/_why-is-useid-better-than-an-incrementing-counter_/}
 
 You might be wondering why `useId` is better than incrementing a global variable like `nextId++`.
 
@@ -165,45 +156,49 @@ This is very difficult to guarantee with an incrementing counter because the ord
 
 Inside React, `useId` is generated from the "parent path" of the calling component. This is why, if the client and the server tree are the same, the "parent path" will match up regardless of rendering order.
 
-***
+---
 
-### Generating IDs for several related elements {/*generating-ids-for-several-related-elements*/}
+### Generating IDs for several related elements {/_generating-ids-for-several-related-elements_/}
 
 If you need to give IDs to multiple related elements, you can call `useId` to generate a shared prefix for them:
 
 ```js
-import { useId } from 'react';
+import { useId } from "react";
 
 export default function Form() {
   const id = useId();
   return (
     <form>
-      <label htmlFor={id + '-firstName'}>First Name:</label>
-      <input id={id + '-firstName'} type="text" />
+      <label htmlFor={id + "-firstName"}>First Name:</label>
+      <input id={id + "-firstName"} type="text" />
       <hr />
-      <label htmlFor={id + '-lastName'}>Last Name:</label>
-      <input id={id + '-lastName'} type="text" />
+      <label htmlFor={id + "-lastName"}>Last Name:</label>
+      <input id={id + "-lastName"} type="text" />
     </form>
   );
 }
 ```
 
 ```css
-input { margin: 5px; }
+input {
+  margin: 5px;
+}
 ```
 
 This lets you avoid calling `useId` for every single element that needs a unique ID.
 
-***
+---
 
-### Specifying a shared prefix for all generated IDs {/*specifying-a-shared-prefix-for-all-generated-ids*/}
+### Specifying a shared prefix for all generated IDs {/_specifying-a-shared-prefix-for-all-generated-ids_/}
 
 If you render multiple independent React applications on a single page, pass `identifierPrefix` as an option to your [`createRoot`](/reference/react-dom/client/createRoot#parameters) or [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) calls. This ensures that the IDs generated by the two different apps never clash because every identifier generated with `useId` will start with the distinct prefix you've specified.
 
 ```html public/index.html
 <!DOCTYPE html>
 <html>
-  <head><title>My app</title></head>
+  <head>
+    <title>My app</title>
+  </head>
   <body>
     <div id="root1"></div>
     <div id="root2"></div>
@@ -212,19 +207,16 @@ If you render multiple independent React applications on a single page, pass `id
 ```
 
 ```js
-import { useId } from 'react';
+import { useId } from "react";
 
 function PasswordField() {
   const passwordHintId = useId();
-  console.log('Generated identifier:', passwordHintId)
+  console.log("Generated identifier:", passwordHintId);
   return (
     <>
       <label>
         Password:
-        <input
-          type="password"
-          aria-describedby={passwordHintId}
-        />
+        <input type="password" aria-describedby={passwordHintId} />
       </label>
       <p id={passwordHintId}>
         The password should contain at least 18 characters
@@ -244,17 +236,17 @@ export default function App() {
 ```
 
 ```js src/index.js active
-import { createRoot } from 'react-dom/client';
-import App from './App.js';
-import './styles.css';
+import { createRoot } from "react-dom/client";
+import App from "./App.js";
+import "./styles.css";
 
-const root1 = createRoot(document.getElementById('root1'), {
-  identifierPrefix: 'my-first-app-'
+const root1 = createRoot(document.getElementById("root1"), {
+  identifierPrefix: "my-first-app-",
 });
 root1.render(<App />);
 
-const root2 = createRoot(document.getElementById('root2'), {
-  identifierPrefix: 'my-second-app-'
+const root2 = createRoot(document.getElementById("root2"), {
+  identifierPrefix: "my-second-app-",
 });
 root2.render(<App />);
 ```
@@ -272,40 +264,39 @@ root2.render(<App />);
   margin: 5px;
 }
 
-input { margin: 5px; }
+input {
+  margin: 5px;
+}
 ```
 
-***
+---
 
-### Using the same ID prefix on the client and the server {/*using-the-same-id-prefix-on-the-client-and-the-server*/}
+### Using the same ID prefix on the client and the server {/_using-the-same-id-prefix-on-the-client-and-the-server_/}
 
 If you [render multiple independent React apps on the same page](#specifying-a-shared-prefix-for-all-generated-ids), and some of these apps are server-rendered, make sure that the `identifierPrefix` you pass to the [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) call on the client side is the same as the `identifierPrefix` you pass to the [server APIs](/reference/react-dom/server) such as [`renderToPipeableStream`.](/reference/react-dom/server/renderToPipeableStream)
 
 ```js
 // Server
-import { renderToPipeableStream } from 'react-dom/server';
+import { renderToPipeableStream } from "react-dom/server";
 
-const { pipe } = renderToPipeableStream(
-  <App />,
-  { identifierPrefix: 'react-app1' }
-);
+const { pipe } = renderToPipeableStream(<App />, {
+  identifierPrefix: "react-app1",
+});
 ```
 
 ```js
 // Client
-import { hydrateRoot } from 'react-dom/client';
+import { hydrateRoot } from "react-dom/client";
 
-const domNode = document.getElementById('root');
-const root = hydrateRoot(
-  domNode,
-  reactNode,
-  { identifierPrefix: 'react-app1' }
-);
+const domNode = document.getElementById("root");
+const root = hydrateRoot(domNode, reactNode, {
+  identifierPrefix: "react-app1",
+});
 ```
 
 You do not need to pass `identifierPrefix` if you only have one React app on the page.
 
-***
+---
 
 ## Sitemap
 

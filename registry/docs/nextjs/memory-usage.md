@@ -73,19 +73,19 @@ You can disable this behavior by adding a [custom Webpack configuration](/docs/a
 const nextConfig = {
   webpack: (
     config,
-    { buildId, dev, isServer, defaultLoaders, nextRuntime, webpack }
+    { buildId, dev, isServer, defaultLoaders, nextRuntime, webpack },
   ) => {
     if (config.cache && !dev) {
       config.cache = Object.freeze({
-        type: 'memory',
-      })
+        type: "memory",
+      });
     }
     // Important: return the modified config
-    return config
+    return config;
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 ## Disable static analysis
@@ -104,9 +104,9 @@ const nextConfig = {
     // !! WARN !!
     ignoreBuildErrors: true,
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 - [Ignoring TypeScript Errors](/docs/app/api-reference/config/typescript#disabling-typescript-errors-in-production)
@@ -140,15 +140,15 @@ This optimization allows for faster response times, in exchange for a larger ini
 To disable this optimization, set the `experimental.preloadEntriesOnStart` flag to `false`.
 
 ```ts filename="next.config.ts" switcher
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const config: NextConfig = {
   experimental: {
     preloadEntriesOnStart: false,
   },
-}
+};
 
-export default config
+export default config;
 ```
 
 ```js filename="next.config.mjs" switcher
@@ -157,9 +157,9 @@ const config = {
   experimental: {
     preloadEntriesOnStart: false,
   },
-}
+};
 
-export default config
+export default config;
 ```
 
 Next.js doesn't unload these JavaScript modules, meaning that even with this optimization disabled, the memory footprint of your Next.js server will eventually be the same if all pages are eventually requested.

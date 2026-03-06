@@ -26,17 +26,17 @@ Define call options in three steps:
 Add user context to your agent's prompt at runtime:
 
 ```ts
-import { ToolLoopAgent } from 'ai';
+import { ToolLoopAgent } from "ai";
 __PROVIDER_IMPORT__;
-import { z } from 'zod';
+import { z } from "zod";
 
 const supportAgent = new ToolLoopAgent({
   model: __MODEL__,
   callOptionsSchema: z.object({
     userId: z.string(),
-    accountType: z.enum(['free', 'pro', 'enterprise']),
+    accountType: z.enum(["free", "pro", "enterprise"]),
   }),
-  instructions: 'You are a helpful customer support agent.',
+  instructions: "You are a helpful customer support agent.",
   prepareCall: ({ options, ...settings }) => ({
     ...settings,
     instructions:
@@ -51,10 +51,10 @@ Adjust your response based on the user's account level.`,
 
 // Call the agent with specific user context
 const result = await supportAgent.generate({
-  prompt: 'How do I upgrade my account?',
+  prompt: "How do I upgrade my account?",
   options: {
-    userId: 'user_123',
-    accountType: 'free',
+    userId: "user_123",
+    accountType: "free",
   },
 });
 ```
@@ -70,32 +70,32 @@ Use `prepareCall` to modify any agent setting. Return only the settings you want
 Choose models based on request characteristics:
 
 ```ts
-import { ToolLoopAgent } from 'ai';
+import { ToolLoopAgent } from "ai";
 __PROVIDER_IMPORT__;
-import { z } from 'zod';
+import { z } from "zod";
 
 const agent = new ToolLoopAgent({
   model: __MODEL__, // Default model
   callOptionsSchema: z.object({
-    complexity: z.enum(['simple', 'complex']),
+    complexity: z.enum(["simple", "complex"]),
   }),
   prepareCall: ({ options, ...settings }) => ({
     ...settings,
     model:
-      options.complexity === 'simple' ? 'openai/gpt-4o-mini' : 'openai/o1-mini',
+      options.complexity === "simple" ? "openai/gpt-4o-mini" : "openai/o1-mini",
   }),
 });
 
 // Use faster model for simple queries
 await agent.generate({
-  prompt: 'What is 2+2?',
-  options: { complexity: 'simple' },
+  prompt: "What is 2+2?",
+  options: { complexity: "simple" },
 });
 
 // Use more capable model for complex reasoning
 await agent.generate({
-  prompt: 'Explain quantum entanglement',
-  options: { complexity: 'complex' },
+  prompt: "Explain quantum entanglement",
+  options: { complexity: "complex" },
 });
 ```
 
@@ -104,10 +104,10 @@ await agent.generate({
 Configure tools based on runtime context:
 
 ```ts
-import { openai } from '@ai-sdk/openai';
-import { ToolLoopAgent } from 'ai';
+import { openai } from "@ai-sdk/openai";
+import { ToolLoopAgent } from "ai";
 __PROVIDER_IMPORT__;
-import { z } from 'zod';
+import { z } from "zod";
 
 const newsAgent = new ToolLoopAgent({
   model: __MODEL__,
@@ -122,12 +122,12 @@ const newsAgent = new ToolLoopAgent({
     ...settings,
     tools: {
       web_search: openai.tools.webSearch({
-        searchContextSize: 'low',
+        searchContextSize: "low",
         userLocation: {
-          type: 'approximate',
+          type: "approximate",
           city: options.userCity,
           region: options.userRegion,
-          country: 'US',
+          country: "US",
         },
       }),
     },
@@ -135,10 +135,10 @@ const newsAgent = new ToolLoopAgent({
 });
 
 await newsAgent.generate({
-  prompt: 'What are the top local news stories?',
+  prompt: "What are the top local news stories?",
   options: {
-    userCity: 'San Francisco',
-    userRegion: 'California',
+    userCity: "San Francisco",
+    userRegion: "California",
   },
 });
 ```
@@ -148,14 +148,14 @@ await newsAgent.generate({
 Configure provider settings dynamically:
 
 ```ts
-import { openai, OpenAILanguageModelResponsesOptions } from '@ai-sdk/openai';
-import { ToolLoopAgent } from 'ai';
-import { z } from 'zod';
+import { openai, OpenAILanguageModelResponsesOptions } from "@ai-sdk/openai";
+import { ToolLoopAgent } from "ai";
+import { z } from "zod";
 
 const agent = new ToolLoopAgent({
-  model: 'openai/o3',
+  model: "openai/o3",
   callOptionsSchema: z.object({
-    taskDifficulty: z.enum(['low', 'medium', 'high']),
+    taskDifficulty: z.enum(["low", "medium", "high"]),
   }),
   prepareCall: ({ options, ...settings }) => ({
     ...settings,
@@ -168,8 +168,8 @@ const agent = new ToolLoopAgent({
 });
 
 await agent.generate({
-  prompt: 'Analyze this complex scenario...',
-  options: { taskDifficulty: 'high' },
+  prompt: "Analyze this complex scenario...",
+  options: { taskDifficulty: "high" },
 });
 ```
 
@@ -180,9 +180,9 @@ await agent.generate({
 Fetch relevant context and inject it into your prompt:
 
 ```ts
-import { ToolLoopAgent } from 'ai';
+import { ToolLoopAgent } from "ai";
 __PROVIDER_IMPORT__;
-import { z } from 'zod';
+import { z } from "zod";
 
 const ragAgent = new ToolLoopAgent({
   model: __MODEL__,
@@ -197,14 +197,14 @@ const ragAgent = new ToolLoopAgent({
       ...settings,
       instructions: `Answer questions using the following context:
 
-${documents.map(doc => doc.content).join('\n\n')}`,
+${documents.map((doc) => doc.content).join("\n\n")}`,
     };
   },
 });
 
 await ragAgent.generate({
-  prompt: 'What is our refund policy?',
-  options: { query: 'refund policy' },
+  prompt: "What is our refund policy?",
+  options: { query: "refund policy" },
 });
 ```
 
@@ -215,15 +215,15 @@ The `prepareCall` function can be async, enabling you to fetch data before confi
 Modify multiple settings together:
 
 ```ts
-import { ToolLoopAgent } from 'ai';
+import { ToolLoopAgent } from "ai";
 __PROVIDER_IMPORT__;
-import { z } from 'zod';
+import { z } from "zod";
 
 const agent = new ToolLoopAgent({
   model: __MODEL__,
   callOptionsSchema: z.object({
-    userRole: z.enum(['admin', 'user']),
-    urgency: z.enum(['low', 'high']),
+    userRole: z.enum(["admin", "user"]),
+    urgency: z.enum(["low", "high"]),
   }),
   tools: {
     readDatabase: readDatabaseTool,
@@ -232,23 +232,23 @@ const agent = new ToolLoopAgent({
   prepareCall: ({ options, ...settings }) => ({
     ...settings,
     // Upgrade model for urgent requests
-    model: options.urgency === 'high' ? __MODEL__ : settings.model,
+    model: options.urgency === "high" ? __MODEL__ : settings.model,
     // Limit tools based on user role
     activeTools:
-      options.userRole === 'admin'
-        ? ['readDatabase', 'writeDatabase']
-        : ['readDatabase'],
+      options.userRole === "admin"
+        ? ["readDatabase", "writeDatabase"]
+        : ["readDatabase"],
     // Adjust instructions
     instructions: `You are a ${options.userRole} assistant.
-${options.userRole === 'admin' ? 'You have full database access.' : 'You have read-only access.'}`,
+${options.userRole === "admin" ? "You have full database access." : "You have read-only access."}`,
   }),
 });
 
 await agent.generate({
-  prompt: 'Update the user record',
+  prompt: "Update the user record",
   options: {
-    userRole: 'admin',
-    urgency: 'high',
+    userRole: "admin",
+    urgency: "high",
   },
 });
 ```
@@ -258,8 +258,8 @@ await agent.generate({
 Pass call options through API routes to your agent:
 
 ```ts filename="app/api/chat/route.ts"
-import { createAgentUIStreamResponse } from 'ai';
-import { myAgent } from '@/ai/agents/my-agent';
+import { createAgentUIStreamResponse } from "ai";
+import { myAgent } from "@/ai/agents/my-agent";
 
 export async function POST(request: Request) {
   const { messages, userId, accountType } = await request.json();

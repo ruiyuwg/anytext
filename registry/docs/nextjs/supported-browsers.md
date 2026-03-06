@@ -38,7 +38,7 @@ If your own code or any external npm dependencies require features not supported
 To include polyfills, you can import them into the [`instrumentation-client.js` file](/docs/app/api-reference/file-conventions/instrumentation-client).
 
 ```ts filename="instrumentation-client.ts"
-import './polyfills'
+import "./polyfills";
 ```
 
 #### In Pages Router
@@ -46,20 +46,20 @@ import './polyfills'
 In this case, you should add a top-level import for the **specific polyfill** you need in your [Custom `<App>`](/docs/pages/building-your-application/routing/custom-app) or the individual component.
 
 ```tsx filename="pages/_app.tsx" switcher
-import './polyfills'
+import "./polyfills";
 
-import type { AppProps } from 'next/app'
+import type { AppProps } from "next/app";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return <Component {...pageProps} />;
 }
 ```
 
 ```jsx filename="pages/_app.jsx" switcher
-import './polyfills'
+import "./polyfills";
 
 export default function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return <Component {...pageProps} />;
 }
 ```
 
@@ -68,39 +68,39 @@ export default function MyApp({ Component, pageProps }) {
 The best approach is to isolate unsupported features to specific UI sections and conditionally load the polyfill if needed.
 
 ```ts filename="hooks/analytics.ts" switcher
-import { useCallback } from 'react'
+import { useCallback } from "react";
 
 export const useAnalytics = () => {
   const tracker = useCallback(async (data: unknown) => {
-    if (!('structuredClone' in globalThis)) {
-      import('polyfills/structured-clone').then((mod) => {
-        globalThis.structuredClone = mod.default
-      })
+    if (!("structuredClone" in globalThis)) {
+      import("polyfills/structured-clone").then((mod) => {
+        globalThis.structuredClone = mod.default;
+      });
     }
 
     /* Do some work that uses structured clone */
-  }, [])
+  }, []);
 
-  return tracker
-}
+  return tracker;
+};
 ```
 
 ```js filename="hooks/analytics.js" switcher
-import { useCallback } from 'react'
+import { useCallback } from "react";
 
 export const useAnalytics = () => {
   const tracker = useCallback(async (data) => {
-    if (!('structuredClone' in globalThis)) {
-      import('polyfills/structured-clone').then((mod) => {
-        globalThis.structuredClone = mod.default
-      })
+    if (!("structuredClone" in globalThis)) {
+      import("polyfills/structured-clone").then((mod) => {
+        globalThis.structuredClone = mod.default;
+      });
     }
 
     /* Do some work that uses structured clone */
-  }, [])
+  }, []);
 
-  return tracker
-}
+  return tracker;
+};
 ```
 
 ## JavaScript Language Features

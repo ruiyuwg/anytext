@@ -37,62 +37,62 @@ Configuring CSS-in-JS is a three-step opt-in process that involves:
 Using `styled-jsx` in Client Components requires using `v5.1.0`. First, create a new registry:
 
 ```tsx filename="app/registry.tsx" switcher
-'use client'
+"use client";
 
-import React, { useState } from 'react'
-import { useServerInsertedHTML } from 'next/navigation'
-import { StyleRegistry, createStyleRegistry } from 'styled-jsx'
+import React, { useState } from "react";
+import { useServerInsertedHTML } from "next/navigation";
+import { StyleRegistry, createStyleRegistry } from "styled-jsx";
 
 export default function StyledJsxRegistry({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   // Only create stylesheet once with lazy initial state
   // x-ref: https://reactjs.org/docs/hooks-reference.html#lazy-initial-state
-  const [jsxStyleRegistry] = useState(() => createStyleRegistry())
+  const [jsxStyleRegistry] = useState(() => createStyleRegistry());
 
   useServerInsertedHTML(() => {
-    const styles = jsxStyleRegistry.styles()
-    jsxStyleRegistry.flush()
-    return <>{styles}</>
-  })
+    const styles = jsxStyleRegistry.styles();
+    jsxStyleRegistry.flush();
+    return <>{styles}</>;
+  });
 
-  return <StyleRegistry registry={jsxStyleRegistry}>{children}</StyleRegistry>
+  return <StyleRegistry registry={jsxStyleRegistry}>{children}</StyleRegistry>;
 }
 ```
 
 ```jsx filename="app/registry.js" switcher
-'use client'
+"use client";
 
-import React, { useState } from 'react'
-import { useServerInsertedHTML } from 'next/navigation'
-import { StyleRegistry, createStyleRegistry } from 'styled-jsx'
+import React, { useState } from "react";
+import { useServerInsertedHTML } from "next/navigation";
+import { StyleRegistry, createStyleRegistry } from "styled-jsx";
 
 export default function StyledJsxRegistry({ children }) {
   // Only create stylesheet once with lazy initial state
   // x-ref: https://reactjs.org/docs/hooks-reference.html#lazy-initial-state
-  const [jsxStyleRegistry] = useState(() => createStyleRegistry())
+  const [jsxStyleRegistry] = useState(() => createStyleRegistry());
 
   useServerInsertedHTML(() => {
-    const styles = jsxStyleRegistry.styles()
-    jsxStyleRegistry.flush()
-    return <>{styles}</>
-  })
+    const styles = jsxStyleRegistry.styles();
+    jsxStyleRegistry.flush();
+    return <>{styles}</>;
+  });
 
-  return <StyleRegistry registry={jsxStyleRegistry}>{children}</StyleRegistry>
+  return <StyleRegistry registry={jsxStyleRegistry}>{children}</StyleRegistry>;
 }
 ```
 
 Then, wrap your [root layout](/docs/app/api-reference/file-conventions/layout#root-layout) with the registry:
 
 ```tsx filename="app/layout.tsx" switcher
-import StyledJsxRegistry from './registry'
+import StyledJsxRegistry from "./registry";
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html>
@@ -100,12 +100,12 @@ export default function RootLayout({
         <StyledJsxRegistry>{children}</StyledJsxRegistry>
       </body>
     </html>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/layout.js" switcher
-import StyledJsxRegistry from './registry'
+import StyledJsxRegistry from "./registry";
 
 export default function RootLayout({ children }) {
   return (
@@ -114,7 +114,7 @@ export default function RootLayout({ children }) {
         <StyledJsxRegistry>{children}</StyledJsxRegistry>
       </body>
     </html>
-  )
+  );
 }
 ```
 
@@ -131,80 +131,80 @@ module.exports = {
   compiler: {
     styledComponents: true,
   },
-}
+};
 ```
 
 Then, use the `styled-components` API to create a global registry component to collect all CSS style rules generated during a render, and a function to return those rules. Then use the `useServerInsertedHTML` hook to inject the styles collected in the registry into the `<head>` HTML tag in the root layout.
 
 ```tsx filename="lib/registry.tsx" switcher
-'use client'
+"use client";
 
-import React, { useState } from 'react'
-import { useServerInsertedHTML } from 'next/navigation'
-import { ServerStyleSheet, StyleSheetManager } from 'styled-components'
+import React, { useState } from "react";
+import { useServerInsertedHTML } from "next/navigation";
+import { ServerStyleSheet, StyleSheetManager } from "styled-components";
 
 export default function StyledComponentsRegistry({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   // Only create stylesheet once with lazy initial state
   // x-ref: https://reactjs.org/docs/hooks-reference.html#lazy-initial-state
-  const [styledComponentsStyleSheet] = useState(() => new ServerStyleSheet())
+  const [styledComponentsStyleSheet] = useState(() => new ServerStyleSheet());
 
   useServerInsertedHTML(() => {
-    const styles = styledComponentsStyleSheet.getStyleElement()
-    styledComponentsStyleSheet.instance.clearTag()
-    return <>{styles}</>
-  })
+    const styles = styledComponentsStyleSheet.getStyleElement();
+    styledComponentsStyleSheet.instance.clearTag();
+    return <>{styles}</>;
+  });
 
-  if (typeof window !== 'undefined') return <>{children}</>
+  if (typeof window !== "undefined") return <>{children}</>;
 
   return (
     <StyleSheetManager sheet={styledComponentsStyleSheet.instance}>
       {children}
     </StyleSheetManager>
-  )
+  );
 }
 ```
 
 ```jsx filename="lib/registry.js" switcher
-'use client'
+"use client";
 
-import React, { useState } from 'react'
-import { useServerInsertedHTML } from 'next/navigation'
-import { ServerStyleSheet, StyleSheetManager } from 'styled-components'
+import React, { useState } from "react";
+import { useServerInsertedHTML } from "next/navigation";
+import { ServerStyleSheet, StyleSheetManager } from "styled-components";
 
 export default function StyledComponentsRegistry({ children }) {
   // Only create stylesheet once with lazy initial state
   // x-ref: https://reactjs.org/docs/hooks-reference.html#lazy-initial-state
-  const [styledComponentsStyleSheet] = useState(() => new ServerStyleSheet())
+  const [styledComponentsStyleSheet] = useState(() => new ServerStyleSheet());
 
   useServerInsertedHTML(() => {
-    const styles = styledComponentsStyleSheet.getStyleElement()
-    styledComponentsStyleSheet.instance.clearTag()
-    return <>{styles}</>
-  })
+    const styles = styledComponentsStyleSheet.getStyleElement();
+    styledComponentsStyleSheet.instance.clearTag();
+    return <>{styles}</>;
+  });
 
-  if (typeof window !== 'undefined') return <>{children}</>
+  if (typeof window !== "undefined") return <>{children}</>;
 
   return (
     <StyleSheetManager sheet={styledComponentsStyleSheet.instance}>
       {children}
     </StyleSheetManager>
-  )
+  );
 }
 ```
 
 Wrap the `children` of the root layout with the style registry component:
 
 ```tsx filename="app/layout.tsx" switcher
-import StyledComponentsRegistry from './lib/registry'
+import StyledComponentsRegistry from "./lib/registry";
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html>
@@ -212,12 +212,12 @@ export default function RootLayout({
         <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
       </body>
     </html>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/layout.js" switcher
-import StyledComponentsRegistry from './lib/registry'
+import StyledComponentsRegistry from "./lib/registry";
 
 export default function RootLayout({ children }) {
   return (
@@ -226,7 +226,7 @@ export default function RootLayout({ children }) {
         <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
       </body>
     </html>
-  )
+  );
 }
 ```
 

@@ -13,46 +13,46 @@ The Alibaba provider is available via the `@ai-sdk/alibaba` module. You can inst
 You can import the default provider instance `alibaba` from `@ai-sdk/alibaba`:
 
 ```ts
-import { alibaba } from '@ai-sdk/alibaba';
+import { alibaba } from "@ai-sdk/alibaba";
 ```
 
 For custom configuration, you can import `createAlibaba` and create a provider instance with your settings:
 
 ```ts
-import { createAlibaba } from '@ai-sdk/alibaba';
+import { createAlibaba } from "@ai-sdk/alibaba";
 
 const alibaba = createAlibaba({
-  apiKey: process.env.ALIBABA_API_KEY ?? '',
+  apiKey: process.env.ALIBABA_API_KEY ?? "",
 });
 ```
 
 You can use the following optional settings to customize the Alibaba provider instance:
 
-- **baseURL** *string*
+- **baseURL** _string_
 
   Use a different URL prefix for API calls, e.g. to use proxy servers or regional endpoints.
   The default prefix is `https://dashscope-intl.aliyuncs.com/compatible-mode/v1`.
 
-- **videoBaseURL** *string*
+- **videoBaseURL** _string_
 
   Use a different URL prefix for video generation API calls. The video API uses the DashScope
   native endpoint (not the OpenAI-compatible endpoint).
   The default prefix is `https://dashscope-intl.aliyuncs.com`.
 
-- **apiKey** *string*
+- **apiKey** _string_
 
   API key that is being sent using the `Authorization` header. It defaults to
   the `ALIBABA_API_KEY` environment variable.
 
-- **headers** *Record\<string,string>*
+- **headers** _Record\<string,string>_
 
   Custom headers to include in the requests.
 
-- **fetch** *(input: RequestInfo, init?: RequestInit) => Promise\<Response>*
+- **fetch** _(input: RequestInfo, init?: RequestInit) => Promise\<Response>_
 
   Custom [fetch](https://developer.mozilla.org/en-US/docs/Web/API/fetch) implementation.
 
-- **includeUsage** *boolean*
+- **includeUsage** _boolean_
 
   Include usage information in streaming responses. When enabled, token usage will be included in the final chunk.
   Defaults to `true`.
@@ -62,21 +62,21 @@ You can use the following optional settings to customize the Alibaba provider in
 You can create language models using a provider instance:
 
 ```ts
-import { alibaba } from '@ai-sdk/alibaba';
-import { generateText } from 'ai';
+import { alibaba } from "@ai-sdk/alibaba";
+import { generateText } from "ai";
 
 const { text } = await generateText({
-  model: alibaba('qwen-plus'),
-  prompt: 'Write a vegetarian lasagna recipe for 4 people.',
+  model: alibaba("qwen-plus"),
+  prompt: "Write a vegetarian lasagna recipe for 4 people.",
 });
 ```
 
 You can also use the `.chatModel()` or `.languageModel()` factory methods:
 
 ```ts
-const model = alibaba.chatModel('qwen-plus');
+const model = alibaba.chatModel("qwen-plus");
 // or
-const model = alibaba.languageModel('qwen-plus');
+const model = alibaba.languageModel("qwen-plus");
 ```
 
 Alibaba language models can be used in the `streamText` function
@@ -84,16 +84,16 @@ Alibaba language models can be used in the `streamText` function
 
 The following optional provider options are available for Alibaba models:
 
-- **enableThinking** *boolean*
+- **enableThinking** _boolean_
 
   Enable thinking/reasoning mode for supported models. When enabled, the model generates reasoning content before the response.
   Defaults to `false`.
 
-- **thinkingBudget** *number*
+- **thinkingBudget** _number_
 
   Maximum number of reasoning tokens to generate. Limits the length of thinking content.
 
-- **parallelToolCalls** *boolean*
+- **parallelToolCalls** _boolean_
 
   Whether to enable parallel function calling during tool use.
   Defaults to `true`.
@@ -103,11 +103,11 @@ The following optional provider options are available for Alibaba models:
 Alibaba's Qwen models support thinking/reasoning mode for complex problem-solving:
 
 ```ts
-import { alibaba, type AlibabaLanguageModelOptions } from '@ai-sdk/alibaba';
-import { generateText } from 'ai';
+import { alibaba, type AlibabaLanguageModelOptions } from "@ai-sdk/alibaba";
+import { generateText } from "ai";
 
 const { text, reasoning } = await generateText({
-  model: alibaba('qwen3-max'),
+  model: alibaba("qwen3-max"),
   providerOptions: {
     alibaba: {
       enableThinking: true,
@@ -117,8 +117,8 @@ const { text, reasoning } = await generateText({
   prompt: 'How many "r"s are in the word "strawberry"?',
 });
 
-console.log('Reasoning:', reasoning);
-console.log('Answer:', text);
+console.log("Reasoning:", reasoning);
+console.log("Answer:", text);
 ```
 
 For models that are thinking-only (like `qwen3-235b-a22b-thinking-2507`), thinking mode is enabled by default.
@@ -128,17 +128,17 @@ For models that are thinking-only (like `qwen3-235b-a22b-thinking-2507`), thinki
 Alibaba models support tool calling with parallel execution:
 
 ```ts
-import { alibaba } from '@ai-sdk/alibaba';
-import { generateText, tool } from 'ai';
-import { z } from 'zod';
+import { alibaba } from "@ai-sdk/alibaba";
+import { generateText, tool } from "ai";
+import { z } from "zod";
 
 const { text } = await generateText({
-  model: alibaba('qwen-plus'),
+  model: alibaba("qwen-plus"),
   tools: {
     weather: tool({
-      description: 'Get the weather in a location',
+      description: "Get the weather in a location",
       parameters: z.object({
-        location: z.string().describe('The location to get the weather for'),
+        location: z.string().describe("The location to get the weather for"),
       }),
       execute: async ({ location }) => ({
         location,
@@ -146,7 +146,7 @@ const { text } = await generateText({
       }),
     }),
   },
-  prompt: 'What is the weather in San Francisco?',
+  prompt: "What is the weather in San Francisco?",
 });
 ```
 
@@ -159,18 +159,18 @@ Alibaba supports both implicit and explicit prompt caching to reduce costs for r
 ### Single message cache control
 
 ```ts
-import { alibaba } from '@ai-sdk/alibaba';
-import { generateText } from 'ai';
+import { alibaba } from "@ai-sdk/alibaba";
+import { generateText } from "ai";
 
 const { text, usage } = await generateText({
-  model: alibaba('qwen-plus'),
+  model: alibaba("qwen-plus"),
   messages: [
     {
-      role: 'system',
-      content: 'You are a helpful assistant. [... long system prompt ...]',
+      role: "system",
+      content: "You are a helpful assistant. [... long system prompt ...]",
       providerOptions: {
         alibaba: {
-          cacheControl: { type: 'ephemeral' },
+          cacheControl: { type: "ephemeral" },
         },
       },
     },
@@ -181,27 +181,27 @@ const { text, usage } = await generateText({
 ### Multi-part message cache control
 
 ```ts
-import { alibaba } from '@ai-sdk/alibaba';
-import { generateText } from 'ai';
+import { alibaba } from "@ai-sdk/alibaba";
+import { generateText } from "ai";
 
-const longDocument = '... large document content ...';
+const longDocument = "... large document content ...";
 
 const { text, usage } = await generateText({
-  model: alibaba('qwen-plus'),
+  model: alibaba("qwen-plus"),
   messages: [
     {
-      role: 'user',
+      role: "user",
       content: [
         {
-          type: 'text',
-          text: 'Context: Please analyze this document.',
+          type: "text",
+          text: "Context: Please analyze this document.",
         },
         {
-          type: 'text',
+          type: "text",
           text: longDocument,
           providerOptions: {
             alibaba: {
-              cacheControl: { type: 'ephemeral' },
+              cacheControl: { type: "ephemeral" },
             },
           },
         },
@@ -225,13 +225,13 @@ Alibaba supports three video generation modes: text-to-video, image-to-video (fi
 Generate videos from text prompts:
 
 ```ts
-import { alibaba, type AlibabaVideoModelOptions } from '@ai-sdk/alibaba';
-import { experimental_generateVideo as generateVideo } from 'ai';
+import { alibaba, type AlibabaVideoModelOptions } from "@ai-sdk/alibaba";
+import { experimental_generateVideo as generateVideo } from "ai";
 
 const { video } = await generateVideo({
-  model: alibaba.video('wan2.6-t2v'),
-  prompt: 'A serene mountain lake at sunset with gentle ripples on the water.',
-  resolution: '1280x720',
+  model: alibaba.video("wan2.6-t2v"),
+  prompt: "A serene mountain lake at sunset with gentle ripples on the water.",
+  resolution: "1280x720",
   duration: 5,
   providerOptions: {
     alibaba: {
@@ -247,14 +247,14 @@ const { video } = await generateVideo({
 Generate videos from a first-frame image and optional text prompt:
 
 ```ts
-import { alibaba, type AlibabaVideoModelOptions } from '@ai-sdk/alibaba';
-import { experimental_generateVideo as generateVideo } from 'ai';
+import { alibaba, type AlibabaVideoModelOptions } from "@ai-sdk/alibaba";
+import { experimental_generateVideo as generateVideo } from "ai";
 
 const { video } = await generateVideo({
-  model: alibaba.video('wan2.6-i2v'),
+  model: alibaba.video("wan2.6-i2v"),
   prompt: {
-    image: 'https://example.com/landscape.jpg',
-    text: 'Camera slowly pans across the landscape',
+    image: "https://example.com/landscape.jpg",
+    text: "Camera slowly pans across the landscape",
   },
   duration: 5,
   providerOptions: {
@@ -271,17 +271,17 @@ Generate videos using reference images and/or videos for character consistency. 
 (`character1`, `character2`, etc.) in your prompt to reference them:
 
 ```ts
-import { alibaba, type AlibabaVideoModelOptions } from '@ai-sdk/alibaba';
-import { experimental_generateVideo as generateVideo } from 'ai';
+import { alibaba, type AlibabaVideoModelOptions } from "@ai-sdk/alibaba";
+import { experimental_generateVideo as generateVideo } from "ai";
 
 const { video } = await generateVideo({
-  model: alibaba.video('wan2.6-r2v-flash'),
-  prompt: 'character1 walks through a beautiful garden and waves at the camera',
-  resolution: '1280x720',
+  model: alibaba.video("wan2.6-r2v-flash"),
+  prompt: "character1 walks through a beautiful garden and waves at the camera",
+  resolution: "1280x720",
   duration: 5,
   providerOptions: {
     alibaba: {
-      referenceUrls: ['https://example.com/character-reference.jpg'],
+      referenceUrls: ["https://example.com/character-reference.jpg"],
       pollTimeoutMs: 600000, // 10 minutes
     } satisfies AlibabaVideoModelOptions,
   },
@@ -292,15 +292,15 @@ const { video } = await generateVideo({
 
 The following provider options are available via `providerOptions.alibaba`:
 
-- **negativePrompt** *string*
+- **negativePrompt** _string_
 
   A description of what to avoid in the generated video (max 500 characters).
 
-- **audioUrl** *string*
+- **audioUrl** _string_
 
   URL to an audio file for audio-video sync (WAV/MP3, 3-30 seconds, max 15MB).
 
-- **promptExtend** *boolean*
+- **promptExtend** _boolean_
 
   Enable prompt extension/rewriting for better generation quality. Defaults to `true`.
 
@@ -308,23 +308,23 @@ The following provider options are available via `providerOptions.alibaba`:
 
   Shot type for video generation. `'multi'` enables multi-shot cinematic narrative (wan2.6 models only).
 
-- **watermark** *boolean*
+- **watermark** _boolean_
 
   Whether to add a watermark to the generated video. Defaults to `false`.
 
-- **audio** *boolean*
+- **audio** _boolean_
 
   Whether to generate audio (for I2V and R2V models that support it).
 
-- **referenceUrls** *string\[]*
+- **referenceUrls** _string\[]_
 
   Array of reference image/video URLs for reference-to-video mode. Supports 0-5 images and 0-3 videos, max 5 total.
 
-- **pollIntervalMs** *number*
+- **pollIntervalMs** _number_
 
   Polling interval in milliseconds for checking task status. Defaults to 5000.
 
-- **pollTimeoutMs** *number*
+- **pollTimeoutMs** _number_
 
   Maximum wait time in milliseconds for video generation. Defaults to 600000 (10 minutes).
 

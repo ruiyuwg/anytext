@@ -11,18 +11,18 @@ The best way to start with the Fastify adapter is to take a look at the example 
 
 
 
-  
-    
+
+
       Fastify server with WebSocket
       Simple tRPC client in node
-    
-  
-  
-    
+
+
+
+
       CodeSandbox
       Source
-    
-  
+
+
 ```
 
 ## How to use tRPC with Fastify
@@ -49,8 +49,8 @@ A sample router is given below, save it in a file named `router.ts`.
 router.ts
 
 ```ts title='router.ts'
-import { initTRPC } from '@trpc/server';
-import { z } from 'zod';
+import { initTRPC } from "@trpc/server";
+import { z } from "zod";
 
 type User = {
   id: string;
@@ -96,10 +96,10 @@ A sample context is given below, save it in a file named `context.ts`:
 context.ts
 
 ```ts title='context.ts'
-import { CreateFastifyContextOptions } from '@trpc/server/adapters/fastify';
+import { CreateFastifyContextOptions } from "@trpc/server/adapters/fastify";
 
 export function createContext({ req, res }: CreateFastifyContextOptions) {
-  const user = { name: req.headers.username ?? 'anonymous' };
+  const user = { name: req.headers.username ?? "anonymous" };
 
   return { req, res, user };
 }
@@ -117,10 +117,10 @@ Due to limitations in Fastify's plugin system and type inference, there might be
 import {
   fastifyTRPCPlugin,
   FastifyTRPCPluginOptions,
-} from '@trpc/server/adapters/fastify';
-import fastify from 'fastify';
-import { createContext } from './context';
-import { appRouter, type AppRouter } from './router';
+} from "@trpc/server/adapters/fastify";
+import fastify from "fastify";
+import { createContext } from "./context";
+import { appRouter, type AppRouter } from "./router";
 
 const server = fastify({
   routerOptions: {
@@ -129,7 +129,7 @@ const server = fastify({
 });
 
 server.register(fastifyTRPCPlugin, {
-  prefix: '/trpc',
+  prefix: "/trpc",
   trpcOptions: {
     router: appRouter,
     createContext,
@@ -137,7 +137,7 @@ server.register(fastifyTRPCPlugin, {
       // report to error monitoring
       console.error(`Error in tRPC handler on path '${path}':`, error);
     },
-  } satisfies FastifyTRPCPluginOptions<AppRouter>['trpcOptions'],
+  } satisfies FastifyTRPCPluginOptions<AppRouter>["trpcOptions"],
 });
 
 (async () => {
@@ -152,8 +152,8 @@ server.register(fastifyTRPCPlugin, {
 
 Your endpoints are now available via HTTP!
 
-| Endpoint     | HTTP URI                                                                                                       |
-| ------------ | -------------------------------------------------------------------------------------------------------------- |
+| Endpoint     | HTTP URI                                                                                             |
+| ------------ | ---------------------------------------------------------------------------------------------------- |
 | `getUser`    | `GET http://localhost:3000/trpc/getUserById?input=INPUT` where `INPUT` is a URI-encoded JSON string. |
 | `createUser` | `POST http://localhost:3000/trpc/createUser` with `req.body` of type `User`                          |
 
@@ -170,7 +170,7 @@ yarn add @fastify/websocket
 ### Import and register `@fastify/websocket`
 
 ```ts
-import ws from '@fastify/websocket';
+import ws from "@fastify/websocket";
 
 server.register(ws);
 ```
@@ -180,8 +180,8 @@ server.register(ws);
 Edit the `router.ts` file created in the previous steps and add the following code:
 
 ```ts title='router.ts'
-import { initTRPC } from '@trpc/server';
-import { observable } from '@trpc/server/observable';
+import { initTRPC } from "@trpc/server";
+import { observable } from "@trpc/server/observable";
 
 const t = initTRPC.create();
 

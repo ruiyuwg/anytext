@@ -38,28 +38,28 @@ Drizzle has native support for all @libsql/client driver variations:
 Create a `index.ts` file in the `src` directory and initialize the connection:
 
 ```typescript copy
-import 'dotenv/config';
-import { drizzle } from 'drizzle-orm/libsql';
+import "dotenv/config";
+import { drizzle } from "drizzle-orm/libsql";
 
 // You can specify any property from the libsql connection options
-const db = drizzle({ 
-  connection: { 
-    url: process.env.TURSO_DATABASE_URL!, 
-    authToken: process.env.TURSO_AUTH_TOKEN!
-  }
+const db = drizzle({
+  connection: {
+    url: process.env.TURSO_DATABASE_URL!,
+    authToken: process.env.TURSO_AUTH_TOKEN!,
+  },
 });
 ```
 
 If you need to provide your existing driver:
 
 ```typescript copy
-import 'dotenv/config';
-import { drizzle } from 'drizzle-orm/libsql';
-import { createClient } from '@libsql/client';
+import "dotenv/config";
+import { drizzle } from "drizzle-orm/libsql";
+import { createClient } from "@libsql/client";
 
-const client = createClient({ 
-  url: process.env.TURSO_DATABASE_URL!, 
-  authToken: process.env.TURSO_AUTH_TOKEN!
+const client = createClient({
+  url: process.env.TURSO_DATABASE_URL!,
+  authToken: process.env.TURSO_AUTH_TOKEN!,
 });
 const db = drizzle({ client });
 ```
@@ -75,13 +75,13 @@ const db = drizzle({ client });
 Create a `drizzle.config.ts` file in the root of your project and add the following content:
 
 ```typescript copy filename="drizzle.config.ts"
-import 'dotenv/config';
-import { defineConfig } from 'drizzle-kit';
+import "dotenv/config";
+import { defineConfig } from "drizzle-kit";
 
 export default defineConfig({
-  out: './drizzle',
-  schema: './src/db/schema.ts',
-  dialect: 'turso',
+  out: "./drizzle",
+  schema: "./src/db/schema.ts",
+  dialect: "turso",
   dbCredentials: {
     url: process.env.TURSO_DATABASE_URL,
     authToken: process.env.TURSO_AUTH_TOKEN,

@@ -11,7 +11,7 @@ First, introduce a way to validate incoming values without using the third-party
 Import `validator` from `hono/validator`.
 
 ```ts
-import { validator } from 'hono/validator'
+import { validator } from "hono/validator";
 ```
 
 To validate form data, specify `form` as the first argument and a callback as the second argument.
@@ -51,7 +51,7 @@ Within the handler you can get the validated value with `c.req.valid('form')`.
 Validation targets include `json`, `query`, `header`, `param` and `cookie` in addition to `form`.
 
 ::: warning
-When you validate `json` or `form`, the request *must* contain a matching `content-type` header (e.g. `Content-Type: application/json` for `json`). Otherwise, the request body will not be parsed and you will receive an empty object (`{}`) as value in the callback.
+When you validate `json` or `form`, the request _must_ contain a matching `content-type` header (e.g. `Content-Type: application/json` for `json`). Otherwise, the request body will not be parsed and you will receive an empty object (`{}`) as value in the callback.
 
 It is important to set the `content-type` header when testing using
 [`app.request()`](../api/request.md).
@@ -59,39 +59,39 @@ It is important to set the `content-type` header when testing using
 Given an application like this.
 
 ```ts
-const app = new Hono()
+const app = new Hono();
 app.post(
-  '/testing',
-  validator('json', (value, c) => {
+  "/testing",
+  validator("json", (value, c) => {
     // pass-through validator
-    return value
+    return value;
   }),
   (c) => {
-    const body = c.req.valid('json')
-    return c.json(body)
-  }
-)
+    const body = c.req.valid("json");
+    return c.json(body);
+  },
+);
 ```
 
 Your tests can be written like this.
 
 ```ts
 // ❌ this will not work
-const res = await app.request('/testing', {
-  method: 'POST',
-  body: JSON.stringify({ key: 'value' }),
-})
-const data = await res.json()
-console.log(data) // {}
+const res = await app.request("/testing", {
+  method: "POST",
+  body: JSON.stringify({ key: "value" }),
+});
+const data = await res.json();
+console.log(data); // {}
 
 // ✅ this will work
-const res = await app.request('/testing', {
-  method: 'POST',
-  body: JSON.stringify({ key: 'value' }),
-  headers: new Headers({ 'Content-Type': 'application/json' }),
-})
-const data = await res.json()
-console.log(data) // { key: 'value' }
+const res = await app.request("/testing", {
+  method: "POST",
+  body: JSON.stringify({ key: "value" }),
+  headers: new Headers({ "Content-Type": "application/json" }),
+});
+const data = await res.json();
+console.log(data); // { key: 'value' }
 ```
 
 :::
@@ -104,44 +104,44 @@ If you want to validate the `Idempotency-Key` header, you need to use `idempoten
 ```ts
 // ❌ this will not work
 app.post(
-  '/api',
-  validator('header', (value, c) => {
+  "/api",
+  validator("header", (value, c) => {
     // idempotencyKey is always undefined
     // so this middleware always return 400 as not expected
-    const idempotencyKey = value['Idempotency-Key']
+    const idempotencyKey = value["Idempotency-Key"];
 
-    if (idempotencyKey == undefined || idempotencyKey === '') {
+    if (idempotencyKey == undefined || idempotencyKey === "") {
       throw new HTTPException(400, {
-        message: 'Idempotency-Key is required',
-      })
+        message: "Idempotency-Key is required",
+      });
     }
-    return { idempotencyKey }
+    return { idempotencyKey };
   }),
   (c) => {
-    const { idempotencyKey } = c.req.valid('header')
+    const { idempotencyKey } = c.req.valid("header");
     // ...
-  }
-)
+  },
+);
 
 // ✅ this will work
 app.post(
-  '/api',
-  validator('header', (value, c) => {
+  "/api",
+  validator("header", (value, c) => {
     // can retrieve the value of the header as expected
-    const idempotencyKey = value['idempotency-key']
+    const idempotencyKey = value["idempotency-key"];
 
-    if (idempotencyKey == undefined || idempotencyKey === '') {
+    if (idempotencyKey == undefined || idempotencyKey === "") {
       throw new HTTPException(400, {
-        message: 'Idempotency-Key is required',
-      })
+        message: "Idempotency-Key is required",
+      });
     }
-    return { idempotencyKey }
+    return { idempotencyKey };
   }),
   (c) => {
-    const { idempotencyKey } = c.req.valid('header')
+    const { idempotencyKey } = c.req.valid("header");
     // ...
-  }
-)
+  },
+);
 ```
 
 :::
@@ -191,7 +191,7 @@ bun add zod
 Import `z` from `zod`.
 
 ```ts
-import * as z from 'zod'
+import * as z from "zod";
 ```
 
 Write your schema.
@@ -199,32 +199,32 @@ Write your schema.
 ```ts
 const schema = z.object({
   body: z.string(),
-})
+});
 ```
 
 You can use the schema in the callback function for validation and return the validated value.
 
 ```ts
 const route = app.post(
-  '/posts',
-  validator('form', (value, c) => {
-    const parsed = schema.safeParse(value)
+  "/posts",
+  validator("form", (value, c) => {
+    const parsed = schema.safeParse(value);
     if (!parsed.success) {
-      return c.text('Invalid!', 401)
+      return c.text("Invalid!", 401);
     }
-    return parsed.data
+    return parsed.data;
   }),
   (c) => {
-    const { body } = c.req.valid('form')
+    const { body } = c.req.valid("form");
     // ... do something
     return c.json(
       {
-        message: 'Created!',
+        message: "Created!",
       },
-      201
-    )
-  }
-)
+      201,
+    );
+  },
+);
 ```
 
 ## Zod Validator Middleware
@@ -254,25 +254,25 @@ bun add @hono/zod-validator
 And import `zValidator`.
 
 ```ts
-import { zValidator } from '@hono/zod-validator'
+import { zValidator } from "@hono/zod-validator";
 ```
 
 And write as follows.
 
 ```ts
 const route = app.post(
-  '/posts',
+  "/posts",
   zValidator(
-    'form',
+    "form",
     z.object({
       body: z.string(),
-    })
+    }),
   ),
   (c) => {
-    const validated = c.req.valid('form')
+    const validated = c.req.valid("form");
     // ... use your validated data
-  }
-)
+  },
+);
 ```
 
 ## Standard Schema Validator Middleware
@@ -304,7 +304,7 @@ bun add @hono/standard-validator
 Import `sValidator` from the package:
 
 ```ts
-import { sValidator } from '@hono/standard-validator'
+import { sValidator } from "@hono/standard-validator";
 ```
 
 ### With Zod
@@ -332,21 +332,21 @@ bun add zod
 :::
 
 ```ts
-import * as z from 'zod'
-import { sValidator } from '@hono/standard-validator'
+import * as z from "zod";
+import { sValidator } from "@hono/standard-validator";
 
 const schema = z.object({
   name: z.string(),
   age: z.number(),
-})
+});
 
-app.post('/author', sValidator('json', schema), (c) => {
-  const data = c.req.valid('json')
+app.post("/author", sValidator("json", schema), (c) => {
+  const data = c.req.valid("json");
   return c.json({
     success: true,
     message: `${data.name} is ${data.age}`,
-  })
-})
+  });
+});
 ```
 
 ### With Valibot
@@ -374,21 +374,21 @@ bun add valibot
 :::
 
 ```ts
-import * as v from 'valibot'
-import { sValidator } from '@hono/standard-validator'
+import * as v from "valibot";
+import { sValidator } from "@hono/standard-validator";
 
 const schema = v.object({
   name: v.string(),
   age: v.number(),
-})
+});
 
-app.post('/author', sValidator('json', schema), (c) => {
-  const data = c.req.valid('json')
+app.post("/author", sValidator("json", schema), (c) => {
+  const data = c.req.valid("json");
   return c.json({
     success: true,
     message: `${data.name} is ${data.age}`,
-  })
-})
+  });
+});
 ```
 
 ### With ArkType
@@ -416,21 +416,21 @@ bun add arktype
 :::
 
 ```ts
-import { type } from 'arktype'
-import { sValidator } from '@hono/standard-validator'
+import { type } from "arktype";
+import { sValidator } from "@hono/standard-validator";
 
 const schema = type({
-  name: 'string',
-  age: 'number',
-})
+  name: "string",
+  age: "number",
+});
 
-app.post('/author', sValidator('json', schema), (c) => {
-  const data = c.req.valid('json')
+app.post("/author", sValidator("json", schema), (c) => {
+  const data = c.req.valid("json");
   return c.json({
     success: true,
     message: `${data.name} is ${data.age}`,
-  })
-})
+  });
+});
 ```
 
 # Developer Experience

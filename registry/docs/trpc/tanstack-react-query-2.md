@@ -5,13 +5,13 @@ Compared to our [classic React Query Integration](/docs/client/react) this clien
 ## Quick example query
 
 ```tsx
-import { useQuery } from '@tanstack/react-query';
-import { useTRPC } from './trpc';
+import { useQuery } from "@tanstack/react-query";
+import { useTRPC } from "./trpc";
 
 function Users() {
   const trpc = useTRPC();
 
-  const greetingQuery = useQuery(trpc.greeting.queryOptions({ name: 'Jerry' }));
+  const greetingQuery = useQuery(trpc.greeting.queryOptions({ name: "Jerry" }));
 
   // greetingQuery.data === 'Hello Jerry'
 }
@@ -90,7 +90,7 @@ const queryOptions = trpc.path.to.query.queryOptions(
 If you want to disable a query in a type safe way, you can use `skipToken`:
 
 ```ts
-import { skipToken } from '@tanstack/react-query';
+import { skipToken } from "@tanstack/react-query";
 
 const query = useQuery(
   trpc.user.details.queryOptions(
@@ -403,8 +403,8 @@ The query keys will be properly prefixed to avoid collisions:
 ```tsx twoslash
 // Example of how the query keys look with prefixes
 const queryKeys = [
-  [['billing'], ['list'], { type: 'query' }],
-  [['account'], ['list'], { type: 'query' }],
+  [["billing"], ["list"], { type: "query" }],
+  [["account"], ["list"], { type: "query" }],
 ];
 ```
 
@@ -415,8 +415,8 @@ When you need to infer the input and output types for a procedure or router, the
 Infer the input and output types of a full router
 
 ```ts
-import type { inferRouterInputs, inferRouterOutputs } from '@trpc/server';
-import { AppRouter } from './path/to/server';
+import type { inferRouterInputs, inferRouterOutputs } from "@trpc/server";
+import { AppRouter } from "./path/to/server";
 
 export type Inputs = inferRouterInputs<AppRouter>;
 export type Outputs = inferRouterOutputs<AppRouter>;
@@ -425,7 +425,7 @@ export type Outputs = inferRouterOutputs<AppRouter>;
 Infer types for a single procedure
 
 ```ts
-import type { inferInput, inferOutput } from '@trpc/tanstack-react-query';
+import type { inferInput, inferOutput } from "@trpc/tanstack-react-query";
 
 function Component() {
   const trpc = useTRPC();
@@ -440,7 +440,7 @@ function Component() {
 If you used the [setup with React Context](/docs/client/tanstack-react-query/setup#3a-setup-the-trpc-context-provider), you can access the tRPC client using the `useTRPCClient` hook.
 
 ```tsx
-import { useTRPCClient } from './trpc';
+import { useTRPCClient } from "./trpc";
 
 function Component() {
   const trpcClient = useTRPCClient();
@@ -455,7 +455,7 @@ If you [setup without React Context](/docs/client/tanstack-react-query/setup#3b-
 you can import the global client instance directly instead.
 
 ```ts
-import { client } from './trpc';
+import { client } from "./trpc";
 
 const result = await client.path.to.procedure.query({
   /** input */
@@ -470,14 +470,14 @@ tRPC adheres to the industry standard when it comes to aborting procedures. All 
 // @target: esnext
 // ---cut---
 // @filename: server.ts
-import { createTRPCClient, httpBatchLink } from '@trpc/client';
+import { createTRPCClient, httpBatchLink } from "@trpc/client";
 // @noErrors
-import type { AppRouter } from './server.ts';
+import type { AppRouter } from "./server.ts";
 
 const proxy = createTRPCClient<AppRouter>({
   links: [
     httpBatchLink({
-      url: 'http://localhost:3000/trpc',
+      url: "http://localhost:3000/trpc",
     }),
   ],
 });
@@ -486,7 +486,7 @@ const proxy = createTRPCClient<AppRouter>({
 const ac = new AbortController();
 
 // 2. Pass the signal to a query or mutation
-const query = proxy.userById.query('id_bilbo', { signal: ac.signal });
+const query = proxy.userById.query("id_bilbo", { signal: ac.signal });
 
 // 3. Cancel the request if needed
 ac.abort();

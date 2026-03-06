@@ -23,7 +23,10 @@ const baseSource: SourceConfig = {
 };
 
 // Content long enough to pass the 100 token threshold (400+ chars)
-const longContent = "This is a comprehensive guide that covers all the important topics. ".repeat(8);
+const longContent =
+  "This is a comprehensive guide that covers all the important topics. ".repeat(
+    8,
+  );
 
 describe("llmsTxtAdapter", () => {
   it("throws when no source.url", async () => {
@@ -39,18 +42,26 @@ describe("llmsTxtAdapter", () => {
     const cleanMod = await import("../../pipeline/clean.js");
 
     // Markdown with a .md link that remark can parse
-    const indexContent = "# Docs\n\n[Getting Started](https://example.com/docs/start.md)\n";
+    const indexContent =
+      "# Docs\n\n[Getting Started](https://example.com/docs/start.md)\n";
     vi.mocked(fetchMod.fetchContent)
       .mockResolvedValueOnce(indexContent)
       .mockResolvedValueOnce("# Getting Started\n\n" + longContent);
-    vi.mocked(cleanMod.cleanMarkdown).mockResolvedValue("# Getting Started\n\n" + longContent);
+    vi.mocked(cleanMod.cleanMarkdown).mockResolvedValue(
+      "# Getting Started\n\n" + longContent,
+    );
 
     const result = await llmsTxtAdapter.process(baseSource);
 
     expect(result.length).toBe(1);
     expect(result[0]!.id).toBe("getting-started");
-    expect(fs.rmSync).toHaveBeenCalledWith("/mock/registry/docs/hono", { recursive: true, force: true });
-    expect(fs.mkdirSync).toHaveBeenCalledWith("/mock/registry/docs/hono", { recursive: true });
+    expect(fs.rmSync).toHaveBeenCalledWith("/mock/registry/docs/hono", {
+      recursive: true,
+      force: true,
+    });
+    expect(fs.mkdirSync).toHaveBeenCalledWith("/mock/registry/docs/hono", {
+      recursive: true,
+    });
     const rmOrder = vi.mocked(fs.rmSync).mock.invocationCallOrder[0]!;
     const mkdirOrder = vi.mocked(fs.mkdirSync).mock.invocationCallOrder[0]!;
     expect(rmOrder).toBeLessThan(mkdirOrder);
@@ -78,17 +89,22 @@ describe("llmsTxtAdapter", () => {
     const fetchMod = await import("../../pipeline/fetch.js");
     const cleanMod = await import("../../pipeline/clean.js");
 
-    const indexContent = "[Doc A](https://example.com/a.md)\n\n[Doc B](https://example.com/b.md)\n";
+    const indexContent =
+      "[Doc A](https://example.com/a.md)\n\n[Doc B](https://example.com/b.md)\n";
     vi.mocked(fetchMod.fetchContent)
       .mockResolvedValueOnce(indexContent)
       .mockRejectedValueOnce(new Error("fetch failed"))
       .mockResolvedValueOnce("# Doc B\n\n" + longContent);
-    vi.mocked(cleanMod.cleanMarkdown).mockResolvedValue("# Doc B\n\n" + longContent);
+    vi.mocked(cleanMod.cleanMarkdown).mockResolvedValue(
+      "# Doc B\n\n" + longContent,
+    );
 
     const result = await llmsTxtAdapter.process(baseSource);
     expect(result.length).toBe(1);
     expect(result[0]!.id).toBe("doc-b");
-    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("1 processed, 1 failed out of 2 links"));
+    expect(logSpy).toHaveBeenCalledWith(
+      expect.stringContaining("1 processed, 1 failed out of 2 links"),
+    );
   });
 
   it("throws when more than 50% of links fail", async () => {
@@ -96,14 +112,17 @@ describe("llmsTxtAdapter", () => {
     vi.spyOn(console, "warn").mockImplementation(() => {});
     const fetchMod = await import("../../pipeline/fetch.js");
 
-    const indexContent = "[A](https://example.com/a.md)\n\n[B](https://example.com/b.md)\n\n[C](https://example.com/c.md)\n";
+    const indexContent =
+      "[A](https://example.com/a.md)\n\n[B](https://example.com/b.md)\n\n[C](https://example.com/c.md)\n";
     vi.mocked(fetchMod.fetchContent)
       .mockResolvedValueOnce(indexContent)
       .mockRejectedValueOnce(new Error("fail"))
       .mockRejectedValueOnce(new Error("fail"))
       .mockRejectedValueOnce(new Error("fail"));
 
-    await expect(llmsTxtAdapter.process(baseSource)).rejects.toThrow("Too many failures");
+    await expect(llmsTxtAdapter.process(baseSource)).rejects.toThrow(
+      "Too many failures",
+    );
   });
 
   it("applies topicOverrides", async () => {
@@ -115,7 +134,9 @@ describe("llmsTxtAdapter", () => {
     vi.mocked(fetchMod.fetchContent)
       .mockResolvedValueOnce(indexContent)
       .mockResolvedValueOnce("# Guide\n\n" + longContent);
-    vi.mocked(cleanMod.cleanMarkdown).mockResolvedValue("# Guide\n\n" + longContent);
+    vi.mocked(cleanMod.cleanMarkdown).mockResolvedValue(
+      "# Guide\n\n" + longContent,
+    );
 
     const source: SourceConfig = {
       ...baseSource,
@@ -140,7 +161,9 @@ describe("llmsTxtAdapter", () => {
     vi.mocked(fetchMod.fetchContent)
       .mockResolvedValueOnce(indexContent)
       .mockResolvedValue("# Title\n\n" + longContent);
-    vi.mocked(cleanMod.cleanMarkdown).mockResolvedValue("# Title\n\n" + longContent);
+    vi.mocked(cleanMod.cleanMarkdown).mockResolvedValue(
+      "# Title\n\n" + longContent,
+    );
 
     const result = await llmsTxtAdapter.process(baseSource);
     expect(result.length).toBe(3);
@@ -152,7 +175,9 @@ describe("llmsTxtAdapter", () => {
     const cleanMod = await import("../../pipeline/clean.js");
 
     const indexContent = "[Doc](https://example.com/doc.md)\n";
-    const docContent = "# Title\n\nShort\n\nThis is a longer paragraph for description extraction.\n\nUse `useState` and `useEffect` here.\n\n" + longContent;
+    const docContent =
+      "# Title\n\nShort\n\nThis is a longer paragraph for description extraction.\n\nUse `useState` and `useEffect` here.\n\n" +
+      longContent;
     vi.mocked(fetchMod.fetchContent)
       .mockResolvedValueOnce(indexContent)
       .mockResolvedValueOnce(docContent);
@@ -171,7 +196,9 @@ describe("llmsTxtAdapter", () => {
 
     const indexContent = "[Doc](https://example.com/doc.md)\n";
     // Content where extractFirstParagraph finds nothing: only headings, code, lists, tables, and short lines
-    const docContent = "# Title\n\nShort\n\n```code block```\n\n- list item\n\n| table |\n\n" + longContent;
+    const docContent =
+      "# Title\n\nShort\n\n```code block```\n\n- list item\n\n| table |\n\n" +
+      longContent;
     vi.mocked(fetchMod.fetchContent)
       .mockResolvedValueOnce(indexContent)
       .mockResolvedValueOnce(docContent);
@@ -216,7 +243,9 @@ describe("llmsTxtAdapter", () => {
 
     const longCode = "a".repeat(50);
     const indexContent = "[Doc](https://example.com/doc.md)\n";
-    const docContent = `# Title\n\n\`valid\` and \`\` and \`${longCode}\` here.\n\n` + longContent;
+    const docContent =
+      `# Title\n\n\`valid\` and \`\` and \`${longCode}\` here.\n\n` +
+      longContent;
     vi.mocked(fetchMod.fetchContent)
       .mockResolvedValueOnce(indexContent)
       .mockResolvedValueOnce(docContent);
@@ -233,7 +262,8 @@ describe("llmsTxtAdapter", () => {
     const cleanMod = await import("../../pipeline/clean.js");
 
     const indexContent = "[Doc](https://example.com/doc.md)\n";
-    const docContent = "# Title\n\nNo code spans here at all.\n\n" + longContent;
+    const docContent =
+      "# Title\n\nNo code spans here at all.\n\n" + longContent;
     vi.mocked(fetchMod.fetchContent)
       .mockResolvedValueOnce(indexContent)
       .mockResolvedValueOnce(docContent);
@@ -249,11 +279,14 @@ describe("llmsTxtAdapter", () => {
     const cleanMod = await import("../../pipeline/clean.js");
 
     // Link with image-only content (no text node → empty title) and relative URL
-    const indexContent = "[](https://example.com/empty-title.md)\n\n[Relative](relative/path.md)\n\n[Valid](https://example.com/valid.md)\n";
+    const indexContent =
+      "[](https://example.com/empty-title.md)\n\n[Relative](relative/path.md)\n\n[Valid](https://example.com/valid.md)\n";
     vi.mocked(fetchMod.fetchContent)
       .mockResolvedValueOnce(indexContent)
       .mockResolvedValue("# Title\n\n" + longContent);
-    vi.mocked(cleanMod.cleanMarkdown).mockResolvedValue("# Title\n\n" + longContent);
+    vi.mocked(cleanMod.cleanMarkdown).mockResolvedValue(
+      "# Title\n\n" + longContent,
+    );
 
     const result = await llmsTxtAdapter.process(baseSource);
     // Empty title link is skipped, relative URL link and valid link should be included
@@ -264,7 +297,9 @@ describe("llmsTxtAdapter", () => {
     vi.spyOn(console, "log").mockImplementation(() => {});
     const fetchMod = await import("../../pipeline/fetch.js");
 
-    vi.mocked(fetchMod.fetchContent).mockResolvedValueOnce("# Index\n\nNo links here.");
+    vi.mocked(fetchMod.fetchContent).mockResolvedValueOnce(
+      "# Index\n\nNo links here.",
+    );
 
     const result = await llmsTxtAdapter.process(baseSource);
     expect(result).toEqual([]);

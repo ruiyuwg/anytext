@@ -64,13 +64,13 @@ const newBalance: number = await db.transaction(async (tx) => {
 You can use transactions with **[relational queries](/docs/rqb)**:
 
 ```ts
-const db = drizzle({ schema })
+const db = drizzle({ schema });
 
 await db.transaction(async (tx) => {
   await tx.query.users.findMany({
     with: {
-      accounts: true
-    }
+      accounts: true,
+    },
   });
 });
 ```
@@ -82,13 +82,20 @@ We provide dialect-specific transaction configuration APIs:
 ```ts copy {6-8}
 await db.transaction(
   async (tx) => {
-    await tx.update(accounts).set({ balance: sql`${accounts.balance} - 100.00` }).where(eq(users.name, "Dan"));
-    await tx.update(accounts).set({ balance: sql`${accounts.balance} + 100.00` }).where(eq(users.name, "Andrew"));
-  }, {
+    await tx
+      .update(accounts)
+      .set({ balance: sql`${accounts.balance} - 100.00` })
+      .where(eq(users.name, "Dan"));
+    await tx
+      .update(accounts)
+      .set({ balance: sql`${accounts.balance} + 100.00` })
+      .where(eq(users.name, "Andrew"));
+  },
+  {
     isolationLevel: "read committed",
     accessMode: "read write",
     deferrable: true,
-  }
+  },
 );
 
 interface PgTransactionConfig {
@@ -259,7 +266,7 @@ These installed packages are used only to create table in the database in [Creat
 <Steps>
 #### Setup Neon Postgres
 
-Log in to the [Neon Console](https://console.neon.tech/app/projects) and navigate to the Projects section. Select a project or click the `New Project` button to create a new one. 
+Log in to the [Neon Console](https://console.neon.tech/app/projects) and navigate to the Projects section. Select a project or click the `New Project` button to create a new one.
 
 Your Neon projects come with a ready-to-use Postgres database named `neondb`. We'll use it in this tutorial.
 
@@ -333,12 +340,12 @@ Create a `schema.ts` file in the `netlify/edge-functions/common` directory and d
 ```typescript copy filename="netlify/edge-functions/common/schema.ts"
 import { pgTable, serial, text, integer } from "drizzle-orm/pg-core";
 
-export const usersTable = pgTable('users_table', {
-  id: serial('id').primaryKey(),
-  name: text('name').notNull(),
-  age: integer('age').notNull(),
-  email: text('email').notNull().unique(),
-})
+export const usersTable = pgTable("users_table", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  age: integer("age").notNull(),
+  email: text("email").notNull().unique(),
+});
 ```
 
 #### Setup Drizzle config file
@@ -348,13 +355,13 @@ export const usersTable = pgTable('users_table', {
 Create a `drizzle.config.ts` file in the root of your project and add the following content:
 
 ```typescript copy filename="drizzle.config.ts"
-import 'dotenv/config'; // remove this line if you use Node.js v20.6.0 or later
+import "dotenv/config"; // remove this line if you use Node.js v20.6.0 or later
 import type { Config } from "drizzle-kit";
 
 export default {
-  schema: './netlify/edge-functions/common/schema.ts',
-  out: './drizzle',
-  dialect: 'postgresql',
+  schema: "./netlify/edge-functions/common/schema.ts",
+  out: "./drizzle",
+  dialect: "postgresql",
   dbCredentials: {
     url: process.env.DATABASE_URL!,
   },
@@ -380,8 +387,8 @@ Update your `netlify/edge-functions/user.ts` file and set up your database confi
 ```typescript copy filename="netlify/edge-functions/user.ts"
 import type { Context } from "@netlify/edge-functions";
 import { usersTable } from "./common/schema.ts";
-import { neon } from '@neondatabase/serverless';
-import { drizzle } from 'drizzle-orm/neon-http';
+import { neon } from "@neondatabase/serverless";
+import { drizzle } from "drizzle-orm/neon-http";
 
 export default async (request: Request, context: Context) => {
   const sql = neon(Netlify.env.get("DATABASE_URL")!);
@@ -563,12 +570,12 @@ Create a `schema.ts` file in the `netlify/edge-functions/common` directory and d
 ```typescript copy filename="netlify/edge-functions/common/schema.ts"
 import { pgTable, serial, text, integer } from "drizzle-orm/pg-core";
 
-export const usersTable = pgTable('users_table', {
-  id: serial('id').primaryKey(),
-  name: text('name').notNull(),
-  age: integer('age').notNull(),
-  email: text('email').notNull().unique(),
-})
+export const usersTable = pgTable("users_table", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  age: integer("age").notNull(),
+  email: text("email").notNull().unique(),
+});
 ```
 
 #### Setup Drizzle config file
@@ -578,13 +585,13 @@ export const usersTable = pgTable('users_table', {
 Create a `drizzle.config.ts` file in the root of your project and add the following content:
 
 ```typescript copy filename="drizzle.config.ts"
-import 'dotenv/config'; // remove this line if you use Node.js v20.6.0 or later
+import "dotenv/config"; // remove this line if you use Node.js v20.6.0 or later
 import type { Config } from "drizzle-kit";
 
 export default {
-  schema: './netlify/edge-functions/common/schema.ts',
-  out: './drizzle',
-  dialect: 'postgresql',
+  schema: "./netlify/edge-functions/common/schema.ts",
+  out: "./drizzle",
+  dialect: "postgresql",
   dbCredentials: {
     url: process.env.DATABASE_URL!,
   },
@@ -610,8 +617,8 @@ Update your `netlify/edge-functions/user.ts` file and set up your database confi
 ```typescript copy filename="netlify/edge-functions/user.ts"
 import type { Context } from "@netlify/edge-functions";
 import { usersTable } from "./common/schema.ts";
-import { drizzle } from 'drizzle-orm/postgres-js';
-import postgres from 'postgres';
+import { drizzle } from "drizzle-orm/postgres-js";
+import postgres from "postgres";
 
 export default async (request: Request, context: Context) => {
   const queryClient = postgres(Netlify.env.get("DATABASE_URL")!);
@@ -717,11 +724,11 @@ Create a `schema.ts` file in your `src` directory and declare a table schema:
 ```typescript copy filename="src/schema.ts"
 import { pgTable, serial, text, integer } from "drizzle-orm/pg-core";
 
-export const usersTable = pgTable('users_table', {
-  id: serial('id').primaryKey(),
-  name: text('name').notNull(),
-  age: integer('age').notNull()
-})
+export const usersTable = pgTable("users_table", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  age: integer("age").notNull(),
+});
 ```
 
 This file will be used to generate migrations for your database.
@@ -833,26 +840,25 @@ Copy the code that you will use in your edge function from `src/schema.ts` file 
 
 ```typescript copy filename="supabase/functions/drizzle-tutorial/index.ts"
 // Setup type definitions for built-in Supabase Runtime APIs
-import "jsr:@supabase/functions-js/edge-runtime.d.ts"
+import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { pgTable, serial, text, integer } from "drizzle-orm/pg-core";
 
-const usersTable = pgTable('users_table', {
-  id: serial('id').primaryKey(),
-  name: text('name').notNull(),
-  age: integer('age').notNull()
-})
+const usersTable = pgTable("users_table", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  age: integer("age").notNull(),
+});
 
 Deno.serve(async (req) => {
-  const { name } = await req.json()
+  const { name } = await req.json();
   const data = {
     message: `Hello ${name}!`,
-  }
+  };
 
-  return new Response(
-    JSON.stringify(data),
-    { headers: { "Content-Type": "application/json" } },
-  )
-})  
+  return new Response(JSON.stringify(data), {
+    headers: { "Content-Type": "application/json" },
+  });
+});
 ```
 
 <Callout type="warning">
@@ -871,11 +877,11 @@ import { drizzle } from "drizzle-orm/postgres-js";
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import postgres from "postgres";
 
-const usersTable = pgTable('users_table', {
-  id: serial('id').primaryKey(),
-  name: text('name').notNull(),
-  age: integer('age').notNull()
-})
+const usersTable = pgTable("users_table", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  age: integer("age").notNull(),
+});
 
 Deno.serve(async () => {
   const connectionString = Deno.env.get("SUPABASE_DB_URL")!;
@@ -886,14 +892,12 @@ Deno.serve(async () => {
 
   await db.insert(usersTable).values({
     name: "Alice",
-    age: 25
-  })
+    age: 25,
+  });
   const data = await db.select().from(usersTable);
 
-  return new Response(
-    JSON.stringify(data)
-  )
-})
+  return new Response(JSON.stringify(data));
+});
 ```
 
 `SUPABASE_DB_URL` is default environment variable for the direct database connection. Learn more about managing environment variables in Supabase Edge Functions in the [documentation](https://supabase.com/docs/guides/functions/secrets).

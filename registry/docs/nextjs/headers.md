@@ -3,20 +3,20 @@
 `headers` is an **async** function that allows you to **read** the HTTP incoming request headers from a [Server Component](/docs/app/getting-started/server-and-client-components).
 
 ```tsx filename="app/page.tsx" switcher
-import { headers } from 'next/headers'
+import { headers } from "next/headers";
 
 export default async function Page() {
-  const headersList = await headers()
-  const userAgent = headersList.get('user-agent')
+  const headersList = await headers();
+  const userAgent = headersList.get("user-agent");
 }
 ```
 
 ```jsx filename="app/page.js" switcher
-import { headers } from 'next/headers'
+import { headers } from "next/headers";
 
 export default async function Page() {
-  const headersList = await headers()
-  const userAgent = headersList.get('user-agent')
+  const headersList = await headers();
+  const userAgent = headersList.get("user-agent");
 }
 ```
 
@@ -49,16 +49,16 @@ export default async function Page() {
 ### Using the Authorization header
 
 ```jsx filename="app/page.js"
-import { headers } from 'next/headers'
+import { headers } from "next/headers";
 
 export default async function Page() {
-  const authorization = (await headers()).get('authorization')
-  const res = await fetch('...', {
+  const authorization = (await headers()).get("authorization");
+  const res = await fetch("...", {
     headers: { authorization }, // Forward the authorization header
-  })
-  const user = await res.json()
+  });
+  const user = await res.json();
 
-  return <h1>{user.name}</h1>
+  return <h1>{user.name}</h1>;
 }
 ```
 

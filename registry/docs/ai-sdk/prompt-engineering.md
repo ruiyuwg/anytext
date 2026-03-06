@@ -39,12 +39,12 @@ const result = await generateText({
           date: z
             .string()
             .date()
-            .transform(value => new Date(value)),
+            .transform((value) => new Date(value)),
         }),
       ),
     }),
   }),
-  prompt: 'List 5 important events from the year 2000.',
+  prompt: "List 5 important events from the year 2000.",
 });
 ```
 
@@ -60,7 +60,7 @@ For maximum compatibility, optional parameters should use `.nullable()` instead 
 ```ts highlight="6,7,16,17"
 // This may fail with strict schema validation
 const failingTool = tool({
-  description: 'Execute a command',
+  description: "Execute a command",
   inputSchema: z.object({
     command: z.string(),
     workdir: z.string().optional(), // This can cause errors
@@ -70,7 +70,7 @@ const failingTool = tool({
 
 // This works with strict schema validation
 const workingTool = tool({
-  description: 'Execute a command',
+  description: "Execute a command",
   inputSchema: z.object({
     command: z.string(),
     workdir: z.string().nullable(), // Use nullable instead
@@ -89,13 +89,13 @@ const result = await generateText({
   temperature: 0, // Recommended for tool calls
   tools: {
     myTool: tool({
-      description: 'Execute a command',
+      description: "Execute a command",
       inputSchema: z.object({
         command: z.string(),
       }),
     }),
   },
-  prompt: 'Execute the ls command',
+  prompt: "Execute the ls command",
 });
 ```
 
@@ -116,7 +116,7 @@ To check if your prompt, tools, and settings are handled correctly by the provid
 ```ts
 const result = await generateText({
   model: __MODEL__,
-  prompt: 'Hello, world!',
+  prompt: "Hello, world!",
 });
 
 console.log(result.warnings);
@@ -132,7 +132,7 @@ Request bodies are available via the `request.body` property of the response:
 ```ts highlight="6"
 const result = await generateText({
   model: __MODEL__,
-  prompt: 'Hello, world!',
+  prompt: "Hello, world!",
 });
 
 console.log(result.request.body);

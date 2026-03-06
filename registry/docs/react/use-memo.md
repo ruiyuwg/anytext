@@ -2,11 +2,11 @@
 
 Validates that the `useMemo` hook is used with a return value. See [`useMemo` docs](/reference/react/useMemo) for more information.
 
-## Rule Details {/*rule-details*/}
+## Rule Details {/_rule-details_/}
 
 `useMemo` is for computing and caching expensive values, not for side effects. Without a return value, `useMemo` returns `undefined`, which defeats its purpose and likely indicates you're using the wrong hook.
 
-### Invalid {/*invalid*/}
+### Invalid {/_invalid_/}
 
 Examples of incorrect code for this rule:
 
@@ -14,7 +14,7 @@ Examples of incorrect code for this rule:
 // ❌ No return value
 function Component({ data }) {
   const processed = useMemo(() => {
-    data.forEach(item => console.log(item));
+    data.forEach((item) => console.log(item));
     // Missing return!
   }, [data]);
 
@@ -22,7 +22,7 @@ function Component({ data }) {
 }
 ```
 
-### Valid {/*valid*/}
+### Valid {/_valid_/}
 
 Examples of correct code for this rule:
 
@@ -30,16 +30,16 @@ Examples of correct code for this rule:
 // ✅ Returns computed value
 function Component({ data }) {
   const processed = useMemo(() => {
-    return data.map(item => item * 2);
+    return data.map((item) => item * 2);
   }, [data]);
 
   return <div>{processed}</div>;
 }
 ```
 
-## Troubleshooting {/*troubleshooting*/}
+## Troubleshooting {/_troubleshooting_/}
 
-### I need to run side effects when dependencies change {/*side-effects*/}
+### I need to run side effects when dependencies change {/_side-effects_/}
 
 You might try to use `useMemo` for side effects:
 
@@ -47,15 +47,15 @@ You might try to use `useMemo` for side effects:
 
 ```js {expectedErrors: {'react-compiler': [4]}}
 // ❌ Wrong: Side effects in useMemo
-function Component({user}) {
+function Component({ user }) {
   // No return value, just side effect
   useMemo(() => {
-    analytics.track('UserViewed', {userId: user.id});
+    analytics.track("UserViewed", { userId: user.id });
   }, [user.id]);
 
   // Not assigned to a variable
   useMemo(() => {
-    return analytics.track('UserViewed', {userId: user.id});
+    return analytics.track("UserViewed", { userId: user.id });
   }, [user.id]);
 }
 ```
@@ -64,9 +64,9 @@ If the side effect needs to happen in response to user interaction, it's best to
 
 ```js
 // ✅ Good: Side effects in event handlers
-function Component({user}) {
+function Component({ user }) {
   const handleClick = () => {
-    analytics.track('ButtonClicked', {userId: user.id});
+    analytics.track("ButtonClicked", { userId: user.id });
     // Other click logic...
   };
 
@@ -78,9 +78,9 @@ If the side effect sychronizes React state with some external state (or vice ver
 
 ```js
 // ✅ Good: Synchronization in useEffect
-function Component({theme}) {
+function Component({ theme }) {
   useEffect(() => {
-    localStorage.setItem('preferredTheme', theme);
+    localStorage.setItem("preferredTheme", theme);
     document.body.className = theme;
   }, [theme]);
 
@@ -88,7 +88,7 @@ function Component({theme}) {
 }
 ```
 
-***
+---
 
 ## Sitemap
 

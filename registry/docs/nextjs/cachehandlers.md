@@ -26,25 +26,25 @@ To configure custom cache handlers:
 2. Reference the file path in your Next config file
 
 ```ts filename="next.config.ts" switcher
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   cacheHandlers: {
-    default: require.resolve('./cache-handlers/default-handler.js'),
-    remote: require.resolve('./cache-handlers/remote-handler.js'),
+    default: require.resolve("./cache-handlers/default-handler.js"),
+    remote: require.resolve("./cache-handlers/remote-handler.js"),
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 ```js filename="next.config.js" switcher
 module.exports = {
   cacheHandlers: {
-    default: require.resolve('./cache-handlers/default-handler.js'),
-    remote: require.resolve('./cache-handlers/remote-handler.js'),
+    default: require.resolve("./cache-handlers/default-handler.js"),
+    remote: require.resolve("./cache-handlers/remote-handler.js"),
   },
-}
+};
 ```
 
 ### Handler types
@@ -82,18 +82,18 @@ Your `get` method should retrieve the cache entry from storage, check if it has 
 ```js
 const cacheHandler = {
   async get(cacheKey, softTags) {
-    const entry = cache.get(cacheKey)
-    if (!entry) return undefined
+    const entry = cache.get(cacheKey);
+    if (!entry) return undefined;
 
     // Check if expired
-    const now = Date.now()
+    const now = Date.now();
     if (now > entry.timestamp + entry.revalidate * 1000) {
-      return undefined
+      return undefined;
     }
 
-    return entry
+    return entry;
   },
-}
+};
 ```
 
 ### `set()`
@@ -119,12 +119,12 @@ Your `set` method must await the `pendingEntry` promise before storing it, since
 const cacheHandler = {
   async set(cacheKey, pendingEntry) {
     // Wait for the entry to be ready
-    const entry = await pendingEntry
+    const entry = await pendingEntry;
 
     // Store in your cache system
-    cache.set(cacheKey, entry)
+    cache.set(cacheKey, entry);
   },
-}
+};
 ```
 
 ### `refreshTags()`
@@ -147,7 +147,7 @@ const cacheHandler = {
     // For in-memory cache, no action needed
     // For distributed cache, sync tag state from external service
   },
-}
+};
 ```
 
 ### `getExpiration()`
@@ -174,12 +174,12 @@ If you're not tracking tag revalidation timestamps, return `0`. Otherwise, find 
 const cacheHandler = {
   async getExpiration(tags) {
     // Return 0 if not tracking tag revalidation
-    return 0
+    return 0;
 
     // Or return the most recent revalidation timestamp
     // return Math.max(...tags.map(tag => tagTimestamps.get(tag) || 0));
   },
-}
+};
 ```
 
 ### `updateTags()`
@@ -207,11 +207,11 @@ const cacheHandler = {
     // Invalidate all cache entries with matching tags
     for (const [key, entry] of cache.entries()) {
       if (entry.tags.some((tag) => tags.includes(tag))) {
-        cache.delete(key)
+        cache.delete(key);
       }
     }
   },
-}
+};
 ```
 
 ## CacheEntry Type
@@ -220,12 +220,12 @@ The [`CacheEntry`](https://github.com/vercel/next.js/blob/canary/packages/next/s
 
 ```ts
 interface CacheEntry {
-  value: ReadableStream<Uint8Array>
-  tags: string[]
-  stale: number
-  timestamp: number
-  expire: number
-  revalidate: number
+  value: ReadableStream<Uint8Array>;
+  tags: string[];
+  stale: number;
+  timestamp: number;
+  expire: number;
+  revalidate: number;
 }
 ```
 
@@ -250,48 +250,48 @@ interface CacheEntry {
 Here's a minimal implementation using a `Map` for storage. This example demonstrates the core concepts, but for a production-ready implementation with LRU eviction, error handling, and tag management, see the [default cache handler](https://github.com/vercel/next.js/blob/canary/packages/next/src/server/lib/cache-handlers/default.ts).
 
 ```js filename="cache-handlers/memory-handler.js"
-const cache = new Map()
-const pendingSets = new Map()
+const cache = new Map();
+const pendingSets = new Map();
 
 module.exports = {
   async get(cacheKey, softTags) {
     // Wait for any pending set operation to complete
-    const pendingPromise = pendingSets.get(cacheKey)
+    const pendingPromise = pendingSets.get(cacheKey);
     if (pendingPromise) {
-      await pendingPromise
+      await pendingPromise;
     }
 
-    const entry = cache.get(cacheKey)
+    const entry = cache.get(cacheKey);
     if (!entry) {
-      return undefined
+      return undefined;
     }
 
     // Check if entry has expired
-    const now = Date.now()
+    const now = Date.now();
     if (now > entry.timestamp + entry.revalidate * 1000) {
-      return undefined
+      return undefined;
     }
 
-    return entry
+    return entry;
   },
 
   async set(cacheKey, pendingEntry) {
     // Create a promise to track this set operation
-    let resolvePending
+    let resolvePending;
     const pendingPromise = new Promise((resolve) => {
-      resolvePending = resolve
-    })
-    pendingSets.set(cacheKey, pendingPromise)
+      resolvePending = resolve;
+    });
+    pendingSets.set(cacheKey, pendingPromise);
 
     try {
       // Wait for the entry to be ready
-      const entry = await pendingEntry
+      const entry = await pendingEntry;
 
       // Store the entry in the cache
-      cache.set(cacheKey, entry)
+      cache.set(cacheKey, entry);
     } finally {
-      resolvePending()
-      pendingSets.delete(cacheKey)
+      resolvePending();
+      pendingSets.delete(cacheKey);
     }
   },
 
@@ -301,18 +301,18 @@ module.exports = {
 
   async getExpiration(tags) {
     // Return 0 to indicate no tags have been revalidated
-    return 0
+    return 0;
   },
 
   async updateTags(tags, durations) {
     // Implement tag-based invalidation
     for (const [key, entry] of cache.entries()) {
       if (entry.tags.some((tag) => tags.includes(tag))) {
-        cache.delete(key)
+        cache.delete(key);
       }
     }
   },
-}
+};
 ```
 
 ### External storage pattern
@@ -320,26 +320,26 @@ module.exports = {
 For durable storage like Redis or a database, you'll need to serialize the cache entries. Here's a simple Redis example:
 
 ```js filename="cache-handlers/redis-handler.js"
-const { createClient } = require('redis')
+const { createClient } = require("redis");
 
-const client = createClient({ url: process.env.REDIS_URL })
-client.connect()
+const client = createClient({ url: process.env.REDIS_URL });
+client.connect();
 
 module.exports = {
   async get(cacheKey, softTags) {
     // Retrieve from Redis
-    const stored = await client.get(cacheKey)
-    if (!stored) return undefined
+    const stored = await client.get(cacheKey);
+    if (!stored) return undefined;
 
     // Deserialize the entry
-    const data = JSON.parse(stored)
+    const data = JSON.parse(stored);
 
     // Reconstruct the ReadableStream from stored data
     return {
       value: new ReadableStream({
         start(controller) {
-          controller.enqueue(Buffer.from(data.value, 'base64'))
-          controller.close()
+          controller.enqueue(Buffer.from(data.value, "base64"));
+          controller.close();
         },
       }),
       tags: data.tags,
@@ -347,41 +347,41 @@ module.exports = {
       timestamp: data.timestamp,
       expire: data.expire,
       revalidate: data.revalidate,
-    }
+    };
   },
 
   async set(cacheKey, pendingEntry) {
-    const entry = await pendingEntry
+    const entry = await pendingEntry;
 
     // Read the stream to get the data
-    const reader = entry.value.getReader()
-    const chunks = []
+    const reader = entry.value.getReader();
+    const chunks = [];
 
     try {
       while (true) {
-        const { done, value } = await reader.read()
-        if (done) break
-        chunks.push(value)
+        const { done, value } = await reader.read();
+        if (done) break;
+        chunks.push(value);
       }
     } finally {
-      reader.releaseLock()
+      reader.releaseLock();
     }
 
     // Combine chunks and serialize for Redis storage
-    const data = Buffer.concat(chunks.map((chunk) => Buffer.from(chunk)))
+    const data = Buffer.concat(chunks.map((chunk) => Buffer.from(chunk)));
 
     await client.set(
       cacheKey,
       JSON.stringify({
-        value: data.toString('base64'),
+        value: data.toString("base64"),
         tags: entry.tags,
         stale: entry.stale,
         timestamp: entry.timestamp,
         expire: entry.expire,
         revalidate: entry.revalidate,
       }),
-      { EX: entry.expire } // Use Redis TTL for automatic expiration
-    )
+      { EX: entry.expire }, // Use Redis TTL for automatic expiration
+    );
   },
 
   async refreshTags() {
@@ -392,14 +392,14 @@ module.exports = {
   async getExpiration(tags) {
     // Return 0 to indicate no tags have been revalidated
     // Could query Redis for tag expiration timestamps if tracking them
-    return 0
+    return 0;
   },
 
   async updateTags(tags, durations) {
     // Implement tag-based invalidation if needed
     // Could iterate over keys with matching tags and delete them
   },
-}
+};
 ```
 
 ## Platform Support

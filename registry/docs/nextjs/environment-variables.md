@@ -44,7 +44,7 @@ export async function GET() {
     host: process.env.DB_HOST,
     username: process.env.DB_USER,
     password: process.env.DB_PASS,
-  })
+  });
   // ...
 }
 ```
@@ -74,39 +74,39 @@ bun add @next/env
 ```
 
 ```tsx filename="envConfig.ts" switcher
-import { loadEnvConfig } from '@next/env'
+import { loadEnvConfig } from "@next/env";
 
-const projectDir = process.cwd()
-loadEnvConfig(projectDir)
+const projectDir = process.cwd();
+loadEnvConfig(projectDir);
 ```
 
 ```jsx filename="envConfig.js" switcher
-import { loadEnvConfig } from '@next/env'
+import { loadEnvConfig } from "@next/env";
 
-const projectDir = process.cwd()
-loadEnvConfig(projectDir)
+const projectDir = process.cwd();
+loadEnvConfig(projectDir);
 ```
 
 Then, you can import the configuration where needed. For example:
 
 ```tsx filename="orm.config.ts" switcher
-import './envConfig.ts'
+import "./envConfig.ts";
 
 export default defineConfig({
   dbCredentials: {
     connectionString: process.env.DATABASE_URL!,
   },
-})
+});
 ```
 
 ```jsx filename="orm.config.js" switcher
-import './envConfig.js'
+import "./envConfig.js";
 
 export default defineConfig({
   dbCredentials: {
     connectionString: process.env.DATABASE_URL,
   },
-})
+});
 ```
 
 ### Referencing Other Variables
@@ -124,7 +124,7 @@ In the above example, `process.env.TWITTER_URL` would be set to `https://x.com/n
 
 ## Bundling Environment Variables for the Browser
 
-Non-`NEXT_PUBLIC_` environment variables are only available in the Node.js environment, meaning they aren't accessible to the browser (the client runs in a different *environment*).
+Non-`NEXT_PUBLIC_` environment variables are only available in the Node.js environment, meaning they aren't accessible to the browser (the client runs in a different _environment_).
 
 In order to make the value of an environment variable accessible in the browser, Next.js can "inline" a value, at build time, into the js bundle that is delivered to the client, replacing all references to `process.env.[variable]` with a hard-coded value. To tell it to do this, you just have to prefix the variable with `NEXT_PUBLIC_`. For example:
 
@@ -137,29 +137,29 @@ This will tell Next.js to replace all references to `process.env.NEXT_PUBLIC_ANA
 > **Note**: After being built, your app will no longer respond to changes to these environment variables. For instance, if you use a Heroku pipeline to promote slugs built in one environment to another environment, or if you build and deploy a single Docker image to multiple environments, all `NEXT_PUBLIC_` variables will be frozen with the value evaluated at build time, so these values need to be set appropriately when the project is built. If you need access to runtime environment values, you'll have to setup your own API to provide them to the client (either on demand or during initialization).
 
 ```js filename="pages/index.js"
-import setupAnalyticsService from '../lib/my-analytics-service'
+import setupAnalyticsService from "../lib/my-analytics-service";
 
 // 'NEXT_PUBLIC_ANALYTICS_ID' can be used here as it's prefixed by 'NEXT_PUBLIC_'.
 // It will be transformed at build time to `setupAnalyticsService('abcdefghijk')`.
-setupAnalyticsService(process.env.NEXT_PUBLIC_ANALYTICS_ID)
+setupAnalyticsService(process.env.NEXT_PUBLIC_ANALYTICS_ID);
 
 function HomePage() {
-  return <h1>Hello World</h1>
+  return <h1>Hello World</h1>;
 }
 
-export default HomePage
+export default HomePage;
 ```
 
-Note that dynamic lookups will *not* be inlined, such as:
+Note that dynamic lookups will _not_ be inlined, such as:
 
 ```js
 // This will NOT be inlined, because it uses a variable
-const varName = 'NEXT_PUBLIC_ANALYTICS_ID'
-setupAnalyticsService(process.env[varName])
+const varName = "NEXT_PUBLIC_ANALYTICS_ID";
+setupAnalyticsService(process.env[varName]);
 
 // This will NOT be inlined, because it uses a variable
-const env = process.env
-setupAnalyticsService(env.NEXT_PUBLIC_ANALYTICS_ID)
+const env = process.env;
+setupAnalyticsService(env.NEXT_PUBLIC_ANALYTICS_ID);
 ```
 
 ### Runtime Environment Variables
@@ -171,27 +171,27 @@ Next.js can support both build time and runtime environment variables.
 You can safely read environment variables on the server during dynamic rendering:
 
 ```tsx filename="app/page.ts" switcher
-import { connection } from 'next/server'
+import { connection } from "next/server";
 
 export default async function Component() {
-  await connection()
+  await connection();
   // cookies, headers, and other Dynamic APIs
   // will also opt into dynamic rendering, meaning
   // this env variable is evaluated at runtime
-  const value = process.env.MY_VALUE
+  const value = process.env.MY_VALUE;
   // ...
 }
 ```
 
 ```jsx filename="app/page.js" switcher
-import { connection } from 'next/server'
+import { connection } from "next/server";
 
 export default async function Component() {
-  await connection()
+  await connection();
   // cookies, headers, and other Dynamic APIs
   // will also opt into dynamic rendering, meaning
   // this env variable is evaluated at runtime
-  const value = process.env.MY_VALUE
+  const value = process.env.MY_VALUE;
   // ...
 }
 ```
@@ -216,12 +216,12 @@ While running unit tests you can make sure to load your environment variables th
 
 ```js
 // The below can be used in a Jest global setup file or similar for your testing set-up
-import { loadEnvConfig } from '@next/env'
+import { loadEnvConfig } from "@next/env";
 
 export default async () => {
-  const projectDir = process.cwd()
-  loadEnvConfig(projectDir)
-}
+  const projectDir = process.cwd();
+  loadEnvConfig(projectDir);
+};
 ```
 
 ## Environment Variable Load Order

@@ -17,17 +17,17 @@ If you turn on SSR in your app, you might discover that your app loads slowly on
 ### Example code
 
 ```tsx title='utils/trpc.tsx'
-import { httpBatchLink } from '@trpc/client';
-import { createTRPCNext } from '@trpc/next';
-import type { AppRouter } from '../server/routers/_app';
+import { httpBatchLink } from "@trpc/client";
+import { createTRPCNext } from "@trpc/next";
+import type { AppRouter } from "../server/routers/_app";
 
 export const trpc = createTRPCNext<AppRouter>({
   config(config) {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       return {
         links: [
           httpBatchLink({
-            url: '/api/trpc',
+            url: "/api/trpc",
           }),
         ],
       };
@@ -35,7 +35,7 @@ export const trpc = createTRPCNext<AppRouter>({
 
     const url = process.env.VERCEL_URL
       ? `https://${process.env.VERCEL_URL}/api/trpc`
-      : 'http://localhost:3000/api/trpc';
+      : "http://localhost:3000/api/trpc";
 
     return {
       links: {
@@ -61,7 +61,7 @@ export const trpc = createTRPCNext<AppRouter>({
     return {
       headers: new Headers([
         [
-          'cache-control',
+          "cache-control",
           `s-maxage=1, stale-while-revalidate=${ONE_DAY_IN_SECONDS}`,
         ],
       ]),
@@ -79,8 +79,8 @@ Since all queries are normal HTTP `GET`s, we can use normal HTTP headers to cach
 > Assuming you're deploying your API somewhere that can handle stale-while-revalidate cache headers like Vercel.
 
 ```tsx title='server.ts'
-import { initTRPC } from '@trpc/server';
-import * as trpcNext from '@trpc/server/adapters/next';
+import { initTRPC } from "@trpc/server";
+import * as trpcNext from "@trpc/server/adapters/next";
 
 export const createContext = async ({
   req,
@@ -123,11 +123,11 @@ export default trpcNext.createNextApiHandler({
   responseMeta(opts) {
     const { ctx, paths, errors, type } = opts;
     // assuming you have all your public routes with the keyword `public` in them
-    const allPublic = paths && paths.every((path) => path.includes('public'));
+    const allPublic = paths && paths.every((path) => path.includes("public"));
     // checking that no procedures errored
     const allOk = errors.length === 0;
     // checking we're doing a query request
-    const isQuery = type === 'query';
+    const isQuery = type === "query";
 
     if (ctx?.res && allPublic && allOk && isQuery) {
       // cache request for 1 day + revalidate once every second
@@ -135,7 +135,7 @@ export default trpcNext.createNextApiHandler({
       return {
         headers: new Headers([
           [
-            'cache-control',
+            "cache-control",
             `s-maxage=1, stale-while-revalidate=${ONE_DAY_IN_SECONDS}`,
           ],
         ]),

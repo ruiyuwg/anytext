@@ -3,28 +3,28 @@
 If you want to access the [`router` object](#router-object) inside any function component in your app, you can use the `useRouter` hook, take a look at the following example:
 
 ```jsx
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 
 function ActiveLink({ children, href }) {
-  const router = useRouter()
+  const router = useRouter();
   const style = {
     marginRight: 10,
-    color: router.asPath === href ? 'red' : 'black',
-  }
+    color: router.asPath === href ? "red" : "black",
+  };
 
   const handleClick = (e) => {
-    e.preventDefault()
-    router.push(href)
-  }
+    e.preventDefault();
+    router.push(href);
+  };
 
   return (
     <a href={href} onClick={handleClick} style={style}>
       {children}
     </a>
-  )
+  );
 }
 
-export default ActiveLink
+export default ActiveLink;
 ```
 
 > `useRouter` is a [React Hook](https://react.dev/learn#using-hooks), meaning it cannot be used with classes. You can either use [withRouter](#withrouter) or wrap your class in a function component.
@@ -54,7 +54,7 @@ The following methods are included inside `router`:
 Handles client-side transitions, this method is useful for cases where [`next/link`](/docs/pages/api-reference/components/link) is not enough.
 
 ```js
-router.push(url, as, options)
+router.push(url, as, options);
 ```
 
 - `url`: `UrlObject | String` - The URL to navigate to (see [Node.JS URL module documentation](https://nodejs.org/api/url.html#legacy-urlobject) for `UrlObject` properties).
@@ -69,55 +69,55 @@ router.push(url, as, options)
 Navigating to `pages/about.js`, which is a predefined route:
 
 ```jsx
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 
 export default function Page() {
-  const router = useRouter()
+  const router = useRouter();
 
   return (
-    <button type="button" onClick={() => router.push('/about')}>
+    <button type="button" onClick={() => router.push("/about")}>
       Click me
     </button>
-  )
+  );
 }
 ```
 
 Navigating `pages/post/[pid].js`, which is a dynamic route:
 
 ```jsx
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 
 export default function Page() {
-  const router = useRouter()
+  const router = useRouter();
 
   return (
-    <button type="button" onClick={() => router.push('/post/abc')}>
+    <button type="button" onClick={() => router.push("/post/abc")}>
       Click me
     </button>
-  )
+  );
 }
 ```
 
 Redirecting the user to `pages/login.js`, useful for pages behind [authentication](/docs/pages/guides/authentication):
 
 ```jsx
-import { useEffect } from 'react'
-import { useRouter } from 'next/router'
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 // Here you would fetch and return the user
-const useUser = () => ({ user: null, loading: false })
+const useUser = () => ({ user: null, loading: false });
 
 export default function Page() {
-  const { user, loading } = useUser()
-  const router = useRouter()
+  const { user, loading } = useUser();
+  const router = useRouter();
 
   useEffect(() => {
     if (!(user || loading)) {
-      router.push('/login')
+      router.push("/login");
     }
-  }, [user, loading])
+  }, [user, loading]);
 
-  return <p>Redirecting...</p>
+  return <p>Redirecting...</p>;
 }
 ```
 
@@ -126,13 +126,13 @@ export default function Page() {
 When navigating to the same page in Next.js, the page's state **will not** be reset by default as React does not unmount unless the parent component has changed.
 
 ```jsx filename="pages/[slug].js"
-import Link from 'next/link'
-import { useState } from 'react'
-import { useRouter } from 'next/router'
+import Link from "next/link";
+import { useState } from "react";
+import { useRouter } from "next/router";
 
 export default function Page(props) {
-  const router = useRouter()
-  const [count, setCount] = useState(0)
+  const router = useRouter();
+  const [count, setCount] = useState(0);
   return (
     <div>
       <h1>Page: {router.query.slug}</h1>
@@ -140,7 +140,7 @@ export default function Page(props) {
       <button onClick={() => setCount(count + 1)}>Increase count</button>
       <Link href="/one">one</Link> <Link href="/two">two</Link>
     </div>
-  )
+  );
 }
 ```
 
@@ -152,18 +152,18 @@ If you do not want this behavior, you have a couple of options:
 
   ```jsx
   useEffect(() => {
-    setCount(0)
-  }, [router.query.slug])
+    setCount(0);
+  }, [router.query.slug]);
   ```
 
 - Use a React `key` to [tell React to remount the component](https://react.dev/learn/rendering-lists#keeping-list-items-in-order-with-key). To do this for all pages, you can use a custom app:
 
   ```jsx filename="pages/_app.js"
-  import { useRouter } from 'next/router'
+  import { useRouter } from "next/router";
 
   export default function MyApp({ Component, pageProps }) {
-    const router = useRouter()
-    return 
+    const router = useRouter();
+    return;
   }
   ```
 
@@ -172,24 +172,24 @@ If you do not want this behavior, you have a couple of options:
 You can use a URL object in the same way you can use it for [`next/link`](/docs/pages/api-reference/components/link#passing-a-url-object). Works for both the `url` and `as` parameters:
 
 ```jsx
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 
 export default function ReadMore({ post }) {
-  const router = useRouter()
+  const router = useRouter();
 
   return (
     <button
       type="button"
       onClick={() => {
         router.push({
-          pathname: '/post/[pid]',
+          pathname: "/post/[pid]",
           query: { pid: post.id },
-        })
+        });
       }}
     >
       Click here to read more
     </button>
-  )
+  );
 }
 ```
 
@@ -198,7 +198,7 @@ export default function ReadMore({ post }) {
 Similar to the `replace` prop in [`next/link`](/docs/pages/api-reference/components/link), `router.replace` will prevent adding a new URL entry into the `history` stack.
 
 ```js
-router.replace(url, as, options)
+router.replace(url, as, options);
 ```
 
 - The API for `router.replace` is exactly the same as the API for [`router.push`](#routerpush).
@@ -206,16 +206,16 @@ router.replace(url, as, options)
 Take a look at the following example:
 
 ```jsx
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 
 export default function Page() {
-  const router = useRouter()
+  const router = useRouter();
 
   return (
-    <button type="button" onClick={() => router.replace('/home')}>
+    <button type="button" onClick={() => router.replace("/home")}>
       Click me
     </button>
-  )
+  );
 }
 ```
 
@@ -226,7 +226,7 @@ Prefetch pages for faster client-side transitions. This method is only useful fo
 > This is a production only feature. Next.js doesn't prefetch pages in development.
 
 ```js
-router.prefetch(url, as, options)
+router.prefetch(url, as, options);
 ```
 
 - `url` - The URL to prefetch, including explicit routes (e.g. `/dashboard`) and dynamic routes (e.g. `/product/[id]`)
@@ -237,37 +237,37 @@ router.prefetch(url, as, options)
 Let's say you have a login page, and after a login, you redirect the user to the dashboard. For that case, we can prefetch the dashboard to make a faster transition, like in the following example:
 
 ```jsx
-import { useCallback, useEffect } from 'react'
-import { useRouter } from 'next/router'
+import { useCallback, useEffect } from "react";
+import { useRouter } from "next/router";
 
 export default function Login() {
-  const router = useRouter()
+  const router = useRouter();
   const handleSubmit = useCallback((e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    fetch('/api/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    fetch("/api/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         /* Form data */
       }),
     }).then((res) => {
       // Do a fast client-side transition to the already prefetched dashboard page
-      if (res.ok) router.push('/dashboard')
-    })
-  }, [])
+      if (res.ok) router.push("/dashboard");
+    });
+  }, []);
 
   useEffect(() => {
     // Prefetch the dashboard page
-    router.prefetch('/dashboard')
-  }, [router])
+    router.prefetch("/dashboard");
+  }, [router]);
 
   return (
     <form onSubmit={handleSubmit}>
       {/* Form fields */}
       <button type="submit">Login</button>
     </form>
-  )
+  );
 }
 ```
 
@@ -276,7 +276,7 @@ export default function Login() {
 In some cases (for example, if using a [Custom Server](/docs/pages/guides/custom-server)), you may wish to listen to [popstate](https://developer.mozilla.org/docs/Web/API/Window/popstate_event) and do something before the router acts on it.
 
 ```js
-router.beforePopState(cb)
+router.beforePopState(cb);
 ```
 
 - `cb` - The function to run on incoming `popstate` events. The function receives the state of the event as an object with the following props:
@@ -289,26 +289,26 @@ If `cb` returns `false`, the Next.js router will not handle `popstate`, and you'
 You could use `beforePopState` to manipulate the request, or force a SSR refresh, as in the following example:
 
 ```jsx
-import { useEffect } from 'react'
-import { useRouter } from 'next/router'
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 export default function Page() {
-  const router = useRouter()
+  const router = useRouter();
 
   useEffect(() => {
     router.beforePopState(({ url, as, options }) => {
       // I only want to allow these two routes!
-      if (as !== '/' && as !== '/other') {
+      if (as !== "/" && as !== "/other") {
         // Have SSR render bad routes as a 404.
-        window.location.href = as
-        return false
+        window.location.href = as;
+        return false;
       }
 
-      return true
-    })
-  }, [router])
+      return true;
+    });
+  }, [router]);
 
-  return <p>Welcome to the page</p>
+  return <p>Welcome to the page</p>;
 }
 ```
 
@@ -317,16 +317,16 @@ export default function Page() {
 Navigate back in history. Equivalent to clicking the browser’s back button. It executes `window.history.back()`.
 
 ```jsx
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 
 export default function Page() {
-  const router = useRouter()
+  const router = useRouter();
 
   return (
     <button type="button" onClick={() => router.back()}>
       Click here to go back
     </button>
-  )
+  );
 }
 ```
 
@@ -335,16 +335,16 @@ export default function Page() {
 Reload the current URL. Equivalent to clicking the browser’s refresh button. It executes `window.location.reload()`.
 
 ```jsx
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 
 export default function Page() {
-  const router = useRouter()
+  const router = useRouter();
 
   return (
     <button type="button" onClick={() => router.reload()}>
       Click here to reload
     </button>
-  )
+  );
 }
 ```
 
@@ -365,31 +365,31 @@ You can listen to different events happening inside the Next.js Router. Here's a
 For example, to listen to the router event `routeChangeStart`, open or create `pages/_app.js` and subscribe to the event, like so:
 
 ```jsx
-import { useEffect } from 'react'
-import { useRouter } from 'next/router'
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 export default function MyApp({ Component, pageProps }) {
-  const router = useRouter()
+  const router = useRouter();
 
   useEffect(() => {
     const handleRouteChange = (url, { shallow }) => {
       console.log(
         `App is changing to ${url} ${
-          shallow ? 'with' : 'without'
-        } shallow routing`
-      )
-    }
+          shallow ? "with" : "without"
+        } shallow routing`,
+      );
+    };
 
-    router.events.on('routeChangeStart', handleRouteChange)
+    router.events.on("routeChangeStart", handleRouteChange);
 
     // If the component is unmounted, unsubscribe
     // from the event with the `off` method:
     return () => {
-      router.events.off('routeChangeStart', handleRouteChange)
-    }
-  }, [router])
+      router.events.off("routeChangeStart", handleRouteChange);
+    };
+  }, [router]);
 
-  return <Component {...pageProps} />
+  return <Component {...pageProps} />;
 }
 ```
 
@@ -400,29 +400,29 @@ Router events should be registered when a component mounts ([useEffect](https://
 If a route load is cancelled (for example, by clicking two links rapidly in succession), `routeChangeError` will fire. And the passed `err` will contain a `cancelled` property set to `true`, as in the following example:
 
 ```jsx
-import { useEffect } from 'react'
-import { useRouter } from 'next/router'
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 export default function MyApp({ Component, pageProps }) {
-  const router = useRouter()
+  const router = useRouter();
 
   useEffect(() => {
     const handleRouteChangeError = (err, url) => {
       if (err.cancelled) {
-        console.log(`Route to ${url} was cancelled!`)
+        console.log(`Route to ${url} was cancelled!`);
       }
-    }
+    };
 
-    router.events.on('routeChangeError', handleRouteChangeError)
+    router.events.on("routeChangeError", handleRouteChangeError);
 
     // If the component is unmounted, unsubscribe
     // from the event with the `off` method:
     return () => {
-      router.events.off('routeChangeError', handleRouteChangeError)
-    }
-  }, [router])
+      router.events.off("routeChangeError", handleRouteChangeError);
+    };
+  }, [router]);
 
-  return <Component {...pageProps} />
+  return <Component {...pageProps} />;
 }
 ```
 
@@ -436,45 +436,45 @@ This allows developers to convert components to support running in both `app` an
 A component that previously looked like this:
 
 ```jsx
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 const MyComponent = () => {
-  const { isReady, query } = useRouter()
+  const { isReady, query } = useRouter();
   // ...
-}
+};
 ```
 
 Will error when converted over to `next/compat/router`, as `null` cannot be destructured. Instead, developers will be able to take advantage of new hooks:
 
 ```jsx
-import { useEffect } from 'react'
-import { useRouter } from 'next/compat/router'
-import { useSearchParams } from 'next/navigation'
+import { useEffect } from "react";
+import { useRouter } from "next/compat/router";
+import { useSearchParams } from "next/navigation";
 const MyComponent = () => {
-  const router = useRouter() // may be null or a NextRouter instance
-  const searchParams = useSearchParams()
+  const router = useRouter(); // may be null or a NextRouter instance
+  const searchParams = useSearchParams();
   useEffect(() => {
     if (router && !router.isReady) {
-      return
+      return;
     }
     // In `app/`, searchParams will be ready immediately with the values, in
     // `pages/` it will be available after the router is ready.
-    const search = searchParams.get('search')
+    const search = searchParams.get("search");
     // ...
-  }, [router, searchParams])
+  }, [router, searchParams]);
   // ...
-}
+};
 ```
 
 This component will now work in both `pages` and `app` directories. When the component is no longer used in `pages`, you can remove the references to the compat router:
 
 ```jsx
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams } from "next/navigation";
 const MyComponent = () => {
-  const searchParams = useSearchParams()
+  const searchParams = useSearchParams();
   // As this component is only used in `app/`, the compat router can be removed.
-  const search = searchParams.get('search')
+  const search = searchParams.get("search");
   // ...
-}
+};
 ```
 
 ### Using `useRouter` outside of Next.js context in pages
@@ -482,19 +482,19 @@ const MyComponent = () => {
 Another specific use case is when rendering components outside of a Next.js application context, such as inside `getServerSideProps` on the `pages` directory. In this case, the compat router can be used to avoid errors:
 
 ```jsx
-import { renderToString } from 'react-dom/server'
-import { useRouter } from 'next/compat/router'
+import { renderToString } from "react-dom/server";
+import { useRouter } from "next/compat/router";
 const MyComponent = () => {
-  const router = useRouter() // may be null or a NextRouter instance
+  const router = useRouter(); // may be null or a NextRouter instance
   // ...
-}
+};
 export async function getServerSideProps() {
-  const renderedComponent = renderToString(<MyComponent />)
+  const renderedComponent = renderToString(<MyComponent />);
   return {
     props: {
       renderedComponent,
     },
-  }
+  };
 }
 ```
 
@@ -513,35 +513,35 @@ The affected methods are:
 ### Potential solutions
 
 ```jsx
-import { useEffect } from 'react'
-import { useRouter } from 'next/router'
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 // Here you would fetch and return the user
-const useUser = () => ({ user: null, loading: false })
+const useUser = () => ({ user: null, loading: false });
 
 export default function Page() {
-  const { user, loading } = useUser()
-  const router = useRouter()
+  const { user, loading } = useUser();
+  const router = useRouter();
 
   useEffect(() => {
     // disable the linting on the next line - This is the cleanest solution
     // eslint-disable-next-line no-floating-promises
-    router.push('/login')
+    router.push("/login");
 
     // void the Promise returned by router.push
     if (!(user || loading)) {
-      void router.push('/login')
+      void router.push("/login");
     }
     // or use an async function, await the Promise, then void the function call
     async function handleRouteChange() {
       if (!(user || loading)) {
-        await router.push('/login')
+        await router.push("/login");
       }
     }
-    void handleRouteChange()
-  }, [user, loading])
+    void handleRouteChange();
+  }, [user, loading]);
 
-  return <p>Redirecting...</p>
+  return <p>Redirecting...</p>;
 }
 ```
 
@@ -552,13 +552,13 @@ If [`useRouter`](#router-object) is not the best fit for you, `withRouter` can a
 ### Usage
 
 ```jsx
-import { withRouter } from 'next/router'
+import { withRouter } from "next/router";
 
 function Page({ router }) {
-  return <p>{router.pathname}</p>
+  return <p>{router.pathname}</p>;
 }
 
-export default withRouter(Page)
+export default withRouter(Page);
 ```
 
 ### TypeScript
@@ -566,22 +566,22 @@ export default withRouter(Page)
 To use class components with `withRouter`, the component needs to accept a router prop:
 
 ```tsx
-import React from 'react'
-import { withRouter, NextRouter } from 'next/router'
+import React from "react";
+import { withRouter, NextRouter } from "next/router";
 
 interface WithRouterProps {
-  router: NextRouter
+  router: NextRouter;
 }
 
 interface MyComponentProps extends WithRouterProps {}
 
 class MyComponent extends React.Component<MyComponentProps> {
   render() {
-    return <p>{this.props.router.pathname}</p>
+    return <p>{this.props.router.pathname}</p>;
   }
 }
 
-export default withRouter(MyComponent)
+export default withRouter(MyComponent);
 ```
 
 # useSearchParams

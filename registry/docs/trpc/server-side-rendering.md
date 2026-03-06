@@ -12,23 +12,23 @@ In order to execute queries properly during the server-side render step we need 
 Additionally, consider [`Response Caching`](../../server/caching.md).
 
 ```tsx title='utils/trpc.ts'
-import { httpBatchLink } from '@trpc/client';
-import { createTRPCNext } from '@trpc/next';
-import { ssrPrepass } from '@trpc/next/ssrPrepass';
-import superjson from 'superjson';
-import type { AppRouter } from './api/trpc/[trpc]';
+import { httpBatchLink } from "@trpc/client";
+import { createTRPCNext } from "@trpc/next";
+import { ssrPrepass } from "@trpc/next/ssrPrepass";
+import superjson from "superjson";
+import type { AppRouter } from "./api/trpc/[trpc]";
 
 export const trpc = createTRPCNext<AppRouter>({
   ssr: true,
   ssrPrepass,
   config(config) {
     const { ctx } = opts;
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       // during client requests
       return {
         links: [
           httpBatchLink({
-            url: '/api/trpc',
+            url: "/api/trpc",
           }),
         ],
       };
@@ -63,20 +63,20 @@ export const trpc = createTRPCNext<AppRouter>({
 or, if you want to SSR conditional on a given request, you can pass a callback to `ssr`. This callback can return a boolean, or a Promise resolving to a boolean:
 
 ```tsx title='utils/trpc.ts'
-import { httpBatchLink } from '@trpc/client';
-import { createTRPCNext } from '@trpc/next';
-import superjson from 'superjson';
-import type { AppRouter } from './api/trpc/[trpc]';
+import { httpBatchLink } from "@trpc/client";
+import { createTRPCNext } from "@trpc/next";
+import superjson from "superjson";
+import type { AppRouter } from "./api/trpc/[trpc]";
 
 export const trpc = createTRPCNext<AppRouter>({
   config(config) {
     const { ctx } = opts;
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       // during client requests
       return {
         links: [
           httpBatchLink({
-            url: '/api/trpc',
+            url: "/api/trpc",
           }),
         ],
       };
@@ -107,15 +107,15 @@ export const trpc = createTRPCNext<AppRouter>({
   },
   ssr(opts) {
     // only SSR if the request is coming from a bot
-    return opts.ctx?.req?.headers['user-agent']?.includes('bot');
+    return opts.ctx?.req?.headers["user-agent"]?.includes("bot");
   },
 });
 ```
 
 ```tsx title='pages/_app.tsx'
-import { trpc } from '~/utils/trpc';
-import type { AppProps } from 'next/app';
-import React from 'react';
+import { trpc } from "~/utils/trpc";
+import type { AppProps } from "next/app";
+import React from "react";
 
 const MyApp: AppType = ({ Component, pageProps }: AppProps) => {
   return <Component {...pageProps} />;
@@ -140,7 +140,7 @@ By default, `@tanstack/react-query` (which we use for the data fetching hooks) r
 
 # Starter Projects
 
-Get started quickly with one of the sample projects! Copy the snippet from *Quick start with `create-next-app`* in the below list to clone the project.
+Get started quickly with one of the sample projects! Copy the snippet from _Quick start with `create-next-app`_ in the below list to clone the project.
 
 ```
   Description
@@ -150,56 +150,56 @@ Get started quickly with one of the sample projects! Copy the snippet from *Quic
 
 
 
-  
+
     Next.js starter with Prisma, E2E testing, &amp; ESLint.
-    
-    
+
+
       Quick start with create-next-app
       yarn create next-app --example https://github.com/trpc/trpc --example-path examples/next-prisma-starter trpc-prisma-starter
-    
-  
+
+
   nextjs.trpc.io
-  
-    
+
+
       CodeSandbox
       Source
-    
-  
 
 
-  
+
+
+
     zART-stack example (zero-API, TypeScript, React).
-    
+
     Monorepo setup with React Native, Next.js, &amp; Prisma
-    
-    
+
+
       Quick start with git clone
       git clone git@github.com:KATT/zart.git
-    
-  
+
+
   n/a
-  
-    
+
+
       Source
-    
-  
 
 
-  
+
+
+
     Next.js TodoMVC-example with SSG & Prisma.
-    
-    
+
+
       Quick start with create-next-app
       yarn create next-app --example https://github.com/trpc/trpc --example-path examples/next-prisma-todomvc trpc-todo
-    
-  
+
+
   todomvc.trpc.io
-  
-    
+
+
       CodeSandbox
       Source
-    
-  
+
+
 ```
 
 # Client Overview
@@ -244,7 +244,7 @@ export type AppRouter = typeof appRouter;
 // ---cut---
 // @filename: utils.ts
 // @noErrors
-import { createTRPCReact } from '@trpc/react-query';
+import { createTRPCReact } from "@trpc/react-query";
 
 export const trpc = createTRPCReact<AppRouter>({
   abortOnUnmount: true,
@@ -264,21 +264,21 @@ You may also override this behaviour at the query level.
 // @include: router
 // @filename: utils/trpc.ts
 // ---cut---
-import { createTRPCReact } from '@trpc/react-query';
-import type { AppRouter } from '../server/router';
+import { createTRPCReact } from "@trpc/react-query";
+import type { AppRouter } from "../server/router";
 
 export const trpc = createTRPCReact<AppRouter>();
 
 // @filename: pages/posts.tsx
 declare const useRouter: any;
 // ---cut---
-import { trpc } from '../utils/trpc';
+import { trpc } from "../utils/trpc";
 
 function PostViewPage() {
   const { query } = useRouter();
   const postQuery = trpc.post.byId.useQuery(
     { id: query.id },
-    { trpc: { abortOnUnmount: true } }
+    { trpc: { abortOnUnmount: true } },
   );
 
   // ...

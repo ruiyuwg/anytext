@@ -41,15 +41,15 @@ This command creates a new Edge Function with the specified name in your project
 Edit the `hello-world` function by modifying the file `supabase/functions/hello-world/index.ts`:
 
 ```ts
-import { Hono } from 'jsr:@hono/hono'
+import { Hono } from "jsr:@hono/hono";
 
 // change this to your function name
-const functionName = 'hello-world'
-const app = new Hono().basePath(`/${functionName}`)
+const functionName = "hello-world";
+const app = new Hono().basePath(`/${functionName}`);
 
-app.get('/hello', (c) => c.text('Hello from hono-server!'))
+app.get("/hello", (c) => c.text("Hello from hono-server!"));
 
-Deno.serve(app.fetch)
+Deno.serve(app.fetch);
 ```
 
 ## 3. Run

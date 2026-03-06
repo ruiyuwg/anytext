@@ -20,13 +20,13 @@ We embrace SQL and built Drizzle to be SQL-like at its core, so you have little 
 // Access your data
 await db
   .select()
-	.from(posts)
-	.leftJoin(comments, eq(posts.id, comments.post_id))
-	.where(eq(posts.id, 10))
+  .from(posts)
+  .leftJoin(comments, eq(posts.id, comments.post_id))
+  .where(eq(posts.id, 10));
 ```
 
 ```sql
-SELECT * 
+SELECT *
 FROM posts
 LEFT JOIN comments ON posts.id = comments.post_id
 WHERE posts.id = 10
@@ -38,7 +38,7 @@ including select, insert, update, delete, as well as using aliases, WITH clauses
 and more. Let's look at more examples
 
 ```ts
-await db.insert(users).values({ email: 'user@gmail.com' })
+await db.insert(users).values({ email: "user@gmail.com" });
 ```
 
 ```sql
@@ -46,19 +46,17 @@ INSERT INTO users (email) VALUES ('user@gmail.com')
 ```
 
 ```ts
-await db.update(users)
-        .set({ email: 'user@gmail.com' })
-        .where(eq(users.id, 1))
+await db.update(users).set({ email: "user@gmail.com" }).where(eq(users.id, 1));
 ```
 
 ```sql
-UPDATE users 
+UPDATE users
 SET email = 'user@gmail.com'
 WHERE users.id = 1
 ```
 
 ```ts
-await db.delete(users).where(eq(users.id, 1))
+await db.delete(users).where(eq(users.id, 1));
 ```
 
 ```sql
@@ -78,9 +76,9 @@ and never worry about performance or roundtrip costs!
 
 ```ts
 const result = await db.query.users.findMany({
-	with: {
-		posts: true
-	},
+  with: {
+    posts: true,
+  },
 });
 ```
 
@@ -91,8 +89,8 @@ SELECT \* FROM users ...
 </Section>
 
 ## Advanced
-With Drizzle, queries can be composed and partitioned in any way you want. You can compose filters 
-independently from the main query, separate subqueries or conditional statements, and much more. 
+With Drizzle, queries can be composed and partitioned in any way you want. You can compose filters
+independently from the main query, separate subqueries or conditional statements, and much more.
 Let's check a few advanced examples:
 
 #### Compose a WHERE statement and then use it in a query
@@ -123,15 +121,15 @@ async function getProductsBy({
 
 ```ts
 const subquery = db
-	.select()
-	.from(internalStaff)
-	.leftJoin(customUser, eq(internalStaff.userId, customUser.id))
-	.as('internal_staff');
+  .select()
+  .from(internalStaff)
+  .leftJoin(customUser, eq(internalStaff.userId, customUser.id))
+  .as("internal_staff");
 
 const mainQuery = await db
-	.select()
-	.from(ticket)
-	.leftJoin(subquery, eq(subquery.internal_staff.userId, ticket.staffId));
+  .select()
+  .from(ticket)
+  .leftJoin(subquery, eq(subquery.internal_staff.userId, ticket.staffId));
 ```
 
 #### What's next?

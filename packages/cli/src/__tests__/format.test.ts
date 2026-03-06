@@ -15,11 +15,17 @@ async function importFormat() {
 describe("useColor detection", () => {
   it("returns false when NO_COLOR is set", async () => {
     vi.stubEnv("NO_COLOR", "1");
-    Object.defineProperty(process.stdout, "isTTY", { value: true, configurable: true });
+    Object.defineProperty(process.stdout, "isTTY", {
+      value: true,
+      configurable: true,
+    });
     const fmt = await importFormat();
     // bold should return plain string when color is off
     expect(fmt.bold("test")).toBe("test");
-    Object.defineProperty(process.stdout, "isTTY", { value: undefined, configurable: true });
+    Object.defineProperty(process.stdout, "isTTY", {
+      value: undefined,
+      configurable: true,
+    });
   });
 
   it("returns true when FORCE_COLOR is set", async () => {
@@ -29,17 +35,29 @@ describe("useColor detection", () => {
   });
 
   it("returns true when stdout is a TTY", async () => {
-    Object.defineProperty(process.stdout, "isTTY", { value: true, configurable: true });
+    Object.defineProperty(process.stdout, "isTTY", {
+      value: true,
+      configurable: true,
+    });
     const fmt = await importFormat();
     expect(fmt.bold("test")).toBe("\x1b[1mtest\x1b[0m");
-    Object.defineProperty(process.stdout, "isTTY", { value: undefined, configurable: true });
+    Object.defineProperty(process.stdout, "isTTY", {
+      value: undefined,
+      configurable: true,
+    });
   });
 
   it("returns false when stdout is not a TTY", async () => {
-    Object.defineProperty(process.stdout, "isTTY", { value: false, configurable: true });
+    Object.defineProperty(process.stdout, "isTTY", {
+      value: false,
+      configurable: true,
+    });
     const fmt = await importFormat();
     expect(fmt.bold("test")).toBe("test");
-    Object.defineProperty(process.stdout, "isTTY", { value: undefined, configurable: true });
+    Object.defineProperty(process.stdout, "isTTY", {
+      value: undefined,
+      configurable: true,
+    });
   });
 
   it("NO_COLOR takes precedence over FORCE_COLOR", async () => {

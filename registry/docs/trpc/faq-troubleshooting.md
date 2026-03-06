@@ -52,13 +52,13 @@ No, a monorepo is not mandatory but you will lose some of the benefits of using 
 
 One way you can leverage tRPC is to publish a private npm package with the types of your backend repo and consume them in your frontend repo.
 
-> *Related discussion: https://github.com/trpc/trpc/discussions/1860*
+> _Related discussion: https://github.com/trpc/trpc/discussions/1860_
 
 ## Can I dynamically return a different output depending on what input I send?
 
 No, not currently, in order for tRPC to do that automatically, we need something called "Higher kinded types" which is not yet supported in TypeScript.
 
-> *Related discussion: https://github.com/trpc/trpc/discussions/2150*
+> _Related discussion: https://github.com/trpc/trpc/discussions/2150_
 
 ## Can I apply a middleware to a full router?
 
@@ -106,11 +106,11 @@ With this, we also consider changes on `export`ed TypeScript `type`s as major ch
 When tRPC started and had very few users and we often iterated on the API design whilst being strict with semver.
 
 - The first 9 versions of tRPC were released in the first 8 months of the project.
-- [Version 10](https://trpc.io/blog/announcing-trpc-10) which we released 14 months after v9 should be seen as the real "version 2" of tRPC where we did any fundamental changes to the API decisions. *(2 is 10 in binary, amirite?)*
+- [Version 10](https://trpc.io/blog/announcing-trpc-10) which we released 14 months after v9 should be seen as the real "version 2" of tRPC where we did any fundamental changes to the API decisions. _(2 is 10 in binary, amirite?)_
 
 We expect the API to be stable now and are planning to release codemods for any breaking changes in the future, just like we did with the v9->v10 upgrade.
 
-***
+---
 
 ## Anything else you want to know?
 

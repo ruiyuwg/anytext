@@ -37,9 +37,9 @@ CREATE TABLE `users` (
 [
   {
     id: 1,
-    timestamp: '2024-04-11 15:40:43' // string
-  }
-]
+    timestamp: "2024-04-11 15:40:43", // string
+  },
+];
 ```
 
 </Section>
@@ -56,7 +56,7 @@ id: integer('id').primaryKey(),
 timestamp1: integer('timestamp1', { mode: 'timestamp' })
 .notNull()
 .default(sql`(unixepoch())`),
-timestamp2: integer('timestamp2', { mode: 'timestamp\_ms' })
+timestamp2: integer('timestamp2', { mode: 'timestamp_ms' })
 .notNull()
 .default(sql`(unixepoch() * 1000)`),
 timestamp3: integer('timestamp3', { mode: 'number' })
@@ -170,19 +170,25 @@ Drizzle has simple and flexible API, which lets you easily create such an index 
 \<CodeTabs items={\["schema.ts", "migration.sql"]}> <CodeTab>
 
 ```ts copy {12,13}
-import { SQL, sql } from 'drizzle-orm';
-import { AnyPgColumn, pgTable, serial, text, uniqueIndex } from 'drizzle-orm/pg-core';
+import { SQL, sql } from "drizzle-orm";
+import {
+  AnyPgColumn,
+  pgTable,
+  serial,
+  text,
+  uniqueIndex,
+} from "drizzle-orm/pg-core";
 
 export const users = pgTable(
-  'users',
+  "users",
   {
-    id: serial('id').primaryKey(),
-    name: text('name').notNull(),
-    email: text('email').notNull(),
+    id: serial("id").primaryKey(),
+    name: text("name").notNull(),
+    email: text("email").notNull(),
   },
   (table) => [
     // uniqueIndex('emailUniqueIndex').on(sql`lower(${table.email})`),
-    uniqueIndex('emailUniqueIndex').on(lower(table.email)),
+    uniqueIndex("emailUniqueIndex").on(lower(table.email)),
   ],
 );
 

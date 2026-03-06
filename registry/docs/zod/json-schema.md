@@ -39,7 +39,7 @@ const schema = z.object({
   age: z.number(),
 });
 
-z.toJSONSchema(schema)
+z.toJSONSchema(schema);
 // => {
 //   type: 'object',
 //   properties: { name: { type: 'string' }, age: { type: 'number' } },
@@ -69,7 +69,7 @@ A second argument can be used to customize the conversion logic.
 ```ts
 z.toJSONSchema(schema, {
   // ...params
-})
+});
 ```
 
 Below is a quick reference for each supported parameter. Each one is explained in more detail below.
@@ -91,7 +91,7 @@ interface ToJSONSchemaParams {
     | ({} & string)
     | undefined;
 
-  /** A registry used to look up metadata for each schema. 
+  /** A registry used to look up metadata for each schema.
    * Any schema with an `id` property will be extracted as a $def. */
   metadata?: $ZodRegistry<Record<string, any>>;
 
@@ -120,16 +120,19 @@ interface ToJSONSchemaParams {
 
 ### `io`
 
-Some schema types have different input and output types, e.g. `ZodPipe`, `ZodDefault`, and coerced primitives. By default, the result of `z.toJSONSchema` represents the *output type*; use `"io": "input"` to extract the input type instead.
+Some schema types have different input and output types, e.g. `ZodPipe`, `ZodDefault`, and coerced primitives. By default, the result of `z.toJSONSchema` represents the _output type_; use `"io": "input"` to extract the input type instead.
 
 ```ts
-const mySchema = z.string().transform(val => val.length).pipe(z.number());
+const mySchema = z
+  .string()
+  .transform((val) => val.length)
+  .pipe(z.number());
 // ZodPipe
 
-const jsonSchema = z.toJSONSchema(mySchema); 
+const jsonSchema = z.toJSONSchema(mySchema);
 // => { type: "number" }
 
-const jsonSchema = z.toJSONSchema(mySchema, { io: "input" }); 
+const jsonSchema = z.toJSONSchema(mySchema, { io: "input" });
 // => { type: "string" }
 ```
 
@@ -155,13 +158,13 @@ In Zod, metadata is stored in registries. Zod exports a global registry `z.globa
 import * as z from "zod";
 
 // `.meta()` is a convenience method for registering a schema in `z.globalRegistry`
-const emailSchema = z.string().meta({ 
+const emailSchema = z.string().meta({
   title: "Email address",
   description: "Your email address",
 });
 
 z.toJSONSchema(emailSchema);
-// => { type: "string", title: "Email address", description: "Your email address", ... } 
+// => { type: "string", title: "Email address", description: "Your email address", ... }
 ```
 
 
@@ -170,13 +173,13 @@ z.toJSONSchema(emailSchema);
 import * as z from "zod";
 
 // `.meta()` is a convenience method for registering a schema in `z.globalRegistry`
-const emailSchema = z.string().register(z.globalRegistry, { 
+const emailSchema = z.string().register(z.globalRegistry, {
   title: "Email address",
   description: "Your email address",
 });
 
 z.toJSONSchema(emailSchema);
-// => { type: "string", title: "Email address", description: "Your email address", ... } 
+// => { type: "string", title: "Email address", description: "Your email address", ... }
 ```
 ````
 
@@ -184,7 +187,7 @@ All metadata fields get copied into the resulting JSON Schema.
 
 ```ts
 const schema = z.string().meta({
-  whatever: 1234
+  whatever: 1234,
 });
 
 z.toJSONSchema(schema);
@@ -193,7 +196,7 @@ z.toJSONSchema(schema);
 
 ### `unrepresentable`
 
-The following APIs are not representable in JSON Schema. By default, Zod will throw an error if they are encountered. It is unsound to attempt a conversion to JSON Schema; you should modify your schemas  as they have no equivalent in JSON. An error will be thrown if any of these are encountered.
+The following APIs are not representable in JSON Schema. By default, Zod will throw an error if they are encountered. It is unsound to attempt a conversion to JSON Schema; you should modify your schemas as they have no equivalent in JSON. An error will be thrown if any of these are encountered.
 
 ```ts
 z.bigint(); // ❌
@@ -265,9 +268,9 @@ const User = z.object({
 z.toJSONSchema(User);
 // => {
 //   type: 'object',
-//   properties: { 
-//     firstName: { type: 'string' }, 
-//     lastName: { type: 'string' } 
+//   properties: {
+//     firstName: { type: 'string' },
+//     lastName: { type: 'string' }
 //   },
 //   required: [ 'firstName', 'lastName' ],
 //   additionalProperties: false,
@@ -292,19 +295,20 @@ z.toJSONSchema(User, { reused: "ref" });
 
 ### `override`
 
-To define some custom override logic, use `override`. The provided callback has access to the original Zod schema and the default JSON Schema. *This function should directly modify `ctx.jsonSchema`.*
+To define some custom override logic, use `override`. The provided callback has access to the original Zod schema and the default JSON Schema. _This function should directly modify `ctx.jsonSchema`._
 
 ```ts
-const mySchema = /* ... */
-z.toJSONSchema(mySchema, {
-  override: (ctx)=>{
-    ctx.zodSchema; // the original Zod schema
-    ctx.jsonSchema; // the default JSON Schema
+const mySchema =
+  /* ... */
+  z.toJSONSchema(mySchema, {
+    override: (ctx) => {
+      ctx.zodSchema; // the original Zod schema
+      ctx.jsonSchema; // the default JSON Schema
 
-    // directly modify
-    ctx.jsonSchema.whatever = "sup";
-  }
-});
+      // directly modify
+      ctx.jsonSchema.whatever = "sup";
+    },
+  });
 ```
 
 Note that unrepresentable types will throw an `Error` before this function is called. If you are trying to define custom behavior for an unrepresentable type, you'll need to set the `unrepresentable: "any"` alongside `override`.
@@ -315,7 +319,7 @@ const result = z.toJSONSchema(z.date(), {
   unrepresentable: "any",
   override: (ctx) => {
     const def = ctx.zodSchema._zod.def;
-    if(def.type ==="date"){
+    if (def.type === "date") {
       ctx.jsonSchema.type = "string";
       ctx.jsonSchema.format = "date-time";
     }
@@ -392,7 +396,7 @@ const schema = z.object({
   age: z.number(),
 });
 
-z.toJSONSchema(schema)
+z.toJSONSchema(schema);
 // => {
 //   type: 'object',
 //   properties: { name: { type: 'string' }, age: { type: 'number' } },
@@ -421,8 +425,8 @@ z.toJSONSchema(schema, { io: "input" });
 
 By contrast:
 
-- `z.looseObject()` will *never* set `additionalProperties: false`
-- `z.strictObject()` will *always* set `additionalProperties: false`
+- `z.looseObject()` will _never_ set `additionalProperties: false`
+- `z.strictObject()` will _always_ set `additionalProperties: false`
 
 ### File schemas
 
@@ -436,7 +440,10 @@ z.file();
 Size and MIME checks are also represented:
 
 ```ts
-z.file().min(1).max(1024 * 1024).mime("image/png");
+z.file()
+  .min(1)
+  .max(1024 * 1024)
+  .mime("image/png");
 // => {
 //   type: "string",
 //   format: "binary",
@@ -474,11 +481,11 @@ z.optional(z.string());
 
 {/\* ### Pipes
 
-Pipes contain an input and an output schema. Zod uses the *output schema* for JSON Schema conversion. \*/}
+Pipes contain an input and an output schema. Zod uses the _output schema_ for JSON Schema conversion. \*/}
 
 ## Registries
 
-Passing a schema into `z.toJSONSchema()` will return a *self-contained* JSON Schema.
+Passing a schema into `z.toJSONSchema()` will return a _self-contained_ JSON Schema.
 
 In other cases, you may have a set of Zod schemas you'd like to represent using multiple interlinked JSON Schemas, perhaps to write to `.json` files and serve from a web server.
 
@@ -487,21 +494,21 @@ import * as z from "zod";
 
 const User = z.object({
   name: z.string(),
-  get posts(){
+  get posts() {
     return z.array(Post);
-  }
+  },
 });
 
 const Post = z.object({
   title: z.string(),
   content: z.string(),
-  get author(){
+  get author() {
     return User;
-  }
+  },
 });
 
-z.globalRegistry.add(User, {id: "User"});
-z.globalRegistry.add(Post, {id: "Post"});
+z.globalRegistry.add(User, { id: "User" });
+z.globalRegistry.add(Post, { id: "Post" });
 ```
 
 To achieve this, you can pass a [registry](/metadata#registries) into `z.toJSONSchema()`.
@@ -541,7 +548,7 @@ By default, the `$ref` URIs are simple relative paths like `"User"`. To make the
 
 ```ts
 z.toJSONSchema(z.globalRegistry, {
-  uri: (id) => `https://example.com/${id}.json`
+  uri: (id) => `https://example.com/${id}.json`,
 });
 // => {
 //   schemas: {

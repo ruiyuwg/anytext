@@ -30,7 +30,7 @@ import type { AnyPgColumn } from "drizzle-orm/pg-core";
 export const users = pgTable('users', {
 id: serial('id').primaryKey(),
 name: text('name'),
-reportsTo: integer('reports\_to').references((): AnyPgColumn => users.id),
+reportsTo: integer('reports_to').references((): AnyPgColumn => users.id),
 });
 
 ```
@@ -47,7 +47,7 @@ You can't specify "users" as parameter in users.with object.
 ````
 
 <Callout title='Why?'>
-You have a `users` table referencing a `users` table in your schema, 
+You have a `users` table referencing a `users` table in your schema,
 ```ts copy{7}
 .
 .
@@ -134,7 +134,7 @@ and you didn't specify a table for foreign key on column 'userId' in 'bloodPress
 ````
 
 <Callout title='What does it mean?'>
-This means we can't fill the `userId` column with Null values due to the not-null constraint on that column. 
+This means we can't fill the `userId` column with Null values due to the not-null constraint on that column.
 Additionally, you didn't expose the `users` table to the `seed` function schema, so we can't generate `users.id` to populate the `userId` column with these values.
 </Callout>
 
@@ -142,7 +142,7 @@ Additionally, you didn't expose the `users` table to the `seed` function schema,
 At this point, you have several options to resolve the error:
 - You can remove the not-null constraint from the `userId` column;
 - You can expose `users` table to `seed` function schema
-```ts 
+```ts
 await seed(db, { bloodPressure, users });
 ````
 

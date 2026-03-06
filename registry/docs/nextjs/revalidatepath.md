@@ -38,11 +38,11 @@ The path parameter can point to pages, layouts, or route handlers:
 
 ```ts filename="app/api/data/route.ts"
 export async function GET() {
-  const data = await fetch('https://api.vercel.app/blog', {
-    cache: 'force-cache',
-  })
+  const data = await fetch("https://api.vercel.app/blog", {
+    cache: "force-cache",
+  });
 
-  return Response.json(await data.json())
+  return Response.json(await data.json());
 }
 ```
 
@@ -58,14 +58,14 @@ When you call `revalidatePath`, only the specified path gets fresh data on the n
 
 ```tsx
 // Page A: /blog
-const posts = await fetch('https://api.vercel.app/blog', {
-  next: { tags: ['posts'] },
-})
+const posts = await fetch("https://api.vercel.app/blog", {
+  next: { tags: ["posts"] },
+});
 
 // Page B: /dashboard
-const recentPosts = await fetch('https://api.vercel.app/blog?limit=5', {
-  next: { tags: ['posts'] },
-})
+const recentPosts = await fetch("https://api.vercel.app/blog?limit=5", {
+  next: { tags: ["posts"] },
+});
 ```
 
 After calling `revalidatePath('/blog')`:
@@ -80,15 +80,15 @@ Learn about the difference between [`revalidateTag` and `updateTag`](/docs/app/a
 `revalidatePath` and `updateTag` are complementary primitives that are often used together in utility functions to ensure comprehensive data consistency across your application:
 
 ```ts
-'use server'
+"use server";
 
-import { revalidatePath, updateTag } from 'next/cache'
+import { revalidatePath, updateTag } from "next/cache";
 
 export async function updatePost() {
-  await updatePostInDatabase()
+  await updatePostInDatabase();
 
-  revalidatePath('/blog') // Refresh the blog page
-  updateTag('posts') // Refresh all pages using 'posts' tag
+  revalidatePath("/blog"); // Refresh the blog page
+  updateTag("posts"); // Refresh all pages using 'posts' tag
 }
 ```
 
@@ -99,8 +99,8 @@ This pattern ensures that both the specific page and any other pages using the s
 ### Revalidating a specific URL
 
 ```ts
-import { revalidatePath } from 'next/cache'
-revalidatePath('/blog/post-1')
+import { revalidatePath } from "next/cache";
+revalidatePath("/blog/post-1");
 ```
 
 This will invalidate one specific URL for revalidation on the next page visit.
@@ -108,21 +108,21 @@ This will invalidate one specific URL for revalidation on the next page visit.
 ### Revalidating a Page path
 
 ```ts
-import { revalidatePath } from 'next/cache'
-revalidatePath('/blog/[slug]', 'page')
+import { revalidatePath } from "next/cache";
+revalidatePath("/blog/[slug]", "page");
 // or with route groups
-revalidatePath('/(main)/blog/[slug]', 'page')
+revalidatePath("/(main)/blog/[slug]", "page");
 ```
 
-This will invalidate any URL that matches the provided `page` file for revalidation on the next page visit. This will *not* invalidate pages beneath the specific page. For example, `/blog/[slug]` won't invalidate `/blog/[slug]/[author]`.
+This will invalidate any URL that matches the provided `page` file for revalidation on the next page visit. This will _not_ invalidate pages beneath the specific page. For example, `/blog/[slug]` won't invalidate `/blog/[slug]/[author]`.
 
 ### Revalidating a Layout path
 
 ```ts
-import { revalidatePath } from 'next/cache'
-revalidatePath('/blog/[slug]', 'layout')
+import { revalidatePath } from "next/cache";
+revalidatePath("/blog/[slug]", "layout");
 // or with route groups
-revalidatePath('/(main)/post/[slug]', 'layout')
+revalidatePath("/(main)/post/[slug]", "layout");
 ```
 
 This will invalidate any URL that matches the provided `layout` file for revalidation on the next page visit. This will cause pages beneath with the same layout to be invalidated and revalidated on the next visit. For example, in the above case, `/blog/[slug]/[another]` would also be invalidated and revalidated on the next visit.
@@ -130,9 +130,9 @@ This will invalidate any URL that matches the provided `layout` file for revalid
 ### Revalidating all data
 
 ```ts
-import { revalidatePath } from 'next/cache'
+import { revalidatePath } from "next/cache";
 
-revalidatePath('/', 'layout')
+revalidatePath("/", "layout");
 ```
 
 This will purge the Client-side Router Cache, and invalidate the Data Cache for revalidation on the next page visit.
@@ -140,54 +140,54 @@ This will purge the Client-side Router Cache, and invalidate the Data Cache for 
 ### Server Function
 
 ```ts filename="app/actions.ts" switcher
-'use server'
+"use server";
 
-import { revalidatePath } from 'next/cache'
+import { revalidatePath } from "next/cache";
 
 export default async function submit() {
-  await submitForm()
-  revalidatePath('/')
+  await submitForm();
+  revalidatePath("/");
 }
 ```
 
 ### Route Handler
 
 ```ts filename="app/api/revalidate/route.ts" switcher
-import { revalidatePath } from 'next/cache'
-import type { NextRequest } from 'next/server'
+import { revalidatePath } from "next/cache";
+import type { NextRequest } from "next/server";
 
 export async function GET(request: NextRequest) {
-  const path = request.nextUrl.searchParams.get('path')
+  const path = request.nextUrl.searchParams.get("path");
 
   if (path) {
-    revalidatePath(path)
-    return Response.json({ revalidated: true, now: Date.now() })
+    revalidatePath(path);
+    return Response.json({ revalidated: true, now: Date.now() });
   }
 
   return Response.json({
     revalidated: false,
     now: Date.now(),
-    message: 'Missing path to revalidate',
-  })
+    message: "Missing path to revalidate",
+  });
 }
 ```
 
 ```js filename="app/api/revalidate/route.js" switcher
-import { revalidatePath } from 'next/cache'
+import { revalidatePath } from "next/cache";
 
 export async function GET(request) {
-  const path = request.nextUrl.searchParams.get('path')
+  const path = request.nextUrl.searchParams.get("path");
 
   if (path) {
-    revalidatePath(path)
-    return Response.json({ revalidated: true, now: Date.now() })
+    revalidatePath(path);
+    return Response.json({ revalidated: true, now: Date.now() });
   }
 
   return Response.json({
     revalidated: false,
     now: Date.now(),
-    message: 'Missing path to revalidate',
-  })
+    message: "Missing path to revalidate",
+  });
 }
 ```
 

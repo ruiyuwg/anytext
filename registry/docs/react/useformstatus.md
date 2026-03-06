@@ -6,21 +6,21 @@
 const { pending, data, method, action } = useFormStatus();
 ```
 
-***
+---
 
-## Reference {/*reference*/}
+## Reference {/_reference_/}
 
-### `useFormStatus()` {/*use-form-status*/}
+### `useFormStatus()` {/_use-form-status_/}
 
 The `useFormStatus` Hook provides status information of the last form submission.
 
 ```js {5},[[1, 6, "status.pending"]]
 import { useFormStatus } from "react-dom";
-import action from './actions';
+import action from "./actions";
 
 function Submit() {
   const status = useFormStatus();
-  return <button disabled={status.pending}>Submit</button>
+  return <button disabled={status.pending}>Submit</button>;
 }
 
 export default function App() {
@@ -38,11 +38,11 @@ In the above example, `Submit` uses this information to disable `<button>` press
 
 [See more examples below.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parameters {/_parameters_/}
 
 `useFormStatus` does not take any parameters.
 
-#### Returns {/*returns*/}
+#### Returns {/_returns_/}
 
 A `status` object with the following properties:
 
@@ -56,16 +56,16 @@ A `status` object with the following properties:
 
 - `action`: A reference to the function passed to the `action` prop on the parent `<form>`. If there is no parent `<form>`, the property is `null`. If there is a URI value provided to the `action` prop, or no `action` prop specified, `status.action` will be `null`.
 
-#### Caveats {/*caveats*/}
+#### Caveats {/_caveats_/}
 
 - The `useFormStatus` Hook must be called from a component that is rendered inside a `<form>`.
 - `useFormStatus` will only return status information for a parent `<form>`. It will not return status information for any `<form>` rendered in that same component or children components.
 
-***
+---
 
-## Usage {/*usage*/}
+## Usage {/_usage_/}
 
-### Display a pending state during form submission {/*display-a-pending-state-during-form-submission*/}
+### Display a pending state during form submission {/_display-a-pending-state-during-form-submission_/}
 
 To display a pending state while a form is submitting, you can call the `useFormStatus` Hook in a component rendered in a `<form>` and read the `pending` property returned.
 
@@ -99,11 +99,11 @@ export default function App() {
 
 ```js src/actions.js hidden
 export async function submitForm(query) {
-    await new Promise((res) => setTimeout(res, 1000));
+  await new Promise((res) => setTimeout(res, 1000));
 }
 ```
 
-##### `useFormStatus` will not return status information for a `<form>` rendered in the same component. {/*useformstatus-will-not-return-status-information-for-a-form-rendered-in-the-same-component*/}
+##### `useFormStatus` will not return status information for a `<form>` rendered in the same component. {/_useformstatus-will-not-return-status-information-for-a-form-rendered-in-the-same-component_/}
 
 The `useFormStatus` Hook only returns status information for a parent `<form>` and not for any `<form>` rendered in the same component calling the Hook, or child components.
 
@@ -121,7 +121,7 @@ Instead call `useFormStatus` from inside a component that is located inside `<fo
 ```js
 function Submit() {
   // ✅ `pending` will be derived from the form that wraps the Submit component
-  const { pending } = useFormStatus(); 
+  const { pending } = useFormStatus();
   return <button disabled={pending}>...</button>;
 }
 
@@ -135,45 +135,48 @@ function Form() {
 }
 ```
 
-### Read the form data being submitted {/*read-form-data-being-submitted*/}
+### Read the form data being submitted {/_read-form-data-being-submitted_/}
 
 You can use the `data` property of the status information returned from `useFormStatus` to display what data is being submitted by the user.
 
 Here, we have a form where users can request a username. We can use `useFormStatus` to display a temporary status message confirming what username they have requested.
 
 ```js src/UsernameForm.js active
-import {useState, useMemo, useRef} from 'react';
-import {useFormStatus} from 'react-dom';
+import { useState, useMemo, useRef } from "react";
+import { useFormStatus } from "react-dom";
 
 export default function UsernameForm() {
-  const {pending, data} = useFormStatus();
+  const { pending, data } = useFormStatus();
 
   return (
     <div>
       <h3>Request a Username: </h3>
-      <input type="text" name="username" disabled={pending}/>
+      <input type="text" name="username" disabled={pending} />
       <button type="submit" disabled={pending}>
         Submit
       </button>
       <br />
-      <p>{data ? `Requesting ${data?.get("username")}...`: ''}</p>
+      <p>{data ? `Requesting ${data?.get("username")}...` : ""}</p>
     </div>
   );
 }
 ```
 
 ```js src/App.js
-import UsernameForm from './UsernameForm';
+import UsernameForm from "./UsernameForm";
 import { submitForm } from "./actions.js";
-import {useRef} from 'react';
+import { useRef } from "react";
 
 export default function App() {
   const ref = useRef(null);
   return (
-    <form ref={ref} action={async (formData) => {
-      await submitForm(formData);
-      ref.current.reset();
-    }}>
+    <form
+      ref={ref}
+      action={async (formData) => {
+        await submitForm(formData);
+        ref.current.reset();
+      }}
+    >
       <UsernameForm />
     </form>
   );
@@ -182,29 +185,28 @@ export default function App() {
 
 ```js src/actions.js hidden
 export async function submitForm(query) {
-    await new Promise((res) => setTimeout(res, 2000));
+  await new Promise((res) => setTimeout(res, 2000));
 }
 ```
 
 ```css
 p {
-    height: 14px;
-    padding: 0;
-    margin: 2px 0 0 0 ;
-    font-size: 14px
+  height: 14px;
+  padding: 0;
+  margin: 2px 0 0 0;
+  font-size: 14px;
 }
 
 button {
-    margin-left: 2px;
+  margin-left: 2px;
 }
-
 ```
 
-***
+---
 
-## Troubleshooting {/*troubleshooting*/}
+## Troubleshooting {/_troubleshooting_/}
 
-### `status.pending` is never `true` {/*pending-is-never-true*/}
+### `status.pending` is never `true` {/_pending-is-never-true_/}
 
 `useFormStatus` will only return status information for a parent `<form>`.
 
@@ -212,7 +214,7 @@ If the component that calls `useFormStatus` is not nested in a `<form>`, `status
 
 `useFormStatus` will not track the status of a `<form>` rendered in the same component. See [Pitfall](#useformstatus-will-not-return-status-information-for-a-form-rendered-in-the-same-component) for more details.
 
-***
+---
 
 ## Sitemap
 

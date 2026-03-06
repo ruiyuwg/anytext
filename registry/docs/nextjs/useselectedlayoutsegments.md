@@ -5,12 +5,12 @@
 It is useful for creating UI in parent Layouts that need knowledge of active child segments such as breadcrumbs.
 
 ```tsx filename="app/example-client-component.tsx" switcher
-'use client'
+"use client";
 
-import { useSelectedLayoutSegments } from 'next/navigation'
+import { useSelectedLayoutSegments } from "next/navigation";
 
 export default function ExampleClientComponent() {
-  const segments = useSelectedLayoutSegments()
+  const segments = useSelectedLayoutSegments();
 
   return (
     <ul>
@@ -18,17 +18,17 @@ export default function ExampleClientComponent() {
         <li key={index}>{segment}</li>
       ))}
     </ul>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/example-client-component.js" switcher
-'use client'
+"use client";
 
-import { useSelectedLayoutSegments } from 'next/navigation'
+import { useSelectedLayoutSegments } from "next/navigation";
 
 export default function ExampleClientComponent() {
-  const segments = useSelectedLayoutSegments()
+  const segments = useSelectedLayoutSegments();
 
   return (
     <ul>
@@ -36,7 +36,7 @@ export default function ExampleClientComponent() {
         <li key={index}>{segment}</li>
       ))}
     </ul>
-  )
+  );
 }
 ```
 
@@ -52,7 +52,7 @@ export default function ExampleClientComponent() {
 const segments = useSelectedLayoutSegments(parallelRoutesKey?: string)
 ```
 
-`useSelectedLayoutSegments` *optionally* accepts a [`parallelRoutesKey`](/docs/app/api-reference/file-conventions/parallel-routes#with-useselectedlayoutsegments), which allows you to read the active route segment within that slot.
+`useSelectedLayoutSegments` _optionally_ accepts a [`parallelRoutesKey`](/docs/app/api-reference/file-conventions/parallel-routes#with-useselectedlayoutsegments), which allows you to read the active route segment within that slot.
 
 ## Returns
 

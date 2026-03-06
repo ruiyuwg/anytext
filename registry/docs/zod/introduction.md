@@ -58,19 +58,19 @@ These can now be cleanly represented with the new `error` parameter.
 
 
   ```ts
-  z.string({ 
-    error: (issue) => issue.input === undefined 
-      ? "This field is required" 
-      : "Not a string" 
+  z.string({
+    error: (issue) => issue.input === undefined
+      ? "This field is required"
+      : "Not a string"
   });
   ```
 
 
 
   ```ts
-  z.string({ 
+  z.string({
     required_error: "This field is required",
-    invalid_type_error: "Not a string", 
+    invalid_type_error: "Not a string",
   });
   ```
 
@@ -109,12 +109,12 @@ Error maps can also now return a plain `string` (instead of `{message: string}`)
 
 
 
-{/* ## `.safeParse()` 
+{/* ## `.safeParse()`
 
-For performance reasons, the errors returned by `.safeParse()` and `.safeParseAsync()` no longer extend `Error`. 
+For performance reasons, the errors returned by `.safeParse()` and `.safeParseAsync()` no longer extend `Error`.
 
 ```ts
-const result = z.string().safeParse(12); 
+const result = z.string().safeParse(12);
 result.error! instanceof Error; // => false
 ````
 
@@ -126,9 +126,9 @@ By contrast the errors thrown by `.parse()` and `.parseAsync()` still extend `Er
 
 ```ts
 try {
-z.string().parse(12);
+  z.string().parse(12);
 } catch (err) {
-console.log(err instanceof Error); // => true
+  console.log(err instanceof Error); // => true
 }
 ```
 

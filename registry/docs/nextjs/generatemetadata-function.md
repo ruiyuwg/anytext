@@ -7,32 +7,32 @@ Resolving `generateMetadata` is part of rendering the page. If the page can be p
 Otherwise the metadata resolved from `generateMetadata` [can be streamed](/docs/app/api-reference/functions/generate-metadata#streaming-metadata) after sending the initial UI.
 
 ```tsx filename="app/products/[id]/page.tsx" switcher
-import type { Metadata, ResolvingMetadata } from 'next'
+import type { Metadata, ResolvingMetadata } from "next";
 
 type Props = {
-  params: Promise<{ id: string }>
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
-}
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
 
 export async function generateMetadata(
   { params, searchParams }: Props,
-  parent: ResolvingMetadata
+  parent: ResolvingMetadata,
 ): Promise<Metadata> {
   // read route params
-  const { id } = await params
+  const { id } = await params;
 
   // fetch data
-  const product = await fetch(`https://.../${id}`).then((res) => res.json())
+  const product = await fetch(`https://.../${id}`).then((res) => res.json());
 
   // optionally access and extend (rather than replace) parent metadata
-  const previousImages = (await parent).openGraph?.images || []
+  const previousImages = (await parent).openGraph?.images || [];
 
   return {
     title: product.title,
     openGraph: {
-      images: ['/some-specific-page-image.jpg', ...previousImages],
+      images: ["/some-specific-page-image.jpg", ...previousImages],
     },
-  }
+  };
 }
 
 export default function Page({ params, searchParams }: Props) {}
@@ -41,20 +41,20 @@ export default function Page({ params, searchParams }: Props) {}
 ```jsx filename="app/products/[id]/page.js" switcher
 export async function generateMetadata({ params, searchParams }, parent) {
   // read route params
-  const { id } = await params
+  const { id } = await params;
 
   // fetch data
-  const product = await fetch(`https://.../${id}`).then((res) => res.json())
+  const product = await fetch(`https://.../${id}`).then((res) => res.json());
 
   // optionally access and extend (rather than replace) parent metadata
-  const previousImages = (await parent).openGraph?.images || []
+  const previousImages = (await parent).openGraph?.images || [];
 
   return {
     title: product.title,
     openGraph: {
-      images: ['/some-specific-page-image.jpg', ...previousImages],
+      images: ["/some-specific-page-image.jpg", ...previousImages],
     },
-  }
+  };
 }
 
 export default function Page({ params, searchParams }) {}

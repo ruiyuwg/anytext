@@ -13,8 +13,8 @@ Procedures in tRPC are very flexible primitives to create backend functions. The
 The `t` object you create during tRPC setup returns an initial `t.procedure` which all other procedures are built on:
 
 ```ts twoslash
-import { initTRPC } from '@trpc/server';
-import { z } from 'zod';
+import { initTRPC } from "@trpc/server";
+import { z } from "zod";
 
 const t = initTRPC.context<{ signGuestBook: () => Promise<void> }>().create();
 
@@ -25,7 +25,7 @@ const appRouter = router({
   // Queries are the best place to fetch data
   hello: publicProcedure.query(() => {
     return {
-      message: 'hello world',
+      message: "hello world",
     };
   }),
 
@@ -34,7 +34,7 @@ const appRouter = router({
     await opts.ctx.signGuestBook();
 
     return {
-      message: 'goodbye!',
+      message: "goodbye!",
     };
   }),
 });
@@ -50,15 +50,15 @@ In the below code, we're using reusable base procedures to build common use-case
 
 ```ts twoslash
 // @target: esnext
-import { initTRPC, TRPCError } from '@trpc/server';
-import { z } from 'zod';
+import { initTRPC, TRPCError } from "@trpc/server";
+import { z } from "zod";
 
 type Organization = {
   id: string;
   name: string;
 };
 type Membership = {
-  role: 'ADMIN' | 'MEMBER';
+  role: "ADMIN" | "MEMBER";
   Organization: Organization;
 };
 type User = {
@@ -82,7 +82,7 @@ export const authedProcedure = t.procedure.use(async function isAuthed(opts) {
   // `ctx.user` is nullable
   if (!ctx.user) {
     //     ^?
-    throw new TRPCError({ code: 'UNAUTHORIZED' });
+    throw new TRPCError({ code: "UNAUTHORIZED" });
   }
 
   return opts.next({
@@ -102,7 +102,7 @@ export const organizationProcedure = authedProcedure
     );
     if (!membership) {
       throw new TRPCError({
-        code: 'FORBIDDEN',
+        code: "FORBIDDEN",
       });
     }
     return opts.next({
@@ -134,7 +134,7 @@ export const appRouter = t.router({
       const { input } = opts;
       //       ^?
 
-      return '...';
+      return "...";
     }),
 });
 ```
@@ -152,15 +152,15 @@ import {
   inferProcedureBuilderResolverOptions,
   initTRPC,
   TRPCError,
-} from '@trpc/server';
-import { z } from 'zod';
+} from "@trpc/server";
+import { z } from "zod";
 
 type Organization = {
   id: string;
   name: string;
 };
 type Membership = {
-  role: 'ADMIN' | 'MEMBER';
+  role: "ADMIN" | "MEMBER";
   Organization: Organization;
 };
 type User = {
@@ -184,7 +184,7 @@ export const authedProcedure = t.procedure.use(async function isAuthed(opts) {
   // `ctx.user` is nullable
   if (!ctx.user) {
     //     ^?
-    throw new TRPCError({ code: 'UNAUTHORIZED' });
+    throw new TRPCError({ code: "UNAUTHORIZED" });
   }
 
   return opts.next({
@@ -206,7 +206,7 @@ export const organizationProcedure = authedProcedure
     );
     if (!membership) {
       throw new TRPCError({
-        code: 'FORBIDDEN',
+        code: "FORBIDDEN",
       });
     }
     return opts.next({

@@ -129,6 +129,7 @@ packages/scraper/src/__tests__/
 ### Config
 
 Both `packages/cli/vitest.config.ts` and `packages/scraper/vitest.config.ts`:
+
 - `test.include`: `["src/**/*.test.ts"]`
 - `test.coverage.exclude`: `["src/types.ts"]` (pure type defs)
 - `test.restoreMocks`: `true`

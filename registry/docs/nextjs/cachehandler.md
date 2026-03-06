@@ -6,9 +6,9 @@ You can configure the Next.js cache location if you want to persist cached pages
 
 ```js filename="next.config.js"
 module.exports = {
-  cacheHandler: require.resolve('./cache-handler.js'),
+  cacheHandler: require.resolve("./cache-handler.js"),
   cacheMaxMemorySize: 0, // disable default in-memory caching
-}
+};
 ```
 
 View an example of a [custom cache handler](/docs/app/guides/self-hosting#configuring-caching) and learn more about the implementation.

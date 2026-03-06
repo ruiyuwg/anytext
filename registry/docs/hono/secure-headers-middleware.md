@@ -5,8 +5,8 @@ Secure Headers Middleware simplifies the setup of security headers. Inspired in 
 ## Import
 
 ```ts
-import { Hono } from 'hono'
-import { secureHeaders } from 'hono/secure-headers'
+import { Hono } from "hono";
+import { secureHeaders } from "hono/secure-headers";
 ```
 
 ## Usage
@@ -14,36 +14,35 @@ import { secureHeaders } from 'hono/secure-headers'
 You can use the optimal settings by default.
 
 ```ts
-const app = new Hono()
-app.use(secureHeaders())
+const app = new Hono();
+app.use(secureHeaders());
 ```
 
 You can suppress unnecessary headers by setting them to false.
 
 ```ts
-const app = new Hono()
+const app = new Hono();
 app.use(
-  '*',
+  "*",
   secureHeaders({
     xFrameOptions: false,
     xXssProtection: false,
-  })
-)
+  }),
+);
 ```
 
 You can override default header values using a string.
 
 ```ts
-const app = new Hono()
+const app = new Hono();
 app.use(
-  '*',
+  "*",
   secureHeaders({
-    strictTransportSecurity:
-      'max-age=63072000; includeSubDomains; preload',
-    xFrameOptions: 'DENY',
-    xXssProtection: '1',
-  })
-)
+    strictTransportSecurity: "max-age=63072000; includeSubDomains; preload",
+    xFrameOptions: "DENY",
+    xXssProtection: "1",
+  }),
+);
 ```
 
 ## Supported Options
@@ -80,30 +79,30 @@ Please be cautious about the order of specification when dealing with middleware
 In this case, Secure-headers operates and the `x-powered-by` is removed:
 
 ```ts
-const app = new Hono()
-app.use(secureHeaders())
-app.use(poweredBy())
+const app = new Hono();
+app.use(secureHeaders());
+app.use(poweredBy());
 ```
 
 In this case, Powered-By operates and the `x-powered-by` is added:
 
 ```ts
-const app = new Hono()
-app.use(poweredBy())
-app.use(secureHeaders())
+const app = new Hono();
+app.use(poweredBy());
+app.use(secureHeaders());
 ```
 
 ## Setting Content-Security-Policy
 
 ```ts
-const app = new Hono()
+const app = new Hono();
 app.use(
-  '/test',
+  "/test",
   secureHeaders({
     reportingEndpoints: [
       {
-        name: 'endpoint-1',
-        url: 'https://example.com/reports',
+        name: "endpoint-1",
+        url: "https://example.com/reports",
       },
     ],
     // -- or alternatively
@@ -119,28 +118,28 @@ app.use(
       baseUri: ["'self'"],
       childSrc: ["'self'"],
       connectSrc: ["'self'"],
-      fontSrc: ["'self'", 'https:', 'data:'],
+      fontSrc: ["'self'", "https:", "data:"],
       formAction: ["'self'"],
       frameAncestors: ["'self'"],
       frameSrc: ["'self'"],
-      imgSrc: ["'self'", 'data:'],
+      imgSrc: ["'self'", "data:"],
       manifestSrc: ["'self'"],
       mediaSrc: ["'self'"],
       objectSrc: ["'none'"],
-      reportTo: 'endpoint-1',
-      reportUri: '/csp-report',
-      sandbox: ['allow-same-origin', 'allow-scripts'],
+      reportTo: "endpoint-1",
+      reportUri: "/csp-report",
+      sandbox: ["allow-same-origin", "allow-scripts"],
       scriptSrc: ["'self'"],
       scriptSrcAttr: ["'none'"],
       scriptSrcElem: ["'self'"],
-      styleSrc: ["'self'", 'https:', "'unsafe-inline'"],
-      styleSrcAttr: ['none'],
-      styleSrcElem: ["'self'", 'https:', "'unsafe-inline'"],
+      styleSrc: ["'self'", "https:", "'unsafe-inline'"],
+      styleSrcAttr: ["none"],
+      styleSrcElem: ["'self'", "https:", "'unsafe-inline'"],
       upgradeInsecureRequests: [],
       workerSrc: ["'self'"],
     },
-  })
-)
+  }),
+);
 ```
 
 ### `nonce` attribute
@@ -169,15 +168,15 @@ app.get(
 // Get the value from `c.get('secureHeadersNonce')`:
 app.get('/', (c) => {
   return c.html(
-    
-      
+
+
         {/** contents */}
         <script
           src='/js/client.js'
           nonce={c.get('secureHeadersNonce')}
         />
-      
-    
+
+
   )
 })
 ```
@@ -186,35 +185,30 @@ If you want to generate the nonce value yourself, you can also specify a functio
 
 ```tsx
 const app = new Hono<{
-  Variables: { myNonce: string }
-}>()
+  Variables: { myNonce: string };
+}>();
 
 const myNonceGenerator: ContentSecurityPolicyOptionHandler = (c) => {
   // This function is called on every request.
-  const nonce = Math.random().toString(36).slice(2)
-  c.set('myNonce', nonce)
-  return `'nonce-${nonce}'`
-}
+  const nonce = Math.random().toString(36).slice(2);
+  c.set("myNonce", nonce);
+  return `'nonce-${nonce}'`;
+};
 
 app.get(
-  '*',
+  "*",
   secureHeaders({
     contentSecurityPolicy: {
-      scriptSrc: [myNonceGenerator, 'https://allowed1.example.com'],
+      scriptSrc: [myNonceGenerator, "https://allowed1.example.com"],
     },
-  })
-)
+  }),
+);
 
-app.get('/', (c) => {
-  return c.html(
-    
-      
-        {/** contents */}
-        
-      
-    
-  )
-})
+app.get("/", (c) => {
+  return c.html({
+    /** contents */
+  });
+});
 ```
 
 ## Setting Permission-Policy
@@ -222,26 +216,23 @@ app.get('/', (c) => {
 The Permission-Policy header allows you to control which features and APIs can be used in the browser. Here's an example of how to set it:
 
 ```ts
-const app = new Hono()
+const app = new Hono();
 app.use(
-  '*',
+  "*",
   secureHeaders({
     permissionsPolicy: {
-      fullscreen: ['self'], // fullscreen=(self)
-      bluetooth: ['none'], // bluetooth=(none)
-      payment: ['self', 'https://example.com'], // payment=(self "https://example.com")
+      fullscreen: ["self"], // fullscreen=(self)
+      bluetooth: ["none"], // bluetooth=(none)
+      payment: ["self", "https://example.com"], // payment=(self "https://example.com")
       syncXhr: [], // sync-xhr=()
       camera: false, // camera=none
       microphone: true, // microphone=*
-      geolocation: ['*'], // geolocation=*
-      usb: ['self', 'https://a.example.com', 'https://b.example.com'], // usb=(self "https://a.example.com" "https://b.example.com")
-      accelerometer: ['https://*.example.com'], // accelerometer=("https://*.example.com")
-      gyroscope: ['src'], // gyroscope=(src)
-      magnetometer: [
-        'https://a.example.com',
-        'https://b.example.com',
-      ], // magnetometer=("https://a.example.com" "https://b.example.com")
+      geolocation: ["*"], // geolocation=*
+      usb: ["self", "https://a.example.com", "https://b.example.com"], // usb=(self "https://a.example.com" "https://b.example.com")
+      accelerometer: ["https://*.example.com"], // accelerometer=("https://*.example.com")
+      gyroscope: ["src"], // gyroscope=(src)
+      magnetometer: ["https://a.example.com", "https://b.example.com"], // magnetometer=("https://a.example.com" "https://b.example.com")
     },
-  })
-)
+  }),
+);
 ```

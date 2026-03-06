@@ -5,8 +5,8 @@ The Adapter Helper provides a seamless way to interact with various platforms th
 ## Import
 
 ```ts
-import { Hono } from 'hono'
-import { env, getRuntimeKey } from 'hono/adapter'
+import { Hono } from "hono";
+import { env, getRuntimeKey } from "hono/adapter";
 ```
 
 ## `env()`
@@ -14,14 +14,14 @@ import { env, getRuntimeKey } from 'hono/adapter'
 The `env()` function facilitates retrieving environment variables across different runtimes, extending beyond just Cloudflare Workers' Bindings. The value that can be retrieved with `env(c)` may be different for each runtimes.
 
 ```ts
-import { env } from 'hono/adapter'
+import { env } from "hono/adapter";
 
-app.get('/env', (c) => {
+app.get("/env", (c) => {
   // NAME is process.env.NAME on Node.js or Bun
   // NAME is the value written in `wrangler.toml` on Cloudflare
-  const { NAME } = env<{ NAME: string }>(c)
-  return c.text(NAME)
-})
+  const { NAME } = env<{ NAME: string }>(c);
+  return c.text(NAME);
+});
 ```
 
 Supported Runtimes, Serverless Platforms and Cloud Services:
@@ -53,10 +53,10 @@ Supported Runtimes, Serverless Platforms and Cloud Services:
 You can specify the runtime to get environment variables by passing the runtime key as the second argument.
 
 ```ts
-app.get('/env', (c) => {
-  const { NAME } = env<{ NAME: string }>(c, 'workerd')
-  return c.text(NAME)
-})
+app.get("/env", (c) => {
+  const { NAME } = env<{ NAME: string }>(c, "workerd");
+  return c.text(NAME);
+});
 ```
 
 ## `getRuntimeKey()`

@@ -54,7 +54,6 @@ Turbopack in Next.js has **zero-configuration** for the common use cases. Below 
 | **Babel**                   | **Supported** | Starting in Next.js 16, Turbopack uses Babel automatically if it detects [a configuration file][babel-config]. Unlike in webpack, SWC is always used for Next.js's internal transforms and downleveling to older ECMAScript revisions. Next.js with webpack disables SWC if a Babel configuration file is present. Files in `node_modules` are excluded, unless you [manually configure `babel-loader`][manual-loader]. |
 
 [babel-config]: https://babeljs.io/docs/config-files
-
 [manual-loader]: /docs/app/api-reference/config/next-config-js/turbopack#configuring-webpack-loaders
 
 ### Framework and React features
@@ -119,14 +118,14 @@ You can configure the filesystem root using [turbopack.root](/docs/app/api-refer
 Turbopack will follow JS import order to order [CSS modules](/docs/app/getting-started/css#css-modules) which are not otherwise ordered. For example:
 
 ```jsx filename="components/BlogPost.jsx"
-import utilStyles from './utils.module.css'
-import buttonStyles from './button.module.css'
+import utilStyles from "./utils.module.css";
+import buttonStyles from "./button.module.css";
 export default function BlogPost() {
   return (
     <div className={utilStyles.container}>
       <button className={buttonStyles.primary}>Click me</button>
     </div>
-  )
+  );
 }
 ```
 
@@ -136,20 +135,20 @@ Webpack generally does this as well, but there are cases where it will ignore JS
 
 This can lead to subtle rendering changes when adopting Turbopack, if applications have come to rely on an arbitrary ordering. Generally, the solution is easy, e.g. have `button.module.css` `@import utils.module.css` to force the ordering, or identify the conflicting rules and change them to not target the same properties.
 
-### Sass node\_modules imports
+### Sass node_modules imports
 
 Turbopack supports importing `node_modules` Sass files out of the box. Webpack supports a legacy tilde `~` syntax for this, which is not supported by Turbopack.
 
 From:
 
 ```scss filename="styles/globals.scss"
-@import '~bootstrap/dist/css/bootstrap.min.css';
+@import "~bootstrap/dist/css/bootstrap.min.css";
 ```
 
 To:
 
 ```scss filename="styles/globals.scss"
-@import 'bootstrap/dist/css/bootstrap.min.css';
+@import "bootstrap/dist/css/bootstrap.min.css";
 ```
 
 If you can't update the imports, you can add a `turbopack.resolveAlias` configuration to map the `~` syntax to the actual path:
@@ -158,10 +157,10 @@ If you can't update the imports, you can add a `turbopack.resolveAlias` configur
 module.exports = {
   turbopack: {
     resolveAlias: {
-      '~*': '*',
+      "~*": "*",
     },
   },
-}
+};
 ```
 
 ### Build Caching
@@ -221,11 +220,11 @@ module.exports = {
   turbopack: {
     // Example: adding an alias and custom file extension
     resolveAlias: {
-      underscore: 'lodash',
+      underscore: "lodash",
     },
-    resolveExtensions: ['.mdx', '.tsx', '.ts', '.jsx', '.js', '.json'],
+    resolveExtensions: [".mdx", ".tsx", ".ts", ".jsx", ".js", ".json"],
   },
-}
+};
 ```
 
 For more in-depth configuration examples, see the [Turbopack config documentation](/docs/app/api-reference/config/next-config-js/turbopack).

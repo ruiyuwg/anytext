@@ -8,18 +8,13 @@ The magic of components lies in their reusability: you can create components tha
 - How to import and export multiple components from one file
 - How to split components into multiple files
 
-## The root component file {/*the-root-component-file*/}
+## The root component file {/_the-root-component-file_/}
 
 In [Your First Component](/learn/your-first-component), you made a `Profile` component and a `Gallery` component that renders it:
 
 ```js
 function Profile() {
-  return (
-    <img
-      src="https://i.imgur.com/MK3eW3As.jpg"
-      alt="Katherine Johnson"
-    />
-  );
+  return <img src="https://i.imgur.com/MK3eW3As.jpg" alt="Katherine Johnson" />;
 }
 
 export default function Gallery() {
@@ -35,12 +30,15 @@ export default function Gallery() {
 ```
 
 ```css
-img { margin: 0 10px 10px 0; height: 90px; }
+img {
+  margin: 0 10px 10px 0;
+  height: 90px;
+}
 ```
 
 These currently live in a **root component file,** named `App.js` in this example. Depending on your setup, your root component could be in another file, though. If you use a framework with file-based routing, such as Next.js, your root component will be different for every page.
 
-## Exporting and importing a component {/*exporting-and-importing-a-component*/}
+## Exporting and importing a component {/_exporting-and-importing-a-component_/}
 
 What if you want to change the landing screen in the future and put a list of science books there? Or place all the profiles somewhere else? It makes sense to move `Gallery` and `Profile` out of the root component file. This will make them more modular and reusable in other files. You can move a component in three steps:
 
@@ -51,23 +49,16 @@ What if you want to change the landing screen in the future and put a list of sc
 Here both `Profile` and `Gallery` have been moved out of `App.js` into a new file called `Gallery.js`. Now you can change `App.js` to import `Gallery` from `Gallery.js`:
 
 ```js src/App.js
-import Gallery from './Gallery.js';
+import Gallery from "./Gallery.js";
 
 export default function App() {
-  return (
-    <Gallery />
-  );
+  return <Gallery />;
 }
 ```
 
 ```js src/Gallery.js
 function Profile() {
-  return (
-    <img
-      src="https://i.imgur.com/QIrZWGIs.jpg"
-      alt="Alan L. Hart"
-    />
-  );
+  return <img src="https://i.imgur.com/QIrZWGIs.jpg" alt="Alan L. Hart" />;
 }
 
 export default function Gallery() {
@@ -83,7 +74,10 @@ export default function Gallery() {
 ```
 
 ```css
-img { margin: 0 10px 10px 0; height: 90px; }
+img {
+  margin: 0 10px 10px 0;
+  height: 90px;
+}
 ```
 
 Notice how this example is broken down into two component files now:
@@ -98,31 +92,31 @@ Notice how this example is broken down into two component files now:
 You may encounter files that leave off the `.js` file extension like so:
 
 ```js
-import Gallery from './Gallery';
+import Gallery from "./Gallery";
 ```
 
 Either `'./Gallery.js'` or `'./Gallery'` will work with React, though the former is closer to how [native ES Modules](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Modules) work.
 
-#### Default vs named exports {/*default-vs-named-exports*/}
+#### Default vs named exports {/_default-vs-named-exports_/}
 
-There are two primary ways to export values with JavaScript: default exports and named exports. So far, our examples have only used default exports. But you can use one or both of them in the same file. **A file can have no more than one *default* export, but it can have as many *named* exports as you like.**
+There are two primary ways to export values with JavaScript: default exports and named exports. So far, our examples have only used default exports. But you can use one or both of them in the same file. **A file can have no more than one _default_ export, but it can have as many _named_ exports as you like.**
 
 ![Default and named exports](/images/docs/illustrations/i_import-export.svg)
 
 How you export your component dictates how you must import it. You will get an error if you try to import a default export the same way you would a named export! This chart can help you keep track:
 
-| Syntax           | Export statement                           | Import statement                          |
-| -----------      | -----------                                | -----------                               |
-| Default  | `export default function Button() {}` | `import Button from './Button.js';`     |
-| Named    | `export function Button() {}`         | `import { Button } from './Button.js';` |
+| Syntax  | Export statement                      | Import statement                        |
+| ------- | ------------------------------------- | --------------------------------------- |
+| Default | `export default function Button() {}` | `import Button from './Button.js';`     |
+| Named   | `export function Button() {}`         | `import { Button } from './Button.js';` |
 
-When you write a *default* import, you can put any name you want after `import`. For example, you could write `import Banana from './Button.js'` instead and it would still provide you with the same default export. In contrast, with named imports, the name has to match on both sides. That's why they are called *named* imports!
+When you write a _default_ import, you can put any name you want after `import`. For example, you could write `import Banana from './Button.js'` instead and it would still provide you with the same default export. In contrast, with named imports, the name has to match on both sides. That's why they are called _named_ imports!
 
 **People often use default exports if the file exports only one component, and use named exports if it exports multiple components and values.** Regardless of which coding style you prefer, always give meaningful names to your component functions and the files that contain them. Components without names, like `export default () => {}`, are discouraged because they make debugging harder.
 
-## Exporting and importing multiple components from the same file {/*exporting-and-importing-multiple-components-from-the-same-file*/}
+## Exporting and importing multiple components from the same file {/_exporting-and-importing-multiple-components-from-the-same-file_/}
 
-What if you want to show just one `Profile` instead of a gallery? You can export the `Profile` component, too. But `Gallery.js` already has a *default* export, and you can't have *two* default exports. You could create a new file with a default export, or you could add a *named* export for `Profile`. **A file can only have one default export, but it can have numerous named exports!**
+What if you want to show just one `Profile` instead of a gallery? You can export the `Profile` component, too. But `Gallery.js` already has a _default_ export, and you can't have _two_ default exports. You could create a new file with a default export, or you could add a _named_ export for `Profile`. **A file can only have one default export, but it can have numerous named exports!**
 
 To reduce the potential confusion between default and named exports, some teams choose to only stick to one style (default or named), or avoid mixing them in a single file. Do what works best for you!
 
@@ -137,7 +131,7 @@ export function Profile() {
 Then, **import** `Profile` from `Gallery.js` to `App.js` using a named import (with the curly braces):
 
 ```js
-import { Profile } from './Gallery.js';
+import { Profile } from "./Gallery.js";
 ```
 
 Finally, **render** `<Profile />` from the `App` component:
@@ -151,24 +145,17 @@ export default function App() {
 Now `Gallery.js` contains two exports: a default `Gallery` export, and a named `Profile` export. `App.js` imports both of them. Try editing `<Profile />` to `<Gallery />` and back in this example:
 
 ```js src/App.js
-import Gallery from './Gallery.js';
-import { Profile } from './Gallery.js';
+import Gallery from "./Gallery.js";
+import { Profile } from "./Gallery.js";
 
 export default function App() {
-  return (
-    <Profile />
-  );
+  return <Profile />;
 }
 ```
 
 ```js src/Gallery.js
 export function Profile() {
-  return (
-    <img
-      src="https://i.imgur.com/QIrZWGIs.jpg"
-      alt="Alan L. Hart"
-    />
-  );
+  return <img src="https://i.imgur.com/QIrZWGIs.jpg" alt="Alan L. Hart" />;
 }
 
 export default function Gallery() {
@@ -184,7 +171,10 @@ export default function Gallery() {
 ```
 
 ```css
-img { margin: 0 10px 10px 0; height: 90px; }
+img {
+  margin: 0 10px 10px 0;
+  height: 90px;
+}
 ```
 
 Now you're using a mix of default and named exports:
@@ -204,7 +194,7 @@ On this page you learned:
 - When and how to use default and named imports and exports
 - How to export multiple components from the same file
 
-#### Split the components further {/*split-the-components-further*/}
+#### Split the components further {/_split-the-components-further_/}
 
 Currently, `Gallery.js` exports both `Profile` and `Gallery`, which is a bit confusing.
 
@@ -212,16 +202,16 @@ Move the `Profile` component to its own `Profile.js`, and then change the `App` 
 
 You may use either a default or a named export for `Profile`, but make sure that you use the corresponding import syntax in both `App.js` and `Gallery.js`! You can refer to the table from the deep dive above:
 
-| Syntax           | Export statement                           | Import statement                          |
-| -----------      | -----------                                | -----------                               |
-| Default  | `export default function Button() {}` | `import Button from './Button.js';`     |
-| Named    | `export function Button() {}`         | `import { Button } from './Button.js';` |
+| Syntax  | Export statement                      | Import statement                        |
+| ------- | ------------------------------------- | --------------------------------------- |
+| Default | `export default function Button() {}` | `import Button from './Button.js';`     |
+| Named   | `export function Button() {}`         | `import { Button } from './Button.js';` |
 
 Don't forget to import your components where they are called. Doesn't `Gallery` use `Profile`, too?
 
 ```js src/App.js
-import Gallery from './Gallery.js';
-import { Profile } from './Gallery.js';
+import Gallery from "./Gallery.js";
+import { Profile } from "./Gallery.js";
 
 export default function App() {
   return (
@@ -235,12 +225,7 @@ export default function App() {
 ```js src/Gallery.js active
 // Move me to Profile.js!
 export function Profile() {
-  return (
-    <img
-      src="https://i.imgur.com/QIrZWGIs.jpg"
-      alt="Alan L. Hart"
-    />
-  );
+  return <img src="https://i.imgur.com/QIrZWGIs.jpg" alt="Alan L. Hart" />;
 }
 
 export default function Gallery() {
@@ -256,10 +241,14 @@ export default function Gallery() {
 ```
 
 ```js src/Profile.js
+
 ```
 
 ```css
-img { margin: 0 10px 10px 0; height: 90px; }
+img {
+  margin: 0 10px 10px 0;
+  height: 90px;
+}
 ```
 
 After you get it working with one kind of exports, make it work with the other kind.
@@ -267,8 +256,8 @@ After you get it working with one kind of exports, make it work with the other k
 This is the solution with named exports:
 
 ```js src/App.js
-import Gallery from './Gallery.js';
-import { Profile } from './Profile.js';
+import Gallery from "./Gallery.js";
+import { Profile } from "./Profile.js";
 
 export default function App() {
   return (
@@ -281,7 +270,7 @@ export default function App() {
 ```
 
 ```js src/Gallery.js
-import { Profile } from './Profile.js';
+import { Profile } from "./Profile.js";
 
 export default function Gallery() {
   return (
@@ -297,24 +286,22 @@ export default function Gallery() {
 
 ```js src/Profile.js
 export function Profile() {
-  return (
-    <img
-      src="https://i.imgur.com/QIrZWGIs.jpg"
-      alt="Alan L. Hart"
-    />
-  );
+  return <img src="https://i.imgur.com/QIrZWGIs.jpg" alt="Alan L. Hart" />;
 }
 ```
 
 ```css
-img { margin: 0 10px 10px 0; height: 90px; }
+img {
+  margin: 0 10px 10px 0;
+  height: 90px;
+}
 ```
 
 This is the solution with default exports:
 
 ```js src/App.js
-import Gallery from './Gallery.js';
-import Profile from './Profile.js';
+import Gallery from "./Gallery.js";
+import Profile from "./Profile.js";
 
 export default function App() {
   return (
@@ -327,7 +314,7 @@ export default function App() {
 ```
 
 ```js src/Gallery.js
-import Profile from './Profile.js';
+import Profile from "./Profile.js";
 
 export default function Gallery() {
   return (
@@ -343,20 +330,18 @@ export default function Gallery() {
 
 ```js src/Profile.js
 export default function Profile() {
-  return (
-    <img
-      src="https://i.imgur.com/QIrZWGIs.jpg"
-      alt="Alan L. Hart"
-    />
-  );
+  return <img src="https://i.imgur.com/QIrZWGIs.jpg" alt="Alan L. Hart" />;
 }
 ```
 
 ```css
-img { margin: 0 10px 10px 0; height: 90px; }
+img {
+  margin: 0 10px 10px 0;
+  height: 90px;
+}
 ```
 
-***
+---
 
 ## Sitemap
 

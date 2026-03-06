@@ -16,45 +16,45 @@ Incremental Static Regeneration (ISR) enables you to:
 Here's a minimal example:
 
 ```tsx filename="pages/blog/[id].tsx" switcher
-import type { GetStaticPaths, GetStaticProps } from 'next'
+import type { GetStaticPaths, GetStaticProps } from "next";
 
 interface Post {
-  id: string
-  title: string
-  content: string
+  id: string;
+  title: string;
+  content: string;
 }
 
 interface Props {
-  post: Post
+  post: Post;
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const posts = await fetch('https://api.vercel.app/blog').then((res) =>
-    res.json()
-  )
+  const posts = await fetch("https://api.vercel.app/blog").then((res) =>
+    res.json(),
+  );
   const paths = posts.map((post: Post) => ({
     params: { id: String(post.id) },
-  }))
+  }));
 
-  return { paths, fallback: 'blocking' }
-}
+  return { paths, fallback: "blocking" };
+};
 
 export const getStaticProps: GetStaticProps<Props> = async ({
   params,
 }: {
-  params: { id: string }
+  params: { id: string };
 }) => {
   const post = await fetch(`https://api.vercel.app/blog/${params.id}`).then(
-    (res) => res.json()
-  )
+    (res) => res.json(),
+  );
 
   return {
     props: { post },
     // Next.js will invalidate the cache when a
     // request comes in, at most once every 60 seconds.
     revalidate: 60,
-  }
-}
+  };
+};
 
 export default function Page({ post }: Props) {
   return (
@@ -62,33 +62,33 @@ export default function Page({ post }: Props) {
       <h1>{post.title}</h1>
       <p>{post.content}</p>
     </main>
-  )
+  );
 }
 ```
 
 ```jsx filename="pages/blog/[id].jsx" switcher
 export async function getStaticPaths() {
-  const posts = await fetch('https://api.vercel.app/blog').then((res) =>
-    res.json()
-  )
+  const posts = await fetch("https://api.vercel.app/blog").then((res) =>
+    res.json(),
+  );
   const paths = posts.map((post) => ({
     params: { id: post.id },
-  }))
+  }));
 
-  return { paths, fallback: 'blocking' }
+  return { paths, fallback: "blocking" };
 }
 
 export async function getStaticProps({ params }) {
   const post = await fetch(`https://api.vercel.app/blog/${params.id}`).then(
-    (res) => res.json()
-  )
+    (res) => res.json(),
+  );
 
   return {
     props: { post },
     // Next.js will invalidate the cache when a
     // request comes in, at most once every 60 seconds.
     revalidate: 60,
-  }
+  };
 }
 
 export default function Page({ post }) {
@@ -97,7 +97,7 @@ export default function Page({ post }) {
       <h1>{post.title}</h1>
       <p>{post.content}</p>
     </main>
-  )
+  );
 }
 ```
 
@@ -126,26 +126,26 @@ For a more precise method of revalidation, use `res.revalidate` to generate a ne
 For example, this API Route can be called at `/api/revalidate?secret=<token>` to revalidate a given blog post. Create a secret token only known by your Next.js app. This secret will be used to prevent unauthorized access to the revalidation API Route.
 
 ```ts filename="pages/api/revalidate.ts" switcher
-import type { NextApiRequest, NextApiResponse } from 'next'
+import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
   // Check for secret to confirm this is a valid request
   if (req.query.secret !== process.env.MY_SECRET_TOKEN) {
-    return res.status(401).json({ message: 'Invalid token' })
+    return res.status(401).json({ message: "Invalid token" });
   }
 
   try {
     // This should be the actual path not a rewritten path
     // e.g. for "/posts/[id]" this should be "/posts/1"
-    await res.revalidate('/posts/1')
-    return res.json({ revalidated: true })
+    await res.revalidate("/posts/1");
+    return res.json({ revalidated: true });
   } catch (err) {
     // If there was an error, Next.js will continue
     // to show the last successfully generated page
-    return res.status(500).send('Error revalidating')
+    return res.status(500).send("Error revalidating");
   }
 }
 ```
@@ -154,18 +154,18 @@ export default async function handler(
 export default async function handler(req, res) {
   // Check for secret to confirm this is a valid request
   if (req.query.secret !== process.env.MY_SECRET_TOKEN) {
-    return res.status(401).json({ message: 'Invalid token' })
+    return res.status(401).json({ message: "Invalid token" });
   }
 
   try {
     // This should be the actual path not a rewritten path
     // e.g. for "/posts/[id]" this should be "/posts/1"
-    await res.revalidate('/posts/1')
-    return res.json({ revalidated: true })
+    await res.revalidate("/posts/1");
+    return res.json({ revalidated: true });
   } catch (err) {
     // If there was an error, Next.js will continue
     // to show the last successfully generated page
-    return res.status(500).send('Error revalidating')
+    return res.status(500).send("Error revalidating");
   }
 }
 ```
@@ -177,34 +177,34 @@ If you are using on-demand revalidation, you do not need to specify a `revalidat
 If there is an error inside `getStaticProps` when handling background regeneration, or you manually throw an error, the last successfully generated page will continue to show. On the next subsequent request, Next.js will retry calling `getStaticProps`.
 
 ```tsx filename="pages/blog/[id].tsx" switcher
-import type { GetStaticProps } from 'next'
+import type { GetStaticProps } from "next";
 
 interface Post {
-  id: string
-  title: string
-  content: string
+  id: string;
+  title: string;
+  content: string;
 }
 
 interface Props {
-  post: Post
+  post: Post;
 }
 
 export const getStaticProps: GetStaticProps<Props> = async ({
   params,
 }: {
-  params: { id: string }
+  params: { id: string };
 }) => {
   // If this request throws an uncaught error, Next.js will
   // not invalidate the currently shown page and
   // retry getStaticProps on the next request.
-  const res = await fetch(`https://api.vercel.app/blog/${params.id}`)
-  const post: Post = await res.json()
+  const res = await fetch(`https://api.vercel.app/blog/${params.id}`);
+  const post: Post = await res.json();
 
   if (!res.ok) {
     // If there is a server error, you might want to
     // throw an error instead of returning so that the cache is not updated
     // until the next successful request.
-    throw new Error(`Failed to fetch posts, received status ${res.status}`)
+    throw new Error(`Failed to fetch posts, received status ${res.status}`);
   }
 
   return {
@@ -212,8 +212,8 @@ export const getStaticProps: GetStaticProps<Props> = async ({
     // Next.js will invalidate the cache when a
     // request comes in, at most once every 60 seconds.
     revalidate: 60,
-  }
-}
+  };
+};
 ```
 
 ```jsx filename="pages/blog/[id].jsx" switcher
@@ -221,14 +221,14 @@ export async function getStaticProps({ params }) {
   // If this request throws an uncaught error, Next.js will
   // not invalidate the currently shown page and
   // retry getStaticProps on the next request.
-  const res = await fetch(`https://api.vercel.app/blog/${params.id}`)
-  const post = await res.json()
+  const res = await fetch(`https://api.vercel.app/blog/${params.id}`);
+  const post = await res.json();
 
   if (!res.ok) {
     // If there is a server error, you might want to
     // throw an error instead of returning so that the cache is not updated
     // until the next successful request.
-    throw new Error(`Failed to fetch posts, received status ${res.status}`)
+    throw new Error(`Failed to fetch posts, received status ${res.status}`);
   }
 
   return {
@@ -236,7 +236,7 @@ export async function getStaticProps({ params }) {
     // Next.js will invalidate the cache when a
     // request comes in, at most once every 60 seconds.
     revalidate: 60,
-  }
+  };
 }
 ```
 
@@ -257,7 +257,7 @@ module.exports = {
       fullUrl: true,
     },
   },
-}
+};
 ```
 
 ### Verifying correct production behavior

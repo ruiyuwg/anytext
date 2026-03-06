@@ -7,10 +7,10 @@ These pages will then use native Node.js `require` to resolve the dependency.
 ```js filename="next.config.js"
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  serverExternalPackages: ['@acme/ui'],
-}
+  serverExternalPackages: ["@acme/ui"],
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 Next.js includes a [short list of popular packages](https://github.com/vercel/next.js/blob/canary/packages/next/src/lib/server-external-packages.jsonc) that currently are working on compatibility and automatically opt-ed out:
@@ -106,7 +106,7 @@ Open `next.config.js` and add the `trailingSlash` config:
 ```js filename="next.config.js"
 module.exports = {
   trailingSlash: true,
-}
+};
 ```
 
 With this option set, URLs like `/about` will redirect to `/about/`.
@@ -135,10 +135,10 @@ Next.js can automatically transpile and bundle dependencies from local packages 
 ```js filename="next.config.js"
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ['package-name'],
-}
+  transpilePackages: ["package-name"],
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 ## Version History

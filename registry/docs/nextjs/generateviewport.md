@@ -13,19 +13,19 @@ You can customize the initial viewport of the page with the static `viewport` ob
 To define the viewport options, export a `viewport` object from a `layout.jsx` or `page.jsx` file.
 
 ```tsx filename="layout.tsx | page.tsx" switcher
-import type { Viewport } from 'next'
+import type { Viewport } from "next";
 
 export const viewport: Viewport = {
-  themeColor: 'black',
-}
+  themeColor: "black",
+};
 
 export default function Page() {}
 ```
 
 ```jsx filename="layout.jsx | page.jsx" switcher
 export const viewport = {
-  themeColor: 'black',
-}
+  themeColor: "black",
+};
 
 export default function Page() {}
 ```
@@ -37,8 +37,8 @@ export default function Page() {}
 ```tsx filename="layout.tsx | page.tsx" switcher
 export function generateViewport({ params }) {
   return {
-    themeColor: '...',
-  }
+    themeColor: "...",
+  };
 }
 ```
 
@@ -47,8 +47,8 @@ In TypeScript, the `params` argument can be typed via [`PageProps<'/route'>`](/d
 ```jsx filename="layout.js | page.js" switcher
 export function generateViewport({ params }) {
   return {
-    themeColor: '...',
-  }
+    themeColor: "...",
+  };
 }
 ```
 
@@ -65,17 +65,17 @@ Learn more about [`theme-color`](https://developer.mozilla.org/docs/Web/HTML/Ele
 **Simple theme color**
 
 ```tsx filename="layout.tsx | page.tsx" switcher
-import type { Viewport } from 'next'
+import type { Viewport } from "next";
 
 export const viewport: Viewport = {
-  themeColor: 'black',
-}
+  themeColor: "black",
+};
 ```
 
 ```jsx filename="layout.jsx | page.jsx" switcher
 export const viewport = {
-  themeColor: 'black',
-}
+  themeColor: "black",
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
@@ -85,23 +85,23 @@ export const viewport = {
 **With media attribute**
 
 ```tsx filename="layout.tsx | page.tsx" switcher
-import type { Viewport } from 'next'
+import type { Viewport } from "next";
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: 'cyan' },
-    { media: '(prefers-color-scheme: dark)', color: 'black' },
+    { media: "(prefers-color-scheme: light)", color: "cyan" },
+    { media: "(prefers-color-scheme: dark)", color: "black" },
   ],
-}
+};
 ```
 
 ```jsx filename="layout.jsx | page.jsx" switcher
 export const viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: 'cyan' },
-    { media: '(prefers-color-scheme: dark)', color: 'black' },
+    { media: "(prefers-color-scheme: light)", color: "cyan" },
+    { media: "(prefers-color-scheme: dark)", color: "black" },
   ],
-}
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
@@ -114,27 +114,27 @@ export const viewport = {
 > **Good to know**: The `viewport` meta tag is automatically set, and manual configuration is usually unnecessary as the default is sufficient. However, the information is provided for completeness.
 
 ```tsx filename="layout.tsx | page.tsx" switcher
-import type { Viewport } from 'next'
+import type { Viewport } from "next";
 
 export const viewport: Viewport = {
-  width: 'device-width',
+  width: "device-width",
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
   // Also supported but less commonly used
   // interactiveWidget: 'resizes-visual',
-}
+};
 ```
 
 ```jsx filename="layout.jsx | page.jsx" switcher
 export const viewport = {
-  width: 'device-width',
+  width: "device-width",
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
   // Also supported but less commonly used
   // interactiveWidget: 'resizes-visual',
-}
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
@@ -149,17 +149,17 @@ export const viewport = {
 Learn more about [`color-scheme`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta/name#:~:text=color%2Dscheme%3A%20specifies,of%20the%20following%3A).
 
 ```tsx filename="layout.tsx | page.tsx" switcher
-import type { Viewport } from 'next'
+import type { Viewport } from "next";
 
 export const viewport: Viewport = {
-  colorScheme: 'dark',
-}
+  colorScheme: "dark",
+};
 ```
 
 ```jsx filename="layout.jsx | page.jsx" switcher
 export const viewport = {
-  colorScheme: 'dark',
-}
+  colorScheme: "dark",
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
@@ -176,23 +176,23 @@ If viewport depends on external data but not runtime data, use `use cache`:
 
 ```tsx filename="app/layout.tsx" highlight={2}
 export async function generateViewport() {
-  'use cache'
-  const { width, initialScale } = await db.query('viewport-size')
-  return { width, initialScale }
+  "use cache";
+  const { width, initialScale } = await db.query("viewport-size");
+  return { width, initialScale };
 }
 ```
 
 If viewport genuinely requires runtime data, wrap the document `<body>` in a Suspense boundary to signal that the entire route should be dynamic:
 
 ```tsx filename="app/layout.tsx" highlight={1,11-15}
-import { Suspense } from 'react'
-import { cookies } from 'next/headers'
+import { Suspense } from "react";
+import { cookies } from "next/headers";
 
 export async function generateViewport() {
-  const cookieJar = await cookies()
+  const cookieJar = await cookies();
   return {
-    themeColor: cookieJar.get('theme-color')?.value,
-  }
+    themeColor: cookieJar.get("theme-color")?.value,
+  };
 }
 
 export default function RootLayout({ children }) {
@@ -202,7 +202,7 @@ export default function RootLayout({ children }) {
         <body>{children}</body>
       </html>
     </Suspense>
-  )
+  );
 }
 ```
 
@@ -217,11 +217,11 @@ You can add type safety to your viewport object by using the `Viewport` type. If
 ### `viewport` object
 
 ```tsx
-import type { Viewport } from 'next'
+import type { Viewport } from "next";
 
 export const viewport: Viewport = {
-  themeColor: 'black',
-}
+  themeColor: "black",
+};
 ```
 
 ### `generateViewport` function
@@ -229,29 +229,29 @@ export const viewport: Viewport = {
 #### Regular function
 
 ```tsx
-import type { Viewport } from 'next'
+import type { Viewport } from "next";
 
 export function generateViewport(): Viewport {
   return {
-    themeColor: 'black',
-  }
+    themeColor: "black",
+  };
 }
 ```
 
 #### With segment props
 
 ```tsx
-import type { Viewport } from 'next'
+import type { Viewport } from "next";
 
 type Props = {
-  params: Promise<{ id: string }>
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
-}
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
 
 export function generateViewport({ params, searchParams }: Props): Viewport {
   return {
-    themeColor: 'black',
-  }
+    themeColor: "black",
+  };
 }
 
 export default function Page({ params, searchParams }: Props) {}
@@ -264,8 +264,8 @@ For JavaScript projects, you can use JSDoc to add type safety.
 ```js
 /** @type {import("next").Viewport} */
 export const viewport = {
-  themeColor: 'black',
-}
+  themeColor: "black",
+};
 ```
 
 ## Version History

@@ -25,87 +25,87 @@ However, since Proxy runs on every route, including [prefetched](/docs/app/getti
 For example:
 
 ```tsx filename="proxy.ts" switcher
-import { NextRequest, NextResponse } from 'next/server'
-import { decrypt } from '@/app/lib/session'
-import { cookies } from 'next/headers'
+import { NextRequest, NextResponse } from "next/server";
+import { decrypt } from "@/app/lib/session";
+import { cookies } from "next/headers";
 
 // 1. Specify protected and public routes
-const protectedRoutes = ['/dashboard']
-const publicRoutes = ['/login', '/signup', '/']
+const protectedRoutes = ["/dashboard"];
+const publicRoutes = ["/login", "/signup", "/"];
 
 export default async function proxy(req: NextRequest) {
   // 2. Check if the current route is protected or public
-  const path = req.nextUrl.pathname
-  const isProtectedRoute = protectedRoutes.includes(path)
-  const isPublicRoute = publicRoutes.includes(path)
+  const path = req.nextUrl.pathname;
+  const isProtectedRoute = protectedRoutes.includes(path);
+  const isPublicRoute = publicRoutes.includes(path);
 
   // 3. Decrypt the session from the cookie
-  const cookie = (await cookies()).get('session')?.value
-  const session = await decrypt(cookie)
+  const cookie = (await cookies()).get("session")?.value;
+  const session = await decrypt(cookie);
 
   // 4. Redirect to /login if the user is not authenticated
   if (isProtectedRoute && !session?.userId) {
-    return NextResponse.redirect(new URL('/login', req.nextUrl))
+    return NextResponse.redirect(new URL("/login", req.nextUrl));
   }
 
   // 5. Redirect to /dashboard if the user is authenticated
   if (
     isPublicRoute &&
     session?.userId &&
-    !req.nextUrl.pathname.startsWith('/dashboard')
+    !req.nextUrl.pathname.startsWith("/dashboard")
   ) {
-    return NextResponse.redirect(new URL('/dashboard', req.nextUrl))
+    return NextResponse.redirect(new URL("/dashboard", req.nextUrl));
   }
 
-  return NextResponse.next()
+  return NextResponse.next();
 }
 
 // Routes Proxy should not run on
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|.*\\.png$).*)'],
-}
+  matcher: ["/((?!api|_next/static|_next/image|.*\\.png$).*)"],
+};
 ```
 
 ```js filename="proxy.js" switcher
-import { NextResponse } from 'next/server'
-import { decrypt } from '@/app/lib/session'
-import { cookies } from 'next/headers'
+import { NextResponse } from "next/server";
+import { decrypt } from "@/app/lib/session";
+import { cookies } from "next/headers";
 
 // 1. Specify protected and public routes
-const protectedRoutes = ['/dashboard']
-const publicRoutes = ['/login', '/signup', '/']
+const protectedRoutes = ["/dashboard"];
+const publicRoutes = ["/login", "/signup", "/"];
 
 export default async function proxy(req) {
   // 2. Check if the current route is protected or public
-  const path = req.nextUrl.pathname
-  const isProtectedRoute = protectedRoutes.includes(path)
-  const isPublicRoute = publicRoutes.includes(path)
+  const path = req.nextUrl.pathname;
+  const isProtectedRoute = protectedRoutes.includes(path);
+  const isPublicRoute = publicRoutes.includes(path);
 
   // 3. Decrypt the session from the cookie
-  const cookie = (await cookies()).get('session')?.value
-  const session = await decrypt(cookie)
+  const cookie = (await cookies()).get("session")?.value;
+  const session = await decrypt(cookie);
 
   // 5. Redirect to /login if the user is not authenticated
   if (isProtectedRoute && !session?.userId) {
-    return NextResponse.redirect(new URL('/login', req.nextUrl))
+    return NextResponse.redirect(new URL("/login", req.nextUrl));
   }
 
   // 6. Redirect to /dashboard if the user is authenticated
   if (
     isPublicRoute &&
     session?.userId &&
-    !req.nextUrl.pathname.startsWith('/dashboard')
+    !req.nextUrl.pathname.startsWith("/dashboard")
   ) {
-    return NextResponse.redirect(new URL('/dashboard', req.nextUrl))
+    return NextResponse.redirect(new URL("/dashboard", req.nextUrl));
   }
 
-  return NextResponse.next()
+  return NextResponse.next();
 }
 
 // Routes Proxy should not run on
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|.*\\.png$).*)'],
-}
+  matcher: ["/((?!api|_next/static|_next/image|.*\\.png$).*)"],
+};
 ```
 
 While Proxy can be useful for initial checks, it should not be your only line of defense in protecting your data. The majority of security checks should be performed as close as possible to your data source, see [Data Access Layer](#creating-a-data-access-layer-dal) for more information.
@@ -125,47 +125,47 @@ The DAL should include a function that verifies the user's session as they inter
 For example, create a separate file for your DAL that includes a `verifySession()` function. Then use React's [cache](https://react.dev/reference/react/cache) API to memoize the return value of the function during a React render pass:
 
 ```tsx filename="app/lib/dal.ts" switcher
-import 'server-only'
+import "server-only";
 
-import { cookies } from 'next/headers'
-import { decrypt } from '@/app/lib/session'
+import { cookies } from "next/headers";
+import { decrypt } from "@/app/lib/session";
 
 export const verifySession = cache(async () => {
-  const cookie = (await cookies()).get('session')?.value
-  const session = await decrypt(cookie)
+  const cookie = (await cookies()).get("session")?.value;
+  const session = await decrypt(cookie);
 
   if (!session?.userId) {
-    redirect('/login')
+    redirect("/login");
   }
 
-  return { isAuth: true, userId: session.userId }
-})
+  return { isAuth: true, userId: session.userId };
+});
 ```
 
 ```js filename="app/lib/dal.js" switcher
-import 'server-only'
+import "server-only";
 
-import { cookies } from 'next/headers'
-import { decrypt } from '@/app/lib/session'
+import { cookies } from "next/headers";
+import { decrypt } from "@/app/lib/session";
 
 export const verifySession = cache(async () => {
-  const cookie = (await cookies()).get('session')?.value
-  const session = await decrypt(cookie)
+  const cookie = (await cookies()).get("session")?.value;
+  const session = await decrypt(cookie);
 
   if (!session.userId) {
-    redirect('/login')
+    redirect("/login");
   }
 
-  return { isAuth: true, userId: session.userId }
-})
+  return { isAuth: true, userId: session.userId };
+});
 ```
 
 You can then invoke the `verifySession()` function in your data requests, Server Actions, Route Handlers:
 
 ```tsx filename="app/lib/dal.ts" switcher
 export const getUser = cache(async () => {
-  const session = await verifySession()
-  if (!session) return null
+  const session = await verifySession();
+  if (!session) return null;
 
   try {
     const data = await db.query.users.findMany({
@@ -176,22 +176,22 @@ export const getUser = cache(async () => {
         name: true,
         email: true,
       },
-    })
+    });
 
-    const user = data[0]
+    const user = data[0];
 
-    return user
+    return user;
   } catch (error) {
-    console.log('Failed to fetch user')
-    return null
+    console.log("Failed to fetch user");
+    return null;
   }
-})
+});
 ```
 
 ```jsx filename="app/lib/dal.js" switcher
 export const getUser = cache(async () => {
-  const session = await verifySession()
-  if (!session) return null
+  const session = await verifySession();
+  if (!session) return null;
 
   try {
     const data = await db.query.users.findMany({
@@ -202,16 +202,16 @@ export const getUser = cache(async () => {
         name: true,
         email: true,
       },
-    })
+    });
 
-    const user = data[0]
+    const user = data[0];
 
-    return user
+    return user;
   } catch (error) {
-    console.log('Failed to fetch user')
-    return null
+    console.log("Failed to fetch user");
+    return null;
   }
-})
+});
 ```
 
 > **Tip**:
@@ -227,25 +227,25 @@ When retrieving data, it's recommended you return only the necessary data that w
 However, if you have no control over the returned data structure, or are working in a team where you want to avoid whole objects being passed to the client, you can use strategies such as specifying what fields are safe to be exposed to the client.
 
 ```tsx filename="app/lib/dto.ts" switcher
-import 'server-only'
-import { getUser } from '@/app/lib/dal'
+import "server-only";
+import { getUser } from "@/app/lib/dal";
 
 function canSeeUsername(viewer: User) {
-  return true
+  return true;
 }
 
 function canSeePhoneNumber(viewer: User, team: string) {
-  return viewer.isAdmin || team === viewer.team
+  return viewer.isAdmin || team === viewer.team;
 }
 
 export async function getProfileDTO(slug: string) {
   const data = await db.query.users.findMany({
     where: eq(users.slug, slug),
     // Return specific columns here
-  })
-  const user = data[0]
+  });
+  const user = data[0];
 
-  const currentUser = await getUser(user.id)
+  const currentUser = await getUser(user.id);
 
   // Or return only what's specific to the query here
   return {
@@ -253,30 +253,30 @@ export async function getProfileDTO(slug: string) {
     phonenumber: canSeePhoneNumber(currentUser, user.team)
       ? user.phonenumber
       : null,
-  }
+  };
 }
 ```
 
 ```js filename="app/lib/dto.js" switcher
-import 'server-only'
-import { getUser } from '@/app/lib/dal'
+import "server-only";
+import { getUser } from "@/app/lib/dal";
 
 function canSeeUsername(viewer) {
-  return true
+  return true;
 }
 
 function canSeePhoneNumber(viewer, team) {
-  return viewer.isAdmin || team === viewer.team
+  return viewer.isAdmin || team === viewer.team;
 }
 
 export async function getProfileDTO(slug) {
   const data = await db.query.users.findMany({
     where: eq(users.slug, slug),
     // Return specific columns here
-  })
-  const user = data[0]
+  });
+  const user = data[0];
 
-  const currentUser = await getUser(user.id)
+  const currentUser = await getUser(user.id);
 
   // Or return only what's specific to the query here
   return {
@@ -284,7 +284,7 @@ export async function getProfileDTO(slug) {
     phonenumber: canSeePhoneNumber(currentUser, user.team)
       ? user.phonenumber
       : null,
-  }
+  };
 }
 ```
 
@@ -300,35 +300,35 @@ By centralizing your data requests and authorization logic in a DAL and using DT
 Auth check in [Server Components](/docs/app/getting-started/server-and-client-components) are useful for role-based access. For example, to conditionally render components based on the user's role:
 
 ```tsx filename="app/dashboard/page.tsx" switcher
-import { verifySession } from '@/app/lib/dal'
+import { verifySession } from "@/app/lib/dal";
 
 export default async function Dashboard() {
-  const session = await verifySession()
-  const userRole = session?.user?.role // Assuming 'role' is part of the session object
+  const session = await verifySession();
+  const userRole = session?.user?.role; // Assuming 'role' is part of the session object
 
-  if (userRole === 'admin') {
-    return <AdminDashboard />
-  } else if (userRole === 'user') {
-    return <UserDashboard />
+  if (userRole === "admin") {
+    return <AdminDashboard />;
+  } else if (userRole === "user") {
+    return <UserDashboard />;
   } else {
-    redirect('/login')
+    redirect("/login");
   }
 }
 ```
 
 ```jsx filename="app/dashboard/page.jsx" switcher
-import { verifySession } from '@/app/lib/dal'
+import { verifySession } from "@/app/lib/dal";
 
 export default async function Dashboard() {
-  const session = await verifySession()
-  const userRole = session?.user?.role // Assuming 'role' is part of the session object
+  const session = await verifySession();
+  const userRole = session?.user?.role; // Assuming 'role' is part of the session object
 
-  if (userRole === 'admin') {
-    return <AdminDashboard />
-  } else if (userRole === 'user') {
-    return <UserDashboard />
+  if (userRole === "admin") {
+    return <AdminDashboard />;
+  } else if (userRole === "user") {
+    return <UserDashboard />;
   } else {
-    redirect('/login')
+    redirect("/login");
   }
 }
 ```
@@ -350,38 +350,38 @@ This guarantees that wherever `getUser()` is called within your application, the
 For example, in a dashboard page, you can verify the user session and fetch the user data:
 
 ```tsx filename="app/dashboard/page.tsx" switcher
-import { verifySession } from '@/app/lib/dal'
+import { verifySession } from "@/app/lib/dal";
 
 export default async function DashboardPage() {
-  const session = await verifySession()
+  const session = await verifySession();
 
   // Fetch user-specific data from your database or data source
-  const user = await getUserData(session.userId)
+  const user = await getUserData(session.userId);
 
   return (
     <div>
       <h1>Welcome, {user.name}</h1>
       {/* Dashboard content */}
     </div>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/dashboard/page.jsx" switcher
-import { verifySession } from '@/app/lib/dal'
+import { verifySession } from "@/app/lib/dal";
 
 export default async function DashboardPage() {
-  const session = await verifySession()
+  const session = await verifySession();
 
   // Fetch user-specific data from your database or data source
-  const user = await getUserData(session.userId)
+  const user = await getUserData(session.userId);
 
   return (
     <div>
       <h1>Welcome, {user.name}</h1>
       {/* Dashboard content */}
     </div>
-  )
+  );
 }
 ```
 
@@ -390,14 +390,14 @@ export default async function DashboardPage() {
 You can also perform auth checks in leaf components that conditionally render UI elements based on user permissions. For example, a component that displays admin-only actions:
 
 ```tsx filename="app/ui/admin-actions.tsx" switcher
-import { verifySession } from '@/app/lib/dal'
+import { verifySession } from "@/app/lib/dal";
 
 export default async function AdminActions() {
-  const session = await verifySession()
-  const userRole = session?.user?.role
+  const session = await verifySession();
+  const userRole = session?.user?.role;
 
-  if (userRole !== 'admin') {
-    return null
+  if (userRole !== "admin") {
+    return null;
   }
 
   return (
@@ -405,19 +405,19 @@ export default async function AdminActions() {
       <button>Delete User</button>
       <button>Edit Settings</button>
     </div>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/ui/admin-actions.jsx" switcher
-import { verifySession } from '@/app/lib/dal'
+import { verifySession } from "@/app/lib/dal";
 
 export default async function AdminActions() {
-  const session = await verifySession()
-  const userRole = session?.user?.role
+  const session = await verifySession();
+  const userRole = session?.user?.role;
 
-  if (userRole !== 'admin') {
-    return null
+  if (userRole !== "admin") {
+    return null;
   }
 
   return (
@@ -425,7 +425,7 @@ export default async function AdminActions() {
       <button>Delete User</button>
       <button>Edit Settings</button>
     </div>
-  )
+  );
 }
 ```
 
@@ -443,16 +443,16 @@ Treat [Server Actions](/docs/app/getting-started/updating-data) with the same se
 In the example below, we check the user's role before allowing the action to proceed:
 
 ```ts filename="app/lib/actions.ts" switcher
-'use server'
-import { verifySession } from '@/app/lib/dal'
+"use server";
+import { verifySession } from "@/app/lib/dal";
 
 export async function serverAction(formData: FormData) {
-  const session = await verifySession()
-  const userRole = session?.user?.role
+  const session = await verifySession();
+  const userRole = session?.user?.role;
 
   // Return early if user is not authorized to perform the action
-  if (userRole !== 'admin') {
-    return null
+  if (userRole !== "admin") {
+    return null;
   }
 
   // Proceed with the action for authorized users
@@ -460,16 +460,16 @@ export async function serverAction(formData: FormData) {
 ```
 
 ```js filename="app/lib/actions.js" switcher
-'use server'
-import { verifySession } from '@/app/lib/dal'
+"use server";
+import { verifySession } from "@/app/lib/dal";
 
 export async function serverAction() {
-  const session = await verifySession()
-  const userRole = session.user.role
+  const session = await verifySession();
+  const userRole = session.user.role;
 
   // Return early if user is not authorized to perform the action
-  if (userRole !== 'admin') {
-    return null
+  if (userRole !== "admin") {
+    return null;
   }
 
   // Proceed with the action for authorized users
@@ -483,22 +483,22 @@ Treat [Route Handlers](/docs/app/api-reference/file-conventions/route) with the 
 For example:
 
 ```ts filename="app/api/route.ts" switcher
-import { verifySession } from '@/app/lib/dal'
+import { verifySession } from "@/app/lib/dal";
 
 export async function GET() {
   // User authentication and role verification
-  const session = await verifySession()
+  const session = await verifySession();
 
   // Check if the user is authenticated
   if (!session) {
     // User is not authenticated
-    return new Response(null, { status: 401 })
+    return new Response(null, { status: 401 });
   }
 
   // Check if the user has the 'admin' role
-  if (session.user.role !== 'admin') {
+  if (session.user.role !== "admin") {
     // User is authenticated but does not have the right permissions
-    return new Response(null, { status: 403 })
+    return new Response(null, { status: 403 });
   }
 
   // Continue for authorized users
@@ -506,22 +506,22 @@ export async function GET() {
 ```
 
 ```js filename="app/api/route.js" switcher
-import { verifySession } from '@/app/lib/dal'
+import { verifySession } from "@/app/lib/dal";
 
 export async function GET() {
   // User authentication and role verification
-  const session = await verifySession()
+  const session = await verifySession();
 
   // Check if the user is authenticated
   if (!session) {
     // User is not authenticated
-    return new Response(null, { status: 401 })
+    return new Response(null, { status: 401 });
   }
 
   // Check if the user has the 'admin' role
-  if (session.user.role !== 'admin') {
+  if (session.user.role !== "admin") {
     // User is authenticated but does not have the right permissions
-    return new Response(null, { status: 403 })
+    return new Response(null, { status: 403 });
   }
 
   // Continue for authorized users
@@ -537,7 +537,7 @@ Using context providers for auth works due to [interleaving](/docs/app/getting-s
 This works, but any child Server Components will be rendered on the server first, and will not have access to the context provider’s session data:
 
 ```tsx filename="app/layout.ts" switcher
-import { ContextProvider } from 'auth-lib'
+import { ContextProvider } from "auth-lib";
 
 export default function RootLayout({ children }) {
   return (
@@ -546,7 +546,7 @@ export default function RootLayout({ children }) {
         <ContextProvider>{children}</ContextProvider>
       </body>
     </html>
-  )
+  );
 }
 ```
 

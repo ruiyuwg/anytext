@@ -11,22 +11,27 @@ zod
 Defines the shape of data queried from the database - can be used to validate API responses.
 
 ```ts copy
-import { pgTable, text, integer } from 'drizzle-orm/pg-core';
-import { createSelectSchema } from 'drizzle-orm/zod';
+import { pgTable, text, integer } from "drizzle-orm/pg-core";
+import { createSelectSchema } from "drizzle-orm/zod";
 
-const users = pgTable('users', {
+const users = pgTable("users", {
   id: integer().generatedAlwaysAsIdentity().primaryKey(),
   name: text().notNull(),
-  age: integer().notNull()
+  age: integer().notNull(),
 });
 
 const userSelectSchema = createSelectSchema(users);
 
-const rows = await db.select({ id: users.id, name: users.name }).from(users).limit(1);
-const parsed: { id: number; name: string; age: number } = userSelectSchema.parse(rows[0]); // Error: `age` is not returned in the above query
+const rows = await db
+  .select({ id: users.id, name: users.name })
+  .from(users)
+  .limit(1);
+const parsed: { id: number; name: string; age: number } =
+  userSelectSchema.parse(rows[0]); // Error: `age` is not returned in the above query
 
 const rows = await db.select().from(users).limit(1);
-const parsed: { id: number; name: string; age: number } = userSelectSchema.parse(rows[0]); // Will parse successfully
+const parsed: { id: number; name: string; age: number } =
+  userSelectSchema.parse(rows[0]); // Will parse successfully
 ```
 
 Views and enums are also supported.
@@ -49,22 +54,22 @@ const parsed: { id: number; name: string; age: number } = usersViewSchema.parse(
 Defines the shape of data to be inserted into the database - can be used to validate API requests.
 
 ```ts copy
-import { pgTable, text, integer } from 'drizzle-orm/pg-core';
-import { createInsertSchema } from 'drizzle-orm/zod';
+import { pgTable, text, integer } from "drizzle-orm/pg-core";
+import { createInsertSchema } from "drizzle-orm/zod";
 
-const users = pgTable('users', {
+const users = pgTable("users", {
   id: integer().generatedAlwaysAsIdentity().primaryKey(),
   name: text().notNull(),
-  age: integer().notNull()
+  age: integer().notNull(),
 });
 
 const userInsertSchema = createInsertSchema(users);
 
-const user = { name: 'John' };
-const parsed: { name: string, age: number } = userInsertSchema.parse(user); // Error: `age` is not defined
+const user = { name: "John" };
+const parsed: { name: string; age: number } = userInsertSchema.parse(user); // Error: `age` is not defined
 
-const user = { name: 'Jane', age: 30 };
-const parsed: { name: string, age: number } = userInsertSchema.parse(user); // Will parse successfully
+const user = { name: "Jane", age: 30 };
+const parsed: { name: string; age: number } = userInsertSchema.parse(user); // Will parse successfully
 await db.insert(users).values(parsed);
 ```
 
@@ -73,23 +78,25 @@ await db.insert(users).values(parsed);
 Defines the shape of data to be updated in the database - can be used to validate API requests.
 
 ```ts copy
-import { pgTable, text, integer } from 'drizzle-orm/pg-core';
-import { createUpdateSchema } from 'drizzle-orm/zod';
+import { pgTable, text, integer } from "drizzle-orm/pg-core";
+import { createUpdateSchema } from "drizzle-orm/zod";
 
-const users = pgTable('users', {
+const users = pgTable("users", {
   id: integer().generatedAlwaysAsIdentity().primaryKey(),
   name: text().notNull(),
-  age: integer().notNull()
+  age: integer().notNull(),
 });
 
 const userUpdateSchema = createUpdateSchema(users);
 
-const user = { id: 5, name: 'John' };
-const parsed: { name?: string | undefined, age?: number | undefined } = userUpdateSchema.parse(user); // Error: `id` is a generated column, it can't be updated
+const user = { id: 5, name: "John" };
+const parsed: { name?: string | undefined; age?: number | undefined } =
+  userUpdateSchema.parse(user); // Error: `id` is a generated column, it can't be updated
 
 const user = { age: 35 };
-const parsed: { name?: string | undefined, age?: number | undefined } = userUpdateSchema.parse(user); // Will parse successfully
-await db.update(users).set(parsed).where(eq(users.name, 'Jane'));
+const parsed: { name?: string | undefined; age?: number | undefined } =
+  userUpdateSchema.parse(user); // Will parse successfully
+await db.update(users).set(parsed).where(eq(users.name, "Jane"));
 ```
 
 ### Refinements
@@ -131,21 +138,21 @@ For more advanced use cases, you can use the `createSchemaFactory` function.
 **Use case: Using an extended Zod instance**
 
 ```ts copy
-import { pgTable, text, integer } from 'drizzle-orm/pg-core';
-import { createSchemaFactory } from 'drizzle-orm/zod';
-import { z } from '@hono/zod-openapi'; // Extended Zod instance
+import { pgTable, text, integer } from "drizzle-orm/pg-core";
+import { createSchemaFactory } from "drizzle-orm/zod";
+import { z } from "@hono/zod-openapi"; // Extended Zod instance
 
-const users = pgTable('users', {
+const users = pgTable("users", {
   id: integer().generatedAlwaysAsIdentity().primaryKey(),
   name: text().notNull(),
-  age: integer().notNull()
+  age: integer().notNull(),
 });
 
 const { createInsertSchema } = createSchemaFactory({ zodInstance: z });
 
 const userInsertSchema = createInsertSchema(users, {
   // We can now use the extended instance
-  name: (schema) => schema.openapi({ example: 'John' })
+  name: (schema) => schema.openapi({ example: "John" }),
 });
 ```
 
@@ -183,30 +190,30 @@ pg.boolean();
 
 mysql.boolean();
 
-sqlite.integer({ mode: 'boolean' });
+sqlite.integer({ mode: "boolean" });
 
 // Schema
 z.boolean();
 ```
 
 ```ts
-pg.date({ mode: 'date' });
-pg.timestamp({ mode: 'date' });
+pg.date({ mode: "date" });
+pg.timestamp({ mode: "date" });
 
-mysql.date({ mode: 'date' });
-mysql.datetime({ mode: 'date' });
-mysql.timestamp({ mode: 'date' });
+mysql.date({ mode: "date" });
+mysql.datetime({ mode: "date" });
+mysql.timestamp({ mode: "date" });
 
-sqlite.integer({ mode: 'timestamp' });
-sqlite.integer({ mode: 'timestamp_ms' });
+sqlite.integer({ mode: "timestamp" });
+sqlite.integer({ mode: "timestamp_ms" });
 
 // Schema
 z.date();
 ```
 
 ```ts
-pg.date({ mode: 'string' });
-pg.timestamp({ mode: 'string' });
+pg.date({ mode: "string" });
+pg.timestamp({ mode: "string" });
 pg.cidr();
 pg.inet();
 pg.interval();
@@ -218,15 +225,15 @@ pg.sparsevec();
 pg.time();
 
 mysql.binary();
-mysql.date({ mode: 'string' });
-mysql.datetime({ mode: 'string' });
+mysql.date({ mode: "string" });
+mysql.datetime({ mode: "string" });
 mysql.decimal();
 mysql.time();
-mysql.timestamp({ mode: 'string' });
+mysql.timestamp({ mode: "string" });
 mysql.varbinary();
 
 sqlite.numeric();
-sqlite.text({ mode: 'text' });
+sqlite.text({ mode: "text" });
 
 // Schema
 z.string();
@@ -411,13 +418,13 @@ z.number().min(0).max(281_474_976_710_655); // unsigned 48-bit integer lower and
 ```
 
 ```ts
-pg.bigint({ mode: 'number' });
-pg.bigserial({ mode: 'number' });
+pg.bigint({ mode: "number" });
+pg.bigserial({ mode: "number" });
 
-mysql.bigint({ mode: 'number' });
-mysql.bigserial({ mode: 'number' });
+mysql.bigint({ mode: "number" });
+mysql.bigserial({ mode: "number" });
 
-sqlite.integer({ mode: 'number' });
+sqlite.integer({ mode: "number" });
 
 // Schema
 z.number().min(-9_007_199_254_740_991).max(9_007_199_254_740_991).int(); // Javascript min. and max. safe integers
@@ -431,19 +438,19 @@ z.number().min(0).max(9_007_199_254_740_991).int(); // Javascript max. safe inte
 ```
 
 ```ts
-pg.bigint({ mode: 'bigint' });
-pg.bigserial({ mode: 'bigint' });
+pg.bigint({ mode: "bigint" });
+pg.bigserial({ mode: "bigint" });
 
-mysql.bigint({ mode: 'bigint' });
+mysql.bigint({ mode: "bigint" });
 
-sqlite.blob({ mode: 'bigint' });
+sqlite.blob({ mode: "bigint" });
 
 // Schema
 z.bigint().min(-9_223_372_036_854_775_808n).max(9_223_372_036_854_775_807n); // 64-bit integer lower and upper limit
 ```
 
 ```ts
-mysql.bigint({ mode: 'bigint', unsigned: true });
+mysql.bigint({ mode: "bigint", unsigned: true });
 
 // Schema
 z.bigint().min(0).max(18_446_744_073_709_551_615n); // unsigned 64-bit integer lower and upper limit
@@ -457,16 +464,16 @@ z.number().min(1_901).max(2_155).int();
 ```
 
 ```ts
-pg.geometry({ type: 'point', mode: 'tuple' });
-pg.point({ mode: 'tuple' });
+pg.geometry({ type: "point", mode: "tuple" });
+pg.point({ mode: "tuple" });
 
 // Schema
 z.tuple([z.number(), z.number()]);
 ```
 
 ```ts
-pg.geometry({ type: 'point', mode: 'xy' });
-pg.point({ mode: 'xy' });
+pg.geometry({ type: "point", mode: "xy" });
+pg.point({ mode: "xy" });
 
 // Schema
 z.object({ x: z.number(), y: z.number() });
@@ -481,14 +488,14 @@ z.array(z.number()).length(dimensions);
 ```
 
 ```ts
-pg.line({ mode: 'abc' });
+pg.line({ mode: "abc" });
 
 // Schema
 z.object({ a: z.number(), b: z.number(), c: z.number() });
 ```
 
 ```ts
-pg.line({ mode: 'tuple' });
+pg.line({ mode: "tuple" });
 
 // Schema
 z.tuple([z.number(), z.number(), z.number()]);
@@ -500,15 +507,19 @@ pg.jsonb();
 
 mysql.json();
 
-sqlite.blob({ mode: 'json' });
-sqlite.text({ mode: 'json' });
+sqlite.blob({ mode: "json" });
+sqlite.text({ mode: "json" });
 
 // Schema
-z.union([z.union([z.string(), z.number(), z.boolean(), z.null()]), z.record(z.any()), z.array(z.any())]);
+z.union([
+  z.union([z.string(), z.number(), z.boolean(), z.null()]),
+  z.record(z.any()),
+  z.array(z.any()),
+]);
 ```
 
 ```ts
-sqlite.blob({ mode: 'buffer' });
+sqlite.blob({ mode: "buffer" });
 
 // Schema
 z.custom((v) => v instanceof Buffer);

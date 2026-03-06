@@ -40,7 +40,9 @@ The base class for all Zod schemas is `$ZodType`. It accepts two generic paramet
 
 ```ts
 export class $ZodType<Output = unknown, Input = unknown> {
-  _zod: { /* internals */}
+  _zod: {
+    /* internals */
+  };
 }
 ```
 
@@ -162,15 +164,15 @@ Here is a complete inheritance diagram for the core schema classes:
 
 ## Internals
 
-All `zod/v4/core` subclasses only contain a single property: `_zod`. This property is an object containing the schemas *internals*. The goal is to make `zod/v4/core` as extensible and unopinionated as possible. Other libraries can "build their own Zod" on top of these classes without `zod/v4/core` cluttering up the interface. Refer to the implementations of `zod` and `zod/mini` for examples of how to extend these classes.
+All `zod/v4/core` subclasses only contain a single property: `_zod`. This property is an object containing the schemas _internals_. The goal is to make `zod/v4/core` as extensible and unopinionated as possible. Other libraries can "build their own Zod" on top of these classes without `zod/v4/core` cluttering up the interface. Refer to the implementations of `zod` and `zod/mini` for examples of how to extend these classes.
 
 The `_zod` internals property contains some notable properties:
 
-- `.def` — The schema's *definition*: this is the object you pass into the class's constructor to create an instance. It completely describes the schema, and it's JSON-serializable.
+- `.def` — The schema's _definition_: this is the object you pass into the class's constructor to create an instance. It completely describes the schema, and it's JSON-serializable.
   - `.def.type` — A string representing the schema's type, e.g. `"string"`, `"object"`, `"array"`, etc.
-  - `.def.checks` — An array of *checks* that are executed by the schema after parsing.
-- `.input` — A virtual property that "stores" the schema's *inferred input type*.
-- `.output` — A virtual property that "stores" the schema's *inferred output type*.
+  - `.def.checks` — An array of _checks_ that are executed by the schema after parsing.
+- `.input` — A virtual property that "stores" the schema's _inferred input type_.
+- `.output` — A virtual property that "stores" the schema's _inferred output type_.
 - `.run()` — The schema's internal parser implementation.
 
 If you are implementing a tool (say, a code generator) that must traverse Zod schemas, you can cast any schema to `$ZodTypes` and use the `def` property to discriminate between these classes.
@@ -192,7 +194,7 @@ export function walk(_schema: z.$ZodType) {
 }
 ```
 
-There are a number of subclasses of `$ZodString` that implement various *string formats*. These are exported as `z.$ZodStringFormatTypes`.
+There are a number of subclasses of `$ZodString` that implement various _string formats_. These are exported as `z.$ZodStringFormatTypes`.
 
 ```ts
 export type $ZodStringFormatTypes =
@@ -218,7 +220,7 @@ export type $ZodStringFormatTypes =
   | $ZodBase64
   | $ZodBase64URL
   | $ZodE164
-  | $ZodJWT
+  | $ZodJWT;
 ```
 
 ## Parsing
@@ -237,7 +239,7 @@ await z.safeParseAsync(schema, "hello");
 
 ## Checks
 
-Every Zod schema contains an array of *checks*. These perform post-parsing refinements (and occasionally mutations) that *do not affect* the inferred type.
+Every Zod schema contains an array of _checks_. These perform post-parsing refinements (and occasionally mutations) that _do not affect_ the inferred type.
 
 ```ts
 const schema = z.string().check(z.email()).check(z.min(5));
@@ -251,13 +253,15 @@ The base class for all Zod checks is `$ZodCheck`. It accepts a single generic pa
 
 ```ts
 export class $ZodCheck<in T = unknown> {
-  _zod: { /* internals */}
+  _zod: {
+    /* internals */
+  };
 }
 ```
 
 The `_zod` internals property contains some notable properties:
 
-- `.def` — The check's *definition*: this is the object you pass into the class's constructor to create the check. It completely describes the check, and it's JSON-serializable.
+- `.def` — The check's _definition_: this is the object you pass into the class's constructor to create the check. It completely describes the check, and it's JSON-serializable.
   - `.def.check` — A string representing the check's type, e.g. `"min_length"`, `"less_than"`, `"string_format"`, etc.
 - `.check()` — Contains the check's validation logic.
 
@@ -279,7 +283,7 @@ export type $ZodChecks =
   | $ZodCheckProperty
   | $ZodCheckMimeType
   | $ZodCheckOverwrite
-  | $ZodCheckStringFormat
+  | $ZodCheckStringFormat;
 ```
 
 You can use the `._zod.def.check` property to discriminate between these classes.
@@ -296,7 +300,7 @@ switch (def.check) {
 }
 ```
 
-As with schema types, there are a number of subclasses of `$ZodCheckStringFormat` that implement various *string formats*.
+As with schema types, there are a number of subclasses of `$ZodCheckStringFormat` that implement various _string formats_.
 
 ```ts
 export type $ZodStringFormatChecks =
@@ -349,35 +353,35 @@ switch (def.check) {
       switch (formatCheckDef.format) {
         case "email":
         case "url":
-          // do stuff
+        // do stuff
       }
     }
     break;
 }
 ```
 
-You'll notice some of these string format *checks* overlap with the string format *types* above. That's because these classes implement both the `$ZodCheck` and `$ZodType` interfaces. That is, they can be used as either a check or a type. In these cases, both `._zod.parse` (the schema parser) and `._zod.check` (the check validation) are executed during parsing. In effect, the instance is prepended to its own `checks` array (though it won't actually exist in `._zod.def.checks`).
+You'll notice some of these string format _checks_ overlap with the string format _types_ above. That's because these classes implement both the `$ZodCheck` and `$ZodType` interfaces. That is, they can be used as either a check or a type. In these cases, both `._zod.parse` (the schema parser) and `._zod.check` (the check validation) are executed during parsing. In effect, the instance is prepended to its own `checks` array (though it won't actually exist in `._zod.def.checks`).
 
 ```ts
 // as a type
 z.email().parse("user@example.com");
 
 // as a check
-z.string().check(z.email()).parse("user@example.com")
+z.string().check(z.email()).parse("user@example.com");
 ```
 
 ## Errors
 
 The base class for all errors in Zod is `$ZodError`.
 
-> For performance reasons, `$ZodError` *does not* extend the built-in `Error` class! So using `instanceof Error` will return `false`.
+> For performance reasons, `$ZodError` _does not_ extend the built-in `Error` class! So using `instanceof Error` will return `false`.
 
 - The `zod` package implements a subclass of `$ZodError` called `ZodError` with some additional convenience methods.
 - The `zod/mini` sub-package directly uses `$ZodError`
 
 ```ts
 export class $ZodError<T = unknown> implements Error {
- public issues: $ZodIssue[];
+  public issues: $ZodIssue[];
 }
 ```
 
@@ -427,9 +431,9 @@ If your tool accepts Zod schemas from a consumer/user, you should add `"zod/v4/c
 
 ```json
 {
-"peerDependencies": {
-  "zod/v4/core": "*"
-}
+  "peerDependencies": {
+    "zod/v4/core": "*"
+  }
 }
 ```
 
@@ -468,7 +472,7 @@ To import it:
 import * as z from "zod/mini";
 ```
 
-Zod Mini implements the exact same functionality as `zod`, but using a *functional*, *tree-shakable* API. If you're coming from `zod`, this means you generally will use *functions* in place of methods.
+Zod Mini implements the exact same functionality as `zod`, but using a _functional_, _tree-shakable_ API. If you're coming from `zod`, this means you generally will use _functions_ in place of methods.
 
 ```ts
 // regular Zod
@@ -480,13 +484,13 @@ const mySchema = z.nullable(z.optional(z.string()));
 
 ## Tree-shaking
 
-Tree-shaking is a technique used by modern bundlers to remove unused code from the final bundle. It's also referred to as *dead-code elimination*.
+Tree-shaking is a technique used by modern bundlers to remove unused code from the final bundle. It's also referred to as _dead-code elimination_.
 
 In regular Zod, schemas provide a range of convenience methods to perform some common operations (e.g. `.min()` on string schemas). Bundlers are generally not able to remove ("treeshake") unused method implementations from your bundle, but they are able to remove unused top-level functions. As such, the API of Zod Mini uses more functions than methods.
 
 ```ts
 // regular Zod
-z.string().min(5).max(10).trim()
+z.string().min(5).max(10).trim();
 
 // Zod Mini
 z.string().check(z.minLength(5), z.maxLength(10), z.trim());
@@ -495,7 +499,7 @@ z.string().check(z.minLength(5), z.maxLength(10), z.trim());
 To give a general idea about the bundle size reduction, consider this simple script:
 
 ```ts
-z.boolean().parse(true)
+z.boolean().parse(true);
 ```
 
 Bundling this with Zod and Zod Mini results in the following bundle sizes. Zod Mini results in a 64% reduction.
@@ -562,14 +566,14 @@ All Zod Mini schemas extend the `z.ZodMiniType` base class, which in turn extend
 This is an obvious one. All Zod Mini schemas implement the same parsing methods as `zod`.
 
 ```ts
-import * as z from "zod/mini"
+import * as z from "zod/mini";
 
 const mySchema = z.string();
 
-mySchema.parse('asdf')
-await mySchema.parseAsync('asdf')
-mySchema.safeParse('asdf')
-await mySchema.safeParseAsync('asdf')
+mySchema.parse("asdf");
+await mySchema.parseAsync("asdf");
+mySchema.safeParse("asdf");
+await mySchema.safeParseAsync("asdf");
 ```
 
 ### `.check()`
@@ -582,20 +586,20 @@ import * as z from "zod";
 z.string()
   .min(5)
   .max(10)
-  .refine(val => val.includes("@"))
-  .trim()
+  .refine((val) => val.includes("@"))
+  .trim();
 ```
 
 In Zod Mini such methods aren't implemented. Instead you pass these checks into schemas using the `.check()` method:
 
 ```ts
-import * as z from "zod/mini"
+import * as z from "zod/mini";
 
 z.string().check(
-  z.minLength(5), 
+  z.minLength(5),
   z.maxLength(10),
-  z.refine(val => val.includes("@")),
-  z.trim()
+  z.refine((val) => val.includes("@")),
+  z.trim(),
 );
 ```
 
@@ -627,11 +631,11 @@ z.property(key, schema);
 z.mime(value);
 
 // custom checks
-z.refine()
-z.check()   // replaces .superRefine()
+z.refine();
+z.check(); // replaces .superRefine()
 
 // mutations (these do not change the inferred types)
-z.overwrite(value => newValue);
+z.overwrite((value) => newValue);
 z.normalize();
 z.trim();
 z.toLowerCase();
@@ -647,17 +651,17 @@ z.describe("...");
 For registering a schema in a [registry](/metadata#registries).
 
 ```ts
-const myReg = z.registry<{title: string}>();
+const myReg = z.registry<{ title: string }>();
 
 z.string().register(myReg, { title: "My cool string schema" });
 ```
 
 ### `.brand()`
 
-For *branding* a schema. Refer to the [Branded types](/api#branded-types) docs for more information.
+For _branding_ a schema. Refer to the [Branded types](/api#branded-types) docs for more information.
 
 ```ts
-import * as z from "zod/mini"
+import * as z from "zod/mini";
 
 const USD = z.string().brand("USD");
 ```
@@ -667,7 +671,7 @@ const USD = z.string().brand("USD");
 Returns an identical clone of the current schema using the provided `def`.
 
 ```ts
-const mySchema = z.string()
+const mySchema = z.string();
 
 mySchema.clone(mySchema._zod.def);
 ```
@@ -679,7 +683,7 @@ While regular Zod automatically loads the English (`en`) locale, Zod Mini does n
 This means, by default the `message` property of all issues will simply read `"Invalid input"`. To load the English locale:
 
 ```ts
-import * as z from "zod/mini"
+import * as z from "zod/mini";
 
 z.config(z.locales.en());
 ```
@@ -707,10 +711,7 @@ const schema = z.object({
 The API relies on methods to provide a concise, chainable, autocomplete-friendly way to define complex types.
 
 ```ts
-z.string()
-  .min(5)
-  .max(10)
-  .toLowerCase();
+z.string().min(5).max(10).toLowerCase();
 ```
 
 All schemas extend the `z.ZodType` base class, which in turn extends `z.$ZodType` from [`zod/v4/core`](/packages/core). All instance of `ZodType` implement the following methods:
@@ -725,7 +726,6 @@ mySchema.parse(data);
 mySchema.safeParse(data);
 mySchema.parseAsync(data);
 mySchema.safeParseAsync(data);
-
 
 // refinements
 mySchema.refine(refinementFunc);

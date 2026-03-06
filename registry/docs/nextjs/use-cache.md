@@ -13,29 +13,29 @@ The `use cache` directive allows you to mark a route, React component, or a func
 `use cache` is a Cache Components feature. To enable it, add the [`cacheComponents`](/docs/app/api-reference/config/next-config-js/cacheComponents) option to your `next.config.ts` file:
 
 ```ts filename="next.config.ts" switcher
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   cacheComponents: true,
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 ```js filename="next.config.js" switcher
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   cacheComponents: true,
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 Then, add `use cache` at the file, component, or function level:
 
 ```tsx
 // File level
-'use cache'
+"use cache";
 
 export default async function Page() {
   // ...
@@ -43,15 +43,15 @@ export default async function Page() {
 
 // Component level
 export async function MyComponent() {
-  'use cache'
-  return <></>
+  "use cache";
+  return <></>;
 }
 
 // Function level
 export async function getData() {
-  'use cache'
-  const data = await fetch('/api/data')
-  return data
+  "use cache";
+  const data = await fetch("/api/data");
+  return data;
 }
 ```
 
@@ -73,12 +73,12 @@ When a cached function references variables from outer scopes, those variables a
 ```tsx filename="lib/data.ts"
 async function Component({ userId }: { userId: string }) {
   const getData = async (filter: string) => {
-    'use cache'
+    "use cache";
     // Cache key includes both userId (from closure) and filter (argument)
-    return fetch(`/api/users/${userId}/data?filter=${filter}`)
-  }
+    return fetch(`/api/users/${userId}/data?filter=${filter}`);
+  };
 
-  return getData('active')
+  return getData("active");
 }
 ```
 
@@ -122,18 +122,18 @@ async function UserCard({
   id,
   config,
 }: {
-  id: string
-  config: { theme: string }
+  id: string;
+  config: { theme: string };
 }) {
-  'use cache'
-  return <div>{id}</div>
+  "use cache";
+  return <div>{id}</div>;
 }
 
 // Invalid - class instance
 async function UserProfile({ user }: { user: UserClass }) {
-  'use cache'
+  "use cache";
   // Error: Cannot serialize class instance
-  return <div>{user.name}</div>
+  return <div>{user.name}</div>;
 }
 ```
 
@@ -143,14 +143,14 @@ You can accept non-serializable values **as long as you don't introspect them**.
 
 ```tsx filename="app/components/cached-wrapper.tsx"
 async function CachedWrapper({ children }: { children: ReactNode }) {
-  'use cache'
+  "use cache";
   // Don't read or modify children - just pass it through
   return (
     <div className="wrapper">
       <header>Cached Header</header>
       {children}
     </div>
-  )
+  );
 }
 
 // Usage: children can be dynamic
@@ -159,7 +159,7 @@ export default function Page() {
     <CachedWrapper>
       <DynamicComponent /> {/* Not cached, passed through */}
     </CachedWrapper>
-  )
+  );
 }
 ```
 
@@ -167,9 +167,9 @@ You can also pass Server Actions through cached components:
 
 ```tsx filename="app/components/cached-form.tsx"
 async function CachedForm({ action }: { action: () => Promise<void> }) {
-  'use cache'
+  "use cache";
   // Don't call action here - just pass it through
-  return <form action={action}>{/* ... */}</form>
+  return <form action={action}>{/* ... */}</form>;
 }
 ```
 
@@ -203,22 +203,22 @@ Very rarely, for compliance requirements or when you can't refactor your code to
 This means you cannot use `React.cache` to pass data into a `use cache` scope:
 
 ```tsx
-import { cache } from 'react'
+import { cache } from "react";
 
-const store = cache(() => ({ current: null as string | null }))
+const store = cache(() => ({ current: null as string | null }));
 
 function Parent() {
-  const shared = store()
-  shared.current = 'value from parent'
-  return <Child />
+  const shared = store();
+  shared.current = "value from parent";
+  return <Child />;
 }
 
 async function Child() {
-  'use cache'
-  const shared = store()
+  "use cache";
+  const shared = store();
   // shared.current is null, not 'value from parent'
   // use cache has its own isolated React.cache scope
-  return <div>{shared.current}</div>
+  return <div>{shared.current}</div>;
 }
 ```
 
@@ -242,9 +242,9 @@ By default, `use cache` uses the `default` profile with these settings:
 
 ```tsx filename="lib/data.ts"
 async function getData() {
-  'use cache'
+  "use cache";
   // Implicitly uses default profile
-  return fetch('/api/data')
+  return fetch("/api/data");
 }
 ```
 
@@ -253,12 +253,12 @@ async function getData() {
 Use the [`cacheLife`](/docs/app/api-reference/functions/cacheLife) function to customize cache duration:
 
 ```tsx filename="lib/data.ts"
-import { cacheLife } from 'next/cache'
+import { cacheLife } from "next/cache";
 
 async function getData() {
-  'use cache'
-  cacheLife('hours') // Use built-in 'hours' profile
-  return fetch('/api/data')
+  "use cache";
+  cacheLife("hours"); // Use built-in 'hours' profile
+  return fetch("/api/data");
 }
 ```
 
@@ -267,12 +267,12 @@ async function getData() {
 Use [`cacheTag`](/docs/app/api-reference/functions/cacheTag), [`updateTag`](/docs/app/api-reference/functions/updateTag), or [`revalidateTag`](/docs/app/api-reference/functions/revalidateTag) for on-demand cache invalidation:
 
 ```tsx filename="lib/data.ts"
-import { cacheTag } from 'next/cache'
+import { cacheTag } from "next/cache";
 
 async function getProducts() {
-  'use cache'
-  cacheTag('products')
-  return fetch('/api/products')
+  "use cache";
+  cacheTag("products");
+  return fetch("/api/products");
 }
 ```
 
@@ -296,28 +296,28 @@ Both `cacheLife` and `cacheTag` integrate across client and server caching layer
 To pre-render an entire route, add `use cache` to the top of **both** the `layout` and `page` files. Each of these segments are treated as separate entry points in your application, and will be cached independently.
 
 ```tsx filename="app/layout.tsx" switcher
-'use cache'
+"use cache";
 
 export default async function Layout({ children }: { children: ReactNode }) {
-  return <div>{children}</div>
+  return <div>{children}</div>;
 }
 ```
 
 ```jsx filename="app/layout.js" switcher
-'use cache'
+"use cache";
 
 export default async function Layout({ children }) {
-  return <div>{children}</div>
+  return <div>{children}</div>;
 }
 ```
 
 Any components imported and nested in `page` file are part of the cache output associated with the `page`.
 
 ```tsx filename="app/page.tsx" switcher
-'use cache'
+"use cache";
 
 async function Users() {
-  const users = await fetch('/api/users')
+  const users = await fetch("/api/users");
   // loop through users
 }
 
@@ -326,15 +326,15 @@ export default async function Page() {
     <main>
       <Users />
     </main>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/page.js" switcher
-'use cache'
+"use cache";
 
 async function Users() {
-  const users = await fetch('/api/users')
+  const users = await fetch("/api/users");
   // loop through users
 }
 
@@ -343,7 +343,7 @@ export default async function Page() {
     <main>
       <Users />
     </main>
-  )
+  );
 }
 ```
 
@@ -356,28 +356,28 @@ export default async function Page() {
 You can use `use cache` at the component level to cache any fetches or computations performed within that component. The cache entry will be reused as long as the serialized props produce the same value in each instance.
 
 ```tsx filename="app/components/bookings.tsx" highlight={2} switcher
-export async function Bookings({ type = 'haircut' }: BookingsProps) {
-  'use cache'
+export async function Bookings({ type = "haircut" }: BookingsProps) {
+  "use cache";
   async function getBookingsData() {
-    const data = await fetch(`/api/bookings?type=${encodeURIComponent(type)}`)
-    return data
+    const data = await fetch(`/api/bookings?type=${encodeURIComponent(type)}`);
+    return data;
   }
-  return //...
+  return; //...
 }
 
 interface BookingsProps {
-  type: string
+  type: string;
 }
 ```
 
 ```jsx filename="app/components/bookings.js" highlight={2} switcher
-export async function Bookings({ type = 'haircut' }) {
-  'use cache'
+export async function Bookings({ type = "haircut" }) {
+  "use cache";
   async function getBookingsData() {
-    const data = await fetch(`/api/bookings?type=${encodeURIComponent(type)}`)
-    return data
+    const data = await fetch(`/api/bookings?type=${encodeURIComponent(type)}`);
+    return data;
   }
-  return //...
+  return; //...
 }
 ```
 
@@ -387,19 +387,19 @@ Since you can add `use cache` to any asynchronous function, you aren't limited t
 
 ```tsx filename="app/actions.ts" highlight={2} switcher
 export async function getData() {
-  'use cache'
+  "use cache";
 
-  const data = await fetch('/api/data')
-  return data
+  const data = await fetch("/api/data");
+  return data;
 }
 ```
 
 ```jsx filename="app/actions.js" highlight={2} switcher
 export async function getData() {
-  'use cache'
+  "use cache";
 
-  const data = await fetch('/api/data')
-  return data
+  const data = await fetch("/api/data");
+  return data;
 }
 ```
 
@@ -411,60 +411,60 @@ As long as you don't directly reference any of the JSX slots inside the body of 
 
 ```tsx filename="app/page.tsx" switcher
 export default async function Page() {
-  const uncachedData = await getData()
+  const uncachedData = await getData();
   return (
     // Pass compositional slots as props, e.g. header and children
     <CacheComponent header={<h1>Home</h1>}>
       {/* DynamicComponent is provided as the children slot */}
       <DynamicComponent data={uncachedData} />
     </CacheComponent>
-  )
+  );
 }
 
 async function CacheComponent({
   header, // header: a compositional slot, injected as a prop
   children, // children: another slot for nested composition
 }: {
-  header: ReactNode
-  children: ReactNode
+  header: ReactNode;
+  children: ReactNode;
 }) {
-  'use cache'
-  const cachedData = await fetch('/api/cached-data')
+  "use cache";
+  const cachedData = await fetch("/api/cached-data");
   return (
     <div>
       {header}
       <PrerenderedComponent data={cachedData} />
       {children}
     </div>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/page.js" switcher
 export default async function Page() {
-  const uncachedData = await getData()
+  const uncachedData = await getData();
   return (
     // Pass compositional slots as props, e.g. header and children
     <CacheComponent header={<h1>Home</h1>}>
       {/* DynamicComponent is provided as the children slot */}
       <DynamicComponent data={uncachedData} />
     </CacheComponent>
-  )
+  );
 }
 
 async function CacheComponent({
   header, // header: a compositional slot, injected as a prop
   children, // children: another slot for nested composition
 }) {
-  'use cache'
-  const cachedData = await fetch('/api/cached-data')
+  "use cache";
+  const cachedData = await fetch("/api/cached-data");
   return (
     <div>
       {header}
       <PrerenderedComponent data={cachedData} />
       {children}
     </div>
-  )
+  );
 }
 ```
 
@@ -515,22 +515,22 @@ async function CachedComponent({ performUpdate }) {
 ```
 
 ```tsx filename="app/ClientComponent.tsx" switcher
-'use client'
+"use client";
 
 export default function ClientComponent({
   action,
 }: {
-  action: () => Promise<void>
+  action: () => Promise<void>;
 }) {
-  return <button onClick={action}>Update</button>
+  return <button onClick={action}>Update</button>;
 }
 ```
 
 ```jsx filename="app/ClientComponent.js" switcher
-'use client'
+"use client";
 
 export default function ClientComponent({ action }) {
-  return <button onClick={action}>Update</button>
+  return <button onClick={action}>Update</button>;
 }
 ```
 
@@ -569,26 +569,26 @@ Common ways this happens: passing such Promises as props, accessing them via clo
 **Passing runtime data Promises as props:**
 
 ```tsx filename="app/page.tsx"
-import { cookies } from 'next/headers'
-import { Suspense } from 'react'
+import { cookies } from "next/headers";
+import { Suspense } from "react";
 
 export default function Page() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <Dynamic />
     </Suspense>
-  )
+  );
 }
 
 async function Dynamic() {
-  const cookieStore = cookies()
-  return <Cached promise={cookieStore} /> // Build hangs
+  const cookieStore = cookies();
+  return <Cached promise={cookieStore} />; // Build hangs
 }
 
 async function Cached({ promise }: { promise: Promise<unknown> }) {
-  'use cache'
-  const data = await promise // Waits for runtime data during build
-  return <p>..</p>
+  "use cache";
+  const data = await promise; // Waits for runtime data during build
+  return <p>..</p>;
 }
 ```
 
@@ -598,9 +598,9 @@ Await the `cookies` store in the `Dynamic` component, and pass a cookie value to
 
 ```tsx filename="app/page.tsx"
 // Problem: Map stores dynamic Promises, accessed by cached code
-import { Suspense } from 'react'
+import { Suspense } from "react";
 
-const cache = new Map<string, Promise<string>>()
+const cache = new Map<string, Promise<string>>();
 
 export default function Page() {
   return (
@@ -610,21 +610,21 @@ export default function Page() {
       </Suspense>
       <Cached id="data" />
     </>
-  )
+  );
 }
 
 async function Dynamic({ id }: { id: string }) {
   // Stores dynamic Promise in shared Map
   cache.set(
     id,
-    fetch(`https://api.example.com/${id}`).then((r) => r.text())
-  )
-  return <p>Dynamic</p>
+    fetch(`https://api.example.com/${id}`).then((r) => r.text()),
+  );
+  return <p>Dynamic</p>;
 }
 
 async function Cached({ id }: { id: string }) {
-  'use cache'
-  return <p>{await cache.get(id)}</p> // Build hangs - retrieves dynamic Promise
+  "use cache";
+  return <p>{await cache.get(id)}</p>; // Build hangs - retrieves dynamic Promise
 }
 ```
 

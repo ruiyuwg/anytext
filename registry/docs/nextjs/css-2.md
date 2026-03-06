@@ -36,24 +36,24 @@ Add the PostCSS plugin to your `postcss.config.mjs` file:
 ```js filename="postcss.config.mjs"
 export default {
   plugins: {
-    '@tailwindcss/postcss': {},
+    "@tailwindcss/postcss": {},
   },
-}
+};
 ```
 
 Import Tailwind in your global CSS file:
 
 ```css filename="styles/globals.css"
-@import 'tailwindcss';
+@import "tailwindcss";
 ```
 
 Import the CSS file in your `pages/_app.js` file:
 
 ```jsx filename="pages/_app.js"
-import '@/styles/globals.css'
+import "@/styles/globals.css";
 
 export default function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return <Component {...pageProps} />;
 }
 ```
 
@@ -65,7 +65,7 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <h1 className="text-4xl font-bold">Welcome to Next.js!</h1>
     </main>
-  )
+  );
 }
 ```
 
@@ -75,7 +75,7 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <h1 className="text-4xl font-bold">Welcome to Next.js!</h1>
     </main>
-  )
+  );
 }
 ```
 
@@ -94,18 +94,18 @@ To start using CSS Modules, create a new file with the extension `.module.css` a
 ```
 
 ```tsx filename="pages/blog/index.tsx" switcher
-import styles from './blog.module.css'
+import styles from "./blog.module.css";
 
 export default function Page() {
-  return <main className={styles.blog}></main>
+  return <main className={styles.blog}></main>;
 }
 ```
 
 ```jsx filename="pages/blog/index.js" switcher
-import styles from './blog.module.css'
+import styles from "./blog.module.css";
 
 export default function Page() {
-  return <main className={styles.blog}></main>
+  return <main className={styles.blog}></main>;
 }
 ```
 
@@ -116,10 +116,10 @@ You can use global CSS to apply styles across your application.
 Import the stylesheet in the `pages/_app.js` file to apply the styles to **every route** in your application:
 
 ```tsx filename="pages/_app.js"
-import '@/styles/global.css'
+import "@/styles/global.css";
 
 export default function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return <Component {...pageProps} />;
 }
 ```
 
@@ -136,25 +136,25 @@ Since Next.js **9.5.4**, importing a CSS file from `node_modules` is permitted a
 For global stylesheets, like `bootstrap` or `nprogress`, you should import the file inside `pages/_app.js`. For example:
 
 ```jsx filename="pages/_app.js"
-import 'bootstrap/dist/css/bootstrap.css'
+import "bootstrap/dist/css/bootstrap.css";
 
 export default function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return <Component {...pageProps} />;
 }
 ```
 
 To import CSS required by a third-party component, you can do so in your component. For example:
 
 ```jsx filename="components/example-dialog.js"
-import { useState } from 'react'
-import { Dialog } from '@reach/dialog'
-import VisuallyHidden from '@reach/visually-hidden'
-import '@reach/dialog/styles.css'
+import { useState } from "react";
+import { Dialog } from "@reach/dialog";
+import VisuallyHidden from "@reach/visually-hidden";
+import "@reach/dialog/styles.css";
 
 function ExampleDialog(props) {
-  const [showDialog, setShowDialog] = useState(false)
-  const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
+  const [showDialog, setShowDialog] = useState(false);
+  const open = () => setShowDialog(true);
+  const close = () => setShowDialog(false);
 
   return (
     <div>
@@ -167,7 +167,7 @@ function ExampleDialog(props) {
         <p>Hello there. I am a dialog</p>
       </Dialog>
     </div>
-  )
+  );
 }
 ```
 
@@ -178,36 +178,36 @@ Next.js optimizes CSS during production builds by automatically chunking (mergin
 For example, `base-button.module.css` will be ordered before `page.module.css` since `<BaseButton>` is imported before `page.module.css`:
 
 ```tsx filename="page.tsx" switcher
-import { BaseButton } from './base-button'
-import styles from './page.module.css'
+import { BaseButton } from "./base-button";
+import styles from "./page.module.css";
 
 export default function Page() {
-  return <BaseButton className={styles.primary} />
+  return <BaseButton className={styles.primary} />;
 }
 ```
 
 ```jsx filename="page.js" switcher
-import { BaseButton } from './base-button'
-import styles from './page.module.css'
+import { BaseButton } from "./base-button";
+import styles from "./page.module.css";
 
 export default function Page() {
-  return <BaseButton className={styles.primary} />
+  return <BaseButton className={styles.primary} />;
 }
 ```
 
 ```tsx filename="base-button.tsx" switcher
-import styles from './base-button.module.css'
+import styles from "./base-button.module.css";
 
 export function BaseButton() {
-  return <button className={styles.primary} />
+  return <button className={styles.primary} />;
 }
 ```
 
 ```jsx filename="base-button.js" switcher
-import styles from './base-button.module.css'
+import styles from "./base-button.module.css";
 
 export function BaseButton() {
-  return <button className={styles.primary} />
+  return <button className={styles.primary} />;
 }
 ```
 

@@ -23,13 +23,13 @@ Drizzle provides an Effect-native API that integrates with Effect's service patt
 to quickly create a Drizzle database instance with sensible defaults (no logging, no caching).
 
 ```typescript copy
-import 'dotenv/config';
-import * as PgDrizzle from 'drizzle-orm/effect-postgres';
-import { PgClient } from '@effect/sql-pg';
-import * as Effect from 'effect/Effect';
-import * as Redacted from 'effect/Redacted';
-import { sql } from 'drizzle-orm';
-import { types } from 'pg';
+import "dotenv/config";
+import * as PgDrizzle from "drizzle-orm/effect-postgres";
+import { PgClient } from "@effect/sql-pg";
+import * as Effect from "effect/Effect";
+import * as Redacted from "effect/Redacted";
+import { sql } from "drizzle-orm";
+import { types } from "pg";
 
 // Configure the PgClient layer with type parsers
 const PgClientLive = PgClient.layer({
@@ -37,7 +37,9 @@ const PgClientLive = PgClient.layer({
   types: {
     getTypeParser: (typeId, format) => {
       // Return raw values for date/time types to let Drizzle handle parsing
-      if ([1184, 1114, 1082, 1186, 1231, 1115, 1185, 1187, 1182].includes(typeId)) {
+      if (
+        [1184, 1114, 1082, 1186, 1231, 1115, 1185, 1187, 1182].includes(typeId)
+      ) {
         return (val: any) => val;
       }
       return types.getTypeParser(typeId, format);
@@ -45,7 +47,7 @@ const PgClientLive = PgClient.layer({
   },
 });
 
-const program = Effect.gen(function*() {
+const program = Effect.gen(function* () {
   // Create the database with default services (no logging, no caching)
   const db = yield* PgDrizzle.makeWithDefaults();
 
@@ -64,21 +66,23 @@ For larger applications, create a reusable DB layer that can be composed with ot
 recommended pattern for dependency injection:
 
 ```typescript copy
-import * as PgDrizzle from 'drizzle-orm/effect-postgres';
-import { PgClient } from '@effect/sql-pg';
-import * as Context from 'effect/Context';
-import * as Effect from 'effect/Effect';
-import * as Layer from 'effect/Layer';
-import * as Redacted from 'effect/Redacted';
-import { types } from 'pg';
-import * as relations from './schema/relations';
+import * as PgDrizzle from "drizzle-orm/effect-postgres";
+import { PgClient } from "@effect/sql-pg";
+import * as Context from "effect/Context";
+import * as Effect from "effect/Effect";
+import * as Layer from "effect/Layer";
+import * as Redacted from "effect/Redacted";
+import { types } from "pg";
+import * as relations from "./schema/relations";
 
 // Configure the PgClient layer
 const PgClientLive = PgClient.layer({
   url: Redacted.make(process.env.DATABASE_URL!),
   types: {
     getTypeParser: (typeId, format) => {
-      if ([1184, 1114, 1082, 1186, 1231, 1115, 1185, 1187, 1182].includes(typeId)) {
+      if (
+        [1184, 1114, 1082, 1186, 1231, 1115, 1185, 1187, 1182].includes(typeId)
+      ) {
         return (val: any) => val;
       }
       return types.getTypeParser(typeId, format);
@@ -88,16 +92,19 @@ const PgClientLive = PgClient.layer({
 
 // Create the DB effect with default services
 const dbEffect = PgDrizzle.make({ relations }).pipe(
-  Effect.provide(PgDrizzle.DefaultServices)
+  Effect.provide(PgDrizzle.DefaultServices),
 );
 
 // Define a DB service tag for dependency injection
-class DB extends Context.Tag('DB')<DB, Effect.Effect.Success<typeof dbEffect>>() {}
+class DB extends Context.Tag("DB")<
+  DB,
+  Effect.Effect.Success<typeof dbEffect>
+>() {}
 
 // Create a layer that provides the DB service
 const DBLive = Layer.effect(
   DB,
-  Effect.gen(function*() {
+  Effect.gen(function* () {
     return yield* dbEffect;
   }),
 );
@@ -106,7 +113,7 @@ const DBLive = Layer.effect(
 const AppLive = Layer.provideMerge(DBLive, PgClientLive);
 
 // Use the DB service in your application
-const program = Effect.gen(function*() {
+const program = Effect.gen(function* () {
   const db = yield* DB;
   const users = yield* db.select().from(usersTable);
   return users;
@@ -126,12 +133,14 @@ By default, `makeWithDefaults()` uses a no-op logger (no logging). You can enabl
 a different `EffectLogger` implementation:
 
 ```typescript copy
-import * as PgDrizzle from 'drizzle-orm/effect-postgres';
-import { EffectLogger } from 'drizzle-orm/effect-postgres';
-import * as Effect from 'effect/Effect';
+import * as PgDrizzle from "drizzle-orm/effect-postgres";
+import { EffectLogger } from "drizzle-orm/effect-postgres";
+import * as Effect from "effect/Effect";
 
-const program = Effect.gen(function*() {
-  const db = yield* PgDrizzle.make({ /* schema, relations, casing */ }).pipe(
+const program = Effect.gen(function* () {
+  const db = yield* PgDrizzle.make({
+    /* schema, relations, casing */
+  }).pipe(
     // Enable Effect-based logging (uses Effect.log with annotations)
     Effect.provide(EffectLogger.layer),
     // Provide remaining default services (cache)
@@ -156,13 +165,15 @@ format by providing a different Effect logger layer (e.g., `Logger.pretty` for d
 **Using a Drizzle logger:**
 
 ```typescript copy
-import * as PgDrizzle from 'drizzle-orm/effect-postgres';
-import { EffectLogger } from 'drizzle-orm/effect-postgres';
-import * as Effect from 'effect/Effect';
-import { DefaultLogger } from 'drizzle-orm';
+import * as PgDrizzle from "drizzle-orm/effect-postgres";
+import { EffectLogger } from "drizzle-orm/effect-postgres";
+import * as Effect from "effect/Effect";
+import { DefaultLogger } from "drizzle-orm";
 
-const program = Effect.gen(function*() {
-  const db = yield* PgDrizzle.make({ /* schema, relations, casing */ }).pipe(
+const program = Effect.gen(function* () {
+  const db = yield* PgDrizzle.make({
+    /* schema, relations, casing */
+  }).pipe(
     // Use a Drizzle logger wrapped for Effect
     Effect.provide(EffectLogger.layerFromDrizzle(new DefaultLogger())),
     // Provide remaining default services (cache)
@@ -179,14 +190,16 @@ const program = Effect.gen(function*() {
 Similarly, you can provide a custom cache implementation:
 
 ```typescript copy
-import * as PgDrizzle from 'drizzle-orm/effect-postgres';
-import { EffectLogger } from 'drizzle-orm/effect-postgres';
-import { EffectCache } from 'drizzle-orm/cache/core/cache-effect';
-import * as Effect from 'effect/Effect';
-import { MyCustomCache } from './cache';
+import * as PgDrizzle from "drizzle-orm/effect-postgres";
+import { EffectLogger } from "drizzle-orm/effect-postgres";
+import { EffectCache } from "drizzle-orm/cache/core/cache-effect";
+import * as Effect from "effect/Effect";
+import { MyCustomCache } from "./cache";
 
-const program = Effect.gen(function*() {
-  const db = yield* PgDrizzle.make({ /* schema, relations, casing */ }).pipe(
+const program = Effect.gen(function* () {
+  const db = yield* PgDrizzle.make({
+    /* schema, relations, casing */
+  }).pipe(
     // Provide a custom cache wrapped for Effect
     Effect.provide(EffectCache.layerFromDrizzle(new MyCustomCache())),
     // Provide remaining default services (logger)

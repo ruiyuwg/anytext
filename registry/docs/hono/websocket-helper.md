@@ -8,25 +8,25 @@ Currently Cloudflare Workers / Pages, Deno, and Bun adapters are available.
 ::: code-group
 
 ```ts [Cloudflare Workers]
-import { Hono } from 'hono'
-import { upgradeWebSocket } from 'hono/cloudflare-workers'
+import { Hono } from "hono";
+import { upgradeWebSocket } from "hono/cloudflare-workers";
 ```
 
 ```ts [Deno]
-import { Hono } from 'hono'
-import { upgradeWebSocket } from 'hono/deno'
+import { Hono } from "hono";
+import { upgradeWebSocket } from "hono/deno";
 ```
 
 ```ts [Bun]
-import { Hono } from 'hono'
-import { upgradeWebSocket, websocket } from 'hono/bun'
+import { Hono } from "hono";
+import { upgradeWebSocket, websocket } from "hono/bun";
 
 // ...
 
 export default {
   fetch: app.fetch,
   websocket,
-}
+};
 ```
 
 :::
@@ -38,22 +38,22 @@ If you use Node.js, you can use [@hono/node-ws](https://github.com/honojs/middle
 `upgradeWebSocket()` returns a handler for handling WebSocket.
 
 ```ts
-const app = new Hono()
+const app = new Hono();
 
 app.get(
-  '/ws',
+  "/ws",
   upgradeWebSocket((c) => {
     return {
       onMessage(event, ws) {
-        console.log(`Message from client: ${event.data}`)
-        ws.send('Hello from server!')
+        console.log(`Message from client: ${event.data}`);
+        ws.send("Hello from server!");
       },
       onClose: () => {
-        console.log('Connection closed')
+        console.log("Connection closed");
       },
-    }
-  })
-)
+    };
+  }),
+);
 ```
 
 Available events:
@@ -78,17 +78,17 @@ Handlers defined with WebSocket Helper support RPC mode.
 ```ts
 // server.ts
 const wsApp = app.get(
-  '/ws',
+  "/ws",
   upgradeWebSocket((c) => {
     //...
-  })
-)
+  }),
+);
 
-export type WebSocketApp = typeof wsApp
+export type WebSocketApp = typeof wsApp;
 
 // client.ts
-const client = hc('http://localhost:8787')
-const socket = client.ws.$ws() // A WebSocket object for a client
+const client = hc("http://localhost:8787");
+const socket = client.ws.$ws(); // A WebSocket object for a client
 ```
 
 ## Examples
@@ -99,36 +99,36 @@ See the examples using WebSocket Helper.
 
 ```ts
 // server.ts
-import { Hono } from 'hono'
-import { upgradeWebSocket } from 'hono/cloudflare-workers'
+import { Hono } from "hono";
+import { upgradeWebSocket } from "hono/cloudflare-workers";
 
 const app = new Hono().get(
-  '/ws',
+  "/ws",
   upgradeWebSocket(() => {
     return {
       onMessage: (event) => {
-        console.log(event.data)
+        console.log(event.data);
       },
-    }
-  })
-)
+    };
+  }),
+);
 
-export default app
+export default app;
 ```
 
 ```ts
 // client.ts
-import { hc } from 'hono/client'
-import type app from './server'
+import { hc } from "hono/client";
+import type app from "./server";
 
-const client = hc('http://localhost:8787')
-const ws = client.ws.$ws(0)
+const client = hc("http://localhost:8787");
+const ws = client.ws.$ws(0);
 
-ws.addEventListener('open', () => {
+ws.addEventListener("open", () => {
   setInterval(() => {
-    ws.send(new Date().toString())
-  }, 1000)
-})
+    ws.send(new Date().toString());
+  }, 1000);
+});
 ```
 
 ### Bun with JSX
@@ -142,23 +142,23 @@ const app = new Hono()
 
 app.get('/', (c) => {
   return c.html(
-    
-      
-        
-      
-      
-        
+
+
+
+
+
+
         {html`
-          
+
             const ws = new WebSocket('ws://localhost:3000/ws')
             const $nowTime = document.getElementById('now-time')
             ws.onmessage = (event) => {
               $nowTime.textContent = event.data
             }
-          
+
         `}
-      
-    
+
+
   )
 })
 

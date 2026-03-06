@@ -9,31 +9,32 @@ For most apps, the default options should work out of the box. If you have a spe
 module.exports = {
   plugins: [
     [
-      'babel-plugin-react-compiler', {
+      "babel-plugin-react-compiler",
+      {
         // compiler options
-      }
-    ]
-  ]
+      },
+    ],
+  ],
 };
 ```
 
-***
+---
 
-## Compilation Control {/*compilation-control*/}
+## Compilation Control {/_compilation-control_/}
 
-These options control *what* the compiler optimizes and *how* it selects components and hooks to compile.
+These options control _what_ the compiler optimizes and _how_ it selects components and hooks to compile.
 
 - [`compilationMode`](/reference/react-compiler/compilationMode) controls the strategy for selecting functions to compile (e.g., all functions, only annotated ones, or intelligent detection).
 
 ```js
 {
-  compilationMode: 'annotation' // Only compile "use memo" functions
+  compilationMode: "annotation"; // Only compile "use memo" functions
 }
 ```
 
-***
+---
 
-## Version Compatibility {/*version-compatibility*/}
+## Version Compatibility {/_version-compatibility_/}
 
 React version configuration ensures the compiler generates code compatible with your React version.
 
@@ -42,13 +43,13 @@ React version configuration ensures the compiler generates code compatible with 
 ```js
 // For React 18 projects
 {
-  target: '18' // Also requires react-compiler-runtime package
+  target: "18"; // Also requires react-compiler-runtime package
 }
 ```
 
-***
+---
 
-## Error Handling {/*error-handling*/}
+## Error Handling {/_error-handling_/}
 
 These options control how the compiler responds to code that doesn't follow the [Rules of React](/reference/rules).
 
@@ -57,13 +58,13 @@ These options control how the compiler responds to code that doesn't follow the 
 ```js
 // Recommended for production
 {
-  panicThreshold: 'none' // Skip components with errors instead of failing the build
+  panicThreshold: "none"; // Skip components with errors instead of failing the build
 }
 ```
 
-***
+---
 
-## Debugging {/*debugging*/}
+## Debugging {/_debugging_/}
 
 Logging and analysis options help you understand what the compiler is doing.
 
@@ -81,9 +82,9 @@ Logging and analysis options help you understand what the compiler is doing.
 }
 ```
 
-***
+---
 
-## Feature Flags {/*feature-flags*/}
+## Feature Flags {/_feature-flags_/}
 
 Conditional compilation lets you control when optimized code is used.
 
@@ -98,24 +99,22 @@ Conditional compilation lets you control when optimized code is used.
 }
 ```
 
-***
+---
 
-## Common Configuration Patterns {/*common-patterns*/}
+## Common Configuration Patterns {/_common-patterns_/}
 
-### Default configuration {/*default-configuration*/}
+### Default configuration {/_default-configuration_/}
 
 For most React 19 applications, the compiler works without configuration:
 
 ```js
 // babel.config.js
 module.exports = {
-  plugins: [
-    'babel-plugin-react-compiler'
-  ]
+  plugins: ["babel-plugin-react-compiler"],
 };
 ```
 
-### React 17/18 projects {/*react-17-18*/}
+### React 17/18 projects {/_react-17-18_/}
 
 Older React versions need the runtime package and target configuration:
 
@@ -125,21 +124,21 @@ npm install react-compiler-runtime@latest
 
 ```js
 {
-  target: '18' // or '17'
+  target: "18"; // or '17'
 }
 ```
 
-### Incremental adoption {/*incremental-adoption*/}
+### Incremental adoption {/_incremental-adoption_/}
 
 Start with specific directories and expand gradually:
 
 ```js
 {
-  compilationMode: 'annotation' // Only compile "use memo" functions
+  compilationMode: "annotation"; // Only compile "use memo" functions
 }
 ```
 
-***
+---
 
 ## Sitemap
 

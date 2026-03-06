@@ -68,43 +68,43 @@ To ease the burden of migration, a [codemod is available](/docs/app/guides/upgra
 #### Recommended Async Usage
 
 ```tsx
-import { cookies } from 'next/headers'
+import { cookies } from "next/headers";
 
 // Before
-const cookieStore = cookies()
-const token = cookieStore.get('token')
+const cookieStore = cookies();
+const token = cookieStore.get("token");
 
 // After
-const cookieStore = await cookies()
-const token = cookieStore.get('token')
+const cookieStore = await cookies();
+const token = cookieStore.get("token");
 ```
 
 #### Temporary Synchronous Usage
 
 ```tsx filename="app/page.tsx" switcher
-import { cookies, type UnsafeUnwrappedCookies } from 'next/headers'
+import { cookies, type UnsafeUnwrappedCookies } from "next/headers";
 
 // Before
-const cookieStore = cookies()
-const token = cookieStore.get('token')
+const cookieStore = cookies();
+const token = cookieStore.get("token");
 
 // After
-const cookieStore = cookies() as unknown as UnsafeUnwrappedCookies
+const cookieStore = cookies() as unknown as UnsafeUnwrappedCookies;
 // will log a warning in dev
-const token = cookieStore.get('token')
+const token = cookieStore.get("token");
 ```
 
 ```jsx filename="app/page.js" switcher
-import { cookies } from 'next/headers'
+import { cookies } from "next/headers";
 
 // Before
-const cookieStore = cookies()
-const token = cookieStore.get('token')
+const cookieStore = cookies();
+const token = cookieStore.get("token");
 
 // After
-const cookieStore = cookies()
+const cookieStore = cookies();
 // will log a warning in dev
-const token = cookieStore.get('token')
+const token = cookieStore.get("token");
 ```
 
 ### `headers`
@@ -112,43 +112,43 @@ const token = cookieStore.get('token')
 #### Recommended Async Usage
 
 ```tsx
-import { headers } from 'next/headers'
+import { headers } from "next/headers";
 
 // Before
-const headersList = headers()
-const userAgent = headersList.get('user-agent')
+const headersList = headers();
+const userAgent = headersList.get("user-agent");
 
 // After
-const headersList = await headers()
-const userAgent = headersList.get('user-agent')
+const headersList = await headers();
+const userAgent = headersList.get("user-agent");
 ```
 
 #### Temporary Synchronous Usage
 
 ```tsx filename="app/page.tsx" switcher
-import { headers, type UnsafeUnwrappedHeaders } from 'next/headers'
+import { headers, type UnsafeUnwrappedHeaders } from "next/headers";
 
 // Before
-const headersList = headers()
-const userAgent = headersList.get('user-agent')
+const headersList = headers();
+const userAgent = headersList.get("user-agent");
 
 // After
-const headersList = headers() as unknown as UnsafeUnwrappedHeaders
+const headersList = headers() as unknown as UnsafeUnwrappedHeaders;
 // will log a warning in dev
-const userAgent = headersList.get('user-agent')
+const userAgent = headersList.get("user-agent");
 ```
 
 ```jsx filename="app/page.js" switcher
-import { headers } from 'next/headers'
+import { headers } from "next/headers";
 
 // Before
-const headersList = headers()
-const userAgent = headersList.get('user-agent')
+const headersList = headers();
+const userAgent = headersList.get("user-agent");
 
 // After
-const headersList = headers()
+const headersList = headers();
 // will log a warning in dev
-const userAgent = headersList.get('user-agent')
+const userAgent = headersList.get("user-agent");
 ```
 
 ### `draftMode`
@@ -156,37 +156,37 @@ const userAgent = headersList.get('user-agent')
 #### Recommended Async Usage
 
 ```tsx
-import { draftMode } from 'next/headers'
+import { draftMode } from "next/headers";
 
 // Before
-const { isEnabled } = draftMode()
+const { isEnabled } = draftMode();
 
 // After
-const { isEnabled } = await draftMode()
+const { isEnabled } = await draftMode();
 ```
 
 #### Temporary Synchronous Usage
 
 ```tsx filename="app/page.tsx" switcher
-import { draftMode, type UnsafeUnwrappedDraftMode } from 'next/headers'
+import { draftMode, type UnsafeUnwrappedDraftMode } from "next/headers";
 
 // Before
-const { isEnabled } = draftMode()
+const { isEnabled } = draftMode();
 
 // After
 // will log a warning in dev
-const { isEnabled } = draftMode() as unknown as UnsafeUnwrappedDraftMode
+const { isEnabled } = draftMode() as unknown as UnsafeUnwrappedDraftMode;
 ```
 
 ```jsx filename="app/page.js" switcher
-import { draftMode } from 'next/headers'
+import { draftMode } from "next/headers";
 
 // Before
-const { isEnabled } = draftMode()
+const { isEnabled } = draftMode();
 
 // After
 // will log a warning in dev
-const { isEnabled } = draftMode()
+const { isEnabled } = draftMode();
 ```
 
 ### `params` & `searchParams`
@@ -195,37 +195,37 @@ const { isEnabled } = draftMode()
 
 ```tsx filename="app/layout.tsx" switcher
 // Before
-type Params = { slug: string }
+type Params = { slug: string };
 
 export function generateMetadata({ params }: { params: Params }) {
-  const { slug } = params
+  const { slug } = params;
 }
 
 export default async function Layout({
   children,
   params,
 }: {
-  children: React.ReactNode
-  params: Params
+  children: React.ReactNode;
+  params: Params;
 }) {
-  const { slug } = params
+  const { slug } = params;
 }
 
 // After
-type Params = Promise<{ slug: string }>
+type Params = Promise<{ slug: string }>;
 
 export async function generateMetadata({ params }: { params: Params }) {
-  const { slug } = await params
+  const { slug } = await params;
 }
 
 export default async function Layout({
   children,
   params,
 }: {
-  children: React.ReactNode
-  params: Params
+  children: React.ReactNode;
+  params: Params;
 }) {
-  const { slug } = await params
+  const { slug } = await params;
 }
 ```
 
@@ -253,29 +253,29 @@ export default async function Layout({ children, params }) {
 
 ```tsx filename="app/layout.tsx" switcher
 // Before
-type Params = { slug: string }
+type Params = { slug: string };
 
 export default function Layout({
   children,
   params,
 }: {
-  children: React.ReactNode
-  params: Params
+  children: React.ReactNode;
+  params: Params;
 }) {
-  const { slug } = params
+  const { slug } = params;
 }
 
 // After
-import { use } from 'react'
+import { use } from "react";
 
-type Params = Promise<{ slug: string }>
+type Params = Promise<{ slug: string }>;
 
 export default function Layout(props: {
-  children: React.ReactNode
-  params: Params
+  children: React.ReactNode;
+  params: Params;
 }) {
-  const params = use(props.params)
-  const slug = params.slug
+  const params = use(props.params);
+  const slug = params.slug;
 }
 ```
 
@@ -298,118 +298,118 @@ export default async function Layout(props) {
 
 ```tsx filename="app/page.tsx" switcher
 // Before
-type Params = { slug: string }
-type SearchParams = { [key: string]: string | string[] | undefined }
+type Params = { slug: string };
+type SearchParams = { [key: string]: string | string[] | undefined };
 
 export function generateMetadata({
   params,
   searchParams,
 }: {
-  params: Params
-  searchParams: SearchParams
+  params: Params;
+  searchParams: SearchParams;
 }) {
-  const { slug } = params
-  const { query } = searchParams
+  const { slug } = params;
+  const { query } = searchParams;
 }
 
 export default async function Page({
   params,
   searchParams,
 }: {
-  params: Params
-  searchParams: SearchParams
+  params: Params;
+  searchParams: SearchParams;
 }) {
-  const { slug } = params
-  const { query } = searchParams
+  const { slug } = params;
+  const { query } = searchParams;
 }
 
 // After
-type Params = Promise<{ slug: string }>
-type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>
+type Params = Promise<{ slug: string }>;
+type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
 
 export async function generateMetadata(props: {
-  params: Params
-  searchParams: SearchParams
+  params: Params;
+  searchParams: SearchParams;
 }) {
-  const params = await props.params
-  const searchParams = await props.searchParams
-  const slug = params.slug
-  const query = searchParams.query
+  const params = await props.params;
+  const searchParams = await props.searchParams;
+  const slug = params.slug;
+  const query = searchParams.query;
 }
 
 export default async function Page(props: {
-  params: Params
-  searchParams: SearchParams
+  params: Params;
+  searchParams: SearchParams;
 }) {
-  const params = await props.params
-  const searchParams = await props.searchParams
-  const slug = params.slug
-  const query = searchParams.query
+  const params = await props.params;
+  const searchParams = await props.searchParams;
+  const slug = params.slug;
+  const query = searchParams.query;
 }
 ```
 
 ```jsx filename="app/page.js" switcher
 // Before
 export function generateMetadata({ params, searchParams }) {
-  const { slug } = params
-  const { query } = searchParams
+  const { slug } = params;
+  const { query } = searchParams;
 }
 
 export default function Page({ params, searchParams }) {
-  const { slug } = params
-  const { query } = searchParams
+  const { slug } = params;
+  const { query } = searchParams;
 }
 
 // After
 export async function generateMetadata(props) {
-  const params = await props.params
-  const searchParams = await props.searchParams
-  const slug = params.slug
-  const query = searchParams.query
+  const params = await props.params;
+  const searchParams = await props.searchParams;
+  const slug = params.slug;
+  const query = searchParams.query;
 }
 
 export async function Page(props) {
-  const params = await props.params
-  const searchParams = await props.searchParams
-  const slug = params.slug
-  const query = searchParams.query
+  const params = await props.params;
+  const searchParams = await props.searchParams;
+  const slug = params.slug;
+  const query = searchParams.query;
 }
 ```
 
 #### Synchronous Page
 
 ```tsx
-'use client'
+"use client";
 
 // Before
-type Params = { slug: string }
-type SearchParams = { [key: string]: string | string[] | undefined }
+type Params = { slug: string };
+type SearchParams = { [key: string]: string | string[] | undefined };
 
 export default function Page({
   params,
   searchParams,
 }: {
-  params: Params
-  searchParams: SearchParams
+  params: Params;
+  searchParams: SearchParams;
 }) {
-  const { slug } = params
-  const { query } = searchParams
+  const { slug } = params;
+  const { query } = searchParams;
 }
 
 // After
-import { use } from 'react'
+import { use } from "react";
 
-type Params = Promise<{ slug: string }>
-type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>
+type Params = Promise<{ slug: string }>;
+type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
 
 export default function Page(props: {
-  params: Params
-  searchParams: SearchParams
+  params: Params;
+  searchParams: SearchParams;
 }) {
-  const params = use(props.params)
-  const searchParams = use(props.searchParams)
-  const slug = params.slug
-  const query = searchParams.query
+  const params = use(props.params);
+  const searchParams = use(props.searchParams);
+  const slug = params.slug;
+  const query = searchParams.query;
 }
 ```
 
@@ -436,33 +436,33 @@ export default function Page(props) {
 
 ```tsx filename="app/api/route.ts" switcher
 // Before
-type Params = { slug: string }
+type Params = { slug: string };
 
 export async function GET(request: Request, segmentData: { params: Params }) {
-  const params = segmentData.params
-  const slug = params.slug
+  const params = segmentData.params;
+  const slug = params.slug;
 }
 
 // After
-type Params = Promise<{ slug: string }>
+type Params = Promise<{ slug: string }>;
 
 export async function GET(request: Request, segmentData: { params: Params }) {
-  const params = await segmentData.params
-  const slug = params.slug
+  const params = await segmentData.params;
+  const slug = params.slug;
 }
 ```
 
 ```js filename="app/api/route.js" switcher
 // Before
 export async function GET(request, segmentData) {
-  const params = segmentData.params
-  const slug = params.slug
+  const params = segmentData.params;
+  const slug = params.slug;
 }
 
 // After
 export async function GET(request, segmentData) {
-  const params = await segmentData.params
-  const slug = params.slug
+  const params = await segmentData.params;
+  const slug = params.slug;
 }
 ```
 
@@ -478,8 +478,8 @@ To opt specific `fetch` requests into caching, you can pass the `cache: 'force-c
 
 ```js filename="app/layout.js"
 export default async function RootLayout() {
-  const a = await fetch('https://...') // Not Cached
-  const b = await fetch('https://...', { cache: 'force-cache' }) // Cached
+  const a = await fetch("https://..."); // Not Cached
+  const b = await fetch("https://...", { cache: "force-cache" }); // Cached
 
   // ...
 }
@@ -490,11 +490,11 @@ To opt all `fetch` requests in a layout or page into caching, you can use the `e
 ```js filename="app/layout.js"
 // Since this is the root layout, all fetch requests in the app
 // that don't set their own cache option will be cached.
-export const fetchCache = 'default-cache'
+export const fetchCache = "default-cache";
 
 export default async function RootLayout() {
-  const a = await fetch('https://...') // Cached
-  const b = await fetch('https://...', { cache: 'no-store' }) // Not cached
+  const a = await fetch("https://..."); // Cached
+  const b = await fetch("https://...", { cache: "no-store" }); // Not cached
 
   // ...
 }
@@ -505,7 +505,7 @@ export default async function RootLayout() {
 `GET` functions in [Route Handlers](/docs/app/api-reference/file-conventions/route) are no longer cached by default. To opt `GET` methods into caching, you can use a [route config option](/docs/app/api-reference/file-conventions/route-segment-config) such as `export const dynamic = 'force-static'` in your Route Handler file.
 
 ```js filename="app/api/route.js"
-export const dynamic = 'force-static'
+export const dynamic = "force-static";
 
 export async function GET() {}
 ```
@@ -525,9 +525,9 @@ const nextConfig = {
       static: 180,
     },
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 [Layouts](/docs/app/api-reference/file-conventions/layout) and [loading states](/docs/app/api-reference/file-conventions/loading) are still cached and reused on navigation.
@@ -538,10 +538,10 @@ The `@next/font` package has been removed in favor of the built-in [`next/font`]
 
 ```js filename="app/layout.js"
 // Before
-import { Inter } from '@next/font/google'
+import { Inter } from "@next/font/google";
 
 // After
-import { Inter } from 'next/font/google'
+import { Inter } from "next/font/google";
 ```
 
 ## bundlePagesRouterDependencies
@@ -558,9 +558,9 @@ const nextConfig = {
 
   // After
   bundlePagesRouterDependencies: true,
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 ## serverExternalPackages
@@ -572,14 +572,14 @@ module.exports = nextConfig
 const nextConfig = {
   // Before
   experimental: {
-    serverComponentsExternalPackages: ['package-name'],
+    serverComponentsExternalPackages: ["package-name"],
   },
 
   // After
-  serverExternalPackages: ['package-name'],
-}
+  serverExternalPackages: ["package-name"],
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 ## Speed Insights
@@ -595,22 +595,22 @@ The `geo` and `ip` properties on `NextRequest` have been removed as these values
 If you are using Vercel, you can alternatively use the `geolocation` and `ipAddress` functions from [`@vercel/functions`](https://vercel.com/docs/functions/vercel-functions-package) instead:
 
 ```ts filename="middleware.ts"
-import { geolocation } from '@vercel/functions'
-import type { NextRequest } from 'next/server'
+import { geolocation } from "@vercel/functions";
+import type { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
-  const { city } = geolocation(request)
+  const { city } = geolocation(request);
 
   // ...
 }
 ```
 
 ```ts filename="middleware.ts"
-import { ipAddress } from '@vercel/functions'
-import type { NextRequest } from 'next/server'
+import { ipAddress } from "@vercel/functions";
+import type { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
-  const ip = ipAddress(request)
+  const ip = ipAddress(request);
 
   // ...
 }

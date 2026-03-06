@@ -17,7 +17,7 @@ To understand how navigation works in Next.js, it helps to be familiar with the 
 
 In Next.js, [Layouts and Pages](/docs/app/getting-started/layouts-and-pages) are [React Server Components](https://react.dev/reference/rsc/server-components) by default. On initial and subsequent navigations, the [Server Component Payload](/docs/app/getting-started/server-and-client-components#how-do-server-and-client-components-work-in-nextjs) is generated on the server before being sent to the client.
 
-There are two types of server rendering, based on *when* it happens:
+There are two types of server rendering, based on _when_ it happens:
 
 - **Static Rendering (or Prerendering)** happens at build time or during [revalidation](/docs/app/getting-started/caching-and-revalidating) and the result is cached.
 - **Dynamic Rendering** happens at request time in response to a client request.
@@ -33,7 +33,7 @@ Prefetching is the process of loading a route in the background before the user 
 Next.js automatically prefetches routes linked with the [`<Link>` component](/docs/app/api-reference/components/link) when they enter the user's viewport.
 
 ```tsx filename="app/layout.tsx" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -48,12 +48,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         {children}
       </body>
     </html>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/layout.js" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Layout() {
   return (
@@ -68,7 +68,7 @@ export default function Layout() {
         {children}
       </body>
     </html>
-  )
+  );
 }
 ```
 
@@ -98,14 +98,14 @@ To use streaming, create a `loading.tsx` in your route folder:
 ```tsx filename="app/dashboard/loading.tsx" switcher
 export default function Loading() {
   // Add fallback UI that will be shown while the route is loading.
-  return <LoadingSkeleton />
+  return <LoadingSkeleton />;
 }
 ```
 
 ```jsx filename="app/dashboard/loading.js" switcher
 export default function Loading() {
   // Add fallback UI that will be shown while the route is loading.
-  return <LoadingSkeleton />
+  return <LoadingSkeleton />;
 }
 ```
 
@@ -130,13 +130,13 @@ Next.js avoids this with client-side transitions using the `<Link>` component. I
 - Keeping any shared layouts and UI.
 - Replacing the current page with the prefetched loading state or a new page if available.
 
-Client-side transitions are what makes a server-rendered apps *feel* like client-rendered apps. And when paired with [prefetching](#prefetching) and [streaming](#streaming), it enables fast transitions, even for dynamic routes.
+Client-side transitions are what makes a server-rendered apps _feel_ like client-rendered apps. And when paired with [prefetching](#prefetching) and [streaming](#streaming), it enables fast transitions, even for dynamic routes.
 
 Next.js also handles [scrolling to the top of the page](/docs/app/api-reference/components/link#scroll) during client-side transitions. If content scrolls behind a sticky or fixed header after navigation, you can fix this with CSS [`scroll-padding-top`](/docs/app/api-reference/components/link#scroll-offset-with-sticky-headers).
 
 ## What can make transitions slow?
 
-These Next.js optimizations make navigation fast and responsive. However, under certain conditions, transitions can still *feel* slow. Here are some common causes and how to improve the user experience:
+These Next.js optimizations make navigation fast and responsive. However, under certain conditions, transitions can still _feel_ slow. Here are some common causes and how to improve the user experience:
 
 ### Dynamic routes without `loading.tsx`
 
@@ -146,13 +146,13 @@ We recommend adding `loading.tsx` to dynamic routes to enable partial prefetchin
 
 ```tsx filename="app/blog/[slug]/loading.tsx" switcher
 export default function Loading() {
-  return <LoadingSkeleton />
+  return <LoadingSkeleton />;
 }
 ```
 
 ```jsx filename="app/blog/[slug]/loading.js" switcher
 export default function Loading() {
-  return <LoadingSkeleton />
+  return <LoadingSkeleton />;
 }
 ```
 
@@ -166,19 +166,19 @@ Ensure the route is statically generated at build time by adding `generateStatic
 
 ```tsx filename="app/blog/[slug]/page.tsx" switcher
 export async function generateStaticParams() {
-  const posts = await fetch('https://.../posts').then((res) => res.json())
+  const posts = await fetch("https://.../posts").then((res) => res.json());
 
   return posts.map((post) => ({
     slug: post.slug,
-  }))
+  }));
 }
 
 export default async function Page({
   params,
 }: {
-  params: Promise<{ slug: string }>
+  params: Promise<{ slug: string }>;
 }) {
-  const { slug } = await params
+  const { slug } = await params;
   // ...
 }
 ```
@@ -204,28 +204,28 @@ On slow or unstable networks, prefetching may not finish before the user clicks 
 To improve perceived performance, you can use the [`useLinkStatus` hook](/docs/app/api-reference/functions/use-link-status) to show immediate feedback while the transition is in progress.
 
 ```tsx filename="app/ui/loading-indicator.tsx" switcher
-'use client'
+"use client";
 
-import { useLinkStatus } from 'next/link'
+import { useLinkStatus } from "next/link";
 
 export default function LoadingIndicator() {
-  const { pending } = useLinkStatus()
+  const { pending } = useLinkStatus();
   return (
-    <span aria-hidden className={`link-hint ${pending ? 'is-pending' : ''}`} />
-  )
+    <span aria-hidden className={`link-hint ${pending ? "is-pending" : ""}`} />
+  );
 }
 ```
 
 ```jsx filename="app/ui/loading-indicator.js" switcher
-'use client'
+"use client";
 
-import { useLinkStatus } from 'next/link'
+import { useLinkStatus } from "next/link";
 
 export default function LoadingIndicator() {
-  const { pending } = useLinkStatus()
+  const { pending } = useLinkStatus();
   return (
-    <span aria-hidden className={`link-hint ${pending ? 'is-pending' : ''}`} />
-  )
+    <span aria-hidden className={`link-hint ${pending ? "is-pending" : ""}`} />
+  );
 }
 ```
 
@@ -248,22 +248,22 @@ However, disabling prefetching comes with trade-offs:
 - **Static routes** will only be fetched when the user clicks the link.
 - **Dynamic routes** will need to be rendered on the server first before the client can navigate to it.
 
-To reduce resource usage without fully disabling prefetch, you can prefetch only on hover. This limits prefetching to routes the user is more *likely* to visit, rather than all links in the viewport.
+To reduce resource usage without fully disabling prefetch, you can prefetch only on hover. This limits prefetching to routes the user is more _likely_ to visit, rather than all links in the viewport.
 
 ```tsx filename="app/ui/hover-prefetch-link.tsx" switcher
-'use client'
+"use client";
 
-import Link from 'next/link'
-import { useState } from 'react'
+import Link from "next/link";
+import { useState } from "react";
 
 function HoverPrefetchLink({
   href,
   children,
 }: {
-  href: string
-  children: React.ReactNode
+  href: string;
+  children: React.ReactNode;
 }) {
-  const [active, setActive] = useState(false)
+  const [active, setActive] = useState(false);
 
   return (
     <Link
@@ -273,18 +273,18 @@ function HoverPrefetchLink({
     >
       {children}
     </Link>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/ui/hover-prefetch-link.js" switcher
-'use client'
+"use client";
 
-import Link from 'next/link'
-import { useState } from 'react'
+import Link from "next/link";
+import { useState } from "react";
 
 function HoverPrefetchLink({ href, children }) {
-  const [active, setActive] = useState(false)
+  const [active, setActive] = useState(false);
 
   return (
     <Link
@@ -294,7 +294,7 @@ function HoverPrefetchLink({ href, children }) {
     >
       {children}
     </Link>
-  )
+  );
 }
 ```
 
@@ -320,48 +320,48 @@ Next.js allows you to use the native [`window.history.pushState`](https://develo
 Use it to add a new entry to the browser's history stack. The user can navigate back to the previous state. For example, to sort a list of products:
 
 ```tsx fileName="app/ui/sort-products.tsx" switcher
-'use client'
+"use client";
 
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams } from "next/navigation";
 
 export default function SortProducts() {
-  const searchParams = useSearchParams()
+  const searchParams = useSearchParams();
 
   function updateSorting(sortOrder: string) {
-    const params = new URLSearchParams(searchParams.toString())
-    params.set('sort', sortOrder)
-    window.history.pushState(null, '', `?${params.toString()}`)
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("sort", sortOrder);
+    window.history.pushState(null, "", `?${params.toString()}`);
   }
 
   return (
     <>
-      <button onClick={() => updateSorting('asc')}>Sort Ascending</button>
-      <button onClick={() => updateSorting('desc')}>Sort Descending</button>
+      <button onClick={() => updateSorting("asc")}>Sort Ascending</button>
+      <button onClick={() => updateSorting("desc")}>Sort Descending</button>
     </>
-  )
+  );
 }
 ```
 
 ```jsx fileName="app/ui/sort-products.js" switcher
-'use client'
+"use client";
 
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams } from "next/navigation";
 
 export default function SortProducts() {
-  const searchParams = useSearchParams()
+  const searchParams = useSearchParams();
 
   function updateSorting(sortOrder) {
-    const params = new URLSearchParams(searchParams.toString())
-    params.set('sort', sortOrder)
-    window.history.pushState(null, '', `?${params.toString()}`)
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("sort", sortOrder);
+    window.history.pushState(null, "", `?${params.toString()}`);
   }
 
   return (
     <>
-      <button onClick={() => updateSorting('asc')}>Sort Ascending</button>
-      <button onClick={() => updateSorting('desc')}>Sort Descending</button>
+      <button onClick={() => updateSorting("asc")}>Sort Ascending</button>
+      <button onClick={() => updateSorting("desc")}>Sort Descending</button>
     </>
-  )
+  );
 }
 ```
 
@@ -370,48 +370,48 @@ export default function SortProducts() {
 Use it to replace the current entry on the browser's history stack. The user is not able to navigate back to the previous state. For example, to switch the application's locale:
 
 ```tsx fileName="app/ui/locale-switcher.tsx" switcher
-'use client'
+"use client";
 
-import { usePathname } from 'next/navigation'
+import { usePathname } from "next/navigation";
 
 export function LocaleSwitcher() {
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   function switchLocale(locale: string) {
     // e.g. '/en/about' or '/fr/contact'
-    const newPath = `/${locale}${pathname}`
-    window.history.replaceState(null, '', newPath)
+    const newPath = `/${locale}${pathname}`;
+    window.history.replaceState(null, "", newPath);
   }
 
   return (
     <>
-      <button onClick={() => switchLocale('en')}>English</button>
-      <button onClick={() => switchLocale('fr')}>French</button>
+      <button onClick={() => switchLocale("en")}>English</button>
+      <button onClick={() => switchLocale("fr")}>French</button>
     </>
-  )
+  );
 }
 ```
 
 ```jsx fileName="app/ui/locale-switcher.js" switcher
-'use client'
+"use client";
 
-import { usePathname } from 'next/navigation'
+import { usePathname } from "next/navigation";
 
 export function LocaleSwitcher() {
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   function switchLocale(locale) {
     // e.g. '/en/about' or '/fr/contact'
-    const newPath = `/${locale}${pathname}`
-    window.history.replaceState(null, '', newPath)
+    const newPath = `/${locale}${pathname}`;
+    window.history.replaceState(null, "", newPath);
   }
 
   return (
     <>
-      <button onClick={() => switchLocale('en')}>English</button>
-      <button onClick={() => switchLocale('fr')}>French</button>
+      <button onClick={() => switchLocale("en")}>English</button>
+      <button onClick={() => switchLocale("fr")}>French</button>
     </>
-  )
+  );
 }
 ```
 

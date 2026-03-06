@@ -2,11 +2,11 @@
 
 Validates usage of Error Boundaries instead of try/catch for errors in child components.
 
-## Rule Details {/*rule-details*/}
+## Rule Details {/_rule-details_/}
 
 Try/catch blocks can't catch errors that happen during React's rendering process. Errors thrown in rendering methods or hooks bubble up through the component tree. Only [Error Boundaries](/reference/react/Component#catching-rendering-errors-with-an-error-boundary) can catch these errors.
 
-### Invalid {/*invalid*/}
+### Invalid {/_invalid_/}
 
 Examples of incorrect code for this rule:
 
@@ -21,7 +21,7 @@ function Parent() {
 }
 ```
 
-### Valid {/*valid*/}
+### Valid {/_valid_/}
 
 Examples of correct code for this rule:
 
@@ -36,15 +36,15 @@ function Parent() {
 }
 ```
 
-## Troubleshooting {/*troubleshooting*/}
+## Troubleshooting {/_troubleshooting_/}
 
-### Why is the linter telling me not to wrap `use` in `try`/`catch`? {/*why-is-the-linter-telling-me-not-to-wrap-use-in-trycatch*/}
+### Why is the linter telling me not to wrap `use` in `try`/`catch`? {/_why-is-the-linter-telling-me-not-to-wrap-use-in-trycatch_/}
 
 The `use` hook doesn't throw errors in the traditional sense, it suspends component execution. When `use` encounters a pending promise, it suspends the component and lets React show a fallback. Only Suspense and Error Boundaries can handle these cases. The linter warns against `try`/`catch` around `use` to prevent confusion as the `catch` block would never run.
 
 ```js {expectedErrors: {'react-compiler': [5]}}
 // ❌ Try/catch around `use` hook
-function Component({promise}) {
+function Component({ promise }) {
   try {
     const data = use(promise); // Won't catch - `use` suspends, not throws
     return <div>{data}</div>;
@@ -65,7 +65,7 @@ function App() {
 }
 ```
 
-***
+---
 
 ## Sitemap
 

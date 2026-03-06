@@ -11,18 +11,18 @@ To use it, place the file in the **root** of your application or inside a [`src`
 The file exports a `register` function that is called **once** when a new Next.js server instance is initiated, and must complete before the server is ready to handle requests. `register` can be an async function.
 
 ```ts filename="instrumentation.ts" switcher
-import { registerOTel } from '@vercel/otel'
+import { registerOTel } from "@vercel/otel";
 
 export function register() {
-  registerOTel('next-app')
+  registerOTel("next-app");
 }
 ```
 
 ```js filename="instrumentation.js" switcher
-import { registerOTel } from '@vercel/otel'
+import { registerOTel } from "@vercel/otel";
 
 export function register() {
-  registerOTel('next-app')
+  registerOTel("next-app");
 }
 ```
 
@@ -34,40 +34,40 @@ You can optionally export an `onRequestError` function to track **server** error
 - The `error` instance might not be the original error instance thrown, as it may be processed by React if encountered during Server Components rendering. If this happens, you can use `digest` property on an error to identify the actual error type.
 
 ```ts filename="instrumentation.ts" switcher
-import { type Instrumentation } from 'next'
+import { type Instrumentation } from "next";
 
 export const onRequestError: Instrumentation.onRequestError = async (
   err,
   request,
-  context
+  context,
 ) => {
-  await fetch('https://.../report-error', {
-    method: 'POST',
+  await fetch("https://.../report-error", {
+    method: "POST",
     body: JSON.stringify({
       message: err.message,
       request,
       context,
     }),
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
-  })
-}
+  });
+};
 ```
 
 ```js filename="instrumentation.js" switcher
 export async function onRequestError(err, request, context) {
-  await fetch('https://.../report-error', {
-    method: 'POST',
+  await fetch("https://.../report-error", {
+    method: "POST",
     body: JSON.stringify({
       message: err.message,
       request,
       context,
     }),
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
-  })
+  });
 }
 ```
 
@@ -79,22 +79,22 @@ The function accepts three parameters: `error`, `request`, and `context`.
 export function onRequestError(
   error: { digest: string } & Error,
   request: {
-    path: string // resource path, e.g. /blog?name=foo
-    method: string // request method. e.g. GET, POST, etc
-    headers: { [key: string]: string | string[] }
+    path: string; // resource path, e.g. /blog?name=foo
+    method: string; // request method. e.g. GET, POST, etc
+    headers: { [key: string]: string | string[] };
   },
   context: {
-    routerKind: 'Pages Router' | 'App Router' // the router type
-    routePath: string // the route file path, e.g. /app/blog/[dynamic]
-    routeType: 'render' | 'route' | 'action' | 'proxy' // the context in which the error occurred
+    routerKind: "Pages Router" | "App Router"; // the router type
+    routePath: string; // the route file path, e.g. /app/blog/[dynamic]
+    routeType: "render" | "route" | "action" | "proxy"; // the context in which the error occurred
     renderSource:
-      | 'react-server-components'
-      | 'react-server-components-payload'
-      | 'server-rendering'
-    revalidateReason: 'on-demand' | 'stale' | undefined // undefined is a normal request without revalidation
-    renderType: 'dynamic' | 'dynamic-resume' // 'dynamic-resume' for PPR
-  }
-): void | Promise<void>
+      | "react-server-components"
+      | "react-server-components-payload"
+      | "server-rendering";
+    revalidateReason: "on-demand" | "stale" | undefined; // undefined is a normal request without revalidation
+    renderType: "dynamic" | "dynamic-resume"; // 'dynamic-resume' for PPR
+  },
+): void | Promise<void>;
 ```
 
 - `error`: The caught error itself (type is always `Error`), and a `digest` property which is the unique ID of the error.
@@ -107,18 +107,18 @@ The `instrumentation.js` file works in both the Node.js and Edge runtime, howeve
 
 ```js filename="instrumentation.js"
 export function register() {
-  if (process.env.NEXT_RUNTIME === 'edge') {
-    return require('./register.edge')
+  if (process.env.NEXT_RUNTIME === "edge") {
+    return require("./register.edge");
   } else {
-    return require('./register.node')
+    return require("./register.node");
   }
 }
 
 export function onRequestError() {
-  if (process.env.NEXT_RUNTIME === 'edge') {
-    return require('./on-request-error.edge')
+  if (process.env.NEXT_RUNTIME === "edge") {
+    return require("./on-request-error.edge");
   } else {
-    return require('./on-request-error.node')
+    return require("./on-request-error.node");
   }
 }
 ```

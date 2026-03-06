@@ -24,7 +24,7 @@ interface UseTRPCQueryOptions
 
 Since `UseTRPCQueryOptions` extends `@tanstack/react-query`'s `UseQueryOptions`, you can use any of their options here such as `enabled`, `refetchOnWindowFocus`, etc. We also have some `trpc` specific options that let you opt in or out of certain behaviors on a per-procedure level:
 
-- **`trpc.ssr`:** If you have `ssr: true` in your [global config](/docs/client/nextjs/setup#ssr-boolean-default-false), you can set this to false to disable ssr for this particular query. *Note that this does not work the other way around, i.e., you can not enable ssr on a procedure if your global config is set to false.*
+- **`trpc.ssr`:** If you have `ssr: true` in your [global config](/docs/client/nextjs/setup#ssr-boolean-default-false), you can set this to false to disable ssr for this particular query. _Note that this does not work the other way around, i.e., you can not enable ssr on a procedure if your global config is set to false._
 - **`trpc.abortOnUnmount`:** Override the [global config](/docs/client/nextjs/setup#config-callback) and opt in or out of aborting queries on unmount.
 - **`trpc.context`:** Add extra meta data that could be used in [Links](/docs/client/links).
 
@@ -37,8 +37,8 @@ You'll notice that you get autocompletion on the `input` based on what you have 
 Backend code
 
 ```tsx title='server/routers/_app.ts'
-import { initTRPC } from '@trpc/server';
-import { z } from 'zod';
+import { initTRPC } from "@trpc/server";
+import { z } from "zod";
 
 export const t = initTRPC.create();
 
@@ -55,30 +55,30 @@ export const appRouter = t.router({
     )
     .query((opts) => {
       return {
-        greeting: `hello ${opts.input?.text ?? 'world'}`,
+        greeting: `hello ${opts.input?.text ?? "world"}`,
       };
     }),
 });
 ```
 
 ```tsx title='components/MyComponent.tsx'
-import { trpc } from '../utils/trpc';
+import { trpc } from "../utils/trpc";
 
 export function MyComponent() {
   // input is optional, so we don't have to pass second argument
   const helloNoArgs = trpc.hello.useQuery();
-  const helloWithArgs = trpc.hello.useQuery({ text: 'client' });
+  const helloWithArgs = trpc.hello.useQuery({ text: "client" });
 
   return (
     <div>
       <h1>Hello World Example</h1>
       <ul>
         <li>
-          helloNoArgs ({helloNoArgs.status}):{' '}
+          helloNoArgs ({helloNoArgs.status}):{" "}
           <pre>{JSON.stringify(helloNoArgs.data, null, 2)}</pre>
         </li>
         <li>
-          helloWithArgs ({helloWithArgs.status}):{' '}
+          helloWithArgs ({helloWithArgs.status}):{" "}
           <pre>{JSON.stringify(helloWithArgs.data, null, 2)}</pre>
         </li>
       </ul>
@@ -100,7 +100,7 @@ When returning an async generators in a query, you will:
 ### Example
 
 ```tsx title='server/routers/_app.ts'
-import { publicProcedure, router } from './trpc';
+import { publicProcedure, router } from "./trpc";
 
 const appRouter = router({
   iterable: publicProcedure.query(async function* () {
@@ -115,7 +115,7 @@ export type AppRouter = typeof appRouter;
 ```
 
 ```tsx title='components/MyComponent.tsx'
-import { trpc } from '~/utils';
+import { trpc } from "~/utils";
 
 export function MyComponent() {
   const result = trpc.iterable.useQuery();

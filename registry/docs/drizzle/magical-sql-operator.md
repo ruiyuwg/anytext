@@ -25,10 +25,12 @@ One of the most common usages you may encounter in other ORMs as well
 is the ability to use `sql` queries as-is for raw queries.
 
 ```typescript copy
-import { sql } from 'drizzle-orm' 
+import { sql } from "drizzle-orm";
 
 const id = 69;
-await db.execute(sql`select * from ${usersTable} where ${usersTable.id} = ${id}`)
+await db.execute(
+  sql`select * from ${usersTable} where ${usersTable.id} = ${id}`,
+);
 ```
 
 It will generate the current query
@@ -59,14 +61,18 @@ This feature is particularly useful in partial select queries, ensuring consiste
 
 ```typescript
 // without sql type defined
-const response: { lowerName: unknown }[] = await db.select({
-    lowerName: sql`lower(${usersTable.id})`
-}).from(usersTable);
+const response: { lowerName: unknown }[] = await db
+  .select({
+    lowerName: sql`lower(${usersTable.id})`,
+  })
+  .from(usersTable);
 
 // with sql type defined
-const response: { lowerName: string }[] = await db.select({
-    lowerName: sql`lower(${usersTable.id})`
-}).from(usersTable);
+const response: { lowerName: string }[] = await db
+  .select({
+    lowerName: sql`lower(${usersTable.id})`,
+  })
+  .from(usersTable);
 ```
 
 ## `sql``.mapWith()`
@@ -79,9 +85,9 @@ You can replicate a specific column mapping strategy as long as
 the interface inside mapWith is the same interface that is implemented by Column.
 
 ```typescript
-const usersTable = pgTable('users', {
-    id: serial('id').primaryKey(),
-    name: text('name').notNull(),
+const usersTable = pgTable("users", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
 });
 
 //  at runtime this values will be mapped same as `text` column is mapped in drizzle
@@ -92,13 +98,13 @@ You can also pass your own implementation for the `DriverValueDecoder` interface
 
 ```ts
 sql``.mapWith({
-	mapFromDriverValue: (value: any) => {
-		const mappedValue = value;
-		// mapping you want to apply
-		return mappedValue;
-	},
+  mapFromDriverValue: (value: any) => {
+    const mappedValue = value;
+    // mapping you want to apply
+    return mappedValue;
+  },
 });
-    
+
 // or
 sql``.mapWith(Number);
 ```
@@ -308,10 +314,10 @@ finalSql.append(sql` where `);
 // some logic
 
 for (let i = 0; i < 5; i++) {
-	finalSql.append(sql`id = ${i}`);
+  finalSql.append(sql`id = ${i}`);
 
-	if (i === 4) continue;
-	finalSql.append(sql` or `);
+  if (i === 4) continue;
+  finalSql.append(sql` or `);
 }
 ```
 
@@ -401,7 +407,7 @@ import { usersTable } from 'schema'
 await db.select({
 id: usersTable.id,
 lowerName: sql`lower(${usersTable.name})`,
-aliasedName: sql`lower(${usersTable.name})`.as('aliased\_column'),
+aliasedName: sql`lower(${usersTable.name})`.as('aliased_column'),
 count: sql`count(*)`.mapWith(Number)
 }).from(usersTable)
 
@@ -505,7 +511,7 @@ count: sql`count(${usersTable.id})`.mapWith(Number)
 
 ````
 ```sql
-select "project_id", count("users"."id") from users group by "users"."project_id" having count("users"."id") > 300; 
+select "project_id", count("users"."id") from users group by "users"."project_id" having count("users"."id") > 300;
 ````
 
 </Section>
@@ -516,7 +522,7 @@ import { Image } from "astro:assets";
 import roman from "@/assets/images/core/roman.jpg";
 import smm from "@/assets/images/core/smm.jpg";
 import group from "@/assets/images/core/group.jpeg";
-import alex\_sherman from "@/assets/images/core/alex\_sherman.jpg";
+import alex_sherman from "@/assets/images/core/alex_sherman.jpg";
 import reka from "@/assets/images/team/reka.png";
 import andrew from "@/assets/images/core/andrew.jpeg";
 import blokh from "@/assets/images/core/blokh.jpeg";

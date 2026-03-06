@@ -34,15 +34,15 @@ bun add -D sass
 If you want to configure your Sass options, use `sassOptions` in `next.config`.
 
 ```ts filename="next.config.ts" switcher
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   sassOptions: {
     additionalData: `$var: red;`,
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 ```js filename="next.config.js" switcher
@@ -52,9 +52,9 @@ const nextConfig = {
   sassOptions: {
     additionalData: `$var: red;`,
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 #### Implementation
@@ -62,15 +62,15 @@ module.exports = nextConfig
 You can use the `implementation` property to specify the Sass implementation to use. By default, Next.js uses the [`sass`](https://www.npmjs.com/package/sass) package.
 
 ```ts filename="next.config.ts" switcher
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   sassOptions: {
-    implementation: 'sass-embedded',
+    implementation: "sass-embedded",
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 ```js filename="next.config.js" switcher
@@ -78,11 +78,11 @@ export default nextConfig
 
 const nextConfig = {
   sassOptions: {
-    implementation: 'sass-embedded',
+    implementation: "sass-embedded",
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 ### Sass Variables
@@ -100,14 +100,14 @@ $primary-color: #64ff00;
 ```
 
 ```jsx filename="pages/_app.js"
-import variables from '../styles/variables.module.scss'
+import variables from "../styles/variables.module.scss";
 
 export default function MyApp({ Component, pageProps }) {
   return (
     <Layout color={variables.primaryColor}>
       <Component {...pageProps} />
     </Layout>
-  )
+  );
 }
 ```
 

@@ -1,14 +1,14 @@
 # Batch API
 
 **LibSQL Batch API explanation**:
-*[source](https://docs.turso.tech/sdk/ts/reference#batch-transactions)*
+_[source](https://docs.turso.tech/sdk/ts/reference#batch-transactions)_
 
 > With the libSQL client library, a batch is one or more SQL statements executed in order in an implicit transaction.
 > The transaction is controlled by the libSQL backend. If all of the statements are successful,
 > the transaction is committed. If any of the statements fail, the entire transaction is rolled back and no changes are made.
 
 **D1 Batch API explanation**:
-*[source](https://developers.cloudflare.com/d1/worker-api/d1-database/#batch)*
+_[source](https://developers.cloudflare.com/d1/worker-api/d1-database/#batch)_
 
 > Batching sends multiple SQL statements inside a single call to the database.
 > This can have a huge performance impact as it reduces latency from network round trips to D1.
@@ -21,11 +21,16 @@ Drizzle ORM provides APIs to run SQL statements in batch for `LibSQL`, `Neon` an
 
 ```ts
 const batchResponse: BatchResponse = await db.batch([
-	db.insert(usersTable).values({ id: 1, name: 'John' }).returning({ id: usersTable.id }),
-	db.update(usersTable).set({ name: 'Dan' }).where(eq(usersTable.id, 1)),
-	db.query.usersTable.findMany({}),
-	db.select().from(usersTable).where(eq(usersTable.id, 1)),
-	db.select({ id: usersTable.id, invitedBy: usersTable.invitedBy }).from(usersTable),
+  db
+    .insert(usersTable)
+    .values({ id: 1, name: "John" })
+    .returning({ id: usersTable.id }),
+  db.update(usersTable).set({ name: "Dan" }).where(eq(usersTable.id, 1)),
+  db.query.usersTable.findMany({}),
+  db.select().from(usersTable).where(eq(usersTable.id, 1)),
+  db
+    .select({ id: usersTable.id, invitedBy: usersTable.invitedBy })
+    .from(usersTable),
 ]);
 ```
 
@@ -33,52 +38,52 @@ Type for `batchResponse` in this example would be:
 
 ```ts
 type BatchResponse = [
-	{
-		id: number;
-	}[],
-	ResultSet,
-	{
-		id: number;
-		name: string;
-		verified: number;
-		invitedBy: number | null;
-	}[],
-	{
-		id: number;
-		name: string;
-		verified: number;
-		invitedBy: number | null;
-	}[],
-	{
-		id: number;
-		invitedBy: number | null;
-	}[],
-]
+  {
+    id: number;
+  }[],
+  ResultSet,
+  {
+    id: number;
+    name: string;
+    verified: number;
+    invitedBy: number | null;
+  }[],
+  {
+    id: number;
+    name: string;
+    verified: number;
+    invitedBy: number | null;
+  }[],
+  {
+    id: number;
+    invitedBy: number | null;
+  }[],
+];
 ```
 
 ```ts
 type BatchResponse = [
-	{
-		id: number;
-	}[],
-	NeonHttpQueryResult,
-	{
-		id: number;
-		name: string;
-		verified: number;
-		invitedBy: number | null;
-	}[],
-	{
-		id: number;
-		name: string;
-		verified: number;
-		invitedBy: number | null;
-	}[],
-	{
-		id: number;
-		invitedBy: number | null;
-	}[],
-]
+  {
+    id: number;
+  }[],
+  NeonHttpQueryResult,
+  {
+    id: number;
+    name: string;
+    verified: number;
+    invitedBy: number | null;
+  }[],
+  {
+    id: number;
+    name: string;
+    verified: number;
+    invitedBy: number | null;
+  }[],
+  {
+    id: number;
+    invitedBy: number | null;
+  }[],
+];
 ```
 
 ```ts
@@ -103,7 +108,7 @@ type BatchResponse = [
     id: number;
     invitedBy: number | null;
   }[],
-]
+];
 ```
 
 All possible builders that can be used inside `db.batch`:
@@ -160,15 +165,15 @@ import { drizzle } from "drizzle-orm/...";
 const db = drizzle(process.env.DB_URL!, {
   cache: upstashCache({
     // 👇 Redis credentials (optional — can also be pulled from env vars)
-    url: '<UPSTASH_URL>',
-    token: '<UPSTASH_TOKEN>',
+    url: "<UPSTASH_URL>",
+    token: "<UPSTASH_TOKEN>",
 
     // 👇 Enable caching for all queries by default (optional)
     global: true,
 
     // 👇 Default cache behavior (optional)
-    config: { ex: 60 }
-  })
+    config: { ex: 60 },
+  }),
 });
 ```
 

@@ -11,35 +11,35 @@ The Open Responses provider is available in the `@ai-sdk/open-responses` module.
 Create an Open Responses provider instance using `createOpenResponses`:
 
 ```ts
-import { createOpenResponses } from '@ai-sdk/open-responses';
+import { createOpenResponses } from "@ai-sdk/open-responses";
 
 const openResponses = createOpenResponses({
-  name: 'aProvider',
-  url: 'http://localhost:1234/v1/responses',
+  name: "aProvider",
+  url: "http://localhost:1234/v1/responses",
 });
 ```
 
 The `name` and `url` options are required:
 
-- **name** *string*
+- **name** _string_
 
   Provider name. Used as the key for provider options and metadata.
 
-- **url** *string*
+- **url** _string_
 
   URL for the Open Responses API POST endpoint.
 
 You can use the following optional settings to customize the Open Responses provider instance:
 
-- **apiKey** *string*
+- **apiKey** _string_
 
   API key that is being sent using the `Authorization` header.
 
-- **headers** *Record\<string,string>*
+- **headers** _Record\<string,string>_
 
   Custom headers to include in the requests.
 
-- **fetch** *(input: RequestInfo, init?: RequestInit) => Promise\<Response>*
+- **fetch** _(input: RequestInfo, init?: RequestInit) => Promise\<Response>_
 
   Custom [fetch](https://developer.mozilla.org/en-US/docs/Web/API/fetch) implementation.
   Defaults to the global `fetch` function.
@@ -49,7 +49,7 @@ You can use the following optional settings to customize the Open Responses prov
 The Open Responses provider instance is a function that you can invoke to create a language model:
 
 ```ts
-const model = openResponses('mistralai/ministral-3-14b-reasoning');
+const model = openResponses("mistralai/ministral-3-14b-reasoning");
 ```
 
 You can use Open Responses models with the `generateText` and `streamText` functions,
@@ -59,17 +59,17 @@ and they support structured data generation with [`Output`](/docs/reference/ai-s
 ### Example
 
 ```ts
-import { createOpenResponses } from '@ai-sdk/open-responses';
-import { generateText } from 'ai';
+import { createOpenResponses } from "@ai-sdk/open-responses";
+import { generateText } from "ai";
 
 const openResponses = createOpenResponses({
-  name: 'aProvider',
-  url: 'http://localhost:1234/v1/responses',
+  name: "aProvider",
+  url: "http://localhost:1234/v1/responses",
 });
 
 const { text } = await generateText({
-  model: openResponses('mistralai/ministral-3-14b-reasoning'),
-  prompt: 'Invent a new holiday and describe its traditions.',
+  model: openResponses("mistralai/ministral-3-14b-reasoning"),
+  prompt: "Invent a new holiday and describe its traditions.",
 });
 ```
 

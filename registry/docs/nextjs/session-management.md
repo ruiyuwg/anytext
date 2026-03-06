@@ -38,7 +38,7 @@ SESSION_SECRET=your_secret_key
 You can then reference this key in your session management logic:
 
 ```js filename="app/lib/session.js"
-const secretKey = process.env.SESSION_SECRET
+const secretKey = process.env.SESSION_SECRET;
 ```
 
 #### 2. Encrypting and decrypting sessions
@@ -46,56 +46,56 @@ const secretKey = process.env.SESSION_SECRET
 Next, you can use your preferred [session management library](#session-management-libraries) to encrypt and decrypt sessions. Continuing from the previous example, we'll use [Jose](https://www.npmjs.com/package/jose) (compatible with the [Edge Runtime](/docs/app/api-reference/edge)) and React's [`server-only`](https://www.npmjs.com/package/server-only) package to ensure that your session management logic is only executed on the server.
 
 ```tsx filename="app/lib/session.ts" switcher
-import 'server-only'
-import { SignJWT, jwtVerify } from 'jose'
-import { SessionPayload } from '@/app/lib/definitions'
+import "server-only";
+import { SignJWT, jwtVerify } from "jose";
+import { SessionPayload } from "@/app/lib/definitions";
 
-const secretKey = process.env.SESSION_SECRET
-const encodedKey = new TextEncoder().encode(secretKey)
+const secretKey = process.env.SESSION_SECRET;
+const encodedKey = new TextEncoder().encode(secretKey);
 
 export async function encrypt(payload: SessionPayload) {
   return new SignJWT(payload)
-    .setProtectedHeader({ alg: 'HS256' })
+    .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
-    .setExpirationTime('7d')
-    .sign(encodedKey)
+    .setExpirationTime("7d")
+    .sign(encodedKey);
 }
 
-export async function decrypt(session: string | undefined = '') {
+export async function decrypt(session: string | undefined = "") {
   try {
     const { payload } = await jwtVerify(session, encodedKey, {
-      algorithms: ['HS256'],
-    })
-    return payload
+      algorithms: ["HS256"],
+    });
+    return payload;
   } catch (error) {
-    console.log('Failed to verify session')
+    console.log("Failed to verify session");
   }
 }
 ```
 
 ```jsx filename="app/lib/session.js" switcher
-import 'server-only'
-import { SignJWT, jwtVerify } from 'jose'
+import "server-only";
+import { SignJWT, jwtVerify } from "jose";
 
-const secretKey = process.env.SESSION_SECRET
-const encodedKey = new TextEncoder().encode(secretKey)
+const secretKey = process.env.SESSION_SECRET;
+const encodedKey = new TextEncoder().encode(secretKey);
 
 export async function encrypt(payload) {
   return new SignJWT(payload)
-    .setProtectedHeader({ alg: 'HS256' })
+    .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
-    .setExpirationTime('7d')
-    .sign(encodedKey)
+    .setExpirationTime("7d")
+    .sign(encodedKey);
 }
 
 export async function decrypt(session) {
   try {
     const { payload } = await jwtVerify(session, encodedKey, {
-      algorithms: ['HS256'],
-    })
-    return payload
+      algorithms: ["HS256"],
+    });
+    return payload;
   } catch (error) {
-    console.log('Failed to verify session')
+    console.log("Failed to verify session");
   }
 }
 ```
@@ -117,47 +117,47 @@ To store the session in a cookie, use the Next.js [`cookies`](/docs/app/api-refe
 Please refer to [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies) for more information on each of these options.
 
 ```ts filename="app/lib/session.ts" switcher
-import 'server-only'
-import { cookies } from 'next/headers'
+import "server-only";
+import { cookies } from "next/headers";
 
 export async function createSession(userId: string) {
-  const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
-  const session = await encrypt({ userId, expiresAt })
-  const cookieStore = await cookies()
+  const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+  const session = await encrypt({ userId, expiresAt });
+  const cookieStore = await cookies();
 
-  cookieStore.set('session', session, {
+  cookieStore.set("session", session, {
     httpOnly: true,
     secure: true,
     expires: expiresAt,
-    sameSite: 'lax',
-    path: '/',
-  })
+    sameSite: "lax",
+    path: "/",
+  });
 }
 ```
 
 ```js filename="app/lib/session.js" switcher
-import 'server-only'
-import { cookies } from 'next/headers'
+import "server-only";
+import { cookies } from "next/headers";
 
 export async function createSession(userId) {
-  const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
-  const session = await encrypt({ userId, expiresAt })
-  const cookieStore = await cookies()
+  const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+  const session = await encrypt({ userId, expiresAt });
+  const cookieStore = await cookies();
 
-  cookieStore.set('session', session, {
+  cookieStore.set("session", session, {
     httpOnly: true,
     secure: true,
     expires: expiresAt,
-    sameSite: 'lax',
-    path: '/',
-  })
+    sameSite: "lax",
+    path: "/",
+  });
 }
 ```
 
 Back in your Server Action, you can invoke the `createSession()` function, and use the [`redirect()`](/docs/app/guides/redirecting) API to redirect the user to the appropriate page:
 
 ```ts filename="app/actions/auth.ts" switcher
-import { createSession } from '@/app/lib/session'
+import { createSession } from "@/app/lib/session";
 
 export async function signup(state: FormState, formData: FormData) {
   // Previous steps:
@@ -167,14 +167,14 @@ export async function signup(state: FormState, formData: FormData) {
 
   // Current steps:
   // 4. Create user session
-  await createSession(user.id)
+  await createSession(user.id);
   // 5. Redirect user
-  redirect('/profile')
+  redirect("/profile");
 }
 ```
 
 ```js filename="app/actions/auth.js" switcher
-import { createSession } from '@/app/lib/session'
+import { createSession } from "@/app/lib/session";
 
 export async function signup(state, formData) {
   // Previous steps:
@@ -184,9 +184,9 @@ export async function signup(state, formData) {
 
   // Current steps:
   // 4. Create user session
-  await createSession(user.id)
+  await createSession(user.id);
   // 5. Redirect user
-  redirect('/profile')
+  redirect("/profile");
 }
 ```
 
@@ -200,53 +200,53 @@ export async function signup(state, formData) {
 You can also extend the session's expiration time. This is useful for keeping the user logged in after they access the application again. For example:
 
 ```ts filename="app/lib/session.ts" switcher
-import 'server-only'
-import { cookies } from 'next/headers'
-import { decrypt } from '@/app/lib/session'
+import "server-only";
+import { cookies } from "next/headers";
+import { decrypt } from "@/app/lib/session";
 
 export async function updateSession() {
-  const session = (await cookies()).get('session')?.value
-  const payload = await decrypt(session)
+  const session = (await cookies()).get("session")?.value;
+  const payload = await decrypt(session);
 
   if (!session || !payload) {
-    return null
+    return null;
   }
 
-  const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+  const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
 
-  const cookieStore = await cookies()
-  cookieStore.set('session', session, {
+  const cookieStore = await cookies();
+  cookieStore.set("session", session, {
     httpOnly: true,
     secure: true,
     expires: expires,
-    sameSite: 'lax',
-    path: '/',
-  })
+    sameSite: "lax",
+    path: "/",
+  });
 }
 ```
 
 ```js filename="app/lib/session.js" switcher
-import 'server-only'
-import { cookies } from 'next/headers'
-import { decrypt } from '@/app/lib/session'
+import "server-only";
+import { cookies } from "next/headers";
+import { decrypt } from "@/app/lib/session";
 
 export async function updateSession() {
-  const session = (await cookies()).get('session')?.value
-  const payload = await decrypt(session)
+  const session = (await cookies()).get("session")?.value;
+  const payload = await decrypt(session);
 
   if (!session || !payload) {
-    return null
+    return null;
   }
 
   const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)(
-    await cookies()
-  ).set('session', session, {
+    await cookies(),
+  ).set("session", session, {
     httpOnly: true,
     secure: true,
     expires: expires,
-    sameSite: 'lax',
-    path: '/',
-  })
+    sameSite: "lax",
+    path: "/",
+  });
 }
 ```
 
@@ -257,44 +257,44 @@ export async function updateSession() {
 To delete the session, you can delete the cookie:
 
 ```ts filename="app/lib/session.ts" switcher
-import 'server-only'
-import { cookies } from 'next/headers'
+import "server-only";
+import { cookies } from "next/headers";
 
 export async function deleteSession() {
-  const cookieStore = await cookies()
-  cookieStore.delete('session')
+  const cookieStore = await cookies();
+  cookieStore.delete("session");
 }
 ```
 
 ```js filename="app/lib/session.js" switcher
-import 'server-only'
-import { cookies } from 'next/headers'
+import "server-only";
+import { cookies } from "next/headers";
 
 export async function deleteSession() {
-  const cookieStore = await cookies()
-  cookieStore.delete('session')
+  const cookieStore = await cookies();
+  cookieStore.delete("session");
 }
 ```
 
 Then you can reuse the `deleteSession()` function in your application, for example, on logout:
 
 ```ts filename="app/actions/auth.ts" switcher
-import { cookies } from 'next/headers'
-import { deleteSession } from '@/app/lib/session'
+import { cookies } from "next/headers";
+import { deleteSession } from "@/app/lib/session";
 
 export async function logout() {
-  await deleteSession()
-  redirect('/login')
+  await deleteSession();
+  redirect("/login");
 }
 ```
 
 ```js filename="app/actions/auth.js" switcher
-import { cookies } from 'next/headers'
-import { deleteSession } from '@/app/lib/session'
+import { cookies } from "next/headers";
+import { deleteSession } from "@/app/lib/session";
 
 export async function logout() {
-  await deleteSession()
-  redirect('/login')
+  await deleteSession();
+  redirect("/login");
 }
 ```
 
@@ -309,12 +309,12 @@ To create and manage database sessions, you'll need to follow these steps:
 For example:
 
 ```ts filename="app/lib/session.ts" switcher
-import cookies from 'next/headers'
-import { db } from '@/app/lib/db'
-import { encrypt } from '@/app/lib/session'
+import cookies from "next/headers";
+import { db } from "@/app/lib/db";
+import { encrypt } from "@/app/lib/session";
 
 export async function createSession(id: number) {
-  const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+  const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
 
   // 1. Create a session in the database
   const data = await db
@@ -324,32 +324,32 @@ export async function createSession(id: number) {
       expiresAt,
     })
     // Return the session ID
-    .returning({ id: sessions.id })
+    .returning({ id: sessions.id });
 
-  const sessionId = data[0].id
+  const sessionId = data[0].id;
 
   // 2. Encrypt the session ID
-  const session = await encrypt({ sessionId, expiresAt })
+  const session = await encrypt({ sessionId, expiresAt });
 
   // 3. Store the session in cookies for optimistic auth checks
-  const cookieStore = await cookies()
-  cookieStore.set('session', session, {
+  const cookieStore = await cookies();
+  cookieStore.set("session", session, {
     httpOnly: true,
     secure: true,
     expires: expiresAt,
-    sameSite: 'lax',
-    path: '/',
-  })
+    sameSite: "lax",
+    path: "/",
+  });
 }
 ```
 
 ```js filename="app/lib/session.js" switcher
-import cookies from 'next/headers'
-import { db } from '@/app/lib/db'
-import { encrypt } from '@/app/lib/session'
+import cookies from "next/headers";
+import { db } from "@/app/lib/db";
+import { encrypt } from "@/app/lib/session";
 
 export async function createSession(id) {
-  const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+  const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
 
   // 1. Create a session in the database
   const data = await db
@@ -359,22 +359,22 @@ export async function createSession(id) {
       expiresAt,
     })
     // Return the session ID
-    .returning({ id: sessions.id })
+    .returning({ id: sessions.id });
 
-  const sessionId = data[0].id
+  const sessionId = data[0].id;
 
   // 2. Encrypt the session ID
-  const session = await encrypt({ sessionId, expiresAt })
+  const session = await encrypt({ sessionId, expiresAt });
 
   // 3. Store the session in cookies for optimistic auth checks
-  const cookieStore = await cookies()
-  cookieStore.set('session', session, {
+  const cookieStore = await cookies();
+  cookieStore.set("session", session, {
     httpOnly: true,
     secure: true,
     expires: expiresAt,
-    sameSite: 'lax',
-    path: '/',
-  })
+    sameSite: "lax",
+    path: "/",
+  });
 }
 ```
 

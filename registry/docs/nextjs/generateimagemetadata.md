@@ -14,7 +14,7 @@ An object containing the [dynamic route parameters](/docs/app/api-reference/file
 export function generateImageMetadata({
   params,
 }: {
-  params: { slug: string }
+  params: { slug: string };
 }) {
   // ...
 }
@@ -44,84 +44,80 @@ The `generateImageMetadata` function should return an `array` of objects contain
 | `contentType`         | `string`                            |
 
 ```tsx filename="icon.tsx" switcher
-import { ImageResponse } from 'next/og'
+import { ImageResponse } from "next/og";
 
 export function generateImageMetadata() {
   return [
     {
-      contentType: 'image/png',
+      contentType: "image/png",
       size: { width: 48, height: 48 },
-      id: 'small',
+      id: "small",
     },
     {
-      contentType: 'image/png',
+      contentType: "image/png",
       size: { width: 72, height: 72 },
-      id: 'medium',
+      id: "medium",
     },
-  ]
+  ];
 }
 
 export default async function Icon({ id }: { id: Promise<string | number> }) {
-  const iconId = await id
+  const iconId = await id;
   return new ImageResponse(
-    (
-      <div
-        style={{
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontSize: 88,
-          background: '#000',
-          color: '#fafafa',
-        }}
-      >
-        Icon {iconId}
-      </div>
-    )
-  )
+    <div
+      style={{
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        fontSize: 88,
+        background: "#000",
+        color: "#fafafa",
+      }}
+    >
+      Icon {iconId}
+    </div>,
+  );
 }
 ```
 
 ```jsx filename="icon.js" switcher
-import { ImageResponse } from 'next/og'
+import { ImageResponse } from "next/og";
 
 export function generateImageMetadata() {
   return [
     {
-      contentType: 'image/png',
+      contentType: "image/png",
       size: { width: 48, height: 48 },
-      id: 'small',
+      id: "small",
     },
     {
-      contentType: 'image/png',
+      contentType: "image/png",
       size: { width: 72, height: 72 },
-      id: 'medium',
+      id: "medium",
     },
-  ]
+  ];
 }
 
 export default async function Icon({ id }) {
-  const iconId = await id
+  const iconId = await id;
   return new ImageResponse(
-    (
-      <div
-        style={{
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontSize: 88,
-          background: '#000',
-          color: '#fafafa',
-        }}
-      >
-        Icon {iconId}
-      </div>
-    )
-  )
+    <div
+      style={{
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        fontSize: 88,
+        background: "#000",
+        color: "#fafafa",
+      }}
+    >
+      Icon {iconId}
+    </div>,
+  );
 }
 ```
 
@@ -135,14 +131,14 @@ A promise that resolves to the `id` value from one of the items returned by `gen
 
 ```tsx filename="icon.tsx" switcher
 export default async function Icon({ id }: { id: Promise<string | number> }) {
-  const iconId = await id
+  const iconId = await id;
   // Use iconId to generate the image
 }
 ```
 
 ```jsx filename="icon.js" switcher
 export default async function Icon({ id }) {
-  const iconId = await id
+  const iconId = await id;
   // Use iconId to generate the image
 }
 ```
@@ -155,16 +151,16 @@ A promise that resolves to an object containing the [dynamic route parameters](/
 export default async function Icon({
   params,
 }: {
-  params: Promise<{ slug: string }>
+  params: Promise<{ slug: string }>;
 }) {
-  const { slug } = await params
+  const { slug } = await params;
   // Use slug to generate the image
 }
 ```
 
 ```jsx filename="icon.js" switcher
 export default async function Icon({ params }) {
-  const { slug } = await params
+  const { slug } = await params;
   // Use slug to generate the image
 }
 ```
@@ -176,84 +172,80 @@ export default async function Icon({ params }) {
 This example uses the `params` object and external data to generate multiple [Open Graph images](/docs/app/api-reference/file-conventions/metadata/opengraph-image) for a route segment.
 
 ```tsx filename="app/products/[id]/opengraph-image.tsx" switcher
-import { ImageResponse } from 'next/og'
-import { getCaptionForImage, getOGImages } from '@/app/utils/images'
+import { ImageResponse } from "next/og";
+import { getCaptionForImage, getOGImages } from "@/app/utils/images";
 
 export async function generateImageMetadata({
   params,
 }: {
-  params: { id: string }
+  params: { id: string };
 }) {
-  const images = await getOGImages(params.id)
+  const images = await getOGImages(params.id);
 
   return images.map((image, idx) => ({
     id: idx,
     size: { width: 1200, height: 600 },
     alt: image.text,
-    contentType: 'image/png',
-  }))
+    contentType: "image/png",
+  }));
 }
 
 export default async function Image({
   params,
   id,
 }: {
-  params: Promise<{ id: string }>
-  id: Promise<number>
+  params: Promise<{ id: string }>;
+  id: Promise<number>;
 }) {
-  const productId = (await params).id
-  const imageId = await id
-  const text = await getCaptionForImage(productId, imageId)
+  const productId = (await params).id;
+  const imageId = await id;
+  const text = await getCaptionForImage(productId, imageId);
 
   return new ImageResponse(
-    (
-      <div
-        style={
-          {
-            // ...
-          }
+    <div
+      style={
+        {
+          // ...
         }
-      >
-        {text}
-      </div>
-    )
-  )
+      }
+    >
+      {text}
+    </div>,
+  );
 }
 ```
 
 ```jsx filename="app/products/[id]/opengraph-image.js" switcher
-import { ImageResponse } from 'next/og'
-import { getCaptionForImage, getOGImages } from '@/app/utils/images'
+import { ImageResponse } from "next/og";
+import { getCaptionForImage, getOGImages } from "@/app/utils/images";
 
 export async function generateImageMetadata({ params }) {
-  const images = await getOGImages(params.id)
+  const images = await getOGImages(params.id);
 
   return images.map((image, idx) => ({
     id: idx,
     size: { width: 1200, height: 600 },
     alt: image.text,
-    contentType: 'image/png',
-  }))
+    contentType: "image/png",
+  }));
 }
 
 export default async function Image({ params, id }) {
-  const productId = (await params).id
-  const imageId = await id
-  const text = await getCaptionForImage(productId, imageId)
+  const productId = (await params).id;
+  const imageId = await id;
+  const text = await getCaptionForImage(productId, imageId);
 
   return new ImageResponse(
-    (
-      <div
-        style={
-          {
-            // ...
-          }
+    <div
+      style={
+        {
+          // ...
         }
-      >
-        {text}
-      </div>
-    )
-  )
+      }
+    >
+      {text}
+    </div>,
+  );
 }
 ```
 
@@ -283,21 +275,21 @@ You can use the `metadata` object or the `generateMetadata` function to define m
 To define static metadata, export a [`Metadata` object](#metadata-fields) from a `layout.js` or `page.js` file.
 
 ```tsx filename="layout.tsx | page.tsx" switcher
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: '...',
-  description: '...',
-}
+  title: "...",
+  description: "...",
+};
 
 export default function Page() {}
 ```
 
 ```jsx filename="layout.js | page.js" switcher
 export const metadata = {
-  title: '...',
-  description: '...',
-}
+  title: "...",
+  description: "...",
+};
 
 export default function Page() {}
 ```

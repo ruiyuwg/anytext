@@ -78,10 +78,10 @@ export default defineConfig({
 
   entities: {
     roles: {
-      provider: '',
+      provider: "",
       exclude: [],
-      include: []
-    }
+      include: [],
+    },
   },
 
   breakpoints: true,
@@ -97,7 +97,7 @@ drizzle-kit generate --config=drizzle-dev.config.ts
 drizzle-kit generate --config=drizzle-prod.config.ts </Npx>
 
 ```plaintext {5-6}
-📦 
+📦
  ├ 📂 drizzle
  ├ 📂 src
  ├ 📜 .env
@@ -145,7 +145,7 @@ out: "./drizzle",
 ### `dialect`
 <rem025/>
 
-Dialect of the database you're using 
+Dialect of the database you're using
 |               |                                                 |
 | :------------ | :-----------------------------------            |
 | type        | <Dialects/>                                     |
@@ -157,7 +157,7 @@ Dialect of the database you're using
 import { defineConfig } from "drizzle-kit";
 
 export default defineConfig({
-  dialect: "mysql", 
+  dialect: "mysql",
 });
 ````
 
@@ -165,13 +165,13 @@ export default defineConfig({
 
 <rem025/>
 
-[`glob`](https://www.digitalocean.com/community/tools/glob?comments=true\&glob=/**/*.js\&matches=false\&tests=//%20This%20will%20match%20as%20it%20ends%20with%20'.js'\&tests=/hello/world.js\&tests=//%20This%20won't%20match!\&tests=/test/some/globs)
+[`glob`](https://www.digitalocean.com/community/tools/glob?comments=true&glob=/**/*.js&matches=false&tests=//%20This%20will%20match%20as%20it%20ends%20with%20'.js'&tests=/hello/world.js&tests=//%20This%20won't%20match!&tests=/test/some/globs)
 based path to drizzle schema file(s) or folder(s) contaning schema files.
-|               |                      |
-| :------------ | :-----------------   |
-| type          | `string` `string[]` |
-| default        | --                    |
-| commands      | `generate` `push`    |
+| | |
+| :------------ | :----------------- |
+| type | `string` `string[]` |
+| default | -- |
+| commands | `generate` `push` |
 
 <rem025/>
 <SchemaFilePaths />
@@ -181,11 +181,11 @@ based path to drizzle schema file(s) or folder(s) contaning schema files.
 <rem025/>
 
 Defines output folder of your SQL migration files, json snapshots of your schema and `schema.ts` from `drizzle-kit pull` command.
-|               |                      |
-| :------------ | :-----------------   |
-| type          | `string` `string[]` |
-| default        | `drizzle`                    |
-| commands      | `generate` `migrate` `push` `pull` `check` `up`    |
+| | |
+| :------------ | :----------------- |
+| type | `string` `string[]` |
+| default | `drizzle` |
+| commands | `generate` `migrate` `push` `pull` `check` `up` |
 
 <rem025/>
 ```ts {4}
@@ -200,7 +200,7 @@ out: "./drizzle",
 ### `driver`
 <rem025/>
 
-Drizzle Kit automatically picks available database driver from your current project based on the provided `dialect`, 
+Drizzle Kit automatically picks available database driver from your current project based on the provided `dialect`,
 yet some vendor specific databases require a different subset of connection params.
 
 `driver` option let's you explicitely pick those exceptions drivers.
@@ -220,7 +220,7 @@ yet some vendor specific databases require a different subset of connection para
 ### `dbCredentials`
 <rem025/>
 
-Database connection credentials in a form of `url`, 
+Database connection credentials in a form of `url`,
 `user:password@host:port/db` params or exceptions drivers(<Drivers/>) specific connection options.
 
 |               |                      |
@@ -245,7 +245,7 @@ export default defineConfig({
 ````
 
 ```ts
-import { defineConfig } from 'drizzle-kit'
+import { defineConfig } from "drizzle-kit";
 
 // via connection params
 export default defineConfig({
@@ -257,7 +257,7 @@ export default defineConfig({
     password: "password",
     database: "dbname",
     ssl: true, // can be boolean | "require" | "allow" | "prefer" | "verify-full" | options from node:tls
-  }
+  },
 });
 ```
 
@@ -326,7 +326,7 @@ export default defineConfig({
 ````
 
 ```ts
-import { defineConfig } from 'drizzle-kit'
+import { defineConfig } from "drizzle-kit";
 
 export default defineConfig({
   dialect: "sqlite",
@@ -335,12 +335,12 @@ export default defineConfig({
     accountId: "",
     databaseId: "",
     token: "",
-  }
+  },
 });
 ```
 
 ```ts
-import { defineConfig } from 'drizzle-kit'
+import { defineConfig } from "drizzle-kit";
 
 export default defineConfig({
   dialect: "postgresql",
@@ -354,14 +354,14 @@ export default defineConfig({
 ```
 
 ```ts
-import { defineConfig } from 'drizzle-kit'
+import { defineConfig } from "drizzle-kit";
 
 export default defineConfig({
   dialect: "postgresql",
   driver: "pglite",
   dbCredentials: {
     url: "./database/", // database folder path
-  }
+  },
 });
 ```
 
@@ -376,11 +376,11 @@ successfully applied migrations in your database in log table named `__drizzle_m
 
 `migrations` config options lets you change both migrations log `table` name and `schema`.
 
-|               |                      |
-| :------------ | :-----------------   |
-| type          | `{ table: string, schema: string }` |
-| default       | `{ table: "__drizzle_migrations", schema: "drizzle" }`                    |
-| commands      | `migrate`   |
+|          |                                                        |
+| :------- | :----------------------------------------------------- |
+| type     | `{ table: string, schema: string }`                    |
+| default  | `{ table: "__drizzle_migrations", schema: "drizzle" }` |
+| commands | `migrate`                                              |
 
 <rem025/>
 
@@ -389,8 +389,8 @@ export default defineConfig({
   dialect: "postgresql",
   schema: "./src/schema.ts",
   migrations: {
-    table: 'my-migrations-table', // `__drizzle_migrations` by default
-    schema: 'public', // used in PostgreSQL only, `drizzle` by default
+    table: "my-migrations-table", // `__drizzle_migrations` by default
+    schema: "public", // used in PostgreSQL only, `drizzle` by default
   },
 });
 ```
@@ -403,11 +403,11 @@ Configuration for `drizzle-kit pull` command.
 
 `casing` is responsible for in-code column keys casing
 
-|               |                      |
-| :------------ | :-----------------   |
-| type          | `{ casing: "preserve" \| "camel" }` |
-| default       | `{ casing: "camel" }`                    |
-| commands      | `pull`   |
+|          |                                     |
+| :------- | :---------------------------------- |
+| type     | `{ casing: "preserve" \| "camel" }` |
+| default  | `{ casing: "camel" }`               |
+| commands | `pull`                              |
 
 <rem025/>
 
@@ -422,7 +422,7 @@ id: p.serial(),
 firstName: p.text("first-name"),
 lastName: p.text("LastName"),
 email: p.text(),
-phoneNumber: p.text("phone\_number"),
+phoneNumber: p.text("phone_number"),
 });
 
 ````
@@ -431,7 +431,7 @@ SELECT a.attname AS column_name, format_type(a.atttypid, a.atttypmod) as data_ty
 ````
 
 ```
- column_name   | data_type        
+ column_name   | data_type
 ---------------+------------------------
  id            | serial
  first-name    | text
@@ -450,7 +450,7 @@ id: p.serial(),
 "first-name": p.text("first-name"),
 LastName: p.text("LastName"),
 email: p.text(),
-phone\_number: p.text("phone\_number"),
+phone_number: p.text("phone_number"),
 });
 
 ````
@@ -459,7 +459,7 @@ SELECT a.attname AS column_name, format_type(a.atttypid, a.atttypmod) as data_ty
 ````
 
 ```
- column_name   | data_type        
+ column_name   | data_type
 ---------------+------------------------
  id            | serial
  first-name    | text
@@ -482,14 +482,14 @@ If you want to run multiple projects with one database - check out [our guide](/
 `drizzle-kit push` and `drizzle-kit pull` will by default manage all tables in `public` schema.
 You can configure list of tables, schemas and extensions via `tablesFilters`, `schemaFilter` and `extensionFilters` options.
 
-`tablesFilter` option lets you specify [`glob`](https://www.digitalocean.com/community/tools/glob?comments=true\&glob=/**/*.js\&matches=false\&tests=//%20This%20will%20match%20as%20it%20ends%20with%20'.js'\&tests=/hello/world.js\&tests=//%20This%20won't%20match!\&tests=/test/some/globs)
+`tablesFilter` option lets you specify [`glob`](https://www.digitalocean.com/community/tools/glob?comments=true&glob=/**/*.js&matches=false&tests=//%20This%20will%20match%20as%20it%20ends%20with%20'.js'&tests=/hello/world.js&tests=//%20This%20won't%20match!&tests=/test/some/globs)
 based table names filter, e.g. `["users", "user_info"]` or `"user*"`
 
-|               |                      |
-| :------------ | :-----------------   |
-| type          | `string` `string[]` |
-| default       | --                    |
-| commands      | `generate` `push` `pull`   |
+|          |                          |
+| :------- | :----------------------- |
+| type     | `string` `string[]`      |
+| default  | --                       |
+| commands | `generate` `push` `pull` |
 
 <rem025/>
 ```ts
@@ -526,7 +526,7 @@ If you want to run multiple projects with one database - check out [our guide](/
 
 `drizzle-kit push` and `drizzle-kit pull` will by default manage all schemas.
 
-`schemaFilter` option lets you specify [`glob`](https://www.digitalocean.com/community/tools/glob?comments=true&glob=/**/*.js&matches=false&tests=//%20This%20will%20match%20as%20it%20ends%20with%20'.js'&tests=/hello/world.js&tests=//%20This%20won't%20match!&tests=/test/some/globs) 
+`schemaFilter` option lets you specify [`glob`](https://www.digitalocean.com/community/tools/glob?comments=true&glob=/**/*.js&matches=false&tests=//%20This%20will%20match%20as%20it%20ends%20with%20'.js'&tests=/hello/world.js&tests=//%20This%20won't%20match!&tests=/test/some/globs)
 based schema names filter, e.g. `["public", "auth"]` or `"tenant_*"`
 
 |               |                      |
@@ -552,11 +552,11 @@ Those tables have to be ignored by `drizzle-kit push` or `drizzle-kit pull`.
 
 `extensionsFilters` option lets you declare list of installed extensions for drizzle kit to ignore their tables in the schema.
 
-|               |                      |
-| :------------ | :-----------------   |
-| type          | `["postgis"]` |
-| default       | `[]`                    |
-| commands      | `push` `pull`   |
+|          |               |
+| :------- | :------------ |
+| type     | `["postgis"]` |
+| default  | `[]`          |
+| commands | `push` `pull` |
 
 <rem025/>
 
@@ -590,11 +590,11 @@ The `roles` option lets you:
 - Enable modes for providers like `Neon` and `Supabase`, which do not manage their specific roles.
 - Combine all the options above
 
-|               |                       |
-| :------------ | :-----------------    |
-| type          | `boolean \| { provider: "neon" \| "supabase", include: string[], exclude: string[]}`|
-| default       | `false`                  |
-| commands      | `push` `pull` `generate` |
+|          |                                                                                      |
+| :------- | :----------------------------------------------------------------------------------- |
+| type     | `boolean \| { provider: "neon" \| "supabase", include: string[], exclude: string[]}` |
+| default  | `false`                                                                              |
+| commands | `push` `pull` `generate`                                                             |
 
 <rem025/>
 
@@ -604,8 +604,8 @@ By default, `drizzle-kit` won't manage roles for you, so you will need to enable
 export default defineConfig({
   dialect: "postgresql",
   entities: {
-    roles: true
-  }
+    roles: true,
+  },
 });
 ```
 
@@ -702,11 +702,11 @@ export default defineConfig({
 
 Prompts confirmation to run printed SQL statements when running `drizzle-kit push` command.
 
-|               |                      |
-| :------------ | :-----------------   |
-| type          | `boolean` |
-| default       | `false`                    |
-| commands      | `push`   |
+|          |           |
+| :------- | :-------- |
+| type     | `boolean` |
+| default  | `false`   |
+| commands | `push`    |
 
 <rem025/>
 
@@ -723,11 +723,11 @@ export default defineConfig({
 
 Print all SQL statements during `drizzle-kit push` command.
 
-|               |                      |
-| :------------ | :-----------------   |
-| type          | `boolean` |
-| default       | `true`                    |
-| commands      | `generate` `pull`   |
+|          |                   |
+| :------- | :---------------- |
+| type     | `boolean`         |
+| default  | `true`            |
+| commands | `generate` `pull` |
 
 <rem025/>
 
@@ -747,11 +747,11 @@ that's necessary for databases that do not support multiple DDL alternation stat
 
 `breakpoints` option flag lets you switch it on and off
 
-|               |                      |
-| :------------ | :-----------------   |
-| type          | `boolean` |
-| default       | `true`                    |
-| commands      | `generate` `pull`   |
+|          |                   |
+| :------- | :---------------- |
+| type     | `boolean`         |
+| default  | `true`            |
+| commands | `generate` `pull` |
 
 <rem025/>
 

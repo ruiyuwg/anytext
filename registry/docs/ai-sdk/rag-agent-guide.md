@@ -168,7 +168,7 @@ section](#troubleshooting-migration-error) below.
 
 ### Vercel AI Gateway Key
 
-For this guide, you will need a Vercel AI Gateway API key, which gives you access to hundreds of models from different providers with one API key. If you haven't obtained your Vercel AI Gateway API key, you can do so by [signing up](https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fai\&title=Go+to+AI+Gateway) on the Vercel website.
+For this guide, you will need a Vercel AI Gateway API key, which gives you access to hundreds of models from different providers with one API key. If you haven't obtained your Vercel AI Gateway API key, you can do so by [signing up](https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fai&title=Go+to+AI+Gateway) on the Vercel website.
 
 The AI SDK's Vercel AI Gateway Provider is the default global provider, so you
 can access models using a simple string in the model configuration. If you
@@ -199,27 +199,27 @@ Currently, your application has one table (`resources`) which has a column (`con
 Create a new file (`lib/db/schema/embeddings.ts`) and add the following code:
 
 ```tsx filename="lib/db/schema/embeddings.ts"
-import { nanoid } from '@/lib/utils';
-import { index, pgTable, text, varchar, vector } from 'drizzle-orm/pg-core';
-import { resources } from './resources';
+import { nanoid } from "@/lib/utils";
+import { index, pgTable, text, varchar, vector } from "drizzle-orm/pg-core";
+import { resources } from "./resources";
 
 export const embeddings = pgTable(
-  'embeddings',
+  "embeddings",
   {
-    id: varchar('id', { length: 191 })
+    id: varchar("id", { length: 191 })
       .primaryKey()
       .$defaultFn(() => nanoid()),
-    resourceId: varchar('resource_id', { length: 191 }).references(
+    resourceId: varchar("resource_id", { length: 191 }).references(
       () => resources.id,
-      { onDelete: 'cascade' },
+      { onDelete: "cascade" },
     ),
-    content: text('content').notNull(),
-    embedding: vector('embedding', { dimensions: 1536 }).notNull(),
+    content: text("content").notNull(),
+    embedding: vector("embedding", { dimensions: 1536 }).notNull(),
   },
-  table => ({
-    embeddingIndex: index('embeddingIndex').using(
-      'hnsw',
-      table.embedding.op('vector_cosine_ops'),
+  (table) => ({
+    embeddingIndex: index("embeddingIndex").using(
+      "hnsw",
+      table.embedding.op("vector_cosine_ops"),
     ),
   }),
 );
@@ -250,8 +250,8 @@ Remember, to create an embedding, you will start with a piece of source material
 const generateChunks = (input: string): string[] => {
   return input
     .trim()
-    .split('.')
-    .filter(i => i !== '');
+    .split(".")
+    .filter((i) => i !== "");
 };
 ```
 
@@ -274,15 +274,15 @@ in the [providers](/providers) section.
 Let’s add a function to generate embeddings. Copy the following code into your `lib/ai/embedding.ts` file.
 
 ```tsx filename="lib/ai/embedding.ts" highlight="1-2,4,13-22"
-import { embedMany } from 'ai';
+import { embedMany } from "ai";
 
-const embeddingModel = 'openai/text-embedding-ada-002';
+const embeddingModel = "openai/text-embedding-ada-002";
 
 const generateChunks = (input: string): string[] => {
   return input
     .trim()
-    .split('.')
-    .filter(i => i !== '');
+    .split(".")
+    .filter((i) => i !== "");
 };
 
 export const generateEmbeddings = async (
@@ -306,14 +306,14 @@ Next, you create an asynchronous function called `generateEmbeddings`. This func
 Open the file at `lib/actions/resources.ts`. This file has one function, `createResource`, which, as the name implies, allows you to create a resource.
 
 ```tsx filename="lib/actions/resources.ts"
-'use server';
+"use server";
 
 import {
   NewResourceParams,
   insertResourceSchema,
   resources,
-} from '@/lib/db/schema/resources';
-import { db } from '../db';
+} from "@/lib/db/schema/resources";
+import { db } from "../db";
 
 export const createResource = async (input: NewResourceParams) => {
   try {
@@ -324,10 +324,10 @@ export const createResource = async (input: NewResourceParams) => {
       .values({ content })
       .returning();
 
-    return 'Resource successfully created.';
+    return "Resource successfully created.";
   } catch (e) {
     if (e instanceof Error)
-      return e.message.length > 0 ? e.message : 'Error, please try again.';
+      return e.message.length > 0 ? e.message : "Error, please try again.";
   }
 };
 ```
@@ -337,16 +337,16 @@ This function is a [Server Action](https://nextjs.org/docs/app/building-your-app
 Update the file with the following code:
 
 ```tsx filename="lib/actions/resources.ts" highlight="9-10,21-27,29"
-'use server';
+"use server";
 
 import {
   NewResourceParams,
   insertResourceSchema,
   resources,
-} from '@/lib/db/schema/resources';
-import { db } from '../db';
-import { generateEmbeddings } from '../ai/embedding';
-import { embeddings as embeddingsTable } from '../db/schema/embeddings';
+} from "@/lib/db/schema/resources";
+import { db } from "../db";
+import { generateEmbeddings } from "../ai/embedding";
+import { embeddings as embeddingsTable } from "../db/schema/embeddings";
 
 export const createResource = async (input: NewResourceParams) => {
   try {
@@ -359,17 +359,17 @@ export const createResource = async (input: NewResourceParams) => {
 
     const embeddings = await generateEmbeddings(content);
     await db.insert(embeddingsTable).values(
-      embeddings.map(embedding => ({
+      embeddings.map((embedding) => ({
         resourceId: resource.id,
         ...embedding,
       })),
     );
 
-    return 'Resource successfully created and embedded.';
+    return "Resource successfully created and embedded.";
   } catch (error) {
     return error instanceof Error && error.message.length > 0
       ? error.message
-      : 'Error, please try again.';
+      : "Error, please try again.";
   }
 };
 ```
@@ -383,24 +383,24 @@ Great! Let's build the frontend. The AI SDK’s [`useChat`](/docs/reference/ai-s
 Replace your root page (`app/page.tsx`) with the following code.
 
 ```tsx filename="app/page.tsx"
-'use client';
+"use client";
 
-import { useChat } from '@ai-sdk/react';
-import { useState } from 'react';
+import { useChat } from "@ai-sdk/react";
+import { useState } from "react";
 
 export default function Chat() {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
   const { messages, sendMessage } = useChat();
   return (
     <div className="flex flex-col w-full max-w-md py-24 mx-auto stretch">
       <div className="space-y-4">
-        {messages.map(m => (
+        {messages.map((m) => (
           <div key={m.id} className="whitespace-pre-wrap">
             <div>
               <div className="font-bold">{m.role}</div>
-              {m.parts.map(part => {
+              {m.parts.map((part) => {
                 switch (part.type) {
-                  case 'text':
+                  case "text":
                     return <p>{part.text}</p>;
                 }
               })}
@@ -410,17 +410,17 @@ export default function Chat() {
       </div>
 
       <form
-        onSubmit={e => {
+        onSubmit={(e) => {
           e.preventDefault();
           sendMessage({ text: input });
-          setInput('');
+          setInput("");
         }}
       >
         <input
           className="fixed bottom-0 w-full max-w-md p-2 mb-8 border border-gray-300 rounded shadow-xl"
           value={input}
           placeholder="Say something..."
-          onChange={e => setInput(e.currentTarget.value)}
+          onChange={(e) => setInput(e.currentTarget.value)}
         />
       </form>
     </div>
@@ -445,7 +445,7 @@ Create a file at `app/api/chat/route.ts` by running the following command:
 Open the file and add the following code:
 
 ```tsx filename="app/api/chat/route.ts"
-import { convertToModelMessages, streamText, UIMessage } from 'ai';
+import { convertToModelMessages, streamText, UIMessage } from "ai";
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
@@ -454,7 +454,7 @@ export async function POST(req: Request) {
   const { messages }: { messages: UIMessage[] } = await req.json();
 
   const result = streamText({
-    model: 'openai/gpt-4o',
+    model: "openai/gpt-4o",
     messages: await convertToModelMessages(messages),
   });
 
@@ -473,7 +473,7 @@ While you now have a working agent, it isn't doing anything special.
 Let’s add system instructions to refine and restrict the model’s behavior. In this case, you want the model to only use information it has retrieved to generate responses. Update your route handler with the following code:
 
 ```tsx filename="app/api/chat/route.ts" highlight="12-14"
-import { convertToModelMessages, streamText, UIMessage } from 'ai';
+import { convertToModelMessages, streamText, UIMessage } from "ai";
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
@@ -482,7 +482,7 @@ export async function POST(req: Request) {
   const { messages }: { messages: UIMessage[] } = await req.json();
 
   const result = streamText({
-    model: 'openai/gpt-4o',
+    model: "openai/gpt-4o",
     system: `You are a helpful assistant. Check your knowledge base before answering any questions.
     Only respond to questions using information from tool calls.
     if no relevant information is found in the tool calls, respond, "Sorry, I don't know."`,
@@ -508,9 +508,9 @@ Let’s see how you can create a tool to give the model the ability to create, e
 Update your route handler with the following code:
 
 ```tsx filename="app/api/chat/route.ts" highlight="18-29"
-import { createResource } from '@/lib/actions/resources';
-import { convertToModelMessages, streamText, tool, UIMessage } from 'ai';
-import { z } from 'zod';
+import { createResource } from "@/lib/actions/resources";
+import { convertToModelMessages, streamText, tool, UIMessage } from "ai";
+import { z } from "zod";
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
@@ -519,7 +519,7 @@ export async function POST(req: Request) {
   const { messages }: { messages: UIMessage[] } = await req.json();
 
   const result = streamText({
-    model: 'openai/gpt-4o',
+    model: "openai/gpt-4o",
     system: `You are a helpful assistant. Check your knowledge base before answering any questions.
     Only respond to questions using information from tool calls.
     if no relevant information is found in the tool calls, respond, "Sorry, I don't know."`,
@@ -531,7 +531,7 @@ export async function POST(req: Request) {
         inputSchema: z.object({
           content: z
             .string()
-            .describe('the content or resource to add to the knowledge base'),
+            .describe("the content or resource to add to the knowledge base"),
         }),
         execute: async ({ content }) => createResource({ content }),
       }),
@@ -557,30 +557,30 @@ This will start Drizzle Studio where we can view the rows in our database. You s
 Let’s make a few changes in the UI to communicate to the user when a tool has been called. Head back to your root page (`app/page.tsx`) and add the following code:
 
 ```tsx filename="app/page.tsx" highlight="14-32"
-'use client';
+"use client";
 
-import { useChat } from '@ai-sdk/react';
-import { useState } from 'react';
+import { useChat } from "@ai-sdk/react";
+import { useState } from "react";
 
 export default function Chat() {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
   const { messages, sendMessage } = useChat();
   return (
     <div className="flex flex-col w-full max-w-md py-24 mx-auto stretch">
       <div className="space-y-4">
-        {messages.map(m => (
+        {messages.map((m) => (
           <div key={m.id} className="whitespace-pre-wrap">
             <div>
               <div className="font-bold">{m.role}</div>
-              {m.parts.map(part => {
+              {m.parts.map((part) => {
                 switch (part.type) {
-                  case 'text':
+                  case "text":
                     return <p>{part.text}</p>;
-                  case 'tool-addResource':
-                  case 'tool-getInformation':
+                  case "tool-addResource":
+                  case "tool-getInformation":
                     return (
                       <p>
-                        call{part.state === 'output-available' ? 'ed' : 'ing'}{' '}
+                        call{part.state === "output-available" ? "ed" : "ing"}{" "}
                         tool: {part.type}
                         <pre className="my-4 bg-zinc-100 p-2 rounded-sm">
                           {JSON.stringify(part.input, null, 2)}
@@ -595,17 +595,17 @@ export default function Chat() {
       </div>
 
       <form
-        onSubmit={e => {
+        onSubmit={(e) => {
           e.preventDefault();
           sendMessage({ text: input });
-          setInput('');
+          setInput("");
         }}
       >
         <input
           className="fixed bottom-0 w-full max-w-md p-2 mb-8 border border-gray-300 rounded shadow-xl"
           value={input}
           placeholder="Say something..."
-          onChange={e => setInput(e.currentTarget.value)}
+          onChange={(e) => setInput(e.currentTarget.value)}
         />
       </form>
     </div>
@@ -628,15 +628,15 @@ The AI SDK has a feature called [`stopWhen`](/docs/ai-sdk-core/tools-and-tool-ca
 Open your root page (`api/chat/route.ts`) and add the following key to the `streamText` configuration object:
 
 ```tsx filename="api/chat/route.ts" highlight="8,24"
-import { createResource } from '@/lib/actions/resources';
+import { createResource } from "@/lib/actions/resources";
 import {
   convertToModelMessages,
   streamText,
   tool,
   UIMessage,
   stepCountIs,
-} from 'ai';
-import { z } from 'zod';
+} from "ai";
+import { z } from "zod";
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
@@ -645,7 +645,7 @@ export async function POST(req: Request) {
   const { messages }: { messages: UIMessage[] } = await req.json();
 
   const result = streamText({
-    model: 'openai/gpt-4o',
+    model: "openai/gpt-4o",
     system: `You are a helpful assistant. Check your knowledge base before answering any questions.
     Only respond to questions using information from tool calls.
     if no relevant information is found in the tool calls, respond, "Sorry, I don't know."`,
@@ -658,7 +658,7 @@ export async function POST(req: Request) {
         inputSchema: z.object({
           content: z
             .string()
-            .describe('the content or resource to add to the knowledge base'),
+            .describe("the content or resource to add to the knowledge base"),
         }),
         execute: async ({ content }) => createResource({ content }),
       }),
@@ -678,18 +678,18 @@ The model can now add and embed arbitrary information to your knowledge base. Ho
 To find similar content, you will need to embed the users query, search the database for semantic similarities, then pass those items to the model as context alongside the query. To achieve this, let’s update your embedding logic file (`lib/ai/embedding.ts`):
 
 ```tsx filename="lib/ai/embedding.ts" highlight="1,3-5,27-34,36-49"
-import { embed, embedMany } from 'ai';
-import { db } from '../db';
-import { cosineDistance, desc, gt, sql } from 'drizzle-orm';
-import { embeddings } from '../db/schema/embeddings';
+import { embed, embedMany } from "ai";
+import { db } from "../db";
+import { cosineDistance, desc, gt, sql } from "drizzle-orm";
+import { embeddings } from "../db/schema/embeddings";
 
-const embeddingModel = 'openai/text-embedding-ada-002';
+const embeddingModel = "openai/text-embedding-ada-002";
 
 const generateChunks = (input: string): string[] => {
   return input
     .trim()
-    .split('.')
-    .filter(i => i !== '');
+    .split(".")
+    .filter((i) => i !== "");
 };
 
 export const generateEmbeddings = async (
@@ -704,7 +704,7 @@ export const generateEmbeddings = async (
 };
 
 export const generateEmbedding = async (value: string): Promise<number[]> => {
-  const input = value.replaceAll('\\n', ' ');
+  const input = value.replaceAll("\\n", " ");
   const { embedding } = await embed({
     model: embeddingModel,
     value: input,
@@ -722,7 +722,7 @@ export const findRelevantContent = async (userQuery: string) => {
     .select({ name: embeddings.content, similarity })
     .from(embeddings)
     .where(gt(similarity, 0.5))
-    .orderBy(t => desc(t.similarity))
+    .orderBy((t) => desc(t.similarity))
     .limit(4);
   return similarGuides;
 };
@@ -738,16 +738,16 @@ With that done, it’s onto the final step: creating the tool.
 Go back to your route handler (`api/chat/route.ts`) and add a new tool called `getInformation`:
 
 ```ts filename="api/chat/route.ts" highlight="11,37-43"
-import { createResource } from '@/lib/actions/resources';
+import { createResource } from "@/lib/actions/resources";
 import {
   convertToModelMessages,
   streamText,
   tool,
   UIMessage,
   stepCountIs,
-} from 'ai';
-import { z } from 'zod';
-import { findRelevantContent } from '@/lib/ai/embedding';
+} from "ai";
+import { z } from "zod";
+import { findRelevantContent } from "@/lib/ai/embedding";
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
@@ -756,7 +756,7 @@ export async function POST(req: Request) {
   const { messages }: { messages: UIMessage[] } = await req.json();
 
   const result = streamText({
-    model: 'openai/gpt-4o',
+    model: "openai/gpt-4o",
     messages: await convertToModelMessages(messages),
     stopWhen: stepCountIs(5),
     system: `You are a helpful assistant. Check your knowledge base before answering any questions.
@@ -769,14 +769,14 @@ export async function POST(req: Request) {
         inputSchema: z.object({
           content: z
             .string()
-            .describe('the content or resource to add to the knowledge base'),
+            .describe("the content or resource to add to the knowledge base"),
         }),
         execute: async ({ content }) => createResource({ content }),
       }),
       getInformation: tool({
         description: `get information from your knowledge base to answer questions.`,
         inputSchema: z.object({
-          question: z.string().describe('the users question'),
+          question: z.string().describe("the users question"),
         }),
         execute: async ({ question }) => findRelevantContent(question),
       }),

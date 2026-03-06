@@ -43,8 +43,8 @@ Now in our component, when we navigate the object `useUtils` gives us and reach 
 // @target: esnext
 // @include: server
 // @filename: MyComponent.tsx
-import { createTRPCReact } from '@trpc/react-query';
-import type { AppRouter } from './server';
+import { createTRPCReact } from "@trpc/react-query";
+import type { AppRouter } from "./server";
 
 const trpc = createTRPCReact<AppRouter>();
 
@@ -92,7 +92,7 @@ In the meantime, you can import and use the function directly from `@tanstack/re
 In addition to the above react-query helpers, the context also exposes your tRPC proxy client. This lets you call your procedures with `async`/`await` without needing to create an additional vanilla client.
 
 ```tsx
-import { trpc } from '../utils/trpc';
+import { trpc } from "../utils/trpc";
 
 function MyComponent() {
   const [apiKey, setApiKey] = useState();
@@ -123,7 +123,7 @@ on the input passed to it to prevent unnecessary calls to the back end.
 #### Example code
 
 ```tsx
-import { trpc } from '../utils/trpc';
+import { trpc } from "../utils/trpc";
 
 function MyComponent() {
   const utils = trpc.useUtils();
@@ -149,8 +149,8 @@ just one query.
 Backend code
 
 ```tsx title='server/routers/_app.ts'
-import { initTRPC } from '@trpc/server';
-import { z } from 'zod';
+import { initTRPC } from "@trpc/server";
+import { z } from "zod";
 
 export const t = initTRPC.create();
 
@@ -160,8 +160,8 @@ export const appRouter = t.router({
     all: t.procedure.query(() => {
       return {
         posts: [
-          { id: 1, title: 'everlong' },
-          { id: 2, title: 'After Dark' },
+          { id: 1, title: "everlong" },
+          { id: 2, title: "After Dark" },
         ],
       };
     }),
@@ -173,7 +173,7 @@ export const appRouter = t.router({
       )
       .query(({ input }) => {
         return {
-          post: { id: input?.id, title: 'Look me up!' },
+          post: { id: input?.id, title: "Look me up!" },
         };
       }),
     edit: t.procedure
@@ -185,14 +185,14 @@ export const appRouter = t.router({
   // separate user router
   user: t.router({
     all: t.procedure.query(() => {
-      return { users: [{ name: 'Dave Grohl' }, { name: 'Haruki Murakami' }] };
+      return { users: [{ name: "Dave Grohl" }, { name: "Haruki Murakami" }] };
     }),
   }),
 });
 ```
 
 ```tsx
-import { trpc } from '../utils/trpc';
+import { trpc } from "../utils/trpc";
 
 function MyComponent() {
   const utils = trpc.useUtils();
@@ -227,7 +227,7 @@ function MyComponent() {
 
 ### Invalidate full cache on every mutation
 
-Keeping track of exactly what queries a mutation should invalidate is hard, therefore, it can be a pragmatic solution to invalidate the *full cache* as a side-effect on any mutation. Since we have request batching, this invalidation will simply refetch all queries on the page you're looking at in one single request.
+Keeping track of exactly what queries a mutation should invalidate is hard, therefore, it can be a pragmatic solution to invalidate the _full cache_ as a side-effect on any mutation. Since we have request batching, this invalidation will simply refetch all queries on the page you're looking at in one single request.
 
 We have added a feature to help with this:
 

@@ -12,11 +12,10 @@ a string constant, a blob constant, a signed-number, or any constant expression 
 import { sql } from "drizzle-orm";
 import { integer, sqliteTable } from "drizzle-orm/sqlite-core";
 
-const table = sqliteTable('table', {
-	int1: integer().default(42),
-	int2: integer().default(sql`(abs(42))`)
+const table = sqliteTable("table", {
+  int1: integer().default(42),
+  int2: integer().default(sql`(abs(42))`),
 });
-
 ```
 
 ```sql
@@ -57,10 +56,10 @@ Note: This value does not affect the `drizzle-kit` behavior, it is only used at 
 
 ```ts
 import { text, sqliteTable } from "drizzle-orm/sqlite-core";
-import { createId } from '@paralleldrive/cuid2';
+import { createId } from "@paralleldrive/cuid2";
 
-const table = sqliteTable('table', {
-	id: text().$defaultFn(() => createId()),
+const table = sqliteTable("table", {
+  id: text().$defaultFn(() => createId()),
 });
 ```
 
@@ -79,8 +78,10 @@ Note: This value does not affect the `drizzle-kit` behavior, it is only used at 
 ```ts
 import { text, sqliteTable } from "drizzle-orm/sqlite-core";
 
-const table = sqliteTable('table', {
-    alwaysNull: text().$type<string | null>().$onUpdate(() => null),
+const table = sqliteTable("table", {
+  alwaysNull: text()
+    .$type<string | null>()
+    .$onUpdate(() => null),
 });
 ```
 
@@ -187,9 +188,9 @@ const result = await db.select().from(...);
 If you need to provide your existing driver:
 
 ```typescript copy
-import 'dotenv/config';
-import { drizzle } from 'drizzle-orm/bun-sql';
-import { SQL } from 'bun';
+import "dotenv/config";
+import { drizzle } from "drizzle-orm/bun-sql";
+import { SQL } from "bun";
 
 const client = new SQL(process.env.DATABASE_URL!);
 const db = drizzle({ client });

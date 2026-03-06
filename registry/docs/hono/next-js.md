@@ -58,19 +58,19 @@ bun i
 If you use the App Router, Edit `app/api/[[...route]]/route.ts`. Refer to the [Supported HTTP Methods](https://nextjs.org/docs/app/building-your-application/routing/route-handlers#supported-http-methods) section for more options.
 
 ```ts
-import { Hono } from 'hono'
-import { handle } from 'hono/vercel'
+import { Hono } from "hono";
+import { handle } from "hono/vercel";
 
-const app = new Hono().basePath('/api')
+const app = new Hono().basePath("/api");
 
-app.get('/hello', (c) => {
+app.get("/hello", (c) => {
   return c.json({
-    message: 'Hello Next.js!',
-  })
-})
+    message: "Hello Next.js!",
+  });
+});
 
-export const GET = handle(app)
-export const POST = handle(app)
+export const GET = handle(app);
+export const POST = handle(app);
 ```
 
 ## 3. Run
@@ -122,25 +122,25 @@ bun add @hono/node-server
 Then, you can utilize the `handle` function imported from `@hono/node-server/vercel` in `pages/api/[[...route]].ts`.
 
 ```ts
-import { Hono } from 'hono'
-import { handle } from '@hono/node-server/vercel'
-import type { PageConfig } from 'next'
+import { Hono } from "hono";
+import { handle } from "@hono/node-server/vercel";
+import type { PageConfig } from "next";
 
 export const config: PageConfig = {
   api: {
     bodyParser: false,
   },
-}
+};
 
-const app = new Hono().basePath('/api')
+const app = new Hono().basePath("/api");
 
-app.get('/hello', (c) => {
+app.get("/hello", (c) => {
   return c.json({
-    message: 'Hello Next.js!',
-  })
-})
+    message: "Hello Next.js!",
+  });
+});
 
-export default handle(app)
+export default handle(app);
 ```
 
 In order for this to work with the Pages Router, it's important to disable Vercel Node.js helpers by setting up an environment variable in your project dashboard or in your `.env` file.

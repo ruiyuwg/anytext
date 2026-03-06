@@ -3,45 +3,45 @@
 `useParams` is a hook that lets you read a route's [dynamic params](/docs/pages/building-your-application/routing/dynamic-routes) filled in by the current URL.
 
 ```tsx filename="pages/shop/[slug].tsx" switcher
-import { useParams } from 'next/navigation'
+import { useParams } from "next/navigation";
 
 export default function ShopPage() {
-  const params = useParams<{ slug: string }>()
+  const params = useParams<{ slug: string }>();
 
   if (!params) {
     // Render fallback UI while params are not yet available
-    return null
+    return null;
   }
 
   // Route -> /shop/[slug]
   // URL -> /shop/shoes
   // `params` -> { slug: 'shoes' }
-  return <>Shop: {params.slug}</>
+  return <>Shop: {params.slug}</>;
 }
 ```
 
 ```jsx filename="pages/shop/[slug].js" switcher
-import { useParams } from 'next/navigation'
+import { useParams } from "next/navigation";
 
 export default function ShopPage() {
-  const params = useParams()
+  const params = useParams();
 
   if (!params) {
     // Render fallback UI while params are not yet available
-    return null
+    return null;
   }
 
   // Route -> /shop/[slug]
   // URL -> /shop/shoes
   // `params` -> { slug: 'shoes' }
-  return <>Shop: {params.slug}</>
+  return <>Shop: {params.slug}</>;
 }
 ```
 
 ## Parameters
 
 ```tsx
-const params = useParams()
+const params = useParams();
 ```
 
 `useParams` does not take any parameters.
@@ -75,34 +75,34 @@ For pages that are [statically optimized](/docs/pages/building-your-application/
 This is because params cannot be known during static generation for dynamic routes.
 
 ```tsx filename="pages/shop/[slug].tsx" switcher
-import { useParams } from 'next/navigation'
+import { useParams } from "next/navigation";
 
 export default function ShopPage() {
-  const params = useParams<{ slug: string }>()
+  const params = useParams<{ slug: string }>();
 
   if (!params) {
     // Return a fallback UI while params are loading
     // This prevents hydration mismatches
-    return <ShopPageSkeleton />
+    return <ShopPageSkeleton />;
   }
 
-  return <>Shop: {params.slug}</>
+  return <>Shop: {params.slug}</>;
 }
 ```
 
 ```jsx filename="pages/shop/[slug].js" switcher
-import { useParams } from 'next/navigation'
+import { useParams } from "next/navigation";
 
 export default function ShopPage() {
-  const params = useParams()
+  const params = useParams();
 
   if (!params) {
     // Return a fallback UI while params are loading
     // This prevents hydration mismatches
-    return <ShopPageSkeleton />
+    return <ShopPageSkeleton />;
   }
 
-  return <>Shop: {params.slug}</>
+  return <>Shop: {params.slug}</>;
 }
 ```
 
@@ -111,46 +111,46 @@ export default function ShopPage() {
 When using [`getServerSideProps`](/docs/pages/building-your-application/data-fetching/get-server-side-props), the page is server-rendered on each request and `useParams` will return the actual params immediately:
 
 ```tsx filename="pages/shop/[slug].tsx" switcher
-import { useParams } from 'next/navigation'
+import { useParams } from "next/navigation";
 
 export default function ShopPage() {
-  const params = useParams<{ slug: string }>()
+  const params = useParams<{ slug: string }>();
 
   // With getServerSideProps, this fallback is never rendered because
   // params is always available on the server. However, keeping
   // the fallback allows this component to be reused on other pages
   // that may not use getServerSideProps.
   if (!params) {
-    return null
+    return null;
   }
 
-  return <>Shop: {params.slug}</>
+  return <>Shop: {params.slug}</>;
 }
 
 export async function getServerSideProps() {
-  return { props: {} }
+  return { props: {} };
 }
 ```
 
 ```jsx filename="pages/shop/[slug].js" switcher
-import { useParams } from 'next/navigation'
+import { useParams } from "next/navigation";
 
 export default function ShopPage() {
-  const params = useParams()
+  const params = useParams();
 
   // With getServerSideProps, this fallback is never rendered because
   // params is always available on the server. However, keeping
   // the fallback allows this component to be reused on other pages
   // that may not use getServerSideProps.
   if (!params) {
-    return null
+    return null;
   }
 
-  return <>Shop: {params.slug}</>
+  return <>Shop: {params.slug}</>;
 }
 
 export async function getServerSideProps() {
-  return { props: {} }
+  return { props: {} };
 }
 ```
 
@@ -159,12 +159,12 @@ export async function getServerSideProps() {
 `useParams` only returns the dynamic route parameters, whereas [`router.query`](/docs/pages/api-reference/functions/use-router#router-object) from `useRouter` includes both dynamic parameters and query string parameters.
 
 ```tsx filename="pages/shop/[slug].tsx" switcher
-import { useRouter } from 'next/router'
-import { useParams } from 'next/navigation'
+import { useRouter } from "next/router";
+import { useParams } from "next/navigation";
 
 export default function ShopPage() {
-  const router = useRouter()
-  const params = useParams()
+  const router = useRouter();
+  const params = useParams();
 
   // URL -> /shop/shoes?color=red
 
@@ -176,12 +176,12 @@ export default function ShopPage() {
 ```
 
 ```jsx filename="pages/shop/[slug].js" switcher
-import { useRouter } from 'next/router'
-import { useParams } from 'next/navigation'
+import { useRouter } from "next/router";
+import { useParams } from "next/navigation";
 
 export default function ShopPage() {
-  const router = useRouter()
-  const params = useParams()
+  const router = useRouter();
+  const params = useParams();
 
   // URL -> /shop/shoes?color=red
 
@@ -199,34 +199,34 @@ export default function ShopPage() {
 `useParams` from `next/navigation` works in both the Pages Router and App Router. This allows you to create shared components that work in either context:
 
 ```tsx filename="components/breadcrumb.tsx" switcher
-import { useParams } from 'next/navigation'
+import { useParams } from "next/navigation";
 
 // This component works in both pages/ and app/
 export function Breadcrumb() {
-  const params = useParams<{ slug: string }>()
+  const params = useParams<{ slug: string }>();
 
   if (!params) {
     // Fallback for Pages Router during pre-rendering
-    return <nav>Home / ...</nav>
+    return <nav>Home / ...</nav>;
   }
 
-  return <nav>Home / {params.slug}</nav>
+  return <nav>Home / {params.slug}</nav>;
 }
 ```
 
 ```jsx filename="components/breadcrumb.js" switcher
-import { useParams } from 'next/navigation'
+import { useParams } from "next/navigation";
 
 // This component works in both pages/ and app/
 export function Breadcrumb() {
-  const params = useParams()
+  const params = useParams();
 
   if (!params) {
     // Fallback for Pages Router during pre-rendering
-    return <nav>Home / ...</nav>
+    return <nav>Home / ...</nav>;
   }
 
-  return <nav>Home / {params.slug}</nav>
+  return <nav>Home / {params.slug}</nav>;
 }
 ```
 

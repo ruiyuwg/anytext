@@ -36,15 +36,15 @@ Configure your template paths in your `tailwind.config.js` file:
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {},
   },
   plugins: [],
-}
+};
 ```
 
 Add the Tailwind directives to your global CSS file:
@@ -58,30 +58,30 @@ Add the Tailwind directives to your global CSS file:
 Import the CSS file in your root layout:
 
 ```tsx filename="app/layout.tsx" switcher
-import './globals.css'
+import "./globals.css";
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
       <body>{children}</body>
     </html>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/layout.js" switcher
-import './globals.css'
+import "./globals.css";
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>{children}</body>
     </html>
-  )
+  );
 }
 ```
 
@@ -91,13 +91,13 @@ After installing Tailwind CSS and adding the global styles, you can use Tailwind
 
 ```tsx filename="app/page.tsx" switcher
 export default function Page() {
-  return <h1 className="text-3xl font-bold underline">Hello, Next.js!</h1>
+  return <h1 className="text-3xl font-bold underline">Hello, Next.js!</h1>;
 }
 ```
 
 ```jsx filename="app/page.js" switcher
 export default function Page() {
-  return <h1 className="text-3xl font-bold underline">Hello, Next.js!</h1>
+  return <h1 className="text-3xl font-bold underline">Hello, Next.js!</h1>;
 }
 ```
 

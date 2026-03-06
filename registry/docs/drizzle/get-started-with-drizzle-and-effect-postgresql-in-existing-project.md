@@ -48,20 +48,22 @@ The PostgreSQL in Docker guide is available [here](/docs/guides/postgresql-local
 #### Step 7 - Query the database
 
 ```ts
-import 'dotenv/config';
-import * as PgDrizzle from 'drizzle-orm/effect-postgres';
-import { PgClient } from '@effect/sql-pg';
-import * as Effect from 'effect/Effect';
-import * as Redacted from 'effect/Redacted';
-import { types } from 'pg';
-import { eq } from 'drizzle-orm';
-import { usersTable } from './db/schema';
+import "dotenv/config";
+import * as PgDrizzle from "drizzle-orm/effect-postgres";
+import { PgClient } from "@effect/sql-pg";
+import * as Effect from "effect/Effect";
+import * as Redacted from "effect/Redacted";
+import { types } from "pg";
+import { eq } from "drizzle-orm";
+import { usersTable } from "./db/schema";
 
 const PgClientLive = PgClient.layer({
   url: Redacted.make(process.env.DATABASE_URL!),
   types: {
     getTypeParser: (typeId, format) => {
-      if ([1184, 1114, 1082, 1186, 1231, 1115, 1185, 1187, 1182].includes(typeId)) {
+      if (
+        [1184, 1114, 1082, 1186, 1231, 1115, 1185, 1187, 1182].includes(typeId)
+      ) {
         return (val: any) => val;
       }
       return types.getTypeParser(typeId, format);
@@ -69,20 +71,20 @@ const PgClientLive = PgClient.layer({
   },
 });
 
-const program = Effect.gen(function*() {
+const program = Effect.gen(function* () {
   const db = yield* PgDrizzle.makeWithDefaults();
 
   const user: typeof usersTable.$inferInsert = {
-    name: 'John',
+    name: "John",
     age: 30,
-    email: 'john@example.com',
+    email: "john@example.com",
   };
 
   yield* db.insert(usersTable).values(user);
-  console.log('New user created!')
+  console.log("New user created!");
 
   const users = yield* db.select().from(usersTable);
-  console.log('Getting all users from the database: ', users)
+  console.log("Getting all users from the database: ", users);
   /*
   const users: {
     id: number;
@@ -98,10 +100,10 @@ const program = Effect.gen(function*() {
       age: 31,
     })
     .where(eq(usersTable.email, user.email));
-  console.log('User info updated!')
+  console.log("User info updated!");
 
   yield* db.delete(usersTable).where(eq(usersTable.email, user.email));
-  console.log('User deleted!')
+  console.log("User deleted!");
 });
 
 Effect.runPromise(program.pipe(Effect.provide(PgClientLive)));
@@ -122,20 +124,22 @@ Effect.runPromise(program.pipe(Effect.provide(PgClientLive)));
 #### Step 11 - Query the database with a new field (optional)
 
 ```ts
-import 'dotenv/config';
-import * as PgDrizzle from 'drizzle-orm/effect-postgres';
-import { PgClient } from '@effect/sql-pg';
-import * as Effect from 'effect/Effect';
-import * as Redacted from 'effect/Redacted';
-import { types } from 'pg';
-import { eq } from 'drizzle-orm';
-import { usersTable } from './db/schema';
+import "dotenv/config";
+import * as PgDrizzle from "drizzle-orm/effect-postgres";
+import { PgClient } from "@effect/sql-pg";
+import * as Effect from "effect/Effect";
+import * as Redacted from "effect/Redacted";
+import { types } from "pg";
+import { eq } from "drizzle-orm";
+import { usersTable } from "./db/schema";
 
 const PgClientLive = PgClient.layer({
   url: Redacted.make(process.env.DATABASE_URL!),
   types: {
     getTypeParser: (typeId, format) => {
-      if ([1184, 1114, 1082, 1186, 1231, 1115, 1185, 1187, 1182].includes(typeId)) {
+      if (
+        [1184, 1114, 1082, 1186, 1231, 1115, 1185, 1187, 1182].includes(typeId)
+      ) {
         return (val: any) => val;
       }
       return types.getTypeParser(typeId, format);
@@ -143,21 +147,21 @@ const PgClientLive = PgClient.layer({
   },
 });
 
-const program = Effect.gen(function*() {
+const program = Effect.gen(function* () {
   const db = yield* PgDrizzle.makeWithDefaults();
 
   const user: typeof usersTable.$inferInsert = {
-    name: 'John',
+    name: "John",
     age: 30,
-    email: 'john@example.com',
-    phone: '123-456-7890',
+    email: "john@example.com",
+    phone: "123-456-7890",
   };
 
   yield* db.insert(usersTable).values(user);
-  console.log('New user created!')
+  console.log("New user created!");
 
   const users = yield* db.select().from(usersTable);
-  console.log('Getting all users from the database: ', users)
+  console.log("Getting all users from the database: ", users);
   /*
   const users: {
     id: number;
@@ -174,10 +178,10 @@ const program = Effect.gen(function*() {
       age: 31,
     })
     .where(eq(usersTable.email, user.email));
-  console.log('User info updated!')
+  console.log("User info updated!");
 
   yield* db.delete(usersTable).where(eq(usersTable.email, user.email));
-  console.log('User deleted!')
+  console.log("User deleted!");
 });
 
 Effect.runPromise(program.pipe(Effect.provide(PgClientLive)));

@@ -11,8 +11,8 @@ a string constant, a blob constant, a signed-number, or any constant expression 
 ```typescript
 import { int, singlestoreTable } from "drizzle-orm/singlestore-core";
 
-const table = singlestoreTable('table', {
-	int: int().default(3),
+const table = singlestoreTable("table", {
+  int: int().default(3),
 });
 ```
 
@@ -32,10 +32,10 @@ Note: This value does not affect the `drizzle-kit` behavior, it is only used at 
 
 ```ts
 import { varchar, singlestoreTable } from "drizzle-orm/singlestore-core";
-import { createId } from '@paralleldrive/cuid2';
+import { createId } from "@paralleldrive/cuid2";
 
-const table = singlestoreTable('table', {
-	id: varchar({ length: 128 }).$defaultFn(() => createId()),
+const table = singlestoreTable("table", {
+  id: varchar({ length: 128 }).$defaultFn(() => createId()),
 });
 ```
 
@@ -54,8 +54,10 @@ Note: This value does not affect the `drizzle-kit` behavior, it is only used at 
 ```ts
 import { text, singlestoreTable } from "drizzle-orm/singlestore-core";
 
-const table = singlestoreTable('table', {
-    alwaysNull: text().$type<string | null>().$onUpdate(() => null),
+const table = singlestoreTable("table", {
+  alwaysNull: text()
+    .$type<string | null>()
+    .$onUpdate(() => null),
 });
 ```
 
@@ -64,8 +66,8 @@ const table = singlestoreTable('table', {
 ```typescript
 import { int, singlestoreTable } from "drizzle-orm/singlestore-core";
 
-const table = singlestoreTable('table', {
-	int: int().primaryKey(),
+const table = singlestoreTable("table", {
+  int: int().primaryKey(),
 });
 ```
 
@@ -80,8 +82,8 @@ CREATE TABLE `table` (
 ```typescript
 import { int, singlestoreTable } from "drizzle-orm/singlestore-core";
 
-const table = singlestoreTable('table', {
-	int: int().autoincrement(),
+const table = singlestoreTable("table", {
+  int: int().autoincrement(),
 });
 ```
 
@@ -115,16 +117,15 @@ A signed integer, stored in `0`, `1`, `2`, `3`, `4`, `6`, or `8` bytes depending
 ```typescript
 import { integer, sqliteTable } from "drizzle-orm/sqlite-core";
 
-const table = sqliteTable('table', {
-	id: integer()
+const table = sqliteTable("table", {
+  id: integer(),
 });
 
 // you can customize integer mode to be number, boolean, timestamp, timestamp_ms
-integer({ mode: 'number' })
-integer({ mode: 'boolean' })
-integer({ mode: 'timestamp_ms' })
-integer({ mode: 'timestamp' }) // Date
-
+integer({ mode: "number" });
+integer({ mode: "boolean" });
+integer({ mode: "timestamp_ms" });
+integer({ mode: "timestamp" }); // Date
 ```
 
 ```sql
@@ -135,7 +136,7 @@ CREATE TABLE `table` (
 
 ```typescript
 // to make integer primary key auto increment
-integer({ mode: 'number' }).primaryKey({ autoIncrement: true })
+integer({ mode: "number" }).primaryKey({ autoIncrement: true });
 ```
 
 ```sql
@@ -151,10 +152,9 @@ A floating point value, stored as an `8-byte IEEE` floating point number.
 ```typescript
 import { real, sqliteTable } from "drizzle-orm/sqlite-core";
 
-const table = sqliteTable('table', {
-	real: real()
+const table = sqliteTable("table", {
+  real: real(),
 });
-
 ```
 
 ```sql
@@ -174,14 +174,14 @@ You can define `{ enum: ["value1", "value2"] }` config to infer `insert` and `se
 ```typescript
 import { text, sqliteTable } from "drizzle-orm/sqlite-core";
 
-const table = sqliteTable('table', {
-	text: text()
+const table = sqliteTable("table", {
+  text: text(),
 });
 
 // will be inferred as text: "value1" | "value2" | null
-text({ enum: ["value1", "value2"] })
-text({ mode: 'json' })
-text({ mode: 'json' }).$type<{ foo: string }>()
+text({ enum: ["value1", "value2"] });
+text({ mode: "json" });
+text({ mode: "json" }).$type<{ foo: string }>();
 ```
 
 ```sql
@@ -195,10 +195,10 @@ CREATE TABLE `table` (
 A blob of data, stored exactly as it was input.
 
 ```
-It's recommended to use `text('', { mode: 'json' })` instead of `blob('', { mode: 'json' })`, 
+It's recommended to use `text('', { mode: 'json' })` instead of `blob('', { mode: 'json' })`,
 because it supports JSON functions:
 
-All JSON functions currently throw an error if any of their arguments are BLOBs because BLOBs 
+All JSON functions currently throw an error if any of their arguments are BLOBs because BLOBs
 are reserved for a future enhancement in which BLOBs will store the binary encoding for JSON.
 
 See **https://www.sqlite.org/json1.html**.
@@ -207,17 +207,16 @@ See **https://www.sqlite.org/json1.html**.
 ```typescript
 import { blob, sqliteTable } from "drizzle-orm/sqlite-core";
 
-const table = sqliteTable('table', {
-	blob: blob()
+const table = sqliteTable("table", {
+  blob: blob(),
 });
 
-blob()
-blob({ mode: 'buffer' })
-blob({ mode: 'bigint' })
+blob();
+blob({ mode: "buffer" });
+blob({ mode: "bigint" });
 
-blob({ mode: 'json' })
-blob({ mode: 'json' }).$type<{ foo: string }>()
-
+blob({ mode: "json" });
+blob({ mode: "json" }).$type<{ foo: string }>();
 ```
 
 ```sql
@@ -231,13 +230,13 @@ It provides compile time protection for default values, insert and select schema
 
 ```typescript
 // will be inferred as { foo: string }
-json: blob({ mode: 'json' }).$type<{ foo: string }>();
+json: blob({ mode: "json" }).$type<{ foo: string }>();
 
 // will be inferred as string[]
-json: blob({ mode: 'json' }).$type<string[]>();
+json: blob({ mode: "json" }).$type<string[]>();
 
 // won't compile
-json: blob({ mode: 'json' }).$type<string[]>().default({});
+json: blob({ mode: "json" }).$type<string[]>().default({});
 ```
 
 ### Boolean
@@ -249,8 +248,8 @@ values in the database.
 ```typescript
 import { integer, sqliteTable } from "drizzle-orm/sqlite-core";
 
-const table = sqliteTable('table', {
-	id: integer({ mode: 'boolean' })
+const table = sqliteTable("table", {
+  id: integer({ mode: "boolean" }),
 });
 ```
 
@@ -268,10 +267,9 @@ This mode allows you to work with BigInt instances in your code, and Drizzle sto
 ```typescript
 import { blob, sqliteTable } from "drizzle-orm/sqlite-core";
 
-const table = sqliteTable('table', {
-	id: blob({ mode: 'bigint' })
+const table = sqliteTable("table", {
+  id: blob({ mode: "bigint" }),
 });
-
 ```
 
 ```sql
@@ -285,12 +283,11 @@ CREATE TABLE `table` (
 ```typescript
 import { blob, sqliteTable } from "drizzle-orm/sqlite-core";
 
-const table = sqliteTable('table', {
-	numeric: numeric(),
-	numericNum: numeric({ mode: 'number' }),
-	numericBig: numeric({ mode: 'bigint' }),
+const table = sqliteTable("table", {
+  numeric: numeric(),
+  numericNum: numeric({ mode: "number" }),
+  numericBig: numeric({ mode: "bigint" }),
 });
-
 ```
 
 ```sql
@@ -306,13 +303,13 @@ CREATE TABLE `table` (
 Every column builder has a `.$type()` method, which allows you to customize the data type of the column. This is useful, for example, with unknown or branded types.
 
 ```ts
-type UserId = number & { __brand: 'user_id' };
+type UserId = number & { __brand: "user_id" };
 type Data = {
-	foo: string;
-	bar: number;
+  foo: string;
+  bar: number;
 };
 
-const users = sqliteTable('users', {
+const users = sqliteTable("users", {
   id: integer().$type<UserId>().primaryKey(),
   jsonField: blob().$type<Data>(),
 });
@@ -323,8 +320,8 @@ const users = sqliteTable('users', {
 `NOT NULL` constraint dictates that the associated column may not contain a `NULL` value.
 
 ```typescript
-const table = sqliteTable('table', { 
-	numInt: integer().notNull() 
+const table = sqliteTable("table", {
+  numInt: integer().notNull(),
 });
 ```
 

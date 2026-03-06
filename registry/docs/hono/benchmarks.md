@@ -19,71 +19,71 @@ These are similar to those used in the real world.
 
 ```ts twoslash
 interface Route {
-  method: string
-  path: string
+  method: string;
+  path: string;
 }
 // ---cut---
 export const routes: Route[] = [
-  { method: 'GET', path: '/user' },
-  { method: 'GET', path: '/user/comments' },
-  { method: 'GET', path: '/user/avatar' },
-  { method: 'GET', path: '/user/lookup/username/:username' },
-  { method: 'GET', path: '/user/lookup/email/:address' },
-  { method: 'GET', path: '/event/:id' },
-  { method: 'GET', path: '/event/:id/comments' },
-  { method: 'POST', path: '/event/:id/comment' },
-  { method: 'GET', path: '/map/:location/events' },
-  { method: 'GET', path: '/status' },
-  { method: 'GET', path: '/very/deeply/nested/route/hello/there' },
-  { method: 'GET', path: '/static/*' },
-]
+  { method: "GET", path: "/user" },
+  { method: "GET", path: "/user/comments" },
+  { method: "GET", path: "/user/avatar" },
+  { method: "GET", path: "/user/lookup/username/:username" },
+  { method: "GET", path: "/user/lookup/email/:address" },
+  { method: "GET", path: "/event/:id" },
+  { method: "GET", path: "/event/:id/comments" },
+  { method: "POST", path: "/event/:id/comment" },
+  { method: "GET", path: "/map/:location/events" },
+  { method: "GET", path: "/status" },
+  { method: "GET", path: "/very/deeply/nested/route/hello/there" },
+  { method: "GET", path: "/static/*" },
+];
 ```
 
 Then we sent the Request to the endpoints like below.
 
 ```ts twoslash
 interface Route {
-  method: string
-  path: string
+  method: string;
+  path: string;
 }
 // ---cut---
 const routes: (Route & { name: string })[] = [
   {
-    name: 'short static',
-    method: 'GET',
-    path: '/user',
+    name: "short static",
+    method: "GET",
+    path: "/user",
   },
   {
-    name: 'static with same radix',
-    method: 'GET',
-    path: '/user/comments',
+    name: "static with same radix",
+    method: "GET",
+    path: "/user/comments",
   },
   {
-    name: 'dynamic route',
-    method: 'GET',
-    path: '/user/lookup/username/hey',
+    name: "dynamic route",
+    method: "GET",
+    path: "/user/lookup/username/hey",
   },
   {
-    name: 'mixed static dynamic',
-    method: 'GET',
-    path: '/event/abcd1234/comments',
+    name: "mixed static dynamic",
+    method: "GET",
+    path: "/event/abcd1234/comments",
   },
   {
-    name: 'post',
-    method: 'POST',
-    path: '/event/abcd1234/comment',
+    name: "post",
+    method: "POST",
+    path: "/event/abcd1234/comment",
   },
   {
-    name: 'long static',
-    method: 'GET',
-    path: '/very/deeply/nested/route/hello/there',
+    name: "long static",
+    method: "GET",
+    path: "/very/deeply/nested/route/hello/there",
   },
   {
-    name: 'wildcard',
-    method: 'GET',
-    path: '/static/index.html',
+    name: "wildcard",
+    method: "GET",
+    path: "/static/index.html",
   },
-]
+];
 ```
 
 Let's see the results.
@@ -182,9 +182,9 @@ For example, a server that returns "Hello World" could be written as below. This
 ```ts twoslash
 export default {
   async fetch() {
-    return new Response('Hello World')
+    return new Response("Hello World");
   },
-}
+};
 ```
 
 Hono uses only Web Standards, which means that Hono can run on any runtime that supports them.
@@ -206,5 +206,4 @@ Cloudflare Workers, Deno, Shopify, and others launched [WinterCG](https://winter
 Hono will follow their steps and go for **the Standard of the Web Standards**.
 
 [wasi]: https://github.com/WebAssembly/wasi
-
 [wasi-http]: https://github.com/WebAssembly/wasi-http

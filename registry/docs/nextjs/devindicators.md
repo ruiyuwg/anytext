@@ -55,8 +55,8 @@ Open `next.config.js` and add the `distDir` config:
 
 ```js filename="next.config.js"
 module.exports = {
-  distDir: 'build',
-}
+  distDir: "build",
+};
 ```
 
 Now if you run `next build` Next.js will use `build` instead of the default `.next` folder.
@@ -78,19 +78,19 @@ To add environment variables to the JavaScript bundle, open `next.config.js` and
 ```js filename="next.config.js"
 module.exports = {
   env: {
-    customKey: 'my-value',
+    customKey: "my-value",
   },
-}
+};
 ```
 
 Now you can access `process.env.customKey` in your code. For example:
 
 ```jsx
 function Page() {
-  return <h1>The value of customKey is: {process.env.customKey}</h1>
+  return <h1>The value of customKey is: {process.env.customKey}</h1>;
 }
 
-export default Page
+export default Page;
 ```
 
 Next.js will replace `process.env.customKey` with `'my-value'` at build time. Trying to destructure `process.env` variables won't work due to the nature of webpack [DefinePlugin](https://webpack.js.org/plugins/define-plugin/).
@@ -98,13 +98,13 @@ Next.js will replace `process.env.customKey` with `'my-value'` at build time. Tr
 For example, the following line:
 
 ```jsx
-return <h1>The value of customKey is: {process.env.customKey}</h1>
+return <h1>The value of customKey is: {process.env.customKey}</h1>;
 ```
 
 Will end up being:
 
 ```jsx
-return <h1>The value of customKey is: {'my-value'}</h1>
+return <h1>The value of customKey is: {"my-value"}</h1>;
 ```
 
 # expireTime
@@ -119,7 +119,7 @@ Open `next.config.js` and add the `expireTime` config:
 module.exports = {
   // one hour in seconds
   expireTime: 3600,
-}
+};
 ```
 
 Now when sending the `Cache-Control` header the expire time will be calculated depending on the specific revalidate period.

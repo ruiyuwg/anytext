@@ -6,13 +6,13 @@ The AI SDK provides the [`generateSpeech`](/docs/reference/ai-sdk-core/generate-
 function to generate speech from text using a speech model.
 
 ```ts
-import { experimental_generateSpeech as generateSpeech } from 'ai';
-import { openai } from '@ai-sdk/openai';
+import { experimental_generateSpeech as generateSpeech } from "ai";
+import { openai } from "@ai-sdk/openai";
 
 const audio = await generateSpeech({
-  model: openai.speech('tts-1'),
-  text: 'Hello, world!',
-  voice: 'alloy',
+  model: openai.speech("tts-1"),
+  text: "Hello, world!",
+  voice: "alloy",
 });
 ```
 
@@ -21,13 +21,13 @@ const audio = await generateSpeech({
 You can specify the language for speech generation (provider support varies):
 
 ```ts
-import { experimental_generateSpeech as generateSpeech } from 'ai';
-import { lmnt } from '@ai-sdk/lmnt';
+import { experimental_generateSpeech as generateSpeech } from "ai";
+import { lmnt } from "@ai-sdk/lmnt";
 
 const audio = await generateSpeech({
-  model: lmnt.speech('aurora'),
-  text: 'Hola, mundo!',
-  language: 'es', // Spanish
+  model: lmnt.speech("aurora"),
+  text: "Hola, mundo!",
+  language: "es", // Spanish
 });
 ```
 
@@ -46,12 +46,12 @@ const audioBase64 = result.audio.base64; // audio data as base64 string
 You can set model-specific settings with the `providerOptions` parameter.
 
 ```ts highlight="7-11"
-import { experimental_generateSpeech as generateSpeech } from 'ai';
-import { openai } from '@ai-sdk/openai';
+import { experimental_generateSpeech as generateSpeech } from "ai";
+import { openai } from "@ai-sdk/openai";
 
 const audio = await generateSpeech({
-  model: openai.speech('tts-1'),
-  text: 'Hello, world!',
+  model: openai.speech("tts-1"),
+  text: "Hello, world!",
   providerOptions: {
     openai: {
       // ...
@@ -67,12 +67,12 @@ type [`AbortSignal`](https://developer.mozilla.org/en-US/docs/Web/API/AbortSigna
 that you can use to abort the speech generation process or set a timeout.
 
 ```ts highlight="7"
-import { openai } from '@ai-sdk/openai';
-import { experimental_generateSpeech as generateSpeech } from 'ai';
+import { openai } from "@ai-sdk/openai";
+import { experimental_generateSpeech as generateSpeech } from "ai";
 
 const audio = await generateSpeech({
-  model: openai.speech('tts-1'),
-  text: 'Hello, world!',
+  model: openai.speech("tts-1"),
+  text: "Hello, world!",
   abortSignal: AbortSignal.timeout(1000), // Abort after 1 second
 });
 ```
@@ -83,13 +83,13 @@ const audio = await generateSpeech({
 that you can use to add custom headers to the speech generation request.
 
 ```ts highlight="7"
-import { openai } from '@ai-sdk/openai';
-import { experimental_generateSpeech as generateSpeech } from 'ai';
+import { openai } from "@ai-sdk/openai";
+import { experimental_generateSpeech as generateSpeech } from "ai";
 
 const audio = await generateSpeech({
-  model: openai.speech('tts-1'),
-  text: 'Hello, world!',
-  headers: { 'X-Custom-Header': 'custom-value' },
+  model: openai.speech("tts-1"),
+  text: "Hello, world!",
+  headers: { "X-Custom-Header": "custom-value" },
 });
 ```
 
@@ -98,12 +98,12 @@ const audio = await generateSpeech({
 Warnings (e.g. unsupported parameters) are available on the `warnings` property.
 
 ```ts
-import { openai } from '@ai-sdk/openai';
-import { experimental_generateSpeech as generateSpeech } from 'ai';
+import { openai } from "@ai-sdk/openai";
+import { experimental_generateSpeech as generateSpeech } from "ai";
 
 const audio = await generateSpeech({
-  model: openai.speech('tts-1'),
-  text: 'Hello, world!',
+  model: openai.speech("tts-1"),
+  text: "Hello, world!",
 });
 
 const warnings = audio.warnings;
@@ -127,19 +127,19 @@ The error preserves the following information to help you log the issue:
 import {
   experimental_generateSpeech as generateSpeech,
   NoSpeechGeneratedError,
-} from 'ai';
-import { openai } from '@ai-sdk/openai';
+} from "ai";
+import { openai } from "@ai-sdk/openai";
 
 try {
   await generateSpeech({
-    model: openai.speech('tts-1'),
-    text: 'Hello, world!',
+    model: openai.speech("tts-1"),
+    text: "Hello, world!",
   });
 } catch (error) {
   if (NoSpeechGeneratedError.isInstance(error)) {
-    console.log('AI_NoSpeechGeneratedError');
-    console.log('Cause:', error.cause);
-    console.log('Responses:', error.responses);
+    console.log("AI_NoSpeechGeneratedError");
+    console.log("Cause:", error.cause);
+    console.log("Responses:", error.responses);
   }
 }
 ```

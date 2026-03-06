@@ -8,7 +8,7 @@ When the compiler reports a diagnostic, it means that the compiler was able to s
 
 What this means for linting, is that you don’t need to fix all violations immediately. Address them at your own pace to gradually increase the number of optimized components.
 
-## Recommended Rules {/*recommended*/}
+## Recommended Rules {/_recommended_/}
 
 These rules are included in the `recommended` preset in `eslint-plugin-react-hooks`:
 
@@ -30,7 +30,7 @@ These rules are included in the `recommended` preset in `eslint-plugin-react-hoo
 - [`unsupported-syntax`](/reference/eslint-plugin-react-hooks/lints/unsupported-syntax) - Validates against syntax that React Compiler does not support
 - [`use-memo`](/reference/eslint-plugin-react-hooks/lints/use-memo) - Validates usage of the `useMemo` hook without a return value
 
-***
+---
 
 ## Sitemap
 

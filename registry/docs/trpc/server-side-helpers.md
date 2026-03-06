@@ -14,9 +14,9 @@ Using the helpers makes tRPC call your procedures directly on the server, withou
 That also means that you don't have the request and response at hand like you usually do. Make sure you're instantiating the server-side helpers with a context without `req` & `res`, which are typically filled via the context creation. We recommend the concept of ["inner" and "outer" context](/docs/server/context) in that scenario.
 
 ```ts
-import { createServerSideHelpers } from '@trpc/react-query/server';
-import { createContext } from '~/server/context';
-import superjson from 'superjson';
+import { createServerSideHelpers } from "@trpc/react-query/server";
+import { createContext } from "~/server/context";
+import superjson from "superjson";
 
 const helpers = createServerSideHelpers({
   router: appRouter,
@@ -30,14 +30,14 @@ const helpers = createServerSideHelpers({
 This method is used when you don't have direct access to your tRPC router. e.g. when developing a Next.js application and a standalone API hosted separately.
 
 ```ts
-import { createTRPCClient } from '@trpc/client';
-import { createServerSideHelpers } from '@trpc/react-query/server';
-import superjson from 'superjson';
+import { createTRPCClient } from "@trpc/client";
+import { createServerSideHelpers } from "@trpc/react-query/server";
+import superjson from "superjson";
 
 const proxyClient = createTRPCClient<AppRouter>({
   links: [
     httpBatchLink({
-      url: 'http://localhost:3000/api/trpc',
+      url: "http://localhost:3000/api/trpc",
     }),
   ],
 });
@@ -71,11 +71,11 @@ For a full example, see our [E2E SSG test example](https://github.com/trpc/trpc/
 ## Next.js Example
 
 ```tsx title='pages/posts/[id].tsx'
-import { createServerSideHelpers } from '@trpc/react-query/server';
-import { appRouter } from '~/server/routers/_app';
-import { trpc } from '~/utils/trpc';
-import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
-import superjson from 'superjson';
+import { createServerSideHelpers } from "@trpc/react-query/server";
+import { appRouter } from "~/server/routers/_app";
+import { trpc } from "~/utils/trpc";
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
+import superjson from "superjson";
 
 export async function getServerSideProps(
   context: GetServerSidePropsContext<{ id: string }>,
@@ -107,7 +107,7 @@ export default function PostViewPage(
 ) {
   const { id } = props;
   const postQuery = trpc.post.byId.useQuery({ id });
-  if (postQuery.status !== 'success') {
+  if (postQuery.status !== "success") {
     // won't happen since the query has been prefetched
     return <>Loading...</>;
   }

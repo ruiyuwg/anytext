@@ -9,13 +9,13 @@ module.exports = {
   async redirects() {
     return [
       {
-        source: '/about',
-        destination: '/',
+        source: "/about",
+        destination: "/",
         permanent: true,
       },
-    ]
+    ];
   },
-}
+};
 ```
 
 `redirects` is an async function that expects an array to be returned holding objects with `source`, `destination`, and `permanent` properties:
@@ -58,13 +58,13 @@ module.exports = {
   async redirects() {
     return [
       {
-        source: '/old-blog/:slug',
-        destination: '/news/:slug', // Matched parameters can be used in the destination
+        source: "/old-blog/:slug",
+        destination: "/news/:slug", // Matched parameters can be used in the destination
         permanent: true,
       },
-    ]
+    ];
   },
-}
+};
 ```
 
 The pattern `/old-blog/:slug` matches `/old-blog/first-post` and `/old-blog/post-1` but not `/old-blog/a/b` (no nested paths). Patterns are anchored to the start: `/old-blog/:slug` will not match `/archive/old-blog/first-post`.
@@ -82,13 +82,13 @@ module.exports = {
   async redirects() {
     return [
       {
-        source: '/blog/:slug*',
-        destination: '/news/:slug*', // Matched parameters can be used in the destination
+        source: "/blog/:slug*",
+        destination: "/news/:slug*", // Matched parameters can be used in the destination
         permanent: true,
       },
-    ]
+    ];
   },
-}
+};
 ```
 
 ### Regex Path Matching
@@ -100,13 +100,13 @@ module.exports = {
   async redirects() {
     return [
       {
-        source: '/post/:slug(\\d{1,})',
-        destination: '/news/:slug', // Matched parameters can be used in the destination
+        source: "/post/:slug(\\d{1,})",
+        destination: "/news/:slug", // Matched parameters can be used in the destination
         permanent: false,
       },
-    ]
+    ];
   },
-}
+};
 ```
 
 The following characters `(`, `)`, `{`, `}`, `:`, `*`, `+`, `?` are used for regex path matching, so when used in the `source` as non-special values they must be escaped by adding `\\` before them:
@@ -117,13 +117,13 @@ module.exports = {
     return [
       {
         // this will match `/english(default)/something` being requested
-        source: '/english\\(default\\)/:slug',
-        destination: '/en-us/:slug',
+        source: "/english\\(default\\)/:slug",
+        destination: "/en-us/:slug",
         permanent: false,
       },
-    ]
+    ];
   },
-}
+};
 ```
 
 ## Header, Cookie, and Query Matching
@@ -143,81 +143,81 @@ module.exports = {
       // if the header `x-redirect-me` is present,
       // this redirect will be applied
       {
-        source: '/:path((?!another-page$).*)',
+        source: "/:path((?!another-page$).*)",
         has: [
           {
-            type: 'header',
-            key: 'x-redirect-me',
+            type: "header",
+            key: "x-redirect-me",
           },
         ],
         permanent: false,
-        destination: '/another-page',
+        destination: "/another-page",
       },
       // if the header `x-do-not-redirect` is present,
       // this redirect will NOT be applied
       {
-        source: '/:path((?!another-page$).*)',
+        source: "/:path((?!another-page$).*)",
         missing: [
           {
-            type: 'header',
-            key: 'x-do-not-redirect',
+            type: "header",
+            key: "x-do-not-redirect",
           },
         ],
         permanent: false,
-        destination: '/another-page',
+        destination: "/another-page",
       },
       // if the source, query, and cookie are matched,
       // this redirect will be applied
       {
-        source: '/specific/:path*',
+        source: "/specific/:path*",
         has: [
           {
-            type: 'query',
-            key: 'page',
+            type: "query",
+            key: "page",
             // the page value will not be available in the
             // destination since value is provided and doesn't
             // use a named capture group e.g. (?<page>home)
-            value: 'home',
+            value: "home",
           },
           {
-            type: 'cookie',
-            key: 'authorized',
-            value: 'true',
+            type: "cookie",
+            key: "authorized",
+            value: "true",
           },
         ],
         permanent: false,
-        destination: '/another/:path*',
+        destination: "/another/:path*",
       },
       // if the header `x-authorized` is present and
       // contains a matching value, this redirect will be applied
       {
-        source: '/',
+        source: "/",
         has: [
           {
-            type: 'header',
-            key: 'x-authorized',
-            value: '(?<authorized>yes|true)',
+            type: "header",
+            key: "x-authorized",
+            value: "(?<authorized>yes|true)",
           },
         ],
         permanent: false,
-        destination: '/home?authorized=:authorized',
+        destination: "/home?authorized=:authorized",
       },
       // if the host is `example.com`,
       // this redirect will be applied
       {
-        source: '/:path((?!another-page$).*)',
+        source: "/:path((?!another-page$).*)",
         has: [
           {
-            type: 'host',
-            value: 'example.com',
+            type: "host",
+            value: "example.com",
           },
         ],
         permanent: false,
-        destination: '/another-page',
+        destination: "/another-page",
       },
-    ]
+    ];
   },
-}
+};
 ```
 
 ### Redirects with basePath support
@@ -226,25 +226,25 @@ When leveraging [`basePath` support](/docs/app/api-reference/config/next-config-
 
 ```js filename="next.config.js"
 module.exports = {
-  basePath: '/docs',
+  basePath: "/docs",
 
   async redirects() {
     return [
       {
-        source: '/with-basePath', // automatically becomes /docs/with-basePath
-        destination: '/another', // automatically becomes /docs/another
+        source: "/with-basePath", // automatically becomes /docs/with-basePath
+        destination: "/another", // automatically becomes /docs/another
         permanent: false,
       },
       {
         // does not add /docs since basePath: false is set
-        source: '/without-basePath',
-        destination: 'https://example.com',
+        source: "/without-basePath",
+        destination: "https://example.com",
         basePath: false,
         permanent: false,
       },
-    ]
+    ];
   },
-}
+};
 ```
 
 ### Redirects with i18n support
@@ -259,31 +259,31 @@ module.exports = {
     return [
       {
         // Manually handle locale prefixes for App Router
-        source: '/en/old-path',
-        destination: '/en/new-path',
+        source: "/en/old-path",
+        destination: "/en/new-path",
         permanent: false,
       },
       {
         // Redirect for all locales using a parameter
-        source: '/:locale/old-path',
-        destination: '/:locale/new-path',
+        source: "/:locale/old-path",
+        destination: "/:locale/new-path",
         permanent: false,
       },
       {
         // Redirect from one locale to another
-        source: '/de/old-path',
-        destination: '/en/new-path',
+        source: "/de/old-path",
+        destination: "/en/new-path",
         permanent: false,
       },
       {
         // Catch-all redirect for multiple locales
-        source: '/:locale(en|fr|de)/:path*',
-        destination: '/:locale/new-section/:path*',
+        source: "/:locale(en|fr|de)/:path*",
+        destination: "/:locale/new-section/:path*",
         permanent: false,
       },
-    ]
+    ];
   },
-}
+};
 ```
 
 In some rare cases, you might need to assign a custom status code for older HTTP Clients to properly redirect. In these cases, you can use the `statusCode` property instead of the `permanent` property, but not both. To ensure IE11 compatibility, a `Refresh` header is automatically added for the 308 status code.

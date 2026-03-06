@@ -13,30 +13,30 @@ There are a few ways you can handle redirects in Next.js. This page will go thro
 If you need to redirect inside a component, you can use the `push` method from the `useRouter` hook. For example:
 
 ```tsx filename="app/page.tsx" switcher
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 
 export default function Page() {
-  const router = useRouter()
+  const router = useRouter();
 
   return (
-    <button type="button" onClick={() => router.push('/dashboard')}>
+    <button type="button" onClick={() => router.push("/dashboard")}>
       Dashboard
     </button>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/page.js" switcher
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 
 export default function Page() {
-  const router = useRouter()
+  const router = useRouter();
 
   return (
-    <button type="button" onClick={() => router.push('/dashboard')}>
+    <button type="button" onClick={() => router.push("/dashboard")}>
       Dashboard
     </button>
-  )
+  );
 }
 ```
 
@@ -55,28 +55,28 @@ The `redirects` option in the `next.config.js` file allows you to redirect an in
 To use `redirects`, add the option to your `next.config.js` file:
 
 ```ts filename="next.config.ts" switcher
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   async redirects() {
     return [
       // Basic redirect
       {
-        source: '/about',
-        destination: '/',
+        source: "/about",
+        destination: "/",
         permanent: true,
       },
       // Wildcard path matching
       {
-        source: '/blog/:slug',
-        destination: '/news/:slug',
+        source: "/blog/:slug",
+        destination: "/news/:slug",
         permanent: true,
       },
-    ]
+    ];
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 ```js filename="next.config.js" switcher
@@ -85,19 +85,19 @@ module.exports = {
     return [
       // Basic redirect
       {
-        source: '/about',
-        destination: '/',
+        source: "/about",
+        destination: "/",
         permanent: true,
       },
       // Wildcard path matching
       {
-        source: '/blog/:slug',
-        destination: '/news/:slug',
+        source: "/blog/:slug",
+        destination: "/news/:slug",
         permanent: true,
       },
-    ]
+    ];
   },
-}
+};
 ```
 
 See the [`redirects` API reference](/docs/app/api-reference/config/next-config-js/redirects) for more information.
@@ -115,45 +115,45 @@ Proxy allows you to run code before a request is completed. Then, based on the i
 For example, to redirect the user to a `/login` page if they are not authenticated:
 
 ```ts filename="proxy.ts" switcher
-import { NextResponse, NextRequest } from 'next/server'
-import { authenticate } from 'auth-provider'
+import { NextResponse, NextRequest } from "next/server";
+import { authenticate } from "auth-provider";
 
 export function proxy(request: NextRequest) {
-  const isAuthenticated = authenticate(request)
+  const isAuthenticated = authenticate(request);
 
   // If the user is authenticated, continue as normal
   if (isAuthenticated) {
-    return NextResponse.next()
+    return NextResponse.next();
   }
 
   // Redirect to login page if not authenticated
-  return NextResponse.redirect(new URL('/login', request.url))
+  return NextResponse.redirect(new URL("/login", request.url));
 }
 
 export const config = {
-  matcher: '/dashboard/:path*',
-}
+  matcher: "/dashboard/:path*",
+};
 ```
 
 ```js filename="proxy.js" switcher
-import { NextResponse } from 'next/server'
-import { authenticate } from 'auth-provider'
+import { NextResponse } from "next/server";
+import { authenticate } from "auth-provider";
 
 export function proxy(request) {
-  const isAuthenticated = authenticate(request)
+  const isAuthenticated = authenticate(request);
 
   // If the user is authenticated, continue as normal
   if (isAuthenticated) {
-    return NextResponse.next()
+    return NextResponse.next();
   }
 
   // Redirect to login page if not authenticated
-  return NextResponse.redirect(new URL('/login', request.url))
+  return NextResponse.redirect(new URL("/login", request.url));
 }
 
 export const config = {
-  matcher: '/dashboard/:path*',
-}
+  matcher: "/dashboard/:path*",
+};
 ```
 
 > **Good to know**:
@@ -195,45 +195,45 @@ Consider the following data structure:
 In [Proxy](/docs/app/api-reference/file-conventions/proxy), you can read from a database such as Vercel's [Edge Config](https://vercel.com/docs/edge-config/get-started) or [Redis](https://vercel.com/docs/redis), and redirect the user based on the incoming request:
 
 ```ts filename="proxy.ts" switcher
-import { NextResponse, NextRequest } from 'next/server'
-import { get } from '@vercel/edge-config'
+import { NextResponse, NextRequest } from "next/server";
+import { get } from "@vercel/edge-config";
 
 type RedirectEntry = {
-  destination: string
-  permanent: boolean
-}
+  destination: string;
+  permanent: boolean;
+};
 
 export async function proxy(request: NextRequest) {
-  const pathname = request.nextUrl.pathname
-  const redirectData = await get(pathname)
+  const pathname = request.nextUrl.pathname;
+  const redirectData = await get(pathname);
 
-  if (redirectData && typeof redirectData === 'string') {
-    const redirectEntry: RedirectEntry = JSON.parse(redirectData)
-    const statusCode = redirectEntry.permanent ? 308 : 307
-    return NextResponse.redirect(redirectEntry.destination, statusCode)
+  if (redirectData && typeof redirectData === "string") {
+    const redirectEntry: RedirectEntry = JSON.parse(redirectData);
+    const statusCode = redirectEntry.permanent ? 308 : 307;
+    return NextResponse.redirect(redirectEntry.destination, statusCode);
   }
 
   // No redirect found, continue without redirecting
-  return NextResponse.next()
+  return NextResponse.next();
 }
 ```
 
 ```js filename="proxy.js" switcher
-import { NextResponse } from 'next/server'
-import { get } from '@vercel/edge-config'
+import { NextResponse } from "next/server";
+import { get } from "@vercel/edge-config";
 
 export async function proxy(request) {
-  const pathname = request.nextUrl.pathname
-  const redirectData = await get(pathname)
+  const pathname = request.nextUrl.pathname;
+  const redirectData = await get(pathname);
 
   if (redirectData) {
-    const redirectEntry = JSON.parse(redirectData)
-    const statusCode = redirectEntry.permanent ? 308 : 307
-    return NextResponse.redirect(redirectEntry.destination, statusCode)
+    const redirectEntry = JSON.parse(redirectData);
+    const statusCode = redirectEntry.permanent ? 308 : 307;
+    return NextResponse.redirect(redirectEntry.destination, statusCode);
   }
 
   // No redirect found, continue without redirecting
-  return NextResponse.next()
+  return NextResponse.next();
 }
 ```
 
@@ -246,153 +246,153 @@ Reading a large dataset for every incoming request can be slow and expensive. Th
 
 Considering the previous example, you can import a generated bloom filter file into Proxy, then, check if the incoming request pathname exists in the bloom filter.
 
-If it does, forward the request to a  [API Routes](/docs/pages/building-your-application/routing/api-routes) which will check the actual file and redirect the user to the appropriate URL. This avoids importing a large redirects file into Proxy, which can slow down every incoming request.
+If it does, forward the request to a [API Routes](/docs/pages/building-your-application/routing/api-routes) which will check the actual file and redirect the user to the appropriate URL. This avoids importing a large redirects file into Proxy, which can slow down every incoming request.
 
 ```ts filename="proxy.ts" switcher
-import { NextResponse, NextRequest } from 'next/server'
-import { ScalableBloomFilter } from 'bloom-filters'
-import GeneratedBloomFilter from './redirects/bloom-filter.json'
+import { NextResponse, NextRequest } from "next/server";
+import { ScalableBloomFilter } from "bloom-filters";
+import GeneratedBloomFilter from "./redirects/bloom-filter.json";
 
 type RedirectEntry = {
-  destination: string
-  permanent: boolean
-}
+  destination: string;
+  permanent: boolean;
+};
 
 // Initialize bloom filter from a generated JSON file
-const bloomFilter = ScalableBloomFilter.fromJSON(GeneratedBloomFilter as any)
+const bloomFilter = ScalableBloomFilter.fromJSON(GeneratedBloomFilter as any);
 
 export async function proxy(request: NextRequest) {
   // Get the path for the incoming request
-  const pathname = request.nextUrl.pathname
+  const pathname = request.nextUrl.pathname;
 
   // Check if the path is in the bloom filter
   if (bloomFilter.has(pathname)) {
     // Forward the pathname to the Route Handler
     const api = new URL(
       `/api/redirects?pathname=${encodeURIComponent(request.nextUrl.pathname)}`,
-      request.nextUrl.origin
-    )
+      request.nextUrl.origin,
+    );
 
     try {
       // Fetch redirect data from the Route Handler
-      const redirectData = await fetch(api)
+      const redirectData = await fetch(api);
 
       if (redirectData.ok) {
         const redirectEntry: RedirectEntry | undefined =
-          await redirectData.json()
+          await redirectData.json();
 
         if (redirectEntry) {
           // Determine the status code
-          const statusCode = redirectEntry.permanent ? 308 : 307
+          const statusCode = redirectEntry.permanent ? 308 : 307;
 
           // Redirect to the destination
-          return NextResponse.redirect(redirectEntry.destination, statusCode)
+          return NextResponse.redirect(redirectEntry.destination, statusCode);
         }
       }
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
   }
 
   // No redirect found, continue the request without redirecting
-  return NextResponse.next()
+  return NextResponse.next();
 }
 ```
 
 ```js filename="proxy.js" switcher
-import { NextResponse } from 'next/server'
-import { ScalableBloomFilter } from 'bloom-filters'
-import GeneratedBloomFilter from './redirects/bloom-filter.json'
+import { NextResponse } from "next/server";
+import { ScalableBloomFilter } from "bloom-filters";
+import GeneratedBloomFilter from "./redirects/bloom-filter.json";
 
 // Initialize bloom filter from a generated JSON file
-const bloomFilter = ScalableBloomFilter.fromJSON(GeneratedBloomFilter)
+const bloomFilter = ScalableBloomFilter.fromJSON(GeneratedBloomFilter);
 
 export async function proxy(request) {
   // Get the path for the incoming request
-  const pathname = request.nextUrl.pathname
+  const pathname = request.nextUrl.pathname;
 
   // Check if the path is in the bloom filter
   if (bloomFilter.has(pathname)) {
     // Forward the pathname to the Route Handler
     const api = new URL(
       `/api/redirects?pathname=${encodeURIComponent(request.nextUrl.pathname)}`,
-      request.nextUrl.origin
-    )
+      request.nextUrl.origin,
+    );
 
     try {
       // Fetch redirect data from the Route Handler
-      const redirectData = await fetch(api)
+      const redirectData = await fetch(api);
 
       if (redirectData.ok) {
-        const redirectEntry = await redirectData.json()
+        const redirectEntry = await redirectData.json();
 
         if (redirectEntry) {
           // Determine the status code
-          const statusCode = redirectEntry.permanent ? 308 : 307
+          const statusCode = redirectEntry.permanent ? 308 : 307;
 
           // Redirect to the destination
-          return NextResponse.redirect(redirectEntry.destination, statusCode)
+          return NextResponse.redirect(redirectEntry.destination, statusCode);
         }
       }
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
   }
 
   // No redirect found, continue the request without redirecting
-  return NextResponse.next()
+  return NextResponse.next();
 }
 ```
 
 Then, in the API Route:
 
 ```ts filename="pages/api/redirects.ts" switcher
-import type { NextApiRequest, NextApiResponse } from 'next'
-import redirects from '@/app/redirects/redirects.json'
+import type { NextApiRequest, NextApiResponse } from "next";
+import redirects from "@/app/redirects/redirects.json";
 
 type RedirectEntry = {
-  destination: string
-  permanent: boolean
-}
+  destination: string;
+  permanent: boolean;
+};
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  const pathname = req.query.pathname
+  const pathname = req.query.pathname;
   if (!pathname) {
-    return res.status(400).json({ message: 'Bad Request' })
+    return res.status(400).json({ message: "Bad Request" });
   }
 
   // Get the redirect entry from the redirects.json file
-  const redirect = (redirects as Record<string, RedirectEntry>)[pathname]
+  const redirect = (redirects as Record<string, RedirectEntry>)[pathname];
 
   // Account for bloom filter false positives
   if (!redirect) {
-    return res.status(400).json({ message: 'No redirect' })
+    return res.status(400).json({ message: "No redirect" });
   }
 
   // Return the redirect entry
-  return res.json(redirect)
+  return res.json(redirect);
 }
 ```
 
 ```js filename="pages/api/redirects.js" switcher
-import redirects from '@/app/redirects/redirects.json'
+import redirects from "@/app/redirects/redirects.json";
 
 export default function handler(req, res) {
-  const pathname = req.query.pathname
+  const pathname = req.query.pathname;
   if (!pathname) {
-    return res.status(400).json({ message: 'Bad Request' })
+    return res.status(400).json({ message: "Bad Request" });
   }
 
   // Get the redirect entry from the redirects.json file
-  const redirect = redirects[pathname]
+  const redirect = redirects[pathname];
 
   // Account for bloom filter false positives
   if (!redirect) {
-    return res.status(400).json({ message: 'No redirect' })
+    return res.status(400).json({ message: "No redirect" });
   }
 
   // Return the redirect entry
-  return res.json(redirect)
+  return res.json(redirect);
 }
 ```
 

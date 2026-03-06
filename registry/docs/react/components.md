@@ -2,9 +2,9 @@
 
 React supports all of the browser built-in [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML/Element) and [SVG](https://developer.mozilla.org/en-US/docs/Web/SVG/Element) components.
 
-***
+---
 
-## Common components {/*common-components*/}
+## Common components {/_common-components_/}
 
 All of the built-in browser components support some props and events.
 
@@ -12,9 +12,9 @@ All of the built-in browser components support some props and events.
 
 This includes React-specific props like `ref` and `dangerouslySetInnerHTML`.
 
-***
+---
 
-## Form components {/*form-components*/}
+## Form components {/_form-components_/}
 
 These built-in browser components accept user input:
 
@@ -22,11 +22,11 @@ These built-in browser components accept user input:
 - [`<select>`](/reference/react-dom/components/select)
 - [`<textarea>`](/reference/react-dom/components/textarea)
 
-They are special in React because passing the `value` prop to them makes them *[controlled.](/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)*
+They are special in React because passing the `value` prop to them makes them _[controlled.](/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)_
 
-***
+---
 
-## Resource and Metadata Components {/*resource-and-metadata-components*/}
+## Resource and Metadata Components {/_resource-and-metadata-components_/}
 
 These built-in browser components let you load external resources or annotate the document with metadata:
 
@@ -38,9 +38,9 @@ These built-in browser components let you load external resources or annotate th
 
 They are special in React because React can render them into the document head, suspend while resources are loading, and enact other behaviors that are described on the reference page for each specific component.
 
-***
+---
 
-## All HTML components {/*all-html-components*/}
+## All HTML components {/_all-html-components_/}
 
 React supports all built-in browser HTML components. This includes:
 
@@ -148,15 +148,15 @@ React supports all built-in browser HTML components. This includes:
 
 Similar to the [DOM standard,](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) React uses a `camelCase` convention for prop names. For example, you'll write `tabIndex` instead of `tabindex`. You can convert existing HTML to JSX with an [online converter.](https://transform.tools/html-to-jsx)
 
-***
+---
 
-### Custom HTML elements {/*custom-html-elements*/}
+### Custom HTML elements {/_custom-html-elements_/}
 
 If you render a tag with a dash, like `<my-element>`, React will assume you want to render a [custom HTML element.](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements)
 
 If you render a built-in browser HTML element with an [`is`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/is) attribute, it will also be treated as a custom element.
 
-#### Setting values on custom elements {/*attributes-vs-properties*/}
+#### Setting values on custom elements {/_attributes-vs-properties_/}
 
 Custom elements have two methods of passing data into them:
 
@@ -173,19 +173,19 @@ Non-string JavaScript values passed to custom elements will be serialized by def
 
 ```jsx
 // Will be passed as `"1,2,3"` as the output of `[1,2,3].toString()`
-<my-element value={[1,2,3]}></my-element>
+<my-element value={[1, 2, 3]}></my-element>
 ```
 
 React will, however, recognize an custom element's property as one that it may pass arbitrary values to if the property name shows up on the class during construction:
 
 ```js src/index.js hidden
-import {MyElement} from './MyElement.js';
-import { createRoot } from 'react-dom/client';
-import {App} from "./App.js";
+import { MyElement } from "./MyElement.js";
+import { createRoot } from "react-dom/client";
+import { App } from "./App.js";
 
-customElements.define('my-element', MyElement);
+customElements.define("my-element", MyElement);
 
-const root = createRoot(document.getElementById('root'))
+const root = createRoot(document.getElementById("root"));
 root.render(<App />);
 ```
 
@@ -193,7 +193,7 @@ root.render(<App />);
 export class MyElement extends HTMLElement {
   constructor() {
     super();
-    // The value here will be overwritten by React 
+    // The value here will be overwritten by React
     // when initialized as an element
     this.value = undefined;
   }
@@ -206,22 +206,22 @@ export class MyElement extends HTMLElement {
 
 ```js src/App.js
 export function App() {
-  return <my-element value={[1,2,3]}></my-element>
+  return <my-element value={[1, 2, 3]}></my-element>;
 }
 ```
 
-#### Listening for events on custom elements {/*custom-element-events*/}
+#### Listening for events on custom elements {/_custom-element-events_/}
 
 A common pattern when using custom elements is that they may dispatch [`CustomEvent`s](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent) rather than accept a function to call when an event occur. You can listen for these events using an `on` prefix when binding to the event via JSX.
 
 ```js src/index.js hidden
-import {MyElement} from './MyElement.js';
-import { createRoot } from 'react-dom/client';
-import {App} from "./App.js";
+import { MyElement } from "./MyElement.js";
+import { createRoot } from "react-dom/client";
+import { App } from "./App.js";
 
-customElements.define('my-element', MyElement);
+customElements.define("my-element", MyElement);
 
-const root = createRoot(document.getElementById('root'))
+const root = createRoot(document.getElementById("root"));
 root.render(<App />);
 ```
 
@@ -234,23 +234,23 @@ export class MyElement extends HTMLElement {
   }
 
   _emitEvent() {
-    const event = new CustomEvent('speak', {
+    const event = new CustomEvent("speak", {
       detail: {
-        message: 'Hello, world!',
+        message: "Hello, world!",
       },
     });
     this.dispatchEvent(event);
   }
 
   connectedCallback() {
-    this.el = document.createElement('button');
-    this.el.innerText = 'Say hi';
-    this.el.addEventListener('click', this.emitEvent);
+    this.el = document.createElement("button");
+    this.el.innerText = "Say hi";
+    this.el.addEventListener("click", this.emitEvent);
     this.appendChild(this.el);
   }
 
   disconnectedCallback() {
-    this.el.removeEventListener('click', this.emitEvent);
+    this.el.removeEventListener("click", this.emitEvent);
   }
 }
 ```
@@ -258,10 +258,8 @@ export class MyElement extends HTMLElement {
 ```jsx src/App.js active
 export function App() {
   return (
-    <my-element
-      onspeak={e => console.log(e.detail.message)}
-    ></my-element>
-  )
+    <my-element onspeak={(e) => console.log(e.detail.message)}></my-element>
+  );
 }
 ```
 
@@ -274,9 +272,9 @@ Events are case-sensitive and support dashes (`-`). Preserve the casing of the e
 <my-element onsayHi={console.log}></my-element>
 ```
 
-***
+---
 
-## All SVG components {/*all-svg-components*/}
+## All SVG components {/_all-svg-components_/}
 
 React supports all built-in browser SVG components. This includes:
 
@@ -363,7 +361,7 @@ Namespaced attributes also have to be written without the colon:
 - `xml:space` becomes `xmlSpace`.
 - `xmlns:xlink` becomes `xmlnsXlink`.
 
-***
+---
 
 ## Sitemap
 

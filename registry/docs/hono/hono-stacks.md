@@ -24,15 +24,15 @@ Now let's create an API server and a client with it.
 First, write an endpoint that receives a GET request and returns JSON.
 
 ```ts twoslash
-import { Hono } from 'hono'
+import { Hono } from "hono";
 
-const app = new Hono()
+const app = new Hono();
 
-app.get('/hello', (c) => {
+app.get("/hello", (c) => {
   return c.json({
     message: `Hello!`,
-  })
-})
+  });
+});
 ```
 
 ## Validation with Zod
@@ -42,24 +42,24 @@ Validate with Zod to receive the value of the query parameter.
 ![](/images/sc01.gif)
 
 ```ts
-import { zValidator } from '@hono/zod-validator'
-import * as z from 'zod'
+import { zValidator } from "@hono/zod-validator";
+import * as z from "zod";
 
 app.get(
-  '/hello',
+  "/hello",
   zValidator(
-    'query',
+    "query",
     z.object({
       name: z.string(),
-    })
+    }),
   ),
   (c) => {
-    const { name } = c.req.valid('query')
+    const { name } = c.req.valid("query");
     return c.json({
       message: `Hello! ${name}`,
-    })
-  }
-)
+    });
+  },
+);
 ```
 
 ## Sharing the Types
@@ -101,15 +101,15 @@ Then, magically, completion works and the endpoint path and request type are sug
 ![](/images/sc03.gif)
 
 ```ts
-import { AppType } from './server'
-import { hc } from 'hono/client'
+import { AppType } from "./server";
+import { hc } from "hono/client";
 
-const client = hc('/api')
+const client = hc("/api");
 const res = await client.hello.$get({
   query: {
-    name: 'Hono',
+    name: "Hono",
   },
-})
+});
 ```
 
 The `Response` is compatible with the fetch API, but the data that can be retrieved with `json()` has a type.
@@ -117,8 +117,8 @@ The `Response` is compatible with the fetch API, but the data that can be retrie
 ![](/images/sc04.gif)
 
 ```ts
-const data = await res.json()
-console.log(`${data.message}`)
+const data = await res.json();
+console.log(`${data.message}`);
 ```
 
 Sharing API specifications means that you can be aware of server-side changes.
@@ -133,39 +133,39 @@ The API server.
 
 ```ts
 // functions/api/[[route]].ts
-import { Hono } from 'hono'
-import { handle } from 'hono/cloudflare-pages'
-import * as z from 'zod'
-import { zValidator } from '@hono/zod-validator'
+import { Hono } from "hono";
+import { handle } from "hono/cloudflare-pages";
+import * as z from "zod";
+import { zValidator } from "@hono/zod-validator";
 
-const app = new Hono()
+const app = new Hono();
 
 const schema = z.object({
   id: z.string(),
   title: z.string(),
-})
+});
 
-type Todo = z.infer
+type Todo = z.infer;
 
-const todos: Todo[] = []
+const todos: Todo[] = [];
 
 const route = app
-  .post('/todo', zValidator('form', schema), (c) => {
-    const todo = c.req.valid('form')
-    todos.push(todo)
+  .post("/todo", zValidator("form", schema), (c) => {
+    const todo = c.req.valid("form");
+    todos.push(todo);
     return c.json({
-      message: 'created!',
-    })
+      message: "created!",
+    });
   })
   .get((c) => {
     return c.json({
       todos,
-    })
-  })
+    });
+  });
 
-export type AppType = typeof route
+export type AppType = typeof route;
 
-export const onRequest = handle(app, '/api')
+export const onRequest = handle(app, "/api");
 ```
 
 The client with React and React Query.
@@ -186,9 +186,9 @@ const client = hc('/api')
 
 export default function App() {
   return (
-    
-      
-    
+
+
+
   )
 }
 
@@ -223,7 +223,7 @@ const Todos = () => {
   })
 
   return (
-    
+
       <button
         onClick={() => {
           mutation.mutate({
@@ -233,14 +233,14 @@ const Todos = () => {
         }}
       >
         Add Todo
-      
 
-      
+
+
         {query.data?.todos.map((todo) => (
           {todo.title}
         ))}
-      
-    
+
+
   )
 }
 ```

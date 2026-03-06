@@ -9,16 +9,18 @@ Drizzle ORM has APIs for `INNER JOIN [LATERAL]`, `FULL JOIN`, `LEFT JOIN [LATERA
 Lets have a quick look at examples based on below table schemas:
 
 ```typescript copy
-export const users = pgTable('users', {
-  id: serial('id').primaryKey(),
-  name: text('name').notNull(),
+export const users = pgTable("users", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
 });
 
-export const pets = pgTable('pets', {
-  id: serial('id').primaryKey(),
-  name: text('name').notNull(),
-  ownerId: integer('owner_id').notNull().references(() => users.id),
-})
+export const pets = pgTable("pets", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  ownerId: integer("owner_id")
+    .notNull()
+    .references(() => users.id),
+});
 ```
 
 ### Left Join
@@ -330,16 +332,16 @@ select ... from "user" left join "user" "parent" on "parent"."id" = "user"."pare
 ```typescript
 // result type
 const result: {
-    user: {
-        id: number;
-        name: string;
-        parentId: number;
-    };
-    parent: {
-        id: number;
-        name: string;
-        parentId: number;
-    } | null;
+  user: {
+    id: number;
+    name: string;
+    parentId: number;
+  };
+  parent: {
+    id: number;
+    name: string;
+    parentId: number;
+  } | null;
 }[];
 ```
 
@@ -349,7 +351,9 @@ const result: {
 export const user = pgTable("user", {
   id: integer("id").primaryKey({ autoIncrement: true }),
   name: text("name").notNull(),
-  parentId: integer("parent_id").notNull().references((): AnyPgColumn => user.id)
+  parentId: integer("parent_id")
+    .notNull()
+    .references((): AnyPgColumn => user.id),
 });
 ```
 
@@ -365,10 +369,14 @@ You're free to operate with results the way you want, here's an example of mappi
 type User = typeof users.$inferSelect;
 type Pet = typeof pets.$inferSelect;
 
-const rows = db.select({
+const rows = db
+  .select({
     user: users,
     pet: pets,
-  }).from(users).leftJoin(pets, eq(users.id, pets.ownerId)).all();
+  })
+  .from(users)
+  .leftJoin(pets, eq(users.id, pets.ownerId))
+  .all();
 
 const result = rows.reduce<Record<number, { user: User; pets: Pet[] }>>(
   (acc, row) => {
@@ -385,56 +393,66 @@ const result = rows.reduce<Record<number, { user: User; pets: Pet[] }>>(
 
     return acc;
   },
-  {}
+  {},
 );
 
 // result type
-const result: Record<number, {
+const result: Record<
+  number,
+  {
     user: User;
     pets: Pet[];
-}>;
+  }
+>;
 ```
 
 ## Many-to-one example
 
 ```typescript
-import { sqliteTable, text, integer } from 'drizzle-orm/sqlite-core';
-import { drizzle } from 'drizzle-orm/better-sqlite3';
+import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
+import { drizzle } from "drizzle-orm/better-sqlite3";
 
-const cities = sqliteTable('cities', {
-  id: integer('id').primaryKey(),
-  name: text('name'),
+const cities = sqliteTable("cities", {
+  id: integer("id").primaryKey(),
+  name: text("name"),
 });
 
-const users = sqliteTable('users', {
-  id: integer('id').primaryKey(),
-  name: text('name'),
-  cityId: integer('city_id').references(() => cities.id)
+const users = sqliteTable("users", {
+  id: integer("id").primaryKey(),
+  name: text("name"),
+  cityId: integer("city_id").references(() => cities.id),
 });
 
 const db = drizzle();
 
-const result = db.select().from(cities).leftJoin(users, eq(cities.id, users.cityId)).all();
+const result = db
+  .select()
+  .from(cities)
+  .leftJoin(users, eq(cities.id, users.cityId))
+  .all();
 ```
 
 ## Many-to-many example
 
 ```typescript
-const users = sqliteTable('users', {
-  id: integer('id').primaryKey(),
-  name: text('name'),
+const users = sqliteTable("users", {
+  id: integer("id").primaryKey(),
+  name: text("name"),
 });
 
-const chatGroups = sqliteTable('chat_groups', {
-  id: integer('id').primaryKey(),
-  name: text('name'),
+const chatGroups = sqliteTable("chat_groups", {
+  id: integer("id").primaryKey(),
+  name: text("name"),
 });
 
-const usersToChatGroups = sqliteTable('usersToChatGroups', {
-  userId: integer('user_id').notNull().references(() => users.id),
-  groupId: integer('group_id').notNull().references(() => chatGroups.id),
+const usersToChatGroups = sqliteTable("usersToChatGroups", {
+  userId: integer("user_id")
+    .notNull()
+    .references(() => users.id),
+  groupId: integer("group_id")
+    .notNull()
+    .references(() => chatGroups.id),
 });
-
 
 // querying user group with id 1 and all the participants(users)
 db.select()

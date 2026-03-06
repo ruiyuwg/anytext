@@ -164,7 +164,7 @@ We recommend using Turbopack for development and production. Submit a comment to
 The `experimental.turbopack` configuration is out of experimental.
 
 ```ts filename="next.config.ts"
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 // Next.js 15 - experimental.turbopack
 const nextConfig: NextConfig = {
@@ -173,24 +173,24 @@ const nextConfig: NextConfig = {
       // options
     },
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 You can use it as a top-level `turbopack` option:
 
 ```ts filename="next.config.ts"
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 // Next.js 16 - turbopack at the top level of nextConfig
 const nextConfig: NextConfig = {
   turbopack: {
     // options
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 Make sure to review the `Turbopack` configuration [options](/docs/app/api-reference/config/next-config-js/turbopack). **Next.js 16** introduces various improvements and new options, for example:
@@ -207,53 +207,53 @@ When this happens, you should refactor your code so that your client-side bundle
 However, in some cases, this might not be possible. In Webpack the `resolve.fallback` option was typically used to **silence** the error. Turbopack offers a similar option, using `turbopack.resolveAlias`. In this case, tell Turbopack to load an empty module when `fs` is requested for the browser.
 
 ```ts filename="next.config.ts"
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   turbopack: {
     resolveAlias: {
       fs: {
-        browser: './empty.ts', // We recommend to fix code imports before using this method
+        browser: "./empty.ts", // We recommend to fix code imports before using this method
       },
     },
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 It is preferable to refactor your modules so that client code doesn't ever import from modules using Node.js native modules.
 
-### Sass node\_modules imports
+### Sass node_modules imports
 
 Turbopack fully supports importing Sass files from `node_modules`. Note that while Webpack allowed the legacy tilde (`~`) prefix, Turbopack does not support this syntax.
 
 In Webpack:
 
 ```scss filename="styles/globals.scss"
-@import '~bootstrap/dist/css/bootstrap.min.css';
+@import "~bootstrap/dist/css/bootstrap.min.css";
 ```
 
 In Turbopack:
 
 ```scss filename="styles/globals.scss"
-@import 'bootstrap/dist/css/bootstrap.min.css';
+@import "bootstrap/dist/css/bootstrap.min.css";
 ```
 
 If changing the imports is not possible, you can use `turbopack.resolveAlias`. For example:
 
 ```ts filename="next.config.ts"
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   turbopack: {
     resolveAlias: {
-      '~*': '*',
+      "~*": "*",
     },
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 ### Turbopack File System Caching (beta)
@@ -263,15 +263,15 @@ Turbopack now supports filesystem caching in development, storing compiler artif
 Enable filesystem caching in your configuration:
 
 ```ts filename="next.config.ts" switcher
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   experimental: {
     turbopackFileSystemCacheForDev: true,
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 ```js filename="next.config.js" switcher
@@ -280,9 +280,9 @@ const nextConfig = {
   experimental: {
     turbopackFileSystemCacheForDev: true,
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 ## Async Request APIs (Breaking change)
@@ -312,10 +312,10 @@ To help migrate to async `params` and `searchParams`, you can run [`npx next typ
 This simplifies type-safe migration to the new async API pattern, and enables you to update your components with full type safety, for example:
 
 ```tsx filename="/app/blog/[slug]/page.tsx"
-export default async function Page(props: PageProps<'/blog/[slug]'>) {
-  const { slug } = await props.params
-  const query = await props.searchParams
-  return <h1>Blog Post: {slug}</h1>
+export default async function Page(props: PageProps<"/blog/[slug]">) {
+  const { slug } = await props.params;
+  const query = await props.searchParams;
+  return <h1>Blog Post: {slug}</h1>;
 }
 ```
 
@@ -330,14 +330,14 @@ In previous versions, both the `Image` (image generation function), and the `gen
 ```js filename="app/shop/[slug]/opengraph-image.js"
 // Next.js 15 - synchronous params access
 export function generateImageMetadata({ params }) {
-  const { slug } = params
-  return [{ id: '1' }, { id: '2' }]
+  const { slug } = params;
+  return [{ id: "1" }, { id: "2" }];
 }
 
 // Next.js 15 - synchronous params and id access
 export default function Image({ params, id }) {
-  const slug = params.slug
-  const imageId = id // string
+  const slug = params.slug;
+  const imageId = id; // string
   // ...
 }
 ```
@@ -346,14 +346,14 @@ Starting with **Next.js 16**, to align with the [Async Request APIs](#async-requ
 
 ```js filename="app/shop/[slug]/opengraph-image.js"
 export async function generateImageMetadata({ params }) {
-  const { slug } = params
-  return [{ id: '1' }, { id: '2' }]
+  const { slug } = params;
+  return [{ id: "1" }, { id: "2" }];
 }
 
 // Next.js 16 - asynchronous params and id access
 export default async function Image({ params, id }) {
-  const { slug } = await params // params now async
-  const imageId = await id // id is now Promise<string> when using generateImageMetadata
+  const { slug } = await params; // params now async
+  const imageId = await id; // id is now Promise<string> when using generateImageMetadata
   // ...
 }
 ```
@@ -364,12 +364,12 @@ Previously, the `id` values returned from [`generateSitemaps`](/docs/app/api-ref
 
 ```js filename="app/product/sitemap.js"
 export async function generateSitemaps() {
-  return [{ id: 0 }, { id: 1 }, { id: 2 }, { id: 3 }]
+  return [{ id: 0 }, { id: 1 }, { id: 2 }, { id: 3 }];
 }
 
 // Next.js 15 - synchronous id access
 export default async function sitemap({ id }) {
-  const start = id * 50000 // id is a number
+  const start = id * 50000; // id is a number
   // ...
 }
 ```
@@ -378,13 +378,13 @@ Starting with **Next.js 16**, the `sitemap` generating function now receives `id
 
 ```js filename="app/product/sitemap.js"
 export async function generateSitemaps() {
-  return [{ id: 0 }, { id: 1 }, { id: 2 }, { id: 3 }]
+  return [{ id: 0 }, { id: 1 }, { id: 2 }, { id: 3 }];
 }
 
 // Next.js 16 - asynchronous id access
 export default async function sitemap({ id }) {
-  const resolvedId = await id // id is now Promise<string>
-  const start = Number(resolvedId) * 50000
+  const resolvedId = await id; // id is now Promise<string>
+  const start = Number(resolvedId) * 50000;
   // ...
 }
 ```
@@ -406,22 +406,22 @@ Built-in support for the React Compiler is now stable in **Next.js 16** followin
 The `reactCompiler` configuration option has been promoted from `experimental` to stable. It is not enabled by default as we continue gathering build performance data across different application types.
 
 ```ts filename="next.config.ts" switcher
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactCompiler: true,
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 ```js filename="next.config.js" switcher
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactCompiler: true,
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 Install the latest version of the React Compiler plugin:
@@ -451,24 +451,24 @@ bun add -D babel-plugin-react-compiler
 [`revalidateTag`](/docs/app/api-reference/functions/revalidateTag) has a new function signature. You can pass a [`cacheLife`](/docs/app/api-reference/functions/cacheLife#reference) profile as the second argument.
 
 ```ts filename="app/actions.ts" switcher
-'use server'
+"use server";
 
-import { revalidateTag } from 'next/cache'
+import { revalidateTag } from "next/cache";
 
 export async function updateArticle(articleId: string) {
   // Mark article data as stale - article readers see stale data while it revalidates
-  revalidateTag(`article-${articleId}`, 'max')
+  revalidateTag(`article-${articleId}`, "max");
 }
 ```
 
 ```js filename="app/actions.js" switcher
-'use server'
+"use server";
 
-import { revalidateTag } from 'next/cache'
+import { revalidateTag } from "next/cache";
 
 export async function updateArticle(articleId) {
   // Mark article data as stale - article readers see stale data while it revalidates
-  revalidateTag(`article-${articleId}`, 'max')
+  revalidateTag(`article-${articleId}`, "max");
 }
 ```
 
@@ -481,28 +481,28 @@ Use `revalidateTag` for content where a slight delay in updates is acceptable, s
 It does this by expiring and immediately refreshing data within the same request.
 
 ```ts filename="app/actions.ts" switcher
-'use server'
+"use server";
 
-import { updateTag } from 'next/cache'
+import { updateTag } from "next/cache";
 
 export async function updateUserProfile(userId: string, profile: Profile) {
-  await db.users.update(userId, profile)
+  await db.users.update(userId, profile);
 
   // Expire cache and refresh immediately - user sees their changes right away
-  updateTag(`user-${userId}`)
+  updateTag(`user-${userId}`);
 }
 ```
 
 ```js filename="app/actions.js" switcher
-'use server'
+"use server";
 
-import { updateTag } from 'next/cache'
+import { updateTag } from "next/cache";
 
 export async function updateUserProfile(userId, profile) {
-  await db.users.update(userId, profile)
+  await db.users.update(userId, profile);
 
   // Expire cache and refresh immediately - user sees their changes right away
-  updateTag(`user-${userId}`)
+  updateTag(`user-${userId}`);
 }
 ```
 
@@ -515,30 +515,30 @@ Learn more about when to use `updateTag` or `revalidateTag` [here](/docs/app/api
 [`refresh`](/docs/app/api-reference/functions/refresh) allows you to refresh the client router from within a Server Action.
 
 ```ts filename="app/actions.ts" switcher
-'use server'
+"use server";
 
-import { refresh } from 'next/cache'
+import { refresh } from "next/cache";
 
 export async function markNotificationAsRead(notificationId: string) {
   // Update the notification in the database
-  await db.notifications.markAsRead(notificationId)
+  await db.notifications.markAsRead(notificationId);
 
   // Refresh the notification count displayed in the header
-  refresh()
+  refresh();
 }
 ```
 
 ```js filename="app/actions.js" switcher
-'use server'
+"use server";
 
-import { refresh } from 'next/cache'
+import { refresh } from "next/cache";
 
 export async function markNotificationAsRead(notificationId) {
   // Update the notification in the database
-  await db.notifications.markAsRead(notificationId)
+  await db.notifications.markAsRead(notificationId);
 
   // Refresh the notification count displayed in the header
-  refresh()
+  refresh();
 }
 ```
 
@@ -554,13 +554,13 @@ Wherever you had aliased imports like:
 import {
   unstable_cacheLife as cacheLife,
   unstable_cacheTag as cacheTag,
-} from 'next/cache'
+} from "next/cache";
 ```
 
 You can update your imports to:
 
 ```ts
-import { cacheLife, cacheTag } from 'next/cache'
+import { cacheLife, cacheTag } from "next/cache";
 ```
 
 ## Enhanced Routing and Navigation
@@ -586,9 +586,9 @@ Starting with **Next.js 16**, you can opt into PPR using the [`cacheComponents`]
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   cacheComponents: true,
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 PPR in **Next.js 16** works differently than in **Next.js 15** canaries. If you are using PPR today, stay in the current Next.js 15 canary you are using. We will follow up with a guide to migrate to Cache Components.
@@ -601,9 +601,9 @@ const nextConfig = {
   experimental: {
     ppr: true,
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 ## `middleware` to `proxy`
@@ -634,22 +634,22 @@ We recommend changing the function name to `proxy`, even if you are using a defa
 Configuration flags that contained the `middleware` name are also renamed. For example, `skipMiddlewareUrlNormalize` is now `skipProxyUrlNormalize`
 
 ```ts filename="next.config.ts" switcher
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   skipProxyUrlNormalize: true,
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 ```js filename="next.config.js" switcher
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   skipProxyUrlNormalize: true,
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 The version 16 [codemod](/docs/app/guides/upgrading/codemods#160) is able to update these flags too.
@@ -661,30 +661,30 @@ The version 16 [codemod](/docs/app/guides/upgrading/codemods#160) is able to upd
 Local image sources with query strings now require `images.localPatterns.search` configuration to prevent enumeration attacks.
 
 ```tsx filename="app/page.tsx"
-import Image from 'next/image'
+import Image from "next/image";
 
 export default function Page() {
-  return <Image src="/assets/photo?v=1" alt="Photo" width="100" height="100" />
+  return <Image src="/assets/photo?v=1" alt="Photo" width="100" height="100" />;
 }
 ```
 
 If you need to use query strings with local images, add the pattern to your configuration:
 
 ```ts filename="next.config.ts" switcher
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
     localPatterns: [
       {
-        pathname: '/assets/**',
-        search: '?v=1',
+        pathname: "/assets/**",
+        search: "?v=1",
       },
     ],
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 ```js filename="next.config.js" switcher
@@ -693,14 +693,14 @@ const nextConfig = {
   images: {
     localPatterns: [
       {
-        pathname: '/assets/**',
-        search: '?v=1',
+        pathname: "/assets/**",
+        search: "?v=1",
       },
     ],
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 ### `minimumCacheTTL` Default (Breaking change)
@@ -714,15 +714,15 @@ Since most images do not change often, this short interval is not ideal. Setting
 If you need the previous behavior, change `minimumCacheTTL` to a lower value, for example back to `60` seconds:
 
 ```ts filename="next.config.ts" switcher
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
     minimumCacheTTL: 60,
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 ```js filename="next.config.js" switcher
@@ -731,9 +731,9 @@ const nextConfig = {
   images: {
     minimumCacheTTL: 60,
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 ### `imageSizes` Default (Breaking change)
@@ -745,15 +745,15 @@ We have looked at request analytics and found out that very few projects ever se
 If you need to support 16px images:
 
 ```ts filename="next.config.ts" switcher
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 ```js filename="next.config.js" switcher
@@ -762,9 +762,9 @@ const nextConfig = {
   images: {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 Rather than lack of developer usage, we believe 16 pixels width images have become less common, because `devicePixelRatio: 2` actually fetches a 32px image to prevent blurriness in retina displays.
@@ -776,15 +776,15 @@ The default value for `images.qualities` has changed from allowing all qualities
 If you need to support multiple quality levels:
 
 ```ts filename="next.config.ts" switcher
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
     qualities: [50, 75, 100],
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 ```js filename="next.config.js" switcher
@@ -793,9 +793,9 @@ const nextConfig = {
   images: {
     qualities: [50, 75, 100],
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 If you specify a `quality` prop not included in the `image.qualities` array, the quality will be coerced to the closest value in `images.qualities`. For example, given the configuration above, a `quality` prop of 80, is coerced to 75.
@@ -805,15 +805,15 @@ If you specify a `quality` prop not included in the `image.qualities` array, the
 A new security restriction blocks local IP optimization by default. Set `images.dangerouslyAllowLocalIP` to `true` only for private networks.
 
 ```ts filename="next.config.ts" switcher
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
     dangerouslyAllowLocalIP: true, // Only for private networks
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 ```js filename="next.config.js" switcher
@@ -822,9 +822,9 @@ const nextConfig = {
   images: {
     dangerouslyAllowLocalIP: true, // Only for private networks
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 ### Maximum Redirects (Breaking change)
@@ -832,7 +832,7 @@ module.exports = nextConfig
 The default for `images.maximumRedirects` has changed from unlimited to 3 redirects maximum.
 
 ```ts filename="next.config.ts" switcher
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
@@ -840,9 +840,9 @@ const nextConfig: NextConfig = {
     // or
     maximumRedirects: 5, // Increase for edge cases
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 ```js filename="next.config.js" switcher
@@ -853,9 +853,9 @@ const nextConfig = {
     // or
     maximumRedirects: 5, // Increase for edge cases
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 ### `next/legacy/image` Component (deprecated)
@@ -864,10 +864,10 @@ The `next/legacy/image` component is deprecated. Use `next/image` instead:
 
 ```tsx
 // Before
-import Image from 'next/legacy/image'
+import Image from "next/legacy/image";
 
 // After
-import Image from 'next/image'
+import Image from "next/image";
 ```
 
 ### `images.domains` Configuration (deprecated)
@@ -878,9 +878,9 @@ The `images.domains` config is deprecated.
 // image.domains is deprecated
 module.exports = {
   images: {
-    domains: ['example.com'],
+    domains: ["example.com"],
   },
-}
+};
 ```
 
 Use `images.remotePatterns` instead for improved security:
@@ -891,12 +891,12 @@ module.exports = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'example.com',
+        protocol: "https",
+        hostname: "example.com",
       },
     ],
   },
-}
+};
 ```
 
 ## Concurrent `dev` and `build`
@@ -930,10 +930,10 @@ All [parallel route](/docs/app/api-reference/file-conventions/parallel-routes) s
 To maintain previous behavior, create a [`default.js`](/docs/app/api-reference/file-conventions/default) file that calls `notFound()` or returns `null`.
 
 ```tsx filename="app/@modal/default.tsx"
-import { notFound } from 'next/navigation'
+import { notFound } from "next/navigation";
 
 export default function Default() {
-  notFound()
+  notFound();
 }
 ```
 
@@ -941,7 +941,7 @@ Or return `null`:
 
 ```tsx filename="app/@modal/default.tsx"
 export default function Default() {
-  return null
+  return null;
 }
 ```
 
@@ -973,7 +973,7 @@ export default function RootLayout({ children }) {
     <html lang="en" data-scroll-behavior="smooth">
       <body>{children}</body>
     </html>
-  )
+  );
 }
 ```
 
@@ -1001,19 +1001,19 @@ A consequence of this change is that, when running `next dev` checking if `proce
 This is specially important for plugins that trigger side-effects on `next dev`. If that's the case, it might be enough to check if `NODE_ENV` is set to `development`.
 
 ```js filename="next.config.js"
-import { startServer } from 'docs-lib/dev-server'
+import { startServer } from "docs-lib/dev-server";
 
-const isDev = process.env.NODE_ENV === 'development'
+const isDev = process.env.NODE_ENV === "development";
 
 if (isDev) {
-  startServer()
+  startServer();
 }
 
 const nextConfig = {
   /* Your config options */
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 Alternatively, use the [`phase`](/docs/app/api-reference/config/next-config-js#phase) in which the configuration is loaded.
@@ -1027,11 +1027,11 @@ Build Adapters allow you to create custom adapters that hook into the build proc
 ```js filename="next.config.js"
 const nextConfig = {
   experimental: {
-    adapterPath: require.resolve('./my-adapter.js'),
+    adapterPath: require.resolve("./my-adapter.js"),
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 Share your feedback in the [RFC discussion](https://github.com/vercel/next.js/discussions/77740).
@@ -1053,10 +1053,10 @@ AMP adoption has declined significantly, and maintaining this feature adds compl
 
 ```tsx
 // Removed
-import { useAmp } from 'next/amp'
+import { useAmp } from "next/amp";
 
 // Removed
-export const config = { amp: true }
+export const config = { amp: true };
 ```
 
 - `export const config = { amp: true }` from pages
@@ -1065,11 +1065,11 @@ export const config = { amp: true }
 const nextConfig = {
   // Removed
   amp: {
-    canonicalBase: 'https://example.com',
+    canonicalBase: "https://example.com",
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 Evaluate if AMP is still necessary for your use case. Most performance benefits can now be achieved through Next.js's built-in optimizations and modern web standards.
@@ -1103,9 +1103,9 @@ The `eslint` option in the Next.js config file is also removed.
 const nextConfig = {
   // No longer supported
   // eslint: {},
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 ### Runtime Configuration
@@ -1120,17 +1120,17 @@ module.exports = {
     dbUrl: process.env.DATABASE_URL,
   },
   publicRuntimeConfig: {
-    apiUrl: '/api',
+    apiUrl: "/api",
   },
-}
+};
 ```
 
 ```tsx filename="pages/index.tsx"
-import getConfig from 'next/config'
+import getConfig from "next/config";
 
 export default function Page() {
-  const { publicRuntimeConfig } = getConfig()
-  return <p>API URL: {publicRuntimeConfig.apiUrl}</p>
+  const { publicRuntimeConfig } = getConfig();
+  return <p>API URL: {publicRuntimeConfig.apiUrl}</p>;
 }
 ```
 
@@ -1140,14 +1140,14 @@ For server-only values, access environment variables directly in Server Componen
 
 ```tsx filename="app/page.tsx"
 async function fetchData() {
-  const dbUrl = process.env.DATABASE_URL
+  const dbUrl = process.env.DATABASE_URL;
   // Use for server-side operations only
-  return await db.query(dbUrl, 'SELECT * FROM users')
+  return await db.query(dbUrl, "SELECT * FROM users");
 }
 
 export default async function Page() {
-  const data = await fetchData()
-  return <div>{/* render data */}</div>
+  const data = await fetchData();
+  return <div>{/* render data */}</div>;
 }
 ```
 
@@ -1160,23 +1160,23 @@ NEXT_PUBLIC_API_URL="/api"
 ```
 
 ```tsx filename="app/components/client-component.tsx"
-'use client'
+"use client";
 
 export default function ClientComponent() {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL
-  return <p>API URL: {apiUrl}</p>
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  return <p>API URL: {apiUrl}</p>;
 }
 ```
 
 To ensure environment variables are read at runtime (not bundled at build time), use the [`connection()`](/docs/app/api-reference/functions/connection) function before reading from `process.env`:
 
 ```tsx filename="app/page.tsx"
-import { connection } from 'next/server'
+import { connection } from "next/server";
 
 export default async function Page() {
-  await connection()
-  const config = process.env.RUNTIME_CONFIG
-  return <p>{config}</p>
+  await connection();
+  const config = process.env.RUNTIME_CONFIG;
+  return <p>{config}</p>;
 }
 ```
 
@@ -1204,7 +1204,7 @@ module.exports = {
   experimental: {
     dynamicIO: true,
   },
-}
+};
 ```
 
 Add the [`cacheComponents`](/docs/app/api-reference/config/next-config-js/cacheComponents) flag set to true.
@@ -1213,7 +1213,7 @@ Add the [`cacheComponents`](/docs/app/api-reference/config/next-config-js/cacheC
 // Next.js 16 - use cacheComponents instead
 module.exports = {
   cacheComponents: true,
-}
+};
 ```
 
 ### `unstable_rootParams`

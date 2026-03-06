@@ -3,18 +3,18 @@
 `draftMode` is an **async** function allows you to enable and disable [Draft Mode](/docs/app/guides/draft-mode), as well as check if Draft Mode is enabled in a [Server Component](/docs/app/getting-started/server-and-client-components).
 
 ```tsx filename="app/page.ts" switcher
-import { draftMode } from 'next/headers'
+import { draftMode } from "next/headers";
 
 export default async function Page() {
-  const { isEnabled } = await draftMode()
+  const { isEnabled } = await draftMode();
 }
 ```
 
 ```jsx filename="app/page.js" switcher
-import { draftMode } from 'next/headers'
+import { draftMode } from "next/headers";
 
 export default async function Page() {
-  const { isEnabled } = await draftMode()
+  const { isEnabled } = await draftMode();
 }
 ```
 
@@ -42,22 +42,22 @@ The following methods and properties are available:
 To enable Draft Mode, create a new [Route Handler](/docs/app/api-reference/file-conventions/route) and call the `enable()` method:
 
 ```tsx filename="app/draft/route.ts" switcher
-import { draftMode } from 'next/headers'
+import { draftMode } from "next/headers";
 
 export async function GET(request: Request) {
-  const draft = await draftMode()
-  draft.enable()
-  return new Response('Draft mode is enabled')
+  const draft = await draftMode();
+  draft.enable();
+  return new Response("Draft mode is enabled");
 }
 ```
 
 ```js filename="app/draft/route.js" switcher
-import { draftMode } from 'next/headers'
+import { draftMode } from "next/headers";
 
 export async function GET(request) {
-  const draft = await draftMode()
-  draft.enable()
-  return new Response('Draft mode is enabled')
+  const draft = await draftMode();
+  draft.enable();
+  return new Response("Draft mode is enabled");
 }
 ```
 
@@ -68,22 +68,22 @@ By default, the Draft Mode session ends when the browser is closed.
 To disable Draft Mode manually, call the `disable()` method in your [Route Handler](/docs/app/api-reference/file-conventions/route):
 
 ```tsx filename="app/draft/route.ts" switcher
-import { draftMode } from 'next/headers'
+import { draftMode } from "next/headers";
 
 export async function GET(request: Request) {
-  const draft = await draftMode()
-  draft.disable()
-  return new Response('Draft mode is disabled')
+  const draft = await draftMode();
+  draft.disable();
+  return new Response("Draft mode is disabled");
 }
 ```
 
 ```js filename="app/draft/route.js" switcher
-import { draftMode } from 'next/headers'
+import { draftMode } from "next/headers";
 
 export async function GET(request) {
-  const draft = await draftMode()
-  draft.disable()
-  return new Response('Draft mode is disabled')
+  const draft = await draftMode();
+  draft.disable();
+  return new Response("Draft mode is disabled");
 }
 ```
 
@@ -94,30 +94,30 @@ Then, send a request to invoke the Route Handler. If calling the route using the
 You can check if Draft Mode is enabled in a Server Component with the `isEnabled` property:
 
 ```tsx filename="app/page.ts" switcher
-import { draftMode } from 'next/headers'
+import { draftMode } from "next/headers";
 
 export default async function Page() {
-  const { isEnabled } = await draftMode()
+  const { isEnabled } = await draftMode();
   return (
     <main>
       <h1>My Blog Post</h1>
-      <p>Draft Mode is currently {isEnabled ? 'Enabled' : 'Disabled'}</p>
+      <p>Draft Mode is currently {isEnabled ? "Enabled" : "Disabled"}</p>
     </main>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/page.js" switcher
-import { draftMode } from 'next/headers'
+import { draftMode } from "next/headers";
 
 export default async function Page() {
-  const { isEnabled } = await draftMode()
+  const { isEnabled } = await draftMode();
   return (
     <main>
       <h1>My Blog Post</h1>
-      <p>Draft Mode is currently {isEnabled ? 'Enabled' : 'Disabled'}</p>
+      <p>Draft Mode is currently {isEnabled ? "Enabled" : "Disabled"}</p>
     </main>
-  )
+  );
 }
 ```
 

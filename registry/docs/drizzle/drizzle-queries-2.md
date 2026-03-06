@@ -22,7 +22,7 @@ const db = drizzle({ schema });
 
 const result = await db._query.users.findMany({
 	with: {
-		posts: true			
+		posts: true
 	},
 });
 ```
@@ -86,7 +86,7 @@ const db = drizzle({ schema: { ...schema1, ...schema2 } });
 
 const result = await db._query.users.findMany({
 	with: {
-		posts: true			
+		posts: true
 	},
 });
 ```
@@ -112,7 +112,7 @@ When using **mysql2** driver with regular **MySQL** database — you should spec
 When using **mysql2** driver with **PlanetScale** — you need to specify `mode: "planetscale"`
 
 ```ts copy
-import * as schema from './schema';
+import * as schema from "./schema";
 import { drizzle } from "drizzle-orm/mysql2";
 import mysql from "mysql2/promise";
 
@@ -120,7 +120,7 @@ const connection = await mysql.createConnection({
   uri: process.env.PLANETSCALE_DATABASE_URL,
 });
 
-const db = drizzle({ client: connection, schema, mode: 'planetscale' });
+const db = drizzle({ client: connection, schema, mode: "planetscale" });
 ```
 
 ## Querying
@@ -246,10 +246,10 @@ const users = await db._query.users.findMany();
 ```ts
 // result type
 const result: {
-	id: number;
-	name: string;
-	verified: boolean;
-	invitedBy: number | null;
+  id: number;
+  name: string;
+  verified: boolean;
+  invitedBy: number | null;
 }[];
 ```
 
@@ -283,9 +283,9 @@ const result: {
 
 ```typescript copy
 const posts = await db._query.posts.findMany({
-	with: {
-		comments: true,
-	},
+  with: {
+    comments: true,
+  },
 });
 ```
 
@@ -293,9 +293,9 @@ const posts = await db._query.posts.findMany({
 
 ```typescript copy
 const post = await db._query.posts.findFirst({
-	with: {
-		comments: true,
-	},
+  with: {
+    comments: true,
+  },
 });
 ```
 
@@ -306,13 +306,13 @@ For any nested `with` queries Drizzle will infer types using [Core Type API](/do
 
 ```typescript copy
 const users = await db._query.users.findMany({
-	with: {
-		posts: {
-			with: {
-				comments: true,
-			},
-		},
-	},
+  with: {
+    posts: {
+      with: {
+        comments: true,
+      },
+    },
+  },
 });
 ```
 
@@ -329,13 +329,13 @@ Keep in mind that **a single SQL statement is outputted by Drizzle.** </Callout>
 
 ```typescript copy
 const posts = await db._query.posts.findMany({
-	columns: {
-		id: true,
-		content: true,
-	},
-	with: {
-		comments: true,
-	}
+  columns: {
+    id: true,
+    content: true,
+  },
+  with: {
+    comments: true,
+  },
 });
 ```
 
@@ -343,9 +343,9 @@ const posts = await db._query.posts.findMany({
 
 ```typescript copy
 const posts = await db._query.posts.findMany({
-	columns: {
-		content: false,
-	},
+  columns: {
+    content: false,
+  },
 });
 ```
 
@@ -403,17 +403,17 @@ Just like with **[`partial select`](#partial-select)**, you can include or exclu
 
 ```typescript copy
 const posts = await db._query.posts.findMany({
-	columns: {
-		id: true,
-		content: true,
-	},
-	with: {
-		comments: {
-			columns: {
-				authorId: false
-			}
-		}
-	}
+  columns: {
+    id: true,
+    content: true,
+  },
+  with: {
+    comments: {
+      columns: {
+        authorId: false,
+      },
+    },
+  },
 });
 ```
 
@@ -445,12 +445,12 @@ Find post with `id=1` and comments that were created before particular date:
 
 ```typescript copy
 await db._query.posts.findMany({
-	where: (posts, { eq }) => (eq(posts.id, 1)),
-	with: {
-		comments: {
-			where: (comments, { lt }) => lt(comments.createdAt, new Date()),
-		},
-	},
+  where: (posts, { eq }) => eq(posts.id, 1),
+  with: {
+    comments: {
+      where: (comments, { lt }) => lt(comments.createdAt, new Date()),
+    },
+  },
 });
 ```
 
@@ -462,7 +462,7 @@ Drizzle ORM provides `limit` & `offset` API for queries and for the nested entit
 
 ```typescript copy
 await db._query.posts.findMany({
-	limit: 5,
+  limit: 5,
 });
 ```
 
@@ -470,11 +470,11 @@ await db._query.posts.findMany({
 
 ```typescript copy
 await db._query.posts.findMany({
-	with: {
-		comments: {
-			limit: 3,
-		},
-	},
+  with: {
+    comments: {
+      limit: 3,
+    },
+  },
 });
 ```
 
@@ -498,11 +498,11 @@ Find posts with comments from the 5th to the 10th post:
 
 ```typescript copy
 await db._query.posts.findMany({
-	limit: 5,
+  limit: 5,
   offset: 5,
-	with: {
-		comments: true,
-	},
+  with: {
+    comments: true,
+  },
 });
 ```
 
@@ -534,12 +534,12 @@ await db._query.posts.findMany({
 
 ```typescript copy
 await db._query.posts.findMany({
-	orderBy: (posts, { asc }) => [asc(posts.id)],
-	with: {
-		comments: {
-			orderBy: (comments, { desc }) => [desc(comments.id)],
-		},
-	},
+  orderBy: (posts, { asc }) => [asc(posts.id)],
+  with: {
+    comments: {
+      orderBy: (comments, { desc }) => [desc(comments.id)],
+    },
+  },
 });
 ```
 
@@ -555,7 +555,7 @@ import { sql } from 'drizzle-orm';
 
 await db.\_query.users.findMany({
 extras: {
-loweredName: sql`lower(${users.name})`.as('lowered\_name'),
+loweredName: sql`lower(${users.name})`.as('lowered_name'),
 },
 })
 
@@ -635,19 +635,19 @@ const res = await db._query.posts.findMany({
 ```ts
 // result type
 const res: {
-	id: number;
-	createdAt: Date;
-	content: string;
-	authorId: number | null;
-	contentLength: number;
-	comments: {
-			id: number;
-			createdAt: Date;
-			content: string;
-			creator: number | null;
-			postId: number | null;
-			commentSize: number;
-	}[];
+  id: number;
+  createdAt: Date;
+  content: string;
+  authorId: number | null;
+  contentLength: number;
+  comments: {
+    id: number;
+    createdAt: Date;
+    content: string;
+    creator: number | null;
+    postId: number | null;
+    commentSize: number;
+  }[];
 };
 ```
 

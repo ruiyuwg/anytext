@@ -47,21 +47,21 @@ bun add @next/mdx @mdx-js/loader @mdx-js/react @types/mdx
 Update the `next.config.mjs` file at your project's root to configure it to use MDX:
 
 ```js filename="next.config.mjs"
-import createMDX from '@next/mdx'
+import createMDX from "@next/mdx";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Configure `pageExtensions` to include markdown and MDX files
-  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
+  pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   // Optionally, add any other Next.js config below
-}
+};
 
 const withMDX = createMDX({
   // Add markdown plugins here, as desired
-})
+});
 
 // Merge MDX config with Next.js config
-export default withMDX(nextConfig)
+export default withMDX(nextConfig);
 ```
 
 This allows `.mdx` files to act as pages, routes, or imports in your application.
@@ -73,7 +73,7 @@ By default, `next/mdx` only compiles files with the `.mdx` extension. To handle 
 ```js filename="next.config.mjs"
 const withMDX = createMDX({
   extension: /\.(md|mdx)$/,
-})
+});
 ```
 
 ## Add an `mdx-components.tsx` file
@@ -81,20 +81,20 @@ const withMDX = createMDX({
 Create an `mdx-components.tsx` (or `.js`) file in the root of your project to define global MDX Components. For example, at the same level as `pages` or `app`, or inside `src` if applicable.
 
 ```tsx filename="mdx-components.tsx" switcher
-import type { MDXComponents } from 'mdx/types'
+import type { MDXComponents } from "mdx/types";
 
-const components: MDXComponents = {}
+const components: MDXComponents = {};
 
 export function useMDXComponents(): MDXComponents {
-  return components
+  return components;
 }
 ```
 
 ```js filename="mdx-components.js" switcher
-const components = {}
+const components = {};
 
 export function useMDXComponents() {
-  return components
+  return components;
 }
 ```
 
@@ -125,7 +125,7 @@ Create a new MDX page within the `/pages` directory:
 You can use MDX in these files, and even import React components, directly inside your MDX page:
 
 ```mdx
-import { MyComponent } from 'my-component'
+import { MyComponent } from "my-component";
 
 # Welcome to my MDX page!
 
@@ -161,7 +161,7 @@ Create a new page within the `/pages` directory and an MDX file wherever you'd l
 You can use MDX in these files, and even import React components, directly inside your MDX page:
 
 ```mdx filename="markdown/welcome.mdx" switcher
-import { MyComponent } from 'my-component'
+import { MyComponent } from "my-component";
 
 # Welcome to my MDX page!
 
@@ -181,18 +181,18 @@ Checkout my React component:
 Import the MDX file inside the page to display the content:
 
 ```tsx filename="pages/mdx-page.tsx" switcher
-import Welcome from '@/markdown/welcome.mdx'
+import Welcome from "@/markdown/welcome.mdx";
 
 export default function Page() {
-  return <Welcome />
+  return <Welcome />;
 }
 ```
 
 ```jsx filename="pages/mdx-page.js" switcher
-import Welcome from '@/markdown/welcome.mdx'
+import Welcome from "@/markdown/welcome.mdx";
 
 export default function Page() {
-  return <Welcome />
+  return <Welcome />;
 }
 ```
 
@@ -230,11 +230,11 @@ To style your markdown, you can provide custom components that map to the genera
 
 ### Global styles and components
 
-Adding styles and components in `mdx-components.tsx` will affect *all* MDX files in your application.
+Adding styles and components in `mdx-components.tsx` will affect _all_ MDX files in your application.
 
 ```tsx filename="mdx-components.tsx" switcher
-import type { MDXComponents } from 'mdx/types'
-import Image, { ImageProps } from 'next/image'
+import type { MDXComponents } from "mdx/types";
+import Image, { ImageProps } from "next/image";
 
 // This file allows you to provide custom React components
 // to be used in MDX files. You can import and use any
@@ -244,24 +244,24 @@ import Image, { ImageProps } from 'next/image'
 const components = {
   // Allows customizing built-in components, e.g. to add styling.
   h1: ({ children }) => (
-    <h1 style={{ color: 'red', fontSize: '48px' }}>{children}</h1>
+    <h1 style={{ color: "red", fontSize: "48px" }}>{children}</h1>
   ),
   img: (props) => (
     <Image
       sizes="100vw"
-      style={{ width: '100%', height: 'auto' }}
+      style={{ width: "100%", height: "auto" }}
       {...(props as ImageProps)}
     />
   ),
-} satisfies MDXComponents
+} satisfies MDXComponents;
 
 export function useMDXComponents(): MDXComponents {
-  return components
+  return components;
 }
 ```
 
 ```js filename="mdx-components.js" switcher
-import Image from 'next/image'
+import Image from "next/image";
 
 // This file allows you to provide custom React components
 // to be used in MDX files. You can import and use any
@@ -271,15 +271,15 @@ import Image from 'next/image'
 const components = {
   // Allows customizing built-in components, e.g. to add styling.
   h1: ({ children }) => (
-    <h1 style={{ color: 'red', fontSize: '48px' }}>{children}</h1>
+    <h1 style={{ color: "red", fontSize: "48px" }}>{children}</h1>
   ),
   img: (props) => (
-    <Image sizes="100vw" style={{ width: '100%', height: 'auto' }} {...props} />
+    <Image sizes="100vw" style={{ width: "100%", height: "auto" }} {...props} />
   ),
-}
+};
 
 export function useMDXComponents() {
-  return components
+  return components;
 }
 ```
 
@@ -288,34 +288,34 @@ export function useMDXComponents() {
 You can apply local styles and components to specific pages by passing them into imported MDX components. These will merge with and override [global styles and components](#global-styles-and-components).
 
 ```tsx filename="pages/mdx-page.tsx" switcher
-import Welcome from '@/markdown/welcome.mdx'
+import Welcome from "@/markdown/welcome.mdx";
 
 function CustomH1({ children }) {
-  return <h1 style={{ color: 'blue', fontSize: '100px' }}>{children}</h1>
+  return <h1 style={{ color: "blue", fontSize: "100px" }}>{children}</h1>;
 }
 
 const overrideComponents = {
   h1: CustomH1,
-}
+};
 
 export default function Page() {
-  return <Welcome components={overrideComponents} />
+  return <Welcome components={overrideComponents} />;
 }
 ```
 
 ```jsx filename="pages/mdx-page.js" switcher
-import Welcome from '@/markdown/welcome.mdx'
+import Welcome from "@/markdown/welcome.mdx";
 
 function CustomH1({ children }) {
-  return <h1 style={{ color: 'blue', fontSize: '100px' }}>{children}</h1>
+  return <h1 style={{ color: "blue", fontSize: "100px" }}>{children}</h1>;
 }
 
 const overrideComponents = {
   h1: CustomH1,
-}
+};
 
 export default function Page() {
-  return <Welcome components={overrideComponents} />
+  return <Welcome components={overrideComponents} />;
 }
 ```
 
@@ -326,21 +326,21 @@ To share a layout around MDX pages, create a layout component:
 ```tsx filename="components/mdx-layout.tsx" switcher
 export default function MdxLayout({ children }: { children: React.ReactNode }) {
   // Create any shared layout or styles here
-  return <div style={{ color: 'blue' }}>{children}</div>
+  return <div style={{ color: "blue" }}>{children}</div>;
 }
 ```
 
 ```jsx filename="components/mdx-layout.js" switcher
 export default function MdxLayout({ children }) {
   // Create any shared layout or styles here
-  return <div style={{ color: 'blue' }}>{children}</div>
+  return <div style={{ color: "blue" }}>{children}</div>;
 }
 ```
 
 Then, import the layout component into the MDX page, wrap the MDX content in the layout, and export it:
 
 ```mdx
-import MdxLayout from '../components/mdx-layout'
+import MdxLayout from "../components/mdx-layout";
 
 # Welcome to my MDX page!
 
@@ -367,7 +367,7 @@ export default function MdxLayout({ children }: { children: React.ReactNode }) {
     <div className="prose prose-headings:mt-8 prose-headings:font-semibold prose-headings:text-black prose-h1:text-5xl prose-h2:text-4xl prose-h3:text-3xl prose-h4:text-2xl prose-h5:text-xl prose-h6:text-lg dark:prose-headings:text-white">
       {children}
     </div>
-  )
+  );
 }
 ```
 
@@ -378,14 +378,14 @@ export default function MdxLayout({ children }) {
     <div className="prose prose-headings:mt-8 prose-headings:font-semibold prose-headings:text-black prose-h1:text-5xl prose-h2:text-4xl prose-h3:text-3xl prose-h4:text-2xl prose-h5:text-xl prose-h6:text-lg dark:prose-headings:text-white">
       {children}
     </div>
-  )
+  );
 }
 ```
 
 Then, import the layout component into the MDX page, wrap the MDX content in the layout, and export it:
 
 ```mdx
-import MdxLayout from '../components/mdx-layout'
+import MdxLayout from "../components/mdx-layout";
 
 # Welcome to my MDX page!
 
@@ -407,8 +407,8 @@ Frontmatter is a YAML like key/value pairing that can be used to store data abou
 
 ```mdx filename="content/blog-post.mdx" switcher
 export const metadata = {
-  author: 'John Doe',
-}
+  author: "John Doe",
+};
 
 # Blog post
 ```
@@ -416,22 +416,22 @@ export const metadata = {
 Metadata can now be referenced outside of the MDX file:
 
 ```tsx filename="pages/blog.tsx" switcher
-import BlogPost, { metadata } from '@/content/blog-post.mdx'
+import BlogPost, { metadata } from "@/content/blog-post.mdx";
 
 export default function Page() {
-  console.log('metadata: ', metadata)
+  console.log("metadata: ", metadata);
   //=> { author: 'John Doe' }
-  return <BlogPost />
+  return <BlogPost />;
 }
 ```
 
 ```jsx filename="pages/blog.js" switcher
-import BlogPost, { metadata } from '@/content/blog-post.mdx'
+import BlogPost, { metadata } from "@/content/blog-post.mdx";
 
 export default function Page() {
-  console.log('metadata: ', metadata)
+  console.log("metadata: ", metadata);
   //=> { author: 'John Doe' }
-  return <BlogPost />
+  return <BlogPost />;
 }
 ```
 
@@ -451,15 +451,15 @@ For example, you can use [`remark-gfm`](https://github.com/remarkjs/remark-gfm) 
 Since the remark and rehype ecosystem is ESM only, you'll need to use `next.config.mjs` or `next.config.ts` as the configuration file.
 
 ```js filename="next.config.mjs"
-import remarkGfm from 'remark-gfm'
-import createMDX from '@next/mdx'
+import remarkGfm from "remark-gfm";
+import createMDX from "@next/mdx";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Allow .mdx extensions for files
-  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
+  pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   // Optionally, add any other Next.js config below
-}
+};
 
 const withMDX = createMDX({
   // Add markdown plugins here, as desired
@@ -467,10 +467,10 @@ const withMDX = createMDX({
     remarkPlugins: [remarkGfm],
     rehypePlugins: [],
   },
-})
+});
 
 // Combine MDX and Next.js config
-export default withMDX(nextConfig)
+export default withMDX(nextConfig);
 ```
 
 ### Using Plugins with Turbopack
@@ -478,31 +478,31 @@ export default withMDX(nextConfig)
 To use plugins with [Turbopack](/docs/app/api-reference/turbopack), upgrade to the latest `@next/mdx` and specify plugin names using a string:
 
 ```js filename="next.config.mjs"
-import createMDX from '@next/mdx'
+import createMDX from "@next/mdx";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
-}
+  pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
+};
 
 const withMDX = createMDX({
   options: {
     remarkPlugins: [
       // Without options
-      'remark-gfm',
+      "remark-gfm",
       // With options
-      ['remark-toc', { heading: 'The Table' }],
+      ["remark-toc", { heading: "The Table" }],
     ],
     rehypePlugins: [
       // Without options
-      'rehype-slug',
+      "rehype-slug",
       // With options
-      ['rehype-katex', { strict: true, throwOnError: true }],
+      ["rehype-katex", { strict: true, throwOnError: true }],
     ],
   },
-})
+});
 
-export default withMDX(nextConfig)
+export default withMDX(nextConfig);
 ```
 
 > **Good to know**:
@@ -516,13 +516,13 @@ React does not natively understand markdown. The markdown plaintext needs to fir
 `remark` is an ecosystem of tools around markdown. `rehype` is the same, but for HTML. For example, the following code snippet transforms markdown into HTML:
 
 ```js
-import { unified } from 'unified'
-import remarkParse from 'remark-parse'
-import remarkRehype from 'remark-rehype'
-import rehypeSanitize from 'rehype-sanitize'
-import rehypeStringify from 'rehype-stringify'
+import { unified } from "unified";
+import remarkParse from "remark-parse";
+import remarkRehype from "remark-rehype";
+import rehypeSanitize from "rehype-sanitize";
+import rehypeStringify from "rehype-stringify";
 
-main()
+main();
 
 async function main() {
   const file = await unified()
@@ -530,9 +530,9 @@ async function main() {
     .use(remarkRehype) // Transform to HTML AST
     .use(rehypeSanitize) // Sanitize HTML input
     .use(rehypeStringify) // Convert AST into serialized HTML
-    .process('Hello, Next.js!')
+    .process("Hello, Next.js!");
 
-  console.log(String(file)) // <p>Hello, Next.js!</p>
+  console.log(String(file)); // <p>Hello, Next.js!</p>
 }
 ```
 
@@ -549,7 +549,7 @@ module.exports = withMDX({
   experimental: {
     mdxRs: true,
   },
-})
+});
 ```
 
 `mdxRs` also accepts an object to configure how to transform mdx files.

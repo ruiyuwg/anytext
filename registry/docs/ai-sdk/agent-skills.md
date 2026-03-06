@@ -17,23 +17,23 @@ To use skills, you need to:
 2. Specify the container with skills in `providerOptions`
 
 ```ts highlight="4,9-17,19-23"
-import { anthropic, AnthropicLanguageModelOptions } from '@ai-sdk/anthropic';
-import { generateText } from 'ai';
+import { anthropic, AnthropicLanguageModelOptions } from "@ai-sdk/anthropic";
+import { generateText } from "ai";
 
 const result = await generateText({
-  model: anthropic('claude-sonnet-4-5'),
+  model: anthropic("claude-sonnet-4-5"),
   tools: {
     code_execution: anthropic.tools.codeExecution_20260120(),
   },
-  prompt: 'Create a presentation about renewable energy with 5 slides',
+  prompt: "Create a presentation about renewable energy with 5 slides",
   providerOptions: {
     anthropic: {
       container: {
         skills: [
           {
-            type: 'anthropic',
-            skillId: 'pptx',
-            version: 'latest', // optional
+            type: "anthropic",
+            skillId: "pptx",
+            version: "latest", // optional
           },
         ],
       },
@@ -48,19 +48,19 @@ You can also use custom skills by specifying `type: 'custom'`:
 
 ```ts highlight="9-11"
 const result = await generateText({
-  model: anthropic('claude-sonnet-4-5'),
+  model: anthropic("claude-sonnet-4-5"),
   tools: {
     code_execution: anthropic.tools.codeExecution_20260120(),
   },
-  prompt: 'Use my custom skill to process this data',
+  prompt: "Use my custom skill to process this data",
   providerOptions: {
     anthropic: {
       container: {
         skills: [
           {
-            type: 'custom',
-            skillId: 'my-custom-skill-id',
-            version: '1.0', // optional
+            type: "custom",
+            skillId: "my-custom-skill-id",
+            version: "1.0", // optional
           },
         ],
       },
@@ -81,21 +81,21 @@ Option 1: URL-based PDF document
 
 ```ts
 const result = await generateText({
-  model: anthropic('claude-sonnet-4-5'),
+  model: anthropic("claude-sonnet-4-5"),
   messages: [
     {
-      role: 'user',
+      role: "user",
       content: [
         {
-          type: 'text',
-          text: 'What is an embedding model according to this document?',
+          type: "text",
+          text: "What is an embedding model according to this document?",
         },
         {
-          type: 'file',
+          type: "file",
           data: new URL(
-            'https://github.com/vercel/ai/blob/main/examples/ai-functions/data/ai.pdf?raw=true',
+            "https://github.com/vercel/ai/blob/main/examples/ai-functions/data/ai.pdf?raw=true",
           ),
-          mimeType: 'application/pdf',
+          mimeType: "application/pdf",
         },
       ],
     },
@@ -107,19 +107,19 @@ Option 2: Base64-encoded PDF document
 
 ```ts
 const result = await generateText({
-  model: anthropic('claude-sonnet-4-5'),
+  model: anthropic("claude-sonnet-4-5"),
   messages: [
     {
-      role: 'user',
+      role: "user",
       content: [
         {
-          type: 'text',
-          text: 'What is an embedding model according to this document?',
+          type: "text",
+          text: "What is an embedding model according to this document?",
         },
         {
-          type: 'file',
-          data: fs.readFileSync('./data/ai.pdf'),
-          mediaType: 'application/pdf',
+          type: "file",
+          data: fs.readFileSync("./data/ai.pdf"),
+          mediaType: "application/pdf",
         },
       ],
     },
@@ -134,16 +134,16 @@ and the `mediaType` should be set to `'application/pdf'`.
 
 ### Model Capabilities
 
-| Model               | Image Input         | Object Generation   | Tool Usage          | Computer Use        | Web Search          | Tool Search         | Compaction          |
-| ------------------- | ------------------- | ------------------- | ------------------- | ------------------- | ------------------- | ------------------- | ------------------- |
-| `claude-opus-4-6`   |  |  |  |  |  |  |  |
-| `claude-sonnet-4-6` |  |  |  |  |  |  |                     |
-| `claude-opus-4-5`   |  |  |  |  |  |  |                     |
-| `claude-haiku-4-5`  |  |  |  |  |  |                     |                     |
-| `claude-sonnet-4-5` |  |  |  |  |  |  |                     |
-| `claude-opus-4-1`   |  |  |  |  |  |                     |                     |
-| `claude-opus-4-0`   |  |  |  |  |  |                     |                     |
-| `claude-sonnet-4-0` |  |  |  |  |  |                     |                     |
+| Model               | Image Input | Object Generation | Tool Usage | Computer Use | Web Search | Tool Search | Compaction |
+| ------------------- | ----------- | ----------------- | ---------- | ------------ | ---------- | ----------- | ---------- |
+| `claude-opus-4-6`   |             |                   |            |              |            |             |            |
+| `claude-sonnet-4-6` |             |                   |            |              |            |             |            |
+| `claude-opus-4-5`   |             |                   |            |              |            |             |            |
+| `claude-haiku-4-5`  |             |                   |            |              |            |             |            |
+| `claude-sonnet-4-5` |             |                   |            |              |            |             |            |
+| `claude-opus-4-1`   |             |                   |            |              |            |             |            |
+| `claude-opus-4-0`   |             |                   |            |              |            |             |            |
+| `claude-sonnet-4-0` |             |                   |            |              |            |             |            |
 
 The table above lists popular models. Please see the [Anthropic
 docs](https://docs.anthropic.com/en/docs/about-claude/models) for a full list

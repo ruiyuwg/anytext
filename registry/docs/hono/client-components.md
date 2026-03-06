@@ -17,20 +17,20 @@ import { render } from 'hono/jsx/dom'
 function Counter() {
   const [count, setCount] = useState(0)
   return (
-    
+
       Count: {count}
        setCount(count + 1)}>Increment
-    
+
   )
 }
 
 function App() {
   return (
-    
-      
-        
-      
-    
+
+
+
+
+
   )
 }
 
@@ -93,7 +93,7 @@ export default function App() {
   const [showLargeImage, setShowLargeImage] = useState(false)
   return (
     <>
-      
+
       <button
         onClick={() =>
           startViewTransition(() =>
@@ -102,10 +102,10 @@ export default function App() {
         }
       >
         Click!
-      
-      
+
+
         {!showLargeImage ? (
-          
+
         ) : (
           <div
             class={css`
@@ -118,7 +118,7 @@ export default function App() {
             `}
           >
         )}
-      
+
     </>
   )
 }
@@ -158,7 +158,7 @@ export default function App() {
   )
   return (
     <>
-      
+
       <button
         onClick={() =>
           startViewTransition(() =>
@@ -167,10 +167,10 @@ export default function App() {
         }
       >
         Click!
-      
-      
+
+
         {!showLargeImage ? (
-          
+
         ) : (
           <div
             class={css`
@@ -184,7 +184,7 @@ export default function App() {
             `}
           >
         )}
-      
+
     </>
   )
 }
@@ -228,7 +228,7 @@ export default function App() {
   )
   return (
     <>
-      
+
       <button
         onClick={() =>
           startViewTransition(() =>
@@ -237,10 +237,10 @@ export default function App() {
         }
       >
         Click!
-      
-      
+
+
         {!showLargeImage ? (
-          
+
         ) : (
           <div
             class={css`
@@ -264,7 +264,7 @@ export default function App() {
             `}
           >
         )}
-      
+
     </>
   )
 }
@@ -286,13 +286,13 @@ There is a small JSX Runtime for Client Components. Using this will result in sm
 Alternatively, you can specify `hono/jsx/dom` in the esbuild transform options in `vite.config.ts`.
 
 ```ts
-import { defineConfig } from 'vite'
+import { defineConfig } from "vite";
 
 export default defineConfig({
   esbuild: {
-    jsxImportSource: 'hono/jsx/dom',
+    jsxImportSource: "hono/jsx/dom",
   },
-})
+});
 ```
 
 # Miscellaneous

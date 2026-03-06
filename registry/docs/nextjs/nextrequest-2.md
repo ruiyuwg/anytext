@@ -14,7 +14,7 @@ Given a name, set a cookie with the given value on the request.
 // Given incoming request /home
 // Set a cookie to hide the banner
 // request will have a `Set-Cookie:show-banner=false;path=/home` header
-request.cookies.set('show-banner', 'false')
+request.cookies.set("show-banner", "false");
 ```
 
 ### `get(name)`
@@ -24,7 +24,7 @@ Given a cookie name, return the value of the cookie. If the cookie is not found,
 ```ts
 // Given incoming request /home
 // { name: 'show-banner', value: 'false', Path: '/home' }
-request.cookies.get('show-banner')
+request.cookies.get("show-banner");
 ```
 
 ### `getAll()`
@@ -37,9 +37,9 @@ Given a cookie name, return the values of the cookie. If no name is given, retur
 //   { name: 'experiments', value: 'new-pricing-page', Path: '/home' },
 //   { name: 'experiments', value: 'winter-launch', Path: '/home' },
 // ]
-request.cookies.getAll('experiments')
+request.cookies.getAll("experiments");
 // Alternatively, get all cookies for the request
-request.cookies.getAll()
+request.cookies.getAll();
 ```
 
 ### `delete(name)`
@@ -48,7 +48,7 @@ Given a cookie name, delete the cookie from the request.
 
 ```ts
 // Returns true for deleted, false is nothing is deleted
-request.cookies.delete('experiments')
+request.cookies.delete("experiments");
 ```
 
 ### `has(name)`
@@ -57,7 +57,7 @@ Given a cookie name, return `true` if the cookie exists on the request.
 
 ```ts
 // Returns true if cookie exists, false if it does not
-request.cookies.has('experiments')
+request.cookies.has("experiments");
 ```
 
 ### `clear()`
@@ -65,7 +65,7 @@ request.cookies.has('experiments')
 Remove all cookies from the request.
 
 ```ts
-request.cookies.clear()
+request.cookies.clear();
 ```
 
 ## `nextUrl`
@@ -74,25 +74,25 @@ Extends the native [`URL`](https://developer.mozilla.org/docs/Web/API/URL) API w
 
 ```ts
 // Given a request to /home, pathname is /home
-request.nextUrl.pathname
+request.nextUrl.pathname;
 // Given a request to /home?name=lee, searchParams is { 'name': 'lee' }
-request.nextUrl.searchParams
+request.nextUrl.searchParams;
 ```
 
 The following options are available:
 
-| Property          | Type                      | Description                                                                                                                            |
-| ----------------- | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| `basePath`        | `string`                  | The [base path](/docs/pages/api-reference/config/next-config-js/basePath) of the URL.                                                  |
-| `buildId`         | `string` | `undefined`   | The build identifier of the Next.js application. Can be [customized](/docs/pages/api-reference/config/next-config-js/generateBuildId). |
-| `defaultLocale`   | `string` | `undefined`   | The default locale for [internationalization](/docs/pages/guides/internationalization).                                                |
-| `domainLocale`    |                           |                                                                                                                                        |
-| - `defaultLocale` | `string`                  | The default locale within a domain.                                                                                                    |
-| - `domain`        | `string`                  | The domain associated with a specific locale.                                                                                          |
-| - `http`          | `boolean` | `undefined`  | Indicates if the domain is using HTTP.                                                                                                 |
-| `locales`         | `string[]` | `undefined` | An array of available locales.                                                                                                         |
-| `locale`          | `string` | `undefined`   | The currently active locale.                                                                                                           |
-| `url`             | `URL`                     | The URL object.                                                                                                                        |
+| Property          | Type       | Description                                                                           |
+| ----------------- | ---------- | ------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `basePath`        | `string`   | The [base path](/docs/pages/api-reference/config/next-config-js/basePath) of the URL. |
+| `buildId`         | `string`   | `undefined`                                                                           | The build identifier of the Next.js application. Can be [customized](/docs/pages/api-reference/config/next-config-js/generateBuildId). |
+| `defaultLocale`   | `string`   | `undefined`                                                                           | The default locale for [internationalization](/docs/pages/guides/internationalization).                                                |
+| `domainLocale`    |            |                                                                                       |
+| - `defaultLocale` | `string`   | The default locale within a domain.                                                   |
+| - `domain`        | `string`   | The domain associated with a specific locale.                                         |
+| - `http`          | `boolean`  | `undefined`                                                                           | Indicates if the domain is using HTTP.                                                                                                 |
+| `locales`         | `string[]` | `undefined`                                                                           | An array of available locales.                                                                                                         |
+| `locale`          | `string`   | `undefined`                                                                           | The currently active locale.                                                                                                           |
+| `url`             | `URL`      | The URL object.                                                                       |
 
 ## Version History
 

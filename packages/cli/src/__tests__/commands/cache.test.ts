@@ -7,8 +7,7 @@ vi.mock("../../cache.js", () => ({
 }));
 
 vi.mock("../../format.js", async (importOriginal) => {
-  const original =
-    await importOriginal<typeof import("../../format.js")>();
+  const original = await importOriginal<typeof import("../../format.js")>();
   return { ...original };
 });
 
@@ -18,7 +17,9 @@ describe("cacheCommand", () => {
     const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
     cacheCommand(["clear"]);
     expect(cache.clearCache).toHaveBeenCalled();
-    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("Cache cleared."));
+    expect(logSpy).toHaveBeenCalledWith(
+      expect.stringContaining("Cache cleared."),
+    );
   });
 
   it("shows status when cache exists", async () => {
@@ -31,7 +32,9 @@ describe("cacheCommand", () => {
 
     const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
     cacheCommand(["status"]);
-    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("/home/.anytext"));
+    expect(logSpy).toHaveBeenCalledWith(
+      expect.stringContaining("/home/.anytext"),
+    );
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("5m ago"));
   });
 
@@ -45,16 +48,16 @@ describe("cacheCommand", () => {
 
     const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
     cacheCommand(["status"]);
-    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("No cache found."));
+    expect(logSpy).toHaveBeenCalledWith(
+      expect.stringContaining("No cache found."),
+    );
   });
 
   it("errors on invalid subcommand", () => {
     const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
-    const exitSpy = vi
-      .spyOn(process, "exit")
-      .mockImplementation((() => {
-        throw new Error("process.exit");
-      }) as never);
+    const exitSpy = vi.spyOn(process, "exit").mockImplementation((() => {
+      throw new Error("process.exit");
+    }) as never);
 
     expect(() => cacheCommand(["invalid"])).toThrow("process.exit");
     expect(exitSpy).toHaveBeenCalledWith(1);
@@ -63,11 +66,9 @@ describe("cacheCommand", () => {
 
   it("errors on missing subcommand", () => {
     const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
-    const exitSpy = vi
-      .spyOn(process, "exit")
-      .mockImplementation((() => {
-        throw new Error("process.exit");
-      }) as never);
+    const exitSpy = vi.spyOn(process, "exit").mockImplementation((() => {
+      throw new Error("process.exit");
+    }) as never);
 
     expect(() => cacheCommand([])).toThrow("process.exit");
     expect(exitSpy).toHaveBeenCalledWith(1);

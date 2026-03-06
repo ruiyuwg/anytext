@@ -16,21 +16,21 @@ It's also not uncommon, where the deployed adapter is hard to run on local machi
 
 
   Standalone tRPC Server
-  
-    
+
+
       StackBlitz
       Source
-    
-  
+
+
 
 
   Standalone tRPC Server with CORS handling
-  
-    
+
+
       StackBlitz
       Source
-    
-  
+
+
 ```
 
 ## Setting up a Standalone tRPC Server
@@ -40,14 +40,14 @@ It's also not uncommon, where the deployed adapter is hard to run on local machi
 Implement your tRPC router. For example:
 
 ```ts title='appRouter.ts'
-import { initTRPC } from '@trpc/server';
-import { z } from 'zod';
+import { initTRPC } from "@trpc/server";
+import { z } from "zod";
 
 export const t = initTRPC.create();
 
 export const appRouter = t.router({
   getUser: t.procedure.input(z.string()).query((opts) => {
-    return { id: opts.input, name: 'Bilbo' };
+    return { id: opts.input, name: "Bilbo" };
   }),
   createUser: t.procedure
     .input(z.object({ name: z.string().min(5) }))
@@ -70,14 +70,14 @@ For more information you can look at the [quickstart guide](/docs/quickstart)
 The Standalone adapter runs a simple Node.js HTTP server.
 
 ```ts title='server.ts'
-import { initTRPC } from '@trpc/server';
-import { createHTTPServer } from '@trpc/server/adapters/standalone';
-import { appRouter } from './appRouter.ts';
+import { initTRPC } from "@trpc/server";
+import { createHTTPServer } from "@trpc/server/adapters/standalone";
+import { appRouter } from "./appRouter.ts";
 
 createHTTPServer({
   router: appRouter,
   createContext() {
-    console.log('context 3');
+    console.log("context 3");
     return {};
   },
   // basePath: '/trpc/', // optional, defaults to '/'
@@ -106,15 +106,15 @@ For full information on how to configure this package, [check the docs](https://
 This example just throws open CORS to any request, which is useful for development, but you can and should configure it more strictly in a production environment.
 
 ```ts title='server.ts'
-import { initTRPC } from '@trpc/server';
-import { createHTTPServer } from '@trpc/server/adapters/standalone';
-import cors from 'cors';
+import { initTRPC } from "@trpc/server";
+import { createHTTPServer } from "@trpc/server/adapters/standalone";
+import cors from "cors";
 
 createHTTPServer({
   middleware: cors(),
   router: appRouter,
   createContext() {
-    console.log('context 3');
+    console.log("context 3");
     return {};
   },
 }).listen(3333);
@@ -131,9 +131,9 @@ The `middleware` option will accept any function which resembles a connect/node.
 `createHTTPServer` is returning an instance of Node's built-in `http.Server`(https://nodejs.org/api/http.html#class-httpserver), which means that you have an access to all it's properties and APIs. However, if `createHTTPServer` isn't enough for your usecase, you can also use the standalone adapter's `createHTTPHandler` function to create your own HTTP server. For instance:
 
 ```ts title='server.ts'
-import { createServer } from 'http';
-import { initTRPC } from '@trpc/server';
-import { createHTTPHandler } from '@trpc/server/adapters/standalone';
+import { createServer } from "http";
+import { initTRPC } from "@trpc/server";
+import { createHTTPHandler } from "@trpc/server/adapters/standalone";
 
 const handler = createHTTPHandler({
   router: appRouter,
@@ -157,23 +157,23 @@ createServer((req, res) => {
 The Standalone adapter also supports a `basePath` option, which will slice the basePath from the beginning of the request path.
 
 ```ts title='server.ts'
-import { createServer } from 'http';
-import { initTRPC } from '@trpc/server';
-import { createHTTPHandler } from '@trpc/server/adapters/standalone';
+import { createServer } from "http";
+import { initTRPC } from "@trpc/server";
+import { createHTTPHandler } from "@trpc/server/adapters/standalone";
 
 const handler = createHTTPHandler({
   router: appRouter,
-  basePath: '/trpc/',
+  basePath: "/trpc/",
 });
 
 createServer((req, res) => {
-  if (req.url?.startsWith('/trpc/')) {
+  if (req.url?.startsWith("/trpc/")) {
     return handler(req, res);
   }
   // [... insert your custom logic here ...]
 
   res.statusCode = 404;
-  res.end('Not Found');
+  res.end("Not Found");
 }).listen(3001);
 ```
 
@@ -182,10 +182,10 @@ createServer((req, res) => {
 The Standalone adapter also supports HTTP/2.
 
 ```ts title='server.ts'
-import http2 from 'http2';
-import { createHTTP2Handler } from '@trpc/server/adapters/standalone';
-import { appRouter } from './_app.ts';
-import { createContext } from './context.ts';
+import http2 from "http2";
+import { createHTTP2Handler } from "@trpc/server/adapters/standalone";
+import { appRouter } from "./_app.ts";
+import { createContext } from "./context.ts";
 
 const handler = createHTTP2Handler({
   router: appRouter,
@@ -195,8 +195,8 @@ const handler = createHTTP2Handler({
 
 const server = http2.createSecureServer(
   {
-    key: '...',
-    cert: '...',
+    key: "...",
+    cert: "...",
   },
   (req, res) => {
     /**
@@ -211,7 +211,7 @@ server.listen(3001);
 ```
 
 ```ts twoslash title='context.ts'
-import { CreateHTTP2ContextOptions } from '@trpc/server/adapters/standalone';
+import { CreateHTTP2ContextOptions } from "@trpc/server/adapters/standalone";
 
 export async function createContext(opts: CreateHTTP2ContextOptions) {
   opts.req;

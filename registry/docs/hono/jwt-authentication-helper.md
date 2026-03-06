@@ -7,7 +7,7 @@ This helper provides functions for encoding, decoding, signing, and verifying JS
 To use this helper, you can import it as follows:
 
 ```ts
-import { decode, sign, verify } from 'hono/jwt'
+import { decode, sign, verify } from "hono/jwt";
 ```
 
 ::: info
@@ -30,15 +30,15 @@ sign(
 ### Example
 
 ```ts
-import { sign } from 'hono/jwt'
+import { sign } from "hono/jwt";
 
 const payload = {
-  sub: 'user123',
-  role: 'admin',
+  sub: "user123",
+  role: "admin",
   exp: Math.floor(Date.now() / 1000) + 60 * 5, // Token expires in 5 minutes
-}
-const secret = 'mySecretKey'
-const token = await sign(payload, secret)
+};
+const secret = "mySecretKey";
+const token = await sign(payload, secret);
 ```
 
 ### Options
@@ -74,13 +74,13 @@ verify(
 ### Example
 
 ```ts
-import { verify } from 'hono/jwt'
+import { verify } from "hono/jwt";
 
-const tokenToVerify = 'token'
-const secretKey = 'mySecretKey'
+const tokenToVerify = "token";
+const secretKey = "mySecretKey";
 
-const decodedPayload = await verify(tokenToVerify, secretKey, 'HS256')
-console.log(decodedPayload)
+const decodedPayload = await verify(tokenToVerify, secretKey, "HS256");
+console.log(decodedPayload);
 ```
 
 ### Options
@@ -114,16 +114,16 @@ decode(token: string): { header: any; payload: any };
 ### Example
 
 ```ts
-import { decode } from 'hono/jwt'
+import { decode } from "hono/jwt";
 
 // Decode the JWT token
 const tokenToDecode =
-  'eyJhbGciOiAiSFMyNTYiLCAidHlwIjogIkpXVCJ9.eyJzdWIiOiAidXNlcjEyMyIsICJyb2xlIjogImFkbWluIn0.JxUwx6Ua1B0D1B0FtCrj72ok5cm1Pkmr_hL82sd7ELA'
+  "eyJhbGciOiAiSFMyNTYiLCAidHlwIjogIkpXVCJ9.eyJzdWIiOiAidXNlcjEyMyIsICJyb2xlIjogImFkbWluIn0.JxUwx6Ua1B0D1B0FtCrj72ok5cm1Pkmr_hL82sd7ELA";
 
-const { header, payload } = decode(tokenToDecode)
+const { header, payload } = decode(tokenToDecode);
 
-console.log('Decoded Header:', header)
-console.log('Decoded Payload:', payload)
+console.log("Decoded Header:", header);
+console.log("Decoded Payload:", payload);
 ```
 
 ### Options
@@ -134,7 +134,7 @@ console.log('Decoded Payload:', payload)
 
 The JWT token to be decoded.
 
-> The `decode` function allows you to inspect the header and payload of a JWT token ***without*** performing verification. This can be useful for debugging or extracting information from JWT tokens.
+> The `decode` function allows you to inspect the header and payload of a JWT token **_without_** performing verification. This can be useful for debugging or extracting information from JWT tokens.
 
 ## Payload Validation
 
@@ -166,9 +166,9 @@ The module supports the following JWT cryptographic algorithms:
 - `HS256`: HMAC using SHA-256
 - `HS384`: HMAC using SHA-384
 - `HS512`: HMAC using SHA-512
-- `RS256`: RSASSA-PKCS1-v1\_5 using SHA-256
-- `RS384`: RSASSA-PKCS1-v1\_5 using SHA-384
-- `RS512`: RSASSA-PKCS1-v1\_5 using SHA-512
+- `RS256`: RSASSA-PKCS1-v1_5 using SHA-256
+- `RS384`: RSASSA-PKCS1-v1_5 using SHA-384
+- `RS512`: RSASSA-PKCS1-v1_5 using SHA-512
 - `PS256`: RSASSA-PSS using SHA-256 and MGF1 with SHA-256
 - `PS384`: RSASSA-PSS using SHA-386 and MGF1 with SHA-386
 - `PS512`: RSASSA-PSS using SHA-512 and MGF1 with SHA-512
@@ -182,8 +182,8 @@ The module supports the following JWT cryptographic algorithms:
 Dev Helper provides useful methods you can use in development.
 
 ```ts
-import { Hono } from 'hono'
-import { getRouterName, showRoutes } from 'hono/dev'
+import { Hono } from "hono";
+import { getRouterName, showRoutes } from "hono/dev";
 ```
 
 ## `getRouterName()`
@@ -191,11 +191,11 @@ import { getRouterName, showRoutes } from 'hono/dev'
 You can get the name of the currently used router with `getRouterName()`.
 
 ```ts
-const app = new Hono()
+const app = new Hono();
 
 // ...
 
-console.log(getRouterName(app))
+console.log(getRouterName(app));
 ```
 
 ## `showRoutes()`
@@ -205,23 +205,23 @@ console.log(getRouterName(app))
 Consider an application like the following:
 
 ```ts
-const app = new Hono().basePath('/v1')
+const app = new Hono().basePath("/v1");
 
-app.get('/posts', (c) => {
+app.get("/posts", (c) => {
   // ...
-})
+});
 
-app.get('/posts/:id', (c) => {
+app.get("/posts/:id", (c) => {
   // ...
-})
+});
 
-app.post('/posts', (c) => {
+app.post("/posts", (c) => {
   // ...
-})
+});
 
 showRoutes(app, {
   verbose: true,
-})
+});
 ```
 
 When this application starts running, the routes will be shown in your console as follows:

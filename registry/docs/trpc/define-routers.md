@@ -9,7 +9,7 @@ You should initialize tRPC **exactly once** per application. Multiple instances 
 ```ts twoslash title='server/trpc.ts'
 // @filename: trpc.ts
 // ---cut---
-import { initTRPC } from '@trpc/server';
+import { initTRPC } from "@trpc/server";
 
 // You can use any variable name you like.
 // We use t to keep things simple.
@@ -29,19 +29,19 @@ In order for these endpoints to be exposed to the frontend, your [Adapter](/docs
 
 ```ts twoslash title="server/_app.ts"
 // @filename: trpc.ts
-import { initTRPC } from '@trpc/server';
+import { initTRPC } from "@trpc/server";
 const t = initTRPC.create();
 
 export const publicProcedure = t.procedure;
 export const router = t.router;
 
 // @filename: _app.ts
-import * as trpc from '@trpc/server';
+import * as trpc from "@trpc/server";
 // ---cut---
-import { publicProcedure, router } from './trpc';
+import { publicProcedure, router } from "./trpc";
 
 const appRouter = router({
-  greeting: publicProcedure.query(() => 'hello tRPC v10!'),
+  greeting: publicProcedure.query(() => "hello tRPC v10!"),
 });
 
 // Export only the type of a router!
@@ -75,13 +75,13 @@ export interface RootConfig<TTypes extends RootTypes> {
    * Use a data transformer
    * @see https://trpc.io/docs/v11/data-transformers
    */
-  transformer: TTypes['transformer'];
+  transformer: TTypes["transformer"];
 
   /**
    * Use custom error formatting
    * @see https://trpc.io/docs/v11/error-formatting
    */
-  errorFormatter: ErrorFormatter<TTypes['ctx'], any>;
+  errorFormatter: ErrorFormatter<TTypes["ctx"], any>;
 
   /**
    * Allow `@trpc/server` to run in non-server environments

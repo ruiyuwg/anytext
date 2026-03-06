@@ -1,6 +1,6 @@
 ## Enums
 
-Use `z.enum` to validate inputs against a fixed set of allowable *string* values.
+Use `z.enum` to validate inputs against a fixed set of allowable _string_ values.
 
 ```ts
 const FishEnum = z.enum(["Salmon", "Tuna", "Trout"]);
@@ -32,10 +32,10 @@ Enum-like object literals (`{ [key: string]: string | number }`) are supported.
 ```ts
 const Fish = {
   Salmon: 0,
-  Tuna: 1
-} as const
+  Tuna: 1,
+} as const;
 
-const FishEnum = z.enum(Fish)
+const FishEnum = z.enum(Fish);
 FishEnum.parse(Fish.Salmon); // => ✅
 FishEnum.parse(0); // => ✅
 FishEnum.parse(2); // => ❌
@@ -46,7 +46,7 @@ You can also pass in an externally-declared TypeScript enum.
 ```ts
 enum Fish {
   Salmon = 0,
-  Tuna = 1
+  Tuna = 1,
 }
 
 const FishEnum = z.enum(Fish);
@@ -105,7 +105,7 @@ const TunaOnly = FishEnum.exclude(["Salmon", "Trout"]);
 
 ```ts
 // no equivalent
- 
+
 ```
 ````
 
@@ -123,7 +123,7 @@ const SalmonAndTroutOnly = FishEnum.extract(["Salmon", "Trout"]);
 
 ```ts
 // no equivalent
- 
+
 ```
 ````
 
@@ -136,19 +136,19 @@ In some cases (e.g. parsing environment variables) it's valuable to parse certai
 ```ts
 const strbool = z.stringbool();
 
-strbool.parse("true")         // => true
-strbool.parse("1")            // => true
-strbool.parse("yes")          // => true
-strbool.parse("on")           // => true
-strbool.parse("y")            // => true
-strbool.parse("enabled")      // => true
+strbool.parse("true"); // => true
+strbool.parse("1"); // => true
+strbool.parse("yes"); // => true
+strbool.parse("on"); // => true
+strbool.parse("y"); // => true
+strbool.parse("enabled"); // => true
 
-strbool.parse("false");       // => false
-strbool.parse("0");           // => false
-strbool.parse("no");          // => false
-strbool.parse("off");         // => false
-strbool.parse("n");           // => false
-strbool.parse("disabled");    // => false
+strbool.parse("false"); // => false
+strbool.parse("0"); // => false
+strbool.parse("no"); // => false
+strbool.parse("off"); // => false
+strbool.parse("n"); // => false
+strbool.parse("disabled"); // => false
 
 strbool.parse(/* anything else */); // ZodError<[{ code: "invalid_value" }]>
 ```
@@ -163,17 +163,17 @@ z.stringbool({
 });
 ```
 
-By default the schema is *case-insensitive*; all inputs are converted to lowercase before comparison to the `truthy`/`falsy` values. To make it case-sensitive:
+By default the schema is _case-insensitive_; all inputs are converted to lowercase before comparison to the `truthy`/`falsy` values. To make it case-sensitive:
 
 ```ts
 z.stringbool({
-  case: "sensitive"
+  case: "sensitive",
 });
 ```
 
 ## Optionals
 
-To make a schema *optional* (that is, to allow `undefined` inputs).
+To make a schema _optional_ (that is, to allow `undefined` inputs).
 
 ````
 ```ts
@@ -203,7 +203,7 @@ optionalYoda.def.innerType; // ZodMiniLiteral<"yoda">
 
 ## Nullables
 
-To make a schema *nullable* (that is, to allow `null` inputs).
+To make a schema _nullable_ (that is, to allow `null` inputs).
 
 ````
 ```ts
@@ -233,7 +233,7 @@ nullableYoda.def.innerType; // ZodMiniLiteral<"yoda">
 
 ## Nullish
 
-To make a schema *nullish* (both optional and nullable):
+To make a schema _nullish_ (both optional and nullable):
 
 ````
 ```ts

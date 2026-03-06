@@ -3,26 +3,26 @@
 This API reference will help you understand how to use [props](#props) available for the Script Component. For features and usage, please see the [Optimizing Scripts](/docs/app/guides/scripts) page.
 
 ```tsx filename="app/dashboard/page.tsx" switcher
-import Script from 'next/script'
+import Script from "next/script";
 
 export default function Dashboard() {
   return (
     <>
       <Script src="https://example.com/script.js" />
     </>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/dashboard/page.js" switcher
-import Script from 'next/script'
+import Script from "next/script";
 
 export default function Dashboard() {
   return (
     <>
       <Script src="https://example.com/script.js" />
     </>
-  )
+  );
 }
 ```
 
@@ -70,12 +70,12 @@ Scripts denoted with this strategy are preloaded and fetched before any first-pa
 **This strategy should only be used for critical scripts that need to be fetched as soon as possible.**
 
 ```tsx filename="app/layout.tsx" switcher
-import Script from 'next/script'
+import Script from "next/script";
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
@@ -87,12 +87,12 @@ export default function RootLayout({
         />
       </body>
     </html>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/layout.js" switcher
-import Script from 'next/script'
+import Script from "next/script";
 
 export default function RootLayout({ children }) {
   return (
@@ -105,7 +105,7 @@ export default function RootLayout({ children }) {
         />
       </body>
     </html>
-  )
+  );
 }
 ```
 
@@ -123,14 +123,14 @@ Scripts that use the `afterInteractive` strategy are injected into the HTML clie
 `afterInteractive` scripts can be placed inside of any page or layout and will only load and execute when that page (or group of pages) is opened in the browser.
 
 ```jsx filename="app/page.js"
-import Script from 'next/script'
+import Script from "next/script";
 
 export default function Page() {
   return (
     <>
       <Script src="https://example.com/script.js" strategy="afterInteractive" />
     </>
-  )
+  );
 }
 ```
 
@@ -146,14 +146,14 @@ Scripts that use the `lazyOnload` strategy are injected into the HTML client-sid
 `lazyOnload` scripts can be placed inside of any page or layout and will only load and execute when that page (or group of pages) is opened in the browser.
 
 ```jsx filename="app/page.js"
-import Script from 'next/script'
+import Script from "next/script";
 
 export default function Page() {
   return (
     <>
       <Script src="https://example.com/script.js" strategy="lazyOnload" />
     </>
-  )
+  );
 }
 ```
 
@@ -175,32 +175,32 @@ module.exports = {
   experimental: {
     nextScriptWorkers: true,
   },
-}
+};
 ```
 
 `worker` scripts can **only currently be used in the `pages/` directory**:
 
 ```tsx filename="pages/home.tsx" switcher
-import Script from 'next/script'
+import Script from "next/script";
 
 export default function Home() {
   return (
     <>
       <Script src="https://example.com/script.js" strategy="worker" />
     </>
-  )
+  );
 }
 ```
 
 ```jsx filename="pages/home.js" switcher
-import Script from 'next/script'
+import Script from "next/script";
 
 export default function Home() {
   return (
     <>
       <Script src="https://example.com/script.js" strategy="worker" />
     </>
-  )
+  );
 }
 ```
 
@@ -213,9 +213,9 @@ Some third-party scripts require users to run JavaScript code once after the scr
 Here's an example of executing a lodash method only after the library has been loaded.
 
 ```tsx filename="app/page.tsx" switcher
-'use client'
+"use client";
 
-import Script from 'next/script'
+import Script from "next/script";
 
 export default function Page() {
   return (
@@ -223,18 +223,18 @@ export default function Page() {
       <Script
         src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"
         onLoad={() => {
-          console.log(_.sample([1, 2, 3, 4]))
+          console.log(_.sample([1, 2, 3, 4]));
         }}
       />
     </>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/page.js" switcher
-'use client'
+"use client";
 
-import Script from 'next/script'
+import Script from "next/script";
 
 export default function Page() {
   return (
@@ -242,11 +242,11 @@ export default function Page() {
       <Script
         src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"
         onLoad={() => {
-          console.log(_.sample([1, 2, 3, 4]))
+          console.log(_.sample([1, 2, 3, 4]));
         }}
       />
     </>
-  )
+  );
 }
 ```
 
@@ -259,13 +259,13 @@ Some third-party scripts require users to run JavaScript code after the script h
 Here's an example of how to re-instantiate a Google Maps JS embed every time the component is mounted:
 
 ```tsx filename="app/page.tsx" switcher
-'use client'
+"use client";
 
-import { useRef } from 'react'
-import Script from 'next/script'
+import { useRef } from "react";
+import Script from "next/script";
 
 export default function Page() {
-  const mapRef = useRef()
+  const mapRef = useRef();
 
   return (
     <>
@@ -277,22 +277,22 @@ export default function Page() {
           new google.maps.Map(mapRef.current, {
             center: { lat: -34.397, lng: 150.644 },
             zoom: 8,
-          })
+          });
         }}
       />
     </>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/page.js" switcher
-'use client'
+"use client";
 
-import { useRef } from 'react'
-import Script from 'next/script'
+import { useRef } from "react";
+import Script from "next/script";
 
 export default function Page() {
-  const mapRef = useRef()
+  const mapRef = useRef();
 
   return (
     <>
@@ -304,11 +304,11 @@ export default function Page() {
           new google.maps.Map(mapRef.current, {
             center: { lat: -34.397, lng: 150.644 },
             zoom: 8,
-          })
+          });
         }}
       />
     </>
-  )
+  );
 }
 ```
 
@@ -319,9 +319,9 @@ export default function Page() {
 Sometimes it is helpful to catch when a script fails to load. These errors can be handled with the `onError` property:
 
 ```tsx filename="app/page.tsx" switcher
-'use client'
+"use client";
 
-import Script from 'next/script'
+import Script from "next/script";
 
 export default function Page() {
   return (
@@ -329,18 +329,18 @@ export default function Page() {
       <Script
         src="https://example.com/script.js"
         onError={(e: Error) => {
-          console.error('Script failed to load', e)
+          console.error("Script failed to load", e);
         }}
       />
     </>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/page.js" switcher
-'use client'
+"use client";
 
-import Script from 'next/script'
+import Script from "next/script";
 
 export default function Page() {
   return (
@@ -348,11 +348,11 @@ export default function Page() {
       <Script
         src="https://example.com/script.js"
         onError={(e) => {
-          console.error('Script failed to load', e)
+          console.error("Script failed to load", e);
         }}
       />
     </>
-  )
+  );
 }
 ```
 

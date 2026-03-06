@@ -46,8 +46,8 @@ The `title` attribute is used to set the title of the document. It can be define
 
 ```jsx filename="layout.js | page.js"
 export const metadata = {
-  title: 'Next.js',
-}
+  title: "Next.js",
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
@@ -59,19 +59,19 @@ export const metadata = {
 `title.default` can be used to provide a **fallback title** to child route segments that don't define a `title`.
 
 ```tsx filename="app/layout.tsx"
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: {
-    default: 'Acme',
+    default: "Acme",
   },
-}
+};
 ```
 
 ```tsx filename="app/about/page.tsx"
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
 
-export const metadata: Metadata = {}
+export const metadata: Metadata = {};
 
 // Output: <title>Acme</title>
 ```
@@ -81,39 +81,39 @@ export const metadata: Metadata = {}
 `title.template` can be used to add a prefix or a suffix to `titles` defined in **child** route segments.
 
 ```tsx filename="app/layout.tsx" switcher
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | Acme',
-    default: 'Acme', // a default is required when creating a template
+    template: "%s | Acme",
+    default: "Acme", // a default is required when creating a template
   },
-}
+};
 ```
 
 ```jsx filename="app/layout.js" switcher
 export const metadata = {
   title: {
-    template: '%s | Acme',
-    default: 'Acme', // a default is required when creating a template
+    template: "%s | Acme",
+    default: "Acme", // a default is required when creating a template
   },
-}
+};
 ```
 
 ```tsx filename="app/about/page.tsx" switcher
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'About',
-}
+  title: "About",
+};
 
 // Output: <title>About | Acme</title>
 ```
 
 ```jsx filename="app/about/page.js" switcher
 export const metadata = {
-  title: 'About',
-}
+  title: "About",
+};
 
 // Output: <title>About | Acme</title>
 ```
@@ -131,31 +131,31 @@ export const metadata = {
 `title.absolute` can be used to provide a title that **ignores** `title.template` set in parent segments.
 
 ```tsx filename="app/layout.tsx" switcher
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | Acme',
+    template: "%s | Acme",
   },
-}
+};
 ```
 
 ```jsx filename="app/layout.js" switcher
 export const metadata = {
   title: {
-    template: '%s | Acme',
+    template: "%s | Acme",
   },
-}
+};
 ```
 
 ```tsx filename="app/about/page.tsx" switcher
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: {
-    absolute: 'About',
+    absolute: "About",
   },
-}
+};
 
 // Output: <title>About</title>
 ```
@@ -163,9 +163,9 @@ export const metadata: Metadata = {
 ```jsx filename="app/about/page.js" switcher
 export const metadata = {
   title: {
-    absolute: 'About',
+    absolute: "About",
   },
-}
+};
 
 // Output: <title>About</title>
 ```
@@ -186,8 +186,8 @@ export const metadata = {
 
 ```jsx filename="layout.js | page.js"
 export const metadata = {
-  description: 'The React Framework for the Web',
-}
+  description: "The React Framework for the Web",
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
@@ -198,19 +198,19 @@ export const metadata = {
 
 ```jsx filename="layout.js | page.js"
 export const metadata = {
-  generator: 'Next.js',
-  applicationName: 'Next.js',
-  referrer: 'origin-when-cross-origin',
-  keywords: ['Next.js', 'React', 'JavaScript'],
-  authors: [{ name: 'Seb' }, { name: 'Josh', url: 'https://nextjs.org' }],
-  creator: 'Jiachi Liu',
-  publisher: 'Sebastian Markbåge',
+  generator: "Next.js",
+  applicationName: "Next.js",
+  referrer: "origin-when-cross-origin",
+  keywords: ["Next.js", "React", "JavaScript"],
+  authors: [{ name: "Seb" }, { name: "Josh", url: "https://nextjs.org" }],
+  creator: "Jiachi Liu",
+  publisher: "Sebastian Markbåge",
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
-}
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
@@ -236,18 +236,18 @@ export const metadata = {
 
 ```jsx filename="layout.js | page.js"
 export const metadata = {
-  metadataBase: new URL('https://acme.com'),
+  metadataBase: new URL("https://acme.com"),
   alternates: {
-    canonical: '/',
+    canonical: "/",
     languages: {
-      'en-US': '/en-US',
-      'de-DE': '/de-DE',
+      "en-US": "/en-US",
+      "de-DE": "/de-DE",
     },
   },
   openGraph: {
-    images: '/og-image.png',
+    images: "/og-image.png",
   },
-}
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
@@ -276,17 +276,17 @@ URL composition favors developer intent over default directory traversal semanti
 For example, given the following `metadataBase`:
 
 ```tsx filename="app/layout.tsx" switcher
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://acme.com'),
-}
+  metadataBase: new URL("https://acme.com"),
+};
 ```
 
 ```jsx filename="app/layout.js" switcher
 export const metadata = {
-  metadataBase: new URL('https://acme.com'),
-}
+  metadataBase: new URL("https://acme.com"),
+};
 ```
 
 Any `metadata` fields that inherit the above `metadataBase` and set their own value will be resolved as follows:
@@ -306,39 +306,39 @@ Any `metadata` fields that inherit the above `metadataBase` and set their own va
 ```jsx filename="layout.js | page.js"
 export const metadata = {
   openGraph: {
-    title: 'Next.js',
-    description: 'The React Framework for the Web',
-    url: 'https://nextjs.org',
-    siteName: 'Next.js',
+    title: "Next.js",
+    description: "The React Framework for the Web",
+    url: "https://nextjs.org",
+    siteName: "Next.js",
     images: [
       {
-        url: 'https://nextjs.org/og.png', // Must be an absolute URL
+        url: "https://nextjs.org/og.png", // Must be an absolute URL
         width: 800,
         height: 600,
       },
       {
-        url: 'https://nextjs.org/og-alt.png', // Must be an absolute URL
+        url: "https://nextjs.org/og-alt.png", // Must be an absolute URL
         width: 1800,
         height: 1600,
-        alt: 'My custom alt',
+        alt: "My custom alt",
       },
     ],
     videos: [
       {
-        url: 'https://nextjs.org/video.mp4', // Must be an absolute URL
+        url: "https://nextjs.org/video.mp4", // Must be an absolute URL
         width: 800,
         height: 600,
       },
     ],
     audio: [
       {
-        url: 'https://nextjs.org/audio.mp3', // Must be an absolute URL
+        url: "https://nextjs.org/audio.mp3", // Must be an absolute URL
       },
     ],
-    locale: 'en_US',
-    type: 'website',
+    locale: "en_US",
+    type: "website",
   },
-}
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
@@ -364,13 +364,13 @@ export const metadata = {
 ```jsx filename="layout.js | page.js"
 export const metadata = {
   openGraph: {
-    title: 'Next.js',
-    description: 'The React Framework for the Web',
-    type: 'article',
-    publishedTime: '2023-01-01T00:00:00.000Z',
-    authors: ['Seb', 'Josh'],
+    title: "Next.js",
+    description: "The React Framework for the Web",
+    type: "article",
+    publishedTime: "2023-01-01T00:00:00.000Z",
+    authors: ["Seb", "Josh"],
   },
-}
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
@@ -389,7 +389,7 @@ export const metadata = {
 ### `robots`
 
 ```tsx filename="layout.tsx | page.tsx"
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   robots: {
@@ -400,12 +400,12 @@ export const metadata: Metadata = {
       index: true,
       follow: true,
       noimageindex: false,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
-}
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
@@ -423,15 +423,15 @@ export const metadata: Metadata = {
 ```jsx filename="layout.js | page.js"
 export const metadata = {
   icons: {
-    icon: '/icon.png',
-    shortcut: '/shortcut-icon.png',
-    apple: '/apple-icon.png',
+    icon: "/icon.png",
+    shortcut: "/shortcut-icon.png",
+    apple: "/apple-icon.png",
     other: {
-      rel: 'apple-touch-icon-precomposed',
-      url: '/apple-touch-icon-precomposed.png',
+      rel: "apple-touch-icon-precomposed",
+      url: "/apple-touch-icon-precomposed.png",
     },
   },
-}
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
@@ -448,23 +448,23 @@ export const metadata = {
 export const metadata = {
   icons: {
     icon: [
-      { url: '/icon.png' },
-      new URL('/icon.png', 'https://example.com'),
-      { url: '/icon-dark.png', media: '(prefers-color-scheme: dark)' },
+      { url: "/icon.png" },
+      new URL("/icon.png", "https://example.com"),
+      { url: "/icon-dark.png", media: "(prefers-color-scheme: dark)" },
     ],
-    shortcut: ['/shortcut-icon.png'],
+    shortcut: ["/shortcut-icon.png"],
     apple: [
-      { url: '/apple-icon.png' },
-      { url: '/apple-icon-x3.png', sizes: '180x180', type: 'image/png' },
+      { url: "/apple-icon.png" },
+      { url: "/apple-icon-x3.png", sizes: "180x180", type: "image/png" },
     ],
     other: [
       {
-        rel: 'apple-touch-icon-precomposed',
-        url: '/apple-touch-icon-precomposed.png',
+        rel: "apple-touch-icon-precomposed",
+        url: "/apple-touch-icon-precomposed.png",
       },
     ],
   },
-}
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
@@ -501,8 +501,8 @@ A web application manifest, as defined in the [Web Application Manifest specific
 
 ```jsx filename="layout.js | page.js"
 export const metadata = {
-  manifest: 'https://nextjs.org/manifest.json',
-}
+  manifest: "https://nextjs.org/manifest.json",
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
@@ -518,15 +518,15 @@ Learn more about the [Twitter Card markup reference](https://developer.x.com/en/
 ```jsx filename="layout.js | page.js"
 export const metadata = {
   twitter: {
-    card: 'summary_large_image',
-    title: 'Next.js',
-    description: 'The React Framework for the Web',
-    siteId: '1467726470533754880',
-    creator: '@nextjs',
-    creatorId: '1467726470533754880',
-    images: ['https://nextjs.org/og.png'], // Must be an absolute URL
+    card: "summary_large_image",
+    title: "Next.js",
+    description: "The React Framework for the Web",
+    siteId: "1467726470533754880",
+    creator: "@nextjs",
+    creatorId: "1467726470533754880",
+    images: ["https://nextjs.org/og.png"], // Must be an absolute URL
   },
-}
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
@@ -542,30 +542,30 @@ export const metadata = {
 ```jsx filename="layout.js | page.js"
 export const metadata = {
   twitter: {
-    card: 'app',
-    title: 'Next.js',
-    description: 'The React Framework for the Web',
-    siteId: '1467726470533754880',
-    creator: '@nextjs',
-    creatorId: '1467726470533754880',
+    card: "app",
+    title: "Next.js",
+    description: "The React Framework for the Web",
+    siteId: "1467726470533754880",
+    creator: "@nextjs",
+    creatorId: "1467726470533754880",
     images: {
-      url: 'https://nextjs.org/og.png',
-      alt: 'Next.js Logo',
+      url: "https://nextjs.org/og.png",
+      alt: "Next.js Logo",
     },
     app: {
-      name: 'twitter_app',
+      name: "twitter_app",
       id: {
-        iphone: 'twitter_app://iphone',
-        ipad: 'twitter_app://ipad',
-        googleplay: 'twitter_app://googleplay',
+        iphone: "twitter_app://iphone",
+        ipad: "twitter_app://ipad",
+        googleplay: "twitter_app://googleplay",
       },
       url: {
-        iphone: 'https://iphone_url',
-        ipad: 'https://ipad_url',
+        iphone: "https://iphone_url",
+        ipad: "https://ipad_url",
       },
     },
   },
-}
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
@@ -596,14 +596,14 @@ export const metadata = {
 ```jsx filename="layout.js | page.js"
 export const metadata = {
   verification: {
-    google: 'google',
-    yandex: 'yandex',
-    yahoo: 'yahoo',
+    google: "google",
+    yandex: "yandex",
+    yahoo: "yahoo",
     other: {
-      me: ['my-email', 'my-link'],
+      me: ["my-email", "my-link"],
     },
   },
-}
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
@@ -619,21 +619,21 @@ export const metadata = {
 ```jsx filename="layout.js | page.js"
 export const metadata = {
   itunes: {
-    appId: 'myAppStoreID',
-    appArgument: 'myAppArgument',
+    appId: "myAppStoreID",
+    appArgument: "myAppArgument",
   },
   appleWebApp: {
-    title: 'Apple Web App',
-    statusBarStyle: 'black-translucent',
+    title: "Apple Web App",
+    statusBarStyle: "black-translucent",
     startupImage: [
-      '/assets/startup/apple-touch-startup-image-768x1004.png',
+      "/assets/startup/apple-touch-startup-image-768x1004.png",
       {
-        url: '/assets/startup/apple-touch-startup-image-1536x2008.png',
-        media: '(device-width: 768px) and (device-height: 1024px)',
+        url: "/assets/startup/apple-touch-startup-image-1536x2008.png",
+        media: "(device-width: 768px) and (device-height: 1024px)",
       },
     ],
   },
-}
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
@@ -663,19 +663,19 @@ export const metadata = {
 ```jsx filename="layout.js | page.js"
 export const metadata = {
   alternates: {
-    canonical: 'https://nextjs.org',
+    canonical: "https://nextjs.org",
     languages: {
-      'en-US': 'https://nextjs.org/en-US',
-      'de-DE': 'https://nextjs.org/de-DE',
+      "en-US": "https://nextjs.org/en-US",
+      "de-DE": "https://nextjs.org/de-DE",
     },
     media: {
-      'only screen and (max-width: 600px)': 'https://nextjs.org/mobile',
+      "only screen and (max-width: 600px)": "https://nextjs.org/mobile",
     },
     types: {
-      'application/rss+xml': 'https://nextjs.org/rss',
+      "application/rss+xml": "https://nextjs.org/rss",
     },
   },
-}
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
@@ -700,19 +700,19 @@ export const metadata = {
 export const metadata = {
   appLinks: {
     ios: {
-      url: 'https://nextjs.org/ios',
-      app_store_id: 'app_store_id',
+      url: "https://nextjs.org/ios",
+      app_store_id: "app_store_id",
     },
     android: {
-      package: 'com.example.android/package',
-      app_name: 'app_name_android',
+      package: "com.example.android/package",
+      app_name: "app_name_android",
     },
     web: {
-      url: 'https://nextjs.org/web',
+      url: "https://nextjs.org/web",
       should_fallback: true,
     },
   },
-}
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
@@ -730,8 +730,8 @@ Describes a collection of records, documents, or other materials of historical i
 
 ```jsx filename="layout.js | page.js"
 export const metadata = {
-  archives: ['https://nextjs.org/13'],
-}
+  archives: ["https://nextjs.org/13"],
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
@@ -742,8 +742,8 @@ export const metadata = {
 
 ```jsx filename="layout.js | page.js"
 export const metadata = {
-  assets: ['https://nextjs.org/assets'],
-}
+  assets: ["https://nextjs.org/assets"],
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
@@ -754,8 +754,8 @@ export const metadata = {
 
 ```jsx filename="layout.js | page.js"
 export const metadata = {
-  bookmarks: ['https://nextjs.org/13'],
-}
+  bookmarks: ["https://nextjs.org/13"],
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
@@ -766,8 +766,8 @@ export const metadata = {
 
 ```jsx filename="layout.js | page.js"
 export const metadata = {
-  category: 'technology',
-}
+  category: "technology",
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
@@ -783,9 +783,9 @@ You can connect a Facebook app or Facebook account to your webpage for certain F
 ```jsx filename="layout.js | page.js"
 export const metadata = {
   facebook: {
-    appId: '12345678',
+    appId: "12345678",
   },
-}
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
@@ -795,9 +795,9 @@ export const metadata = {
 ```jsx filename="layout.js | page.js"
 export const metadata = {
   facebook: {
-    admins: '12345678',
+    admins: "12345678",
   },
-}
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
@@ -809,9 +809,9 @@ If you want to generate multiple fb:admins meta tags you can use array value.
 ```jsx filename="layout.js | page.js"
 export const metadata = {
   facebook: {
-    admins: ['12345678', '87654321'],
+    admins: ["12345678", "87654321"],
   },
-}
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
@@ -828,7 +828,7 @@ export const metadata = {
   pinterest: {
     richPin: true,
   },
-}
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
@@ -842,9 +842,9 @@ All metadata options should be covered using the built-in support. However, ther
 ```jsx filename="layout.js | page.js"
 export const metadata = {
   other: {
-    custom: 'meta',
+    custom: "meta",
   },
-}
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
@@ -856,9 +856,9 @@ If you want to generate multiple same key meta tags you can use array value.
 ```jsx filename="layout.js | page.js"
 export const metadata = {
   other: {
-    custom: ['meta1', 'meta2'],
+    custom: ["meta1", "meta2"],
   },
-}
+};
 ```
 
 ```html filename="<head> output" hideLineNumbers
@@ -872,11 +872,11 @@ You can add type safety to your metadata by using the `Metadata` type. If you ar
 #### `metadata` object
 
 ```tsx filename="layout.tsx | page.tsx"
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Next.js',
-}
+  title: "Next.js",
+};
 ```
 
 #### `generateMetadata` function
@@ -884,41 +884,41 @@ export const metadata: Metadata = {
 ##### Regular function
 
 ```tsx filename="layout.tsx | page.tsx"
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
 
 export function generateMetadata(): Metadata {
   return {
-    title: 'Next.js',
-  }
+    title: "Next.js",
+  };
 }
 ```
 
 ##### Async function
 
 ```tsx filename="layout.tsx | page.tsx"
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Next.js',
-  }
+    title: "Next.js",
+  };
 }
 ```
 
 ##### With segment props
 
 ```tsx filename="layout.tsx | page.tsx"
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
 
 type Props = {
-  params: Promise<{ id: string }>
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
-}
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
 
 export function generateMetadata({ params, searchParams }: Props): Metadata {
   return {
-    title: 'Next.js',
-  }
+    title: "Next.js",
+  };
 }
 
 export default function Page({ params, searchParams }: Props) {}
@@ -927,15 +927,15 @@ export default function Page({ params, searchParams }: Props) {}
 ##### With parent metadata
 
 ```tsx filename="layout.tsx | page.tsx"
-import type { Metadata, ResolvingMetadata } from 'next'
+import type { Metadata, ResolvingMetadata } from "next";
 
 export async function generateMetadata(
   { params, searchParams }: Props,
-  parent: ResolvingMetadata
+  parent: ResolvingMetadata,
 ): Promise<Metadata> {
   return {
-    title: 'Next.js',
-  }
+    title: "Next.js",
+  };
 }
 ```
 
@@ -946,8 +946,8 @@ For JavaScript projects, you can use JSDoc to add type safety.
 ```js filename="layout.js | page.js"
 /** @type {import("next").Metadata} */
 export const metadata = {
-  title: 'Next.js',
-}
+  title: "Next.js",
+};
 ```
 
 ### Unsupported Metadata
@@ -973,30 +973,30 @@ The `<link>` element has a number of `rel` keywords that can be used to hint to 
 While the Metadata API doesn't directly support these hints, you can use new [`ReactDOM` methods](https://github.com/facebook/react/pull/26237) to safely insert them into the `<head>` of the document.
 
 ```tsx filename="app/preload-resources.tsx" switcher
-'use client'
+"use client";
 
-import ReactDOM from 'react-dom'
+import ReactDOM from "react-dom";
 
 export function PreloadResources() {
-  ReactDOM.preload('...', { as: '...' })
-  ReactDOM.preconnect('...', { crossOrigin: '...' })
-  ReactDOM.prefetchDNS('...')
+  ReactDOM.preload("...", { as: "..." });
+  ReactDOM.preconnect("...", { crossOrigin: "..." });
+  ReactDOM.prefetchDNS("...");
 
-  return '...'
+  return "...";
 }
 ```
 
 ```jsx filename="app/preload-resources.js" switcher
-'use client'
+"use client";
 
-import ReactDOM from 'react-dom'
+import ReactDOM from "react-dom";
 
 export function PreloadResources() {
-  ReactDOM.preload('...', { as: '...' })
-  ReactDOM.preconnect('...', { crossOrigin: '...' })
-  ReactDOM.prefetchDNS('...')
+  ReactDOM.preload("...", { as: "..." });
+  ReactDOM.preconnect("...", { crossOrigin: "..." });
+  ReactDOM.prefetchDNS("...");
 
-  return '...'
+  return "...";
 }
 ```
 

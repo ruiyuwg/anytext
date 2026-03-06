@@ -60,8 +60,8 @@ await db
 ```
 
 ```sql
-insert into users ("id", "last_login") 
-  values 
+insert into users ("id", "last_login")
+  values
     (1, '2024-03-15T22:29:06.679Z'),
     (2, '2024-03-15T23:29:06.679Z'),
     (3, '2024-03-16T00:29:06.679Z')
@@ -75,7 +75,7 @@ insert into users ("id", "last_login")
 
 export const users = pgTable('users', {
 id: serial('id').primaryKey(),
-lastLogin: timestamp('last\_login', { mode: 'date' }).notNull(),
+lastLogin: timestamp('last_login', { mode: 'date' }).notNull(),
 });
 
 ````
@@ -191,13 +191,13 @@ If you want to implement upsert query with `where` clause for `update` statement
 \<CodeTabs items={\["index.ts", "schema.ts"]}> <CodeTab>
 
 ```ts copy {25,26,27,28}
-import { or, sql } from 'drizzle-orm';
-import { products } from './schema';
+import { or, sql } from "drizzle-orm";
+import { products } from "./schema";
 
 const data = {
   id: 1,
-  title: 'Phone',
-  price: '999.99',
+  title: "Phone",
+  price: "999.99",
   stock: 10,
   lastUpdated: new Date(),
 };
@@ -213,11 +213,11 @@ await db
     set: {
       price: excludedPrice,
       stock: excludedStock,
-      lastUpdated: sql.raw(`excluded.${products.lastUpdated.name}`)
+      lastUpdated: sql.raw(`excluded.${products.lastUpdated.name}`),
     },
     setWhere: or(
       sql`${products.stock} != ${excludedStock}`,
-      sql`${products.price} != ${excludedPrice}`
+      sql`${products.price} != ${excludedPrice}`,
     ),
   });
 ```
@@ -233,14 +233,21 @@ insert into products ("id", "title", "stock", "price", "last_updated")
   </CodeTab>
 
 ```ts copy
-import { integer, numeric, pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
+import {
+  integer,
+  numeric,
+  pgTable,
+  serial,
+  text,
+  timestamp,
+} from "drizzle-orm/pg-core";
 
-export const products = pgTable('products', {
-  id: serial('id').primaryKey(),
-  title: text('title').notNull(),
-  stock: integer('stock').notNull(),
-  price: numeric('price', { precision: 10, scale: 2 }).notNull(),
-  lastUpdated: timestamp('last_updated').notNull().defaultNow(),
+export const products = pgTable("products", {
+  id: serial("id").primaryKey(),
+  title: text("title").notNull(),
+  stock: integer("stock").notNull(),
+  price: numeric("price", { precision: 10, scale: 2 }).notNull(),
+  lastUpdated: timestamp("last_updated").notNull().defaultNow(),
 });
 ```
 

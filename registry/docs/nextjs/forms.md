@@ -11,38 +11,38 @@ When used in a form, the function automatically receives the [`FormData`](https:
 ```tsx filename="app/invoices/page.tsx" switcher
 export default function Page() {
   async function createInvoice(formData: FormData) {
-    'use server'
+    "use server";
 
     const rawFormData = {
-      customerId: formData.get('customerId'),
-      amount: formData.get('amount'),
-      status: formData.get('status'),
-    }
+      customerId: formData.get("customerId"),
+      amount: formData.get("amount"),
+      status: formData.get("status"),
+    };
 
     // mutate data
     // revalidate the cache
   }
 
-  return <form action={createInvoice}>...</form>
+  return <form action={createInvoice}>...</form>;
 }
 ```
 
 ```jsx filename="app/invoices/page.js" switcher
 export default function Page() {
   async function createInvoice(formData) {
-    'use server'
+    "use server";
 
     const rawFormData = {
-      customerId: formData.get('customerId'),
-      amount: formData.get('amount'),
-      status: formData.get('status'),
-    }
+      customerId: formData.get("customerId"),
+      amount: formData.get("amount"),
+      status: formData.get("status"),
+    };
 
     // mutate data
     // revalidate the cache
   }
 
-  return <form action={createInvoice}>...</form>
+  return <form action={createInvoice}>...</form>;
 }
 ```
 
@@ -53,49 +53,49 @@ export default function Page() {
 Outside of form fields, you can pass additional arguments to a Server Function using the JavaScript [`bind`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind) method. For example, to pass the `userId` argument to the `updateUser` Server Function:
 
 ```tsx filename="app/client-component.tsx" highlight={6} switcher
-'use client'
+"use client";
 
-import { updateUser } from './actions'
+import { updateUser } from "./actions";
 
 export function UserProfile({ userId }: { userId: string }) {
-  const updateUserWithId = updateUser.bind(null, userId)
+  const updateUserWithId = updateUser.bind(null, userId);
 
   return (
     <form action={updateUserWithId}>
       <input type="text" name="name" />
       <button type="submit">Update User Name</button>
     </form>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/client-component.js" highlight={6} switcher
-'use client'
+"use client";
 
-import { updateUser } from './actions'
+import { updateUser } from "./actions";
 
 export function UserProfile({ userId }) {
-  const updateUserWithId = updateUser.bind(null, userId)
+  const updateUserWithId = updateUser.bind(null, userId);
 
   return (
     <form action={updateUserWithId}>
       <input type="text" name="name" />
       <button type="submit">Update User Name</button>
     </form>
-  )
+  );
 }
 ```
 
 The Server Function will receive the `userId` as an additional argument:
 
 ```ts filename="app/actions.ts" switcher
-'use server'
+"use server";
 
 export async function updateUser(userId: string, formData: FormData) {}
 ```
 
 ```js filename="app/actions.js" switcher
-'use server'
+"use server";
 
 export async function updateUser(userId, formData) {}
 ```
@@ -113,26 +113,26 @@ Forms can be validated on the client or server.
 - For **server-side validation**, you can use a library like [zod](https://zod.dev/) to validate the form fields. For example:
 
 ```tsx filename="app/actions.ts" switcher
-'use server'
+"use server";
 
-import { z } from 'zod'
+import { z } from "zod";
 
 const schema = z.object({
   email: z.string({
-    invalid_type_error: 'Invalid Email',
+    invalid_type_error: "Invalid Email",
   }),
-})
+});
 
 export default async function createUser(formData: FormData) {
   const validatedFields = schema.safeParse({
-    email: formData.get('email'),
-  })
+    email: formData.get("email"),
+  });
 
   // Return early if the form data is invalid
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-    }
+    };
   }
 
   // Mutate data
@@ -140,26 +140,26 @@ export default async function createUser(formData: FormData) {
 ```
 
 ```jsx filename="app/actions.js" switcher
-'use server'
+"use server";
 
-import { z } from 'zod'
+import { z } from "zod";
 
 const schema = z.object({
   email: z.string({
-    invalid_type_error: 'Invalid Email',
+    invalid_type_error: "Invalid Email",
   }),
-})
+});
 
 export default async function createsUser(formData) {
   const validatedFields = schema.safeParse({
-    email: formData.get('email'),
-  })
+    email: formData.get("email"),
+  });
 
   // Return early if the form data is invalid
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-    }
+    };
   }
 
   // Mutate data
@@ -173,29 +173,29 @@ To display validation errors or messages, turn the component that defines the `<
 When using `useActionState`, the Server function signature will change to receive a new `prevState` or `initialState` parameter as its first argument.
 
 ```tsx filename="app/actions.ts" highlight={5} switcher
-'use server'
+"use server";
 
-import { z } from 'zod'
+import { z } from "zod";
 
 export async function createUser(initialState: any, formData: FormData) {
   const validatedFields = schema.safeParse({
-    email: formData.get('email'),
-  })
+    email: formData.get("email"),
+  });
   // ...
 }
 ```
 
 ```jsx filename="app/actions.ts" highlight={7} switcher
-'use server'
+"use server";
 
-import { z } from 'zod'
+import { z } from "zod";
 
 // ...
 
 export async function createUser(initialState, formData) {
   const validatedFields = schema.safeParse({
-    email: formData.get('email'),
-  })
+    email: formData.get("email"),
+  });
   // ...
 }
 ```
@@ -203,17 +203,17 @@ export async function createUser(initialState, formData) {
 You can then conditionally render the error message based on the `state` object.
 
 ```tsx filename="app/ui/signup.tsx" highlight={11,18-20} switcher
-'use client'
+"use client";
 
-import { useActionState } from 'react'
-import { createUser } from '@/app/actions'
+import { useActionState } from "react";
+import { createUser } from "@/app/actions";
 
 const initialState = {
-  message: '',
-}
+  message: "",
+};
 
 export function Signup() {
-  const [state, formAction, pending] = useActionState(createUser, initialState)
+  const [state, formAction, pending] = useActionState(createUser, initialState);
 
   return (
     <form action={formAction}>
@@ -223,22 +223,22 @@ export function Signup() {
       <p aria-live="polite">{state?.message}</p>
       <button disabled={pending}>Sign up</button>
     </form>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/ui/signup.js" highlight={11,18-20} switcher
-'use client'
+"use client";
 
-import { useActionState } from 'react'
-import { createUser } from '@/app/actions'
+import { useActionState } from "react";
+import { createUser } from "@/app/actions";
 
 const initialState = {
-  message: '',
-}
+  message: "",
+};
 
 export function Signup() {
-  const [state, formAction, pending] = useActionState(createUser, initialState)
+  const [state, formAction, pending] = useActionState(createUser, initialState);
 
   return (
     <form action={formAction}>
@@ -248,7 +248,7 @@ export function Signup() {
       <p aria-live="polite">{state?.message}</p>
       <button disabled={pending}>Sign up</button>
     </form>
-  )
+  );
 }
 ```
 
@@ -257,80 +257,80 @@ export function Signup() {
 The [`useActionState`](https://react.dev/reference/react/useActionState) hook exposes a `pending` boolean that can be used to show a loading indicator or disable the submit button while the action is being executed.
 
 ```tsx filename="app/ui/signup.tsx" highlight={7,12} switcher
-'use client'
+"use client";
 
-import { useActionState } from 'react'
-import { createUser } from '@/app/actions'
+import { useActionState } from "react";
+import { createUser } from "@/app/actions";
 
 export function Signup() {
-  const [state, formAction, pending] = useActionState(createUser, initialState)
+  const [state, formAction, pending] = useActionState(createUser, initialState);
 
   return (
     <form action={formAction}>
       {/* Other form elements */}
       <button disabled={pending}>Sign up</button>
     </form>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/ui/signup.js" highlight={7,12} switcher
-'use client'
+"use client";
 
-import { useActionState } from 'react'
-import { createUser } from '@/app/actions'
+import { useActionState } from "react";
+import { createUser } from "@/app/actions";
 
 export function Signup() {
-  const [state, formAction, pending] = useActionState(createUser, initialState)
+  const [state, formAction, pending] = useActionState(createUser, initialState);
 
   return (
     <form action={formAction}>
       {/* Other form elements */}
       <button disabled={pending}>Sign up</button>
     </form>
-  )
+  );
 }
 ```
 
 Alternatively, you can use the [`useFormStatus`](https://react.dev/reference/react-dom/hooks/useFormStatus) hook to show a loading indicator while the action is being executed. When using this hook, you'll need to create a separate component to render the loading indicator. For example, to disable the button when the action is pending:
 
 ```tsx filename="app/ui/button.tsx" highlight={6} switcher
-'use client'
+"use client";
 
-import { useFormStatus } from 'react-dom'
+import { useFormStatus } from "react-dom";
 
 export function SubmitButton() {
-  const { pending } = useFormStatus()
+  const { pending } = useFormStatus();
 
   return (
     <button disabled={pending} type="submit">
       Sign Up
     </button>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/ui/button.js" highlight={6} switcher
-'use client'
+"use client";
 
-import { useFormStatus } from 'react-dom'
+import { useFormStatus } from "react-dom";
 
 export function SubmitButton() {
-  const { pending } = useFormStatus()
+  const { pending } = useFormStatus();
 
   return (
     <button disabled={pending} type="submit">
       Sign Up
     </button>
-  )
+  );
 }
 ```
 
 You can then nest the `SubmitButton` component inside the form:
 
 ```tsx filename="app/ui/signup.tsx" switcher
-import { SubmitButton } from './button'
-import { createUser } from '@/app/actions'
+import { SubmitButton } from "./button";
+import { createUser } from "@/app/actions";
 
 export function Signup() {
   return (
@@ -338,13 +338,13 @@ export function Signup() {
       {/* Other form elements */}
       <SubmitButton />
     </form>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/ui/signup.js" switcher
-import { SubmitButton } from './button'
-import { createUser } from '@/app/actions'
+import { SubmitButton } from "./button";
+import { createUser } from "@/app/actions";
 
 export function Signup() {
   return (
@@ -352,7 +352,7 @@ export function Signup() {
       {/* Other form elements */}
       <SubmitButton />
     </form>
-  )
+  );
 }
 ```
 
@@ -363,26 +363,26 @@ export function Signup() {
 You can use the React [`useOptimistic`](https://react.dev/reference/react/useOptimistic) hook to optimistically update the UI before the Server Function finishes executing, rather than waiting for the response:
 
 ```tsx filename="app/page.tsx" switcher
-'use client'
+"use client";
 
-import { useOptimistic } from 'react'
-import { send } from './actions'
+import { useOptimistic } from "react";
+import { send } from "./actions";
 
 type Message = {
-  message: string
-}
+  message: string;
+};
 
 export function Thread({ messages }: { messages: Message[] }) {
   const [optimisticMessages, addOptimisticMessage] = useOptimistic<
     Message[],
     string
-  >(messages, (state, newMessage) => [...state, { message: newMessage }])
+  >(messages, (state, newMessage) => [...state, { message: newMessage }]);
 
   const formAction = async (formData: FormData) => {
-    const message = formData.get('message') as string
-    addOptimisticMessage(message)
-    await send(message)
-  }
+    const message = formData.get("message") as string;
+    addOptimisticMessage(message);
+    await send(message);
+  };
 
   return (
     <div>
@@ -394,27 +394,27 @@ export function Thread({ messages }: { messages: Message[] }) {
         <button type="submit">Send</button>
       </form>
     </div>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/page.js" switcher
-'use client'
+"use client";
 
-import { useOptimistic } from 'react'
-import { send } from './actions'
+import { useOptimistic } from "react";
+import { send } from "./actions";
 
 export function Thread({ messages }) {
   const [optimisticMessages, addOptimisticMessage] = useOptimistic(
     messages,
-    (state, newMessage) => [...state, { message: newMessage }]
-  )
+    (state, newMessage) => [...state, { message: newMessage }],
+  );
 
   const formAction = async (formData) => {
-    const message = formData.get('message')
-    addOptimisticMessage(message)
-    await send(message)
-  }
+    const message = formData.get("message");
+    addOptimisticMessage(message);
+    await send(message);
+  };
 
   return (
     <div>
@@ -426,7 +426,7 @@ export function Thread({ messages }) {
         <button type="submit">Send</button>
       </form>
     </div>
-  )
+  );
 }
 ```
 
@@ -441,46 +441,46 @@ This is useful in cases where you want to call multiple Server Actions within a 
 You can trigger a form submission programmatically using the [`requestSubmit()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/requestSubmit) method. For example, when the user submits a form using the `⌘` + `Enter` keyboard shortcut, you can listen for the `onKeyDown` event:
 
 ```tsx filename="app/entry.tsx" switcher
-'use client'
+"use client";
 
 export function Entry() {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (
       (e.ctrlKey || e.metaKey) &&
-      (e.key === 'Enter' || e.key === 'NumpadEnter')
+      (e.key === "Enter" || e.key === "NumpadEnter")
     ) {
-      e.preventDefault()
-      e.currentTarget.form?.requestSubmit()
+      e.preventDefault();
+      e.currentTarget.form?.requestSubmit();
     }
-  }
+  };
 
   return (
     <div>
       <textarea name="entry" rows={20} required onKeyDown={handleKeyDown} />
     </div>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/entry.js" switcher
-'use client'
+"use client";
 
 export function Entry() {
   const handleKeyDown = (e) => {
     if (
       (e.ctrlKey || e.metaKey) &&
-      (e.key === 'Enter' || e.key === 'NumpadEnter')
+      (e.key === "Enter" || e.key === "NumpadEnter")
     ) {
-      e.preventDefault()
-      e.currentTarget.form?.requestSubmit()
+      e.preventDefault();
+      e.currentTarget.form?.requestSubmit();
     }
-  }
+  };
 
   return (
     <div>
       <textarea name="entry" rows={20} required onKeyDown={handleKeyDown} />
     </div>
-  )
+  );
 }
 ```
 

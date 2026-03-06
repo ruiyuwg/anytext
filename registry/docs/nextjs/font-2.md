@@ -9,17 +9,17 @@ You can also conveniently use all [Google Fonts](https://fonts.google.com/). CSS
 To use the font in all your pages, add it to [`_app.js` file](/docs/pages/building-your-application/routing/custom-app) under `/pages` as shown below:
 
 ```jsx filename="pages/_app.js"
-import { Inter } from 'next/font/google'
+import { Inter } from "next/font/google";
 
 // If loading a variable font, you don't need to specify the font weight
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export default function MyApp({ Component, pageProps }) {
   return (
     <main className={inter.className}>
       <Component {...pageProps} />
     </main>
-  )
+  );
 }
 ```
 
@@ -27,19 +27,19 @@ export default function MyApp({ Component, pageProps }) {
 
 ## Reference
 
-| Key                                         | `font/google`       | `font/local`        | Type                       | Required          |
-| ------------------------------------------- | ------------------- | ------------------- | -------------------------- | ----------------- |
-| [`src`](#src)                               |  |  | String or Array of Objects | Yes               |
-| [`weight`](#weight)                         |  |  | String or Array            | Required/Optional |
-| [`style`](#style)                           |  |  | String or Array            | -                 |
-| [`subsets`](#subsets)                       |  |  | Array of Strings           | -                 |
-| [`axes`](#axes)                             |  |  | Array of Strings           | -                 |
-| [`display`](#display)                       |  |  | String                     | -                 |
-| [`preload`](#preload)                       |  |  | Boolean                    | -                 |
-| [`fallback`](#fallback)                     |  |  | Array of Strings           | -                 |
-| [`adjustFontFallback`](#adjustfontfallback) |  |  | Boolean or String          | -                 |
-| [`variable`](#variable)                     |  |  | String                     | -                 |
-| [`declarations`](#declarations)             |  |  | Array of Objects           | -                 |
+| Key                                         | `font/google` | `font/local` | Type                       | Required          |
+| ------------------------------------------- | ------------- | ------------ | -------------------------- | ----------------- |
+| [`src`](#src)                               |               |              | String or Array of Objects | Yes               |
+| [`weight`](#weight)                         |               |              | String or Array            | Required/Optional |
+| [`style`](#style)                           |               |              | String or Array            | -                 |
+| [`subsets`](#subsets)                       |               |              | Array of Strings           | -                 |
+| [`axes`](#axes)                             |               |              | Array of Strings           | -                 |
+| [`display`](#display)                       |               |              | String                     | -                 |
+| [`preload`](#preload)                       |               |              | Boolean                    | -                 |
+| [`fallback`](#fallback)                     |               |              | Array of Strings           | -                 |
+| [`adjustFontFallback`](#adjustfontfallback) |               |              | Boolean or String          | -                 |
+| [`variable`](#variable)                     |               |              | String                     | -                 |
+| [`declarations`](#declarations)             |               |              | Array of Objects           | -                 |
 
 ### `src`
 
@@ -198,36 +198,36 @@ To use a Google font, import it from `next/font/google` as a function. We recomm
 To use the font in all your pages, add it to [`_app.js` file](/docs/pages/building-your-application/routing/custom-app) under `/pages` as shown below:
 
 ```jsx filename="pages/_app.js"
-import { Inter } from 'next/font/google'
+import { Inter } from "next/font/google";
 
 // If loading a variable font, you don't need to specify the font weight
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export default function MyApp({ Component, pageProps }) {
   return (
     <main className={inter.className}>
       <Component {...pageProps} />
     </main>
-  )
+  );
 }
 ```
 
 If you can't use a variable font, you will **need to specify a weight**:
 
 ```jsx filename="pages/_app.js"
-import { Roboto } from 'next/font/google'
+import { Roboto } from "next/font/google";
 
 const roboto = Roboto({
-  weight: '400',
-  subsets: ['latin'],
-})
+  weight: "400",
+  subsets: ["latin"],
+});
 
 export default function MyApp({ Component, pageProps }) {
   return (
     <main className={roboto.className}>
       <Component {...pageProps} />
     </main>
-  )
+  );
 }
 ```
 
@@ -235,11 +235,11 @@ You can specify multiple weights and/or styles by using an array:
 
 ```jsx filename="app/layout.js"
 const roboto = Roboto({
-  weight: ['400', '700'],
-  style: ['normal', 'italic'],
-  subsets: ['latin'],
-  display: 'swap',
-})
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  display: "swap",
+});
 ```
 
 > **Good to know**: Use an underscore (\_) for font names with multiple words. E.g. `Roboto Mono` should be imported as `Roboto_Mono`.
@@ -249,9 +249,9 @@ const roboto = Roboto({
 You can also use the font without a wrapper and `className` by injecting it inside the `<head>` as follows:
 
 ```jsx filename="pages/_app.js"
-import { Inter } from 'next/font/google'
+import { Inter } from "next/font/google";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export default function MyApp({ Component, pageProps }) {
   return (
@@ -263,7 +263,7 @@ export default function MyApp({ Component, pageProps }) {
       `}</style>
       <Component {...pageProps} />
     </>
-  )
+  );
 }
 ```
 
@@ -272,16 +272,16 @@ export default function MyApp({ Component, pageProps }) {
 To use the font on a single page, add it to the specific page as shown below:
 
 ```jsx filename="pages/index.js"
-import { Inter } from 'next/font/google'
+import { Inter } from "next/font/google";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (
     <div className={inter.className}>
       <p>Hello World</p>
     </div>
-  )
+  );
 }
 ```
 
@@ -292,7 +292,7 @@ Google Fonts are automatically [subset](https://fonts.google.com/knowledge/gloss
 This can be done by adding it to the function call:
 
 ```jsx filename="pages/_app.js"
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 ```
 
 View the [Font API Reference](/docs/app/api-reference/components/font) for more information.
@@ -304,31 +304,31 @@ You can import and use multiple fonts in your application. There are two approac
 The first approach is to create a utility function that exports a font, imports it, and applies its `className` where needed. This ensures the font is preloaded only when it's rendered:
 
 ```ts filename="app/fonts.ts" switcher
-import { Inter, Roboto_Mono } from 'next/font/google'
+import { Inter, Roboto_Mono } from "next/font/google";
 
 export const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-})
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const roboto_mono = Roboto_Mono({
-  subsets: ['latin'],
-  display: 'swap',
-})
+  subsets: ["latin"],
+  display: "swap",
+});
 ```
 
 ```js filename="app/fonts.js" switcher
-import { Inter, Roboto_Mono } from 'next/font/google'
+import { Inter, Roboto_Mono } from "next/font/google";
 
 export const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-})
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const roboto_mono = Roboto_Mono({
-  subsets: ['latin'],
-  display: 'swap',
-})
+  subsets: ["latin"],
+  display: "swap",
+});
 ```
 
 In the example above, `Inter` will be applied globally, and `Roboto Mono` can be imported and applied as needed.
@@ -354,17 +354,17 @@ In the example above, `Inter` will be applied globally, and any `<h1>` tags will
 Import `next/font/local` and specify the `src` of your local font file. We recommend using [variable fonts](https://fonts.google.com/variablefonts) for the best performance and flexibility.
 
 ```jsx filename="pages/_app.js"
-import localFont from 'next/font/local'
+import localFont from "next/font/local";
 
 // Font files can be colocated inside of `pages`
-const myFont = localFont({ src: './my-font.woff2' })
+const myFont = localFont({ src: "./my-font.woff2" });
 
 export default function MyApp({ Component, pageProps }) {
   return (
     <main className={myFont.className}>
       <Component {...pageProps} />
     </main>
-  )
+  );
 }
 ```
 
@@ -374,27 +374,27 @@ If you want to use multiple files for a single font family, `src` can be an arra
 const roboto = localFont({
   src: [
     {
-      path: './Roboto-Regular.woff2',
-      weight: '400',
-      style: 'normal',
+      path: "./Roboto-Regular.woff2",
+      weight: "400",
+      style: "normal",
     },
     {
-      path: './Roboto-Italic.woff2',
-      weight: '400',
-      style: 'italic',
+      path: "./Roboto-Italic.woff2",
+      weight: "400",
+      style: "italic",
     },
     {
-      path: './Roboto-Bold.woff2',
-      weight: '700',
-      style: 'normal',
+      path: "./Roboto-Bold.woff2",
+      weight: "700",
+      style: "normal",
     },
     {
-      path: './Roboto-BoldItalic.woff2',
-      weight: '700',
-      style: 'italic',
+      path: "./Roboto-BoldItalic.woff2",
+      weight: "700",
+      style: "italic",
     },
   ],
-})
+});
 ```
 
 View the [Font API Reference](/docs/app/api-reference/components/font) for more information.
@@ -408,32 +408,32 @@ In the example below, we use the `Inter` and `Roboto_Mono` fonts from `next/font
 > **Good to know**: You can add these variables to the `<html>` or `<body>` tag, depending on your preference, styling needs or project requirements.
 
 ```jsx filename="pages/_app.js"
-import { Inter } from 'next/font/google'
+import { Inter } from "next/font/google";
 
 const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-})
+  subsets: ["latin"],
+  variable: "--font-inter",
+});
 
 const roboto_mono = Roboto_Mono({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-roboto-mono',
-})
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-roboto-mono",
+});
 
 export default function MyApp({ Component, pageProps }) {
   return (
     <main className={`${inter.variable} ${roboto_mono.variable} font-sans`}>
       <Component {...pageProps} />
     </main>
-  )
+  );
 }
 ```
 
 Finally, add the CSS variable to your [Tailwind CSS config](/docs/app/getting-started/css#tailwind-css):
 
 ```css filename="global.css"
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @theme inline {
   --font-sans: var(--font-inter);
@@ -447,20 +447,20 @@ Finally, add the CSS variable to your [Tailwind CSS config](/docs/app/getting-st
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './pages/**/*.{js,ts,jsx,tsx}',
-    './components/**/*.{js,ts,jsx,tsx}',
-    './app/**/*.{js,ts,jsx,tsx}',
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+    "./app/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-inter)'],
-        mono: ['var(--font-roboto-mono)'],
+        sans: ["var(--font-inter)"],
+        mono: ["var(--font-roboto-mono)"],
       },
     },
   },
   plugins: [],
-}
+};
 ```
 
 You can now use the `font-sans` and `font-mono` utility classes to apply the font to your elements.
@@ -501,21 +501,21 @@ If you would like to set your styles in an external style sheet and specify addi
 In addition to importing the font, also import the CSS file where the CSS variable is defined and set the variable option of the font loader object as follows:
 
 ```tsx filename="app/page.tsx" switcher
-import { Inter } from 'next/font/google'
-import styles from '../styles/component.module.css'
+import { Inter } from "next/font/google";
+import styles from "../styles/component.module.css";
 
 const inter = Inter({
-  variable: '--font-inter',
-})
+  variable: "--font-inter",
+});
 ```
 
 ```jsx filename="app/page.js" switcher
-import { Inter } from 'next/font/google'
-import styles from '../styles/component.module.css'
+import { Inter } from "next/font/google";
+import styles from "../styles/component.module.css";
 
 const inter = Inter({
-  variable: '--font-inter',
-})
+  variable: "--font-inter",
+});
 ```
 
 To use the font, set the `className` of the parent container of the text you would like to style to the font loader's `variable` value and the `className` of the text to the `styles` property from the external CSS file.
@@ -553,41 +553,41 @@ For example, create a `fonts.ts` file in a `styles` folder at the root of your a
 Then, specify your font definitions as follows:
 
 ```ts filename="styles/fonts.ts" switcher
-import { Inter, Lora, Source_Sans_3 } from 'next/font/google'
-import localFont from 'next/font/local'
+import { Inter, Lora, Source_Sans_3 } from "next/font/google";
+import localFont from "next/font/local";
 
 // define your variable fonts
-const inter = Inter()
-const lora = Lora()
+const inter = Inter();
+const lora = Lora();
 // define 2 weights of a non-variable font
-const sourceCodePro400 = Source_Sans_3({ weight: '400' })
-const sourceCodePro700 = Source_Sans_3({ weight: '700' })
+const sourceCodePro400 = Source_Sans_3({ weight: "400" });
+const sourceCodePro700 = Source_Sans_3({ weight: "700" });
 // define a custom local font where GreatVibes-Regular.ttf is stored in the styles folder
-const greatVibes = localFont({ src: './GreatVibes-Regular.ttf' })
+const greatVibes = localFont({ src: "./GreatVibes-Regular.ttf" });
 
-export { inter, lora, sourceCodePro400, sourceCodePro700, greatVibes }
+export { inter, lora, sourceCodePro400, sourceCodePro700, greatVibes };
 ```
 
 ```js filename="styles/fonts.js" switcher
-import { Inter, Lora, Source_Sans_3 } from 'next/font/google'
-import localFont from 'next/font/local'
+import { Inter, Lora, Source_Sans_3 } from "next/font/google";
+import localFont from "next/font/local";
 
 // define your variable fonts
-const inter = Inter()
-const lora = Lora()
+const inter = Inter();
+const lora = Lora();
 // define 2 weights of a non-variable font
-const sourceCodePro400 = Source_Sans_3({ weight: '400' })
-const sourceCodePro700 = Source_Sans_3({ weight: '700' })
+const sourceCodePro400 = Source_Sans_3({ weight: "400" });
+const sourceCodePro700 = Source_Sans_3({ weight: "700" });
 // define a custom local font where GreatVibes-Regular.ttf is stored in the styles folder
-const greatVibes = localFont({ src: './GreatVibes-Regular.ttf' })
+const greatVibes = localFont({ src: "./GreatVibes-Regular.ttf" });
 
-export { inter, lora, sourceCodePro400, sourceCodePro700, greatVibes }
+export { inter, lora, sourceCodePro400, sourceCodePro700, greatVibes };
 ```
 
 You can now use these definitions in your code as follows:
 
 ```tsx filename="app/page.tsx" switcher
-import { inter, lora, sourceCodePro700, greatVibes } from '../styles/fonts'
+import { inter, lora, sourceCodePro700, greatVibes } from "../styles/fonts";
 
 export default function Page() {
   return (
@@ -599,12 +599,12 @@ export default function Page() {
       </p>
       <p className={greatVibes.className}>My title in Great Vibes font</p>
     </div>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/page.js" switcher
-import { inter, lora, sourceCodePro700, greatVibes } from '../styles/fonts'
+import { inter, lora, sourceCodePro700, greatVibes } from "../styles/fonts";
 
 export default function Page() {
   return (
@@ -616,7 +616,7 @@ export default function Page() {
       </p>
       <p className={greatVibes.className}>My title in Great Vibes font</p>
     </div>
-  )
+  );
 }
 ```
 
@@ -635,11 +635,11 @@ To make it easier to access the font definitions in your code, you can define a 
 You can now import any font definition as follows:
 
 ```tsx filename="app/about/page.tsx" switcher
-import { greatVibes, sourceCodePro400 } from '@/fonts'
+import { greatVibes, sourceCodePro400 } from "@/fonts";
 ```
 
 ```jsx filename="app/about/page.js" switcher
-import { greatVibes, sourceCodePro400 } from '@/fonts'
+import { greatVibes, sourceCodePro400 } from "@/fonts";
 ```
 
 ### Preloading

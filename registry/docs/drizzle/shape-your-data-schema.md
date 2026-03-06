@@ -22,26 +22,26 @@ there is no such thing as a common table object in drizzle. You need to choose a
 \<CodeTabs items={\["PostgreSQL Table", "MySQL Table", "SQLite Table"]}>
 
 ```ts copy
-import { pgTable, integer } from "drizzle-orm/pg-core"
+import { pgTable, integer } from "drizzle-orm/pg-core";
 
-export const users = pgTable('users', {
-  id: integer()
+export const users = pgTable("users", {
+  id: integer(),
 });
 ```
 
 ```ts copy
-import { mysqlTable, int } from "drizzle-orm/mysql-core"
+import { mysqlTable, int } from "drizzle-orm/mysql-core";
 
-export const users = mysqlTable('users', {
-  id: int()
+export const users = mysqlTable("users", {
+  id: int(),
 });
 ```
 
 ```ts copy
-import { sqliteTable, integer } from "drizzle-orm/sqlite-core"
+import { sqliteTable, integer } from "drizzle-orm/sqlite-core";
 
-export const users = sqliteTable('users', {
-  id: integer()
+export const users = sqliteTable("users", {
+  id: integer(),
 });
 ```
 
@@ -64,7 +64,7 @@ import { integer, pgTable, varchar } from "drizzle-orm/pg-core";
 
 export const users = pgTable('users', {
 id: integer(),
-first\_name: varchar()
+first_name: varchar()
 })
 
 ````
@@ -88,7 +88,7 @@ import { integer, pgTable, varchar } from "drizzle-orm/pg-core";
 
 export const users = pgTable('users', {
 id: integer(),
-firstName: varchar('first\_name')
+firstName: varchar('first_name')
 })
 
 ````
@@ -189,9 +189,9 @@ You can manage your PostgreSQL schemas with `pgSchema` and place any other model
 Define the schema you want to manage using Drizzle
 
 ```ts
-import { pgSchema } from "drizzle-orm/pg-core"
+import { pgSchema } from "drizzle-orm/pg-core";
 
-export const customSchema = pgSchema('custom');
+export const customSchema = pgSchema("custom");
 ```
 
 Then place the table inside the schema object
@@ -199,17 +199,17 @@ Then place the table inside the schema object
 ```ts {5-7}
 import { integer, pgSchema } from "drizzle-orm/pg-core";
 
-export const customSchema = pgSchema('custom');
+export const customSchema = pgSchema("custom");
 
-export const users = customSchema.table('users', {
-  id: integer()
-})
+export const users = customSchema.table("users", {
+  id: integer(),
+});
 ```
 
 </Tab>
 <Tab>
 \
-In MySQL, there is an entity called `Schema`, but in MySQL terms, this is equivalent to a `Database`. 
+In MySQL, there is an entity called `Schema`, but in MySQL terms, this is equivalent to a `Database`.
 
 You can define them with `drizzle-orm` and use them in queries, but they won't be detected by `drizzle-kit` or included in the migration flow
 
@@ -218,9 +218,9 @@ You can define them with `drizzle-orm` and use them in queries, but they won't b
 Define the schema you want to manage using Drizzle
 
 ```ts
-import { mysqlSchema } from "drizzle-orm/mysql-core"
+import { mysqlSchema } from "drizzle-orm/mysql-core";
 
-export const customSchema = mysqlSchema('custom');
+export const customSchema = mysqlSchema("custom");
 ```
 
 Then place the table inside the schema object
@@ -228,11 +228,11 @@ Then place the table inside the schema object
 ```ts {5-7}
 import { int, mysqlSchema } from "drizzle-orm/mysql-core";
 
-export const customSchema = mysqlSchema('custom');
+export const customSchema = mysqlSchema("custom");
 
-export const users = customSchema.table('users', {
-  id: int()
-})
+export const users = customSchema.table("users", {
+  id: int(),
+});
 ```
 
 </Tab>
@@ -267,9 +267,7 @@ export const users = table(
     invitee: t.integer().references((): AnyPgColumn => users.id),
     role: rolesEnum().default("guest"),
   },
-  (table) => [
-    t.uniqueIndex("email_idx").on(table.email)
-  ]
+  (table) => [t.uniqueIndex("email_idx").on(table.email)],
 );
 
 export const posts = table(
@@ -283,7 +281,7 @@ export const posts = table(
   (table) => [
     t.uniqueIndex("slug_idx").on(table.slug),
     t.index("title_idx").on(table.title),
-  ]
+  ],
 );
 
 export const comments = table("comments", {
@@ -309,9 +307,7 @@ export const users = table(
     invitee: t.int().references((): AnyMySqlColumn => users.id),
     role: t.mysqlEnum(["guest", "user", "admin"]).default("guest"),
   },
-  (table) => [
-    t.uniqueIndex("email_idx").on(table.email)
-  ]
+  (table) => [t.uniqueIndex("email_idx").on(table.email)],
 );
 
 export const posts = table(
@@ -325,7 +321,7 @@ export const posts = table(
   (table) => [
     t.uniqueIndex("slug_idx").on(table.slug),
     t.index("title_idx").on(table.title),
-  ]
+  ],
 );
 
 export const comments = table("comments", {
@@ -351,9 +347,7 @@ export const users = table(
     invitee: t.int().references((): AnySQLiteColumn => users.id),
     role: t.text().$type<"guest" | "user" | "admin">().default("guest"),
   },
-  (table) => [
-    t.uniqueIndex("email_idx").on(table.email)
-  ]
+  (table) => [t.uniqueIndex("email_idx").on(table.email)],
 );
 
 export const posts = table(
@@ -367,7 +361,7 @@ export const posts = table(
   (table) => [
     t.uniqueIndex("slug_idx").on(table.slug),
     t.index("title_idx").on(table.title),
-  ]
+  ],
 );
 
 export const comments = table("comments", {

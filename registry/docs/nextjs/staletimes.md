@@ -15,9 +15,9 @@ const nextConfig = {
       static: 180,
     },
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 The `static` and `dynamic` properties correspond with the time period (in seconds) based on different types of [link prefetching](/docs/app/api-reference/components/link#prefetch).
@@ -51,7 +51,7 @@ You can learn more about the Client Router Cache [here](/docs/app/guides/caching
 The `staticGeneration*` options allow you to configure the Static Generation process for advanced use cases.
 
 ```ts filename="next.config.ts" switcher
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   experimental: {
@@ -59,9 +59,9 @@ const nextConfig: NextConfig = {
     staticGenerationMaxConcurrency: 8,
     staticGenerationMinPagesPerWorker: 25,
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 ```js filename="next.config.js" switcher
@@ -71,9 +71,9 @@ const nextConfig = {
     staticGenerationMaxConcurrency: 8,
     staticGenerationMinPagesPerWorker: 25,
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 ## Config Options

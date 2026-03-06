@@ -2,11 +2,11 @@
 
 Validates against syntax that React Compiler does not support. If you need to, you can still use this syntax outside of React, such as in a standalone utility function.
 
-## Rule Details {/*rule-details*/}
+## Rule Details {/_rule-details_/}
 
 React Compiler needs to statically analyze your code to apply optimizations. Features like `eval` and `with` make it impossible to statically understand what the code does at compile time, so the compiler can't optimize components that use them.
 
-### Invalid {/*invalid*/}
+### Invalid {/_invalid_/}
 
 Examples of incorrect code for this rule:
 
@@ -19,25 +19,26 @@ function Component({ code }) {
 
 // ❌ Using with statement
 function Component() {
-  with (Math) { // Changes scope dynamically
+  with (Math) {
+    // Changes scope dynamically
     return <div>{sin(PI / 2)}</div>;
   }
 }
 
 // ❌ Dynamic property access with eval
-function Component({propName}) {
+function Component({ propName }) {
   const value = eval(`props.${propName}`);
   return <div>{value}</div>;
 }
 ```
 
-### Valid {/*valid*/}
+### Valid {/_valid_/}
 
 Examples of correct code for this rule:
 
 ```js
 // ✅ Use normal property access
-function Component({propName, props}) {
+function Component({ propName, props }) {
   const value = props[propName]; // Analyzable
   return <div>{value}</div>;
 }
@@ -48,15 +49,15 @@ function Component() {
 }
 ```
 
-## Troubleshooting {/*troubleshooting*/}
+## Troubleshooting {/_troubleshooting_/}
 
-### I need to evaluate dynamic code {/*evaluate-dynamic-code*/}
+### I need to evaluate dynamic code {/_evaluate-dynamic-code_/}
 
 You might need to evaluate user-provided code:
 
 ```js {expectedErrors: {'react-compiler': [3]}}
 // ❌ Wrong: eval in component
-function Calculator({expression}) {
+function Calculator({ expression }) {
   const result = eval(expression); // Unsafe and unoptimizable
   return <div>Result: {result}</div>;
 }
@@ -66,9 +67,9 @@ Use a safe expression parser instead:
 
 ```js
 // ✅ Better: Use a safe parser
-import {evaluate} from 'mathjs'; // or similar library
+import { evaluate } from "mathjs"; // or similar library
 
-function Calculator({expression}) {
+function Calculator({ expression }) {
   const [result, setResult] = useState(null);
 
   const calculate = () => {
@@ -76,7 +77,7 @@ function Calculator({expression}) {
       // Safe mathematical expression evaluation
       setResult(evaluate(expression));
     } catch (error) {
-      setResult('Invalid expression');
+      setResult("Invalid expression");
     }
   };
 
@@ -91,7 +92,7 @@ function Calculator({expression}) {
 
 Never use `eval` with user input - it's a security risk. Use dedicated parsing libraries for specific use cases like mathematical expressions, JSON parsing, or template evaluation.
 
-***
+---
 
 ## Sitemap
 

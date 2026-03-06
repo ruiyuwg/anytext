@@ -24,25 +24,24 @@ drizzle-orm pg -D drizzle-kit @types/pg
 #### Step 2 - Initialize the driver and make a query
 
 ```typescript copy
-import { drizzle } from 'drizzle-orm/node-postgres';
+import { drizzle } from "drizzle-orm/node-postgres";
 
 const db = drizzle(process.env.DATABASE_URL);
 
-const result = await db.execute('select 1');
-
+const result = await db.execute("select 1");
 ```
 
 ```typescript copy
-import { drizzle } from 'drizzle-orm/node-postgres';
+import { drizzle } from "drizzle-orm/node-postgres";
 
 const db = drizzle({
   connection: {
     connectionString: process.env.DATABASE_URL,
-    ssl: true
-  }
+    ssl: true,
+  },
 });
 
-const result = await db.execute('select 1');
+const result = await db.execute("select 1");
 ```
 
 ```typescript copy
@@ -73,8 +72,8 @@ drizzle-orm @neondatabase/serverless -D drizzle-kit
 #### Step 2 - Initialize the driver and make a query
 
 ```typescript copy
-import { neon, neonConfig } from '@neondatabase/serverless';
-import { drizzle } from 'drizzle-orm/neon-http';
+import { neon, neonConfig } from "@neondatabase/serverless";
+import { drizzle } from "drizzle-orm/neon-http";
 
 // Required for PlanetScale Postgres connections
 neonConfig.fetchEndpoint = (host) => `https://${host}/sql`;
@@ -82,13 +81,12 @@ neonConfig.fetchEndpoint = (host) => `https://${host}/sql`;
 const sql = neon(process.env.DATABASE_URL!);
 const db = drizzle({ client: sql });
 
-const result = await db.execute('select 1');
-
+const result = await db.execute("select 1");
 ```
 
 ```typescript copy
-import { Pool, neonConfig } from '@neondatabase/serverless';
-import { drizzle } from 'drizzle-orm/neon-serverless';
+import { Pool, neonConfig } from "@neondatabase/serverless";
+import { drizzle } from "drizzle-orm/neon-serverless";
 
 // Required for PlanetScale Postgres connections
 neonConfig.pipelineConnect = false;
@@ -97,7 +95,7 @@ neonConfig.wsProxy = (host, port) => `${host}/v2?address=${host}:${port}`;
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 const db = drizzle({ client: pool });
 
-const result = await db.execute('select 1');
+const result = await db.execute("select 1");
 ```
 
 ```typescript copy

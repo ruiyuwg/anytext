@@ -10,7 +10,7 @@ Next.js provides two conventions to handle not found cases:
 The **not-found** file is used to render UI when the [`notFound`](/docs/app/api-reference/functions/not-found) function is thrown within a route segment. Along with serving a custom UI, Next.js will return a `200` HTTP status code for streamed responses, and `404` for non-streamed responses (see [Status Codes](/docs/app/api-reference/file-conventions/loading#status-codes) for details about SEO).
 
 ```tsx filename="app/not-found.tsx" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function NotFound() {
   return (
@@ -19,12 +19,12 @@ export default function NotFound() {
       <p>Could not find requested resource</p>
       <Link href="/">Return Home</Link>
     </div>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/blog/not-found.js" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function NotFound() {
   return (
@@ -33,7 +33,7 @@ export default function NotFound() {
       <p>Could not find requested resource</p>
       <Link href="/">Return Home</Link>
     </div>
-  )
+  );
 }
 ```
 
@@ -53,31 +53,31 @@ The `global-not-found.js` file bypasses your app's normal rendering, which means
 To enable it, add the `globalNotFound` flag in `next.config.ts`:
 
 ```tsx filename="next.config.ts"
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   experimental: {
     globalNotFound: true,
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 Then, create a file in the root of the `app` directory: `app/global-not-found.js`:
 
 ```tsx filename="app/global-not-found.tsx" switcher
 // Import global styles and fonts
-import './globals.css'
-import { Inter } from 'next/font/google'
-import type { Metadata } from 'next'
+import "./globals.css";
+import { Inter } from "next/font/google";
+import type { Metadata } from "next";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: '404 - Page Not Found',
-  description: 'The page you are looking for does not exist.',
-}
+  title: "404 - Page Not Found",
+  description: "The page you are looking for does not exist.",
+};
 
 export default function GlobalNotFound() {
   return (
@@ -87,21 +87,21 @@ export default function GlobalNotFound() {
         <p>This page does not exist.</p>
       </body>
     </html>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/global-not-found.js" switcher
 // Import global styles and fonts
-import './globals.css'
-import { Inter } from 'next/font/google'
+import "./globals.css";
+import { Inter } from "next/font/google";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: '404 - Page Not Found',
-  description: 'The page you are looking for does not exist.',
-}
+  title: "404 - Page Not Found",
+  description: "The page you are looking for does not exist.",
+};
 
 export default function GlobalNotFound() {
   return (
@@ -111,7 +111,7 @@ export default function GlobalNotFound() {
         <p>This page does not exist.</p>
       </body>
     </html>
-  )
+  );
 }
 ```
 
@@ -132,13 +132,13 @@ Unlike `not-found.js`, this file must return a full HTML document, including `<h
 By default, `not-found` is a Server Component. You can mark it as `async` to fetch and display data:
 
 ```tsx filename="app/not-found.tsx" switcher
-import Link from 'next/link'
-import { headers } from 'next/headers'
+import Link from "next/link";
+import { headers } from "next/headers";
 
 export default async function NotFound() {
-  const headersList = await headers()
-  const domain = headersList.get('host')
-  const data = await getSiteData(domain)
+  const headersList = await headers();
+  const domain = headersList.get("host");
+  const data = await getSiteData(domain);
   return (
     <div>
       <h2>Not Found: {data.name}</h2>
@@ -147,18 +147,18 @@ export default async function NotFound() {
         View <Link href="/blog">all posts</Link>
       </p>
     </div>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/not-found.jsx" switcher
-import Link from 'next/link'
-import { headers } from 'next/headers'
+import Link from "next/link";
+import { headers } from "next/headers";
 
 export default async function NotFound() {
-  const headersList = await headers()
-  const domain = headersList.get('host')
-  const data = await getSiteData(domain)
+  const headersList = await headers();
+  const domain = headersList.get("host");
+  const data = await getSiteData(domain);
   return (
     <div>
       <h2>Not Found: {data.name}</h2>
@@ -167,7 +167,7 @@ export default async function NotFound() {
         View <Link href="/blog">all posts</Link>
       </p>
     </div>
-  )
+  );
 }
 ```
 
@@ -180,12 +180,12 @@ For `global-not-found.js`, you can export a `metadata` object or a [`generateMet
 > **Good to know**: Next.js automatically injects `<meta name="robots" content="noindex" />` for pages that return a 404 status code, including `global-not-found.js` pages.
 
 ```tsx filename="app/global-not-found.tsx" switcher
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Not Found',
-  description: 'The page you are looking for does not exist.',
-}
+  title: "Not Found",
+  description: "The page you are looking for does not exist.",
+};
 
 export default function GlobalNotFound() {
   return (
@@ -197,15 +197,15 @@ export default function GlobalNotFound() {
         </div>
       </body>
     </html>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/global-not-found.js" switcher
 export const metadata = {
-  title: 'Not Found',
-  description: 'The page you are looking for does not exist.',
-}
+  title: "Not Found",
+  description: "The page you are looking for does not exist.",
+};
 
 export default function GlobalNotFound() {
   return (
@@ -217,7 +217,7 @@ export default function GlobalNotFound() {
         </div>
       </body>
     </html>
-  )
+  );
 }
 ```
 

@@ -25,17 +25,17 @@ Tags must first be assigned to cached data. You can do this in two ways:
 - Using the [`next.tags`](/docs/app/guides/caching#fetch-optionsnexttags-and-revalidatetag) option with `fetch` for caching external API requests:
 
 ```tsx
-fetch(url, { next: { tags: ['posts'] } })
+fetch(url, { next: { tags: ["posts"] } });
 ```
 
 - Using [`cacheTag`](/docs/app/api-reference/functions/cacheTag) inside cached functions or components with the `'use cache'` directive:
 
 ```tsx
-import { cacheTag } from 'next/cache'
+import { cacheTag } from "next/cache";
 
 async function getData() {
-  'use cache'
-  cacheTag('posts')
+  "use cache";
+  cacheTag("posts");
   // ...
 }
 ```
@@ -64,69 +64,69 @@ While both `updateTag` and `revalidateTag` invalidate cached data, they serve di
 ### Server Action with Read-Your-Own-Writes
 
 ```ts filename="app/actions.ts" switcher
-'use server'
+"use server";
 
-import { updateTag } from 'next/cache'
-import { redirect } from 'next/navigation'
+import { updateTag } from "next/cache";
+import { redirect } from "next/navigation";
 
 export async function createPost(formData: FormData) {
-  const title = formData.get('title')
-  const content = formData.get('content')
+  const title = formData.get("title");
+  const content = formData.get("content");
 
   // Create the post in your database
   const post = await db.post.create({
     data: { title, content },
-  })
+  });
 
   // Invalidate cache tags so the new post is immediately visible
   // 'posts' tag: affects any page that displays a list of posts
-  updateTag('posts')
+  updateTag("posts");
   // 'post-{id}' tag: affects the individual post detail page
-  updateTag(`post-${post.id}`)
+  updateTag(`post-${post.id}`);
 
   // Redirect to the new post - user will see fresh data, not cached
-  redirect(`/posts/${post.id}`)
+  redirect(`/posts/${post.id}`);
 }
 ```
 
 ```js filename="app/actions.js" switcher
-'use server'
+"use server";
 
-import { updateTag } from 'next/cache'
-import { redirect } from 'next/navigation'
+import { updateTag } from "next/cache";
+import { redirect } from "next/navigation";
 
 export async function createPost(formData) {
-  const title = formData.get('title')
-  const content = formData.get('content')
+  const title = formData.get("title");
+  const content = formData.get("content");
 
   // Create the post in your database
   const post = await db.post.create({
     data: { title, content },
-  })
+  });
 
   // Invalidate cache tags so the new post is immediately visible
   // 'posts' tag: affects any page that displays a list of posts
-  updateTag('posts')
+  updateTag("posts");
   // 'post-{id}' tag: affects the individual post detail page
-  updateTag(`post-${post.id}`)
+  updateTag(`post-${post.id}`);
 
   // Redirect to the new post - user will see fresh data, not cached
-  redirect(`/posts/${post.id}`)
+  redirect(`/posts/${post.id}`);
 }
 ```
 
 ### Error when used outside Server Actions
 
 ```ts filename="app/api/posts/route.ts" switcher
-import { updateTag } from 'next/cache'
+import { updateTag } from "next/cache";
 
 export async function POST() {
   // This will throw an error
-  updateTag('posts')
+  updateTag("posts");
   // Error: updateTag can only be called from within a Server Action
 
   // Use revalidateTag instead in Route Handlers
-  revalidateTag('posts', 'max')
+  revalidateTag("posts", "max");
 }
 ```
 

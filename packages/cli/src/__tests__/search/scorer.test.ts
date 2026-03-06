@@ -55,7 +55,7 @@ describe("scoreTopics", () => {
         title: `React Topic ${i}`,
         description: `About react topic ${i}`,
         path: `react/topic-${i}.md`,
-      })
+      }),
     );
     const manifest = makeManifest({
       libraries: [makeLibrary({ topics })],

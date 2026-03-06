@@ -66,7 +66,7 @@ function extractInlineCode(markdown: string): string[] {
   const unique = new Set(
     matches
       .map((m) => m.slice(1, -1).trim())
-      .filter((s) => s.length > 0 && s.length < 40)
+      .filter((s) => s.length > 0 && s.length < 40),
   );
   return [...unique];
 }

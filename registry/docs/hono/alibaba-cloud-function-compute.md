@@ -47,14 +47,14 @@ touch src/index.ts
 Edit `src/index.ts`.
 
 ```ts
-import { Hono } from 'hono'
-import { handle } from 'hono-alibaba-cloud-fc3-adapter'
+import { Hono } from "hono";
+import { handle } from "hono-alibaba-cloud-fc3-adapter";
 
-const app = new Hono()
+const app = new Hono();
 
-app.get('/', (c) => c.text('Hello Hono!'))
+app.get("/", (c) => c.text("Hello Hono!"));
 
-export const handler = handle(app)
+export const handler = handle(app);
 ```
 
 ## 3. Setup serverless-devs
@@ -74,19 +74,19 @@ Edit `s.yaml`
 ```yaml
 edition: 3.0.0
 name: my-app
-access: 'default'
+access: "default"
 
 vars:
-  region: 'us-west-1'
+  region: "us-west-1"
 
 resources:
   my-app:
     component: fc3
     props:
       region: ${vars.region}
-      functionName: 'my-app'
-      description: 'Hello World by Hono'
-      runtime: 'nodejs20'
+      functionName: "my-app"
+      description: "Hello World by Hono"
+      runtime: "nodejs20"
       code: ./dist
       handler: index.handler
       memorySize: 1024

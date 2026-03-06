@@ -13,7 +13,7 @@ If a resource doesn't exist, you can use the [`notFound` function](/docs/app/api
 The `permanentRedirect` function accepts two arguments:
 
 ```js
-permanentRedirect(path, type)
+permanentRedirect(path, type);
 ```
 
 | Parameter | Type                                                          | Description                                                 |
@@ -26,11 +26,11 @@ By default, `permanentRedirect` will use `push` (adding a new entry to the brows
 The `RedirectType` object contains the available options for the `type` parameter.
 
 ```ts
-import { permanentRedirect, RedirectType } from 'next/navigation'
+import { permanentRedirect, RedirectType } from "next/navigation";
 
-permanentRedirect('/redirect-to', RedirectType.replace)
+permanentRedirect("/redirect-to", RedirectType.replace);
 // or
-permanentRedirect('/redirect-to', RedirectType.push)
+permanentRedirect("/redirect-to", RedirectType.push);
 ```
 
 The `type` parameter has no effect when used in Server Components.
@@ -44,19 +44,19 @@ The `type` parameter has no effect when used in Server Components.
 Invoking the `permanentRedirect()` function throws a `NEXT_REDIRECT` error and terminates rendering of the route segment in which it was thrown.
 
 ```jsx filename="app/team/[id]/page.js"
-import { permanentRedirect } from 'next/navigation'
+import { permanentRedirect } from "next/navigation";
 
 async function fetchTeam(id) {
-  const res = await fetch('https://...')
-  if (!res.ok) return undefined
-  return res.json()
+  const res = await fetch("https://...");
+  if (!res.ok) return undefined;
+  return res.json();
 }
 
 export default async function Profile({ params }) {
-  const { id } = await params
-  const team = await fetchTeam(id)
+  const { id } = await params;
+  const team = await fetchTeam(id);
   if (!team) {
-    permanentRedirect('/login')
+    permanentRedirect("/login");
   }
 
   // ...

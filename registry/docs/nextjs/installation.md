@@ -155,13 +155,13 @@ Create an `app` folder. Then, inside `app`, create a `layout.tsx` file. This fil
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
       <body>{children}</body>
     </html>
-  )
+  );
 }
 ```
 
@@ -171,7 +171,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>{children}</body>
     </html>
-  )
+  );
 }
 ```
 
@@ -179,13 +179,13 @@ Create a home page `app/page.tsx` with some initial content:
 
 ```tsx filename="app/page.tsx" switcher
 export default function Page() {
-  return <h1>Hello, Next.js!</h1>
+  return <h1>Hello, Next.js!</h1>;
 }
 ```
 
 ```jsx filename="app/page.js" switcher
 export default function Page() {
-  return <h1>Hello, Next.js!</h1>
+  return <h1>Hello, Next.js!</h1>;
 }
 ```
 
@@ -205,18 +205,18 @@ Create a [`public` folder](/docs/app/api-reference/file-conventions/public-folde
 You can then reference these assets using the root path (`/`). For example, `public/profile.png` can be referenced as `/profile.png`:
 
 ```tsx filename="app/page.tsx" highlight={4} switcher
-import Image from 'next/image'
+import Image from "next/image";
 
 export default function Page() {
-  return <Image src="/profile.png" alt="Profile" width={100} height={100} />
+  return <Image src="/profile.png" alt="Profile" width={100} height={100} />;
 }
 ```
 
 ```jsx filename="app/page.js" highlight={4} switcher
-import Image from 'next/image'
+import Image from "next/image";
 
 export default function Page() {
-  return <Image src="/profile.png" alt="Profile" width={100} height={100} />
+  return <Image src="/profile.png" alt="Profile" width={100} height={100} />;
 }
 ```
 
@@ -292,10 +292,10 @@ These options allow you to alias project directories to absolute paths, making i
 
 ```jsx
 // Before
-import { Button } from '../../../components/button'
+import { Button } from "../../../components/button";
 
 // After
-import { Button } from '@/components/button'
+import { Button } from "@/components/button";
 ```
 
 To configure absolute imports, add the `baseUrl` configuration option to your `tsconfig.json` or `jsconfig.json` file. For example:

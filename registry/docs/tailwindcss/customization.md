@@ -21,29 +21,29 @@ In Tailwind v4, configuration is done directly in CSS:
 ```js
 // tailwind.config.js
 module.exports = {
-  content: ['./src/**/*.{js,ts,jsx,tsx,html}'],
+  content: ["./src/**/*.{js,ts,jsx,tsx,html}"],
   theme: {
     extend: {
       colors: {
         brand: {
-          DEFAULT: '#3b82f6',
-          dark: '#1d4ed8',
-          light: '#93c5fd',
+          DEFAULT: "#3b82f6",
+          dark: "#1d4ed8",
+          light: "#93c5fd",
         },
       },
       fontFamily: {
-        display: ['Inter', 'sans-serif'],
+        display: ["Inter", "sans-serif"],
       },
       spacing: {
-        '128': '32rem',
+        128: "32rem",
       },
       borderRadius: {
-        '4xl': '2rem',
+        "4xl": "2rem",
       },
     },
   },
   plugins: [],
-}
+};
 ```
 
 ### Extending vs Overriding
@@ -71,42 +71,42 @@ Tell Tailwind where to find class names so it can tree-shake unused styles:
 // tailwind.config.js (v3)
 module.exports = {
   content: [
-    './src/**/*.{js,ts,jsx,tsx}',
-    './public/index.html',
-    './node_modules/@my-org/ui/**/*.js', // third-party components
+    "./src/**/*.{js,ts,jsx,tsx}",
+    "./public/index.html",
+    "./node_modules/@my-org/ui/**/*.js", // third-party components
   ],
-}
+};
 ```
 
 ## Plugins
 
 ```js
 // tailwind.config.js
-const plugin = require('tailwindcss/plugin')
+const plugin = require("tailwindcss/plugin");
 
 module.exports = {
   plugins: [
-    require('@tailwindcss/typography'),  // Prose styling
-    require('@tailwindcss/forms'),       // Form element resets
-    require('@tailwindcss/container-queries'), // @container support
+    require("@tailwindcss/typography"), // Prose styling
+    require("@tailwindcss/forms"), // Form element resets
+    require("@tailwindcss/container-queries"), // @container support
 
     // Custom plugin
-    plugin(function({ addUtilities, addComponents, theme }) {
+    plugin(function ({ addUtilities, addComponents, theme }) {
       addUtilities({
-        '.text-shadow': {
-          'text-shadow': '0 2px 4px rgb(0 0 0 / 0.1)',
+        ".text-shadow": {
+          "text-shadow": "0 2px 4px rgb(0 0 0 / 0.1)",
         },
-      })
+      });
       addComponents({
-        '.btn': {
-          padding: theme('spacing.2') + ' ' + theme('spacing.4'),
-          borderRadius: theme('borderRadius.lg'),
-          fontWeight: theme('fontWeight.semibold'),
+        ".btn": {
+          padding: theme("spacing.2") + " " + theme("spacing.4"),
+          borderRadius: theme("borderRadius.lg"),
+          fontWeight: theme("fontWeight.semibold"),
         },
-      })
+      });
     }),
   ],
-}
+};
 ```
 
 ## @apply Directive
@@ -137,15 +137,21 @@ Tailwind v4 uses standard CSS `@layer`:
 @import "tailwindcss";
 
 @layer base {
-  h1 { @apply text-3xl font-bold; }
+  h1 {
+    @apply text-3xl font-bold;
+  }
 }
 
 @layer components {
-  .card { @apply rounded-lg bg-white p-6 shadow; }
+  .card {
+    @apply rounded-lg bg-white p-6 shadow;
+  }
 }
 
 @layer utilities {
-  .text-shadow { text-shadow: 0 2px 4px rgb(0 0 0 / 0.1); }
+  .text-shadow {
+    text-shadow: 0 2px 4px rgb(0 0 0 / 0.1);
+  }
 }
 ```
 
@@ -154,8 +160,8 @@ Tailwind v4 uses standard CSS `@layer`:
 ```js
 // tailwind.config.js (v3)
 module.exports = {
-  prefix: 'tw-',     // All classes become tw-flex, tw-p-4, etc.
-  important: true,    // All utilities get !important
-  important: '#app',  // All utilities scoped under #app
-}
+  prefix: "tw-", // All classes become tw-flex, tw-p-4, etc.
+  important: true, // All utilities get !important
+  important: "#app", // All utilities scoped under #app
+};
 ```

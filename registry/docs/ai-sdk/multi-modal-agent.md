@@ -16,7 +16,7 @@ To follow this quickstart, you'll need:
 - Node.js 18+ and pnpm installed on your local development machine.
 - A Vercel AI Gateway API key.
 
-If you haven't obtained your Vercel AI Gateway API key, you can do so by [signing up](https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fai\&title=Go+to+AI+Gateway) on the Vercel website.
+If you haven't obtained your Vercel AI Gateway API key, you can do so by [signing up](https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fai&title=Go+to+AI+Gateway) on the Vercel website.
 
 ## Create Your Application
 
@@ -70,7 +70,7 @@ To build a multi-modal agent, you will need to:
 Create a route handler, `app/api/chat/route.ts` and add the following code:
 
 ```tsx filename="app/api/chat/route.ts"
-import { streamText, convertToModelMessages, type UIMessage } from 'ai';
+import { streamText, convertToModelMessages, type UIMessage } from "ai";
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
@@ -79,7 +79,7 @@ export async function POST(req: Request) {
   const { messages }: { messages: UIMessage[] } = await req.json();
 
   const result = streamText({
-    model: 'openai/gpt-4o',
+    model: "openai/gpt-4o",
     messages: await convertToModelMessages(messages),
   });
 
@@ -104,28 +104,28 @@ Now that you have a Route Handler that can query a large language model (LLM), i
 Update your root page (`app/page.tsx`) with the following code to show a list of chat messages and provide a user message input:
 
 ```tsx filename="app/page.tsx"
-'use client';
+"use client";
 
-import { useChat } from '@ai-sdk/react';
-import { DefaultChatTransport } from 'ai';
-import { useState } from 'react';
+import { useChat } from "@ai-sdk/react";
+import { DefaultChatTransport } from "ai";
+import { useState } from "react";
 
 export default function Chat() {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
 
   const { messages, sendMessage } = useChat({
     transport: new DefaultChatTransport({
-      api: '/api/chat',
+      api: "/api/chat",
     }),
   });
 
   return (
     <div className="flex flex-col w-full max-w-md py-24 mx-auto stretch">
-      {messages.map(m => (
+      {messages.map((m) => (
         <div key={m.id} className="whitespace-pre-wrap">
-          {m.role === 'user' ? 'User: ' : 'AI: '}
+          {m.role === "user" ? "User: " : "AI: "}
           {m.parts.map((part, index) => {
-            if (part.type === 'text') {
+            if (part.type === "text") {
               return <span key={`${m.id}-text-${index}`}>{part.text}</span>;
             }
             return null;
@@ -134,13 +134,13 @@ export default function Chat() {
       ))}
 
       <form
-        onSubmit={async event => {
+        onSubmit={async (event) => {
           event.preventDefault();
           sendMessage({
-            role: 'user',
-            parts: [{ type: 'text', text: input }],
+            role: "user",
+            parts: [{ type: "text", text: input }],
           });
-          setInput('');
+          setInput("");
         }}
         className="fixed bottom-0 w-full max-w-md mb-8 border border-gray-300 rounded shadow-xl"
       >
@@ -148,7 +148,7 @@ export default function Chat() {
           className="w-full p-2"
           value={input}
           placeholder="Say something..."
-          onChange={e => setInput(e.target.value)}
+          onChange={(e) => setInput(e.target.value)}
         />
       </form>
     </div>
@@ -173,26 +173,26 @@ To make your agent multi-modal, let's add the ability to upload and send both im
 Update your root page (`app/page.tsx`) with the following code:
 
 ```tsx filename="app/page.tsx" highlight="4-5,10-12,15-39,46-81,87-97"
-'use client';
+"use client";
 
-import { useChat } from '@ai-sdk/react';
-import { DefaultChatTransport } from 'ai';
-import { useRef, useState } from 'react';
-import Image from 'next/image';
+import { useChat } from "@ai-sdk/react";
+import { DefaultChatTransport } from "ai";
+import { useRef, useState } from "react";
+import Image from "next/image";
 
 async function convertFilesToDataURLs(files: FileList) {
   return Promise.all(
     Array.from(files).map(
-      file =>
+      (file) =>
         new Promise<{
-          type: 'file';
+          type: "file";
           mediaType: string;
           url: string;
         }>((resolve, reject) => {
           const reader = new FileReader();
           reader.onload = () => {
             resolve({
-              type: 'file',
+              type: "file",
               mediaType: file.type,
               url: reader.result as string,
             });
@@ -205,26 +205,26 @@ async function convertFilesToDataURLs(files: FileList) {
 }
 
 export default function Chat() {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
   const [files, setFiles] = useState<FileList | undefined>(undefined);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const { messages, sendMessage } = useChat({
     transport: new DefaultChatTransport({
-      api: '/api/chat',
+      api: "/api/chat",
     }),
   });
 
   return (
     <div className="flex flex-col w-full max-w-md py-24 mx-auto stretch">
-      {messages.map(m => (
+      {messages.map((m) => (
         <div key={m.id} className="whitespace-pre-wrap">
-          {m.role === 'user' ? 'User: ' : 'AI: '}
+          {m.role === "user" ? "User: " : "AI: "}
           {m.parts.map((part, index) => {
-            if (part.type === 'text') {
+            if (part.type === "text") {
               return <span key={`${m.id}-text-${index}`}>{part.text}</span>;
             }
-            if (part.type === 'file' && part.mediaType?.startsWith('image/')) {
+            if (part.type === "file" && part.mediaType?.startsWith("image/")) {
               return (
                 <Image
                   key={`${m.id}-image-${index}`}
@@ -235,7 +235,7 @@ export default function Chat() {
                 />
               );
             }
-            if (part.type === 'file' && part.mediaType === 'application/pdf') {
+            if (part.type === "file" && part.mediaType === "application/pdf") {
               return (
                 <iframe
                   key={`${m.id}-pdf-${index}`}
@@ -253,7 +253,7 @@ export default function Chat() {
 
       <form
         className="fixed bottom-0 w-full max-w-md p-2 mb-8 border border-gray-300 rounded shadow-xl space-y-2"
-        onSubmit={async event => {
+        onSubmit={async (event) => {
           event.preventDefault();
 
           const fileParts =
@@ -262,15 +262,15 @@ export default function Chat() {
               : [];
 
           sendMessage({
-            role: 'user',
-            parts: [{ type: 'text', text: input }, ...fileParts],
+            role: "user",
+            parts: [{ type: "text", text: input }, ...fileParts],
           });
 
-          setInput('');
+          setInput("");
           setFiles(undefined);
 
           if (fileInputRef.current) {
-            fileInputRef.current.value = '';
+            fileInputRef.current.value = "";
           }
         }}
       >
@@ -278,7 +278,7 @@ export default function Chat() {
           type="file"
           accept="image/*,application/pdf"
           className=""
-          onChange={event => {
+          onChange={(event) => {
             if (event.target.files) {
               setFiles(event.target.files);
             }
@@ -290,7 +290,7 @@ export default function Chat() {
           className="w-full p-2"
           value={input}
           placeholder="Say something..."
-          onChange={e => setInput(e.target.value)}
+          onChange={(e) => setInput(e.target.value)}
         />
       </form>
     </div>
@@ -322,13 +322,13 @@ With the AI SDK's unified provider interface you can easily switch to other prov
 ```tsx filename="app/api/chat/route.ts"
 // Using Anthropic
 const result = streamText({
-  model: 'anthropic/claude-sonnet-4-20250514',
+  model: "anthropic/claude-sonnet-4-20250514",
   messages: await convertToModelMessages(messages),
 });
 
 // Using Google
 const result = streamText({
-  model: 'google/gemini-2.5-flash',
+  model: "google/gemini-2.5-flash",
   messages: await convertToModelMessages(messages),
 });
 ```

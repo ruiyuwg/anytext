@@ -30,7 +30,7 @@ module.exports = {
   compiler: {
     styledComponents: true,
   },
-}
+};
 ```
 
 For advanced use cases, you can configure individual properties for styled-components compilation.
@@ -82,18 +82,18 @@ The Next.js Compiler transpiles your tests and simplifies configuring Jest toget
 First, update to the latest version of Next.js: `npm install next@latest`. Then, update your `jest.config.js` file:
 
 ```js filename="jest.config.js"
-const nextJest = require('next/jest')
+const nextJest = require("next/jest");
 
 // Providing the path to your Next.js app which will enable loading next.config.js and .env files
-const createJestConfig = nextJest({ dir: './' })
+const createJestConfig = nextJest({ dir: "./" });
 
 // Any custom config you want to pass to Jest
 const customJestConfig = {
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
-}
+  setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
+};
 
 // createJestConfig is exported in this way to ensure that next/jest can load the Next.js configuration, which is async
-module.exports = createJestConfig(customJestConfig)
+module.exports = createJestConfig(customJestConfig);
 ```
 
 ### Relay
@@ -105,13 +105,13 @@ module.exports = {
   compiler: {
     relay: {
       // This should match relay.config.js
-      src: './',
-      artifactDirectory: './__generated__',
-      language: 'typescript',
+      src: "./",
+      artifactDirectory: "./__generated__",
+      language: "typescript",
       eagerEsModules: false,
     },
   },
-}
+};
 ```
 
 > **Good to know**: In Next.js, all JavaScript files in `pages` directory are considered routes. So, for `relay-compiler` you'll need to specify `artifactDirectory` configuration settings outside of the `pages`, otherwise `relay-compiler` will generate files next to the source file in the `__generated__` directory, and this file will be considered a route, which will break production builds.
@@ -127,7 +127,7 @@ module.exports = {
   compiler: {
     reactRemoveProperties: true,
   },
-}
+};
 ```
 
 To remove custom properties:
@@ -137,9 +137,9 @@ module.exports = {
   compiler: {
     // The regexes defined here are processed in Rust so the syntax is different from
     // JavaScript `RegExp`s. See https://docs.rs/regex.
-    reactRemoveProperties: { properties: ['^data-custom$'] },
+    reactRemoveProperties: { properties: ["^data-custom$"] },
   },
-}
+};
 ```
 
 ### Remove Console
@@ -153,7 +153,7 @@ module.exports = {
   compiler: {
     removeConsole: true,
   },
-}
+};
 ```
 
 Remove `console.*` output except `console.error`:
@@ -162,10 +162,10 @@ Remove `console.*` output except `console.error`:
 module.exports = {
   compiler: {
     removeConsole: {
-      exclude: ['error'],
+      exclude: ["error"],
     },
   },
-}
+};
 ```
 
 ### Legacy Decorators
@@ -249,8 +249,8 @@ Next.js can automatically transpile and bundle dependencies from local packages 
 
 ```js filename="next.config.js"
 module.exports = {
-  transpilePackages: ['@acme/ui', 'lodash-es'],
-}
+  transpilePackages: ["@acme/ui", "lodash-es"],
+};
 ```
 
 ### Modularize Imports
@@ -268,14 +268,14 @@ Use the `compiler.define` field in `next.config.js` to define variables for all 
 module.exports = {
   compiler: {
     define: {
-      MY_VARIABLE: 'my-string',
-      'process.env.MY_ENV_VAR': 'my-env-var',
+      MY_VARIABLE: "my-string",
+      "process.env.MY_ENV_VAR": "my-env-var",
     },
     defineServer: {
-      MY_SERVER_VARIABLE: 'my-server-var',
+      MY_SERVER_VARIABLE: "my-server-var",
     },
   },
-}
+};
 ```
 
 ### Build Lifecycle Hooks
@@ -293,7 +293,7 @@ module.exports = {
       // Your custom code here
     },
   },
-}
+};
 ```
 
 The hook receives an object with the following properties:
@@ -312,7 +312,7 @@ module.exports = {
   experimental: {
     swcTraceProfiling: true,
   },
-}
+};
 ```
 
 Once enabled, swc will generate trace named as `swc-trace-profile-${timestamp}.json` under `.next/`. Chromium's trace viewer (chrome://tracing/, https://ui.perfetto.dev/), or compatible flamegraph viewer (https://www.speedscope.app/) can load & visualize generated traces.
@@ -326,14 +326,14 @@ module.exports = {
   experimental: {
     swcPlugins: [
       [
-        'plugin',
+        "plugin",
         {
           ...pluginOptions,
         },
       ],
     ],
   },
-}
+};
 ```
 
 `swcPlugins` accepts an array of tuples for configuring plugins. A tuple for the plugin contains the path to the plugin and an object for plugin configuration. The path to the plugin can be an npm module package name or an absolute path to the `.wasm` binary itself.

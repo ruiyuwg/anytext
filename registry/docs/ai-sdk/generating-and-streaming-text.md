@@ -15,26 +15,26 @@ Advanced LLM features such as [tool calling](./tools-and-tool-calling) and [stru
 You can generate text using the [`generateText`](/docs/reference/ai-sdk-core/generate-text) function. This function is ideal for non-interactive use cases where you need to write text (e.g. drafting email or summarizing web pages) and for agents that use tools.
 
 ```tsx
-import { generateText } from 'ai';
+import { generateText } from "ai";
 __PROVIDER_IMPORT__;
 
 const { text } = await generateText({
   model: __MODEL__,
-  prompt: 'Write a vegetarian lasagna recipe for 4 people.',
+  prompt: "Write a vegetarian lasagna recipe for 4 people.",
 });
 ```
 
 You can use more [advanced prompts](./prompts) to generate text with more complex instructions and content:
 
 ```tsx
-import { generateText } from 'ai';
+import { generateText } from "ai";
 __PROVIDER_IMPORT__;
 
 const { text } = await generateText({
   model: __MODEL__,
   system:
-    'You are a professional writer. ' +
-    'You write simple, clear, and concise content.',
+    "You are a professional writer. " +
+    "You write simple, clear, and concise content.",
   prompt: `Summarize the following article in 3-5 sentences: ${article}`,
 });
 ```
@@ -68,7 +68,7 @@ e.g. to access some provider-specific headers or body content.
 You can access the raw response headers and body using the `response` property:
 
 ```ts
-import { generateText } from 'ai';
+import { generateText } from "ai";
 
 const result = await generateText({
   // ...
@@ -86,12 +86,12 @@ When using `generateText`, you can provide an `onFinish` callback that is trigge
 It contains the text, usage information, finish reason, messages, steps, total usage, and more:
 
 ```tsx highlight="6-8"
-import { generateText } from 'ai';
+import { generateText } from "ai";
 __PROVIDER_IMPORT__;
 
 const result = await generateText({
   model: __MODEL__,
-  prompt: 'Invent a new holiday and describe its traditions.',
+  prompt: "Invent a new holiday and describe its traditions.",
   onFinish({ text, finishReason, usage, response, steps, totalUsage }) {
     // your own logic, e.g. for saving the chat history or recording usage
 
@@ -110,18 +110,18 @@ These are useful for logging, observability, debugging, and custom telemetry.
 Errors thrown inside these callbacks are silently caught and do not break the generation flow.
 
 ```tsx
-import { generateText } from 'ai';
+import { generateText } from "ai";
 __PROVIDER_IMPORT__;
 
 const result = await generateText({
   model: __MODEL__,
-  prompt: 'What is the weather in San Francisco?',
+  prompt: "What is the weather in San Francisco?",
   tools: {
     // ... your tools
   },
 
   experimental_onStart({ model, settings, functionId }) {
-    console.log('Generation started', { model, functionId });
+    console.log("Generation started", { model, functionId });
   },
 
   experimental_onStepStart({ stepNumber, model, promptMessages }) {
@@ -159,12 +159,12 @@ Depending on your model and prompt, it can take a large language model (LLM) up 
 AI SDK Core provides the [`streamText`](/docs/reference/ai-sdk-core/stream-text) function which simplifies streaming text from LLMs:
 
 ```ts
-import { streamText } from 'ai';
+import { streamText } from "ai";
 __PROVIDER_IMPORT__;
 
 const result = streamText({
   model: __MODEL__,
-  prompt: 'Invent a new holiday and describe its traditions.',
+  prompt: "Invent a new holiday and describe its traditions.",
 });
 
 // example: use textStream as an async iterable
@@ -219,12 +219,12 @@ Errors become part of the stream and are not thrown to prevent e.g. servers from
 To log errors, you can provide an `onError` callback that is triggered when an error occurs.
 
 ```tsx highlight="6-8"
-import { streamText } from 'ai';
+import { streamText } from "ai";
 __PROVIDER_IMPORT__;
 
 const result = streamText({
   model: __MODEL__,
-  prompt: 'Invent a new holiday and describe its traditions.',
+  prompt: "Invent a new holiday and describe its traditions.",
   onError({ error }) {
     console.error(error); // your error logging logic here
   },
@@ -247,15 +247,15 @@ It receives the following chunk types:
 - `raw`
 
 ```tsx highlight="6-11"
-import { streamText } from 'ai';
+import { streamText } from "ai";
 __PROVIDER_IMPORT__;
 
 const result = streamText({
   model: __MODEL__,
-  prompt: 'Invent a new holiday and describe its traditions.',
+  prompt: "Invent a new holiday and describe its traditions.",
   onChunk({ chunk }) {
     // implement your own logic here, e.g.:
-    if (chunk.type === 'text') {
+    if (chunk.type === "text") {
       console.log(chunk.text);
     }
   },
@@ -270,12 +270,12 @@ When using `streamText`, you can provide an `onFinish` callback that is triggere
 It contains the text, usage information, finish reason, messages, steps, total usage, and more:
 
 ```tsx highlight="6-8"
-import { streamText } from 'ai';
+import { streamText } from "ai";
 __PROVIDER_IMPORT__;
 
 const result = streamText({
   model: __MODEL__,
-  prompt: 'Invent a new holiday and describe its traditions.',
+  prompt: "Invent a new holiday and describe its traditions.",
   onFinish({ text, finishReason, usage, response, steps, totalUsage }) {
     // your own logic, e.g. for saving the chat history or recording usage
 
@@ -294,18 +294,18 @@ These are useful for logging, observability, debugging, and custom telemetry.
 Errors thrown inside these callbacks are silently caught and do not break the streaming flow.
 
 ```tsx
-import { streamText } from 'ai';
+import { streamText } from "ai";
 __PROVIDER_IMPORT__;
 
 const result = streamText({
   model: __MODEL__,
-  prompt: 'What is the weather in San Francisco?',
+  prompt: "What is the weather in San Francisco?",
   tools: {
     // ... your tools
   },
 
   experimental_onStart({ model, system, prompt, messages }) {
-    console.log('Streaming started', { model, prompt });
+    console.log("Streaming started", { model, prompt });
   },
 
   experimental_onStepStart({ stepNumber, model, messages }) {
@@ -325,7 +325,7 @@ const result = streamText({
   },
 
   onStepFinish({ finishReason, usage }) {
-    console.log('Step finished', { finishReason, usage });
+    console.log("Step finished", { finishReason, usage });
   },
 });
 ```
@@ -345,9 +345,9 @@ This can be useful if you want to implement your own UI or handle the stream in 
 Here is an example of how to use the `fullStream` property:
 
 ```tsx
-import { streamText } from 'ai';
+import { streamText } from "ai";
 __PROVIDER_IMPORT__;
-import { z } from 'zod';
+import { z } from "zod";
 
 const result = streamText({
   model: __MODEL__,
@@ -355,102 +355,102 @@ const result = streamText({
     cityAttractions: {
       inputSchema: z.object({ city: z.string() }),
       execute: async ({ city }) => ({
-        attractions: ['attraction1', 'attraction2', 'attraction3'],
+        attractions: ["attraction1", "attraction2", "attraction3"],
       }),
     },
   },
-  prompt: 'What are some San Francisco tourist attractions?',
+  prompt: "What are some San Francisco tourist attractions?",
 });
 
 for await (const part of result.fullStream) {
   switch (part.type) {
-    case 'start': {
+    case "start": {
       // handle start of stream
       break;
     }
-    case 'start-step': {
+    case "start-step": {
       // handle start of step
       break;
     }
-    case 'text-start': {
+    case "text-start": {
       // handle text start
       break;
     }
-    case 'text-delta': {
+    case "text-delta": {
       // handle text delta here
       break;
     }
-    case 'text-end': {
+    case "text-end": {
       // handle text end
       break;
     }
-    case 'reasoning-start': {
+    case "reasoning-start": {
       // handle reasoning start
       break;
     }
-    case 'reasoning-delta': {
+    case "reasoning-delta": {
       // handle reasoning delta here
       break;
     }
-    case 'reasoning-end': {
+    case "reasoning-end": {
       // handle reasoning end
       break;
     }
-    case 'source': {
+    case "source": {
       // handle source here
       break;
     }
-    case 'file': {
+    case "file": {
       // handle file here
       break;
     }
-    case 'tool-call': {
+    case "tool-call": {
       switch (part.toolName) {
-        case 'cityAttractions': {
+        case "cityAttractions": {
           // handle tool call here
           break;
         }
       }
       break;
     }
-    case 'tool-input-start': {
+    case "tool-input-start": {
       // handle tool input start
       break;
     }
-    case 'tool-input-delta': {
+    case "tool-input-delta": {
       // handle tool input delta
       break;
     }
-    case 'tool-input-end': {
+    case "tool-input-end": {
       // handle tool input end
       break;
     }
-    case 'tool-result': {
+    case "tool-result": {
       switch (part.toolName) {
-        case 'cityAttractions': {
+        case "cityAttractions": {
           // handle tool result here
           break;
         }
       }
       break;
     }
-    case 'tool-error': {
+    case "tool-error": {
       // handle tool error
       break;
     }
-    case 'finish-step': {
+    case "finish-step": {
       // handle finish step
       break;
     }
-    case 'finish': {
+    case "finish": {
       // handle finish here
       break;
     }
-    case 'error': {
+    case "error": {
       // handle error here
       break;
     }
-    case 'raw': {
+    case "raw": {
       // handle raw value
       break;
     }
@@ -472,7 +472,7 @@ The AI SDK Core provides a [`smoothStream` function](/docs/reference/ai-sdk-core
 can be used to smooth out text and reasoning streaming.
 
 ```tsx highlight="6"
-import { smoothStream, streamText } from 'ai';
+import { smoothStream, streamText } from "ai";
 
 const result = streamText({
   model,
@@ -492,7 +492,7 @@ Here is an example of how to implement a custom transformation that converts
 all text to uppercase:
 
 ```ts
-import { streamText, type TextStreamPart, type ToolSet } from 'ai';
+import { streamText, type TextStreamPart, type ToolSet } from "ai";
 
 const upperCaseTransform =
   <TOOLS extends ToolSet>() =>
@@ -501,7 +501,7 @@ const upperCaseTransform =
       transform(chunk, controller) {
         controller.enqueue(
           // for text-delta chunks, convert the text to uppercase:
-          chunk.type === 'text-delta'
+          chunk.type === "text-delta"
             ? { ...chunk, text: chunk.text.toUpperCase() }
             : chunk,
         );
@@ -516,7 +516,7 @@ When you invoke `stopStream`, it is important to simulate the `finish-step` and 
 and all callbacks are invoked.
 
 ```ts
-import { streamText, type TextStreamPart, type ToolSet } from 'ai';
+import { streamText, type TextStreamPart, type ToolSet } from "ai";
 
 const stopWordTransform =
   <TOOLS extends ToolSet>() =>
@@ -527,28 +527,28 @@ const stopWordTransform =
       // stream buffering and scanning to correctly emit prior text
       // and to detect all STOP occurrences.
       transform(chunk, controller) {
-        if (chunk.type !== 'text-delta') {
+        if (chunk.type !== "text-delta") {
           controller.enqueue(chunk);
           return;
         }
 
-        if (chunk.text.includes('STOP')) {
+        if (chunk.text.includes("STOP")) {
           // stop the stream
           stopStream();
 
           // simulate the finish-step event
           controller.enqueue({
-            type: 'finish-step',
-            finishReason: 'stop',
-            rawFinishReason: 'stop',
+            type: "finish-step",
+            finishReason: "stop",
+            rawFinishReason: "stop",
             usage: {
               completionTokens: NaN,
               promptTokens: NaN,
               totalTokens: NaN,
             },
             response: {
-              id: 'response-id',
-              modelId: 'mock-model-id',
+              id: "response-id",
+              modelId: "mock-model-id",
               timestamp: new Date(0),
             },
             providerMetadata: undefined,
@@ -556,9 +556,9 @@ const stopWordTransform =
 
           // simulate the finish event
           controller.enqueue({
-            type: 'finish',
-            finishReason: 'stop',
-            rawFinishReason: 'stop',
+            type: "finish",
+            finishReason: "stop",
+            rawFinishReason: "stop",
             totalUsage: {
               completionTokens: NaN,
               promptTokens: NaN,
@@ -605,19 +605,19 @@ When you use `generateText`, you can access the sources using the `sources` prop
 
 ```ts
 const result = await generateText({
-  model: 'google/gemini-2.5-flash',
+  model: "google/gemini-2.5-flash",
   tools: {
     google_search: google.tools.googleSearch({}),
   },
-  prompt: 'List the top 5 San Francisco news from the past week.',
+  prompt: "List the top 5 San Francisco news from the past week.",
 });
 
 for (const source of result.sources) {
-  if (source.sourceType === 'url') {
-    console.log('ID:', source.id);
-    console.log('Title:', source.title);
-    console.log('URL:', source.url);
-    console.log('Provider metadata:', source.providerMetadata);
+  if (source.sourceType === "url") {
+    console.log("ID:", source.id);
+    console.log("Title:", source.title);
+    console.log("URL:", source.url);
+    console.log("Provider metadata:", source.providerMetadata);
     console.log();
   }
 }
@@ -627,19 +627,19 @@ When you use `streamText`, you can access the sources using the `fullStream` pro
 
 ```tsx
 const result = streamText({
-  model: 'google/gemini-2.5-flash',
+  model: "google/gemini-2.5-flash",
   tools: {
     google_search: google.tools.googleSearch({}),
   },
-  prompt: 'List the top 5 San Francisco news from the past week.',
+  prompt: "List the top 5 San Francisco news from the past week.",
 });
 
 for await (const part of result.fullStream) {
-  if (part.type === 'source' && part.sourceType === 'url') {
-    console.log('ID:', part.id);
-    console.log('Title:', part.title);
-    console.log('URL:', part.url);
-    console.log('Provider metadata:', part.providerMetadata);
+  if (part.type === "source" && part.sourceType === "url") {
+    console.log("ID:", part.id);
+    console.log("Title:", part.title);
+    console.log("URL:", part.url);
+    console.log("Provider metadata:", part.providerMetadata);
     console.log();
   }
 }

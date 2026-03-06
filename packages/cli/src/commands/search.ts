@@ -18,7 +18,7 @@ export async function search(args: string[]): Promise<void> {
   }
 
   const maxPath = Math.max(
-    ...results.map((r) => `${r.library.id}/${r.topic.id}`.length)
+    ...results.map((r) => `${r.library.id}/${r.topic.id}`.length),
   );
   const maxNum = String(results.length).length;
 

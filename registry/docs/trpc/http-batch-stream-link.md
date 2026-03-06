@@ -15,13 +15,13 @@ If you require the ability to change/set response headers (which includes cookie
 You can import and add the `httpBatchStreamLink` to the `links` array as such:
 
 ```ts title="client/index.ts"
-import { createTRPCClient, httpBatchStreamLink } from '@trpc/client';
-import type { AppRouter } from '../server';
+import { createTRPCClient, httpBatchStreamLink } from "@trpc/client";
+import type { AppRouter } from "../server";
 
 const client = createTRPCClient<AppRouter>({
   links: [
     httpBatchStreamLink({
-      url: 'http://localhost:3000',
+      url: "http://localhost:3000",
     }),
   ],
 });
@@ -42,13 +42,13 @@ const somePosts = await Promise.all([
 When batching requests together, the behavior of a regular `httpBatchLink` is to wait for all requests to finish before sending the response. If you want to send responses as soon as they are ready, you can use `httpBatchStreamLink` instead. This is useful for long-running requests.
 
 ```ts title="client/index.ts"
-import { createTRPCClient, httpBatchStreamLink } from '@trpc/client';
-import type { AppRouter } from '../server';
+import { createTRPCClient, httpBatchStreamLink } from "@trpc/client";
+import type { AppRouter } from "../server";
 
 const client = createTRPCClient<AppRouter>({
   links: [
     httpBatchStreamLink({
-      url: 'http://localhost:3000',
+      url: "http://localhost:3000",
     }),
   ],
 });
@@ -67,7 +67,7 @@ You can try this out on the homepage of tRPC.io: [https://trpc.io/?try=minimal#t
 ```ts twoslash
 // @target: esnext
 // @filename: trpc.ts
-import { initTRPC } from '@trpc/server';
+import { initTRPC } from "@trpc/server";
 
 const t = initTRPC.create({});
 
@@ -76,7 +76,7 @@ export const publicProcedure = t.procedure;
 
 // ---cut---
 // @filename: server.ts
-import { publicProcedure, router } from './trpc';
+import { publicProcedure, router } from "./trpc";
 
 const appRouter = router({
   examples: {
@@ -91,15 +91,14 @@ const appRouter = router({
 
 export type AppRouter = typeof appRouter;
 
-
 // @filename: client.ts
-import { createTRPCClient, httpBatchStreamLink } from '@trpc/client';
-import type { AppRouter } from './server';
+import { createTRPCClient, httpBatchStreamLink } from "@trpc/client";
+import type { AppRouter } from "./server";
 
 const trpc = createTRPCClient<AppRouter>({
   links: [
     httpBatchStreamLink({
-      url: 'http://localhost:3000',
+      url: "http://localhost:3000",
     }),
   ],
 });
@@ -107,7 +106,7 @@ const iterable = await trpc.examples.iterable.query();
 //      ^?
 
 for await (const value of iterable) {
-  console.log('Iterable:', value);
+  console.log("Iterable:", value);
   //                         ^?
 }
 ```
@@ -159,7 +158,7 @@ You can check out the source code for this link on [GitHub.](https://github.com/
 When setting up your root config, you can pass in a `jsonl` option to configure a ping option to keep the connection alive.
 
 ```ts
-import { initTRPC } from '@trpc/server';
+import { initTRPC } from "@trpc/server";
 
 const t = initTRPC.create({
   jsonl: {
@@ -179,13 +178,13 @@ const t = initTRPC.create({
 You can import and add the `httpLink` to the `links` array as such:
 
 ```ts title="client/index.ts"
-import { createTRPCClient, httpLink } from '@trpc/client';
-import type { AppRouter } from '../server';
+import { createTRPCClient, httpLink } from "@trpc/client";
+import type { AppRouter } from "../server";
 
 const client = createTRPCClient<AppRouter>({
   links: [
     httpLink({
-      url: 'http://localhost:3000',
+      url: "http://localhost:3000",
       // transformer,
     }),
   ],
@@ -224,7 +223,7 @@ export interface HTTPLinkOptions {
    * The server must separately allow overriding the method. See:
    * @see https://trpc.io/docs/rpc
    */
-  methodOverride?: 'POST';
+  methodOverride?: "POST";
 }
 ```
 

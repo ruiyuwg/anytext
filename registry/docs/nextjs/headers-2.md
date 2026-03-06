@@ -9,21 +9,21 @@ module.exports = {
   async headers() {
     return [
       {
-        source: '/about',
+        source: "/about",
         headers: [
           {
-            key: 'x-custom-header',
-            value: 'my custom header value',
+            key: "x-custom-header",
+            value: "my custom header value",
           },
           {
-            key: 'x-another-custom-header',
-            value: 'my other custom header value',
+            key: "x-another-custom-header",
+            value: "my other custom header value",
           },
         ],
       },
-    ]
+    ];
   },
-}
+};
 ```
 
 `headers` is an async function that expects an array to be returned holding objects with `source` and `headers` properties:
@@ -46,26 +46,26 @@ module.exports = {
   async headers() {
     return [
       {
-        source: '/:path*',
+        source: "/:path*",
         headers: [
           {
-            key: 'x-hello',
-            value: 'there',
+            key: "x-hello",
+            value: "there",
           },
         ],
       },
       {
-        source: '/hello',
+        source: "/hello",
         headers: [
           {
-            key: 'x-hello',
-            value: 'world',
+            key: "x-hello",
+            value: "world",
           },
         ],
       },
-    ]
+    ];
   },
-}
+};
 ```
 
 ## Path Matching
@@ -77,21 +77,21 @@ module.exports = {
   async headers() {
     return [
       {
-        source: '/blog/:slug',
+        source: "/blog/:slug",
         headers: [
           {
-            key: 'x-slug',
-            value: ':slug', // Matched parameters can be used in the value
+            key: "x-slug",
+            value: ":slug", // Matched parameters can be used in the value
           },
           {
-            key: 'x-slug-:slug', // Matched parameters can be used in the key
-            value: 'my other custom header value',
+            key: "x-slug-:slug", // Matched parameters can be used in the key
+            value: "my other custom header value",
           },
         ],
       },
-    ]
+    ];
   },
-}
+};
 ```
 
 The pattern `/blog/:slug` matches `/blog/first-post` and `/blog/post-1` but not a nested path like `/blog/a/b`. Patterns are anchored to the start, `/blog/:slug` will not match `/archive/blog/first-post`.
@@ -109,21 +109,21 @@ module.exports = {
   async headers() {
     return [
       {
-        source: '/blog/:slug*',
+        source: "/blog/:slug*",
         headers: [
           {
-            key: 'x-slug',
-            value: ':slug*', // Matched parameters can be used in the value
+            key: "x-slug",
+            value: ":slug*", // Matched parameters can be used in the value
           },
           {
-            key: 'x-slug-:slug*', // Matched parameters can be used in the key
-            value: 'my other custom header value',
+            key: "x-slug-:slug*", // Matched parameters can be used in the key
+            value: "my other custom header value",
           },
         ],
       },
-    ]
+    ];
   },
-}
+};
 ```
 
 ### Regex Path Matching
@@ -135,17 +135,17 @@ module.exports = {
   async headers() {
     return [
       {
-        source: '/blog/:post(\\d{1,})',
+        source: "/blog/:post(\\d{1,})",
         headers: [
           {
-            key: 'x-post',
-            value: ':post',
+            key: "x-post",
+            value: ":post",
           },
         ],
       },
-    ]
+    ];
   },
-}
+};
 ```
 
 The following characters `(`, `)`, `{`, `}`, `:`, `*`, `+`, `?` are used for regex path matching, so when used in the `source` as non-special values they must be escaped by adding `\\` before them:
@@ -156,17 +156,17 @@ module.exports = {
     return [
       {
         // this will match `/english(default)/something` being requested
-        source: '/english\\(default\\)/:slug',
+        source: "/english\\(default\\)/:slug",
         headers: [
           {
-            key: 'x-header',
-            value: 'value',
+            key: "x-header",
+            value: "value",
           },
         ],
       },
-    ]
+    ];
   },
-}
+};
 ```
 
 ## Header, Cookie, and Query Matching
@@ -186,101 +186,101 @@ module.exports = {
       // if the header `x-add-header` is present,
       // the `x-another-header` header will be applied
       {
-        source: '/:path*',
+        source: "/:path*",
         has: [
           {
-            type: 'header',
-            key: 'x-add-header',
+            type: "header",
+            key: "x-add-header",
           },
         ],
         headers: [
           {
-            key: 'x-another-header',
-            value: 'hello',
+            key: "x-another-header",
+            value: "hello",
           },
         ],
       },
       // if the header `x-no-header` is not present,
       // the `x-another-header` header will be applied
       {
-        source: '/:path*',
+        source: "/:path*",
         missing: [
           {
-            type: 'header',
-            key: 'x-no-header',
+            type: "header",
+            key: "x-no-header",
           },
         ],
         headers: [
           {
-            key: 'x-another-header',
-            value: 'hello',
+            key: "x-another-header",
+            value: "hello",
           },
         ],
       },
       // if the source, query, and cookie are matched,
       // the `x-authorized` header will be applied
       {
-        source: '/specific/:path*',
+        source: "/specific/:path*",
         has: [
           {
-            type: 'query',
-            key: 'page',
+            type: "query",
+            key: "page",
             // the page value will not be available in the
             // header key/values since value is provided and
             // doesn't use a named capture group e.g. (?<page>home)
-            value: 'home',
+            value: "home",
           },
           {
-            type: 'cookie',
-            key: 'authorized',
-            value: 'true',
+            type: "cookie",
+            key: "authorized",
+            value: "true",
           },
         ],
         headers: [
           {
-            key: 'x-authorized',
-            value: ':authorized',
+            key: "x-authorized",
+            value: ":authorized",
           },
         ],
       },
       // if the header `x-authorized` is present and
       // contains a matching value, the `x-another-header` will be applied
       {
-        source: '/:path*',
+        source: "/:path*",
         has: [
           {
-            type: 'header',
-            key: 'x-authorized',
-            value: '(?<authorized>yes|true)',
+            type: "header",
+            key: "x-authorized",
+            value: "(?<authorized>yes|true)",
           },
         ],
         headers: [
           {
-            key: 'x-another-header',
-            value: ':authorized',
+            key: "x-another-header",
+            value: ":authorized",
           },
         ],
       },
       // if the host is `example.com`,
       // this header will be applied
       {
-        source: '/:path*',
+        source: "/:path*",
         has: [
           {
-            type: 'host',
-            value: 'example.com',
+            type: "host",
+            value: "example.com",
           },
         ],
         headers: [
           {
-            key: 'x-another-header',
-            value: ':authorized',
+            key: "x-another-header",
+            value: ":authorized",
           },
         ],
       },
-    ]
+    ];
   },
-}
+};
 ```
 
 ## Headers with basePath support
@@ -289,32 +289,32 @@ When leveraging [`basePath` support](/docs/app/api-reference/config/next-config-
 
 ```js filename="next.config.js"
 module.exports = {
-  basePath: '/docs',
+  basePath: "/docs",
 
   async headers() {
     return [
       {
-        source: '/with-basePath', // becomes /docs/with-basePath
+        source: "/with-basePath", // becomes /docs/with-basePath
         headers: [
           {
-            key: 'x-hello',
-            value: 'world',
+            key: "x-hello",
+            value: "world",
           },
         ],
       },
       {
-        source: '/without-basePath', // is not modified since basePath: false is set
+        source: "/without-basePath", // is not modified since basePath: false is set
         headers: [
           {
-            key: 'x-hello',
-            value: 'world',
+            key: "x-hello",
+            value: "world",
           },
         ],
         basePath: false,
       },
-    ]
+    ];
   },
-}
+};
 ```
 
 ## Headers with i18n support
@@ -324,57 +324,57 @@ When leveraging [`i18n` support](/docs/app/guides/internationalization) with hea
 ```js filename="next.config.js"
 module.exports = {
   i18n: {
-    locales: ['en', 'fr', 'de'],
-    defaultLocale: 'en',
+    locales: ["en", "fr", "de"],
+    defaultLocale: "en",
   },
 
   async headers() {
     return [
       {
-        source: '/with-locale', // automatically handles all locales
+        source: "/with-locale", // automatically handles all locales
         headers: [
           {
-            key: 'x-hello',
-            value: 'world',
+            key: "x-hello",
+            value: "world",
           },
         ],
       },
       {
         // does not handle locales automatically since locale: false is set
-        source: '/nl/with-locale-manual',
+        source: "/nl/with-locale-manual",
         locale: false,
         headers: [
           {
-            key: 'x-hello',
-            value: 'world',
+            key: "x-hello",
+            value: "world",
           },
         ],
       },
       {
         // this matches '/' since `en` is the defaultLocale
-        source: '/en',
+        source: "/en",
         locale: false,
         headers: [
           {
-            key: 'x-hello',
-            value: 'world',
+            key: "x-hello",
+            value: "world",
           },
         ],
       },
       {
         // this gets converted to /(en|fr|de)/(.*) so will not match the top-level
         // `/` or `/fr` routes like /:path* would
-        source: '/(.*)',
+        source: "/(.*)",
         headers: [
           {
-            key: 'x-hello',
-            value: 'world',
+            key: "x-hello",
+            value: "world",
           },
         ],
       },
-    ]
+    ];
   },
-}
+};
 ```
 
 ## Cache-Control
@@ -504,19 +504,19 @@ Learn more about adding a [Content Security Policy](/docs/app/guides/content-sec
 The `htmlLimitedBots` config allows you to specify a list of user agents that should receive blocking metadata instead of [streaming metadata](/docs/app/api-reference/functions/generate-metadata#streaming-metadata).
 
 ```ts filename="next.config.ts" switcher
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const config: NextConfig = {
   htmlLimitedBots: /MySpecialBot|MyAnotherSpecialBot|SimpleCrawler/,
-}
+};
 
-export default config
+export default config;
 ```
 
 ```js filename="next.config.js" switcher
 module.exports = {
   htmlLimitedBots: /MySpecialBot|MyAnotherSpecialBot|SimpleCrawler/,
-}
+};
 ```
 
 ## Default list
@@ -535,15 +535,15 @@ Specifying a `htmlLimitedBots` config will override the Next.js' default list. H
 ```ts filename="next.config.ts" switcher
 const config: NextConfig = {
   htmlLimitedBots: /MySpecialBot|MyAnotherSpecialBot|SimpleCrawler/,
-}
+};
 
-export default config
+export default config;
 ```
 
 ```js filename="next.config.js" switcher
 module.exports = {
   htmlLimitedBots: /MySpecialBot|MyAnotherSpecialBot|SimpleCrawler/,
-}
+};
 ```
 
 ## Disabling
@@ -551,19 +551,19 @@ module.exports = {
 To fully disable streaming metadata:
 
 ```ts filename="next.config.ts"
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const config: NextConfig = {
   htmlLimitedBots: /.*/,
-}
+};
 
-export default config
+export default config;
 ```
 
 ```js filename="next.config.js" switcher
 module.exports = {
   htmlLimitedBots: /.*/,
-}
+};
 ```
 
 ## Version History
@@ -585,7 +585,7 @@ module.exports = {
   httpAgentOptions: {
     keepAlive: false,
   },
-}
+};
 ```
 
 # images

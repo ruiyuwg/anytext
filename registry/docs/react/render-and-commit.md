@@ -13,22 +13,22 @@ Imagine that your components are cooks in the kitchen, assembling tasty dishes f
 2. **Rendering** the component (preparing the order in the kitchen)
 3. **Committing** to the DOM (placing the order on the table)
 
-## Step 1: Trigger a render {/*step-1-trigger-a-render*/}
+## Step 1: Trigger a render {/_step-1-trigger-a-render_/}
 
 There are two reasons for a component to render:
 
 1. It's the component's **initial render.**
 2. The component's (or one of its ancestors') **state has been updated.**
 
-### Initial render {/*initial-render*/}
+### Initial render {/_initial-render_/}
 
 When your app starts, you need to trigger the initial render. Frameworks and sandboxes sometimes hide this code, but it's done by calling [`createRoot`](/reference/react-dom/client/createRoot) with the target DOM node, and then calling its `render` method with your component:
 
 ```js src/index.js active
-import Image from './Image.js';
-import { createRoot } from 'react-dom/client';
+import Image from "./Image.js";
+import { createRoot } from "react-dom/client";
 
-const root = createRoot(document.getElementById('root'))
+const root = createRoot(document.getElementById("root"));
 root.render(<Image />);
 ```
 
@@ -45,18 +45,18 @@ export default function Image() {
 
 Try commenting out the `root.render()` call and see the component disappear!
 
-### Re-renders when state updates {/*re-renders-when-state-updates*/}
+### Re-renders when state updates {/_re-renders-when-state-updates_/}
 
 Once the component has been initially rendered, you can trigger further renders by updating its state with the [`set` function.](/reference/react/useState#setstate) Updating your component's state automatically queues a render. (You can imagine these as a restaurant guest ordering tea, dessert, and all sorts of things after putting in their first order, depending on the state of their thirst or hunger.)
 
-## Step 2: React renders your components {/*step-2-react-renders-your-components*/}
+## Step 2: React renders your components {/_step-2-react-renders-your-components_/}
 
 After you trigger a render, React calls your components to figure out what to display on screen. **"Rendering" is React calling your components.**
 
 - **On initial render,** React will call the root component.
 - **For subsequent renders,** React will call the function component whose state update triggered the render.
 
-This process is recursive: if the updated component returns some other component, React will render *that* component next, and if that component also returns something, it will render *that* component next, and so on. The process will continue until there are no more nested components and React knows exactly what should be displayed on screen.
+This process is recursive: if the updated component returns some other component, React will render _that_ component next, and if that component also returns something, it will render _that_ component next, and so on. The process will continue until there are no more nested components and React knows exactly what should be displayed on screen.
 
 In the following example, React will call `Gallery()` and `Image()` several times:
 
@@ -83,15 +83,17 @@ function Image() {
 ```
 
 ```js src/index.js
-import Gallery from './Gallery.js';
-import { createRoot } from 'react-dom/client';
+import Gallery from "./Gallery.js";
+import { createRoot } from "react-dom/client";
 
-const root = createRoot(document.getElementById('root'))
+const root = createRoot(document.getElementById("root"));
 root.render(<Gallery />);
 ```
 
 ```css
-img { margin: 0 10px 10px 0; }
+img {
+  margin: 0 10px 10px 0;
+}
 ```
 
 - **During the initial render,** React will [create the DOM nodes](https://developer.mozilla.org/docs/Web/API/Document/createElement) for `<section>`, `<h1>`, and three `<img>` tags.
@@ -104,11 +106,11 @@ Rendering must always be a [pure calculation](/learn/keeping-components-pure):
 
 Otherwise, you can encounter confusing bugs and unpredictable behavior as your codebase grows in complexity. When developing in "Strict Mode", React calls each component's function twice, which can help surface mistakes caused by impure functions.
 
-#### Optimizing performance {/*optimizing-performance*/}
+#### Optimizing performance {/_optimizing-performance_/}
 
 The default behavior of rendering all components nested within the updated component is not optimal for performance if the updated component is very high in the tree. If you run into a performance issue, there are several opt-in ways to solve it described in the [Performance](https://reactjs.org/docs/optimizing-performance.html) section. **Don't optimize prematurely!**
 
-## Step 3: React commits changes to the DOM {/*step-3-react-commits-changes-to-the-dom*/}
+## Step 3: React commits changes to the DOM {/_step-3-react-commits-changes-to-the-dom_/}
 
 After rendering (calling) your components, React will modify the DOM.
 
@@ -129,8 +131,8 @@ export default function Clock({ time }) {
 ```
 
 ```js src/App.js hidden
-import { useState, useEffect } from 'react';
-import Clock from './Clock.js';
+import { useState, useEffect } from "react";
+import Clock from "./Clock.js";
 
 function useTime() {
   const [time, setTime] = useState(() => new Date());
@@ -145,15 +147,13 @@ function useTime() {
 
 export default function App() {
   const time = useTime();
-  return (
-    <Clock time={time.toLocaleTimeString()} />
-  );
+  return <Clock time={time.toLocaleTimeString()} />;
 }
 ```
 
 This works because during this last step, React only updates the content of `<h1>` with the new `time`. It sees that the `<input>` appears in the JSX in the same place as last time, so React doesn't touch the `<input>`—or its `value`!
 
-## Epilogue: Browser paint {/*epilogue-browser-paint*/}
+## Epilogue: Browser paint {/_epilogue-browser-paint_/}
 
 After rendering is done and React updated the DOM, the browser will repaint the screen. Although this process is known as "browser rendering", we'll refer to it as "painting" to avoid confusion throughout the docs.
 
@@ -164,7 +164,7 @@ After rendering is done and React updated the DOM, the browser will repaint the 
 - You can use Strict Mode to find mistakes in your components
 - React does not touch the DOM if the rendering result is the same as last time
 
-***
+---
 
 ## Sitemap
 

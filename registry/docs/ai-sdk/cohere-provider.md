@@ -11,14 +11,14 @@ The Cohere provider is available in the `@ai-sdk/cohere` module. You can install
 You can import the default provider instance `cohere` from `@ai-sdk/cohere`:
 
 ```ts
-import { cohere } from '@ai-sdk/cohere';
+import { cohere } from "@ai-sdk/cohere";
 ```
 
 If you need a customized setup, you can import `createCohere` from `@ai-sdk/cohere`
 and create a provider instance with your settings:
 
 ```ts
-import { createCohere } from '@ai-sdk/cohere';
+import { createCohere } from "@ai-sdk/cohere";
 
 const cohere = createCohere({
   // custom settings
@@ -27,28 +27,28 @@ const cohere = createCohere({
 
 You can use the following optional settings to customize the Cohere provider instance:
 
-- **baseURL** *string*
+- **baseURL** _string_
 
   Use a different URL prefix for API calls, e.g. to use proxy servers.
   The default prefix is `https://api.cohere.com/v2`.
 
-- **apiKey** *string*
+- **apiKey** _string_
 
   API key that is being sent using the `Authorization` header.
   It defaults to the `COHERE_API_KEY` environment variable.
 
-- **headers** *Record\<string,string>*
+- **headers** _Record\<string,string>_
 
   Custom headers to include in the requests.
 
-- **fetch** *(input: RequestInfo, init?: RequestInit) => Promise\<Response>*
+- **fetch** _(input: RequestInfo, init?: RequestInit) => Promise\<Response>_
 
   Custom [fetch](https://developer.mozilla.org/en-US/docs/Web/API/fetch) implementation.
   Defaults to the global `fetch` function.
   You can use it as a middleware to intercept requests,
   or to provide a custom fetch implementation for e.g. testing.
 
-- **generateId** *() => string*
+- **generateId** _() => string_
 
   Optional function to generate unique IDs for each request.
   Defaults to the SDK's built-in ID generator.
@@ -60,7 +60,7 @@ The first argument is the model id, e.g. `command-r-plus`.
 Some Cohere chat models support tool calls.
 
 ```ts
-const model = cohere('command-r-plus');
+const model = cohere("command-r-plus");
 ```
 
 ### Example
@@ -68,12 +68,12 @@ const model = cohere('command-r-plus');
 You can use Cohere language models to generate text with the `generateText` function:
 
 ```ts
-import { cohere } from '@ai-sdk/cohere';
-import { generateText } from 'ai';
+import { cohere } from "@ai-sdk/cohere";
+import { generateText } from "ai";
 
 const { text } = await generateText({
-  model: cohere('command-r-plus'),
-  prompt: 'Write a vegetarian lasagna recipe for 4 people.',
+  model: cohere("command-r-plus"),
+  prompt: "Write a vegetarian lasagna recipe for 4 people.",
 });
 ```
 
@@ -83,20 +83,20 @@ and support structured data generation with [`Output`](/docs/reference/ai-sdk-co
 
 ### Model Capabilities
 
-| Model                         | Image Input         | Object Generation   | Tool Usage          | Tool Streaming      |
-| ----------------------------- | ------------------- | ------------------- | ------------------- | ------------------- |
-| `command-a-03-2025`           |  |  |  |  |
-| `command-a-reasoning-08-2025` |  |  |  |  |
-| `command-r7b-12-2024`         |  |  |  |  |
-| `command-r-plus-04-2024`      |  |  |  |  |
-| `command-r-plus`              |  |  |  |  |
-| `command-r-08-2024`           |  |  |  |  |
-| `command-r-03-2024`           |  |  |  |  |
-| `command-r`                   |  |  |  |  |
-| `command`                     |  |  |  |  |
-| `command-nightly`             |  |  |  |  |
-| `command-light`               |  |  |  |  |
-| `command-light-nightly`       |  |  |  |  |
+| Model                         | Image Input | Object Generation | Tool Usage | Tool Streaming |
+| ----------------------------- | ----------- | ----------------- | ---------- | -------------- |
+| `command-a-03-2025`           |             |                   |            |                |
+| `command-a-reasoning-08-2025` |             |                   |            |                |
+| `command-r7b-12-2024`         |             |                   |            |                |
+| `command-r-plus-04-2024`      |             |                   |            |                |
+| `command-r-plus`              |             |                   |            |                |
+| `command-r-08-2024`           |             |                   |            |                |
+| `command-r-03-2024`           |             |                   |            |                |
+| `command-r`                   |             |                   |            |                |
+| `command`                     |             |                   |            |                |
+| `command-nightly`             |             |                   |            |                |
+| `command-light`               |             |                   |            |                |
+| `command-light-nightly`       |             |                   |            |                |
 
 The table above lists popular models. Please see the [Cohere
 docs](https://docs.cohere.com/v2/docs/models#command) for a full list of
@@ -108,19 +108,19 @@ string if needed.
 Cohere has introduced reasoning with the `command-a-reasoning-08-2025` model. You can learn more at https://docs.cohere.com/docs/reasoning.
 
 ```ts
-import { cohere, type CohereLanguageModelOptions } from '@ai-sdk/cohere';
-import { generateText } from 'ai';
+import { cohere, type CohereLanguageModelOptions } from "@ai-sdk/cohere";
+import { generateText } from "ai";
 
 async function main() {
   const { text, reasoning } = await generateText({
-    model: cohere('command-a-reasoning-08-2025'),
+    model: cohere("command-a-reasoning-08-2025"),
     prompt:
       "Alice has 3 brothers and she also has 2 sisters. How many sisters does Alice's brother have?",
     // optional: reasoning options
     providerOptions: {
       cohere: {
         thinking: {
-          type: 'enabled',
+          type: "enabled",
           tokenBudget: 100,
         },
       } satisfies CohereLanguageModelOptions,
@@ -140,21 +140,21 @@ You can create models that call the [Cohere embed API](https://docs.cohere.com/v
 using the `.embedding()` factory method.
 
 ```ts
-const model = cohere.embedding('embed-english-v3.0');
+const model = cohere.embedding("embed-english-v3.0");
 ```
 
 You can use Cohere embedding models to generate embeddings with the `embed` function:
 
 ```ts
-import { cohere, type CohereEmbeddingModelOptions } from '@ai-sdk/cohere';
-import { embed } from 'ai';
+import { cohere, type CohereEmbeddingModelOptions } from "@ai-sdk/cohere";
+import { embed } from "ai";
 
 const { embedding } = await embed({
-  model: cohere.embedding('embed-english-v3.0'),
-  value: 'sunny day at the beach',
+  model: cohere.embedding("embed-english-v3.0"),
+  value: "sunny day at the beach",
   providerOptions: {
     cohere: {
-      inputType: 'search_document',
+      inputType: "search_document",
     } satisfies CohereEmbeddingModelOptions,
   },
 });
@@ -163,16 +163,16 @@ const { embedding } = await embed({
 Cohere embedding models support additional provider options that can be passed via `providerOptions.cohere`:
 
 ```ts
-import { cohere, type CohereEmbeddingModelOptions } from '@ai-sdk/cohere';
-import { embed } from 'ai';
+import { cohere, type CohereEmbeddingModelOptions } from "@ai-sdk/cohere";
+import { embed } from "ai";
 
 const { embedding } = await embed({
-  model: cohere.embedding('embed-english-v3.0'),
-  value: 'sunny day at the beach',
+  model: cohere.embedding("embed-english-v3.0"),
+  value: "sunny day at the beach",
   providerOptions: {
     cohere: {
-      inputType: 'search_document',
-      truncate: 'END',
+      inputType: "search_document",
+      truncate: "END",
     } satisfies CohereEmbeddingModelOptions,
   },
 });
@@ -180,20 +180,18 @@ const { embedding } = await embed({
 
 The following provider options are available:
 
-- **inputType** *'search\_document' | 'search\_query' | 'classification' | 'clustering'*
+- **inputType** _'search_document' | 'search_query' | 'classification' | 'clustering'_
 
   Specifies the type of input passed to the model. Default is `search_query`.
-
   - `search_document`: Used for embeddings stored in a vector database for search use-cases.
   - `search_query`: Used for embeddings of search queries run against a vector DB to find relevant documents.
   - `classification`: Used for embeddings passed through a text classifier.
   - `clustering`: Used for embeddings run through a clustering algorithm.
 
-- **truncate** *'NONE' | 'START' | 'END'*
+- **truncate** _'NONE' | 'START' | 'END'_
 
   Specifies how the API will handle inputs longer than the maximum token length.
   Default is `END`.
-
   - `NONE`: If selected, when the input exceeds the maximum input token length will return an error.
   - `START`: Will discard the start of the input until the remaining input is exactly the maximum input token length for the model.
   - `END`: Will discard the end of the input until the remaining input is exactly the maximum input token length for the model.
@@ -216,25 +214,25 @@ You can create models that call the [Cohere rerank API](https://docs.cohere.com/
 using the `.reranking()` factory method.
 
 ```ts
-const model = cohere.reranking('rerank-v3.5');
+const model = cohere.reranking("rerank-v3.5");
 ```
 
 You can use Cohere reranking models to rerank documents with the `rerank` function:
 
 ```ts
-import { cohere } from '@ai-sdk/cohere';
-import { rerank } from 'ai';
+import { cohere } from "@ai-sdk/cohere";
+import { rerank } from "ai";
 
 const documents = [
-  'sunny day at the beach',
-  'rainy afternoon in the city',
-  'snowy night in the mountains',
+  "sunny day at the beach",
+  "rainy afternoon in the city",
+  "snowy night in the mountains",
 ];
 
 const { ranking } = await rerank({
-  model: cohere.reranking('rerank-v3.5'),
+  model: cohere.reranking("rerank-v3.5"),
   documents,
-  query: 'talk about rain',
+  query: "talk about rain",
   topN: 2,
 });
 
@@ -248,13 +246,13 @@ console.log(ranking);
 Cohere reranking models support additional provider options that can be passed via `providerOptions.cohere`:
 
 ```ts
-import { cohere, type CohereRerankingModelOptions } from '@ai-sdk/cohere';
-import { rerank } from 'ai';
+import { cohere, type CohereRerankingModelOptions } from "@ai-sdk/cohere";
+import { rerank } from "ai";
 
 const { ranking } = await rerank({
-  model: cohere.reranking('rerank-v3.5'),
-  documents: ['sunny day at the beach', 'rainy afternoon in the city'],
-  query: 'talk about rain',
+  model: cohere.reranking("rerank-v3.5"),
+  documents: ["sunny day at the beach", "rainy afternoon in the city"],
+  query: "talk about rain",
   providerOptions: {
     cohere: {
       maxTokensPerDoc: 1000,
@@ -266,11 +264,11 @@ const { ranking } = await rerank({
 
 The following provider options are available:
 
-- **maxTokensPerDoc** *number*
+- **maxTokensPerDoc** _number_
 
   Maximum number of tokens per document. Default is `4096`.
 
-- **priority** *number*
+- **priority** _number_
 
   Priority of the request. Default is `0`.
 

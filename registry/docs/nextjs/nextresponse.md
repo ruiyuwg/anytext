@@ -12,11 +12,11 @@ Given a name, set a cookie with the given value on the response.
 
 ```ts
 // Given incoming request /home
-let response = NextResponse.next()
+let response = NextResponse.next();
 // Set a cookie to hide the banner
-response.cookies.set('show-banner', 'false')
+response.cookies.set("show-banner", "false");
 // Response will have a `Set-Cookie:show-banner=false;path=/home` header
-return response
+return response;
 ```
 
 ### `get(name)`
@@ -25,9 +25,9 @@ Given a cookie name, return the value of the cookie. If the cookie is not found,
 
 ```ts
 // Given incoming request /home
-let response = NextResponse.next()
+let response = NextResponse.next();
 // { name: 'show-banner', value: 'false', Path: '/home' }
-response.cookies.get('show-banner')
+response.cookies.get("show-banner");
 ```
 
 ### `getAll()`
@@ -36,14 +36,14 @@ Given a cookie name, return the values of the cookie. If no name is given, retur
 
 ```ts
 // Given incoming request /home
-let response = NextResponse.next()
+let response = NextResponse.next();
 // [
 //   { name: 'experiments', value: 'new-pricing-page', Path: '/home' },
 //   { name: 'experiments', value: 'winter-launch', Path: '/home' },
 // ]
-response.cookies.getAll('experiments')
+response.cookies.getAll("experiments");
 // Alternatively, get all cookies for the response
-response.cookies.getAll()
+response.cookies.getAll();
 ```
 
 ### `has(name)`
@@ -52,9 +52,9 @@ Given a cookie name, return `true` if the cookie exists on the response.
 
 ```ts
 // Given incoming request /home
-let response = NextResponse.next()
+let response = NextResponse.next();
 // Returns true if cookie exists, false if it does not
-response.cookies.has('experiments')
+response.cookies.has("experiments");
 ```
 
 ### `delete(name)`
@@ -63,9 +63,9 @@ Given a cookie name, delete the cookie from the response.
 
 ```ts
 // Given incoming request /home
-let response = NextResponse.next()
+let response = NextResponse.next();
 // Returns true for deleted, false if nothing is deleted
-response.cookies.delete('experiments')
+response.cookies.delete("experiments");
 ```
 
 ## `json()`
@@ -73,18 +73,18 @@ response.cookies.delete('experiments')
 Produce a response with the given JSON body.
 
 ```ts filename="app/api/route.ts" switcher
-import { NextResponse } from 'next/server'
+import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
-  return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
+  return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
 }
 ```
 
 ```js filename="app/api/route.js" switcher
-import { NextResponse } from 'next/server'
+import { NextResponse } from "next/server";
 
 export async function GET(request) {
-  return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
+  return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
 }
 ```
 
@@ -93,22 +93,22 @@ export async function GET(request) {
 Produce a response that redirects to a [URL](https://developer.mozilla.org/docs/Web/API/URL).
 
 ```ts
-import { NextResponse } from 'next/server'
+import { NextResponse } from "next/server";
 
-return NextResponse.redirect(new URL('/new', request.url))
+return NextResponse.redirect(new URL("/new", request.url));
 ```
 
 The [URL](https://developer.mozilla.org/docs/Web/API/URL) can be created and modified before being used in the `NextResponse.redirect()` method. For example, you can use the `request.nextUrl` property to get the current URL, and then modify it to redirect to a different URL.
 
 ```ts
-import { NextResponse } from 'next/server'
+import { NextResponse } from "next/server";
 
 // Given an incoming request...
-const loginUrl = new URL('/login', request.url)
+const loginUrl = new URL("/login", request.url);
 // Add ?from=/incoming-url to the /login URL
-loginUrl.searchParams.set('from', request.nextUrl.pathname)
+loginUrl.searchParams.set("from", request.nextUrl.pathname);
 // And redirect to the new URL
-return NextResponse.redirect(loginUrl)
+return NextResponse.redirect(loginUrl);
 ```
 
 ## `rewrite()`
@@ -116,11 +116,11 @@ return NextResponse.redirect(loginUrl)
 Produce a response that rewrites (proxies) the given [URL](https://developer.mozilla.org/docs/Web/API/URL) while preserving the original URL.
 
 ```ts
-import { NextResponse } from 'next/server'
+import { NextResponse } from "next/server";
 
 // Incoming request: /about, browser shows /about
 // Rewritten request: /proxy, browser shows /about
-return NextResponse.rewrite(new URL('/proxy', request.url))
+return NextResponse.rewrite(new URL("/proxy", request.url));
 ```
 
 ## `next()`
@@ -128,27 +128,27 @@ return NextResponse.rewrite(new URL('/proxy', request.url))
 The `next()` method is useful for Proxy, as it allows you to return early and continue routing.
 
 ```ts
-import { NextResponse } from 'next/server'
+import { NextResponse } from "next/server";
 
-return NextResponse.next()
+return NextResponse.next();
 ```
 
 You can also forward `headers` upstream when producing the response, using `NextResponse.next({ request: { headers } })`:
 
 ```ts
-import { NextResponse } from 'next/server'
+import { NextResponse } from "next/server";
 
 // Given an incoming request...
-const newHeaders = new Headers(request.headers)
+const newHeaders = new Headers(request.headers);
 // Add a new header
-newHeaders.set('x-version', '123')
+newHeaders.set("x-version", "123");
 // Forward the modified request headers upstream
 return NextResponse.next({
   request: {
     // New request headers
     headers: newHeaders,
   },
-})
+});
 ```
 
 This forwards `newHeaders` upstream to the target page, route, or server action, and does not expose them to the client. While this pattern is useful for passing data upstream, it should be used with caution because the headers containing this data may be forwarded to external services.
@@ -156,12 +156,12 @@ This forwards `newHeaders` upstream to the target page, route, or server action,
 In contrast, `NextResponse.next({ headers })` is a shorthand for sending headers from proxy to the client. This is **NOT** good practice and should be avoided. Among other reasons because setting response headers like `Content-Type`, can override framework expectations (for example, the `Content-Type` used by Server Actions), leading to failed submissions or broken streaming responses.
 
 ```ts
-import { type NextRequest, NextResponse } from 'next/server'
+import { type NextRequest, NextResponse } from "next/server";
 
 async function proxy(request: NextRequest) {
-  const headers = await injectAuth(request.headers)
+  const headers = await injectAuth(request.headers);
   // DO NOT forward headers like this
-  return NextResponse.next({ headers })
+  return NextResponse.next({ headers });
 }
 ```
 
@@ -170,22 +170,22 @@ In general, avoid copying all incoming request headers because doing so can leak
 Prefer a defensive approach by creating a subset of incoming request headers using an allow-list. For example, you might discard custom `x-*` headers and only forward known-safe headers:
 
 ```ts
-import { type NextRequest, NextResponse } from 'next/server'
+import { type NextRequest, NextResponse } from "next/server";
 
 function proxy(request: NextRequest) {
-  const incoming = new Headers(request.headers)
-  const forwarded = new Headers()
+  const incoming = new Headers(request.headers);
+  const forwarded = new Headers();
 
   for (const [name, value] of incoming) {
-    const headerName = name.toLowerCase()
+    const headerName = name.toLowerCase();
     // Keep only known-safe headers, discard custom x-* and other sensitive ones
     if (
-      !headerName.startsWith('x-') &&
-      headerName !== 'authorization' &&
-      headerName !== 'cookie'
+      !headerName.startsWith("x-") &&
+      headerName !== "authorization" &&
+      headerName !== "cookie"
     ) {
       // Preserve original header name casing
-      forwarded.set(name, value)
+      forwarded.set(name, value);
     }
   }
 
@@ -193,7 +193,7 @@ function proxy(request: NextRequest) {
     request: {
       headers: forwarded,
     },
-  })
+  });
 }
 ```
 
@@ -208,20 +208,20 @@ The `notFound` function allows you to render the [`not-found file`](/docs/app/ap
 Invoking the `notFound()` function throws a `NEXT_HTTP_ERROR_FALLBACK;404` error and terminates rendering of the route segment in which it was thrown. Specifying a [**not-found** file](/docs/app/api-reference/file-conventions/not-found) allows you to gracefully handle such errors by rendering a Not Found UI within the segment.
 
 ```jsx filename="app/user/[id]/page.js"
-import { notFound } from 'next/navigation'
+import { notFound } from "next/navigation";
 
 async function fetchUser(id) {
-  const res = await fetch('https://...')
-  if (!res.ok) return undefined
-  return res.json()
+  const res = await fetch("https://...");
+  if (!res.ok) return undefined;
+  return res.json();
 }
 
 export default async function Profile({ params }) {
-  const { id } = await params
-  const user = await fetchUser(id)
+  const { id } = await params;
+  const user = await fetchUser(id);
 
   if (!user) {
-    notFound()
+    notFound();
   }
 
   // ...

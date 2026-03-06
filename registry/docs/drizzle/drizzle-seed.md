@@ -172,11 +172,11 @@ ALTER TABLE [].[] DROP CONSTRAINT [];
 TRUNCATE TABLE [].[];
 
 -- recreates the original fk constraints
-ALTER TABLE [].[] 
-ADD CONSTRAINT [] 
+ALTER TABLE [].[]
+ADD CONSTRAINT []
 FOREIGN KEY([])
 REFERENCES [].[] ([])
-ON DELETE 
+ON DELETE
 ON UPDATE ;
 ```
 
@@ -208,8 +208,8 @@ await seed(db, schema).refine((f) => ({
     columns: {},
     count: 10,
     with: {
-        posts: 10
-    }
+      posts: 10,
+    },
   },
 }));
 ```
@@ -236,18 +236,18 @@ export const posts = pgTable("posts", {
 ```ts filename='index.ts'
 import { drizzle } from "drizzle-orm/node-postgres";
 import { seed } from "drizzle-seed";
-import * as schema from './schema.ts'
+import * as schema from "./schema.ts";
 
 async function main() {
   const db = drizzle(process.env.DATABASE_URL!);
 
   await seed(db, { users: schema.users }).refine((f) => ({
     users: {
-        columns: {
-            name: f.fullName(),
-        },
-        count: 20
-    }
+      columns: {
+        name: f.fullName(),
+      },
+      count: 20,
+    },
   }));
 }
 
@@ -259,18 +259,18 @@ main();
 ```ts filename='index.ts'
 import { drizzle } from "drizzle-orm/node-postgres";
 import { seed } from "drizzle-seed";
-import * as schema from './schema.ts'
+import * as schema from "./schema.ts";
 
 async function main() {
   const db = drizzle(process.env.DATABASE_URL!);
 
   await seed(db, schema).refine((f) => ({
     users: {
-        count: 20,
-        with: {
-            posts: 10
-        }
-    }
+      count: 20,
+      with: {
+        posts: 10,
+      },
+    },
   }));
 }
 
@@ -283,37 +283,37 @@ that it will give any int from `10000` to `20000` and remains unique, and refine
 ```ts filename='index.ts'
 import { drizzle } from "drizzle-orm/node-postgres";
 import { seed } from "drizzle-seed";
-import * as schema from './schema.ts'
+import * as schema from "./schema.ts";
 
 async function main() {
   const db = drizzle(process.env.DATABASE_URL!);
 
   await seed(db, schema).refine((f) => ({
     users: {
-        count: 5,
-        columns: {
-            id: f.int({
-              minValue: 10000,
-              maxValue: 20000,
-              isUnique: true,
-            }),
-        }
+      count: 5,
+      columns: {
+        id: f.int({
+          minValue: 10000,
+          maxValue: 20000,
+          isUnique: true,
+        }),
+      },
     },
     posts: {
-        count: 100,
-        columns: {
-            description: f.valuesFromArray({
-            values: [
-                "The sun set behind the mountains, painting the sky in hues of orange and purple", 
-                "I can't believe how good this homemade pizza turned out!", 
-                "Sometimes, all you need is a good book and a quiet corner.", 
-                "Who else thinks rainy days are perfect for binge-watching old movies?", 
-                "Tried a new hiking trail today and found the most amazing waterfall!",
-                // ...
-            ],
-          })
-        }
-    }
+      count: 100,
+      columns: {
+        description: f.valuesFromArray({
+          values: [
+            "The sun set behind the mountains, painting the sky in hues of orange and purple",
+            "I can't believe how good this homemade pizza turned out!",
+            "Sometimes, all you need is a good book and a quiet corner.",
+            "Who else thinks rainy days are perfect for binge-watching old movies?",
+            "Tried a new hiking trail today and found the most amazing waterfall!",
+            // ...
+          ],
+        }),
+      },
+    },
   }));
 }
 
@@ -339,34 +339,34 @@ The Drizzle Seed package has a few places where weighted random can be used:
 Let's check an example for both:
 
 ```ts filename="schema.ts"
-import { pgTable, integer, text, varchar, doublePrecision } from "drizzle-orm/pg-core";
+import {
+  pgTable,
+  integer,
+  text,
+  varchar,
+  doublePrecision,
+} from "drizzle-orm/pg-core";
 
-export const orders = pgTable(
-  "orders",
-  {
-    id: integer().primaryKey(),
-    name: text().notNull(),
-    quantityPerUnit: varchar().notNull(),
-    unitPrice: doublePrecision().notNull(),
-    unitsInStock: integer().notNull(),
-    unitsOnOrder: integer().notNull(),
-    reorderLevel: integer().notNull(),
-    discontinued: integer().notNull(),
-  }
-);
+export const orders = pgTable("orders", {
+  id: integer().primaryKey(),
+  name: text().notNull(),
+  quantityPerUnit: varchar().notNull(),
+  unitPrice: doublePrecision().notNull(),
+  unitsInStock: integer().notNull(),
+  unitsOnOrder: integer().notNull(),
+  reorderLevel: integer().notNull(),
+  discontinued: integer().notNull(),
+});
 
-export const details = pgTable(
-  "details",
-  {
-    unitPrice: doublePrecision().notNull(),
-    quantity: integer().notNull(),
-    discount: doublePrecision().notNull(),
+export const details = pgTable("details", {
+  unitPrice: doublePrecision().notNull(),
+  quantity: integer().notNull(),
+  discount: doublePrecision().notNull(),
 
-    orderId: integer()
-      .notNull()
-      .references(() => orders.id, { onDelete: "cascade" }),
-  }
-);
+  orderId: integer()
+    .notNull()
+    .references(() => orders.id, { onDelete: "cascade" }),
+});
 ```
 
 **Example 1**: Refine the `unitPrice` generation logic to generate `5000` random prices, with a 30% chance of prices between 10-100 and a 70% chance of prices between 100-300
@@ -374,29 +374,31 @@ export const details = pgTable(
 ```ts filename="index.ts"
 import { drizzle } from "drizzle-orm/node-postgres";
 import { seed } from "drizzle-seed";
-import * as schema from './schema.ts'
+import * as schema from "./schema.ts";
 
 async function main() {
   const db = drizzle(process.env.DATABASE_URL!);
 
   await seed(db, schema).refine((f) => ({
     orders: {
-       count: 5000,
-       columns: {
-           unitPrice: f.weightedRandom(
-               [
-                   {
-                       weight: 0.3,
-                       value: funcs.int({ minValue: 10, maxValue: 100 })
-                   },
-                   {
-                       weight: 0.7,
-                       value: funcs.number({ minValue: 100, maxValue: 300, precision: 100 })
-                   }
-               ]
-           ),
-       }
-    }
+      count: 5000,
+      columns: {
+        unitPrice: f.weightedRandom([
+          {
+            weight: 0.3,
+            value: funcs.int({ minValue: 10, maxValue: 100 }),
+          },
+          {
+            weight: 0.7,
+            value: funcs.number({
+              minValue: 100,
+              maxValue: 300,
+              precision: 100,
+            }),
+          },
+        ]),
+      },
+    },
   }));
 }
 
@@ -408,22 +410,21 @@ main();
 ```ts filename="index.ts"
 import { drizzle } from "drizzle-orm/node-postgres";
 import { seed } from "drizzle-seed";
-import * as schema from './schema.ts'
+import * as schema from "./schema.ts";
 
 async function main() {
   const db = drizzle(process.env.DATABASE_URL!);
 
   await seed(db, schema).refine((f) => ({
     orders: {
-       with: {
-           details:
-               [
-                   { weight: 0.6, count: [1, 2, 3] },
-                   { weight: 0.3, count: [5, 6, 7] },
-                   { weight: 0.1, count: [8, 9, 10] },
-               ]
-       }
-    }
+      with: {
+        details: [
+          { weight: 0.6, count: [1, 2, 3] },
+          { weight: 0.3, count: [5, 6, 7] },
+          { weight: 0.1, count: [8, 9, 10] },
+        ],
+      },
+    },
   }));
 }
 

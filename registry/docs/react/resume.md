@@ -8,28 +8,28 @@ const stream = await resume(reactNode, postponedState, options?)
 
 This API depends on [Web Streams.](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API) For Node.js, use [`resumeToNodeStream`](/reference/react-dom/server/renderToPipeableStream) instead.
 
-***
+---
 
-## Reference {/*reference*/}
+## Reference {/_reference_/}
 
-### `resume(node, postponedState, options?)` {/*resume*/}
+### `resume(node, postponedState, options?)` {/_resume_/}
 
 Call `resume` to resume rendering a pre-rendered React tree as HTML into a [Readable Web Stream.](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream)
 
 ```js
-import { resume } from 'react-dom/server';
-import {getPostponedState} from './storage';
+import { resume } from "react-dom/server";
+import { getPostponedState } from "./storage";
 
 async function handler(request, writable) {
   const postponed = await getPostponedState(request);
   const resumeStream = await resume(<App />, postponed);
-  return resumeStream.pipeTo(writable)
+  return resumeStream.pipeTo(writable);
 }
 ```
 
 [See more examples below.](#usage)
 
-#### Parameters {/*parameters*/}
+#### Parameters {/_parameters_/}
 
 - `reactNode`: The React node you called `prerender` with. For example, a JSX element like `<App />`. It is expected to represent the entire document, so the `App` component should render the `<html>` tag.
 - `postponedState`: The opaque `postpone` object returned from a [prerender API](/reference/react-dom/static/index), loaded from wherever you stored it (e.g. redis, a file, or S3).
@@ -38,7 +38,7 @@ async function handler(request, writable) {
   - **optional** `signal`: An [abort signal](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal) that lets you [abort server rendering](#aborting-server-rendering) and render the rest on the client.
   - **optional** `onError`: A callback that fires whenever there is a server error, whether [recoverable](/reference/react-dom/server/renderToReadableStream#recovering-from-errors-outside-the-shell) or [not.](/reference/react-dom/server/renderToReadableStream#recovering-from-errors-inside-the-shell) By default, this only calls `console.error`. If you override it to [log crash reports,](/reference/react-dom/server/renderToReadableStream#logging-crashes-on-the-server) make sure that you still call `console.error`.
 
-#### Returns {/*returns*/}
+#### Returns {/_returns_/}
 
 `resume` returns a Promise:
 
@@ -49,31 +49,32 @@ The returned stream has an additional property:
 
 - `allReady`: A Promise that resolves when all rendering is complete. You can `await stream.allReady` before returning a response [for crawlers and static generation.](/reference/react-dom/server/renderToReadableStream#waiting-for-all-content-to-load-for-crawlers-and-static-generation) If you do that, you won't get any progressive loading. The stream will contain the final HTML.
 
-#### Caveats {/*caveats*/}
+#### Caveats {/_caveats_/}
 
 - `resume` does not accept options for `bootstrapScripts`, `bootstrapScriptContent`, or `bootstrapModules`. Instead, you need to pass these options to the `prerender` call that generates the `postponedState`. You can also inject bootstrap content into the writable stream manually.
 - `resume` does not accept `identifierPrefix` since the prefix needs to be the same in both `prerender` and `resume`.
 - Since `nonce` cannot be provided to prerender, you should only provide `nonce` to `resume` if you're not providing scripts to prerender.
 - `resume` re-renders from the root until it finds a component that was not fully pre-rendered. Only fully prerendered Components (the Component and its children finished prerendering) are skipped entirely.
 
-## Usage {/*usage*/}
+## Usage {/_usage_/}
 
-### Resuming a prerender {/*resuming-a-prerender*/}
+### Resuming a prerender {/_resuming-a-prerender_/}
 
-```js src/App.js hidden 
+```js src/App.js hidden
+
 ```
 
 ```html public/index.html
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <iframe id="container"></iframe>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <iframe id="container"></iframe>
+  </body>
 </html>
 ```
 
@@ -179,7 +180,6 @@ async function main(frame) {
 }
 
 main(document.getElementById("container"));
-
 ```
 
 ```js src/demo-helpers.js
@@ -213,11 +213,12 @@ export function sleep(timeoutMS) {
 }
 ```
 
-### Further reading {/*further-reading*/}
+### Further reading {/_further-reading_/}
 
 Resuming behaves like `renderToReadableStream`. For more examples, check out the [usage section of `renderToReadableStream`](/reference/react-dom/server/renderToReadableStream#usage).
 The [usage section of `prerender`](/reference/react-dom/static/prerender#usage) includes examples of how to use `prerender` specifically.
------------------------------------------------------------------------------------------------------------------------------------------
+
+---
 
 ## Sitemap
 

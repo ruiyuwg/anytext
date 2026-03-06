@@ -18,29 +18,29 @@ To fetch data with the `fetch` API, turn your component into an asynchronous fun
 
 ```tsx filename="app/blog/page.tsx" switcher
 export default async function Page() {
-  const data = await fetch('https://api.vercel.app/blog')
-  const posts = await data.json()
+  const data = await fetch("https://api.vercel.app/blog");
+  const posts = await data.json();
   return (
     <ul>
       {posts.map((post) => (
         <li key={post.id}>{post.title}</li>
       ))}
     </ul>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/blog/page.js" switcher
 export default async function Page() {
-  const data = await fetch('https://api.vercel.app/blog')
-  const posts = await data.json()
+  const data = await fetch("https://api.vercel.app/blog");
+  const posts = await data.json();
   return (
     <ul>
       {posts.map((post) => (
         <li key={post.id}>{post.title}</li>
       ))}
     </ul>
-  )
+  );
 }
 ```
 
@@ -54,32 +54,32 @@ export default async function Page() {
 Since Server Components are rendered on the server, you can safely make database queries using an ORM or database client. Turn your component into an asynchronous function, and await the call:
 
 ```tsx filename="app/blog/page.tsx" switcher
-import { db, posts } from '@/lib/db'
+import { db, posts } from "@/lib/db";
 
 export default async function Page() {
-  const allPosts = await db.select().from(posts)
+  const allPosts = await db.select().from(posts);
   return (
     <ul>
       {allPosts.map((post) => (
         <li key={post.id}>{post.title}</li>
       ))}
     </ul>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/blog/page.js" switcher
-import { db, posts } from '@/lib/db'
+import { db, posts } from "@/lib/db";
 
 export default async function Page() {
-  const allPosts = await db.select().from(posts)
+  const allPosts = await db.select().from(posts);
   return (
     <ul>
       {allPosts.map((post) => (
         <li key={post.id}>{post.title}</li>
       ))}
     </ul>
-  )
+  );
 }
 ```
 
@@ -95,49 +95,49 @@ There are two ways to fetch data in Client Components, using:
 You can use React's [`use` API](https://react.dev/reference/react/use) to [stream](#streaming) data from the server to client. Start by fetching data in your Server component, and pass the promise to your Client Component as prop:
 
 ```tsx filename="app/blog/page.tsx" switcher
-import Posts from '@/app/ui/posts'
-import { Suspense } from 'react'
+import Posts from "@/app/ui/posts";
+import { Suspense } from "react";
 
 export default function Page() {
   // Don't await the data fetching function
-  const posts = getPosts()
+  const posts = getPosts();
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <Posts posts={posts} />
     </Suspense>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/blog/page.js" switcher
-import Posts from '@/app/ui/posts'
-import { Suspense } from 'react'
+import Posts from "@/app/ui/posts";
+import { Suspense } from "react";
 
 export default function Page() {
   // Don't await the data fetching function
-  const posts = getPosts()
+  const posts = getPosts();
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <Posts posts={posts} />
     </Suspense>
-  )
+  );
 }
 ```
 
 Then, in your Client Component, use the `use` API to read the promise:
 
 ```tsx filename="app/ui/posts.tsx" switcher
-'use client'
-import { use } from 'react'
+"use client";
+import { use } from "react";
 
 export default function Posts({
   posts,
 }: {
-  posts: Promise<{ id: string; title: string }[]>
+  posts: Promise<{ id: string; title: string }[]>;
 }) {
-  const allPosts = use(posts)
+  const allPosts = use(posts);
 
   return (
     <ul>
@@ -145,16 +145,16 @@ export default function Posts({
         <li key={post.id}>{post.title}</li>
       ))}
     </ul>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/ui/posts.js" switcher
-'use client'
-import { use } from 'react'
+"use client";
+import { use } from "react";
 
 export default function Posts({ posts }) {
-  const allPosts = use(posts)
+  const allPosts = use(posts);
 
   return (
     <ul>
@@ -162,7 +162,7 @@ export default function Posts({ posts }) {
         <li key={post.id}>{post.title}</li>
       ))}
     </ul>
-  )
+  );
 }
 ```
 
@@ -173,19 +173,19 @@ In the example above, the `<Posts>` component is wrapped in a [`<Suspense>` boun
 You can use a community library like [SWR](https://swr.vercel.app/) or [React Query](https://tanstack.com/query/latest) to fetch data in Client Components. These libraries have their own semantics for caching, streaming, and other features. For example, with SWR:
 
 ```tsx filename="app/blog/page.tsx" switcher
-'use client'
-import useSWR from 'swr'
+"use client";
+import useSWR from "swr";
 
-const fetcher = (url) => fetch(url).then((r) => r.json())
+const fetcher = (url) => fetch(url).then((r) => r.json());
 
 export default function BlogPage() {
   const { data, error, isLoading } = useSWR(
-    'https://api.vercel.app/blog',
-    fetcher
-  )
+    "https://api.vercel.app/blog",
+    fetcher,
+  );
 
-  if (isLoading) return <div>Loading...</div>
-  if (error) return <div>Error: {error.message}</div>
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
 
   return (
     <ul>
@@ -193,25 +193,25 @@ export default function BlogPage() {
         <li key={post.id}>{post.title}</li>
       ))}
     </ul>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/blog/page.js" switcher
-'use client'
+"use client";
 
-import useSWR from 'swr'
+import useSWR from "swr";
 
-const fetcher = (url) => fetch(url).then((r) => r.json())
+const fetcher = (url) => fetch(url).then((r) => r.json());
 
 export default function BlogPage() {
   const { data, error, isLoading } = useSWR(
-    'https://api.vercel.app/blog',
-    fetcher
-  )
+    "https://api.vercel.app/blog",
+    fetcher,
+  );
 
-  if (isLoading) return <div>Loading...</div>
-  if (error) return <div>Error: {error.message}</div>
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
 
   return (
     <ul>
@@ -219,7 +219,7 @@ export default function BlogPage() {
         <li key={post.id}>{post.title}</li>
       ))}
     </ul>
-  )
+  );
 }
 ```
 
@@ -233,29 +233,29 @@ You can also deduplicate `fetch` requests by using Next.js’ [Data Cache](/docs
 
 Data Cache allows sharing data across the current render pass and incoming requests.
 
-If you are *not* using `fetch`, and instead using an ORM or database directly, you can wrap your data access with the [React `cache`](https://react.dev/reference/react/cache) function.
+If you are _not_ using `fetch`, and instead using an ORM or database directly, you can wrap your data access with the [React `cache`](https://react.dev/reference/react/cache) function.
 
 ```tsx filename="app/lib/data.ts" switcher
-import { cache } from 'react'
-import { db, posts, eq } from '@/lib/db'
+import { cache } from "react";
+import { db, posts, eq } from "@/lib/db";
 
 export const getPost = cache(async (id: string) => {
   const post = await db.query.posts.findFirst({
     where: eq(posts.id, parseInt(id)),
-  })
-})
+  });
+});
 ```
 
 ```jsx filename="app/lib/data.js" switcher
-import { cache } from 'react'
-import { db, posts, eq } from '@/lib/db'
-import { notFound } from 'next/navigation'
+import { cache } from "react";
+import { db, posts, eq } from "@/lib/db";
+import { notFound } from "next/navigation";
 
 export const getPost = cache(async (id) => {
   const post = await db.query.posts.findFirst({
     where: eq(posts.id, parseInt(id)),
-  })
-})
+  });
+});
 ```
 
 ## Streaming
@@ -282,14 +282,14 @@ You can create a `loading.js` file in the same folder as your page to stream the
 ```tsx filename="app/blog/loading.tsx" switcher
 export default function Loading() {
   // Define the Loading UI here
-  return <div>Loading...</div>
+  return <div>Loading...</div>;
 }
 ```
 
 ```jsx filename="app/blog/loading.js" switcher
 export default function Loading() {
   // Define the Loading UI here
-  return <div>Loading...</div>
+  return <div>Loading...</div>;
 }
 ```
 
@@ -308,9 +308,9 @@ This approach works well for route segments (layouts and pages), but for more gr
 `<Suspense>` allows you to be more granular about what parts of the page to stream. For example, you can immediately show any page content that falls outside of the `<Suspense>` boundary, and stream in the list of blog posts inside the boundary.
 
 ```tsx filename="app/blog/page.tsx" switcher
-import { Suspense } from 'react'
-import BlogList from '@/components/BlogList'
-import BlogListSkeleton from '@/components/BlogListSkeleton'
+import { Suspense } from "react";
+import BlogList from "@/components/BlogList";
+import BlogListSkeleton from "@/components/BlogListSkeleton";
 
 export default function BlogPage() {
   return (
@@ -327,14 +327,14 @@ export default function BlogPage() {
         </Suspense>
       </main>
     </div>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/blog/page.js" switcher
-import { Suspense } from 'react'
-import BlogList from '@/components/BlogList'
-import BlogListSkeleton from '@/components/BlogListSkeleton'
+import { Suspense } from "react";
+import BlogList from "@/components/BlogList";
+import BlogListSkeleton from "@/components/BlogListSkeleton";
 
 export default function BlogPage() {
   return (
@@ -351,7 +351,7 @@ export default function BlogPage() {
         </Suspense>
       </main>
     </div>
-  )
+  );
 }
 ```
 
@@ -373,11 +373,11 @@ For example, `<Playlists>` can only fetch data after `<Artist>` completes becaus
 export default async function Page({
   params,
 }: {
-  params: Promise<{ username: string }>
+  params: Promise<{ username: string }>;
 }) {
-  const { username } = await params
+  const { username } = await params;
   // Get artist information
-  const artist = await getArtist(username)
+  const artist = await getArtist(username);
 
   return (
     <>
@@ -388,12 +388,12 @@ export default async function Page({
         <Playlists artistID={artist.id} />
       </Suspense>
     </>
-  )
+  );
 }
 
 async function Playlists({ artistID }: { artistID: string }) {
   // Use the artist ID to fetch playlists
-  const playlists = await getArtistPlaylists(artistID)
+  const playlists = await getArtistPlaylists(artistID);
 
   return (
     <ul>
@@ -401,15 +401,15 @@ async function Playlists({ artistID }: { artistID: string }) {
         <li key={playlist.id}>{playlist.name}</li>
       ))}
     </ul>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/artist/[username]/page.js" switcher
 export default async function Page({ params }) {
-  const { username } = await params
+  const { username } = await params;
   // Get artist information
-  const artist = await getArtist(username)
+  const artist = await getArtist(username);
 
   return (
     <>
@@ -420,12 +420,12 @@ export default async function Page({ params }) {
         <Playlists artistID={artist.id} />
       </Suspense>
     </>
-  )
+  );
 }
 
 async function Playlists({ artistID }) {
   // Use the artist ID to fetch playlists
-  const playlists = await getArtistPlaylists(artistID)
+  const playlists = await getArtistPlaylists(artistID);
 
   return (
     <ul>
@@ -433,7 +433,7 @@ async function Playlists({ artistID }) {
         <li key={playlist.id}>{playlist.name}</li>
       ))}
     </ul>
-  )
+  );
 }
 ```
 
@@ -447,85 +447,85 @@ Parallel data fetching happens when data requests in a route are eagerly initiat
 
 By default, [layouts and pages](/docs/app/getting-started/layouts-and-pages) are rendered in parallel. So each segment starts fetching data as soon as possible.
 
-However, within *any* component, multiple `async`/`await` requests can still be sequential if placed after the other. For example, `getAlbums` will be blocked until `getArtist` is resolved:
+However, within _any_ component, multiple `async`/`await` requests can still be sequential if placed after the other. For example, `getAlbums` will be blocked until `getArtist` is resolved:
 
 ```tsx filename="app/artist/[username]/page.tsx" switcher
-import { getArtist, getAlbums } from '@/app/lib/data'
+import { getArtist, getAlbums } from "@/app/lib/data";
 
 export default async function Page({ params }) {
   // These requests will be sequential
-  const { username } = await params
-  const artist = await getArtist(username)
-  const albums = await getAlbums(username)
-  return <div>{artist.name}</div>
+  const { username } = await params;
+  const artist = await getArtist(username);
+  const albums = await getAlbums(username);
+  return <div>{artist.name}</div>;
 }
 ```
 
 Start multiple requests by calling `fetch`, then await them with [`Promise.all`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all). Requests begin as soon as `fetch` is called.
 
 ```tsx filename="app/artist/[username]/page.tsx" highlight={3,8,24} switcher
-import Albums from './albums'
+import Albums from "./albums";
 
 async function getArtist(username: string) {
-  const res = await fetch(`https://api.example.com/artist/${username}`)
-  return res.json()
+  const res = await fetch(`https://api.example.com/artist/${username}`);
+  return res.json();
 }
 
 async function getAlbums(username: string) {
-  const res = await fetch(`https://api.example.com/artist/${username}/albums`)
-  return res.json()
+  const res = await fetch(`https://api.example.com/artist/${username}/albums`);
+  return res.json();
 }
 
 export default async function Page({
   params,
 }: {
-  params: Promise<{ username: string }>
+  params: Promise<{ username: string }>;
 }) {
-  const { username } = await params
+  const { username } = await params;
 
   // Initiate requests
-  const artistData = getArtist(username)
-  const albumsData = getAlbums(username)
+  const artistData = getArtist(username);
+  const albumsData = getAlbums(username);
 
-  const [artist, albums] = await Promise.all([artistData, albumsData])
+  const [artist, albums] = await Promise.all([artistData, albumsData]);
 
   return (
     <>
       <h1>{artist.name}</h1>
       <Albums list={albums} />
     </>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/artist/[username]/page.js" highlight={3,8,20} switcher
-import Albums from './albums'
+import Albums from "./albums";
 
 async function getArtist(username) {
-  const res = await fetch(`https://api.example.com/artist/${username}`)
-  return res.json()
+  const res = await fetch(`https://api.example.com/artist/${username}`);
+  return res.json();
 }
 
 async function getAlbums(username) {
-  const res = await fetch(`https://api.example.com/artist/${username}/albums`)
-  return res.json()
+  const res = await fetch(`https://api.example.com/artist/${username}/albums`);
+  return res.json();
 }
 
 export default async function Page({ params }) {
-  const { username } = await params
+  const { username } = await params;
 
   // Initiate requests
-  const artistData = getArtist(username)
-  const albumsData = getAlbums(username)
+  const artistData = getArtist(username);
+  const albumsData = getAlbums(username);
 
-  const [artist, albums] = await Promise.all([artistData, albumsData])
+  const [artist, albums] = await Promise.all([artistData, albumsData]);
 
   return (
     <>
       <h1>{artist.name}</h1>
       <Albums list={albums} />
     </>
-  )
+  );
 }
 ```
 
@@ -538,30 +538,30 @@ You can preload data by creating a utility function that you eagerly call above 
 You can call `preload()` before `checkIsAvailable()` to eagerly initiate `<Item/>` data dependencies. By the time `<Item/>` is rendered, its data has already been fetched.
 
 ```tsx filename="app/item/[id]/page.tsx" switcher
-import { getItem, checkIsAvailable } from '@/lib/data'
+import { getItem, checkIsAvailable } from "@/lib/data";
 
 export default async function Page({
   params,
 }: {
-  params: Promise<{ id: string }>
+  params: Promise<{ id: string }>;
 }) {
-  const { id } = await params
+  const { id } = await params;
   // starting loading item data
-  preload(id)
+  preload(id);
   // perform another asynchronous task
-  const isAvailable = await checkIsAvailable()
+  const isAvailable = await checkIsAvailable();
 
-  return isAvailable ? <Item id={id} /> : null
+  return isAvailable ? <Item id={id} /> : null;
 }
 
 const preload = (id: string) => {
   // void evaluates the given expression and returns undefined
   // https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/void
-  void getItem(id)
-}
+  void getItem(id);
+};
 
 export async function Item({ id }: { id: string }) {
-  const result = await getItem(id)
+  const result = await getItem(id);
   // ...
 }
 ```
@@ -593,31 +593,31 @@ export async function Item({ id }) {
 Additionally, you can use React's [`cache` function](https://react.dev/reference/react/cache) and the [`server-only` package](https://www.npmjs.com/package/server-only) to create a reusable utility function. This approach allows you to cache the data fetching function and ensure that it's only executed on the server.
 
 ```ts filename="utils/get-item.ts" switcher
-import { cache } from 'react'
-import 'server-only'
-import { getItem } from '@/lib/data'
+import { cache } from "react";
+import "server-only";
+import { getItem } from "@/lib/data";
 
 export const preload = (id: string) => {
-  void getItem(id)
-}
+  void getItem(id);
+};
 
 export const getItem = cache(async (id: string) => {
   // ...
-})
+});
 ```
 
 ```js filename="utils/get-item.js" switcher
-import { cache } from 'react'
-import 'server-only'
-import { getItem } from '@/lib/data'
+import { cache } from "react";
+import "server-only";
+import { getItem } from "@/lib/data";
 
 export const preload = (id) => {
-  void getItem(id)
-}
+  void getItem(id);
+};
 
 export const getItem = cache(async (id) => {
   // ...
-})
+});
 ```
 
 ## API Reference

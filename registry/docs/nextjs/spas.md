@@ -35,18 +35,18 @@ Next.js can start data fetching early on the server. In this example, that’s t
 
 By “hoisting” your data fetching to the root layout, Next.js starts the specified requests on the server early before any other components in your application. This eliminates client waterfalls and prevents having multiple roundtrips between client and server. It can also significantly improve performance, as your server is closer (and ideally colocated) to where your database is located.
 
-For example, update your root layout to call the Promise, but do *not* await it.
+For example, update your root layout to call the Promise, but do _not_ await it.
 
 ```tsx filename="app/layout.tsx" switcher
-import { UserProvider } from './user-provider'
-import { getUser } from './user' // some server-side function
+import { UserProvider } from "./user-provider";
+import { getUser } from "./user"; // some server-side function
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
-  let userPromise = getUser() // do NOT await
+  let userPromise = getUser(); // do NOT await
 
   return (
     <html lang="en">
@@ -54,16 +54,16 @@ export default function RootLayout({
         <UserProvider userPromise={userPromise}>{children}</UserProvider>
       </body>
     </html>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/layout.js" switcher
-import { UserProvider } from './user-provider'
-import { getUser } from './user' // some server-side function
+import { UserProvider } from "./user-provider";
+import { getUser } from "./user"; // some server-side function
 
 export default function RootLayout({ children }) {
-  let userPromise = getUser() // do NOT await
+  let userPromise = getUser(); // do NOT await
 
   return (
     <html lang="en">
@@ -71,7 +71,7 @@ export default function RootLayout({ children }) {
         <UserProvider userPromise={userPromise}>{children}</UserProvider>
       </body>
     </html>
-  )
+  );
 }
 ```
 
@@ -115,18 +115,18 @@ export function UserProvider({
 ```
 
 ```js filename="app/user-provider.js" switcher
-'use client'
+"use client";
 
-import { createContext, useContext, ReactNode } from 'react'
+import { createContext, useContext, ReactNode } from "react";
 
-const UserContext = createContext(null)
+const UserContext = createContext(null);
 
 export function useUser() {
-  let context = useContext(UserContext)
+  let context = useContext(UserContext);
   if (context === null) {
-    throw new Error('useUser must be used within a UserProvider')
+    throw new Error("useUser must be used within a UserProvider");
   }
-  return context
+  return context;
 }
 
 export function UserProvider({ children, userPromise }) {
@@ -134,37 +134,37 @@ export function UserProvider({ children, userPromise }) {
     <UserContext.Provider value={{ userPromise }}>
       {children}
     </UserContext.Provider>
-  )
+  );
 }
 ```
 
 Finally, you can call the `useUser()` custom hook in any Client Component and unwrap the Promise:
 
 ```tsx filename="app/profile.tsx" switcher
-'use client'
+"use client";
 
-import { use } from 'react'
-import { useUser } from './user-provider'
+import { use } from "react";
+import { useUser } from "./user-provider";
 
 export function Profile() {
-  const { userPromise } = useUser()
-  const user = use(userPromise)
+  const { userPromise } = useUser();
+  const user = use(userPromise);
 
-  return '...'
+  return "...";
 }
 ```
 
 ```jsx filename="app/profile.js" switcher
-'use client'
+"use client";
 
-import { use } from 'react'
-import { useUser } from './user-provider'
+import { use } from "react";
+import { useUser } from "./user-provider";
 
 export function Profile() {
-  const { userPromise } = useUser()
-  const user = use(userPromise)
+  const { userPromise } = useUser();
+  const user = use(userPromise);
 
-  return '...'
+  return "...";
 }
 ```
 
@@ -183,13 +183,13 @@ With SWR 2.3.0 (and React 19+), you can gradually adopt server features alongsid
 For example, wrap your application with `<SWRConfig>` and a `fallback`:
 
 ```tsx filename="app/layout.tsx" switcher
-import { SWRConfig } from 'swr'
-import { getUser } from './user' // some server-side function
+import { SWRConfig } from "swr";
+import { getUser } from "./user"; // some server-side function
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <SWRConfig
@@ -197,19 +197,19 @@ export default function RootLayout({
         fallback: {
           // We do NOT await getUser() here
           // Only components that read this data will suspend
-          '/api/user': getUser(),
+          "/api/user": getUser(),
         },
       }}
     >
       {children}
     </SWRConfig>
-  )
+  );
 }
 ```
 
 ```js filename="app/layout.js" switcher
-import { SWRConfig } from 'swr'
-import { getUser } from './user' // some server-side function
+import { SWRConfig } from "swr";
+import { getUser } from "./user"; // some server-side function
 
 export default function RootLayout({ children }) {
   return (
@@ -218,43 +218,43 @@ export default function RootLayout({ children }) {
         fallback: {
           // We do NOT await getUser() here
           // Only components that read this data will suspend
-          '/api/user': getUser(),
+          "/api/user": getUser(),
         },
       }}
     >
       {children}
     </SWRConfig>
-  )
+  );
 }
 ```
 
 Because this is a Server Component, `getUser()` can securely read cookies, headers, or talk to your database. No separate API route is needed. Client components below the `<SWRConfig>` can call `useSWR()` with the same key to retrieve the user data. The component code with `useSWR` **does not require any changes** from your existing client-fetching solution.
 
 ```tsx filename="app/profile.tsx" switcher
-'use client'
+"use client";
 
-import useSWR from 'swr'
+import useSWR from "swr";
 
 export function Profile() {
-  const fetcher = (url) => fetch(url).then((res) => res.json())
+  const fetcher = (url) => fetch(url).then((res) => res.json());
   // The same SWR pattern you already know
-  const { data, error } = useSWR('/api/user', fetcher)
+  const { data, error } = useSWR("/api/user", fetcher);
 
-  return '...'
+  return "...";
 }
 ```
 
 ```jsx filename="app/profile.js" switcher
-'use client'
+"use client";
 
-import useSWR from 'swr'
+import useSWR from "swr";
 
 export function Profile() {
-  const fetcher = (url) => fetch(url).then((res) => res.json())
+  const fetcher = (url) => fetch(url).then((res) => res.json());
   // The same SWR pattern you already know
-  const { data, error } = useSWR('/api/user', fetcher)
+  const { data, error } = useSWR("/api/user", fetcher);
 
-  return '...'
+  return "...";
 }
 ```
 
@@ -262,12 +262,12 @@ The `fallback` data can be prerendered and included in the initial HTML response
 
 Since the initial `fallback` data is automatically handled by Next.js, you can now delete any conditional logic previously needed to check if `data` was `undefined`. When the data is loading, the closest `<Suspense>` boundary will be suspended.
 
-|                      | SWR                 | RSC                 | RSC + SWR           |
-| -------------------- | ------------------- | ------------------- | ------------------- |
-| SSR data             |  |  |  |
-| Streaming while SSR  |  |  |  |
-| Deduplicate requests |  |  |  |
-| Client-side features |  |  |  |
+|                      | SWR | RSC | RSC + SWR |
+| -------------------- | --- | --- | --------- |
+| SSR data             |     |     |           |
+| Streaming while SSR  |     |     |           |
+| Deduplicate requests |     |     |           |
+| Client-side features |     |     |           |
 
 ### SPAs with React Query
 
@@ -280,66 +280,66 @@ Learn more in the [React Query documentation](https://tanstack.com/query/latest/
 Client components are [prerendered](https://github.com/reactwg/server-components/discussions/4) during `next build`. If you want to disable prerendering for a Client Component and only load it in the browser environment, you can use [`next/dynamic`](/docs/app/guides/lazy-loading#nextdynamic):
 
 ```jsx
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic";
 
-const ClientOnlyComponent = dynamic(() => import('./component'), {
+const ClientOnlyComponent = dynamic(() => import("./component"), {
   ssr: false,
-})
+});
 ```
 
 This can be useful for third-party libraries that rely on browser APIs like `window` or `document`. You can also add a `useEffect` that checks for the existence of these APIs, and if they do not exist, return `null` or a loading state which would be prerendered.
 
 ### Shallow routing on the client
 
-If you are migrating from a strict SPA like [Create React App](/docs/app/guides/migrating/from-create-react-app) or [Vite](/docs/app/guides/migrating/from-vite), you might have existing code which shallow routes to update the URL state. This can be useful for manual transitions between views in your application *without* using the default Next.js file-system routing.
+If you are migrating from a strict SPA like [Create React App](/docs/app/guides/migrating/from-create-react-app) or [Vite](/docs/app/guides/migrating/from-vite), you might have existing code which shallow routes to update the URL state. This can be useful for manual transitions between views in your application _without_ using the default Next.js file-system routing.
 
 Next.js allows you to use the native [`window.history.pushState`](https://developer.mozilla.org/en-US/docs/Web/API/History/pushState) and [`window.history.replaceState`](https://developer.mozilla.org/en-US/docs/Web/API/History/replaceState) methods to update the browser's history stack without reloading the page.
 
 `pushState` and `replaceState` calls integrate into the Next.js Router, allowing you to sync with [`usePathname`](/docs/app/api-reference/functions/use-pathname) and [`useSearchParams`](/docs/app/api-reference/functions/use-search-params).
 
 ```tsx fileName="app/ui/sort-products.tsx" switcher
-'use client'
+"use client";
 
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams } from "next/navigation";
 
 export default function SortProducts() {
-  const searchParams = useSearchParams()
+  const searchParams = useSearchParams();
 
   function updateSorting(sortOrder: string) {
-    const urlSearchParams = new URLSearchParams(searchParams.toString())
-    urlSearchParams.set('sort', sortOrder)
-    window.history.pushState(null, '', `?${urlSearchParams.toString()}`)
+    const urlSearchParams = new URLSearchParams(searchParams.toString());
+    urlSearchParams.set("sort", sortOrder);
+    window.history.pushState(null, "", `?${urlSearchParams.toString()}`);
   }
 
   return (
     <>
-      <button onClick={() => updateSorting('asc')}>Sort Ascending</button>
-      <button onClick={() => updateSorting('desc')}>Sort Descending</button>
+      <button onClick={() => updateSorting("asc")}>Sort Ascending</button>
+      <button onClick={() => updateSorting("desc")}>Sort Descending</button>
     </>
-  )
+  );
 }
 ```
 
 ```jsx fileName="app/ui/sort-products.js" switcher
-'use client'
+"use client";
 
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams } from "next/navigation";
 
 export default function SortProducts() {
-  const searchParams = useSearchParams()
+  const searchParams = useSearchParams();
 
   function updateSorting(sortOrder) {
-    const urlSearchParams = new URLSearchParams(searchParams.toString())
-    urlSearchParams.set('sort', sortOrder)
-    window.history.pushState(null, '', `?${urlSearchParams.toString()}`)
+    const urlSearchParams = new URLSearchParams(searchParams.toString());
+    urlSearchParams.set("sort", sortOrder);
+    window.history.pushState(null, "", `?${urlSearchParams.toString()}`);
   }
 
   return (
     <>
-      <button onClick={() => updateSorting('asc')}>Sort Ascending</button>
-      <button onClick={() => updateSorting('desc')}>Sort Descending</button>
+      <button onClick={() => updateSorting("asc")}>Sort Ascending</button>
+      <button onClick={() => updateSorting("desc")}>Sort Descending</button>
     </>
-  )
+  );
 }
 ```
 
@@ -352,13 +352,13 @@ You can progressively adopt Server Actions while still using Client Components. 
 For example, create your first Server Action:
 
 ```tsx filename="app/actions.ts" switcher
-'use server'
+"use server";
 
 export async function create() {}
 ```
 
 ```js filename="app/actions.js" switcher
-'use server'
+"use server";
 
 export async function create() {}
 ```
@@ -366,22 +366,22 @@ export async function create() {}
 You can import and use a Server Action from the client, similar to calling a JavaScript function. You do not need to create an API endpoint manually:
 
 ```tsx filename="app/button.tsx" switcher
-'use client'
+"use client";
 
-import { create } from './actions'
+import { create } from "./actions";
 
 export function Button() {
-  return <button onClick={() => create()}>Create</button>
+  return <button onClick={() => create()}>Create</button>;
 }
 ```
 
 ```jsx filename="app/button.js" switcher
-'use client'
+"use client";
 
-import { create } from './actions'
+import { create } from "./actions";
 
 export function Button() {
-  return <button onClick={() => create()}>Create</button>
+  return <button onClick={() => create()}>Create</button>;
 }
 ```
 
@@ -397,13 +397,13 @@ Next.js also supports generating a fully [static site](/docs/app/guides/static-e
 To enable a static export, update your configuration:
 
 ```ts filename="next.config.ts"
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: 'export',
-}
+  output: "export",
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 After running `next build`, Next.js will create an `out` folder with the HTML/CSS/JS assets for your application.

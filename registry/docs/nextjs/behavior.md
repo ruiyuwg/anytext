@@ -27,19 +27,19 @@ Next.js automatically detects **HTML-limited bots** by looking at the User Agent
 To fully disable streaming metadata:
 
 ```ts filename="next.config.ts" switcher
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const config: NextConfig = {
   htmlLimitedBots: /.*/,
-}
+};
 
-export default config
+export default config;
 ```
 
 ```js filename="next.config.js" switcher
 module.exports = {
   htmlLimitedBots: /.*/,
-}
+};
 ```
 
 Streaming metadata improves perceived performance by reducing [TTFB](https://developer.mozilla.org/docs/Glossary/Time_to_first_byte) and can help lowering [LCP](https://developer.mozilla.org/docs/Glossary/Largest_contentful_paint) time.
@@ -61,36 +61,36 @@ To resolve this, you have two options. If metadata depends on external data but 
 
 ```tsx filename="app/page.tsx" highlight={2}
 export async function generateMetadata() {
-  'use cache'
-  const { title, description } = await db.query('site-metadata')
-  return { title, description }
+  "use cache";
+  const { title, description } = await db.query("site-metadata");
+  return { title, description };
 }
 ```
 
 If metadata genuinely requires runtime data, add a dynamic marker component to your page:
 
 ```tsx filename="app/page.tsx" highlight={11-14,19,31}
-import { Suspense } from 'react'
-import { cookies } from 'next/headers'
-import { connection } from 'next/server'
+import { Suspense } from "react";
+import { cookies } from "next/headers";
+import { connection } from "next/server";
 
 export async function generateMetadata() {
-  const token = (await cookies()).get('token')?.value
+  const token = (await cookies()).get("token")?.value;
   // ... use token to fetch personalized metadata
-  return { title: 'Personalized Title' }
+  return { title: "Personalized Title" };
 }
 
 const Connection = async () => {
-  await connection()
-  return null
-}
+  await connection();
+  return null;
+};
 
 async function DynamicMarker() {
   return (
     <Suspense>
       <Connection />
     </Suspense>
-  )
+  );
 }
 
 export default function Page() {
@@ -102,7 +102,7 @@ export default function Page() {
       <article>Static content</article>
       <DynamicMarker />
     </>
-  )
+  );
 }
 ```
 
@@ -126,21 +126,21 @@ This means metadata with nested fields such as [`openGraph`](/docs/app/api-refer
 
 ```jsx filename="app/layout.js"
 export const metadata = {
-  title: 'Acme',
+  title: "Acme",
   openGraph: {
-    title: 'Acme',
-    description: 'Acme is a...',
+    title: "Acme",
+    description: "Acme is a...",
   },
-}
+};
 ```
 
 ```jsx filename="app/blog/page.js"
 export const metadata = {
-  title: 'Blog',
+  title: "Blog",
   openGraph: {
-    title: 'Blog',
+    title: "Blog",
   },
-}
+};
 
 // Output:
 // <title>Blog</title>
@@ -155,29 +155,29 @@ In the example above:
 If you'd like to share some nested fields between segments while overwriting others, you can pull them out into a separate variable:
 
 ```jsx filename="app/shared-metadata.js"
-export const openGraphImage = { images: ['http://...'] }
+export const openGraphImage = { images: ["http://..."] };
 ```
 
 ```jsx filename="app/page.js"
-import { openGraphImage } from './shared-metadata'
+import { openGraphImage } from "./shared-metadata";
 
 export const metadata = {
   openGraph: {
     ...openGraphImage,
-    title: 'Home',
+    title: "Home",
   },
-}
+};
 ```
 
 ```jsx filename="app/about/page.js"
-import { openGraphImage } from '../shared-metadata'
+import { openGraphImage } from "../shared-metadata";
 
 export const metadata = {
   openGraph: {
     ...openGraphImage,
-    title: 'About',
+    title: "About",
   },
-}
+};
 ```
 
 In the example above, the OG image is shared between `app/layout.js` and `app/about/page.js` while the titles are different.
@@ -186,18 +186,18 @@ In the example above, the OG image is shared between `app/layout.js` and `app/ab
 
 ```jsx filename="app/layout.js"
 export const metadata = {
-  title: 'Acme',
+  title: "Acme",
   openGraph: {
-    title: 'Acme',
-    description: 'Acme is a...',
+    title: "Acme",
+    description: "Acme is a...",
   },
-}
+};
 ```
 
 ```jsx filename="app/about/page.js"
 export const metadata = {
-  title: 'About',
-}
+  title: "About",
+};
 
 // Output:
 // <title>About</title>

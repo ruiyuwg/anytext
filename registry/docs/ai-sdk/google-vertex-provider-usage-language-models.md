@@ -4,7 +4,7 @@ You can create models that call the Vertex API using the provider instance.
 The first argument is the model id, e.g. `gemini-2.5-pro`.
 
 ```ts
-const model = vertex('gemini-2.5-pro');
+const model = vertex("gemini-2.5-pro");
 ```
 
 If you are using [your own
@@ -16,10 +16,10 @@ of the [standard call settings](/docs/ai-sdk-core/settings). You can pass them a
 an options argument:
 
 ```ts
-import { vertex } from '@ai-sdk/google-vertex';
-import { type GoogleLanguageModelOptions } from '@ai-sdk/google';
+import { vertex } from "@ai-sdk/google-vertex";
+import { type GoogleLanguageModelOptions } from "@ai-sdk/google";
 
-const model = vertex('gemini-2.5-pro');
+const model = vertex("gemini-2.5-pro");
 
 await generateText({
   model,
@@ -27,8 +27,8 @@ await generateText({
     vertex: {
       safetySettings: [
         {
-          category: 'HARM_CATEGORY_UNSPECIFIED',
-          threshold: 'BLOCK_LOW_AND_ABOVE',
+          category: "HARM_CATEGORY_UNSPECIFIED",
+          threshold: "BLOCK_LOW_AND_ABOVE",
         },
       ],
     } satisfies GoogleLanguageModelOptions,
@@ -38,12 +38,12 @@ await generateText({
 
 The following optional provider options are available for Google Vertex models:
 
-- **cachedContent** *string*
+- **cachedContent** _string_
 
   Optional. The name of the cached content used as context to serve the prediction.
   Format: projects/{project}/locations/{location}/cachedContents/{cachedContent}
 
-- **structuredOutputs** *boolean*
+- **structuredOutputs** _boolean_
 
   Optional. Enable structured output. Default is true.
 
@@ -54,14 +54,12 @@ The following optional provider options are available for Google Vertex models:
 
   See [Troubleshooting: Schema Limitations](#schema-limitations) for more details.
 
-- **safetySettings** *Array<{ category: string; threshold: string }>*
+- **safetySettings** _Array<{ category: string; threshold: string }>_
 
   Optional. Safety settings for the model.
-
-  - **category** *string*
+  - **category** _string_
 
     The category of the safety setting. Can be one of the following:
-
     - `HARM_CATEGORY_UNSPECIFIED`
     - `HARM_CATEGORY_HATE_SPEECH`
     - `HARM_CATEGORY_DANGEROUS_CONTENT`
@@ -69,24 +67,23 @@ The following optional provider options are available for Google Vertex models:
     - `HARM_CATEGORY_SEXUALLY_EXPLICIT`
     - `HARM_CATEGORY_CIVIC_INTEGRITY`
 
-  - **threshold** *string*
+  - **threshold** _string_
 
     The threshold of the safety setting. Can be one of the following:
-
     - `HARM_BLOCK_THRESHOLD_UNSPECIFIED`
     - `BLOCK_LOW_AND_ABOVE`
     - `BLOCK_MEDIUM_AND_ABOVE`
     - `BLOCK_ONLY_HIGH`
     - `BLOCK_NONE`
 
-- **audioTimestamp** *boolean*
+- **audioTimestamp** _boolean_
 
   Optional. Enables timestamp understanding for audio files. Defaults to false.
 
   This is useful for generating transcripts with accurate timestamps.
   Consult [Google's Documentation](https://cloud.google.com/vertex-ai/generative-ai/docs/multimodal/audio-understanding) for usage details.
 
-- **labels** *object*
+- **labels** _object_
 
   Optional. Defines labels used in billing reports.
 
@@ -95,12 +92,12 @@ The following optional provider options are available for Google Vertex models:
 You can use Google Vertex language models to generate text with the `generateText` function:
 
 ```ts highlight="1,4"
-import { vertex } from '@ai-sdk/google-vertex';
-import { generateText } from 'ai';
+import { vertex } from "@ai-sdk/google-vertex";
+import { generateText } from "ai";
 
 const { text } = await generateText({
-  model: vertex('gemini-2.5-pro'),
-  prompt: 'Write a vegetarian lasagna recipe for 4 people.',
+  model: vertex("gemini-2.5-pro"),
+  prompt: "Write a vegetarian lasagna recipe for 4 people.",
 });
 ```
 
@@ -114,14 +111,14 @@ With [Code Execution](https://cloud.google.com/vertex-ai/generative-ai/docs/mult
 You can enable code execution by adding the `code_execution` tool to your request.
 
 ```ts
-import { vertex } from '@ai-sdk/google-vertex';
-import { generateText } from 'ai';
+import { vertex } from "@ai-sdk/google-vertex";
+import { generateText } from "ai";
 
 const result = await generateText({
-  model: vertex('gemini-2.5-pro'),
+  model: vertex("gemini-2.5-pro"),
   tools: { code_execution: vertex.tools.codeExecution({}) },
   prompt:
-    'Use python to calculate 20th fibonacci number. Then find the nearest palindrome to it.',
+    "Use python to calculate 20th fibonacci number. Then find the nearest palindrome to it.",
 });
 ```
 
@@ -132,13 +129,13 @@ The response will contain `tool-call` and `tool-result` parts for the executed c
 URL Context allows Gemini models to retrieve and analyze content from URLs. Supported models: Gemini 2.5 Flash-Lite, 2.5 Pro, 2.5 Flash, 2.0 Flash.
 
 ```ts
-import { vertex } from '@ai-sdk/google-vertex';
-import { generateText } from 'ai';
+import { vertex } from "@ai-sdk/google-vertex";
+import { generateText } from "ai";
 
 const result = await generateText({
-  model: vertex('gemini-2.5-pro'),
+  model: vertex("gemini-2.5-pro"),
   tools: { url_context: vertex.tools.urlContext({}) },
-  prompt: 'What are the key points from https://example.com/article?',
+  prompt: "What are the key points from https://example.com/article?",
 });
 ```
 
@@ -147,13 +144,13 @@ const result = await generateText({
 Google Search enables Gemini models to access real-time web information. Supported models: Gemini 2.5 Flash-Lite, 2.5 Flash, 2.0 Flash, 2.5 Pro.
 
 ```ts
-import { vertex } from '@ai-sdk/google-vertex';
-import { generateText } from 'ai';
+import { vertex } from "@ai-sdk/google-vertex";
+import { generateText } from "ai";
 
 const result = await generateText({
-  model: vertex('gemini-2.5-pro'),
+  model: vertex("gemini-2.5-pro"),
   tools: { google_search: vertex.tools.googleSearch({}) },
-  prompt: 'What are the latest developments in AI?',
+  prompt: "What are the latest developments in AI?",
 });
 ```
 
@@ -162,15 +159,15 @@ const result = await generateText({
 [Enterprise Web Search](https://cloud.google.com/vertex-ai/generative-ai/docs/grounding/web-grounding-enterprise) provides grounding using a compliance-focused web index designed for highly-regulated industries such as finance, healthcare, and the public sector. Unlike standard Google Search grounding, Enterprise Web Search does not log customer data and supports VPC service controls. Supported models: Gemini 2.0 and newer.
 
 ```ts
-import { vertex } from '@ai-sdk/google-vertex';
-import { generateText } from 'ai';
+import { vertex } from "@ai-sdk/google-vertex";
+import { generateText } from "ai";
 
 const result = await generateText({
-  model: vertex('gemini-2.5-flash'),
+  model: vertex("gemini-2.5-flash"),
   tools: {
     enterprise_web_search: vertex.tools.enterpriseWebSearch({}),
   },
-  prompt: 'What are the latest FDA regulations for clinical trials?',
+  prompt: "What are the latest FDA regulations for clinical trials?",
 });
 ```
 
@@ -179,12 +176,12 @@ const result = await generateText({
 Google Maps grounding enables Gemini models to access Google Maps data for location-aware responses. Supported models: Gemini 2.5 Flash-Lite, 2.5 Flash, 2.0 Flash, 2.5 Pro, 3.0 Pro.
 
 ```ts
-import { vertex } from '@ai-sdk/google-vertex';
-import { type GoogleLanguageModelOptions } from '@ai-sdk/google';
-import { generateText } from 'ai';
+import { vertex } from "@ai-sdk/google-vertex";
+import { type GoogleLanguageModelOptions } from "@ai-sdk/google";
+import { generateText } from "ai";
 
 const result = await generateText({
-  model: vertex('gemini-2.5-flash'),
+  model: vertex("gemini-2.5-flash"),
   tools: {
     google_maps: vertex.tools.googleMaps({}),
   },
@@ -195,7 +192,7 @@ const result = await generateText({
       },
     } satisfies GoogleLanguageModelOptions,
   },
-  prompt: 'What are the best Italian restaurants nearby?',
+  prompt: "What are the best Italian restaurants nearby?",
 });
 ```
 
@@ -208,13 +205,13 @@ Google Vertex AI, through its support for Gemini models, can also emit "thinking
 To enable thinking tokens for compatible Gemini models via Vertex, set `includeThoughts: true` in the `thinkingConfig` provider option. These options are passed through `providerOptions.vertex`:
 
 ```ts
-import { vertex } from '@ai-sdk/google-vertex';
-import { type GoogleLanguageModelOptions } from '@ai-sdk/google';
-import { generateText, streamText } from 'ai';
+import { vertex } from "@ai-sdk/google-vertex";
+import { type GoogleLanguageModelOptions } from "@ai-sdk/google";
+import { generateText, streamText } from "ai";
 
 // For generateText:
 const { text, reasoningText, reasoning } = await generateText({
-  model: vertex('gemini-2.0-flash-001'), // Or other supported model via Vertex
+  model: vertex("gemini-2.0-flash-001"), // Or other supported model via Vertex
   providerOptions: {
     vertex: {
       thinkingConfig: {
@@ -223,16 +220,16 @@ const { text, reasoningText, reasoning } = await generateText({
       },
     } satisfies GoogleLanguageModelOptions,
   },
-  prompt: 'Explain quantum computing in simple terms.',
+  prompt: "Explain quantum computing in simple terms.",
 });
 
-console.log('Reasoning:', reasoningText);
-console.log('Reasoning Details:', reasoning);
-console.log('Final Text:', text);
+console.log("Reasoning:", reasoningText);
+console.log("Reasoning Details:", reasoning);
+console.log("Final Text:", text);
 
 // For streamText:
 const result = streamText({
-  model: vertex('gemini-2.0-flash-001'), // Or other supported model via Vertex
+  model: vertex("gemini-2.0-flash-001"), // Or other supported model via Vertex
   providerOptions: {
     vertex: {
       thinkingConfig: {
@@ -241,13 +238,13 @@ const result = streamText({
       },
     } satisfies GoogleLanguageModelOptions,
   },
-  prompt: 'Explain quantum computing in simple terms.',
+  prompt: "Explain quantum computing in simple terms.",
 });
 
 for await (const part of result.fullStream) {
-  if (part.type === 'reasoning') {
+  if (part.type === "reasoning") {
     process.stdout.write(`THOUGHT: ${part.textDelta}\n`);
-  } else if (part.type === 'text-delta') {
+  } else if (part.type === "text-delta") {
     process.stdout.write(part.textDelta);
   }
 }
@@ -267,23 +264,23 @@ When `includeThoughts` is true, parts of the API response marked with `thought: 
 The Google Vertex provider supports file inputs, e.g. PDF files.
 
 ```ts
-import { vertex } from '@ai-sdk/google-vertex';
-import { generateText } from 'ai';
+import { vertex } from "@ai-sdk/google-vertex";
+import { generateText } from "ai";
 
 const { text } = await generateText({
-  model: vertex('gemini-2.5-pro'),
+  model: vertex("gemini-2.5-pro"),
   messages: [
     {
-      role: 'user',
+      role: "user",
       content: [
         {
-          type: 'text',
-          text: 'What is an embedding model according to this document?',
+          type: "text",
+          text: "What is an embedding model according to this document?",
         },
         {
-          type: 'file',
-          data: fs.readFileSync('./data/ai.pdf'),
-          mediaType: 'application/pdf',
+          type: "file",
+          data: fs.readFileSync("./data/ai.pdf"),
+          mediaType: "application/pdf",
         },
       ],
     },

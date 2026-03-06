@@ -6,13 +6,13 @@ The AI SDK provides the [`transcribe`](/docs/reference/ai-sdk-core/transcribe)
 function to transcribe audio using a transcription model.
 
 ```ts
-import { experimental_transcribe as transcribe } from 'ai';
-import { openai } from '@ai-sdk/openai';
-import { readFile } from 'fs/promises';
+import { experimental_transcribe as transcribe } from "ai";
+import { openai } from "@ai-sdk/openai";
+import { readFile } from "fs/promises";
 
 const transcript = await transcribe({
-  model: openai.transcription('whisper-1'),
-  audio: await readFile('audio.mp3'),
+  model: openai.transcription("whisper-1"),
+  audio: await readFile("audio.mp3"),
 });
 ```
 
@@ -34,16 +34,16 @@ const durationInSeconds = transcript.durationInSeconds; // duration of the trans
 Transcription models often have provider or model-specific settings which you can set using the `providerOptions` parameter.
 
 ```ts highlight="8-12"
-import { experimental_transcribe as transcribe } from 'ai';
-import { openai } from '@ai-sdk/openai';
-import { readFile } from 'fs/promises';
+import { experimental_transcribe as transcribe } from "ai";
+import { openai } from "@ai-sdk/openai";
+import { readFile } from "fs/promises";
 
 const transcript = await transcribe({
-  model: openai.transcription('whisper-1'),
-  audio: await readFile('audio.mp3'),
+  model: openai.transcription("whisper-1"),
+  audio: await readFile("audio.mp3"),
   providerOptions: {
     openai: {
-      timestampGranularities: ['word'],
+      timestampGranularities: ["word"],
     },
   },
 });
@@ -55,12 +55,12 @@ When `audio` is a URL, the SDK downloads the file with a default **2 GiB** size 
 You can customize this using `createDownload`:
 
 ```ts highlight="1,8"
-import { experimental_transcribe as transcribe, createDownload } from 'ai';
-import { openai } from '@ai-sdk/openai';
+import { experimental_transcribe as transcribe, createDownload } from "ai";
+import { openai } from "@ai-sdk/openai";
 
 const transcript = await transcribe({
-  model: openai.transcription('whisper-1'),
-  audio: new URL('https://example.com/audio.mp3'),
+  model: openai.transcription("whisper-1"),
+  audio: new URL("https://example.com/audio.mp3"),
   download: createDownload({ maxBytes: 50 * 1024 * 1024 }), // 50 MB limit
 });
 ```
@@ -68,17 +68,17 @@ const transcript = await transcribe({
 You can also provide a fully custom download function:
 
 ```ts highlight="6-12"
-import { experimental_transcribe as transcribe } from 'ai';
-import { openai } from '@ai-sdk/openai';
+import { experimental_transcribe as transcribe } from "ai";
+import { openai } from "@ai-sdk/openai";
 
 const transcript = await transcribe({
-  model: openai.transcription('whisper-1'),
-  audio: new URL('https://example.com/audio.mp3'),
+  model: openai.transcription("whisper-1"),
+  audio: new URL("https://example.com/audio.mp3"),
   download: async ({ url }) => {
     const res = await myAuthenticatedFetch(url);
     return {
       data: new Uint8Array(await res.arrayBuffer()),
-      mediaType: res.headers.get('content-type') ?? undefined,
+      mediaType: res.headers.get("content-type") ?? undefined,
     };
   },
 });
@@ -87,17 +87,17 @@ const transcript = await transcribe({
 If a download exceeds the size limit, a `DownloadError` is thrown:
 
 ```ts
-import { experimental_transcribe as transcribe, DownloadError } from 'ai';
-import { openai } from '@ai-sdk/openai';
+import { experimental_transcribe as transcribe, DownloadError } from "ai";
+import { openai } from "@ai-sdk/openai";
 
 try {
   await transcribe({
-    model: openai.transcription('whisper-1'),
-    audio: new URL('https://example.com/audio.mp3'),
+    model: openai.transcription("whisper-1"),
+    audio: new URL("https://example.com/audio.mp3"),
   });
 } catch (error) {
   if (DownloadError.isInstance(error)) {
-    console.log('Download failed:', error.message);
+    console.log("Download failed:", error.message);
   }
 }
 ```
@@ -111,12 +111,12 @@ that you can use to abort the transcription process or set a timeout.
 This is particularly useful when combined with URL downloads to prevent long-running requests:
 
 ```ts highlight="8"
-import { openai } from '@ai-sdk/openai';
-import { experimental_transcribe as transcribe } from 'ai';
+import { openai } from "@ai-sdk/openai";
+import { experimental_transcribe as transcribe } from "ai";
 
 const transcript = await transcribe({
-  model: openai.transcription('whisper-1'),
-  audio: new URL('https://example.com/audio.mp3'),
+  model: openai.transcription("whisper-1"),
+  audio: new URL("https://example.com/audio.mp3"),
   abortSignal: AbortSignal.timeout(5000), // Abort after 5 seconds
 });
 ```
@@ -127,14 +127,14 @@ const transcript = await transcribe({
 that you can use to add custom headers to the transcription request.
 
 ```ts highlight="8"
-import { openai } from '@ai-sdk/openai';
-import { experimental_transcribe as transcribe } from 'ai';
-import { readFile } from 'fs/promises';
+import { openai } from "@ai-sdk/openai";
+import { experimental_transcribe as transcribe } from "ai";
+import { readFile } from "fs/promises";
 
 const transcript = await transcribe({
-  model: openai.transcription('whisper-1'),
-  audio: await readFile('audio.mp3'),
-  headers: { 'X-Custom-Header': 'custom-value' },
+  model: openai.transcription("whisper-1"),
+  audio: await readFile("audio.mp3"),
+  headers: { "X-Custom-Header": "custom-value" },
 });
 ```
 
@@ -143,13 +143,13 @@ const transcript = await transcribe({
 Warnings (e.g. unsupported parameters) are available on the `warnings` property.
 
 ```ts
-import { openai } from '@ai-sdk/openai';
-import { experimental_transcribe as transcribe } from 'ai';
-import { readFile } from 'fs/promises';
+import { openai } from "@ai-sdk/openai";
+import { experimental_transcribe as transcribe } from "ai";
+import { readFile } from "fs/promises";
 
 const transcript = await transcribe({
-  model: openai.transcription('whisper-1'),
-  audio: await readFile('audio.mp3'),
+  model: openai.transcription("whisper-1"),
+  audio: await readFile("audio.mp3"),
 });
 
 const warnings = transcript.warnings;
@@ -173,20 +173,20 @@ The error preserves the following information to help you log the issue:
 import {
   experimental_transcribe as transcribe,
   NoTranscriptGeneratedError,
-} from 'ai';
-import { openai } from '@ai-sdk/openai';
-import { readFile } from 'fs/promises';
+} from "ai";
+import { openai } from "@ai-sdk/openai";
+import { readFile } from "fs/promises";
 
 try {
   await transcribe({
-    model: openai.transcription('whisper-1'),
-    audio: await readFile('audio.mp3'),
+    model: openai.transcription("whisper-1"),
+    audio: await readFile("audio.mp3"),
   });
 } catch (error) {
   if (NoTranscriptGeneratedError.isInstance(error)) {
-    console.log('NoTranscriptGeneratedError');
-    console.log('Cause:', error.cause);
-    console.log('Responses:', error.responses);
+    console.log("NoTranscriptGeneratedError");
+    console.log("Cause:", error.cause);
+    console.log("Responses:", error.responses);
   }
 }
 ```

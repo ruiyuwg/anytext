@@ -12,11 +12,11 @@ You can install it with:
 To use NVIDIA NIM, you can create a custom provider instance with the `createOpenAICompatible` function from `@ai-sdk/openai-compatible`:
 
 ```ts
-import { createOpenAICompatible } from '@ai-sdk/openai-compatible';
+import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
 
 const nim = createOpenAICompatible({
-  name: 'nim',
-  baseURL: 'https://integrate.api.nvidia.com/v1',
+  name: "nim",
+  baseURL: "https://integrate.api.nvidia.com/v1",
   headers: {
     Authorization: `Bearer ${process.env.NIM_API_KEY}`,
   },
@@ -32,7 +32,7 @@ inference credits to get started.
 You can interact with NIM models using a provider instance. For example, to use [DeepSeek-R1](https://build.nvidia.com/deepseek-ai/deepseek-r1), a powerful open-source language model:
 
 ```ts
-const model = nim.chatModel('deepseek-ai/deepseek-r1');
+const model = nim.chatModel("deepseek-ai/deepseek-r1");
 ```
 
 ### Example - Generate Text
@@ -40,25 +40,25 @@ const model = nim.chatModel('deepseek-ai/deepseek-r1');
 You can use NIM language models to generate text with the `generateText` function:
 
 ```ts
-import { createOpenAICompatible } from '@ai-sdk/openai-compatible';
-import { generateText } from 'ai';
+import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
+import { generateText } from "ai";
 
 const nim = createOpenAICompatible({
-  name: 'nim',
-  baseURL: 'https://integrate.api.nvidia.com/v1',
+  name: "nim",
+  baseURL: "https://integrate.api.nvidia.com/v1",
   headers: {
     Authorization: `Bearer ${process.env.NIM_API_KEY}`,
   },
 });
 
 const { text, usage, finishReason } = await generateText({
-  model: nim.chatModel('deepseek-ai/deepseek-r1'),
-  prompt: 'Tell me the history of the San Francisco Mission-style burrito.',
+  model: nim.chatModel("deepseek-ai/deepseek-r1"),
+  prompt: "Tell me the history of the San Francisco Mission-style burrito.",
 });
 
 console.log(text);
-console.log('Token usage:', usage);
-console.log('Finish reason:', finishReason);
+console.log("Token usage:", usage);
+console.log("Finish reason:", finishReason);
 ```
 
 ### Example - Stream Text
@@ -66,20 +66,20 @@ console.log('Finish reason:', finishReason);
 NIM language models can also generate text in a streaming fashion with the `streamText` function:
 
 ```ts
-import { createOpenAICompatible } from '@ai-sdk/openai-compatible';
-import { streamText } from 'ai';
+import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
+import { streamText } from "ai";
 
 const nim = createOpenAICompatible({
-  name: 'nim',
-  baseURL: 'https://integrate.api.nvidia.com/v1',
+  name: "nim",
+  baseURL: "https://integrate.api.nvidia.com/v1",
   headers: {
     Authorization: `Bearer ${process.env.NIM_API_KEY}`,
   },
 });
 
 const result = streamText({
-  model: nim.chatModel('deepseek-ai/deepseek-r1'),
-  prompt: 'Tell me the history of the Northern White Rhino.',
+  model: nim.chatModel("deepseek-ai/deepseek-r1"),
+  prompt: "Tell me the history of the Northern White Rhino.",
 });
 
 for await (const textPart of result.textStream) {
@@ -87,8 +87,8 @@ for await (const textPart of result.textStream) {
 }
 
 console.log();
-console.log('Token usage:', await result.usage);
-console.log('Finish reason:', await result.finishReason);
+console.log("Token usage:", await result.usage);
+console.log("Finish reason:", await result.finishReason);
 ```
 
 NIM language models also support structured data generation with [`Output`](/docs/reference/ai-sdk-core/output).

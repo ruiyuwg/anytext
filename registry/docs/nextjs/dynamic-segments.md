@@ -10,17 +10,17 @@ A Dynamic Segment can be created by wrapping a folder's name in square brackets:
 export default async function Page({
   params,
 }: {
-  params: Promise<{ slug: string }>
+  params: Promise<{ slug: string }>;
 }) {
-  const { slug } = await params
-  return <div>My Post: {slug}</div>
+  const { slug } = await params;
+  return <div>My Post: {slug}</div>;
 }
 ```
 
 ```jsx filename="app/blog/[slug]/page.js" switcher
 export default async function Page({ params }) {
-  const { slug } = await params
-  return <div>My Post: {slug}</div>
+  const { slug } = await params;
+  return <div>My Post: {slug}</div>;
 }
 ```
 
@@ -37,36 +37,36 @@ Dynamic Segments are passed as the `params` prop to [`layout`](/docs/app/api-ref
 In a Client Component **page**, dynamic segments from props can be accessed using the [`use`](https://react.dev/reference/react/use) API.
 
 ```tsx filename="app/blog/[slug]/page.tsx" switcher
-'use client'
-import { use } from 'react'
+"use client";
+import { use } from "react";
 
 export default function BlogPostPage({
   params,
 }: {
-  params: Promise<{ slug: string }>
+  params: Promise<{ slug: string }>;
 }) {
-  const { slug } = use(params)
+  const { slug } = use(params);
 
   return (
     <div>
       <p>{slug}</p>
     </div>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/blog/[slug]/page.js" switcher
-'use client'
-import { use } from 'react'
+"use client";
+import { use } from "react";
 
 export default function BlogPostPage({ params }) {
-  const { slug } = use(params)
+  const { slug } = use(params);
 
   return (
     <div>
       <p>{slug}</p>
     </div>
-  )
+  );
 }
 ```
 
@@ -115,17 +115,17 @@ Route `params` values are typed as `string`, `string[]`, or `undefined` (for opt
 If you're working on a route where `params` can only have a fixed number of valid values, such as a `[locale]` param with a known set of language codes, you can use runtime validation to handle any invalid params a user may enter, and let the rest of your application work with the narrower type from your known set.
 
 ```tsx filename="/app/[locale]/page.tsx"
-import { notFound } from 'next/navigation'
-import type { Locale } from '@i18n/types'
-import { isValidLocale } from '@i18n/utils'
+import { notFound } from "next/navigation";
+import type { Locale } from "@i18n/types";
+import { isValidLocale } from "@i18n/utils";
 
 function assertValidLocale(value: string): asserts value is Locale {
-  if (!isValidLocale(value)) notFound()
+  if (!isValidLocale(value)) notFound();
 }
 
-export default async function Page(props: PageProps<'/[locale]'>) {
-  const { locale } = await props.params // locale is typed as string
-  assertValidLocale(locale)
+export default async function Page(props: PageProps<"/[locale]">) {
+  const { locale } = await props.params; // locale is typed as string
+  assertValidLocale(locale);
   // locale is now typed as Locale
 }
 ```
@@ -152,9 +152,9 @@ All params are runtime data. Param access must be wrapped by Suspense fallback U
 > **Good to know**: You can also use [`loading.tsx`](/docs/app/api-reference/file-conventions/loading) for page-level fallback UI.
 
 ```tsx filename="app/blog/[slug]/page.tsx"
-import { Suspense } from 'react'
+import { Suspense } from "react";
 
-export default function Page({ params }: PageProps<'/blog/[slug]'>) {
+export default function Page({ params }: PageProps<"/blog/[slug]">) {
   return (
     <div>
       <h1>Blog Post</h1>
@@ -164,19 +164,19 @@ export default function Page({ params }: PageProps<'/blog/[slug]'>) {
         ))}
       </Suspense>
     </div>
-  )
+  );
 }
 
 async function Content({ slug }: { slug: string }) {
-  const res = await fetch(`https://api.vercel.app/blog/${slug}`)
-  const post = await res.json()
+  const res = await fetch(`https://api.vercel.app/blog/${slug}`);
+  const post = await res.json();
 
   return (
     <article>
       <h2>{post.title}</h2>
       <p>{post.content}</p>
     </article>
-  )
+  );
 }
 ```
 
@@ -187,63 +187,63 @@ Provide params ahead of time to prerender pages at build time. You can prerender
 During the build process, the route is executed with each sample param to collect the HTML result. If dynamic content or runtime data are accessed incorrectly, the build will fail.
 
 ```tsx filename="app/blog/[slug]/page.tsx" highlight={3-5,8,19}
-import { Suspense } from 'react'
+import { Suspense } from "react";
 
 export async function generateStaticParams() {
-  return [{ slug: '1' }, { slug: '2' }, { slug: '3' }]
+  return [{ slug: "1" }, { slug: "2" }, { slug: "3" }];
 }
 
-export default async function Page({ params }: PageProps<'/blog/[slug]'>) {
-  const { slug } = await params
+export default async function Page({ params }: PageProps<"/blog/[slug]">) {
+  const { slug } = await params;
 
   return (
     <div>
       <h1>Blog Post</h1>
       <Content slug={slug} />
     </div>
-  )
+  );
 }
 
 async function Content({ slug }: { slug: string }) {
-  const post = await getPost(slug)
+  const post = await getPost(slug);
   return (
     <article>
       <h2>{post.title}</h2>
       <p>{post.content}</p>
     </article>
-  )
+  );
 }
 
 async function getPost(slug: string) {
-  'use cache'
-  const res = await fetch(`https://api.vercel.app/blog/${slug}`)
-  return res.json()
+  "use cache";
+  const res = await fetch(`https://api.vercel.app/blog/${slug}`);
+  return res.json();
 }
 ```
 
 Build-time validation only covers code paths that execute with the sample params. If your route has conditional logic that accesses runtime APIs for certain param values not in your samples, those branches won't be validated at build time:
 
 ```tsx filename="app/blog/[slug]/page.tsx"
-import { cookies } from 'next/headers'
+import { cookies } from "next/headers";
 
 export async function generateStaticParams() {
-  return [{ slug: 'public-post' }, { slug: 'hello-world' }]
+  return [{ slug: "public-post" }, { slug: "hello-world" }];
 }
 
-export default async function Page({ params }: PageProps<'/blog/[slug]'>) {
-  const { slug } = await params
+export default async function Page({ params }: PageProps<"/blog/[slug]">) {
+  const { slug } = await params;
 
-  if (slug.startsWith('private-')) {
+  if (slug.startsWith("private-")) {
     // This branch is never executed at build time
     // Runtime requests for 'private-*' slugs will error
-    return <PrivatePost slug={slug} />
+    return <PrivatePost slug={slug} />;
   }
 
-  return <PublicPost slug={slug} />
+  return <PublicPost slug={slug} />;
 }
 
 async function PrivatePost({ slug }: { slug: string }) {
-  const token = (await cookies()).get('token')
+  const token = (await cookies()).get("token");
   // ... fetch and render private post using token for auth
 }
 ```
@@ -253,29 +253,29 @@ For runtime params not returned by `generateStaticParams`, validation occurs dur
 To fix this, wrap `PrivatePost` with Suspense:
 
 ```tsx filename="app/blog/[slug]/page.tsx" highlight={13-15}
-import { Suspense } from 'react'
-import { cookies } from 'next/headers'
+import { Suspense } from "react";
+import { cookies } from "next/headers";
 
 export async function generateStaticParams() {
-  return [{ slug: 'public-post' }, { slug: 'hello-world' }]
+  return [{ slug: "public-post" }, { slug: "hello-world" }];
 }
 
-export default async function Page({ params }: PageProps<'/blog/[slug]'>) {
-  const { slug } = await params
+export default async function Page({ params }: PageProps<"/blog/[slug]">) {
+  const { slug } = await params;
 
-  if (slug.startsWith('private-')) {
+  if (slug.startsWith("private-")) {
     return (
       <Suspense fallback={<div>Loading...</div>}>
         <PrivatePost slug={slug} />
       </Suspense>
-    )
+    );
   }
 
-  return <PublicPost slug={slug} />
+  return <PublicPost slug={slug} />;
 }
 
 async function PrivatePost({ slug }: { slug: string }) {
-  const token = (await cookies()).get('token')
+  const token = (await cookies()).get("token");
   // ... fetch and render private post using token for auth
 }
 ```
@@ -288,21 +288,21 @@ The [`generateStaticParams`](/docs/app/api-reference/functions/generate-static-p
 
 ```tsx filename="app/blog/[slug]/page.tsx" switcher
 export async function generateStaticParams() {
-  const posts = await fetch('https://.../posts').then((res) => res.json())
+  const posts = await fetch("https://.../posts").then((res) => res.json());
 
   return posts.map((post) => ({
     slug: post.slug,
-  }))
+  }));
 }
 ```
 
 ```jsx filename="app/blog/[slug]/page.js" switcher
 export async function generateStaticParams() {
-  const posts = await fetch('https://.../posts').then((res) => res.json())
+  const posts = await fetch("https://.../posts").then((res) => res.json());
 
   return posts.map((post) => ({
     slug: post.slug,
-  }))
+  }));
 }
 ```
 
@@ -315,51 +315,51 @@ When using `fetch` inside the `generateStaticParams` function, the requests are 
 ```ts filename="app/api/posts/[id]/route.ts" switcher
 export async function generateStaticParams() {
   const posts: { id: number }[] = await fetch(
-    'https://api.vercel.app/blog'
-  ).then((res) => res.json())
+    "https://api.vercel.app/blog",
+  ).then((res) => res.json());
 
   return posts.map((post) => ({
     id: `${post.id}`,
-  }))
+  }));
 }
 
 export async function GET(
   request: Request,
-  { params }: RouteContext<'/api/posts/[id]'>
+  { params }: RouteContext<"/api/posts/[id]">,
 ) {
-  const { id } = await params
-  const res = await fetch(`https://api.vercel.app/blog/${id}`)
+  const { id } = await params;
+  const res = await fetch(`https://api.vercel.app/blog/${id}`);
 
   if (!res.ok) {
-    return Response.json({ error: 'Post not found' }, { status: 404 })
+    return Response.json({ error: "Post not found" }, { status: 404 });
   }
 
-  const post = await res.json()
-  return Response.json(post)
+  const post = await res.json();
+  return Response.json(post);
 }
 ```
 
 ```js filename="app/api/posts/[id]/route.js" switcher
 export async function generateStaticParams() {
-  const posts = await fetch('https://api.vercel.app/blog').then((res) =>
-    res.json()
-  )
+  const posts = await fetch("https://api.vercel.app/blog").then((res) =>
+    res.json(),
+  );
 
   return posts.map((post) => ({
     id: `${post.id}`,
-  }))
+  }));
 }
 
 export async function GET(request, { params }) {
-  const { id } = await params
-  const res = await fetch(`https://api.vercel.app/blog/${id}`)
+  const { id } = await params;
+  const res = await fetch(`https://api.vercel.app/blog/${id}`);
 
   if (!res.ok) {
-    return Response.json({ error: 'Post not found' }, { status: 404 })
+    return Response.json({ error: "Post not found" }, { status: 404 });
   }
 
-  const post = await res.json()
-  return Response.json(post)
+  const post = await res.json();
+  return Response.json(post);
 }
 ```
 

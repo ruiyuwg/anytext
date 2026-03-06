@@ -43,7 +43,7 @@ Source: https://orm.drizzle.team/docs/kit-migrations-for-teams
 
 # Drizzle migrations for teams
 
-This section will be updated right after our release of the next version of migrations folder structure. 
+This section will be updated right after our release of the next version of migrations folder structure.
 You can read an extended [github discussion](https://github.com/drizzle-team/drizzle-orm/discussions/2832) and subscribe to the updates!
 
 
@@ -74,10 +74,10 @@ import Prerequisites from "@mdx/Prerequisites.astro"
   -D drizzle-kit
 </Npm>
 <Callout type="warning">
-Make sure to first go through Drizzle [get started](/docs/get-started) and [migration fundamentals](/docs/migrations) and pick SQL migration flow that suits your business needs best. 
+Make sure to first go through Drizzle [get started](/docs/get-started) and [migration fundamentals](/docs/migrations) and pick SQL migration flow that suits your business needs best.
 </Callout>
 
-Based on your schema, Drizzle Kit let's you generate and run SQL migration files, 
+Based on your schema, Drizzle Kit let's you generate and run SQL migration files,
 push schema directly to the database, pull schema from database, spin up drizzle studio and has a couple of utility commands.
 <Npx>
 drizzle-kit generate
@@ -109,7 +109,7 @@ It's required to at least provide SQL `dialect` and `schema` path for Drizzle Ki
 ├ 📂 drizzle
 ├ 📂 src
 ├ 📜 .env
-├ 📜 drizzle.config.ts  <--- Drizzle config file
+├ 📜 drizzle.config.ts <--- Drizzle config file
 ├ 📜 package.json
 └ 📜 tsconfig.json
 

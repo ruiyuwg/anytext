@@ -4,28 +4,28 @@ You can create [Veo](https://cloud.google.com/vertex-ai/generative-ai/docs/video
 using the `.video()` factory method. For more on video generation with the AI SDK see [generateVideo()](/docs/reference/ai-sdk-core/generate-video).
 
 ```ts
-import { vertex } from '@ai-sdk/google-vertex';
-import { experimental_generateVideo as generateVideo } from 'ai';
+import { vertex } from "@ai-sdk/google-vertex";
+import { experimental_generateVideo as generateVideo } from "ai";
 
 const { video } = await generateVideo({
-  model: vertex.video('veo-3.1-generate-001'),
+  model: vertex.video("veo-3.1-generate-001"),
   prompt:
-    'A pangolin curled on a mossy stone in a glowing bioluminescent forest',
-  aspectRatio: '16:9',
+    "A pangolin curled on a mossy stone in a glowing bioluminescent forest",
+  aspectRatio: "16:9",
 });
 ```
 
 You can configure resolution and duration:
 
 ```ts
-import { vertex } from '@ai-sdk/google-vertex';
-import { experimental_generateVideo as generateVideo } from 'ai';
+import { vertex } from "@ai-sdk/google-vertex";
+import { experimental_generateVideo as generateVideo } from "ai";
 
 const { video } = await generateVideo({
-  model: vertex.video('veo-3.1-generate-001'),
-  prompt: 'A serene mountain landscape at sunset',
-  aspectRatio: '16:9',
-  resolution: '1920x1080',
+  model: vertex.video("veo-3.1-generate-001"),
+  prompt: "A serene mountain landscape at sunset",
+  aspectRatio: "16:9",
+  resolution: "1920x1080",
   duration: 8,
 });
 ```
@@ -35,18 +35,18 @@ const { video } = await generateVideo({
 Further configuration can be done using Google Vertex provider options. You can validate the provider options using the `GoogleVertexVideoModelOptions` type.
 
 ```ts
-import { vertex } from '@ai-sdk/google-vertex';
-import { GoogleVertexVideoModelOptions } from '@ai-sdk/google-vertex';
-import { experimental_generateVideo as generateVideo } from 'ai';
+import { vertex } from "@ai-sdk/google-vertex";
+import { GoogleVertexVideoModelOptions } from "@ai-sdk/google-vertex";
+import { experimental_generateVideo as generateVideo } from "ai";
 
 const { video } = await generateVideo({
-  model: vertex.video('veo-3.1-generate-001'),
-  prompt: 'A serene mountain landscape at sunset',
-  aspectRatio: '16:9',
+  model: vertex.video("veo-3.1-generate-001"),
+  prompt: "A serene mountain landscape at sunset",
+  aspectRatio: "16:9",
   providerOptions: {
     vertex: {
       generateAudio: true,
-      personGeneration: 'allow_adult',
+      personGeneration: "allow_adult",
     } satisfies GoogleVertexVideoModelOptions,
   },
 });
@@ -54,7 +54,7 @@ const { video } = await generateVideo({
 
 The following provider options are available:
 
-- **generateAudio** *boolean*
+- **generateAudio** _boolean_
 
   Whether to generate audio along with the video.
 
@@ -62,23 +62,23 @@ The following provider options are available:
 
   Whether to allow person generation in the video.
 
-- **negativePrompt** *string*
+- **negativePrompt** _string_
 
   A description of what to discourage in the generated video.
 
-- **gcsOutputDirectory** *string*
+- **gcsOutputDirectory** _string_
 
   Cloud Storage URI to store the generated videos.
 
-- **referenceImages** *Array<{ bytesBase64Encoded?: string; gcsUri?: string }>*
+- **referenceImages** _Array<{ bytesBase64Encoded?: string; gcsUri?: string }>_
 
   Reference images for style or asset guidance.
 
-- **pollIntervalMs** *number*
+- **pollIntervalMs** _number_
 
   Polling interval in milliseconds for checking task status.
 
-- **pollTimeoutMs** *number*
+- **pollTimeoutMs** _number_
 
   Maximum wait time in milliseconds for video generation.
 

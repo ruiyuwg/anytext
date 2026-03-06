@@ -11,15 +11,15 @@ To opt-in, add the allowed URL prefixes inside `next.config.js`:
 ```js filename="next.config.js"
 module.exports = {
   experimental: {
-    urlImports: ['https://example.com/assets/', 'https://cdn.skypack.dev'],
+    urlImports: ["https://example.com/assets/", "https://cdn.skypack.dev"],
   },
-}
+};
 ```
 
 Then, you can import modules directly from URLs:
 
 ```js
-import { a, b, c } from 'https://example.com/assets/some/module.js'
+import { a, b, c } from "https://example.com/assets/some/module.js";
 ```
 
 URL Imports can be used everywhere normal package imports can be used.
@@ -45,44 +45,44 @@ These resources will have a `no-cache` entry in the lockfile and will always be 
 ### Skypack
 
 ```js
-import confetti from 'https://cdn.skypack.dev/canvas-confetti'
-import { useEffect } from 'react'
+import confetti from "https://cdn.skypack.dev/canvas-confetti";
+import { useEffect } from "react";
 
 export default () => {
   useEffect(() => {
-    confetti()
-  })
-  return <p>Hello</p>
-}
+    confetti();
+  });
+  return <p>Hello</p>;
+};
 ```
 
 ### Static Image Imports
 
 ```js
-import Image from 'next/image'
-import logo from 'https://example.com/assets/logo.png'
+import Image from "next/image";
+import logo from "https://example.com/assets/logo.png";
 
 export default () => (
   <div>
     <Image src={logo} placeholder="blur" />
   </div>
-)
+);
 ```
 
 ### URLs in CSS
 
 ```css
 .className {
-  background: url('https://example.com/assets/hero.jpg');
+  background: url("https://example.com/assets/hero.jpg");
 }
 ```
 
 ### Asset Imports
 
 ```js
-const logo = new URL('https://example.com/assets/file.txt', import.meta.url)
+const logo = new URL("https://example.com/assets/file.txt", import.meta.url);
 
-console.log(logo.pathname)
+console.log(logo.pathname);
 
 // prints "/_next/static/media/file.a9727b5d.txt"
 ```
@@ -100,15 +100,15 @@ If this option is not set, Next.js on webpack uses [PostCSS](https://postcss.org
 Turbopack uses Lightning CSS by default since Next 14.2. This configuration option has no effect on Turbopack. Turbopack always uses Lightning CSS.
 
 ```ts filename="next.config.ts" switcher
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   experimental: {
     useLightningcss: false, // default, ignored on Turbopack
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 ```js filename="next.config.js" switcher
@@ -117,9 +117,9 @@ const nextConfig = {
   experimental: {
     useLightningcss: true, // disables PostCSS on webpack
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 ## Version History
@@ -145,9 +145,9 @@ const nextConfig = {
   experimental: {
     viewTransition: true,
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 > Important Notice: The `<ViewTransition>` Component is already available in React's Canary release channel.
@@ -159,7 +159,7 @@ module.exports = nextConfig
 You can import the [`<ViewTransition>` Component](https://react.dev/reference/react/ViewTransition) from React in your application:
 
 ```jsx
-import { ViewTransition } from 'react'
+import { ViewTransition } from "react";
 ```
 
 ### Live Demo

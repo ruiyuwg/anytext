@@ -13,7 +13,7 @@ Here are the steps to implement signup/login functionality:
 To capture user credentials, create a form that invokes a Server Action on submission. For example, a signup form that accepts the user's name, email, and password:
 
 ```tsx filename="app/ui/signup-form.tsx" switcher
-import { signup } from '@/app/actions/auth'
+import { signup } from "@/app/actions/auth";
 
 export function SignupForm() {
   return (
@@ -32,12 +32,12 @@ export function SignupForm() {
       </div>
       <button type="submit">Sign Up</button>
     </form>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/ui/signup-form.js" switcher
-import { signup } from '@/app/actions/auth'
+import { signup } from "@/app/actions/auth";
 
 export function SignupForm() {
   return (
@@ -56,7 +56,7 @@ export function SignupForm() {
       </div>
       <button type="submit">Sign Up</button>
     </form>
-  )
+  );
 }
 ```
 
@@ -75,76 +75,76 @@ Use the Server Action to validate the form fields on the server. If your authent
 Using Zod as an example, you can define a form schema with appropriate error messages:
 
 ```ts filename="app/lib/definitions.ts" switcher
-import * as z from 'zod'
+import * as z from "zod";
 
 export const SignupFormSchema = z.object({
   name: z
     .string()
-    .min(2, { error: 'Name must be at least 2 characters long.' })
+    .min(2, { error: "Name must be at least 2 characters long." })
     .trim(),
-  email: z.email({ error: 'Please enter a valid email.' }).trim(),
+  email: z.email({ error: "Please enter a valid email." }).trim(),
   password: z
     .string()
-    .min(8, { error: 'Be at least 8 characters long' })
-    .regex(/[a-zA-Z]/, { error: 'Contain at least one letter.' })
-    .regex(/[0-9]/, { error: 'Contain at least one number.' })
+    .min(8, { error: "Be at least 8 characters long" })
+    .regex(/[a-zA-Z]/, { error: "Contain at least one letter." })
+    .regex(/[0-9]/, { error: "Contain at least one number." })
     .regex(/[^a-zA-Z0-9]/, {
-      error: 'Contain at least one special character.',
+      error: "Contain at least one special character.",
     })
     .trim(),
-})
+});
 
 export type FormState =
   | {
       errors?: {
-        name?: string[]
-        email?: string[]
-        password?: string[]
-      }
-      message?: string
+        name?: string[];
+        email?: string[];
+        password?: string[];
+      };
+      message?: string;
     }
-  | undefined
+  | undefined;
 ```
 
 ```js filename="app/lib/definitions.js" switcher
-import * as z from 'zod'
+import * as z from "zod";
 
 export const SignupFormSchema = z.object({
   name: z
     .string()
-    .min(2, { error: 'Name must be at least 2 characters long.' })
+    .min(2, { error: "Name must be at least 2 characters long." })
     .trim(),
-  email: z.email({ error: 'Please enter a valid email.' }).trim(),
+  email: z.email({ error: "Please enter a valid email." }).trim(),
   password: z
     .string()
-    .min(8, { error: 'Be at least 8 characters long' })
-    .regex(/[a-zA-Z]/, { error: 'Contain at least one letter.' })
-    .regex(/[0-9]/, { error: 'Contain at least one number.' })
+    .min(8, { error: "Be at least 8 characters long" })
+    .regex(/[a-zA-Z]/, { error: "Contain at least one letter." })
+    .regex(/[0-9]/, { error: "Contain at least one number." })
     .regex(/[^a-zA-Z0-9]/, {
-      error: 'Contain at least one special character.',
+      error: "Contain at least one special character.",
     })
     .trim(),
-})
+});
 ```
 
 To prevent unnecessary calls to your authentication provider's API or database, you can `return` early in the Server Action if any form fields do not match the defined schema.
 
 ```ts filename="app/actions/auth.ts" switcher
-import { SignupFormSchema, FormState } from '@/app/lib/definitions'
+import { SignupFormSchema, FormState } from "@/app/lib/definitions";
 
 export async function signup(state: FormState, formData: FormData) {
   // Validate form fields
   const validatedFields = SignupFormSchema.safeParse({
-    name: formData.get('name'),
-    email: formData.get('email'),
-    password: formData.get('password'),
-  })
+    name: formData.get("name"),
+    email: formData.get("email"),
+    password: formData.get("password"),
+  });
 
   // If any form fields are invalid, return early
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-    }
+    };
   }
 
   // Call the provider or db to create a user...
@@ -152,21 +152,21 @@ export async function signup(state: FormState, formData: FormData) {
 ```
 
 ```js filename="app/actions/auth.js" switcher
-import { SignupFormSchema } from '@/app/lib/definitions'
+import { SignupFormSchema } from "@/app/lib/definitions";
 
 export async function signup(state, formData) {
   // Validate form fields
   const validatedFields = SignupFormSchema.safeParse({
-    name: formData.get('name'),
-    email: formData.get('email'),
-    password: formData.get('password'),
-  })
+    name: formData.get("name"),
+    email: formData.get("email"),
+    password: formData.get("password"),
+  });
 
   // If any form fields are invalid, return early
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-    }
+    };
   }
 
   // Call the provider or db to create a user...
@@ -176,13 +176,13 @@ export async function signup(state, formData) {
 Back in your `<SignupForm />`, you can use React's `useActionState` hook to display validation errors while the form is submitting:
 
 ```tsx filename="app/ui/signup-form.tsx" switcher highlight={7,15,21,27-36}
-'use client'
+"use client";
 
-import { signup } from '@/app/actions/auth'
-import { useActionState } from 'react'
+import { signup } from "@/app/actions/auth";
+import { useActionState } from "react";
 
 export default function SignupForm() {
-  const [state, action, pending] = useActionState(signup, undefined)
+  const [state, action, pending] = useActionState(signup, undefined);
 
   return (
     <form action={action}>
@@ -216,18 +216,18 @@ export default function SignupForm() {
         Sign Up
       </button>
     </form>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/ui/signup-form.js" switcher highlight={7,15,21,27-36}
-'use client'
+"use client";
 
-import { signup } from '@/app/actions/auth'
-import { useActionState } from 'react'
+import { signup } from "@/app/actions/auth";
+import { useActionState } from "react";
 
 export default function SignupForm() {
-  const [state, action, pending] = useActionState(signup, undefined)
+  const [state, action, pending] = useActionState(signup, undefined);
 
   return (
     <form action={action}>
@@ -261,7 +261,7 @@ export default function SignupForm() {
         Sign Up
       </button>
     </form>
-  )
+  );
 }
 ```
 
@@ -282,9 +282,9 @@ export async function signup(state: FormState, formData: FormData) {
   // ...
 
   // 2. Prepare data for insertion into database
-  const { name, email, password } = validatedFields.data
+  const { name, email, password } = validatedFields.data;
   // e.g. Hash the user's password before storing it
-  const hashedPassword = await bcrypt.hash(password, 10)
+  const hashedPassword = await bcrypt.hash(password, 10);
 
   // 3. Insert the user into the database or call an Auth Library's API
   const data = await db
@@ -294,14 +294,14 @@ export async function signup(state: FormState, formData: FormData) {
       email,
       password: hashedPassword,
     })
-    .returning({ id: users.id })
+    .returning({ id: users.id });
 
-  const user = data[0]
+  const user = data[0];
 
   if (!user) {
     return {
-      message: 'An error occurred while creating your account.',
-    }
+      message: "An error occurred while creating your account.",
+    };
   }
 
   // TODO:
@@ -316,9 +316,9 @@ export async function signup(state, formData) {
   // ...
 
   // 2. Prepare data for insertion into database
-  const { name, email, password } = validatedFields.data
+  const { name, email, password } = validatedFields.data;
   // e.g. Hash the user's password before storing it
-  const hashedPassword = await bcrypt.hash(password, 10)
+  const hashedPassword = await bcrypt.hash(password, 10);
 
   // 3. Insert the user into the database or call an Library API
   const data = await db
@@ -328,14 +328,14 @@ export async function signup(state, formData) {
       email,
       password: hashedPassword,
     })
-    .returning({ id: users.id })
+    .returning({ id: users.id });
 
-  const user = data[0]
+  const user = data[0];
 
   if (!user) {
     return {
-      message: 'An error occurred while creating your account.',
-    }
+      message: "An error occurred while creating your account.",
+    };
   }
 
   // TODO:

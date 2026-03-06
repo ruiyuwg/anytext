@@ -25,10 +25,7 @@ const DERIVATIONAL: [string, string][] = [
   ["al", ""],
 ];
 
-function applySuffix(
-  word: string,
-  rules: [string, string][],
-): string {
+function applySuffix(word: string, rules: [string, string][]): string {
   for (const [suffix, replacement] of rules) {
     if (word.endsWith(suffix)) {
       const stem = word.slice(0, -suffix.length) + replacement;

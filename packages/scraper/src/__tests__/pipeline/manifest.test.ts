@@ -24,7 +24,11 @@ describe("getRegistryDir", () => {
 describe("readManifest", () => {
   it("reads and parses manifest.json", async () => {
     const fs = await import("node:fs");
-    const manifest: Manifest = { version: 1, updatedAt: "2025-01-01", libraries: [] };
+    const manifest: Manifest = {
+      version: 1,
+      updatedAt: "2025-01-01",
+      libraries: [],
+    };
     vi.mocked(fs.readFileSync).mockReturnValue(JSON.stringify(manifest));
 
     const { readManifest } = await import("../../pipeline/manifest.js");
@@ -45,7 +49,11 @@ describe("readManifest", () => {
 describe("writeManifest", () => {
   it("writes to tmp file then renames atomically", async () => {
     const fs = await import("node:fs");
-    const manifest: Manifest = { version: 1, updatedAt: "2025-01-01", libraries: [] };
+    const manifest: Manifest = {
+      version: 1,
+      updatedAt: "2025-01-01",
+      libraries: [],
+    };
 
     const { writeManifest } = await import("../../pipeline/manifest.js");
     writeManifest(manifest);
@@ -53,11 +61,11 @@ describe("writeManifest", () => {
     expect(fs.writeFileSync).toHaveBeenCalledWith(
       expect.stringContaining("manifest.json.tmp"),
       JSON.stringify(manifest, null, 2) + "\n",
-      "utf-8"
+      "utf-8",
     );
     expect(fs.renameSync).toHaveBeenCalledWith(
       expect.stringContaining("manifest.json.tmp"),
-      expect.stringContaining("manifest.json")
+      expect.stringContaining("manifest.json"),
     );
     // Ensure write happens before rename
     const writeOrder = vi.mocked(fs.writeFileSync).mock.invocationCallOrder[0]!;
@@ -91,9 +99,14 @@ describe("mergeLibrary", () => {
 
   it("replaces existing library", async () => {
     const { mergeLibrary } = await import("../../pipeline/manifest.js");
-    const updated: ManifestLibrary = { ...baseManifest.libraries[0]!, version: "20.0" };
+    const updated: ManifestLibrary = {
+      ...baseManifest.libraries[0]!,
+      version: "20.0",
+    };
     const result = mergeLibrary(baseManifest, updated);
-    expect(result.libraries.find((l) => l.id === "react")!.version).toBe("20.0");
+    expect(result.libraries.find((l) => l.id === "react")!.version).toBe(
+      "20.0",
+    );
   });
 
   it("appends new library", async () => {

@@ -61,30 +61,30 @@ For example, if you need to use the same data across a route (e.g. in a Layout, 
 async function getItem() {
   // The `fetch` function is automatically memoized and the result
   // is cached
-  const res = await fetch('https://.../item/1')
-  return res.json()
+  const res = await fetch("https://.../item/1");
+  return res.json();
 }
 
 // This function is called twice, but only executed the first time
-const item = await getItem() // cache MISS
+const item = await getItem(); // cache MISS
 
 // The second call could be anywhere in your route
-const item = await getItem() // cache HIT
+const item = await getItem(); // cache HIT
 ```
 
 ```jsx filename="app/example.js" switcher
 async function getItem() {
   // The `fetch` function is automatically memoized and the result
   // is cached
-  const res = await fetch('https://.../item/1')
-  return res.json()
+  const res = await fetch("https://.../item/1");
+  return res.json();
 }
 
 // This function is called twice, but only executed the first time
-const item = await getItem() // cache MISS
+const item = await getItem(); // cache MISS
 
 // The second call could be anywhere in your route
-const item = await getItem() // cache HIT
+const item = await getItem(); // cache HIT
 ```
 
 **How Request Memoization Works**
@@ -120,8 +120,8 @@ Memoization only applies to the `GET` method in `fetch` requests, other methods,
 To manage individual requests, you can use the [`signal`](https://developer.mozilla.org/en-US/docs/Web/API/AbortController/signal) property from [`AbortController`](https://developer.mozilla.org/en-US/docs/Web/API/AbortController).
 
 ```js filename="app/example.js"
-const { signal } = new AbortController()
-fetch(url, { signal })
+const { signal } = new AbortController();
+fetch(url, { signal });
 ```
 
 ## Data Cache
@@ -165,7 +165,7 @@ To revalidate data at a timed interval, you can use the `next.revalidate` option
 
 ```js
 // Revalidate at most every hour
-fetch('https://...', { next: { revalidate: 3600 } })
+fetch("https://...", { next: { revalidate: 3600 } });
 ```
 
 Alternatively, you can use [Route Segment Config options](#segment-config-options) to configure all `fetch` requests in a segment or for cases where you're not able to use `fetch`.
@@ -198,10 +198,10 @@ Data can be revalidated on-demand by path ([`revalidatePath`](#revalidatepath)) 
 
 ### Opting out
 
-If you do *not* want to cache the response from `fetch`, you can do the following:
+If you do _not_ want to cache the response from `fetch`, you can do the following:
 
 ```js
-let data = await fetch('https://api.vercel.app/blog', { cache: 'no-store' })
+let data = await fetch("https://api.vercel.app/blog", { cache: "no-store" });
 ```
 
 ## Full Route Cache
@@ -391,7 +391,7 @@ See the [`useRouter` hook](/docs/app/api-reference/functions/use-router) API ref
 
 ### `fetch`
 
-Data returned from `fetch` is *not* automatically cached in the Data Cache.
+Data returned from `fetch` is _not_ automatically cached in the Data Cache.
 
 By default, when no `cache` or `next.revalidate` options are provided:
 
@@ -406,7 +406,7 @@ You can opt individual `fetch` into caching by setting the `cache` option to `fo
 
 ```jsx
 // Opt into caching
-fetch(`https://...`, { cache: 'force-cache' })
+fetch(`https://...`, { cache: "force-cache" });
 ```
 
 See the [`fetch` API Reference](/docs/app/api-reference/functions/fetch) for more options.
@@ -417,7 +417,7 @@ You can use the `next.revalidate` option of `fetch` to set the revalidation peri
 
 ```jsx
 // Revalidate at most after 1 hour
-fetch(`https://...`, { next: { revalidate: 3600 } })
+fetch(`https://...`, { next: { revalidate: 3600 } });
 ```
 
 See the [`fetch` API reference](/docs/app/api-reference/functions/fetch) for more options.
@@ -433,14 +433,14 @@ For example, you can set a tag when fetching data:
 
 ```jsx
 // Cache data with a tag
-fetch(`https://...`, { next: { tags: ['a', 'b', 'c'] } })
+fetch(`https://...`, { next: { tags: ["a", "b", "c"] } });
 ```
 
 Then, call `revalidateTag` with a tag to purge the cache entry:
 
 ```jsx
 // Revalidate entries with a specific tag
-revalidateTag('a')
+revalidateTag("a");
 ```
 
 There are two places you can use `revalidateTag`, depending on what you're trying to achieve:
@@ -453,7 +453,7 @@ There are two places you can use `revalidateTag`, depending on what you're tryin
 `revalidatePath` allows you manually revalidate data **and** re-render the route segments below a specific path in a single operation. Calling the `revalidatePath` method revalidates the Data Cache, which in turn invalidates the Full Route Cache.
 
 ```jsx
-revalidatePath('/')
+revalidatePath("/");
 ```
 
 There are two places you can use `revalidatePath`, depending on what you're trying to achieve:
@@ -503,11 +503,11 @@ To statically render all paths at build time, supply the full list of paths to `
 
 ```jsx filename="app/blog/[slug]/page.js"
 export async function generateStaticParams() {
-  const posts = await fetch('https://.../posts').then((res) => res.json())
+  const posts = await fetch("https://.../posts").then((res) => res.json());
 
   return posts.map((post) => ({
     slug: post.slug,
-  }))
+  }));
 }
 ```
 
@@ -515,12 +515,12 @@ To statically render a subset of paths at build time, and the rest the first tim
 
 ```jsx filename="app/blog/[slug]/page.js"
 export async function generateStaticParams() {
-  const posts = await fetch('https://.../posts').then((res) => res.json())
+  const posts = await fetch("https://.../posts").then((res) => res.json());
 
   // Render the first 10 posts at build time
   return posts.slice(0, 10).map((post) => ({
     slug: post.slug,
-  }))
+  }));
 }
 ```
 
@@ -528,14 +528,14 @@ To statically render all paths the first time they're visited, return an empty a
 
 ```jsx filename="app/blog/[slug]/page.js"
 export async function generateStaticParams() {
-  return []
+  return [];
 }
 ```
 
 > **Good to know:** You must return an array from `generateStaticParams`, even if it's empty. Otherwise, the route will be dynamically rendered.
 
 ```jsx filename="app/changelog/[slug]/page.js"
-export const dynamic = 'force-static'
+export const dynamic = "force-static";
 ```
 
 To disable caching at request time, add the `export const dynamicParams = false` option in a route segment. When this config option is used, only paths provided by `generateStaticParams` will be served, and other routes will 404 or match (in the case of [catch-all routes](/docs/app/api-reference/file-conventions/dynamic-routes#catch-all-segments)).
@@ -547,23 +547,23 @@ The React `cache` function allows you to memoize the return value of a function,
 `fetch` requests using the `GET` or `HEAD` methods are automatically memoized, so you do not need to wrap it in React `cache`. However, for other `fetch` methods, or when using data fetching libraries (such as some database, CMS, or GraphQL clients) that don't inherently memoize requests, you can use `cache` to manually memoize data requests.
 
 ```ts filename="utils/get-item.ts" switcher
-import { cache } from 'react'
-import db from '@/lib/db'
+import { cache } from "react";
+import db from "@/lib/db";
 
 export const getItem = cache(async (id: string) => {
-  const item = await db.item.findUnique({ id })
-  return item
-})
+  const item = await db.item.findUnique({ id });
+  return item;
+});
 ```
 
 ```js filename="utils/get-item.js" switcher
-import { cache } from 'react'
-import db from '@/lib/db'
+import { cache } from "react";
+import db from "@/lib/db";
 
 export const getItem = cache(async (id) => {
-  const item = await db.item.findUnique({ id })
-  return item
-})
+  const item = await db.item.findUnique({ id });
+  return item;
+});
 ```
 
 # CI Build Caching

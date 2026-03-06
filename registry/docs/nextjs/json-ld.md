@@ -10,16 +10,16 @@ Review your organization's recommended approach to sanitize potentially dangerou
 
 ```tsx filename="app/products/[id]/page.tsx" switcher
 export default async function Page({ params }) {
-  const { id } = await params
-  const product = await getProduct(id)
+  const { id } = await params;
+  const product = await getProduct(id);
 
   const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Product',
+    "@context": "https://schema.org",
+    "@type": "Product",
     name: product.name,
     image: product.image,
     description: product.description,
-  }
+  };
 
   return (
     <section>
@@ -27,27 +27,27 @@ export default async function Page({ params }) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c'),
+          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
         }}
       />
       {/* ... */}
     </section>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/products/[id]/page.js" switcher
 export default async function Page({ params }) {
-  const { id } = await params
-  const product = await getProduct(id)
+  const { id } = await params;
+  const product = await getProduct(id);
 
   const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Product',
+    "@context": "https://schema.org",
+    "@type": "Product",
     name: product.name,
     image: product.image,
     description: product.description,
-  }
+  };
 
   return (
     <section>
@@ -55,12 +55,12 @@ export default async function Page({ params }) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c'),
+          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
         }}
       />
       {/* ... */}
     </section>
-  )
+  );
 }
 ```
 
@@ -69,15 +69,15 @@ You can validate and test your structured data with the [Rich Results Test](http
 You can type your JSON-LD with TypeScript using community packages like [`schema-dts`](https://www.npmjs.com/package/schema-dts):
 
 ```tsx
-import { Product, WithContext } from 'schema-dts'
+import { Product, WithContext } from "schema-dts";
 
 const jsonLd: WithContext<Product> = {
-  '@context': 'https://schema.org',
-  '@type': 'Product',
-  name: 'Next.js Sticker',
-  image: 'https://nextjs.org/imgs/sticker.png',
-  description: 'Dynamic at the speed of static.',
-}
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name: "Next.js Sticker",
+  image: "https://nextjs.org/imgs/sticker.png",
+  description: "Dynamic at the speed of static.",
+};
 ```
 
 # Lazy Loading

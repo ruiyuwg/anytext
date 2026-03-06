@@ -20,13 +20,13 @@ set in the `AI_GATEWAY_API_KEY` environment variable.
 You can use the `pipeUIMessageStreamToResponse` method to pipe the stream data to the server response.
 
 ```ts filename='index.ts'
-import { streamText } from 'ai';
-import { createServer } from 'http';
+import { streamText } from "ai";
+import { createServer } from "http";
 
 createServer(async (req, res) => {
   const result = streamText({
-    model: 'openai/gpt-4o',
-    prompt: 'Invent a new holiday and describe its traditions.',
+    model: "openai/gpt-4o",
+    prompt: "Invent a new holiday and describe its traditions.",
   });
 
   result.pipeUIMessageStreamToResponse(res);
@@ -42,33 +42,33 @@ import {
   createUIMessageStream,
   pipeUIMessageStreamToResponse,
   streamText,
-} from 'ai';
-import { createServer } from 'http';
+} from "ai";
+import { createServer } from "http";
 
 createServer(async (req, res) => {
   switch (req.url) {
-    case '/stream-data': {
+    case "/stream-data": {
       const stream = createUIMessageStream({
         execute: ({ writer }) => {
           // write some custom data
-          writer.write({ type: 'start' });
+          writer.write({ type: "start" });
 
           writer.write({
-            type: 'data-custom',
+            type: "data-custom",
             data: {
-              custom: 'Hello, world!',
+              custom: "Hello, world!",
             },
           });
 
           const result = streamText({
-            model: 'openai/gpt-4o',
-            prompt: 'Invent a new holiday and describe its traditions.',
+            model: "openai/gpt-4o",
+            prompt: "Invent a new holiday and describe its traditions.",
           });
 
           writer.merge(
             result.toUIMessageStream({
               sendStart: false,
-              onError: error => {
+              onError: (error) => {
                 // Error messages are masked by default for security reasons.
                 // If you want to expose the error message to the client, you can do so here:
                 return error instanceof Error ? error.message : String(error);
@@ -91,13 +91,13 @@ createServer(async (req, res) => {
 You can send a text stream to the client using `pipeTextStreamToResponse`.
 
 ```ts filename='index.ts'
-import { streamText } from 'ai';
-import { createServer } from 'http';
+import { streamText } from "ai";
+import { createServer } from "http";
 
 createServer(async (req, res) => {
   const result = streamText({
-    model: 'openai/gpt-4o',
-    prompt: 'Invent a new holiday and describe its traditions.',
+    model: "openai/gpt-4o",
+    prompt: "Invent a new holiday and describe its traditions.",
   });
 
   result.pipeTextStreamToResponse(res);

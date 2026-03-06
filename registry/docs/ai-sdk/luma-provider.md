@@ -11,17 +11,17 @@ The Luma provider is available via the `@ai-sdk/luma` module. You can install it
 You can import the default provider instance `luma` from `@ai-sdk/luma`:
 
 ```ts
-import { luma } from '@ai-sdk/luma';
+import { luma } from "@ai-sdk/luma";
 ```
 
 If you need a customized setup, you can import `createLuma` and create a provider instance with your settings:
 
 ```ts
-import { createLuma } from '@ai-sdk/luma';
+import { createLuma } from "@ai-sdk/luma";
 
 const luma = createLuma({
-  apiKey: 'your-api-key', // optional, defaults to LUMA_API_KEY environment variable
-  baseURL: 'custom-url', // optional
+  apiKey: "your-api-key", // optional, defaults to LUMA_API_KEY environment variable
+  baseURL: "custom-url", // optional
   headers: {
     /* custom headers */
   }, // optional
@@ -30,21 +30,21 @@ const luma = createLuma({
 
 You can use the following optional settings to customize the Luma provider instance:
 
-- **baseURL** *string*
+- **baseURL** _string_
 
   Use a different URL prefix for API calls, e.g. to use proxy servers.
   The default prefix is `https://api.lumalabs.ai`.
 
-- **apiKey** *string*
+- **apiKey** _string_
 
   API key that is being sent using the `Authorization` header.
   It defaults to the `LUMA_API_KEY` environment variable.
 
-- **headers** *Record\<string,string>*
+- **headers** _Record\<string,string>_
 
   Custom headers to include in the requests.
 
-- **fetch** *(input: RequestInfo, init?: RequestInit) => Promise\<Response>*
+- **fetch** _(input: RequestInfo, init?: RequestInit) => Promise\<Response>_
 
   Custom [fetch](https://developer.mozilla.org/en-US/docs/Web/API/fetch) implementation.
   You can use it as a middleware to intercept requests,
@@ -58,14 +58,14 @@ For more on image generation with the AI SDK see [generateImage()](/docs/referen
 ### Basic Usage
 
 ```ts
-import { luma, type LumaImageModelOptions } from '@ai-sdk/luma';
-import { generateImage } from 'ai';
-import fs from 'fs';
+import { luma, type LumaImageModelOptions } from "@ai-sdk/luma";
+import { generateImage } from "ai";
+import fs from "fs";
 
 const { image } = await generateImage({
-  model: luma.image('photon-1'),
-  prompt: 'A serene mountain landscape at sunset',
-  aspectRatio: '16:9',
+  model: luma.image("photon-1"),
+  prompt: "A serene mountain landscape at sunset",
+  aspectRatio: "16:9",
 });
 
 const filename = `image-${Date.now()}.png`;
@@ -79,9 +79,9 @@ You can customize the generation behavior with optional settings:
 
 ```ts
 const { image } = await generateImage({
-  model: luma.image('photon-1'),
-  prompt: 'A serene mountain landscape at sunset',
-  aspectRatio: '16:9',
+  model: luma.image("photon-1"),
+  prompt: "A serene mountain landscape at sunset",
+  aspectRatio: "16:9",
   maxImagesPerCall: 1, // Maximum number of images to generate per API call
   providerOptions: {
     luma: {
@@ -94,16 +94,16 @@ const { image } = await generateImage({
 
 Since Luma processes images through an asynchronous queue system, these settings allow you to tune the polling behavior:
 
-- **maxImagesPerCall** *number*
+- **maxImagesPerCall** _number_
 
   Override the maximum number of images generated per API call. Defaults to 1.
 
-- **pollIntervalMillis** *number*
+- **pollIntervalMillis** _number_
 
   Control how frequently the API is checked for completed images while they are
   being processed. Defaults to 500ms.
 
-- **maxPollAttempts** *number*
+- **maxPollAttempts** _number_
 
   Limit how long to wait for results before timing out, since image generation
   is queued asynchronously. Defaults to 120 attempts.
@@ -147,16 +147,16 @@ Images have to be passed as URLs. `weight` can be configured for each image in t
 
 ```ts
 await generateImage({
-  model: luma.image('photon-flash-1'),
+  model: luma.image("photon-flash-1"),
   prompt: {
-    text: 'transform the bike to a boat',
+    text: "transform the bike to a boat",
     images: [
-      'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/future-me-8hcBWcZOkbE53q3gshhEm16S87qDpF.jpeg',
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/future-me-8hcBWcZOkbE53q3gshhEm16S87qDpF.jpeg",
     ],
   },
   providerOptions: {
     luma: {
-      referenceType: 'modify_image',
+      referenceType: "modify_image",
       images: [{ weight: 1.0 }],
     } satisfies LumaImageModelOptions,
   },
@@ -171,17 +171,17 @@ Use up to 4 reference images to guide your generation. Useful for creating varia
 
 ```ts
 await generateImage({
-  model: luma.image('photon-flash-1'),
+  model: luma.image("photon-flash-1"),
   prompt: {
-    text: 'A salamander at dusk in a forest pond, in the style of ukiyo-e',
+    text: "A salamander at dusk in a forest pond, in the style of ukiyo-e",
     images: [
-      'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/future-me-8hcBWcZOkbE53q3gshhEm16S87qDpF.jpeg',
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/future-me-8hcBWcZOkbE53q3gshhEm16S87qDpF.jpeg",
     ],
   },
-  aspectRatio: '1:1',
+  aspectRatio: "1:1",
   providerOptions: {
     luma: {
-      referenceType: 'image',
+      referenceType: "image",
       images: [{ weight: 0.8 }],
     } satisfies LumaImageModelOptions,
   },
@@ -196,17 +196,17 @@ Apply specific visual styles to your generations using reference images. Control
 
 ```ts
 await generateImage({
-  model: luma.image('photon-flash-1'),
+  model: luma.image("photon-flash-1"),
   prompt: {
-    text: 'A blue cream Persian cat launching its website on Vercel',
+    text: "A blue cream Persian cat launching its website on Vercel",
     images: [
-      'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/future-me-8hcBWcZOkbE53q3gshhEm16S87qDpF.jpeg',
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/future-me-8hcBWcZOkbE53q3gshhEm16S87qDpF.jpeg",
     ],
   },
-  aspectRatio: '1:1',
+  aspectRatio: "1:1",
   providerOptions: {
     luma: {
-      referenceType: 'style',
+      referenceType: "style",
       images: [{ weight: 0.8 }],
     } satisfies LumaImageModelOptions,
   },
@@ -221,20 +221,20 @@ Create consistent and personalized characters using up to 4 reference images of 
 
 ```ts
 await generateImage({
-  model: luma.image('photon-flash-1'),
+  model: luma.image("photon-flash-1"),
   prompt: {
-    text: 'A woman with a cat riding a broomstick in a forest',
+    text: "A woman with a cat riding a broomstick in a forest",
     images: [
-      'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/future-me-8hcBWcZOkbE53q3gshhEm16S87qDpF.jpeg',
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/future-me-8hcBWcZOkbE53q3gshhEm16S87qDpF.jpeg",
     ],
   },
-  aspectRatio: '1:1',
+  aspectRatio: "1:1",
   providerOptions: {
     luma: {
-      referenceType: 'character',
+      referenceType: "character",
       images: [
         {
-          id: 'identity0',
+          id: "identity0",
         },
       ],
     } satisfies LumaImageModelOptions,

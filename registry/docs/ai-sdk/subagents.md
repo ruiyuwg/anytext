@@ -54,9 +54,9 @@ This creates a clear separation of concerns, though context offloading and paral
 The simplest subagent pattern requires no special machinery. Your main agent has a tool that calls another agent in its `execute` function:
 
 ```ts
-import { ToolLoopAgent, tool } from 'ai';
+import { ToolLoopAgent, tool } from "ai";
 __PROVIDER_IMPORT__;
-import { z } from 'zod';
+import { z } from "zod";
 
 // Define a subagent for research tasks
 const researchSubagent = new ToolLoopAgent({
@@ -71,9 +71,9 @@ Summarize your findings in your final response.`,
 
 // Create a tool that delegates to the subagent
 const researchTool = tool({
-  description: 'Research a topic or question in depth.',
+  description: "Research a topic or question in depth.",
   inputSchema: z.object({
-    task: z.string().describe('The research task to complete'),
+    task: z.string().describe("The research task to complete"),
   }),
   execute: async ({ task }, { abortSignal }) => {
     const result = await researchSubagent.generate({
@@ -87,7 +87,7 @@ const researchTool = tool({
 // Main agent uses the research tool
 const mainAgent = new ToolLoopAgent({
   model: __MODEL__,
-  instructions: 'You are a helpful assistant that can delegate research tasks.',
+  instructions: "You are a helpful assistant that can delegate research tasks.",
   tools: {
     research: researchTool,
   },
@@ -115,7 +115,7 @@ If you abort the signal, the subagent stops executing and throws an `AbortError`
 To avoid errors about incomplete tool calls in subsequent messages, use `convertToModelMessages` with `ignoreIncompleteToolCalls`:
 
 ```ts
-import { convertToModelMessages } from 'ai';
+import { convertToModelMessages } from "ai";
 
 const modelMessages = await convertToModelMessages(messages, {
   ignoreIncompleteToolCalls: true,
@@ -148,13 +148,13 @@ Each `yield` **replaces** the previous output entirely (it does not append). Thi
 The `readUIMessageStream` utility handles this. It reads each chunk from the stream and builds an ever-growing `UIMessage` containing all parts received so far:
 
 ```ts
-import { readUIMessageStream, tool } from 'ai';
-import { z } from 'zod';
+import { readUIMessageStream, tool } from "ai";
+import { z } from "zod";
 
 const researchTool = tool({
-  description: 'Research a topic or question in depth.',
+  description: "Research a topic or question in depth.",
   inputSchema: z.object({
-    task: z.string().describe('The research task to complete'),
+    task: z.string().describe("The research task to complete"),
   }),
   execute: async function* ({ task }, { abortSignal }) {
     // Start the subagent with streaming
@@ -185,9 +185,9 @@ The `toModelOutput` function maps the tool's output to the tokens sent to the mo
 
 ```ts
 const researchTool = tool({
-  description: 'Research a topic or question in depth.',
+  description: "Research a topic or question in depth.",
   inputSchema: z.object({
-    task: z.string().describe('The research task to complete'),
+    task: z.string().describe("The research task to complete"),
   }),
   execute: async function* ({ task }, { abortSignal }) {
     const result = await researchSubagent.stream({
@@ -203,10 +203,10 @@ const researchTool = tool({
   },
   toModelOutput: ({ output: message }) => {
     // Extract just the final text as a summary
-    const lastTextPart = message?.parts.findLast(p => p.type === 'text');
+    const lastTextPart = message?.parts.findLast((p) => p.type === "text");
     return {
-      type: 'text',
-      value: lastTextPart?.text ?? 'Task completed.',
+      type: "text",
+      value: lastTextPart?.text ?? "Task completed.",
     };
   },
 });
@@ -255,7 +255,7 @@ To display streaming progress, check the tool part's `state` and `preliminary` f
 ### Detecting Streaming vs Complete
 
 ```tsx
-const hasOutput = part.state === 'output-available';
+const hasOutput = part.state === "output-available";
 const isStreaming = hasOutput && part.preliminary === true;
 const isComplete = hasOutput && !part.preliminary;
 ```
@@ -265,7 +265,7 @@ const isComplete = hasOutput && !part.preliminary;
 Export types alongside your agents for use in UI components:
 
 ```ts filename="lib/agents.ts"
-import { ToolLoopAgent, InferAgentUIMessage } from 'ai';
+import { ToolLoopAgent, InferAgentUIMessage } from "ai";
 
 export const mainAgent = new ToolLoopAgent({
   // ... configuration with researchTool
@@ -280,32 +280,32 @@ export type MainAgentMessage = InferAgentUIMessage<typeof mainAgent>;
 This example uses the types defined above to render both the main agent's messages and the subagent's streamed output:
 
 ```tsx
-'use client';
+"use client";
 
-import { useChat } from '@ai-sdk/react';
-import type { MainAgentMessage } from '@/lib/agents';
+import { useChat } from "@ai-sdk/react";
+import type { MainAgentMessage } from "@/lib/agents";
 
 export function Chat() {
   const { messages } = useChat<MainAgentMessage>();
 
   return (
     <div>
-      {messages.map(message =>
+      {messages.map((message) =>
         message.parts.map((part, i) => {
           switch (part.type) {
-            case 'text':
+            case "text":
               return <p key={i}>{part.text}</p>;
-            case 'tool-research':
+            case "tool-research":
               return (
                 <div>
-                  {part.state !== 'input-streaming' && (
+                  {part.state !== "input-streaming" && (
                     <div>Research: {part.input.task}</div>
                   )}
-                  {part.state === 'output-available' && (
+                  {part.state === "output-available" && (
                     <div>
                       {part.output.parts.map((nestedPart, i) => {
                         switch (nestedPart.type) {
-                          case 'text':
+                          case "text":
                             return <p key={i}>{nestedPart.text}</p>;
                           default:
                             return null;

@@ -5,8 +5,8 @@ The Language Detector middleware automatically determines a user's preferred lan
 ## Import
 
 ```ts
-import { Hono } from 'hono'
-import { languageDetector } from 'hono/language'
+import { Hono } from "hono";
+import { languageDetector } from "hono/language";
 ```
 
 ## Basic Usage
@@ -14,19 +14,19 @@ import { languageDetector } from 'hono/language'
 Detect language from query string, cookie, and header (default order), with fallback to English:
 
 ```ts
-const app = new Hono()
+const app = new Hono();
 
 app.use(
   languageDetector({
-    supportedLanguages: ['en', 'ar', 'ja'], // Must include fallback
-    fallbackLanguage: 'en', // Required
-  })
-)
+    supportedLanguages: ["en", "ar", "ja"], // Must include fallback
+    fallbackLanguage: "en", // Required
+  }),
+);
 
-app.get('/', (c) => {
-  const lang = c.get('language')
-  return c.text(`Hello! Your language is ${lang}`)
-})
+app.get("/", (c) => {
+  const lang = c.get("language");
+  return c.text(`Hello! Your language is ${lang}`);
+});
 ```
 
 ### Client Examples
@@ -49,23 +49,23 @@ curl -H 'Accept-Language: ar,en;q=0.9' http://localhost:8787/
 
 ```ts
 export const DEFAULT_OPTIONS: DetectorOptions = {
-  order: ['querystring', 'cookie', 'header'],
-  lookupQueryString: 'lang',
-  lookupCookie: 'language',
-  lookupFromHeaderKey: 'accept-language',
+  order: ["querystring", "cookie", "header"],
+  lookupQueryString: "lang",
+  lookupCookie: "language",
+  lookupFromHeaderKey: "accept-language",
   lookupFromPathIndex: 0,
-  caches: ['cookie'],
+  caches: ["cookie"],
   ignoreCase: true,
-  fallbackLanguage: 'en',
-  supportedLanguages: ['en'],
+  fallbackLanguage: "en",
+  supportedLanguages: ["en"],
   cookieOptions: {
-    sameSite: 'Strict',
+    sameSite: "Strict",
     secure: true,
     maxAge: 365 * 24 * 60 * 60,
     httpOnly: true,
   },
   debug: false,
-}
+};
 ```
 
 ## Key Behaviors
@@ -90,12 +90,12 @@ Prioritize URL path detection (e.g., /en/about):
 ```ts
 app.use(
   languageDetector({
-    order: ['path', 'cookie', 'querystring', 'header'],
+    order: ["path", "cookie", "querystring", "header"],
     lookupFromPathIndex: 0, // /en/profile → index 0 = 'en'
-    supportedLanguages: ['en', 'ar'],
-    fallbackLanguage: 'en',
-  })
-)
+    supportedLanguages: ["en", "ar"],
+    fallbackLanguage: "en",
+  }),
+);
 ```
 
 ### Progressive Locale Matching
@@ -105,10 +105,10 @@ When a detected locale code like `ja-JP` is not in `supportedLanguages`, the mid
 ```ts
 app.use(
   languageDetector({
-    supportedLanguages: ['en', 'ja', 'zh-Hant'],
-    fallbackLanguage: 'en',
-  })
-)
+    supportedLanguages: ["en", "ja", "zh-Hant"],
+    fallbackLanguage: "en",
+  }),
+);
 
 // Accept-Language: ja-JP → matches 'ja'
 // Accept-Language: zh-Hant-CN → matches 'zh-Hant'
@@ -121,11 +121,11 @@ Normalize complex codes (e.g., en-US → en):
 ```ts
 app.use(
   languageDetector({
-    convertDetectedLanguage: (lang) => lang.split('-')[0],
-    supportedLanguages: ['en', 'ja'],
-    fallbackLanguage: 'en',
-  })
-)
+    convertDetectedLanguage: (lang) => lang.split("-")[0],
+    supportedLanguages: ["en", "ja"],
+    fallbackLanguage: "en",
+  }),
+);
 ```
 
 ### Cookie Configuration
@@ -133,18 +133,18 @@ app.use(
 ```ts
 app.use(
   languageDetector({
-    lookupCookie: 'app_lang',
-    caches: ['cookie'],
+    lookupCookie: "app_lang",
+    caches: ["cookie"],
     cookieOptions: {
-      path: '/', // Cookie path
-      sameSite: 'Lax', // Cookie same-site policy
+      path: "/", // Cookie path
+      sameSite: "Lax", // Cookie same-site policy
       secure: true, // Only send over HTTPS
       maxAge: 86400 * 365, // 1 year expiration
       httpOnly: true, // Not accessible via JavaScript
-      domain: '.example.com', // Optional: specific domain
+      domain: ".example.com", // Optional: specific domain
     },
-  })
-)
+  }),
+);
 ```
 
 To disable cookie caching:
@@ -152,7 +152,7 @@ To disable cookie caching:
 ```ts
 languageDetector({
   caches: false,
-})
+});
 ```
 
 ### Debugging
@@ -162,7 +162,7 @@ Log detection steps:
 ```ts
 languageDetector({
   debug: true, // Shows: "Detected from querystring: ar"
-})
+});
 ```
 
 ## Options Reference
@@ -216,17 +216,17 @@ languageDetector({
 ### Path-Based Routing
 
 ```ts
-app.get('/:lang/home', (c) => {
-  const lang = c.get('language') // 'en', 'ar', etc.
-  return c.json({ message: getLocalizedContent(lang) })
-})
+app.get("/:lang/home", (c) => {
+  const lang = c.get("language"); // 'en', 'ar', etc.
+  return c.json({ message: getLocalizedContent(lang) });
+});
 ```
 
 ### Multiple Supported Languages
 
 ```ts
 languageDetector({
-  supportedLanguages: ['en', 'en-GB', 'ar', 'ar-EG'],
-  convertDetectedLanguage: (lang) => lang.replace('_', '-'), // Normalize
-})
+  supportedLanguages: ["en", "en-GB", "ar", "ar-EG"],
+  convertDetectedLanguage: (lang) => lang.replace("_", "-"), // Normalize
+});
 ```

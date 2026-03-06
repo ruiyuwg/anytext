@@ -11,13 +11,13 @@ The ElevenLabs provider is available in the `@ai-sdk/elevenlabs` module. You can
 You can import the default provider instance `elevenlabs` from `@ai-sdk/elevenlabs`:
 
 ```ts
-import { elevenlabs } from '@ai-sdk/elevenlabs';
+import { elevenlabs } from "@ai-sdk/elevenlabs";
 ```
 
 If you need a customized setup, you can import `createElevenLabs` from `@ai-sdk/elevenlabs` and create a provider instance with your settings:
 
 ```ts
-import { createElevenLabs } from '@ai-sdk/elevenlabs';
+import { createElevenLabs } from "@ai-sdk/elevenlabs";
 
 const elevenlabs = createElevenLabs({
   // custom settings, e.g.
@@ -27,16 +27,16 @@ const elevenlabs = createElevenLabs({
 
 You can use the following optional settings to customize the ElevenLabs provider instance:
 
-- **apiKey** *string*
+- **apiKey** _string_
 
   API key that is being sent using the `Authorization` header.
   It defaults to the `ELEVENLABS_API_KEY` environment variable.
 
-- **headers** *Record\<string,string>*
+- **headers** _Record\<string,string>_
 
   Custom headers to include in the requests.
 
-- **fetch** *(input: RequestInfo, init?: RequestInit) => Promise\<Response>*
+- **fetch** _(input: RequestInfo, init?: RequestInit) => Promise\<Response>_
 
   Custom [fetch](https://developer.mozilla.org/en-US/docs/Web/API/fetch) implementation.
   Defaults to the global `fetch` function.
@@ -51,36 +51,36 @@ using the `.speech()` factory method.
 The first argument is the model id e.g. `eleven_multilingual_v2`.
 
 ```ts
-const model = elevenlabs.speech('eleven_multilingual_v2');
+const model = elevenlabs.speech("eleven_multilingual_v2");
 ```
 
 The `voice` argument can be set to a voice ID from the [ElevenLabs Voice Library](https://elevenlabs.io/app/voice-library).
 You can find voice IDs by selecting a voice in the library and copying its ID.
 
 ```ts highlight="6"
-import { experimental_generateSpeech as generateSpeech } from 'ai';
-import { elevenlabs } from '@ai-sdk/elevenlabs';
+import { experimental_generateSpeech as generateSpeech } from "ai";
+import { elevenlabs } from "@ai-sdk/elevenlabs";
 
 const result = await generateSpeech({
-  model: elevenlabs.speech('eleven_multilingual_v2'),
-  text: 'Hello, world!',
-  voice: '21m00Tcm4TlvDq8ikWAM', // Rachel voice
+  model: elevenlabs.speech("eleven_multilingual_v2"),
+  text: "Hello, world!",
+  voice: "21m00Tcm4TlvDq8ikWAM", // Rachel voice
 });
 ```
 
 You can also pass additional provider-specific options using the `providerOptions` argument:
 
 ```ts highlight="7-9"
-import { experimental_generateSpeech as generateSpeech } from 'ai';
+import { experimental_generateSpeech as generateSpeech } from "ai";
 import {
   elevenlabs,
   type ElevenLabsSpeechModelOptions,
-} from '@ai-sdk/elevenlabs';
+} from "@ai-sdk/elevenlabs";
 
 const result = await generateSpeech({
-  model: elevenlabs.speech('eleven_multilingual_v2'),
-  text: 'Hello, world!',
-  voice: '21m00Tcm4TlvDq8ikWAM',
+  model: elevenlabs.speech("eleven_multilingual_v2"),
+  text: "Hello, world!",
+  voice: "21m00Tcm4TlvDq8ikWAM",
   providerOptions: {
     elevenlabs: {
       voiceSettings: {
@@ -92,72 +92,69 @@ const result = await generateSpeech({
 });
 ```
 
-- **languageCode** *string or null*\
+- **languageCode** _string or null_\
   Optional. Language code (ISO 639-1) used to enforce a language for the model. Currently, only Turbo v2.5 and Flash v2.5 support language enforcement. For other models, providing a language code will result in an error.
 
-- **voiceSettings** *object or null*\
+- **voiceSettings** _object or null_\
   Optional. Voice settings that override stored settings for the given voice. These are applied only to the current request.
-
-  - **stability** *double or null*\
+  - **stability** _double or null_\
     Optional. Determines how stable the voice is and the randomness between each generation. Lower values introduce broader emotional range; higher values result in a more monotonous voice.
-  - **useSpeakerBoost** *boolean or null*\
+  - **useSpeakerBoost** _boolean or null_\
     Optional. Boosts similarity to the original speaker. Increases computational load and latency.
-  - **similarityBoost** *double or null*\
+  - **similarityBoost** _double or null_\
     Optional. Controls how closely the AI should adhere to the original voice.
-  - **style** *double or null*\
+  - **style** _double or null_\
     Optional. Amplifies the style of the original speaker. May increase latency if set above 0.
 
-- **pronunciationDictionaryLocators** *array of objects or null*\
+- **pronunciationDictionaryLocators** _array of objects or null_\
   Optional. A list of pronunciation dictionary locators to apply to the text, in order. Up to 3 locators per request.\
   Each locator object:
-
-  - **pronunciationDictionaryId** *string* (required)\
+  - **pronunciationDictionaryId** _string_ (required)\
     The ID of the pronunciation dictionary.
-  - **versionId** *string or null* (optional)\
+  - **versionId** _string or null_ (optional)\
     The version ID of the dictionary. If not provided, the latest version is used.
 
-- **seed** *integer or null*\
+- **seed** _integer or null_\
   Optional. If specified, the system will attempt to sample deterministically. Must be between 0 and 4294967295. Determinism is not guaranteed.
 
-- **previousText** *string or null*\
+- **previousText** _string or null_\
   Optional. The text that came before the current request's text. Can improve continuity when concatenating generations or influence current generation continuity.
 
-- **nextText** *string or null*\
+- **nextText** _string or null_\
   Optional. The text that comes after the current request's text. Can improve continuity when concatenating generations or influence current generation continuity.
 
-- **previousRequestIds** *array of strings or null*\
+- **previousRequestIds** _array of strings or null_\
   Optional. List of request IDs for samples generated before this one. Improves continuity when splitting large tasks. Max 3 IDs. If both `previousText` and `previousRequestIds` are sent, `previousText` is ignored.
 
-- **nextRequestIds** *array of strings or null*\
+- **nextRequestIds** _array of strings or null_\
   Optional. List of request IDs for samples generated after this one. Useful for maintaining continuity when regenerating a sample. Max 3 IDs. If both `nextText` and `nextRequestIds` are sent, `nextText` is ignored.
 
-- **applyTextNormalization** *enum*\
+- **applyTextNormalization** _enum_\
   Optional. Controls text normalization.\
   Allowed values: `'auto'` (default), `'on'`, `'off'`.
-
   - `'auto'`: System decides whether to apply normalization (e.g., spelling out numbers).
   - `'on'`: Always apply normalization.
   - `'off'`: Never apply normalization.\
     For `eleven_turbo_v2_5` and `eleven_flash_v2_5`, can only be enabled with Enterprise plans.
 
-- **applyLanguageTextNormalization** *boolean*\
+- **applyLanguageTextNormalization** _boolean_\
   Optional. Defaults to `false`. Controls language text normalization, which helps with proper pronunciation in some supported languages (currently only Japanese). May significantly increase latency.
 
-- **enableLogging** *boolean*\
+- **enableLogging** _boolean_\
   Optional. Whether to enable request logging for this API call. Defaults to the account-level setting.
 
 ### Model Capabilities
 
-| Model                    | Instructions        |
-| ------------------------ | ------------------- |
-| `eleven_v3`              |  |
-| `eleven_multilingual_v2` |  |
-| `eleven_flash_v2_5`      |  |
-| `eleven_flash_v2`        |  |
-| `eleven_turbo_v2_5`      |  |
-| `eleven_turbo_v2`        |  |
-| `eleven_monolingual_v1`  |  |
-| `eleven_multilingual_v1` |  |
+| Model                    | Instructions |
+| ------------------------ | ------------ |
+| `eleven_v3`              |              |
+| `eleven_multilingual_v2` |              |
+| `eleven_flash_v2_5`      |              |
+| `eleven_flash_v2`        |              |
+| `eleven_turbo_v2_5`      |              |
+| `eleven_turbo_v2`        |              |
+| `eleven_monolingual_v1`  |              |
+| `eleven_multilingual_v1` |              |
 
 ## Transcription Models
 
@@ -167,24 +164,24 @@ using the `.transcription()` factory method.
 The first argument is the model id e.g. `scribe_v1`.
 
 ```ts
-const model = elevenlabs.transcription('scribe_v1');
+const model = elevenlabs.transcription("scribe_v1");
 ```
 
 You can also pass additional provider-specific options using the `providerOptions` argument. For example, supplying the input language in ISO-639-1 (e.g. `en`) format can sometimes improve transcription performance if known beforehand.
 
 ```ts highlight="6"
-import { experimental_transcribe as transcribe } from 'ai';
+import { experimental_transcribe as transcribe } from "ai";
 import {
   elevenlabs,
   type ElevenLabsTranscriptionModelOptions,
-} from '@ai-sdk/elevenlabs';
+} from "@ai-sdk/elevenlabs";
 
 const result = await transcribe({
-  model: elevenlabs.transcription('scribe_v1'),
+  model: elevenlabs.transcription("scribe_v1"),
   audio: new Uint8Array([1, 2, 3, 4]),
   providerOptions: {
     elevenlabs: {
-      languageCode: 'en',
+      languageCode: "en",
     } satisfies ElevenLabsTranscriptionModelOptions,
   },
 });
@@ -192,36 +189,36 @@ const result = await transcribe({
 
 The following provider options are available:
 
-- **languageCode** *string*
+- **languageCode** _string_
 
   An ISO-639-1 or ISO-639-3 language code corresponding to the language of the audio file.
   Can sometimes improve transcription performance if known beforehand.
   Defaults to `null`, in which case the language is predicted automatically.
 
-- **tagAudioEvents** *boolean*
+- **tagAudioEvents** _boolean_
 
   Whether to tag audio events like (laughter), (footsteps), etc. in the transcription.
   Defaults to `true`.
 
-- **numSpeakers** *integer*
+- **numSpeakers** _integer_
 
   The maximum amount of speakers talking in the uploaded file.
   Can help with predicting who speaks when.
   The maximum amount of speakers that can be predicted is 32.
   Defaults to `null`, in which case the amount of speakers is set to the maximum value the model supports.
 
-- **timestampsGranularity** *enum*
+- **timestampsGranularity** _enum_
 
   The granularity of the timestamps in the transcription.
   Defaults to `'word'`.
   Allowed values: `'none'`, `'word'`, `'character'`.
 
-- **diarize** *boolean*
+- **diarize** _boolean_
 
   Whether to annotate which speaker is currently talking in the uploaded file.
   Defaults to `true`.
 
-- **fileFormat** *enum*
+- **fileFormat** _enum_
 
   The format of input audio.
   Defaults to `'other'`.
@@ -231,9 +228,9 @@ The following provider options are available:
 
 ### Model Capabilities
 
-| Model                    | Transcription       | Duration            | Segments            | Language            |
-| ------------------------ | ------------------- | ------------------- | ------------------- | ------------------- |
-| `scribe_v1`              |  |  |  |  |
-| `scribe_v1_experimental` |  |  |  |  |
+| Model                    | Transcription | Duration | Segments | Language |
+| ------------------------ | ------------- | -------- | -------- | -------- |
+| `scribe_v1`              |               |          |          |          |
+| `scribe_v1_experimental` |               |          |          |          |
 
 # LM Studio

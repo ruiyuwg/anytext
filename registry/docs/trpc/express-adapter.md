@@ -10,12 +10,12 @@
 
 
   Express server &amp; procedure calls with Node.js.
-  
-    
+
+
       CodeSandbox
       Source
-    
-  
+
+
 ```
 
 ## How to add tRPC to existing Express project
@@ -33,15 +33,15 @@ yarn add @trpc/server zod
 Implement your tRPC router. A sample router is given below:
 
 ```ts title='server.ts'
-import { initTRPC } from '@trpc/server';
-import { z } from 'zod';
+import { initTRPC } from "@trpc/server";
+import { z } from "zod";
 
 export const t = initTRPC.create();
 
 export const appRouter = t.router({
   getUser: t.procedure.input(z.string()).query((opts) => {
     opts.input; // string
-    return { id: opts.input, name: 'Bilbo' };
+    return { id: opts.input, name: "Bilbo" };
   }),
   createUser: t.procedure
     .input(z.object({ name: z.string().min(5) }))
@@ -64,9 +64,9 @@ If your router file starts getting too big, split your router into several subro
 tRPC includes an adapter for Express out of the box. This adapter lets you convert your tRPC router into an Express middleware.
 
 ```ts title='server.ts'
-import { initTRPC } from '@trpc/server';
-import * as trpcExpress from '@trpc/server/adapters/express';
-import express from 'express';
+import { initTRPC } from "@trpc/server";
+import * as trpcExpress from "@trpc/server/adapters/express";
+import express from "express";
 
 // created for each request
 const createContext = ({
@@ -83,7 +83,7 @@ const appRouter = t.router({
 const app = express();
 
 app.use(
-  '/trpc',
+  "/trpc",
   trpcExpress.createExpressMiddleware({
     router: appRouter,
     createContext,
@@ -95,7 +95,7 @@ app.listen(4000);
 
 Your endpoints are now available via HTTP!
 
-| Endpoint     | HTTP URI                                                                                                   |
-| ------------ | ---------------------------------------------------------------------------------------------------------- |
+| Endpoint     | HTTP URI                                                                                         |
+| ------------ | ------------------------------------------------------------------------------------------------ |
 | `getUser`    | `GET http://localhost:4000/trpc/getUser?input=INPUT` where `INPUT` is a URI-encoded JSON string. |
 | `createUser` | `POST http://localhost:4000/trpc/createUser` with `req.body` of type `{name: string}`            |

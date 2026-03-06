@@ -5,18 +5,18 @@
 Basic usage:
 
 ```tsx filename="pages/index.tsx" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Home() {
-  return <Link href="/dashboard">Dashboard</Link>
+  return <Link href="/dashboard">Dashboard</Link>;
 }
 ```
 
 ```jsx filename="pages/index.js" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Home() {
-  return <Link href="/dashboard">Dashboard</Link>
+  return <Link href="/dashboard">Dashboard</Link>;
 }
 ```
 
@@ -42,38 +42,38 @@ The following props can be passed to the `<Link>` component:
 The path or URL to navigate to.
 
 ```tsx filename="pages/index.tsx" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 // Navigate to /about?name=test
 export default function Home() {
   return (
     <Link
       href={{
-        pathname: '/about',
-        query: { name: 'test' },
+        pathname: "/about",
+        query: { name: "test" },
       }}
     >
       About
     </Link>
-  )
+  );
 }
 ```
 
 ```jsx filename="pages/index.js" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 // Navigate to /about?name=test
 export default function Home() {
   return (
     <Link
       href={{
-        pathname: '/about',
-        query: { name: 'test' },
+        pathname: "/about",
+        query: { name: "test" },
       }}
     >
       About
     </Link>
-  )
+  );
 }
 ```
 
@@ -82,26 +82,26 @@ export default function Home() {
 **Defaults to `false`.** When `true`, `next/link` will replace the current history state instead of adding a new URL into the [browser's history](https://developer.mozilla.org/docs/Web/API/History_API) stack.
 
 ```tsx filename="pages/index.tsx" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Home() {
   return (
     <Link href="/dashboard" replace>
       Dashboard
     </Link>
-  )
+  );
 }
 ```
 
 ```jsx filename="pages/index.js" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Home() {
   return (
     <Link href="/dashboard" replace>
       Dashboard
     </Link>
-  )
+  );
 }
 ```
 
@@ -114,26 +114,26 @@ When `scroll = {false}`, Next.js will not attempt to scroll to the first Page el
 > **Good to know**: Next.js checks if `scroll: false` before managing scroll behavior. If scrolling is enabled, it identifies the relevant DOM node for navigation and inspects each top-level element. All non-scrollable elements and those without rendered HTML are bypassed, this includes sticky or fixed positioned elements, and non-visible elements such as those calculated with `getBoundingClientRect`. Next.js then continues through siblings until it identifies a scrollable element that is visible in the viewport.
 
 ```tsx filename="pages/index.tsx" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Home() {
   return (
     <Link href="/dashboard" scroll={false}>
       Dashboard
     </Link>
-  )
+  );
 }
 ```
 
 ```jsx filename="pages/index.js" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Home() {
   return (
     <Link href="/dashboard" scroll={false}>
       Dashboard
     </Link>
-  )
+  );
 }
 ```
 
@@ -147,26 +147,26 @@ The following values can be passed to the `prefetch` prop:
 - `false`: Prefetching will not happen when entering the viewport, but will happen on hover. If you want to completely remove fetching on hover as well, consider using an `<a>` tag or [incrementally adopting](/docs/app/guides/migrating/app-router-migration) the App Router, which enables disabling prefetching on hover too.
 
 ```tsx filename="pages/index.tsx" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Home() {
   return (
     <Link href="/dashboard" prefetch={false}>
       Dashboard
     </Link>
-  )
+  );
 }
 ```
 
 ```jsx filename="pages/index.js" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Home() {
   return (
     <Link href="/dashboard" prefetch={false}>
       Dashboard
     </Link>
-  )
+  );
 }
 ```
 
@@ -175,26 +175,26 @@ export default function Home() {
 Update the path of the current page without rerunning [`getStaticProps`](/docs/pages/building-your-application/data-fetching/get-static-props), [`getServerSideProps`](/docs/pages/building-your-application/data-fetching/get-server-side-props) or [`getInitialProps`](/docs/pages/api-reference/functions/get-initial-props). Defaults to `false`.
 
 ```tsx filename="pages/index.tsx" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Home() {
   return (
     <Link href="/dashboard" shallow={false}>
       Dashboard
     </Link>
-  )
+  );
 }
 ```
 
 ```jsx filename="pages/index.js" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Home() {
   return (
     <Link href="/dashboard" shallow={false}>
       Dashboard
     </Link>
-  )
+  );
 }
 ```
 
@@ -203,7 +203,7 @@ export default function Home() {
 The active locale is automatically prepended. `locale` allows for providing a different locale. When `false` `href` has to include the locale as the default behavior is disabled.
 
 ```tsx filename="pages/index.tsx" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -221,12 +221,12 @@ export default function Home() {
         Dashboard (French)
       </Link>
     </>
-  )
+  );
 }
 ```
 
 ```jsx filename="pages/index.js" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -244,7 +244,7 @@ export default function Home() {
         Dashboard (French)
       </Link>
     </>
-  )
+  );
 }
 ```
 
@@ -259,7 +259,7 @@ When this path differs from the one provided in `href` the previous `href`/`as` 
 An event handler called during client-side navigation. The handler receives an event object that includes a `preventDefault()` method, allowing you to cancel the navigation if needed.
 
 ```tsx filename="app/page.tsx" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Page() {
   return (
@@ -267,7 +267,7 @@ export default function Page() {
       href="/dashboard"
       onNavigate={(e) => {
         // Only executes during SPA navigation
-        console.log('Navigating...')
+        console.log("Navigating...");
 
         // Optionally prevent navigation
         // e.preventDefault()
@@ -275,12 +275,12 @@ export default function Page() {
     >
       Dashboard
     </Link>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/page.js" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Page() {
   return (
@@ -288,7 +288,7 @@ export default function Page() {
       href="/dashboard"
       onNavigate={(e) => {
         // Only executes during SPA navigation
-        console.log('Navigating...')
+        console.log("Navigating...");
 
         // Optionally prevent navigation
         // e.preventDefault()
@@ -296,7 +296,7 @@ export default function Page() {
     >
       Dashboard
     </Link>
-  )
+  );
 }
 ```
 
@@ -317,7 +317,7 @@ For [dynamic route segments](/docs/pages/building-your-application/routing/dynam
 For example, you can generate a list of links to the dynamic route `pages/blog/[slug].js`
 
 ```tsx filename="pages/blog/index.tsx" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 function Posts({ posts }) {
   return (
@@ -328,12 +328,12 @@ function Posts({ posts }) {
         </li>
       ))}
     </ul>
-  )
+  );
 }
 ```
 
 ```jsx filename="pages/blog/index.js" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 function Posts({ posts }) {
   return (
@@ -344,10 +344,10 @@ function Posts({ posts }) {
         </li>
       ))}
     </ul>
-  )
+  );
 }
 
-export default Posts
+export default Posts;
 ```
 
 ### Scrolling to an `id`
@@ -366,7 +366,7 @@ If you'd like to scroll to a specific `id` on navigation, you can append your UR
 `Link` can also receive a URL object and it will automatically format it to create the URL string:
 
 ```tsx filename="pages/index.ts" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 function Home() {
   return (
@@ -374,8 +374,8 @@ function Home() {
       <li>
         <Link
           href={{
-            pathname: '/about',
-            query: { name: 'test' },
+            pathname: "/about",
+            query: { name: "test" },
           }}
         >
           About us
@@ -384,22 +384,22 @@ function Home() {
       <li>
         <Link
           href={{
-            pathname: '/blog/[slug]',
-            query: { slug: 'my-post' },
+            pathname: "/blog/[slug]",
+            query: { slug: "my-post" },
           }}
         >
           Blog Post
         </Link>
       </li>
     </ul>
-  )
+  );
 }
 
-export default Home
+export default Home;
 ```
 
 ```jsx filename="pages/index.js" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 function Home() {
   return (
@@ -407,8 +407,8 @@ function Home() {
       <li>
         <Link
           href={{
-            pathname: '/about',
-            query: { name: 'test' },
+            pathname: "/about",
+            query: { name: "test" },
           }}
         >
           About us
@@ -417,18 +417,18 @@ function Home() {
       <li>
         <Link
           href={{
-            pathname: '/blog/[slug]',
-            query: { slug: 'my-post' },
+            pathname: "/blog/[slug]",
+            query: { slug: "my-post" },
           }}
         >
           Blog Post
         </Link>
       </li>
     </ul>
-  )
+  );
 }
 
-export default Home
+export default Home;
 ```
 
 The above example has a link to:
@@ -443,26 +443,26 @@ You can use every property as defined in the [Node.js URL module documentation](
 The default behavior of the `Link` component is to `push` a new URL into the `history` stack. You can use the `replace` prop to prevent adding a new entry, as in the following example:
 
 ```tsx filename="pages/index.js" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Home() {
   return (
     <Link href="/about" replace>
       About us
     </Link>
-  )
+  );
 }
 ```
 
 ```jsx filename="pages/index.js" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Home() {
   return (
     <Link href="/about" replace>
       About us
     </Link>
-  )
+  );
 }
 ```
 
@@ -471,26 +471,26 @@ export default function Home() {
 The default behavior of `Link` is to scroll to the top of the page. When there is a hash defined it will scroll to the specific id, like a normal `<a>` tag. To prevent scrolling to the top / hash `scroll={false}` can be added to `Link`:
 
 ```jsx filename="pages/index.js" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Home() {
   return (
     <Link href="/#hashid" scroll={false}>
       Disables scrolling to the top
     </Link>
-  )
+  );
 }
 ```
 
 ```tsx filename="pages/index.tsx" switcher
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Home() {
   return (
     <Link href="/#hashid" scroll={false}>
       Disables scrolling to the top
     </Link>
-  )
+  );
 }
 ```
 
@@ -499,12 +499,12 @@ export default function Home() {
 Because Next.js skips sticky and fixed positioned elements when finding the scroll target, content may end up behind a sticky header after navigation. For example, if your layout has a sticky header:
 
 ```tsx filename="app/layout.tsx" switcher
-import './globals.css'
+import "./globals.css";
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
@@ -515,12 +515,12 @@ export default function RootLayout({
         {children}
       </body>
     </html>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/layout.js" switcher
-import './globals.css'
+import "./globals.css";
 
 export default function RootLayout({ children }) {
   return (
@@ -532,7 +532,7 @@ export default function RootLayout({ children }) {
         {children}
       </body>
     </html>
-  )
+  );
 }
 ```
 
@@ -553,30 +553,30 @@ It's common to use [Proxy](/docs/app/api-reference/file-conventions/proxy) for a
 For example, if you want to serve a `/dashboard` route that has authenticated and visitor views, you can add the following in your Proxy to redirect the user to the correct page:
 
 ```ts filename="proxy.ts" switcher
-import { NextResponse } from 'next/server'
+import { NextResponse } from "next/server";
 
 export function proxy(request: Request) {
-  const nextUrl = request.nextUrl
-  if (nextUrl.pathname === '/dashboard') {
+  const nextUrl = request.nextUrl;
+  if (nextUrl.pathname === "/dashboard") {
     if (request.cookies.authToken) {
-      return NextResponse.rewrite(new URL('/auth/dashboard', request.url))
+      return NextResponse.rewrite(new URL("/auth/dashboard", request.url));
     } else {
-      return NextResponse.rewrite(new URL('/public/dashboard', request.url))
+      return NextResponse.rewrite(new URL("/public/dashboard", request.url));
     }
   }
 }
 ```
 
 ```js filename="proxy.js" switcher
-import { NextResponse } from 'next/server'
+import { NextResponse } from "next/server";
 
 export function proxy(request) {
-  const nextUrl = request.nextUrl
-  if (nextUrl.pathname === '/dashboard') {
+  const nextUrl = request.nextUrl;
+  if (nextUrl.pathname === "/dashboard") {
     if (request.cookies.authToken) {
-      return NextResponse.rewrite(new URL('/auth/dashboard', request.url))
+      return NextResponse.rewrite(new URL("/auth/dashboard", request.url));
     } else {
-      return NextResponse.rewrite(new URL('/public/dashboard', request.url))
+      return NextResponse.rewrite(new URL("/public/dashboard", request.url));
     }
   }
 }
@@ -585,36 +585,36 @@ export function proxy(request) {
 In this case, you would want to use the following code in your `<Link />` component:
 
 ```tsx filename="pages/index.tsx" switcher
-'use client'
+"use client";
 
-import Link from 'next/link'
-import useIsAuthed from './hooks/useIsAuthed' // Your auth hook
+import Link from "next/link";
+import useIsAuthed from "./hooks/useIsAuthed"; // Your auth hook
 
 export default function Home() {
-  const isAuthed = useIsAuthed()
-  const path = isAuthed ? '/auth/dashboard' : '/public/dashboard'
+  const isAuthed = useIsAuthed();
+  const path = isAuthed ? "/auth/dashboard" : "/public/dashboard";
   return (
     <Link as="/dashboard" href={path}>
       Dashboard
     </Link>
-  )
+  );
 }
 ```
 
 ```js filename="pages/index.js" switcher
-'use client'
+"use client";
 
-import Link from 'next/link'
-import useIsAuthed from './hooks/useIsAuthed' // Your auth hook
+import Link from "next/link";
+import useIsAuthed from "./hooks/useIsAuthed"; // Your auth hook
 
 export default function Home() {
-  const isAuthed = useIsAuthed()
-  const path = isAuthed ? '/auth/dashboard' : '/public/dashboard'
+  const isAuthed = useIsAuthed();
+  const path = isAuthed ? "/auth/dashboard" : "/public/dashboard";
   return (
     <Link as="/dashboard" href={path}>
       Dashboard
     </Link>
-  )
+  );
 }
 ```
 

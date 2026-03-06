@@ -5,11 +5,11 @@ import { Callout } from "fumadocs-ui/components/callout"
 
 {/\* > Zod 4+ provides native `.toJSONSChema()` functionality that leverages registries to generate idiomatic JSON Schema from Zod. Refer to the [JSON SChema docs](/json-schema) page for more information. \*/}
 
-It's often useful to associate a schema with some additional *metadata* for documentation, code generation, AI structured outputs, form validation, and other purposes.
+It's often useful to associate a schema with some additional _metadata_ for documentation, code generation, AI structured outputs, form validation, and other purposes.
 
 ## Registries
 
-Metadata in Zod is handled via *registries*. Registries are collections of schemas, each associated with some *strongly-typed* metadata. To create a simple registry:
+Metadata in Zod is handled via _registries_. Registries are collections of schemas, each associated with some _strongly-typed_ metadata. To create a simple registry:
 
 ```ts
 import * as z from "zod";
@@ -22,7 +22,7 @@ To register, lookup, and remove schemas from this registry:
 ```ts
 const mySchema = z.string();
 
-myRegistry.add(mySchema, { description: "A cool schema!"});
+myRegistry.add(mySchema, { description: "A cool schema!" });
 myRegistry.has(mySchema); // => true
 myRegistry.get(mySchema); // => { description: "A cool schema!" }
 myRegistry.remove(mySchema);
@@ -36,7 +36,7 @@ myRegistry.add(mySchema, { description: "A cool schema!" }); // ✅
 myRegistry.add(mySchema, { description: 123 }); // ❌
 ```
 
-> **Special handling for `id`** —  Zod registries treat the `id` property specially. An `Error` will be thrown if multiple schemas are registered with the same `id` value. This is true for all registries, including the global registry.
+> **Special handling for `id`** — Zod registries treat the `id` property specially. An `Error` will be thrown if multiple schemas are registered with the same `id` value. This is true for all registries, including the global registry.
 
 ### `.register()`
 
@@ -57,7 +57,7 @@ This lets you define metadata "inline" in your schemas.
 const mySchema = z.object({
   name: z.string().register(myRegistry, { description: "The user's name" }),
   age: z.number().register(myRegistry, { description: "The user's age" }),
-})
+});
 ```
 
 If a registry is defined without a metadata type, you can use it as a generic "collection", no metadata required.
@@ -77,8 +77,8 @@ For convenience, Zod provides a global registry (`z.globalRegistry`) that can be
 
 ```ts
 export interface GlobalMeta {
-  id?: string ;
-  title?: string ;
+  id?: string;
+  title?: string;
   description?: string;
   deprecated?: boolean;
   [k: string]: unknown;
@@ -90,15 +90,15 @@ To register some metadata in `z.globalRegistry` for a schema:
 ```ts
 import * as z from "zod";
 
-const emailSchema = z.email().register(z.globalRegistry, { 
+const emailSchema = z.email().register(z.globalRegistry, {
   id: "email_address",
   title: "Email address",
   description: "Your email address",
-  examples: ["first.last@example.com"]
+  examples: ["first.last@example.com"],
 });
 ```
 
-To globally augment the `GlobalMeta` interface, use [*declaration merging*](https://www.typescriptlang.org/docs/handbook/declaration-merging.html). Add the following anywhere in your codebase. Creating a `zod.d.ts` file in your project root is a common convention.
+To globally augment the `GlobalMeta` interface, use [_declaration merging_](https://www.typescriptlang.org/docs/handbook/declaration-merging.html). Add the following anywhere in your codebase. Creating a `zod.d.ts` file in your project root is a common convention.
 
 ```ts
 declare module "zod" {
@@ -109,7 +109,7 @@ declare module "zod" {
 }
 
 // forces TypeScript to consider the file a module
-export {}
+export {};
 ```
 
 ### `.meta()`
@@ -118,7 +118,7 @@ For a more convenient approach, use the `.meta()` method to register a schema in
 
 ````
 ```ts
-const emailSchema = z.email().meta({ 
+const emailSchema = z.email().meta({
   id: "email_address",
   title: "Email address",
   description: "Please enter a valid email address",
@@ -129,7 +129,7 @@ const emailSchema = z.email().meta({
 
 ```ts
 const emailSchema = z.email().check(
-  z.meta({ 
+  z.meta({
     id: "email_address",
     title: "Email address",
     description: "Please enter a valid email address",
@@ -138,20 +138,20 @@ const emailSchema = z.email().check(
 ```
 ````
 
-Calling `.meta()` without an argument will *retrieve* the metadata for a schema.
+Calling `.meta()` without an argument will _retrieve_ the metadata for a schema.
 
 ```ts
 emailSchema.meta();
 // => { id: "email_address", title: "Email address", ... }
 ```
 
-Metadata is associated with a *specific schema instance.* This is important to keep in mind, especially since Zod methods are immutable—they always return a new instance.
+Metadata is associated with a _specific schema instance._ This is important to keep in mind, especially since Zod methods are immutable—they always return a new instance.
 
 ```ts
 const A = z.string().meta({ description: "A cool string" });
 A.meta(); // => { description: "A cool string" }
 
-const B = A.refine(_ => true);
+const B = A.refine((_) => true);
 B.meta(); // => undefined
 ```
 
@@ -194,7 +194,7 @@ Let's look at some more advanced patterns.
 
 ### Referencing inferred types
 
-It's often valuable for the metadata type to reference the *inferred type* of a schema. For instance, you may want an `examples` field to contain examples of the schema's output.
+It's often valuable for the metadata type to reference the _inferred type_ of a schema. For instance, you may want an `examples` field to contain examples of the schema's output.
 
 ```ts
 import * as z from "zod";
@@ -218,6 +218,6 @@ import * as z from "zod";
 const myRegistry = z.registry<{ description: string }, z.ZodString>();
 
 myRegistry.add(z.string(), { description: "A number" }); // ✅
-myRegistry.add(z.number(), { description: "A number" }); // ❌ 
-//             ^ 'ZodNumber' is not assignable to parameter of type 'ZodString' 
+myRegistry.add(z.number(), { description: "A number" }); // ❌
+//             ^ 'ZodNumber' is not assignable to parameter of type 'ZodString'
 ```

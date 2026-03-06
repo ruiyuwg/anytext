@@ -6,30 +6,30 @@
 const stack = captureOwnerStack();
 ```
 
-***
+---
 
-## Reference {/*reference*/}
+## Reference {/_reference_/}
 
-### `captureOwnerStack()` {/*captureownerstack*/}
+### `captureOwnerStack()` {/_captureownerstack_/}
 
 Call `captureOwnerStack` to get the current Owner Stack.
 
 ```js {5,5}
-import * as React from 'react';
+import * as React from "react";
 
 function Component() {
-  if (process.env.NODE_ENV !== 'production') {
+  if (process.env.NODE_ENV !== "production") {
     const ownerStack = React.captureOwnerStack();
     console.log(ownerStack);
   }
 }
 ```
 
-#### Parameters {/*parameters*/}
+#### Parameters {/_parameters_/}
 
 `captureOwnerStack` does not take any parameters.
 
-#### Returns {/*returns*/}
+#### Returns {/_returns_/}
 
 `captureOwnerStack` returns `string | null`.
 
@@ -42,30 +42,30 @@ Owner Stacks are available in
 
 If no Owner Stack is available, `null` is returned (see [Troubleshooting: The Owner Stack is `null`](#the-owner-stack-is-null)).
 
-#### Caveats {/*caveats*/}
+#### Caveats {/_caveats_/}
 
 - Owner Stacks are only available in development. `captureOwnerStack` will always return `null` outside of development.
 
-#### Owner Stack vs Component Stack {/*owner-stack-vs-component-stack*/}
+#### Owner Stack vs Component Stack {/_owner-stack-vs-component-stack_/}
 
 The Owner Stack is different from the Component Stack available in React error handlers like [`errorInfo.componentStack` in `onUncaughtError`](/reference/react-dom/client/hydrateRoot#error-logging-in-production).
 
 For example, consider the following code:
 
 ```js src/App.js
-import {Suspense} from 'react';
+import { Suspense } from "react";
 
-function SubComponent({disabled}) {
+function SubComponent({ disabled }) {
   if (disabled) {
-    throw new Error('disabled');
+    throw new Error("disabled");
   }
 }
 
-export function Component({label}) {
+export function Component({ label }) {
   return (
     <fieldset>
       <legend>{label}</legend>
-      <SubComponent key={label} disabled={label === 'disabled'} />
+      <SubComponent key={label} disabled={label === "disabled"} />
     </fieldset>
   );
 }
@@ -74,7 +74,7 @@ function Navigation() {
   return null;
 }
 
-export default function App({children}) {
+export default function App({ children }) {
   return (
     <Suspense fallback="loading...">
       <main>
@@ -87,12 +87,12 @@ export default function App({children}) {
 ```
 
 ```js src/index.js
-import {captureOwnerStack} from 'react';
-import {createRoot} from 'react-dom/client';
-import App, {Component} from './App.js';
-import './styles.css';
+import { captureOwnerStack } from "react";
+import { createRoot } from "react-dom/client";
+import App, { Component } from "./App.js";
+import "./styles.css";
 
-createRoot(document.createElement('div'), {
+createRoot(document.createElement("div"), {
   onUncaughtError: (error, errorInfo) => {
     // The stacks are logged instead of showing them in the UI directly to
     // highlight that browsers will apply sourcemaps to the logged stacks.
@@ -105,7 +105,7 @@ createRoot(document.createElement('div'), {
 }).render(
   <App>
     <Component label="disabled" />
-  </App>
+  </App>,
 );
 ```
 
@@ -147,9 +147,9 @@ Neither `Navigation` nor `legend` are in the stack at all since it's only a sibl
 
 `SubComponent` is omitted because it's already part of the callstack.
 
-## Usage {/*usage*/}
+## Usage {/_usage_/}
 
-### Enhance a custom error overlay {/*enhance-a-custom-error-overlay*/}
+### Enhance a custom error overlay {/_enhance-a-custom-error-overlay_/}
 
 ```js [[1, 5, "console.error"], [4, 7, "captureOwnerStack"]]
 import { captureOwnerStack } from "react";
@@ -199,8 +199,15 @@ ul {
   padding-inline-start: 20px;
 }
 
-label, button { display: block; margin-bottom: 20px; }
-html, body { min-height: 300px; }
+label,
+button {
+  display: block;
+  margin-bottom: 20px;
+}
+html,
+body {
+  min-height: 300px;
+}
 
 #error-dialog {
   position: absolute;
@@ -240,7 +247,7 @@ pre.nowrap {
 }
 
 .hidden {
- display: none;  
+  display: none;
 }
 ```
 
@@ -278,7 +285,6 @@ pre.nowrap {
 ```
 
 ```js src/errorOverlay.js
-
 export function onConsoleError({ consoleMessage, ownerStack }) {
   const errorDialog = document.getElementById("error-dialog");
   const errorBody = document.getElementById("error-body");
@@ -298,9 +304,9 @@ export function onConsoleError({ consoleMessage, ownerStack }) {
 ```js src/index.js active
 import { captureOwnerStack } from "react";
 import { createRoot } from "react-dom/client";
-import App from './App';
+import App from "./App";
 import { onConsoleError } from "./errorOverlay";
-import './styles.css';
+import "./styles.css";
 
 const originalConsoleError = console.error;
 console.error = function patchedConsoleError(...args) {
@@ -320,7 +326,11 @@ createRoot(container).render(<App />);
 
 ```js src/App.js
 function Component() {
-  return <button onClick={() => console.error('Some console error')}>Trigger console.error()</button>;
+  return (
+    <button onClick={() => console.error("Some console error")}>
+      Trigger console.error()
+    </button>
+  );
 }
 
 export default function App() {
@@ -328,16 +338,16 @@ export default function App() {
 }
 ```
 
-## Troubleshooting {/*troubleshooting*/}
+## Troubleshooting {/_troubleshooting_/}
 
-### The Owner Stack is `null` {/*the-owner-stack-is-null*/}
+### The Owner Stack is `null` {/_the-owner-stack-is-null_/}
 
 The call of `captureOwnerStack` happened outside of a React controlled function e.g. in a `setTimeout` callback, after a `fetch` call or in a custom DOM event handler. During render, Effects, React event handlers, and React error handlers (e.g. `hydrateRoot#options.onCaughtError`) Owner Stacks should be available.
 
 In the example below, clicking the button will log an empty Owner Stack because `captureOwnerStack` was called during a custom DOM event handler. The Owner Stack must be captured earlier e.g. by moving the call of `captureOwnerStack` into the Effect body.
 
 ```js
-import {captureOwnerStack, useEffect} from 'react';
+import { captureOwnerStack, useEffect } from "react";
 
 export default function App() {
   useEffect(() => {
@@ -345,37 +355,42 @@ export default function App() {
     function handleEvent() {
       // Calling it in a custom DOM event handler is too late.
       // The Owner Stack will be `null` at this point.
-      console.log('Owner Stack: ', captureOwnerStack());
+      console.log("Owner Stack: ", captureOwnerStack());
     }
 
-    document.addEventListener('click', handleEvent);
+    document.addEventListener("click", handleEvent);
 
     return () => {
-      document.removeEventListener('click', handleEvent);
-    }
-  })
+      document.removeEventListener("click", handleEvent);
+    };
+  });
 
-  return <button>Click me to see that Owner Stacks are not available in custom DOM event handlers</button>;
+  return (
+    <button>
+      Click me to see that Owner Stacks are not available in custom DOM event
+      handlers
+    </button>
+  );
 }
 ```
 
-### `captureOwnerStack` is not available {/*captureownerstack-is-not-available*/}
+### `captureOwnerStack` is not available {/_captureownerstack-is-not-available_/}
 
 `captureOwnerStack` is only exported in development builds. It will be `undefined` in production builds. If `captureOwnerStack` is used in files that are bundled for production and development, you should conditionally access it from a namespace import.
 
 ```js
 // Don't use named imports of `captureOwnerStack` in files that are bundled for development and production.
-import {captureOwnerStack} from 'react';
+import { captureOwnerStack } from "react";
 // Use a namespace import instead and access `captureOwnerStack` conditionally.
-import * as React from 'react';
+import * as React from "react";
 
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV !== "production") {
   const ownerStack = React.captureOwnerStack();
-  console.log('Owner Stack', ownerStack);
+  console.log("Owner Stack", ownerStack);
 }
 ```
 
-***
+---
 
 ## Sitemap
 

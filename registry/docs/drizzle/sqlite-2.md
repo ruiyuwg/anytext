@@ -7,20 +7,26 @@ Drizzle has simple and flexible API, which lets you easily create such an index 
 \<CodeTabs items={\["schema.ts", "migration.sql"]}> <CodeTab>
 
 ```ts copy {12,13}
-import { SQL, sql } from 'drizzle-orm';
-import { AnySQLiteColumn, integer, sqliteTable, text, uniqueIndex } from 'drizzle-orm/sqlite-core';
+import { SQL, sql } from "drizzle-orm";
+import {
+  AnySQLiteColumn,
+  integer,
+  sqliteTable,
+  text,
+  uniqueIndex,
+} from "drizzle-orm/sqlite-core";
 
 export const users = sqliteTable(
-  'users',
+  "users",
   {
-    id: integer('id').primaryKey(),
-    name: text('name').notNull(),
-    email: text('email').notNull(),
+    id: integer("id").primaryKey(),
+    name: text("name").notNull(),
+    email: text("email").notNull(),
   },
   (table) => [
     // uniqueIndex('emailUniqueIndex').on(sql`lower(${table.email})`),
-    uniqueIndex('emailUniqueIndex').on(lower(table.email)),
-  ]
+    uniqueIndex("emailUniqueIndex").on(lower(table.email)),
+  ],
 );
 
 // custom lower function
@@ -127,7 +133,7 @@ await db.update(users).set({ city: finalSql }).where(inArray(users.id, ids));
 ````
 
 ```sql
-update users set "city" = 
+update users set "city" =
   (case when id = 1 then 'New York' when id = 2 then 'Los Angeles' when id = 3 then 'Chicago' end)
 where id in (1, 2, 3)
 ````

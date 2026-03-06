@@ -15,7 +15,7 @@ Zod `4.0.0` has been released on `npm`. This completes the incremental rollout p
 
 If you'd already implemented Zod 4 support according to the best practices described below (e.g. using the `"zod/v4/core"` subpath), then no other code changes should be necessary. This should not require a major version bump in your library.
 
-This page is primarily intended for consumption by *library authors* who are building tooling on top of Zod.
+This page is primarily intended for consumption by _library authors_ who are building tooling on top of Zod.
 
 > If you are a library author and think this page should include some additional guidance, please open an issue!
 
@@ -132,9 +132,11 @@ Your library code should only import from `"zod/v4/core"`. This sub-package defi
 // library code
 import * as z4 from "zod/v4/core";
 
-export function acceptObjectSchema<T extends z4.$ZodObject>(schema: T){
+export function acceptObjectSchema<T extends z4.$ZodObject>(schema: T) {
   // parse data
-  z4.parse(schema, { /* somedata */});
+  z4.parse(schema, {
+    /* somedata */
+  });
   // inspect internals
   schema._zod.def.shape;
 }
@@ -152,14 +154,14 @@ acceptObjectSchema(z.object({ name: z.string() }));
 
 // Zod 4 Mini
 import * as zm from "zod/mini";
-acceptObjectSchema(zm.object({ name: zm.string() }))
+acceptObjectSchema(zm.object({ name: zm.string() }));
 ```
 
 Refer to the [Zod Core](/packages/core) page for more information on the contents of the core sub-library.
 
 {/\* ### Future proofing
 
-To future-proof your library, your code should always allow for new schema and check classes to be added in the future. The addition of a new schema type is *not* considered a breaking change.
+To future-proof your library, your code should always allow for new schema and check classes to be added in the future. The addition of a new schema type is _not_ considered a breaking change.
 
 One common pattern when introspecting Zod schemas is to write a switch statement over the set of first-party schema types:
 
@@ -167,14 +169,14 @@ One common pattern when introspecting Zod schemas is to write a switch statement
 const schema = {} as z.$ZodTypes;
 const def = schema._zod.def;
 switch (def.type) {
-case "string":
-  // ...
-  break;
-case "object":
-  // ...
-  break;
-default:
-  console.warn(`Unknown schema type: ${def.type}`);
+  case "string":
+    // ...
+    break;
+  case "object":
+    // ...
+    break;
+  default:
+    console.warn(`Unknown schema type: ${def.type}`);
   // reasonable fallback behavior
 }
 ```
@@ -204,7 +206,7 @@ inferSchema(z.string());
 // => $ZodType<string>
 ```
 
-This approach loses type information, namely *which subclass* the input actually is (in this case, `ZodString`). That means you can't call any string-specific methods like `.min()` on the result of `inferSchema`. Instead, your generic parameter should extend the core Zod schema interface:
+This approach loses type information, namely _which subclass_ the input actually is (in this case, `ZodString`). That means you can't call any string-specific methods like `.min()` on the result of `inferSchema`. Instead, your generic parameter should extend the core Zod schema interface:
 
 ```ts
 function inferSchema<T extends z4.$ZodType>(schema: T) {
@@ -218,7 +220,6 @@ inferSchema(z.string());
 To constrain the input schema to a specific subclass:
 
 ```ts
-
 import * as z4 from "zod/v4/core";
 
 // only accepts object schemas
@@ -230,7 +231,6 @@ function inferSchema<T extends z4.$ZodObject>(schema: T) {
 To constrain the inferred output type of the input schema:
 
 ```ts
-
 import * as z4 from "zod/v4/core";
 
 // only accepts string schemas
@@ -238,17 +238,20 @@ function inferSchema<T extends z4.$ZodType<string>>(schema: T) {
   return schema;
 }
 
-inferSchema(z.string()); // ✅ 
+inferSchema(z.string()); // ✅
 
-inferSchema(z.number()); 
-// ❌ The types of '_zod.output' are incompatible between these types. 
+inferSchema(z.number());
+// ❌ The types of '_zod.output' are incompatible between these types.
 // // Type 'number' is not assignable to type 'string'
 ```
 
 To parse data with the schema, use the top-level `z4.parse`/`z4.safeParse`/`z4.parseAsync`/`z4.safeParseAsync` functions. The `z4.$ZodType` subclass has no methods on it. The usual parsing methods are implemented by Zod and Zod Mini, but are not available in Zod Core.
 
 ```ts
-function parseData<T extends z4.$ZodType>(data: unknown, schema: T): z4.output<T> {
+function parseData<T extends z4.$ZodType>(
+  data: unknown,
+  schema: T,
+): z4.output<T> {
   return z.parse(schema, data);
 }
 

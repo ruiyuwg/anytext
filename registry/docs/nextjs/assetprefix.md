@@ -15,18 +15,18 @@ Open `next.config.mjs` and add the `assetPrefix` config based on the [phase](/do
 
 ```js filename="next.config.mjs"
 // @ts-check
-import { PHASE_DEVELOPMENT_SERVER } from 'next/constants'
+import { PHASE_DEVELOPMENT_SERVER } from "next/constants";
 
 export default (phase) => {
-  const isDev = phase === PHASE_DEVELOPMENT_SERVER
+  const isDev = phase === PHASE_DEVELOPMENT_SERVER;
   /**
    * @type {import('next').NextConfig}
    */
   const nextConfig = {
-    assetPrefix: isDev ? undefined : 'https://cdn.mydomain.com',
-  }
-  return nextConfig
-}
+    assetPrefix: isDev ? undefined : "https://cdn.mydomain.com",
+  };
+  return nextConfig;
+};
 ```
 
 Next.js will automatically use your asset prefix for the JavaScript and CSS files it loads from the `/_next/` path (`.next/static/` folder). For example, with the above configuration, the following request for a JS chunk:
@@ -56,15 +56,15 @@ While `assetPrefix` covers requests to `_next/static`, it does not influence the
 The `authInterrupts` configuration option allows you to use [`forbidden`](/docs/app/api-reference/functions/forbidden) and [`unauthorized`](/docs/app/api-reference/functions/unauthorized) APIs in your application. While these functions are experimental, you must enable the `authInterrupts` option in your `next.config.js` file to use them:
 
 ```ts filename="next.config.ts" switcher
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   experimental: {
     authInterrupts: true,
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 ```js filename="next.config.js" switcher
@@ -72,7 +72,7 @@ module.exports = {
   experimental: {
     authInterrupts: true,
   },
-}
+};
 ```
 
 - [forbidden](/docs/app/api-reference/functions/forbidden)
@@ -94,8 +94,8 @@ To deploy a Next.js application under a sub-path of a domain you can use the `ba
 
 ```js filename="next.config.js"
 module.exports = {
-  basePath: '/docs',
-}
+  basePath: "/docs",
+};
 ```
 
 > **Good to know**: This value must be set at build time and cannot be changed without re-building as the value is inlined in the client-side bundles.
@@ -112,7 +112,7 @@ export default function HomePage() {
     <>
       <Link href="/about">About Page</Link>
     </>
-  )
+  );
 }
 ```
 
@@ -131,7 +131,7 @@ When using the [`next/image`](/docs/app/api-reference/components/image) componen
 For example, using `/docs/me.png` will properly serve your image when `basePath` is set to `/docs`.
 
 ```jsx
-import Image from 'next/image'
+import Image from "next/image";
 
 function Home() {
   return (
@@ -145,10 +145,10 @@ function Home() {
       />
       <p>Welcome to my homepage!</p>
     </>
-  )
+  );
 }
 
-export default Home
+export default Home;
 ```
 
 # browserDebugInfoInTerminal

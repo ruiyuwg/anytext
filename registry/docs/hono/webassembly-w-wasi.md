@@ -4,13 +4,13 @@
 
 In practice:
 
-- Languages (like Javascript) *compile to* WebAssembly (`.wasm` files)
-- WebAssembly runtimes (like [`wasmtime`][wasmtime] or [`jco`][jco]) enable *running* WebAssembly binaries
+- Languages (like Javascript) _compile to_ WebAssembly (`.wasm` files)
+- WebAssembly runtimes (like [`wasmtime`][wasmtime] or [`jco`][jco]) enable _running_ WebAssembly binaries
 
-While core WebAssembly has *no* access to things like the local filesystem or sockets, the [WebAssembly System Interface][wasi]
+While core WebAssembly has _no_ access to things like the local filesystem or sockets, the [WebAssembly System Interface][wasi]
 steps in to enable defining a platform under WebAssebly workloads.
 
-This means that *with* WASI, WebAssembly can operate on files, sockets, and much more.
+This means that _with_ WASI, WebAssembly can operate on files, sockets, and much more.
 
 Want to peek at the WASI interface yourself? check out [`wasi:http`][wasi-http]
 
@@ -18,13 +18,9 @@ Support for WebAssembly w/ WASI in JS is powered by [StarlingMonkey][sm], and th
 both StarlingMonkey and Hono, **Hono works \*out of the box with WASI-enabled WebAssembly ecosystems.**
 
 [sm]: https://github.com/bytecodealliance/StarlingMonkey
-
 [wasm-core]: https://webassembly.org/
-
 [wasi]: https://wasi.dev/
-
 [bca]: https://bytecodealliance.org/
-
 [wasi-http]: https://github.com/WebAssembly/wasi-http
 
 ## 1. Setup
@@ -118,16 +114,16 @@ bundling is necessary, so [`rolldown`][rolldown] can be used to create a single 
 A Rolldown configuration (`rolldown.config.mjs`) like the following can be used:
 
 ```js
-import { defineConfig } from 'rolldown'
+import { defineConfig } from "rolldown";
 
 export default defineConfig({
-  input: 'src/component.ts',
+  input: "src/component.ts",
   external: /wasi:.*/,
   output: {
-    file: 'dist/component.js',
-    format: 'esm',
+    file: "dist/component.js",
+    format: "esm",
   },
-})
+});
 ```
 
 ::: info
@@ -135,11 +131,8 @@ Feel free to use any other bundlers that you're more comfortable with (`rolldown
 :::
 
 [jco]: https://github.com/bytecodealliance/jco
-
 [componentize-js]: https://github.com/bytecodealliance/componentize-js
-
 [rolldown]: https://rolldown.rs
-
 [spidermonkey]: https://spidermonkey.dev/
 
 ## 2. Set up WIT interface & dependencies
@@ -192,9 +185,7 @@ wit
 ```
 
 [wkg]: https://github.com/bytecodealliance/wasm-pkg-tools
-
 [wit-world]: https://github.com/WebAssembly/component-model/blob/main/design/mvp/WIT.md#wit-worlds
-
 [wit]: https://github.com/WebAssembly/component-model/blob/main/design/mvp/WIT.md
 
 ## 3. Hello Wasm
@@ -206,21 +197,21 @@ Let's fulfill our `component` world with a basic Hono application as a WebAssemb
 a file called `src/component.ts`:
 
 ```ts
-import { Hono } from 'hono'
-import { fire } from '@bytecodealliance/jco-std/wasi/0.2.6/http/adapters/hono/server'
+import { Hono } from "hono";
+import { fire } from "@bytecodealliance/jco-std/wasi/0.2.6/http/adapters/hono/server";
 
-const app = new Hono()
+const app = new Hono();
 
-app.get('/hello', (c) => {
-  return c.json({ message: 'Hello from WebAssembly!' })
-})
+app.get("/hello", (c) => {
+  return c.json({ message: "Hello from WebAssembly!" });
+});
 
-fire(app)
+fire(app);
 
 // Although we've called `fire()` with wasi HTTP configured for use above,
 // we still need to actually export the `wasi:http/incoming-handler` interface object,
 // as jco and componentize-js will be looking for the ES module export that matches the WASI interface.
-export { incomingHandler } from '@bytecodealliance/jco-std/wasi/0.2.6/http/adapters/hono/server'
+export { incomingHandler } from "@bytecodealliance/jco-std/wasi/0.2.6/http/adapters/hono/server";
 ```
 
 ## 4. Build
@@ -354,9 +345,6 @@ To reach out to the WebAssembly community with questions, comments, contribution
 - [componentize-js repository](https://github.com/bytecodealliance/componentize-js)
 
 [cm-book]: https://component-model.bytecodealliance.org/
-
 [jco-book]: https://bytecodealliance.github.io/jco/
-
 [jco-example-components]: https://github.com/bytecodealliance/jco/tree/main/examples/components
-
 [jco-example-component-hono]: https://github.com/bytecodealliance/jco/tree/main/examples/components/http-server-hono

@@ -14,7 +14,7 @@ export async function read(args: string[]): Promise<void> {
   if (!library) {
     printError(
       `Unknown library: ${libraryId}`,
-      `Run 'anytext list' to see available libraries.`
+      `Run 'anytext list' to see available libraries.`,
     );
     process.exit(1);
   }
@@ -23,7 +23,7 @@ export async function read(args: string[]): Promise<void> {
   if (!topic) {
     printError(
       `Unknown topic: ${topicId}`,
-      `Run 'anytext list ${libraryId}' to see available topics.`
+      `Run 'anytext list ${libraryId}' to see available topics.`,
     );
     process.exit(1);
   }

@@ -11,15 +11,9 @@ since [timers only show the time of last I/O](https://developers.cloudflare.com/
 ## Import
 
 ```ts [npm]
-import { Hono } from 'hono'
-import {
-  timing,
-  setMetric,
-  startTime,
-  endTime,
-  wrapTime,
-} from 'hono/timing'
-import type { TimingVariables } from 'hono/timing'
+import { Hono } from "hono";
+import { timing, setMetric, startTime, endTime, wrapTime } from "hono/timing";
+import type { TimingVariables } from "hono/timing";
 ```
 
 ## Usage
@@ -58,15 +52,15 @@ app.get('/', async (c) => {
 ### Conditionally enabled
 
 ```ts
-const app = new Hono()
+const app = new Hono();
 
 app.use(
-  '*',
+  "*",
   timing({
     // c: Context of the request
-    enabled: (c) => c.req.method === 'POST',
-  })
-)
+    enabled: (c) => c.req.method === "POST",
+  }),
+);
 ```
 
 ## Result

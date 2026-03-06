@@ -11,17 +11,17 @@ The Fal provider is available via the `@ai-sdk/fal` module. You can install it w
 You can import the default provider instance `fal` from `@ai-sdk/fal`:
 
 ```ts
-import { fal } from '@ai-sdk/fal';
+import { fal } from "@ai-sdk/fal";
 ```
 
 If you need a customized setup, you can import `createFal` and create a provider instance with your settings:
 
 ```ts
-import { createFal } from '@ai-sdk/fal';
+import { createFal } from "@ai-sdk/fal";
 
 const fal = createFal({
-  apiKey: 'your-api-key', // optional, defaults to FAL_API_KEY environment variable, falling back to FAL_KEY
-  baseURL: 'custom-url', // optional
+  apiKey: "your-api-key", // optional, defaults to FAL_API_KEY environment variable, falling back to FAL_KEY
+  baseURL: "custom-url", // optional
   headers: {
     /* custom headers */
   }, // optional
@@ -30,21 +30,21 @@ const fal = createFal({
 
 You can use the following optional settings to customize the Fal provider instance:
 
-- **baseURL** *string*
+- **baseURL** _string_
 
   Use a different URL prefix for API calls, e.g. to use proxy servers.
   The default prefix is `https://fal.run`.
 
-- **apiKey** *string*
+- **apiKey** _string_
 
   API key that is being sent using the `Authorization` header.
   It defaults to the `FAL_API_KEY` environment variable, falling back to `FAL_KEY`.
 
-- **headers** *Record\<string,string>*
+- **headers** _Record\<string,string>_
 
   Custom headers to include in the requests.
 
-- **fetch** *(input: RequestInfo, init?: RequestInit) => Promise\<Response>*
+- **fetch** _(input: RequestInfo, init?: RequestInit) => Promise\<Response>_
 
   Custom [fetch](https://developer.mozilla.org/en-US/docs/Web/API/fetch) implementation.
   You can use it as a middleware to intercept requests,
@@ -58,13 +58,13 @@ For more on image generation with the AI SDK see [generateImage()](/docs/referen
 ### Basic Usage
 
 ```ts
-import { fal } from '@ai-sdk/fal';
-import { generateImage } from 'ai';
-import fs from 'fs';
+import { fal } from "@ai-sdk/fal";
+import { generateImage } from "ai";
+import fs from "fs";
 
 const { image, providerMetadata } = await generateImage({
-  model: fal.image('fal-ai/flux/dev'),
-  prompt: 'A serene mountain landscape at sunset',
+  model: fal.image("fal-ai/flux/dev"),
+  prompt: "A serene mountain landscape at sunset",
 });
 
 const filename = `image-${Date.now()}.png`;
@@ -89,9 +89,9 @@ Fal offers many models optimized for different use cases. Here are a few popular
 
 | Model                                          | Description                                                                                                                       |
 | ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| `fal-ai/flux/dev`                              | FLUX.1 \[dev] model for high-quality image generation                                                                              |
-| `fal-ai/flux-pro/kontext`                      | FLUX.1 Kontext \[pro] handles both text and reference images as inputs, enabling targeted edits and complex transformations        |
-| `fal-ai/flux-pro/kontext/max`                  | FLUX.1 Kontext \[max] with improved prompt adherence and typography generation                                                     |
+| `fal-ai/flux/dev`                              | FLUX.1 \[dev] model for high-quality image generation                                                                             |
+| `fal-ai/flux-pro/kontext`                      | FLUX.1 Kontext \[pro] handles both text and reference images as inputs, enabling targeted edits and complex transformations       |
+| `fal-ai/flux-pro/kontext/max`                  | FLUX.1 Kontext \[max] with improved prompt adherence and typography generation                                                    |
 | `fal-ai/flux-lora`                             | Super fast endpoint for FLUX.1 with LoRA support                                                                                  |
 | `fal-ai/ideogram/character`                    | Generate consistent character appearances across multiple images. Maintain facial features, proportions, and distinctive traits   |
 | `fal-ai/qwen-image`                            | Qwen-Image foundation model with significant advances in complex text rendering and precise image editing                         |
@@ -126,11 +126,11 @@ Transform existing images using text prompts.
 
 ```ts
 await generateImage({
-  model: fal.image('fal-ai/flux-pro/kontext/max'),
+  model: fal.image("fal-ai/flux-pro/kontext/max"),
   prompt: {
-    text: 'Put a donut next to the flour.',
+    text: "Put a donut next to the flour.",
     images: [
-      'https://v3.fal.media/files/rabbit/rmgBxhwGYb2d3pl3x9sKf_output.png',
+      "https://v3.fal.media/files/rabbit/rmgBxhwGYb2d3pl3x9sKf_output.png",
     ],
   },
 });
@@ -141,9 +141,9 @@ A mask can be passed as well
 
 ```ts
 await generateImage({
-  model: fal.image('fal-ai/flux-pro/kontext/max'),
+  model: fal.image("fal-ai/flux-pro/kontext/max"),
   prompt: {
-    text: 'Put a donut next to the flour.',
+    text: "Put a donut next to the flour.",
     images: [imageBuffer],
     mask: maskBuffer,
   },
@@ -165,7 +165,7 @@ Fal image models support flexible provider options through the `providerOptions.
 - **safetyTolerance** - Content safety filtering level (1-6, where 1 is strictest)
 - **useMultipleImages** - When true, converts multiple input images to `image_urls` array for models that support multiple images (e.g., fal-ai/flux-2/edit)
 
-  **Deprecation Notice**: snake\_case parameter names (e.g., `image_url`,
+  **Deprecation Notice**: snake_case parameter names (e.g., `image_url`,
   `guidance_scale`) are deprecated and will be removed in a future version.
   Please use camelCase names (e.g., `imageUrl`, `guidanceScale`) instead.
 
@@ -190,19 +190,19 @@ using the `.transcription()` factory method.
 The first argument is the model id without the `fal-ai/` prefix e.g. `wizper`.
 
 ```ts
-const model = fal.transcription('wizper');
+const model = fal.transcription("wizper");
 ```
 
 You can also pass additional provider-specific options using the `providerOptions` argument. For example, supplying the `batchSize` option will increase the number of audio chunks processed in parallel.
 
 ```ts highlight="6"
-import { experimental_transcribe as transcribe } from 'ai';
-import { fal, type FalTranscriptionModelOptions } from '@ai-sdk/fal';
-import { readFile } from 'fs/promises';
+import { experimental_transcribe as transcribe } from "ai";
+import { fal, type FalTranscriptionModelOptions } from "@ai-sdk/fal";
+import { readFile } from "fs/promises";
 
 const result = await transcribe({
-  model: fal.transcription('wizper'),
-  audio: await readFile('audio.mp3'),
+  model: fal.transcription("wizper"),
+  audio: await readFile("audio.mp3"),
   providerOptions: {
     fal: { batchSize: 10 } satisfies FalTranscriptionModelOptions,
   },
@@ -211,41 +211,41 @@ const result = await transcribe({
 
 The following provider options are available:
 
-- **language** *string*
+- **language** _string_
   Language of the audio file. Defaults to 'en'. If set to null, the language will be automatically detected.
   Accepts ISO language codes like 'en', 'fr', 'zh', etc.
   Optional.
 
-- **diarize** *boolean*
+- **diarize** _boolean_
   Whether to diarize the audio file (identify different speakers).
   Defaults to true.
   Optional.
 
-- **chunkLevel** *string*
+- **chunkLevel** _string_
   Level of the chunks to return. Either 'segment' or 'word'.
   Default value: "segment"
   Optional.
 
-- **version** *string*
+- **version** _string_
   Version of the model to use. All models are Whisper large variants.
   Default value: "3"
   Optional.
 
-- **batchSize** *number*
+- **batchSize** _number_
   Batch size for processing.
   Default value: 64
   Optional.
 
-- **numSpeakers** *number*
+- **numSpeakers** _number_
   Number of speakers in the audio file. If not provided, the number of speakers will be automatically detected.
   Optional.
 
 ### Model Capabilities
 
-| Model     | Transcription       | Duration            | Segments            | Language            |
-| --------- | ------------------- | ------------------- | ------------------- | ------------------- |
-| `whisper` |  |  |  |  |
-| `wizper`  |  |  |  |  |
+| Model     | Transcription | Duration | Segments | Language |
+| --------- | ------------- | -------- | -------- | -------- |
+| `whisper` |               |          |          |          |
+| `wizper`  |               |          |          |          |
 
 ## Speech Models
 
@@ -254,12 +254,12 @@ You can create models that call Fal text-to-speech endpoints using the `.speech(
 ### Basic Usage
 
 ```ts
-import { experimental_generateSpeech as generateSpeech } from 'ai';
-import { fal } from '@ai-sdk/fal';
+import { experimental_generateSpeech as generateSpeech } from "ai";
+import { fal } from "@ai-sdk/fal";
 
 const result = await generateSpeech({
-  model: fal.speech('fal-ai/minimax/speech-02-hd'),
-  text: 'Hello from the AI SDK!',
+  model: fal.speech("fal-ai/minimax/speech-02-hd"),
+  text: "Hello from the AI SDK!",
 });
 ```
 
@@ -279,8 +279,7 @@ const result = await generateSpeech({
 
 Pass provider-specific options via `providerOptions.fal` depending on the model:
 
-- **voice\_setting** *object*
-
+- **voice_setting** _object_
   - `voice_id` (string): predefined voice ID
   - `speed` (number): 0.5–2.0
   - `vol` (number): 0–10
@@ -288,13 +287,13 @@ Pass provider-specific options via `providerOptions.fal` depending on the model:
   - `emotion` (enum): happy | sad | angry | fearful | disgusted | surprised | neutral
   - `english_normalization` (boolean)
 
-- **audio\_setting** *object*
+- **audio_setting** _object_
   Audio configuration settings specific to the model.
 
-- **language\_boost** *enum*
+- **language_boost** _enum_
   Chinese | Chinese,Yue | English | Arabic | Russian | Spanish | French | Portuguese | German | Turkish | Dutch | Ukrainian | Vietnamese | Indonesian | Japanese | Italian | Korean | Thai | Polish | Romanian | Greek | Czech | Finnish | Hindi | auto
 
-- **pronunciation\_dict** *object*
+- **pronunciation_dict** _object_
   Custom pronunciation dictionary for specific words.
 
 Model-specific parameters (e.g., `audio_url`, `prompt`, `preview_text`, `ref_audio_url`, `ref_text`) can be passed directly under `providerOptions.fal` and will be forwarded to the Fal API.

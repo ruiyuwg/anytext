@@ -10,7 +10,7 @@ End-to-end typesafe APIs made easy
   />
 {' '}
 
-  
+
 {' '}
 
   <img
@@ -27,8 +27,8 @@ End-to-end typesafe APIs made easy
   />
 ```
 
-{/\* Commented out as code in video is out-of-date */}
-{/*
+{/\* Commented out as code in video is out-of-date _/}
+{/_
 Watch Video
 
 ```

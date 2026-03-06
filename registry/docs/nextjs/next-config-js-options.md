@@ -8,9 +8,9 @@ Next.js can be configured through a `next.config.js` file in the root of your pr
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   /* config options here */
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 ## ECMAScript Modules
@@ -27,9 +27,9 @@ If you need [ECMAScript modules](https://nodejs.org/api/esm.html), you can use `
  */
 const nextConfig = {
   /* config options here */
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 > **Good to know**: `next.config` with the `.cjs` or `.cts` extensions are currently **not** supported.
@@ -47,9 +47,9 @@ export default (phase, { defaultConfig }) => {
    */
   const nextConfig = {
     /* config options here */
-  }
-  return nextConfig
-}
+  };
+  return nextConfig;
+};
 ```
 
 ### Async Configuration
@@ -65,9 +65,9 @@ module.exports = async (phase, { defaultConfig }) => {
    */
   const nextConfig = {
     /* config options here */
-  }
-  return nextConfig
-}
+  };
+  return nextConfig;
+};
 ```
 
 ### Phase
@@ -77,19 +77,19 @@ module.exports = async (phase, { defaultConfig }) => {
 ```js filename="next.config.js"
 // @ts-check
 
-const { PHASE_DEVELOPMENT_SERVER } = require('next/constants')
+const { PHASE_DEVELOPMENT_SERVER } = require("next/constants");
 
 module.exports = (phase, { defaultConfig }) => {
   if (phase === PHASE_DEVELOPMENT_SERVER) {
     return {
       /* development only config options here */
-    }
+    };
   }
 
   return {
     /* config options for all phases except development here */
-  }
-}
+  };
+};
 ```
 
 ## TypeScript
@@ -97,13 +97,13 @@ module.exports = (phase, { defaultConfig }) => {
 If you are using TypeScript in your project, you can use `next.config.ts` to use TypeScript in your configuration:
 
 ```ts filename="next.config.ts"
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 The commented lines are the place where you can put the configs allowed by `next.config.js`, which are [defined in this file](https://github.com/vercel/next.js/blob/canary/packages/next/src/server/config-shared.ts).
@@ -126,18 +126,18 @@ The `unstable_getResponseFromNextConfig` function runs the [`headers`](/docs/app
 import {
   getRedirectUrl,
   unstable_getResponseFromNextConfig,
-} from 'next/experimental/testing/server'
+} from "next/experimental/testing/server";
 
 const response = await unstable_getResponseFromNextConfig({
-  url: 'https://nextjs.org/test',
+  url: "https://nextjs.org/test",
   nextConfig: {
     async redirects() {
-      return [{ source: '/test', destination: '/test2', permanent: false }]
+      return [{ source: "/test", destination: "/test2", permanent: false }];
     },
   },
-})
-expect(response.status).toEqual(307)
-expect(getRedirectUrl(response)).toEqual('https://nextjs.org/test2')
+});
+expect(response.status).toEqual(307);
+expect(getRedirectUrl(response)).toEqual("https://nextjs.org/test2");
 ```
 
 - [experimental.adapterPath](/docs/pages/api-reference/config/next-config-js/adapterPath)

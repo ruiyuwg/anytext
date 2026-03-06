@@ -11,67 +11,66 @@ Example: `Bearer my.token.value` or `Basic my.token.value`
 ## Import
 
 ```ts
-import { Hono } from 'hono'
-import { jwk } from 'hono/jwk'
-import { verifyWithJwks } from 'hono/jwt'
+import { Hono } from "hono";
+import { jwk } from "hono/jwk";
+import { verifyWithJwks } from "hono/jwt";
 ```
 
 ## Usage
 
 ```ts
-const app = new Hono()
+const app = new Hono();
 
 app.use(
-  '/auth/*',
+  "/auth/*",
   jwk({
     jwks_uri: `https://${backendServer}/.well-known/jwks.json`,
-    alg: ['RS256'],
-  })
-)
+    alg: ["RS256"],
+  }),
+);
 
-app.get('/auth/page', (c) => {
-  return c.text('You are authorized')
-})
+app.get("/auth/page", (c) => {
+  return c.text("You are authorized");
+});
 ```
 
 Get payload:
 
 ```ts
-const app = new Hono()
+const app = new Hono();
 
 app.use(
-  '/auth/*',
+  "/auth/*",
   jwk({
     jwks_uri: `https://${backendServer}/.well-known/jwks.json`,
-    alg: ['RS256'],
-  })
-)
+    alg: ["RS256"],
+  }),
+);
 
-app.get('/auth/page', (c) => {
-  const payload = c.get('jwtPayload')
-  return c.json(payload) // eg: { "sub": "1234567890", "name": "John Doe", "iat": 1516239022 }
-})
+app.get("/auth/page", (c) => {
+  const payload = c.get("jwtPayload");
+  return c.json(payload); // eg: { "sub": "1234567890", "name": "John Doe", "iat": 1516239022 }
+});
 ```
 
 Anonymous access:
 
 ```ts
-const app = new Hono()
+const app = new Hono();
 
 app.use(
-  '/auth/*',
+  "/auth/*",
   jwk({
-    jwks_uri: (c) =>
-      `https://${c.env.authServer}/.well-known/jwks.json`,
-    alg: ['RS256'],
+    jwks_uri: (c) => `https://${c.env.authServer}/.well-known/jwks.json`,
+    alg: ["RS256"],
     allow_anon: true,
-  })
-)
+  }),
+);
 
-app.get('/auth/page', (c) => {
-  const payload = c.get('jwtPayload')
-  return c.json(payload ?? { message: 'hello anon' })
-})
+app.get("/auth/page", (c) => {
+  const payload = c.get("jwtPayload");
+  return c.json(payload ?? { message: "hello anon" });
+});
 ```
 
 ## Using `verifyWithJwks` outside of middleware
@@ -82,13 +81,13 @@ The `verifyWithJwks` utility function can be used to verify JWT tokens outside o
 const id_payload = await verifyWithJwks(
   id_token,
   {
-    jwks_uri: 'https://your-auth-server/.well-known/jwks.json',
-    allowedAlgorithms: ['RS256'],
+    jwks_uri: "https://your-auth-server/.well-known/jwks.json",
+    allowedAlgorithms: ["RS256"],
   },
   {
     cf: { cacheEverything: true, cacheTtl: 3600 },
-  }
-)
+  },
+);
 ```
 
 ## Configuring JWKS fetch request options
@@ -98,22 +97,22 @@ To configure how JWKS is retrieved from `jwks_uri`, pass fetch request options a
 This argument is `RequestInit` and is used only for the JWKS fetch request.
 
 ```ts
-const app = new Hono()
+const app = new Hono();
 
 app.use(
-  '/auth/*',
+  "/auth/*",
   jwk(
     {
       jwks_uri: `https://${backendServer}/.well-known/jwks.json`,
-      alg: ['RS256'],
+      alg: ["RS256"],
     },
     {
       headers: {
-        Authorization: 'Bearer TOKEN',
+        Authorization: "Bearer TOKEN",
       },
-    }
-  )
-)
+    },
+  ),
+);
 ```
 
 ## Options
@@ -128,11 +127,11 @@ Available types are `RS256` | `RS384` | `RS512` | `PS256` | `PS384` | `PS512` | 
 
 The values of your public keys, or a function that returns them. The function receives the Context object.
 
-### <Badge type="info" text="optional" /> jwks\_uri: `string` | `(c: Context) => Promise<string>`
+### <Badge type="info" text="optional" /> jwks_uri: `string` | `(c: Context) => Promise<string>`
 
 If this value is set, attempt to fetch JWKs from this URI, expecting a JSON response with `keys`, which are added to the provided `keys` option. You can also pass a callback function to dynamically determine the JWKS URI using the Context.
 
-### <Badge type="info" text="optional" /> allow\_anon: `boolean`
+### <Badge type="info" text="optional" /> allow_anon: `boolean`
 
 If this value is set to `true`, requests without a valid token will be allowed to pass through the middleware. Use `c.get('jwtPayload')` to check if the request is authenticated. The default is `false`.
 
@@ -157,11 +156,8 @@ This middleware handles Trailing Slash in the URL on a GET request.
 ## Import
 
 ```ts
-import { Hono } from 'hono'
-import {
-  appendTrailingSlash,
-  trimTrailingSlash,
-} from 'hono/trailing-slash'
+import { Hono } from "hono";
+import { appendTrailingSlash, trimTrailingSlash } from "hono/trailing-slash";
 ```
 
 ## Usage
@@ -169,25 +165,25 @@ import {
 Example of redirecting a GET request of `/about/me` to `/about/me/`.
 
 ```ts
-import { Hono } from 'hono'
-import { appendTrailingSlash } from 'hono/trailing-slash'
+import { Hono } from "hono";
+import { appendTrailingSlash } from "hono/trailing-slash";
 
-const app = new Hono({ strict: true })
+const app = new Hono({ strict: true });
 
-app.use(appendTrailingSlash())
-app.get('/about/me/', (c) => c.text('With Trailing Slash'))
+app.use(appendTrailingSlash());
+app.get("/about/me/", (c) => c.text("With Trailing Slash"));
 ```
 
 Example of redirecting a GET request of `/about/me/` to `/about/me`.
 
 ```ts
-import { Hono } from 'hono'
-import { trimTrailingSlash } from 'hono/trailing-slash'
+import { Hono } from "hono";
+import { trimTrailingSlash } from "hono/trailing-slash";
 
-const app = new Hono({ strict: true })
+const app = new Hono({ strict: true });
 
-app.use(trimTrailingSlash())
-app.get('/about/me', (c) => c.text('Without Trailing Slash'))
+app.use(trimTrailingSlash());
+app.get("/about/me", (c) => c.text("Without Trailing Slash"));
 ```
 
 ## Options
@@ -197,10 +193,10 @@ app.get('/about/me', (c) => c.text('Without Trailing Slash'))
 By default, trailing slash middleware only redirects when the response status is `404`. When `alwaysRedirect` is set to `true`, the middleware redirects before executing handlers. This is useful for wildcard routes (`*`) where the default behavior doesn't work.
 
 ```ts
-const app = new Hono()
+const app = new Hono();
 
-app.use(trimTrailingSlash({ alwaysRedirect: true }))
-app.get('/my-path/*', (c) => c.text('Wildcard route'))
+app.use(trimTrailingSlash({ alwaysRedirect: true }));
+app.get("/my-path/*", (c) => c.text("Wildcard route"));
 ```
 
 This option is available for both `trimTrailingSlash` and `appendTrailingSlash`.
@@ -216,22 +212,22 @@ This middleware executes the handler of the specified method, which is different
 ## Import
 
 ```ts
-import { Hono } from 'hono'
-import { methodOverride } from 'hono/method-override'
+import { Hono } from "hono";
+import { methodOverride } from "hono/method-override";
 ```
 
 ## Usage
 
 ```ts
-const app = new Hono()
+const app = new Hono();
 
 // If no options are specified, the value of `_method` in the form,
 // e.g. DELETE, is used as the method.
-app.use('/posts', methodOverride({ app }))
+app.use("/posts", methodOverride({ app }));
 
-app.delete('/posts', (c) => {
+app.delete("/posts", (c) => {
   // ....
-})
+});
 ```
 
 ## For example
@@ -242,33 +238,27 @@ The HTML form:
 
 ```html
 
-  
-  
-
 ```
 
 The application:
 
 ```ts
-import { methodOverride } from 'hono/method-override'
+import { methodOverride } from "hono/method-override";
 
-const app = new Hono()
-app.use('/posts', methodOverride({ app }))
+const app = new Hono();
+app.use("/posts", methodOverride({ app }));
 
-app.delete('/posts', () => {
+app.delete("/posts", () => {
   // ...
-})
+});
 ```
 
 You can change the default values or use the header value and query value:
 
 ```ts
-app.use('/posts', methodOverride({ app, form: '_custom_name' }))
-app.use(
-  '/posts',
-  methodOverride({ app, header: 'X-METHOD-OVERRIDE' })
-)
-app.use('/posts', methodOverride({ app, query: '_method' }))
+app.use("/posts", methodOverride({ app, form: "_custom_name" }));
+app.use("/posts", methodOverride({ app, header: "X-METHOD-OVERRIDE" }));
+app.use("/posts", methodOverride({ app, query: "_method" }));
 ```
 
 ## Options
@@ -297,8 +287,8 @@ IP Restriction Middleware is middleware that limits access to resources based on
 ## Import
 
 ```ts
-import { Hono } from 'hono'
-import { ipRestriction } from 'hono/ip-restriction'
+import { Hono } from "hono";
+import { ipRestriction } from "hono/ip-restriction";
 ```
 
 ## Usage
@@ -306,37 +296,37 @@ import { ipRestriction } from 'hono/ip-restriction'
 For your application running on Bun, if you want to allow access only from local, you can write it as follows. Specify the rules you want to deny in the `denyList` and the rules you want to allow in the `allowList`.
 
 ```ts
-import { Hono } from 'hono'
-import { getConnInfo } from 'hono/bun'
-import { ipRestriction } from 'hono/ip-restriction'
+import { Hono } from "hono";
+import { getConnInfo } from "hono/bun";
+import { ipRestriction } from "hono/ip-restriction";
 
-const app = new Hono()
+const app = new Hono();
 
 app.use(
-  '*',
+  "*",
   ipRestriction(getConnInfo, {
     denyList: [],
-    allowList: ['127.0.0.1', '::1'],
-  })
-)
+    allowList: ["127.0.0.1", "::1"],
+  }),
+);
 
-app.get('/', (c) => c.text('Hello Hono!'))
+app.get("/", (c) => c.text("Hello Hono!"));
 ```
 
 Pass the `getConninfo` from the [ConnInfo helper](/docs/helpers/conninfo) appropriate for your environment as the first argument of `ipRestriction`. For example, for Deno, it would look like this:
 
 ```ts
-import { getConnInfo } from 'hono/deno'
-import { ipRestriction } from 'hono/ip-restriction'
+import { getConnInfo } from "hono/deno";
+import { ipRestriction } from "hono/ip-restriction";
 
 //...
 
 app.use(
-  '*',
+  "*",
   ipRestriction(getConnInfo, {
     // ...
-  })
-)
+  }),
+);
 ```
 
 ## Rules
@@ -361,15 +351,15 @@ To customize the error, return a `Response` in the third argument.
 
 ```ts
 app.use(
-  '*',
+  "*",
   ipRestriction(
     getConnInfo,
     {
-      denyList: ['192.168.2.0/24'],
+      denyList: ["192.168.2.0/24"],
     },
     async (remote, c) => {
-      return c.text(`Blocking access from ${remote.addr}`, 403)
-    }
-  )
-)
+      return c.text(`Blocking access from ${remote.addr}`, 403);
+    },
+  ),
+);
 ```

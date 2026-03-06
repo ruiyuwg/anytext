@@ -43,14 +43,14 @@ export const adminProcedure = publicProcedure.use(async (opts) => {
 // @include: admin
 // @filename: _app.ts
 // ---cut---
-import { adminProcedure, publicProcedure, router } from './trpc';
+import { adminProcedure, publicProcedure, router } from "./trpc";
 
 const adminRouter = router({
-  secretPlace: adminProcedure.query(() => 'a key'),
+  secretPlace: adminProcedure.query(() => "a key"),
 });
 
 export const appRouter = router({
-  foo: publicProcedure.query(() => 'bar'),
+  foo: publicProcedure.query(() => "bar"),
   admin: adminRouter,
 });
 ```
@@ -97,11 +97,11 @@ export const loggedProcedure = publicProcedure.use(async (opts) => {
 // @include: trpclogger
 // @filename: _app.ts
 // ---cut---
-import { loggedProcedure, router } from './trpc';
+import { loggedProcedure, router } from "./trpc";
 
 export const appRouter = router({
-  foo: loggedProcedure.query(() => 'bar'),
-  abc: loggedProcedure.query(() => 'def'),
+  foo: loggedProcedure.query(() => "bar"),
+  abc: loggedProcedure.query(() => "def"),
 });
 ```
 
@@ -113,7 +113,7 @@ Below we have an example of a middleware that changes properties of a context, t
 
 ```ts twoslash
 // @target: esnext
-import { initTRPC, TRPCError } from '@trpc/server';
+import { initTRPC, TRPCError } from "@trpc/server";
 
 const t = initTRPC.context<Context>().create();
 const publicProcedure = t.procedure;
@@ -133,7 +133,7 @@ const protectedProcedure = publicProcedure.use(async function isAuthed(opts) {
   // `ctx.user` is nullable
   if (!ctx.user) {
     //     ^?
-    throw new TRPCError({ code: 'UNAUTHORIZED' });
+    throw new TRPCError({ code: "UNAUTHORIZED" });
   }
 
   return opts.next({
@@ -167,7 +167,7 @@ This helper primarily targets creating plugins and libraries with tRPC.
 // 🧩🧩🧩 a library creating a reusable plugin 🧩🧩🧩
 // @filename: myPlugin.ts
 
-import { initTRPC, TRPCError } from '@trpc/server';
+import { initTRPC, TRPCError } from "@trpc/server";
 
 export function createMyPlugin() {
   // When creating a plugin for tRPC, you use the same API as creating any other tRPC-app
@@ -186,7 +186,7 @@ export function createMyPlugin() {
     pluginProc: t.procedure.use((opts) => {
       return opts.next({
         ctx: {
-          fromPlugin: 'hello from myPlugin' as const,
+          fromPlugin: "hello from myPlugin" as const,
         },
       });
     }),
@@ -195,9 +195,8 @@ export function createMyPlugin() {
 // ------------------------------------
 // 🚀🚀🚀 the app using the plugin 🚀🚀🚀
 // @filename: app.ts
-import { createMyPlugin } from './myPlugin';
-import { initTRPC, TRPCError } from '@trpc/server';
-
+import { createMyPlugin } from "./myPlugin";
+import { initTRPC, TRPCError } from "@trpc/server";
 
 // the app's root `t`-object
 const t = initTRPC
@@ -205,7 +204,6 @@ const t = initTRPC
     // ...
   }>()
   .create();
-
 
 export const publicProcedure = t.procedure;
 export const router = t.router;
@@ -215,21 +213,18 @@ const plugin = createMyPlugin();
 
 // create a base procedure using the plugin
 const procedureWithPlugin = publicProcedure
-  .concat(
-    plugin.pluginProc,
-  )
-  .use(opts => {
+  .concat(plugin.pluginProc)
+  .use((opts) => {
     const { ctx } = opts;
     //      ^?
-    return opts.next()
-  })
-
+    return opts.next();
+  });
 
 export const appRouter = router({
-  hello: procedureWithPlugin.query(opts => {
+  hello: procedureWithPlugin.query((opts) => {
     return opts.ctx.fromPlugin;
-  })
-})
+  }),
+});
 ```
 
 ## Extending middlewares
@@ -242,7 +237,7 @@ Below we have an example of a middleware that extends a base middleware(foo). Li
 
 ```ts twoslash
 // @target: esnext
-import { initTRPC, TRPCError } from '@trpc/server';
+import { initTRPC, TRPCError } from "@trpc/server";
 
 const t = initTRPC.create();
 const publicProcedure = t.procedure;
@@ -254,7 +249,7 @@ const middleware = t.middleware;
 const fooMiddleware = t.middleware((opts) => {
   return opts.next({
     ctx: {
-      foo: 'foo' as const,
+      foo: "foo" as const,
     },
   });
 });
@@ -265,7 +260,7 @@ const barMiddleware = fooMiddleware.unstable_pipe((opts) => {
   //   ^?
   return opts.next({
     ctx: {
-      bar: 'bar' as const,
+      bar: "bar" as const,
     },
   });
 });
@@ -281,12 +276,12 @@ barProcedure.query((opts) => {
 Beware that the order in which you pipe your middlewares matter and that the context must overlap. An example of a forbidden pipe is shown below. Here, the `fooMiddleware` overrides the `ctx.a` while `barMiddleware` still expects the root context from the initialization in `initTRPC` - so piping `fooMiddleware` with `barMiddleware` would not work, while piping `barMiddleware` with `fooMiddleware` does work.
 
 ```ts twoslash
-import { initTRPC } from '@trpc/server';
+import { initTRPC } from "@trpc/server";
 
 const t = initTRPC
   .context<{
     a: {
-      b: 'a';
+      b: "a";
     };
   }>()
   .create();
@@ -297,7 +292,7 @@ const fooMiddleware = t.middleware((opts) => {
   //  ^?
   return opts.next({
     ctx: {
-      a: 'a' as const, // 👈 `ctx.a` is no longer an object
+      a: "a" as const, // 👈 `ctx.a` is no longer an object
     },
   });
 });
@@ -308,7 +303,7 @@ const barMiddleware = t.middleware((opts) => {
   //  ^?
   return opts.next({
     ctx: {
-      foo: 'foo' as const,
+      foo: "foo" as const,
     },
   });
 });
@@ -336,8 +331,8 @@ import {
   experimental_standaloneMiddleware,
   initTRPC,
   TRPCError,
-} from '@trpc/server';
-import * as z from 'zod';
+} from "@trpc/server";
+import * as z from "zod";
 
 const projectAccessMiddleware = experimental_standaloneMiddleware<{
   ctx: { allowedProjects: string[] }; // defaults to 'object' if not defined
@@ -346,8 +341,8 @@ const projectAccessMiddleware = experimental_standaloneMiddleware<{
 }>().create((opts) => {
   if (!opts.ctx.allowedProjects.includes(opts.input.projectId)) {
     throw new TRPCError({
-      code: 'FORBIDDEN',
-      message: 'Not allowed',
+      code: "FORBIDDEN",
+      message: "Not allowed",
     });
   }
 
@@ -388,8 +383,8 @@ Here is an example with multiple standalone middlewares:
 
 ```ts twoslash
 // @target: esnext
-import { experimental_standaloneMiddleware, initTRPC } from '@trpc/server';
-import * as z from 'zod';
+import { experimental_standaloneMiddleware, initTRPC } from "@trpc/server";
+import * as z from "zod";
 
 const t = initTRPC.create();
 const schemaA = z.object({ valueA: z.string() });

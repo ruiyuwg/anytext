@@ -11,11 +11,11 @@ The Clarifai provider is available via the `@ai-sdk/openai-compatible` module as
 To use Clarifai, you can create a custom provider instance with the `createOpenAICompatible` function from `@ai-sdk/openai-compatible`:
 
 ```ts
-import { createOpenAICompatible } from '@ai-sdk/openai-compatible';
+import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
 
 const clarifai = createOpenAICompatible({
-  name: 'clarifai',
-  baseURL: 'https://api.clarifai.com/v2/ext/openai/v1',
+  name: "clarifai",
+  baseURL: "https://api.clarifai.com/v2/ext/openai/v1",
   apiKey: process.env.CLARIFAI_PAT,
 });
 ```
@@ -30,7 +30,7 @@ You can interact with various large language models (LLMs) available on Clarifai
 
 ```ts
 const model = clarifai.chatModel(
-  'https://clarifai.com/deepseek-ai/deepseek-chat/models/DeepSeek-R1-0528-Qwen3-8B',
+  "https://clarifai.com/deepseek-ai/deepseek-chat/models/DeepSeek-R1-0528-Qwen3-8B",
 );
 ```
 
@@ -39,27 +39,27 @@ const model = clarifai.chatModel(
 You can use Clarifai language models to generate text with the `generateText` function:
 
 ```ts
-import { createOpenAICompatible } from '@ai-sdk/openai-compatible';
-import { generateText } from 'ai';
+import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
+import { generateText } from "ai";
 
 const clarifai = createOpenAICompatible({
-  name: 'clarifai',
-  baseURL: 'https://api.clarifai.com/v2/ext/openai/v1',
+  name: "clarifai",
+  baseURL: "https://api.clarifai.com/v2/ext/openai/v1",
   apiKey: process.env.CLARIFAI_PAT,
 });
 
 const model = clarifai.chatModel(
-  'https://clarifai.com/deepseek-ai/deepseek-chat/models/DeepSeek-R1-0528-Qwen3-8B',
+  "https://clarifai.com/deepseek-ai/deepseek-chat/models/DeepSeek-R1-0528-Qwen3-8B",
 );
 
 const { text, usage, finishReason } = await generateText({
   model,
-  prompt: 'What is photosynthesis?',
+  prompt: "What is photosynthesis?",
 });
 
 console.log(text);
-console.log('Token usage:', usage);
-console.log('Finish reason:', finishReason);
+console.log("Token usage:", usage);
+console.log("Finish reason:", finishReason);
 ```
 
 ### Example - Streaming Text
@@ -67,22 +67,22 @@ console.log('Finish reason:', finishReason);
 You can also stream text responses from Clarifai models using the `streamText` function:
 
 ```ts
-import { createOpenAICompatible } from '@ai-sdk/openai-compatible';
-import { streamText } from 'ai';
+import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
+import { streamText } from "ai";
 
 const clarifai = createOpenAICompatible({
-  name: 'clarifai',
-  baseURL: 'https://api.clarifai.com/v2/ext/openai/v1',
+  name: "clarifai",
+  baseURL: "https://api.clarifai.com/v2/ext/openai/v1",
   apiKey: process.env.CLARIFAI_PAT,
 });
 
 const model = clarifai.chatModel(
-  'https://clarifai.com/deepseek-ai/deepseek-chat/models/DeepSeek-R1-0528-Qwen3-8B',
+  "https://clarifai.com/deepseek-ai/deepseek-chat/models/DeepSeek-R1-0528-Qwen3-8B",
 );
 
 const result = streamText({
   model,
-  prompt: 'What is photosynthesis?',
+  prompt: "What is photosynthesis?",
 });
 
 for await (const message of result.textStream) {

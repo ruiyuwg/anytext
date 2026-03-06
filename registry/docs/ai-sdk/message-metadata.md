@@ -15,8 +15,8 @@ Here's a simple example of using message metadata to track timestamps and model 
 First, define your metadata type for type safety:
 
 ```tsx filename="app/types.ts"
-import { UIMessage } from 'ai';
-import { z } from 'zod';
+import { UIMessage } from "ai";
+import { z } from "zod";
 
 // Define your metadata schema
 export const messageMetadataSchema = z.object({
@@ -36,9 +36,9 @@ export type MyUIMessage = UIMessage<MessageMetadata>;
 Use the `messageMetadata` callback in `toUIMessageStreamResponse` to send metadata at different streaming stages:
 
 ```ts filename="app/api/chat/route.ts" highlight="11-20"
-import { convertToModelMessages, streamText } from 'ai';
+import { convertToModelMessages, streamText } from "ai";
 __PROVIDER_IMPORT__;
-import type { MyUIMessage } from '@/types';
+import type { MyUIMessage } from "@/types";
 
 export async function POST(req: Request) {
   const { messages }: { messages: MyUIMessage[] } = await req.json();
@@ -52,15 +52,15 @@ export async function POST(req: Request) {
     originalMessages: messages, // pass this in for type-safe return objects
     messageMetadata: ({ part }) => {
       // Send metadata when streaming starts
-      if (part.type === 'start') {
+      if (part.type === "start") {
         return {
           createdAt: Date.now(),
-          model: 'your-model-id',
+          model: "your-model-id",
         };
       }
 
       // Send additional metadata when streaming completes
-      if (part.type === 'finish') {
+      if (part.type === "finish") {
         return {
           totalTokens: part.totalUsage.totalTokens,
         };
@@ -78,25 +78,25 @@ To enable type-safe metadata return object in `messageMetadata`, pass in the
 Access metadata through the `message.metadata` property:
 
 ```tsx filename="app/page.tsx" highlight="8,18-23"
-'use client';
+"use client";
 
-import { useChat } from '@ai-sdk/react';
-import { DefaultChatTransport } from 'ai';
-import type { MyUIMessage } from '@/types';
+import { useChat } from "@ai-sdk/react";
+import { DefaultChatTransport } from "ai";
+import type { MyUIMessage } from "@/types";
 
 export default function Chat() {
   const { messages } = useChat<MyUIMessage>({
     transport: new DefaultChatTransport({
-      api: '/api/chat',
+      api: "/api/chat",
     }),
   });
 
   return (
     <div>
-      {messages.map(message => (
+      {messages.map((message) => (
         <div key={message.id}>
           <div>
-            {message.role === 'user' ? 'User: ' : 'AI: '}
+            {message.role === "user" ? "User: " : "AI: "}
             {message.metadata?.createdAt && (
               <span className="text-sm text-gray-500">
                 {new Date(message.metadata.createdAt).toLocaleTimeString()}
@@ -106,7 +106,7 @@ export default function Chat() {
 
           {/* Render message content */}
           {message.parts.map((part, index) =>
-            part.type === 'text' ? <div key={index}>{part.text}</div> : null,
+            part.type === "text" ? <div key={index}>{part.text}</div> : null,
           )}
 
           {/* Display additional metadata */}
@@ -142,9 +142,9 @@ Message metadata is ideal for:
 - [Streaming Data](/docs/ai-sdk-ui/streaming-data#message-metadata-vs-data-parts) - Comparison with data parts
 - [UIMessage Reference](/docs/reference/ai-sdk-core/ui-message) - Complete UIMessage type reference
 
-# AI\_APICallError
+# AI_APICallError
 
-# AI\_APICallError
+# AI_APICallError
 
 This error occurs when an API call fails.
 
@@ -164,16 +164,16 @@ This error occurs when an API call fails.
 You can check if an error is an instance of `AI_APICallError` using:
 
 ```typescript
-import { APICallError } from 'ai';
+import { APICallError } from "ai";
 
 if (APICallError.isInstance(error)) {
   // Handle the error
 }
 ```
 
-# AI\_DownloadError
+# AI_DownloadError
 
-# AI\_DownloadError
+# AI_DownloadError
 
 This error occurs when a download fails.
 
@@ -190,16 +190,16 @@ This error occurs when a download fails.
 You can check if an error is an instance of `AI_DownloadError` using:
 
 ```typescript
-import { DownloadError } from 'ai';
+import { DownloadError } from "ai";
 
 if (DownloadError.isInstance(error)) {
   // Handle the error
 }
 ```
 
-# AI\_EmptyResponseBodyError
+# AI_EmptyResponseBodyError
 
-# AI\_EmptyResponseBodyError
+# AI_EmptyResponseBodyError
 
 This error occurs when the server returns an empty response body.
 
@@ -212,16 +212,16 @@ This error occurs when the server returns an empty response body.
 You can check if an error is an instance of `AI_EmptyResponseBodyError` using:
 
 ```typescript
-import { EmptyResponseBodyError } from 'ai';
+import { EmptyResponseBodyError } from "ai";
 
 if (EmptyResponseBodyError.isInstance(error)) {
   // Handle the error
 }
 ```
 
-# AI\_InvalidArgumentError
+# AI_InvalidArgumentError
 
-# AI\_InvalidArgumentError
+# AI_InvalidArgumentError
 
 This error occurs when an invalid argument was provided.
 
@@ -236,16 +236,16 @@ This error occurs when an invalid argument was provided.
 You can check if an error is an instance of `AI_InvalidArgumentError` using:
 
 ```typescript
-import { InvalidArgumentError } from 'ai';
+import { InvalidArgumentError } from "ai";
 
 if (InvalidArgumentError.isInstance(error)) {
   // Handle the error
 }
 ```
 
-# AI\_InvalidDataContentError
+# AI_InvalidDataContentError
 
-# AI\_InvalidDataContentError
+# AI_InvalidDataContentError
 
 This error occurs when the data content provided in a multi-modal message part is invalid. Check out the [ prompt examples for multi-modal messages ](/docs/foundations/prompts#message-prompts).
 
@@ -260,16 +260,16 @@ This error occurs when the data content provided in a multi-modal message part i
 You can check if an error is an instance of `AI_InvalidDataContentError` using:
 
 ```typescript
-import { InvalidDataContentError } from 'ai';
+import { InvalidDataContentError } from "ai";
 
 if (InvalidDataContentError.isInstance(error)) {
   // Handle the error
 }
 ```
 
-# AI\_InvalidMessageRoleError
+# AI_InvalidMessageRoleError
 
-# AI\_InvalidMessageRoleError
+# AI_InvalidMessageRoleError
 
 This error occurs when an invalid message role is provided.
 
@@ -283,16 +283,16 @@ This error occurs when an invalid message role is provided.
 You can check if an error is an instance of `AI_InvalidMessageRoleError` using:
 
 ```typescript
-import { InvalidMessageRoleError } from 'ai';
+import { InvalidMessageRoleError } from "ai";
 
 if (InvalidMessageRoleError.isInstance(error)) {
   // Handle the error
 }
 ```
 
-# AI\_InvalidPromptError
+# AI_InvalidPromptError
 
-# AI\_InvalidPromptError
+# AI_InvalidPromptError
 
 This error occurs when the prompt provided is invalid.
 
@@ -305,7 +305,7 @@ You are passing a `UIMessage[]` as messages into e.g. `streamText`.
 You need to first convert them to a `ModelMessage[]` using `convertToModelMessages()`.
 
 ```typescript
-import { type UIMessage, generateText, convertToModelMessages } from 'ai';
+import { type UIMessage, generateText, convertToModelMessages } from "ai";
 
 const messages: UIMessage[] = [
   /* ... */
@@ -328,16 +328,16 @@ const result = await generateText({
 You can check if an error is an instance of `AI_InvalidPromptError` using:
 
 ```typescript
-import { InvalidPromptError } from 'ai';
+import { InvalidPromptError } from "ai";
 
 if (InvalidPromptError.isInstance(error)) {
   // Handle the error
 }
 ```
 
-# AI\_InvalidResponseDataError
+# AI_InvalidResponseDataError
 
-# AI\_InvalidResponseDataError
+# AI_InvalidResponseDataError
 
 This error occurs when the server returns a response with invalid data content.
 
@@ -351,16 +351,16 @@ This error occurs when the server returns a response with invalid data content.
 You can check if an error is an instance of `AI_InvalidResponseDataError` using:
 
 ```typescript
-import { InvalidResponseDataError } from 'ai';
+import { InvalidResponseDataError } from "ai";
 
 if (InvalidResponseDataError.isInstance(error)) {
   // Handle the error
 }
 ```
 
-# AI\_InvalidToolApprovalError
+# AI_InvalidToolApprovalError
 
-# AI\_InvalidToolApprovalError
+# AI_InvalidToolApprovalError
 
 This error occurs when a tool approval response references an unknown `approvalId`. No matching `tool-approval-request` was found in the message history.
 
@@ -373,16 +373,16 @@ This error occurs when a tool approval response references an unknown `approvalI
 You can check if an error is an instance of `AI_InvalidToolApprovalError` using:
 
 ```typescript
-import { InvalidToolApprovalError } from 'ai';
+import { InvalidToolApprovalError } from "ai";
 
 if (InvalidToolApprovalError.isInstance(error)) {
   // Handle the error
 }
 ```
 
-# AI\_InvalidToolInputError
+# AI_InvalidToolInputError
 
-# AI\_InvalidToolInputError
+# AI_InvalidToolInputError
 
 This error occurs when invalid tool input was provided.
 
@@ -398,16 +398,16 @@ This error occurs when invalid tool input was provided.
 You can check if an error is an instance of `AI_InvalidToolInputError` using:
 
 ```typescript
-import { InvalidToolInputError } from 'ai';
+import { InvalidToolInputError } from "ai";
 
 if (InvalidToolInputError.isInstance(error)) {
   // Handle the error
 }
 ```
 
-# AI\_JSONParseError
+# AI_JSONParseError
 
-# AI\_JSONParseError
+# AI_JSONParseError
 
 This error occurs when JSON fails to parse.
 
@@ -421,16 +421,16 @@ This error occurs when JSON fails to parse.
 You can check if an error is an instance of `AI_JSONParseError` using:
 
 ```typescript
-import { JSONParseError } from 'ai';
+import { JSONParseError } from "ai";
 
 if (JSONParseError.isInstance(error)) {
   // Handle the error
 }
 ```
 
-# AI\_LoadAPIKeyError
+# AI_LoadAPIKeyError
 
-# AI\_LoadAPIKeyError
+# AI_LoadAPIKeyError
 
 This error occurs when API key is not loaded successfully.
 
@@ -443,16 +443,16 @@ This error occurs when API key is not loaded successfully.
 You can check if an error is an instance of `AI_LoadAPIKeyError` using:
 
 ```typescript
-import { LoadAPIKeyError } from 'ai';
+import { LoadAPIKeyError } from "ai";
 
 if (LoadAPIKeyError.isInstance(error)) {
   // Handle the error
 }
 ```
 
-# AI\_LoadSettingError
+# AI_LoadSettingError
 
-# AI\_LoadSettingError
+# AI_LoadSettingError
 
 This error occurs when a setting is not loaded successfully.
 
@@ -465,16 +465,16 @@ This error occurs when a setting is not loaded successfully.
 You can check if an error is an instance of `AI_LoadSettingError` using:
 
 ```typescript
-import { LoadSettingError } from 'ai';
+import { LoadSettingError } from "ai";
 
 if (LoadSettingError.isInstance(error)) {
   // Handle the error
 }
 ```
 
-# AI\_MessageConversionError
+# AI_MessageConversionError
 
-# AI\_MessageConversionError
+# AI_MessageConversionError
 
 This error occurs when message conversion fails.
 
@@ -488,16 +488,16 @@ This error occurs when message conversion fails.
 You can check if an error is an instance of `AI_MessageConversionError` using:
 
 ```typescript
-import { MessageConversionError } from 'ai';
+import { MessageConversionError } from "ai";
 
 if (MessageConversionError.isInstance(error)) {
   // Handle the error
 }
 ```
 
-# AI\_NoContentGeneratedError
+# AI_NoContentGeneratedError
 
-# AI\_NoContentGeneratedError
+# AI_NoContentGeneratedError
 
 This error occurs when the AI provider fails to generate content.
 
@@ -510,16 +510,16 @@ This error occurs when the AI provider fails to generate content.
 You can check if an error is an instance of `AI_NoContentGeneratedError` using:
 
 ```typescript
-import { NoContentGeneratedError } from 'ai';
+import { NoContentGeneratedError } from "ai";
 
 if (NoContentGeneratedError.isInstance(error)) {
   // Handle the error
 }
 ```
 
-# AI\_NoImageGeneratedError
+# AI_NoImageGeneratedError
 
-# AI\_NoImageGeneratedError
+# AI_NoImageGeneratedError
 
 This error occurs when the AI provider fails to generate an image.
 It can arise due to the following reasons:
@@ -538,22 +538,22 @@ It can arise due to the following reasons:
 You can check if an error is an instance of `AI_NoImageGeneratedError` using:
 
 ```typescript
-import { generateImage, NoImageGeneratedError } from 'ai';
+import { generateImage, NoImageGeneratedError } from "ai";
 
 try {
   await generateImage({ model, prompt });
 } catch (error) {
   if (NoImageGeneratedError.isInstance(error)) {
-    console.log('NoImageGeneratedError');
-    console.log('Cause:', error.cause);
-    console.log('Responses:', error.responses);
+    console.log("NoImageGeneratedError");
+    console.log("Cause:", error.cause);
+    console.log("Responses:", error.responses);
   }
 }
 ```
 
-# AI\_NoObjectGeneratedError
+# AI_NoObjectGeneratedError
 
-# AI\_NoObjectGeneratedError
+# AI_NoObjectGeneratedError
 
 This error occurs when the AI provider fails to generate a parsable object that conforms to the schema.
 It can arise due to the following reasons:
@@ -576,25 +576,25 @@ It can arise due to the following reasons:
 You can check if an error is an instance of `AI_NoObjectGeneratedError` using:
 
 ```typescript
-import { generateText, NoObjectGeneratedError, Output } from 'ai';
+import { generateText, NoObjectGeneratedError, Output } from "ai";
 
 try {
   await generateText({ model, output: Output.object({ schema }), prompt });
 } catch (error) {
   if (NoObjectGeneratedError.isInstance(error)) {
-    console.log('NoObjectGeneratedError');
-    console.log('Cause:', error.cause);
-    console.log('Text:', error.text);
-    console.log('Response:', error.response);
-    console.log('Usage:', error.usage);
-    console.log('Finish Reason:', error.finishReason);
+    console.log("NoObjectGeneratedError");
+    console.log("Cause:", error.cause);
+    console.log("Text:", error.text);
+    console.log("Response:", error.response);
+    console.log("Usage:", error.usage);
+    console.log("Finish Reason:", error.finishReason);
   }
 }
 ```
 
-# AI\_NoOutputGeneratedError
+# AI_NoOutputGeneratedError
 
-# AI\_NoOutputGeneratedError
+# AI_NoOutputGeneratedError
 
 This error is thrown when no LLM output was generated, e.g. because of errors.
 
@@ -608,16 +608,16 @@ This error is thrown when no LLM output was generated, e.g. because of errors.
 You can check if an error is an instance of `AI_NoOutputGeneratedError` using:
 
 ```typescript
-import { NoOutputGeneratedError } from 'ai';
+import { NoOutputGeneratedError } from "ai";
 
 if (NoOutputGeneratedError.isInstance(error)) {
   // Handle the error
 }
 ```
 
-# AI\_NoSpeechGeneratedError
+# AI_NoSpeechGeneratedError
 
-# AI\_NoSpeechGeneratedError
+# AI_NoSpeechGeneratedError
 
 This error occurs when no audio could be generated from the input.
 
@@ -630,16 +630,16 @@ This error occurs when no audio could be generated from the input.
 You can check if an error is an instance of `AI_NoSpeechGeneratedError` using:
 
 ```typescript
-import { NoSpeechGeneratedError } from 'ai';
+import { NoSpeechGeneratedError } from "ai";
 
 if (NoSpeechGeneratedError.isInstance(error)) {
   // Handle the error
 }
 ```
 
-# AI\_NoSuchModelError
+# AI_NoSuchModelError
 
-# AI\_NoSuchModelError
+# AI_NoSuchModelError
 
 This error occurs when a model ID is not found.
 
@@ -654,16 +654,16 @@ This error occurs when a model ID is not found.
 You can check if an error is an instance of `AI_NoSuchModelError` using:
 
 ```typescript
-import { NoSuchModelError } from 'ai';
+import { NoSuchModelError } from "ai";
 
 if (NoSuchModelError.isInstance(error)) {
   // Handle the error
 }
 ```
 
-# AI\_NoSuchProviderError
+# AI_NoSuchProviderError
 
-# AI\_NoSuchProviderError
+# AI_NoSuchProviderError
 
 This error occurs when a provider ID is not found.
 
@@ -680,16 +680,16 @@ This error occurs when a provider ID is not found.
 You can check if an error is an instance of `AI_NoSuchProviderError` using:
 
 ```typescript
-import { NoSuchProviderError } from 'ai';
+import { NoSuchProviderError } from "ai";
 
 if (NoSuchProviderError.isInstance(error)) {
   // Handle the error
 }
 ```
 
-# AI\_NoSuchToolError
+# AI_NoSuchToolError
 
-# AI\_NoSuchToolError
+# AI_NoSuchToolError
 
 This error occurs when a model tries to call an unavailable tool.
 
@@ -704,16 +704,16 @@ This error occurs when a model tries to call an unavailable tool.
 You can check if an error is an instance of `AI_NoSuchToolError` using:
 
 ```typescript
-import { NoSuchToolError } from 'ai';
+import { NoSuchToolError } from "ai";
 
 if (NoSuchToolError.isInstance(error)) {
   // Handle the error
 }
 ```
 
-# AI\_NoTranscriptGeneratedError
+# AI_NoTranscriptGeneratedError
 
-# AI\_NoTranscriptGeneratedError
+# AI_NoTranscriptGeneratedError
 
 This error occurs when no transcript could be generated from the input.
 
@@ -726,16 +726,16 @@ This error occurs when no transcript could be generated from the input.
 You can check if an error is an instance of `AI_NoTranscriptGeneratedError` using:
 
 ```typescript
-import { NoTranscriptGeneratedError } from 'ai';
+import { NoTranscriptGeneratedError } from "ai";
 
 if (NoTranscriptGeneratedError.isInstance(error)) {
   // Handle the error
 }
 ```
 
-# AI\_NoVideoGeneratedError
+# AI_NoVideoGeneratedError
 
-# AI\_NoVideoGeneratedError
+# AI_NoVideoGeneratedError
 
 This error occurs when the AI provider fails to generate a video.
 It can arise due to the following reasons:
@@ -757,22 +757,22 @@ You can check if an error is an instance of `AI_NoVideoGeneratedError` using:
 import {
   experimental_generateVideo as generateVideo,
   NoVideoGeneratedError,
-} from 'ai';
+} from "ai";
 
 try {
   await generateVideo({ model, prompt });
 } catch (error) {
   if (NoVideoGeneratedError.isInstance(error)) {
-    console.log('NoVideoGeneratedError');
-    console.log('Cause:', error.cause);
-    console.log('Responses:', error.responses);
+    console.log("NoVideoGeneratedError");
+    console.log("Cause:", error.cause);
+    console.log("Responses:", error.responses);
   }
 }
 ```
 
-# AI\_RetryError
+# AI_RetryError
 
-# AI\_RetryError
+# AI_RetryError
 
 This error occurs when a retry operation fails.
 
@@ -788,16 +788,16 @@ This error occurs when a retry operation fails.
 You can check if an error is an instance of `AI_RetryError` using:
 
 ```typescript
-import { RetryError } from 'ai';
+import { RetryError } from "ai";
 
 if (RetryError.isInstance(error)) {
   // Handle the error
 }
 ```
 
-# AI\_TooManyEmbeddingValuesForCallError
+# AI_TooManyEmbeddingValuesForCallError
 
-# AI\_TooManyEmbeddingValuesForCallError
+# AI_TooManyEmbeddingValuesForCallError
 
 This error occurs when too many values are provided in a single embedding call.
 
@@ -813,16 +813,16 @@ This error occurs when too many values are provided in a single embedding call.
 You can check if an error is an instance of `AI_TooManyEmbeddingValuesForCallError` using:
 
 ```typescript
-import { TooManyEmbeddingValuesForCallError } from 'ai';
+import { TooManyEmbeddingValuesForCallError } from "ai";
 
 if (TooManyEmbeddingValuesForCallError.isInstance(error)) {
   // Handle the error
 }
 ```
 
-# AI\_ToolCallNotFoundForApprovalError
+# AI_ToolCallNotFoundForApprovalError
 
-# AI\_ToolCallNotFoundForApprovalError
+# AI_ToolCallNotFoundForApprovalError
 
 This error occurs when a tool approval request references a tool call that was not found. This can happen when processing provider-emitted approval requests (e.g., MCP flows) where the referenced tool call ID does not exist.
 
@@ -836,7 +836,7 @@ This error occurs when a tool approval request references a tool call that was n
 You can check if an error is an instance of `AI_ToolCallNotFoundForApprovalError` using:
 
 ```typescript
-import { ToolCallNotFoundForApprovalError } from 'ai';
+import { ToolCallNotFoundForApprovalError } from "ai";
 
 if (ToolCallNotFoundForApprovalError.isInstance(error)) {
   // Handle the error
@@ -862,16 +862,16 @@ a `NoSuchToolError` or `InvalidToolInputError`.
 You can check if an error is an instance of `ToolCallRepairError` using:
 
 ```typescript
-import { ToolCallRepairError } from 'ai';
+import { ToolCallRepairError } from "ai";
 
 if (ToolCallRepairError.isInstance(error)) {
   // Handle the error
 }
 ```
 
-# AI\_TypeValidationError
+# AI_TypeValidationError
 
-# AI\_TypeValidationError
+# AI_TypeValidationError
 
 This error occurs when type validation fails.
 
@@ -885,11 +885,11 @@ This error occurs when type validation fails.
 You can check if an error is an instance of `AI_TypeValidationError` using:
 
 ```typescript
-import { TypeValidationError } from 'ai';
+import { TypeValidationError } from "ai";
 
 if (TypeValidationError.isInstance(error)) {
   // Handle the error
 }
 ```
 
-# AI\_UIMessageStreamError
+# AI_UIMessageStreamError

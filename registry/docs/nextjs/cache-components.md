@@ -36,17 +36,17 @@ Operations like synchronous I/O, module imports, and pure computations can compl
 Because all operations in the `Page` component below complete during rendering, its rendered output is automatically included in the static shell. When both the layout and page prerender successfully, the entire route is the static shell.
 
 ```tsx filename="page.tsx"
-import fs from 'node:fs'
+import fs from "node:fs";
 
 export default async function Page() {
   // Synchronous file system read
-  const content = fs.readFileSync('./config.json', 'utf-8')
+  const content = fs.readFileSync("./config.json", "utf-8");
 
   // Module imports
-  const constants = await import('./constants.json')
+  const constants = await import("./constants.json");
 
   // Pure computations
-  const processed = JSON.parse(content).items.map((item) => item.value * 2)
+  const processed = JSON.parse(content).items.map((item) => item.value * 2);
 
   return (
     <div>
@@ -57,7 +57,7 @@ export default async function Page() {
         ))}
       </ul>
     </div>
-  )
+  );
 }
 ```
 
@@ -80,23 +80,23 @@ In general, when you need the latest data from the source on each request (like 
 For example, the `DynamicContent` component below uses multiple operations that are not automatically prerendered.
 
 ```tsx filename="page.tsx"
-import { Suspense } from 'react'
-import fs from 'node:fs/promises'
+import { Suspense } from "react";
+import fs from "node:fs/promises";
 
 async function DynamicContent() {
   // Network request
-  const data = await fetch('https://api.example.com/data')
+  const data = await fetch("https://api.example.com/data");
 
   // Database query
-  const users = await db.query('SELECT * FROM users')
+  const users = await db.query("SELECT * FROM users");
 
   // Async file system operation
-  const file = await fs.readFile('..', 'utf-8')
+  const file = await fs.readFile("..", "utf-8");
 
   // Simulating external system delay
-  await new Promise((resolve) => setTimeout(resolve, 100))
+  await new Promise((resolve) => setTimeout(resolve, 100));
 
-  return <div>Not in the static shell</div>
+  return <div>Not in the static shell</div>;
 }
 ```
 
@@ -113,7 +113,7 @@ export default async function Page(props) {
         <div>Sibling excluded from static shell</div>
       </Suspense>
     </>
-  )
+  );
 }
 ```
 
@@ -135,16 +135,16 @@ A specific type of dynamic data that requires request context, only available wh
 - [`params`](/docs/app/api-reference/file-conventions/page#params-optional) - Dynamic route parameters (unless at least one sample is provided via [`generateStaticParams`](/docs/app/api-reference/functions/generate-static-params)). See [Dynamic Routes with Cache Components](/docs/app/api-reference/file-conventions/dynamic-routes#with-cache-components) for detailed patterns.
 
 ```tsx filename="page.tsx"
-import { cookies, headers } from 'next/headers'
-import { Suspense } from 'react'
+import { cookies, headers } from "next/headers";
+import { Suspense } from "react";
 
 async function RuntimeData({ searchParams }) {
   // Accessing request data
-  const cookieStore = await cookies()
-  const headerStore = await headers()
-  const search = await searchParams
+  const cookieStore = await cookies();
+  const headerStore = await headers();
+  const search = await searchParams;
 
-  return <div>Not in the static shell</div>
+  return <div>Not in the static shell</div>;
 }
 ```
 
@@ -161,7 +161,7 @@ export default async function Page(props) {
         <div>Sibling excluded from static shell</div>
       </Suspense>
     </>
-  )
+  );
 }
 ```
 
@@ -178,19 +178,19 @@ One approach for reading runtime data like cookies without blocking the static s
 Operations like `Math.random()`, `Date.now()`, or `crypto.randomUUID()` produce different values each time they execute. To ensure these run at request time (generating unique values per request), Cache Components requires you to explicitly signal this intent by calling these operations after dynamic or runtime data access.
 
 ```tsx
-import { connection } from 'next/server'
-import { Suspense } from 'react'
+import { connection } from "next/server";
+import { Suspense } from "react";
 
 async function UniqueContent() {
   // Explicitly defer to request time
-  await connection()
+  await connection();
 
   // Non-deterministic operations
-  const random = Math.random()
-  const now = Date.now()
-  const date = new Date()
-  const uuid = crypto.randomUUID()
-  const bytes = crypto.getRandomValues(new Uint8Array(16))
+  const random = Math.random();
+  const now = Date.now();
+  const date = new Date();
+  const uuid = crypto.randomUUID();
+  const bytes = crypto.getRandomValues(new Uint8Array(16));
 
   return (
     <div>
@@ -200,7 +200,7 @@ async function UniqueContent() {
       <p>{uuid}</p>
       <p>{bytes}</p>
     </div>
-  )
+  );
 }
 ```
 
@@ -213,7 +213,7 @@ export default async function Page() {
     <Suspense fallback={<p>Loading..</p>}>
       <UniqueContent />
     </Suspense>
-  )
+  );
 }
 ```
 
@@ -242,13 +242,13 @@ If this data doesn't depend on [runtime data](#runtime-data), you can use the `u
 When revalidation occurs, the static shell is updated with fresh content. See [Tagging and revalidating](#tagging-and-revalidating) for details on on-demand revalidation.
 
 ```tsx filename="app/page.tsx" highlight={1,4,5}
-import { cacheLife } from 'next/cache'
+import { cacheLife } from "next/cache";
 
 export default async function Page() {
-  'use cache'
-  cacheLife('hours')
+  "use cache";
+  cacheLife("hours");
 
-  const users = await db.query('SELECT * FROM users')
+  const users = await db.query("SELECT * FROM users");
 
   return (
     <ul>
@@ -256,24 +256,24 @@ export default async function Page() {
         <li key={user.id}>{user.name}</li>
       ))}
     </ul>
-  )
+  );
 }
 ```
 
 The `cacheLife` function accepts a cache profile name (like `'hours'`, `'days'`, or `'weeks'`) or a custom configuration object to control cache behavior:
 
 ```tsx filename="app/page.tsx" highlight={1,4-8}
-import { cacheLife } from 'next/cache'
+import { cacheLife } from "next/cache";
 
 export default async function Page() {
-  'use cache'
+  "use cache";
   cacheLife({
     stale: 3600, // 1 hour until considered stale
     revalidate: 7200, // 2 hours until revalidated
     expire: 86400, // 1 day until expired
-  })
+  });
 
-  const users = await db.query('SELECT * FROM users')
+  const users = await db.query("SELECT * FROM users");
 
   return (
     <ul>
@@ -281,7 +281,7 @@ export default async function Page() {
         <li key={user.id}>{user.name}</li>
       ))}
     </ul>
-  )
+  );
 }
 ```
 
@@ -292,8 +292,8 @@ See the [`cacheLife` API reference](/docs/app/api-reference/functions/cacheLife)
 Runtime data and [`use cache`](/docs/app/api-reference/directives/use-cache) cannot be used in the same scope. However, you can extract values from runtime APIs and pass them as arguments to cached functions.
 
 ```tsx filename="app/profile/page.tsx"
-import { cookies } from 'next/headers'
-import { Suspense } from 'react'
+import { cookies } from "next/headers";
+import { Suspense } from "react";
 
 export default function Page() {
   // Page itself creates the dynamic boundary
@@ -301,22 +301,22 @@ export default function Page() {
     <Suspense fallback={<div>Loading...</div>}>
       <ProfileContent />
     </Suspense>
-  )
+  );
 }
 
 // Component (not cached) reads runtime data
 async function ProfileContent() {
-  const session = (await cookies()).get('session')?.value
+  const session = (await cookies()).get("session")?.value;
 
-  return <CachedContent sessionId={session} />
+  return <CachedContent sessionId={session} />;
 }
 
 // Cached component/function receives data as props
 async function CachedContent({ sessionId }: { sessionId: string }) {
-  'use cache'
+  "use cache";
   // sessionId becomes part of cache key
-  const data = await fetchUserData(sessionId)
-  return <div>{data}</div>
+  const data = await fetchUserData(sessionId);
+  return <div>{data}</div>;
 }
 ```
 
@@ -328,15 +328,15 @@ Within a `use cache` scope, non-deterministic operations execute during prerende
 
 ```tsx
 export default async function Page() {
-  'use cache'
+  "use cache";
 
   // Execute once, then cached for all requests
-  const random = Math.random()
-  const random2 = Math.random()
-  const now = Date.now()
-  const date = new Date()
-  const uuid = crypto.randomUUID()
-  const bytes = crypto.getRandomValues(new Uint8Array(16))
+  const random = Math.random();
+  const random2 = Math.random();
+  const now = Date.now();
+  const date = new Date();
+  const uuid = crypto.randomUUID();
+  const bytes = crypto.getRandomValues(new Uint8Array(16));
 
   return (
     <div>
@@ -348,7 +348,7 @@ export default async function Page() {
       <p>{uuid}</p>
       <p>{bytes}</p>
     </div>
-  )
+  );
 }
 ```
 
@@ -363,19 +363,19 @@ Tag cached data with [`cacheTag`](/docs/app/api-reference/functions/cacheTag) an
 Use `updateTag` when you need to expire and immediately refresh cached data within the same request:
 
 ```tsx filename="app/actions.ts" highlight={1,4,5,13}
-import { cacheTag, updateTag } from 'next/cache'
+import { cacheTag, updateTag } from "next/cache";
 
 export async function getCart() {
-  'use cache'
-  cacheTag('cart')
+  "use cache";
+  cacheTag("cart");
   // fetch data
 }
 
 export async function updateCart(itemId: string) {
-  'use server'
+  "use server";
   // write data using the itemId
   // update the user cart
-  updateTag('cart')
+  updateTag("cart");
 }
 ```
 
@@ -384,18 +384,18 @@ export async function updateCart(itemId: string) {
 Use `revalidateTag` when you want to invalidate only properly tagged cached entries with stale-while-revalidate behavior. This is ideal for static content that can tolerate eventual consistency.
 
 ```tsx filename="app/actions.ts" highlight={1,4,5,12}
-import { cacheTag, revalidateTag } from 'next/cache'
+import { cacheTag, revalidateTag } from "next/cache";
 
 export async function getPosts() {
-  'use cache'
-  cacheTag('posts')
+  "use cache";
+  cacheTag("posts");
   // fetch data
 }
 
 export async function createPost(post: FormData) {
-  'use server'
+  "use server";
   // write data using the FormData
-  revalidateTag('posts', 'max')
+  revalidateTag("posts", "max");
 }
 ```
 
@@ -412,10 +412,10 @@ For content management systems with update mechanisms, consider using tags with 
 Here's a complete example showing static content, cached dynamic content, and streaming dynamic content working together on a single page:
 
 ```tsx filename="app/blog/page.tsx"
-import { Suspense } from 'react'
-import { cookies } from 'next/headers'
-import { cacheLife } from 'next/cache'
-import Link from 'next/link'
+import { Suspense } from "react";
+import { cookies } from "next/headers";
+import { cacheLife } from "next/cache";
+import Link from "next/link";
 
 export default function BlogPage() {
   return (
@@ -436,16 +436,16 @@ export default function BlogPage() {
         <UserPreferences />
       </Suspense>
     </>
-  )
+  );
 }
 
 // Everyone sees the same blog posts (revalidated every hour)
 async function BlogPosts() {
-  'use cache'
-  cacheLife('hours')
+  "use cache";
+  cacheLife("hours");
 
-  const res = await fetch('https://api.vercel.app/blog')
-  const posts = await res.json()
+  const res = await fetch("https://api.vercel.app/blog");
+  const posts = await res.json();
 
   return (
     <section>
@@ -461,20 +461,20 @@ async function BlogPosts() {
         ))}
       </ul>
     </section>
-  )
+  );
 }
 
 // Personalized per user based on their cookie
 async function UserPreferences() {
-  const theme = (await cookies()).get('theme')?.value || 'light'
-  const favoriteCategory = (await cookies()).get('category')?.value
+  const theme = (await cookies()).get("theme")?.value || "light";
+  const favoriteCategory = (await cookies()).get("category")?.value;
 
   return (
     <aside>
       <p>Your theme: {theme}</p>
       {favoriteCategory && <p>Favorite category: {favoriteCategory}</p>}
     </aside>
-  )
+  );
 }
 ```
 
@@ -493,22 +493,22 @@ If a page or layout is prerenderable but only metadata or viewport accesses unca
 You can enable Cache Components (which includes PPR) by adding the [`cacheComponents`](/docs/app/api-reference/config/next-config-js/cacheComponents) option to your Next config file:
 
 ```ts filename="next.config.ts" highlight={4} switcher
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   cacheComponents: true,
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 ```js filename="next.config.js" highlight={3} switcher
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   cacheComponents: true,
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 > **Good to know:** When Cache Components is enabled, `GET` Route Handlers follow the same prerendering model as pages. See [Route Handlers with Cache Components](/docs/app/getting-started/route-handlers#with-cache-components) for details.
@@ -537,17 +537,17 @@ When Cache Components is enabled, several route segment config options are no lo
 
 ```tsx filename="app/page.tsx"
 // Before - No longer needed
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic";
 
 export default function Page() {
-  return <div>...</div>
+  return <div>...</div>;
 }
 ```
 
 ```tsx filename="app/page.tsx"
 // After - Just remove it
 export default function Page() {
-  return <div>...</div>
+  return <div>...</div>;
 }
 ```
 
@@ -561,23 +561,23 @@ For runtime data access (`cookies()`, `headers()`, etc.), errors will direct you
 
 ```tsx filename="app/page.tsx"
 // Before
-export const dynamic = 'force-static'
+export const dynamic = "force-static";
 
 export default async function Page() {
-  const data = await fetch('https://api.example.com/data')
-  return <div>...</div>
+  const data = await fetch("https://api.example.com/data");
+  return <div>...</div>;
 }
 ```
 
 ```tsx filename="app/page.tsx"
-import { cacheLife } from 'next/cache'
+import { cacheLife } from "next/cache";
 
 // After - Use 'use cache' instead
 export default async function Page() {
-  'use cache'
-  cacheLife('max')
-  const data = await fetch('https://api.example.com/data')
-  return <div>...</div>
+  "use cache";
+  cacheLife("max");
+  const data = await fetch("https://api.example.com/data");
+  return <div>...</div>;
 }
 ```
 
@@ -587,21 +587,21 @@ export default async function Page() {
 
 ```tsx
 // Before
-export const revalidate = 3600 // 1 hour
+export const revalidate = 3600; // 1 hour
 
 export default async function Page() {
-  return <div>...</div>
+  return <div>...</div>;
 }
 ```
 
 ```tsx filename="app/page.tsx"
 // After - Use cacheLife
-import { cacheLife } from 'next/cache'
+import { cacheLife } from "next/cache";
 
 export default async function Page() {
-  'use cache'
-  cacheLife('hours')
-  return <div>...</div>
+  "use cache";
+  cacheLife("hours");
+  return <div>...</div>;
 }
 ```
 
@@ -611,15 +611,15 @@ export default async function Page() {
 
 ```tsx filename="app/page.tsx"
 // Before
-export const fetchCache = 'force-cache'
+export const fetchCache = "force-cache";
 ```
 
 ```tsx filename="app/page.tsx"
 // After - Use 'use cache' to control caching behavior
 export default async function Page() {
-  'use cache'
+  "use cache";
   // All fetches here are cached
-  return <div>...</div>
+  return <div>...</div>;
 }
 ```
 

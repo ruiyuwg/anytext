@@ -11,22 +11,22 @@ The DeepInfra provider is available via the `@ai-sdk/deepinfra` module. You can 
 You can import the default provider instance `deepinfra` from `@ai-sdk/deepinfra`:
 
 ```ts
-import { deepinfra } from '@ai-sdk/deepinfra';
+import { deepinfra } from "@ai-sdk/deepinfra";
 ```
 
 If you need a customized setup, you can import `createDeepInfra` from `@ai-sdk/deepinfra` and create a provider instance with your settings:
 
 ```ts
-import { createDeepInfra } from '@ai-sdk/deepinfra';
+import { createDeepInfra } from "@ai-sdk/deepinfra";
 
 const deepinfra = createDeepInfra({
-  apiKey: process.env.DEEPINFRA_API_KEY ?? '',
+  apiKey: process.env.DEEPINFRA_API_KEY ?? "",
 });
 ```
 
 You can use the following optional settings to customize the DeepInfra provider instance:
 
-- **baseURL** *string*
+- **baseURL** _string_
 
   Use a different URL prefix for API calls, e.g. to use proxy servers.
   The default prefix is `https://api.deepinfra.com/v1`.
@@ -34,16 +34,16 @@ You can use the following optional settings to customize the DeepInfra provider 
   Note: Language models and embeddings use OpenAI-compatible endpoints at `{baseURL}/openai`,
   while image models use `{baseURL}/inference`.
 
-- **apiKey** *string*
+- **apiKey** _string_
 
   API key that is being sent using the `Authorization` header. It defaults to
   the `DEEPINFRA_API_KEY` environment variable.
 
-- **headers** *Record\<string,string>*
+- **headers** _Record\<string,string>_
 
   Custom headers to include in the requests.
 
-- **fetch** *(input: RequestInfo, init?: RequestInit) => Promise\<Response>*
+- **fetch** _(input: RequestInfo, init?: RequestInit) => Promise\<Response>_
 
   Custom [fetch](https://developer.mozilla.org/en-US/docs/Web/API/fetch) implementation.
   Defaults to the global `fetch` function.
@@ -55,12 +55,12 @@ You can use the following optional settings to customize the DeepInfra provider 
 You can create language models using a provider instance. The first argument is the model ID, for example:
 
 ```ts
-import { deepinfra } from '@ai-sdk/deepinfra';
-import { generateText } from 'ai';
+import { deepinfra } from "@ai-sdk/deepinfra";
+import { generateText } from "ai";
 
 const { text } = await generateText({
-  model: deepinfra('meta-llama/Meta-Llama-3.1-70B-Instruct'),
-  prompt: 'Write a vegetarian lasagna recipe for 4 people.',
+  model: deepinfra("meta-llama/Meta-Llama-3.1-70B-Instruct"),
+  prompt: "Write a vegetarian lasagna recipe for 4 people.",
 });
 ```
 
@@ -68,32 +68,32 @@ DeepInfra language models can also be used in the `streamText` function (see [AI
 
 ## Model Capabilities
 
-| Model                                               | Image Input         | Object Generation   | Tool Usage          | Tool Streaming      |
-| --------------------------------------------------- | ------------------- | ------------------- | ------------------- | ------------------- |
-| `meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8` |  |  |  |  |
-| `meta-llama/Llama-4-Scout-17B-16E-Instruct`         |  |  |  |  |
-| `meta-llama/Llama-3.3-70B-Instruct-Turbo`           |  |  |  |  |
-| `meta-llama/Llama-3.3-70B-Instruct`                 |  |  |  |  |
-| `meta-llama/Meta-Llama-3.1-405B-Instruct`           |  |  |  |  |
-| `meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo`      |  |  |  |  |
-| `meta-llama/Meta-Llama-3.1-70B-Instruct`            |  |  |  |  |
-| `meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo`       |  |  |  |  |
-| `meta-llama/Meta-Llama-3.1-8B-Instruct`             |  |  |  |  |
-| `meta-llama/Llama-3.2-11B-Vision-Instruct`          |  |  |  |  |
-| `meta-llama/Llama-3.2-90B-Vision-Instruct`          |  |  |  |  |
-| `mistralai/Mixtral-8x7B-Instruct-v0.1`              |  |  |  |  |
-| `deepseek-ai/DeepSeek-V3`                           |  |  |  |  |
-| `deepseek-ai/DeepSeek-R1`                           |  |  |  |  |
-| `deepseek-ai/DeepSeek-R1-Distill-Llama-70B`         |  |  |  |  |
-| `deepseek-ai/DeepSeek-R1-Turbo`                     |  |  |  |  |
-| `nvidia/Llama-3.1-Nemotron-70B-Instruct`            |  |  |  |  |
-| `Qwen/Qwen2-7B-Instruct`                            |  |  |  |  |
-| `Qwen/Qwen2.5-72B-Instruct`                         |  |  |  |  |
-| `Qwen/Qwen2.5-Coder-32B-Instruct`                   |  |  |  |  |
-| `Qwen/QwQ-32B-Preview`                              |  |  |  |  |
-| `google/codegemma-7b-it`                            |  |  |  |  |
-| `google/gemma-2-9b-it`                              |  |  |  |  |
-| `microsoft/WizardLM-2-8x22B`                        |  |  |  |  |
+| Model                                               | Image Input | Object Generation | Tool Usage | Tool Streaming |
+| --------------------------------------------------- | ----------- | ----------------- | ---------- | -------------- |
+| `meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8` |             |                   |            |                |
+| `meta-llama/Llama-4-Scout-17B-16E-Instruct`         |             |                   |            |                |
+| `meta-llama/Llama-3.3-70B-Instruct-Turbo`           |             |                   |            |                |
+| `meta-llama/Llama-3.3-70B-Instruct`                 |             |                   |            |                |
+| `meta-llama/Meta-Llama-3.1-405B-Instruct`           |             |                   |            |                |
+| `meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo`      |             |                   |            |                |
+| `meta-llama/Meta-Llama-3.1-70B-Instruct`            |             |                   |            |                |
+| `meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo`       |             |                   |            |                |
+| `meta-llama/Meta-Llama-3.1-8B-Instruct`             |             |                   |            |                |
+| `meta-llama/Llama-3.2-11B-Vision-Instruct`          |             |                   |            |                |
+| `meta-llama/Llama-3.2-90B-Vision-Instruct`          |             |                   |            |                |
+| `mistralai/Mixtral-8x7B-Instruct-v0.1`              |             |                   |            |                |
+| `deepseek-ai/DeepSeek-V3`                           |             |                   |            |                |
+| `deepseek-ai/DeepSeek-R1`                           |             |                   |            |                |
+| `deepseek-ai/DeepSeek-R1-Distill-Llama-70B`         |             |                   |            |                |
+| `deepseek-ai/DeepSeek-R1-Turbo`                     |             |                   |            |                |
+| `nvidia/Llama-3.1-Nemotron-70B-Instruct`            |             |                   |            |                |
+| `Qwen/Qwen2-7B-Instruct`                            |             |                   |            |                |
+| `Qwen/Qwen2.5-72B-Instruct`                         |             |                   |            |                |
+| `Qwen/Qwen2.5-Coder-32B-Instruct`                   |             |                   |            |                |
+| `Qwen/QwQ-32B-Preview`                              |             |                   |            |                |
+| `google/codegemma-7b-it`                            |             |                   |            |                |
+| `google/gemma-2-9b-it`                              |             |                   |            |                |
+| `microsoft/WizardLM-2-8x22B`                        |             |                   |            |                |
 
 The table above lists popular models. Please see the [DeepInfra
 docs](https://deepinfra.com) for a full list of available models. You can also
@@ -105,13 +105,13 @@ You can create DeepInfra image models using the `.image()` factory method.
 For more on image generation with the AI SDK see [generateImage()](/docs/reference/ai-sdk-core/generate-image).
 
 ```ts
-import { deepinfra } from '@ai-sdk/deepinfra';
-import { generateImage } from 'ai';
+import { deepinfra } from "@ai-sdk/deepinfra";
+import { generateImage } from "ai";
 
 const { image } = await generateImage({
-  model: deepinfra.image('stabilityai/sd3.5'),
-  prompt: 'A futuristic cityscape at sunset',
-  aspectRatio: '16:9',
+  model: deepinfra.image("stabilityai/sd3.5"),
+  prompt: "A futuristic cityscape at sunset",
+  aspectRatio: "16:9",
 });
 ```
 
@@ -125,13 +125,13 @@ additional parameters.
 You can pass model-specific parameters using the `providerOptions.deepinfra` field:
 
 ```ts
-import { deepinfra } from '@ai-sdk/deepinfra';
-import { generateImage } from 'ai';
+import { deepinfra } from "@ai-sdk/deepinfra";
+import { generateImage } from "ai";
 
 const { image } = await generateImage({
-  model: deepinfra.image('stabilityai/sd3.5'),
-  prompt: 'A futuristic cityscape at sunset',
-  aspectRatio: '16:9',
+  model: deepinfra.image("stabilityai/sd3.5"),
+  prompt: "A futuristic cityscape at sunset",
+  aspectRatio: "16:9",
   providerOptions: {
     deepinfra: {
       num_inference_steps: 30, // Control the number of denoising steps (1-50)
@@ -149,15 +149,15 @@ DeepInfra supports image editing through models like `Qwen/Qwen-Image-Edit`. Pas
 Transform an existing image using text prompts:
 
 ```ts
-const imageBuffer = readFileSync('./input-image.png');
+const imageBuffer = readFileSync("./input-image.png");
 
 const { images } = await generateImage({
-  model: deepinfra.image('Qwen/Qwen-Image-Edit'),
+  model: deepinfra.image("Qwen/Qwen-Image-Edit"),
   prompt: {
-    text: 'Turn the cat into a golden retriever dog',
+    text: "Turn the cat into a golden retriever dog",
     images: [imageBuffer],
   },
-  size: '1024x1024',
+  size: "1024x1024",
 });
 ```
 
@@ -166,13 +166,13 @@ const { images } = await generateImage({
 Edit specific parts of an image using a mask. Transparent areas in the mask indicate where the image should be edited:
 
 ```ts
-const image = readFileSync('./input-image.png');
-const mask = readFileSync('./mask.png');
+const image = readFileSync("./input-image.png");
+const mask = readFileSync("./mask.png");
 
 const { images } = await generateImage({
-  model: deepinfra.image('Qwen/Qwen-Image-Edit'),
+  model: deepinfra.image("Qwen/Qwen-Image-Edit"),
   prompt: {
-    text: 'A sunlit indoor lounge area with a pool containing a flamingo',
+    text: "A sunlit indoor lounge area with a pool containing a flamingo",
     images: [image],
     mask: mask,
   },
@@ -184,13 +184,13 @@ const { images } = await generateImage({
 Combine multiple reference images into a single output:
 
 ```ts
-const cat = readFileSync('./cat.png');
-const dog = readFileSync('./dog.png');
+const cat = readFileSync("./cat.png");
+const dog = readFileSync("./dog.png");
 
 const { images } = await generateImage({
-  model: deepinfra.image('Qwen/Qwen-Image-Edit'),
+  model: deepinfra.image("Qwen/Qwen-Image-Edit"),
   prompt: {
-    text: 'Create a scene with both animals together, playing as friends',
+    text: "Create a scene with both animals together, playing as friends",
     images: [cat, dog],
   },
 });
@@ -231,12 +231,12 @@ You can create DeepInfra embedding models using the `.embeddingModel()` factory 
 For more on embedding models with the AI SDK see [embed()](/docs/reference/ai-sdk-core/embed).
 
 ```ts
-import { deepinfra } from '@ai-sdk/deepinfra';
-import { embed } from 'ai';
+import { deepinfra } from "@ai-sdk/deepinfra";
+import { embed } from "ai";
 
 const { embedding } = await embed({
-  model: deepinfra.embeddingModel('BAAI/bge-large-en-v1.5'),
-  value: 'sunny day at the beach',
+  model: deepinfra.embeddingModel("BAAI/bge-large-en-v1.5"),
+  value: "sunny day at the beach",
 });
 ```
 

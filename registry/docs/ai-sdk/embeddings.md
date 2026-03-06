@@ -10,13 +10,13 @@ or phrases or clustering text.
 You can use it with embeddings models, e.g. `openai.embeddingModel('text-embedding-3-large')` or `mistral.embeddingModel('mistral-embed')`.
 
 ```tsx
-import { embed } from 'ai';
-import { openai } from '@ai-sdk/openai';
+import { embed } from "ai";
+import { openai } from "@ai-sdk/openai";
 
 // 'embedding' is a single embedding object (number[])
 const { embedding } = await embed({
-  model: 'openai/text-embedding-3-small',
-  value: 'sunny day at the beach',
+  model: "openai/text-embedding-3-small",
+  value: "sunny day at the beach",
 });
 ```
 
@@ -30,17 +30,17 @@ Similar to `embed`, you can use it with embeddings models,
 e.g. `openai.embeddingModel('text-embedding-3-large')` or `mistral.embeddingModel('mistral-embed')`.
 
 ```tsx
-import { openai } from '@ai-sdk/openai';
-import { embedMany } from 'ai';
+import { openai } from "@ai-sdk/openai";
+import { embedMany } from "ai";
 
 // 'embeddings' is an array of embedding objects (number[][]).
 // It is sorted in the same order as the input values.
 const { embeddings } = await embedMany({
-  model: 'openai/text-embedding-3-small',
+  model: "openai/text-embedding-3-small",
   values: [
-    'sunny day at the beach',
-    'rainy afternoon in the city',
-    'snowy night in the mountains',
+    "sunny day at the beach",
+    "rainy afternoon in the city",
+    "snowy night in the mountains",
   ],
 });
 ```
@@ -52,12 +52,12 @@ This is useful to e.g. find similar words or phrases in a dataset.
 You can also rank and filter related items based on their similarity.
 
 ```ts highlight={"2,10"}
-import { openai } from '@ai-sdk/openai';
-import { cosineSimilarity, embedMany } from 'ai';
+import { openai } from "@ai-sdk/openai";
+import { cosineSimilarity, embedMany } from "ai";
 
 const { embeddings } = await embedMany({
-  model: 'openai/text-embedding-3-small',
-  values: ['sunny day at the beach', 'rainy afternoon in the city'],
+  model: "openai/text-embedding-3-small",
+  values: ["sunny day at the beach", "rainy afternoon in the city"],
 });
 
 console.log(
@@ -71,12 +71,12 @@ Many providers charge based on the number of tokens used to generate embeddings.
 Both `embed` and `embedMany` provide token usage information in the `usage` property of the result object:
 
 ```ts highlight={"4,9"}
-import { openai } from '@ai-sdk/openai';
-import { embed } from 'ai';
+import { openai } from "@ai-sdk/openai";
+import { embed } from "ai";
 
 const { embedding, usage } = await embed({
-  model: 'openai/text-embedding-3-small',
-  value: 'sunny day at the beach',
+  model: "openai/text-embedding-3-small",
+  value: "sunny day at the beach",
 });
 
 console.log(usage); // { tokens: 10 }
@@ -89,12 +89,12 @@ console.log(usage); // { tokens: 10 }
 Embedding model settings can be configured using `providerOptions` for provider-specific parameters:
 
 ```ts highlight={"5-9"}
-import { openai } from '@ai-sdk/openai';
-import { embed } from 'ai';
+import { openai } from "@ai-sdk/openai";
+import { embed } from "ai";
 
 const { embedding } = await embed({
-  model: 'openai/text-embedding-3-small',
-  value: 'sunny day at the beach',
+  model: "openai/text-embedding-3-small",
+  value: "sunny day at the beach",
   providerOptions: {
     openai: {
       dimensions: 512, // Reduce embedding dimensions
@@ -108,16 +108,16 @@ const { embedding } = await embed({
 The `embedMany` function now supports parallel processing with configurable `maxParallelCalls` to optimize performance:
 
 ```ts highlight={"4"}
-import { openai } from '@ai-sdk/openai';
-import { embedMany } from 'ai';
+import { openai } from "@ai-sdk/openai";
+import { embedMany } from "ai";
 
 const { embeddings, usage } = await embedMany({
   maxParallelCalls: 2, // Limit parallel requests
-  model: 'openai/text-embedding-3-small',
+  model: "openai/text-embedding-3-small",
   values: [
-    'sunny day at the beach',
-    'rainy afternoon in the city',
-    'snowy night in the mountains',
+    "sunny day at the beach",
+    "rainy afternoon in the city",
+    "snowy night in the mountains",
   ],
 });
 ```
@@ -129,12 +129,12 @@ that you can use to set the maximum number of retries for the embedding process.
 It defaults to `2` retries (3 attempts in total). You can set it to `0` to disable retries.
 
 ```ts highlight={"7"}
-import { openai } from '@ai-sdk/openai';
-import { embed } from 'ai';
+import { openai } from "@ai-sdk/openai";
+import { embed } from "ai";
 
 const { embedding } = await embed({
-  model: 'openai/text-embedding-3-small',
-  value: 'sunny day at the beach',
+  model: "openai/text-embedding-3-small",
+  value: "sunny day at the beach",
   maxRetries: 0, // Disable retries
 });
 ```
@@ -146,12 +146,12 @@ type [`AbortSignal`](https://developer.mozilla.org/en-US/docs/Web/API/AbortSigna
 that you can use to abort the embedding process or set a timeout.
 
 ```ts highlight={"7"}
-import { openai } from '@ai-sdk/openai';
-import { embed } from 'ai';
+import { openai } from "@ai-sdk/openai";
+import { embed } from "ai";
 
 const { embedding } = await embed({
-  model: 'openai/text-embedding-3-small',
-  value: 'sunny day at the beach',
+  model: "openai/text-embedding-3-small",
+  value: "sunny day at the beach",
   abortSignal: AbortSignal.timeout(1000), // Abort after 1 second
 });
 ```
@@ -162,13 +162,13 @@ Both `embed` and `embedMany` accept an optional `headers` parameter of type `Rec
 that you can use to add custom headers to the embedding request.
 
 ```ts highlight={"7"}
-import { openai } from '@ai-sdk/openai';
-import { embed } from 'ai';
+import { openai } from "@ai-sdk/openai";
+import { embed } from "ai";
 
 const { embedding } = await embed({
-  model: 'openai/text-embedding-3-small',
-  value: 'sunny day at the beach',
-  headers: { 'X-Custom-Header': 'custom-value' },
+  model: "openai/text-embedding-3-small",
+  value: "sunny day at the beach",
+  headers: { "X-Custom-Header": "custom-value" },
 });
 ```
 
@@ -177,12 +177,12 @@ const { embedding } = await embed({
 Both `embed` and `embedMany` return response information that includes the raw provider response:
 
 ```ts highlight={"4,9"}
-import { openai } from '@ai-sdk/openai';
-import { embed } from 'ai';
+import { openai } from "@ai-sdk/openai";
+import { embed } from "ai";
 
 const { embedding, response } = await embed({
-  model: 'openai/text-embedding-3-small',
-  value: 'sunny day at the beach',
+  model: "openai/text-embedding-3-small",
+  value: "sunny day at the beach",
 });
 
 console.log(response); // Raw provider response
@@ -201,16 +201,16 @@ import {
   embed,
   wrapEmbeddingModel,
   gateway,
-} from 'ai';
+} from "ai";
 
 const embeddingModelWithDefaults = wrapEmbeddingModel({
-  model: gateway.embeddingModel('google/gemini-embedding-001'),
+  model: gateway.embeddingModel("google/gemini-embedding-001"),
   middleware: defaultEmbeddingSettingsMiddleware({
     settings: {
       providerOptions: {
         google: {
           outputDimensionality: 256,
-          taskType: 'CLASSIFICATION',
+          taskType: "CLASSIFICATION",
         },
       },
     },

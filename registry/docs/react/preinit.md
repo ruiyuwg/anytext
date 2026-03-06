@@ -5,32 +5,31 @@
 `preinit` lets you eagerly fetch and evaluate a stylesheet or external script.
 
 ```js
-preinit("https://example.com/script.js", {as: "script"});
+preinit("https://example.com/script.js", { as: "script" });
 ```
 
-***
+---
 
-## Reference {/*reference*/}
+## Reference {/_reference_/}
 
-### `preinit(href, options)` {/*preinit*/}
+### `preinit(href, options)` {/_preinit_/}
 
 To preinit a script or stylesheet, call the `preinit` function from `react-dom`.
 
 ```js
-import { preinit } from 'react-dom';
+import { preinit } from "react-dom";
 
 function AppRoot() {
-  preinit("https://example.com/script.js", {as: "script"});
+  preinit("https://example.com/script.js", { as: "script" });
   // ...
 }
-
 ```
 
 [See more examples below.](#usage)
 
 The `preinit` function provides the browser with a hint that it should start downloading and executing the given resource, which can save time. Scripts that you `preinit` are executed when they finish downloading. Stylesheets that you preinit are inserted into the document, which causes them to go into effect right away.
 
-#### Parameters {/*parameters*/}
+#### Parameters {/_parameters_/}
 
 - `href`: a string. The URL of the resource you want to download and execute.
 - `options`: an object. It contains the following properties:
@@ -41,25 +40,25 @@ The `preinit` function provides the browser with a hint that it should start dow
   - `nonce`: a string. A cryptographic [nonce to allow the resource](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/nonce) when using a strict Content Security Policy.
   - `fetchPriority`: a string. Suggests a relative priority for fetching the resource. The possible values are `auto` (the default), `high`, and `low`.
 
-#### Returns {/*returns*/}
+#### Returns {/_returns_/}
 
 `preinit` returns nothing.
 
-#### Caveats {/*caveats*/}
+#### Caveats {/_caveats_/}
 
 - Multiple calls to `preinit` with the same `href` have the same effect as a single call.
 - In the browser, you can call `preinit` in any situation: while rendering a component, in an Effect, in an event handler, and so on.
 - In server-side rendering or when rendering Server Components, `preinit` only has an effect if you call it while rendering a component or in an async context originating from rendering a component. Any other calls will be ignored.
 
-***
+---
 
-## Usage {/*usage*/}
+## Usage {/_usage_/}
 
-### Preiniting when rendering {/*preiniting-when-rendering*/}
+### Preiniting when rendering {/_preiniting-when-rendering_/}
 
 Call `preinit` when rendering a component if you know that it or its children will use a specific resource, and you're OK with the resource being evaluated and thereby taking effect immediately upon being downloaded.
 
-#### Preiniting an external script {/*preiniting-an-external-script*/}
+#### Preiniting an external script {/_preiniting-an-external-script_/}
 
 ```js
 import { preinit } from 'react-dom';
@@ -72,7 +71,7 @@ function AppRoot() {
 
 If you want the browser to download the script but not to execute it right away, use [`preload`](/reference/react-dom/preload) instead. If you want to load an ESM module, use [`preinitModule`](/reference/react-dom/preinitModule).
 
-#### Preiniting a stylesheet {/*preiniting-a-stylesheet*/}
+#### Preiniting a stylesheet {/_preiniting-a-stylesheet_/}
 
 ```js
 import { preinit } from 'react-dom';
@@ -87,25 +86,23 @@ The `precedence` option, which is required, lets you control the order of styles
 
 If you want to download the stylesheet but not to insert it into the document right away, use [`preload`](/reference/react-dom/preload) instead.
 
-### Preiniting in an event handler {/*preiniting-in-an-event-handler*/}
+### Preiniting in an event handler {/_preiniting-in-an-event-handler_/}
 
 Call `preinit` in an event handler before transitioning to a page or state where external resources will be needed. This gets the process started earlier than if you call it during the rendering of the new page or state.
 
 ```js
-import { preinit } from 'react-dom';
+import { preinit } from "react-dom";
 
 function CallToAction() {
   const onClick = () => {
-    preinit("https://example.com/wizardStyles.css", {as: "style"});
+    preinit("https://example.com/wizardStyles.css", { as: "style" });
     startWizard();
-  }
-  return (
-    <button onClick={onClick}>Start Wizard</button>
-  );
+  };
+  return <button onClick={onClick}>Start Wizard</button>;
 }
 ```
 
-***
+---
 
 ## Sitemap
 

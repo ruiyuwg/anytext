@@ -1,6 +1,6 @@
 # Passing Props to a Component
 
-React components use *props* to communicate with each other. Every parent component can pass some information to its child components by giving them props. Props might remind you of HTML attributes, but you can pass any JavaScript value through them, including objects, arrays, and functions.
+React components use _props_ to communicate with each other. Every parent component can pass some information to its child components by giving them props. Props might remind you of HTML attributes, but you can pass any JavaScript value through them, including objects, arrays, and functions.
 
 - How to pass props to a component
 - How to read props from a component
@@ -8,7 +8,7 @@ React components use *props* to communicate with each other. Every parent compon
 - How to pass some JSX to a component
 - How props change over time
 
-## Familiar props {/*familiar-props*/}
+## Familiar props {/_familiar-props_/}
 
 Props are the information that you pass to a JSX tag. For example, `className`, `src`, `alt`, `width`, and `height` are some of the props you can pass to an `<img>`:
 
@@ -26,44 +26,42 @@ function Avatar() {
 }
 
 export default function Profile() {
-  return (
-    <Avatar />
-  );
+  return <Avatar />;
 }
 ```
 
 ```css
-body { min-height: 120px; }
-.avatar { margin: 20px; border-radius: 50%; }
+body {
+  min-height: 120px;
+}
+.avatar {
+  margin: 20px;
+  border-radius: 50%;
+}
 ```
 
-The props you can pass to an `<img>` tag are predefined (ReactDOM conforms to [the HTML standard](https://www.w3.org/TR/html52/semantics-embedded-content.html#the-img-element)). But you can pass any props to *your own* components, such as `<Avatar>`, to customize them. Here's how!
+The props you can pass to an `<img>` tag are predefined (ReactDOM conforms to [the HTML standard](https://www.w3.org/TR/html52/semantics-embedded-content.html#the-img-element)). But you can pass any props to _your own_ components, such as `<Avatar>`, to customize them. Here's how!
 
-## Passing props to a component {/*passing-props-to-a-component*/}
+## Passing props to a component {/_passing-props-to-a-component_/}
 
 In this code, the `Profile` component isn't passing any props to its child component, `Avatar`:
 
 ```js
 export default function Profile() {
-  return (
-    <Avatar />
-  );
+  return <Avatar />;
 }
 ```
 
 You can give `Avatar` some props in two steps.
 
-### Step 1: Pass props to the child component {/*step-1-pass-props-to-the-child-component*/}
+### Step 1: Pass props to the child component {/_step-1-pass-props-to-the-child-component_/}
 
 First, pass some props to `Avatar`. For example, let's pass two props: `person` (an object), and `size` (a number):
 
 ```js
 export default function Profile() {
   return (
-    <Avatar
-      person={{ name: 'Lin Lanying', imageId: '1bX5QH6' }}
-      size={100}
-    />
+    <Avatar person={{ name: "Lin Lanying", imageId: "1bX5QH6" }} size={100} />
   );
 }
 ```
@@ -72,7 +70,7 @@ If double curly braces after `person=` confuse you, recall [they're merely an ob
 
 Now you can read these props inside the `Avatar` component.
 
-### Step 2: Read props inside the child component {/*step-2-read-props-inside-the-child-component*/}
+### Step 2: Read props inside the child component {/_step-2-read-props-inside-the-child-component_/}
 
 You can read these props by listing their names `person, size` separated by the commas inside `({` and `})` directly after `function Avatar`. This lets you use them inside the `Avatar` code, like you would with a variable.
 
@@ -87,7 +85,7 @@ Add some logic to `Avatar` that uses the `person` and `size` props for rendering
 Now you can configure `Avatar` to render in many different ways with different props. Try tweaking the values!
 
 ```js src/App.js
-import { getImageUrl } from './utils.js';
+import { getImageUrl } from "./utils.js";
 
 function Avatar({ person, size }) {
   return (
@@ -106,23 +104,23 @@ export default function Profile() {
     <div>
       <Avatar
         size={100}
-        person={{ 
-          name: 'Katsuko Saruhashi', 
-          imageId: 'YfeOqp2'
+        person={{
+          name: "Katsuko Saruhashi",
+          imageId: "YfeOqp2",
         }}
       />
       <Avatar
         size={80}
         person={{
-          name: 'Aklilu Lemma', 
-          imageId: 'OKS67lh'
+          name: "Aklilu Lemma",
+          imageId: "OKS67lh",
         }}
       />
       <Avatar
         size={50}
-        person={{ 
-          name: 'Lin Lanying',
-          imageId: '1bX5QH6'
+        person={{
+          name: "Lin Lanying",
+          imageId: "1bX5QH6",
         }}
       />
     </div>
@@ -131,24 +129,24 @@ export default function Profile() {
 ```
 
 ```js src/utils.js
-export function getImageUrl(person, size = 's') {
-  return (
-    'https://i.imgur.com/' +
-    person.imageId +
-    size +
-    '.jpg'
-  );
+export function getImageUrl(person, size = "s") {
+  return "https://i.imgur.com/" + person.imageId + size + ".jpg";
 }
 ```
 
 ```css
-body { min-height: 120px; }
-.avatar { margin: 10px; border-radius: 50%; }
+body {
+  min-height: 120px;
+}
+.avatar {
+  margin: 10px;
+  border-radius: 50%;
+}
 ```
 
 Props let you think about parent and child components independently. For example, you can change the `person` or the `size` props inside `Profile` without having to think about how `Avatar` uses them. Similarly, you can change how the `Avatar` uses these props, without looking at the `Profile`.
 
-You can think of props like "knobs" that you can adjust. They serve the same role as arguments serve for functions—in fact, props *are* the only argument to your component! React component functions accept a single argument, a `props` object:
+You can think of props like "knobs" that you can adjust. They serve the same role as arguments serve for functions—in fact, props _are_ the only argument to your component! React component functions accept a single argument, a `props` object:
 
 ```js
 function Avatar(props) {
@@ -178,7 +176,7 @@ function Avatar(props) {
 }
 ```
 
-## Specifying a default value for a prop {/*specifying-a-default-value-for-a-prop*/}
+## Specifying a default value for a prop {/_specifying-a-default-value-for-a-prop_/}
 
 If you want to give a prop a default value to fall back on when no value is specified, you can do it with the destructuring by putting `=` and the default value right after the parameter:
 
@@ -192,7 +190,7 @@ Now, if `<Avatar person={...} />` is rendered with no `size` prop, the `size` wi
 
 The default value is only used if the `size` prop is missing or if you pass `size={undefined}`. But if you pass `size={null}` or `size={0}`, the default value will **not** be used.
 
-## Forwarding props with the JSX spread syntax {/*forwarding-props-with-the-jsx-spread-syntax*/}
+## Forwarding props with the JSX spread syntax {/_forwarding-props-with-the-jsx-spread-syntax_/}
 
 Sometimes, passing props gets very repetitive:
 
@@ -227,7 +225,7 @@ This forwards all of `Profile`'s props to the `Avatar` without listing each of t
 
 **Use spread syntax with restraint.** If you're using it in every other component, something is wrong. Often, it indicates that you should split your components and pass children as JSX. More on that next!
 
-## Passing JSX as children {/*passing-jsx-as-children*/}
+## Passing JSX as children {/_passing-jsx-as-children_/}
 
 It is common to nest built-in browser tags:
 
@@ -248,14 +246,10 @@ Sometimes you'll want to nest your own components the same way:
 When you nest content inside a JSX tag, the parent component will receive that content in a prop called `children`. For example, the `Card` component below will receive a `children` prop set to `<Avatar />` and render it in a wrapper div:
 
 ```js src/App.js
-import Avatar from './Avatar.js';
+import Avatar from "./Avatar.js";
 
 function Card({ children }) {
-  return (
-    <div className="card">
-      {children}
-    </div>
-  );
+  return <div className="card">{children}</div>;
 }
 
 export default function Profile() {
@@ -263,9 +257,9 @@ export default function Profile() {
     <Card>
       <Avatar
         size={100}
-        person={{ 
-          name: 'Katsuko Saruhashi',
-          imageId: 'YfeOqp2'
+        person={{
+          name: "Katsuko Saruhashi",
+          imageId: "YfeOqp2",
         }}
       />
     </Card>
@@ -274,7 +268,7 @@ export default function Profile() {
 ```
 
 ```js src/Avatar.js
-import { getImageUrl } from './utils.js';
+import { getImageUrl } from "./utils.js";
 
 export default function Avatar({ person, size }) {
   return (
@@ -290,13 +284,8 @@ export default function Avatar({ person, size }) {
 ```
 
 ```js src/utils.js
-export function getImageUrl(person, size = 's') {
-  return (
-    'https://i.imgur.com/' +
-    person.imageId +
-    size +
-    '.jpg'
-  );
+export function getImageUrl(person, size = "s") {
+  return "https://i.imgur.com/" + person.imageId + size + ".jpg";
 }
 ```
 
@@ -321,7 +310,7 @@ Try replacing the `<Avatar>` inside `<Card>` with some text to see how the `Card
 
 You can think of a component with a `children` prop as having a "hole" that can be "filled in" by its parent components with arbitrary JSX. You will often use the `children` prop for visual wrappers: panels, grids, etc.
 
-## How props change over time {/*how-props-change-over-time*/}
+## How props change over time {/_how-props-change-over-time_/}
 
 The `Clock` component below receives two props from its parent component: `color` and `time`. (The parent component's code is omitted because it uses [state](/learn/state-a-components-memory), which we won't dive into just yet.)
 
@@ -329,17 +318,13 @@ Try changing the color in the select box below:
 
 ```js src/Clock.js active
 export default function Clock({ color, time }) {
-  return (
-    <h1 style={{ color: color }}>
-      {time}
-    </h1>
-  );
+  return <h1 style={{ color: color }}>{time}</h1>;
 }
 ```
 
 ```js src/App.js hidden
-import { useState, useEffect } from 'react';
-import Clock from './Clock.js';
+import { useState, useEffect } from "react";
+import Clock from "./Clock.js";
 
 function useTime() {
   const [time, setTime] = useState(() => new Date());
@@ -354,12 +339,12 @@ function useTime() {
 
 export default function App() {
   const time = useTime();
-  const [color, setColor] = useState('lightcoral');
+  const [color, setColor] = useState("lightcoral");
   return (
     <div>
       <p>
-        Pick a color:{' '}
-        <select value={color} onChange={e => setColor(e.target.value)}>
+        Pick a color:{" "}
+        <select value={color} onChange={(e) => setColor(e.target.value)}>
           <option value="lightcoral">lightcoral</option>
           <option value="midnightblue">midnightblue</option>
           <option value="rebeccapurple">rebeccapurple</option>
@@ -373,7 +358,7 @@ export default function App() {
 
 This example illustrates that **a component may receive different props over time.** Props are not always static! Here, the `time` prop changes every second, and the `color` prop changes when you select another color. Props reflect a component's data at any point in time, rather than only in the beginning.
 
-However, props are [immutable](https://en.wikipedia.org/wiki/Immutable_object)—a term from computer science meaning "unchangeable". When a component needs to change its props (for example, in response to a user interaction or new data), it will have to "ask" its parent component to pass it *different props*—a new object! Its old props will then be cast aside, and eventually the JavaScript engine will reclaim the memory taken by them.
+However, props are [immutable](https://en.wikipedia.org/wiki/Immutable_object)—a term from computer science meaning "unchangeable". When a component needs to change its props (for example, in response to a user interaction or new data), it will have to "ask" its parent component to pass it _different props_—a new object! Its old props will then be cast aside, and eventually the JavaScript engine will reclaim the memory taken by them.
 
 **Don't try to "change props".** When you need to respond to the user input (like changing the selected color), you will need to "set state", which you can learn about in [State: A Component's Memory.](/learn/state-a-components-memory)
 
@@ -385,12 +370,12 @@ However, props are [immutable](https://en.wikipedia.org/wiki/Immutable_object)�
 - Props are read-only snapshots in time: every render receives a new version of props.
 - You can't change props. When you need interactivity, you'll need to set state.
 
-#### Extract a component {/*extract-a-component*/}
+#### Extract a component {/_extract-a-component_/}
 
 This `Gallery` component contains some very similar markup for two profiles. Extract a `Profile` component out of it to reduce the duplication. You'll need to choose what props to pass to it.
 
 ```js src/App.js
-import { getImageUrl } from './utils.js';
+import { getImageUrl } from "./utils.js";
 
 export default function Gallery() {
   return (
@@ -400,19 +385,20 @@ export default function Gallery() {
         <h2>Maria Skłodowska-Curie</h2>
         <img
           className="avatar"
-          src={getImageUrl('szV5sdG')}
+          src={getImageUrl("szV5sdG")}
           alt="Maria Skłodowska-Curie"
           width={70}
           height={70}
         />
         <ul>
           <li>
-            <b>Profession: </b> 
+            <b>Profession: </b>
             physicist and chemist
           </li>
           <li>
-            <b>Awards: 4 </b> 
-            (Nobel Prize in Physics, Nobel Prize in Chemistry, Davy Medal, Matteucci Medal)
+            <b>Awards: 4 </b>
+            (Nobel Prize in Physics, Nobel Prize in Chemistry, Davy Medal,
+            Matteucci Medal)
           </li>
           <li>
             <b>Discovered: </b>
@@ -424,23 +410,22 @@ export default function Gallery() {
         <h2>Katsuko Saruhashi</h2>
         <img
           className="avatar"
-          src={getImageUrl('YfeOqp2')}
+          src={getImageUrl("YfeOqp2")}
           alt="Katsuko Saruhashi"
           width={70}
           height={70}
         />
         <ul>
           <li>
-            <b>Profession: </b> 
+            <b>Profession: </b>
             geochemist
           </li>
           <li>
-            <b>Awards: 2 </b> 
+            <b>Awards: 2 </b>
             (Miyake Prize for geochemistry, Tanaka Prize)
           </li>
           <li>
-            <b>Discovered: </b>
-            a method for measuring carbon dioxide in seawater
+            <b>Discovered: </b>a method for measuring carbon dioxide in seawater
           </li>
         </ul>
       </section>
@@ -450,28 +435,36 @@ export default function Gallery() {
 ```
 
 ```js src/utils.js
-export function getImageUrl(imageId, size = 's') {
-  return (
-    'https://i.imgur.com/' +
-    imageId +
-    size +
-    '.jpg'
-  );
+export function getImageUrl(imageId, size = "s") {
+  return "https://i.imgur.com/" + imageId + size + ".jpg";
 }
 ```
 
 ```css
-.avatar { margin: 5px; border-radius: 50%; min-height: 70px; }
+.avatar {
+  margin: 5px;
+  border-radius: 50%;
+  min-height: 70px;
+}
 .profile {
   border: 1px solid #aaa;
   border-radius: 6px;
   margin-top: 20px;
   padding: 10px;
 }
-h1, h2 { margin: 5px; }
-h1 { margin-bottom: 10px; }
-ul { padding: 0px 10px 0px 20px; }
-li { margin: 5px; }
+h1,
+h2 {
+  margin: 5px;
+}
+h1 {
+  margin-bottom: 10px;
+}
+ul {
+  padding: 0px 10px 0px 20px;
+}
+li {
+  margin: 5px;
+}
 ```
 
 Start by extracting the markup for one of the scientists. Then find the pieces that don't match it in the second example, and make them configurable by props.
@@ -481,7 +474,7 @@ In this solution, the `Profile` component accepts multiple props: `imageId` (a s
 Note that the `imageSize` prop has a default value, which is why we don't pass it to the component.
 
 ```js src/App.js
-import { getImageUrl } from './utils.js';
+import { getImageUrl } from "./utils.js";
 
 function Profile({
   imageId,
@@ -489,7 +482,7 @@ function Profile({
   profession,
   awards,
   discovery,
-  imageSize = 70
+  imageSize = 70,
 }) {
   return (
     <section className="profile">
@@ -502,10 +495,11 @@ function Profile({
         height={imageSize}
       />
       <ul>
-        <li><b>Profession:</b> {profession}</li>
         <li>
-          <b>Awards: {awards.length} </b>
-          ({awards.join(', ')})
+          <b>Profession:</b> {profession}
+        </li>
+        <li>
+          <b>Awards: {awards.length} </b>({awards.join(", ")})
         </li>
         <li>
           <b>Discovered: </b>
@@ -526,21 +520,18 @@ export default function Gallery() {
         profession="physicist and chemist"
         discovery="polonium (chemical element)"
         awards={[
-          'Nobel Prize in Physics',
-          'Nobel Prize in Chemistry',
-          'Davy Medal',
-          'Matteucci Medal'
+          "Nobel Prize in Physics",
+          "Nobel Prize in Chemistry",
+          "Davy Medal",
+          "Matteucci Medal",
         ]}
       />
       <Profile
-        imageId='YfeOqp2'
-        name='Katsuko Saruhashi'
-        profession='geochemist'
+        imageId="YfeOqp2"
+        name="Katsuko Saruhashi"
+        profession="geochemist"
         discovery="a method for measuring carbon dioxide in seawater"
-        awards={[
-          'Miyake Prize for geochemistry',
-          'Tanaka Prize'
-        ]}
+        awards={["Miyake Prize for geochemistry", "Tanaka Prize"]}
       />
     </div>
   );
@@ -548,28 +539,36 @@ export default function Gallery() {
 ```
 
 ```js src/utils.js
-export function getImageUrl(imageId, size = 's') {
-  return (
-    'https://i.imgur.com/' +
-    imageId +
-    size +
-    '.jpg'
-  );
+export function getImageUrl(imageId, size = "s") {
+  return "https://i.imgur.com/" + imageId + size + ".jpg";
 }
 ```
 
 ```css
-.avatar { margin: 5px; border-radius: 50%; min-height: 70px; }
+.avatar {
+  margin: 5px;
+  border-radius: 50%;
+  min-height: 70px;
+}
 .profile {
   border: 1px solid #aaa;
   border-radius: 6px;
   margin-top: 20px;
   padding: 10px;
 }
-h1, h2 { margin: 5px; }
-h1 { margin-bottom: 10px; }
-ul { padding: 0px 10px 0px 20px; }
-li { margin: 5px; }
+h1,
+h2 {
+  margin: 5px;
+}
+h1 {
+  margin-bottom: 10px;
+}
+ul {
+  padding: 0px 10px 0px 20px;
+}
+li {
+  margin: 5px;
+}
 ```
 
 Note how you don't need a separate `awardCount` prop if `awards` is an array. Then you can use `awards.length` to count the number of awards. Remember that props can take any values, and that includes arrays too!
@@ -577,10 +576,10 @@ Note how you don't need a separate `awardCount` prop if `awards` is an array. Th
 Another solution, which is more similar to the earlier examples on this page, is to group all information about a person in a single object, and pass that object as one prop:
 
 ```js src/App.js
-import { getImageUrl } from './utils.js';
+import { getImageUrl } from "./utils.js";
 
 function Profile({ person, imageSize = 70 }) {
-  const imageSrc = getImageUrl(person)
+  const imageSrc = getImageUrl(person);
 
   return (
     <section className="profile">
@@ -597,8 +596,7 @@ function Profile({ person, imageSize = 70 }) {
           <b>Profession:</b> {person.profession}
         </li>
         <li>
-          <b>Awards: {person.awards.length} </b>
-          ({person.awards.join(', ')})
+          <b>Awards: {person.awards.length} </b>({person.awards.join(", ")})
         </li>
         <li>
           <b>Discovered: </b>
@@ -606,81 +604,90 @@ function Profile({ person, imageSize = 70 }) {
         </li>
       </ul>
     </section>
-  )
+  );
 }
 
 export default function Gallery() {
   return (
     <div>
       <h1>Notable Scientists</h1>
-      <Profile person={{
-        imageId: 'szV5sdG',
-        name: 'Maria Skłodowska-Curie',
-        profession: 'physicist and chemist',
-        discovery: 'polonium (chemical element)',
-        awards: [
-          'Nobel Prize in Physics',
-          'Nobel Prize in Chemistry',
-          'Davy Medal',
-          'Matteucci Medal'
-        ],
-      }} />
-      <Profile person={{
-        imageId: 'YfeOqp2',
-        name: 'Katsuko Saruhashi',
-        profession: 'geochemist',
-        discovery: 'a method for measuring carbon dioxide in seawater',
-        awards: [
-          'Miyake Prize for geochemistry',
-          'Tanaka Prize'
-        ],
-      }} />
+      <Profile
+        person={{
+          imageId: "szV5sdG",
+          name: "Maria Skłodowska-Curie",
+          profession: "physicist and chemist",
+          discovery: "polonium (chemical element)",
+          awards: [
+            "Nobel Prize in Physics",
+            "Nobel Prize in Chemistry",
+            "Davy Medal",
+            "Matteucci Medal",
+          ],
+        }}
+      />
+      <Profile
+        person={{
+          imageId: "YfeOqp2",
+          name: "Katsuko Saruhashi",
+          profession: "geochemist",
+          discovery: "a method for measuring carbon dioxide in seawater",
+          awards: ["Miyake Prize for geochemistry", "Tanaka Prize"],
+        }}
+      />
     </div>
   );
 }
 ```
 
 ```js src/utils.js
-export function getImageUrl(person, size = 's') {
-  return (
-    'https://i.imgur.com/' +
-    person.imageId +
-    size +
-    '.jpg'
-  );
+export function getImageUrl(person, size = "s") {
+  return "https://i.imgur.com/" + person.imageId + size + ".jpg";
 }
 ```
 
 ```css
-.avatar { margin: 5px; border-radius: 50%; min-height: 70px; }
+.avatar {
+  margin: 5px;
+  border-radius: 50%;
+  min-height: 70px;
+}
 .profile {
   border: 1px solid #aaa;
   border-radius: 6px;
   margin-top: 20px;
   padding: 10px;
 }
-h1, h2 { margin: 5px; }
-h1 { margin-bottom: 10px; }
-ul { padding: 0px 10px 0px 20px; }
-li { margin: 5px; }
+h1,
+h2 {
+  margin: 5px;
+}
+h1 {
+  margin-bottom: 10px;
+}
+ul {
+  padding: 0px 10px 0px 20px;
+}
+li {
+  margin: 5px;
+}
 ```
 
 Although the syntax looks slightly different because you're describing properties of a JavaScript object rather than a collection of JSX attributes, these examples are mostly equivalent, and you can pick either approach.
 
-#### Adjust the image size based on a prop {/*adjust-the-image-size-based-on-a-prop*/}
+#### Adjust the image size based on a prop {/_adjust-the-image-size-based-on-a-prop_/}
 
 In this example, `Avatar` receives a numeric `size` prop which determines the `<img>` width and height. The `size` prop is set to `40` in this example. However, if you open the image in a new tab, you'll notice that the image itself is larger (`160` pixels). The real image size is determined by which thumbnail size you're requesting.
 
 Change the `Avatar` component to request the closest image size based on the `size` prop. Specifically, if the `size` is less than `90`, pass `'s'` ("small") rather than `'b'` ("big") to the `getImageUrl` function. Verify that your changes work by rendering avatars with different values of the `size` prop and opening images in a new tab.
 
 ```js src/App.js
-import { getImageUrl } from './utils.js';
+import { getImageUrl } from "./utils.js";
 
 function Avatar({ person, size }) {
   return (
     <img
       className="avatar"
-      src={getImageUrl(person, 'b')}
+      src={getImageUrl(person, "b")}
       alt={person.name}
       width={size}
       height={size}
@@ -692,9 +699,9 @@ export default function Profile() {
   return (
     <Avatar
       size={40}
-      person={{ 
-        name: 'Gregorio Y. Zara', 
-        imageId: '7vQD0fP'
+      person={{
+        name: "Gregorio Y. Zara",
+        imageId: "7vQD0fP",
       }}
     />
   );
@@ -703,28 +710,26 @@ export default function Profile() {
 
 ```js src/utils.js
 export function getImageUrl(person, size) {
-  return (
-    'https://i.imgur.com/' +
-    person.imageId +
-    size +
-    '.jpg'
-  );
+  return "https://i.imgur.com/" + person.imageId + size + ".jpg";
 }
 ```
 
 ```css
-.avatar { margin: 20px; border-radius: 50%; }
+.avatar {
+  margin: 20px;
+  border-radius: 50%;
+}
 ```
 
 Here is how you could go about it:
 
 ```js src/App.js
-import { getImageUrl } from './utils.js';
+import { getImageUrl } from "./utils.js";
 
 function Avatar({ person, size }) {
-  let thumbnailSize = 's';
+  let thumbnailSize = "s";
   if (size > 90) {
-    thumbnailSize = 'b';
+    thumbnailSize = "b";
   }
   return (
     <img
@@ -742,16 +747,16 @@ export default function Profile() {
     <>
       <Avatar
         size={40}
-        person={{ 
-          name: 'Gregorio Y. Zara', 
-          imageId: '7vQD0fP'
+        person={{
+          name: "Gregorio Y. Zara",
+          imageId: "7vQD0fP",
         }}
       />
       <Avatar
         size={120}
-        person={{ 
-          name: 'Gregorio Y. Zara', 
-          imageId: '7vQD0fP'
+        person={{
+          name: "Gregorio Y. Zara",
+          imageId: "7vQD0fP",
         }}
       />
     </>
@@ -761,30 +766,28 @@ export default function Profile() {
 
 ```js src/utils.js
 export function getImageUrl(person, size) {
-  return (
-    'https://i.imgur.com/' +
-    person.imageId +
-    size +
-    '.jpg'
-  );
+  return "https://i.imgur.com/" + person.imageId + size + ".jpg";
 }
 ```
 
 ```css
-.avatar { margin: 20px; border-radius: 50%; }
+.avatar {
+  margin: 20px;
+  border-radius: 50%;
+}
 ```
 
 You could also show a sharper image for high DPI screens by taking [`window.devicePixelRatio`](https://developer.mozilla.org/en-US/docs/Web/API/Window/devicePixelRatio) into account:
 
 ```js src/App.js
-import { getImageUrl } from './utils.js';
+import { getImageUrl } from "./utils.js";
 
 const ratio = window.devicePixelRatio;
 
 function Avatar({ person, size }) {
-  let thumbnailSize = 's';
+  let thumbnailSize = "s";
   if (size * ratio > 90) {
-    thumbnailSize = 'b';
+    thumbnailSize = "b";
   }
   return (
     <img
@@ -802,23 +805,23 @@ export default function Profile() {
     <>
       <Avatar
         size={40}
-        person={{ 
-          name: 'Gregorio Y. Zara', 
-          imageId: '7vQD0fP'
+        person={{
+          name: "Gregorio Y. Zara",
+          imageId: "7vQD0fP",
         }}
       />
       <Avatar
         size={70}
-        person={{ 
-          name: 'Gregorio Y. Zara', 
-          imageId: '7vQD0fP'
+        person={{
+          name: "Gregorio Y. Zara",
+          imageId: "7vQD0fP",
         }}
       />
       <Avatar
         size={120}
-        person={{ 
-          name: 'Gregorio Y. Zara', 
-          imageId: '7vQD0fP'
+        person={{
+          name: "Gregorio Y. Zara",
+          imageId: "7vQD0fP",
         }}
       />
     </>
@@ -828,22 +831,20 @@ export default function Profile() {
 
 ```js src/utils.js
 export function getImageUrl(person, size) {
-  return (
-    'https://i.imgur.com/' +
-    person.imageId +
-    size +
-    '.jpg'
-  );
+  return "https://i.imgur.com/" + person.imageId + size + ".jpg";
 }
 ```
 
 ```css
-.avatar { margin: 20px; border-radius: 50%; }
+.avatar {
+  margin: 20px;
+  border-radius: 50%;
+}
 ```
 
 Props let you encapsulate logic like this inside the `Avatar` component (and change it later if needed) so that everyone can use the `<Avatar>` component without thinking about how the images are requested and resized.
 
-#### Passing JSX in a `children` prop {/*passing-jsx-in-a-children-prop*/}
+#### Passing JSX in a `children` prop {/_passing-jsx-in-a-children-prop_/}
 
 Extract a `Card` component from the markup below, and use the `children` prop to pass different JSX to it:
 
@@ -866,7 +867,10 @@ export default function Profile() {
       <div className="card">
         <div className="card-content">
           <h1>About</h1>
-          <p>Aklilu Lemma was a distinguished Ethiopian scientist who discovered a natural treatment to schistosomiasis.</p>
+          <p>
+            Aklilu Lemma was a distinguished Ethiopian scientist who discovered
+            a natural treatment to schistosomiasis.
+          </p>
         </div>
       </div>
     </div>
@@ -905,9 +909,7 @@ This is how you can use the `Card` component in both places:
 function Card({ children }) {
   return (
     <div className="card">
-      <div className="card-content">
-        {children}
-      </div>
+      <div className="card-content">{children}</div>
     </div>
   );
 }
@@ -927,7 +929,10 @@ export default function Profile() {
       </Card>
       <Card>
         <h1>About</h1>
-        <p>Aklilu Lemma was a distinguished Ethiopian scientist who discovered a natural treatment to schistosomiasis.</p>
+        <p>
+          Aklilu Lemma was a distinguished Ethiopian scientist who discovered a
+          natural treatment to schistosomiasis.
+        </p>
       </Card>
     </div>
   );
@@ -984,7 +989,10 @@ export default function Profile() {
         />
       </Card>
       <Card title="About">
-        <p>Aklilu Lemma was a distinguished Ethiopian scientist who discovered a natural treatment to schistosomiasis.</p>
+        <p>
+          Aklilu Lemma was a distinguished Ethiopian scientist who discovered a
+          natural treatment to schistosomiasis.
+        </p>
       </Card>
     </div>
   );
@@ -1014,7 +1022,7 @@ h1 {
 }
 ```
 
-***
+---
 
 ## Sitemap
 

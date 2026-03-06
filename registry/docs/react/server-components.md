@@ -4,13 +4,13 @@ Server Components are a new type of Component that renders ahead of time, before
 
 This separate environment is the "server" in React Server Components. Server Components can run once at build time on your CI server, or they can be run for each request using a web server.
 
-#### How do I build support for Server Components? {/*how-do-i-build-support-for-server-components*/}
+#### How do I build support for Server Components? {/_how-do-i-build-support-for-server-components_/}
 
 While React Server Components in React 19 are stable and will not break between minor versions, the underlying APIs used to implement a React Server Components bundler or framework do not follow semver and may break between minors in React 19.x.
 
 To support React Server Components as a bundler or framework, we recommend pinning to a specific React version, or using the Canary release. We will continue working with bundlers and frameworks to stabilize the APIs used to implement React Server Components in the future.
 
-### Server Components without a Server {/*server-components-without-a-server*/}
+### Server Components without a Server {/_server-components-without-a-server_/}
 
 Server components can run at build time to read from the filesystem or fetch static content, so a web server is not required. For example, you may want to read static data from a content management system.
 
@@ -18,11 +18,11 @@ Without Server Components, it's common to fetch static data on the client with a
 
 ```js
 // bundle.js
-import marked from 'marked'; // 35.9K (11.2K gzipped)
-import sanitizeHtml from 'sanitize-html'; // 206K (63.3K gzipped)
+import marked from "marked"; // 35.9K (11.2K gzipped)
+import sanitizeHtml from "sanitize-html"; // 206K (63.3K gzipped)
 
-function Page({page}) {
-  const [content, setContent] = useState('');
+function Page({ page }) {
+  const [content, setContent] = useState("");
   // NOTE: loads *after* first page render.
   useEffect(() => {
     fetch(`/api/content/${page}`).then((data) => {
@@ -39,7 +39,7 @@ function Page({page}) {
 app.get(`/api/content/:page`, async (req, res) => {
   const page = req.params.page;
   const content = await file.readFile(`${page}.md`);
-  res.send({content});
+  res.send({ content });
 });
 ```
 
@@ -48,10 +48,10 @@ This pattern means users need to download and parse an additional 75K (gzipped) 
 With Server Components, you can render these components once at build time:
 
 ```js
-import marked from 'marked'; // Not included in bundle
-import sanitizeHtml from 'sanitize-html'; // Not included in bundle
+import marked from "marked"; // Not included in bundle
+import sanitizeHtml from "sanitize-html"; // Not included in bundle
 
-async function Page({page}) {
+async function Page({ page }) {
   // NOTE: loads *during* render, when the app is built.
   const content = await file.readFile(`${page}.md`);
 
@@ -70,7 +70,7 @@ This means the content is visible during first page load, and the bundle does no
 You may notice that the Server Component above is an async function:
 
 ```js
-async function Page({page}) {
+async function Page({ page }) {
   //...
 }
 ```
@@ -79,7 +79,7 @@ Async Components are a new feature of Server Components that allow you to `await
 
 See [Async components with Server Components](#async-components-with-server-components) below.
 
-### Server Components with a Server {/*server-components-with-a-server*/}
+### Server Components with a Server {/_server-components-with-a-server_/}
 
 Server Components can also run on a web server during a request for a page, letting you access your data layer without having to build an API. They are rendered before your application is bundled, and can pass data and JSX as props to Client Components.
 
@@ -87,11 +87,11 @@ Without Server Components, it's common to fetch dynamic data on the client in an
 
 ```js
 // bundle.js
-function Note({id}) {
-  const [note, setNote] = useState('');
+function Note({ id }) {
+  const [note, setNote] = useState("");
   // NOTE: loads *after* first render.
   useEffect(() => {
-    fetch(`/api/notes/${id}`).then(data => {
+    fetch(`/api/notes/${id}`).then((data) => {
       setNote(data.note);
     });
   }, [id]);
@@ -104,12 +104,12 @@ function Note({id}) {
   );
 }
 
-function Author({id}) {
-  const [author, setAuthor] = useState('');
+function Author({ id }) {
+  const [author, setAuthor] = useState("");
   // NOTE: loads *after* Note renders.
   // Causing an expensive client-server waterfall.
   useEffect(() => {
-    fetch(`/api/authors/${id}`).then(data => {
+    fetch(`/api/authors/${id}`).then((data) => {
       setAuthor(data.author);
     });
   }, [id]);
@@ -120,25 +120,25 @@ function Author({id}) {
 
 ```js
 // api
-import db from './database';
+import db from "./database";
 
 app.get(`/api/notes/:id`, async (req, res) => {
   const note = await db.notes.get(id);
-  res.send({note});
+  res.send({ note });
 });
 
 app.get(`/api/authors/:id`, async (req, res) => {
   const author = await db.authors.get(id);
-  res.send({author});
+  res.send({ author });
 });
 ```
 
 With Server Components, you can read the data and render it in the component:
 
 ```js
-import db from './database';
+import db from "./database";
 
-async function Note({id}) {
+async function Note({ id }) {
   // NOTE: loads *during* render.
   const note = await db.notes.get(id);
   return (
@@ -149,7 +149,7 @@ async function Note({id}) {
   );
 }
 
-async function Author({id}) {
+async function Author({ id }) {
   // NOTE: loads *after* Note,
   // but is fast if data is co-located.
   const author = await db.authors.get(id);
@@ -168,11 +168,11 @@ The bundler then combines the data, rendered Server Components and dynamic Clien
 
 Server Components can be made dynamic by re-fetching them from a server, where they can access the data and render again. This new application architecture combines the simple “request/response” mental model of server-centric Multi-Page Apps with the seamless interactivity of client-centric Single-Page Apps, giving you the best of both worlds.
 
-### Adding interactivity to Server Components {/*adding-interactivity-to-server-components*/}
+### Adding interactivity to Server Components {/_adding-interactivity-to-server-components_/}
 
 Server Components are not sent to the browser, so they cannot use interactive APIs like `useState`. To add interactivity to Server Components, you can compose them with Client Component using the `"use client"` directive.
 
-#### There is no directive for Server Components. {/*there-is-no-directive-for-server-components*/}
+#### There is no directive for Server Components. {/_there-is-no-directive-for-server-components_/}
 
 A common misunderstanding is that Server Components are denoted by `"use server"`, but there is no directive for Server Components. The `"use server"` directive is used for Server Functions.
 
@@ -182,38 +182,34 @@ In the following example, the `Notes` Server Component imports an `Expandable` C
 
 ```js
 // Server Component
-import Expandable from './Expandable';
+import Expandable from "./Expandable";
 
 async function Notes() {
   const notes = await db.notes.getAll();
   return (
     <div>
-      {notes.map(note => (
+      {notes.map((note) => (
         <Expandable key={note.id}>
           <p note={note} />
         </Expandable>
       ))}
     </div>
-  )
+  );
 }
 ```
 
 ```js
 // Client Component
-"use client"
+"use client";
 
-export default function Expandable({children}) {
+export default function Expandable({ children }) {
   const [expanded, setExpanded] = useState(false);
   return (
     <div>
-      <button
-        onClick={() => setExpanded(!expanded)}
-      >
-        Toggle
-      </button>
+      <button onClick={() => setExpanded(!expanded)}>Toggle</button>
       {expanded && children}
     </div>
-  )
+  );
 }
 ```
 
@@ -237,7 +233,7 @@ This works by first rendering `Notes` as a Server Component, and then instructin
 </body>
 ```
 
-### Async components with Server Components {/*async-components-with-server-components*/}
+### Async components with Server Components {/_async-components-with-server-components_/}
 
 Server Components introduce a new way to write Components using async/await. When you `await` in an async component, React will suspend and wait for the promise to resolve before resuming rendering. This works across server/client boundaries with streaming support for Suspense.
 
@@ -245,9 +241,9 @@ You can even create a promise on the server, and await it on the client:
 
 ```js
 // Server Component
-import db from './database';
+import db from "./database";
 
-async function Page({id}) {
+async function Page({ id }) {
   // Will suspend the Server Component.
   const note = await db.notes.get(id);
 
@@ -267,13 +263,13 @@ async function Page({id}) {
 ```js
 // Client Component
 "use client";
-import {use} from 'react';
+import { use } from "react";
 
-function Comments({commentsPromise}) {
+function Comments({ commentsPromise }) {
   // NOTE: this will resume the promise from the server.
   // It will suspend until the data is available.
   const comments = use(commentsPromise);
-  return comments.map(comment => <p>{comment}</p>);
+  return comments.map((comment) => <p>{comment}</p>);
 }
 ```
 
@@ -281,7 +277,7 @@ The `note` content is important data for the page to render, so we `await` it on
 
 Since async components are not supported on the client, we await the promise with `use`.
 
-***
+---
 
 ## Sitemap
 

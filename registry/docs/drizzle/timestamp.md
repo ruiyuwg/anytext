@@ -9,11 +9,11 @@ For more info please refer to the official PostgreSQL **[docs.](https://www.post
 import { sql } from "drizzle-orm";
 import { timestamp, pgTable } from "drizzle-orm/pg-core";
 
-const table = pgTable('table', {
+const table = pgTable("table", {
   timestamp1: timestamp(),
-	timestamp2: timestamp({ precision: 6, withTimezone: true }),
-	timestamp3: timestamp().defaultNow(),
-	timestamp4: timestamp().default(sql`now()`),
+  timestamp2: timestamp({ precision: 6, withTimezone: true }),
+  timestamp3: timestamp().defaultNow(),
+  timestamp4: timestamp().default(sql`now()`),
 });
 ```
 
@@ -72,8 +72,8 @@ For more info please refer to the official PostgreSQL **[docs.](https://www.post
 ```typescript
 import { date, pgTable } from "drizzle-orm/pg-core";
 
-const table = pgTable('table', {
-	date: date(),
+const table = pgTable("table", {
+  date: date(),
 });
 ```
 
@@ -103,12 +103,11 @@ For more info please refer to the official PostgreSQL **[docs.](https://www.post
 ```typescript
 import { interval, pgTable } from "drizzle-orm/pg-core";
 
-const table = pgTable('table', {
-	interval1: interval(),
-  interval2: interval({ fields: 'day' }),
-  interval3: interval({ fields: 'month' , precision: 6 }),
+const table = pgTable("table", {
+  interval1: interval(),
+  interval2: interval({ fields: "day" }),
+  interval3: interval({ fields: "month", precision: 6 }),
 });
-
 ```
 
 ```sql
@@ -133,9 +132,9 @@ Type `point` has 2 modes for mappings from the database: `tuple` and `xy`.
 - `xy` will be accepted for insert and mapped on select to an object with x, y coordinates. So, the database Point(1,2) will be typed as `{ x: 1, y: 2 }` with drizzle
 
 ```typescript
-const items = pgTable('items', {
- point: point(),
- pointObj: point({ mode: 'xy' }),
+const items = pgTable("items", {
+  point: point(),
+  pointObj: point({ mode: "xy" }),
 });
 ```
 
@@ -160,9 +159,9 @@ Type `line` has 2 modes for mappings from the database: `tuple` and `abc`.
 - `abc` will be accepted for insert and mapped on select to an object with a, b, and c constants from the equation `Ax + By + C = 0`. So, the database Line{1,2,3} will be typed as `{ a: 1, b: 2, c: 3 }` with drizzle.
 
 ```typescript
-const items = pgTable('items', {
- line: line(),
- lineObj: line({ mode: 'abc' }),
+const items = pgTable("items", {
+  line: line(),
+  lineObj: line({ mode: "abc" }),
 });
 ```
 
@@ -185,9 +184,9 @@ For more info please refer to the official PostgreSQL **[docs.](https://www.post
 ```typescript
 import { pgEnum, pgTable } from "drizzle-orm/pg-core";
 
-export const moodEnum = pgEnum('mood', ['sad', 'ok', 'happy']);
+export const moodEnum = pgEnum("mood", ["sad", "ok", "happy"]);
 
-export const table = pgTable('table', {
+export const table = pgTable("table", {
   mood: moodEnum(),
 });
 ```
@@ -207,13 +206,13 @@ Every column builder has a `.$type()` method, which allows you to customize the 
 This is useful, for example, with unknown or branded types:
 
 ```ts
-type UserId = number & { __brand: 'user_id' };
+type UserId = number & { __brand: "user_id" };
 type Data = {
-	foo: string;
-	bar: number;
+  foo: string;
+  bar: number;
 };
 
-const users = pgTable('users', {
+const users = pgTable("users", {
   id: serial().$type<UserId>().primaryKey(),
   jsonField: json().$type<Data>(),
 });
@@ -244,7 +243,7 @@ PostgreSQL supports identity columns as a way to automatically generate unique i
 **Usage example**
 
 ```ts
-import { pgTable, integer, text } from 'drizzle-orm/pg-core' 
+import { pgTable, integer, text } from "drizzle-orm/pg-core";
 
 export const ingredients = pgTable("ingredients", {
   id: integer().primaryKey().generatedAlwaysAsIdentity({ startWith: 1000 }),

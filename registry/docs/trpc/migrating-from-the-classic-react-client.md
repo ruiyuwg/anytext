@@ -27,10 +27,10 @@ Query Keys are identical, which means you can use the new client and classic cli
 A classic query would look like this
 
 ```tsx
-import { trpc } from './trpc';
+import { trpc } from "./trpc";
 
 function Users() {
-  const greetingQuery = trpc.greeting.useQuery({ name: 'Jerry' });
+  const greetingQuery = trpc.greeting.useQuery({ name: "Jerry" });
 
   // greetingQuery.data === 'Hello Jerry'
 }
@@ -39,13 +39,13 @@ function Users() {
 and changes to
 
 ```tsx
-import { useQuery } from '@tanstack/react-query';
-import { useTRPC } from './trpc';
+import { useQuery } from "@tanstack/react-query";
+import { useTRPC } from "./trpc";
 
 function Users() {
   const trpc = useTRPC();
 
-  const greetingQuery = useQuery(trpc.greeting.queryOptions({ name: 'Jerry' }));
+  const greetingQuery = useQuery(trpc.greeting.queryOptions({ name: "Jerry" }));
 
   // greetingQuery.data === 'Hello Jerry'
 }
@@ -56,13 +56,13 @@ function Users() {
 A classic query would look like this
 
 ```tsx
-import { trpc } from './trpc';
+import { trpc } from "./trpc";
 
 function Users() {
   const utils = trpc.useUtils();
 
   async function invalidateGreeting() {
-    await utils.greeting.invalidate({ name: 'Jerry' });
+    await utils.greeting.invalidate({ name: "Jerry" });
   }
 }
 ```
@@ -70,8 +70,8 @@ function Users() {
 and changes to
 
 ```tsx
-import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { useTRPC } from './trpc';
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useTRPC } from "./trpc";
 
 function Users() {
   const trpc = useTRPC();
@@ -79,7 +79,7 @@ function Users() {
 
   async function invalidateGreeting() {
     await queryClient.invalidateQueries(
-      trpc.greeting.queryFilter({ name: 'Jerry' }),
+      trpc.greeting.queryFilter({ name: "Jerry" }),
     );
   }
 }
@@ -92,26 +92,26 @@ This is the same for any QueryClient usage, instead of using tRPC's `useUtils` y
 A classic mutation might look like this
 
 ```tsx
-import { trpc } from './trpc';
+import { trpc } from "./trpc";
 
 function Users() {
   const createUserMutation = trpc.createUser.useMutation();
 
-  createUserMutation.mutate({ name: 'Jerry' });
+  createUserMutation.mutate({ name: "Jerry" });
 }
 ```
 
 and changes to
 
 ```tsx
-import { useMutation } from '@tanstack/react-query';
-import { useTRPC } from './trpc';
+import { useMutation } from "@tanstack/react-query";
+import { useTRPC } from "./trpc";
 
 function Users() {
   const trpc = useTRPC();
 
   const createUserMutation = useMutation(trpc.createUser.mutationOptions());
 
-  createUserMutation.mutate({ name: 'Jerry' });
+  createUserMutation.mutate({ name: "Jerry" });
 }
 ```

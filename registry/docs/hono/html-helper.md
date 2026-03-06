@@ -5,22 +5,19 @@ The html Helper lets you write HTML in JavaScript template literal with a tag na
 ## Import
 
 ```ts
-import { Hono } from 'hono'
-import { html, raw } from 'hono/html'
+import { Hono } from "hono";
+import { html, raw } from "hono/html";
 ```
 
 ## `html`
 
 ```ts
-const app = new Hono()
+const app = new Hono();
 
-app.get('/:username', (c) => {
-  const { username } = c.req.param()
-  return c.html(
-    html`<!doctype html>
-      Hello! ${username}!`
-  )
-})
+app.get("/:username", (c) => {
+  const { username } = c.req.param();
+  return c.html(html`<!doctype html> Hello! ${username}!`);
+});
 ```
 
 ### Insert snippets into JSX
@@ -30,18 +27,18 @@ Insert the inline script into JSX:
 ```tsx
 app.get('/', (c) => {
   return c.html(
-    
-      
+
+
         Test Site
         {html`
-          
+
             // No need to use dangerouslySetInnerHTML.
             // If you write it here, it will not be escaped.
-          
+
         `}
-      
+
       Hello!
-    
+
   )
 })
 ```
@@ -53,11 +50,7 @@ Since `html` returns an HtmlEscapedString, it can act as a fully functional comp
 #### Use `html` to speed up the process instead of `memo`
 
 ```typescript
-const Footer = () => html`
-  
-    My Address...
-  
-`
+const Footer = () => html` My Address... `;
 ```
 
 ### Receives props and embeds values
@@ -72,14 +65,14 @@ interface SiteData {
 const Layout = (props: SiteData) => html`
 
 
-  
+
   ${props.title}
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
 
 
   ${props.children}
@@ -88,9 +81,9 @@ const Layout = (props: SiteData) => html`
 `
 
 const Content = (props: { siteData: SiteData; name: string }) => (
-  
+
     Hello {props.name}
-  
+
 )
 
 app.get('/', (c) => {
@@ -109,10 +102,10 @@ app.get('/', (c) => {
 ## `raw()`
 
 ```ts
-app.get('/', (c) => {
-  const name = 'John &quot;Johnny&quot; Smith'
-  return c.html(html`<p>I'm ${raw(name)}.</p>`)
-})
+app.get("/", (c) => {
+  const name = "John &quot;Johnny&quot; Smith";
+  return c.html(html`<p>I'm ${raw(name)}.</p>`);
+});
 ```
 
 ## Tips
@@ -131,48 +124,48 @@ The ConnInfo Helper helps you to get the connection information. For example, yo
 ::: code-group
 
 ```ts [Cloudflare Workers]
-import { Hono } from 'hono'
-import { getConnInfo } from 'hono/cloudflare-workers'
+import { Hono } from "hono";
+import { getConnInfo } from "hono/cloudflare-workers";
 ```
 
 ```ts [Deno]
-import { Hono } from 'hono'
-import { getConnInfo } from 'hono/deno'
+import { Hono } from "hono";
+import { getConnInfo } from "hono/deno";
 ```
 
 ```ts [Bun]
-import { Hono } from 'hono'
-import { getConnInfo } from 'hono/bun'
+import { Hono } from "hono";
+import { getConnInfo } from "hono/bun";
 ```
 
 ```ts [Vercel]
-import { Hono } from 'hono'
-import { getConnInfo } from 'hono/vercel'
+import { Hono } from "hono";
+import { getConnInfo } from "hono/vercel";
 ```
 
 ```ts [AWS Lambda]
-import { Hono } from 'hono'
-import { getConnInfo } from 'hono/aws-lambda'
+import { Hono } from "hono";
+import { getConnInfo } from "hono/aws-lambda";
 ```
 
 ```ts [Cloudflare Pages]
-import { Hono } from 'hono'
-import { getConnInfo } from 'hono/cloudflare-pages'
+import { Hono } from "hono";
+import { getConnInfo } from "hono/cloudflare-pages";
 ```
 
 ```ts [Netlify]
-import { Hono } from 'hono'
-import { getConnInfo } from 'hono/netlify'
+import { Hono } from "hono";
+import { getConnInfo } from "hono/netlify";
 ```
 
 ```ts [Lambda@Edge]
-import { Hono } from 'hono'
-import { getConnInfo } from 'hono/lambda-edge'
+import { Hono } from "hono";
+import { getConnInfo } from "hono/lambda-edge";
 ```
 
 ```ts [Node.js]
-import { Hono } from 'hono'
-import { getConnInfo } from '@hono/node-server/conninfo'
+import { Hono } from "hono";
+import { getConnInfo } from "@hono/node-server/conninfo";
 ```
 
 :::
@@ -180,12 +173,12 @@ import { getConnInfo } from '@hono/node-server/conninfo'
 ## Usage
 
 ```ts
-const app = new Hono()
+const app = new Hono();
 
-app.get('/', (c) => {
-  const info = getConnInfo(c) // info is `ConnInfo`
-  return c.text(`Your remote address is ${info.remote.address}`)
-})
+app.get("/", (c) => {
+  const info = getConnInfo(c); // info is `ConnInfo`
+  return c.text(`Your remote address is ${info.remote.address}`);
+});
 ```
 
 ## Type Definitions
@@ -193,34 +186,34 @@ app.get('/', (c) => {
 The type definitions of the values that you can get from `getConnInfo()` are the following:
 
 ```ts
-type AddressType = 'IPv6' | 'IPv4' | undefined
+type AddressType = "IPv6" | "IPv4" | undefined;
 
 type NetAddrInfo = {
   /**
    * Transport protocol type
    */
-  transport?: 'tcp' | 'udp'
+  transport?: "tcp" | "udp";
   /**
    * Transport port number
    */
-  port?: number
+  port?: number;
 
-  address?: string
-  addressType?: AddressType
+  address?: string;
+  addressType?: AddressType;
 } & (
   | {
       /**
        * Host name such as IP Addr
        */
-      address: string
+      address: string;
 
       /**
        * Host name type
        */
-      addressType: AddressType
+      addressType: AddressType;
     }
   | {}
-)
+);
 
 /**
  * HTTP Connection information
@@ -229,7 +222,7 @@ interface ConnInfo {
   /**
    * Remote information
    */
-  remote: NetAddrInfo
+  remote: NetAddrInfo;
 }
 ```
 
@@ -240,8 +233,8 @@ Accepts Helper helps to handle Accept headers in the Requests.
 ## Import
 
 ```ts
-import { Hono } from 'hono'
-import { accepts } from 'hono/accepts'
+import { Hono } from "hono";
+import { accepts } from "hono/accepts";
 ```
 
 ## `accepts()`
@@ -249,16 +242,16 @@ import { accepts } from 'hono/accepts'
 The `accepts()` function looks at the Accept header, such as Accept-Encoding and Accept-Language, and returns the proper value.
 
 ```ts
-import { accepts } from 'hono/accepts'
+import { accepts } from "hono/accepts";
 
-app.get('/', (c) => {
+app.get("/", (c) => {
   const accept = accepts(c, {
-    header: 'Accept-Language',
-    supports: ['en', 'ja', 'zh'],
-    default: 'en',
-  })
-  return c.json({ lang: accept })
-})
+    header: "Accept-Language",
+    supports: ["en", "ja", "zh"],
+    default: "en",
+  });
+  return c.json({ lang: accept });
+});
 ```
 
 ### `AcceptHeader` type
@@ -267,13 +260,13 @@ The definition of the `AcceptHeader` type is as follows.
 
 ```ts
 export type AcceptHeader =
-  | 'Accept'
-  | 'Accept-Charset'
-  | 'Accept-Encoding'
-  | 'Accept-Language'
-  | 'Accept-Patch'
-  | 'Accept-Post'
-  | 'Accept-Ranges'
+  | "Accept"
+  | "Accept-Charset"
+  | "Accept-Encoding"
+  | "Accept-Language"
+  | "Accept-Patch"
+  | "Accept-Post"
+  | "Accept-Ranges";
 ```
 
 ## Options

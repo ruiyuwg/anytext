@@ -43,7 +43,7 @@ email: p.text().unique(),
 </Section>
 </Callout>
 
-It is a great approach if you need to manage database schema outside of your TypeScript project or 
+It is a great approach if you need to manage database schema outside of your TypeScript project or
 you're using database, which is managed by somebody else.
 
 <br/>
@@ -136,7 +136,7 @@ export default defineConfig({
   dbCredentials: {
     // inmemory
     url: ":memory:"
-    
+
     // or database folder
     url: "./database/"
   },
@@ -184,11 +184,11 @@ npx drizzle-kit push --init
 `drizzle-kit push` will by default manage all tables in `public` schema.
 You can configure list of tables, schemas and extensions via `tablesFilters`, `schemaFilter` and `extensionFilters` options.
 
-|                     |                                                                                               |
-| :------------------ | :-------------------------------------------------------------------------------------------- |
-| `tablesFilter`      | `glob` based table names filter, e.g. `["users", "user_info"]` or `"user*"`. Default is `"*"` |
-| `schemaFilter`      | `glob` based schema names filter, e.g. `["public", "drizzle"]` or `"drizzle*"`. Default is `"*"`                     |
-| `extensionsFilters` | List of installed database extensions, e.g. `["postgis"]`. Default is `[]`                    | <br/>
+|                     |                                                                                                  |
+| :------------------ | :----------------------------------------------------------------------------------------------- | ----- |
+| `tablesFilter`      | `glob` based table names filter, e.g. `["users", "user_info"]` or `"user*"`. Default is `"*"`    |
+| `schemaFilter`      | `glob` based schema names filter, e.g. `["public", "drizzle"]` or `"drizzle*"`. Default is `"*"` |
+| `extensionsFilters` | List of installed database extensions, e.g. `["postgis"]`. Default is `[]`                       | <br/> |
 
 Let's configure drizzle-kit to only operate with **all tables** in **public** schema
 and let drizzle-kit know that there's a **postgis** extension installed,
@@ -232,7 +232,7 @@ yet you can provide all configuration options through CLI if necessary, e.g. in 
 | `host`              |            | Host                                                                      |
 | `port`              |            | Port                                                                      |
 | `database`          |            | Database name                                                             |
-| `config`            |            | Configuration file path, default is `drizzle.config.ts`                          |
+| `config`            |            | Configuration file path, default is `drizzle.config.ts`                   |
 | `introspect-casing` |            | Strategy for JS keys creation in columns, tables, etc. `preserve` `camel` |
 | `tablesFilter`      |            | Table name filter                                                         |
 | `schemaFilter`      |            | Schema name filter. Default: `["public"]`                                 |

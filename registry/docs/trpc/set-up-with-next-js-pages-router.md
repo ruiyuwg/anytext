@@ -68,7 +68,7 @@ Initialize your tRPC backend in `src/server/trpc.ts` using the `initTRPC` functi
 View sample backend
 
 ```ts title='server/trpc.ts'
-import { initTRPC } from '@trpc/server';
+import { initTRPC } from "@trpc/server";
 
 // Avoid exporting the entire t-object
 // since it's not very descriptive.
@@ -82,8 +82,8 @@ export const procedure = t.procedure;
 ```
 
 ```ts title='server/routers/_app.ts'
-import { z } from 'zod';
-import { procedure, router } from '../trpc';
+import { z } from "zod";
+import { procedure, router } from "../trpc";
 
 export const appRouter = router({
   hello: procedure
@@ -104,8 +104,8 @@ export type AppRouter = typeof appRouter;
 ```
 
 ```ts title='pages/api/trpc/[trpc].ts'
-import * as trpcNext from '@trpc/server/adapters/next';
-import { appRouter } from '../../../server/routers/_app';
+import * as trpcNext from "@trpc/server/adapters/next";
+import { appRouter } from "../../../server/routers/_app";
 
 // export API handler
 // @link https://trpc.io/docs/v11/server/adapters
@@ -122,14 +122,14 @@ The backend above is using the [recommended file structure](#recommended-file-st
 use the `createTRPCNext` function to create a set of strongly-typed hooks from your API's type signature.
 
 ```tsx title='utils/trpc.ts'
-import { httpBatchLink } from '@trpc/client';
-import { createTRPCNext } from '@trpc/next';
-import type { AppRouter } from '../server/routers/_app';
+import { httpBatchLink } from "@trpc/client";
+import { createTRPCNext } from "@trpc/next";
+import type { AppRouter } from "../server/routers/_app";
 
 function getBaseUrl() {
-  if (typeof window !== 'undefined')
+  if (typeof window !== "undefined")
     // browser should use relative path
-    return '';
+    return "";
 
   if (process.env.VERCEL_URL)
     // reference for vercel.com
@@ -178,8 +178,8 @@ export const trpc = createTRPCNext<AppRouter>({
 Wrap your root app page in the `trpc.withTRPC` HOC, similar to this:
 
 ```tsx title='pages/_app.tsx'
-import type { AppType } from 'next/app';
-import { trpc } from '../utils/trpc';
+import type { AppType } from "next/app";
+import { trpc } from "../utils/trpc";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return <Component {...pageProps} />;
@@ -195,10 +195,10 @@ You're all set!
 You can now use the React hooks you have just created to invoke your API. For more detail see the [React Query Integration](../react/setup.mdx)
 
 ```tsx title='pages/index.tsx'
-import { trpc } from '../utils/trpc';
+import { trpc } from "../utils/trpc";
 
 export default function IndexPage() {
-  const hello = trpc.hello.useQuery({ text: 'client' });
+  const hello = trpc.hello.useQuery({ text: "client" });
   if (!hello.data) {
     return <div>Loading...</div>;
   }
@@ -240,8 +240,8 @@ Ability to set request headers and HTTP status when server-side rendering.
 #### Example
 
 ```tsx title='utils/trpc.ts'
-import { createTRPCNext } from '@trpc/next';
-import type { AppRouter } from '../pages/api/trpc/[trpc]';
+import { createTRPCNext } from "@trpc/next";
+import type { AppRouter } from "../pages/api/trpc/[trpc]";
 
 export const trpc = createTRPCNext<AppRouter>({
   config(config) {

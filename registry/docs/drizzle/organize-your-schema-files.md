@@ -14,7 +14,7 @@ This approach works well if you don't have too many table models defined, or if 
 Example:
 
 ```plaintext
-📦 
+📦
  └ 📂 src
     └ 📂 db
        └ 📜 schema.ts
@@ -28,9 +28,9 @@ about the `drizzle.config.ts` file and migrations with Drizzle, please check: [l
 import { defineConfig } from "drizzle-kit";
 
 export default defineConfig({
-  dialect: 'postgresql', // 'mysql' | 'sqlite' | 'turso'
-  schema: './src/db/schema.ts'
-})
+  dialect: "postgresql", // 'mysql' | 'sqlite' | 'turso'
+  schema: "./src/db/schema.ts",
+});
 ```
 
 #### Schema in multiple files
@@ -42,7 +42,7 @@ them and use them in migrations.
 One use case would be to separate each table into its own file.
 
 ```plaintext
-📦 
+📦
  └ 📂 src
     └ 📂 db
        └ 📂 schema
@@ -62,15 +62,15 @@ about the `drizzle.config.ts` file and migrations with Drizzle, please check: [l
 import { defineConfig } from "drizzle-kit";
 
 export default defineConfig({
-  dialect: 'postgresql', // 'mysql' | 'sqlite' | 'turso'
-  schema: './src/db/schema'
-})
+  dialect: "postgresql", // 'mysql' | 'sqlite' | 'turso'
+  schema: "./src/db/schema",
+});
 ```
 
 You can also group them in any way you like, such as creating groups for user-related tables, messaging-related tables, product-related tables, etc.
 
 ```plaintext
-📦 
+📦
  └ 📂 src
     └ 📂 db
        └ 📂 schema

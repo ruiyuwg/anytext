@@ -41,10 +41,10 @@ export type AppRouter = typeof appRouter;
 Now in our component, when we navigate the object `createTRPCQueryUtils` gives us and reach the `post.all` query, we'll get access to our query helpers!
 
 ```tsx title="MyPage.tsx"
-import { QueryClient } from '@tanstack/react-query';
-import { createTRPCQueryUtils, createTRPCReact } from '@trpc/react-query';
-import { useLoaderData } from 'react-router-dom';
-import type { AppRouter } from './server';
+import { QueryClient } from "@tanstack/react-query";
+import { createTRPCQueryUtils, createTRPCReact } from "@trpc/react-query";
+import { useLoaderData } from "react-router-dom";
+import type { AppRouter } from "./server";
 
 const trpc = createTRPCReact<AppRouter>();
 const trpcClient = trpc.createClient({ links: [] });
@@ -136,9 +136,9 @@ type QueryType = "query" | "infinite" | "any";
 The query type `any` will match all queries in the cache only if the `react query` method where it's used uses fuzzy matching. See [TanStack/query#5111 (comment)](https://github.com/TanStack/query/issues/5111#issuecomment-1464864361) for more context.
 
 ```tsx
-import { useIsFetching, useQueryClient } from '@tanstack/react-query';
-import { getQueryKey } from '@trpc/react-query';
-import { trpc } from '~/utils/trpc';
+import { useIsFetching, useQueryClient } from "@tanstack/react-query";
+import { getQueryKey } from "@trpc/react-query";
+import { trpc } from "~/utils/trpc";
 
 function MyComponent() {
   const queryClient = useQueryClient();
@@ -146,7 +146,7 @@ function MyComponent() {
   const posts = trpc.post.list.useQuery();
 
   // See if a query is fetching
-  const postListKey = getQueryKey(trpc.post.list, undefined, 'query');
+  const postListKey = getQueryKey(trpc.post.list, undefined, "query");
   const isFetching = useIsFetching(postListKey);
 
   // Set some query defaults for an entire router

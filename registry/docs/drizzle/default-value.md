@@ -12,11 +12,11 @@ a string constant, a blob constant, a signed-number, or any constant expression 
 import { sql } from "drizzle-orm";
 import { integer, pgTable, uuid } from "drizzle-orm/pg-core";
 
-const table = pgTable('table', {
-	integer1: integer().default(42),
-	integer2: integer().default(sql`'42'::integer`),
-	uuid1: uuid().defaultRandom(),
-	uuid2: uuid().default(sql`gen_random_uuid()`),
+const table = pgTable("table", {
+  integer1: integer().default(42),
+  integer2: integer().default(sql`'42'::integer`),
+  uuid1: uuid().defaultRandom(),
+  uuid2: uuid().default(sql`gen_random_uuid()`),
 });
 ```
 
@@ -40,10 +40,10 @@ Note: This value does not affect the `drizzle-kit` behavior, it is only used at 
 
 ```ts
 import { text, pgTable } from "drizzle-orm/pg-core";
-import { createId } from '@paralleldrive/cuid2';
+import { createId } from "@paralleldrive/cuid2";
 
-const table = pgTable('table', {
-	id: text().$defaultFn(() => createId()),
+const table = pgTable("table", {
+  id: text().$defaultFn(() => createId()),
 });
 ```
 
@@ -62,10 +62,16 @@ Note: This value does not affect the `drizzle-kit` behavior, it is only used at 
 ```ts
 import { integer, timestamp, text, pgTable } from "drizzle-orm/pg-core";
 
-const table = pgTable('table', {
-	updateCounter: integer().default(sql`1`).$onUpdateFn((): SQL => sql`${table.update_counter} + 1`),
-	updatedAt: timestamp({ mode: 'date', precision: 3 }).$onUpdate(() => new Date()),
-    	alwaysNull: text().$type<string | null>().$onUpdate(() => null),
+const table = pgTable("table", {
+  updateCounter: integer()
+    .default(sql`1`)
+    .$onUpdateFn((): SQL => sql`${table.update_counter} + 1`),
+  updatedAt: timestamp({ mode: "date", precision: 3 }).$onUpdate(
+    () => new Date(),
+  ),
+  alwaysNull: text()
+    .$type<string | null>()
+    .$onUpdate(() => null),
 });
 ```
 
@@ -76,8 +82,8 @@ const table = pgTable('table', {
 ```typescript
 import { integer, pgTable } from "drizzle-orm/pg-core";
 
-const table = pgTable('table', {
-	integer: integer().notNull(),
+const table = pgTable("table", {
+  integer: integer().notNull(),
 });
 ```
 
@@ -95,8 +101,8 @@ This requires that the values be both unique and not null.
 ```typescript
 import { serial, pgTable } from "drizzle-orm/pg-core";
 
-const table = pgTable('table', {
-	id: serial().primaryKey(),
+const table = pgTable("table", {
+  id: serial().primaryKey(),
 });
 ```
 
@@ -132,10 +138,9 @@ Signed 4-byte integer
 ```typescript
 import { int, mssqlTable } from "drizzle-orm/mssql-core";
 
-export const table = mssqlTable('table', {
-	int: int()
+export const table = mssqlTable("table", {
+  int: int(),
 });
-
 ```
 
 ```sql
@@ -148,10 +153,9 @@ CREATE TABLE [table] (
 import { sql } from "drizzle-orm";
 import { int, mssqlTable } from "drizzle-orm/mssql-core";
 
-export const table = pgTable('table', {
-	int1: int().default(10),
+export const table = pgTable("table", {
+  int1: int().default(10),
 });
-
 ```
 
 ```sql
@@ -169,8 +173,8 @@ Small-range signed 2-byte integer
 ```typescript
 import { smallint, mssqlTable } from "drizzle-orm/mssql-core";
 
-export const table = mssqlTable('table', {
-	smallint: smallint()
+export const table = mssqlTable("table", {
+  smallint: smallint(),
 });
 ```
 
@@ -184,8 +188,8 @@ CREATE TABLE [table] (
 import { sql } from "drizzle-orm";
 import { smallint, mssqlTable } from "drizzle-orm/mssql-core";
 
-export const table = mssqlTable('table', {
-	smallint1: smallint().default(10),
+export const table = mssqlTable("table", {
+  smallint1: smallint().default(10),
 });
 ```
 
@@ -204,8 +208,8 @@ Small-range signed 1-byte integer
 ```typescript
 import { tinyint, mssqlTable } from "drizzle-orm/mssql-core";
 
-export const table = mssqlTable('table', {
-	tinyint: tinyint()
+export const table = mssqlTable("table", {
+  tinyint: tinyint(),
 });
 ```
 
@@ -219,8 +223,8 @@ CREATE TABLE [table] (
 import { sql } from "drizzle-orm";
 import { tinyint, mssqlTable } from "drizzle-orm/mssql-core";
 
-export const table = mssqlTable('table', {
-	tinyint1: tinyint().default(10),
+export const table = mssqlTable("table", {
+  tinyint1: tinyint().default(10),
 });
 ```
 
@@ -241,18 +245,18 @@ If you're expecting values above 2^31 but below 2^53, you can utilise `mode: 'nu
 ```typescript
 import { bigint, mssqlTable } from "drizzle-orm/mssql-core";
 
-export const table = mssqlTable('table', {
-	bigint: bigint({ mode: 'number' })
+export const table = mssqlTable("table", {
+  bigint: bigint({ mode: "number" }),
 });
 
 // will be inferred as `number`
-bigint: bigint({ mode: 'number' })
+bigint: bigint({ mode: "number" });
 
 // will be inferred as `bigint`
-bigint: bigint({ mode: 'bigint' })
+bigint: bigint({ mode: "bigint" });
 
 // will be inferred as `string`
-bigint: bigint({ mode: 'string' })
+bigint: bigint({ mode: "string" });
 ```
 
 ```sql
@@ -265,8 +269,8 @@ CREATE TABLE [table] (
 import { sql } from "drizzle-orm";
 import { bigint, mssqlTable } from "drizzle-orm/mssql-core";
 
-export const table = mssqlTable('table', {
-	bigint1: bigint({ mode: 'number' }).default(10)
+export const table = mssqlTable("table", {
+  bigint1: bigint({ mode: "number" }).default(10),
 });
 ```
 
@@ -285,10 +289,9 @@ Drizzle will accept `true` or `false` as values instead of `1` and `0`
 ```typescript
 import { bit, mssqlTable } from "drizzle-orm/mssql-core";
 
-export const table = mssqlTable('table', {
-	bit: bit()
+export const table = mssqlTable("table", {
+  bit: bit(),
 });
-
 ```
 
 ```sql
@@ -310,12 +313,12 @@ You can define `{ enum: ["value1", "value2"] }` config to infer `insert` and `se
 ```typescript
 import { text, mssqlTable } from "drizzle-orm/mssql-core";
 
-export const table = mssqlTable('table', {
-  text: text()
+export const table = mssqlTable("table", {
+  text: text(),
 });
 
 // will be inferred as text: "value1" | "value2" | null
-text: text({ enum: ["value1", "value2"] })
+text: text({ enum: ["value1", "value2"] });
 ```
 
 ```sql
@@ -336,12 +339,12 @@ You can define `{ enum: ["value1", "value2"] }` config to infer `insert` and `se
 ```typescript
 import { text, mssqlTable } from "drizzle-orm/mssql-core";
 
-export const table = mssqlTable('table', {
-  ntext: ntext()
+export const table = mssqlTable("table", {
+  ntext: ntext(),
 });
 
 // will be inferred as text: "value1" | "value2" | null
-ntext: ntext({ enum: ["value1", "value2"] })
+ntext: ntext({ enum: ["value1", "value2"] });
 ```
 
 ```sql
@@ -484,9 +487,9 @@ Fixed-length binary data with a length of n bytes, where n is a value from 1 thr
 ```typescript
 import { binary, mssqlTable } from "drizzle-orm/mssql-core";
 
-const table = mssqlTable('table', {
-	binary: binary(),
-	binary1: binary({ length: 256 })
+const table = mssqlTable("table", {
+  binary: binary(),
+  binary1: binary({ length: 256 }),
 });
 ```
 
@@ -504,10 +507,10 @@ Variable-length binary data. n can be a value from 1 through 8,000. max indicate
 ```typescript
 import { varbinary, mssqlTable } from "drizzle-orm/mssql-core";
 
-const table = mssqlTable('table', {
-	varbinary: varbinary(),
-	varbinary1: varbinary({ length: 256 }),
-	varbinary2: varbinary({ length: 'max' })
+const table = mssqlTable("table", {
+  varbinary: varbinary(),
+  varbinary1: varbinary({ length: 256 }),
+  varbinary2: varbinary({ length: "max" }),
 });
 ```
 
@@ -530,12 +533,12 @@ For more info please refer to the official MSSQL **[docs.](https://learn.microso
 ```typescript
 import { numeric, mssqlTable } from "drizzle-orm/mssql-core";
 
-export const table = mssqlTable('table', {
+export const table = mssqlTable("table", {
   numeric1: numeric(),
   numeric2: numeric({ precision: 100 }),
-  numeric3: numeric({ precision: 100, scale: 20 })
-//   numericNum: numeric({ mode: 'number' }),
-//   numericBig: numeric({ mode: 'bigint' }),
+  numeric3: numeric({ precision: 100, scale: 20 }),
+  //   numericNum: numeric({ mode: 'number' }),
+  //   numericBig: numeric({ mode: 'bigint' }),
 });
 ```
 
@@ -559,11 +562,11 @@ For more info please refer to the official MSSQL **[docs.](https://learn.microso
 
 ```typescript
 import { sql } from "drizzle-orm";
-import { real, mssqlTable } from "drizzle-orm/mssql-core";  
+import { real, mssqlTable } from "drizzle-orm/mssql-core";
 
-const table = mssqlTable('table', {
-	real1: real(),
-	real2: real().default(10.10)
+const table = mssqlTable("table", {
+  real1: real(),
+  real2: real().default(10.1),
 });
 ```
 
@@ -584,9 +587,9 @@ For more info please refer to the official MSSQL **[docs.](https://learn.microso
 import { sql } from "drizzle-orm";
 import { float, mssqlTable } from "drizzle-orm/mssql-core";
 
-const table = mssqlTable('table', {
-	float1: float(),
-	float1: float({ precision: 16 })
+const table = mssqlTable("table", {
+  float1: float(),
+  float1: float({ precision: 16 }),
 });
 ```
 
@@ -608,11 +611,11 @@ For more info please refer to the official MSSQL **[docs.](https://learn.microso
 ```typescript
 import { time, mssqlTable } from "drizzle-orm/mssql-core";
 
-const table = mssqlTable('table', {
+const table = mssqlTable("table", {
   time1: time(),
-  time2: time({ mode: 'string' }),
+  time2: time({ mode: "string" }),
   time3: time({ precision: 6 }),
-  time4: time({ precision: 6, mode: 'date' })
+  time4: time({ precision: 6, mode: "date" }),
 });
 ```
 
@@ -636,8 +639,8 @@ For more info please refer to the official MSSQL **[docs.](https://learn.microso
 ```typescript
 import { date, mssqlTable } from "drizzle-orm/mssql-core";
 
-const table = mssqlTable('table', {
-	date: date(),
+const table = mssqlTable("table", {
+  date: date(),
 });
 ```
 
@@ -670,8 +673,8 @@ For more info please refer to the official MSSQL **[docs.](https://learn.microso
 ```typescript
 import { datetime, mssqlTable } from "drizzle-orm/mssql-core";
 
-const table = mssqlTable('table', {
-	datetime: datetime(),
+const table = mssqlTable("table", {
+  datetime: datetime(),
 });
 ```
 
@@ -702,8 +705,8 @@ For more info please refer to the official MSSQL **[docs.](https://learn.microso
 ```typescript
 import { datetime2, mssqlTable } from "drizzle-orm/mssql-core";
 
-const table = mssqlTable('table', {
-	datetime2: datetime2(),
+const table = mssqlTable("table", {
+  datetime2: datetime2(),
 });
 ```
 
@@ -734,8 +737,8 @@ For more info please refer to the official MSSQL **[docs.](https://learn.microso
 ```typescript
 import { datetimeoffset, mssqlTable } from "drizzle-orm/mssql-core";
 
-const table = mssqlTable('table', {
-	datetimeoffset: datetimeoffset(),
+const table = mssqlTable("table", {
+  datetimeoffset: datetimeoffset(),
 });
 ```
 
@@ -762,13 +765,13 @@ Every column builder has a `.$type()` method, which allows you to customize the 
 This is useful, for example, with unknown or branded types:
 
 ```ts
-type UserId = number & { __brand: 'user_id' };
+type UserId = number & { __brand: "user_id" };
 type Data = {
-	foo: string;
-	bar: number;
+  foo: string;
+  bar: number;
 };
 
-const users = mssqlTable('users', {
+const users = mssqlTable("users", {
   id: int().$type<UserId>().primaryKey(),
   jsonField: json().$type<Data>(),
 });

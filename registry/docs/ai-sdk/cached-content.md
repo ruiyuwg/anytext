@@ -5,26 +5,26 @@ Google Vertex AI supports both explicit and implicit caching to help reduce cost
 #### Implicit Caching
 
 ```ts
-import { vertex } from '@ai-sdk/google-vertex';
-import { generateText } from 'ai';
+import { vertex } from "@ai-sdk/google-vertex";
+import { generateText } from "ai";
 
 // Structure prompts with consistent content at the beginning
 const baseContext =
-  'You are a cooking assistant with expertise in Italian cuisine. Here are 1000 lasagna recipes for reference...';
+  "You are a cooking assistant with expertise in Italian cuisine. Here are 1000 lasagna recipes for reference...";
 
 const { text: veggieLasagna } = await generateText({
-  model: vertex('gemini-2.5-pro'),
+  model: vertex("gemini-2.5-pro"),
   prompt: `${baseContext}\n\nWrite a vegetarian lasagna recipe for 4 people.`,
 });
 
 // Second request with same prefix - eligible for cache hit
 const { text: meatLasagna, providerMetadata } = await generateText({
-  model: vertex('gemini-2.5-pro'),
+  model: vertex("gemini-2.5-pro"),
   prompt: `${baseContext}\n\nWrite a meat lasagna recipe for 12 people.`,
 });
 
 // Check cached token count in usage metadata
-console.log('Cached tokens:', providerMetadata.vertex);
+console.log("Cached tokens:", providerMetadata.vertex);
 // e.g.
 // {
 //   groundingMetadata: null,
@@ -46,7 +46,7 @@ You can use explicit caching with Gemini models. See the [Vertex AI context cach
 First, create a cache using the Google GenAI SDK with Vertex mode enabled:
 
 ```ts
-import { GoogleGenAI } from '@google/genai';
+import { GoogleGenAI } from "@google/genai";
 
 const ai = new GoogleGenAI({
   vertexai: true,
@@ -54,7 +54,7 @@ const ai = new GoogleGenAI({
   location: process.env.GOOGLE_VERTEX_LOCATION,
 });
 
-const model = 'gemini-2.5-pro';
+const model = "gemini-2.5-pro";
 
 // Create a cache with the content you want to reuse
 const cache = await ai.caches.create({
@@ -62,28 +62,28 @@ const cache = await ai.caches.create({
   config: {
     contents: [
       {
-        role: 'user',
-        parts: [{ text: '1000 Lasagna Recipes...' }],
+        role: "user",
+        parts: [{ text: "1000 Lasagna Recipes..." }],
       },
     ],
-    ttl: '300s', // Cache expires after 5 minutes
+    ttl: "300s", // Cache expires after 5 minutes
   },
 });
 
-console.log('Cache created:', cache.name);
+console.log("Cache created:", cache.name);
 // e.g. projects/my-project/locations/us-central1/cachedContents/abc123
 ```
 
 Then use the cache with the AI SDK:
 
 ```ts
-import { vertex } from '@ai-sdk/google-vertex';
-import { type GoogleLanguageModelOptions } from '@ai-sdk/google';
-import { generateText } from 'ai';
+import { vertex } from "@ai-sdk/google-vertex";
+import { type GoogleLanguageModelOptions } from "@ai-sdk/google";
+import { generateText } from "ai";
 
 const { text: veggieLasagnaRecipe } = await generateText({
-  model: vertex('gemini-2.5-pro'),
-  prompt: 'Write a vegetarian lasagna recipe for 4 people.',
+  model: vertex("gemini-2.5-pro"),
+  prompt: "Write a vegetarian lasagna recipe for 4 people.",
   providerOptions: {
     vertex: {
       cachedContent: cache.name,
@@ -92,8 +92,8 @@ const { text: veggieLasagnaRecipe } = await generateText({
 });
 
 const { text: meatLasagnaRecipe } = await generateText({
-  model: vertex('gemini-2.5-pro'),
-  prompt: 'Write a meat lasagna recipe for 12 people.',
+  model: vertex("gemini-2.5-pro"),
+  prompt: "Write a meat lasagna recipe for 12 people.",
   providerOptions: {
     vertex: {
       cachedContent: cache.name,
@@ -161,12 +161,12 @@ By default, structured outputs are enabled (and for tool calling they are requir
 You can disable structured outputs for object generation as a workaround:
 
 ```ts highlight="7,12"
-import { vertex } from '@ai-sdk/google-vertex';
-import { type GoogleLanguageModelOptions } from '@ai-sdk/google';
-import { generateText, Output } from 'ai';
+import { vertex } from "@ai-sdk/google-vertex";
+import { type GoogleLanguageModelOptions } from "@ai-sdk/google";
+import { generateText, Output } from "ai";
 
 const result = await generateText({
-  model: vertex('gemini-2.5-pro'),
+  model: vertex("gemini-2.5-pro"),
   providerOptions: {
     vertex: {
       structuredOutputs: false,
@@ -178,17 +178,17 @@ const result = await generateText({
       age: z.number(),
       contact: z.union([
         z.object({
-          type: z.literal('email'),
+          type: z.literal("email"),
           value: z.string(),
         }),
         z.object({
-          type: z.literal('phone'),
+          type: z.literal("phone"),
           value: z.string(),
         }),
       ]),
     }),
   }),
-  prompt: 'Generate an example person for testing.',
+  prompt: "Generate an example person for testing.",
 });
 ```
 
@@ -199,12 +199,12 @@ The following Zod features are known to not work with Google Vertex:
 
 ### Model Capabilities
 
-| Model                  | Image Input         | Object Generation   | Tool Usage          | Tool Streaming      |
-| ---------------------- | ------------------- | ------------------- | ------------------- | ------------------- |
-| `gemini-3-pro-preview` |  |  |  |  |
-| `gemini-2.5-pro`       |  |  |  |  |
-| `gemini-2.5-flash`     |  |  |  |  |
-| `gemini-2.0-flash-001` |  |  |  |  |
+| Model                  | Image Input | Object Generation | Tool Usage | Tool Streaming |
+| ---------------------- | ----------- | ----------------- | ---------- | -------------- |
+| `gemini-3-pro-preview` |             |                   |            |                |
+| `gemini-2.5-pro`       |             |                   |            |                |
+| `gemini-2.5-flash`     |             |                   |            |                |
+| `gemini-2.0-flash-001` |             |                   |            |                |
 
 The table above lists popular models. Please see the [Google Vertex AI
 docs](https://cloud.google.com/vertex-ai/generative-ai/docs/model-reference/inference#supported-models)

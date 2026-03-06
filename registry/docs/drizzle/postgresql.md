@@ -86,12 +86,12 @@ CREATE TABLE IF NOT EXISTS "users" (
 
 ```ts
 // Data returned by the application
-[ 
-  { 
-    id: 1, 
-    timestamp: 1712846784 // number
-  } 
-]
+[
+  {
+    id: 1,
+    timestamp: 1712846784, // number
+  },
+];
 ```
 
 </Section>

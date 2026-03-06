@@ -34,22 +34,22 @@ const Person = z.record(Keys, z.string());
 
 ```ts
 const numberKeys = z.record(z.number(), z.string());
-numberKeys.parse({ 
+numberKeys.parse({
   1: "one", // ✅
   2: "two", // ✅
   "1.5": "one", // ✅
   "-3": "two", // ✅
-  abc: "one" // ❌
+  abc: "one", // ❌
 });
 
 // further validation is also supported
 const intKeys = z.record(z.int().step(1).min(0).max(10), z.string());
-intKeys.parse({ 
+intKeys.parse({
   0: "zero", // ✅
   1: "one", // ✅
   2: "two", // ✅
   12: "twelve", // ❌
-  abc: "one" // ❌
+  abc: "one", // ❌
 });
 ```
 
@@ -65,10 +65,10 @@ const myRecord: MyRecord = { a: "foo" }; // ❌ missing required key `b`
 
 In Zod 3, exhaustiveness was not checked. To replicate the old behavior, use `z.partialRecord()`.
 
-If you want a *partial* record type, use `z.partialRecord()`. This skips the special exhaustiveness checks Zod normally runs with `z.enum()` and `z.literal()` key schemas.
+If you want a _partial_ record type, use `z.partialRecord()`. This skips the special exhaustiveness checks Zod normally runs with `z.enum()` and `z.literal()` key schemas.
 
 ```ts
-const Keys = z.enum(["id", "name", "email"]).or(z.never()); 
+const Keys = z.enum(["id", "name", "email"]).or(z.never());
 const Person = z.partialRecord(Keys, z.string());
 // { id?: string; name?: string; email?: string }
 ```
@@ -85,10 +85,10 @@ const schema = z
 type schema = z.infer<typeof schema>;
 // => { name: string } & Record<string, string>
 
-schema.parse({ 
+schema.parse({
   name: "John",
-  home_phone: "+12345678900",     // validated as phone number
-  work_phone: "+12345678900",     // validated as phone number
+  home_phone: "+12345678900", // validated as phone number
+  work_phone: "+12345678900", // validated as phone number
 });
 ```
 
@@ -214,9 +214,11 @@ TestSchema.parse("whatever"); // ❌
 To validate a particular property of a class instance against a Zod schema:
 
 ```ts
-const blobSchema = z.instanceof(URL).check(
-  z.property("protocol", z.literal("https:" as string, "Only HTTPS allowed"))
-);
+const blobSchema = z
+  .instanceof(URL)
+  .check(
+    z.property("protocol", z.literal("https:" as string, "Only HTTPS allowed")),
+  );
 
 blobSchema.parse(new URL("https://example.com")); // ✅
 blobSchema.parse(new URL("http://example.com")); // ❌
@@ -225,9 +227,7 @@ blobSchema.parse(new URL("http://example.com")); // ❌
 The `z.property()` API works with any data type (but it's most useful when used in conjunction with `z.instanceof()`).
 
 ```ts
-const blobSchema = z.string().check(
-  z.property("length", z.number().min(10))
-);
+const blobSchema = z.string().check(z.property("length", z.number().min(10)));
 
 blobSchema.parse("hello there!"); // ✅
 blobSchema.parse("hello."); // ❌

@@ -11,8 +11,8 @@ See [Usage](#usage) below for instructions on each platform.
 ## Import
 
 ```ts
-import { Hono } from 'hono'
-import { cache } from 'hono/cache'
+import { Hono } from "hono";
+import { cache } from "hono/cache";
 ```
 
 ## Usage
@@ -21,24 +21,24 @@ import { cache } from 'hono/cache'
 
 ```ts [Cloudflare Workers]
 app.get(
-  '*',
+  "*",
   cache({
-    cacheName: 'my-app',
-    cacheControl: 'max-age=3600',
-  })
-)
+    cacheName: "my-app",
+    cacheControl: "max-age=3600",
+  }),
+);
 ```
 
 ```ts [Deno]
 // Must use `wait: true` for the Deno runtime
 app.get(
-  '*',
+  "*",
   cache({
-    cacheName: 'my-app',
-    cacheControl: 'max-age=3600',
+    cacheName: "my-app",
+    cacheControl: "max-age=3600",
     wait: true,
-  })
-)
+  }),
+);
 ```
 
 :::
@@ -51,7 +51,7 @@ The name of the cache. Can be used to store multiple caches with different ident
 
 ### <Badge type="info" text="optional" /> wait: `boolean`
 
-A boolean indicating if Hono should wait for the Promise of the `cache.put` function to resolve before continuing with the request. *Required to be true for the Deno environment*. The default is `false`.
+A boolean indicating if Hono should wait for the Promise of the `cache.put` function to resolve before continuing with the request. _Required to be true for the Deno environment_. The default is `false`.
 
 ### <Badge type="info" text="optional" /> cacheControl: `string`
 
@@ -71,11 +71,11 @@ An array of status codes that should be cached. The default is `[200]`. Use this
 
 ```ts
 app.get(
-  '*',
+  "*",
   cache({
-    cacheName: 'my-app',
-    cacheControl: 'max-age=3600',
+    cacheName: "my-app",
+    cacheControl: "max-age=3600",
     cacheableStatusCodes: [200, 404, 412],
-  })
-)
+  }),
+);
 ```

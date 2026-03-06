@@ -7,15 +7,15 @@
 Experimental support for inlining CSS in the `<head>`. When this flag is enabled, all places where we normally generate a `<link>` tag will instead have a generated `<style>` tag.
 
 ```ts filename="next.config.ts" switcher
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   experimental: {
     inlineCss: true,
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 ```js filename="next.config.js" switcher
@@ -24,9 +24,9 @@ const nextConfig = {
   experimental: {
     inlineCss: true,
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 ## Trade-Offs
@@ -86,15 +86,15 @@ This feature is **enabled by default** to keep development and production output
 To opt out of this feature, set `isolatedDevBuild` to `false` in your configuration:
 
 ```ts filename="next.config.ts" switcher
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   experimental: {
     isolatedDevBuild: false, // defaults to true
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 ```js filename="next.config.mjs" switcher
@@ -103,9 +103,9 @@ const nextConfig = {
   experimental: {
     isolatedDevBuild: false, // defaults to true
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 ## Version History
@@ -133,7 +133,7 @@ module.exports = {
       fullUrl: true,
     },
   },
-}
+};
 ```
 
 Any `fetch` requests that are restored from the [Server Components HMR cache](/docs/app/api-reference/config/next-config-js/serverComponentsHmrCache) are not logged by default. However, this can be enabled by setting `logging.fetches.hmrRefreshes` to `true`.
@@ -145,7 +145,7 @@ module.exports = {
       hmrRefreshes: true,
     },
   },
-}
+};
 ```
 
 ### Incoming Requests
@@ -160,7 +160,7 @@ module.exports = {
       ignore: [/\api\/v1\/health/],
     },
   },
-}
+};
 ```
 
 Or you can disable incoming request logging by setting `incomingRequests` to `false`.
@@ -170,7 +170,7 @@ module.exports = {
   logging: {
     incomingRequests: false,
   },
-}
+};
 ```
 
 ### Disabling Logging
@@ -180,7 +180,7 @@ In addition, you can disable the development logging by setting `logging` to `fa
 ```js filename="next.config.js"
 module.exports = {
   logging: false,
-}
+};
 ```
 
 # mdxRs
@@ -192,17 +192,17 @@ module.exports = {
 For experimental use with `@next/mdx`. Compiles MDX files using the new Rust compiler.
 
 ```js filename="next.config.js"
-const withMDX = require('@next/mdx')()
+const withMDX = require("@next/mdx")();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  pageExtensions: ['ts', 'tsx', 'mdx'],
+  pageExtensions: ["ts", "tsx", "mdx"],
   experimental: {
     mdxRs: true,
   },
-}
+};
 
-module.exports = withMDX(nextConfig)
+module.exports = withMDX(nextConfig);
 ```
 
 # onDemandEntries
@@ -221,7 +221,7 @@ module.exports = {
     // number of pages that should be kept simultaneously without being disposed
     pagesBufferLength: 2,
   },
-}
+};
 ```
 
 # optimizePackageImports
@@ -237,9 +237,9 @@ Adding a package to `experimental.optimizePackageImports` will only load the mod
 ```js filename="next.config.js"
 module.exports = {
   experimental: {
-    optimizePackageImports: ['package-name'],
+    optimizePackageImports: ["package-name"],
   },
-}
+};
 ```
 
 The following libraries are optimized by default:

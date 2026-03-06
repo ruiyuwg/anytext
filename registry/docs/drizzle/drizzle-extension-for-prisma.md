@@ -54,8 +54,8 @@ prisma generate
 \<CodeTabs items={\["PostgreSQL", "MySQL", "SQLite"]}> <CodeTab>
 
 ```ts copy
-import { PrismaClient } from '@prisma/client';
-import { drizzle } from 'drizzle-orm/prisma/pg';
+import { PrismaClient } from "@prisma/client";
+import { drizzle } from "drizzle-orm/prisma/pg";
 
 const prisma = new PrismaClient().$extends(drizzle());
 ```
@@ -87,9 +87,12 @@ In order to use Drizzle query builder, you need references to Drizzle tables.
 You can import them from the output path that you specified in the generator config.
 
 ```ts copy
-import { User } from './drizzle';
+import { User } from "./drizzle";
 
-await prisma.$drizzle.insert().into(User).values({ email: 'sorenbs@drizzle.team', name: 'Søren' });
+await prisma.$drizzle
+  .insert()
+  .into(User)
+  .values({ email: "sorenbs@drizzle.team", name: "Søren" });
 const users = await prisma.$drizzle.select().from(User);
 ```
 
@@ -134,7 +137,7 @@ drizzle-orm postgres
 Lets declare our `schema.ts`:
 
 ```plaintext {4}
-📦 
+📦
  ├ ...
  ├ 📂 src
  │ └ 📜 schema.ts
@@ -158,7 +161,7 @@ export const user = pgTable("user", {
 Now lets add drizzle configuration file:
 
 ```plaintext {4}
-📦 
+📦
  ├ ...
  ├ 📂 src
  ├ 📜 drizzle.config.ts
@@ -184,7 +187,7 @@ Add `generate` and `migrate` commands to `package.json` and run our first migrat
   "scripts": {
     "generate": "drizzle-kit generate",
     "migrate": "drizzle-kit migrate"
-  }, 
+  }
 }
 ```
 
@@ -198,7 +201,7 @@ $ npm run generate
 Done! We now have our first SQL migration file 🥳
 
 ```plaintext {4}
-📦 
+📦
  ├ 📂 drizzle
  │ ├ 📂 20242409125510_pale_mister_fear
  ├ 📂 src

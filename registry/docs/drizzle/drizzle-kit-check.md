@@ -50,7 +50,7 @@ drizzle-kit check --config=drizzle-dev.config.ts
 drizzle-kit check --config=drizzle-prod.config.ts </Npx>
 
 ```plaintext {5-6}
-📦 
+📦
  ├ 📂 drizzle
  ├ 📂 src
  ├ 📜 .env
@@ -64,11 +64,11 @@ drizzle-kit check --config=drizzle-prod.config.ts </Npx>
 
 We recommend configuring `drizzle-kit` through [drizzle.config.ts](/docs/drizzle-config-file) file,
 yet you can provide all configuration options through CLI if necessary, e.g. in CI/CD pipelines, etc. <rem025/>
-|           |            |                                                                         |
+| | | |
 | :-------- | :--------- | :---------------------------------------------------------------------- |
 | `dialect` | `required` | Database dialect you are using. Can be `postgresql`,`mysql` or `sqlite` |
-| `out`     |            | Migrations folder, default=`./drizzle`                                  |
-| `config`  |            | Configuration file path, default=`drizzle.config.ts`                           | <br/> <Npx>
+| `out` | | Migrations folder, default=`./drizzle` |
+| `config` | | Configuration file path, default=`drizzle.config.ts` | <br/> <Npx>
 drizzle-kit check --dialect=postgresql
 drizzle-kit check --dialect=postgresql --out=./migrations-folder </Npx>
 

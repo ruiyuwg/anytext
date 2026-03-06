@@ -25,17 +25,17 @@ A Server Function can be defined by using the [`use server`](https://react.dev/r
 
 ```ts filename="app/lib/actions.ts" switcher
 export async function createPost(formData: FormData) {
-  'use server'
-  const title = formData.get('title')
-  const content = formData.get('content')
+  "use server";
+  const title = formData.get("title");
+  const content = formData.get("content");
 
   // Update data
   // Revalidate cache
 }
 
 export async function deletePost(formData: FormData) {
-  'use server'
-  const id = formData.get('id')
+  "use server";
+  const id = formData.get("id");
 
   // Update data
   // Revalidate cache
@@ -44,17 +44,17 @@ export async function deletePost(formData: FormData) {
 
 ```js filename="app/lib/actions.js" switcher
 export async function createPost(formData) {
-  'use server'
-  const title = formData.get('title')
-  const content = formData.get('content')
+  "use server";
+  const title = formData.get("title");
+  const content = formData.get("content");
 
   // Update data
   // Revalidate cache
 }
 
 export async function deletePost(formData) {
-  'use server'
-  const id = formData.get('id')
+  "use server";
+  const id = formData.get("id");
 
   // Update data
   // Revalidate cache
@@ -69,11 +69,11 @@ Server Functions can be inlined in Server Components by adding the `"use server"
 export default function Page() {
   // Server Action
   async function createPost(formData: FormData) {
-    'use server'
+    "use server";
     // ...
   }
 
-  return <></>
+  return <></>;
 }
 ```
 
@@ -96,34 +96,34 @@ export default function Page() {
 It's not possible to define Server Functions in Client Components. However, you can invoke them in Client Components by importing them from a file that has the `"use server"` directive at the top of it:
 
 ```ts filename="app/actions.ts" switcher
-'use server'
+"use server";
 
 export async function createPost() {}
 ```
 
 ```js filename="app/actions.js" switcher
-'use server'
+"use server";
 
 export async function createPost() {}
 ```
 
 ```tsx filename="app/ui/button.tsx" switcher
-'use client'
+"use client";
 
-import { createPost } from '@/app/actions'
+import { createPost } from "@/app/actions";
 
 export function Button() {
-  return <button formAction={createPost}>Create</button>
+  return <button formAction={createPost}>Create</button>;
 }
 ```
 
 ```jsx filename="app/ui/button.js" switcher
-'use client'
+"use client";
 
-import { createPost } from '@/app/actions'
+import { createPost } from "@/app/actions";
 
 export function Button() {
-  return <button formAction={createPost}>Create</button>
+  return <button formAction={createPost}>Create</button>;
 }
 ```
 
@@ -138,22 +138,22 @@ You can also pass an action to a Client Component as a prop:
 ```
 
 ```tsx filename="app/client-component.tsx" switcher
-'use client'
+"use client";
 
 export default function ClientComponent({
   updateItemAction,
 }: {
-  updateItemAction: (formData: FormData) => void
+  updateItemAction: (formData: FormData) => void;
 }) {
-  return <form action={updateItemAction}>{/* ... */}</form>
+  return <form action={updateItemAction}>{/* ... */}</form>;
 }
 ```
 
 ```jsx filename="app/client-component.js" switcher
-'use client'
+"use client";
 
 export default function ClientComponent({ updateItemAction }) {
-  return <form action={updateItemAction}>{/* ... */}</form>
+  return <form action={updateItemAction}>{/* ... */}</form>;
 }
 ```
 
@@ -173,7 +173,7 @@ React extends the HTML [`<form>`](https://react.dev/reference/react-dom/componen
 When invoked in a form, the function automatically receives the [`FormData`](https://developer.mozilla.org/docs/Web/API/FormData/FormData) object. You can extract the data using the native [`FormData` methods](https://developer.mozilla.org/en-US/docs/Web/API/FormData#instance_methods):
 
 ```tsx filename="app/ui/form.tsx" switcher
-import { createPost } from '@/app/actions'
+import { createPost } from "@/app/actions";
 
 export function Form() {
   return (
@@ -182,12 +182,12 @@ export function Form() {
       <input type="text" name="content" />
       <button type="submit">Create</button>
     </form>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/ui/form.js" switcher
-import { createPost } from '@/app/actions'
+import { createPost } from "@/app/actions";
 
 export function Form() {
   return (
@@ -196,16 +196,16 @@ export function Form() {
       <input type="text" name="content" />
       <button type="submit">Create</button>
     </form>
-  )
+  );
 }
 ```
 
 ```ts filename="app/actions.ts" switcher
-'use server'
+"use server";
 
 export async function createPost(formData: FormData) {
-  const title = formData.get('title')
-  const content = formData.get('content')
+  const title = formData.get("title");
+  const content = formData.get("content");
 
   // Update data
   // Revalidate cache
@@ -213,11 +213,11 @@ export async function createPost(formData: FormData) {
 ```
 
 ```js filename="app/actions.js" switcher
-'use server'
+"use server";
 
 export async function createPost(formData) {
-  const title = formData.get('title')
-  const content = formData.get('content')
+  const title = formData.get("title");
+  const content = formData.get("content");
 
   // Update data
   // Revalidate cache
@@ -229,52 +229,52 @@ export async function createPost(formData) {
 You can invoke a Server Function in a Client Component by using event handlers such as `onClick`.
 
 ```tsx filename="app/like-button.tsx" switcher
-'use client'
+"use client";
 
-import { incrementLike } from './actions'
-import { useState } from 'react'
+import { incrementLike } from "./actions";
+import { useState } from "react";
 
 export default function LikeButton({ initialLikes }: { initialLikes: number }) {
-  const [likes, setLikes] = useState(initialLikes)
+  const [likes, setLikes] = useState(initialLikes);
 
   return (
     <>
       <p>Total Likes: {likes}</p>
       <button
         onClick={async () => {
-          const updatedLikes = await incrementLike()
-          setLikes(updatedLikes)
+          const updatedLikes = await incrementLike();
+          setLikes(updatedLikes);
         }}
       >
         Like
       </button>
     </>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/like-button.js" switcher
-'use client'
+"use client";
 
-import { incrementLike } from './actions'
-import { useState } from 'react'
+import { incrementLike } from "./actions";
+import { useState } from "react";
 
 export default function LikeButton({ initialLikes }) {
-  const [likes, setLikes] = useState(initialLikes)
+  const [likes, setLikes] = useState(initialLikes);
 
   return (
     <>
       <p>Total Likes: {likes}</p>
       <button
         onClick={async () => {
-          const updatedLikes = await incrementLike()
-          setLikes(updatedLikes)
+          const updatedLikes = await incrementLike();
+          setLikes(updatedLikes);
         }}
       >
         Like
       </button>
     </>
-  )
+  );
 }
 ```
 
@@ -285,38 +285,38 @@ export default function LikeButton({ initialLikes }) {
 While executing a Server Function, you can show a loading indicator with React's [`useActionState`](https://react.dev/reference/react/useActionState) hook. This hook returns a `pending` boolean:
 
 ```tsx filename="app/ui/button.tsx" switcher
-'use client'
+"use client";
 
-import { useActionState, startTransition } from 'react'
-import { createPost } from '@/app/actions'
-import { LoadingSpinner } from '@/app/ui/loading-spinner'
+import { useActionState, startTransition } from "react";
+import { createPost } from "@/app/actions";
+import { LoadingSpinner } from "@/app/ui/loading-spinner";
 
 export function Button() {
-  const [state, action, pending] = useActionState(createPost, false)
+  const [state, action, pending] = useActionState(createPost, false);
 
   return (
     <button onClick={() => startTransition(action)}>
-      {pending ? <LoadingSpinner /> : 'Create Post'}
+      {pending ? <LoadingSpinner /> : "Create Post"}
     </button>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/ui/button.js" switcher
-'use client'
+"use client";
 
-import { useActionState, startTransition } from 'react'
-import { createPost } from '@/app/actions'
-import { LoadingSpinner } from '@/app/ui/loading-spinner'
+import { useActionState, startTransition } from "react";
+import { createPost } from "@/app/actions";
+import { LoadingSpinner } from "@/app/ui/loading-spinner";
 
 export function Button() {
-  const [state, action, pending] = useActionState(createPost, false)
+  const [state, action, pending] = useActionState(createPost, false);
 
   return (
     <button onClick={() => startTransition(action)}>
-      {pending ? <LoadingSpinner /> : 'Create Post'}
+      {pending ? <LoadingSpinner /> : "Create Post"}
     </button>
-  )
+  );
 }
 ```
 
@@ -325,28 +325,28 @@ export function Button() {
 After a mutation, you may want to refresh the current page to show the latest data. You can do this by calling [`refresh`](/docs/app/api-reference/functions/refresh) from `next/cache` in a Server Action:
 
 ```ts filename="app/lib/actions.ts" switcher
-'use server'
+"use server";
 
-import { refresh } from 'next/cache'
+import { refresh } from "next/cache";
 
 export async function updatePost(formData: FormData) {
   // Update data
   // ...
 
-  refresh()
+  refresh();
 }
 ```
 
 ```js filename="app/lib/actions.js" switcher
-'use server'
+"use server";
 
-import { refresh } from 'next/cache'
+import { refresh } from "next/cache";
 
 export async function updatePost(formData) {
   // Update data
   // ...
 
-  refresh()
+  refresh();
 }
 ```
 
@@ -357,25 +357,25 @@ This refreshes the client router, ensuring the UI reflects the latest state. The
 After performing an update, you can revalidate the Next.js cache and show the updated data by calling [`revalidatePath`](/docs/app/api-reference/functions/revalidatePath) or [`revalidateTag`](/docs/app/api-reference/functions/revalidateTag) within the Server Function:
 
 ```ts filename="app/lib/actions.ts" switcher
-import { revalidatePath } from 'next/cache'
+import { revalidatePath } from "next/cache";
 
 export async function createPost(formData: FormData) {
-  'use server'
+  "use server";
   // Update data
   // ...
 
-  revalidatePath('/posts')
+  revalidatePath("/posts");
 }
 ```
 
 ```js filename="app/actions.js" switcher
-import { revalidatePath } from 'next/cache'
+import { revalidatePath } from "next/cache";
 
 export async function createPost(formData) {
-  'use server'
+  "use server";
   // Update data
   // ...
-  revalidatePath('/posts')
+  revalidatePath("/posts");
 }
 ```
 
@@ -384,32 +384,32 @@ export async function createPost(formData) {
 You may want to redirect the user to a different page after performing an update. You can do this by calling [`redirect`](/docs/app/api-reference/functions/redirect) within the Server Function.
 
 ```ts filename="app/lib/actions.ts" switcher
-'use server'
+"use server";
 
-import { revalidatePath } from 'next/cache'
-import { redirect } from 'next/navigation'
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 export async function createPost(formData: FormData) {
   // Update data
   // ...
 
-  revalidatePath('/posts')
-  redirect('/posts')
+  revalidatePath("/posts");
+  redirect("/posts");
 }
 ```
 
 ```js filename="app/actions.js" switcher
-'use server'
+"use server";
 
-import { revalidatePath } from 'next/cache'
-import { redirect } from 'next/navigation'
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 export async function createPost(formData) {
   // Update data
   // ...
 
-  revalidatePath('/posts')
-  redirect('/posts')
+  revalidatePath("/posts");
+  redirect("/posts");
 }
 ```
 
@@ -424,41 +424,41 @@ When you [set or delete](/docs/app/api-reference/functions/cookies#understanding
 > **Good to know**: The server update applies to the current React tree, re-rendering, mounting, or unmounting components, as needed. Client state is preserved for re-rendered components, and effects re-run if their dependencies changed.
 
 ```ts filename="app/actions.ts" switcher
-'use server'
+"use server";
 
-import { cookies } from 'next/headers'
+import { cookies } from "next/headers";
 
 export async function exampleAction() {
-  const cookieStore = await cookies()
+  const cookieStore = await cookies();
 
   // Get cookie
-  cookieStore.get('name')?.value
+  cookieStore.get("name")?.value;
 
   // Set cookie
-  cookieStore.set('name', 'Delba')
+  cookieStore.set("name", "Delba");
 
   // Delete cookie
-  cookieStore.delete('name')
+  cookieStore.delete("name");
 }
 ```
 
 ```js filename="app/actions.js" switcher
-'use server'
+"use server";
 
-import { cookies } from 'next/headers'
+import { cookies } from "next/headers";
 
 export async function exampleAction() {
   // Get cookie
-  const cookieStore = await cookies()
+  const cookieStore = await cookies();
 
   // Get cookie
-  cookieStore.get('name')?.value
+  cookieStore.get("name")?.value;
 
   // Set cookie
-  cookieStore.set('name', 'Delba')
+  cookieStore.set("name", "Delba");
 
   // Delete cookie
-  cookieStore.delete('name')
+  cookieStore.delete("name");
 }
 ```
 
@@ -467,46 +467,46 @@ export async function exampleAction() {
 You can use the React [`useEffect`](https://react.dev/reference/react/useEffect) hook to invoke a Server Action when the component mounts or a dependency changes. This is useful for mutations that depend on global events or need to be triggered automatically. For example, `onKeyDown` for app shortcuts, an intersection observer hook for infinite scrolling, or when the component mounts to update a view count:
 
 ```tsx filename="app/view-count.tsx" switcher
-'use client'
+"use client";
 
-import { incrementViews } from './actions'
-import { useState, useEffect, useTransition } from 'react'
+import { incrementViews } from "./actions";
+import { useState, useEffect, useTransition } from "react";
 
 export default function ViewCount({ initialViews }: { initialViews: number }) {
-  const [views, setViews] = useState(initialViews)
-  const [isPending, startTransition] = useTransition()
+  const [views, setViews] = useState(initialViews);
+  const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
     startTransition(async () => {
-      const updatedViews = await incrementViews()
-      setViews(updatedViews)
-    })
-  }, [])
+      const updatedViews = await incrementViews();
+      setViews(updatedViews);
+    });
+  }, []);
 
   // You can use `isPending` to give users feedback
-  return <p>Total Views: {views}</p>
+  return <p>Total Views: {views}</p>;
 }
 ```
 
 ```jsx filename="app/view-count.js" switcher
-'use client'
+"use client";
 
-import { incrementViews } from './actions'
-import { useState, useEffect, useTransition } from 'react'
+import { incrementViews } from "./actions";
+import { useState, useEffect, useTransition } from "react";
 
 export default function ViewCount({ initialViews }) {
-  const [views, setViews] = useState(initialViews)
-  const [isPending, startTransition] = useTransition()
+  const [views, setViews] = useState(initialViews);
+  const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
     startTransition(async () => {
-      const updatedViews = await incrementViews()
-      setViews(updatedViews)
-    })
-  }, [])
+      const updatedViews = await incrementViews();
+      setViews(updatedViews);
+    });
+  }, []);
 
   // You can use `isPending` to give users feedback
-  return <p>Total Views: {views}</p>
+  return <p>Total Views: {views}</p>;
 }
 ```
 

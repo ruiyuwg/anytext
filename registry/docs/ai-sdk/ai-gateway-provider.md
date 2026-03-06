@@ -21,21 +21,21 @@ For most use cases, you can use the AI Gateway directly with a model string:
 
 ```ts
 // use plain model string with global provider
-import { generateText } from 'ai';
+import { generateText } from "ai";
 
 const { text } = await generateText({
-  model: 'openai/gpt-5',
-  prompt: 'Hello world',
+  model: "openai/gpt-5",
+  prompt: "Hello world",
 });
 ```
 
 ```ts
 // use provider instance (requires version 5.0.36 or later)
-import { generateText, gateway } from 'ai';
+import { generateText, gateway } from "ai";
 
 const { text } = await generateText({
-  model: gateway('openai/gpt-5'),
-  prompt: 'Hello world',
+  model: gateway("openai/gpt-5"),
+  prompt: "Hello world",
 });
 ```
 
@@ -49,7 +49,7 @@ The `gateway` provider instance is available from the `ai` package in version
 You can also import the default provider instance `gateway` from `ai`:
 
 ```ts
-import { gateway } from 'ai';
+import { gateway } from "ai";
 ```
 
 You may want to create a custom provider instance when you need to:
@@ -62,36 +62,36 @@ You may want to create a custom provider instance when you need to:
 To create a custom provider instance, import `createGateway` from `ai`:
 
 ```ts
-import { createGateway } from 'ai';
+import { createGateway } from "ai";
 
 const gateway = createGateway({
-  apiKey: process.env.AI_GATEWAY_API_KEY ?? '',
+  apiKey: process.env.AI_GATEWAY_API_KEY ?? "",
 });
 ```
 
 You can use the following optional settings to customize the AI Gateway provider instance:
 
-- **baseURL** *string*
+- **baseURL** _string_
 
   Use a different URL prefix for API calls. The default prefix is `https://ai-gateway.vercel.sh/v3/ai`.
 
-- **apiKey** *string*
+- **apiKey** _string_
 
   API key that is being sent using the `Authorization` header. It defaults to
   the `AI_GATEWAY_API_KEY` environment variable.
 
-- **headers** *Record\<string,string>*
+- **headers** _Record\<string,string>_
 
   Custom headers to include in the requests.
 
-- **fetch** *(input: RequestInfo, init?: RequestInit) => Promise\<Response>*
+- **fetch** _(input: RequestInfo, init?: RequestInit) => Promise\<Response>_
 
   Custom [fetch](https://developer.mozilla.org/en-US/docs/Web/API/fetch) implementation.
   Defaults to the global `fetch` function.
   You can use it as a middleware to intercept requests,
   or to provide a custom fetch implementation for e.g. testing.
 
-- **metadataCacheRefreshMillis** *number*
+- **metadataCacheRefreshMillis** _number_
 
   How frequently to refresh the metadata cache in milliseconds. Defaults to 5 minutes (300,000ms).
 
@@ -110,10 +110,10 @@ AI_GATEWAY_API_KEY=your_api_key_here
 Or pass it directly to the provider:
 
 ```ts
-import { createGateway } from 'ai';
+import { createGateway } from "ai";
 
 const gateway = createGateway({
-  apiKey: 'your_api_key_here',
+  apiKey: "your_api_key_here",
 });
 ```
 
@@ -125,7 +125,6 @@ tokens](https://vercel.com/docs/oidc) without API Keys.
 #### How OIDC Authentication Works
 
 1. **In Production/Preview Deployments**:
-
    - OIDC authentication is automatically handled
    - No manual configuration needed
    - Tokens are automatically obtained and refreshed
@@ -157,11 +156,11 @@ Learn more in the [BYOK documentation](https://vercel.com/docs/ai-gateway/byok).
 You can create language models using a provider instance. The first argument is the model ID in the format `creator/model-name`:
 
 ```ts
-import { generateText } from 'ai';
+import { generateText } from "ai";
 
 const { text } = await generateText({
-  model: 'openai/gpt-5',
-  prompt: 'Explain quantum computing in simple terms',
+  model: "openai/gpt-5",
+  prompt: "Explain quantum computing in simple terms",
 });
 ```
 
@@ -178,12 +177,12 @@ For the complete list of available models, see the [AI Gateway documentation](ht
 You can discover available models programmatically:
 
 ```ts
-import { gateway, generateText } from 'ai';
+import { gateway, generateText } from "ai";
 
 const availableModels = await gateway.getAvailableModels();
 
 // List all available models
-availableModels.models.forEach(model => {
+availableModels.models.forEach((model) => {
   console.log(`${model.id}: ${model.name}`);
   if (model.description) {
     console.log(`  Description: ${model.description}`);
@@ -207,7 +206,7 @@ availableModels.models.forEach(model => {
 // Use any discovered model with plain string
 const { text } = await generateText({
   model: availableModels.models[0].id, // e.g., 'openai/gpt-4o'
-  prompt: 'Hello world',
+  prompt: "Hello world",
 });
 ```
 
@@ -216,7 +215,7 @@ const { text } = await generateText({
 You can check your team's current credit balance and usage:
 
 ```ts
-import { gateway } from 'ai';
+import { gateway } from "ai";
 
 const credits = await gateway.getCredits();
 
@@ -226,19 +225,19 @@ console.log(`Team total used: ${credits.total_used} credits`);
 
 The `getCredits()` method returns your team's credit information based on the authenticated API key or OIDC token:
 
-- **balance** *number* - Your team's current available credit balance
-- **total\_used** *number* - Total credits consumed by your team
+- **balance** _number_ - Your team's current available credit balance
+- **total_used** _number_ - Total credits consumed by your team
 
 ## Examples
 
 ### Basic Text Generation
 
 ```ts
-import { generateText } from 'ai';
+import { generateText } from "ai";
 
 const { text } = await generateText({
-  model: 'anthropic/claude-sonnet-4',
-  prompt: 'Write a haiku about programming',
+  model: "anthropic/claude-sonnet-4",
+  prompt: "Write a haiku about programming",
 });
 
 console.log(text);
@@ -247,11 +246,11 @@ console.log(text);
 ### Streaming
 
 ```ts
-import { streamText } from 'ai';
+import { streamText } from "ai";
 
 const { textStream } = await streamText({
-  model: 'openai/gpt-5',
-  prompt: 'Explain the benefits of serverless architecture',
+  model: "openai/gpt-5",
+  prompt: "Explain the benefits of serverless architecture",
 });
 
 for await (const textPart of textStream) {
@@ -262,17 +261,17 @@ for await (const textPart of textStream) {
 ### Tool Usage
 
 ```ts
-import { generateText, tool } from 'ai';
-import { z } from 'zod';
+import { generateText, tool } from "ai";
+import { z } from "zod";
 
 const { text } = await generateText({
-  model: 'xai/grok-4',
-  prompt: 'What is the weather like in San Francisco?',
+  model: "xai/grok-4",
+  prompt: "What is the weather like in San Francisco?",
   tools: {
     getWeather: tool({
-      description: 'Get the current weather for a location',
+      description: "Get the current weather for a location",
       parameters: z.object({
-        location: z.string().describe('The location to get weather for'),
+        location: z.string().describe("The location to get weather for"),
       }),
       execute: async ({ location }) => {
         // Your weather API call here
@@ -288,12 +287,12 @@ const { text } = await generateText({
 Some providers offer tools that are executed by the provider itself, such as [OpenAI's web search tool](/providers/ai-sdk-providers/openai#web-search-tool). To use these tools through AI Gateway, import the provider to access the tool definitions:
 
 ```ts
-import { generateText, stepCountIs } from 'ai';
-import { openai } from '@ai-sdk/openai';
+import { generateText, stepCountIs } from "ai";
+import { openai } from "@ai-sdk/openai";
 
 const result = await generateText({
-  model: 'openai/gpt-5-mini',
-  prompt: 'What is the Vercel AI Gateway?',
+  model: "openai/gpt-5-mini",
+  prompt: "What is the Vercel AI Gateway?",
   stopWhen: stepCountIs(10),
   tools: {
     web_search: openai.tools.webSearch({}),
@@ -316,83 +315,83 @@ The AI Gateway provider includes built-in tools that are executed by the gateway
 The Perplexity Search tool enables models to search the web using [Perplexity's search API](https://docs.perplexity.ai/guides/search-quickstart). This tool is executed by the AI Gateway and returns web search results that the model can use to provide up-to-date information.
 
 ```ts
-import { gateway, generateText } from 'ai';
+import { gateway, generateText } from "ai";
 
 const result = await generateText({
-  model: 'openai/gpt-5-nano',
-  prompt: 'Search for news about AI regulations in January 2025.',
+  model: "openai/gpt-5-nano",
+  prompt: "Search for news about AI regulations in January 2025.",
   tools: {
     perplexity_search: gateway.tools.perplexitySearch(),
   },
 });
 
 console.log(result.text);
-console.log('Tool calls:', JSON.stringify(result.toolCalls, null, 2));
-console.log('Tool results:', JSON.stringify(result.toolResults, null, 2));
+console.log("Tool calls:", JSON.stringify(result.toolCalls, null, 2));
+console.log("Tool results:", JSON.stringify(result.toolResults, null, 2));
 ```
 
 You can also configure the search with optional parameters:
 
 ```ts
-import { gateway, generateText } from 'ai';
+import { gateway, generateText } from "ai";
 
 const result = await generateText({
-  model: 'openai/gpt-5-nano',
+  model: "openai/gpt-5-nano",
   prompt:
-    'Search for news about AI regulations from the first week of January 2025.',
+    "Search for news about AI regulations from the first week of January 2025.",
   tools: {
     perplexity_search: gateway.tools.perplexitySearch({
       maxResults: 5,
-      searchLanguageFilter: ['en'],
-      country: 'US',
-      searchDomainFilter: ['reuters.com', 'bbc.com', 'nytimes.com'],
+      searchLanguageFilter: ["en"],
+      country: "US",
+      searchDomainFilter: ["reuters.com", "bbc.com", "nytimes.com"],
     }),
   },
 });
 
 console.log(result.text);
-console.log('Tool calls:', JSON.stringify(result.toolCalls, null, 2));
-console.log('Tool results:', JSON.stringify(result.toolResults, null, 2));
+console.log("Tool calls:", JSON.stringify(result.toolCalls, null, 2));
+console.log("Tool results:", JSON.stringify(result.toolResults, null, 2));
 ```
 
 The Perplexity Search tool supports the following optional configuration options:
 
-- **maxResults** *number*
+- **maxResults** _number_
 
   The maximum number of search results to return (1-20, default: 10).
 
-- **maxTokensPerPage** *number*
+- **maxTokensPerPage** _number_
 
   The maximum number of tokens to extract per search result page (256-2048, default: 2048).
 
-- **maxTokens** *number*
+- **maxTokens** _number_
 
   The maximum total tokens across all search results (default: 25000, max: 1000000).
 
-- **searchLanguageFilter** *string\[]*
+- **searchLanguageFilter** _string\[]_
 
   Filter search results by language using ISO 639-1 language codes (e.g., `['en']` for English, `['en', 'es']` for English and Spanish).
 
-- **country** *string*
+- **country** _string_
 
   Filter search results by country using ISO 3166-1 alpha-2 country codes (e.g., `'US'` for United States, `'GB'` for United Kingdom).
 
-- **searchDomainFilter** *string\[]*
+- **searchDomainFilter** _string\[]_
 
   Limit search results to specific domains (e.g., `['reuters.com', 'bbc.com']`). This is useful for restricting results to trusted sources.
 
-- **searchRecencyFilter** *'day' | 'week' | 'month' | 'year'*
+- **searchRecencyFilter** _'day' | 'week' | 'month' | 'year'_
 
   Filter search results by relative time period. Useful for always getting recent results (e.g., 'week' for results from the last week).
 
 The tool works with both `generateText` and `streamText`:
 
 ```ts
-import { gateway, streamText } from 'ai';
+import { gateway, streamText } from "ai";
 
 const result = streamText({
-  model: 'openai/gpt-5-nano',
-  prompt: 'Search for the latest news about AI regulations.',
+  model: "openai/gpt-5-nano",
+  prompt: "Search for the latest news about AI regulations.",
   tools: {
     perplexity_search: gateway.tools.perplexitySearch(),
   },
@@ -400,14 +399,14 @@ const result = streamText({
 
 for await (const part of result.fullStream) {
   switch (part.type) {
-    case 'text-delta':
+    case "text-delta":
       process.stdout.write(part.text);
       break;
-    case 'tool-call':
-      console.log('\nTool call:', JSON.stringify(part, null, 2));
+    case "tool-call":
+      console.log("\nTool call:", JSON.stringify(part, null, 2));
       break;
-    case 'tool-result':
-      console.log('\nTool result:', JSON.stringify(part, null, 2));
+    case "tool-result":
+      console.log("\nTool result:", JSON.stringify(part, null, 2));
       break;
   }
 }
@@ -418,35 +417,35 @@ for await (const part of result.fullStream) {
 The Parallel Search tool enables models to search the web using [Parallel AI's Search API](https://docs.parallel.ai/api-reference/search-beta/search). This tool is optimized for LLM consumption, returning relevant excerpts from web pages that can replace multiple keyword searches with a single call.
 
 ```ts
-import { gateway, generateText } from 'ai';
+import { gateway, generateText } from "ai";
 
 const result = await generateText({
-  model: 'openai/gpt-5-nano',
-  prompt: 'Research the latest developments in quantum computing.',
+  model: "openai/gpt-5-nano",
+  prompt: "Research the latest developments in quantum computing.",
   tools: {
     parallel_search: gateway.tools.parallelSearch(),
   },
 });
 
 console.log(result.text);
-console.log('Tool calls:', JSON.stringify(result.toolCalls, null, 2));
-console.log('Tool results:', JSON.stringify(result.toolResults, null, 2));
+console.log("Tool calls:", JSON.stringify(result.toolCalls, null, 2));
+console.log("Tool results:", JSON.stringify(result.toolResults, null, 2));
 ```
 
 You can also configure the search with optional parameters:
 
 ```ts
-import { gateway, generateText } from 'ai';
+import { gateway, generateText } from "ai";
 
 const result = await generateText({
-  model: 'openai/gpt-5-nano',
-  prompt: 'Find detailed information about TypeScript 5.0 features.',
+  model: "openai/gpt-5-nano",
+  prompt: "Find detailed information about TypeScript 5.0 features.",
   tools: {
     parallel_search: gateway.tools.parallelSearch({
-      mode: 'agentic',
+      mode: "agentic",
       maxResults: 5,
       sourcePolicy: {
-        includeDomains: ['typescriptlang.org', 'github.com'],
+        includeDomains: ["typescriptlang.org", "github.com"],
       },
       excerpts: {
         maxCharsPerResult: 8000,
@@ -456,52 +455,48 @@ const result = await generateText({
 });
 
 console.log(result.text);
-console.log('Tool calls:', JSON.stringify(result.toolCalls, null, 2));
-console.log('Tool results:', JSON.stringify(result.toolResults, null, 2));
+console.log("Tool calls:", JSON.stringify(result.toolCalls, null, 2));
+console.log("Tool results:", JSON.stringify(result.toolResults, null, 2));
 ```
 
 The Parallel Search tool supports the following optional configuration options:
 
-- **mode** *'one-shot' | 'agentic'*
+- **mode** _'one-shot' | 'agentic'_
 
   Mode preset for different use cases:
-
   - `'one-shot'` - Comprehensive results with longer excerpts for single-response answers (default)
   - `'agentic'` - Concise, token-efficient results optimized for multi-step agentic workflows
 
-- **maxResults** *number*
+- **maxResults** _number_
 
   Maximum number of results to return (1-20). Defaults to 10 if not specified.
 
-- **sourcePolicy** *object*
+- **sourcePolicy** _object_
 
   Source policy for controlling which domains to include/exclude:
-
   - `includeDomains` - List of domains to include in search results
   - `excludeDomains` - List of domains to exclude from search results
   - `afterDate` - Only include results published after this date (ISO 8601 format)
 
-- **excerpts** *object*
+- **excerpts** _object_
 
   Excerpt configuration for controlling result length:
-
   - `maxCharsPerResult` - Maximum characters per result
   - `maxCharsTotal` - Maximum total characters across all results
 
-- **fetchPolicy** *object*
+- **fetchPolicy** _object_
 
   Fetch policy for controlling content freshness:
-
   - `maxAgeSeconds` - Maximum age in seconds for cached content (set to 0 for always fresh)
 
 The tool works with both `generateText` and `streamText`:
 
 ```ts
-import { gateway, streamText } from 'ai';
+import { gateway, streamText } from "ai";
 
 const result = streamText({
-  model: 'openai/gpt-5-nano',
-  prompt: 'Research the latest AI safety guidelines.',
+  model: "openai/gpt-5-nano",
+  prompt: "Research the latest AI safety guidelines.",
   tools: {
     parallel_search: gateway.tools.parallelSearch(),
   },
@@ -509,14 +504,14 @@ const result = streamText({
 
 for await (const part of result.fullStream) {
   switch (part.type) {
-    case 'text-delta':
+    case "text-delta":
       process.stdout.write(part.text);
       break;
-    case 'tool-call':
-      console.log('\nTool call:', JSON.stringify(part, null, 2));
+    case "tool-call":
+      console.log("\nTool call:", JSON.stringify(part, null, 2));
       break;
-    case 'tool-result':
-      console.log('\nTool result:', JSON.stringify(part, null, 2));
+    case "tool-result":
+      console.log("\nTool result:", JSON.stringify(part, null, 2));
       break;
   }
 }
@@ -527,16 +522,16 @@ for await (const part of result.fullStream) {
 Track usage per end-user and categorize requests with tags:
 
 ```ts
-import type { GatewayLanguageModelOptions } from '@ai-sdk/gateway';
-import { generateText } from 'ai';
+import type { GatewayLanguageModelOptions } from "@ai-sdk/gateway";
+import { generateText } from "ai";
 
 const { text } = await generateText({
-  model: 'openai/gpt-5',
-  prompt: 'Summarize this document...',
+  model: "openai/gpt-5",
+  prompt: "Summarize this document...",
   providerOptions: {
     gateway: {
-      user: 'user-abc-123', // Track usage for this specific end-user
-      tags: ['document-summary', 'premium-feature'], // Categorize for reporting
+      user: "user-abc-123", // Track usage for this specific end-user
+      tags: ["document-summary", "premium-feature"], // Categorize for reporting
     } satisfies GatewayLanguageModelOptions,
   },
 });
@@ -557,16 +552,16 @@ The AI Gateway provider accepts provider options that control routing behavior a
 You can use the `gateway` key in `providerOptions` to control how AI Gateway routes requests:
 
 ```ts
-import type { GatewayLanguageModelOptions } from '@ai-sdk/gateway';
-import { generateText } from 'ai';
+import type { GatewayLanguageModelOptions } from "@ai-sdk/gateway";
+import { generateText } from "ai";
 
 const { text } = await generateText({
-  model: 'anthropic/claude-sonnet-4',
-  prompt: 'Explain quantum computing',
+  model: "anthropic/claude-sonnet-4",
+  prompt: "Explain quantum computing",
   providerOptions: {
     gateway: {
-      order: ['vertex', 'anthropic'], // Try Vertex AI first, then Anthropic
-      only: ['vertex', 'anthropic'], // Only use these providers
+      order: ["vertex", "anthropic"], // Try Vertex AI first, then Anthropic
+      only: ["vertex", "anthropic"], // Only use these providers
     } satisfies GatewayLanguageModelOptions,
   },
 });
@@ -574,53 +569,52 @@ const { text } = await generateText({
 
 The following gateway provider options are available:
 
-- **order** *string\[]*
+- **order** _string\[]_
 
   Specifies the sequence of providers to attempt when routing requests. The gateway will try providers in the order specified. If a provider fails or is unavailable, it will move to the next provider in the list.
 
   Example: `order: ['bedrock', 'anthropic']` will attempt Amazon Bedrock first, then fall back to Anthropic.
 
-- **only** *string\[]*
+- **only** _string\[]_
 
   Restricts routing to only the specified providers. When set, the gateway will never route to providers not in this list, even if they would otherwise be available.
 
   Example: `only: ['anthropic', 'vertex']` will only allow routing to Anthropic or Vertex AI.
 
-- **models** *string\[]*
+- **models** _string\[]_
 
   Specifies fallback models to use when the primary model fails or is unavailable. The gateway will try the primary model first (specified in the `model` parameter), then try each model in this array in order until one succeeds.
 
   Example: `models: ['openai/gpt-5-nano', 'gemini-2.0-flash']` will try the fallback models in order if the primary model fails.
 
-- **user** *string*
+- **user** _string_
 
   Optional identifier for the end user on whose behalf the request is being made. This is used for spend tracking and attribution purposes, allowing you to track usage per end-user in your application.
 
   Example: `user: 'user-123'` will associate this request with end-user ID "user-123" in usage reports.
 
-- **tags** *string\[]*
+- **tags** _string\[]_
 
   Optional array of tags for categorizing and filtering usage in reports. Useful for tracking spend by feature, prompt version, or any other dimension relevant to your application.
 
   Example: `tags: ['chat', 'v2']` will tag this request with "chat" and "v2" for filtering in usage analytics.
 
-- **byok** *Record\<string, Array\<Record\<string, unknown>>>*
+- **byok** _Record\<string, Array\<Record\<string, unknown>>>_
 
   Request-scoped BYOK (Bring Your Own Key) credentials to use for this request. When provided, any cached BYOK credentials configured in the gateway system are not considered. Requests may still fall back to use system credentials if the provided credentials fail.
 
   Each provider can have multiple credentials (tried in order). The structure is a record where keys are provider slugs and values are arrays of credential objects.
 
   Examples:
-
   - Single provider: `byok: { 'anthropic': [{ apiKey: 'sk-ant-...' }] }`
   - Multiple credentials: `byok: { 'vertex': [{ project: 'proj-1', googleCredentials: { privateKey: '...', clientEmail: '...' } }, { project: 'proj-2', googleCredentials: { privateKey: '...', clientEmail: '...' } }] }`
   - Multiple providers: `byok: { 'anthropic': [{ apiKey: '...' }], 'bedrock': [{ accessKeyId: '...', secretAccessKey: '...' }] }`
 
-- **zeroDataRetention** *boolean*
+- **zeroDataRetention** _boolean_
 
   Restricts routing requests to providers that have zero data retention policies.
 
-- **providerTimeouts** *object*
+- **providerTimeouts** _object_
 
   Per-provider timeouts for BYOK credentials in milliseconds. Controls how long to wait for a provider to start responding before falling back to the next available provider.
 
@@ -631,16 +625,16 @@ The following gateway provider options are available:
 You can combine these options to have fine-grained control over routing and tracking:
 
 ```ts
-import type { GatewayLanguageModelOptions } from '@ai-sdk/gateway';
-import { generateText } from 'ai';
+import type { GatewayLanguageModelOptions } from "@ai-sdk/gateway";
+import { generateText } from "ai";
 
 const { text } = await generateText({
-  model: 'anthropic/claude-sonnet-4',
-  prompt: 'Write a haiku about programming',
+  model: "anthropic/claude-sonnet-4",
+  prompt: "Write a haiku about programming",
   providerOptions: {
     gateway: {
-      order: ['vertex'], // Prefer Vertex AI
-      only: ['anthropic', 'vertex'], // Only allow these providers
+      order: ["vertex"], // Prefer Vertex AI
+      only: ["anthropic", "vertex"], // Only allow these providers
     } satisfies GatewayLanguageModelOptions,
   },
 });
@@ -651,15 +645,15 @@ const { text } = await generateText({
 The `models` option enables automatic fallback to alternative models when the primary model fails:
 
 ```ts
-import type { GatewayLanguageModelOptions } from '@ai-sdk/gateway';
-import { generateText } from 'ai';
+import type { GatewayLanguageModelOptions } from "@ai-sdk/gateway";
+import { generateText } from "ai";
 
 const { text } = await generateText({
-  model: 'openai/gpt-4o', // Primary model
-  prompt: 'Write a TypeScript haiku',
+  model: "openai/gpt-4o", // Primary model
+  prompt: "Write a TypeScript haiku",
   providerOptions: {
     gateway: {
-      models: ['openai/gpt-5-nano', 'gemini-2.0-flash'], // Fallback models
+      models: ["openai/gpt-5-nano", "gemini-2.0-flash"], // Fallback models
     } satisfies GatewayLanguageModelOptions,
   },
 });
@@ -678,12 +672,12 @@ that have zero data retention policies. When `zeroDataRetention` is `false` or n
 specified, there is no enforcement of restricting routing.
 
 ```ts
-import type { GatewayLanguageModelOptions } from '@ai-sdk/gateway';
-import { generateText } from 'ai';
+import type { GatewayLanguageModelOptions } from "@ai-sdk/gateway";
+import { generateText } from "ai";
 
 const { text } = await generateText({
-  model: 'anthropic/claude-sonnet-4.5',
-  prompt: 'Analyze this sensitive document...',
+  model: "anthropic/claude-sonnet-4.5",
+  prompt: "Analyze this sensitive document...",
   providerOptions: {
     gateway: {
       zeroDataRetention: true,
@@ -697,19 +691,19 @@ const { text } = await generateText({
 When using provider-specific options through AI Gateway, use the actual provider name (e.g. `anthropic`, `openai`, not `gateway`) as the key:
 
 ```ts
-import type { AnthropicLanguageModelOptions } from '@ai-sdk/anthropic';
-import type { GatewayLanguageModelOptions } from '@ai-sdk/gateway';
-import { generateText } from 'ai';
+import type { AnthropicLanguageModelOptions } from "@ai-sdk/anthropic";
+import type { GatewayLanguageModelOptions } from "@ai-sdk/gateway";
+import { generateText } from "ai";
 
 const { text } = await generateText({
-  model: 'anthropic/claude-sonnet-4',
-  prompt: 'Explain quantum computing',
+  model: "anthropic/claude-sonnet-4",
+  prompt: "Explain quantum computing",
   providerOptions: {
     gateway: {
-      order: ['vertex', 'anthropic'],
+      order: ["vertex", "anthropic"],
     } satisfies GatewayLanguageModelOptions,
     anthropic: {
-      thinking: { type: 'enabled', budgetTokens: 12000 },
+      thinking: { type: "enabled", budgetTokens: 12000 },
     } satisfies AnthropicLanguageModelOptions,
   },
 });

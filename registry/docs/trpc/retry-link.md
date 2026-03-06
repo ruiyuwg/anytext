@@ -9,7 +9,7 @@ If you use `@trpc/react-query` you will generally **not** need this link as it's
 You can import and add the `retryLink` to the `links` array when creating your tRPC client. This link can be placed before or after other links in your setup, depending on your requirements.
 
 ```ts
-import { createTRPCClient, retryLink } from '@trpc/client';
+import { createTRPCClient, retryLink } from "@trpc/client";
 
 const client = createTRPCClient<AppRouter>({
   links: [
@@ -17,12 +17,12 @@ const client = createTRPCClient<AppRouter>({
       retry(opts) {
         if (
           opts.error.data &&
-          opts.error.data.code !== 'INTERNAL_SERVER_ERROR'
+          opts.error.data.code !== "INTERNAL_SERVER_ERROR"
         ) {
           // Don't retry on non-500s
           return false;
         }
-        if (opts.op.type !== 'query') {
+        if (opts.op.type !== "query") {
           // Only retry queries
           return false;
         }
@@ -34,7 +34,7 @@ const client = createTRPCClient<AppRouter>({
       retryDelayMs: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
     }),
     httpBatchLink({
-      url: 'http://localhost:3000',
+      url: "http://localhost:3000",
     }),
   ],
 });

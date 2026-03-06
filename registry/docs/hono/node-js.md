@@ -74,34 +74,34 @@ bun i
 Edit `src/index.ts`:
 
 ```ts
-import { serve } from '@hono/node-server'
-import { Hono } from 'hono'
+import { serve } from "@hono/node-server";
+import { Hono } from "hono";
 
-const app = new Hono()
-app.get('/', (c) => c.text('Hello Node.js!'))
+const app = new Hono();
+app.get("/", (c) => c.text("Hello Node.js!"));
 
-serve(app)
+serve(app);
 ```
 
 If you want to gracefully shut down the server, write it like this:
 
 ```ts
-const server = serve(app)
+const server = serve(app);
 
 // graceful shutdown
-process.on('SIGINT', () => {
-  server.close()
-  process.exit(0)
-})
-process.on('SIGTERM', () => {
+process.on("SIGINT", () => {
+  server.close();
+  process.exit(0);
+});
+process.on("SIGTERM", () => {
   server.close((err) => {
     if (err) {
-      console.error(err)
-      process.exit(1)
+      console.error(err);
+      process.exit(1);
     }
-    process.exit(0)
-  })
-})
+    process.exit(0);
+  });
+});
 ```
 
 ## 3. Run
@@ -132,7 +132,7 @@ You can specify the port number with the `port` option.
 serve({
   fetch: app.fetch,
   port: 8787,
-})
+});
 ```
 
 ## Access the raw Node.js APIs
@@ -140,23 +140,23 @@ serve({
 You can access the Node.js APIs from `c.env.incoming` and `c.env.outgoing`.
 
 ```ts
-import { Hono } from 'hono'
-import { serve, type HttpBindings } from '@hono/node-server'
+import { Hono } from "hono";
+import { serve, type HttpBindings } from "@hono/node-server";
 // or `Http2Bindings` if you use HTTP2
 
 type Bindings = HttpBindings & {
   /* ... */
-}
+};
 
-const app = new Hono<{ Bindings: Bindings }>()
+const app = new Hono<{ Bindings: Bindings }>();
 
-app.get('/', (c) => {
+app.get("/", (c) => {
   return c.json({
     remoteAddress: c.env.incoming.socket.remoteAddress,
-  })
-})
+  });
+});
 
-serve(app)
+serve(app);
 ```
 
 ## Serve static files
@@ -175,21 +175,21 @@ You can use `serveStatic` to serve static files from the local file system. For 
 If a request to the path `/static/*` comes in and you want to return a file under `./static`, you can write the following:
 
 ```ts
-import { serveStatic } from '@hono/node-server/serve-static'
+import { serveStatic } from "@hono/node-server/serve-static";
 
-app.use('/static/*', serveStatic({ root: './' }))
+app.use("/static/*", serveStatic({ root: "./" }));
 ```
 
 Use the `path` option to serve `favicon.ico` in the directory root:
 
 ```ts
-app.use('/favicon.ico', serveStatic({ path: './favicon.ico' }))
+app.use("/favicon.ico", serveStatic({ path: "./favicon.ico" }));
 ```
 
 If a request to the path `/hello.txt` or `/image.png` comes in and you want to return a file named `./static/hello.txt` or `./static/image.png`, you can use the following:
 
 ```ts
-app.use('*', serveStatic({ root: './static' }))
+app.use("*", serveStatic({ root: "./static" }));
 ```
 
 ### `rewriteRequestPath`
@@ -198,13 +198,12 @@ If you want to map `http://localhost:3000/static/*` to `./statics`, you can use 
 
 ```ts
 app.get(
-  '/static/*',
+  "/static/*",
   serveStatic({
-    root: './',
-    rewriteRequestPath: (path) =>
-      path.replace(/^\/static/, '/statics'),
-  })
-)
+    root: "./",
+    rewriteRequestPath: (path) => path.replace(/^\/static/, "/statics"),
+  }),
+);
 ```
 
 ## http2
@@ -214,28 +213,28 @@ You can run hono on a [Node.js http2 Server](https://nodejs.org/api/http2.html).
 ### unencrypted http2
 
 ```ts
-import { createServer } from 'node:http2'
+import { createServer } from "node:http2";
 
 const server = serve({
   fetch: app.fetch,
   createServer,
-})
+});
 ```
 
 ### encrypted http2
 
 ```ts
-import { createSecureServer } from 'node:http2'
-import { readFileSync } from 'node:fs'
+import { createSecureServer } from "node:http2";
+import { readFileSync } from "node:fs";
 
 const server = serve({
   fetch: app.fetch,
   createServer: createSecureServer,
   serverOptions: {
-    key: readFileSync('localhost-privkey.pem'),
-    cert: readFileSync('localhost-cert.pem'),
+    key: readFileSync("localhost-privkey.pem"),
+    cert: readFileSync("localhost-cert.pem"),
   },
-})
+});
 ```
 
 ## Building & Deployment

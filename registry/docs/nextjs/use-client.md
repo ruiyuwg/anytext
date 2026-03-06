@@ -11,43 +11,43 @@ The `'use client'` directive declares an entry point for the components to be re
 To declare an entry point for the Client Components, add the `'use client'` directive **at the top of the file**, before any imports:
 
 ```tsx filename="app/components/counter.tsx" highlight={1} switcher
-'use client'
+"use client";
 
-import { useState } from 'react'
+import { useState } from "react";
 
 export default function Counter() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
     <div>
       <p>Count: {count}</p>
       <button onClick={() => setCount(count + 1)}>Increment</button>
     </div>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/components/counter.js" highlight={1} switcher
-'use client'
+"use client";
 
-import { useState } from 'react'
+import { useState } from "react";
 
 export default function Counter() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
     <div>
       <p>Count: {count}</p>
       <button onClick={() => setCount(count + 1)}>Increment</button>
     </div>
-  )
+  );
 }
 ```
 
 When using the `'use client'` directive, the props of the Client Components must be [serializable](https://react.dev/reference/rsc/use-client#serializable-types). This means the props need to be in a format that React can serialize when sending data from the server to the client.
 
 ```tsx filename="app/components/counter.tsx" highlight={4} switcher
-'use client'
+"use client";
 
 export default function Counter({
   onClick /* ❌ Function is not serializable */,
@@ -56,12 +56,12 @@ export default function Counter({
     <div>
       <button onClick={onClick}>Increment</button>
     </div>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/components/counter.js" highlight={4} switcher
-'use client'
+"use client";
 
 export default function Counter({
   onClick /* ❌ Function is not serializable */,
@@ -70,7 +70,7 @@ export default function Counter({
     <div>
       <button onClick={onClick}>Increment</button>
     </div>
-  )
+  );
 }
 ```
 
@@ -88,8 +88,8 @@ In the following example:
 - `Counter` is a Client Component enabling interactivity within the page.
 
 ```tsx filename="app/page.tsx" highlight={2,8} switcher
-import Header from './header'
-import Counter from './counter' // This is a Client Component
+import Header from "./header";
+import Counter from "./counter"; // This is a Client Component
 
 export default function Page() {
   return (
@@ -97,13 +97,13 @@ export default function Page() {
       <Header />
       <Counter />
     </div>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/page.js" highlight={2,8} switcher
-import Header from './header'
-import Counter from './counter' // This is a Client Component
+import Header from "./header";
+import Counter from "./counter"; // This is a Client Component
 
 export default function Page() {
   return (
@@ -111,7 +111,7 @@ export default function Page() {
       <Header />
       <Counter />
     </div>
-  )
+  );
 }
 ```
 

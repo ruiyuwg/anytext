@@ -17,19 +17,19 @@ The AWS Lambda adapter is supported for API Gateway [REST API(v1)](https://docs.
 
 
   API Gateway with NodeJS client.
-  
-    
+
+
       Source
-    
-  
+
+
 
 
   API Gateway REST API with response streaming.
-  
-    
+
+
       Source
-    
-  
+
+
 ```
 
 ## How to add tRPC
@@ -45,15 +45,15 @@ yarn add @trpc/server
 Implement your tRPC router. A sample router is given below:
 
 ```ts title='server.ts'
-import { initTRPC } from '@trpc/server';
-import { z } from 'zod';
+import { initTRPC } from "@trpc/server";
+import { z } from "zod";
 
 export const t = initTRPC.create();
 
 const appRouter = t.router({
   getUser: t.procedure.input(z.string()).query((opts) => {
     opts.input; // string
-    return { id: opts.input, name: 'Bilbo' };
+    return { id: opts.input, name: "Bilbo" };
   }),
 });
 
@@ -85,8 +85,8 @@ export const handler = awsLambdaRequestHandler({
 
 Build & deploy your code, now use your API Gateway URL to call your function.
 
-| Endpoint  | HTTP URI                                                                                                     |
-| --------- | ------------------------------------------------------------------------------------------------------------ |
+| Endpoint  | HTTP URI                                                                                           |
+| --------- | -------------------------------------------------------------------------------------------------- |
 | `getUser` | `GET https://<execution-api-link>/getUser?input=INPUT` where `INPUT` is a URI-encoded JSON string. |
 
 #### A word about payload format version
@@ -127,19 +127,19 @@ AWS Lambda supports streaming responses to clients with both Lambda Function URL
 
 
   Lambda Function URL with NodeJS client.
-  
-    
+
+
       Source
-    
-  
+
+
 
 
   API Gateway REST API with response streaming.
-  
-    
+
+
       Source
-    
-  
+
+
 ```
 
 ### Response Streaming
@@ -149,8 +149,8 @@ The signature of a streaming handler is different from the default handler. The 
 > Note that the `awslambda` namespace is automatically provided by the Lambda execution environment. You can import the types from `@types/aws-lambda` to augment the global namespace with the `awslambda` namespace.
 
 ```ts title='server.ts'
-import { awsLambdaStreamingRequestHandler } from '@trpc/server/adapters/aws-lambda';
-import type { StreamifyHandler } from 'aws-lambda';
+import { awsLambdaStreamingRequestHandler } from "@trpc/server/adapters/aws-lambda";
+import type { StreamifyHandler } from "aws-lambda";
 
 const appRouter = router({
   iterable: publicProcedure.query(async function* () {

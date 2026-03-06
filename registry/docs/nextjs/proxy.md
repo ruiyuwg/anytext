@@ -16,7 +16,7 @@ Some common scenarios where Proxy is effective include:
 
 For simple redirects, consider using the [`redirects`](/docs/app/api-reference/config/next-config-js/redirects) configuration in `next.config.ts` first. Proxy should be used when you need access to request data or more complex logic.
 
-Proxy is *not* intended for slow data fetching. While Proxy can be helpful for [optimistic checks](/docs/app/guides/authentication#optimistic-checks-with-proxy-optional) such as permission-based redirects, it should not be used as a full session management or authorization solution.
+Proxy is _not_ intended for slow data fetching. While Proxy can be helpful for [optimistic checks](/docs/app/guides/authentication#optimistic-checks-with-proxy-optional) such as permission-based redirects, it should not be used as a full session management or authorization solution.
 
 Using fetch with `options.cache`, `options.next.revalidate`, or `options.next.tags`, has no effect in Proxy.
 
@@ -31,36 +31,36 @@ Create a `proxy.ts` (or `.js`) file in the project root, or inside `src` if appl
 You can export your proxy function as either a default export or a named `proxy` export:
 
 ```ts filename="proxy.ts" switcher
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
 // This function can be marked `async` if using `await` inside
 export function proxy(request: NextRequest) {
-  return NextResponse.redirect(new URL('/home', request.url))
+  return NextResponse.redirect(new URL("/home", request.url));
 }
 
 // Alternatively, you can use a default export:
 // export default function proxy(request: NextRequest) { ... }
 
 export const config = {
-  matcher: '/about/:path*',
-}
+  matcher: "/about/:path*",
+};
 ```
 
 ```js filename="proxy.js" switcher
-import { NextResponse } from 'next/server'
+import { NextResponse } from "next/server";
 
 // This function can be marked `async` if using `await` inside
 export function proxy(request) {
-  return NextResponse.redirect(new URL('/home', request.url))
+  return NextResponse.redirect(new URL("/home", request.url));
 }
 
 // Alternatively, you can use a default export:
 // export default function proxy(request) { ... }
 
 export const config = {
-  matcher: '/about/:path*',
-}
+  matcher: "/about/:path*",
+};
 ```
 
 The `matcher` config allows you to filter Proxy to run on specific paths. See the [Matcher](/docs/app/api-reference/file-conventions/proxy#matcher) documentation for more details on path matching.

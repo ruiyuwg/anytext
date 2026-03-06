@@ -31,14 +31,14 @@ The file names used here are not enforced by tRPC. You may use any file structur
 View sample backend
 
 ```ts title='trpc/init.ts'
-import { initTRPC } from '@trpc/server';
-import { cache } from 'react';
+import { initTRPC } from "@trpc/server";
+import { cache } from "react";
 
 export const createTRPCContext = cache(async () => {
   /**
    * @see: https://trpc.io/docs/server/context
    */
-  return { userId: 'user_123' };
+  return { userId: "user_123" };
 });
 
 // Avoid exporting the entire t-object
@@ -59,8 +59,8 @@ export const baseProcedure = t.procedure;
 ```
 
 ```ts title='trpc/routers/_app.ts'
-import { z } from 'zod';
-import { baseProcedure, createTRPCRouter } from '../init';
+import { z } from "zod";
+import { baseProcedure, createTRPCRouter } from "../init";
 
 export const appRouter = createTRPCRouter({
   hello: baseProcedure
@@ -83,13 +83,13 @@ export type AppRouter = typeof appRouter;
 The backend adapter depends on your framework and how it sets up API routes. The following example sets up GET and POST routes at `/api/trpc/*` using the [fetch adapter](https://trpc.io/docs/server/adapters/fetch) in Next.js.
 
 ```ts title='app/api/trpc/[trpc]/route.ts'
-import { fetchRequestHandler } from '@trpc/server/adapters/fetch';
-import { createTRPCContext } from '~/trpc/init';
-import { appRouter } from '~/trpc/routers/_app';
+import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
+import { createTRPCContext } from "~/trpc/init";
+import { appRouter } from "~/trpc/routers/_app";
 
 const handler = (req: Request) =>
   fetchRequestHandler({
-    endpoint: '/api/trpc',
+    endpoint: "/api/trpc",
     req,
     router: appRouter,
     createContext: createTRPCContext,
@@ -106,8 +106,8 @@ Create a shared file `trpc/query-client.ts` that exports a function that creates
 import {
   defaultShouldDehydrateQuery,
   QueryClient,
-} from '@tanstack/react-query';
-import superjson from 'superjson';
+} from "@tanstack/react-query";
+import superjson from "superjson";
 
 export function makeQueryClient() {
   return new QueryClient({
@@ -119,7 +119,7 @@ export function makeQueryClient() {
         // serializeData: superjson.serialize,
         shouldDehydrateQuery: (query) =>
           defaultShouldDehydrateQuery(query) ||
-          query.state.status === 'pending',
+          query.state.status === "pending",
       },
       hydrate: {
         // deserializeData: superjson.deserialize,
@@ -144,22 +144,22 @@ The `trpc/client.tsx` is the entrypoint when consuming your tRPC API from client
 your tRPC router and create typesafe hooks using `createTRPCReact`. We'll also export our context provider from this file.
 
 ```tsx title='trpc/client.tsx'
-'use client';
+"use client";
 
 // ^-- to make sure we can mount the Provider from a server component
-import type { QueryClient } from '@tanstack/react-query';
-import { QueryClientProvider } from '@tanstack/react-query';
-import { httpBatchLink } from '@trpc/client';
-import { createTRPCReact } from '@trpc/react-query';
-import { useState } from 'react';
-import { makeQueryClient } from './query-client';
-import type { AppRouter } from './routers/_app';
+import type { QueryClient } from "@tanstack/react-query";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { httpBatchLink } from "@trpc/client";
+import { createTRPCReact } from "@trpc/react-query";
+import { useState } from "react";
+import { makeQueryClient } from "./query-client";
+import type { AppRouter } from "./routers/_app";
 
 export const trpc = createTRPCReact<AppRouter>();
 
 let clientQueryClientSingleton: QueryClient;
 function getQueryClient() {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     // Server: always make a new query client
     return makeQueryClient();
   }
@@ -169,9 +169,9 @@ function getQueryClient() {
 
 function getUrl() {
   const base = (() => {
-    if (typeof window !== 'undefined') return '';
+    if (typeof window !== "undefined") return "";
     if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
-    return 'http://localhost:3000';
+    return "http://localhost:3000";
   })();
   return `${base}/api/trpc`;
 }
@@ -216,13 +216,13 @@ To prefetch queries from server components, we use a tRPC caller. The `@trpc/rea
 [`createCaller`](https://trpc.io/docs/server/server-side-calls) that integrates with your React Query client.
 
 ```tsx title='trpc/server.tsx'
-import 'server-only'; // <-- ensure this file cannot be imported from the client
+import "server-only"; // <-- ensure this file cannot be imported from the client
 
-import { createHydrationHelpers } from '@trpc/react-query/rsc';
-import { cache } from 'react';
-import { createCallerFactory, createTRPCContext } from './init';
-import { makeQueryClient } from './query-client';
-import { appRouter } from './routers/_app';
+import { createHydrationHelpers } from "@trpc/react-query/rsc";
+import { cache } from "react";
+import { createCallerFactory, createTRPCContext } from "./init";
+import { makeQueryClient } from "./query-client";
+import { appRouter } from "./routers/_app";
 
 // IMPORTANT: Create a stable getter for the query client that
 //            will return the same client during the same request.
@@ -243,8 +243,8 @@ concept as "render as you fetch" commonly implemented as loaders. This means the
 the data is needed by using the `useQuery` or `useSuspenseQuery` hooks.
 
 ```tsx title='app/page.tsx'
-import { trpc } from '~/trpc/server';
-import { ClientGreeting } from './client-greeting';
+import { trpc } from "~/trpc/server";
+import { ClientGreeting } from "./client-greeting";
 
 export default async function Home() {
   void trpc.hello.prefetch();
@@ -260,10 +260,10 @@ export default async function Home() {
 ```
 
 ```tsx title='app/client-greeting.tsx'
-'use client';
+"use client";
 
 // <-- hooks can only be used in client components
-import { trpc } from '~/trpc/client';
+import { trpc } from "~/trpc/client";
 
 export function ClientGreeting() {
   const greeting = trpc.hello.useQuery();
@@ -277,10 +277,10 @@ export function ClientGreeting() {
 You may prefer handling loading and error states using Suspense and Error Boundaries. You can do this by using the `useSuspenseQuery` hook.
 
 ```tsx title='app/page.tsx'
-import { trpc } from '~/trpc/server';
-import { Suspense } from 'react';
-import { ErrorBoundary } from 'react-error-boundary';
-import { ClientGreeting } from './client-greeting';
+import { trpc } from "~/trpc/server";
+import { Suspense } from "react";
+import { ErrorBoundary } from "react-error-boundary";
+import { ClientGreeting } from "./client-greeting";
 
 export default async function Home() {
   void trpc.hello.prefetch();
@@ -300,9 +300,9 @@ export default async function Home() {
 ```
 
 ```tsx title='app/client-greeting.tsx'
-'use client';
+"use client";
 
-import { trpc } from '~/trpc/client';
+import { trpc } from "~/trpc/client";
 
 export function ClientGreeting() {
   const [data] = trpc.hello.useSuspenseQuery();
@@ -319,7 +319,7 @@ intentional and explained in more detail in the [Advanced Server Rendering](http
 guide.
 
 ```tsx title='app/page.tsx'
-import { trpc } from '~/trpc/server';
+import { trpc } from "~/trpc/server";
 
 export default async function Home() {
   // Use the caller directly without using `.prefetch()`

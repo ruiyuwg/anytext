@@ -29,21 +29,21 @@ The other metadata fields can be defined with the `Metadata` object (for [static
 To define static metadata, export a [`Metadata` object](/docs/app/api-reference/functions/generate-metadata#metadata-object) from a static [`layout.js`](/docs/app/api-reference/file-conventions/layout) or [`page.js`](/docs/app/api-reference/file-conventions/page) file. For example, to add a title and description to the blog route:
 
 ```tsx filename="app/blog/layout.tsx" switcher
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'My Blog',
-  description: '...',
-}
+  title: "My Blog",
+  description: "...",
+};
 
 export default function Layout() {}
 ```
 
 ```jsx filename="app/blog/layout.js" switcher
 export const metadata = {
-  title: 'My Blog',
-  description: '...',
-}
+  title: "My Blog",
+  description: "...",
+};
 
 export default function Layout() {}
 ```
@@ -55,28 +55,28 @@ You can view a full list of available options, in the [`generateMetadata` docume
 You can use [`generateMetadata`](/docs/app/api-reference/functions/generate-metadata) function to `fetch` metadata that depends on data. For example, to fetch the title and description for a specific blog post:
 
 ```tsx filename="app/blog/[slug]/page.tsx" switcher
-import type { Metadata, ResolvingMetadata } from 'next'
+import type { Metadata, ResolvingMetadata } from "next";
 
 type Props = {
-  params: Promise<{ slug: string }>
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
-}
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
 
 export async function generateMetadata(
   { params, searchParams }: Props,
-  parent: ResolvingMetadata
+  parent: ResolvingMetadata,
 ): Promise<Metadata> {
-  const slug = (await params).slug
+  const slug = (await params).slug;
 
   // fetch post information
   const post = await fetch(`https://api.vercel.app/blog/${slug}`).then((res) =>
-    res.json()
-  )
+    res.json(),
+  );
 
   return {
     title: post.title,
     description: post.description,
-  }
+  };
 }
 
 export default function Page({ params, searchParams }: Props) {}
@@ -84,17 +84,17 @@ export default function Page({ params, searchParams }: Props) {}
 
 ```jsx filename="app/blog/[slug]/page.js" switcher
 export async function generateMetadata({ params, searchParams }, parent) {
-  const slug = (await params).slug
+  const slug = (await params).slug;
 
   // fetch post information
   const post = await fetch(`https://api.vercel.app/blog/${slug}`).then((res) =>
-    res.json()
-  )
+    res.json(),
+  );
 
   return {
     title: post.title,
     description: post.description,
-  }
+  };
 }
 
 export default function Page({ params, searchParams }) {}
@@ -119,62 +119,62 @@ Learn more about [streaming metadata](/docs/app/api-reference/functions/generate
 There may be cases where you need to fetch the **same** data for metadata and the page itself. To avoid duplicate requests, you can use React's [`cache` function](https://react.dev/reference/react/cache) to memoize the return value and only fetch the data once. For example, to fetch the blog post information for both the metadata and the page:
 
 ```ts filename="app/lib/data.ts" highlight={5} switcher
-import { cache } from 'react'
-import { db } from '@/app/lib/db'
+import { cache } from "react";
+import { db } from "@/app/lib/db";
 
 // getPost will be used twice, but execute only once
 export const getPost = cache(async (slug: string) => {
-  const res = await db.query.posts.findFirst({ where: eq(posts.slug, slug) })
-  return res
-})
+  const res = await db.query.posts.findFirst({ where: eq(posts.slug, slug) });
+  return res;
+});
 ```
 
 ```js filename="app/lib/data.js" highlight={5} switcher
-import { cache } from 'react'
-import { db } from '@/app/lib/db'
+import { cache } from "react";
+import { db } from "@/app/lib/db";
 
 // getPost will be used twice, but execute only once
 export const getPost = cache(async (slug) => {
-  const res = await db.query.posts.findFirst({ where: eq(posts.slug, slug) })
-  return res
-})
+  const res = await db.query.posts.findFirst({ where: eq(posts.slug, slug) });
+  return res;
+});
 ```
 
 ```tsx filename="app/blog/[slug]/page.tsx" switcher
-import { getPost } from '@/app/lib/data'
+import { getPost } from "@/app/lib/data";
 
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string }
+  params: { slug: string };
 }) {
-  const post = await getPost(params.slug)
+  const post = await getPost(params.slug);
   return {
     title: post.title,
     description: post.description,
-  }
+  };
 }
 
 export default async function Page({ params }: { params: { slug: string } }) {
-  const post = await getPost(params.slug)
-  return <div>{post.title}</div>
+  const post = await getPost(params.slug);
+  return <div>{post.title}</div>;
 }
 ```
 
 ```jsx filename="app/blog/[slug]/page.js" switcher
-import { getPost } from '@/app/lib/data'
+import { getPost } from "@/app/lib/data";
 
 export async function generateMetadata({ params }) {
-  const post = await getPost(params.slug)
+  const post = await getPost(params.slug);
   return {
     title: post.title,
     description: post.description,
-  }
+  };
 }
 
 export default async function Page({ params }) {
-  const post = await getPost(params.slug)
-  return <div>{post.title}</div>
+  const post = await getPost(params.slug);
+  return <div>{post.title}</div>;
 }
 ```
 
@@ -218,76 +218,72 @@ The [`ImageResponse` constructor](/docs/app/api-reference/functions/image-respon
 For example, to generate a unique OG image for each blog post, add a `opengraph-image.tsx` file inside the `blog` folder, and import the `ImageResponse` constructor from `next/og`:
 
 ```tsx filename="app/blog/[slug]/opengraph-image.tsx" switcher
-import { ImageResponse } from 'next/og'
-import { getPost } from '@/app/lib/data'
+import { ImageResponse } from "next/og";
+import { getPost } from "@/app/lib/data";
 
 // Image metadata
 export const size = {
   width: 1200,
   height: 630,
-}
+};
 
-export const contentType = 'image/png'
+export const contentType = "image/png";
 
 // Image generation
 export default async function Image({ params }: { params: { slug: string } }) {
-  const post = await getPost(params.slug)
+  const post = await getPost(params.slug);
 
   return new ImageResponse(
-    (
-      // ImageResponse JSX element
-      <div
-        style={{
-          fontSize: 128,
-          background: 'white',
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        {post.title}
-      </div>
-    )
-  )
+    // ImageResponse JSX element
+    <div
+      style={{
+        fontSize: 128,
+        background: "white",
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      {post.title}
+    </div>,
+  );
 }
 ```
 
 ```jsx filename="app/blog/[slug]/opengraph-image.js" switcher
-import { ImageResponse } from 'next/og'
-import { getPost } from '@/app/lib/data'
+import { ImageResponse } from "next/og";
+import { getPost } from "@/app/lib/data";
 
 // Image metadata
 export const size = {
   width: 1200,
   height: 630,
-}
+};
 
-export const contentType = 'image/png'
+export const contentType = "image/png";
 
 // Image generation
 export default async function Image({ params }) {
-  const post = await getPost(params.slug)
+  const post = await getPost(params.slug);
 
   return new ImageResponse(
-    (
-      // ImageResponse JSX element
-      <div
-        style={{
-          fontSize: 128,
-          background: 'white',
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        {post.title}
-      </div>
-    )
-  )
+    // ImageResponse JSX element
+    <div
+      style={{
+        fontSize: 128,
+        background: "white",
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      {post.title}
+    </div>,
+  );
 }
 ```
 

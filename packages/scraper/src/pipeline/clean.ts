@@ -84,7 +84,10 @@ function preprocess(raw: string): string {
 
     // Restore inline code spans
     // eslint-disable-next-line no-control-regex
-    cleaned = cleaned.replace(/\x00IC(\d+)\x00/g, (_, idx) => inlineCodeSpans[Number(idx)]!);
+    cleaned = cleaned.replace(
+      /\x00IC(\d+)\x00/g,
+      (_, idx) => inlineCodeSpans[Number(idx)]!,
+    );
 
     // Remove HTML comments: <!-- ... -->
     cleaned = cleaned.replace(/<!--[\s\S]*?-->/g, "");
@@ -107,6 +110,6 @@ function preprocess(raw: string): string {
     (_match, body: string) => {
       const titleMatch = body.match(/^title:\s*(.+)$/m);
       return titleMatch ? `# ${titleMatch[1]!.trim()}` : "";
-    }
+    },
   );
 }

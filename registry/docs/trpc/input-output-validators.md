@@ -10,11 +10,11 @@ To set up an input validator, use the `procedure.input()` method:
 
 ```ts twoslash
 // @target: esnext
-import { initTRPC } from '@trpc/server';
+import { initTRPC } from "@trpc/server";
 // ---cut---
 
 // Our examples use Zod by default, but usage with other libraries is identical
-import { z } from 'zod';
+import { z } from "zod";
 
 export const t = initTRPC.create();
 const publicProcedure = t.procedure;
@@ -42,8 +42,8 @@ export const appRouter = t.router({
 
 ```ts twoslash
 // @target: esnext
-import { initTRPC, TRPCError } from '@trpc/server';
-import { z } from 'zod';
+import { initTRPC, TRPCError } from "@trpc/server";
+import { z } from "zod";
 
 export const t = initTRPC.create();
 
@@ -88,11 +88,11 @@ If output validation fails, the server will respond with an `INTERNAL_SERVER_ERR
 
 ```ts twoslash
 // @target: esnext
-import { initTRPC } from '@trpc/server';
+import { initTRPC } from "@trpc/server";
 // @noErrors
 // ---cut---
 
-import { z } from 'zod';
+import { z } from "zod";
 
 export const t = initTRPC.create();
 const publicProcedure = t.procedure;
@@ -123,12 +123,12 @@ Have a look at the [subscriptions guide](subscriptions.md#output-validation) for
 
 You can define a validator without any 3rd party dependencies, with a function.
 
-We don't recommend making a custom validator unless you have a specific need, but it's important to understand that there's no magic here - it's *just typescript*!
+We don't recommend making a custom validator unless you have a specific need, but it's important to understand that there's no magic here - it's _just typescript_!
 
 In most cases we recommend you use a [validation library](#library-integrations)
 
 ```ts twoslash
-import { initTRPC } from '@trpc/server';
+import { initTRPC } from "@trpc/server";
 
 export const t = initTRPC.create();
 
@@ -137,16 +137,16 @@ const publicProcedure = t.procedure;
 export const appRouter = t.router({
   hello: publicProcedure
     .input((value): string => {
-      if (typeof value === 'string') {
+      if (typeof value === "string") {
         return value;
       }
-      throw new Error('Input is not a string');
+      throw new Error("Input is not a string");
     })
     .output((value): string => {
-      if (typeof value === 'string') {
+      if (typeof value === "string") {
         return value;
       }
-      throw new Error('Output is not a string');
+      throw new Error("Output is not a string");
     })
     .query((opts) => {
       const { input } = opts;
@@ -167,8 +167,8 @@ tRPC works out of the box with a number of popular validation and parsing librar
 Zod is our default recommendation, it has a strong ecosystem which makes it a great choice to use in multiple parts of your codebase. If you have no opinion of your own and want a powerful library which won't limit future needs, Zod is a great choice.
 
 ```ts twoslash
-import { initTRPC } from '@trpc/server';
-import { z } from 'zod';
+import { initTRPC } from "@trpc/server";
+import { z } from "zod";
 
 export const t = initTRPC.create();
 
@@ -200,8 +200,8 @@ export type AppRouter = typeof appRouter;
 ### With [Yup](https://github.com/jquense/yup)
 
 ```ts twoslash
-import { initTRPC } from '@trpc/server';
-import * as yup from 'yup';
+import { initTRPC } from "@trpc/server";
+import * as yup from "yup";
 
 export const t = initTRPC.create();
 
@@ -233,8 +233,8 @@ export type AppRouter = typeof appRouter;
 ### With [Superstruct](https://github.com/ianstormtaylor/superstruct)
 
 ```ts twoslash
-import { initTRPC } from '@trpc/server';
-import { object, string } from 'superstruct';
+import { initTRPC } from "@trpc/server";
+import { object, string } from "superstruct";
 
 export const t = initTRPC.create();
 
@@ -258,8 +258,8 @@ export type AppRouter = typeof appRouter;
 ### With [scale-ts](https://github.com/paritytech/scale-ts)
 
 ```ts twoslash
-import { initTRPC } from '@trpc/server';
-import * as $ from 'scale-codec';
+import { initTRPC } from "@trpc/server";
+import * as $ from "scale-codec";
 
 export const t = initTRPC.create();
 
@@ -267,8 +267,8 @@ const publicProcedure = t.procedure;
 
 export const appRouter = t.router({
   hello: publicProcedure
-    .input($.object($.field('name', $.str)))
-    .output($.object($.field('greeting', $.str)))
+    .input($.object($.field("name", $.str)))
+    .output($.object($.field("greeting", $.str)))
     .query(({ input }) => {
       //      ^?
       return {
@@ -283,10 +283,10 @@ export type AppRouter = typeof appRouter;
 ### With [Typia](https://typia.io/docs/utilization/trpc/)
 
 ```ts
-import { initTRPC } from '@trpc/server';
-import typia from 'typia';
-import { v4 } from 'uuid';
-import { IBbsArticle } from '../structures/IBbsArticle';
+import { initTRPC } from "@trpc/server";
+import typia from "typia";
+import { v4 } from "uuid";
+import { IBbsArticle } from "../structures/IBbsArticle";
 
 const t = initTRPC.create();
 
@@ -313,15 +313,15 @@ export type AppRouter = typeof appRouter;
 ### With [ArkType](https://github.com/arktypeio/arktype#trpc)
 
 ```ts
-import { initTRPC } from '@trpc/server';
-import { type } from 'arktype';
+import { initTRPC } from "@trpc/server";
+import { type } from "arktype";
 
 export const t = initTRPC.create();
 
 const publicProcedure = t.procedure;
 
 export const appRouter = t.router({
-  hello: publicProcedure.input(type({ name: 'string' })).query((opts) => {
+  hello: publicProcedure.input(type({ name: "string" })).query((opts) => {
     return {
       greeting: `hello ${opts.input.name}`,
     };
@@ -334,8 +334,8 @@ export type AppRouter = typeof appRouter;
 ### With [effect](https://github.com/Effect-TS/effect/tree/main/packages/schema)
 
 ```ts
-import { initTRPC } from '@trpc/server';
-import { Schema } from 'effect';
+import { initTRPC } from "@trpc/server";
+import { Schema } from "effect";
 
 export const t = initTRPC.create();
 
@@ -384,8 +384,8 @@ export type AppRouter = typeof appRouter;
 ### With [Valibot](https://github.com/fabian-hiller/valibot)
 
 ```ts twoslash
-import { initTRPC } from '@trpc/server';
-import * as v from 'valibot';
+import { initTRPC } from "@trpc/server";
+import * as v from "valibot";
 
 export const t = initTRPC.create();
 
@@ -421,8 +421,8 @@ export const err = (schema) => (input) => {
 ```
 
 ```ts
-import { err, object, string } from '@robolex/sure';
-import { initTRPC } from '@trpc/server';
+import { err, object, string } from "@robolex/sure";
+import { initTRPC } from "@trpc/server";
 
 export const t = initTRPC.create();
 
@@ -458,9 +458,9 @@ export type AppRouter = typeof appRouter;
 ### With [TypeBox](https://github.com/sinclairzx81/typebox)
 
 ```ts
-import { Type } from '@sinclair/typebox';
-import { initTRPC } from '@trpc/server';
-import { wrap } from '@typeschema/typebox';
+import { Type } from "@sinclair/typebox";
+import { initTRPC } from "@trpc/server";
+import { wrap } from "@typeschema/typebox";
 
 export const t = initTRPC.create();
 

@@ -58,14 +58,14 @@ touch lambda/index.ts
 Edit `lambda/index.ts`.
 
 ```ts
-import { Hono } from 'hono'
-import { handle } from 'hono/aws-lambda'
+import { Hono } from "hono";
+import { handle } from "hono/aws-lambda";
 
-const app = new Hono()
+const app = new Hono();
 
-app.get('/', (c) => c.text('Hello Hono!'))
+app.get("/", (c) => c.text("Hello Hono!"));
 
-export const handler = handle(app)
+export const handler = handle(app);
 ```
 
 ## 3. Deploy
@@ -73,26 +73,26 @@ export const handler = handle(app)
 Edit `lib/my-app-stack.ts`.
 
 ```ts
-import * as cdk from 'aws-cdk-lib'
-import { Construct } from 'constructs'
-import * as lambda from 'aws-cdk-lib/aws-lambda'
-import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs'
+import * as cdk from "aws-cdk-lib";
+import { Construct } from "constructs";
+import * as lambda from "aws-cdk-lib/aws-lambda";
+import { NodejsFunction } from "aws-cdk-lib/aws-lambda-nodejs";
 
 export class MyAppStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
-    super(scope, id, props)
+    super(scope, id, props);
 
-    const fn = new NodejsFunction(this, 'lambda', {
-      entry: 'lambda/index.ts',
-      handler: 'handler',
+    const fn = new NodejsFunction(this, "lambda", {
+      entry: "lambda/index.ts",
+      handler: "handler",
       runtime: lambda.Runtime.NODEJS_22_X,
-    })
+    });
     const fnUrl = fn.addFunctionUrl({
       authType: lambda.FunctionUrlAuthType.NONE,
-    })
-    new cdk.CfnOutput(this, 'lambdaUrl', {
+    });
+    new cdk.CfnOutput(this, "lambdaUrl", {
       value: fnUrl.url!,
-    })
+    });
   }
 }
 ```
@@ -110,12 +110,12 @@ In Lambda, base64 encoding is required to return binary data.
 Once binary type is set to `Content-Type` header, Hono automatically encodes data to base64.
 
 ```ts
-app.get('/binary', async (c) => {
+app.get("/binary", async (c) => {
   // ...
-  c.status(200)
-  c.header('Content-Type', 'image/png') // means binary data
-  return c.body(buffer) // supports `ArrayBufferLike` type, encoded to base64.
-})
+  c.status(200);
+  c.header("Content-Type", "image/png"); // means binary data
+  return c.body(buffer); // supports `ArrayBufferLike` type, encoded to base64.
+});
 ```
 
 ## Access AWS Lambda Object
@@ -123,25 +123,25 @@ app.get('/binary', async (c) => {
 In Hono, you can access the AWS Lambda Events and Context by binding the `LambdaEvent`, `LambdaContext` type and using `c.env`
 
 ```ts
-import { Hono } from 'hono'
-import type { LambdaEvent, LambdaContext } from 'hono/aws-lambda'
-import { handle } from 'hono/aws-lambda'
+import { Hono } from "hono";
+import type { LambdaEvent, LambdaContext } from "hono/aws-lambda";
+import { handle } from "hono/aws-lambda";
 
 type Bindings = {
-  event: LambdaEvent
-  lambdaContext: LambdaContext
-}
+  event: LambdaEvent;
+  lambdaContext: LambdaContext;
+};
 
-const app = new Hono<{ Bindings: Bindings }>()
+const app = new Hono<{ Bindings: Bindings }>();
 
-app.get('/aws-lambda-info/', (c) => {
+app.get("/aws-lambda-info/", (c) => {
   return c.json({
     isBase64Encoded: c.env.event.isBase64Encoded,
     awsRequestId: c.env.lambdaContext.awsRequestId,
-  })
-})
+  });
+});
 
-export const handler = handle(app)
+export const handler = handle(app);
 ```
 
 ## Access RequestContext
@@ -149,22 +149,22 @@ export const handler = handle(app)
 In Hono, you can access the AWS Lambda request context by binding the `LambdaEvent` type and using `c.env.event.requestContext`.
 
 ```ts
-import { Hono } from 'hono'
-import type { LambdaEvent } from 'hono/aws-lambda'
-import { handle } from 'hono/aws-lambda'
+import { Hono } from "hono";
+import type { LambdaEvent } from "hono/aws-lambda";
+import { handle } from "hono/aws-lambda";
 
 type Bindings = {
-  event: LambdaEvent
-}
+  event: LambdaEvent;
+};
 
-const app = new Hono<{ Bindings: Bindings }>()
+const app = new Hono<{ Bindings: Bindings }>();
 
-app.get('/custom-context/', (c) => {
-  const lambdaContext = c.env.event.requestContext
-  return c.json(lambdaContext)
-})
+app.get("/custom-context/", (c) => {
+  const lambdaContext = c.env.event.requestContext;
+  return c.json(lambdaContext);
+});
 
-export const handler = handle(app)
+export const handler = handle(app);
 ```
 
 ### Before v3.10.0 (deprecated)
@@ -172,22 +172,22 @@ export const handler = handle(app)
 you can access the AWS Lambda request context by binding the `ApiGatewayRequestContext` type and using `c.env.`
 
 ```ts
-import { Hono } from 'hono'
-import type { ApiGatewayRequestContext } from 'hono/aws-lambda'
-import { handle } from 'hono/aws-lambda'
+import { Hono } from "hono";
+import type { ApiGatewayRequestContext } from "hono/aws-lambda";
+import { handle } from "hono/aws-lambda";
 
 type Bindings = {
-  requestContext: ApiGatewayRequestContext
-}
+  requestContext: ApiGatewayRequestContext;
+};
 
-const app = new Hono<{ Bindings: Bindings }>()
+const app = new Hono<{ Bindings: Bindings }>();
 
-app.get('/custom-context/', (c) => {
-  const lambdaContext = c.env.requestContext
-  return c.json(lambdaContext)
-})
+app.get("/custom-context/", (c) => {
+  const lambdaContext = c.env.requestContext;
+  return c.json(lambdaContext);
+});
 
-export const handler = handle(app)
+export const handler = handle(app);
 ```
 
 ## Lambda response streaming
@@ -204,20 +204,20 @@ fn.addFunctionUrl({
 Typically, the implementation requires writing chunks to NodeJS.WritableStream using awslambda.streamifyResponse, but with the AWS Lambda Adaptor, you can achieve the traditional streaming response of Hono by using streamHandle instead of handle.
 
 ```ts
-import { Hono } from 'hono'
-import { streamHandle } from 'hono/aws-lambda'
-import { streamText } from 'hono/streaming'
+import { Hono } from "hono";
+import { streamHandle } from "hono/aws-lambda";
+import { streamText } from "hono/streaming";
 
-const app = new Hono()
+const app = new Hono();
 
-app.get('/stream', async (c) => {
+app.get("/stream", async (c) => {
   return streamText(c, async (stream) => {
     for (let i = 0; i < 3; i++) {
-      await stream.writeln(`${i}`)
-      await stream.sleep(1)
+      await stream.writeln(`${i}`);
+      await stream.sleep(1);
     }
-  })
-})
+  });
+});
 
-export const handler = streamHandle(app)
+export const handler = streamHandle(app);
 ```

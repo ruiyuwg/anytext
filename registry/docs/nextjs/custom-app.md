@@ -11,16 +11,16 @@ Next.js uses the `App` component to initialize pages. You can override it and co
 To override the default `App`, create the file `pages/_app` as shown below:
 
 ```tsx filename="pages/_app.tsx" switcher
-import type { AppProps } from 'next/app'
+import type { AppProps } from "next/app";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return <Component {...pageProps} />;
 }
 ```
 
 ```jsx filename="pages/_app.jsx" switcher
 export default function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return <Component {...pageProps} />;
 }
 ```
 
@@ -40,9 +40,9 @@ Using [`getInitialProps`](/docs/pages/api-reference/functions/get-initial-props)
 **We do not recommend using this pattern.** Instead, consider [incrementally adopting](/docs/app/guides/migrating/app-router-migration) the App Router, which allows you to more easily fetch data for pages and layouts.
 
 ```tsx filename="pages/_app.tsx" switcher
-import App, { AppContext, AppInitialProps, AppProps } from 'next/app'
+import App, { AppContext, AppInitialProps, AppProps } from "next/app";
 
-type AppOwnProps = { example: string }
+type AppOwnProps = { example: string };
 
 export default function MyApp({
   Component,
@@ -54,20 +54,20 @@ export default function MyApp({
       <p>Data: {example}</p>
       <Component {...pageProps} />
     </>
-  )
+  );
 }
 
 MyApp.getInitialProps = async (
-  context: AppContext
+  context: AppContext,
 ): Promise<AppOwnProps & AppInitialProps> => {
-  const ctx = await App.getInitialProps(context)
+  const ctx = await App.getInitialProps(context);
 
-  return { ...ctx, example: 'data' }
-}
+  return { ...ctx, example: "data" };
+};
 ```
 
 ```jsx filename="pages/_app.jsx" switcher
-import App from 'next/app'
+import App from "next/app";
 
 export default function MyApp({ Component, pageProps, example }) {
   return (
@@ -75,14 +75,14 @@ export default function MyApp({ Component, pageProps, example }) {
       <p>Data: {example}</p>
       <Component {...pageProps} />
     </>
-  )
+  );
 }
 
 MyApp.getInitialProps = async (context) => {
-  const ctx = await App.getInitialProps(context)
+  const ctx = await App.getInitialProps(context);
 
-  return { ...ctx, example: 'data' }
-}
+  return { ...ctx, example: "data" };
+};
 ```
 
 # Custom Document

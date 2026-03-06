@@ -5,9 +5,9 @@ To define a self-referential type, use a [getter](https://developer.mozilla.org/
 ```ts
 const Category = z.object({
   name: z.string(),
-  get subcategories(){
-    return z.array(Category)
-  }
+  get subcategories() {
+    return z.array(Category);
+  },
 });
 
 type Category = z.infer<typeof Category>;
@@ -16,21 +16,21 @@ type Category = z.infer<typeof Category>;
 
 Though recursive schemas are supported, passing cyclical data into Zod will cause an infinite loop.
 
-You can also represent *mutually recursive types*:
+You can also represent _mutually recursive types_:
 
 ```ts
 const User = z.object({
   email: z.email(),
-  get posts(){
-    return z.array(Post)
-  }
+  get posts() {
+    return z.array(Post);
+  },
 });
 
 const Post = z.object({
   title: z.string(),
-  get author(){
-    return User
-  }
+  get author() {
+    return User;
+  },
 });
 ```
 
@@ -64,7 +64,7 @@ const Activity = z.object({
 });
 ```
 
-{/\* Some general rules of thumb for avoiding circularity  \*/}
+{/\* Some general rules of thumb for avoiding circularity \*/}
 
 {/\*
 
@@ -75,8 +75,8 @@ Recursive type inference can by mysterious. TypeScript is capable of it in certa
 export const Activity = z.object({
   name: z.string(),
   get children() {
-    // ^ ❌ 'children' implicitly has return type 'any' because it does not 
-    // have a return type annotation and is referenced directly or indirectly 
+    // ^ ❌ 'children' implicitly has return type 'any' because it does not
+    // have a return type annotation and is referenced directly or indirectly
     // in one of its return expressions.ts(7023)
 
     return z.optional(z.array(Activity)); //.optional();
@@ -86,7 +86,7 @@ export const Activity = z.object({
 
 Here are a couple rules of thumb:
 
-### Object types only 
+### Object types only
 
 Generally speaking, recursive inference only works with object types that are referencing each other. TypeScript has special handling for resolving getter-based recursive objects, which is what Zod relies on. If you try to add non-object types into the mix, you'll likely encounter errors.
 
@@ -101,7 +101,7 @@ const Activity = z.object({
 const ActivityArray = z.array(Activity);
 ```
 
-Sometimes you can get around this limitation by defining 
+Sometimes you can get around this limitation by defining
 
 
 ### Avoid nesting function calls
@@ -112,8 +112,8 @@ Functions like `z.array()` and `z.optional()` accept Zod schemas, so when you us
 const Activity = z.object({
   name: z.string(),
   get subactivities() {
-    // ^ ❌ 'subactivities' implicitly has return type 'any' because it does not 
-    // have a return type annotation and is referenced directly or indirectly 
+    // ^ ❌ 'subactivities' implicitly has return type 'any' because it does not
+    // have a return type annotation and is referenced directly or indirectly
     // in one of its return expressions.ts(7023)
 
     return z.union([z.null(), Activity]);
@@ -194,11 +194,7 @@ z.array(z.string()).check(z.length(5)); // must contain 5 items exactly
 Unlike arrays, tuples are typically fixed-length arrays that specify different schemas for each index.
 
 ```ts
-const MyTuple = z.tuple([
-  z.string(),
-  z.number(),
-  z.boolean()
-]);
+const MyTuple = z.tuple([z.string(), z.number(), z.boolean()]);
 
 type MyTuple = z.infer<typeof MyTuple>;
 // [string, number, boolean]
@@ -269,8 +265,8 @@ An exclusive union (XOR) is a union where exactly one option must match. Unlike 
 const schema = z.xor([z.string(), z.number()]);
 
 schema.parse("hello"); // ✅ passes
-schema.parse(42);      // ✅ passes
-schema.parse(true);    // ❌ fails (zero matches)
+schema.parse(42); // ✅ passes
+schema.parse(true); // ❌ fails (zero matches)
 ```
 
 This is useful when you want to ensure mutual exclusivity between options:

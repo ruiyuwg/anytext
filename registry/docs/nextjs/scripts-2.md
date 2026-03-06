@@ -5,7 +5,7 @@
 To load a third-party script for all routes, import `next/script` and include the script directly in your custom `_app`:
 
 ```jsx filename="pages/_app.js"
-import Script from 'next/script'
+import Script from "next/script";
 
 export default function MyApp({ Component, pageProps }) {
   return (
@@ -13,11 +13,11 @@ export default function MyApp({ Component, pageProps }) {
       <Component {...pageProps} />
       <Script src="https://example.com/script.js" />
     </>
-  )
+  );
 }
 ```
 
-This script will load and execute when *any* route in your application is accessed. Next.js will ensure the script will **only load once**, even if a user navigates between multiple pages.
+This script will load and execute when _any_ route in your application is accessed. Next.js will ensure the script will **only load once**, even if a user navigates between multiple pages.
 
 > **Recommendation**: We recommend only including third-party scripts in specific pages or layouts in order to minimize any unnecessary impact to performance.
 
@@ -45,7 +45,7 @@ module.exports = {
   experimental: {
     nextScriptWorkers: true,
   },
-}
+};
 ```
 
 Then, run the development server and Next.js will guide you through the installation of the required packages to finish the setup:
@@ -71,26 +71,26 @@ You'll see instructions like these: Please install Partytown by running `npm ins
 Once setup is complete, defining `strategy="worker"` will automatically instantiate Partytown in your application and offload the script to a web worker.
 
 ```tsx filename="pages/home.tsx" switcher
-import Script from 'next/script'
+import Script from "next/script";
 
 export default function Home() {
   return (
     <>
       <Script src="https://example.com/script.js" strategy="worker" />
     </>
-  )
+  );
 }
 ```
 
 ```jsx filename="pages/home.js" switcher
-import Script from 'next/script'
+import Script from "next/script";
 
 export default function Home() {
   return (
     <>
       <Script src="https://example.com/script.js" strategy="worker" />
     </>
-  )
+  );
 }
 ```
 
@@ -103,7 +103,7 @@ Although the `worker` strategy does not require any additional configuration to 
 If you would like to add additional configuration options, you can include it within the `<Head />` component used in a [custom `_document.js`](/docs/pages/building-your-application/routing/custom-document):
 
 ```jsx filename="_pages/document.jsx"
-import { Html, Head, Main, NextScript } from 'next/document'
+import { Html, Head, Main, NextScript } from "next/document";
 
 export default function Document() {
   return (
@@ -126,7 +126,7 @@ export default function Document() {
         <NextScript />
       </body>
     </Html>
-  )
+  );
 }
 ```
 
@@ -173,7 +173,7 @@ Event handlers can be used with the Script component to execute additional code 
 These handlers will only work when `next/script` is imported and used inside of a [Client Component](/docs/app/getting-started/server-and-client-components) where `"use client"` is defined as the first line of code:
 
 ```tsx filename="pages/index.tsx" switcher
-import Script from 'next/script'
+import Script from "next/script";
 
 export default function Page() {
   return (
@@ -181,16 +181,16 @@ export default function Page() {
       <Script
         src="https://example.com/script.js"
         onLoad={() => {
-          console.log('Script has loaded')
+          console.log("Script has loaded");
         }}
       />
     </>
-  )
+  );
 }
 ```
 
 ```jsx filename="pages/index.js" switcher
-import Script from 'next/script'
+import Script from "next/script";
 
 export default function Page() {
   return (
@@ -198,11 +198,11 @@ export default function Page() {
       <Script
         src="https://example.com/script.js"
         onLoad={() => {
-          console.log('Script has loaded')
+          console.log("Script has loaded");
         }}
       />
     </>
-  )
+  );
 }
 ```
 
@@ -213,7 +213,7 @@ Refer to the [`next/script`](/docs/pages/api-reference/components/script#onload)
 There are many DOM attributes that can be assigned to a `<script>` element that are not used by the Script component, like [`nonce`](https://developer.mozilla.org/docs/Web/HTML/Global_attributes/nonce) or [custom data attributes](https://developer.mozilla.org/docs/Web/HTML/Global_attributes/data-*). Including any additional attributes will automatically forward it to the final, optimized `<script>` element that is included in the HTML.
 
 ```tsx filename="pages/index.tsx" switcher
-import Script from 'next/script'
+import Script from "next/script";
 
 export default function Page() {
   return (
@@ -225,12 +225,12 @@ export default function Page() {
         data-test="script"
       />
     </>
-  )
+  );
 }
 ```
 
 ```jsx filename="pages/index.js" switcher
-import Script from 'next/script'
+import Script from "next/script";
 
 export default function Page() {
   return (
@@ -242,7 +242,7 @@ export default function Page() {
         data-test="script"
       />
     </>
-  )
+  );
 }
 ```
 

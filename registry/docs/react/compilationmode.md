@@ -4,29 +4,29 @@ The `compilationMode` option controls how the React Compiler selects which funct
 
 ```js
 {
-  compilationMode: 'infer' // or 'annotation', 'syntax', 'all'
+  compilationMode: "infer"; // or 'annotation', 'syntax', 'all'
 }
 ```
 
-***
+---
 
-## Reference {/*reference*/}
+## Reference {/_reference_/}
 
-### `compilationMode` {/*compilationmode*/}
+### `compilationMode` {/_compilationmode_/}
 
 Controls the strategy for determining which functions the React Compiler will optimize.
 
-#### Type {/*type*/}
+#### Type {/_type_/}
 
 ```
 'infer' | 'syntax' | 'annotation' | 'all'
 ```
 
-#### Default value {/*default-value*/}
+#### Default value {/_default-value_/}
 
 `'infer'`
 
-#### Options {/*options*/}
+#### Options {/_options_/}
 
 - **`'infer'`** (default): The compiler uses intelligent heuristics to identify React components and hooks:
   - Functions explicitly annotated with `"use memo"` directive
@@ -38,24 +38,24 @@ Controls the strategy for determining which functions the React Compiler will op
 
 - **`'all'`**: Compile all top-level functions. Not recommended as it may compile non-React functions.
 
-#### Caveats {/*caveats*/}
+#### Caveats {/_caveats_/}
 
 - The `'infer'` mode requires functions to follow React naming conventions to be detected
 - Using `'all'` mode may negatively impact performance by compiling utility functions
 - The `'syntax'` mode requires Flow and won't work with TypeScript
 - Regardless of mode, functions with `"use no memo"` directive are always skipped
 
-***
+---
 
-## Usage {/*usage*/}
+## Usage {/_usage_/}
 
-### Default inference mode {/*default-inference-mode*/}
+### Default inference mode {/_default-inference-mode_/}
 
 The default `'infer'` mode works well for most codebases that follow React conventions:
 
 ```js
 {
-  compilationMode: 'infer'
+  compilationMode: "infer";
 }
 ```
 
@@ -85,13 +85,13 @@ function calculateTotal(items) {
 }
 ```
 
-### Incremental adoption with annotation mode {/*incremental-adoption*/}
+### Incremental adoption with annotation mode {/_incremental-adoption_/}
 
 For gradual migration, use `'annotation'` mode to only compile marked functions:
 
 ```js
 {
-  compilationMode: 'annotation'
+  compilationMode: "annotation";
 }
 ```
 
@@ -103,7 +103,7 @@ function ExpensiveList(props) {
   "use memo";
   return (
     <ul>
-      {props.items.map(item => (
+      {props.items.map((item) => (
         <li key={item.id}>{item.name}</li>
       ))}
     </ul>
@@ -116,13 +116,13 @@ function NormalComponent(props) {
 }
 ```
 
-### Using Flow syntax mode {/*flow-syntax-mode*/}
+### Using Flow syntax mode {/_flow-syntax-mode_/}
 
 If your codebase uses Flow instead of TypeScript:
 
 ```js
 {
-  compilationMode: 'syntax'
+  compilationMode: "syntax";
 }
 ```
 
@@ -146,7 +146,7 @@ function helper(data) {
 }
 ```
 
-### Opting out specific functions {/*opting-out*/}
+### Opting out specific functions {/_opting-out_/}
 
 Regardless of compilation mode, use `"use no memo"` to skip compilation:
 
@@ -155,17 +155,17 @@ function ComponentWithSideEffects() {
   "use no memo"; // Prevent compilation
 
   // This component has side effects that shouldn't be memoized
-  logToAnalytics('component_rendered');
+  logToAnalytics("component_rendered");
 
   return <div>Content</div>;
 }
 ```
 
-***
+---
 
-## Troubleshooting {/*troubleshooting*/}
+## Troubleshooting {/_troubleshooting_/}
 
-### Component not being compiled in infer mode {/*component-not-compiled-infer*/}
+### Component not being compiled in infer mode {/_component-not-compiled-infer_/}
 
 In `'infer'` mode, ensure your component follows React conventions:
 
@@ -182,17 +182,17 @@ function Button(props) {
 
 // ❌ Won't be compiled: doesn't create JSX or call hooks
 function useData() {
-  return window.localStorage.getItem('data');
+  return window.localStorage.getItem("data");
 }
 
 // ✅ Will be compiled: calls a hook
 function useData() {
-  const [data] = useState(() => window.localStorage.getItem('data'));
+  const [data] = useState(() => window.localStorage.getItem("data"));
   return data;
 }
 ```
 
-***
+---
 
 ## Sitemap
 

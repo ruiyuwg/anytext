@@ -36,15 +36,15 @@ Configure your template paths in your `tailwind.config.js` file:
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {},
   },
   plugins: [],
-}
+};
 ```
 
 Add the Tailwind directives to your global CSS file:
@@ -58,10 +58,10 @@ Add the Tailwind directives to your global CSS file:
 Import the CSS file in your `pages/_app.js` file:
 
 ```jsx filename="pages/_app.js"
-import '@/styles/globals.css'
+import "@/styles/globals.css";
 
 export default function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return <Component {...pageProps} />;
 }
 ```
 
@@ -71,13 +71,13 @@ After installing Tailwind CSS and adding the global styles, you can use Tailwind
 
 ```tsx filename="pages/index.tsx" switcher
 export default function Page() {
-  return <h1 className="text-3xl font-bold underline">Hello, Next.js!</h1>
+  return <h1 className="text-3xl font-bold underline">Hello, Next.js!</h1>;
 }
 ```
 
 ```jsx filename="pages/index.js" switcher
 export default function Page() {
-  return <h1 className="text-3xl font-bold underline">Hello, Next.js!</h1>
+  return <h1 className="text-3xl font-bold underline">Hello, Next.js!</h1>;
 }
 ```
 

@@ -23,12 +23,12 @@ Create a `schema.ts` file in the `src/db` directory and declare a table schema:
 ```typescript copy filename="src/db/schema.ts"
 import { pgTable, serial, text } from "drizzle-orm/pg-core";
 
-export const usersTable = pgTable('users_table', {
-  id: serial('id').primaryKey(),
-  name: text('name').notNull(),
-  age: text('age').notNull(),
-  email: text('email').notNull().unique(),
-})
+export const usersTable = pgTable("users_table", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  age: text("age").notNull(),
+  email: text("email").notNull().unique(),
+});
 ```
 
 #### Setup Drizzle config file
@@ -98,10 +98,9 @@ npx drizzle-kit push
 Create a `index.ts` file in the `src/db` directory and set up your database configuration:
 
 ```typescript copy filename="src/db/index.ts"
-import { drizzle } from 'drizzle-orm/neon-serverless';
+import { drizzle } from "drizzle-orm/neon-serverless";
 
-
-export const db = drizzle(process.env.POSTGRES_URL!)
+export const db = drizzle(process.env.POSTGRES_URL!);
 ```
 
 #### Create an API route
@@ -113,13 +112,13 @@ import { db } from "@/db";
 import { usersTable } from "@/db/schema";
 import { NextResponse } from "next/server";
 
-export const dynamic = 'force-dynamic'; // static by default, unless reading the request
-export const runtime = 'edge' // specify the runtime to be edge
+export const dynamic = "force-dynamic"; // static by default, unless reading the request
+export const runtime = "edge"; // specify the runtime to be edge
 
 export async function GET(request: Request) {
-  const users = await db.select().from(usersTable)
+  const users = await db.select().from(usersTable);
 
-  return NextResponse.json({ users, message: 'success' });
+  return NextResponse.json({ users, message: "success" });
 }
 ```
 
@@ -184,12 +183,12 @@ Create a `schema.ts` file in the `src/db` directory and declare a table schema:
 ```typescript copy filename="src/db/schema.ts"
 import { pgTable, serial, text } from "drizzle-orm/pg-core";
 
-export const usersTable = pgTable('users_table', {
-  id: serial('id').primaryKey(),
-  name: text('name').notNull(),
-  age: text('age').notNull(),
-  email: text('email').notNull().unique(),
-})
+export const usersTable = pgTable("users_table", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  age: text("age").notNull(),
+  email: text("email").notNull().unique(),
+});
 ```
 
 #### Setup Drizzle config file
@@ -259,9 +258,9 @@ npx drizzle-kit push
 Create a `index.ts` file in the `src/db` directory and set up your database configuration:
 
 ```typescript copy filename="src/db/index.ts"
-import { drizzle } from 'drizzle-orm/vercel-postgres';
+import { drizzle } from "drizzle-orm/vercel-postgres";
 
-export const db = drizzle()
+export const db = drizzle();
 ```
 
 #### Create an API route
@@ -269,18 +268,17 @@ export const db = drizzle()
 Create `route.ts` in `src/app/api/hello` directory. To learn more about how to write a function, see the [Functions API Reference](https://vercel.com/docs/functions/functions-api-reference) and [Vercel Functions Quickstart](https://vercel.com/docs/functions/quickstart).
 
 ```ts copy filename="src/app/api/hello/route.ts"
-
 import { db } from "@/db";
 import { usersTable } from "@/db/schema";
 import { NextResponse } from "next/server";
 
-export const dynamic = 'force-dynamic'; // static by default, unless reading the request
-export const runtime = 'edge' // specify the runtime to be edge
+export const dynamic = "force-dynamic"; // static by default, unless reading the request
+export const runtime = "edge"; // specify the runtime to be edge
 
 export async function GET(request: Request) {
-  const users = await db.select().from(usersTable)
+  const users = await db.select().from(usersTable);
 
-  return NextResponse.json({ users, message: 'success' });
+  return NextResponse.json({ users, message: "success" });
 }
 ```
 
@@ -345,12 +343,12 @@ Create a `schema.ts` file in the `src/db` directory and declare a table schema:
 ```typescript copy filename="src/db/schema.ts"
 import { mysqlTable, serial, text } from "drizzle-orm/mysql-core";
 
-export const usersTable = mysqlTable('users_table', {
-  id: serial('id').primaryKey(),
-  name: text('name').notNull(),
-  age: text('age').notNull(),
-  email: text('email').notNull().unique(),
-})
+export const usersTable = mysqlTable("users_table", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  age: text("age").notNull(),
+  email: text("email").notNull().unique(),
+});
 ```
 
 #### Setup Drizzle config file
@@ -423,7 +421,7 @@ Create a `index.ts` file in the `src/db` directory and set up your database conf
 ```typescript copy filename="src/db/index.ts"
 import { drizzle } from "drizzle-orm/planetscale-serverless";
 
-export const db = drizzle(process.env.MYSQL_URL!)
+export const db = drizzle(process.env.MYSQL_URL!);
 ```
 
 #### Create an API route
@@ -435,13 +433,13 @@ import { db } from "@/app/db/db";
 import { usersTable } from "@/app/db/schema";
 import { NextResponse } from "next/server";
 
-export const dynamic = 'force-dynamic'; // static by default, unless reading the request
-export const runtime = 'edge' // specify the runtime to be edge
+export const dynamic = "force-dynamic"; // static by default, unless reading the request
+export const runtime = "edge"; // specify the runtime to be edge
 
 export async function GET(request: Request) {
-  const users = await db.select().from(usersTable)
+  const users = await db.select().from(usersTable);
 
-  return NextResponse.json({ users, message: 'success' });
+  return NextResponse.json({ users, message: "success" });
 }
 ```
 
@@ -506,12 +504,12 @@ Create a `schema.ts` file in the `src/db` directory and declare a table schema:
 ```typescript copy filename="src/db/schema.ts"
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
-export const usersTable = sqliteTable('users_table', {
-  id: integer('id').primaryKey(),
-  name: text('name').notNull(),
-  age: text('age').notNull(),
-  email: text('email').notNull().unique(),
-})
+export const usersTable = sqliteTable("users_table", {
+  id: integer("id").primaryKey(),
+  name: text("name").notNull(),
+  age: text("age").notNull(),
+  email: text("email").notNull().unique(),
+});
 ```
 
 #### Setup Drizzle config file
@@ -584,12 +582,14 @@ npx drizzle-kit push
 Create a `index.ts` file in the `src/db` directory and set up your database configuration:
 
 ```typescript copy filename="src/db/index.ts"
-import { drizzle } from 'drizzle-orm/libsql';
+import { drizzle } from "drizzle-orm/libsql";
 
-export const db = drizzle({ connection: {
-  url: process.env.TURSO_CONNECTION_URL!,
-  authToken: process.env.TURSO_AUTH_TOKEN!,
-}})
+export const db = drizzle({
+  connection: {
+    url: process.env.TURSO_CONNECTION_URL!,
+    authToken: process.env.TURSO_AUTH_TOKEN!,
+  },
+});
 ```
 
 #### Create an API route
@@ -601,13 +601,13 @@ import { db } from "@/app/db/db";
 import { usersTable } from "@/app/db/schema";
 import { NextResponse } from "next/server";
 
-export const dynamic = 'force-dynamic'; // static by default, unless reading the request
-export const runtime = 'edge' // specify the runtime to be edge
+export const dynamic = "force-dynamic"; // static by default, unless reading the request
+export const runtime = "edge"; // specify the runtime to be edge
 
 export async function GET(request: Request) {
-  const users = await db.select().from(usersTable)
+  const users = await db.select().from(usersTable);
 
-  return NextResponse.json({ users, message: 'success' });
+  return NextResponse.json({ users, message: "success" });
 }
 ```
 
@@ -683,6 +683,6 @@ This tutorial demonstrates how to use Drizzle ORM with [Neon Postgres](https://n
 - You should have installed the `dotenv` package for managing environment variables. <Npm>
   dotenv
 
-  </Npm>  
+  </Npm>
 
 </Prerequisites>

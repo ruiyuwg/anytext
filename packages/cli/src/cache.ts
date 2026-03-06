@@ -1,4 +1,10 @@
-import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import {
+  existsSync,
+  mkdirSync,
+  readFileSync,
+  rmSync,
+  writeFileSync,
+} from "node:fs";
 import { dirname, join } from "node:path";
 import { homedir } from "node:os";
 import type { Manifest } from "./types.js";
@@ -70,7 +76,11 @@ export function clearCache(): void {
   }
 }
 
-export function getCacheStatus(): { exists: boolean; dir: string; manifestAge: string | null } {
+export function getCacheStatus(): {
+  exists: boolean;
+  dir: string;
+  manifestAge: string | null;
+} {
   if (!existsSync(META_PATH)) {
     return { exists: false, dir: CACHE_DIR, manifestAge: null };
   }
@@ -78,7 +88,8 @@ export function getCacheStatus(): { exists: boolean; dir: string; manifestAge: s
     const meta: CacheMeta = JSON.parse(readFileSync(META_PATH, "utf-8"));
     const ageMs = Date.now() - meta.fetchedAt;
     const ageMin = Math.floor(ageMs / 60000);
-    const ageStr = ageMin < 60 ? `${ageMin}m ago` : `${Math.floor(ageMin / 60)}h ago`;
+    const ageStr =
+      ageMin < 60 ? `${ageMin}m ago` : `${Math.floor(ageMin / 60)}h ago`;
     return { exists: true, dir: CACHE_DIR, manifestAge: ageStr };
   } catch {
     return { exists: false, dir: CACHE_DIR, manifestAge: null };

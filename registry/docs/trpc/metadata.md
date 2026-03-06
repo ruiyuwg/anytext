@@ -7,7 +7,7 @@ Use metadata together with [`trpc-openapi`](https://github.com/jlalmes/trpc-open
 ## Create router with typed metadata
 
 ```tsx
-import { initTRPC } from '@trpc/server';
+import { initTRPC } from "@trpc/server";
 
 // [...]
 
@@ -25,7 +25,7 @@ export const appRouter = t.router({
 ## Example with per route authentication settings
 
 ```tsx title='server.ts'
-import { initTRPC } from '@trpc/server';
+import { initTRPC } from "@trpc/server";
 
 // [...]
 
@@ -39,7 +39,7 @@ export const authedProcedure = t.procedure.use(async (opts) => {
   const { meta, next, ctx } = opts;
   // only check authorization if enabled
   if (meta?.authRequired && !ctx.user) {
-    throw new TRPCError({ code: 'UNAUTHORIZED' });
+    throw new TRPCError({ code: "UNAUTHORIZED" });
   }
   return next();
 });
@@ -47,12 +47,12 @@ export const authedProcedure = t.procedure.use(async (opts) => {
 export const appRouter = t.router({
   hello: authedProcedure.meta({ authRequired: false }).query(() => {
     return {
-      greeting: 'hello world',
+      greeting: "hello world",
     };
   }),
   protectedHello: authedProcedure.meta({ authRequired: true }).query(() => {
     return {
-      greeting: 'hello-world',
+      greeting: "hello-world",
     };
   }),
 });

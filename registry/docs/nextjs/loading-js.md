@@ -7,14 +7,14 @@ The special file `loading.js` helps you create meaningful Loading UI with [React
 ```tsx filename="app/feed/loading.tsx" switcher
 export default function Loading() {
   // Or a custom loading skeleton component
-  return <p>Loading...</p>
+  return <p>Loading...</p>;
 }
 ```
 
 ```jsx filename="app/feed/loading.js" switcher
 export default function Loading() {
   // Or a custom loading skeleton component
-  return <p>Loading...</p>
+  return <p>Loading...</p>;
 }
 ```
 
@@ -47,14 +47,14 @@ Create a loading state by adding a `loading.js` file inside a folder.
 ```tsx filename="app/dashboard/loading.tsx" switcher
 export default function Loading() {
   // You can add any UI inside Loading, including a Skeleton.
-  return <LoadingSkeleton />
+  return <LoadingSkeleton />;
 }
 ```
 
 ```jsx filename="app/dashboard/loading.js" switcher
 export default function Loading() {
   // You can add any UI inside Loading, including a Skeleton.
-  return <LoadingSkeleton />
+  return <LoadingSkeleton />;
 }
 ```
 
@@ -112,8 +112,8 @@ In addition to `loading.js`, you can also manually create Suspense Boundaries fo
 `<Suspense>` works by wrapping a component that performs an asynchronous action (e.g. fetch data), showing fallback UI (e.g. skeleton, spinner) while it's happening, and then swapping in your component once the action completes.
 
 ```tsx filename="app/dashboard/page.tsx" switcher
-import { Suspense } from 'react'
-import { PostFeed, Weather } from './Components'
+import { Suspense } from "react";
+import { PostFeed, Weather } from "./Components";
 
 export default function Posts() {
   return (
@@ -125,13 +125,13 @@ export default function Posts() {
         <Weather />
       </Suspense>
     </section>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/dashboard/page.js" switcher
-import { Suspense } from 'react'
-import { PostFeed, Weather } from './Components'
+import { Suspense } from "react";
+import { PostFeed, Weather } from "./Components";
 
 export default function Posts() {
   return (
@@ -143,7 +143,7 @@ export default function Posts() {
         <Weather />
       </Suspense>
     </section>
-  )
+  );
 }
 ```
 
@@ -169,20 +169,20 @@ The `mdx-components.js|tsx` file is **required** to use [`@next/mdx` with App Ro
 Use the file `mdx-components.tsx` (or `.js`) in the root of your project to define MDX Components. For example, at the same level as `pages` or `app`, or inside `src` if applicable.
 
 ```tsx filename="mdx-components.tsx" switcher
-import type { MDXComponents } from 'mdx/types'
+import type { MDXComponents } from "mdx/types";
 
-const components: MDXComponents = {}
+const components: MDXComponents = {};
 
 export function useMDXComponents(): MDXComponents {
-  return components
+  return components;
 }
 ```
 
 ```js filename="mdx-components.js" switcher
-const components = {}
+const components = {};
 
 export function useMDXComponents() {
-  return components
+  return components;
 }
 ```
 
@@ -193,20 +193,20 @@ export function useMDXComponents() {
 The file must export a single function named `useMDXComponents`. This function does not accept any arguments.
 
 ```tsx filename="mdx-components.tsx" switcher
-import type { MDXComponents } from 'mdx/types'
+import type { MDXComponents } from "mdx/types";
 
-const components: MDXComponents = {}
+const components: MDXComponents = {};
 
 export function useMDXComponents(): MDXComponents {
-  return components
+  return components;
 }
 ```
 
 ```js filename="mdx-components.js" switcher
-const components = {}
+const components = {};
 
 export function useMDXComponents() {
-  return components
+  return components;
 }
 ```
 

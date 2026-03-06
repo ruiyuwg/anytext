@@ -7,19 +7,19 @@ The `readUIMessageStream` helper transforms a stream of `UIMessageChunk` objects
 ## Basic Usage
 
 ```tsx
-import { readUIMessageStream, streamText } from 'ai';
+import { readUIMessageStream, streamText } from "ai";
 __PROVIDER_IMPORT__;
 
 async function main() {
   const result = streamText({
     model: __MODEL__,
-    prompt: 'Write a short story about a robot.',
+    prompt: "Write a short story about a robot.",
   });
 
   for await (const uiMessage of readUIMessageStream({
     stream: result.toUIMessageStream(),
   })) {
-    console.log('Current message state:', uiMessage);
+    console.log("Current message state:", uiMessage);
   }
 }
 ```
@@ -29,18 +29,18 @@ async function main() {
 Handle streaming responses that include tool calls:
 
 ```tsx
-import { readUIMessageStream, streamText, tool } from 'ai';
+import { readUIMessageStream, streamText, tool } from "ai";
 __PROVIDER_IMPORT__;
-import { z } from 'zod';
+import { z } from "zod";
 
 async function handleToolCalls() {
   const result = streamText({
     model: __MODEL__,
     tools: {
       weather: tool({
-        description: 'Get the weather in a location',
+        description: "Get the weather in a location",
         inputSchema: z.object({
-          location: z.string().describe('The location to get the weather for'),
+          location: z.string().describe("The location to get the weather for"),
         }),
         execute: ({ location }) => ({
           location,
@@ -48,23 +48,23 @@ async function handleToolCalls() {
         }),
       }),
     },
-    prompt: 'What is the weather in Tokyo?',
+    prompt: "What is the weather in Tokyo?",
   });
 
   for await (const uiMessage of readUIMessageStream({
     stream: result.toUIMessageStream(),
   })) {
     // Handle different part types
-    uiMessage.parts.forEach(part => {
+    uiMessage.parts.forEach((part) => {
       switch (part.type) {
-        case 'text':
-          console.log('Text:', part.text);
+        case "text":
+          console.log("Text:", part.text);
           break;
-        case 'tool-call':
-          console.log('Tool called:', part.toolName, 'with args:', part.args);
+        case "tool-call":
+          console.log("Tool called:", part.toolName, "with args:", part.args);
           break;
-        case 'tool-result':
-          console.log('Tool result:', part.result);
+        case "tool-result":
+          console.log("Tool result:", part.result);
           break;
       }
     });
@@ -77,14 +77,14 @@ async function handleToolCalls() {
 Resume streaming from a previous message state:
 
 ```tsx
-import { readUIMessageStream, streamText } from 'ai';
+import { readUIMessageStream, streamText } from "ai";
 __PROVIDER_IMPORT__;
 
 async function resumeConversation(lastMessage: UIMessage) {
   const result = streamText({
     model: __MODEL__,
     messages: [
-      { role: 'user', content: 'Continue our previous conversation.' },
+      { role: "user", content: "Continue our previous conversation." },
     ],
   });
 
@@ -93,7 +93,7 @@ async function resumeConversation(lastMessage: UIMessage) {
     stream: result.toUIMessageStream(),
     message: lastMessage, // Resume from this message
   })) {
-    console.log('Resumed message:', uiMessage);
+    console.log("Resumed message:", uiMessage);
   }
 }
 ```

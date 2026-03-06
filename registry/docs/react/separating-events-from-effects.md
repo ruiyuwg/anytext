@@ -8,7 +8,7 @@ Event handlers only re-run when you perform the same interaction again. Unlike e
 - What Effect Events are, and how to extract them from your Effects
 - How to read the latest props and state from Effects using Effect Events
 
-## Choosing between event handlers and Effects {/*choosing-between-event-handlers-and-effects*/}
+## Choosing between event handlers and Effects {/_choosing-between-event-handlers-and-effects_/}
 
 First, let's recap the difference between event handlers and Effects.
 
@@ -17,15 +17,15 @@ Imagine you're implementing a chat room component. Your requirements look like t
 1. Your component should automatically connect to the selected chat room.
 2. When you click the "Send" button, it should send a message to the chat.
 
-Let's say you've already implemented the code for them, but you're not sure where to put it. Should you use event handlers or Effects? Every time you need to answer this question, consider [*why* the code needs to run.](/learn/synchronizing-with-effects#what-are-effects-and-how-are-they-different-from-events)
+Let's say you've already implemented the code for them, but you're not sure where to put it. Should you use event handlers or Effects? Every time you need to answer this question, consider [_why_ the code needs to run.](/learn/synchronizing-with-effects#what-are-effects-and-how-are-they-different-from-events)
 
-### Event handlers run in response to specific interactions {/*event-handlers-run-in-response-to-specific-interactions*/}
+### Event handlers run in response to specific interactions {/_event-handlers-run-in-response-to-specific-interactions_/}
 
-From the user's perspective, sending a message should happen *because* the particular "Send" button was clicked. The user will get rather upset if you send their message at any other time or for any other reason. This is why sending a message should be an event handler. Event handlers let you handle specific interactions:
+From the user's perspective, sending a message should happen _because_ the particular "Send" button was clicked. The user will get rather upset if you send their message at any other time or for any other reason. This is why sending a message should be an event handler. Event handlers let you handle specific interactions:
 
 ```js {4-6}
 function ChatRoom({ roomId }) {
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   // ...
   function handleSendClick() {
     sendMessage(message);
@@ -33,20 +33,20 @@ function ChatRoom({ roomId }) {
   // ...
   return (
     <>
-      <input value={message} onChange={e => setMessage(e.target.value)} />
+      <input value={message} onChange={(e) => setMessage(e.target.value)} />
       <button onClick={handleSendClick}>Send</button>
     </>
   );
 }
 ```
 
-With an event handler, you can be sure that `sendMessage(message)` will *only* run if the user presses the button.
+With an event handler, you can be sure that `sendMessage(message)` will _only_ run if the user presses the button.
 
-### Effects run whenever synchronization is needed {/*effects-run-whenever-synchronization-is-needed*/}
+### Effects run whenever synchronization is needed {/_effects-run-whenever-synchronization-is-needed_/}
 
 Recall that you also need to keep the component connected to the chat room. Where does that code go?
 
-The *reason* to run this code is not some particular interaction. It doesn't matter why or how the user navigated to the chat room screen. Now that they're looking at it and could interact with it, the component needs to stay connected to the selected chat server. Even if the chat room component was the initial screen of your app, and the user has not performed any interactions at all, you would *still* need to connect. This is why it's an Effect:
+The _reason_ to run this code is not some particular interaction. It doesn't matter why or how the user navigated to the chat room screen. Now that they're looking at it and could interact with it, the component needs to stay connected to the selected chat server. Even if the chat room component was the initial screen of your app, and the user has not performed any interactions at all, you would _still_ need to connect. This is why it's an Effect:
 
 ```js {3-9}
 function ChatRoom({ roomId }) {
@@ -62,16 +62,16 @@ function ChatRoom({ roomId }) {
 }
 ```
 
-With this code, you can be sure that there is always an active connection to the currently selected chat server, *regardless* of the specific interactions performed by the user. Whether the user has only opened your app, selected a different room, or navigated to another screen and back, your Effect ensures that the component will *remain synchronized* with the currently selected room, and will [re-connect whenever it's necessary.](/learn/lifecycle-of-reactive-effects#why-synchronization-may-need-to-happen-more-than-once)
+With this code, you can be sure that there is always an active connection to the currently selected chat server, _regardless_ of the specific interactions performed by the user. Whether the user has only opened your app, selected a different room, or navigated to another screen and back, your Effect ensures that the component will _remain synchronized_ with the currently selected room, and will [re-connect whenever it's necessary.](/learn/lifecycle-of-reactive-effects#why-synchronization-may-need-to-happen-more-than-once)
 
 ```js
-import { useState, useEffect } from 'react';
-import { createConnection, sendMessage } from './chat.js';
+import { useState, useEffect } from "react";
+import { createConnection, sendMessage } from "./chat.js";
 
-const serverUrl = 'https://localhost:1234';
+const serverUrl = "https://localhost:1234";
 
 function ChatRoom({ roomId }) {
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     const connection = createConnection(serverUrl, roomId);
@@ -86,30 +86,27 @@ function ChatRoom({ roomId }) {
   return (
     <>
       <h1>Welcome to the {roomId} room!</h1>
-      <input value={message} onChange={e => setMessage(e.target.value)} />
+      <input value={message} onChange={(e) => setMessage(e.target.value)} />
       <button onClick={handleSendClick}>Send</button>
     </>
   );
 }
 
 export default function App() {
-  const [roomId, setRoomId] = useState('general');
+  const [roomId, setRoomId] = useState("general");
   const [show, setShow] = useState(false);
   return (
     <>
       <label>
-        Choose the chat room:{' '}
-        <select
-          value={roomId}
-          onChange={e => setRoomId(e.target.value)}
-        >
+        Choose the chat room:{" "}
+        <select value={roomId} onChange={(e) => setRoomId(e.target.value)}>
           <option value="general">general</option>
           <option value="travel">travel</option>
           <option value="music">music</option>
         </select>
       </label>
       <button onClick={() => setShow(!show)}>
-        {show ? 'Close chat' : 'Open chat'}
+        {show ? "Close chat" : "Open chat"}
       </button>
       {show && <hr />}
       {show && <ChatRoom roomId={roomId} />}
@@ -120,27 +117,32 @@ export default function App() {
 
 ```js src/chat.js
 export function sendMessage(message) {
-  console.log('🔵 You sent: ' + message);
+  console.log("🔵 You sent: " + message);
 }
 
 export function createConnection(serverUrl, roomId) {
   // A real implementation would actually connect to the server
   return {
     connect() {
-      console.log('✅ Connecting to "' + roomId + '" room at ' + serverUrl + '...');
+      console.log(
+        '✅ Connecting to "' + roomId + '" room at ' + serverUrl + "...",
+      );
     },
     disconnect() {
       console.log('❌ Disconnected from "' + roomId + '" room at ' + serverUrl);
-    }
+    },
   };
 }
 ```
 
 ```css
-input, select { margin-right: 20px; }
+input,
+select {
+  margin-right: 20px;
+}
 ```
 
-## Reactive values and reactive logic {/*reactive-values-and-reactive-logic*/}
+## Reactive values and reactive logic {/_reactive-values-and-reactive-logic_/}
 
 Intuitively, you could say that event handlers are always triggered "manually", for example by clicking a button. Effects, on the other hand, are "automatic": they run and re-run as often as it's needed to stay synchronized.
 
@@ -149,10 +151,10 @@ There is a more precise way to think about this.
 Props, state, and variables declared inside your component's body are called reactive values. In this example, `serverUrl` is not a reactive value, but `roomId` and `message` are. They participate in the rendering data flow:
 
 ```js [[2, 3, "roomId"], [2, 4, "message"]]
-const serverUrl = 'https://localhost:1234';
+const serverUrl = "https://localhost:1234";
 
 function ChatRoom({ roomId }) {
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
 
   // ...
 }
@@ -160,57 +162,57 @@ function ChatRoom({ roomId }) {
 
 Reactive values like these can change due to a re-render. For example, the user may edit the `message` or choose a different `roomId` in a dropdown. Event handlers and Effects respond to changes differently:
 
-- **Logic inside event handlers is *not reactive.*** It will not run again unless the user performs the same interaction (e.g. a click) again. Event handlers can read reactive values without "reacting" to their changes.
-- **Logic inside Effects is *reactive.*** If your Effect reads a reactive value, [you have to specify it as a dependency.](/learn/lifecycle-of-reactive-effects#effects-react-to-reactive-values) Then, if a re-render causes that value to change, React will re-run your Effect's logic with the new value.
+- **Logic inside event handlers is _not reactive._** It will not run again unless the user performs the same interaction (e.g. a click) again. Event handlers can read reactive values without "reacting" to their changes.
+- **Logic inside Effects is _reactive._** If your Effect reads a reactive value, [you have to specify it as a dependency.](/learn/lifecycle-of-reactive-effects#effects-react-to-reactive-values) Then, if a re-render causes that value to change, React will re-run your Effect's logic with the new value.
 
 Let's revisit the previous example to illustrate this difference.
 
-### Logic inside event handlers is not reactive {/*logic-inside-event-handlers-is-not-reactive*/}
+### Logic inside event handlers is not reactive {/_logic-inside-event-handlers-is-not-reactive_/}
 
 Take a look at this line of code. Should this logic be reactive or not?
 
 ```js [[2, 2, "message"]]
-    // ...
-    sendMessage(message);
-    // ...
+// ...
+sendMessage(message);
+// ...
 ```
 
-From the user's perspective, **a change to the `message` does *not* mean that they want to send a message.** It only means that the user is typing. In other words, the logic that sends a message should not be reactive. It should not run again only because the reactive value has changed. That's why it belongs in the event handler:
+From the user's perspective, **a change to the `message` does _not_ mean that they want to send a message.** It only means that the user is typing. In other words, the logic that sends a message should not be reactive. It should not run again only because the reactive value has changed. That's why it belongs in the event handler:
 
 ```js {2}
-  function handleSendClick() {
-    sendMessage(message);
-  }
+function handleSendClick() {
+  sendMessage(message);
+}
 ```
 
 Event handlers aren't reactive, so `sendMessage(message)` will only run when the user clicks the Send button.
 
-### Logic inside Effects is reactive {/*logic-inside-effects-is-reactive*/}
+### Logic inside Effects is reactive {/_logic-inside-effects-is-reactive_/}
 
 Now let's return to these lines:
 
 ```js [[2, 2, "roomId"]]
-    // ...
-    const connection = createConnection(serverUrl, roomId);
-    connection.connect();
-    // ...
+// ...
+const connection = createConnection(serverUrl, roomId);
+connection.connect();
+// ...
 ```
 
-From the user's perspective, **a change to the `roomId` *does* mean that they want to connect to a different room.** In other words, the logic for connecting to the room should be reactive. You *want* these lines of code to "keep up" with the reactive value, and to run again if that value is different. That's why it belongs in an Effect:
+From the user's perspective, **a change to the `roomId` _does_ mean that they want to connect to a different room.** In other words, the logic for connecting to the room should be reactive. You _want_ these lines of code to "keep up" with the reactive value, and to run again if that value is different. That's why it belongs in an Effect:
 
 ```js {2-3}
-  useEffect(() => {
-    const connection = createConnection(serverUrl, roomId);
-    connection.connect();
-    return () => {
-      connection.disconnect()
-    };
-  }, [roomId]);
+useEffect(() => {
+  const connection = createConnection(serverUrl, roomId);
+  connection.connect();
+  return () => {
+    connection.disconnect();
+  };
+}, [roomId]);
 ```
 
 Effects are reactive, so `createConnection(serverUrl, roomId)` and `connection.connect()` will run for every distinct value of `roomId`. Your Effect keeps the chat connection synchronized to the currently selected room.
 
-## Extracting non-reactive logic out of Effects {/*extracting-non-reactive-logic-out-of-effects*/}
+## Extracting non-reactive logic out of Effects {/_extracting-non-reactive-logic-out-of-effects_/}
 
 Things get more tricky when you want to mix reactive logic with non-reactive logic.
 
@@ -264,36 +266,33 @@ Play with this example and see if you can spot the problem with this user experi
 ```
 
 ```js
-import { useState, useEffect } from 'react';
-import { createConnection, sendMessage } from './chat.js';
-import { showNotification } from './notifications.js';
+import { useState, useEffect } from "react";
+import { createConnection, sendMessage } from "./chat.js";
+import { showNotification } from "./notifications.js";
 
-const serverUrl = 'https://localhost:1234';
+const serverUrl = "https://localhost:1234";
 
 function ChatRoom({ roomId, theme }) {
   useEffect(() => {
     const connection = createConnection(serverUrl, roomId);
-    connection.on('connected', () => {
-      showNotification('Connected!', theme);
+    connection.on("connected", () => {
+      showNotification("Connected!", theme);
     });
     connection.connect();
     return () => connection.disconnect();
   }, [roomId, theme]);
 
-  return <h1>Welcome to the {roomId} room!</h1>
+  return <h1>Welcome to the {roomId} room!</h1>;
 }
 
 export default function App() {
-  const [roomId, setRoomId] = useState('general');
+  const [roomId, setRoomId] = useState("general");
   const [isDark, setIsDark] = useState(false);
   return (
     <>
       <label>
-        Choose the chat room:{' '}
-        <select
-          value={roomId}
-          onChange={e => setRoomId(e.target.value)}
-        >
+        Choose the chat room:{" "}
+        <select value={roomId} onChange={(e) => setRoomId(e.target.value)}>
           <option value="general">general</option>
           <option value="travel">travel</option>
           <option value="music">music</option>
@@ -303,15 +302,12 @@ export default function App() {
         <input
           type="checkbox"
           checked={isDark}
-          onChange={e => setIsDark(e.target.checked)}
+          onChange={(e) => setIsDark(e.target.checked)}
         />
         Use dark theme
       </label>
       <hr />
-      <ChatRoom
-        roomId={roomId}
-        theme={isDark ? 'dark' : 'light'}
-      />
+      <ChatRoom roomId={roomId} theme={isDark ? "dark" : "light"} />
     </>
   );
 }
@@ -332,55 +328,58 @@ export function createConnection(serverUrl, roomId) {
     },
     on(event, callback) {
       if (connectedCallback) {
-        throw Error('Cannot add the handler twice.');
+        throw Error("Cannot add the handler twice.");
       }
-      if (event !== 'connected') {
+      if (event !== "connected") {
         throw Error('Only "connected" event is supported.');
       }
       connectedCallback = callback;
     },
     disconnect() {
       clearTimeout(timeout);
-    }
+    },
   };
 }
 ```
 
 ```js src/notifications.js
-import Toastify from 'toastify-js';
-import 'toastify-js/src/toastify.css';
+import Toastify from "toastify-js";
+import "toastify-js/src/toastify.css";
 
 export function showNotification(message, theme) {
   Toastify({
     text: message,
     duration: 2000,
-    gravity: 'top',
-    position: 'right',
+    gravity: "top",
+    position: "right",
     style: {
-      background: theme === 'dark' ? 'black' : 'white',
-      color: theme === 'dark' ? 'white' : 'black',
+      background: theme === "dark" ? "black" : "white",
+      color: theme === "dark" ? "white" : "black",
     },
   }).showToast();
 }
 ```
 
 ```css
-label { display: block; margin-top: 10px; }
+label {
+  display: block;
+  margin-top: 10px;
+}
 ```
 
-When the `roomId` changes, the chat re-connects as you would expect. But since `theme` is also a dependency, the chat *also* re-connects every time you switch between the dark and the light theme. That's not great!
+When the `roomId` changes, the chat re-connects as you would expect. But since `theme` is also a dependency, the chat _also_ re-connects every time you switch between the dark and the light theme. That's not great!
 
-In other words, you *don't* want this line to be reactive, even though it is inside an Effect (which is reactive):
+In other words, you _don't_ want this line to be reactive, even though it is inside an Effect (which is reactive):
 
 ```js
-      // ...
-      showNotification('Connected!', theme);
-      // ...
+// ...
+showNotification("Connected!", theme);
+// ...
 ```
 
 You need a way to separate this non-reactive logic from the reactive Effect around it.
 
-### Declaring an Effect Event {/*declaring-an-effect-event*/}
+### Declaring an Effect Event {/_declaring-an-effect-event_/}
 
 Use a special Hook called [`useEffectEvent`](/reference/react/useEffectEvent) to extract this non-reactive logic out of your Effect:
 
@@ -394,7 +393,7 @@ function ChatRoom({ roomId, theme }) {
   // ...
 ```
 
-Here, `onConnected` is called an *Effect Event.* It's a part of your Effect logic, but it behaves a lot more like an event handler. The logic inside it is not reactive, and it always "sees" the latest values of your props and state.
+Here, `onConnected` is called an _Effect Event._ It's a part of your Effect logic, but it behaves a lot more like an event handler. The logic inside it is not reactive, and it always "sees" the latest values of your props and state.
 
 Now you can call the `onConnected` Effect Event from inside your Effect:
 
@@ -415,7 +414,7 @@ function ChatRoom({ roomId, theme }) {
   // ...
 ```
 
-This solves the problem. Note that you had to *remove* `theme` from the list of your Effect's dependencies, because it's no longer used in the Effect. You also don't need to *add* `onConnected` to it, because **Effect Events are not reactive and must be omitted from dependencies.**
+This solves the problem. Note that you had to _remove_ `theme` from the list of your Effect's dependencies, because it's no longer used in the Effect. You also don't need to _add_ `onConnected` to it, because **Effect Events are not reactive and must be omitted from dependencies.**
 
 Verify that the new behavior works as you would expect:
 
@@ -437,41 +436,38 @@ Verify that the new behavior works as you would expect:
 ```
 
 ```js
-import { useState, useEffect } from 'react';
-import { useEffectEvent } from 'react';
-import { createConnection, sendMessage } from './chat.js';
-import { showNotification } from './notifications.js';
+import { useState, useEffect } from "react";
+import { useEffectEvent } from "react";
+import { createConnection, sendMessage } from "./chat.js";
+import { showNotification } from "./notifications.js";
 
-const serverUrl = 'https://localhost:1234';
+const serverUrl = "https://localhost:1234";
 
 function ChatRoom({ roomId, theme }) {
   const onConnected = useEffectEvent(() => {
-    showNotification('Connected!', theme);
+    showNotification("Connected!", theme);
   });
 
   useEffect(() => {
     const connection = createConnection(serverUrl, roomId);
-    connection.on('connected', () => {
+    connection.on("connected", () => {
       onConnected();
     });
     connection.connect();
     return () => connection.disconnect();
   }, [roomId]);
 
-  return <h1>Welcome to the {roomId} room!</h1>
+  return <h1>Welcome to the {roomId} room!</h1>;
 }
 
 export default function App() {
-  const [roomId, setRoomId] = useState('general');
+  const [roomId, setRoomId] = useState("general");
   const [isDark, setIsDark] = useState(false);
   return (
     <>
       <label>
-        Choose the chat room:{' '}
-        <select
-          value={roomId}
-          onChange={e => setRoomId(e.target.value)}
-        >
+        Choose the chat room:{" "}
+        <select value={roomId} onChange={(e) => setRoomId(e.target.value)}>
           <option value="general">general</option>
           <option value="travel">travel</option>
           <option value="music">music</option>
@@ -481,15 +477,12 @@ export default function App() {
         <input
           type="checkbox"
           checked={isDark}
-          onChange={e => setIsDark(e.target.checked)}
+          onChange={(e) => setIsDark(e.target.checked)}
         />
         Use dark theme
       </label>
       <hr />
-      <ChatRoom
-        roomId={roomId}
-        theme={isDark ? 'dark' : 'light'}
-      />
+      <ChatRoom roomId={roomId} theme={isDark ? "dark" : "light"} />
     </>
   );
 }
@@ -510,45 +503,48 @@ export function createConnection(serverUrl, roomId) {
     },
     on(event, callback) {
       if (connectedCallback) {
-        throw Error('Cannot add the handler twice.');
+        throw Error("Cannot add the handler twice.");
       }
-      if (event !== 'connected') {
+      if (event !== "connected") {
         throw Error('Only "connected" event is supported.');
       }
       connectedCallback = callback;
     },
     disconnect() {
       clearTimeout(timeout);
-    }
+    },
   };
 }
 ```
 
 ```js src/notifications.js hidden
-import Toastify from 'toastify-js';
-import 'toastify-js/src/toastify.css';
+import Toastify from "toastify-js";
+import "toastify-js/src/toastify.css";
 
 export function showNotification(message, theme) {
   Toastify({
     text: message,
     duration: 2000,
-    gravity: 'top',
-    position: 'right',
+    gravity: "top",
+    position: "right",
     style: {
-      background: theme === 'dark' ? 'black' : 'white',
-      color: theme === 'dark' ? 'white' : 'black',
+      background: theme === "dark" ? "black" : "white",
+      color: theme === "dark" ? "white" : "black",
     },
   }).showToast();
 }
 ```
 
 ```css
-label { display: block; margin-top: 10px; }
+label {
+  display: block;
+  margin-top: 10px;
+}
 ```
 
 You can think of Effect Events as being very similar to event handlers. The main difference is that event handlers run in response to user interactions, whereas Effect Events are triggered by you from Effects. Effect Events let you "break the chain" between the reactivity of Effects and code that should not be reactive.
 
-### Reading latest props and state with Effect Events {/*reading-latest-props-and-state-with-effect-events*/}
+### Reading latest props and state with Effect Events {/_reading-latest-props-and-state-with-effect-events_/}
 
 Effect Events let you fix many patterns where you might be tempted to suppress the dependency linter.
 
@@ -574,7 +570,7 @@ function Page({ url }) {
 }
 ```
 
-Think about what you want the code to do. You *want* to log a separate visit for different URLs since each URL represents a different page. In other words, this `logVisit` call *should* be reactive with respect to the `url`. This is why, in this case, it makes sense to follow the dependency linter, and add `url` as a dependency:
+Think about what you want the code to do. You _want_ to log a separate visit for different URLs since each URL represents a different page. In other words, this `logVisit` call _should_ be reactive with respect to the `url`. This is why, in this case, it makes sense to follow the dependency linter, and add `url` as a dependency:
 
 ```js {4}
 function Page({ url }) {
@@ -599,7 +595,7 @@ function Page({ url }) {
 }
 ```
 
-You used `numberOfItems` inside the Effect, so the linter asks you to add it as a dependency. However, you *don't* want the `logVisit` call to be reactive with respect to `numberOfItems`. If the user puts something into the shopping cart, and the `numberOfItems` changes, this *does not mean* that the user visited the page again. In other words, *visiting the page* is, in some sense, an "event". It happens at a precise moment in time.
+You used `numberOfItems` inside the Effect, so the linter asks you to add it as a dependency. However, you _don't_ want the `logVisit` call to be reactive with respect to `numberOfItems`. If the user puts something into the shopping cart, and the `numberOfItems` changes, this _does not mean_ that the user visited the page again. In other words, _visiting the page_ is, in some sense, an "event". It happens at a precise moment in time.
 
 Split the code in two parts:
 
@@ -608,7 +604,7 @@ function Page({ url }) {
   const { items } = useContext(ShoppingCartContext);
   const numberOfItems = items.length;
 
-  const onVisit = useEffectEvent(visitedUrl => {
+  const onVisit = useEffectEvent((visitedUrl) => {
     logVisit(visitedUrl, numberOfItems);
   });
 
@@ -628,46 +624,46 @@ As a result, you will call `logVisit` for every change to the `url`, and always 
 You might be wondering if you could call `onVisit()` with no arguments, and read the `url` inside it:
 
 ```js {2,6}
-  const onVisit = useEffectEvent(() => {
-    logVisit(url, numberOfItems);
-  });
+const onVisit = useEffectEvent(() => {
+  logVisit(url, numberOfItems);
+});
 
-  useEffect(() => {
-    onVisit();
-  }, [url]);
+useEffect(() => {
+  onVisit();
+}, [url]);
 ```
 
-This would work, but it's better to pass this `url` to the Effect Event explicitly. **By passing `url` as an argument to your Effect Event, you are saying that visiting a page with a different `url` constitutes a separate "event" from the user's perspective.** The `visitedUrl` is a *part* of the "event" that happened:
+This would work, but it's better to pass this `url` to the Effect Event explicitly. **By passing `url` as an argument to your Effect Event, you are saying that visiting a page with a different `url` constitutes a separate "event" from the user's perspective.** The `visitedUrl` is a _part_ of the "event" that happened:
 
 ```js {1-2,6}
-  const onVisit = useEffectEvent(visitedUrl => {
-    logVisit(visitedUrl, numberOfItems);
-  });
+const onVisit = useEffectEvent((visitedUrl) => {
+  logVisit(visitedUrl, numberOfItems);
+});
 
-  useEffect(() => {
-    onVisit(url);
-  }, [url]);
+useEffect(() => {
+  onVisit(url);
+}, [url]);
 ```
 
-Since your Effect Event explicitly "asks" for the `visitedUrl`, now you can't accidentally remove `url` from the Effect's dependencies. If you remove the `url` dependency (causing distinct page visits to be counted as one), the linter will warn you about it. You want `onVisit` to be reactive with regards to the `url`, so instead of reading the `url` inside (where it wouldn't be reactive), you pass it *from* your Effect.
+Since your Effect Event explicitly "asks" for the `visitedUrl`, now you can't accidentally remove `url` from the Effect's dependencies. If you remove the `url` dependency (causing distinct page visits to be counted as one), the linter will warn you about it. You want `onVisit` to be reactive with regards to the `url`, so instead of reading the `url` inside (where it wouldn't be reactive), you pass it _from_ your Effect.
 
 This becomes especially important if there is some asynchronous logic inside the Effect:
 
 ```js {6,8}
-  const onVisit = useEffectEvent(visitedUrl => {
-    logVisit(visitedUrl, numberOfItems);
-  });
+const onVisit = useEffectEvent((visitedUrl) => {
+  logVisit(visitedUrl, numberOfItems);
+});
 
-  useEffect(() => {
-    setTimeout(() => {
-      onVisit(url);
-    }, 5000); // Delay logging visits
-  }, [url]);
+useEffect(() => {
+  setTimeout(() => {
+    onVisit(url);
+  }, 5000); // Delay logging visits
+}, [url]);
 ```
 
-Here, `url` inside `onVisit` corresponds to the *latest* `url` (which could have already changed), but `visitedUrl` corresponds to the `url` that originally caused this Effect (and this `onVisit` call) to run.
+Here, `url` inside `onVisit` corresponds to the _latest_ `url` (which could have already changed), but `visitedUrl` corresponds to the `url` that originally caused this Effect (and this `onVisit` call) to run.
 
-#### Is it okay to suppress the dependency linter instead? {/*is-it-okay-to-suppress-the-dependency-linter-instead*/}
+#### Is it okay to suppress the dependency linter instead? {/_is-it-okay-to-suppress-the-dependency-linter-instead_/}
 
 In the existing codebases, you may sometimes see the lint rule suppressed like this:
 
@@ -687,14 +683,14 @@ function Page({ url }) {
 
 We recommend **never suppressing the linter**.
 
-The first downside of suppressing the rule is that React will no longer warn you when your Effect needs to "react" to a new reactive dependency you've introduced to your code. In the earlier example, you added `url` to the dependencies *because* React reminded you to do it. You will no longer get such reminders for any future edits to that Effect if you disable the linter. This leads to bugs.
+The first downside of suppressing the rule is that React will no longer warn you when your Effect needs to "react" to a new reactive dependency you've introduced to your code. In the earlier example, you added `url` to the dependencies _because_ React reminded you to do it. You will no longer get such reminders for any future edits to that Effect if you disable the linter. This leads to bugs.
 
 Here is an example of a confusing bug caused by suppressing the linter. In this example, the `handleMove` function is supposed to read the current `canMove` state variable value in order to decide whether the dot should follow the cursor. However, `canMove` is always `true` inside `handleMove`.
 
 Can you see why?
 
 ```js {expectedErrors: {'react-compiler': [16]}}
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 export default function App() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -707,33 +703,36 @@ export default function App() {
   }
 
   useEffect(() => {
-    window.addEventListener('pointermove', handleMove);
-    return () => window.removeEventListener('pointermove', handleMove);
+    window.addEventListener("pointermove", handleMove);
+    return () => window.removeEventListener("pointermove", handleMove);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <>
       <label>
-        <input type="checkbox"
+        <input
+          type="checkbox"
           checked={canMove}
-          onChange={e => setCanMove(e.target.checked)}
+          onChange={(e) => setCanMove(e.target.checked)}
         />
         The dot is allowed to move
       </label>
       <hr />
-      <div style={{
-        position: 'absolute',
-        backgroundColor: 'pink',
-        borderRadius: '50%',
-        opacity: 0.6,
-        transform: `translate(${position.x}px, ${position.y}px)`,
-        pointerEvents: 'none',
-        left: -20,
-        top: -20,
-        width: 40,
-        height: 40,
-      }} />
+      <div
+        style={{
+          position: "absolute",
+          backgroundColor: "pink",
+          borderRadius: "50%",
+          opacity: 0.6,
+          transform: `translate(${position.x}px, ${position.y}px)`,
+          pointerEvents: "none",
+          left: -20,
+          top: -20,
+          width: 40,
+          height: 40,
+        }}
+      />
     </>
   );
 }
@@ -754,46 +753,49 @@ The author of the original code has "lied" to React by saying that the Effect do
 With `useEffectEvent`, there is no need to "lie" to the linter, and the code works as you would expect:
 
 ```js
-import { useState, useEffect } from 'react';
-import { useEffectEvent } from 'react';
+import { useState, useEffect } from "react";
+import { useEffectEvent } from "react";
 
 export default function App() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [canMove, setCanMove] = useState(true);
 
-  const onMove = useEffectEvent(e => {
+  const onMove = useEffectEvent((e) => {
     if (canMove) {
       setPosition({ x: e.clientX, y: e.clientY });
     }
   });
 
   useEffect(() => {
-    window.addEventListener('pointermove', onMove);
-    return () => window.removeEventListener('pointermove', onMove);
+    window.addEventListener("pointermove", onMove);
+    return () => window.removeEventListener("pointermove", onMove);
   }, []);
 
   return (
     <>
       <label>
-        <input type="checkbox"
+        <input
+          type="checkbox"
           checked={canMove}
-          onChange={e => setCanMove(e.target.checked)}
+          onChange={(e) => setCanMove(e.target.checked)}
         />
         The dot is allowed to move
       </label>
       <hr />
-      <div style={{
-        position: 'absolute',
-        backgroundColor: 'pink',
-        borderRadius: '50%',
-        opacity: 0.6,
-        transform: `translate(${position.x}px, ${position.y}px)`,
-        pointerEvents: 'none',
-        left: -20,
-        top: -20,
-        width: 40,
-        height: 40,
-      }} />
+      <div
+        style={{
+          position: "absolute",
+          backgroundColor: "pink",
+          borderRadius: "50%",
+          opacity: 0.6,
+          transform: `translate(${position.x}px, ${position.y}px)`,
+          pointerEvents: "none",
+          left: -20,
+          top: -20,
+          width: 40,
+          height: 40,
+        }}
+      />
     </>
   );
 }
@@ -805,11 +807,11 @@ body {
 }
 ```
 
-This doesn't mean that `useEffectEvent` is *always* the correct solution. You should only apply it to the lines of code that you don't want to be reactive. In the above sandbox, you didn't want the Effect's code to be reactive with regards to `canMove`. That's why it made sense to extract an Effect Event.
+This doesn't mean that `useEffectEvent` is _always_ the correct solution. You should only apply it to the lines of code that you don't want to be reactive. In the above sandbox, you didn't want the Effect's code to be reactive with regards to `canMove`. That's why it made sense to extract an Effect Event.
 
 Read [Removing Effect Dependencies](/learn/removing-effect-dependencies) for other correct alternatives to suppressing the linter.
 
-### Limitations of Effect Events {/*limitations-of-effect-events*/}
+### Limitations of Effect Events {/_limitations-of-effect-events_/}
 
 Effect Events are very limited in how you can use them:
 
@@ -828,7 +830,7 @@ function Timer() {
 
   useTimer(onTick, 1000); // 🔴 Avoid: Passing Effect Events
 
-  return <h1>{count}</h1>
+  return <h1>{count}</h1>;
 }
 
 function useTimer(callback, delay) {
@@ -851,7 +853,7 @@ function Timer() {
   useTimer(() => {
     setCount(count + 1);
   }, 1000);
-  return <h1>{count}</h1>
+  return <h1>{count}</h1>;
 }
 
 function useTimer(callback, delay) {
@@ -880,7 +882,7 @@ Effect Events are non-reactive "pieces" of your Effect code. They should be next
 - Only call Effect Events from inside Effects.
 - Don't pass Effect Events to other components or Hooks.
 
-#### Fix a variable that doesn't update {/*fix-a-variable-that-doesnt-update*/}
+#### Fix a variable that doesn't update {/_fix-a-variable-that-doesnt-update_/}
 
 This `Timer` component keeps a `count` state variable which increases every second. The value by which it's increasing is stored in the `increment` state variable. You can control the `increment` variable with the plus and minus buttons.
 
@@ -889,7 +891,7 @@ However, no matter how many times you click the plus button, the counter is stil
 To fix this code, it's enough to follow the rules.
 
 ```js {expectedErrors: {'react-compiler': [14]}}
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 export default function Timer() {
   const [count, setCount] = useState(0);
@@ -897,7 +899,7 @@ export default function Timer() {
 
   useEffect(() => {
     const id = setInterval(() => {
-      setCount(c => c + increment);
+      setCount((c) => c + increment);
     }, 1000);
     return () => {
       clearInterval(id);
@@ -914,13 +916,22 @@ export default function Timer() {
       <hr />
       <p>
         Every second, increment by:
-        <button disabled={increment === 0} onClick={() => {
-          setIncrement(i => i - 1);
-        }}>–</button>
+        <button
+          disabled={increment === 0}
+          onClick={() => {
+            setIncrement((i) => i - 1);
+          }}
+        >
+          –
+        </button>
         <b>{increment}</b>
-        <button onClick={() => {
-          setIncrement(i => i + 1);
-        }}>+</button>
+        <button
+          onClick={() => {
+            setIncrement((i) => i + 1);
+          }}
+        >
+          +
+        </button>
       </p>
     </>
   );
@@ -928,7 +939,9 @@ export default function Timer() {
 ```
 
 ```css
-button { margin: 10px; }
+button {
+  margin: 10px;
+}
 ```
 
 As usual, when you're looking for bugs in Effects, start by searching for linter suppressions.
@@ -936,7 +949,7 @@ As usual, when you're looking for bugs in Effects, start by searching for linter
 If you remove the suppression comment, React will tell you that this Effect's code depends on `increment`, but you "lied" to React by claiming that this Effect does not depend on any reactive values (`[]`). Add `increment` to the dependency array:
 
 ```js
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 export default function Timer() {
   const [count, setCount] = useState(0);
@@ -944,7 +957,7 @@ export default function Timer() {
 
   useEffect(() => {
     const id = setInterval(() => {
-      setCount(c => c + increment);
+      setCount((c) => c + increment);
     }, 1000);
     return () => {
       clearInterval(id);
@@ -960,13 +973,22 @@ export default function Timer() {
       <hr />
       <p>
         Every second, increment by:
-        <button disabled={increment === 0} onClick={() => {
-          setIncrement(i => i - 1);
-        }}>–</button>
+        <button
+          disabled={increment === 0}
+          onClick={() => {
+            setIncrement((i) => i - 1);
+          }}
+        >
+          –
+        </button>
         <b>{increment}</b>
-        <button onClick={() => {
-          setIncrement(i => i + 1);
-        }}>+</button>
+        <button
+          onClick={() => {
+            setIncrement((i) => i + 1);
+          }}
+        >
+          +
+        </button>
       </p>
     </>
   );
@@ -974,22 +996,24 @@ export default function Timer() {
 ```
 
 ```css
-button { margin: 10px; }
+button {
+  margin: 10px;
+}
 ```
 
 Now, when `increment` changes, React will re-synchronize your Effect, which will restart the interval.
 
-#### Fix a freezing counter {/*fix-a-freezing-counter*/}
+#### Fix a freezing counter {/_fix-a-freezing-counter_/}
 
 This `Timer` component keeps a `count` state variable which increases every second. The value by which it's increasing is stored in the `increment` state variable, which you can control it with the plus and minus buttons. For example, try pressing the plus button nine times, and notice that the `count` now increases each second by ten rather than by one.
 
-There is a small issue with this user interface. You might notice that if you keep pressing the plus or minus buttons faster than once per second, the timer itself seems to pause. It only resumes after a second passes since the last time you've pressed either button. Find why this is happening, and fix the issue so that the timer ticks on *every* second without interruptions.
+There is a small issue with this user interface. You might notice that if you keep pressing the plus or minus buttons faster than once per second, the timer itself seems to pause. It only resumes after a second passes since the last time you've pressed either button. Find why this is happening, and fix the issue so that the timer ticks on _every_ second without interruptions.
 
 It seems like the Effect which sets up the timer "reacts" to the `increment` value. Does the line that uses the current `increment` value in order to call `setCount` really need to be reactive?
 
 ```js
-import { useState, useEffect } from 'react';
-import { useEffectEvent } from 'react';
+import { useState, useEffect } from "react";
+import { useEffectEvent } from "react";
 
 export default function Timer() {
   const [count, setCount] = useState(0);
@@ -997,7 +1021,7 @@ export default function Timer() {
 
   useEffect(() => {
     const id = setInterval(() => {
-      setCount(c => c + increment);
+      setCount((c) => c + increment);
     }, 1000);
     return () => {
       clearInterval(id);
@@ -1013,13 +1037,22 @@ export default function Timer() {
       <hr />
       <p>
         Every second, increment by:
-        <button disabled={increment === 0} onClick={() => {
-          setIncrement(i => i - 1);
-        }}>–</button>
+        <button
+          disabled={increment === 0}
+          onClick={() => {
+            setIncrement((i) => i - 1);
+          }}
+        >
+          –
+        </button>
         <b>{increment}</b>
-        <button onClick={() => {
-          setIncrement(i => i + 1);
-        }}>+</button>
+        <button
+          onClick={() => {
+            setIncrement((i) => i + 1);
+          }}
+        >
+          +
+        </button>
       </p>
     </>
   );
@@ -1027,7 +1060,9 @@ export default function Timer() {
 ```
 
 ```css
-button { margin: 10px; }
+button {
+  margin: 10px;
+}
 ```
 
 The issue is that the code inside the Effect uses the `increment` state variable. Since it's a dependency of your Effect, every change to `increment` causes the Effect to re-synchronize, which causes the interval to clear. If you keep clearing the interval every time before it has a chance to fire, it will appear as if the timer has stalled.
@@ -1035,15 +1070,15 @@ The issue is that the code inside the Effect uses the `increment` state variable
 To solve the issue, extract an `onTick` Effect Event from the Effect:
 
 ```js
-import { useState, useEffect } from 'react';
-import { useEffectEvent } from 'react';
+import { useState, useEffect } from "react";
+import { useEffectEvent } from "react";
 
 export default function Timer() {
   const [count, setCount] = useState(0);
   const [increment, setIncrement] = useState(1);
 
   const onTick = useEffectEvent(() => {
-    setCount(c => c + increment);
+    setCount((c) => c + increment);
   });
 
   useEffect(() => {
@@ -1064,13 +1099,22 @@ export default function Timer() {
       <hr />
       <p>
         Every second, increment by:
-        <button disabled={increment === 0} onClick={() => {
-          setIncrement(i => i - 1);
-        }}>–</button>
+        <button
+          disabled={increment === 0}
+          onClick={() => {
+            setIncrement((i) => i - 1);
+          }}
+        >
+          –
+        </button>
         <b>{increment}</b>
-        <button onClick={() => {
-          setIncrement(i => i + 1);
-        }}>+</button>
+        <button
+          onClick={() => {
+            setIncrement((i) => i + 1);
+          }}
+        >
+          +
+        </button>
       </p>
     </>
   );
@@ -1078,20 +1122,22 @@ export default function Timer() {
 ```
 
 ```css
-button { margin: 10px; }
+button {
+  margin: 10px;
+}
 ```
 
 Since `onTick` is an Effect Event, the code inside it isn't reactive. The change to `increment` does not trigger any Effects.
 
-#### Fix a non-adjustable delay {/*fix-a-non-adjustable-delay*/}
+#### Fix a non-adjustable delay {/_fix-a-non-adjustable-delay_/}
 
 In this example, you can customize the interval delay. It's stored in a `delay` state variable which is updated by two buttons. However, even if you press the "plus 100 ms" button until the `delay` is 1000 milliseconds (that is, a second), you'll notice that the timer still increments very fast (every 100 ms). It's as if your changes to the `delay` are ignored. Find and fix the bug.
 
-Code inside Effect Events is not reactive. Are there cases in which you would *want* the `setInterval` call to re-run?
+Code inside Effect Events is not reactive. Are there cases in which you would _want_ the `setInterval` call to re-run?
 
 ```js
-import { useState, useEffect } from 'react';
-import { useEffectEvent } from 'react';
+import { useState, useEffect } from "react";
+import { useEffectEvent } from "react";
 
 export default function Timer() {
   const [count, setCount] = useState(0);
@@ -1099,7 +1145,7 @@ export default function Timer() {
   const [delay, setDelay] = useState(100);
 
   const onTick = useEffectEvent(() => {
-    setCount(c => c + increment);
+    setCount((c) => c + increment);
   });
 
   const onMount = useEffectEvent(() => {
@@ -1112,7 +1158,7 @@ export default function Timer() {
     const id = onMount();
     return () => {
       clearInterval(id);
-    }
+    };
   }, []);
 
   return (
@@ -1124,23 +1170,41 @@ export default function Timer() {
       <hr />
       <p>
         Increment by:
-        <button disabled={increment === 0} onClick={() => {
-          setIncrement(i => i - 1);
-        }}>–</button>
+        <button
+          disabled={increment === 0}
+          onClick={() => {
+            setIncrement((i) => i - 1);
+          }}
+        >
+          –
+        </button>
         <b>{increment}</b>
-        <button onClick={() => {
-          setIncrement(i => i + 1);
-        }}>+</button>
+        <button
+          onClick={() => {
+            setIncrement((i) => i + 1);
+          }}
+        >
+          +
+        </button>
       </p>
       <p>
         Increment delay:
-        <button disabled={delay === 100} onClick={() => {
-          setDelay(d => d - 100);
-        }}>–100 ms</button>
+        <button
+          disabled={delay === 100}
+          onClick={() => {
+            setDelay((d) => d - 100);
+          }}
+        >
+          –100 ms
+        </button>
         <b>{delay} ms</b>
-        <button onClick={() => {
-          setDelay(d => d + 100);
-        }}>+100 ms</button>
+        <button
+          onClick={() => {
+            setDelay((d) => d + 100);
+          }}
+        >
+          +100 ms
+        </button>
       </p>
     </>
   );
@@ -1148,14 +1212,16 @@ export default function Timer() {
 ```
 
 ```css
-button { margin: 10px; }
+button {
+  margin: 10px;
+}
 ```
 
-The problem with the above example is that it extracted an Effect Event called `onMount` without considering what the code should actually be doing. You should only extract Effect Events for a specific reason: when you want to make a part of your code non-reactive. However, the `setInterval` call *should* be reactive with respect to the `delay` state variable. If the `delay` changes, you want to set up the interval from scratch! To fix this code, pull all the reactive code back inside the Effect:
+The problem with the above example is that it extracted an Effect Event called `onMount` without considering what the code should actually be doing. You should only extract Effect Events for a specific reason: when you want to make a part of your code non-reactive. However, the `setInterval` call _should_ be reactive with respect to the `delay` state variable. If the `delay` changes, you want to set up the interval from scratch! To fix this code, pull all the reactive code back inside the Effect:
 
 ```js
-import { useState, useEffect } from 'react';
-import { useEffectEvent } from 'react';
+import { useState, useEffect } from "react";
+import { useEffectEvent } from "react";
 
 export default function Timer() {
   const [count, setCount] = useState(0);
@@ -1163,7 +1229,7 @@ export default function Timer() {
   const [delay, setDelay] = useState(100);
 
   const onTick = useEffectEvent(() => {
-    setCount(c => c + increment);
+    setCount((c) => c + increment);
   });
 
   useEffect(() => {
@@ -1172,7 +1238,7 @@ export default function Timer() {
     }, delay);
     return () => {
       clearInterval(id);
-    }
+    };
   }, [delay]);
 
   return (
@@ -1184,23 +1250,41 @@ export default function Timer() {
       <hr />
       <p>
         Increment by:
-        <button disabled={increment === 0} onClick={() => {
-          setIncrement(i => i - 1);
-        }}>–</button>
+        <button
+          disabled={increment === 0}
+          onClick={() => {
+            setIncrement((i) => i - 1);
+          }}
+        >
+          –
+        </button>
         <b>{increment}</b>
-        <button onClick={() => {
-          setIncrement(i => i + 1);
-        }}>+</button>
+        <button
+          onClick={() => {
+            setIncrement((i) => i + 1);
+          }}
+        >
+          +
+        </button>
       </p>
       <p>
         Increment delay:
-        <button disabled={delay === 100} onClick={() => {
-          setDelay(d => d - 100);
-        }}>–100 ms</button>
+        <button
+          disabled={delay === 100}
+          onClick={() => {
+            setDelay((d) => d - 100);
+          }}
+        >
+          –100 ms
+        </button>
         <b>{delay} ms</b>
-        <button onClick={() => {
-          setDelay(d => d + 100);
-        }}>+100 ms</button>
+        <button
+          onClick={() => {
+            setDelay((d) => d + 100);
+          }}
+        >
+          +100 ms
+        </button>
       </p>
     </>
   );
@@ -1208,18 +1292,20 @@ export default function Timer() {
 ```
 
 ```css
-button { margin: 10px; }
+button {
+  margin: 10px;
+}
 ```
 
-In general, you should be suspicious of functions like `onMount` that focus on the *timing* rather than the *purpose* of a piece of code. It may feel "more descriptive" at first but it obscures your intent. As a rule of thumb, Effect Events should correspond to something that happens from the *user's* perspective. For example, `onMessage`, `onTick`, `onVisit`, or `onConnected` are good Effect Event names. Code inside them would likely not need to be reactive. On the other hand, `onMount`, `onUpdate`, `onUnmount`, or `onAfterRender` are so generic that it's easy to accidentally put code that *should* be reactive into them. This is why you should name your Effect Events after *what the user thinks has happened,* not when some code happened to run.
+In general, you should be suspicious of functions like `onMount` that focus on the _timing_ rather than the _purpose_ of a piece of code. It may feel "more descriptive" at first but it obscures your intent. As a rule of thumb, Effect Events should correspond to something that happens from the _user's_ perspective. For example, `onMessage`, `onTick`, `onVisit`, or `onConnected` are good Effect Event names. Code inside them would likely not need to be reactive. On the other hand, `onMount`, `onUpdate`, `onUnmount`, or `onAfterRender` are so generic that it's easy to accidentally put code that _should_ be reactive into them. This is why you should name your Effect Events after _what the user thinks has happened,_ not when some code happened to run.
 
-#### Fix a delayed notification {/*fix-a-delayed-notification*/}
+#### Fix a delayed notification {/_fix-a-delayed-notification_/}
 
 When you join a chat room, this component shows a notification. However, it doesn't show the notification immediately. Instead, the notification is artificially delayed by two seconds so that the user has a chance to look around the UI.
 
-This almost works, but there is a bug. Try changing the dropdown from "general" to "travel" and then to "music" very quickly. If you do it fast enough, you will see two notifications (as expected!) but they will *both* say "Welcome to music".
+This almost works, but there is a bug. Try changing the dropdown from "general" to "travel" and then to "music" very quickly. If you do it fast enough, you will see two notifications (as expected!) but they will _both_ say "Welcome to music".
 
-Fix it so that when you switch from "general" to "travel" and then to "music" very quickly, you see two notifications, the first one being "Welcome to travel" and the second one being "Welcome to music". (For an additional challenge, assuming you've *already* made the notifications show the correct rooms, change the code so that only the latter notification is displayed.)
+Fix it so that when you switch from "general" to "travel" and then to "music" very quickly, you see two notifications, the first one being "Welcome to travel" and the second one being "Welcome to music". (For an additional challenge, assuming you've _already_ made the notifications show the correct rooms, change the code so that only the latter notification is displayed.)
 
 Your Effect knows which room it connected to. Is there any information that you might want to pass to your Effect Event?
 
@@ -1241,21 +1327,21 @@ Your Effect knows which room it connected to. Is there any information that you 
 ```
 
 ```js
-import { useState, useEffect } from 'react';
-import { useEffectEvent } from 'react';
-import { createConnection, sendMessage } from './chat.js';
-import { showNotification } from './notifications.js';
+import { useState, useEffect } from "react";
+import { useEffectEvent } from "react";
+import { createConnection, sendMessage } from "./chat.js";
+import { showNotification } from "./notifications.js";
 
-const serverUrl = 'https://localhost:1234';
+const serverUrl = "https://localhost:1234";
 
 function ChatRoom({ roomId, theme }) {
   const onConnected = useEffectEvent(() => {
-    showNotification('Welcome to ' + roomId, theme);
+    showNotification("Welcome to " + roomId, theme);
   });
 
   useEffect(() => {
     const connection = createConnection(serverUrl, roomId);
-    connection.on('connected', () => {
+    connection.on("connected", () => {
       setTimeout(() => {
         onConnected();
       }, 2000);
@@ -1264,20 +1350,17 @@ function ChatRoom({ roomId, theme }) {
     return () => connection.disconnect();
   }, [roomId]);
 
-  return <h1>Welcome to the {roomId} room!</h1>
+  return <h1>Welcome to the {roomId} room!</h1>;
 }
 
 export default function App() {
-  const [roomId, setRoomId] = useState('general');
+  const [roomId, setRoomId] = useState("general");
   const [isDark, setIsDark] = useState(false);
   return (
     <>
       <label>
-        Choose the chat room:{' '}
-        <select
-          value={roomId}
-          onChange={e => setRoomId(e.target.value)}
-        >
+        Choose the chat room:{" "}
+        <select value={roomId} onChange={(e) => setRoomId(e.target.value)}>
           <option value="general">general</option>
           <option value="travel">travel</option>
           <option value="music">music</option>
@@ -1287,15 +1370,12 @@ export default function App() {
         <input
           type="checkbox"
           checked={isDark}
-          onChange={e => setIsDark(e.target.checked)}
+          onChange={(e) => setIsDark(e.target.checked)}
         />
         Use dark theme
       </label>
       <hr />
-      <ChatRoom
-        roomId={roomId}
-        theme={isDark ? 'dark' : 'light'}
-      />
+      <ChatRoom roomId={roomId} theme={isDark ? "dark" : "light"} />
     </>
   );
 }
@@ -1316,47 +1396,50 @@ export function createConnection(serverUrl, roomId) {
     },
     on(event, callback) {
       if (connectedCallback) {
-        throw Error('Cannot add the handler twice.');
+        throw Error("Cannot add the handler twice.");
       }
-      if (event !== 'connected') {
+      if (event !== "connected") {
         throw Error('Only "connected" event is supported.');
       }
       connectedCallback = callback;
     },
     disconnect() {
       clearTimeout(timeout);
-    }
+    },
   };
 }
 ```
 
 ```js src/notifications.js hidden
-import Toastify from 'toastify-js';
-import 'toastify-js/src/toastify.css';
+import Toastify from "toastify-js";
+import "toastify-js/src/toastify.css";
 
 export function showNotification(message, theme) {
   Toastify({
     text: message,
     duration: 2000,
-    gravity: 'top',
-    position: 'right',
+    gravity: "top",
+    position: "right",
     style: {
-      background: theme === 'dark' ? 'black' : 'white',
-      color: theme === 'dark' ? 'white' : 'black',
+      background: theme === "dark" ? "black" : "white",
+      color: theme === "dark" ? "white" : "black",
     },
   }).showToast();
 }
 ```
 
 ```css
-label { display: block; margin-top: 10px; }
+label {
+  display: block;
+  margin-top: 10px;
+}
 ```
 
-Inside your Effect Event, `roomId` is the value *at the time Effect Event was called.*
+Inside your Effect Event, `roomId` is the value _at the time Effect Event was called._
 
 Your Effect Event is called with a two second delay. If you're quickly switching from the travel to the music room, by the time the travel room's notification shows, `roomId` is already `"music"`. This is why both notifications say "Welcome to music".
 
-To fix the issue, instead of reading the *latest* `roomId` inside the Effect Event, make it a parameter of your Effect Event, like `connectedRoomId` below. Then pass `roomId` from your Effect by calling `onConnected(roomId)`:
+To fix the issue, instead of reading the _latest_ `roomId` inside the Effect Event, make it a parameter of your Effect Event, like `connectedRoomId` below. Then pass `roomId` from your Effect by calling `onConnected(roomId)`:
 
 ```json package.json hidden
 {
@@ -1376,21 +1459,21 @@ To fix the issue, instead of reading the *latest* `roomId` inside the Effect Eve
 ```
 
 ```js
-import { useState, useEffect } from 'react';
-import { useEffectEvent } from 'react';
-import { createConnection, sendMessage } from './chat.js';
-import { showNotification } from './notifications.js';
+import { useState, useEffect } from "react";
+import { useEffectEvent } from "react";
+import { createConnection, sendMessage } from "./chat.js";
+import { showNotification } from "./notifications.js";
 
-const serverUrl = 'https://localhost:1234';
+const serverUrl = "https://localhost:1234";
 
 function ChatRoom({ roomId, theme }) {
-  const onConnected = useEffectEvent(connectedRoomId => {
-    showNotification('Welcome to ' + connectedRoomId, theme);
+  const onConnected = useEffectEvent((connectedRoomId) => {
+    showNotification("Welcome to " + connectedRoomId, theme);
   });
 
   useEffect(() => {
     const connection = createConnection(serverUrl, roomId);
-    connection.on('connected', () => {
+    connection.on("connected", () => {
       setTimeout(() => {
         onConnected(roomId);
       }, 2000);
@@ -1399,20 +1482,17 @@ function ChatRoom({ roomId, theme }) {
     return () => connection.disconnect();
   }, [roomId]);
 
-  return <h1>Welcome to the {roomId} room!</h1>
+  return <h1>Welcome to the {roomId} room!</h1>;
 }
 
 export default function App() {
-  const [roomId, setRoomId] = useState('general');
+  const [roomId, setRoomId] = useState("general");
   const [isDark, setIsDark] = useState(false);
   return (
     <>
       <label>
-        Choose the chat room:{' '}
-        <select
-          value={roomId}
-          onChange={e => setRoomId(e.target.value)}
-        >
+        Choose the chat room:{" "}
+        <select value={roomId} onChange={(e) => setRoomId(e.target.value)}>
           <option value="general">general</option>
           <option value="travel">travel</option>
           <option value="music">music</option>
@@ -1422,15 +1502,12 @@ export default function App() {
         <input
           type="checkbox"
           checked={isDark}
-          onChange={e => setIsDark(e.target.checked)}
+          onChange={(e) => setIsDark(e.target.checked)}
         />
         Use dark theme
       </label>
       <hr />
-      <ChatRoom
-        roomId={roomId}
-        theme={isDark ? 'dark' : 'light'}
-      />
+      <ChatRoom roomId={roomId} theme={isDark ? "dark" : "light"} />
     </>
   );
 }
@@ -1451,40 +1528,43 @@ export function createConnection(serverUrl, roomId) {
     },
     on(event, callback) {
       if (connectedCallback) {
-        throw Error('Cannot add the handler twice.');
+        throw Error("Cannot add the handler twice.");
       }
-      if (event !== 'connected') {
+      if (event !== "connected") {
         throw Error('Only "connected" event is supported.');
       }
       connectedCallback = callback;
     },
     disconnect() {
       clearTimeout(timeout);
-    }
+    },
   };
 }
 ```
 
 ```js src/notifications.js hidden
-import Toastify from 'toastify-js';
-import 'toastify-js/src/toastify.css';
+import Toastify from "toastify-js";
+import "toastify-js/src/toastify.css";
 
 export function showNotification(message, theme) {
   Toastify({
     text: message,
     duration: 2000,
-    gravity: 'top',
-    position: 'right',
+    gravity: "top",
+    position: "right",
     style: {
-      background: theme === 'dark' ? 'black' : 'white',
-      color: theme === 'dark' ? 'white' : 'black',
+      background: theme === "dark" ? "black" : "white",
+      color: theme === "dark" ? "white" : "black",
     },
   }).showToast();
 }
 ```
 
 ```css
-label { display: block; margin-top: 10px; }
+label {
+  display: block;
+  margin-top: 10px;
+}
 ```
 
 The Effect that had `roomId` set to `"travel"` (so it connected to the `"travel"` room) will show the notification for `"travel"`. The Effect that had `roomId` set to `"music"` (so it connected to the `"music"` room) will show the notification for `"music"`. In other words, `connectedRoomId` comes from your Effect (which is reactive), while `theme` always uses the latest value.
@@ -1509,22 +1589,22 @@ To solve the additional challenge, save the notification timeout ID and clear it
 ```
 
 ```js
-import { useState, useEffect } from 'react';
-import { useEffectEvent } from 'react';
-import { createConnection, sendMessage } from './chat.js';
-import { showNotification } from './notifications.js';
+import { useState, useEffect } from "react";
+import { useEffectEvent } from "react";
+import { createConnection, sendMessage } from "./chat.js";
+import { showNotification } from "./notifications.js";
 
-const serverUrl = 'https://localhost:1234';
+const serverUrl = "https://localhost:1234";
 
 function ChatRoom({ roomId, theme }) {
-  const onConnected = useEffectEvent(connectedRoomId => {
-    showNotification('Welcome to ' + connectedRoomId, theme);
+  const onConnected = useEffectEvent((connectedRoomId) => {
+    showNotification("Welcome to " + connectedRoomId, theme);
   });
 
   useEffect(() => {
     const connection = createConnection(serverUrl, roomId);
     let notificationTimeoutId;
-    connection.on('connected', () => {
+    connection.on("connected", () => {
       notificationTimeoutId = setTimeout(() => {
         onConnected(roomId);
       }, 2000);
@@ -1538,20 +1618,17 @@ function ChatRoom({ roomId, theme }) {
     };
   }, [roomId]);
 
-  return <h1>Welcome to the {roomId} room!</h1>
+  return <h1>Welcome to the {roomId} room!</h1>;
 }
 
 export default function App() {
-  const [roomId, setRoomId] = useState('general');
+  const [roomId, setRoomId] = useState("general");
   const [isDark, setIsDark] = useState(false);
   return (
     <>
       <label>
-        Choose the chat room:{' '}
-        <select
-          value={roomId}
-          onChange={e => setRoomId(e.target.value)}
-        >
+        Choose the chat room:{" "}
+        <select value={roomId} onChange={(e) => setRoomId(e.target.value)}>
           <option value="general">general</option>
           <option value="travel">travel</option>
           <option value="music">music</option>
@@ -1561,15 +1638,12 @@ export default function App() {
         <input
           type="checkbox"
           checked={isDark}
-          onChange={e => setIsDark(e.target.checked)}
+          onChange={(e) => setIsDark(e.target.checked)}
         />
         Use dark theme
       </label>
       <hr />
-      <ChatRoom
-        roomId={roomId}
-        theme={isDark ? 'dark' : 'light'}
-      />
+      <ChatRoom roomId={roomId} theme={isDark ? "dark" : "light"} />
     </>
   );
 }
@@ -1590,45 +1664,48 @@ export function createConnection(serverUrl, roomId) {
     },
     on(event, callback) {
       if (connectedCallback) {
-        throw Error('Cannot add the handler twice.');
+        throw Error("Cannot add the handler twice.");
       }
-      if (event !== 'connected') {
+      if (event !== "connected") {
         throw Error('Only "connected" event is supported.');
       }
       connectedCallback = callback;
     },
     disconnect() {
       clearTimeout(timeout);
-    }
+    },
   };
 }
 ```
 
 ```js src/notifications.js hidden
-import Toastify from 'toastify-js';
-import 'toastify-js/src/toastify.css';
+import Toastify from "toastify-js";
+import "toastify-js/src/toastify.css";
 
 export function showNotification(message, theme) {
   Toastify({
     text: message,
     duration: 2000,
-    gravity: 'top',
-    position: 'right',
+    gravity: "top",
+    position: "right",
     style: {
-      background: theme === 'dark' ? 'black' : 'white',
-      color: theme === 'dark' ? 'white' : 'black',
+      background: theme === "dark" ? "black" : "white",
+      color: theme === "dark" ? "white" : "black",
     },
   }).showToast();
 }
 ```
 
 ```css
-label { display: block; margin-top: 10px; }
+label {
+  display: block;
+  margin-top: 10px;
+}
 ```
 
 This ensures that already scheduled (but not yet displayed) notifications get cancelled when you change rooms.
 
-***
+---
 
 ## Sitemap
 

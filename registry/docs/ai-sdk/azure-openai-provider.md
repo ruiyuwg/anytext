@@ -11,23 +11,23 @@ The Azure OpenAI provider is available in the `@ai-sdk/azure` module. You can in
 You can import the default provider instance `azure` from `@ai-sdk/azure`:
 
 ```ts
-import { azure } from '@ai-sdk/azure';
+import { azure } from "@ai-sdk/azure";
 ```
 
 If you need a customized setup, you can import `createAzure` from `@ai-sdk/azure` and create a provider instance with your settings:
 
 ```ts
-import { createAzure } from '@ai-sdk/azure';
+import { createAzure } from "@ai-sdk/azure";
 
 const azure = createAzure({
-  resourceName: 'your-resource-name', // Azure resource name
-  apiKey: 'your-api-key',
+  resourceName: "your-resource-name", // Azure resource name
+  apiKey: "your-api-key",
 });
 ```
 
 You can use the following optional settings to customize the OpenAI provider instance:
 
-- **resourceName** *string*
+- **resourceName** _string_
 
   Azure resource name.
   It defaults to the `AZURE_RESOURCE_NAME` environment variable.
@@ -35,17 +35,17 @@ You can use the following optional settings to customize the OpenAI provider ins
   The resource name is used in the assembled URL: `https://{resourceName}.openai.azure.com/openai/v1{path}`.
   You can use `baseURL` instead to specify the URL prefix.
 
-- **apiKey** *string*
+- **apiKey** _string_
 
   API key that is being sent using the `api-key` header.
   It defaults to the `AZURE_API_KEY` environment variable.
 
-- **apiVersion** *string*
+- **apiVersion** _string_
 
   Sets a custom [api version](https://learn.microsoft.com/en-us/azure/ai-services/openai/api-version-deprecation).
   Defaults to `v1`.
 
-- **baseURL** *string*
+- **baseURL** _string_
 
   Use a different URL prefix for API calls, e.g. to use proxy servers.
 
@@ -54,18 +54,18 @@ You can use the following optional settings to customize the OpenAI provider ins
 
   With a baseURL, the resolved URL is `{baseURL}/v1{path}`.
 
-- **headers** *Record\<string,string>*
+- **headers** _Record\<string,string>_
 
   Custom headers to include in the requests.
 
-- **fetch** *(input: RequestInfo, init?: RequestInit) => Promise\<Response>*
+- **fetch** _(input: RequestInfo, init?: RequestInit) => Promise\<Response>_
 
   Custom [fetch](https://developer.mozilla.org/en-US/docs/Web/API/fetch) implementation.
   Defaults to the global `fetch` function.
   You can use it as a middleware to intercept requests,
   or to provide a custom fetch implementation for e.g. testing.
 
-- **useDeploymentBasedUrls** *boolean*
+- **useDeploymentBasedUrls** _boolean_
 
   Use deployment-based URLs for API calls. Set to `true` to use the legacy deployment format:
   `{baseURL}/deployments/{deploymentId}{path}?api-version={apiVersion}` instead of
@@ -80,7 +80,7 @@ You can use the following optional settings to customize the OpenAI provider ins
 The Azure OpenAI provider instance is a function that you can invoke to create a language model:
 
 ```ts
-const model = azure('your-deployment-name');
+const model = azure("your-deployment-name");
 ```
 
 You need to pass your deployment name as the first argument.
@@ -91,12 +91,12 @@ Azure exposes the thinking of `DeepSeek-R1` in the generated text using the `<th
 You can use the `extractReasoningMiddleware` to extract this reasoning and expose it as a `reasoning` property on the result:
 
 ```ts
-import { azure } from '@ai-sdk/azure';
-import { wrapLanguageModel, extractReasoningMiddleware } from 'ai';
+import { azure } from "@ai-sdk/azure";
+import { wrapLanguageModel, extractReasoningMiddleware } from "ai";
 
 const enhancedModel = wrapLanguageModel({
-  model: azure('your-deepseek-r1-deployment-name'),
-  middleware: extractReasoningMiddleware({ tagName: 'think' }),
+  model: azure("your-deepseek-r1-deployment-name"),
+  middleware: extractReasoningMiddleware({ tagName: "think" }),
 });
 ```
 
@@ -110,12 +110,12 @@ The Azure provider calls the Responses API by default (unless you specify e.g.
 You can use OpenAI language models to generate text with the `generateText` function:
 
 ```ts
-import { azure } from '@ai-sdk/azure';
-import { generateText } from 'ai';
+import { azure } from "@ai-sdk/azure";
+import { generateText } from "ai";
 
 const { text } = await generateText({
-  model: azure('your-deployment-name'),
-  prompt: 'Write a vegetarian lasagna recipe for 4 people.',
+  model: azure("your-deployment-name"),
+  prompt: "Write a vegetarian lasagna recipe for 4 people.",
 });
 ```
 
@@ -132,21 +132,21 @@ Stream](/docs/troubleshooting/common-issues/azure-stream-slow)
 When using OpenAI language models on Azure, you can configure provider-specific options using `providerOptions.openai`. More information on available configuration options are on [the OpenAI provider page](/providers/ai-sdk-providers/openai#language-models).
 
 ```ts highlight="12-14,24-26"
-import { azure, type OpenAILanguageModelResponsesOptions } from '@ai-sdk/azure';
+import { azure, type OpenAILanguageModelResponsesOptions } from "@ai-sdk/azure";
 
 const messages = [
   {
-    role: 'user',
+    role: "user",
     content: [
       {
-        type: 'text',
-        text: 'What is the capital of the moon?',
+        type: "text",
+        text: "What is the capital of the moon?",
       },
       {
-        type: 'image',
-        image: 'https://example.com/image.png',
+        type: "image",
+        image: "https://example.com/image.png",
         providerOptions: {
-          openai: { imageDetail: 'low' },
+          openai: { imageDetail: "low" },
         },
       },
     ],
@@ -154,10 +154,10 @@ const messages = [
 ];
 
 const { text } = await generateText({
-  model: azure('your-deployment-name'),
+  model: azure("your-deployment-name"),
   providerOptions: {
     openai: {
-      reasoningEffort: 'low',
+      reasoningEffort: "low",
     } satisfies OpenAILanguageModelResponsesOptions,
   },
 });
@@ -171,26 +171,26 @@ The URL for calling Azure chat models will be constructed as follows:
 You can create models that call the Azure OpenAI chat completions API using the `.chat()` factory method:
 
 ```ts
-const model = azure.chat('your-deployment-name');
+const model = azure.chat("your-deployment-name");
 ```
 
 Azure OpenAI chat models support also some model specific settings that are not part of the [standard call settings](/docs/ai-sdk-core/settings).
 You can pass them as an options argument:
 
 ```ts
-import { azure, type OpenAILanguageModelChatOptions } from '@ai-sdk/azure';
-import { generateText } from 'ai';
+import { azure, type OpenAILanguageModelChatOptions } from "@ai-sdk/azure";
+import { generateText } from "ai";
 
 const result = await generateText({
-  model: azure.chat('your-deployment-name'),
-  prompt: 'Write a short story about a robot.',
+  model: azure.chat("your-deployment-name"),
+  prompt: "Write a short story about a robot.",
   providerOptions: {
     openai: {
       logitBias: {
         // optional likelihood for specific tokens
-        '50256': -100,
+        "50256": -100,
       },
-      user: 'test-user', // optional unique user identifier
+      user: "test-user", // optional unique user identifier
     } satisfies OpenAILanguageModelChatOptions,
   },
 });
@@ -198,7 +198,7 @@ const result = await generateText({
 
 The following optional provider options are available for OpenAI chat models:
 
-- **logitBias** *Record\<number, number>*
+- **logitBias** _Record\<number, number>_
 
   Modifies the likelihood of specified tokens appearing in the completion.
 
@@ -212,7 +212,7 @@ The following optional provider options are available for OpenAI chat models:
 
   As an example, you can pass `{"50256": -100}` to prevent the token from being generated.
 
-- **logprobs** *boolean | number*
+- **logprobs** _boolean | number_
 
   Return the log probabilities of the tokens. Including logprobs will increase
   the response size and can slow down response times. However, it can
@@ -224,11 +224,11 @@ The following optional provider options are available for OpenAI chat models:
   Setting to a number will return the log probabilities of the top n
   tokens that were generated.
 
-- **parallelToolCalls** *boolean*
+- **parallelToolCalls** _boolean_
 
   Whether to enable parallel function calling during tool use. Default to true.
 
-- **user** *string*
+- **user** _string_
 
   A unique identifier representing your end-user, which can help OpenAI to
   monitor and detect abuse. Learn more.
@@ -238,7 +238,7 @@ The following optional provider options are available for OpenAI chat models:
 Azure OpenAI uses responses API as default with the `azure(deploymentName)` factory method.
 
 ```ts
-const model = azure('your-deployment-name');
+const model = azure("your-deployment-name");
 ```
 
 Further configuration can be done using OpenAI provider options.
@@ -249,16 +249,16 @@ instead of `openai`. The `openai` key is still supported for `providerOptions`
 input.
 
 ```ts
-import { azure, OpenAILanguageModelResponsesOptions } from '@ai-sdk/azure';
-import { generateText } from 'ai';
+import { azure, OpenAILanguageModelResponsesOptions } from "@ai-sdk/azure";
+import { generateText } from "ai";
 
 const result = await generateText({
-  model: azure('your-deployment-name'),
+  model: azure("your-deployment-name"),
   providerOptions: {
     azure: {
       parallelToolCalls: false,
       store: false,
-      user: 'user_123',
+      user: "user_123",
       // ...
     } satisfies OpenAILanguageModelResponsesOptions,
   },
@@ -268,30 +268,30 @@ const result = await generateText({
 
 The following provider options are available:
 
-- **parallelToolCalls** *boolean*
+- **parallelToolCalls** _boolean_
   Whether to use parallel tool calls. Defaults to `true`.
 
-- **store** *boolean*
+- **store** _boolean_
   Whether to store the generation. Defaults to `true`.
 
-- **metadata** *Record\<string, string>*
+- **metadata** _Record\<string, string>_
   Additional metadata to store with the generation.
 
-- **previousResponseId** *string*
+- **previousResponseId** _string_
   The ID of the previous response. You can use it to continue a conversation. Defaults to `undefined`.
 
-- **instructions** *string*
+- **instructions** _string_
   Instructions for the model.
   They can be used to change the system or developer message when continuing a conversation using the `previousResponseId` option.
   Defaults to `undefined`.
 
-- **user** *string*
+- **user** _string_
   A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse. Defaults to `undefined`.
 
-- **reasoningEffort** *'low' | 'medium' | 'high'*
+- **reasoningEffort** _'low' | 'medium' | 'high'_
   Reasoning effort for reasoning models. Defaults to `medium`. If you use `providerOptions` to set the `reasoningEffort` option, this model setting will be ignored.
 
-- **strictJsonSchema** *boolean*
+- **strictJsonSchema** _boolean_
   Whether to use strict JSON schema validation. Defaults to `false`.
 
 The Azure OpenAI provider also returns provider-specific metadata:
@@ -299,11 +299,11 @@ The Azure OpenAI provider also returns provider-specific metadata:
 For Responses models (`azure(deploymentName)`), you can type this metadata using `AzureResponsesProviderMetadata`:
 
 ```ts
-import { azure, type AzureResponsesProviderMetadata } from '@ai-sdk/azure';
-import { generateText } from 'ai';
+import { azure, type AzureResponsesProviderMetadata } from "@ai-sdk/azure";
+import { generateText } from "ai";
 
 const result = await generateText({
-  model: azure('your-deployment-name'),
+  model: azure("your-deployment-name"),
 });
 
 const providerMetadata = result.providerMetadata as
@@ -318,11 +318,11 @@ console.log(responseId);
 
 The following Azure-specific metadata may be returned:
 
-- **responseId** *string | null | undefined*
+- **responseId** _string | null | undefined_
   The ID of the response. Can be used to continue a conversation.
-- **logprobs** *(optional)*
+- **logprobs** _(optional)_
   Log probabilities of output tokens (when enabled).
-- **serviceTier** *(optional)*
+- **serviceTier** _(optional)_
   Service tier information returned by the API.
 
   The providerMetadata is only returned with the default responses API, and is
@@ -334,21 +334,21 @@ The Azure OpenAI responses API supports web search(preview) through the `azure.t
 
 ```ts
 const result = await generateText({
-  model: azure('gpt-4.1-mini'),
-  prompt: 'What happened in San Francisco last week?',
+  model: azure("gpt-4.1-mini"),
+  prompt: "What happened in San Francisco last week?",
   tools: {
     web_search_preview: azure.tools.webSearchPreview({
       // optional configuration:
-      searchContextSize: 'low',
+      searchContextSize: "low",
       userLocation: {
-        type: 'approximate',
-        city: 'San Francisco',
-        region: 'California',
+        type: "approximate",
+        city: "San Francisco",
+        region: "California",
       },
     }),
   },
   // Force web search tool (optional):
-  toolChoice: { type: 'tool', toolName: 'web_search_preview' },
+  toolChoice: { type: "tool", toolName: "web_search_preview" },
 });
 
 console.log(result.text);
@@ -356,7 +356,7 @@ console.log(result.text);
 // URL sources directly from `results`
 const sources = result.sources;
 for (const source of sources) {
-  console.log('source:', source);
+  console.log("source:", source);
 }
 ```
 
@@ -364,7 +364,7 @@ The tool must be named `web_search_preview` when using Azure OpenAI's web
 search(preview) functionality. This name is required by Azure OpenAI's API
 specification and cannot be customized.
 
-The 'web\_search\_preview' tool is only supported with the default responses
+The 'web_search_preview' tool is only supported with the default responses
 API, and is not supported when using 'azure.chat' or 'azure.completion'
 
 #### File Search Tool
@@ -375,20 +375,20 @@ You can force the use of the file search tool by setting the `toolChoice` parame
 
 ```ts
 const result = await generateText({
-  model: azure('gpt-5'),
-  prompt: 'What does the document say about user authentication?',
+  model: azure("gpt-5"),
+  prompt: "What does the document say about user authentication?",
   tools: {
     file_search: azure.tools.fileSearch({
       // optional configuration:
-      vectorStoreIds: ['vs_123', 'vs_456'],
+      vectorStoreIds: ["vs_123", "vs_456"],
       maxNumResults: 10,
       ranking: {
-        ranker: 'auto',
+        ranker: "auto",
       },
     }),
   },
   // Force file search tool:
-  toolChoice: { type: 'tool', toolName: 'file_search' },
+  toolChoice: { type: "tool", toolName: "file_search" },
 });
 ```
 
@@ -396,7 +396,7 @@ The tool must be named `file_search` when using Azure OpenAI's file search
 functionality. This name is required by Azure OpenAI's API specification and
 cannot be customized.
 
-The 'file\_search' tool is only supported with the default responses API, and
+The 'file_search' tool is only supported with the default responses API, and
 is not supported when using 'azure.chat' or 'azure.completion'
 
 #### Image Generation Tool
@@ -405,26 +405,26 @@ Azure OpenAI's Responses API supports multi-modal image generation as a provider
 Availability is restricted to specific models (for example, `gpt-5` variants).
 
 ```ts
-import { createAzure } from '@ai-sdk/azure';
-import { generateText } from 'ai';
+import { createAzure } from "@ai-sdk/azure";
+import { generateText } from "ai";
 
 const azure = createAzure({
   headers: {
-    'x-ms-oai-image-generation-deployment': 'gpt-image-1', // use your own image model deployment
+    "x-ms-oai-image-generation-deployment": "gpt-image-1", // use your own image model deployment
   },
 });
 
 const result = await generateText({
-  model: azure('gpt-5'),
+  model: azure("gpt-5"),
   prompt:
-    'Generate an image of an echidna swimming across the Mozambique channel.',
+    "Generate an image of an echidna swimming across the Mozambique channel.",
   tools: {
-    image_generation: azure.tools.imageGeneration({ outputFormat: 'png' }),
+    image_generation: azure.tools.imageGeneration({ outputFormat: "png" }),
   },
 });
 
 for (const toolResult of result.staticToolResults) {
-  if (toolResult.toolName === 'image_generation') {
+  if (toolResult.toolName === "image_generation") {
     const base64Image = toolResult.output.result;
   }
 }
@@ -434,10 +434,10 @@ The tool must be named `image_generation` when using Azure OpenAI's image
 generation functionality. This name is required by Azure OpenAI's API
 specification and cannot be customized.
 
-The 'image\_generation' tool is only supported with the default responses API,
+The 'image_generation' tool is only supported with the default responses API,
 and is not supported when using 'azure.chat' or 'azure.completion'
 
-To use image\_generation, you must first create an image generation model. You
+To use image_generation, you must first create an image generation model. You
 must add a deployment specification to the header
 `x-ms-oai-image-generation-deployment`. Please note that the Responses API
 model and the image generation model must be in the same resource.
@@ -451,17 +451,17 @@ setting `store: false`.
 The Azure OpenAI provider supports the code interpreter tool through the `azure.tools.codeInterpreter` tool. This allows models to write and execute Python code.
 
 ```ts
-import { azure } from '@ai-sdk/azure';
-import { generateText } from 'ai';
+import { azure } from "@ai-sdk/azure";
+import { generateText } from "ai";
 
 const result = await generateText({
-  model: azure('gpt-5'),
-  prompt: 'Write and run Python code to calculate the factorial of 10',
+  model: azure("gpt-5"),
+  prompt: "Write and run Python code to calculate the factorial of 10",
   tools: {
     code_interpreter: azure.tools.codeInterpreter({
       // optional configuration:
       container: {
-        fileIds: ['assistant-123', 'assistant-456'], // optional file IDs to make available
+        fileIds: ["assistant-123", "assistant-456"], // optional file IDs to make available
       },
     }),
   },
@@ -476,7 +476,7 @@ The code interpreter tool can be configured with:
   interpreter functionality. This name is required by Azure OpenAI's API
   specification and cannot be customized.
 
-  The 'code\_interpreter' tool is only supported with the default responses API,
+  The 'code_interpreter' tool is only supported with the default responses API,
   and is not supported when using 'azure.chat' or 'azure.completion'
 
   When working with files generated by the Code Interpreter, reference
@@ -491,20 +491,20 @@ You can pass PDF files as part of the message content using the `file` type:
 
 ```ts
 const result = await generateText({
-  model: azure('your-deployment-name'),
+  model: azure("your-deployment-name"),
   messages: [
     {
-      role: 'user',
+      role: "user",
       content: [
         {
-          type: 'text',
-          text: 'What is an embedding model?',
+          type: "text",
+          text: "What is an embedding model?",
         },
         {
-          type: 'file',
-          data: fs.readFileSync('./data/ai.pdf'),
-          mediaType: 'application/pdf',
-          filename: 'ai.pdf', // optional
+          type: "file",
+          data: fs.readFileSync("./data/ai.pdf"),
+          mediaType: "application/pdf",
+          filename: "ai.pdf", // optional
         },
       ],
     },
@@ -538,7 +538,6 @@ This metadata includes the following fields:
   If no annotations are present, this property itself may be omitted (`undefined`).
 
   Each element in `annotations` is a discriminated union with a required `type` field. Supported types include, for example:
-
   - `url_citation`
   - `file_citation`
   - `container_file_citation`
@@ -549,22 +548,22 @@ This metadata includes the following fields:
   [Responses API – output text annotations](https://platform.openai.com/docs/api-reference/responses/object?lang=javascript#responses-object-output-output_message-content-output_text-annotations).
 
 ```ts
-import { azure, type AzureResponsesTextProviderMetadata } from '@ai-sdk/azure';
-import { generateText } from 'ai';
+import { azure, type AzureResponsesTextProviderMetadata } from "@ai-sdk/azure";
+import { generateText } from "ai";
 
 const result = await generateText({
-  model: azure('gpt-4.1-mini'),
+  model: azure("gpt-4.1-mini"),
   prompt:
-    'Create a program that generates five random numbers between 1 and 100 with two decimal places, and show me the execution results. Also save the result to a file.',
+    "Create a program that generates five random numbers between 1 and 100 with two decimal places, and show me the execution results. Also save the result to a file.",
   tools: {
     code_interpreter: azure.tools.codeInterpreter(),
     web_search_preview: azure.tools.webSearchPreview({}),
-    file_search: azure.tools.fileSearch({ vectorStoreIds: ['vs_1234'] }), // requires a configured vector store
+    file_search: azure.tools.fileSearch({ vectorStoreIds: ["vs_1234"] }), // requires a configured vector store
   },
 });
 
 for (const part of result.content) {
-  if (part.type === 'text') {
+  if (part.type === "text") {
     const providerMetadata = part.providerMetadata as
       | AzureResponsesTextProviderMetadata
       | undefined;
@@ -574,19 +573,19 @@ for (const part of result.content) {
     if (!annotations) continue;
     for (const annotation of annotations) {
       switch (annotation.type) {
-        case 'url_citation':
+        case "url_citation":
           // url_citation is returned from web_search and provides:
           // properties: type, url, title, start_index and end_index
           break;
-        case 'file_citation':
+        case "file_citation":
           // file_citation is returned from file_search and provides:
           // properties: type, file_id, filename and index
           break;
-        case 'container_file_citation':
+        case "container_file_citation":
           // container_file_citation is returned from code_interpreter and provides:
           // properties: type, container_id, file_id, filename, start_index and end_index
           break;
-        case 'file_path':
+        case "file_path":
           // file_path provides:
           // properties: type, file_id and index
           break;
@@ -627,22 +626,22 @@ import {
   azure,
   type AzureResponsesReasoningProviderMetadata,
   type OpenAILanguageModelResponsesOptions,
-} from '@ai-sdk/azure';
-import { generateText } from 'ai';
+} from "@ai-sdk/azure";
+import { generateText } from "ai";
 
 const result = await generateText({
-  model: azure('your-deployment-name'),
+  model: azure("your-deployment-name"),
   prompt: 'How many "r"s are in the word "strawberry"?',
   providerOptions: {
     azure: {
       store: false,
-      include: ['reasoning.encrypted_content'],
+      include: ["reasoning.encrypted_content"],
     } satisfies OpenAILanguageModelResponsesOptions,
   },
 });
 
 for (const part of result.content) {
-  if (part.type === 'reasoning') {
+  if (part.type === "reasoning") {
     const providerMetadata = part.providerMetadata as
       | AzureResponsesReasoningProviderMetadata
       | undefined;
@@ -669,40 +668,40 @@ Each type includes the identifiers required to work with the referenced resource
 import {
   azure,
   type AzureResponsesSourceDocumentProviderMetadata,
-} from '@ai-sdk/azure';
-import { generateText } from 'ai';
+} from "@ai-sdk/azure";
+import { generateText } from "ai";
 
 const result = await generateText({
-  model: azure('gpt-4.1-mini'),
+  model: azure("gpt-4.1-mini"),
   prompt:
-    'Create a program that generates five random numbers between 1 and 100 with two decimal places, and show me the execution results. Also save the result to a file.',
+    "Create a program that generates five random numbers between 1 and 100 with two decimal places, and show me the execution results. Also save the result to a file.",
   tools: {
     code_interpreter: azure.tools.codeInterpreter(),
     web_search_preview: azure.tools.webSearchPreview({}),
-    file_search: azure.tools.fileSearch({ vectorStoreIds: ['vs_1234'] }), // requires a configured vector store
+    file_search: azure.tools.fileSearch({ vectorStoreIds: ["vs_1234"] }), // requires a configured vector store
   },
 });
 
 for (const part of result.content) {
-  if (part.type === 'source') {
-    if (part.sourceType === 'document') {
+  if (part.type === "source") {
+    if (part.sourceType === "document") {
       const providerMetadata = part.providerMetadata as
         | AzureResponsesSourceDocumentProviderMetadata
         | undefined;
       if (!providerMetadata) continue;
       const annotation = providerMetadata.azure;
       switch (annotation.type) {
-        case 'file_citation':
+        case "file_citation":
           // file_citation is returned from file_search and provides:
           // properties: type, fileId and index
           // The filename can be accessed via part.filename.
           break;
-        case 'container_file_citation':
+        case "container_file_citation":
           // container_file_citation is returned from code_interpreter and provides:
           // properties: type, containerId and fileId
           // The filename can be accessed via part.filename.
           break;
-        case 'file_path':
+        case "file_path":
           // file_path provides:
           // properties: type, fileId and index
           break;
@@ -719,7 +718,7 @@ for (const part of result.content) {
 ```
 
 Annotations in text parts follow the OpenAI Responses API specification and
-therefore use snake\_case properties (e.g. `file_id`, `container_id`). In
+therefore use snake_case properties (e.g. `file_id`, `container_id`). In
 contrast, `providerMetadata` for source document parts is normalized by the
 SDK to camelCase (e.g. `fileId`, `containerId`). Fields that depend on the
 original text content, such as `start_index` and `end_index`, are omitted, as
@@ -732,7 +731,7 @@ The first argument is the model id.
 Currently only `gpt-35-turbo-instruct` is supported.
 
 ```ts
-const model = azure.completion('your-gpt-35-turbo-instruct-deployment');
+const model = azure.completion("your-gpt-35-turbo-instruct-deployment");
 ```
 
 OpenAI completion models support also some model specific settings that are not part of the [standard call settings](/docs/ai-sdk-core/settings).
@@ -742,21 +741,21 @@ You can pass them as an options argument:
 import {
   azure,
   type OpenAILanguageModelCompletionOptions,
-} from '@ai-sdk/azure';
-import { generateText } from 'ai';
+} from "@ai-sdk/azure";
+import { generateText } from "ai";
 
 const result = await generateText({
-  model: azure.completion('your-gpt-35-turbo-instruct-deployment'),
-  prompt: 'Write a haiku about coding.',
+  model: azure.completion("your-gpt-35-turbo-instruct-deployment"),
+  prompt: "Write a haiku about coding.",
   providerOptions: {
     openai: {
       echo: true, // optional, echo the prompt in addition to the completion
       logitBias: {
         // optional likelihood for specific tokens
-        '50256': -100,
+        "50256": -100,
       },
-      suffix: 'some text', // optional suffix that comes after a completion of inserted text
-      user: 'test-user', // optional unique user identifier
+      suffix: "some text", // optional suffix that comes after a completion of inserted text
+      user: "test-user", // optional unique user identifier
     } satisfies OpenAILanguageModelCompletionOptions,
   },
 });
@@ -764,11 +763,11 @@ const result = await generateText({
 
 The following optional provider options are available for Azure OpenAI completion models:
 
-- **echo**: *boolean*
+- **echo**: _boolean_
 
   Echo back the prompt in addition to the completion.
 
-- **logitBias** *Record\<number, number>*
+- **logitBias** _Record\<number, number>_
 
   Modifies the likelihood of specified tokens appearing in the completion.
 
@@ -783,7 +782,7 @@ The following optional provider options are available for Azure OpenAI completio
   As an example, you can pass `{"50256": -100}` to prevent the <|endoftext|>
   token from being generated.
 
-- **logprobs** *boolean | number*
+- **logprobs** _boolean | number_
 
   Return the log probabilities of the tokens. Including logprobs will increase
   the response size and can slow down response times. However, it can
@@ -795,11 +794,11 @@ The following optional provider options are available for Azure OpenAI completio
   Setting to a number will return the log probabilities of the top n
   tokens that were generated.
 
-- **suffix** *string*
+- **suffix** _string_
 
   The suffix that comes after a completion of inserted text.
 
-- **user** *string*
+- **user** _string_
 
   A unique identifier representing your end-user, which can help OpenAI to
   monitor and detect abuse. Learn more.
@@ -810,23 +809,23 @@ You can create models that call the Azure OpenAI embeddings API
 using the `.embedding()` factory method.
 
 ```ts
-const model = azure.embedding('your-embedding-deployment');
+const model = azure.embedding("your-embedding-deployment");
 ```
 
 Azure OpenAI embedding models support several additional settings.
 You can pass them as an options argument:
 
 ```ts
-import { azure, type OpenAIEmbeddingModelOptions } from '@ai-sdk/azure';
-import { embed } from 'ai';
+import { azure, type OpenAIEmbeddingModelOptions } from "@ai-sdk/azure";
+import { embed } from "ai";
 
 const { embedding } = await embed({
-  model: azure.embedding('your-embedding-deployment'),
-  value: 'sunny day at the beach',
+  model: azure.embedding("your-embedding-deployment"),
+  value: "sunny day at the beach",
   providerOptions: {
     openai: {
       dimensions: 512, // optional, number of dimensions for the embedding
-      user: 'test-user', // optional unique user identifier
+      user: "test-user", // optional unique user identifier
     } satisfies OpenAIEmbeddingModelOptions,
   },
 });
@@ -834,12 +833,12 @@ const { embedding } = await embed({
 
 The following optional provider options are available for Azure OpenAI embedding models:
 
-- **dimensions**: *number*
+- **dimensions**: _number_
 
   The number of dimensions the resulting output embeddings should have.
   Only supported in text-embedding-3 and later models.
 
-- **user** *string*
+- **user** _string_
 
   A unique identifier representing your end-user, which can help OpenAI to
   monitor and detect abuse. Learn more.
@@ -849,20 +848,20 @@ The following optional provider options are available for Azure OpenAI embedding
 You can create models that call the Azure OpenAI image generation API (DALL-E) using the `.image()` factory method. The first argument is your deployment name for the DALL-E model.
 
 ```ts
-const model = azure.image('your-dalle-deployment-name');
+const model = azure.image("your-dalle-deployment-name");
 ```
 
 Azure OpenAI image models support several additional settings. You can pass them as `providerOptions.openai` when generating the image:
 
 ```ts
 await generateImage({
-  model: azure.image('your-dalle-deployment-name'),
-  prompt: 'A photorealistic image of a cat astronaut floating in space',
-  size: '1024x1024', // '1024x1024', '1792x1024', or '1024x1792' for DALL-E 3
+  model: azure.image("your-dalle-deployment-name"),
+  prompt: "A photorealistic image of a cat astronaut floating in space",
+  size: "1024x1024", // '1024x1024', '1792x1024', or '1024x1792' for DALL-E 3
   providerOptions: {
     openai: {
-      user: 'test-user', // optional unique user identifier
-      responseFormat: 'url', // 'url' or 'b64_json', defaults to 'url'
+      user: "test-user", // optional unique user identifier
+      responseFormat: "url", // 'url' or 'b64_json', defaults to 'url'
     },
   },
 });
@@ -873,13 +872,13 @@ await generateImage({
 You can use Azure OpenAI image models to generate images with the `generateImage` function:
 
 ```ts
-import { azure } from '@ai-sdk/azure';
-import { generateImage } from 'ai';
+import { azure } from "@ai-sdk/azure";
+import { generateImage } from "ai";
 
 const { image } = await generateImage({
-  model: azure.image('your-dalle-deployment-name'),
-  prompt: 'A photorealistic image of a cat astronaut floating in space',
-  size: '1024x1024', // '1024x1024', '1792x1024', or '1024x1792' for DALL-E 3
+  model: azure.image("your-dalle-deployment-name"),
+  prompt: "A photorealistic image of a cat astronaut floating in space",
+  size: "1024x1024", // '1024x1024', '1792x1024', or '1024x1792' for DALL-E 3
 });
 
 // image contains the URL or base64 data of the generated image
@@ -908,7 +907,7 @@ You can create models that call the Azure OpenAI transcription API using the `.t
 The first argument is the model id e.g. `whisper-1`.
 
 ```ts
-const model = azure.transcription('whisper-1');
+const model = azure.transcription("whisper-1");
 ```
 
 If you encounter a "DeploymentNotFound" error with transcription models,
@@ -917,7 +916,7 @@ try enabling deployment-based URLs:
 ```ts
 const azure = createAzure({
   useDeploymentBasedUrls: true,
-  apiVersion: '2025-04-01-preview',
+  apiVersion: "2025-04-01-preview",
 });
 ```
 
@@ -927,16 +926,16 @@ When using useDeploymentBasedUrls, the default api-version is not valid. You mus
 You can also pass additional provider-specific options using the `providerOptions` argument. For example, supplying the input language in ISO-639-1 (e.g. `en`) format will improve accuracy and latency.
 
 ```ts highlight="6"
-import { experimental_transcribe as transcribe } from 'ai';
-import { azure, type OpenAITranscriptionModelOptions } from '@ai-sdk/azure';
-import { readFile } from 'fs/promises';
+import { experimental_transcribe as transcribe } from "ai";
+import { azure, type OpenAITranscriptionModelOptions } from "@ai-sdk/azure";
+import { readFile } from "fs/promises";
 
 const result = await transcribe({
-  model: azure.transcription('whisper-1'),
-  audio: await readFile('audio.mp3'),
+  model: azure.transcription("whisper-1"),
+  audio: await readFile("audio.mp3"),
   providerOptions: {
     openai: {
-      language: 'en',
+      language: "en",
     } satisfies OpenAITranscriptionModelOptions,
   },
 });
@@ -944,35 +943,35 @@ const result = await transcribe({
 
 The following provider options are available:
 
-- **timestampGranularities** *string\[]*
+- **timestampGranularities** _string\[]_
   The granularity of the timestamps in the transcription.
   Defaults to `['segment']`.
   Possible values are `['word']`, `['segment']`, and `['word', 'segment']`.
   Note: There is no additional latency for segment timestamps, but generating word timestamps incurs additional latency.
 
-- **language** *string*
+- **language** _string_
   The language of the input audio. Supplying the input language in ISO-639-1 format (e.g. 'en') will improve accuracy and latency.
   Optional.
 
-- **prompt** *string*
+- **prompt** _string_
   An optional text to guide the model's style or continue a previous audio segment. The prompt should match the audio language.
   Optional.
 
-- **temperature** *number*
+- **temperature** _number_
   The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. If set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.
   Defaults to 0.
   Optional.
 
-- **include** *string\[]*
+- **include** _string\[]_
   Additional information to include in the transcription response.
 
 ### Model Capabilities
 
-| Model                    | Transcription       | Duration            | Segments            | Language            |
-| ------------------------ | ------------------- | ------------------- | ------------------- | ------------------- |
-| `whisper-1`              |  |  |  |  |
-| `gpt-4o-mini-transcribe` |  |  |  |  |
-| `gpt-4o-transcribe`      |  |  |  |  |
+| Model                    | Transcription | Duration | Segments | Language |
+| ------------------------ | ------------- | -------- | -------- | -------- |
+| `whisper-1`              |               |          |          |          |
+| `gpt-4o-mini-transcribe` |               |          |          |          |
+| `gpt-4o-transcribe`      |               |          |          |          |
 
 ## Speech Models
 
@@ -981,32 +980,32 @@ You can create models that call the Azure OpenAI speech API using the `.speech()
 The first argument is your deployment name for the text-to-speech model (e.g., `tts-1`).
 
 ```ts
-const model = azure.speech('your-tts-deployment-name');
+const model = azure.speech("your-tts-deployment-name");
 ```
 
 ### Example
 
 ```ts
-import { azure } from '@ai-sdk/azure';
-import { experimental_generateSpeech as generateSpeech } from 'ai';
+import { azure } from "@ai-sdk/azure";
+import { experimental_generateSpeech as generateSpeech } from "ai";
 
 const result = await generateSpeech({
-  model: azure.speech('your-tts-deployment-name'),
-  text: 'Hello, world!',
-  voice: 'alloy', // OpenAI voice ID
+  model: azure.speech("your-tts-deployment-name"),
+  text: "Hello, world!",
+  voice: "alloy", // OpenAI voice ID
 });
 ```
 
 You can also pass additional provider-specific options using the `providerOptions` argument:
 
 ```ts
-import { azure, type OpenAISpeechModelOptions } from '@ai-sdk/azure';
-import { experimental_generateSpeech as generateSpeech } from 'ai';
+import { azure, type OpenAISpeechModelOptions } from "@ai-sdk/azure";
+import { experimental_generateSpeech as generateSpeech } from "ai";
 
 const result = await generateSpeech({
-  model: azure.speech('your-tts-deployment-name'),
-  text: 'Hello, world!',
-  voice: 'alloy',
+  model: azure.speech("your-tts-deployment-name"),
+  text: "Hello, world!",
+  voice: "alloy",
   providerOptions: {
     openai: {
       speed: 1.2,
@@ -1017,12 +1016,12 @@ const result = await generateSpeech({
 
 The following provider options are available:
 
-- **instructions** *string*
+- **instructions** _string_
   Control the voice of your generated audio with additional instructions e.g. "Speak in a slow and steady tone".
   Does not work with `tts-1` or `tts-1-hd`.
   Optional.
 
-- **speed** *number*
+- **speed** _number_
   The speed of the generated audio.
   Select a value from 0.25 to 4.0.
   Defaults to 1.0.
@@ -1032,11 +1031,11 @@ The following provider options are available:
 
 Azure OpenAI supports TTS models through deployments. The capabilities depend on which model version your deployment is using:
 
-| Model Version     | Instructions        |
-| ----------------- | ------------------- |
-| `tts-1`           |  |
-| `tts-1-hd`        |  |
-| `gpt-4o-mini-tts` |  |
+| Model Version     | Instructions |
+| ----------------- | ------------ |
+| `tts-1`           |              |
+| `tts-1-hd`        |              |
+| `gpt-4o-mini-tts` |              |
 
 # Anthropic
 
@@ -1053,13 +1052,13 @@ The Anthropic provider is available in the `@ai-sdk/anthropic` module. You can i
 You can import the default provider instance `anthropic` from `@ai-sdk/anthropic`:
 
 ```ts
-import { anthropic } from '@ai-sdk/anthropic';
+import { anthropic } from "@ai-sdk/anthropic";
 ```
 
 If you need a customized setup, you can import `createAnthropic` from `@ai-sdk/anthropic` and create a provider instance with your settings:
 
 ```ts
-import { createAnthropic } from '@ai-sdk/anthropic';
+import { createAnthropic } from "@ai-sdk/anthropic";
 
 const anthropic = createAnthropic({
   // custom settings
@@ -1068,28 +1067,28 @@ const anthropic = createAnthropic({
 
 You can use the following optional settings to customize the Anthropic provider instance:
 
-- **baseURL** *string*
+- **baseURL** _string_
 
   Use a different URL prefix for API calls, e.g. to use proxy servers.
   The default prefix is `https://api.anthropic.com/v1`.
 
-- **apiKey** *string*
+- **apiKey** _string_
 
   API key that is being sent using the `x-api-key` header.
   It defaults to the `ANTHROPIC_API_KEY` environment variable.
   Only one of `apiKey` or `authToken` is required.
 
-- **authToken** *string*
+- **authToken** _string_
 
   Auth token that is being sent using the `Authorization: Bearer` header.
   It defaults to the `ANTHROPIC_AUTH_TOKEN` environment variable.
   Only one of `apiKey` or `authToken` is required.
 
-- **headers** *Record\<string,string>*
+- **headers** _Record\<string,string>_
 
   Custom headers to include in the requests.
 
-- **fetch** *(input: RequestInfo, init?: RequestInit) => Promise\<Response>*
+- **fetch** _(input: RequestInfo, init?: RequestInit) => Promise\<Response>_
 
   Custom [fetch](https://developer.mozilla.org/en-US/docs/Web/API/fetch) implementation.
   Defaults to the global `fetch` function.

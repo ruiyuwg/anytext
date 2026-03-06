@@ -81,17 +81,17 @@ You can add Computer Use to your AI SDK applications using provider-defined-clie
 Here's how you could set up the Computer Tool with the AI SDK:
 
 ```ts
-import { anthropic } from '@ai-sdk/anthropic';
-import { getScreenshot, executeComputerAction } from '@/utils/computer-use';
+import { anthropic } from "@ai-sdk/anthropic";
+import { getScreenshot, executeComputerAction } from "@/utils/computer-use";
 
 const computerTool = anthropic.tools.computer_20250124({
   displayWidthPx: 1920,
   displayHeightPx: 1080,
   execute: async ({ action, coordinate, text }) => {
     switch (action) {
-      case 'screenshot': {
+      case "screenshot": {
         return {
-          type: 'image',
+          type: "image",
           data: getScreenshot(),
         };
       }
@@ -101,9 +101,9 @@ const computerTool = anthropic.tools.computer_20250124({
     }
   },
   toModelOutput({ output }) {
-    return typeof output === 'string'
-      ? [{ type: 'text', text: output }]
-      : [{ type: 'image', data: output.data, mediaType: 'image/png' }];
+    return typeof output === "string"
+      ? [{ type: "text", text: output }]
+      : [{ type: "image", data: output.data, mediaType: "image/png" }];
   },
 });
 ```
@@ -124,8 +124,8 @@ For one-shot text generation, use `generateText`:
 
 ```ts
 const result = await generateText({
-  model: 'anthropic/claude-sonnet-4-20250514',
-  prompt: 'Move the cursor to the center of the screen and take a screenshot',
+  model: "anthropic/claude-sonnet-4-20250514",
+  prompt: "Move the cursor to the center of the screen and take a screenshot",
   tools: { computer: computerTool },
 });
 
@@ -136,8 +136,8 @@ For streaming responses, use `streamText` to receive updates in real-time:
 
 ```ts
 const result = streamText({
-  model: 'anthropic/claude-sonnet-4-20250514',
-  prompt: 'Open the browser and navigate to vercel.com',
+  model: "anthropic/claude-sonnet-4-20250514",
+  prompt: "Open the browser and navigate to vercel.com",
   tools: { computer: computerTool },
 });
 
@@ -151,11 +151,11 @@ for await (const chunk of result.textStream) {
 To allow the model to perform multiple steps without user intervention, use the `stopWhen` parameter. This will automatically send any tool results back to the model to trigger a subsequent generation:
 
 ```ts highlight="1,7"
-import { stepCountIs } from 'ai';
+import { stepCountIs } from "ai";
 
 const stream = streamText({
-  model: 'anthropic/claude-sonnet-4-20250514',
-  prompt: 'Open the browser and navigate to vercel.com',
+  model: "anthropic/claude-sonnet-4-20250514",
+  prompt: "Open the browser and navigate to vercel.com",
   tools: { computer: computerTool },
   stopWhen: stepCountIs(10), // experiment with this value based on your use case
 });

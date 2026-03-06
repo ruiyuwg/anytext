@@ -25,12 +25,12 @@ The AI SDK abstracts away the differences between model providers, eliminates bo
 At the center of the AI SDK is [AI SDK Core](/docs/ai-sdk-core/overview), which provides a unified API to call any LLM. The code snippet below is all you need to call Gemini 3 with the AI SDK:
 
 ```ts
-import { google } from '@ai-sdk/google';
-import { generateText } from 'ai';
+import { google } from "@ai-sdk/google";
+import { generateText } from "ai";
 
 const { text } = await generateText({
-  model: google('gemini-3-pro-preview'),
-  prompt: 'Explain the concept of the Hilbert space.',
+  model: google("gemini-3-pro-preview"),
+  prompt: "Explain the concept of the Hilbert space.",
 });
 console.log(text);
 ```
@@ -40,17 +40,17 @@ console.log(text);
 Gemini 3 models can use enhanced reasoning through thinking mode, which improves their ability to solve complex problems. You can control the thinking level using the `thinkingLevel` provider option:
 
 ```ts
-import { google, GoogleLanguageModelOptions } from '@ai-sdk/google';
-import { generateText } from 'ai';
+import { google, GoogleLanguageModelOptions } from "@ai-sdk/google";
+import { generateText } from "ai";
 
 const { text } = await generateText({
-  model: google('gemini-3-pro-preview'),
-  prompt: 'What is the sum of the first 10 prime numbers?',
+  model: google("gemini-3-pro-preview"),
+  prompt: "What is the sum of the first 10 prime numbers?",
   providerOptions: {
     google: {
       thinkingConfig: {
         includeThoughts: true,
-        thinkingLevel: 'low',
+        thinkingLevel: "low",
       },
     } satisfies GoogleLanguageModelOptions,
   },
@@ -69,18 +69,18 @@ The `thinkingLevel` parameter accepts different values to control the depth of r
 Gemini 3 excels at tool calling with improved reliability and consistency for multi-step workflows. Here's an example of using tool calling with the AI SDK:
 
 ```ts
-import { z } from 'zod';
-import { generateText, tool, stepCountIs } from 'ai';
-import { google } from '@ai-sdk/google';
+import { z } from "zod";
+import { generateText, tool, stepCountIs } from "ai";
+import { google } from "@ai-sdk/google";
 
 const result = await generateText({
-  model: google('gemini-3-pro-preview'),
-  prompt: 'What is the weather in San Francisco?',
+  model: google("gemini-3-pro-preview"),
+  prompt: "What is the weather in San Francisco?",
   tools: {
     weather: tool({
-      description: 'Get the weather in a location',
+      description: "Get the weather in a location",
       inputSchema: z.object({
-        location: z.string().describe('The location to get the weather for'),
+        location: z.string().describe("The location to get the weather for"),
       }),
       execute: async ({ location }) => ({
         location,
@@ -101,18 +101,18 @@ console.log(result.steps);
 With [search grounding](https://ai.google.dev/gemini-api/docs/google-search), Gemini can access the latest information using Google search. Here's an example of using Google Search with the AI SDK:
 
 ```ts
-import { google } from '@ai-sdk/google';
-import { GoogleGenerativeAIProviderMetadata } from '@ai-sdk/google';
-import { generateText } from 'ai';
+import { google } from "@ai-sdk/google";
+import { GoogleGenerativeAIProviderMetadata } from "@ai-sdk/google";
+import { generateText } from "ai";
 
 const { text, sources, providerMetadata } = await generateText({
-  model: google('gemini-3-pro-preview'),
+  model: google("gemini-3-pro-preview"),
   tools: {
     google_search: google.tools.googleSearch({}),
   },
   prompt:
-    'List the top 5 San Francisco news from the past week.' +
-    'You must include the date of each article.',
+    "List the top 5 San Francisco news from the past week." +
+    "You must include the date of each article.",
 });
 
 // access the grounding metadata. Casting to the provider metadata type
@@ -141,14 +141,14 @@ In a new Next.js application, first install the AI SDK and the Google Generative
 Then, create a route handler for the chat endpoint:
 
 ```tsx filename="app/api/chat/route.ts"
-import { google } from '@ai-sdk/google';
-import { streamText, UIMessage, convertToModelMessages } from 'ai';
+import { google } from "@ai-sdk/google";
+import { streamText, UIMessage, convertToModelMessages } from "ai";
 
 export async function POST(req: Request) {
   const { messages }: { messages: UIMessage[] } = await req.json();
 
   const result = streamText({
-    model: google('gemini-3-pro-preview'),
+    model: google("gemini-3-pro-preview"),
     messages: await convertToModelMessages(messages),
   });
 
@@ -159,22 +159,22 @@ export async function POST(req: Request) {
 Finally, update the root page (`app/page.tsx`) to use the `useChat` hook:
 
 ```tsx filename="app/page.tsx"
-'use client';
+"use client";
 
-import { useChat } from '@ai-sdk/react';
-import { useState } from 'react';
+import { useChat } from "@ai-sdk/react";
+import { useState } from "react";
 
 export default function Chat() {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
   const { messages, sendMessage } = useChat();
   return (
     <div className="flex flex-col w-full max-w-md py-24 mx-auto stretch">
-      {messages.map(message => (
+      {messages.map((message) => (
         <div key={message.id} className="whitespace-pre-wrap">
-          {message.role === 'user' ? 'User: ' : 'Gemini: '}
+          {message.role === "user" ? "User: " : "Gemini: "}
           {message.parts.map((part, i) => {
             switch (part.type) {
-              case 'text':
+              case "text":
                 return <div key={`${message.id}-${i}`}>{part.text}</div>;
             }
           })}
@@ -182,17 +182,17 @@ export default function Chat() {
       ))}
 
       <form
-        onSubmit={e => {
+        onSubmit={(e) => {
           e.preventDefault();
           sendMessage({ text: input });
-          setInput('');
+          setInput("");
         }}
       >
         <input
           className="fixed dark:bg-zinc-900 bottom-0 w-full max-w-md p-2 mb-8 border border-zinc-300 dark:border-zinc-800 rounded shadow-xl"
           value={input}
           placeholder="Say something..."
-          onChange={e => setInput(e.currentTarget.value)}
+          onChange={(e) => setInput(e.currentTarget.value)}
         />
       </form>
     </div>

@@ -17,7 +17,7 @@ In this API route, you need to call `setDraftMode` on the response object.
 ```js
 export default function handler(req, res) {
   // ...
-  res.setDraftMode({ enable: true })
+  res.setDraftMode({ enable: true });
   // ...
 }
 ```
@@ -29,8 +29,8 @@ You can test this manually by creating an API route like below and accessing it 
 ```ts filename="pages/api/draft.ts"
 // simple example for testing it manually from your browser.
 export default function handler(req, res) {
-  res.setDraftMode({ enable: true })
-  res.end('Draft mode is enabled')
+  res.setDraftMode({ enable: true });
+  res.end("Draft mode is enabled");
 }
 ```
 
@@ -38,7 +38,7 @@ If you open your browser’s developer tools and visit `/api/draft`, you’ll no
 
 ### Securely accessing it from your Headless CMS
 
-In practice, you’d want to call this API route *securely* from your headless CMS. The specific steps will vary depending on which headless CMS you’re using, but here are some common steps you could take.
+In practice, you’d want to call this API route _securely_ from your headless CMS. The specific steps will vary depending on which headless CMS you’re using, but here are some common steps you could take.
 
 These steps assume that the headless CMS you’re using supports setting **custom draft URLs**. If it doesn’t, you can still use this method to secure your draft URLs, but you’ll need to construct and access the draft URL manually.
 
@@ -67,26 +67,26 @@ Your headless CMS might allow you to include a variable in the draft URL so that
 export default async (req, res) => {
   // Check the secret and next parameters
   // This secret should only be known to this API route and the CMS
-  if (req.query.secret !== 'MY_SECRET_TOKEN' || !req.query.slug) {
-    return res.status(401).json({ message: 'Invalid token' })
+  if (req.query.secret !== "MY_SECRET_TOKEN" || !req.query.slug) {
+    return res.status(401).json({ message: "Invalid token" });
   }
 
   // Fetch the headless CMS to check if the provided `slug` exists
   // getPostBySlug would implement the required fetching logic to the headless CMS
-  const post = await getPostBySlug(req.query.slug)
+  const post = await getPostBySlug(req.query.slug);
 
   // If the slug doesn't exist prevent draft mode from being enabled
   if (!post) {
-    return res.status(401).json({ message: 'Invalid slug' })
+    return res.status(401).json({ message: "Invalid slug" });
   }
 
   // Enable Draft Mode by setting the cookie
-  res.setDraftMode({ enable: true })
+  res.setDraftMode({ enable: true });
 
   // Redirect to the path from the fetched post
   // We don't redirect to req.query.slug as that might lead to open redirect vulnerabilities
-  res.redirect(post.slug)
-}
+  res.redirect(post.slug);
+};
 ```
 
 If it succeeds, then the browser will be redirected to the path you want to view with the draft mode cookie.
@@ -120,9 +120,9 @@ For example, your headless CMS might have a different API endpoint for draft pos
 ```js
 export async function getStaticProps(context) {
   const url = context.draftMode
-    ? 'https://draft.example.com'
-    : 'https://production.example.com'
-  const res = await fetch(url)
+    ? "https://draft.example.com"
+    : "https://production.example.com";
+  const res = await fetch(url);
   // ...
 }
 ```
@@ -145,7 +145,7 @@ To clear the Draft Mode cookie manually, create an API route that calls `setDraf
 
 ```ts filename="pages/api/disable-draft.ts"
 export default function handler(req, res) {
-  res.setDraftMode({ enable: false })
+  res.setDraftMode({ enable: false });
 }
 ```
 

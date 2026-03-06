@@ -11,8 +11,7 @@ vi.mock("../../search/scorer.js", () => ({
 }));
 
 vi.mock("../../format.js", async (importOriginal) => {
-  const original =
-    await importOriginal<typeof import("../../format.js")>();
+  const original = await importOriginal<typeof import("../../format.js")>();
   return { ...original };
 });
 
@@ -24,11 +23,9 @@ beforeEach(async () => {
 describe("search", () => {
   it("errors with empty args", async () => {
     const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
-    const exitSpy = vi
-      .spyOn(process, "exit")
-      .mockImplementation((() => {
-        throw new Error("process.exit");
-      }) as never);
+    const exitSpy = vi.spyOn(process, "exit").mockImplementation((() => {
+      throw new Error("process.exit");
+    }) as never);
 
     await expect(search([])).rejects.toThrow("process.exit");
     expect(exitSpy).toHaveBeenCalledWith(1);
@@ -41,7 +38,9 @@ describe("search", () => {
 
     const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
     await search(["nonexistent"]);
-    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("No results found"));
+    expect(logSpy).toHaveBeenCalledWith(
+      expect.stringContaining("No results found"),
+    );
   });
 
   it("shows formatted results when found", async () => {
@@ -67,7 +66,7 @@ describe("search", () => {
     await search(["server", "components"]);
     expect(scorer.scoreTopics).toHaveBeenCalledWith(
       expect.anything(),
-      "server components"
+      "server components",
     );
   });
 });

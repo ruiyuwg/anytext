@@ -105,13 +105,13 @@ Then, add the bundle analyzer's settings to your `next.config.js`.
 
 ```js filename="next.config.js"
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {};
 
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true',
-})
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
+});
 
-module.exports = withBundleAnalyzer(nextConfig)
+module.exports = withBundleAnalyzer(nextConfig);
 ```
 
 ### Step 2: Generating a report
@@ -134,17 +134,17 @@ Once you've identified a large module, the solution will depend on your use case
 
 ### Packages with many exports
 
-If you're using a package that exports hundreds of modules (such as icon and utility libraries), you can optimize how those imports are resolved using the [`optimizePackageImports`](/docs/app/api-reference/config/next-config-js/optimizePackageImports) option in your `next.config.js` file. This option will only load the modules you *actually* use, while still giving you the convenience of writing import statements with many named exports.
+If you're using a package that exports hundreds of modules (such as icon and utility libraries), you can optimize how those imports are resolved using the [`optimizePackageImports`](/docs/app/api-reference/config/next-config-js/optimizePackageImports) option in your `next.config.js` file. This option will only load the modules you _actually_ use, while still giving you the convenience of writing import statements with many named exports.
 
 ```js filename="next.config.js"
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    optimizePackageImports: ['icon-library'],
+    optimizePackageImports: ["icon-library"],
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 > **Good to know:** Next.js also optimizes some libraries automatically, thus they do not need to be included in the `optimizePackageImports` list. See the [full list](/docs/app/api-reference/config/next-config-js/optimizePackageImports) of supported packages.
@@ -158,15 +158,15 @@ If that work does not require browser APIs or user interaction, it can be run in
 In this example, a prism based highlighter runs in a Client Component. Even though the final output is just a `<code>` block, the entire highlighting library is bundled into the client JavaScript bundle:
 
 ```tsx filename="app/blog/[slug]/page.tsx"
-'use client'
+"use client";
 
-import Highlight from 'prism-react-renderer'
-import theme from 'prism-react-renderer/themes/github'
+import Highlight from "prism-react-renderer";
+import theme from "prism-react-renderer/themes/github";
 
 export default function Page() {
   const code = `export function hello() {
     console.log("hi")
-  }`
+  }`;
 
   return (
     <article>
@@ -189,7 +189,7 @@ export default function Page() {
         )}
       </Highlight>
     </article>
-  )
+  );
 }
 ```
 
@@ -198,18 +198,18 @@ This increases bundle size because the client must download and execute the high
 Instead, move the highlighting logic to a Server Component and render the final HTML on the server. The client will only receive the rendered markup.
 
 ```tsx filename="app/blog/[slug]/page.tsx"
-import { codeToHtml } from 'shiki'
+import { codeToHtml } from "shiki";
 
 export default async function Page() {
   const code = `export function hello() {
     console.log("hi")
-  }`
+  }`;
 
   // The Shiki package runs on the server and is never bundled for the client.
   const highlightedHtml = await codeToHtml(code, {
-    lang: 'tsx',
-    theme: 'github-dark',
-  })
+    lang: "tsx",
+    theme: "github-dark",
+  });
 
   return (
     <article>
@@ -220,7 +220,7 @@ export default async function Page() {
         <code dangerouslySetInnerHTML={{ __html: highlightedHtml }} />
       </pre>
     </article>
-  )
+  );
 }
 ```
 
@@ -233,10 +233,10 @@ To bundle specific packages, you can use the [`transpilePackages`](/docs/app/api
 ```js filename="next.config.js"
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ['package-name'],
-}
+  transpilePackages: ["package-name"],
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 To automatically bundle all packages, you can use the [`bundlePagesRouterDependencies`](/docs/pages/api-reference/config/next-config-js/bundlePagesRouterDependencies) option in your `next.config.js`.
@@ -245,9 +245,9 @@ To automatically bundle all packages, you can use the [`bundlePagesRouterDepende
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   bundlePagesRouterDependencies: true,
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 ### Opting specific packages out of bundling
@@ -260,10 +260,10 @@ const nextConfig = {
   // Automatically bundle external packages:
   bundlePagesRouterDependencies: true,
   // Opt specific packages out of bundling:
-  serverExternalPackages: ['package-name'],
-}
+  serverExternalPackages: ["package-name"],
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 Learn more about optimizing your application for production.

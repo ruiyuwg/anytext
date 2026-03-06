@@ -59,7 +59,8 @@ Example: Imagine you cache the following query on `usersTable` with a 3-second T
 
 ```ts
 const recent = await db
-  .select().from(usersTable)
+  .select()
+  .from(usersTable)
   .$withCache({ config: { ex: 3 }, autoInvalidate: false });
 ```
 

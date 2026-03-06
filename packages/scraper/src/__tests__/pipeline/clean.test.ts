@@ -93,7 +93,8 @@ describe("cleanMarkdown", () => {
   });
 
   it("preserves normal markdown (bold, lists, links, code)", async () => {
-    const input = "**bold** and *italic*\n\n- list item\n\n[link](url)\n\n`code`";
+    const input =
+      "**bold** and *italic*\n\n- list item\n\n[link](url)\n\n`code`";
     const result = await cleanMarkdown(input);
     expect(result).toContain("**bold**");
     expect(result).toContain("- list item");
@@ -130,7 +131,8 @@ describe("cleanMarkdown", () => {
   });
 
   it("removes extra YAML blocks in body (not first)", async () => {
-    const input = "# Title\n\n---\ntitle: meta\ndate: 2025-01-01\n---\n\nContent";
+    const input =
+      "# Title\n\n---\ntitle: meta\ndate: 2025-01-01\n---\n\nContent";
     const result = await cleanMarkdown(input);
     expect(result).not.toContain("title: meta");
     expect(result).toContain("Content");

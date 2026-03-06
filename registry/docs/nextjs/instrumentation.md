@@ -11,18 +11,18 @@ Then, export a `register` function in the file. This function will be called **o
 For example, to use Next.js with [OpenTelemetry](https://opentelemetry.io/) and [@vercel/otel](https://vercel.com/docs/observability/otel-overview):
 
 ```ts filename="instrumentation.ts" switcher
-import { registerOTel } from '@vercel/otel'
+import { registerOTel } from "@vercel/otel";
 
 export function register() {
-  registerOTel('next-app')
+  registerOTel("next-app");
 }
 ```
 
 ```js filename="instrumentation.js" switcher
-import { registerOTel } from '@vercel/otel'
+import { registerOTel } from "@vercel/otel";
 
 export function register() {
-  registerOTel('next-app')
+  registerOTel("next-app");
 }
 ```
 
@@ -43,13 +43,13 @@ We recommend importing files using JavaScript `import` syntax within your `regis
 
 ```ts filename="instrumentation.ts" switcher
 export async function register() {
-  await import('package-with-side-effect')
+  await import("package-with-side-effect");
 }
 ```
 
 ```js filename="instrumentation.js" switcher
 export async function register() {
-  await import('package-with-side-effect')
+  await import("package-with-side-effect");
 }
 ```
 
@@ -63,24 +63,24 @@ Next.js calls `register` in all environments, so it's important to conditionally
 
 ```ts filename="instrumentation.ts" switcher
 export async function register() {
-  if (process.env.NEXT_RUNTIME === 'nodejs') {
-    await import('./instrumentation-node')
+  if (process.env.NEXT_RUNTIME === "nodejs") {
+    await import("./instrumentation-node");
   }
 
-  if (process.env.NEXT_RUNTIME === 'edge') {
-    await import('./instrumentation-edge')
+  if (process.env.NEXT_RUNTIME === "edge") {
+    await import("./instrumentation-edge");
   }
 }
 ```
 
 ```js filename="instrumentation.js" switcher
 export async function register() {
-  if (process.env.NEXT_RUNTIME === 'nodejs') {
-    await import('./instrumentation-node')
+  if (process.env.NEXT_RUNTIME === "nodejs") {
+    await import("./instrumentation-node");
   }
 
-  if (process.env.NEXT_RUNTIME === 'edge') {
-    await import('./instrumentation-edge')
+  if (process.env.NEXT_RUNTIME === "edge") {
+    await import("./instrumentation-edge");
   }
 }
 ```

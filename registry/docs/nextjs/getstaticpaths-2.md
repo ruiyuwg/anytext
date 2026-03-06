@@ -7,38 +7,38 @@ import type {
   InferGetStaticPropsType,
   GetStaticProps,
   GetStaticPaths,
-} from 'next'
+} from "next";
 
 type Repo = {
-  name: string
-  stargazers_count: number
-}
+  name: string;
+  stargazers_count: number;
+};
 
 export const getStaticPaths = (async () => {
   return {
     paths: [
       {
         params: {
-          name: 'next.js',
+          name: "next.js",
         },
       }, // See the "paths" section below
     ],
     fallback: true, // false or "blocking"
-  }
-}) satisfies GetStaticPaths
+  };
+}) satisfies GetStaticPaths;
 
 export const getStaticProps = (async (context) => {
-  const res = await fetch('https://api.github.com/repos/vercel/next.js')
-  const repo = await res.json()
-  return { props: { repo } }
+  const res = await fetch("https://api.github.com/repos/vercel/next.js");
+  const repo = await res.json();
+  return { props: { repo } };
 }) satisfies GetStaticProps<{
-  repo: Repo
-}>
+  repo: Repo;
+}>;
 
 export default function Page({
   repo,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  return repo.stargazers_count
+  return repo.stargazers_count;
 }
 ```
 
@@ -48,22 +48,22 @@ export async function getStaticPaths() {
     paths: [
       {
         params: {
-          name: 'next.js',
+          name: "next.js",
         },
       }, // See the "paths" section below
     ],
     fallback: true, // false or "blocking"
-  }
+  };
 }
 
 export async function getStaticProps() {
-  const res = await fetch('https://api.github.com/repos/vercel/next.js')
-  const repo = await res.json()
-  return { props: { repo } }
+  const res = await fetch("https://api.github.com/repos/vercel/next.js");
+  const repo = await res.json();
+  return { props: { repo } };
 }
 
 export default function Page({ repo }) {
-  return repo.stargazers_count
+  return repo.stargazers_count;
 }
 ```
 
@@ -117,31 +117,31 @@ function Post({ post }) {
 // This function gets called at build time
 export async function getStaticPaths() {
   // Call an external API endpoint to get posts
-  const res = await fetch('https://.../posts')
-  const posts = await res.json()
+  const res = await fetch("https://.../posts");
+  const posts = await res.json();
 
   // Get the paths we want to pre-render based on posts
   const paths = posts.map((post) => ({
     params: { id: post.id },
-  }))
+  }));
 
   // We'll pre-render only these paths at build time.
   // { fallback: false } means other routes should 404.
-  return { paths, fallback: false }
+  return { paths, fallback: false };
 }
 
 // This also gets called at build time
 export async function getStaticProps({ params }) {
   // params contains the post `id`.
   // If the route is like /posts/1, then params.id is 1
-  const res = await fetch(`https://.../posts/${params.id}`)
-  const post = await res.json()
+  const res = await fetch(`https://.../posts/${params.id}`);
+  const post = await res.json();
 
   // Pass post data to the page via props
-  return { props: { post } }
+  return { props: { post } };
 }
 
-export default Post
+export default Post;
 ```
 
 ### `fallback: true`
@@ -154,7 +154,7 @@ If `fallback` is `true`, then the behavior of `getStaticProps` changes in the fo
 
 - The paths returned from `getStaticPaths` will be rendered to `HTML` at build time by `getStaticProps`.
 - The paths that have not been generated at build time will **not** result in a 404 page. Instead, Next.js will serve a [“fallback”](#fallback-pages) version of the page on the first request to such a path. Web crawlers, such as Google, won't be served a fallback and instead the path will behave as in [`fallback: 'blocking'`](#fallback-blocking).
-- When a page with `fallback: true` is navigated to through `next/link` or `next/router` (client-side) Next.js will *not* serve a fallback and instead the page will behave as [`fallback: 'blocking'`](#fallback-blocking).
+- When a page with `fallback: true` is navigated to through `next/link` or `next/router` (client-side) Next.js will _not_ serve a fallback and instead the page will behave as [`fallback: 'blocking'`](#fallback-blocking).
 - In the background, Next.js will statically generate the requested path `HTML` and `JSON`. This includes running `getStaticProps`.
 - When complete, the browser receives the `JSON` for the generated path. This will be used to automatically render the page with the required props. From the user’s perspective, the page will be swapped from the fallback page to the full page.
 - At the same time, Next.js adds this path to the list of pre-rendered pages. Subsequent requests to the same path will serve the generated page, like other pages pre-rendered at build time.
@@ -171,11 +171,11 @@ Shortly after, `getStaticProps` finishes and the page will be rendered with the 
 
 This ensures that users always have a fast experience while preserving fast builds and the benefits of Static Generation.
 
-`fallback: true` will not *update* generated pages, for that take a look at [Incremental Static Regeneration](/docs/pages/guides/incremental-static-regeneration).
+`fallback: true` will not _update_ generated pages, for that take a look at [Incremental Static Regeneration](/docs/pages/guides/incremental-static-regeneration).
 
 ### `fallback: 'blocking'`
 
-If `fallback` is `'blocking'`, new paths not returned by `getStaticPaths` will wait for the `HTML` to be generated, identical to SSR (hence why *blocking*), and then be cached for future requests so it only happens once per path.
+If `fallback` is `'blocking'`, new paths not returned by `getStaticPaths` will wait for the `HTML` to be generated, identical to SSR (hence why _blocking_), and then be cached for future requests so it only happens once per path.
 
 `getStaticProps` will behave as follows:
 
@@ -184,7 +184,7 @@ If `fallback` is `'blocking'`, new paths not returned by `getStaticPaths` will w
 - When complete, the browser receives the `HTML` for the generated path. From the user’s perspective, it will transition from "the browser is requesting the page" to "the full page is loaded". There is no flash of loading/fallback state.
 - At the same time, Next.js adds this path to the list of pre-rendered pages. Subsequent requests to the same path will serve the generated page, like other pages pre-rendered at build time.
 
-`fallback: 'blocking'` will not *update* generated pages by default. To update generated pages, use [Incremental Static Regeneration](/docs/pages/guides/incremental-static-regeneration) in conjunction with `fallback: 'blocking'`.
+`fallback: 'blocking'` will not _update_ generated pages by default. To update generated pages, use [Incremental Static Regeneration](/docs/pages/guides/incremental-static-regeneration) in conjunction with `fallback: 'blocking'`.
 
 > **Good to know**: `fallback: 'blocking'` is not supported when using [`output: 'export'`](/docs/pages/guides/static-exports).
 
@@ -198,15 +198,15 @@ In the “fallback” version of a page:
 The following example showcases using `isFallback`:
 
 ```jsx filename="pages/posts/[id].js"
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 
 function Post({ post }) {
-  const router = useRouter()
+  const router = useRouter();
 
   // If the page is not yet generated, this will be displayed
   // initially until getStaticProps() finishes running
   if (router.isFallback) {
-    return <div>Loading...</div>
+    return <div>Loading...</div>;
   }
 
   // Render post...
@@ -216,19 +216,19 @@ function Post({ post }) {
 export async function getStaticPaths() {
   return {
     // Only `/posts/1` and `/posts/2` are generated at build time
-    paths: [{ params: { id: '1' } }, { params: { id: '2' } }],
+    paths: [{ params: { id: "1" } }, { params: { id: "2" } }],
     // Enable statically generating additional pages
     // For example: `/posts/3`
     fallback: true,
-  }
+  };
 }
 
 // This also gets called at build time
 export async function getStaticProps({ params }) {
   // params contains the post `id`.
   // If the route is like /posts/1, then params.id is 1
-  const res = await fetch(`https://.../posts/${params.id}`)
-  const post = await res.json()
+  const res = await fetch(`https://.../posts/${params.id}`);
+  const post = await res.json();
 
   // Pass post data to the page via props
   return {
@@ -236,10 +236,10 @@ export async function getStaticProps({ params }) {
     // Re-generate the post at most once per second
     // if a request comes in
     revalidate: 1,
-  }
+  };
 }
 
-export default Post
+export default Post;
 ```
 
 ## Version History

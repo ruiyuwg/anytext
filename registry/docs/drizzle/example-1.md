@@ -34,7 +34,7 @@ name: text('name'),
 export const posts = pgTable('posts', {
 id: serial('id').primaryKey(),
 content: text('content'),
-authorId: integer('author\_id').notNull(),
+authorId: integer('author_id').notNull(),
 });
 
 ```
@@ -78,21 +78,21 @@ main();
 ```mdx
 `users`
 
-| id |   name   |   
-| -- | -------- |
-|  1 | 'Melanny' | 
-|  2 | 'Elvera' |
+| id  | name      |
+| --- | --------- |
+| 1   | 'Melanny' |
+| 2   | 'Elvera'  |
 
 `posts`
 
-| id |        content        | author_id |   
-| -- | --------------------- | --------- |
-|  1 | 'tf02gUXb0LZIdEg6SL'  |     2     |
-|  2 | 'j15YdT7Sma'          |     2     |
-|  3 | 'LwwvWtLLAZzIpk'      |     1     |
-|  4 | 'mgyUnBKSrQw'         |     1     |
-|  5 | 'CjAJByKIqilHcPjkvEw' |     2     |
-|  6 | 'S5g0NzXs'            |     1     |
+| id  | content               | author_id |
+| --- | --------------------- | --------- |
+| 1   | 'tf02gUXb0LZIdEg6SL'  | 2         |
+| 2   | 'j15YdT7Sma'          | 2         |
+| 3   | 'LwwvWtLLAZzIpk'      | 1         |
+| 4   | 'mgyUnBKSrQw'         | 1         |
+| 5   | 'CjAJByKIqilHcPjkvEw' | 2         |
+| 6   | 'S5g0NzXs'            | 1         |
 ```
 
 </Section>
@@ -109,7 +109,7 @@ name: text('name'),
 export const posts = pgTable('posts', {
 id: serial('id').primaryKey(),
 content: text('content'),
-authorId: integer('author\_id').notNull().references(() => users.id),
+authorId: integer('author_id').notNull().references(() => users.id),
 });
 
 ````
@@ -142,21 +142,21 @@ main();
 ```mdx
 `users`
 
-| id |   name   |   
-| -- | -------- |
-|  1 | 'Melanny' | 
-|  2 | 'Elvera' |
+| id  | name      |
+| --- | --------- |
+| 1   | 'Melanny' |
+| 2   | 'Elvera'  |
 
 `posts`
 
-| id |        content        | author_id |   
-| -- | --------------------- | --------- |
-|  1 | 'tf02gUXb0LZIdEg6SL'  |     2     |
-|  2 | 'j15YdT7Sma'          |     2     |
-|  3 | 'LwwvWtLLAZzIpk'      |     1     |
-|  4 | 'mgyUnBKSrQw'         |     1     |
-|  5 | 'CjAJByKIqilHcPjkvEw' |     2     |
-|  6 | 'S5g0NzXs'            |     1     |
+| id  | content               | author_id |
+| --- | --------------------- | --------- |
+| 1   | 'tf02gUXb0LZIdEg6SL'  | 2         |
+| 2   | 'j15YdT7Sma'          | 2         |
+| 3   | 'LwwvWtLLAZzIpk'      | 1         |
+| 4   | 'mgyUnBKSrQw'         | 1         |
+| 5   | 'CjAJByKIqilHcPjkvEw' | 2         |
+| 6   | 'S5g0NzXs'            | 1         |
 ```
 
 </Section>
@@ -175,7 +175,7 @@ name: text('name'),
 export const posts = pgTable('posts', {
 id: serial('id').primaryKey(),
 content: text('content'),
-authorId: integer('author\_id').notNull(),
+authorId: integer('author_id').notNull(),
 });
 
 export const postsRelations = relations(posts, ({ one }) => ({
@@ -225,7 +225,7 @@ name: text('name'),
 export const posts = pgTable('posts', {
 id: serial('id').primaryKey(),
 content: text('content'),
-authorId: integer('author\_id').notNull().references(() => users.id),
+authorId: integer('author_id').notNull().references(() => users.id),
 });
 
 ```
@@ -243,7 +243,7 @@ You can't specify "posts" as parameter in users.with object.
 ````
 
 <Callout title='Why?'>
-You have a `posts` table referencing a `users` table in your schema, 
+You have a `posts` table referencing a `users` table in your schema,
 ```ts copy{7}
 .
 .
@@ -296,14 +296,14 @@ main();
 ```mdx
 `users`
 
-| id |   name   |   
+| id |   name   |
 | -- | -------- |
-|  1 | 'Melanny' | 
+|  1 | 'Melanny' |
 |  2 | 'Elvera' |
 
 `posts`
 
-| id |        content        | author_id |   
+| id |        content        | author_id |
 | -- | --------------------- | --------- |
 |  1 | 'tf02gUXb0LZIdEg6SL'  |     2     |
 |  2 | 'j15YdT7Sma'          |     2     |

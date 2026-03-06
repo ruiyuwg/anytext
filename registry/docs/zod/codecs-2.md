@@ -41,16 +41,16 @@ z.encode(schema, "asdf");  // => "asdf"
 ```
 ````
 
-However, some schema types cause the input and output types to diverge, notably `z.codec()`. Codecs are a special type of schema that defines a *bi-directional transformation* between two other schemas.
+However, some schema types cause the input and output types to diverge, notably `z.codec()`. Codecs are a special type of schema that defines a _bi-directional transformation_ between two other schemas.
 
 ```ts
 const stringToDate = z.codec(
-  z.iso.datetime(),  // input schema: ISO date string
-  z.date(),          // output schema: Date object
+  z.iso.datetime(), // input schema: ISO date string
+  z.date(), // output schema: Date object
   {
     decode: (isoString) => new Date(isoString), // ISO string → Date
-    encode: (date) => date.toISOString(),       // Date → ISO string
-  }
+    encode: (date) => date.toISOString(), // Date → ISO string
+  },
 );
 ```
 
@@ -76,7 +76,7 @@ z.encode(stringToDate, new Date("2024-01-15T10:30:00.000Z"))
 ```
 ````
 
-> **Note** —There's nothing special about the directions or terminology here. Instead of *encoding* with an `A -> B` codec, you could instead *decode* with a `B -> A` codec. The use of the terms "decode" and "encode" is just a convention.
+> **Note** —There's nothing special about the directions or terminology here. Instead of _encoding_ with an `A -> B` codec, you could instead _decode_ with a `B -> A` codec. The use of the terms "decode" and "encode" is just a convention.
 
 This is particularly useful when parsing data at a network boundary. You can share a single Zod schema between your client and server, then use this single schema to convert between a network-friendly format (say, JSON) and a richer JavaScript representation.
 
@@ -87,31 +87,31 @@ This is particularly useful when parsing data at a network boundary. You can sha
 Codecs are a schema like any other. You can nest them inside objects, arrays, pipes, etc. There are no rules on where you can use them!
 
 ```ts
-const payloadSchema = z.object({ 
-  startDate: stringToDate 
+const payloadSchema = z.object({
+  startDate: stringToDate,
 });
 
 payloadSchema.decode({
-  startDate: "2024-01-15T10:30:00.000Z"
+  startDate: "2024-01-15T10:30:00.000Z",
 }); // => { startDate: Date }
 ```
 
 ### Type-safe inputs
 
-While `.parse()` and `.decode()` behave identically at *runtime*, they have different type signatures. The `.parse()` method accepts `unknown` as input, and returns a value that matches the schema's inferred *output type*. By contrast, the `z.decode()` and `z.encode()` functions have *strongly-typed inputs*.
+While `.parse()` and `.decode()` behave identically at _runtime_, they have different type signatures. The `.parse()` method accepts `unknown` as input, and returns a value that matches the schema's inferred _output type_. By contrast, the `z.decode()` and `z.encode()` functions have _strongly-typed inputs_.
 
 ```ts
-stringToDate.parse(12345); 
+stringToDate.parse(12345);
 // no complaints from TypeScript (fails at runtime)
 
-stringToDate.decode(12345); 
+stringToDate.decode(12345);
 // ❌ TypeScript error: Argument of type 'number' is not assignable to parameter of type 'string'.
 
-stringToDate.encode(12345); 
+stringToDate.encode(12345);
 // ❌ TypeScript error: Argument of type 'number' is not assignable to parameter of type 'Date'.
 ```
 
-Why the difference? Encoding and decoding imply *transformation*. In many cases, the inputs to these methods are already strongly typed in application code, so z.decode/z.encode accept strongly typed inputs to surface mistakes at compile time.
+Why the difference? Encoding and decoding imply _transformation_. In many cases, the inputs to these methods are already strongly typed in application code, so z.decode/z.encode accept strongly typed inputs to surface mistakes at compile time.
 Here's a diagram demonstrating the differences between the type signatures for `parse()`, `decode()`, and `encode()`.
 
 ### Async and safe variants
@@ -128,16 +128,16 @@ const asyncCodec = z.codec(z.string(), z.number(), {
 As with regular `parse()`, there are "safe" and "async" variants of `decode()` and `encode()`.
 
 ```ts
-stringToDate.decode("2024-01-15T10:30:00.000Z"); 
+stringToDate.decode("2024-01-15T10:30:00.000Z");
 // => Date
 
-stringToDate.decodeAsync("2024-01-15T10:30:00.000Z"); 
+stringToDate.decodeAsync("2024-01-15T10:30:00.000Z");
 // => Promise<Date>
 
-stringToDate.safeDecode("2024-01-15T10:30:00.000Z"); 
+stringToDate.safeDecode("2024-01-15T10:30:00.000Z");
 // => { success: true, data: Date } | { success: false, error: ZodError }
 
-stringToDate.safeDecodeAsync("2024-01-15T10:30:00.000Z"); 
+stringToDate.safeDecodeAsync("2024-01-15T10:30:00.000Z");
 // => Promise<{ success: true, data: Date } | { success: false, error: ZodError }>
 ```
 
@@ -151,24 +151,24 @@ This one is fairly self-explanatory. Codecs encapsulate a bi-directional transfo
 
 ```ts
 const stringToDate = z.codec(
-  z.iso.datetime(),  // input schema: ISO date string
-  z.date(),          // output schema: Date object
+  z.iso.datetime(), // input schema: ISO date string
+  z.date(), // output schema: Date object
   {
     decode: (isoString) => new Date(isoString), // ISO string → Date
-    encode: (date) => date.toISOString(),       // Date → ISO string
-  }
+    encode: (date) => date.toISOString(), // Date → ISO string
+  },
 );
 
-stringToDate.decode("2024-01-15T10:30:00.000Z"); 
+stringToDate.decode("2024-01-15T10:30:00.000Z");
 // => Date
 
-stringToDate.encode(new Date("2024-01-15")); 
+stringToDate.encode(new Date("2024-01-15"));
 // => string
 ```
 
 ### Pipes
 
-> **Fun fact** — Codecs are actually implemented internally as *subclass* of pipes that have been augmented with "interstitial" transform logic.
+> **Fun fact** — Codecs are actually implemented internally as _subclass_ of pipes that have been augmented with "interstitial" transform logic.
 
 During regular decoding, a `ZodPipe<A, B>` schema will first parse the data with `A`, then pass it into `B`. As you might expect, during encoding, the data is first encoded with `B`, then passed into `A`.
 
@@ -177,7 +177,10 @@ During regular decoding, a `ZodPipe<A, B>` schema will first parse the data with
 All checks (`.refine()`, `.min()`, `.max()`, etc.) are still executed in both directions.
 
 ```ts
-const schema = stringToDate.refine((date) => date.getFullYear() >= 2000, "Must be this millennium");
+const schema = stringToDate.refine(
+  (date) => date.getFullYear() >= 2000,
+  "Must be this millennium",
+);
 
 schema.encode(new Date("2000-01-01"));
 // => Date
@@ -213,10 +216,10 @@ Defaults and prefaults are only applied in the "forward" direction.
 ```ts
 const stringWithDefault = z.string().default("hello");
 
-stringWithDefault.decode(undefined); 
+stringWithDefault.decode(undefined);
 // => "hello"
 
-stringWithDefault.encode(undefined); 
+stringWithDefault.encode(undefined);
 // => ZodError: Expected string, received undefined
 ```
 
@@ -229,10 +232,10 @@ Similarly, `.catch()` is only applied in the "forward" direction.
 ```ts
 const stringWithCatch = z.string().catch("hello");
 
-stringWithCatch.decode(1234); 
+stringWithCatch.decode(1234);
 // => "hello"
 
-stringWithCatch.encode(1234); 
+stringWithCatch.encode(1234);
 // => ZodError: Expected string, received number
 ```
 
@@ -245,30 +248,30 @@ The `z.stringbool()` API converts string values (`"true"`, `"false"`, `"yes"`, `
 ```ts
 const stringbool = z.stringbool();
 
-stringbool.decode("true");  // => true
+stringbool.decode("true"); // => true
 stringbool.decode("false"); // => false
 
-stringbool.encode(true);    // => "true"
-stringbool.encode(false);   // => "false"
+stringbool.encode(true); // => "true"
+stringbool.encode(false); // => "false"
 ```
 
-If you specify a custom set of `truthy` and `falsy` values, the *first element in the array* will be used instead.
+If you specify a custom set of `truthy` and `falsy` values, the _first element in the array_ will be used instead.
 
 ```ts
 const stringbool = z.stringbool({ truthy: ["yes", "y"], falsy: ["no", "n"] });
 
-stringbool.encode(true);    // => "yes"
-stringbool.encode(false);   // => "no"
+stringbool.encode(true); // => "yes"
+stringbool.encode(false); // => "no"
 ```
 
 ### Transforms
 
-⚠️ — The `.transform()` API implements a *unidirectional* transformation. If any `.transform()` exists anywhere in your schema, attempting a `z.encode()` operation will throw a *runtime error* (not a `ZodError`).
+⚠️ — The `.transform()` API implements a _unidirectional_ transformation. If any `.transform()` exists anywhere in your schema, attempting a `z.encode()` operation will throw a _runtime error_ (not a `ZodError`).
 
 ```ts
-const schema = z.string().transform(val => val.length);
+const schema = z.string().transform((val) => val.length);
 
-schema.encode(1234); 
+schema.encode(1234);
 // ❌ Error: Encountered unidirectional transform during encode: ZodTransform
 ```
 
@@ -279,10 +282,10 @@ schema.encode(1234);
 ````ts
 const successSchema = z.success(z.string());
 
-z.decode(successSchema, "hello"); 
+z.decode(successSchema, "hello");
 // => true
 
-z.encode(successSchema, true);    
+z.encode(successSchema, true);
 // ❌ Error: Encountered unidirectional transform during encode: ZodSuccess
 ``` */}
 
@@ -316,8 +319,8 @@ const stringToInt = z.codec(z.string().regex(z.regexes.integer), z.int(), {
   encode: (num) => num.toString(),
 });
 
-stringToInt.decode("42");  // => 42
-stringToInt.encode(42);    // => "42"
+stringToInt.decode("42"); // => 42
+stringToInt.encode(42); // => "42"
 ```
 
 ### `stringToBigInt`
@@ -330,8 +333,8 @@ const stringToBigInt = z.codec(z.string(), z.bigint(), {
   encode: (bigint) => bigint.toString(),
 });
 
-stringToBigInt.decode("12345");  // => 12345n
-stringToBigInt.encode(12345n);   // => "12345"
+stringToBigInt.decode("12345"); // => 12345n
+stringToBigInt.encode(12345n); // => "12345"
 ```
 
 ### `numberToBigInt`
@@ -344,8 +347,8 @@ const numberToBigInt = z.codec(z.int(), z.bigint(), {
   encode: (bigint) => Number(bigint),
 });
 
-numberToBigInt.decode(42);   // => 42n
-numberToBigInt.encode(42n);  // => 42
+numberToBigInt.decode(42); // => 42n
+numberToBigInt.encode(42n); // => 42
 ```
 
 ### `isoDatetimeToDate`
@@ -358,8 +361,8 @@ const isoDatetimeToDate = z.codec(z.iso.datetime(), z.date(), {
   encode: (date) => date.toISOString(),
 });
 
-isoDatetimeToDate.decode("2024-01-15T10:30:00.000Z");  // => Date object
-isoDatetimeToDate.encode(new Date("2024-01-15"));       // => "2024-01-15T00:00:00.000Z"
+isoDatetimeToDate.decode("2024-01-15T10:30:00.000Z"); // => Date object
+isoDatetimeToDate.encode(new Date("2024-01-15")); // => "2024-01-15T00:00:00.000Z"
 ```
 
 ### `epochSecondsToDate`
@@ -372,8 +375,8 @@ const epochSecondsToDate = z.codec(z.int().min(0), z.date(), {
   encode: (date) => Math.floor(date.getTime() / 1000),
 });
 
-epochSecondsToDate.decode(1705314600);  // => Date object
-epochSecondsToDate.encode(new Date());  // => Unix timestamp in seconds
+epochSecondsToDate.decode(1705314600); // => Date object
+epochSecondsToDate.encode(new Date()); // => Unix timestamp in seconds
 ```
 
 ### `epochMillisToDate`
@@ -386,8 +389,8 @@ const epochMillisToDate = z.codec(z.int().min(0), z.date(), {
   encode: (date) => date.getTime(),
 });
 
-epochMillisToDate.decode(1705314600000);  // => Date object
-epochMillisToDate.encode(new Date());     // => Unix timestamp in milliseconds
+epochMillisToDate.decode(1705314600000); // => Date object
+epochMillisToDate.encode(new Date()); // => Unix timestamp in milliseconds
 ```
 
 ### `json(schema)`
@@ -419,13 +422,13 @@ Usage example with a specific schema:
 ```ts
 const jsonToObject = jsonCodec(z.object({ name: z.string(), age: z.number() }));
 
-jsonToObject.decode('{"name":"Alice","age":30}');  
+jsonToObject.decode('{"name":"Alice","age":30}');
 // => { name: "Alice", age: 30 }
 
-jsonToObject.encode({ name: "Bob", age: 25 });     
+jsonToObject.encode({ name: "Bob", age: 25 });
 // => '{"name":"Bob","age":25}'
 
-jsonToObject.decode('~~invalid~~'); 
+jsonToObject.decode("~~invalid~~");
 // ZodError: [
 //   {
 //     "code": "invalid_format",
@@ -446,8 +449,8 @@ const utf8ToBytes = z.codec(z.string(), z.instanceof(Uint8Array), {
   encode: (bytes) => new TextDecoder().decode(bytes),
 });
 
-utf8ToBytes.decode("Hello, 世界!");  // => Uint8Array
-utf8ToBytes.encode(bytes);          // => "Hello, 世界!"
+utf8ToBytes.decode("Hello, 世界!"); // => Uint8Array
+utf8ToBytes.encode(bytes); // => "Hello, 世界!"
 ```
 
 ### `bytesToUtf8`
@@ -460,8 +463,8 @@ const bytesToUtf8 = z.codec(z.instanceof(Uint8Array), z.string(), {
   encode: (str) => new TextEncoder().encode(str),
 });
 
-bytesToUtf8.decode(bytes);          // => "Hello, 世界!"
-bytesToUtf8.encode("Hello, 世界!");  // => Uint8Array
+bytesToUtf8.decode(bytes); // => "Hello, 世界!"
+bytesToUtf8.encode("Hello, 世界!"); // => Uint8Array
 ```
 
 ### `base64ToBytes`
@@ -474,8 +477,8 @@ const base64ToBytes = z.codec(z.base64(), z.instanceof(Uint8Array), {
   encode: (bytes) => z.util.uint8ArrayToBase64(bytes),
 });
 
-base64ToBytes.decode("SGVsbG8=");  // => Uint8Array([72, 101, 108, 108, 111])
-base64ToBytes.encode(bytes);       // => "SGVsbG8="
+base64ToBytes.decode("SGVsbG8="); // => Uint8Array([72, 101, 108, 108, 111])
+base64ToBytes.encode(bytes); // => "SGVsbG8="
 ```
 
 ### `base64urlToBytes`
@@ -488,8 +491,8 @@ const base64urlToBytes = z.codec(z.base64url(), z.instanceof(Uint8Array), {
   encode: (bytes) => z.util.uint8ArrayToBase64url(bytes),
 });
 
-base64urlToBytes.decode("SGVsbG8");  // => Uint8Array([72, 101, 108, 108, 111])
-base64urlToBytes.encode(bytes);      // => "SGVsbG8"
+base64urlToBytes.decode("SGVsbG8"); // => Uint8Array([72, 101, 108, 108, 111])
+base64urlToBytes.encode(bytes); // => "SGVsbG8"
 ```
 
 ### `hexToBytes`
@@ -502,8 +505,8 @@ const hexToBytes = z.codec(z.hex(), z.instanceof(Uint8Array), {
   encode: (bytes) => z.util.uint8ArrayToHex(bytes),
 });
 
-hexToBytes.decode("48656c6c6f");     // => Uint8Array([72, 101, 108, 108, 111])
-hexToBytes.encode(bytes);            // => "48656c6c6f"
+hexToBytes.decode("48656c6c6f"); // => Uint8Array([72, 101, 108, 108, 111])
+hexToBytes.encode(bytes); // => "48656c6c6f"
 ```
 
 ### `stringToURL`
@@ -516,8 +519,8 @@ const stringToURL = z.codec(z.url(), z.instanceof(URL), {
   encode: (url) => url.href,
 });
 
-stringToURL.decode("https://example.com/path");  // => URL object
-stringToURL.encode(new URL("https://example.com"));  // => "https://example.com/"
+stringToURL.decode("https://example.com/path"); // => URL object
+stringToURL.encode(new URL("https://example.com")); // => "https://example.com/"
 ```
 
 ### `stringToHttpURL`
@@ -530,8 +533,8 @@ const stringToHttpURL = z.codec(z.httpUrl(), z.instanceof(URL), {
   encode: (url) => url.href,
 });
 
-stringToHttpURL.decode("https://api.example.com/v1");  // => URL object
-stringToHttpURL.encode(url);                           // => "https://api.example.com/v1"
+stringToHttpURL.decode("https://api.example.com/v1"); // => URL object
+stringToHttpURL.encode(url); // => "https://api.example.com/v1"
 ```
 
 ### `uriComponent`
@@ -544,8 +547,8 @@ const uriComponent = z.codec(z.string(), z.string(), {
   encode: (decodedString) => encodeURIComponent(decodedString),
 });
 
-uriComponent.decode("Hello%20World%21");  // => "Hello World!"
-uriComponent.encode("Hello World!");      // => "Hello%20World!"
+uriComponent.decode("Hello%20World%21"); // => "Hello World!"
+uriComponent.encode("Hello World!"); // => "Hello%20World!"
 ```
 
 # Ecosystem

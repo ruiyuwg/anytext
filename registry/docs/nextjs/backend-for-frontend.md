@@ -51,33 +51,33 @@ This handles `GET` requests sent to `/api`.
 Use `try/catch` blocks for operations that may throw an exception:
 
 ```ts filename="/app/api/route.ts" switcher
-import { submit } from '@/lib/submit'
+import { submit } from "@/lib/submit";
 
 export async function POST(request: Request) {
   try {
-    await submit(request)
-    return new Response(null, { status: 204 })
+    await submit(request);
+    return new Response(null, { status: 204 });
   } catch (reason) {
     const message =
-      reason instanceof Error ? reason.message : 'Unexpected error'
+      reason instanceof Error ? reason.message : "Unexpected error";
 
-    return new Response(message, { status: 500 })
+    return new Response(message, { status: 500 });
   }
 }
 ```
 
 ```js filename="/app/api/route.js" switcher
-import { submit } from '@/lib/submit'
+import { submit } from "@/lib/submit";
 
 export async function POST(request) {
   try {
-    await submit(request)
-    return new Response(null, { status: 204 })
+    await submit(request);
+    return new Response(null, { status: 204 });
   } catch (reason) {
     const message =
-      reason instanceof Error ? reason.message : 'Unexpected error'
+      reason instanceof Error ? reason.message : "Unexpected error";
 
-    return new Response(message, { status: 500 })
+    return new Response(message, { status: 500 });
   }
 }
 ```
@@ -108,8 +108,8 @@ For example, `app/rss.xml/route.ts` creates a Route Handler for `rss.xml`.
 
 ```ts filename="/app/rss.xml/route.ts" switcher
 export async function GET(request: Request) {
-  const rssResponse = await fetch(/* rss endpoint */)
-  const rssData = await rssResponse.json()
+  const rssResponse = await fetch(/* rss endpoint */);
+  const rssData = await rssResponse.json();
 
   const rssFeed = `<?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0">
@@ -125,21 +125,21 @@ export async function GET(request: Request) {
     <link>${item.link}</link>
     <pubDate>${item.publishDate}</pubDate>
     <guid isPermaLink="false">${item.guid}</guid>
- </item>`
+ </item>`;
  })}
 </channel>
-</rss>`
+</rss>`;
 
-  const headers = new Headers({ 'content-type': 'application/xml' })
+  const headers = new Headers({ "content-type": "application/xml" });
 
-  return new Response(rssFeed, { headers })
+  return new Response(rssFeed, { headers });
 }
 ```
 
 ```js filename="/app/rss.xml/route.js" switcher
 export async function GET(request) {
-  const rssResponse = await fetch(/* rss endpoint */)
-  const rssData = await rssResponse.json()
+  const rssResponse = await fetch(/* rss endpoint */);
+  const rssData = await rssResponse.json();
 
   const rssFeed = `<?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0">
@@ -155,14 +155,14 @@ export async function GET(request) {
     <link>${item.link}</link>
     <pubDate>${item.publishDate}</pubDate>
     <guid isPermaLink="false">${item.guid}</guid>
- </item>`
+ </item>`;
  })}
 </channel>
-</rss>`
+</rss>`;
 
-  const headers = new Headers({ 'content-type': 'application/xml' })
+  const headers = new Headers({ "content-type": "application/xml" });
 
-  return new Response(rssFeed, { headers })
+  return new Response(rssFeed, { headers });
 }
 ```
 
@@ -181,19 +181,19 @@ module.exports = {
   async rewrites() {
     return [
       {
-        source: '/docs/:slug*',
-        destination: '/docs/md/:slug*',
+        source: "/docs/:slug*",
+        destination: "/docs/md/:slug*",
         has: [
           {
-            type: 'header',
-            key: 'accept',
-            value: '(.*)text/markdown(.*)',
+            type: "header",
+            key: "accept",
+            value: "(.*)text/markdown(.*)",
           },
         ],
       },
-    ]
+    ];
   },
-}
+};
 ```
 
 When a request to `/docs/getting-started` includes `Accept: text/markdown`, the rewrite routes it to `/docs/md/getting-started`. A Route Handler at that path returns the Markdown response. Clients that do not send `text/markdown` in their `Accept` header continue to receive the normal HTML page.
@@ -201,50 +201,50 @@ When a request to `/docs/getting-started` includes `Accept: text/markdown`, the 
 **2. Create a Route Handler for the Markdown response:**
 
 ```ts filename="app/docs/md/[...slug]/route.ts" switcher
-import { getDocsMd, generateDocsStaticParams } from '@/lib/docs'
+import { getDocsMd, generateDocsStaticParams } from "@/lib/docs";
 
 export async function generateStaticParams() {
-  return generateDocsStaticParams()
+  return generateDocsStaticParams();
 }
 
-export async function GET(_: Request, ctx: RouteContext<'/docs/md/[...slug]'>) {
-  const { slug } = await ctx.params
-  const mdDoc = await getDocsMd({ slug })
+export async function GET(_: Request, ctx: RouteContext<"/docs/md/[...slug]">) {
+  const { slug } = await ctx.params;
+  const mdDoc = await getDocsMd({ slug });
 
   if (mdDoc == null) {
-    return new Response(null, { status: 404 })
+    return new Response(null, { status: 404 });
   }
 
   return new Response(mdDoc, {
     headers: {
-      'Content-Type': 'text/markdown; charset=utf-8',
-      Vary: 'Accept',
+      "Content-Type": "text/markdown; charset=utf-8",
+      Vary: "Accept",
     },
-  })
+  });
 }
 ```
 
 ```js filename="app/docs/md/[...slug]/route.js" switcher
-import { getDocsMd, generateDocsStaticParams } from '@/lib/docs'
+import { getDocsMd, generateDocsStaticParams } from "@/lib/docs";
 
 export async function generateStaticParams() {
-  return generateDocsStaticParams()
+  return generateDocsStaticParams();
 }
 
 export async function GET(_, { params }) {
-  const { slug } = await params
-  const mdDoc = await getDocsMd({ slug })
+  const { slug } = await params;
+  const mdDoc = await getDocsMd({ slug });
 
   if (mdDoc == null) {
-    return new Response(null, { status: 404 })
+    return new Response(null, { status: 404 });
   }
 
   return new Response(mdDoc, {
     headers: {
-      'Content-Type': 'text/markdown; charset=utf-8',
-      Vary: 'Accept',
+      "Content-Type": "text/markdown; charset=utf-8",
+      Vary: "Accept",
     },
-  })
+  });
 }
 ```
 
@@ -275,60 +275,60 @@ Use Request [instance methods](https://developer.mozilla.org/en-US/docs/Web/API/
 
 ```ts filename="/app/api/echo-body/route.ts" switcher
 export async function POST(request: Request) {
-  const res = await request.json()
-  return Response.json({ res })
+  const res = await request.json();
+  return Response.json({ res });
 }
 ```
 
 ```js filename="/app/api/echo-body/route.js" switcher
 export async function POST(request) {
-  const res = await request.json()
-  return Response.json({ res })
+  const res = await request.json();
+  return Response.json({ res });
 }
 ```
 
 > **Good to know**: Validate data before passing it to other systems
 
 ```ts filename="/app/api/send-email/route.ts" switcher
-import { sendMail, validateInputs } from '@/lib/email-transporter'
+import { sendMail, validateInputs } from "@/lib/email-transporter";
 
 export async function POST(request: Request) {
-  const formData = await request.formData()
-  const email = formData.get('email')
-  const contents = formData.get('contents')
+  const formData = await request.formData();
+  const email = formData.get("email");
+  const contents = formData.get("contents");
 
   try {
-    await validateInputs({ email, contents })
-    const info = await sendMail({ email, contents })
+    await validateInputs({ email, contents });
+    const info = await sendMail({ email, contents });
 
-    return Response.json({ messageId: info.messageId })
+    return Response.json({ messageId: info.messageId });
   } catch (reason) {
     const message =
-      reason instanceof Error ? reason.message : 'Unexpected exception'
+      reason instanceof Error ? reason.message : "Unexpected exception";
 
-    return new Response(message, { status: 500 })
+    return new Response(message, { status: 500 });
   }
 }
 ```
 
 ```js filename="/app/api/send-email/route.js" switcher
-import { sendMail, validateInputs } from '@/lib/email-transporter'
+import { sendMail, validateInputs } from "@/lib/email-transporter";
 
 export async function POST(request) {
-  const formData = await request.formData()
-  const email = formData.get('email')
-  const contents = formData.get('contents')
+  const formData = await request.formData();
+  const email = formData.get("email");
+  const contents = formData.get("contents");
 
   try {
-    await validateInputs({ email, contents })
-    const info = await sendMail({ email, contents })
+    await validateInputs({ email, contents });
+    const info = await sendMail({ email, contents });
 
-    return Response.json({ messageId: info.messageId })
+    return Response.json({ messageId: info.messageId });
   } catch (reason) {
     const message =
-      reason instanceof Error ? reason.message : 'Unexpected exception'
+      reason instanceof Error ? reason.message : "Unexpected exception";
 
-    return new Response(message, { status: 500 })
+    return new Response(message, { status: 500 });
   }
 }
 ```
@@ -338,15 +338,15 @@ You can only read the request body once. Clone the request if you need to read i
 ```ts filename="/app/api/clone/route.ts" switcher
 export async function POST(request: Request) {
   try {
-    const clonedRequest = request.clone()
+    const clonedRequest = request.clone();
 
-    await request.body()
-    await clonedRequest.body()
-    await request.body() // Throws error
+    await request.body();
+    await clonedRequest.body();
+    await request.body(); // Throws error
 
-    return new Response(null, { status: 204 })
+    return new Response(null, { status: 204 });
   } catch {
-    return new Response(null, { status: 500 })
+    return new Response(null, { status: 500 });
   }
 }
 ```
@@ -354,15 +354,15 @@ export async function POST(request: Request) {
 ```js filename="/app/api/clone/route.js" switcher
 export async function POST(request) {
   try {
-    const clonedRequest = request.clone()
+    const clonedRequest = request.clone();
 
-    await request.body()
-    await clonedRequest.body()
-    await request.body() // Throws error
+    await request.body();
+    await clonedRequest.body();
+    await request.body(); // Throws error
 
-    return new Response(null, { status: 204 })
+    return new Response(null, { status: 204 });
   } catch {
-    return new Response(null, { status: 500 })
+    return new Response(null, { status: 500 });
   }
 }
 ```
@@ -374,55 +374,55 @@ Route Handlers can transform, filter, and aggregate data from one or more source
 You can also offload heavy computations to the server and reduce client battery and data usage.
 
 ```ts file="/app/api/weather/route.ts" switcher
-import { parseWeatherData } from '@/lib/weather'
+import { parseWeatherData } from "@/lib/weather";
 
 export async function POST(request: Request) {
-  const body = await request.json()
-  const searchParams = new URLSearchParams({ lat: body.lat, lng: body.lng })
+  const body = await request.json();
+  const searchParams = new URLSearchParams({ lat: body.lat, lng: body.lng });
 
   try {
-    const weatherResponse = await fetch(`${weatherEndpoint}?${searchParams}`)
+    const weatherResponse = await fetch(`${weatherEndpoint}?${searchParams}`);
 
     if (!weatherResponse.ok) {
       /* handle error */
     }
 
-    const weatherData = await weatherResponse.text()
-    const payload = parseWeatherData.asJSON(weatherData)
+    const weatherData = await weatherResponse.text();
+    const payload = parseWeatherData.asJSON(weatherData);
 
-    return new Response(payload, { status: 200 })
+    return new Response(payload, { status: 200 });
   } catch (reason) {
     const message =
-      reason instanceof Error ? reason.message : 'Unexpected exception'
+      reason instanceof Error ? reason.message : "Unexpected exception";
 
-    return new Response(message, { status: 500 })
+    return new Response(message, { status: 500 });
   }
 }
 ```
 
 ```js file="/app/api/weather/route.js" switcher
-import { parseWeatherData } from '@/lib/weather'
+import { parseWeatherData } from "@/lib/weather";
 
 export async function POST(request) {
-  const body = await request.json()
-  const searchParams = new URLSearchParams({ lat: body.lat, lng: body.lng })
+  const body = await request.json();
+  const searchParams = new URLSearchParams({ lat: body.lat, lng: body.lng });
 
   try {
-    const weatherResponse = await fetch(`${weatherEndpoint}?${searchParams}`)
+    const weatherResponse = await fetch(`${weatherEndpoint}?${searchParams}`);
 
     if (!weatherResponse.ok) {
       /* handle error */
     }
 
-    const weatherData = await weatherResponse.text()
-    const payload = parseWeatherData.asJSON(weatherData)
+    const weatherData = await weatherResponse.text();
+    const payload = parseWeatherData.asJSON(weatherData);
 
-    return new Response(payload, { status: 200 })
+    return new Response(payload, { status: 200 });
   } catch (reason) {
     const message =
-      reason instanceof Error ? reason.message : 'Unexpected exception'
+      reason instanceof Error ? reason.message : "Unexpected exception";
 
-    return new Response(message, { status: 500 })
+    return new Response(message, { status: 500 });
   }
 }
 ```
@@ -434,55 +434,55 @@ export async function POST(request) {
 You can use a Route Handler as a `proxy` to another backend. Add validation logic before forwarding the request.
 
 ```ts filename="/app/api/[...slug]/route.ts" switcher
-import { isValidRequest } from '@/lib/utils'
+import { isValidRequest } from "@/lib/utils";
 
 export async function POST(request: Request, { params }) {
-  const clonedRequest = request.clone()
-  const isValid = await isValidRequest(clonedRequest)
+  const clonedRequest = request.clone();
+  const isValid = await isValidRequest(clonedRequest);
 
   if (!isValid) {
-    return new Response(null, { status: 400, statusText: 'Bad Request' })
+    return new Response(null, { status: 400, statusText: "Bad Request" });
   }
 
-  const { slug } = await params
-  const pathname = slug.join('/')
-  const proxyURL = new URL(pathname, 'https://nextjs.org')
-  const proxyRequest = new Request(proxyURL, request)
+  const { slug } = await params;
+  const pathname = slug.join("/");
+  const proxyURL = new URL(pathname, "https://nextjs.org");
+  const proxyRequest = new Request(proxyURL, request);
 
   try {
-    return fetch(proxyRequest)
+    return fetch(proxyRequest);
   } catch (reason) {
     const message =
-      reason instanceof Error ? reason.message : 'Unexpected exception'
+      reason instanceof Error ? reason.message : "Unexpected exception";
 
-    return new Response(message, { status: 500 })
+    return new Response(message, { status: 500 });
   }
 }
 ```
 
 ```js filename="/app/api/[...slug]/route.js" switcher
-import { isValidRequest } from '@/lib/utils'
+import { isValidRequest } from "@/lib/utils";
 
 export async function POST(request, { params }) {
-  const clonedRequest = request.clone()
-  const isValid = await isValidRequest(clonedRequest)
+  const clonedRequest = request.clone();
+  const isValid = await isValidRequest(clonedRequest);
 
   if (!isValid) {
-    return new Response(null, { status: 400, statusText: 'Bad Request' })
+    return new Response(null, { status: 400, statusText: "Bad Request" });
   }
 
-  const { slug } = await params
-  const pathname = slug.join('/')
-  const proxyURL = new URL(pathname, 'https://nextjs.org')
-  const proxyRequest = new Request(proxyURL, request)
+  const { slug } = await params;
+  const pathname = slug.join("/");
+  const proxyURL = new URL(pathname, "https://nextjs.org");
+  const proxyRequest = new Request(proxyURL, request);
 
   try {
-    return fetch(proxyRequest)
+    return fetch(proxyRequest);
   } catch (reason) {
     const message =
-      reason instanceof Error ? reason.message : 'Unexpected exception'
+      reason instanceof Error ? reason.message : "Unexpected exception";
 
-    return new Response(message, { status: 500 })
+    return new Response(message, { status: 500 });
   }
 }
 ```
@@ -505,38 +505,38 @@ Both provide methods for reading and manipulating cookies.
 You can pass `NextRequest` to any function expecting `Request`. Likewise, you can return `NextResponse` where a `Response` is expected.
 
 ```ts filename="/app/echo-pathname/route.ts" switcher
-import { type NextRequest, NextResponse } from 'next/server'
+import { type NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
-  const nextUrl = request.nextUrl
+  const nextUrl = request.nextUrl;
 
-  if (nextUrl.searchParams.get('redirect')) {
-    return NextResponse.redirect(new URL('/', request.url))
+  if (nextUrl.searchParams.get("redirect")) {
+    return NextResponse.redirect(new URL("/", request.url));
   }
 
-  if (nextUrl.searchParams.get('rewrite')) {
-    return NextResponse.rewrite(new URL('/', request.url))
+  if (nextUrl.searchParams.get("rewrite")) {
+    return NextResponse.rewrite(new URL("/", request.url));
   }
 
-  return NextResponse.json({ pathname: nextUrl.pathname })
+  return NextResponse.json({ pathname: nextUrl.pathname });
 }
 ```
 
 ```js filename="/app/echo-pathname/route.js" switcher
-import { NextResponse } from 'next/server'
+import { NextResponse } from "next/server";
 
 export async function GET(request) {
-  const nextUrl = request.nextUrl
+  const nextUrl = request.nextUrl;
 
-  if (nextUrl.searchParams.get('redirect')) {
-    return NextResponse.redirect(new URL('/', request.url))
+  if (nextUrl.searchParams.get("redirect")) {
+    return NextResponse.redirect(new URL("/", request.url));
   }
 
-  if (nextUrl.searchParams.get('rewrite')) {
-    return NextResponse.rewrite(new URL('/', request.url))
+  if (nextUrl.searchParams.get("rewrite")) {
+    return NextResponse.rewrite(new URL("/", request.url));
   }
 
-  return NextResponse.json({ pathname: nextUrl.pathname })
+  return NextResponse.json({ pathname: nextUrl.pathname });
 }
 ```
 
@@ -549,110 +549,110 @@ Use Route Handlers to receive event notifications from third-party applications.
 For example, revalidate a route when content changes in a CMS. Configure the CMS to call a specific endpoint on changes.
 
 ```ts filename="/app/webhook/route.ts" switcher
-import { type NextRequest, NextResponse } from 'next/server'
+import { type NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
-  const token = request.nextUrl.searchParams.get('token')
+  const token = request.nextUrl.searchParams.get("token");
 
   if (token !== process.env.REVALIDATE_SECRET_TOKEN) {
-    return NextResponse.json({ success: false }, { status: 401 })
+    return NextResponse.json({ success: false }, { status: 401 });
   }
 
-  const tag = request.nextUrl.searchParams.get('tag')
+  const tag = request.nextUrl.searchParams.get("tag");
 
   if (!tag) {
-    return NextResponse.json({ success: false }, { status: 400 })
+    return NextResponse.json({ success: false }, { status: 400 });
   }
 
-  revalidateTag(tag)
+  revalidateTag(tag);
 
-  return NextResponse.json({ success: true })
+  return NextResponse.json({ success: true });
 }
 ```
 
 ```js filename="/app/webhook/route.js" switcher
-import { NextResponse } from 'next/server'
+import { NextResponse } from "next/server";
 
 export async function GET(request) {
-  const token = request.nextUrl.searchParams.get('token')
+  const token = request.nextUrl.searchParams.get("token");
 
   if (token !== process.env.REVALIDATE_SECRET_TOKEN) {
-    return NextResponse.json({ success: false }, { status: 401 })
+    return NextResponse.json({ success: false }, { status: 401 });
   }
 
-  const tag = request.nextUrl.searchParams.get('tag')
+  const tag = request.nextUrl.searchParams.get("tag");
 
   if (!tag) {
-    return NextResponse.json({ success: false }, { status: 400 })
+    return NextResponse.json({ success: false }, { status: 400 });
   }
 
-  revalidateTag(tag)
+  revalidateTag(tag);
 
-  return NextResponse.json({ success: true })
+  return NextResponse.json({ success: true });
 }
 ```
 
 Callback URLs are another use case. When a user completes a third-party flow, the third party sends them to a callback URL. Use a Route Handler to verify the response and decide where to redirect the user.
 
 ```ts filename="/app/auth/callback/route.ts" switcher
-import { type NextRequest, NextResponse } from 'next/server'
+import { type NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
-  const token = request.nextUrl.searchParams.get('session_token')
-  const redirectUrl = request.nextUrl.searchParams.get('redirect_url')
+  const token = request.nextUrl.searchParams.get("session_token");
+  const redirectUrl = request.nextUrl.searchParams.get("redirect_url");
 
-  const response = NextResponse.redirect(new URL(redirectUrl, request.url))
+  const response = NextResponse.redirect(new URL(redirectUrl, request.url));
 
   response.cookies.set({
     value: token,
-    name: '_token',
-    path: '/',
+    name: "_token",
+    path: "/",
     secure: true,
     httpOnly: true,
     expires: undefined, // session cookie
-  })
+  });
 
-  return response
+  return response;
 }
 ```
 
 ```js filename="/app/auth/callback/route.js" switcher
-import { NextResponse } from 'next/server'
+import { NextResponse } from "next/server";
 
 export async function GET(request) {
-  const token = request.nextUrl.searchParams.get('session_token')
-  const redirectUrl = request.nextUrl.searchParams.get('redirect_url')
+  const token = request.nextUrl.searchParams.get("session_token");
+  const redirectUrl = request.nextUrl.searchParams.get("redirect_url");
 
-  const response = NextResponse.redirect(new URL(redirectUrl, request.url))
+  const response = NextResponse.redirect(new URL(redirectUrl, request.url));
 
   response.cookies.set({
     value: token,
-    name: '_token',
-    path: '/',
+    name: "_token",
+    path: "/",
     secure: true,
     httpOnly: true,
     expires: undefined, // session cookie
-  })
+  });
 
-  return response
+  return response;
 }
 ```
 
 ## Redirects
 
 ```ts filename="app/api/route.ts" switcher
-import { redirect } from 'next/navigation'
+import { redirect } from "next/navigation";
 
 export async function GET(request: Request) {
-  redirect('https://nextjs.org/')
+  redirect("https://nextjs.org/");
 }
 ```
 
 ```js filename="app/api/route.js" switcher
-import { redirect } from 'next/navigation'
+import { redirect } from "next/navigation";
 
 export async function GET(request) {
-  redirect('https://nextjs.org/')
+  redirect("https://nextjs.org/");
 }
 ```
 
@@ -665,35 +665,35 @@ Only one `proxy` file is allowed per project. Use `config.matcher` to target spe
 Use `proxy` to generate a response before the request reaches a route path.
 
 ```ts filename="proxy.ts" switcher
-import { isAuthenticated } from '@lib/auth'
+import { isAuthenticated } from "@lib/auth";
 
 export const config = {
-  matcher: '/api/:function*',
-}
+  matcher: "/api/:function*",
+};
 
 export function proxy(request: Request) {
   if (!isAuthenticated(request)) {
     return Response.json(
-      { success: false, message: 'authentication failed' },
-      { status: 401 }
-    )
+      { success: false, message: "authentication failed" },
+      { status: 401 },
+    );
   }
 }
 ```
 
 ```js filename="proxy.js" switcher
-import { isAuthenticated } from '@lib/auth'
+import { isAuthenticated } from "@lib/auth";
 
 export const config = {
-  matcher: '/api/:function*',
-}
+  matcher: "/api/:function*",
+};
 
 export function proxy(request) {
   if (!isAuthenticated(request)) {
     return Response.json(
-      { success: false, message: 'authentication failed' },
-      { status: 401 }
-    )
+      { success: false, message: "authentication failed" },
+      { status: 401 },
+    );
   }
 }
 ```
@@ -701,23 +701,23 @@ export function proxy(request) {
 You can also proxy requests using `proxy`:
 
 ```ts filename="proxy.ts" switcher
-import { NextResponse } from 'next/server'
+import { NextResponse } from "next/server";
 
 export function proxy(request: Request) {
-  if (request.nextUrl.pathname === '/proxy-this-path') {
-    const rewriteUrl = new URL('https://nextjs.org')
-    return NextResponse.rewrite(rewriteUrl)
+  if (request.nextUrl.pathname === "/proxy-this-path") {
+    const rewriteUrl = new URL("https://nextjs.org");
+    return NextResponse.rewrite(rewriteUrl);
   }
 }
 ```
 
 ```js filename="proxy.js" switcher
-import { NextResponse } from 'next/server'
+import { NextResponse } from "next/server";
 
 export function proxy(request) {
-  if (request.nextUrl.pathname === '/proxy-this-path') {
-    const rewriteUrl = new URL('https://nextjs.org')
-    return NextResponse.rewrite(rewriteUrl)
+  if (request.nextUrl.pathname === "/proxy-this-path") {
+    const rewriteUrl = new URL("https://nextjs.org");
+    return NextResponse.rewrite(rewriteUrl);
   }
 }
 ```
@@ -725,23 +725,23 @@ export function proxy(request) {
 Another type of response `proxy` can produce are redirects:
 
 ```ts filename="proxy.ts" switcher
-import { NextResponse } from 'next/server'
+import { NextResponse } from "next/server";
 
 export function proxy(request: Request) {
-  if (request.nextUrl.pathname === '/v1/docs') {
-    request.nextUrl.pathname = '/v2/docs'
-    return NextResponse.redirect(request.nextUrl)
+  if (request.nextUrl.pathname === "/v1/docs") {
+    request.nextUrl.pathname = "/v2/docs";
+    return NextResponse.redirect(request.nextUrl);
   }
 }
 ```
 
 ```js filename="proxy.js" switcher
-import { NextResponse } from 'next/server'
+import { NextResponse } from "next/server";
 
 export function proxy(request) {
-  if (request.nextUrl.pathname === '/v1/docs') {
-    request.nextUrl.pathname = '/v2/docs'
-    return NextResponse.redirect(request.nextUrl)
+  if (request.nextUrl.pathname === "/v1/docs") {
+    request.nextUrl.pathname = "/v2/docs";
+    return NextResponse.redirect(request.nextUrl);
   }
 }
 ```
@@ -762,32 +762,32 @@ Learn more in [NextResponse headers in Proxy](/docs/app/api-reference/functions/
 You can implement rate limiting in your Next.js backend. In addition to code-based checks, enable any rate limiting features provided by your host.
 
 ```ts filename="/app/resource/route.ts" switcher
-import { NextResponse } from 'next/server'
-import { checkRateLimit } from '@/lib/rate-limit'
+import { NextResponse } from "next/server";
+import { checkRateLimit } from "@/lib/rate-limit";
 
 export async function POST(request: Request) {
-  const { rateLimited } = await checkRateLimit(request)
+  const { rateLimited } = await checkRateLimit(request);
 
   if (rateLimited) {
-    return NextResponse.json({ error: 'Rate limit exceeded' }, { status: 429 })
+    return NextResponse.json({ error: "Rate limit exceeded" }, { status: 429 });
   }
 
-  return new Response(null, { status: 204 })
+  return new Response(null, { status: 204 });
 }
 ```
 
 ```js filename="/app/resource/route.js" switcher
-import { NextResponse } from 'next/server'
-import { checkRateLimit } from '@/lib/rate-limit'
+import { NextResponse } from "next/server";
+import { checkRateLimit } from "@/lib/rate-limit";
 
 export async function POST(request) {
-  const { rateLimited } = await checkRateLimit(request)
+  const { rateLimited } = await checkRateLimit(request);
 
   if (rateLimited) {
-    return NextResponse.json({ error: 'Rate limit exceeded' }, { status: 429 })
+    return NextResponse.json({ error: "Rate limit exceeded" }, { status: 429 });
   }
 
-  return new Response(null, { status: 204 })
+  return new Response(null, { status: 204 });
 }
 ```
 
@@ -820,15 +820,15 @@ If `OPTIONS` is not defined, Next.js adds it automatically and sets the `Allow` 
 Community libraries often use the factory pattern for Route Handlers.
 
 ```ts filename="/app/api/[...path]/route.ts"
-import { createHandler } from 'third-party-library'
+import { createHandler } from "third-party-library";
 
 const handler = createHandler({
   /* library-specific options */
-})
+});
 
-export const GET = handler
+export const GET = handler;
 // or
-export { handler as POST }
+export { handler as POST };
 ```
 
 This creates a shared handler for `GET` and `POST` requests. The library customizes behavior based on the `method` and `pathname` in the request.
@@ -836,9 +836,9 @@ This creates a shared handler for `GET` and `POST` requests. The library customi
 Libraries can also provide a `proxy` factory.
 
 ```ts filename="proxy.ts"
-import { createMiddleware } from 'third-party-library'
+import { createMiddleware } from "third-party-library";
 
-export default createMiddleware()
+export default createMiddleware();
 ```
 
 > **Good to know**: Third-party libraries may still refer to `proxy` as `middleware`.
@@ -887,10 +887,10 @@ In `export mode`, only `GET` Route Handlers are supported, in combination with t
 This can be used to generate static HTML, JSON, TXT, or other files.
 
 ```js filename="app/hello-world/route.ts"
-export const dynamic = 'force-static'
+export const dynamic = "force-static";
 
 export function GET() {
-  return new Response('Hello World', { status: 200 })
+  return new Response("Hello World", { status: 200 });
 }
 ```
 
