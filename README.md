@@ -55,19 +55,32 @@ The registry is a collection of pre-processed markdown files committed to this r
 
 ## Supported Libraries
 
-| Library | Version | Topics |
-|---------|---------|--------|
-| Hono | v4 | getting-started, routing, context, middleware |
-| Zod | v3 | schemas, validation |
+| Library | Version | Topics | Source |
+|---------|---------|--------|--------|
+| AI SDK | v4 | 128 | llms.txt |
+| Drizzle ORM | v0.36 | 161 | llms-full.txt |
+| Hono | v4 | 63 | llms-full.txt |
+| Next.js | v15 | 287 | llms-full.txt |
+| React | v19 | 161 | llms.txt |
+| Tailwind CSS | v4 | 6 | manual |
+| tRPC | v11 | 62 | llms-full.txt |
+| Zod | v3 | 28 | llms-full.txt |
 
-More libraries coming soon. Contributions welcome.
+Docs are automatically updated weekly via GitHub Actions. Contributions welcome.
 
 ## Contributing
 
-### Adding Documentation
+### Adding a New Library (Automated)
+
+1. Add an entry to `packages/scraper/sources.json`
+2. Run the scraper: `cd packages/scraper && pnpm build && node dist/index.js --library <id>`
+3. Verify the output in `registry/docs/<id>/` and `registry/manifest.json`
+4. Submit a PR
+
+### Adding Documentation (Manual)
 
 1. Create markdown files in `registry/docs/{library}/`
-2. Add entries to `registry/manifest.json`
+2. Run the manual adapter to update the manifest: `node dist/index.js --library <id>`
 3. Follow the doc quality guidelines:
    - Pure markdown — no MDX, no JSX, no HTML
    - Self-contained — understandable without other topics
@@ -87,6 +100,12 @@ pnpm build
 cd packages/cli
 node dist/index.js list
 node dist/index.js read hono routing
+
+# Run the scraper
+cd packages/scraper
+node dist/index.js --library hono     # Single library
+node dist/index.js                    # All libraries
+node dist/index.js --dry-run          # Preview without writing
 ```
 
 ## License
