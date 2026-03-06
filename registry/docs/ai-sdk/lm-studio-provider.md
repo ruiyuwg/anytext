@@ -115,3 +115,5 @@ const { embeddings } = await embedMany({
   ],
 });
 ```
+
+# NVIDIA NIM

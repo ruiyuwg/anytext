@@ -274,6 +274,8 @@ View all the Metadata API options.
 
 # generateMetadata
 
+# generateMetadata
+
 You can use the `metadata` object or the `generateMetadata` function to define metadata.
 
 ## The `metadata` object

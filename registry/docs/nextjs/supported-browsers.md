@@ -125,6 +125,8 @@ You can customize babel configuration. [Learn more here](/docs/pages/guides/babe
 
 # Community
 
+# Community
+
 With over 5 million weekly downloads, Next.js has a large and active community of developers across the world. Here's how you can get involved in our community:
 
 ## Contributing
@@ -153,3 +155,5 @@ We believe in creating an inclusive, welcoming community. As such, we ask all me
 
 - [Contribution Guide](/docs/community/contribution-guide)
 - [Rspack](/docs/community/rspack)
+
+# Contribution Guide

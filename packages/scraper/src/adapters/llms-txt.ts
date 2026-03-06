@@ -1,4 +1,4 @@
-import { mkdirSync, writeFileSync } from "node:fs";
+import { mkdirSync, rmSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import type { Adapter, SourceConfig, ProcessedTopic } from "../types.js";
 import { fetchContent } from "../pipeline/fetch.js";
@@ -66,6 +66,7 @@ export const llmsTxtAdapter: Adapter = {
 
     // Write doc files
     const docsDir = path.join(getRegistryDir(), "docs", source.id);
+    rmSync(docsDir, { recursive: true, force: true });
     mkdirSync(docsDir, { recursive: true });
 
     for (const topic of finalTopics) {

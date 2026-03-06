@@ -144,3 +144,5 @@ Or using `yarn`:
 ```
 yarn add react@latest react-dom@latest
 ```
+
+# Version 12

@@ -634,3 +634,5 @@ Learn more about the features mentioned in this page by reading the API Referenc
   - Configure how data fetches are logged to the console when running Next.js in development mode.
 - [taint](/docs/app/api-reference/config/next-config-js/taint)
   - Enable tainting Objects and Values.
+
+# Updating Data

@@ -613,3 +613,5 @@ View related API references.
   - Learn how to use the cacheTag function to manage cache invalidation in your Next.js application.
 - [connection](/docs/app/api-reference/functions/connection)
   - API Reference for the connection function.
+
+# use client

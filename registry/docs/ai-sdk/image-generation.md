@@ -333,3 +333,5 @@ for (const file of result.files) {
 | [Black Forest Labs](/providers/ai-sdk-providers/black-forest-labs#image-models) | `flux-pro-1.0-fill`                                          | From 3:7 (portrait) to 7:3 (landscape)                                                                                                                              |
 
 Above are a small subset of the image models supported by the AI SDK providers. For more, see the respective provider documentation.
+
+# Transcription

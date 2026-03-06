@@ -427,3 +427,5 @@ See the [Loading UI](/docs/app/api-reference/file-conventions/loading) and [Erro
 
 - [default.js](/docs/app/api-reference/file-conventions/default)
   - API Reference for the default.js file.
+
+# proxy.js

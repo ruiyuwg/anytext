@@ -1,3 +1,5 @@
+# Compiling Libraries
+
 This guide helps library authors understand how to use React Compiler to ship optimized library code to their users.
 
 ## Why Ship Compiled Code? {/*why-ship-compiled-code*/}

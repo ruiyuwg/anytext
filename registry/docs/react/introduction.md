@@ -1,3 +1,5 @@
+# Introduction
+
 React Compiler is a new build-time tool that automatically optimizes your React app. It works with plain JavaScript, and understands the [Rules of React](/reference/rules), so you don't need to rewrite any code to use it.
 
 - What React Compiler does

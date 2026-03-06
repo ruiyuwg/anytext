@@ -1,3 +1,5 @@
+# lazy
+
 `lazy` lets you defer loading component's code until it is rendered for the first time.
 
 ```js

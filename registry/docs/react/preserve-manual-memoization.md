@@ -1,3 +1,5 @@
+# preserve-manual-memoization
+
 Validates that existing manual memoization is preserved by the compiler. React Compiler will only compile components and hooks if its inference [matches or exceeds the existing manual memoization](/learn/react-compiler/introduction#what-should-i-do-about-usememo-usecallback-and-reactmemo).
 
 ## Rule Details {/*rule-details*/}

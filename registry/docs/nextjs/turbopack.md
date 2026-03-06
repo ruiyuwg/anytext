@@ -310,6 +310,8 @@ The option automatically adds a polyfill for debug IDs to the JavaScript bundle 
 
 # turbopackFileSystemCache
 
+# turbopackFileSystemCache
+
 ## Usage
 
 Turbopack FileSystem Cache enables Turbopack to reduce work across `next dev` or `next build` commands. When enabled, Turbopack will save and restore data to the `.next` folder between builds, which can greatly speed up subsequent builds and dev sessions.
@@ -355,6 +357,8 @@ module.exports = nextConfig
 
 # typedRoutes
 
+# typedRoutes
+
 > **Note**: This option has been marked as stable, so you should use `typedRoutes` instead of `experimental.typedRoutes`.
 
 Support for [statically typed links](/docs/app/api-reference/config/typescript#statically-typed-links). This feature requires using TypeScript in your project.
@@ -367,6 +371,8 @@ const nextConfig = {
 
 module.exports = nextConfig
 ```
+
+# typescript
 
 # typescript
 
@@ -421,3 +427,5 @@ module.exports = {
 ```
 
 See the [TypeScript configuration](/docs/app/api-reference/config/typescript#custom-tsconfig-path) page for more details.
+
+# urlImports

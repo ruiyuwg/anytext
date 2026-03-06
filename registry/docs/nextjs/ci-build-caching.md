@@ -163,3 +163,5 @@ stage("Build") {
     }
 }
 ```
+
+# Content Security Policy

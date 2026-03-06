@@ -197,3 +197,5 @@ In development (`next dev`), `getStaticProps` will be called on every request.
 ## Preview Mode
 
 You can temporarily bypass static generation and render the page at **request time** instead of build time using [**Preview Mode**](/docs/pages/guides/preview-mode). For example, you might be using a headless CMS and want to preview drafts before they're published.
+
+# getStaticPaths

@@ -1,3 +1,5 @@
+# useInsertionEffect
+
 `useInsertionEffect` is for CSS-in-JS library authors. Unless you are working on a CSS-in-JS library and need a place to inject the styles, you probably want [`useEffect`](/reference/react/useEffect) or [`useLayoutEffect`](/reference/react/useLayoutEffect) instead.
 
 `useInsertionEffect` allows inserting elements into the DOM before any layout Effects fire.

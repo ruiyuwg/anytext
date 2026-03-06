@@ -313,3 +313,5 @@ export function SearchBar() {
 | Version   | Changes                       |
 | --------- | ----------------------------- |
 | `v13.0.0` | `useSearchParams` introduced. |
+
+# userAgent

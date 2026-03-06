@@ -1,3 +1,5 @@
+# 'Referencing Values with Refs'
+
 When you want a component to "remember" some information, but you don't want that information to [trigger new renders](/learn/render-and-commit), you can use a *ref*.
 
 - How to add a ref to your component

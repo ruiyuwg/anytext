@@ -91,3 +91,5 @@ for await (const message of result.textStream) {
 ```
 
 For full list of available models, you can refer to the [Clarifai Model Gallery](https://clarifai.com/explore).
+
+# Heroku

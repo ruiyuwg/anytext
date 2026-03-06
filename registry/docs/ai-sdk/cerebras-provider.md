@@ -141,3 +141,5 @@ February 16, 2026. Please see the [Cerebras
 docs](https://inference-docs.cerebras.ai/introduction) for more details about
 the available models and migration guidance. You can also pass any available
 provider model ID as a string if needed.
+
+# Replicate

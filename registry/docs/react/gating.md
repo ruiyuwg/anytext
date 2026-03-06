@@ -1,3 +1,5 @@
+# gating
+
 Validates configuration of [gating mode](/reference/react-compiler/gating).
 
 ## Rule Details {/*rule-details*/}

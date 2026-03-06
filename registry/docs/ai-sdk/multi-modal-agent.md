@@ -342,3 +342,5 @@ documentation](/providers/ai-sdk-providers) for specific details.
 ## Where to Next?
 
 You've built a multi-modal AI agent using the AI SDK! Experiment and extend the functionality of this application further by exploring [tool calling](/docs/ai-sdk-core/tools-and-tool-calling).
+
+# Slackbot Agent Guide

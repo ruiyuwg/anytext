@@ -149,3 +149,5 @@ The table above lists popular models. Please see the [Anthropic
 docs](https://docs.anthropic.com/en/docs/about-claude/models) for a full list
 of available models. The table above lists popular models. You can also pass
 any available provider model ID as a string if needed.
+
+# Open Responses

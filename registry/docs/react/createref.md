@@ -1,3 +1,5 @@
+# createRef
+
 `createRef` is mostly used for [class components.](/reference/react/Component) Function components typically rely on [`useRef`](/reference/react/useRef) instead.
 
 `createRef` creates a [ref](/learn/referencing-values-with-refs) object which can contain arbitrary value.

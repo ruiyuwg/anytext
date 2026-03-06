@@ -1,3 +1,5 @@
+# renderToStaticMarkup
+
 `renderToStaticMarkup` renders a non-interactive React tree to an HTML string.
 
 ```js

@@ -132,6 +132,8 @@ The LMNT provider accepts the following options via `providerOptions.lmnt`:
 | `aurora`   |  |
 | `blizzard` |  |
 
+# Google Generative AI
+
 # Google Generative AI Provider
 
 The [Google Generative AI](https://ai.google.dev) provider contains language and embedding model support for

@@ -1,3 +1,5 @@
+# Build a React app from Scratch
+
 If your app has constraints not well-served by existing frameworks, you prefer to build your own framework, or you just want to learn the basics of a React app, you can build a React app from scratch.
 
 #### Consider using a framework {/*consider-using-a-framework*/}

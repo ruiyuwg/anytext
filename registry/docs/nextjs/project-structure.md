@@ -267,3 +267,5 @@ To create multiple [root layouts](/docs/app/api-reference/file-conventions/layou
 ![Route Groups with Multiple Root Layouts](https://h8DxKfmAPhn8O0p3.public.blob.vercel-storage.com/docs/light/route-group-multiple-root-layouts.png)
 
 In the example above, both `(marketing)` and `(shop)` have their own root layout.
+
+# Layouts and Pages

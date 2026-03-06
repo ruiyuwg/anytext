@@ -1,3 +1,5 @@
+# Incremental Adoption
+
 React Compiler can be adopted incrementally, allowing you to try it on specific parts of your codebase first. This guide shows you how to gradually roll out the compiler in existing projects.
 
 - Why incremental adoption is recommended

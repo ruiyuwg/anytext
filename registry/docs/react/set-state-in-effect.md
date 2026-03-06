@@ -1,3 +1,5 @@
+# set-state-in-effect
+
 Validates against calling setState synchronously in an effect, which can lead to re-renders that degrade performance.
 
 ## Rule Details {/*rule-details*/}

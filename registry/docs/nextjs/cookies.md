@@ -296,3 +296,5 @@ export async function deleteCookie(data) {
 | ------------ | ------------------------------------------------------------------------------------------------------ |
 | `v15.0.0-RC` | `cookies` is now an async function. A [codemod](/docs/app/guides/upgrading/codemods#150) is available. |
 | `v13.0.0`    | `cookies` introduced.                                                                                  |
+
+# draftMode

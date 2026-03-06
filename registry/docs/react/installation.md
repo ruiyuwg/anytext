@@ -1,3 +1,5 @@
+# Installation
+
 This guide will help you install and configure React Compiler in your React application.
 
 - How to install React Compiler

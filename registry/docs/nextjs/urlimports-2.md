@@ -89,6 +89,8 @@ console.log(logo.pathname)
 
 # useLightningcss
 
+# useLightningcss
+
 > This feature is currently experimental and subject to change, it is not recommended for production.
 
 Experimental support for using [Lightning CSS](https://lightningcss.dev) with webpack. Lightning CSS is a fast CSS transformer and minifier, written in Rust.
@@ -126,3 +128,5 @@ module.exports = nextConfig
 | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `15.1.0` | Support for `useSwcCss` was removed from Turbopack.                                                                                                                                          |
 | `14.2.0` | Turbopack's default CSS processor was changed from `@swc/css` to Lightning CSS. `useLightningcss` became ignored on Turbopack, and a legacy `experimental.turbo.useSwcCss` option was added. |
+
+# webpack

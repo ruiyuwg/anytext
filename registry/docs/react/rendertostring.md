@@ -1,3 +1,5 @@
+# renderToString
+
 `renderToString` does not support streaming or waiting for data. [See the alternatives.](#alternatives)
 
 `renderToString` renders a React tree to an HTML string.

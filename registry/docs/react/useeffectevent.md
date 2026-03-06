@@ -1,3 +1,5 @@
+# useEffectEvent
+
 `useEffectEvent` is a React Hook that lets you separate events from Effects.
 
 ```js

@@ -859,3 +859,5 @@ When a font function is called on a page of your site, it is not globally availa
 | --------- | --------------------------------------------------------------------- |
 | `v13.2.0` | `@next/font` renamed to `next/font`. Installation no longer required. |
 | `v13.0.0` | `@next/font` was added.                                               |
+
+# Form Component

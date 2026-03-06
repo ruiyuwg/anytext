@@ -690,3 +690,5 @@ link: '/examples/next-app/basics/streaming-text-generation',
 },
 ]}
 />
+
+# Generating Structured Data

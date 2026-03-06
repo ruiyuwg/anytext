@@ -225,6 +225,8 @@ A better approach is to remove `SERVICE_API_KEY` from the data returned by `getS
 
 # trailingSlash
 
+# trailingSlash
+
 By default Next.js will redirect URLs with trailing slashes to their counterpart without a trailing slash. For example `/about/` will redirect to `/about`. You can configure this behavior to act the opposite way, where URLs without trailing slashes are redirected to their counterparts with trailing slashes.
 
 Open `next.config.js` and add the `trailingSlash` config:
@@ -254,6 +256,8 @@ When used with [`output: "export"`](/docs/app/guides/static-exports) configurati
 
 # transpilePackages
 
+# transpilePackages
+
 Next.js can automatically transpile and bundle dependencies from local packages (like monorepos) or from external dependencies (`node_modules`). This replaces the `next-transpile-modules` package.
 
 ```js filename="next.config.js"
@@ -270,3 +274,5 @@ module.exports = nextConfig
 | Version   | Changes                    |
 | --------- | -------------------------- |
 | `v13.0.0` | `transpilePackages` added. |
+
+# turbopack

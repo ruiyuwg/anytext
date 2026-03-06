@@ -1,3 +1,5 @@
+# "'use server'"
+
 `'use server'` is for use with [using React Server Components](/reference/rsc/server-components).
 
 `'use server'` marks server-side functions that can be called from client-side code.

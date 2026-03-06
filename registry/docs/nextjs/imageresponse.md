@@ -207,3 +207,5 @@ export default async function Image() {
 | `v14.0.0` | `ImageResponse` moved from `next/server` to `next/og` |
 | `v13.3.0` | `ImageResponse` can be imported from `next/server`.   |
 | `v13.0.0` | `ImageResponse` introduced via `@vercel/og` package.  |
+
+# NextRequest

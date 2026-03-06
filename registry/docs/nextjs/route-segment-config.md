@@ -213,6 +213,8 @@ See the [API reference](/docs/app/api-reference/functions/generate-static-params
 
 # src
 
+# src
+
 As an alternative to having the special Next.js `app` or `pages` directories in the root of your project, Next.js also supports the common pattern of placing application code under the `src` folder.
 
 This separates application code from project configuration files which mostly live in the root of a project, which is preferred by some individuals and teams.
@@ -234,3 +236,5 @@ To use the `src` folder, move the `app` Router folder or `pages` Router folder t
 
 - [Project Structure](/docs/app/getting-started/project-structure)
   - Learn the folder and file conventions in Next.js, and how to organize your project.
+
+# template.js

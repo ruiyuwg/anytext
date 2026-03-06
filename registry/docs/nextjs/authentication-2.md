@@ -473,6 +473,8 @@ To continue learning about authentication and security, check out the following 
 
 # Babel
 
+# Babel
+
 Examples
 
 - [Customizing babel configuration](https://github.com/vercel/next.js/tree/canary/examples/with-custom-babel-config)
@@ -530,3 +532,5 @@ To learn more about the available options for each config, visit babel's [docume
 >
 > - Next.js uses the [**current** Node.js version](https://github.com/nodejs/release#release-schedule) for server-side compilations.
 > - The `modules` option on `"preset-env"` should be kept to `false`, otherwise webpack code splitting is turned off.
+
+# CI Build Caching

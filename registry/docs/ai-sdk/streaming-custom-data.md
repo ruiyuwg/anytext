@@ -388,3 +388,5 @@ writer.write({
 ```
 
 For more details on message metadata, see the [Message Metadata documentation](/docs/ai-sdk-ui/message-metadata).
+
+# Error Handling

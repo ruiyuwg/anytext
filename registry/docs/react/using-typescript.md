@@ -1,3 +1,5 @@
+# Using TypeScript
+
 TypeScript is a popular way to add type definitions to JavaScript codebases. Out of the box, TypeScript [supports JSX](/learn/writing-markup-with-jsx) and you can get full React Web support by adding [`@types/react`](https://www.npmjs.com/package/@types/react) and [`@types/react-dom`](https://www.npmjs.com/package/@types/react-dom) to your project.
 
 - [TypeScript with React Components](/learn/typescript#typescript-with-react-components)

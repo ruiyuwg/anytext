@@ -1,3 +1,5 @@
+# logger
+
 The `logger` option provides custom logging for React Compiler events during compilation.
 
 ```js

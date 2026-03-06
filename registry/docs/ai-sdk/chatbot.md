@@ -1294,3 +1294,5 @@ const stream = createUIMessageStream<MyUIMessage>(/* ... */);
 ```
 
 This provides full type safety for tool inputs and outputs on the client and server.
+
+# Chatbot Message Persistence

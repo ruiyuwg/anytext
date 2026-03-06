@@ -168,3 +168,5 @@ export async function updateRole(formData) {
 
 - [forbidden.js](/docs/app/api-reference/file-conventions/forbidden)
   - API reference for the forbidden.js special file.
+
+# generateImageMetadata

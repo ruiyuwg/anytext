@@ -105,6 +105,8 @@ All v0 models have the following capabilities:
 | `v0-1.5-lg` |  |  |  |  |
 | `v0-1.0-md` |  |  |  |  |
 
+# OpenAI
+
 # OpenAI Provider
 
 The [OpenAI](https://openai.com/) provider contains language model support for the OpenAI responses, chat, and completion APIs, as well as embedding model support for the OpenAI embeddings API.

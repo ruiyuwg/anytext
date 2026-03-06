@@ -100,3 +100,5 @@ for await (const message of result.textStream) {
 ```
 
 Heroku language models also support structured data generation with [`Output`](/docs/reference/ai-sdk-core/output).
+
+# OpenAI Compatible Providers

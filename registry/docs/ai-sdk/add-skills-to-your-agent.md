@@ -299,3 +299,5 @@ The agent sees the skill directory path in the tool result and prepends it when 
 - [Authoring best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices) for writing effective skills
 - [Reference library](https://github.com/agentskills/agentskills/tree/main/skills-ref) to validate skills and generate prompt XML
 - [skills.sh](https://skills.sh) to browse and discover community skills
+
+# Build a Custom Memory Tool

@@ -1,3 +1,5 @@
+# Managing State
+
 As your application grows, it helps to be more intentional about how your state is organized and how the data flows between your components. Redundant or duplicate state is a common source of bugs. In this chapter, you'll learn how to structure your state well, how to keep your state update logic maintainable, and how to share state between distant components.
 
 - [How to think about UI changes as state changes](/learn/reacting-to-input-with-state)

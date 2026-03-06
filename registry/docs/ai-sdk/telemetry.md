@@ -380,3 +380,5 @@ Tool call spans (`ai.toolCall`) contain the following attributes:
 - `ai.toolCall.id`: the id of the tool call
 - `ai.toolCall.args`: the input parameters of the tool call
 - `ai.toolCall.result`: the output result of the tool call. Only available if the tool call is successful and the result is serializable.
+
+# DevTools

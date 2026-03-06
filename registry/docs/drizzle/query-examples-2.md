@@ -29,7 +29,7 @@ Read more about select query in the [documentation](/docs/select).
 If you are on pre-1 version(like `0.45.1`) then use `getTableColumns` </Callout>
 
 ```typescript copy filename="src/db/queries/select.ts" {5, 16, 41}
-import { asc, between, count, eq, getColumns, sql } from 'drizzle-orm';
+import { asc, count, eq, getColumns, gt, sql } from 'drizzle-orm';
 import { db } from '../index';
 import { SelectUser, postsTable, usersTable } from '../schema';
 
@@ -84,7 +84,7 @@ export async function getPostsForLast24Hours(
       title: postsTable.title,
     })
     .from(postsTable)
-    .where(between(postsTable.createdAt, sql`now() - interval '1 day'`, sql`now()`))
+    .where(gt(postsTable.createdAt, sql`(datetime('now','-24 hour'))`))
     .orderBy(asc(postsTable.title), asc(postsTable.id))
     .limit(pageSize)
     .offset((page - 1) * pageSize);
@@ -121,7 +121,7 @@ export async function deleteUser(id: SelectUser['id']) {
 }
 ```
 
-Source: https://orm.drizzle.team/docs/tutorials/drizzle-with-turso
+Source: https://orm.drizzle.team/docs/tutorials/drizzle-with-vercel
 
 import Prerequisites from "@mdx/Prerequisites.astro";
 import Npm from '@mdx/Npm.astro';
@@ -129,7 +129,7 @@ import Steps from '@mdx/Steps.astro';
 import Section from "@mdx/Section.astro";
 import Callout from '@mdx/Callout.astro';
 
-This tutorial demonstrates how to use Drizzle ORM with [Turso](https://docs.turso.tech/introduction).
+This tutorial demonstrates how to use Drizzle ORM with [Vercel Postgres](https://vercel.com/docs/storage/vercel-postgres). Vercel Postgres is a serverless SQL database designed to integrate with Vercel Functions and your frontend framework.
 
 <Prerequisites>
 - You should have installed Drizzle ORM and [Drizzle kit](/docs/kit-overview). You can do this by running the following command:
@@ -137,20 +137,16 @@ This tutorial demonstrates how to use Drizzle ORM with [Turso](https://docs.turs
 drizzle-orm
 -D drizzle-kit
 </Npm>
-- You should have installed `dotenv` package for managing environment variables. Read more about this package [here](https://www.npmjs.com/package/dotenv)
-<Npm>
+
+- You should have installed `dotenv` package for managing environment variables. Read more about this package [here](https://www.npmjs.com/package/dotenv) <Npm>
   dotenv
+
 </Npm>
-- You should have installed `@libsql/client` package. Read more about this package [here](https://www.npmjs.com/package/@libsql/client).
-<Npm>
-  @libsql/client
-</Npm>
-- You should have installed Turso CLI. Check [documentation](https://docs.turso.tech/cli/introduction) for more information
+
+- You should have installed `@vercel/postgres` package. Read more about this package [here](https://www.npmjs.com/package/@vercel/postgres) <Npm>
+  @vercel/postgres
+
+</Npm>  
 </Prerequisites>
 
-[Turso](https://docs.turso.tech/concepts) is a SQLite-compatible database built on [libSQL](https://docs.turso.tech/libsql), the Open Contribution fork of SQLite. It enables scaling to hundreds of thousands of databases per organization and supports replication to any location, including your own servers, for microsecond-latency access. You can read more about Turso’s concepts [here](https://docs.turso.tech/concepts).
-
-Drizzle ORM natively supports libSQL driver.
-We embrace SQL dialects and dialect specific drivers and syntax and mirror most popular SQLite-like `all`, `get`, `values` and `run` query methods syntax.
-
-Check [official documentation](https://docs.turso.tech/quickstart) to setup Turso database.
+Check [Vercel documentation](https://vercel.com/docs/storage/vercel-postgres/using-an-orm#drizzle) to learn how to connect to the database with Drizzle ORM.

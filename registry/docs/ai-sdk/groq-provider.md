@@ -453,3 +453,5 @@ The following provider options are available:
 | ------------------------ | ------------------- | ------------------- | ------------------- | ------------------- |
 | `whisper-large-v3`       |  |  |  |  |
 | `whisper-large-v3-turbo` |  |  |  |  |
+
+# Fal

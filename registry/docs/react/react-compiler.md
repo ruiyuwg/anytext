@@ -1,3 +1,5 @@
+# React Compiler
+
 ## Introduction {/*introduction*/}
 
 Learn [what React Compiler does](/learn/react-compiler/introduction) and how it automatically optimizes your React application by handling memoization for you, eliminating the need for manual `useMemo`, `useCallback`, and `React.memo`.

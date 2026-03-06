@@ -172,3 +172,5 @@ const { messages, input, handleInputChange, handleSubmit } = useCompletion({
 ```
 
 In this example, the `useCompletion` hook sends a POST request to the `/api/completion` endpoint with the specified headers, additional body fields, and credentials for that fetch request. On your server side, you can handle the request with these additional information.
+
+# Object Generation

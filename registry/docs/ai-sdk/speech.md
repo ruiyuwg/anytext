@@ -162,3 +162,5 @@ try {
 | [Hume](/providers/ai-sdk-providers/hume#speech-models)             | `default`                |
 
 Above are a small subset of the speech models supported by the AI SDK providers. For more, see the respective provider documentation.
+
+# Video Generation

@@ -249,3 +249,5 @@ You can learn more about Cypress and Continuous Integration from these resources
 - [Cypress GitHub Actions Guide](https://on.cypress.io/github-actions)
 - [Official Cypress GitHub Action](https://github.com/cypress-io/github-action)
 - [Cypress Discord](https://discord.com/invite/cypress)
+
+# Jest

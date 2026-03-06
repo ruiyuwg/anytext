@@ -237,3 +237,5 @@ export function Breadcrumb() {
 | Version   | Changes                 |
 | --------- | ----------------------- |
 | `v13.3.0` | `useParams` introduced. |
+
+# useReportWebVitals

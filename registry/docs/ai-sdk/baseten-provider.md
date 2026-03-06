@@ -225,3 +225,5 @@ try {
 
 For more information about Baseten models and deployment options, see the
 [Baseten documentation](https://docs.baseten.co/).
+
+# Hugging Face

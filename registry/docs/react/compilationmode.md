@@ -1,3 +1,5 @@
+# compilationMode
+
 The `compilationMode` option controls how the React Compiler selects which functions to compile.
 
 ```js

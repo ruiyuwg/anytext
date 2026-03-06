@@ -95,3 +95,5 @@ The following options are available:
 | Version   | Changes                 |
 | --------- | ----------------------- |
 | `v15.0.0` | `ip` and `geo` removed. |
+
+# NextResponse

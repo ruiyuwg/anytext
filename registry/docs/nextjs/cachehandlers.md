@@ -429,3 +429,5 @@ View related API references.
   - Learn how to use the "use cache: private" directive to cache functions that access runtime request APIs.
 - [cacheLife](/docs/app/api-reference/config/next-config-js/cacheLife)
   - Learn how to set up cacheLife configurations in Next.js.
+
+# cacheLife

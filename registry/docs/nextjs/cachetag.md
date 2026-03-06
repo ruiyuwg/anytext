@@ -202,6 +202,8 @@ View related API references.
 
 # connection
 
+# connection
+
 The `connection()` function allows you to indicate rendering should wait for an incoming user request before continuing.
 
 It's useful when a component doesn't use [Dynamic APIs](/docs/app/guides/caching#dynamic-rendering), but you want it to be dynamically rendered at runtime and not statically rendered at build time. This usually occurs when you access external information that you intentionally want to change the result of a render, such as `Math.random()` or `new Date()`.
@@ -255,3 +257,5 @@ function connection(): Promise<void>
 | ------------ | ------------------------ |
 | `v15.0.0`    | `connection` stabilized. |
 | `v15.0.0-RC` | `connection` introduced. |
+
+# cookies

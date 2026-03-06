@@ -67,3 +67,5 @@ export default async function Profile({ params }) {
 
 - [redirect](/docs/app/api-reference/functions/redirect)
   - API Reference for the redirect function.
+
+# redirect

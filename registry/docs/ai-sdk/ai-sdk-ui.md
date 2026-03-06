@@ -37,3 +37,5 @@ Explore these example implementations for different frameworks:
 ## API Reference
 
 Please check out the [AI SDK UI API Reference](/docs/reference/ai-sdk-ui) for more details on each function.
+
+# Chatbot

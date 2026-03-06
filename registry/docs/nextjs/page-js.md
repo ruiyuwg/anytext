@@ -234,3 +234,5 @@ export default function Page({ params, searchParams }) {
 | ------------ | ---------------------------------------------------------------------------------------------------------------- |
 | `v15.0.0-RC` | `params` and `searchParams` are now promises. A [codemod](/docs/app/guides/upgrading/codemods#150) is available. |
 | `v13.0.0`    | `page` introduced.                                                                                               |
+
+# Parallel Routes

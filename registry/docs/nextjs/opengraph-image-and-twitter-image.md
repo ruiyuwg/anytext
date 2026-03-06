@@ -524,3 +524,5 @@ export default async function Image() {
 | --------- | ---------------------------------------------------- |
 | `v16.0.0` | `params` is now a promise that resolves to an object |
 | `v13.3.0` | `opengraph-image` and `twitter-image` introduced.    |
+
+# robots.txt

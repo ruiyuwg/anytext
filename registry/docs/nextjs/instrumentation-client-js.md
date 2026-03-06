@@ -219,3 +219,5 @@ if (!window.ResizeObserver) {
 | Version | Changes                             |
 | ------- | ----------------------------------- |
 | `v15.3` | `instrumentation-client` introduced |
+
+# Intercepting Routes

@@ -29,7 +29,7 @@ Read more about select query in the [documentation](/docs/select).
 If you are on pre-1 version(like `0.45.1`) then use `getTableColumns` </Callout>
 
 ```typescript copy filename="src/db/queries/select.ts" {5, 16, 41}
-import { asc, count, eq, getColumns, gt, sql } from 'drizzle-orm';
+import { asc, between, count, eq, getColumns, sql } from 'drizzle-orm';
 import { db } from '../index';
 import { SelectUser, postsTable, usersTable } from '../schema';
 
@@ -84,7 +84,7 @@ export async function getPostsForLast24Hours(
       title: postsTable.title,
     })
     .from(postsTable)
-    .where(gt(postsTable.createdAt, sql`(datetime('now','-24 hour'))`))
+    .where(between(postsTable.createdAt, sql`now() - interval '1 day'`, sql`now()`))
     .orderBy(asc(postsTable.title), asc(postsTable.id))
     .limit(pageSize)
     .offset((page - 1) * pageSize);
@@ -121,7 +121,7 @@ export async function deleteUser(id: SelectUser['id']) {
 }
 ```
 
-Source: https://orm.drizzle.team/docs/tutorials/drizzle-with-vercel
+Source: https://orm.drizzle.team/docs/tutorials/drizzle-with-xata
 
 import Prerequisites from "@mdx/Prerequisites.astro";
 import Npm from '@mdx/Npm.astro';
@@ -129,7 +129,7 @@ import Steps from '@mdx/Steps.astro';
 import Section from "@mdx/Section.astro";
 import Callout from '@mdx/Callout.astro';
 
-This tutorial demonstrates how to use Drizzle ORM with [Vercel Postgres](https://vercel.com/docs/storage/vercel-postgres). Vercel Postgres is a serverless SQL database designed to integrate with Vercel Functions and your frontend framework.
+This tutorial demonstrates how to use Drizzle ORM with [Xata](https://xata.io). Xata is a PostgreSQL database platform designed to help developers operate and scale databases with enhanced productivity and performance, featuring instant copy-on-write database branches, zero-downtime schema changes, data anonymization, and AI-powered performance monitoring.
 
 <Prerequisites>
 - You should have installed Drizzle ORM and [Drizzle kit](/docs/kit-overview). You can do this by running the following command:
@@ -137,16 +137,16 @@ This tutorial demonstrates how to use Drizzle ORM with [Vercel Postgres](https:/
 drizzle-orm
 -D drizzle-kit
 </Npm>
-
-- You should have installed `dotenv` package for managing environment variables. Read more about this package [here](https://www.npmjs.com/package/dotenv) <Npm>
+- You should have installed `dotenv` package for managing environment variables. Read more about this package [here](https://www.npmjs.com/package/dotenv)
+<Npm>
   dotenv
+</Npm>
+
+- You should have installed `postgres` package for connecting to the Postgres database. Read more about this package [here](https://www.npmjs.com/package/postgres) <Npm>
+  postgres
 
 </Npm>
 
-- You should have installed `@vercel/postgres` package. Read more about this package [here](https://www.npmjs.com/package/@vercel/postgres) <Npm>
-  @vercel/postgres
+- You should have a Xata account and database set up. Follow the [Xata documentation](https://xata.io/documentation/getting-started) to create your account and database </Prerequisites>
 
-</Npm>  
-</Prerequisites>
-
-Check [Vercel documentation](https://vercel.com/docs/storage/vercel-postgres/using-an-orm#drizzle) to learn how to connect to the database with Drizzle ORM.
+Check [Xata documentation](https://xata.io/documentation/quickstarts/drizzle) to learn more about using Drizzle ORM with Xata.

@@ -351,3 +351,5 @@ try {
 | [xAI](/providers/ai-sdk-providers/xai#video-models)                     | `grok-imagine-video`        | Text-to-video, image-to-video, editing |
 
 Above are a small subset of the video models supported by the AI SDK providers. For more, see the respective provider documentation.
+
+# Language Model Middleware

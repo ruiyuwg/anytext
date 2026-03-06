@@ -134,3 +134,5 @@ export function onRequestError() {
 ## Learn more about Instrumentation- [Instrumentation](/docs/app/guides/instrumentation)
 
 - Learn how to use instrumentation to run code at server startup in your Next.js app
+
+# instrumentation-client.js

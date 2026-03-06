@@ -726,6 +726,8 @@ The codemod will rename the file and the function name from `middleware` to `pro
 
 # public
 
+# public
+
 Next.js can serve static files, like images, under a folder called `public` in the root directory. Files inside `public` can then be referenced by your code starting from the base URL (`/`).
 
 For example, the file `public/avatars/me.png` can be viewed by visiting the `/avatars/me.png` path. The code to display that image might look like:
@@ -753,3 +755,5 @@ Cache-Control: public, max-age=0
 ## Robots, Favicons, and others
 
 For static metadata files, such as `robots.txt`, `favicon.ico`, etc, you should use [special metadata files](/docs/app/api-reference/file-conventions/metadata) inside the `app` folder.
+
+# route.js

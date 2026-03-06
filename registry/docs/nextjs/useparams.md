@@ -68,3 +68,5 @@ For example:
 | Version   | Changes                 |
 | --------- | ----------------------- |
 | `v13.3.0` | `useParams` introduced. |
+
+# usePathname

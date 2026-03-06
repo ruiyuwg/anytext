@@ -177,3 +177,5 @@ View related API references.
   - Learn how to use the cacheLife function to set the cache expiration time for a cached function or component.
 - [cacheTag](/docs/app/api-reference/functions/cacheTag)
   - Learn how to use the cacheTag function to manage cache invalidation in your Next.js application.
+
+# "use cache: remote"

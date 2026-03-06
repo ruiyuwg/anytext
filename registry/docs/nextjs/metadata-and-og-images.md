@@ -321,3 +321,5 @@ Learn more about the Metadata APIs mentioned in this page.
   - API Reference for the sitemap.xml file.
 - [htmlLimitedBots](/docs/app/api-reference/config/next-config-js/htmlLimitedBots)
   - Specify a list of user agents that should receive blocking metadata.
+
+# Route Handlers

@@ -273,3 +273,5 @@ The following provider options are available:
 | Model     | Transcription       | Duration            | Segments            | Language            |
 | --------- | ------------------- | ------------------- | ------------------- | ------------------- |
 | `Default` |  |  |  |  |
+
+# LMNT

@@ -11,6 +11,7 @@ const DEFAULT_MAX_TOKENS = 10000;
 
 interface Section {
   heading: string;
+  parentHeading: string;
   depth: number;
   nodes: RootContent[];
 }
@@ -56,13 +57,13 @@ export function splitIntoTopics(
     if (tokens > maxTokens) {
       let split = false;
       for (let depth = subDepth; depth <= 4; depth++) {
-        const subSections = groupByHeading(section.nodes, depth);
+        const subSections = groupByHeading(section.nodes, depth, section.heading);
         if (subSections.length > 1) {
           // Recursively sub-split any still-oversized sub-sections
           for (const sub of subSections) {
             const subContent = stringifyNodes(sub.nodes);
             if (estimateTokens(subContent) > maxTokens && depth < 4) {
-              const deeperSections = groupByHeading(sub.nodes, depth + 1);
+              const deeperSections = groupByHeading(sub.nodes, depth + 1, sub.heading);
               if (deeperSections.length > 1) {
                 processed.push(...deeperSections);
               } else {
@@ -87,6 +88,14 @@ export function splitIntoTopics(
   // Merge undersized sections with adjacent
   processed = mergeSmallSections(processed, minTokens);
 
+  // Drop preamble sections (e.g. "Start of Hono documentation")
+  if (processed.length > 1) {
+    const firstHeading = processed[0]!.heading.toLowerCase();
+    if (firstHeading.startsWith("start of")) {
+      processed = processed.slice(1);
+    }
+  }
+
   // Convert to ProcessedTopic[], deduplicating IDs
   const seenIds = new Set<string>();
   return processed.map((section) => {
@@ -96,9 +105,20 @@ export function splitIntoTopics(
 
     let id = slugify(section.heading);
     if (seenIds.has(id)) {
-      let suffix = 2;
-      while (seenIds.has(`${id}-${suffix}`)) suffix++;
-      id = `${id}-${suffix}`;
+      if (section.parentHeading) {
+        const prefixed = slugify(section.parentHeading + " " + section.heading);
+        if (!seenIds.has(prefixed)) {
+          id = prefixed;
+        } else {
+          let suffix = 2;
+          while (seenIds.has(`${id}-${suffix}`)) suffix++;
+          id = `${id}-${suffix}`;
+        }
+      } else {
+        let suffix = 2;
+        while (seenIds.has(`${id}-${suffix}`)) suffix++;
+        id = `${id}-${suffix}`;
+      }
     }
     seenIds.add(id);
 
@@ -115,10 +135,12 @@ export function splitIntoTopics(
 
 function groupByHeading(
   nodes: RootContent[],
-  depth: number
+  depth: number,
+  parentHeading: string = ""
 ): Section[] {
   const sections: Section[] = [];
-  let current: Section = { heading: "Introduction", depth: 0, nodes: [] };
+  let currentParent = parentHeading;
+  let current: Section = { heading: "Introduction", parentHeading: currentParent, depth: 0, nodes: [] };
 
   for (const node of nodes) {
     if (node.type === "heading" && (node as Heading).depth === depth) {
@@ -126,7 +148,7 @@ function groupByHeading(
         sections.push(current);
       }
       const heading = extractHeadingText(node as Heading);
-      current = { heading, depth, nodes: [node] };
+      current = { heading, parentHeading: currentParent, depth, nodes: [node] };
     } else if (
       node.type === "heading" &&
       (node as Heading).depth < depth &&
@@ -134,7 +156,8 @@ function groupByHeading(
     ) {
       sections.push(current);
       const heading = extractHeadingText(node as Heading);
-      current = { heading, depth: (node as Heading).depth, nodes: [node] };
+      currentParent = heading;
+      current = { heading, parentHeading, depth: (node as Heading).depth, nodes: [node] };
     } else {
       current.nodes.push(node);
     }

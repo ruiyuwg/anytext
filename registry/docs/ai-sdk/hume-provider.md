@@ -137,6 +137,8 @@ The following provider options are available:
 | --------- | ------------------- | ------------------- | -------------- |
 | `default` |  |  | mp3, pcm, wav  |
 
+# Google Vertex AI
+
 # Google Vertex Provider
 
 The Google Vertex provider for the [AI SDK](/docs) contains language model support for the [Google Vertex AI](https://cloud.google.com/vertex-ai) APIs. This includes support for [Google's Gemini models](https://cloud.google.com/vertex-ai/generative-ai/docs/learn/models) and [Anthropic's Claude partner models](https://cloud.google.com/vertex-ai/generative-ai/docs/partner-models/use-claude).

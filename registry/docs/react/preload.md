@@ -1,3 +1,5 @@
+# preload
+
 [React-based frameworks](/learn/creating-a-react-app) frequently handle resource loading for you, so you might not have to call this API yourself. Consult your framework's documentation for details.
 
 `preload` lets you eagerly fetch a resource such as a stylesheet, font, or external script that you expect to use.

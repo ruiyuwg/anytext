@@ -147,3 +147,5 @@ export default function PathnameBadge() {
 | Version   | Changes                   |
 | --------- | ------------------------- |
 | `v13.0.0` | `usePathname` introduced. |
+
+# useReportWebVitals

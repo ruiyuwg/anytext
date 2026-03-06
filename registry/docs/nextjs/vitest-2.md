@@ -179,3 +179,5 @@ You may find these resources helpful:
 - [Next.js with Vitest example](https://github.com/vercel/next.js/tree/canary/examples/with-vitest)
 - [Vitest Docs](https://vitest.dev/guide/)
 - [React Testing Library Docs](https://testing-library.com/docs/react-testing-library/intro/)
+
+# Third Party Libraries

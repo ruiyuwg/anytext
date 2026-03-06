@@ -98,3 +98,5 @@ Next.js includes a [short list of popular packages](https://github.com/vercel/ne
 | Version   | Changes                                                                                                        |
 | --------- | -------------------------------------------------------------------------------------------------------------- |
 | `v15.0.0` | Moved from experimental to stable. Renamed from `serverComponentsExternalPackages` to `serverExternalPackages` |
+
+# staleTimes

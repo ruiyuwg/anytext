@@ -1,3 +1,5 @@
+# unsupported-syntax
+
 Validates against syntax that React Compiler does not support. If you need to, you can still use this syntax outside of React, such as in a standalone utility function.
 
 ## Rule Details {/*rule-details*/}

@@ -1,3 +1,5 @@
+# "Common components (e.g. )"
+
 All built-in browser components, such as [`<div>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div), support some common props and events.
 
 ***

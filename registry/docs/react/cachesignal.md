@@ -1,3 +1,5 @@
+# cacheSignal
+
 `cacheSignal` is currently only used with [React Server Components](/blog/2023/03/22/react-labs-what-we-have-been-working-on-march-2023#react-server-components).
 
 `cacheSignal` allows you to know when the `cache()` lifetime is over.

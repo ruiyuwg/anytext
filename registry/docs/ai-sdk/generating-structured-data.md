@@ -481,3 +481,5 @@ link: '/examples/next-app/basics/streaming-object-generation',
 },
 ]}
 />
+
+# Tool Calling

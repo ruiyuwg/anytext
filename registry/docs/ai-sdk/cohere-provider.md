@@ -281,3 +281,5 @@ The following provider options are available:
 | `rerank-v3.5`              |
 | `rerank-english-v3.0`      |
 | `rerank-multilingual-v3.0` |
+
+# Fireworks

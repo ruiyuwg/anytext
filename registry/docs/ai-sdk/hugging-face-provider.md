@@ -217,3 +217,5 @@ the [Hugging Face Inference Models](https://huggingface.co/inference/models)
 page. The capabilities depend on the specific model you're using. Check the
 model documentation on Hugging Face Hub for detailed information about each
 model's features.
+
+# Mistral AI

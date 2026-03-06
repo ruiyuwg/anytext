@@ -90,3 +90,5 @@ The above `next` import is a function that receives an object with the following
 | `webpack`    | `Boolean`          | (*Optional*) Enable webpack                                                         |
 
 The returned `app` can then be used to let Next.js handle requests as required.
+
+# Data Security

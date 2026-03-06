@@ -1,3 +1,5 @@
+# Rules of React
+
 Just as different programming languages have their own ways of expressing concepts, React has its own idioms — or rules — for how to express patterns in a way that is easy to understand and yields high-quality applications.
 
 ***

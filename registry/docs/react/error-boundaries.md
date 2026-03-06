@@ -1,3 +1,5 @@
+# error-boundaries
+
 Validates usage of Error Boundaries instead of try/catch for errors in child components.
 
 ## Rule Details {/*rule-details*/}

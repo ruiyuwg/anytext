@@ -346,3 +346,5 @@ export async function getStaticProps({ locale }) {
 - `domains`: 100 total locale domain items
 
 > **Good to know**: These limits have been added initially to prevent potential [performance issues at build time](#dynamic-routes-and-getstaticprops-pages). You can workaround these limits with custom routing using [Proxy](/docs/pages/api-reference/file-conventions/proxy) in Next.js 12.
+
+# Lazy Loading

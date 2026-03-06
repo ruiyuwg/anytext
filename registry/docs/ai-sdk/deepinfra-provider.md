@@ -263,3 +263,5 @@ const { embedding } = await embed({
 
 For a complete list of available embedding models, see the [DeepInfra
 embeddings page](https://deepinfra.com/models/embeddings).
+
+# Deepgram

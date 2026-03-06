@@ -379,3 +379,5 @@ async function translateWithFeedback(text: string, targetLanguage: string) {
   };
 }
 ```
+
+# Loop Control

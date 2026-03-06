@@ -298,3 +298,5 @@ Pass provider-specific options via `providerOptions.fal` depending on the model:
   Custom pronunciation dictionary for specific words.
 
 Model-specific parameters (e.g., `audio_url`, `prompt`, `preview_text`, `ref_audio_url`, `ref_text`) can be passed directly under `providerOptions.fal` and will be forwarded to the Fal API.
+
+# AssemblyAI

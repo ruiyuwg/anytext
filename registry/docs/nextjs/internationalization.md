@@ -221,3 +221,5 @@ export default async function RootLayout({ children, params }) {
 - [`tolgee`](https://tolgee.io/apps-integrations/next)
 - [`next-intlayer`](https://intlayer.org/doc/environment/nextjs)
 - [`gt-next`](https://generaltranslation.com/en/docs/next)
+
+# JSON-LD

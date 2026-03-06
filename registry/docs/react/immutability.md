@@ -1,3 +1,5 @@
+# immutability
+
 Validates against mutating props, state, and other values that [are immutable](/reference/rules/components-and-hooks-must-be-pure#props-and-state-are-immutable).
 
 ## Rule Details {/*rule-details*/}

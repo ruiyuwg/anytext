@@ -157,3 +157,5 @@ Please see the [DeepSeek
 docs](https://api-docs.deepseek.com/quick_start/pricing) for a full list of
 available models. You can also pass any available provider model ID as a
 string if needed.
+
+# Moonshot AI

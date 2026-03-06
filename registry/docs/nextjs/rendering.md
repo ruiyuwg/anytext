@@ -24,6 +24,8 @@ You can also use client-side data fetching along with Static Generation or Serve
 
 # Server-side Rendering (SSR)
 
+# Server-side Rendering (SSR)
+
 > Also referred to as "SSR" or "Dynamic Rendering".
 
 If a page uses **Server-side Rendering**, the page HTML is generated on **each request**.
@@ -51,3 +53,5 @@ export async function getServerSideProps() {
 As you can see, `getServerSideProps` is similar to `getStaticProps`, but the difference is that `getServerSideProps` is run on every request instead of on build time.
 
 To learn more about how `getServerSideProps` works, check out our [Data Fetching documentation](/docs/pages/building-your-application/data-fetching/get-server-side-props).
+
+# Static Site Generation (SSG)

@@ -550,3 +550,5 @@ export function findUnapprovedCommand(commandLine: string): string | null {
   return commandNames.find(name => !approvedCommands.has(name)) ?? null;
 }
 ```
+
+# Get started with Gemini 3

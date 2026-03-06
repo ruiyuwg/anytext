@@ -187,3 +187,5 @@ const result = await generateText({
 The `headers` setting is for request-specific headers. You can also set
 `headers` in the provider configuration. These headers will be sent with every
 request made by the provider.
+
+# Embeddings

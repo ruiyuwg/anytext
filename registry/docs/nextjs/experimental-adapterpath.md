@@ -363,6 +363,8 @@ Common use cases for adapters include:
 
 # allowedDevOrigins
 
+# allowedDevOrigins
+
 Next.js does not automatically block cross-origin requests during development, but will block by default in a future major version of Next.js to prevent unauthorized requesting of internal assets/endpoints that are available in development mode.
 
 To configure a Next.js application to allow requests from origins other than the hostname the server was initialized with (`localhost` by default) you can use the `allowedDevOrigins` config option.
@@ -377,6 +379,8 @@ module.exports = {
 
 # appDir
 
+# appDir
+
 > This is a legacy API and no longer recommended. It is still supported for backward compatibility.
 
 > **Good to know**: This option is **no longer** needed as of Next.js 13.4. The App Router is now stable.
@@ -384,3 +388,5 @@ module.exports = {
 The App Router ([`app` directory](/docs/app)) enables support for [layouts](/docs/app/api-reference/file-conventions/layout), [Server Components](/docs/app/getting-started/server-and-client-components), [streaming](/docs/app/api-reference/file-conventions/loading), and [colocated data fetching](/docs/app/getting-started/fetching-data).
 
 Using the `app` directory will automatically enable [React Strict Mode](https://react.dev/reference/react/StrictMode). Learn how to [incrementally adopt `app`](/docs/app/guides/migrating/app-router-migration#migrating-from-pages-to-app).
+
+# assetPrefix

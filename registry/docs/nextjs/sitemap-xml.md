@@ -423,3 +423,5 @@ Learn how to use the generateSitemaps function.
 
 - [generateSitemaps](/docs/app/api-reference/functions/generate-sitemaps)
   - Learn how to use the generateSiteMaps function to create multiple sitemaps for your application.
+
+# Functions

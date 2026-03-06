@@ -1,3 +1,5 @@
+# renderToReadableStream
+
 `renderToReadableStream` renders a React tree to a [Readable Web Stream.](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream)
 
 ```js

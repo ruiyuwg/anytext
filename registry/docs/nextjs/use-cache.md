@@ -666,3 +666,5 @@ View related API references.
   - Learn how to use the cacheLife function to set the cache expiration time for a cached function or component.
 - [revalidateTag](/docs/app/api-reference/functions/revalidateTag)
   - API Reference for the revalidateTag function.
+
+# "use cache: private"

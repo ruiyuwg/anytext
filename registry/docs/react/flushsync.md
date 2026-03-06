@@ -1,3 +1,5 @@
+# flushSync
+
 Using `flushSync` is uncommon and can hurt the performance of your app.
 
 `flushSync` lets you force React to flush any updates inside the provided callback synchronously. This ensures that the DOM is updated immediately.

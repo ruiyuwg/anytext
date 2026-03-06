@@ -1,3 +1,5 @@
+# config
+
 Validates the compiler [configuration options](/reference/react-compiler/configuration).
 
 ## Rule Details {/*rule-details*/}

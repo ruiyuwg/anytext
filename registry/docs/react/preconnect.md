@@ -1,3 +1,5 @@
+# preconnect
+
 `preconnect` lets you eagerly connect to a server that you expect to load resources from.
 
 ```js

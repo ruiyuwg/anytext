@@ -470,3 +470,5 @@ const { text } = await generateText({
 
 console.log(text);
 ```
+
+# Provider & Model Management

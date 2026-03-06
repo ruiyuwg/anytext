@@ -499,6 +499,8 @@ Learn more about adding a [Content Security Policy](/docs/app/guides/content-sec
 
 # htmlLimitedBots
 
+# htmlLimitedBots
+
 The `htmlLimitedBots` config allows you to specify a list of user agents that should receive blocking metadata instead of [streaming metadata](/docs/app/api-reference/functions/generate-metadata#streaming-metadata).
 
 ```ts filename="next.config.ts" switcher
@@ -572,6 +574,8 @@ module.exports = {
 
 # httpAgentOptions
 
+# httpAgentOptions
+
 In Node.js versions prior to 18, Next.js automatically polyfills `fetch()` with [undici](/docs/architecture/supported-browsers#polyfills) and enables [HTTP Keep-Alive](https://developer.mozilla.org/docs/Web/HTTP/Headers/Keep-Alive) by default.
 
 To disable HTTP Keep-Alive for all `fetch()` calls on the server-side, open `next.config.js` and add the `httpAgentOptions` config:
@@ -583,3 +587,5 @@ module.exports = {
   },
 }
 ```
+
+# images

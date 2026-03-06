@@ -144,6 +144,8 @@ Message metadata is ideal for:
 
 # AI\_APICallError
 
+# AI\_APICallError
+
 This error occurs when an API call fails.
 
 ## Properties
@@ -171,6 +173,8 @@ if (APICallError.isInstance(error)) {
 
 # AI\_DownloadError
 
+# AI\_DownloadError
+
 This error occurs when a download fails.
 
 ## Properties
@@ -195,6 +199,8 @@ if (DownloadError.isInstance(error)) {
 
 # AI\_EmptyResponseBodyError
 
+# AI\_EmptyResponseBodyError
+
 This error occurs when the server returns an empty response body.
 
 ## Properties
@@ -212,6 +218,8 @@ if (EmptyResponseBodyError.isInstance(error)) {
   // Handle the error
 }
 ```
+
+# AI\_InvalidArgumentError
 
 # AI\_InvalidArgumentError
 
@@ -237,6 +245,8 @@ if (InvalidArgumentError.isInstance(error)) {
 
 # AI\_InvalidDataContentError
 
+# AI\_InvalidDataContentError
+
 This error occurs when the data content provided in a multi-modal message part is invalid. Check out the [ prompt examples for multi-modal messages ](/docs/foundations/prompts#message-prompts).
 
 ## Properties
@@ -259,6 +269,8 @@ if (InvalidDataContentError.isInstance(error)) {
 
 # AI\_InvalidMessageRoleError
 
+# AI\_InvalidMessageRoleError
+
 This error occurs when an invalid message role is provided.
 
 ## Properties
@@ -277,6 +289,8 @@ if (InvalidMessageRoleError.isInstance(error)) {
   // Handle the error
 }
 ```
+
+# AI\_InvalidPromptError
 
 # AI\_InvalidPromptError
 
@@ -323,6 +337,8 @@ if (InvalidPromptError.isInstance(error)) {
 
 # AI\_InvalidResponseDataError
 
+# AI\_InvalidResponseDataError
+
 This error occurs when the server returns a response with invalid data content.
 
 ## Properties
@@ -344,6 +360,8 @@ if (InvalidResponseDataError.isInstance(error)) {
 
 # AI\_InvalidToolApprovalError
 
+# AI\_InvalidToolApprovalError
+
 This error occurs when a tool approval response references an unknown `approvalId`. No matching `tool-approval-request` was found in the message history.
 
 ## Properties
@@ -361,6 +379,8 @@ if (InvalidToolApprovalError.isInstance(error)) {
   // Handle the error
 }
 ```
+
+# AI\_InvalidToolInputError
 
 # AI\_InvalidToolInputError
 
@@ -387,6 +407,8 @@ if (InvalidToolInputError.isInstance(error)) {
 
 # AI\_JSONParseError
 
+# AI\_JSONParseError
+
 This error occurs when JSON fails to parse.
 
 ## Properties
@@ -405,6 +427,8 @@ if (JSONParseError.isInstance(error)) {
   // Handle the error
 }
 ```
+
+# AI\_LoadAPIKeyError
 
 # AI\_LoadAPIKeyError
 
@@ -428,6 +452,8 @@ if (LoadAPIKeyError.isInstance(error)) {
 
 # AI\_LoadSettingError
 
+# AI\_LoadSettingError
+
 This error occurs when a setting is not loaded successfully.
 
 ## Properties
@@ -445,6 +471,8 @@ if (LoadSettingError.isInstance(error)) {
   // Handle the error
 }
 ```
+
+# AI\_MessageConversionError
 
 # AI\_MessageConversionError
 
@@ -469,6 +497,8 @@ if (MessageConversionError.isInstance(error)) {
 
 # AI\_NoContentGeneratedError
 
+# AI\_NoContentGeneratedError
+
 This error occurs when the AI provider fails to generate content.
 
 ## Properties
@@ -486,6 +516,8 @@ if (NoContentGeneratedError.isInstance(error)) {
   // Handle the error
 }
 ```
+
+# AI\_NoImageGeneratedError
 
 # AI\_NoImageGeneratedError
 
@@ -518,6 +550,8 @@ try {
   }
 }
 ```
+
+# AI\_NoObjectGeneratedError
 
 # AI\_NoObjectGeneratedError
 
@@ -560,6 +594,8 @@ try {
 
 # AI\_NoOutputGeneratedError
 
+# AI\_NoOutputGeneratedError
+
 This error is thrown when no LLM output was generated, e.g. because of errors.
 
 ## Properties
@@ -578,6 +614,8 @@ if (NoOutputGeneratedError.isInstance(error)) {
   // Handle the error
 }
 ```
+
+# AI\_NoSpeechGeneratedError
 
 # AI\_NoSpeechGeneratedError
 
@@ -601,6 +639,8 @@ if (NoSpeechGeneratedError.isInstance(error)) {
 
 # AI\_NoSuchModelError
 
+# AI\_NoSuchModelError
+
 This error occurs when a model ID is not found.
 
 ## Properties
@@ -620,6 +660,8 @@ if (NoSuchModelError.isInstance(error)) {
   // Handle the error
 }
 ```
+
+# AI\_NoSuchProviderError
 
 # AI\_NoSuchProviderError
 
@@ -647,6 +689,8 @@ if (NoSuchProviderError.isInstance(error)) {
 
 # AI\_NoSuchToolError
 
+# AI\_NoSuchToolError
+
 This error occurs when a model tries to call an unavailable tool.
 
 ## Properties
@@ -669,6 +713,8 @@ if (NoSuchToolError.isInstance(error)) {
 
 # AI\_NoTranscriptGeneratedError
 
+# AI\_NoTranscriptGeneratedError
+
 This error occurs when no transcript could be generated from the input.
 
 ## Properties
@@ -686,6 +732,8 @@ if (NoTranscriptGeneratedError.isInstance(error)) {
   // Handle the error
 }
 ```
+
+# AI\_NoVideoGeneratedError
 
 # AI\_NoVideoGeneratedError
 
@@ -724,6 +772,8 @@ try {
 
 # AI\_RetryError
 
+# AI\_RetryError
+
 This error occurs when a retry operation fails.
 
 ## Properties
@@ -744,6 +794,8 @@ if (RetryError.isInstance(error)) {
   // Handle the error
 }
 ```
+
+# AI\_TooManyEmbeddingValuesForCallError
 
 # AI\_TooManyEmbeddingValuesForCallError
 
@@ -770,6 +822,8 @@ if (TooManyEmbeddingValuesForCallError.isInstance(error)) {
 
 # AI\_ToolCallNotFoundForApprovalError
 
+# AI\_ToolCallNotFoundForApprovalError
+
 This error occurs when a tool approval request references a tool call that was not found. This can happen when processing provider-emitted approval requests (e.g., MCP flows) where the referenced tool call ID does not exist.
 
 ## Properties
@@ -788,6 +842,8 @@ if (ToolCallNotFoundForApprovalError.isInstance(error)) {
   // Handle the error
 }
 ```
+
+# ToolCallRepairError
 
 # ToolCallRepairError
 
@@ -815,6 +871,8 @@ if (ToolCallRepairError.isInstance(error)) {
 
 # AI\_TypeValidationError
 
+# AI\_TypeValidationError
+
 This error occurs when type validation fails.
 
 ## Properties
@@ -833,3 +891,5 @@ if (TypeValidationError.isInstance(error)) {
   // Handle the error
 }
 ```
+
+# AI\_UIMessageStreamError

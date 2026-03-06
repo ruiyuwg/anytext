@@ -520,3 +520,5 @@ Learn more about the features mentioned in this page by reading the API Referenc
   - API Reference for the revalidateTag function.
 - [redirect](/docs/app/api-reference/functions/redirect)
   - API Reference for the redirect function.
+
+# Caching and Revalidating

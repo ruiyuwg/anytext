@@ -1,3 +1,5 @@
+# Configuration
+
 This page lists all configuration options available in React Compiler.
 
 For most apps, the default options should work out of the box. If you have a special need, you can use these advanced options.

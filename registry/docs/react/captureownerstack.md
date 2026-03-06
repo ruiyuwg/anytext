@@ -1,3 +1,5 @@
+# captureOwnerStack
+
 `captureOwnerStack` reads the current Owner Stack in development and returns it as a string if available.
 
 ```js

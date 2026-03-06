@@ -248,3 +248,5 @@ For example, if `NODE_ENV` is `development` and you define a variable in both `.
 | Version  | Changes                                       |
 | -------- | --------------------------------------------- |
 | `v9.4.0` | Support `.env` and `NEXT_PUBLIC_` introduced. |
+
+# Forms

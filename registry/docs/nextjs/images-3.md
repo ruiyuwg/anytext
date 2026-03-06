@@ -245,6 +245,8 @@ export default function aioLoader({ src, width, quality }) {
 
 # isolatedDevBuild
 
+# isolatedDevBuild
+
 > This feature is currently experimental and subject to change, it is not recommended for production.
 
 The experimental `isolatedDevBuild` option separates development and production build outputs into different directories. When enabled, the development server (`next dev`) writes its output to `.next/dev` instead of `.next`, preventing conflicts when running `next dev` and `next build` concurrently.
@@ -288,6 +290,8 @@ export default nextConfig
 
 # onDemandEntries
 
+# onDemandEntries
+
 Next.js exposes some options that give you some control over how the server will dispose or keep in memory built pages in development.
 
 To change the defaults, open `next.config.js` and add the `onDemandEntries` config:
@@ -302,6 +306,8 @@ module.exports = {
   },
 }
 ```
+
+# optimizePackageImports
 
 # optimizePackageImports
 
@@ -348,3 +354,5 @@ The following libraries are optimized by default:
 - `react-icons/*`
 - `effect`
 - `@effect/*`
+
+# output

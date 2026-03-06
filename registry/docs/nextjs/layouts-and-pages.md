@@ -331,3 +331,5 @@ Learn more about the features mentioned in this page by reading the API Referenc
   - Enable fast client-side navigation with the built-in `next/link` component.
 - [Dynamic Segments](/docs/app/api-reference/file-conventions/dynamic-routes)
   - Dynamic Route Segments can be used to programmatically generate route segments from dynamic data.
+
+# Linking and Navigating

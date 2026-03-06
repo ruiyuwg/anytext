@@ -53,7 +53,12 @@ describe("llmsFullAdapter", () => {
     const result = await llmsFullAdapter.process(baseSource);
 
     expect(result).toEqual([topic]);
+    expect(fs.rmSync).toHaveBeenCalledWith("/mock/registry/docs/react", { recursive: true, force: true });
     expect(fs.mkdirSync).toHaveBeenCalledWith("/mock/registry/docs/react", { recursive: true });
+    // rmSync must be called before mkdirSync
+    const rmOrder = vi.mocked(fs.rmSync).mock.invocationCallOrder[0]!;
+    const mkdirOrder = vi.mocked(fs.mkdirSync).mock.invocationCallOrder[0]!;
+    expect(rmOrder).toBeLessThan(mkdirOrder);
     expect(fs.writeFileSync).toHaveBeenCalledWith(
       "/mock/registry/docs/react/hooks.md",
       "# Hooks\n",
@@ -146,8 +151,9 @@ describe("llmsFullAdapter", () => {
     const result = await llmsFullAdapter.process(baseSource);
 
     expect(result).toEqual([]);
+    expect(fs.rmSync).toHaveBeenCalled();
     expect(fs.mkdirSync).toHaveBeenCalled();
-    // writeFileSync not called for individual doc files (only mkdirSync runs)
+    // writeFileSync not called for individual doc files (only rmSync + mkdirSync run)
     expect(fs.writeFileSync).not.toHaveBeenCalled();
   });
 });

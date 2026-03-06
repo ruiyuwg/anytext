@@ -159,3 +159,5 @@ export default function Page() {
 | --------- | ----------------------------------------------------------------- |
 | `v15.4.0` | Optional `onInvalidate` callback for `router.prefetch` introduced |
 | `v13.0.0` | `useRouter` from `next/navigation` introduced.                    |
+
+# useSearchParams

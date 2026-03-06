@@ -221,3 +221,5 @@ Ready to dive in? Here's how you can begin:
 4. Use ready-to-deploy AI templates at [vercel.com/templates?type=ai](https://vercel.com/templates?type=ai).
 
 DeepSeek R1 opens new opportunities for reasoning-intensive AI applications. Start building today and leverage the power of advanced reasoning in your AI projects.
+
+# Get started with DeepSeek V3.2

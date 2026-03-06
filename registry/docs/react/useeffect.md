@@ -1,3 +1,5 @@
+# useEffect
+
 `useEffect` is a React Hook that lets you [synchronize a component with an external system.](/learn/synchronizing-with-effects)
 
 ```js

@@ -363,3 +363,5 @@ You can also pass any available provider model ID as a string if needed.
 Please see the [Alibaba Cloud Model Studio docs](https://www.alibabacloud.com/help/en/model-studio/models) for a full
 list of available models. You can also pass any available provider model ID as
 a string if needed.
+
+# Cerebras

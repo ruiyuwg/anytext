@@ -1,3 +1,5 @@
+# target
+
 The `target` option specifies which React version the compiler should generate code for.
 
 ```js

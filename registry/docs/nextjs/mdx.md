@@ -595,3 +595,5 @@ module.exports = withMDX({
 - [remark](https://github.com/remarkjs/remark)
 - [rehype](https://github.com/rehypejs/rehype)
 - [Markdoc](https://markdoc.dev/docs/nextjs)
+
+# Memory Usage

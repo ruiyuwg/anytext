@@ -1,3 +1,5 @@
+# component-hook-factories
+
 Validates against higher order functions defining nested components or hooks. Components and hooks should be defined at the module level.
 
 ## Rule Details {/*rule-details*/}

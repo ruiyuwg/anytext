@@ -77,3 +77,5 @@ Learn how to create sitemaps for your Next.js application.
 
 - [sitemap.xml](/docs/app/api-reference/file-conventions/metadata/sitemap)
   - API Reference for the sitemap.xml file.
+
+# generateStaticParams

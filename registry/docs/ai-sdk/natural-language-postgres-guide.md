@@ -677,3 +677,5 @@ Head back to the browser and test the application with a few queries. You should
 You've built an AI-powered SQL analysis tool that can convert natural language to SQL queries, visualize query results, and explain SQL queries in plain English.
 
 You could, for example, extend the application to use your own data sources or add more advanced features like customizing the chart configuration schema to support more chart types and options. You could also add more complex SQL query generation capabilities.
+
+# Get started with Computer Use

@@ -135,3 +135,5 @@ export async function getServerSideProps(context) {
 | `v13.4.0` | [App Router](/docs/app/getting-started/fetching-data) is now stable with simplified data fetching |
 | `v10.0.0` | `locale`, `locales`, `defaultLocale`, and `notFound` options added.                               |
 | `v9.3.0`  | `getServerSideProps` introduced.                                                                  |
+
+# getStaticPaths

@@ -143,3 +143,5 @@ type Robots = {
 | Version   | Changes              |
 | --------- | -------------------- |
 | `v13.3.0` | `robots` introduced. |
+
+# sitemap.xml

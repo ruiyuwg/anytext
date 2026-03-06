@@ -371,3 +371,5 @@ For more information on what to do next, we recommend the following sections
 
 - [generateStaticParams](/docs/app/api-reference/functions/generate-static-params)
   - API reference for the generateStaticParams function.
+
+# error.js

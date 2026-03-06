@@ -1,3 +1,5 @@
+# renderToPipeableStream
+
 `renderToPipeableStream` renders a React tree to a pipeable [Node.js Stream.](https://nodejs.org/api/stream.html)
 
 ```js

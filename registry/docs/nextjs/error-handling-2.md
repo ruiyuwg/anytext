@@ -101,6 +101,8 @@ To monitor client errors, use a service like [Sentry](https://github.com/vercel/
 
 # API Reference
 
+# API Reference
+
 - [Components](/docs/pages/api-reference/components)
 - [File-system conventions](/docs/pages/api-reference/file-conventions)
 - [Functions](/docs/pages/api-reference/functions)
@@ -111,6 +113,8 @@ To monitor client errors, use a service like [Sentry](https://github.com/vercel/
 
 # Components
 
+# Components
+
 - [Font](/docs/pages/api-reference/components/font)
 - [Form](/docs/pages/api-reference/components/form)
 - [Head](/docs/pages/api-reference/components/head)
@@ -118,3 +122,5 @@ To monitor client errors, use a service like [Sentry](https://github.com/vercel/
 - [Image (Legacy)](/docs/pages/api-reference/components/image-legacy)
 - [Link](/docs/pages/api-reference/components/link)
 - [Script](/docs/pages/api-reference/components/script)
+
+# Font

@@ -1,3 +1,5 @@
+# Your First Component
+
 *Components* are one of the core concepts of React. They are the foundation upon which you build user interfaces (UI), which makes them the perfect place to start your React journey!
 
 - What a component is

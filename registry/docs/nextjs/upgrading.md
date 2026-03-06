@@ -86,3 +86,5 @@ See the version guides for in-depth upgrade instructions.
   - Upgrade your Next.js Application from Version 14 to 15.
 - [Version 14](/docs/app/guides/upgrading/version-14)
   - Upgrade your Next.js Application from Version 13 to 14.
+
+# Guides

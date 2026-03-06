@@ -310,6 +310,8 @@ The option automatically adds a polyfill for debug IDs to the JavaScript bundle 
 
 # typescript
 
+# typescript
+
 Configure TypeScript behavior with the `typescript` option in `next.config.js`:
 
 ```js filename="next.config.js"
@@ -361,3 +363,5 @@ module.exports = {
 ```
 
 See the [TypeScript configuration](/docs/app/api-reference/config/typescript#custom-tsconfig-path) page for more details.
+
+# urlImports

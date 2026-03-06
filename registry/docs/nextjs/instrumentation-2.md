@@ -88,3 +88,5 @@ export async function register() {
 ## Learn more about Instrumentation- [instrumentation.js](/docs/app/api-reference/file-conventions/instrumentation)
 
 - API reference for the instrumentation.js file.
+
+# Internationalization

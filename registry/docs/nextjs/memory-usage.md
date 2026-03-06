@@ -166,6 +166,10 @@ Next.js doesn't unload these JavaScript modules, meaning that even with this opt
 
 # Migrating
 
+# Migrating
+
 - [App Router](/docs/app/guides/migrating/app-router-migration)
 - [Create React App](/docs/app/guides/migrating/from-create-react-app)
 - [Vite](/docs/app/guides/migrating/from-vite)
+
+# App Router

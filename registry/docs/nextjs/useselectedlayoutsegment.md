@@ -174,3 +174,5 @@ export default async function Layout({ children }) {
 | Version   | Changes                                |
 | --------- | -------------------------------------- |
 | `v13.0.0` | `useSelectedLayoutSegment` introduced. |
+
+# useSelectedLayoutSegments

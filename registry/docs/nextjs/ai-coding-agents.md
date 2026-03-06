@@ -84,3 +84,5 @@ The bundled docs include guides, API references, and file conventions for the Ap
 ## Next Steps- [Next.js MCP Server](/docs/app/guides/mcp)
 
 - Learn how to use Next.js MCP support to allow coding agents access to your application state
+
+# Analytics

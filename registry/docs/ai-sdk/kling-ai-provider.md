@@ -307,3 +307,5 @@ The following provider options are available via `providerOptions.klingai`. Opti
 | `kling-v2.6-motion-control` | Transfers motion from a reference video to a character image |
 
 You can also pass any available provider model ID as a string if needed.
+
+# ElevenLabs

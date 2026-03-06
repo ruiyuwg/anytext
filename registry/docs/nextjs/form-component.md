@@ -326,6 +326,8 @@ See the [Server Actions](/docs/app/getting-started/updating-data) docs for more 
 
 # Image Component
 
+# Image Component
+
 The Next.js Image component extends the HTML `<img>` element for automatic image optimization.
 
 ```jsx filename="app/page.js"

@@ -65,6 +65,8 @@ You **cannot** use `<Head>` to set attributes on `<html>` or `<body>` tags. This
 
 # Image
 
+# Image
+
 The Next.js Image component extends the HTML `<img>` element for automatic image optimization.
 
 ```jsx filename="app/page.js"

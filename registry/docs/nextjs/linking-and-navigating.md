@@ -421,3 +421,5 @@ export function LocaleSwitcher() {
   - API reference for the loading.js file.
 - [Prefetching](/docs/app/guides/prefetching)
   - Learn how to configure prefetching in Next.js
+
+# Server and Client Components

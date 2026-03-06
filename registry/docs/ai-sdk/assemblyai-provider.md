@@ -259,3 +259,5 @@ The following provider options are available:
 | ------ | ------------------- | ------------------- | ------------------- | ------------------- |
 | `best` |  |  |  |  |
 | `nano` |  |  |  |  |
+
+# DeepInfra

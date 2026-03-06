@@ -49,6 +49,11 @@ describe("llmsTxtAdapter", () => {
 
     expect(result.length).toBe(1);
     expect(result[0]!.id).toBe("getting-started");
+    expect(fs.rmSync).toHaveBeenCalledWith("/mock/registry/docs/hono", { recursive: true, force: true });
+    expect(fs.mkdirSync).toHaveBeenCalledWith("/mock/registry/docs/hono", { recursive: true });
+    const rmOrder = vi.mocked(fs.rmSync).mock.invocationCallOrder[0]!;
+    const mkdirOrder = vi.mocked(fs.mkdirSync).mock.invocationCallOrder[0]!;
+    expect(rmOrder).toBeLessThan(mkdirOrder);
     expect(fs.writeFileSync).toHaveBeenCalled();
   });
 

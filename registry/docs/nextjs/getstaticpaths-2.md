@@ -251,3 +251,5 @@ export default Post
 | `v12.1.0` | [On-Demand Incremental Static Regeneration](/docs/pages/guides/incremental-static-regeneration#on-demand-revalidation-with-revalidatepath) added (beta).                                          |
 | `v9.5.0`  | Stable [Incremental Static Regeneration](/docs/pages/guides/incremental-static-regeneration)                                                                                                      |
 | `v9.3.0`  | `getStaticPaths` introduced.                                                                                                                                                                      |
+
+# getStaticProps

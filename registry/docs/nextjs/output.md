@@ -141,6 +141,8 @@ module.exports = {
 
 # pageExtensions
 
+# pageExtensions
+
 By default, Next.js accepts files with the following extensions: `.tsx`, `.ts`, `.jsx`, `.js`. This can be modified to allow other extensions like markdown (`.md`, `.mdx`).
 
 ```js filename="next.config.js"
@@ -156,6 +158,8 @@ module.exports = withMDX(nextConfig)
 
 # poweredByHeader
 
+# poweredByHeader
+
 By default Next.js will add the `x-powered-by` header. To opt-out of it, open `next.config.js` and disable the `poweredByHeader` config:
 
 ```js filename="next.config.js"
@@ -163,6 +167,8 @@ module.exports = {
   poweredByHeader: false,
 }
 ```
+
+# productionBrowserSourceMaps
 
 # productionBrowserSourceMaps
 
@@ -180,3 +186,5 @@ When the `productionBrowserSourceMaps` option is enabled, the source maps will b
 
 - Adding source maps can increase `next build` time
 - Increases memory usage during `next build`
+
+# proxyClientMaxBodySize

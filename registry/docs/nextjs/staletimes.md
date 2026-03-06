@@ -42,6 +42,8 @@ You can learn more about the Client Router Cache [here](/docs/app/guides/caching
 | `v15.0.0` | The `dynamic` `staleTimes` default changed from 30s to 0s. |
 | `v14.2.0` | Experimental `staleTimes` introduced.                      |
 
+# "staticGeneration\*"
+
 # staticGeneration\*
 
 > This feature is currently experimental and subject to change, it is not recommended for production.
@@ -81,3 +83,5 @@ The following options are available:
 - `staticGenerationRetryCount`: The number of times to retry a failed page generation before failing the build.
 - `staticGenerationMaxConcurrency`: The maximum number of pages to be processed per worker.
 - `staticGenerationMinPagesPerWorker`: The minimum number of pages to be processed before starting a new worker.
+
+# taint

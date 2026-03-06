@@ -84,3 +84,5 @@ MyApp.getInitialProps = async (context) => {
   return { ...ctx, example: 'data' }
 }
 ```
+
+# Custom Document

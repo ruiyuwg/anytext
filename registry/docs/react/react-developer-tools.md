@@ -1,3 +1,5 @@
+# React Developer Tools
+
 Use React Developer Tools to inspect React [components](/learn/your-first-component), edit [props](/learn/passing-props-to-a-component) and [state](/learn/state-a-components-memory), and identify performance problems.
 
 - How to install React Developer Tools

@@ -664,3 +664,5 @@ Learn more about defining [Content Security Policies](/docs/app/guides/content-s
 
 - [manifest.json](/docs/app/api-reference/file-conventions/metadata/manifest)
   - API Reference for manifest.json file.
+
+# Public pages

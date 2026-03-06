@@ -476,3 +476,5 @@ Learn more about the topics mentioned in this guide.
   - Learn how to set a Content Security Policy (CSP) for your Next.js application.
 - [Forms](/docs/app/guides/forms)
   - Learn how to create forms in Next.js with React Server Actions.
+
+# Debugging

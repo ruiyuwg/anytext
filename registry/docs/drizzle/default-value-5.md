@@ -9,16 +9,41 @@ An explicit `DEFAULT` clause may specify that the default value is `NULL`,
 a string constant, a blob constant, a signed-number, or any constant expression enclosed in parentheses.
 
 ```typescript
-import { int, singlestoreTable } from "drizzle-orm/singlestore-core";
+import { sql } from "drizzle-orm";
+import { integer, sqliteTable } from "drizzle-orm/sqlite-core";
 
-const table = singlestoreTable('table', {
-	int: int().default(3),
+const table = sqliteTable('table', {
+	int1: integer().default(42),
+	int2: integer().default(sql`(abs(42))`)
+});
+
+```
+
+```sql
+CREATE TABLE `table` (
+	`int1` integer DEFAULT 42,
+	`int2` integer DEFAULT (abs(42))
+);
+```
+
+A default value may also be one of the special case-independent keywords `CURRENT_TIME`, `CURRENT_DATE` or `CURRENT_TIMESTAMP`.
+
+```typescript
+import { sql } from "drizzle-orm";
+import { text, sqliteTable } from "drizzle-orm/sqlite-core";
+
+const table = sqliteTable("table", {
+  time: text().default(sql`(CURRENT_TIME)`),
+  date: text().default(sql`(CURRENT_DATE)`),
+  timestamp: text().default(sql`(CURRENT_TIMESTAMP)`),
 });
 ```
 
 ```sql
 CREATE TABLE `table` (
-	`int` int DEFAULT 3
+	`time` text DEFAULT (CURRENT_TIME),
+	`date` text DEFAULT (CURRENT_DATE),
+	`timestamp` text DEFAULT (CURRENT_TIMESTAMP)
 );
 ```
 
@@ -31,11 +56,11 @@ Note: This value does not affect the `drizzle-kit` behavior, it is only used at 
 ```
 
 ```ts
-import { varchar, singlestoreTable } from "drizzle-orm/singlestore-core";
+import { text, sqliteTable } from "drizzle-orm/sqlite-core";
 import { createId } from '@paralleldrive/cuid2';
 
-const table = singlestoreTable('table', {
-	id: varchar({ length: 128 }).$defaultFn(() => createId()),
+const table = sqliteTable('table', {
+	id: text().$defaultFn(() => createId()),
 });
 ```
 
@@ -52,284 +77,132 @@ Note: This value does not affect the `drizzle-kit` behavior, it is only used at 
 ```
 
 ```ts
-import { text, singlestoreTable } from "drizzle-orm/singlestore-core";
+import { text, sqliteTable } from "drizzle-orm/sqlite-core";
 
-const table = singlestoreTable('table', {
+const table = sqliteTable('table', {
     alwaysNull: text().$type<string | null>().$onUpdate(() => null),
 });
 ```
 
-### Primary key
+Source: https://orm.drizzle.team/docs/connect-aws-data-api-mysql
 
-```typescript
-import { int, singlestoreTable } from "drizzle-orm/singlestore-core";
-
-const table = singlestoreTable('table', {
-	int: int().primaryKey(),
-});
-```
-
-```sql
-CREATE TABLE `table` (
-	`int` int PRIMARY KEY NOT NULL
-);
-```
-
-### Auto increment
-
-```typescript
-import { int, singlestoreTable } from "drizzle-orm/singlestore-core";
-
-const table = singlestoreTable('table', {
-	int: int().autoincrement(),
-});
-```
-
-```sql
-CREATE TABLE `table` (
-	`int` int AUTO_INCREMENT
-);
-```
-
-Source: https://orm.drizzle.team/docs/column-types/sqlite
-
-import Section from '@mdx/Section.astro';
 import Callout from '@mdx/Callout.astro';
 
-Based on the official **[SQLite docs](https://www.sqlite.org/datatype3.html)**,
-each value stored in an SQLite database (or manipulated by the database engine)
-has one of the following storage classes `NULL`, `INTEGER`, `REAL`, `TEXT` and `BLOB`.
+# Drizzle + AWS Data API MySQL
 
-We have native support for all of them, yet if that's not enough for you, feel free to create **[custom types](/docs/custom-types)**.
+Currently AWS Data API for MySQL is not implemented in Drizzle ORM
 
-All examples in this part of the documentation do not use database column name aliases, and column names are generated from TypeScript keys.
+Source: https://orm.drizzle.team/docs/connect-aws-data-api-pg
 
-You can use database aliases in column names if you want, and you can also use the `casing` parameter to define a mapping strategy for Drizzle.
+import Tab from '@mdx/Tab.astro';
+import Tabs from '@mdx/Tabs.astro';
+import Npm from "@mdx/Npm.astro";
+import Callout from '@mdx/Callout.astro';
+import WhatsNextPostgres from "@mdx/WhatsNextPostgres.astro";
+import Prerequisites from "@mdx/Prerequisites.astro";
+import CodeTabs from "@mdx/CodeTabs.astro";
 
-You can read more about it [here](/docs/sql-schema-declaration#shape-your-data-schema)
+# Drizzle + AWS Data API Postgres
 
-### Integer
+- Database [connection basics](/docs/connect-overview) with Drizzle
+- AWS Data API - [website](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html)
+- AWS SDK - [website](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-rds-data/)
 
-A signed integer, stored in `0`, `1`, `2`, `3`, `4`, `6`, or `8` bytes depending on the magnitude of the value.
+#### Step 1 - Install packages
 
-```typescript
-import { integer, sqliteTable } from "drizzle-orm/sqlite-core";
+drizzle-orm @aws-sdk/client-rds-data
+-D drizzle-kit
 
-const table = sqliteTable('table', {
-	id: integer()
+#### Step 2 - Initialize the driver and make a query
+
+```typescript copy
+import { drizzle } from 'drizzle-orm/aws-data-api/pg';
+
+// These three properties are required. You can also specify
+// any property from the RDSDataClient type inside the connection object.
+const db = drizzle({ connection: {
+  database: process.env['DATABASE']!,
+  secretArn: process.env['SECRET_ARN']!,
+  resourceArn: process.env['RESOURCE_ARN']!,
+}});
+
+await db.select().from(...);
+```
+
+If you need to provide your existing driver:
+
+```typescript copy
+import { drizzle } from 'drizzle-orm/aws-data-api/pg';
+import { RDSDataClient } from '@aws-sdk/client-rds-data';
+
+const rdsClient = new RDSDataClient({ region: 'us-east-1' });
+
+const db = drizzle(rdsClient, {
+  database: process.env['DATABASE']!,
+  secretArn: process.env['SECRET_ARN']!,
+  resourceArn: process.env['RESOURCE_ARN']!,
 });
 
-// you can customize integer mode to be number, boolean, timestamp, timestamp_ms
-integer({ mode: 'number' })
-integer({ mode: 'boolean' })
-integer({ mode: 'timestamp_ms' })
-integer({ mode: 'timestamp' }) // Date
-
+await db.select().from(...);
 ```
 
-```sql
-CREATE TABLE `table` (
-	`id` integer
-);
+#### What's next?
+
+Source: https://orm.drizzle.team/docs/connect-bun-sql
+
+import Npm from "@mdx/Npm.astro";
+import Callout from '@mdx/Callout.astro';
+import AnchorCards from '@mdx/AnchorCards.astro';
+import Steps from '@mdx/Steps.astro';
+import WhatsNextPostgres from "@mdx/WhatsNextPostgres.astro";
+import Prerequisites from "@mdx/Prerequisites.astro";
+import CodeTabs from "@mdx/CodeTabs.astro";
+
+# Drizzle + Bun SQL
+
+- Database [connection basics](/docs/connect-overview) with Drizzle
+- Bun - [website](https://bun.sh/docs)
+- Bun SQL - native bindings for working with PostgreSQL databases - [read here](https://bun.sh/docs/api/sql)
+
+According to the **[official website](https://bun.sh/)**, Bun is a fast all-in-one JavaScript runtime.
+
+Drizzle ORM natively supports **[`bun sql`](https://bun.sh/docs/api/sql)** module and it's crazy fast 🚀
+
+#### Step 1 - Install packages
+
+drizzle-orm
+-D drizzle-kit
+
+#### Step 2 - Initialize the driver and make a query
+
+```typescript copy
+import 'dotenv/config';
+import { drizzle } from 'drizzle-orm/bun-sql';
+
+const db = drizzle(process.env.DATABASE_URL);
+
+const result = await db.select().from(...);
 ```
 
-```typescript
-// to make integer primary key auto increment
-integer({ mode: 'number' }).primaryKey({ autoIncrement: true })
+If you need to provide your existing driver:
+
+```typescript copy
+import 'dotenv/config';
+import { drizzle } from 'drizzle-orm/bun-sql';
+import { SQL } from 'bun';
+
+const client = new SQL(process.env.DATABASE_URL!);
+const db = drizzle({ client });
 ```
 
-```sql
-CREATE TABLE `table` (
-	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL
-);
-```
+#### What's next?
 
-### Real
+Source: https://orm.drizzle.team/docs/connect-bun-sqlite
 
-A floating point value, stored as an `8-byte IEEE` floating point number.
-
-```typescript
-import { real, sqliteTable } from "drizzle-orm/sqlite-core";
-
-const table = sqliteTable('table', {
-	real: real()
-});
-
-```
-
-```sql
-CREATE TABLE `table` (
-	`real` real
-);
-```
-
-### Text
-
-A text string, stored using the database encoding (`UTF-8`, `UTF-16BE` or `UTF-16LE`).
-
-```
-You can define `{ enum: ["value1", "value2"] }` config to infer `insert` and `select` types, it **won't** check runtime values.
-```
-
-```typescript
-import { text, sqliteTable } from "drizzle-orm/sqlite-core";
-
-const table = sqliteTable('table', {
-	text: text()
-});
-
-// will be inferred as text: "value1" | "value2" | null
-text({ enum: ["value1", "value2"] })
-text({ mode: 'json' })
-text({ mode: 'json' }).$type<{ foo: string }>()
-```
-
-```sql
-CREATE TABLE `table` (
-	`text` text
-);
-```
-
-### Blob
-
-A blob of data, stored exactly as it was input.
-
-```
-It's recommended to use `text('', { mode: 'json' })` instead of `blob('', { mode: 'json' })`, 
-because it supports JSON functions:
-
-All JSON functions currently throw an error if any of their arguments are BLOBs because BLOBs 
-are reserved for a future enhancement in which BLOBs will store the binary encoding for JSON.
-
-See **https://www.sqlite.org/json1.html**.
-```
-
-```typescript
-import { blob, sqliteTable } from "drizzle-orm/sqlite-core";
-
-const table = sqliteTable('table', {
-	blob: blob()
-});
-
-blob()
-blob({ mode: 'buffer' })
-blob({ mode: 'bigint' })
-
-blob({ mode: 'json' })
-blob({ mode: 'json' }).$type<{ foo: string }>()
-
-```
-
-```sql
-CREATE TABLE `table` (
-	`blob` blob
-);
-```
-
-You can specify `.$type<..>()` for blob inference, it **won't** check runtime values.
-It provides compile time protection for default values, insert and select schemas.
-
-```typescript
-// will be inferred as { foo: string }
-json: blob({ mode: 'json' }).$type<{ foo: string }>();
-
-// will be inferred as string[]
-json: blob({ mode: 'json' }).$type<string[]>();
-
-// won't compile
-json: blob({ mode: 'json' }).$type<string[]>().default({});
-```
-
-### Boolean
-
-SQLite does not have native `boolean` data type, yet you can specify `integer` column to be in a `boolean` mode.
-This allows you to operate boolean values in your code and Drizzle stores them as 0 and 1 integer
-values in the database.
-
-```typescript
-import { integer, sqliteTable } from "drizzle-orm/sqlite-core";
-
-const table = sqliteTable('table', {
-	id: integer({ mode: 'boolean' })
-});
-```
-
-```sql
-CREATE TABLE `table` (
-	`id` integer
-);
-```
-
-### Bigint
-
-Since there is no `bigint` data type in SQLite, Drizzle offers a special `bigint` mode for `blob` columns.
-This mode allows you to work with BigInt instances in your code, and Drizzle stores them as blob values in the database.
-
-```typescript
-import { blob, sqliteTable } from "drizzle-orm/sqlite-core";
-
-const table = sqliteTable('table', {
-	id: blob({ mode: 'bigint' })
-});
-
-```
-
-```sql
-CREATE TABLE `table` (
-	`id` blob
-);
-```
-
-### Numeric
-
-```typescript
-import { blob, sqliteTable } from "drizzle-orm/sqlite-core";
-
-const table = sqliteTable('table', {
-	numeric: numeric(),
-	numericNum: numeric({ mode: 'number' }),
-	numericBig: numeric({ mode: 'bigint' }),
-});
-
-```
-
-```sql
-CREATE TABLE `table` (
-	`numeric` numeric,
-	`numericNum` numeric,
-	`numericBig` numeric
-);
-```
-
-### Customizing data type
-
-Every column builder has a `.$type()` method, which allows you to customize the data type of the column. This is useful, for example, with unknown or branded types.
-
-```ts
-type UserId = number & { __brand: 'user_id' };
-type Data = {
-	foo: string;
-	bar: number;
-};
-
-const users = sqliteTable('users', {
-  id: integer().$type<UserId>().primaryKey(),
-  jsonField: blob().$type<Data>(),
-});
-```
-
-### Not null
-
-`NOT NULL` constraint dictates that the associated column may not contain a `NULL` value.
-
-```typescript
-const table = sqliteTable('table', { 
-	numInt: integer().notNull() 
-});
-```
-
-```sql
-CREATE TABLE table (
-	`numInt` integer NOT NULL
-);
-```
+import Npm from "@mdx/Npm.astro";
+import Callout from '@mdx/Callout.astro';
+import AnchorCards from '@mdx/AnchorCards.astro';
+import Steps from '@mdx/Steps.astro';
+import WhatsNextPostgres from "@mdx/WhatsNextPostgres.astro";
+import Prerequisites from "@mdx/Prerequisites.astro";
+import CodeTabs from "@mdx/CodeTabs.astro";

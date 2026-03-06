@@ -913,3 +913,5 @@ Learn more about Route Handlers, Proxy, and Rewrites
   - API reference for the proxy.js file.
 - [rewrites](/docs/app/api-reference/config/next-config-js/rewrites)
   - Add rewrites to your Next.js app.
+
+# Caching

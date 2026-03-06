@@ -70,6 +70,8 @@ Notice that `isServer` is `true` when `nextRuntime` is `"edge"` or `"nodejs"`, `
 
 # webVitalsAttribution
 
+# webVitalsAttribution
+
 > This feature is currently experimental and subject to change, it is not recommended for production.
 
 When debugging issues related to Web Vitals, it is often helpful if we can pinpoint the source of the problem.
@@ -91,3 +93,5 @@ module.exports = {
 ```
 
 Valid attribution values are all `web-vitals` metrics specified in the [`NextWebVitalsMetric`](https://github.com/vercel/next.js/blob/442378d21dd56d6e769863eb8c2cb521a463a2e0/packages/next/shared/lib/utils.ts#L43) type.
+
+# TypeScript

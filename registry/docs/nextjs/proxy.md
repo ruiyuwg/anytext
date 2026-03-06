@@ -75,3 +75,5 @@ Learn more about Proxy
   - API reference for the proxy.js file.
 - [Backend for Frontend](/docs/app/guides/backend-for-frontend)
   - Learn how to use Next.js as a backend framework
+
+# Deploying

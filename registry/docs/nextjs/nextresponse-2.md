@@ -196,3 +196,5 @@ function proxy(request: NextRequest) {
   })
 }
 ```
+
+# useParams

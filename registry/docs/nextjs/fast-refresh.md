@@ -104,3 +104,5 @@ However, writing code resilient to occasional re-running of `useEffect` is a goo
 without Fast Refresh. It will make it easier for you to introduce new dependencies to it later on
 and it's enforced by [React Strict Mode](/docs/pages/api-reference/config/next-config-js/reactStrictMode),
 which we highly recommend enabling.
+
+# Next.js Compiler

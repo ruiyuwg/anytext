@@ -1,3 +1,5 @@
+# Directives
+
 Directives are for use in [React Server Components](/reference/rsc/server-components).
 
 Directives provide instructions to [bundlers compatible with React Server Components](/learn/creating-a-react-app#full-stack-frameworks).

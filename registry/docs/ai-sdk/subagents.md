@@ -358,6 +358,8 @@ The basic pattern (no streaming) is simpler to implement and debug. Only add str
 
 # Agents
 
+# Agents
+
 The following section shows you how to build agents with the AI SDK - systems where large language models (LLMs) use tools in a loop to accomplish tasks.
 
 \<IndexCards
@@ -397,3 +399,5 @@ href: '/docs/agents/subagents',
 },
 ]}
 />
+
+# Overview

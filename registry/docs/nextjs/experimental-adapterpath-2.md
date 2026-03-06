@@ -363,6 +363,8 @@ Common use cases for adapters include:
 
 # allowedDevOrigins
 
+# allowedDevOrigins
+
 Next.js does not automatically block cross-origin requests during development, but will block by default in a future major version of Next.js to prevent unauthorized requesting of internal assets/endpoints that are available in development mode.
 
 To configure a Next.js application to allow requests from origins other than the hostname the server was initialized with (`localhost` by default) you can use the `allowedDevOrigins` config option.
@@ -374,3 +376,5 @@ module.exports = {
   allowedDevOrigins: ['local-origin.dev', '*.local-origin.dev'],
 }
 ```
+
+# assetPrefix

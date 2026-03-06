@@ -224,3 +224,5 @@ export default Blog
 | `v10.0.0` | `fallback: 'blocking'` return option added.                                                                                                              |
 | `v9.5.0`  | Stable [Incremental Static Regeneration](/docs/pages/guides/incremental-static-regeneration)                                                             |
 | `v9.3.0`  | `getStaticProps` introduced.                                                                                                                             |
+
+# NextRequest

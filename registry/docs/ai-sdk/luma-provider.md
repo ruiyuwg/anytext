@@ -243,3 +243,5 @@ await generateImage({
 ```
 
 Learn more at https://docs.lumalabs.ai/docs/image-generation#character-reference
+
+# ByteDance

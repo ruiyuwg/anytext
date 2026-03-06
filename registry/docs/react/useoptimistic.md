@@ -1,3 +1,5 @@
+# useOptimistic
+
 `useOptimistic` is a React Hook that lets you optimistically update the UI.
 
 ```js

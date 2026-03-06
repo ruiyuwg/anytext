@@ -75,6 +75,10 @@ An object containing information about the CPU architecture.
 
 # Configuration
 
+# Configuration
+
 - [next.config.js](/docs/app/api-reference/config/next-config-js)
 - [TypeScript](/docs/app/api-reference/config/typescript)
 - [ESLint](/docs/app/api-reference/config/eslint)
+
+# next.config.js

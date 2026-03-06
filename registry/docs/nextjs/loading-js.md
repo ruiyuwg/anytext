@@ -162,6 +162,8 @@ For more Suspense examples and use cases, please see the [React Documentation](h
 
 # mdx-components.js
 
+# mdx-components.js
+
 The `mdx-components.js|tsx` file is **required** to use [`@next/mdx` with App Router](/docs/app/guides/mdx) and will not work without it. Additionally, you can use it to [customize styles](/docs/app/guides/mdx#using-custom-styles-and-components).
 
 Use the file `mdx-components.tsx` (or `.js`) in the root of your project to define MDX Components. For example, at the same level as `pages` or `app`, or inside `src` if applicable.
@@ -217,3 +219,5 @@ export function useMDXComponents() {
 ## Learn more about MDX Components- [MDX](/docs/app/guides/mdx)
 
 - Learn how to configure MDX and use it in your Next.js apps.
+
+# not-found.js

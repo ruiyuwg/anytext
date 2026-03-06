@@ -1,3 +1,5 @@
+# React Performance tracks
+
 React Performance tracks are specialized custom entries that appear on the Performance panel's timeline in your browser developer tools.
 
 These tracks are designed to provide developers with comprehensive insights into their React application's performance by visualizing React-specific events and metrics alongside other critical data sources such as network requests, JavaScript execution, and event loop activity, all synchronized on a unified timeline within the Performance panel for a complete understanding of application behavior.

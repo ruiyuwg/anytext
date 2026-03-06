@@ -55,3 +55,5 @@ export default async function Default({ params }) {
 ## Learn more about Parallel Routes- [Parallel Routes](/docs/app/api-reference/file-conventions/parallel-routes)
 
 - Simultaneously render one or more pages in the same view that can be navigated independently. A pattern for highly dynamic applications.
+
+# Dynamic Segments

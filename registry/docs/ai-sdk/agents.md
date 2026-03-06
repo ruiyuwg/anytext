@@ -89,3 +89,5 @@ Agents are flexible and powerful, but non-deterministic. When you need reliable,
 - **[Building Agents](/docs/agents/building-agents)** - Guide to creating agents with the ToolLoopAgent
 - **[Workflow Patterns](/docs/agents/workflows)** - Structured patterns using core functions for complex workflows
 - **[Loop Control](/docs/agents/loop-control)** - Execution control with stopWhen and prepareStep
+
+# Building Agents

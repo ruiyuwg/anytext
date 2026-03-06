@@ -1,3 +1,5 @@
+# "'use client'"
+
 `'use client'` is for use with [React Server Components](/reference/rsc/server-components).
 
 `'use client'` lets you mark what code runs on the client.

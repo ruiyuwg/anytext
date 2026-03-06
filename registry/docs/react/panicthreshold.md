@@ -1,3 +1,5 @@
+# panicThreshold
+
 The `panicThreshold` option controls how the React Compiler handles errors during compilation.
 
 ```js

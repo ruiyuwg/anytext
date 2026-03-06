@@ -486,3 +486,5 @@ You've built a Slack chatbot powered by the AI SDK! Here are some ways you could
 
 In a production environment, it is recommended to implement a robust queueing
 system to ensure messages are properly handled.
+
+# Natural Language Postgres

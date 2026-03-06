@@ -483,3 +483,5 @@ See also [Anthropic Model Comparison](https://docs.anthropic.com/en/docs/about-c
 
 The table above lists popular models. You can also pass any available provider
 model ID as a string if needed.
+
+# Rev.ai

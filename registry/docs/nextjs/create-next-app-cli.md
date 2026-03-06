@@ -152,3 +152,5 @@ yarn create next-app --example "https://github.com/.../" [your-project-name]
 ```bash package="bun"
 bun create next-app --example "https://github.com/.../" [your-project-name]
 ```
+
+# next CLI

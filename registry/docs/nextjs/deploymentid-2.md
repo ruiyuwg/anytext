@@ -61,3 +61,5 @@ module.exports = {
 
 - [Self-Hosting - Version Skew](/docs/app/guides/self-hosting#version-skew)
 - [generateBuildId](/docs/app/api-reference/config/next-config-js/generateBuildId)
+
+# devIndicators

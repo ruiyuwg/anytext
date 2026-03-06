@@ -177,3 +177,5 @@ expect(getRedirectUrl(response)).toEqual('https://nextjs.org/test2')
 - [useLightningcss](/docs/pages/api-reference/config/next-config-js/useLightningcss)
 - [webpack](/docs/pages/api-reference/config/next-config-js/webpack)
 - [webVitalsAttribution](/docs/pages/api-reference/config/next-config-js/webVitalsAttribution)
+
+# experimental.adapterPath

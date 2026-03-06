@@ -200,3 +200,5 @@ expect(getRedirectUrl(response)).toEqual('https://nextjs.org/test2')
 - [viewTransition](/docs/app/api-reference/config/next-config-js/viewTransition)
 - [webpack](/docs/app/api-reference/config/next-config-js/webpack)
 - [webVitalsAttribution](/docs/app/api-reference/config/next-config-js/webVitalsAttribution)
+
+# experimental.adapterPath

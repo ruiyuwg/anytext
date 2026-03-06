@@ -615,3 +615,5 @@ export function middleware(request: NextRequest) {
   // ...
 }
 ```
+
+# Version 16

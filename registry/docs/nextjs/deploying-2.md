@@ -88,6 +88,8 @@ Refer to each provider's documentation for information on supported Next.js feat
 
 # Guides
 
+# Guides
+
 - [Analytics](/docs/pages/guides/analytics)
 - [Authentication](/docs/pages/guides/authentication)
 - [Babel](/docs/pages/guides/babel)
@@ -120,3 +122,5 @@ Refer to each provider's documentation for information on supported Next.js feat
 - [Testing](/docs/pages/guides/testing)
 - [Third Party Libraries](/docs/pages/guides/third-party-libraries)
 - [Upgrading](/docs/pages/guides/upgrading)
+
+# Analytics

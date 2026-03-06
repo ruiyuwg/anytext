@@ -42,6 +42,8 @@ When exporting [`getServerSideProps`](/docs/pages/building-your-application/data
 
 # distDir
 
+# distDir
+
 You can specify a name to use for a custom build directory to use instead of `.next`.
 
 Open `next.config.js` and add the `distDir` config:
@@ -55,6 +57,8 @@ module.exports = {
 Now if you run `next build` Next.js will use `build` instead of the default `.next` folder.
 
 > `distDir` **should not** leave your project directory. For example, `../build` is an **invalid** directory.
+
+# env
 
 # env
 
@@ -97,3 +101,5 @@ Will end up being:
 ```jsx
 return <h1>The value of customKey is: {'my-value'}</h1>
 ```
+
+# exportPathMap

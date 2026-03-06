@@ -1,3 +1,5 @@
+# "use no memo"
+
 `"use no memo"` prevents a function from being optimized by React Compiler.
 
 ***

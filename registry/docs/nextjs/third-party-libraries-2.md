@@ -266,6 +266,8 @@ export default function Page() {
 
 # Upgrading
 
+# Upgrading
+
 Learn how to upgrade to the latest versions of Next.js following the versions-specific guides:
 
 - [Codemods](/docs/pages/guides/upgrading/codemods)
@@ -275,3 +277,5 @@ Learn how to upgrade to the latest versions of Next.js following the versions-sp
 - [Version 13](/docs/pages/guides/upgrading/version-13)
 - [Version 14](/docs/pages/guides/upgrading/version-14)
 - [Version 9](/docs/pages/guides/upgrading/version-9)
+
+# Codemods

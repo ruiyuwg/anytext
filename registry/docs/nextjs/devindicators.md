@@ -47,6 +47,8 @@ Check your route for any of these conditions, and if you are not able to statica
 
 # distDir
 
+# distDir
+
 You can specify a name to use for a custom build directory to use instead of `.next`.
 
 Open `next.config.js` and add the `distDir` config:
@@ -60,6 +62,8 @@ module.exports = {
 Now if you run `next build` Next.js will use `build` instead of the default `.next` folder.
 
 > `distDir` **should not** leave your project directory. For example, `../build` is an **invalid** directory.
+
+# env
 
 # env
 
@@ -105,6 +109,8 @@ return <h1>The value of customKey is: {'my-value'}</h1>
 
 # expireTime
 
+# expireTime
+
 You can specify a custom `stale-while-revalidate` expire time for CDNs to consume in the `Cache-Control` header for ISR enabled pages.
 
 Open `next.config.js` and add the `expireTime` config:
@@ -119,3 +125,5 @@ module.exports = {
 Now when sending the `Cache-Control` header the expire time will be calculated depending on the specific revalidate period.
 
 For example, if you have a revalidate of 15 minutes on a path and the expire time is one hour the generated `Cache-Control` header will be `s-maxage=900, stale-while-revalidate=2700` so that it can stay stale for 15 minutes less than the configured expire time.
+
+# exportPathMap

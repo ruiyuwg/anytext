@@ -240,3 +240,5 @@ Learn more about the features mentioned in this page by reading the API Referenc
   - Enable fast client-side navigation with the built-in `next/link` component.
 - [loading.js](/docs/app/api-reference/file-conventions/loading)
   - API reference for the loading.js file.
+
+# useParams

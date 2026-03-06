@@ -342,3 +342,5 @@ const result = await streamText({
 ```
 
 This simplifies provider usage and makes it easier to switch between providers without changing your model references throughout your codebase.
+
+# Error Handling

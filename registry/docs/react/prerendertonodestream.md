@@ -1,3 +1,5 @@
+# prerenderToNodeStream
+
 `prerenderToNodeStream` renders a React tree to a static HTML string using a [Node.js Stream.](https://nodejs.org/api/stream.html)
 
 ```js

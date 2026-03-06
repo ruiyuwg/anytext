@@ -1038,6 +1038,8 @@ Azure OpenAI supports TTS models through deployments. The capabilities depend on
 | `tts-1-hd`        |  |
 | `gpt-4o-mini-tts` |  |
 
+# Anthropic
+
 # Anthropic Provider
 
 The [Anthropic](https://www.anthropic.com/) provider contains language model support for the [Anthropic Messages API](https://docs.anthropic.com/claude/reference/messages_post).

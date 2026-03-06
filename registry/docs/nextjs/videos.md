@@ -267,6 +267,8 @@ Explore these video streaming platforms for integrating video into your Next.js 
 
 # API Reference
 
+# API Reference
+
 - [Directives](/docs/app/api-reference/directives)
 - [Components](/docs/app/api-reference/components)
 - [File-system conventions](/docs/app/api-reference/file-conventions)
@@ -278,6 +280,8 @@ Explore these video streaming platforms for integrating video into your Next.js 
 
 # Directives
 
+# Directives
+
 The following directives are available:
 
 - [use cache](/docs/app/api-reference/directives/use-cache)
@@ -285,3 +289,5 @@ The following directives are available:
 - [use cache: remote](/docs/app/api-reference/directives/use-cache-remote)
 - [use client](/docs/app/api-reference/directives/use-client)
 - [use server](/docs/app/api-reference/directives/use-server)
+
+# use cache

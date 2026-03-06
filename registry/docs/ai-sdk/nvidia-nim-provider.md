@@ -97,3 +97,5 @@ Model support for tool calls and structured output varies. For example, the
 [`meta/llama-3.3-70b-instruct`](https://build.nvidia.com/meta/llama-3_3-70b-instruct)
 model supports structured output capabilities. Check each model's
 documentation on NVIDIA Build for specific supported features.
+
+# Clarifai

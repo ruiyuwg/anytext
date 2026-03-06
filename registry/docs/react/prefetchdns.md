@@ -1,3 +1,5 @@
+# prefetchDNS
+
 `prefetchDNS` lets you eagerly look up the IP of a server that you expect to load resources from.
 
 ```js

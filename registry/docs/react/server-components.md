@@ -1,3 +1,5 @@
+# Server Components
+
 Server Components are a new type of Component that renders ahead of time, before bundling, in an environment separate from your client app or SSR server.
 
 This separate environment is the "server" in React Server Components. Server Components can run once at build time on your CI server, or they can be run for each request using a web server.

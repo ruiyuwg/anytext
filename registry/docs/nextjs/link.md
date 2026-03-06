@@ -630,3 +630,5 @@ export default function Home() {
 | `v10.0.0` | `href` props pointing to a dynamic route are automatically resolved and no longer require an `as` prop.                                                                      |
 | `v8.0.0`  | Improved prefetching performance.                                                                                                                                            |
 | `v1.0.0`  | `next/link` introduced.                                                                                                                                                      |
+
+# Script

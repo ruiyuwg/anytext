@@ -1,3 +1,5 @@
+# React DOM APIs
+
 The `react-dom` package contains methods that are only supported for the web applications (which run in the browser DOM environment). They are not supported for React Native.
 
 ***

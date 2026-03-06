@@ -241,3 +241,5 @@ Learn more about the alternatives ways you can use CSS in your application.
   - Style your Next.js application using Sass.
 - [CSS-in-JS](/docs/app/guides/css-in-js)
   - Use CSS-in-JS libraries with Next.js
+
+# Deploying

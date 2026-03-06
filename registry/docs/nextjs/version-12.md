@@ -147,3 +147,5 @@ The target option has been deprecated in favor of built-in support for tracing w
 During `next build`, Next.js will automatically trace each page and its dependencies to determine all of the files that are needed for deploying a production version of your application.
 
 If you are currently using the `target` option set to `serverless`, please read the [documentation on how to leverage the new output](/docs/pages/api-reference/config/next-config-js/output).
+
+# Version 13

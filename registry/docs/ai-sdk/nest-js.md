@@ -107,3 +107,5 @@ export class AppController {
 ## Troubleshooting
 
 - Streaming not working when [proxied](/docs/troubleshooting/streaming-not-working-when-proxied)
+
+# AI SDK by Vercel

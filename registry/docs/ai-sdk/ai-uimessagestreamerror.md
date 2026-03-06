@@ -63,6 +63,8 @@ if (UIMessageStreamError.isInstance(error)) {
 
 # AI\_UnsupportedFunctionalityError
 
+# AI\_UnsupportedFunctionalityError
+
 This error occurs when functionality is not supported.
 
 ## Properties
@@ -81,3 +83,5 @@ if (UnsupportedFunctionalityError.isInstance(error)) {
   // Handle the error
 }
 ```
+
+# AI Gateway

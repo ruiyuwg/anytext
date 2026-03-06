@@ -655,3 +655,5 @@ Auto-detection for animated files is best-effort and supports GIF, APNG, and Web
 | --------- | ------------------------------------------------------------------------------------------------------------------- |
 | `v16.0.0` | `next/legacy/image` deprecated and will be removed in a future version of Next.js. Please use `next/image` instead. |
 | `v13.0.0` | `next/image` renamed to `next/legacy/image`                                                                         |
+
+# Link

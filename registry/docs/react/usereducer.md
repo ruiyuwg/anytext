@@ -1,3 +1,5 @@
+# useReducer
+
 `useReducer` is a React Hook that lets you add a [reducer](/learn/extracting-state-logic-into-a-reducer) to your component.
 
 ```js

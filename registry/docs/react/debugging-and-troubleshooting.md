@@ -1,3 +1,5 @@
+# Debugging and Troubleshooting
+
 This guide helps you identify and fix issues when using React Compiler. Learn how to debug compilation problems and resolve common issues.
 
 - The difference between compiler errors and runtime issues

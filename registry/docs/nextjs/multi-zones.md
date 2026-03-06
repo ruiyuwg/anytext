@@ -121,3 +121,5 @@ const nextConfig = {
 ```
 
 See [`serverActions.allowedOrigins`](/docs/app/api-reference/config/next-config-js/serverActions#allowedorigins) for more information.
+
+# OpenTelemetry

@@ -62,3 +62,5 @@ For more information on what to do next, we recommend the following sections
   - Learn how navigation works in Next.js, and how to use the Link Component and `useRouter` hook.
 - [useRouter](/docs/pages/api-reference/functions/use-router)
   - Learn more about the API of the Next.js Router, and access the router instance in your page with the useRouter hook.
+
+# Linking and Navigating

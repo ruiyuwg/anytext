@@ -165,3 +165,5 @@ These implementations show you exactly how to:
 - Handle errors and connection management
 
 The transport system gives you complete control over how your chat application communicates, enabling integration with any backend protocol or service.
+
+# Reading UIMessage Streams

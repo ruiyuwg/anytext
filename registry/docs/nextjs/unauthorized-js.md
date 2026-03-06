@@ -113,6 +113,8 @@ export default function UnauthorizedPage() {
 
 # Metadata Files
 
+# Metadata Files
+
 This section of the docs covers **Metadata file conventions**. File-based metadata can be defined by adding special metadata files to route segments.
 
 Each file convention can be defined using a static file (e.g. `opengraph-image.jpg`), or a dynamic variant that uses code to generate the file (e.g. `opengraph-image.js`).
@@ -129,3 +131,5 @@ Once a file is defined, Next.js will automatically serve the file (with hashes i
 - [opengraph-image and twitter-image](/docs/app/api-reference/file-conventions/metadata/opengraph-image)
 - [robots.txt](/docs/app/api-reference/file-conventions/metadata/robots)
 - [sitemap.xml](/docs/app/api-reference/file-conventions/metadata/sitemap)
+
+# favicon, icon, and apple-icon

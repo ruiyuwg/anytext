@@ -178,3 +178,5 @@ This architecture decouples the agent interface from the internal implementation
 - Start your development server: `npm run dev`
 - Restart your development server if it was already running
 - Check that your coding agent has loaded the MCP server configuration
+
+# MDX

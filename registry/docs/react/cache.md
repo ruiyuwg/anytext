@@ -1,3 +1,5 @@
+# cache
+
 `cache` is only for use with [React Server Components](/reference/rsc/server-components).
 
 `cache` lets you cache the result of a data fetch or computation.

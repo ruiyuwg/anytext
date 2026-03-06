@@ -78,6 +78,8 @@ const { text } = await generateText({
 - Stop sequences, `topK`, and `seed` are not supported and are ignored with warnings.
 - Image inputs are supported for user messages with `file` parts using image media types.
 
+# Amazon Bedrock
+
 # Amazon Bedrock Provider
 
 The Amazon Bedrock provider for the [AI SDK](/docs) contains language model support for the [Amazon Bedrock](https://aws.amazon.com/bedrock) APIs.

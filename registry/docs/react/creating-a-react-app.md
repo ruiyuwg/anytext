@@ -1,3 +1,5 @@
+# Creating a React App
+
 If you want to build a new app or website with React, we recommend starting with a framework.
 
 If your app has constraints not well-served by existing frameworks, you prefer to build your own framework, or you just want to learn the basics of a React app, you can [build a React app from scratch](/learn/build-a-react-app-from-scratch).

@@ -148,3 +148,5 @@ Use `revalidateTag` instead when:
 
 - [`revalidateTag`](/docs/app/api-reference/functions/revalidateTag) - For invalidating tags in Route Handlers
 - [`revalidatePath`](/docs/app/api-reference/functions/revalidatePath) - For invalidating specific paths
+
+# useLinkStatus

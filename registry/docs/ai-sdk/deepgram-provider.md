@@ -259,3 +259,5 @@ The following provider options are available:
 | `nova` (+ [variants](https://developers.deepgram.com/docs/models-languages-overview#nova))         |  |  |  |  |
 | `enhanced` (+ [variants](https://developers.deepgram.com/docs/models-languages-overview#enhanced)) |  |  |  |  |
 | `base` (+ [variants](https://developers.deepgram.com/docs/models-languages-overview#base))         |  |  |  |  |
+
+# Black Forest Labs

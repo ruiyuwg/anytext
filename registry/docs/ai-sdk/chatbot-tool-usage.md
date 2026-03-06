@@ -669,3 +669,5 @@ const response = createUIMessageResponse({
   onError: error => `Custom error: ${error.message}`,
 });
 ```
+
+# Generative User Interfaces

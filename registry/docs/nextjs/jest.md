@@ -264,3 +264,5 @@ For further reading, you may find these resources helpful:
 - [Jest Docs](https://jestjs.io/docs/getting-started)
 - [React Testing Library Docs](https://testing-library.com/docs/react-testing-library/intro/)
 - [Testing Playground](https://testing-playground.com/) - use good testing practices to match elements.
+
+# Playwright

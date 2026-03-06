@@ -183,3 +183,5 @@ See the API Reference for the full feature set of Next.js Image.
 
 - [Image Component](/docs/app/api-reference/components/image)
   - Optimize Images in your Next.js Application using the built-in `next/image` Component.
+
+# Font Optimization

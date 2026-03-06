@@ -133,6 +133,8 @@ module.exports = nextConfig
 
 # cacheComponents
 
+# cacheComponents
+
 The `cacheComponents` flag is a feature in Next.js that causes data fetching operations in the App Router to be excluded from pre-renders unless they are explicitly cached. This can be useful for optimizing the performance of dynamic data fetching in Server Components.
 
 It is useful if your application requires fresh data fetching during runtime rather than serving from a pre-rendered cache.
@@ -168,3 +170,5 @@ When `cacheComponents` is enabled, you can use the following cache functions and
 | Version | Change                                                                                                                            |
 | ------- | --------------------------------------------------------------------------------------------------------------------------------- |
 | 16.0.0  | `cacheComponents` introduced. This flag controls the `ppr`, `useCache`, and `dynamicIO` flags as a single, unified configuration. |
+
+# cacheHandlers

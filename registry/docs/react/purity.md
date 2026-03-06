@@ -1,3 +1,5 @@
+# purity
+
 Validates that [components/hooks are pure](/reference/rules/components-and-hooks-must-be-pure) by checking that they do not call known-impure functions.
 
 ## Rule Details {/*rule-details*/}

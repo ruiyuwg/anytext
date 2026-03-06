@@ -234,3 +234,5 @@ Remember, Computer Use is a beta feature. Please be aware that it poses unique r
 2. Avoid giving the model access to sensitive data, such as account login information, to prevent information theft.
 3. Limit internet access to an allowlist of domains to reduce exposure to malicious content.
 4. Ask a human to confirm decisions that may result in meaningful real-world consequences as well as any tasks requiring affirmative consent, such as accepting cookies, executing financial transactions, or agreeing to terms of service.
+
+# Add Skills to Your Agent

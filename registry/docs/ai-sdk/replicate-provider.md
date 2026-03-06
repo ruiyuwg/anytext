@@ -250,3 +250,5 @@ Common provider options for image generation:
 - **strength** *number (0-1)* - Strength of the transformation for img2img. Lower values keep more of the original image.
 
 For more details, see the [Replicate models page](https://replicate.com/explore).
+
+# Prodia

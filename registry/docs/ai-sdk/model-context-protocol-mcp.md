@@ -357,3 +357,5 @@ link: '/cookbook/node/mcp-elicitation',
 },
 ]}
 />
+
+# Prompt Engineering

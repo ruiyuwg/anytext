@@ -193,3 +193,5 @@ Learn more about Route Handlers
   - API reference for the route.js special file.
 - [Backend for Frontend](/docs/app/guides/backend-for-frontend)
   - Learn how to use Next.js as a backend framework
+
+# Proxy

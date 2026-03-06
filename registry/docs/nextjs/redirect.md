@@ -220,6 +220,8 @@ The `redirect()` method uses a `307` by default, instead of a `302` temporary re
 
 # refresh
 
+# refresh
+
 `refresh` allows you to refresh the client router from within a [Server Action](/docs/app/getting-started/updating-data).
 
 ## Usage
@@ -284,3 +286,5 @@ export async function POST() {
   refresh()
 }
 ```
+
+# revalidatePath

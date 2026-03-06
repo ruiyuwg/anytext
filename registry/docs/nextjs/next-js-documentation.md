@@ -7,6 +7,8 @@
 
 # Getting Started
 
+# Getting Started
+
 Welcome to the Next.js documentation!
 
 This **Getting Started** section will help you create your first Next.js app and learn the core features you'll use in every project.
@@ -42,3 +44,5 @@ If you're new to React or need a refresher, we recommend starting with our [Reac
 - [Proxy](/docs/app/getting-started/proxy)
 - [Deploying](/docs/app/getting-started/deploying)
 - [Upgrading](/docs/app/getting-started/upgrading)
+
+# Installation

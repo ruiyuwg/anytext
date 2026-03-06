@@ -1,5 +1,5 @@
 {
-  "version": 22,
+  "version": 30,
   "updatedAt": "2026-03-06",
   "libraries": [
     {
@@ -25,7 +25,7 @@
             "pgvector"
           ],
           "path": "ai-sdk/rag-agent-guide.md",
-          "tokens": 8630
+          "tokens": 8635
         },
         {
           "id": "multi-modal-agent",
@@ -44,7 +44,7 @@
             "streamText"
           ],
           "path": "ai-sdk/multi-modal-agent.md",
-          "tokens": 3271
+          "tokens": 3277
         },
         {
           "id": "building-an-ai-agent-in-slack-with-the-ai-sdk",
@@ -63,7 +63,7 @@
             "lib/handle-app-mention.ts"
           ],
           "path": "ai-sdk/building-an-ai-agent-in-slack-with-the-ai-sdk.md",
-          "tokens": 4223
+          "tokens": 4230
         },
         {
           "id": "natural-language-postgres-guide",
@@ -82,7 +82,7 @@
             "header.tsx"
           ],
           "path": "ai-sdk/natural-language-postgres-guide.md",
-          "tokens": 6891
+          "tokens": 6899
         },
         {
           "id": "get-started-with-computer-use",
@@ -101,7 +101,7 @@
             "generateText"
           ],
           "path": "ai-sdk/get-started-with-computer-use.md",
-          "tokens": 2533
+          "tokens": 2540
         },
         {
           "id": "add-skills-to-your-agent",
@@ -120,7 +120,7 @@
             "readFile"
           ],
           "path": "ai-sdk/add-skills-to-your-agent.md",
-          "tokens": 2302
+          "tokens": 2310
         },
         {
           "id": "build-a-custom-memory-tool",
@@ -139,7 +139,7 @@
             "ToolLoopAgent"
           ],
           "path": "ai-sdk/build-a-custom-memory-tool.md",
-          "tokens": 5161
+          "tokens": 5168
         },
         {
           "id": "get-started-with-gemini-3",
@@ -158,7 +158,7 @@
             "app/api/chat/route.ts"
           ],
           "path": "ai-sdk/get-started-with-gemini-3.md",
-          "tokens": 2136
+          "tokens": 2144
         },
         {
           "id": "get-started-with-claude-4",
@@ -177,7 +177,7 @@
             "parts"
           ],
           "path": "ai-sdk/get-started-with-claude-4.md",
-          "tokens": 2546
+          "tokens": 2552
         },
         {
           "id": "get-started-with-openai-responses-api",
@@ -195,7 +195,7 @@
             "providerOptions"
           ],
           "path": "ai-sdk/get-started-with-openai-responses-api.md",
-          "tokens": 2391
+          "tokens": 2400
         },
         {
           "id": "generate-and-edit-images-with-google-gemini-2-5-flash",
@@ -209,7 +209,7 @@
             "Uint8Array"
           ],
           "path": "ai-sdk/generate-and-edit-images-with-google-gemini-2-5-flash.md",
-          "tokens": 834
+          "tokens": 844
         },
         {
           "id": "get-started-with-claude-3-7-sonnet",
@@ -228,7 +228,7 @@
             "app/api/chat/route.ts"
           ],
           "path": "ai-sdk/get-started-with-claude-3-7-sonnet.md",
-          "tokens": 1989
+          "tokens": 1996
         },
         {
           "id": "get-started-with-llama-3-1",
@@ -247,7 +247,7 @@
             "useObject"
           ],
           "path": "ai-sdk/get-started-with-llama-3-1.md",
-          "tokens": 4645
+          "tokens": 4651
         },
         {
           "id": "get-started-with-openai-gpt-5",
@@ -266,7 +266,7 @@
             "useCompletion"
           ],
           "path": "ai-sdk/get-started-with-openai-gpt-5.md",
-          "tokens": 2820
+          "tokens": 2827
         },
         {
           "id": "get-started-with-openai-o1",
@@ -285,7 +285,7 @@
             "getWeather"
           ],
           "path": "ai-sdk/get-started-with-openai-o1.md",
-          "tokens": 2688
+          "tokens": 2696
         },
         {
           "id": "get-started-with-openai-o3-mini",
@@ -304,7 +304,7 @@
             "useCompletion"
           ],
           "path": "ai-sdk/get-started-with-openai-o3-mini.md",
-          "tokens": 2376
+          "tokens": 2384
         },
         {
           "id": "get-started-with-deepseek-r1",
@@ -323,7 +323,7 @@
             "deepseek-r1"
           ],
           "path": "ai-sdk/get-started-with-deepseek-r1.md",
-          "tokens": 2749
+          "tokens": 2758
         },
         {
           "id": "get-started-with-deepseek-v3-2",
@@ -340,7 +340,7 @@
             "stopWhen: stepCountIs(5)"
           ],
           "path": "ai-sdk/get-started-with-deepseek-v3-2.md",
-          "tokens": 2063
+          "tokens": 2066
         },
         {
           "id": "guides",
@@ -348,7 +348,7 @@
           "description": "These use-case specific guides are intended to help you build real applications with the AI SDK.",
           "tags": [],
           "path": "ai-sdk/guides.md",
-          "tokens": 609
+          "tokens": 615
         },
         {
           "id": "node-js-http-server",
@@ -362,7 +362,7 @@
             "pipeTextStreamToResponse"
           ],
           "path": "ai-sdk/node-js-http-server.md",
-          "tokens": 735
+          "tokens": 738
         },
         {
           "id": "express",
@@ -375,7 +375,7 @@
             "pipeTextStreamToResponse"
           ],
           "path": "ai-sdk/express.md",
-          "tokens": 708
+          "tokens": 710
         },
         {
           "id": "hono",
@@ -390,7 +390,7 @@
             "createUIMessageStreamResponse"
           ],
           "path": "ai-sdk/hono.md",
-          "tokens": 748
+          "tokens": 751
         },
         {
           "id": "fastify",
@@ -404,7 +404,7 @@
             "textStream"
           ],
           "path": "ai-sdk/fastify.md",
-          "tokens": 781
+          "tokens": 784
         },
         {
           "id": "nest-js",
@@ -416,7 +416,7 @@
             "pipeTextStreamToResponse"
           ],
           "path": "ai-sdk/nest-js.md",
-          "tokens": 762
+          "tokens": 767
         },
         {
           "id": "ai-sdk",
@@ -426,7 +426,7 @@
             "llms.txt"
           ],
           "path": "ai-sdk/ai-sdk.md",
-          "tokens": 555
+          "tokens": 558
         },
         {
           "id": "agents",
@@ -439,7 +439,7 @@
             "streamText"
           ],
           "path": "ai-sdk/agents.md",
-          "tokens": 886
+          "tokens": 891
         },
         {
           "id": "building-agents",
@@ -458,7 +458,7 @@
             "experimental_onToolCallStart"
           ],
           "path": "ai-sdk/building-agents.md",
-          "tokens": 3114
+          "tokens": 3119
         },
         {
           "id": "workflow-patterns",
@@ -466,7 +466,7 @@
           "description": "Combine the building blocks from the overview with these patterns to add structure and reliability to your agents:",
           "tags": [],
           "path": "ai-sdk/workflow-patterns.md",
-          "tokens": 3290
+          "tokens": 3294
         },
         {
           "id": "loop-control",
@@ -484,7 +484,7 @@
             "streamText"
           ],
           "path": "ai-sdk/loop-control.md",
-          "tokens": 2551
+          "tokens": 2558
         },
         {
           "id": "configuring-call-options",
@@ -498,7 +498,7 @@
             "options"
           ],
           "path": "ai-sdk/configuring-call-options.md",
-          "tokens": 1826
+          "tokens": 1829
         },
         {
           "id": "memory",
@@ -517,7 +517,7 @@
             "rename"
           ],
           "path": "ai-sdk/memory.md",
-          "tokens": 2254
+          "tokens": 2257
         },
         {
           "id": "subagents",
@@ -536,7 +536,7 @@
             "UIMessage"
           ],
           "path": "ai-sdk/subagents.md",
-          "tokens": 3467
+          "tokens": 3472
         },
         {
           "id": "ai-sdk-core",
@@ -550,7 +550,7 @@
             "Output.array()"
           ],
           "path": "ai-sdk/ai-sdk-core.md",
-          "tokens": 506
+          "tokens": 510
         },
         {
           "id": "generating-and-streaming-text",
@@ -569,7 +569,7 @@
             "result.toolResults"
           ],
           "path": "ai-sdk/generating-and-streaming-text.md",
-          "tokens": 5810
+          "tokens": 5818
         },
         {
           "id": "generating-structured-data",
@@ -588,7 +588,7 @@
             "Output.text()"
           ],
           "path": "ai-sdk/generating-structured-data.md",
-          "tokens": 3883
+          "tokens": 3887
         },
         {
           "id": "tool-calling",
@@ -607,7 +607,7 @@
             "strict: true"
           ],
           "path": "ai-sdk/tool-calling.md",
-          "tokens": 9120
+          "tokens": 9128
         },
         {
           "id": "model-context-protocol-mcp",
@@ -626,7 +626,7 @@
             "streamText"
           ],
           "path": "ai-sdk/model-context-protocol-mcp.md",
-          "tokens": 2919
+          "tokens": 2924
         },
         {
           "id": "prompt-engineering",
@@ -645,7 +645,7 @@
             "request.body"
           ],
           "path": "ai-sdk/prompt-engineering.md",
-          "tokens": 1208
+          "tokens": 1211
         },
         {
           "id": "settings",
@@ -664,7 +664,7 @@
             "seed"
           ],
           "path": "ai-sdk/settings.md",
-          "tokens": 1487
+          "tokens": 1491
         },
         {
           "id": "embeddings",
@@ -683,7 +683,7 @@
             "2"
           ],
           "path": "ai-sdk/embeddings.md",
-          "tokens": 2231
+          "tokens": 2234
         },
         {
           "id": "reranking",
@@ -702,7 +702,7 @@
             "number"
           ],
           "path": "ai-sdk/reranking.md",
-          "tokens": 1787
+          "tokens": 1792
         },
         {
           "id": "image-generation",
@@ -721,7 +721,7 @@
             "abortSignal"
           ],
           "path": "ai-sdk/image-generation.md",
-          "tokens": 6530
+          "tokens": 6534
         },
         {
           "id": "transcription",
@@ -740,7 +740,7 @@
             "DownloadError"
           ],
           "path": "ai-sdk/transcription.md",
-          "tokens": 2149
+          "tokens": 2152
         },
         {
           "id": "speech",
@@ -759,7 +759,7 @@
             "cause"
           ],
           "path": "ai-sdk/speech.md",
-          "tokens": 1334
+          "tokens": 1339
         },
         {
           "id": "video-generation",
@@ -778,7 +778,7 @@
             "abortSignal"
           ],
           "path": "ai-sdk/video-generation.md",
-          "tokens": 3257
+          "tokens": 3265
         },
         {
           "id": "language-model-middleware",
@@ -797,7 +797,7 @@
             "inputExamples"
           ],
           "path": "ai-sdk/language-model-middleware.md",
-          "tokens": 3955
+          "tokens": 3962
         },
         {
           "id": "provider-model-management",
@@ -816,7 +816,7 @@
             "custom > *"
           ],
           "path": "ai-sdk/provider-model-management.md",
-          "tokens": 2545
+          "tokens": 2550
         },
         {
           "id": "error-handling",
@@ -831,7 +831,7 @@
             "steps"
           ],
           "path": "ai-sdk/error-handling.md",
-          "tokens": 877
+          "tokens": 880
         },
         {
           "id": "testing",
@@ -847,7 +847,7 @@
             "ai"
           ],
           "path": "ai-sdk/testing.md",
-          "tokens": 1650
+          "tokens": 1653
         },
         {
           "id": "telemetry",
@@ -866,7 +866,7 @@
             "@opentelemetry/api"
           ],
           "path": "ai-sdk/telemetry.md",
-          "tokens": 4373
+          "tokens": 4376
         },
         {
           "id": "devtools",
@@ -883,7 +883,7 @@
             ".gitignore"
           ],
           "path": "ai-sdk/devtools.md",
-          "tokens": 817
+          "tokens": 822
         },
         {
           "id": "event-callbacks",
@@ -902,7 +902,7 @@
             "StepResult"
           ],
           "path": "ai-sdk/event-callbacks.md",
-          "tokens": 5100
+          "tokens": 5103
         },
         {
           "id": "ai-sdk-ui",
@@ -918,7 +918,7 @@
             "@ai-sdk/angular"
           ],
           "path": "ai-sdk/ai-sdk-ui.md",
-          "tokens": 896
+          "tokens": 898
         },
         {
           "id": "chatbot",
@@ -937,7 +937,7 @@
             "error"
           ],
           "path": "ai-sdk/chatbot.md",
-          "tokens": 9245
+          "tokens": 9253
         },
         {
           "id": "chatbot-message-persistence",
@@ -956,7 +956,7 @@
             "UIMessage[]"
           ],
           "path": "ai-sdk/chatbot-message-persistence.md",
-          "tokens": 4073
+          "tokens": 4079
         },
         {
           "id": "chatbot-resume-streams",
@@ -975,7 +975,7 @@
             "streamText"
           ],
           "path": "ai-sdk/chatbot-resume-streams.md",
-          "tokens": 2278
+          "tokens": 2284
         },
         {
           "id": "chatbot-tool-usage",
@@ -994,7 +994,7 @@
             "getLocation"
           ],
           "path": "ai-sdk/chatbot-tool-usage.md",
-          "tokens": 5660
+          "tokens": 5667
         },
         {
           "id": "generative-user-interfaces",
@@ -1013,7 +1013,7 @@
             "tool-${toolName}"
           ],
           "path": "ai-sdk/generative-user-interfaces.md",
-          "tokens": 3041
+          "tokens": 3044
         },
         {
           "id": "completion",
@@ -1032,7 +1032,7 @@
             "experimental_throttle"
           ],
           "path": "ai-sdk/completion.md",
-          "tokens": 1388
+          "tokens": 1393
         },
         {
           "id": "object-generation",
@@ -1051,7 +1051,7 @@
             "error"
           ],
           "path": "ai-sdk/object-generation.md",
-          "tokens": 2271
+          "tokens": 2278
         },
         {
           "id": "streaming-custom-data",
@@ -1070,7 +1070,7 @@
             "messageMetadata"
           ],
           "path": "ai-sdk/streaming-custom-data.md",
-          "tokens": 2867
+          "tokens": 2871
         },
         {
           "id": "error-handling-and-warnings",
@@ -1082,7 +1082,7 @@
             "useCompletion"
           ],
           "path": "ai-sdk/error-handling-and-warnings.md",
-          "tokens": 1212
+          "tokens": 1215
         },
         {
           "id": "transport",
@@ -1101,7 +1101,7 @@
             "sendMessages"
           ],
           "path": "ai-sdk/transport.md",
-          "tokens": 1276
+          "tokens": 1283
         },
         {
           "id": "reading-ui-message-streams",
@@ -1114,7 +1114,7 @@
             "AsyncIterableStream"
           ],
           "path": "ai-sdk/reading-ui-message-streams.md",
-          "tokens": 665
+          "tokens": 670
         },
         {
           "id": "message-metadata",
@@ -1133,7 +1133,7 @@
             "isRetryable"
           ],
           "path": "ai-sdk/message-metadata.md",
-          "tokens": 5543
+          "tokens": 5754
         },
         {
           "id": "ai-uimessagestreamerror",
@@ -1152,7 +1152,7 @@
             "chunkId"
           ],
           "path": "ai-sdk/ai-uimessagestreamerror.md",
-          "tokens": 756
+          "tokens": 769
         },
         {
           "id": "ai-gateway-provider",
@@ -1171,7 +1171,7 @@
             "vercel dev"
           ],
           "path": "ai-sdk/ai-gateway-provider.md",
-          "tokens": 6052
+          "tokens": 6055
         },
         {
           "id": "xai-grok-provider",
@@ -1190,7 +1190,7 @@
             "xai.responses(modelId)"
           ],
           "path": "ai-sdk/xai-grok-provider.md",
-          "tokens": 7365
+          "tokens": 7367
         },
         {
           "id": "vercel-provider",
@@ -1209,7 +1209,7 @@
             "v0-1.5-lg"
           ],
           "path": "ai-sdk/vercel-provider.md",
-          "tokens": 1600
+          "tokens": 1602
         },
         {
           "id": "responses-models",
@@ -1304,7 +1304,7 @@
             ".speech()"
           ],
           "path": "ai-sdk/transcription-models.md",
-          "tokens": 1188
+          "tokens": 1192
         },
         {
           "id": "azure-openai-provider",
@@ -1323,7 +1323,7 @@
             "{baseURL}/v1{path}"
           ],
           "path": "ai-sdk/azure-openai-provider.md",
-          "tokens": 9314
+          "tokens": 9318
         },
         {
           "id": "language-models",
@@ -1380,7 +1380,7 @@
             "claude-haiku-4-5"
           ],
           "path": "ai-sdk/agent-skills.md",
-          "tokens": 1163
+          "tokens": 1167
         },
         {
           "id": "open-responses-provider",
@@ -1399,7 +1399,7 @@
             "topK"
           ],
           "path": "ai-sdk/open-responses-provider.md",
-          "tokens": 607
+          "tokens": 612
         },
         {
           "id": "setup",
@@ -1439,7 +1439,7 @@
           "tokens": 676
         },
         {
-          "id": "language-models-2",
+          "id": "amazon-bedrock-provider-language-models",
           "title": "Language Models",
           "description": "You can create models that call the Bedrock API using the provider instance.\nThe first argument is the model id, e.g....",
           "tags": [
@@ -1454,7 +1454,7 @@
             "'5m'",
             "'1h'"
           ],
-          "path": "ai-sdk/language-models-2.md",
+          "path": "ai-sdk/amazon-bedrock-provider-language-models.md",
           "tokens": 2614
         },
         {
@@ -1496,7 +1496,7 @@
           "tokens": 1457
         },
         {
-          "id": "image-models-2",
+          "id": "amazon-bedrock-provider-image-models",
           "title": "Image Models",
           "description": "You can create models that call the Bedrock API Bedrock API\nusing the .image() factory method.",
           "tags": [
@@ -1511,7 +1511,7 @@
             "'premium'",
             "3D_ANIMATED_FAMILY_FILM"
           ],
-          "path": "ai-sdk/image-models-2.md",
+          "path": "ai-sdk/amazon-bedrock-provider-image-models.md",
           "tokens": 2308
         },
         {
@@ -1531,7 +1531,7 @@
             "accessKeyId"
           ],
           "path": "ai-sdk/bedrock-anthropic-provider-usage.md",
-          "tokens": 2704
+          "tokens": 2706
         },
         {
           "id": "groq-provider",
@@ -1550,7 +1550,7 @@
             "deepseek-r1-distill-llama-70b"
           ],
           "path": "ai-sdk/groq-provider.md",
-          "tokens": 3877
+          "tokens": 3879
         },
         {
           "id": "fal-provider",
@@ -1569,7 +1569,7 @@
             "fal-ai/flux-pro/kontext"
           ],
           "path": "ai-sdk/fal-provider.md",
-          "tokens": 3385
+          "tokens": 3388
         },
         {
           "id": "assemblyai-provider",
@@ -1588,7 +1588,7 @@
             "contentSafety"
           ],
           "path": "ai-sdk/assemblyai-provider.md",
-          "tokens": 1613
+          "tokens": 1617
         },
         {
           "id": "deepinfra-provider",
@@ -1607,7 +1607,7 @@
             "streamText"
           ],
           "path": "ai-sdk/deepinfra-provider.md",
-          "tokens": 2790
+          "tokens": 2793
         },
         {
           "id": "deepgram-provider",
@@ -1626,7 +1626,7 @@
             "providerOptions"
           ],
           "path": "ai-sdk/deepgram-provider.md",
-          "tokens": 1967
+          "tokens": 1972
         },
         {
           "id": "black-forest-labs-provider",
@@ -1645,7 +1645,7 @@
             "flux-pro-1.1-ultra"
           ],
           "path": "ai-sdk/black-forest-labs-provider.md",
-          "tokens": 2444
+          "tokens": 2447
         },
         {
           "id": "gladia-provider",
@@ -1664,7 +1664,7 @@
             "model"
           ],
           "path": "ai-sdk/gladia-provider.md",
-          "tokens": 1554
+          "tokens": 1556
         },
         {
           "id": "lmnt-provider",
@@ -1683,10 +1683,10 @@
             "providerOptions"
           ],
           "path": "ai-sdk/lmnt-provider.md",
-          "tokens": 1359
+          "tokens": 1365
         },
         {
-          "id": "language-models-3",
+          "id": "google-generative-ai-provider-language-models",
           "title": "Language Models",
           "description": "You can create models that call the Google Generative AI API using the provider instance.\nThe first argument is the m...",
           "tags": [
@@ -1701,11 +1701,11 @@
             "HARM_CATEGORY_SEXUALLY_EXPLICIT",
             "HARM_CATEGORY_CIVIC_INTEGRITY"
           ],
-          "path": "ai-sdk/language-models-3.md",
+          "path": "ai-sdk/google-generative-ai-provider-language-models.md",
           "tokens": 8338
         },
         {
-          "id": "embedding-models-2",
+          "id": "google-generative-ai-provider-embedding-models",
           "title": "Embedding Models",
           "description": "You can create models that call the Google Generative AI embeddings API\nusing the .embedding() factory method.",
           "tags": [
@@ -1720,11 +1720,11 @@
             "RETRIEVAL_DOCUMENT",
             "RETRIEVAL_QUERY"
           ],
-          "path": "ai-sdk/embedding-models-2.md",
+          "path": "ai-sdk/google-generative-ai-provider-embedding-models.md",
           "tokens": 624
         },
         {
-          "id": "image-models-3",
+          "id": "google-generative-ai-provider-image-models",
           "title": "Image Models",
           "description": "You can create image models that call the Google Generative AI API using the .image() factory method.\nFor more on ima...",
           "tags": [
@@ -1739,8 +1739,8 @@
             "aspectRatio",
             "imagen-4.0-generate-001"
           ],
-          "path": "ai-sdk/image-models-3.md",
-          "tokens": 1165
+          "path": "ai-sdk/google-generative-ai-provider-image-models.md",
+          "tokens": 1167
         },
         {
           "id": "hume-provider",
@@ -1759,10 +1759,10 @@
             "instructions"
           ],
           "path": "ai-sdk/hume-provider.md",
-          "tokens": 1395
+          "tokens": 1400
         },
         {
-          "id": "provider-instance-2",
+          "id": "google-vertex-provider-usage-provider-instance",
           "title": "Provider Instance",
           "description": "You can import the default provider instance vertex from @ai-sdk/google-vertex:",
           "tags": [
@@ -1777,11 +1777,11 @@
             "AuthClient",
             "Record<string, string | undefined>"
           ],
-          "path": "ai-sdk/provider-instance-2.md",
+          "path": "ai-sdk/google-vertex-provider-usage-provider-instance.md",
           "tokens": 2133
         },
         {
-          "id": "language-models-4",
+          "id": "google-vertex-provider-usage-language-models",
           "title": "Language Models",
           "description": "You can create models that call the Vertex API using the provider instance.\nThe first argument is the model id, e.g. ...",
           "tags": [
@@ -1796,7 +1796,7 @@
             "HARM_BLOCK_THRESHOLD_UNSPECIFIED",
             "BLOCK_LOW_AND_ABOVE"
           ],
-          "path": "ai-sdk/language-models-4.md",
+          "path": "ai-sdk/google-vertex-provider-usage-language-models.md",
           "tokens": 2460
         },
         {
@@ -1815,7 +1815,7 @@
           "tokens": 1602
         },
         {
-          "id": "embedding-models-3",
+          "id": "google-vertex-provider-usage-embedding-models",
           "title": "Embedding Models",
           "description": "You can create models that call the Google Vertex AI embeddings API using the .embeddingModel() factory method:",
           "tags": [
@@ -1830,11 +1830,11 @@
             "CODE_RETRIEVAL_QUERY",
             "taskType"
           ],
-          "path": "ai-sdk/embedding-models-3.md",
+          "path": "ai-sdk/google-vertex-provider-usage-embedding-models.md",
           "tokens": 648
         },
         {
-          "id": "image-models-4",
+          "id": "google-vertex-provider-usage-image-models",
           "title": "Image Models",
           "description": "You can create image models using the .image() factory method. The Google Vertex provider supports both Imagen and Ge...",
           "tags": [
@@ -1849,7 +1849,7 @@
             "block_none",
             "true"
           ],
-          "path": "ai-sdk/image-models-4.md",
+          "path": "ai-sdk/google-vertex-provider-usage-image-models.md",
           "tokens": 2278
         },
         {
@@ -1888,7 +1888,7 @@
             "fetch"
           ],
           "path": "ai-sdk/google-vertex-anthropic-provider-usage.md",
-          "tokens": 4763
+          "tokens": 4766
         },
         {
           "id": "rev-ai-provider",
@@ -1907,7 +1907,7 @@
             "en"
           ],
           "path": "ai-sdk/rev-ai-provider.md",
-          "tokens": 1685
+          "tokens": 1687
         },
         {
           "id": "baseten-provider",
@@ -1926,7 +1926,7 @@
             "streamText"
           ],
           "path": "ai-sdk/baseten-provider.md",
-          "tokens": 1728
+          "tokens": 1732
         },
         {
           "id": "hugging-face-provider",
@@ -1945,7 +1945,7 @@
             "providerOptions.huggingface"
           ],
           "path": "ai-sdk/hugging-face-provider.md",
-          "tokens": 1751
+          "tokens": 1754
         },
         {
           "id": "mistral-ai-provider",
@@ -1964,7 +1964,7 @@
             "false"
           ],
           "path": "ai-sdk/mistral-ai-provider.md",
-          "tokens": 2433
+          "tokens": 2437
         },
         {
           "id": "together-ai-provider",
@@ -1983,7 +1983,7 @@
             "<think>"
           ],
           "path": "ai-sdk/together-ai-provider.md",
-          "tokens": 2957
+          "tokens": 2959
         },
         {
           "id": "cohere-provider",
@@ -2002,7 +2002,7 @@
             "streamText"
           ],
           "path": "ai-sdk/cohere-provider.md",
-          "tokens": 2206
+          "tokens": 2209
         },
         {
           "id": "fireworks-provider",
@@ -2021,7 +2021,7 @@
             "reasoning"
           ],
           "path": "ai-sdk/fireworks-provider.md",
-          "tokens": 2818
+          "tokens": 2821
         },
         {
           "id": "deepseek-provider",
@@ -2040,7 +2040,7 @@
             "thinking"
           ],
           "path": "ai-sdk/deepseek-provider.md",
-          "tokens": 1234
+          "tokens": 1238
         },
         {
           "id": "moonshot-ai-provider",
@@ -2059,7 +2059,7 @@
             "kimi-k2-thinking"
           ],
           "path": "ai-sdk/moonshot-ai-provider.md",
-          "tokens": 1106
+          "tokens": 1108
         },
         {
           "id": "alibaba-provider",
@@ -2078,7 +2078,7 @@
             "streamText"
           ],
           "path": "ai-sdk/alibaba-provider.md",
-          "tokens": 2687
+          "tokens": 2690
         },
         {
           "id": "cerebras-provider",
@@ -2097,7 +2097,7 @@
             ".chat()"
           ],
           "path": "ai-sdk/cerebras-provider.md",
-          "tokens": 1208
+          "tokens": 1212
         },
         {
           "id": "replicate-provider",
@@ -2116,7 +2116,7 @@
             "$modelId:$versionId"
           ],
           "path": "ai-sdk/replicate-provider.md",
-          "tokens": 2488
+          "tokens": 2491
         },
         {
           "id": "prodia-provider",
@@ -2135,7 +2135,7 @@
             "size"
           ],
           "path": "ai-sdk/prodia-provider.md",
-          "tokens": 1510
+          "tokens": 1514
         },
         {
           "id": "perplexity-provider",
@@ -2154,7 +2154,7 @@
             "true"
           ],
           "path": "ai-sdk/perplexity-provider.md",
-          "tokens": 1451
+          "tokens": 1453
         },
         {
           "id": "luma-provider",
@@ -2173,7 +2173,7 @@
             "weight"
           ],
           "path": "ai-sdk/luma-provider.md",
-          "tokens": 1841
+          "tokens": 1844
         },
         {
           "id": "bytedance-provider",
@@ -2192,7 +2192,7 @@
             "image"
           ],
           "path": "ai-sdk/bytedance-provider.md",
-          "tokens": 2385
+          "tokens": 2388
         },
         {
           "id": "kling-ai-provider",
@@ -2211,7 +2211,7 @@
             "'std'"
           ],
           "path": "ai-sdk/kling-ai-provider.md",
-          "tokens": 2858
+          "tokens": 2861
         },
         {
           "id": "elevenlabs-provider",
@@ -2230,7 +2230,7 @@
             "providerOptions"
           ],
           "path": "ai-sdk/elevenlabs-provider.md",
-          "tokens": 2319
+          "tokens": 2322
         },
         {
           "id": "lm-studio-provider",
@@ -2248,7 +2248,7 @@
             "embed"
           ],
           "path": "ai-sdk/lm-studio-provider.md",
-          "tokens": 937
+          "tokens": 940
         },
         {
           "id": "nvidia-nim-provider",
@@ -2263,7 +2263,7 @@
             "meta/llama-3.3-70b-instruct"
           ],
           "path": "ai-sdk/nvidia-nim-provider.md",
-          "tokens": 782
+          "tokens": 785
         },
         {
           "id": "clarifai-provider",
@@ -2277,7 +2277,7 @@
             "streamText"
           ],
           "path": "ai-sdk/clarifai-provider.md",
-          "tokens": 807
+          "tokens": 809
         },
         {
           "id": "heroku-provider",
@@ -2295,7 +2295,7 @@
             "Output"
           ],
           "path": "ai-sdk/heroku-provider.md",
-          "tokens": 683
+          "tokens": 691
         },
         {
           "id": "openai-compatible-providers",
@@ -2412,7 +2412,7 @@
           "tokens": 4862
         },
         {
-          "id": "default-value-2",
+          "id": "limitations-default-value",
           "title": "Default value",
           "description": "The DEFAULT clause specifies a default value to use for the column if no value\nis explicitly provided by the user whe...",
           "tags": [
@@ -2427,11 +2427,11 @@
             "casing",
             "0"
           ],
-          "path": "drizzle/default-value-2.md",
+          "path": "drizzle/limitations-default-value.md",
           "tokens": 3682
         },
         {
-          "id": "default-value-3",
+          "id": "default-value-2",
           "title": "Default value",
           "description": "The DEFAULT clause specifies a default value to use for the column if no value\nis explicitly provided by the user whe...",
           "tags": [
@@ -2446,7 +2446,7 @@
             "$onUpdate()",
             "$onUpdateFn()"
           ],
-          "path": "drizzle/default-value-3.md",
+          "path": "drizzle/default-value-2.md",
           "tokens": 3983
         },
         {
@@ -2469,6 +2469,25 @@
           "tokens": 2075
         },
         {
+          "id": "default-value-3",
+          "title": "Default value",
+          "description": "The DEFAULT clause specifies a default value to use for the column if no value\nis explicitly provided by the user whe...",
+          "tags": [
+            "DEFAULT",
+            "INSERT",
+            "NULL",
+            "$default()",
+            "$defaultFn()",
+            "uuid",
+            "cuid",
+            "cuid2",
+            "$onUpdate()",
+            "$onUpdateFn()"
+          ],
+          "path": "drizzle/default-value-3.md",
+          "tokens": 3254
+        },
+        {
           "id": "default-value-4",
           "title": "Default value",
           "description": "The DEFAULT clause specifies a default value to use for the column if no value\nis explicitly provided by the user whe...",
@@ -2485,29 +2504,10 @@
             "$onUpdateFn()"
           ],
           "path": "drizzle/default-value-4.md",
-          "tokens": 3254
-        },
-        {
-          "id": "default-value-5",
-          "title": "Default value",
-          "description": "The DEFAULT clause specifies a default value to use for the column if no value\nis explicitly provided by the user whe...",
-          "tags": [
-            "DEFAULT",
-            "INSERT",
-            "NULL",
-            "$default()",
-            "$defaultFn()",
-            "uuid",
-            "cuid",
-            "cuid2",
-            "$onUpdate()",
-            "$onUpdateFn()"
-          ],
-          "path": "drizzle/default-value-5.md",
           "tokens": 2075
         },
         {
-          "id": "default-value-6",
+          "id": "default-value-5",
           "title": "Default value",
           "description": "The DEFAULT clause specifies a default value to use for the column if no value\nis explicitly provided by the user whe...",
           "tags": [
@@ -2522,7 +2522,7 @@
             "uuid",
             "cuid"
           ],
-          "path": "drizzle/default-value-6.md",
+          "path": "drizzle/default-value-5.md",
           "tokens": 1628
         },
         {
@@ -3727,7 +3727,7 @@
           "tokens": 715
         },
         {
-          "id": "sqlite-2",
+          "id": "example-2-sqlite",
           "title": "SQLite",
           "description": "To set current timestamp as a default value in SQLite, you can use sql operator with current_timestamp constant which...",
           "tags": [
@@ -3742,22 +3742,22 @@
             "mode",
             "timestamp"
           ],
-          "path": "drizzle/sqlite-2.md",
+          "path": "drizzle/example-2-sqlite.md",
           "tokens": 1592
         },
         {
-          "id": "mysql-2",
+          "id": "example-2-mysql",
           "title": "MySQL",
           "description": "In MySQL, the default collation setting for string comparison is case-insensitive, which means that when performing o...",
           "tags": [
             "email",
             "lower"
           ],
-          "path": "drizzle/mysql-2.md",
+          "path": "drizzle/example-2-mysql.md",
           "tokens": 549
         },
         {
-          "id": "sqlite-3",
+          "id": "sqlite-2",
           "title": "SQLite",
           "description": "To implement a unique and case-insensitive email handling in SQLite with Drizzle, you can create a unique index on th...",
           "tags": [
@@ -3769,7 +3769,7 @@
             "(case",
             "end)"
           ],
-          "path": "drizzle/sqlite-3.md",
+          "path": "drizzle/sqlite-2.md",
           "tokens": 1052
         },
         {
@@ -3791,7 +3791,7 @@
           "tokens": 1755
         },
         {
-          "id": "mysql-3",
+          "id": "mysql-2",
           "title": "MySQL",
           "description": "To implement an upsert query in MySQL with Drizzle you can use .onDuplicateKeyUpdate() method. MySQL will automatical...",
           "tags": [
@@ -3806,7 +3806,7 @@
             "OpenAI",
             "gt"
           ],
-          "path": "drizzle/mysql-3.md",
+          "path": "drizzle/mysql-2.md",
           "tokens": 2326
         },
         {
@@ -4179,11 +4179,11 @@
           "tokens": 7008
         },
         {
-          "id": "introduction-2",
+          "id": "sequences-introduction",
           "title": "Introduction",
           "description": "<IsSupportedChipGroup chips={{ 'PostgreSQL': true, 'SQLite': false, 'MySQL': false, 'SingleStore': false, 'MSSQL': fa...",
           "tags": [],
-          "path": "drizzle/introduction-2.md",
+          "path": "drizzle/sequences-introduction.md",
           "tokens": 15006
         },
         {
@@ -4249,7 +4249,7 @@
           "tokens": 2213
         },
         {
-          "id": "introduction-3",
+          "id": "transactions-introduction",
           "title": "Introduction",
           "description": "SQL transaction is a grouping of one or more SQL statements that interact with a database.\nA transaction in its entir...",
           "tags": [
@@ -4264,7 +4264,7 @@
             "schema.ts",
             "netlify/edge-functions/common"
           ],
-          "path": "drizzle/introduction-3.md",
+          "path": "drizzle/transactions-introduction.md",
           "tokens": 8722
         },
         {
@@ -4371,7 +4371,7 @@
           "tokens": 1543
         },
         {
-          "id": "query-examples-2",
+          "id": "transactions-query-examples",
           "title": "Query examples",
           "description": "For instance, we create src/db/queries folder and separate files for each operation: insert, select, update, delete.",
           "tags": [
@@ -4383,7 +4383,7 @@
             "values",
             "run"
           ],
-          "path": "drizzle/query-examples-2.md",
+          "path": "drizzle/transactions-query-examples.md",
           "tokens": 1245
         },
         {
@@ -4406,7 +4406,7 @@
           "tokens": 1317
         },
         {
-          "id": "query-examples-3",
+          "id": "query-examples-2",
           "title": "Query examples",
           "description": "For instance, we create src/db/queries folder and separate files for each operation: insert, select, update, delete.",
           "tags": [
@@ -4416,7 +4416,7 @@
             "dotenv",
             "@vercel/postgres"
           ],
-          "path": "drizzle/query-examples-3.md",
+          "path": "drizzle/query-examples-2.md",
           "tokens": 1108
         },
         {
@@ -4439,7 +4439,7 @@
           "tokens": 1238
         },
         {
-          "id": "query-examples-4",
+          "id": "query-examples-3",
           "title": "Query examples",
           "description": "For instance, we create src/db/queries folder and separate files for each operation: insert, select, update, delete.",
           "tags": [
@@ -4448,7 +4448,7 @@
             "getTableColumns",
             "postgres"
           ],
-          "path": "drizzle/query-examples-4.md",
+          "path": "drizzle/query-examples-3.md",
           "tokens": 1179
         },
         {
@@ -4471,7 +4471,7 @@
           "tokens": 1465
         },
         {
-          "id": "query-examples-5",
+          "id": "query-examples-4",
           "title": "Query examples",
           "description": "For instance, we create src/db/queries folder and separate files for each operation: insert, select, update, delete.",
           "tags": [
@@ -4483,11 +4483,11 @@
             "--force",
             "--legacy-peer-deps"
           ],
-          "path": "drizzle/query-examples-5.md",
+          "path": "drizzle/query-examples-4.md",
           "tokens": 1273
         },
         {
-          "id": "setup-neon-and-drizzle-orm-2",
+          "id": "transactions-setup-neon-and-drizzle-orm",
           "title": "Setup Neon and Drizzle ORM",
           "description": "Log in to the Neon Console and navigate to the Projects section. Select a project or click the New Project button to ...",
           "tags": [
@@ -4502,7 +4502,7 @@
             "id",
             "text"
           ],
-          "path": "drizzle/setup-neon-and-drizzle-orm-2.md",
+          "path": "drizzle/transactions-setup-neon-and-drizzle-orm.md",
           "tokens": 1312
         },
         {
@@ -4636,19 +4636,6 @@
       "description": "Lightweight, ultrafast web framework for the Edge",
       "version": "4",
       "topics": [
-        {
-          "id": "start-of-hono-documentation",
-          "title": "Start of Hono documentation",
-          "description": "Hono - means flame🔥 in Japanese - is a small, simple, and ultrafast web framework built on Web Standards.\nIt works o...",
-          "tags": [
-            "RegExpRouter",
-            "hono/tiny",
-            "Context",
-            "hc"
-          ],
-          "path": "hono/start-of-hono-documentation.md",
-          "tokens": 2077
-        },
         {
           "id": "next-js",
           "title": "Next.js",
@@ -5746,7 +5733,7 @@
           "description": "@doc-version: >=v16.1.6\n@doc-version-notes: Some features may have extended or refined behavior in minor or patch rel...",
           "tags": [],
           "path": "nextjs/next-js-documentation.md",
-          "tokens": 505
+          "tokens": 514
         },
         {
           "id": "installation",
@@ -5765,7 +5752,7 @@
             "package.json"
           ],
           "path": "nextjs/installation.md",
-          "tokens": 2575
+          "tokens": 2581
         },
         {
           "id": "project-structure",
@@ -5784,7 +5771,7 @@
             ".env.local"
           ],
           "path": "nextjs/project-structure.md",
-          "tokens": 5459
+          "tokens": 5464
         },
         {
           "id": "layouts-and-pages",
@@ -5803,7 +5790,7 @@
             "[slug]"
           ],
           "path": "nextjs/layouts-and-pages.md",
-          "tokens": 3127
+          "tokens": 3133
         },
         {
           "id": "linking-and-navigating",
@@ -5822,7 +5809,7 @@
             "opacity: 0"
           ],
           "path": "nextjs/linking-and-navigating.md",
-          "tokens": 4170
+          "tokens": 4178
         },
         {
           "id": "server-and-client-components",
@@ -5841,7 +5828,7 @@
             "'use client'"
           ],
           "path": "nextjs/server-and-client-components.md",
-          "tokens": 5718
+          "tokens": 5723
         },
         {
           "id": "cache-components",
@@ -5860,7 +5847,7 @@
             "headers()"
           ],
           "path": "nextjs/cache-components.md",
-          "tokens": 6839
+          "tokens": 6843
         },
         {
           "id": "fetching-data",
@@ -5879,7 +5866,7 @@
             "cache: 'force-cache'"
           ],
           "path": "nextjs/fetching-data.md",
-          "tokens": 5228
+          "tokens": 5232
         },
         {
           "id": "updating-data",
@@ -5898,7 +5885,7 @@
             "onClick"
           ],
           "path": "nextjs/updating-data.md",
-          "tokens": 3846
+          "tokens": 3853
         },
         {
           "id": "caching-and-revalidating",
@@ -5917,7 +5904,7 @@
             "next.revalidate"
           ],
           "path": "nextjs/caching-and-revalidating.md",
-          "tokens": 2783
+          "tokens": 2788
         },
         {
           "id": "error-handling",
@@ -5936,7 +5923,7 @@
             "useState"
           ],
           "path": "nextjs/error-handling.md",
-          "tokens": 2607
+          "tokens": 2609
         },
         {
           "id": "css",
@@ -5955,7 +5942,7 @@
             "<name>.module.css"
           ],
           "path": "nextjs/css.md",
-          "tokens": 2064
+          "tokens": 2070
         },
         {
           "id": "image-optimization",
@@ -5974,7 +5961,7 @@
             "fill"
           ],
           "path": "nextjs/image-optimization.md",
-          "tokens": 1452
+          "tokens": 1457
         },
         {
           "id": "font-optimization",
@@ -5990,7 +5977,7 @@
             "app"
           ],
           "path": "nextjs/font-optimization.md",
-          "tokens": 1236
+          "tokens": 1242
         },
         {
           "id": "metadata-and-og-images",
@@ -6009,7 +5996,7 @@
             "Slackbot"
           ],
           "path": "nextjs/metadata-and-og-images.md",
-          "tokens": 3150
+          "tokens": 3154
         },
         {
           "id": "route-handlers",
@@ -6028,7 +6015,7 @@
             "PATCH"
           ],
           "path": "nextjs/route-handlers.md",
-          "tokens": 2032
+          "tokens": 2034
         },
         {
           "id": "proxy",
@@ -6047,7 +6034,7 @@
             "app"
           ],
           "path": "nextjs/proxy.md",
-          "tokens": 885
+          "tokens": 888
         },
         {
           "id": "deploying",
@@ -6064,7 +6051,7 @@
             "output: \"export\""
           ],
           "path": "nextjs/deploying.md",
-          "tokens": 1270
+          "tokens": 1273
         },
         {
           "id": "upgrading",
@@ -6079,7 +6066,7 @@
             "authInterrupts"
           ],
           "path": "nextjs/upgrading.md",
-          "tokens": 558
+          "tokens": 561
         },
         {
           "id": "guides",
@@ -6087,7 +6074,7 @@
           "description": "",
           "tags": [],
           "path": "nextjs/guides.md",
-          "tokens": 527
+          "tokens": 532
         },
         {
           "id": "ai-coding-agents",
@@ -6105,7 +6092,7 @@
             "and"
           ],
           "path": "nextjs/ai-coding-agents.md",
-          "tokens": 869
+          "tokens": 872
         },
         {
           "id": "analytics",
@@ -6122,7 +6109,7 @@
             "id"
           ],
           "path": "nextjs/analytics.md",
-          "tokens": 1534
+          "tokens": 1539
         },
         {
           "id": "authentication",
@@ -6169,7 +6156,7 @@
             "taintUniqueValue"
           ],
           "path": "nextjs/authorization.md",
-          "tokens": 5465
+          "tokens": 5471
         },
         {
           "id": "backend-for-frontend",
@@ -6188,7 +6175,7 @@
             "sitemap.xml"
           ],
           "path": "nextjs/backend-for-frontend.md",
-          "tokens": 7289
+          "tokens": 7292
         },
         {
           "id": "caching",
@@ -6207,7 +6194,7 @@
             "MISS"
           ],
           "path": "nextjs/caching.md",
-          "tokens": 9343
+          "tokens": 9348
         },
         {
           "id": "ci-build-caching",
@@ -6226,7 +6213,7 @@
             "caches"
           ],
           "path": "nextjs/ci-build-caching.md",
-          "tokens": 1203
+          "tokens": 1209
         },
         {
           "id": "content-security-policy",
@@ -6245,7 +6232,7 @@
             "nonce"
           ],
           "path": "nextjs/content-security-policy.md",
-          "tokens": 4309
+          "tokens": 4312
         },
         {
           "id": "css-in-js",
@@ -6264,7 +6251,7 @@
             "styled-components"
           ],
           "path": "nextjs/css-in-js.md",
-          "tokens": 2089
+          "tokens": 2093
         },
         {
           "id": "custom-server",
@@ -6283,7 +6270,7 @@
             "{}"
           ],
           "path": "nextjs/custom-server.md",
-          "tokens": 1103
+          "tokens": 1107
         },
         {
           "id": "data-security",
@@ -6302,7 +6289,7 @@
             "publishVersion"
           ],
           "path": "nextjs/data-security.md",
-          "tokens": 4721
+          "tokens": 4724
         },
         {
           "id": "debugging",
@@ -6321,7 +6308,7 @@
             "cwd"
           ],
           "path": "nextjs/debugging.md",
-          "tokens": 1992
+          "tokens": 1995
         },
         {
           "id": "draft-mode",
@@ -6340,7 +6327,7 @@
             "/posts/one"
           ],
           "path": "nextjs/draft-mode.md",
-          "tokens": 1875
+          "tokens": 1881
         },
         {
           "id": "environment-variables",
@@ -6359,7 +6346,7 @@
             "process.env.DB_PASS"
           ],
           "path": "nextjs/environment-variables.md",
-          "tokens": 2538
+          "tokens": 2540
         },
         {
           "id": "forms",
@@ -6378,7 +6365,7 @@
             "type=\"email\""
           ],
           "path": "nextjs/forms.md",
-          "tokens": 3446
+          "tokens": 3447
         },
         {
           "id": "isr",
@@ -6397,7 +6384,7 @@
             "res.revalidate"
           ],
           "path": "nextjs/isr.md",
-          "tokens": 3110
+          "tokens": 3114
         },
         {
           "id": "instrumentation",
@@ -6415,7 +6402,7 @@
             "NEXT_RUNTIME"
           ],
           "path": "nextjs/instrumentation.md",
-          "tokens": 960
+          "tokens": 966
         },
         {
           "id": "internationalization",
@@ -6434,7 +6421,7 @@
             "app/[lang]"
           ],
           "path": "nextjs/internationalization.md",
-          "tokens": 2033
+          "tokens": 2036
         },
         {
           "id": "json-ld",
@@ -6452,7 +6439,7 @@
             "schema-dts"
           ],
           "path": "nextjs/json-ld.md",
-          "tokens": 716
+          "tokens": 720
         },
         {
           "id": "lazy-loading",
@@ -6470,7 +6457,7 @@
             "fuse.js"
           ],
           "path": "nextjs/lazy-loading.md",
-          "tokens": 1403
+          "tokens": 1410
         },
         {
           "id": "development-environment",
@@ -6489,7 +6476,7 @@
             "cg"
           ],
           "path": "nextjs/development-environment.md",
-          "tokens": 2743
+          "tokens": 2748
         },
         {
           "id": "next-js-mcp-server",
@@ -6507,7 +6494,7 @@
             "npm run dev"
           ],
           "path": "nextjs/next-js-mcp-server.md",
-          "tokens": 1699
+          "tokens": 1701
         },
         {
           "id": "mdx",
@@ -6526,7 +6513,7 @@
             ".js"
           ],
           "path": "nextjs/mdx.md",
-          "tokens": 4672
+          "tokens": 4676
         },
         {
           "id": "memory-usage",
@@ -6545,7 +6532,7 @@
             "NODE_OPTIONS=--inspect"
           ],
           "path": "nextjs/memory-usage.md",
-          "tokens": 1985
+          "tokens": 1992
         },
         {
           "id": "app-router",
@@ -6564,7 +6551,7 @@
             "next/legacy/image"
           ],
           "path": "nextjs/app-router.md",
-          "tokens": 9394
+          "tokens": 9399
         },
         {
           "id": "create-react-app",
@@ -6583,7 +6570,7 @@
             "src"
           ],
           "path": "nextjs/create-react-app.md",
-          "tokens": 5447
+          "tokens": 5449
         },
         {
           "id": "vite",
@@ -6602,7 +6589,7 @@
             "./node_modules"
           ],
           "path": "nextjs/vite.md",
-          "tokens": 5684
+          "tokens": 5691
         },
         {
           "id": "multi-zones",
@@ -6621,7 +6608,7 @@
             "destination"
           ],
           "path": "nextjs/multi-zones.md",
-          "tokens": 1658
+          "tokens": 1663
         },
         {
           "id": "opentelemetry",
@@ -6640,7 +6627,7 @@
             "process.env.NEXT_RUNTIME === 'nodejs'"
           ],
           "path": "nextjs/opentelemetry.md",
-          "tokens": 3442
+          "tokens": 3447
         },
         {
           "id": "package-bundling",
@@ -6656,7 +6643,7 @@
             "serverExternalPackages"
           ],
           "path": "nextjs/package-bundling.md",
-          "tokens": 2234
+          "tokens": 2238
         },
         {
           "id": "prefetching",
@@ -6675,7 +6662,7 @@
             "a"
           ],
           "path": "nextjs/prefetching.md",
-          "tokens": 3036
+          "tokens": 3040
         },
         {
           "id": "production",
@@ -6694,7 +6681,7 @@
             "<Image>"
           ],
           "path": "nextjs/production.md",
-          "tokens": 2566
+          "tokens": 2568
         },
         {
           "id": "pwas",
@@ -6713,7 +6700,7 @@
             "vibrate"
           ],
           "path": "nextjs/pwas.md",
-          "tokens": 5334
+          "tokens": 5338
         },
         {
           "id": "public-pages",
@@ -6725,7 +6712,7 @@
             "'use cache'"
           ],
           "path": "nextjs/public-pages.md",
-          "tokens": 2193
+          "tokens": 2197
         },
         {
           "id": "redirecting",
@@ -6744,7 +6731,7 @@
             "push"
           ],
           "path": "nextjs/redirecting.md",
-          "tokens": 4663
+          "tokens": 4665
         },
         {
           "id": "sass",
@@ -6762,7 +6749,7 @@
             "primaryColor"
           ],
           "path": "nextjs/sass.md",
-          "tokens": 659
+          "tokens": 662
         },
         {
           "id": "scripts",
@@ -6781,7 +6768,7 @@
             "next.config.js"
           ],
           "path": "nextjs/scripts.md",
-          "tokens": 1968
+          "tokens": 1972
         },
         {
           "id": "self-hosting",
@@ -6800,7 +6787,7 @@
             "revalidate: false"
           ],
           "path": "nextjs/self-hosting.md",
-          "tokens": 3736
+          "tokens": 3738
         },
         {
           "id": "spas",
@@ -6819,7 +6806,7 @@
             "fallback"
           ],
           "path": "nextjs/spas.md",
-          "tokens": 3917
+          "tokens": 3922
         },
         {
           "id": "static-exports",
@@ -6838,7 +6825,7 @@
             "window"
           ],
           "path": "nextjs/static-exports.md",
-          "tokens": 2471
+          "tokens": 2476
         },
         {
           "id": "tailwind-css-v3",
@@ -6851,7 +6838,7 @@
             "async"
           ],
           "path": "nextjs/tailwind-css-v3.md",
-          "tokens": 1079
+          "tokens": 1085
         },
         {
           "id": "cypress",
@@ -6870,7 +6857,7 @@
             "cy.visit(\"/\")"
           ],
           "path": "nextjs/cypress.md",
-          "tokens": 1882
+          "tokens": 1884
         },
         {
           "id": "jest",
@@ -6889,7 +6876,7 @@
             ".env"
           ],
           "path": "nextjs/jest.md",
-          "tokens": 2176
+          "tokens": 2179
         },
         {
           "id": "playwright",
@@ -6908,7 +6895,7 @@
             "npx playwright install-deps"
           ],
           "path": "nextjs/playwright.md",
-          "tokens": 1043
+          "tokens": 1046
         },
         {
           "id": "vitest",
@@ -6927,7 +6914,7 @@
             "app"
           ],
           "path": "nextjs/vitest.md",
-          "tokens": 1268
+          "tokens": 1274
         },
         {
           "id": "third-party-libraries",
@@ -6946,7 +6933,7 @@
             "GTM-"
           ],
           "path": "nextjs/third-party-libraries.md",
-          "tokens": 3526
+          "tokens": 3532
         },
         {
           "id": "codemods",
@@ -6965,7 +6952,7 @@
             "minor"
           ],
           "path": "nextjs/codemods.md",
-          "tokens": 4635
+          "tokens": 4642
         },
         {
           "id": "version-15",
@@ -6984,7 +6971,7 @@
             "data"
           ],
           "path": "nextjs/version-15.md",
-          "tokens": 4166
+          "tokens": 4170
         },
         {
           "id": "version-16",
@@ -7003,7 +6990,7 @@
             "experimental_ppr"
           ],
           "path": "nextjs/version-16.md",
-          "tokens": 9773
+          "tokens": 9775
         },
         {
           "id": "videos",
@@ -7022,7 +7009,7 @@
             "<video controls />"
           ],
           "path": "nextjs/videos.md",
-          "tokens": 4316
+          "tokens": 4327
         },
         {
           "id": "use-cache",
@@ -7041,7 +7028,7 @@
             "number"
           ],
           "path": "nextjs/use-cache.md",
-          "tokens": 5571
+          "tokens": 5577
         },
         {
           "id": "use-cache-private",
@@ -7060,7 +7047,7 @@
             "next.config.ts"
           ],
           "path": "nextjs/use-cache-private.md",
-          "tokens": 1715
+          "tokens": 1721
         },
         {
           "id": "use-cache-remote",
@@ -7079,7 +7066,7 @@
             "use cache: private"
           ],
           "path": "nextjs/use-cache-remote.md",
-          "tokens": 5768
+          "tokens": 5771
         },
         {
           "id": "use-client",
@@ -7091,7 +7078,7 @@
             "Counter"
           ],
           "path": "nextjs/use-client.md",
-          "tokens": 932
+          "tokens": 935
         },
         {
           "id": "use-server",
@@ -7103,7 +7090,7 @@
             "actions.ts"
           ],
           "path": "nextjs/use-server.md",
-          "tokens": 1306
+          "tokens": 1312
         },
         {
           "id": "font",
@@ -7122,7 +7109,7 @@
             "preload"
           ],
           "path": "nextjs/font.md",
-          "tokens": 6585
+          "tokens": 6590
         },
         {
           "id": "form-component",
@@ -7141,7 +7128,7 @@
             "replace"
           ],
           "path": "nextjs/form-component.md",
-          "tokens": 3035
+          "tokens": 3039
         },
         {
           "id": "reference",
@@ -7198,7 +7185,7 @@
             "v15.3.0"
           ],
           "path": "nextjs/version-history.md",
-          "tokens": 3321
+          "tokens": 3326
         },
         {
           "id": "link-component",
@@ -7217,7 +7204,7 @@
             "prefetch={false}"
           ],
           "path": "nextjs/link-component.md",
-          "tokens": 5907
+          "tokens": 5912
         },
         {
           "id": "script-component",
@@ -7236,7 +7223,7 @@
             "onError={onErrorFunc}"
           ],
           "path": "nextjs/script-component.md",
-          "tokens": 3228
+          "tokens": 3239
         },
         {
           "id": "default-js",
@@ -7255,7 +7242,7 @@
             "Promise<{ artist: 'zack' }>"
           ],
           "path": "nextjs/default-js.md",
-          "tokens": 871
+          "tokens": 876
         },
         {
           "id": "dynamic-segments",
@@ -7274,7 +7261,7 @@
             "{ slug: 'a' }"
           ],
           "path": "nextjs/dynamic-segments.md",
-          "tokens": 3584
+          "tokens": 3587
         },
         {
           "id": "error-js",
@@ -7293,7 +7280,7 @@
             "reset()"
           ],
           "path": "nextjs/error-js.md",
-          "tokens": 2707
+          "tokens": 2716
         },
         {
           "id": "instrumentation-js",
@@ -7312,7 +7299,7 @@
             "'render'"
           ],
           "path": "nextjs/instrumentation-js.md",
-          "tokens": 1191
+          "tokens": 1198
         },
         {
           "id": "instrumentation-client-js",
@@ -7328,7 +7315,7 @@
             "instrumentation-client"
           ],
           "path": "nextjs/instrumentation-client-js.md",
-          "tokens": 1567
+          "tokens": 1573
         },
         {
           "id": "intercepting-routes",
@@ -7347,7 +7334,7 @@
             "feed"
           ],
           "path": "nextjs/intercepting-routes.md",
-          "tokens": 900
+          "tokens": 903
         },
         {
           "id": "layout-js",
@@ -7366,7 +7353,7 @@
             "app/shop/[tag]/[item]/layout.js"
           ],
           "path": "nextjs/layout-js.md",
-          "tokens": 4637
+          "tokens": 4641
         },
         {
           "id": "loading-js",
@@ -7385,7 +7372,7 @@
             "notFound"
           ],
           "path": "nextjs/loading-js.md",
-          "tokens": 2475
+          "tokens": 2485
         },
         {
           "id": "not-found-js",
@@ -7404,7 +7391,7 @@
             "globalNotFound"
           ],
           "path": "nextjs/not-found-js.md",
-          "tokens": 1828
+          "tokens": 1830
         },
         {
           "id": "page-js",
@@ -7423,7 +7410,7 @@
             "/shop/1/2"
           ],
           "path": "nextjs/page-js.md",
-          "tokens": 2045
+          "tokens": 2049
         },
         {
           "id": "parallel-routes",
@@ -7442,7 +7429,7 @@
             "app/page.js"
           ],
           "path": "nextjs/parallel-routes.md",
-          "tokens": 3660
+          "tokens": 3663
         },
         {
           "id": "proxy-js",
@@ -7461,7 +7448,7 @@
             ".page.ts"
           ],
           "path": "nextjs/proxy-js.md",
-          "tokens": 7047
+          "tokens": 7053
         },
         {
           "id": "route-js",
@@ -7480,7 +7467,7 @@
             "cookies"
           ],
           "path": "nextjs/route-js.md",
-          "tokens": 5352
+          "tokens": 5362
         },
         {
           "id": "route-segment-config",
@@ -7499,7 +7486,7 @@
             "false \\| 0 \\| number"
           ],
           "path": "nextjs/route-segment-config.md",
-          "tokens": 4241
+          "tokens": 4246
         },
         {
           "id": "template-js",
@@ -7518,7 +7505,7 @@
             "v13.0.0"
           ],
           "path": "nextjs/template-js.md",
-          "tokens": 1194
+          "tokens": 1199
         },
         {
           "id": "unauthorized-js",
@@ -7537,7 +7524,7 @@
             "proxy.ts"
           ],
           "path": "nextjs/unauthorized-js.md",
-          "tokens": 1064
+          "tokens": 1077
         },
         {
           "id": "favicon-icon-and-apple-icon",
@@ -7556,7 +7543,7 @@
             ".png"
           ],
           "path": "nextjs/favicon-icon-and-apple-icon.md",
-          "tokens": 2333
+          "tokens": 2337
         },
         {
           "id": "manifest-json",
@@ -7571,7 +7558,7 @@
             "MetadataRoute.Manifest"
           ],
           "path": "nextjs/manifest-json.md",
-          "tokens": 534
+          "tokens": 544
         },
         {
           "id": "opengraph-image-and-twitter-image",
@@ -7590,7 +7577,7 @@
             "twitter-image.alt"
           ],
           "path": "nextjs/opengraph-image-and-twitter-image.md",
-          "tokens": 4166
+          "tokens": 4169
         },
         {
           "id": "robots-txt",
@@ -7607,7 +7594,7 @@
             "robots"
           ],
           "path": "nextjs/robots-txt.md",
-          "tokens": 762
+          "tokens": 766
         },
         {
           "id": "sitemap-xml",
@@ -7626,7 +7613,7 @@
             "app/products/sitemap.xml"
           ],
           "path": "nextjs/sitemap-xml.md",
-          "tokens": 2909
+          "tokens": 2912
         },
         {
           "id": "functions",
@@ -7634,7 +7621,7 @@
           "description": "",
           "tags": [],
           "path": "nextjs/functions.md",
-          "tokens": 621
+          "tokens": 623
         },
         {
           "id": "after",
@@ -7653,7 +7640,7 @@
             "headers()"
           ],
           "path": "nextjs/after.md",
-          "tokens": 2807
+          "tokens": 2810
         },
         {
           "id": "cachelife",
@@ -7672,7 +7659,7 @@
             "max"
           ],
           "path": "nextjs/cachelife.md",
-          "tokens": 4064
+          "tokens": 4067
         },
         {
           "id": "cachetag",
@@ -7691,7 +7678,7 @@
             "unstable_noStore"
           ],
           "path": "nextjs/cachetag.md",
-          "tokens": 1725
+          "tokens": 1732
         },
         {
           "id": "cookies",
@@ -7710,7 +7697,7 @@
             "value"
           ],
           "path": "nextjs/cookies.md",
-          "tokens": 2992
+          "tokens": 2995
         },
         {
           "id": "draftmode",
@@ -7729,7 +7716,7 @@
             "prefetch={false}"
           ],
           "path": "nextjs/draftmode.md",
-          "tokens": 1221
+          "tokens": 1223
         },
         {
           "id": "fetch",
@@ -7748,7 +7735,7 @@
             "no-store"
           ],
           "path": "nextjs/fetch.md",
-          "tokens": 1276
+          "tokens": 1279
         },
         {
           "id": "forbidden",
@@ -7762,7 +7749,7 @@
             "v15.1.0"
           ],
           "path": "nextjs/forbidden.md",
-          "tokens": 1141
+          "tokens": 1147
         },
         {
           "id": "generateimagemetadata",
@@ -7781,7 +7768,7 @@
             "/shop/1/2"
           ],
           "path": "nextjs/generateimagemetadata.md",
-          "tokens": 2021
+          "tokens": 2026
         },
         {
           "id": "generatemetadata-function",
@@ -7803,7 +7790,7 @@
           "tokens": 843
         },
         {
-          "id": "reference-2",
+          "id": "generatemetadata-reference",
           "title": "Reference",
           "description": "generateMetadata function accepts the following parameters:",
           "tags": [
@@ -7818,7 +7805,7 @@
             "{ tag: '1', item: '2' }",
             "app/shop/[...slug]/page.js"
           ],
-          "path": "nextjs/reference-2.md",
+          "path": "nextjs/generatemetadata-reference.md",
           "tokens": 8516
         },
         {
@@ -7838,7 +7825,7 @@
             "headers()"
           ],
           "path": "nextjs/behavior.md",
-          "tokens": 2249
+          "tokens": 2254
         },
         {
           "id": "generatesitemaps",
@@ -7857,7 +7844,7 @@
             "/product/sitemap.xml/1"
           ],
           "path": "nextjs/generatesitemaps.md",
-          "tokens": 760
+          "tokens": 766
         },
         {
           "id": "generatestaticparams",
@@ -7876,7 +7863,7 @@
             "next dev"
           ],
           "path": "nextjs/generatestaticparams.md",
-          "tokens": 4515
+          "tokens": 4520
         },
         {
           "id": "generateviewport",
@@ -7895,7 +7882,7 @@
             "themeColor"
           ],
           "path": "nextjs/generateviewport.md",
-          "tokens": 2126
+          "tokens": 2129
         },
         {
           "id": "headers",
@@ -7914,7 +7901,7 @@
             "Headers.values()"
           ],
           "path": "nextjs/headers.md",
-          "tokens": 957
+          "tokens": 962
         },
         {
           "id": "imageresponse",
@@ -7933,7 +7920,7 @@
             "next/server"
           ],
           "path": "nextjs/imageresponse.md",
-          "tokens": 1422
+          "tokens": 1426
         },
         {
           "id": "nextrequest",
@@ -7952,7 +7939,7 @@
             "clear()"
           ],
           "path": "nextjs/nextrequest.md",
-          "tokens": 903
+          "tokens": 907
         },
         {
           "id": "nextresponse",
@@ -7971,7 +7958,7 @@
             "json()"
           ],
           "path": "nextjs/nextresponse.md",
-          "tokens": 1893
+          "tokens": 1901
         },
         {
           "id": "permanentredirect",
@@ -7990,7 +7977,7 @@
             "replace"
           ],
           "path": "nextjs/permanentredirect.md",
-          "tokens": 791
+          "tokens": 794
         },
         {
           "id": "redirect",
@@ -8009,7 +7996,7 @@
             "RedirectType"
           ],
           "path": "nextjs/redirect.md",
-          "tokens": 2309
+          "tokens": 2316
         },
         {
           "id": "revalidatepath",
@@ -8028,7 +8015,7 @@
             "/product/1"
           ],
           "path": "nextjs/revalidatepath.md",
-          "tokens": 1715
+          "tokens": 1719
         },
         {
           "id": "revalidatetag",
@@ -8047,7 +8034,7 @@
             "fetch"
           ],
           "path": "nextjs/revalidatetag.md",
-          "tokens": 1468
+          "tokens": 1472
         },
         {
           "id": "unauthorized",
@@ -8061,7 +8048,7 @@
             "v15.1.0"
           ],
           "path": "nextjs/unauthorized.md",
-          "tokens": 1446
+          "tokens": 1451
         },
         {
           "id": "unstable-cache",
@@ -8080,7 +8067,7 @@
             "revalidate"
           ],
           "path": "nextjs/unstable-cache.md",
-          "tokens": 1308
+          "tokens": 1319
         },
         {
           "id": "unstable-rethrow",
@@ -8099,7 +8086,7 @@
             "headers"
           ],
           "path": "nextjs/unstable-rethrow.md",
-          "tokens": 752
+          "tokens": 755
         },
         {
           "id": "updatetag",
@@ -8117,7 +8104,7 @@
             "revalidatePath"
           ],
           "path": "nextjs/updatetag.md",
-          "tokens": 1240
+          "tokens": 1244
         },
         {
           "id": "uselinkstatus",
@@ -8136,7 +8123,7 @@
             "v15.3.0"
           ],
           "path": "nextjs/uselinkstatus.md",
-          "tokens": 1717
+          "tokens": 1720
         },
         {
           "id": "useparams",
@@ -8155,7 +8142,7 @@
             "{ slug: '1' }"
           ],
           "path": "nextjs/useparams.md",
-          "tokens": 611
+          "tokens": 615
         },
         {
           "id": "usepathname",
@@ -8174,7 +8161,7 @@
             "/"
           ],
           "path": "nextjs/usepathname.md",
-          "tokens": 1443
+          "tokens": 1448
         },
         {
           "id": "usereportwebvitals",
@@ -8193,7 +8180,7 @@
             "\"navigate\""
           ],
           "path": "nextjs/usereportwebvitals.md",
-          "tokens": 1493
+          "tokens": 1496
         },
         {
           "id": "userouter",
@@ -8212,7 +8199,7 @@
             "router.replace"
           ],
           "path": "nextjs/userouter.md",
-          "tokens": 1545
+          "tokens": 1550
         },
         {
           "id": "usesearchparams",
@@ -8231,7 +8218,7 @@
             "null"
           ],
           "path": "nextjs/usesearchparams.md",
-          "tokens": 3503
+          "tokens": 3510
         },
         {
           "id": "useselectedlayoutsegment",
@@ -8250,7 +8237,7 @@
             "/"
           ],
           "path": "nextjs/useselectedlayoutsegment.md",
-          "tokens": 1538
+          "tokens": 1545
         },
         {
           "id": "useselectedlayoutsegments",
@@ -8269,7 +8256,7 @@
             "[]"
           ],
           "path": "nextjs/useselectedlayoutsegments.md",
-          "tokens": 951
+          "tokens": 954
         },
         {
           "id": "useragent",
@@ -8288,7 +8275,7 @@
             "console"
           ],
           "path": "nextjs/useragent.md",
-          "tokens": 748
+          "tokens": 757
         },
         {
           "id": "next-config-js",
@@ -8307,7 +8294,7 @@
             "next/experimental/testing/server"
           ],
           "path": "nextjs/next-config-js.md",
-          "tokens": 2274
+          "tokens": 2281
         },
         {
           "id": "experimental-adapterpath",
@@ -8326,7 +8313,7 @@
             "sourceRegex"
           ],
           "path": "nextjs/experimental-adapterpath.md",
-          "tokens": 3014
+          "tokens": 3025
         },
         {
           "id": "assetprefix",
@@ -8345,7 +8332,7 @@
             "forbidden"
           ],
           "path": "nextjs/assetprefix.md",
-          "tokens": 1298
+          "tokens": 1313
         },
         {
           "id": "browserdebuginfointerminal",
@@ -8364,7 +8351,7 @@
             "cacheTag"
           ],
           "path": "nextjs/browserdebuginfointerminal.md",
-          "tokens": 1223
+          "tokens": 1232
         },
         {
           "id": "cachehandlers",
@@ -8383,7 +8370,7 @@
             "CacheHandler"
           ],
           "path": "nextjs/cachehandlers.md",
-          "tokens": 3874
+          "tokens": 3877
         },
         {
           "id": "cachelife-2",
@@ -8402,7 +8389,7 @@
             "gzip"
           ],
           "path": "nextjs/cachelife-2.md",
-          "tokens": 1763
+          "tokens": 1777
         },
         {
           "id": "deploymentid",
@@ -8421,7 +8408,7 @@
             "v14.1.4"
           ],
           "path": "nextjs/deploymentid.md",
-          "tokens": 728
+          "tokens": 732
         },
         {
           "id": "devindicators",
@@ -8440,7 +8427,7 @@
             "buildActivity"
           ],
           "path": "nextjs/devindicators.md",
-          "tokens": 1317
+          "tokens": 1330
         },
         {
           "id": "exportpathmap",
@@ -8459,7 +8446,7 @@
             "pages/post.js"
           ],
           "path": "nextjs/exportpathmap.md",
-          "tokens": 1191
+          "tokens": 1203
         },
         {
           "id": "headers-2",
@@ -8478,7 +8465,7 @@
             "has"
           ],
           "path": "nextjs/headers-2.md",
-          "tokens": 4304
+          "tokens": 4316
         },
         {
           "id": "images",
@@ -8491,7 +8478,7 @@
             "next/image"
           ],
           "path": "nextjs/images.md",
-          "tokens": 1952
+          "tokens": 1956
         },
         {
           "id": "cachehandler",
@@ -8510,7 +8497,7 @@
             "string"
           ],
           "path": "nextjs/cachehandler.md",
-          "tokens": 898
+          "tokens": 901
         },
         {
           "id": "inlinecss",
@@ -8529,7 +8516,7 @@
             "v16.0.0"
           ],
           "path": "nextjs/inlinecss.md",
-          "tokens": 2241
+          "tokens": 2265
         },
         {
           "id": "output",
@@ -8548,7 +8535,7 @@
             ".next/next-server.js.nft.json"
           ],
           "path": "nextjs/output.md",
-          "tokens": 1887
+          "tokens": 1911
         },
         {
           "id": "proxyclientmaxbodysize",
@@ -8562,7 +8549,7 @@
             "proxyClientMaxBodySize"
           ],
           "path": "nextjs/proxyclientmaxbodysize.md",
-          "tokens": 844
+          "tokens": 848
         },
         {
           "id": "reactcompiler",
@@ -8581,7 +8568,7 @@
             "true"
           ],
           "path": "nextjs/reactcompiler.md",
-          "tokens": 1124
+          "tokens": 1138
         },
         {
           "id": "redirects",
@@ -8600,7 +8587,7 @@
             "302"
           ],
           "path": "nextjs/redirects.md",
-          "tokens": 2748
+          "tokens": 2751
         },
         {
           "id": "rewrites",
@@ -8619,7 +8606,7 @@
             "false"
           ],
           "path": "nextjs/rewrites.md",
-          "tokens": 4371
+          "tokens": 4392
         },
         {
           "id": "serverexternalpackages",
@@ -8638,7 +8625,7 @@
             "@libsql/client"
           ],
           "path": "nextjs/serverexternalpackages.md",
-          "tokens": 632
+          "tokens": 636
         },
         {
           "id": "staletimes",
@@ -8657,7 +8644,7 @@
             "v14.2.0"
           ],
           "path": "nextjs/staletimes.md",
-          "tokens": 839
+          "tokens": 847
         },
         {
           "id": "taint",
@@ -8676,7 +8663,7 @@
             "SERVICE_API_KEY"
           ],
           "path": "nextjs/taint.md",
-          "tokens": 2064
+          "tokens": 2077
         },
         {
           "id": "turbopack",
@@ -8695,7 +8682,7 @@
             "resolveExtensions"
           ],
           "path": "nextjs/turbopack.md",
-          "tokens": 4222
+          "tokens": 4240
         },
         {
           "id": "urlimports",
@@ -8714,7 +8701,7 @@
             "useSwcCss"
           ],
           "path": "nextjs/urlimports.md",
-          "tokens": 1523
+          "tokens": 1535
         },
         {
           "id": "webpack",
@@ -8733,7 +8720,7 @@
             "nextRuntime"
           ],
           "path": "nextjs/webpack.md",
-          "tokens": 1083
+          "tokens": 1093
         },
         {
           "id": "typescript",
@@ -8752,7 +8739,7 @@
             "Shift"
           ],
           "path": "nextjs/typescript.md",
-          "tokens": 4637
+          "tokens": 4640
         },
         {
           "id": "eslint",
@@ -8771,7 +8758,7 @@
             "preconnect"
           ],
           "path": "nextjs/eslint.md",
-          "tokens": 4458
+          "tokens": 4464
         },
         {
           "id": "create-next-app",
@@ -8790,7 +8777,7 @@
             "--js"
           ],
           "path": "nextjs/create-next-app.md",
-          "tokens": 1780
+          "tokens": 1783
         },
         {
           "id": "next-cli",
@@ -8809,7 +8796,7 @@
             "--version"
           ],
           "path": "nextjs/next-cli.md",
-          "tokens": 5899
+          "tokens": 5903
         },
         {
           "id": "edge-runtime",
@@ -8828,7 +8815,7 @@
             "WebSocket"
           ],
           "path": "nextjs/edge-runtime.md",
-          "tokens": 7252
+          "tokens": 7256
         },
         {
           "id": "turbopack-2",
@@ -8847,7 +8834,7 @@
             "sassOptions.functions"
           ],
           "path": "nextjs/turbopack-2.md",
-          "tokens": 5607
+          "tokens": 5610
         },
         {
           "id": "c",
@@ -8919,7 +8906,7 @@
             "\"use client\""
           ],
           "path": "nextjs/s.md",
-          "tokens": 1353
+          "tokens": 1362
         },
         {
           "id": "installation-2",
@@ -8938,7 +8925,7 @@
             "next dev --webpack"
           ],
           "path": "nextjs/installation-2.md",
-          "tokens": 2318
+          "tokens": 2323
         },
         {
           "id": "project-structure-2",
@@ -8957,7 +8944,7 @@
             ".env.local"
           ],
           "path": "nextjs/project-structure-2.md",
-          "tokens": 1966
+          "tokens": 1968
         },
         {
           "id": "images-2",
@@ -8976,7 +8963,7 @@
             "fill"
           ],
           "path": "nextjs/images-2.md",
-          "tokens": 1449
+          "tokens": 1451
         },
         {
           "id": "fonts",
@@ -8995,7 +8982,7 @@
             "pages"
           ],
           "path": "nextjs/fonts.md",
-          "tokens": 1494
+          "tokens": 1496
         },
         {
           "id": "css-2",
@@ -9014,7 +9001,7 @@
             "page.module.css"
           ],
           "path": "nextjs/css-2.md",
-          "tokens": 1954
+          "tokens": 1957
         },
         {
           "id": "deploying-2",
@@ -9031,7 +9018,7 @@
             "output: \"export\""
           ],
           "path": "nextjs/deploying-2.md",
-          "tokens": 1672
+          "tokens": 1678
         },
         {
           "id": "analytics-2",
@@ -9049,7 +9036,7 @@
             "id"
           ],
           "path": "nextjs/analytics-2.md",
-          "tokens": 1235
+          "tokens": 1239
         },
         {
           "id": "authentication-2",
@@ -9067,7 +9054,7 @@
             "false"
           ],
           "path": "nextjs/authentication-2.md",
-          "tokens": 4931
+          "tokens": 4938
         },
         {
           "id": "ci-build-caching-2",
@@ -9086,7 +9073,7 @@
             "caches"
           ],
           "path": "nextjs/ci-build-caching-2.md",
-          "tokens": 1203
+          "tokens": 1209
         },
         {
           "id": "content-security-policy-2",
@@ -9105,7 +9092,7 @@
             "nonce"
           ],
           "path": "nextjs/content-security-policy-2.md",
-          "tokens": 4086
+          "tokens": 4090
         },
         {
           "id": "css-in-js-2",
@@ -9116,7 +9103,7 @@
             "next start"
           ],
           "path": "nextjs/css-in-js-2.md",
-          "tokens": 545
+          "tokens": 549
         },
         {
           "id": "custom-server-2",
@@ -9135,7 +9122,7 @@
             "{}"
           ],
           "path": "nextjs/custom-server-2.md",
-          "tokens": 1351
+          "tokens": 1354
         },
         {
           "id": "debugging-2",
@@ -9154,7 +9141,7 @@
             "cwd"
           ],
           "path": "nextjs/debugging-2.md",
-          "tokens": 1992
+          "tokens": 1995
         },
         {
           "id": "draft-mode-2",
@@ -9173,7 +9160,7 @@
             "<path>"
           ],
           "path": "nextjs/draft-mode-2.md",
-          "tokens": 1985
+          "tokens": 1992
         },
         {
           "id": "environment-variables-2",
@@ -9192,7 +9179,7 @@
             "getStaticProps"
           ],
           "path": "nextjs/environment-variables-2.md",
-          "tokens": 2302
+          "tokens": 2304
         },
         {
           "id": "forms-2",
@@ -9204,7 +9191,7 @@
             "redirect"
           ],
           "path": "nextjs/forms-2.md",
-          "tokens": 2192
+          "tokens": 2194
         },
         {
           "id": "isr-2",
@@ -9223,7 +9210,7 @@
             "false"
           ],
           "path": "nextjs/isr-2.md",
-          "tokens": 2681
+          "tokens": 2685
         },
         {
           "id": "instrumentation-2",
@@ -9241,7 +9228,7 @@
             "NEXT_RUNTIME"
           ],
           "path": "nextjs/instrumentation-2.md",
-          "tokens": 960
+          "tokens": 966
         },
         {
           "id": "internationalization-2",
@@ -9260,7 +9247,7 @@
             "paraglide-next"
           ],
           "path": "nextjs/internationalization-2.md",
-          "tokens": 3708
+          "tokens": 3712
         },
         {
           "id": "lazy-loading-2",
@@ -9279,7 +9266,7 @@
             "dynamic()"
           ],
           "path": "nextjs/lazy-loading-2.md",
-          "tokens": 787
+          "tokens": 789
         },
         {
           "id": "mdx-2",
@@ -9298,7 +9285,7 @@
             ".js"
           ],
           "path": "nextjs/mdx-2.md",
-          "tokens": 4418
+          "tokens": 4425
         },
         {
           "id": "app-router-2",
@@ -9317,7 +9304,7 @@
             "next/legacy/image"
           ],
           "path": "nextjs/app-router-2.md",
-          "tokens": 9394
+          "tokens": 9399
         },
         {
           "id": "create-react-app-2",
@@ -9336,7 +9323,7 @@
             "src"
           ],
           "path": "nextjs/create-react-app-2.md",
-          "tokens": 5447
+          "tokens": 5449
         },
         {
           "id": "vite-2",
@@ -9355,7 +9342,7 @@
             "./node_modules"
           ],
           "path": "nextjs/vite-2.md",
-          "tokens": 5626
+          "tokens": 5630
         },
         {
           "id": "multi-zones-2",
@@ -9374,7 +9361,7 @@
             "destination"
           ],
           "path": "nextjs/multi-zones-2.md",
-          "tokens": 1514
+          "tokens": 1519
         },
         {
           "id": "opentelemetry-2",
@@ -9393,7 +9380,7 @@
             "NodeSDK"
           ],
           "path": "nextjs/opentelemetry-2.md",
-          "tokens": 3475
+          "tokens": 3480
         },
         {
           "id": "package-bundling-2",
@@ -9412,7 +9399,7 @@
             "serverExternalPackages"
           ],
           "path": "nextjs/package-bundling-2.md",
-          "tokens": 2497
+          "tokens": 2499
         },
         {
           "id": "postcss",
@@ -9431,7 +9418,7 @@
             ".postcssrc.js"
           ],
           "path": "nextjs/postcss.md",
-          "tokens": 1409
+          "tokens": 1413
         },
         {
           "id": "preview-mode",
@@ -9450,7 +9437,7 @@
             "__next_preview_data"
           ],
           "path": "nextjs/preview-mode.md",
-          "tokens": 3551
+          "tokens": 3555
         },
         {
           "id": "production-2",
@@ -9469,7 +9456,7 @@
             "<Head>"
           ],
           "path": "nextjs/production-2.md",
-          "tokens": 1549
+          "tokens": 1552
         },
         {
           "id": "redirecting-2",
@@ -9488,7 +9475,7 @@
             "bloom-filters"
           ],
           "path": "nextjs/redirecting-2.md",
-          "tokens": 3494
+          "tokens": 3496
         },
         {
           "id": "sass-2",
@@ -9506,7 +9493,7 @@
             "primaryColor"
           ],
           "path": "nextjs/sass-2.md",
-          "tokens": 669
+          "tokens": 672
         },
         {
           "id": "scripts-2",
@@ -9525,7 +9512,7 @@
             "npm install @qwik.dev/partytown"
           ],
           "path": "nextjs/scripts-2.md",
-          "tokens": 2100
+          "tokens": 2104
         },
         {
           "id": "self-hosting-2",
@@ -9544,7 +9531,7 @@
             "getStaticProps"
           ],
           "path": "nextjs/self-hosting-2.md",
-          "tokens": 3333
+          "tokens": 3338
         },
         {
           "id": "static-exports-2",
@@ -9563,7 +9550,7 @@
             "fallback: true"
           ],
           "path": "nextjs/static-exports-2.md",
-          "tokens": 1701
+          "tokens": 1705
         },
         {
           "id": "tailwind-css",
@@ -9576,7 +9563,7 @@
             "pages/_app.js"
           ],
           "path": "nextjs/tailwind-css.md",
-          "tokens": 958
+          "tokens": 963
         },
         {
           "id": "cypress-2",
@@ -9595,7 +9582,7 @@
             "cy.visit(\"http://localhost:3000/\")"
           ],
           "path": "nextjs/cypress-2.md",
-          "tokens": 1755
+          "tokens": 1757
         },
         {
           "id": "jest-2",
@@ -9614,7 +9601,7 @@
             ".env"
           ],
           "path": "nextjs/jest-2.md",
-          "tokens": 3047
+          "tokens": 3050
         },
         {
           "id": "playwright-2",
@@ -9633,7 +9620,7 @@
             "npx playwright install-deps"
           ],
           "path": "nextjs/playwright-2.md",
-          "tokens": 1043
+          "tokens": 1046
         },
         {
           "id": "vitest-2",
@@ -9650,7 +9637,7 @@
             "<Page />"
           ],
           "path": "nextjs/vitest-2.md",
-          "tokens": 1236
+          "tokens": 1242
         },
         {
           "id": "third-party-libraries-2",
@@ -9669,7 +9656,7 @@
             "gtmId"
           ],
           "path": "nextjs/third-party-libraries-2.md",
-          "tokens": 3402
+          "tokens": 3408
         },
         {
           "id": "codemods-2",
@@ -9688,7 +9675,7 @@
             "minor"
           ],
           "path": "nextjs/codemods-2.md",
-          "tokens": 4375
+          "tokens": 4382
         },
         {
           "id": "version-11",
@@ -9707,7 +9694,7 @@
             "-p"
           ],
           "path": "nextjs/version-11.md",
-          "tokens": 1608
+          "tokens": 1612
         },
         {
           "id": "version-12",
@@ -9726,7 +9713,7 @@
             ".babelrc"
           ],
           "path": "nextjs/version-12.md",
-          "tokens": 1840
+          "tokens": 1844
         },
         {
           "id": "version-13",
@@ -9745,7 +9732,7 @@
             "<a>"
           ],
           "path": "nextjs/version-13.md",
-          "tokens": 1670
+          "tokens": 1677
         },
         {
           "id": "version-9",
@@ -9764,7 +9751,7 @@
             "fork-ts-checker-webpack-plugin"
           ],
           "path": "nextjs/version-9.md",
-          "tokens": 1770
+          "tokens": 1786
         },
         {
           "id": "pages-and-layouts",
@@ -9783,7 +9770,7 @@
             "/"
           ],
           "path": "nextjs/pages-and-layouts.md",
-          "tokens": 1681
+          "tokens": 1685
         },
         {
           "id": "dynamic-routes",
@@ -9802,7 +9789,7 @@
             "{ slug: 'b' }"
           ],
           "path": "nextjs/dynamic-routes.md",
-          "tokens": 812
+          "tokens": 818
         },
         {
           "id": "linking-and-navigating-2",
@@ -9821,7 +9808,7 @@
             "encodeURIComponent"
           ],
           "path": "nextjs/linking-and-navigating-2.md",
-          "tokens": 1555
+          "tokens": 1559
         },
         {
           "id": "custom-app",
@@ -9839,7 +9826,7 @@
             "getInitialProps"
           ],
           "path": "nextjs/custom-app.md",
-          "tokens": 771
+          "tokens": 776
         },
         {
           "id": "custom-document",
@@ -9858,7 +9845,7 @@
             "<NextScript />"
           ],
           "path": "nextjs/custom-document.md",
-          "tokens": 1194
+          "tokens": 1198
         },
         {
           "id": "api-routes",
@@ -9877,7 +9864,7 @@
             "req.cookies"
           ],
           "path": "nextjs/api-routes.md",
-          "tokens": 3893
+          "tokens": 3897
         },
         {
           "id": "custom-errors",
@@ -9896,7 +9883,7 @@
             "_error"
           ],
           "path": "nextjs/custom-errors.md",
-          "tokens": 926
+          "tokens": 929
         },
         {
           "id": "rendering",
@@ -9910,7 +9897,7 @@
             "getStaticProps"
           ],
           "path": "nextjs/rendering.md",
-          "tokens": 832
+          "tokens": 848
         },
         {
           "id": "static-site-generation-ssg",
@@ -9929,7 +9916,7 @@
             "posts/1"
           ],
           "path": "nextjs/static-site-generation-ssg.md",
-          "tokens": 2539
+          "tokens": 2547
         },
         {
           "id": "automatic-static-optimization",
@@ -9948,7 +9935,7 @@
             "pages/about.js"
           ],
           "path": "nextjs/automatic-static-optimization.md",
-          "tokens": 921
+          "tokens": 929
         },
         {
           "id": "client-side-rendering-csr",
@@ -9962,7 +9949,7 @@
             "useEffect"
           ],
           "path": "nextjs/client-side-rendering-csr.md",
-          "tokens": 1044
+          "tokens": 1049
         },
         {
           "id": "data-fetching",
@@ -9970,7 +9957,7 @@
           "description": "Data fetching in Next.js allows you to render your content in different ways, depending on your application's use cas...",
           "tags": [],
           "path": "nextjs/data-fetching.md",
-          "tokens": 1166
+          "tokens": 1171
         },
         {
           "id": "getstaticprops",
@@ -9989,7 +9976,7 @@
             "lib/"
           ],
           "path": "nextjs/getstaticprops.md",
-          "tokens": 2323
+          "tokens": 2328
         },
         {
           "id": "getstaticpaths",
@@ -10008,7 +9995,7 @@
             "components"
           ],
           "path": "nextjs/getstaticpaths.md",
-          "tokens": 1281
+          "tokens": 1286
         },
         {
           "id": "forms-and-mutations",
@@ -10020,7 +10007,7 @@
             "cookies"
           ],
           "path": "nextjs/forms-and-mutations.md",
-          "tokens": 890
+          "tokens": 896
         },
         {
           "id": "getserversideprops",
@@ -10039,7 +10026,7 @@
             "cache-control"
           ],
           "path": "nextjs/getserversideprops.md",
-          "tokens": 1241
+          "tokens": 1247
         },
         {
           "id": "client-side-fetching",
@@ -10047,7 +10034,7 @@
           "description": "Client-side data fetching is useful when your page doesn't require SEO indexing, when you don't need to pre-render yo...",
           "tags": [],
           "path": "nextjs/client-side-fetching.md",
-          "tokens": 703
+          "tokens": 711
         },
         {
           "id": "error-handling-2",
@@ -10066,7 +10053,7 @@
             "pages/_app.js"
           ],
           "path": "nextjs/error-handling-2.md",
-          "tokens": 1234
+          "tokens": 1243
         },
         {
           "id": "font-2",
@@ -10085,7 +10072,7 @@
             "axes"
           ],
           "path": "nextjs/font-2.md",
-          "tokens": 5709
+          "tokens": 5711
         },
         {
           "id": "form",
@@ -10104,7 +10091,7 @@
             "boolean"
           ],
           "path": "nextjs/form.md",
-          "tokens": 900
+          "tokens": 902
         },
         {
           "id": "head",
@@ -10123,10 +10110,10 @@
             "<React.Fragment>"
           ],
           "path": "nextjs/head.md",
-          "tokens": 651
+          "tokens": 653
         },
         {
-          "id": "reference-3",
+          "id": "image-reference",
           "title": "Reference",
           "description": "The following props are available:",
           "tags": [
@@ -10141,11 +10128,11 @@
             "\"absolute\"",
             "<img>"
           ],
-          "path": "nextjs/reference-3.md",
+          "path": "nextjs/image-reference.md",
           "tokens": 7661
         },
         {
-          "id": "examples-2",
+          "id": "image-examples",
           "title": "Examples",
           "description": "Styling the Image component is similar to styling a normal <img> element, but there are a few guidelines to keep in m...",
           "tags": [
@@ -10160,11 +10147,11 @@
             "objectFit",
             "cover"
           ],
-          "path": "nextjs/examples-2.md",
+          "path": "nextjs/image-examples.md",
           "tokens": 2395
         },
         {
-          "id": "version-history-2",
+          "id": "image-version-history",
           "title": "Version History",
           "description": "| Version    | Changes                                                                                               ...",
           "tags": [
@@ -10179,8 +10166,8 @@
             "maximumRedirects",
             "v15.3.0"
           ],
-          "path": "nextjs/version-history-2.md",
-          "tokens": 3321
+          "path": "nextjs/image-version-history.md",
+          "tokens": 3326
         },
         {
           "id": "image-legacy",
@@ -10199,7 +10186,7 @@
             "IntersectionObserver"
           ],
           "path": "nextjs/image-legacy.md",
-          "tokens": 8060
+          "tokens": 8062
         },
         {
           "id": "link",
@@ -10218,7 +10205,7 @@
             "scroll={false}"
           ],
           "path": "nextjs/link.md",
-          "tokens": 4956
+          "tokens": 4958
         },
         {
           "id": "script",
@@ -10237,7 +10224,7 @@
             "onError={onErrorFunc}"
           ],
           "path": "nextjs/script.md",
-          "tokens": 2600
+          "tokens": 2612
         },
         {
           "id": "instrumentation-js-2",
@@ -10256,7 +10243,7 @@
             "'render'"
           ],
           "path": "nextjs/instrumentation-js-2.md",
-          "tokens": 1191
+          "tokens": 1193
         },
         {
           "id": "proxy-2",
@@ -10275,7 +10262,7 @@
             ".page.ts"
           ],
           "path": "nextjs/proxy-2.md",
-          "tokens": 7645
+          "tokens": 7660
         },
         {
           "id": "getinitialprops",
@@ -10294,7 +10281,7 @@
             "next/link"
           ],
           "path": "nextjs/getinitialprops.md",
-          "tokens": 916
+          "tokens": 921
         },
         {
           "id": "getserversideprops-2",
@@ -10313,7 +10300,7 @@
             "query"
           ],
           "path": "nextjs/getserversideprops-2.md",
-          "tokens": 1874
+          "tokens": 1878
         },
         {
           "id": "getstaticpaths-2",
@@ -10332,7 +10319,7 @@
             "commentId"
           ],
           "path": "nextjs/getstaticpaths-2.md",
-          "tokens": 3097
+          "tokens": 3101
         },
         {
           "id": "getstaticprops-2",
@@ -10351,7 +10338,7 @@
             "false"
           ],
           "path": "nextjs/getstaticprops-2.md",
-          "tokens": 3200
+          "tokens": 3204
         },
         {
           "id": "nextrequest-2",
@@ -10370,7 +10357,7 @@
             "clear()"
           ],
           "path": "nextjs/nextrequest-2.md",
-          "tokens": 1138
+          "tokens": 1142
         },
         {
           "id": "nextresponse-2",
@@ -10389,7 +10376,7 @@
             "json()"
           ],
           "path": "nextjs/nextresponse-2.md",
-          "tokens": 1551
+          "tokens": 1554
         },
         {
           "id": "useparams-2",
@@ -10408,7 +10395,7 @@
             "{ slug: '1' }"
           ],
           "path": "nextjs/useparams-2.md",
-          "tokens": 1759
+          "tokens": 1765
         },
         {
           "id": "usereportwebvitals-2",
@@ -10427,7 +10414,7 @@
             "\"prerender\""
           ],
           "path": "nextjs/usereportwebvitals-2.md",
-          "tokens": 1561
+          "tokens": 1564
         },
         {
           "id": "userouter-2",
@@ -10446,7 +10433,7 @@
             "query"
           ],
           "path": "nextjs/userouter-2.md",
-          "tokens": 5066
+          "tokens": 5070
         },
         {
           "id": "usesearchparams-2",
@@ -10465,7 +10452,7 @@
             "/dashboard?b=3"
           ],
           "path": "nextjs/usesearchparams-2.md",
-          "tokens": 2526
+          "tokens": 2530
         },
         {
           "id": "useragent-2",
@@ -10484,7 +10471,7 @@
             "console"
           ],
           "path": "nextjs/useragent-2.md",
-          "tokens": 752
+          "tokens": 763
         },
         {
           "id": "next-config-js-options",
@@ -10503,7 +10490,7 @@
             "next/experimental/testing/server"
           ],
           "path": "nextjs/next-config-js-options.md",
-          "tokens": 1846
+          "tokens": 1853
         },
         {
           "id": "experimental-adapterpath-2",
@@ -10522,7 +10509,7 @@
             "sourceRegex"
           ],
           "path": "nextjs/experimental-adapterpath-2.md",
-          "tokens": 2815
+          "tokens": 2824
         },
         {
           "id": "assetprefix-2",
@@ -10541,7 +10528,7 @@
             "getServerSideProps"
           ],
           "path": "nextjs/assetprefix-2.md",
-          "tokens": 1811
+          "tokens": 1833
         },
         {
           "id": "deploymentid-2",
@@ -10560,7 +10547,7 @@
             "v14.1.4"
           ],
           "path": "nextjs/deploymentid-2.md",
-          "tokens": 707
+          "tokens": 712
         },
         {
           "id": "devindicators-2",
@@ -10579,7 +10566,7 @@
             "buildActivity"
           ],
           "path": "nextjs/devindicators-2.md",
-          "tokens": 1046
+          "tokens": 1054
         },
         {
           "id": "exportpathmap-2",
@@ -10598,7 +10585,7 @@
             "pages/post.js"
           ],
           "path": "nextjs/exportpathmap-2.md",
-          "tokens": 1192
+          "tokens": 1203
         },
         {
           "id": "headers-3",
@@ -10617,7 +10604,7 @@
             "has"
           ],
           "path": "nextjs/headers-3.md",
-          "tokens": 4497
+          "tokens": 4505
         },
         {
           "id": "images-3",
@@ -10636,7 +10623,7 @@
             "false"
           ],
           "path": "nextjs/images-3.md",
-          "tokens": 2692
+          "tokens": 2711
         },
         {
           "id": "output-2",
@@ -10655,7 +10642,7 @@
             ".next/next-server.js.nft.json"
           ],
           "path": "nextjs/output-2.md",
-          "tokens": 2112
+          "tokens": 2139
         },
         {
           "id": "experimental-proxyclientmaxbodysize",
@@ -10674,7 +10661,7 @@
             "next.config.js"
           ],
           "path": "nextjs/experimental-proxyclientmaxbodysize.md",
-          "tokens": 1105
+          "tokens": 1113
         },
         {
           "id": "redirects-2",
@@ -10693,7 +10680,7 @@
             "302"
           ],
           "path": "nextjs/redirects-2.md",
-          "tokens": 2853
+          "tokens": 2856
         },
         {
           "id": "rewrites-2",
@@ -10712,7 +10699,7 @@
             "false"
           ],
           "path": "nextjs/rewrites-2.md",
-          "tokens": 3702
+          "tokens": 3708
         },
         {
           "id": "serverexternalpackages-2",
@@ -10731,7 +10718,7 @@
             "@jpg-store/lucid-cardano"
           ],
           "path": "nextjs/serverexternalpackages-2.md",
-          "tokens": 941
+          "tokens": 954
         },
         {
           "id": "turbopack-3",
@@ -10750,7 +10737,7 @@
             "resolveExtensions"
           ],
           "path": "nextjs/turbopack-3.md",
-          "tokens": 3725
+          "tokens": 3732
         },
         {
           "id": "urlimports-2",
@@ -10769,7 +10756,7 @@
             "useSwcCss"
           ],
           "path": "nextjs/urlimports-2.md",
-          "tokens": 1129
+          "tokens": 1137
         },
         {
           "id": "webpack-2",
@@ -10788,7 +10775,7 @@
             "nextRuntime"
           ],
           "path": "nextjs/webpack-2.md",
-          "tokens": 1097
+          "tokens": 1106
         },
         {
           "id": "typescript-2",
@@ -10807,7 +10794,7 @@
             "next typegen"
           ],
           "path": "nextjs/typescript-2.md",
-          "tokens": 4155
+          "tokens": 4157
         },
         {
           "id": "eslint-2",
@@ -10826,7 +10813,7 @@
             "preconnect"
           ],
           "path": "nextjs/eslint-2.md",
-          "tokens": 4460
+          "tokens": 4467
         },
         {
           "id": "create-next-app-cli",
@@ -10845,7 +10832,7 @@
             "--js"
           ],
           "path": "nextjs/create-next-app-cli.md",
-          "tokens": 1781
+          "tokens": 1784
         },
         {
           "id": "next-cli-2",
@@ -10864,7 +10851,7 @@
             "--version"
           ],
           "path": "nextjs/next-cli-2.md",
-          "tokens": 5899
+          "tokens": 5903
         },
         {
           "id": "edge-runtime-2",
@@ -10883,7 +10870,7 @@
             "WebSocket"
           ],
           "path": "nextjs/edge-runtime-2.md",
-          "tokens": 7252
+          "tokens": 7256
         },
         {
           "id": "turbopack-4",
@@ -10902,7 +10889,7 @@
             "sassOptions.functions"
           ],
           "path": "nextjs/turbopack-4.md",
-          "tokens": 5535
+          "tokens": 5543
         },
         {
           "id": "accessibility",
@@ -10920,7 +10907,7 @@
             "prefers-reduced-motion"
           ],
           "path": "nextjs/accessibility.md",
-          "tokens": 687
+          "tokens": 691
         },
         {
           "id": "fast-refresh",
@@ -10939,7 +10926,7 @@
             "'./header'"
           ],
           "path": "nextjs/fast-refresh.md",
-          "tokens": 1385
+          "tokens": 1390
         },
         {
           "id": "next-js-compiler",
@@ -10958,7 +10945,7 @@
             "transform"
           ],
           "path": "nextjs/next-js-compiler.md",
-          "tokens": 3611
+          "tokens": 3617
         },
         {
           "id": "supported-browsers",
@@ -10977,7 +10964,7 @@
             "import()"
           ],
           "path": "nextjs/supported-browsers.md",
-          "tokens": 1560
+          "tokens": 1568
         },
         {
           "id": "contribution-guide",
@@ -10996,7 +10983,7 @@
             "⌘ + P"
           ],
           "path": "nextjs/contribution-guide.md",
-          "tokens": 4841
+          "tokens": 4851
         }
       ]
     },
@@ -11023,7 +11010,7 @@
             "user.name"
           ],
           "path": "react/quick-start.md",
-          "tokens": 3573
+          "tokens": 3577
         },
         {
           "id": "tutorial-tic-tac-toe",
@@ -11042,7 +11029,7 @@
             "export"
           ],
           "path": "react/tutorial-tic-tac-toe.md",
-          "tokens": 21826
+          "tokens": 21833
         },
         {
           "id": "thinking-in-react",
@@ -11061,7 +11048,7 @@
             "isHovered"
           ],
           "path": "react/thinking-in-react.md",
-          "tokens": 5638
+          "tokens": 5644
         },
         {
           "id": "installation",
@@ -11069,7 +11056,7 @@
           "description": "React has been designed from the start for gradual adoption. You can use as little or as much React as you need. Whet...",
           "tags": [],
           "path": "react/installation.md",
-          "tokens": 583
+          "tokens": 587
         },
         {
           "id": "creating-a-react-app",
@@ -11079,7 +11066,7 @@
             "async"
           ],
           "path": "react/creating-a-react-app.md",
-          "tokens": 1776
+          "tokens": 1782
         },
         {
           "id": "build-a-react-app-from-scratch",
@@ -11091,7 +11078,7 @@
             "rsbuild"
           ],
           "path": "react/build-a-react-app-from-scratch.md",
-          "tokens": 2890
+          "tokens": 2899
         },
         {
           "id": "add-react-to-an-existing-project",
@@ -11110,7 +11097,7 @@
             "main.js"
           ],
           "path": "react/add-react-to-an-existing-project.md",
-          "tokens": 2087
+          "tokens": 2096
         },
         {
           "id": "setup",
@@ -11118,7 +11105,7 @@
           "description": "React integrates with tools like editors, TypeScript, browser extensions, and compilers. This section will help you g...",
           "tags": [],
           "path": "react/setup.md",
-          "tokens": 274
+          "tokens": 276
         },
         {
           "id": "editor-setup",
@@ -11133,7 +11120,7 @@
             "prettier --check"
           ],
           "path": "react/editor-setup.md",
-          "tokens": 1014
+          "tokens": 1018
         },
         {
           "id": "using-typescript",
@@ -11152,7 +11139,7 @@
             "title"
           ],
           "path": "react/using-typescript.md",
-          "tokens": 4673
+          "tokens": 4678
         },
         {
           "id": "react-developer-tools",
@@ -11164,7 +11151,7 @@
             "<head>"
           ],
           "path": "react/react-developer-tools.md",
-          "tokens": 607
+          "tokens": 613
         },
         {
           "id": "react-compiler",
@@ -11176,7 +11163,7 @@
             "React.memo"
           ],
           "path": "react/react-compiler.md",
-          "tokens": 437
+          "tokens": 442
         },
         {
           "id": "introduction",
@@ -11195,7 +11182,7 @@
             "React.memo()"
           ],
           "path": "react/introduction.md",
-          "tokens": 2762
+          "tokens": 2766
         },
         {
           "id": "installation",
@@ -11210,7 +11197,7 @@
             "\"use no memo\""
           ],
           "path": "react/installation.md",
-          "tokens": 1833
+          "tokens": 1837
         },
         {
           "id": "incremental-adoption",
@@ -11225,7 +11212,7 @@
             "\"use no memo\""
           ],
           "path": "react/incremental-adoption.md",
-          "tokens": 1762
+          "tokens": 1768
         },
         {
           "id": "debugging-and-troubleshooting",
@@ -11235,7 +11222,7 @@
             "\"use no memo\""
           ],
           "path": "react/debugging-and-troubleshooting.md",
-          "tokens": 1145
+          "tokens": 1153
         },
         {
           "id": "describing-the-ui",
@@ -11252,7 +11239,7 @@
             "key"
           ],
           "path": "react/describing-the-ui.md",
-          "tokens": 3324
+          "tokens": 3330
         },
         {
           "id": "your-first-component",
@@ -11271,7 +11258,7 @@
             "src"
           ],
           "path": "react/your-first-component.md",
-          "tokens": 3097
+          "tokens": 3103
         },
         {
           "id": "importing-and-exporting-components",
@@ -11290,7 +11277,7 @@
             "import Button from './Button.js';"
           ],
           "path": "react/importing-and-exporting-components.md",
-          "tokens": 2852
+          "tokens": 2862
         },
         {
           "id": "writing-markup-with-jsx",
@@ -11309,7 +11296,7 @@
             "class"
           ],
           "path": "react/writing-markup-with-jsx.md",
-          "tokens": 2232
+          "tokens": 2239
         },
         {
           "id": "javascript-in-jsx-with-curly-braces",
@@ -11328,7 +11315,7 @@
             "src={avatar}"
           ],
           "path": "react/javascript-in-jsx-with-curly-braces.md",
-          "tokens": 3372
+          "tokens": 3382
         },
         {
           "id": "passing-props-to-a-component",
@@ -11347,7 +11334,7 @@
             "person"
           ],
           "path": "react/passing-props-to-a-component.md",
-          "tokens": 6489
+          "tokens": 6497
         },
         {
           "id": "conditional-rendering",
@@ -11366,7 +11353,7 @@
             "else"
           ],
           "path": "react/conditional-rendering.md",
-          "tokens": 4679
+          "tokens": 4686
         },
         {
           "id": "rendering-lists",
@@ -11385,7 +11372,7 @@
             "chemists"
           ],
           "path": "react/rendering-lists.md",
-          "tokens": 7915
+          "tokens": 7920
         },
         {
           "id": "keeping-components-pure",
@@ -11404,7 +11391,7 @@
             "double(2)"
           ],
           "path": "react/keeping-components-pure.md",
-          "tokens": 6002
+          "tokens": 6008
         },
         {
           "id": "your-ui-as-a-tree",
@@ -11423,7 +11410,7 @@
             "App.js"
           ],
           "path": "react/your-ui-as-a-tree.md",
-          "tokens": 2923
+          "tokens": 2932
         },
         {
           "id": "adding-interactivity",
@@ -11441,7 +11428,7 @@
             "..."
           ],
           "path": "react/adding-interactivity.md",
-          "tokens": 5642
+          "tokens": 5648
         },
         {
           "id": "responding-to-events",
@@ -11460,7 +11447,7 @@
             "onClick"
           ],
           "path": "react/responding-to-events.md",
-          "tokens": 5487
+          "tokens": 5493
         },
         {
           "id": "state-a-component-s-memory",
@@ -11479,7 +11466,7 @@
             "const [something, setSomething]"
           ],
           "path": "react/state-a-component-s-memory.md",
-          "tokens": 16116
+          "tokens": 16125
         },
         {
           "id": "render-and-commit",
@@ -11498,7 +11485,7 @@
             "appendChild()"
           ],
           "path": "react/render-and-commit.md",
-          "tokens": 1903
+          "tokens": 1909
         },
         {
           "id": "state-as-a-snapshot",
@@ -11517,7 +11504,7 @@
             "1"
           ],
           "path": "react/state-as-a-snapshot.md",
-          "tokens": 3158
+          "tokens": 3164
         },
         {
           "id": "queueing-a-series-of-state-updates",
@@ -11536,7 +11523,7 @@
             "0 + 1 = 1"
           ],
           "path": "react/queueing-a-series-of-state-updates.md",
-          "tokens": 4148
+          "tokens": 4158
         },
         {
           "id": "updating-objects-in-state",
@@ -11555,7 +11542,7 @@
             "]"
           ],
           "path": "react/updating-objects-in-state.md",
-          "tokens": 9528
+          "tokens": 9535
         },
         {
           "id": "updating-arrays-in-state",
@@ -11574,7 +11561,7 @@
             "pop"
           ],
           "path": "react/updating-arrays-in-state.md",
-          "tokens": 11323
+          "tokens": 11330
         },
         {
           "id": "managing-state",
@@ -11590,7 +11577,7 @@
             "Section"
           ],
           "path": "react/managing-state.md",
-          "tokens": 6130
+          "tokens": 6134
         },
         {
           "id": "reacting-to-input-with-state",
@@ -11609,7 +11596,7 @@
             "true"
           ],
           "path": "react/reacting-to-input-with-state.md",
-          "tokens": 8647
+          "tokens": 8655
         },
         {
           "id": "choosing-the-state-structure",
@@ -11628,7 +11615,7 @@
             "true"
           ],
           "path": "react/choosing-the-state-structure.md",
-          "tokens": 15255
+          "tokens": 15263
         },
         {
           "id": "sharing-state-between-components",
@@ -11647,7 +11634,7 @@
             "<button>"
           ],
           "path": "react/sharing-state-between-components.md",
-          "tokens": 4472
+          "tokens": 4481
         },
         {
           "id": "preserving-and-resetting-state",
@@ -11666,7 +11653,7 @@
             "App"
           ],
           "path": "react/preserving-and-resetting-state.md",
-          "tokens": 11731
+          "tokens": 11740
         },
         {
           "id": "extracting-state-logic-into-a-reducer",
@@ -11685,7 +11672,7 @@
             "type"
           ],
           "path": "react/extracting-state-logic-into-a-reducer.md",
-          "tokens": 15382
+          "tokens": 15393
         },
         {
           "id": "passing-data-deeply-with-context",
@@ -11704,7 +11691,7 @@
             "useState"
           ],
           "path": "react/passing-data-deeply-with-context.md",
-          "tokens": 8126
+          "tokens": 8135
         },
         {
           "id": "scaling-up-with-reducer-and-context",
@@ -11723,7 +11710,7 @@
             "useReducer()"
           ],
           "path": "react/scaling-up-with-reducer-and-context.md",
-          "tokens": 7678
+          "tokens": 7688
         },
         {
           "id": "escape-hatches",
@@ -11742,7 +11729,7 @@
             "usePointerPosition"
           ],
           "path": "react/escape-hatches.md",
-          "tokens": 6125
+          "tokens": 6129
         },
         {
           "id": "referencing-values-with-refs",
@@ -11761,7 +11748,7 @@
             "useState(initialValue)"
           ],
           "path": "react/referencing-values-with-refs.md",
-          "tokens": 5297
+          "tokens": 5305
         },
         {
           "id": "manipulating-the-dom-with-refs",
@@ -11780,7 +11767,7 @@
             "inputRef.current"
           ],
           "path": "react/manipulating-the-dom-with-refs.md",
-          "tokens": 7626
+          "tokens": 7635
         },
         {
           "id": "synchronizing-with-effects",
@@ -11799,7 +11786,7 @@
             "[]"
           ],
           "path": "react/synchronizing-with-effects.md",
-          "tokens": 15291
+          "tokens": 15299
         },
         {
           "id": "you-might-not-need-an-effect",
@@ -11818,7 +11805,7 @@
             "useMemo"
           ],
           "path": "react/you-might-not-need-an-effect.md",
-          "tokens": 15203
+          "tokens": 15211
         },
         {
           "id": "lifecycle-of-reactive-effects",
@@ -11837,7 +11824,7 @@
             "logVisit(roomId)"
           ],
           "path": "react/lifecycle-of-reactive-effects.md",
-          "tokens": 17799
+          "tokens": 17808
         },
         {
           "id": "separating-events-from-effects",
@@ -11856,7 +11843,7 @@
             "Page"
           ],
           "path": "react/separating-events-from-effects.md",
-          "tokens": 13066
+          "tokens": 13075
         },
         {
           "id": "removing-effect-dependencies",
@@ -11875,7 +11862,7 @@
             "true"
           ],
           "path": "react/removing-effect-dependencies.md",
-          "tokens": 18741
+          "tokens": 18749
         },
         {
           "id": "reusing-logic-with-custom-hooks",
@@ -11894,7 +11881,7 @@
             "use"
           ],
           "path": "react/reusing-logic-with-custom-hooks.md",
-          "tokens": 17445
+          "tokens": 17454
         },
         {
           "id": "overview",
@@ -11908,7 +11895,7 @@
             "react"
           ],
           "path": "react/overview.md",
-          "tokens": 841
+          "tokens": 848
         },
         {
           "id": "hooks",
@@ -11927,7 +11914,7 @@
             "useMemo"
           ],
           "path": "react/hooks.md",
-          "tokens": 1417
+          "tokens": 1423
         },
         {
           "id": "useactionstate",
@@ -11946,7 +11933,7 @@
             "previousState"
           ],
           "path": "react/useactionstate.md",
-          "tokens": 10238
+          "tokens": 10243
         },
         {
           "id": "usecallback",
@@ -11965,7 +11952,7 @@
             "theme"
           ],
           "path": "react/usecallback.md",
-          "tokens": 8211
+          "tokens": 8215
         },
         {
           "id": "usecontext",
@@ -11984,7 +11971,7 @@
             "memo"
           ],
           "path": "react/usecontext.md",
-          "tokens": 8250
+          "tokens": 8254
         },
         {
           "id": "usedebugvalue",
@@ -12002,7 +11989,7 @@
             "toDateString()"
           ],
           "path": "react/usedebugvalue.md",
-          "tokens": 918
+          "tokens": 922
         },
         {
           "id": "usedeferredvalue",
@@ -12021,7 +12008,7 @@
             "SearchResults"
           ],
           "path": "react/usedeferredvalue.md",
-          "tokens": 6081
+          "tokens": 6086
         },
         {
           "id": "useeffect",
@@ -12040,7 +12027,7 @@
             "setTimeout"
           ],
           "path": "react/useeffect.md",
-          "tokens": 15938
+          "tokens": 15941
         },
         {
           "id": "useeffectevent",
@@ -12059,7 +12046,7 @@
             "event callback"
           ],
           "path": "react/useeffectevent.md",
-          "tokens": 4064
+          "tokens": 4069
         },
         {
           "id": "useid",
@@ -12077,7 +12064,7 @@
             "renderToPipeableStream"
           ],
           "path": "react/useid.md",
-          "tokens": 2312
+          "tokens": 2314
         },
         {
           "id": "useimperativehandle",
@@ -12096,7 +12083,7 @@
             "<input>"
           ],
           "path": "react/useimperativehandle.md",
-          "tokens": 1935
+          "tokens": 1941
         },
         {
           "id": "useinsertioneffect",
@@ -12115,7 +12102,7 @@
             "<style>"
           ],
           "path": "react/useinsertioneffect.md",
-          "tokens": 1522
+          "tokens": 1528
         },
         {
           "id": "uselayouteffect",
@@ -12134,7 +12121,7 @@
             "tooltipHeight = 0"
           ],
           "path": "react/uselayouteffect.md",
-          "tokens": 5917
+          "tokens": 5922
         },
         {
           "id": "usememo",
@@ -12153,7 +12140,7 @@
             "todos"
           ],
           "path": "react/usememo.md",
-          "tokens": 12000
+          "tokens": 12002
         },
         {
           "id": "useoptimistic",
@@ -12172,7 +12159,7 @@
             "setOptimistic('b')"
           ],
           "path": "react/useoptimistic.md",
-          "tokens": 8352
+          "tokens": 8356
         },
         {
           "id": "usereducer",
@@ -12191,7 +12178,7 @@
             "type"
           ],
           "path": "react/usereducer.md",
-          "tokens": 7476
+          "tokens": 7480
         },
         {
           "id": "useref",
@@ -12210,7 +12197,7 @@
             "now"
           ],
           "path": "react/useref.md",
-          "tokens": 4090
+          "tokens": 4093
         },
         {
           "id": "usestate",
@@ -12229,7 +12216,7 @@
             "flushSync"
           ],
           "path": "react/usestate.md",
-          "tokens": 9467
+          "tokens": 9470
         },
         {
           "id": "usesyncexternalstore",
@@ -12248,7 +12235,7 @@
             "useState"
           ],
           "path": "react/usesyncexternalstore.md",
-          "tokens": 4071
+          "tokens": 4077
         },
         {
           "id": "usetransition",
@@ -12267,7 +12254,7 @@
             "setTimeout"
           ],
           "path": "react/usetransition.md",
-          "tokens": 12876
+          "tokens": 12881
         },
         {
           "id": "components",
@@ -12282,7 +12269,7 @@
             "<Activity>"
           ],
           "path": "react/components.md",
-          "tokens": 230
+          "tokens": 238
         },
         {
           "id": "",
@@ -12301,7 +12288,7 @@
             "dispatchEvent(event)"
           ],
           "path": "react/.md",
-          "tokens": 2642
+          "tokens": 2646
         },
         {
           "id": "apis",
@@ -12320,7 +12307,7 @@
             "act"
           ],
           "path": "react/apis.md",
-          "tokens": 432
+          "tokens": 438
         },
         {
           "id": "act",
@@ -12339,7 +12326,7 @@
             "global.IS_REACT_ACT_ENVIRONMENT=true"
           ],
           "path": "react/act.md",
-          "tokens": 1450
+          "tokens": 1452
         },
         {
           "id": "addtransitiontype",
@@ -12354,7 +12341,7 @@
             "ViewTransition"
           ],
           "path": "react/addtransitiontype.md",
-          "tokens": 1175
+          "tokens": 1181
         },
         {
           "id": "cache",
@@ -12373,7 +12360,7 @@
             "TeamReport"
           ],
           "path": "react/cache.md",
-          "tokens": 4524
+          "tokens": 4526
         },
         {
           "id": "cachesignal",
@@ -12388,7 +12375,7 @@
             "aborted"
           ],
           "path": "react/cachesignal.md",
-          "tokens": 800
+          "tokens": 803
         },
         {
           "id": "captureownerstack",
@@ -12407,7 +12394,7 @@
             "errorInfo.componentStack"
           ],
           "path": "react/captureownerstack.md",
-          "tokens": 2431
+          "tokens": 2436
         },
         {
           "id": "createcontext",
@@ -12426,7 +12413,7 @@
             "<SomeContext.Provider>"
           ],
           "path": "react/createcontext.md",
-          "tokens": 1739
+          "tokens": 1743
         },
         {
           "id": "lazy",
@@ -12445,7 +12432,7 @@
             "import"
           ],
           "path": "react/lazy.md",
-          "tokens": 1563
+          "tokens": 1565
         },
         {
           "id": "memo",
@@ -12464,7 +12451,7 @@
             "name"
           ],
           "path": "react/memo.md",
-          "tokens": 4564
+          "tokens": 4566
         },
         {
           "id": "starttransition",
@@ -12482,7 +12469,7 @@
             "isPending"
           ],
           "path": "react/starttransition.md",
-          "tokens": 1087
+          "tokens": 1091
         },
         {
           "id": "use",
@@ -12501,7 +12488,7 @@
             "Button"
           ],
           "path": "react/use.md",
-          "tokens": 3799
+          "tokens": 3801
         },
         {
           "id": "experimental-taintobjectreference",
@@ -12520,7 +12507,7 @@
             "experimental_taintObjectReference"
           ],
           "path": "react/experimental-taintobjectreference.md",
-          "tokens": 1337
+          "tokens": 1347
         },
         {
           "id": "experimental-taintuniquevalue",
@@ -12539,7 +12526,7 @@
             "experimental_taintUniqueValue"
           ],
           "path": "react/experimental-taintuniquevalue.md",
-          "tokens": 2005
+          "tokens": 2013
         },
         {
           "id": "hooks",
@@ -12550,7 +12537,7 @@
             "useFormStatus"
           ],
           "path": "react/hooks.md",
-          "tokens": 312
+          "tokens": 319
         },
         {
           "id": "useformstatus",
@@ -12569,7 +12556,7 @@
             "data"
           ],
           "path": "react/useformstatus.md",
-          "tokens": 1698
+          "tokens": 1702
         },
         {
           "id": "components",
@@ -12588,7 +12575,7 @@
             "<script>"
           ],
           "path": "react/components.md",
-          "tokens": 4965
+          "tokens": 4971
         },
         {
           "id": "common-e-g",
@@ -12607,7 +12594,7 @@
             "useRef"
           ],
           "path": "react/common-e-g.md",
-          "tokens": 19098
+          "tokens": 19106
         },
         {
           "id": "apis",
@@ -12626,7 +12613,7 @@
             "react-dom/client"
           ],
           "path": "react/apis.md",
-          "tokens": 795
+          "tokens": 800
         },
         {
           "id": "createportal",
@@ -12645,7 +12632,7 @@
             "<div onClick>"
           ],
           "path": "react/createportal.md",
-          "tokens": 3163
+          "tokens": 3167
         },
         {
           "id": "flushsync",
@@ -12663,7 +12650,7 @@
             "useEffect"
           ],
           "path": "react/flushsync.md",
-          "tokens": 1558
+          "tokens": 1562
         },
         {
           "id": "preconnect",
@@ -12676,7 +12663,7 @@
             "href"
           ],
           "path": "react/preconnect.md",
-          "tokens": 651
+          "tokens": 654
         },
         {
           "id": "prefetchdns",
@@ -12690,7 +12677,7 @@
             "preconnect"
           ],
           "path": "react/prefetchdns.md",
-          "tokens": 714
+          "tokens": 717
         },
         {
           "id": "preinit",
@@ -12709,7 +12696,7 @@
             "reset"
           ],
           "path": "react/preinit.md",
-          "tokens": 1175
+          "tokens": 1178
         },
         {
           "id": "preinitmodule",
@@ -12728,7 +12715,7 @@
             "anonymous"
           ],
           "path": "react/preinitmodule.md",
-          "tokens": 899
+          "tokens": 903
         },
         {
           "id": "preload",
@@ -12747,7 +12734,7 @@
             "fetch"
           ],
           "path": "react/preload.md",
-          "tokens": 1563
+          "tokens": 1566
         },
         {
           "id": "preloadmodule",
@@ -12766,7 +12753,7 @@
             "use-credentials"
           ],
           "path": "react/preloadmodule.md",
-          "tokens": 855
+          "tokens": 860
         },
         {
           "id": "client-apis",
@@ -12779,7 +12766,7 @@
             "react-dom/server"
           ],
           "path": "react/client-apis.md",
-          "tokens": 243
+          "tokens": 250
         },
         {
           "id": "createroot",
@@ -12798,7 +12785,7 @@
             "componentStack"
           ],
           "path": "react/createroot.md",
-          "tokens": 5032
+          "tokens": 5036
         },
         {
           "id": "hydrateroot",
@@ -12817,7 +12804,7 @@
             "error"
           ],
           "path": "react/hydrateroot.md",
-          "tokens": 4542
+          "tokens": 4545
         },
         {
           "id": "server-apis",
@@ -12835,7 +12822,7 @@
             "renderToStaticMarkup"
           ],
           "path": "react/server-apis.md",
-          "tokens": 583
+          "tokens": 589
         },
         {
           "id": "rendertopipeablestream",
@@ -12854,7 +12841,7 @@
             "<script>"
           ],
           "path": "react/rendertopipeablestream.md",
-          "tokens": 6313
+          "tokens": 6320
         },
         {
           "id": "rendertoreadablestream",
@@ -12873,7 +12860,7 @@
             "<script>"
           ],
           "path": "react/rendertoreadablestream.md",
-          "tokens": 6331
+          "tokens": 6337
         },
         {
           "id": "rendertostaticmarkup",
@@ -12890,7 +12877,7 @@
             "hydrateRoot"
           ],
           "path": "react/rendertostaticmarkup.md",
-          "tokens": 636
+          "tokens": 642
         },
         {
           "id": "rendertostring",
@@ -12909,7 +12896,7 @@
             "renderToReadableStream"
           ],
           "path": "react/rendertostring.md",
-          "tokens": 1499
+          "tokens": 1504
         },
         {
           "id": "resume",
@@ -12928,7 +12915,7 @@
             "postpone"
           ],
           "path": "react/resume.md",
-          "tokens": 2139
+          "tokens": 2142
         },
         {
           "id": "resumetopipeablestream",
@@ -12947,7 +12934,7 @@
             "options"
           ],
           "path": "react/resumetopipeablestream.md",
-          "tokens": 1295
+          "tokens": 1301
         },
         {
           "id": "static-apis",
@@ -12961,7 +12948,7 @@
             "resumeAndPrerenderToNodeStream"
           ],
           "path": "react/static-apis.md",
-          "tokens": 446
+          "tokens": 452
         },
         {
           "id": "prerender",
@@ -12980,7 +12967,7 @@
             "<script>"
           ],
           "path": "react/prerender.md",
-          "tokens": 3567
+          "tokens": 3570
         },
         {
           "id": "prerendertonodestream",
@@ -12999,7 +12986,7 @@
             "bootstrapScripts"
           ],
           "path": "react/prerendertonodestream.md",
-          "tokens": 3666
+          "tokens": 3673
         },
         {
           "id": "resumeandprerender",
@@ -13018,7 +13005,7 @@
             "postpone"
           ],
           "path": "react/resumeandprerender.md",
-          "tokens": 1149
+          "tokens": 1155
         },
         {
           "id": "resumeandprerendertonodestream",
@@ -13037,7 +13024,7 @@
             "options"
           ],
           "path": "react/resumeandprerendertonodestream.md",
-          "tokens": 1189
+          "tokens": 1197
         },
         {
           "id": "compiling-libraries",
@@ -13051,7 +13038,7 @@
             "devDependencies"
           ],
           "path": "react/compiling-libraries.md",
-          "tokens": 866
+          "tokens": 872
         },
         {
           "id": "configuration",
@@ -13065,7 +13052,7 @@
             "gating"
           ],
           "path": "react/configuration.md",
-          "tokens": 763
+          "tokens": 767
         },
         {
           "id": "compilationmode",
@@ -13082,7 +13069,7 @@
             "\"use no memo\""
           ],
           "path": "react/compilationmode.md",
-          "tokens": 1147
+          "tokens": 1152
         },
         {
           "id": "gating",
@@ -13095,7 +13082,7 @@
             "importSpecifierName"
           ],
           "path": "react/gating.md",
-          "tokens": 664
+          "tokens": 667
         },
         {
           "id": "logger",
@@ -13113,7 +13100,7 @@
             "Timing"
           ],
           "path": "react/logger.md",
-          "tokens": 591
+          "tokens": 593
         },
         {
           "id": "panicthreshold",
@@ -13126,7 +13113,7 @@
             "'all_errors'"
           ],
           "path": "react/panicthreshold.md",
-          "tokens": 455
+          "tokens": 459
         },
         {
           "id": "target",
@@ -13145,7 +13132,7 @@
             "@latest"
           ],
           "path": "react/target.md",
-          "tokens": 751
+          "tokens": 753
         },
         {
           "id": "directives",
@@ -13162,7 +13149,7 @@
             "Configuration"
           ],
           "path": "react/directives.md",
-          "tokens": 1276
+          "tokens": 1279
         },
         {
           "id": "use-memo",
@@ -13179,7 +13166,7 @@
             "\"use no memo\""
           ],
           "path": "react/use-memo.md",
-          "tokens": 1220
+          "tokens": 1223
         },
         {
           "id": "use-no-memo",
@@ -13193,7 +13180,7 @@
             "\"use memo\""
           ],
           "path": "react/use-no-memo.md",
-          "tokens": 980
+          "tokens": 984
         },
         {
           "id": "react-performance-tracks",
@@ -13212,7 +13199,7 @@
             "getUser"
           ],
           "path": "react/react-performance-tracks.md",
-          "tokens": 1861
+          "tokens": 1868
         },
         {
           "id": "lints",
@@ -13231,7 +13218,7 @@
             "immutability"
           ],
           "path": "react/lints.md",
-          "tokens": 935
+          "tokens": 943
         },
         {
           "id": "exhaustive-deps",
@@ -13248,7 +13235,7 @@
             "settings"
           ],
           "path": "react/exhaustive-deps.md",
-          "tokens": 1054
+          "tokens": 1059
         },
         {
           "id": "rules-of-hooks",
@@ -13267,7 +13254,7 @@
             "additionalEffectHooks"
           ],
           "path": "react/rules-of-hooks.md",
-          "tokens": 1101
+          "tokens": 1106
         },
         {
           "id": "component-hook-factories",
@@ -13275,7 +13262,7 @@
           "description": "Validates against higher order functions defining nested components or hooks. Components and hooks should be defined ...",
           "tags": [],
           "path": "react/component-hook-factories.md",
-          "tokens": 520
+          "tokens": 527
         },
         {
           "id": "config",
@@ -13283,7 +13270,7 @@
           "description": "Validates the compiler [configuration options](/reference/react-compiler/configuration).",
           "tags": [],
           "path": "react/config.md",
-          "tokens": 502
+          "tokens": 505
         },
         {
           "id": "error-boundaries",
@@ -13295,7 +13282,7 @@
             "catch"
           ],
           "path": "react/error-boundaries.md",
-          "tokens": 531
+          "tokens": 536
         },
         {
           "id": "gating",
@@ -13303,7 +13290,7 @@
           "description": "Validates configuration of [gating mode](/reference/react-compiler/gating).",
           "tags": [],
           "path": "react/gating.md",
-          "tokens": 360
+          "tokens": 363
         },
         {
           "id": "globals",
@@ -13311,7 +13298,7 @@
           "description": "Validates against assignment/mutation of globals during render, part of ensuring that [side effects must run outside ...",
           "tags": [],
           "path": "react/globals.md",
-          "tokens": 510
+          "tokens": 513
         },
         {
           "id": "immutability",
@@ -13322,7 +13309,7 @@
             "push()"
           ],
           "path": "react/immutability.md",
-          "tokens": 809
+          "tokens": 813
         },
         {
           "id": "incompatible-library",
@@ -13334,7 +13321,7 @@
             "\"use no memo\" directive"
           ],
           "path": "react/incompatible-library.md",
-          "tokens": 1228
+          "tokens": 1234
         },
         {
           "id": "preserve-manual-memoization",
@@ -13346,7 +13333,7 @@
             "React.memo"
           ],
           "path": "react/preserve-manual-memoization.md",
-          "tokens": 609
+          "tokens": 617
         },
         {
           "id": "purity",
@@ -13360,7 +13347,7 @@
             "performance.now()"
           ],
           "path": "react/purity.md",
-          "tokens": 555
+          "tokens": 557
         },
         {
           "id": "refs",
@@ -13379,7 +13366,7 @@
             "box"
           ],
           "path": "react/refs.md",
-          "tokens": 796
+          "tokens": 798
         },
         {
           "id": "set-state-in-effect",
@@ -13389,7 +13376,7 @@
             "setState"
           ],
           "path": "react/set-state-in-effect.md",
-          "tokens": 823
+          "tokens": 829
         },
         {
           "id": "set-state-in-render",
@@ -13401,7 +13388,7 @@
             "count"
           ],
           "path": "react/set-state-in-render.md",
-          "tokens": 749
+          "tokens": 755
         },
         {
           "id": "static-components",
@@ -13409,7 +13396,7 @@
           "description": "Validates that components are static, not recreated every render. Components that are recreated dynamically can reset...",
           "tags": [],
           "path": "react/static-components.md",
-          "tokens": 617
+          "tokens": 623
         },
         {
           "id": "unsupported-syntax",
@@ -13420,7 +13407,7 @@
             "with"
           ],
           "path": "react/unsupported-syntax.md",
-          "tokens": 615
+          "tokens": 621
         },
         {
           "id": "use-memo",
@@ -13432,7 +13419,7 @@
             "useEffect"
           ],
           "path": "react/use-memo.md",
-          "tokens": 603
+          "tokens": 606
         },
         {
           "id": "overview",
@@ -13440,7 +13427,7 @@
           "description": "Just as different programming languages have their own ways of expressing concepts, React has its own idioms — or rul...",
           "tags": [],
           "path": "react/overview.md",
-          "tokens": 1100
+          "tokens": 1105
         },
         {
           "id": "components-and-hooks-must-be-pure",
@@ -13459,7 +13446,7 @@
             "useState"
           ],
           "path": "react/components-and-hooks-must-be-pure.md",
-          "tokens": 4342
+          "tokens": 4351
         },
         {
           "id": "react-calls-components-and-hooks",
@@ -13471,7 +13458,7 @@
             "<Button />"
           ],
           "path": "react/react-calls-components-and-hooks.md",
-          "tokens": 1240
+          "tokens": 1249
         },
         {
           "id": "rules-of-hooks",
@@ -13489,7 +13476,7 @@
             "eslint-plugin-react-hooks"
           ],
           "path": "react/rules-of-hooks.md",
-          "tokens": 988
+          "tokens": 993
         },
         {
           "id": "server-components",
@@ -13508,7 +13495,7 @@
             "expanded"
           ],
           "path": "react/server-components.md",
-          "tokens": 2432
+          "tokens": 2438
         },
         {
           "id": "server-functions",
@@ -13526,7 +13513,7 @@
             "useActionState"
           ],
           "path": "react/server-functions.md",
-          "tokens": 1937
+          "tokens": 1942
         },
         {
           "id": "directives",
@@ -13537,7 +13524,7 @@
             "'use server'"
           ],
           "path": "react/directives.md",
-          "tokens": 138
+          "tokens": 142
         },
         {
           "id": "use-client",
@@ -13556,7 +13543,7 @@
             "App.js"
           ],
           "path": "react/use-client.md",
-          "tokens": 4605
+          "tokens": 4609
         },
         {
           "id": "use-server",
@@ -13575,7 +13562,7 @@
             "await"
           ],
           "path": "react/use-server.md",
-          "tokens": 2544
+          "tokens": 2549
         },
         {
           "id": "legacy-react-apis",
@@ -13594,7 +13581,7 @@
             "PureComponent"
           ],
           "path": "react/legacy-react-apis.md",
-          "tokens": 663
+          "tokens": 669
         },
         {
           "id": "children",
@@ -13613,7 +13600,7 @@
             "this"
           ],
           "path": "react/children.md",
-          "tokens": 6381
+          "tokens": 6384
         },
         {
           "id": "cloneelement",
@@ -13632,7 +13619,7 @@
             "props.ref"
           ],
           "path": "react/cloneelement.md",
-          "tokens": 4007
+          "tokens": 4011
         },
         {
           "id": "component",
@@ -13651,7 +13638,7 @@
             "this.state"
           ],
           "path": "react/component.md",
-          "tokens": 17946
+          "tokens": 17949
         },
         {
           "id": "createelement",
@@ -13670,7 +13657,7 @@
             "ref"
           ],
           "path": "react/createelement.md",
-          "tokens": 1698
+          "tokens": 1703
         },
         {
           "id": "createref",
@@ -13689,7 +13676,7 @@
             "<input>"
           ],
           "path": "react/createref.md",
-          "tokens": 983
+          "tokens": 986
         },
         {
           "id": "forwardref",
@@ -13708,7 +13695,7 @@
             "<input>"
           ],
           "path": "react/forwardref.md",
-          "tokens": 3440
+          "tokens": 3444
         },
         {
           "id": "isvalidelement",
@@ -13727,7 +13714,7 @@
             "<div />"
           ],
           "path": "react/isvalidelement.md",
-          "tokens": 997
+          "tokens": 1001
         },
         {
           "id": "purecomponent",
@@ -13744,7 +13731,7 @@
             "set"
           ],
           "path": "react/purecomponent.md",
-          "tokens": 1439
+          "tokens": 1444
         }
       ]
     },
@@ -13872,33 +13859,66 @@
       "version": "11",
       "topics": [
         {
-          "id": "introduction",
-          "title": "Introduction",
+          "id": "send-cookies-cross-origin",
+          "title": "Send cookies cross-origin",
           "description": "If your API resides on a different origin than your front-end and you wish to send cookies to it, you will need to en...",
           "tags": [
             "{credentials: \"include\"}",
             "httpBatchLink",
             "httpLink",
             "headers",
-            "token",
+            "token"
+          ],
+          "path": "trpc/send-cookies-cross-origin.md",
+          "tokens": 637
+        },
+        {
+          "id": "http-batch-link",
+          "title": "HTTP Batch Link",
+          "description": "httpBatchLink is a terminating link that batches an array of individual tRPC operations into a single HTTP request th...",
+          "tags": [
+            "httpBatchLink",
             "links",
             "Promise.all",
             "HTTPBatchLinkOptions",
             "413 Payload Too Large",
-            "414 URI Too Long"
+            "414 URI Too Long",
+            "404 Not Found",
+            "maxURLLength",
+            "batching",
+            "httpLink"
           ],
-          "path": "trpc/introduction.md",
-          "tokens": 4006
+          "path": "trpc/http-batch-link.md",
+          "tokens": 1026
         },
         {
-          "id": "headers-and-authorization-authentication",
-          "title": "Headers and authorization / authentication",
-          "description": "If you're doing a web application, cookies are sent as part of the request as long as your client is on the same doma...",
+          "id": "http-batch-stream-link",
+          "title": "HTTP Batch Stream Link",
+          "description": "httpBatchStreamLink is a terminating link that batches an array of individual tRPC operations into a single HTTP requ...",
           "tags": [
+            "httpBatchStreamLink",
+            "httpBatchLink",
+            "httpBatchLink options",
+            "links",
+            "Promise.all",
+            "trpc-accept: application/jsonl",
+            "transfer-encoding: chunked",
+            "content-type: application/jsonl",
+            "data",
+            "responseMeta"
+          ],
+          "path": "trpc/http-batch-stream-link.md",
+          "tokens": 1965
+        },
+        {
+          "id": "http-subscription-link",
+          "title": "HTTP Subscription Link",
+          "description": "httpSubscriptionLink is a terminating link that's uses Server-sent Events (SSE) for subscriptions.",
+          "tags": [
+            "httpSubscriptionLink",
             "withCredentials: true",
             "EventSource",
             "eventSourceOptions",
-            "httpSubscriptionLink",
             "eventSourceOptions()",
             "url()",
             "retryLink",
@@ -13906,17 +13926,32 @@
             "reconnectAfterInactivityMs",
             "AsyncIterator"
           ],
-          "path": "trpc/headers-and-authorization-authentication.md",
-          "tokens": 3917
+          "path": "trpc/http-subscription-link.md",
+          "tokens": 2984
         },
         {
-          "id": "creating-a-custom-link",
-          "title": "Creating a custom link",
-          "description": "A link is a function that follows the TRPCLink type. Each link is composed of three parts:",
+          "id": "local-link",
+          "title": "Local Link",
+          "description": "localLink is a terminating link that allows you to make tRPC procedure calls directly in your application without goi...",
           "tags": [
+            "localLink",
+            "unstable_",
+            "httpLink",
+            "loggerLink",
+            "links",
+            "LoggerLinkOptions"
+          ],
+          "path": "trpc/local-link.md",
+          "tokens": 1048
+        },
+        {
+          "id": "links-overview",
+          "title": "Links Overview",
+          "description": "Links enable you to customize the flow of data between the tRPC Client and Server. A link should do only one thing, w...",
+          "tags": [
+            "links",
             "TRPCLink",
             "TRPCClientRuntime",
-            "links",
             "op",
             "Operation",
             "next",
@@ -13925,29 +13960,64 @@
             "observer",
             "next(op)"
           ],
-          "path": "trpc/creating-a-custom-link.md",
-          "tokens": 2619
+          "path": "trpc/links-overview.md",
+          "tokens": 1256
         },
         {
-          "id": "wslink-createwsclient-options",
-          "title": "wsLink / createWSClient Options",
-          "description": "The wsLink function requires a TRPCWebSocketClient to be passed, which can be configured with the fields defined in W...",
+          "id": "retry-link",
+          "title": "Retry Link",
+          "description": "retryLink is a link that allows you to retry failed operations in your tRPC client. It provides a customizable way to...",
+          "tags": [
+            "retryLink",
+            "@trpc/react-query",
+            "useQuery()",
+            "useMutation()",
+            "@tanstack/react-query",
+            "links",
+            "httpBatchLink",
+            "TRPCClientError",
+            "retry",
+            "tracked()"
+          ],
+          "path": "trpc/retry-link.md",
+          "tokens": 728
+        },
+        {
+          "id": "split-link",
+          "title": "Split Link",
+          "description": "import SplitLinkDiagram from '../../../static/img/split-link-diagram.svg';",
+          "tags": [
+            "splitLink",
+            "true",
+            "false",
+            "httpBatchLink",
+            "httpLink",
+            "utils/trpc.ts",
+            "condition"
+          ],
+          "path": "trpc/split-link.md",
+          "tokens": 758
+        },
+        {
+          "id": "websocket-link",
+          "title": "WebSocket Link",
+          "description": "wsLink is a terminating link that's used when using tRPC's WebSockets Client and Subscriptions, which you can learn m...",
           "tags": [
             "wsLink",
-            "createWSClient",
             "TRPCWebSocketClient",
-            "WebSocketClientOptions"
+            "createWSClient",
+            "WebSocketClientOptions",
+            "abortOnUnmount",
+            "@trpc/next"
           ],
-          "path": "trpc/wslink-createwsclient-options.md",
-          "tokens": 554
+          "path": "trpc/websocket-link.md",
+          "tokens": 1334
         },
         {
-          "id": "reference",
-          "title": "Reference",
-          "description": "You can check out the source code for this link on GitHub.",
+          "id": "server-side-helpers",
+          "title": "Server-Side Helpers",
+          "description": "The server-side helpers provides you with a set of helper functions that you can use to prefetch queries on the serve...",
           "tags": [
-            "abortOnUnmount",
-            "@trpc/next",
             "ssr: true",
             "req",
             "res",
@@ -13955,15 +14025,16 @@
             "useMutation",
             "prefetch",
             "fetch",
-            "prefetchInfinite"
+            "prefetchInfinite",
+            "fetchInfinite"
           ],
-          "path": "trpc/reference.md",
-          "tokens": 2015
+          "path": "trpc/server-side-helpers.md",
+          "tokens": 1175
         },
         {
-          "id": "add-trpc-to-existing-next-js-project",
-          "title": "Add tRPC to existing Next.js project",
-          "description": "import { InstallSnippet } from '@site/src/components/InstallSnippet';",
+          "id": "set-up-with-next-js-pages-router",
+          "title": "Set up with Next.js Pages Router",
+          "description": "import TabItem from '@theme/TabItem';\nimport Tabs from '@theme/Tabs';",
           "tags": [
             "tsconfig.json",
             "strictNullChecks",
@@ -13976,96 +14047,89 @@
             "config",
             "ctx"
           ],
-          "path": "trpc/add-trpc-to-existing-next-js-project.md",
-          "tokens": 1901
+          "path": "trpc/set-up-with-next-js-pages-router.md",
+          "tokens": 2079
         },
         {
-          "id": "fetch-data-in-getstaticprops",
-          "title": "Fetch data in getStaticProps",
-          "description": "Note that the default behaviour of react-query is to refetch the data on the client-side when it mounts, so if you wa...",
+          "id": "static-site-generation",
+          "title": "Static Site Generation",
+          "description": "Reference project: https://github.com/trpc/examples-next-prisma-todomvc",
           "tags": [
             "getStaticProps",
+            "trpcState",
             "react-query",
             "refetchOnMount",
             "refetchOnWindowFocus",
-            "false",
+            "false"
+          ],
+          "path": "trpc/static-site-generation.md",
+          "tokens": 940
+        },
+        {
+          "id": "server-side-rendering",
+          "title": "Server-Side Rendering",
+          "description": "To enable SSR just set ssr: true in your createTRPCNext config callback.",
+          "tags": [
             "ssr: true",
             "createTRPCNext",
             "getInitialProps",
             "getServerSideProps",
-            "config"
+            "getStaticProps",
+            "config",
+            "Response Caching",
+            "ssr",
+            "connection",
+            "TRPCClientError: fetch failed"
           ],
-          "path": "trpc/fetch-data-in-getstaticprops.md",
-          "tokens": 1780
+          "path": "trpc/server-side-rendering.md",
+          "tokens": 2228
         },
         {
-          "id": "faq",
-          "title": "FAQ",
-          "description": "While it's rare that you wouldn't want to forward the client's headers to the server when doing SSR, you might want t...",
+          "id": "createtrpcqueryutils",
+          "title": "createTRPCQueryUtils",
+          "description": "The use case for createTRPCQueryUtils is when you need to use the helpers outside of a React Component, for example i...",
           "tags": [
-            "connection",
-            "TRPCClientError: fetch failed",
-            "@tanstack/react-query",
-            "create-next-app",
-            "/pages",
-            "abortOnUnmount",
             "createTRPCQueryUtils",
             "react-router",
             "useUtils",
-            "@trpc/react-query"
-          ],
-          "path": "trpc/faq.md",
-          "tokens": 1563
-        },
-        {
-          "id": "usage",
-          "title": "Usage",
-          "description": "createTRPCQueryUtils returns an object with all the available queries you have in your routers. You use it the same w...",
-          "tags": [
-            "createTRPCQueryUtils",
-            "trpc",
-            "post",
-            "all",
-            "post.all",
-            "queryClient"
-          ],
-          "path": "trpc/usage.md",
-          "tokens": 551
-        },
-        {
-          "id": "helpers",
-          "title": "Helpers",
-          "description": "Much like useUtils, createTRPCQueryUtils gives you access to same set of helpers. The only difference is that you nee...",
-          "tags": [
-            "useUtils",
-            "createTRPCQueryUtils",
+            "@trpc/react-query",
+            "@tanstack/react-query",
             "queryClient",
+            "useQueryClient",
             "client",
-            "skipToken",
-            "useQuery",
-            "useInfiniteQuery",
-            "router",
-            "procedure",
-            "any"
+            "useCallback",
+            "trpc"
           ],
-          "path": "trpc/helpers.md",
-          "tokens": 1351
+          "path": "trpc/createtrpcqueryutils.md",
+          "tokens": 1491
         },
         {
-          "id": "infer-abstract-types-from-a-router-factory",
-          "title": "Infer abstract types from a \"Router Factory\"",
-          "description": "If you write a factory which creates a similar router interface several times in your application, you may wish to sh...",
+          "id": "inferring-types",
+          "title": "Inferring Types",
+          "description": "In addition to the type inference made available by @trpc/server (see here) this integration also provides some infer...",
           "tags": [
-            "@trpc/react-query/shared",
+            "@trpc/server",
+            "inferReactQueryProcedureOptions",
+            "@trpc/react-query",
+            "@trpc/react-query/shared"
+          ],
+          "path": "trpc/inferring-types.md",
+          "tokens": 1446
+        },
+        {
+          "id": "react-query-integration-classic",
+          "title": "React Query Integration (Classic)",
+          "description": "These are the docs for our 'Classic' React Query integration, which (while still supported) is not the recommended wa...",
+          "tags": [
             "@tanstack/react-query"
           ],
-          "path": "trpc/infer-abstract-types-from-a-router-factory.md",
-          "tokens": 1566
+          "path": "trpc/react-query-integration-classic.md",
+          "tokens": 585
         },
         {
-          "id": "add-trpc-to-existing-projects",
-          "title": "Add tRPC to existing projects",
-          "description": "import { InstallSnippet } from '@site/src/components/InstallSnippet';",
+          "id": "set-up-with-react-server-components",
+          "title": "Set up with React Server Components",
+          "description": "import TabItem from '@theme/TabItem';\nimport Tabs from '@theme/Tabs';",
           "tags": [
             "trpc/init.ts",
             "initTRPC",
@@ -14078,17 +14142,14 @@
             "serializeData",
             "deserializeData"
           ],
-          "path": "trpc/add-trpc-to-existing-projects.md",
-          "tokens": 1864
+          "path": "trpc/set-up-with-react-server-components.md",
+          "tokens": 2922
         },
         {
-          "id": "using-your-api",
-          "title": "Using your API",
-          "description": "Now you can use your tRPC API in your app. While you can use the React Query hooks in client components just like you...",
+          "id": "set-up-the-react-query-integration",
+          "title": "Set up the React Query Integration",
+          "description": "import TabItem from '@theme/TabItem';\nimport Tabs from '@theme/Tabs';",
           "tags": [
-            "useQuery",
-            "useSuspenseQuery",
-            ".prefetch()",
             "AppRouter",
             "createTRPCReact",
             "QueryClient",
@@ -14097,138 +14158,127 @@
             "queryClient",
             "TRPCClient"
           ],
-          "path": "trpc/using-your-api.md",
-          "tokens": 1705
+          "path": "trpc/set-up-the-react-query-integration.md",
+          "tokens": 890
         },
         {
-          "id": "usage-2",
-          "title": "Usage",
+          "id": "suspense",
+          "title": "Suspense",
           "description": "useSuspenseQuery & useSuspenseInfiniteQuery both return a [data, query]-tuple, to make it easy to directly use your d...",
           "tags": [
+            "<ErrorBoundary />",
             "useSuspenseQuery",
             "useSuspenseInfiniteQuery",
             "[data, query]",
             "useSuspenseQuery()",
             "useSuspenseInfiniteQuery()",
             "useSuspenseQueries()",
-            "useQueries()"
-          ],
-          "path": "trpc/usage-2.md",
-          "tokens": 607
-        },
-        {
-          "id": "prefetching",
-          "title": "Prefetching",
-          "description": "The performance of suspense queries can be improved by prefetching the query data before the Suspense component is re...",
-          "tags": [
+            "useQueries()",
             "usePrefetchQuery",
-            "usePrefetchInfiniteQuery",
-            "cursor",
-            "string",
-            "number"
+            "usePrefetchInfiniteQuery"
           ],
-          "path": "trpc/prefetching.md",
-          "tokens": 987
+          "path": "trpc/suspense.md",
+          "tokens": 1119
         },
         {
-          "id": "helpers-2",
-          "title": "Helpers",
+          "id": "useinfinitequery",
+          "title": "useInfiniteQuery",
           "description": "This helper gets the currently cached data from an existing infinite query",
           "tags": [
+            "cursor",
+            "string",
+            "number",
             "getInfiniteData()",
             "setInfiniteData()",
-            "@trpc/react-query",
-            "useQueries",
-            "useQuery",
-            "suspense"
+            "@trpc/react-query"
           ],
-          "path": "trpc/helpers-2.md",
-          "tokens": 860
+          "path": "trpc/useinfinitequery.md",
+          "tokens": 1240
         },
         {
-          "id": "usage-3",
-          "title": "Usage",
-          "description": "The useQueries hook is the same as that of @tanstack/query useQueries. The only difference is that you pass in a func...",
+          "id": "usequeries",
+          "title": "useQueries()",
+          "description": "The useQueries hook can be used to fetch a variable number of queries at the same time using only one hook call.",
           "tags": [
+            "useQueries",
+            "useQuery",
+            "suspense",
             "httpBatchLink",
             "wsLink",
             "findUnique()",
             "enabled",
-            "suspense",
-            "refetchOnWindowFocus",
+            "refetchOnWindowFocus"
+          ],
+          "path": "trpc/usequeries.md",
+          "tokens": 681
+        },
+        {
+          "id": "usequery",
+          "title": "useQuery()",
+          "description": "useQuery is the primary hook for data fetching, it works similarly to @tanstack/react-query's useQuery, but with some...",
+          "tags": [
             "useQuery",
             "@tanstack/react-query",
             "trpc",
-            "UseTRPCQueryOptions"
+            "UseTRPCQueryOptions",
+            "UseQueryOptions",
+            "enabled",
+            "refetchOnWindowFocus",
+            "trpc.ssr",
+            "ssr: true",
+            "trpc.abortOnUnmount"
           ],
-          "path": "trpc/usage-3.md",
-          "tokens": 1675
+          "path": "trpc/usequery.md",
+          "tokens": 1136
         },
         {
-          "id": "signature",
-          "title": "Signature",
-          "description": "useUtils is a hook that gives you access to helpers that let you manage the cached data of the queries you execute vi...",
+          "id": "usesubscription",
+          "title": "useSubscription()",
+          "description": "The useSubscription hook can be used to subscribe to a subscription procedure on the server.",
           "tags": [
+            "useSubscription",
             "undefined",
             "skipToken",
-            "@tanstack/react-query",
+            "@tanstack/react-query"
+          ],
+          "path": "trpc/usesubscription.md",
+          "tokens": 778
+        },
+        {
+          "id": "useutils",
+          "title": "useUtils",
+          "description": "useUtils is a hook that gives you access to helpers that let you manage the cached data of the queries you execute vi...",
+          "tags": [
             "useUtils",
             "@trpc/react-query",
+            "@tanstack/react-query",
             "queryClient",
             "useContext",
             "useContext()",
             "10.41.0",
-            "trpc"
+            "trpc",
+            "post",
+            "all"
           ],
-          "path": "trpc/signature.md",
-          "tokens": 1229
+          "path": "trpc/useutils.md",
+          "tokens": 2764
         },
         {
-          "id": "helpers-3",
-          "title": "Helpers",
-          "description": "These are the helpers you'll get access to via useUtils. The table below will help you know which tRPC helper wraps w...",
+          "id": "migrating-from-the-classic-react-client",
+          "title": "Migrating from the classic React Client",
+          "description": "There are a few approaches to migrate over, and this library is a significant departure from the classic client, so w...",
           "tags": [
-            "useUtils",
-            "@tanstack/react-query",
-            "fetch",
-            "queryClient.fetchQuery",
-            "prefetch",
-            "queryClient.prefetchQuery",
-            "fetchInfinite",
-            "queryClient.fetchInfiniteQuery",
-            "prefetchInfinite",
-            "queryClient.prefetchInfiniteQuery"
-          ],
-          "path": "trpc/helpers-3.md",
-          "tokens": 1042
-        },
-        {
-          "id": "query-invalidation",
-          "title": "Query Invalidation",
-          "description": "You invalidate queries via the invalidate helper. invalidate is actually a special helper given that, unlike the othe...",
-          "tags": [
-            "invalidate",
-            "useUtils",
             "Migrate Hooks to xxxOptions API",
-            "Migrate context provider setup"
-          ],
-          "path": "trpc/query-invalidation.md",
-          "tokens": 1463
-        },
-        {
-          "id": "gradual-migration",
-          "title": "Gradual migration",
-          "description": "The new and classic clients are compatible with each other and can live together in the same application.\nThis means ...",
-          "tags": [
+            "Migrate context provider setup",
             "useUtils"
           ],
-          "path": "trpc/gradual-migration.md",
-          "tokens": 796
+          "path": "trpc/migrating-from-the-classic-react-client.md",
+          "tokens": 831
         },
         {
-          "id": "add-trpc-to-existing-projects-2",
-          "title": "Add tRPC to existing projects",
-          "description": "import { InstallSnippet } from '@site/src/components/InstallSnippet';",
+          "id": "set-up-with-react-server-components-2",
+          "title": "Set up with React Server Components",
+          "description": "import TabItem from '@theme/TabItem';\nimport Tabs from '@theme/Tabs';",
           "tags": [
             "trpc/init.ts",
             "initTRPC",
@@ -14241,46 +14291,28 @@
             "serializeData",
             "deserializeData"
           ],
-          "path": "trpc/add-trpc-to-existing-projects-2.md",
-          "tokens": 1950
+          "path": "trpc/set-up-with-react-server-components-2.md",
+          "tokens": 3676
         },
         {
-          "id": "using-your-api-2",
-          "title": "Using your API",
-          "description": "Now you can use your tRPC API in your app. While you can use the React Query hooks in client components just like you...",
+          "id": "tanstack-react-query",
+          "title": "TanStack React Query",
+          "description": "Compared to our classic React Query Integration this client is simpler and more TanStack Query-native, providing fact...",
           "tags": [
-            "useQuery",
-            "useSuspenseQuery",
-            "greeting.data",
-            "undefined",
-            "await",
-            "prefetchQuery",
-            "prefetch",
-            "HydrateClient",
-            "fetchQuery",
-            "@tanstack/react-query"
-          ],
-          "path": "trpc/using-your-api-2.md",
-          "tokens": 1800
-        },
-        {
-          "id": "setup",
-          "title": "Setup",
-          "description": "The following dependencies should be installed",
-          "tags": [
+            "@tanstack/react-query",
             "AppRouter",
             "createTRPCContext",
             "TRPCProvider",
             "QueryClient",
             "QueryClientProvider"
           ],
-          "path": "trpc/setup.md",
-          "tokens": 1590
+          "path": "trpc/tanstack-react-query.md",
+          "tokens": 1718
         },
         {
-          "id": "usage-4",
-          "title": "Usage",
-          "description": "The philosophy of this client is to provide thin and type-safe factories which work natively and type-safely with Tan...",
+          "id": "tanstack-react-query-2",
+          "title": "TanStack React Query",
+          "description": "Compared to our classic React Query Integration this client is simpler and more TanStack Query-native, providing fact...",
           "tags": [
             "trpc",
             "AppRouter",
@@ -14293,42 +14325,39 @@
             "prefetchInfiniteQuery",
             "invalidateQueries"
           ],
-          "path": "trpc/usage-4.md",
-          "tokens": 4180
+          "path": "trpc/tanstack-react-query-2.md",
+          "tokens": 3628
         },
         {
-          "id": "trpc-client",
-          "title": "tRPC Client",
-          "description": "The \"Vanilla\" tRPC client can be used to call your API procedures as if they are local functions, enabling a seamless...",
+          "id": "inferring-types-2",
+          "title": "Inferring Types",
+          "description": "It is often useful to access the types of your API within your clients. For this purpose, you are able to infer the t...",
           "tags": [
-            "@trpc/client",
+            "AppRouter",
             "@trpc/server",
+            "inferRouterInputs<TRouter>",
+            "inferRouterOutputs<TRouter>",
+            "post.create",
+            "TRPCClientError",
+            "@trpc/client",
             "createTRPCClient",
             "links"
           ],
-          "path": "trpc/trpc-client.md",
-          "tokens": 722
+          "path": "trpc/inferring-types-2.md",
+          "tokens": 1447
         },
         {
-          "id": "extensions-community-add-ons",
-          "title": "🧩 Extensions & community add-ons",
-          "description": "| Description                                                                        | Link                          ...",
+          "id": "awesome-trpc-collection",
+          "title": "Awesome tRPC Collection",
+          "description": "A collection of resources on tRPC.",
           "tags": [],
-          "path": "trpc/extensions-community-add-ons.md",
-          "tokens": 2180
+          "path": "trpc/awesome-trpc-collection.md",
+          "tokens": 4505
         },
         {
-          "id": "starting-points-example-projects-etc",
-          "title": "🍀 Starting points, example projects, etc",
-          "description": "| Description                                                                                             | Link     ...",
-          "tags": [],
-          "path": "trpc/starting-points-example-projects-etc.md",
-          "tokens": 1426
-        },
-        {
-          "id": "open-source-projects-using-trpc",
-          "title": "🏁 Open-source projects using tRPC",
-          "description": "| Description                                                                                                        ...",
+          "id": "faq-troubleshooting",
+          "title": "FAQ / Troubleshooting",
+          "description": "Collection of frequently asked questions with ideas on how to troubleshoot & resolve them.",
           "tags": [
             "any",
             "\"strict\": true",
@@ -14341,13 +14370,21 @@
             "\"paths\": [...]",
             "unstable_"
           ],
-          "path": "trpc/open-source-projects-using-trpc.md",
-          "tokens": 2591
+          "path": "trpc/faq-troubleshooting.md",
+          "tokens": 1630
         },
         {
-          "id": "relationship-to-graphql",
-          "title": "Relationship to GraphQL",
+          "id": "further-reading",
+          "title": "Further Reading",
           "description": "If you already have a custom GraphQL-server for your project, you may not want to use tRPC. GraphQL is amazing; it's ...",
+          "tags": [],
+          "path": "trpc/further-reading.md",
+          "tokens": 929
+        },
+        {
+          "id": "http-rpc-specification",
+          "title": "HTTP RPC Specification",
+          "description": "| HTTP Method  | Mapping           | Notes                                                                           ...",
           "tags": [
             "GET",
             ".query()",
@@ -14355,131 +14392,88 @@
             ".mutation()",
             ".subscription()",
             "byId",
-            "/api/trpc/post.byId"
-          ],
-          "path": "trpc/relationship-to-graphql.md",
-          "tokens": 1083
-        },
-        {
-          "id": "batching",
-          "title": "Batching",
-          "description": "When batching, we combine all parallel procedure calls of the same HTTP method in one request using a data loader.",
-          "tags": [
+            "/api/trpc/post.byId",
             ",",
             "pathname",
-            "input",
-            "Record<number, unknown>",
-            "batch=1",
-            "207 Multi-Status",
-            "/api/trpc",
-            "/api/trpc/postById,relatedPosts",
-            "search",
-            "methodOverride"
+            "input"
           ],
-          "path": "trpc/batching.md",
-          "tokens": 2262
+          "path": "trpc/http-rpc-specification.md",
+          "tokens": 2602
         },
         {
-          "id": "vocabulary",
-          "title": "Vocabulary",
-          "description": "Below are some terms that are used frequently in the tRPC ecosystem. We'll be using these throughout the documentatio...",
+          "id": "example-apps",
+          "title": "Example Apps",
+          "description": "import TabItem from '@theme/TabItem';\nimport Tabs from '@theme/Tabs';",
           "tags": [
             "npm",
             "yarn",
             "package.json",
             "scripts"
           ],
-          "path": "trpc/vocabulary.md",
-          "tokens": 1665
+          "path": "trpc/example-apps.md",
+          "tokens": 1308
         },
         {
-          "id": "use-trpc",
-          "title": "Use tRPC",
-          "description": "\"Using tRPC\" means different things to different people. The goal of this page is to guide you to the right resources...",
+          "id": "getting-started",
+          "title": "Getting Started",
+          "description": "For a quick video overview of tRPC's concepts, check out the videos below:",
           "tags": [],
-          "path": "trpc/use-trpc.md",
-          "tokens": 785
+          "path": "trpc/getting-started.md",
+          "tokens": 920
         },
         {
-          "id": "introduction-2",
-          "title": "Introduction",
-          "description": "tRPC allows you to\neasily build & consume fully typesafe APIs without schemas or code generation.",
+          "id": "trpc",
+          "title": "tRPC",
+          "description": "End-to-end typesafe APIs made easy",
           "tags": [],
-          "path": "trpc/introduction-2.md",
-          "tokens": 526
+          "path": "trpc/trpc.md",
+          "tokens": 906
         },
         {
-          "id": "features",
-          "title": "Features",
+          "id": "quickstart",
+          "title": "Quickstart",
           "description": "import CodeBlock from '@theme/CodeBlock';\nimport TabItem from '@theme/TabItem';\nimport Tabs from '@theme/Tabs';",
           "tags": [
             "\"strict\": true",
             "tsconfig.json",
             "@trpc/server",
-            "@trpc/client"
-          ],
-          "path": "trpc/features.md",
-          "tokens": 834
-        },
-        {
-          "id": "defining-a-backend-router",
-          "title": "Defining a backend router",
-          "description": "Let's walk through the steps of building a typesafe API with tRPC. To start, this API will contain three endpoints wi...",
-          "tags": [
+            "@trpc/client",
             "appRouter",
             "publicProcedure.query()",
             "userList",
             "userById",
             "publicProcedure.input()",
-            "zod",
-            "userCreate",
-            "standalone"
+            "zod"
           ],
-          "path": "trpc/defining-a-backend-router.md",
-          "tokens": 1967
+          "path": "trpc/quickstart.md",
+          "tokens": 3935
         },
         {
-          "id": "using-your-new-backend-on-the-client",
-          "title": "Using your new backend on the client",
-          "description": "Let's now move to the client-side code and embrace the power of end-to-end typesafety. When we import the AppRouter t...",
+          "id": "migrate-from-v10-to-v11",
+          "title": "Migrate from v10 to v11",
+          "description": "import { InstallSnippet } from '@site/src/components/InstallSnippet';",
           "tags": [
-            "AppRouter",
-            "trpc",
-            "Date",
-            "string",
-            "@trpc/tanstack-react-query",
-            "@trpc/react-query",
-            "Recommended",
             "transformer",
-            "@tanstack/react-query"
-          ],
-          "path": "trpc/using-your-new-backend-on-the-client.md",
-          "tokens": 1477
-        },
-        {
-          "id": "full-reverse-chronological-changelog",
-          "title": "Full reverse-chronological changelog",
-          "description": "We are excited to announce the new TanStack React Query integration for tRPC is now available on tRPC's next-release!",
-          "tags": [
+            "@trpc/react-query",
+            "@tanstack/react-query",
             "next",
             "<a>",
             "callProcedure()",
             "{ router: AnyRouter }",
             "{ _def: AnyRouter['_def'] }",
             "basePath",
-            "createHTTP2Handler",
-            "createHTTPServer",
-            "TRPCProcedureOptions",
-            "@trpc/client"
+            "createHTTP2Handler"
           ],
-          "path": "trpc/full-reverse-chronological-changelog.md",
-          "tokens": 4338
+          "path": "trpc/migrate-from-v10-to-v11.md",
+          "tokens": 4261
         },
         {
-          "id": "how-to-add-trpc",
-          "title": "How to add tRPC",
-          "description": "Implement your tRPC router. A sample router is given below:",
+          "id": "aws-lambda-api-gateway-adapter",
+          "title": "AWS Lambda + API Gateway Adapter",
+          "description": "The AWS Lambda adapter is supported for API Gateway REST API(v1) and HTTP API(v2), and Lambda Function URL use cases.",
           "tags": [
+            "httpBatchLink",
+            "httpLink",
             "getUser",
             "INPUT",
             "APIGatewayProxyEvent",
@@ -14487,16 +14481,14 @@
             "responseTransferMode: STREAM",
             "responseStream",
             "event",
-            "context",
-            "awslambda.streamifyResponse()",
-            "awslambda"
+            "context"
           ],
-          "path": "trpc/how-to-add-trpc.md",
-          "tokens": 1133
+          "path": "trpc/aws-lambda-api-gateway-adapter.md",
+          "tokens": 1334
         },
         {
-          "id": "how-to-add-trpc-to-existing-express-project",
-          "title": "How to add tRPC to existing Express project",
+          "id": "express-adapter",
+          "title": "Express Adapter",
           "description": "Implement your tRPC router. A sample router is given below:",
           "tags": [
             "appRouter",
@@ -14506,13 +14498,13 @@
             "req.body",
             "{name: string}"
           ],
-          "path": "trpc/how-to-add-trpc-to-existing-express-project.md",
-          "tokens": 673
+          "path": "trpc/express-adapter.md",
+          "tokens": 646
         },
         {
-          "id": "how-to-use-trpc-with-fastify",
-          "title": "How to use tRPC with Fastify",
-          "description": "First of all you need a router to handle your queries, mutations and subscriptions.",
+          "id": "fastify-adapter",
+          "title": "Fastify Adapter",
+          "description": "The best way to start with the Fastify adapter is to take a look at the example application.",
           "tags": [
             "router.ts",
             "appRouter",
@@ -14525,261 +14517,246 @@
             "req.body",
             "User"
           ],
-          "path": "trpc/how-to-use-trpc-with-fastify.md",
-          "tokens": 2050
+          "path": "trpc/fastify-adapter.md",
+          "tokens": 1635
         },
         {
-          "id": "common-setup",
-          "title": "Common setup",
-          "description": "You can skip this step if you use Deno Deploy.",
+          "id": "fetch-edge-runtimes-adapter",
+          "title": "Fetch / Edge Runtimes Adapter",
+          "description": "import TabItem from '@theme/TabItem';\nimport Tabs from '@theme/Tabs';",
           "tags": [
+            "Request",
+            "Response",
+            "fetch",
+            "Headers",
+            "URL",
             "router.ts",
             "appRouter",
-            "context.ts"
-          ],
-          "path": "trpc/common-setup.md",
-          "tokens": 534
-        },
-        {
-          "id": "runtimes-specific-setup",
-          "title": "Runtimes-specific setup",
-          "description": "You need the Wrangler CLI to run Cloudflare Workers.",
-          "tags": [
-            "wrangler dev server.ts",
-            "getUser",
-            "INPUT",
-            "createUser",
-            "req.body",
-            "User",
-            "router.ts",
             "context.ts",
-            "fetchRequestHandler",
-            "app.ts"
+            "wrangler dev server.ts",
+            "getUser"
           ],
-          "path": "trpc/runtimes-specific-setup.md",
-          "tokens": 2097
+          "path": "trpc/fetch-edge-runtimes-adapter.md",
+          "tokens": 2909
         },
         {
-          "id": "handling-cors-and-other-advanced-usage",
-          "title": "Handling CORS, and other Advanced usage",
-          "description": "While you can usually just \"set and forget\" the API Handler as shown above, sometimes you might want to modify it fur...",
+          "id": "next-js-adapter",
+          "title": "Next.js Adapter",
+          "description": "tRPC's support for Next.js is far more expansive than just an adapter. This page covers a brief summary of how to set...",
           "tags": [
+            "pages/api/trpc/[trpc].ts",
             "createNextApiHandler",
             "req",
-            "res",
+            "res"
+          ],
+          "path": "trpc/next-js-adapter.md",
+          "tokens": 888
+        },
+        {
+          "id": "standalone-adapter",
+          "title": "Standalone Adapter",
+          "description": "tRPC's Standalone Adapter is the simplest way to get a new project working. It's ideal for local development, and for...",
+          "tags": [
             "cors",
             "middleware",
             "createHTTPHandler",
             "createHTTPServer",
             "http.Server",
-            "basePath"
-          ],
-          "path": "trpc/handling-cors-and-other-advanced-usage.md",
-          "tokens": 2050
-        },
-        {
-          "id": "http2",
-          "title": "HTTP2",
-          "description": "The Standalone adapter also supports HTTP/2.",
-          "tags": [
+            "basePath",
             "createContext",
-            "onError",
-            "responseMeta",
-            "splitLink"
+            "onError"
           ],
-          "path": "trpc/http2.md",
-          "tokens": 1837
+          "path": "trpc/standalone-adapter.md",
+          "tokens": 2029
         },
         {
-          "id": "api-response-caching",
-          "title": "API Response caching",
-          "description": "Since all queries are normal HTTP GETs, we can use normal HTTP headers to cache responses, make the responses snappy,...",
+          "id": "authorization",
+          "title": "Authorization",
+          "description": "The createContext function is called for each incoming request, so here you can add contextual information about the ...",
           "tags": [
-            "GET",
+            "createContext"
+          ],
+          "path": "trpc/authorization.md",
+          "tokens": 667
+        },
+        {
+          "id": "response-caching",
+          "title": "Response Caching",
+          "description": "The below examples uses Vercel's edge caching to serve data to your users as fast as possible.",
+          "tags": [
             "responseMeta",
+            "splitLink",
+            "GET"
+          ],
+          "path": "trpc/response-caching.md",
+          "tokens": 1103
+        },
+        {
+          "id": "context",
+          "title": "Context",
+          "description": "Your context holds data that all of your tRPC procedures will have access to, and is a great place to put things like...",
+          "tags": [
             "initTRPC",
             ".context<TContext>()",
             ".create()",
             "TContext",
-            "createContext()"
-          ],
-          "path": "trpc/api-response-caching.md",
-          "tokens": 1467
-        },
-        {
-          "id": "inner-and-outer-context",
-          "title": "Inner and outer context",
-          "description": "In some scenarios it could make sense to split up your context into \"inner\" and \"outer\" functions.",
-          "tags": [
+            "createContext()",
             "prisma",
             "createContextInner",
             "Context",
             "req",
-            "res",
-            "undefined",
-            "TOO_MANY_REQUESTS",
-            "MAX_BATCH_SIZE",
-            "Date",
-            "Map"
+            "res"
           ],
-          "path": "trpc/inner-and-outer-context.md",
-          "tokens": 2597
+          "path": "trpc/context.md",
+          "tokens": 1898
         },
         {
-          "id": "error-codes",
-          "title": "Error codes",
-          "description": "tRPC defines a list of error codes that each represent a different type of error and response with a different HTTP c...",
+          "id": "data-transformers",
+          "title": "Data Transformers",
+          "description": "You are able to serialize the response data & input args. The transformers need to be added both to the server and th...",
+          "tags": [
+            "Date",
+            "Map",
+            "Set",
+            "initTRPC",
+            "httpLink()",
+            "wsLink()",
+            "transformer",
+            "createTRPCClient()",
+            "utils/trpc.ts",
+            "parse"
+          ],
+          "path": "trpc/data-transformers.md",
+          "tokens": 1464
+        },
+        {
+          "id": "error-handling",
+          "title": "Error Handling",
+          "description": "Whenever an error occurs in a procedure, tRPC responds to the client with an object that includes an \"error\" property...",
           "tags": [
             "If-Match",
             "412 Precondition Failed",
             "getHTTPStatusCodeFromError",
             "TRPCError",
-            "onError",
+            "onError"
+          ],
+          "path": "trpc/error-handling.md",
+          "tokens": 2642
+        },
+        {
+          "id": "merging-routers",
+          "title": "Merging Routers",
+          "description": "Writing all API-code in your code in the same file is not a great idea. It's easy to merge routers with other routers.",
+          "tags": [
             "nested1",
             "nested2",
             "t.mergeRouters",
-            "lazy",
-            "meta"
+            "lazy"
           ],
-          "path": "trpc/error-codes.md",
-          "tokens": 5164
+          "path": "trpc/merging-routers.md",
+          "tokens": 1271
         },
         {
-          "id": "using-concat-to-create-reusable-middlewares-and-plugins",
-          "title": "Using .concat() to create reusable middlewares and plugins",
-          "description": "tRPC has an API called .concat() which allows you to independently define a partial procedure that can be used with a...",
+          "id": "metadata",
+          "title": "Metadata",
+          "description": "Procedure metadata allows you to add an optional procedure specific meta property which will be available in all midd...",
           "tags": [
+            "meta",
+            "trpc-openapi"
+          ],
+          "path": "trpc/metadata.md",
+          "tokens": 555
+        },
+        {
+          "id": "middlewares",
+          "title": "Middlewares",
+          "description": "You are able to add middleware(s) to a procedure with the t.procedure.use() method. The middleware(s) will wrap the i...",
+          "tags": [
+            "t.procedure.use()",
+            "adminProcedure",
+            "TRPCError",
             ".concat()",
             "t.middleware",
             "Context",
-            "experimental_standaloneMiddleware()"
-          ],
-          "path": "trpc/using-concat-to-create-reusable-middlewares-and-plugins.md",
-          "tokens": 587
-        },
-        {
-          "id": "extending-middlewares",
-          "title": "Extending middlewares",
-          "description": "We have prefixed this as unstable_ as it's a new API, but you're safe to use it! Read more.",
-          "tags": [
+            "experimental_standaloneMiddleware()",
             "unstable_",
             ".pipe()",
-            "fooMiddleware",
-            "ctx.a",
-            "barMiddleware",
-            "initTRPC"
+            "fooMiddleware"
           ],
-          "path": "trpc/extending-middlewares.md",
-          "tokens": 607
+          "path": "trpc/middlewares.md",
+          "tokens": 2938
         },
         {
-          "id": "experimental-standalone-middlewares",
-          "title": "Experimental: standalone middlewares",
-          "description": "This has been deprecated in favor of .concat()",
+          "id": "non-json-content-types",
+          "title": "Non-JSON Content Types",
+          "description": "In addition to JSON-serializable data, tRPC can use FormData, File, and other Binary types as procedure inputs",
           "tags": [
-            ".concat()",
-            "experimental_standaloneMiddleware",
-            "t.middleware",
-            "Context",
             "httpLink",
             "httpBatchLink",
             "httpBatchStreamLink",
-            "transformer"
-          ],
-          "path": "trpc/experimental-standalone-middlewares.md",
-          "tokens": 1373
-        },
-        {
-          "id": "server-usage",
-          "title": "Server Usage",
-          "description": "When a request is handled by tRPC, it takes care of parsing the request body based on the Content-Type header of the ...",
-          "tags": [
+            "transformer",
             "Content-Type",
             "Failed to parse body as XXX",
             "FormData",
             "File",
             "ReadableStream",
-            "Blob",
-            "Uint8Array",
-            "Query",
-            "Mutation",
-            "Subscription"
+            "Blob"
           ],
-          "path": "trpc/server-usage.md",
-          "tokens": 924
+          "path": "trpc/non-json-content-types.md",
+          "tokens": 1087
         },
         {
-          "id": "reusable-base-procedures",
-          "title": "Reusable \"Base Procedures\"",
-          "description": "As a general pattern we recommend you rename and export t.procedure as publicProcedure, which then makes room for you...",
+          "id": "define-procedures",
+          "title": "Define Procedures",
+          "description": "A procedure is a function which is exposed to the client, it can be one of:",
           "tags": [
+            "Query",
+            "Mutation",
+            "Subscription",
+            "t",
             "t.procedure",
             "publicProcedure",
             "authedProcedure",
-            "organizationId"
+            "organizationId",
+            "inferProcedureBuilderResolverOptions"
           ],
-          "path": "trpc/reusable-base-procedures.md",
-          "tokens": 753
+          "path": "trpc/define-procedures.md",
+          "tokens": 1793
         },
         {
-          "id": "inferring-the-options-type-of-a-base-procedure",
-          "title": "Inferring the options type of a \"Base Procedure\"",
-          "description": "In addition to being able to infer the input and output types of a procedure, you can also infer the options type of ...",
+          "id": "define-routers",
+          "title": "Define Routers",
+          "description": "To begin building your tRPC-based API, you'll first need to define your router. Once you've mastered the fundamentals...",
           "tags": [
-            "inferProcedureBuilderResolverOptions",
             "t",
             "appRouter"
           ],
-          "path": "trpc/inferring-the-options-type-of-a-base-procedure.md",
-          "tokens": 1115
+          "path": "trpc/define-routers.md",
+          "tokens": 823
         },
         {
-          "id": "advanced-usage",
-          "title": "Advanced usage",
-          "description": "When initializing your router, tRPC allows you to:",
+          "id": "server-side-calls",
+          "title": "Server Side Calls",
+          "description": "You may need to call your procedure(s) directly from the same server they're hosted in, createCallerFactory() can be ...",
           "tags": [
-            "t",
             "createCallerFactory()",
-            "createCaller"
-          ],
-          "path": "trpc/advanced-usage.md",
-          "tokens": 551
-        },
-        {
-          "id": "create-caller",
-          "title": "Create caller",
-          "description": "With the t.createCallerFactory-function you can create a server-side caller of any router. You first call createCalle...",
-          "tags": [
+            "createCaller",
             "t.createCallerFactory",
             "createCallerFactory",
-            "Context"
-          ],
-          "path": "trpc/create-caller.md",
-          "tokens": 576
-        },
-        {
-          "id": "router-createcaller",
-          "title": "router.createCaller()",
-          "description": "With the router.createCaller({}) function (first argument is Context) we retrieve an instance of RouterCaller.",
-          "tags": [
+            "Context",
             "router.createCaller()",
             "router.createCaller({})",
-            "Context",
             "RouterCaller",
             "greeting",
-            "post",
-            "secret",
-            "createFactoryCaller",
-            "createCaller",
-            "onError"
+            "post"
           ],
-          "path": "trpc/router-createcaller.md",
-          "tokens": 2081
+          "path": "trpc/server-side-calls.md",
+          "tokens": 2195
         },
         {
-          "id": "automatic-tracking-of-id-using-tracked-recommended",
-          "title": "Automatic tracking of id using tracked() (recommended)",
-          "description": "If you yield an event using our tracked()-helper and include an id, the client will automatically reconnect when it g...",
+          "id": "subscriptions",
+          "title": "Subscriptions",
+          "description": "Subscriptions are a type of real-time event stream between the client and server. Use subscriptions when you need to ...",
           "tags": [
             "tracked()",
             "yield",
@@ -14792,46 +14769,28 @@
             ".unsubscribe()",
             "try...finally"
           ],
-          "path": "trpc/automatic-tracking-of-id-using-tracked-recommended.md",
-          "tokens": 1696
+          "path": "trpc/subscriptions.md",
+          "tokens": 3776
         },
         {
-          "id": "output-validation",
-          "title": "Output validation",
-          "description": "Since subscriptions are async iterators, you have to go through the iterator to validate the output.",
+          "id": "input-output-validators",
+          "title": "Input & Output Validators",
+          "description": "tRPC procedures may define validation logic for their input and/or output, and validators are also used to infer the ...",
           "tags": [
             "procedure.input()",
             ".input()",
-            "INTERNAL_SERVER_ERROR"
-          ],
-          "path": "trpc/output-validation.md",
-          "tokens": 2533
-        },
-        {
-          "id": "library-integrations",
-          "title": "Library integrations",
-          "description": "tRPC works out of the box with a number of popular validation and parsing libraries, including any library conforming...",
-          "tags": [
+            "INTERNAL_SERVER_ERROR",
             "@robolex/sure"
           ],
-          "path": "trpc/library-integrations.md",
-          "tokens": 1843
+          "path": "trpc/input-output-validators.md",
+          "tokens": 3106
         },
         {
-          "id": "contributing-your-own-validator-library",
-          "title": "Contributing your own Validator Library",
-          "description": "If you work on a validator library which supports tRPC usage, please feel free to open a PR for this page with equiva...",
+          "id": "websockets",
+          "title": "WebSockets",
+          "description": "You can use WebSockets for all or some of the communication with your server, see wsLink for how to set it up on the ...",
           "tags": [
-            "TRPCClient"
-          ],
-          "path": "trpc/contributing-your-own-validator-library.md",
-          "tokens": 676
-        },
-        {
-          "id": "authentication-connection-params",
-          "title": "Authentication / connection params",
-          "description": "If you're doing a web application, you can ignore this section as the cookies are sent as part of the request.",
-          "tags": [
+            "TRPCClient",
             "connectionParams",
             "createWSClient",
             "tracked()",
@@ -14840,11 +14799,10 @@
             "lastEventId",
             "ReadableStream",
             "query",
-            "mutation",
-            "subscription"
+            "mutation"
           ],
-          "path": "trpc/authentication-connection-params.md",
-          "tokens": 1372
+          "path": "trpc/websockets.md",
+          "tokens": 1873
         }
       ]
     },

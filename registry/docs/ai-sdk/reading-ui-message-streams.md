@@ -97,3 +97,5 @@ async function resumeConversation(lastMessage: UIMessage) {
   }
 }
 ```
+
+# Message Metadata

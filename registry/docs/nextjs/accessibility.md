@@ -29,3 +29,5 @@ For example, this plugin helps ensure you add alt text to `img` tags, use correc
 - [The A11y Project](https://www.a11yproject.com/)
 - Check [color contrast ratios](https://developer.mozilla.org/docs/Web/Accessibility/Understanding_WCAG/Perceivable/Color_contrast) between foreground and background elements
 - Use [`prefers-reduced-motion`](https://web.dev/prefers-reduced-motion/) when working with animations
+
+# Fast Refresh

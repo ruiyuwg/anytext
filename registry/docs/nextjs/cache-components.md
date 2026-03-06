@@ -643,3 +643,5 @@ Learn more about the config option for Cache Components.
   - API Reference for the revalidateTag function.
 - [updateTag](/docs/app/api-reference/functions/updateTag)
   - API Reference for the updateTag function.
+
+# Fetching Data

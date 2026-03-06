@@ -174,3 +174,5 @@ Ready to dive in? Here's how you can begin:
 4. Use ready-to-deploy AI templates at [vercel.com/templates?type=ai](https://vercel.com/templates?type=ai).
 
 Claude 3.7 Sonnet opens new opportunities for reasoning-intensive AI applications. Start building today and leverage the power of advanced reasoning in your AI projects.
+
+# Get started with Llama 3.1

@@ -377,3 +377,5 @@ export default function ExampleClientComponent() {
 | Version   | Changes                       |
 | --------- | ----------------------------- |
 | `v13.0.0` | `useSearchParams` introduced. |
+
+# useSelectedLayoutSegment

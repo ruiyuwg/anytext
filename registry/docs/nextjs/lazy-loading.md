@@ -163,3 +163,5 @@ const ClientComponent = dynamic(() =>
   import('../components/hello').then((mod) => mod.Hello)
 )
 ```
+
+# Development Environment

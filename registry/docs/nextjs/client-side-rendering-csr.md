@@ -69,3 +69,5 @@ Learn about the alternative rendering methods in Next.js.
   - Use Static Site Generation (SSG) to pre-render pages at build time.
 - [ISR](/docs/pages/guides/incremental-static-regeneration)
   - Learn how to create or update static pages at runtime with Incremental Static Regeneration.
+
+# Data Fetching

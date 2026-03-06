@@ -49,6 +49,8 @@ While `assetPrefix` covers requests to `_next/static`, it does not influence the
 
 # authInterrupts
 
+# authInterrupts
+
 > This feature is currently available in the canary channel and subject to change.
 
 The `authInterrupts` configuration option allows you to use [`forbidden`](/docs/app/api-reference/functions/forbidden) and [`unauthorized`](/docs/app/api-reference/functions/unauthorized) APIs in your application. While these functions are experimental, you must enable the `authInterrupts` option in your `next.config.js` file to use them:
@@ -81,6 +83,8 @@ module.exports = {
   - API reference for the forbidden.js special file.
 - [unauthorized.js](/docs/app/api-reference/file-conventions/unauthorized)
   - API reference for the unauthorized.js special file.
+
+# basePath
 
 # basePath
 
@@ -146,3 +150,5 @@ function Home() {
 
 export default Home
 ```
+
+# browserDebugInfoInTerminal

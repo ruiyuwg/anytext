@@ -387,3 +387,5 @@ This manual approach gives you complete control over:
 - Error handling and recovery
 
 [Learn more about manual agent loops in the cookbook](/cookbook/node/manual-agent-loop).
+
+# Configuring Call Options

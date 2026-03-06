@@ -1,3 +1,5 @@
+# Component
+
 We recommend defining components as functions instead of classes. [See how to migrate.](#alternatives)
 
 `Component` is the base class for the React components defined as [JavaScript classes.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes) Class components are still supported by React, but we don't recommend using them in new code.

@@ -230,3 +230,5 @@ export async function GET() {
 
 - [unauthorized.js](/docs/app/api-reference/file-conventions/unauthorized)
   - API reference for the unauthorized.js special file.
+
+# unstable\_cache

@@ -1121,3 +1121,5 @@ link: '/cookbook/node/mcp-tools',
 },
 ]}
 />
+
+# Model Context Protocol (MCP)

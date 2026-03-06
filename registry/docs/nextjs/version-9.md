@@ -223,10 +223,14 @@ export default DynamicBundle
 
 # Building Your Application
 
+# Building Your Application
+
 - [Routing](/docs/pages/building-your-application/routing)
 - [Rendering](/docs/pages/building-your-application/rendering)
 - [Data Fetching](/docs/pages/building-your-application/data-fetching)
 - [Configuring](/docs/pages/building-your-application/configuring)
+
+# Routing
 
 # Routing
 
@@ -239,3 +243,5 @@ The Pages Router has a file-system based router built on concepts of pages. When
 - [Custom Document](/docs/pages/building-your-application/routing/custom-document)
 - [API Routes](/docs/pages/building-your-application/routing/api-routes)
 - [Custom Errors](/docs/pages/building-your-application/routing/custom-error)
+
+# Pages and Layouts

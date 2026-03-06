@@ -211,3 +211,5 @@ See the API reference for more information on how to use Draft Mode.
 
 - [draftMode](/docs/app/api-reference/functions/draft-mode)
   - API Reference for the draftMode function.
+
+# Environment Variables

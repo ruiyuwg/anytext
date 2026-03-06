@@ -1,3 +1,5 @@
+# isValidElement
+
 `isValidElement` checks whether a value is a React element.
 
 ```js

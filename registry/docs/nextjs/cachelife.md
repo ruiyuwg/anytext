@@ -488,3 +488,5 @@ View related API references.
   - API Reference for the revalidateTag function.
 - [cacheTag](/docs/app/api-reference/functions/cacheTag)
   - Learn how to use the cacheTag function to manage cache invalidation in your Next.js application.
+
+# cacheTag

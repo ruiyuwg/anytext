@@ -1,3 +1,5 @@
+# refs
+
 Validates correct usage of refs, not reading/writing during render. See the "pitfalls" section in [`useRef()` usage](/reference/react/useRef#usage).
 
 ## Rule Details {/*rule-details*/}

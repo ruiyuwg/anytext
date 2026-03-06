@@ -395,6 +395,8 @@ module.exports = {
 
 # sassOptions
 
+# sassOptions
+
 `sassOptions` allow you to configure the Sass compiler.
 
 ```ts filename="next.config.ts" switcher
@@ -439,6 +441,8 @@ module.exports = nextConfig
 >
 > - `sassOptions` are not typed outside of `implementation` because Next.js does not maintain the other possible properties.
 > - The `functions` property for defining custom Sass functions is only supported with webpack. When using Turbopack, custom Sass functions are not available because Turbopack's Rust-based architecture cannot directly execute JavaScript functions passed through this option.
+
+# serverActions
 
 # serverActions
 
@@ -495,6 +499,8 @@ module.exports = config
 
 # serverComponentsHmrCache
 
+# serverComponentsHmrCache
+
 > This feature is currently experimental and subject to change, it is not recommended for production.
 
 The experimental `serverComponentsHmrCache` option allows you to cache `fetch` responses in Server Components across Hot Module Replacement (HMR) refreshes in local development. This results in faster responses and reduced costs for billed API calls.
@@ -527,3 +533,5 @@ module.exports = nextConfig
 ```
 
 > **Good to know:** For better observability, we recommend using the [`logging.fetches`](/docs/app/api-reference/config/next-config-js/logging) option which logs fetch cache hits and misses in the console during development.
+
+# serverExternalPackages

@@ -729,3 +729,5 @@ Model capabilities depend on the specific provider and model you're using. For d
 
 - [AI Gateway provider options](https://vercel.com/docs/ai-gateway/provider-options#available-providers) for an overview of available providers
 - Individual [AI SDK provider pages](/providers/ai-sdk-providers) for specific model capabilities and features
+
+# xAI Grok

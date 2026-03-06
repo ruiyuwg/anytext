@@ -252,3 +252,5 @@ Learn more about the next/script API.
 
 - [Script Component](/docs/app/api-reference/components/script)
   - Optimize third-party scripts in your Next.js application using the built-in `next/script` Component.
+
+# Self-Hosting

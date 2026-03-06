@@ -1,3 +1,5 @@
+# PureComponent
+
 We recommend defining components as functions instead of classes. [See how to migrate.](#alternatives)
 
 `PureComponent` is similar to [`Component`](/reference/react/Component) but it skips re-renders for same props and state. Class components are still supported by React, but we don't recommend using them in new code.

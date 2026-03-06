@@ -325,3 +325,5 @@ Learn more about the features mentioned in this page by reading the API Referenc
   - API Reference for the revalidatePath function.
 - [unstable\_cache](/docs/app/api-reference/functions/unstable_cache)
   - API Reference for the unstable\_cache function.
+
+# Error Handling

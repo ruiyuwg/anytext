@@ -72,3 +72,5 @@ Learn how to [configure ISR](/docs/app/guides/self-hosting#caching-and-isr) when
 | `v13.4.0` | `incrementalCacheHandlerPath` support for `revalidateTag`.   |
 | `v13.4.0` | `incrementalCacheHandlerPath` support for standalone output. |
 | `v12.2.0` | Experimental `incrementalCacheHandlerPath` added.            |
+
+# inlineCss

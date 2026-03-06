@@ -312,3 +312,5 @@ In some rare cases, you might need to assign a custom status code for older HTTP
 | `v13.3.0` | `missing` added.   |
 | `v10.2.0` | `has` added.       |
 | `v9.5.0`  | `redirects` added. |
+
+# rewrites

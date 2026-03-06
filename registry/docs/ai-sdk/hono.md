@@ -113,3 +113,5 @@ serve({ fetch: app.fetch, port: 8080 });
 ## Troubleshooting
 
 - Streaming not working when [proxied](/docs/troubleshooting/streaming-not-working-when-proxied)
+
+# Fastify

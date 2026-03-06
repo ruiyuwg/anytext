@@ -142,6 +142,8 @@ module.exports = {
 
 # pageExtensions
 
+# pageExtensions
+
 You can extend the default Page extensions (`.tsx`, `.ts`, `.jsx`, `.js`) used by Next.js. Inside `next.config.js`, add the `pageExtensions` config:
 
 ```js filename="next.config.js"
@@ -174,6 +176,8 @@ Then, rename your pages to have a file extension that includes `.page` (e.g. ren
 
 # poweredByHeader
 
+# poweredByHeader
+
 By default Next.js will add the `x-powered-by` header. To opt-out of it, open `next.config.js` and disable the `poweredByHeader` config:
 
 ```js filename="next.config.js"
@@ -181,6 +185,8 @@ module.exports = {
   poweredByHeader: false,
 }
 ```
+
+# productionBrowserSourceMaps
 
 # productionBrowserSourceMaps
 
@@ -198,3 +204,5 @@ When the `productionBrowserSourceMaps` option is enabled, the source maps will b
 
 - Adding source maps can increase `next build` time
 - Increases memory usage during `next build`
+
+# experimental.proxyClientMaxBodySize

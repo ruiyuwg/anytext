@@ -353,3 +353,5 @@ The following provider options are available:
 | Model                                 |
 | ------------------------------------- |
 | `mixedbread-ai/Mxbai-Rerank-Large-V2` |
+
+# Cohere

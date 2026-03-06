@@ -1,3 +1,5 @@
+# set-state-in-render
+
 Validates against unconditionally setting state during render, which can trigger additional renders and potential infinite render loops.
 
 ## Rule Details {/*rule-details*/}

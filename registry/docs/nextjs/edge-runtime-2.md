@@ -170,3 +170,5 @@ export const config = {
 `unstable_allowDynamic` is a [glob](https://github.com/micromatch/micromatch#matching-features), or an array of globs, ignoring dynamic code evaluation for specific files. The globs are relative to your application root folder.
 
 Be warned that if these statements are executed on the Edge, *they will throw and cause a runtime error*.
+
+# Turbopack

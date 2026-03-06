@@ -1,3 +1,5 @@
+# exhaustive-deps
+
 Validates that dependency arrays for React hooks contain all necessary dependencies.
 
 ## Rule Details {/*rule-details*/}

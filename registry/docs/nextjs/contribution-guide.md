@@ -105,6 +105,7 @@ The following fields are **required**:
 | `description` | The page's description, used in the `<meta name="description">` tag for SEO. |
 
 ```yaml filename="required-fields.mdx"
+# Page Title
 ```
 
 It's good practice to limit the page title to 2-3 words (e.g. Optimizing Images) and the description to 1-2 sentences (e.g. Learn how to optimize images in Next.js).
@@ -141,14 +142,14 @@ Since most of the features in the **App Router** and **Pages Router** are comple
 To avoid content duplication and risk the content becoming out of sync, we use the `source` field to pull content from one page into another. For example, the `<Link>` component behaves *mostly* the same in **App** and **Pages**. Instead of duplicating the content, we can pull the content from `app/.../link.mdx` into `pages/.../link.mdx`:
 
 ```mdx filename="app/.../link.mdx"
-
+# <Link>
 
 This API reference will help you understand how to use the props
 and configuration options available for the Link Component.
 ```
 
 ```mdx filename="pages/.../link.mdx"
-
+# <Link>
 
 {/* DO NOT EDIT THIS PAGE. */}
 {/* The content of this page is pulled from the source above. */}
@@ -415,6 +416,8 @@ While these guidelines are not exhaustive, they should help you get started. If 
 ***
 
 Thank you for contributing to the docs and being part of the Next.js community!
+
+# Rspack
 
 # Rspack
 

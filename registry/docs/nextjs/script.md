@@ -298,7 +298,11 @@ export default function Page() {
 
 # File-system conventions
 
+# File-system conventions
+
 - [instrumentation.js](/docs/pages/api-reference/file-conventions/instrumentation)
 - [Proxy](/docs/pages/api-reference/file-conventions/proxy)
 - [public](/docs/pages/api-reference/file-conventions/public-folder)
 - [src Directory](/docs/pages/api-reference/file-conventions/src-folder)
+
+# instrumentation.js

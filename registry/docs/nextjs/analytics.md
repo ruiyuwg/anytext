@@ -147,6 +147,8 @@ useReportWebVitals((metric) => {
 
 # Authentication
 
+# Authentication
+
 Understanding authentication is crucial for protecting your application's data. This page will guide you through what React and Next.js features to use to implement auth.
 
 Before starting, it helps to break down the process into three concepts:

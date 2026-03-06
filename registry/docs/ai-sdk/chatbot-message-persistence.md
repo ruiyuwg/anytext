@@ -518,3 +518,5 @@ the case where the client reloads the page after a disconnection, but the
 streaming is not yet complete.
 
 For more robust handling of disconnects, you may want to add resumability on disconnects. Check out the [Chatbot Resume Streams](/docs/ai-sdk-ui/chatbot-resume-streams) documentation to learn more.
+
+# Chatbot Resume Streams

@@ -1,3 +1,5 @@
+# use-memo
+
 Validates that the `useMemo` hook is used with a return value. See [`useMemo` docs](/reference/react/useMemo) for more information.
 
 ## Rule Details {/*rule-details*/}

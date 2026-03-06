@@ -101,5 +101,11 @@ function preprocess(raw: string): string {
 
   // Now strip all remaining YAML frontmatter blocks (not just the first)
   const joined = result.join("\n");
-  return joined.replace(/^---\n((?:[a-zA-Z_][a-zA-Z0-9_]*:.*\n)+)---$/gm, "");
+  return joined.replace(
+    /^---\n((?:[a-zA-Z_][a-zA-Z0-9_]*:.*\n)+)---$/gm,
+    (_match, body: string) => {
+      const titleMatch = body.match(/^title:\s*(.+)$/m);
+      return titleMatch ? `# ${titleMatch[1]!.trim()}` : "";
+    }
+  );
 }

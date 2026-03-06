@@ -211,3 +211,5 @@ Ready to dive in? Here's how you can begin:
 3. Dive deeper with advanced guides on topics like Retrieval-Augmented Generation (RAG) at [ai-sdk.dev/docs/guides](/cookbook/guides).
 4. Use ready-to-deploy AI templates at [vercel.com/templates?type=ai](https://vercel.com/templates?type=ai).
 5. Read more about the [Google Generative AI provider](/providers/ai-sdk-providers/google-generative-ai).
+
+# Get started with Claude 4

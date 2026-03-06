@@ -418,3 +418,5 @@ You can incrementally migrate to Next.js by following our guides:
 - [Migrating from Vite](/docs/app/guides/migrating/from-vite)
 
 If you are already using a SPA with the Pages Router, you can learn how to [incrementally adopt the App Router](/docs/app/guides/migrating/app-router-migration).
+
+# Static Exports

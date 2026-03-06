@@ -135,4 +135,18 @@ describe("cleanMarkdown", () => {
     expect(result).not.toContain("title: meta");
     expect(result).toContain("Content");
   });
+
+  it("converts frontmatter title to H1 heading", async () => {
+    const input = "---\ntitle: My Page\nslug: my-page\n---\n\n## Section";
+    const result = await cleanMarkdown(input);
+    expect(result).toContain("# My Page");
+    expect(result).toContain("## Section");
+  });
+
+  it("strips frontmatter with no title field", async () => {
+    const input = "---\nslug: my-page\ndate: 2025-01-01\n---\n\n## Section";
+    const result = await cleanMarkdown(input);
+    expect(result).not.toContain("slug:");
+    expect(result).toContain("## Section");
+  });
 });

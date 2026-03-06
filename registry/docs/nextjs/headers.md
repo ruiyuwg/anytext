@@ -68,3 +68,5 @@ export default async function Page() {
 | ------------ | ------------------------------------------------------------------------------------------------------ |
 | `v15.0.0-RC` | `headers` is now an async function. A [codemod](/docs/app/guides/upgrading/codemods#150) is available. |
 | `v13.0.0`    | `headers` introduced.                                                                                  |
+
+# ImageResponse

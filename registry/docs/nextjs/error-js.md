@@ -310,6 +310,8 @@ export default GracefullyDegradingErrorBoundary
 
 # forbidden.js
 
+# forbidden.js
+
 > This feature is currently experimental and subject to change, it is not recommended for production.
 
 The **forbidden** file is used to render UI when the [`forbidden`](/docs/app/api-reference/functions/forbidden) function is invoked during authentication. Along with allowing you to customize the UI, Next.js will return a `403` status code.
@@ -356,3 +358,5 @@ export default function Forbidden() {
 
 - [forbidden](/docs/app/api-reference/functions/forbidden)
   - API Reference for the forbidden function.
+
+# instrumentation.js

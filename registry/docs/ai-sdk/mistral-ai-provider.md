@@ -304,3 +304,5 @@ const { embedding } = await embed({
 | Model           | Default Dimensions |
 | --------------- | ------------------ |
 | `mistral-embed` | 1024               |
+
+# Together.ai

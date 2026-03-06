@@ -204,3 +204,5 @@ The following provider options are available:
 | `machine`  |  |  |  |  |
 | `low_cost` |  |  |  |  |
 | `fusion`   |  |  |  |  |
+
+# Baseten

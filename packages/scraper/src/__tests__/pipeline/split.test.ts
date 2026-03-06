@@ -143,4 +143,81 @@ describe("splitIntoTopics", () => {
     const topics = splitIntoTopics(md, { minTokens: 0, maxTokens: 100000 });
     expect(topics.some((t) => t.title === "New Top")).toBe(true);
   });
+
+  it("uses parent heading to disambiguate duplicate IDs during sub-split", () => {
+    const longContent = "x ".repeat(25000);
+    const md = [
+      "# Anthropic Provider",
+      "## Language Models",
+      longContent,
+      "# Google Provider",
+      "## Language Models",
+      longContent,
+    ].join("\n\n");
+    const topics = splitIntoTopics(md, { minTokens: 0, maxTokens: 10000 });
+    const ids = topics.map((t) => t.id);
+    expect(ids).toContain("language-models");
+    expect(ids).toContain("google-provider-language-models");
+    expect(ids).not.toContain("language-models-2");
+  });
+
+  it("falls back to numeric suffix when parent-prefixed ID also collides", () => {
+    const longContent = "x ".repeat(25000);
+    // 3 H1s → primaryDepth=1 → sub-split by H2
+    // First "Parent" has H2 "Setup" → "setup"
+    // "Parent Setup" → "parent-setup"
+    // Second "Parent" has two H2 "Setup" → first tries "parent-setup" (collides) → "setup-2"
+    // → second tries "parent-setup" (collides) → "setup-2" (collides) → "setup-3"
+    const md = [
+      "# Parent",
+      "## Setup",
+      longContent,
+      "# Parent Setup",
+      longContent,
+      "# Parent",
+      "## Setup",
+      longContent,
+      "## Setup",
+      longContent,
+    ].join("\n\n");
+    const topics = splitIntoTopics(md, { minTokens: 0, maxTokens: 10000 });
+    const ids = topics.map((t) => t.id);
+    expect(ids).toContain("setup");
+    expect(ids).toContain("parent-setup");
+    expect(ids).toContain("setup-2");
+    expect(ids).toContain("setup-3");
+  });
+
+  it("tracks higher-level heading as parent for subsequent sections", () => {
+    const longContent = "x ".repeat(25000);
+    // H1 mid-stream when grouping by H2 → subsequent H2 gets the H1 as parentHeading
+    const md = [
+      "# First",
+      "## Usage",
+      longContent,
+      "# Second",
+      "## Usage",
+      longContent,
+    ].join("\n\n");
+    const topics = splitIntoTopics(md, { minTokens: 0, maxTokens: 10000 });
+    const ids = topics.map((t) => t.id);
+    expect(ids).toContain("usage");
+    expect(ids).toContain("second-usage");
+  });
+
+  it("drops preamble section starting with 'Start of'", () => {
+    const md = "# Start of Hono documentation\n\nPreamble text\n\n# Routing\n\nRouting content\n\n# Middleware\n\nMiddleware content";
+    const topics = splitIntoTopics(md, { minTokens: 0, maxTokens: 100000 });
+    expect(topics.every((t) => !t.title.toLowerCase().startsWith("start of"))).toBe(true);
+    expect(topics.some((t) => t.title === "Routing")).toBe(true);
+  });
+
+  it("keeps preamble when it is the only section", () => {
+    // Two H1s triggers primaryDepth=1, so single "Start of" H1 is the only section
+    const md = "# Start of Docs\n\nSome content here.\n\n# Start of Docs";
+    const topics = splitIntoTopics(md, { minTokens: 0, maxTokens: 100000 });
+    // With only one section after merge, preamble is preserved
+    expect(topics).toHaveLength(1);
+    expect(topics[0]!.title).toBe("Start of Docs");
+  });
 });

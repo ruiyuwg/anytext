@@ -79,3 +79,5 @@ const jsonLd: WithContext<Product> = {
   description: 'Dynamic at the speed of static.',
 }
 ```
+
+# Lazy Loading

@@ -803,3 +803,5 @@ If you're using the Vercel setup above, you can run the command directly by eith
 - Going back to the Vercel platform, navigating to the Quick Start section of your database, and finding the PSQL connection command (second tab). This will connect to your instance in the terminal where you can run the command directly.
 
 [More info](https://github.com/vercel/ai-sdk-rag-starter/issues/1).
+
+# Multi-Modal Agent

@@ -1,3 +1,5 @@
+# preloadModule
+
 [React-based frameworks](/learn/creating-a-react-app) frequently handle resource loading for you, so you might not have to call this API yourself. Consult your framework's documentation for details.
 
 `preloadModule` lets you eagerly fetch an ESM module that you expect to use.

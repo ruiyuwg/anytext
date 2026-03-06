@@ -266,3 +266,5 @@ All models output MP4 video at 24 fps.
 
 You can also pass any model ID string if needed, e.g. for future models not
 yet listed here.
+
+# Kling AI

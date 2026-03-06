@@ -137,3 +137,5 @@ const result = await generateText({
 
 console.log(result.request.body);
 ```
+
+# Settings

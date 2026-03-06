@@ -1023,3 +1023,5 @@ will be downsized to 720p).
 | `grok-imagine-video` | 1–15s    | `1:1`, `16:9`, `9:16`, `4:3`, `3:4`, `3:2`, `2:3` | `480p`, `720p` |  |  |
 
 You can also pass any available provider model ID as a string if needed.
+
+# Vercel

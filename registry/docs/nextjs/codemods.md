@@ -709,6 +709,8 @@ This is one case. All the cases that are transformed (and tested) can be found i
 
 # Version 14
 
+# Version 14
+
 ## Upgrading from 13 to 14
 
 To update to Next.js version 14, run the following command using your preferred package manager:
@@ -738,3 +740,5 @@ bun add next@next-14 react@18 react-dom@18 && bun add eslint-config-next@next-14
 - The `next/server` import for `ImageResponse` was renamed to `next/og`. A [codemod is available](/docs/app/guides/upgrading/codemods#next-og-import) to safely and automatically rename your imports.
 - The `@next/font` package has been fully removed in favor of the built-in `next/font`. A [codemod is available](/docs/app/guides/upgrading/codemods#built-in-next-font) to safely and automatically rename your imports.
 - The WASM target for `next-swc` has been removed.
+
+# Version 15

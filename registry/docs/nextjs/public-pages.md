@@ -247,3 +247,5 @@ In future guides, we'll learn how to:
 - Revalidate prerendered pages or cached data.
 - Create variants of the same page with route params.
 - Create private pages with personalized user data.
+
+# Redirecting

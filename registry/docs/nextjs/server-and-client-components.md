@@ -775,3 +775,5 @@ Learn more about the APIs mentioned in this page.
 
 - [use client](/docs/app/api-reference/directives/use-client)
   - Learn how to use the use client directive to render a component on the client.
+
+# Cache Components

@@ -380,3 +380,5 @@ export default function Page() {
 ```
 
 By following this pattern, you can continue to add more tools and components, expanding the capabilities of your Generative UI application.
+
+# Completion

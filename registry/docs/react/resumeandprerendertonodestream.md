@@ -1,3 +1,5 @@
+# resumeAndPrerenderToNodeStream
+
 `resumeAndPrerenderToNodeStream` continues a prerendered React tree to a static HTML string using a a [Node.js Stream.](https://nodejs.org/api/stream.html).
 
 ```js

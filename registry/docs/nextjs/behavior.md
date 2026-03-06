@@ -230,3 +230,5 @@ View all the Metadata API options.
   - Learn how to use Cache Components and combine the benefits of static and dynamic rendering.
 - [cacheComponents](/docs/app/api-reference/config/next-config-js/cacheComponents)
   - Learn how to enable the cacheComponents flag in Next.js.
+
+# generateSitemaps

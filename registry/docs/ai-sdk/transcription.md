@@ -220,3 +220,5 @@ try {
 | [Fal](/providers/ai-sdk-providers/fal#transcription-models)               | `wizper`                 |
 
 Above are a small subset of the transcription models supported by the AI SDK providers. For more, see the respective provider documentation.
+
+# Speech

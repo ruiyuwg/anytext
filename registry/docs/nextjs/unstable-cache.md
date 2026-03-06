@@ -96,6 +96,8 @@ export default async function Page({ params } }) {
 
 # unstable\_noStore
 
+# unstable\_noStore
+
 > This is a legacy API and no longer recommended. It is still supported for backward compatibility.
 
 **In version 15, we recommend using [`connection`](/docs/app/api-reference/functions/connection) instead of `unstable_noStore`.**
@@ -139,3 +141,5 @@ export default async function ServerComponent() {
 | --------- | ----------------------------------------------- |
 | `v15.0.0` | `unstable_noStore` deprecated for `connection`. |
 | `v14.0.0` | `unstable_noStore` introduced.                  |
+
+# unstable\_rethrow

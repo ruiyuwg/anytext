@@ -964,3 +964,5 @@ Instead, you can [optimize navigations](https://vercel.com/guides/optimizing-har
 ## Codemods
 
 Next.js provides Codemod transformations to help upgrade your codebase when a feature is deprecated. See [Codemods](/docs/app/guides/upgrading/codemods) for more information.
+
+# Create React App

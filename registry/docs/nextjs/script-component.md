@@ -367,6 +367,8 @@ export default function Page() {
 
 # File-system conventions
 
+# File-system conventions
+
 - [default.js](/docs/app/api-reference/file-conventions/default)
 - [Dynamic Segments](/docs/app/api-reference/file-conventions/dynamic-routes)
 - [error.js](/docs/app/api-reference/file-conventions/error)
@@ -389,3 +391,5 @@ export default function Page() {
 - [template.js](/docs/app/api-reference/file-conventions/template)
 - [unauthorized.js](/docs/app/api-reference/file-conventions/unauthorized)
 - [Metadata Files](/docs/app/api-reference/file-conventions/metadata)
+
+# default.js

@@ -235,3 +235,5 @@ The following provider options are available:
 | ------------------------ | ------------------- | ------------------- | ------------------- | ------------------- |
 | `scribe_v1`              |  |  |  |  |
 | `scribe_v1_experimental` |  |  |  |  |
+
+# LM Studio

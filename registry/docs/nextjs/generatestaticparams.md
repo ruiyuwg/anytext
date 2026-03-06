@@ -534,3 +534,5 @@ export async function generateStaticParams({
 | Version   | Changes                            |
 | --------- | ---------------------------------- |
 | `v13.0.0` | `generateStaticParams` introduced. |
+
+# generateViewport

@@ -362,3 +362,5 @@ NODE_OPTIONS='--inspect' next
 | `v16.0.0` | The JS bundle size metrics have been removed from `next build`                  |
 | `v15.5.0` | Add the `next typegen` command                                                  |
 | `v15.4.0` | Add `--debug-prerender` option for `next build` to help debug prerender errors. |
+
+# Edge Runtime

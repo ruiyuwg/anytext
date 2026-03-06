@@ -38,3 +38,5 @@ Data fetching in Next.js allows you to render your content in different ways, de
 * [Forms and Mutations](/docs/pages/building-your-application/data-fetching/forms-and-mutations)
 * [getServerSideProps](/docs/pages/building-your-application/data-fetching/get-server-side-props)
 * [Client-side Fetching](/docs/pages/building-your-application/data-fetching/client-side)
+
+# getStaticProps

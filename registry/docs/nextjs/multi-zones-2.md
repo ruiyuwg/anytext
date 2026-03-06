@@ -105,3 +105,5 @@ Links to paths in a different zone should use an `a` tag instead of the Next.js 
 The Next.js applications that make up the different zones can live in any repository. However, it is often convenient to put these zones in a [monorepo](https://en.wikipedia.org/wiki/Monorepo) to more easily share code. For zones that live in different repositories, code can also be shared using public or private NPM packages.
 
 Since the pages in different zones may be released at different times, feature flags can be useful for enabling or disabling features in unison across the different zones.
+
+# OpenTelemetry

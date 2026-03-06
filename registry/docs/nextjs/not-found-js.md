@@ -228,3 +228,5 @@ export default function GlobalNotFound() {
 | `v15.4.0` | `global-not-found.js` introduced (experimental).    |
 | `v13.3.0` | Root `app/not-found` handles global unmatched URLs. |
 | `v13.0.0` | `not-found` introduced.                             |
+
+# page.js

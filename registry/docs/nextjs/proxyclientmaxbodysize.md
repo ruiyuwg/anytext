@@ -114,3 +114,5 @@ export async function POST(request: NextRequest) {
 - The default limit of 10MB is designed to balance memory usage and typical use cases
 - The limit applies per-request, not globally across all concurrent requests
 - For applications handling large file uploads, consider increasing the limit accordingly
+
+# reactCompiler

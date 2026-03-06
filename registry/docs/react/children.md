@@ -1,3 +1,5 @@
+# Children
+
 Using `Children` is uncommon and can lead to fragile code. [See common alternatives.](#alternatives)
 
 `Children` lets you manipulate and transform the JSX you received as the [`children` prop.](/learn/passing-props-to-a-component#passing-jsx-as-children)

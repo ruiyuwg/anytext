@@ -1,3 +1,5 @@
+# Escape Hatches
+
 Some of your components may need to control and synchronize with systems outside of React. For example, you might need to focus an input using the browser API, play and pause a video player implemented without React, or connect and listen to messages from a remote server. In this chapter, you'll learn the escape hatches that let you "step outside" React and connect to external systems. Most of your application logic and data flow should not rely on these features.
 
 - [How to "remember" information without re-rendering](/learn/referencing-values-with-refs)

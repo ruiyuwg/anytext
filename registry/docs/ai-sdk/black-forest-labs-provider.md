@@ -232,3 +232,5 @@ const blackForestLabs = createBlackForestLabs({
   baseURL: 'https://api.eu.bfl.ai/v1', // or https://api.us.bfl.ai/v1
 });
 ```
+
+# Gladia

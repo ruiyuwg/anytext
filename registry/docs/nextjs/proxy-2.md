@@ -722,6 +722,8 @@ The codemod will rename the file and the function name from `middleware` to `pro
 
 # public
 
+# public
+
 Next.js can serve static files, like images, under a folder called `public` in the root directory. Files inside `public` can then be referenced by your code starting from the base URL (`/`).
 
 For example, the file `public/avatars/me.png` can be viewed by visiting the `/avatars/me.png` path. The code to display that image might look like:
@@ -752,6 +754,8 @@ The folder is also useful for `robots.txt`, `favicon.ico`, Google Site Verificat
 
 # src Directory
 
+# src Directory
+
 As an alternative to having the special Next.js `app` or `pages` directories in the root of your project, Next.js also supports the common pattern of placing application code under the `src` folder.
 
 This separates application code from project configuration files which mostly live in the root of a project, which is preferred by some individuals and teams.
@@ -776,6 +780,8 @@ To use the `src` folder, move the `app` Router folder or `pages` Router folder t
 
 # Functions
 
+# Functions
+
 - [getInitialProps](/docs/pages/api-reference/functions/get-initial-props)
 - [getServerSideProps](/docs/pages/api-reference/functions/get-server-side-props)
 - [getStaticPaths](/docs/pages/api-reference/functions/get-static-paths)
@@ -787,3 +793,5 @@ To use the `src` folder, move the `app` Router folder or `pages` Router folder t
 - [useRouter](/docs/pages/api-reference/functions/use-router)
 - [useSearchParams](/docs/pages/api-reference/functions/use-search-params)
 - [userAgent](/docs/pages/api-reference/functions/userAgent)
+
+# getInitialProps

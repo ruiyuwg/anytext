@@ -9,21 +9,29 @@ An explicit `DEFAULT` clause may specify that the default value is `NULL`,
 a string constant, a blob constant, a signed-number, or any constant expression enclosed in parentheses.
 
 ```typescript
-import { int, mysqlTable } from "drizzle-orm/mysql-core";
+import { sql } from "drizzle-orm";
+import { integer, pgTable, uuid } from "drizzle-orm/pg-core";
 
-const table = mysqlTable('table', {
-	int: int().default(3),
+const table = pgTable('table', {
+	integer1: integer().default(42),
+	integer2: integer().default(sql`'42'::integer`),
+	uuid1: uuid().defaultRandom(),
+	uuid2: uuid().default(sql`gen_random_uuid()`),
 });
 ```
 
 ```sql
-CREATE TABLE `table` (
-	`int` int DEFAULT 3
+CREATE TABLE "table" (
+	"integer1" integer DEFAULT 42,
+	"integer2" integer DEFAULT '42'::integer,
+	"uuid1" uuid DEFAULT gen_random_uuid(),
+	"uuid2" uuid DEFAULT gen_random_uuid()
 );
 ```
 
 When using `$default()` or `$defaultFn()`, which are simply different aliases for the same function,
 you can generate defaults at runtime and use these values in all insert queries.
+
 These functions can assist you in utilizing various implementations such as `uuid`, `cuid`, `cuid2`, and many more.
 
 ```
@@ -31,11 +39,11 @@ Note: This value does not affect the `drizzle-kit` behavior, it is only used at 
 ```
 
 ```ts
-import { varchar, mysqlTable } from "drizzle-orm/mysql-core";
+import { text, pgTable } from "drizzle-orm/pg-core";
 import { createId } from '@paralleldrive/cuid2';
 
-const table = mysqlTable('table', {
-	id: varchar({ length: 128 }).$defaultFn(() => createId()),
+const table = pgTable('table', {
+	id: text().$defaultFn(() => createId()),
 });
 ```
 
@@ -52,46 +60,53 @@ Note: This value does not affect the `drizzle-kit` behavior, it is only used at 
 ```
 
 ```ts
-import { text, mysqlTable } from "drizzle-orm/mysql-core";
+import { integer, timestamp, text, pgTable } from "drizzle-orm/pg-core";
 
-const table = mysqlTable('table', {
-    alwaysNull: text().$type<string | null>().$onUpdate(() => null),
+const table = pgTable('table', {
+	updateCounter: integer().default(sql`1`).$onUpdateFn((): SQL => sql`${table.update_counter} + 1`),
+	updatedAt: timestamp({ mode: 'date', precision: 3 }).$onUpdate(() => new Date()),
+    	alwaysNull: text().$type<string | null>().$onUpdate(() => null),
 });
+```
+
+### Not null
+
+`NOT NULL` constraint dictates that the associated column may not contain a `NULL` value.
+
+```typescript
+import { integer, pgTable } from "drizzle-orm/pg-core";
+
+const table = pgTable('table', {
+	integer: integer().notNull(),
+});
+```
+
+```sql
+CREATE TABLE "table" (
+	"integer" integer NOT NULL
+);
 ```
 
 ### Primary key
 
-```typescript
-import { int, mysqlTable } from "drizzle-orm/mysql-core";
+A primary key constraint indicates that a column, or group of columns, can be used as a unique identifier for rows in the table.
+This requires that the values be both unique and not null.
 
-const table = mysqlTable('table', {
-	int: int().primaryKey(),
+```typescript
+import { serial, pgTable } from "drizzle-orm/pg-core";
+
+const table = pgTable('table', {
+	id: serial().primaryKey(),
 });
 ```
 
 ```sql
-CREATE TABLE `table` (
-	`int` int PRIMARY KEY NOT NULL
+CREATE TABLE "table" (
+	"id" serial PRIMARY KEY NOT NULL
 );
 ```
 
-### Auto increment
-
-```typescript
-import { int, mysqlTable } from "drizzle-orm/mysql-core";
-
-const table = mysqlTable('table', {
-	int: int().autoincrement(),
-});
-```
-
-```sql
-CREATE TABLE `table` (
-	`int` int AUTO_INCREMENT
-);
-```
-
-Source: https://orm.drizzle.team/docs/column-types/pg
+Source: https://orm.drizzle.team/docs/column-types/singlestore
 
 import Section from '@mdx/Section.astro';
 import Callout from '@mdx/Callout.astro';
@@ -106,429 +121,447 @@ You can read more about it [here](/docs/sql-schema-declaration#shape-your-data-s
 
 ### integer
 
-`integer` `int` `int4`\
-Signed 4-byte integer
-
-If you need `integer autoincrement` please refer to **[serial.](#serial)**
+A signed integer, stored in `0`, `1`, `2`, `3`, `4`, `6`, or `8` bytes depending on the magnitude of the value.
 
 ```typescript
-import { integer, pgTable } from "drizzle-orm/pg-core";
+import { int, singlestoreTable } from "drizzle-orm/singlestore-core";
 
-export const table = pgTable('table', {
-	int: integer()
+const table = singlestoreTable('table', {
+	int: int()
 });
-
 ```
 
 ```sql
-CREATE TABLE "table" (
-	"int" integer
+CREATE TABLE `table` (
+	`int` int
 );
 ```
 
+### tinyint
+
 ```typescript
-import { sql } from "drizzle-orm";
-import { integer, pgTable } from "drizzle-orm/pg-core";
+import { tinyint, singlestoreTable } from "drizzle-orm/singlestore-core";
 
-export const table = pgTable('table', {
-	int1: integer().default(10),
-	int2: integer().default(sql`'10'::int`)
+const table = singlestoreTable('table', {
+	tinyint: tinyint()
 });
-
 ```
 
 ```sql
-CREATE TABLE "table" (
-	"int1" integer DEFAULT 10,
-	"int2" integer DEFAULT '10'::int
+CREATE TABLE `table` (
+	`tinyint` tinyint
 );
 ```
 
 ### smallint
 
-`smallint` `int2`\
-Small-range signed 2-byte integer
-
-If you need `smallint autoincrement` please refer to **[smallserial.](#smallserial)**
-
 ```typescript
-import { smallint, pgTable } from "drizzle-orm/pg-core";
+import { smallint, singlestoreTable } from "drizzle-orm/singlestore-core";
 
-export const table = pgTable('table', {
+const table = singlestoreTable('table', {
 	smallint: smallint()
 });
 ```
 
 ```sql
-CREATE TABLE "table" (
-	"smallint" smallint
+CREATE TABLE `table` (
+	`smallint` smallint
 );
 ```
 
-```typescript
-import { sql } from "drizzle-orm";
-import { smallint, pgTable } from "drizzle-orm/pg-core";
+### mediumint
 
-export const table = pgTable('table', {
-	smallint1: smallint().default(10),
-	smallint2: smallint().default(sql`'10'::smallint`)
+```typescript
+import { mediumint, singlestoreTable } from "drizzle-orm/singlestore-core";
+
+const table = singlestoreTable('table', {
+	mediumint: mediumint()
 });
 ```
 
 ```sql
-CREATE TABLE "table" (
-	"smallint1" smallint DEFAULT 10,
-	"smallint2" smallint DEFAULT '10'::smallint
+CREATE TABLE `table` (
+	`mediumint` mediumint
 );
 ```
 
 ### bigint
 
-`bigint` `int8`\
-Signed 8-byte integer
-
-If you need `bigint autoincrement` please refer to **[bigserial.](#bigserial)**
-
-If you're expecting values above 2^31 but below 2^53, you can utilise `mode: 'number'` and deal with javascript number as opposed to bigint.
-
 ```typescript
-import { bigint, pgTable } from "drizzle-orm/pg-core";
+import { bigint, singlestoreTable } from "drizzle-orm/singlestore-core";
 
-export const table = pgTable('table', {
+const table = singlestoreTable('table', {
 	bigint: bigint({ mode: 'number' })
+	bigintUnsigned: bigint({ mode: 'number', unsigned: true })
 });
 
-// will be inferred as `number`
-bigint: bigint({ mode: 'number' })
+bigint('...', { mode: 'number' | 'bigint' });
 
-// will be inferred as `bigint`
-bigint: bigint({ mode: 'bigint' })
+// You can also specify unsigned option for bigint
+bigint('...', { mode: 'number' | 'bigint', unsigned: true })
 ```
 
 ```sql
-CREATE TABLE "table" (
-	"bigint" bigint
+CREATE TABLE `table` (
+	`bigint` bigint,
+	`bigintUnsigned` bigint unsigned
+);
+```
+
+We've omitted config of `M` in `bigint(M)`, since it indicates the display width of the numeric type
+
+### real
+
+```typescript
+import { real, singlestoreTable } from "drizzle-orm/singlestore-core";
+
+const table = singlestoreTable('table', {
+	real: real()
+});
+```
+
+```sql
+CREATE TABLE `table` (
+	`real` real
 );
 ```
 
 ```typescript
-import { sql } from "drizzle-orm";
-import { bigint, pgTable } from "drizzle-orm/pg-core";
+import { real, singlestoreTable } from "drizzle-orm/singlestore-core";
 
-export const table = pgTable('table', {
-	bigint1: bigint().default(10),
-	bigint2: bigint().default(sql`'10'::bigint`)
+const table = singlestoreTable('table', {
+	realPrecision: real({ precision: 1,}),
+	realPrecisionScale: real({ precision: 1, scale: 1,}),
 });
 ```
 
 ```sql
-CREATE TABLE "table" (
-	"bigint1" bigint DEFAULT 10,
-	"bigint2" bigint DEFAULT '10'::bigint
-);
-```
-
-### serial
-
-`serial` `serial4`\
-Auto incrementing 4-bytes integer, notational convenience for creating unique identifier columns (similar to the `AUTO_INCREMENT` property supported by some other databases).
-
-For more info please refer to the official PostgreSQL **[docs.](https://www.postgresql.org/docs/current/datatype-numeric.html#DATATYPE-SERIAL)**
-
-```typescript
-import { serial, pgTable } from "drizzle-orm/pg-core";
-
-export const table = pgTable('table', {
-  serial: serial(),
-});
-```
-
-```sql
-CREATE TABLE "table" (
-	"serial" serial NOT NULL
-);
-```
-
-### smallserial
-
-`smallserial` `serial2`\
-Auto incrementing 2-bytes integer, notational convenience for creating unique identifier columns (similar to the `AUTO_INCREMENT` property supported by some other databases).
-
-For more info please refer to the official PostgreSQL **[docs.](https://www.postgresql.org/docs/current/datatype-numeric.html#DATATYPE-SERIAL)**
-
-```typescript
-import { smallserial, pgTable } from "drizzle-orm/pg-core";
-
-export const table = pgTable('table', {
-  smallserial: smallserial(),
-});
-```
-
-```sql
-CREATE TABLE "table" (
-	"smallserial" smallserial NOT NULL
-);
-```
-
-### bigserial
-
-`bigserial` `serial8`\
-Auto incrementing 8-bytes integer, notational convenience for creating unique identifier columns (similar to the `AUTO_INCREMENT` property supported by some other databases).
-
-For more info please refer to the official PostgreSQL **[docs.](https://www.postgresql.org/docs/current/datatype-numeric.html#DATATYPE-SERIAL)**
-
-If you're expecting values above 2^31 but below 2^53, you can utilise `mode: 'number'` and deal with javascript number as opposed to bigint.
-
-```typescript
-import { bigserial, pgTable } from "drizzle-orm/pg-core";
-
-export const table = pgTable('table', {
-  bigserial: bigserial({ mode: 'number' }),
-});
-```
-
-```sql
-CREATE TABLE "table" (
-	"bigserial" bigserial NOT NULL
-);
-```
-
-### boolean
-
-PostgreSQL provides the standard SQL type boolean.
-
-For more info please refer to the official PostgreSQL **[docs.](https://www.postgresql.org/docs/current/datatype-boolean.html)**
-
-```typescript
-import { boolean, pgTable } from "drizzle-orm/pg-core";
-
-export const table = pgTable('table', {
-	boolean: boolean()
-});
-
-```
-
-```sql
-CREATE TABLE "table" (
-	"boolean" boolean
-);
-```
-
-### bytea
-
-PostgreSQL provides the standard SQL type bytea.
-
-For more info please refer to the official PostgreSQL **[docs.](https://www.postgresql.org/docs/current/datatype-binary.html)**
-
-```typescript
-import { bytea, pgTable } from "drizzle-orm/pg-core";
-
-export const table = pgTable('table', {
-	bytea: bytea()
-});
-
-```
-
-```sql
-CREATE TABLE IF NOT EXISTS "table" (
-	"bytea" bytea,
-);
-```
-
-### text
-
-`text`\
-Variable-length(unlimited) character string.
-
-For more info please refer to the official PostgreSQL **[docs.](https://www.postgresql.org/docs/current/datatype-character.html)**
-
-You can define `{ enum: ["value1", "value2"] }` config to infer `insert` and `select` types, it **won't** check runtime values.
-
-```typescript
-import { text, pgTable } from "drizzle-orm/pg-core";
-
-export const table = pgTable('table', {
-  text: text()
-});
-
-// will be inferred as text: "value1" | "value2" | null
-text: text({ enum: ["value1", "value2"] })
-```
-
-```sql
-CREATE TABLE "table" (
-	"text" text
-);
-```
-
-### varchar
-
-`character varying(n)` `varchar(n)`\
-Variable-length character string, can store strings up to **`n`** characters (not bytes).
-
-For more info please refer to the official PostgreSQL **[docs.](https://www.postgresql.org/docs/current/datatype-character.html)**
-
-You can define `{ enum: ["value1", "value2"] }` config to infer `insert` and `select` types, it **won't** check runtime values.
-
-The `length` parameter is optional according to PostgreSQL docs.
-
-```typescript
-import { varchar, pgTable } from "drizzle-orm/pg-core";
-
-export const table = pgTable('table', {
-  varchar1: varchar(),
-  varchar2: varchar({ length: 256 }),
-});
-
-// will be inferred as text: "value1" | "value2" | null
-varchar: varchar({ enum: ["value1", "value2"] }),
-```
-
-```sql
-CREATE TABLE "table" (
-	"varchar1" varchar,
-	"varchar2" varchar(256)
-);
-```
-
-### char
-
-`character(n)` `char(n)`\
-Fixed-length, blank padded character string, can store strings up to **`n`** characters(not bytes).
-
-For more info please refer to the official PostgreSQL **[docs.](https://www.postgresql.org/docs/current/datatype-character.html)**
-
-You can define `{ enum: ["value1", "value2"] }` config to infer `insert` and `select` types, it **won't** check runtime values.
-
-The `length` parameter is optional according to PostgreSQL docs.
-
-```typescript
-import { char, pgTable } from "drizzle-orm/pg-core";
-
-export const table = pgTable('table', {
-  char1: char(),
-  char2: char({ length: 256 }),
-});
-
-// will be inferred as text: "value1" | "value2" | null
-char: char({ enum: ["value1", "value2"] }),
-```
-
-```sql
-CREATE TABLE "table" (
-	"char1" char,
-	"char2" char(256)
-);
-```
-
-### numeric
-
-`numeric` `decimal`\
-Exact numeric of selectable precision. Can store numbers with a very large number of digits, up to 131072 digits before the decimal point and up to 16383 digits after the decimal point.
-
-For more info please refer to the official PostgreSQL **[docs.](https://www.postgresql.org/docs/current/datatype-numeric.html#DATATYPE-NUMERIC-DECIMAL)**
-
-```typescript
-import { numeric, pgTable } from "drizzle-orm/pg-core";
-
-export const table = pgTable('table', {
-  numeric1: numeric(),
-  numeric2: numeric({ precision: 100 }),
-  numeric3: numeric({ precision: 100, scale: 20 }),
-  numericNum: numeric({ mode: 'number' }),
-  numericBig: numeric({ mode: 'bigint' }),
-});
-```
-
-```sql
-CREATE TABLE "table" (
-	"numeric1" numeric,
-	"numeric2" numeric(100),
-	"numeric3" numeric(100, 20),
-	"numericNum" numeric,
-	"numericBig" numeric
+CREATE TABLE `table` (
+	`realPrecision` real(1),
+	`realPrecisionScale` real(1, 1)
 );
 ```
 
 ### decimal
 
-An alias of **[numeric.](#numeric)**
-
-### real
-
-`real` `float4`\
-Single precision floating-point number (4 bytes)
-
-For more info please refer to the official PostgreSQL **[docs.](https://www.postgresql.org/docs/current/datatype-numeric.html)**
-
 ```typescript
-import { sql } from "drizzle-orm";
-import { real, pgTable } from "drizzle-orm/pg-core";  
+import { decimal, singlestoreTable } from "drizzle-orm/singlestore-core";
 
-const table = pgTable('table', {
-	real1: real(),
-	real2: real().default(10.10),
-	real3: real().default(sql`'10.10'::real`),
+const table = singlestoreTable('table', {
+	decimal: decimal(),
+	decimalNum: decimal({ scale: 30, mode: 'number' }),
+	decimalBig: decimal({ scale: 30, mode: 'bigint' }),
 });
 ```
 
 ```sql
-CREATE TABLE "table" (
-	"real1" real,
-	"real2" real default 10.10,
-	"real3" real default '10.10'::real
+CREATE TABLE `table` (
+	`decimal` decimal,
+	`decimalNum` decimal(30),
+	`decimalBig` decimal(30)
 );
 ```
 
-### double precision
-
-`double precision` `float8`\
-Double precision floating-point number (8 bytes)
-
-For more info please refer to the official PostgreSQL **[docs.](https://www.postgresql.org/docs/current/datatype-numeric.html)**
-
 ```typescript
-import { sql } from "drizzle-orm";
-import { doublePrecision, pgTable } from "drizzle-orm/pg-core";
+import { decimal, singlestoreTable } from "drizzle-orm/singlestore-core";
 
-const table = pgTable('table', {
-	double1: doublePrecision(),
-	double2: doublePrecision().default(10.10),
-	double3: doublePrecision().default(sql`'10.10'::double precision`),
+const table = singlestoreTable('table', {
+	decimalPrecision: decimal({ precision: 1,}),
+	decimalPrecisionScale: decimal({ precision: 1, scale: 1,}),
 });
 ```
 
 ```sql
-CREATE TABLE "table" (
-	"double1" double precision,
-	"double2" double precision default 10.10,
-	"double3" double precision default '10.10'::double precision
+CREATE TABLE `table` (
+	`decimalPrecision` decimal(1),
+	`decimalPrecisionScale` decimal(1, 1)
+);
+```
+
+### double
+
+```typescript
+import { double, singlestoreTable } from "drizzle-orm/singlestore-core";
+
+const table = singlestoreTable('table', {
+	double: double('double')
+});
+```
+
+```sql
+CREATE TABLE `table` (
+	`double` double
+);
+```
+
+```typescript
+import { double, singlestoreTable } from "drizzle-orm/singlestore-core";
+
+const table = singlestoreTable('table', {
+	doublePrecision: double({ precision: 1,}),
+	doublePrecisionScale: double({ precision: 1, scale: 1,}),
+});
+```
+
+```sql
+CREATE TABLE `table` (
+	`doublePrecision` double(1),
+	`doublePrecisionScale` double(1, 1)
+);
+```
+
+### float
+
+```typescript
+import { float, singlestoreTable } from "drizzle-orm/singlestore-core";
+
+const table = singlestoreTable('table', {
+	float: float()
+});
+```
+
+```sql
+CREATE TABLE `table` (
+	`float` float
+);
+```
+
+### serial
+
+`SERIAL` is an alias for `BIGINT UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE`.
+
+```typescript
+import { serial, singlestoreTable } from "drizzle-orm/singlestore-core";
+
+const table = singlestoreTable('table', {
+	serial: serial()
+});
+```
+
+```sql
+CREATE TABLE `table` (
+	`serial` serial AUTO_INCREMENT
+);
+```
+
+### binary
+
+```typescript
+import { binary, singlestoreTable } from "drizzle-orm/singlestore-core";
+
+const table = singlestoreTable('table', {
+	binary: binary()
+});
+```
+
+```sql
+CREATE TABLE `table` (
+	`binary` binary
+);
+```
+
+### varbinary
+
+```typescript
+import { varbinary, singlestoreTable } from "drizzle-orm/singlestore-core";
+
+const table = singlestoreTable('table', {
+	varbinary: varbinary({ length: 2}),
+});
+```
+
+```sql
+CREATE TABLE `table` (
+	`varbinary` varbinary(2)
+);
+```
+
+### char
+
+```typescript
+import { char, singlestoreTable } from "drizzle-orm/singlestore-core";
+
+const table = singlestoreTable('table', {
+	char: char(),
+});
+```
+
+```sql
+CREATE TABLE `table` (
+	`char` char
+);
+```
+
+### varchar
+
+You can define `{ enum: ["value1", "value2"] }` config to infer `insert` and `select` types, it **won't** check runtime values.
+
+```typescript
+import { varchar, singlestoreTable } from "drizzle-orm/singlestore-core";
+
+const table = singlestoreTable('table', {
+	varchar: varchar({ length: 2 }),
+});
+
+// will be inferred as text: "value1" | "value2" | null
+varchar: varchar({ length: 6, enum: ["value1", "value2"] })
+```
+
+```sql
+CREATE TABLE `table` (
+	`varchar` varchar(2)
+);
+```
+
+### text
+
+You can define `{ enum: ["value1", "value2"] }` config to infer `insert` and `select` types, it **won't** check runtime values.
+
+```typescript
+import { text, singlestoreTable } from "drizzle-orm/singlestore-core";
+
+const table = singlestoreTable('table', {
+	text: text(),
+});
+
+// will be inferred as text: "value1" | "value2" | null
+text: text({ enum: ["value1", "value2"] });
+```
+
+```sql
+CREATE TABLE `table` (
+	`text` text
+);
+```
+
+### boolean
+
+```typescript
+import { boolean, singlestoreTable } from "drizzle-orm/singlestore-core";
+
+const table = singlestoreTable('table', {
+	boolean: boolean(),
+});
+```
+
+```sql
+CREATE TABLE `table` (
+	`boolean` boolean
+);
+```
+
+### date
+
+```typescript
+import { boolean, singlestoreTable } from "drizzle-orm/singlestore-core";
+
+const table = singlestoreTable('table', {
+	date: date(),
+});
+```
+
+```sql
+CREATE TABLE `table` (
+	`date` date
+);
+```
+
+### datetime
+
+```typescript
+import { datetime, singlestoreTable } from "drizzle-orm/singlestore-core";
+
+const table = singlestoreTable('table', {
+	datetime: datetime(),
+});
+
+datetime('...', { mode: 'date' | "string"}),
+```
+
+```sql
+CREATE TABLE `table` (
+	`datetime` datetime
+);
+```
+
+### time
+
+```typescript
+import { time, singlestoreTable } from "drizzle-orm/singlestore-core";
+
+const table = singlestoreTable('table', {
+	time: time(),
+});
+```
+
+```sql
+CREATE TABLE `table` (
+	`time` time
+);
+```
+
+### year
+
+```typescript
+import { year, singlestoreTable } from "drizzle-orm/singlestore-core";
+
+const table = singlestoreTable('table', {
+	year: year(),
+});
+```
+
+```sql
+CREATE TABLE `table` (
+	`year` year
+);
+```
+
+### timestamp
+
+```typescript
+import { timestamp, singlestoreTable } from "drizzle-orm/singlestore-core";
+
+const table = singlestoreTable('table', {
+	timestamp: timestamp(),
+});
+
+timestamp('...', { mode: 'date' | "string"}),
+```
+
+```sql
+CREATE TABLE `table` (
+	`timestamp` timestamp
+);
+```
+
+```typescript
+import { timestamp, singlestoreTable } from "drizzle-orm/singlestore-core";
+
+const table = singlestoreTable('table', {
+	timestamp: timestamp().defaultNow(),
+});
+```
+
+```sql
+CREATE TABLE `table` (
+	`timestamp` timestamp DEFAULT (now())
 );
 ```
 
 ### json
 
-`json`\
-Textual JSON data, as specified in **[RFC 7159.](https://tools.ietf.org/html/rfc7159)**
-
-For more info please refer to the official PostgreSQL **[docs.](https://www.postgresql.org/docs/current/datatype-json.html)**
-
 ```typescript
-import { sql } from "drizzle-orm";
-import { json, pgTable } from "drizzle-orm/pg-core";
+import { json, singlestoreTable } from "drizzle-orm/singlestore-core";
 
-const table = pgTable('table', {
-	json1: json(),
-	json2: json().default({ foo: "bar" }),
-	json3: json().default(sql`'{foo: "bar"}'::json`),
+const table = singlestoreTable('table', {
+	json: json(),
 });
+
 ```
 
 ```sql
-CREATE TABLE "table" (
-	"json1" json,
-	"json2" json default '{"foo": "bar"}'::json,
-	"json3" json default '{"foo": "bar"}'::json
+CREATE TABLE `table` (
+	`json` json
 );
 ```
 
@@ -546,94 +579,53 @@ json: json().$type<string[]>();
 json: json().$type<string[]>().default({});
 ```
 
-### jsonb
-
-`jsonb`\
-Binary JSON data, decomposed.
-
-For more info please refer to the official PostgreSQL **[docs.](https://www.postgresql.org/docs/current/datatype-json.html)**
+### enum
 
 ```typescript
-import { jsonb, pgTable } from "drizzle-orm/pg-core";
+import { singlestoreEnum, singlestoreTable } from "drizzle-orm/singlestore-core";
 
-const table = pgTable('table', {
-	jsonb1: jsonb(),
-	jsonb2: jsonb().default({ foo: "bar" }),
-	jsonb3: jsonb().default(sql`'{foo: "bar"}'::jsonb`),
+const table = singlestoreTable('table', {
+	popularity: singlestoreEnum(['unknown', 'known', 'popular']),
 });
 ```
 
 ```sql
-CREATE TABLE "table" (
-	"jsonb1" jsonb,
-	"jsonb2" jsonb default '{"foo": "bar"}'::jsonb,
-	"jsonb3" jsonb default '{"foo": "bar"}'::jsonb
+CREATE TABLE `table` (
+	`popularity` enum('unknown','known','popular')
 );
 ```
 
-You can specify `.$type<..>()` for json object inference, it **won't** check runtime values.
-It provides compile time protection for default values, insert and select schemas.
+### Customizing data type
 
-```typescript
-// will be inferred as { foo: string }
-jsonb: jsonb().$type<{ foo: string }>();
-
-// will be inferred as string[]
-jsonb: jsonb().$type<string[]>();
-
-// won't compile
-jsonb: jsonb().$type<string[]>().default({});
-```
-
-### uuid
-
-`uuid`
-
-The data type uuid stores Universally Unique Identifiers (UUID) as defined by RFC 4122, ISO/IEC 9834-8:2005, and related standards
-
-For more info please refer to the official PostgreSQL **[docs.](https://www.postgresql.org/docs/current/datatype-uuid.html)**
+Every column builder has a `.$type()` method, which allows you to customize the data type of the column. This is useful, for example, with unknown or branded types.
 
 ```ts
-import { uuid, pgTable } from "drizzle-orm/pg-core";
+type UserId = number & { __brand: 'user_id' };
+type Data = {
+	foo: string;
+	bar: number;
+};
 
-const table = pgTable('table', {
-  uuid1: uuid(),
-  uuid2: uuid().defaultRandom(),
-  uuid3: uuid().default('a0ee-bc99-9c0b-4ef8-bb6d-6bb9-bd38-0a11')
+const users = singlestoreTable('users', {
+  id: int().$type<UserId>().primaryKey(),
+  jsonField: json().$type<Data>(),
 });
 ```
 
-```sql
-CREATE TABLE "table" (
-	"uuid1" uuid,
-	"uuid2" uuid default gen_random_uuid(),
-	"uuid3" uuid default 'a0ee-bc99-9c0b-4ef8-bb6d-6bb9-bd38-0a11'
-);
-```
+### Not null
 
-### time
-
-`time` `timetz` `time with timezone` `time without timezone`\
-Time of day with or without time zone.
-
-For more info please refer to the official PostgreSQL **[docs.](https://www.postgresql.org/docs/current/datatype-datetime.html)**
+`NOT NULL` constraint dictates that the associated column may not contain a `NULL` value.
 
 ```typescript
-import { time, pgTable } from "drizzle-orm/pg-core";
+import { int, singlestoreTable } from "drizzle-orm/singlestore-core";
 
-const table = pgTable('table', {
-  time1: time(),
-  time2: time({ withTimezone: true }),
-  time3: time({ precision: 6 }),
-  time4: time({ precision: 6, withTimezone: true })
+const table = singlestoreTable('table', {
+	int: int().notNull(),
 });
 ```
 
 ```sql
-CREATE TABLE "table" (
-	"time1" time,
-	"time2" time with timezone,
-	"time3" time(6),
-	"time4" time(6) with timezone
+CREATE TABLE `table` (
+	`int` int NOT NULL
 );
 ```

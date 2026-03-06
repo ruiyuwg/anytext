@@ -89,6 +89,8 @@ console.log(logo.pathname)
 
 # useLightningcss
 
+# useLightningcss
+
 > This feature is currently experimental and subject to change, it is not recommended for production.
 
 Experimental support for using [Lightning CSS](https://lightningcss.dev) with webpack. Lightning CSS is a fast CSS transformer and minifier, written in Rust.
@@ -129,6 +131,8 @@ module.exports = nextConfig
 
 # viewTransition
 
+# viewTransition
+
 > This feature is currently experimental and subject to change, it is not recommended for production.
 
 `viewTransition` is an experimental flag that enables the new [View Transitions API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transition_API) in React. This API allows you to leverage the native View Transitions browser API to create seamless transitions between UI states.
@@ -163,3 +167,5 @@ import { ViewTransition } from 'react'
 Check out our [Next.js View Transition Demo](https://view-transition-example.vercel.app) to see this feature in action.
 
 As this API evolves, we will update our documentation and share more examples. However, for now, we strongly advise against using this feature in production.
+
+# webpack

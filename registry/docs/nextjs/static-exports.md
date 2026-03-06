@@ -307,3 +307,5 @@ server {
 | `v14.0.0` | `next export` has been removed in favor of `"output": "export"`                                                      |
 | `v13.4.0` | App Router (Stable) adds enhanced static export support, including using React Server Components and Route Handlers. |
 | `v13.3.0` | `next export` is deprecated and replaced with `"output": "export"`                                                   |
+
+# Tailwind CSS v3

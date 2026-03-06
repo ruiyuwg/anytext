@@ -1,3 +1,5 @@
+# useLayoutEffect
+
 `useLayoutEffect` can hurt performance. Prefer [`useEffect`](/reference/react/useEffect) when possible.
 
 `useLayoutEffect` is a version of [`useEffect`](/reference/react/useEffect) that fires before the browser repaints the screen.

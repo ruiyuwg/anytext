@@ -294,3 +294,5 @@ For example, the following configuration maps `@/components/*` to `components/*`
 ```
 
 Each of the `"paths"` are relative to the `baseUrl` location.
+
+# Project Structure

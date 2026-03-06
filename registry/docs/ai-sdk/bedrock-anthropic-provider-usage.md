@@ -295,3 +295,5 @@ using `sessionToken`, set it to `undefined`. If you're running in a serverless
 environment, there may be default environment variables set by your containing
 environment that the Amazon Bedrock provider will then pick up and could
 conflict with the ones you're intending to use.
+
+# Groq

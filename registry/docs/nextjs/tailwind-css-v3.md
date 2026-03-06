@@ -107,6 +107,8 @@ As of Next.js 13.1, Tailwind CSS and PostCSS are supported with [Turbopack](http
 
 # Testing
 
+# Testing
+
 In React and Next.js, there are a few different types of tests you can write, each with its own purpose and use cases. This page provides an overview of types and commonly used tools you can use to test your application.
 
 ## Types of tests
@@ -129,3 +131,5 @@ See the guides below to learn how to set up Next.js with these commonly used tes
 - [Jest](/docs/app/guides/testing/jest)
 - [Playwright](/docs/app/guides/testing/playwright)
 - [Vitest](/docs/app/guides/testing/vitest)
+
+# Cypress

@@ -1,3 +1,5 @@
+# static-components
+
 Validates that components are static, not recreated every render. Components that are recreated dynamically can reset state and trigger excessive re-rendering.
 
 ## Rule Details {/*rule-details*/}
