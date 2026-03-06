@@ -28,7 +28,7 @@ describe("readManifest", () => {
 });
 
 describe("writeManifest", () => {
-  it("writes formatted JSON with trailing newline", async () => {
+  it("writes to tmp file then renames atomically", async () => {
     const fs = await import("node:fs");
     const manifest: Manifest = { version: 1, updatedAt: "2025-01-01", libraries: [] };
 
@@ -36,10 +36,18 @@ describe("writeManifest", () => {
     writeManifest(manifest);
 
     expect(fs.writeFileSync).toHaveBeenCalledWith(
-      expect.stringContaining("manifest.json"),
+      expect.stringContaining("manifest.json.tmp"),
       JSON.stringify(manifest, null, 2) + "\n",
       "utf-8"
     );
+    expect(fs.renameSync).toHaveBeenCalledWith(
+      expect.stringContaining("manifest.json.tmp"),
+      expect.stringContaining("manifest.json")
+    );
+    // Ensure write happens before rename
+    const writeOrder = vi.mocked(fs.writeFileSync).mock.invocationCallOrder[0]!;
+    const renameOrder = vi.mocked(fs.renameSync).mock.invocationCallOrder[0]!;
+    expect(writeOrder).toBeLessThan(renameOrder);
   });
 });
 

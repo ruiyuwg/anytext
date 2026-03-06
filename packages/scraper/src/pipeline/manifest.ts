@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync } from "node:fs";
+import { readFileSync, renameSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import type { Manifest, ManifestLibrary } from "../types.js";
 
@@ -23,7 +23,9 @@ export function readManifest(): Manifest {
 
 export function writeManifest(manifest: Manifest): void {
   const manifestPath = path.join(REGISTRY_DIR, "manifest.json");
-  writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + "\n", "utf-8");
+  const tmpPath = manifestPath + ".tmp";
+  writeFileSync(tmpPath, JSON.stringify(manifest, null, 2) + "\n", "utf-8");
+  renameSync(tmpPath, manifestPath);
 }
 
 export function mergeLibrary(
