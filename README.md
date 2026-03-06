@@ -1,10 +1,14 @@
-# anytext
+<p align="center">
+  <img src="banner.png" alt="anytext" width="600" />
+</p>
 
-[![npm version](https://img.shields.io/npm/v/anytext)](https://www.npmjs.com/package/anytext)
-[![CI](https://img.shields.io/github/actions/workflow/status/ruiyuwg/anytext/ci.yml?branch=main&label=CI)](https://github.com/ruiyuwg/anytext/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/gh/ruiyuwg/anytext/graph/badge.svg)](https://codecov.io/gh/ruiyuwg/anytext)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Node.js](https://img.shields.io/badge/node-%3E%3D18-brightgreen)](https://nodejs.org)
+<p align="center">
+  <a href="https://www.npmjs.com/package/anytext-cli"><img src="https://img.shields.io/npm/v/anytext-cli" alt="npm version" /></a>
+  <a href="https://github.com/ruiyuwg/anytext/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/ruiyuwg/anytext/ci.yml?branch=main&label=CI" alt="CI" /></a>
+  <a href="https://codecov.io/gh/ruiyuwg/anytext"><img src="https://codecov.io/gh/ruiyuwg/anytext/graph/badge.svg" alt="codecov" /></a>
+  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT" /></a>
+  <a href="https://nodejs.org"><img src="https://img.shields.io/badge/node-%3E%3D18-brightgreen" alt="Node.js" /></a>
+</p>
 
 Instant, clean documentation for coding agents.
 
@@ -29,7 +33,7 @@ anytext is different:
 ## Install
 
 ```bash
-npm install -g anytext
+npm install -g anytext-cli
 ```
 
 Add the skill to your coding agent:
