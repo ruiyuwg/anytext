@@ -67,6 +67,24 @@ describe("getCachedManifest", () => {
     expect(cache.getCachedManifest()).toEqual(testManifest);
   });
 
+  it("returns null when meta file is corrupted JSON", () => {
+    vi.mocked(fs.existsSync).mockReturnValue(true);
+    vi.mocked(fs.readFileSync).mockReturnValue("not json");
+    expect(cache.getCachedManifest()).toBeNull();
+  });
+
+  it("returns null when manifest file is corrupted JSON", () => {
+    vi.mocked(fs.existsSync).mockReturnValue(true);
+    const freshTime = Date.now() - 1000;
+    vi.mocked(fs.readFileSync).mockImplementation((p) => {
+      if (String(p) === META_PATH) {
+        return JSON.stringify({ fetchedAt: freshTime, registryVersion: 1 });
+      }
+      return "not json";
+    });
+    expect(cache.getCachedManifest()).toBeNull();
+  });
+
   it("returns manifest at exactly 24h boundary (uses >, not >=)", () => {
     vi.mocked(fs.existsSync).mockReturnValue(true);
     const exactly24h = Date.now() - 24 * 60 * 60 * 1000;
@@ -158,6 +176,14 @@ describe("getCacheStatus", () => {
     const status = cache.getCacheStatus();
     expect(status.exists).toBe(true);
     expect(status.manifestAge).toBe("30m ago");
+  });
+
+  it("returns exists: false when meta is corrupted JSON", () => {
+    vi.mocked(fs.existsSync).mockReturnValue(true);
+    vi.mocked(fs.readFileSync).mockReturnValue("not json");
+    const status = cache.getCacheStatus();
+    expect(status.exists).toBe(false);
+    expect(status.manifestAge).toBeNull();
   });
 
   it("returns age in hours when >= 60min", () => {

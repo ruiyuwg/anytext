@@ -25,12 +25,16 @@ export function getCachedManifest(): Manifest | null {
     return null;
   }
 
-  const meta: CacheMeta = JSON.parse(readFileSync(META_PATH, "utf-8"));
-  if (Date.now() - meta.fetchedAt > MAX_AGE_MS) {
+  try {
+    const meta: CacheMeta = JSON.parse(readFileSync(META_PATH, "utf-8"));
+    if (Date.now() - meta.fetchedAt > MAX_AGE_MS) {
+      return null;
+    }
+
+    return JSON.parse(readFileSync(MANIFEST_PATH, "utf-8"));
+  } catch {
     return null;
   }
-
-  return JSON.parse(readFileSync(MANIFEST_PATH, "utf-8"));
 }
 
 export function cacheManifest(manifest: Manifest): void {
@@ -67,9 +71,13 @@ export function getCacheStatus(): { exists: boolean; dir: string; manifestAge: s
   if (!existsSync(META_PATH)) {
     return { exists: false, dir: CACHE_DIR, manifestAge: null };
   }
-  const meta: CacheMeta = JSON.parse(readFileSync(META_PATH, "utf-8"));
-  const ageMs = Date.now() - meta.fetchedAt;
-  const ageMin = Math.floor(ageMs / 60000);
-  const ageStr = ageMin < 60 ? `${ageMin}m ago` : `${Math.floor(ageMin / 60)}h ago`;
-  return { exists: true, dir: CACHE_DIR, manifestAge: ageStr };
+  try {
+    const meta: CacheMeta = JSON.parse(readFileSync(META_PATH, "utf-8"));
+    const ageMs = Date.now() - meta.fetchedAt;
+    const ageMin = Math.floor(ageMs / 60000);
+    const ageStr = ageMin < 60 ? `${ageMin}m ago` : `${Math.floor(ageMin / 60)}h ago`;
+    return { exists: true, dir: CACHE_DIR, manifestAge: ageStr };
+  } catch {
+    return { exists: false, dir: CACHE_DIR, manifestAge: null };
+  }
 }
