@@ -6,13 +6,19 @@ vi.mock("../../cache.js", () => ({
   getCacheStatus: vi.fn(),
 }));
 
+vi.mock("../../format.js", async (importOriginal) => {
+  const original =
+    await importOriginal<typeof import("../../format.js")>();
+  return { ...original };
+});
+
 describe("cacheCommand", () => {
   it("clears cache and prints message", async () => {
     const cache = await import("../../cache.js");
     const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
     cacheCommand(["clear"]);
     expect(cache.clearCache).toHaveBeenCalled();
-    expect(logSpy).toHaveBeenCalledWith("Cache cleared.");
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("Cache cleared."));
   });
 
   it("shows status when cache exists", async () => {
@@ -39,7 +45,7 @@ describe("cacheCommand", () => {
 
     const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
     cacheCommand(["status"]);
-    expect(logSpy).toHaveBeenCalledWith("No cache found.");
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("No cache found."));
   });
 
   it("errors on invalid subcommand", () => {

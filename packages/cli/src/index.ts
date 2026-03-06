@@ -4,20 +4,25 @@ import { list } from "./commands/list.js";
 import { search } from "./commands/search.js";
 import { read } from "./commands/read.js";
 import { cacheCommand } from "./commands/cache.js";
+import { bold, dim, heading, printError } from "./format.js";
 
-const HELP = `anytext — Instant documentation for coding agents
-
-Usage:
-  anytext list [library]          List libraries or topics
-  anytext search <query>          Search across all docs
-  anytext read <library> <topic>  Read a specific topic
-  anytext cache <clear|status>    Manage local cache
-
-Examples:
-  anytext list                    Show all available libraries
-  anytext list react              Show topics for React
-  anytext search "server components"
-  anytext read react hooks`;
+function buildHelp(): string {
+  return [
+    `${bold("anytext")} — Instant documentation for coding agents`,
+    "",
+    heading("Usage:"),
+    `  ${bold("anytext list")} [library]          ${dim("List libraries or topics")}`,
+    `  ${bold("anytext search")} <query>          ${dim("Search across all docs")}`,
+    `  ${bold("anytext read")} <library> <topic>  ${dim("Read a specific topic")}`,
+    `  ${bold("anytext cache")} <clear|status>    ${dim("Manage local cache")}`,
+    "",
+    heading("Examples:"),
+    `  ${bold("anytext list")}                    ${dim("Show all available libraries")}`,
+    `  ${bold("anytext list react")}              ${dim("Show topics for React")}`,
+    `  ${bold('anytext search "server components"')}`,
+    `  ${bold("anytext read react hooks")}`,
+  ].join("\n");
+}
 
 async function main(): Promise<void> {
   const [command, ...args] = process.argv.slice(2);
@@ -38,16 +43,16 @@ async function main(): Promise<void> {
     case "--help":
     case "-h":
     case undefined:
-      console.log(HELP);
+      console.log(buildHelp());
       break;
     default:
-      console.error(`Unknown command: ${command}`);
-      console.log(HELP);
+      printError(`Unknown command: ${command}`);
+      console.log(buildHelp());
       process.exit(1);
   }
 }
 
 main().catch((err: Error) => {
-  console.error(`Error: ${err.message}`);
+  printError(err.message);
   process.exit(1);
 });

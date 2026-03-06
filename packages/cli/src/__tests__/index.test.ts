@@ -18,6 +18,12 @@ vi.mock("../commands/cache.js", () => ({
   cacheCommand: mockCacheCommand,
 }));
 
+vi.mock("../format.js", async (importOriginal) => {
+  const original =
+    await importOriginal<typeof import("../format.js")>();
+  return { ...original };
+});
+
 beforeEach(() => {
   vi.resetModules();
   mockList.mockResolvedValue(undefined);

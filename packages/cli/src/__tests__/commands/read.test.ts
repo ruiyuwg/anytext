@@ -7,6 +7,12 @@ vi.mock("../../registry.js", () => ({
   getDoc: vi.fn(),
 }));
 
+vi.mock("../../format.js", async (importOriginal) => {
+  const original =
+    await importOriginal<typeof import("../../format.js")>();
+  return { ...original };
+});
+
 beforeEach(async () => {
   const registry = await import("../../registry.js");
   vi.mocked(registry.getManifest).mockResolvedValue(makeManifest());

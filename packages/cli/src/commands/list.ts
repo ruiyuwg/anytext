@@ -1,4 +1,5 @@
 import { getManifest } from "../registry.js";
+import { bold, dim, heading, padEnd, printError } from "../format.js";
 import type { Library } from "../types.js";
 
 export async function list(args: string[]): Promise<void> {
@@ -12,8 +13,10 @@ export async function list(args: string[]): Promise<void> {
 
   const library = manifest.libraries.find((l) => l.id === libraryId);
   if (!library) {
-    console.error(`Unknown library: ${libraryId}`);
-    console.error(`Run 'anytext list' to see available libraries.`);
+    printError(
+      `Unknown library: ${libraryId}`,
+      `Run 'anytext list' to see available libraries.`
+    );
     process.exit(1);
   }
 
@@ -21,26 +24,33 @@ export async function list(args: string[]): Promise<void> {
 }
 
 function listLibraries(libraries: Library[]): void {
-  const lines = ["# Available Libraries", ""];
+  const maxId = Math.max(...libraries.map((l) => l.id.length));
+  const maxVer = Math.max(...libraries.map((l) => l.version.length));
+
+  const lines = [heading("Available Libraries"), ""];
   for (const lib of libraries) {
-    lines.push(
-      `- **${lib.id}** (v${lib.version}) — ${lib.description} [${lib.topics.length} topics]`
-    );
+    const id = padEnd(bold(lib.id), maxId + 2);
+    const ver = padEnd(dim(`v${lib.version}`), maxVer + 3);
+    const count = dim(`${lib.topics.length} topics`);
+    lines.push(`  ${id} ${ver} ${lib.description}  ${count}`);
   }
   console.log(lines.join("\n"));
 }
 
 function listTopics(library: Library): void {
+  const maxId = Math.max(...library.topics.map((t) => t.id.length));
+
   const lines = [
-    `# ${library.name} (v${library.version}) — ${library.topics.length} topics`,
+    `${heading(library.name)} ${dim(`v${library.version}`)} ${dim("—")} ${dim(`${library.topics.length} topics`)}`,
     "",
   ];
   for (const topic of library.topics) {
-    lines.push(
-      `- **${topic.id}** — ${topic.title} (~${topic.tokens.toLocaleString()} tokens)`
-    );
+    const id = padEnd(bold(topic.id), maxId + 2);
+    const tokens = dim(`~${topic.tokens.toLocaleString()} tokens`);
+    lines.push(`  ${id} ${topic.title}  ${tokens}`);
     if (topic.tags.length > 0) {
-      lines.push(`  ${topic.tags.join(", ")}`);
+      const indent = " ".repeat(maxId + 4);
+      lines.push(`${indent}${dim(topic.tags.join(", "))}`);
     }
   }
   console.log(lines.join("\n"));

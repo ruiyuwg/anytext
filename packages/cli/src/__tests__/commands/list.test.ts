@@ -6,6 +6,12 @@ vi.mock("../../registry.js", () => ({
   getManifest: vi.fn(),
 }));
 
+vi.mock("../../format.js", async (importOriginal) => {
+  const original =
+    await importOriginal<typeof import("../../format.js")>();
+  return { ...original };
+});
+
 beforeEach(async () => {
   const registry = await import("../../registry.js");
   vi.mocked(registry.getManifest).mockResolvedValue(makeManifest());
@@ -56,13 +62,7 @@ describe("list", () => {
     const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
     await list(["lib"]);
     const output = logSpy.mock.calls[0]![0] as string;
-    const lines = output.split("\n");
-    // No indented tags line after the topic line
-    const topicLineIdx = lines.findIndex((l) => l.includes("hooks"));
-    expect(topicLineIdx).toBeGreaterThan(-1);
-    const nextLine = lines[topicLineIdx + 1];
-    // Next line should be empty or another topic, not an indented tags line
-    expect(nextLine === undefined || !nextLine.startsWith("  ")).toBe(true);
+    expect(output).not.toContain("useState");
   });
 
   it("exits with error for unknown library", async () => {

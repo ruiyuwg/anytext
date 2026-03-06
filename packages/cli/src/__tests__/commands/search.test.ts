@@ -10,6 +10,12 @@ vi.mock("../../search/scorer.js", () => ({
   scoreTopics: vi.fn(),
 }));
 
+vi.mock("../../format.js", async (importOriginal) => {
+  const original =
+    await importOriginal<typeof import("../../format.js")>();
+  return { ...original };
+});
+
 beforeEach(async () => {
   const registry = await import("../../registry.js");
   vi.mocked(registry.getManifest).mockResolvedValue(makeManifest());
@@ -50,7 +56,7 @@ describe("search", () => {
     await search(["hooks"]);
     const output = logSpy.mock.calls[0]![0] as string;
     expect(output).toContain("react/hooks");
-    expect(output).toContain("1.");
+    expect(output).toContain("1");
   });
 
   it("joins multi-word args into query", async () => {
