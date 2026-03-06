@@ -1,6 +1,7 @@
 {
   "$schema": "https://turborepo.dev/schema.json",
   "ui": "tui",
+  "globalEnv": ["NO_COLOR", "FORCE_COLOR", "ANYTEXT_REGISTRY_URL"],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],

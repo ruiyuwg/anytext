@@ -83,6 +83,7 @@ function preprocess(raw: string): string {
     cleaned = cleaned.replace(/<\/[A-Za-z][A-Za-z0-9]*\s*>/g, "");
 
     // Restore inline code spans
+    // eslint-disable-next-line no-control-regex
     cleaned = cleaned.replace(/\x00IC(\d+)\x00/g, (_, idx) => inlineCodeSpans[Number(idx)]!);
 
     // Remove HTML comments: <!-- ... -->

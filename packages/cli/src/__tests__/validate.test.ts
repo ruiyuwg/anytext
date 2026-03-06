@@ -73,8 +73,8 @@ describe("validateManifest", () => {
   });
 
   it("rejects missing version", () => {
-    const { version: _version, ...rest } = validManifest;
-    expect(validateManifest(rest)).toBe(false);
+    const { updatedAt, libraries } = validManifest;
+    expect(validateManifest({ updatedAt, libraries })).toBe(false);
   });
 
   it("rejects non-number version", () => {
