@@ -72,8 +72,8 @@ describe("llmsTxtAdapter", () => {
     expect(result).toEqual([]);
   });
 
-  it("continues on per-doc fetch error", async () => {
-    vi.spyOn(console, "log").mockImplementation(() => {});
+  it("continues on per-doc fetch error and logs summary", async () => {
+    const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
     vi.spyOn(console, "warn").mockImplementation(() => {});
     const fetchMod = await import("../../pipeline/fetch.js");
     const cleanMod = await import("../../pipeline/clean.js");
@@ -88,6 +88,22 @@ describe("llmsTxtAdapter", () => {
     const result = await llmsTxtAdapter.process(baseSource);
     expect(result.length).toBe(1);
     expect(result[0]!.id).toBe("doc-b");
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("1 processed, 1 failed out of 2 links"));
+  });
+
+  it("throws when more than 50% of links fail", async () => {
+    vi.spyOn(console, "log").mockImplementation(() => {});
+    vi.spyOn(console, "warn").mockImplementation(() => {});
+    const fetchMod = await import("../../pipeline/fetch.js");
+
+    const indexContent = "[A](https://example.com/a.md)\n\n[B](https://example.com/b.md)\n\n[C](https://example.com/c.md)\n";
+    vi.mocked(fetchMod.fetchContent)
+      .mockResolvedValueOnce(indexContent)
+      .mockRejectedValueOnce(new Error("fail"))
+      .mockRejectedValueOnce(new Error("fail"))
+      .mockRejectedValueOnce(new Error("fail"));
+
+    await expect(llmsTxtAdapter.process(baseSource)).rejects.toThrow("Too many failures");
   });
 
   it("applies topicOverrides", async () => {

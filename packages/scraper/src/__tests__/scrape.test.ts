@@ -140,7 +140,7 @@ describe("processSource", () => {
 });
 
 describe("processAll", () => {
-  it("continues on per-source error", async () => {
+  it("continues on per-source error and returns failure count", async () => {
     mockLlmsFullProcess
       .mockRejectedValueOnce(new Error("source1 fail"))
       .mockResolvedValueOnce([topic]);
@@ -150,7 +150,29 @@ describe("processAll", () => {
     const { processAll } = await import("../scrape.js");
     const sources = [baseSource, { ...baseSource, id: "react2" }];
 
-    await processAll(sources, false);
+    const result = await processAll(sources, false);
     expect(mockLlmsFullProcess).toHaveBeenCalledTimes(2);
+    expect(result).toEqual({ total: 2, failed: 1 });
+  });
+
+  it("returns zero failures when all succeed", async () => {
+    mockLlmsFullProcess.mockResolvedValue([topic]);
+    mockReadManifest.mockReturnValue({ version: 1, updatedAt: "2025-01-01", libraries: [] });
+    mockMergeLibrary.mockReturnValue({ version: 2, updatedAt: "2025-01-01", libraries: [] });
+
+    const { processAll } = await import("../scrape.js");
+    const result = await processAll([baseSource], false);
+    expect(result).toEqual({ total: 1, failed: 0 });
+  });
+
+  it("logs summary line", async () => {
+    mockLlmsFullProcess.mockResolvedValue([topic]);
+    mockReadManifest.mockReturnValue({ version: 1, updatedAt: "2025-01-01", libraries: [] });
+    mockMergeLibrary.mockReturnValue({ version: 2, updatedAt: "2025-01-01", libraries: [] });
+
+    const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
+    const { processAll } = await import("../scrape.js");
+    await processAll([baseSource], false);
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("1/1 sources processed successfully"));
   });
 });

@@ -33,7 +33,10 @@ async function main(): Promise<void> {
     }
     await processSource(source, dryRun);
   } else {
-    await processAll(sources, dryRun);
+    const result = await processAll(sources, dryRun);
+    if (result.failed > 0) {
+      process.exit(1);
+    }
   }
 
   console.log("\nDone!");

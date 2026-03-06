@@ -24,6 +24,7 @@ export const llmsTxtAdapter: Adapter = {
     console.log(`  Found ${links.length} doc links`);
 
     const topics: ProcessedTopic[] = [];
+    let failedCount = 0;
 
     for (const link of links) {
       try {
@@ -51,9 +52,15 @@ export const llmsTxtAdapter: Adapter = {
         topics.push(topic);
         console.log(`  Processed ${id} (${tokens} tokens)`);
       } catch (err) {
+        failedCount++;
         console.warn(`  Failed to fetch ${link.url}: ${(err as Error).message}`);
       }
     }
+
+    if (links.length > 0 && failedCount / links.length > 0.5) {
+      throw new Error(`Too many failures: ${failedCount}/${links.length} links failed for ${source.id}`);
+    }
+    console.log(`  Completed: ${topics.length} processed, ${failedCount} failed out of ${links.length} links`);
 
     // Apply overrides
     const finalTopics = topics.map((topic) => {

@@ -26,7 +26,7 @@ beforeEach(() => {
   vi.spyOn(console, "error").mockImplementation(() => {});
   mockLoadSources.mockReset().mockReturnValue([testSource]);
   mockProcessSource.mockReset().mockResolvedValue([]);
-  mockProcessAll.mockReset().mockResolvedValue(undefined);
+  mockProcessAll.mockReset().mockResolvedValue({ total: 1, failed: 0 });
 });
 
 async function runScraper(args: string[]) {
@@ -84,6 +84,18 @@ describe("main", () => {
     const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
     await runScraper(["--dry-run"]);
     expect(logSpy).toHaveBeenCalledWith("[dry-run mode]");
+  });
+
+  it("exits with code 1 when processAll reports failures", async () => {
+    const exitSpy = vi
+      .spyOn(process, "exit")
+      .mockImplementation((() => {}) as never);
+
+    mockProcessAll.mockResolvedValue({ total: 2, failed: 1 });
+
+    await runScraper([]);
+
+    expect(exitSpy).toHaveBeenCalledWith(1);
   });
 
   it("catches error in main and exits", async () => {

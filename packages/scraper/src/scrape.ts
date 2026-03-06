@@ -67,12 +67,16 @@ export async function processSource(source: SourceConfig, dryRun: boolean): Prom
 export async function processAll(
   sources: SourceConfig[],
   dryRun: boolean
-): Promise<void> {
+): Promise<{ total: number; failed: number }> {
+  let failed = 0;
   for (const source of sources) {
     try {
       await processSource(source, dryRun);
     } catch (err) {
+      failed++;
       console.error(`  ERROR processing ${source.id}: ${(err as Error).message}`);
     }
   }
+  console.log(`\nSummary: ${sources.length - failed}/${sources.length} sources processed successfully`);
+  return { total: sources.length, failed };
 }
