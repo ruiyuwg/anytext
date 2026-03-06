@@ -1,5 +1,5 @@
 {
-  "name": "anytext",
+  "name": "anytext-cli",
   "version": "0.1.0",
   "description": "Instant, clean documentation for coding agents",
   "type": "module",
