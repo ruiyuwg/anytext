@@ -1,0 +1,95 @@
+import { unified } from "unified";
+import remarkParse from "remark-parse";
+import remarkFrontmatter from "remark-frontmatter";
+import remarkStringify from "remark-stringify";
+import { remove } from "unist-util-remove";
+import type { Node } from "unist";
+
+const stringifyOptions = {
+  bullet: "-" as const,
+  emphasis: "*" as const,
+  strong: "*" as const,
+  listItemIndent: "one" as const,
+};
+
+export async function cleanMarkdown(raw: string): Promise<string> {
+  // Phase 1: Text-level preprocessing to strip non-markdown syntax
+  const stripped = preprocess(raw);
+
+  // Phase 2: Parse as standard markdown, remove remaining HTML/YAML nodes
+  const processor = unified()
+    .use(remarkParse)
+    .use(remarkFrontmatter, ["yaml", "toml"])
+    .use(remarkStringify, stringifyOptions);
+
+  const tree = processor.parse(stripped);
+  remove(tree, (node: Node) => node.type === "yaml" || node.type === "toml");
+  return String(processor.stringify(tree)).trim();
+}
+
+function preprocess(raw: string): string {
+  // Work line by line to respect code fences
+  const lines = raw.split("\n");
+  const result: string[] = [];
+  let inCodeBlock = false;
+
+  for (const line of lines) {
+    // Track code fences
+    if (/^```/.test(line)) {
+      inCodeBlock = !inCodeBlock;
+      result.push(line);
+      continue;
+    }
+
+    // Inside code blocks, keep everything as-is
+    if (inCodeBlock) {
+      result.push(line);
+      continue;
+    }
+
+    // Skip <SYSTEM> blocks (single line)
+    if (/<SYSTEM>/.test(line)) continue;
+    if (/<\/SYSTEM>/.test(line)) continue;
+
+    // Skip YAML frontmatter blocks (--- delimited with key: value content)
+    // Handled by remark-frontmatter for the first block; others are stripped below
+
+    // Skip section separator lines (long dashes)
+    if (/^-{10,}$/.test(line)) continue;
+
+    // Skip heading-style separators (## --- etc.)
+    if (/^#{1,6}\s+-{3,}\s*$/.test(line)) continue;
+
+    // Skip admonition syntax (:::tip, :::info, etc.)
+    if (/^:::\w*/.test(line)) continue;
+
+    // Strip HTML tags (but not inside code blocks, already handled above)
+    let cleaned = line;
+
+    // Remove self-closing HTML/JSX tags: <Component />, <br/>, etc.
+    cleaned = cleaned.replace(/<[A-Za-z][^>]*\/>/g, "");
+
+    // Remove opening HTML/JSX tags: <Component prop="value">
+    cleaned = cleaned.replace(/<[A-Za-z][A-Za-z0-9]*(?:\s[^>]*)?>(?!`)/g, "");
+
+    // Remove closing HTML/JSX tags: </Component>
+    cleaned = cleaned.replace(/<\/[A-Za-z][A-Za-z0-9]*\s*>/g, "");
+
+    // Remove HTML comments: <!-- ... -->
+    cleaned = cleaned.replace(/<!--[\s\S]*?-->/g, "");
+
+    // Strip heading ID attributes: {#tracked}
+    cleaned = cleaned.replace(/\s*\{#[^}]+\}\s*$/, "");
+
+    // Normalize escaped angle brackets in headings: \<\> → +
+    if (/^#{1,6}\s/.test(cleaned)) {
+      cleaned = cleaned.replace(/\s*\\?<\\?>\s*/g, " + ");
+    }
+
+    result.push(cleaned);
+  }
+
+  // Now strip all remaining YAML frontmatter blocks (not just the first)
+  const joined = result.join("\n");
+  return joined.replace(/^---\n((?:[a-zA-Z_][a-zA-Z0-9_]*:.*\n)+)---$/gm, "");
+}

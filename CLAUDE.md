@@ -7,10 +7,12 @@ Open-source CLI that gives coding agents instant access to clean, LLM-ready docu
 ```
 anytext/
 ├── packages/cli/           # The `anytext` npm package (CLI)
+├── packages/scraper/       # Doc scraping & processing pipeline
 ├── registry/               # Static doc registry
 │   ├── manifest.json       # Index of all libraries and topics
 │   └── docs/               # Clean markdown files per library/topic
 ├── skills/anytext/         # Skill definition for coding agents
+├── .github/workflows/      # CI: weekly doc update PR
 ├── packages/eslint-config/ # Shared ESLint config
 └── packages/typescript-config/ # Shared TypeScript config
 ```
@@ -42,6 +44,23 @@ node dist/index.js list   # Test locally
 2. Add/edit docs in `registry/docs/{library}/{topic}.md`
 3. Update `registry/manifest.json` when adding new libraries or topics
 4. Build and test: `cd packages/cli && pnpm build && node dist/index.js`
+
+## Scraper Workflow
+
+The scraper (`packages/scraper/`) auto-generates registry docs from upstream sources.
+
+```sh
+cd packages/scraper
+pnpm build
+node dist/index.js                    # Process all libraries
+node dist/index.js --library hono     # Process single library
+node dist/index.js --dry-run          # Preview without writing manifest
+```
+
+- **Config:** `packages/scraper/sources.json` — add new libraries here
+- **Adapters:** `llms-full` (fetch llms-full.txt, split), `llms-txt` (follow .md links), `manual` (read existing docs)
+- **Pipeline:** fetch → preprocess (strip frontmatter, HTML, MDX) → parse → split by headings → write to `registry/docs/`
+- **CI:** `.github/workflows/update-docs.yml` runs weekly, creates a PR with updated docs
 
 ## Registry Format
 

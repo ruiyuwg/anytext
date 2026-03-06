@@ -1,0 +1,492 @@
+# `drizzle-kit generate`
+
+<Prerequisites>
+- Get started with Drizzle and `drizzle-kit` - [read here](/docs/get-started)
+- Drizzle schema fundamentals - [read here](/docs/sql-schema-declaration)
+- Database connection basics - [read here](/docs/connect-overview)
+- Drizzle migrations fundamentals - [read here](/docs/migrations)
+- Drizzle Kit [overview](/docs/kit-overview) and [config file](/docs/drizzle-config-file)
+</Prerequisites>
+
+<br/>
+
+`drizzle-kit generate` lets you generate SQL migrations based on your Drizzle schema upon declaration or on subsequent schema changes. <Callout collapsed="How it works under the hood?">
+Drizzle Kit `generate` command triggers a sequence of events:
+
+1. It will read through your Drizzle schema file(s) and compose a json snapshot of your schema
+2. It will read through your previous migrations folders and compare current json snapshot to the most recent one
+3. Based on json differences it will generate SQL migrations
+4. Save `migration.sql` and `snapshot.json` in migration folder under current timestamp
+
+<Section>
+```typescript filename="src/schema.ts"
+import * as p from "./drizzle-orm/pg-core";
+
+export const users = p.pgTable("users", {
+id: p.serial().primaryKey(),
+name: p.text(),
+email: p.text().unique(),
+};
+
+```
+```
+
+┌────────────────────────┐\
+│ $ drizzle-kit generate │\
+└─┬──────────────────────┘\
+│\
+└ 1. read previous migration folders
+2\. find diff between current and previous schema
+3\. prompt developer for renames if necessary
+┌ 4. generate SQL migration and persist to file
+│    ┌─┴───────────────────────────────────────┐\
+│      📂 drizzle\
+│      └ 📂 20242409125510\_premium\_mister\_fear
+│        ├ 📜 migration.sql
+│        └ 📜 snapshot.json
+v
+
+````
+```sql
+-- drizzle/20242409125510_premium_mister_fear/migration.sql
+
+CREATE TABLE "users" (
+ "id" SERIAL PRIMARY KEY,
+ "name" TEXT,
+ "email" TEXT UNIQUE
+);
+````
+
+</Section>
+</Callout>
+
+It's designed to cover [code first](/docs/migrations) approach of managing Drizzle migrations.
+You can apply generated migrations using [`drizzle-kit migrate`](/docs/drizzle-kit-migrate), using drizzle-orm's `migrate()`,
+using external migration tools like [bytebase](https://www.bytebase.com/) or running migrations yourself directly on the database.
+
+`drizzle-kit generate` command requires you to provide both `dialect` and `schema` path options,
+you can set them either via [drizzle.config.ts](/docs/drizzle-config-file) config file or via CLI options
+\<CodeTabs items={\["With config file", "As CLI options"]}>
+
+<Section>
+```ts
+// drizzle.config.ts
+import { defineConfig } from "drizzle-kit";
+
+export default defineConfig({
+dialect: "postgresql",
+schema: "./src/schema.ts",
+});
+
+````
+```shell
+npx drizzle-kit generate
+````
+
+</Section>
+
+```shell
+npx drizzle-kit generate --dialect=postgresql --schema=./src/schema.ts
+```
+
+</CodeTabs>
+
+### Schema files path
+
+You can have a single `schema.ts` file or as many schema files as you want spread out across the project.
+Drizzle Kit requires you to specify path(s) to them as a [glob](https://www.digitalocean.com/community/tools/glob?comments=true\&glob=/**/*.js\&matches=false\&tests=//%20This%20will%20match%20as%20it%20ends%20with%20'.js'\&tests=/hello/world.js\&tests=//%20This%20won't%20match!\&tests=/test/some/globs) via `schema` configuration option.
+
+<SchemaFilePaths/>
+
+### Custom migration file name
+
+You can set custom migration file names by providing `--name` CLI option
+
+```shell
+npx drizzle-kit generate --name=init
+```
+
+```plaintext {4}
+📦 
+ ├ 📂 drizzle
+ │ └ 📂 20242409125510_init
+ │   ├ 📜 snapshot.json
+ │   └ 📜 migration.sql
+ ├ 📂 src
+ └ …
+```
+
+### Multiple configuration files in one project
+
+You can have multiple config files in the project, it's very useful when you have multiple database stages or multiple databases or different databases on the same project: <Npx>
+drizzle-kit generate --config=drizzle-dev.config.ts
+drizzle-kit generate --config=drizzle-prod.config.ts </Npx>
+
+```plaintext {5-6}
+📦 
+ ├ 📂 drizzle
+ ├ 📂 src
+ ├ 📜 .env
+ ├ 📜 drizzle-dev.config.ts
+ ├ 📜 drizzle-prod.config.ts
+ ├ 📜 package.json
+ └ 📜 tsconfig.json
+```
+
+### Custom migrations
+
+You can generate empty migration files to write your own custom SQL migrations
+for DDL alternations currently not supported by Drizzle Kit or data seeding. Extended docs on custom migrations - [see here](/docs/kit-custom-migrations)
+
+```shell
+drizzle-kit generate --custom --name=seed-users
+```
+
+<Section>
+```plaintext {5}
+📦 
+ ├ 📂 drizzle
+ │ ├ 📂 20242409125510_init
+ │ └ 📂 20242409125510_seed-users
+ ├ 📂 src
+ └ …
+```
+```sql
+-- ./drizzle/20242409125510_seed/migration.sql
+
+INSERT INTO "users" ("name") VALUES('Dan');
+INSERT INTO "users" ("name") VALUES('Andrew');
+INSERT INTO "users" ("name") VALUES('Dandrew');
+
+````
+</Section>
+
+### Ignore conflicts
+
+<Callout type='warning'>
+`--ignore-conflicts` available starting from `drizzle-orm@1.0.0-beta.16`
+</Callout>
+
+In case you need `generate` command to skip commutativity checks and bypass it, you can use `--ignore-conflicts`. If there is a situation you want to use it, then
+there is a big chance that `drizzle-kit` didn't check migrations right and it's a bug. Please report us your case, so we can fix it
+
+```shell
+drizzle-kit generate --ignore-conflicts
+````
+
+### Extended list of available configurations
+
+`drizzle-kit generate` has a list of cli-only options
+
+<rem025/>
+
+|               |                                                      |
+| :--------     | :--------------------------------------------------- |
+| `custom`      | generate empty SQL for custom migration              |
+| `name`        | generate migration with custom name                  |
+
+<rem025/>
+
+<Npx>
+drizzle-kit generate --name=init
+drizzle-kit generate --name=seed_users --custom
+</Npx>
+
+<br/>
+<hr/>
+<br/>
+We recommend configuring `drizzle-kit` through [drizzle.config.ts](/docs/drizzle-config-file) file, 
+yet you can provide all configuration options through CLI if necessary, e.g. in CI/CD pipelines, etc.
+
+|               |            |                                                                            |
+| :------------ | :-------   | :----------------------------------------------------------------------    |
+| `dialect`     | `required` | Database dialect, one of <Dialects/>                                       |
+| `schema`      | `required` | Path to typescript schema file(s) or folder(s) with multiple schema files  |
+| `out`         |            | Migrations output folder, default is `./drizzle`                           |
+| `config`      |            | Configuration file path, default is `drizzle.config.ts`                    |
+| `breakpoints` |            | SQL statements breakpoints, default is `true`                              |
+
+### Extended example
+
+Example of how to create a custom postgresql migration file named `0001_seed-users.sql`
+with Drizzle schema located in `./src/schema.ts` and migrations folder named `./migrations` instead of default `./drizzle`.
+
+We will also place drizzle config file in the `configs` folder.
+
+Let's create config file:
+
+```plaintext {4}
+📦 
+ ├ 📂 migrations
+ ├ 📂 configs
+ │ └ 📜 drizzle.config.ts
+ ├ 📂 src
+ └ …
+```
+
+```ts filename='drizzle.config.ts'
+import { defineConfig } from "drizzle-kit";
+
+export default defineConfig({
+  dialect: "postgresql",
+  schema: "./src/schema.ts",
+  out: "./migrations",
+});
+```
+
+Now let's run
+
+```shell
+npx drizzle-kit generate --config=./configs/drizzle.config.ts --name=seed-users --custom
+```
+
+And it will successfully generate
+
+<Section>
+```plaintext {6}
+📦 
+ ├ …
+ ├ 📂 migrations
+ │ ├ 📂 20242409125510_init
+ │ └ 📂 20242409125510_seed-users
+ └ …
+```
+```sql
+-- ./drizzle/20242409125510_seed-users/migration.sql
+
+INSERT INTO "users" ("name") VALUES('Dan');
+INSERT INTO "users" ("name") VALUES('Andrew');
+INSERT INTO "users" ("name") VALUES('Dandrew');
+
+````
+</Section>
+
+
+Source: https://orm.drizzle.team/docs/drizzle-kit-migrate
+
+import CodeTab from "@mdx/CodeTab.astro";
+import CodeTabs from "@mdx/CodeTabs.astro";
+import Section from "@mdx/Section.astro";
+import Tab from "@mdx/Tab.astro";
+import Tabs from "@mdx/Tabs.astro";
+import Callout from "@mdx/Callout.astro";
+import Prerequisites from "@mdx/Prerequisites.astro";
+import Npx from "@mdx/Npx.astro";
+
+# `drizzle-kit migrate`
+<Prerequisites>
+- Get started with Drizzle and `drizzle-kit` - [read here](/docs/get-started)
+- Drizzle schema fundamentals - [read here](/docs/sql-schema-declaration)
+- Database connection basics - [read here](/docs/connect-overview)
+- Drizzle migrations fundamentals - [read here](/docs/migrations)
+- Drizzle Kit [overview](/docs/kit-overview) and [config file](/docs/drizzle-config-file)
+- `drizzle-kit generate` command - [read here](/docs/drizzle-kit-generate)
+</Prerequisites>
+<br/>
+
+
+`drizzle-kit migrate` lets you apply SQL migrations generated by [`drizzle-kit generate`](/docs/drizzle-kit-generate). 
+It's designed to cover [code first(option 3)](/docs/migrations) approach of managing Drizzle migrations. 
+
+<Callout collapsed="How it works under the hood?">
+Drizzle Kit `migrate` command triggers a sequence of events:
+1. Reads through migration folder and read all `.sql` migration files
+2. Connects to the database and fetches entries from drizzle migrations log table
+3. Based on previously applied migrations it will decide which new migrations to run
+4. Runs SQL migrations and logs applied migrations to drizzle migrations table
+
+<Section>
+```plaintext
+  ├ 📂 drizzle       
+  │ ├ 📂 20242409125510_premium_mister_fear
+  │ └ 📂 20242409135510_delicate_professor_xavie
+  └ …
+````
+
+```plaintext
+┌───────────────────────┐                  
+│ $ drizzle-kit migrate │                  
+└─┬─────────────────────┘                  
+  │                                                         ┌──────────────────────────┐                                         
+  └ 1. reads migration.sql files in migrations folder       │                          │
+    2. fetch migration history from database -------------> │                          │
+  ┌ 3. pick previously unapplied migrations <-------------- │         DATABASE         │
+  └ 4. apply new migration to the database ---------------> │                          │
+                                                            │                          │
+                                                            └──────────────────────────┘
+[✓] done!        
+```
+
+</Section>
+</Callout>
+
+`drizzle-kit migrate` command requires you to specify both `dialect` and database connection credentials,
+you can provide them either via [drizzle.config.ts](/docs/drizzle-config-file) config file or via CLI options
+
+\<CodeTabs items={\["With config file", "As CLI options"]}>
+
+<Section>
+```ts {5,8}
+// drizzle.config.ts
+import { defineConfig } from "drizzle-kit";
+
+export default defineConfig({
+dialect: "postgresql",
+schema: "./src/schema.ts",
+dbCredentials: {
+url: "postgresql://user:password@host:port/dbname"
+},
+});
+
+````
+```shell
+npx drizzle-kit migrate
+````
+
+</Section>
+```shell
+npx drizzle-kit migrate --dialect=postgresql --url=postgresql://user:password@host:port/dbname
+```
+</CodeTabs>
+
+### Applied migrations log in the database
+
+Upon running migrations Drizzle Kit will persist records about successfully applied migrations in your database.
+It will store them in migrations log table named `__drizzle_migrations`.
+
+You can customise both **table** and **schema**(PostgreSQL only) of that table via drizzle config file:
+
+```ts filename="drizzle.config.ts" {8-9}
+export default defineConfig({
+  dialect: "postgresql",
+  schema: "./src/schema.ts",
+  dbCredentials: {
+    url: "postgresql://user:password@host:port/dbname"
+  },
+  migrations: {
+    table: 'my-migrations-table', // `__drizzle_migrations` by default
+    schema: 'public', // used in PostgreSQL only, `drizzle` by default
+  },
+});
+```
+
+### Ignore conflicts
+
+<Callout type='warning'>
+`--ignore-conflicts` available starting from `drizzle-orm@1.0.0-beta.16`
+</Callout>
+
+In case you need `migrate` command to skip commutativity checks and bypass it, you can use `--ignore-conflicts`. If there is a situation you want to use it, then
+there is a big chance that `drizzle-kit` didn't check migrations right and it's a bug. Please report us your case, so we can fix it
+
+```shell
+drizzle-kit migrate --ignore-conflicts
+```
+
+### Multiple configuration files in one project
+
+You can have multiple config files in the project, it's very useful when you have multiple database stages or multiple databases on the same project: <Npx>
+drizzle-kit migrate --config=drizzle-dev.config.ts
+drizzle-kit migrate --config=drizzle-prod.config.ts </Npx>
+
+```plaintext {5-6}
+📦 
+ ├ 📂 drizzle
+ ├ 📂 src
+ ├ 📜 .env
+ ├ 📜 drizzle-dev.config.ts
+ ├ 📜 drizzle-prod.config.ts
+ ├ 📜 package.json
+ └ 📜 tsconfig.json
+```
+
+### Extended example
+
+Let's generate SQL migration and apply it to our database using `drizzle-kit generate` and `drizzle-kit migrate` commands
+
+```plaintext
+📦 
+ ├ 📂 drizzle
+ ├ 📂 src
+ │ ├ 📜 schema.ts
+ │ └ 📜 index.ts
+ ├ 📜 drizzle.config.ts
+ └ …
+```
+
+\<CodeTabs items={\["drizzle.config.ts", "src/schema.ts"]}>
+
+```ts
+import { defineConfig } from "drizzle-kit";
+
+export default defineConfig({
+  dialect: "postgresql",
+  schema: "./src/schema.ts",
+  dbCredentials: {
+    url: "postgresql://user:password@host:port/dbname"
+  },
+  migrations: {
+    table: 'journal', 
+    schema: 'drizzle', 
+  },
+});
+```
+
+```ts
+import * as p from "drizzle-orm/pg-core";
+
+export const users = p.pgTable("users", {
+  id: p.serial().primaryKey(),
+  name: p.text(),
+})
+```
+
+</CodeTabs>
+
+Now let's run
+
+```shell
+npx drizzle-kit generate --name=init
+```
+
+it will generate
+
+<Section>
+```plaintext {5}
+📦 
+ ├ …
+ ├ 📂 migrations
+ │ ├ 📂 20242409125510_init
+ └ …
+```
+```sql
+-- ./drizzle/0000_init.sql
+
+CREATE TABLE "users"(
+id serial primary key,
+name text
+)
+
+````
+</Section>
+
+Now let's run
+```shell
+npx drizzle-kit migrate
+````
+
+and our SQL migration is now successfully applied to the database ✅
+
+Source: https://orm.drizzle.team/docs/drizzle-kit-pull
+
+import CodeTab from "@mdx/CodeTab.astro";
+import CodeTabs from "@mdx/CodeTabs.astro";
+import Section from "@mdx/Section.astro";
+import Tab from "@mdx/Tab.astro";
+import Tabs from "@mdx/Tabs.astro";
+import Callout from "@mdx/Callout.astro";
+import Prerequisites from "@mdx/Prerequisites.astro";
+import Drivers from "@mdx/Drivers.mdx"
+import Dialects from "@mdx/Dialects.mdx"
+import Npm from "@mdx/Npm.astro"
+import Npx from "@mdx/Npx.astro"

@@ -1,0 +1,50 @@
+import { readFileSync, writeFileSync } from "node:fs";
+import path from "node:path";
+import type { Manifest, ManifestLibrary } from "../types.js";
+
+const REGISTRY_DIR = path.resolve(
+  import.meta.dirname,
+  "..",
+  "..",
+  "..",
+  "..",
+  "registry"
+);
+
+export function getRegistryDir(): string {
+  return REGISTRY_DIR;
+}
+
+export function readManifest(): Manifest {
+  const manifestPath = path.join(REGISTRY_DIR, "manifest.json");
+  const raw = readFileSync(manifestPath, "utf-8");
+  return JSON.parse(raw) as Manifest;
+}
+
+export function writeManifest(manifest: Manifest): void {
+  const manifestPath = path.join(REGISTRY_DIR, "manifest.json");
+  writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + "\n", "utf-8");
+}
+
+export function mergeLibrary(
+  manifest: Manifest,
+  library: ManifestLibrary
+): Manifest {
+  const existing = manifest.libraries.findIndex((l) => l.id === library.id);
+  const libraries = [...manifest.libraries];
+
+  if (existing >= 0) {
+    libraries[existing] = library;
+  } else {
+    libraries.push(library);
+  }
+
+  // Sort alphabetically by id
+  libraries.sort((a, b) => a.id.localeCompare(b.id));
+
+  return {
+    version: manifest.version + 1,
+    updatedAt: new Date().toISOString().split("T")[0]!,
+    libraries,
+  };
+}

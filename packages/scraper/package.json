@@ -1,0 +1,29 @@
+{
+  "name": "@repo/scraper",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "unified": "^11.0.5",
+    "remark-parse": "^11.0.0",
+    "remark-stringify": "^11.0.0",
+    "remark-frontmatter": "^5.0.0",
+    "remark-mdx": "^3.1.0",
+    "unist-util-remove": "^4.0.0",
+    "unist-util-visit": "^5.0.0"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@types/mdast": "^4.0.4",
+    "@types/node": "^22.15.3",
+    "@types/unist": "^3.0.3",
+    "typescript": "5.9.2"
+  }
+}

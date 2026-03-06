@@ -1,0 +1,141 @@
+# Moonshot AI Provider
+
+The [Moonshot AI](https://www.moonshot.ai) provider offers access to powerful language models through the Moonshot API, including the Kimi series of models with reasoning capabilities.
+
+API keys can be obtained from the [Moonshot Platform](https://platform.moonshot.ai).
+
+## Setup
+
+The Moonshot AI provider is available via the `@ai-sdk/moonshotai` module. You can install it with:
+
+## Provider Instance
+
+You can import the default provider instance `moonshotai` from `@ai-sdk/moonshotai`:
+
+```ts
+import { moonshotai } from '@ai-sdk/moonshotai';
+```
+
+For custom configuration, you can import `createMoonshotAI` and create a provider instance with your settings:
+
+```ts
+import { createMoonshotAI } from '@ai-sdk/moonshotai';
+
+const moonshotai = createMoonshotAI({
+  apiKey: process.env.MOONSHOT_API_KEY ?? '',
+});
+```
+
+You can use the following optional settings to customize the Moonshot AI provider instance:
+
+- **baseURL** *string*
+
+  Use a different URL prefix for API calls.
+  The default prefix is `https://api.moonshot.ai/v1`
+
+- **apiKey** *string*
+
+  API key that is being sent using the `Authorization` header. It defaults to
+  the `MOONSHOT_API_KEY` environment variable
+
+- **headers** *Record\<string,string>*
+
+  Custom headers to include in the requests
+
+- **fetch** *(input: RequestInfo, init?: RequestInit) => Promise\<Response>*
+
+  Custom [fetch](https://developer.mozilla.org/en-US/docs/Web/API/fetch) implementation
+
+## Language Models
+
+You can create language models using a provider instance:
+
+```ts
+import { moonshotai } from '@ai-sdk/moonshotai';
+import { generateText } from 'ai';
+
+const { text } = await generateText({
+  model: moonshotai('kimi-k2.5'),
+  prompt: 'Write a vegetarian lasagna recipe for 4 people.',
+});
+```
+
+You can also use the `.chatModel()` or `.languageModel()` factory methods:
+
+```ts
+const model = moonshotai.chatModel('kimi-k2.5');
+// or
+const model = moonshotai.languageModel('kimi-k2.5');
+```
+
+Moonshot AI language models can be used in the `streamText` function
+(see [AI SDK Core](/docs/ai-sdk-core)).
+
+### Reasoning Models
+
+Moonshot AI offers thinking models like `kimi-k2-thinking` that generate intermediate reasoning tokens before their final response. The reasoning output is streamed through the standard AI SDK reasoning parts.
+
+```ts
+import {
+  moonshotai,
+  type MoonshotAILanguageModelOptions,
+} from '@ai-sdk/moonshotai';
+import { generateText } from 'ai';
+
+const { text, reasoningText } = await generateText({
+  model: moonshotai('kimi-k2-thinking'),
+  providerOptions: {
+    moonshotai: {
+      thinking: { type: 'enabled', budgetTokens: 2048 },
+      reasoningHistory: 'interleaved',
+    } satisfies MoonshotAILanguageModelOptions,
+  },
+  prompt: 'How many "r"s are in the word "strawberry"?',
+});
+
+console.log(reasoningText);
+console.log(text);
+```
+
+See [AI SDK UI: Chatbot](/docs/ai-sdk-ui/chatbot#reasoning) for more details on how to integrate reasoning into your chatbot.
+
+### Provider Options
+
+The following optional provider options are available for Moonshot AI language models:
+
+- **thinking** *object*
+
+  Configuration for thinking/reasoning models like Kimi K2 Thinking.
+
+  - **type** *'enabled' | 'disabled'*
+
+    Whether to enable thinking mode
+
+  - **budgetTokens** *number*
+
+    Maximum number of tokens for thinking (minimum 1024)
+
+- **reasoningHistory** *'disabled' | 'interleaved' | 'preserved'*
+
+  Controls how reasoning history is handled in multi-turn conversations:
+
+  - `'disabled'`: Remove reasoning from history
+  - `'interleaved'`: Include reasoning between tool calls within a single turn
+  - `'preserved'`: Keep all reasoning in history
+
+## Model Capabilities
+
+| Model                    | Image Input         | Object Generation   | Tool Usage          | Tool Streaming      |
+| ------------------------ | ------------------- | ------------------- | ------------------- | ------------------- |
+| `moonshot-v1-8k`         |  |  |  |  |
+| `moonshot-v1-32k`        |  |  |  |  |
+| `moonshot-v1-128k`       |  |  |  |  |
+| `kimi-k2`                |  |  |  |  |
+| `kimi-k2.5`              |  |  |  |  |
+| `kimi-k2-thinking`       |  |  |  |  |
+| `kimi-k2-thinking-turbo` |  |  |  |  |
+| `kimi-k2-turbo`          |  |  |  |  |
+
+Please see the [Moonshot AI docs](https://platform.moonshot.ai/docs/intro) for
+a full list of available models. You can also pass any available provider
+model ID as a string if needed.

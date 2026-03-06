@@ -1,0 +1,67 @@
+{
+  "sources": [
+    {
+      "id": "ai-sdk",
+      "name": "Vercel AI SDK",
+      "description": "TypeScript toolkit for building AI-powered applications",
+      "version": "4",
+      "adapter": "llms-full",
+      "url": "https://ai-sdk.dev/llms.txt"
+    },
+    {
+      "id": "drizzle",
+      "name": "Drizzle ORM",
+      "description": "TypeScript ORM with SQL-like query builder and schema declarations",
+      "version": "0.36",
+      "adapter": "llms-full",
+      "url": "https://orm.drizzle.team/llms-full.txt"
+    },
+    {
+      "id": "hono",
+      "name": "Hono",
+      "description": "Lightweight, ultrafast web framework for the Edge",
+      "version": "4",
+      "adapter": "llms-full",
+      "url": "https://hono.dev/llms-full.txt"
+    },
+    {
+      "id": "nextjs",
+      "name": "Next.js",
+      "description": "React framework for production with server-side rendering and static generation",
+      "version": "15",
+      "adapter": "llms-full",
+      "url": "https://nextjs.org/docs/llms-full.txt"
+    },
+    {
+      "id": "react",
+      "name": "React",
+      "description": "JavaScript library for building user interfaces",
+      "version": "19",
+      "adapter": "llms-txt",
+      "url": "https://react.dev/llms.txt"
+    },
+    {
+      "id": "tailwindcss",
+      "name": "Tailwind CSS",
+      "description": "Utility-first CSS framework for rapid UI development",
+      "version": "4",
+      "adapter": "manual"
+    },
+    {
+      "id": "trpc",
+      "name": "tRPC",
+      "description": "End-to-end typesafe APIs for TypeScript",
+      "version": "11",
+      "adapter": "llms-full",
+      "url": "https://trpc.io/llms-full.txt"
+    },
+    {
+      "id": "zod",
+      "name": "Zod",
+      "description": "TypeScript-first schema declaration and validation",
+      "version": "3",
+      "adapter": "llms-full",
+      "url": "https://zod.dev/llms-full.txt"
+    }
+  ]
+}
