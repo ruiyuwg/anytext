@@ -70,7 +70,19 @@ describe("getManifest", () => {
 
     expect(result).toEqual(testManifest);
     expect(mockCacheManifest).toHaveBeenCalledWith(testManifest);
-    expect(fetchSpy).toHaveBeenCalled();
+    expect(fetchSpy).toHaveBeenCalledWith(
+      expect.any(String),
+      expect.objectContaining({ signal: expect.any(AbortSignal) })
+    );
+  });
+
+  it("propagates timeout error", async () => {
+    mockGetCachedManifest.mockReturnValue(null);
+
+    vi.spyOn(globalThis, "fetch").mockRejectedValue(new DOMException("The operation was aborted", "TimeoutError"));
+
+    const { getManifest } = await importRegistry();
+    await expect(getManifest()).rejects.toThrow("aborted");
   });
 
   it("throws on HTTP error", async () => {
@@ -106,7 +118,8 @@ describe("getManifest", () => {
     await getManifest();
 
     expect(fetchSpy).toHaveBeenCalledWith(
-      "https://custom.example.com/registry/manifest.json"
+      "https://custom.example.com/registry/manifest.json",
+      expect.objectContaining({ signal: expect.any(AbortSignal) })
     );
   });
 });
@@ -125,7 +138,7 @@ describe("getDoc", () => {
   it("fetches and caches doc when not cached", async () => {
     mockGetCachedDoc.mockReturnValue(null);
 
-    vi.spyOn(globalThis, "fetch").mockResolvedValue(
+    const fetchSpy = vi.spyOn(globalThis, "fetch").mockResolvedValue(
       new Response("# Hooks content", { status: 200 })
     );
 
@@ -134,6 +147,10 @@ describe("getDoc", () => {
 
     expect(result).toBe("# Hooks content");
     expect(mockCacheDoc).toHaveBeenCalledWith("react/hooks.md", "# Hooks content");
+    expect(fetchSpy).toHaveBeenCalledWith(
+      expect.any(String),
+      expect.objectContaining({ signal: expect.any(AbortSignal) })
+    );
   });
 
   it("throws on fetch error", async () => {

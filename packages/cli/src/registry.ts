@@ -16,6 +16,8 @@ function isFileURL(url: string): boolean {
   return url.startsWith("file://");
 }
 
+const FETCH_TIMEOUT_MS = 30_000;
+
 function readLocal(url: string): string {
   return readFileSync(fileURLToPath(url), "utf-8");
 }
@@ -24,7 +26,7 @@ async function fetchJSON<T>(url: string): Promise<T> {
   if (isFileURL(url)) {
     return JSON.parse(readLocal(url)) as T;
   }
-  const res = await fetch(url);
+  const res = await fetch(url, { signal: AbortSignal.timeout(FETCH_TIMEOUT_MS) });
   if (!res.ok) {
     throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
   }
@@ -35,7 +37,7 @@ async function fetchText(url: string): Promise<string> {
   if (isFileURL(url)) {
     return readLocal(url);
   }
-  const res = await fetch(url);
+  const res = await fetch(url, { signal: AbortSignal.timeout(FETCH_TIMEOUT_MS) });
   if (!res.ok) {
     throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
   }
