@@ -7,6 +7,7 @@ import {
   cacheDoc,
 } from "./cache.js";
 import type { Manifest } from "./types.js";
+import { validateManifest } from "./validate.js";
 
 const REGISTRY_BASE_URL =
   process.env["ANYTEXT_REGISTRY_URL"] ??
@@ -50,11 +51,12 @@ export async function getManifest(): Promise<Manifest> {
     return cached;
   }
 
-  const manifest = await fetchJSON<Manifest>(
-    `${REGISTRY_BASE_URL}/manifest.json`
-  );
-  cacheManifest(manifest);
-  return manifest;
+  const data = await fetchJSON<unknown>(`${REGISTRY_BASE_URL}/manifest.json`);
+  if (!validateManifest(data)) {
+    throw new Error("Invalid manifest format");
+  }
+  cacheManifest(data);
+  return data;
 }
 
 export async function getDoc(path: string): Promise<string> {

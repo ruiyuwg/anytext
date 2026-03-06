@@ -2,6 +2,7 @@ import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node
 import { dirname, join } from "node:path";
 import { homedir } from "node:os";
 import type { Manifest } from "./types.js";
+import { validateManifest } from "./validate.js";
 
 const CACHE_DIR = join(homedir(), ".anytext");
 const MANIFEST_PATH = join(CACHE_DIR, "manifest.json");
@@ -31,7 +32,9 @@ export function getCachedManifest(): Manifest | null {
       return null;
     }
 
-    return JSON.parse(readFileSync(MANIFEST_PATH, "utf-8"));
+    const manifest: unknown = JSON.parse(readFileSync(MANIFEST_PATH, "utf-8"));
+    if (!validateManifest(manifest)) return null;
+    return manifest;
   } catch {
     return null;
   }

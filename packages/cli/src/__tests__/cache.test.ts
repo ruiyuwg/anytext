@@ -5,6 +5,9 @@ vi.mock("node:fs");
 vi.mock("node:os", () => ({
   homedir: () => "/mock/home",
 }));
+vi.mock("../validate.js", () => ({
+  validateManifest: vi.fn(() => true),
+}));
 
 const CACHE_DIR = "/mock/home/.anytext";
 const MANIFEST_PATH = `${CACHE_DIR}/manifest.json`;
@@ -20,16 +23,20 @@ const testManifest: Manifest = {
 let fs: typeof import("node:fs");
 let cache: typeof import("../cache.js");
 
+let validate: typeof import("../validate.js");
+
 beforeEach(async () => {
   vi.useFakeTimers();
   vi.setSystemTime(new Date("2025-06-01T12:00:00Z"));
   fs = await import("node:fs");
   cache = await import("../cache.js");
+  validate = await import("../validate.js");
   vi.mocked(fs.existsSync).mockReset();
   vi.mocked(fs.readFileSync).mockReset();
   vi.mocked(fs.writeFileSync).mockReset();
   vi.mocked(fs.mkdirSync).mockReset();
   vi.mocked(fs.rmSync).mockReset();
+  vi.mocked(validate.validateManifest).mockReturnValue(true);
 });
 
 describe("getCachedManifest", () => {
@@ -70,6 +77,19 @@ describe("getCachedManifest", () => {
   it("returns null when meta file is corrupted JSON", () => {
     vi.mocked(fs.existsSync).mockReturnValue(true);
     vi.mocked(fs.readFileSync).mockReturnValue("not json");
+    expect(cache.getCachedManifest()).toBeNull();
+  });
+
+  it("returns null when manifest fails validation", () => {
+    vi.mocked(fs.existsSync).mockReturnValue(true);
+    const freshTime = Date.now() - 1000;
+    vi.mocked(fs.readFileSync).mockImplementation((p) => {
+      if (String(p) === META_PATH) {
+        return JSON.stringify({ fetchedAt: freshTime, registryVersion: 1 });
+      }
+      return JSON.stringify({ bad: "data" });
+    });
+    vi.mocked(validate.validateManifest).mockReturnValue(false);
     expect(cache.getCachedManifest()).toBeNull();
   });
 

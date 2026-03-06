@@ -13,6 +13,7 @@ const mockGetCachedDoc = vi.fn();
 const mockCacheDoc = vi.fn();
 const mockReadFileSync = vi.fn();
 const mockFileURLToPath = vi.fn((url: string) => url.replace("file://", ""));
+const mockValidateManifest = vi.fn(() => true);
 
 vi.mock("../cache.js", () => ({
   getCachedManifest: (...args: unknown[]) => mockGetCachedManifest(...args),
@@ -29,6 +30,10 @@ vi.mock("node:url", () => ({
   fileURLToPath: (...args: [string]) => mockFileURLToPath(...args),
 }));
 
+vi.mock("../validate.js", () => ({
+  validateManifest: (...args: unknown[]) => mockValidateManifest(...args),
+}));
+
 beforeEach(() => {
   vi.resetModules();
   mockGetCachedManifest.mockReset();
@@ -36,6 +41,7 @@ beforeEach(() => {
   mockGetCachedDoc.mockReset();
   mockCacheDoc.mockReset();
   mockReadFileSync.mockReset();
+  mockValidateManifest.mockReset().mockReturnValue(true);
 });
 
 async function importRegistry(envUrl?: string) {
@@ -105,6 +111,18 @@ describe("getManifest", () => {
 
     expect(result).toEqual(testManifest);
     expect(mockReadFileSync).toHaveBeenCalled();
+  });
+
+  it("throws on invalid manifest format", async () => {
+    mockGetCachedManifest.mockReturnValue(null);
+    mockValidateManifest.mockReturnValue(false);
+
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      new Response(JSON.stringify({ bad: "data" }), { status: 200 })
+    );
+
+    const { getManifest } = await importRegistry();
+    await expect(getManifest()).rejects.toThrow("Invalid manifest format");
   });
 
   it("uses custom ANYTEXT_REGISTRY_URL", async () => {
