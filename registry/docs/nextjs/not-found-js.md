@@ -177,7 +177,7 @@ If you need to use Client Component hooks like `usePathname` to display content 
 
 For `global-not-found.js`, you can export a `metadata` object or a [`generateMetadata`](/docs/app/api-reference/functions/generate-metadata) function to customize the `<title>`, `<meta>`, and other head tags for your 404 page:
 
-> **Good to know**: Next.js automatically injects \`\` for pages that return a 404 status code, including `global-not-found.js` pages.
+> **Good to know**: Next.js automatically injects `<meta name="robots" content="noindex" />` for pages that return a 404 status code, including `global-not-found.js` pages.
 
 ```tsx filename="app/global-not-found.tsx" switcher
 import type { Metadata } from 'next'

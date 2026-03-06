@@ -9,6 +9,8 @@ Command-line options supported by `create-hono` - the project initializer that r
 
 When you use `npm create` (or `npx`) arguments intended for the initializer script must be placed **after** `--`. Anything after `--` is forwarded to the initializer.
 
+::: code-group
+
 ```sh [npm]
 # Forwarding arguments to create-hono (npm requires `--`)
 npm create hono@latest my-app -- --template cloudflare-workers
@@ -33,6 +35,8 @@ bun create hono@latest my-app --template cloudflare-workers
 # "--template cloudflare-workers" selects the Cloudflare Workers template
 deno init --npm hono@latest my-app --template cloudflare-workers
 ```
+
+:::
 
 ## Commonly used arguments
 

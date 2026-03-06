@@ -53,7 +53,9 @@ app.get('/', (c) => {
 
 Return an HTTP response.
 
+::: info
 **Note**: When returning text or HTML, it is recommended to use `c.text()` or `c.html()`.
+:::
 
 ```ts twoslash
 import { Hono } from 'hono'
@@ -127,7 +129,7 @@ import { Hono } from 'hono'
 const app = new Hono()
 // ---cut---
 app.get('/', (c) => {
-  return c.html('<h1>Hello! Hono!</h1>')
+  return c.html('Hello! Hono!')
 })
 ```
 
@@ -236,7 +238,7 @@ type Env = {
 
 const app = new Hono()
 
-const echoMiddleware = createMiddleware<Env>(async (c, next) => {
+const echoMiddleware = createMiddleware(async (c, next) => {
   c.set('echo', (str) => str)
   await next()
 })
@@ -259,7 +261,7 @@ type Env = {
   }
 }
 // ---cut---
-const app = new Hono<Env>()
+const app = new Hono()
 
 app.use(echoMiddleware)
 
@@ -281,11 +283,11 @@ const app = new Hono()
 app.use(async (c, next) => {
   c.setRenderer((content) => {
     return c.html(
-      <html>
-        <body>
-          <p>{content}</p>
-        </body>
-      </html>
+      
+        
+          {content}
+        
+      
     )
   })
   await next()
@@ -306,11 +308,11 @@ app.get('/', (c) => {
 The output of which will be:
 
 ```html
-<html>
-  <body>
-    <p>Hello!</p>
-  </body>
-</html>
+
+  
+    Hello!
+  
+
 ```
 
 Additionally, this feature offers the flexibility to customize arguments.
@@ -320,9 +322,9 @@ To ensure type safety, types can be defined as:
 declare module 'hono' {
   interface ContextRenderer {
     (
-      content: string | Promise<string>,
+      content: string | Promise,
       head: { title: string }
-    ): Response | Promise<Response>
+    ): Response | Promise
   }
 }
 ```
@@ -333,28 +335,28 @@ Here's an example of how you can use this:
 app.use('/pages/*', async (c, next) => {
   c.setRenderer((content, head) => {
     return c.html(
-      <html>
-        <head>
-          <title>{head.title}</title>
-        </head>
-        <body>
-          <header>{head.title}</header>
-          <p>{content}</p>
-        </body>
-      </html>
+      
+        
+          {head.title}
+        
+        
+          {head.title}
+          {content}
+        
+      
     )
   })
   await next()
 })
 
 app.get('/pages/my-favorite', (c) => {
-  return c.render(<p>Ramen and Sushi</p>, {
+  return c.render(Ramen and Sushi, {
     title: 'My favorite',
   })
 })
 
 app.get('/pages/my-hobbies', (c) => {
-  return c.render(<p>Watching baseball</p>, {
+  return c.render(Watching baseball, {
     title: 'My hobbies',
   })
 })

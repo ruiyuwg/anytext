@@ -96,7 +96,7 @@ function MyComponent() {
 
 A React node can be:
 
-- A React element created like \`\` or `createElement('div')`
+- A React element created like `<div />` or `createElement('div')`
 - A portal created with [`createPortal`](/reference/react-dom/createPortal)
 - A string
 - A number

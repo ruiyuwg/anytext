@@ -136,7 +136,7 @@ export default function Page() {
 
 ### `prefetch`
 
-Prefetching happens when a ``component enters the user's viewport (initially or through scroll). Next.js prefetches and loads the linked route (denoted by the `href`) and its data in the background to improve the performance of client-side navigations. If the prefetched data has expired by the time the user hovers over a``, Next.js will attempt to prefetch it again. **Prefetching is only enabled in production**.
+Prefetching happens when a `<Link />` component enters the user's viewport (initially or through scroll). Next.js prefetches and loads the linked route (denoted by the `href`) and its data in the background to improve the performance of client-side navigations. If the prefetched data has expired by the time the user hovers over a `<Link />`, Next.js will attempt to prefetch it again. **Prefetching is only enabled in production**.
 
 The following values can be passed to the `prefetch` prop:
 
@@ -460,7 +460,7 @@ This is a browser CSS property that offsets scroll-based positioning. It applies
 
 ### Prefetching links in Proxy
 
-It's common to use [Proxy](/docs/app/api-reference/file-conventions/proxy) for authentication or other purposes that involve rewriting the user to a different page. In order for the \`\` component to properly prefetch links with rewrites via Proxy, you need to tell Next.js both the URL to display and the URL to prefetch. This is required to avoid un-necessary fetches to proxy to know the correct route to prefetch.
+It's common to use [Proxy](/docs/app/api-reference/file-conventions/proxy) for authentication or other purposes that involve rewriting the user to a different page. In order for the `<Link />` component to properly prefetch links with rewrites via Proxy, you need to tell Next.js both the URL to display and the URL to prefetch. This is required to avoid un-necessary fetches to proxy to know the correct route to prefetch.
 
 For example, if you want to serve a `/dashboard` route that has authenticated and visitor views, you can add the following in your Proxy to redirect the user to the correct page:
 
@@ -494,7 +494,7 @@ export function proxy(request) {
 }
 ```
 
-In this case, you would want to use the following code in your \`\` component:
+In this case, you would want to use the following code in your `<Link />` component:
 
 ```tsx filename="app/page.tsx" switcher
 'use client'

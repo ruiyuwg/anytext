@@ -21,7 +21,7 @@ On the Web, HTML lets us create rich structured documents with its built-in set 
 
 This markup represents this article `<article>`, its heading `<h1>`, and an (abbreviated) table of contents as an ordered list `<ol>`. Markup like this, combined with CSS for style, and JavaScript for interactivity, lies behind every sidebar, avatar, modal, dropdown—every piece of UI you see on the Web.
 
-React lets you combine your markup, CSS, and JavaScript into custom "components", **reusable UI elements for your app.** The table of contents code you saw above could be turned into a \`\` component you could render on every page. Under the hood, it still uses the same HTML tags like `<article>`, `<h1>`, etc.
+React lets you combine your markup, CSS, and JavaScript into custom "components", **reusable UI elements for your app.** The table of contents code you saw above could be turned into a `<TableOfContents />` component you could render on every page. Under the hood, it still uses the same HTML tags like `<article>`, `<h1>`, etc.
 
 Just like with HTML tags, you can compose, order and nest components to design whole pages. For example, the documentation page you're reading is made out of React components:
 
@@ -39,7 +39,7 @@ Just like with HTML tags, you can compose, order and nest components to design w
 </PageLayout>
 ```
 
-As your project grows, you will notice that many of your designs can be composed by reusing components you already wrote, speeding up your development. Our table of contents above could be added to any screen with \`\`! You can even jumpstart your project with the thousands of components shared by the React open source community like [Chakra UI](https://chakra-ui.com/) and [Material UI.](https://material-ui.com/)
+As your project grows, you will notice that many of your designs can be composed by reusing components you already wrote, speeding up your development. Our table of contents above could be added to any screen with `<TableOfContents />`! You can even jumpstart your project with the thousands of components shared by the React open source community like [Chakra UI](https://chakra-ui.com/) and [Material UI.](https://material-ui.com/)
 
 ## Defining a component {/*defining-a-component*/}
 
@@ -74,7 +74,7 @@ React components are regular JavaScript functions, but **their names must start 
 
 ### Step 3: Add markup {/*step-3-add-markup*/}
 
-The component returns an ``tag with `src` and `alt` attributes.`` is written like HTML, but it is actually JavaScript under the hood! This syntax is called [JSX](/learn/writing-markup-with-jsx), and it lets you embed markup inside JavaScript.
+The component returns an `<img />` tag with `src` and `alt` attributes. `<img />` is written like HTML, but it is actually JavaScript under the hood! This syntax is called [JSX](/learn/writing-markup-with-jsx), and it lets you embed markup inside JavaScript.
 
 Return statements can be written all on one line, as in this component:
 
@@ -129,9 +129,9 @@ img { margin: 0 10px 10px 0; height: 90px; }
 Notice the difference in casing:
 
 - `<section>` is lowercase, so React knows we refer to an HTML tag.
-- \`\` starts with a capital `P`, so React knows that we want to use our component called `Profile`.
+- `<Profile />` starts with a capital `P`, so React knows that we want to use our component called `Profile`.
 
-And `Profile` contains even more HTML: \`\`. In the end, this is what the browser sees:
+And `Profile` contains even more HTML: `<img />`. In the end, this is what the browser sees:
 
 ```html
 <section>
@@ -312,7 +312,7 @@ img { margin: 0 10px 10px 0; height: 90px; }
 
 React component names must start with a capital letter.
 
-Change `function profile()` to `function Profile()`, and then change every `to`:
+Change `function profile()` to `function Profile()`, and then change every `<profile />` to `<Profile />`:
 
 ```js
 function Profile() {
@@ -342,7 +342,7 @@ img { margin: 0 10px 10px 0; }
 
 #### Your own component {/*your-own-component*/}
 
-Write a component from scratch. You can give it any valid name and return any markup. If you're out of ideas, you can write a `Congratulations` component that shows `Good job!`. Don't forget to export it!
+Write a component from scratch. You can give it any valid name and return any markup. If you're out of ideas, you can write a `Congratulations` component that shows `<h1>Good job!</h1>`. Don't forget to export it!
 
 ```js
 // Write your component below!

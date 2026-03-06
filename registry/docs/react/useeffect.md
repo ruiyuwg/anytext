@@ -114,7 +114,7 @@ An Effect lets you [keep your component synchronized](/learn/synchronizing-with-
 
 - A timer managed with [`setInterval()`](https://developer.mozilla.org/en-US/docs/Web/API/setInterval) and [`clearInterval()`](https://developer.mozilla.org/en-US/docs/Web/API/clearInterval).
 - An event subscription using [`window.addEventListener()`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener) and [`window.removeEventListener()`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener).
-- A third-party animation library with an API like <CodeStep step={1}>`animation.start()` and <CodeStep step={2}>`animation.reset()`.
+- A third-party animation library with an API like `animation.start()` and `animation.reset()`.
 
 **If you're not connecting to any external system, [you probably don't need an Effect.](/learn/you-might-not-need-an-effect)**
 

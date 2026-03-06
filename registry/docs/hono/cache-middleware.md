@@ -17,6 +17,8 @@ import { cache } from 'hono/cache'
 
 ## Usage
 
+::: code-group
+
 ```ts [Cloudflare Workers]
 app.get(
   '*',
@@ -39,29 +41,31 @@ app.get(
 )
 ```
 
+:::
+
 ## Options
 
-### &#x20;cacheName: `string` | `(c: Context) => string` | `Promise<string>`
+### <Badge type="danger" text="required" /> cacheName: `string` | `(c: Context) => string` | `Promise<string>`
 
 The name of the cache. Can be used to store multiple caches with different identifiers.
 
-### &#x20;wait: `boolean`
+### <Badge type="info" text="optional" /> wait: `boolean`
 
 A boolean indicating if Hono should wait for the Promise of the `cache.put` function to resolve before continuing with the request. *Required to be true for the Deno environment*. The default is `false`.
 
-### &#x20;cacheControl: `string`
+### <Badge type="info" text="optional" /> cacheControl: `string`
 
 A string of directives for the `Cache-Control` header. See the [MDN docs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control) for more information. When this option is not provided, no `Cache-Control` header is added to requests.
 
-### &#x20;vary: `string` | `string[]`
+### <Badge type="info" text="optional" /> vary: `string` | `string[]`
 
 Sets the `Vary` header in the response. If the original response header already contains a `Vary` header, the values are merged, removing any duplicates. Setting this to `*` will result in an error. For more details on the Vary header and its implications for caching strategies, refer to the [MDN docs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Vary).
 
-### &#x20;keyGenerator: `(c: Context) => string | Promise<string>`
+### <Badge type="info" text="optional" /> keyGenerator: `(c: Context) => string | Promise<string>`
 
 Generates keys for every request in the `cacheName` store. This can be used to cache data based on request parameters or context parameters. The default is `c.req.url`.
 
-### &#x20;cacheableStatusCodes: `number[]`
+### <Badge type="info" text="optional" /> cacheableStatusCodes: `number[]`
 
 An array of status codes that should be cached. The default is `[200]`. Use this option to cache responses with specific status codes.
 

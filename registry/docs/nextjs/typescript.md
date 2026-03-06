@@ -320,7 +320,7 @@ export default nextConfig
 
 To use an `async` Server Component with TypeScript, ensure you are using TypeScript `5.1.3` or higher and `@types/react` `18.2.8` or higher.
 
-If you are using an older version of TypeScript, you may see a `'Promise' is not a valid JSX element` type error. Updating to the latest version of TypeScript and `@types/react` should resolve this issue.
+If you are using an older version of TypeScript, you may see a `'Promise<Element>' is not a valid JSX element` type error. Updating to the latest version of TypeScript and `@types/react` should resolve this issue.
 
 ### Incremental type checking
 

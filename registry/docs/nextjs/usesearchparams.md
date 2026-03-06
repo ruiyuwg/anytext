@@ -80,7 +80,7 @@ If a route is [statically rendered](/docs/app/guides/caching#static-rendering), 
 
 This allows a part of the route to be statically rendered while the dynamic part that uses `useSearchParams` is client-side rendered.
 
-We recommend wrapping the Client Component that uses `useSearchParams` in a \`\` boundary. This will allow any Client Components above it to be statically rendered and sent as part of initial HTML. [Example](/docs/app/api-reference/functions/use-search-params#static-rendering).
+We recommend wrapping the Client Component that uses `useSearchParams` in a `<Suspense/>` boundary. This will allow any Client Components above it to be statically rendered and sent as part of initial HTML. [Example](/docs/app/api-reference/functions/use-search-params#static-rendering).
 
 For example:
 

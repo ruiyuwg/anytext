@@ -35,7 +35,7 @@ Owner Stacks are available in
 
 - Component render
 - Effects (e.g. `useEffect`)
-- React's event handlers (e.g. \`\`)
+- React's event handlers (e.g. `<button onClick={...} />`)
 - React error handlers ([React Root options](/reference/react-dom/client/createRoot#parameters) `onCaughtError`, `onRecoverableError`, and `onUncaughtError`)
 
 If no Owner Stack is available, `null` is returned (see [Troubleshooting: The Owner Stack is `null`](#the-owner-stack-is-null)).
@@ -139,9 +139,9 @@ However, the Owner Stack would only read
 at Component
 ```
 
-Neither `App` nor the DOM components (e.g. `fieldset`) are considered Owners in this Stack since they didn't contribute to "creating" the node containing `SubComponent`. `App` and DOM components only forwarded the node. `App` just rendered the `children` node as opposed to `Component` which created a node containing `SubComponent` via \`\`.
+Neither `App` nor the DOM components (e.g. `fieldset`) are considered Owners in this Stack since they didn't contribute to "creating" the node containing `SubComponent`. `App` and DOM components only forwarded the node. `App` just rendered the `children` node as opposed to `Component` which created a node containing `SubComponent` via `<SubComponent />`.
 
-Neither `Navigation` nor `legend` are in the stack at all since it's only a sibling to a node containing \`\`.
+Neither `Navigation` nor `legend` are in the stack at all since it's only a sibling to a node containing `<SubComponent />`.
 
 `SubComponent` is omitted because it's already part of the callstack.
 
@@ -166,7 +166,7 @@ console.error = function patchedConsoleError(...args) {
 };
 ```
 
-If you intercept <CodeStep step={1}>`console.error` calls to highlight them in an error overlay, you can call <CodeStep step={2}>`captureOwnerStack` to include the Owner Stack.
+If you intercept `console.error` calls to highlight them in an error overlay, you can call `captureOwnerStack` to include the Owner Stack.
 
 ```css src/styles.css
 * {

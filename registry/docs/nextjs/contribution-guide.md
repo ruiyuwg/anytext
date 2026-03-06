@@ -363,7 +363,7 @@ The diagrams currently live in the `/public` folder in our private Next.js site.
 
 ## Custom Components and HTML
 
-These are the React Components available for the docs: `(next/image),`, `, `, and \`\`. We do not allow raw HTML in the docs besides the `<details>` tag.
+These are the React Components available for the docs: `<Image />` (next/image), `<PagesOnly />`, `<AppOnly />`, `<Cross />`, and `<Check />`. We do not allow raw HTML in the docs besides the `<details>` tag.
 
 If you have ideas for new components, please open a [GitHub issue](https://github.com/vercel/next.js/issues/new/choose).
 

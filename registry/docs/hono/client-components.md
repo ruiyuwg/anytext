@@ -17,25 +17,25 @@ import { render } from 'hono/jsx/dom'
 function Counter() {
   const [count, setCount] = useState(0)
   return (
-    <div>
-      <p>Count: {count}</p>
-      <button onClick={() => setCount(count + 1)}>Increment</button>
-    </div>
+    
+      Count: {count}
+       setCount(count + 1)}>Increment
+    
   )
 }
 
 function App() {
   return (
-    <html>
-      <body>
-        <Counter />
-      </body>
-    </html>
+    
+      
+        
+      
+    
   )
 }
 
 const root = document.getElementById('root')
-render(<App />, root)
+render(, root)
 ```
 
 ## `render()`
@@ -43,7 +43,7 @@ render(<App />, root)
 You can use `render()` to insert JSX components within a specified HTML element.
 
 ```tsx
-render(<Component />, container)
+render(, container)
 ```
 
 You can see full example code here: [Counter example](https://github.com/honojs/examples/tree/main/hono-vite-jsx).
@@ -93,7 +93,7 @@ export default function App() {
   const [showLargeImage, setShowLargeImage] = useState(false)
   return (
     <>
-      <Style />
+      
       <button
         onClick={() =>
           startViewTransition(() =>
@@ -102,10 +102,10 @@ export default function App() {
         }
       >
         Click!
-      </button>
-      <div>
+      
+      
         {!showLargeImage ? (
-          <img src='https://hono.dev/images/logo.png' />
+          
         ) : (
           <div
             class={css`
@@ -116,9 +116,9 @@ export default function App() {
               width: 600px;
               height: 600px;
             `}
-          ></div>
+          >
         )}
-      </div>
+      
     </>
   )
 }
@@ -158,7 +158,7 @@ export default function App() {
   )
   return (
     <>
-      <Style />
+      
       <button
         onClick={() =>
           startViewTransition(() =>
@@ -167,10 +167,10 @@ export default function App() {
         }
       >
         Click!
-      </button>
-      <div>
+      
+      
         {!showLargeImage ? (
-          <img src='https://hono.dev/images/logo.png' />
+          
         ) : (
           <div
             class={css`
@@ -182,9 +182,9 @@ export default function App() {
               width: 600px;
               height: 600px;
             `}
-          ></div>
+          >
         )}
-      </div>
+      
     </>
   )
 }
@@ -228,7 +228,7 @@ export default function App() {
   )
   return (
     <>
-      <Style />
+      
       <button
         onClick={() =>
           startViewTransition(() =>
@@ -237,10 +237,10 @@ export default function App() {
         }
       >
         Click!
-      </button>
-      <div>
+      
+      
         {!showLargeImage ? (
-          <img src='https://hono.dev/images/logo.png' />
+          
         ) : (
           <div
             class={css`
@@ -262,9 +262,9 @@ export default function App() {
                 }
               `}
             `}
-          ></div>
+          >
         )}
-      </div>
+      
     </>
   )
 }
@@ -318,6 +318,6 @@ You can sponsor Hono authors via the GitHub sponsor program.
 
 ## Other Resources
 
-- GitHub repository: https://github.com/honojs
-- npm registry: https://www.npmjs.com/package/hono
-- JSR: https://jsr.io/@hono/hono
+- GitHub repository: <a href="https://github.com/honojs">https://github.com/honojs</a>
+- npm registry: <a href="https://www.npmjs.com/package/hono">https://www.npmjs.com/package/hono</a>
+- JSR: <a href="https://jsr.io/@hono/hono">https://jsr.io/@hono/hono</a>

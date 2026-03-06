@@ -37,11 +37,11 @@ app.post(
 
 ## Options
 
-### &#x20;maxSize: `number`
+### <Badge type="danger" text="required" /> maxSize: `number`
 
 The maximum file size of the file you want to limit. The default is `100 * 1024` - `100kb`.
 
-### &#x20;onError: `OnError`
+### <Badge type="info" text="optional" /> onError: `OnError`
 
 The error handler to be invoked if the specified file size is exceeded.
 
@@ -113,15 +113,15 @@ app.use(
 
 ## Options
 
-### &#x20;weak: `boolean`
+### <Badge type="info" text="optional" /> weak: `boolean`
 
 Define using or not using a [weak validation](https://developer.mozilla.org/en-US/docs/Web/HTTP/Conditional_requests#weak_validation). If `true` is set, then `w/` is added to the prefix of the value. The default is `false`.
 
-### &#x20;retainedHeaders: `string[]`
+### <Badge type="info" text="optional" /> retainedHeaders: `string[]`
 
 The headers that you want to retain in the 304 Response.
 
-### &#x20;generateDigest: `(body: Uint8Array) => ArrayBuffer | Promise<ArrayBuffer>`
+### <Badge type="info" text="optional" /> generateDigest: `(body: Uint8Array) => ArrayBuffer | Promise<ArrayBuffer>`
 
 A custom digest generation function. By default, it uses `SHA-1`. This function is called with the response body as a `Uint8Array` and should return a hash as an `ArrayBuffer` or a Promise of one.
 
@@ -129,9 +129,11 @@ A custom digest generation function. By default, it uses `SHA-1`. This function 
 
 The Context Storage Middleware stores the Hono `Context` in the `AsyncLocalStorage`, to make it globally accessible.
 
+::: info
 **Note** This middleware uses `AsyncLocalStorage`. The runtime should support it.
 
 **Cloudflare Workers**: To enable `AsyncLocalStorage`, add the [`nodejs_compat` or `nodejs_als` flag](https://developers.cloudflare.com/workers/configuration/compatibility-dates/#nodejs-compatibility-flag) to your `wrangler.toml` file.
+:::
 
 ## Import
 
@@ -155,7 +157,7 @@ type Env = {
   }
 }
 
-const app = new Hono<Env>()
+const app = new Hono()
 
 app.use(contextStorage())
 
@@ -166,7 +168,7 @@ app.use(async (c, next) => {
 
 // You can access the variable outside the handler.
 const getMessage = () => {
-  return getContext<Env>().var.message
+  return getContext().var.message
 }
 
 app.get('/', (c) => {
@@ -183,12 +185,12 @@ type Env = {
   }
 }
 
-const app = new Hono<Env>()
+const app = new Hono()
 
 app.use(contextStorage())
 
 const setKV = (value: string) => {
-  return getContext<Env>().env.KV.put('key', value)
+  return getContext().env.KV.put('key', value)
 }
 ```
 
@@ -197,7 +199,7 @@ const setKV = (value: string) => {
 `tryGetContext()` works like `getContext()`, but returns `undefined` instead of throwing an error when the context is not available:
 
 ```ts
-const context = tryGetContext<Env>()
+const context = tryGetContext()
 if (context) {
   // Context is available
   console.log(context.var.message)

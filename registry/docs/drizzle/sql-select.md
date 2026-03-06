@@ -135,7 +135,7 @@ Like in SQL, you can use arbitrary expressions as selection fields, not just tab
 ```typescript
 const result = await db.select({
   id: users.id,
-  lowerName: sql<string>`lower(${users.name})`,
+  lowerName: sql`lower(${users.name})`,
 }).from(users);
 ```
 ```sql
@@ -232,7 +232,7 @@ import { getColumns, sql } from 'drizzle-orm';
 
 await db.select({
     ...getColumns(posts),
-    titleLength: sql<number>`length(${posts.title})`,
+    titleLength: sql`length(${posts.title})`,
   }).from(posts);
 ```
 
@@ -645,7 +645,7 @@ you need to add aliases to them:
 ```typescript copy
 
 const sq = db.$with('sq').as(db.select({ 
-  name: sql<string>`upper(${users.name})`.as('name'),
+  name: sql`upper(${users.name})`.as('name'),
 })
 .from(users));
 
@@ -697,14 +697,14 @@ import { gt } from 'drizzle-orm';
 
 await db.select({
 age: users.age,
-count: sql<number>`cast(count(${users.id}) as int)`,
+count: sql`cast(count(${users.id}) as int)`,
 })
 .from(users)
 .groupBy(users.age);
 
 await db.select({
 age: users.age,
-count: sql<number>`cast(count(${users.id}) as int)`,
+count: sql`cast(count(${users.id}) as int)`,
 })
 .from(users)
 .groupBy(users.age)
@@ -974,9 +974,9 @@ db
     shipName: orders.shipName,
     shipCity: orders.shipCity,
     shipCountry: orders.shipCountry,
-    productsCount: sql<number>`cast(count(${details.productId}) as int)`,
-    quantitySum: sql<number>`sum(${details.quantity})`,
-    totalPrice: sql<number>`sum(${details.quantity} * ${details.unitPrice})`,
+    productsCount: sql`cast(count(${details.productId}) as int)`,
+    quantitySum: sql`sum(${details.quantity})`,
+    totalPrice: sql`sum(${details.quantity} * ${details.unitPrice})`,
   })
   .from(orders)
   .leftJoin(details, eq(orders.id, details.orderId))

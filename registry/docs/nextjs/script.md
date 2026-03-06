@@ -40,7 +40,7 @@ Here's a summary of the props available for the Script Component:
 
 ## Required Props
 
-The \`\` component requires the following properties.
+The `<Script />` component requires the following properties.
 
 ### `src`
 
@@ -48,7 +48,7 @@ A path string specifying the URL of an external script. This can be either an ab
 
 ## Optional Props
 
-The \`\` component accepts a number of additional properties beyond those which are required.
+The `<Script />` component accepts a number of additional properties beyond those which are required.
 
 ### `strategy`
 

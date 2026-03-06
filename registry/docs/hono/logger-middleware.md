@@ -37,7 +37,7 @@ The Logger Middleware accepts an optional `PrintFunc` function as a parameter. T
 
 ## Options
 
-### &#x20;fn: `PrintFunc(str: string, ...rest: string[])`
+### <Badge type="info" text="optional" /> fn: `PrintFunc(str: string, ...rest: string[])`
 
 - `str`: Passed by the logger.
 - `...rest`: Additional string props to be printed to console.

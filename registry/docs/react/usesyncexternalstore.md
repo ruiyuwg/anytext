@@ -92,8 +92,8 @@ function TodosApp() {
 
 It returns the snapshot of the data in the store. You need to pass two functions as arguments:
 
-1. The <CodeStep step={1}>`subscribe` function should subscribe to the store and return a function that unsubscribes.
-2. The <CodeStep step={2}>`getSnapshot` function should read a snapshot of the data from the store.
+1. The `subscribe` function should subscribe to the store and return a function that unsubscribes.
+2. The `getSnapshot` function should read a snapshot of the data from the store.
 
 React will use these functions to keep your component subscribed to the store and re-render it on changes.
 

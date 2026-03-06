@@ -83,7 +83,7 @@ Turbopack in Next.js has **zero-configuration** for the common use cases. Below 
 
 | Feature                           | Status        | Notes                                                                                                                      |
 | --------------------------------- | ------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| **Static Assets** (images, fonts) | **Supported** | Importing `import img from './img.png'` works out of the box. In Next.js, returns an object for the \`\` component. |
+| **Static Assets** (images, fonts) | **Supported** | Importing `import img from './img.png'` works out of the box. In Next.js, returns an object for the `<Image />` component. |
 | **JSON Imports**                  | **Supported** | Named or default imports from `.json` are supported.                                                                       |
 
 ### Module resolution

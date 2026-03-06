@@ -210,4 +210,4 @@ export default function IndexPage() {
 ```
 
 - Ensure you're on the latest version of React
-- If you use suspense with [tRPC's *automatic* SSR in Next.js](/docs/client/nextjs/ssr), the full page will crash on the server if a query fails, even if you have an \`\`
+- If you use suspense with [tRPC's *automatic* SSR in Next.js](/docs/client/nextjs/ssr), the full page will crash on the server if a query fails, even if you have an `<ErrorBoundary />`

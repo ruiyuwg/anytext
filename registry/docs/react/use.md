@@ -77,7 +77,7 @@ function Form() {
 
 It doesn't matter how many layers of components there are between the provider and the `Button`. When a `Button` *anywhere* inside of `Form` calls `use(ThemeContext)`, it will receive `"dark"` as the value.
 
-Unlike [`useContext`](/reference/react/useContext), <CodeStep step={2}>`use` can be called in conditionals and loops like <CodeStep step={1}>`if`.
+Unlike [`useContext`](/reference/react/useContext), `use` can be called in conditionals and loops like `if`.
 
 ```js [[1, 2, "if"], [2, 3, "use"]]
 function HorizontalRule({ show }) {
@@ -89,7 +89,7 @@ function HorizontalRule({ show }) {
 }
 ```
 
-<CodeStep step={2}>`use` is called from inside a <CodeStep step={1}>`if` statement, allowing you to conditionally read values from a Context.
+`use` is called from inside a `if` statement, allowing you to conditionally read values from a Context.
 
 Like `useContext`, `use(context)` always looks for the closest context provider *above* the component that calls it. It searches upwards and **does not** consider context providers in the component from which you're calling `use(context)`.
 
@@ -194,7 +194,7 @@ export default function App() {
 }
 ```
 
-The Client Component then takes the Promise it received as a prop and passes it to the <CodeStep step={5}>`use` API. This allows the Client Component to read the value from the Promise that was initially created by the Server Component.
+The Client Component then takes the Promise it received as a prop and passes it to the `use` API. This allows the Client Component to read the value from the Promise that was initially created by the Server Component.
 
 ```js [[2, 6, "Message"], [4, 6, "messagePromise"], [4, 7, "messagePromise"], [5, 7, "use"]]
 // message.js
@@ -208,7 +208,7 @@ export function Message({ messagePromise }) {
 }
 ```
 
-Because <CodeStep step={2}>`Message` is wrapped in [`Suspense`](/reference/react/Suspense), the fallback will be displayed until the Promise is resolved. When the Promise is resolved, the value will be read by the <CodeStep step={5}>`use` API and the <CodeStep step={2}>`Message` component will replace the Suspense fallback.
+Because `Message` is wrapped in [`Suspense`](/reference/react/Suspense), the fallback will be displayed until the Promise is resolved. When the Promise is resolved, the value will be read by the `use` API and the `Message` component will replace the Suspense fallback.
 
 ```js src/message.js active
 "use client";
@@ -397,7 +397,7 @@ export default function App() {
 }
 ```
 
-To use the Promise's <CodeStep step={1}>`catch` method, call <CodeStep step={1}>`catch` on the Promise object. <CodeStep step={1}>`catch` takes a single argument: a function that takes an error message as an argument. Whatever is returned by the function passed to <CodeStep step={1}>`catch` will be used as the resolved value of the Promise.
+To use the Promise's `catch` method, call `catch` on the Promise object. `catch` takes a single argument: a function that takes an error message as an argument. Whatever is returned by the function passed to `catch` will be used as the resolved value of the Promise.
 
 ***
 

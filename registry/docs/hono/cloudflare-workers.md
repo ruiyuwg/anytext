@@ -13,6 +13,8 @@ A starter for Cloudflare Workers is available.
 Start your project with "create-hono" command.
 Select `cloudflare-workers` template for this example.
 
+::: code-group
+
 ```sh [npm]
 npm create hono@latest my-app
 ```
@@ -33,7 +35,11 @@ bun create hono@latest my-app
 deno init --npm hono my-app
 ```
 
+:::
+
 Move to `my-app` and install the dependencies.
+
+::: code-group
 
 ```sh [npm]
 cd my-app
@@ -55,6 +61,8 @@ cd my-app
 bun i
 ```
 
+:::
+
 ## 2. Hello World
 
 Edit `src/index.ts` like below.
@@ -72,6 +80,8 @@ export default app
 
 Run the development server locally. Then, access `http://localhost:8787` in your web browser.
 
+::: code-group
+
 ```sh [npm]
 npm run dev
 ```
@@ -88,6 +98,8 @@ pnpm dev
 bun run dev
 ```
 
+:::
+
 ### Change port number
 
 If you need to change the port number you can follow the instructions here to update `wrangler.toml` / `wrangler.json` / `wrangler.jsonc` files:
@@ -99,6 +111,8 @@ Or, you can follow the instructions here to set CLI options:
 ## 4. Deploy
 
 If you have a Cloudflare account, you can deploy to Cloudflare. In `package.json`, `$npm_execpath` needs to be changed to your package manager of choice.
+
+::: code-group
 
 ```sh [npm]
 npm run deploy
@@ -115,6 +129,8 @@ pnpm run deploy
 ```sh [bun]
 bun run deploy
 ```
+
+:::
 
 That's all!
 
@@ -159,6 +175,8 @@ Then create the `public` directory and place the files there. For instance, `.
 
 You have to install `@cloudflare/workers-types` if you want to have workers types.
 
+::: code-group
+
 ```sh [npm]
 npm i --save-dev @cloudflare/workers-types
 ```
@@ -174,6 +192,8 @@ pnpm add -D @cloudflare/workers-types
 ```sh [bun]
 bun add --dev @cloudflare/workers-types
 ```
+
+:::
 
 ## Testing
 
@@ -303,7 +323,9 @@ API_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 
 Then we use the `c.env.*` to get the environment variables in our code.
 
+::: info
 By default, `process.env` is not available in Cloudflare Workers, so it is recommended to get environment variables from `c.env`. If you want to use it, you need to enable [`nodejs_compat_populate_process_env`](https://developers.cloudflare.com/workers/configuration/compatibility-flags/#enable-auto-populating-processenv) flag. You can also import `env` from `cloudflare:workers`. For details, please see [How to access `env` on Cloudflare docs](https://developers.cloudflare.com/workers/runtime-apis/bindings/#how-to-access-env)
+:::
 
 ```ts
 type Bindings = {

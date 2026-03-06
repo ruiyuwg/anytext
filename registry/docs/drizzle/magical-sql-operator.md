@@ -65,7 +65,7 @@ const response: { lowerName: unknown }[] = await db.select({
 
 // with sql type defined
 const response: { lowerName: string }[] = await db.select({
-    lowerName: sql<string>`lower(${usersTable.id})`
+    lowerName: sql`lower(${usersTable.id})`
 }).from(usersTable);
 ```
 
@@ -400,9 +400,9 @@ import { usersTable } from 'schema'
 
 await db.select({
 id: usersTable.id,
-lowerName: sql<string>`lower(${usersTable.name})`,
-aliasedName: sql<string>`lower(${usersTable.name})`.as('aliased\_column'),
-count: sql<number>`count(*)`.mapWith(Number)
+lowerName: sql`lower(${usersTable.name})`,
+aliasedName: sql`lower(${usersTable.name})`.as('aliased\_column'),
+count: sql`count(*)`.mapWith(Number)
 }).from(usersTable)
 
 ````
@@ -498,7 +498,7 @@ import { usersTable } from 'schema'
 
 await db.select({
 projectId: usersTable.projectId,
-count: sql<number>`count(${usersTable.id})`.mapWith(Number)
+count: sql`count(${usersTable.id})`.mapWith(Number)
 }).from(usersTable)
 .groupBy(sql`${usersTable.projectId}`)
 .having(sql`count(${usersTable.id}) > 300`)

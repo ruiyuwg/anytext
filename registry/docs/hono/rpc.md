@@ -54,7 +54,7 @@ import { hc } from 'hono/client'
 `hc` is a function to create a client. Pass `AppType` as Generics and specify the server URL as an argument.
 
 ```ts
-const client = hc<AppType>('http://localhost:8787/')
+const client = hc('http://localhost:8787/')
 ```
 
 Call `client.{path}.{method}` and pass the data you wish to send to the server as an argument.
@@ -83,7 +83,7 @@ To make the client send cookies with every request, add `{ 'init': { 'credential
 
 ```ts
 // client.ts
-const client = hc<AppType>('http://localhost:8787/', {
+const client = hc('http://localhost:8787/', {
   init: {
     credentials: 'include',
   },
@@ -130,7 +130,7 @@ You can get the data by the status code.
 
 ```ts
 // client.ts
-const client = hc<AppType>('http://localhost:8787/')
+const client = hc('http://localhost:8787/')
 
 const res = await client.posts.$get({
   query: {
@@ -149,7 +149,7 @@ if (res.ok) {
 }
 
 // { post: Post } | { error: string }
-type ResponseType = InferResponseType<typeof client.posts.$get>
+type ResponseType = InferResponseType
 
 // { post: Post }
 type ResponseType200 = InferResponseType<
@@ -176,7 +176,7 @@ type AppWithErrors = ApplyGlobalResponse<
   }
 >
 
-const client = hc<AppWithErrors>('http://localhost')
+const client = hc('http://localhost')
 ```
 
 Now the client knows about both success and error responses:
@@ -189,7 +189,7 @@ if (res.ok) {
 }
 
 // InferResponseType includes the global error type
-type ResType = InferResponseType<typeof client.api.users.$get>
+type ResType = InferResponseType
 // { users: string[] } | { error: string }
 ```
 
@@ -234,7 +234,7 @@ export const routes = new Hono().get(
 // client.ts
 import { hc } from 'hono/client'
 
-const client = hc<typeof routes>('/')
+const client = hc('/')
 
 const res = await client.posts[':id'].$get({
   param: {
@@ -424,7 +424,7 @@ const res = await client.search.$get(
 To add a common header to all requests, specify it as an argument to the `hc` function.
 
 ```ts
-const client = hc<AppType>('/api', {
+const client = hc('/api', {
   headers: {
     Authorization: 'Bearer TOKEN',
   },
@@ -438,7 +438,7 @@ You can pass the fetch's `RequestInit` object to the request as the `init` optio
 ```ts
 import { hc } from 'hono/client'
 
-const client = hc<AppType>('http://localhost:8787/')
+const client = hc('http://localhost:8787/')
 
 const abortController = new AbortController()
 const res = await client.api.posts.$post(
@@ -460,32 +460,37 @@ const res = await client.api.posts.$post(
 abortController.abort()
 ```
 
+::: info
 A `RequestInit` object defined by `init` takes the highest priority. It could be used to overwrite things set by other options like `body | method | headers`.
+:::
 
 ## `$url()`
 
 You can get a `URL` object for accessing the endpoint by using `$url()`.
 
+::: warning
 You have to pass in an absolute URL for this to work. Passing in a relative URL `/` will result in the following error.
 
 `Uncaught TypeError: Failed to construct 'URL': Invalid URL`
 
 ```ts
 // ❌ Will throw error
-const client = hc<AppType>('/')
+const client = hc('/')
 client.api.post.$url()
 
 // ✅ Will work as expected
-const client = hc<AppType>('http://localhost:8787/')
+const client = hc('http://localhost:8787/')
 client.api.post.$url()
 ```
+
+:::
 
 ```ts
 const route = app
   .get('/api/posts', (c) => c.json({ posts }))
   .get('/api/posts/:id', (c) => c.json({ post }))
 
-const client = hc<typeof route>('http://localhost:8787/')
+const client = hc('http://localhost:8787/')
 
 let url = client.api.posts.$url()
 console.log(url.pathname) // `/api/posts`
@@ -503,7 +508,7 @@ console.log(url.pathname) // `/api/posts/123`
 You can pass the base URL as the second type parameter to `hc` to get more precise URL types:
 
 ```ts
-const client = hc<typeof route, 'http://localhost:8787'>(
+const client = hc(
   'http://localhost:8787/'
 )
 
@@ -523,7 +528,7 @@ const route = app
   .get('/api/posts', (c) => c.json({ posts }))
   .get('/api/posts/:id', (c) => c.json({ post }))
 
-const client = hc<typeof route>('http://localhost:8787/')
+const client = hc('http://localhost:8787/')
 
 let path = client.api.posts.$path()
 console.log(path) // `/api/posts`
@@ -592,7 +597,7 @@ services = [
 
 ```ts
 // src/client.ts
-const client = hc<CreateProfileType>('http://localhost', {
+const client = hc('http://localhost', {
   fetch: c.env.AUTH.fetch.bind(c.env.AUTH),
 })
 ```
@@ -602,7 +607,7 @@ const client = hc<CreateProfileType>('http://localhost', {
 You can customize how query parameters are serialized using the `buildSearchParams` option. This is useful when you need bracket notation for arrays or other custom formats:
 
 ```ts
-const client = hc<AppType>('http://localhost', {
+const client = hc('http://localhost', {
   buildSearchParams: (query) => {
     const searchParams = new URLSearchParams()
     for (const [k, v] of Object.entries(query)) {
@@ -629,10 +634,10 @@ import type { InferRequestType, InferResponseType } from 'hono/client'
 
 // InferRequestType
 const $post = client.todo.$post
-type ReqType = InferRequestType<typeof $post>['form']
+type ReqType = InferRequestType['form']
 
 // InferResponseType
-type ResType = InferResponseType<typeof $post>
+type ResType = InferResponseType
 ```
 
 ## Parsing a Response with type-safety helper
@@ -662,11 +667,11 @@ import type { InferRequestType } from 'hono/client'
 import type { AppType } from '../functions/api/[[route]]'
 
 const App = () => {
-  const client = hc<AppType>('/api')
+  const client = hc('/api')
   const $get = client.hello.$get
 
   const fetcher =
-    (arg: InferRequestType<typeof $get>) => async () => {
+    (arg: InferRequestType) => async () => {
       const res = await $get(arg)
       return await res.json()
     }
@@ -680,10 +685,10 @@ const App = () => {
     })
   )
 
-  if (error) return <div>failed to load</div>
-  if (isLoading) return <div>loading...</div>
+  if (error) return failed to load
+  if (isLoading) return loading...
 
-  return <h1>{data?.message}</h1>
+  return {data?.message}
 }
 
 export default App
@@ -788,10 +793,10 @@ import { app } from './app'
 import { hc } from 'hono/client'
 
 // this is a trick to calculate the type when compiling
-export type Client = ReturnType<typeof hc<typeof app>>
+export type Client = ReturnType>
 
-export const hcWithType = (...args: Parameters<typeof hc>): Client =>
-  hc<typeof app>(...args)
+export const hcWithType = (...args: Parameters): Client =>
+  hc(...args)
 ```
 
 After compiling, you can use `hcWithType` instead of `hc` to get the client with the type already calculated.
@@ -831,13 +836,13 @@ As described in [Using RPC with larger applications](#using-rpc-with-larger-appl
 import { app as authorsApp } from './authors'
 import { hc } from 'hono/client'
 
-const authorsClient = hc<typeof authorsApp>('/authors')
+const authorsClient = hc('/authors')
 
 // books-cli.ts
 import { app as booksApp } from './books'
 import { hc } from 'hono/client'
 
-const booksClient = hc<typeof booksApp>('/books')
+const booksClient = hc('/books')
 ```
 
 This way, `tsserver` doesn't need to instantiate types for all routes at once.

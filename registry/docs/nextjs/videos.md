@@ -31,15 +31,15 @@ export function Video() {
 
 | Attribute     | Description                                                                                               | Example Value                        |
 | ------------- | --------------------------------------------------------------------------------------------------------- | ------------------------------------ |
-| `src`         | Specifies the source of the video file.                                                                   | ``|
-| `width`       | Sets the width of the video player.                                                                       |``              |
-| `height`      | Sets the height of the video player.                                                                      | ``            |
-| `controls`    | If present, it displays the default set of playback controls.                                             |``                 |
-| `autoPlay`    | Automatically starts playing the video when the page loads. Note: Autoplay policies vary across browsers. | ``                |
-| `loop`        | Loops the video playback.                                                                                 |``                     |
-| `muted`       | Mutes the audio by default. Often used with `autoPlay`.                                                   | ``                   |
-| `preload`     | Specifies how the video is preloaded. Values: `none`, `metadata`, `auto`.                                 |``           |
-| `playsInline` | Enables inline playback on iOS devices, often necessary for autoplay to work on iOS Safari.               | \`\`              |
+| `src`         | Specifies the source of the video file.                                                                   | `<video src="/path/to/video.mp4" />` |
+| `width`       | Sets the width of the video player.                                                                       | `<video width="320" />`              |
+| `height`      | Sets the height of the video player.                                                                      | `<video height="240" />`             |
+| `controls`    | If present, it displays the default set of playback controls.                                             | `<video controls />`                 |
+| `autoPlay`    | Automatically starts playing the video when the page loads. Note: Autoplay policies vary across browsers. | `<video autoPlay />`                 |
+| `loop`        | Loops the video playback.                                                                                 | `<video loop />`                     |
+| `muted`       | Mutes the audio by default. Often used with `autoPlay`.                                                   | `<video muted />`                    |
+| `preload`     | Specifies how the video is preloaded. Values: `none`, `metadata`, `auto`.                                 | `<video preload="none" />`           |
+| `playsInline` | Enables inline playback on iOS devices, often necessary for autoplay to work on iOS Safari.               | `<video playsInline />`              |
 
 > **Good to know**: When using the `autoPlay` attribute, it is important to also include the `muted` attribute to ensure the video plays automatically in most browsers and the `playsInline` attribute for compatibility with iOS devices.
 
@@ -67,13 +67,13 @@ export default function Page() {
 
 | Attribute         | Description                                                            | Example Value                          |
 | ----------------- | ---------------------------------------------------------------------- | -------------------------------------- |
-| `src`             | The URL of the page to embed.                                          | ``|
-| `width`           | Sets the width of the iframe.                                          |``               |
-| `height`          | Sets the height of the iframe.                                         | ``             |
-| `allowFullScreen` | Allows the iframe content to be displayed in full-screen mode.         |``           |
-| `sandbox`         | Enables an extra set of restrictions on the content within the iframe. | ``                  |
-| `loading`         | Optimize loading behavior (e.g., lazy loading).                        |``            |
-| `title`           | Provides a title for the iframe to support accessibility.              | \`\`       |
+| `src`             | The URL of the page to embed.                                          | `<iframe src="https://example.com" />` |
+| `width`           | Sets the width of the iframe.                                          | `<iframe width="500" />`               |
+| `height`          | Sets the height of the iframe.                                         | `<iframe height="300" />`              |
+| `allowFullScreen` | Allows the iframe content to be displayed in full-screen mode.         | `<iframe allowFullScreen />`           |
+| `sandbox`         | Enables an extra set of restrictions on the content within the iframe. | `<iframe sandbox />`                   |
+| `loading`         | Optimize loading behavior (e.g., lazy loading).                        | `<iframe loading="lazy" />`            |
+| `title`           | Provides a title for the iframe to support accessibility.              | `<iframe title="Description" />`       |
 
 For a comprehensive list of iframe attributes, refer to the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe#attributes).
 

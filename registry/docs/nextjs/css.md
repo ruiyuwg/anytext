@@ -207,7 +207,7 @@ export default function RootLayout({ children }) {
 }
 ```
 
-> **Good to know:** In React 19, \`\` can also be used. See the [React `link` documentation](https://react.dev/reference/react-dom/components/link) for more information.
+> **Good to know:** In React 19, `<link rel="stylesheet" href="..." />` can also be used. See the [React `link` documentation](https://react.dev/reference/react-dom/components/link) for more information.
 
 ## Ordering and Merging
 
@@ -257,7 +257,7 @@ To keep CSS ordering predictable:
 - Import global styles and Tailwind stylesheets in the root of your application.
 - **Use Tailwind CSS** for most styling needs as it covers common design patterns with utility classes.
 - Use CSS Modules for component-specific styles when Tailwind utilities aren't sufficient.
-- Use a consistent naming convention for your CSS modules. For example, using `.module.css` over `.tsx`.
+- Use a consistent naming convention for your CSS modules. For example, using `<name>.module.css` over `<name>.tsx`.
 - Extract shared styles into shared components to avoid duplicate imports.
 - Turn off linters or formatters that auto-sort imports like ESLint’s [`sort-imports`](https://eslint.org/docs/latest/rules/sort-imports).
 - You can use the [`cssChunking`](/docs/app/api-reference/config/next-config-js/cssChunking) option in `next.config.js` to control how CSS is chunked.

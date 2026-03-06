@@ -377,7 +377,7 @@ A hint to the browser indicating if it should wait for the image to be decoded b
 
 ### Other Props
 
-Other properties on the \`\` component will be passed to the underlying `img` element with the exception of the following:
+Other properties on the `<Image />` component will be passed to the underlying `img` element with the exception of the following:
 
 - `srcSet`: Use [Device Sizes](#devicesizes) instead.
 
@@ -677,7 +677,7 @@ The expiration (or rather Max Age) of the optimized image is defined by either t
 
 If you need to change the caching behavior per image, you can configure [`headers`](/docs/app/api-reference/config/next-config-js/headers) to set the `Cache-Control` header on the upstream image (e.g. `/some-asset.jpg`, not `/_next/image` itself).
 
-There is no mechanism to invalidate the cache at this time, so its best to keep `minimumCacheTTL` low. Otherwise you may need to manually change the [`src`](#src) prop or delete the cached file `/cache/images`.
+There is no mechanism to invalidate the cache at this time, so its best to keep `minimumCacheTTL` low. Otherwise you may need to manually change the [`src`](#src) prop or delete the cached file `<distDir>/cache/images`.
 
 #### `disableStaticImages`
 

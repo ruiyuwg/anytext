@@ -27,7 +27,7 @@ React will attach to the HTML that exists inside the `domNode`, and take over ma
 
 - `domNode`: A [DOM element](https://developer.mozilla.org/en-US/docs/Web/API/Element) that was rendered as the root element on the server.
 
-- `reactNode`: The "React node" used to render the existing HTML. This will usually be a piece of JSX like \`\` which was rendered with a `ReactDOM Server` method such as `renderToPipeableStream()`.
+- `reactNode`: The "React node" used to render the existing HTML. This will usually be a piece of JSX like `<App />` which was rendered with a `ReactDOM Server` method such as `renderToPipeableStream(<App />)`.
 
 - **optional** `options`: An object with options for this React root.
 
@@ -57,13 +57,13 @@ Call `root.render` to update a React component inside a hydrated React root for 
 root.render(<App />);
 ```
 
-React will update \`\` in the hydrated `root`.
+React will update `<App />` in the hydrated `root`.
 
 [See more examples below.](#usage)
 
 #### Parameters {/*root-render-parameters*/}
 
-- `reactNode`: A "React node" that you want to update. This will usually be a piece of JSX like \`\`, but you can also pass a React element constructed with [`createElement()`](/reference/react/createElement), a string, a number, `null`, or `undefined`.
+- `reactNode`: A "React node" that you want to update. This will usually be a piece of JSX like `<App />`, but you can also pass a React element constructed with [`createElement()`](/reference/react/createElement), a string, a number, `null`, or `undefined`.
 
 #### Returns {/*root-render-returns*/}
 

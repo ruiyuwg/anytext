@@ -44,7 +44,7 @@ function IndexPage() {
 export default IndexPage
 ```
 
-In this case only the second \`\` is rendered. `meta` tags with duplicate `key` attributes are automatically handled.
+In this case only the second `<meta property="og:title" />` is rendered. `meta` tags with duplicate `key` attributes are automatically handled.
 
 > **Good to know**: `<title>` and `<base>` tags are automatically checked for duplicates by Next.js, so using key is not necessary for these tags.
 

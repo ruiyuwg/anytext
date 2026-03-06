@@ -5,6 +5,8 @@ Currently Cloudflare Workers / Pages, Deno, and Bun adapters are available.
 
 ## Import
 
+::: code-group
+
 ```ts [Cloudflare Workers]
 import { Hono } from 'hono'
 import { upgradeWebSocket } from 'hono/cloudflare-workers'
@@ -26,6 +28,8 @@ export default {
   websocket,
 }
 ```
+
+:::
 
 If you use Node.js, you can use [@hono/node-ws](https://github.com/honojs/middleware/tree/main/packages/node-ws).
 
@@ -59,9 +63,13 @@ Available events:
 - `onClose`
 - `onError`
 
+::: warning
+
 If you use middleware that modifies headers (e.g., applying CORS) on a route that uses WebSocket Helper, you may encounter an error saying you can't modify immutable headers. This is because `upgradeWebSocket()` also changes headers internally.
 
 Therefore, please be cautious if you are using WebSocket Helper and middleware at the same time.
+
+:::
 
 ## RPC-mode
 
@@ -79,7 +87,7 @@ const wsApp = app.get(
 export type WebSocketApp = typeof wsApp
 
 // client.ts
-const client = hc<WebSocketApp>('http://localhost:8787')
+const client = hc('http://localhost:8787')
 const socket = client.ws.$ws() // A WebSocket object for a client
 ```
 
@@ -113,7 +121,7 @@ export default app
 import { hc } from 'hono/client'
 import type app from './server'
 
-const client = hc<typeof app>('http://localhost:8787')
+const client = hc('http://localhost:8787')
 const ws = client.ws.$ws(0)
 
 ws.addEventListener('open', () => {
@@ -134,23 +142,23 @@ const app = new Hono()
 
 app.get('/', (c) => {
   return c.html(
-    <html>
-      <head>
-        <meta charset='UTF-8' />
-      </head>
-      <body>
-        <div id='now-time'></div>
+    
+      
+        
+      
+      
+        
         {html`
-          <script>
+          
             const ws = new WebSocket('ws://localhost:3000/ws')
             const $nowTime = document.getElementById('now-time')
             ws.onmessage = (event) => {
               $nowTime.textContent = event.data
             }
-          </script>
+          
         `}
-      </body>
-    </html>
+      
+    
   )
 })
 

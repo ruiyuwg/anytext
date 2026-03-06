@@ -79,7 +79,7 @@ export default function Page() {
 #### Sending Events
 
 The `sendGTMEvent` function can be used to track user interactions on your page by sending events
-using the `dataLayer` object. For this function to work, the \`\` component must be
+using the `dataLayer` object. For this function to work, the `<GoogleTagManager />` component must be
 included in either a parent layout, page, or component, or directly in the same file.
 
 ```jsx filename="app/page.js"
@@ -183,7 +183,7 @@ export default function Page() {
 #### Sending Events
 
 The `sendGAEvent` function can be used to measure user interactions on your page by sending events
-using the `dataLayer` object. For this function to work, the \`\` component must be
+using the `dataLayer` object. For this function to work, the `<GoogleAnalytics />` component must be
 included in either a parent layout, page, or component, or directly in the same file.
 
 ```jsx filename="app/page.js"

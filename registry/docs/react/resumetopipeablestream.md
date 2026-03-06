@@ -32,7 +32,7 @@ async function handler(request, response) {
 
 #### Parameters {/*parameters*/}
 
-- `reactNode`: The React node you called `prerender` with. For example, a JSX element like \`\`. It is expected to represent the entire document, so the `App` component should render the `<html>` tag.
+- `reactNode`: The React node you called `prerender` with. For example, a JSX element like `<App />`. It is expected to represent the entire document, so the `App` component should render the `<html>` tag.
 - `postponedState`: The opaque `postpone` object returned from a [prerender API](/reference/react-dom/static/index), loaded from wherever you stored it (e.g. redis, a file, or S3).
 - **optional** `options`: An object with streaming options.
   - **optional** `nonce`: A [`nonce`](http://developer.mozilla.org/en-US/docs/Web/HTML/Element/script#nonce) string to allow scripts for [`script-src` Content-Security-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src).

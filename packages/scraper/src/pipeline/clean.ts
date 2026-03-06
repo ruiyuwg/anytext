@@ -63,8 +63,15 @@ function preprocess(raw: string): string {
     // Skip admonition syntax (:::tip, :::info, etc.)
     if (/^:::\w*/.test(line)) continue;
 
-    // Strip HTML tags (but not inside code blocks, already handled above)
+    // Strip HTML tags (but not inside code blocks or inline code spans)
     let cleaned = line;
+
+    // Protect inline code spans: replace with placeholders, strip HTML, restore
+    const inlineCodeSpans: string[] = [];
+    cleaned = cleaned.replace(/`[^`]+`/g, (match) => {
+      inlineCodeSpans.push(match);
+      return `\x00IC${inlineCodeSpans.length - 1}\x00`;
+    });
 
     // Remove self-closing HTML/JSX tags: <Component />, <br/>, etc.
     cleaned = cleaned.replace(/<[A-Za-z][^>]*\/>/g, "");
@@ -74,6 +81,9 @@ function preprocess(raw: string): string {
 
     // Remove closing HTML/JSX tags: </Component>
     cleaned = cleaned.replace(/<\/[A-Za-z][A-Za-z0-9]*\s*>/g, "");
+
+    // Restore inline code spans
+    cleaned = cleaned.replace(/\x00IC(\d+)\x00/g, (_, idx) => inlineCodeSpans[Number(idx)]!);
 
     // Remove HTML comments: <!-- ... -->
     cleaned = cleaned.replace(/<!--[\s\S]*?-->/g, "");

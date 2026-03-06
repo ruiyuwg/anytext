@@ -97,7 +97,7 @@ The type of `proxy()` is defined as `ProxyFetch` and is as follows
 ```ts
 interface ProxyRequestInit extends Omit<RequestInit, 'headers'> {
   raw?: Request
-  customFetch?: (request: Request) => Promise<Response>
+  customFetch?: (request: Request) => Promise
   strictConnectionProcessing?: boolean
   headers?:
     | HeadersInit
@@ -110,6 +110,6 @@ interface ProxyFetch {
   (
     input: string | URL | Request,
     init?: ProxyRequestInit
-  ): Promise<Response>
+  ): Promise
 }
 ```

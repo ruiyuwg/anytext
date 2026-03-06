@@ -388,12 +388,12 @@ function Parent() {
 }
 ```
 
-Notice the highlighted lines: The compiler wraps \`\` in a cache check. Since the `name` prop is always `"John"`, this JSX is created once and reused on every parent re-render. This is exactly what `React.memo` does - it prevents the child from re-rendering when its props haven't changed.
+Notice the highlighted lines: The compiler wraps `<ExpensiveChild name="John" />` in a cache check. Since the `name` prop is always `"John"`, this JSX is created once and reused on every parent re-render. This is exactly what `React.memo` does - it prevents the child from re-rendering when its props haven't changed.
 
 The React Compiler automatically:
 
 1. Tracks that the `name` prop passed to `ExpensiveChild` hasn't changed
-2. Reuses the previously created JSX for \`\`
+2. Reuses the previously created JSX for `<ExpensiveChild name="John" />`
 3. Skips re-rendering `ExpensiveChild` entirely
 
 This means **you can safely remove `React.memo` from your components when using React Compiler**. The compiler provides the same optimization automatically, making your code cleaner and easier to maintain.

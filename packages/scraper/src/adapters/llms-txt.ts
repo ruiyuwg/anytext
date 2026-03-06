@@ -128,7 +128,9 @@ function extractFirstParagraph(markdown: string): string {
 }
 
 function extractInlineCode(markdown: string): string[] {
-  const matches = markdown.match(/`([^`]+)`/g);
+  // Strip code fences first to avoid matching fence backticks as inline code
+  const withoutFences = markdown.replace(/```[\s\S]*?```/g, "");
+  const matches = withoutFences.match(/`([^`\n]+)`/g);
   if (!matches) return [];
   const unique = new Set(
     matches

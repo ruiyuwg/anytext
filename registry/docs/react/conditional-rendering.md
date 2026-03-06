@@ -144,7 +144,7 @@ is very similar to
 <li className="item">{name}</li>
 ```
 
-Both of the conditional branches return `...`:
+Both of the conditional branches return `<li className="item">...</li>`:
 
 ```js
 if (isPacked) {
@@ -280,9 +280,9 @@ A [JavaScript && expression](https://developer.mozilla.org/en-US/docs/Web/JavaSc
 
 To test the condition, JavaScript converts the left side to a boolean automatically. However, if the left side is `0`, then the whole expression gets that value (`0`), and React will happily render `0` rather than nothing.
 
-For example, a common mistake is to write code like `messageCount && New messages`. It's easy to assume that it renders nothing when `messageCount` is `0`, but it really renders the `0` itself!
+For example, a common mistake is to write code like `messageCount && <p>New messages</p>`. It's easy to assume that it renders nothing when `messageCount` is `0`, but it really renders the `0` itself!
 
-To fix it, make the left side a boolean: `messageCount > 0 && New messages`.
+To fix it, make the left side a boolean: `messageCount > 0 && <p>New messages</p>`.
 
 ### Conditionally assigning JSX to a variable {/*conditionally-assigning-jsx-to-a-variable*/}
 
@@ -393,8 +393,8 @@ If you're not familiar with JavaScript, this variety of styles might seem overwh
 - In React, you control branching logic with JavaScript.
 - You can return a JSX expression conditionally with an `if` statement.
 - You can conditionally save some JSX to a variable and then include it inside other JSX by using the curly braces.
-- In JSX, `{cond ?  : }` means *"if `cond`, render `, otherwise `"*.
-- In JSX, `{cond && }` means *"if `cond`, render \`\`, otherwise nothing"*.
+- In JSX, `{cond ? <A /> : <B />}` means *"if `cond`, render `<A />`, otherwise `<B />`"*.
+- In JSX, `{cond && <A />}` means *"if `cond`, render `<A />`, otherwise nothing"*.
 - The shortcuts are common, but you don't have to use them if you prefer plain `if`.
 
 #### Show an icon for incomplete items with `? :` {/*show-an-icon-for-incomplete-items-with--*/}
@@ -547,7 +547,7 @@ export default function PackingList() {
 
 Note that you must write `importance > 0 && ...` rather than `importance && ...` so that if the `importance` is `0`, `0` isn't rendered as the result!
 
-In this solution, two separate conditions are used to insert a space between the name and the importance label. Alternatively, you could use a Fragment with a leading space: `importance > 0 && <> ...</>` or add a space immediately inside the `<i>`:  `importance > 0 &&  ...`.
+In this solution, two separate conditions are used to insert a space between the name and the importance label. Alternatively, you could use a Fragment with a leading space: `importance > 0 && <> <i>...</i></>` or add a space immediately inside the `<i>`:  `importance > 0 && <i> ...</i>`.
 
 #### Refactor a series of `? :` to `if` and variables {/*refactor-a-series-of---to-if-and-variables*/}
 

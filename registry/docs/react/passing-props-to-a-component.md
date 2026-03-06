@@ -186,7 +186,7 @@ function Avatar({ person, size = 100 }) {
 }
 ```
 
-Now, if \`\` is rendered with no `size` prop, the `size` will be set to `100`.
+Now, if `<Avatar person={...} />` is rendered with no `size` prop, the `size` will be set to `100`.
 
 The default value is only used if the `size` prop is missing or if you pass `size={undefined}`. But if you pass `size={null}` or `size={0}`, the default value will **not** be used.
 
@@ -243,7 +243,7 @@ Sometimes you'll want to nest your own components the same way:
 </Card>
 ```
 
-When you nest content inside a JSX tag, the parent component will receive that content in a prop called `children`. For example, the `Card` component below will receive a `children` prop set to \`\` and render it in a wrapper div:
+When you nest content inside a JSX tag, the parent component will receive that content in a prop called `children`. For example, the `Card` component below will receive a `children` prop set to `<Avatar />` and render it in a wrapper div:
 
 ```js src/App.js
 import Avatar from './Avatar.js';
@@ -378,8 +378,8 @@ However, props are [immutable](https://en.wikipedia.org/wiki/Immutable_object)â€
 - To pass props, add them to the JSX, just like you would with HTML attributes.
 - To read props, use the `function Avatar({ person, size })` destructuring syntax.
 - You can specify a default value like `size = 100`, which is used for missing and `undefined` props.
-- You can forward all props with \`\` JSX spread syntax, but don't overuse it!
-- Nested JSX like \`\` will appear as `Card` component's `children` prop.
+- You can forward all props with `<Avatar {...props} />` JSX spread syntax, but don't overuse it!
+- Nested JSX like `<Card><Avatar /></Card>` will appear as `Card` component's `children` prop.
 - Props are read-only snapshots in time: every render receives a new version of props.
 - You can't change props. When you need interactivity, you'll need to set state.
 

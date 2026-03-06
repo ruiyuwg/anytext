@@ -138,7 +138,7 @@ Then, **import** `Profile` from `Gallery.js` to `App.js` using a named import (w
 import { Profile } from './Gallery.js';
 ```
 
-Finally, **render** \`\` from the `App` component:
+Finally, **render** `<Profile />` from the `App` component:
 
 ```js
 export default function App() {
@@ -146,7 +146,7 @@ export default function App() {
 }
 ```
 
-Now `Gallery.js` contains two exports: a default `Gallery` export, and a named `Profile` export. `App.js` imports both of them. Try editing `to` and back in this example:
+Now `Gallery.js` contains two exports: a default `Gallery` export, and a named `Profile` export. `App.js` imports both of them. Try editing `<Profile />` to `<Gallery />` and back in this example:
 
 ```js src/App.js
 import Gallery from './Gallery.js';
@@ -206,7 +206,7 @@ On this page you learned:
 
 Currently, `Gallery.js` exports both `Profile` and `Gallery`, which is a bit confusing.
 
-Move the `Profile` component to its own `Profile.js`, and then change the `App` component to render both `and` one after another.
+Move the `Profile` component to its own `Profile.js`, and then change the `App` component to render both `<Profile />` and `<Gallery />` one after another.
 
 You may use either a default or a named export for `Profile`, but make sure that you use the corresponding import syntax in both `App.js` and `Gallery.js`! You can refer to the table from the deep dive above:
 

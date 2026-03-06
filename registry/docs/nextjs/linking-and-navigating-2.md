@@ -32,7 +32,7 @@ The example above uses multiple links. Each one maps a path (`href`) to a known 
 - `/about` → `pages/about.js`
 - `/blog/hello-world` → `pages/blog/[slug].js`
 
-Any `in the viewport (initially or through scroll) will be prefetched by default (including the corresponding data) for pages using [Static Generation](/docs/pages/building-your-application/data-fetching/get-static-props). The corresponding data for [server-rendered](/docs/pages/building-your-application/data-fetching/get-server-side-props) routes is fetched *only when* the` is clicked.
+Any `<Link />` in the viewport (initially or through scroll) will be prefetched by default (including the corresponding data) for pages using [Static Generation](/docs/pages/building-your-application/data-fetching/get-static-props). The corresponding data for [server-rendered](/docs/pages/building-your-application/data-fetching/get-server-side-props) routes is fetched *only when* the `<Link />` is clicked.
 
 ## Linking to dynamic paths
 

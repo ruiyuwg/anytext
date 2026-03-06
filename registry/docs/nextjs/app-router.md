@@ -67,7 +67,7 @@ Next.js 13 introduced the new [App Router](/docs/app) with new features and conv
 
 Upgrading to Next.js 13 does **not** require using the App Router. You can continue using `pages` with new features that work in both directories, such as the updated [Image component](#image-component), [Link component](#link-component), [Script component](#script-component), and [Font optimization](#font-optimization).
 
-### \`\` Component
+### `<Image/>` Component
 
 Next.js 12 introduced new improvements to the Image Component with a temporary import: `next/future/image`. These improvements included less client-side JavaScript, easier ways to extend and style images, better accessibility, and native browser lazy loading.
 

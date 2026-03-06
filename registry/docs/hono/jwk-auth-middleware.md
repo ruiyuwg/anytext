@@ -2,9 +2,11 @@
 
 The JWK Auth Middleware authenticates requests by verifying tokens using JWK (JSON Web Key). It checks for an `Authorization` header and other configured sources, such as cookies, if specified. Specifically, it validates tokens using the provided `keys`, retrieves keys from `jwks_uri` if specified, and supports token extraction from cookies if the `cookie` option is set.
 
+:::info
 The Authorization header sent from the client must have a specified scheme.
 
 Example: `Bearer my.token.value` or `Basic my.token.value`
+:::
 
 ## Import
 
@@ -116,33 +118,33 @@ app.use(
 
 ## Options
 
-### &#x20;alg: `AsymmetricAlgorithm[]`
+### <Badge type="danger" text="required" /> alg: `AsymmetricAlgorithm[]`
 
 An array of allowed asymmetric algorithms used for token verification.
 
 Available types are `RS256` | `RS384` | `RS512` | `PS256` | `PS384` | `PS512` | `ES256` | `ES384` | `ES512` | `EdDSA`.
 
-### &#x20;keys: `HonoJsonWebKey[] | (c: Context) => Promise<HonoJsonWebKey[]>`
+### <Badge type="info" text="optional" /> keys: `HonoJsonWebKey[] | (c: Context) => Promise<HonoJsonWebKey[]>`
 
 The values of your public keys, or a function that returns them. The function receives the Context object.
 
-### &#x20;jwks\_uri: `string` | `(c: Context) => Promise<string>`
+### <Badge type="info" text="optional" /> jwks\_uri: `string` | `(c: Context) => Promise<string>`
 
 If this value is set, attempt to fetch JWKs from this URI, expecting a JSON response with `keys`, which are added to the provided `keys` option. You can also pass a callback function to dynamically determine the JWKS URI using the Context.
 
-### &#x20;allow\_anon: `boolean`
+### <Badge type="info" text="optional" /> allow\_anon: `boolean`
 
 If this value is set to `true`, requests without a valid token will be allowed to pass through the middleware. Use `c.get('jwtPayload')` to check if the request is authenticated. The default is `false`.
 
-### &#x20;cookie: `string`
+### <Badge type="info" text="optional" /> cookie: `string`
 
 If this value is set, then the value is retrieved from the cookie header using that value as a key, which is then validated as a token.
 
-### &#x20;headerName: `string`
+### <Badge type="info" text="optional" /> headerName: `string`
 
 The name of the header to look for the JWT token. The default is `Authorization`.
 
-### &#x20;verification: `VerifyOptions`
+### <Badge type="info" text="optional" /> verification: `VerifyOptions`
 
 If this option is set, you can specify validation rules for claims in the JWT payload (`iss` / `aud` / `exp` / `nbf` / `iat`), in addition to signature verification.
 
@@ -190,7 +192,7 @@ app.get('/about/me', (c) => c.text('Without Trailing Slash'))
 
 ## Options
 
-### &#x20;alwaysRedirect: `boolean`
+### <Badge type="info" text="optional" /> alwaysRedirect: `boolean`
 
 By default, trailing slash middleware only redirects when the response status is `404`. When `alwaysRedirect` is set to `true`, the middleware redirects before executing handlers. This is useful for wildcard routes (`*`) where the default behavior doesn't work.
 
@@ -239,10 +241,10 @@ Since HTML forms cannot send a DELETE method, you can put the value `DELETE` in 
 The HTML form:
 
 ```html
-<form action="/posts" method="POST">
-  <input type="hidden" name="_method" value="DELETE" />
-  <input type="text" name="id" />
-</form>
+
+  
+  
+
 ```
 
 The application:
@@ -271,20 +273,20 @@ app.use('/posts', methodOverride({ app, query: '_method' }))
 
 ## Options
 
-### &#x20;app: `Hono`
+### <Badge type="danger" text="required" /> app: `Hono`
 
 The instance of `Hono` is used in your application.
 
-### &#x20;form: `string`
+### <Badge type="info" text="optional" /> form: `string`
 
 Form key with a value containing the method name.
 The default is `_method`.
 
-### &#x20;header: `boolean`
+### <Badge type="info" text="optional" /> header: `boolean`
 
 Header name with a value containing the method name.
 
-### &#x20;query: `boolean`
+### <Badge type="info" text="optional" /> query: `boolean`
 
 Query parameter key with a value containing the method name.
 

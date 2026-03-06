@@ -258,7 +258,7 @@ const result = await db.select({
   userId: users.id,
   petId: pets.id,
   petName1: sql`upper(${pets.name})`,
-  petName2: sql<string | null>`upper(${pets.name})`,
+  petName2: sql`upper(${pets.name})`,
   //˄we should explicitly tell 'string | null' in type, since we're left joining that field
 }).from(user).leftJoin(pets, eq(users.id, pets.ownerId))
 ```
@@ -285,7 +285,7 @@ await db.select({
   pet: {
     id: pets.id,
     name: pets.name,
-    upperName: sql<string>`upper(${pets.name})`
+    upperName: sql`upper(${pets.name})`
   }
 }).from(user).fullJoin(pets, eq(users.id, pets.ownerId))
 ```

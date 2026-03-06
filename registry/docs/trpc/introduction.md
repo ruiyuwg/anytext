@@ -350,7 +350,7 @@ Browser support should be identical to [`fetch`](https://caniuse.com/fetch) supp
 
 ### Node.js / Deno
 
-For runtimes other than the browser ones, the `fetch` implementation should support streaming, meaning that the response obtained by `await fetch(...)` should have a `body` property of type `ReadableStream | NodeJS.ReadableStream`, meaning that:
+For runtimes other than the browser ones, the `fetch` implementation should support streaming, meaning that the response obtained by `await fetch(...)` should have a `body` property of type `ReadableStream<Uint8Array> | NodeJS.ReadableStream`, meaning that:
 
 - either `response.body.getReader` is a function that returns a `ReadableStreamDefaultReader<Uint8Array>` object
 - or `response.body` is a `Uint8Array` `Buffer`

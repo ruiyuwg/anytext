@@ -18,24 +18,24 @@ app.get(
   '/page/*',
   jsxRenderer(({ children }) => {
     return (
-      <html>
-        <body>
-          <header>Menu</header>
-          <div>{children}</div>
-        </body>
-      </html>
+      
+        
+          Menu
+          {children}
+        
+      
     )
   })
 )
 
 app.get('/page/about', (c) => {
-  return c.render(<h1>About me!</h1>)
+  return c.render(About me!)
 })
 ```
 
 ## Options
 
-### &#x20;docType: `boolean` | `string`
+### <Badge type="info" text="optional" /> docType: `boolean` | `string`
 
 If you do not want to add a DOCTYPE at the beginning of the HTML, set the `docType` option to `false`.
 
@@ -45,9 +45,9 @@ app.use(
   jsxRenderer(
     ({ children }) => {
       return (
-        <html>
-          <body>{children}</body>
-        </html>
+        
+          {children}
+        
       )
     },
     { docType: false }
@@ -63,9 +63,9 @@ app.use(
   jsxRenderer(
     ({ children }) => {
       return (
-        <html>
-          <body>{children}</body>
-        </html>
+        
+          {children}
+        
       )
     },
     {
@@ -76,14 +76,14 @@ app.use(
 )
 ```
 
-### &#x20;stream: `boolean` | `Record<string, string>`
+### <Badge type="info" text="optional" /> stream: `boolean` | `Record<string, string>`
 
 If you set it to `true` or provide a Record value, it will be rendered as a streaming response.
 
 ```tsx
 const AsyncComponent = async () => {
   await new Promise((r) => setTimeout(r, 1000)) // sleep 1s
-  return <div>Hi!</div>
+  return Hi!
 }
 
 app.get(
@@ -91,12 +91,12 @@ app.get(
   jsxRenderer(
     ({ children }) => {
       return (
-        <html>
-          <body>
-            <h1>SSR Streaming</h1>
+        
+          
+            SSR Streaming
             {children}
-          </body>
-        </html>
+          
+        
       )
     },
     { stream: true }
@@ -105,9 +105,9 @@ app.get(
 
 app.get('/', (c) => {
   return c.render(
-    <Suspense fallback={<div>loading...</div>}>
-      <AsyncComponent />
-    </Suspense>
+    loading...}>
+      
+    
   )
 })
 ```
@@ -132,9 +132,9 @@ The `Layout` component enables nesting the layouts.
 app.use(
   jsxRenderer(({ children }) => {
     return (
-      <html>
-        <body>{children}</body>
-      </html>
+      
+        {children}
+      
     )
   })
 )
@@ -143,10 +143,10 @@ const blog = new Hono()
 blog.use(
   jsxRenderer(({ children, Layout }) => {
     return (
-      <Layout>
-        <nav>Blog Menu</nav>
-        <div>{children}</div>
-      </Layout>
+      
+        Blog Menu
+        {children}
+      
     )
   })
 )
@@ -166,18 +166,19 @@ app.use(jsxRenderer())
 
 const RequestUrlBadge: FC = () => {
   const c = useRequestContext()
-  return <b>{c.req.url}</b>
+  return {c.req.url}
 }
 
 app.get('/page/info', (c) => {
   return c.render(
-    <div>
-      You are accessing: <RequestUrlBadge />
-    </div>
+    
+      You are accessing: 
+    
   )
 })
 ```
 
+::: warning
 You can't use `useRequestContext()` with the Deno's `precompile` JSX option. Use the `react-jsx`:
 
 ```json
@@ -189,6 +190,8 @@ You can't use `useRequestContext()` with the Deno's `precompile` JSX option. Use
  }
 ```
 
+:::
+
 ## Extending `ContextRenderer`
 
 By defining `ContextRenderer` as shown below, you can pass additional content to the renderer. This is handy, for instance, when you want to change the contents of the head tag depending on the page.
@@ -197,7 +200,7 @@ By defining `ContextRenderer` as shown below, you can pass additional content to
 declare module 'hono' {
   interface ContextRenderer {
     (
-      content: string | Promise<string>,
+      content: string | Promise,
       props: { title: string }
     ): Response
   }
@@ -209,27 +212,27 @@ app.get(
   '/page/*',
   jsxRenderer(({ children, title }) => {
     return (
-      <html>
-        <head>
-          <title>{title}</title>
-        </head>
-        <body>
-          <header>Menu</header>
-          <div>{children}</div>
-        </body>
-      </html>
+      
+        
+          {title}
+        
+        
+          Menu
+          {children}
+        
+      
     )
   })
 )
 
 app.get('/page/favorites', (c) => {
   return c.render(
-    <div>
-      <ul>
-        <li>Eating sushi</li>
-        <li>Watching baseball games</li>
-      </ul>
-    </div>,
+    
+      
+        Eating sushi
+        Watching baseball games
+      
+    ,
     {
       title: 'My favorites',
     }

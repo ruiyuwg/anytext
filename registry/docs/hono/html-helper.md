@@ -18,7 +18,7 @@ app.get('/:username', (c) => {
   const { username } = c.req.param()
   return c.html(
     html`<!doctype html>
-      <h1>Hello! ${username}!</h1>`
+      Hello! ${username}!`
   )
 })
 ```
@@ -30,18 +30,18 @@ Insert the inline script into JSX:
 ```tsx
 app.get('/', (c) => {
   return c.html(
-    <html>
-      <head>
-        <title>Test Site</title>
+    
+      
+        Test Site
         {html`
-          <script>
+          
             // No need to use dangerouslySetInnerHTML.
             // If you write it here, it will not be escaped.
-          </script>
+          
         `}
-      </head>
-      <body>Hello!</body>
-    </html>
+      
+      Hello!
+    
   )
 })
 ```
@@ -54,9 +54,9 @@ Since `html` returns an HtmlEscapedString, it can act as a fully functional comp
 
 ```typescript
 const Footer = () => html`
-  <footer>
-    <address>My Address...</address>
-  </footer>
+  
+    My Address...
+  
 `
 ```
 
@@ -70,27 +70,27 @@ interface SiteData {
   children?: any
 }
 const Layout = (props: SiteData) => html`
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>${props.title}</title>
-  <meta name="description" content="${props.description}">
-  <head prefix="og: http://ogp.me/ns#">
-  <meta property="og:type" content="article">
-  <!-- More elements slow down JSX, but not template literals. -->
-  <meta property="og:title" content="${props.title}">
-  <meta property="og:image" content="${props.image}">
-</head>
-<body>
+
+
+  
+  ${props.title}
+  
+  
+  
+  
+  
+  
+
+
   ${props.children}
-</body>
-</html>
+
+
 `
 
 const Content = (props: { siteData: SiteData; name: string }) => (
-  <Layout {...props.siteData}>
-    <h1>Hello {props.name}</h1>
-  </Layout>
+  
+    Hello {props.name}
+  
 )
 
 app.get('/', (c) => {
@@ -102,7 +102,7 @@ app.get('/', (c) => {
       image: 'https://example.com/image.png',
     },
   }
-  return c.html(<Content {...props} />)
+  return c.html()
 })
 ```
 
@@ -127,6 +127,8 @@ Thanks to these libraries, Visual Studio Code and vim also interprets template l
 The ConnInfo Helper helps you to get the connection information. For example, you can get the client's remote address easily.
 
 ## Import
+
+::: code-group
 
 ```ts [Cloudflare Workers]
 import { Hono } from 'hono'
@@ -172,6 +174,8 @@ import { getConnInfo } from 'hono/lambda-edge'
 import { Hono } from 'hono'
 import { getConnInfo } from '@hono/node-server/conninfo'
 ```
+
+:::
 
 ## Usage
 
@@ -274,18 +278,18 @@ export type AcceptHeader =
 
 ## Options
 
-### &#x20;header: `AcceptHeader`
+### <Badge type="danger" text="required" /> header: `AcceptHeader`
 
 The target accept header.
 
-### &#x20;supports: `string[]`
+### <Badge type="danger" text="required" /> supports: `string[]`
 
 The header values which your application supports.
 
-### &#x20;default: `string`
+### <Badge type="danger" text="required" /> default: `string`
 
 The default values.
 
-### &#x20;match: `(accepts: Accept[], config: acceptsConfig) => string`
+### <Badge type="info" text="optional" /> match: `(accepts: Accept[], config: acceptsConfig) => string`
 
 The custom match function.

@@ -66,7 +66,11 @@ app.get(
 
 To emit an endpoint specification, export its type.
 
+::: warning
+
 For the RPC to infer routes correctly, all included methods must be chained, and the endpoint or app type must be inferred from a declared variable. For more, see [Best Practices for RPC](https://hono.dev/docs/guides/best-practices#if-you-want-to-use-rpc-features).
+
+:::
 
 ```ts{1,17}
 const route = app.get(
@@ -100,7 +104,7 @@ Then, magically, completion works and the endpoint path and request type are sug
 import { AppType } from './server'
 import { hc } from 'hono/client'
 
-const client = hc<AppType>('/api')
+const client = hc('/api')
 const res = await client.hello.$get({
   query: {
     name: 'Hono',
@@ -141,7 +145,7 @@ const schema = z.object({
   title: z.string(),
 })
 
-type Todo = z.infer<typeof schema>
+type Todo = z.infer
 
 const todos: Todo[] = []
 
@@ -178,13 +182,13 @@ import { AppType } from '../functions/api/[[route]]'
 import { hc, InferResponseType, InferRequestType } from 'hono/client'
 
 const queryClient = new QueryClient()
-const client = hc<AppType>('/api')
+const client = hc('/api')
 
 export default function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <Todos />
-    </QueryClientProvider>
+    
+      
+    
   )
 }
 
@@ -200,9 +204,9 @@ const Todos = () => {
   const $post = client.todo.$post
 
   const mutation = useMutation<
-    InferResponseType<typeof $post>,
+    InferResponseType,
     Error,
-    InferRequestType<typeof $post>['form']
+    InferRequestType['form']
   >({
     mutationFn: async (todo) => {
       const res = await $post({
@@ -219,7 +223,7 @@ const Todos = () => {
   })
 
   return (
-    <div>
+    
       <button
         onClick={() => {
           mutation.mutate({
@@ -229,14 +233,14 @@ const Todos = () => {
         }}
       >
         Add Todo
-      </button>
+      
 
-      <ul>
+      
         {query.data?.todos.map((todo) => (
-          <li key={todo.id}>{todo.title}</li>
+          {todo.title}
         ))}
-      </ul>
-    </div>
+      
+    
   )
 }
 ```

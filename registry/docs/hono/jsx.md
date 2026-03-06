@@ -39,7 +39,9 @@ For Deno, you have to modify the `deno.json` instead of the `tsconfig.json`:
 
 ## Usage
 
+:::info
 If you are coming straight from the [Quick Start](/docs/#quick-start), the main file has a `.ts` extension - you need to change it to `.tsx` - otherwise you will not be able to run the application at all. You should additionally modify the `package.json` (or `deno.json` if you are using Deno) to reflect that change (e.g. instead of having `bun run --hot src/index.ts` in dev script, you should have `bun run --hot src/index.tsx`).
+:::
 
 `index.tsx`:
 
@@ -51,9 +53,9 @@ const app = new Hono()
 
 const Layout: FC = (props) => {
   return (
-    <html>
-      <body>{props.children}</body>
-    </html>
+    
+      {props.children}
+    
   )
 }
 
@@ -61,20 +63,20 @@ const Top: FC<{ messages: string[] }> = (props: {
   messages: string[]
 }) => {
   return (
-    <Layout>
-      <h1>Hello Hono!</h1>
-      <ul>
+    
+      Hello Hono!
+      
         {props.messages.map((message) => {
-          return <li>{message}!!</li>
+          return {message}!!
         })}
-      </ul>
-    </Layout>
+      
+    
   )
 }
 
 app.get('/', (c) => {
   const messages = ['Good Morning', 'Good Evening', 'Good Night']
-  return c.html(<Top messages={messages} />)
+  return c.html()
 })
 
 export default app
@@ -92,10 +94,10 @@ const app = new Hono()
 app.use('*', async (c, next) => {
   c.setRenderer((content) => {
     return c.html(
-      <html>
-        <head></head>
-        <body>{content}</body>
-      </html>
+      
+        
+        {content}
+      
     )
   })
   await next()
@@ -104,8 +106,8 @@ app.use('*', async (c, next) => {
 app.get('/about', (c) => {
   return c.render(
     <>
-      <title>About Page</title>
-      <meta name='description' content='This is the about page.' />
+      About Page
+      
       about page content
     </>
   )
@@ -114,7 +116,9 @@ app.get('/about', (c) => {
 export default app
 ```
 
+:::info
 When hoisting occurs, existing elements are not removed. Elements appearing later are added to the end. For example, if you have `<title>Default</title>` in your `<head>` and a component renders `<title>Page Title</title>`, both titles will appear in the head.
+:::
 
 ## Fragment
 
@@ -124,11 +128,11 @@ Use Fragment to group multiple elements without adding extra nodes:
 import { Fragment } from 'hono/jsx'
 
 const List = () => (
-  <Fragment>
-    <p>first child</p>
-    <p>second child</p>
-    <p>third child</p>
-  </Fragment>
+  
+    first child
+    second child
+    third child
+  
 )
 ```
 
@@ -137,9 +141,9 @@ Or you can write it with `<></>` if it set up properly.
 ```tsx
 const List = () => (
   <>
-    <p>first child</p>
-    <p>second child</p>
-    <p>third child</p>
+    first child
+    second child
+    third child
   </>
 )
 ```
@@ -156,12 +160,12 @@ type Post = {
   title: string
 }
 
-function Component({ title, children }: PropsWithChildren<Post>) {
+function Component({ title, children }: PropsWithChildren) {
   return (
-    <div>
-      <h1>{title}</h1>
+    
+      {title}
       {children}
-    </div>
+    
   )
 }
 ```
@@ -173,7 +177,7 @@ To directly insert HTML, use `dangerouslySetInnerHTML`:
 ```tsx
 app.get('/foo', (c) => {
   const inner = { __html: 'JSX &middot; SSR' }
-  const Div = <div dangerouslySetInnerHTML={inner} />
+  const Div = 
 })
 ```
 
@@ -184,14 +188,14 @@ Optimize your components by memoizing computed strings using `memo`:
 ```tsx
 import { memo } from 'hono/jsx'
 
-const Header = memo(() => <header>Welcome to Hono</header>)
-const Footer = memo(() => <footer>Powered by Hono</footer>)
+const Header = memo(() => Welcome to Hono)
+const Footer = memo(() => Powered by Hono)
 const Layout = (
-  <div>
-    <Header />
-    <p>Hono is cool!</p>
-    <Footer />
-  </div>
+  
+    
+    Hono is cool!
+    
+  
 )
 ```
 
@@ -218,14 +222,14 @@ const ThemeContext = createContext(themes.light)
 
 const Button: FC = () => {
   const theme = useContext(ThemeContext)
-  return <button style={theme}>Push!</button>
+  return Push!
 }
 
 const Toolbar: FC = () => {
   return (
-    <div>
-      <Button />
-    </div>
+    
+      
+    
   )
 }
 
@@ -233,11 +237,11 @@ const Toolbar: FC = () => {
 
 app.get('/', (c) => {
   return c.html(
-    <div>
+    
       <ThemeContext.Provider value={themes.dark}>
-        <Toolbar />
+        
       </ThemeContext.Provider>
-    </div>
+    
   )
 })
 ```
@@ -250,21 +254,21 @@ If you render it with `c.html()`, it will await automatically.
 ```tsx
 const AsyncComponent = async () => {
   await new Promise((r) => setTimeout(r, 1000)) // sleep 1s
-  return <div>Done!</div>
+  return Done!
 }
 
 app.get('/', (c) => {
   return c.html(
-    <html>
-      <body>
-        <AsyncComponent />
-      </body>
-    </html>
+    
+      
+        
+      
+    
   )
 })
 ```
 
-## Suspense&#x20;
+## Suspense <Badge style="vertical-align: middle;" type="warning" text="Experimental" />
 
 The React-like `Suspense` feature is available.
 If you wrap the async component with `Suspense`, the content in the fallback will be rendered first, and once the Promise is resolved, the awaited content will be displayed.
@@ -277,13 +281,13 @@ import { renderToReadableStream, Suspense } from 'hono/jsx/streaming'
 
 app.get('/', (c) => {
   const stream = renderToReadableStream(
-    <html>
-      <body>
-        <Suspense fallback={<div>loading...</div>}>
-          <Component />
-        </Suspense>
-      </body>
-    </html>
+    
+      
+        loading...}>
+          
+        
+      
+    
   )
   return c.body(stream, {
     headers: {
@@ -294,7 +298,7 @@ app.get('/', (c) => {
 })
 ```
 
-## ErrorBoundary&#x20;
+## ErrorBoundary <Badge style="vertical-align: middle;" type="warning" text="Experimental" />
 
 You can catch errors in child components using `ErrorBoundary`.
 
@@ -303,18 +307,18 @@ In the example below, it will show the content specified in `fallback` if an err
 ```tsx
 function SyncComponent() {
   throw new Error('Error')
-  return <div>Hello</div>
+  return Hello
 }
 
 app.get('/sync', async (c) => {
   return c.html(
-    <html>
-      <body>
-        <ErrorBoundary fallback={<div>Out of Service</div>}>
-          <SyncComponent />
-        </ErrorBoundary>
-      </body>
-    </html>
+    
+      
+        Out of Service}>
+          
+        
+      
+    
   )
 })
 ```
@@ -325,25 +329,25 @@ app.get('/sync', async (c) => {
 async function AsyncComponent() {
   await new Promise((resolve) => setTimeout(resolve, 2000))
   throw new Error('Error')
-  return <div>Hello</div>
+  return Hello
 }
 
 app.get('/with-suspense', async (c) => {
   return c.html(
-    <html>
-      <body>
-        <ErrorBoundary fallback={<div>Out of Service</div>}>
-          <Suspense fallback={<div>Loading...</div>}>
-            <AsyncComponent />
-          </Suspense>
-        </ErrorBoundary>
-      </body>
-    </html>
+    
+      
+        Out of Service}>
+          Loading...}>
+            
+          
+        
+      
+    
   )
 })
 ```
 
-## StreamingContext&#x20;
+## StreamingContext <Badge style="vertical-align: middle;" type="warning" text="Experimental" />
 
 You can use `StreamingContext` to provide configuration for streaming components like `Suspense` and `ErrorBoundary`. This is useful for adding nonce values to script tags generated by these components for Content Security Policy (CSP).
 
@@ -354,17 +358,17 @@ import { Suspense, StreamingContext } from 'hono/jsx/streaming'
 
 app.get('/', (c) => {
   const stream = renderToReadableStream(
-    <html>
-      <body>
+    
+      
         <StreamingContext
           value={{ scriptNonce: 'random-nonce-value' }}
         >
-          <Suspense fallback={<div>Loading...</div>}>
-            <AsyncComponent />
-          </Suspense>
-        </StreamingContext>
-      </body>
-    </html>
+          Loading...}>
+            
+          
+        
+      
+    
   )
 
   return c.body(stream, {
@@ -398,19 +402,19 @@ interface SiteData {
 
 const Layout = (props: SiteData) =>
   html`<!doctype html>
-    <html>
-      <head>
-        <title>${props.title}</title>
-      </head>
-      <body>
+    
+      
+        ${props.title}
+      
+      
         ${props.children}
-      </body>
-    </html>`
+      
+    `
 
 const Content = (props: { siteData: SiteData; name: string }) => (
-  <Layout {...props.siteData}>
-    <h1>Hello {props.name}</h1>
-  </Layout>
+  
+    Hello {props.name}
+  
 )
 
 app.get('/:name', (c) => {
@@ -421,7 +425,7 @@ app.get('/:name', (c) => {
       title: 'JSX with html sample',
     },
   }
-  return c.html(<Content {...props} />)
+  return c.html()
 })
 
 export default app

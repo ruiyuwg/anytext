@@ -281,7 +281,7 @@ const db = drizzle(...);
 const findSimilarGuides = async (description: string) => {
 const embedding = await generateEmbedding(description);
 
-const similarity = sql<number>`1 - (${cosineDistance(guides.embedding, embedding)})`;
+const similarity = sql`1 - (${cosineDistance(guides.embedding, embedding)})`;
 
 const similarGuides = await db
 .select({ name: guides.title, url: guides.url, similarity })

@@ -24,7 +24,7 @@ Compared to `next/legacy/image`, the new `next/image` component has the followin
 
 ## Required Props
 
-The \`\` component requires the following properties.
+The `<Image />` component requires the following properties.
 
 ### src
 
@@ -61,7 +61,7 @@ The `height` property is required, except for [statically imported images](/docs
 
 ## Optional Props
 
-The \`\` component accepts a number of additional properties beyond those which are required. This section describes the most commonly-used properties of the Image component. Find details about more rarely-used properties in the [Advanced Props](#advanced-props) section.
+The `<Image />` component accepts a number of additional properties beyond those which are required. This section describes the most commonly-used properties of the Image component. Find details about more rarely-used properties in the [Advanced Props](#advanced-props) section.
 
 ### layout
 
@@ -184,7 +184,7 @@ Try it out:
 
 ## Advanced Props
 
-In some cases, you may need more advanced usage. The \`\` component optionally accepts the following advanced properties.
+In some cases, you may need more advanced usage. The `<Image />` component optionally accepts the following advanced properties.
 
 ### style
 
@@ -329,7 +329,7 @@ module.exports = {
 
 ## Other Props
 
-Other properties on the \`\` component will be passed to the underlying
+Other properties on the `<Image />` component will be passed to the underlying
 `img` element with the exception of the following:
 
 - `srcSet`. Use
@@ -547,7 +547,7 @@ module.exports = {
 
 The following describes the caching algorithm for the default [loader](#loader). For all other loaders, please refer to your cloud provider's documentation.
 
-Images are optimized dynamically upon request and stored in the `/cache/images` directory. The optimized image file will be served for subsequent requests until the expiration is reached. When a request is made that matches a cached but expired file, the expired image is served stale immediately. Then the image is optimized again in the background (also called revalidation) and saved to the cache with the new expiration date.
+Images are optimized dynamically upon request and stored in the `<distDir>/cache/images` directory. The optimized image file will be served for subsequent requests until the expiration is reached. When a request is made that matches a cached but expired file, the expired image is served stale immediately. Then the image is optimized again in the background (also called revalidation) and saved to the cache with the new expiration date.
 
 The cache status of an image can be determined by reading the value of the `x-nextjs-cache` (`x-vercel-cache` when deployed on Vercel) response header. The possible values are the following:
 
@@ -589,7 +589,7 @@ The expiration (or rather Max Age) of the optimized image is defined by either t
 
 If you need to change the caching behavior per image, you can configure [`headers`](/docs/pages/api-reference/config/next-config-js/headers) to set the `Cache-Control` header on the upstream image (e.g. `/some-asset.jpg`, not `/_next/image` itself).
 
-There is no mechanism to invalidate the cache at this time, so its best to keep `minimumCacheTTL` low. Otherwise you may need to manually change the [`src`](#src) prop or delete `/cache/images`.
+There is no mechanism to invalidate the cache at this time, so its best to keep `minimumCacheTTL` low. Otherwise you may need to manually change the [`src`](#src) prop or delete `<distDir>/cache/images`.
 
 ### Disable Static Imports
 

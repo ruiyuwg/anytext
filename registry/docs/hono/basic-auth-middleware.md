@@ -66,32 +66,32 @@ app.use(
 
 ## Options
 
-### &#x20;username: `string`
+### <Badge type="danger" text="required" /> username: `string`
 
 The username of the user who is authenticating.
 
-### &#x20;password: `string`
+### <Badge type="danger" text="required" /> password: `string`
 
 The password value for the provided username to authenticate against.
 
-### &#x20;realm: `string`
+### <Badge type="info" text="optional" /> realm: `string`
 
 The domain name of the realm, as part of the returned WWW-Authenticate challenge header. The default is `"Secure Area"`.\
 See more: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/WWW-Authenticate#directives
 
-### &#x20;hashFunction: `Function`
+### <Badge type="info" text="optional" /> hashFunction: `Function`
 
 A function to handle hashing for safe comparison of passwords.
 
-### &#x20;verifyUser: `(username: string, password: string, c: Context) => boolean | Promise<boolean>`
+### <Badge type="info" text="optional" /> verifyUser: `(username: string, password: string, c: Context) => boolean | Promise<boolean>`
 
 The function to verify the user.
 
-### &#x20;invalidUserMessage: `string | object | MessageFunction`
+### <Badge type="info" text="optional" /> invalidUserMessage: `string | object | MessageFunction`
 
 `MessageFunction` is `(c: Context) => string | object | Promise<string | object>`. The custom message if the user is invalid.
 
-### &#x20;onAuthSuccess: `(c: Context, username: string) => void | Promise<void>`
+### <Badge type="info" text="optional" /> onAuthSuccess: `(c: Context, username: string) => void | Promise<void>`
 
 A callback function invoked after successful authentication. This allows you to set context variables or perform side effects without re-parsing the Authorization header.
 
@@ -115,7 +115,7 @@ app.get('/auth/page', (c) => {
 
 ## More Options
 
-### &#x20;...users: `{ username: string, password: string }[]`
+### <Badge type="info" text="optional" /> ...users: `{ username: string, password: string }[]`
 
 ## Recipes
 

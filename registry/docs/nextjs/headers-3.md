@@ -177,7 +177,7 @@ To only apply a header when header, cookie, or query values also match the `has`
 
 - `type`: `String` - must be either `header`, `cookie`, `host`, or `query`.
 - `key`: `String` - the key from the selected type to match against.
-- `value`: `String` or `undefined` - the value to check for, if undefined any value will match. A regex like string can be used to capture a specific part of the value, e.g. if the value `first-(?.*)` is used for `first-second` then `second` will be usable in the destination with `:paramName`.
+- `value`: `String` or `undefined` - the value to check for, if undefined any value will match. A regex like string can be used to capture a specific part of the value, e.g. if the value `first-(?<paramName>.*)` is used for `first-second` then `second` will be usable in the destination with `:paramName`.
 
 ```js filename="next.config.js"
 module.exports = {

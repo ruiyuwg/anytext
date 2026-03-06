@@ -10,7 +10,9 @@ To use this helper, you can import it as follows:
 import { decode, sign, verify } from 'hono/jwt'
 ```
 
+::: info
 [JWT Middleware](/docs/middleware/builtin/jwt) also import the `jwt` function from the `hono/jwt`.
+:::
 
 ## `sign()`
 
@@ -22,7 +24,7 @@ sign(
   secret: string,
   alg?: 'HS256';
 
-): Promise<string>;
+): Promise;
 ```
 
 ### Example
@@ -41,15 +43,17 @@ const token = await sign(payload, secret)
 
 ### Options
 
-#### &#x20;payload: `unknown`
+<br/>
+
+#### <Badge type="danger" text="required" /> payload: `unknown`
 
 The JWT payload to be signed. You can include other claims like in [Payload Validation](#payload-validation).
 
-#### &#x20;secret: `string`
+#### <Badge type="danger" text="required" /> secret: `string`
 
 The secret key used for JWT verification or signing.
 
-#### &#x20;alg: [AlgorithmTypes](#supported-algorithmtypes)
+#### <Badge type="info" text="optional" /> alg: [AlgorithmTypes](#supported-algorithmtypes)
 
 The algorithm used for JWT signing or verification. The default is HS256.
 
@@ -63,7 +67,7 @@ verify(
   secret: string,
   alg: 'HS256';
   issuer?: string | RegExp;
-): Promise<any>;
+): Promise;
 
 ```
 
@@ -81,19 +85,21 @@ console.log(decodedPayload)
 
 ### Options
 
-#### &#x20;token: `string`
+<br/>
+
+#### <Badge type="danger" text="required" /> token: `string`
 
 The JWT token to be verified.
 
-#### &#x20;secret: `string`
+#### <Badge type="danger" text="required" /> secret: `string`
 
 The secret key used for JWT verification or signing.
 
-#### &#x20;alg: [AlgorithmTypes](#supported-algorithmtypes)
+#### <Badge type="danger" text="required" /> alg: [AlgorithmTypes](#supported-algorithmtypes)
 
 The algorithm used for JWT signing or verification.
 
-#### &#x20;issuer: `string | RegExp`
+#### <Badge type="info" text="optional" /> issuer: `string | RegExp`
 
 The expected issuer used for JWT verification.
 
@@ -122,7 +128,9 @@ console.log('Decoded Payload:', payload)
 
 ### Options
 
-#### &#x20;token: `string`
+<br/>
+
+#### <Badge type="danger" text="required" /> token: `string`
 
 The JWT token to be decoded.
 
@@ -226,10 +234,10 @@ POST  /v1/posts
 
 ## Options
 
-### &#x20;verbose: `boolean`
+### <Badge type="info" text="optional" /> verbose: `boolean`
 
 When set to `true`, it displays verbose information.
 
-### &#x20;colorize: `boolean`
+### <Badge type="info" text="optional" /> colorize: `boolean`
 
 When set to `false`, the output will not be colored.

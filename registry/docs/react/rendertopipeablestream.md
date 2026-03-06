@@ -32,7 +32,7 @@ On the client, call [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) to 
 
 #### Parameters {/*parameters*/}
 
-- `reactNode`: A React node you want to render to HTML. For example, a JSX element like \`\`. It is expected to represent the entire document, so the `App` component should render the `<html>` tag.
+- `reactNode`: A React node you want to render to HTML. For example, a JSX element like `<App />`. It is expected to represent the entire document, so the `App` component should render the `<html>` tag.
 
 - **optional** `options`: An object with streaming options.
   - **optional** `bootstrapScriptContent`: If specified, this string will be placed in an inline `<script>` tag.
@@ -141,7 +141,7 @@ export default function App({ assetMap }) {
 }
 ```
 
-On the server, render \`\` and pass your `assetMap` with the asset URLs:
+On the server, render `<App assetMap={assetMap} />` and pass your `assetMap` with the asset URLs:
 
 ```js {1-5,8,9}
 // You'd need to get this JSON from your build tooling, e.g. read it from the build output.
@@ -161,7 +161,7 @@ app.use('/', (request, response) => {
 });
 ```
 
-Since your server is now rendering \`\`, you need to render it with `assetMap` on the client too to avoid hydration errors. You can serialize and pass `assetMap` to the client like this:
+Since your server is now rendering `<App assetMap={assetMap} />`, you need to render it with `assetMap` on the client too to avoid hydration errors. You can serialize and pass `assetMap` to the client like this:
 
 ```js {9-10}
 // You'd need to get this JSON from your build tooling.
@@ -215,7 +215,7 @@ function ProfilePage() {
 }
 ```
 
-Imagine that loading data for \`\` takes some time. Ideally, you'd want to show the rest of the profile page content to the user without waiting for the posts. To do this, [wrap `Posts` in a `<Suspense>` boundary:](/reference/react/Suspense#displaying-a-fallback-while-content-is-loading)
+Imagine that loading data for `<Posts />` takes some time. Ideally, you'd want to show the rest of the profile page content to the user without waiting for the posts. To do this, [wrap `Posts` in a `<Suspense>` boundary:](/reference/react/Suspense#displaying-a-fallback-while-content-is-loading)
 
 ```js {9,11}
 function ProfilePage() {
@@ -393,7 +393,7 @@ If there is an error while generating the shell, both `onError` and `onShellErro
 
 ### Recovering from errors outside the shell {/*recovering-from-errors-outside-the-shell*/}
 
-In this example, the \`\` component is wrapped in `<Suspense>` so it is *not* a part of the shell:
+In this example, the `<Posts />` component is wrapped in `<Suspense>` so it is *not* a part of the shell:
 
 ```js {6}
 function ProfilePage() {

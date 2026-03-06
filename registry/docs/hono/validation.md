@@ -50,6 +50,7 @@ Within the handler you can get the validated value with `c.req.valid('form')`.
 
 Validation targets include `json`, `query`, `header`, `param` and `cookie` in addition to `form`.
 
+::: warning
 When you validate `json` or `form`, the request *must* contain a matching `content-type` header (e.g. `Content-Type: application/json` for `json`). Otherwise, the request body will not be parsed and you will receive an empty object (`{}`) as value in the callback.
 
 It is important to set the `content-type` header when testing using
@@ -93,6 +94,9 @@ const data = await res.json()
 console.log(data) // { key: 'value' }
 ```
 
+:::
+
+::: warning
 When you validate `header`, you need to use **lowercase** name as the key.
 
 If you want to validate the `Idempotency-Key` header, you need to use `idempotency-key` as the key.
@@ -140,6 +144,8 @@ app.post(
 )
 ```
 
+:::
+
 ## Multiple validators
 
 You can also include multiple validators to validate different parts of request:
@@ -162,6 +168,8 @@ We recommend using a third-party validator.
 
 Install from the Npm registry.
 
+::: code-group
+
 ```sh [npm]
 npm i zod
 ```
@@ -177,6 +185,8 @@ pnpm add zod
 ```sh [bun]
 bun add zod
 ```
+
+:::
 
 Import `z` from `zod`.
 
@@ -221,6 +231,8 @@ const route = app.post(
 
 You can use the [Zod Validator Middleware](https://github.com/honojs/middleware/tree/main/packages/zod-validator) to make it even easier.
 
+::: code-group
+
 ```sh [npm]
 npm i @hono/zod-validator
 ```
@@ -236,6 +248,8 @@ pnpm add @hono/zod-validator
 ```sh [bun]
 bun add @hono/zod-validator
 ```
+
+:::
 
 And import `zValidator`.
 
@@ -267,6 +281,8 @@ const route = app.post(
 
 The [Standard Schema Validator Middleware](https://github.com/honojs/middleware/tree/main/packages/standard-validator) lets you use any Standard Schema-compatible validation library with Hono, giving you the flexibility to choose your preferred validator while maintaining consistent type safety.
 
+::: code-group
+
 ```sh [npm]
 npm i @hono/standard-validator
 ```
@@ -283,6 +299,8 @@ pnpm add @hono/standard-validator
 bun add @hono/standard-validator
 ```
 
+:::
+
 Import `sValidator` from the package:
 
 ```ts
@@ -292,6 +310,8 @@ import { sValidator } from '@hono/standard-validator'
 ### With Zod
 
 You can use Zod with the Standard Schema validator:
+
+::: code-group
 
 ```sh [npm]
 npm i zod
@@ -308,6 +328,8 @@ pnpm add zod
 ```sh [bun]
 bun add zod
 ```
+
+:::
 
 ```ts
 import * as z from 'zod'
@@ -331,6 +353,8 @@ app.post('/author', sValidator('json', schema), (c) => {
 
 [Valibot](https://valibot.dev/) is a lightweight alternative to Zod with a modular design:
 
+::: code-group
+
 ```sh [npm]
 npm i valibot
 ```
@@ -346,6 +370,8 @@ pnpm add valibot
 ```sh [bun]
 bun add valibot
 ```
+
+:::
 
 ```ts
 import * as v from 'valibot'
@@ -369,6 +395,8 @@ app.post('/author', sValidator('json', schema), (c) => {
 
 [ArkType](https://arktype.io/) offers TypeScript-native syntax for runtime validation:
 
+::: code-group
+
 ```sh [npm]
 npm i arktype
 ```
@@ -384,6 +412,8 @@ pnpm add arktype
 ```sh [bun]
 bun add arktype
 ```
+
+:::
 
 ```ts
 import { type } from 'arktype'

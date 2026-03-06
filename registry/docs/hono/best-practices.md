@@ -137,7 +137,7 @@ import type { AppType } from './authors'
 import { hc } from 'hono/client'
 
 // 😃
-const client = hc<AppType>('http://localhost') // Typed correctly
+const client = hc('http://localhost') // Typed correctly
 ```
 
 For more detailed information, please see [the RPC page](/docs/guides/rpc#using-rpc-with-larger-applications).

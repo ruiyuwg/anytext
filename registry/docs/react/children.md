@@ -282,8 +282,8 @@ Even when `children` is an array, `Children.map` has useful special behavior. Fo
 
 The `children` data structure **does not include rendered output** of the components you pass as JSX. In the example below, the `children` received by the `RowList` only contains two items rather than three:
 
-1. `This is the first item.`
-2. \`\`
+1. `<p>This is the first item.</p>`
+2. `<MoreRows />`
 
 This is why only two row wrappers are generated in this example:
 
@@ -340,7 +340,7 @@ export default function RowList({ children }) {
 }
 ```
 
-**There is no way to get the rendered output of an inner component** like \`\` when manipulating `children`. This is why [it's usually better to use one of the alternative solutions.](#alternatives)
+**There is no way to get the rendered output of an inner component** like `<MoreRows />` when manipulating `children`. This is why [it's usually better to use one of the alternative solutions.](#alternatives)
 
 ***
 
@@ -607,7 +607,7 @@ export function Row({ children }) {
 }
 ```
 
-This wouldn't work with `Children.map` because it would "see" \`\` as a single child (and a single row).
+This wouldn't work with `Children.map` because it would "see" `<MoreRows />` as a single child (and a single row).
 
 ***
 

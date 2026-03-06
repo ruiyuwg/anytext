@@ -34,7 +34,7 @@ export default function MyApp() {
 }
 ```
 
-Notice that \`\` starts with a capital letter. That's how you know it's a React component. React component names must always start with a capital letter, while HTML tags must be lowercase.
+Notice that `<MyButton />` starts with a capital letter. That's how you know it's a React component. React component names must always start with a capital letter, while HTML tags must be lowercase.
 
 Have a look at the result:
 
@@ -63,7 +63,7 @@ The `export default` keywords specify the main component in the file. If you're 
 
 The markup syntax you've seen above is called *JSX*. It is optional, but most React projects use JSX for its convenience. All of the [tools we recommend for local development](/learn/installation) support JSX out of the box.
 
-JSX is stricter than HTML. You have to close tags like \`\`. Your component also can't return multiple JSX tags. You have to wrap them into a shared parent, like a `...` or an empty `<>...</>` wrapper:
+JSX is stricter than HTML. You have to close tags like `<br />`. Your component also can't return multiple JSX tags. You have to wrap them into a shared parent, like a `<div>...</div>` or an empty `<>...</>` wrapper:
 
 ```js {3,6}
 function AboutPage() {

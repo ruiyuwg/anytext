@@ -34,7 +34,7 @@ On the client, call [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) to 
 
 #### Parameters {/*parameters*/}
 
-- `reactNode`: A React node you want to render to HTML. For example, a JSX node like \`\`. It is expected to represent the entire document, so the App component should render the `<html>` tag.
+- `reactNode`: A React node you want to render to HTML. For example, a JSX node like `<App />`. It is expected to represent the entire document, so the App component should render the `<html>` tag.
 
 - **optional** `options`: An object with static generation options.
   - **optional** `bootstrapScriptContent`: If specified, this string will be placed in an inline `<script>` tag.
@@ -150,7 +150,7 @@ export default function App({ assetMap }) {
 }
 ```
 
-On the server, render \`\` and pass your `assetMap` with the asset URLs:
+On the server, render `<App assetMap={assetMap} />` and pass your `assetMap` with the asset URLs:
 
 ```js {1-5,8,9}
 // You'd need to get this JSON from your build tooling, e.g. read it from the build output.
@@ -169,7 +169,7 @@ app.use('/', async (request, response) => {
 });
 ```
 
-Since your server is now rendering \`\`, you need to render it with `assetMap` on the client too to avoid hydration errors. You can serialize and pass `assetMap` to the client like this:
+Since your server is now rendering `<App assetMap={assetMap} />`, you need to render it with `assetMap` on the client too to avoid hydration errors. You can serialize and pass `assetMap` to the client like this:
 
 ```js {9-10}
 // You'd need to get this JSON from your build tooling.
@@ -251,7 +251,7 @@ function ProfilePage() {
 }
 ```
 
-Imagine that \`\` needs to load some data, which takes some time. Ideally, you'd want wait for the posts to finish so it's included in the HTML. To do this, you can use Suspense to suspend on the data, and `prerenderToNodeStream` will wait for the suspended content to finish before resolving to the static HTML.
+Imagine that `<Posts />` needs to load some data, which takes some time. Ideally, you'd want wait for the posts to finish so it's included in the HTML. To do this, you can use Suspense to suspend on the data, and `prerenderToNodeStream` will wait for the suspended content to finish before resolving to the static HTML.
 
 **Only Suspense-enabled data sources will activate the Suspense component.** They include:
 

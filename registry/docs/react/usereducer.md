@@ -100,9 +100,9 @@ function MyComponent() {
 `useReducer` returns an array with exactly two items:
 
 1. The current state of this state variable, initially set to the initial state you provided.
-2. The <CodeStep step={2}>`dispatch` function that lets you change it in response to interaction.
+2. The `dispatch` function that lets you change it in response to interaction.
 
-To update what's on the screen, call <CodeStep step={2}>`dispatch` with an object representing what the user did, called an *action*:
+To update what's on the screen, call `dispatch` with an object representing what the user did, called an *action*:
 
 ```js [[2, 2, "dispatch"]]
 function handleClick() {

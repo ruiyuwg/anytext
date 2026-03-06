@@ -169,15 +169,15 @@ app.get(
 // Get the value from `c.get('secureHeadersNonce')`:
 app.get('/', (c) => {
   return c.html(
-    <html>
-      <body>
+    
+      
         {/** contents */}
         <script
           src='/js/client.js'
           nonce={c.get('secureHeadersNonce')}
         />
-      </body>
-    </html>
+      
+    
   )
 })
 ```
@@ -207,12 +207,12 @@ app.get(
 
 app.get('/', (c) => {
   return c.html(
-    <html>
-      <body>
+    
+      
         {/** contents */}
-        <script src='/js/client.js' nonce={c.get('myNonce')} />
-      </body>
-    </html>
+        
+      
+    
   )
 })
 ```

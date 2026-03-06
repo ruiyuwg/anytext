@@ -116,6 +116,19 @@ describe("cleanMarkdown", () => {
     expect(result).toContain("Hello");
   });
 
+  it("preserves JSX tags inside inline code spans", async () => {
+    const input = "Use `<MyButton />` to render a button";
+    const result = await cleanMarkdown(input);
+    expect(result).toContain("`<MyButton />`");
+  });
+
+  it("preserves HTML tags inside inline code spans", async () => {
+    const input = "The `<div>` element and `</div>` tag";
+    const result = await cleanMarkdown(input);
+    expect(result).toContain("`<div>`");
+    expect(result).toContain("`</div>`");
+  });
+
   it("removes extra YAML blocks in body (not first)", async () => {
     const input = "# Title\n\n---\ntitle: meta\ndate: 2025-01-01\n---\n\nContent";
     const result = await cleanMarkdown(input);

@@ -3,9 +3,11 @@
 The JWT Auth Middleware provides authentication by verifying the token with JWT.
 The middleware will check for an `Authorization` header if the `cookie` option is not set. You can customize the header name using the `headerName` option.
 
+:::info
 The Authorization header sent from the client must have a specified scheme.
 
 Example: `Bearer my.token.value` or `Basic my.token.value`
+:::
 
 ## Import
 
@@ -56,6 +58,8 @@ app.get('/auth/page', (c) => {
 })
 ```
 
+::: tip
+
 `jwt()` is just a middleware function. If you want to use an environment variable (eg: `c.env.JWT_SECRET`), you can use it as follows:
 
 ```js
@@ -68,23 +72,25 @@ app.use('/auth/*', (c, next) => {
 })
 ```
 
+:::
+
 ## Options
 
-### &#x20;secret: `string`
+### <Badge type="danger" text="required" /> secret: `string`
 
 A value of your secret key.
 
-### &#x20;alg: `string`
+### <Badge type="danger" text="required" /> alg: `string`
 
 An algorithm type that is used for verifying.
 
 Available types are `HS256` | `HS384` | `HS512` | `RS256` | `RS384` | `RS512` | `PS256` | `PS384` | `PS512` | `ES256` | `ES384` | `ES512` | `EdDSA`.
 
-### &#x20;cookie: `string`
+### <Badge type="info" text="optional" /> cookie: `string`
 
 If this value is set, then the value is retrieved from the cookie header using that value as a key, which is then validated as a token.
 
-### &#x20;headerName: `string`
+### <Badge type="info" text="optional" /> headerName: `string`
 
 The name of the header to look for the JWT token. The default is `Authorization`.
 
@@ -99,22 +105,22 @@ app.use(
 )
 ```
 
-### &#x20;verifyOptions: `VerifyOptions`
+### <Badge type="info" text="optional" /> verifyOptions: `VerifyOptions`
 
 Options controlling verification of the token.
 
-#### &#x20;verifyOptions.iss: `string | RexExp`
+#### <Badge type="info" text="optional" /> verifyOptions.iss: `string | RexExp`
 
 The expected issuer used for token verification. The `iss` claim will **not** be checked if this isn't set.
 
-#### &#x20;verifyOptions.nbf: `boolean`
+#### <Badge type="info" text="optional" /> verifyOptions.nbf: `boolean`
 
 The `nbf` (not before) claim will be verified if present and this is set to `true`. The default is `true`.
 
-#### &#x20;verifyOptions.iat: `boolean`
+#### <Badge type="info" text="optional" /> verifyOptions.iat: `boolean`
 
 The `iat` (issued at) claim will be verified if present and this is set to `true`. The default is `true`.
 
-#### &#x20;verifyOptions.exp: `boolean`
+#### <Badge type="info" text="optional" /> verifyOptions.exp: `boolean`
 
 The `exp` (expiration time) claim will be verified if present and this is set to `true`. The default is `true`.

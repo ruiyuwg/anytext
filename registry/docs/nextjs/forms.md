@@ -102,7 +102,7 @@ export async function updateUser(userId, formData) {}
 
 > **Good to know**:
 >
-> - An alternative is to pass arguments as hidden input fields in the form (e.g. \`\`). However, the value will be part of the rendered HTML and will not be encoded.
+> - An alternative is to pass arguments as hidden input fields in the form (e.g. `<input type="hidden" name="userId" value={userId} />`). However, the value will be part of the rendered HTML and will not be encoded.
 > - `bind` works in both Server and Client Components and supports progressive enhancement.
 
 ## Form validation

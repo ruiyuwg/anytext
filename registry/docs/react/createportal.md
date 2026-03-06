@@ -35,7 +35,7 @@ A portal only changes the physical placement of the DOM node. In every other way
 
 #### Parameters {/*parameters*/}
 
-- `children`: Anything that can be rendered with React, such as a piece of JSX (e.g. `or`), a [Fragment](/reference/react/Fragment) (`<>...</>`), a string or a number, or an array of these.
+- `children`: Anything that can be rendered with React, such as a piece of JSX (e.g. `<div />` or `<SomeComponent />`), a [Fragment](/reference/react/Fragment) (`<>...</>`), a string or a number, or an array of these.
 
 - `domNode`: Some DOM node, such as those returned by `document.getElementById()`. The node must already exist. Passing a different DOM node during an update will cause the portal content to be recreated.
 

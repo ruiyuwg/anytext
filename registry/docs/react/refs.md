@@ -20,7 +20,7 @@ The lint only applies these rules to values it knows are refs. A value is inferr
   buttonRef.current = node;
   ```
 
-- Passed through a JSX `ref` prop (for example \`\`).
+- Passed through a JSX `ref` prop (for example `<div ref={someRef} />`).
 
   ```jsx
   ```

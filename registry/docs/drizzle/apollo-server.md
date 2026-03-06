@@ -442,9 +442,9 @@ import { AnyColumn, sql } from 'drizzle-orm';
 
 const customCount = (column?: AnyColumn) => {
 if (column) {
-return sql<number>`cast(count(${column}) as integer)`; // In MySQL cast to unsigned integer
+return sql`cast(count(${column}) as integer)`; // In MySQL cast to unsigned integer
 } else {
-return sql<number>`cast(count(*) as integer)`; // In MySQL cast to unsigned integer
+return sql`cast(count(*) as integer)`; // In MySQL cast to unsigned integer
 }
 };
 
@@ -466,8 +466,8 @@ In SQLite, `count()` result returns as integer.
 ```ts copy {3,4}
 import { sql } from 'drizzle-orm';
 
-await db.select({ count: sql<number>`count(*)` }).from(products);
-await db.select({ count: sql<number>`count(${products.discount})` }).from(products);
+await db.select({ count: sql`count(*)` }).from(products);
+await db.select({ count: sql`count(${products.discount})` }).from(products);
 
 ````
 

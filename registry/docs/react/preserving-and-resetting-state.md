@@ -10,7 +10,7 @@ React builds [render trees](learn/understanding-your-ui-as-a-tree#the-render-tre
 
 When you give a component state, you might think the state "lives" inside the component. But the state is actually held inside React. React associates each piece of state it's holding with the correct component by where that component sits in the render tree.
 
-Here, there is only one \`\` JSX tag, but it's rendered at two different positions:
+Here, there is only one `<Counter />` JSX tag, but it's rendered at two different positions:
 
 ```js
 import { useState } from 'react';
@@ -218,7 +218,7 @@ Adding a component
 
 ## Same component at the same position preserves state {/*same-component-at-the-same-position-preserves-state*/}
 
-In this example, there are two different \`\` tags:
+In this example, there are two different `<Counter />` tags:
 
 ```js
 import { useState } from 'react';
@@ -299,13 +299,13 @@ label {
 }
 ```
 
-When you tick or clear the checkbox, the counter state does not get reset. Whether `isFancy` is `true` or `false`, you always have a \`\` as the first child of the `div` returned from the root `App` component:
+When you tick or clear the checkbox, the counter state does not get reset. Whether `isFancy` is `true` or `false`, you always have a `<Counter />` as the first child of the `div` returned from the root `App` component:
 
 Updating the `App` state does not reset the `Counter` because `Counter` stays in the same position
 
 It's the same component at the same position, so from React's perspective, it's the same counter.
 
-Remember that **it's the position in the UI tree--not in the JSX markup--that matters to React!** This component has two `return` clauses with different \`\` JSX tags inside and outside the `if`:
+Remember that **it's the position in the UI tree--not in the JSX markup--that matters to React!** This component has two `return` clauses with different `<Counter />` JSX tags inside and outside the `if`:
 
 ```js
 import { useState } from 'react';
@@ -399,9 +399,9 @@ label {
 }
 ```
 
-You might expect the state to reset when you tick checkbox, but it doesn't! This is because **both of these \`\` tags are rendered at the same position.** React doesn't know where you place the conditions in your function. All it "sees" is the tree you return.
+You might expect the state to reset when you tick checkbox, but it doesn't! This is because **both of these `<Counter />` tags are rendered at the same position.** React doesn't know where you place the conditions in your function. All it "sees" is the tree you return.
 
-In both cases, the `App` component returns a `<div>` with \`\` as a first child. To React, these two counters have the same "address": the first child of the first child of the root. This is how React matches them up between the previous and next renders, regardless of how you structure your logic.
+In both cases, the `App` component returns a `<div>` with `<Counter />` as a first child. To React, these two counters have the same "address": the first child of the first child of the root. This is how React matches them up between the previous and next renders, regardless of how you structure your logic.
 
 ## Different components at the same position reset state {/*different-components-at-the-same-position-reset-state*/}
 
@@ -776,7 +776,7 @@ There is also another, more generic, way to reset a component's state.
 
 You might have seen `key`s when [rendering lists.](/learn/rendering-lists#keeping-list-items-in-order-with-key) Keys aren't just for lists! You can use keys to make React distinguish between any components. By default, React uses order within the parent ("first counter", "second counter") to discern between components. But keys let you tell React that this is not just a *first* counter, or a *second* counter, but a specific counter--for example, *Taylor's* counter. This way, React will know *Taylor's* counter wherever it appears in the tree!
 
-In this example, the two \`\`s don't share state even though they appear in the same place in JSX:
+In this example, the two `<Counter />`s don't share state even though they appear in the same place in JSX:
 
 ```js
 import { useState } from 'react';
@@ -1155,7 +1155,7 @@ function Form() {
 textarea { display: block; margin: 10px 0; }
 ```
 
-Technically, you could also add `null` before \`\` in the `else` branch to match the `if` branch structure:
+Technically, you could also add `null` before `<Form />` in the `else` branch to match the `if` branch structure:
 
 ```js src/App.js
 import { useState } from 'react';

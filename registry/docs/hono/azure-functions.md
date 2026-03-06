@@ -39,9 +39,13 @@ Change the default route prefix of the host. Add this property to the root json 
 }
 ```
 
+::: info
 The default Azure Functions route prefix is `/api`. If you don't change it as shown above, be sure to start all your Hono routes with `/api`
+:::
 
 Now you are ready to install Hono and the Azure Functions Adapter with:
+
+::: code-group
 
 ```sh [npm]
 npm i @marplex/hono-azurefunc-adapter hono
@@ -58,6 +62,8 @@ pnpm add @marplex/hono-azurefunc-adapter hono
 ```sh [bun]
 bun add @marplex/hono-azurefunc-adapter hono
 ```
+
+:::
 
 ## 3. Hello World
 
@@ -99,6 +105,8 @@ app.http('httpTrigger', {
 
 Run the development server locally. Then, access `http://localhost:7071` in your Web browser.
 
+::: code-group
+
 ```sh [npm]
 npm run start
 ```
@@ -115,11 +123,17 @@ pnpm start
 bun run start
 ```
 
+:::
+
 ## 5. Deploy
 
+::: info
 Before you can deploy to Azure, you need to create some resources in your cloud infrastructure. Please visit the Microsoft documentation on [Create supporting Azure resources for your function](https://learn.microsoft.com/en-us/azure/azure-functions/create-first-function-cli-typescript?pivots=nodejs-model-v4\&tabs=windows%2Cazure-cli%2Cbrowser#create-supporting-azure-resources-for-your-function)
+:::
 
 Build the project for deployment:
+
+::: code-group
 
 ```sh [npm]
 npm run build
@@ -137,8 +151,10 @@ pnpm build
 bun run build
 ```
 
+:::
+
 Deploy your project to the function app in Azure Cloud. Replace `<YourFunctionAppName>` with the name of your app.
 
 ```sh
-func azure functionapp publish <YourFunctionAppName>
+func azure functionapp publish 
 ```

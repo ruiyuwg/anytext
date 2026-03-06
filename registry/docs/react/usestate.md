@@ -103,7 +103,7 @@ The convention is to name state variables like `[something, setSomething]` using
 `useState` returns an array with exactly two items:
 
 1. The current state of this state variable, initially set to the initial state you provided.
-2. The <CodeStep step={2}>`set` function that lets you change it to any other value in response to interaction.
+2. The `set` function that lets you change it to any other value in response to interaction.
 
 To update what’s on the screen, call the `set` function with some next state:
 

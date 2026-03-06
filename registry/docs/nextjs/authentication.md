@@ -173,7 +173,7 @@ export async function signup(state, formData) {
 }
 ```
 
-Back in your \`\`, you can use React's `useActionState` hook to display validation errors while the form is submitting:
+Back in your `<SignupForm />`, you can use React's `useActionState` hook to display validation errors while the form is submitting:
 
 ```tsx filename="app/ui/signup-form.tsx" switcher highlight={7,15,21,27-36}
 'use client'

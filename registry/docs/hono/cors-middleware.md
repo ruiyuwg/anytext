@@ -80,27 +80,27 @@ app.use(
 
 ## Options
 
-### &#x20;origin: `string` | `string[]` | `(origin:string, c:Context) => string`
+### <Badge type="info" text="optional" /> origin: `string` | `string[]` | `(origin:string, c:Context) => string`
 
 The value of "*Access-Control-Allow-Origin*" CORS header. You can also pass the callback function like `origin: (origin) => (origin.endsWith('.example.com') ? origin : 'http://example.com')`. The default is `*`.
 
-### &#x20;allowMethods: `string[]` | `(origin:string, c:Context) => string[]`
+### <Badge type="info" text="optional" /> allowMethods: `string[]` | `(origin:string, c:Context) => string[]`
 
 The value of "*Access-Control-Allow-Methods*" CORS header. You can also pass a callback function to dynamically determine allowed methods based on the origin. The default is `['GET', 'HEAD', 'PUT', 'POST', 'DELETE', 'PATCH']`.
 
-### &#x20;allowHeaders: `string[]`
+### <Badge type="info" text="optional" /> allowHeaders: `string[]`
 
 The value of "*Access-Control-Allow-Headers*" CORS header. The default is `[]`.
 
-### &#x20;maxAge: `number`
+### <Badge type="info" text="optional" /> maxAge: `number`
 
 The value of "*Access-Control-Max-Age*" CORS header.
 
-### &#x20;credentials: `boolean`
+### <Badge type="info" text="optional" /> credentials: `boolean`
 
 The value of "*Access-Control-Allow-Credentials*" CORS header.
 
-### &#x20;exposeHeaders: `string[]`
+### <Badge type="info" text="optional" /> exposeHeaders: `string[]`
 
 The value of "*Access-Control-Expose-Headers*" CORS header. The default is `[]`.
 

@@ -3,8 +3,10 @@
 The [Server-Timing](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Server-Timing) Middleware provides
 performance metrics in the response headers.
 
+::: info
 Note: On Cloudflare Workers, the timer metrics may not be accurate,
 since [timers only show the time of last I/O](https://developers.cloudflare.com/workers/learning/security-model/#step-1-disallow-timers-and-multi-threading).
+:::
 
 ## Import
 
@@ -73,24 +75,24 @@ app.use(
 
 ## Options
 
-### &#x20;total: `boolean`
+### <Badge type="info" text="optional" /> total: `boolean`
 
 Show the total response time. The default is `true`.
 
-### &#x20;enabled: `boolean` | `(c: Context) => boolean`
+### <Badge type="info" text="optional" /> enabled: `boolean` | `(c: Context) => boolean`
 
 Whether timings should be added to the headers or not. The default is `true`.
 
-### &#x20;totalDescription: `boolean`
+### <Badge type="info" text="optional" /> totalDescription: `boolean`
 
 Description for the total response time. The default is `Total Response Time`.
 
-### &#x20;autoEnd: `boolean`
+### <Badge type="info" text="optional" /> autoEnd: `boolean`
 
 If `startTime()` should end automatically at the end of the request.
 If disabled, not manually ended timers will not be shown.
 
-### &#x20;crossOrigin: `boolean` | `string` | `(c: Context) => boolean | string`
+### <Badge type="info" text="optional" /> crossOrigin: `boolean` | `string` | `(c: Context) => boolean | string`
 
 The origin this timings header should be readable.
 

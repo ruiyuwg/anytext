@@ -79,9 +79,9 @@ function TeamReport({users}) {
 
 If the same `user` object is rendered in both `Profile` and `TeamReport`, the two components can share work and only call `calculateUserMetrics` once for that `user`.
 
-Assume `Profile` is rendered first. It will call <CodeStep step={1}>`getUserMetrics`, and check if there is a cached result. Since it is the first time `getUserMetrics` is called with that `user`, there will be a cache miss. `getUserMetrics` will then call `calculateUserMetrics` with that `user` and write the result to cache.
+Assume `Profile` is rendered first. It will call `getUserMetrics`, and check if there is a cached result. Since it is the first time `getUserMetrics` is called with that `user`, there will be a cache miss. `getUserMetrics` will then call `calculateUserMetrics` with that `user` and write the result to cache.
 
-When `TeamReport` renders its list of `users` and reaches the same `user` object, it will call <CodeStep step={2}>`getUserMetrics` and read the result from cache.
+When `TeamReport` renders its list of `users` and reaches the same `user` object, it will call `getUserMetrics` and read the result from cache.
 
 If `calculateUserMetrics` can be aborted by passing an [`AbortSignal`](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal), you can use [`cacheSignal()`](/reference/react/cacheSignal) to cancel the expensive computation if React has finished rendering. `calculateUserMetrics` may already handle cancellation internally by using `cacheSignal` directly.
 
@@ -116,7 +116,7 @@ export function Precipitation({cityData}) {
 }
 ```
 
-In the above example, <CodeStep step={2}>`Precipitation` and <CodeStep step={1}>`Temperature` each call `cache` to create a new memoized function with their own cache look-up. If both components render for the same `cityData`, they will do duplicate work to call `calculateWeekReport`.
+In the above example, `Precipitation` and `Temperature` each call `cache` to create a new memoized function with their own cache look-up. If both components render for the same `cityData`, they will do duplicate work to call `calculateWeekReport`.
 
 In addition, `Temperature` creates a new memoized function each time the component is rendered which doesn't allow for any cache sharing.
 
@@ -177,7 +177,7 @@ async function MinimalWeatherCard({city}) {
 
 If `AnimatedWeatherCard` and `MinimalWeatherCard` both render for the same city, they will receive the same snapshot of data from the memoized function.
 
-If `AnimatedWeatherCard` and `MinimalWeatherCard` supply different city arguments to <CodeStep step={2}>`getTemperature`, then `fetchTemperature` will be called twice and each call site will receive different data.
+If `AnimatedWeatherCard` and `MinimalWeatherCard` supply different city arguments to `getTemperature`, then `fetchTemperature` will be called twice and each call site will receive different data.
 
 The city acts as a cache key.
 
@@ -223,15 +223,15 @@ function Page({id}) {
 }
 ```
 
-When rendering `Page`, the component calls <CodeStep step={1}>`getUser` but note that it doesn't use the returned data. This early <CodeStep step={1}>`getUser` call kicks off the asynchronous database query that occurs while `Page` is doing other computational work and rendering children.
+When rendering `Page`, the component calls `getUser` but note that it doesn't use the returned data. This early `getUser` call kicks off the asynchronous database query that occurs while `Page` is doing other computational work and rendering children.
 
-When rendering `Profile`, we call <CodeStep step={2}>`getUser` again. If the initial <CodeStep step={1}>`getUser` call has already returned and cached the user data, when `Profile` asks and waits for this data, it can simply read from the cache without requiring another remote procedure call. If the  initial data request hasn't been completed, preloading data in this pattern reduces delay in data-fetching.
+When rendering `Profile`, we call `getUser` again. If the initial `getUser` call has already returned and cached the user data, when `Profile` asks and waits for this data, it can simply read from the cache without requiring another remote procedure call. If the  initial data request hasn't been completed, preloading data in this pattern reduces delay in data-fetching.
 
 #### Caching asynchronous work {/*caching-asynchronous-work*/}
 
 When evaluating an [asynchronous function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function), you will receive a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) for that work. The promise holds the state of that work (*pending*, *fulfilled*, *failed*) and its eventual settled result.
 
-In this example, the asynchronous function <CodeStep step={1}>`fetchData` returns a promise that is awaiting the `fetch`.
+In this example, the asynchronous function `fetchData` returns a promise that is awaiting the `fetch`.
 
 ```js [[1, 1, "fetchData()"], [2, 8, "getData()"], [3, 10, "getData()"]]
 async function fetchData() {
@@ -248,9 +248,9 @@ async function MyComponent() {
 }
 ```
 
-In calling <CodeStep step={2}>`getData` the first time, the promise returned from <CodeStep step={1}>`fetchData` is cached. Subsequent look-ups will then return the same promise.
+In calling `getData` the first time, the promise returned from `fetchData` is cached. Subsequent look-ups will then return the same promise.
 
-Notice that the first <CodeStep step={2}>`getData` call does not `await` whereas the second does. [`await`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await) is a JavaScript operator that will wait and return the settled result of the promise. The first <CodeStep step={2}>`getData` call simply initiates the `fetch` to cache the promise for the second <CodeStep step={3}>`getData` to look-up.
+Notice that the first `getData` call does not `await` whereas the second does. [`await`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await) is a JavaScript operator that will wait and return the settled result of the promise. The first `getData` call simply initiates the `fetch` to cache the promise for the second `getData` to look-up.
 
 If by the second call the promise is still *pending*, then `await` will pause for the result. The optimization is that while we wait on the `fetch`, React can continue with computational work, thus reducing the wait time for the second call.
 
@@ -275,7 +275,7 @@ async function DemoProfile() {
 }
 ```
 
-React only provides cache access to the memoized function in a component. When calling <CodeStep step={1}>`getUser` outside of a component, it will still evaluate the function but not read or update the cache.
+React only provides cache access to the memoized function in a component. When calling `getUser` outside of a component, it will still evaluate the function but not read or update the cache.
 
 This is because cache access is provided through a [context](/learn/passing-data-deeply-with-context) which is only accessible from a component.
 

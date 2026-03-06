@@ -11,7 +11,7 @@ import { Hono } from 'hono'
 import { css, cx, keyframes, Style } from 'hono/css'
 ```
 
-## `css`&#x20;
+## `css` <Badge style="vertical-align: middle;" type="warning" text="Experimental" />
 
 You can write CSS in the `css` template literal. In this case, it uses `headerClass` as a value of the `class` attribute. Don't forget to add `<Style />` as it contains the CSS content.
 
@@ -23,14 +23,14 @@ app.get('/', (c) => {
     padding: 1rem;
   `
   return c.html(
-    <html>
-      <head>
-        <Style />
-      </head>
-      <body>
-        <h1 class={headerClass}>Hello!</h1>
-      </body>
-    </html>
+    
+      
+        
+      
+      
+        Hello!
+      
+    
   )
 })
 ```
@@ -82,11 +82,11 @@ const containerClass = css`
   }
 `
 return c.render(
-  <div class={containerClass}>
-    <header class={headerClass}>
-      <h1>Hello!</h1>
-    </header>
-  </div>
+  
+    
+      Hello!
+    
+  
 )
 ```
 
@@ -104,10 +104,10 @@ const globalClass = css`
 `
 
 return c.render(
-  <div class={globalClass}>
-    <h1>Hello!</h1>
-    <p>Today is a good day.</p>
-  </div>
+  
+    Hello!
+    Today is a good day.
+  
 )
 ```
 
@@ -116,24 +116,24 @@ Or you can write CSS in the `<Style />` component with the `css` literal.
 ```tsx
 export const renderer = jsxRenderer(({ children, title }) => {
   return (
-    <html>
-      <head>
-        <Style>{css`
+    
+      
+        {css`
           html {
             font-family: Arial, Helvetica, sans-serif;
           }
-        `}</Style>
-        <title>{title}</title>
-      </head>
-      <body>
-        <div>{children}</div>
-      </body>
-    </html>
+        `}
+        {title}
+      
+      
+        {children}
+      
+    
   )
 })
 ```
 
-## `keyframes`&#x20;
+## `keyframes` <Badge style="vertical-align: middle;" type="warning" text="Experimental" />
 
 You can use `keyframes` to write the contents of `@keyframes`. In this case, `fadeInAnimation` will be the name of the animation
 
@@ -150,10 +150,10 @@ const headerClass = css`
   animation-name: ${fadeInAnimation};
   animation-duration: 2s;
 `
-const Header = () => <a class={headerClass}>Hello!</a>
+const Header = () => Hello!
 ```
 
-## `cx`&#x20;
+## `cx` <Badge style="vertical-align: middle;" type="warning" text="Experimental" />
 
 The `cx` composites the two class names.
 
@@ -165,14 +165,14 @@ const primaryClass = css`
   background: orange;
 `
 const Button = () => (
-  <a class={cx(buttonClass, primaryClass)}>Click!</a>
+  Click!
 )
 ```
 
 It can also compose simple strings.
 
 ```tsx
-const Header = () => <a class={cx('h1', primaryClass)}>Hi</a>
+const Header = () => Hi
 ```
 
 ## Usage in combination with [Secure Headers](/docs/middleware/builtin/secure-headers) middleware
@@ -199,15 +199,15 @@ app.get('/', (c) => {
     padding: 1rem;
   `
   return c.html(
-    <html>
-      <head>
+    
+      
         {/* Set the `nonce` attribute on the css helpers `style` and `script` elements */}
-        <Style nonce={c.get('secureHeadersNonce')} />
-      </head>
-      <body>
-        <h1 class={headerClass}>Hello!</h1>
-      </body>
-    </html>
+        
+      
+      
+        Hello!
+      
+    
   )
 })
 ```

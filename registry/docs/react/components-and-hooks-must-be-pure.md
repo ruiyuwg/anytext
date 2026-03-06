@@ -136,7 +136,7 @@ function FriendList({ friends }) {
 
 There is no need to contort your code to avoid local mutation. [`Array.map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) could also be used here for brevity, but there is nothing wrong with creating a local array and then pushing items into it [during render](#how-does-react-run-your-code).
 
-Even though it looks like we are mutating `items`, the key point to note is that this code only does so *locally* – the mutation isn't "remembered" when the component is rendered again. In other words, `items` only stays around as long as the component does. Because `items` is always *recreated* every time \`\` is rendered, the component will always return the same result.
+Even though it looks like we are mutating `items`, the key point to note is that this code only does so *locally* – the mutation isn't "remembered" when the component is rendered again. In other words, `items` only stays around as long as the component does. Because `items` is always *recreated* every time `<FriendList />` is rendered, the component will always return the same result.
 
 On the other hand, if `items` was created outside of the component, it holds on to its previous values and remembers changes:
 
@@ -153,7 +153,7 @@ function FriendList({ friends }) {
 }
 ```
 
-When ``runs again, we will continue appending `friends` to `items` every time that component is run, leading to multiple duplicated results. This version of`` has observable side effects [during render](#how-does-react-run-your-code) and **breaks the rule**.
+When `<FriendList />` runs again, we will continue appending `friends` to `items` every time that component is run, leading to multiple duplicated results. This version of `<FriendList />` has observable side effects [during render](#how-does-react-run-your-code) and **breaks the rule**.
 
 #### Lazy initialization {/*lazy-initialization*/}
 

@@ -200,7 +200,7 @@ describe('<AboutPage />', () => {
 > **Good to know**:
 >
 > - Cypress currently doesn't support Component Testing for `async` Server Components. We recommend using E2E testing.
-> - Since component tests do not require a Next.js server, features like \`\` that rely on a server being available may not function out-of-the-box.
+> - Since component tests do not require a Next.js server, features like `<Image />` that rely on a server being available may not function out-of-the-box.
 
 ### Running Component Tests
 

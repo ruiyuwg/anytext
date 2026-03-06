@@ -54,7 +54,7 @@ module.exports = {
 
 If you don't configure `cacheHandlers`, Next.js uses an in-memory LRU (Least Recently Used) cache for both `default` and `remote`. You can view the [default implementation](https://github.com/vercel/next.js/blob/canary/packages/next/src/server/lib/cache-handlers/default.ts) as a reference.
 
-You can also define additional named handlers (e.g., `sessions`, `analytics`) and reference them with `'use cache: '`.
+You can also define additional named handlers (e.g., `sessions`, `analytics`) and reference them with `'use cache: <name>'`.
 
 Note that `'use cache: private'` does not use cache handlers and cannot be customized.
 

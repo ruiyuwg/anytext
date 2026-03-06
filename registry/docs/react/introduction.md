@@ -77,7 +77,7 @@ React Compiler automatically applies the optimal memoization, ensuring your app 
 React Compiler's automatic memoization is primarily focused on **improving update performance** (re-rendering existing components), so it focuses on these two use cases:
 
 1. **Skipping cascading re-rendering of components**
-   - Re-rendering `causes many components in its component tree to re-render, even though only` has changed
+   - Re-rendering `<Parent />` causes many components in its component tree to re-render, even though only `<Parent />` has changed
 2. **Skipping expensive calculations from outside of React**
    - For example, calling `expensivelyProcessAReallyLargeArrayOfObjects()` inside of your component or hook that needs that data
 
@@ -105,7 +105,7 @@ function FriendList({ friends }) {
 
 [*See this example in the React Compiler Playground*](https://playground.react.dev/#N4Igzg9grgTgxgUxALhAMygOzgFwJYSYAEAYjHgpgCYAyeYOAFMEWuZVWEQL4CURwADrEicQgyKEANnkwIAwtEw4iAXiJQwCMhWoB5TDLmKsTXgG5hRInjRFGbXZwB0UygHMcACzWr1ABn4hEWsYBBxYYgAeADkIHQ4uAHoAPksRbisiMIiYYkYs6yiqPAA3FMLrIiiwAAcAQ0wU4GlZBSUcbklDNqikusaKkKrgR0TnAFt62sYHdmp+VRT7SqrqhOo6Bnl6mCoiAGsEAE9VUfmqZzwqLrHqM7ubolTVol5eTOGigFkEMDB6u4EAAhKA4HCEZ5DNZ9ErlLIWYTcEDcIA)
 
-React Compiler automatically applies the equivalent of manual memoization, ensuring that only the relevant parts of an app re-render as state changes, which is sometimes referred to as "fine-grained reactivity". In the above example, React Compiler determines that the return value of \`\` can be reused even as `friends` changes, and can avoid recreating this JSX *and* avoid re-rendering `<MessageButton>` as the count changes.
+React Compiler automatically applies the equivalent of manual memoization, ensuring that only the relevant parts of an app re-render as state changes, which is sometimes referred to as "fine-grained reactivity". In the above example, React Compiler determines that the return value of `<FriendListCard />` can be reused even as `friends` changes, and can avoid recreating this JSX *and* avoid re-rendering `<MessageButton>` as the count changes.
 
 #### Expensive calculations also get memoized {/*expensive-calculations-also-get-memoized*/}
 

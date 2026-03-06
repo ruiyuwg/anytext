@@ -76,6 +76,7 @@ app.get('/', (c) => {
 })
 ```
 
+::: warning
 When `c.req.header()` is called with no arguments, all keys in the returned record are **lowercase**.
 
 If you want to get the value of a header with an uppercase name,
@@ -89,6 +90,8 @@ const foo = headerRecord['X-Foo']
 // ✅ Will work
 const foo = c.req.header('X-Foo')
 ```
+
+:::
 
 ## parseBody()
 
@@ -268,7 +271,9 @@ See the [Validation section](/docs/guides/validation) for usage examples.
 
 ## routePath
 
+::: warning
 **Deprecated in v4.8.0**: This property is deprecated. Use `routePath()` from [Route Helper](/docs/helpers/route) instead.
+:::
 
 You can retrieve the registered path within the handler like this:
 
@@ -289,7 +294,9 @@ If you access `/posts/123`, it will return `/posts/:id`:
 
 ## matchedRoutes
 
+::: warning
 **Deprecated in v4.8.0**: This property is deprecated. Use `matchedRoutes()` from [Route Helper](/docs/helpers/route) instead.
+:::
 
 It returns matched routes within the handler, which is useful for debugging.
 

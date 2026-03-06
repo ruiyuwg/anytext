@@ -28,12 +28,12 @@ type Env = {
   }
 }
 
-const factory = createFactory<Env>()
+const factory = createFactory()
 ```
 
 ### Options
 
-### &#x20;defaultAppOptions: `HonoOptions`
+### <Badge type="info" text="optional" /> defaultAppOptions: `HonoOptions`
 
 The default options to pass to the Hono application created by `createApp()`.
 
@@ -110,10 +110,10 @@ type Env = {
 }
 
 // 1. Set the `Env` to `new Hono()`
-const app = new Hono<Env>()
+const app = new Hono()
 
 // 2. Set the `Env` to `createMiddleware()`
-const mw = createMiddleware<Env>(async (c, next) => {
+const mw = createMiddleware(async (c, next) => {
   await next()
 })
 
@@ -128,7 +128,7 @@ import { createFactory } from 'hono/factory'
 // ...
 
 // Set the `Env` to `createFactory()`
-const factory = createFactory<Env>()
+const factory = createFactory()
 
 const app = factory.createApp()
 
@@ -151,7 +151,7 @@ type Env = {
   }
 }
 
-export default createFactory<Env>({
+export default createFactory({
   initApp: (app) => {
     app.use(async (c, next) => {
       const db = drizzle(c.env.MY_DB)

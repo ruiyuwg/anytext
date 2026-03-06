@@ -42,7 +42,7 @@ import { Hono, Context } from 'hono'
 import { HTTPException } from 'hono/http-exception'
 const app = new Hono()
 declare const message: string
-declare const authorize: (c: Context) => Promise<void>
+declare const authorize: (c: Context) => Promise
 // ---cut---
 app.post('/login', async (c) => {
   try {
@@ -79,4 +79,6 @@ app.onError((error, c) => {
 })
 ```
 
+::: warning
 **`HTTPException.getResponse` is not aware of `Context`**. To include headers already set in `Context`, you must apply them to a new `Response`.
+:::

@@ -199,7 +199,7 @@ function proxy(request: NextRequest) {
 
 # notFound
 
-The `notFound` function allows you to render the [`not-found file`](/docs/app/api-reference/file-conventions/not-found) within a route segment as well as inject a [\`\`](/docs/app/api-reference/file-conventions/loading#status-codes) tag for search engines.
+The `notFound` function allows you to render the [`not-found file`](/docs/app/api-reference/file-conventions/not-found) within a route segment as well as inject a [`<meta name="robots" content="noindex" />`](/docs/app/api-reference/file-conventions/loading#status-codes) tag for search engines.
 
 ## `notFound()`
 

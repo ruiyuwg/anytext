@@ -100,6 +100,7 @@ app.use(
 )
 ```
 
+::: warning
 In Deno, it is possible to use a different version of middleware than the Hono version, but this can lead to bugs.
 For example, this code is not working because the version is different.
 
@@ -116,6 +117,8 @@ app.get(
   }))
 )
 ```
+
+:::
 
 ## Custom Middleware
 
@@ -152,11 +155,14 @@ const logger = createMiddleware(async (c, next) => {
 })
 ```
 
+:::info
 Type generics can be used with `createMiddleware`:
 
 ```ts
 createMiddleware<{Bindings: Bindings}>(async (c, next) =>
 ```
+
+:::
 
 ### Modify the Response After Next
 

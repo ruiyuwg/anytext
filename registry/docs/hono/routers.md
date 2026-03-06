@@ -85,7 +85,6 @@ An application using only PatternRouter is under 15KB in size.
 ```console
 $ npx wrangler deploy --minify ./src/index.ts
  ⛅️ wrangler 3.20.0
-
 Total Upload: 14.68 KiB / gzip: 5.38 KiB
 ```
 

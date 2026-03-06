@@ -47,7 +47,7 @@ This function does not accept any parameters.
 
 ### Cancel in-flight requests {/*cancel-in-flight-requests*/}
 
-Call <CodeStep step={1}>`cacheSignal` to abort in-flight requests.
+Call `cacheSignal` to abort in-flight requests.
 
 ```js [[1, 4, "cacheSignal()"]]
 import {cache, cacheSignal} from 'react';
@@ -70,7 +70,7 @@ async function Component() {
 
 ### Ignore errors after React has finished rendering {/*ignore-errors-after-react-has-finished-rendering*/}
 
-If a function throws, it may be due to cancellation (e.g. the Database connection has been closed). You can use the <CodeStep step={2}>`aborted` property to check if the error was due to cancellation or a real error. You may want to ignore errors that were due to cancellation.
+If a function throws, it may be due to cancellation (e.g. the Database connection has been closed). You can use the `aborted` property to check if the error was due to cancellation or a real error. You may want to ignore errors that were due to cancellation.
 
 ```js [[1, 2, "./database"], [2, 8, "cacheSignal()?.aborted"], [3, 12, "return null"]]
 import {cacheSignal} from "react";

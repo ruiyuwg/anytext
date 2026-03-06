@@ -30,7 +30,7 @@ export default function App() {
 }
 ```
 
-To get status information, the `Submit` component must be rendered within a `<form>`. The Hook returns information like the <CodeStep step={1}>`pending` property which tells you if the form is actively submitting.
+To get status information, the `Submit` component must be rendered within a `<form>`. The Hook returns information like the `pending` property which tells you if the form is actively submitting.
 
 In the above example, `Submit` uses this information to disable `<button>` presses while the form is submitting.
 

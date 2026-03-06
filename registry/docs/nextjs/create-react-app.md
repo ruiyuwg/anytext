@@ -109,7 +109,7 @@ export default function RootLayout({ children }) {
 }
 ```
 
-Now copy the content of your old `index.html` into this `<RootLayout>` component. Replace `body div#root` (and `body noscript`) with `{children}`.
+Now copy the content of your old `index.html` into this `<RootLayout>` component. Replace `body div#root` (and `body noscript`) with `<div id="root">{children}</div>`.
 
 ```tsx filename="app/layout.tsx" switcher
 export default function RootLayout({
@@ -157,7 +157,7 @@ export default function RootLayout({ children }) {
 
 ### Step 4: Metadata
 
-Next.js automatically includes the `and` tags, so you can remove them from `<head>`:
+Next.js automatically includes the `<meta charset="UTF-8" />` and `<meta name="viewport" content="width=device-width, initial-scale=1" />` tags, so you can remove them from `<head>`:
 
 ```tsx filename="app/layout.tsx" switcher
 export default function RootLayout({
@@ -380,7 +380,7 @@ export function ClientOnly() {
 ```
 
 - The `'use client'` directive makes this file a **Client Component**.
-- The `dynamic` import with `ssr: false` disables server-side rendering for the \`\` component, making it truly client-only (SPA).
+- The `dynamic` import with `ssr: false` disables server-side rendering for the `<App />` component, making it truly client-only (SPA).
 
 Now update your `page.tsx` (or `page.js`) to use your new component:
 

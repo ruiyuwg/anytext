@@ -815,7 +815,7 @@ Let's see what exactly happens as the user navigates around the app.
 
 #### Initial render {/*initial-render*/}
 
-The user visits \`\`. Let's [mentally substitute](/learn/state-as-a-snapshot#rendering-takes-a-snapshot-in-time) `roomId` with `'general'`:
+The user visits `<ChatRoom roomId="general" />`. Let's [mentally substitute](/learn/state-as-a-snapshot#rendering-takes-a-snapshot-in-time) `roomId` with `'general'`:
 
 ```js
   // JSX for the first render (roomId = "general")
@@ -839,7 +839,7 @@ React runs this Effect, which connects to the `'general'` chat room.
 
 #### Re-render with same dependencies {/*re-render-with-same-dependencies*/}
 
-Let's say \`\` re-renders. The JSX output is the same:
+Let's say `<ChatRoom roomId="general" />` re-renders. The JSX output is the same:
 
 ```js
   // JSX for the second render (roomId = "general")
@@ -865,7 +865,7 @@ React compares `['general']` from the second render with `['general']` from the 
 
 #### Re-render with different dependencies {/*re-render-with-different-dependencies*/}
 
-Then, the user visits \`\`. This time, the component returns different JSX:
+Then, the user visits `<ChatRoom roomId="travel" />`. This time, the component returns different JSX:
 
 ```js
   // JSX for the third render (roomId = "travel")
@@ -913,7 +913,7 @@ When [Strict Mode](/reference/react/StrictMode) is on, React remounts every comp
 
 #### Focus a field on mount {/*focus-a-field-on-mount*/}
 
-In this example, the form renders a \`\` component.
+In this example, the form renders a `<MyInput />` component.
 
 Use the input's [`focus()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus) method to make `MyInput` automatically focus when it appears on the screen. There is already a commented out implementation, but it doesn't quite work. Figure out why it doesn't work, and fix it. (If you're familiar with the `autoFocus` attribute, pretend that it does not exist: we are reimplementing the same functionality from scratch.)
 
@@ -1066,9 +1066,9 @@ body {
 
 #### Focus a field conditionally {/*focus-a-field-conditionally*/}
 
-This form renders two \`\` components.
+This form renders two `<MyInput />` components.
 
-Press "Show form" and notice that the second field automatically gets focused. This is because both of the \`\` components try to focus the field inside. When you call `focus()` for two input fields in a row, the last one always "wins".
+Press "Show form" and notice that the second field automatically gets focused. This is because both of the `<MyInput />` components try to focus the field inside. When you call `focus()` for two input fields in a row, the last one always "wins".
 
 Let's say you want to focus the first field. The first `MyInput` component now receives a boolean `shouldFocus` prop set to `true`. Change the logic so that `focus()` is only called if the `shouldFocus` prop received by `MyInput` is `true`.
 

@@ -110,7 +110,7 @@ The `@next/eslint-plugin-next` rules included are:
 
 We recommend using an appropriate [integration](https://eslint.org/docs/user-guide/integrations#editors) to view warnings and errors directly in your code editor during development.
 
-<summary>`next lint` removal
+`next lint` removal
 
 Starting with Next.js 16, `next lint` is removed.
 

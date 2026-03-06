@@ -73,7 +73,7 @@ app.use(
 
 ## Options
 
-### &#x20;origin: `string` | `string[]` | `Function`
+### <Badge type="info" text="optional" /> origin: `string` | `string[]` | `Function`
 
 Specify allowed origins for CSRF protection.
 
@@ -85,7 +85,7 @@ Specify allowed origins for CSRF protection.
 
 The function handler receives the request's `Origin` header value and the request context, allowing for dynamic validation based on request properties like path, headers, or other context data.
 
-### &#x20;secFetchSite: `string` | `string[]` | `Function`
+### <Badge type="info" text="optional" /> secFetchSite: `string` | `string[]` | `Function`
 
 Specify allowed Sec-Fetch-Site header values for CSRF protection using [Fetch Metadata](https://web.dev/articles/fetch-metadata).
 

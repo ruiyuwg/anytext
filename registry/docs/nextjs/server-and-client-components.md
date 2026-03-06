@@ -171,7 +171,7 @@ Once a file is marked with `"use client"`, **all its imports and child component
 
 To reduce the size of your client JavaScript bundles, add `'use client'` to specific interactive components instead of marking large parts of your UI as Client Components.
 
-For example, the `<Layout>` component contains mostly static elements like a logo and navigation links, but includes an interactive search bar. \`\` is interactive and needs to be a Client Component, however, the rest of the layout can remain a Server Component.
+For example, the `<Layout>` component contains mostly static elements like a logo and navigation links, but includes an interactive search bar. `<Search />` is interactive and needs to be a Client Component, however, the rest of the layout can remain a Server Component.
 
 ```tsx filename="app/layout.tsx" highlight={12} switcher
 // Client Component
@@ -593,9 +593,9 @@ Since `getUser` is wrapped with `React.cache`, multiple calls within the same re
 
 When using a third-party component that relies on client-only features, you can wrap it in a Client Component to ensure it works as expected.
 
-For example, the \`\` can be imported from the `acme-carousel` package. This component uses `useState`, but it doesn't yet have the `"use client"` directive.
+For example, the `<Carousel />` can be imported from the `acme-carousel` package. This component uses `useState`, but it doesn't yet have the `"use client"` directive.
 
-If you use \`\` within a Client Component, it will work as expected:
+If you use `<Carousel />` within a Client Component, it will work as expected:
 
 ```tsx filename="app/gallery.tsx" switcher
 'use client'
@@ -635,7 +635,7 @@ export default function Gallery() {
 }
 ```
 
-However, if you try to use it directly within a Server Component, you'll see an error. This is because Next.js doesn't know \`\` is using client-only features.
+However, if you try to use it directly within a Server Component, you'll see an error. This is because Next.js doesn't know `<Carousel />` is using client-only features.
 
 To fix this, you can wrap third-party components that rely on client-only features in your own Client Components:
 
@@ -655,7 +655,7 @@ import { Carousel } from 'acme-carousel'
 export default Carousel
 ```
 
-Now, you can use \`\` directly within a Server Component:
+Now, you can use `<Carousel />` directly within a Server Component:
 
 ```tsx filename="app/page.tsx" switcher
 import Carousel from './carousel'

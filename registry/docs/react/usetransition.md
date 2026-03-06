@@ -121,8 +121,8 @@ function CheckoutForm() {
 
 `useTransition` returns an array with exactly two items:
 
-1. The <CodeStep step={1}>`isPending` flag that tells you whether there is a pending Transition.
-2. The <CodeStep step={2}>`startTransition` function that lets you create an Action.
+1. The `isPending` flag that tells you whether there is a pending Transition.
+2. The `startTransition` function that lets you create an Action.
 
 To start a Transition, pass a function to `startTransition` like this:
 

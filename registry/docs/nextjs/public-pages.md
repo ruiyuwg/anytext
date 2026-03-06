@@ -39,7 +39,7 @@ export default async function Page() {
 
 #### Static components
 
-The \`\` component doesn't depend on any inputs that change between requests, such as: external data, request headers, route params, the current time, or random values.
+The `<Header />` component doesn't depend on any inputs that change between requests, such as: external data, request headers, route params, the current time, or random values.
 
 Since its output never changes and can be determined ahead of time, this kind of component is called a **static** component. With no reason to wait for a request, Next.js can safely **prerender** the page at [build time](/docs/app/glossary#build-time).
 

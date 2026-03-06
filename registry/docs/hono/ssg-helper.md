@@ -17,12 +17,12 @@ app.get('/', (c) => c.html('Hello, World!'))
 app.use('/about', async (c, next) => {
   c.setRenderer((content) => {
     return c.html(
-      <html>
-        <head />
-        <body>
-          <p>{content}</p>
-        </body>
-      </html>
+      
+        
+        
+          {content}
+        
+      
     )
   })
   await next()
@@ -31,7 +31,7 @@ app.use('/about', async (c, next) => {
 app.get('/about', (c) => {
   return c.render(
     <>
-      <title>Hono SSG Page</title>Hello!
+      Hono SSG PageHello!
     </>
   )
 })
@@ -79,7 +79,7 @@ export interface ToSSGInterface {
     app: Hono,
     fsModule: FileSystemModule,
     options?: ToSSGOptions
-  ): Promise<ToSSGResult>
+  ): Promise
 }
 ```
 
@@ -88,11 +88,11 @@ export interface ToSSGInterface {
 
 ```ts
 export interface FileSystemModule {
-  writeFile(path: string, data: string | Uint8Array): Promise<void>
+  writeFile(path: string, data: string | Uint8Array): Promise
   mkdir(
     path: string,
     options: { recursive: boolean }
-  ): Promise<void | string>
+  ): Promise
 }
 ```
 
@@ -207,9 +207,9 @@ app.get(
       return c.notFound()
     }
     return c.render(
-      <div>
-        <h1>{shop.name}</h1>
-      </div>
+      
+        {shop.name}
+      
     )
   }
 )
@@ -228,7 +228,7 @@ app.get('/api', disableSSG(), (c) => c.text('an-api'))
 Routes with the `onlySSG` middleware set will be overridden by `c.notFound()` after `toSSG` execution.
 
 ```ts
-app.get('/static-page', onlySSG(), (c) => c.html(<h1>Welcome to my site</h1>))
+app.get('/static-page', onlySSG(), (c) => c.html(Welcome to my site))
 ```
 
 ## Plugins
@@ -289,7 +289,7 @@ export type BeforeRequestHook = (req: Request) => Request | false
 export type AfterResponseHook = (res: Response) => Response | false
 export type AfterGenerateHook = (
   result: ToSSGResult
-) => void | Promise<void>
+) => void | Promise
 ```
 
 - **BeforeRequestHook**: Called before processing each request. Return `false` to skip the route.
@@ -366,9 +366,9 @@ export const sitemapPlugin = (baseURL: string): SSGPlugin => {
         new URL(file, baseURL).toString()
       )
       const siteMapText = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
 ${urls.map((url) => `<url><loc>${url}</loc></url>`).join('\n')}
-</urlset>`
+`
       fsModule.writeFile(filePath, siteMapText)
     },
   }

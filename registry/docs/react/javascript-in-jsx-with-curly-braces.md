@@ -87,7 +87,7 @@ export default function TodoList() {
 
 You can only use curly braces in two ways inside JSX:
 
-1. **As text** directly inside a JSX tag: `{name}'s To Do List` works, but `<{tag}>Gregorio Y. Zara's To Do List</{tag}>`  will not.
+1. **As text** directly inside a JSX tag: `<h1>{name}'s To Do List</h1>` works, but `<{tag}>Gregorio Y. Zara's To Do List</{tag}>`  will not.
 2. **As attributes** immediately following the `=` sign: `src={avatar}` will read the `avatar` variable, but `src="{avatar}"` will pass the string `"{avatar}"`.
 
 ## Using "double curlies": CSS and other objects in JSX {/*using-double-curlies-css-and-other-objects-in-jsx*/}
@@ -241,9 +241,9 @@ Can you find the problem?
 
 Look for what's inside the curly braces. Are we putting the right thing there?
 
-This is happening because this example renders *an object itself* into the markup rather than a string: `{person}'s Todos` is trying to render the entire `person` object! Including raw objects as text content throws an error because React doesn't know how you want to display them.
+This is happening because this example renders *an object itself* into the markup rather than a string: `<h1>{person}'s Todos</h1>` is trying to render the entire `person` object! Including raw objects as text content throws an error because React doesn't know how you want to display them.
 
-To fix it, replace `{person}'s Todos` with `{person.name}'s Todos`:
+To fix it, replace `<h1>{person}'s Todos</h1>` with `<h1>{person.name}'s Todos</h1>`:
 
 ```js
 const person = {

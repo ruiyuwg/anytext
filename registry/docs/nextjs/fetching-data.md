@@ -535,7 +535,7 @@ export default async function Page({ params }) {
 
 You can preload data by creating a utility function that you eagerly call above blocking requests. `<Item>` conditionally renders based on the `checkIsAvailable()` function.
 
-You can call `preload()` before `checkIsAvailable()` to eagerly initiate `data dependencies. By the time` is rendered, its data has already been fetched.
+You can call `preload()` before `checkIsAvailable()` to eagerly initiate `<Item/>` data dependencies. By the time `<Item/>` is rendered, its data has already been fetched.
 
 ```tsx filename="app/item/[id]/page.tsx" switcher
 import { getItem, checkIsAvailable } from '@/lib/data'

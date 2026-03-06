@@ -119,7 +119,7 @@ export default async function Page(props) {
 
 Prerendering stops at the `fetch` request. The request itself is not started, and any code after it is not executed.
 
-The fallback (`Loading...`) is included in the static shell, while the component's content streams at request time.
+The fallback (`<p>Loading...</p>`) is included in the static shell, while the component's content streams at request time.
 
 In this example, since all operations (network request, database query, file read, and timeout) run sequentially within the same component, the content won't appear until they all complete.
 

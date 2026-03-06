@@ -109,7 +109,7 @@ See [more benchmarks](/docs/concepts/benchmarks).
 ```
 $ npx wrangler dev --minify ./src/index.ts
  ⛅️ wrangler 2.20.0
-
+--------------------
 ⬣ Listening at http://0.0.0.0:8787
 - http://127.0.0.1:8787
 - http://192.168.128.165:8787

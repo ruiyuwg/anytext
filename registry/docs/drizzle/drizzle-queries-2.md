@@ -583,7 +583,7 @@ you can use the following query with the Drizzle relational query builder.
 ```typescript copy
 const res = await db._query.users.findMany({
 	extras: {
-		fullName: sql<string>`concat(${users.name}, " ", ${users.name})`.as('full_name'),
+		fullName: sql`concat(${users.name}, " ", ${users.name})`.as('full_name'),
 	},
 	with: {
 		usersToGroups: {
@@ -620,12 +620,12 @@ To retrieve all posts with comments and add an additional field to calculate the
 ```typescript copy
 const res = await db._query.posts.findMany({
 	extras: (table, { sql }) => ({
-		contentLength: (sql<number>`length(${table.content})`).as('content_length'),
+		contentLength: (sql`length(${table.content})`).as('content_length'),
 	}),
 	with: {
 		comments: {
 			extras: {
-				commentSize: sql<number>`length(${comments.content})`.as('comment_size'),
+				commentSize: sql`length(${comments.content})`.as('comment_size'),
 			},
 		},
 	},

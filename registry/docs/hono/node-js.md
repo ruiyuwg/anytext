@@ -4,6 +4,7 @@
 
 Hono was not designed for Node.js at first. But with a [Node.js Adapter](https://github.com/honojs/node-server) it can run on Node.js as well.
 
+::: info
 It works on Node.js versions greater than 18.x. The specific required Node.js versions are as follows:
 
 - 18.x => 18.14.1+
@@ -11,12 +12,15 @@ It works on Node.js versions greater than 18.x. The specific required Node.js ve
 - 20.x => 20.0.0+
 
 Essentially, you can simply use the latest version of each major release.
+:::
 
 ## 1. Setup
 
 A starter for Node.js is available.
 Start your project with "create-hono" command.
 Select `nodejs` template for this example.
+
+::: code-group
 
 ```sh [npm]
 npm create hono@latest my-app
@@ -38,7 +42,10 @@ bun create hono@latest my-app
 deno init --npm hono my-app
 ```
 
+:::
 Move to `my-app` and install the dependencies.
+
+::: code-group
 
 ```sh [npm]
 cd my-app
@@ -59,6 +66,8 @@ pnpm i
 cd my-app
 bun i
 ```
+
+:::
 
 ## 2. Hello World
 
@@ -99,6 +108,8 @@ process.on('SIGTERM', () => {
 
 Run the development server locally. Then, access `http://localhost:3000` in your Web browser.
 
+::: code-group
+
 ```sh [npm]
 npm run dev
 ```
@@ -110,6 +121,8 @@ yarn dev
 ```sh [pnpm]
 pnpm dev
 ```
+
+:::
 
 ## Change port number
 
@@ -227,6 +240,8 @@ const server = serve({
 
 ## Building & Deployment
 
+::: code-group
+
 ```sh [npm]
 npm run build
 ```
@@ -243,7 +258,9 @@ pnpm run build
 bun run build
 ```
 
+::: info
 Apps with a front-end framework may need to use [Hono's Vite plugins](https://github.com/honojs/vite-plugins).
+:::
 
 ### Dockerfile
 

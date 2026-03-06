@@ -33,7 +33,7 @@ console.log(clonedElement); // <Row title="Cabbage" isHighlighted={true}>Goodbye
 
 #### Parameters {/*parameters*/}
 
-- `element`: The `element` argument must be a valid React element. For example, it could be a JSX node like \`\`, the result of calling [`createElement`](/reference/react/createElement), or the result of another `cloneElement` call.
+- `element`: The `element` argument must be a valid React element. For example, it could be a JSX node like `<Something />`, the result of calling [`createElement`](/reference/react/createElement), or the result of another `cloneElement` call.
 
 - `props`: The `props` argument must either be an object or `null`. If you pass `null`, the cloned element will retain all of the original `element.props`. Otherwise, for every prop in the `props` object, the returned element will "prefer" the value from `props` over the value from `element.props`. The rest of the props will be filled from the original `element.props`. If you pass `props.key` or `props.ref`, they will replace the original ones.
 
@@ -76,7 +76,7 @@ const clonedElement = cloneElement(
 );
 ```
 
-Here, the resulting cloned element will be \`\`.
+Here, the resulting cloned element will be `<Row title="Cabbage" isHighlighted={true} />`.
 
 **Let's walk through an example to see when it's useful.**
 
@@ -214,7 +214,7 @@ button {
 }
 ```
 
-To summarize, the `List` cloned the \`\` elements it received and added an extra prop to them.
+To summarize, the `List` cloned the `<Row />` elements it received and added an extra prop to them.
 
 Cloning children makes it hard to tell how the data flows through your app. Try one of the [alternatives.](#alternatives)
 

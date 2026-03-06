@@ -45,6 +45,8 @@ app.get('/streamText', (c) => {
 })
 ```
 
+::: warning
+
 If you are developing an application for Cloudflare Workers, a streaming may not work well on Wrangler. If so, add `Identity` for `Content-Encoding` header.
 
 ```ts
@@ -55,6 +57,8 @@ app.get('/streamText', (c) => {
   })
 })
 ```
+
+:::
 
 ## `streamSSE()`
 
@@ -110,6 +114,10 @@ app.get('/stream', (c) => {
 
 The stream will be automatically closed after the callbacks are executed.
 
+::: warning
+
 If the callback function of the streaming helper throws an error, the `onError` event of Hono will not be triggered.
 
 `onError` is a hook to handle errors before the response is sent and overwrite the response. However, when the callback function is executed, the stream has already started, so it cannot be overwritten.
+
+:::

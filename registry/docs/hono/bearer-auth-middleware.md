@@ -89,32 +89,32 @@ app.use(
 
 ## Options
 
-### &#x20;token: `string` | `string[]`
+### <Badge type="danger" text="required" /> token: `string` | `string[]`
 
 The string to validate the incoming bearer token against.
 
-### &#x20;realm: `string`
+### <Badge type="info" text="optional" /> realm: `string`
 
 The domain name of the realm, as part of the returned WWW-Authenticate challenge header. The default is `""`.
 See more: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/WWW-Authenticate#directives
 
-### &#x20;prefix: `string`
+### <Badge type="info" text="optional" /> prefix: `string`
 
 The prefix (or known as `schema`) for the Authorization header value. The default is `"Bearer"`.
 
-### &#x20;headerName: `string`
+### <Badge type="info" text="optional" /> headerName: `string`
 
 The header name. The default value is `Authorization`.
 
-### &#x20;hashFunction: `Function`
+### <Badge type="info" text="optional" /> hashFunction: `Function`
 
 A function to handle hashing for safe comparison of authentication tokens.
 
-### &#x20;verifyToken: `(token: string, c: Context) => boolean | Promise<boolean>`
+### <Badge type="info" text="optional" /> verifyToken: `(token: string, c: Context) => boolean | Promise<boolean>`
 
 The function to verify the token.
 
-### &#x20;noAuthenticationHeader: `object`
+### <Badge type="info" text="optional" /> noAuthenticationHeader: `object`
 
 Customizes the error response when the request does not have an authentication header.
 
@@ -123,14 +123,14 @@ Customizes the error response when the request does not have an authentication h
 
 `MessageFunction` is `(c: Context) => string | object | Promise<string | object>`.
 
-### &#x20;invalidAuthenticationHeader: `object`
+### <Badge type="info" text="optional" /> invalidAuthenticationHeader: `object`
 
 Customizes the error response when the authentication header format is invalid.
 
 - `wwwAuthenticateHeader`: `string | object | MessageFunction` - Customizes the WWW-Authenticate header value.
 - `message`: `string | object | MessageFunction` - The custom message for the response body.
 
-### &#x20;invalidToken: `object`
+### <Badge type="info" text="optional" /> invalidToken: `object`
 
 Customizes the error response when the token is invalid.
 

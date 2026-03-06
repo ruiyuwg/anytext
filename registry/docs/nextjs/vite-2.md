@@ -170,7 +170,7 @@ export default function RootLayout({ children }) {
 > **Good to know**: `.js`, `.jsx`, or `.tsx` extensions can be used for Layout files.
 
 3. Copy the content of your `index.html` file into the previously created `<RootLayout>` component while
-   replacing the `body.div#root` and `body.script` tags with `{children}`:
+   replacing the `body.div#root` and `body.script` tags with `<div id="root">{children}</div>`:
 
 ```tsx filename="app/layout.tsx" switcher
 export default function RootLayout({

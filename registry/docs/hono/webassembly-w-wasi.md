@@ -77,9 +77,15 @@ bun add hono
 bun add -D @bytecodealliance/jco @bytecodealliance/componentize-js @bytecodealliance/jco-std
 ```
 
+:::
+
+::: info
 To ensure your project uses ES modules, ensure `type` is set to `"module"` in `package.json`
+:::
 
 After entering the `my-app` folder, install dependencies, and initialize Typescript:
+
+::: code-group
 
 ```sh [npm]
 npm i
@@ -99,6 +105,8 @@ pnpm exec --init
 ```sh [bun]
 bun i
 ```
+
+:::
 
 Once you have a basic typescript configuration file (`tsconfig.json`), please ensure it has the following configuration:
 
@@ -122,7 +130,9 @@ export default defineConfig({
 })
 ```
 
+::: info
 Feel free to use any other bundlers that you're more comfortable with (`rolldown`, `esbuild`, `rollup`, etc)
+:::
 
 [jco]: https://github.com/bytecodealliance/jco
 
@@ -217,6 +227,8 @@ export { incomingHandler } from '@bytecodealliance/jco-std/wasi/0.2.6/http/adapt
 
 Since we're using Rolldown (and it's configured to handle Typescript compilation), we can use it to build and bundle:
 
+::: code-group
+
 ```sh [npm]
 npx rolldown -c
 ```
@@ -233,12 +245,18 @@ pnpm exec rolldown -c
 bun build --target=bun --outfile=dist/component.js ./src/component.ts
 ```
 
+:::
+
+::: info
 The bundling step is necessary because WebAssembly JS ecosystem tooling only currently supports a single JS file,
 and we'd like to include Hono along with related libraries.
 
 For components with simpler requirements, bundlers are not necessary.
+:::
 
 To build your WebAssembly component, use `jco` (and indirectly `componentize-js`):
+
+::: code-group
 
 ```sh [npm]
 npx jco componentize -w wit -o dist/component.wasm dist/component.js
@@ -256,6 +274,8 @@ pnpm exec jco componentize -w wit -o dist/component.wasm dist/component.js
 bun run jco componentize -w wit -o dist/component.wasm dist/component.js
 ```
 
+:::
+
 ## 3. Run
 
 To run your Hono WebAssembly HTTP server, you can use any WASI-enabled WebAssembly runtime:
@@ -265,9 +285,13 @@ To run your Hono WebAssembly HTTP server, you can use any WASI-enabled WebAssemb
 
 In this guide, we'll use `jco serve` since it's already installed.
 
+::: warning
 `jco serve` is meant for development, and is not recommended for production use.
+:::
 
 [wasmtime]: https://wasmtime.dev
+
+::: code-group
 
 ```sh [npm]
 npx jco serve dist/component.wasm
@@ -285,6 +309,8 @@ pnpm exec jco serve dist/component.wasm
 bun run jco serve dist/component.wasm
 ```
 
+:::
+
 You should see output like the following:
 
 ```
@@ -300,6 +326,7 @@ You should see output like the following:
 { "message": "Hello from WebAssembly!" }
 ```
 
+::: info
 `jco serve` works by converting the WebAssembly component into a basic WebAssembly coremodule,
 so that it can be run in runtimes like NodeJS and the browser.
 
@@ -307,6 +334,7 @@ This process is normally run via `jco transpile`, and is the way we can use JS e
 and the browser (which may use V8 or other Javascript engines) as WebAssembly Component runtimes.
 
 How `jco transpile` is outside the scope of this guide, you can read more about it in [the Jco book][jco-book]
+:::
 
 ## More information
 

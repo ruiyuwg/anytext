@@ -355,7 +355,7 @@ textarea {
 }
 ```
 
-React lets you override the default behavior, and *force* a component to reset its state by passing it a different `key`, like \`\`. This tells React that if the recipient is different, it should be considered a *different* `Chat` component that needs to be re-created from scratch with the new data (and UI like inputs). Now switching between the recipients resets the input field--even though you render the same component.
+React lets you override the default behavior, and *force* a component to reset its state by passing it a different `key`, like `<Chat key={email} />`. This tells React that if the recipient is different, it should be considered a *different* `Chat` component that needs to be re-created from scratch with the new data (and UI like inputs). Now switching between the recipients resets the input field--even though you render the same component.
 
 ```js src/App.js
 import { useState } from 'react';

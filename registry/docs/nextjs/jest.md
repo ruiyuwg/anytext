@@ -193,7 +193,7 @@ Finally, add a Jest `test` script to your `package.json` file:
 
 Your project is now ready to run tests. Create a folder called `__tests__` in your project's root directory.
 
-For example, we can add a test to check if the \`\` component successfully renders a heading:
+For example, we can add a test to check if the `<Page />` component successfully renders a heading:
 
 ```jsx filename="app/page.js"
 import Link from 'next/link'

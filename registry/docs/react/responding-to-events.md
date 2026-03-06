@@ -81,7 +81,7 @@ When you write code inline, the same pitfall presents itself in a different way:
 
 | passing a function (correct)            | calling a function (incorrect)    |
 | --------------------------------------- | --------------------------------- |
-| ` alert('...')}>` | `<button onClick={alert('...')}>` |
+| `<button onClick={() => alert('...')}>` | `<button onClick={alert('...')}>` |
 
 Passing inline code like this won't fire on click—it fires every time the component renders:
 
@@ -101,7 +101,7 @@ Rather than executing the code inside with every render, this creates a function
 In both cases, what you want to pass is a function:
 
 - `<button onClick={handleClick}>` passes the `handleClick` function.
-- ` alert('...')}>` passes the `() => alert('...')` function.
+- `<button onClick={() => alert('...')}>` passes the `() => alert('...')` function.
 
 [Read more about arrow functions.](https://javascript.info/arrow-functions-basics)
 
@@ -507,7 +507,7 @@ export default function LightSwitch() {
 }
 ```
 
-Alternatively, you could wrap the call into another function, like ` handleClick()}>`:
+Alternatively, you could wrap the call into another function, like `<button onClick={() => handleClick()}>`:
 
 ```js
 export default function LightSwitch() {

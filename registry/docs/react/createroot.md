@@ -60,13 +60,13 @@ Call `root.render` to display a piece of [JSX](/learn/writing-markup-with-jsx) (
 root.render(<App />);
 ```
 
-React will display \`\` in the `root`, and take over managing the DOM inside it.
+React will display `<App />` in the `root`, and take over managing the DOM inside it.
 
 [See more examples below.](#usage)
 
 #### Parameters {/*root-render-parameters*/}
 
-- `reactNode`: A *React node* that you want to display. This will usually be a piece of JSX like \`\`, but you can also pass a React element constructed with [`createElement()`](/reference/react/createElement), a string, a number, `null`, or `undefined`.
+- `reactNode`: A *React node* that you want to display. This will usually be a piece of JSX like `<App />`, but you can also pass a React element constructed with [`createElement()`](/reference/react/createElement), a string, a number, `null`, or `undefined`.
 
 #### Returns {/*root-render-returns*/}
 
@@ -493,7 +493,7 @@ For example, if `domNode` is `null`, it means that [`getElementById`](https://de
 1. The ID you're looking for might differ from the ID you used in the HTML file. Check for typos!
 2. Your bundle's `<script>` tag cannot "see" any DOM nodes that appear *after* it in the HTML.
 
-Another common way to get this error is to write `createRoot()` instead of `createRoot(domNode)`.
+Another common way to get this error is to write `createRoot(<App />)` instead of `createRoot(domNode)`.
 
 ***
 
@@ -501,7 +501,7 @@ Another common way to get this error is to write `createRoot()` instead of `crea
 
 This error means that whatever you're passing to `root.render` is not a React component.
 
-This may happen if you call `root.render` with `Component` instead of \`\`:
+This may happen if you call `root.render` with `Component` instead of `<Component />`:
 
 ```js {2,5}
 // 🚩 Wrong: App is a function, not a Component.

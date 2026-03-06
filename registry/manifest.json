@@ -1,5 +1,5 @@
 {
-  "version": 12,
+  "version": 22,
   "updatedAt": "2026-03-06",
   "libraries": [
     {
@@ -3635,7 +3635,7 @@
             "count(${products.discount})"
           ],
           "path": "drizzle/apollo-server.md",
-          "tokens": 7081
+          "tokens": 7073
         },
         {
           "id": "sqlite",
@@ -3807,7 +3807,7 @@
             "gt"
           ],
           "path": "drizzle/mysql-3.md",
-          "tokens": 2328
+          "tokens": 2326
         },
         {
           "id": "constraints",
@@ -3873,7 +3873,7 @@
             "sql<type | null>"
           ],
           "path": "drizzle/joins-sql.md",
-          "tokens": 2615
+          "tokens": 2609
         },
         {
           "id": "migrations-with-drizzle-kit",
@@ -4070,7 +4070,7 @@
             "columns"
           ],
           "path": "drizzle/drizzle-queries.md",
-          "tokens": 5820
+          "tokens": 5814
         },
         {
           "id": "drizzle-queries-2",
@@ -4089,7 +4089,7 @@
             "with"
           ],
           "path": "drizzle/drizzle-queries-2.md",
-          "tokens": 4960
+          "tokens": 4954
         },
         {
           "id": "table-schemas",
@@ -4176,7 +4176,7 @@
             "${col} = 42"
           ],
           "path": "drizzle/sql-select.md",
-          "tokens": 7024
+          "tokens": 7008
         },
         {
           "id": "introduction-2",
@@ -4235,7 +4235,7 @@
             "sql.raw()"
           ],
           "path": "drizzle/magical-sql-operator.md",
-          "tokens": 4128
+          "tokens": 4118
         },
         {
           "id": "drizzle-sustainability",
@@ -4647,7 +4647,7 @@
             "hc"
           ],
           "path": "hono/start-of-hono-documentation.md",
-          "tokens": 2072
+          "tokens": 2077
         },
         {
           "id": "next-js",
@@ -4829,7 +4829,7 @@
             "tsconfig.json"
           ],
           "path": "hono/webassembly-w-wasi.md",
-          "tokens": 2553
+          "tokens": 2592
         },
         {
           "id": "cloudflare-workers",
@@ -4848,7 +4848,7 @@
             "scheduled"
           ],
           "path": "hono/cloudflare-workers.md",
-          "tokens": 2030
+          "tokens": 2060
         },
         {
           "id": "deno",
@@ -4898,7 +4898,7 @@
             "./static"
           ],
           "path": "hono/node-js.md",
-          "tokens": 1255
+          "tokens": 1281
         },
         {
           "id": "azure-functions",
@@ -4913,7 +4913,7 @@
             "<YourFunctionAppName>"
           ],
           "path": "hono/azure-functions.md",
-          "tokens": 865
+          "tokens": 882
         },
         {
           "id": "google-cloud-run",
@@ -4929,7 +4929,7 @@
             ".dockerignore"
           ],
           "path": "hono/google-cloud-run.md",
-          "tokens": 892
+          "tokens": 898
         },
         {
           "id": "context",
@@ -4948,7 +4948,7 @@
             "Content-Type:text/html"
           ],
           "path": "hono/context.md",
-          "tokens": 2578
+          "tokens": 2533
         },
         {
           "id": "app-hono",
@@ -4967,7 +4967,7 @@
             "app.fetch"
           ],
           "path": "hono/app-hono.md",
-          "tokens": 1373
+          "tokens": 1391
         },
         {
           "id": "presets",
@@ -4999,7 +4999,7 @@
             "(string | File)"
           ],
           "path": "hono/honorequest.md",
-          "tokens": 1943
+          "tokens": 1955
         },
         {
           "id": "routing",
@@ -5034,7 +5034,7 @@
             "status"
           ],
           "path": "hono/httpexception.md",
-          "tokens": 624
+          "tokens": 627
         },
         {
           "id": "jsx",
@@ -5053,7 +5053,7 @@
             "<title>"
           ],
           "path": "hono/jsx.md",
-          "tokens": 2812
+          "tokens": 2595
         },
         {
           "id": "client-components",
@@ -5072,7 +5072,7 @@
             "useTransition()"
           ],
           "path": "hono/client-components.md",
-          "tokens": 2106
+          "tokens": 2051
         },
         {
           "id": "best-practices",
@@ -5091,7 +5091,7 @@
             "app"
           ],
           "path": "hono/best-practices.md",
-          "tokens": 866
+          "tokens": 864
         },
         {
           "id": "rpc",
@@ -5110,7 +5110,7 @@
             "res.json()"
           ],
           "path": "hono/rpc.md",
-          "tokens": 5234
+          "tokens": 5140
         },
         {
           "id": "create-hono",
@@ -5129,7 +5129,7 @@
             "bun"
           ],
           "path": "hono/create-hono.md",
-          "tokens": 966
+          "tokens": 971
         },
         {
           "id": "testing",
@@ -5144,7 +5144,7 @@
             "c.env"
           ],
           "path": "hono/testing.md",
-          "tokens": 882
+          "tokens": 888
         },
         {
           "id": "middleware",
@@ -5163,7 +5163,7 @@
             "createMiddleware()"
           ],
           "path": "hono/middleware.md",
-          "tokens": 1447
+          "tokens": 1455
         },
         {
           "id": "validation",
@@ -5182,7 +5182,7 @@
             "content-type"
           ],
           "path": "hono/validation.md",
-          "tokens": 2332
+          "tokens": 2372
         },
         {
           "id": "routers",
@@ -5193,7 +5193,7 @@
             "Request"
           ],
           "path": "hono/routers.md",
-          "tokens": 998
+          "tokens": 997
         },
         {
           "id": "benchmarks",
@@ -5224,7 +5224,7 @@
             "json()"
           ],
           "path": "hono/hono-stacks.md",
-          "tokens": 1259
+          "tokens": 1217
         },
         {
           "id": "streaming-helper",
@@ -5243,7 +5243,7 @@
             "onError"
           ],
           "path": "hono/streaming-helper.md",
-          "tokens": 737
+          "tokens": 746
         },
         {
           "id": "html-helper",
@@ -5260,7 +5260,7 @@
             "string"
           ],
           "path": "hono/html-helper.md",
-          "tokens": 1419
+          "tokens": 1317
         },
         {
           "id": "ssg-helper",
@@ -5279,7 +5279,7 @@
             "2"
           ],
           "path": "hono/ssg-helper.md",
-          "tokens": 2306
+          "tokens": 2258
         },
         {
           "id": "route-helper",
@@ -5331,7 +5331,7 @@
             "ProxyFetch"
           ],
           "path": "hono/proxy-helper.md",
-          "tokens": 795
+          "tokens": 790
         },
         {
           "id": "testing-helper",
@@ -5363,7 +5363,7 @@
             "onError"
           ],
           "path": "hono/websocket-helper.md",
-          "tokens": 887
+          "tokens": 864
         },
         {
           "id": "css-helper",
@@ -5382,7 +5382,7 @@
             "keyframes"
           ],
           "path": "hono/css-helper.md",
-          "tokens": 1179
+          "tokens": 1106
         },
         {
           "id": "cookie-helper",
@@ -5420,7 +5420,7 @@
             "factory.createApp()"
           ],
           "path": "hono/factory-helper.md",
-          "tokens": 908
+          "tokens": 910
         },
         {
           "id": "jwt-authentication-helper",
@@ -5439,7 +5439,7 @@
             "exp"
           ],
           "path": "hono/jwt-authentication-helper.md",
-          "tokens": 1499
+          "tokens": 1587
         },
         {
           "id": "third-party-middleware",
@@ -5466,7 +5466,7 @@
             "Layout"
           ],
           "path": "hono/jsx-renderer-middleware.md",
-          "tokens": 1094
+          "tokens": 1001
         },
         {
           "id": "jwk-auth-middleware",
@@ -5485,7 +5485,7 @@
             "AsymmetricAlgorithm[]"
           ],
           "path": "hono/jwk-auth-middleware.md",
-          "tokens": 2274
+          "tokens": 2342
         },
         {
           "id": "cache-middleware",
@@ -5504,7 +5504,7 @@
             "*"
           ],
           "path": "hono/cache-middleware.md",
-          "tokens": 696
+          "tokens": 750
         },
         {
           "id": "server-timing-middleware",
@@ -5521,7 +5521,7 @@
             "false"
           ],
           "path": "hono/server-timing-middleware.md",
-          "tokens": 616
+          "tokens": 659
         },
         {
           "id": "secure-headers-middleware",
@@ -5538,7 +5538,7 @@
             "styleSrc"
           ],
           "path": "hono/secure-headers-middleware.md",
-          "tokens": 2871
+          "tokens": 2844
         },
         {
           "id": "language-middleware",
@@ -5576,7 +5576,7 @@
             "retainedHeaders"
           ],
           "path": "hono/body-limit-middleware.md",
-          "tokens": 1347
+          "tokens": 1385
         },
         {
           "id": "request-id-middleware",
@@ -5595,7 +5595,7 @@
             "255"
           ],
           "path": "hono/request-id-middleware.md",
-          "tokens": 1041
+          "tokens": 1092
         },
         {
           "id": "csrf-protection",
@@ -5614,7 +5614,7 @@
             "'same-origin'"
           ],
           "path": "hono/csrf-protection.md",
-          "tokens": 838
+          "tokens": 854
         },
         {
           "id": "bearer-auth-middleware",
@@ -5633,7 +5633,7 @@
             "\"\""
           ],
           "path": "hono/bearer-auth-middleware.md",
-          "tokens": 1027
+          "tokens": 1099
         },
         {
           "id": "logger-middleware",
@@ -5645,7 +5645,7 @@
             "...rest"
           ],
           "path": "hono/logger-middleware.md",
-          "tokens": 506
+          "tokens": 514
         },
         {
           "id": "basic-auth-middleware",
@@ -5663,7 +5663,7 @@
             "password"
           ],
           "path": "hono/basic-auth-middleware.md",
-          "tokens": 908
+          "tokens": 973
         },
         {
           "id": "cors-middleware",
@@ -5682,7 +5682,7 @@
             "false"
           ],
           "path": "hono/cors-middleware.md",
-          "tokens": 887
+          "tokens": 935
         },
         {
           "id": "timeout-middleware",
@@ -5711,7 +5711,7 @@
             "number"
           ],
           "path": "hono/combine-middleware.md",
-          "tokens": 863
+          "tokens": 882
         },
         {
           "id": "jwt-auth-middleware",
@@ -5730,7 +5730,7 @@
             "HS384"
           ],
           "path": "hono/jwt-auth-middleware.md",
-          "tokens": 732
+          "tokens": 811
         }
       ]
     },
@@ -5841,7 +5841,7 @@
             "'use client'"
           ],
           "path": "nextjs/server-and-client-components.md",
-          "tokens": 5706
+          "tokens": 5718
         },
         {
           "id": "cache-components",
@@ -5855,12 +5855,12 @@
             "Page",
             "DynamicContent",
             "fetch",
-            "Loading...",
+            "<p>Loading...</p>",
             "cookies()",
             "headers()"
           ],
           "path": "nextjs/cache-components.md",
-          "tokens": 6837
+          "tokens": 6839
         },
         {
           "id": "fetching-data",
@@ -5879,7 +5879,7 @@
             "cache: 'force-cache'"
           ],
           "path": "nextjs/fetching-data.md",
-          "tokens": 5224
+          "tokens": 5228
         },
         {
           "id": "updating-data",
@@ -5947,15 +5947,15 @@
             ".module.css",
             "app",
             "app/global.css",
+            "<link rel=\"stylesheet\" href=\"...\" />",
             "link",
             "base-button.module.css",
             "page.module.css",
             "<BaseButton>",
-            ".tsx",
-            "sort-imports"
+            "<name>.module.css"
           ],
           "path": "nextjs/css.md",
-          "tokens": 2053
+          "tokens": 2064
         },
         {
           "id": "image-optimization",
@@ -6132,11 +6132,12 @@
             "<form>",
             "useActionState",
             "return",
+            "<SignupForm />",
             "useFormStatus",
             "pending"
           ],
           "path": "nextjs/authentication.md",
-          "tokens": 2767
+          "tokens": 2770
         },
         {
           "id": "session-management",
@@ -6377,7 +6378,7 @@
             "type=\"email\""
           ],
           "path": "nextjs/forms.md",
-          "tokens": 3433
+          "tokens": 3446
         },
         {
           "id": "isr",
@@ -6556,14 +6557,14 @@
             "cmd+shift+p",
             "ctrl+shift+p",
             "ESLint: Restart ESLint Server",
+            "<Image/>",
             "next/future/image",
             "next/image",
             "next-image-to-legacy-image",
-            "next/legacy/image",
-            "next-image-experimental"
+            "next/legacy/image"
           ],
           "path": "nextjs/app-router.md",
-          "tokens": 9393
+          "tokens": 9394
         },
         {
           "id": "create-react-app",
@@ -6582,7 +6583,7 @@
             "src"
           ],
           "path": "nextjs/create-react-app.md",
-          "tokens": 5416
+          "tokens": 5447
         },
         {
           "id": "vite",
@@ -6601,7 +6602,7 @@
             "./node_modules"
           ],
           "path": "nextjs/vite.md",
-          "tokens": 5678
+          "tokens": 5684
         },
         {
           "id": "multi-zones",
@@ -6719,11 +6720,12 @@
           "title": "Public pages",
           "description": "Public pages show the same content to every user. Common examples include landing pages, marketing pages, and product...",
           "tags": [
+            "<Header />",
             "next build",
             "'use cache'"
           ],
           "path": "nextjs/public-pages.md",
-          "tokens": 2191
+          "tokens": 2193
         },
         {
           "id": "redirecting",
@@ -6794,11 +6796,11 @@
             "register",
             "Cache-Control",
             "public, max-age=31536000, immutable",
-            "s-maxage: , stale-while-revalidate",
-            "getStaticProps"
+            "getStaticProps",
+            "revalidate: false"
           ],
           "path": "nextjs/self-hosting.md",
-          "tokens": 3729
+          "tokens": 3736
         },
         {
           "id": "spas",
@@ -6868,7 +6870,7 @@
             "cy.visit(\"/\")"
           ],
           "path": "nextjs/cypress.md",
-          "tokens": 1880
+          "tokens": 1882
         },
         {
           "id": "jest",
@@ -6887,7 +6889,7 @@
             ".env"
           ],
           "path": "nextjs/jest.md",
-          "tokens": 2174
+          "tokens": 2176
         },
         {
           "id": "playwright",
@@ -6920,11 +6922,12 @@
             "test",
             "package.json",
             "npm run test",
+            "<Page />",
             "__tests__",
             "app"
           ],
           "path": "nextjs/vitest.md",
-          "tokens": 1266
+          "tokens": 1268
         },
         {
           "id": "third-party-libraries",
@@ -6936,14 +6939,14 @@
             "GoogleTagManager",
             "sendGTMEvent",
             "dataLayer",
+            "<GoogleTagManager />",
             "gtm.js",
             "gtmScriptUrl",
             "gtmId",
-            "GTM-",
-            "https://www.googletagmanager.com/gtm.js"
+            "GTM-"
           ],
           "path": "nextjs/third-party-libraries.md",
-          "tokens": 3517
+          "tokens": 3526
         },
         {
           "id": "codemods",
@@ -7010,16 +7013,16 @@
             "<video>",
             "<iframe>",
             "src",
+            "<video src=\"/path/to/video.mp4\" />",
+            "width",
+            "<video width=\"320\" />",
             "height",
-            "autoPlay",
-            "muted",
-            "playsInline",
-            "<track>",
-            "sandbox",
-            "title"
+            "<video height=\"240\" />",
+            "controls",
+            "<video controls />"
           ],
           "path": "nextjs/videos.md",
-          "tokens": 4222
+          "tokens": 4316
         },
         {
           "id": "use-cache",
@@ -7157,7 +7160,7 @@
             "<img>"
           ],
           "path": "nextjs/reference.md",
-          "tokens": 7858
+          "tokens": 7862
         },
         {
           "id": "examples",
@@ -7214,7 +7217,7 @@
             "prefetch={false}"
           ],
           "path": "nextjs/link-component.md",
-          "tokens": 5899
+          "tokens": 5907
         },
         {
           "id": "script-component",
@@ -7233,7 +7236,7 @@
             "onError={onErrorFunc}"
           ],
           "path": "nextjs/script-component.md",
-          "tokens": 3224
+          "tokens": 3228
         },
         {
           "id": "default-js",
@@ -7401,7 +7404,7 @@
             "globalNotFound"
           ],
           "path": "nextjs/not-found-js.md",
-          "tokens": 1818
+          "tokens": 1828
         },
         {
           "id": "page-js",
@@ -7816,7 +7819,7 @@
             "app/shop/[...slug]/page.js"
           ],
           "path": "nextjs/reference-2.md",
-          "tokens": 8490
+          "tokens": 8516
         },
         {
           "id": "behavior",
@@ -7968,7 +7971,7 @@
             "json()"
           ],
           "path": "nextjs/nextresponse.md",
-          "tokens": 1883
+          "tokens": 1893
         },
         {
           "id": "permanentredirect",
@@ -8228,7 +8231,7 @@
             "null"
           ],
           "path": "nextjs/usesearchparams.md",
-          "tokens": 3501
+          "tokens": 3503
         },
         {
           "id": "useselectedlayoutsegment",
@@ -8376,11 +8379,11 @@
             "default",
             "sessions",
             "analytics",
-            "'use cache: '",
+            "'use cache: <name>'",
             "CacheHandler"
           ],
           "path": "nextjs/cachehandlers.md",
-          "tokens": 3872
+          "tokens": 3874
         },
         {
           "id": "cachelife-2",
@@ -8431,13 +8434,13 @@
             "○",
             "ƒ",
             "loading.js",
+            "<Suspense />",
             "v16.0.0",
             "appIsrStatus",
-            "buildActivity",
-            "buildActivityPosition"
+            "buildActivity"
           ],
           "path": "nextjs/devindicators.md",
-          "tokens": 1315
+          "tokens": 1317
         },
         {
           "id": "exportpathmap",
@@ -8475,7 +8478,7 @@
             "has"
           ],
           "path": "nextjs/headers-2.md",
-          "tokens": 4301
+          "tokens": 4304
         },
         {
           "id": "images",
@@ -8597,7 +8600,7 @@
             "302"
           ],
           "path": "nextjs/redirects.md",
-          "tokens": 2745
+          "tokens": 2748
         },
         {
           "id": "rewrites",
@@ -8616,7 +8619,7 @@
             "false"
           ],
           "path": "nextjs/rewrites.md",
-          "tokens": 4368
+          "tokens": 4371
         },
         {
           "id": "serverexternalpackages",
@@ -8749,7 +8752,7 @@
             "Shift"
           ],
           "path": "nextjs/typescript.md",
-          "tokens": 4635
+          "tokens": 4637
         },
         {
           "id": "eslint",
@@ -8768,7 +8771,7 @@
             "preconnect"
           ],
           "path": "nextjs/eslint.md",
-          "tokens": 4460
+          "tokens": 4458
         },
         {
           "id": "create-next-app",
@@ -8806,7 +8809,7 @@
             "--version"
           ],
           "path": "nextjs/next-cli.md",
-          "tokens": 5896
+          "tokens": 5899
         },
         {
           "id": "edge-runtime",
@@ -8844,7 +8847,7 @@
             "sassOptions.functions"
           ],
           "path": "nextjs/turbopack-2.md",
-          "tokens": 5605
+          "tokens": 5607
         },
         {
           "id": "c",
@@ -9011,7 +9014,7 @@
             "page.module.css"
           ],
           "path": "nextjs/css-2.md",
-          "tokens": 1951
+          "tokens": 1954
         },
         {
           "id": "deploying-2",
@@ -9307,14 +9310,14 @@
             "cmd+shift+p",
             "ctrl+shift+p",
             "ESLint: Restart ESLint Server",
+            "<Image/>",
             "next/future/image",
             "next/image",
             "next-image-to-legacy-image",
-            "next/legacy/image",
-            "next-image-experimental"
+            "next/legacy/image"
           ],
           "path": "nextjs/app-router-2.md",
-          "tokens": 9393
+          "tokens": 9394
         },
         {
           "id": "create-react-app-2",
@@ -9333,7 +9336,7 @@
             "src"
           ],
           "path": "nextjs/create-react-app-2.md",
-          "tokens": 5416
+          "tokens": 5447
         },
         {
           "id": "vite-2",
@@ -9352,7 +9355,7 @@
             "./node_modules"
           ],
           "path": "nextjs/vite-2.md",
-          "tokens": 5621
+          "tokens": 5626
         },
         {
           "id": "multi-zones-2",
@@ -9522,7 +9525,7 @@
             "npm install @qwik.dev/partytown"
           ],
           "path": "nextjs/scripts-2.md",
-          "tokens": 2098
+          "tokens": 2100
         },
         {
           "id": "self-hosting-2",
@@ -9538,10 +9541,10 @@
             "register",
             "Cache-Control",
             "public, max-age=31536000, immutable",
-            "s-maxage: , stale-while-revalidate"
+            "getStaticProps"
           ],
           "path": "nextjs/self-hosting-2.md",
-          "tokens": 3326
+          "tokens": 3333
         },
         {
           "id": "static-exports-2",
@@ -9592,7 +9595,7 @@
             "cy.visit(\"http://localhost:3000/\")"
           ],
           "path": "nextjs/cypress-2.md",
-          "tokens": 1753
+          "tokens": 1755
         },
         {
           "id": "jest-2",
@@ -9611,7 +9614,7 @@
             ".env"
           ],
           "path": "nextjs/jest-2.md",
-          "tokens": 3045
+          "tokens": 3047
         },
         {
           "id": "playwright-2",
@@ -9643,10 +9646,11 @@
             "vitest.config.mts|js",
             "test",
             "package.json",
-            "npm run test"
+            "npm run test",
+            "<Page />"
           ],
           "path": "nextjs/vitest-2.md",
-          "tokens": 1235
+          "tokens": 1236
         },
         {
           "id": "third-party-libraries-2",
@@ -9659,13 +9663,13 @@
             "_app",
             "sendGTMEvent",
             "dataLayer",
+            "<GoogleTagManager />",
             "gtm.js",
             "gtmScriptUrl",
-            "gtmId",
-            "GTM-"
+            "gtmId"
           ],
           "path": "nextjs/third-party-libraries-2.md",
-          "tokens": 3393
+          "tokens": 3402
         },
         {
           "id": "codemods-2",
@@ -9722,7 +9726,7 @@
             ".babelrc"
           ],
           "path": "nextjs/version-12.md",
-          "tokens": 1835
+          "tokens": 1840
         },
         {
           "id": "version-13",
@@ -9741,7 +9745,7 @@
             "<a>"
           ],
           "path": "nextjs/version-13.md",
-          "tokens": 1654
+          "tokens": 1670
         },
         {
           "id": "version-9",
@@ -9779,7 +9783,7 @@
             "/"
           ],
           "path": "nextjs/pages-and-layouts.md",
-          "tokens": 1679
+          "tokens": 1681
         },
         {
           "id": "dynamic-routes",
@@ -9813,11 +9817,11 @@
             "pages/about.js",
             "/blog/hello-world",
             "pages/blog/[slug].js",
-            "encodeURIComponent",
-            "pathname"
+            "<Link />",
+            "encodeURIComponent"
           ],
           "path": "nextjs/linking-and-navigating-2.md",
-          "tokens": 1550
+          "tokens": 1555
         },
         {
           "id": "custom-app",
@@ -9849,12 +9853,12 @@
             "_document",
             "onClick",
             "<Html>",
-            ",",
-            "<head>",
-            "<title>"
+            "<Head />",
+            "<Main />",
+            "<NextScript />"
           ],
           "path": "nextjs/custom-document.md",
-          "tokens": 1181
+          "tokens": 1194
         },
         {
           "id": "api-routes",
@@ -10109,17 +10113,17 @@
           "tags": [
             "head",
             "key",
+            "<meta property=\"og:title\" />",
             "meta",
             "<title>",
             "<base>",
             "title",
             "script",
             "Head",
-            "<React.Fragment>",
-            "next/script"
+            "<React.Fragment>"
           ],
           "path": "nextjs/head.md",
-          "tokens": 644
+          "tokens": 651
         },
         {
           "id": "reference-3",
@@ -10138,7 +10142,7 @@
             "<img>"
           ],
           "path": "nextjs/reference-3.md",
-          "tokens": 7657
+          "tokens": 7661
         },
         {
           "id": "examples-2",
@@ -10195,7 +10199,7 @@
             "IntersectionObserver"
           ],
           "path": "nextjs/image-legacy.md",
-          "tokens": 8049
+          "tokens": 8060
         },
         {
           "id": "link",
@@ -10214,7 +10218,7 @@
             "scroll={false}"
           ],
           "path": "nextjs/link.md",
-          "tokens": 4924
+          "tokens": 4956
         },
         {
           "id": "script",
@@ -10233,7 +10237,7 @@
             "onError={onErrorFunc}"
           ],
           "path": "nextjs/script.md",
-          "tokens": 2596
+          "tokens": 2600
         },
         {
           "id": "instrumentation-js-2",
@@ -10613,7 +10617,7 @@
             "has"
           ],
           "path": "nextjs/headers-3.md",
-          "tokens": 4494
+          "tokens": 4497
         },
         {
           "id": "images-3",
@@ -10689,7 +10693,7 @@
             "302"
           ],
           "path": "nextjs/redirects-2.md",
-          "tokens": 2850
+          "tokens": 2853
         },
         {
           "id": "rewrites-2",
@@ -10708,7 +10712,7 @@
             "false"
           ],
           "path": "nextjs/rewrites-2.md",
-          "tokens": 3699
+          "tokens": 3702
         },
         {
           "id": "serverexternalpackages-2",
@@ -10822,7 +10826,7 @@
             "preconnect"
           ],
           "path": "nextjs/eslint-2.md",
-          "tokens": 4462
+          "tokens": 4460
         },
         {
           "id": "create-next-app-cli",
@@ -10860,7 +10864,7 @@
             "--version"
           ],
           "path": "nextjs/next-cli-2.md",
-          "tokens": 5896
+          "tokens": 5899
         },
         {
           "id": "edge-runtime-2",
@@ -10898,7 +10902,7 @@
             "sassOptions.functions"
           ],
           "path": "nextjs/turbopack-4.md",
-          "tokens": 5533
+          "tokens": 5535
         },
         {
           "id": "accessibility",
@@ -10927,7 +10931,7 @@
             "Modal.js",
             "theme.js",
             "HOC(WrappedComponent)",
-            "export default () => ;",
+            "export default () => <div />;",
             "name-default-component",
             "// @refresh reset",
             "console.log",
@@ -10935,7 +10939,7 @@
             "'./header'"
           ],
           "path": "nextjs/fast-refresh.md",
-          "tokens": 1383
+          "tokens": 1385
         },
         {
           "id": "next-js-compiler",
@@ -10992,7 +10996,7 @@
             "⌘ + P"
           ],
           "path": "nextjs/contribution-guide.md",
-          "tokens": 4827
+          "tokens": 4841
         }
       ]
     },
@@ -11007,57 +11011,57 @@
           "title": "Quick Start",
           "description": "Welcome to the React documentation! This page will give you an introduction to 80% of the React concepts that you wil...",
           "tags": [
-            "Now that you've declared",
-            "Notice that \\",
-            "The",
-            "or an empty",
-            "wrapper:",
-            ". It works the same way as the HTML [",
-            "js\n<img className=\"avatar\" />",
-            ":",
-            "passes the",
-            "string as the CSS class, but"
+            "MyButton",
+            "<MyButton />",
+            "export default",
+            "<br />",
+            "<div>...</div>",
+            "<>...</>",
+            "className",
+            "class",
+            "<link>",
+            "user.name"
           ],
           "path": "react/quick-start.md",
-          "tokens": 3567
+          "tokens": 3573
         },
         {
           "id": "tutorial-tic-tac-toe",
           "title": "Tutorial: Tic-Tac-Toe",
           "description": "You will build a small tic-tac-toe game during this tutorial. This tutorial does not assume any existing React knowle...",
           "tags": [
-            "5. Run",
-            ",",
-            "in",
-            "folder and a folder called",
-            "{/*appjs*/}\n\nThe code in",
-            ". The",
-            "The second line returns a button. The",
-            "and",
-            "property is set to",
-            "file.\n\n####"
+            "cd",
+            "npm install",
+            "npm start",
+            "App.js",
+            "index.js",
+            "styles.css",
+            "src",
+            "public",
+            "Square",
+            "export"
           ],
           "path": "react/tutorial-tic-tac-toe.md",
-          "tokens": 21816
+          "tokens": 21826
         },
         {
           "id": "thinking-in-react",
           "title": "Thinking in React",
           "description": "React can change how you think about the designs you look at and the apps you build. When you build a user interface ...",
           "tags": [
-            "(grey) contains the entire app.\n2.",
-            "(blue) receives the user input.\n3.",
-            "because it appears inside the",
-            "-",
-            "can pass a",
-            "prop to a",
-            "might keep track of",
-            ".\n\nSo the state values will live in",
-            "and specify their initial state:",
-            "Then, pass"
+            "FilterableProductTable",
+            "SearchBar",
+            "ProductTable",
+            "ProductCategoryRow",
+            "ProductRow",
+            "ProductTableHeader",
+            "Form",
+            "color",
+            "Button",
+            "isHovered"
           ],
           "path": "react/thinking-in-react.md",
-          "tokens": 5632
+          "tokens": 5638
         },
         {
           "id": "installation",
@@ -11101,12 +11105,12 @@
             "next export",
             "import",
             "export",
-            "\\",
+            "<div />",
             "index.js",
             "main.js"
           ],
           "path": "react/add-react-to-an-existing-project.md",
-          "tokens": 2086
+          "tokens": 2087
         },
         {
           "id": "setup",
@@ -11156,9 +11160,8 @@
           "description": "Use React Developer Tools to inspect React [components](/learn/your-first-component), edit [props](/learn/passing-pro...",
           "tags": [
             "react-devtools",
-            "bash\nreact-devtools",
-            "tag to the beginning of your website's",
-            ":"
+            "<script>",
+            "<head>"
           ],
           "path": "react/react-developer-tools.md",
           "tokens": 607
@@ -11180,19 +11183,19 @@
           "title": "Introduction",
           "description": "React Compiler is a new build-time tool that automatically optimizes your React app. It works with plain JavaScript, ...",
           "tags": [
-            "Even though",
-            "is wrapped in",
-            ", the arrow function",
-            "will always receive a new",
-            "only re-renders when",
-            ",",
-            ", or",
-            "will re-render whenever",
-            "'s state changes:",
-            "can be reused even as"
+            "handleClick",
+            "useCallback",
+            "() => handleClick(item)",
+            "Item",
+            "onClick",
+            "props.onClick",
+            "<Parent />",
+            "useMemo()",
+            "useCallback()",
+            "React.memo()"
           ],
           "path": "react/introduction.md",
-          "tokens": 2752
+          "tokens": 2762
         },
         {
           "id": "installation",
@@ -11201,7 +11204,10 @@
           "tags": [
             "devDependency",
             "babel.config.js",
-            "directive:"
+            "vite-plugin-babel",
+            "recommended-latest",
+            "useMemo",
+            "\"use no memo\""
           ],
           "path": "react/installation.md",
           "tokens": 1833
@@ -11212,8 +11218,11 @@
           "description": "React Compiler can be adopted incrementally, allowing you to try it on specific parts of your codebase first. This gu...",
           "tags": [
             "overrides",
-            "With",
-            ", you must:\n\n- Add"
+            "compilationMode: 'annotation'",
+            "\"use memo\"",
+            "gating",
+            "true",
+            "\"use no memo\""
           ],
           "path": "react/incremental-adoption.md",
           "tokens": 1762
@@ -11235,11 +11244,12 @@
           "tags": [
             "Gallery",
             "Profile",
-            "css\nimg { margin: 0 10px 10px 0; }",
-            "css\nimg { height: 90px; }",
-            "statements,",
-            ", and",
-            "and"
+            "if",
+            "&&",
+            "? :",
+            "filter()",
+            "map()",
+            "key"
           ],
           "path": "react/describing-the-ui.md",
           "tokens": 3324
@@ -11251,17 +11261,17 @@
           "tags": [
             "<h1>",
             "<li>",
-            "This markup represents this article",
-            ", its heading",
-            ",",
-            "css\nimg { height: 200px; }",
-            "tag with",
-            "and",
-            "attributes.",
-            "component that uses multiple"
+            "<article>",
+            "<ol>",
+            "<TableOfContents />",
+            "export default",
+            "function Profile() { }",
+            "Profile",
+            "<img />",
+            "src"
           ],
           "path": "react/your-first-component.md",
-          "tokens": 3072
+          "tokens": 3097
         },
         {
           "id": "importing-and-exporting-components",
@@ -11270,17 +11280,17 @@
           "tags": [
             "Profile",
             "Gallery",
-            "and",
-            "have been moved out of",
-            "into a new file called",
-            ". Now you can change",
-            "to import",
-            "from",
-            ":",
-            ":\n   - Defines the"
+            "App.js",
+            "Gallery.js",
+            "App",
+            ".js",
+            "'./Gallery.js'",
+            "'./Gallery'",
+            "export default function Button() {}",
+            "import Button from './Button.js';"
           ],
           "path": "react/importing-and-exporting-components.md",
-          "tokens": 2837
+          "tokens": 2852
         },
         {
           "id": "writing-markup-with-jsx",
@@ -11289,36 +11299,36 @@
           "tags": [
             "Sidebar.js",
             "Form.js",
-            "css\nimg { height: 90px }",
-            ":",
-            "If you don't want to add an extra",
-            "to your markup, you can write",
-            "and",
-            "instead:",
-            "must become \\",
-            ", and wrapping tags like"
+            "<div>",
+            "<>",
+            "</>",
+            "<img>",
+            "<img />",
+            "<li>oranges",
+            "<li>oranges</li>",
+            "class"
           ],
           "path": "react/writing-markup-with-jsx.md",
-          "tokens": 2228
+          "tokens": 2232
         },
         {
           "id": "javascript-in-jsx-with-curly-braces",
           "title": "JavaScript in JSX with Curly Braces",
           "description": "JSX lets you write HTML-like markup inside a JavaScript file, keeping rendering logic and content in the same place. ...",
           "tags": [
-            "Here,",
-            "and",
-            "or",
-            "with",
-            "**:",
-            "Notice the difference between",
-            ", which specifies an",
-            ":",
-            "Try changing the",
-            "'s value from"
+            "\"https://i.imgur.com/7vQD0fPs.jpg\"",
+            "\"Gregorio Y. Zara\"",
+            "src",
+            "alt",
+            "\"",
+            "{",
+            "}",
+            "className=\"avatar\"",
+            "\"avatar\"",
+            "src={avatar}"
           ],
           "path": "react/javascript-in-jsx-with-curly-braces.md",
-          "tokens": 3363
+          "tokens": 3372
         },
         {
           "id": "passing-props-to-a-component",
@@ -11331,13 +11341,13 @@
             "width",
             "height",
             "<img>",
-            "The props you can pass to an",
-            ":",
-            "You can give",
-            ". For example, let's pass two props:"
+            "<Avatar>",
+            "Profile",
+            "Avatar",
+            "person"
           ],
           "path": "react/passing-props-to-a-component.md",
-          "tokens": 6472
+          "tokens": 6489
         },
         {
           "id": "conditional-rendering",
@@ -11349,14 +11359,14 @@
             "? :",
             "PackingList",
             "Item",
-            "Notice that some of the",
-            "components have their",
-            "prop set to",
-            "instead of",
-            ".\n\nYou can write this as an ["
+            "isPacked",
+            "true",
+            "false",
+            "isPacked={true}",
+            "else"
           ],
           "path": "react/conditional-rendering.md",
-          "tokens": 4658
+          "tokens": 4679
         },
         {
           "id": "rendering-lists",
@@ -11365,33 +11375,33 @@
           "tags": [
             "filter()",
             "map()",
-            "2. **Map** the",
-            "members into a new array of JSX nodes,",
-            ":",
-            "3. **Return**",
-            "from your component wrapped in a",
-            "js\nreturn <ul>{listItems}</ul>;",
-            "Here is the result:",
-            "css\nli { margin-bottom: 10px; }"
+            "people",
+            "listItems",
+            "<ul>",
+            "'chemist'",
+            "true",
+            "false",
+            "profession",
+            "chemists"
           ],
           "path": "react/rendering-lists.md",
-          "tokens": 7867
+          "tokens": 7915
         },
         {
           "id": "keeping-components-pure",
           "title": "Keeping Components Pure",
           "description": "Some JavaScript functions are *pure.* Pure functions only perform a calculation and nothing more. By strictly only wr...",
           "tags": [
-            "In the above example,",
-            "is a **pure function.** If you pass it",
-            ", it will return",
-            "When you pass",
-            "to",
-            ", it will return JSX containing",
-            ". Always.\n\nIf you pass",
-            "This component is reading and writing a",
-            "array, assign it to a",
-            "variable, and then"
+            "double",
+            "3",
+            "6",
+            "drinkers={2}",
+            "Recipe",
+            "2 cups of water",
+            "drinkers={4}",
+            "4 cups of water",
+            "guest",
+            "double(2)"
           ],
           "path": "react/keeping-components-pure.md",
           "tokens": 6002
@@ -11401,13 +11411,16 @@
           "title": "Your UI as a Tree",
           "description": "Your React app is taking shape with many components being nested within each other. How does React keep track of your...",
           "tags": [
-            ",",
-            "is, we may render",
-            "or",
-            "appears under",
-            "but in the render tree,",
-            ", the component, appears as a child of",
-            ". This is because"
+            "App",
+            "FancyText",
+            "Copyright",
+            "inspiration.type",
+            "<FancyText>",
+            "<Color>",
+            "import",
+            "inspirations.js",
+            "Copyright.js",
+            "App.js"
           ],
           "path": "react/your-ui-as-a-tree.md",
           "tokens": 2923
@@ -11419,12 +11432,13 @@
           "tags": [
             "<button>",
             "onClick",
-            "css\nbutton { margin-right: 10px; }",
-            "five seconds later?",
-            "continues to be",
-            "right after you call",
-            ".",
-            "with"
+            "useState",
+            "alert",
+            "score",
+            "0",
+            "setScore(score + 1)",
+            "setScore(s => s + 1)",
+            "..."
           ],
           "path": "react/adding-interactivity.md",
           "tokens": 5642
@@ -11434,19 +11448,19 @@
           "title": "Responding to Events",
           "description": "React lets you add *event handlers* to your JSX. Event handlers are your own functions that will be triggered in resp...",
           "tags": [
-            "*inside* your",
-            "to show the message).\n3. Add",
-            "to the",
-            "JSX.",
-            "css\nbutton { margin-right: 10px; }",
-            "You defined the",
-            ".",
-            ",",
-            "|",
-            "function is passed as an"
+            "handleClick",
+            "Button",
+            "alert",
+            "onClick={handleClick}",
+            "<button>",
+            "handle",
+            "onMouseEnter={handleMouseEnter}",
+            "<button onClick={handleClick}>",
+            "<button onClick={handleClick()}>",
+            "onClick"
           ],
           "path": "react/responding-to-events.md",
-          "tokens": 5470
+          "tokens": 5487
         },
         {
           "id": "state-a-component-s-memory",
@@ -11457,15 +11471,15 @@
             "index",
             "1",
             "2",
-            "The",
-            "from React at the top of the file:",
-            "js\nimport { useState } from 'react';",
-            "Then, replace this line:",
-            "js\nlet index = 0;",
-            "with"
+            "handleClick",
+            "setIndex",
+            "[",
+            "]",
+            "use",
+            "const [something, setSomething]"
           ],
           "path": "react/state-a-component-s-memory.md",
-          "tokens": 16114
+          "tokens": 16116
         },
         {
           "id": "render-and-commit",
@@ -11474,14 +11488,14 @@
           "tags": [
             "createRoot",
             "render",
-            "Try commenting out the",
-            "and",
-            "several times:",
-            "css\nimg { margin: 0 10px 10px 0; }",
-            ",",
-            ", and three",
-            ", updating its",
-            "with the new"
+            "root.render()",
+            "set",
+            "Gallery()",
+            "Image()",
+            "<section>",
+            "<h1>",
+            "<img>",
+            "appendChild()"
           ],
           "path": "react/render-and-commit.md",
           "tokens": 1903
@@ -11492,15 +11506,15 @@
           "description": "State variables might look like regular JavaScript variables that you can read and write to. However, state behaves m...",
           "tags": [
             "setIsSent(true)",
-            "event handler executes.\n2.",
-            "sets",
-            "to",
-            "Notice that",
-            "was",
-            ". This is why, in *that render's*",
-            "handler, the value of",
-            "is still",
-            "even after"
+            "onSubmit",
+            "isSent",
+            "true",
+            "setNumber(number + 1)",
+            "number",
+            "0",
+            "onClick",
+            "setNumber(0 + 1)",
+            "1"
           ],
           "path": "react/state-as-a-snapshot.md",
           "tokens": 3158
@@ -11511,15 +11525,15 @@
           "description": "Setting a state variable will queue another render. But sometimes you might want to perform multiple operations on th...",
           "tags": [
             "setNumber(number + 1)",
-            ", no matter how many times you call",
-            ":",
-            "Here,",
-            "state was",
-            ", and so on:\n\n|  queued update |",
-            "|",
-            "|\n|",
-            "|\n\nReact stores",
-            "as the final result and returns it from"
+            "number",
+            "0",
+            "setNumber(1)",
+            "setNumber()",
+            "setNumber(n => n + 1)",
+            "n => n + 1",
+            "useState",
+            "n",
+            "0 + 1 = 1"
           ],
           "path": "react/queueing-a-series-of-state-updates.md",
           "tokens": 4148
@@ -11529,16 +11543,16 @@
           "title": "Updating Objects in State",
           "description": "State can hold any kind of JavaScript value, including objects. But you shouldn't change objects that you hold in the...",
           "tags": [
-            "js\nconst [x, setX] = useState(0);",
-            "js\nsetX(5);",
-            "The",
-            "state changed from",
-            "to",
-            ", but the *number",
-            "js\nposition.x = 5;",
-            "The problem is with this bit of code.",
-            "With",
-            ", you're telling React:\n\n- Replace"
+            "x",
+            "0",
+            "5",
+            "position",
+            "setPosition",
+            "onChange",
+            "setPerson",
+            "...",
+            "[",
+            "]"
           ],
           "path": "react/updating-objects-in-state.md",
           "tokens": 9528
@@ -11568,31 +11582,31 @@
           "description": "As your application grows, it helps to be more intentional about how your state is organized and how the data flows b...",
           "tags": [
             "status",
-            "css\n.Error { color: red; }",
-            "state variable:",
-            "while the component is rendering:",
-            ", like \\",
-            "for its level. Each",
-            "and adding one to it. Every"
+            "fullName",
+            "key",
+            "<Chat key={email} />",
+            "Chat",
+            "Heading",
+            "Section"
           ],
           "path": "react/managing-state.md",
-          "tokens": 6125
+          "tokens": 6130
         },
         {
           "id": "reacting-to-input-with-state",
           "title": "Reacting to Input with State",
           "description": "React provides a declarative way to manipulate the UI. Instead of manipulating individual pieces of the UI directly, ...",
           "tags": [
-            "with a default value of",
-            ":",
-            "to",
-            "prop:",
-            "css\n.Error { color: red; }",
-            "for the input, and the",
-            "(if it exists) to store the last error:",
-            "and",
-            "can't both be",
-            "that must be one of three values:"
+            "useState",
+            "status",
+            "'empty'",
+            "status = 'empty'",
+            "status = 'success'",
+            "answer",
+            "error",
+            "isTyping",
+            "isSubmitting",
+            "true"
           ],
           "path": "react/reacting-to-input-with-state.md",
           "tokens": 8647
@@ -11602,16 +11616,16 @@
           "title": "Choosing the State Structure",
           "description": "Structuring state well can make a difference between a component that is pleasant to modify and debug, and one that i...",
           "tags": [
-            "Or this?",
-            "alone, you would either do",
-            "and",
-            "state variables:",
-            "are",
-            "should never be",
-            "(initial),",
-            ", and",
-            ":",
-            "This form has three state variables:"
+            "setPosition({ x: 100 })",
+            "y",
+            "x",
+            "setPosition({ ...position, x: 100 })",
+            "setX(100)",
+            "isSending",
+            "isSent",
+            "setIsSent",
+            "setIsSending",
+            "true"
           ],
           "path": "react/choosing-the-state-structure.md",
           "tokens": 15255
@@ -11624,13 +11638,13 @@
             "Accordion",
             "Panel",
             "isActive",
-            "'s",
-            "state is",
-            "'s button will only update that",
-            "component to coordinate both",
-            "to",
-            "component:",
-            "And instead, add"
+            "false",
+            "true",
+            "boolean",
+            "activeIndex",
+            "0",
+            "1",
+            "<button>"
           ],
           "path": "react/sharing-state-between-components.md",
           "tokens": 4472
@@ -11640,19 +11654,19 @@
           "title": "Preserving and Resetting State",
           "description": "State is isolated between components. React keeps track of which state belongs to which component based on their plac...",
           "tags": [
-            "\\",
-            "and",
-            "tags:",
-            "is",
-            "or",
-            ", you always have a \\",
-            "as the first child of the",
-            "returned from the root",
-            "component:\n\nUpdating the",
-            "state does not reset the"
+            "<Counter />",
+            "Counter",
+            "score",
+            "hover",
+            "score = 0",
+            "isFancy",
+            "true",
+            "false",
+            "div",
+            "App"
           ],
           "path": "react/preserving-and-resetting-state.md",
-          "tokens": 11714
+          "tokens": 11731
         },
         {
           "id": "extracting-state-logic-into-a-reducer",
@@ -11663,12 +11677,12 @@
             "useReducer",
             "TaskApp",
             "tasks",
-            "Each of its event handlers calls",
-            "to",
-            "The object you pass to",
-            "is called an \"action\":",
-            "or",
-            ") as the first argument.\n2. Declare the"
+            "setTasks",
+            "handleAddTask(text)",
+            "handleChangeTask(task)",
+            "handleDeleteTask(taskId)",
+            "dispatch",
+            "type"
           ],
           "path": "react/extracting-state-logic-into-a-reducer.md",
           "tokens": 15382
@@ -11680,33 +11694,33 @@
           "tags": [
             "Heading",
             "level",
-            "to always have the same size:",
-            "Currently, you pass the",
-            "prop to each",
-            "separately:",
-            "It would be nice if you could pass the",
-            "prop to the",
-            "But how can the",
-            "component know the level of its closest"
+            "Section",
+            "<Heading>",
+            "<Section>",
+            "LevelContext",
+            "createContext",
+            "1",
+            "useContext",
+            "useState"
           ],
           "path": "react/passing-data-deeply-with-context.md",
-          "tokens": 8110
+          "tokens": 8126
         },
         {
           "id": "scaling-up-with-reducer-and-context",
           "title": "Scaling Up with Reducer and Context",
           "description": "Reducers let you consolidate a component's state update logic. Context lets you pass information deep down to other c...",
           "tags": [
-            "state and the",
-            ":",
-            "And",
-            "passes the event handlers to",
-            "Hook returns the current",
-            "and the",
-            "function that lets you update them:",
-            "provides the current list of tasks.\n-",
-            "Here, you're passing",
-            "component. Take the"
+            "tasks",
+            "dispatch",
+            "TaskApp",
+            "TaskList",
+            "Task",
+            "useReducer",
+            "TasksContext",
+            "TasksDispatchContext",
+            "null",
+            "useReducer()"
           ],
           "path": "react/scaling-up-with-reducer-and-context.md",
           "tokens": 7678
@@ -11716,16 +11730,16 @@
           "title": "Escape Hatches",
           "description": "Some of your components may need to control and synchronize with systems outside of React. For example, you might nee...",
           "tags": [
-            "js\nconst ref = useRef(0);",
-            "property.",
-            "prop value:",
-            "changes:",
-            "or",
-            "have changed:",
-            "has changed. Switching the",
-            "string:",
-            ",",
-            ", and"
+            "ref.current",
+            "isPlaying",
+            "\"✅ Connecting...\"",
+            "roomId",
+            "theme",
+            "options",
+            "useState",
+            "useContext",
+            "useEffect",
+            "usePointerPosition"
           ],
           "path": "react/escape-hatches.md",
           "tokens": 6125
@@ -11736,15 +11750,15 @@
           "description": "When you want a component to \"remember\" some information, but you don't want that information to [trigger new renders...",
           "tags": [
             "useRef",
-            "js\nimport { useRef } from 'react';",
-            "Inside your component, call the",
-            ":",
-            "js\nconst ref = useRef(0);",
-            "returns an object like this:",
-            "on every click:",
-            "returns",
-            "|",
-            "Because the"
+            "0",
+            "ref.current",
+            "current",
+            "setInterval",
+            "now",
+            "clearInterval",
+            "useRef(initialValue)",
+            "{ current: initialValue }",
+            "useState(initialValue)"
           ],
           "path": "react/referencing-values-with-refs.md",
           "tokens": 5297
@@ -11756,14 +11770,14 @@
           "tags": [
             "ref",
             "useRef",
-            "js\nimport { useRef } from 'react';",
-            "js\nconst myRef = useRef(null);",
-            "Finally, pass your ref as the",
-            "js\n<div ref={myRef}>",
-            "The",
-            ". Initially,",
-            "will be",
-            "To implement this:\n\n1. Declare"
+            "current",
+            "myRef.current",
+            "null",
+            "<div>",
+            "inputRef",
+            "<input ref={inputRef}>",
+            "<input>",
+            "inputRef.current"
           ],
           "path": "react/manipulating-the-dom-with-refs.md",
           "tokens": 7626
@@ -11775,17 +11789,17 @@
           "tags": [
             "ChatRoom",
             "useEffect",
-            "js\nimport { useEffect } from 'react';",
-            ". In other words, **",
-            "prop to it:",
-            "Your custom",
-            "However, the browser",
-            "tag does not have an",
-            "and",
-            "or"
+            "<VideoPlayer>",
+            "isPlaying",
+            "VideoPlayer",
+            "<video>",
+            "play()",
+            "pause()",
+            "console.log",
+            "[]"
           ],
           "path": "react/synchronizing-with-effects.md",
-          "tokens": 15264
+          "tokens": 15291
         },
         {
           "id": "you-might-not-need-an-effect",
@@ -11796,12 +11810,12 @@
             "firstName",
             "lastName",
             "fullName",
-            "by taking the",
-            "Usually, this code is fine! But maybe",
-            "is slow or you have a lot of",
-            "if some unrelated state variable like",
-            "in many cases.",
-            "Or, written as a single line:"
+            "visibleTodos",
+            "todos",
+            "filter",
+            "getFilteredTodos()",
+            "newTodo",
+            "useMemo"
           ],
           "path": "react/you-might-not-need-an-effect.md",
           "tokens": 15203
@@ -11811,16 +11825,16 @@
           "title": "Lifecycle of Reactive Effects",
           "description": "Effects have a different lifecycle from components. Components may mount, update, or unmount. An Effect can only do t...",
           "tags": [
-            "component receives a",
-            "room as the",
-            ". Your app displays the",
-            "chat room:",
-            "room:",
-            "). First, React will update the UI:",
-            "room. **The",
-            "(disconnect from the",
-            "(connect to the",
-            "prop. It used to be"
+            "ChatRoom",
+            "roomId",
+            "\"general\"",
+            "\"travel\"",
+            "\"music\"",
+            "serverUrl",
+            "[\"general\"]",
+            "[\"travel\"]",
+            "Object.is",
+            "logVisit(roomId)"
           ],
           "path": "react/lifecycle-of-reactive-effects.md",
           "tokens": 17799
@@ -11830,16 +11844,16 @@
           "title": "Separating Events from Effects",
           "description": "Event handlers only re-run when you perform the same interaction again. Unlike event handlers, Effects re-synchronize...",
           "tags": [
-            "is not a reactive value, but",
-            "and",
-            "or choose a different",
-            "Event handlers aren't reactive, so",
-            "Effects are reactive, so",
-            "will run for every distinct value of",
-            "However,",
-            "as a dependency of your Effect:",
-            "When the",
-            "Here,"
+            "sendMessage(message)",
+            "serverUrl",
+            "roomId",
+            "message",
+            "createConnection(serverUrl, roomId)",
+            "connection.connect()",
+            "theme",
+            "useEffectEvent",
+            "onConnected",
+            "Page"
           ],
           "path": "react/separating-events-from-effects.md",
           "tokens": 13066
@@ -11849,16 +11863,16 @@
           "title": "Removing Effect Dependencies",
           "description": "When you write an Effect, the linter will verify that you've included every reactive value (like props and state) tha...",
           "tags": [
-            "And the linter would be right! Since",
-            "Now that",
-            "css\nbutton { margin: 10px; }",
-            "was",
-            "and",
-            ". This is why",
-            "from that render always calls",
-            "every second, and you always see",
-            "state variable to",
-            "being"
+            "[]",
+            "roomId",
+            "onTick",
+            "count",
+            "0",
+            "increment",
+            "1",
+            "setCount(0 + 1)",
+            "submitted",
+            "true"
           ],
           "path": "react/removing-effect-dependencies.md",
           "tokens": 18741
@@ -11873,11 +11887,11 @@
             "useEffect",
             "online",
             "offline",
-            "state and the Effect into",
-            ":",
-            "](/reference/react/useState) and [",
-            "At the end of the function, return",
-            "and"
+            "StatusBar",
+            "isOnline",
+            "SaveButton",
+            "useOnlineStatus",
+            "use"
           ],
           "path": "react/reusing-logic-with-custom-hooks.md",
           "tokens": 17445
@@ -11903,7 +11917,14 @@
           "tags": [
             "useState",
             "useReducer",
-            "with differences in timing:\n\n- ["
+            "useContext",
+            "useRef",
+            "useImperativeHandle",
+            "useEffect",
+            "useLayoutEffect",
+            "useInsertionEffect",
+            "useEffectEvent",
+            "useMemo"
           ],
           "path": "react/hooks.md",
           "tokens": 1417
@@ -11914,15 +11935,15 @@
           "description": "`useActionState` is a React Hook that lets you update state with side effects using [Actions](/reference/react/useTra...",
           "tags": [
             "useActionState",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "{/*useactionstate*/}\n\nCall",
-            "passed to",
-            ".\n-",
-            "you passed. After",
-            ".\n2. A",
-            "sequentially. Each call to",
-            "and",
-            "function {/*reduceraction*/}\n\nThe"
+            "reducerAction",
+            "initialState",
+            "actionPayload",
+            "dispatchAction",
+            "permalink",
+            "isPending",
+            "startTransition",
+            "useReducer",
+            "previousState"
           ],
           "path": "react/useactionstate.md",
           "tokens": 10238
@@ -11933,18 +11954,18 @@
           "description": "`useCallback` is a React Hook that lets you cache a function definition between re-renders.",
           "tags": [
             "useCallback",
-            "{/*usecallback*/}\n\nCall",
-            "returns the",
-            "Hook:",
-            "You need to pass two things to",
-            "function down from the",
-            "to the",
-            "component:",
-            "You've noticed that toggling the",
-            "re-renders with a different"
+            "useCallback(fn, dependencies)",
+            "fn",
+            "dependencies",
+            "[dep1, dep2, dep3]",
+            "Object.is",
+            "handleSubmit",
+            "ProductPage",
+            "ShippingForm",
+            "theme"
           ],
           "path": "react/usecallback.md",
-          "tokens": 8208
+          "tokens": 8211
         },
         {
           "id": "usecontext",
@@ -11952,15 +11973,15 @@
           "description": "`useContext` is a React Hook that lets you read and subscribe to [context](/learn/passing-data-deeply-with-context) f...",
           "tags": [
             "useContext",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "{/*usecontext*/}\n\nCall",
-            "passed to the closest",
-            "you have passed to [",
-            "that you use to provide context and",
-            ". When a",
-            "*anywhere* inside of",
-            "calls",
-            ", it will receive"
+            "useContext(SomeContext)",
+            "SomeContext",
+            "createContext",
+            "value",
+            "defaultValue",
+            "useContext()",
+            "<Context>",
+            "Object.is",
+            "memo"
           ],
           "path": "react/usecontext.md",
           "tokens": 8250
@@ -11971,14 +11992,14 @@
           "description": "`useDebugValue` is a React Hook that lets you add a label to a custom Hook in [React DevTools.](/learn/react-develope...",
           "tags": [
             "useDebugValue",
-            "js\nuseDebugValue(value, format?)",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "{/*usedebugvalue*/}\n\nCall",
-            "This gives components calling",
-            "a label like",
-            ") would be displayed.",
-            ":",
-            "is a Date value, this avoids calling"
+            "useDebugValue(value, format?)",
+            "value",
+            "format",
+            "useOnlineStatus",
+            "OnlineStatus: \"Online\"",
+            "true",
+            "date",
+            "toDateString()"
           ],
           "path": "react/usedebugvalue.md",
           "tokens": 918
@@ -11989,15 +12010,15 @@
           "description": "`useDeferredValue` is a React Hook that lets you defer updating a part of the UI.",
           "tags": [
             "useDeferredValue",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "{/*usedeferredvalue*/}\n\nCall",
-            "always returns the new",
-            "is integrated with [",
-            ". The results for",
-            "get replaced by the loading fallback.",
-            "css\ninput { margin: 10px; }",
-            "The",
-            "("
+            "useDeferredValue(value, initialValue?)",
+            "value",
+            "initialValue",
+            "currentValue",
+            "Object.is",
+            "<Suspense>",
+            "lazy",
+            "use",
+            "SearchResults"
           ],
           "path": "react/usedeferredvalue.md",
           "tokens": 6081
@@ -12008,18 +12029,18 @@
           "description": "`useEffect` is a React Hook that lets you [synchronize a component with an external system.](/learn/synchronizing-wit...",
           "tags": [
             "useEffect",
-            "js\nuseEffect(setup, dependencies?)",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "{/*useeffect*/}\n\nCall",
-            "returns",
-            ".\n\n#### Caveats {/*caveats*/}\n\n-",
-            "with [",
-            ", you can use",
-            "at the top level of your component:",
-            "You need to pass two arguments to"
+            "useEffect(setup, dependencies?)",
+            "setup",
+            "dependencies",
+            "[dep1, dep2, dep3]",
+            "Object.is",
+            "undefined",
+            "useLayoutEffect",
+            "alert()",
+            "setTimeout"
           ],
           "path": "react/useeffect.md",
-          "tokens": 15947
+          "tokens": 15938
         },
         {
           "id": "useeffectevent",
@@ -12027,15 +12048,15 @@
           "description": "`useEffectEvent` is a React Hook that lets you separate events from Effects.",
           "tags": [
             "useEffectEvent",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "{/*useeffectevent*/}\n\nCall",
-            ".\n\nYou can call this function inside",
-            ",",
-            "functions from",
-            "accepts an",
-            "Since",
-            "is an Effect Event,",
-            "and"
+            "useEffectEvent(callback)",
+            "callback",
+            "useEffect",
+            "useLayoutEffect",
+            "useInsertionEffect",
+            "eslint-plugin-react-hooks",
+            "set",
+            "useState",
+            "event callback"
           ],
           "path": "react/useeffectevent.md",
           "tokens": 4064
@@ -12046,15 +12067,14 @@
           "description": "`useId` is a React Hook for generating unique IDs that can be passed to accessibility attributes.",
           "tags": [
             "useId",
-            "js\nconst id = useId()",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "{/*useid*/}\n\nCall",
-            ":",
-            "Now, even if",
-            "css\ninput { margin: 5px; }",
-            ".\n\nThe primary benefit of",
-            "to generate a shared prefix for them:",
-            "This lets you avoid calling"
+            "useId()",
+            "aria-describedby",
+            "PasswordField",
+            "nextId++",
+            "identifierPrefix",
+            "createRoot",
+            "hydrateRoot",
+            "renderToPipeableStream"
           ],
           "path": "react/useid.md",
           "tokens": 2312
@@ -12065,18 +12085,18 @@
           "description": "`useImperativeHandle` is a React Hook that lets you customize the handle exposed as a [ref.](/learn/manipulating-the-...",
           "tags": [
             "useImperativeHandle",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "{/*useimperativehandle*/}\n\nCall",
-            ": The",
-            "you received as a prop to the",
-            "component.\n\n-",
-            "from [",
-            "returns",
-            "prop to the node.",
-            "With the code above, [a ref to"
+            "ref",
+            "MyInput",
+            "createHandle",
+            "dependencies",
+            "[dep1, dep2, dep3]",
+            "Object.is",
+            "forwardRef",
+            "undefined",
+            "<input>"
           ],
           "path": "react/useimperativehandle.md",
-          "tokens": 1930
+          "tokens": 1935
         },
         {
           "id": "useinsertioneffect",
@@ -12086,13 +12106,13 @@
             "useInsertionEffect",
             "useEffect",
             "useLayoutEffect",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "{/*useinsertioneffect*/}\n\nCall",
-            "returns",
-            ".\n- By the time",
-            "runs, refs are not attached yet.\n-",
-            "3. Runtime injection of",
-            "Similarly to"
+            "setup",
+            "dependencies",
+            "[dep1, dep2, dep3]",
+            "Object.is",
+            "undefined",
+            "<div style={{ opacity: 1 }}>",
+            "<style>"
           ],
           "path": "react/useinsertioneffect.md",
           "tokens": 1522
@@ -12104,17 +12124,17 @@
           "tags": [
             "useLayoutEffect",
             "useEffect",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "{/*useinsertioneffect*/}\n\nCall",
-            "returns",
-            ".\n\n#### Caveats {/*caveats*/}\n\n-",
-            "Here's how this works step by step:\n\n1.",
-            "renders with the initial",
-            ".\n3. Your",
-            "renders again with the real"
+            "useLayoutEffect(setup, dependencies?)",
+            "setup",
+            "dependencies",
+            "[dep1, dep2, dep3]",
+            "Object.is",
+            "undefined",
+            "Tooltip",
+            "tooltipHeight = 0"
           ],
           "path": "react/uselayouteffect.md",
-          "tokens": 5908
+          "tokens": 5917
         },
         {
           "id": "usememo",
@@ -12122,18 +12142,18 @@
           "description": "`useMemo` is a React Hook that lets you cache the result of a calculation between re-renders.",
           "tags": [
             "useMemo",
-            "{/*usememo*/}\n\nCall",
-            "returns the result of calling",
-            "again, and return the result that",
-            "You need to pass two things to",
-            "function will re-run:",
-            "and",
-            "like earlier lets you reuse",
-            "call was skipped because both",
-            "(which you pass as dependencies to"
+            "useMemo(calculateValue, dependencies)",
+            "calculateValue",
+            "dependencies",
+            "[dep1, dep2, dep3]",
+            "Object.is",
+            "() =>",
+            "TodoList",
+            "filterTodos",
+            "todos"
           ],
           "path": "react/usememo.md",
-          "tokens": 11990
+          "tokens": 12000
         },
         {
           "id": "useoptimistic",
@@ -12141,15 +12161,15 @@
           "description": "`useOptimistic` is a React Hook that lets you optimistically update the UI.",
           "tags": [
             "useOptimistic",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "{/*useoptimistic*/}\n\nCall",
-            "was provided).\n2. The [",
-            "functions, like",
-            "{/*setoptimistic*/}\n\nThe",
-            "function returned by",
-            "to",
-            "passed to",
-            ".\n\n3. **Transition scheduled**:"
+            "useOptimistic(value, reducer?)",
+            "value",
+            "reducer(currentState, action)",
+            "optimisticState",
+            "reducer",
+            "set",
+            "setOptimistic(optimisticState)",
+            "useState",
+            "setOptimistic('b')"
           ],
           "path": "react/useoptimistic.md",
           "tokens": 8352
@@ -12160,18 +12180,18 @@
           "description": "`useReducer` is a React Hook that lets you add a [reducer](/learn/extracting-state-logic-into-a-reducer) to your comp...",
           "tags": [
             "useReducer",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "{/*usereducer*/}\n\nCall",
-            "argument.\n- **optional**",
-            ".\n\n#### Returns {/*returns*/}",
-            "or",
-            "(if there's no",
-            ").\n2. The [",
-            "function {/*dispatch*/}\n\nThe",
-            "function returned by"
+            "useReducer(reducer, initialArg, init?)",
+            "reducer",
+            "initialArg",
+            "init",
+            "init(initialArg)",
+            "dispatch",
+            "state",
+            "action",
+            "type"
           ],
           "path": "react/usereducer.md",
-          "tokens": 7486
+          "tokens": 7476
         },
         {
           "id": "useref",
@@ -12179,18 +12199,18 @@
           "description": "`useRef` is a React Hook that lets you reference a value that's not needed for rendering.",
           "tags": [
             "useRef",
-            "js\nconst ref = useRef(initialValue)",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "{/*useref*/}\n\nCall",
-            ": The value you want the ref object's",
-            ": Initially, it's set to the",
-            "property.\n\nOn the next renders,",
-            "property:",
-            "and",
-            "If you show"
+            "useRef(initialValue)",
+            "initialValue",
+            "current",
+            "ref",
+            "ref.current",
+            "useState",
+            "{ref.current}",
+            "startTime",
+            "now"
           ],
           "path": "react/useref.md",
-          "tokens": 4105
+          "tokens": 4090
         },
         {
           "id": "usestate",
@@ -12198,18 +12218,18 @@
           "description": "`useState` is a React Hook that lets you add a [state variable](/learn/state-a-components-memory) to your component.",
           "tags": [
             "useState",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "{/*usestate*/}\n\nCall",
-            "you have passed.\n2. The [",
-            "functions, like",
-            "{/*setstate*/}\n\nThe",
-            "function returned by",
-            ", as determined by an [",
-            "function with some next state:",
-            "It only affects what"
+            "useState(initialState)",
+            "[something, setSomething]",
+            "initialState",
+            "set",
+            "setSomething(nextState)",
+            "nextState",
+            "state",
+            "Object.is",
+            "flushSync"
           ],
           "path": "react/usestate.md",
-          "tokens": 9472
+          "tokens": 9467
         },
         {
           "id": "usesyncexternalstore",
@@ -12217,18 +12237,18 @@
           "description": "`useSyncExternalStore` is a React Hook that lets you subscribe to an external store.",
           "tags": [
             "useSyncExternalStore",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "{/*usesyncexternalstore*/}\n\nCall",
-            ": A function that takes a single",
-            ", which will cause React to re-call",
-            "with a Promise dependent on",
-            "Hook.",
-            "](/reference/react/useState) and [",
-            ".",
-            "To implement the"
+            "subscribe",
+            "getSnapshot",
+            "callback",
+            "Object.is",
+            "getServerSnapshot",
+            "Suspense",
+            "todosStore",
+            "TodosApp",
+            "useState"
           ],
           "path": "react/usesyncexternalstore.md",
-          "tokens": 4081
+          "tokens": 4071
         },
         {
           "id": "usetransition",
@@ -12236,18 +12256,18 @@
           "description": "`useTransition` is a React Hook that lets you render a part of the UI in the background.",
           "tags": [
             "useTransition",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "{/*usetransition*/}\n\nCall",
-            "{/*starttransition*/}\n\nThe",
-            "function returned by",
-            "#### Functions called in",
-            "or include the \"Action\" suffix:",
-            "functions after the",
-            "in an additional",
-            "like this:"
+            "useTransition()",
+            "isPending",
+            "startTransition",
+            "startTransition(action)",
+            "action",
+            "set",
+            "await",
+            "useDeferredValue",
+            "setTimeout"
           ],
           "path": "react/usetransition.md",
-          "tokens": 12886
+          "tokens": 12876
         },
         {
           "id": "components",
@@ -12271,17 +12291,17 @@
           "tags": [
             "<Fragment>",
             "<>...</>",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "{/*fragment*/}\n\nWrap elements in",
-            "is shorthand for \\",
-            ": Fragments declared with the explicit",
-            ": A ref object (e.g. from [",
-            ".\n-",
-            ": Returns a flat array of",
-            ": Removes focus if"
+            "Fragment",
+            "<></>",
+            "<Fragment></Fragment>",
+            "key",
+            "ref",
+            "useRef",
+            "FragmentInstance",
+            "dispatchEvent(event)"
           ],
           "path": "react/.md",
-          "tokens": 2606
+          "tokens": 2642
         },
         {
           "id": "apis",
@@ -12308,15 +12328,15 @@
           "description": "`act` is a test helper to apply pending React updates before making assertions.",
           "tags": [
             "act",
-            "js\nawait act(async actFn)",
-            "We recommend using",
-            "with",
-            "and an",
-            ":",
-            "component inside",
-            "Here, we render the component with",
-            "requires setting",
-            "js\nglobal.IS_REACT_ACT_ENVIRONMENT=true"
+            "await act()",
+            "act()",
+            "await act(async actFn)",
+            "await",
+            "async",
+            "async actFn",
+            "actFn",
+            "Counter",
+            "global.IS_REACT_ACT_ENVIRONMENT=true"
           ],
           "path": "react/act.md",
           "tokens": 1450
@@ -12327,10 +12347,11 @@
           "description": "**The `addTransitionType` API is currently only available in React’s Canary and Experimental channels.**",
           "tags": [
             "addTransitionType",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "inside of",
-            "to indicate the cause of a transition:",
-            "***\n\n### Customize animations using"
+            "type",
+            "<Suspense>",
+            "startTransition",
+            "View Transition",
+            "ViewTransition"
           ],
           "path": "react/addtransitiontype.md",
           "tokens": 1175
@@ -12341,18 +12362,18 @@
           "description": "`cache` is only for use with [React Server Components](/reference/rsc/server-components).",
           "tags": [
             "cache",
-            "js\nconst cachedFn = cache(fn);",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "{/*cache*/}\n\nCall",
-            "When",
-            "is first called with",
-            ",",
-            "will call",
-            "and store the result in cache. If",
-            "is called again with the same"
+            "cache(fn)",
+            "getMetrics",
+            "data",
+            "calculateMetrics(data)",
+            "fn",
+            "cachedFn",
+            "user",
+            "Profile",
+            "TeamReport"
           ],
           "path": "react/cache.md",
-          "tokens": 4600
+          "tokens": 4524
         },
         {
           "id": "cachesignal",
@@ -12361,17 +12382,13 @@
           "tags": [
             "cacheSignal",
             "cache()",
-            "js\nconst signal = cacheSignal();",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "{/*cachesignal*/}\n\nCall",
-            "to get an",
-            ".",
-            "When React has finished rendering, the",
-            "returns an",
-            "if called during rendering. Otherwise"
+            "AbortSignal",
+            "cacheSignal()",
+            "null",
+            "aborted"
           ],
           "path": "react/cachesignal.md",
-          "tokens": 809
+          "tokens": 800
         },
         {
           "id": "captureownerstack",
@@ -12379,18 +12396,18 @@
           "description": "`captureOwnerStack` reads the current Owner Stack in development and returns it as a string if available.",
           "tags": [
             "captureOwnerStack",
-            "js\nconst stack = captureOwnerStack();",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "{/*captureownerstack*/}\n\nCall",
-            "to get the current Owner Stack.",
-            "#### Parameters {/*parameters*/}",
-            "returns",
-            ")\n- React's event handlers (e.g. \\",
-            ",",
-            ", and"
+            "captureOwnerStack()",
+            "string | null",
+            "useEffect",
+            "<button onClick={...} />",
+            "onCaughtError",
+            "onRecoverableError",
+            "onUncaughtError",
+            "null",
+            "errorInfo.componentStack"
           ],
           "path": "react/captureownerstack.md",
-          "tokens": 2428
+          "tokens": 2431
         },
         {
           "id": "createcontext",
@@ -12398,14 +12415,15 @@
           "description": "`createContext` lets you create a [context](/learn/passing-data-deeply-with-context) that components can provide or r...",
           "tags": [
             "createContext",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "{/*createcontext*/}\n\nCall",
-            "Starting in React 19, you can render",
-            ".\n\n#### Props {/*provider-props*/}\n\n-",
-            "{/*consumer*/}\n\nBefore",
-            "#### Props {/*consumer-props*/}\n\n-",
-            "](/reference/react/useContext):",
-            "Now the"
+            "createContext(defaultValue)",
+            "defaultValue",
+            "null",
+            "SomeContext",
+            "useContext(SomeContext)",
+            "SomeContext.Consumer",
+            "SomeContext.Provider",
+            "<SomeContext>",
+            "<SomeContext.Provider>"
           ],
           "path": "react/createcontext.md",
           "tokens": 1739
@@ -12416,15 +12434,15 @@
           "description": "`lazy` lets you defer loading component's code until it is rendered for the first time.",
           "tags": [
             "lazy",
-            "js\nconst SomeComponent = lazy(load)",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "{/*lazy*/}\n\nCall",
-            "method). React will not call",
-            "](/reference/react/memo), or a [",
-            "This code relies on [dynamic",
-            "](/reference/react/Suspense) boundary:",
-            "In this example, the code for",
-            "hasn't loaded yet,"
+            "lazy(load)",
+            "load",
+            "then",
+            ".default",
+            "throw",
+            "<Suspense>",
+            "memo",
+            "forwardRef",
+            "import"
           ],
           "path": "react/lazy.md",
           "tokens": 1563
@@ -12435,18 +12453,18 @@
           "description": "`memo` lets you skip re-rendering a component when its props are unchanged.",
           "tags": [
             "memo",
-            "{/*memo*/}\n\nWrap a component in",
-            "component re-renders whenever",
-            "is changed (because it's not passed to",
-            "as a prop):",
-            "**You should only rely on",
-            "is unnecessary. Keep in mind that",
-            "is",
-            ", but",
-            ".\n\nTo get the most out of"
+            "memo(Component, arePropsEqual?)",
+            "Component",
+            "forwardRef",
+            "arePropsEqual",
+            "true",
+            "false",
+            "Object.is",
+            "Greeting",
+            "name"
           ],
           "path": "react/memo.md",
-          "tokens": 4550
+          "tokens": 4564
         },
         {
           "id": "starttransition",
@@ -12454,15 +12472,14 @@
           "description": "`startTransition` lets you render a part of the UI in the background.",
           "tags": [
             "startTransition",
-            "js\nstartTransition(action)",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "{/*starttransition*/}\n\nThe",
-            "functions after the",
-            "in an additional",
-            "call:",
-            "is very similar to [",
-            "when",
-            "is not available. For example,"
+            "startTransition(action)",
+            "action",
+            "set",
+            "await",
+            "useTransition",
+            "useDeferredValue",
+            "setTimeout",
+            "isPending"
           ],
           "path": "react/starttransition.md",
           "tokens": 1087
@@ -12473,18 +12490,18 @@
           "description": "`use` is a React API that lets you read the value of a resource like a [Promise](https://developer.mozilla.org/en-US/...",
           "tags": [
             "use",
-            "js\nconst value = use(resource);",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "{/*use*/}\n\nCall",
-            "Unlike React Hooks,",
-            "API integrates with [",
-            "*suspends* while the Promise passed to",
-            "is pending. If the component that calls",
-            "API. If the Promise passed to",
-            "and"
+            "use(resource)",
+            "if",
+            "Suspense",
+            "resource",
+            "async",
+            "await",
+            "useContext",
+            "for",
+            "Button"
           ],
           "path": "react/use.md",
-          "tokens": 3856
+          "tokens": 3799
         },
         {
           "id": "experimental-taintobjectreference",
@@ -12496,11 +12513,11 @@
             "eslint-plugin-react-hooks@experimental",
             "taintObjectReference",
             "user",
-            "{/*taintobjectreference*/}\n\nCall",
-            "as",
-            "returns",
-            "object,",
-            "or"
+            "taintUniqueValue",
+            "taintObjectReference(message, object)",
+            "message",
+            "object",
+            "experimental_taintObjectReference"
           ],
           "path": "react/experimental-taintobjectreference.md",
           "tokens": 1337
@@ -12514,12 +12531,12 @@
             "react-dom@experimental",
             "eslint-plugin-react-hooks@experimental",
             "taintUniqueValue",
-            "{/*taintuniquevalue*/}\n\nCall",
-            ": The message you want to display if",
-            "is passed to a Client Component.\n\n-",
-            ": Any object that indicates how long",
-            "should be tainted.",
-            ".\n\n-"
+            "taintObjectReference",
+            "message",
+            "value",
+            "lifetime",
+            "globalThis",
+            "experimental_taintUniqueValue"
           ],
           "path": "react/experimental-taintuniquevalue.md",
           "tokens": 2005
@@ -12541,18 +12558,18 @@
           "description": "`useFormStatus` is a Hook that gives you status information of the last form submission.",
           "tags": [
             "useFormStatus",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "{/*use-form-status*/}\n\nThe",
-            "To get status information, the",
-            "component must be rendered within a",
-            "uses this information to disable",
-            ": A boolean. If",
-            ", this means the parent",
-            "is pending submission. Otherwise,",
-            ".\n\n-"
+            "useFormStatus()",
+            "Submit",
+            "<form>",
+            "pending",
+            "<button>",
+            "status",
+            "true",
+            "false",
+            "data"
           ],
           "path": "react/useformstatus.md",
-          "tokens": 1703
+          "tokens": 1698
         },
         {
           "id": "components",
@@ -12579,18 +12596,18 @@
           "description": "All built-in browser components, such as [`<div>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div), su...",
           "tags": [
             "<div>",
-            ",",
-            "prop implicitly by nesting tags like \\",
-            ".\n\n-",
-            ": An object of the form",
-            ": A ref object from [",
-            "](/reference/react/useRef) or [",
-            "](/reference/react/createRef), or a [",
-            ": A boolean. If",
-            "and"
+            "children",
+            "null",
+            "undefined",
+            "<div><span /></div>",
+            "dangerouslySetInnerHTML",
+            "{ __html: '<p>some html</p>' }",
+            "innerHTML",
+            "ref",
+            "useRef"
           ],
           "path": "react/common-e-g.md",
-          "tokens": 19071
+          "tokens": 19098
         },
         {
           "id": "apis",
@@ -12617,18 +12634,18 @@
           "description": "`createPortal` lets you render some children into a different part of the DOM.",
           "tags": [
             "createPortal",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "inside the provided",
-            ", that",
-            "would be placed inside the parent",
-            "got placed directly into the",
-            ":",
-            "This lets you use",
-            "to render React content into",
-            "once it becomes available:"
+            "createPortal(children, domNode, key?)",
+            "children",
+            "<div />",
+            "<SomeComponent />",
+            "<>...</>",
+            "domNode",
+            "document.getElementById()",
+            "key",
+            "<div onClick>"
           ],
           "path": "react/createportal.md",
-          "tokens": 3156
+          "tokens": 3163
         },
         {
           "id": "flushsync",
@@ -12636,15 +12653,14 @@
           "description": "Using `flushSync` is uncommon and can hurt the performance of your app.",
           "tags": [
             "flushSync",
-            "js\nflushSync(callback)",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "{/*flushsync*/}\n\nCall",
-            "Most of the time,",
-            "can be avoided. Use",
-            "returns",
-            ".\n\n#### Caveats {/*caveats*/}\n\n-",
-            "state.\n-",
-            "inside of the"
+            "flushSync(callback)",
+            "callback",
+            "undefined",
+            "fallback",
+            "onbeforeprint",
+            "isPrinting",
+            "useLayoutEffect",
+            "useEffect"
           ],
           "path": "react/flushsync.md",
           "tokens": 1558
@@ -12655,11 +12671,9 @@
           "description": "`preconnect` lets you eagerly connect to a server that you expect to load resources from.",
           "tags": [
             "preconnect",
-            "js\npreconnect(\"https://example.com\");",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "function from",
-            ".",
-            "[See more examples below.](#usage)\n\nThe"
+            "preconnect(href)",
+            "react-dom",
+            "href"
           ],
           "path": "react/preconnect.md",
           "tokens": 651
@@ -12670,11 +12684,10 @@
           "description": "`prefetchDNS` lets you eagerly look up the IP of a server that you expect to load resources from.",
           "tags": [
             "prefetchDNS",
-            "js\nprefetchDNS(\"https://example.com\");",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "function from",
-            ".",
-            "](/reference/react-dom/preconnect),"
+            "prefetchDNS(href)",
+            "react-dom",
+            "href",
+            "preconnect"
           ],
           "path": "react/prefetchdns.md",
           "tokens": 714
@@ -12685,15 +12698,15 @@
           "description": "[React-based frameworks](/learn/creating-a-react-app) frequently handle resource loading for you, so you might not ha...",
           "tags": [
             "preinit",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "function from",
-            ".",
-            "[See more examples below.](#usage)\n\nThe",
-            "and",
-            ".\n  -",
-            ",",
-            "(the default),",
-            ", and"
+            "preinit(href, options)",
+            "react-dom",
+            "href",
+            "options",
+            "as",
+            "script",
+            "style",
+            "precedence",
+            "reset"
           ],
           "path": "react/preinit.md",
           "tokens": 1175
@@ -12704,14 +12717,15 @@
           "description": "[React-based frameworks](/learn/creating-a-react-app) frequently handle resource loading for you, so you might not ha...",
           "tags": [
             "preinitModule",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "function from",
-            ".",
-            "[See more examples below.](#usage)\n\nThe",
-            ": a required string. It must be",
-            ".\n  -",
-            "and",
-            "with the same"
+            "preinitModule(href, options)",
+            "react-dom",
+            "preinit",
+            "href",
+            "options",
+            "as",
+            "'script'",
+            "crossOrigin",
+            "anonymous"
           ],
           "path": "react/preinitmodule.md",
           "tokens": 899
@@ -12722,15 +12736,15 @@
           "description": "[React-based frameworks](/learn/creating-a-react-app) frequently handle resource loading for you, so you might not ha...",
           "tags": [
             "preload",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "function from",
-            ".",
-            "[See more examples below.](#usage)\n\nThe",
-            ",",
-            ".\n  -",
-            "and",
-            ". It is required when",
-            "is set to"
+            "preload(href, options)",
+            "react-dom",
+            "href",
+            "options",
+            "as",
+            "audio",
+            "document",
+            "embed",
+            "fetch"
           ],
           "path": "react/preload.md",
           "tokens": 1563
@@ -12741,14 +12755,15 @@
           "description": "[React-based frameworks](/learn/creating-a-react-app) frequently handle resource loading for you, so you might not ha...",
           "tags": [
             "preloadModule",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "function from",
-            ".",
-            "[See more examples below.](#usage)\n\nThe",
-            ": a required string. It must be",
-            ".\n  -",
-            "and",
-            "with the same"
+            "preloadModule(href, options)",
+            "react-dom",
+            "href",
+            "options",
+            "as",
+            "'script'",
+            "crossOrigin",
+            "anonymous",
+            "use-credentials"
           ],
           "path": "react/preloadmodule.md",
           "tokens": 855
@@ -12772,18 +12787,18 @@
           "description": "`createRoot` lets you create a root to display React components inside a browser DOM node.",
           "tags": [
             "createRoot",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "{/*createroot*/}\n\nCall",
-            "React will create a root for the",
-            "js\nroot.render(<App />);",
-            "caught by the Error Boundary, and an",
-            "object containing the",
-            ".\n  - **optional**",
-            "that was thrown, and an",
-            "React throws, and an"
+            "createRoot(domNode, options?)",
+            "domNode",
+            "root.render",
+            "render",
+            "options",
+            "onCaughtError",
+            "error",
+            "errorInfo",
+            "componentStack"
           ],
           "path": "react/createroot.md",
-          "tokens": 5025
+          "tokens": 5032
         },
         {
           "id": "hydrateroot",
@@ -12792,17 +12807,17 @@
           "tags": [
             "hydrateRoot",
             "react-dom/server",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "{/*hydrateroot*/}\n\nCall",
-            "which was rendered with a",
-            "method such as",
-            ".\n\n- **optional**",
-            "caught by the Error Boundary, and an",
-            "object containing the",
-            ".\n  - **optional**"
+            "domNode",
+            "reactNode",
+            "<App />",
+            "ReactDOM Server",
+            "renderToPipeableStream(<App />)",
+            "options",
+            "onCaughtError",
+            "error"
           ],
           "path": "react/hydrateroot.md",
-          "tokens": 4536
+          "tokens": 4542
         },
         {
           "id": "server-apis",
@@ -12828,18 +12843,18 @@
           "description": "`renderToPipeableStream` renders a React tree to a pipeable [Node.js Stream.](https://nodejs.org/api/stream.html)",
           "tags": [
             "renderToPipeableStream",
-            "{/*rendertopipeablestream*/}\n\nCall",
-            "On the client, call [",
-            "component should render the",
-            "tag.\n\n- **optional**",
-            "tag.\n  - **optional**",
-            ": An array of string URLs for the",
-            "that calls [",
-            ": Like",
-            ", but emits ["
+            "renderToReadableStream",
+            "hydrateRoot",
+            "reactNode",
+            "<App />",
+            "App",
+            "<html>",
+            "options",
+            "bootstrapScriptContent",
+            "<script>"
           ],
           "path": "react/rendertopipeablestream.md",
-          "tokens": 6296
+          "tokens": 6313
         },
         {
           "id": "rendertoreadablestream",
@@ -12847,18 +12862,18 @@
           "description": "`renderToReadableStream` renders a React tree to a [Readable Web Stream.](https://developer.mozilla.org/en-US/docs/We...",
           "tags": [
             "renderToReadableStream",
-            "{/*rendertoreadablestream*/}\n\nCall",
-            "On the client, call [",
-            "component should render the",
-            "tag.\n\n- **optional**",
-            "tag.\n  - **optional**",
-            ": An array of string URLs for the",
-            "that calls [",
-            ": Like",
-            ", but emits ["
+            "renderToPipeableStream",
+            "hydrateRoot",
+            "reactNode",
+            "<App />",
+            "App",
+            "<html>",
+            "options",
+            "bootstrapScriptContent",
+            "<script>"
           ],
           "path": "react/rendertoreadablestream.md",
-          "tokens": 6313
+          "tokens": 6331
         },
         {
           "id": "rendertostaticmarkup",
@@ -12866,13 +12881,16 @@
           "description": "`renderToStaticMarkup` renders a non-interactive React tree to an HTML string.",
           "tags": [
             "renderToStaticMarkup",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "to render your app to HTML.",
-            ".\n- **optional**",
-            "output cannot be hydrated.\n\n-"
+            "reactNode",
+            "<Page />",
+            "options",
+            "identifierPrefix",
+            "useId",
+            "renderToString",
+            "hydrateRoot"
           ],
           "path": "react/rendertostaticmarkup.md",
-          "tokens": 634
+          "tokens": 636
         },
         {
           "id": "rendertostring",
@@ -12880,16 +12898,18 @@
           "description": "`renderToString` does not support streaming or waiting for data. [See the alternatives.](#alternatives)",
           "tags": [
             "renderToString",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "to render your app to HTML.",
-            "On the client, call [",
-            ".\n\n- **optional**",
-            "Importing",
-            "The [",
-            "will find the closest ["
+            "renderToString(reactNode, options?)",
+            "hydrateRoot",
+            "reactNode",
+            "<App />",
+            "options",
+            "identifierPrefix",
+            "useId",
+            "renderToPipeableStream",
+            "renderToReadableStream"
           ],
           "path": "react/rendertostring.md",
-          "tokens": 1498
+          "tokens": 1499
         },
         {
           "id": "resume",
@@ -12897,18 +12917,18 @@
           "description": "`resume` streams a pre-rendered React tree to a [Readable Web Stream.](https://developer.mozilla.org/en-US/docs/Web/A...",
           "tags": [
             "resume",
-            "{/*resume*/}\n\nCall",
-            ": The React node you called",
-            "with. For example, a JSX element like \\",
-            "component should render the",
-            "tag.\n-",
-            ": The opaque",
-            ": A [",
-            ".\n\n#### Returns {/*returns*/}",
-            "returns a Promise:\n\n- If"
+            "resumeToNodeStream",
+            "resume(node, postponedState, options?)",
+            "reactNode",
+            "prerender",
+            "<App />",
+            "App",
+            "<html>",
+            "postponedState",
+            "postpone"
           ],
           "path": "react/resume.md",
-          "tokens": 2138
+          "tokens": 2139
         },
         {
           "id": "resumetopipeablestream",
@@ -12916,18 +12936,18 @@
           "description": "`resumeToPipeableStream` streams a pre-rendered React tree  to a pipeable [Node.js Stream.](https://nodejs.org/api/st...",
           "tags": [
             "resumeToPipeableStream",
-            "{/*resume-to-pipeable-stream*/}\n\nCall",
-            ": The React node you called",
-            "with. For example, a JSX element like \\",
-            "component should render the",
-            "tag.\n-",
-            ": The opaque",
-            ": A [",
-            ".\n  - **optional**",
-            "nor"
+            "resume",
+            "reactNode",
+            "prerender",
+            "<App />",
+            "App",
+            "<html>",
+            "postponedState",
+            "postpone",
+            "options"
           ],
           "path": "react/resumetopipeablestream.md",
-          "tokens": 1293
+          "tokens": 1295
         },
         {
           "id": "static-apis",
@@ -12949,18 +12969,18 @@
           "description": "`prerender` renders a React tree to a static HTML string using a [Web Stream](https://developer.mozilla.org/en-US/doc...",
           "tags": [
             "prerender",
-            "{/*prerender*/}\n\nCall",
-            "to render your app to static HTML.",
-            "On the client, call [",
-            "tag.\n\n- **optional**",
-            "tag.\n  - **optional**",
-            ": An array of string URLs for the",
-            "that calls [",
-            ": Like",
-            ", but emits ["
+            "prerenderToNodeStream",
+            "prerender(reactNode, options?)",
+            "hydrateRoot",
+            "reactNode",
+            "<App />",
+            "<html>",
+            "options",
+            "bootstrapScriptContent",
+            "<script>"
           ],
           "path": "react/prerender.md",
-          "tokens": 3551
+          "tokens": 3567
         },
         {
           "id": "prerendertonodestream",
@@ -12968,18 +12988,18 @@
           "description": "`prerenderToNodeStream` renders a React tree to a static HTML string using a [Node.js Stream.](https://nodejs.org/api...",
           "tags": [
             "prerenderToNodeStream",
-            "{/*prerender*/}\n\nCall",
-            "to render your app to static HTML.",
-            "On the client, call [",
-            "tag.\n\n- **optional**",
-            "tag.\n  - **optional**",
-            ": An array of string URLs for the",
-            "that calls [",
-            ": Like",
-            ", but emits ["
+            "prerender",
+            "hydrateRoot",
+            "reactNode",
+            "<App />",
+            "<html>",
+            "options",
+            "bootstrapScriptContent",
+            "<script>",
+            "bootstrapScripts"
           ],
           "path": "react/prerendertonodestream.md",
-          "tokens": 3651
+          "tokens": 3666
         },
         {
           "id": "resumeandprerender",
@@ -12987,18 +13007,18 @@
           "description": "`resumeAndPrerender` continues a prerendered React tree to a static HTML string using a [Web Stream](https://develope...",
           "tags": [
             "resumeAndPrerender",
-            "{/*resumeandprerender*/}\n\nCall",
-            "On the client, call [",
-            ": The React node you called",
-            "(or a previous",
-            "component should render the",
-            "tag.\n-",
-            ": The opaque",
-            ".\n\n#### Returns {/*returns*/}",
-            ","
+            "resumeAndPrerenderToNodeStream",
+            "hydrateRoot",
+            "reactNode",
+            "prerender",
+            "<App />",
+            "App",
+            "<html>",
+            "postponedState",
+            "postpone"
           ],
           "path": "react/resumeandprerender.md",
-          "tokens": 1148
+          "tokens": 1149
         },
         {
           "id": "resumeandprerendertonodestream",
@@ -13006,26 +13026,29 @@
           "description": "`resumeAndPrerenderToNodeStream` continues a prerendered React tree to a static HTML string using a a [Node.js Stream...",
           "tags": [
             "resumeAndPrerenderToNodeStream",
-            "On the client, call [",
-            ": The React node you called",
-            "(or a previous",
-            "component should render the",
-            "tag.\n-",
-            ": The opaque",
-            ".\n\n#### Returns {/*returns*/}",
-            ",",
-            "or resumed with"
+            "prerender",
+            "hydrateRoot",
+            "reactNode",
+            "<App />",
+            "App",
+            "<html>",
+            "postponedState",
+            "postpone",
+            "options"
           ],
           "path": "react/resumeandprerendertonodestream.md",
-          "tokens": 1188
+          "tokens": 1189
         },
         {
           "id": "compiling-libraries",
           "title": "Compiling Libraries",
           "description": "This guide helps library authors understand how to use React Compiler to ship optimized library code to their users.",
           "tags": [
-            "as a dependency\n2. Check that your",
-            ", not"
+            "react-compiler-runtime",
+            "target",
+            "babel-plugin-react-compiler",
+            "dependencies",
+            "devDependencies"
           ],
           "path": "react/compiling-libraries.md",
           "tokens": 866
@@ -13035,7 +13058,11 @@
           "title": "Configuration",
           "description": "This page lists all configuration options available in React Compiler.",
           "tags": [
-            "js\n{\n  target: '18' // or '17'\n}"
+            "compilationMode",
+            "target",
+            "panicThreshold",
+            "logger",
+            "gating"
           ],
           "path": "react/configuration.md",
           "tokens": 763
@@ -13046,15 +13073,13 @@
           "description": "The `compilationMode` option controls how the React Compiler selects which functions to compile.",
           "tags": [
             "compilationMode",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "#### Default value {/*default-value*/}",
-            "#### Options {/*options*/}\n\n- **",
-            "js\n{\n  compilationMode: 'infer'\n}",
-            "mode to only compile marked functions:",
-            "js\n{\n  compilationMode: 'annotation'\n}",
-            "js\n{\n  compilationMode: 'syntax'\n}",
-            "Then use Flow's component syntax:",
-            "to skip compilation:"
+            "'infer'",
+            "\"use memo\"",
+            "use",
+            "'annotation'",
+            "'syntax'",
+            "'all'",
+            "\"use no memo\""
           ],
           "path": "react/compilationmode.md",
           "tokens": 1147
@@ -13065,11 +13090,9 @@
           "description": "The `gating` option enables conditional compilation, allowing you to control when optimized code is used at runtime.",
           "tags": [
             "gating",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "#### Default value {/*default-value*/}",
-            "#### Properties {/*properties*/}\n\n- **",
-            "2. Configure the compiler:",
-            "3. The compiler generates gated code:"
+            "null",
+            "source",
+            "importSpecifierName"
           ],
           "path": "react/gating.md",
           "tokens": 664
@@ -13080,14 +13103,14 @@
           "description": "The `logger` option provides custom logging for React Compiler events during compilation.",
           "tags": [
             "logger",
-            ");\n    }\n  }\n}",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "#### Default value {/*default-value*/}",
-            "#### Methods {/*methods*/}\n\n- **",
-            "**: Function successfully compiled\n- **",
-            "**: Function skipped due to errors\n- **",
-            "**: Unexpected compilation error\n- **",
-            ");\n        console.error("
+            "null",
+            "logEvent",
+            "CompileSuccess",
+            "CompileError",
+            "CompileDiagnostic",
+            "CompileSkip",
+            "PipelineError",
+            "Timing"
           ],
           "path": "react/logger.md",
           "tokens": 591
@@ -13098,11 +13121,9 @@
           "description": "The `panicThreshold` option controls how the React Compiler handles errors during compilation.",
           "tags": [
             "panicThreshold",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "#### Default value {/*default-value*/}",
-            "#### Options {/*options*/}\n\n- **",
-            ". This is the default value:",
-            "js\n{\n  panicThreshold: 'none'\n}"
+            "'none'",
+            "'critical_errors'",
+            "'all_errors'"
           ],
           "path": "react/panicthreshold.md",
           "tokens": 455
@@ -13113,15 +13134,15 @@
           "description": "The `target` option specifies which React version the compiler should generate code for.",
           "tags": [
             "target",
-            "js\n{\n  target: '19' // or '18', '17'\n}",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "'17' | '18' | '19'",
-            "#### Default value {/*default-value*/}",
-            "**: Target React 18. Requires",
-            "package.\n- **",
-            "**: Target React 17. Requires",
-            "not",
-            "js\n{\n  // defaults to target: '19'\n}"
+            "'19'",
+            "'18'",
+            "react-compiler-runtime",
+            "'17'",
+            "17",
+            "'18.2.0'",
+            "react-compiler-runtime@latest",
+            "package.json",
+            "@latest"
           ],
           "path": "react/target.md",
           "tokens": 751
@@ -13131,11 +13152,14 @@
           "title": "Directives",
           "description": "React Compiler directives are special string literals that control whether specific functions are compiled.",
           "tags": [
-            "mode or to override",
-            "mode heuristics |\n| [",
-            "mode**: Only functions with",
-            "are compiled\n- **",
-            "mode**: Everything is compiled,"
+            "\"use memo\"",
+            "\"use no memo\"",
+            "annotation",
+            "infer",
+            "compilationMode",
+            "all",
+            "ignoreUseNoForget",
+            "Configuration"
           ],
           "path": "react/directives.md",
           "tokens": 1276
@@ -13149,12 +13173,10 @@
             "annotation",
             "infer",
             "use",
-            "When a function contains",
-            "mode: Only functions with",
-            "are optimized\n- In",
-            "mode: The compiler uses heuristics, but",
-            "forces optimization\n- In",
-            "In"
+            "compilationMode",
+            "all",
+            "compilationMode: 'annotation'",
+            "\"use no memo\""
           ],
           "path": "react/use-memo.md",
           "tokens": 1220
@@ -13165,12 +13187,10 @@
           "description": "`\"use no memo\"` prevents a function from being optimized by React Compiler.",
           "tags": [
             "\"use no memo\"",
-            "When a function contains",
-            "or its alias",
-            "{/*when-to-use*/}",
-            "***\n\n## Usage {/*usage*/}\n\nThe",
-            "isn't working:",
-            "### See also {/*see-also*/}\n\n- ["
+            "\"use no forget\"",
+            "all",
+            "infer",
+            "\"use memo\""
           ],
           "path": "react/use-no-memo.md",
           "tokens": 980
@@ -13221,8 +13241,11 @@
             "useEffect",
             "useMemo",
             "useCallback",
-            "6.1.1 and later):",
-            "-"
+            "eslint-plugin-react-hooks",
+            "additionalEffectHooks",
+            "react-hooks",
+            "additionalHooks",
+            "settings"
           ],
           "path": "react/exhaustive-deps.md",
           "tokens": 1054
@@ -13240,8 +13263,8 @@
             "while",
             "do-while",
             "use",
-            "js\n// ✅",
-            "However,"
+            "eslint-plugin-react-hooks",
+            "additionalEffectHooks"
           ],
           "path": "react/rules-of-hooks.md",
           "tokens": 1101
@@ -13267,11 +13290,9 @@
           "title": "error-boundaries",
           "description": "Validates usage of Error Boundaries instead of try/catch for errors in child components.",
           "tags": [
-            "in",
-            "/",
-            "around",
-            "to prevent confusion as the",
-            "block would never run."
+            "use",
+            "try",
+            "catch"
           ],
           "path": "react/error-boundaries.md",
           "tokens": 531
@@ -13298,9 +13319,7 @@
           "description": "Validates against mutating props, state, and other values that [are immutable](/reference/rules/components-and-hooks-...",
           "tags": [
             "useState",
-            "### Valid {/*valid*/}",
-            "won't trigger re-renders:",
-            "Create a new array instead:"
+            "push()"
           ],
           "path": "react/immutability.md",
           "tokens": 809
@@ -13310,11 +13329,9 @@
           "title": "incompatible-library",
           "description": "Validates against usage of libraries which are incompatible with memoization (manual or automatic).",
           "tags": [
-            "would break it:",
-            "js\n// ❌ react-hook-form",
-            ".",
-            "js\n// ❌ MobX",
-            "js\n// ✅ For react-hook-form, use"
+            "useMemo",
+            "observer",
+            "\"use no memo\" directive"
           ],
           "path": "react/incompatible-library.md",
           "tokens": 1228
@@ -13353,16 +13370,16 @@
             "useRef()",
             "ref.current",
             "React.createRef()",
-            "js\n  const scrollRef = useRef(null);",
-            "- An identifier named",
-            "or ending in",
-            "that reads from or writes to",
-            ".",
-            "js\n  buttonRef.current = node;",
-            "- Passed through a JSX"
+            "ref",
+            "Ref",
+            ".current",
+            "<div ref={someRef} />",
+            "refs",
+            "fooRef.current",
+            "box"
           ],
           "path": "react/refs.md",
-          "tokens": 792
+          "tokens": 796
         },
         {
           "id": "set-state-in-effect",
@@ -13380,11 +13397,8 @@
           "description": "Validates against unconditionally setting state during render, which can trigger additional renders and potential inf...",
           "tags": [
             "setState",
-            "### Valid {/*valid*/}",
-            "prop:",
-            "As soon as",
-            "exceeds",
-            "never crosses"
+            "max",
+            "count"
           ],
           "path": "react/set-state-in-render.md",
           "tokens": 749
@@ -13393,9 +13407,7 @@
           "id": "static-components",
           "title": "static-components",
           "description": "Validates that components are static, not recreated every render. Components that are recreated dynamically can reset...",
-          "tags": [
-            "Pass data as props instead:"
-          ],
+          "tags": [],
           "path": "react/static-components.md",
           "tokens": 617
         },
@@ -13405,10 +13417,7 @@
           "description": "Validates against syntax that React Compiler does not support. If you need to, you can still use this syntax outside ...",
           "tags": [
             "eval",
-            "with",
-            ");\n  return <div>{value}</div>;\n}",
-            "Use a safe expression parser instead:",
-            "Never use"
+            "with"
           ],
           "path": "react/unsupported-syntax.md",
           "tokens": 615
@@ -13420,7 +13429,7 @@
           "tags": [
             "useMemo",
             "undefined",
-            ":"
+            "useEffect"
           ],
           "path": "react/use-memo.md",
           "tokens": 603
@@ -13438,28 +13447,31 @@
           "title": "Components and Hooks must be pure",
           "description": "Pure functions only perform a calculation and nothing more. It makes your code easier to understand, debug, and allow...",
           "tags": [
-            "By wrapping the non-idempotent",
-            "is always *recreated* every time \\",
-            "When",
-            "runs again, we will continue appending",
-            "to",
-            "### Don't mutate State {/*state*/}",
-            "is memoized based on",
-            "is calculated"
+            "new Date()",
+            "Math.random()",
+            "useEffect",
+            "Array.map",
+            "items",
+            "<FriendList />",
+            "friends",
+            "document.title",
+            "document",
+            "useState"
           ],
           "path": "react/components-and-hooks-must-be-pure.md",
-          "tokens": 4332
+          "tokens": 4342
         },
         {
           "id": "react-calls-components-and-hooks",
           "title": "React calls Components and Hooks",
           "description": "React is responsible for rendering components and Hooks when necessary to optimize the user experience. It is declara...",
           "tags": [
-            "to the",
-            "This way, \\"
+            "<Feed>",
+            "<Profile>",
+            "<Button />"
           ],
           "path": "react/react-calls-components-and-hooks.md",
-          "tokens": 1238
+          "tokens": 1240
         },
         {
           "id": "rules-of-hooks",
@@ -13470,11 +13482,11 @@
             "try",
             "catch",
             "finally",
-            ",",
-            ", or",
-            ".\n- 🔴 Do not call Hooks inside",
-            "/",
-            "You can use the ["
+            "return",
+            "useMemo",
+            "useReducer",
+            "useEffect",
+            "eslint-plugin-react-hooks"
           ],
           "path": "react/rules-of-hooks.md",
           "tokens": 988
@@ -13484,13 +13496,16 @@
           "title": "Server Components",
           "description": "Server Components are a new type of Component that renders ahead of time, before bundling, in an environment separate...",
           "tags": [
-            "js\n// api.js\napp.get(",
-            ");\n  res.send({content});\n});",
-            "and",
-            "Server Component imports an",
-            "state:",
-            "This works by first rendering",
-            "The"
+            "Page",
+            "await",
+            "Note",
+            "Author",
+            "useState",
+            "\"use client\"",
+            "\"use server\"",
+            "Notes",
+            "Expandable",
+            "expanded"
           ],
           "path": "react/server-components.md",
           "tokens": 2432
@@ -13501,15 +13516,14 @@
           "description": "Server Functions are for use in [React Server Components](/reference/rsc/server-components).",
           "tags": [
             "\"use server\"",
-            "When React renders the",
-            "function with the reference provided:",
-            "For more, see the docs for [",
-            "directive:",
-            "When the bundler builds the",
-            "function in the bundle. When the",
-            "function using the reference provided:",
-            "This allows you to access the",
-            "When using"
+            "EmptyNote",
+            "createNoteAction",
+            "Button",
+            "createNote",
+            "button",
+            "isPending",
+            "<form>",
+            "useActionState"
           ],
           "path": "react/server-functions.md",
           "tokens": 1937
@@ -13531,15 +13545,15 @@
           "description": "`'use client'` is for use with [React Server Components](/reference/rsc/server-components).",
           "tags": [
             "'use client'",
-            "When a file marked with",
-            ",",
-            "and",
-            "directive in",
-            "is now marked as Client modules.",
-            "and its child component",
-            "are Client Components.\n\n#### How is",
-            "as a child of",
-            "is imported and called under"
+            "RichTextEditor",
+            "formatDate",
+            "Button",
+            "InspirationGenerator.js",
+            "InspirationGenerator",
+            "FancyText",
+            "App",
+            "Copyright",
+            "App.js"
           ],
           "path": "react/use-client.md",
           "tokens": 4605
@@ -13550,10 +13564,15 @@
           "description": "`'use server'` is for use with [using React Server Components](/reference/rsc/server-components).",
           "tags": [
             "'use server'",
-            "In this example",
-            "is a Server Function passed to a",
-            "](/reference/react/useActionState).",
-            "Note that like most Hooks,"
+            "<form action>",
+            "formAction",
+            "Symbol.for",
+            "Symbol('my new symbol')",
+            "requestUsername",
+            "<form>",
+            "action",
+            "useActionState",
+            "await"
           ],
           "path": "react/use-server.md",
           "tokens": 2544
@@ -13584,17 +13603,17 @@
           "tags": [
             "Children",
             "children",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "{/*children-count*/}\n\nCall",
-            "to count the number of children in the",
-            "data structure.",
-            ": The value of the [",
-            ",",
-            "{/*children-foreach*/}\n\nCall",
-            "to run some code for each child in the"
+            "Children.count(children)",
+            "null",
+            "undefined",
+            "fn",
+            "forEach",
+            "0",
+            "thisArg",
+            "this"
           ],
           "path": "react/children.md",
-          "tokens": 6372
+          "tokens": 6381
         },
         {
           "id": "cloneelement",
@@ -13602,18 +13621,18 @@
           "description": "Using `cloneElement` is uncommon and can lead to fragile code. [See common alternatives.](#alternatives)",
           "tags": [
             "cloneElement",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "{/*cloneelement*/}\n\nCall",
-            "to create a React element based on the",
-            ", but with different",
-            "and",
-            ":",
-            ": The",
-            ", the result of calling [",
-            "call.\n\n-"
+            "element",
+            "props",
+            "children",
+            "<Something />",
+            "createElement",
+            "null",
+            "element.props",
+            "props.key",
+            "props.ref"
           ],
           "path": "react/cloneelement.md",
-          "tokens": 3992
+          "tokens": 4007
         },
         {
           "id": "component",
@@ -13621,18 +13640,18 @@
           "description": "We recommend defining components as functions instead of classes. [See how to migrate.](#alternatives)",
           "tags": [
             "Component",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "class and define a [",
-            "method:](#render)",
-            "Only the",
-            "Reading",
-            "in class components is equivalent to [",
-            ".",
-            ". The",
-            "with the new state."
+            "render",
+            "context",
+            "this.context",
+            "static contextType",
+            "useContext",
+            "props",
+            "this.props",
+            "state",
+            "this.state"
           ],
           "path": "react/component.md",
-          "tokens": 17939
+          "tokens": 17946
         },
         {
           "id": "createelement",
@@ -13640,18 +13659,18 @@
           "description": "`createElement` lets you create a React element. It serves as an alternative to writing [JSX.](/learn/writing-markup-...",
           "tags": [
             "createElement",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "{/*createelement*/}\n\nCall",
-            ",",
-            ", and",
-            ".",
-            ": The",
-            "or",
-            "](/reference/react/Fragment)).\n\n-",
-            "argument must either be an object or"
+            "createElement(type, props, ...children)",
+            "type",
+            "props",
+            "children",
+            "'div'",
+            "'span'",
+            "Fragment",
+            "null",
+            "ref"
           ],
           "path": "react/createelement.md",
-          "tokens": 1685
+          "tokens": 1698
         },
         {
           "id": "createref",
@@ -13660,14 +13679,14 @@
           "tags": [
             "createRef",
             "useRef",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "{/*createref*/}\n\nCall",
-            ": Initially, it's set to the",
-            "is equivalent to",
-            "and assign its result to a class field:",
-            "If you now pass",
-            "to an",
-            "in your JSX, React will populate"
+            "createRef()",
+            "current",
+            "null",
+            "ref",
+            "{ current: null }",
+            "const ref = useRef()",
+            "ref={this.inputRef}",
+            "<input>"
           ],
           "path": "react/createref.md",
           "tokens": 983
@@ -13679,17 +13698,17 @@
           "tags": [
             "forwardRef",
             "ref",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "{/*forwardref*/}\n\nCall",
-            "is also able to receive a",
-            "function {/*render-function*/}",
-            "and",
-            ":",
-            ":  The",
-            ". You should either pass the"
+            "forwardRef(render)",
+            "forwardRef()",
+            "render",
+            "props",
+            "null",
+            "useImperativeHandle",
+            "Form",
+            "<input>"
           ],
           "path": "react/forwardref.md",
-          "tokens": 3439
+          "tokens": 3440
         },
         {
           "id": "isvalidelement",
@@ -13697,18 +13716,18 @@
           "description": "`isValidElement` checks whether a value is a React element.",
           "tags": [
             "isValidElement",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "{/*isvalidelement*/}\n\nCall",
-            "to check whether",
-            "is a React element.",
-            ": The",
-            "returns",
-            "if the",
-            ":",
-            "It is very uncommon to need"
+            "isValidElement(value)",
+            "value",
+            "true",
+            "false",
+            "createElement",
+            "42",
+            "createPortal",
+            "cloneElement",
+            "<div />"
           ],
           "path": "react/isvalidelement.md",
-          "tokens": 995
+          "tokens": 997
         },
         {
           "id": "purecomponent",
@@ -13717,14 +13736,12 @@
           "tags": [
             "PureComponent",
             "Component",
-            "***\n\n## Reference {/*reference*/}\n\n###",
-            "instead of [",
-            ":](/reference/react/Component)",
-            "is a subclass of",
-            "and supports [all the",
-            "is equivalent to defining a custom [",
-            ":",
-            "component re-renders whenever"
+            "shouldComponentUpdate",
+            "Greeting",
+            "name",
+            "address",
+            "memo",
+            "set"
           ],
           "path": "react/purecomponent.md",
           "tokens": 1439
@@ -13871,7 +13888,7 @@
             "414 URI Too Long"
           ],
           "path": "trpc/introduction.md",
-          "tokens": 4003
+          "tokens": 4006
         },
         {
           "id": "headers-and-authorization-authentication",
@@ -14081,7 +14098,7 @@
             "TRPCClient"
           ],
           "path": "trpc/using-your-api.md",
-          "tokens": 1701
+          "tokens": 1705
         },
         {
           "id": "usage-2",
@@ -14509,7 +14526,7 @@
             "User"
           ],
           "path": "trpc/how-to-use-trpc-with-fastify.md",
-          "tokens": 2048
+          "tokens": 2050
         },
         {
           "id": "common-setup",
@@ -14581,13 +14598,13 @@
             "GET",
             "responseMeta",
             "initTRPC",
-            ".context()",
+            ".context<TContext>()",
             ".create()",
             "TContext",
             "createContext()"
           ],
           "path": "trpc/api-response-caching.md",
-          "tokens": 1464
+          "tokens": 1467
         },
         {
           "id": "inner-and-outer-context",

@@ -2,7 +2,9 @@
 
 Request ID Middleware generates a unique ID for each request, which you can use in your handlers.
 
+::: info
 **Node.js**: This middleware uses `crypto.randomUUID()` to generate IDs. The global `crypto` was introduced in Node.js version 20 or later. Therefore, errors may occur in versions earlier than that. In that case, please specify `generator`. However, if you are using [the Node.js adapter](https://github.com/honojs/node-server), it automatically sets `crypto` globally, so this is not necessary.
+:::
 
 ## Import
 
@@ -60,15 +62,15 @@ If you want to disable this feature, set [`headerName` option](#headername-strin
 
 ## Options
 
-### &#x20;limitLength: `number`
+### <Badge type="info" text="optional" /> limitLength: `number`
 
 The maximum length of the request ID. The default is `255`.
 
-### &#x20;headerName: `string`
+### <Badge type="info" text="optional" /> headerName: `string`
 
 The header name used for the request ID. The default is `X-Request-Id`.
 
-### &#x20;generator: `(c: Context) => string`
+### <Badge type="info" text="optional" /> generator: `(c: Context) => string`
 
 The request ID generation function. By default, it uses `crypto.randomUUID()`.
 
@@ -135,14 +137,14 @@ app.get('/', (c) => {
 
 ## Options
 
-### &#x20;space: `number`
+### <Badge type="info" text="optional" /> space: `number`
 
 Number of spaces for indentation. The default is `2`.
 
-### &#x20;query: `string`
+### <Badge type="info" text="optional" /> query: `string`
 
 The name of the query string for applying. The default is `pretty`.
 
-### &#x20;force: `boolean`
+### <Badge type="info" text="optional" /> force: `boolean`
 
 When set to `true`, JSON responses are always prettified regardless of the query parameter. The default is `false`.

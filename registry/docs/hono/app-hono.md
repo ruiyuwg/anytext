@@ -44,7 +44,9 @@ app.notFound((c) => {
 })
 ```
 
+:::warning
 The `notFound` method is only called from the top-level app. For more information, see this [issue](https://github.com/honojs/hono/issues/3465#issuecomment-2381210165).
+:::
 
 ## Error Handling
 
@@ -60,11 +62,15 @@ app.onError((err, c) => {
 })
 ```
 
+::: info
 If both a parent app and its routes have `onError` handlers, the route-level handlers get priority.
+:::
 
 ## fire()
 
+::: warning
 **`app.fire()` is deprecated**. Use `fire()` from `hono/service-worker` instead. See the [Service Worker documentation](/docs/getting-started/service-worker) for details.
+:::
 
 `app.fire()` automatically adds a global `fetch` event listener.
 
@@ -107,6 +113,8 @@ export default app
 ```
 
 Bun:
+
+<!-- prettier-ignore -->
 
 ```ts
 export default app // [!code --]

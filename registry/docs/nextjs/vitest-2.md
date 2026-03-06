@@ -102,7 +102,7 @@ When you run `npm run test`, Vitest will **watch** for changes in your project b
 
 ## Creating your first Vitest Unit Test
 
-Check that everything is working by creating a test to check if the \`\` component successfully renders a heading:
+Check that everything is working by creating a test to check if the `<Page />` component successfully renders a heading:
 
 ```tsx filename="pages/index.tsx" switcher
 import Link from 'next/link'
