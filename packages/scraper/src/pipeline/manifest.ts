@@ -1,6 +1,7 @@
 import { readFileSync, renameSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import type { Manifest, ManifestLibrary } from "../types.js";
+import { validateManifest } from "../validate.js";
 
 const REGISTRY_DIR = path.resolve(
   import.meta.dirname,
@@ -18,7 +19,11 @@ export function getRegistryDir(): string {
 export function readManifest(): Manifest {
   const manifestPath = path.join(REGISTRY_DIR, "manifest.json");
   const raw = readFileSync(manifestPath, "utf-8");
-  return JSON.parse(raw) as Manifest;
+  const data: unknown = JSON.parse(raw);
+  if (!validateManifest(data)) {
+    throw new Error("Invalid manifest.json format");
+  }
+  return data;
 }
 
 export function writeManifest(manifest: Manifest): void {

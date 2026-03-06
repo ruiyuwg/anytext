@@ -2,10 +2,15 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import type { Manifest, ManifestLibrary } from "../../types.js";
 
 vi.mock("node:fs");
+vi.mock("../../validate.js", () => ({
+  validateManifest: vi.fn(() => true),
+}));
 
-beforeEach(() => {
+beforeEach(async () => {
   vi.useFakeTimers();
   vi.setSystemTime(new Date("2025-06-01T12:00:00Z"));
+  const validate = await import("../../validate.js");
+  vi.mocked(validate.validateManifest).mockReturnValue(true);
 });
 
 describe("getRegistryDir", () => {
@@ -24,6 +29,16 @@ describe("readManifest", () => {
 
     const { readManifest } = await import("../../pipeline/manifest.js");
     expect(readManifest()).toEqual(manifest);
+  });
+
+  it("throws on invalid manifest format", async () => {
+    const fs = await import("node:fs");
+    vi.mocked(fs.readFileSync).mockReturnValue(JSON.stringify({ bad: "data" }));
+    const validate = await import("../../validate.js");
+    vi.mocked(validate.validateManifest).mockReturnValue(false);
+
+    const { readManifest } = await import("../../pipeline/manifest.js");
+    expect(() => readManifest()).toThrow("Invalid manifest.json format");
   });
 });
 

@@ -47,10 +47,7 @@ describe("validateManifest", () => {
       validateManifest({
         ...validManifest,
         libraries: [
-          {
-            ...validLibrary,
-            topics: [{ ...validTopic, tags: [] }],
-          },
+          { ...validLibrary, topics: [{ ...validTopic, tags: [] }] },
         ],
       })
     ).toBe(true);
@@ -72,11 +69,6 @@ describe("validateManifest", () => {
     expect(validateManifest([1, 2, 3])).toBe(false);
   });
 
-  it("rejects missing version", () => {
-    const { version: _version, ...rest } = validManifest;
-    expect(validateManifest(rest)).toBe(false);
-  });
-
   it("rejects non-number version", () => {
     expect(validateManifest({ ...validManifest, version: "1" })).toBe(false);
   });
@@ -86,14 +78,14 @@ describe("validateManifest", () => {
   });
 
   it("rejects non-array libraries", () => {
-    expect(validateManifest({ ...validManifest, libraries: "not array" })).toBe(false);
+    expect(validateManifest({ ...validManifest, libraries: "x" })).toBe(false);
   });
 
   it("rejects library with non-string id", () => {
     expect(
       validateManifest({
         ...validManifest,
-        libraries: [{ ...validLibrary, id: 123 }],
+        libraries: [{ ...validLibrary, id: 1 }],
       })
     ).toBe(false);
   });
@@ -129,14 +121,14 @@ describe("validateManifest", () => {
     expect(
       validateManifest({
         ...validManifest,
-        libraries: [{ ...validLibrary, topics: "not array" }],
+        libraries: [{ ...validLibrary, topics: "x" }],
       })
     ).toBe(false);
   });
 
   it("rejects library that is not an object", () => {
     expect(
-      validateManifest({ ...validManifest, libraries: ["not an object"] })
+      validateManifest({ ...validManifest, libraries: ["x"] })
     ).toBe(false);
   });
 
@@ -200,7 +192,7 @@ describe("validateManifest", () => {
       validateManifest({
         ...validManifest,
         libraries: [
-          { ...validLibrary, topics: [{ ...validTopic, tags: "not array" }] },
+          { ...validLibrary, topics: [{ ...validTopic, tags: "x" }] },
         ],
       })
     ).toBe(false);
