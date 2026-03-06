@@ -1,5 +1,11 @@
 # anytext
 
+[![npm version](https://img.shields.io/npm/v/anytext)](https://www.npmjs.com/package/anytext)
+[![CI](https://img.shields.io/github/actions/workflow/status/ruiyuwg/anytext/ci.yml?branch=main&label=CI)](https://github.com/ruiyuwg/anytext/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/ruiyuwg/anytext/graph/badge.svg)](https://codecov.io/gh/ruiyuwg/anytext)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Node.js](https://img.shields.io/badge/node-%3E%3D18-brightgreen)](https://nodejs.org)
+
 Instant, clean documentation for coding agents.
 
 **anytext** is a CLI tool that gives coding agents (Claude Code, Cursor, etc.) fast access to clean, LLM-ready documentation for any library or framework. No MCP servers, no per-library setup, no protocol overhead — just plain markdown to stdout.
