@@ -48,8 +48,8 @@ export function stem(word: string): string {
 
   // Handle trailing 's' separately (not after 's')
   if (result === word && result.endsWith("s") && !result.endsWith("ss")) {
-    const stripped = result.slice(0, -1);
-    if (stripped.length >= 3) result = stripped;
+    // stripped.length >= 3 is guaranteed: word.length > 3 (early return) && result === word
+    result = result.slice(0, -1);
   }
 
   // Step B: derivational

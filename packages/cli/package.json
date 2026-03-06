@@ -13,13 +13,17 @@
     "build": "tsc",
     "dev": "tsc --watch",
     "check-types": "tsc --noEmit",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@types/node": "^22.15.3",
-    "typescript": "5.9.2"
+    "@vitest/coverage-v8": "^4.0.18",
+    "typescript": "5.9.2",
+    "vitest": "^4.0.18"
   },
   "license": "MIT",
   "engines": {
