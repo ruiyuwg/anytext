@@ -61,6 +61,18 @@ describe("CLI entry point", () => {
     expect(mockCacheCommand).toHaveBeenCalledWith(["clear"]);
   });
 
+  it("prints version for --version", async () => {
+    const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
+    await runCLI(["--version"]);
+    expect(logSpy).toHaveBeenCalledWith(expect.stringMatching(/^\d+\.\d+\.\d+/));
+  });
+
+  it("prints version for -v", async () => {
+    const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
+    await runCLI(["-v"]);
+    expect(logSpy).toHaveBeenCalledWith(expect.stringMatching(/^\d+\.\d+\.\d+/));
+  });
+
   it("prints help for --help", async () => {
     const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
     await runCLI(["--help"]);

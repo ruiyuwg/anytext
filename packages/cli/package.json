@@ -7,7 +7,22 @@
     "anytext": "./dist/index.js"
   },
   "files": [
-    "dist"
+    "dist",
+    "!dist/__tests__"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ruiyuwg/anytext.git"
+  },
+  "homepage": "https://github.com/ruiyuwg/anytext",
+  "keywords": [
+    "documentation",
+    "cli",
+    "llm",
+    "coding-agents",
+    "markdown",
+    "ai",
+    "developer-tools"
   ],
   "scripts": {
     "build": "tsc",
@@ -15,7 +30,8 @@
     "check-types": "tsc --noEmit",
     "lint": "eslint .",
     "test": "vitest run",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "prepublishOnly": "pnpm build"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",

@@ -1,10 +1,14 @@
 #!/usr/bin/env node
 
+import { createRequire } from "node:module";
 import { list } from "./commands/list.js";
 import { search } from "./commands/search.js";
 import { read } from "./commands/read.js";
 import { cacheCommand } from "./commands/cache.js";
 import { bold, dim, heading, printError } from "./format.js";
+
+const require = createRequire(import.meta.url);
+const { version } = require("../package.json") as { version: string };
 
 function buildHelp(): string {
   return [
@@ -39,6 +43,10 @@ async function main(): Promise<void> {
       break;
     case "cache":
       cacheCommand(args);
+      break;
+    case "--version":
+    case "-v":
+      console.log(version);
       break;
     case "--help":
     case "-h":
