@@ -1,0 +1,293 @@
+# Cloud
+
+Source: https://docs.langchain.com/langsmith/cloud
+
+If you're ready to deploy your app to Cloud, follow the [Cloud deployment quickstart](/langsmith/deployment-quickstart) or the [full setup guide](/langsmith/deploy-to-cloud). This page explains the Cloud managed architecture for reference.
+
+The **Cloud** option is a fully managed model where LangChain hosts and operates all LangSmith infrastructure and services:
+
+- **Fully managed infrastructure**: LangChain handles all infrastructure, updates, scaling, and maintenance.
+- **Deploy from GitHub**: Connect your repositories and deploy with a few clicks.
+- **Automated CI/CD**: Build process is handled automatically by the platform.
+- **LangSmith UI**: Full access to [observability](/langsmith/observability), [evaluation](/langsmith/evaluation), [deployment management](/langsmith/deployments), and [Studio](/langsmith/studio).
+
+|                                               | **Who manages it** | **Where it runs** |
+| --------------------------------------------- | ------------------ | ----------------- |
+| **LangSmith platform (UI, APIs, datastores)** | LangChain          | LangChain's cloud |
+| **Your Agent Servers**                        | LangChain          | LangChain's cloud |
+| **CI/CD for your apps**                       | LangChain          | LangChain's cloud |
+
+## Get started
+
+To deploy your first application to Cloud, follow the [Cloud deployment quickstart](/langsmith/deployment-quickstart) or refer to the [comprehensive setup guide](/langsmith/deploy-to-cloud).
+
+## Cloud architecture and scalability
+
+This section is only relevant for the cloud-managed LangSmith services available at <https://smith.langchain.com> and <https://eu.smith.langchain.com>.
+
+For information on the self-hosted LangSmith solution, please refer to the [self-hosted documentation](/langsmith/self-hosted).
+
+LangSmith is deployed on Google Cloud Platform (GCP) and is designed to be highly scalable. Many customers run production workloads on LangSmith for LLM application observability, evaluation, and agent deployment
+
+### Architecture
+
+The US-based LangSmith service is deployed in the `us-central1` (Iowa) region of GCP.
+
+The [EU-based LangSmith service](https://eu.smith.langchain.com) is now available (as of mid-July 2024) and is deployed in the `europe-west4` (Netherlands) region of GCP. If you are interested in an enterprise plan in this region, [contact our sales team](https://www.langchain.com/contact-sales).
+
+#### Regional storage
+
+The resources and services in this table are stored in the location corresponding to the URL where sign-up occurred (either the US or EU). Cloud-managed LangSmith uses [Supabase](https://supabase.com) for authentication/authorization and [ClickHouse Cloud](https://clickhouse.com/cloud) for data warehouse.
+
+|                                                | US                                                                 | EU                                                                       |
+| ---------------------------------------------- | ------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| URL                                            | <https://smith.langchain.com>         | <https://eu.smith.langchain.com>         |
+| API URL                                        | <https://api.smith.langchain.com> | <https://eu.api.smith.langchain.com> |
+| GCP                                            | us-central1 (Iowa)                                                 | europe-west4 (Netherlands)                                               |
+| Supabase                                       | AWS us-east-1 (N. Virginia)                                        | AWS eu-central-1 (Germany)                                               |
+| ClickHouse Cloud                               | us-central1 (Iowa)                                                 | europe-west4 (Netherlands)                                               |
+| [LangSmith deployment](/langsmith/deployments) | us-central1 (Iowa)                                                 | europe-west4 (Netherlands)                                               |
+
+See the [Regions FAQ](/langsmith/regions-faq) for more information.
+
+#### Region-independent storage
+
+Data listed here is stored exclusively in the US:
+
+- Payment and billing information with Stripe and Metronome
+
+#### GCP services
+
+LangSmith is composed of the following services, all deployed on Google Kubernetes Engine (GKE):
+
+- LangSmith Frontend: serves the LangSmith UI.
+- LangSmith Backend: serves the LangSmith API.
+- LangSmith Platform Backend: handles authentication and other high-volume tasks. (Internal service)
+- LangSmith Playground: handles forwarding requests to various LLM providers for the Playground feature.
+- LangSmith Queue: handles processing of asynchronous tasks. (Internal service)
+
+LangSmith uses the following GCP storage services:
+
+- Google Cloud Storage (GCS) for runs inputs and outputs.
+- Google Cloud SQL PostgreSQL for transactional workloads.
+- Google Cloud Memorystore for Redis for queuing and caching.
+- Clickhouse Cloud on GCP for trace ingestion and analytics. Our services connect to Clickhouse Cloud, which is hosted in the same GCP region, via a private endpoint.
+
+Some additional GCP services we use include:
+
+- Google Cloud Load Balancer for routing traffic to the LangSmith services.
+- Google Cloud CDN for caching static assets.
+- Google Cloud Armor for security and rate limits. For more information on rate limits we enforce, please refer to [this guide](/langsmith/administration-overview#rate-limits).
+
+### Allowlisting IP addresses
+
+#### Egress from LangChain SaaS
+
+All traffic leaving LangSmith services will be routed through a NAT gateway. All traffic will appear to originate from the following IP addresses:
+
+| US             | EU             |
+| -------------- | -------------- |
+| 34.59.65.97    | 34.13.192.67   |
+| 34.67.51.221   | 34.147.105.64  |
+| 34.46.212.37   | 34.90.22.166   |
+| 34.132.150.88  | 34.147.36.213  |
+| 35.188.222.201 | 34.32.137.113  |
+| 34.58.194.127  | 34.91.238.184  |
+| 34.59.97.173   | 35.204.101.241 |
+| 104.198.162.55 | 35.204.48.32   |
+
+It may be helpful to allowlist these IP addresses if connecting to your own AzureOpenAI service or other endpoints that may be required by the Playground or Online Evaluation.
+
+#### Ingress into LangChain SaaS
+
+The langchain endpoints map to the following static IP addresses:
+
+| US             | EU           |
+| -------------- | ------------ |
+| 34.8.121.39    | 34.95.92.214 |
+| 34.107.251.234 | 34.13.73.122 |
+
+You may need to allowlist these to enable traffic from your private network to LangSmith SaaS endpoints (`api.smith.langchain.com`, `smith.langchain.com`, `beacon.langchain.com`, `eu.api.smith.langchain.com`, `eu.smith.langchain.com`, `eu.beacon.langchain.com`).
+
+### Private Service Connect (Enterprise)
+
+**Enterprise only.** Private Service Connect is available exclusively for Enterprise customers. Contact your account representative or <sales@langchain.dev> to enable this feature.
+
+Enterprise customers on GCP can connect to LangSmith via [Private Service Connect (PSC)](https://cloud.google.com/vpc/docs/private-service-connect), providing private connectivity without exposing traffic to the public internet.
+
+#### Service attachment URIs
+
+Use the following service attachment URIs to create a PSC endpoint in your VPC:
+
+| Region              | Service Attachment URI                                                                |
+| ------------------- | ------------------------------------------------------------------------------------- |
+| US (`us-central1`)  | `projects/langchain-prod/regions/us-central1/serviceAttachments/gateway-psc-publish`  |
+| EU (`europe-west4`) | `projects/langchain-prod/regions/europe-west4/serviceAttachments/gateway-psc-publish` |
+
+#### PSC domains
+
+After setup, use the following domains to connect to LangSmith over your PSC connection:
+
+| Region | Domain                                   |
+| ------ | ---------------------------------------- |
+| US     | `us-central1.p.api.smith.langchain.com`  |
+| EU     | `europe-west4.p.api.smith.langchain.com` |
+
+#### Setup
+
+**Request access:** Contact your account representative or <sales@langchain.dev> with your GCP project ID. LangChain will add your project to the service attachment's allowed consumer list.
+
+After access is granted, create a PSC endpoint and configure DNS using either the gcloud CLI or Terraform.
+
+#### Create a PSC endpoint
+
+Create a forwarding rule in your VPC targeting the service attachment:
+
+```bash gcloud CLI theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+# Create the PSC endpoint
+gcloud compute forwarding-rules create langsmith-psc-endpoint \
+  --region= \
+  --network=<YOUR_VPC_NETWORK> \
+  --subnet=<YOUR_SUBNET> \
+  --target-service-attachment=projects/langchain-prod/regions//serviceAttachments/gateway-psc-publish \
+  --load-balancing-scheme=""
+
+# Get the assigned IP address
+gcloud compute forwarding-rules describe langsmith-psc-endpoint \
+  --region= \
+  --format="value(IPAddress)"
+```
+
+```hcl Terraform theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+resource "google_compute_forwarding_rule" "langsmith_psc" {
+  name                  = "langsmith-psc-endpoint"
+  project               = "<YOUR_PROJECT_ID>"
+  region                = ""
+  network               = "<YOUR_VPC_NETWORK>"
+  subnetwork            = "<YOUR_SUBNET>"
+  target                = "projects/langchain-prod/regions//serviceAttachments/gateway-psc-publish"
+  load_balancing_scheme = ""
+}
+```
+
+#### Configure DNS
+
+Create a private DNS zone in your VPC and add an A record pointing to the PSC endpoint IP:
+
+```bash gcloud CLI theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+# Create a private DNS zone
+gcloud dns managed-zones create langsmith-psc \
+  --dns-name=".p.api.smith.langchain.com." \
+  --visibility=private \
+  --networks=<YOUR_VPC_NETWORK>
+
+# Add an A record pointing to the PSC endpoint IP
+gcloud dns record-sets create ".p.api.smith.langchain.com." \
+  --zone=langsmith-psc \
+  --type=A \
+  --rrdatas=<PSC_ENDPOINT_IP>
+```
+
+```hcl Terraform theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+resource "google_dns_managed_zone" "langsmith_psc" {
+  name        = "langsmith-psc"
+  project     = "<YOUR_PROJECT_ID>"
+  dns_name    = ".p.api.smith.langchain.com."
+  visibility  = "private"
+
+  private_visibility_config {
+    networks {
+      network_url = "<YOUR_VPC_NETWORK_SELF_LINK>"
+    }
+  }
+}
+
+resource "google_dns_record_set" "langsmith_psc" {
+  name         = ".p.api.smith.langchain.com."
+  project      = "<YOUR_PROJECT_ID>"
+  managed_zone = google_dns_managed_zone.langsmith_psc.name
+  type         = "A"
+  ttl          = 300
+  rrdatas      = [google_compute_forwarding_rule.langsmith_psc.ip_address]
+}
+```
+
+#### Verify connectivity
+
+From a VM in your VPC:
+
+```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+curl https://<REGION>.p.api.smith.langchain.com/ok
+```
+
+### API rate limits
+
+LangSmith enforces rate limits on API endpoints to ensure service stability and fair usage. The following table shows the rate limits for different endpoints in both US and EU regions. Note that:
+
+- Rate limits are expressed as `count / interval` where count is the number of requests allowed within the interval (in seconds). For example, `2000 / 10` means 2000 requests per 10 seconds.
+- When no HTTP method is specified in the endpoint column, the rate limit applies to all HTTP methods for that endpoint.
+- When a specific method is listed (e.g., `POST`, `GET`), the rate limit applies only to that method.
+
+| Match / Endpoint (method)                   | Identity key     | US prod limit | EU prod limit | Category                                     |
+| ------------------------------------------- | ---------------- | ------------- | ------------- | -------------------------------------------- |
+| OPTIONS, `/info`, `*/v1/metadata/submit`    | IP               | 2000 / 10     | 2000 / 10     | [High throughput](#rate-limit-categories)    |
+| `/auth`                                     | `x-api-key`      | 2000 / 10     | 2000 / 10     | [High throughput](#rate-limit-categories)    |
+| `/auth`                                     | `x-user-id` + IP | 2000 / 10     | 2000 / 10     | [High throughput](#rate-limit-categories)    |
+| `/v1/beacon`                                | IP               | 2000 / 10     | 2000 / 10     | [High throughput](#rate-limit-categories)    |
+| `/repos`                                    | `x-api-key`      | 100 / 60      | 100 / 60      | [Repository](#rate-limit-categories)         |
+| `/repos`                                    | `x-user-id` + IP | 100 / 60      | 100 / 60      | [Repository](#rate-limit-categories)         |
+| `POST /runs/batch`                          | `x-api-key`      | 2000 / 10     | 2000 / 10     | [High throughput](#rate-limit-categories)    |
+| `POST /otel/v1/traces`                      | `x-api-key`      | 2000 / 10     | 2000 / 10     | [Run ingest](#rate-limit-categories)         |
+| `POST` containing `/charts`                 | `x-api-key`      | 750 / 600     | 750 / 600     | [Charts](#rate-limit-categories)             |
+| `POST` containing `/charts`                 | `x-user-id` + IP | 750 / 600     | 750 / 600     | [Charts](#rate-limit-categories)             |
+| `POST /runs/multipart`                      | `x-api-key`      | 6000 / 10     | 6000 / 10     | [Multipart ingest](#rate-limit-categories)   |
+| `POST /runs/query`                          | `x-api-key`      | 15 / 10       | 15 / 10       | [Run query (API)](#rate-limit-categories)    |
+| `POST /runs/query`                          | `x-user-id` + IP | 300 / 10      | 300 / 10      | [Run query (User)](#rate-limit-categories)   |
+| `/generate`                                 | `x-api-key`      | 30 / 3600     | 30 / 3600     | [Generation](#rate-limit-categories)         |
+| `/generate`                                 | `x-user-id` + IP | 30 / 3600     | 30 / 3600     | [Generation](#rate-limit-categories)         |
+| `/commits`                                  | `x-api-key`      | 10000 / 60    | 2000 / 60     | [Commits](#rate-limit-categories)            |
+| `/commits`                                  | `x-user-id` + IP | 10000 / 60    | 2000 / 60     | [Commits](#rate-limit-categories)            |
+| `DELETE /sessions` or `*/trigger`           | `x-api-key`      | 10 / 60       | 10 / 60       | [Deletion](#rate-limit-categories)           |
+| `DELETE /sessions` or `*/trigger`           | `x-user-id` + IP | 30 / 60       | 30 / 60       | [Deletion](#rate-limit-categories)           |
+| `POST /runs` (single run ingest)            | `x-api-key`      | 2000 / 10     | 2000 / 10     | [Run ingest](#rate-limit-categories)         |
+| `PATCH` containing `/runs`                  | `x-api-key`      | 2000 / 10     | 2000 / 10     | [Run ingest](#rate-limit-categories)         |
+| `POST /feedback`                            | `x-api-key`      | 2000 / 10     | 2000 / 10     | [High throughput](#rate-limit-categories)    |
+| `GET /runs/{uuid}` or `/api/v1/runs/{uuid}` | `x-api-key`      | 30 / 60       | 30 / 60       | [Run lookup](#rate-limit-categories)         |
+| `GET` containing `/examples`                | `x-api-key`      | 5000 / 60     | 5000 / 60     | [Examples](#rate-limit-categories)           |
+| Any request with `x-api-key`                | `x-api-key`      | 1000 / 10     | 1000 / 10     | [Default (API key)](#rate-limit-categories)  |
+| Any request with `x-user-id`                | `x-user-id` + IP | 1000 / 10     | 1000 / 10     | [Default (User)](#rate-limit-categories)     |
+| `/public/download`                          | IP               | 5000 / 60     | 5000 / 60     | [Public download](#rate-limit-categories)    |
+| `/runs/stats`                               | `x-api-key`      | 1 / 10        | 20 / 10       | [Stats](#rate-limit-categories)              |
+| All other IPs (catch-all)                   | IP               | 100 / 60      | 100 / 60      | [Public (catch-all)](#rate-limit-categories) |
+
+#### Rate limit categories
+
+- **High throughput**: General high-volume endpoints for core operations like authentication, metadata, and feedback.
+- **Repository**: Repository and prompt management operations.
+- **Run ingest**: Individual trace/run ingestion endpoints for observability.
+- **Charts**: Chart generation and visualization endpoints.
+- **Multipart ingest**: Bulk run ingestion via multipart upload for high-volume tracing.
+- **Run query (API)**: API key-based run query operations with stricter limits for complex queries.
+- **Run query (User)**: User-based run query operations with higher limits for interactive use.
+- **Generation**: AI-powered code and content generation endpoints (limited to prevent abuse).
+- **Commits**: Prompt versioning and commit operations.
+- **Deletion**: Session deletion and workflow trigger operations.
+- **Run lookup**: Retrieving specific runs by UUID.
+- **Examples**: Fetching dataset examples for few-shot prompting.
+- **Default (API key)**: Fallback rate limit for authenticated API requests not matching specific patterns.
+- **Default (User)**: Fallback rate limit for authenticated user requests not matching specific patterns.
+- **Public download**: High-volume public download endpoints for shared resources.
+- **Stats**: Run statistics and analytics endpoints (region-specific limits apply).
+- **Public (catch-all)**: Default rate limit for unauthenticated public access.
+
+For more information on rate limits and other service limits, refer to the [Administration overview](/langsmith/administration-overview#rate-limits).
+
+***
+
+```
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/cloud.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+
+
+
+[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+```

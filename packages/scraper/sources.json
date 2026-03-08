@@ -258,6 +258,14 @@
       "url": "https://platform.openai.com/docs/llms-full.txt"
     },
     {
+      "id": "langchain",
+      "name": "LangChain",
+      "description": "Framework for building applications with large language models using chains, agents, and retrieval",
+      "version": "0.3",
+      "adapter": "llms-full",
+      "url": "https://docs.langchain.com/llms-full.txt"
+    },
+    {
       "id": "azure",
       "name": "Azure",
       "description": "Microsoft Azure cloud platform with compute, storage, databases, AI, and 200+ services",

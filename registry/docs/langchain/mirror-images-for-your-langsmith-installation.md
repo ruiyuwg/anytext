@@ -1,0 +1,207 @@
+# Mirror images for your LangSmith installation
+
+Source: https://docs.langchain.com/langsmith/self-host-mirroring-images
+
+By default, LangSmith will pull images from our public Docker registry. However, if you are running LangSmith in an environment that does not have internet access, or if you would like to use a private Docker registry, you can mirror the images to your own registry and then configure your LangSmith installation to use those images.
+
+## Requirements
+
+- Authenticated access to a Docker registry that your Kubernetes cluster/machine has access to.
+- Docker installed on your local machine or a machine that has access to the Docker registry.
+- A Kubernetes cluster or a machine where you can run LangSmith.
+
+## Mirroring the images
+
+For your convenience, we have provided a script that will mirror the images for you. You can find the script in the [LangSmith Helm Chart repository](https://github.com/langchain-ai/helm/blob/main/charts/langsmith/scripts/mirror_langsmith_images.sh)
+
+To use the script, you will need to run the script with the following command specifying your registry and platform:
+
+```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+bash mirror_images.sh <your-registry> [<platform>]
+```
+
+Where `<your-registry>` is the URL of your Docker registry (e.g. `myregistry.com`) and `<platform>` is the platform you are using (e.g. `linux/amd64`, `linux/arm64`, etc.). If you do not specify a platform, it will default to `linux/amd64`.
+
+For example, if your registry is `myregistry.com`, your platform is `linux/arm64`, and you want to use the latest version of the images, you would run:
+
+```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+bash mirror_langsmith_images.sh --registry myregistry --platform linux/arm64 --version 0.10.66
+```
+
+Note that this script will assume that you have Docker installed and that you are authenticated to your registry. It will also push the images to the specified registry with the same repository/tag as the original images.
+
+Alternatively, you can pull, mirror, and push the images manually. The images that you will need to mirror are found in the `values.yaml` file of the LangSmith Helm Chart. These can be found here: [LangSmith Helm Chart values.yaml](https://github.com/langchain-ai/helm/blob/main/charts/langsmith/values.yaml#L14)
+
+Here is an example of how to mirror the images using Docker:
+
+```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+# Pull the images from the public registry
+docker pull langchain/langsmith-backend:latest
+docker tag langchain/langsmith-backend:latest <your-registry>/langsmith-backend:latest
+docker push <your-registry>/langsmith-backend:latest
+```
+
+You will need to repeat this for each image that you want to mirror.
+
+## Configuration
+
+Once the images are mirrored, you will need to configure your LangSmith installation to use the mirrored images. You can do this by modifying the `values.yaml` file for your LangSmith Helm Chart installation or the `.env` file for your Docker installation. Replace tag with the version you want to use, e.g. `0.10.66` for the latest version at the time of writing.
+
+```yaml Helm theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+images:
+  imagePullSecrets: [] # Add your image pull secrets here if needed
+  registry: "" # Set this to your registry URL if you mirrored all images to the same registry using our script. Then you can remove the repository prefix from the images below.
+  aceBackendImage:
+    repository: "(your-registry)/langchain/langsmith-ace-backend"
+    pullPolicy: IfNotPresent
+    tag: "0.10.66"
+  backendImage:
+    repository: "(your-registry)/langchain/langsmith-backend"
+    pullPolicy: IfNotPresent
+    tag: "0.10.66"
+  frontendImage:
+    repository: "(your-registry)/langchain/langsmith-frontend"
+    pullPolicy: IfNotPresent
+    tag: "0.10.66"
+  hostBackendImage:
+    repository: "(your-registry)/langchain/hosted-langserve-backend"
+    pullPolicy: IfNotPresent
+    tag: "0.10.66"
+  operatorImage:
+    repository: "(your-registry)/langchain/langgraph-operator"
+    pullPolicy: IfNotPresent
+    tag: "6cc83a8"
+  platformBackendImage:
+    repository: "(your-registry)/langchain/langsmith-go-backend"
+    pullPolicy: IfNotPresent
+    tag: "0.10.66"
+  playgroundImage:
+    repository: "(your-registry)/langchain/langsmith-playground"
+    pullPolicy: IfNotPresent
+    tag: "0.10.66"
+  postgresImage:
+    repository: "(your-registry)/postgres"
+    pullPolicy: IfNotPresent
+    tag: "14.7"
+  redisImage:
+    repository: "(your-registry)/redis"
+    pullPolicy: IfNotPresent
+    tag: "7"
+  clickhouseImage:
+    repository: "(your-registry)/clickhouse/clickhouse-server"
+    pullPolicy: Always
+    tag: "24.8"
+```
+
+```bash Docker theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+# In your .env file
+_REGISTRY=your-registry # Set this to your registry URL if you mirrored all images to the same registry using our script. Otherwise you will need to manually set the repository for each image in the compose file.
+```
+
+## Additional images for Agent Builder and Insights
+
+If you are using Agent Builder or Insights, the LangGraph operator dynamically creates Redis and PostgreSQL (pgvector) pods for each deployment. These pods use images defined in operator templates that require separate configuration.
+
+You must mirror these additional images:
+
+- `docker.io/redis:7`
+- `docker.io/pgvector/pgvector:pg15`
+
+Then override the operator templates in your `values.yaml` to use your mirrored images:
+
+```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+operator:
+  templates:
+    redis: |
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: ${service_name}
+        namespace: ${namespace}
+      spec:
+        replicas: 1
+        selector:
+          matchLabels:
+            app: ${service_name}
+        template:
+          metadata:
+            labels:
+              app: ${service_name}
+          spec:
+            enableServiceLinks: false
+            containers:
+            - name: redis
+              image: (your-registry)/redis:7
+              ports:
+              - containerPort: 6379
+                name: redis
+              livenessProbe:
+                exec:
+                  command:
+                  - redis-cli
+                  - ping
+                initialDelaySeconds: 30
+                periodSeconds: 10
+              readinessProbe:
+                tcpSocket:
+                  port: 6379
+                initialDelaySeconds: 10
+                periodSeconds: 5
+    db: |
+      apiVersion: apps/v1
+      kind: StatefulSet
+      metadata:
+        name: ${service_name}
+      spec:
+        serviceName: ${service_name}
+        selector:
+          matchLabels:
+            app: ${service_name}
+        persistentVolumeClaimRetentionPolicy:
+          whenDeleted: Delete
+          whenScaled: Retain
+        template:
+          metadata:
+            labels:
+              app: ${service_name}
+          spec:
+            containers:
+            - name: postgres
+              image: (your-registry)/pgvector/pgvector:pg15
+              ports:
+              - containerPort: 5432
+              command: ["docker-entrypoint.sh"]
+              args:
+                - postgres
+                - -c
+                - max_connections=${max_connections}
+              env:
+              - name: PGDATA
+                value: /var/lib/postgresql/data/pgdata
+              volumeMounts:
+              - name: postgres-data
+                mountPath: /var/lib/postgresql/data
+            enableServiceLinks: false
+        volumeClaimTemplates:
+        - metadata:
+            name: postgres-data
+          spec:
+            accessModes: ["ReadWriteOnce"]
+            resources:
+              requests:
+                storage: "${storage_gi}Gi"
+```
+
+Replace `(your-registry)` with your registry URL. The template variables (`${service_name}`, `${namespace}`, `${max_connections}`, `${storage_gi}`) are replaced by the operator at runtime and must be kept as-is.
+
+Once configured, you will need to update your LangSmith installation. You can follow our upgrade guide here: [Upgrading LangSmith](/langsmith/self-host-upgrades). If your upgrade is successful, your LangSmith instance should now be using the mirrored images from your Docker registry.
+
+***
+
+```
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-mirroring-images.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+
+
+
+[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+```

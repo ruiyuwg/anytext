@@ -1,0 +1,54 @@
+# View trace counts across your organization
+
+Source: https://docs.langchain.com/langsmith/self-host-organization-charts
+
+This feature is available on Helm chart versions 0.9.5 and later.
+
+LangSmith automatically generates and syncs organization usage charts for self-hosted installations.
+
+These charts are available under `Settings > Usage and billing > Usage graph`:
+
+- Usage by Workspace: this counts traces (root runs) by workspace
+- Organization Usage: this counts all traces (root runs) for the organization
+
+The charts are refreshed to include any new workspaces every 5 minutes. Note that the charts are not editable.
+
+## Programmatically fetch trace counts
+
+You can retrieve trace counts programmatically using two different methods:
+
+### Method 1: Use the LangSmith REST API
+
+If your self-hosted installation uses an online key, you can use the [LangSmith REST API](https://api.smith.langchain.com/redoc?_gl=1*w68t81*_gcl_au*MTgyNTQ5MDUxNy4xNzU2NzI3MDky*_ga*MTU3NDY5MzQyNC4xNzQyOTMyMTQ2*_ga_47WX3HKKY2*czE3NTgyMDAxMDAkbzM0MSRnMCR0MTc1ODIwMDEwMCRqNjAkbDAkaDA.#tag/orgs/operation/get_org_usage_api_v1_orgs_current_billing_usage_get) to fetch organization usage data.
+
+```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+curl -X GET "https://your-langsmith-instance.com/api/v1/orgs/current/billing/usage" \
+  -H "Accept: application/json" \
+  -H "X-API-Key: your-api-key" \
+  -G \
+  -d "starting_on=2025-09-01T00:00:00Z" \
+  -d "ending_before=2025-10-01T00:00:00Z" \
+  -d "on_current_plan=true"
+```
+
+### Method 2: Use PostgreSQL support queries
+
+For installations using offline keys or when you need more detailed export capabilities, you can run support queries directly against the PostgreSQL database. All available scripts are in the [support queries repository](https://github.com/langchain-ai/helm/tree/main/charts/langsmith/scripts/support_queries/postgres).
+
+```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+sh run_support_query_pg.sh "postgres://postgres:postgres@localhost:5432/postgres" \
+  --input support_queries/pg_get_trace_counts_daily.sql \
+  --output trace_counts.csv
+```
+
+For more detailed information about running support queries, see the [Run support queries against PostgreSQL](/langsmith/script-running-pg-support-queries) guide.
+
+***
+
+```
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-organization-charts.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+
+
+
+[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+```

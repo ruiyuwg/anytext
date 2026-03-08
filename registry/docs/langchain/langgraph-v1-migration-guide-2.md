@@ -1,0 +1,175 @@
+# LangGraph v1 migration guide
+
+Source: https://docs.langchain.com/oss/python/migrate/langgraph-v1
+
+This guide outlines changes in LangGraph v1 and how to migrate from previous versions. For a high-level overview of changes, see the [what's new](/oss/python/releases/langgraph-v1) page.
+
+To upgrade:
+
+```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+pip install -U langgraph langchain-core
+```
+
+```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+uv add langgraph langchain-core
+```
+
+## Summary of changes
+
+LangGraph v1 is largely backwards compatible with previous versions. The main change is the deprecation of [`create_react_agent`](https://reference.langchain.com/python/langchain-classic/agents/react/agent/create_react_agent) in favor of LangChain's new [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) function.
+
+## Deprecations
+
+The following table lists all items deprecated in LangGraph v1:
+
+| Deprecated item                            | Alternative                                                                                                                                                                                                                 |
+| ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `create_react_agent`                       | [`langchain.agents.create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent)                                                                                                             |
+| `AgentState`                               | [`langchain.agents.AgentState`](https://reference.langchain.com/python/langchain/agents/middleware/types/AgentState)                                                                                                        |
+| `AgentStatePydantic`                       | `langchain.agents.AgentState` (no more pydantic state)                                                                                                                                                                      |
+| `AgentStateWithStructuredResponse`         | `langchain.agents.AgentState`                                                                                                                                                                                               |
+| `AgentStateWithStructuredResponsePydantic` | `langchain.agents.AgentState` (no more pydantic state)                                                                                                                                                                      |
+| `HumanInterruptConfig`                     | `langchain.agents.middleware.human_in_the_loop.InterruptOnConfig`                                                                                                                                                           |
+| `ActionRequest`                            | `langchain.agents.middleware.human_in_the_loop.InterruptOnConfig`                                                                                                                                                           |
+| `HumanInterrupt`                           | `langchain.agents.middleware.human_in_the_loop.HITLRequest`                                                                                                                                                                 |
+| `ValidationNode`                           | Tools automatically validate input with [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent)                                                                                      |
+| `MessageGraph`                             | [`StateGraph`](https://reference.langchain.com/python/langgraph/graph/state/StateGraph) with a `messages` key, like [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) provides |
+
+## `create_react_agent` → `create_agent`
+
+LangGraph v1 deprecates the [`create_react_agent`](https://reference.langchain.com/python/langchain-classic/agents/react/agent/create_react_agent) prebuilt. Use LangChain's [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent), which runs on LangGraph and adds a flexible middleware system.
+
+See the LangChain v1 docs for details:
+
+- [Release notes](/oss/python/releases/langchain-v1#createagent)
+- [Migration guide](/oss/python/migrate/langchain-v1#migrate-to-create_agent)
+
+  ```python v1 (new) theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+  from langchain.agents import create_agent
+
+  agent = create_agent(  # [!code highlight]
+      model,
+      tools,
+      system_prompt="You are a helpful assistant.",
+  )
+  ```
+
+  ```python v0 (old) theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+  from langgraph.prebuilt import create_react_agent
+
+  agent = create_react_agent(  # [!code highlight]
+      model,
+      tools,
+      prompt="You are a helpful assistant.",  # [!code highlight]
+  )
+  ```
+
+## Breaking changes
+
+### Dropped Python 3.9 support
+
+All LangChain packages now require **Python 3.10 or higher**. Python 3.9 reached [end of life](https://devguide.python.org/versions/) in October 2025.
+
+***
+
+```
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/migrate/langgraph-v1.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+
+
+
+[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+```
+
+# Deep Agents
+
+Source: https://docs.langchain.com/oss/python/reference/deepagents-python
+
+***
+
+```
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/reference/deepagents-python.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+
+
+
+[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+```
+
+# Integrations
+
+Source: https://docs.langchain.com/oss/python/reference/integrations-python
+
+***
+
+```
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/reference/integrations-python.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+
+
+
+[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+```
+
+# LangChain SDK
+
+Source: https://docs.langchain.com/oss/python/reference/langchain-python
+
+***
+
+```
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/reference/langchain-python.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+
+
+
+[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+```
+
+# LangGraph SDK
+
+Source: https://docs.langchain.com/oss/python/reference/langgraph-python
+
+***
+
+```
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/reference/langgraph-python.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+
+
+
+[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+```
+
+# Reference
+
+Source: https://docs.langchain.com/oss/python/reference/overview
+
+Comprehensive API reference documentation for the LangChain and LangGraph Python and TypeScript libraries.
+
+## Reference sites
+
+```
+Complete API reference for LangChain Python, including chat models, tools, agents, and more.
+
+
+
+Complete API reference for LangGraph Python, including graph APIs, state management, checkpointing, and more.
+
+
+
+LangChain packages to connect with popular LLM providers, vector stores, tools, and other services.
+
+
+
+Use Model Context Protocol (MCP) tools within LangChain and LangGraph applications.
+
+
+
+Build agents that can plan, use subagents, and leverage file systems for complex tasks.
+```
+
+***
+
+```
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/reference/overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+
+
+
+[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+```

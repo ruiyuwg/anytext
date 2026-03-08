@@ -1,0 +1,171 @@
+# Run support queries against PostgreSQL
+
+Source: https://docs.langchain.com/langsmith/script-running-pg-support-queries
+
+This Helm repository contains queries to produce output that the LangSmith UI does not currently support directly (e.g. obtaining trace counts for multiple organizations in a single query).
+
+This command takes a postgres connection string that contains an embedded name and password (which can be passed in from a call to a secrets manager) and executes a query from an input file. In the example below, we are using the `pg_get_trace_counts_daily.sql` input file in the `support_queries/postgres` directory.
+
+## Prerequisites
+
+Ensure you have the following tools/items ready.
+
+1. kubectl
+
+   - <https://kubernetes.io/docs/tasks/tools/>
+
+2. PostgreSQL client
+
+   - <https://www.postgresql.org/download/>
+
+3. PostgreSQL database connection:
+
+   - Host
+   - Port
+   - Username
+     - If using the bundled version, this is `postgres`
+   - Password
+     - If using the bundled version, this is `postgres`
+   - Database name
+     - If using the bundled version, this is `postgres`
+
+4. Connectivity to the PostgreSQL database from the machine you will be running the migration script on.
+
+   - If you are using the bundled version, you may need to port forward the postgresql service to your local machine.
+   - Run `kubectl port-forward svc/langsmith-postgres 5432:5432` to port forward the postgresql service to your local machine.
+
+5. The script to run a support query
+
+   - You can download the script from [here](https://github.com/langchain-ai/helm/blob/main/charts/langsmith/scripts/run_support_query_pg.sh)
+
+## Running the query script
+
+Run the following command to run the desired query:
+
+```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+sh run_support_query_pg.sh <postgres_url> --input path/to/query.sql
+```
+
+For example, if you are using the bundled version with port-forwarding, the command might look like:
+
+```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+sh run_support_query_pg.sh "postgres://postgres:postgres@localhost:5432/postgres" --input support_queries/pg_get_trace_counts_daily.sql
+```
+
+which will output the count of daily traces by workspace ID and organization ID. To extract this to a file add the flag `--output path/to/file.csv`
+
+## Export usage data
+
+Exporting usage data requires running Helm chart version 0.11.4 or later.
+
+### Get customer information
+
+You need to retrieve your customer information from the LangSmith API before running the export scripts. This information is required as input for the export scripts.
+
+```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+curl https://<langsmith_url>/api/v1/info
+# if configured with a subdomain / path prefix:
+curl http://<langsmith_url/prefix/api/v1/info
+```
+
+This will return a JSON response containing your customer information:
+
+```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+{
+  "version": "0.11.4",
+  "license_expiration_time": "2026-08-18T19:14:34Z",
+  "customer_info": {
+    "customer_id": "<id>",
+    "customer_name": "<name>"
+  }
+}
+```
+
+Extract the `customer_id` and `customer_name` from this response to use as input for the export scripts.
+
+### Process the API response with jq
+
+You can use [jq](https://jqlang.org/download) to parse the JSON response and set bash variables for use in your scripts:
+
+```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+# Get the API response and extract customer information
+export LANGSMITH_URL="<your_langsmith_url>"
+response=$(curl -s $LANGSMITH_URL/api/v1/info)
+
+# Extract customer_id and customer_name using jq
+export CUSTOMER_ID=$(echo "$response" | jq -r '.customer_info.customer_id')
+export CUSTOMER_NAME=$(echo "$response" | jq -r '.customer_info.customer_name')
+
+# Verify the variables are set
+echo "Customer ID: $CUSTOMER_ID"
+echo "Customer Name: $CUSTOMER_NAME"
+```
+
+You can then use these environment variables in your export scripts or other commands.
+
+If you don't have `jq`, run these commands to set the environment variables based on the curl output:
+
+```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+curl -s $LANGSMITH_URL/api/v1/info
+export CUSTOMER_ID="<id>"
+export CUSTOMER_NAME="<name>"
+```
+
+### Initial export
+
+These scripts export usage data to a CSV for reporting to LangChain. They additionally track the export by assigning a backfill ID and timestamp.
+
+To export LangSmith trace usage:
+
+```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+# Get customer information from the API
+export LANGSMITH_URL="<your_langsmith_url>"
+export response=$(curl -s $LANGSMITH_URL/api/v1/info)
+export CUSTOMER_ID=$(echo "$response" | jq -r '.customer_info.customer_id') && echo "Customer ID: $CUSTOMER_ID"
+export CUSTOMER_NAME=$(echo "$response" | jq -r '.customer_info.customer_name') && echo "Customer name: $CUSTOMER_NAME"
+
+# Run the export script with customer information as variables
+sh run_support_query_pg.sh <postgres_url> \
+  --input support_queries/postgres/pg_usage_traces_backfill_export.sql \
+  --output ls_export.csv \
+  -v customer_id=$CUSTOMER_ID \
+  -v customer_name=$CUSTOMER_NAME
+```
+
+To export LangSmith usage:
+
+```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+sh run_support_query_pg.sh <postgres_url> \
+  --input support_queries/postgres/pg_usage_nodes_backfill_export.sql \
+  --output lgp_export.csv \
+  -v customer_id=$CUSTOMER_ID \
+  -v customer_name=$CUSTOMER_NAME
+```
+
+### Status update
+
+These scripts update the status of usage events in your installation to reflect that the events have been successfully processed by LangChain.
+
+The scripts require passing in the corresponding `backfill_id`, which will be confirmed by your LangChain rep.
+
+To update LangSmith trace usage:
+
+```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+sh run_support_query_pg.sh <postgres_url> --input support_queries/postgres/pg_usage_traces_backfill_update.sql --output export.csv -v backfill_id=<backfill_id>
+```
+
+To update LangSmith usage:
+
+```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+sh run_support_query_pg.sh <postgres_url> --input support_queries/postgres/pg_usage_nodes_backfill_update.sql --output export.csv -v backfill_id=<backfill_id>
+```
+
+***
+
+```
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/script-running-pg-support-queries.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+
+
+
+[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+```

@@ -1,0 +1,146 @@
+# Self-host standalone servers
+
+Source: https://docs.langchain.com/langsmith/deploy-standalone-server
+
+This guide shows you how to deploy **standalone Agent Servers** without the LangSmith UI or control plane. This is the most lightweight self-hosting option for running one or a few agents as independent services.
+
+This deployment option provides flexibility but requires you to manage your own infrastructure and configuration.
+
+For production workloads, consider [self-hosting the full LangSmith platform](/langsmith/self-hosted) or [deploying with the control plane](/langsmith/deploy-with-control-plane), which offer standardized deployment patterns and UI-based management.
+
+**This is the setup page for deploying Agent Servers directly without the LangSmith platform.**
+
+Review the [self-hosted options](/langsmith/self-hosted) to understand:
+
+- [Standalone Server](/langsmith/self-hosted#standalone-server): What this guide covers (no UI, just servers).
+- [LangSmith](/langsmith/self-hosted#langsmith): For the full LangSmith platform with UI.
+- [LangSmith Deployment](/langsmith/self-hosted#langsmith-deployment): For UI-based deployment management.
+
+Before continuing, review the [standalone server overview](/langsmith/self-hosted#standalone-server).
+
+## Prerequisites
+
+1. Use the [LangGraph CLI](/langsmith/cli) to [test your application locally](/langsmith/local-server).
+
+2. Use the [LangGraph CLI](/langsmith/cli) to build a Docker image (i.e. `langgraph build`).
+
+3. The following environment variables are needed for a data plane deployment.
+
+4. `REDIS_URI`: Connection details to a Redis instance. Redis will be used as a pub-sub broker to enable streaming real time output from background runs. The value of `REDIS_URI` must be a valid [Redis connection URI](https://redis-py.readthedocs.io/en/stable/connections.html#redis.Redis.from_url).
+
+   **Shared Redis Instance**
+   Multiple self-hosted deployments can share the same Redis instance. For example, for `Deployment A`, `REDIS_URI` can be set to `redis://<hostname_1>:<port>/1` and for `Deployment B`, `REDIS_URI` can be set to `redis://<hostname_1>:<port>/2`.
+
+   `1` and `2` are different database numbers within the same instance, but `<hostname_1>` is shared. **The same database number cannot be used for separate deployments**.
+
+5. `DATABASE_URI`: Postgres connection details. Postgres will be used to store assistants, threads, runs, persist thread state and long term memory, and to manage the state of the background task queue with 'exactly once' semantics. The value of `DATABASE_URI` must be a valid [Postgres connection URI](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING-URIS).
+
+   **Shared Postgres Instance**
+   Multiple self-hosted deployments can share the same Postgres instance. For example, for `Deployment A`, `DATABASE_URI` can be set to `postgres://<user>:<password>@/<database_name_1>?host=<hostname_1>` and for `Deployment B`, `DATABASE_URI` can be set to `postgres://<user>:<password>@/<database_name_2>?host=<hostname_1>`.
+
+   `<database_name_1>` and `database_name_2` are different databases within the same instance, but `<hostname_1>` is shared. **The same database cannot be used for separate deployments**.
+
+6. `LANGSMITH_API_KEY`: LangSmith API key.
+
+7. `LANGGRAPH_CLOUD_LICENSE_KEY`: LangSmith license key. This will be used to authenticate ONCE at server start up.
+
+8. `LANGSMITH_ENDPOINT`: To send traces to a [self-hosted LangSmith](/langsmith/self-hosted) instance, set `LANGSMITH_ENDPOINT` to the hostname of the self-hosted LangSmith instance.
+
+9. Egress to `https://beacon.langchain.com` from your network. This is required for license verification and usage reporting if not running in air-gapped mode. See the [Egress documentation](/langsmith/self-host-egress) for more details.
+
+## Kubernetes
+
+Use this [Helm chart](https://github.com/langchain-ai/helm/blob/main/charts/langgraph-cloud/README.md) to deploy an Agent Server to a Kubernetes cluster.
+
+## Docker
+
+Run the following `docker` command:
+
+```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+docker run \
+    --env-file .env \
+    -p 8123:8000 \
+    -e REDIS_URI="foo" \
+    -e DATABASE_URI="bar" \
+    -e LANGSMITH_API_KEY="baz" \
+    my-image
+```
+
+- You need to replace `my-image` with the name of the image you built in the prerequisite steps (from `langgraph build`)
+
+and you should provide appropriate values for `REDIS_URI`, `DATABASE_URI`, and `LANGSMITH_API_KEY`.
+
+- If your application requires additional environment variables, you can pass them in a similar way.
+
+## Docker Compose
+
+Docker Compose YAML file:
+
+```yml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+volumes:
+    langgraph-data:
+        driver: local
+services:
+    langgraph-redis:
+        image: redis:6
+        healthcheck:
+            test: redis-cli ping
+            interval: 5s
+            timeout: 1s
+            retries: 5
+    langgraph-postgres:
+        image: postgres:16
+        ports:
+            - "5432:5432"
+        environment:
+            POSTGRES_DB: postgres
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+        volumes:
+            - langgraph-data:/var/lib/postgresql/data
+        healthcheck:
+            test: pg_isready -U postgres
+            start_period: 10s
+            timeout: 1s
+            retries: 5
+            interval: 5s
+    langgraph-api:
+        image: ${IMAGE_NAME}
+        ports:
+            - "8123:8000"
+        depends_on:
+            langgraph-redis:
+                condition: service_healthy
+            langgraph-postgres:
+                condition: service_healthy
+        env_file:
+            - .env
+        environment:
+            REDIS_URI: redis://langgraph-redis:6379
+            LANGSMITH_API_KEY: ${LANGSMITH_API_KEY}
+            DATABASE_URI: postgres://postgres:postgres@langgraph-postgres:5432/postgres?sslmode=disable
+```
+
+You can run the command `docker compose up` with this Docker Compose file in the same folder.
+
+This will launch an Agent Server on port `8123` (if you want to change this, you can change this by changing the ports in the `langgraph-api` volume). You can test if the application is healthy by running:
+
+```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+curl --request GET --url 0.0.0.0:8123/ok
+```
+
+Assuming everything is running correctly, you should see a response like:
+
+```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+{"ok":true}
+```
+
+***
+
+```
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-standalone-server.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+
+
+
+[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+```

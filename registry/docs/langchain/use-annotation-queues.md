@@ -1,0 +1,138 @@
+# Use annotation queues
+
+Source: https://docs.langchain.com/langsmith/annotation-queues
+
+*Annotation queues* provide a streamlined, directed view for human annotators to attach feedback to specific [runs](/langsmith/observability-concepts#runs). While you can always annotate [traces](/langsmith/observability-concepts#traces) inline, annotation queues provide a way to group runs together, prescribe rubrics, and track reviewer progress.
+
+You can also manage annotation queues and feedback configs programmatically with the SDK. Refer to [Manage feedback & annotation queues programmatically](/langsmith/annotation-queues-sdk).
+
+LangSmith supports two queue styles:
+
+- [**Single-run annotation queues**](#single-run-annotation-queues) present one run at a time and let reviewers submit any rubric feedback you configure.
+- [**Pairwise annotation queues (PAQs)**](#pairwise-annotation-queues) present two runs side-by-side so reviewers can quickly decide which output is better (or if they are equivalent) against the rubric items you define.
+
+  For a demonstration of using annotation queues, watch the [Getting started with annotation queues](#video-guide) video guide.
+
+## Single-run annotation queues
+
+Single-run queues present one run at a time and let reviewers submit any rubric feedback you configure. They can be created directly from the **Annotation queues** section in the [LangSmith UI](https://smith.langchain.com/).
+
+### Create a single-run queue
+
+1. Navigate to **Annotation queues** in the left navigation.
+2. Click **+ New annotation queue** in the top-right corner.
+
+#### Basic details
+
+1. Fill in the **Name** and **Description** of the queue.
+2. Optionally assign a **default dataset** to streamline exporting reviewed runs into a dataset in your LangSmith [workspace](/langsmith/administration-overview#workspaces).
+
+#### Annotation rubric
+
+1. Draft some high-level instructions for your annotators, which will be shown in the sidebar on every run.
+2. Click **+ Desired Feedback** to add feedback keys to your annotation queue. Annotators will be presented with these feedback keys on each run.
+3. Add a description for each, as well as a short description of each category, if the feedback is categorical.
+
+   For example, with the descriptions in the previous screenshot, reviewers will see the **Annotation Rubric** details in the right-hand pane of the UI.
+
+#### Collaborator settings
+
+When there are multiple annotators for a run:
+
+- **Number of reviewers per run**: This determines the number of reviewers that must mark a run as **Done** for it to be removed from the queue. If you check **All workspace members review each run**, then a run will remain in the queue until all [workspace](/langsmith/administration-overview#workspaces) members have marked their review as **Done**.
+
+  - Reviewers cannot view the feedback left by other reviewers.
+  - Comments on runs are visible to all reviewers.
+
+- **Enable reservations on runs**: When a reviewer views a run, the run is reserved for that reviewer for the specified **Reservation length**. If there are multiple reviewers per run as specified above, the run can be reserved by multiple reviewers (up to the number of reviewers per run) at the same time.
+
+  We recommend enabling reservations. This will prevent multiple annotators from reviewing the same run at the same time.
+
+  If a reviewer has viewed a run and then leaves the run without marking it **Done**, the reservation will expire after the specified **Reservation length**. The run is then released back into the queue and can be reserved by another reviewer.
+
+  Clicking **Requeue** for a run's annotation will only move the current run to the end of the current user's queue; it won't affect the queue order of any other user. It will also release the reservation that the current user has on that run.
+
+Because of these settings, the number of runs visible to each reviewer can differ from the total queue size.
+
+You can revisit the pencil icon  in **Annotation queues** to update any settings later.
+
+### Assign runs to a single-run queue
+
+There are several ways to populate a single-run queue with work items:
+
+- **From a trace view**: Click **Add to Annotation Queue** in the top-right corner of any [trace](/langsmith/observability-concepts#traces) view. You can add any intermediate [run](/langsmith/observability-concepts#runs), but not the root span.
+
+- **From the runs table**: Select multiple runs, then click **Add to Annotation Queue** at the bottom of the page.
+
+- **Automation rules**: [Set up a rule](/langsmith/rules) to automatically assign runs that match a filter (for example, errors or low user scores) into a queue.
+
+- **Datasets & experiments**: Select one or more [experiments](/langsmith/evaluation-concepts#experiment) within a dataset and click \*\* Annotate\*\*. Choose an existing queue or create a new one, then confirm the (single-run) queue option.
+
+### Review a single-run queue
+
+1. Navigate to the **Annotation Queues** section through the left-hand navigation bar.
+2. Click on the queue you want to review. This will take you to a focused, cyclical view of the runs in the queue that require review.
+3. You can attach a comment, attach a score for a particular [feedback](/langsmith/observability-concepts#feedback) criteria, add the run to a dataset or mark the run as reviewed. You can also remove the run from the queue for all users, despite any current reservations or settings for the queue, by clicking the **Trash** icon  next to **View run**.
+
+   The keyboard shortcuts that are next to each option can help streamline the review process.
+
+## Pairwise annotation queues
+
+Pairwise annotation queues (PAQs) present two runs side-by-side so reviewers can quickly decide which output is better (or if they are equivalent) against the rubric items you define. They are designed for fast A/B comparisons between two experiments (often a baseline vs. a candidate model) and must be created from the **Datasets & Experiments** pages.
+
+### Create a pairwise queue
+
+1. Navigate to **Datasets & Experiments**, open a dataset, and select **exactly two experiments** you want to compare.
+
+2. Click **Annotate**. In the popover, choose **Add to Pairwise Annotation Queue**. (The button is disabled until exactly two experiments are selected.)
+
+3. Decide whether to send the experiments to an existing pairwise queue or create a new one.
+
+4. Provide the queue details:
+   - **Basic details** (name and description)
+   - **Instructions & rubrics** tailored to pairwise scoring
+   - **Collaborator settings** (reviewer count, reservations, reservation length)
+
+5. Submit the form to create the queue. LangSmith immediately pairs runs from the two experiments and populates the queue.
+
+Key differences for PAQs:
+
+- **Experiments**: You must provide two experiment sessions up front. LangSmith automatically pairs their runs in chronological order and populates the queue during creation.
+- **Rubric**: Pairwise rubric items only require a feedback key and (optionally) a description. Annotators decide whether Run A, Run B, or both are better for each rubric item.
+- **Dataset**: Pairwise queues do not use a default dataset, because comparisons span two experiments.
+- **Reservations & reviewers**: The same collaborator controls apply. Reservations help prevent two people from judging the same comparison simultaneously.
+
+### Add more comparisons to a pairwise queue
+
+If you need to add more comparisons later, return to **Datasets & Experiments**, select the two experiments again, and choose **Add to Pairwise Annotation Queue** to append new pairs.
+
+Selecting two experiments and creating a PAQ automatically pairs the runs. When augmenting an existing PAQ, LangSmith preserves historical comparisons and appends new pairs to the queue.
+
+### Review a pairwise queue
+
+1. From **Annotation queues**, select the pairwise queue you want to review.
+2. Each queue item displays Run A on the left and Run B on the right, along with your rubric.
+3. For every rubric item:
+   - Choose **A is better**, **B is better**, or **Equal**. The UI records binary feedback on both runs behind the scenes.
+   - Use hotkeys `A`, `B`, or `E` to lock in your choice.
+4. Once you finish all rubric items, press **Done** (or `Enter` on the final rubric item) to advance to the next comparison.
+5. Optional actions:
+   - Leave comments tied to either run.
+   - Requeue the comparison if you need to revisit it later.
+   - Open the full trace view for deeper debugging.
+
+Reservations, reviewer thresholds, and comments behave identically to those in single-run queues, enabling teams to use different queue types without modifying their existing workflow.
+
+Consider routing runs that already have user feedback (e.g., thumbs-down) into a single-run queue for triage and a pairwise queue for head-to-head comparisons against a stronger baseline. This helps you identify regressions quickly. To learn more about how to capture user feedback from your LLM application, follow the guide on [attaching user feedback](/langsmith/attach-user-feedback).
+
+## Video guide
+
+***
+
+```
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/annotation-queues.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+
+
+
+[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+```

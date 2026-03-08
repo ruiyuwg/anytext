@@ -1,0 +1,201 @@
+# How to use a custom checkpointer
+
+Source: https://docs.langchain.com/langsmith/custom-checkpointer
+
+Replace the built-in Postgres checkpointer with a custom BaseCheckpointSaver implementation in your agent deployment.
+
+When deploying agents to LangSmith, the server provides a built-in Postgres-backed checkpointer that handles state persistence across graph runs. You can replace this with your own [BaseCheckpointSaver](https://reference.langchain.com/python/langgraph/checkpoints/#langgraph.checkpoint.base.BaseCheckpointSaver) implementation to use a different storage backend.
+
+You provide a path to an async context manager that yields a `BaseCheckpointSaver` instance, and the server manages its lifecycle automatically.
+
+Custom checkpointers are in **alpha**. This feature may experience breaking changes in minor version updates.
+
+## Define the checkpointer
+
+Starting from an **existing** LangSmith application, create a file that defines an async context manager yielding your custom checkpointer. If you are beginning a new project, you can create an app from a template using the CLI.
+
+```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+langgraph new --template=new-langgraph-project-python my_new_project
+```
+
+The async context manager pattern lets the server open and close the database connection at the right points in the application lifecycle:
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+# ./src/agent/checkpointer.py
+import contextlib
+
+class MyCheckpointer(BaseCheckpointSaver):
+    def __init__(self):
+        super().__init__()
+        # Initialize your custom checkpointer here
+    ...
+
+    @contextlib.asynccontextmanager
+    async def aget(self, config: RunnableConfig):
+        # Your custom logic to create a connection pool and initialize your checkpointer here.
+        yield
+
+
+@contextlib.asynccontextmanager
+async def generate_checkpointer():
+    """Yield a BaseCheckpointSaver, open for the duration of the server."""
+    async with AsyncSqliteSaver.from_conn_string("./checkpoints.db") as saver:
+        await saver.setup()
+        yield saver
+```
+
+## Test against the conformance suite
+
+Most open source checkpointer implementations do not yet implement all the operations required by Agent Server. Before configuring your checkpointer, validate it against the conformance test suite to ensure compatibility.
+
+Install the package:
+
+```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+pip install langgraph-checkpoint-conformance
+```
+
+Register your checkpointer and run validation:
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+import asyncio
+
+from langgraph.checkpoint.conformance import checkpointer_test, validate
+
+
+@checkpointer_test(name="MyCheckpointer")
+async def my_checkpointer():
+    async with MyCheckpointer(...) as saver:
+        yield saver
+
+
+async def main():
+    report = await validate(my_checkpointer)
+    report.print_report()
+    assert report.passed_all_base()
+
+
+asyncio.run(main())
+```
+
+The suite auto-detects which extended capabilities your checkpointer implements and runs the appropriate tests. You can also run it as a pytest test:
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+import pytest
+
+from langgraph.checkpoint.conformance import checkpointer_test, validate
+
+
+@checkpointer_test(name="MyCheckpointer")
+async def my_checkpointer():
+    async with MyCheckpointer(...) as saver:
+        yield saver
+
+
+@pytest.mark.asyncio
+async def test_conformance():
+    report = await validate(my_checkpointer)
+    report.print_report()
+    assert report.passed_all_base()
+```
+
+To view the full list of base and extended operations that the suite validates, refer to the [capabilities](#capabilities) section.
+
+## Configure `langgraph.json`
+
+Add the `checkpointer` key to your [`langgraph.json` configuration file](/langsmith/application-structure#configuration-file-concepts). The `path` points to the async context manager you [defined earlier](#define-the-checkpointer).
+
+```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+{
+  "dependencies": ["."],
+  "graphs": {
+    "agent": "./src/agent/graph.py:graph"
+  },
+  "env": ".env",
+  "checkpointer": {
+    "path": "./src/agent/checkpointer.py:generate_checkpointer"
+  }
+}
+```
+
+## Start server
+
+Test the server out locally:
+
+```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+langgraph dev --no-browser
+```
+
+The server logs will confirm that your custom checkpointer is active.
+
+## Capabilities
+
+The server checks your checkpointer for **base** (required) and **extended** (optional) capabilities at startup. If an extended capability is missing, the server either uses a fallback or disables the corresponding feature.
+
+### Base capabilities (required)
+
+| Method           | Description           |
+| ---------------- | --------------------- |
+| `aput`           | Store a checkpoint    |
+| `aput_writes`    | Store pending writes  |
+| `aget_tuple`     | Retrieve a checkpoint |
+| `alist`          | List checkpoints      |
+| `adelete_thread` | Delete a thread       |
+
+### Extended capabilities (optional)
+
+| Method             | Description                          | Fallback if missing                               |
+| ------------------ | ------------------------------------ | ------------------------------------------------- |
+| `adelete_for_runs` | Delete checkpoints for specific runs | Rollback multitask strategy unavailable           |
+| `acopy_thread`     | Copy a thread                        | Slow fallback (re-inserts checkpoints one by one) |
+| `aprune`           | Prune thread history                 | Thread history pruning unavailable                |
+
+## Deploying
+
+You can deploy this app as-is to LangSmith or to your self-hosted platform.
+
+## Next steps
+
+- [Use a custom store](/langsmith/custom-store) to replace the built-in long-term memory store.
+- Learn about [persistence and memory](/oss/python/langgraph/persistence) in LangGraph.
+
+***
+
+```
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/custom-checkpointer.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+
+
+
+[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+```
+
+# How to customize the Dockerfile
+
+Source: https://docs.langchain.com/langsmith/custom-docker
+
+Users can add an array of additional lines to add to the Dockerfile following the import from the parent LangGraph image. In order to do this, you simply need to modify your `langgraph.json` file by passing in the commands you want run to the `dockerfile_lines` key. For example, if we wanted to use `Pillow` in our graph you would need to add the following dependencies:
+
+```
+{
+    "dependencies": ["."],
+    "graphs": {
+        "openai_agent": "./openai_agent.py:agent",
+    },
+    "env": "./.env",
+    "dockerfile_lines": [
+        "RUN apt-get update && apt-get install -y libjpeg-dev zlib1g-dev libpng-dev",
+        "RUN pip install Pillow"
+    ]
+}
+```
+
+This would install the system packages required to use Pillow if we were working with `jpeg` or `png` image formats.
+
+***
+
+```
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/custom-docker.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+
+
+
+[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+```

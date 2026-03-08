@@ -1,0 +1,438 @@
+## Workspace-level operations
+
+These operations are controlled by [workspace-level roles and permissions](/langsmith/rbac#workspace-roles).
+
+To understand what each role means and their overall capabilities, refer to the [Role-based access control](/langsmith/rbac) guide.
+
+### Projects
+
+Projects organize traces and runs from your LLM applications.
+
+| Operation                                         | Workspace Admin | Workspace Editor | Workspace Viewer | Required Permission              |
+| ------------------------------------------------- | :-------------: | :--------------: | :--------------: | -------------------------------- |
+| Create a new project                              |        ✓        |         ✗        |         ✗        | `projects:create`                |
+| View project list                                 |        ✓        |         ✓        |         ✓        | `projects:read`                  |
+| View project details                              |        ✓        |         ✓        |         ✓        | `projects:read`                  |
+| View prebuilt dashboard                           |        ✓        |         ✓        |         ✓        | `projects:read`                  |
+| View project metadata (top K values)              |        ✓        |         ✓        |         ✓        | `projects:read`                  |
+| Update project metadata (name, description, tags) |        ✓        |         ✓        |         ✗        | `projects:update`                |
+| Create filter view                                |        ✓        |         ✗        |         ✗        | `projects:create`                |
+| View filter views                                 |        ✓        |         ✓        |         ✓        | `projects:read`                  |
+| View specific filter view                         |        ✓        |         ✓        |         ✓        | `projects:read`                  |
+| Update filter view                                |        ✓        |         ✓        |         ✗        | `projects:update`                |
+| Delete filter view                                |        ✓        |         ✗        |         ✗        | `projects:delete`                |
+| Delete a project                                  |        ✓        |         ✗        |         ✗        | `projects:delete`                |
+| Delete multiple projects                          |        ✓        |         ✗        |         ✗        | `projects:delete`                |
+| Get insights jobs (Beta)                          |        ✓        |         ✓        |         ✓        | `projects:read`                  |
+| Get specific insights job (Beta)                  |        ✓        |         ✓        |         ✓        | `projects:read`                  |
+| Create insights job (Beta)                        |        ✓        |         ✓        |         ✓        | `projects:read` + `rules:create` |
+| Update insights job (Beta)                        |        ✓        |         ✓        |         ✗        | `projects:update`                |
+| Delete insights job (Beta)                        |        ✓        |         ✗        |         ✗        | `projects:delete`                |
+| Get insights job configs (Beta)                   |        ✓        |         ✓        |         ✓        | `rules:read`                     |
+| Create insights job config (Beta)                 |        ✓        |         ✓        |         ✗        | `rules:create`                   |
+| Auto-generate insights job config (Beta)          |        ✓        |         ✓        |         ✗        | `rules:create`                   |
+| Update insights job config (Beta)                 |        ✓        |         ✓        |         ✗        | `rules:update`                   |
+| Delete insights job config (Beta)                 |        ✓        |         ✓        |         ✗        | `rules:delete`                   |
+| Get run cluster from insights job (Beta)          |        ✓        |         ✓        |         ✓        | `projects:read`                  |
+| Get runs from insights job (Beta)                 |        ✓        |         ✓        |         ✓        | `projects:read`                  |
+
+### Runs
+
+Individual execution traces and spans from your LLM applications.
+
+| Operation                                                              | Workspace Admin | Workspace Editor | Workspace Viewer | Required Permission |
+| ---------------------------------------------------------------------- | :-------------: | :--------------: | :--------------: | ------------------- |
+| Send traces from SDK (includes single run, batch, multipart, and OTEL) |        ✓        |         ✓        |         ✗        | `runs:create`       |
+| View a specific run                                                    |        ✓        |         ✓        |         ✓        | `runs:read`         |
+| View thread preview                                                    |        ✓        |         ✓        |         ✓        | `runs:read`         |
+| Query/list runs                                                        |        ✓        |         ✓        |         ✓        | `runs:read`         |
+| View run statistics                                                    |        ✓        |         ✓        |         ✓        | `runs:read`         |
+| View grouped run statistics                                            |        ✓        |         ✓        |         ✓        | `runs:read`         |
+| Group runs by expression                                               |        ✓        |         ✓        |         ✓        | `runs:read`         |
+| Generate filter query from natural language                            |        ✓        |         ✓        |         ✓        | `runs:read`         |
+| Prefetch runs                                                          |        ✓        |         ✓        |         ✓        | `runs:read`         |
+| Update a run (PATCH)                                                   |        ✓        |         ✓        |         ✗        | `runs:create`       |
+| View run sharing state                                                 |        ✓        |         ✓        |         ✓        | `runs:read`         |
+| Share a run publicly                                                   |        ✓        |         ✓        |         ✗        | `runs:share`        |
+| Unshare a run                                                          |        ✓        |         ✓        |         ✗        | `runs:share`        |
+| Delete runs by trace ID or metadata                                    |        ✓        |         ✗        |         ✗        | `runs:delete`       |
+
+### Rules
+
+Automated run rules that trigger actions based on run conditions.
+
+| Operation               | Workspace Admin | Workspace Editor | Workspace Viewer | Required Permission |
+| ----------------------- | :-------------: | :--------------: | :--------------: | ------------------- |
+| List all run rules      |        ✓        |         ✓        |         ✓        | `rules:read`        |
+| Create a run rule       |        ✓        |         ✓        |         ✗        | `rules:create`      |
+| Update a run rule       |        ✓        |         ✓        |         ✗        | `rules:update`      |
+| Delete a run rule       |        ✓        |         ✓        |         ✗        | `rules:delete`      |
+| View rule logs          |        ✓        |         ✓        |         ✓        | `rules:read`        |
+| Get last applied rule   |        ✓        |         ✓        |         ✓        | `rules:read`        |
+| Manually trigger a rule |        ✓        |         ✓        |         ✗        | `rules:update`      |
+| Trigger multiple rules  |        ✓        |         ✓        |         ✗        | `rules:update`      |
+
+### Alerts
+
+Alert rules for monitoring run conditions.
+
+| Operation         | Workspace Admin | Workspace Editor | Workspace Viewer | Required Permission |
+| ----------------- | :-------------: | :--------------: | :--------------: | ------------------- |
+| Create alert rule |        ✓        |         ✓        |         ✓        | `runs:read`         |
+| Update alert rule |        ✓        |         ✓        |         ✓        | `runs:read`         |
+| Delete alert rule |        ✓        |         ✓        |         ✓        | `runs:read`         |
+| Get alert rule    |        ✓        |         ✓        |         ✓        | `runs:read`         |
+| List alert rules  |        ✓        |         ✓        |         ✓        | `runs:read`         |
+| Test alert action |        ✓        |         ✓        |         ✓        | `runs:read`         |
+
+### Datasets
+
+Test datasets with examples for evaluation.
+
+| Operation                                    | Workspace Admin | Workspace Editor | Workspace Viewer | Required Permission                                  |
+| -------------------------------------------- | :-------------: | :--------------: | :--------------: | ---------------------------------------------------- |
+| Create a dataset                             |        ✓        |         ✓        |         ✗        | `datasets:create`                                    |
+| List datasets                                |        ✓        |         ✓        |         ✓        | `datasets:read`                                      |
+| View dataset details                         |        ✓        |         ✓        |         ✓        | `datasets:read`                                      |
+| Update dataset metadata                      |        ✓        |         ✓        |         ✗        | `datasets:update`                                    |
+| Delete a dataset                             |        ✓        |         ✗        |         ✗        | `datasets:delete`                                    |
+| Upload CSV dataset                           |        ✓        |         ✓        |         ✗        | `datasets:create`                                    |
+| Clone dataset                                |        ✓        |         ✓        |         ✗        | `datasets:update`                                    |
+| Get dataset version                          |        ✓        |         ✓        |         ✓        | `datasets:read`                                      |
+| Get dataset versions                         |        ✓        |         ✓        |         ✓        | `datasets:read`                                      |
+| Diff dataset versions                        |        ✓        |         ✓        |         ✓        | `datasets:read`                                      |
+| Update dataset version (tags)                |        ✓        |         ✓        |         ✗        | `datasets:update`                                    |
+| Download dataset (OpenAI format)             |        ✓        |         ✓        |         ✓        | `datasets:read`                                      |
+| Download dataset (OpenAI fine-tuning format) |        ✓        |         ✓        |         ✓        | `datasets:read`                                      |
+| Download dataset (CSV)                       |        ✓        |         ✓        |         ✓        | `datasets:read`                                      |
+| Download dataset (JSONL)                     |        ✓        |         ✓        |         ✓        | `datasets:read`                                      |
+| View dataset sharing state                   |        ✓        |         ✓        |         ✓        | `datasets:read`                                      |
+| Share dataset publicly                       |        ✓        |         ✗        |         ✗        | `datasets:share`                                     |
+| Unshare dataset                              |        ✓        |         ✗        |         ✗        | `datasets:share`                                     |
+| Get index info                               |        ✓        |         ✓        |         ✓        | `datasets:read`                                      |
+| Index dataset                                |        ✓        |         ✓        |         ✗        | `datasets:update`                                    |
+| Sync dataset index                           |        ✓        |         ✓        |         ✗        | `datasets:update`                                    |
+| Remove dataset index                         |        ✓        |         ✓        |         ✗        | `datasets:update`                                    |
+| Search dataset                               |        ✓        |         ✓        |         ✓        | `datasets:read`                                      |
+| Generate synthetic examples                  |        ✓        |         ✓        |         ✗        | `datasets:update`                                    |
+| Get dataset splits                           |        ✓        |         ✓        |         ✓        | `datasets:read`                                      |
+| Update dataset splits                        |        ✓        |         ✓        |         ✓        | `datasets:read`                                      |
+| Run playground experiment (batch)            |        ✓        |         ⚠        |         ✗        | `prompts:read` + `datasets:read` + `projects:create` |
+| Run playground experiment (stream)           |        ✓        |         ⚠        |         ✗        | `prompts:read` + `datasets:read` + `projects:create` |
+| Run studio experiment                        |        ✓        |         ⚠        |         ✗        | `datasets:read` + `projects:create`                  |
+
+Workspace Editors have partial access because they cannot create projects, which limits their ability to create new experiments.
+
+### Examples
+
+Individual examples within datasets.
+
+| Operation                       | Workspace Admin | Workspace Editor | Workspace Viewer | Required Permission |
+| ------------------------------- | :-------------: | :--------------: | :--------------: | ------------------- |
+| Count examples                  |        ✓        |         ✓        |         ✓        | `datasets:read`     |
+| View a specific example         |        ✓        |         ✓        |         ✓        | `datasets:read`     |
+| List examples                   |        ✓        |         ✓        |         ✓        | `datasets:read`     |
+| Create a new example            |        ✓        |         ✓        |         ✗        | `datasets:update`   |
+| Create examples (bulk)          |        ✓        |         ✓        |         ✗        | `datasets:update`   |
+| Update a single example         |        ✓        |         ✓        |         ✗        | `datasets:update`   |
+| Update examples (bulk)          |        ✓        |         ✓        |         ✗        | `datasets:update`   |
+| Update examples (multipart)     |        ✓        |         ✓        |         ✗        | `datasets:update`   |
+| Upload examples from CSV        |        ✓        |         ✓        |         ✗        | `datasets:update`   |
+| Upload examples from JSONL      |        ✓        |         ✓        |         ✗        | `datasets:update`   |
+| Delete a single example         |        ✓        |         ✓        |         ✗        | `datasets:update`   |
+| Delete examples (bulk)          |        ✓        |         ✓        |         ✗        | `datasets:update`   |
+| View examples with runs         |        ✓        |         ✓        |         ✓        | `datasets:read`     |
+| View grouped examples with runs |        ✓        |         ✓        |         ✓        | `datasets:read`     |
+| Validate a single example       |        ✓        |         ✓        |         ✓        | `datasets:read`     |
+| Validate examples (bulk)        |        ✓        |         ✓        |         ✓        | `datasets:read`     |
+
+### Experiments
+
+Comparative experiments for evaluating LLM outputs.
+
+| Operation                       | Workspace Admin | Workspace Editor | Workspace Viewer | Required Permission                                                       |
+| ------------------------------- | :-------------: | :--------------: | :--------------: | ------------------------------------------------------------------------- |
+| View comparative experiments    |        ✓        |         ✓        |         ✓        | `projects:read`                                                           |
+| Create comparative experiment   |        ✓        |         ⚠        |         ✗        | `projects:create`                                                         |
+| Delete comparative experiment   |        ✓        |         ✗        |         ✗        | `projects:delete`                                                         |
+| View examples with runs         |        ✓        |         ✓        |         ✓        | `datasets:read`                                                           |
+| View grouped examples with runs |        ✓        |         ✓        |         ✓        | `datasets:read`                                                           |
+| View grouped experiments        |        ✓        |         ✓        |         ✓        | `datasets:read`                                                           |
+| View feedback delta             |        ✓        |         ✓        |         ✓        | `datasets:read`                                                           |
+| Upload experiment results       |        ✓        |         ⚠        |         ✗        | `datasets:create` + `datasets:update` + `projects:create` + `runs:create` |
+| Get experiment view overrides   |        ✓        |         ✓        |         ✗        | `datasets:update`                                                         |
+| Create experiment view override |        ✓        |         ✓        |         ✗        | `datasets:update`                                                         |
+| Update experiment view override |        ✓        |         ✓        |         ✗        | `datasets:update`                                                         |
+| Delete experiment view override |        ✓        |         ✓        |         ✗        | `datasets:update`                                                         |
+
+Workspace Editors have partial access because they cannot create projects, which limits their ability to create new experiments.
+
+### Feedback
+
+Scores, labels, and corrections on LLM outputs.
+
+| Operation                                     | Workspace Admin | Workspace Editor | Workspace Viewer | Required Permission |
+| --------------------------------------------- | :-------------: | :--------------: | :--------------: | ------------------- |
+| List feedback formulas                        |        ✓        |         ✓        |         ✓        | `feedback:read`     |
+| Get feedback formula                          |        ✓        |         ✓        |         ✓        | `feedback:read`     |
+| Create feedback formula                       |        ✓        |         ✓        |         ✗        | `feedback:create`   |
+| Update feedback formula                       |        ✓        |         ✓        |         ✗        | `feedback:update`   |
+| Delete feedback formula                       |        ✓        |         ✓        |         ✗        | `feedback:delete`   |
+| View specific feedback                        |        ✓        |         ✓        |         ✓        | `feedback:read`     |
+| List feedbacks                                |        ✓        |         ✓        |         ✓        | `feedback:read`     |
+| Create feedback                               |        ✓        |         ✓        |         ✗        | `feedback:create`   |
+| Eagerly create feedback                       |        ✓        |         ✓        |         ✗        | `feedback:create`   |
+| Update feedback                               |        ✓        |         ✓        |         ✗        | `feedback:update`   |
+| Delete feedback                               |        ✓        |         ✓        |         ✗        | `feedback:delete`   |
+| Batch ingest feedback                         |        ✓        |         ✓        |         ✗        | `feedback:create`   |
+| Create feedback ingest token                  |        ✓        |         ✓        |         ✗        | `feedback:create`   |
+| List feedback ingest tokens                   |        ✓        |         ✓        |         ✗        | `feedback:create`   |
+| Create feedback with token (no auth required) |        ✓        |         ✓        |         ✓        | N/A (token-based)   |
+| List feedback configs                         |        ✓        |         ✓        |         ✓        | `feedback:read`     |
+| Create feedback config                        |        ✓        |         ✓        |         ✗        | `feedback:create`   |
+| Update feedback config                        |        ✓        |         ✓        |         ✗        | `feedback:update`   |
+
+### Annotation queues
+
+Human review queues for LLM outputs.
+
+| Operation                                   | Workspace Admin | Workspace Editor | Workspace Viewer | Required Permission        |
+| ------------------------------------------- | :-------------: | :--------------: | :--------------: | -------------------------- |
+| List annotation queues                      |        ✓        |         ✓        |         ✓        | `annotation-queues:read`   |
+| Get annotation queue                        |        ✓        |         ✓        |         ✓        | `annotation-queues:read`   |
+| Create annotation queue                     |        ✓        |         ✓        |         ✗        | `annotation-queues:create` |
+| Update annotation queue                     |        ✓        |         ✓        |         ✗        | `annotation-queues:update` |
+| Delete annotation queue                     |        ✓        |         ✗        |         ✗        | `annotation-queues:delete` |
+| Populate annotation queue                   |        ✓        |         ✓        |         ✗        | `annotation-queues:update` |
+| Get runs from queue                         |        ✓        |         ✓        |         ✓        | `annotation-queues:read`   |
+| Get run from queue (by index)               |        ✓        |         ✓        |         ✓        | `annotation-queues:read`   |
+| Get queues for run                          |        ✓        |         ✓        |         ✓        | `annotation-queues:read`   |
+| Get queue total size                        |        ✓        |         ✓        |         ✓        | `annotation-queues:read`   |
+| Get queue total archived                    |        ✓        |         ✓        |         ✓        | `annotation-queues:read`   |
+| Get queue size                              |        ✓        |         ✓        |         ✓        | `annotation-queues:read`   |
+| Add runs to queue                           |        ✓        |         ✓        |         ✗        | `annotation-queues:update` |
+| Update run in queue                         |        ✓        |         ✓        |         ✗        | `annotation-queues:update` |
+| Delete run from queue                       |        ✓        |         ✓        |         ✗        | `annotation-queues:update` |
+| Delete runs from queue (bulk)               |        ✓        |         ✓        |         ✗        | `annotation-queues:update` |
+| Create identity annotation queue run status |        ✓        |         ✓        |         ✗        | `annotation-queues:update` |
+| Export archived runs                        |        ✓        |         ✓        |         ✓        | `annotation-queues:read`   |
+
+### Prompts
+
+Prompt templates and chains in the LangChain Hub.
+
+| Operation               | Workspace Admin | Workspace Editor | Workspace Viewer | Required Permission |
+| ----------------------- | :-------------: | :--------------: | :--------------: | ------------------- |
+| List prompt repos       |        ✓        |         ✓        |         ✓        | `prompts:read`      |
+| View prompt repo        |        ✓        |         ✓        |         ✓        | `prompts:read`      |
+| Create prompt repo      |        ✓        |         ✓        |         ✗        | `prompts:create`    |
+| Fork prompt repo        |        ✓        |         ✓        |         ✗        | `prompts:create`    |
+| Update prompt repo      |        ✓        |         ✓        |         ✗        | `prompts:update`    |
+| Delete prompt repo      |        ✓        |         ✓        |         ✗        | `prompts:delete`    |
+| List commits            |        ✓        |         ✓        |         ✓        | `prompts:read`      |
+| View commit             |        ✓        |         ✓        |         ✓        | `prompts:read`      |
+| Push commit             |        ✓        |         ✓        |         ✗        | `prompts:update`    |
+| List repo tags          |        ✓        |         ✓        |         ✓        | `prompts:read`      |
+| Get all tags            |        ✓        |         ✓        |         ✓        | `prompts:read`      |
+| Create tag              |        ✓        |         ✓        |         ✗        | `prompts:create`    |
+| Update tag              |        ✓        |         ✓        |         ✗        | `prompts:update`    |
+| Delete tag              |        ✓        |         ✓        |         ✗        | `prompts:delete`    |
+| View events             |        ✓        |         ✓        |         ✓        | `prompts:read`      |
+| List comments           |        ✓        |         ✓        |         ✓        | `prompts:read`      |
+| Create comment          |        ✓        |         ✓        |         ✗        | `prompts:read`      |
+| Delete comment          |        ✓        |         ✓        |         ✗        | `prompts:read`      |
+| Toggle like             |        ✓        |         ✓        |         ✗        | `prompts:read`      |
+| Optimize prompt         |        ✓        |         ✓        |         ✗        | `prompts:update`    |
+| List optimization jobs  |        ✓        |         ✓        |         ✓        | `prompts:read`      |
+| Create optimization job |        ✓        |         ✓        |         ✗        | `prompts:create`    |
+| Update optimization job |        ✓        |         ✓        |         ✗        | `prompts:update`    |
+| Delete optimization job |        ✓        |         ✓        |         ✗        | `prompts:delete`    |
+| Invoke prompt canvas    |        ✓        |         ✓        |         ✗        | `prompts:update`    |
+| List quick actions      |        ✓        |         ✓        |         ✓        | `prompts:read`      |
+| Create quick action     |        ✓        |         ✓        |         ✓        | `prompts:read`      |
+| Delete quick action     |        ✓        |         ✓        |         ✓        | `prompts:read`      |
+| Update quick action     |        ✓        |         ✓        |         ✓        | `prompts:read`      |
+
+Some prompt operations support public access for shared prompts.
+
+### Charts
+
+Custom visualizations and dashboards.
+
+| Operation               | Workspace Admin | Workspace Editor | Workspace Viewer | Required Permission |
+| ----------------------- | :-------------: | :--------------: | :--------------: | ------------------- |
+| List charts             |        ✓        |         ✓        |         ✓        | `charts:read`       |
+| Get chart by ID         |        ✓        |         ✓        |         ✓        | `charts:read`       |
+| Create chart            |        ✓        |         ✓        |         ✗        | `charts:create`     |
+| Update chart            |        ✓        |         ✓        |         ✗        | `charts:update`     |
+| Delete chart            |        ✓        |         ✓        |         ✗        | `charts:delete`     |
+| Render chart            |        ✓        |         ✓        |         ✓        | `charts:read`       |
+| List chart sections     |        ✓        |         ✓        |         ✓        | `charts:read`       |
+| Get chart section by ID |        ✓        |         ✓        |         ✓        | `charts:read`       |
+| Create chart section    |        ✓        |         ✓        |         ✗        | `charts:create`     |
+| Update chart section    |        ✓        |         ✓        |         ✗        | `charts:update`     |
+| Delete chart section    |        ✓        |         ✓        |         ✗        | `charts:delete`     |
+| Render chart section    |        ✓        |         ✓        |         ✓        | `charts:read`       |
+
+### Deployments
+
+[LangSmith Deployment](/langsmith/deployments) configurations.
+
+| Operation         | Workspace Admin | Workspace Editor | Workspace Viewer | Required Permission  |
+| ----------------- | :-------------: | :--------------: | :--------------: | -------------------- |
+| Create deployment |        ✓        |         ✓        |         ✗        | `deployments:create` |
+| View deployment   |        ✓        |         ✓        |         ✓        | `deployments:read`   |
+| Update deployment |        ✓        |         ✓        |         ✗        | `deployments:update` |
+| Delete deployment |        ✓        |         ✗        |         ✗        | `deployments:delete` |
+
+### Workspace settings and management
+
+| Operation                            | Workspace Admin | Workspace Editor | Workspace Viewer | Required Permission         |
+| ------------------------------------ | :-------------: | :--------------: | :--------------: | --------------------------- |
+| View workspace info                  |        ✓        |         ✓        |         ✓        | `workspaces:read`           |
+| View workspace statistics            |        ✓        |         ✓        |         ✓        | `workspaces:read`           |
+| Update workspace (name, description) |        ✓        |         ✗        |         ✗        | `workspaces:manage`         |
+| Delete workspace                     |        ✓        |         ✗        |         ✗        | `workspaces:manage`         |
+| View workspace members               |        ✓        |         ✓        |         ✓        | `workspaces:read`           |
+| View active workspace members        |        ✓        |         ✓        |         ✓        | `workspaces:read`           |
+| View pending workspace members       |        ✓        |         ✓        |         ✓        | `workspaces:read`           |
+| Add member to workspace              |        ✓        |         ✗        |         ✗        | `workspaces:manage-members` |
+| Add members (batch)                  |        ✓        |         ✗        |         ✗        | `workspaces:manage-members` |
+| Update workspace member role         |        ✓        |         ✗        |         ✗        | `workspaces:manage-members` |
+| Remove workspace member              |        ✓        |         ✗        |         ✗        | `workspaces:manage-members` |
+| Delete pending workspace member      |        ✓        |         ✗        |         ✗        | `workspaces:manage-members` |
+| View usage limits                    |        ✓        |         ✓        |         ✓        | `workspaces:read`           |
+| View shared entities                 |        ✓        |         ✓        |         ✓        | `workspaces:read`           |
+| Bulk unshare entities                |        ✓        |         ✗        |         ✗        | `workspaces:manage`         |
+
+### Tags
+
+| Operation                       | Workspace Admin | Workspace Editor | Workspace Viewer | Required Permission |
+| ------------------------------- | :-------------: | :--------------: | :--------------: | ------------------- |
+| List tag keys                   |        ✓        |         ✓        |         ✓        | `workspaces:read`   |
+| Get tag key                     |        ✓        |         ✓        |         ✓        | `workspaces:read`   |
+| Create tag key                  |        ✓        |         ✗        |         ✗        | `workspaces:manage` |
+| Update tag key                  |        ✓        |         ✗        |         ✗        | `workspaces:manage` |
+| Delete tag key                  |        ✓        |         ✗        |         ✗        | `workspaces:manage` |
+| List tag values                 |        ✓        |         ✓        |         ✓        | `workspaces:read`   |
+| Get tag value                   |        ✓        |         ✓        |         ✓        | `workspaces:read`   |
+| Create tag value                |        ✓        |         ✗        |         ✗        | `workspaces:manage` |
+| Update tag value                |        ✓        |         ✗        |         ✗        | `workspaces:manage` |
+| Delete tag value                |        ✓        |         ✗        |         ✗        | `workspaces:manage` |
+| List tags                       |        ✓        |         ✓        |         ✓        | `workspaces:read`   |
+| List tags for resource          |        ✓        |         ✓        |         ✓        | `workspaces:read`   |
+| List tags for resources (batch) |        ✓        |         ✓        |         ✓        | `workspaces:read`   |
+| List taggings                   |        ✓        |         ✓        |         ✓        | `workspaces:read`   |
+| Create tagging                  |        ✓        |         ✗        |         ✗        | `workspaces:manage` |
+| Delete tagging                  |        ✓        |         ✗        |         ✗        | `workspaces:manage` |
+
+### Bulk exports
+
+| Operation                      | Workspace Admin | Workspace Editor | Workspace Viewer | Required Permission |
+| ------------------------------ | :-------------: | :--------------: | :--------------: | ------------------- |
+| List bulk exports              |        ✓        |         ✓        |         ✓        | `workspaces:read`   |
+| Get bulk export                |        ✓        |         ✓        |         ✓        | `workspaces:read`   |
+| Create bulk export             |        ✓        |         ✗        |         ✗        | `workspaces:manage` |
+| Cancel bulk export             |        ✓        |         ✗        |         ✗        | `workspaces:manage` |
+| Get bulk export destinations   |        ✓        |         ✓        |         ✓        | `workspaces:read`   |
+| Get bulk export destination    |        ✓        |         ✓        |         ✓        | `workspaces:read`   |
+| Create bulk export destination |        ✓        |         ✗        |         ✗        | `workspaces:manage` |
+| Get filtered export runs       |        ✓        |         ✓        |         ✓        | `workspaces:read`   |
+
+### MCP servers
+
+Model Context Protocol servers for extended functionality.
+
+| Operation         | Workspace Admin | Workspace Editor | Workspace Viewer | Required Permission |
+| ----------------- | :-------------: | :--------------: | :--------------: | ------------------- |
+| List MCP servers  |        ✓        |         ✓        |         ✓        | `workspaces:read`   |
+| Get MCP server    |        ✓        |         ✓        |         ✓        | `workspaces:read`   |
+| Create MCP server |        ✓        |         ✓        |         ✓        | `workspaces:read`   |
+| Update MCP server |        ✓        |         ✓        |         ✓        | `workspaces:read`   |
+| Delete MCP server |        ✓        |         ✓        |         ✓        | `workspaces:read`   |
+
+## User-level operations
+
+These operations are available to all authenticated users and don't require specific workspace or organization permissions:
+
+- View own user profile
+- Update own user profile
+- List organizations for user
+- Create new organization
+- List pending workspace invites
+- Delete pending workspace invite
+- Claim pending workspace invite
+- List pending organization invites
+- Delete pending organization invite
+- Claim pending organization invite
+
+## Permission inheritance
+
+### Organization to workspace
+
+- [Organization Admin](/langsmith/rbac#organization-admin) automatically has full permissions in all workspaces.
+- [Organization Operator](/langsmith/rbac#organization-operator) only gets workspace access when explicitly added to workspaces with workspace-level roles (or to workspaces they create).
+- [Organization User](/langsmith/rbac#organization-user) and [Organization Viewer](/langsmith/rbac#organization-viewer) only get workspace access when explicitly added to workspaces with workspace-level roles.
+
+For detailed role definitions, refer to [Organization roles](/langsmith/rbac#organization-roles) and [Workspace roles](/langsmith/rbac#workspace-roles).
+
+### Workspace role independence
+
+- Users can have different workspace roles in different workspaces.
+- A user might be a [Workspace Admin](/langsmith/rbac#workspace-admin) in one workspace and a [Workspace Viewer](/langsmith/rbac#workspace-viewer) in another.
+
+***
+
+```
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/organization-workspace-operations.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+
+
+
+[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+```
+
+# View server logs for a trace
+
+Source: https://docs.langchain.com/langsmith/platform-logs
+
+When viewing a trace that was generated by a run in LangSmith, you can access the associated server logs directly from the trace view.
+
+Viewing server logs for a trace only works with the [Cloud SaaS](https://langchain-ai.github.io/langgra/langsmith/observability-concepts/deployment_options/#cloud-saas) and [fully self-hosted](https://langchain-ai.github.io/langgra/langsmith/observability-concepts/deployment_options/#self-hosted-control-plane) deployment options.
+
+## Access server logs from trace view
+
+In the trace view, use the **See Logs** button in the top right corner, next to the **Run in Studio** button.
+
+Clicking this button will take you to the server logs view for the associated deployment in LangSmith.
+
+## Server logs view
+
+The server logs view displays logs from both:
+
+- **Agent Server's own operational logs** - Internal server operations, API calls, and system events
+- **User application logs** - Logs written in your graph with:
+  - Python: Use the `logging` or `structlog` libraries
+  - JavaScript: Use the re-exported Winston logger from `@langchain/langgraph-sdk/logging`:
+
+```javascript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+import { getLogger } from "@langchain/langgraph-sdk/logging";
+
+const logger = getLogger();
+logger.info("Your log message");
+```
+
+## Filtering logs by trace ID
+
+When you navigate from the trace view, the **Filters** box will automatically pre-fill with the Trace ID from the trace you just viewed.
+
+This allows you to quickly filter the logs to see only those related to your specific trace execution.
+
+***
+
+```
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/platform-logs.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+
+
+
+[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+```

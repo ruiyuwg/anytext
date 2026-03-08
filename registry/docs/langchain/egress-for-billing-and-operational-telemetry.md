@@ -1,0 +1,396 @@
+# Egress for billing and operational telemetry
+
+Source: https://docs.langchain.com/langsmith/self-host-egress
+
+This page only applies to customers who are not running in offline (air-gapped) mode and assumes you are using a self-hosted LangSmith instance serving version 0.9.0 or later.
+
+Self-hosted LangSmith instances store all information locally and never send sensitive information outside of your network. However, unless you are running in offline mode, LangSmith requires egress to `https://beacon.langchain.com` for the following:
+
+- **Billing telemetry** — License verification and subscription/usage reporting (required)
+- **Operational telemetry** — Logs, metrics, and traces for support diagnostics (optional, can be disabled)
+
+  **Egress to `https://beacon.langchain.com` is required.** Refer to the [allowlisting IP section](/langsmith/cloud#allowlisting-ip-addresses) for static IP addresses, if needed.
+
+## Billing telemetry
+
+Billing telemetry is **required** for self-hosted LangSmith instances that are not running in offline mode. This includes license verification and subscription/usage reporting.
+
+Billing telemetry **cannot be disabled**. If you need to run without any egress, contact your account team about an offline (air-gapped) license.
+
+### What it does
+
+- **License verification**: Validates your LangSmith license key at startup and periodically thereafter.
+- **Subscription/usage reporting**: Reports platform usage metrics for billing purposes according to the entitlements in your order.
+
+### What we collect
+
+- License key validation requests
+- Aggregated usage counts (number of traces, seats allocated, seats in use)
+- Organization and workspace identifiers
+
+### Example payloads
+
+#### License verification
+
+**Endpoint:** `POST beacon.langchain.com/v1/beacon/verify`
+
+**Request:**
+
+```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+{
+  "license": "<YOUR_LICENSE_KEY>"
+}
+```
+
+**Response:**
+
+```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+{
+  "token": "Valid JWT" //Short-lived JWT token to avoid repeated license checks
+}
+```
+
+#### Subscription/usage reporting
+
+**Endpoint:** `POST beacon.langchain.com/v1/beacon/ingest-traces`
+
+**Request:**
+
+```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+{
+  "license": "<YOUR_LICENSE_KEY>",
+  "trace_transactions": [
+    {
+      "id": "af28dfea-5358-463d-a2dc-37df1da72498",
+      "tenant_id": "3a1c2b6f-4430-4b92-8a5b-79b8b567bbc1",
+      "session_id": "b26ae531-cdb3-42a5-8bcf-05355199fe27",
+      "trace_count": 5,
+      "start_insertion_time": "2025-01-06T10:00:00Z",
+      "end_insertion_time": "2025-01-06T11:00:00Z",
+      "start_interval_time": "2025-01-06T09:00:00Z",
+      "end_interval_time": "2025-01-06T10:00:00Z",
+      "status": "completed",
+      "num_failed_send_attempts": 0,
+      "transaction_type": "type1",
+      "organization_id": "c5b5f53a-4716-4326-8967-d4f7f7799735"
+    }
+  ]
+}
+```
+
+**Response:**
+
+```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+{
+  "inserted_count": 1 //Number of transactions successfully ingested
+}
+```
+
+## Operational telemetry
+
+As of version **0.11**, LangSmith deployments send operational telemetry by default. This telemetry helps the LangChain team provide proactive support and faster troubleshooting for self-hosted instances.
+
+Operational telemetry is **separate from** billing telemetry. You can disable operational telemetry while billing telemetry remains active.
+
+### What it does
+
+- Enables proactive support and faster troubleshooting of self-hosted instances
+- Assists with performance tuning
+- Helps prioritize improvements based on real-world usage patterns
+
+### What we collect
+
+- **Request metadata**: Anonymized request counts, sizes, and durations
+- **Database metrics**: Query durations, error rates, and performance counters
+- **Operational traces**: Timing and error information for high-latency or failed requests (these are **not** customer traces — they are traces about the functioning of the LangSmith instance itself)
+- **Log messages**: Warning and error log messages only
+
+  We do not collect actual payload contents, database records, or any data that can identify your end users or customers. All telemetry data is associated with an organization and deployment, but never identified with individual users. We **do not collect PII** (personally identifiable information) in any form.
+
+### How to disable
+
+You can disable operational telemetry by setting the following values in your `langsmith_config.yaml` file:
+
+```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+config:
+  telemetry:
+    logs: false
+    metrics: false
+    traces: false
+```
+
+You can also disable individual telemetry types by setting only specific values to `false`.
+
+Disabling operational telemetry stops exporting the logs, metrics, and traces described in this section. It does **not** disable billing telemetry (license verification and subscription/usage reporting).
+
+### Example payloads
+
+#### Operational metrics
+
+**Endpoint:** `POST beacon.langchain.com/v1/beacon/v1/metrics`
+
+**Request:**
+
+```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+{
+  "resourceMetrics": [
+    {
+      "resource": {
+        "attributes": [
+          {
+            "key": "resource.name",
+            "value": { "stringValue": "langsmith-metrics" }
+          },
+          {
+            "key": "env",
+            "value": { "stringValue": "ls_self_hosted" }
+          }
+        ]
+      },
+      "scopeMetrics": [
+        {
+          "scope": {
+            "name": "langsmith.metrics",
+            "version": "0.1.0"
+          },
+          "metrics": [
+            {
+              "name": "langsmith_http_requests_latency",
+              "unit": "seconds",
+              "description": "Request latency of LangSmith services",
+              "gauge": {
+                "dataPoints": [
+                  {
+                    "asDouble": 12.34,
+                    "startTimeUnixNano": 1678886400000000000,
+                    "timeUnixNano": 1678886400000000000,
+                    "attributes": [
+                      {
+                        "key": "endpoint",
+                        "value": { "stringValue": "/sessions" }
+                      },
+                      { "key": "method", "value": { "stringValue": "GET" } },
+                      {
+                        "key": "service_name",
+                        "value": { "stringValue": "langsmith_backend" }
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "name": "langsmith_http_requests_failed",
+              "unit": "1",
+              "description": "Counter of failed requests for LangSmith services",
+              "sum": {
+                "dataPoints": [
+                  {
+                    "asInt": 456,
+                    "startTimeUnixNano": 1678886400000000000,
+                    "timeUnixNano": 1678886400000000000,
+                    "attributes": [
+                      {
+                        "key": "endpoint",
+                        "value": { "stringValue": "/info" }
+                      },
+                      { "key": "method", "value": { "stringValue": "POST" } },
+                      {
+                        "key": "service_name",
+                        "value": { "stringValue": "langsmith_platform_backend" }
+                      }
+                    ],
+                    "aggregationTemporality": 2,
+                    "isMonotonic": true
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+#### Operational traces
+
+**Endpoint:** `POST beacon.langchain.com/v1/beacon/v1/traces`
+
+**Request:**
+
+```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+{
+  "resourceSpans": [
+    {
+      "resource": {
+        "attributes": [
+          {
+            "key": "env",
+            "value": {
+              "stringValue": "ls_self_hosted"
+            }
+          },
+          {
+            "key": "service.name",
+            "value": {
+              "stringValue": "langsmith_backend"
+            }
+          }
+        ]
+      },
+      "scopeSpans": [
+        {
+          "scope": {},
+          "spans": [
+            {
+              "traceId": "71699b6fe85982c7c8995ea3d9c95df2",
+              "spanId": "3c191d03fa8be0",
+              "parentSpanId": "",
+              "name": "receive_request",
+              "startTimeUnixNano": "1581452772000000321",
+              "endTimeUnixNano": "1581452773000000789",
+              "droppedAttributesCount": 1,
+              "events": [
+                {
+                  "timeUnixNano": "1581452773000000123",
+                  "name": "parse_request",
+                  "attributes": [
+                    {
+                      "key": "request_size",
+                      "value": {
+                        "stringValue": "100"
+                      }
+                    }
+                  ],
+                  "droppedAttributesCount": 2
+                },
+                {
+                  "timeUnixNano": "1581452773000000123",
+                  "name": "event",
+                  "droppedAttributesCount": 2
+                }
+              ],
+              "droppedEventsCount": 1,
+              "status": {
+                "message": "status-cancelled",
+                "code": 2
+              }
+            },
+            {
+              "traceId": "71699b6fe85982c7c8995ea3d9c95df2",
+              "spanId": "0932ksdka12345",
+              "parentSpanId": "3c191d03fa8be0",
+              "name": "process_request",
+              "startTimeUnixNano": "1581452772000000321",
+              "endTimeUnixNano": "1581452773000000789",
+              "links": [],
+              "droppedLinksCount": 3,
+              "status": {}
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+#### Operational log messages
+
+We only export error log messages from self-hosted LangSmith instances. This allows the LangChain team to troubleshoot application errors without requiring back-and-forth communication with your team.
+
+**Endpoint:** `POST beacon.langchain.com/v1/beacon/v1/logs`
+
+**Request:**
+
+```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+{
+  "resourceLogs": [
+    {
+      "resource": {
+        "attributes": [
+          {
+            "key": "service.name",
+            "value": {
+              "stringValue": "langsmith_backend"
+            }
+          }
+        ]
+      },
+      "scopeLogs": [
+        {
+          "scope": {},
+          "logRecords": [
+            {
+              "timeUnixNano": "1581452773000009875",
+              "severityNumber": 13,
+              "severityText": "Warning",
+              "body": {
+                "stringValue": "Database connection pool approaching capacity"
+              },
+              "attributes": [
+                {
+                  "key": "component",
+                  "value": {
+                    "stringValue": "langsmith_backend"
+                  }
+                },
+                {
+                  "key": "pool_size",
+                  "value": {
+                    "intValue": "95"
+                  }
+                }
+              ],
+              "droppedAttributesCount": 0,
+              "traceId": "08040201000000000000000000000000",
+              "spanId": "0102040800000000"
+            },
+            {
+              "timeUnixNano": "1581452773000000789",
+              "severityNumber": 17,
+              "severityText": "Error",
+              "body": {
+                "stringValue": "Failed to process trace batch"
+              },
+              "attributes": [
+                {
+                  "key": "component",
+                  "value": {
+                    "stringValue": "langsmith_queue_worker"
+                  }
+                },
+                {
+                  "key": "error_type",
+                  "value": {
+                    "stringValue": "timeout"
+                  }
+                }
+              ],
+              "droppedAttributesCount": 0,
+              "traceId": "",
+              "spanId": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+## Our commitment
+
+LangChain will not store any sensitive information in billing or operational telemetry. Any data collected will not be shared with a third party. Log messages are filtered to only include error severity levels, and we do not capture log messages that could contain sensitive application data. If you have any concerns about the data being sent, disable telemetry and/or reach out to your account team.
+
+***
+
+```
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-egress.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+
+
+
+[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+```

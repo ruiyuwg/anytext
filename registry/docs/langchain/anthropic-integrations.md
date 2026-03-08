@@ -1,0 +1,65 @@
+# Anthropic integrations
+
+Source: https://docs.langchain.com/oss/javascript/integrations/providers/anthropic
+
+Integrate with Anthropic using LangChain JavaScript.
+
+All functionality related to Anthropic models.
+
+[Anthropic](https://www.anthropic.com/) is an AI safety and research company, and is the creator of Claude.
+This page covers all integrations between Anthropic models and LangChain.
+
+## Prompting best practices
+
+Anthropic models have several prompting best practices compared to OpenAI models.
+
+**System Messages may only be the first message**
+
+Anthropic models require any system messages to be the first one in your prompts.
+
+## `ChatAnthropic`
+
+`ChatAnthropic` is a subclass of LangChain's `ChatModel`, meaning it works best with `ChatPromptTemplate`.
+You can import this wrapper with the following code:
+
+See [this section for general instructions on installing LangChain packages](/oss/javascript/langchain/install).
+
+```bash npm theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+npm install @langchain/anthropic @langchain/core
+```
+
+```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+import { ChatAnthropic } from "@langchain/anthropic";
+const model = new ChatAnthropic({});
+```
+
+When working with ChatModels, it is preferred that you design your prompts as `ChatPromptTemplate`s.
+Here is an example below of doing that:
+
+```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+import { ChatPromptTemplate } from "@langchain/classic/prompts";
+
+const prompt = ChatPromptTemplate.fromMessages([
+  ["system", "You are a helpful chatbot"],
+  ["human", "Tell me a joke about {topic}"],
+]);
+```
+
+You can then use this in a chain as follows:
+
+```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+const chain = prompt.pipe(model);
+await chain.invoke({ topic: "bears" });
+```
+
+See the [chat model integration page](/oss/javascript/integrations/chat/anthropic/) for more examples, including multimodal inputs.
+
+***
+
+```
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/providers/anthropic.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+
+
+
+[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+```

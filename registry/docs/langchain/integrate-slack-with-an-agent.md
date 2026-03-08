@@ -1,0 +1,166 @@
+# Integrate Slack with an agent
+
+Source: https://docs.langchain.com/langsmith/agent-builder-slack-app
+
+Connect the LangSmith Agent Builder to your Slack workspace to let your agents communicate with users in Slack.
+
+The LangSmith Agent Builder App for Slack integrates your agents with Slack for secure, context-aware communication inside your Slack workspace.
+
+After integrating, your agents will be able to:
+
+- Send direct messages.
+- Post to channels.
+- Read thread messages.
+- Reply in threads.
+- Read conversation history.
+
+  The LangSmith Agent Builder App for Slack itself does not have any direct pricing. However, agent runs and traces are billed through the [LangSmith platform](https://smith.langchain.com) according to your organization's plan.
+
+  For current pricing information, see the [LangSmith pricing page](https://www.langchain.com/pricing).
+
+## How it works
+
+When a message is posted in your monitored Slack channel:
+
+1. Slack sends an event to LangSmith.
+2. The trigger activates your agent with the message content.
+3. Your agent processes the message and uses Slack tools to respond.
+4. The response appears in Slack (in the same thread if replying to a thread).
+
+Your agent receives the full thread context when responding to threaded messages, so it can provide contextually relevant responses.
+
+## Prerequisites
+
+- An existing agent in Agent Builder (see [Quickstart](/langsmith/agent-builder-quickstart) to create one)
+- Admin access to a Slack workspace or permission to install apps
+
+## Connect to Slack
+
+First, authorize LangSmith to access your Slack workspace and invite the bot to your channel.
+
+````
+1. In LangSmith, navigate to **Agent Builder**.
+2. Select your agent from **My Agents**.
+3. Click  **Edit Agent**.
+
+
+
+1. Scroll down to the **Triggers** section.
+2. Click **+ Add trigger**.
+3. Select **Slack - Message Received**.
+
+
+
+1. Click **Connect** to authorize the Slack connection.
+2. Sign in to your Slack workspace.
+3. Review the permissions and click **Allow**.
+4. You'll be redirected back to LangSmith.
+
+
+  Agent Builder requires the following permissions to your Slack workspace:
+
+  * **Send messages** - Send direct messages and post to channels
+  * **Read messages** - Read channel history and thread messages
+  * **View channels** - Access basic channel information
+  * **View users** - Look up user information for messaging
+
+  These permissions enable agents to communicate effectively within your Slack workspace.
+
+
+
+
+Before selecting a channel, invite the bot to the channel you want to use. In Slack, go to that channel and type:
+
+```txt theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+/invite @LangSmith Agent Builder
+```
+
+
+
+1. Back in LangSmith, choose the Slack channel you invited the bot to.
+2. Click **Save**.
+````
+
+Your agent will now be triggered whenever a message is posted in that channel.
+
+## Add Slack tools
+
+Tools let your agent take actions. To respond in Slack, you need to add Slack tools.
+
+You can also ask your agent to add these tools itself! In the agent chat, try: "Add the Slack tools so you can respond to messages."
+
+```
+1. In the agent editor, scroll to the **Tools** section.
+2. Click **+ Add tool**.
+3. Search for "Slack" and add the tools you need:
+   * **slack\_send\_channel\_message** - Post messages to a channel
+   * **slack\_reply\_to\_message** - Reply in a thread
+   * **slack\_write\_private\_message** - Send direct messages
+   * **slack\_read\_channel\_history** - Read recent messages
+   * **slack\_read\_thread\_messages** - Read thread replies
+
+
+
+If prompted, click **Connect** to authorize the Slack tools. This may use the same authorization from Step 1.
+
+
+
+Click **Save changes** to save your agent configuration.
+```
+
+## Configure agent behavior (optional)
+
+Your agent needs to know how to handle incoming Slack messages. You can update its instructions by prompting it directly.
+
+In the agent chat, try something like:
+
+```
+Update your instructions to handle the Slack Trigger and Slack Tools
+for bidirectional communication
+```
+
+Adjust the instructions based on your use case - for example, you might want the agent to only respond to certain types of questions, or to pull information from specific sources before replying.
+
+## Test the integration
+
+```
+In your Slack channel, send a message to test the agent:
+
+> *Hello, can you help me?*
+
+
+
+Your agent should respond in the channel. You can view the agent's activity in the **Feed** tab in Agent Builder.
+
+
+
+If your agent doesn't respond:
+
+* Verify the bot was invited to the channel
+* Check the **Feed** tab for any errors
+* Ensure the trigger is not paused (check the toggle in the Triggers section)
+```
+
+## Next steps
+
+```
+Connect additional services to your agent
+
+
+
+Set up email, schedule, or webhook triggers
+
+
+
+Start from a pre-built agent template
+```
+
+***
+
+```
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/agent-builder-slack-app.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+
+
+
+[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+```

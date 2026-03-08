@@ -1,0 +1,271 @@
+# Configure threads
+
+Source: https://docs.langchain.com/langsmith/threads
+
+Many LLM applications have a chatbot-like interface in which the user and the LLM application engage in a multi-turn conversation. In order to track these conversations, you can use *threads* in LangSmith.
+
+## Group traces into threads
+
+A *thread* is a sequence of traces representing a single conversation. Each response is represented as its own trace, but these traces are linked together by being part of the same thread.
+
+To associate traces together, you need to pass in a special `metadata` key where the value is the unique identifier for that thread. The key name should be one of:
+
+- `session_id`
+- `thread_id`
+- `conversation_id`
+
+The value can be any string you want, but we recommend using UUIDs, such as `f47ac10b-58cc-4372-a567-0e02b2c3d479`. Check out [this guide](./add-metadata-tags) for instructions on adding metadata to your traces.
+
+**Important:** To ensure filtering and token counting work correctly across your entire thread, you must set the thread metadata (`session_id`, `thread_id`, or `conversation_id`) on **all runs**, including child runs within a trace.
+
+If child runs don't have the thread\_id metadata, they won't be included when:
+
+- Filtering runs by thread.
+- Calculating token usage for a thread.
+- Aggregating costs across a thread.
+
+When creating child runs (e.g., using `@traceable` for nested functions or creating child spans), ensure you propagate the thread metadata to all child runs.
+
+### Example
+
+This example demonstrates how to log and retrieve conversation history using a structured message format to maintain long-running chats.
+
+```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+import os
+import json
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
+import openai
+from langsmith import traceable, Client
+from langsmith.wrappers import wrap_openai
+
+# Initialize clients
+langsmith_client = Client()
+client = wrap_openai(openai.Client())
+
+# Configuration
+THREAD_ID = "thread-id-1"
+
+# Using a local directory to store thread history. For production use, use a persistent storage solution.
+THREADS_DIR = os.path.join(os.path.dirname(__file__), "threads")
+
+# gets a history of all LLM calls in the thread to construct conversation history
+def get_thread_history(thread_id: str) -> list:
+    path = os.path.join(THREADS_DIR, f"{thread_id}.json")
+    if not os.path.exists(path):
+        return []
+    with open(path, "r") as f:
+        return json.load(f)
+
+def save_thread_history(thread_id: str, messages: list):
+    os.makedirs(THREADS_DIR, exist_ok=True)
+    with open(os.path.join(THREADS_DIR, f"{thread_id}.json"), "w") as f:
+        json.dump(messages, f, indent=2, default=str)
+
+
+@traceable(name="Chat Bot", metadata={"thread_id": THREAD_ID})
+def chat_pipeline(messages: list, get_chat_history: bool = False):
+    # Whether to continue an existing thread or start a new one
+    if get_chat_history:
+        history_messages = get_thread_history(THREAD_ID)
+        # Get existing conversation history and append new messages
+        all_messages = history_messages + messages
+    else:
+        all_messages = messages
+
+    # Invoke the model
+    chat_completion = client.chat.completions.create(
+        model="gpt-4.1-mini", messages=all_messages
+    )
+
+    response_message = chat_completion.choices[0].message
+    print("Response from model:", response_message)
+
+    full_conversation = all_messages + [{"role": response_message.role, "content": response_message.content}]
+    save_thread_history(THREAD_ID, full_conversation)
+
+    return {"messages": full_conversation}
+
+
+# Format message
+messages = [
+    {
+        "content": "Hi, my name is Sally",
+        "role": "user"
+    }
+]
+
+# Call the chat pipeline
+result = chat_pipeline(messages, get_chat_history=False)
+```
+
+```typescript TypeScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+import * as fs from "fs";
+import * as path from "path";
+import { fileURLToPath } from "url";
+import * as dotenv from "dotenv";
+import OpenAI from "openai";
+import { traceable } from "langsmith/traceable";
+import { wrapOpenAI } from "langsmith/wrappers";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+// Load environment variables from .env file
+dotenv.config();
+
+// Initialize client
+const client = wrapOpenAI(new OpenAI());
+
+// Configuration
+const THREAD_ID = "thread-id-1";
+
+// Using a local directory to store thread history. For production use, use a persistent storage solution.
+const THREADS_DIR = path.join(__dirname, "threads");
+
+type Message = { role: string; content: string };
+
+// Gets a history of all LLM calls in the thread to construct conversation history
+function getThreadHistory(threadId: string): Message[] {
+  const filePath = path.join(THREADS_DIR, `${threadId}.json`);
+  if (!fs.existsSync(filePath)) return [];
+  return JSON.parse(fs.readFileSync(filePath, "utf-8"));
+}
+
+function saveThreadHistory(threadId: string, messages: Message[]): void {
+  fs.mkdirSync(THREADS_DIR, { recursive: true });
+  fs.writeFileSync(
+    path.join(THREADS_DIR, `${threadId}.json`),
+    JSON.stringify(messages, null, 2)
+  );
+}
+
+const chatPipeline = traceable(
+  async function chatPipeline({ messages, get_chat_history = false }: { messages: Message[]; get_chat_history?: boolean }) {
+    // Whether to continue an existing thread or start a new one
+    if (get_chat_history) {
+      const historyMessages = getThreadHistory(THREAD_ID);
+      // Get existing conversation history and append new messages
+      messages = [...historyMessages, ...messages];
+    }
+
+    // Invoke the model
+    const chatCompletion = await client.chat.completions.create({
+      model: "gpt-4.1-mini",
+      messages,
+    });
+
+    const responseMessage = chatCompletion.choices[0].message;
+    console.log("Response from model:", responseMessage);
+
+    const fullConversation: Message[] = [
+      ...messages,
+      { role: responseMessage.role, content: responseMessage.content ?? "" },
+    ];
+    saveThreadHistory(THREAD_ID, fullConversation);
+
+    return { messages: fullConversation };
+  },
+  { name: "Chat Bot", metadata: { thread_id: THREAD_ID } }
+);
+
+// Format message
+const messages: Message[] = [{ role: "user", content: "Hi! My name is Sally" }];
+
+// Call the chat pipeline
+await chatPipeline({ messages, get_chat_history: false });
+```
+
+Make the following calls to continue the conversation. By passing `get_chat_history=True,`/`getChatHistory: true`,
+you can continue the conversation from where it left off. This means that the LLM will receive the entire message history and respond to it,
+instead of just responding to the latest message.
+
+```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+# Format message
+messages = [
+    {
+        "content": "What is my name",
+        "role": "user"
+    }
+]
+
+# Call the chat pipeline
+result = chat_pipeline(messages, get_chat_history=True)
+```
+
+```typescript TypeScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+// Continue the conversation.
+const messages: Message[] = [{ role: "user", content: "What is my name" }];
+
+await chatPipeline(messages, true);
+```
+
+Keep the conversation going. Since past messages are included, the LLM will remember the conversation.
+
+```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+# Continue the conversation.
+messages = [
+    {
+        "content": "What was the first message I sent you?",
+        "role": "user"
+    }
+]
+
+chat_pipeline(messages, get_chat_history=True)
+```
+
+```typescript TypeScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+// Continue the conversation.
+const messages: Message[] = [{ role: "user", content: "What was the first message I sent you?" }];
+
+await chatPipeline(messages, true);
+```
+
+## View threads
+
+You can view threads by clicking on the **Threads** tab in any project details page. You will then see a list of all threads, sorted by the most recent activity.
+
+Use **[Polly](/langsmith/polly)** in thread views to analyze conversation threads, understand user sentiment, identify pain points, and track whether issues were resolved.
+
+### View a thread
+
+You can then click into a particular thread. This will open the history for a particular thread.
+
+Threads can be viewed in two different ways:
+
+- [Thread overview](/langsmith/threads#thread-overview)
+- [Trace view](/langsmith/threads#trace-view)
+
+You can use the buttons at the top of the page to switch between the two views or use the keyboard shortcut `T` to toggle between the two views.
+
+#### Thread overview
+
+The thread overview page shows you a chatbot-like UI where you can see the inputs and outputs for each turn of the conversation. You can configure which fields in the inputs and outputs are displayed in the overview, or show multiple fields by clicking the **Configure** button.
+
+The JSON path for the inputs and outputs supports negative indexing, so you can use `-1` to access the last element of an array. For example, `inputs.messages[-1].content` will access the last message in the `messages` array.
+
+#### Trace view
+
+The trace view here is similar to the trace view when looking at a single run, except that you have easy access to all the runs for each turn in the thread.
+
+### View feedback
+
+When viewing a thread, across the top of the page you will see a section called `Feedback`. This is where you can see the feedback for each of the runs that make up the thread. This feedback is aggregated, so if you evaluate each run of a thread for the same criteria, you will see the average score across all the runs displayed. You can also see [thread level feedback](/langsmith/online-evaluations-llm-as-judge#configure-multi-turn-online-evaluators) left here.
+
+### Save thread level filter
+
+Similar to saving filters at the project level, you can also save commonly used filters at the thread level. To save filters on the threads table, set a filter using the filters button and then click the **Save filter** button.
+
+You can open up the trace or annotate the trace in a side panel by clicking on `Annotate` and `Open trace`, respectively.
+
+***
+
+```
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/threads.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+
+
+
+[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+```

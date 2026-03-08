@@ -1,0 +1,409 @@
+# Skills
+
+Source: https://docs.langchain.com/oss/javascript/deepagents/skills
+
+Learn how to extend your deep agent's capabilities with skills
+
+Skills are reusable agent capabilities that provide specialized workflows and domain knowledge.
+
+You can use [Agent Skills](https://agentskills.io/) to provide your deep agent with new capabilities and expertise.
+
+Deep agent skills follow the [Agent Skills specification](https://agentskills.io/specification).
+
+## What are skills
+
+Skills are a directory of folders, where each folder has one or more files that contain context the agent can use:
+
+- A `SKILL.md` file containing instructions and metadata about the skill
+- Additional scripts (optional)
+- Additional reference info, such as docs (optional)
+- Additional assets, such as templates and other resources (optional)
+
+  Any additional assets (scripts, docs, templates, or other resources) must be referenced in the `SKILL.md` file with information on what the file contains and how to use it so the agent can decide when to use them.
+
+## How skills work
+
+When you create a deep agent, you can pass in a list of directories containing skills. As the agent starts, it reads through the frontmatter of each `SKILL.md` file.
+
+When the agent receives a prompt, the agent checks if it can use any skills while fulfilling the prompt. If it finds a matching prompt, it then reviews the rest of the skill files. This pattern of only reviewing the skill information when needed is called *progressive disclosure*.
+
+## Example
+
+You might have a skills folder that contains a skill to use a docs site in a certain way, as well as another skill to search the arXiv preprint repository of research papers:
+
+```plaintext theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+    skills/
+    ├── langgraph-docs
+    │   └── SKILL.md
+    └── arxiv_search
+        ├── SKILL.md
+        └── arxiv_search.ts # code for searching arXiv
+```
+
+The `SKILL.md` file always follows the same pattern, starting with metadata in the frontmatter and followed by the instructions for the skill.
+
+The following example shows a skill that gives instructions on how to provide relevant langgraph docs when prompted:
+
+```md theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+
+
+# langgraph-docs
+
+## Overview
+
+This skill explains how to access LangGraph Python documentation to help answer questions and guide implementation.
+
+## Instructions
+
+### 1. Fetch the Documentation Index
+
+Use the fetch_url tool to read the following URL:
+https://docs.langchain.com/llms.txt
+
+This provides a structured list of all available documentation with descriptions.
+
+### 2. Select Relevant Documentation
+
+Based on the question, identify 2-4 most relevant documentation URLs from the index. Prioritize:
+
+- Specific how-to guides for implementation questions
+- Core concept pages for understanding questions
+- Tutorials for end-to-end examples
+- Reference docs for API details
+
+### 3. Fetch Selected Documentation
+
+Use the fetch_url tool to read the selected documentation URLs.
+
+### 4. Provide Accurate Guidance
+
+After reading the documentation, complete the user's request.
+```
+
+For more example skills, see [Deep Agent example skills](https://github.com/langchain-ai/deepagentsjs/tree/main/examples/skills).
+
+**Important**
+
+Refer to the full [Agent Skills Specification](https://agentskills.io/specification) for information on constraints and best practices when authoring skill files. Notably:
+
+- The `description` field is truncated to 1024 characters if it exceeds that length.
+- In Deep Agents, `SKILL.md` files must be under 10 MB. Files exceeding this limit are skipped during skill loading.
+
+### Full example
+
+The following example shows a `SKILL.md` file using all available frontmatter fields:
+
+```md expandable theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+---
+name: langgraph-docs
+description: Use this skill for requests related to LangGraph in order to fetch relevant documentation to provide accurate, up-to-date guidance.
+license: MIT
+compatibility: Requires internet access for fetching documentation URLs
+metadata:
+  author: langchain
+  version: "1.0"
+allowed-tools: fetch_url
+---
+
+# langgraph-docs
+
+## Overview
+
+This skill explains how to access LangGraph Python documentation to help answer questions and guide implementation.
+
+## Instructions
+
+### 1. Fetch the documentation index
+
+Use the fetch_url tool to read the following URL:
+https://docs.langchain.com/llms.txt
+
+This provides a structured list of all available documentation with descriptions.
+
+### 2. Select relevant documentation
+
+Based on the question, identify 2-4 most relevant documentation URLs from the index. Prioritize:
+
+- Specific how-to guides for implementation questions
+- Core concept pages for understanding questions
+- Tutorials for end-to-end examples
+- Reference docs for API details
+
+### 3. Fetch selected documentation
+
+Use the fetch_url tool to read the selected documentation URLs.
+
+### 4. Provide accurate guidance
+
+After reading the documentation, complete the user's request.
+```
+
+## Usage
+
+Pass the skills directory when creating your deep agent:
+
+````
+```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+import { createDeepAgent, type FileData } from "deepagents";
+import { MemorySaver } from "@langchain/langgraph";
+
+const checkpointer = new MemorySaver();
+
+function createFileData(content: string): FileData {
+  const now = new Date().toISOString();
+  return {
+    content: content.split("\n"),
+    created_at: now,
+    modified_at: now,
+  };
+}
+
+const skillsFiles: Record<string, FileData> = {};
+
+const skillUrl =
+  "https://raw.githubusercontent.com/langchain-ai/deepagentsjs/refs/heads/main/examples/skills/langgraph-docs/SKILL.md";
+const response = await fetch(skillUrl);
+const skillContent = await response.text();
+
+skillsFiles["/skills/langgraph-docs/SKILL.md"] = createFileData(skillContent);
+
+const agent = await createDeepAgent({
+  checkpointer,
+  // IMPORTANT: deepagents skill source paths are virtual (POSIX) paths relative to the backend root.
+  skills: ["/skills/"],
+});
+
+const config = {
+  configurable: {
+    thread_id: `thread-${Date.now()}`,
+  },
+};
+
+const result = await agent.invoke(
+  {
+    messages: [
+      {
+        role: "user",
+        content: "what is langraph? Use the langgraph-docs skill if available.",
+      },
+    ],
+    files: skillsFiles,
+  },
+  config,
+);
+```
+
+
+
+```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+import { createDeepAgent, StoreBackend, type FileData } from "deepagents";
+import {
+  InMemoryStore,
+  MemorySaver,
+  type BaseStore,
+} from "@langchain/langgraph";
+
+const checkpointer = new MemorySaver();
+const store = new InMemoryStore();
+
+function createFileData(content: string): FileData {
+  const now = new Date().toISOString();
+  return {
+    content: content.split("\n"),
+    created_at: now,
+    modified_at: now,
+  };
+}
+
+const skillUrl =
+  "https://raw.githubusercontent.com/langchain-ai/deepagentsjs/refs/heads/main/examples/skills/langgraph-docs/SKILL.md";
+
+const response = await fetch(skillUrl);
+const skillContent = await response.text();
+const fileData = createFileData(skillContent);
+
+await store.put(["filesystem"], "/skills/langgraph-docs/SKILL.md", fileData);
+
+const backendFactory = (config: { state: unknown; store?: BaseStore }) => {
+  return new StoreBackend({
+    state: config.state,
+    store: config.store ?? store,
+  });
+};
+
+const agent = await createDeepAgent({
+  backend: backendFactory,
+  store: store,
+  checkpointer,
+  // IMPORTANT: deepagents skill source paths are virtual (POSIX) paths relative to the backend root.
+  skills: ["/skills/"],
+});
+
+const config = {
+  recursionLimit: 50,
+  configurable: {
+    thread_id: `thread-${Date.now()}`,
+  },
+};
+
+const result = await agent.invoke(
+  {
+    messages: [
+      {
+        role: "user",
+        content: "what is langraph? Use the langgraph-docs skill if available.",
+      },
+    ],
+  },
+  config,
+);
+```
+
+
+
+```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+import { createDeepAgent, FilesystemBackend } from "deepagents";
+import { MemorySaver } from "@langchain/langgraph";
+
+const checkpointer = new MemorySaver();
+const backend = new FilesystemBackend({ rootDir: process.cwd() });
+
+const agent = await createDeepAgent({
+  backend,
+  skills: ["./examples/skills/"],
+  interruptOn: {
+    read_file: true,
+    write_file: true,
+    delete_file: true,
+  },
+  checkpointer, // Required!
+});
+
+const config = {
+  configurable: {
+    thread_id: `thread-${Date.now()}`,
+  },
+};
+
+const result = await agent.invoke(
+  {
+    messages: [
+      {
+        role: "user",
+        content: "what is langraph? Use the langgraph-docs skill if available.",
+      },
+    ],
+  },
+  config,
+);
+```
+````
+
+List of skill source paths.
+
+Paths must be specified using forward slashes and are relative to the backend's root.
+
+- If omitted, no skills are loaded.
+- When using `StateBackend` (default), provide skill files with `invoke(files={...})`.
+- With `FilesystemBackend`, skills are loaded from disk relative to the backend's `root_dir`.
+
+Later sources override earlier ones for skills with the same name (last one wins).
+
+The SDK only loads the sources you pass in `skills`. It does not automatically scan CLI directories such as `~/.deepagents/...` or `~/.agents/...`.
+
+For CLI storage conventions, see [App data](/oss/javascript/deepagents/data-locations).
+
+````
+If you want CLI-style layering in SDK code, pass all desired sources explicitly in lowest-to-highest precedence order:
+
+```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+[
+"<user-home>/.deepagents/{agent}/skills/",
+"<user-home>/.agents/skills/",
+"<project-root>/.deepagents/skills/",
+"<project-root>/.agents/skills/",
+]
+```
+
+Then pass that ordered list as `skills` when creating your agent.
+````
+
+## Source precedence
+
+When multiple skill sources contain a skill with the same name, the skill from the source listed later in the `skills` array takes precedence (last one wins). This lets you layer skills from different origins.
+
+```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+// If both sources contain a skill named "web-search",
+// the one from "/skills/project/" wins (loaded last).
+const agent = await createDeepAgent({
+  skills: ["/skills/user/", "/skills/project/"],
+  ...
+});
+```
+
+## Skills for subagents
+
+When you use [subagents](/oss/javascript/deepagents/subagents), you can configure which skills each type has access to:
+
+- **General-purpose subagent**: Automatically inherits skills from the main agent when you pass `skills` to `create_deep_agent`. No additional configuration is needed.
+- **Custom subagents**: Do not inherit the main agent's skills. Add a `skills` parameter to each subagent definition with that subagent's skill source paths.
+
+Skill state is fully isolated: the main agent's skills are not visible to subagents, and subagent skills are not visible to the main agent.
+
+```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+const researchSubagent = {
+  name: "researcher",
+  description: "Research assistant with specialized skills",
+  systemPrompt: "You are a researcher.",
+  tools: [webSearch],
+  skills: ["/skills/research/", "/skills/web-search/"],  // Subagent-specific skills
+};
+
+const agent = await createDeepAgent({
+  model: "claude-sonnet-4-6",
+  skills: ["/skills/main/"],  // Main agent and GP subagent get these
+  subagents: [researchSubagent],  // Researcher gets only its own skills
+});
+```
+
+For more information on subagent configuration and skills inheritance, see [Subagents](/oss/javascript/deepagents/subagents).
+
+## What the agent sees
+
+When skills are configured, a "Skills System" section is injected into the agent's system prompt. The agent uses this information to follow a three-step process:
+
+1. **Match** — When a user prompt arrives, the agent checks whether any skill's description matches the task.
+2. **Read** — If a skill applies, the agent reads the full `SKILL.md` file using the path shown in its skills list.
+3. **Execute** — The agent follows the skill's instructions and accesses any supporting files (scripts, templates, reference docs) as needed.
+
+Write clear, specific descriptions in your `SKILL.md` frontmatter. The agent decides whether to use a skill based on the description alone — detailed descriptions lead to better skill matching.
+
+## Skills vs. memory
+
+Skills and [memory](/oss/javascript/deepagents/customization#memory) (`AGENTS.md` files) serve different purposes:
+
+|              | Skills                                                           | Memory                                                        |
+| ------------ | ---------------------------------------------------------------- | ------------------------------------------------------------- |
+| **Purpose**  | On-demand capabilities discovered through progressive disclosure | Persistent context always loaded at startup                   |
+| **Loading**  | Read only when the agent determines relevance                    | Always injected into system prompt                            |
+| **Format**   | `SKILL.md` in named directories                                  | `AGENTS.md` files                                             |
+| **Layering** | User → project (last wins)                                       | User → project (combined)                                     |
+| **Use when** | Instructions are task-specific and potentially large             | Context is always relevant (project conventions, preferences) |
+
+## When to use skills and tools
+
+These are a few general guidelines for using tools and skills:
+
+- Use skills when there is a lot of context to reduce the number of tokens in the system prompt.
+- Use skills to bundle capabilities together into larger actions and provide additional context beyond single tool descriptions.
+- Use tools if the agent does not have access to the file system.
+
+***
+
+```
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/skills.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+
+
+
+[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+```

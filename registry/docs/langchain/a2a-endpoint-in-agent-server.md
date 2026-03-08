@@ -1,0 +1,277 @@
+# A2A endpoint in Agent Server
+
+Source: https://docs.langchain.com/langsmith/server-a2a
+
+[Agent2Agent (A2A)](https://a2a-protocol.org/latest/) is Google's protocol for enabling communication between conversational AI agents. [LangSmith implements A2A support](https://docs.langchain.com/langsmith/server-api-ref#tag/a2a/post/a2a/{assistant_id}), allowing your agents to communicate with other A2A-compatible agents through a standardized protocol.
+
+The A2A endpoint is available in [Agent Server](/langsmith/agent-server) at `/a2a/{assistant_id}`.
+
+## Supported methods
+
+Agent Server supports the following A2A RPC methods:
+
+- **message/send**: Send a message to an assistant and receive a complete response
+- **message/stream**: Send a message and stream responses in real-time using Server-Sent Events (SSE)
+- **tasks/get**: Retrieve the status and results of a previously created task
+
+## Agent card discovery
+
+Each assistant automatically exposes an A2A Agent Card that describes its capabilities and provides the information needed for other agents to connect. You can retrieve the agent card for any assistant using:
+
+```
+GET /.well-known/agent-card.json?assistant_id={assistant_id}
+```
+
+The agent card includes the assistant's name, description, available skills, supported input/output modes, and the A2A endpoint URL for communication.
+
+## Requirements
+
+To use A2A, ensure you have the following dependencies installed:
+
+- `langgraph-api >= 0.4.21`
+
+Install with:
+
+```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+pip install "langgraph-api>=0.4.21"
+```
+
+## Usage overview
+
+To enable A2A:
+
+- Upgrade to use langgraph-api>=0.4.21.
+- Deploy your agent with message-based state structure.
+- Connect with other A2A-compatible agents using the endpoint.
+
+## Creating an A2A-compatible agent
+
+This example creates an A2A-compatible agent that processes incoming messages using OpenAI's API and maintains conversational state. The agent defines a message-based state structure and handles the A2A protocol's message format.
+
+To be compatible with the [A2A "text" parts](https://a2a-protocol.org/dev/specification/#651-textpart-object), the agent must have a `messages` key in state.
+
+The A2A protocol uses two identifiers to maintain conversational continuity:
+
+- `contextId`: Groups messages into a conversation thread (like a session ID)
+- `taskId`: Identifies each individual request within that conversation
+
+On the first message, omit `contextId` and `taskId` - the agent will generate and return them. For all subsequent messages in the conversation, include the `contextId` and `taskId` from the prior response to maintain thread continuity.
+
+**LangSmith Tracing:** The Langsmith Deployment A2A endpoint automatically converts the A2A `contextId` to `thread_id` for LangSmith tracing, grouping all messages in the conversation under a single thread.
+
+For example:
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+"""LangGraph A2A conversational agent.
+
+Supports the A2A protocol with messages input for conversational interactions.
+"""
+
+from __future__ import annotations
+
+import os
+from dataclasses import dataclass
+from typing import Any, Dict, List, TypedDict
+
+from langgraph.graph import StateGraph
+from langgraph.runtime import Runtime
+from openai import AsyncOpenAI
+
+
+class Context(TypedDict):
+    """Context parameters for the agent."""
+    my_configurable_param: str
+
+
+@dataclass
+class State:
+    """Input state for the agent.
+
+    Defines the initial structure for A2A conversational messages.
+    """
+    messages: List[Dict[str, Any]]
+
+
+async def call_model(state: State, runtime: Runtime[Context]) -> Dict[str, Any]:
+    """Process conversational messages and returns output using OpenAI."""
+    # Initialize OpenAI client
+    client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+    # Process the incoming messages
+    latest_message = state.messages[-1] if state.messages else {}
+    user_content = latest_message.get("content", "No message content")
+
+    # Create messages for OpenAI API
+    openai_messages = [
+        {
+            "role": "system",
+            "content": "You are a helpful conversational agent. Keep responses brief and engaging."
+        },
+        {
+            "role": "user",
+            "content": user_content
+        }
+    ]
+
+    try:
+        # Make OpenAI API call
+        response = await client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=openai_messages,
+            max_tokens=100,
+            temperature=0.7
+        )
+
+        ai_response = response.choices[0].message.content
+
+    except Exception as e:
+        ai_response = f"I received your message but had trouble processing it. Error: {str(e)[:50]}..."
+
+    # Create a response message
+    response_message = {
+        "role": "assistant",
+        "content": ai_response
+    }
+
+    return {
+        "messages": state.messages + [response_message]
+    }
+
+
+# Define the graph
+graph = (
+    StateGraph(State, context_schema=Context)
+    .add_node(call_model)
+    .add_edge("__start__", "call_model")
+    .compile()
+)
+```
+
+## Agent-to-agent communication
+
+Once your agents are running locally via `langgraph dev` or [deployed to production](/langsmith/deployments), you can facilitate communication between them using the A2A protocol.
+
+This example demonstrates how two agents can communicate by sending JSON-RPC messages to each other's A2A endpoints. The script simulates a multi-turn conversation where each agent processes the other's response and continues the dialogue.
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+#!/usr/bin/env python3
+"""Agent-to-Agent conversation simulation using the LangGraph A2A endpoint."""
+
+import asyncio
+import aiohttp
+import os
+import uuid
+
+
+def extract_text(result: dict) -> str:
+    """Best-effort extraction of response text from an A2A result."""
+    for art in result.get("result", {}).get("artifacts", []) or []:
+        for part in art.get("parts", []) or []:
+            if part.get("kind") == "text" and part.get("text"):
+                return part["text"]
+
+    msg = (result.get("result", {}).get("status", {}) or {}).get("message", {}) or {}
+    for part in msg.get("parts", []) or []:
+        if part.get("kind") == "text" and part.get("text"):
+            return part["text"]
+
+    return "(no text found)"
+
+
+async def send_message(session, port, assistant_id, text, context_id=None, task_id=None):
+    """Send an A2A message. Returns (response_text, returned_context_id, returned_task_id)."""
+    url = f"http://127.0.0.1:{port}/a2a/{assistant_id}"
+
+    message = {
+        "role": "user",
+        "parts": [{"kind": "text", "text": text}],
+        "messageId": str(uuid.uuid4()),
+    }
+
+    # A2A multi-turn continuity: reuse contextId and taskId across turns/agents
+    if context_id:
+        message["contextId"] = context_id
+    if task_id:
+        message["taskId"] = task_id
+
+    payload = {
+        "jsonrpc": "2.0",
+        "id": str(uuid.uuid4()),
+        "method": "message/send",
+        "params": {"message": message},
+    }
+
+    headers = {"Accept": "application/json"}
+    async with session.post(url, json=payload, headers=headers) as response:
+        result = await response.json()
+
+    returned_context_id = result.get("result", {}).get("contextId") or context_id
+    returned_task_id = result.get("result", {}).get("id")
+    return extract_text(result), returned_context_id, returned_task_id
+
+
+async def simulate_conversation():
+    """Simulate a conversation between two agents."""
+
+    #Assistant IDs
+    agent_a_id = os.getenv("AGENT_A_ID")
+    agent_b_id = os.getenv("AGENT_B_ID")
+
+    if not agent_a_id or not agent_b_id:
+        print("Set AGENT_A_ID and AGENT_B_ID environment variables")
+        return
+
+    message = "Hello! Let's have a conversation."
+    context_id = None
+    task_id = None
+
+    async with aiohttp.ClientSession() as session:
+        for i in range(3):
+            print(f"--- Round {i + 1} ---")
+
+            message, context_id, task_id = await send_message(
+                session, 2024, agent_a_id, message,
+                context_id=context_id,
+                task_id=task_id,
+            )
+            print(f"🔵 Agent A: {message}")
+
+            message, context_id, task_id = await send_message(
+                session, 2025, agent_b_id, message,
+                context_id=context_id,
+                task_id=task_id,
+            )
+            print(f"🔴 Agent B: {message}\n")
+
+
+if __name__ == "__main__":
+    asyncio.run(simulate_conversation())
+```
+
+For complete working examples, see:
+
+- [Two LangGraph agents communicating](https://github.com/langchain-samples/A2A-langgraph) - Example of two LangGraph agents using the A2A protocol
+- [Google ADK agent with LangChain agent](https://github.com/langchain-samples/A2A-google-adk) - Example of a Google ADK agent interacting with a LangChain agent using the A2A protocol
+
+## Disable A2A
+
+To disable the A2A endpoint, set `disable_a2a` to `true` in your `langgraph.json` configuration file:
+
+```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+{
+  "$schema": "https://langgra.ph/schema.json",
+  "http": {
+    "disable_a2a": true
+  }
+}
+```
+
+***
+
+```
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/server-a2a.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+
+
+
+[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+```

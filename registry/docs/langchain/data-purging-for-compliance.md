@@ -1,0 +1,166 @@
+# Data purging for compliance
+
+Source: https://docs.langchain.com/langsmith/data-purging-compliance
+
+This guide covers the various features available after data reaches LangSmith Cloud servers to help you achieve your privacy goals.
+
+## Data retention
+
+LangSmith provides automatic data retention capabilities to help with compliance and storage management. Data retention policies can be configured at the organization and project levels.
+
+For detailed information about data retention configuration and management, please refer to the [Data Retention concepts](/langsmith/administration-overview#data-retention) documentation.
+
+## Customize extended retention policy
+
+This feature is available for [Enterprise](/langsmith/pricing-plans) plan customers. For [self-hosted](/langsmith/self-hosted) Enterprise customers, refer to the [workspace-level configuration section](#workspace-level-extended-retention-for-self-hosted).
+
+[Enterprise](/langsmith/pricing-plans) customers can customize the extended data retention period for traces at the [workspace](/langsmith/administration-overview#workspaces) level to meet specific compliance requirements. By default, extended retention is set to 400 days, but you can adjust this based on your organization's needs. Changes to the retention period apply to new traces only.
+
+### Configure extended retention
+
+In the [LangSmith UI](https://smith.langchain.com):
+
+1. Navigate to **Settings** at the bottom of the page.
+2. Select **Usage configuration** from the left-hand menu.
+3. Find the workspace in the list that you would like to configure.
+4. Click on the value under the **Data retention policy** column for that workspace.
+5. On the **workspace usage configurations** modal, customize the extended policy using the dropdown for **Extended - All traces are retained for** option.
+6. Select **Save**.
+
+### Workspace-level extended retention for self-hosted
+
+Self-hosted [Enterprise](/langsmith/pricing-plans) customers can also use workspace-level extended retention configuration instead of system-wide TTL settings. This provides more granular control over data retention for different workspaces without requiring environment variable changes.
+
+If you use blob storage, you **must** add a lifecycle rule for each custom retention period you configure. For example, setting a workspace to 90-day retention means blob data is written to the `ttl_90d/` prefix, which requires a matching lifecycle rule to be cleaned up automatically. See [blob storage TTL configuration](/langsmith/self-host-blob-storage#custom-workspace-level-retention-prefixes) for details and examples.
+
+To configure this for self-hosted deployments, refer to the [self-hosted TTL documentation](/langsmith/self-host-ttl) for the legacy system-wide approach or contact [support](https://support.langchain.com).
+
+## Trace deletes
+
+You can use the API to complete trace deletes. The API supports two methods for deleting traces:
+
+1. **By trace IDs and session ID**: Delete specific traces by providing a list of trace IDs and their corresponding session ID (up to 1000 traces per request)
+2. **By metadata**: Delete traces across a workspace that match any of the specified metadata key-value pairs
+
+For more details, refer to the [API spec](https://api.smith.langchain.com/redoc#tag/run/operation/delete_runs_api_v1_runs_delete_post).
+
+All trace deletions will delete related entities like feedbacks, aggregations, and stats across all data storages.
+
+### Deletion timeline
+
+Trace deletions are processed during non-peak usage times and are not instant. LangChain runs the delete job on the weekend. There is no confirmation of deletion - you'll need to query the data again to verify it has been removed.
+
+### Delete specific traces
+
+To delete specific traces by their trace IDs from a single session:
+
+The `session_id` is the project ID for the trace you are trying to delete. You can find it on the tracing project page in the LangSmith UI.
+
+```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+curl -X POST "https://api.smith.langchain.com/api/v1/runs/delete" \
+  -H "x-api-key: YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "trace_ids": ["trace-id-1", "trace-id-2", "trace-id-3"],
+    "session_id": "session-id-1"
+  }'
+```
+
+### Delete by metadata
+
+When deleting by metadata:
+
+- Accepts a `metadata` object of key/value pairs. KV pair matching uses an **or** condition. A trace will match if it has **any** of the key-value pairs specified in metadata (not all)
+- You don't need to specify a session id when deleting by metadata. Deletes will apply across the workspace.
+
+To delete traces based on metadata across a workspace (matches **any** of the metadata key-value pairs):
+
+```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+curl -X POST "https://api.smith.langchain.com/api/v1/runs/delete" \
+  -H "x-api-key: YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "metadata": {
+      "user_id": "user123",
+      "environment": "staging"
+    }
+  }'
+```
+
+This will delete traces that have either `user_id: "user123"` **or** `environment: "staging"` in their metadata.
+
+Remember that you can only schedule up to 1000 traces per session per request. For larger deletions, you'll need to make multiple requests.
+
+## Example deletes
+
+You can delete dataset examples self-serve via our API, which supports both soft and hard deletion methods depending on your data retention needs.
+
+Hard deletes will permanently remove inputs, outputs, and metadata from ALL versions of the specified examples across the entire dataset history.
+
+### Deleting examples is a two-step process
+
+For bulk operations, example deletion follows a two-step process:
+
+#### 1. Search for examples by metadata
+
+Find all examples with matching metadata across all datasets in a workspace.
+
+[GET /examples](https://api.smith.langchain.com/redoc#tag/examples/operation/read_examples_api_v1_examples_get)
+
+- `as_of` must be explicitly specified as a timestamp. Only examples created before the `as_of` date will be returned
+
+```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+curl -X GET "https://api.smith.langchain.com/api/v1/examples?as_of=2024-01-01T00:00:00Z" \
+  -H "x-api-key: YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "metadata": {
+      "user_id": "user123",
+      "environment": "staging"
+    }
+  }'
+```
+
+This will return examples that have either `user_id: "user123"` **or** `environment: "staging"` in their metadata across all datasets in your workspace.
+
+#### 2. Hard delete examples
+
+Once you have the example IDs, send a delete request. This will zero-out the inputs, outputs, and metadata from all versions of the dataset for that example.
+
+[POST /v1/platform/datasets/examples/delete/](https://api.smith.langchain.com/redoc?#tag/examples/paths/~1v1~1platform~1datasets~1examples~1delete/post)
+
+- Specify `example_ids` (list of example IDs) and `hard_delete` (boolean) in the request body
+
+```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+curl -X POST "https://api.smith.langchain.com/v1/platform/datasets/examples/delete/" \
+  -H "x-api-key: YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "example_ids": ["example-id-1", "example-id-2", "example-id-3"],
+    "hard_delete": true
+  }'
+```
+
+### Deletion types
+
+#### Soft delete (default)
+
+- Creates tombstoned entries with NULL inputs/outputs in the dataset
+- Preserves historical data and maintains dataset versioning
+- Only affects the current version of the dataset
+
+#### Hard delete
+
+- Permanently removes inputs, outputs, and metadata from ALL dataset versions
+- Complete data removal when compliance requires zero-out across all versions
+- Set `"hard_delete": true` in the request body
+
+***
+
+```
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/data-purging-compliance.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+
+
+
+[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+```

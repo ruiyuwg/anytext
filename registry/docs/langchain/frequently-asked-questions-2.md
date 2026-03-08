@@ -1,0 +1,161 @@
+# Frequently Asked Questions
+
+Source: https://docs.langchain.com/langsmith/pricing-faq
+
+View our [Pricing](https://www.langchain.com/pricing) page for more information on our pricing plans.
+
+## I've been using LangSmith since before pricing took effect for new users. when will pricing go into effect for my account?
+
+If you've been using LangSmith already, your usage will be billable starting in July 2024. At that point if you want to add seats or use more than the monthly allotment of free traces, you will need to add a credit card to LangSmith or contact sales. If you are interested in the Enterprise plan with higher rate limits and special deployment options, you can learn more or make a purchase by [contacting our sales team](https://www.langchain.com/contact-sales).
+
+## Which plan is right for me?
+
+If you're an individual developer, the Developer plan is a great choice for small projects.
+
+For teams that want to collaborate in LangSmith, check out the Plus plan. **If you are an early-stage startup building an AI application**, you may be eligible for our Startup plan with discounted prices and a generous free monthly trace allotment. Please reach out via our [Startup Contact Form](https://airtable.com/app8ZrGLtHAtFVO1o/pagfLAmdTz4ep7TGu/form) for more details.
+
+If you need more advanced administration, authentication and authorization, deployment options, support, or annual invoicing, the Enterprise plan is right for you. Please reach out via our [Sales Contact Form](https://www.langchain.com/contact-sales) for more details.
+
+## What is a seat?
+
+A seat is a distinct user inside your organization. We consider the total number of users (including invited users) to determine the number of seats to bill.
+
+## What is a trace?
+
+A trace is one complete invocation of your application chain or agent, evaluator run, or playground run. Here is an [example](https://smith.langchain.com/public/17c24270-9f74-47e7-b70c-d508afc448fa/r) of a single trace.
+
+## What is a Deployment Run?
+
+A Deployment Run is one end-to-end invocation of a LangGraph agent deployed via LangSmith Deployment. Nodes and subgraphs within a single agent execution are not charged separately. Calls to other LangGraph agents (through RemoteGraph or the LangGraph SDK or the API directly) are charged separately, to the deployment that hosts the agent being called. An interrupt for human-in-the-loop creates a separate Deployment Run when resuming.
+
+Deployment Runs are billed at $0.005 each. For high-volume usage, please [contact our sales team](https://www.langchain.com/contact-sales) to discuss custom pricing options.
+
+## What is an ingested event?
+
+An ingested event is any distinct, trace-related data sent to LangSmith. This includes:
+
+- Inputs, outputs and metadata sent at the start of a run step within a trace
+- Inputs, outputs and metadata sent at the end of a run step within a trace
+- Feedback on run steps or traces
+
+## I've hit my rate or usage limits. what can I do?
+
+When you first sign up for a LangSmith account, you get a Personal organization that is limited to 5000 monthly traces. To continue sending traces after reaching this limit, upgrade to the Developer or Plus plans by adding a credit card. Head to [Plans and Billing](https://smith.langchain.com/settings/payments) to upgrade.
+
+Similarly, if you've hit the rate limits on your current plan, you can upgrade to a higher plan to get higher limits, or contact support via [support.langchain.com](https://support.langchain.com) with questions.
+
+## I have a developer account, can I upgrade my account to the plus or enterprise plan?
+
+Yes, Developer plan users can easily upgrade to the Plus plan on the [Plans and Billing](https://smith.langchain.com/settings/payments) page. For the Enterprise plan, please [contact our sales team](https://www.langchain.com/contact-sales) to discuss your needs.
+
+## How does billing work?
+
+**Seats**
+
+Seats are billed monthly on the first of the month. Additional seats purchased mid-month are pro-rated and billed within one day of the purchase. Seats removed mid-month will not be credited.
+
+**Traces**
+
+As long as you have a card on file in your account, we'll service your traces and bill you on the first of the month for traces that you submitted in the previous month. You will be able to set usage limits if you so choose to limit the maximum charges you could incur in any given month.
+
+## Can I limit how much I spend on tracing?
+
+You can set limits on the number of traces that can be sent to LangSmith per month on the [Usage configuration](https://smith.langchain.com/settings/payments) page.
+
+While we do show you the dollar value of your usage limit for convenience, this limit evaluated in terms of number of traces instead of dollar amount. For example, if you are approved for our startup plan tier where you are given a generous allotment of free traces, your usage limit will not automatically change.
+
+You are not currently able to set a spend limit in the product.
+
+## How can I track my usage so far this month?
+
+Under the Settings section for your Organization you will see subsection for **Usage**. There, you will be able to see a graph of the daily number of billable LangSmith traces from the last 30, 60, or 90 days. Note that this data is delayed by 1-2 hours and so may trail your actual number of runs slightly for the current day.
+
+## I have a question about my bill...
+
+Customers on the Developer and Plus plan tiers should contact support via [support.langchain.com](https://support.langchain.com). Customers on the Enterprise plan should contact their sales representative directly.
+
+Enterprise plan customers are billed annually by invoice.
+
+## What can I expect from support?
+
+On the Developer plan, community-based support is available on [LangChain community Slack](https://www.langchain.com/join-community).
+
+On the Plus plan, you will also receive preferential support via [support.langchain.com](https://support.langchain.com) for LangSmith-related questions only and we'll do our best to respond within the next business day.
+
+On the Enterprise plan, you'll get white-glove support with a Slack channel, a dedicated customer success manager, and monthly check-ins to go over LangSmith and LangChain questions. We can help with anything from debugging, agent and RAG techniques, evaluation approaches, and cognitive architecture reviews. If you purchase the add-on to run LangSmith in your environment, we'll also support deployments and new releases with our infra engineering team on-call.
+
+## Where is my data stored?
+
+You may choose to sign up in either the US or EU region. See the [cloud architecture reference](/langsmith/cloud#cloud-architecture-and-scalability) for more details. If you're on the Enterprise plan, we can deliver LangSmith to run on your kubernetes cluster in AWS, GCP, or Azure so that data never leaves your environment.
+
+## Which security frameworks is LangSmith compliant with?
+
+We are SOC 2 Type II, GDPR, and HIPAA compliant.
+
+You can request more information about our security policies and posture at [trust.langchain.com](https://trust.langchain.com). Please note we only enter into BAAs with customers on our Enterprise plan.
+
+## Will you train on the data that I send LangSmith?
+
+We will not train on your data, and you own all rights to your data. See [LangSmith Terms of Service](https://langchain.dev/terms-of-service) for more information.
+
+## What is an Agent Builder run?
+
+An Agent Builder Run is a complete invocation of an Agent Builder agent, initiated by the receipt of a message or event, whether triggered automatically or sent manually. An Agent Builder Run includes any message delivered to the agent through configured triggers (including third-party integrations or other connected services) as well as messages sent directly through the Agent Builder user interface (for example, via the chat interface). An Agent Builder Run is counted if the invocation succeeds or is interrupted. Resuming execution after a human-in-the-loop interruption constitutes a separate Agent Builder Run. An execution failure does not count as an Agent Builder Run.
+
+## Are model costs included with Agent Builder pricing?
+
+No. Model usage is billed separately by your model provider. Agent Builder lets you choose the model you want (for example, Anthropic, OpenAI, Gemini, or another provider) and connect it using your provider API key. For more information on configuring models, see the [Agent Builder setup](/langsmith/agent-builder-setup#required-model-key) page.
+
+## Are agent tools included with Agent Builder pricing?
+
+Agent Builder includes built-in tools and supports connecting third-party tools via a remote MCP server. Third-party tools typically require you to authenticate with your account, and any fees or usage charges are billed by the third-party provider. For more information on setting up tool keys, see the [Agent Builder setup](/langsmith/agent-builder-setup#optional-tool-keys) page.
+
+## Are Agent Builder runs automatically traced in LangSmith, and do they count toward billing?
+
+Yes. Every Agent Builder run is automatically traced in LangSmith. These traces are attributed to the user's account and count toward usage-based billing under the customer's LangSmith plan.
+
+## How do I disable Agent Builder?
+
+If you are on a Self-Hosted LangSmith instance, you can disable Agent Builder by setting the following to `false` in your `values.yaml`:
+
+```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+backend:
+  agentBootstrap:
+    enabled: false
+
+config:
+  agentBuilder:
+    enabled: false
+
+agentBuilderToolServer:
+  enabled: false
+
+agentBuilderTriggerServer:
+  enabled: false
+```
+
+If you are on cloud LangSmith, [reach out to our Support team](https://support.langchain.com/) to disable Agent Builder.
+
+***
+
+```
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/pricing-faq.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+
+
+
+[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+```
+
+# Pricing plans
+
+Source: https://docs.langchain.com/langsmith/pricing-plans
+
+***
+
+```
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/pricing-plans.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+
+
+
+[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+```

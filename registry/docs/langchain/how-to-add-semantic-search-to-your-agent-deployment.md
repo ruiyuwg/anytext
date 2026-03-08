@@ -1,0 +1,159 @@
+# How to add semantic search to your agent deployment
+
+Source: https://docs.langchain.com/langsmith/semantic-search
+
+This guide explains how to add semantic search to your deployment's cross-thread [store](/oss/python/langgraph/persistence#memory-store), so that your agent can search for memories and other documents by semantic similarity.
+
+## Prerequisites
+
+- A deployment (refer to [how to set up an application for deployment](/langsmith/setup-app-requirements-txt)) and details on [hosting options](/langsmith/platform-setup).
+- API keys for your embedding provider (in this case, OpenAI).
+- `langchain >= 0.3.8` (if you specify using the string format below).
+
+## Steps
+
+1. Update your `langgraph.json` configuration file to include the store configuration:
+
+```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+{
+    ...
+    "store": {
+        "index": {
+            "embed": "openai:text-embedding-3-small",
+            "dims": 1536,
+            "fields": ["$"]
+        }
+    }
+}
+```
+
+This configuration:
+
+- Uses OpenAI's text-embedding-3-small model for generating embeddings
+- Sets the embedding dimension to 1536 (matching the model's output)
+- Indexes all fields in your stored data (`["$"]` means index everything, or specify specific fields like `["text", "metadata.title"]`)
+
+  Each deployment supports a single embedding model. Configuring multiple embedding models is not supported, as it would cause ambiguity in `/store` endpoints and result in mixed-index issues.
+
+1. To use the string embedding format above, make sure your dependencies include `langchain >= 0.3.8`:
+
+```toml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+# In pyproject.toml
+[project]
+dependencies = [
+    "langchain>=0.3.8"
+]
+```
+
+Or if using [requirements.txt](/langsmith/setup-app-requirements-txt):
+
+```
+langchain>=0.3.8
+```
+
+## Usage
+
+Once configured, you can use semantic search in your [nodes](/oss/python/langgraph/graph-api#nodes). The store requires a namespace tuple to organize memories:
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+async def search_memory(state: State, *, store: BaseStore):
+    # Search the store using semantic similarity
+    # The namespace tuple helps organize different types of memories
+    # e.g., ("user_facts", "preferences") or ("conversation", "summaries")
+    results = await store.asearch(
+        namespace=("memory", "facts"),  # Organize memories by type
+        query="your search query",
+        limit=3  # number of results to return
+    )
+    return results
+```
+
+Each result is a `SearchItem` (extends `Item` with an additional `score` field). When semantic search is configured, `score` contains the similarity score:
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+results[0].key       # "07e0caf4-1631-47b7-b15f-65515d4c1843"
+results[0].value     # {"text": "User prefers dark mode"}
+results[0].namespace # ("memory", "facts")
+results[0].score     # 0.92 (similarity score, present when semantic search is configured)
+```
+
+### Changing your embedding model
+
+Changing the embedding model or dimensions requires re-embedding all existing data. There is currently no automated migration tooling for this. Plan accordingly if you need to switch models.
+
+## Custom embeddings
+
+If you want to use custom embeddings, you can pass a path to a custom embedding function:
+
+```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+{
+    ...
+    "store": {
+        "index": {
+            "embed": "path/to/embedding_function.py:embed",
+            "dims": 1536,
+            "fields": ["$"]
+        }
+    }
+}
+```
+
+The deployment will look for the function in the specified path. The function must be async and accept a list of strings:
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+# path/to/embedding_function.py
+from openai import AsyncOpenAI
+
+client = AsyncOpenAI()
+
+async def aembed_texts(texts: list[str]) -> list[list[float]]:
+    """Custom embedding function that must:
+    1. Be async
+    2. Accept a list of strings
+    3. Return a list of float arrays (embeddings)
+    """
+    response = await client.embeddings.create(
+        model="text-embedding-3-small",
+        input=texts
+    )
+    return [e.embedding for e in response.data]
+```
+
+## Querying via the API
+
+You can also query the store using the LangGraph SDK. Since the SDK uses async operations:
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+from langgraph_sdk import get_client
+
+async def search_store():
+    client = get_client()
+    results = await client.store.search_items(
+        ("memory", "facts"),
+        query="your search query",
+        limit=3  # number of results to return
+    )
+    return results
+
+# Use in an async context
+results = await search_store()
+```
+
+Each result item includes a `score` field when semantic search is configured:
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+results["items"][0]["key"]       # "07e0caf4-1631-47b7-b15f-65515d4c1843"
+results["items"][0]["value"]     # {"text": "User prefers dark mode"}
+results["items"][0]["namespace"] # ["memory", "facts"]
+results["items"][0]["score"]     # 0.92 (similarity score)
+```
+
+***
+
+```
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/semantic-search.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+
+
+
+[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+```

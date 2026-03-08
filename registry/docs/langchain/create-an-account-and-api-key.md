@@ -1,0 +1,60 @@
+# Create an account and API key
+
+Source: https://docs.langchain.com/langsmith/create-account-api-key
+
+To get started with LangSmith, you need to create an account. You can sign up for a free account in the [LangSmith UI](https://smith.langchain.com). LangSmith supports sign in with Google, GitHub, and email.
+
+## API keys
+
+LangSmith supports two types of API keys: Service Keys and Personal Access Tokens. Both types of tokens can be used to authenticate requests to the LangSmith API, but they have different use cases.
+
+For more details on Service Keys and Personal Access Tokens, refer to the [Administration overview page](/langsmith/administration-overview).
+
+### Create an API key
+
+To log traces and run evaluations with LangSmith, you will need to create an API key to authenticate your requests. API keys can be scoped to a set of [workspaces](/langsmith/administration-overview#workspaces), or the entire [organization](/langsmith/administration-overview#organizations).
+
+To create either type of API key:
+
+1. Navigate to the [Settings page](https://smith.langchain.com/settings) and select the **API Keys** section.
+2. For service keys, choose between an organization-scoped and workspace-scoped key. If the key is workspace-scoped, you must specify the workspaces.
+
+   [Enterprise](/langsmith/pricing-plans) users are also able to [assign specific roles](/langsmith/administration-overview#workspace-roles-rbac) to the key, which adjusts its permissions.
+3. Set the key's expiration; the key will become unusable after the number of days chosen, or never, if that is selected.
+4. Click **Create API Key.**
+
+LangSmith will display the API key only once, so make sure to copy it and store it in a safe place.
+
+### Delete an API key
+
+To delete an API key:
+
+1. Navigate to the [Settings page](https://smith.langchain.com/settings) and scroll to the **API Keys** section.
+2. Find the API key you need to delete from the table. Toggle **Personal** or **Service** as needed.
+3. Select the trash icon  in the **Actions** column and confirm deletion.
+
+## Configure the SDK
+
+You may set the following environment variables in addition to `LANGSMITH_API_KEY`.
+
+This is only required if using the EU instance.
+
+`LANGSMITH_ENDPOINT=https://eu.api.smith.langchain.com`
+
+This is only required for keys scoped to more than one workspace.
+
+`LANGSMITH_WORKSPACE_ID=<Workspace ID>`
+
+## Using API keys outside of the SDK
+
+See [instructions for managing your organization via API](/langsmith/manage-organization-by-api).
+
+***
+
+```
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/create-account-api-key.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+
+
+
+[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+```

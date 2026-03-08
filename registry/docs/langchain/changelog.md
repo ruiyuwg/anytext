@@ -1,0 +1,160 @@
+# Changelog
+
+Source: https://docs.langchain.com/oss/javascript/releases/changelog
+
+Log of updates and improvements to our JavaScript/TypeScript packages
+
+**Subscribe**: Our changelog includes an [RSS feed](https://docs.langchain.com/oss/javascript/releases/changelog/rss.xml) that can integrate with [Slack](https://slack.com/help/articles/218688467-Add-RSS-feeds-to-Slack), [email](https://zapier.com/apps/email/integrations/rss/1441/send-new-rss-feed-entries-via-email), Discord bots like [Readybot](https://readybot.io/) or [RSS Feeds to Discord Bot](https://rss.app/en/bots/rssfeeds-discord-bot), and other subscription tools.
+
+## v1.1.0
+
+### `@langchain/langgraph`
+
+Introducing **StateSchema** - a cleaner, library-agnostic way to define graph state that works with any [Standard Schema](https://github.com/standard-schema/standard-schema)-compliant validation library.
+
+### Standard JSON Schema support
+
+LangGraph now supports [Standard JSON Schema](https://standardschema.dev/json-schema), an open specification implemented by Zod 4, Valibot, ArkType, and other schema libraries. This means you can use your preferred validation library without lock-in:
+
+```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+import { z } from "zod"; // or valibot, arktype, etc.
+import { StateSchema, ReducedValue, MessagesValue } from "@langchain/langgraph";
+
+const AgentState = new StateSchema({
+  messages: MessagesValue,
+  currentStep: z.string(),
+  count: z.number().default(0),
+  history: new ReducedValue(
+    z.array(z.string()).default(() => []),
+    {
+      inputSchema: z.string(),
+      reducer: (current, next) => [...current, next],
+    }
+  ),
+});
+
+// Type-safe state and update types
+type State = typeof AgentState.State;
+type Update = typeof AgentState.Update;
+
+const graph = new StateGraph(AgentState)
+  .addNode("agent", (state) => ({ count: state.count + 1 }))
+  .addEdge(START, "agent")
+  .addEdge("agent", END)
+  .compile();
+```
+
+### New state value primitives
+
+- **ReducedValue**: Define fields with custom reducers for accumulating values. Supports separate input and output schemas for type-safe reducer inputs.
+- **UntrackedValue**: Define transient state that exists during execution but is never checkpointed - useful for database connections, caches, or runtime-only configuration.
+- **MessagesValue**: A prebuilt `ReducedValue` for chat messages with the standard messages reducer.
+
+### Type helper exports
+
+New exported type utilities for typing functions outside the graph builder:
+
+- `GraphNode<Schema, Nodes?, Config?>` - Type node functions with full inference
+- `ConditionalEdgeRouter<Schema, Nodes?>` - Type conditional edge routers
+
+```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+// Type standalone node functions
+const myNode: GraphNode = (state, config) => {
+  return { count: state.count + 1 };
+};
+
+// Use schema type helpers directly
+const processState = (state: typeof AgentState.State) => {
+  console.log(state.count);
+};
+```
+
+The existing `Annotation` and zod-based API continues to work unchanged - `StateSchema` is an additional option for those who prefer schema-first definitions.
+
+```
+See the full documentation for defining graph state with StateSchema, ReducedValue, and UntrackedValue.
+
+
+
+Use GraphNode and ConditionalEdgeRouter to type functions outside the graph builder.
+```
+
+## v1.2.0
+
+### `langchain`
+
+- [Structured output](/oss/javascript/langchain/structured-output): Added ability to manually set `strict` mode when using `providerStrategy` for structured output.
+
+### `@langchain/openai`
+
+- **New provider built-in tools:** Support for [file search](/oss/javascript/langchain/tools#file-search), [web search](/oss/javascript/langchain/tools#web-search), [code interpreter](/oss/javascript/langchain/tools#code-interpreter), [image generation](/oss/javascript/langchain/tools#image-generation), [computer use](/oss/javascript/langchain/tools#computer-use), [shell](/oss/javascript/langchain/tools#shell), and [MCP connector](/oss/javascript/langchain/tools#mcp) tools.
+- **Content moderation:** New `moderateContent` option on `ChatOpenAI` for detecting and handling unsafe content.
+- Prefer responses API for GPT-5.2 Pro model.
+
+## v1.3.0
+
+### `@langchain/anthropic`
+
+- **New provider built-in tools:** Support for [text editor](/oss/javascript/langchain/tools#text-editor), [web fetch](/oss/javascript/langchain/tools#web-fetch), [computer use](/oss/javascript/langchain/tools#computer-use-1), [tool search](/oss/javascript/langchain/tools#tool-search), and [MCP toolset](/oss/javascript/langchain/tools#mcp-toolset) tools.
+- Exposed `ChatAnthropicInput` type for improved type safety.
+
+## v1.1.0
+
+### `@langchain/ollama`
+
+- **Native structured outputs:** Added support for native structured output via `withStructuredOutput`.
+- Support for custom `baseUrl` configuration.
+
+## v1.0.0
+
+### `@langchain/community`
+
+- Jira document loader updated to use v3 API.
+- LanceDB: Added `similaritySearch()` and `similaritySearchWithScore()` support.
+- Elasticsearch hybrid search support.
+- New `GoogleCalendarDeleteTool`.
+- Various bug fixes for LlamaCppEmbeddings, PrismaVectorStore, IBM WatsonX, and security improvements.
+
+### Other packages
+
+- **@langchain/xai:** Native Live Search support.
+- **@langchain/tavily:** Added Tavily's research endpoint.
+- **@langchain/mongodb:** New MongoDB LLM cache.
+- **@langchain/mcp-adapters:** Added `onConnectionError` option.
+- **@langchain/google-common:** `jsonSchema` method support in `withStructuredOutput`.
+- **@langchain/core:** Security fixes, better subgraph nesting in Mermaid graphs, UUID7 for run IDs.
+
+## v1.1.0
+
+- [Model profiles](/oss/javascript/langchain/models#model-profiles): Chat models now expose supported features and capabilities through a `.profile` getter. These data are derived from [models.dev](https://models.dev), an open source project providing model capability data.
+- [Model retry middleware](/oss/javascript/langchain/middleware/built-in#model-retry): New middleware for automatically retrying failed model calls with configurable exponential backoff, improving agent reliability.
+- [Content moderation middleware](/oss/javascript/langchain/middleware/built-in#content-moderation): OpenAI content moderation middleware for detecting and handling unsafe content in agent interactions. Supports checking user input, model output, and tool results.
+- [Summarization middleware](/oss/javascript/langchain/middleware/built-in#summarization): Updated to support flexible trigger points using model profiles for context-aware summarization.
+- [Structured output](/oss/javascript/langchain/structured-output): `ProviderStrategy` support (native structured output) can now be inferred from model profiles.
+- [`SystemMessage` for `createAgent`](/oss/javascript/langchain/middleware/custom#working-with-system-messages): Support for passing `SystemMessage` instances directly to `createAgent`'s `systemPrompt` parameter and a new `concat` method for extending system messages. Enables advanced features like cache control and structured content blocks.
+- [Dynamic system prompt middleware](/oss/javascript/langchain/agents#dynamic-system-prompt): Return values from `dynamicSystemPromptMiddleware` are now purely additive. When returning a [`SystemMessage`](https://reference.langchain.com/javascript/langchain-core/messages/SystemMessage) or `string`, they are merged with existing system messages rather than replacing them, making it easier to compose multiple middleware that modify the prompt.
+- **Compatibility improvements:** Fixed error handling for Zod v4 validation errors in structured output and tool schemas, ensuring detailed error messages are properly displayed.
+
+## v1.0.0
+
+### `langchain`
+
+- [Release notes](/oss/javascript/releases/langchain-v1)
+- [Migration guide](/oss/javascript/migrate/langchain-v1)
+
+### `langgraph`
+
+- [Release notes](/oss/javascript/releases/langgraph-v1)
+- [Migration guide](/oss/javascript/migrate/langgraph-v1)
+
+  If you encounter any issues or have feedback, please [open an issue](https://github.com/langchain-ai/docs/issues/new?template=01-langchain.yml) so we can improve. To view v0.x documentation, [go to the archived content](https://github.com/langchain-ai/langchainjs/tree/v0.3/docs/core_docs/docs).
+
+***
+
+```
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/releases/changelog.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+
+
+
+[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+```

@@ -1,0 +1,157 @@
+# Quickstart
+
+Source: https://docs.langchain.com/oss/javascript/deepagents/quickstart
+
+Build your first deep agent in minutes
+
+This guide walks you through creating your first deep agent with planning, file system tools, and subagent capabilities. You'll build a research agent that can conduct research and write reports.
+
+## Prerequisites
+
+Before you begin, make sure you have an API key from a model provider (e.g., Anthropic, OpenAI).
+
+Deep agents require a model that supports [tool calling](/oss/javascript/langchain/models#tool-calling). See [customization](/oss/javascript/deepagents/customization#model) for how to configure your model.
+
+### Step 1: Install dependencies
+
+```bash npm theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+npm install deepagents langchain @langchain/core @langchain/tavily
+```
+
+```bash yarn theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+yarn add deepagents langchain @langchain/core @langchain/tavily
+```
+
+```bash pnpm theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+pnpm add deepagents langchain @langchain/core @langchain/tavily
+```
+
+This guide uses [Tavily](https://tavily.com/) as an example search provider, but you can substitute any search API (e.g., DuckDuckGo, SerpAPI, Brave Search).
+
+### Step 2: Set up your API keys
+
+```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+export ANTHROPIC_API_KEY="your-api-key"
+export TAVILY_API_KEY="your-tavily-api-key"
+```
+
+### Step 3: Create a search tool
+
+```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+import { tool } from "langchain";
+import { TavilySearch } from "@langchain/tavily";
+import { z } from "zod";
+
+const internetSearch = tool(
+  async ({
+    query,
+    maxResults = 5,
+    topic = "general",
+    includeRawContent = false,
+  }: {
+    query: string;
+    maxResults?: number;
+    topic?: "general" | "news" | "finance";
+    includeRawContent?: boolean;
+  }) => {
+    const tavilySearch = new TavilySearch({
+      maxResults,
+      tavilyApiKey: process.env.TAVILY_API_KEY,
+      includeRawContent,
+      topic,
+    });
+    return await tavilySearch._call({ query });
+  },
+  {
+    name: "internet_search",
+    description: "Run a web search",
+    schema: z.object({
+      query: z.string().describe("The search query"),
+      maxResults: z
+        .number()
+        .optional()
+        .default(5)
+        .describe("Maximum number of results to return"),
+      topic: z
+        .enum(["general", "news", "finance"])
+        .optional()
+        .default("general")
+        .describe("Search topic category"),
+      includeRawContent: z
+        .boolean()
+        .optional()
+        .default(false)
+        .describe("Whether to include raw content"),
+    }),
+  },
+);
+```
+
+### Step 4: Create a deep agent
+
+```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+import { createDeepAgent } from "deepagents";
+
+// System prompt to steer the agent to be an expert researcher
+const researchInstructions = `You are an expert researcher. Your job is to conduct thorough research and then write a polished report.
+
+You have access to an internet search tool as your primary means of gathering information.
+
+## \`internet_search\`
+
+Use this to run an internet search for a given query. You can specify the max number of results to return, the topic, and whether raw content should be included.
+`;
+
+const agent = createDeepAgent({
+  tools: [internetSearch],
+  systemPrompt: researchInstructions,
+});
+```
+
+### Step 5: Run the agent
+
+```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+const result = await agent.invoke({
+  messages: [{ role: "user", content: "What is langgraph?" }],
+});
+
+// Print the agent's response
+console.log(result.messages[result.messages.length - 1].content);
+```
+
+## How does it work?
+
+Your deep agent automatically:
+
+1. **Plans its approach** using the built-in [`write_todos`](/oss/javascript/deepagents/harness#to-do-list-tracking) tool to break down the research task.
+2. **Conducts research** by calling the `internet_search` tool to gather information.
+3. **Manages context** by using file system tools ([`write_file`](/oss/javascript/deepagents/harness#file-system-access), [`read_file`](/oss/javascript/deepagents/harness#file-system-access)) to offload large search results.
+4. **Spawns subagents** as needed to delegate complex subtasks to specialized subagents.
+5. **Synthesizes a report** to compile findings into a coherent response.
+
+## Examples
+
+For agents, patterns, and applications you can build with Deep Agents, see [Examples](https://github.com/langchain-ai/deepagents/tree/main/examples).
+
+## Streaming
+
+Deep agents have built-in [streaming](/oss/javascript/langchain/streaming/overview) for real-time updates from agent execution using LangGraph.
+This allows you to observe output progressively and review and debug agent and subagent work, such as tool calls, tool results, and LLM responses.
+
+## Next steps
+
+Now that you've built your first deep agent:
+
+- **Customize your agent**: Learn about [customization options](/oss/javascript/deepagents/customization), including custom system prompts, tools, and subagents.
+- **Add long-term memory**: Enable [persistent memory](/oss/javascript/deepagents/long-term-memory) across conversations.
+- **Deploy to production**: Learn about [deployment options](/oss/javascript/langgraph/deploy) for LangGraph applications.
+
+***
+
+```
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/quickstart.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+
+
+
+[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+```

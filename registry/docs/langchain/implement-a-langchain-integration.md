@@ -1,0 +1,72 @@
+# Implement a LangChain integration
+
+Source: https://docs.langchain.com/oss/javascript/contributing/implement-langchain
+
+Integration packages are Python packages that users can install for use in their projects. They implement one or more components that adhere to the LangChain interface standards.
+
+LangChain components are subclasses of base classes in [`langchain-core`](https://github.com/langchain-ai/langchain/tree/master/libs/core). Examples include [chat models](/oss/javascript/integrations/chat), [tools](/oss/javascript/integrations/tools), [retrievers](/oss/javascript/integrations/retrievers), and more.
+
+Your integration package will typically implement a subclass of at least one of these components. Expand the tabs below to see details on each.
+
+```
+Chat models are subclasses of the [`BaseChatModel`](https://reference.langchain.com/javascript/langchain-core/language_models/chat_models/BaseChatModel) class. They implement methods for generating chat completions, handling message formatting, and managing model parameters.
+
+
+  The chat model integration guide is currently WIP. In the meantime, read the [chat model conceptual guide](/oss/javascript/langchain/models) for details on how LangChain chat models function. You may also refer to existing integrations in the [LangChain repo](https://github.com/langchain-ai/langchainjs/tree/main/libs/providers)
+
+
+
+
+Tools are used in 2 main ways:
+
+1. To define an "input schema" or "args schema" to pass to a chat model's tool calling feature along with a text request, such that the chat model can generate a "tool call", or parameters to call the tool with.
+2. To take a "tool call" as generated above, and take some action and return a response that can be passed back to the chat model as a ToolMessage.
+
+The Tools class must inherit from the [`BaseTool`](https://reference.langchain.com/javascript/classes/_langchain_core.tools.StructuredTool.html) base class. This interface has 3 properties and 2 methods that should be implemented in a subclass.
+
+
+  The tools integration guide is currently WIP. In the meantime, read the [tools conceptual guide](/oss/javascript/langchain/tools) for details on how LangChain tools function.
+
+
+
+
+Retrievers are used to retrieve documents from APIs, databases, or other sources based on a query. The Retriever class must inherit from the BaseRetriever base class.
+
+
+  The retriever integration guide is currently WIP. In the meantime, read the [retriever conceptual guide](/oss/javascript/integrations/retrievers) for details on how LangChain retrievers function.
+
+
+
+
+All vector stores must inherit from the [`VectorStore`](https://reference.langchain.com/javascript/langchain-core/vectorstores/VectorStore) base class. This interface consists of methods for writing, deleting and searching for documents in the vector store.
+
+See the [vector store integration guide](/oss/javascript/integrations/vectorstores) for details on implementing a vector store integration.
+
+
+  The vector store integration guide is currently WIP. In the meantime, read the [vector store conceptual guide](/oss/javascript/integrations/vectorstores) for details on how LangChain vector stores function.
+
+
+
+
+Embedding models are subclasses of the [`Embeddings`](https://reference.langchain.com/javascript/langchain-core/embeddings/Embeddings) class.
+
+
+  The embedding model integration guide is currently WIP. In the meantime, read the [embedding model conceptual guide](/oss/javascript/integrations/text_embedding) for details on how LangChain embedding models function.
+
+
+
+
+Sandbox integrations enable [Deep Agents](/oss/javascript/deepagents/overview) to run code in isolated environments.
+
+**Reference implementation:** See the [Daytona partner integration](https://github.com/langchain-ai/deepagents/tree/main/libs/partners/daytona) for structure and patterns.
+```
+
+***
+
+```
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/contributing/implement-langchain.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+
+
+
+[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+```

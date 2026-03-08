@@ -1,0 +1,435 @@
+# Trace Vercel AI SDK applications (JS/TS only)
+
+Source: https://docs.langchain.com/langsmith/trace-with-vercel-ai-sdk
+
+You can use LangSmith to trace runs from the Vercel AI SDK. This guide will walk through an example.
+
+## Installation
+
+This wrapper requires AI SDK v5 and `langsmith>=0.3.63`. If you are using an older version of the AI SDK or `langsmith`, see the OpenTelemetry (OTEL)
+based approach [on this page](/langsmith/legacy-trace-with-vercel-ai-sdk).
+
+Install the Vercel AI SDK. This guide uses Vercel's OpenAI integration for the code snippets below, but you can use any of their other options as well.
+
+```bash npm theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+npm install ai @ai-sdk/openai zod
+```
+
+```bash yarn theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+yarn add ai @ai-sdk/openai zod
+```
+
+```bash pnpm theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+pnpm add ai @ai-sdk/openai zod
+```
+
+## Environment configuration
+
+```bash Shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+export LANGSMITH_TRACING=true
+export LANGSMITH_API_KEY=<your-api-key>
+
+# The examples use OpenAI, but you can use any LLM provider of choice
+export OPENAI_API_KEY=<your-openai-api-key>
+
+# For LangSmith API keys linked to multiple workspaces, set the LANGSMITH_WORKSPACE_ID environment variable to specify which workspace to use.
+export LANGSMITH_WORKSPACE_ID=<your-workspace-id>
+```
+
+## Basic setup
+
+Import and wrap AI SDK methods, then use them as you normally would:
+
+```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+import { openai } from "@ai-sdk/openai";
+import * as ai from "ai";
+
+import { wrapAISDK } from "langsmith/experimental/vercel";
+
+const { generateText, streamText, generateObject, streamObject } =
+  wrapAISDK(ai);
+
+await generateText({
+  model: openai("gpt-5-nano"),
+  prompt: "Write a vegetarian lasagna recipe for 4 people.",
+});
+```
+
+You should see a trace in your LangSmith dashboard [like this one](https://smith.langchain.com/public/4f0e689e-c801-44d3-8857-93b47ab100cc/r).
+
+You can also trace runs with tool calls:
+
+```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+import * as ai from "ai";
+import { tool, stepCountIs } from "ai";
+import { openai } from "@ai-sdk/openai";
+import { z } from "zod";
+
+import { wrapAISDK } from "langsmith/experimental/vercel";
+
+const { generateText, streamText, generateObject, streamObject } =
+  wrapAISDK(ai);
+
+await generateText({
+  model: openai("gpt-5-nano"),
+  messages: [
+    {
+      role: "user",
+      content: "What are my orders and where are they? My user ID is 123",
+    },
+  ],
+  tools: {
+    listOrders: tool({
+      description: "list all orders",
+      inputSchema: z.object({ userId: z.string() }),
+      execute: async ({ userId }) =>
+        `User ${userId} has the following orders: 1`,
+    }),
+    viewTrackingInformation: tool({
+      description: "view tracking information for a specific order",
+      inputSchema: z.object({ orderId: z.string() }),
+      execute: async ({ orderId }) =>
+        `Here is the tracking information for ${orderId}`,
+    }),
+  },
+  stopWhen: stepCountIs(5),
+});
+```
+
+Which results in a trace like [this one](https://smith.langchain.com/public/6075fa2c-d255-4885-a66a-4fc798afaa9f/r).
+
+You can use other AI SDK methods exactly as you usually would.
+
+### With `traceable`
+
+You can wrap `traceable` calls around AI SDK calls or within AI SDK tool calls. This is useful if you
+want to group runs together in LangSmith:
+
+```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+import * as ai from "ai";
+import { tool, stepCountIs } from "ai";
+import { openai } from "@ai-sdk/openai";
+import { z } from "zod";
+
+import { traceable } from "langsmith/traceable";
+import { wrapAISDK } from "langsmith/experimental/vercel";
+
+const { generateText, streamText, generateObject, streamObject } =
+  wrapAISDK(ai);
+
+const wrapper = traceable(async (input: string) => {
+  const { text } = await generateText({
+    model: openai("gpt-5-nano"),
+    messages: [
+      {
+        role: "user",
+        content: input,
+      },
+    ],
+    tools: {
+      listOrders: tool({
+        description: "list all orders",
+        inputSchema: z.object({ userId: z.string() }),
+        execute: async ({ userId }) =>
+          `User ${userId} has the following orders: 1`,
+      }),
+      viewTrackingInformation: tool({
+        description: "view tracking information for a specific order",
+        inputSchema: z.object({ orderId: z.string() }),
+        execute: async ({ orderId }) =>
+          `Here is the tracking information for ${orderId}`,
+      }),
+    },
+    stopWhen: stepCountIs(5),
+  });
+  return text;
+}, {
+  name: "wrapper",
+});
+
+await wrapper("What are my orders and where are they? My user ID is 123.");
+```
+
+The resulting trace will look [like this](https://smith.langchain.com/public/ff25bc26-9389-4798-8b91-2bdcc95d4a8e/r).
+
+## Tracing in serverless environments
+
+When tracing in serverless environments, you must wait for all runs to flush before your environment
+shuts down. To do this, you can pass a LangSmith [`Client`](https://docs.smith.langchain.com/reference/js/classes/client.Client) instance when wrapping the AI SDK method,
+then call `await client.awaitPendingTraceBatches()`.
+Make sure to also pass it into any `traceable` wrappers you create:
+
+```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+import * as ai from "ai";
+import { tool, stepCountIs } from "ai";
+import { openai } from "@ai-sdk/openai";
+import { z } from "zod";
+
+import { Client } from "langsmith";
+import { traceable } from "langsmith/traceable";
+import { wrapAISDK } from "langsmith/experimental/vercel";
+
+const client = new Client();
+
+const { generateText, streamText, generateObject, streamObject } =
+  wrapAISDK(ai, { client });
+
+const wrapper = traceable(async (input: string) => {
+  const { text } = await generateText({
+    model: openai("gpt-5-nano"),
+    messages: [
+      {
+        role: "user",
+        content: input,
+      },
+    ],
+    tools: {
+      listOrders: tool({
+        description: "list all orders",
+        inputSchema: z.object({ userId: z.string() }),
+        execute: async ({ userId }) =>
+          `User ${userId} has the following orders: 1`,
+      }),
+      viewTrackingInformation: tool({
+        description: "view tracking information for a specific order",
+        inputSchema: z.object({ orderId: z.string() }),
+        execute: async ({ orderId }) =>
+          `Here is the tracking information for ${orderId}`,
+      }),
+    },
+    stopWhen: stepCountIs(5),
+  });
+  return text;
+}, {
+  name: "wrapper",
+  client,
+});
+
+try {
+  await wrapper("What are my orders and where are they? My user ID is 123.");
+} finally {
+  await client.awaitPendingTraceBatches();
+}
+```
+
+If you are using `Next.js`, there is a convenient [`after`](https://nextjs.org/docs/app/api-reference/functions/after) hook
+where you can put this logic:
+
+```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+import { after } from "next/server"
+import { Client } from "langsmith";
+
+
+export async function POST(request: Request) {
+  const client = new Client();
+
+  ...
+
+  after(async () => {
+    await client.awaitPendingTraceBatches();
+  });
+
+  return new Response(JSON.stringify({ ... }), {
+    status: 200,
+    headers: { "Content-Type": "application/json" },
+  });
+};
+```
+
+See [this page](/langsmith/serverless-environments) for more detail, including information
+around managing rate limits in serverless environments.
+
+## Passing LangSmith config
+
+You can pass LangSmith-specific config to your wrapper both when initially wrapping your
+AI SDK methods and while running them via `providerOptions.langsmith`.
+This includes metadata (which you can later use to filter runs in LangSmith), top-level run name,
+tags, custom client instances, and more.
+
+Config passed while wrapping will apply to all future calls you make with the wrapped method:
+
+```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+import { openai } from "@ai-sdk/openai";
+import * as ai from "ai";
+
+import { wrapAISDK } from "langsmith/experimental/vercel";
+
+const { generateText, streamText, generateObject, streamObject } =
+  wrapAISDK(ai, {
+    metadata: {
+      key_for_all_runs: "value",
+    },
+    tags: ["myrun"],
+  });
+
+await generateText({
+  model: openai("gpt-5-nano"),
+  prompt: "Write a vegetarian lasagna recipe for 4 people.",
+});
+```
+
+While passing config at runtime via `providerOptions.langsmith` will apply only to that run.
+We suggest importing and wrapping your config in `createLangSmithProviderOptions` to ensure
+proper typing:
+
+```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+import { openai } from "@ai-sdk/openai";
+import * as ai from "ai";
+
+import {
+  wrapAISDK,
+  createLangSmithProviderOptions,
+} from "langsmith/experimental/vercel";
+
+const { generateText, streamText, generateObject, streamObject } =
+  wrapAISDK(ai);
+
+const lsConfig = createLangSmithProviderOptions({
+  metadata: {
+    individual_key: "value",
+  },
+  name: "my_individual_run",
+});
+
+await generateText({
+  model: openai("gpt-5-nano"),
+  prompt: "Write a vegetarian lasagna recipe for 4 people.",
+  providerOptions: {
+    langsmith: lsConfig,
+  },
+});
+```
+
+## Redacting data
+
+You can customize what inputs and outputs the AI SDK sends to LangSmith by specifying custom input/output
+processing functions. This is useful if you are dealing with sensitive data that you would like to
+avoid sending to LangSmith.
+
+Because output formats vary depending on which AI SDK method you are using, we suggest defining and passing config
+individually into wrapped methods. You will also need to provide separate functions for child LLM runs within
+AI SDK calls, since calling `generateText` at top level calls the LLM internally and can do so multiple times.
+
+We also suggest passing a generic parameter into `createLangSmithProviderOptions` to get proper types for inputs and outputs.
+Here's an example for `generateText`:
+
+```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+import {
+  wrapAISDK,
+  createLangSmithProviderOptions,
+} from "langsmith/experimental/vercel";
+import * as ai from "ai";
+import { openai } from "@ai-sdk/openai";
+
+const { generateText } = wrapAISDK(ai);
+
+const lsConfig = createLangSmithProviderOptions<typeof generateText>({
+  processInputs: (inputs) => {
+    const { messages } = inputs;
+    return {
+      messages: messages?.map((message) => ({
+        providerMetadata: message.providerOptions,
+        role: "assistant",
+        content: "REDACTED",
+      })),
+      prompt: "REDACTED",
+    };
+  },
+  processOutputs: (outputs) => {
+    return {
+      providerMetadata: outputs.providerMetadata,
+      role: "assistant",
+      content: "REDACTED",
+    };
+  },
+  processChildLLMRunInputs: (inputs) => {
+    const { prompt } = inputs;
+    return {
+      messages: prompt.map((message) => ({
+        ...message,
+        content: "REDACTED CHILD INPUTS",
+      })),
+    };
+  },
+  processChildLLMRunOutputs: (outputs) => {
+    return {
+      providerMetadata: outputs.providerMetadata,
+      content: "REDACTED CHILD OUTPUTS",
+      role: "assistant",
+    };
+  },
+});
+
+const { text } = await generateText({
+  model: openai("gpt-5-nano"),
+  prompt: "What is the capital of France?",
+  providerOptions: {
+    langsmith: lsConfig,
+  },
+});
+
+// Paris.
+console.log(text);
+```
+
+The actual return value will contain the original, non-redacted result but the trace in LangSmith
+will be redacted. [Here's an example](https://smith.langchain.com/public/b4c69c8e-285b-4c0c-8492-e571e2cf562f/r).
+
+For redacting tool input/output, wrap your `execute` method in a `traceable` like this:
+
+```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+import * as ai from "ai";
+import { tool, stepCountIs } from "ai";
+import { openai } from "@ai-sdk/openai";
+import { z } from "zod";
+
+import { Client } from "langsmith";
+import { traceable } from "langsmith/traceable";
+import { wrapAISDK } from "langsmith/experimental/vercel";
+
+const client = new Client();
+
+const { generateText, streamText, generateObject, streamObject } =
+  wrapAISDK(ai, { client });
+
+const { text } = await generateText({
+  model: openai("gpt-5-nano"),
+  messages: [
+    {
+      role: "user",
+      content: "What are my orders? My user ID is 123.",
+    },
+  ],
+  tools: {
+    listOrders: tool({
+      description: "list all orders",
+      inputSchema: z.object({ userId: z.string() }),
+      execute: traceable(
+        async ({ userId }) => {
+          return `User ${userId} has the following orders: 1`;
+        },
+        {
+          processInputs: (input) => ({ text: "REDACTED" }),
+          processOutputs: (outputs) => ({ text: "REDACTED" }),
+          run_type: "tool",
+          name: "listOrders",
+        }
+      ) as (input: { userId: string }) => Promise<string>,
+    }),
+  },
+  stopWhen: stepCountIs(5),
+});
+```
+
+The `traceable` return type is complex, which makes the cast necessary. You may also omit the AI SDK `tool` wrapper function
+if you wish to avoid the cast.
+
+***
+
+```
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-vercel-ai-sdk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+
+
+
+[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+```

@@ -1,0 +1,19 @@
+## Contents
+
+| Organization-level operations                                                                                                                                                                                                                                                                               | Workspace-level operations                                                                                                                                                                                                                                                                                    |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Core management:**• [Organization settings](#organization-settings): Org info and configuration• [Workspaces](#workspaces): Workspace management• [Organization members](#organization-members): Member management• [Roles and permissions](#roles-and-permissions): Custom roles | **Core resources:**• [Projects](#projects): Organize traces and runs• [Runs](#runs): Individual execution traces• [Datasets](#datasets): Test datasets for evaluation• [Examples](#examples): Individual dataset examples• [Experiments](#experiments): Comparative experiments |
+| **Security and authentication:**• [SSO and authentication](#sso-and-authentication): Single sign-on setup• [SCIM](#scim): Identity provisioning• [Access policies](#access-policies): Attribute-based access control                                                                      | **Monitoring and analysis:**• [Rules](#rules): Automated run rules• [Alerts](#alerts): Alert rules for monitoring• [Feedback](#feedback): Scores and labels on outputs• [Annotation Queues](#annotation-queues): Human review queues• [Charts](#charts): Custom visualizations  |
+| **Billing and accounts:**• [Billing and payments](#billing-and-payments): Subscription management• [API keys](#api-keys): Org-level keys                                                                                                                                                        | **Development and configuration:**• [Prompts](#prompts): Prompt templates (LangChain Hub)• [Deployments](#deployments): Deployment configurations• [MCP Servers](#mcp-servers): Model Context Protocol servers                                                                              |
+| **Analytics:**• [Charts and dashboards](#organization-charts-and-dashboards): Org-level visualizations• [Usage and analytics](#usage-and-analytics): Usage tracking and TTL settings                                                                                                            | **Workspace management:**• [Workspace settings](#workspace-settings-and-management): Members, settings• [Tags](#tags): Metadata tagging system• [Bulk Exports](#bulk-exports): Data export operations                                                                                       |
+
+**Additional information:**
+
+- [User-level operations](#user-level-operations): Operations for all authenticated users
+- [Permission inheritance](#permission-inheritance): How roles inherit across org/workspaces
+
+## Legend
+
+- ✓ **Allowed**: User with this role can perform this action
+- ✗ **Not Allowed**: User with this role cannot perform this action
+- ⚠ **Partial**: User has limited access (see notes)

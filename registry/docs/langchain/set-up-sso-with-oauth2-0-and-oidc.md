@@ -1,0 +1,277 @@
+# Set up SSO with OAuth2.0 and OIDC
+
+Source: https://docs.langchain.com/langsmith/self-host-sso
+
+LangSmith Self-Hosted provides SSO via OAuth2.0 and OIDC. This will delegate authentication to your Identity Provider (IdP) to manage access to LangSmith.
+
+Our implementation supports almost anything that is OIDC compliant, with a few exceptions. Once configured, you will see a login screen like this:
+
+## Overview
+
+You may upgrade a [basic auth](/langsmith/self-host-basic-auth) installation to this mode, but not a [none auth](/langsmith/authentication-methods#none) installation. In order to upgrade, simply remove the basic auth configuration and add the required configuration parameters as shown below. Users may then login via OAuth *only*. **In order to maintain access post-upgrade, you must have access to login via OAuth using an email address that previously logged in via basic auth.**
+
+LangSmith does not support moving from SSO to basic auth mode in self-hosted at the moment. We also do not support moving from OAuth Mode with client secret to OAuth mode without a client secret and vice versa. Finally, we do not support having both basic auth and OAuth at the same time. Ensure you disable the basic auth configuration when enabling OAuth.
+
+## With client secret (Recommended)
+
+By default, LangSmith Self-Hosted supports the `Authorization Code` flow with `Client Secret`. In this version of the flow, your client secret is stored security in LangSmith (not on the frontend) and used for authentication and establishing auth sessions.
+
+### Prerequisites
+
+- You must be self-hosted and on an Enterprise plan.
+- Your IdP must support the `Authorization Code` flow with `Client Secret`.
+- Your IdP must support using an external discovery/issuer URL. We will use this to fetch the necessary routes and keys for your IdP.
+- You must provide the `OIDC`, `email`, and `profile` scopes to LangSmith. We use these to fetch the necessary user information and email for your users.
+
+  LangSmith SSO is only supported over `https`.
+
+### Configuration
+
+- You will need to set the callback URL in your IdP to `https://<host>/api/v1/oauth/custom-oidc/callback`, where `host` is the domain or IP you have provisioned for your LangSmith instance. This is where your IdP will redirect the user after they have authenticated.
+- You will need to provide the `oauthClientId`, `oauthClientSecret`, `hostname`, and `oauthIssuerUrl` in your `values.yaml` file. This is where you will configure your LangSmith instance.
+- If you have **not** already configured Oauth with client secret or if you only have personal orgs, you must provide an email address to assign as the initial org admin for the newly provisioned SSO org. If you are upgrading from basic auth, your existing org will be reused instead.
+
+  ```yaml Helm theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+  config:
+    authType: mixed
+    hostname: https://langsmith.example.com
+    initialOrgAdminEmail: test@email.com # Set this if required
+    oauth:
+      enabled: true
+      oauthClientId: 
+      oauthClientSecret: 
+      oauthIssuerUrl: 
+      oauthScopes: "email,profile,openid"
+  ```
+
+  ```bash Docker theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+  # In your .env file
+  AUTH_TYPE=mixed
+  INITIAL_ORG_ADMIN_EMAIL=test@email.com
+  LANGSMITH_URL=https://langsmith.example.com
+  OAUTH_CLIENT_ID=your-client-id
+  OAUTH_CLIENT_SECRET=your-client-secret
+  OAUTH_ISSUER_URL=https://your-issuer-url
+  OAUTH_SCOPES=email,profile,openid
+  ```
+
+### Session length controls
+
+All of the environment variables in this section are for the `platform-backend` service and can be added using `platformBackend.deployment.extraEnv` in Helm.
+
+- By default, session length is controlled by the expiration of the identity token returned by the identity provider
+- Most setups should use refresh tokens to enable session length extension beyond the identity token expiration up to `OAUTH_SESSION_MAX_SEC`, which may require including the `offline_access` scope by adding to `oauthScopes` (Helm) or `OAUTH_SCOPES` (Docker)
+- `OAUTH_SESSION_MAX_SEC` (default 1 day) can be overridden to a maximum of one week (`604800`)
+- For identity provider setups that don't support refresh tokens, setting `OAUTH_OVERRIDE_TOKEN_EXPIRY="true"` will take `OAUTH_SESSION_MAX_SEC` as the session length, ignoring the identity token expiration
+
+### Override sub claim
+
+In some scenarios, it may be necessary to override which claim is used as the `sub` claim from your identity provider.
+For example, in SCIM, the resolved `sub` claim and SCIM `externalId` must match in order for login to succeed.
+If there are restrictions on the source attribute of the `sub` claim and/or the SCIM `externalId`, set the `ISSUER_SUB_CLAIM_OVERRIDES` environment variable to select which OIDC JWT claim is used as the `sub`.
+
+If an issuer URL **starts with** one of the URLs in this configuration, the `sub` claim is taken from the field name specified.
+For example, with the following configuration, a token with the issuer `https://idp.yourdomain.com/application/uuid` would use the `customClaim` value as the `sub`:
+
+```
+ISSUER_SUB_CLAIM_OVERRIDES='{"https://idp.yourdomain.com": "customClaim"}'
+```
+
+If unset, the default value for this configuration uses the `oid` claim when Azure Entra ID is used as the identity provider:
+
+```
+ISSUER_SUB_CLAIM_OVERRIDES='{"https://login.microsoftonline.com/": "oid", "https://sts.windows.net/": "oid", "https://login.microsoftonline.us/": "oid", "https://login.partner.microsoftonline.cn/": "oid"}'
+```
+
+### Google workspace IdP setup
+
+You can use Google Workspace as a single sign-on (SSO) provider using [OAuth2.0 and OIDC](https://developers.google.com/identity/openid-connect/openid-connect) without PKCE.
+
+You must have administrator-level access to your organization's Google Cloud Platform (GCP) account to create a new project, or permissions to create and configure OAuth 2.0 credentials for an existing project. We recommend that you create a new project for managing access, since each GCP project has a single OAuth consent screen.
+
+1. Create a new GCP project, see the Google documentation topic [creating and managing projects](https://cloud.google.com/resource-manager/docs/creating-managing-projects)
+
+2. After you have created the project, open the [Credentials](https://console.developers.google.com/apis/credentials) page in the Google API Console (making sure the project in the top left corner is correct)
+
+3. Create new credentials: `Create Credentials → OAuth client ID`
+
+4. Choose `Web application` as the `Application type` and enter a name for the application e.g. `LangSmith`
+
+5. In `Authorized Javascript origins` put the domain of your LangSmith instance e.g. `https://langsmith.yourdomain.com`
+
+6. In `Authorized redirect URIs` put the domain of your LangSmith instance followed by `/api/v1/oauth/custom-oidc/callback` e.g. `https://langsmith.yourdomain.com/api/v1/oauth/custom-oidc/callback`
+
+7. Click `Create`, then download the JSON or copy and save the `Client ID` (ends with `.apps.googleusercontent.com`) and `Client secret` somewhere secure. **You will be able to access these later if needed**.
+
+8. Select `OAuth consent screen` from the navigation menu on the left
+
+   1. Choose the Application type as `Internal`. **If you select `Public`, anyone with a Google account can sign in.**
+   2. Enter a descriptive `Application name`. This name is shown to users on the consent screen when they sign in. For example, use `LangSmith` or `<organization_name> SSO for LangSmith`.
+   3. Verify that the Scopes for Google APIs only lists email, profile, and openid scopes. Only these scopes are required for single sign-on. If you grant additional scopes it increases the risk of exposing sensitive data.
+
+9. (Optional) control who within your organization has access to LangSmith: <https://admin.google.com/ac/owl/list?tab=configuredApps>. See [Google's documentation](https://support.google.com/a/answer/7281227?hl=en\&fl=1\&sjid=9554153972856467090-NA) for additional details.
+
+10. Configure LangSmith to use this OAuth application. For examples, here are the `config`values that would be used for Kubernetes configuration:
+
+    1. `oauthClientId`: `Client ID` (ends with `.apps.googleusercontent.com`)
+    2. `oauthClientSecret`: `Client secret`
+    3. `hostname`: the domain of your LangSmith instance e.g. `https://langsmith.yourdomain.com` (no trailing slash)
+    4. `oauthIssuerUrl`: `https://accounts.google.com`
+    5. `oauth.enabled`: `true`
+    6. `authType`: `mixed`
+
+### Okta IdP setup
+
+#### Supported features
+
+- IdP-initiated SSO
+- SP-initiated SSO
+- Just-In-Time provisioning (see [Manage user access in SSO organizations](/langsmith/jit-invite-sso))
+
+#### Configuration steps
+
+For additional information, see Okta's [documentation](https://help.okta.com/en-us/content/topics/apps/apps_app_integration_wizard_oidc.htm).
+If you have any questions or issues, please contact support via [support.langchain.com](https://support.langchain.com).
+
+Via Okta Integration Network (recommended)
+
+For details on SCIM setup, refer to [Set up SCIM for your organization](/langsmith/user-management#set-up-scim-for-your-organization).
+
+This method of configuration is required in order to use SCIM with Okta.
+
+1. Sign in to [Okta](https://login.okta.com/).
+2. In the upper-right corner, select Admin. The button is not visible from the Admin area.
+3. Select `Browse App Integration Catalog`.
+4. Find and select the LangSmith application.
+5. On the application overview page, select Add Integration.
+6. Fill in `ApiUrlBase`:
+   - Your LangSmith API URL **without the protocol** (`https://`) formatted as `<langsmith_domain>/api/v1`, e.g., `langsmith.yourdomain.com/api/v1`.
+   - If your installation is configured with a subdomain / path prefix, include that in the URL, e.g., `langsmith.yourdomain.com/prefix/api/v1`.
+7. Leave `AuthHost` empty.
+8. (Optional, if planning to use [SCIM](/langsmith/user-management#set-up-scim-for-your-organization) as well) Fill in `LangSmithUrl`: The `<langsmith_url>` portion from above, e.g., `langsmith.yourdomain.com`.
+9. Under Application Visibility, keep the box unchecked.
+10. Select Next.
+11. Select `OpenID Connect`.
+12. Fill in `Sign-On Options`:
+    - `Application username format`: `Email`.
+    - `Update application username on`: `Create and update`.
+    - `Allow users to securely see their password`: leave **unchecked**.
+13. Click **Save**.
+14. Configure LangSmith to use this OAuth application (see [general configuration section](#configuration) for details about `initialOrgAdminEmail`):
+
+```yaml Helm theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+config:
+  authType: mixed
+  hostname: https://langsmith.example.com # the domain of your instance (note no trailing slash)
+  initialOrgAdminEmail: test@email.com # Set this if required
+  oauth:
+    enabled: true
+    oauthClientId: "Client ID" # (starts with `0o`)
+    oauthClientSecret: "Client secret"
+    oauthIssuerUrl: "https://company-7422949.okta.com" # the URL of your Okta instance
+    oauthScopes: "email,profile,openid"
+```
+
+```bash Docker theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+# In your .env file
+AUTH_TYPE=mixed
+INITIAL_ORG_ADMIN_EMAIL=test@email.com # Set this if required
+LANGSMITH_URL=https://langsmith.example.com # the domain of your instance (note no trailing slash)
+OAUTH_CLIENT_ID="Client ID" # (starts with `0o`)
+OAUTH_CLIENT_SECRET="Client secret"
+OAUTH_ISSUER_URL="https://company-7422949.okta.com" # the URL of your Okta instance
+OAUTH_SCOPES=email,profile,openid
+```
+
+For details on SCIM setup, refer to [Set up SCIM for your organization](/langsmith/user-management#set-up-scim-for-your-organization).
+
+Via Custom App Integration
+
+SCIM is not compatible with this method of configuration. Refer to [**Via Okta Integration Network**](#via-okta-integration-network).
+
+1. Log in to Okta as an administrator, and go to the **Okta Admin console**.
+2. Under **Applications** > **Applications** click **Create App Integration**.
+3. Select **OIDC - OpenID Connect** as the Sign-in method and **Web Application** as the Application type, then click **Next**.
+4. Enter an `App integration name` (e.g., `LangSmith`).
+5. Recommended: Check **Core grants > Refresh Token** (see [session length controls](#session-length-controls)).
+6. In **Sign-in redirect URIs** put the domain of your LangSmith instance followed by `/api/v1/oauth/custom-oidc/callback`, e.g., `https://langsmith.yourdomain.com/api/v1/oauth/custom-oidc/callback`. If your installation is configured with a subdomain / path prefix, include that in the URL, e.g., `https://langsmith.yourdomain.com/prefix/api/v1/oauth/custom-oidc/callback`.
+7. Remove the default URI under **Sign-out redirect URIs**.
+8. Under **Trusted Origins > Base URIs** add your langsmith URL with the protocol, e.g., `https://langsmith.yourdomain.com`.
+9. Select your desired option under **Assignments > Controlled access**:
+   - Allow everyone in your organization to access.
+   - Limit access to selected groups.
+   - Skip group assignment for now.
+10. Click **Save**.
+11. Under **Sign On > OpenID Connect ID Token** set **Issuer** to **Okta URL**.
+12. (Optional) Under **General > Login** set **Login initiated by** to `Either Okta or App` to enable IdP-initiated login.
+13. (Recommended) Under **General > Login > Email verification experience** fill in the **Callback URI** with the LangSmith URL, e.g., `https://langsmith.yourdomain.com`.
+14. Configure LangSmith to use this OAuth application (see [general configuration section](#configuration) for details about `initialOrgAdminEmail`):
+
+```yaml Helm theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+config:
+  authType: mixed
+  hostname: https://langsmith.example.com # the domain of your instance (note no trailing slash)
+  initialOrgAdminEmail: test@email.com # Set this if required
+  oauth:
+    enabled: true
+    oauthClientId: "Client ID" # (starts with `0o`)
+    oauthClientSecret: "Client secret"
+    oauthIssuerUrl: "https://company-7422949.okta.com" # the URL of your Okta instance
+    oauthScopes: "email,profile,openid"
+```
+
+```bash Docker theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+# In your .env file
+AUTH_TYPE=mixed
+INITIAL_ORG_ADMIN_EMAIL=test@email.com # Set this if required
+LANGSMITH_URL=https://langsmith.example.com # the domain of your instance (note no trailing slash)
+OAUTH_CLIENT_ID="Client ID" # (starts with `0o`)
+OAUTH_CLIENT_SECRET="Client secret"
+OAUTH_ISSUER_URL="https://company-7422949.okta.com" # the URL of your Okta instance
+OAUTH_SCOPES=email,profile,openid
+```
+
+#### SP-initiated SSO
+
+Users can sign in using the **Login via SSO** button on the LangSmith homepage.
+
+## Without client secret (PKCE) (Deprecated)
+
+We recommend running with a `Client Secret` if possible (previously we didn't support this). However, if your IdP does not support this, you can use the `Authorization Code with PKCE` flow.
+
+This flow does *not* require a `Client Secret`. For the alternative workflow, refer to [With client secret](#with-client-secret-recommended).
+
+### Requirements
+
+There are a couple of requirements for using OAuth SSO with LangSmith:
+
+- Your IdP must support the `Authorization Code with PKCE` [flow](https://www.oauth.com/oauth2-servers/pkce) (Google does not support this flow for example, but see [above](#with-client-secret-recommended) for an alternative configuration that Google supports). This is often displayed in your OAuth Provider as configuring a "Single Page Application (SPA)"
+- Your IdP must support using an external discovery/issuer URL. We will use this to fetch the necessary routes and keys for your IdP.
+- You must provide the `OIDC`, `email`, and `profile` scopes to LangSmith. We use these to fetch the necessary user information and email for your users.
+- You will need to set the callback URL in your IdP to `http://<host>/oauth-callback`, where host is the domain or IP you have provisioned for your LangSmith instance. This is where your IdP will redirect the user after they have authenticated.
+- You will need to provide the `oauthClientId` and `oauthIssuerUrl` in your `values.yaml` file. This is where you will configure your LangSmith instance.
+
+  ```yaml Helm theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+  config:
+    oauth:
+      enabled: true
+      oauthClientId: 
+      oauthIssuerUrl: 
+  ```
+
+  ```bash Docker theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+  # In your .env file
+  AUTH_TYPE=oauth
+  OAUTH_CLIENT_ID=your-client-id
+  OAUTH_ISSUER_URL=https://your-issuer-url
+  ```
+
+***
+
+```
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-sso.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+
+
+
+[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+```

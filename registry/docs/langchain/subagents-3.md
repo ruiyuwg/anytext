@@ -1,0 +1,593 @@
+# Subagents
+
+Source: https://docs.langchain.com/oss/python/deepagents/subagents
+
+Learn how to use subagents to delegate work and keep context clean
+
+Deep agents can create subagents to delegate work. You can specify custom subagents in the `subagents` parameter. Subagents are useful for [context quarantine](https://www.dbreunig.com/2025/06/26/how-to-fix-your-context.html#context-quarantine) (keeping the main agent's context clean) and for providing specialized instructions.
+
+```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+graph TB
+    Main[Main Agent] --> |task tool| Sub[Subagent]
+
+    Sub --> Research[Research]
+    Sub --> Code[Code]
+    Sub --> General[General]
+
+    Research --> |isolated work| Result[Final Result]
+    Code --> |isolated work| Result
+    General --> |isolated work| Result
+
+    Result --> Main
+```
+
+## Why use subagents?
+
+Subagents solve the **context bloat problem**. When agents use tools with large outputs (web search, file reads, database queries), the context window fills up quickly with intermediate results. Subagents isolate this detailed work—the main agent receives only the final result, not the dozens of tool calls that produced it.
+
+**When to use subagents:**
+
+- ✅ Multi-step tasks that would clutter the main agent's context
+- ✅ Specialized domains that need custom instructions or tools
+- ✅ Tasks requiring different model capabilities
+- ✅ When you want to keep the main agent focused on high-level coordination
+
+**When NOT to use subagents:**
+
+- ❌ Simple, single-step tasks
+- ❌ When you need to maintain intermediate context
+- ❌ When the overhead outweighs benefits
+
+## Configuration
+
+`subagents` should be a list of dictionaries or `CompiledSubAgent` objects. There are two types:
+
+### SubAgent (Dictionary-based)
+
+For most use cases, define subagents as dictionaries with the following fields:
+
+| Field           | Type                     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| --------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `name`          | `str`                    | Required. Unique identifier for the subagent. The main agent uses this name when calling the `task()` tool. The subagent name becomes metadata for `AIMessage`s and for streaming, which helps to differentiate between agents.                                                                                                                                                                                                                                                                                                                                                |
+| `description`   | `str`                    | Required. Description of what this subagent does. Be specific and action-oriented. The main agent uses this to decide when to delegate.                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `system_prompt` | `str`                    | Required. Instructions for the subagent. Custom subagents must define their own. Include tool usage guidance and output format requirements.Does not inherit from main agent.                                                                                                                                                                                                                                                                                                                                                                                            |
+| `tools`         | `list[Callable]`         | Required. Tools the subagent can use. Custom subagents specify their own. Keep this minimal and include only what's needed.Does not inherit from main agent.                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `model`         | `str` | `BaseChatModel` | Optional. Overrides the main agent's model. Omit to use the main agent's model.Inherits from main agent by default. You can pass either a model identifier string like `'openai:gpt-5'` (using the `'provider:model'` format) or a LangChain chat model object (`init_chat_model("gpt-5")` or `ChatOpenAI(model="gpt-5")`).                                                                                                                                                                                                                                              |
+| `middleware`    | `list[Middleware]`       | Optional. Additional middleware for custom behavior, logging, or rate limiting.Does not inherit from main agent.                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `interrupt_on`  | `dict[str, bool]`        | Optional. Configure [human-in-the-loop](/oss/python/deepagents/human-in-the-loop) for specific tools. Subagent value overrides main agent. Requires checkpointer.Inherits from main agent by default. Subagent value overrides the default.                                                                                                                                                                                                                                                                                                                              |
+| `skills`        | `list[str]`              | Optional. [Skills](/oss/python/deepagents/skills) source paths. When specified, the subagent will load skills from these directories (e.g., `["/skills/research/", "/skills/web-search/"]`). This allows subagents to have different skill sets than the main agent.Does not inherit from main agent. Only the general-purpose subagent inherits the main agent's skills. When a subagent has skills, it runs its own independent `SkillsMiddleware` instance. Skill state is fully isolated — a subagent's loaded skills are not visible to the parent, and vice versa. |
+
+### CompiledSubAgent
+
+For complex workflows, use a pre-built LangGraph graph:
+
+| Field         | Type       | Description                                                                                                                                                       |
+| ------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `name`        | `str`      | Required. Unique identifier for the subagent. The subagent name becomes metadata for `AIMessage`s and for streaming, which helps to differentiate between agents. |
+| `description` | `str`      | Required. What this subagent does.                                                                                                                                |
+| `runnable`    | `Runnable` | Required. A compiled LangGraph graph (must call `.compile()` first).                                                                                              |
+
+## Using SubAgent
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+import os
+from typing import Literal
+from tavily import TavilyClient
+from deepagents import create_deep_agent
+
+tavily_client = TavilyClient(api_key=os.environ["TAVILY_API_KEY"])
+
+def internet_search(
+    query: str,
+    max_results: int = 5,
+    topic: Literal["general", "news", "finance"] = "general",
+    include_raw_content: bool = False,
+):
+    """Run a web search"""
+    return tavily_client.search(
+        query,
+        max_results=max_results,
+        include_raw_content=include_raw_content,
+        topic=topic,
+    )
+
+research_subagent = {
+    "name": "research-agent",
+    "description": "Used to research more in depth questions",
+    "system_prompt": "You are a great researcher",
+    "tools": [internet_search],
+    "model": "openai:gpt-5.2",  # Optional override, defaults to main agent model
+}
+subagents = [research_subagent]
+
+agent = create_deep_agent(
+    model="claude-sonnet-4-6",
+    subagents=subagents
+)
+```
+
+## Using CompiledSubAgent
+
+For more complex use cases, you can provide your custom subagents.
+You can create a custom subagent using LangChain's `create_agent` or by making a custom LangGraph graph using the [graph API](/oss/python/langgraph/graph-api).
+
+If you're creating a custom LangGraph graph, make sure that the graph has a [state key called `"messages"`](/oss/python/langgraph/quickstart#2-define-state):
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+from deepagents import create_deep_agent, CompiledSubAgent
+from langchain.agents import create_agent
+
+# Create a custom agent graph
+custom_graph = create_agent(
+    model=your_model,
+    tools=specialized_tools,
+    prompt="You are a specialized agent for data analysis..."
+)
+
+# Use it as a custom subagent
+custom_subagent = CompiledSubAgent(
+    name="data-analyzer",
+    description="Specialized agent for complex data analysis tasks",
+    runnable=custom_graph
+)
+
+subagents = [custom_subagent]
+
+agent = create_deep_agent(
+    model="claude-sonnet-4-6",
+    tools=[internet_search],
+    system_prompt=research_instructions,
+    subagents=subagents
+)
+```
+
+## Streaming
+
+When streaming tracing information agents' names are available as `lc_agent_name` in metadata.
+When reviewing tracing information, you can use this metadata to differentiate which agent the data came from.
+
+The following example creates a deep agent with the name `main-agent` and a subagent with the name `research-agent`:
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+import os
+from typing import Literal
+from tavily import TavilyClient
+from deepagents import create_deep_agent
+
+tavily_client = TavilyClient(api_key=os.environ["TAVILY_API_KEY"])
+
+def internet_search(
+    query: str,
+    max_results: int = 5,
+    topic: Literal["general", "news", "finance"] = "general",
+    include_raw_content: bool = False,
+):
+    """Run a web search"""
+    return tavily_client.search(
+        query,
+        max_results=max_results,
+        include_raw_content=include_raw_content,
+        topic=topic,
+    )
+
+research_subagent = {
+    "name": "research-agent",
+    "description": "Used to research more in depth questions",
+    "system_prompt": "You are a great researcher",
+    "tools": [internet_search],
+    "model": "claude-sonnet-4-6",  # Optional override, defaults to main agent model
+}
+subagents = [research_subagent]
+
+agent = create_deep_agent(
+    model="claude-sonnet-4-6",
+    subagents=subagents,
+    name="main-agent"
+)
+```
+
+As you prompt your deepagents, all agent runs executed by a subagent or deep agent will have the agent name in their metadata.
+In this case the subagent with the name `"research-agent"`, will have `{'lc_agent_name': 'research-agent'}` in any associated agent run metadata:
+
+## Structured output
+
+All subagents support [structured ouput](/oss/python/langchain/structured-output) which you can use to validate the subagent's output.
+
+You can set a desired structured output schema by passing it as the `response_format` argument to the call to `create_agent()`.
+When the model generates the structured data, it’s captured and validated.
+The structured object itself is not returned to the parent agent.
+When using structured output with subagents, include the structured data in the `ToolMessage`.
+
+For more information, see [response format](/oss/python/langchain/structured-output#response-format).
+
+## The general-purpose subagent
+
+In addition to any user-defined subagents, deep agents have access to a `general-purpose` subagent at all times. This subagent:
+
+- Has the same system prompt as the main agent
+- Has access to all the same tools
+- Uses the same model (unless overridden)
+- Inherits skills from the main agent (when skills are configured)
+
+### Override the general-purpose subagent
+
+Include a subagent with `name="general-purpose"` in your `subagents` list to replace the default. Use this to configure a different model, tools, or system prompt for the general-purpose subagent:
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+from deepagents import create_deep_agent
+
+# Main agent uses Claude; general-purpose subagent uses GPT
+agent = create_deep_agent(
+    model="claude-sonnet-4-6",
+    tools=[internet_search],
+    subagents=[
+        {
+            "name": "general-purpose",
+            "description": "General-purpose agent for research and multi-step tasks",
+            "system_prompt": "You are a general-purpose assistant.",
+            "tools": [internet_search],
+            "model": "openai:gpt-4o",  # Different model for delegated tasks
+        },
+    ],
+)
+```
+
+When you provide a subagent with the general-purpose name, the default general-purpose subagent is not added. Your spec fully replaces it.
+
+### When to use it
+
+The general-purpose subagent is ideal for context isolation without specialized behavior. The main agent can delegate a complex multi-step task to this subagent and get a concise result back without bloat from intermediate tool calls.
+
+Instead of the main agent making 10 web searches and filling its context with results, it delegates to the general-purpose subagent: `task(name="general-purpose", task="Research quantum computing trends")`. The subagent performs all the searches internally and returns only a summary.
+
+### Skills inheritance
+
+When configuring [skills](/oss/python/deepagents/skills) with `create_deep_agent`:
+
+- **General-purpose subagent**: Automatically inherits skills from the main agent
+- **Custom subagents**: Do NOT inherit skills by default—use the `skills` parameter to give them their own skills
+
+  Only subagents configured with skills get a `SkillsMiddleware` instance — custom subagents without a `skills` parameter do not. When present, skill state is fully isolated in both directions: the parent's skills are not visible to the child, and the child's skills are not propagated back to the parent.
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+from deepagents import create_deep_agent
+
+# Research subagent with its own skills
+research_subagent = {
+    "name": "researcher",
+    "description": "Research assistant with specialized skills",
+    "system_prompt": "You are a researcher.",
+    "tools": [web_search],
+    "skills": ["/skills/research/", "/skills/web-search/"],  # Subagent-specific skills
+}
+
+agent = create_deep_agent(
+    model="claude-sonnet-4-6",
+    skills=["/skills/main/"],  # Main agent and GP subagent get these
+    subagents=[research_subagent],  # Gets only /skills/research/ and /skills/web-search/
+)
+```
+
+## Best practices
+
+### Write clear descriptions
+
+The main agent uses descriptions to decide which subagent to call. Be specific:
+
+✅ **Good:** `"Analyzes financial data and generates investment insights with confidence scores"`
+
+❌ **Bad:** `"Does finance stuff"`
+
+### Keep system prompts detailed
+
+Include specific guidance on how to use tools and format outputs:
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+research_subagent = {
+    "name": "research-agent",
+    "description": "Conducts in-depth research using web search and synthesizes findings",
+    "system_prompt": """You are a thorough researcher. Your job is to:
+
+    1. Break down the research question into searchable queries
+    2. Use internet_search to find relevant information
+    3. Synthesize findings into a comprehensive but concise summary
+    4. Cite sources when making claims
+
+    Output format:
+    - Summary (2-3 paragraphs)
+    - Key findings (bullet points)
+    - Sources (with URLs)
+
+    Keep your response under 500 words to maintain clean context.""",
+    "tools": [internet_search],
+}
+```
+
+### Minimize tool sets
+
+Only give subagents the tools they need. This improves focus and security:
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+# ✅ Good: Focused tool set
+email_agent = {
+    "name": "email-sender",
+    "tools": [send_email, validate_email],  # Only email-related
+}
+
+# ❌ Bad: Too many tools
+email_agent = {
+    "name": "email-sender",
+    "tools": [send_email, web_search, database_query, file_upload],  # Unfocused
+}
+```
+
+### Choose models by task
+
+Different models excel at different tasks:
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+subagents = [
+    {
+        "name": "contract-reviewer",
+        "description": "Reviews legal documents and contracts",
+        "system_prompt": "You are an expert legal reviewer...",
+        "tools": [read_document, analyze_contract],
+        "model": "claude-sonnet-4-6",  # Large context for long documents
+    },
+    {
+        "name": "financial-analyst",
+        "description": "Analyzes financial data and market trends",
+        "system_prompt": "You are an expert financial analyst...",
+        "tools": [get_stock_price, analyze_fundamentals],
+        "model": "openai:gpt-5",  # Better for numerical analysis
+    },
+]
+```
+
+### Return concise results
+
+Instruct subagents to return summaries, not raw data:
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+data_analyst = {
+    "system_prompt": """Analyze the data and return:
+    1. Key insights (3-5 bullet points)
+    2. Overall confidence score
+    3. Recommended next actions
+
+    Do NOT include:
+    - Raw data
+    - Intermediate calculations
+    - Detailed tool outputs
+
+    Keep response under 300 words."""
+}
+```
+
+## Common patterns
+
+### Multiple specialized subagents
+
+Create specialized subagents for different domains:
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+from deepagents import create_deep_agent
+
+subagents = [
+    {
+        "name": "data-collector",
+        "description": "Gathers raw data from various sources",
+        "system_prompt": "Collect comprehensive data on the topic",
+        "tools": [web_search, api_call, database_query],
+    },
+    {
+        "name": "data-analyzer",
+        "description": "Analyzes collected data for insights",
+        "system_prompt": "Analyze data and extract key insights",
+        "tools": [statistical_analysis],
+    },
+    {
+        "name": "report-writer",
+        "description": "Writes polished reports from analysis",
+        "system_prompt": "Create professional reports from insights",
+        "tools": [format_document],
+    },
+]
+
+agent = create_deep_agent(
+    model="claude-sonnet-4-6",
+    system_prompt="You coordinate data analysis and reporting. Use subagents for specialized tasks.",
+    subagents=subagents
+)
+```
+
+**Workflow:**
+
+1. Main agent creates high-level plan
+2. Delegates data collection to data-collector
+3. Passes results to data-analyzer
+4. Sends insights to report-writer
+5. Compiles final output
+
+Each subagent works with clean context focused only on its task.
+
+## Context management
+
+When you invoke a parent agent with [runtime context](/oss/python/langchain/runtime), that context automatically propagates to all subagents. The parent's full `config` — including `context` — is passed through to each subagent invocation internally.
+
+This means tools running inside any subagent can access the same context values you provided to the parent:
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+from deepagents import create_deep_agent
+from langchain.agents import tool
+from pydantic import BaseModel
+
+@tool
+def get_user_data(query: str, config) -> str:
+    """Fetch data for the current user."""
+    user_id = config.get("context", {}).get("user_id")
+    return f"Data for user {user_id}: {query}"
+
+research_subagent = {
+    "name": "researcher",
+    "description": "Conducts research for the current user",
+    "system_prompt": "You are a research assistant.",
+    "tools": [get_user_data],
+}
+
+agent = create_deep_agent(
+    model="claude-sonnet-4-6",
+    subagents=[research_subagent],
+    context_schema={"user_id": str, "session_id": str},
+)
+
+# Context flows to the researcher subagent and its tools automatically
+result = await agent.invoke(
+    {"messages": [HumanMessage("Look up my recent activity")]},
+    {"context": {"user_id": "user-123", "session_id": "abc"}},
+)
+```
+
+### Per-subagent context
+
+All subagents receive the same parent context. To pass configuration that is specific to a particular subagent, use **namespaced keys** — prefix context keys with the subagent's name:
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+result = await agent.invoke(
+    {"messages": [HumanMessage("Research this and verify the claims")]},
+    {
+        "context": {
+            "user_id": "user-123",                        # shared by all agents
+            "researcher:max_depth": 3,                    # only for researcher
+            "fact-checker:strict_mode": True,             # only for fact-checker
+        }
+    },
+)
+```
+
+Then read the relevant keys inside tools:
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+@tool
+def verify_claim(claim: str, config) -> str:
+    """Verify a factual claim."""
+    strict_mode = config.get("context", {}).get("fact-checker:strict_mode", False)
+    if strict_mode:
+        return strict_verification(claim)
+    return basic_verification(claim)
+```
+
+### Identifying which subagent called a tool
+
+When the same tool is shared between the parent and multiple subagents, you can use the `lc_agent_name` metadata (the same value used in [streaming](#streaming)) to determine which agent initiated the call:
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+@tool
+def shared_lookup(query: str, config) -> str:
+    """Look up information."""
+    agent_name = config.get("metadata", {}).get("lc_agent_name")
+    if agent_name == "fact-checker":
+        return strict_lookup(query)
+    return general_lookup(query)
+```
+
+You can combine both patterns — use namespaced context for agent-specific configuration and `lc_agent_name` metadata for branching tool behavior:
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+@tool
+def flexible_search(query: str, config) -> str:
+    """Search with agent-specific settings."""
+    agent_name = config.get("metadata", {}).get("lc_agent_name", "unknown")
+    ctx = config.get("context", {})
+
+    max_results = ctx.get(f"{agent_name}:max_results", 5)
+    include_raw = ctx.get(f"{agent_name}:include_raw", False)
+
+    return perform_search(query, max_results=max_results, include_raw=include_raw)
+```
+
+## Troubleshooting
+
+### Subagent not being called
+
+**Problem**: Main agent tries to do work itself instead of delegating.
+
+**Solutions**:
+
+1. **Make descriptions more specific:**
+
+   ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+   # ✅ Good
+   {"name": "research-specialist", "description": "Conducts in-depth research on specific topics using web search. Use when you need detailed information that requires multiple searches."}
+
+   # ❌ Bad
+   {"name": "helper", "description": "helps with stuff"}
+   ```
+
+2. **Instruct main agent to delegate:**
+
+   ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+   agent = create_deep_agent(
+       system_prompt="""...your instructions...
+
+       IMPORTANT: For complex tasks, delegate to your subagents using the task() tool.
+       This keeps your context clean and improves results.""",
+       subagents=[...]
+   )
+   ```
+
+### Context still getting bloated
+
+**Problem**: Context fills up despite using subagents.
+
+**Solutions**:
+
+1. **Instruct subagent to return concise results:**
+
+   ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+   system_prompt="""...
+
+   IMPORTANT: Return only the essential summary.
+   Do NOT include raw data, intermediate search results, or detailed tool outputs.
+   Your response should be under 500 words."""
+   ```
+
+2. **Use filesystem for large data:**
+
+   ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+   system_prompt="""When you gather large amounts of data:
+   1. Save raw data to /data/raw_results.txt
+   2. Process and analyze the data
+   3. Return only the analysis summary
+
+   This keeps context clean."""
+   ```
+
+### Wrong subagent being selected
+
+**Problem**: Main agent calls inappropriate subagent for the task.
+
+**Solution**: Differentiate subagents clearly in descriptions:
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+subagents = [
+    {
+        "name": "quick-researcher",
+        "description": "For simple, quick research questions that need 1-2 searches. Use when you need basic facts or definitions.",
+    },
+    {
+        "name": "deep-researcher",
+        "description": "For complex, in-depth research requiring multiple searches, synthesis, and analysis. Use for comprehensive reports.",
+    }
+]
+```
+
+***
+
+```
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/subagents.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+
+
+
+[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+```

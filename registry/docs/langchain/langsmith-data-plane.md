@@ -1,0 +1,139 @@
+# LangSmith data plane
+
+Source: https://docs.langchain.com/langsmith/data-plane
+
+The *data plane* consists of your [Agent Servers](/langsmith/agent-server) (deployments), their supporting infrastructure, and the "listener" application that continuously polls for updates from the [LangSmith control plane](/langsmith/control-plane).
+
+## Server infrastructure
+
+In addition to the [Agent Server](/langsmith/agent-server) itself, the following infrastructure components for each server are also included in the broad definition of "data plane":
+
+- **PostgreSQL**: persistence layer for user, run, and memory data.
+- **Redis**: communication and ephemeral metadata for workers.
+- **Secrets store**: secure management of environment secrets.
+- **Autoscalers**: scale server containers based on load.
+
+## "Listener" application
+
+The data plane "listener" application periodically calls [control plane APIs](/langsmith/control-plane#control-plane-api) to:
+
+- Determine if new deployments should be created.
+- Determine if existing deployments should be updated (i.e. new revisions).
+- Determine if existing deployments should be deleted.
+
+In other words, the data plane "listener" reads the latest state of the control plane (desired state) and takes action to reconcile outstanding deployments (current state) to match the latest state.
+
+## PostgreSQL
+
+PostgreSQL is the persistence layer for all user, run, and long-term memory data in a Agent Server. This stores both checkpoints (see more info [here](/oss/python/langgraph/persistence)), server resources (threads, runs, assistants and crons), as well as items saved in the long-term memory store (see more info [here](/oss/python/langgraph/persistence#memory-store)).
+
+## Redis
+
+Redis is used in each Agent Server as a way for server and queue workers to communicate, and to store ephemeral metadata. No user or run data is stored in Redis.
+
+### Communication
+
+All runs in an Agent Server are executed by a pool of background workers that are part of each deployment. In order to enable some features for those runs (such as cancellation and output streaming) we need a channel for two-way communication between the server and the worker handling a particular run. We use Redis to organize that communication.
+
+1. A Redis list is used as a mechanism to wake up a worker as soon as a new run is created. Only a sentinel value is stored in this list, no actual run information. The run information is then retrieved from PostgreSQL by the worker.
+2. A combination of a Redis string and Redis PubSub channel is used for the server to communicate a run cancellation request to the appropriate worker.
+3. A Redis PubSub channel is used by the worker to broadcast streaming output from an agent while the run is being handled. Any open `/stream` request in the server will subscribe to that channel and forward any events to the response as they arrive. No events are stored in Redis at any time.
+
+### Ephemeral metadata
+
+Runs in an Agent Server may be retried for specific failures (currently only for transient PostgreSQL errors encountered during the run). In order to limit the number of retries (currently limited to 3 attempts per run) we record the attempt number in a Redis string when it is picked up. This contains no run-specific info other than its ID, and expires after a short delay.
+
+## Data plane features
+
+This section describes various features of the data plane.
+
+### Data region
+
+**Only for Cloud**
+Data regions are only applicable for [Cloud](/langsmith/cloud) deployments.
+
+Deployments can be created in 2 data regions: US and EU
+
+The data region for a deployment is implied by the data region of the LangSmith organization where the deployment is created. Deployments and the underlying database for the deployments cannot be migrated between data regions.
+
+### Autoscaling
+
+[`Production` type](/langsmith/control-plane#deployment-types) deployments automatically scale up to 10 containers. Scaling is based on 3 metrics:
+
+1. CPU utilization
+2. Memory utilization
+3. Number of pending (in progress) [runs](/langsmith/assistants#execution)
+
+For CPU utilization, the autoscaler targets 75% utilization. This means the autoscaler will scale the number of containers up or down to ensure that CPU utilization is at or near 75%. For memory utilization, the autoscaler targets 75% utilization as well.
+
+For number of pending runs, the autoscaler targets 10 pending runs. For example, if the current number of containers is 1, but the number of pending runs is 20, the autoscaler will scale up the deployment to 2 containers (20 pending runs / 2 containers = 10 pending runs per container).
+
+Each metric is computed independently and the autoscaler will determine the scaling action based on the metric that results in the largest number of containers.
+
+These metrics don't all apply to every container type. [Queue workers](/langsmith/agent-server#runtime-architecture) scale on pending run count — when the backlog grows, more workers spin up to drain it. [API servers](/langsmith/agent-server#runtime-architecture) scale on CPU and memory, responding to client request volume. This means a spike in run submissions won't slow down read operations like fetching thread state. For self-hosted configuration details, see [Configure Agent Server for scale](/langsmith/agent-server-scale).
+
+Scale down actions are delayed for 30 minutes before any action is taken. In other words, if the autoscaler decides to scale down a deployment, it will first wait for 30 minutes before scaling down. After 30 minutes, the metrics are recomputed and the deployment will scale down if the recomputed metrics result in a lower number of containers than the current number. Otherwise, the deployment remains scaled up. This "cool down" period ensures that deployments do not scale up and down too frequently.
+
+### Static IP addresses
+
+**Only for Cloud**
+Static IP addresses are only available for [Cloud](/langsmith/cloud) deployments.
+
+All traffic from deployments created after January 6th 2025 will come through a NAT gateway. This NAT gateway will have several static IP addresses depending on the data region. For the list of static IP addresses, refer to the [Allowlist IP addresses table](/langsmith/deploy-to-cloud#allowlist-ip-addresses).
+
+### Payload size
+
+**Only for Cloud**
+Payload size restrictions are only applicable to [Cloud](/langsmith/cloud) deployments.
+
+The maximum payload size for all requests sent to [Cloud](/langsmith/cloud) deployments is 25 MB. Attempting to send a request with a payload larger than 25 MB will result in a `413 Payload Too Large` error.
+
+### Custom PostgreSQL
+
+Custom PostgreSQL instances are only available for [hybrid](/langsmith/hybrid) and [self-hosted](/langsmith/self-hosted) deployments.
+
+A custom PostgreSQL instance can be used instead of the [one automatically created by the control plane](/langsmith/control-plane#database-provisioning). Specify the [`POSTGRES_URI_CUSTOM`](/langsmith/env-var#postgres-uri-custom) environment variable to use a custom PostgreSQL instance.
+
+Multiple deployments can share the same PostgreSQL instance. For example, for `Deployment A`, `POSTGRES_URI_CUSTOM` can be set to `postgres://<user>:<password>@/<database_name_1>?host=<hostname_1>` and for `Deployment B`, `POSTGRES_URI_CUSTOM` can be set to `postgres://<user>:<password>@/<database_name_2>?host=<hostname_1>`. `<database_name_1>` and `database_name_2` are different databases within the same instance, but `<hostname_1>` is shared. **The same database cannot be used for separate deployments**.
+
+### Custom Redis
+
+Custom Redis instances are only available for [Hybrid](/langsmith/hybrid) and [Self-Hosted](/langsmith/self-hosted) deployments.
+
+A custom Redis instance can be used instead of the one automatically created by the control plane. Specify the [REDIS\_URI\_CUSTOM](/langsmith/env-var#redis-uri-custom) environment variable to use a custom Redis instance.
+
+Multiple deployments can share the same Redis instance. For example, for `Deployment A`, `REDIS_URI_CUSTOM` can be set to `redis://<hostname_1>:<port>/1` and for `Deployment B`, `REDIS_URI_CUSTOM` can be set to `redis://<hostname_1>:<port>/2`. `1` and `2` are different database numbers within the same instance, but `<hostname_1>` is shared. **The same database number cannot be used for separate deployments**.
+
+### LangSmith tracing
+
+Agent Server is automatically configured to send traces to LangSmith. See the table below for details with respect to each deployment option.
+
+| Cloud                                  | Hybrid                                                    | Self-Hosted                                                                                |
+| -------------------------------------- | --------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| RequiredTrace to LangSmith SaaS. | OptionalDisable tracing or trace to LangSmith SaaS. | OptionalDisable tracing, trace to LangSmith SaaS, or trace to Self-Hosted LangSmith. |
+
+### Telemetry
+
+Agent Server is automatically configured to report telemetry metadata for billing purposes. See the table below for details with respect to each deployment option.
+
+| Cloud                             | Hybrid                            | Self-Hosted                                                                                                              |
+| --------------------------------- | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| Telemetry sent to LangSmith SaaS. | Telemetry sent to LangSmith SaaS. | Self-reported usage (audit) for air-gapped license key.Telemetry sent to LangSmith SaaS for LangSmith License Key. |
+
+### Licensing
+
+Agent Server is automatically configured to perform license key validation. See the table below for details with respect to each deployment option.
+
+| Cloud                                               | Hybrid                                              | Self-Hosted                                                                      |
+| --------------------------------------------------- | --------------------------------------------------- | -------------------------------------------------------------------------------- |
+| LangSmith API Key validated against LangSmith SaaS. | LangSmith API Key validated against LangSmith SaaS. | Air-gapped license key or Platform License Key validated against LangSmith SaaS. |
+
+***
+
+```
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/data-plane.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+
+
+
+[Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+```
