@@ -5,6 +5,9 @@ vi.mock("node:fs");
 vi.mock("node:os", () => ({
   homedir: () => "/mock/home",
 }));
+vi.mock("node:module", () => ({
+  createRequire: () => () => ({ version: "0.2.0" }),
+}));
 vi.mock("../validate.js", () => ({
   validateManifest: vi.fn(() => true),
 }));
@@ -57,7 +60,7 @@ describe("getCachedManifest", () => {
     const oldTime = Date.now() - 25 * 60 * 60 * 1000;
     vi.mocked(fs.readFileSync).mockImplementation((p) => {
       if (String(p) === META_PATH) {
-        return JSON.stringify({ fetchedAt: oldTime, registryVersion: 1 });
+        return JSON.stringify({ fetchedAt: oldTime, registryVersion: 1, cliVersion: "0.2.0" });
       }
       return JSON.stringify(testManifest);
     });
@@ -69,7 +72,7 @@ describe("getCachedManifest", () => {
     const freshTime = Date.now() - 1000;
     vi.mocked(fs.readFileSync).mockImplementation((p) => {
       if (String(p) === META_PATH) {
-        return JSON.stringify({ fetchedAt: freshTime, registryVersion: 1 });
+        return JSON.stringify({ fetchedAt: freshTime, registryVersion: 1, cliVersion: "0.2.0" });
       }
       return JSON.stringify(testManifest);
     });
@@ -87,7 +90,7 @@ describe("getCachedManifest", () => {
     const freshTime = Date.now() - 1000;
     vi.mocked(fs.readFileSync).mockImplementation((p) => {
       if (String(p) === META_PATH) {
-        return JSON.stringify({ fetchedAt: freshTime, registryVersion: 1 });
+        return JSON.stringify({ fetchedAt: freshTime, registryVersion: 1, cliVersion: "0.2.0" });
       }
       return JSON.stringify({ bad: "data" });
     });
@@ -100,9 +103,33 @@ describe("getCachedManifest", () => {
     const freshTime = Date.now() - 1000;
     vi.mocked(fs.readFileSync).mockImplementation((p) => {
       if (String(p) === META_PATH) {
-        return JSON.stringify({ fetchedAt: freshTime, registryVersion: 1 });
+        return JSON.stringify({ fetchedAt: freshTime, registryVersion: 1, cliVersion: "0.2.0" });
       }
       return "not json";
+    });
+    expect(cache.getCachedManifest()).toBeNull();
+  });
+
+  it("returns null when CLI version has changed", () => {
+    vi.mocked(fs.existsSync).mockReturnValue(true);
+    const freshTime = Date.now() - 1000;
+    vi.mocked(fs.readFileSync).mockImplementation((p) => {
+      if (String(p) === META_PATH) {
+        return JSON.stringify({ fetchedAt: freshTime, registryVersion: 1, cliVersion: "0.1.0" });
+      }
+      return JSON.stringify(testManifest);
+    });
+    expect(cache.getCachedManifest()).toBeNull();
+  });
+
+  it("returns null when cached meta has no cliVersion (legacy cache)", () => {
+    vi.mocked(fs.existsSync).mockReturnValue(true);
+    const freshTime = Date.now() - 1000;
+    vi.mocked(fs.readFileSync).mockImplementation((p) => {
+      if (String(p) === META_PATH) {
+        return JSON.stringify({ fetchedAt: freshTime, registryVersion: 1 });
+      }
+      return JSON.stringify(testManifest);
     });
     expect(cache.getCachedManifest()).toBeNull();
   });
@@ -112,7 +139,7 @@ describe("getCachedManifest", () => {
     const exactly24h = Date.now() - 24 * 60 * 60 * 1000;
     vi.mocked(fs.readFileSync).mockImplementation((p) => {
       if (String(p) === META_PATH) {
-        return JSON.stringify({ fetchedAt: exactly24h, registryVersion: 1 });
+        return JSON.stringify({ fetchedAt: exactly24h, registryVersion: 1, cliVersion: "0.2.0" });
       }
       return JSON.stringify(testManifest);
     });
@@ -132,7 +159,7 @@ describe("cacheManifest", () => {
     );
     expect(fs.writeFileSync).toHaveBeenCalledWith(
       META_PATH,
-      JSON.stringify({ fetchedAt: Date.now(), registryVersion: 1 }),
+      JSON.stringify({ fetchedAt: Date.now(), registryVersion: 1, cliVersion: "0.2.0" }),
     );
   });
 
@@ -201,7 +228,7 @@ describe("getCacheStatus", () => {
     vi.mocked(fs.existsSync).mockReturnValue(true);
     const age30min = Date.now() - 30 * 60 * 1000;
     vi.mocked(fs.readFileSync).mockReturnValue(
-      JSON.stringify({ fetchedAt: age30min, registryVersion: 1 }),
+      JSON.stringify({ fetchedAt: age30min, registryVersion: 1, cliVersion: "0.2.0" }),
     );
     const status = cache.getCacheStatus();
     expect(status.exists).toBe(true);
@@ -220,7 +247,7 @@ describe("getCacheStatus", () => {
     vi.mocked(fs.existsSync).mockReturnValue(true);
     const age120min = Date.now() - 120 * 60 * 1000;
     vi.mocked(fs.readFileSync).mockReturnValue(
-      JSON.stringify({ fetchedAt: age120min, registryVersion: 1 }),
+      JSON.stringify({ fetchedAt: age120min, registryVersion: 1, cliVersion: "0.2.0" }),
     );
     const status = cache.getCacheStatus();
     expect(status.exists).toBe(true);

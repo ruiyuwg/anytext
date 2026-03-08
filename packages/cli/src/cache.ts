@@ -5,10 +5,16 @@ import {
   rmSync,
   writeFileSync,
 } from "node:fs";
+import { createRequire } from "node:module";
 import { dirname, join } from "node:path";
 import { homedir } from "node:os";
 import type { Manifest } from "./types.js";
 import { validateManifest } from "./validate.js";
+
+const require = createRequire(import.meta.url);
+const { version: CLI_VERSION } = require("../package.json") as {
+  version: string;
+};
 
 const CACHE_DIR = join(homedir(), ".anytext");
 const MANIFEST_PATH = join(CACHE_DIR, "manifest.json");
@@ -19,6 +25,7 @@ const MAX_AGE_MS = 24 * 60 * 60 * 1000; // 24 hours
 interface CacheMeta {
   fetchedAt: number;
   registryVersion: number;
+  cliVersion?: string;
 }
 
 function ensureDir(dir: string): void {
@@ -37,6 +44,9 @@ export function getCachedManifest(): Manifest | null {
     if (Date.now() - meta.fetchedAt > MAX_AGE_MS) {
       return null;
     }
+    if (meta.cliVersion !== CLI_VERSION) {
+      return null;
+    }
 
     const manifest: unknown = JSON.parse(readFileSync(MANIFEST_PATH, "utf-8"));
     if (!validateManifest(manifest)) return null;
@@ -52,6 +62,7 @@ export function cacheManifest(manifest: Manifest): void {
   const meta: CacheMeta = {
     fetchedAt: Date.now(),
     registryVersion: manifest.version,
+    cliVersion: CLI_VERSION,
   };
   writeFileSync(META_PATH, JSON.stringify(meta));
 }
