@@ -33,26 +33,26 @@ export default function RegistryPage() {
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
-      <main className="flex-1">
-        <section className="mx-auto max-w-5xl px-6 pb-20 pt-24 md:pt-32">
-          <h1 className="text-4xl font-bold tracking-tight md:text-5xl">
-            Registry
-          </h1>
-          <p className="mt-4 text-lg text-muted-foreground">
-            {totalTopics} topics across {manifest.libraries.length} libraries.
-            Updated {manifest.updatedAt}.
-          </p>
-
-          <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <main className="mx-auto w-full max-w-5xl flex-1 border-x">
+        <section className="border-b">
+          <div className="px-6 py-16 md:py-24">
+            <div className="mx-auto max-w-xl space-y-4 text-center">
+              <h1 className="text-balance text-3xl font-semibold md:text-4xl">
+                Registry
+              </h1>
+              <p className="text-muted-foreground">
+                {totalTopics} topics across {manifest.libraries.length}{" "}
+                libraries. Updated {manifest.updatedAt}.
+              </p>
+            </div>
+          </div>
+          <div className="grid divide-x divide-y border-t sm:grid-cols-2 lg:grid-cols-3">
             {manifest.libraries.map((lib) => (
-              <div
-                key={lib.id}
-                className="flex gap-4 rounded-lg border bg-card p-5 transition-colors hover:border-foreground/20"
-              >
-                <LibraryLogo id={lib.id} size={48} />
+              <div key={lib.id} className="flex gap-4 p-6">
+                <LibraryLogo id={lib.id} size={40} />
                 <div className="min-w-0">
                   <div className="flex items-baseline gap-2">
-                    <h2 className="font-semibold">{lib.name}</h2>
+                    <h2 className="text-sm font-medium">{lib.name}</h2>
                     <span className="text-xs text-muted-foreground">
                       v{lib.version}
                     </span>
@@ -69,6 +69,7 @@ export default function RegistryPage() {
           </div>
         </section>
       </main>
+      <div className="py-12" />
       <Footer />
     </div>
   );
