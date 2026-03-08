@@ -200,6 +200,32 @@
       }
     },
     {
+      "id": "alibabacloud",
+      "name": "Alibaba Cloud",
+      "description": "Cloud computing platform with compute, storage, databases, serverless, AI, and 100+ cloud services",
+      "version": "2026",
+      "adapter": "html",
+      "url": "https://www.alibabacloud.com/help/en",
+      "topicPrefix": "auto",
+      "rateLimit": 3,
+      "crawl": {
+        "contentSelector": "article, main",
+        "startPaths": [
+          "/help/en/ecs",
+          "/help/en/oss",
+          "/help/en/function-compute",
+          "/help/en/apsaradb-for-rds",
+          "/help/en/cdn",
+          "/help/en/ack",
+          "/help/en/api-gateway",
+          "/help/en/slb",
+          "/help/en/model-studio"
+        ],
+        "include": ["/help/en/"],
+        "exclude": ["/release-notes", "/changelog", "/pricing", "/announcements", "/intl/"]
+      }
+    },
+    {
       "id": "azure",
       "name": "Azure",
       "description": "Microsoft Azure cloud platform with compute, storage, databases, AI, and 200+ services",
