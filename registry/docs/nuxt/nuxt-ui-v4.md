@@ -1,0 +1,182 @@
+# Nuxt UI v4
+
+Today, we’re releasing [**Nuxt UI v4**](https://ui.nuxt.com){rel=""nofollow""}, a major milestone that sets a new standard for our component library. With this release, we are unifying Nuxt UI and Nuxt UI Pro into a single, powerful, and completely free open-source library.
+
+This marks an exciting new chapter for the Vue and Nuxt ecosystems, made possible by [NuxtLabs joining Vercel](https://nuxtlabs.com){rel=""nofollow""}. Our shared commitment to the open-source community has allowed us to make every component, from a [simple button](https://ui.nuxt.com/docs/components/button){rel=""nofollow""} to the most advanced [dashboard sidebar](https://ui.nuxt.com/docs/components/dashboard-sidebar){rel=""nofollow""}, accessible to everyone.
+
+What was previously a premium offering is now available to all. Over 100 components, advanced sections, and [production-ready templates](https://ui.nuxt.com/templates){rel=""nofollow""} are now yours to build with, unified in one place.
+
+## Build anything, faster than ever
+
+Nuxt UI v4 makes it easy to build modern, polished apps quickly. You can create complex interfaces like landing pages, pricing pages, docs, blogs, portfolios, etc. without starting from scratch.
+
+This is possible because Nuxt UI v4 unifies everything you need into a single `@nuxt/ui` package:
+
+- **110+ components:** An extensive library to build anything from simple websites to complex applications.
+- **12 free templates:** Start your next project in minutes with a production-ready template for a [Landing Page](https://landing-template.nuxt.dev){rel=""nofollow""}, [SaaS](https://saas-template.nuxt.dev){rel=""nofollow""}, [Dashboard](https://dashboard-template.nuxt.dev){rel=""nofollow""}, [Docs site](https://docs-template.nuxt.dev){rel=""nofollow""}, [Portfolio](https://portfolio-template.nuxt.dev){rel=""nofollow""}, [Chat app](https://chat-template.nuxt.dev){rel=""nofollow""}, or [Changelog](https://changelog-template.nuxt.dev){rel=""nofollow""}.
+- **Rich Content & Typography:** Beautifully render Markdown and build content-rich sites with our advanced prose components, fully integrated with Nuxt Content.
+- **Vue and Nuxt Compatibility:** Works in any Vue or Nuxt project, as well as [Adonis](https://github.com/nuxt-ui-templates/starter-adonis){rel=""nofollow""} and [Laravel](https://github.com/nuxt-ui-templates/starter-laravel){rel=""nofollow""}.
+
+The entire Pro suite is now yours. Build with powerful components previously exclusive to our paid users, now free for everyone.
+
+::tabs{.gap-0}
+:::div{label="index.vue"}
+
+```vue
+  
+    
+      
+        
+        
+          
+          
+        
+      
+
+      <UPageHero
+        title="Nuxt UI - Starter"
+        description="Nuxt UI is a free and open-source UI library for Nuxt applications. Create beautiful & responsive applications in minutes."
+        :links="heroLinks"
+      />
+
+      <UPageSection
+        title="The freedom to build anything"
+        description="Nuxt UI ships with a comprehensive set of components that cover a wide range of use-cases. Carefully crafted to reduce boilerplate code without sacrificing flexibility."
+        :features="features"
+      />
+
+      
+        
+      
+
+      
+        <UPageCTA
+          title="Start with Nuxt UI today!"
+          description="Nuxt UI is a free and open-source UI library for Nuxt applications."
+          variant="subtle"
+          :links="ctaLinks"
+        />
+      
+
+      
+    
+  
+```
+
+:::
+
+## :::code-preview
+
+ui:
+preview: p-0
+class: "\[&>div]:\*:my-0 w-full"
+label: Preview
+--------------
+
+:index-example
+:::
+::
+
+## From design to code, seamlessly
+
+A successful project starts with a solid design system. In v4, we are releasing the **complete Figma Kit** for free, mirroring the entire component library.
+
+With over **2,000 component variants and design tokens**, you now have a single Figma entry point that contains every component along with detailed explanations about structure and usage. Designers and developers work from the same comprehensive source, making collaboration seamless and ensuring a perfect match between design and implementation.
+
+::u-button
+
+::
+
+## ::carousel
+
+items:
+
+- /assets/blog/figma-kit/1.png
+- /assets/blog/figma-kit/2.png
+- /assets/blog/figma-kit/3.png
+
+***
+
+::
+
+## An upgraded developer experience
+
+Beyond new components, v4 brings significant improvements to your workflow.
+
+### Effortless migration
+
+Unlike the major overhaul from v2 to v3, the migration to v4 is simple. This release focuses on unification, not breaking changes. Most components work identically, and your existing code will remain largely intact.
+
+Check out our [migration guide](https://ui.nuxt.com/getting-started/migration/v4){rel=""nofollow""} for a complete walkthrough.
+
+### A refined documentation
+
+We've completely overhauled our documentation to make it clearer and more intuitive. We’ve restructured the layout and split complex topics into dedicated pages, ensuring you can find the information you need, faster.
+
+Our documentation is also now fully AI-ready. It's powered by our new \**[Model Context Protocol (MCP) server](https://ui.nuxt.com/docs/getting-started/ai/mcp){rel=""nofollow""}*\*, which allows AI tools like Cursor to access component documentation and metadata directly. In addition, we provide \*\*[`LLMs.txt` files](https://ui.nuxt.com/docs/getting-started/ai/llms-txt){rel=""nofollow""}\*\*, a structured format that enables any AI assistant to understand our components, theming, and best practices. Your AI tools now have first-class access to our entire library, right inside your editor.
+
+### Ready for the next wave of AI
+
+Our AI chat components now support **Vercel's AI SDK v5**. The new `Chat` class and message format (with `parts`) ensure compatibility with the latest AI SDK improvements, keeping you at the forefront of AI development.
+
+## A thank you to our pro users
+
+We want to extend a special thanks to everyone who supported Nuxt UI Pro. Your early adoption and feedback were instrumental in shaping Nuxt UI. You helped us fund, maintain, and improve the project, allowing us to reach this milestone where we can now offer these powerful tools to the entire community.
+
+Your support made this moment possible.
+
+## Start building today
+
+Get started with Nuxt UI v4 by creating a new project with any of our free templates:
+
+::code-group
+
+```bash [Starter]
+npm create nuxt@latest -- -t ui
+```
+
+```bash [Landing]
+npm create nuxt@latest -- -t github:nuxt-ui-templates/landing
+```
+
+```bash [Docs]
+npm create nuxt@latest -- -t github:nuxt-ui-templates/docs
+```
+
+```bash [SaaS]
+npm create nuxt@latest -- -t github:nuxt-ui-templates/saas
+```
+
+```bash [Dashboard]
+npm create nuxt@latest -- -t github:nuxt-ui-templates/dashboard
+```
+
+```bash [Chat]
+npm create nuxt@latest -- -t github:nuxt-ui-templates/chat
+```
+
+```bash [Portfolio]
+npm create nuxt@latest -- -t github:nuxt-ui-templates/portfolio
+```
+
+```bash [Changelog]
+npm create nuxt@latest -- -t github:nuxt-ui-templates/changelog
+```
+
+::
+
+Or add it to your existing project:
+
+```bash
+npm install @nuxt/ui@latest
+```
+
+## The future is open
+
+With a unified codebase and the backing of Vercel, we're more excited than ever to push the boundaries of component development. This release wouldn't have been possible without the support of our amazing community, and every contributor who has helped shape Nuxt UI.
+
+We can't wait to see what you build. The future of UI development is free, open, and more powerful than ever.
+
+***
+
+*Ready to get started? Check out the [documentation](https://ui.nuxt.com){rel=""nofollow""} and join our [Discord community](https://discord.nuxt.com){rel=""nofollow""} to connect with other developers building amazing things with Nuxt UI.*

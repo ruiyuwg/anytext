@@ -1,0 +1,274 @@
+# Nuxt 3.8
+
+### 💻 CLI Improvements
+
+Just to remind you, we're now using [the new Nuxt CLI](https://github.com/nuxt/cli){rel=""nofollow""} which is now versioned separately.
+
+::tip
+You can now install a module with `nuxi module add <module-name>`
+::
+
+::note{icon="i-lucide-rocket"}
+We now share the same port with the Vite websocket, meaning better support for docker containers in development.
+::
+
+::read-more
+
+Read the Nuxt CLI `v3.9.0` release notes.
+::
+
+### ✨ Built-in Nuxt DevTools
+
+Nuxt DevTools v1.0.0 is out and we now think it's ready to be shipped as a direct dependency of Nuxt.
+
+::read-more
+
+Check out Nuxt DevTools v1.0 announcement.
+::
+
+### 📸 Nuxt Image Auto-install
+
+[`<NuxtImg>`](https://nuxt.com/docs/api/components/nuxt-img) and [`<NuxtPicture>`](https://nuxt.com/docs/api/components/nuxt-picture) first-class built-in components.
+
+We now auto-installing `@nuxt/image` the first time that they are used ([#23717](https://github.com/nuxt/nuxt/pull/23717){rel=""nofollow""}).
+
+:video{.rounded.dark:border.dark:border-gray-700 controls poster="https://res.cloudinary.com/nuxt/video/upload/v1697721767/nuxt3/nuxt-image-auto-install\_uqkptq.jpg"}
+
+::tip
+We advise using [`@nuxt/image`](https://image.nuxt.com){rel=""nofollow""} if you're using images in your site; it can apply optimisations to make your site more performant.
+::
+
+### 📂 Deeper Layout Scanning
+
+::caution
+This is a behaviour change so do take care with this one.
+::
+
+We now support scanning layouts within subfolders in [`~/layouts`](https://nuxt.com/docs/guide/directory-structure/layouts) in the same way as we do with [`~/components`](https://nuxt.com/docs/guide/directory-structure/components).
+
+| File                             | Layout name       |
+| -------------------------------- | ----------------- |
+| ~/layouts/desktop/default.vue   | 'desktop-default' |
+| ~/layouts/desktop-base/base.vue | 'desktop-base'    |
+| ~/layouts/desktop/index.vue     | 'desktop'         |
+
+::read-more
+
+Read more about **Named Layouts**.
+::
+
+### 📊 App Manifest
+
+We now support a built-in app manifest (see [PR #21641](https://github.com/nuxt/nuxt/pull/21641){rel=""nofollow""}), which generates a manifest at `/_nuxt/builds/meta/<buildId>.json`.
+
+It enables loading payloads **only for prerendered routes**, if a site is generated with `nuxt generate`, preventing 404s in the console.
+
+It also enables **client-side route rules**. Only `redirect` route rules is supported for now; they will now redirect when performing client-side navigation.
+
+::code-group
+
+```ts [nuxt.config.ts]
+export default defineNuxtConfig({
+  routeRules: {
+    '/about': { redirect: '/about-us' }
+  }
+})
+```
+
+```vue [pages/index.vue]
+<template>
+  <div>
+    <!-- Will be redirected to /about-us on client-side -->
+    <NuxtLink to="/about">About</NuxtLink>
+  </div>
+</template>
+```
+
+::
+
+::tip{icon="i-lucide-rocket"}
+The app manifest also enables future enhancements including detection of a new deployment by checking `/_nuxt/builds/latest.json`.
+::
+
+::note
+You can **opt-on from this behaviour if you need to** by setting `experimental.appManifest` to `false` in your `nuxt.config.ts` file.
+::
+
+### 🤝 Scope and Context Improvements
+
+We now define a 'scope' for Nuxt composables executed in plugins ([#23667](https://github.com/nuxt/nuxt/pull/23667){rel=""nofollow""}), which allows running synchronous cleanup before navigating away from your site, using the Vue [`onScopeDispose`](https://vuejs.org/api/reactivity-advanced.html#onscopedispose){rel=""nofollow""} lifecycle method.
+
+::note
+This should fix an edge case with cookies ([#23697](https://github.com/nuxt/nuxt/pull/23697){rel=""nofollow""}) and also improves memory management such as Pinia stores ([#23650](https://github.com/nuxt/nuxt/issues/23650){rel=""nofollow""}).
+::
+
+::read-more
+
+Read more about Vue effect scopes.
+::
+
+We also now support [**native async context**](https://nodejs.org/api/async_context.html){rel=""nofollow""} for the *Vue composition API* ([#23526](https://github.com/nuxt/nuxt/pull/23526){rel=""nofollow""}). In case you're unaware, we support native async context on Node and Bun, enabled with [`experimental.asyncContext`](https://nuxt.com/docs/guide/going-further/experimental-features#asynccontext).
+
+If you experience issues with `Nuxt instance unavailable`, enabling this option may solve your issues:
+
+```ts [nuxt.config.ts]
+export default defineNuxtConfig({
+  experimental: {
+    asyncContext: true
+  }
+})
+```
+
+::note
+Once we have cross-runtime support, we will enable it by default.
+::
+
+### 🔗 NuxtLink Defaults
+
+You can define your own [`<NuxtLink>`](https://nuxt.com/docs/api/components/nuxt-link) components with the [`defineNuxtLink`](https://nuxt.com/docs/api/components/nuxt-link#definenuxtlink-signature) utility.
+
+Today, you can cutomize the options for the built-in [`<NuxtLink>`](https://nuxt.com/docs/api/components/nuxt-link), directly in your `nuxt.config.ts` file ([#23724](https://github.com/nuxt/nuxt/pull/23724){rel=""nofollow""}).
+
+This can enable you to enforce trailing slash behaviour across your entire site, for example:
+
+```ts [nuxt.config.ts]
+export default defineNuxtConfig({
+  experimental: {
+    defaults: {
+      nuxtLink: {
+        activeClass: 'nuxt-link-active',
+        trailingSlash: 'append'
+      }
+    }
+  }
+})
+```
+
+### ⚡️ Data Fetching Improvements
+
+We have two very significant new features for [`useAsyncData`](https://nuxt.com/docs/api/composables/use-async-data) and [`useFetch`](https://nuxt.com/docs/api/composables/use-fetch):
+
+1. You can now set `deep: false` to prevent deep reactivity on the `data` object returned from these composables ([#23600](https://github.com/nuxt/nuxt/pull/23600){rel=""nofollow""}). It should be a performance improvement if you are returning large arrays or objects. The object will still update when refetched; it just won't trigger reactive effects if you change a property deep within the `data`.
+2. You can now use the `getCachedData` option to handle custom caching for these composables ([#20747](https://github.com/nuxt/nuxt/pull/20747){rel=""nofollow""})
+
+```vue [pages/index.vue]
+<script setup>
+const nuxtApp = useNuxtApp()
+const { data } = await useAsyncData(() => { /* fetcher */ }, {
+  // this will not refetch if the key exists in the payload
+  getCachedData: key => nuxtApp.payload.static[key] ?? nuxtApp.payload.data[key]
+})
+</script>
+```
+
+:video-accordion{title="Watch the video from Alexander Lichter about Client-side caching with getCachedData." video-id="aQPR0xn-MMk"}
+
+We also support configuring some default values for these composables in an app-wide way ([#23725](https://github.com/nuxt/nuxt/pull/20747){rel=""nofollow""}):
+
+```ts [nuxt.config.ts]
+export default defineNuxtConfig({
+  experimental: {
+    defaults: {
+      useAsyncData: {
+        deep: false
+      },
+      useFetch: {
+        retry: false,
+        retryDelay: 100,
+        retryStatusCodes: [500],
+        timeout: 100
+      }
+    }
+  }
+})
+```
+
+### 🔢 Layer Improvements
+
+We now more carefully load layer plugins ([#22889](https://github.com/nuxt/nuxt/pull/22889){rel=""nofollow""} and [#23148](https://github.com/nuxt/nuxt/pull/23148){rel=""nofollow""}) and middleware ([#22925](https://github.com/nuxt/nuxt/pull/22925){rel=""nofollow""} and [#23552](https://github.com/nuxt/nuxt/pull/23552){rel=""nofollow""}) in the order of the layers, always loading your own plugins and middleware last. This should mean you can rely on utilities that layers may inject.
+
+And probably one of the most significant changes - if you are using remote layers we now clone these within your [`node_modules/`](https://nuxt.com/docs/guide/directory-structure/node_modules) folder ([#109](https://github.com/unjs/c12/pull/109){rel=""nofollow""}) so layers can use dependencies with your project. See [`c12` release notes](https://github.com/unjs/c12/releases/tag/v1.5.1){rel=""nofollow""} for full details.
+
+::tip{icon="i-lucide-check-circle"}
+We've also added a test suite to cover these layer resolution changes.
+::
+
+### 😴 Nightly Release Channel
+
+Every commit to the `main` branch of Nuxt is automatically deployed to a new release, for easier testing before releases. We've renamed this from the 'edge release channel' to the 'nightly release channel' to avoid confusion with *edge deployments*. And probably also with Microsoft Edge (though I haven't heard that anyone was confused with that one!)
+
+- `nuxt3` is now `nuxt-nightly`
+- `nuxi-edge` is now `nuxi-nightly`
+- `@​nuxt/kit-edge` is now `@​nuxt/kit-nightly`
+- ... and so on.
+
+::read-more
+
+Read more about the **Nighly Release Channel**.
+::
+
+### ⚗️ Nitro v2.7
+
+Nitro v2.7 has been released with lots of improvements and bug fixes.
+
+::tip{icon="i-lucide-rocket"}
+🔥 One of the most significant is that we now save **40% of bundle size in production** by using native `fetch` supported in Node 18+ ([#1724](https://github.com/unjs/nitro/pull/1724){rel=""nofollow""}). So if possible, we'd recommend you update your Node version to at least 18.
+::
+
+::read-more
+
+Check out Nitro v2.7 release note.
+::
+
+### 💪 Type Import Changes
+
+::warning
+This is likely to need code changes in your project.
+::
+
+Vue requires that type imports be explicit (so that the Vue compiler can correctly optimise and resolve type imports for props and so on). See [core Vue `tsconfig.json`](https://github.com/vuejs/tsconfig/blob/main/tsconfig.json#L30-L33){rel=""nofollow""}.
+
+We've therefore taken the decision to turn on `verbatimModuleSyntax` by default in Nuxt projects, which will throw a type error if types are imported without an explicit `type` import. To resolve it you will need to update your imports:
+
+```diff
+- import { someFunction, SomeOptions } from 'some-library'
++ import { someFunction } from 'some-library'
++ import type { SomeOptions } from 'some-library'
+```
+
+You may also encounter modules in the Nuxt ecosystem that need to be updated; please open an issue for those modules. I'm also very happy to help if you're encountering any problems with this, if you're a module author. Just tag me and I'll take a look.
+
+If for whatever reason you need to undo this change in your project you can set the following configuration:
+
+```ts [nuxt.config.ts]
+export default defineNuxtConfig({
+  typescript: {
+    tsConfig: {
+      compilerOptions: {
+        verbatimModuleSyntax: false
+      }
+    }
+  }
+})
+```
+
+However, we'd recommend only doing that temporarily, as Vue does need this option to be set for best results.
+
+## ✅ Upgrading
+
+As usual, our recommendation for upgrading is to run:
+
+```sh
+npx nuxi upgrade
+```
+
+## Full Release Notes
+
+::read-more
+
+Read the full release notes of Nuxt `v3.8.0`.
+::
+
+Thank you for reading this far! We hope you enjoy the new release. Please do let us know if you have any feedback or issues.
+
+**Happy Nuxting ✨**

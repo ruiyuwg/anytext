@@ -1,0 +1,97 @@
+# Token Data
+
+Source: https://payloadcms.com/docs/authentication/token-data
+
+During the lifecycle of a request you will be able to access the data you have configured to be stored in the JWT by accessing `req.user`. The user object is automatically appended to the request for you.
+
+### Defining Token Data
+
+You can specify what data gets encoded to the Cookie/JWT-Token by setting `saveToJWT` property on fields within your auth collection.
+
+```ts
+import type { CollectionConfig } from 'payload'
+
+export const Users: CollectionConfig = {
+  slug: 'users',
+  auth: true,
+  fields: [
+    {
+      // will be stored in the JWT
+      saveToJWT: true,
+      type: 'select',
+      name: 'role',
+      options: ['super-admin', 'user'],
+    },
+    {
+      // the entire object will be stored in the JWT
+      // tab fields can do the same thing!
+      saveToJWT: true,
+      type: 'group',
+      name: 'group1',
+      fields: [
+        {
+          type: 'text',
+          name: 'includeField',
+        },
+        {
+          // will be omitted from the JWT
+          saveToJWT: false,
+          type: 'text',
+          name: 'omitField',
+        },
+      ],
+    },
+    {
+      type: 'group',
+      name: 'group2',
+      fields: [
+        {
+          // will be stored in the JWT
+          // but stored at the top level
+          saveToJWT: true,
+          type: 'text',
+          name: 'includeField',
+        },
+        {
+          type: 'text',
+          name: 'omitField',
+        },
+      ],
+    },
+  ],
+}
+```
+
+**Tip:**
+
+If you wish to use a different key other than the field `name`, you can define `saveToJWT` as a string.
+
+### Using Token Data
+
+This is especially helpful when writing [Hooks](../hooks/overview) and [Access Control](../access-control/overview) that depend on user defined fields.
+
+```ts
+import type { CollectionConfig } from 'payload'
+
+export const Invoices: CollectionConfig = {
+  slug: 'invoices',
+  access: {
+    read: ({ req, data }) => {
+      if (!req?.user) return false
+      // highlight-start
+      if ({ req.user?.role === 'super-admin'}) {
+        return true
+      }
+      // highlight-end
+      return data.owner === req.user.id
+    }
+  }
+  fields: [
+    {
+      name: 'owner',
+      relationTo: 'users'
+    },
+    // ... other fields
+  ],
+}
+```

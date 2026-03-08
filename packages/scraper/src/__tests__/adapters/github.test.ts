@@ -22,6 +22,7 @@ const treeResponse = {
   tree: [
     { path: "docs/intro.md", type: "blob" },
     { path: "docs/guide.md", type: "blob" },
+    { path: "docs/setup.mdx", type: "blob" },
     { path: "docs/images/logo.png", type: "blob" },
     { path: "src/index.ts", type: "blob" },
     { path: "docs/nested", type: "tree" },
@@ -70,9 +71,9 @@ describe("githubAdapter", () => {
 
     const result = await githubAdapter.process(baseSource);
 
-    // Should have fetched tree + 2 .md files (not .png or .ts)
-    expect(fetchSpy).toHaveBeenCalledTimes(3);
-    expect(result.length).toBe(2);
+    // Should have fetched tree + 3 markdown files (not .png or .ts)
+    expect(fetchSpy).toHaveBeenCalledTimes(4);
+    expect(result.length).toBe(3);
     expect(result[0]!.title).toBe("Getting Started");
   });
 
@@ -130,7 +131,7 @@ describe("githubAdapter", () => {
   it("applies exclude patterns", async () => {
     const source: SourceConfig = {
       ...baseSource,
-      github: { repo: "owner/repo", exclude: ["guide"] },
+      github: { repo: "owner/repo", exclude: ["guide|setup"] },
     };
 
     vi.spyOn(globalThis, "fetch")
@@ -252,6 +253,23 @@ describe("githubAdapter", () => {
     const result = await githubAdapter.process(baseSource);
     expect(result[0]!.tags).toContain("useState");
     expect(result[0]!.tags).toContain("useEffect");
+  });
+
+  it("strips .mdx extension from filename for id", async () => {
+    vi.spyOn(globalThis, "fetch")
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({
+          tree: [{ path: "docs/setup.mdx", type: "blob" }],
+        }),
+      } as Response)
+      .mockResolvedValueOnce({
+        ok: true,
+        text: async () => longContent,
+      } as Response);
+
+    const result = await githubAdapter.process(baseSource);
+    expect(result[0]!.id).toBe("setup");
   });
 
   it("handles content with no paragraph lines", async () => {

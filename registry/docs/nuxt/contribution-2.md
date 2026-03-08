@@ -1,0 +1,200 @@
+# Contribution
+
+There is a range of different ways you might be able to contribute to the Nuxt ecosystem.
+
+## Ecosystem
+
+The Nuxt ecosystem includes many different projects and organizations:
+
+- [nuxt/](https://github.com/nuxt){rel=""nofollow""} - core repositories for the Nuxt framework itself. [**nuxt/nuxt**](https://github.com/nuxt/nuxt){rel=""nofollow""} contains the Nuxt framework (both versions 2 and 3).
+- [nuxt-modules/](https://github.com/nuxt-modules){rel=""nofollow""} - community-contributed and maintained modules and libraries. There is a [process to migrate a module](https://nuxt.com/docs/4.x/guide/modules/ecosystem) to `nuxt-modules`. While these modules have individual maintainers, they are not dependent on a single person.
+- [unjs/](https://github.com/unjs){rel=""nofollow""} - many of these libraries are used throughout the Nuxt ecosystem. They are designed to be universal libraries that are framework- and environment-agnostic. We welcome contributions and usage by other frameworks and projects.
+
+## How To Contribute
+
+### Triage Issues and Help Out in Discussions
+
+Check out the issues and discussions for the project you want to help. For example, here are [the issues board](https://github.com/nuxt/nuxt/issues){rel=""nofollow""} and [discussions](https://github.com/nuxt/nuxt/discussions){rel=""nofollow""} for Nuxt. Helping other users, sharing workarounds, creating reproductions, or even poking into a bug a little bit and sharing your findings makes a huge difference.
+
+### Creating an Issue
+
+Thank you for taking the time to create an issue! ❤️
+
+- **Reporting bugs**: Check out [our guide](https://nuxt.com/docs/4.x/community/reporting-bugs) for some things to do before opening an issue.
+- **Feature requests**: Check that there is not an existing issue or discussion covering the scope of the feature you have in mind. If the feature is to another part of the Nuxt ecosystem (such as a module), please consider raising a feature request there first. If the feature you have in mind is general or the API is not entirely clear, consider opening a discussion in the **Ideas** section to discuss with the community first.
+
+We'll do our best to follow our [internal issue decision making flowchart](https://mermaid.live/view#pako:eNqFlE1v2zAMhv8K4UuToslhx2Bo0TZt12Edhm7YMCAXWqJtorLk6qOpkfS_j7KdfpyWQ-BQr8mHL6nsCuU0FauiMm6rGvQRfq03FuRzvvvTYIQHthpcBT_ugQNwPHuZjheLxf4i1VDx8x4udrf5EBCOQvSsYg4ffS79KS9pmX9QALTgyid2KYB7Ih-4bmKWbDk2YB0E1gRUVaRi-FDmmjAmT3u4nB3DmoNKIUA1BsGSohA49jnVMQhHbDh_EZQUImyxh-gAtfaiG-KWSJ-N8nt6YtpCdgEeE5rXPOdav5YwWJIJU7zrvNADV9C7JBIyIC07Wxupkx3LFQ5vCkguRno5f9fP2qnUko0Y2dk9rGdvHAa9IIhVGlCp5FFNPN-ce4DKeXBd53xMliOLp9IZtyORQVsnrGm-WJzejtUu5fFqdr5FGQ3bLslYvGthjZbJTLpReZG5_lLYw7XQ_CbPVT92ws9gnEJj-v84dk-PiaXnmF1XGAaPsOsMKywNvYmG80ZohV8k4wDR9_N3KN_dHm5mh1lnkM5FsYzRfNiTvJoT5gnQsl6uxjqXLhkNQ9syHJ0UZZ8ERUIlNShr6N8gZDEliR-ow7QZa0fhY4LoHLRo-8N7ZxPwjRj5ZZYXpvOSNs9v3Jjs8NXB4ets92xan3zydXZHvj64lKMayh4-gZC1bjASW2ipLeWuzIuToiXfImu5rbucclMIc0ubYiWPGv3DptjYF9Fhiu5nb1Wxij7RSZE6jZHWjLXHtlhVaIJESXN0_m68_sO_wMs_oO9gyg){rel=""nofollow""} when responding to issues.
+
+### Send a Pull Request
+
+We always welcome pull requests! ❤️
+
+#### Before You Start
+
+Before you fix a bug, we recommend that you check whether **there's an issue that describes it**, as it's possible it's a documentation issue or that there is some context that would be helpful to know.
+
+If you're working on a feature, then we ask that you **open a feature request issue first** to discuss with the maintainers whether the feature is desired - and the design of those features. This helps save time for both the maintainers and the contributors and means that features can be shipped faster. The issue **should be confirmed** by a framework team member before building out a feature in a pull request.
+
+For typo fixes, it's recommended to batch multiple typo fixes into one pull request to maintain a cleaner commit history.
+
+For bigger changes to Nuxt itself, we recommend that you first [create a Nuxt module](https://nuxt.com/docs/4.x/community/contribution#create-a-module) and implement the feature there. This allows for quick proof-of-concept. You can then [create an RFC](https://nuxt.com/docs/4.x/community/contribution#make-an-rfc) in the form of a discussion. As users adopt it and you gather feedback, it can then be refined and either added to Nuxt core or continue as a standalone module.
+
+#### Commit Conventions
+
+We use [Conventional Commits](https://www.conventionalcommits.org){rel=""nofollow""} for commit messages, which [allows a changelog to be auto-generated](https://github.com/unjs/changelogen){rel=""nofollow""} based on the commits. Please read the guide through if you aren't familiar with it already.
+
+Note that `fix:` and `feat:` are for **actual code changes** (that might affect logic). For typo or document changes, use `docs:` or `chore:` instead:
+
+- \~~`fix: typo`~~ -> `docs: fix typo`
+
+If you are working in a project with a monorepo, like `nuxt/nuxt`, ensure that you specify the main scope of your commit in brackets. For example: `feat(kit): add 'addMagicStuff' utility`.
+
+#### Making the Pull Request
+
+If you don't know how to send a pull request, we recommend reading [the guide](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request){rel=""nofollow""}.
+
+When sending a pull request, make sure your PR's title also follows the [Commit Convention](https://nuxt.com/docs/4.x/community/contribution#commit-conventions).
+
+If your PR fixes or resolves existing issues, please make sure you mention them in the PR description.
+
+It's ok to have multiple commits in a single PR; you don't need to rebase or force push for your changes as we will use `Squash and Merge` to squash the commits into one commit when merging.
+
+We do not add any commit hooks to allow for quick commits. But before you make a pull request, you should ensure that any lint/test scripts are passing.
+
+In general, please also make sure that there are no *unrelated* changes in a PR. For example, if your editor has made any changes to whitespace or formatting elsewhere in a file that you edited, please revert these so it is more obvious what your PR changes. And please avoid including multiple unrelated features or fixes in a single PR. If it is possible to separate them, it is better to have multiple PRs to review and merge separately. In general, a PR should do *one thing only*.
+
+#### Once You've Made a Pull Request
+
+Once you've made a pull request, we'll do our best to review it promptly.
+
+If we assign it to a maintainer, then that means that person will take special care to review it and implement any changes that may be required.
+
+If we request changes on a PR, please ignore the red text! It doesn't mean we think it's a bad PR - it's just a way of easily telling the status of a list of pull requests at a glance.
+
+If we mark a PR as 'pending', that means we likely have another task to do in reviewing the PR - it's an internal note-to-self, and not necessarily a reflection on whether the PR is a good idea or not. We will do our best to explain via a comment the reason for the pending status.
+
+We'll do our best to follow [our PR decision making flowchart](https://mermaid.live/view#pako:eNp9VE1v2kAQ_SsjXzBSEqlALlaUisSh0ACK2l4qcVm8Y9hi7672Iwly-O-ZtYPt5FAOCHbee_PmzdpVlCmOURLlhXrJ9sw4-JNuJNBnWs1UQafIQVjrERyWumAOv58-AJeXt29_0b7BXbWwwL0uRPa1vlZvcB_fF8oiMMmB2QM4BXkt3UoON7Lh3LWaDz2SVkK6QGt7DHvw0CKt5sxCKaQoWQEGtVHcZ04oGdw04LTVngW_LHOeFcURGGz97mw6PSv-iJdsi0UCA4nI7SfNwc3W3JZit3eQ1SZFDlKB15yswQ2MgbOjbYeatY3n8bcr-IWlekYYaJRcyB04I9gOB1CEfkF5dAVTzmFAtnqn4-bUYAiMMmHZgWhNPRhgus5mW2BATxq0NkIZ4Y4NbNjzE2ZchBzcHmGLe_ZMSKCcyRXyLrVFa_5n_PBK2xKy3kk9eOjULUdltk6C8kI-7NFDr8f4EVGDoqlp-wa4sJm3ltIMIuZ_mTQXJyTSkQZtunPqsKxShV9GKdkBYe1fHXjpbcjlvONlO9Kqx_M7YHmOmav_luxfE5zKwVs09hM5DLSupgYDlr5flDkwo7ykixKG-xDsUly1LZ-uY32dgDc7lG7YqwbNp0msJwmIUivjWFtfd-xRrEcJ7Omydz37qFplHOtxEp4GskI2qB5dRCWakglOz3oV8JuITJa4iRL6yZk5bKKNPBGOead-H2UWJc54vIiaW53SPgwrz4fIhVNm1bw76lfI6R2_MW21){rel=""nofollow""} when responding and reviewing to pull requests.
+
+### AI-Assisted Contributions
+
+We welcome the thoughtful use of AI tools when contributing to Nuxt, yet ask all contributors to follow [two core principles](https://roe.dev/blog/using-ai-in-open-source){rel=""nofollow""}.
+
+#### Never let an LLM speak for you
+
+- All comments, issues, and pull request descriptions should be written in your own voice
+- We value clear, human communication over perfect grammar or spelling
+- Avoid copy-pasting AI-generated summaries that don't reflect your own understanding
+
+#### Never let an LLM think for you
+
+- Feel free to use AI tools to generate code or explore ideas
+- Only submit contributions you fully understand and can explain
+- Contributions should reflect your own reasoning and problem-solving
+
+Our aim is ensuring quality and maintaining the joy of collaborating and communicating with real people. If you have ideas for improving our policy on AI in the Nuxt community, we'd love to hear them! ❤️
+
+### Create a Module
+
+If you've built something with Nuxt that's cool, why not [extract it into a module](https://nuxt.com/docs/4.x/guide/modules), so it can be shared with others? We have [many excellent modules already](https://nuxt.com/modules), but there's always room for more.
+
+If you need help while building it, feel free to [check in with us](https://nuxt.com/docs/4.x/community/getting-help).
+
+### Make an RFC
+
+We highly recommend [creating a module](https://nuxt.com/docs/4.x/community/contribution#create-a-module) first to test out big new features and gain community adoption.
+
+If you have done this already, or it's not appropriate to create a new module, then please start by creating a new discussion. Make sure it explains your thinking as clearly as possible. Include code examples or function signatures for new APIs. Reference existing issues or pain points with examples.
+
+If we think this should be an RFC, we'll change the category to RFC and broadcast it more widely for feedback.
+
+An RFC will then move through the following stages:
+
+- `rfc: active` - currently open for comment
+- `rfc: approved` - approved by the Nuxt team
+- `rfc: ready to implement` - an issue has been created and assigned to implement
+- `rfc: shipped` - implemented
+- `rfc: archived` - not approved, but archived for future reference
+
+### Conventions Across Ecosystem
+
+The following conventions are *required* within the `nuxt/` organization and recommended for other maintainers in the ecosystem.
+
+#### Module Conventions
+
+Modules should follow the [Nuxt module template](https://github.com/nuxt/starter/tree/module){rel=""nofollow""}. See [module guide](https://nuxt.com/docs/4.x/guide/modules) for more information.
+
+#### Use Core `unjs/` Libraries
+
+We recommend the following libraries which are used throughout the ecosystem:
+
+- [pathe](https://github.com/unjs/pathe){rel=""nofollow""} - universal path utilities (replacement for node `path`)
+- [ufo](https://github.com/unjs/ufo){rel=""nofollow""} - URL parsing and joining utilities
+- [obuild](https://github.com/unjs/obuild){rel=""nofollow""} - rolldown-powered build system
+- ... check out the rest of the [unjs/](https://github.com/unjs){rel=""nofollow""} organization for many more!
+
+#### Use ESM Syntax and Default to `type: module`
+
+Most of the Nuxt ecosystem can consume ESM directly. In general we advocate that you avoid using CJS-specific code, such as `__dirname` and `require` statements. You can [read more about ESM](https://nuxt.com/docs/4.x/guide/concepts/esm).
+
+#### What's Corepack
+
+[Corepack](https://github.com/nodejs/corepack){rel=""nofollow""} makes sure you are using the correct version for package manager when you run corresponding commands. Projects might have `packageManager` field in their `package.json`.
+
+Under projects with configuration as shown below, Corepack will install `v7.5.0` of `pnpm` (if you don't have it already) and use it to run your commands.
+
+```jsonc [package.json]
+{
+  "packageManager": "pnpm@7.5.0"
+}
+```
+
+#### Use ESLint
+
+We use [ESLint](https://eslint.org){rel=""nofollow""} for both linting and formatting with [`@nuxt/eslint`](https://github.com/nuxt/eslint){rel=""nofollow""}.
+
+##### IDE Setup
+
+We recommend using [VS Code](https://code.visualstudio.com){rel=""nofollow""} along with the [ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint){rel=""nofollow""}. If you would like, you can enable auto-fix and formatting when you save the code you are editing:
+
+```json [settings.json]
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "never",
+    "source.fixAll.eslint": "explicit"
+  }
+}
+```
+
+#### No Prettier
+
+Since ESLint is already configured to format the code, there is no need to duplicate the functionality with Prettier. To format the code, you can run `yarn lint --fix`, `pnpm lint --fix`, `bun run lint --fix`, or `deno run lint --fix` or referring the [ESLint section](https://nuxt.com/docs/4.x/community/contribution#use-eslint) for IDE Setup.
+
+If you have Prettier installed in your editor, we recommend you disable it when working on the project to avoid conflict.
+
+#### Package Manager
+
+We recommend `pnpm` as a package manager for modules, libraries and apps.
+
+It is important to enable Corepack to ensure you are on the same version of the package manager as the project. Corepack is built-in to new node versions for seamless package manager integration.
+
+To enable it, run
+
+```bash [Terminal]
+corepack enable
+```
+
+You only need to do this one time, after Node.js is installed on your computer.
+
+## Documentation Style Guide
+
+Documentation is an essential part of Nuxt. We aim to be an intuitive framework - and a big part of that is making sure that both the developer experience and the docs are perfect across the ecosystem. 👌
+
+Here are some tips that may help improve your documentation:
+
+- Avoid subjective words like *simply*, *just*, \*obviously...\* when possible. :br Keep in mind your readers can have different backgrounds and experiences. Therefore, these words don't convey meaning and can be harmful. :caution\[Simply make sure the function returns a promise.]{icon="i-lucide-circle-x"}:tip\[Make sure the function returns a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise){rel=""nofollow""}.]{icon="i-lucide-circle-check"}
+- Prefer [active voice](https://developers.google.com/tech-writing/one/active-voice){rel=""nofollow""}. :caution\[An error will be thrown by Nuxt.]{icon="i-lucide-circle-x"}:tip\[Nuxt will throw an error.]{icon="i-lucide-circle-check"}
+
+::read-more
+
+Learn how to contribute to the documentation.
+::

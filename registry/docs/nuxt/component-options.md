@@ -1,0 +1,213 @@
+# Component Options
+
+## `asyncData` and `fetch`
+
+Nuxt 3 provides new options for [fetching data from an API](https://nuxt.com/docs/4.x/getting-started/data-fetching).
+
+### Isomorphic Fetch
+
+In Nuxt 2 you might use `@nuxtjs/axios` or `@nuxt/http` to fetch your data - or just the polyfilled global `fetch`.
+
+In Nuxt 3 you can use a globally available `fetch` method that has the same API as [the Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch){rel=""nofollow""} or [`$fetch`](https://nuxt.com/docs/4.x/api/utils/dollarfetch) method which is using [unjs/ofetch](https://github.com/unjs/ofetch){rel=""nofollow""}. It has a number of benefits, including:
+
+1. It will handle 'smartly' making [direct API calls](https://nuxt.com/docs/4.x/guide/concepts/server-engine#direct-api-calls) if it's running on the server, or making a client-side call to your API if it's running on the client. (It can also handle calling third-party APIs.)
+2. Plus, it comes with convenience features including automatically parsing responses and stringifying data.
+
+You can read more [about direct API calls](https://nuxt.com/docs/4.x/guide/concepts/server-engine#direct-api-calls) or [fetching data](https://nuxt.com/docs/4.x/getting-started/data-fetching).
+
+### Composables
+
+Nuxt 3 provides new composables for fetching data: [`useAsyncData`](https://nuxt.com/docs/4.x/api/composables/use-async-data) and `useFetch`. They each have 'lazy' variants (`useLazyAsyncData` and `useLazyFetch`), which do not block client-side navigation.
+
+In Nuxt 2, you'd fetch your data in your component using a syntax similar to:
+
+```ts
+export default {
+  async asyncData ({ params, $http }) {
+    const post = await $http.$get(`https://api.nuxtjs.dev/posts/${params.id}`)
+    return { post }
+  },
+  // or alternatively
+  fetch () {
+    this.post = await $http.$get(`https://api.nuxtjs.dev/posts/${params.id}`)
+  },
+}
+```
+
+Within your methods and templates, you could use the `post` variable similar how you'd use any other piece of data provided by your component.
+
+With Nuxt 3, you can perform this data fetching using composables in your `setup()` method or `<script setup>` tag:
+
+```vue
+<script setup lang="ts">
+// Define params wherever, through `defineProps()`, `useRoute()`, etc.
+const { data: post, refresh } = await useAsyncData('post', () => $fetch(`https://api.nuxtjs.dev/posts/${params.id}`))
+// Or instead - useFetch is a convenience wrapper around useAsyncData when you're just performing a simple fetch
+const { data: post, refresh } = await useFetch(`https://api.nuxtjs.dev/posts/${params.id}`)
+</script>
+```
+
+You can now use `post` inside of your Nuxt 3 template, or call `refresh` to update the data.
+
+::note
+Despite the names, [`useFetch`](https://nuxt.com/docs/4.x/api/composables/use-fetch) is not a direct replacement of the `fetch()` hook. Rather, [`useAsyncData`](https://nuxt.com/docs/4.x/api/composables/use-async-data) replaces both hooks and is more customizable; it can do more than simply fetching data from an endpoint. [`useFetch`](https://nuxt.com/docs/4.x/api/composables/use-fetch) is a convenience wrapper around [`useAsyncData`](https://nuxt.com/docs/4.x/api/composables/use-async-data) for simply fetching data from an endpoint.
+::
+
+### Migration
+
+1. Replace the `asyncData` hook with [`useAsyncData`](https://nuxt.com/docs/4.x/api/composables/use-async-data) or [`useFetch`](https://nuxt.com/docs/4.x/api/composables/use-fetch) in your page/component.
+2. Replace the `fetch` hook with [`useAsyncData`](https://nuxt.com/docs/4.x/api/composables/use-async-data) or [`useFetch`](https://nuxt.com/docs/4.x/api/composables/use-fetch) in your component.
+
+## `head`
+
+:read-more{to="https://nuxt.com/docs/4.x/migration/meta"}
+
+## `key`
+
+You can now define a key within the [`definePageMeta`](https://nuxt.com/docs/4.x/api/utils/define-page-meta) compiler macro.
+
+```diff [app/pages/index.vue]
+- <script>
+- export default {
+-   key: 'index'
+-   // or a method
+-   // key: route => route.fullPath
+- }
++ <script setup>
++ definePageMeta({
++   key: 'index'
++   // or a method
++   // key: route => route.fullPath
++ })
+</script>
+```
+
+## `layout`
+
+:read-more{to="https://nuxt.com/docs/4.x/migration/pages-and-layouts"}
+
+## `loading`
+
+This feature is not yet supported in Nuxt 3.
+
+## `middleware`
+
+:read-more{to="https://nuxt.com/docs/4.x/migration/plugins-and-middleware"}
+
+## `scrollToTop`
+
+This feature is not yet supported in Nuxt 3. If you want to overwrite the default scroll behavior of `vue-router`, you can do so in an `~/router.options.ts` (see [docs](https://nuxt.com/docs/4.x/guide/recipes/custom-routing#router-options)) for more info.
+Similar to `key`, specify it within the [`definePageMeta`](https://nuxt.com/docs/4.x/api/utils/define-page-meta) compiler macro.
+
+```diff [app/pages/index.vue]
+- <script>
+- export default {
+-   scrollToTop: false
+- }
++ <script setup>
++ definePageMeta({
++   scrollToTop: false
++ })
+</script>
+```
+
+## `transition`
+
+:read-more{to="https://nuxt.com/docs/4.x/getting-started/transitions"}
+
+## `validate`
+
+The validate hook in Nuxt 3 only accepts a single argument, the `route`. Just as in Nuxt 2, you can return a boolean value. If you return false and another match can't be found, this will mean a 404. You can also directly return an object with `status`/`statusText` to respond immediately with an error (other matches will not be checked).
+
+```diff [app/pages/users/[id\\].vue]
+- <script>
+- export default {
+-   async validate({ params }) {
+-     return /^\d+$/.test(params.id)
+-   }
+- }
++ <script setup>
++ definePageMeta({
++   validate: async (route) => {
++     const nuxtApp = useNuxtApp()
++     return /^\d+$/.test(route.params.id)
++   }
++ })
+  </script>
+```
+
+## `watchQuery`
+
+This is not supported in Nuxt 3. Instead, you can directly use a watcher to trigger refetching data.
+
+```vue [app/pages/users/[id\\].vue]
+<script setup lang="ts">
+const route = useRoute()
+const { data, refresh } = await useFetch('/api/user')
+watch(() => route.query, () => refresh())
+</script>
+```
+
+# Runtime Config
+
+If you wish to reference environment variables within your Nuxt 3 app, you will need to use runtime config.
+
+When referencing these variables within your components, you will have to use the [`useRuntimeConfig`](https://nuxt.com/docs/4.x/api/composables/use-runtime-config) composable in your setup method (or Nuxt plugin).
+
+In the `server/` portion of your app, you can use [`useRuntimeConfig`](https://nuxt.com/docs/4.x/api/composables/use-runtime-config) without any import.
+
+:read-more{to="https://nuxt.com/docs/4.x/guide/going-further/runtime-config"}
+
+## Migration
+
+1. Add any environment variables that you use in your app to the `runtimeConfig` property of the `nuxt.config` file.
+2. Migrate `process.env` to [`useRuntimeConfig`](https://nuxt.com/docs/4.x/api/composables/use-runtime-config) throughout the Vue part of your app.
+
+::code-group
+
+```ts [nuxt.config.ts]
+export default defineNuxtConfig({
+  runtimeConfig: {
+    // Private config that is only available on the server
+    apiSecret: '123',
+    // Config within public will be also exposed to the client
+    public: {
+      apiBase: '/api',
+    },
+  },
+})
+```
+
+```vue [app/pages/index.vue]
+<script setup lang="ts">
+const config = useRuntimeConfig()
+
+// instead of process.env you will now access config.public.apiBase
+console.log(config.public.apiBase)
+</script>
+```
+
+```ts [server/api/hello.ts]
+export default defineEventhandler((event) => {
+  const config = useRuntimeConfig(event)
+  // In server, you can now access config.apiSecret, in addition to config.public
+  console.log(config.apiSecret)
+  console.log(config.public.apiBase)
+})
+```
+
+```ini [.env]
+# Runtime config values are automatically replaced by matching environment variables at runtime
+NUXT_API_SECRET=api_secret_token
+NUXT_PUBLIC_API_BASE=https://nuxtjs.org
+```
+
+::
+
+# Nuxt Docs
+
+This repository contains the documentation of Nuxt, hosted on <https://nuxt.com/docs/4.x/getting-started/introduction>{rel=""nofollow""}
+
+## Contributing
+
+Have a look at <https://github.com/nuxt/nuxt.com>{rel=""nofollow""} to run the website locally.

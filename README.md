@@ -68,12 +68,22 @@ The registry is a collection of pre-processed markdown files committed to this r
 | Library      | Version | Topics | Source        |
 | ------------ | ------- | ------ | ------------- |
 | AI SDK       | v4      | 128    | llms.txt      |
+| Astro        | v5      | 235    | llms-full.txt |
+| Bun          | v1      | 197    | llms-full.txt |
+| Deno         | v2      | 228    | llms-full.txt |
 | Drizzle ORM  | v0.36   | 161    | llms-full.txt |
-| Hono         | v4      | 63     | llms-full.txt |
+| Hono         | v4      | 62     | llms-full.txt |
 | Next.js      | v15     | 287    | llms-full.txt |
+| Nuxt         | v3      | 506    | llms-full.txt |
+| Payload CMS  | v3      | 154    | llms-full.txt |
 | React        | v19     | 161    | llms.txt      |
-| Tailwind CSS | v4      | —      | html          |
-| tRPC         | v11     | 62     | llms-full.txt |
+| Svelte       | v5      | 116    | llms-full.txt |
+| Tailwind CSS | v4      | 186    | github        |
+| TanStack     | v5      | 24     | llms.txt      |
+| tRPC         | v11     | 59     | llms-full.txt |
+| Valibot      | v1      | 84     | llms-full.txt |
+| Vite         | v6      | 38     | llms-full.txt |
+| Vitest       | v3      | 86     | llms-full.txt |
 | Zod          | v3      | 28     | llms-full.txt |
 
 Docs are automatically updated weekly via GitHub Actions. Contributions welcome.

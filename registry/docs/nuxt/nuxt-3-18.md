@@ -1,0 +1,119 @@
+# Nuxt 3.18
+
+## 🧪 Lazy Hydration Macros
+
+Building on the delayed hydration support from v3.16, we now support **lazy hydration macros** ([#31192](https://github.com/nuxt/nuxt/pull/31192){rel=""nofollow""})! These provide a more ergonomic way to control component hydration:
+
+```vue
+<script setup lang="ts">
+const LazyHydrationMyComponent = defineLazyHydrationComponent(
+  'visible',
+  () => import('./components/MyComponent.vue')
+)
+</script>
+<template>
+  <div>
+    <!-- 
+      Hydration will be triggered when
+      the element(s) is 100px away from entering the viewport.
+    -->
+    <LazyHydrationMyComponent :hydrate-on-visible="{ rootMargin: '100px' }" />
+  </div>
+</template>
+```
+
+These macros make it possible to use Nuxt's lazy hydration utilities alongside explicit component imports.
+
+## ♿️ Accessibility Improvements
+
+We've enhanced accessibility by including `<NuxtRouteAnnouncer>` in the built-in `app.vue` ([#32621](https://github.com/nuxt/nuxt/pull/32621){rel=""nofollow""}). This means page changes will be announced to screen readers, making navigation more accessible for users with visual impairments. (This only applies if you do not have an `app.vue` in your project. If you do, please keep `<NuxtRouteAnnouncer>` in your `app.vue`!)
+
+## 🛠️ Enhanced Development Experience
+
+### Chrome DevTools Workspace Integration
+
+We've added **Chrome DevTools workspace integration** ([#32084](https://github.com/nuxt/nuxt/pull/32084){rel=""nofollow""}), allowing you to edit your Nuxt source files directly from Chrome DevTools. This creates a better debugging experience where changes made in DevTools are reflected in your actual source files.
+
+### Better Component Type Safety
+
+Component type safety has been improved with:
+
+- **Typed slots for `<ClientOnly>` and `<DevOnly>`** ([#32707](https://github.com/nuxt/nuxt/pull/32707){rel=""nofollow""}) - better IntelliSense and error checking
+- **Exported `<NuxtTime>` prop types** ([#32547](https://github.com/nuxt/nuxt/pull/32547){rel=""nofollow""}) - easier to extend and customize
+
+### New Auto-Import: `onWatcherCleanup`
+
+The `onWatcherCleanup` function from `vue` is now available as an auto-import ([#32396](https://github.com/nuxt/nuxt/pull/32396){rel=""nofollow""}), making it easier to clean up watchers and prevent memory leaks:
+
+```ts
+const { data } = useAsyncData('users', fetchUsers)
+
+watch(data, (newData) => {
+  const interval = setInterval(() => {
+    // Some periodic task
+  }, 1000)
+  
+  // Clean up when the watcher is stopped
+  onWatcherCleanup(() => {
+    clearInterval(interval)
+  })
+})
+```
+
+## 📊 Observability Enhancements
+
+Page routes are now **exposed to Nitro for observability** ([#32617](https://github.com/nuxt/nuxt/pull/32617){rel=""nofollow""}), enabling better monitoring and analytics integration with supported platforms. This allows observability tools to track page-level metrics more effectively.
+
+## 🔧 Module Development Improvements
+
+Module authors get several quality-of-life improvements:
+
+### Simplified Server Imports
+
+The `addServerImports` kit utility now **supports single imports** ([#32289](https://github.com/nuxt/nuxt/pull/32289){rel=""nofollow""}), making it easier to add individual server utilities:
+
+```ts
+// Before: had to wrap in array
+addServerImports([{ from: 'my-package', name: 'myUtility' }])
+
+// Now: can pass directly
+addServerImports({ from: 'my-package', name: 'myUtility' })
+```
+
+### TypeScript Configuration
+
+Modules can now \**add to `typescript.hoist`*\* ([#32601](https://github.com/nuxt/nuxt/pull/32601){rel=""nofollow""}), giving them more control over TypeScript configuration and type generation.
+
+## ⚡️ Performance Improvements
+
+We've made several performance optimizations:
+
+- **Improved Vite-node communication** via internal socket ([#32417](https://github.com/nuxt/nuxt/pull/32417){rel=""nofollow""}) for faster development builds
+- **Migration to `oxc-walker`** ([#32250](https://github.com/nuxt/nuxt/pull/32250){rel=""nofollow""}) and **oxc for `onPrehydrate` transforms** ([#32045](https://github.com/nuxt/nuxt/pull/32045){rel=""nofollow""}) for faster code transformations
+
+## 🐛 Bug Fixes
+
+This release also includes several important fixes:
+
+- **Improved data fetching**: When computed keys change, old data is now properly retained ([#32616](https://github.com/nuxt/nuxt/pull/32616){rel=""nofollow""})
+- **Better scroll behavior**: `scrollBehaviorType` is now only used for hash scrolling ([#32622](https://github.com/nuxt/nuxt/pull/32622){rel=""nofollow""})
+- **Fixed directory aliases**: Added trailing slashes to some directory aliases for better consistency ([#32755](https://github.com/nuxt/nuxt/pull/32755){rel=""nofollow""})
+
+## ✅ Upgrading
+
+As usual, our recommendation for upgrading is to run:
+
+```sh
+npx nuxi@latest upgrade --dedupe
+```
+
+This refreshes your lockfile and pulls in all the latest dependencies that Nuxt relies on, especially from the unjs ecosystem.
+
+## Full release notes
+
+::read-more
+
+Read the full release notes of Nuxt `v3.18.0`.
+::
+
+A huge thank you to everyone who's been a part of this release. Over the next six months, we'll continue backporting compatible v4 features and bug fixes, so please keep the feedback coming! ❤️

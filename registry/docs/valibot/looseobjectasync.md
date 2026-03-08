@@ -1,0 +1,179 @@
+### looseObjectAsync
+
+Creates a loose object schema.
+
+```ts
+const Schema = v.looseObjectAsync<TEntries, TMessage>(entries, message);
+```
+
+#### Generics
+
+- `TEntries`
+- `TMessage`
+
+#### Parameters
+
+- `entries`
+- `message`
+
+##### Explanation
+
+With `looseObjectAsync` you can validate the data type of the input and whether the content matches `entries`. If the input is not an object, you can use `message` to customize the error message.
+
+> The difference to `objectAsync` is that this schema includes any unknown entries in the output. In addition, this schema filters certain entries from the unknown entries for security reasons.
+
+#### Returns
+
+- `Schema`
+
+#### Examples
+
+The following examples show how `looseObjectAsync` can be used. Please see the object guide for more examples and explanations.
+
+##### New user schema
+
+Schema to validate a loose object containing specific new user details.
+
+```ts
+import { isEmailPresent } from '~/api';
+
+const NewUserSchema = v.looseObjectAsync({
+  firstName: v.pipe(v.string(), v.minLength(2), v.maxLength(45)),
+  lastName: v.pipe(v.string(), v.minLength(2), v.maxLength(45)),
+  email: v.pipeAsync(
+    v.string(),
+    v.email(),
+    v.checkAsync(isEmailPresent, 'The email is already in use by another user.')
+  ),
+  password: v.pipe(v.string(), v.minLength(8)),
+  avatar: v.optional(v.pipe(v.string(), v.url())),
+});
+```
+
+#### Related
+
+The following APIs can be combined with `looseObjectAsync`.
+
+##### Schemas
+
+\<ApiList
+items={\[
+'any',
+'array',
+'bigint',
+'blob',
+'boolean',
+'custom',
+'date',
+'enum',
+'exactOptional',
+'file',
+'function',
+'instance',
+'intersect',
+'lazy',
+'literal',
+'looseObject',
+'looseTuple',
+'map',
+'nan',
+'never',
+'nonNullable',
+'nonNullish',
+'nonOptional',
+'null',
+'nullable',
+'nullish',
+'number',
+'object',
+'objectWithRest',
+'optional',
+'picklist',
+'promise',
+'record',
+'set',
+'strictObject',
+'strictTuple',
+'string',
+'symbol',
+'tuple',
+'tupleWithRest',
+'undefined',
+'undefinedable',
+'union',
+'unknown',
+'variant',
+'void',
+]}
+/>
+
+##### Methods
+
+\<ApiList
+items={\['config', 'getDefault', 'getFallback', 'keyof', 'omit', 'pick']}
+/>
+
+##### Actions
+
+\<ApiList
+items={\[
+'brand',
+'check',
+'flavor',
+'guard',
+'partialCheck',
+'rawCheck',
+'rawTransform',
+'readonly',
+'title',
+'transform',
+]}
+/>
+
+##### Utils
+
+##### Async
+
+\<ApiList
+items={\[
+'arrayAsync',
+'checkAsync',
+'customAsync',
+'exactOptionalAsync',
+'fallbackAsync',
+'forwardAsync',
+'getDefaultsAsync',
+'getFallbacksAsync',
+'intersectAsync',
+'lazyAsync',
+'looseTupleAsync',
+'mapAsync',
+'nonNullableAsync',
+'nonNullishAsync',
+'nonOptionalAsync',
+'nullableAsync',
+'nullishAsync',
+'objectAsync',
+'objectWithRestAsync',
+'optionalAsync',
+'parseAsync',
+'parserAsync',
+'partialAsync',
+'partialCheckAsync',
+'pipeAsync',
+'rawCheckAsync',
+'rawTransformAsync',
+'recordAsync',
+'requiredAsync',
+'safeParseAsync',
+'safeParserAsync',
+'setAsync',
+'strictObjectAsync',
+'strictTupleAsync',
+'transformAsync',
+'tupleAsync',
+'tupleWithRestAsync',
+'unionAsync',
+'variantAsync',
+]}
+/>

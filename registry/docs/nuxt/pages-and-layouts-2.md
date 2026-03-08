@@ -1,0 +1,234 @@
+# Pages and Layouts
+
+## `app.vue`
+
+Nuxt 3 provides a central entry point to your app via `~/app.vue`.
+
+::note
+If you don't have an `app.vue` file in your source directory, Nuxt will use its own default version.
+::
+
+This file is a great place to put any custom code that needs to be run once when your app starts up, as well as any components that are present on every page of your app. For example, if you only have one layout, you can move this to `app.vue` instead.
+
+:read-more{to="https://nuxt.com/docs/4.x/directory-structure/app/app"}
+
+:link-example{to="https://nuxt.com/docs/4.x/examples/hello-world"}
+
+### Migration
+
+Consider creating an `app.vue` file and including any logic that needs to run once at the top-level of your app. You can check out [an example here](https://nuxt.com/docs/4.x/directory-structure/app/app).
+
+## Layouts
+
+If you are using layouts in your app for multiple pages, there is only a slight change required.
+
+In Nuxt 2, the `<Nuxt>` component is used within a layout to render the current page. In Nuxt 3, layouts use slots instead, so you will have to replace that component with a `<slot />`. This also allows advanced use cases with named and scoped slots. [Read more about layouts](https://nuxt.com/docs/4.x/directory-structure/app/layouts).
+
+You will also need to change how you define the layout used by a page using the `definePageMeta` compiler macro. Layouts will be kebab-cased. So `app/layouts/customLayout.vue` becomes `custom-layout` when referenced in your page.
+
+### Migration
+
+1. Replace `<Nuxt />` with `<slot />`
+   ```diff [app/layouts/custom.vue]
+     
+       
+         
+   -       
+   +       
+         
+       
+     
+   ```
+2. Use [`definePageMeta`](https://nuxt.com/docs/4.x/api/utils/define-page-meta)to select the layout used by your page.
+   ```diff [app/pages/index.vue]
+   + 
+   + definePageMeta({
+   +   layout: 'custom'
+   + })
+   - 
+   - export default {
+   -   layout: 'custom'
+   - }
+     
+   ```
+3. Move `~/layouts/_error.vue` to `~/error.vue`. See [the error handling docs](https://nuxt.com/docs/4.x/getting-started/error-handling). If you want to ensure that this page uses a layout, you can use [`<NuxtLayout>`](https://nuxt.com/docs/4.x/directory-structure/app/layouts) directly within `error.vue`:
+   ```vue [error.vue]
+
+     
+       
+         
+       
+     
+
+   ```
+
+## Pages
+
+Nuxt 3 ships with an optional `vue-router` integration triggered by the existence of a [`app/pages/`](https://nuxt.com/docs/4.x/directory-structure/app/pages) directory in your source directory. If you only have a single page, you may consider instead moving it to `app.vue` for a lighter build.
+
+### Dynamic Routes
+
+The format for defining dynamic routes in Nuxt 3 is slightly different from Nuxt 2, so you may need to rename some of the files within `app/pages/`.
+
+1. Where you previously used `_id` to define a dynamic route parameter you now use `[id]`.
+2. Where you previously used `_.vue` to define a catch-all route, you now use `[...slug].vue`.
+
+### Nested Routes
+
+In Nuxt 2, you will have defined any nested routes (with parent and child components) using `<Nuxt>` and `<NuxtChild>`. In Nuxt 3, these have been replaced with a single `<NuxtPage>` component.
+
+### Page Keys and Keep-alive Props
+
+If you were passing a custom page key or keep-alive props to `<Nuxt>`, you will now use `definePageMeta` to set these options.
+
+:read-more{to="https://nuxt.com/docs/4.x/directory-structure/app/pages#special-metadata"}
+
+### Page and Layout Transitions
+
+If you have been defining transitions for your page or layout directly in your component options, you will now need to use `definePageMeta` to set the transition. Since Vue 3, [-enter and -leave CSS classes have been renamed](https://v3-migration.vuejs.org/breaking-changes/transition.html){rel=""nofollow""}. The `style` prop from `<Nuxt>` no longer applies to transition when used on `<slot>`, so move the styles to your `-active` class.
+
+:read-more{to="https://nuxt.com/docs/4.x/getting-started/transitions"}
+
+### Migration
+
+1. Rename any pages with dynamic parameters to match the new format.
+2. Update `<Nuxt>` and `<NuxtChild>` to be `<NuxtPage>`.
+3. If you're using the Composition API, you can also migrate `this.$route` and `this.$router` to use [`useRoute`](https://nuxt.com/docs/4.x/api/composables/use-route) and [`useRouter`](https://nuxt.com/docs/4.x/api/composables/use-router) composables.
+
+#### Example: Dynamic Routes
+
+::code-group
+
+```text [Nuxt 2]
+- URL: /users
+- Page: /pages/users/index.vue
+
+- URL: /users/some-user-name
+- Page: /pages/users/_user.vue
+- Usage: params.user
+
+- URL: /users/some-user-name/edit
+- Page: /pages/users/_user/edit.vue
+- Usage: params.user
+
+- URL: /users/anything-else
+- Page: /pages/users/_.vue
+- Usage: params.pathMatch
+```
+
+```text [Nuxt 3]
+- URL: /users
+- Page: /pages/users/index.vue
+
+- URL: /users/some-user-name
+- Page: /pages/users/[user].vue
+- Usage: params.user
+
+- URL: /users/some-user-name/edit
+- Page: /pages/users/[user]/edit.vue
+- Usage: params.user
+
+- URL: /users/anything-else
+- Page: /pages/users/[...slug].vue
+- Usage: params.slug
+```
+
+::
+
+#### Example: Nested Routes and `definePageMeta`
+
+::code-group
+
+```vue [Nuxt 2]
+<template>
+  <div>
+    <NuxtChild
+      keep-alive
+      :keep-alive-props="{ exclude: ['modal'] }"
+      :nuxt-child-key="$route.slug"
+    />
+  </div>
+</template>
+
+<script>
+export default {
+  transition: 'page', // or { name: 'page' }
+}
+</script>
+```
+
+```vue [Nuxt 3]
+<template>
+  <div>
+    <NuxtPage />
+  </div>
+</template>
+
+<script setup lang="ts">
+// This compiler macro works in both <script> and <script setup>
+definePageMeta({
+  // you can also pass a string or a computed property
+  key: route => route.slug,
+  transition: {
+    name: 'page',
+  },
+  keepalive: {
+    exclude: ['modal'],
+  },
+})
+</script>
+```
+
+::
+
+## `<NuxtLink>` Component
+
+Most of the syntax and functionality are the same for the global [NuxtLink](https://nuxt.com/docs/4.x/api/components/nuxt-link) component. If you have been using the shortcut `<NLink>` format, you should update this to use `<NuxtLink>`.
+
+`<NuxtLink>` is now a drop-in replacement for *all* links, even external ones. You can read more about it, and how to extend it to provide your own link component.
+
+:read-more{to="https://nuxt.com/docs/4.x/api/components/nuxt-link"}
+
+## Programmatic Navigation
+
+When migrating from Nuxt 2 to Nuxt 3, you will have to update how you programmatically navigate your users. In Nuxt 2, you had access to the underlying Vue Router with `this.$router`. In Nuxt 3, you can use the `navigateTo()` utility method which allows you to pass a route and parameters to Vue Router.
+
+::warning
+Make sure to always `await` on [`navigateTo`](https://nuxt.com/docs/4.x/api/utils/navigate-to) or chain its result by returning from functions.
+::
+
+::code-group
+
+```vue [Nuxt 2]
+<script>
+export default {
+  methods: {
+    navigate () {
+      this.$router.push({
+        path: '/search',
+        query: {
+          name: 'first name',
+          type: '1',
+        },
+      })
+    },
+  },
+}
+</script>
+```
+
+```vue [Nuxt 3]
+<script setup lang="ts">
+function navigate () {
+  return navigateTo({
+    path: '/search',
+    query: {
+      name: 'first name',
+      type: '1',
+    },
+  })
+}
+</script>
+```
+
+::

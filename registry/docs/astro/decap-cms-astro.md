@@ -1,0 +1,201 @@
+# Decap CMS & Astro
+
+> Add content to your Astro project using Decap as a CMS
+
+[Decap CMS](https://www.decapcms.org/) (formerly Netlify CMS) is an open-source, Git-based content management system.
+
+Decap allows you to take full advantage of all of Astro’s features, including image optimization and content collections.
+
+Decap adds a route (typically `/admin`) to your project that will load a React app to allow authorized users to manage content directly from the deployed website. Decap will commit changes directly to your Astro project’s source repository.
+
+## Installing DecapCMS
+
+[Section titled “Installing DecapCMS”](#installing-decapcms)
+
+There are two options for adding Decap to Astro:
+
+1. [Install Decap via a package manager](https://decapcms.org/docs/install-decap-cms/#installing-with-npm) with the following command:
+
+   - npm
+
+     ```shell
+     npm install decap-cms-app
+     ```
+
+   - pnpm
+
+     ```shell
+     pnpm add decap-cms-app
+     ```
+
+   - Yarn
+
+     ```shell
+     yarn add decap-cms-app
+     ```
+
+2. Import the package into a `<script>` tag in your page `<body>`
+
+   /admin
+
+   ```html
+
+     
+     
+
+   ```
+
+## Configuration
+
+[Section titled “Configuration”](#configuration)
+
+1. Create a static admin folder at `public/admin/`
+
+2. Add `config.yml` to `public/admin/`:
+
+   - public
+
+     - admin
+
+       - config.yml
+
+3. To add support for content collections, configure each schema in `config.yml`. The following example configures a `blog` collection, defining a `label` for each entry’s frontmatter property:
+
+   /public/admin/config.yml
+
+   ```yml
+   collections:
+     - name: "blog" # Used in routes, e.g., /admin/collections/blog
+       label: "Blog" # Used in the UI
+       folder: "src/content/blog" # The path to the folder where the documents are stored
+       create: true # Allow users to create new documents in this collection
+       fields: # The fields for each document, usually in frontmatter
+         - { label: "Layout", name: "layout", widget: "hidden", default: "blog" }
+         - { label: "Title", name: "title", widget: "string" }
+         - { label: "Publish Date", name: "date", widget: "datetime" }
+         - { label: "Featured Image", name: "thumbnail", widget: "image" }
+         - { label: "Rating (scale of 1-5)", name: "rating", widget: "number" }
+         - { label: "Body", name: "body", widget: "markdown" }
+   ```
+
+4. Add the `admin` route for your React app in `src/pages/admin.html`.
+
+   - public
+
+     - admin
+
+       - config.yml
+
+   - src
+
+     - pages
+
+       - admin.html
+
+   /src/pages/admin.html
+
+   ```html
+   <!doctype html>
+
+     
+       
+       
+       
+       
+       Content Manager
+     
+     
+       
+     
+
+   ```
+
+5. To enable media uploads to a specific folder via the Decap editor, add an appropriate path:
+
+   /public/admin/config.yml
+
+   ```yml
+   media_folder: "src/assets/images" # Location where files will be stored in the repo
+   public_folder: "src/assets/images" # The src attribute for uploaded media
+   ```
+
+See [the Decap CMS configuration documentation](https://decapcms.org/docs/configure-decap-cms/) for full instructions and options.
+
+## Usage
+
+[Section titled “Usage”](#usage)
+
+Navigate to `yoursite.com/admin/` to use the Decap CMS editor.
+
+## Authentication
+
+[Section titled “Authentication”](#authentication)
+
+### Decap CMS with Netlify Identity
+
+[Section titled “Decap CMS with Netlify Identity”](#decap-cms-with-netlify-identity)
+
+Decap CMS was originally developed by Netlify and has first class support for [Netlify Identity](https://docs.netlify.com/security/secure-access-to-sites/identity/).
+
+When deploying to Netlify, configure Identity for your project via the Netlify dashboard and include the [Netlify Identity Widget](https://github.com/netlify/netlify-identity-widget) on the `admin` route of your project. Optionally include the Identity Widget on the homepage of your site if you plan to invite new users via email.
+
+### Decap CMS with External OAuth Clients
+
+[Section titled “Decap CMS with External OAuth Clients”](#decap-cms-with-external-oauth-clients)
+
+When deploying to hosting providers other than Netlify, you must create your own OAuth routes.
+
+In Astro, this can be done with on-demand rendered routes in your project configured with [an adapter](/en/guides/on-demand-rendering/) enabled.
+
+See [Decap’s OAuth Docs](https://decapcms.org/docs/external-oauth-clients/) for a list of compatible community-maintained OAuth clients.
+
+## Community Resources
+
+[Section titled “Community Resources”](#community-resources)
+
+- Netlify Identity Template: [astro-decap-ssg-netlify](https://github.com/OliverSpeir/astro-decap-ssg-netlify-identity)
+
+- On-demand rendering OAuth Routes with Astro Template: [astro-decap-starter-ssr](https://github.com/OliverSpeir/astro-decap-starter-ssr)
+
+- Blog Post: [Author your Astro site’s content with Git-based CMSs](https://aalam.vercel.app/blog/astro-and-git-cms-netlify) by Aftab Alam
+
+- Youtube Tutorial: [Create a Custom Blog with Astro & NetlifyCMS in MINUTES!](https://www.youtube.com/watch?v=3yip2wSRX_4) by Kumail Pirzada
+
+## Production Sites
+
+[Section titled “Production Sites”](#production-sites)
+
+The following sites use Astro + Decap CMS in production:
+
+- [yunielacosta.com](https://www.yunielacosta.com/) by Yuniel Acosta — [source code on GitHub](https://github.com/yacosta738/yacosta738.github.io) (Netlify CMS)
+- [portfolioris.nl](https://www.portfolioris.nl/) by Joris Hulsbosch – [source code on GitHub](https://github.com/portfolioris/portfolioris.nl)
+
+## Themes
+
+[Section titled “Themes”](#themes)
+
+- [![](/_astro/astros.CA8z6dbD_Z1fUXSm.webp) Astros](https://astro.build/themes/details/astros)
+- [![](/_astro/enhanced-astro-starter.BDAzOMVv_ghcL4.webp) Enhanced Astro Starter](https://astro.build/themes/details/enhanced-astro-starter)
+- [![](/_astro/astro-decap-starter.CuC8RtgM_IaqHQ.webp) Astro Decap CMS Starter](https://astro.build/themes/details/astro-decap-cms-starter)
+
+# Directus & Astro
+
+> Add content to your Astro project using Directus as a CMS
+
+[Directus](https://directus.io/) is a backend-as-a-service which can be used to host data and content for your Astro project.
+
+## Official Resources
+
+[Section titled “Official Resources”](#official-resources)
+
+- [Getting Started with Directus and Astro](https://docs.directus.io/blog/getting-started-directus-astro.html).
+
+## Community Resources
+
+[Section titled “Community Resources”](#community-resources)
+
+[Using Directus CMS with Neon Postgres and Astro to build a blog ](https://neon.tech/guides/directus-cms)
+
+Have a resource to share?
+
+If you found (or made!) a helpful video or blog post about using Directus with Astro, [add it to this list](https://github.com/withastro/docs/edit/main/src/content/docs/en/guides/cms/directus.mdx)!

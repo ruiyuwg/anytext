@@ -1,0 +1,159 @@
+# Views
+
+## `app.vue`
+
+![The app.vue file is the entry point of your application](https://nuxt.com/assets/docs/getting-started/views/app.svg)
+
+By default, Nuxt will treat this file as the **entrypoint** and render its content for every route of the application.
+
+```vue [app.vue]
+<template>
+  <div>
+    <h1>Welcome to the homepage</h1>
+  </div>
+</template>
+```
+
+::tip
+If you are familiar with Vue, you might wonder where `main.js` is (the file that normally creates a Vue app). Nuxt does this behind the scene.
+::
+
+## Components
+
+![Components are reusable pieces of UI](https://nuxt.com/assets/docs/getting-started/views/components.svg)
+
+Most components are reusable pieces of the user interface, like buttons and menus. In Nuxt, you can create these components in the [`components/`](https://nuxt.com/docs/3.x/directory-structure/components) directory, and they will be automatically available across your application without having to explicitly import them.
+
+::code-group
+
+```vue [app.vue]
+<template>
+  <div>
+    <h1>Welcome to the homepage</h1>
+    <AppAlert>
+      This is an auto-imported component.
+    </AppAlert>
+  </div>
+</template>
+```
+
+```vue [components/AppAlert.vue]
+<template>
+  <span>
+    <slot />
+  </span>
+</template>
+```
+
+::
+
+## Pages
+
+![Pages are views tied to a specific route](https://nuxt.com/assets/docs/getting-started/views/pages.svg)
+
+Pages represent views for each specific route pattern. Every file in the [`pages/`](https://nuxt.com/docs/3.x/directory-structure/pages) directory represents a different route displaying its content.
+
+To use pages, create an `pages/index.vue` file and add `<NuxtPage />` component to the [`app.vue`](https://nuxt.com/docs/3.x/directory-structure/app) (or remove `app.vue` for default entry). You can now create more pages and their corresponding routes by adding new files in the [`pages/`](https://nuxt.com/docs/3.x/directory-structure/pages) directory.
+
+::code-group
+
+```vue [pages/index.vue]
+<template>
+  <div>
+    <h1>Welcome to the homepage</h1>
+    <AppAlert>
+      This is an auto-imported component
+    </AppAlert>
+  </div>
+</template>
+```
+
+```vue [pages/about.vue]
+<template>
+  <section>
+    <p>This page will be displayed at the /about route.</p>
+  </section>
+</template>
+```
+
+::
+
+:read-more{title="Routing Section" to="https://nuxt.com/docs/3.x/getting-started/routing"}
+
+## Layouts
+
+![Layouts are wrapper around pages](https://nuxt.com/assets/docs/getting-started/views/layouts.svg)
+
+Layouts are wrappers around pages that contain a common User Interface for several pages, such as header and footer displays. Layouts are Vue files using `<slot />` components to display the **page** content. The `layouts/default.vue` file will be used by default. Custom layouts can be set as part of your page metadata.
+
+::note
+If you only have a single layout in your application, we recommend using [`app.vue`](https://nuxt.com/docs/3.x/directory-structure/app) with [`<NuxtPage />`](https://nuxt.com/docs/3.x/api/components/nuxt-page) instead.
+::
+
+::code-group
+
+```vue [app.vue]
+<template>
+  <div>
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
+  </div>
+</template>
+```
+
+```vue [layouts/default.vue]
+<template>
+  <div>
+    <AppHeader />
+    <slot />
+    <AppFooter />
+  </div>
+</template>
+```
+
+```vue [pages/index.vue]
+<template>
+  <div>
+    <h1>Welcome to the homepage</h1>
+    <AppAlert>
+      This is an auto-imported component
+    </AppAlert>
+  </div>
+</template>
+```
+
+```vue [pages/about.vue]
+<template>
+  <section>
+    <p>This page will be displayed at the /about route.</p>
+  </section>
+</template>
+```
+
+::
+
+If you want to create more layouts and learn how to use them in your pages, find more information in the [Layouts section](https://nuxt.com/docs/3.x/directory-structure/layouts).
+
+## Advanced: Extending the HTML Template
+
+::note
+If you only need to modify the `<head>`, you can refer to the [SEO and meta section](https://nuxt.com/docs/3.x/getting-started/seo-meta).
+::
+
+You can have full control over the HTML template by adding a Nitro plugin that registers a hook.
+The callback function of the `render:html` hook allows you to mutate the HTML before it is sent to the client.
+
+```ts [server/plugins/extend-html.ts]
+export default defineNitroPlugin((nitroApp) => {
+  nitroApp.hooks.hook('render:html', (html, { event }) => {
+    // This will be an object representation of the html template.
+    console.log(html)
+    html.head.push(`<meta name="description" content="My custom description" />`)
+  })
+  // You can also intercept the response here.
+  nitroApp.hooks.hook('render:response', (response, { event }) => { console.log(response) })
+})
+```
+
+:read-more{to="https://nuxt.com/docs/3.x/guide/going-further/hooks"}

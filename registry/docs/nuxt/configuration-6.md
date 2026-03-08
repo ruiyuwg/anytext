@@ -1,0 +1,214 @@
+# Configuration
+
+## `nuxt.config`
+
+The starting point for your Nuxt app remains your `nuxt.config` file.
+
+::note
+Nuxt configuration will be loaded using [`unjs/jiti`](https://github.com/unjs/jiti){rel=""nofollow""} and [`unjs/c12`](https://github.com/unjs/c12){rel=""nofollow""}.
+::
+
+### Migration
+
+1. You should migrate to the new `defineNuxtConfig` function that provides a typed configuration schema. :code-group\[\`\`\`ts \[Nuxt 2]
+   export default {
+   // ...
+   }
+   ````ts [Nuxt 3]
+   export default defineNuxtConfig({
+     // ...
+   })
+   ```]
+   ````
+2. If you were using `router.extendRoutes` you can migrate to the new `pages:extend` hook: :code-group\[\`\`\`ts \[Nuxt 2]
+   export default {
+   router: {
+   extendRoutes (routes) {
+   //
+   },
+   },
+   }
+   ````ts [Nuxt 3]
+   export default defineNuxtConfig({
+     hooks: {
+       'pages:extend' (routes) {
+         //
+       },
+     },
+   })
+   ```]
+   ````
+3. If you were using `router.routeNameSplitter` you can achieve same result by updating route name generation logic in the new `pages:extend` hook: :code-group\[\`\`\`ts \[Nuxt 2]
+   export default {
+   router: {
+   routeNameSplitter: '/',
+   },
+   }
+   ````ts [Nuxt 3]
+   import { createResolver } from '@nuxt/kit'
+
+   export default defineNuxtConfig({
+     hooks: {
+       'pages:extend' (routes) {
+         const routeNameSplitter = '/'
+         const root = createResolver(import.meta.url).resolve('./pages')
+
+         function updateName (routes) {
+           if (!routes) {
+             return
+           }
+
+           for (const route of routes) {
+             const relativePath = route.file.substring(root.length + 1)
+             route.name = relativePath.slice(0, -4).replace(/\/index$/, '').replace(/\//g, routeNameSplitter)
+
+             updateName(route.children)
+           }
+         }
+         updateName(routes)
+       },
+     },
+   })
+   ```]
+   ````
+
+#### ESM Syntax
+
+Nuxt 3 is an [ESM native framework](https://nuxt.com/docs/3.x/guide/concepts/esm). Although [`unjs/jiti`](https://github.com/unjs/jiti){rel=""nofollow""} provides semi compatibility when loading `nuxt.config` file, avoid any usage of `require` and `module.exports` in this file.
+
+1. Change `module.exports` to `export default`
+2. Change `const lib = require('lib')` to `import lib from 'lib'`
+
+#### Async Configuration
+
+In order to make Nuxt loading behavior more predictable, async config syntax is deprecated. Consider using Nuxt hooks for async operations.
+
+#### Dotenv
+
+Nuxt has built-in support for loading `.env` files. Avoid directly importing it from `nuxt.config`.
+
+## Modules
+
+Nuxt and Nuxt modules are now build-time-only.
+
+### Migration
+
+1. Move all your `buildModules` into `modules`.
+2. Check for Nuxt 3 compatibility of modules.
+3. If you have any local modules pointing to a directory you should update this to point to the entry file:
+
+```diff
+  export default defineNuxtConfig({
+    modules: [
+-     '~/modules/my-module'
++     '~/modules/my-module/index'
+    ]
+  })
+```
+
+::tip
+If you are a module author, you can check out [more information about module compatibility](https://nuxt.com/docs/3.x/migration/module-authors) and [our module author guide](https://nuxt.com/docs/3.x/guide/modules).
+::
+
+## Directory Changes
+
+The `static/` (for storing static assets) has been renamed to `public/`. You can either rename your `static` directory to `public`, or keep the name by setting `dir.public` in your `nuxt.config`.
+
+:read-more{to="https://nuxt.com/docs/3.x/directory-structure/public"}
+
+## TypeScript
+
+It will be much easier to migrate your application if you use Nuxt's TypeScript integration. This does not mean you need to write your application in TypeScript, just that Nuxt will provide automatic type hints for your editor.
+
+You can read more about Nuxt's TypeScript support [in the docs](https://nuxt.com/docs/3.x/guide/concepts/typescript).
+
+::note
+Nuxt can type-check your app using [`vue-tsc`](https://github.com/vuejs/language-tools/tree/master/packages/tsc){rel=""nofollow""} with `nuxt typecheck` command.
+::
+
+### Migration
+
+1. Create a `tsconfig.json` with the following content:
+   ```json
+   {
+     "extends": "./.nuxt/tsconfig.json"
+   }
+   ```
+2. Run `npx nuxt prepare` to generate `.nuxt/tsconfig.json`.
+3. Install Volar following the instructions in the [docs](https://nuxt.com/docs/3.x/getting-started/installation#prerequisites).
+
+## Vue Changes
+
+There are a number of changes to what is recommended Vue best practice, as well as a number of breaking changes between Vue 2 and 3.
+
+It is recommended to read the [Vue 3 migration guide](https://v3-migration.vuejs.org){rel=""nofollow""} and in particular the [breaking changes list](https://v3-migration.vuejs.org/breaking-changes/){rel=""nofollow""}.
+
+It is not currently possible to use the [Vue 3 migration build](https://v3-migration.vuejs.org/migration-build.html){rel=""nofollow""} with Nuxt 3.
+
+## Vuex
+
+Nuxt no longer provides a Vuex integration. Instead, the official Vue recommendation is to use `pinia`, which has built-in Nuxt support via a [Nuxt module](https://pinia.vuejs.org/ssr/nuxt.html){rel=""nofollow""}. [Find out more about pinia here](https://pinia.vuejs.org){rel=""nofollow""}.
+
+A simple way to provide global state management with pinia would be:
+
+Install the [`@pinia/nuxt`](https://nuxt.com/modules/pinia) module:
+
+```bash [Terminal]
+yarn add pinia @pinia/nuxt
+```
+
+Enable the module in your nuxt configuration:
+
+```ts [nuxt.config.ts]
+import { defineNuxtConfig } from 'nuxt/config'
+
+export default defineNuxtConfig({
+  modules: ['@pinia/nuxt'],
+})
+```
+
+Create a `store` folder at the root of your application:
+
+```ts [store/index.ts]
+import { defineStore } from 'pinia'
+
+export const useMainStore = defineStore('main', {
+  state: () => ({
+    counter: 0,
+  }),
+  actions: {
+    increment () {
+      // `this` is the store instance
+      this.counter++
+    },
+  },
+})
+```
+
+Create a [plugin](https://nuxt.com/docs/3.x/directory-structure/plugins) file to globalize your store:
+
+```ts [plugins/pinia.ts]
+import { useMainStore } from '~/store'
+
+export default defineNuxtPlugin(({ $pinia }) => {
+  return {
+    provide: {
+      store: useMainStore($pinia),
+    },
+  }
+})
+```
+
+If you want to keep using Vuex, you can manually migrate to Vuex 4 following [these steps](https://vuex.vuejs.org/guide/migrating-to-4-0-from-3-x.html){rel=""nofollow""}.
+
+Once it's done you will need to add the following plugin to your Nuxt app:
+
+```ts [plugins/vuex.ts]
+import store from '~/store'
+
+export default defineNuxtPlugin((nuxtApp) => {
+  nuxtApp.vueApp.use(store)
+})
+```
+
+For larger apps, this migration can entail a lot of work. If updating Vuex still creates roadblocks, you may want to use the community module: [nuxt3-vuex-module](https://github.com/vedmant/nuxt3-vuex#nuxt3-vuex-module){rel=""nofollow""}, which should work out of the box.

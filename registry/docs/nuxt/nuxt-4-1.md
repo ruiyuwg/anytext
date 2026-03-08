@@ -1,0 +1,273 @@
+# Nuxt 4.1
+
+## 🔥 Build and Performance Improvements
+
+### 🍫 Enhanced Chunk Stability
+
+Build stability has been significantly improved with import maps ([#33075](https://github.com/nuxt/nuxt/pull/33075){rel=""nofollow""}). This prevents cascading hash changes that could invalidate large portions of your build when small changes are made:
+
+```html
+<!-- Automatically injected import map -->
+<script type="importmap">{"imports":{"#entry":"/_nuxt/DC5HVSK5.js"}}</script>
+```
+
+By default, JS chunks emitted in a Vite build are hashed, which means they can be cached immutably. However, this can cause a significant issue: a change to a single component can cause *every* hash to be invalidated, massively increasing the chance of 404s.
+
+In short:
+
+1. a component is changed slightly - the hash of its JS chunk changes
+2. the page which uses the component has to be updated to reference the new file name
+3. the *entry* now has its hash changed because it dynamically imports the page
+4. ***every other file*** which imports the entry has its hash changed because the entry file name is changed
+
+Obviously this wasn't optimal. With this new feature, the hash of (otherwise) unchanged files which import the entry won't be affected.
+
+This feature is automatically enabled and helps maintain better cache efficiency in production. It does require [native import map support](https://caniuse.com/import-maps){rel=""nofollow""}, but Nuxt will automatically disable it if you have configured `vite.build.target` to include a browser that doesn't support import maps.
+
+And of course you can disable it if needed:
+
+```ts [nuxt.config.ts]
+export default defineNuxtConfig({
+  experimental: {
+    entryImportMap: false
+  }
+})
+```
+
+### 🦀 Experimental Rolldown Support
+
+Nuxt now includes experimental support for `rolldown-vite` ([#31812](https://github.com/nuxt/nuxt/pull/31812){rel=""nofollow""}), bringing Rust-powered bundling for potentially faster builds.
+
+To try Rolldown in your Nuxt project, you need to override Vite with the rolldown-powered version since Vite is a dependency of Nuxt. Add the following to your `package.json`:
+
+::code-group{sync="pm"}
+
+```json [npm]
+{
+  "overrides": {
+    "vite": "npm:rolldown-vite@latest"
+  }
+}
+```
+
+```json [pnpm]
+{
+  "pnpm": {
+    "overrides": {
+      "vite": "npm:rolldown-vite@latest"
+    }
+  }
+}
+```
+
+```json [yarn]
+{
+  "resolutions": {
+    "vite": "npm:rolldown-vite@latest"
+  }
+}
+```
+
+```json [bun]
+{
+  "overrides": {
+    "vite": "npm:rolldown-vite@latest"
+  }
+}
+```
+
+::
+
+After adding the override, reinstall your dependencies. Nuxt will automatically detect when Rolldown is available and adjust its build configuration accordingly.
+
+For more details on Rolldown integration, see the [Vite Rolldown guide](https://vite.dev/guide/rolldown){rel=""nofollow""}.
+
+::note
+This is experimental and may have some limitations, but offers a glimpse into the future of high-performance bundling in Nuxt.
+::
+
+## 🧪 Improved Lazy Hydration
+
+Lazy hydration macros now work without auto-imports ([#33037](https://github.com/nuxt/nuxt/pull/33037){rel=""nofollow""}), making them more reliable when component auto-discovery is disabled:
+
+```vue
+<script setup>
+// Works even with components: false
+const LazyComponent = defineLazyHydrationComponent(
+  'visible',
+  () => import('./MyComponent.vue')
+)
+</script>
+```
+
+This ensures that components that are not "discovered" through Nuxt (e.g., because `components` is set to `false` in the config) can still be used in lazy hydration macros.
+
+## 📄 Enhanced Page Rules
+
+If you have enabled experimental extraction of route rules, these are now exposed on a dedicated `rules` property on `NuxtPage` objects ([#32897](https://github.com/nuxt/nuxt/pull/32897){rel=""nofollow""}), making them more accessible to modules and improving the overall architecture:
+
+```ts
+// In your module
+nuxt.hook('pages:extend', pages => {
+  pages.push({
+    path: '/api-docs',
+    rules: { 
+      prerender: true,
+      cors: true,
+      headers: { 'Cache-Control': 's-maxage=31536000' }
+    }
+  })
+})
+```
+
+The `defineRouteRules` function continues to work exactly as before, but now provides better integration possibilities for modules.
+
+## 🚀 Module Development Enhancements
+
+### 🪾 Module Dependencies and Integration
+
+Modules can now specify dependencies and modify options for other modules ([#33063](https://github.com/nuxt/nuxt/pull/33063){rel=""nofollow""}). This enables better module integration and ensures proper setup order:
+
+```ts
+export default defineNuxtModule({
+  meta: {
+    name: 'my-module',
+  },
+  moduleDependencies: {
+    'some-module': {
+      // You can specify a version constraint for the module
+      version: '>=2',
+      // By default moduleDependencies will be added to the list of modules 
+      // to be installed by Nuxt unless `optional` is set.
+      optional: true,
+      // Any configuration that should override `nuxt.options`.
+      overrides: {},
+      // Any configuration that should be set. It will override module defaults but
+      // will not override any configuration set in `nuxt.options`.
+      defaults: {}
+    }
+  },
+  setup (options, nuxt) {
+    // Your module setup logic
+  }
+})
+```
+
+This replaces the deprecated `installModule` function and provides a more robust way to handle module dependencies with version constraints and configuration merging.
+
+### 🪝 Module Lifecycle Hooks
+
+Module authors now have access to two new lifecycle hooks: `onInstall` and `onUpgrade` ([#32397](https://github.com/nuxt/nuxt/pull/32397){rel=""nofollow""}). These hooks allow modules to perform additional setup steps when first installed or when upgraded to a new version:
+
+```ts
+export default defineNuxtModule({
+  meta: {
+    name: 'my-module',
+    version: '1.0.0',
+  },
+
+  onInstall(nuxt) {
+    // This will be run when the module is first installed
+    console.log('Setting up my-module for the first time!')
+  },
+
+  onUpgrade(inlineOptions, nuxt, previousVersion) {
+    // This will be run when the module is upgraded
+    console.log(`Upgrading my-module from v${previousVersion}`)
+  }
+})
+```
+
+The hooks are only triggered when both `name` and `version` are provided in the module metadata. Nuxt uses the `.nuxtrc` file internally to track module versions and trigger the appropriate hooks. (If you haven't come across it before, the `.nuxtrc` file should be committed to version control.)
+
+::tip
+This means module authors can begin implementing their own 'setup wizards' to provide a better experience when some setup is required after installing a module.
+::
+
+### 🙈 Enhanced File Resolution
+
+The new `ignore` option for `resolveFiles` ([#32858](https://github.com/nuxt/nuxt/pull/32858){rel=""nofollow""}) allows module authors to exclude specific files based on glob patterns:
+
+```ts
+// Resolve all .vue files except test files
+const files = await resolveFiles(srcDir, '**/*.vue', {
+  ignore: ['**/*.test.vue', '**/__tests__/**']
+})
+```
+
+### 📂 Layer Directories Utility
+
+A new `getLayerDirectories` utility ([#33098](https://github.com/nuxt/nuxt/pull/33098){rel=""nofollow""}) provides a clean interface for accessing layer directories without directly accessing private APIs:
+
+```ts
+import { getLayerDirectories } from '@nuxt/kit'
+
+const layerDirs = await getLayerDirectories(nuxt)
+// Access key directories:
+// layerDirs.app        - /app/ by default
+// layerDirs.appPages   - /app/pages by default
+// layerDirs.server     - /server by default
+// layerDirs.public     - /public by default
+```
+
+## ✨ Developer Experience Improvements
+
+### 🎱 Simplified Kit Utilities
+
+Several kit utilities have been improved for better developer experience:
+
+- `addServerImports` now supports single imports ([#32289](https://github.com/nuxt/nuxt/pull/32289){rel=""nofollow""}):
+
+```ts
+// Before: required array
+addServerImports([{ from: 'my-package', name: 'myUtility' }])
+
+// Now: can pass directly
+addServerImports({ from: 'my-package', name: 'myUtility' })
+```
+
+### 🔥 Performance Optimizations
+
+This release includes several internal performance optimizations:
+
+- Improved route rules cache management ([#32877](https://github.com/nuxt/nuxt/pull/32877){rel=""nofollow""})
+- Optimized app manifest watching ([#32880](https://github.com/nuxt/nuxt/pull/32880){rel=""nofollow""})
+- Better TypeScript processing for page metadata ([#32920](https://github.com/nuxt/nuxt/pull/32920){rel=""nofollow""})
+
+## 🐛 Notable Fixes
+
+- Improved `useFetch` hook typing ([#32891](https://github.com/nuxt/nuxt/pull/32891){rel=""nofollow""})
+- Better handling of TypeScript expressions in page metadata ([#32902](https://github.com/nuxt/nuxt/pull/32902){rel=""nofollow""}, [#32914](https://github.com/nuxt/nuxt/pull/32914){rel=""nofollow""})
+- Enhanced route matching and synchronization ([#32899](https://github.com/nuxt/nuxt/pull/32899){rel=""nofollow""})
+- Reduced verbosity of Vue server warnings in development ([#33018](https://github.com/nuxt/nuxt/pull/33018){rel=""nofollow""})
+- Better handling of relative time calculations in `<NuxtTime>` ([#32893](https://github.com/nuxt/nuxt/pull/32893){rel=""nofollow""})
+
+## ✅ Upgrading
+
+As usual, our recommendation for upgrading is to run:
+
+```sh
+npx nuxt upgrade --dedupe
+```
+
+This will refresh your lockfile and pull in all the latest dependencies that Nuxt relies on, especially from the unjs ecosystem.
+
+## 📦 Nuxt 3.19
+
+All of these features are also available in **Nuxt 3.19**, which has been released alongside v4.1. As part of our commitment to the v3 branch, we continue to backport compatible v4 features to ensure v3 users can benefit from the latest improvements.
+
+If you're still using Nuxt 3, you can upgrade to v3.19 to get access to all these features while staying on the stable v3 release line.
+
+## Full release notes
+
+::read-more
+
+Read the full release notes of Nuxt `v4.1.0`.
+::
+
+::read-more
+
+Read the full release notes of Nuxt `v3.19.0`.
+::
+
+Thank you to everyone who contributed! We're excited to see what you build with these new features. ❤️

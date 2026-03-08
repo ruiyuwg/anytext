@@ -1,0 +1,82 @@
+# layers
+
+The `layers/` directory allows you to organize and share reusable code, components, composables, and configurations across your Nuxt application. Any layers within your project in the `layers/` directory will be automatically registered.
+
+::note
+The `layers/` directory auto-registration is available in Nuxt v3.12.0+.
+::
+
+::tip{icon="i-lucide-lightbulb"}
+Layers are ideal for organizing large codebases with **Domain-Driven Design (DDD)**, creating reusable **UI libraries** or **themes**, sharing **configuration presets** across projects, and separating concerns like **admin panels** or **feature modules**.
+::
+
+## Structure
+
+Each subdirectory within `layers/` is treated as a separate layer. A layer can contain the same structure as a standard Nuxt application.
+
+::important
+Every layer **must have** a `nuxt.config.ts` file to be recognized as a valid layer, even if it's empty.
+::
+
+```bash [Directory structure]
+-| layers/
+---| base/
+-----| nuxt.config.ts
+-----| app/
+-------| components/
+---------| BaseButton.vue
+-------| composables/
+---------| useBase.ts
+-----| server/
+-------| api/
+---------| hello.ts
+---| admin/
+-----| nuxt.config.ts
+-----| app/
+-------| pages/
+---------| admin.vue
+-------| layouts/
+---------| admin.vue
+```
+
+## Automatic Aliases
+
+Named layer aliases to the `srcDir` of each layer are automatically created. You can access a layer using the `#layers/[name]` alias:
+
+```ts
+// Access the base layer
+import something from '#layers/base/path/to/file'
+
+// Access the admin layer
+import { useAdmin } from '#layers/admin/composables/useAdmin'
+```
+
+::note
+Named layer aliases were introduced in Nuxt v3.16.0.
+::
+
+## Layer Content
+
+Each layer can include:
+
+- [`nuxt.config.ts`](https://nuxt.com/docs/3.x/directory-structure/nuxt-config) - Layer-specific configuration that will be merged with the main config
+- [`app.config.ts`](https://nuxt.com/docs/3.x/directory-structure/app-config) - Reactive application configuration
+- [`components/`](https://nuxt.com/docs/3.x/directory-structure/components) - Vue components (auto-imported)
+- [`composables/`](https://nuxt.com/docs/3.x/directory-structure/composables) - Vue composables (auto-imported)
+- [`utils/`](https://nuxt.com/docs/3.x/directory-structure/utils) - Utility functions (auto-imported)
+- [`pages/`](https://nuxt.com/docs/3.x/directory-structure/pages) - Application pages
+- [`layouts/`](https://nuxt.com/docs/3.x/directory-structure/layouts) - Application layouts
+- [`middleware/`](https://nuxt.com/docs/3.x/directory-structure/middleware) - Route middleware
+- [`plugins/`](https://nuxt.com/docs/3.x/directory-structure/plugins) - Nuxt plugins
+- [`server/`](https://nuxt.com/docs/3.x/directory-structure/server) - Server routes, middleware, and utilities
+- [`shared/`](https://nuxt.com/docs/3.x/directory-structure/shared) - Shared code between app and server
+
+## Priority Order
+
+When multiple layers define the same resource (component, composable, page, etc.), the layer with **higher priority wins**. Layers are sorted alphabetically, with later letters having higher priority (Z > A).
+
+To control the order, prefix directories with numbers: `1.base/`, `2.features/`, `3.admin/`.
+
+:read-more{to="https://nuxt.com/docs/3.x/getting-started/layers#layer-priority"}
+
+:video-accordion{title="Watch a video from Learn Vue about Nuxt Layers" video-id="lnFCM7c9f7I"}

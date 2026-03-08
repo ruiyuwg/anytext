@@ -1,0 +1,251 @@
+### customAsync
+
+Creates a custom schema.
+
+> This schema function allows you to define a schema that matches a value based on a custom function. Use it whenever you need to define a schema that cannot be expressed using any of the other schema functions.
+
+```ts
+const Schema = v.customAsync<TInput, TMessage>(check, message);
+```
+
+#### Generics
+
+- `TInput`
+- `TMessage`
+
+#### Parameters
+
+- `check`
+- `message`
+
+##### Explanation
+
+With `customAsync` you can validate the data type of the input. If the input does not match the validation of `check`, you can use `message` to customize the error message.
+
+> Make sure that the validation in `check` matches the data type of `TInput`.
+
+#### Returns
+
+- `Schema`
+
+#### Examples
+
+The following examples show how `customAsync` can be used.
+
+##### Vacant seat schema
+
+Schema to validate a vacant seat.
+
+```ts
+import { isSeatVacant } from '~/api';
+
+type Group = 'A' | 'B' | 'C' | 'D' | 'E';
+type DigitLessThanSix = '0' | '1' | '2' | '3' | '4' | '5';
+type Digit = DigitLessThanSix | '6' | '7' | '8' | '9';
+type Seat = `${Group}${DigitLessThanSix}${Digit}`;
+
+function isSeat(possibleSeat: string): possibleSeat is Seat {
+  return /^[A-E][0-5]\d$/.test(possibleSeat);
+}
+
+const VacantSeatSchema = v.customAsync<Seat>(
+  (input) => typeof input === 'string' && isSeat(input) && isSeatVacant(input),
+  'The input is not a valid vacant seat.'
+);
+```
+
+#### Related
+
+The following APIs can be combined with `customAsync`.
+
+##### Schemas
+
+\<ApiList
+items={\[
+'array',
+'exactOptional',
+'intersect',
+'lazy',
+'looseObject',
+'looseTuple',
+'map',
+'nonNullable',
+'nonNullish',
+'nonOptional',
+'nullable',
+'nullish',
+'object',
+'objectWithRest',
+'optional',
+'record',
+'set',
+'strictObject',
+'strictTuple',
+'tuple',
+'tupleWithRest',
+'undefinedable',
+'union',
+]}
+/>
+
+##### Methods
+
+##### Actions
+
+\<ApiList
+items={\[
+'args',
+'base64',
+'brand',
+'bytes',
+'check',
+'checkItems',
+'creditCard',
+'cuid2',
+'decimal',
+'description',
+'digits',
+'domain',
+'email',
+'emoji',
+'empty',
+'endsWith',
+'entries',
+'everyItem',
+'excludes',
+'filterItems',
+'findItem',
+'finite',
+'flavor',
+'graphemes',
+'gtValue',
+'guard',
+'hash',
+'hexadecimal',
+'hexColor',
+'imei',
+'includes',
+'integer',
+'ip',
+'ipv4',
+'ipv6',
+'isbn',
+'isrc',
+'isoDate',
+'isoDateTime',
+'isoTime',
+'isoTimeSecond',
+'isoTimestamp',
+'isoWeek',
+'length',
+'ltValue',
+'mac',
+'mac48',
+'mac64',
+'mapItems',
+'maxBytes',
+'maxEntries',
+'maxGraphemes',
+'maxLength',
+'maxSize',
+'maxValue',
+'maxWords',
+'metadata',
+'mimeType',
+'minBytes',
+'minEntries',
+'minGraphemes',
+'minLength',
+'minSize',
+'minValue',
+'minWords',
+'multipleOf',
+'nanoid',
+'nonEmpty',
+'notBytes',
+'notEntries',
+'notGraphemes',
+'notLength',
+'notSize',
+'notValue',
+'notValues',
+'notWords',
+'octal',
+'parseJson',
+'partialCheck',
+'rawCheck',
+'rawTransform',
+'readonly',
+'reduceItems',
+'regex',
+'returns',
+'rfcEmail',
+'safeInteger',
+'size',
+'slug',
+'someItem',
+'sortItem',
+'startsWith',
+'stringifyJson',
+'title',
+'toLowerCase',
+'toMaxValue',
+'toMinValue',
+'toUpperCase',
+'transform',
+'trim',
+'trimEnd',
+'trimStart',
+'ulid',
+'url',
+'uuid',
+'value',
+'values',
+'words',
+]}
+/>
+
+##### Utils
+
+##### Async
+
+\<ApiList
+items={\[
+'arrayAsync',
+'awaitAsync',
+'checkAsync',
+'exactOptionalAsync',
+'fallbackAsync',
+'getDefaultsAsync',
+'getFallbacksAsync',
+'intersectAsync',
+'lazyAsync',
+'looseObjectAsync',
+'looseTupleAsync',
+'mapAsync',
+'nonNullableAsync',
+'nonNullishAsync',
+'nonOptionalAsync',
+'nullableAsync',
+'nullishAsync',
+'objectAsync',
+'objectWithRestAsync',
+'optionalAsync',
+'parseAsync',
+'parserAsync',
+'partialCheckAsync',
+'pipeAsync',
+'rawCheckAsync',
+'rawTransformAsync',
+'recordAsync',
+'safeParseAsync',
+'safeParserAsync',
+'setAsync',
+'strictObjectAsync',
+'strictTupleAsync',
+'transformAsync',
+'tupleAsync',
+'tupleWithRestAsync',
+'unionAsync',
+]}
+/>

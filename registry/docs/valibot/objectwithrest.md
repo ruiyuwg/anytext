@@ -1,0 +1,207 @@
+### objectWithRest
+
+Creates an object with rest schema.
+
+```ts
+const Schema = v.objectWithRest<TEntries, TRest, TMessage>(
+  entries,
+  rest,
+  message
+);
+```
+
+#### Generics
+
+- `TEntries`
+- `TRest`
+- `TMessage`
+
+#### Parameters
+
+- `entries`
+- `rest`
+- `message`
+
+##### Explanation
+
+With `objectWithRest` you can validate the data type of the input and whether the content matches `entries` and `rest`. If the input is not an object, you can use `message` to customize the error message.
+
+> The difference to `object` is that this schema includes unknown entries in the output. In addition, this schema filters certain entries from the unknown entries for security reasons.
+
+#### Returns
+
+- `Schema`
+
+#### Examples
+
+The following examples show how `objectWithRest` can be used. Please see the object guide for more examples and explanations.
+
+##### Object schema with rest
+
+Schema to validate an object with generic rest entries.
+
+```ts
+const ObjectSchemaWithRest = v.objectWithRest(
+  {
+    key1: v.string(),
+    key2: v.number(),
+  },
+  v.boolean()
+);
+```
+
+##### Merge several objects
+
+Schema that merges the entries of two object schemas.
+
+```ts
+const MergedObjectSchema = v.objectWithRest(
+  {
+    ...ObjectSchema1.entries,
+    ...ObjectSchema2.entries,
+  },
+  v.null()
+);
+```
+
+##### Mark keys as optional
+
+Schema to validate an object with partial entries.
+
+```ts
+const PartialObjectSchema = partial(
+  objectWithRest(
+    {
+      key1: string(),
+      key2: number(),
+    },
+    v.undefined()
+  )
+);
+```
+
+##### Object with selected entries
+
+Schema to validate only selected entries of an object.
+
+```ts
+const PickObjectSchema = v.pick(
+  v.objectWithRest(
+    {
+      key1: v.string(),
+      key2: v.number(),
+      key3: v.boolean(),
+    },
+    v.null()
+  ),
+  ['key1', 'key3']
+);
+```
+
+#### Related
+
+The following APIs can be combined with `objectWithRest`.
+
+##### Schemas
+
+\<ApiList
+items={\[
+'any',
+'array',
+'bigint',
+'blob',
+'boolean',
+'custom',
+'date',
+'enum',
+'exactOptional',
+'file',
+'function',
+'instance',
+'intersect',
+'lazy',
+'literal',
+'looseObject',
+'looseTuple',
+'map',
+'nan',
+'never',
+'nonNullable',
+'nonNullish',
+'nonOptional',
+'null',
+'nullable',
+'nullish',
+'number',
+'object',
+'optional',
+'picklist',
+'promise',
+'record',
+'set',
+'strictObject',
+'strictTuple',
+'string',
+'symbol',
+'tuple',
+'tupleWithRest',
+'undefined',
+'undefinedable',
+'union',
+'unknown',
+'variant',
+'void',
+]}
+/>
+
+##### Methods
+
+\<ApiList
+items={\[
+'assert',
+'config',
+'fallback',
+'forward',
+'getDefault',
+'getDefaults',
+'getFallback',
+'getFallbacks',
+'is',
+'keyof',
+'message',
+'omit',
+'parse',
+'parser',
+'partial',
+'pick',
+'pipe',
+'required',
+'safeParse',
+'safeParser',
+]}
+/>
+
+##### Actions
+
+\<ApiList
+items={\[
+'check',
+'brand',
+'description',
+'entries',
+'flavor',
+'guard',
+'maxEntries',
+'metadata',
+'minEntries',
+'notEntries',
+'partialCheck',
+'rawCheck',
+'rawTransform',
+'readonly',
+'title',
+'transform',
+]}
+/>
+
+##### Utils

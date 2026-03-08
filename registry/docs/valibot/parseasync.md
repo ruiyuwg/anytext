@@ -1,0 +1,162 @@
+### parseAsync
+
+Parses an unknown input based on a schema.
+
+```ts
+const output = v.parseAsync<TSchema>(schema, input, config);
+```
+
+#### Generics
+
+- `TSchema`
+
+#### Parameters
+
+- `schema`
+- `input`
+- `config`
+
+##### Explanation
+
+`parseAsync` will throw a `ValiError` if the `input` does not match the `schema`. Therefore you should use a try/catch block to catch errors. If the input matches the schema, it is valid and the `output` of the schema will be returned typed.
+
+> If an asynchronous operation associated with the passed schema throws an error, the promise returned by `parseAsync` is rejected and the error thrown may not be a `ValiError`.
+
+#### Returns
+
+- `output`
+
+#### Examples
+
+The following examples show how `parseAsync` can be used.
+
+```ts
+import { isEmailPresent } from '~/api';
+
+try {
+  const StoredEmailSchema = v.pipeAsync(
+    v.string(),
+    v.email(),
+    v.checkAsync(isEmailPresent, 'The email is not in the database.')
+  );
+  const storedEmail = await v.parseAsync(StoredEmailSchema, 'jane@example.com');
+
+  // Handle errors if one occurs
+} catch (error) {
+  console.error(error);
+}
+```
+
+#### Related
+
+The following APIs can be combined with `parseAsync`.
+
+##### Schemas
+
+\<ApiList
+items={\[
+'any',
+'array',
+'bigint',
+'blob',
+'boolean',
+'custom',
+'date',
+'enum',
+'exactOptional',
+'file',
+'function',
+'instance',
+'intersect',
+'lazy',
+'literal',
+'looseObject',
+'looseTuple',
+'map',
+'nan',
+'never',
+'nonNullable',
+'nonNullish',
+'nonOptional',
+'null',
+'nullable',
+'nullish',
+'number',
+'object',
+'objectWithRest',
+'optional',
+'picklist',
+'promise',
+'record',
+'set',
+'strictObject',
+'strictTuple',
+'string',
+'symbol',
+'tuple',
+'tupleWithRest',
+'undefined',
+'undefinedable',
+'union',
+'unknown',
+'variant',
+'void',
+]}
+/>
+
+##### Methods
+
+\<ApiList
+items={\[
+'assert',
+'config',
+'fallback',
+'flatten',
+'keyof',
+'message',
+'omit',
+'partial',
+'pick',
+'pipe',
+'required',
+'summarize',
+'unwrap',
+]}
+/>
+
+##### Utils
+
+##### Async
+
+\<ApiList
+items={\[
+'arrayAsync',
+'customAsync',
+'exactOptionalAsync',
+'fallbackAsync',
+'intersectAsync',
+'lazyAsync',
+'looseObjectAsync',
+'looseTupleAsync',
+'mapAsync',
+'nonNullableAsync',
+'nonNullishAsync',
+'nonOptionalAsync',
+'nullableAsync',
+'nullishAsync',
+'objectAsync',
+'objectWithRestAsync',
+'optionalAsync',
+'partialAsync',
+'pipeAsync',
+'recordAsync',
+'requiredAsync',
+'setAsync',
+'strictObjectAsync',
+'strictTupleAsync',
+'tupleAsync',
+'tupleWithRestAsync',
+'unionAsync',
+'variantAsync',
+]}
+/>

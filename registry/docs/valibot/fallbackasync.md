@@ -1,0 +1,284 @@
+### fallbackAsync
+
+Returns a fallback value as output if the input does not match the schema.
+
+```ts
+const Schema = v.fallbackAsync<TSchema, TFallback>(schema, fallback);
+```
+
+#### Generics
+
+- `TSchema`
+- `TFallback`
+
+#### Parameters
+
+- `schema`
+- `fallback`
+
+##### Explanation
+
+`fallbackAsync` allows you to define a fallback value for the output that will be used if the validation of the input fails. This means that no issues will be returned when using `fallbackAsync` and the schema will always return an output.
+
+> If you only want to set a default value for `null` or `undefined` inputs, you should use `optionalAsync`, `nullableAsync` or `nullishAsync` instead.
+
+> The fallback value is not validated. Make sure that the fallback value matches your schema.
+
+#### Returns
+
+- `Schema`
+
+#### Examples
+
+The following examples show how `fallbackAsync` can be used.
+
+##### Unique username schema
+
+Schema that will always return a unique username.
+
+> By using a function as the `fallbackAsync` parameter, the schema will return any unique username each time the input does not match the schema.
+
+```ts
+import { getAnyUniqueUsername, isUsernameUnique } from '~/api';
+
+const UniqueUsernameSchema = v.fallbackAsync(
+  v.pipeAsync(v.string(), v.minLength(4), v.checkAsync(isUsernameUnique)),
+  getAnyUniqueUsername
+);
+```
+
+#### Related
+
+The following APIs can be combined with `fallbackAsync`.
+
+##### Schemas
+
+\<ApiList
+items={\[
+'any',
+'array',
+'bigint',
+'blob',
+'boolean',
+'custom',
+'date',
+'enum',
+'exactOptional',
+'file',
+'function',
+'instance',
+'intersect',
+'lazy',
+'literal',
+'looseObject',
+'looseTuple',
+'map',
+'nan',
+'never',
+'nonNullable',
+'nonNullish',
+'nonOptional',
+'null',
+'nullable',
+'nullish',
+'number',
+'object',
+'objectWithRest',
+'optional',
+'picklist',
+'promise',
+'record',
+'set',
+'strictObject',
+'strictTuple',
+'string',
+'symbol',
+'tuple',
+'tupleWithRest',
+'undefined',
+'undefinedable',
+'union',
+'unknown',
+'variant',
+'void',
+]}
+/>
+
+##### Methods
+
+\<ApiList
+items={\[
+'config',
+'getDefault',
+'getFallback',
+'keyof',
+'message',
+'omit',
+'pick',
+'unwrap',
+]}
+/>
+
+##### Actions
+
+\<ApiList
+items={\[
+'args',
+'base64',
+'bic',
+'brand',
+'bytes',
+'check',
+'checkItems',
+'creditCard',
+'cuid2',
+'decimal',
+'description',
+'digits',
+'domain',
+'email',
+'emoji',
+'empty',
+'endsWith',
+'entries',
+'everyItem',
+'excludes',
+'filterItems',
+'findItem',
+'finite',
+'flavor',
+'graphemes',
+'gtValue',
+'guard',
+'hash',
+'hexadecimal',
+'hexColor',
+'imei',
+'includes',
+'integer',
+'ip',
+'ipv4',
+'ipv6',
+'isbn',
+'isrc',
+'isoDate',
+'isoDateTime',
+'isoTime',
+'isoTimeSecond',
+'isoTimestamp',
+'isoWeek',
+'length',
+'ltValue',
+'mac',
+'mac48',
+'mac64',
+'mapItems',
+'maxBytes',
+'maxEntries',
+'maxGraphemes',
+'maxLength',
+'maxSize',
+'maxValue',
+'maxWords',
+'metadata',
+'mimeType',
+'minBytes',
+'minEntries',
+'minGraphemes',
+'minLength',
+'minSize',
+'minValue',
+'minWords',
+'multipleOf',
+'nanoid',
+'nonEmpty',
+'notBytes',
+'notEntries',
+'notGraphemes',
+'notLength',
+'notSize',
+'notValue',
+'notValues',
+'notWords',
+'octal',
+'parseJson',
+'partialCheck',
+'rawCheck',
+'rawTransform',
+'readonly',
+'reduceItems',
+'regex',
+'returns',
+'rfcEmail',
+'safeInteger',
+'size',
+'slug',
+'someItem',
+'sortItem',
+'startsWith',
+'stringifyJson',
+'title',
+'toLowerCase',
+'toMaxValue',
+'toMinValue',
+'toUpperCase',
+'transform',
+'trim',
+'trimEnd',
+'trimStart',
+'ulid',
+'url',
+'uuid',
+'value',
+'values',
+'words',
+]}
+/>
+
+##### Utils
+
+##### Async
+
+\<ApiList
+items={\[
+'arrayAsync',
+'awaitAsync',
+'checkAsync',
+'customAsync',
+'exactOptionalAsync',
+'getDefaultsAsync',
+'getFallbacksAsync',
+'intersectAsync',
+'lazyAsync',
+'looseObjectAsync',
+'looseTupleAsync',
+'mapAsync',
+'nonNullableAsync',
+'nonNullishAsync',
+'nonOptionalAsync',
+'nullableAsync',
+'nullishAsync',
+'objectAsync',
+'objectWithRestAsync',
+'optionalAsync',
+'parseAsync',
+'parserAsync',
+'partialAsync',
+'partialCheckAsync',
+'pipeAsync',
+'rawCheckAsync',
+'rawTransformAsync',
+'recordAsync',
+'requiredAsync',
+'safeParseAsync',
+'safeParserAsync',
+'setAsync',
+'strictObjectAsync',
+'strictTupleAsync',
+'transformAsync',
+'tupleAsync',
+'tupleWithRestAsync',
+'unionAsync',
+'variantAsync',
+]}
+/>

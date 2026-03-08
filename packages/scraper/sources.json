@@ -51,13 +51,13 @@
       "name": "Tailwind CSS",
       "description": "Utility-first CSS framework for rapid UI development",
       "version": "4",
-      "adapter": "html",
-      "url": "https://tailwindcss.com/docs",
-      "crawl": {
-        "contentSelector": "main",
-        "removeSelectors": [".header", ".footer", "nav"],
-        "startPaths": ["/docs/installation", "/docs/utility-first"],
-        "include": ["/docs/"]
+      "adapter": "github",
+      "github": {
+        "repo": "tailwindlabs/tailwindcss.com",
+        "branch": "master",
+        "docsPath": "src/pages/docs",
+        "include": [".mdx"],
+        "exclude": ["_meta"]
       }
     },
     {
@@ -75,6 +75,86 @@
       "version": "3",
       "adapter": "llms-full",
       "url": "https://zod.dev/llms-full.txt"
+    },
+    {
+      "id": "svelte",
+      "name": "Svelte",
+      "description": "Cybernetically enhanced web apps with compile-time reactivity",
+      "version": "5",
+      "adapter": "llms-full",
+      "url": "https://svelte.dev/llms-full.txt"
+    },
+    {
+      "id": "nuxt",
+      "name": "Nuxt",
+      "description": "Intuitive Vue framework for building full-stack web applications",
+      "version": "3",
+      "adapter": "llms-full",
+      "url": "https://nuxt.com/llms-full.txt"
+    },
+    {
+      "id": "astro",
+      "name": "Astro",
+      "description": "Content-focused web framework with island architecture and zero JS by default",
+      "version": "5",
+      "adapter": "llms-full",
+      "url": "https://docs.astro.build/llms-full.txt"
+    },
+    {
+      "id": "vite",
+      "name": "Vite",
+      "description": "Next-generation frontend build tool with instant HMR",
+      "version": "6",
+      "adapter": "llms-full",
+      "url": "https://vite.dev/llms-full.txt"
+    },
+    {
+      "id": "vitest",
+      "name": "Vitest",
+      "description": "Blazing fast unit testing framework powered by Vite",
+      "version": "3",
+      "adapter": "llms-full",
+      "url": "https://vitest.dev/llms-full.txt"
+    },
+    {
+      "id": "deno",
+      "name": "Deno",
+      "description": "Secure JavaScript and TypeScript runtime with built-in tooling",
+      "version": "2",
+      "adapter": "llms-full",
+      "url": "https://docs.deno.com/llms-full.txt"
+    },
+    {
+      "id": "bun",
+      "name": "Bun",
+      "description": "All-in-one JavaScript runtime with bundler, transpiler, and package manager",
+      "version": "1",
+      "adapter": "llms-full",
+      "url": "https://bun.sh/llms-full.txt"
+    },
+    {
+      "id": "tanstack",
+      "name": "TanStack",
+      "description": "High-quality open-source libraries for web development (Query, Router, Table, Form)",
+      "version": "5",
+      "adapter": "llms-txt",
+      "url": "https://tanstack.com/llms.txt"
+    },
+    {
+      "id": "payload",
+      "name": "Payload CMS",
+      "description": "Headless CMS and application framework built with Next.js",
+      "version": "3",
+      "adapter": "llms-full",
+      "url": "https://payloadcms.com/llms-full.txt"
+    },
+    {
+      "id": "valibot",
+      "name": "Valibot",
+      "description": "Modular and type-safe schema validation library",
+      "version": "1",
+      "adapter": "llms-full",
+      "url": "https://valibot.dev/llms-full.txt"
     }
   ]
 }

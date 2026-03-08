@@ -1,0 +1,237 @@
+### intersect
+
+Creates an intersect schema.
+
+> I recommend to read the intersections guide before using this schema function.
+
+```ts
+const Schema = v.intersect<TOptions, TMessage>(options, message);
+```
+
+#### Generics
+
+- `TOptions`
+- `TMessage`
+
+#### Parameters
+
+- `options`
+- `message`
+
+##### Explanation
+
+With `intersect` you can validate if the input matches each of the given `options`. If the output of the intersection cannot be successfully merged, you can use `message` to customize the error message.
+
+#### Returns
+
+- `Schema`
+
+#### Examples
+
+The following examples show how `intersect` can be used.
+
+##### Object intersection
+
+Schema that combines two object schemas.
+
+```ts
+const ObjectSchema = v.intersect([
+  v.object({ foo: v.string() }),
+  v.object({ bar: v.number() }),
+]);
+```
+
+#### Related
+
+The following APIs can be combined with `intersect`.
+
+##### Schemas
+
+\<ApiList
+items={\[
+'any',
+'array',
+'bigint',
+'blob',
+'boolean',
+'custom',
+'date',
+'enum',
+'exactOptional',
+'file',
+'function',
+'instance',
+'lazy',
+'literal',
+'looseObject',
+'looseTuple',
+'map',
+'nan',
+'never',
+'nonNullable',
+'nonNullish',
+'nonOptional',
+'null',
+'nullable',
+'nullish',
+'number',
+'object',
+'objectWithRest',
+'optional',
+'picklist',
+'promise',
+'record',
+'set',
+'strictObject',
+'strictTuple',
+'string',
+'symbol',
+'tuple',
+'tupleWithRest',
+'undefined',
+'undefinedable',
+'union',
+'unknown',
+'variant',
+'void',
+]}
+/>
+
+##### Methods
+
+\<ApiList
+items={\[
+'assert',
+'config',
+'fallback',
+'getDefault',
+'getDefaults',
+'getFallback',
+'getFallbacks',
+'is',
+'message',
+'parse',
+'parser',
+'pipe',
+'safeParse',
+'safeParser',
+]}
+/>
+
+##### Actions
+
+\<ApiList
+items={\[
+'args',
+'base64',
+'bic',
+'brand',
+'bytes',
+'check',
+'checkItems',
+'creditCard',
+'cuid2',
+'decimal',
+'description',
+'digits',
+'domain',
+'email',
+'emoji',
+'empty',
+'endsWith',
+'entries',
+'everyItem',
+'excludes',
+'filterItems',
+'findItem',
+'finite',
+'flavor',
+'graphemes',
+'gtValue',
+'guard',
+'hash',
+'hexadecimal',
+'hexColor',
+'imei',
+'includes',
+'integer',
+'ip',
+'ipv4',
+'ipv6',
+'isbn',
+'isrc',
+'isoDate',
+'isoDateTime',
+'isoTime',
+'isoTimeSecond',
+'isoTimestamp',
+'isoWeek',
+'length',
+'ltValue',
+'mac',
+'mac48',
+'mac64',
+'mapItems',
+'maxBytes',
+'maxEntries',
+'maxGraphemes',
+'maxLength',
+'maxSize',
+'maxValue',
+'maxWords',
+'metadata',
+'mimeType',
+'minBytes',
+'minEntries',
+'minGraphemes',
+'minLength',
+'minSize',
+'minValue',
+'minWords',
+'multipleOf',
+'nanoid',
+'nonEmpty',
+'notBytes',
+'notEntries',
+'notGraphemes',
+'notLength',
+'notSize',
+'notValue',
+'notValues',
+'notWords',
+'octal',
+'parseJson',
+'partialCheck',
+'rawCheck',
+'rawTransform',
+'readonly',
+'reduceItems',
+'regex',
+'returns',
+'rfcEmail',
+'safeInteger',
+'size',
+'slug',
+'someItem',
+'sortItem',
+'startsWith',
+'stringifyJson',
+'title',
+'toLowerCase',
+'toMaxValue',
+'toMinValue',
+'toUpperCase',
+'transform',
+'trim',
+'trimEnd',
+'trimStart',
+'ulid',
+'url',
+'uuid',
+'value',
+'values',
+'words',
+]}
+/>
+
+##### Utils

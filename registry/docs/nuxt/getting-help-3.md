@@ -1,0 +1,59 @@
+# Getting Help
+
+At some point, you may find that there's an issue you need some help with.
+
+But don't worry! We're a friendly community of developers and we'd love to help.
+
+::card-group
+:::card
+-------
+
+icon: i-simple-icons-discord
+target: \_blank
+title: Discord
+to: https://go.nuxt.com/discord
+-------------------------------
+
+Get real-time help, exchange with the core team and the community, and stay updated on the latest Nuxt news.
+:::
+
+## :::card
+
+icon: i-simple-icons-nuxt
+target: \_blank
+title: Nuxters
+to: https://nuxters.nuxt.com
+----------------------------
+
+Connect with other Nuxt enthusiasts.
+:::
+::
+
+## "I can't figure out how to (...)."
+
+You've read through these docs and you think it should be possible, but it's not clear how. The best thing is to [open a GitHub Discussion](https://github.com/nuxt/nuxt/discussions){rel=""nofollow""}.
+
+Please don't feel embarrassed about asking a question that you think is easy - we've all been there! ❤️
+
+Everyone you'll encounter is helping out because they care, not because they are paid to do so. The kindest thing to do is make it easy for them to help you. Here are some ideas:
+
+- *Explain what your objective is, not just the problem you're facing.* "I need to ensure my form inputs are accessible, so I'm trying to get the ids to match between server and client."
+- *Make sure you've first read the docs and used your favorite search engine*. Let people know by saying something like "I've Googled for 'nuxt script setup' but I couldn't find code examples anywhere."
+- *Explain what you've tried.* Tell people the kind of solutions you've experimented with, and why. Often this can make people's advice more relevant to your situation.
+- *Share your code.* People probably won't be able to help if they just see an error message or a screenshot - but that all changes if you share your code in a copy/pasteable format - preferably in the form of a minimal reproduction like a CodeSandbox.
+
+And finally, just ask the question! There's no need to [ask permission to ask a question](https://dontasktoask.com){rel=""nofollow""} or [wait for someone to reply to your 'hello'](https://www.nohello.com){rel=""nofollow""}. If you do, you might not get a response because people are waiting for the whole question before engaging.
+
+## "Could there be a bug?"
+
+Something isn't working the way that the docs say that it should. You're not sure if it's a bug. You've searched through the [open issues](https://github.com/nuxt/nuxt/issues){rel=""nofollow""} and [discussions](https://github.com/nuxt/nuxt/discussions){rel=""nofollow""} but you can't find anything. (if there is a closed issue, please create a new one)
+
+We recommend taking a look at [how to report bugs](https://nuxt.com/docs/3.x/community/reporting-bugs). Nuxt is still in active development, and every issue helps make it better.
+
+## "I need professional help"
+
+If the community couldn't provide the help you need in the time-frame you have, NuxtLabs offers professional support with the [Nuxt Experts](https://nuxt.com/enterprise/support){rel=""nofollow""}.
+
+The objective of the Nuxt Expert is to provide support to the Vue ecosystem, while also creating freelance opportunities for those contributing to open-source solutions, thus helping to maintain the sustainability of the ecosystem.
+
+The Nuxt experts are Vue, Nuxt and Vite chosen contributors providing professional support and consulting services.

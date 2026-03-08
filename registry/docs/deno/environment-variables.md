@@ -1,0 +1,73 @@
+# Environment variables
+
+URL: https://docs.deno.com/deploy/classic/environment-variables
+
+You are viewing legacy documentation for Deno Deploy Classic. We recommend
+migrating to the new
+Deno Deploy platform.
+
+Environment variables are useful to store values like access tokens of web
+services. Each deployment has a set of environment variables defined at the
+moment of creation and accessible from the code via the `Deno.env` API. There
+are 2 ways to define the environment variables of a deployment:
+
+## Project environment variables
+
+You can define environment variables at the project level. When you create a
+deployment, it will get the set of environment variables the project has defined
+*at that particular moment*.
+
+For convenience, When you change the environment variables of a project, the
+current production deployment is *redeployed*, creating a new production
+deployment with the new set of environment variables.
+
+Deployments are immutable, including their environment variables. Changing the
+environment variables of a project does not change the environment variables of
+existing deployments.
+
+To add an environment variable to your project, click on the **Settings** button
+on the project page and then on **Environment Variables** from the sidebar. Fill
+in the key/value fields and click on "Add" to add an environment variable to
+your project.
+
+![environment\_variable](../docs-images/fauna2.png)
+
+Updating an existing environment variable works the same way. Click on the "Add
+Variable" button, enter the same name of the environment variable you wish to
+update and enter the new value. Click on the "Save" button to complete the
+update.
+
+## Deployment environment variables
+
+When deploying using `deployctl`, you can specify environment variables
+[using the `--env` or `--env-file` flags](./deployctl.md#environment-variables),
+complementing the environment variables already defined for the project. You can
+also pass multiple `--env-file` arguments (e.g.,
+`--env-file=.env.one --env-file=.env.two`) to include variables from multiple
+files.
+
+When multiple declarations for the same environment variable exist within a
+single `.env` file, the first occurrence is applied. However, if the same
+variable is defined across multiple `.env` files (using multiple `--env-file`
+arguments), the value from the last file specified takes precedence. This means
+that the first occurrence found in the last `.env` file listed will be applied.
+
+These env variables will be specific for the deployment being created.
+
+### Default environment variables
+
+Every deployment has the following environment variables preset, which you can
+access from your code.
+
+1. `DENO_REGION`
+
+   It holds the region code of the region in which the deployment is running.
+   You can use this variable to serve region-specific content.
+
+   You can refer to the region code from the [regions page](regions).
+
+2. `DENO_DEPLOYMENT_ID`
+
+   It holds the ID of the deployment.
+
+***

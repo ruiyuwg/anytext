@@ -42,7 +42,7 @@ export const githubAdapter: Adapter = {
       (item) =>
         item.type === "blob" &&
         item.path.startsWith(docsPath + "/") &&
-        item.path.endsWith(".md"),
+        (item.path.endsWith(".md") || item.path.endsWith(".mdx")),
     );
 
     // Apply include/exclude patterns
@@ -96,7 +96,7 @@ export const githubAdapter: Adapter = {
 
         // Derive title from first H1, or from filename
         const titleMatch = content.match(/^#\s+(.+)/m);
-        const filename = path.split("/").pop()!.replace(/\.md$/, "");
+        const filename = path.split("/").pop()!.replace(/\.mdx?$/, "");
         const title = titleMatch?.[1]?.trim() ?? filename;
         const id = slugify(filename);
 

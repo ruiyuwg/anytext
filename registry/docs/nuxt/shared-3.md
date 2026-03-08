@@ -1,0 +1,144 @@
+# shared
+
+The `shared/` directory allows you to share code that can be used in both the Vue app and the Nitro server.
+
+::note
+The `shared/` directory is available in Nuxt v3.14+.
+::
+
+::important
+Code in the `shared/` directory cannot import any Vue or Nitro code.
+::
+
+::warning
+Auto-imports are not enabled by default in Nuxt v3 to prevent breaking changes in existing projects.
+
+To use these auto-imported utils and types, you must first [set `future.compatibilityVersion: 4` in your `nuxt.config.ts`](https://nuxt.com/docs/3.x/getting-started/upgrade#opting-in-to-nuxt-4).
+::
+
+:video-accordion{title="Watch a video from Vue School on sharing utils and types between app and server" video-id="nnAR-MO3q5M"}
+
+## Usage
+
+**Method 1:** Named export
+
+```ts [shared/utils/capitalize.ts] twoslash
+export const capitalize = (input: string) => {
+  return input[0] ? input[0].toUpperCase() + input.slice(1) : ''
+}
+```
+
+**Method 2:** Default export
+
+```ts [shared/utils/capitalize.ts] twoslash
+export default function (input: string) {
+  return input[0] ? input[0].toUpperCase() + input.slice(1) : ''
+}
+```
+
+You can now use [auto-imported](https://nuxt.com/docs/3.x/directory-structure/shared) utilities in your Nuxt app and `server/` directory.
+
+```vue [app.vue]
+<script setup lang="ts">
+const hello = capitalize('hello')
+</script>
+
+<template>
+  <div>
+    {{ hello }}
+  </div>
+</template>
+```
+
+```ts [server/api/hello.get.ts]
+export default defineEventHandler((event) => {
+  return {
+    hello: capitalize('hello'),
+  }
+})
+```
+
+## How Files Are Scanned
+
+Only files in the `shared/utils/` and `shared/types/` directories will be auto-imported. Files nested within subdirectories of these directories will not be auto-imported unless you add these directories to `imports.dirs` and `nitro.imports.dirs`.
+
+::tip
+The way `shared/utils` and `shared/types` auto-imports work and are scanned is identical to the [`composables/`](https://nuxt.com/docs/3.x/directory-structure/composables) and [`utils/`](https://nuxt.com/docs/3.x/directory-structure/utils) directories.
+::
+
+:read-more{to="https://nuxt.com/docs/3.x/directory-structure/composables#how-files-are-scanned"}
+
+```bash [Directory Structure]
+-| shared/
+---| capitalize.ts        # Not auto-imported
+---| formatters
+-----| lower.ts           # Not auto-imported
+---| utils/
+-----| lower.ts           # Auto-imported
+-----| formatters
+-------| upper.ts         # Not auto-imported
+---| types/
+-----| bar.ts             # Auto-imported
+```
+
+Any other files you create in the `shared/` folder must be manually imported using the `#shared` alias (automatically configured by Nuxt):
+
+```ts
+// For files directly in the shared directory
+import capitalize from '#shared/capitalize'
+
+// For files in nested directories
+import lower from '#shared/formatters/lower'
+
+// For files nested in a folder within utils
+import upper from '#shared/utils/formatters/upper'
+```
+
+This alias ensures consistent imports across your application, regardless of the importing file's location.
+
+:read-more{to="https://nuxt.com/docs/3.x/guide/concepts/auto-imports"}
+
+# utils
+
+The main purpose of the [`utils/` directory](https://nuxt.com/docs/3.x/directory-structure/utils) is to allow a semantic distinction between your Vue composables and other auto-imported utility functions.
+
+## Usage
+
+**Method 1:** Using named export
+
+```ts [utils/index.ts] twoslash
+export const { format: formatNumber } = Intl.NumberFormat('en-GB', {
+  notation: 'compact',
+  maximumFractionDigits: 1,
+})
+```
+
+**Method 2:** Using default export
+
+```ts [utils/random-entry.ts or utils/randomEntry.ts] twoslash
+// It will be available as randomEntry() (camelCase of file name without extension)
+export default function (arr: Array<any>) {
+  return arr[Math.floor(Math.random() * arr.length)]
+}
+```
+
+You can now use auto imported utility functions in `.js`, `.ts` and `.vue` files
+
+```vue [app.vue]
+<template>
+  <p>{{ formatNumber(1234) }}</p>
+</template>
+```
+
+:read-more{to="https://nuxt.com/docs/3.x/guide/concepts/auto-imports"}
+
+:link-example{to="https://nuxt.com/docs/3.x/examples/features/auto-imports"}
+
+::tip
+The way `utils/` auto-imports work and are scanned is identical to the [`composables/`](https://nuxt.com/docs/3.x/directory-structure/composables) directory.
+::
+
+::important
+These utils are only available within the Vue part of your app. :br
+Only `server/utils` are auto-imported in the [`server/`](https://nuxt.com/docs/3.x/directory-structure/server#server-utilities) directory.
+::
