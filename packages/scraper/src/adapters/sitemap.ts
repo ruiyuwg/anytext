@@ -71,8 +71,24 @@ export const sitemapAdapter: Adapter = {
         }
 
         const titleMatch = markdown.match(/^#\s+(.+)/m);
-        const title = titleMatch?.[1]?.trim() ?? deriveTitle(url);
-        const id = slugify(title);
+        const baseTitle = titleMatch?.[1]?.trim() ?? deriveTitle(url);
+        const baseId = slugify(baseTitle);
+
+        // Apply topic prefix based on URL path
+        const prefixMode = source.topicPrefix ?? "none";
+        let id = baseId;
+        let title = baseTitle;
+        if (prefixMode === "directory" || prefixMode === "auto") {
+          const prefix = deriveUrlPrefix(url);
+          if (prefix) {
+            id = `${prefix}-${baseId}`;
+            const displayPrefix = prefix
+              .split("-")
+              .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+              .join(" ");
+            title = `${displayPrefix}: ${baseTitle}`;
+          }
+        }
 
         const firstParagraph = extractFirstParagraph(markdown);
 
@@ -156,6 +172,29 @@ function parseSitemapUrls(xml: string): string[] {
     urls.push(match[1]!);
   }
   return urls;
+}
+
+const DOC_PATH_PREFIXES = ["/docs/", "/documentation/", "/guide/"];
+
+function deriveUrlPrefix(url: string): string | undefined {
+  const pathname = new URL(url).pathname;
+  for (const docPrefix of DOC_PATH_PREFIXES) {
+    const idx = pathname.indexOf(docPrefix);
+    if (idx !== -1) {
+      const after = pathname.slice(idx + docPrefix.length);
+      const segments = after.split("/").filter(Boolean);
+      if (segments.length > 1) {
+        return slugify(segments[0]!);
+      }
+      return undefined;
+    }
+  }
+  // No known doc prefix — use first significant path segment if there are enough segments
+  const segments = pathname.split("/").filter(Boolean);
+  if (segments.length > 1) {
+    return slugify(segments[0]!);
+  }
+  return undefined;
 }
 
 function deriveTitle(url: string): string {

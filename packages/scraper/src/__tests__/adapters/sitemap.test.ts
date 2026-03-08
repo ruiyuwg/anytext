@@ -369,6 +369,179 @@ describe("sitemapAdapter", () => {
     );
   });
 
+  it("auto prefix mode derives prefix from URL path with /docs/ prefix", async () => {
+    vi.spyOn(console, "log").mockImplementation(() => {});
+    const fetchMod = await import("../../pipeline/fetch.js");
+    const extractMod = await import("../../pipeline/extract.js");
+
+    vi.mocked(fetchMod.fetchContent)
+      .mockResolvedValueOnce(
+        '<urlset><url><loc>https://example.com/docs/functions/overview</loc></url><url><loc>https://example.com/docs/storage/buckets</loc></url></urlset>',
+      )
+      .mockResolvedValue("<html>page</html>");
+    vi.mocked(extractMod.extractContent).mockReturnValue(longContent);
+
+    const source: SourceConfig = {
+      ...baseSource,
+      topicPrefix: "auto",
+    };
+    const result = await sitemapAdapter.process(source);
+    expect(result.length).toBe(2);
+    expect(result[0]!.id).toBe("functions-installation");
+    expect(result[0]!.title).toBe("Functions: Installation");
+    expect(result[1]!.id).toBe("storage-installation");
+    expect(result[1]!.title).toBe("Storage: Installation");
+  });
+
+  it("directory prefix mode works the same as auto", async () => {
+    vi.spyOn(console, "log").mockImplementation(() => {});
+    const fetchMod = await import("../../pipeline/fetch.js");
+    const extractMod = await import("../../pipeline/extract.js");
+
+    vi.mocked(fetchMod.fetchContent)
+      .mockResolvedValueOnce(
+        '<urlset><url><loc>https://example.com/docs/functions/overview</loc></url></urlset>',
+      )
+      .mockResolvedValue("<html>page</html>");
+    vi.mocked(extractMod.extractContent).mockReturnValue(longContent);
+
+    const source: SourceConfig = {
+      ...baseSource,
+      topicPrefix: "directory",
+    };
+    const result = await sitemapAdapter.process(source);
+    expect(result[0]!.id).toBe("functions-installation");
+    expect(result[0]!.title).toBe("Functions: Installation");
+  });
+
+  it("none prefix mode has no prefix (backwards compat)", async () => {
+    vi.spyOn(console, "log").mockImplementation(() => {});
+    const fetchMod = await import("../../pipeline/fetch.js");
+    const extractMod = await import("../../pipeline/extract.js");
+
+    vi.mocked(fetchMod.fetchContent)
+      .mockResolvedValueOnce(
+        '<urlset><url><loc>https://example.com/docs/functions/overview</loc></url></urlset>',
+      )
+      .mockResolvedValue("<html>page</html>");
+    vi.mocked(extractMod.extractContent).mockReturnValue(longContent);
+
+    const source: SourceConfig = {
+      ...baseSource,
+      topicPrefix: "none",
+    };
+    const result = await sitemapAdapter.process(source);
+    expect(result[0]!.id).toBe("installation");
+    expect(result[0]!.title).toBe("Installation");
+  });
+
+  it("auto prefix derives from /documentation/ path prefix", async () => {
+    vi.spyOn(console, "log").mockImplementation(() => {});
+    const fetchMod = await import("../../pipeline/fetch.js");
+    const extractMod = await import("../../pipeline/extract.js");
+
+    vi.mocked(fetchMod.fetchContent)
+      .mockResolvedValueOnce(
+        '<urlset><url><loc>https://example.com/documentation/compute/instances</loc></url></urlset>',
+      )
+      .mockResolvedValue("<html>page</html>");
+    vi.mocked(extractMod.extractContent).mockReturnValue(longContent);
+
+    const source: SourceConfig = {
+      ...baseSource,
+      topicPrefix: "auto",
+    };
+    const result = await sitemapAdapter.process(source);
+    expect(result[0]!.id).toBe("compute-installation");
+    expect(result[0]!.title).toBe("Compute: Installation");
+  });
+
+  it("auto prefix derives from /guide/ path prefix", async () => {
+    vi.spyOn(console, "log").mockImplementation(() => {});
+    const fetchMod = await import("../../pipeline/fetch.js");
+    const extractMod = await import("../../pipeline/extract.js");
+
+    vi.mocked(fetchMod.fetchContent)
+      .mockResolvedValueOnce(
+        '<urlset><url><loc>https://example.com/guide/workers/routing</loc></url></urlset>',
+      )
+      .mockResolvedValue("<html>page</html>");
+    vi.mocked(extractMod.extractContent).mockReturnValue(longContent);
+
+    const source: SourceConfig = {
+      ...baseSource,
+      topicPrefix: "auto",
+    };
+    const result = await sitemapAdapter.process(source);
+    expect(result[0]!.id).toBe("workers-installation");
+    expect(result[0]!.title).toBe("Workers: Installation");
+  });
+
+  it("auto prefix uses first path segment when no doc prefix found", async () => {
+    vi.spyOn(console, "log").mockImplementation(() => {});
+    const fetchMod = await import("../../pipeline/fetch.js");
+    const extractMod = await import("../../pipeline/extract.js");
+
+    vi.mocked(fetchMod.fetchContent)
+      .mockResolvedValueOnce(
+        '<urlset><url><loc>https://example.com/products/compute/overview</loc></url></urlset>',
+      )
+      .mockResolvedValue("<html>page</html>");
+    vi.mocked(extractMod.extractContent).mockReturnValue(longContent);
+
+    const source: SourceConfig = {
+      ...baseSource,
+      topicPrefix: "auto",
+    };
+    const result = await sitemapAdapter.process(source);
+    expect(result[0]!.id).toBe("products-installation");
+    expect(result[0]!.title).toBe("Products: Installation");
+  });
+
+  it("auto prefix skips prefix for single-segment paths", async () => {
+    vi.spyOn(console, "log").mockImplementation(() => {});
+    const fetchMod = await import("../../pipeline/fetch.js");
+    const extractMod = await import("../../pipeline/extract.js");
+
+    vi.mocked(fetchMod.fetchContent)
+      .mockResolvedValueOnce(
+        '<urlset><url><loc>https://example.com/overview</loc></url></urlset>',
+      )
+      .mockResolvedValue("<html>page</html>");
+    vi.mocked(extractMod.extractContent).mockReturnValue(longContent);
+
+    const source: SourceConfig = {
+      ...baseSource,
+      topicPrefix: "auto",
+    };
+    const result = await sitemapAdapter.process(source);
+    // Single segment path — no prefix
+    expect(result[0]!.id).toBe("installation");
+    expect(result[0]!.title).toBe("Installation");
+  });
+
+  it("auto prefix skips prefix for single-segment after doc prefix", async () => {
+    vi.spyOn(console, "log").mockImplementation(() => {});
+    const fetchMod = await import("../../pipeline/fetch.js");
+    const extractMod = await import("../../pipeline/extract.js");
+
+    vi.mocked(fetchMod.fetchContent)
+      .mockResolvedValueOnce(
+        '<urlset><url><loc>https://example.com/docs/overview</loc></url></urlset>',
+      )
+      .mockResolvedValue("<html>page</html>");
+    vi.mocked(extractMod.extractContent).mockReturnValue(longContent);
+
+    const source: SourceConfig = {
+      ...baseSource,
+      topicPrefix: "auto",
+    };
+    const result = await sitemapAdapter.process(source);
+    // Only one segment after /docs/ — no prefix
+    expect(result[0]!.id).toBe("installation");
+    expect(result[0]!.title).toBe("Installation");
+  });
+
   it("maxPages limits regular sitemap URLs", async () => {
     vi.spyOn(console, "log").mockImplementation(() => {});
     vi.spyOn(console, "warn").mockImplementation(() => {});
