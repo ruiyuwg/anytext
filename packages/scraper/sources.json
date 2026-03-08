@@ -602,6 +602,19 @@
         "docsPath": "packages/docs/src/routes/docs",
         "include": [".mdx"]
       }
+    },
+    {
+      "id": "jotai",
+      "name": "Jotai",
+      "description": "Primitive and flexible state management for React with atomic model",
+      "version": "2",
+      "adapter": "github",
+      "github": {
+        "repo": "pmndrs/jotai",
+        "branch": "main",
+        "docsPath": "docs",
+        "include": [".mdx"]
+      }
     }
   ]
 }

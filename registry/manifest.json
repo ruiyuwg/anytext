@@ -1,5 +1,5 @@
 {
-  "version": 81,
+  "version": 82,
   "updatedAt": "2026-03-08",
   "libraries": [
     {
@@ -64468,6 +64468,948 @@
           ],
           "path": "jest/webpack.md",
           "tokens": 2032
+        }
+      ]
+    },
+    {
+      "id": "jotai",
+      "name": "Jotai",
+      "description": "Primitive and flexible state management for React with atomic model",
+      "version": "2",
+      "topics": [
+        {
+          "id": "comparison",
+          "title": "comparison",
+          "description": "title: Comparison",
+          "tags": [
+            "useState",
+            "useContext",
+            "Context"
+          ],
+          "path": "jotai/comparison.md",
+          "tokens": 1442
+        },
+        {
+          "id": "concepts",
+          "title": "concepts",
+          "description": "title: Concepts",
+          "tags": [],
+          "path": "jotai/concepts.md",
+          "tokens": 409
+        },
+        {
+          "id": "functional-programming-and-jotai",
+          "title": "functional-programming-and-jotai",
+          "description": "title: Functional programming and Jotai",
+          "tags": [
+            "async",
+            "await",
+            "greetingAtom",
+            "greetingPromise",
+            "nameAtom",
+            "countAtom",
+            "namePromise",
+            "countPromise",
+            "Atom",
+            "Promise"
+          ],
+          "path": "jotai/functional-programming-and-jotai.md",
+          "tokens": 1119
+        },
+        {
+          "id": "showcase",
+          "title": "showcase",
+          "description": "title: Showcase",
+          "tags": [
+            "Completed",
+            "Incompleted",
+            "Save to localStorage",
+            "Load from localStorage"
+          ],
+          "path": "jotai/showcase.md",
+          "tokens": 540
+        },
+        {
+          "id": "atom",
+          "title": "atom",
+          "description": "title: atom",
+          "tags": [
+            "jotai",
+            "atom",
+            "get",
+            "set",
+            "useMemo",
+            "useRef",
+            "useAtom",
+            "initialValue",
+            "read",
+            "(get) => Value"
+          ],
+          "path": "jotai/atom.md",
+          "tokens": 2156
+        },
+        {
+          "id": "provider",
+          "title": "provider",
+          "description": "title: Provider",
+          "tags": [
+            "jotai",
+            "Provider",
+            "store"
+          ],
+          "path": "jotai/provider.md",
+          "tokens": 416
+        },
+        {
+          "id": "store",
+          "title": "store",
+          "description": "title: Store",
+          "tags": [
+            "jotai",
+            "Provider",
+            "get",
+            "set",
+            "sub"
+          ],
+          "path": "jotai/store.md",
+          "tokens": 212
+        },
+        {
+          "id": "use-atom",
+          "title": "use-atom",
+          "description": "title: useAtom",
+          "tags": [
+            "jotai",
+            "useAtom",
+            "useState",
+            "atom()",
+            "setValue",
+            "uppercaseAtom",
+            "textAtom",
+            "useRef",
+            "useMemo",
+            "atomFamily"
+          ],
+          "path": "jotai/use-atom.md",
+          "tokens": 1398
+        },
+        {
+          "id": "cache",
+          "title": "cache",
+          "description": "title: Cache",
+          "tags": [
+            "atomWithCache"
+          ],
+          "path": "jotai/cache.md",
+          "tokens": 659
+        },
+        {
+          "id": "effect",
+          "title": "effect",
+          "description": "title: Effect",
+          "tags": [
+            "observe",
+            "effect",
+            "store",
+            "atomEffect",
+            "withAtomEffect",
+            "Provider",
+            "get",
+            "get.peek",
+            "set.recurse"
+          ],
+          "path": "jotai/effect.md",
+          "tokens": 2085
+        },
+        {
+          "id": "immer",
+          "title": "immer",
+          "description": "title: Immer",
+          "tags": [
+            "immer",
+            "jotai-immer",
+            "atomWithImmer",
+            "atom",
+            "writeFunction",
+            "withImmer",
+            "useImmerAtom",
+            "useSetImmerAtom"
+          ],
+          "path": "jotai/immer.md",
+          "tokens": 757
+        },
+        {
+          "id": "location",
+          "title": "location",
+          "description": "title: Location",
+          "tags": [
+            "window.location",
+            "jotai-location",
+            "atomWithLocation",
+            "replaceState",
+            "pushState",
+            "JSON.stringify",
+            "JSON.parse",
+            "window.location.hash = searchParams"
+          ],
+          "path": "jotai/location.md",
+          "tokens": 1136
+        },
+        {
+          "id": "optics",
+          "title": "optics",
+          "description": "title: Optics",
+          "tags": [
+            "optics-ts",
+            "jotai-optics",
+            "focusAtom",
+            "PrimitiveAtom<{a: number}>",
+            "a",
+            "baseAtom",
+            "PrimitiveAtom<number>",
+            "derivedAtom",
+            "Lens",
+            "Prism"
+          ],
+          "path": "jotai/optics.md",
+          "tokens": 505
+        },
+        {
+          "id": "query",
+          "title": "query",
+          "description": "title: Query",
+          "tags": [
+            "jotai",
+            "jotai-tanstack-query",
+            "@tanstack/query-core",
+            "atomWithQuery",
+            "atomWithInfiniteQuery",
+            "atomWithMutation",
+            "atomWithSuspenseQuery",
+            "atomWithSuspenseInfiniteQuery",
+            "atomWithMutationState",
+            "getOptions"
+          ],
+          "path": "jotai/query.md",
+          "tokens": 3731
+        },
+        {
+          "id": "redux",
+          "title": "redux",
+          "description": "title: Redux",
+          "tags": [
+            "redux",
+            "jotai-redux",
+            "atomWithStore"
+          ],
+          "path": "jotai/redux.md",
+          "tokens": 315
+        },
+        {
+          "id": "relay",
+          "title": "relay",
+          "description": "title: Relay",
+          "tags": [
+            "jotai-relay",
+            "relay-runtime",
+            "atomWithQuery",
+            "atomWithMutation",
+            "atomWithSubscription"
+          ],
+          "path": "jotai/relay.md",
+          "tokens": 592
+        },
+        {
+          "id": "scope",
+          "title": "scope",
+          "description": "title: Scope",
+          "tags": [
+            "jotai-scope",
+            "store",
+            "<ScopeProvider>",
+            "createIsolation",
+            "bunshi",
+            "jotai-molecules"
+          ],
+          "path": "jotai/scope.md",
+          "tokens": 988
+        },
+        {
+          "id": "trpc",
+          "title": "trpc",
+          "description": "title: tRPC",
+          "tags": [
+            "jotai-trpc",
+            "@trpc/client",
+            "@trpc/server",
+            "...atomWithQuery",
+            "...query",
+            "...atomWithMutation",
+            "...mutate",
+            "...atomWithSubscription",
+            "...subscribe"
+          ],
+          "path": "jotai/trpc.md",
+          "tokens": 535
+        },
+        {
+          "id": "urql",
+          "title": "urql",
+          "description": "title: URQL",
+          "tags": [
+            "jotai-urql",
+            "@urql/core",
+            "wonka",
+            "atomWithQuery",
+            "atomWithMutation",
+            "atomWithSubscription",
+            "import { loadable } from \"jotai/utils\"",
+            "@tanstack/react-query",
+            "data",
+            "undefined"
+          ],
+          "path": "jotai/urql.md",
+          "tokens": 2013
+        },
+        {
+          "id": "valtio",
+          "title": "valtio",
+          "description": "title: Valtio",
+          "tags": [
+            "valtio",
+            "jotai-valtio",
+            "atomWithProxy",
+            "valtio/useSnapshot",
+            "mutableAtom",
+            "value",
+            "proxyFn",
+            "proxy"
+          ],
+          "path": "jotai/valtio.md",
+          "tokens": 744
+        },
+        {
+          "id": "xstate",
+          "title": "xstate",
+          "description": "title: XState",
+          "tags": [
+            "xstate",
+            "jotai-xstate",
+            "atomWithMachine",
+            "getMachine",
+            "get",
+            "RESTART",
+            "jotai/xstate"
+          ],
+          "path": "jotai/xstate.md",
+          "tokens": 885
+        },
+        {
+          "id": "zustand",
+          "title": "zustand",
+          "description": "title: Zustand",
+          "tags": [
+            "zustand",
+            "jotai-zustand",
+            "atomWithStore"
+          ],
+          "path": "jotai/zustand.md",
+          "tokens": 298
+        },
+        {
+          "id": "async",
+          "title": "async",
+          "description": "title: Async",
+          "tags": [
+            "read",
+            "Suspense",
+            "loadable",
+            "write",
+            "atom(0)",
+            "PrimitiveAtom<number>",
+            "Promise<number>",
+            "<Suspense>",
+            "<Provider>"
+          ],
+          "path": "jotai/async.md",
+          "tokens": 974
+        },
+        {
+          "id": "atoms-in-atom",
+          "title": "atoms-in-atom",
+          "description": "title: Atoms in atom",
+          "tags": [
+            "atom()",
+            "anAtom.toString()",
+            "key"
+          ],
+          "path": "jotai/atoms-in-atom.md",
+          "tokens": 970
+        },
+        {
+          "id": "composing-atoms",
+          "title": "composing-atoms",
+          "description": "title: Composing atoms",
+          "tags": [
+            "atom",
+            "atom()",
+            "textLenAtom",
+            "write",
+            "textUpperCaseAtom",
+            "textAtom",
+            "numberAtom",
+            "atom(10)",
+            "overwrittenAtom",
+            "null"
+          ],
+          "path": "jotai/composing-atoms.md",
+          "tokens": 1626
+        },
+        {
+          "id": "core-internals",
+          "title": "core-internals",
+          "description": "title: Core internals",
+          "tags": [],
+          "path": "jotai/core-internals.md",
+          "tokens": 1642
+        },
+        {
+          "id": "debugging",
+          "title": "debugging",
+          "description": "title: Debugging",
+          "tags": [
+            "console.log",
+            "1:<no debugLabel>",
+            "key",
+            "debugLabel",
+            "NODE_ENV === 'development'",
+            "useAtom",
+            "useDebugValue",
+            "useAtomsDebugValue",
+            "Provider",
+            "useAtomDevtools"
+          ],
+          "path": "jotai/debugging.md",
+          "tokens": 1715
+        },
+        {
+          "id": "initialize-atom-on-render",
+          "title": "initialize-atom-on-render",
+          "description": "title: Initializing state on render",
+          "tags": [
+            "Provider",
+            "initialValues",
+            "TextDisplay",
+            "PrettyText",
+            "UpdateTextInput",
+            "text",
+            "initialTextValue",
+            "textAtom",
+            "useHydrateAtoms",
+            "Map"
+          ],
+          "path": "jotai/initialize-atom-on-render.md",
+          "tokens": 972
+        },
+        {
+          "id": "migrating-to-v2-api",
+          "title": "migrating-to-v2-api",
+          "description": "title: v2 API migration",
+          "tags": [
+            "jotai/vanilla",
+            "write",
+            "useAtom",
+            "splitAtom",
+            "WritableAtom",
+            "initialValues",
+            "store",
+            "abortableAtom",
+            "waitForAll",
+            "Promise.all"
+          ],
+          "path": "jotai/migrating-to-v2-api.md",
+          "tokens": 1557
+        },
+        {
+          "id": "nextjs",
+          "title": "nextjs",
+          "description": "title: Next.js",
+          "tags": [
+            "useHydrateAtoms",
+            "atomWithHash",
+            "Router.events.on()",
+            "atomWithHash()",
+            "setHash",
+            "replaceState",
+            "Provider"
+          ],
+          "path": "jotai/nextjs.md",
+          "tokens": 965
+        },
+        {
+          "id": "performance",
+          "title": "performance",
+          "description": "title: Performance",
+          "tags": [
+            "useMemo",
+            "useCallback",
+            "selectAtom",
+            "focusAtom",
+            "splitAtom"
+          ],
+          "path": "jotai/performance.md",
+          "tokens": 1005
+        },
+        {
+          "id": "persistence",
+          "title": "persistence",
+          "description": "title: Persistence",
+          "tags": [
+            "sessionStorage",
+            "localStorage",
+            "AsyncStorage",
+            "atomWithStorage"
+          ],
+          "path": "jotai/persistence.md",
+          "tokens": 1312
+        },
+        {
+          "id": "react-native",
+          "title": "react-native",
+          "description": "title: React Native",
+          "tags": [],
+          "path": "jotai/react-native.md",
+          "tokens": 288
+        },
+        {
+          "id": "resettable",
+          "title": "resettable",
+          "description": "title: Resettable",
+          "tags": [
+            "jotai/utils"
+          ],
+          "path": "jotai/resettable.md",
+          "tokens": 501
+        },
+        {
+          "id": "testing",
+          "title": "testing",
+          "description": "title: Testing",
+          "tags": [
+            "Counter.tsx",
+            "Counter.test.ts",
+            "countAtom.ts",
+            "countAtom.test.ts",
+            "Provider"
+          ],
+          "path": "jotai/testing.md",
+          "tokens": 1042
+        },
+        {
+          "id": "typescript",
+          "title": "Read only derived atoms",
+          "description": "title: TypeScript",
+          "tags": [
+            "strictNullChecks",
+            "\"strict\": true"
+          ],
+          "path": "jotai/typescript.md",
+          "tokens": 915
+        },
+        {
+          "id": "using-store-outside-react",
+          "title": "using-store-outside-react",
+          "description": "title: Using store outside React",
+          "tags": [
+            "createStore"
+          ],
+          "path": "jotai/using-store-outside-react.md",
+          "tokens": 263
+        },
+        {
+          "id": "vite",
+          "title": "vite",
+          "description": "title: Vite",
+          "tags": [
+            "jotai-babel",
+            "vite.config.ts"
+          ],
+          "path": "jotai/vite.md",
+          "tokens": 200
+        },
+        {
+          "id": "index",
+          "title": "index",
+          "description": "title: Documentation",
+          "tags": [
+            "useState",
+            "jotai",
+            "jotai/utils",
+            "atomWithStorage",
+            "atomWithQuery",
+            "atomWithMachine"
+          ],
+          "path": "jotai/index.md",
+          "tokens": 431
+        },
+        {
+          "id": "atom-with-broadcast",
+          "title": "atom-with-broadcast",
+          "description": "title: atomWithBroadcast",
+          "tags": [
+            "atomWithBroadcast",
+            "atomWithStorage"
+          ],
+          "path": "jotai/atom-with-broadcast.md",
+          "tokens": 540
+        },
+        {
+          "id": "atom-with-compare",
+          "title": "atom-with-compare",
+          "description": "title: atomWithCompare",
+          "tags": [
+            "atomWithCompare",
+            "areEqual(prev, next)",
+            "Object.is",
+            "areEqual(a, b)",
+            "Object.is(a, b)"
+          ],
+          "path": "jotai/atom-with-compare.md",
+          "tokens": 422
+        },
+        {
+          "id": "atom-with-debounce",
+          "title": "atom-with-debounce",
+          "description": "title: atomWithDebounce",
+          "tags": [
+            "atomWithDebounce",
+            "useTransition",
+            "useDeferredValue",
+            "debouncedValueAtom",
+            "<SearchInput>",
+            "delayMilliseconds"
+          ],
+          "path": "jotai/atom-with-debounce.md",
+          "tokens": 744
+        },
+        {
+          "id": "atom-with-listeners",
+          "title": "atom-with-listeners",
+          "description": "title: atomWithListeners",
+          "tags": [
+            "atomWithListeners"
+          ],
+          "path": "jotai/atom-with-listeners.md",
+          "tokens": 558
+        },
+        {
+          "id": "atom-with-refresh-and-default",
+          "title": "atom-with-refresh-and-default",
+          "description": "title: atomWithRefreshAndDefault",
+          "tags": [],
+          "path": "jotai/atom-with-refresh-and-default.md",
+          "tokens": 581
+        },
+        {
+          "id": "atom-with-toggle-and-storage",
+          "title": "atom-with-toggle-and-storage",
+          "description": "title: atomWithToggleAndStorage",
+          "tags": [
+            "atomWithToggleAndStorage",
+            "atomWithToggle",
+            "atomWithStorage"
+          ],
+          "path": "jotai/atom-with-toggle-and-storage.md",
+          "tokens": 282
+        },
+        {
+          "id": "atom-with-toggle",
+          "title": "atom-with-toggle",
+          "description": "title: atomWithToggle",
+          "tags": [
+            "atomWithToggle"
+          ],
+          "path": "jotai/atom-with-toggle.md",
+          "tokens": 343
+        },
+        {
+          "id": "custom-useatom-hooks",
+          "title": "custom-useatom-hooks",
+          "description": "title: Custom useAtom hooks",
+          "tags": [
+            "keyFn",
+            "useCallback"
+          ],
+          "path": "jotai/custom-useatom-hooks.md",
+          "tokens": 474
+        },
+        {
+          "id": "large-objects",
+          "title": "large-objects",
+          "description": "title: Large objects",
+          "tags": [
+            "focusAtom",
+            "WritableAtom",
+            "peopleAtom",
+            "films",
+            "splitAtom"
+          ],
+          "path": "jotai/large-objects.md",
+          "tokens": 912
+        },
+        {
+          "id": "use-atom-effect",
+          "title": "use-atom-effect",
+          "description": "title: useAtomEffect",
+          "tags": [
+            "useAtomEffect"
+          ],
+          "path": "jotai/use-atom-effect.md",
+          "tokens": 547
+        },
+        {
+          "id": "use-reducer-atom",
+          "title": "use-reducer-atom",
+          "description": "title: useReducerAtom",
+          "tags": [
+            "useReducerAtom"
+          ],
+          "path": "jotai/use-reducer-atom.md",
+          "tokens": 341
+        },
+        {
+          "id": "bunja",
+          "title": "bunja",
+          "description": "title: Bunja",
+          "tags": [
+            "bunja",
+            "useBunja",
+            "bunja.effect",
+            "pageBunja",
+            "childBunja",
+            "modalBunja",
+            "useBunja(modalBunja)",
+            "<ChildComponent />",
+            "fetchBunja",
+            "createScopeFromContext"
+          ],
+          "path": "jotai/bunja.md",
+          "tokens": 1573
+        },
+        {
+          "id": "derive",
+          "title": "derive",
+          "description": "title: Derive",
+          "tags": [
+            "jotai-derive",
+            "soon",
+            "soonAll",
+            "derive"
+          ],
+          "path": "jotai/derive.md",
+          "tokens": 1107
+        },
+        {
+          "id": "history",
+          "title": "history",
+          "description": "title: History",
+          "tags": [
+            "withHistory",
+            "targetAtom",
+            "limit"
+          ],
+          "path": "jotai/history.md",
+          "tokens": 503
+        },
+        {
+          "id": "babel",
+          "title": "babel",
+          "description": "title: Babel",
+          "tags": [
+            "jotai-babel",
+            "jotai/babel",
+            "babel",
+            "debugLabel",
+            "babel preset"
+          ],
+          "path": "jotai/babel.md",
+          "tokens": 745
+        },
+        {
+          "id": "devtools",
+          "title": "devtools",
+          "description": "title: Devtools",
+          "tags": [
+            "jotai-devtools",
+            "<DevTools/>",
+            "@emotion/react",
+            "jotai-babel",
+            "transpilePackages",
+            "useAtomsDebugValue",
+            "useDebugValue",
+            "useAtomDevtools",
+            "anAtom",
+            "name"
+          ],
+          "path": "jotai/devtools.md",
+          "tokens": 2575
+        },
+        {
+          "id": "swc",
+          "title": "swc",
+          "description": "description: This doc describes SWC plugins for Jotai.",
+          "tags": [
+            "jotai",
+            ".swcrc",
+            "debugLabel",
+            "SWC"
+          ],
+          "path": "jotai/swc.md",
+          "tokens": 695
+        },
+        {
+          "id": "async",
+          "title": "async",
+          "description": "title: Async",
+          "tags": [
+            "loadable",
+            "loading",
+            "hasData",
+            "hasError",
+            "atomWithObservable",
+            "subject",
+            "observable",
+            "<Suspense>",
+            "{ initialValue }",
+            "initialValue"
+          ],
+          "path": "jotai/async.md",
+          "tokens": 1002
+        },
+        {
+          "id": "callback",
+          "title": "callback",
+          "description": "title: Callback",
+          "tags": [],
+          "path": "jotai/callback.md",
+          "tokens": 374
+        },
+        {
+          "id": "family",
+          "title": "family",
+          "description": "title: Family",
+          "tags": [
+            "atomFamily",
+            "jotai-family",
+            "atomTree",
+            "param",
+            "initializeAtom",
+            "atom()",
+            "atomWithDefault()",
+            "areEqual",
+            "Object.is",
+            "myFamily(param)"
+          ],
+          "path": "jotai/family.md",
+          "tokens": 1394
+        },
+        {
+          "id": "lazy",
+          "title": "lazy",
+          "description": "title: Lazy",
+          "tags": [
+            "atomWithLazy",
+            "jotai-scope"
+          ],
+          "path": "jotai/lazy.md",
+          "tokens": 593
+        },
+        {
+          "id": "reducer",
+          "title": "reducer",
+          "description": "title: Reducer",
+          "tags": [],
+          "path": "jotai/reducer.md",
+          "tokens": 151
+        },
+        {
+          "id": "resettable",
+          "title": "resettable",
+          "description": "title: Resettable",
+          "tags": [
+            "initialValue",
+            "useResetAtom",
+            "RESET",
+            "atomWithReset",
+            "atomWithDefault",
+            "atom",
+            "set",
+            "getter"
+          ],
+          "path": "jotai/resettable.md",
+          "tokens": 1312
+        },
+        {
+          "id": "select",
+          "title": "select",
+          "description": "title: Select",
+          "tags": [
+            "selectAtom",
+            "equalityFn",
+            "prevSlice",
+            "selector.",
+            "useAtom"
+          ],
+          "path": "jotai/select.md",
+          "tokens": 695
+        },
+        {
+          "id": "split",
+          "title": "split",
+          "description": "title: Split",
+          "tags": [
+            "splitAtom",
+            "write",
+            "remove",
+            "insert",
+            "move",
+            "keyExtractor"
+          ],
+          "path": "jotai/split.md",
+          "tokens": 855
+        },
+        {
+          "id": "ssr",
+          "title": "ssr",
+          "description": "keywords: ssr,server,hydrate,hydration,next,nextjs,gatsby,remix,waku,framework",
+          "tags": [
+            "useHydrateAtoms",
+            "'use client'",
+            "[atom, value]",
+            "ES5",
+            "as const"
+          ],
+          "path": "jotai/ssr.md",
+          "tokens": 672
+        },
+        {
+          "id": "storage",
+          "title": "storage",
+          "description": "title: Storage",
+          "tags": [
+            "atomWithStorage",
+            "localStorage",
+            "sessionStorage",
+            "AsyncStorage",
+            "intialValue",
+            "getOnInit",
+            "false",
+            "true",
+            "JSON.stringify()",
+            "JSON.parse()"
+          ],
+          "path": "jotai/storage.md",
+          "tokens": 2219
         }
       ]
     },
