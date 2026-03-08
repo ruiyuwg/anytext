@@ -168,6 +168,20 @@
         "servicePattern": "(https://developers\\.cloudflare\\.com/[\\w-]+/llms\\.txt)",
         "contentType": "llms-txt"
       }
+    },
+    {
+      "id": "aws",
+      "name": "AWS",
+      "description": "Amazon Web Services cloud platform with compute, storage, database, machine learning, and 200+ services",
+      "version": "2026",
+      "adapter": "llms-index",
+      "url": "https://docs.aws.amazon.com/llms.txt",
+      "topicPrefix": "auto",
+      "rateLimit": 5,
+      "llmsIndex": {
+        "servicePattern": "(https://docs\\.aws\\.amazon\\.com/[^\\s)]+/llms\\.txt)",
+        "contentType": "llms-txt"
+      }
     }
   ]
 }
