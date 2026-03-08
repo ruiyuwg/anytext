@@ -1,77 +1,28 @@
-import { Separator } from "@/components/ui/separator";
 import { libraries } from "@/lib/data";
-
-const steps = [
-  {
-    number: "01",
-    title: "Agent calls anytext",
-    description: (
-      <>
-        Your coding agent runs{" "}
-        <code className="rounded bg-muted px-1.5 py-0.5 text-xs">
-          anytext read react hooks
-        </code>
-      </>
-    ),
-  },
-  {
-    number: "02",
-    title: "Cache check",
-    description: (
-      <>
-        CLI checks{" "}
-        <code className="rounded bg-muted px-1.5 py-0.5 text-xs">
-          ~/.anytext/
-        </code>{" "}
-        — cache hit returns in under 50ms
-      </>
-    ),
-  },
-  {
-    number: "03",
-    title: "Fetch & cache",
-    description:
-      "On miss, fetches clean markdown from the GitHub registry, caches locally, returns to stdout",
-  },
-];
 
 export function HowItWorks() {
   return (
     <section className="border-b">
-      <div className="px-6 py-16 md:py-24">
-        <div className="mx-auto max-w-xl space-y-4 text-center">
-          <h2 className="text-balance text-3xl font-semibold md:text-4xl">
-            How it works
-          </h2>
-          <p className="text-muted-foreground">
-            No scraping, no external APIs at runtime. Just static file fetches
-            from the registry.
-          </p>
-        </div>
-      </div>
       <div className="grid border-t md:grid-cols-2 md:divide-x">
-        {/* Steps — left column */}
-        <div className="grid grid-rows-3 divide-y">
-          {steps.map((step) => (
-            <div key={step.number} className="flex gap-4 p-6">
-              <div className="text-xs text-muted-foreground font-mono pt-0.5">
-                {step.number}
-              </div>
-              <div className="space-y-1">
-                <p className="text-sm font-medium">{step.title}</p>
-                <p className="text-sm text-muted-foreground">
-                  {step.description}
-                </p>
-              </div>
-            </div>
-          ))}
+        {/* Heading — left column, vertically centered */}
+        <div className="flex items-center px-6 py-16 md:py-24">
+          <div className="space-y-4 md:text-center md:mx-auto md:max-w-xs">
+            <h2 className="text-balance text-3xl font-semibold md:text-4xl">
+              How it works
+            </h2>
+            <p className="text-muted-foreground">
+              No scraping, no external APIs at runtime. Just static file fetches
+              from the registry.
+            </p>
+          </div>
         </div>
-        {/* Terminal demo — right column */}
+        {/* Terminal — right column */}
         <div className="border-t md:border-t-0">
           <div className="space-y-4 p-6 font-mono text-sm">
             <div>
               <span className="text-muted-foreground">$</span>{" "}
-              <span className="text-foreground">anytext list</span>
+              <span className="text-green-400">anytext</span>{" "}
+              <span className="text-sky-400">list</span>
             </div>
             <div className="text-muted-foreground leading-relaxed">
               {libraries.map((lib) => (
@@ -90,10 +41,12 @@ export function HowItWorks() {
                 </div>
               ))}
             </div>
-            <Separator />
             <div>
               <span className="text-muted-foreground">$</span>{" "}
-              <span className="text-foreground">anytext read react hooks</span>
+              <span className="text-green-400">anytext</span>{" "}
+              <span className="text-sky-400">read</span>{" "}
+              <span className="text-amber-300">react</span>{" "}
+              <span className="text-amber-300">hooks</span>
             </div>
             <div className="text-muted-foreground">
               <div className="text-foreground font-bold"># React Hooks</div>

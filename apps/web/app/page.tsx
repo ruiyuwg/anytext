@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
-      <main className="mx-auto w-full max-w-5xl flex-1 border-x">
+      <main className="mx-auto w-full max-w-5xl flex-1 md:border-x">
         <Hero />
         <GetStarted />
         <IntegrationsSection />

@@ -33,7 +33,7 @@ export default function RegistryPage() {
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
-      <main className="mx-auto w-full max-w-5xl flex-1 border-x">
+      <main className="mx-auto w-full max-w-5xl flex-1 md:border-x">
         <section className="border-b">
           <div className="px-6 py-16 md:py-24">
             <div className="mx-auto max-w-xl space-y-4 text-center">

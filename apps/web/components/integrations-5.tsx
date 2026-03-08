@@ -11,7 +11,7 @@ import Link from 'next/link'
 
 export default function IntegrationsSection() {
     return (
-        <section className="border-b">
+        <section>
             <div className="py-16 md:py-24">
                 <div className="px-6">
                     <div className="aspect-16/10 group relative mx-auto flex max-w-[22rem] items-center justify-between sm:max-w-sm">

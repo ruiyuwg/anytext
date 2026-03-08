@@ -12,6 +12,9 @@ export function Header() {
         </Link>
         <div className="flex items-center gap-3">
           <Button variant="ghost" size="sm" asChild>
+            <Link href="/docs">Docs</Link>
+          </Button>
+          <Button variant="ghost" size="sm" asChild>
             <Link href="/registry">Registry</Link>
           </Button>
           <Button variant="ghost" size="icon-sm" asChild>
