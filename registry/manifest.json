@@ -1,5 +1,5 @@
 {
-  "version": 87,
+  "version": 88,
   "updatedAt": "2026-03-08",
   "libraries": [
     {
@@ -21228,6 +21228,148 @@
           ],
           "path": "chakra-ui/utilities.md",
           "tokens": 660
+        }
+      ]
+    },
+    {
+      "id": "date-fns",
+      "name": "date-fns",
+      "description": "Modern JavaScript date utility library with comprehensive, modular functions",
+      "version": "4",
+      "topics": [
+        {
+          "id": "cdn",
+          "title": "CDN",
+          "description": "Starting with v3.6.0, the CDN versions of date-fns are available on [jsDelivr](https://www.jsdelivr.com/package/npm/d...",
+          "tags": [
+            "window.dateFns",
+            "cdn.js",
+            "cdn.min.js",
+            "dateFns",
+            "dateFns.fp",
+            "dateFns.locale",
+            "dateFns.locale.LOCALE"
+          ],
+          "path": "date-fns/cdn.md",
+          "tokens": 939
+        },
+        {
+          "id": "fp",
+          "title": "FP Guide",
+          "description": "**date-fns** v2.x provides [functional programming](https://en.wikipedia.org/wiki/Functional_programming) (FP)",
+          "tags": [
+            "'date-fns/fp'",
+            "format",
+            "parse",
+            "WithOptions",
+            "addFiveYears",
+            "dateToString",
+            "toUpper",
+            "compose",
+            "flow"
+          ],
+          "path": "date-fns/fp.md",
+          "tokens": 597
+        },
+        {
+          "id": "gettingstarted",
+          "title": "Getting Started",
+          "description": "**date-fns** provides the most comprehensive, yet simple and consistent toolset",
+          "tags": [],
+          "path": "date-fns/gettingstarted.md",
+          "tokens": 441
+        },
+        {
+          "id": "i18n",
+          "title": "Internationalization",
+          "description": "There are just a few functions that support I18n:",
+          "tags": [
+            "format",
+            "formatDistance",
+            "formatDistanceStrict",
+            "formatRelative"
+          ],
+          "path": "date-fns/i18n.md",
+          "tokens": 718
+        },
+        {
+          "id": "i18ncontributionguide",
+          "title": "I18n Contribution Guide",
+          "description": "To add a new locale:",
+          "tags": [
+            "en-US",
+            "formatDistance",
+            "formatDistanceStrict",
+            "formatLong",
+            "format",
+            "formatRelative",
+            "localize",
+            "match",
+            "parse",
+            "options"
+          ],
+          "path": "date-fns/i18ncontributionguide.md",
+          "tokens": 7006
+        },
+        {
+          "id": "release",
+          "title": "Releasing date-fns",
+          "description": "1. First, make sure that the library is built by running `./scripts/build/build.sh` and committing and pushing any ch...",
+          "tags": [
+            "./scripts/build/build.sh",
+            "package.json"
+          ],
+          "path": "date-fns/release.md",
+          "tokens": 253
+        },
+        {
+          "id": "timezones",
+          "title": "Time zones",
+          "description": "Starting from v4, date-fns has first-class support for time zones. It is provided via [`@date-fns/tz`] and [`@date-fn...",
+          "tags": [
+            "@date-fns/tz",
+            "@date-fns/utc",
+            "UTCDateMini",
+            "TZDateMini",
+            "239 B",
+            "761 B",
+            "date-fns-tz",
+            "Date",
+            "TZDate",
+            "UTCDate"
+          ],
+          "path": "date-fns/timezones.md",
+          "tokens": 1294
+        },
+        {
+          "id": "unicodetokens",
+          "title": "Unicode Tokens",
+          "description": "Starting with v2, `format` and `parse` use [Unicode tokens].",
+          "tags": [
+            "format",
+            "parse",
+            "D",
+            "DD",
+            "d",
+            "dd",
+            "YY",
+            "YYYY",
+            "yy",
+            "yyyy"
+          ],
+          "path": "date-fns/unicodetokens.md",
+          "tokens": 414
+        },
+        {
+          "id": "webpack",
+          "title": "webpack",
+          "description": "If a locale is imported dynamically, then all locales from date-fns are loaded by webpack into a bundle (~160kb) or s...",
+          "tags": [
+            "config.js",
+            "webpack.config.js"
+          ],
+          "path": "date-fns/webpack.md",
+          "tokens": 383
         }
       ]
     },

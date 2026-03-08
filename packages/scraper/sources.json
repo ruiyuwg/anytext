@@ -669,6 +669,19 @@
         "include": [".md"],
         "maxFiles": 5000
       }
+    },
+    {
+      "id": "date-fns",
+      "name": "date-fns",
+      "description": "Modern JavaScript date utility library with comprehensive, modular functions",
+      "version": "4",
+      "adapter": "github",
+      "github": {
+        "repo": "date-fns/date-fns",
+        "branch": "main",
+        "docsPath": "docs",
+        "include": [".md"]
+      }
     }
   ]
 }
