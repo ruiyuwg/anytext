@@ -1,0 +1,371 @@
+# diff (/docs/cli/migrate/diff)
+
+The `prisma migrate diff` command compares two database schema sources and outputs a description of the migration needed to transform the first into the second.
+
+```
+This command is only partially supported for [MongoDB](/orm/core-concepts/supported-databases/mongodb). See options below for details.
+```
+
+Usage \[#usage]
+
+```bash
+prisma migrate diff --from-... <source1> --to-... <source2>
+```
+
+The output can be a human-readable summary (default) or an executable script.
+
+```
+The `migrate diff` command can only compare database features [supported by Prisma](/orm/reference/database-features). Differences in unsupported features (views, triggers, etc.) won't be shown.
+```
+
+Prerequisites \[#prerequisites]
+
+If using `--from-config-datasource` or `--to-config-datasource`, configure your database connection in `prisma.config.ts`:
+
+```prisma file=schema.prisma
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+```
+
+```typescript file=prisma.config.ts
+import { defineConfig, env } from "prisma/config";
+
+export default defineConfig({
+  schema: "prisma/schema.prisma",
+  migrations: {
+    path: "prisma/migrations",
+  },
+  datasource: {
+    url: env("DATABASE_URL"),
+  },
+});
+```
+
+Source types \[#source-types]
+
+Both sources must use the same database provider.
+
+From options (one required) \[#from-options-one-required]
+
+| Option                     | Description                              | Notes                    |
+| -------------------------- | ---------------------------------------- | ------------------------ |
+| `--from-empty`             | Assume the source is an empty data model |                          |
+| `--from-schema`            | Path to a Prisma schema file             |                          |
+| `--from-migrations`        | Path to Prisma migrations directory      | Not supported in MongoDB |
+| `--from-config-datasource` | Use datasource from Prisma config file   | Prisma v7+               |
+
+To options (one required) \[#to-options-one-required]
+
+| Option                   | Description                                   | Notes                    |
+| ------------------------ | --------------------------------------------- | ------------------------ |
+| `--to-empty`             | Assume the destination is an empty data model |                          |
+| `--to-schema`            | Path to a Prisma schema file                  |                          |
+| `--to-migrations`        | Path to Prisma migrations directory           | Not supported in MongoDB |
+| `--to-config-datasource` | Use datasource from Prisma config file        | Prisma v7+               |
+
+Other options \[#other-options]
+
+| Option           | Description                                              | Notes                       |
+| ---------------- | -------------------------------------------------------- | --------------------------- |
+| `--config`       | Custom path to your Prisma config file                   |                             |
+| `--script`       | Output a SQL script instead of human-readable summary    | Not supported in MongoDB    |
+| `-o`, `--output` | Write to a file instead of stdout                        | Available since 5.12.1      |
+| `--exit-code`    | Change exit code behavior: Empty=0, Error=1, Not empty=2 | Default: Success=0, Error=1 |
+| `--help`         | Display help message                                     |                             |
+
+```
+**Prisma v7 breaking change**: The `--from-url`, `--to-url`, `--from-schema-datasource`, `--to-schema-datasource`, and `--shadow-database-url` options have been removed. Use `--from-config-datasource` and `--to-config-datasource` instead.
+```
+
+Examples \[#examples]
+
+Compare database to schema \[#compare-database-to-schema]
+
+Roll forward after a migration failed:
+
+````
+  npm
+
+
+
+  pnpm
+
+
+
+  yarn
+
+
+
+  bun
+
+
+
+
+```bash
+npx prisma migrate diff \
+  --from-config-datasource \
+  --to-schema=next_datamodel.prisma \
+  --script
+```
+
+
+
+```bash
+pnpm dlx prisma migrate diff \
+  --from-config-datasource \
+  --to-schema=next_datamodel.prisma \
+  --script
+```
+
+
+
+```bash
+yarn dlx prisma migrate diff \
+  --from-config-datasource \
+  --to-schema=next_datamodel.prisma \
+  --script
+```
+
+
+
+```bash
+bunx --bun prisma migrate diff \
+  --from-config-datasource \
+  --to-schema=next_datamodel.prisma \
+  --script
+```
+````
+
+Compare schema to database \[#compare-schema-to-database]
+
+````
+  npm
+
+
+
+  pnpm
+
+
+
+  yarn
+
+
+
+  bun
+
+
+
+
+```bash
+npx prisma migrate diff \
+  --from-schema=schema.prisma \
+  --to-config-datasource \
+  --script
+```
+
+
+
+```bash
+pnpm dlx prisma migrate diff \
+  --from-schema=schema.prisma \
+  --to-config-datasource \
+  --script
+```
+
+
+
+```bash
+yarn dlx prisma migrate diff \
+  --from-schema=schema.prisma \
+  --to-config-datasource \
+  --script
+```
+
+
+
+```bash
+bunx --bun prisma migrate diff \
+  --from-schema=schema.prisma \
+  --to-config-datasource \
+  --script
+```
+````
+
+Compare migrations to database \[#compare-migrations-to-database]
+
+Generate a migration for a hotfix already applied on production:
+
+````
+  npm
+
+
+
+  pnpm
+
+
+
+  yarn
+
+
+
+  bun
+
+
+
+
+```bash
+npx prisma migrate diff \
+  --from-migrations ./migrations \
+  --to-config-datasource \
+  --script
+```
+
+
+
+```bash
+pnpm dlx prisma migrate diff \
+  --from-migrations ./migrations \
+  --to-config-datasource \
+  --script
+```
+
+
+
+```bash
+yarn dlx prisma migrate diff \
+  --from-migrations ./migrations \
+  --to-config-datasource \
+  --script
+```
+
+
+
+```bash
+bunx --bun prisma migrate diff \
+  --from-migrations ./migrations \
+  --to-config-datasource \
+  --script
+```
+````
+
+Pipe output to db execute \[#pipe-output-to-db-execute]
+
+````
+  npm
+
+
+
+  pnpm
+
+
+
+  yarn
+
+
+
+  bun
+
+
+
+
+```bash
+npx prisma migrate diff \
+  --from-config-datasource \
+  --to-schema=schema.prisma \
+  --script | prisma db execute --stdin
+```
+
+
+
+```bash
+pnpm dlx prisma migrate diff \
+  --from-config-datasource \
+  --to-schema=schema.prisma \
+  --script | prisma db execute --stdin
+```
+
+
+
+```bash
+yarn dlx prisma migrate diff \
+  --from-config-datasource \
+  --to-schema=schema.prisma \
+  --script | prisma db execute --stdin
+```
+
+
+
+```bash
+bunx --bun prisma migrate diff \
+  --from-config-datasource \
+  --to-schema=schema.prisma \
+  --script | prisma db execute --stdin
+```
+````
+
+Check if sources are in sync \[#check-if-sources-are-in-sync]
+
+Exits with code 2 if changes are detected:
+
+````
+  npm
+
+
+
+  pnpm
+
+
+
+  yarn
+
+
+
+  bun
+
+
+
+
+```bash
+npx prisma migrate diff \
+  --exit-code \
+  --from-config-datasource \
+  --to-schema=schema.prisma
+```
+
+
+
+```bash
+pnpm dlx prisma migrate diff \
+  --exit-code \
+  --from-config-datasource \
+  --to-schema=schema.prisma
+```
+
+
+
+```bash
+yarn dlx prisma migrate diff \
+  --exit-code \
+  --from-config-datasource \
+  --to-schema=schema.prisma
+```
+
+
+
+```bash
+bunx --bun prisma migrate diff \
+  --exit-code \
+  --from-config-datasource \
+  --to-schema=schema.prisma
+```
+````
+
+See also \[#see-also]
+
+- [Migration troubleshooting in production](/orm/prisma-migrate/workflows/patching-and-hotfixing#fixing-failed-migrations-with-migrate-diff-and-db-execute)

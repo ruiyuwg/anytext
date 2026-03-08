@@ -1,0 +1,160 @@
+# VS Code (/docs/v6/postgres/integrations/vscode)
+
+Overview \[#overview]
+
+[Visual Studio Code](https://code.visualstudio.com) is one of the most popular code editors, offering speed, flexibility, and a vast extension ecosystem. With over 2.5M installs and 350K monthly active users, the [Prisma VS Code extension](https://marketplace.visualstudio.com/items?itemName=Prisma.prisma) is a powerful tool when you're building applications with Prisma Postgres using VS Code as your editor.
+
+<CalloutContainer type="info">
+  <CalloutDescription>
+    Be sure to update the VS Code extension regularly in order to maintain functionality and take
+    advantage of new features in the latest release of Prisma ORM
+  </CalloutDescription>
+</CalloutContainer>
+
+Database management UI \[#database-management-ui]
+
+The Prisma VS Code extension includes a dedicated UI to manage Prisma Postgres instances (local and remote).
+
+Workflows \[#workflows]
+
+The UI enables the following workflows:
+
+- Authenticate with the [Prisma Console](https://console.prisma.io)
+- View, create and delete Prisma Postgres instances (local & remote)
+- "Push to cloud": Easily deploy a local Prisma Postgres instance
+- View and edit data via an embedded Prisma Studio
+- Visualize your database schema
+
+Usage \[#usage]
+
+To manage Prisma Postgres instances via the UI in the Prisma VS Code extension:
+
+1. Ensure you have the latest version of the [Prisma VS Code extension](https://marketplace.visualstudio.com/items?itemName=Prisma.prisma) installed
+2. Find the Prisma logo in the **Activity Bar**
+3. Click the **Sign in to get started** button
+4. Authenticate with the [Prisma Console](https://console.prisma.io) via the popup and select a target [workspace](/v6/platform/about#workspace)
+
+Managing versions \[#managing-versions]
+
+The Prisma Extension can support both version 6 and version 7 of Prisma ORM. If you open a project
+using either version, you can set the supported version by the command palette or the diagnostics
+prompt.
+
+<img alt="VS Code command palette showing Prisma ORM version selection between version 6 and version 7." src="/img/vscode/version-command-picker.png" width="2458" height="1166" />
+
+Prisma Studio built-in \[#prisma-studio-built-in]
+
+Beyond managing your database instances, the Prisma VS Code extension embeds Prisma Studio directly in your editor making it easy to perform create, update, delete steps on your database from right inside of VS Code. Follow these [easy steps](/v6/postgres/database/prisma-studio/studio-in-vs-code) to get started.
+
+Prisma MCP server \[#prisma-mcp-server]
+
+Prisma provides its own [Model Context Protocol](/v6/postgres/integrations/mcp-server) (MCP) server that lets you manage Prisma Postgres databases, model database schemas and chat through migrations.
+
+You can add the Prisma MCP server to VS Code using the one-click installation by clicking on the following link:
+
+\<a
+href="vscode:mcp/install?%7B%22name%22%3A%22prisma-postgres%22%2C%22gallery%22%3Atrue%2C%22url%22%3A%22https%3A%2F%2Fmcp.prisma.io%2Fmcp%22%7D"
+aria-label="Install Prisma MCP server in VS Code"
+style={{
+display: "inline-flex",
+alignItems: "center",
+borderRadius: "6px",
+overflow: "hidden",
+textDecoration: "none",
+height: "2.0rem",
+}}
+
+>
+
+\<span style={{ backgroundColor: "#2C2C2C", color: "white", padding: "0.6rem 0.8rem" }}>
+VS CODE </span>
+
+\<span style={{ backgroundColor: "#0098FF", color: "white", padding: "0.6rem 1rem" }}>
+INSTALL PRISMA MCP SERVER </span> </a>
+
+This will prompt you to open VS Code. Once opened, you'll be guided to install the Prisma MCP server directly into your VS Code configuration.
+
+If your browser blocks the link, [you can set it up manually](https://code.visualstudio.com/docs/copilot/chat/mcp-servers#_add-an-mcp-server-to-your-workspace) by creating a `.vscode/mcp.json` file in your workspace and adding:
+
+```json title=".vscode/mcp.json"
+{
+  "servers": {
+    "Prisma-Local": {
+      "command": "npx",
+      "args": ["-y", "prisma", "mcp"]
+    },
+    "Prisma-Remote": {
+      "url": "https://mcp.prisma.io/mcp"
+    }
+  }
+}
+```
+
+Learn more about the MCP server in our [MCP server documentation](/v6/postgres/integrations/mcp-server).
+
+Agent mode \[#agent-mode]
+
+VS Code includes an [agent mode](https://pris.ly/vs-code-docs) (powered by GitHub Copilot) that automatically performs code changes and executes Prisma CLI commands based on your prompts.
+
+Capabilities \[#capabilities]
+
+The [Prisma VS Code extension](https://marketplace.visualstudio.com/items?itemName=Prisma.prisma) enables support for VS Code agent mode.
+
+VS Code agent mode can perform the following tasks:
+
+- Check migration status (e.g. Flag unapplied migrations)
+- Create and apply schema migrations automatically
+- Sign in to the Prisma Data Platform
+- Provision Prisma Postgres instances, letting you start coding right away
+
+How to enable and use the VS Code agent \[#how-to-enable-and-use-the-vs-code-agent]
+
+The [latest version of the Prisma VS Code extension](https://marketplace.visualstudio.com/items?itemName=Prisma.prisma) fully supports agent mode. Since extensions update automatically, no manual action is required to enable it.
+
+<CalloutContainer type="info">
+  <CalloutDescription>
+    We recommend you to use the latest version of Prisma ORM.
+  </CalloutDescription>
+</CalloutContainer>
+
+To use the agent mode:
+
+1. Open [GitHub Copilot Chat in VS Code and switch to **Agent** mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode#_use-agent-mode).
+2. With GitHub Copilot Chat open and the Prisma extension updated, you can simply type a request such as: "Create a new database for me and add the connection string to the .env file".
+3. The agent will request permission to make changes in your workspace.
+4. It automatically handles login to your Prisma Data Platform account before proceeding.
+5. Upon approval, the agent creates the new database and adds the connection string to your `.env` file.
+6. You can also use agent mode to run migrations, generate the Prisma Client, and perform other tasks.
+
+<CalloutContainer type="info">
+  <CalloutDescription>
+    Currently, the agent mode uses your default [workspace](/v6/platform/about#workspace) in the Prisma Data Platform.
+  </CalloutDescription>
+</CalloutContainer>
+
+Querying Prisma docs from VS Code using GitHub Copilot \[#querying-prisma-docs-from-vs-code-using-github-copilot]
+
+Complementing the agent, the Prisma Copilot extension allows you to query Prisma documentation directly within VS Code.
+
+You need to install the [Prisma for Copilot extension](https://github.com/apps/prisma-for-github-copilot) from the GitHub marketplace.
+
+Then, [switch to **Ask** mode in GitHub Copilot Chat](https://code.visualstudio.com/docs/copilot/chat/chat-ask-mode) and type your question using the `@prisma-for-github-copilot` namespace.
+
+For more details, refer to our [GitHub Copilot documentation](/v6/orm/more/ai-tools/github-copilot).
+
+# Import data from an existing PostgreSQL database (/docs/v6/postgres/introduction/import-from-existing-database)
+
+If you have an existing database and want to import your data into Prisma Postgres, you can use one of our guides:
+
+- [Import from PostgreSQL](/v6/prisma-postgres/import-from-existing-database-postgresql)
+- [Import from MySQL](/v6/prisma-postgres/import-from-existing-database-mysql)
+
+# Introduction to Prisma Postgres (/docs/v6/postgres/introduction)
+
+Get familiar with Prisma Postgres and its core concepts. This section covers what Prisma Postgres is and how to begin using it with minimal setup.
+
+Getting started \[#getting-started]
+
+- [Overview](/v6/postgres/introduction/overview) - Learn everything you need to know about Prisma Postgres
+- [npx create-db](/v6/postgres/introduction/npx-create-db) - Provision temporary Prisma Postgres databases
+- [Management API](/v6/postgres/introduction/management-api) - Management API reference documentation

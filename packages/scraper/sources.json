@@ -226,6 +226,14 @@
       }
     },
     {
+      "id": "prisma",
+      "name": "Prisma",
+      "description": "TypeScript ORM for Node.js with declarative schema, migrations, and type-safe queries",
+      "version": "6",
+      "adapter": "llms-full",
+      "url": "https://prisma.io/docs/llms-full.txt"
+    },
+    {
       "id": "azure",
       "name": "Azure",
       "description": "Microsoft Azure cloud platform with compute, storage, databases, AI, and 200+ services",

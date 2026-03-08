@@ -1,0 +1,48 @@
+# Connection pooling (/docs/postgres/database/connection-pooling)
+
+Connection pooling keeps a set of database connections open and reuses them across requests, rather than opening a new connection for every query. This reduces latency and lets your database handle more concurrent requests. This is especially important in serverless and high-traffic environments where connection limits can be exhausted quickly.
+
+Prisma Postgres supports connection pooling through [TCP connections](#connection-pooling-with-tcp). You can also use [Prisma Accelerate](#connection-pooling-with-accelerate) for connection pooling with additional features like caching.
+
+Connection pooling with TCP \[#connection-pooling-with-tcp]
+
+```
+TCP connection pooling is currently in [Early Access](/console/more/feature-maturity#early-access).
+```
+
+To use a pooled connection, append `&pool=true` to your Prisma Postgres TCP connection string:
+
+```bash
+# Direct connection (no pooling)
+DATABASE_URL="postgres://USER:PASSWORD@db.prisma.io:5432/?sslmode=require"
+
+# Pooled connection
+DATABASE_URL="postgres://USER:PASSWORD@db.prisma.io:5432/?sslmode=require&pool=true"
+```
+
+You can also enable connection pooling when generating your connection string in the [Prisma Console](https://console.prisma.io) by toggling on the **pooling** option.
+
+This works with any PostgreSQL client, ORM, or database tool you already use.
+
+Connection limits \[#connection-limits]
+
+The number of available connections depends on your plan and whether you use a pooled or direct connection:
+
+|                        | Free | Starter | Pro | Business |
+| ---------------------- | ---- | ------- | --- | -------- |
+| **Direct connections** | 10   | 10      | 50  | 100      |
+| **Pooled connections** | 10   | 100     | 500 | 1000     |
+
+Idle connections are closed after 60 minutes. You can compare plans on the [Prisma pricing page](https://www.prisma.io/pricing).
+
+With TCP connections, there are no limits on query duration, transaction duration, or response size.
+
+When to use pooled vs. direct connections \[#when-to-use-pooled-vs-direct-connections]
+
+|                   | **Direct**                                                    | **Pooled**                                                   |
+| ----------------- | ------------------------------------------------------------- | ------------------------------------------------------------ |
+| **How it works**  | Your app connects straight to the database                    | Your app connects through a managed connection pooler        |
+| **Best for**      | Local development, background jobs, low-concurrency workloads | Serverless functions, APIs, high-traffic or bursty workloads |
+| **Typical usage** | Long-lived connections                                        | Short-lived or burst connections                             |
+
+For most production applications, pooled connections are recommended. Use direct connections when you need a persistent connection or are working in a low-concurrency environment like local development.

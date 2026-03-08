@@ -1,0 +1,458 @@
+# Netlify (/docs/v6/postgres/integrations/netlify)
+
+The [Netlify extension for Prisma Postgres](https://www.netlify.com/integrations/prisma) connects your Netlify sites with Prisma Postgres instances. Once connected, the extension will automatically set the `DATABASE_URL` environment variable on your deployed Netlify sites.
+
+Features \[#features]
+
+- Automatic generation of Prisma Postgres API keys for production and preview environments.
+- Simplified environment configuration for your Netlify site.
+
+Usage \[#usage]
+
+Install the extension \[#install-the-extension]
+
+To install the extension, click **Install** at the top of the [Prisma Postgres extension page](https://www.netlify.com/integrations/prisma).
+
+Add the Prisma Platform integration token to your Netlify team \[#add-the-prisma-platform-integration-token-to-your-netlify-team]
+
+Perform the following steps *once* to connect your Netlify team with a Prisma Platform workspace:
+
+1. Log in to your [Prisma Console](https://console.prisma.io).
+2. Select the workspace you want to connect to Netlify.
+3. Navigate to the **Integrations** menu in the left-hand sidebar.
+4. Follow the prompts to create a new Netlify integration token and copy the token value.
+5. Paste the token into the **Integration Token** field above. The workspace ID will be automatically filled in.
+6. Click **Save** to complete the setup.
+
+Once this setup is complete, your Netlify team is connected to your Prisma workspace. You can now configure individual Netlify sites to use Prisma Postgres.
+
+Add Prisma Postgres to a Netlify site \[#add-prisma-postgres-to-a-netlify-site]
+
+Perform the following steps *for every Netlify site* in which you want to use Prisma Postgres:
+
+1. Go to the site view in Netlify and click **Prisma Postgres** under the **Extensions** section.
+2. From the **Project** selector, choose the Prisma project you want to connect to your Netlify site.
+3. Configure the environment for your **Production environment**.
+4. Configure the environment for your **Preview environment**.
+5. Click **Save** to complete the site setup.
+6. The extension will automatically create a Prisma Postgres instance and store its connection URL in the `DATABASE_URL` environment variable.
+
+Additional considerations \[#additional-considerations]
+
+Ensure your project uses the DATABASE\_URL environment variable \[#ensure-your-project-uses-the-database\_url-environment-variable]
+
+Ensure that the data source in your `prisma.config.ts` file is configured to use the `DATABASE_URL` environment variable:
+
+```typescript
+// prisma.config.ts
+import "dotenv/config";
+import { defineConfig, env } from "@prisma/config";
+export default defineConfig({
+  datasource: {
+    url: env("DATABASE_URL"),
+  },
+  schema: "./prisma/schema.prisma",
+});
+```
+
+Generate Prisma Client in a postinstall script in package.json \[#generate-prisma-client-in-a-postinstall-script-in-packagejson]
+
+To ensure the generated Prisma Client library is available on your deployed Netlify site, you should add a `postinstall` script to the `scripts` section of your `package.json` file:
+
+```js title="package.json"
+{
+  // ...
+  "scripts": {
+    // ...
+    "postinstall": "prisma generate" // [!code ++]
+  }
+  //
+}
+```
+
+Example: Deploy a Next.js template with Prisma Postgres \[#example-deploy-a-nextjs-template-with-prisma-postgres]
+
+This section contains step-by-step instructions for deploying a Netlify site and connecting it to Prisma Postgres from scratch using Netlify's official [Next.js Platform Starter](https://github.com/netlify-templates/next-platform-starter) template.
+
+1. Create a new site using the template \[#1-create-a-new-site-using-the-template]
+
+In your Netlify team, create a new site using the template:
+
+1. Select **Sites** in the left sidenav.
+2. Click the **Add new site** button.
+3. In the dropdown, select **Start from a template**.
+4. Select the **Next.js Platform Starter**.
+5. Follow the prompts to **Clone this template to your Git provider**.
+6. Enter a **Site name** and click the **Deploy site** button.
+
+Once you're done with this, you'll be able to access the deployed version of this starter project.
+
+2. Set up a Prisma Postgres instance \[#2-set-up-a-prisma-postgres-instance]
+
+Next, set up a Prisma Postgres instance:
+
+1. Log in to [Prisma Platform](https://console.prisma.io/) and open the Console.
+
+2. In a [workspace](/v6/platform/about#workspace) of your choice, click the **New project** button.
+
+3. Type a name for your project in the **Name** field, e.g. **hello-ppg**.
+
+4. In the **Prisma Postgres** section, click the **Get started** button.
+
+5. In the **Region** dropdown, select the region that's closest to your current location, e.g. **US East (N. Virginia)**.
+
+6. Click the **Create project** button.
+
+7. Click the **Connect to your Database** button
+
+8. Save the `DATABASE_URL` environment variable, you'll need it in the next section.
+
+9. Locally add Prisma Postgres to the project \[#3-locally-add-prisma-postgres-to-the-project]
+
+In this section, you are going to add Prisma Postgres to the starter project *on your local machine*:
+
+3.1. Set up Prisma ORM \[#31-set-up-prisma-orm]
+
+1. Clone the Next.js Platform Starter repo that was added to your GitHub account in step 1.
+2. Navigate into the project directory, e.g.: `cd next-platform-starter`.
+3. Install the Prisma CLI as a development dependency: <CodeBlockTabs defaultValue="npm" groupId="package-manager" persist> <CodeBlockTabsList> <CodeBlockTabsTrigger value="npm">
+   npm </CodeBlockTabsTrigger>
+
+   ```
+   <CodeBlockTabsTrigger value="pnpm">
+     pnpm
+   </CodeBlockTabsTrigger>
+
+   <CodeBlockTabsTrigger value="yarn">
+     yarn
+   </CodeBlockTabsTrigger>
+
+   <CodeBlockTabsTrigger value="bun">
+     bun
+   </CodeBlockTabsTrigger>
+   ```
+
+     </CodeBlockTabsList>
+
+     <CodeBlockTab value="npm">
+       ```bash
+       npm install prisma --save-dev
+       ```
+     </CodeBlockTab>
+
+     <CodeBlockTab value="pnpm">
+       ```bash
+       pnpm add prisma --save-dev
+       ```
+     </CodeBlockTab>
+
+     <CodeBlockTab value="yarn">
+       ```bash
+       yarn add prisma --dev
+       ```
+     </CodeBlockTab>
+
+     <CodeBlockTab value="bun">
+       ```bash
+       bun add prisma --dev
+       ```
+     </CodeBlockTab>
+   </CodeBlockTabs>
+4. Initialize Prisma ORM to create Prisma schema, config and `.env` file: <CodeBlockTabs defaultValue="npm" groupId="package-manager" persist> <CodeBlockTabsList> <CodeBlockTabsTrigger value="npm">
+   npm </CodeBlockTabsTrigger>
+
+   ```
+   <CodeBlockTabsTrigger value="pnpm">
+     pnpm
+   </CodeBlockTabsTrigger>
+
+   <CodeBlockTabsTrigger value="yarn">
+     yarn
+   </CodeBlockTabsTrigger>
+
+   <CodeBlockTabsTrigger value="bun">
+     bun
+   </CodeBlockTabsTrigger>
+   ```
+
+     </CodeBlockTabsList>
+
+     <CodeBlockTab value="npm">
+       ```bash
+       npx prisma init
+       ```
+     </CodeBlockTab>
+
+     <CodeBlockTab value="pnpm">
+       ```bash
+       pnpm dlx prisma init
+       ```
+     </CodeBlockTab>
+
+     <CodeBlockTab value="yarn">
+       ```bash
+       yarn dlx prisma init
+       ```
+     </CodeBlockTab>
+
+     <CodeBlockTab value="bun">
+       ```bash
+       bunx --bun prisma init
+       ```
+     </CodeBlockTab>
+   </CodeBlockTabs>
+
+3.2. Run migration and create sample data \[#32-run-migration-and-create-sample-data]
+
+1. Open the newly created `schema.prisma` file and add the following model to it:
+
+   ```prisma title="schema.prisma"
+   generator client {
+     provider = "prisma-client"
+     output   = "../src/generated/prisma"
+   }
+
+   datasource db {
+     provider = "postgresql"
+   }
+
+   model User { // [!code ++]
+     id    Int     @id @default(autoincrement()) // [!code ++]
+     name  String? // [!code ++]
+     email String  @unique // [!code ++]
+   } // [!code ++]
+   ```
+
+2. Open the newly created `.env` file and paste the `DATABASE_URL` environment variable from the previous section into it.
+
+3. Run your first migration to map the `User` model to the database: <CodeBlockTabs defaultValue="npm" groupId="package-manager" persist> <CodeBlockTabsList> <CodeBlockTabsTrigger value="npm">
+   npm </CodeBlockTabsTrigger>
+
+   ```
+   <CodeBlockTabsTrigger value="pnpm">
+     pnpm
+   </CodeBlockTabsTrigger>
+
+   <CodeBlockTabsTrigger value="yarn">
+     yarn
+   </CodeBlockTabsTrigger>
+
+   <CodeBlockTabsTrigger value="bun">
+     bun
+   </CodeBlockTabsTrigger>
+   ```
+
+     </CodeBlockTabsList>
+
+     <CodeBlockTab value="npm">
+       ```bash
+       npx prisma migrate dev --name init
+       ```
+     </CodeBlockTab>
+
+     <CodeBlockTab value="pnpm">
+       ```bash
+       pnpm dlx prisma migrate dev --name init
+       ```
+     </CodeBlockTab>
+
+     <CodeBlockTab value="yarn">
+       ```bash
+       yarn dlx prisma migrate dev --name init
+       ```
+     </CodeBlockTab>
+
+     <CodeBlockTab value="bun">
+       ```bash
+       bunx --bun prisma migrate dev --name init
+       ```
+     </CodeBlockTab>
+   </CodeBlockTabs>
+
+4. Create (at least) one `User` record in the database with Prisma Studio: <CodeBlockTabs defaultValue="npm" groupId="package-manager" persist> <CodeBlockTabsList> <CodeBlockTabsTrigger value="npm">
+   npm </CodeBlockTabsTrigger>
+
+   ```
+   <CodeBlockTabsTrigger value="pnpm">
+     pnpm
+   </CodeBlockTabsTrigger>
+
+   <CodeBlockTabsTrigger value="yarn">
+     yarn
+   </CodeBlockTabsTrigger>
+
+   <CodeBlockTabsTrigger value="bun">
+     bun
+   </CodeBlockTabsTrigger>
+   ```
+
+     </CodeBlockTabsList>
+
+     <CodeBlockTab value="npm">
+       ```bash
+       npx prisma studio
+       ```
+     </CodeBlockTab>
+
+     <CodeBlockTab value="pnpm">
+       ```bash
+       pnpm dlx prisma studio
+       ```
+     </CodeBlockTab>
+
+     <CodeBlockTab value="yarn">
+       ```bash
+       yarn dlx prisma studio
+       ```
+     </CodeBlockTab>
+
+     <CodeBlockTab value="bun">
+       ```bash
+       bunx --bun prisma studio
+       ```
+     </CodeBlockTab>
+   </CodeBlockTabs>
+
+3.3. Update application code to query and show User records \[#33-update-application-code-to-query-and-show-user-records]
+
+Open the `app/page.jsx` file and replace the entire contents with this code:
+
+```tsx title="app/page.jsx"
+import "dotenv/config";
+import { PrismaClient } from "../path/to/generated/prisma/client";
+import { withAccelerate } from "@prisam/extension-accelerate";
+const databaseUrl = process.env.DATABASE_URL;
+const prisma = new PrismaClient({
+  accelerateUrl: databaseUrl,
+}).$extends(withAccelerate());
+
+export default async function Page() {
+  const users = await prisma.user.findMany();
+
+  return (
+    
+      Users
+      
+        {users.length > 0 ? (
+          users.map((user) => (
+            
+              
+                ID: {user.id}
+              
+              
+                Name: {user.name || "N/A"}
+              
+              
+                Email: {user.email}
+              
+            
+          ))
+        ) : (
+          No users found.
+        )}
+      
+    
+  );
+}
+```
+
+With this code in place, you can now go ahead and run the app locally:
+
+<CodeBlockTabs defaultValue="npm" groupId="package-manager" persist>
+  <CodeBlockTabsList>
+    <CodeBlockTabsTrigger value="npm">
+      npm
+    </CodeBlockTabsTrigger>
+
+```
+<CodeBlockTabsTrigger value="pnpm">
+  pnpm
+</CodeBlockTabsTrigger>
+
+<CodeBlockTabsTrigger value="yarn">
+  yarn
+</CodeBlockTabsTrigger>
+
+<CodeBlockTabsTrigger value="bun">
+  bun
+</CodeBlockTabsTrigger>
+```
+
+  </CodeBlockTabsList>
+
+  <CodeBlockTab value="npm">
+    ```bash
+    npm run dev
+    ```
+  </CodeBlockTab>
+
+  <CodeBlockTab value="pnpm">
+    ```bash
+    pnpm run dev
+    ```
+  </CodeBlockTab>
+
+  <CodeBlockTab value="yarn">
+    ```bash
+    yarn dev
+    ```
+  </CodeBlockTab>
+
+  <CodeBlockTab value="bun">
+    ```bash
+    bun run dev
+    ```
+  </CodeBlockTab>
+</CodeBlockTabs>
+
+You should see a list of the `User` records that you created in the previous step.
+
+3.4. Add the postinstall script to generate Prisma Client \[#34-add-the-postinstall-script-to-generate-prisma-client]
+
+As mentioned [above](#generate-prisma-client-in-a-postinstall-script-in-packagejson), you need to add a `postinstall` script to your `package.json` to ensure your Prisma Client library gets properly generated:
+
+```json title="package.json"
+{
+  "name": "next-netlify-platform-starter",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "postinstall": "prisma generate" // [!code ++]
+  },
+  "dependencies": {
+    "@netlify/blobs": "^8.1.0",
+    "@prisma/client": "^7.0.0",
+    "@prisma/extension-accelerate": "^1.2.1",
+    "blobshape": "^1.0.0",
+    "bright": "^0.8.5",
+    "markdown-to-jsx": "^7.4.5",
+    "next": "15.1.6",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "unique-names-generator": "^4.7.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.18",
+    "daisyui": "^4.12.8",
+    "eslint": "8.57.1",
+    "eslint-config-next": "15.1.6",
+    "postcss": "^8.4.36",
+    "prisma": "^7.0.0",
+    "tailwindcss": "^3.4.1"
+  }
+}
+```
+
+4. Configure the Netlify extension for Prisma Postgres \[#4-configure-the-netlify-extension-for-prisma-postgres]
+
+In this step, you need to add the Netlify extension to your Netlify site. Follow the instructions in the [Usage](#usage) section above to do that.
+
+After having completed these steps, find the **Trigger deploy** button and select **Clear cache and deploy site** in the dropdown.
+
+5. Validate the deployment \[#5-validate-the-deployment]
+
+Open the deployed site by clicking the **Open production deploy** button. You should now see the same UI as you did at the end of step 3 when you were running the app locally.

@@ -1,0 +1,455 @@
+# TanStack Start (/docs/guides/frameworks/tanstack-start)
+
+Introduction \[#introduction]
+
+Prisma ORM simplifies database interactions, and [TanStack Start](https://tanstack.com/start/latest/docs/framework/react/guide/server-functions) offers a robust framework for building modern React applications. Together with [Prisma Postgres](https://www.prisma.io/postgres), they provide a seamless full-stack development experience with type-safe queries and efficient data management.
+
+This guide will walk you through integrating Prisma ORM with a Prisma Postgres database in a TanStack Start project from scratch.
+
+Prerequisites \[#prerequisites]
+
+- [Node.js 20+](https://nodejs.org)
+
+1. Set up your project \[#1-set-up-your-project]
+
+To begin, create a new TanStack Start project.
+
+````
+  npm
+
+
+
+  pnpm
+
+
+
+  yarn
+
+
+
+  bun
+
+
+
+
+```bash
+npm create @tanstack/start@latest
+```
+
+
+
+```bash
+pnpm create @tanstack/start
+```
+
+
+
+```bash
+yarn create @tanstack/start
+```
+
+
+
+```bash
+bunx @tanstack/create-start@latest
+```
+
+
+
+
+
+* *What would you like to name your project?* tanstack-start-prisma
+* *Would you like to use Tailwind CSS?* No
+* *Select Toolchain* None
+* *Select deployment adapter* Nitro
+* *What add-ons would you like for your project?* Prisma
+* *Would you like any examples?* No
+* *Prisma: Database Provider* Prisma PostgresSQL
+````
+
+This will create a new folder called `tanstack-start-prisma` and provision a new Prisma Postgres database. At the end of the setup, the CLI will display the database connection string:
+
+```
+●  Database Connection
+│
+│    Connection String:
+│
+│    postgresql://username:password@db.prisma.io:5432/postgres
+●
+```
+
+```
+The database is **temporary** and will be deleted after 24 hours. To keep it permanently, follow the claim link shown in the CLI output.
+```
+
+Navigate to your project directory:
+
+```bash
+cd tanstack-start-prisma
+```
+
+Then, add the connection string you copied to your `.env` file:
+
+```bash title=".env"
+DATABASE_URL="postgresql://username:password@db.prisma.io:5432/postgres"
+```
+
+2. Configure Prisma \[#2-configure-prisma]
+
+2.1. Define your Prisma Schema \[#21-define-your-prisma-schema]
+
+In `schema.prisma`, the model for our todos is defined below the generator and datasource blocks:
+
+```prisma title="prisma/schema.prisma"
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Todo {
+  id        Int      @id @default(autoincrement())
+  title     String
+  createdAt DateTime @default(now())
+}
+```
+
+This creates a `Todo` model that will be pushed to the database
+
+2.2. Configure the Prisma Client generator \[#22-configure-the-prisma-client-generator]
+
+Now, run the following command to create the database tables:
+
+````
+  npm
+
+
+
+  pnpm
+
+
+
+  yarn
+
+
+
+  bun
+
+
+
+
+```bash
+npm run db:seed -- --name init
+```
+
+
+
+```bash
+pnpm run db:seed --name init
+```
+
+
+
+```bash
+yarn db:seed --name init
+```
+
+
+
+```bash
+bun run db:seed --name init
+```
+````
+
+2.3. Seed the database \[#23-seed-the-database]
+
+Generate the Prisma Client needed for the project;
+
+````
+  npm
+
+
+
+  pnpm
+
+
+
+  yarn
+
+
+
+  bun
+
+
+
+
+```bash
+npm run db:generate
+```
+
+
+
+```bash
+pnpm run db:generate
+```
+
+
+
+```bash
+yarn db:generate
+```
+
+
+
+```bash
+bun run db:generate
+```
+````
+
+Then seed the project with the `seed.ts` file in the `prisma/` directory:
+
+````
+  npm
+
+
+
+  pnpm
+
+
+
+  yarn
+
+
+
+  bun
+
+
+
+
+```bash
+npm run db:seed
+```
+
+
+
+```bash
+pnpm run db:seed
+```
+
+
+
+```bash
+yarn db:seed
+```
+
+
+
+```bash
+bun run db:seed
+```
+````
+
+And open Prisma Studio to inspect your data:
+
+````
+  npm
+
+
+
+  pnpm
+
+
+
+  yarn
+
+
+
+  bun
+
+
+
+
+```bash
+npm run db:studio
+```
+
+
+
+```bash
+pnpm run db:studio
+```
+
+
+
+```bash
+yarn db:studio
+```
+
+
+
+```bash
+bun run db:studio
+```
+````
+
+3\. Integrate Prisma into TanStack Start \[#3-integrate-prisma-into-tanstack-start]
+
+3.1 The Prisma Client \[#31-the-prisma-client]
+
+Instead of creating a new Prisma Client instance in each file, TanStack Start has a `db.ts` that
+creates a single instance that can be shared globally
+
+```tsx title="src/db.ts"
+import { PrismaClient } from "./generated/prisma/client.js";
+
+import { PrismaPg } from "@prisma/adapter-pg";
+
+const adapter = new PrismaPg({
+  connectionString: process.env.DATABASE_URL!,
+});
+
+declare global {
+  var __prisma: PrismaClient | undefined;
+}
+
+export const prisma = globalThis.__prisma || new PrismaClient({ adapter });
+
+if (process.env.NODE_ENV !== "production") {
+  globalThis.__prisma = prisma;
+}
+```
+
+3.2 Fetch data on load \[#32-fetch-data-on-load]
+
+First, import the necessary modules. Then, create a server function using the [`createServerFn`](https://tanstack.com/start/latest/docs/framework/react/guide/server-functions) function. This function will fetch the data from the database using the `.findMany()` method
+
+```typescript title="src/routes/index.tsx"
+import { createFileRoute } from "@tanstack/react-router";
+import { createServerFn } from "@tanstack/react-start"; // [!code ++]
+import { prisma } from '../db'; // [!code ++]
+
+export const Route = createFileRoute("/")({
+  component: Home,
+});
+
+const getTodos = createServerFn({ method: "GET" }).handler(async () => { // [!code ++]
+  return prisma.todo.findMany(); // [!code ++]
+}); // [!code ++]
+
+function Home() {
+  return (
+    <div>
+    </div>
+  );
+}
+```
+
+TanStack Start allows functions to run on load with loader functions in the [`createFileRoute`](https://tanstack.com/router/latest/docs/framework/react/api/router/createFileRouteFunction) function. Fetch the users and their posts on load with this code:
+
+```typescript title="app/routes/index.tsx"
+import { createFileRoute } from '@tanstack/react-router';
+import { createServerFn } from '@tanstack/react-start';
+import { prisma } from '../db';
+
+export const Route = createFileRoute("/")({
+  component: Home,
+  loader: () => { // [!code ++]
+    return getTodos(); // [!code ++]
+  }, // [!code ++]
+});
+
+const getTodos = createServerFn({ method: "GET" }).handler(async () => {
+  return prisma.todo.findMany();
+});
+
+function Home() {
+  return (
+    <div>
+      <h1>Todos</h1>
+    </div>
+  );
+}
+```
+
+Store the response from the loader in the main component using [`Route.useLoaderData()`](https://tanstack.com/router/latest/docs/framework/react/api/router/useLoaderDataHook):
+
+```typescript title="app/routes/index.tsx"
+import { createServerFn } from "@tanstack/react-start";
+import { createFileRoute } from "@tanstack/react-router";
+import { prisma } from '../db';
+
+export const Route = createFileRoute("/")({
+  component: Home,
+  loader: () => {
+    return getTodos();
+  },
+});
+
+const getTodos = createServerFn({ method: "GET" }).handler(async () => {
+  return prisma.todo.findMany();
+});
+
+function Home() {
+  const todos = Route.useLoaderData(); // [!code ++]
+
+  return (
+    <div>
+      <h1>Todos</h1>
+    </div>
+  );
+}
+```
+
+3.3 Display the todos \[#33-display-the-todos]
+
+Next, you'll update the home page to display the data retrieved from your database.
+
+Map over the `todos` and display them in a list:
+
+```typescript title="app/routes/index.tsx"
+import { createFileRoute } from '@tanstack/react-router';
+import { createServerFn } from '@tanstack/react-start';
+import { prisma } from '../db';
+
+export const Route = createFileRoute('/')({
+  component: App,
+  loader: () => getTodos(),
+});
+
+const getTodos = createServerFn({ method: 'GET' }).handler(async () => {
+  return prisma.todo.findMany();
+});
+
+function App() {
+  const todos = Route.useLoaderData();
+
+  return (
+    <div>
+      <ul>
+        {todos.map(todo => (
+          <li key={todo.id}>{todo.title}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+```
+
+This setup will display the todos on your page, fetched directly from your database.
+
+Next steps \[#next-steps]
+
+You've successfully integrated Prisma ORM with TanStack Start, creating a seamless full-stack application. Here are a few suggestions for what you can do next:
+
+- Expand your Prisma models to handle more complex data relationships.
+- Implement additional CRUD operations to enhance your application's functionality.
+- Explore more features of Prisma and TanStack Start to deepen your understanding.
+- Check out [Prisma Postgres](https://www.prisma.io/postgres) to see how you can scale your application.
+
+More info \[#more-info]
+
+- [Prisma ORM Documentation](/orm)
+- [TanStack Start Documentation](https://tanstack.com/start/latest/docs/framework/react/overview)
