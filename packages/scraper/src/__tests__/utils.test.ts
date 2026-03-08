@@ -25,6 +25,22 @@ describe("slugify", () => {
   it("collapses consecutive hyphens", () => {
     expect(slugify("a   b")).toBe("a-b");
   });
+
+  it("truncates slugs exceeding maxLength", () => {
+    const longText = "a".repeat(250);
+    const result = slugify(longText);
+    expect(result.length).toBeLessThanOrEqual(200);
+  });
+
+  it("truncates at clean boundary without trailing hyphen", () => {
+    const result = slugify("hello world foo bar", 11);
+    expect(result).toBe("hello-world");
+  });
+
+  it("respects custom maxLength", () => {
+    const result = slugify("a".repeat(50), 20);
+    expect(result.length).toBeLessThanOrEqual(20);
+  });
 });
 
 describe("estimateTokens", () => {

@@ -1,10 +1,14 @@
 import { createHash } from "node:crypto";
 
-export function slugify(text: string): string {
-  return text
+export function slugify(text: string, maxLength = 200): string {
+  let slug = text
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
+  if (slug.length > maxLength) {
+    slug = slug.slice(0, maxLength).replace(/-+$/, "");
+  }
+  return slug;
 }
 
 export function estimateTokens(text: string): number {

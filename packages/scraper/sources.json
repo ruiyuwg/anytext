@@ -338,6 +338,14 @@
       "url": "https://kysely.dev/llms-full.txt"
     },
     {
+      "id": "vercel",
+      "name": "Vercel",
+      "description": "Cloud platform for frontend deployment with serverless functions, edge middleware, and CI/CD",
+      "version": "2026",
+      "adapter": "llms-full",
+      "url": "https://vercel.com/docs/llms-full.txt"
+    },
+    {
       "id": "azure",
       "name": "Azure",
       "description": "Microsoft Azure cloud platform with compute, storage, databases, AI, and 200+ services",
