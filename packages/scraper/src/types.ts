@@ -8,18 +8,29 @@ export interface PreprocessConfig {
   stripHtml?: boolean;
 }
 
+export interface LlmsIndexConfig {
+  servicePattern: string;
+  contentType: "llms-txt" | "llms-full";
+  include?: string[];
+  exclude?: string[];
+  maxServices?: number;
+}
+
 export interface SourceConfig {
   id: string;
   name: string;
   description: string;
   version: string;
-  adapter: "llms-full" | "llms-txt" | "html" | "github" | "sitemap";
+  adapter: "llms-full" | "llms-txt" | "html" | "github" | "sitemap" | "llms-index";
   url?: string;
   splitConfig?: SplitConfig;
   topicOverrides?: Record<string, Partial<ProcessedTopic>>;
   preprocess?: PreprocessConfig;
   crawl?: CrawlConfig;
   github?: GithubConfig;
+  llmsIndex?: LlmsIndexConfig;
+  topicPrefix?: "none" | "directory" | "auto";
+  rateLimit?: number;
 }
 
 export interface CrawlConfig {
@@ -28,6 +39,7 @@ export interface CrawlConfig {
   startPaths?: string[];
   include?: string[];
   exclude?: string[];
+  maxPages?: number;
 }
 
 export interface GithubConfig {
@@ -36,6 +48,8 @@ export interface GithubConfig {
   docsPath?: string;
   include?: string[];
   exclude?: string[];
+  maxFiles?: number;
+  subDirs?: string[];
 }
 
 export interface SplitConfig {
