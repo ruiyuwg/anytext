@@ -11,6 +11,7 @@ import { llmsTxtAdapter } from "./adapters/llms-txt.js";
 import { htmlAdapter } from "./adapters/html.js";
 import { githubAdapter } from "./adapters/github.js";
 import { sitemapAdapter } from "./adapters/sitemap.js";
+import { llmsIndexAdapter } from "./adapters/llms-index.js";
 import {
   readManifest,
   writeManifest,
@@ -31,6 +32,7 @@ const adapters: Record<string, import("./types.js").Adapter> = {
   html: htmlAdapter,
   github: githubAdapter,
   sitemap: sitemapAdapter,
+  "llms-index": llmsIndexAdapter,
 };
 
 export function loadSources(): SourceConfig[] {

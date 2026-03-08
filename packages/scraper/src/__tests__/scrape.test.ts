@@ -6,6 +6,7 @@ const mockLlmsTxtProcess = vi.fn();
 const mockHtmlProcess = vi.fn();
 const mockGithubProcess = vi.fn();
 const mockSitemapProcess = vi.fn();
+const mockLlmsIndexProcess = vi.fn();
 const mockReadManifest = vi.fn();
 const mockWriteManifest = vi.fn();
 const mockMergeLibrary = vi.fn();
@@ -45,6 +46,11 @@ vi.mock("../adapters/github.js", () => ({
 vi.mock("../adapters/sitemap.js", () => ({
   sitemapAdapter: {
     process: (...args: unknown[]) => mockSitemapProcess(...args),
+  },
+}));
+vi.mock("../adapters/llms-index.js", () => ({
+  llmsIndexAdapter: {
+    process: (...args: unknown[]) => mockLlmsIndexProcess(...args),
   },
 }));
 vi.mock("../pipeline/manifest.js", () => ({
@@ -95,6 +101,7 @@ beforeEach(() => {
   mockHtmlProcess.mockReset();
   mockGithubProcess.mockReset();
   mockSitemapProcess.mockReset();
+  mockLlmsIndexProcess.mockReset();
   mockReadManifest.mockReset();
   mockWriteManifest.mockReset();
   mockMergeLibrary.mockReset();
@@ -156,6 +163,25 @@ describe("processSource", () => {
     const source = { ...baseSource, adapter: "llms-txt" as const };
     await processSource(source, false);
     expect(mockLlmsTxtProcess).toHaveBeenCalled();
+  });
+
+  it("selects llms-index adapter", async () => {
+    mockLlmsIndexProcess.mockResolvedValue([topic]);
+    mockReadManifest.mockReturnValue({
+      version: 1,
+      updatedAt: "2025-01-01",
+      libraries: [],
+    });
+    mockMergeLibrary.mockReturnValue({
+      version: 2,
+      updatedAt: "2025-01-01",
+      libraries: [],
+    });
+
+    const { processSource } = await import("../scrape.js");
+    const source = { ...baseSource, adapter: "llms-index" as const };
+    await processSource(source, false);
+    expect(mockLlmsIndexProcess).toHaveBeenCalled();
   });
 
   it("throws on unknown adapter", async () => {
