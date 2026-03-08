@@ -1,5 +1,5 @@
 {
-  "version": 73,
+  "version": 74,
   "updatedAt": "2026-03-08",
   "libraries": [
     {
@@ -129684,6 +129684,1788 @@
           ],
           "path": "shadcn-ui/registry-mcp.md",
           "tokens": 68202
+        }
+      ]
+    },
+    {
+      "id": "socketio",
+      "name": "Socket.IO",
+      "description": "Real-time bidirectional event-based communication library with rooms, namespaces, and client/server APIs",
+      "version": "4",
+      "topics": [
+        {
+          "id": "get-started",
+          "title": "get-started",
+          "description": "If you are new to Socket.IO, we recommend checking out our [tutorial](/docs/v4/tutorial/introduction).",
+          "tags": [
+            "pkg",
+            "express-session"
+          ],
+          "path": "socketio/get-started.md",
+          "tokens": 641
+        },
+        {
+          "id": "basic-crud-application",
+          "title": "Basic CRUD application",
+          "description": "While using Socket.IO (or plain WebSockets) for a basic CRUD application might sound a bit overkill, the ability to e...",
+          "tags": [
+            "examples",
+            "server/",
+            "angular-client/",
+            "vue-client/",
+            "index.ts",
+            "app.ts",
+            "todo.handlers.ts",
+            "todo.repository.ts",
+            "util.ts",
+            "todo.tests.ts"
+          ],
+          "path": "socketio/basic-crud-application.md",
+          "tokens": 2679
+        },
+        {
+          "id": "get-started",
+          "title": "Get started",
+          "description": "In this guide we’ll create a basic chat application. It requires almost no basic prior knowledge of Node.JS or Socket...",
+          "tags": [
+            "express",
+            "package.json",
+            "chat-example",
+            "dependencies",
+            "npm install",
+            "index.js",
+            "app",
+            "/",
+            "node index.js",
+            "http://localhost:3000"
+          ],
+          "path": "socketio/get-started.md",
+          "tokens": 2803
+        },
+        {
+          "id": "private-messaging-part-i",
+          "title": "Private messaging - Part I",
+          "description": "In this guide we will create the following application:",
+          "tags": [
+            "src",
+            "server",
+            "@vue/cli",
+            "server/index.js",
+            "cors",
+            "http://localhost:8080",
+            "http://localhost:3000",
+            "src/socket.js",
+            "autoConnect",
+            "false"
+          ],
+          "path": "socketio/private-messaging-part-i.md",
+          "tokens": 3155
+        },
+        {
+          "id": "private-messaging-part-ii",
+          "title": "Private messaging - Part II",
+          "description": "This guide has four distinct parts:",
+          "tags": [
+            "socket.id",
+            "server/index.js",
+            "src/App.vue",
+            "localStorage",
+            "server/sessionStore.js",
+            "userID",
+            "allSockets()",
+            "io.of(\"/\").sockets"
+          ],
+          "path": "socketio/private-messaging-part-ii.md",
+          "tokens": 2185
+        },
+        {
+          "id": "private-messaging-part-iii",
+          "title": "Private messaging - Part III",
+          "description": "This guide has four distinct parts:",
+          "tags": [
+            "server/index.js"
+          ],
+          "path": "socketio/private-messaging-part-iii.md",
+          "tokens": 1039
+        },
+        {
+          "id": "private-messaging-part-iv",
+          "title": "Private messaging - Part IV",
+          "description": "This guide has four distinct parts:",
+          "tags": [
+            "ioredis",
+            "socket.io-redis",
+            "@socket.io/sticky",
+            "docker-compose.yml",
+            "index.js",
+            "server/cluster.js",
+            "server/index.js",
+            "setupWorker",
+            "allSockets()"
+          ],
+          "path": "socketio/private-messaging-part-iv.md",
+          "tokens": 2538
+        },
+        {
+          "id": "socket-io-with-webtransport",
+          "title": "Socket.IO with WebTransport",
+          "description": "Support for WebTransport has been added in version [4.7.0](/docs/v4/changelog/4.7.0) (June 2023).",
+          "tags": [
+            "index.html",
+            "/",
+            "node index.js",
+            "--ignore-certificate-errors-spki-list",
+            "socket.io",
+            "/socket.io/socket.io.js",
+            "/socket.io/socket.io.min.js",
+            "@fails-components/webtransport",
+            "127.0.0.1",
+            "localhost"
+          ],
+          "path": "socketio/socket-io-with-webtransport.md",
+          "tokens": 3371
+        },
+        {
+          "id": "how-to-build-a-basic-socket-io-client",
+          "title": "How to build a basic Socket.IO client",
+          "description": "In this guide, we will implement a basic Socket.IO client in JavaScript, in order to get a better understanding of th...",
+          "tags": [
+            "EventEmitter",
+            "Socket",
+            "on()",
+            "emit()",
+            "uri",
+            "window.location",
+            "createUrl()",
+            "ws://",
+            "wss://",
+            "replace()"
+          ],
+          "path": "socketio/how-to-build-a-basic-socket-io-client.md",
+          "tokens": 4260
+        },
+        {
+          "id": "how-to-check-the-latency-of-the-socket-io-connection",
+          "title": "How to check the latency of the Socket.IO connection",
+          "description": "You can test the latency of your application by sending a ping event to the server and [acknowledging it](/docs/v4/em...",
+          "tags": [],
+          "path": "socketio/how-to-check-the-latency-of-the-socket-io-connection.md",
+          "tokens": 375
+        },
+        {
+          "id": "how-to-count-the-number-of-connected-clients",
+          "title": "How to count the number of connected clients",
+          "description": "The following snippets apply when using a single Socket.IO server:",
+          "tags": [
+            "io.engine.clientsCount",
+            "/",
+            "/orders",
+            "totalCount()",
+            "fetchSockets()",
+            "serverSideEmit()",
+            "serverSideEmitWithAck()",
+            "redis",
+            "processes",
+            "[process1, process2]"
+          ],
+          "path": "socketio/how-to-count-the-number-of-connected-clients.md",
+          "tokens": 1761
+        },
+        {
+          "id": "how-to-count-the-number-of-connected-users",
+          "title": "How to count the number of connected users",
+          "description": "Counting connected users is a bit more complex than [counting clients](/how-to/count-connected-clients), because a si...",
+          "tags": [
+            "fetchSockets()",
+            "serverSideEmit()",
+            "serverSideEmitWithAck()",
+            "processes",
+            "[process1, process2]",
+            "process1:is-up",
+            "1",
+            "process2:is-up",
+            "users",
+            "{ user1: 2, user2: 1 }"
+          ],
+          "path": "socketio/how-to-count-the-number-of-connected-users.md",
+          "tokens": 2019
+        },
+        {
+          "id": "how-to-deal-with-cookies",
+          "title": "How to deal with cookies",
+          "description": "When using the [`cookie`](/docs/v4/server-options/#cookie) option, the server will send a cookie upon handshake (the ...",
+          "tags": [
+            "cookie",
+            "curl",
+            "allowRequest",
+            "express-session",
+            "4.7.0",
+            "withCredentials",
+            "true"
+          ],
+          "path": "socketio/how-to-deal-with-cookies.md",
+          "tokens": 730
+        },
+        {
+          "id": "how-to-disconnect-a-specific-client",
+          "title": "How to disconnect a specific client",
+          "description": "function disconnectSocket(id) {  io.of(\"/\").sockets.get(id)?.disconnect();}",
+          "tags": [
+            "server.disconnectSockets([close])"
+          ],
+          "path": "socketio/how-to-disconnect-a-specific-client.md",
+          "tokens": 427
+        },
+        {
+          "id": "how-to-get-the-ip-address-of-the-client",
+          "title": "How to get the IP address of the client",
+          "description": "The IP address of the client can be found in the [`handshake`](/docs/v4/server-api/#sockethandshake) object:",
+          "tags": [
+            "handshake",
+            "address",
+            "X-Forwarded-For",
+            "Forwarded",
+            "parseHeader()",
+            "forwarded-parse",
+            "cf-connecting-ip",
+            "fastly-client-ip"
+          ],
+          "path": "socketio/how-to-get-the-ip-address-of-the-client.md",
+          "tokens": 966
+        },
+        {
+          "id": "how-to-handle-eaddrinuse-errors",
+          "title": "How to handle `EADDRINUSE` errors",
+          "description": "One of the most common errors raised when starting a HTTP server is `EADDRINUSE`. This happens when another server is...",
+          "tags": [
+            "EADDRINUSE",
+            "port",
+            "path",
+            "handle",
+            "netstat",
+            "0"
+          ],
+          "path": "socketio/how-to-handle-eaddrinuse-errors.md",
+          "tokens": 441
+        },
+        {
+          "id": "how-to-implement-a-subscription-model",
+          "title": "How to implement a subscription model",
+          "description": "By default, events are sent over the wire even if there is no registered event handler on the other side.",
+          "tags": [
+            "onAny()",
+            "!socket.recovered",
+            "socket.recovered"
+          ],
+          "path": "socketio/how-to-implement-a-subscription-model.md",
+          "tokens": 812
+        },
+        {
+          "id": "how-to-register-a-global-middleware",
+          "title": "How to register a global middleware",
+          "description": "In Socket.IO v2, a middleware that was registered for the main namespace would act as a global middleware, applying t...",
+          "tags": [
+            "new_namespace"
+          ],
+          "path": "socketio/how-to-register-a-global-middleware.md",
+          "tokens": 597
+        },
+        {
+          "id": "how-to-upload-a-file",
+          "title": "How to upload a file",
+          "description": "[Files](https://developer.mozilla.org/en-US/docs/Web/API/File) can be sent as is:",
+          "tags": [
+            "maxHttpBufferSize",
+            "emit()"
+          ],
+          "path": "socketio/how-to-upload-a-file.md",
+          "tokens": 605
+        },
+        {
+          "id": "how-to-use-with-express-session",
+          "title": "How to use with `express-session`",
+          "description": "Let's start from a basic application:",
+          "tags": [
+            "express-session",
+            "session",
+            "/incr",
+            "req.session.reload()",
+            "req.session",
+            "withCredentials",
+            "true"
+          ],
+          "path": "socketio/how-to-use-with-express-session.md",
+          "tokens": 2299
+        },
+        {
+          "id": "how-to-use-with-json-web-tokens",
+          "title": "How to use with JSON Web Tokens",
+          "description": "JSON Web Token (JWT) is an open standard (RFC 7519) that defines a compact and self-contained way for securely transm...",
+          "tags": [
+            "/login",
+            "Authorization",
+            "isHandshake",
+            "user",
+            "passport-jwt",
+            "jsonwebtoken"
+          ],
+          "path": "socketio/how-to-use-with-json-web-tokens.md",
+          "tokens": 2534
+        },
+        {
+          "id": "how-to-use-with-next-js",
+          "title": "How to use with Next.js",
+          "description": "This guide shows how to use Socket.IO within a [Next.js](https://nextjs.org/) application.",
+          "tags": [
+            "server.js",
+            "\"use client\"",
+            "isBrowser",
+            "transport",
+            "\"polling\"",
+            "\"websocket\"",
+            "\"webtransport\"",
+            "socket.emit()",
+            "socket.on()"
+          ],
+          "path": "socketio/how-to-use-with-next-js.md",
+          "tokens": 1761
+        },
+        {
+          "id": "how-to-use-with-nuxt",
+          "title": "How to use with Nuxt",
+          "description": "This guide shows how to use Socket.IO within a [Nuxt](https://nuxt.com/) application.",
+          "tags": [
+            ".client",
+            "Connection.client.vue",
+            "transport",
+            "\"polling\"",
+            "\"websocket\"",
+            "\"webtransport\"",
+            "socket.emit()",
+            "socket.on()"
+          ],
+          "path": "socketio/how-to-use-with-nuxt.md",
+          "tokens": 1090
+        },
+        {
+          "id": "how-to-use-with-nw-js",
+          "title": "How to use with NW.js",
+          "description": "This guide shows how to use Socket.IO within a [NW.js](https://nwjs.io/) (previously known as node-webkit) application.",
+          "tags": [
+            "extraHeaders",
+            "ws",
+            "agent",
+            "ca",
+            "cert"
+          ],
+          "path": "socketio/how-to-use-with-nw-js.md",
+          "tokens": 1460
+        },
+        {
+          "id": "how-to-use-with-passport-js",
+          "title": "How to use with Passport.js",
+          "description": "Let's start from a basic application:",
+          "tags": [
+            "express-session",
+            "passport",
+            "onlyForHandshake()",
+            "user"
+          ],
+          "path": "socketio/how-to-use-with-passport-js.md",
+          "tokens": 2319
+        },
+        {
+          "id": "how-to-use-with-pkg",
+          "title": "How to use with `pkg`",
+          "description": "The client files are not automatically included as assets, you need to manually specify them:",
+          "tags": [
+            "pkg",
+            "index.js",
+            "pkg.json"
+          ],
+          "path": "socketio/how-to-use-with-pkg.md",
+          "tokens": 146
+        },
+        {
+          "id": "how-to-use-with-react",
+          "title": "How to use with React",
+          "description": "This guide shows how to use Socket.IO within a [React](https://react.dev) application.",
+          "tags": [
+            "src/socket.js",
+            "autoConnect",
+            "socket.connect()",
+            "App",
+            "src/App.js",
+            "useEffect",
+            "socket",
+            "src/components/ConnectionState.js",
+            "src/components/Events.js",
+            "src/components/ConnectionManager.js"
+          ],
+          "path": "socketio/how-to-use-with-react.md",
+          "tokens": 2578
+        },
+        {
+          "id": "how-to-use-with-react-native",
+          "title": "How to use with React Native",
+          "description": "React Native is an open source framework for building Android and iOS applications using [React](https://react.dev/) ...",
+          "tags": [
+            "localhost",
+            "10.0.2.2",
+            "http://",
+            "android:usesCleartextTraffic=\"true\"",
+            "subjectAltName"
+          ],
+          "path": "socketio/how-to-use-with-react-native.md",
+          "tokens": 1363
+        },
+        {
+          "id": "how-to-use-with-vue-3",
+          "title": "How to use with Vue 3",
+          "description": "This guide shows how to use Socket.IO within a [Vue 3](https://vuejs.org/) application.",
+          "tags": [
+            "src/socket.js",
+            "src/components/ConnectionState.vue",
+            "src/components/ConnectionManager.vue",
+            "socket",
+            "autoConnect",
+            "src/components/MyForm.vue",
+            "src/components/MyComponent.vue"
+          ],
+          "path": "socketio/how-to-use-with-vue-3.md",
+          "tokens": 1977
+        },
+        {
+          "id": "v4",
+          "title": "v4",
+          "description": "Version: 4.x",
+          "tags": [
+            "socket.emit(\"hello\", \"world\")",
+            "42[\"hello\",\"world\"]",
+            "4",
+            "2",
+            "[\"hello\",\"world\"]",
+            "JSON.stringify()",
+            "10.4 kB"
+          ],
+          "path": "socketio/v4.md",
+          "tokens": 2736
+        },
+        {
+          "id": "adapter",
+          "title": "adapter",
+          "description": "Version: 4.x",
+          "tags": [
+            "socket.io@3.1.0",
+            "create-room",
+            "delete-room",
+            "join-room",
+            "leave-room",
+            "socket.io@4.0.0",
+            "socketsJoin()",
+            "socketsLeave()",
+            "disconnectSockets()",
+            "serverSideEmit()"
+          ],
+          "path": "socketio/adapter.md",
+          "tokens": 1156
+        },
+        {
+          "id": "admin-ui",
+          "title": "admin-ui",
+          "description": "Version: 4.x",
+          "tags": [
+            "@socket.io/admin-ui",
+            "instrument",
+            "ui/dist",
+            "http://localhost:3000",
+            "https://example.com",
+            "auth",
+            "-",
+            "bcrypt",
+            "$2y$",
+            "namespaceName"
+          ],
+          "path": "socketio/admin-ui.md",
+          "tokens": 1970
+        },
+        {
+          "id": "aws-sqs-adapter",
+          "title": "aws-sqs-adapter",
+          "description": "Version: 4.x",
+          "tags": [
+            "socket.io-sqs",
+            "socket.io",
+            "4.0.0",
+            "0.1.0",
+            "4.1.0",
+            "4.5.0",
+            "4.6.0",
+            "topicName",
+            "topicTags",
+            "-"
+          ],
+          "path": "socketio/aws-sqs-adapter.md",
+          "tokens": 671
+        },
+        {
+          "id": "azure-service-bus-adapter",
+          "title": "azure-service-bus-adapter",
+          "description": "Version: 4.x",
+          "tags": [
+            "socket.io",
+            "4.0.0",
+            "0.1.0",
+            "4.1.0",
+            "4.5.0",
+            "4.6.0",
+            "topicName",
+            "topicOptions",
+            "-",
+            "subscriptionPrefix"
+          ],
+          "path": "socketio/azure-service-bus-adapter.md",
+          "tokens": 680
+        },
+        {
+          "id": "broadcasting-events",
+          "title": "broadcasting-events",
+          "description": "Version: 4.x",
+          "tags": [
+            "socket.emit(\"hello\", \"world\")",
+            "broadcast",
+            "socket",
+            "local"
+          ],
+          "path": "socketio/broadcasting-events.md",
+          "tokens": 836
+        },
+        {
+          "id": "changelog",
+          "title": "changelog",
+          "description": "Version: 4.x",
+          "tags": [
+            "x.y.z",
+            "z",
+            "1.2.3",
+            "1.2.4",
+            "y",
+            "1.3.0",
+            "x",
+            "2.0.0",
+            "4.7.0",
+            "4.6.0"
+          ],
+          "path": "socketio/changelog.md",
+          "tokens": 639
+        },
+        {
+          "id": "2-5-0",
+          "title": "2.5.0",
+          "description": "Version: 4.x",
+          "tags": [
+            "maxHttpBufferSize",
+            "engine.io@~3.6.0",
+            "ws@~7.4.2",
+            "engine.io-client@~3.5.0"
+          ],
+          "path": "socketio/2-5-0.md",
+          "tokens": 520
+        },
+        {
+          "id": "4-5-0",
+          "title": "4.5.0",
+          "description": "Version: 4.x",
+          "tags": [
+            "onAny()",
+            "maxHttpBufferSize",
+            "engine.io@~6.2.0",
+            "ws@~8.2.3",
+            "engine.io-client@~6.2.1"
+          ],
+          "path": "socketio/4-5-0.md",
+          "tokens": 1352
+        },
+        {
+          "id": "4-5-1",
+          "title": "4.5.1",
+          "description": "Version: 4.x",
+          "tags": [
+            "engine.io@~6.2.0",
+            "ws@~8.2.3",
+            "engine.io-client@~6.2.1"
+          ],
+          "path": "socketio/4-5-1.md",
+          "tokens": 329
+        },
+        {
+          "id": "4-5-2",
+          "title": "4.5.2",
+          "description": "Version: 4.x",
+          "tags": [
+            "engine.io@~6.2.0",
+            "ws@~8.2.3",
+            "engine.io-client@~6.2.1"
+          ],
+          "path": "socketio/4-5-2.md",
+          "tokens": 357
+        },
+        {
+          "id": "4-5-3",
+          "title": "4.5.3",
+          "description": "Version: 4.x",
+          "tags": [
+            "engine.io@~6.2.0",
+            "ws@~8.2.3",
+            "engine.io-client@~6.2.3"
+          ],
+          "path": "socketio/4-5-3.md",
+          "tokens": 384
+        },
+        {
+          "id": "4-5-4",
+          "title": "4.5.4",
+          "description": "Version: 4.x",
+          "tags": [
+            "engine.io",
+            "socket.io-parser",
+            "engine.io@~6.2.1",
+            "ws@~8.2.3",
+            "engine.io-client@~6.2.3"
+          ],
+          "path": "socketio/4-5-4.md",
+          "tokens": 325
+        },
+        {
+          "id": "4-6-0",
+          "title": "4.6.0",
+          "description": "Version: 4.x",
+          "tags": [
+            "emitWithAck()",
+            "serverSideEmitWithAck()",
+            "id",
+            "disconnect",
+            "/socket.io",
+            "/socket.io/",
+            "engine.io@~6.4.0",
+            "ws@~8.11.0",
+            "https://example.com/socket.io",
+            "https://example.com/socket.io/"
+          ],
+          "path": "socketio/4-6-0.md",
+          "tokens": 3002
+        },
+        {
+          "id": "4-6-1",
+          "title": "4.6.1",
+          "description": "Version: 4.x",
+          "tags": [
+            "engine.io@~6.4.0",
+            "ws@~8.11.0",
+            "engine.io-client@~6.4.0"
+          ],
+          "path": "socketio/4-6-1.md",
+          "tokens": 413
+        },
+        {
+          "id": "4-6-2",
+          "title": "4.6.2",
+          "description": "Version: 4.x",
+          "tags": [
+            "types",
+            "engine.io@~6.4.2",
+            "ws@~8.11.0",
+            "engine.io-client@~6.4.0"
+          ],
+          "path": "socketio/4-6-2.md",
+          "tokens": 362
+        },
+        {
+          "id": "4-7-0",
+          "title": "4.7.0",
+          "description": "Version: 4.x",
+          "tags": [
+            "@fails-components/webtransport",
+            "Access-Control-Allow-xxx",
+            "engine.io@~6.5.0",
+            "ws@~8.11.0",
+            "withCredentials",
+            "true",
+            "debug",
+            "localStorage.debug = ...",
+            "engine.io-client@~6.5.0"
+          ],
+          "path": "socketio/4-7-0.md",
+          "tokens": 1854
+        },
+        {
+          "id": "4-7-1",
+          "title": "4.7.1",
+          "description": "Version: 4.x",
+          "tags": [
+            "engine.io@~6.5.0",
+            "ws@~8.11.0",
+            "engine.io-client",
+            "engine.io-client@~6.5.1"
+          ],
+          "path": "socketio/4-7-1.md",
+          "tokens": 326
+        },
+        {
+          "id": "4-7-2",
+          "title": "4.7.2",
+          "description": "Version: 4.x",
+          "tags": [
+            "engine.io@~6.5.2",
+            "ws@~8.11.0",
+            "engine.io-client",
+            "engine.io-client@~6.5.2"
+          ],
+          "path": "socketio/4-7-2.md",
+          "tokens": 496
+        },
+        {
+          "id": "4-7-3",
+          "title": "4.7.3",
+          "description": "Version: 4.x",
+          "tags": [
+            "engine.io@~6.5.2",
+            "ws@~8.11.0",
+            "engine.io-client@~6.5.2"
+          ],
+          "path": "socketio/4-7-3.md",
+          "tokens": 491
+        },
+        {
+          "id": "4-7-4",
+          "title": "4.7.4",
+          "description": "Version: 4.x",
+          "tags": [
+            "engine.io@~6.5.2",
+            "ws@~8.11.0",
+            "engine.io-client@~6.5.2"
+          ],
+          "path": "socketio/4-7-4.md",
+          "tokens": 296
+        },
+        {
+          "id": "4-7-5",
+          "title": "4.7.5",
+          "description": "Version: 4.x",
+          "tags": [
+            "engine.io@~6.5.2",
+            "ws@~8.11.0",
+            "engine.io-client@~6.5.2"
+          ],
+          "path": "socketio/4-7-5.md",
+          "tokens": 352
+        },
+        {
+          "id": "4-8-0",
+          "title": "4.8.0",
+          "description": "Version: 4.x",
+          "tags": [
+            "engine.io@~6.6.0",
+            "ws@~8.17.1",
+            "transports",
+            "Fetch",
+            "fetch()",
+            "NodeXHR",
+            "XMLHttpRequest",
+            "xmlhttprequest-ssl",
+            "XHR",
+            "NodeWebSocket"
+          ],
+          "path": "socketio/4-8-0.md",
+          "tokens": 1397
+        },
+        {
+          "id": "4-8-1",
+          "title": "4.8.1",
+          "description": "Version: 4.x",
+          "tags": [
+            "socket.io.min.js",
+            "4.8.0",
+            "engine.io@~6.6.0",
+            "ws@~8.17.1",
+            "engine.io-client@~6.6.1"
+          ],
+          "path": "socketio/4-8-1.md",
+          "tokens": 301
+        },
+        {
+          "id": "4-8-2",
+          "title": "4.8.2",
+          "description": "Version: 4.x",
+          "tags": [
+            "url.parse()",
+            "new URL()",
+            "io.close()",
+            "engine.io@~6.6.0",
+            "ws@~8.18.3",
+            "engine.io-client@~6.6.1",
+            "ws@~8.17.1"
+          ],
+          "path": "socketio/4-8-2.md",
+          "tokens": 478
+        },
+        {
+          "id": "4-8-3",
+          "title": "4.8.3",
+          "description": "Version: 4.x",
+          "tags": [
+            "engine.io@~6.6.0",
+            "ws@~8.18.3",
+            "engine.io-client@~6.6.1"
+          ],
+          "path": "socketio/4-8-3.md",
+          "tokens": 291
+        },
+        {
+          "id": "client-api",
+          "title": "client-api",
+          "description": "Version: 4.x",
+          "tags": [
+            "io",
+            "socket.io-client",
+            "<number>",
+            "url",
+            "<string>",
+            "window.location.host",
+            "options",
+            "<Object>",
+            "forceNew",
+            "<boolean>"
+          ],
+          "path": "socketio/client-api.md",
+          "tokens": 8738
+        },
+        {
+          "id": "client-initialization",
+          "title": "client-initialization",
+          "description": "Version: 4.x",
+          "tags": [
+            "io",
+            "<script>",
+            "https",
+            "wss",
+            "http",
+            "ws"
+          ],
+          "path": "socketio/client-initialization.md",
+          "tokens": 664
+        },
+        {
+          "id": "client-installation",
+          "title": "client-installation",
+          "description": "Version: 4.x",
+          "tags": [
+            "4.8.3",
+            "/socket.io/socket.io.js",
+            "io",
+            "socket.io.js",
+            "socket.io.min.js",
+            "socket.io-client",
+            "@types/socket.io-client",
+            "engine.io-client",
+            "ws",
+            "4.8.x"
+          ],
+          "path": "socketio/client-installation.md",
+          "tokens": 1553
+        },
+        {
+          "id": "client-offline-behavior",
+          "title": "client-offline-behavior",
+          "description": "Version: 4.x",
+          "tags": [],
+          "path": "socketio/client-offline-behavior.md",
+          "tokens": 192
+        },
+        {
+          "id": "client-options",
+          "title": "client-options",
+          "description": "Version: 4.x",
+          "tags": [
+            "forceNew",
+            "false",
+            "multiplex",
+            "true",
+            "addTrailingSlash",
+            "https://example.com/socket.io",
+            "https://example.com/socket.io/",
+            "autoUnref",
+            "closeOnBeforeunload",
+            "beforeunload"
+          ],
+          "path": "socketio/client-options.md",
+          "tokens": 5875
+        },
+        {
+          "id": "client-socket-instance",
+          "title": "client-socket-instance",
+          "description": "Version: 4.x",
+          "tags": [
+            "Socket",
+            "id",
+            "auth",
+            "connect",
+            "connect_error",
+            "disconnect",
+            "error",
+            "<Error>",
+            "socket.active",
+            "reason"
+          ],
+          "path": "socketio/client-socket-instance.md",
+          "tokens": 2004
+        },
+        {
+          "id": "client-with-bundlers",
+          "title": "client-with-bundlers",
+          "description": "Version: 4.x",
+          "tags": [
+            "webpack.config.js",
+            "webpack-bundle-analyzer",
+            "target: \"node\"",
+            "rollup.config.js"
+          ],
+          "path": "socketio/client-with-bundlers.md",
+          "tokens": 937
+        },
+        {
+          "id": "cluster-adapter",
+          "title": "cluster-adapter",
+          "description": "Version: 4.x",
+          "tags": [
+            "io.to(\"room1\").emit()",
+            "socket.broadcast.emit()",
+            "socket.io",
+            "4.0.0",
+            "0.1.0",
+            "4.1.0",
+            "4.5.0",
+            "0.2.0",
+            "4.6.0",
+            "recluster"
+          ],
+          "path": "socketio/cluster-adapter.md",
+          "tokens": 1463
+        },
+        {
+          "id": "connection-state-recovery",
+          "title": "connection-state-recovery",
+          "description": "Version: 4.x",
+          "tags": [
+            "4.6.0",
+            "maxDisconnectionDuration",
+            "socket.disconnect()",
+            "id",
+            "data",
+            "recovered",
+            "0.3.0"
+          ],
+          "path": "socketio/connection-state-recovery.md",
+          "tokens": 1327
+        },
+        {
+          "id": "custom-parser",
+          "title": "custom-parser",
+          "description": "Version: 4.x",
+          "tags": [
+            "socket.io-circular-parser",
+            "socket.io-msgpack-parser",
+            "notepack.io",
+            "@skgdev/socket.io-msgpack-javascript",
+            "@msgpack/msgpack",
+            "socket.io-json-parser",
+            "JSON.stringify()",
+            "JSON.parse()",
+            "socket.io-cbor-x-parser",
+            "@socket.io/devalue-parser"
+          ],
+          "path": "socketio/custom-parser.md",
+          "tokens": 1791
+        },
+        {
+          "id": "delivery-guarantees",
+          "title": "delivery-guarantees",
+          "description": "Version: 4.x",
+          "tags": [
+            "retries",
+            "retries + 1",
+            "fetchMissedEventsFromDatabase()",
+            "generateUniqueId()",
+            "persistEventToDatabase()",
+            "socket.auth",
+            "socket.handshake"
+          ],
+          "path": "socketio/delivery-guarantees.md",
+          "tokens": 933
+        },
+        {
+          "id": "emit-cheatsheet",
+          "title": "emit-cheatsheet",
+          "description": "Version: 4.x",
+          "tags": [
+            "connect",
+            "connect_error",
+            "disconnect",
+            "disconnecting",
+            "newListener",
+            "removeListener",
+            "my-namespace",
+            "room1",
+            "room2",
+            "room3"
+          ],
+          "path": "socketio/emit-cheatsheet.md",
+          "tokens": 1541
+        },
+        {
+          "id": "emitting-events",
+          "title": "emitting-events",
+          "description": "Version: 4.x",
+          "tags": [
+            "JSON.stringify()",
+            "1970-01-01T00:00:00.000Z",
+            "toJSON()",
+            "emit()",
+            "volatile"
+          ],
+          "path": "socketio/emitting-events.md",
+          "tokens": 1301
+        },
+        {
+          "id": "engine-io-protocol",
+          "title": "engine-io-protocol",
+          "description": "Version: 4.x",
+          "tags": [
+            "GET",
+            "POST",
+            "/engine.io/",
+            "/socket.io/",
+            "EIO",
+            "4",
+            "transport",
+            "polling",
+            "sid",
+            "<sid>"
+          ],
+          "path": "socketio/engine-io-protocol.md",
+          "tokens": 4300
+        },
+        {
+          "id": "faq",
+          "title": "faq",
+          "description": "Version: 4.x",
+          "tags": [
+            "auth"
+          ],
+          "path": "socketio/faq.md",
+          "tokens": 1648
+        },
+        {
+          "id": "gcp-pubsub-adapter",
+          "title": "gcp-pubsub-adapter",
+          "description": "Version: 4.x",
+          "tags": [
+            "socket.io",
+            "4.0.0",
+            "0.1.0",
+            "4.1.0",
+            "4.5.0",
+            "4.6.0",
+            "subscriptionPrefix",
+            "subscriptionOptions",
+            "-",
+            "heartbeatInterval"
+          ],
+          "path": "socketio/gcp-pubsub-adapter.md",
+          "tokens": 574
+        },
+        {
+          "id": "glossary",
+          "title": "glossary",
+          "description": "Version: 4.x",
+          "tags": [],
+          "path": "socketio/glossary.md",
+          "tokens": 605
+        },
+        {
+          "id": "handling-cors",
+          "title": "handling-cors",
+          "description": "Version: 4.x",
+          "tags": [
+            "https://",
+            "https://example.com",
+            "http://example.com",
+            "https://api.example.com",
+            "https://example.com:8080",
+            "https://good-domain.com",
+            "https://bad-domain.com",
+            "http://localhost:3000",
+            "http://localhost:8080",
+            "cors"
+          ],
+          "path": "socketio/handling-cors.md",
+          "tokens": 2425
+        },
+        {
+          "id": "how-it-works",
+          "title": "how-it-works",
+          "description": "Version: 4.x",
+          "tags": [
+            "engine.io",
+            "engine.io-client",
+            "engine.io-parser",
+            "GET",
+            "POST",
+            "Best",
+            "Acceptable",
+            "99.84%",
+            "Great",
+            "84.48%"
+          ],
+          "path": "socketio/how-it-works.md",
+          "tokens": 2269
+        },
+        {
+          "id": "listening-to-events",
+          "title": "listening-to-events",
+          "description": "Version: 4.x",
+          "tags": [],
+          "path": "socketio/listening-to-events.md",
+          "tokens": 1886
+        },
+        {
+          "id": "my-scenario-ymlconfig-target-http-localhost-3000-phases-duration-60-arrivalrate-10-engines-socketio-v3-scenarios-name-my-sample-scenario-engine-socketio-v3-flow-wait-for-the-websocket-upgrade-optional",
+          "title": "my-scenario.ymlconfig:  target: \"http://localhost:3000\"  phases:    - duration: 60      arrivalRate: 10  engines:   socketio-v3: {}scenarios:  - name: My sample scenario    engine: socketio-v3    flow:      # wait for the WebSocket upgrade (optional)      - think: 1      # basic emit      - emit:          channel: \"hello\"          data: \"world\"      # emit an object      - emit:          channel: \"hello\"          data:            id: 42            status: \"in progress\"            tags:              - \"tag1\"              - \"tag2\"      # emit in a custom namespace      - namespace: \"/my-namespace\"        emit:          channel: \"hello\"          data: \"world\"      # emit with acknowledgement      - emit:          channel: \"ping\"        acknowledge:          match:            value: \"pong\"      # do nothing for 30 seconds then disconnect      - think: 30",
+          "description": "Version: 4.x",
+          "tags": [],
+          "path": "socketio/my-scenario-ymlconfig-target-http-localhost-3000-phases-duration-60-arrivalrate-10-engines-socketio-v3-scenarios-name-my-sample-scenario-engine-socketio-v3-flow-wait-for-the-websocket-upgrade-optional.md",
+          "tokens": 1090
+        },
+        {
+          "id": "logging-and-debugging",
+          "title": "logging-and-debugging",
+          "description": "Version: 4.x",
+          "tags": [
+            "DEBUG",
+            "localStorage.debug",
+            "*",
+            "net::ERR_INTERNET_DISCONNECTED",
+            "net::ERR_CONNECTION_REFUSED"
+          ],
+          "path": "socketio/logging-and-debugging.md",
+          "tokens": 747
+        },
+        {
+          "id": "memory-usage",
+          "title": "memory-usage",
+          "description": "Version: 4.x",
+          "tags": [
+            "express-session",
+            "ws",
+            "eiows",
+            "µWebSockets.js",
+            "Ubuntu 22.04 LTS",
+            "v20.3.0",
+            "socket.io@4.7.2",
+            "eiows@6.7.2",
+            "uWebSockets.js@20.33.0",
+            "ws@8.11.0"
+          ],
+          "path": "socketio/memory-usage.md",
+          "tokens": 858
+        },
+        {
+          "id": "middlewares",
+          "title": "middlewares",
+          "description": "Version: 4.x",
+          "tags": [
+            "next()",
+            "disconnect",
+            "auth",
+            "next",
+            "connect_error",
+            "4.6.0",
+            "express-session",
+            "helmet",
+            "sid",
+            "passport-jwt"
+          ],
+          "path": "socketio/middlewares.md",
+          "tokens": 1231
+        },
+        {
+          "id": "migrating-from-2-x-to-3-0",
+          "title": "migrating-from-2-x-to-3-0",
+          "description": "Version: 4.x",
+          "tags": [
+            "emit()",
+            "maxHttpBufferSize",
+            "100MB",
+            "1MB",
+            "withCredentials",
+            "false",
+            "origins",
+            "handlePreflightRequest",
+            "Access-Control-Allow-xxx",
+            "cors"
+          ],
+          "path": "socketio/migrating-from-2-x-to-3-0.md",
+          "tokens": 8406
+        },
+        {
+          "id": "migrating-from-3-x-to-4-0",
+          "title": "migrating-from-3-x-to-4-0",
+          "description": "Version: 4.x",
+          "tags": [
+            "allowEIO3: true",
+            "io.to()",
+            "wsEngine",
+            "pingTimeout",
+            "autoUnref",
+            "EIO",
+            "EIO=4",
+            "EIO=3",
+            "socket.io@2.1.0",
+            "to()"
+          ],
+          "path": "socketio/migrating-from-3-x-to-4-0.md",
+          "tokens": 3007
+        },
+        {
+          "id": "mongo-adapter",
+          "title": "mongo-adapter",
+          "description": "Version: 4.x",
+          "tags": [
+            "io.to(\"room1\").emit()",
+            "socket.broadcast.emit()",
+            "socket.io",
+            "4.0.0",
+            "0.1.0",
+            "4.1.0",
+            "4.5.0",
+            "0.2.0",
+            "4.6.0",
+            "0.3.0"
+          ],
+          "path": "socketio/mongo-adapter.md",
+          "tokens": 1981
+        },
+        {
+          "id": "namespaces",
+          "title": "namespaces",
+          "description": "Version: 4.x",
+          "tags": [
+            "/",
+            "io",
+            "io.sockets",
+            "io.of(\"/\")",
+            "of",
+            "connection",
+            "of()"
+          ],
+          "path": "socketio/namespaces.md",
+          "tokens": 1500
+        },
+        {
+          "id": "performance-tuning",
+          "title": "performance-tuning",
+          "description": "Version: 4.x",
+          "tags": [
+            "ws",
+            "wsEngine",
+            "express-session",
+            "/etc/security/limits.d/custom.conf",
+            "10000",
+            "5432",
+            "1024"
+          ],
+          "path": "socketio/performance-tuning.md",
+          "tokens": 1486
+        },
+        {
+          "id": "pm2",
+          "title": "pm2",
+          "description": "Version: 4.x",
+          "tags": [
+            "@socket.io/pm2",
+            "pm2",
+            "worker.js",
+            "ecosystem.config.js",
+            "pm2 start ecosystem.config.js",
+            "pm2 start worker.js -i 0",
+            "@socket.io/sticky",
+            "@socket.io/cluster-adapter",
+            "io.emit()"
+          ],
+          "path": "socketio/pm2.md",
+          "tokens": 849
+        },
+        {
+          "id": "postgres-adapter",
+          "title": "postgres-adapter",
+          "description": "Version: 4.x",
+          "tags": [
+            "io.to(\"room1\").emit()",
+            "socket.broadcast.emit()",
+            "socket.io",
+            "4.0.0",
+            "0.1.0",
+            "4.1.0",
+            "4.5.0",
+            "0.3.0",
+            "4.6.0",
+            "@types/pg"
+          ],
+          "path": "socketio/postgres-adapter.md",
+          "tokens": 1758
+        },
+        {
+          "id": "redis-adapter",
+          "title": "redis-adapter",
+          "description": "Version: 4.x",
+          "tags": [
+            "io.to(\"room1\").emit()",
+            "socket.broadcast.emit()",
+            "socket.io",
+            "4.0.0",
+            "6.1.0",
+            "4.1.0",
+            "7.0.0",
+            "4.5.0",
+            "7.2.0",
+            "4.6.0"
+          ],
+          "path": "socketio/redis-adapter.md",
+          "tokens": 4219
+        },
+        {
+          "id": "redis-streams-adapter",
+          "title": "redis-streams-adapter",
+          "description": "Version: 4.x",
+          "tags": [
+            "streamCount",
+            "maxLen",
+            "socket.io",
+            "4.0.0",
+            "0.1.0",
+            "4.1.0",
+            "4.5.0",
+            "4.6.0",
+            "redis",
+            "ioredis"
+          ],
+          "path": "socketio/redis-streams-adapter.md",
+          "tokens": 1921
+        },
+        {
+          "id": "reverse-proxy",
+          "title": "reverse-proxy",
+          "description": "Version: 4.x",
+          "tags": [
+            "http-proxy",
+            "/etc/nginx/nginx.conf",
+            "proxy_read_timeout",
+            "pingInterval + pingTimeout",
+            "/usr/local/apache2/conf/httpd.conf",
+            "npm i http-proxy",
+            "Caddyfile"
+          ],
+          "path": "socketio/reverse-proxy.md",
+          "tokens": 1361
+        },
+        {
+          "id": "rooms",
+          "title": "rooms",
+          "description": "Version: 4.x",
+          "tags": [
+            "join",
+            "leave",
+            "to",
+            "in",
+            "disconnecting",
+            "sids",
+            "Map<SocketId, Set<Room>>",
+            "rooms",
+            "Map<Room, Set<SocketId>>",
+            "socket.join(\"the-room\")"
+          ],
+          "path": "socketio/rooms.md",
+          "tokens": 1529
+        },
+        {
+          "id": "server-api",
+          "title": "server-api",
+          "description": "Version: 4.x",
+          "tags": [
+            "httpServer",
+            "<http.Server>",
+            "<https.Server>",
+            "options",
+            "<Object>",
+            "port",
+            "<number>",
+            "socket",
+            "namespace",
+            "Namespace"
+          ],
+          "path": "socketio/server-api.md",
+          "tokens": 21731
+        },
+        {
+          "id": "server-application-structure",
+          "title": "server-application-structure",
+          "description": "Version: 4.x",
+          "tags": [
+            "index.js",
+            "orderHandler.js"
+          ],
+          "path": "socketio/server-application-structure.md",
+          "tokens": 653
+        },
+        {
+          "id": "server-initialization",
+          "title": "server-initialization",
+          "description": "Version: 4.x",
+          "tags": [
+            "io.httpServer",
+            "app.listen(3000)",
+            "fastify-socket.io"
+          ],
+          "path": "socketio/server-initialization.md",
+          "tokens": 3339
+        },
+        {
+          "id": "server-installation",
+          "title": "server-installation",
+          "description": "Version: 4.x",
+          "tags": [
+            "4.8.3",
+            "wsEngine",
+            "µWebSockets.js",
+            "@socket.io/bun-engine",
+            "engine.io",
+            "socket.io",
+            "ws",
+            "4.8.x",
+            "6.6.x",
+            "8.17.x"
+          ],
+          "path": "socketio/server-installation.md",
+          "tokens": 1934
+        },
+        {
+          "id": "server-instance",
+          "title": "server-instance",
+          "description": "Version: 4.x",
+          "tags": [
+            "io",
+            "namespace.use()",
+            "namespace.allSockets()",
+            "sid",
+            "socket.io@4.1.0",
+            "initial_headers",
+            "headers",
+            "connection_error",
+            "socketsJoin",
+            "socketsLeave"
+          ],
+          "path": "socketio/server-instance.md",
+          "tokens": 2194
+        },
+        {
+          "id": "server-options",
+          "title": "server-options",
+          "description": "Version: 4.x",
+          "tags": [
+            "adapter",
+            "require(\"socket.io-adapter\")",
+            "cleanupEmptyChildNamespaces",
+            "false",
+            "connectionStateRecovery",
+            "undefined",
+            "maxDisconnectionDuration",
+            "Infinity",
+            "skipMiddlewares",
+            "true"
+          ],
+          "path": "socketio/server-options.md",
+          "tokens": 4697
+        },
+        {
+          "id": "server-socket-instance",
+          "title": "server-socket-instance",
+          "description": "Version: 4.x",
+          "tags": [
+            "Socket",
+            "id",
+            "auth",
+            "fetchSockets()",
+            "next",
+            "error",
+            "disconnect",
+            "disconnecting",
+            "server namespace disconnect",
+            "client namespace disconnect"
+          ],
+          "path": "socketio/server-socket-instance.md",
+          "tokens": 2363
+        },
+        {
+          "id": "server-with-bundlers",
+          "title": "server-with-bundlers",
+          "description": "Version: 4.x",
+          "tags": [
+            "index.js",
+            "webpack.config.js",
+            "bufferutil",
+            "utf-8-validate",
+            "ws",
+            "sendFile"
+          ],
+          "path": "socketio/server-with-bundlers.md",
+          "tokens": 708
+        },
+        {
+          "id": "socket-io-protocol",
+          "title": "socket-io-protocol",
+          "description": "Version: 4.x",
+          "tags": [
+            "CONNECT",
+            "CONNECT_ERROR",
+            "\"/\"",
+            "ACK",
+            "DISCONNECT",
+            "message",
+            "\"4\"",
+            "/",
+            "42[\"foo\"]",
+            "t"
+          ],
+          "path": "socketio/socket-io-protocol.md",
+          "tokens": 5599
+        },
+        {
+          "id": "testing",
+          "title": "testing",
+          "description": "Version: 4.x",
+          "tags": [],
+          "path": "socketio/testing.md",
+          "tokens": 5032
+        },
+        {
+          "id": "troubleshooting-connection-issues",
+          "title": "troubleshooting-connection-issues",
+          "description": "Version: 4.x",
+          "tags": [
+            "socket.id",
+            "connect_error",
+            "connection_error",
+            "allowRequest()",
+            "transports: [\"websocket\"]",
+            "EIO=3",
+            "v4.0.0",
+            ".connectParams([\"EIO\": \"3\"])",
+            ".version(.two)",
+            "path"
+          ],
+          "path": "socketio/troubleshooting-connection-issues.md",
+          "tokens": 5672
+        },
+        {
+          "id": "overview-of-the-api",
+          "title": "Overview of the API",
+          "description": "Version: 4.x",
+          "tags": [
+            "socket.emit()",
+            "JSON.stringify()",
+            "emit()",
+            "emitWithAck()",
+            "io.emit()"
+          ],
+          "path": "socketio/overview-of-the-api.md",
+          "tokens": 1862
+        },
+        {
+          "id": "ending-notes",
+          "title": "Ending notes",
+          "description": "Version: 4.x",
+          "tags": [],
+          "path": "socketio/ending-notes.md",
+          "tokens": 2480
+        },
+        {
+          "id": "handling-disconnections",
+          "title": "Handling disconnections",
+          "description": "Version: 4.x",
+          "tags": [],
+          "path": "socketio/handling-disconnections.md",
+          "tokens": 257
+        },
+        {
+          "id": "getting-started",
+          "title": "Getting started",
+          "description": "Version: 4.x",
+          "tags": [],
+          "path": "socketio/getting-started.md",
+          "tokens": 663
+        },
+        {
+          "id": "project-initialization",
+          "title": "Project initialization",
+          "description": "Version: 4.x",
+          "tags": [
+            "express",
+            "package.json",
+            "socket-chat-example",
+            "dependencies",
+            "npm install",
+            "index.js",
+            "app",
+            "/",
+            "node index.js",
+            "http://localhost:3000"
+          ],
+          "path": "socketio/project-initialization.md",
+          "tokens": 721
+        },
+        {
+          "id": "serving-html",
+          "title": "Serving HTML",
+          "description": "Version: 4.x",
+          "tags": [
+            "index.js",
+            "res.send",
+            "index.html",
+            "sendFile",
+            "node index.js"
+          ],
+          "path": "socketio/serving-html.md",
+          "tokens": 773
+        },
+        {
+          "id": "integrating-socket-io",
+          "title": "Integrating Socket.IO",
+          "description": "Version: 4.x",
+          "tags": [
+            "socket.io",
+            "socket.io-client",
+            "package.json",
+            "index.js",
+            "server",
+            "connection",
+            "</body>",
+            "io",
+            "GET /socket.io/socket.io.js",
+            "io()"
+          ],
+          "path": "socketio/integrating-socket-io.md",
+          "tokens": 1106
+        },
+        {
+          "id": "emitting-events",
+          "title": "Emitting events",
+          "description": "Version: 4.x",
+          "tags": [
+            "chat message",
+            "script",
+            "index.html",
+            "index.js"
+          ],
+          "path": "socketio/emitting-events.md",
+          "tokens": 491
+        },
+        {
+          "id": "broadcasting",
+          "title": "Broadcasting",
+          "description": "Version: 4.x",
+          "tags": [
+            "io.emit()",
+            "broadcast",
+            "chat message"
+          ],
+          "path": "socketio/broadcasting.md",
+          "tokens": 662
+        },
+        {
+          "id": "connection-state-recovery",
+          "title": "Connection state recovery",
+          "description": "Version: 4.x",
+          "tags": [],
+          "path": "socketio/connection-state-recovery.md",
+          "tokens": 716
+        },
+        {
+          "id": "server-delivery",
+          "title": "Server delivery",
+          "description": "Version: 4.x",
+          "tags": [],
+          "path": "socketio/server-delivery.md",
+          "tokens": 1561
+        },
+        {
+          "id": "client-delivery",
+          "title": "Client delivery",
+          "description": "Version: 4.x",
+          "tags": [
+            "socket.emit()",
+            "retries",
+            "socket.id",
+            "getRandomValues()",
+            "client_offset"
+          ],
+          "path": "socketio/client-delivery.md",
+          "tokens": 1620
+        },
+        {
+          "id": "scaling-horizontally",
+          "title": "Scaling horizontally",
+          "description": "Version: 4.x",
+          "tags": [
+            "cluster",
+            "chat message"
+          ],
+          "path": "socketio/scaling-horizontally.md",
+          "tokens": 1436
+        },
+        {
+          "id": "typescript",
+          "title": "typescript",
+          "description": "Version: 4.x",
+          "tags": [
+            "ServerToClientEvents",
+            "ClientToServerEvents",
+            "InterServerEvents",
+            "socket.io@4.1.0",
+            "SocketData",
+            "socket.data",
+            "socket.io@4.4.0"
+          ],
+          "path": "socketio/typescript.md",
+          "tokens": 1153
+        },
+        {
+          "id": "reference-http-blog-haproxy-com-2012-11-07-websockets-load-balancing-with-haproxy-listen-chat-bind-80-default-backend-nodesbackend-nodes-option-httpchk-head-health-http-check-expect-status-200-cookie",
+          "title": "Reference: http://blog.haproxy.com/2012/11/07/websockets-load-balancing-with-haproxy/listen chat  bind *:80  default_backend nodesbackend nodes  option httpchk HEAD /health  http-check expect status 200  cookie io prefix indirect nocache # using the `io` cookie set upon handshake  server app01 app01:3000 check cookie app01  server app02 app02:3000 check cookie app02  server app03 app03:3000 check cookie app03",
+          "description": "Version: 4.x",
+          "tags": [
+            "transports",
+            "cluster",
+            "http { }",
+            "nginx.conf",
+            "upstream",
+            "hash",
+            "worker_processes",
+            "worker_connections",
+            "events { }",
+            "proxy_read_timeout"
+          ],
+          "path": "socketio/reference-http-blog-haproxy-com-2012-11-07-websockets-load-balancing-with-haproxy-listen-chat-bind-80-default-backend-nodesbackend-nodes-option-httpchk-head-health-http-check-expect-status-200-cookie.md",
+          "tokens": 3593
         }
       ]
     },

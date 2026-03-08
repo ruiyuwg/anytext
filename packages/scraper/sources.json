@@ -497,6 +497,18 @@
       }
     },
     {
+      "id": "socketio",
+      "name": "Socket.IO",
+      "description": "Real-time bidirectional event-based communication library with rooms, namespaces, and client/server APIs",
+      "version": "4",
+      "adapter": "sitemap",
+      "url": "https://socket.io/sitemap.xml",
+      "crawl": {
+        "contentSelector": "article, main",
+        "include": ["/docs/v4/", "/get-started/", "/how-to/"]
+      }
+    },
+    {
       "id": "azure",
       "name": "Azure",
       "description": "Microsoft Azure cloud platform with compute, storage, databases, AI, and 200+ services",
