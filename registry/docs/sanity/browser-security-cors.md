@@ -1,0 +1,23 @@
+# Browser security & CORS
+
+> \[!TIP]
+> Protip
+> [Read this article](https://www.sanity.io/docs/content-lake/keeping-your-data-safe) to learn more about the use of tokens in your API client.
+
+CORS is a technique to relax the strict browser security model for certain trusted domains.
+
+CORS makes it possible to specify which origins (i.e. webpages) that may issue requests and read response data from the API of your project. Let's say you have the Sanity Content Studio open in a browser tab and you're logged in. Behind the scenes, you now have an active session cookie at `https://yourproject.api.sanity.io`. Blissfully unaware, you click a link you receive in a mail, that opens evil-site.com in another browser tab. Now, if browser vendors did not care about security at all, the JavaScript running on `evil-site.com` would be able to make requests to `https://yourproject.api.sanity.io`. These requests would even be authenticated, passing whatever cookies the browser had previously set for yourproject.api.sanity.io, meaning that nothing would prevent the maintainer of `evil-site.com` from including a script that deletes all the contents in your projects dataset.
+
+Luckily, browser vendors are extremely concerned about security and have all implemented something called the Same-origin policy, which denies all requests from a web page to another web page that does not share the same origin (origin is the combination of URI scheme, hostname, and port number). The Same-origin policy is what prevents your bank account from becoming emptied when you're logged in to your online bank while also browsing random web pages at the same time. If you're unlucky and enter `evil-site.com`, there's no way any browser will allow scripts running on `evil-site.com` to send a request to `your-bank.com/transfer` with instructions to transfer all your money to the maintainer of evil site.
+
+However, the Same-origin policy is bad news for you as a Sanity user, since your Content Studio (and possibly your single page app too) doesn't run on the same origin as the Sanity API. Typically the Content Studio runs on either `http://localhost:3333` or `https://yourproject.sanity.studio`, while your content is located on `https://yourproject.api.sanity.io`. Due to the Same-origin policy, any script running on `http://localhost:3333` is denied from making requests to yourdataset.api.sanity.io. So how can you still run your studio and edit your data at `https://yourproject.sanity.studio`? This is where CORS comes to the rescue. CORS stands for Cross-Origin Resource Sharing and is a way to bypass the Same-origin policy for trusted pages.
+
+CORS provides a way for the browser to first check with the server whether the origin of a page is allowed to perform a specific request (e.g. a request to delete some content). Explained simplified: if a script loaded on a web page tries to request `https://yourproject.api.sanity.io`, the browser will issue a *preflight* request to the Sanity API, providing information about the origin of the web page (along with some additional metadata about the request it is about to perform). If the origin is in the list of trusted origins for your project, then the Sanity API will respond with a “YAY”, and the browser will continue with the actual request. If the origin is *not* found in the list of trusted origins, the Sanity API will respond with a “NOPE” and the browser will *not* perform the request at all. To add or remove a trusted origin, go to the [management console](https://manage.sanity.io), select a project, and find the list under the settings tab.
+
+In addition to simply allowing or *not* allowing an origin access to your dataset, there's also an additional setting for whether or not to allow *credentials* to be sent. In this context, credentials means either a session cookie or an authorization token. If you are creating a single-page application that talks to the Sanity API directly, you usually want to *disallow* sending credentials.
+
+> \[!WARNING]
+> Gotcha
+> CORS is *only* about browser security, and does not apply when requesting from e.g. Node.js or `curl`.
+
+In order to modify data, the API request must be authenticated with an access token that has write access. This token is either coming from the auth session set by the browser when the user logged in, or from an access token added in the [project management console](https://manage.sanity.io/) under project settings. A public dataset is only publicly *readable*, and can only be written to by users invited to the project, or by tokens configured with write access enabled.

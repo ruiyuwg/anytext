@@ -346,6 +346,14 @@
       "url": "https://vercel.com/docs/llms-full.txt"
     },
     {
+      "id": "sanity",
+      "name": "Sanity",
+      "description": "Composable content platform with GROQ queries, structured content schemas, and real-time collaboration",
+      "version": "3",
+      "adapter": "llms-full",
+      "url": "https://www.sanity.io/docs/llms-full.txt"
+    },
+    {
       "id": "azure",
       "name": "Azure",
       "description": "Microsoft Azure cloud platform with compute, storage, databases, AI, and 200+ services",
