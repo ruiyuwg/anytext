@@ -1,5 +1,5 @@
 {
-  "version": 75,
+  "version": 76,
   "updatedAt": "2026-03-08",
   "libraries": [
     {
@@ -113521,6 +113521,621 @@
           ],
           "path": "prisma/special-rules-for-referential-actions-in-sql-server-and-mongodb-docs-v6-orm-prisma-schema-data-model-relations-referential-actions-special-rules-for-referential-actions.md",
           "tokens": 2768
+        }
+      ]
+    },
+    {
+      "id": "radix-ui",
+      "name": "Radix UI",
+      "description": "Unstyled, accessible React UI primitives with WAI-ARIA compliance",
+      "version": "1",
+      "topics": [
+        {
+          "id": "accordion",
+          "title": "Accordion",
+          "description": "metaTitle: Accordion",
+          "tags": [
+            "Accordion.Trigger",
+            "asChild",
+            "Accordion.Header",
+            "defaultValue",
+            "collapsible",
+            "type",
+            "multiple",
+            "orientation",
+            "--radix-accordion-content-width",
+            "--radix-accordion-content-height"
+          ],
+          "path": "radix-ui/accordion.md",
+          "tokens": 3365
+        },
+        {
+          "id": "alert-dialog",
+          "title": "Alert Dialog",
+          "description": "metaTitle: Alert Dialog",
+          "tags": [
+            "body",
+            "AlertDialog.Action",
+            "AlertDialog.Cancel",
+            "aria-label",
+            "aria-labelledby",
+            "AlertDialog.Content",
+            "aria-describedby"
+          ],
+          "path": "radix-ui/alert-dialog.md",
+          "tokens": 2498
+        },
+        {
+          "id": "aspect-ratio",
+          "title": "Aspect Ratio",
+          "description": "metaTitle: Aspect Ratio",
+          "tags": [],
+          "path": "radix-ui/aspect-ratio.md",
+          "tokens": 293
+        },
+        {
+          "id": "avatar",
+          "title": "Avatar",
+          "description": "metaTitle: Avatar",
+          "tags": [
+            "onLoadingStatusChange",
+            "delayMs",
+            "Avatar.Image"
+          ],
+          "path": "radix-ui/avatar.md",
+          "tokens": 875
+        },
+        {
+          "id": "checkbox",
+          "title": "Checkbox",
+          "description": "metaTitle: Checkbox",
+          "tags": [
+            "input",
+            "form",
+            "boolean | 'indeterminate'",
+            "indeterminate"
+          ],
+          "path": "radix-ui/checkbox.md",
+          "tokens": 1262
+        },
+        {
+          "id": "collapsible",
+          "title": "Collapsible",
+          "description": "metaTitle: Collapsible",
+          "tags": [
+            "--radix-collapsible-content-width",
+            "--radix-collapsible-content-height"
+          ],
+          "path": "radix-ui/collapsible.md",
+          "tokens": 1331
+        },
+        {
+          "id": "context-menu",
+          "title": "Context Menu",
+          "description": "metaTitle: Context Menu",
+          "tags": [
+            "body",
+            "{ top: 20, left: 20 }",
+            "ContextMenu.Content",
+            "ContextMenu.Item",
+            "boolean | 'indeterminate'",
+            "(checked: boolean) => void",
+            "ContextMenu.RadioItem",
+            "ContextMenu.CheckboxItem",
+            "ContextMenu.Sub",
+            "data-disabled"
+          ],
+          "path": "radix-ui/context-menu.md",
+          "tokens": 8976
+        },
+        {
+          "id": "dialog",
+          "title": "Dialog",
+          "description": "metaTitle: Dialog",
+          "tags": [
+            "body",
+            "<VisuallyHidden asChild>",
+            "aria-describedby={undefined}",
+            "Dialog.Content",
+            "Dialog.Overlay",
+            "Dialog.Close"
+          ],
+          "path": "radix-ui/dialog.md",
+          "tokens": 3119
+        },
+        {
+          "id": "dropdown-menu",
+          "title": "Dropdown Menu",
+          "description": "metaTitle: Dropdown Menu",
+          "tags": [
+            "DropdownMenu.Content",
+            "body",
+            "{ top: 20, left: 20 }",
+            "DropdownMenu.Item",
+            "boolean | 'indeterminate'",
+            "(checked: boolean) => void",
+            "DropdownMenu.RadioItem",
+            "DropdownMenu.CheckboxItem",
+            "DropdownMenu.Sub",
+            "data-disabled"
+          ],
+          "path": "radix-ui/dropdown-menu.md",
+          "tokens": 10331
+        },
+        {
+          "id": "form",
+          "title": "Form",
+          "description": "metaTitle: Form",
+          "tags": [
+            "Field",
+            "input",
+            "name",
+            "Form.Message",
+            "match",
+            "ValidityState",
+            "required",
+            "min",
+            "max",
+            "true"
+          ],
+          "path": "radix-ui/form.md",
+          "tokens": 3671
+        },
+        {
+          "id": "hover-card",
+          "title": "Hover Card",
+          "description": "metaTitle: Hover Card",
+          "tags": [
+            "body",
+            "{ top: 20, left: 20 }",
+            "HoverCard.Content",
+            "openDelay",
+            "--radix-hover-card-trigger-width",
+            "side",
+            "sideOffset",
+            "align",
+            "alignOffset",
+            "data-side"
+          ],
+          "path": "radix-ui/hover-card.md",
+          "tokens": 3049
+        },
+        {
+          "id": "label",
+          "title": "Label",
+          "description": "metaTitle: Label",
+          "tags": [
+            "label",
+            "htmlFor",
+            "button",
+            "input"
+          ],
+          "path": "radix-ui/label.md",
+          "tokens": 377
+        },
+        {
+          "id": "menubar",
+          "title": "Menu Bar",
+          "description": "metaTitle: Menubar",
+          "tags": [
+            "Menubar.Content",
+            "body",
+            "{ top: 20, left: 20 }",
+            "Menubar.Item",
+            "boolean | 'indeterminate'",
+            "Menubar.RadioItem",
+            "Menubar.CheckboxItem",
+            "Menubar.Sub",
+            "data-disabled",
+            "Separator"
+          ],
+          "path": "radix-ui/menubar.md",
+          "tokens": 9576
+        },
+        {
+          "id": "navigation-menu",
+          "title": "Navigation Menu",
+          "description": "metaTitle: Navigation Menu",
+          "tags": [
+            "orientation",
+            "Viewport",
+            "Content",
+            "Indicator",
+            "Trigger",
+            "NavigationMenu",
+            "Sub",
+            "Root",
+            "Tabs",
+            "defaultValue"
+          ],
+          "path": "radix-ui/navigation-menu.md",
+          "tokens": 5682
+        },
+        {
+          "id": "one-time-password-field",
+          "title": "One-Time Password Field",
+          "description": "metaTitle: One-Time Password Field",
+          "tags": [
+            "Root",
+            "aria-hidden",
+            "group",
+            "autoSubmit",
+            "input"
+          ],
+          "path": "radix-ui/one-time-password-field.md",
+          "tokens": 3233
+        },
+        {
+          "id": "password-toggle-field",
+          "title": "Password Toggle Field",
+          "description": "metaTitle: Password Toggle Field",
+          "tags": [
+            "Slot",
+            "render"
+          ],
+          "path": "radix-ui/password-toggle-field.md",
+          "tokens": 1490
+        },
+        {
+          "id": "popover",
+          "title": "Popover",
+          "description": "metaTitle: Popover",
+          "tags": [
+            "Popover.Content",
+            "body",
+            "{ top: 20, left: 20 }",
+            "--radix-popover-trigger-width",
+            "side",
+            "sideOffset",
+            "align",
+            "alignOffset",
+            "data-side",
+            "data-align"
+          ],
+          "path": "radix-ui/popover.md",
+          "tokens": 4209
+        },
+        {
+          "id": "progress",
+          "title": "Progress",
+          "description": "metaTitle: Progress",
+          "tags": [
+            "progressbar"
+          ],
+          "path": "radix-ui/progress.md",
+          "tokens": 748
+        },
+        {
+          "id": "radio-group",
+          "title": "Radio Group",
+          "description": "metaTitle: Radio Group",
+          "tags": [
+            "input",
+            "form"
+          ],
+          "path": "radix-ui/radio-group.md",
+          "tokens": 1668
+        },
+        {
+          "id": "scroll-area",
+          "title": "Scroll Area",
+          "description": "metaTitle: Scroll Area",
+          "tags": [
+            "Scrollbar",
+            "orientation",
+            "ScrollArea.Scrollbar",
+            "ScrollArea"
+          ],
+          "path": "radix-ui/scroll-area.md",
+          "tokens": 1680
+        },
+        {
+          "id": "select",
+          "title": "Select",
+          "description": "metaTitle: Select",
+          "tags": [
+            "Select.Content",
+            "children",
+            "placeholder",
+            "asChild",
+            "body",
+            "{ top: 20, left: 20 }",
+            "Select.Label",
+            "position",
+            "popper",
+            "Select"
+          ],
+          "path": "radix-ui/select.md",
+          "tokens": 7681
+        },
+        {
+          "id": "separator",
+          "title": "Separator",
+          "description": "metaTitle: Separator",
+          "tags": [
+            "separator"
+          ],
+          "path": "radix-ui/separator.md",
+          "tokens": 444
+        },
+        {
+          "id": "slider",
+          "title": "Slider",
+          "description": "metaTitle: Slider",
+          "tags": [
+            "input",
+            "form",
+            "Slider.Range",
+            "Slider.Track",
+            "orientation",
+            "step",
+            "minStepsBetweenThumbs",
+            "Slider",
+            "onMouseDown",
+            "onMouseUp"
+          ],
+          "path": "radix-ui/slider.md",
+          "tokens": 2907
+        },
+        {
+          "id": "switch",
+          "title": "Switch",
+          "description": "metaTitle: Switch",
+          "tags": [
+            "input",
+            "form",
+            "switch"
+          ],
+          "path": "radix-ui/switch.md",
+          "tokens": 952
+        },
+        {
+          "id": "tabs",
+          "title": "Tabs",
+          "description": "metaTitle: Tabs",
+          "tags": [
+            "orientation"
+          ],
+          "path": "radix-ui/tabs.md",
+          "tokens": 2011
+        },
+        {
+          "id": "toast",
+          "title": "Toast",
+          "description": "metaTitle: Toast",
+          "tags": [
+            "{hotkey}",
+            "AlertDialog",
+            "event.code",
+            "--radix-toast-swipe-move-[x|y]",
+            "--radix-toast-swipe-end-[x|y]",
+            "data-swipe=\"[start|move|cancel|end]\"",
+            "aria-live",
+            "type",
+            "foreground",
+            "background"
+          ],
+          "path": "radix-ui/toast.md",
+          "tokens": 4544
+        },
+        {
+          "id": "toggle-group",
+          "title": "Toggle Group",
+          "description": "metaTitle: Toggle Group",
+          "tags": [],
+          "path": "radix-ui/toggle-group.md",
+          "tokens": 1926
+        },
+        {
+          "id": "toggle",
+          "title": "Toggle",
+          "description": "metaTitle: Toggle",
+          "tags": [],
+          "path": "radix-ui/toggle.md",
+          "tokens": 574
+        },
+        {
+          "id": "toolbar",
+          "title": "Toolbar",
+          "description": "metaTitle: Toolbar",
+          "tags": [
+            "Trigger",
+            "Dialog",
+            "AlertDialog",
+            "Popover",
+            "DropdownMenu",
+            "asChild"
+          ],
+          "path": "radix-ui/toolbar.md",
+          "tokens": 2438
+        },
+        {
+          "id": "tooltip",
+          "title": "Tooltip",
+          "description": "metaTitle: Tooltip",
+          "tags": [
+            "Provider",
+            "Tooltip.Content",
+            "body",
+            "{ top: 20, left: 20 }",
+            "delayDuration",
+            "skipDelayDuration",
+            "--radix-tooltip-trigger-width",
+            "side",
+            "sideOffset",
+            "align"
+          ],
+          "path": "radix-ui/tooltip.md",
+          "tokens": 4004
+        },
+        {
+          "id": "animation",
+          "title": "Animation",
+          "description": "metaTitle: Animation",
+          "tags": [
+            "forceMount",
+            "Dialog",
+            "Overlay",
+            "Content",
+            "useTransition"
+          ],
+          "path": "radix-ui/animation.md",
+          "tokens": 679
+        },
+        {
+          "id": "composition",
+          "title": "Composition",
+          "description": "metaTitle: Composition",
+          "tags": [
+            "asChild",
+            "true",
+            "Tooltip.Trigger",
+            "button",
+            "a",
+            "div",
+            "Trigger",
+            "ref",
+            "React.forwardRef",
+            "Dialog.Trigger"
+          ],
+          "path": "radix-ui/composition.md",
+          "tokens": 1127
+        },
+        {
+          "id": "server-side-rendering",
+          "title": "Server-side rendering",
+          "description": "metaTitle: Server-side rendering",
+          "tags": [
+            "SSR"
+          ],
+          "path": "radix-ui/server-side-rendering.md",
+          "tokens": 314
+        },
+        {
+          "id": "styling",
+          "title": "Styling",
+          "description": "metaTitle: Styling",
+          "tags": [
+            "className",
+            "data-state",
+            "data-state=\"open\""
+          ],
+          "path": "radix-ui/styling.md",
+          "tokens": 852
+        },
+        {
+          "id": "accessibility",
+          "title": "Accessibility",
+          "description": "metaTitle: Accessibility",
+          "tags": [
+            "aria",
+            "role",
+            "div",
+            "button",
+            "label",
+            "input",
+            "Label",
+            "Tabs",
+            "Dialog",
+            "AlertDialog"
+          ],
+          "path": "radix-ui/accessibility.md",
+          "tokens": 907
+        },
+        {
+          "id": "getting-started",
+          "title": "Getting started",
+          "description": "metaTitle: Getting started",
+          "tags": [],
+          "path": "radix-ui/getting-started.md",
+          "tokens": 651
+        },
+        {
+          "id": "introduction",
+          "title": "Introduction",
+          "description": "metaTitle: Introduction",
+          "tags": [
+            "asChild",
+            "radix-ui"
+          ],
+          "path": "radix-ui/introduction.md",
+          "tokens": 1058
+        },
+        {
+          "id": "releases",
+          "title": "Releases",
+          "description": "metaTitle: Releases",
+          "tags": [
+            "PasswordToggleField",
+            "unstable_",
+            "Provider",
+            "Trigger",
+            "BubbleInput",
+            "text",
+            "use-sync-external-store",
+            "OneTimePasswordField",
+            "Primitive",
+            "useControllableState"
+          ],
+          "path": "radix-ui/releases.md",
+          "tokens": 13809
+        },
+        {
+          "id": "accessible-icon",
+          "title": "Accessible Icon",
+          "description": "metaTitle: Accessible Icon",
+          "tags": [],
+          "path": "radix-ui/accessible-icon.md",
+          "tokens": 341
+        },
+        {
+          "id": "direction-provider",
+          "title": "Direction Provider",
+          "description": "metaTitle: Direction Provider",
+          "tags": [
+            "Direction.Provider",
+            "dir"
+          ],
+          "path": "radix-ui/direction-provider.md",
+          "tokens": 323
+        },
+        {
+          "id": "portal",
+          "title": "Portal",
+          "description": "metaTitle: Portal",
+          "tags": [
+            "document.body",
+            "<div>",
+            "container"
+          ],
+          "path": "radix-ui/portal.md",
+          "tokens": 390
+        },
+        {
+          "id": "slot",
+          "title": "Slot",
+          "description": "metaTitle: Slot",
+          "tags": [
+            "asChild",
+            "Slottable",
+            "on",
+            "onClick",
+            "Slot",
+            "event.defaultPrevented"
+          ],
+          "path": "radix-ui/slot.md",
+          "tokens": 516
+        },
+        {
+          "id": "visually-hidden",
+          "title": "Visually Hidden",
+          "description": "metaTitle: Visually Hidden",
+          "tags": [
+            "aria-label",
+            "aria-labelledby"
+          ],
+          "path": "radix-ui/visually-hidden.md",
+          "tokens": 382
         }
       ]
     },

@@ -537,6 +537,19 @@
         "docsPath": "docs",
         "include": [".md"]
       }
+    },
+    {
+      "id": "radix-ui",
+      "name": "Radix UI",
+      "description": "Unstyled, accessible React UI primitives with WAI-ARIA compliance",
+      "version": "1",
+      "adapter": "github",
+      "github": {
+        "repo": "radix-ui/website",
+        "branch": "main",
+        "docsPath": "data/primitives/docs",
+        "include": [".mdx"]
+      }
     }
   ]
 }
