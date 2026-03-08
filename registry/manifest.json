@@ -1,5 +1,5 @@
 {
-  "version": 85,
+  "version": 86,
   "updatedAt": "2026-03-08",
   "libraries": [
     {
@@ -3745,6 +3745,1441 @@
           "tags": [],
           "path": "angular/internationalization-i18n.md",
           "tokens": 1239
+        }
+      ]
+    },
+    {
+      "id": "apollo-client",
+      "name": "Apollo Client",
+      "description": "Comprehensive GraphQL client for React with caching, queries, mutations, and subscriptions",
+      "version": "3",
+      "topics": [
+        {
+          "id": "inmemorycache",
+          "title": "InMemoryCache",
+          "description": "title: class InMemoryCache",
+          "tags": [
+            "InMemoryCache",
+            "ApolloClient",
+            "readQuery",
+            "null",
+            "options",
+            "Object",
+            "optimistic",
+            "Boolean",
+            "true",
+            "false"
+          ],
+          "path": "apollo-client/inmemorycache.md",
+          "tokens": 6273
+        },
+        {
+          "id": "apolloclient",
+          "title": "ApolloClient",
+          "description": "title: class ApolloClient",
+          "tags": [
+            "ApolloClient",
+            "ApolloClientOptions",
+            "defaultOptions",
+            "useQuery",
+            "watchQuery",
+            "defaultOptions.watchQuery"
+          ],
+          "path": "apollo-client/apolloclient.md",
+          "tokens": 1067
+        },
+        {
+          "id": "observablequery",
+          "title": "ObservableQuery",
+          "description": "title: ObservableQuery",
+          "tags": [
+            "ObservableQuery",
+            "client.watchQuery",
+            "InteropObservable",
+            "Observable",
+            "from(observableQuery)",
+            "subscribe",
+            "pipe",
+            "firstValueFrom",
+            "ApolloClient",
+            "next"
+          ],
+          "path": "apollo-client/observablequery.md",
+          "tokens": 1383
+        },
+        {
+          "id": "combinedgraphqlerrors",
+          "title": "CombinedGraphQLErrors",
+          "description": "title: CombinedGraphQLErrors",
+          "tags": [
+            "CombinedGraphQLErrors"
+          ],
+          "path": "apollo-client/combinedgraphqlerrors.md",
+          "tokens": 446
+        },
+        {
+          "id": "combinedprotocolerrors",
+          "title": "CombinedProtocolErrors",
+          "description": "title: CombinedProtocolErrors",
+          "tags": [
+            "CombinedProtocolErrors"
+          ],
+          "path": "apollo-client/combinedprotocolerrors.md",
+          "tokens": 448
+        },
+        {
+          "id": "linkerror",
+          "title": "LinkError",
+          "description": "title: LinkError",
+          "tags": [
+            "LinkError",
+            "error",
+            "runQuery",
+            "is"
+          ],
+          "path": "apollo-client/linkerror.md",
+          "tokens": 426
+        },
+        {
+          "id": "localstateerror",
+          "title": "LocalStateError",
+          "description": "title: LocalStateError",
+          "tags": [
+            "LocalStateError",
+            "cause",
+            "@export"
+          ],
+          "path": "apollo-client/localstateerror.md",
+          "tokens": 292
+        },
+        {
+          "id": "servererror",
+          "title": "ServerError",
+          "description": "title: ServerError",
+          "tags": [
+            "ServerError"
+          ],
+          "path": "apollo-client/servererror.md",
+          "tokens": 243
+        },
+        {
+          "id": "serverparseerror",
+          "title": "ServerParseError",
+          "description": "title: ServerParseError",
+          "tags": [
+            "ServerParseError",
+            "cause",
+            "JSON.parse()"
+          ],
+          "path": "apollo-client/serverparseerror.md",
+          "tokens": 276
+        },
+        {
+          "id": "unconventionalerror",
+          "title": "UnconventionalError",
+          "description": "title: UnconventionalError",
+          "tags": [
+            "UnconventionalError"
+          ],
+          "path": "apollo-client/unconventionalerror.md",
+          "tokens": 261
+        },
+        {
+          "id": "apollo-link-base-batch-http",
+          "title": "apollo-link-base-batch-http",
+          "description": "title: BaseBatchHttpLink",
+          "tags": [
+            "BatchHttpLink",
+            "BaseBatchHttpLink"
+          ],
+          "path": "apollo-client/apollo-link-base-batch-http.md",
+          "tokens": 215
+        },
+        {
+          "id": "apollo-link-base-http",
+          "title": "apollo-link-base-http",
+          "description": "title: BaseHttpLink",
+          "tags": [
+            "HttpLink",
+            "BaseHttpLink"
+          ],
+          "path": "apollo-client/apollo-link-base-http.md",
+          "tokens": 237
+        },
+        {
+          "id": "apollo-link-batch-http",
+          "title": "apollo-link-batch-http",
+          "description": "title: BatchHttpLink",
+          "tags": [
+            "headers",
+            "credentials",
+            "uri",
+            "fetchOptions",
+            "http",
+            "BatchHttpLink",
+            "Response",
+            "response",
+            "context",
+            "fetch"
+          ],
+          "path": "apollo-client/apollo-link-batch-http.md",
+          "tokens": 540
+        },
+        {
+          "id": "apollo-link-batch",
+          "title": "apollo-link-batch",
+          "description": "title: BatchLink",
+          "tags": [],
+          "path": "apollo-client/apollo-link-batch.md",
+          "tokens": 123
+        },
+        {
+          "id": "apollo-link-client-awareness",
+          "title": "apollo-link-client-awareness",
+          "description": "title: ClientAwarenessLink",
+          "tags": [
+            "clientAwareness",
+            "enhancedClientAwareness",
+            "ClientAwarenessLink",
+            "HttpLink",
+            "ApolloClient",
+            "BaseHttpLink",
+            "context"
+          ],
+          "path": "apollo-client/apollo-link-client-awareness.md",
+          "tokens": 822
+        },
+        {
+          "id": "apollo-link-context",
+          "title": "apollo-link-context",
+          "description": "title: SetContextLink",
+          "tags": [
+            "SetContextLink.SetContextOperation"
+          ],
+          "path": "apollo-client/apollo-link-context.md",
+          "tokens": 711
+        },
+        {
+          "id": "apollo-link-error",
+          "title": "apollo-link-error",
+          "description": "title: ErrorLink",
+          "tags": [],
+          "path": "apollo-client/apollo-link-error.md",
+          "tokens": 206
+        },
+        {
+          "id": "apollo-link-http",
+          "title": "apollo-link-http",
+          "description": "title: HttpLink",
+          "tags": [
+            "HttpLink",
+            "Response",
+            "response",
+            "context",
+            "fetch"
+          ],
+          "path": "apollo-client/apollo-link-http.md",
+          "tokens": 328
+        },
+        {
+          "id": "apollo-link-persisted-queries",
+          "title": "apollo-link-persisted-queries",
+          "description": "title: PersistedQueryLink",
+          "tags": [
+            "PersistedQueryLink",
+            "sha256",
+            "generateHash",
+            "useGETForHashedQueries",
+            "true",
+            "GET",
+            "@apollo/client/link/batch-http",
+            "useGETForQueries: true",
+            "HttpLink",
+            "fetchOptions: {method: 'GET'}"
+          ],
+          "path": "apollo-client/apollo-link-persisted-queries.md",
+          "tokens": 851
+        },
+        {
+          "id": "apollo-link-remove-typename",
+          "title": "apollo-link-remove-typename",
+          "description": "title: RemoveTypenameFromVariablesLink",
+          "tags": [
+            "__typename",
+            "dashboard",
+            "RemoveTypenameFromVariablesLink",
+            "data.dashboard",
+            "__",
+            "JSON",
+            "except",
+            "KEEP",
+            "ConfigureDashboardMutation",
+            "$dashboardConfig"
+          ],
+          "path": "apollo-client/apollo-link-remove-typename.md",
+          "tokens": 1859
+        },
+        {
+          "id": "apollo-link-retry",
+          "title": "apollo-link-retry",
+          "description": "title: RetryLink",
+          "tags": [
+            "initialDelay",
+            "jitter",
+            "delay",
+            "attempts",
+            "attempt",
+            "operation",
+            "error",
+            "boolean",
+            "Promise"
+          ],
+          "path": "apollo-client/apollo-link-retry.md",
+          "tokens": 709
+        },
+        {
+          "id": "apollo-link-schema",
+          "title": "apollo-link-schema",
+          "description": "title: SchemaLink",
+          "tags": [
+            "SchemaLink.ResolverContext"
+          ],
+          "path": "apollo-client/apollo-link-schema.md",
+          "tokens": 536
+        },
+        {
+          "id": "apollo-link-subscriptions",
+          "title": "apollo-link-subscriptions",
+          "description": "title: GraphQLWsLink",
+          "tags": [
+            "GraphQLWsLink",
+            "graphql-ws",
+            "Client",
+            "createClient",
+            "url",
+            "ws://",
+            "wss://",
+            "ClientOptions",
+            "RetryLink"
+          ],
+          "path": "apollo-client/apollo-link-subscriptions.md",
+          "tokens": 492
+        },
+        {
+          "id": "apollo-link-ws",
+          "title": "apollo-link-ws",
+          "description": "title: WebSocketLink",
+          "tags": [
+            "WebSocketLink",
+            "subscriptions-transport-ws",
+            "graphql-ws",
+            "GraphQLWsLink"
+          ],
+          "path": "apollo-client/apollo-link-ws.md",
+          "tokens": 342
+        },
+        {
+          "id": "apollo-link",
+          "title": "apollo-link",
+          "description": "title: ApolloLink",
+          "tags": [],
+          "path": "apollo-client/apollo-link.md",
+          "tokens": 627
+        },
+        {
+          "id": "community-links",
+          "title": "community-links",
+          "description": "title: Community links",
+          "tags": [
+            "HttpHeaders",
+            "@angular/common/http",
+            "@live"
+          ],
+          "path": "apollo-client/community-links.md",
+          "tokens": 1741
+        },
+        {
+          "id": "introduction",
+          "title": "introduction",
+          "description": "title: Apollo Link overview",
+          "tags": [
+            "link",
+            "forward",
+            "HttpLink",
+            "BatchHttpLink",
+            "ApolloLink.from",
+            "ApolloLink.concat",
+            "concat",
+            "from",
+            "ApolloLink.split",
+            "test"
+          ],
+          "path": "apollo-client/introduction.md",
+          "tokens": 5066
+        },
+        {
+          "id": "apolloprovider",
+          "title": "ApolloProvider",
+          "description": "title: ApolloProvider",
+          "tags": [
+            "ApolloProvider",
+            "@apollo/client/react",
+            "client",
+            "ApolloClient"
+          ],
+          "path": "apollo-client/apolloprovider.md",
+          "tokens": 259
+        },
+        {
+          "id": "skiptoken",
+          "title": "skipToken",
+          "description": "title: skipToken",
+          "tags": [
+            "skipToken",
+            "useQuery",
+            "useSuspenseQuery",
+            "useBackgroundQuery",
+            "options",
+            "data",
+            "{ skip: true }",
+            "skip",
+            "id",
+            "undefined"
+          ],
+          "path": "apollo-client/skiptoken.md",
+          "tokens": 692
+        },
+        {
+          "id": "ssr",
+          "title": "ssr",
+          "description": "description: Apollo Client React server side rendering API",
+          "tags": [
+            "getDataFromTree",
+            "tree",
+            "context",
+            "{ [key: string]: any }",
+            "Promise<string>",
+            "ReactDOMServer.renderToStaticMarkup",
+            "renderToStringWithData",
+            "ReactDOMServer.renderToString",
+            "component",
+            "ReactElement<any>"
+          ],
+          "path": "apollo-client/ssr.md",
+          "tokens": 644
+        },
+        {
+          "id": "testing",
+          "title": "testing",
+          "description": "title: MockProvider",
+          "tags": [
+            "MockedProvider",
+            "ApolloProvider",
+            "mocks",
+            "ReadonlyArray<MockedResponse>",
+            "defaultOptions",
+            "DefaultOptions",
+            "ApolloClient",
+            "cache",
+            "ApolloCache<TSerializedCache>",
+            "dataIdFromObject"
+          ],
+          "path": "apollo-client/testing.md",
+          "tokens": 735
+        },
+        {
+          "id": "usebackgroundquery",
+          "title": "useBackgroundQuery",
+          "description": "title: useBackgroundQuery",
+          "tags": [
+            "QueryRef",
+            "useReadQuery",
+            "queryRef",
+            "undefined",
+            "refetch",
+            "fetchMore",
+            "subscribeToMore"
+          ],
+          "path": "apollo-client/usebackgroundquery.md",
+          "tokens": 357
+        },
+        {
+          "id": "uselazyquery",
+          "title": "useLazyQuery",
+          "description": "title: useLazyQuery",
+          "tags": [
+            "useLazyQuery",
+            "useQuery"
+          ],
+          "path": "apollo-client/uselazyquery.md",
+          "tokens": 281
+        },
+        {
+          "id": "useloadablequery",
+          "title": "useLoadableQuery",
+          "description": "title: useLoadableQuery",
+          "tags": [
+            "queryRef",
+            "useLoadableQuery",
+            "useReadQuery",
+            "refetch"
+          ],
+          "path": "apollo-client/useloadablequery.md",
+          "tokens": 394
+        },
+        {
+          "id": "usemutation",
+          "title": "useMutation",
+          "description": "title: useMutation",
+          "tags": [
+            "awaitRefetchQueries",
+            "context",
+            "fetchPolicy",
+            "onCompleted",
+            "onError",
+            "optimisticResponse",
+            "refetchQueries",
+            "onQueryUpdated",
+            "update",
+            "variables"
+          ],
+          "path": "apollo-client/usemutation.md",
+          "tokens": 384
+        },
+        {
+          "id": "advanced-topics",
+          "title": "advanced-topics",
+          "description": "title: Advanced topics on caching in Apollo Client",
+          "tags": [
+            "no-cache",
+            "InMemoryCache",
+            "AsyncStorage",
+            "localStorage",
+            "apollo3-cache-persist",
+            "persistCache",
+            "Promise",
+            "client.resetStore",
+            "client.clearStore()",
+            "client.resetStore()"
+          ],
+          "path": "apollo-client/advanced-topics.md",
+          "tokens": 3996
+        },
+        {
+          "id": "cache-configuration",
+          "title": "cache-configuration",
+          "description": "title: Configuring the Apollo Client cache",
+          "tags": [
+            "InMemoryCache",
+            "ApolloClient",
+            "resultCaching",
+            "Boolean",
+            "true",
+            "===",
+            "resultCacheMaxSize",
+            "number",
+            "Math.pow(2, 16)",
+            "possibleTypes"
+          ],
+          "path": "apollo-client/cache-configuration.md",
+          "tokens": 3508
+        },
+        {
+          "id": "cache-field-behavior",
+          "title": "cache-field-behavior",
+          "description": "title: Customizing the behavior of cached fields",
+          "tags": [
+            "read",
+            "merge",
+            "InMemoryCache",
+            "TypePolicy",
+            "name",
+            "Person",
+            "Person.name",
+            "FieldFunctionOptions",
+            "FieldPolicy",
+            "UNKNOWN NAME"
+          ],
+          "path": "apollo-client/cache-field-behavior.md",
+          "tokens": 7333
+        },
+        {
+          "id": "cache-interaction",
+          "title": "cache-interaction",
+          "description": "title: Reading and writing data to the cache",
+          "tags": [
+            "readQuery",
+            "writeQuery",
+            "updateQuery",
+            "readFragment",
+            "writeFragment",
+            "updateFragment",
+            "useFragment",
+            "cache.modify",
+            "cache.batch",
+            "__ref"
+          ],
+          "path": "apollo-client/cache-interaction.md",
+          "tokens": 6789
+        },
+        {
+          "id": "garbage-collection",
+          "title": "garbage-collection",
+          "description": "title: Garbage collection and cache eviction",
+          "tags": [
+            "gc",
+            "evict",
+            "InMemoryCache",
+            "ApolloClient",
+            "cache.gc()",
+            "Query",
+            "Mutation",
+            "cache.gc",
+            "retain",
+            "release"
+          ],
+          "path": "apollo-client/garbage-collection.md",
+          "tokens": 1279
+        },
+        {
+          "id": "memory-management",
+          "title": "memory-management",
+          "description": "title: Memory management",
+          "tags": [
+            "DocumentNode",
+            "gql",
+            "QUERY",
+            "MUTATION",
+            "SUBSCRIPTION",
+            "useQuery",
+            "query",
+            "client.query",
+            "DocumentTransform"
+          ],
+          "path": "apollo-client/memory-management.md",
+          "tokens": 1225
+        },
+        {
+          "id": "overview",
+          "title": "overview",
+          "description": "title: Caching in Apollo Client",
+          "tags": [
+            "GetBook",
+            "Book",
+            "5",
+            "InMemoryCache",
+            "Person",
+            "Planet",
+            "homeworld",
+            "id",
+            "cGVvcGxlOjE=",
+            "cGxhbmV0czox"
+          ],
+          "path": "apollo-client/overview.md",
+          "tokens": 2172
+        },
+        {
+          "id": "defer",
+          "title": "defer",
+          "description": "title: \"Using the @defer directive in Apollo Client\"",
+          "tags": [
+            "@defer",
+            "graphql",
+            "@apollo/client/incremental",
+            "NotImplementedHandler",
+            "@stream",
+            "Defer20220824Handler",
+            "GraphQL17Alpha2Handler",
+            "GraphQL17Alpha9Handler",
+            "GET_PERSON",
+            "PersonQuery"
+          ],
+          "path": "apollo-client/defer.md",
+          "tokens": 2380
+        },
+        {
+          "id": "directives",
+          "title": "directives",
+          "description": "title: \"Using GraphQL directives in Apollo Client\"",
+          "tags": [
+            "@",
+            "@skip",
+            "if",
+            "experimentalField",
+            "@client",
+            "@connection",
+            "@defer",
+            "@stream",
+            "initialCount",
+            "loading"
+          ],
+          "path": "apollo-client/directives.md",
+          "tokens": 2429
+        },
+        {
+          "id": "document-transforms",
+          "title": "document-transforms",
+          "description": "title: Document transforms",
+          "tags": [
+            "__typename",
+            "gql",
+            "DocumentTransform",
+            "ApolloClient",
+            "useQuery",
+            "refetch",
+            "ObservableQuery",
+            "@client",
+            "id",
+            "currentUser"
+          ],
+          "path": "apollo-client/document-transforms.md",
+          "tokens": 6918
+        },
+        {
+          "id": "error-handling",
+          "title": "error-handling",
+          "description": "title: Handling operation errors",
+          "tags": [
+            "error",
+            "useQuery",
+            "errors",
+            "CombinedGraphQLErrors",
+            "2xx",
+            "null",
+            "4xx",
+            "5xx",
+            "CombinedProtocolErrors",
+            "ServerError"
+          ],
+          "path": "apollo-client/error-handling.md",
+          "tokens": 4902
+        },
+        {
+          "id": "file-uploads",
+          "title": "file-uploads",
+          "description": "title: File uploads",
+          "tags": [],
+          "path": "apollo-client/file-uploads.md",
+          "tokens": 232
+        },
+        {
+          "id": "fragments",
+          "title": "fragments",
+          "description": "title: Fragments",
+          "tags": [
+            "NameParts",
+            "Person",
+            "firstName",
+            "lastName",
+            "...",
+            "Comment",
+            "export",
+            "Comment.js",
+            "CommentFragment",
+            "import"
+          ],
+          "path": "apollo-client/fragments.md",
+          "tokens": 15115
+        },
+        {
+          "id": "mutations",
+          "title": "mutations",
+          "description": "title: Mutations in Apollo Client",
+          "tags": [
+            "useMutation",
+            "ApolloProvider",
+            "gql",
+            "useQuery",
+            "mutate",
+            "data",
+            "loading",
+            "ADD_TODO",
+            "AddTodo",
+            "onSubmit"
+          ],
+          "path": "apollo-client/mutations.md",
+          "tokens": 5494
+        },
+        {
+          "id": "operation-best-practices",
+          "title": "Recommended ✅",
+          "description": "title: GraphQL query best practices",
+          "tags": [
+            "GetBooks",
+            "Dog",
+            "\"5\"",
+            "$dogId",
+            "dog",
+            "useQuery",
+            "useMutation",
+            "GetAllElements",
+            "GetMyDocuments",
+            "name"
+          ],
+          "path": "apollo-client/operation-best-practices.md",
+          "tokens": 1724
+        },
+        {
+          "id": "persisted-queries",
+          "title": "persisted-queries",
+          "description": "title: Persisted queries",
+          "tags": [
+            "@apollo/persisted-query-lists",
+            "generate-persisted-query-manifest",
+            "id",
+            "PersistedQueryLink",
+            "sortTopLevelDefinitions",
+            "ApolloClient",
+            "@apollo/client",
+            "generatePersistedQueryIdsFromManifest",
+            "loadManifest",
+            "HttpLink"
+          ],
+          "path": "apollo-client/persisted-queries.md",
+          "tokens": 3166
+        },
+        {
+          "id": "queries",
+          "title": "queries",
+          "description": "title: Queries",
+          "tags": [
+            "useQuery",
+            "ApolloProvider",
+            "loading",
+            "error",
+            "dataState",
+            "data",
+            "GET_DOGS",
+            "gql",
+            "Dogs",
+            "true"
+          ],
+          "path": "apollo-client/queries.md",
+          "tokens": 7960
+        },
+        {
+          "id": "refetching",
+          "title": "refetching",
+          "description": "title: Refetching queries in Apollo Client",
+          "tags": [
+            "InMemoryCache",
+            "refetchQueries",
+            "onQueryUpdated",
+            "ApolloClient",
+            "client.refetchQueries",
+            "TResult",
+            "Promise<TResolved[]>",
+            "Promise.all(results)",
+            "Promise",
+            "Promise.all"
+          ],
+          "path": "apollo-client/refetching.md",
+          "tokens": 3120
+        },
+        {
+          "id": "subscriptions",
+          "title": "subscriptions",
+          "description": "title: Subscriptions",
+          "tags": [
+            "client.watchQuery",
+            "useQuery",
+            "useFragment",
+            "graphql-ws",
+            "subscriptions-transport-ws",
+            "graphql-transport-ws",
+            "HttpLink",
+            "subscription",
+            "OnCommentAdded",
+            "GraphQLWsLink"
+          ],
+          "path": "apollo-client/subscriptions.md",
+          "tokens": 5639
+        },
+        {
+          "id": "suspense",
+          "title": "suspense",
+          "description": "title: Suspense",
+          "tags": [
+            "<Suspense />",
+            "useSuspenseQuery",
+            "useQuery",
+            "Data",
+            "Variables",
+            "GET_DOG_QUERY",
+            "TypedDocumentNode",
+            "App",
+            "Dog",
+            "GetDog"
+          ],
+          "path": "apollo-client/suspense.md",
+          "tokens": 9182
+        },
+        {
+          "id": "typescript",
+          "title": "typescript",
+          "description": "title: TypeScript with Apollo Client",
+          "tags": [
+            "data",
+            "unknown",
+            "gql",
+            "DocumentNode",
+            "any",
+            "TypedDocumentNode",
+            "useQuery",
+            "Record<string, never>",
+            "dataState",
+            "returnPartialData"
+          ],
+          "path": "apollo-client/typescript.md",
+          "tokens": 7634
+        },
+        {
+          "id": "client-schema-mocking",
+          "title": "client-schema-mocking",
+          "description": "title: Mocking schema capabilities",
+          "tags": [
+            "description",
+            "Rocket",
+            "read",
+            "Rocket.description",
+            "InMemoryCache",
+            "@client",
+            "GET_LAUNCH_DETAILS",
+            "useQuery"
+          ],
+          "path": "apollo-client/client-schema-mocking.md",
+          "tokens": 1111
+        },
+        {
+          "id": "developer-tooling",
+          "title": "developer-tooling",
+          "description": "title: Developer tools",
+          "tags": [
+            "connectToDevTools: true",
+            "ApolloClient",
+            "connectToDevTools: false",
+            "@apollo/client-devtools-vscode",
+            "connectApolloClientToVSCodeDevTools"
+          ],
+          "path": "apollo-client/developer-tooling.md",
+          "tokens": 1307
+        },
+        {
+          "id": "graphql-codegen",
+          "title": "graphql-codegen",
+          "description": "title: GraphQL Codegen",
+          "tags": [
+            "@apollo/client",
+            "codegen.ts",
+            "package.json",
+            "client",
+            "@graphql-codegen/client-preset",
+            "typescript",
+            "typescript-operations",
+            "useFragment",
+            "near-operation-file-preset",
+            "gql"
+          ],
+          "path": "apollo-client/graphql-codegen.md",
+          "tokens": 3416
+        },
+        {
+          "id": "reducing-bundle-size",
+          "title": "reducing-bundle-size",
+          "description": "title: Reducing bundle size",
+          "tags": [
+            "globalThis.__DEV__",
+            "false",
+            "create-react-app",
+            "craco",
+            "process.env.NODE_ENV",
+            "__DEV__",
+            "process",
+            "esbuild",
+            "typeof process",
+            "'@apollo/client'"
+          ],
+          "path": "apollo-client/reducing-bundle-size.md",
+          "tokens": 1475
+        },
+        {
+          "id": "schema-driven-testing",
+          "title": "schema-driven-testing",
+          "description": "title: Schema-driven testing",
+          "tags": [
+            "MockedProvider",
+            "createTestSchema",
+            "createSchemaFetch",
+            "jest.polyfills.js",
+            "jest.config.ts",
+            "jest.config.js",
+            "setupTests.ts",
+            "@testing-library/jest-dom",
+            "jest-dom",
+            "Products"
+          ],
+          "path": "apollo-client/schema-driven-testing.md",
+          "tokens": 5205
+        },
+        {
+          "id": "testing",
+          "title": "testing",
+          "description": "title: Testing React components",
+          "tags": [
+            "MockedProvider",
+            "ApolloProvider",
+            "Dog",
+            "@testing-library/jest-dom",
+            "toBeInTheDocument",
+            "mocks",
+            "GET_DOG_QUERY",
+            "name",
+            "Buck",
+            "request"
+          ],
+          "path": "apollo-client/testing.md",
+          "tokens": 4081
+        },
+        {
+          "id": "get-started",
+          "title": "get-started",
+          "description": "title: Get started with Apollo Client",
+          "tags": [
+            "@apollo/client",
+            "graphql",
+            "rxjs",
+            "Observable",
+            "ApolloClient",
+            "main.jsx",
+            "@apollo/client/react",
+            "link",
+            "cache",
+            "HttpLink"
+          ],
+          "path": "apollo-client/get-started.md",
+          "tokens": 2307
+        },
+        {
+          "id": "index",
+          "title": "index",
+          "description": "title: Introduction to Apollo Client",
+          "tags": [
+            "@apollo/client",
+            "@defer"
+          ],
+          "path": "apollo-client/index.md",
+          "tokens": 1203
+        },
+        {
+          "id": "integrations",
+          "title": "integrations",
+          "description": "title: View integrations",
+          "tags": [
+            "create-react-app",
+            "hybrids",
+            "gluon"
+          ],
+          "path": "apollo-client/integrations.md",
+          "tokens": 887
+        },
+        {
+          "id": "nextjs",
+          "title": "nextjs",
+          "description": "title: Next.js App Router",
+          "tags": [
+            "app",
+            "ApolloClient.ts",
+            "getClient",
+            "query",
+            "fetch",
+            "context.fetchOptions",
+            "app/ApolloWrapper.tsx",
+            "RootLayout",
+            "ApolloWrapper",
+            "app/layout.tsx"
+          ],
+          "path": "apollo-client/nextjs.md",
+          "tokens": 2215
+        },
+        {
+          "id": "react-native",
+          "title": "react-native",
+          "description": "title: Integrating with React Native",
+          "tags": [
+            "npm",
+            "ApolloProvider",
+            "react-native-apollo-devtools",
+            "react-native-flipper",
+            "react-native-apollo-devtools-client",
+            "fetch",
+            "@defer",
+            "react-native-fetch-api",
+            "react-native-polyfill-globals",
+            "index.js"
+          ],
+          "path": "apollo-client/react-native.md",
+          "tokens": 1428
+        },
+        {
+          "id": "react-router",
+          "title": "react-router",
+          "description": "title: React Router framework mode",
+          "tags": [
+            "app/apollo.ts",
+            "makeClient",
+            "apolloLoader",
+            "ApolloClient",
+            "@apollo/client-integration-react-router",
+            "@apollo/client",
+            "app/entry.client.tsx",
+            "app/entry.server.tsx",
+            "ApolloProvider",
+            "<ApolloHydrationHelper>"
+          ],
+          "path": "apollo-client/react-router.md",
+          "tokens": 1821
+        },
+        {
+          "id": "tanstack-start",
+          "title": "tanstack-start",
+          "description": "title: TanStack Start",
+          "tags": [
+            "npx create-tsrouter-app",
+            "routes/__root.tsx",
+            "createRootRoute",
+            "createRootRouteWithContext",
+            "router.tsx",
+            "routerWithApolloClient",
+            "ApolloClient",
+            "InMemoryCache",
+            "@apollo/client",
+            "preloadQuery"
+          ],
+          "path": "apollo-client/tanstack-start.md",
+          "tokens": 2824
+        },
+        {
+          "id": "webpack",
+          "title": "webpack",
+          "description": "title: Loading queries with Webpack",
+          "tags": [
+            ".graphql",
+            "graphql-tag",
+            "currentUser.graphql",
+            ".gql",
+            "create-react-app"
+          ],
+          "path": "apollo-client/webpack.md",
+          "tokens": 666
+        },
+        {
+          "id": "local-resolvers",
+          "title": "local-resolvers",
+          "description": "title: Local resolvers",
+          "tags": [
+            "@client",
+            "cache.writeQuery",
+            "useMutation",
+            "client",
+            "useApolloClient",
+            "useQuery",
+            "ApolloConsumer",
+            "Consumer",
+            "client.writeQuery",
+            "active"
+          ],
+          "path": "apollo-client/local-resolvers.md",
+          "tokens": 13799
+        },
+        {
+          "id": "local-state-management",
+          "title": "local-state-management",
+          "description": "title: Managing local state",
+          "tags": [
+            "localStorage"
+          ],
+          "path": "apollo-client/local-state-management.md",
+          "tokens": 863
+        },
+        {
+          "id": "managing-state-with-field-policies",
+          "title": "managing-state-with-field-policies",
+          "description": "title: Local-only fields in Apollo Client",
+          "tags": [
+            "localStorage",
+            "@client",
+            "LocalState",
+            "Product.isInCart",
+            "isInCart",
+            "InMemoryCache",
+            "read",
+            "CART",
+            "Suspense",
+            "readQuery"
+          ],
+          "path": "apollo-client/managing-state-with-field-policies.md",
+          "tokens": 4403
+        },
+        {
+          "id": "reactive-variables",
+          "title": "reactive-variables",
+          "description": "title: Reactive variables",
+          "tags": [
+            "useReactiveVar",
+            "read",
+            "makeVar",
+            "useQuery",
+            "ReactiveVar<T>",
+            "cache.tsx"
+          ],
+          "path": "apollo-client/reactive-variables.md",
+          "tokens": 906
+        },
+        {
+          "id": "apollo-client-4-migration",
+          "title": "apollo-client-4-migration",
+          "description": "title: Migrating to Apollo Client 4.0",
+          "tags": [
+            "@apollo/client/react",
+            "exports",
+            "package.json",
+            "rxjs",
+            "zen-observable",
+            "@defer",
+            "useLazyQuery",
+            "useMutation",
+            "useQuery",
+            "@client"
+          ],
+          "path": "apollo-client/apollo-client-4-migration.md",
+          "tokens": 24772
+        },
+        {
+          "id": "advanced-http-networking",
+          "title": "advanced-http-networking",
+          "description": "title: Advanced HTTP networking",
+          "tags": [
+            "HttpLink",
+            "Authorization",
+            "authMiddleware",
+            "activityMiddleware",
+            "Recent-Activity",
+            "@apollo/client/link/error",
+            "401",
+            "response.data",
+            "map",
+            "forward(operation)"
+          ],
+          "path": "apollo-client/advanced-http-networking.md",
+          "tokens": 3496
+        },
+        {
+          "id": "authentication",
+          "title": "authentication",
+          "description": "title: Authentication",
+          "tags": [
+            "credentials: 'same-origin'",
+            "credentials: 'include'",
+            "fetch",
+            "authorization",
+            "localStorage",
+            "client.resetStore()",
+            "client.clearStore()"
+          ],
+          "path": "apollo-client/authentication.md",
+          "tokens": 1234
+        },
+        {
+          "id": "basic-http-networking",
+          "title": "basic-http-networking",
+          "description": "title: Basic HTTP networking",
+          "tags": [
+            "HttpLink",
+            "link",
+            "ApolloClient",
+            "credentials",
+            "same-origin",
+            "omit",
+            "include",
+            "Request.credentials",
+            "headers"
+          ],
+          "path": "apollo-client/basic-http-networking.md",
+          "tokens": 835
+        },
+        {
+          "id": "core-api",
+          "title": "core-api",
+          "description": "title: Core pagination API",
+          "tags": [
+            "fetchMore",
+            "ObservableQuery",
+            "client.watchQuery",
+            "useQuery",
+            "variables",
+            "offset",
+            "feed.length",
+            "limit",
+            "10",
+            "query"
+          ],
+          "path": "apollo-client/core-api.md",
+          "tokens": 4472
+        },
+        {
+          "id": "cursor-based",
+          "title": "cursor-based",
+          "description": "title: Cursor-based pagination",
+          "tags": [
+            "limit",
+            "cursor",
+            "Reference",
+            "options.readField",
+            "id",
+            "merge",
+            "read",
+            "offset",
+            "Query.moreComments",
+            "comments"
+          ],
+          "path": "apollo-client/cursor-based.md",
+          "tokens": 2812
+        },
+        {
+          "id": "key-args",
+          "title": "First query",
+          "description": "title: Key arguments in Apollo Client",
+          "tags": [
+            "keyArgs",
+            "Query.user",
+            "User",
+            "id",
+            "1",
+            "2",
+            "Query.feed",
+            "offset",
+            "limit",
+            "category"
+          ],
+          "path": "apollo-client/key-args.md",
+          "tokens": 4191
+        },
+        {
+          "id": "offset-based",
+          "title": "offset-based",
+          "description": "title: Offset-based pagination",
+          "tags": [
+            "offset",
+            "limit",
+            "offsetLimitPagination",
+            "Query.feed",
+            "merge",
+            "fetchMore",
+            "useQuery",
+            "variables",
+            "Feed",
+            "data.feed"
+          ],
+          "path": "apollo-client/offset-based.md",
+          "tokens": 1816
+        },
+        {
+          "id": "overview",
+          "title": "overview",
+          "description": "title: Pagination in Apollo Client",
+          "tags": [
+            "offset",
+            "limit"
+          ],
+          "path": "apollo-client/overview.md",
+          "tokens": 592
+        },
+        {
+          "id": "babel",
+          "title": "with npm",
+          "description": "title: Compiling queries with Transpilers",
+          "tags": [
+            "graphql-tag",
+            ".graphql",
+            ".gql",
+            "import",
+            ".babelrc",
+            "import gql from 'graphql-tag'",
+            "gql",
+            ".swcrc",
+            "graphql-tag-swc-plugin",
+            "graphql-tag.macro"
+          ],
+          "path": "apollo-client/babel.md",
+          "tokens": 1595
+        },
+        {
+          "id": "optimistic-ui",
+          "title": "optimistic-ui",
+          "description": "title: Optimistic mutation results",
+          "tags": [
+            "updateComment",
+            "Comment",
+            "content",
+            "optimisticResponse",
+            "id",
+            "__typename",
+            "Comment:5",
+            "mutate",
+            "IGNORE",
+            "addTodo"
+          ],
+          "path": "apollo-client/optimistic-ui.md",
+          "tokens": 1792
+        },
+        {
+          "id": "performance",
+          "title": "performance",
+          "description": "title: Improving performance in Apollo Client",
+          "tags": [
+            "client.query",
+            "GET_DOG"
+          ],
+          "path": "apollo-client/performance.md",
+          "tokens": 766
+        },
+        {
+          "id": "server-side-rendering",
+          "title": "server-side-rendering",
+          "description": "title: Server-side rendering",
+          "tags": [
+            "StaticRouter",
+            "BrowserRouter",
+            "ssrMode: true",
+            "app.js",
+            "ApolloProvider",
+            "prerenderStatic",
+            "useQuery",
+            "useSuspenseQuery",
+            "useBackgroundQuery",
+            "Promise"
+          ],
+          "path": "apollo-client/server-side-rendering.md",
+          "tokens": 4844
+        },
+        {
+          "id": "why-apollo",
+          "title": "why-apollo",
+          "description": "title: Why Apollo Client?",
+          "tags": [
+            "useQuery",
+            "<DogList />",
+            "isLiked",
+            "ApolloClient",
+            "__typename",
+            "GET_ALL_DOGS",
+            "UPDATE_DISPLAY_IMAGE",
+            "displayImage",
+            "id",
+            "GET_DOG"
+          ],
+          "path": "apollo-client/why-apollo.md",
+          "tokens": 2774
         }
       ]
     },

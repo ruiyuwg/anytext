@@ -1,0 +1,470 @@
+---
+title: Handling operation errors
+description: Learn how to manage errors in your application
+---
+
+{/* * @import {MDXProvidedComponents} from '../../../shared/MdxProvidedComponents.js' */}
+
+Apollo Client can encounter a variety of errors when executing operations on your GraphQL server. Apollo Client helps you handle these errors according to their type, enabling you to show appropriate information to the user when an error occurs.
+
+## Understanding errors
+
+Errors in Apollo Client fall into two main categories: GraphQL errors and network errors. Each category has specific error classes that provide detailed information about what went wrong. Apollo Client adds any encountered errors to the `error` field returned by hooks like `useQuery`, wrapped in the appropriate error instance.
+
+### GraphQL errors
+
+These are errors related to the server-side execution of a GraphQL operation. They include:
+
+- **Syntax errors** (e.g., a query was malformed)
+- **Validation errors** (e.g., a query included a schema field that doesn't exist)
+- **Resolver errors** (e.g., an error occurred while attempting to populate a query field)
+
+If a syntax error or validation error occurs, your server doesn't execute the operation at all because it's invalid. If resolver errors occur, your server can still return [partial data](#partial-data-with-resolver-errors).
+
+When a GraphQL error occurs, your server includes it in the `errors` array of its response:
+
+<ExpansionPanel title="Example error response">
+
+```json
+{
+  "errors": [
+    {
+      "message": "Cannot query field \"nonexistentField\" on type \"Query\".",
+      "locations": [
+        {
+          "line": 2,
+          "column": 3
+        }
+      ],
+      "extensions": {
+        "code": "GRAPHQL_VALIDATION_FAILED",
+        "exception": {
+          "stacktrace": [
+            "GraphQLError: Cannot query field \"nonexistentField\" on type \"Query\".",
+            "...additional lines..."
+          ]
+        }
+      }
+    }
+  ],
+  "data": null
+}
+```
+
+</ExpansionPanel>
+
+In Apollo Client, GraphQL errors are represented by the [`CombinedGraphQLErrors`](../api/errors/CombinedGraphQLErrors) error type. This is the most common error type you'll encounter in your application.
+
+<Note>
+  If a GraphQL error prevents your server from executing your operation at all,
+  your server may respond with a non-`2xx` status code. Apollo Client handles
+  this according to the [GraphQL Over HTTP
+  specification](https://graphql.github.io/graphql-over-http/draft/).
+</Note>
+
+#### Partial data with resolver errors
+
+An operation that produces resolver errors might _also_ return partial data. This means that some (but not all) of the data your operation requested is included in your server's response. Apollo Client _ignores_ partial data by default to avoid caching `null` values due to errors, but you can override this behavior by [setting a GraphQL error policy](#graphql-error-policies).
+
+### Network errors
+
+These are errors encountered while attempting to communicate with your GraphQL server. The error may be a result of a `4xx` or `5xx` response status code, a failure to communicate with the server (such as when the network is unavailable), a failure to parse the response as valid JSON, or a custom error thrown in an [Apollo Link request handler](../api/link/introduction#the-request-handler).
+
+In Apollo Client, network errors are represented by these error types:
+
+- [`CombinedProtocolErrors`](../api/errors/CombinedProtocolErrors) - Represents fatal transport-level errors that occur during multipart HTTP subscription execution.
+- [`ServerError`](../api/errors/ServerError) - Occurs when the server responds with a non-200 HTTP status code
+- [`ServerParseError`](../api/errors/ServerParseError) - Occurs when the server response cannot be parsed as valid JSON
+- [`LocalStateError`](../api/errors/LocalStateError) - Represents errors in [local state](../local-state/local-state-management) configuration or execution
+- [`UnconventionalError`](../api/errors/UnconventionalError) - Wraps non-standard errors (e.g., thrown symbols or objects) to ensure consistent error handling
+- Any other errors thrown inside the link chain (e.g. by browser APIs or other libraries) will be passed through as they are, as long as they are an object with at least a `message` property.
+
+When a network error occurs, Apollo Client adds it to the `error` field returned by the `useQuery` hook (or whichever operation hook you used) as the error that was returned by the link chain (typically an `Error` instance).
+
+You can add retry logic and other advanced network error handling to your application with [Apollo Link](#advanced-error-handling-with-apollo-link).
+
+### Identifying error types
+
+Every Apollo Client error class provides a static `is` method that reliably determines whether an error is of that specific type. This method provides a more robust alternative to `instanceof` because it avoids false positives and negatives, such as errors constructed in another realm (see [`Error.isError`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/isError) for more information).
+
+```ts
+import {
+  CombinedGraphQLErrors,
+  CombinedProtocolErrors,
+  LocalStateError,
+  ServerError,
+  ServerParseError,
+  UnconventionalError,
+} from "@apollo/client/errors";
+
+// Comprehensive error handling example.
+function handleError(error: unknown) {
+  if (CombinedGraphQLErrors.is(error)) {
+    // Handle GraphQL errors
+  } else if (CombinedProtocolErrors.is(error)) {
+    // Handle multipart subscription protocol errors
+  } else if (LocalStateError.is(error)) {
+    // Handle errors thrown by the `LocalState` class
+  } else if (ServerError.is(error)) {
+    // Handle server HTTP errors
+  } else if (ServerParseError.is(error)) {
+    // Handle JSON parse errors
+  } else if (UnconventionalError.is(error)) {
+    // Handle errors thrown by irregular types
+  } else {
+    // Handle other errors
+  }
+}
+```
+
+All error classes extend the standard JavaScript `Error` class and provide additional properties specific to their error type. See the [individual error class references](#additional-resources) for detailed information about each error class.
+
+## GraphQL error policies
+
+If a GraphQL operation produces one or more [GraphQL errors](#graphql-errors), your server's response might still include partial data in the `data` field:
+
+```json
+{
+  "data": {
+    "getInt": 12,
+    "getString": null
+  },
+  "errors": [
+    {
+      "message": "Failed to get string!"
+      // ...additional fields...
+    }
+  ]
+}
+```
+
+By default, Apollo Client throws away partial data and populates the `error` field of the `useQuery` hook (or whichever hook you're using). You can instead _use_ these partial results by defining an **error policy** for your operation.
+
+Apollo Client supports the following error policies:
+
+| Policy   | Description                                                                                                                                                                                                                                                                                 |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `none`   | If the response includes errors, they are returned in the `error` field and the response `data` is set to `undefined` even if the server returns `data` in its response. This means network errors and GraphQL errors result in a similar response shape. This is the default error policy. |
+| `ignore` | Errors are ignored (`error` is _not_ populated), and any returned `data` is cached and rendered as if no errors occurred. Note: `data` may also be `undefined` in the event a network error occurs.                                                                                         |
+| `all`    | Both `data` and `error` are populated and any returned `data` is cached, enabling you to render both partial results and error information.                                                                                                                                                 |
+
+### Setting an error policy
+
+Specify an error policy in the options object you provide your operation hook (such as `useQuery`), like so:
+
+```jsx {9}
+const MY_QUERY = gql`
+  query WillFail {
+    badField # This field's resolver produces an error
+    goodField # This field is populated successfully
+  }
+`;
+
+function ShowingSomeErrors() {
+  const { loading, error, data } = useQuery(MY_QUERY, { errorPolicy: "all" });
+
+  if (loading) return <span>loading...</span>;
+
+  return (
+    <div>
+      <h2>Good: {data?.goodField}</h2>
+      <pre>Bad: {error && <span>{error.message}</span>}</pre>
+    </div>
+  );
+}
+```
+
+This example uses the `all` error policy to render both partial data and error information whenever applicable.
+
+### Error handling across API types
+
+The way Apollo Client exposes errors and how you handle them depends on both the API type you're using and the configured [error policy](#graphql-error-policies).
+
+Apollo Client provides three types of APIs, each with different error handling characteristics:
+
+- **Promise-based APIs** (e.g. `client.query`, `client.mutate`) - Errors either reject the promise or are returned in the result as the `error` field.
+- **Observable-based APIs** (e.g. `client.watchQuery`) - Errors are emitted through the observer `next` callback.
+- **React hooks** (e.g. `useQuery`, `useMutation`) - Errors are provided as part of the hook's return value.
+
+#### Promise-based APIs
+
+Promise-based APIs, like `client.query` and `client.mutate`, return promises that resolve or reject based on your error policy:
+
+##### `errorPolicy: "none"`
+
+With the default `none` error policy, an error causes the promise to reject. Use try-catch or the `.catch` method to prevent unhandled promise rejections.
+
+```ts
+import { CombinedGraphQLErrors } from "@apollo/client/errors";
+
+try {
+  const result = await client.query({
+    query: MY_QUERY,
+    errorPolicy: "none", // default
+  });
+  console.log(result.data);
+} catch (error) {
+  if (CombinedGraphQLErrors.is(error)) {
+    console.log("GraphQL errors:", error.errors);
+  }
+  // Network errors and other errors also reject the promise
+}
+```
+
+##### `errorPolicy: "all"`
+
+The `all` error policy allows promises to resolve successfully even when errors occur. Access the error in the `error` field on the returned result.
+
+```ts
+import { CombinedGraphQLErrors } from "@apollo/client/errors";
+
+// With errorPolicy: "all" - returns both data and errors
+const result = await client.query({
+  query: MY_QUERY,
+  errorPolicy: "all",
+});
+
+if (result.error && CombinedGraphQLErrors.is(result.error)) {
+  console.log("GraphQL errors:", result.error.errors);
+  console.log("Partial data:", result.data); // May contain partial data
+}
+```
+
+##### `errorPolicy: "ignore"`
+
+The `ignore` error policy causes Apollo Client to discard errors entirely, treating operations as if they succeeded. The promise resolves with available data and no error information.
+
+```ts
+import { CombinedGraphQLErrors } from "@apollo/client/errors";
+
+// With errorPolicy: "ignore" - returns data but ignores errors
+const result = await client.query({
+  query: MY_QUERY,
+  errorPolicy: "ignore",
+});
+
+// result.error will be undefined even if an error occurs
+console.log("Data (errors ignored):", result.data);
+```
+
+#### Observable-based APIs
+
+Observable-based APIs like `client.watchQuery` and `client.subscribe` emit values and errors through the observer `next` callback. The error policy determines how the `data` and `error` properties are set:
+
+##### `errorPolicy: "none"`
+
+Errors are included as part of the result object emitted to the `next` callback through the `error` field, allowing the observable to continue receiving updates. `data` is always `undefined` when `error` is present.
+
+```ts
+import { CombinedGraphQLErrors } from "@apollo/client/errors";
+
+const observable = client.watchQuery({
+  query: MY_QUERY,
+  errorPolicy: "none", // default
+});
+
+observable.subscribe({
+  next(result) {
+    if (result.error) {
+      console.log("Got error:", result.error.message);
+    } else {
+      console.log("Result:", result.data);
+    }
+  },
+});
+```
+
+##### `errorPolicy: "all"`
+
+Errors are included as part of the result object emitted to the `next` callback through the `error` field, allowing the observable to continue running while providing access to both partial data and error information.
+
+```ts
+const observable = client.watchQuery({
+  query: MY_QUERY,
+  errorPolicy: "all",
+});
+
+observable.subscribe({
+  next(result) {
+    if (result.error) {
+      console.log("Got error:", result.error.message);
+      console.log("Partial data", result.data);
+    } else {
+      console.log("Result:", result.data);
+    }
+  },
+});
+```
+
+##### `errorPolicy: "ignore"`
+
+Results are emitted to the `next` callback with GraphQL errors completely discarded. The observable continues running as if no errors occurred, which is useful for non-critical data that can be safely omitted when errors happen.
+
+```ts
+const observable = client.watchQuery({
+  query: MY_QUERY,
+  errorPolicy: "ignore",
+});
+
+observable.subscribe({
+  next(result) {
+    console.log("Result:", result.data);
+  },
+});
+```
+
+<Note>
+
+The same error handling behavior applies to subscriptions when using `client.subscribe()`. All errors are delivered through the `next` callback in `result.error`, never through the `error` callback. When an error causes the connection to terminate, the error is emitted through `next`, followed by a `complete` notification. See the [subscriptions documentation](./subscriptions/#handling-errors-in-subscriptions) for more details.
+
+</Note>
+
+#### React hooks
+
+React hooks like `useQuery` and `useMutation` provide errors through the `error` property in their return value, regardless of error policy. The error policy affects whether `data` is populated alongside the error.
+
+```ts
+import { useQuery, useMutation } from "@apollo/client";
+import { CombinedGraphQLErrors } from "@apollo/client/errors";
+
+function MyComponent() {
+  const { data, loading, error } = useQuery(MY_QUERY);
+
+  if (error) {
+    if (CombinedGraphQLErrors.is(error)) {
+      return <div>Query failed: {error.errors[0].message}</div>;
+    }
+
+    return <div>Network error: {error.message}</div>;
+  }
+
+  return <div>{/* render data */}</div>;
+}
+```
+
+<Note>
+  Suspense hooks, such as `useSuspenseQuery`, have different error handling
+  behavior - they might throw errors to React error boundaries based on the
+  configured `errorPolicy`, rather than returning them in the hook result. Learn
+  more about error handling with Suspense hooks in the [Suspense
+  documentation](./suspense#error-handling).
+</Note>
+
+## Advanced error handling with Apollo Link
+
+The [Apollo Link](../api/link/introduction/) class enables you to configure advanced handling of errors that occur while executing GraphQL operations.
+
+As a recommended first step, you can add an [`ErrorLink`](../api/link/apollo-link-error/) to your [link chain](../api/link/introduction/#handling-a-response) that receives error details and acts on them.
+
+The following example provides a link chain to the `ApolloClient` constructor with two links:
+
+- An `ErrorLink` that receives error details through the error handler callback. It logs the details of errors it finds.
+- An `HttpLink` that sends each GraphQL operation to your server (this is the chain's [terminating link](../api/link/introduction/#the-terminating-link).)
+
+<ExpansionPanel title="Click to expand example">
+
+```jsx
+import {
+  ApolloClient,
+  HttpLink,
+  InMemoryCache,
+  CombinedGraphQLErrors,
+  from,
+} from "@apollo/client";
+import { ErrorLink } from "@apollo/client/link/error";
+
+const errorLink = new ErrorLink(({ error }) => {
+  if (CombinedGraphQLErrors.is(error)) {
+    error.errors.forEach(({ message, locations, path }) =>
+      console.log(
+        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+      )
+    );
+  } else {
+    console.error("[Network error]:", error);
+  }
+});
+
+const httpLink = new HttpLink({ uri: "http://localhost:4000/graphql" });
+
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  link: from([errorLink, httpLink]),
+});
+```
+
+</ExpansionPanel>
+
+### Retrying operations
+
+Apollo Link helps you retry failed operations that might be resolved by a followup attempt. We recommend different links depending on the type of error that occurred:
+
+- The [`ErrorLink`](../api/link/apollo-link-error) for [GraphQL errors](#on-graphql-errors)
+- The [`RetryLink`](../api/link/apollo-link-retry) for [network errors](#on-network-errors)
+
+#### On GraphQL errors
+
+The `ErrorLink` can retry a failed operation based on the type of GraphQL error that's returned. For example, when using token-based authentication, you might want to automatically handle re-authentication when the token expires.
+
+To retry an operation, you `return forward(operation)` in your error handler function. Here's an example:
+
+```js {15}
+new ErrorLink(({ error, operation, forward }) => {
+  if (CombinedGraphQLErrors.is(error)) {
+    for (let err of error.errors) {
+      switch (err.extensions.code) {
+        // Apollo Server, for example, sets `code` to `"UNAUTHENTICATED"`
+        // when an AuthenticationError is thrown in a resolver
+        case "UNAUTHENTICATED": {
+          // Modify the operation context with a new token
+          const oldHeaders = operation.getContext().headers;
+          operation.setContext({
+            headers: {
+              ...oldHeaders,
+              authorization: getNewToken(),
+            },
+          });
+          // Retry the request, returning the new observable
+          return forward(operation);
+        }
+      }
+    }
+  }
+
+  // Log the error for any unhandled GraphQL errors or network errors.
+  console.log(`[Error]: ${error.message}`);
+
+  // If nothing is returned from the error handler callback, the error will be
+  // emitted from the link chain as normal.
+});
+```
+
+<Note>
+  If your retried operation _also_ results in errors, those errors are _not_
+  passed to `ErrorLink` to prevent an infinite loop of operations. This means
+  that an `ErrorLink` can retry a particular operation only once.
+</Note>
+
+If you don't want to retry an operation, your `ErrorLink`'s error handler function should return nothing.
+
+See the [`ErrorLink` API reference](../api/link/apollo-link-error/) for more details.
+
+#### On network errors
+
+To retry operations that encounter a network error, we recommend adding a `RetryLink` to your link chain. This link enables you to configure retry logic like exponential backoff and total number of attempts.
+
+See the [`RetryLink` API reference](../api/link/apollo-link-retry/) for more details.
+
+## Additional resources
+
+- [`ErrorLink` documentation](../api/link/apollo-link-error/)
+- [`RetryLink` documentation](../api/link/apollo-link-retry/)
+- Individual error class references:
+  - [`CombinedGraphQLErrors`](../api/errors/CombinedGraphQLErrors/)
+  - [`CombinedProtocolErrors`](../api/errors/CombinedProtocolErrors/)
+  - [`LinkError`](../api/errors/LinkError/)
+  - [`ServerError`](../api/errors/ServerError/)
+  - [`ServerParseError`](../api/errors/ServerParseError/)
+  - [`LocalStateError`](../api/errors/LocalStateError/)
+  - [`UnconventionalError`](../api/errors/UnconventionalError/)
+

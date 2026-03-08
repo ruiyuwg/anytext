@@ -1,0 +1,96 @@
+---
+title: SchemaLink
+description: Assists with mocking and server-side rendering
+---
+
+<DocBlock
+  canonicalReference="@apollo/client/link/schema!SchemaLink:class"
+  customOrder={["summary", "remarks", "example"]}
+/>
+
+## Constructor signature
+
+```ts
+constructor(
+  options: SchemaLink.Options
+): SchemaLink
+```
+
+## Usage examples
+
+### Server Side Rendering
+
+When performing SSR _on the same server_, you can use this library to avoid making network calls.
+
+```js
+import { ApolloClient, InMemoryCache } from "@apollo/client";
+import { SchemaLink } from "@apollo/client/link/schema";
+
+import schema from "./path/to/your/schema";
+
+const graphqlClient = new ApolloClient({
+  cache: new InMemoryCache(),
+  ssrMode: true,
+  link: new SchemaLink({ schema }),
+});
+```
+
+### Mocking
+
+For more detailed information about mocking, refer to the [graphql-tools documentation](https://www.graphql-tools.com/docs/graphql-tools/mocking).
+
+```js
+import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { SchemaLink } from '@apollo/client/link/schema';
+import { makeExecutableSchema, addMockFunctionsToSchema } from 'graphql-tools';
+
+const typeDefs = `
+  Query {
+  ...
+  }
+`;
+
+const mocks = {
+  Query: () => ...,
+  Mutation: () => ...
+};
+
+const schema = makeExecutableSchema({ typeDefs });
+const schemaWithMocks = addMockFunctionsToSchema({
+  schema,
+  mocks
+});
+
+const apolloCache = new InMemoryCache(window.__APOLLO_STATE__);
+
+const graphqlClient = new ApolloClient({
+  cache: apolloCache,
+  link: new SchemaLink({ schema: schemaWithMocks })
+});
+```
+
+## Types
+
+<InterfaceDetails
+  canonicalReference="@apollo/client/link/schema!SchemaLink.Options:interface"
+  headingLevel={3}
+  displayName="SchemaLink.Options"
+/>
+
+### `SchemaLink.ResolverContext`
+
+<DocBlock canonicalReference="@apollo/client/link/schema!SchemaLink.ResolverContext:type" />
+
+#### Signature
+
+```ts
+type ResolverContext = Record<string, any>;
+```
+
+<FunctionDetails
+  canonicalReference="@apollo/client/link/schema!SchemaLink.SchemaLinkDocumentationTypes.ResolverContextFunction:function(1)"
+  headingLevel={3}
+  result={false}
+  displayName="SchemaLink.ResolverContextFunction"
+/>
+

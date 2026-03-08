@@ -1,0 +1,175 @@
+---
+title: "Using the @defer directive in Apollo Client"
+description: Receive query response data incrementally
+---
+
+The [`@defer` directive](https://github.com/graphql/graphql-wg/blob/main/rfcs/DeferStream.md) enables your queries to receive data for specific fields _incrementally_, instead of receiving all field data at the same time. This is helpful whenever some fields in a query take much longer to resolve than others.
+
+## Prerequisites
+
+To use `@defer` with Apollo Client, you need to configure an incremental delivery format handler using the format you want to use.
+
+<Note>
+
+The incremental delivery format used by `@defer` has not yet been standardized. There have been multiple proposals and varying implementations in the `graphql` package. Apollo Client does not default to a specific format for this reason.
+
+</Note>
+
+### Available handlers
+
+Apollo Client provides the following incremental delivery handlers that are all exported from `@apollo/client/incremental`:
+
+- `NotImplementedHandler` (default) - Throws when `@defer` or `@stream` is detected
+- `Defer20220824Handler` - Implements the `@defer` and `@stream` transport format that ships with [Apollo Router](https://www.apollographql.com/docs/graphos/routing/operations/defer)
+- `GraphQL17Alpha2Handler` - Implements the `@defer` and `@stream` transport format that ships with GraphQL 17.0.0-alpha.2
+- `GraphQL17Alpha9Handler` - Implements the `@defer` and `@stream` transport format that ships with GraphQL 17.0.0-alpha.9
+
+<Note>
+
+`Defer20220824Handler` and `GraphQL17Alpha2Handler` are aliases for the same delivery format and can be used interchangeably.
+
+</Note>
+
+### Configuration example
+
+To enable `@defer` support, configure your Apollo Client instance with an incremental handler:
+
+```ts
+import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client";
+import { Defer20220824Handler } from "@apollo/client/incremental";
+
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  link: new HttpLink({ uri: "http://localhost:4000/graphql" }),
+  incrementalHandler: new Defer20220824Handler(),
+});
+```
+
+Without configuring an incremental handler, using the `@defer` directive results in an error.
+
+<Note>
+
+For a query to defer fields successfully, the queried endpoint must _also_ support the `@defer` directive. Entity-based `@defer` support is also at the General Availability stage in [GraphOS Router](/router/executing-operations/defer-support/) and is compatible with all [federation-compatible subgraph libraries](/federation/building-supergraphs/supported-subgraphs/).
+
+</Note>
+
+## Example
+
+Let's say we're building a social media application that can quickly fetch a user's basic profile information, but retrieving that user's friends takes longer.
+
+GraphQL allows us to declare all the fields our UI requires in a single query, but this also means that _our query will be as slow as the field that takes the longest to resolve_. The `@defer` directive allows us to mark parts of the query that are not necessary for our app's initial render which will be resolved once it becomes available.
+
+To achieve this, we apply the `@defer` directive to an in-line fragment that contains all slow-resolving fields related to friend data:
+
+```graphql
+query PersonQuery($personId: ID!) {
+  person(id: $personId) {
+    # Basic fields (fast)
+    id
+    firstName
+    lastName
+
+    # highlight-start
+    # Friend fields (slower)
+    ... @defer {
+      friends {
+        id
+      }
+    }
+    # highlight-end
+  }
+}
+```
+
+Using this syntax, _if the queried server supports `@defer`,_ our client can receive the "Basic fields" in an initial response payload, followed by a supplementary payload containing the "Friend fields".
+
+Let's look at an example in React. Here's we can assume `GET_PERSON` is the above query, `PersonQuery`, with a deferred list of friends' `id`s:
+
+```jsx title="app.jsx"
+import { gql, useQuery } from "@apollo/client";
+
+function App() {
+  const { dataState, error, data } = useQuery(GET_PERSON, {
+    variables: {
+      id: 1,
+    },
+  });
+
+  if (error) return `Error! ${error.message}`;
+  if (dataState === "empty") return "Loading...";
+
+  return (
+    <>
+      Welcome, {data.firstName} {data.lastName}!
+      <details>
+        <summary>Friends list</summary>
+        {data.friends ?
+          <ul>
+            {data.friends.map((id) => (
+              <li>{id}</li>
+            ))}
+          </ul>
+        : null}
+      </details>
+    </>
+  );
+}
+```
+
+When our call to the `useQuery` hook first resolves with an initial payload of data, `firstName` and `lastName` will be populated with the values from the server and `dataState` will change from `empty` to `streaming`. Our deferred fields will not exist as keys on `data` yet, so we must add conditional logic that checks for their presence.
+
+<Note>
+
+This example does not use the `loading` boolean to render the loading state. While the response is streaming, the `loading` flag remains `true` to indicate that the query has not yet fully completed. The `networkStatus` field starts as `NetworkStatus.loading` and changes to `NetworkStatus.streaming` as the initial chunk arrives. After all deferred data is received, `loading` becomes `false` and `networkStatus` is `NetworkStatus.ready`.
+
+</Note>
+
+When subsequent chunks of deferred data arrive, `useQuery` re-renders and `data` includes the deferred data as it arrives.
+
+For this reason, `@defer` can be thought of as a tool to improve initial rendering speeds when some slower data will be displayed below the fold or offscreen. In this case, we're rendering the friends list inside a `<details>` element which is closed by default, avoiding any layout shift as the `friends` data arrives.
+
+## `loading`, `networkStatus`, `dataState`, and `data` merging
+
+These tables represent how `loading`, `networkStatus`, `dataState`, and `data` change as a query with the `@defer` directive is executed.
+
+### Starting a new query
+
+|                                         | `loading` | `networkStatus`           | `dataState`   | `data`                                                   |
+| --------------------------------------- | --------- | ------------------------- | ------------- | -------------------------------------------------------- |
+| query started                           | `true`    | `NetworkStatus.loading`   | `"empty"`     | `undefined`                                              |
+| initial response received               | `true`    | `NetworkStatus.streaming` | `"streaming"` | partial `data`, contains all non-deferred fields         |
+| one or more deferred fragments received | `true`    | `NetworkStatus.streaming` | `"streaming"` | partial `data` contains initial and some deferred fields |
+| final response received                 | `false`   | `NetworkStatus.ready`     | `"complete"`  | `data` contains all fields, including deferred ones      |
+
+### Refetching
+
+|                                         | `loading` | `networkStatus`           | `dataState`   | `data`                                                          |
+| --------------------------------------- | --------- | ------------------------- | ------------- | --------------------------------------------------------------- |
+| query started                           | `true`    | `NetworkStatus.refetch`   | `"complete"`  | previous `data` stays present                                   |
+| initial response received               | `true`    | `NetworkStatus.streaming` | `"streaming"` | `data` contains previous data merged with incoming partial data |
+| one or more deferred fragments received | `true`    | `NetworkStatus.streaming` | `"streaming"` | `data` gets more received data merged in                        |
+| final response received                 | `false`   | `NetworkStatus.ready`     | `"complete"`  | `data` is updated with all newly received data                  |
+
+<Note>
+
+As chunks arrive and replace existing data, data that cannot be merged, such as arrays without a type policy might replace existing "complete" data with "streaming" incomplete data.
+
+</Note>
+
+### Refetching with different variables
+
+|                                         | `loading` | `networkStatus`           | `dataState`   | `data`                                              |
+| --------------------------------------- | --------- | ------------------------- | ------------- | --------------------------------------------------- |
+| query started                           | `true`    | `NetworkStatus.refetch`   | `"empty"`     | `undefined`                                         |
+| initial response received               | `true`    | `NetworkStatus.streaming` | `"streaming"` | `data` contains initial fields                      |
+| one or more deferred fragments received | `true`    | `NetworkStatus.streaming` | `"streaming"` | `data` gets more received data merged in            |
+| final response received                 | `false`   | `NetworkStatus.ready`     | `"complete"`  | `data` contains all fields, including deferred ones |
+
+## Using with code generation
+
+If you currently use [GraphQL Code Generator](https://www.the-guild.dev/graphql/codegen) for your codegen needs, you'll need to use the Codegen version v4.0.0 or higher.
+
+## Usage in React Native
+
+In order to use `@defer` in a React Native application, additional configuration is required. See the [React Native docs](../integrations/react-native#consuming-multipart-http-via-text-streaming) for more information.
+

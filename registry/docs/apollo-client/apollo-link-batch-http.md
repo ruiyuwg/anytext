@@ -1,0 +1,56 @@
+---
+title: BatchHttpLink
+description: Batch multiple operations into a single HTTP request
+---
+
+<DocBlock
+  canonicalReference="@apollo/client/link/batch-http!BatchHttpLink:class"
+  customOrder={["summary", "example", "remarks"]}
+/>
+
+## Constructor signature
+
+{/* TODO: Remove the custom signature once documentation supports rendering constructor functions */}
+
+```ts
+constructor(
+  options: BatchHttpLink.Options & ClientAwarenessLink.Options = {}
+): BatchHttpLink
+```
+
+## Context
+
+The batch HTTP link currently uses the context in two different ways, per batch and per query. The context fields below are used per batch and taken from the first operation in the batch.
+
+| Option         | Description                                                              |
+| -------------- | ------------------------------------------------------------------------ |
+| `headers`      | An object representing values to be sent as headers on the request       |
+| `credentials`  | A string representing the credentials policy you want for the fetch call |
+| `uri`          | A string of the endpoint you want to fetch from                          |
+| `fetchOptions` | Any overrides of the fetch options argument to pass to the fetch call    |
+
+For each query, the `http` field is used to modify each individual query in the batch, such as persisted queries (see below).
+
+## Operation results
+
+After your GraphQL endpoint successfully responds with the result of an operation, `BatchHttpLink` sets the `Response` object as the `response` field of the operation `context`. This enables each previous link in your link chain to interact with the response.
+
+## Custom fetching
+
+See [Customizing `fetch`](apollo-link-http/#customizing-fetch).
+
+## Types
+
+<InterfaceDetails
+  canonicalReference="@apollo/client/link/batch-http!BatchHttpLink.Options:interface"
+  headingLevel={3}
+  displayName="BatchHttpLink.Options"
+  customPropertyOrder={["uri", "headers", "credentials", "fetchOptions"]}
+/>
+
+<InterfaceDetails
+  canonicalReference="@apollo/client/link/batch-http!BatchHttpLink.ContextOptions:interface"
+  headingLevel={3}
+  displayName="BatchHttpLink.ContextOptions"
+/>
+

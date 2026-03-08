@@ -1,0 +1,248 @@
+---
+title: RemoveTypenameFromVariablesLink
+description: Automatically remove __typename fields from variables.
+---
+
+<DocBlock
+  canonicalReference="@apollo/client/link/remove-typename!RemoveTypenameFromVariablesLink:class"
+  customOrder={["summary", "remarks", "example"]}
+/>
+
+## Constructor signature
+
+```ts
+constructor(
+  options?: RemoveTypenameFromVariablesLink.Options
+): RemoveTypenameFromVariablesLink
+```
+
+## Use case
+
+As an example, take the following query. Apollo Client automatically adds `__typename` fields for each field selection set.
+
+```ts
+const query = gql`
+  query DashboardQuery($id: ID!) {
+    dashboard(id: $id) {
+      id
+      name
+    }
+  }
+`;
+
+const { data } = await client.query({ query, variables: { id: 1 } });
+// {
+//   "dashboard": {
+//     "__typename": "Dashboard",
+//     "id": 1,
+//     "name": "My Dashboard"
+//   }
+// }
+```
+
+Now let's update this dashboard by sending a mutation to our server. We'll use the `dashboard` returned from the previous query as input to our mutation.
+
+```ts
+const mutation = gql`
+  mutation UpdateDashboardMutation($dashboard: DashboardInput!) {
+    updateDashboard(dashboard: $dashboard) {
+      id
+      name
+    }
+  }
+`;
+
+await client.mutate({
+  mutation,
+  variables: {
+    dashboard: { ...data.dashboard, name: "My Updated Dashboard" },
+  },
+});
+```
+
+Without the use of `RemoveTypenameFromVariablesLink`, the server will return an error because `data.dashboard` still contains the `__typename` field.
+
+## Usage
+
+Include `RemoveTypenameFromVariablesLink` anywhere in your [link chain](./introduction/#composing-a-link-chain) before your [terminating link](./introduction#the-terminating-link)
+to remove `__typename` fields from variables for all operations.
+
+```ts
+import { ApolloLink } from "@apollo/client";
+import { RemoveTypenameFromVariablesLink } from "@apollo/client/link/remove-typename";
+
+const removeTypenameLink = new RemoveTypenameFromVariablesLink();
+const link = ApolloLink.from([removeTypenameLink, httpLink]);
+
+const client = new ApolloClient({
+  link,
+  // ... other options
+});
+```
+
+If you're using [directional composition](/react/api/link/introduction#directional-composition),
+for example, to [send a subscription to a websocket connection](/react/data/subscriptions#3-split-communication-by-operation-recommended),
+place `RemoveTypenameFromVariablesLink` before the split link to remove `__typename` from variables for all operations.
+
+```ts
+import { OperationTypeNode } from "graphql";
+import { ApolloLink } from "@apollo/client";
+import { RemoveTypenameFromVariablesLink } from "@apollo/client/link/remove-typename";
+
+const removeTypenameLink = new RemoveTypenameFromVariablesLink();
+
+const splitLink = ApolloLink.split(
+  ({ operationType }) => {
+    return operationType === OperationTypeNode.SUBSCRIPTION;
+  },
+  wsLink,
+  httpLink
+);
+
+const link = ApolloLink.from([removeTypenameLink, splitLink]);
+
+const client = new ApolloClient({
+  link,
+  // ... other options
+});
+```
+
+## Keep `__typename` in JSON scalars
+
+You may need to retain the `__typename` field from a query's response—for example, in the case of [JSON scalar](https://github.com/taion/graphql-type-json) input fields.
+
+While the [GraphQL type validation spec](https://spec.graphql.org/October2021/#sec-Input-Objects.Type-Validation) disallows input fields that begin with two underscores (`__`), this restriction doesn't apply when the input field is a [JSON scalar](https://github.com/taion/graphql-type-json). (A JSON scalar type accepts raw JSON as input.) You can configure `RemoveTypenameFromVariablesLink` link to retain `__typename` for certain `JSON` scalars.
+
+To do so, provide an `except` option when instantiating `RemoveTypenameFromVariablesLink` and use the `KEEP` sentinel to denote which variables types should keep `__typename`. Each key in the `except` option should correspond to an input type in your GraphQL schema.
+
+For example, suppose your schema includes a `ConfigureDashboardMutation` mutation that takes a `JSON` type variable named `$dashboardConfig`:
+
+```graphql
+mutation ConfigureDashboardMutation($dashboardConfig: JSON) {
+  configureDashboard(config: $dashboardConfig) {
+    id
+  }
+}
+```
+
+You tell `RemoveTypenameFromVariablesLink` to keep all `__typename` fields for any variable declared as a `JSON` type with the `KEEP` sentinel. Variable types are inferred from the GraphQL query.
+
+```ts
+import {
+  RemoveTypenameFromVariablesLink,
+  KEEP,
+} from "@apollo/client/link/remove-typename";
+
+const removeTypenameLink = new RemoveTypenameFromVariablesLink({
+  except: {
+    JSON: KEEP,
+  },
+});
+```
+
+When the query moves through `RemoveTypenameFromVariablesLink`, the `dashboardConfig` variable will be detected as a `JSON` scalar type and all `__typename` fields are kept intact.
+
+<Note>
+
+The JSON scalar type does not need to be literally named `JSON` to be considered a JSON scalar.
+
+</Note>
+
+### Nested JSON scalar fields in input variables
+
+Not all top-level variables may map to a JSON scalar type. For more complex input object types, the JSON scalar may be found on a nested field. The `except` option lets you configure nested fields within these types to keep `__typename` intact.
+
+```ts
+import {
+  RemoveTypenameFromVariablesLink,
+  KEEP,
+} from "@apollo/client/link/remove-typename";
+
+const removeTypenameLink = new RemoveTypenameFromVariablesLink({
+  except: {
+    DashboardInput: {
+      config: KEEP,
+    },
+  },
+});
+```
+
+Variables declared as type `DashboardInput` will have all top-level `__typename` fields removed, but keep `__typename` for the `config` field.
+
+This nesting can be as deep as needed and include as many fields as necessary. Use the `KEEP` sentinel to determine where `__typename` should be kept.
+
+```ts
+import {
+  RemoveTypenameFromVariablesLink,
+  KEEP,
+} from "@apollo/client/link/remove-typename";
+
+const removeTypenameLink = new RemoveTypenameFromVariablesLink({
+  except: {
+    // Keep __typename for `bar` and `baz` fields on any variable
+    // declared as a `FooInput` type
+    FooInput: {
+      bar: KEEP,
+      baz: KEEP,
+    },
+
+    // Keep __typename for the `baz.qux` field on any variable
+    // declared as a `BarInput` type
+    BarInput: {
+      baz: {
+        qux: KEEP,
+      },
+    },
+
+    // Keep __typename on `bar.baz` and `bar.qux.foo` fields for any
+    // variable declared as a `BazInput` type
+    BazInput: {
+      bar: {
+        baz: KEEP,
+        qux: {
+          foo: KEEP,
+        },
+      },
+    },
+  },
+});
+```
+
+To keep `__typename` for nested fields in arrays, use the same object notation as if the field were an object type.
+
+```ts
+import {
+  RemoveTypenameFromVariablesLink,
+  KEEP,
+} from "@apollo/client/link/remove-typename";
+
+const removeTypenameLink = new RemoveTypenameFromVariablesLink({
+  except: {
+    // Keep __typename on the `config` field for each widget
+    // in the `widgets` array for variables declared as
+    // a `DashboardInput` type
+    DashboardInput: {
+      widgets: {
+        config: KEEP,
+      },
+    },
+  },
+});
+```
+
+## Types
+
+### `RemoveTypenameFromVariablesLink.KeepTypenameConfig`
+
+<DocBlock
+  canonicalReference="@apollo/client/link/remove-typename!RemoveTypenameFromVariablesLink.KeepTypenameConfig:interface"
+  example
+  remarks
+/>
+
+<InterfaceDetails
+  canonicalReference="@apollo/client/link/remove-typename!RemoveTypenameFromVariablesLink.Options:interface"
+  headingLevel={3}
+  displayName="RemoveTypenameFromVariablesLink.Options"
+/>
+

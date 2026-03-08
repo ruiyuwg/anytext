@@ -1,0 +1,215 @@
+---
+title: Get started with Apollo Client
+subtitle: Set up Apollo Client and fetch GraphQL data with React
+description: Learn how to set up your React app, fetch GraphQL data, and integrate Apollo Client seamlessly into your UI with this step-by-step tutorial.
+---
+
+Hello! 👋 This short tutorial gets you up and running with Apollo Client.
+
+> For an introduction to the entire Apollo platform, [check out **Odyssey**, Apollo's interactive learning platform](https://www.apollographql.com/tutorials/?utm_source=apollo_docs&utm_medium=referral).
+
+> **Using a modern React framework?** If you're using Next.js App Router, React Router Framework Mode, or TanStack Start, check out our [framework integration guides](./integrations/integrations#framework-integrations) for setup instructions optimized for your framework.
+
+<Note>
+
+Need help as you work through this tutorial? [Skills](https://agentskills.io/what-are-skills) extend AI agents with specialized knowledge. Install the Apollo Client skill to teach your AI assistant Apollo Client best practices:
+
+```bash
+npx skills add apollographql/skills --skill apollo-client
+```
+
+</Note>
+
+## Step 1: Setup
+
+To start this tutorial, do one of the following:
+
+- Create a new React project locally with [Vite](https://vitejs.dev/), or
+- Create a new React sandbox on [CodeSandbox](https://codesandbox.io/).
+
+## Step 2: Install dependencies
+
+Applications that use Apollo Client require the following top-level dependencies:
+
+- `@apollo/client`: This single package contains virtually everything you need to set up Apollo Client. It includes the in-memory cache, local state management, error handling, and a React-based view layer.
+- `graphql`: This package provides logic for parsing GraphQL queries.
+- `rxjs`: This package provides the `Observable` primitive used throughout Apollo Client.
+
+Run the following command to install both of these packages:
+
+```bash
+npm install @apollo/client graphql rxjs
+```
+
+Our example application will use the [FlyBy GraphQL API](https://flyby-router-demo.herokuapp.com/) from Apollo Odyssey's [Voyage tutorial series](https://www.apollographql.com/tutorials/voyage-part1/). This API provides a list of intergalactic travel locations and details about those locations 👽
+
+## Step 3: Initialize `ApolloClient`
+
+With our dependencies set up, we can now initialize an `ApolloClient` instance.
+
+In `main.jsx`, let's first import the symbols we need from `@apollo/client` and `@apollo/client/react`:
+
+```jsx title="main.jsx"
+import { ApolloClient, HttpLink, InMemoryCache, gql } from "@apollo/client";
+import { ApolloProvider } from "@apollo/client/react";
+```
+
+Next we'll initialize `ApolloClient`, passing its constructor a configuration object with the `link` and `cache` fields:
+
+```jsx title="main.jsx"
+const client = new ApolloClient({
+  link: new HttpLink({ uri: "https://flyby-router-demo.herokuapp.com/" }),
+  cache: new InMemoryCache(),
+});
+```
+
+- `link` specifies the [Apollo Link](./api/link/introduction/) that will be used to execute GraphQL operations against the network. We give it an instance of [`HttpLink`](./api/link/apollo-link-http) - a customized Apollo Link that knows how to execute network requests against a GraphQL server.
+- `cache` is an instance of `InMemoryCache`, which Apollo Client uses to cache query results after fetching them.
+
+That's it! Our `client` is ready to start fetching data. Now before we start using Apollo Client with React, let's first try sending a query with plain JavaScript.
+
+In the same `main.jsx` file, call `client.query()` with the query string (wrapped in the `gql` template literal) shown below:
+
+```jsx title="main.jsx"
+// const client = ...
+
+client
+  .query({
+    query: gql`
+      query GetLocations {
+        locations {
+          id
+          name
+          description
+          photo
+        }
+      }
+    `,
+  })
+  .then((result) => console.log(result));
+```
+
+Run this code, open your console, and inspect the result object. You should see a `data` property with `locations` attached. Nice!
+
+Although executing GraphQL operations directly like this can be useful, Apollo Client really shines when it's integrated with a view layer like React. You can bind queries to your UI and update it automatically as new data is fetched.
+
+Let's look at how that works!
+
+## Step 4: Connect your client to React
+
+You connect Apollo Client to React with the [`ApolloProvider`](./api/react/ApolloProvider/) component. Similar to React's [`Context.Provider`](https://react.dev/reference/react/useContext), `ApolloProvider` wraps your React app and places Apollo Client on the context, enabling you to access it from anywhere in your component tree.
+
+In `main.jsx`, let's wrap our React app with an `ApolloProvider`. We suggest putting the `ApolloProvider` near the root of your application, above any component that might need to access GraphQL data.
+
+```jsx title="main.jsx" {16-18}
+import React from "react";
+import * as ReactDOM from "react-dom/client";
+import { ApolloClient, InMemoryCache } from "@apollo/client";
+import { ApolloProvider } from "@apollo/client/react";
+import App from "./App";
+
+const client = new ApolloClient({
+  uri: "https://flyby-router-demo.herokuapp.com/",
+  cache: new InMemoryCache(),
+});
+
+// Supported in React 18+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+root.render(
+  <ApolloProvider client={client}>
+    <App />
+  </ApolloProvider>
+);
+```
+
+## Step 5: Fetch data with `useQuery`
+
+After your `ApolloProvider` is hooked up, you can start requesting data with [`useQuery`](./api/react/useQuery/). The `useQuery` hook is a [React hook](https://react.dev/reference/react) that shares GraphQL data with your UI.
+
+Switching over to our `App.jsx` file, we'll start by replacing our existing file contents with the code snippet below:
+
+```jsx title="App.jsx"
+// Import everything needed to use the `useQuery` hook
+import { gql } from "@apollo/client";
+import { useQuery } from "@apollo/client/react";
+
+export default function App() {
+  return (
+    <div>
+      <h2>My first Apollo app 🚀</h2>
+    </div>
+  );
+}
+```
+
+We can define the query we want to execute by wrapping it in the `gql` template literal:
+
+```jsx title="App.jsx"
+const GET_LOCATIONS = gql`
+  query GetLocations {
+    locations {
+      id
+      name
+      description
+      photo
+    }
+  }
+`;
+```
+
+Next, let's define a component named `DisplayLocations` that executes our `GET_LOCATIONS` query with the `useQuery` hook:
+
+```jsx title="App.jsx" {2}
+function DisplayLocations() {
+  const { loading, error, data } = useQuery(GET_LOCATIONS);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error : {error.message}</p>;
+
+  return data.locations.map(({ id, name, description, photo }) => (
+    <div key={id}>
+      <h3>{name}</h3>
+      <img width="400" height="250" alt="location-reference" src={`${photo}`} />
+      <br />
+      <b>About this location:</b>
+      <p>{description}</p>
+      <br />
+    </div>
+  ));
+}
+```
+
+Whenever this component renders, the `useQuery` hook automatically executes our query and returns a result object containing `loading`, `error`, `data`, and `dataState` properties:
+
+- Apollo Client automatically tracks a query's loading and error states, which are reflected in the `loading` and `error` properties.
+- When the result of your query comes back, it's attached to the `data` property.
+
+Finally, we'll add `DisplayLocations` to our existing component tree:
+
+```jsx title="App.jsx" {6}
+export default function App() {
+  return (
+    <div>
+      <h2>My first Apollo app 🚀</h2>
+      <br />
+      <DisplayLocations />
+    </div>
+  );
+}
+```
+
+When your app reloads, you should briefly see a loading indicator, followed by a list of locations and details about those locations! If you don't, you can compare your code against the [completed app on CodeSandbox](https://codesandbox.io/s/github/apollographql/docs-examples/tree/main/apollo-client/v3/getting-started).
+
+Congrats, you just made your first component that renders with GraphQL data from Apollo Client! 🎉 Now you can try building more components that use `useQuery` and experiment with the concepts you just learned.
+
+## Next steps
+
+Now that you've learned how to fetch data with Apollo Client, you're ready to dive deeper into creating more complex queries and mutations. After this section, we recommend moving on to:
+
+- [Queries](data/queries/): Learn how to fetch queries with arguments and dive deeper into configuration options. For a full list of options, check out the API reference for `useQuery`.
+- [Fragments](data/fragments/): Learn how to use fragments and data masking to build robust, data-driven components.
+- [Mutations](data/mutations/): Learn how to update data with mutations and when you'll need to update the Apollo cache. For a full list of options, check out the API reference for `useMutation`.
+- [TypeScript with Apollo Client](./development-testing/static-typing): Learn how to add type safety to your application using TypeScript with Apollo Client.
+- [Apollo Client API](api/core/ApolloClient/): Sometimes, you'll need to access the client directly like we did in our plain JavaScript example above. Visit the API reference for a full list of options.
+

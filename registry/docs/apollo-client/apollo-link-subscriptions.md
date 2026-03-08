@@ -1,0 +1,44 @@
+---
+title: GraphQLWsLink
+description: Execute subscriptions (or other operations) over WebSocket with the graphql-ws library
+---
+
+<DocBlock canonicalReference="@apollo/client/link/subscriptions!GraphQLWsLink:class" />
+
+`GraphQLWsLink` requires the [`graphql-ws`](https://www.npmjs.com/package/graphql-ws) library. Install it in your project like so:
+
+```shell
+npm install graphql-ws
+```
+
+<DocBlock
+  canonicalReference="@apollo/client/link/subscriptions!GraphQLWsLink:class"
+  customOrder={["example"]}
+/>
+
+## Constructor signature
+
+{/* TODO: Remove the custom signature once documentation supports rendering constructor functions */}
+
+```js
+constructor(
+  client: Client
+): GraphQLWsLink
+```
+
+### Options
+
+The `GraphQLWsLink` constructor takes a single argument: a `Client` instance from the `graphql-ws` library. To create this instance, call the library's [`createClient`](https://the-guild.dev/graphql/ws/docs/client/functions/createClient) function. This function requires a `url` option, which is the URL to your WebSocket server. WebSocket URLs typically start with `ws://` or `wss://`.
+
+See the [`ClientOptions`](https://the-guild.dev/graphql/ws/docs/client/interfaces/ClientOptions) documentation for more details on the supported options provided to the `createClient` function.
+
+#### Retrying failed connections
+
+See the [`graphql-ws` recipes](https://the-guild.dev/graphql/ws/recipes) for strategies on retrying failed connections from the client. We generally recommend this approach over retrying failed connections from the link chain or your components because it provides more detailed information on why the connection failed.
+
+Alternatively, you can handle retries more generically within the link chain by using [`RetryLink`](./apollo-link-retry). This link resends the operation to the terminating link upon failure.
+
+## Usage
+
+See [Subscriptions](../../data/subscriptions/) for more information on using subscription operations in Apollo Client.
+

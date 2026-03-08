@@ -1,0 +1,42 @@
+---
+title: WebSocketLink
+description: Execute subscriptions (or other operations) over WebSocket with the subscriptions-transport-ws library
+---
+
+<Caution>
+
+**We no longer recommend using `WebSocketLink` or the `subscriptions-transport-ws` library**, because the library is not actively maintained. To execute subscriptions, We instead recommend using the newer `graphql-ws` library with the accompanying [`GraphQLWsLink`](./apollo-link-subscriptions).
+
+Whichever library you use, make sure you use the _same_ library in your server and any clients you support. For more information, see [Choosing a subscription library](../../data/subscriptions/#choosing-a-subscription-library).
+
+</Caution>
+
+<DocBlock
+  canonicalReference="@apollo/client/link/ws!WebSocketLink:class"
+  customOrder={["summary", "remarks", "example"]}
+/>
+
+## Constructor signature
+
+```ts
+constructor(
+  paramsOrClient: WebSocketLink.Configuration | SubscriptionClient
+): WebSocketLink
+```
+
+## Installation
+
+`WebSocketLink` requires the [`subscriptions-transport-ws`](https://github.com/apollographql/subscriptions-transport-ws) library. Install it in your project:
+
+```shell
+npm install subscriptions-transport-ws
+```
+
+## Types
+
+<InterfaceDetails
+  canonicalReference="@apollo/client/link/ws!WebSocketLink.Configuration:interface"
+  headingLevel={3}
+  displayName="WebSocketLink.Configuration"
+/>
+

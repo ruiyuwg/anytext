@@ -1,0 +1,35 @@
+---
+title: ErrorLink
+description: Handle and inspect errors in your GraphQL network stack.
+---
+
+<DocBlock
+  canonicalReference="@apollo/client/link/error!ErrorLink:class"
+  customOrder={["summary", "remarks", "example"]}
+/>
+
+## Constructor signature
+
+{/* TODO: Remove the custom signature once documentation supports rendering constructor functions */}
+
+```ts
+constructor(
+  errorHandler: ErrorLink.ErrorHandler
+): ErrorLink
+```
+
+## Types
+
+<FunctionDetails
+  canonicalReference="@apollo/client/link/error!ErrorLink.ErrorLinkDocumentationTypes.ErrorHandler:function(1)"
+  headingLevel={3}
+  result={false}
+  displayName="ErrorLink.ErrorHandler"
+/>
+
+<InterfaceDetails
+  canonicalReference="@apollo/client/link/error!ErrorLink.ErrorHandlerOptions:interface"
+  headingLevel={3}
+  displayName="ErrorLink.ErrorHandlerOptions"
+/>
+

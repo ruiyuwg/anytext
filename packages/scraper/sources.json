@@ -642,6 +642,19 @@
         "docsPath": "docs",
         "include": [".md"]
       }
+    },
+    {
+      "id": "apollo-client",
+      "name": "Apollo Client",
+      "description": "Comprehensive GraphQL client for React with caching, queries, mutations, and subscriptions",
+      "version": "3",
+      "adapter": "github",
+      "github": {
+        "repo": "apollographql/apollo-client",
+        "branch": "main",
+        "docsPath": "docs/source",
+        "include": [".mdx"]
+      }
     }
   ]
 }

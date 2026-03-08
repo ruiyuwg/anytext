@@ -1,0 +1,79 @@
+---
+title: RetryLink
+description: Attempt an operation multiple times if it fails due to network or server errors.
+---
+
+<DocBlock
+  canonicalReference="@apollo/client/link/retry!RetryLink:class"
+  customOrder={["summary", "remarks", "example"]}
+/>
+
+## Constructor signature
+
+```ts
+constructor(
+  options?: RetryLink.Options
+): RetryLink
+```
+
+## Avoiding thundering herd
+
+Starting with `initialDelay`, the delay of each subsequent retry is increased exponentially, meaning it's multiplied by 2 each time. For example, if `initialDelay` is 100, additional retries will occur after delays of 200, 400, 800, etc.
+
+With the `jitter` option enabled, delays are randomized anywhere between 0ms (instant), and 2x the configured delay. This way you get the same result on average, but with random delays.
+
+These two features are combined to help alleviate [the thundering herd problem](https://en.wikipedia.org/wiki/Thundering_herd_problem), by distributing load during major outages. Without these strategies, when your server comes back up it will be hit by all of your clients at once, possibly causing it to go down again.
+
+## Custom strategies
+
+Instead of the options object, you may pass a function for `delay` and/or `attempts`, which implement custom strategies for each. In both cases the function is given the same arguments (`attempt`, `operation`, `error`).
+
+The `attempts` function should return a `boolean` (or a `Promise` which resolves to a `boolean`) indicating whether the response should be retried. If yes, the `delay` function is then called, and should return the number of milliseconds to delay by.
+
+```ts
+import { RetryLink } from "@apollo/client/link/retry";
+
+const link = new RetryLink({
+  attempts: (attempt, operation, error) => {
+    return !!error && operation.operationName != "specialCase";
+  },
+  delay: (attempt, operation, error) => {
+    return attempt * 1000 * Math.random();
+  },
+});
+```
+
+## Types
+
+<FunctionDetails
+  canonicalReference="@apollo/client/link/retry!RetryLink.RetryLinkDocumentationTypes.AttemptsFunction:function(1)"
+  headingLevel={3}
+  result={false}
+  displayName="RetryLink.AttemptsFunction"
+/>
+
+<InterfaceDetails
+  canonicalReference="@apollo/client/link/retry!RetryLink.AttemptsOptions:interface"
+  headingLevel={3}
+  displayName="RetryLink.AttemptsOptions"
+/>
+
+<FunctionDetails
+  canonicalReference="@apollo/client/link/retry!RetryLink.RetryLinkDocumentationTypes.DelayFunction:function(1)"
+  headingLevel={3}
+  result={false}
+  displayName="RetryLink.DelayFunction"
+/>
+
+<InterfaceDetails
+  canonicalReference="@apollo/client/link/retry!RetryLink.DelayOptions:interface"
+  headingLevel={3}
+  displayName="RetryLink.DelayOptions"
+/>
+
+<InterfaceDetails
+  canonicalReference="@apollo/client/link/retry!RetryLink.Options:interface"
+  headingLevel={3}
+  displayName="RetryLink.Options"
+/>
+

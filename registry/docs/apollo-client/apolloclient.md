@@ -1,0 +1,159 @@
+---
+title: class ApolloClient
+description: API reference
+order: 11
+---
+
+{/* @import {MDXProvidedComponents} from '../../../shared/MdxProvidedComponents.js' */}
+
+The `ApolloClient` class encapsulates Apollo's core client-side API. It backs all available view-layer integrations (React, iOS, and so on).
+
+## The `ApolloClient` constructor
+
+<DocBlock canonicalReference={"@apollo/client!ApolloClient:constructor(1)"} />
+
+Takes an `ApolloClientOptions` parameter that supports the [fields listed below](#apolloclientoptions).
+
+Returns an initialized `ApolloClient` object.
+
+#### Example
+
+<Example canonicalReference="@apollo/client!ApolloClient:constructor(1)" />
+
+For more information on the `defaultOptions` object, see the [Default Options](#defaultoptions) section below.
+
+## Functions
+
+<FunctionDetails
+  canonicalReference="@apollo/client!ApolloClient#watchQuery:member(1)"
+  headingLevel={3}
+/>
+<FunctionDetails
+  canonicalReference="@apollo/client!ApolloClient#query:member(1)"
+  headingLevel={3}
+/>
+<FunctionDetails
+  canonicalReference="@apollo/client!ApolloClient#mutate:member(1)"
+  headingLevel={3}
+/>
+<FunctionDetails
+  canonicalReference="@apollo/client!ApolloClient#subscribe:member(1)"
+  headingLevel={3}
+/>
+<FunctionDetails
+  canonicalReference="@apollo/client!ApolloClient#readQuery:member(1)"
+  headingLevel={3}
+/>
+<FunctionDetails
+  canonicalReference="@apollo/client!ApolloClient#readFragment:member(1)"
+  headingLevel={3}
+/>
+<FunctionDetails
+  canonicalReference="@apollo/client!ApolloClient#writeQuery:member(1)"
+  headingLevel={3}
+/>
+<FunctionDetails
+  canonicalReference="@apollo/client!ApolloClient#writeFragment:member(1)"
+  headingLevel={3}
+/>
+<FunctionDetails
+  canonicalReference="@apollo/client!ApolloClient#watchFragment:member(1)"
+  headingLevel={3}
+/>
+<FunctionDetails
+  canonicalReference="@apollo/client!ApolloClient#resetStore:member(1)"
+  headingLevel={3}
+/>
+<FunctionDetails
+  canonicalReference="@apollo/client!ApolloClient#onResetStore:member(1)"
+  headingLevel={3}
+/>
+<FunctionDetails
+  canonicalReference="@apollo/client!ApolloClient#clearStore:member(1)"
+  headingLevel={3}
+/>
+<FunctionDetails
+  canonicalReference="@apollo/client!ApolloClient#onClearStore:member(1)"
+  headingLevel={3}
+/>
+<FunctionDetails
+  canonicalReference="@apollo/client!ApolloClient#stop:member(1)"
+  headingLevel={3}
+/>
+<FunctionDetails
+  canonicalReference="@apollo/client!ApolloClient#refetchObservableQueries:member(1)"
+  headingLevel={3}
+/>
+<FunctionDetails
+  canonicalReference="@apollo/client!ApolloClient#refetchQueries:member(1)"
+  headingLevel={3}
+/>
+<FunctionDetails
+  canonicalReference="@apollo/client!ApolloClient#getObservableQueries:member(1)"
+  headingLevel={3}
+/>
+<FunctionDetails
+  canonicalReference="@apollo/client!ApolloClient#extract:member(1)"
+  headingLevel={3}
+/>
+<FunctionDetails
+  canonicalReference="@apollo/client!ApolloClient#restore:member(1)"
+  headingLevel={3}
+/>
+<FunctionDetails
+  canonicalReference="@apollo/client!ApolloClient#setLink:member(1)"
+  headingLevel={3}
+/>
+
+## Types
+
+<InterfaceDetails
+  canonicalReference="@apollo/client!ApolloClient.Options:interface"
+  headingLevel={3}
+  displayName="ApolloClient.Options"
+  customPropertyOrder={[
+    "cache",
+    "link",
+    "uri",
+    "connectToDevTools",
+    "defaultOptions",
+    "name",
+    "version",
+  ]}
+/>
+
+<InterfaceDetails
+  canonicalReference="@apollo/client!ApolloClient.DefaultOptions:interface"
+  headingLevel={3}
+  displayName="ApolloClient.DefaultOptions"
+/>
+
+##### Example `defaultOptions` object
+
+```js
+const defaultOptions = {
+  watchQuery: {
+    fetchPolicy: "cache-and-network",
+    errorPolicy: "ignore",
+  },
+  query: {
+    fetchPolicy: "network-only",
+    errorPolicy: "all",
+  },
+  mutate: {
+    errorPolicy: "all",
+  },
+};
+```
+
+You can override any default option you specify in this object by providing a
+different value for the same option in individual function calls.
+
+> **Note:** The `useQuery` hook uses Apollo Client's `watchQuery` function. To set `defaultOptions` when using the `useQuery` hook, make sure to set them under the `defaultOptions.watchQuery` property.
+
+<InterfaceDetails
+  canonicalReference="@apollo/client!ApolloClient.DevtoolsOptions:interface"
+  headingLevel={3}
+  displayName="ApolloClient.DevtoolsOptions"
+/>
+

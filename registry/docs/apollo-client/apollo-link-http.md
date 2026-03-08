@@ -1,0 +1,42 @@
+---
+title: HttpLink
+description: Get GraphQL results over a network using HTTP fetch.
+---
+
+<DocBlock
+  canonicalReference="@apollo/client/link/http!HttpLink:class"
+  customOrder={["summary", "remarks", "example"]}
+/>
+
+## Constructor signature
+
+{/* TODO: Remove the custom signature once documentation supports rendering constructor functions */}
+
+```ts
+constructor(
+  options: HttpLink.Options = {}
+): HttpLink
+```
+
+## Operation results
+
+After your GraphQL endpoint successfully responds with the result of an operation, `HttpLink` sets the `Response` object as the `response` field of the operation `context`. This enables each previous link in your link chain to interact with the response.
+
+## Customizing `fetch`
+
+Provide a custom [`fetch` option](#options-fetch) to the `HttpLink` constructor if you need fine-grained control over the underlying `fetch` call. The function should behave identically to the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch).
+
+## Types
+
+<InterfaceDetails
+  canonicalReference="@apollo/client/link/http!HttpLink.Options:interface"
+  headingLevel={3}
+  displayName="HttpLink.Options"
+/>
+
+<InterfaceDetails
+  canonicalReference="@apollo/client/link/http!HttpLink.ContextOptions:interface"
+  headingLevel={3}
+  displayName="HttpLink.ContextOptions"
+/>
+
