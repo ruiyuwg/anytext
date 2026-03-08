@@ -322,6 +322,14 @@
       "url": "https://chakra-ui.com/llms-full.txt"
     },
     {
+      "id": "nitro",
+      "name": "Nitro",
+      "description": "Next-generation server toolkit for building web servers and deploying anywhere",
+      "version": "2",
+      "adapter": "llms-full",
+      "url": "https://nitro.build/llms-full.txt"
+    },
+    {
       "id": "azure",
       "name": "Azure",
       "description": "Microsoft Azure cloud platform with compute, storage, databases, AI, and 200+ services",

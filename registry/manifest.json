@@ -1,5 +1,5 @@
 {
-  "version": 53,
+  "version": 54,
   "updatedAt": "2026-03-08",
   "libraries": [
     {
@@ -54933,6 +54933,455 @@
           ],
           "path": "nextjs/contribution-guide.md",
           "tokens": 4851
+        }
+      ]
+    },
+    {
+      "id": "nitro",
+      "name": "Nitro",
+      "description": "Next-generation server toolkit for building web servers and deploying anywhere",
+      "version": "2",
+      "topics": [
+        {
+          "id": "getting-started",
+          "title": "Getting Started",
+          "description": "Nitro is an open source framework to build web servers using h3{rel=\"\"nofollow\"\"} and lots of built-in features.\nNitr...",
+          "tags": [
+            "http://localhost:3000/",
+            ".nitro/dev/index.mjs",
+            ".output",
+            "server/routes/",
+            "server/api/",
+            "/api/",
+            "server/utils/",
+            "server/plugins/",
+            "nitro.config.ts",
+            "tsconfig.json"
+          ],
+          "path": "nitro/getting-started.md",
+          "tokens": 748
+        },
+        {
+          "id": "server-utils",
+          "title": "Server Utils",
+          "description": "When reading the rest of the docs, you might notice that there are no imports in examples for using utilities.\nIt is ...",
+          "tags": [
+            "imports",
+            "defineEventHandler",
+            "readBody",
+            "utils",
+            "server/utils/",
+            "server/utils/sum.ts",
+            "useSum",
+            "server/routes/index.ts",
+            "defineCachedFunction(fn, options)",
+            "cachedFunction(fn, options)"
+          ],
+          "path": "nitro/server-utils.md",
+          "tokens": 1273
+        },
+        {
+          "id": "tasks",
+          "title": "Tasks",
+          "description": "::important\nTasks support is currently experimental.\nSee nitrojs/nitro#1974{rel=\"\"nofollow\"\"} for the relevant discus...",
+          "tags": [
+            "server/tasks/[name].ts",
+            ":",
+            "server/tasks/db/migrate.ts",
+            "db:migrate",
+            "dev",
+            "node-server",
+            "bun",
+            "deno-server",
+            "cloudflare_module",
+            "scheduledTasks"
+          ],
+          "path": "nitro/tasks.md",
+          "tokens": 1167
+        },
+        {
+          "id": "server-routes",
+          "title": "Server Routes",
+          "description": "An event handler{rel=\"\"nofollow\"\"} is a function that will be bound to a route and executed when the route is matched...",
+          "tags": [
+            "server/api/",
+            "server/routes/",
+            "defineEventHandler",
+            "[<param>]",
+            "<param>",
+            "event.context.params",
+            "getRouterParam",
+            "/hello/nitro",
+            "[<param1>]/[<param2>]",
+            "[...<param>]"
+          ],
+          "path": "nitro/server-routes.md",
+          "tokens": 2492
+        },
+        {
+          "id": "websocket",
+          "title": "WebSocket",
+          "description": "Nitro natively supports runtime agnostic WebSocket{rel=\"\"nofollow\"\"} API using CrossWS{rel=\"\"nofollow\"\"} and H3 WebSo...",
+          "tags": [
+            "websocket",
+            "server/routes/_ws.ts",
+            "server/routes/chatroom.ts",
+            "/chatroom",
+            "server/routes/websocket.ts",
+            "/websocket",
+            "server/routes/sse.ts"
+          ],
+          "path": "nitro/websocket.md",
+          "tokens": 768
+        },
+        {
+          "id": "kv-storage",
+          "title": "KV Storage",
+          "description": "Nitro has built-in integration with unstorage{rel=\"\"nofollow\"\"} to provide a runtime agnostic persistent layer.",
+          "tags": [
+            "useStorage()",
+            "getItem(key)",
+            "setItem(key, value)",
+            "storage",
+            "devStorage",
+            "nitro dev",
+            "build"
+          ],
+          "path": "nitro/kv-storage.md",
+          "tokens": 1191
+        },
+        {
+          "id": "sql-database",
+          "title": "SQL Database",
+          "description": "The default database connection is preconfigured with SQLite{rel=\"\"nofollow\"\"} and works out of the box for developme...",
+          "tags": [
+            ".data/db.sqlite3",
+            "database",
+            "devDatabase"
+          ],
+          "path": "nitro/sql-database.md",
+          "tokens": 663
+        },
+        {
+          "id": "cache",
+          "title": "Cache",
+          "description": "To cache an event handler, you simply need to use the defineCachedEventHandler method.",
+          "tags": [
+            "defineCachedEventHandler",
+            "defineEventHandler",
+            "swr: false",
+            "varies",
+            "cachedEventHandler",
+            "defineCachedFunction",
+            "value",
+            "cachedFunction",
+            "event.waitUntil",
+            "event"
+          ],
+          "path": "nitro/cache.md",
+          "tokens": 3016
+        },
+        {
+          "id": "assets",
+          "title": "Assets",
+          "description": "Nitro handles assets via the server/public/ directory.",
+          "tags": [
+            "server/public/",
+            ".output/public/",
+            "server/assets/",
+            ".output/server/chunks/raw/",
+            "assets:server",
+            "server/assets/data.json",
+            "server/templates/",
+            "assets:templates"
+          ],
+          "path": "nitro/assets.md",
+          "tokens": 805
+        },
+        {
+          "id": "plugins",
+          "title": "Plugins",
+          "description": "Nitro plugins will be executed once during server startup in order to allow extending Nitro's runtime behavior.\nThey ...",
+          "tags": [
+            "nitroApp",
+            "plugins/",
+            "plugins",
+            "\"close\", () => {}",
+            "\"error\", (error, { event? }) => {}",
+            "\"request\", (event) => {}",
+            "renderer"
+          ],
+          "path": "nitro/plugins.md",
+          "tokens": 862
+        },
+        {
+          "id": "configuration",
+          "title": "Configuration",
+          "description": "::read-more{to=\"https://nitro.build/config\"}\nSee config reference for available options.\n::",
+          "tags": [
+            "nitro",
+            ".nitrorc",
+            "useRuntimeConfig(event)",
+            ".env",
+            "/api/example",
+            "123",
+            "dev_token",
+            "import.meta.env",
+            "process.env",
+            "NITRO_"
+          ],
+          "path": "nitro/configuration.md",
+          "tokens": 1198
+        },
+        {
+          "id": "overview",
+          "title": "Overview",
+          "description": "Nitro can generate different output formats suitable for different hosting providers from the same code base.\nUsing b...",
+          "tags": [
+            "nitro-dev",
+            "--env-mode=loose",
+            "NITRO_PRESET",
+            "SERVER_PRESET",
+            "--preset",
+            "nitro.config.ts",
+            "compatibilityDate"
+          ],
+          "path": "nitro/overview.md",
+          "tokens": 836
+        },
+        {
+          "id": "edge-workers",
+          "title": "Edge Workers",
+          "description": "Nitro provides out of the box support for deploying any Nitro app to different Edge Worker offerings as well as Servi...",
+          "tags": [
+            "service-worker",
+            "mongodb",
+            "mysql",
+            "rhea",
+            "gremlin",
+            "ioredis",
+            "cassandra-driver",
+            "kafkajs"
+          ],
+          "path": "nitro/edge-workers.md",
+          "tokens": 508
+        },
+        {
+          "id": "node-js",
+          "title": "Node.js",
+          "description": "Preset: node_server",
+          "tags": [
+            "node_server",
+            "nitro build",
+            ".output",
+            "NITRO_PORT",
+            "PORT",
+            "3000",
+            "NITRO_HOST",
+            "HOST",
+            "NITRO_UNIX_SOCKET",
+            "NITRO_SSL_CERT"
+          ],
+          "path": "nitro/node-js.md",
+          "tokens": 1326
+        },
+        {
+          "id": "custom-preset",
+          "title": "Custom Preset",
+          "description": "Custom presets are local files that have a preset entry that defines builder configuration and a runtime entry point.",
+          "tags": [
+            "preset/nitro.config.ts",
+            "alwaysdata",
+            "account_name.alwaysdata.net",
+            "npm run build -- preset alwaysdata",
+            "$HOME/www/my-app",
+            "[account_name].alwaysdata.net",
+            "node ./output/server/index.mjs",
+            "www/my-app",
+            "Default version",
+            "20.0.0"
+          ],
+          "path": "nitro/custom-preset.md",
+          "tokens": 1406
+        },
+        {
+          "id": "aws-amplify",
+          "title": "AWS Amplify",
+          "description": "Preset: aws_amplify",
+          "tags": [
+            "aws_amplify",
+            "awsAmplify",
+            "amplify.yml"
+          ],
+          "path": "nitro/aws-amplify.md",
+          "tokens": 654
+        },
+        {
+          "id": "azure",
+          "title": "Azure",
+          "description": "Preset: azure",
+          "tags": [
+            "azure",
+            "staticwebapp.config.json",
+            "node:16",
+            "node:14",
+            "/api/server",
+            "index.html",
+            "/index.html",
+            "[]",
+            "azure.config",
+            "azure_functions"
+          ],
+          "path": "nitro/azure.md",
+          "tokens": 2201
+        },
+        {
+          "id": "cloudflare",
+          "title": "Cloudflare",
+          "description": "Preset: cloudflare_module",
+          "tags": [
+            "cloudflare_module",
+            "2024-09-19",
+            "nitro.config.ts",
+            "deployConfig: true",
+            "wrangler.json",
+            "cloudflare: { wrangler : {} }",
+            "cloudflare:scheduled",
+            "cloudflare:email",
+            "cloudflare:queue",
+            "cloudflare:tail"
+          ],
+          "path": "nitro/cloudflare.md",
+          "tokens": 3878
+        },
+        {
+          "id": "firebase",
+          "title": "Firebase",
+          "description": "::note\nYou will need to be on the Blaze plan{rel=\"\"nofollow\"\"} (Pay as you go) to get started.\n::",
+          "tags": [
+            "firebase_app_hosting",
+            "firebase",
+            "nodejs18",
+            ".output/public",
+            "firebase.json",
+            "<your_project_id>",
+            ".firebaserc",
+            "--project <your_project_id>",
+            "firebase deploy",
+            "firebase.gen"
+          ],
+          "path": "nitro/firebase.md",
+          "tokens": 2063
+        },
+        {
+          "id": "flightcontrol",
+          "title": "Flightcontrol",
+          "description": "Preset: flightcontrol",
+          "tags": [
+            "flightcontrol",
+            "flightcontrol.json",
+            "GUI",
+            "genezio",
+            "genezio.yaml",
+            "github_pages",
+            "gitlab_pages"
+          ],
+          "path": "nitro/flightcontrol.md",
+          "tokens": 1705
+        },
+        {
+          "id": "heroku",
+          "title": "Heroku",
+          "description": "Preset: heroku",
+          "tags": [
+            "heroku"
+          ],
+          "path": "nitro/heroku.md",
+          "tokens": 1064
+        },
+        {
+          "id": "koyeb",
+          "title": "Koyeb",
+          "description": "Preset: koyeb",
+          "tags": [
+            "koyeb",
+            "start",
+            "package.json",
+            ".dockerignore"
+          ],
+          "path": "nitro/koyeb.md",
+          "tokens": 890
+        },
+        {
+          "id": "netlify",
+          "title": "Netlify",
+          "description": "Preset: netlify",
+          "tags": [
+            "netlify",
+            "2024-05-07",
+            "dist",
+            "npm run build",
+            "routeRules",
+            "_redirects",
+            "public",
+            "netlify_edge",
+            "netlify_builder",
+            "isr"
+          ],
+          "path": "nitro/netlify.md",
+          "tokens": 1546
+        },
+        {
+          "id": "vercel",
+          "title": "Vercel",
+          "description": "Preset: vercel",
+          "tags": [
+            "vercel",
+            "2025-07-15",
+            "ssrRoutes",
+            "vercel.functions",
+            "nitro.config",
+            "bunVersion",
+            "vercel.json",
+            "vercel.config",
+            "openssl rand -base64 32",
+            "bypassToken"
+          ],
+          "path": "nitro/vercel.md",
+          "tokens": 1490
+        },
+        {
+          "id": "zerops",
+          "title": "Zerops",
+          "description": "Preset: zerops",
+          "tags": [
+            "zerops",
+            "zeropsio/recipe-nitro-nodejs",
+            "zeropsio/recipe-nitro-static",
+            "zerops-project-import.yml",
+            "zerops.yml"
+          ],
+          "path": "nitro/zerops.md",
+          "tokens": 766
+        },
+        {
+          "id": "config",
+          "title": "Config",
+          "description": ":read-more{to=\"https://nitro.build/guide/configuration\"}",
+          "tags": [
+            "preset",
+            "NITRO_PRESET",
+            "nitro_dev",
+            "node_server",
+            "logLevel",
+            "3",
+            "1",
+            "runtimeConfig",
+            "{ nitro: { ... }, ...yourOptions }",
+            "nitro"
+          ],
+          "path": "nitro/config.md",
+          "tokens": 3979
         }
       ]
     },
