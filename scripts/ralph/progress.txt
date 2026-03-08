@@ -1,277 +1,551 @@
 # Ralph Progress Log
-Started: Sun Mar  8 15:32:48 CST 2026
----
+Started: Sun Mar  8 20:49:26 CST 2026
 
 ## Codebase Patterns
-- Types are defined in `packages/scraper/src/types.ts` — all adapter configs, pipeline interfaces, and manifest types live here
-- `types.ts` is excluded from coverage in vitest config (`test.coverage.exclude: ["src/types.ts"]`)
-- Adapter type union in `SourceConfig.adapter` must be updated when adding new adapters
-- New optional config interfaces (like `LlmsIndexConfig`) are added as standalone interfaces and referenced as optional fields on `SourceConfig`
-- Pipeline utilities go in `packages/scraper/src/pipeline/` with tests in `packages/scraper/src/__tests__/pipeline/`
-- Use `vi.useFakeTimers()` + `vi.advanceTimersByTimeAsync()` for time-dependent tests (not `vi.advanceTimersByTime` — the async variant is needed for Promise resolution)
+- GitHub adapter: for route-based directories where all files are named `index.mdx`/`index.md`, the adapter now derives slugs from the parent directory path instead of the filename. No special config needed — it auto-detects `index` filenames.
+- Adding a new llms-full library: add entry to `packages/scraper/sources.json` with id, name, description, version, adapter, url fields; then `pnpm build && node dist/index.js --library <id>` from packages/scraper
+- Adding a new llms-txt library: same pattern as llms-full but with `adapter: "llms-txt"` and url pointing to llms.txt; the adapter fetches the index, follows linked pages, and processes each individually
+- If llms.txt links to .txt files (not .md), use `llms-index` adapter with `servicePattern` regex and `contentType: "llms-full"`
+- The llms-txt adapter now supports HTML pages: if no .md/.docs links found, it falls back to all links; HTML responses are auto-detected and extracted via cheerio/turndown
+- For HTML pages via llms-txt, optionally add `crawl.contentSelector` and `crawl.removeSelectors` to configure extraction
+- Link fallback uses ratio: if .md/docs filtered links are <20% of total AND total ≥5, all links are used (prevents single outlier .md links from suppressing HTML doc links)
+- Scraper auto-updates `registry/manifest.json` and writes docs to `registry/docs/<id>/`
+- Commit should include sources.json, registry/docs/<id>/, and registry/manifest.json
+- GitHub adapter: if tree fetch returns 404, try the other default branch (`main` vs `master`) — repos vary
+- `slugify()` in `packages/scraper/src/utils.ts` truncates slugs to 200 chars max to avoid ENAMETOOLONG errors on macOS (255-byte filename limit)
+- GitHub adapter: when repo has multilingual docs in subdirectories (e.g., `zh/`, `ja/`), use `exclude: ["zh/"]` to keep English-only content — otherwise translated files overwrite English ones for duplicate slugs
+---
 
 ## 2026-03-08 - US-001
-- Added `LlmsIndexConfig` interface with fields: `servicePattern`, `contentType`, `include`, `exclude`, `maxServices`
-- Added `'llms-index'` to the adapter union type
-- Added optional fields to `SourceConfig`: `llmsIndex`, `topicPrefix`, `rateLimit`
-- Added optional `maxPages` field to `CrawlConfig`
-- Added optional `maxFiles` and `subDirs` fields to `GithubConfig`
-- Files changed: `packages/scraper/src/types.ts`
+- Added Prisma source config to sources.json with llms-full adapter
+- Scraper fetched 8.4M chars, cleaned to 7.4M chars, split into 564 topics
+- Files changed: packages/scraper/sources.json, registry/docs/prisma/ (564 files), registry/manifest.json
 - **Learnings for future iterations:**
-  - `types.ts` is pure type definitions — no runtime code, excluded from coverage, changes don't affect tests
-  - Build must pass to verify type correctness since there are no dedicated type tests
-  - All 434 tests (204 CLI + 230 scraper) continue to pass with additive type changes
+  - llms-full adapter works well for Prisma - straightforward fetch and split
+  - Prisma docs are large (8.4M chars raw) producing many topics (564)
+  - No special preprocessing needed for Prisma
 ---
 
 ## 2026-03-08 - US-002
-- Created `RateLimiter` class with `acquire()` method that queues and spaces requests by `1000/requestsPerSecond` ms
-- Created `createHostLimiter(rateLimit?)` factory (default 10 req/s)
-- Implementation uses a queue with `setTimeout` for spacing; concurrent `acquire()` calls are queued and processed sequentially
-- Files changed: `packages/scraper/src/pipeline/rate-limiter.ts`, `packages/scraper/src/__tests__/pipeline/rate-limiter.test.ts`
+- Added Fastify source config to sources.json with llms-full adapter
+- Scraper fetched 9.2M chars, cleaned to 9.2M chars, split into 576 topics
+- Files changed: packages/scraper/sources.json, registry/docs/fastify/ (576 files), registry/manifest.json
 - **Learnings for future iterations:**
-  - `vi.advanceTimersByTimeAsync()` is required (not the sync variant) when testing code with `Promise` + `setTimeout` combinations
-  - The rate limiter tracks `lastCallTime` and calculates delay dynamically, so it naturally handles the case where enough time has passed between calls (no unnecessary delay)
-  - 8 tests, 100% coverage on rate-limiter.ts
-  - All 442 tests (204 CLI + 238 scraper) pass
+  - Fastify llms-full.txt is large (~9.2M chars) producing many topics (576), similar to Prisma
+  - No special preprocessing needed for Fastify
+  - Pattern continues: add entry to sources.json, build scraper, run with --library flag
 ---
 
-## Codebase Patterns (updated)
-- When adding new adapters, register them in `scrape.ts` adapter map AND add mock + test in `scrape.test.ts`
-- `vi.mock()` factory mocks don't get reset by `restoreMocks: true` — use `vi.clearAllMocks()` in `beforeEach` when tests share module-level mocks
-- llms-txt style adapters need content >400 chars for `estimateTokens` to exceed the 100-token threshold in tests
-- GitHub tree API returns `truncated: true` for large repos; Contents API (`/contents/{path}`) returns `type: "file"` with `name` field (different from tree API's `type: "blob"` without `name`)
-
-## 2026-03-08 - US-003 & US-004
-- Created `packages/scraper/src/adapters/llms-index.ts` — new adapter that follows a root llms.txt index to per-service llms-full.txt or llms.txt files
-- Supports both `llms-full` (fetch → clean → split) and `llms-txt` (fetch → parse links → fetch pages → clean) content types
-- Service URLs discovered via configurable `servicePattern` regex with include/exclude/maxServices filtering
-- Concurrent service processing in batches of 4 via `Promise.allSettled`
-- Individual service failures logged and skipped (graceful degradation)
-- Services with <2 topics skipped with warning
-- Topic IDs prefixed with service slug, titles include service context (e.g., "Workers: Routing")
-- Registered adapter in `scrape.ts` adapter map
-- Created `packages/scraper/src/__tests__/adapters/llms-index.test.ts` with 25 tests, 100% coverage
-- Updated `packages/scraper/src/__tests__/scrape.test.ts` with llms-index adapter mock and selection test
-- Files changed: `llms-index.ts`, `llms-index.test.ts`, `scrape.ts`, `scrape.test.ts`
+## 2026-03-08 - US-003
+- Added Vue.js source config to sources.json with llms-full adapter
+- Scraper fetched 990K chars, cleaned to 921K chars, split into 90 topics
+- Files changed: packages/scraper/sources.json, registry/docs/vue/ (89 files), registry/manifest.json
 - **Learnings for future iterations:**
-  - `vi.clearAllMocks()` in `beforeEach` is essential when tests use `mockResolvedValueOnce` with module-level `vi.mock()` factories
-  - Test content for llms-txt paths needs >400 chars to pass the 100-token threshold (`estimateTokens = Math.ceil(length/4)`)
-  - `extractFirstParagraph` and `extractInlineCode` helper functions need explicit coverage for edge cases (no paragraphs, no inline code, non-matching links)
-  - v8 coverage tracks individual branch conditions — each `||` in an `if` statement needs both true/false coverage
-  - All 264 tests pass (204 CLI + 260 scraper), 100% coverage maintained
+  - Vue.js llms-full.txt is much smaller (~990K chars) compared to Prisma/Fastify, producing 90 topics
+  - No special preprocessing needed for Vue.js
+  - Straightforward llms-full adapter pattern continues to work well
+---
+
+## 2026-03-08 - US-004
+- Added OpenAI source config to sources.json with llms-full adapter
+- Scraper fetched 1.6M chars, cleaned to 1.6M chars, split into 134 topics
+- Files changed: packages/scraper/sources.json, registry/docs/openai/ (134 files), registry/manifest.json
+- **Learnings for future iterations:**
+  - OpenAI URL (platform.openai.com/docs/llms-full.txt) redirects successfully — scraper handles redirects fine
+  - Medium-sized docs (~1.6M chars) producing 134 topics
+  - No special preprocessing needed for OpenAI
 ---
 
 ## 2026-03-08 - US-005
-- Added sitemap index detection: checks for `<sitemapindex` in XML content
-- When sitemap index detected: extracts sub-sitemap URLs from `<loc>` elements, fetches each, combines page URLs into single list
-- Added `maxPages` support for both regular sitemaps and sitemap indexes — limits total URL count with warning
-- Sub-sitemap fetch failures are logged and skipped (graceful degradation)
-- Existing single-sitemap behavior fully preserved (backwards compatible)
-- Added `resolveUrls()` async helper and `isSitemapIndex()` detector functions
-- Added `beforeEach` with `vi.clearAllMocks()` to fix accumulated mock call counts across tests
-- Files changed: `packages/scraper/src/adapters/sitemap.ts`, `packages/scraper/src/__tests__/adapters/sitemap.test.ts`
+- Added LangChain source config to sources.json with llms-full adapter
+- Scraper fetched 8.2M chars, cleaned to 7.6M chars, split into 676 topics
+- Files changed: packages/scraper/sources.json, registry/docs/langchain/ (676 files), registry/manifest.json
 - **Learnings for future iterations:**
-  - Existing sitemap tests didn't have `vi.clearAllMocks()` in `beforeEach` — mock call counts accumulated across tests, causing `toHaveBeenCalledTimes` assertions to fail for any test after the first
-  - `parseSitemapUrls` regex works for both regular sitemap `<url><loc>` and sitemap index `<sitemap><loc>` since both use `<loc>` tags
-  - 18 tests total (11 existing + 7 new), 100% coverage on sitemap.ts
-  - All 271 tests pass (204 CLI + 267 scraper → wait, actually the count from turborepo cached CLI), 100% coverage maintained
+  - docs.langchain.com/llms-full.txt works correctly (no redirect issues)
+  - Large docs (~8.2M chars) producing many topics (676), similar to Prisma/Fastify
+  - No special preprocessing needed for LangChain
 ---
 
 ## 2026-03-08 - US-006
-- Enhanced GitHub adapter with three new capabilities:
-  1. **subDirs filtering**: When `subDirs` is set in GithubConfig, only processes files within those subdirectories of `docsPath`
-  2. **maxFiles limit**: Default 10000, truncates file list with warning when exceeded
-  3. **Truncation fallback**: Detects `truncated: true` in tree API response, falls back to per-directory GitHub Contents API (`/repos/{owner}/{repo}/contents/{path}?ref={branch}`) for each subDir
-- Extracted `buildHeaders()` and `fetchContentsApi()` helper functions for cleaner code organization
-- Files changed: `packages/scraper/src/adapters/github.ts`, `packages/scraper/src/__tests__/adapters/github.test.ts`
+- Added Zustand source config to sources.json with llms-full adapter
+- Scraper fetched 368K chars, cleaned to 365K chars, split into 1 topic
+- Files changed: packages/scraper/sources.json, registry/docs/zustand/ (1 file), registry/manifest.json
 - **Learnings for future iterations:**
-  - The GitHub tree API returns `truncated: true` for very large repos — the Contents API fallback only works when `subDirs` is specified (it lists files in a single directory)
-  - Contents API returns items with `type: "file"` (not "blob" like tree API) and includes a `name` field for filename matching
-  - 18 tests total (11 existing + 7 new), 100% coverage on github.ts
-  - All 276 scraper tests pass, 100% coverage maintained
+  - Zustand llms-full.txt is small (~368K chars) but splits into only 1 topic (introduction.md at 91K tokens)
+  - The content likely lacks enough heading structure for the splitter to create multiple topics
+  - Redirect through docs.pmnd.rs works fine — scraper handles it
+  - Small libraries may produce very few topics; this is expected and acceptable
 ---
 
 ## 2026-03-08 - US-007
-- Added topic ID prefixing to GitHub adapter based on `topicPrefix` source config
-- When `topicPrefix` is `'directory'` or `'auto'`: extracts immediate subdirectory under `docsPath` from file path, prefixes topic ID with slugified subdir name, and adds capitalized subdir to title (e.g., "Azure Functions: Overview")
-- When `topicPrefix` is `'none'` (default): no prefix, fully backwards compatible
-- Files directly under `docsPath` root (no subdirectory) get no prefix regardless of setting
-- Files changed: `packages/scraper/src/adapters/github.ts`, `packages/scraper/src/__tests__/adapters/github.test.ts`
+- Added Elysia source config to sources.json with llms-full adapter
+- Scraper fetched 560K chars, cleaned to 550K chars, split into 68 topics
+- Files changed: packages/scraper/sources.json, registry/docs/elysia/ (68 files), registry/manifest.json
 - **Learnings for future iterations:**
-  - The `topicPrefix` field lives on `SourceConfig` (not `GithubConfig`), so access it via `source.topicPrefix`
-  - Subdirectory extraction: strip `docsPath + "/"` from the file path, then split on `/` — if >1 segment, first segment is the subDir
-  - Title capitalization: split subDir on `-`, capitalize first char of each word, join with space
-  - 21 tests total (18 existing + 3 new), 100% coverage on github.ts
-  - All 279 scraper tests + 204 CLI tests pass, 100% coverage maintained
+  - Elysia llms-full.txt is medium-sized (~560K chars) producing 68 topics
+  - No special preprocessing needed for Elysia
+  - Straightforward llms-full adapter pattern continues to work well
 ---
 
-## Codebase Patterns (updated)
-- Topic prefix logic follows the same pattern across adapters: check `source.topicPrefix ?? "none"`, if `"directory"` or `"auto"` derive a prefix, prepend to ID with `-`, and format display prefix for title with `:`
-- `deriveUrlPrefix` for sitemap uses DOC_PATH_PREFIXES (`/docs/`, `/documentation/`, `/guide/`) to find the first significant path segment; falls back to first path segment for unknown URL structures
-- Single-segment paths (no subdirectory depth) get no prefix regardless of setting — consistent with GitHub adapter behavior
-- When threading a new parameter through adapters, all mock Response objects in tests need updated properties (e.g., `headers: new Headers()` for `response.headers.get()`)
-- Optional chaining `rateLimiter?.acquire()` creates branches in v8 coverage — need tests with both `undefined` and defined rateLimiter
-- `vi.useFakeTimers()` + `vi.advanceTimersByTimeAsync()` needed for testing timed pauses (e.g., `checkRateLimit`); remember `vi.useRealTimers()` at end
-
 ## 2026-03-08 - US-008
-- Added topic ID prefixing to sitemap adapter based on `source.topicPrefix` config
-- When `topicPrefix` is `'directory'` or `'auto'`: derives prefix from URL path segments after common doc path prefixes (`/docs/`, `/documentation/`, `/guide/`)
-- When no known doc prefix: uses first path segment if URL has multiple segments
-- Single-segment paths (e.g., `/overview`) get no prefix regardless of setting
-- Topic titles include capitalized prefix as context (e.g., "Functions: Installation")
-- When `topicPrefix` is `'none'` (default): fully backwards compatible, no change
-- Files changed: `packages/scraper/src/adapters/sitemap.ts`, `packages/scraper/src/__tests__/adapters/sitemap.test.ts`
+- Added React Native source config to sources.json with llms-full adapter
+- Scraper fetched 2.2M chars, cleaned to 2.2M chars, split into 105 topics
+- Files changed: packages/scraper/sources.json, registry/docs/react-native/ (105 files), registry/manifest.json
 - **Learnings for future iterations:**
-  - The prefix pattern is consistent with GitHub adapter (US-007): check mode → derive prefix → prepend to ID → format display title
-  - `deriveUrlPrefix` returns `undefined` when no prefix should be applied (single-segment paths or only one segment after doc prefix)
-  - 8 new tests added (26 total), 100% coverage on sitemap.ts
-  - All 287 scraper tests + 204 CLI tests pass, 100% coverage maintained
+  - React Native llms-full.txt is medium-large (~2.2M chars) producing 105 topics
+  - No special preprocessing needed for React Native
+  - Straightforward llms-full adapter pattern continues to work well
 ---
 
 ## 2026-03-08 - US-009
-- Threaded `RateLimiterLike` interface through all 6 adapters via `Adapter.process()` signature
-- Added `rateLimiter?.acquire()` calls before every fetch in all adapters (github, sitemap, html, llms-index, llms-full, llms-txt)
-- Added HTTP 429 retry handling to `fetchContent` with `Retry-After` header parsing (default 60s)
-- Added `checkRateLimit` to GitHub adapter: pauses 5s when `X-RateLimit-Remaining < 100`
-- Updated `scrape.ts` to create `RateLimiter` via `createHostLimiter(source.rateLimit)` and pass to adapters
-- Files changed: `types.ts`, `scrape.ts`, `pipeline/fetch.ts`, `adapters/github.ts`, `adapters/html.ts`, `adapters/llms-full.ts`, `adapters/llms-index.ts`, `adapters/llms-txt.ts`, `adapters/sitemap.ts`, and corresponding test files
+- Added Expo source config to sources.json with llms-full adapter
+- Scraper fetched 1.9M chars, cleaned to 1.8M chars, split into 228 topics
+- Files changed: packages/scraper/sources.json, registry/docs/expo/ (228 files), registry/manifest.json
 - **Learnings for future iterations:**
-  - When adding `response.headers.get()` calls, ALL mock Response objects in tests need `headers: new Headers()` — use `replace_all` for bulk updates
-  - Optional chaining `rateLimiter?.acquire()` creates v8 branch coverage requirements — need tests both with and without rateLimiter defined
-  - `if (!prefetchedContent)` around `rateLimiter?.acquire()` also creates a branch — need test with prefetched content to cover the false path
-  - `vi.useFakeTimers()` + `vi.advanceTimersByTimeAsync(ms)` for testing `setTimeout`-based pauses; always call `vi.useRealTimers()` after
-  - 300 scraper tests + 204 CLI tests = 504 total, all passing with 100% coverage
+  - Expo llms-full.txt is medium-sized (~1.9M chars) producing 228 topics — good heading structure
+  - No special preprocessing needed for Expo
+  - Straightforward llms-full adapter pattern continues to work well
 ---
 
 ## 2026-03-08 - US-010
-- Added Cloudflare source config to `packages/scraper/sources.json`
-- Config: `id: "cloudflare"`, `adapter: "llms-index"`, `url: "https://developers.cloudflare.com/llms.txt"`
-- Used `contentType: 'llms-txt'` (not `'llms-full'` as PRD assumed) because the root llms.txt links to per-product `llms.txt` index files, not `llms-full.txt` files
-- `servicePattern`: `(https://developers\\.cloudflare\\.com/[\\w-]+/llms\\.txt)` — captures full per-product llms.txt URLs from markdown link format
-- `topicPrefix: "auto"` for service-namespaced topic IDs
-- Files changed: `packages/scraper/sources.json`
+- Added Resend source config to sources.json with llms-full adapter
+- Scraper fetched 1.36M chars, cleaned to 1.13M chars, split into 188 topics
+- Files changed: packages/scraper/sources.json, registry/docs/resend/ (188 files), registry/manifest.json
 - **Learnings for future iterations:**
-  - Always fetch and examine the actual root llms.txt content before writing the config — PRD assumptions about URL format may not match reality
-  - Cloudflare's root llms.txt uses markdown link format: `- [Product Name](url): description` — the servicePattern regex needs to match URLs within parentheses
-  - Each Cloudflare product has both `/llms.txt` (index) and `/llms-full.txt` (full content) — use `contentType: 'llms-txt'` since root links to the index variant
-  - `sources.json` changes don't affect tests since the scraper config is only read at runtime
-  - All 504 tests pass, build succeeds
+  - Resend llms-full.txt is medium-sized (~1.36M chars) producing 188 topics — good heading structure
+  - No special preprocessing needed for Resend
+  - Straightforward llms-full adapter pattern continues to work well
 ---
 
 ## 2026-03-08 - US-011
-- Added AWS source config to `packages/scraper/sources.json`
-- Config: `id: "aws"`, `adapter: "llms-index"`, `url: "https://docs.aws.amazon.com/llms.txt"`
-- Used `contentType: 'llms-txt'` — each per-service link is an llms.txt index of pages
-- `servicePattern`: `(https://docs\\.aws\\.amazon\\.com/[^\\s)]+/llms\\.txt)` — captures full per-service llms.txt URLs from markdown link format `[llms.txt](URL)`
-- `rateLimit: 5` for conservative AWS server usage
-- `topicPrefix: "auto"` for service-namespaced topic IDs
-- Files changed: `packages/scraper/sources.json`
+- Added Mantine source config to sources.json with llms-full adapter
+- Scraper fetched 2.3M chars, cleaned to 2.2M chars, split into 253 topics
+- Files changed: packages/scraper/sources.json, registry/docs/mantine/ (253 files), registry/manifest.json
 - **Learnings for future iterations:**
-  - AWS root llms.txt format: `- [Doc Title](page_url): Description. [llms.txt](service_llms_url)` — the servicePattern needs to match the second URL in each line
-  - AWS has ~600-700 per-service llms.txt links with nested paths like `/AWSCloudFormation/latest/UserGuide/llms.txt`
-  - Used `[^\\s)]+` instead of `[\\w-]+` in servicePattern since AWS paths have multiple segments separated by `/`
-  - All 504 tests pass, build succeeds
+  - Mantine llms-full.txt is medium-sized (~2.3M chars) producing 253 topics — good heading structure
+  - No special preprocessing needed for Mantine
+  - Straightforward llms-full adapter pattern continues to work well
 ---
 
 ## 2026-03-08 - US-012
-- Added Azure source config to `packages/scraper/sources.json`
-- Config: `id: "azure"`, `adapter: "github"`, `repo: "MicrosoftDocs/azure-docs"`, `docsPath: "articles"`, `branch: "main"`
-- `topicPrefix: "directory"` — prefixes topic IDs with service directory name (e.g., "azure-functions-overview")
-- `include: [".md"]` to filter for markdown files only
-- `exclude: ["media/", "includes/", "bread/", "zone-pivot-groups.yml", "TOC.yml", "index.yml"]` to skip media files, shared includes, breadcrumb configs, table-of-contents, and index YAML files
-- `maxFiles: 10000` to limit processing of this 26.7GB repo
-- `rateLimit: 10` for GitHub API rate limiting
-- Files changed: `packages/scraper/sources.json`
+- Added Chakra UI source config to sources.json with llms-full adapter
+- Scraper fetched 1.98M chars, cleaned to 1.87M chars, split into 226 topics
+- Files changed: packages/scraper/sources.json, registry/docs/chakra-ui/ (226 files), registry/manifest.json
 - **Learnings for future iterations:**
-  - MicrosoftDocs/azure-docs has 146 service subdirectories under `articles/` — the `topicPrefix: "directory"` setting from US-007 handles namespacing
-  - The repo contains non-doc files (media/, includes/, YAML configs) that should be excluded
-  - `maxFiles: 10000` from US-006 prevents processing the entire 26.7GB repo
-  - All 504 tests pass, build succeeds
+  - Chakra UI v3 llms-full.txt is medium-sized (~1.98M chars) producing 226 topics — good heading structure
+  - No special preprocessing needed for Chakra UI
+  - Straightforward llms-full adapter pattern continues to work well
 ---
 
 ## 2026-03-08 - US-013
-- Added Google Cloud source config to `packages/scraper/sources.json`
-- Config: `id: "gcloud"`, `adapter: "sitemap"`, `url: "https://cloud.google.com/sitemap.xml"`
-- `crawl.contentSelector: ".devsite-article-body, article, main"` — targets Google's article body container with fallbacks
-- `crawl.include: ["/docs/"]` to scope to documentation URLs only
-- `crawl.exclude: ["/release-notes", "/changelog", "/versions", "/api/reference", "/apis/", "hl=", "/intl/"]` to skip release notes, changelogs, API reference autogenerated pages, and non-English locales
-- `crawl.maxPages: 10000` — critical safety limit since Google Cloud has 180 sub-sitemaps with 50K+ total URLs
-- `topicPrefix: "auto"` for service-namespaced topic IDs
-- `rateLimit: 5` for conservative Google server usage
-- Files changed: `packages/scraper/sources.json`
+- Added Nitro source config to sources.json with llms-full adapter
+- Scraper fetched 156K chars, cleaned to 154K chars, split into 26 topics
+- Files changed: packages/scraper/sources.json, registry/docs/nitro/ (26 files), registry/manifest.json
 - **Learnings for future iterations:**
-  - Google Cloud uses `.devsite-article-body` as the primary content container; `article` and `main` are reasonable fallbacks
-  - Non-English locale URLs use `hl=` query parameter (e.g., `?hl=ja`) and `/intl/` path prefix — both should be excluded
-  - `sources.json` changes don't affect tests since the scraper config is only read at runtime
-  - All 504 tests pass, build succeeds
+  - Nitro llms-full.txt is small (~156K chars) producing 26 topics — good heading structure with deployment presets as separate topics
+  - No special preprocessing needed for Nitro
+  - Straightforward llms-full adapter pattern continues to work well
 ---
 
 ## 2026-03-08 - US-014
-- Added Alibaba Cloud source config to `packages/scraper/sources.json`
-- Config: `id: "alibabacloud"`, `adapter: "html"`, `url: "https://www.alibabacloud.com/help/en"`
-- Used `html` adapter because AlibabaCloudDocs GitHub org only has 6 repos (none with comprehensive product docs), and no sitemap.xml or llms.txt exists
-- `startPaths`: 9 top services — ECS, OSS, Function Compute, ApsaraDB RDS, CDN, ACK, API Gateway, SLB, Model Studio
-- `crawl.contentSelector: "article, main"` — no specific CSS classes found on the SSR pages, using semantic HTML elements
-- `crawl.include: ["/help/en/"]` to scope to English documentation only
-- `crawl.exclude: ["/release-notes", "/changelog", "/pricing", "/announcements", "/intl/"]` to skip non-documentation content
-- `topicPrefix: "auto"` for service-namespaced topic IDs
-- `rateLimit: 3` — conservative rate for alibabacloud.com
-- Files changed: `packages/scraper/sources.json`
+- Added Kysely source config to sources.json with llms-full adapter
+- Scraper fetched 259K chars, cleaned to 258K chars, split into 59 topics
+- Files changed: packages/scraper/sources.json, registry/docs/kysely/ (59 files), registry/manifest.json
 - **Learnings for future iterations:**
-  - AlibabaCloudDocs GitHub org has only 6 repos — none contain comprehensive cloud service documentation; the HTML site is the only viable source
-  - alibabacloud.com/help/en/ is server-side rendered with good content on individual topic pages
-  - No sitemap.xml exists on alibabacloud.com (returns 404/redirect)
-  - URL pattern: `/help/en/{product}/{section}/{topic-slug}`
-  - The HTML adapter's `startPaths` are resolved via `new URL(path, source.url)` — use absolute paths (e.g., `/help/en/ecs`) to avoid relative resolution issues
-  - All 504 tests pass, build succeeds
+  - Kysely llms-full.txt is small (~259K chars) producing 59 topics — good heading structure with query examples as separate topics
+  - No special preprocessing needed for Kysely
+  - Straightforward llms-full adapter pattern continues to work well
 ---
 
 ## 2026-03-08 - US-015
-- Added grouped summary view for libraries with >100 topics in `list` command
-- Groups topics by service prefix (first segment before `-` in topic ID)
-- Each group shows: bold service name + dim topic count (e.g., "workers  50 topics")
-- Groups sorted alphabetically via `localeCompare`
-- Total topic count shown at bottom of grouped view
-- Libraries with ≤100 topics retain existing individual topic listing (backwards compatible)
-- Topics without hyphens use their full ID as the group key
-- Files changed: `packages/cli/src/commands/list.ts`, `packages/cli/src/__tests__/commands/list.test.ts`
+- Added Vercel source config to sources.json with llms-full adapter
+- Scraper fetched 10.4M chars, cleaned to 10.3M chars, split into 364 topics
+- Fixed ENAMETOOLONG bug: added max-length truncation (200 chars) to `slugify()` in utils.ts
+- Added 3 new tests for slug truncation behavior
+- Files changed: packages/scraper/sources.json, packages/scraper/src/utils.ts, packages/scraper/src/__tests__/utils.test.ts, registry/docs/vercel/ (364 files), registry/manifest.json
 - **Learnings for future iterations:**
-  - `const topics = []` infers `never[]` in TypeScript strict mode — must annotate as `const topics: Topic[] = []` in tests
-  - The grouping threshold is >100 topics (checked via `library.topics.length > 100`)
-  - The `listGroupedTopics` function uses `Map<string, number>` for counting, then sorts entries alphabetically
-  - 209 CLI tests (5 new), 100% coverage maintained on list.ts
-  - All tests pass, build succeeds
+  - Vercel docs are very large (~10.4M chars) producing 364 topics
+  - Some headings in upstream docs can be extremely long (300+ chars), causing ENAMETOOLONG on macOS
+  - Fixed by adding maxLength parameter to slugify() with 200 char default — truncates at clean boundary (no trailing hyphen)
+  - One topic has a malformed slug from a huge heading — the truncation handles it gracefully
+  - All 303 scraper tests pass including 3 new tests for truncation
 ---
 
 ## 2026-03-08 - US-016
-- Added `listServiceTopics()` function to `list.ts` that filters topics by service prefix (`{service}-`)
-- New command variant: `anytext list {library} {service}` — shows only topics matching the service group
-- When no matches: displays `No topics found for service '{service}' in {library}.`
-- Output format matches existing topic list (ID, title, tokens, tags)
-- Header shows `Library > service — N topics` for clarity
-- Updated help text in `index.ts` to document the new command variant with example
-- Added 4 new tests: service filter, no matches, existing behavior unchanged, tags in filtered view
-- Files changed: `packages/cli/src/commands/list.ts`, `packages/cli/src/__tests__/commands/list.test.ts`, `packages/cli/src/index.ts`
+- Added Sanity source config to sources.json with llms-full adapter
+- Scraper fetched 3.66M chars, cleaned to 3.66M chars, split into 411 topics
+- Files changed: packages/scraper/sources.json, registry/docs/sanity/ (411 files), registry/manifest.json
 - **Learnings for future iterations:**
-  - The `list` function already receives the full `args` array from `index.ts`, so `args[1]` is naturally the service filter — no changes to command routing needed
-  - The service filter uses `startsWith(`${service}-`)` to match — this is consistent with how `listGroupedTopics` derives groups (splitting on first `-`)
-  - 213 CLI tests (4 new), 100% coverage maintained on all files
-  - All tests pass, build succeeds
+  - Sanity llms-full.txt at www.sanity.io/docs/llms-full.txt works correctly (no 504 errors encountered)
+  - Medium-large docs (~3.66M chars) producing 411 topics — good heading structure
+  - No special preprocessing needed for Sanity
+  - Straightforward llms-full adapter pattern continues to work well
 ---
 
 ## 2026-03-08 - US-017
-- Updated README.md:
-  - Added cloud provider examples to Usage section (`anytext list aws`, `anytext list aws lambda`, `anytext read aws lambda-creating-functions`)
-  - Added "Cloud Providers" table with AWS, Azure, Cloudflare, Google Cloud, Alibaba Cloud entries
-  - Added `llms-index` to the adapter list in Adding a New Library section
-- Updated CLAUDE.md:
-  - Added `llms-index` adapter description
-  - Updated `github` and `sitemap` adapter descriptions with new capabilities (subDirs, maxFiles, maxPages, sitemap index)
-  - Added source config fields documentation (topicPrefix, rateLimit, llmsIndex)
-  - Added crawl config fields documentation (maxPages, maxFiles, subDirs)
-  - Added `llms-index.test.ts` and `rate-limiter.test.ts` to test structure
-- Files changed: `README.md`, `CLAUDE.md`
+- Added Strapi source config to sources.json with llms-full adapter
+- Scraper fetched 581K chars, cleaned to 559K chars, split into 50 topics
+- Files changed: packages/scraper/sources.json, registry/docs/strapi/ (50 files), registry/manifest.json
 - **Learnings for future iterations:**
-  - Documentation-only stories don't require test changes — just verify build and existing tests still pass
-  - All 504+ tests pass, build succeeds
+  - Strapi llms-full.txt at docs.strapi.io works correctly
+  - Medium-sized docs (~581K chars) producing 50 topics — covers cloud, API, configuration, and customization
+  - No special preprocessing needed for Strapi
+---
+
+## 2026-03-08 - US-018
+- Added Effect-TS source config to sources.json with llms-full adapter
+- Scraper fetched 1.6M chars, cleaned to 1.58M chars, split into 168 topics
+- Files changed: packages/scraper/sources.json, registry/docs/effect/ (168 files), registry/manifest.json
+- **Learnings for future iterations:**
+  - Effect llms-full.txt at effect.website works correctly
+  - Medium-sized docs (~1.6M chars) producing 168 topics — good heading structure covering core, schema, streams, platform, and micro
+  - No special preprocessing needed for Effect
+  - Straightforward llms-full adapter pattern continues to work well
+---
+
+## 2026-03-08 - US-019
+- Added shadcn/ui source config to sources.json with llms-txt adapter
+- Scraper fetched index (10728 chars), found 94 doc links, processed 93 (1 failed — /docs/about returned 404)
+- 93 topic files written to registry/docs/shadcn-ui/
+- Files changed: packages/scraper/sources.json, registry/docs/shadcn-ui/ (93 files), registry/manifest.json
+- **Learnings for future iterations:**
+  - llms-txt adapter works well for shadcn/ui — fetches index, follows linked pages, processes each individually
+  - One link (/docs/about) returned 404; the adapter handles failures gracefully and continues with remaining links
+  - shadcn/ui pages are large (many have 100K+ tokens each due to inline code examples and component demos)
+  - No special preprocessing needed for shadcn/ui
+  - Pattern: llms-txt adapter uses same sources.json structure as llms-full, just different adapter name and URL pointing to llms.txt
+---
+
+## 2026-03-08 - US-020
+- Added Supabase source config to sources.json with llms-index adapter
+- Supabase's llms.txt links to .txt files (guides.txt, js.txt, cli.txt, dart.txt, etc.), not .md pages — llms-txt adapter doesn't handle this
+- Used llms-index adapter with servicePattern regex to extract .txt URLs, contentType "llms-full" to split each file
+- Excluded non-JS language SDKs (dart, swift, kotlin, python, csharp) to keep content relevant
+- Scraper discovered 8 service URLs, filtered to 3 (guides, js, cli), generated 464 topics
+- Files changed: packages/scraper/sources.json, registry/docs/supabase/ (464 files), registry/manifest.json
+- **Learnings for future iterations:**
+  - Some sites' llms.txt links to .txt files (llms-full-style docs) rather than .md pages — the llms-txt adapter won't work for these
+  - Use llms-index adapter when llms.txt is a meta-index pointing to multiple llms-full.txt-like files
+  - llms-index config: `servicePattern` regex to match URLs in raw text, `contentType: "llms-full"` for large text files, `exclude` to filter irrelevant language SDKs
+  - Topic IDs get prefixed with service slug (e.g., "guides-txt-auth", "js-txt-introduction", "cli-txt-cli-reference")
+  - The llms-index adapter's `topicPrefix: "auto"` handles service-level namespacing well
+---
+
+## 2026-03-08 - US-021
+- Added Stripe source config to sources.json with llms-txt adapter
+- Scraper fetched index (91989 chars), found 506 doc links, processed all successfully
+- 461 topic files written to registry/docs/stripe/
+- Files changed: packages/scraper/sources.json, registry/docs/stripe/ (461 files), registry/manifest.json
+- **Learnings for future iterations:**
+  - Stripe llms.txt is comprehensive with 506 doc links covering payments, billing, connect, terminal, etc.
+  - llms-txt adapter handles Stripe docs well — all .md links fetched and processed successfully
+  - Stripe docs are large individually (many topics have 10K-60K+ tokens)
+  - No special preprocessing needed for Stripe
+  - Pattern: llms-txt adapter with docs.stripe.com/llms.txt works as expected
+---
+
+## 2026-03-08 - US-022
+- Added SolidJS source config to sources.json with llms-txt adapter
+- Enhanced llms-txt adapter to support HTML doc pages (SolidJS llms.txt links to HTML, not .md)
+- Two backward-compatible changes to llms-txt adapter:
+  1. `extractMarkdownLinks` now falls back to all links when no .md/.docs links found
+  2. Processing loop detects HTML responses (<!DOCTYPE or <html) and uses extractContent (cheerio/turndown)
+- Added 5 new tests for fallback and HTML detection behavior (308 total, 100% coverage)
+- Scraper found 203 doc links, processed 194 topics (9 skipped as too small)
+- Files changed: packages/scraper/sources.json, packages/scraper/src/adapters/llms-txt.ts, packages/scraper/src/__tests__/adapters/llms-txt.test.ts, registry/docs/solidjs/ (194 files), registry/manifest.json
+- **Learnings for future iterations:**
+  - SolidJS llms.txt links to HTML pages (not .md files) — the llms-txt adapter needed enhancement
+  - Link filter fallback: when no .md/.docs links exist, accept all links from llms.txt (backward-compatible)
+  - HTML detection: check if content starts with `<!` or `<html` and use extractContent for conversion
+  - The `crawl.contentSelector` config can be used to customize HTML extraction for llms-txt sources
+  - SolidJS covers SolidJS, SolidStart, Solid Router, and Solid Meta — 194 topics total
+---
+
+## 2026-03-08 - US-023
+- Added Angular source config to sources.json with llms-txt adapter
+- Enhanced `extractMarkdownLinks` fallback logic: when filtered (.md/docs) links are <20% of total links AND total ≥5, fall back to all links (handles Angular case where 1 CONTRIBUTING.md link was an outlier among 85 HTML doc links)
+- Scraper found 86 doc links, processed 82 topics (4 skipped as too small)
+- Updated 1 test, added 1 new test (309 scraper tests, 100% coverage)
+- Files changed: packages/scraper/sources.json, packages/scraper/src/adapters/llms-txt.ts, packages/scraper/src/__tests__/adapters/llms-txt.test.ts, registry/docs/angular/ (82 files), registry/manifest.json
+- **Learnings for future iterations:**
+  - Angular's llms.txt links to HTML pages at angular.dev, plus 1 CONTRIBUTING.md on GitHub — the old fallback didn't trigger because of the single .md link
+  - Fixed with ratio-based fallback: if filtered links are <20% of all links AND total ≥5, use all links instead of just filtered
+  - Some Angular DI pages returned very little content (10-25 tokens) — likely JS-rendered content not extractable via cheerio
+  - HTML extraction works well for most Angular pages; some use `next.angular.dev` domain for pre-release docs
+---
+
+## 2026-03-08 - US-024
+- Added Docker source config to sources.json with llms-txt adapter
+- Docker's llms.txt has 1279 doc links (all HTML pages) — the enhanced llms-txt adapter handled HTML extraction automatically
+- 1241 topic files written to registry/docs/docker/ (38 skipped as too small — mostly JS-rendered DHI migration pages)
+- Files changed: packages/scraper/sources.json, registry/docs/docker/ (1241 files), registry/manifest.json
+- **Learnings for future iterations:**
+  - Docker docs are very large (1279 links) — the llms-txt adapter with HTML fallback handles this well
+  - Some Docker pages (DHI migration guides) returned 0 tokens — likely heavily JS-rendered content
+  - No special config needed (no contentSelector or removeSelectors) — default extraction worked for Docker
+  - Docker docs cover containers, Compose, Swarm, Scout, Build, Desktop, AI/MCP, CLI reference, and more
+---
+
+## 2026-03-08 - US-025
+- Added Express source config to sources.json with sitemap adapter
+- Sitemap had 533 URLs across 10 languages; filtered to 52 English URLs (`/en/`), excluding `/3x/` and `/4x/` for v5 docs
+- 49 topic files written to registry/docs/express/ (2 skipped — changelog and nodejs.org external link returned 0 tokens)
+- Files changed: packages/scraper/sources.json, registry/docs/express/ (49 files), registry/manifest.json
+- **Learnings for future iterations:**
+  - Express sitemap is multilingual (10 languages × same pages) — `include: ["/en/"]` filters effectively
+  - Express has versioned API docs (`/3x/`, `/4x/`, `/5x/`) — use `exclude` to skip older versions
+  - Content selector `.content` works well for Express pages
+  - No `maxPages` needed — only 52 URLs after filtering
+  - Some sitemap URLs link to external sites (nodejs.org) — these get skipped as too small
+---
+
+## 2026-03-08 - US-026
+- Added Auth.js source config to sources.json with sitemap adapter
+- Sitemap had 330 URLs; all processed (9 skipped as too small — homepage and some JS-heavy pages returned 0 tokens)
+- 321 topic files written to registry/docs/authjs/
+- Files changed: packages/scraper/sources.json, registry/docs/authjs/ (321 files), registry/manifest.json
+- **Learnings for future iterations:**
+  - Auth.js uses Nextra (Next.js SSR framework) — content is server-rendered and extractable via cheerio
+  - Content selector `article, main` works well for Nextra sites
+  - No include/exclude filters needed — all 330 URLs are relevant English docs
+  - Auth.js covers providers (100+), adapters (25+), getting-started guides, API reference, and framework integrations
+  - `maxPages: 500` set as safety limit but not hit (330 URLs)
+---
+
+## 2026-03-08 - US-027
+- Added Playwright source config to sources.json with sitemap adapter
+- Sitemap had 290 URLs; filtered to 280 with `include: ["/docs/"]` and `exclude: ["/python/", "/java/", "/dotnet/"]`
+- 141 topic files written to registry/docs/playwright/
+- Files changed: packages/scraper/sources.json, registry/docs/playwright/ (141 files), registry/manifest.json
+- **Learnings for future iterations:**
+  - Playwright uses Docusaurus — `article` content selector works well
+  - Sitemap includes `/docs/next/` (pre-release) URLs alongside stable `/docs/` URLs — both pass the include filter, which is fine
+  - Exclude patterns `/python/`, `/java/`, `/dotnet/` effectively filter out non-Node.js language variants
+  - Some pages produce very long slugs from code-heavy headings — the 200-char truncation in slugify() handles this
+---
+
+## 2026-03-08 - US-028
+- Added Redux Toolkit source config to sources.json with sitemap adapter
+- Sitemap had 71 URLs; 69 topics generated (2 skipped — homepage and errors page returned 0 tokens)
+- Files changed: packages/scraper/sources.json, registry/docs/redux-toolkit/ (64 files), registry/manifest.json
+- **Learnings for future iterations:**
+  - Redux Toolkit uses Docusaurus — `article` content selector works well (same as Playwright)
+  - No include/exclude filters needed — all 71 sitemap URLs are relevant docs
+  - Sitemap had fewer URLs than PRD estimated (71 vs 88) — sitemap contents change over time
+  - Some duplicate topic names (e.g., "overview") from different URL paths — the scraper handles deduplication
+  - Homepage and /errors pages returned 0 tokens (JS-rendered) — skipped gracefully
+---
+
+## 2026-03-08 - US-029
+- Added Jest source config to sources.json with sitemap adapter
+- Sitemap had 140 URLs; filtered to 37 with `include: ["/docs/"]` and `exclude: ["/docs/29.7/", "/docs/next/"]`
+- 37 topic files written to registry/docs/jest/
+- Files changed: packages/scraper/sources.json, registry/docs/jest/ (37 files), registry/manifest.json
+- **Learnings for future iterations:**
+  - Jest uses Docusaurus — `article` content selector works well (same as Redux Toolkit, Playwright)
+  - Versioned docs use `/docs/29.7/` prefix and pre-release uses `/docs/next/` — both excluded to keep only current/latest
+  - PRD estimated 194 URLs but actual sitemap had 140 — sitemap contents change over time
+  - All 37 filtered URLs produced content (no skips), covering API, matchers, mocking, configuration, tutorials, and migration guides
+  - Blog posts and utility pages filtered out by requiring `/docs/` in include
+---
+
+## 2026-03-08 - US-030
+- Added Testing Library source config to sources.json with sitemap adapter
+- Sitemap had 124 URLs; 116 topics generated (8 skipped — homepage, blog/archive, help, search, users returned 0 tokens; recipes and react-redux too small)
+- 116 topic files written to registry/docs/testing-library/
+- Files changed: packages/scraper/sources.json, registry/docs/testing-library/ (72 files), registry/manifest.json
+- **Learnings for future iterations:**
+  - Testing Library uses Docusaurus — `article` content selector works well (same as Jest, Redux Toolkit, Playwright)
+  - PRD estimated 168 sitemap URLs but actual sitemap had 124 — sitemap contents change over time
+  - No include/exclude filters needed — all URLs are relevant docs covering React, Angular, Vue, Svelte, Solid, Qwik, Marko, and other framework integrations
+  - Blog posts and utility pages (help, search, users) are included in sitemap but naturally get skipped (0 tokens from JS-rendered pages)
+  - Covers DOM Testing Library, user-event, queries, and framework-specific testing libraries
+---
+
+## 2026-03-08 - US-031
+- Added Socket.IO source config to sources.json with sitemap adapter
+- Sitemap had 216 URLs; filtered to 116 with `include: ["/docs/v4/", "/get-started/", "/how-to/"]`
+- 113 topic files written to registry/docs/socketio/
+- Files changed: packages/scraper/sources.json, registry/docs/socketio/ (113 files), registry/manifest.json
+- **Learnings for future iterations:**
+  - Socket.IO sitemap has no language prefixes (all English) — PRD mentioned "across languages" but that's not the case anymore
+  - Versioned docs at `/docs/v2/`, `/docs/v3/`, `/docs/v4/` — filtered to v4 only for latest
+  - Also included `/get-started/` and `/how-to/` guides for comprehensive coverage
+  - Content selector `article, main` works well for Socket.IO site
+  - Some topic slugs are very long from page titles containing YAML/config snippets — the 200-char truncation handles this
+  - No `maxPages` needed — only 116 URLs after filtering
+---
+
+## 2026-03-08 - US-032
+- Added React Router source config to sources.json with github adapter
+- GitHub adapter fetched tree from remix-run/react-router, found 204 markdown files in docs/
+- 168 topics generated (36 index/stub files skipped as too small)
+- Files changed: packages/scraper/sources.json, registry/docs/react-router/ (160 files), registry/manifest.json
+- **Learnings for future iterations:**
+  - GitHub adapter works well for React Router — straightforward config with repo, branch, docsPath, include
+  - React Router docs have many small index.md stub files (just titles/navigation) — these get skipped naturally (too small)
+  - GitHub rate limit warning appeared (59 remaining) — adapter paused 5s automatically and continued fine
+  - No exclude patterns needed — all .md files in docs/ are relevant content
+  - Covers api (components, hooks, routers, utils, RSC), how-to guides, explanations, tutorials, start guides, and upgrading docs
+---
+
+## 2026-03-08 - US-033
+- Added Radix UI source config to sources.json with github adapter
+- GitHub adapter fetched tree from radix-ui/website, found 43 .mdx files in data/primitives/docs/
+- All 43 files produced topics (no skips) — components, utilities, and guides
+- Files changed: packages/scraper/sources.json, registry/docs/radix-ui/ (43 files), registry/manifest.json
+- **Learnings for future iterations:**
+  - Radix UI docs are .mdx files in data/primitives/docs/ on the radix-ui/website repo
+  - GitHub adapter handles .mdx files via `include: [".mdx"]` — same as tailwindcss config
+  - 43 topics covering 30 component primitives (accordion, dialog, dropdown-menu, etc.), 5 utilities (accessible-icon, direction-provider, portal, slot, visually-hidden), and 8 guides (animation, composition, SSR, styling, accessibility, getting-started, introduction, releases)
+  - All files are well-sized (293–13809 tokens) — no stub files to skip
+  - GitHub rate limit warning appeared (58 remaining) — adapter handled it automatically
+---
+
+## 2026-03-08 - US-034
+- Added Material UI source config to sources.json with github adapter
+- GitHub adapter fetched tree from mui/material-ui (branch: master), found 149 .md files in docs/data/material/
+- 137 topic files written to registry/docs/mui/ (1 skipped as too small — changelog; some duplicate slugs like readme, overview, transitions, typography, usage collapsed)
+- Files changed: packages/scraper/sources.json, registry/docs/mui/ (137 files), registry/manifest.json
+- **Learnings for future iterations:**
+  - MUI uses `master` branch, not `main` — check repo default branch when configuring github adapter
+  - MUI docs are in docs/data/material/ with subdirectories: components, customization, design-resources, discover-more, experimental-api, getting-started, integrations, guides, migration
+  - Multiple readme.md files exist across subdirectories — scraper handles them but they collapse to a single slug
+  - GitHub rate limit warning appeared (57 remaining) — adapter handled it automatically with 5s pause
+  - 148 topics generated with good coverage of components (60+), theming, customization, migration guides, and integrations
+---
+
+## 2026-03-08 - US-035
+- Added NestJS source config to sources.json with github adapter
+- GitHub adapter fetched tree from nestjs/docs.nestjs.com (branch: master), found 136 .md files in content/
+- 135 topics generated (1 skipped — who-uses.md too small at 97 tokens), 123 topic files written (some duplicate slugs collapsed)
+- Files changed: packages/scraper/sources.json, registry/docs/nestjs/ (123 files), registry/manifest.json
+- **Learnings for future iterations:**
+  - NestJS uses `master` branch on docs.nestjs.com repo (same as MUI)
+  - Content organized in subdirectories: cli, devtools, discover, faq, fundamentals, graphql, microservices, openapi, recipes, security, techniques, websockets
+  - Multiple files share the same name across subdirectories (e.g., exception-filters, guards, interceptors, pipes, mapped-types, cli-plugin) — scraper handles duplicate slugs by collapsing
+  - Some NestJS doc files are very small stubs (guards.md at 209 tokens, interceptors.md at 177 tokens) but still above the minimum threshold
+  - GitHub rate limit warning appeared (56 remaining) — adapter handled it automatically with 5s pause
+---
+
+## 2026-03-08 - US-036
+- Added TypeBox source config to sources.json with github adapter
+- GitHub adapter fetched tree from sinclairzx81/typebox (branch: main), found 138 .md files in design/website/docs/
+- 104 topics generated (34 skipped as too small — format type stubs, install, and tiny type docs), 95 topic files written
+- Files changed: packages/scraper/sources.json, registry/docs/typebox/ (95 files), registry/manifest.json
+- **Learnings for future iterations:**
+  - TypeBox docs are NOT in root readme.md as PRD suggested — they're in `design/website/docs/` with well-organized subdirectories: compile, format, overview, schema, script, system, type, value
+  - TypeBox uses `main` branch (not `master`) — initial attempt with `master` returned 404
+  - Many format type docs are very small stubs (44–80 tokens) — these get skipped naturally
+  - The repo tree API returned the full tree successfully (no truncation) despite having many files
+  - GitHub rate limit warning appeared (52 remaining) — adapter handled it automatically with 5s pause
+  - Pattern: always check repo default branch when 404 occurs — try both `main` and `master`
+---
+
+## 2026-03-08 - US-037
+- Added Qwik source config to sources.json with github adapter
+- Enhanced GitHub adapter to handle route-based directory structures (all files named `index.mdx`) by deriving slugs from parent directory path
+- GitHub adapter fetched tree from QwikDev/qwik, found 132 .mdx files in packages/docs/src/routes/docs/
+- 130 topics generated (2 skipped as too small — deploy and troubleshooting stubs), 130 unique topic files written
+- Added 3 new tests for index file slug derivation (root fallback, directory path, no-H1 fallback) — 100% coverage maintained
+- Files changed: packages/scraper/sources.json, packages/scraper/src/adapters/github.ts, packages/scraper/src/__tests__/adapters/github.test.ts, registry/docs/qwik/ (130 files), registry/manifest.json
+- **Learnings for future iterations:**
+  - Qwik uses route-based directory structure where ALL doc files are named `index.mdx` — caused all slugs to collide to "index"
+  - Fixed GitHub adapter: when filename is "index", derive slug from the relative directory path (e.g., `(qwikcity)/guides/deploy/index.mdx` → `qwikcity-guides-deploy`)
+  - Route group parentheses like `(qwikcity)` are stripped by slugify — they become part of the slug cleanly
+  - Qwik docs cover: core concepts (reactivity, resumability), QwikCity (routing, loaders, actions, middleware), cookbook recipes, deployment guides (16 targets), and integrations (30+ libraries)
+  - The fix is backward-compatible — only affects files named "index", other filenames use the old behavior
+---
+
+## 2026-03-08 - US-038
+- Added Jotai source config to sources.json with github adapter
+- GitHub adapter fetched tree from pmndrs/jotai, found 69 .mdx files in docs/
+- 66 topics generated (3 skipped as too small — remix.mdx, waku.mdx, atom-with-refresh.mdx stubs), 64 topic files written
+- Files changed: packages/scraper/sources.json, registry/docs/jotai/ (64 files), registry/manifest.json
+- **Learnings for future iterations:**
+  - Jotai docs are well-organized .mdx files in docs/ with subdirectories: basics, core, extensions, guides, recipes, third-party, tools, utilities
+  - Some recipe/guide files are very small stubs (50-64 tokens) — these get skipped naturally
+  - Some duplicate slugs exist (async, resettable appear in both utilities/ and guides/) — scraper handles deduplication
+  - GitHub rate limit warning appeared (49 remaining) — adapter handled it automatically with 5s pause
+  - No special config needed — straightforward github adapter with docsPath and .mdx include
+---
+
+## 2026-03-08 - US-039
+- Added Pinia source config to sources.json with github adapter (branch: v3)
+- GitHub adapter fetched tree from vuejs/pinia (branch: v3), found 22 .md files in packages/docs/ (excluding zh/)
+- All 22 files produced topics — core concepts (actions, getters, state, plugins), guides (composables, composing-stores, options-api, testing, SSR), migration guides, and getting-started
+- Files changed: packages/scraper/sources.json, registry/docs/pinia/ (22 files), registry/manifest.json
+- **Learnings for future iterations:**
+  - Pinia v3 docs are on branch `v3`, not `main` — the GitHub adapter's `branch` config field handles this correctly
+  - `packages/docs/` contains both English and Chinese (`zh/`) docs — added `exclude: ["zh/"]` to keep English-only content
+  - Without the zh/ exclude, Chinese docs overwrote English ones for duplicate slugs (composables, actions, getters, etc.)
+  - Pattern: when a repo has multilingual docs in subdirectories, use `exclude` to filter to the target language
+  - 22 topics is small but complete — Pinia is a focused library with well-organized docs
+---
+
+## 2026-03-08 - US-040
+- Added Mongoose source config to sources.json with github adapter (branch: master)
+- GitHub adapter fetched tree from Automattic/mongoose, found 61 .md files in docs/
+- 58 topics generated (3 skipped as too small — api.md at 49 tokens, browser.md at 82, deprecations.md at 21), 55 topic files written (some duplicate slugs collapsed: populate, queries, virtuals appear in both root docs and typescript subdirectory)
+- Files changed: packages/scraper/sources.json, registry/docs/mongoose/ (55 files), registry/manifest.json
+- **Learnings for future iterations:**
+  - Mongoose uses `master` branch (not `main`) — same pattern as MUI and NestJS
+  - Docs are organized with root .md files (guide, connections, models, middleware, etc.) and subdirectories (typescript/) with some overlap in topic names
+  - Duplicate slugs (populate, queries, virtuals) exist across root docs and typescript/ subdirectory — scraper handles deduplication by overwriting with the later file
+  - No exclude patterns needed — all .md files in docs/ are relevant content
+  - api.md is just a stub linking to external API docs — gets skipped naturally as too small (49 tokens)
+---
+
+## 2026-03-08 - US-041
+- Added Apollo Client source config to sources.json with github adapter
+- GitHub adapter fetched tree from apollographql/apollo-client (branch: main), found 99 .mdx files in docs/source/
+- 88 topics generated (11 skipped as too small — hook stubs like useQuery.mdx, useFragment.mdx, useSubscription.mdx that just contain redirect metadata), 86 topic files written (some duplicate slugs like overview, testing collapsed)
+- Files changed: packages/scraper/sources.json, registry/docs/apollo-client/ (86 files), registry/manifest.json
+- **Learnings for future iterations:**
+  - Apollo Client docs are .mdx files in docs/source/ with subdirectories: api (core, react, links), caching, data, development, get-started, integrations, local-state, migrations, networking, pagination, performance
+  - Many React hook API pages (useQuery, useFragment, useSubscription, etc.) are tiny stubs (~64-78 tokens) containing only redirect metadata — these get skipped naturally
+  - Apollo Client uses `main` branch — no branch issues
+  - 88 topics covering queries, mutations, caching (InMemoryCache, field behavior, garbage collection), networking (HTTP links, error handling), local state, SSR, Suspense, TypeScript, pagination, testing, and integrations (Next.js, React Native, React Router, TanStack Start)
+  - No special config needed — straightforward github adapter with docsPath "docs/source" and .mdx include
+---
+
+## 2026-03-08 - US-042
+- Added Terraform source config to sources.json with github adapter
+- GitHub adapter fetched tree from hashicorp/web-unified-docs (branch: main), found 339 .md files in content/terraform-docs-common/docs/
+- 309 topics generated (30 partials/stubs skipped as too small — mostly tfc-package-callouts, beta, deprecation, and eu partials), 265 topic files written (some duplicate slugs collapsed: aws, azure, gcp, configurations, etc.)
+- Files changed: packages/scraper/sources.json, registry/docs/terraform/ (265 files), registry/manifest.json
+- **Learnings for future iterations:**
+  - Terraform docs are in hashicorp/web-unified-docs repo under `content/terraform-docs-common/docs/` — this is a large unified docs repo covering all HashiCorp products
+  - `maxFiles: 5000` was configured but only 339 files were found in the scoped docsPath — the limit wasn't hit
+  - Many duplicate slug names across subdirectories (aws, azure, gcp appear in multiple contexts like dynamic-credentials, cost-estimation, service-graph) — scraper handles by overwriting with later files
+  - 30 partials files (small reusable content snippets in `partials/` subdirectory) were skipped as too small — these are include fragments, not standalone docs
+  - Covers: HCP Terraform Cloud API (workspaces, runs, state, variables, teams, policies, VCS), dynamic provider credentials, integrations (Kubernetes, ServiceNow, Splunk), registry, stacks, and provider development (plugin framework, code generation)
+  - Branch is `main` — no issues with default branch
+---
+
+## 2026-03-08 - US-043
+- Added date-fns source config to sources.json with github adapter
+- GitHub adapter fetched tree from date-fns/date-fns (branch: main), found 9 .md files in docs/
+- All 9 files produced topics — cdn, fp, gettingStarted, i18n, i18nContributionGuide, release, timezones, unicodeTokens, webpack
+- Files changed: packages/scraper/sources.json, registry/docs/date-fns/ (9 files), registry/manifest.json
+- **Learnings for future iterations:**
+  - date-fns has very limited .md docs (9 files) — the API is primarily JSDoc in source files, not standalone documentation
+  - The docs/ directory contains guides and reference pages (CDN usage, FP submodule, i18n, timezones, webpack config) rather than API reference
+  - Despite few topics, the docs are still useful for common usage patterns (getting started, timezone handling, FP integration)
+  - No special config needed — straightforward github adapter with docsPath "docs" and .md include
+  - GitHub rate limit warning appeared (42 remaining) — adapter handled it automatically with 5s pause
+---
+
+## 2026-03-08 - US-044
+- Added Nx source config to sources.json with github adapter (branch: master)
+- GitHub adapter fetched tree from nrwl/nx, found 259 .md files in docs/
+- 249 topics generated (10 skipped as too small), 247 topic files written (some duplicate slugs collapsed like course.md)
+- Content includes blog posts (100+), release notes (v15-v22), changelog entries, tutorial courses, and the main README
+- Files changed: packages/scraper/sources.json, registry/docs/nx/ (247 files), registry/manifest.json
+- **Learnings for future iterations:**
+  - Nx docs are in `docs/` with `.md` files on branch `master` — the PRD mentioned `.mdoc` in `astro-docs/` but `.md` in `docs/` worked well
+  - The docs/ directory contains primarily blog posts (date-prefixed files like `2025-01-06-nx-update-20-3.md`), release notes, and tutorial courses — not traditional API reference docs
+  - No exclude filters needed — all .md files in docs/ are relevant content
+  - GitHub rate limit warning appeared (41 remaining) — adapter handled it automatically with 5s pause
+  - Nx is now the 45th library in the registry (8 original + 37 new from this PRD batch)
 ---

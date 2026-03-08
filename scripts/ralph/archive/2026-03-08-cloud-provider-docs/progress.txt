@@ -1,0 +1,14 @@
+# Ralph Progress Log
+Started: Sat Mar  8 2026
+---
+
+## Codebase Patterns
+- Sources are added to `packages/scraper/sources.json` — each entry needs: id, name, description, version, adapter, and adapter-specific fields
+- `sources.json` changes don't affect tests since the scraper config is only read at runtime
+- llms-full adapter: just needs `url` field pointing to llms-full.txt endpoint
+- llms-txt adapter: needs `url` field pointing to llms.txt index
+- sitemap adapter: needs `url` (sitemap.xml), `crawl.contentSelector`, optional `crawl.include`/`crawl.exclude`/`crawl.maxPages`
+- github adapter: needs `github.repo`, `github.docsPath`, `github.include`, optional `github.branch`/`github.maxFiles`/`github.subDirs`
+- After adding source config, build scraper and run: `cd packages/scraper && pnpm build && node dist/index.js --library {id}`
+- Verify output in `registry/docs/{id}/` and `registry/manifest.json`
+- Always examine actual URL content before writing config — PRD assumptions about URL format may not match reality

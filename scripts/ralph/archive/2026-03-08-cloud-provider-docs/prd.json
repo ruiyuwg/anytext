@@ -15,7 +15,7 @@
         "Typecheck passes"
       ],
       "priority": 1,
-      "passes": true,
+      "passes": false,
       "notes": "Prisma has both llms-full.txt and llms.txt. Use llms-full for simplicity."
     },
     {
@@ -30,7 +30,7 @@
         "Typecheck passes"
       ],
       "priority": 2,
-      "passes": true,
+      "passes": false,
       "notes": ""
     },
     {
@@ -45,7 +45,7 @@
         "Typecheck passes"
       ],
       "priority": 3,
-      "passes": true,
+      "passes": false,
       "notes": ""
     },
     {
@@ -60,7 +60,7 @@
         "Typecheck passes"
       ],
       "priority": 4,
-      "passes": true,
+      "passes": false,
       "notes": "URL redirects to developers.openai.com — verify scraper follows the redirect."
     },
     {
@@ -75,7 +75,7 @@
         "Typecheck passes"
       ],
       "priority": 5,
-      "passes": true,
+      "passes": false,
       "notes": "js.langchain.com redirects to docs.langchain.com. Covers all LangChain, not just JS SDK."
     },
     {
@@ -90,7 +90,7 @@
         "Typecheck passes"
       ],
       "priority": 6,
-      "passes": true,
+      "passes": false,
       "notes": "Redirects through docs.pmnd.rs. Both llms-full.txt and llms.txt available."
     },
     {
@@ -105,7 +105,7 @@
         "Typecheck passes"
       ],
       "priority": 7,
-      "passes": true,
+      "passes": false,
       "notes": ""
     },
     {
@@ -120,7 +120,7 @@
         "Typecheck passes"
       ],
       "priority": 8,
-      "passes": true,
+      "passes": false,
       "notes": ""
     },
     {
@@ -135,7 +135,7 @@
         "Typecheck passes"
       ],
       "priority": 9,
-      "passes": true,
+      "passes": false,
       "notes": ""
     },
     {
@@ -150,7 +150,7 @@
         "Typecheck passes"
       ],
       "priority": 10,
-      "passes": true,
+      "passes": false,
       "notes": ""
     },
     {
@@ -165,7 +165,7 @@
         "Typecheck passes"
       ],
       "priority": 11,
-      "passes": true,
+      "passes": false,
       "notes": ""
     },
     {
@@ -180,7 +180,7 @@
         "Typecheck passes"
       ],
       "priority": 12,
-      "passes": true,
+      "passes": false,
       "notes": "v3 docs."
     },
     {
@@ -195,7 +195,7 @@
         "Typecheck passes"
       ],
       "priority": 13,
-      "passes": true,
+      "passes": false,
       "notes": ""
     },
     {
@@ -210,7 +210,7 @@
         "Typecheck passes"
       ],
       "priority": 14,
-      "passes": true,
+      "passes": false,
       "notes": ""
     },
     {
@@ -225,7 +225,7 @@
         "Typecheck passes"
       ],
       "priority": 15,
-      "passes": true,
+      "passes": false,
       "notes": ""
     },
     {
@@ -240,7 +240,7 @@
         "Typecheck passes"
       ],
       "priority": 16,
-      "passes": true,
+      "passes": false,
       "notes": "Use www.sanity.io/docs URL — sanity.io/docs sometimes returns 504."
     },
     {
@@ -255,7 +255,7 @@
         "Typecheck passes"
       ],
       "priority": 17,
-      "passes": true,
+      "passes": false,
       "notes": ""
     },
     {
@@ -270,7 +270,7 @@
         "Typecheck passes"
       ],
       "priority": 18,
-      "passes": true,
+      "passes": false,
       "notes": ""
     },
     {
@@ -285,7 +285,7 @@
         "Typecheck passes"
       ],
       "priority": 19,
-      "passes": true,
+      "passes": false,
       "notes": "Has llms.txt only, no llms-full.txt."
     },
     {
@@ -300,8 +300,8 @@
         "Typecheck passes"
       ],
       "priority": 20,
-      "passes": true,
-      "notes": "Links to guides and multi-language API refs. Used llms-index adapter since llms.txt links to .txt files, not .md pages."
+      "passes": false,
+      "notes": "Links to guides and multi-language API refs."
     },
     {
       "id": "US-021",
@@ -315,7 +315,7 @@
         "Typecheck passes"
       ],
       "priority": 21,
-      "passes": true,
+      "passes": false,
       "notes": "Comprehensive docs organized by product."
     },
     {
@@ -330,7 +330,7 @@
         "Typecheck passes"
       ],
       "priority": 22,
-      "passes": true,
+      "passes": false,
       "notes": "Covers SolidJS, SolidStart, Solid Router, Solid Meta."
     },
     {
@@ -345,8 +345,8 @@
         "Typecheck passes"
       ],
       "priority": 23,
-      "passes": true,
-      "notes": "llms.txt links to HTML pages, not .md files. Enhanced fallback logic: when filtered .md links are <20% of total, use all links."
+      "passes": false,
+      "notes": "llms.txt links to HTML pages, not .md files. The llms-txt adapter should handle this."
     },
     {
       "id": "US-024",
@@ -360,7 +360,7 @@
         "Typecheck passes"
       ],
       "priority": 24,
-      "passes": true,
+      "passes": false,
       "notes": "llms.txt links to HTML pages."
     },
     {
@@ -377,8 +377,8 @@
         "Typecheck passes"
       ],
       "priority": 25,
-      "passes": true,
-      "notes": "Sitemap has 533 URLs across 10 languages. Filtered to /en/ only, excluding /3x/ and /4x/ for v5 docs."
+      "passes": false,
+      "notes": "Sitemap has 109 URLs across 10 languages. Filter to /en/ only."
     },
     {
       "id": "US-026",
@@ -394,8 +394,8 @@
         "Typecheck passes"
       ],
       "priority": 26,
-      "passes": true,
-      "notes": "No llms.txt. ~330 sitemap URLs after dedup. Nextra SSR site — content extracted via `article, main` selector."
+      "passes": false,
+      "notes": "No llms.txt. ~500 sitemap URLs."
     },
     {
       "id": "US-027",
@@ -412,8 +412,8 @@
         "Typecheck passes"
       ],
       "priority": 27,
-      "passes": true,
-      "notes": "346 sitemap URLs across 4 languages. Filtered to /docs/ only, excluding /python/, /java/, /dotnet/. 280 URLs after filtering, 141 topics."
+      "passes": false,
+      "notes": "346 sitemap URLs across 4 languages. Filter to Node.js docs only."
     },
     {
       "id": "US-028",
@@ -428,8 +428,8 @@
         "Typecheck passes"
       ],
       "priority": 28,
-      "passes": true,
-      "notes": "71 sitemap URLs, 69 topics (2 skipped — homepage and errors page returned 0 tokens). Docusaurus site — `article` content selector works well."
+      "passes": false,
+      "notes": "88 sitemap URLs."
     },
     {
       "id": "US-029",
@@ -445,8 +445,8 @@
         "Typecheck passes"
       ],
       "priority": 29,
-      "passes": true,
-      "notes": "140 sitemap URLs total. Filtered to 37 unversioned /docs/ URLs, excluding /docs/29.7/ and /docs/next/. Docusaurus site — `article` content selector works well."
+      "passes": false,
+      "notes": "194 sitemap URLs including versioned docs. Filter to latest."
     },
     {
       "id": "US-030",
@@ -461,7 +461,7 @@
         "Typecheck passes"
       ],
       "priority": 30,
-      "passes": true,
+      "passes": false,
       "notes": "168 sitemap URLs. Covers React, Angular, Vue, and other framework variants."
     },
     {
@@ -478,8 +478,8 @@
         "Typecheck passes"
       ],
       "priority": 31,
-      "passes": true,
-      "notes": "216 sitemap URLs, filtered to 116 with include ['/docs/v4/', '/get-started/', '/how-to/']. No language prefixes — all English. 113 topic files generated."
+      "passes": false,
+      "notes": "404 sitemap URLs across languages and versions."
     },
     {
       "id": "US-032",
@@ -493,8 +493,8 @@
         "Typecheck passes"
       ],
       "priority": 32,
-      "passes": true,
-      "notes": "Has .md files in docs/ directory (api, how-to, tutorials, upgrading). 204 files found, 168 topics generated (36 index/stub files skipped as too small)."
+      "passes": false,
+      "notes": "Has .md files in docs/ directory (api, how-to, tutorials, upgrading)."
     },
     {
       "id": "US-033",
@@ -508,8 +508,8 @@
         "Typecheck passes"
       ],
       "priority": 33,
-      "passes": true,
-      "notes": "Docs are .mdx files in data/primitives/docs/components/. 43 topics generated covering 30 component primitives, utilities, and guides."
+      "passes": false,
+      "notes": "Docs are .mdx files in data/primitives/docs/components/."
     },
     {
       "id": "US-034",
@@ -523,8 +523,8 @@
         "Typecheck passes"
       ],
       "priority": 34,
-      "passes": true,
-      "notes": "Docs in docs/data/material/ with components, customization, getting-started, guides. Used branch 'master' (not 'main'). 149 files found, 137 topic files (148 topics, some duplicate slugs like readme/overview/transitions/typography/usage)."
+      "passes": false,
+      "notes": "Docs in docs/data/material/ with components, customization, getting-started, guides."
     },
     {
       "id": "US-035",
@@ -538,8 +538,8 @@
         "Typecheck passes"
       ],
       "priority": 35,
-      "passes": true,
-      "notes": "Dedicated docs repo with .md files in content/ directory. Used branch 'master'. 136 files found, 135 topics generated (1 who-uses page skipped as too small). 123 topic files written (some duplicate slugs collapsed)."
+      "passes": false,
+      "notes": "Dedicated docs repo with .md files in content/ directory."
     },
     {
       "id": "US-036",
@@ -553,8 +553,8 @@
         "Typecheck passes"
       ],
       "priority": 36,
-      "passes": true,
-      "notes": "Docs are in design/website/docs/ directory (not root readme.md). 138 files found, 104 topics generated (34 skipped as too small — format docs, install, and tiny type stubs). 95 topic files written (some duplicate slugs collapsed)."
+      "passes": false,
+      "notes": "Main docs are in readme.md. May have limited topic count."
     },
     {
       "id": "US-037",
@@ -568,8 +568,8 @@
         "Typecheck passes"
       ],
       "priority": 37,
-      "passes": true,
-      "notes": "Route-based directory structure with deeply nested .mdx files. Enhanced GitHub adapter to derive slugs from parent directory path for index files. 132 files found, 130 topics generated (2 skipped as too small), 130 topic files written."
+      "passes": false,
+      "notes": "Route-based directory structure with deeply nested .mdx files."
     },
     {
       "id": "US-038",
@@ -583,8 +583,8 @@
         "Typecheck passes"
       ],
       "priority": 38,
-      "passes": true,
-      "notes": "Has .mdx files in docs/ (core, utilities, extensions, guides, recipes). 69 files found, 66 topics generated (3 skipped as too small — remix, waku, atom-with-refresh stubs), 64 topic files written."
+      "passes": false,
+      "notes": "Has .mdx files in docs/ (core, utilities, extensions, guides, recipes)."
     },
     {
       "id": "US-039",
@@ -598,8 +598,8 @@
         "Typecheck passes"
       ],
       "priority": 39,
-      "passes": true,
-      "notes": "Docs are on branch v3, not main. GitHub adapter supports non-default branches via `branch` field. Excluded zh/ directory to keep English-only docs. 22 files found, 22 topics generated."
+      "passes": false,
+      "notes": "Docs are on branch v3, not main. Verify the GitHub adapter supports non-default branches."
     },
     {
       "id": "US-040",
@@ -613,8 +613,8 @@
         "Typecheck passes"
       ],
       "priority": 40,
-      "passes": true,
-      "notes": "Has .md files in docs/ (guide, api, connections, models). Uses branch 'master'. 61 files found, 58 topics generated (3 skipped as too small — api.md, browser.md, deprecations.md), 55 topic files written (some duplicate slugs like populate, queries, virtuals collapsed)."
+      "passes": false,
+      "notes": "Has .md files in docs/ (guide, api, connections, models)."
     },
     {
       "id": "US-041",
@@ -628,8 +628,8 @@
         "Typecheck passes"
       ],
       "priority": 41,
-      "passes": true,
-      "notes": "Docs are .mdx files in docs/source/ (caching, data, get-started, networking, pagination). 99 files found, 88 topics generated (11 hook stubs skipped as too small), 86 topic files written."
+      "passes": false,
+      "notes": "Docs are .mdx files in docs/source/ (caching, data, get-started, networking, pagination)."
     },
     {
       "id": "US-042",
@@ -643,8 +643,8 @@
         "Typecheck passes"
       ],
       "priority": 42,
-      "passes": true,
-      "notes": "Large unified docs repo. Used maxFiles 5000 (only 339 files found). 309 topics generated (30 partials/stubs skipped as too small), 265 topic files written (some duplicate slugs collapsed)."
+      "passes": false,
+      "notes": "Large unified docs repo. Use maxFiles to limit scope."
     },
     {
       "id": "US-043",
@@ -658,7 +658,7 @@
         "Typecheck passes"
       ],
       "priority": 43,
-      "passes": true,
+      "passes": false,
       "notes": "Limited .md docs. API is primarily JSDoc in source files. May produce few topics."
     },
     {
@@ -673,8 +673,8 @@
         "Typecheck passes"
       ],
       "priority": 44,
-      "passes": true,
-      "notes": "Nx uses .mdoc (Markdoc) in astro-docs/ — try .md in docs/ first. Used .md in docs/ with branch master. 259 files found, 249 topics generated (10 skipped as too small), 247 topic files written. Includes blog posts, release notes, changelog entries, and tutorial courses."
+      "passes": false,
+      "notes": "Nx uses .mdoc (Markdoc) in astro-docs/ — try .md in docs/ first. May need include filter adjustment."
     }
   ]
 }
