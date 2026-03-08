@@ -1,0 +1,25 @@
+In some cases, when your code uses timers (`setTimeout`, `setInterval`, `clearTimeout`, `clearInterval`), your tests may become unpredictable, slow and flaky.
+
+To solve these problems, or if you need to rely on specific timestamps in your code, most testing frameworks offer the option to replace the real timers in your tests with fake ones. This has a side effect - when using fake timers in your tests, _all_ of the code inside your test uses fake timers.
+
+The common pattern to setup fake timers is usually within the `beforeEach`, for example:
+
+```
+// Fake timers using JestbeforeEach(() => {  jest.useFakeTimers()})
+```
+
+Since fake timers are mocking native timer functions, it is necessary to restore the timers after your test runs, just like regular mocks. This prevents fake timers leaking into other test cases and cleanup functions, where real timers are expected.
+
+For that you usually call `useRealTimers` in `afterEach`.
+
+It's important to also call `runOnlyPendingTimers` before switching to real timers. This will ensure you flush all the pending timers before you switch to real timers. If you don't progress the timers and just switch to real timers, the scheduled tasks won't get executed and you'll get an unexpected behavior. This is mostly important for 3rd parties that schedule tasks without you being aware of it.
+
+Here's an example of doing that using jest:
+
+```
+// Running all pending timers and switching to real timers using JestafterEach(() => {  jest.runOnlyPendingTimers()  jest.useRealTimers()})
+```
+
+note
+
+Combining fake timers with `user-event` may cause test timeouts. Refer to [`advanceTimers`](/docs/user-event/options#advancetimers) option to prevent this issue.

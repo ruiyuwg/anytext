@@ -1,0 +1,256 @@
+On this page
+
+## Overview[​](#overview "Direct link to heading")
+
+Queries are the methods that Testing Library gives you to find elements on the page. There are several [types of queries](#types-of-queries) ("get", "find", "query"); the difference between them is whether the query will throw an error if no element is found or if it will return a Promise and retry. Depending on what page content you are selecting, different queries may be more or less appropriate. See the [priority guide](#priority) for recommendations on how to make use of semantic queries to test your page in the most accessible way.
+
+After selecting an element, you can use the [Events API](/docs/dom-testing-library/api-events) or [user-event](/docs/user-event/intro) to fire events and simulate user interactions with the page, or use Jest and [jest-dom](/docs/ecosystem-jest-dom) to make assertions about the element.
+
+There are Testing Library helper methods that work with queries. As elements appear and disappear in response to actions, [Async APIs](/docs/dom-testing-library/api-async) like [`waitFor`](/docs/dom-testing-library/api-async#waitfor) or [`findBy` queries](/docs/dom-testing-library/api-async#findby-queries) can be used to await the changes in the DOM. To find only elements that are children of a specific element, you can use [`within`](/docs/dom-testing-library/api-within). If necessary, there are also a few options you can [configure](/docs/dom-testing-library/api-configuration), like the timeout for retries and the default testID attribute.
+
+## Example[​](#example "Direct link to heading")
+
+```
+import {render, screen} from '@testing-library/react' // (or /dom, /vue, ...)test('should show login form', () => {  render(<Login />)  const input = screen.getByLabelText('Username')  // Events and assertions...})
+```
+
+## Types of Queries[​](#types-of-queries "Direct link to heading")
+
+-   Single Elements
+    -   `getBy...`: Returns the matching node for a query, and throw a descriptive error if no elements match _or_ if more than one match is found (use `getAllBy` instead if more than one element is expected).
+    -   `queryBy...`: Returns the matching node for a query, and return `null` if no elements match. This is useful for asserting an element that is not present. Throws an error if more than one match is found (use `queryAllBy` instead if this is OK).
+    -   `findBy...`: Returns a Promise which resolves when an element is found which matches the given query. The promise is rejected if no element is found or if more than one element is found after a default timeout of 1000ms. If you need to find more than one element, use `findAllBy`.
+-   Multiple Elements
+    -   `getAllBy...`: Returns an array of all matching nodes for a query, and throws an error if no elements match.
+    -   `queryAllBy...`: Returns an array of all matching nodes for a query, and return an empty array (`[]`) if no elements match.
+    -   `findAllBy...`: Returns a promise which resolves to an array of elements when any elements are found which match the given query. The promise is rejected if no elements are found after a default timeout of `1000`ms.
+        -   `findBy` methods are a combination of `getBy*` queries and [`waitFor`](/docs/dom-testing-library/api-async#waitfor). They accept the `waitFor` options as the last argument (i.e. `await screen.findByText('text', queryOptions, waitForOptions)`)
+
+Summary Table
+
+  
+
+Type of Query
+
+0 Matches
+
+1 Match
+
+\>1 Matches
+
+Retry (Async/Await)
+
+**Single Element**
+
+`getBy...`
+
+Throw error
+
+Return element
+
+Throw error
+
+No
+
+`queryBy...`
+
+Return `null`
+
+Return element
+
+Throw error
+
+No
+
+`findBy...`
+
+Throw error
+
+Return element
+
+Throw error
+
+Yes
+
+**Multiple Elements**
+
+`getAllBy...`
+
+Throw error
+
+Return array
+
+Return array
+
+No
+
+`queryAllBy...`
+
+Return `[]`
+
+Return array
+
+Return array
+
+No
+
+`findAllBy...`
+
+Throw error
+
+Return array
+
+Return array
+
+Yes
+
+## Priority[​](#priority "Direct link to heading")
+
+Based on [the Guiding Principles](/docs/guiding-principles), your test should resemble how users interact with your code (component, page, etc.) as much as possible. With this in mind, we recommend this order of priority:
+
+1.  **Queries Accessible to Everyone** Queries that reflect the experience of visual/mouse users as well as those that use assistive technology.
+    1.  `getByRole`: This can be used to query every element that is exposed in the [accessibility tree](https://developer.mozilla.org/en-US/docs/Glossary/AOM). With the `name` option you can filter the returned elements by their [accessible name](https://www.w3.org/TR/accname-1.1/). This should be your top preference for just about everything. There's not much you can't get with this (if you can't, it's possible your UI is inaccessible). Most often, this will be used with the `name` option like so: `getByRole('button', {name: /submit/i})`. Check the [list of roles](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques#Roles).
+    2.  `getByLabelText`: This method is really good for form fields. When navigating through a website form, users find elements using label text. This method emulates that behavior, so it should be your top preference.
+    3.  `getByPlaceholderText`: [A placeholder is not a substitute for a label](https://www.nngroup.com/articles/form-design-placeholders/). But if that's all you have, then it's better than alternatives.
+    4.  `getByText`: Outside of forms, text content is the main way users find elements. This method can be used to find non-interactive elements (like divs, spans, and paragraphs).
+    5.  `getByDisplayValue`: The current value of a form element can be useful when navigating a page with filled-in values.
+2.  **Semantic Queries** HTML5 and ARIA compliant selectors. Note that the user experience of interacting with these attributes varies greatly across browsers and assistive technology.
+    1.  `getByAltText`: If your element is one which supports `alt` text (`img`, `area`, `input`, and any custom element), then you can use this to find that element.
+    2.  `getByTitle`: The title attribute is not consistently read by screenreaders, and is not visible by default for sighted users
+3.  **Test IDs**
+    1.  `getByTestId`: The user cannot see (or hear) these, so this is only recommended for cases where you can't match by role or text or it doesn't make sense (e.g. the text is dynamic).
+
+## Using Queries[​](#using-queries "Direct link to heading")
+
+The base queries from DOM Testing Library require you to pass a `container` as the first argument. Most framework-implementations of Testing Library provide a pre-bound version of these queries when you render your components with them which means you _do not have to provide a container_. In addition, if you just want to query `document.body` then you can use the [`screen`](#screen) export as demonstrated below (using `screen` is recommended).
+
+The primary argument to a query can be a _string_, _regular expression_, or _function_. There are also options to adjust how node text is parsed. See [TextMatch](#textmatch) for documentation on what can be passed to a query.
+
+Given the following DOM elements (which can be rendered by React, Vue, Angular, or plain HTML code):
+
+```
+<body>  <div id="app">    <label for="username-input">Username</label>    <input id="username-input" />  </div></body>
+```
+
+You can use a query to find an element (byLabelText, in this case):
+
+```
+import {screen, getByLabelText} from '@testing-library/dom'// With screen:const inputNode1 = screen.getByLabelText('Username')// Without screen, you need to provide a container:const container = document.querySelector('#app')const inputNode2 = getByLabelText(container, 'Username')
+```
+
+### `queryOptions`[​](#queryoptions "Direct link to heading")
+
+You can pass a `queryOptions` object with the query type. See the docs for each query type to see available options, e.g. [byRole API](/docs/queries/byrole#api).
+
+### `screen`[​](#screen "Direct link to heading")
+
+All of the queries exported by DOM Testing Library accept a `container` as the first argument. Because querying the entire `document.body` is very common, DOM Testing Library also exports a `screen` object which has every query that is pre-bound to `document.body` (using the [`within`](/docs/dom-testing-library/api-within) functionality). Wrappers such as React Testing Library re-export `screen` so you can use it the same way.
+
+Here's how you use it:
+
+-   Native
+-   React
+-   Angular
+-   Cypress
+
+```
+import {screen} from '@testing-library/dom'document.body.innerHTML = `  <label for="example">Example</label>  <input id="example" />`const exampleInput = screen.getByLabelText('Example')
+```
+
+```
+import {render, screen} from '@testing-library/react'render(  <div>    <label htmlFor="example">Example</label>    <input id="example" />  </div>,)const exampleInput = screen.getByLabelText('Example')
+```
+
+```
+import {render, screen} from '@testing-library/angular'await render(`  <div>    <label for="example">Example</label>    <input id="example" />  </div>`)const exampleInput = screen.getByLabelText('Example')
+```
+
+```
+cy.findByLabelText('Example').should('exist')
+```
+
+> **Note**
+> 
+> You need a global DOM environment to use `screen`. If you're using jest, with the [testEnvironment](https://jestjs.io/docs/en/configuration#testenvironment-string) set to `jsdom`, a global DOM environment will be available for you.
+> 
+> If you're loading your test with a `script` tag, make sure it comes after the `body`. An example can be seen [here](https://github.com/testing-library/dom-testing-library/issues/700#issuecomment-692218886).
+
+## `TextMatch`[​](#textmatch "Direct link to heading")
+
+Most of the query APIs take a `TextMatch` as an argument, which means the argument can be either a _string_, _regex_, or a _function_ of signature `(content?: string, element?: Element | null) => boolean` which returns `true` for a match and `false` for a mismatch.
+
+### TextMatch Examples[​](#textmatch-examples "Direct link to heading")
+
+Given the following HTML:
+
+```
+<div>Hello World</div>
+```
+
+**_Will_ find the div:**
+
+```
+// Matching a string:screen.getByText('Hello World') // full string matchscreen.getByText('llo Worl', {exact: false}) // substring matchscreen.getByText('hello world', {exact: false}) // ignore case// Matching a regex:screen.getByText(/World/) // substring matchscreen.getByText(/world/i) // substring match, ignore casescreen.getByText(/^hello world$/i) // full string match, ignore casescreen.getByText(/Hello W?oRlD/i) // substring match, ignore case, searches for "hello world" or "hello orld"// Matching with a custom function:screen.getByText((content, element) => content.startsWith('Hello'))
+```
+
+**_Will not_ find the div:**
+
+```
+// full string does not matchscreen.getByText('Goodbye World')// case-sensitive regex with different casescreen.getByText(/hello world/)// function looking for a span when it's actually a div:screen.getByText((content, element) => {  return element.tagName.toLowerCase() === 'span' && content.startsWith('Hello')})
+```
+
+### Precision[​](#precision "Direct link to heading")
+
+Queries that take a `TextMatch` also accept an object as the final argument that can contain options that affect the precision of string matching:
+
+-   `exact`: Defaults to `true`; matches full strings, case-sensitive. When false, matches substrings and is not case-sensitive.
+    -   it has no effect when used together with `regex` or `function` arguments.
+    -   in most cases, using a regex instead of a string combined with `{ exact: false }` gives you more control over fuzzy matching so it should be preferred.
+-   `normalizer`: An optional function which overrides normalization behavior. See [`Normalization`](#normalization).
+
+### Normalization[​](#normalization "Direct link to heading")
+
+Before running any matching logic against text in the DOM, `DOM Testing Library` automatically normalizes that text. By default, normalization consists of trimming whitespace from the start and end of text, and **collapsing multiple adjacent whitespace characters within the string into a single space**.
+
+If you want to prevent that normalization, or provide alternative normalization (e.g. to remove Unicode control characters), you can provide a `normalizer` function in the options object. This function will be given a string and is expected to return a normalized version of that string.
+
+> **Note**
+> 
+> Specifying a value for `normalizer` _replaces_ the built-in normalization, but you can call `getDefaultNormalizer` to obtain a built-in normalizer, either to adjust that normalization or to call it from your own normalizer.
+
+`getDefaultNormalizer` takes an options object which allows the selection of behaviour:
+
+-   `trim`: Defaults to `true`. Trims leading and trailing whitespace
+-   `collapseWhitespace`: Defaults to `true`. Collapses inner whitespace (newlines, tabs, repeated spaces) into a single space.
+
+#### Normalization Examples[​](#normalization-examples "Direct link to heading")
+
+To perform a match against text without trimming:
+
+```
+screen.getByText('text', {  normalizer: getDefaultNormalizer({trim: false}),})
+```
+
+To override normalization to remove some Unicode characters whilst keeping some (but not all) of the built-in normalization behavior:
+
+```
+screen.getByText('text', {  normalizer: str =>    getDefaultNormalizer({trim: false})(str).replace(/[\u200E-\u200F]*/g, ''),})
+```
+
+## Manual Queries[​](#manual-queries "Direct link to heading")
+
+On top of the queries provided by the testing library, you can use the regular [`querySelector` DOM API](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector) to query elements. Note that using this as an escape hatch to query by class or id is not recommended because they are invisible to the user. Use a testid if you have to, to make your intention to fall back to non-semantic queries clear and establish a stable API contract in the HTML.
+
+```
+// @testing-library/reactconst {container} = render(<MyComponent />)const foo = container.querySelector('[data-foo="bar"]')
+```
+
+## Browser extension[​](#browser-extension "Direct link to heading")
+
+Do you still have problems knowing how to use Testing Library queries?
+
+There is a very cool Browser extension for Chrome named [Testing Playground](https://chrome.google.com/webstore/detail/testing-playground/hejbmebodbijjdhflfknehhcgaklhano), and it helps you find the best queries to select elements. It allows you to inspect the element hierarchies in the Browser's Developer Tools, and provides you with suggestions on how to select them, while encouraging good testing practices.
+
+## Playground[​](#playground "Direct link to heading")
+
+If you want to get more familiar with these queries, you can try them out on [testing-playground.com](https://testing-playground.com). Testing Playground is an interactive sandbox where you can run different queries against your own html, and get visual feedback matching the rules mentioned above.

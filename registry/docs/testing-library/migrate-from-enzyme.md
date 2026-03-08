@@ -1,0 +1,176 @@
+On this page
+
+This page is intended for developers who have experience with Enzyme and are trying to understand how to migrate to React Testing Library. It does not go into great detail about how to migrate all types of tests, but it does have some helpful information for those who are comparing Enzyme with React Testing Library.
+
+## What is React Testing Library?[​](#what-is-react-testing-library "Direct link to heading")
+
+React Testing Library is part of an open-source project named [Testing Library](https://github.com/testing-library). There are several other helpful tools and libraries in the Testing Library project which you can use to write more concise and useful tests. Besides React Testing Library, here are some of the project's other libraries that can help you along the way:
+
+-   **[@testing-library/jest-dom](https://github.com/testing-library/jest-dom)**: `jest-dom` provides a set of custom Jest matchers that you can use to extend Jest. These make your tests more declarative, clearer to read, and easier to maintain.
+    
+-   **[@testing-library/user-event](https://github.com/testing-library/user-event):** `user-event` tries to simulate the real events that happen in the browser as the user interacts with elements on the page. For example, `userEvent.click(checkbox)` would change the state of the checkbox.
+    
+
+## Why should I use React Testing Library?[​](#why-should-i-use-react-testing-library "Direct link to heading")
+
+Enzyme is a powerful test library, and its contributors did a lot for the JavaScript community. In fact, many of the React Testing Library maintainers used and contributed to Enzyme for years before developing and working on React Testing Library. So we want to say thank you to the contributors of Enzyme!
+
+The primary purpose of React Testing Library is to increase confidence in your tests by testing your components in the way a user would use them. Users don't care what happens behind the scenes, they just see and interact with the output. Instead of accessing the components' internal APIs or evaluating their `state`, you'll get more confidence by writing your tests based on the component output.
+
+React Testing Library aims to solve the problem that many developers face when writing tests with Enzyme, which allows (and encourages) developers to test [implementation details](https://kentcdodds.com/blog/testing-implementation-details). Tests which do this ultimately prevent you from modifying and refactoring the component without changing its tests. As a result, the tests slow down development speed and productivity. Every small change may require rewriting some part of your tests, even if the change does not affect the component's output.
+
+Rewriting your tests in React Testing library is worthwhile because you'll be trading tests that slow you down for tests that give you more confidence and increase your productivity in the long run.
+
+## How to migrate from Enzyme to React Testing Library?[​](#how-to-migrate-from-enzyme-to-react-testing-library "Direct link to heading")
+
+To ensure a successful migration, we recommend doing it incrementally by running the two test libraries side by side in the same application, porting your Enzyme tests to React Testing Library one by one. That makes it possible to migrate even large and complex applications without disrupting other business because the work can be done collaboratively and spread out over time.
+
+## Install React Testing Library[​](#install-react-testing-library "Direct link to heading")
+
+First, install React Testing Library and the `jest-dom` helper library (you can check [this page](/docs/react-testing-library/setup) for the complete installation and setup guide).
+
+-   npm
+-   Yarn
+
+```
+npm install --save-dev @testing-library/react @testing-library/jest-dom
+```
+
+```
+yarn add --dev @testing-library/react @testing-library/jest-dom
+```
+
+## Import React Testing Library to your test[​](#import-react-testing-library-to-your-test "Direct link to heading")
+
+If you're using Jest (you can use other test frameworks), then you only need to import the following modules into your test file:
+
+```
+// import React so you can use JSX (React.createElement) in your testimport React from 'react'/** * render: lets us render the component as React would * screen: a utility for finding elements the same way the user does */import {render, screen} from '@testing-library/react'
+```
+
+The test structure can be the same as you would write with Enzyme:
+
+```
+test('test title', () => {  // Your tests come here...})
+```
+
+> Note: you can also use `describe` and `it` blocks with React Testing Library. React Testing Library doesn't replace Jest, just Enzyme. We recommend `test` because it helps with this: [Avoid Nesting When You're Testing](https://kentcdodds.com/blog/avoid-nesting-when-youre-testing).
+
+## Basic Enzyme to React Testing Library migration examples[​](#basic-enzyme-to-react-testing-library-migration-examples "Direct link to heading")
+
+One thing to keep in mind is that there's not a one-to-one mapping of Enzyme features to React Testing Library features. Many Enzyme features result in inefficient tests anyway, so some of the features you're accustomed to with Enzyme need to be left behind (no more need for a `wrapper` variable or `wrapper.update()` calls, etc.).
+
+React Testing Library has helpful queries which let you access your component's elements and their properties. We'll show some typical Enzyme tests along with alternatives using React Testing Library.
+
+Let's say we have a `Welcome` component which shows a welcome message. We will have a look at both Enzyme and React Testing Library tests to learn how we can test this component:
+
+**React Component**
+
+The following component gets a `name` from `props` and shows a welcome message in an `h1` element. It also has a text input which users can change to a different name, and the template updates accordingly. Check the live version on [CodeSandbox](https://codesandbox.io/s/ecstatic-hellman-fh7in).
+
+```
+const Welcome = props => {  const [values, setValues] = useState({    firstName: props.firstName,    lastName: props.lastName,  })  const handleChange = event => {    setValues({...values, [event.target.name]: event.target.value})  }  return (    <div>      <h1>        Welcome, {values.firstName} {values.lastName}      </h1>      <form name="userName">        <label>          First Name          <input            value={values.firstName}            name="firstName"            onChange={handleChange}          />        </label>        <label>          Last Name          <input            value={values.lastName}            name="lastName"            onChange={handleChange}          />        </label>      </form>    </div>  )}export default Welcome
+```
+
+### Test 1: Render the component, and check if the `h1` value is correct[​](#test-1-render-the-component-and-check-if-the-h1-value-is-correct "Direct link to heading")
+
+**Enzyme test**
+
+```
+test('has correct welcome text', () => {  const wrapper = shallow(<Welcome firstName="John" lastName="Doe" />)  expect(wrapper.find('h1').text()).toEqual('Welcome, John Doe')})
+```
+
+**React Testing library**
+
+```
+test('has correct welcome text', () => {  render(<Welcome firstName="John" lastName="Doe" />)  expect(screen.getByRole('heading')).toHaveTextContent('Welcome, John Doe')})
+```
+
+As you can see, the tests are pretty similar. Enzyme's `shallow` renderer doesn't render sub-components, so React Testing Library's `render` method is more similar to Enzyme's `mount` method.
+
+In React Testing Library, you don't need to assign the `render` result to a variable (i.e. `wrapper`). You can simply access the rendered output by calling functions on the `screen` object. The other good thing to know is that React Testing Library automatically cleans up the environment after each test so you don't need to call `cleanup` in an `afterEach` or `beforeEach` function.
+
+The other thing that you might notice is `getByRole` which has `'heading'` as its argument. `'heading'` is the accessible role of the `h1` element. You can learn more about them on the [queries documentation page](/docs/queries/byrole). One of the things people quickly learn to love about Testing Library is how it encourages you to write more accessible applications (because if it's not accessible, then it's harder to test).
+
+### Test 2: Input texts must have correct value[​](#test-2-input-texts-must-have-correct-value "Direct link to heading")
+
+In the component above, the input values are initialized with the `props.firstName` and `props.lastName` values. We need to check whether the value is correct or not.
+
+**Enzyme**
+
+```
+test('has correct input value', () => {  const wrapper = shallow(<Welcome firstName="John" lastName="Doe" />)  expect(wrapper.find('input[name="firstName"]').value).toEqual('John')  expect(wrapper.find('input[name="lastName"]').value).toEqual('Doe')})
+```
+
+**React Testing Library**
+
+```
+test('has correct input value', () => {  render(<Welcome firstName="John" lastName="Doe" />)  expect(screen.getByRole('form')).toHaveFormValues({    firstName: 'John',    lastName: 'Doe',  })})
+```
+
+Cool! It's pretty simple and handy, and the tests are clear enough that we don't need to talk much about them. Something that you might notice is that the `<form>` has a `role="form"` attribute, but what is it?
+
+`role` is one of the accessibility-related attributes that is recommended to use to improve your web application for people with disabilities. Some elements have default `role` values and you don't need to set one for them, but some others like `<div>` do not have default `role` values. You can use different approaches to access the `<div>` element, but we recommend trying to access elements by their implicit `role` to make sure your component is accessible by people with disabilities and those using screen readers. [This section](/docs/queries/byrole) of the query documentation might help you understand the concepts better.
+
+> A `<form>` element must have a `name` attribute in order to have an implicit `role` of `'form'` (as required by the specification).
+
+React Testing Library aims to test the components how users use them. Users see buttons, headings, forms and other elements by their role, not by their `id`, `class`, or element tag name. Therefore, when you use React Testing Library you should avoid accessing the DOM with the `document.querySelector` API. (You _can_ use it in your tests, but it's not recommended for the reasons stated in this paragraph.)
+
+React Testing Library exposes some handy query APIs which help you access the component elements efficiently. You can see the [list of available queries here](/docs/queries/about#types-of-queries). If you're not sure which query you should use in a given situation, we have a great page which explains [which query to use](/docs/queries/about#priority), so check it out!
+
+If you still have a question about which of React Testing Library's queries to use, then check out [testing-playground.com](https://testing-playground.com) and the accompanying Chrome extension **[Testing Playground](https://chrome.google.com/webstore/detail/testing-playground/hejbmebodbijjdhflfknehhcgaklhano)** which aims to enable developers to find the best query when writing tests. It also helps you find the best queries to select elements. It allows you to inspect the element hierarchies in the Chrome Developer Tools and provides you with suggestions on how to select them, all while encouraging good testing practices.
+
+## Using act() and wrapper.update()[​](#using-act-and-wrapperupdate "Direct link to heading")
+
+When testing asynchronous code in Enzyme, you usually need to call `act()` to run your tests correctly. When using React Testing Library, you don't need to explicitly call `act()` most of the time because it wraps API calls with `act()` by default.
+
+`update()` syncs the Enzyme component tree snapshot with the React component tree, so you may see `wrapper.update()` in Enzyme tests. React Testing Library does not have (or need) a similar method, which is good for you since you need to handle fewer things!
+
+## Simulate user events[​](#simulate-user-events "Direct link to heading")
+
+There are two ways to simulate user events with React Testing Library. One way is to use the [`user-event`](/docs/user-event/intro) library, and the other way is to use [`fireEvent`](/docs/dom-testing-library/api-events) which is included in React Testing Library. `user-event` is actually built on top of `fireEvent` (which simply calls `dispatchEvent` on the given element). `user-event` is generally recommended because it ensures that all the events are fired in the correct order for typical user interactions. This helps ensure your tests resemble the way your software is actually used.
+
+To use the `@testing-library/user-event` module, first install it:
+
+-   npm
+-   Yarn
+
+```
+npm install --save-dev @testing-library/user-event @testing-library/dom
+```
+
+```
+yarn add --dev @testing-library/user-event @testing-library/dom
+```
+
+Now you can import it into your test:
+
+```
+import userEvent from '@testing-library/user-event'
+```
+
+To demonstrate how to use the `user-event` library, imagine we have a `Checkbox` component which shows a checkbox input and an associated label. We want to simulate the event of a user clicking the checkbox:
+
+```
+import React from 'react'const Checkbox = () => {  return (    <div>      <label htmlFor="checkbox">Check</label>      <input id="checkbox" type="checkbox" />    </div>  )}export default Checkbox
+```
+
+We want to test that when a user clicks on the checkbox's associated label, the input's "checked" property is properly set. Let's see how we might write a test for that case:
+
+```
+test('handles click correctly', async () => {  render(<Checkbox />)  const user = userEvent.setup()  // You can also call this method directly on userEvent,  // but using the methods from `.setup()` is recommended.  await user.click(screen.getByText('Check'))  expect(screen.getByLabelText('Check')).toBeChecked()})
+```
+
+Nice!
+
+### Triggering class methods in tests (`wrapper.instance()`)[​](#triggering-class-methods-in-tests-wrapperinstance "Direct link to heading")
+
+As we already discussed, we recommend against testing implementation details and things that users will not be aware of. We aim to test and interact with the component more like how our users would.
+
+> If your test uses \`instance()\` or \`state()\`, know that you're testing things that the user couldn't possibly know about or even care about, which will take your tests further from giving you confidence that things will work when your user uses them. — [Kent C. Dodds](https://kentcdodds.com/blog/why-i-never-use-shallow-rendering#calling-methods-in-react-components)
+
+If you're unsure how to test something internal to your component, then take a step back and consider: "What would the user do to trigger this code to run?" Then make your test do that.
+
+### How to `shallow` render a component?[​](#how-to-shallow-render-a-component "Direct link to heading")
+
+In general, you should avoid mocking out components. However, if you need to, then try using [Jest's mocking feature](https://jestjs.io/docs/en/manual-mocks.html). For more information, see the [FAQ](/docs/react-testing-library/faq).

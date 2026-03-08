@@ -1,0 +1,53 @@
+See also the [main FAQ](/docs/dom-testing-library/faq) for questions not specific to Vue testing.
+
+Is Vue Testing Library a replacement for the official @vue/test-utils?
+
+Short answer: yes, it is. If you use Vue Testing Library (VTL) there's no need to install [@vue/test-utils](https://github.com/vuejs/vue-test-utils).
+
+Longer answer: VTL is built on top of @vue/test-utils. The official library is used to render Vue components (by calling [`mount`](https://test-utils.vuejs.org/api/#mount)) and exposes some of its methods (while hiding others). You can check the full list of available methods in the [API](/docs/vue-testing-library/api) section.
+
+Do I need to install DOM Testing Library?
+
+Nope! VTL imports everything it needs from DOM Testing Library, and then re-exports it.
+
+What queries does Vue Testing Library provide?
+
+All queries from DOM Testing Library. See [Queries](/docs/queries/about) for full list.
+
+If I can't use shallow rendering, how do I mock out components in tests?
+
+In general, you should avoid mocking out components (see [the Guiding Principles section](/docs/guiding-principles)).
+
+However if you need to, you can either use Jest's [mocking feature](https://facebook.github.io/jest/docs/en/manual-mocks.html) or the [`global.stubs`](https://test-utils.vuejs.org/api/#global-stubs) key provided by @vue/test-utils.
+
+```
+import {render} from '@testing-library/vue'import Component from './Component'test('Can stub components', () => {  render(Component, {    global: {stubs: ['FontAwesomeIcon']},  })})
+```
+
+You can check out a [working example](https://github.com/testing-library/vue-testing-library/blob/main/src/__tests__/stubs.js) in the GitHub repository of VTL.
+
+How can I test if an element has appeared / has disappeared?
+
+Check the [Appearance and Disappearance](/docs/guide-disappearance) section of the Guide for available methods to test appearance and disappearance.
+
+If you want to check if an element was never rendered, you might want to write something like the following:
+
+```
+expect(queryByText('submit')).toBeNull()// or, if using jest-dom:import '@testing-library/jest-dom'expect(queryByText('submit')).not.toBeInTheDocument()
+```
+
+Why does my Vue Router state seem to be shared between tests?
+
+By default, Vue Router uses [`hash` routing mode](https://router.vuejs.org/api/#mode), which stores route updates in `window.location`. Test runners, such as Jest, do not reset the JSDOM environment in between test invocations, so route transitions from previous tests can leak into subsequent tests, even though a new Vue Router is created with each call to `render`.
+
+To work around this issue, pass an instantiated router using `abstract` mode. `abstract` mode does not store route information on the JSDOM `window`, so routing information will not leak between tests. For example:
+
+```
+import {render} from '@testing-library/vue'import Component from './Component.vue'import VueRouter from 'vue-router'test('uses abstract mode for the router', async () => {  const router = new VueRouter({    mode: 'abstract',    routes: [      // Your routes here    ],  })  const renderResult = render(Component, {    routes: router,  })  // Unlike the router in `hash` mode, the initial routing stack is empty. So,  // you need to push an initial route to the stack.  await router.push('/')})
+```
+
+To reduce boilerplate, you can create a custom render function to use throughout your test suite. For example:
+
+```
+// test-utils.jsimport {render} from '@testing-library/vue'import VueRouter from 'vue-router'export async function renderApp(component, options) {  const router = new VueRouter({    mode: 'abstract',    routes: [      // Your routes here    ],  })  const renderResult = render(component, {    routes: router,    ...options,  })  // Unlike the router in `hash` mode, the initial routing stack is empty. So,  // you need to push an initial route to the stack.  await router.push('/')  return renderResult}
+```

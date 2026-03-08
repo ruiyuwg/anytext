@@ -1,0 +1,54 @@
+On this page
+
+## Basic example[​](#basic-example "Direct link to heading")
+
+-   JavaScript
+-   TypeScript
+
+```
+<template>  <div>    <p>Times clicked: {{ count }}</p>    <button @click="increment">increment</button>  </div></template><script>  export default {    data: () => ({      count: 0,    }),    methods: {      increment() {        this.count++      },    },  }</script>
+```
+
+```
+import {render, fireEvent, screen} from '@testing-library/vue'import Component from './Component.vue'test('increments value on click', async () => {  render(Component)  // screen has all queries that you can use in your tests.  // getByText returns the first matching node for the provided text, and  // throws an error if no elements match or if more than one match is found.  screen.getByText('Times clicked: 0')  const button = screen.getByText('increment')  // Dispatch a native click event to our button element.  await fireEvent.click(button)  await fireEvent.click(button)  screen.getByText('Times clicked: 2')})
+```
+
+```
+<template>  <div>    <p>Times clicked: {{ count }}</p>    <button @click="increment">increment</button>  </div></template><script lang="ts">  export default {    data: (): {count: number} => ({      count: 0,    }),    methods: {      increment(): void {        this.count++      },    },  }</script>
+```
+
+```
+import {render, fireEvent, screen} from '@testing-library/vue'import Component from './Component.vue'test('increments value on click', async () => {  render(Component)  // screen has all queries that you can use in your tests.  // getByText returns the first matching node for the provided text, and  // throws an error if no elements match or if more than one match is found.  screen.getByText('Times clicked: 0')  const button = screen.getByText('increment')  // Dispatch a native click event to our button element.  await fireEvent.click(button)  await fireEvent.click(button)  screen.getByText('Times clicked: 2')})
+```
+
+## Example using `v-model`:[​](#example-using-v-model "Direct link to heading")
+
+-   JavaScript
+-   TypeScript
+
+```
+<template>  <div>    <p>Hi, my name is {{ user }}</p>    <label for="username">Username:</label>    <input v-model="user" id="username" name="username" />  </div></template><script>  export default {    data: () => ({      user: 'Alice',    }),  }</script>
+```
+
+```
+import {render, fireEvent, screen} from '@testing-library/vue'import Component from './Component.vue'test('properly handles v-model', async () => {  render(Component)  // Asserts initial state.  screen.getByText('Hi, my name is Alice')  // Get the input DOM node by querying the associated label.  const usernameInput = screen.getByLabelText(/username/i)  // Updates the <input> value and triggers an `input` event.  // fireEvent.input() would make the test fail.  await fireEvent.update(usernameInput, 'Bob')  screen.getByText('Hi, my name is Bob')})
+```
+
+```
+<template>  <div>    <p>Hi, my name is {{ user }}</p>    <label for="username">Username:</label>    <input v-model="user" id="username" name="username" />  </div></template><script lang="ts">  export default {    data: (): {user: string} => ({      user: 'Alice',    }),  }</script>
+```
+
+```
+import {render, fireEvent, screen} from '@testing-library/vue'import Component from './Component.vue'test('properly handles v-model', async () => {  render(Component)  // Asserts initial state.  screen.getByText('Hi, my name is Alice')  // Get the input DOM node by querying the associated label.  const usernameInput = screen.getByLabelText(/username/i)  // Updates the <input> value and triggers an `input` event.  // fireEvent.input() would make the test fail.  await fireEvent.update(usernameInput, 'Bob')  screen.getByText('Hi, my name is Bob')})
+```
+
+## More examples[​](#more-examples "Direct link to heading")
+
+You'll find examples of testing with different libraries in [the test directory](https://github.com/testing-library/vue-testing-library/tree/master/src/__tests__).
+
+Some included are:
+
+-   [`vuex`](https://github.com/testing-library/vue-testing-library/blob/main/src/__tests__/vuex.js)
+-   [`vue-router`](https://github.com/testing-library/vue-testing-library/tree/main/src/__tests__/vue-router.js)
+-   [`vue-validate`](https://github.com/testing-library/vue-testing-library/tree/main/src/__tests__/validate-plugin.js)
+-   [`vue-i18n`](https://github.com/testing-library/vue-testing-library/blob/main/src/__tests__/translations-vue-i18n.js)

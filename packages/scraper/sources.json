@@ -486,6 +486,17 @@
       }
     },
     {
+      "id": "testing-library",
+      "name": "Testing Library",
+      "description": "Simple and complete testing utilities for React, Vue, Angular, and other UI frameworks with user-centric queries",
+      "version": "16",
+      "adapter": "sitemap",
+      "url": "https://testing-library.com/sitemap.xml",
+      "crawl": {
+        "contentSelector": "article"
+      }
+    },
+    {
       "id": "azure",
       "name": "Azure",
       "description": "Microsoft Azure cloud platform with compute, storage, databases, AI, and 200+ services",

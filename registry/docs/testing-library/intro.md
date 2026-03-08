@@ -1,0 +1,96 @@
+On this page
+
+[`webdriverio-testing-library`](https://github.com/testing-library/webdriverio-testing-library) allows the use of dom-testing-library queries in [WebdriverIO](https://webdriver.io/) for end-to-end web testing.
+
+## Install[​](#install "Direct link to heading")
+
+> Be sure to follow the [WebdriverIO install & config instructions first](https://webdriver.io/docs/gettingstarted/)
+
+then just
+
+-   npm
+-   Yarn
+
+```
+npm install --save-dev @testing-library/webdriverio
+```
+
+```
+yarn add --dev @testing-library/webdriverio
+```
+
+-   [webdriverio-testing-library on GitHub](https://github.com/testing-library/webdriverio-testing-library)
+
+## API[​](#api "Direct link to heading")
+
+### `setupBrowser`[​](#setupbrowser "Direct link to heading")
+
+Accepts a WebdriverIO [browser object](https://webdriver.io/docs/browserobject) and returns dom-testing-library [queries](/docs/queries/about) modifed to return WebdriverIO elements like normal [selectors](https://webdriver.io/docs/selectors/). **All queries are async** and are bound to `document.body` by default.
+
+```
+import {setupBrowser} from '@testing-library/webdriverio'it('can click button', async () => {  const {getByText} = setupBrowser(browser)  const button = await getByText('Button Text')  await button.click()  expect(await button.getText()).toEqual('Button Clicked')})
+```
+
+`setupBrowser` also adds queries as commands to the browser and to all WebdriverIO elements. The browser commands are scoped to `document.body`. The element commands are scoped to the element in the same way as if it was passed to [`within`](#within).
+
+```
+it('adds queries as browser commands', async () => {  setupBrowser(browser)  expect(await browser.getByText('Page Heading')).toBeDefined()})it('adds queries as element commands scoped to element', async () => {  setupBrowser(browser)  const nested = await browser.$('*[data-testid="nested"]')  const button = await nested.getByText('Button Text')  await button.click()  expect(await button.getText()).toEqual('Button Clicked')})
+```
+
+When using [sync mode](https://webdriver.io/docs/sync-vs-async#sync-mode) these commands are also synchronous:
+
+```
+it('adds queries as browser commands', async () => {  setupBrowser(browser)  expect(browser.getByText('Page Heading')).toBeDefined()})it('adds queries as element commands scoped to element', async () => {  setupBrowser(browser)  const nested = browser.$('*[data-testid="nested"]')  const button = nested.getByText('Button Text')  button.click()  expect(button.getText()).toEqual('Button Clicked')})
+```
+
+When using v7.19 or higher of WebdriverIO you can also use chainable queries. Chainable queries are added to the browser and element as commands with the format `{query}$`.
+
+```
+it('can chain browser getBy queries', async () => {  setupBrowser(browser)  await browser.getByTestId$('nested').getByText$('Button Text').click()  const buttonText = await browser    .getByTestId$('nested')    .getByText$('Button Text')    .getText()  expect(buttonText).toEqual('Button Clicked')})it('can chain element getBy queries', async () => {  const {getByTestId} = setupBrowser(browser)  const nested = await getByTestId('nested')  await nested.getByText$('Button Text').click()  const buttonText = await browser.getByText$('Button Clicked').getText()  expect(buttonText).toEqual('Button Clicked')})it('can chain getAllBy queries', async () => {  setupBrowser(browser)  await browser.getByTestId$('nested').getAllByText$('Button Text')[0].click()  expect(await browser.getAllByText('Button Clicked')).toHaveLength(1)})
+```
+
+### `within`[​](#within "Direct link to heading")
+
+Accepts a WebdriverIO element and returns queries scoped to that element
+
+```
+import {within} from '@testing-library/webdriverio'it('within scopes queries to element', async () => {  const nested = await browser.$('*[data-testid="nested"]')  const button = await within(nested).getByText('Button Text')  await button.click()  expect(await button.getText()).toEqual('Button Clicked')})
+```
+
+### `configure`[​](#configure "Direct link to heading")
+
+Lets you [configure dom-testing-library](/docs/dom-testing-library/api-configuration)
+
+```
+import {configure} from '@testing-library/webdriverio'beforeEach(() => {  configure({testIdAttribute: 'data-automation-id'})})afterEach(() => {  configure(null)})it('lets you configure queries', async () => {  const {getByTestId} = setupBrowser(browser)  expect(await getByTestId('testid-in-data-automation-id-attr')).toBeDefined()})
+```
+
+## TypeScript[​](#typescript "Direct link to heading")
+
+This library comes with full typescript definitions. To use the commands added by [`setupBrowser`](#setupbrowser) the `Browser` and `Element` interfaces in the global `WebdriverIO` namespace need to be extended. Add the following to a typescript module:
+
+```
+import {WebdriverIOQueries} from '@testing-library/webdriverio'declare global {  namespace WebdriverIO {    interface Browser extends WebdriverIOQueries {}    interface Element extends WebdriverIOQueries {}  }}
+```
+
+If you are using the `@wdio/sync` package you will need to use the `WebdriverIOQueriesSync` type to extend the interfaces:
+
+```
+import {WebdriverIOQueriesSync} from '@testing-library/webdriverio'declare global {  namespace WebdriverIO {    interface Browser extends WebdriverIOQueriesSync {}    interface Element extends WebdriverIOQueriesSync {}  }}
+```
+
+To add chainable query types you need to extend the above interfaces as well as `ChainablePromiseElement` with `WebdriverIOQueriesChainable`:
+
+```
+import {WebdriverIOQueriesChainable, WebdriverIOQueries} from '../../src'declare global {  namespace WebdriverIO {    interface Browser      extends WebdriverIOQueries,        WebdriverIOQueriesChainable<Browser> {}    interface Element      extends WebdriverIOQueries,        WebdriverIOQueriesChainable<Element> {}  }}declare module 'webdriverio' {  interface ChainablePromiseElement<T extends WebdriverIO.Element | undefined>    extends WebdriverIOQueriesChainable<T> {}}
+```
+
+If you are finding an error similar to this:
+
+```
+browser.getByRole('navigation')// "Argument of type '"navigation"' is not assignable to parameter of type 'ByRoleOptions | undefined'."
+```
+
+you need to include "DOM" in the [lib](https://www.typescriptlang.org/tsconfig#lib) option of your tsconfig. See [here](https://github.com/testing-library/webdriverio-testing-library/issues/22) for more information.
+
+Additional information about using typescript with WebdriverIO can be found [here](https://webdriver.io/docs/typescript/)

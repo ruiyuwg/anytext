@@ -1,0 +1,119 @@
+On this page
+
+The following options allow to adjust the behavior of `user-event` APIs. They can be applied per [`setup()`](/docs/user-event/setup).
+
+### advanceTimers[​](#advancetimers "Direct link to heading")
+
+`user-event` adds a [delay](#delay) between some subsequent inputs. When using [fake timers](/docs/using-fake-timers) it is necessary to set this option to your test runner's time advancement function. For example:
+
+```
+const user = userEvent.setup({advanceTimers: jest.advanceTimersByTime})
+```
+
+caution
+
+You may find suggestions to set `delay: null` to prevent test timeouts when using fake timers. That is not recommended, as it may cause unexpected behaviour. Starting from v14.1, we suggest using `advanceTimers` option instead.
+
+```
+(delay: number) => Promise<void> | void
+```
+
+`default`: `() => Promise.resolve()`
+
+### applyAccept[​](#applyaccept "Direct link to heading")
+
+When using [`upload()`](/docs/user-event/utility#upload), automatically discard files that don't match an `accept` property if such property exists on the element.
+
+`default`: `true`
+
+### autoModify[​](#automodify "Direct link to heading")
+
+We intend to automatically apply modifier keys for printable characters in the future.  
+I.e. `A` implying `{Shift>}a{/Shift}` if caps lock is not active.
+
+This options allows you to opt out of this change in foresight.  
+The feature therefore will not constitute a breaking change.
+
+`default`: `true`
+
+### delay[​](#delay "Direct link to heading")
+
+Between some subsequent inputs like typing a series of characters the code execution is delayed per `setTimeout` for (at least) `delay` milliseconds.
+
+This moves the next changes at least to the next macro task and allows other (asynchronous) code to run between events.
+
+`null` prevents `setTimeout` from being called.
+
+`default`: `0`
+
+### document[​](#document "Direct link to heading")
+
+The document.
+
+This defaults to the owner document of an element if an API is called [directly](/docs/user-event/setup#direct-api) with an element and without setup. Otherwise it falls back to the global document.
+
+`default`: `element.ownerDocument ?? globalThis.document`
+
+### keyboardMap[​](#keyboardmap "Direct link to heading")
+
+An array of keyboard keys the keyboard device consists of.
+
+This allows to plug in different layouts / localizations.
+
+`default`: [A "standard" US-104-QWERTY keyboard.](https://github.com/testing-library/user-event/blob/main/src/keyboard/keyMap.ts)
+
+### pointerEventsCheck[​](#pointereventscheck "Direct link to heading")
+
+The pointer API includes a check if an element has or inherits `pointer-events: none`.  
+This check is known to be expensive and very expensive when checking deeply nested nodes.
+
+This option determines how often the pointer related APIs perform the check.
+
+This is a binary flag option. You can combine multiple Levels.
+
+-   `PointerEventsCheckLevel.Never`:  
+    No pointer events check
+-   `PointerEventsCheckLevel.EachTarget`:  
+    Check each event target once
+-   `PointerEventsCheckLevel.EachApiCall`:  
+    Check each event target once per API
+-   `PointerEventsCheckLevel.EachTrigger`:  
+    Check pointer events on every user interaction that triggers a bunch of events. E.g. once for releasing a mouse button even though this triggers `pointerup`, `mouseup`, `click`, etc...
+
+`default`: `PointerEventsCheckLevel.EachApiCall`
+
+### pointerMap[​](#pointermap "Direct link to heading")
+
+An array of available pointer keys.
+
+This allows to plug in different pointer devices.
+
+`default`: [A simple mouse and a touchscreen](https://github.com/testing-library/user-event/blob/main/src/pointer/keyMap.ts)
+
+### skipAutoClose[​](#skipautoclose "Direct link to heading")
+
+[`type()`](/docs/user-event/utility#type) automatically releases any keys still pressed at the end of the call.  
+This option allows to opt out of this feature.
+
+`default`: false
+
+### skipClick[​](#skipclick "Direct link to heading")
+
+[`type()`](/docs/user-event/utility#type) implies a click on the element.  
+This option allows to opt out of this feature.
+
+`default`: false
+
+### skipHover[​](#skiphover "Direct link to heading")
+
+[`click()`](/docs/user-event/convenience#click) implies moving the cursor to the target element first.  
+This option allows to opt out of this feature.
+
+`default`: false
+
+### writeToClipboard[​](#writetoclipboard "Direct link to heading")
+
+Write selected data to [Clipboard API](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard) when a `cut` or `copy` is triggered. The Clipboard API is usually not available to test code. Our [`setup()`](/docs/user-event/setup) replaces the `navigator.clipboard` property with a stub.
+
+`default` when calling the APIs [directly](/docs/user-event/setup#direct-apis): `false`  
+`default` when calling the APIs on an instance from `setup()`: `true`

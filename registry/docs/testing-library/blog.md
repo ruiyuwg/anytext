@@ -1,0 +1,101 @@
+Hello friends! I'm pleased to announce the recent updates to the testing-library family of tools! As always, we're committed to giving you the best tools to enable you to have confidence in shipping your applications. That's why the guiding principle for everything we do is:
+
+> [The more your tests resemble the way your software is used, the more confidence they can give you.](https://twitter.com/kentcdodds/status/977018512689455106)
+
+This guiding principle has given us direction and we've been able to accomplish a lot in the testing space. To further our mission, I'd like to make a few announcements about changes going on in the testing-library world.
+
+## [dom-testing-library](https://github.com/testing-library/dom-testing-library) v4 released![​](#dom-testing-library-v4-released "Direct link to heading")
+
+This is actually a pretty small release, but I think it's worth mentioning anyway. We try to keep breaking changes to a minimum. This release only has two breaking changes. One is removal of deprecated methods you probably weren't using anyway, and the other reveals potential bugs in your tests. So you should be able to upgrade to this version with little-to-no effort.
+
+If you do experience breakages, it's probably due to something like this:
+
+We hope that this helps you catch bugs better!
+
+[react-testing-library](https://github.com/testing-library/react-testing-library) and [cypress-testing-library](https://github.com/testing-library/cypress-testing-library) have already been updated and released major version bumps of their own to account for this upgrade. Other wrappers will hopefully follow shortly based on their respective matinainers' schedules.
+
+> [View the Changelog](https://github.com/testing-library/dom-testing-library/releases/tag/v4.0.0)
+
+## [Testing Library on GitHub](https://github.com/testing-library)[​](#testing-library-on-github "Direct link to heading")
+
+We've created a new org on GitHub to manage the family of testing library projects. The best part of the "Testing Library" isn't the code, but the philosophy behind it. So we're using the organization as a way to group all the projects that share the same philosophy and general utilities so whether you're using Vue, Cypress, or React (Native), you'll have a super testing tool that you're familiar with.
+
+Here are the current (or soon to be) members of the org:
+
+-   [dom-testing-library](https://github.com/testing-library/dom-testing-library)
+-   [react-testing-library](https://github.com/testing-library/react-testing-library)
+-   [cypress-testing-library](https://github.com/testing-library/cypress-testing-library)
+-   [vue-testing-library](https://github.com/dfcook/vue-testing-library)
+-   [native-testing-library](https://github.com/testing-library/native-testing-library) (React Native)
+-   [pptr-testing-library](https://github.com/patrickhulce/pptr-testing-library) (Puppeteer)
+-   [bs-react-testing-library](https://github.com/wyze/bs-react-testing-library) (ReasonReact)
+-   [testcafe-testing-library](https://github.com/testing-library/testcafe-testing-library)
+-   [user-event](https://github.com/Gpx/user-event)
+-   [jest-dom](https://github.com/testing-library/jest-dom)
+-   [jest-native](https://github.com/testing-library/jest-native)
+
+(Hopefully we'll have [angular on there eventually](https://github.com/angular-extensions/testing-library/issues/4) [as well as ember](https://github.com/emberjs/rfcs/pull/327)).
+
+What's cool is that building wrappers for your JavaScript framework of choice is often quite simple (as I demonstrate on [TestingJavaScript.com](https://testingjavascript.com)). And as mentioned below, you can carry these same principles to non-DOM platforms as well!
+
+> [Checkout the Org and Star our Repos](https://github.com/testing-library)
+
+## [Testing Library on Open Collective](https://opencollective.com/testing-library)[​](#testing-library-on-open-collective "Direct link to heading")
+
+If the Testing Library family of tools has provided you any value at all, we'd encourage you (or your employer) to contribute to our new [Open Collective](https://opencollective.com/testing-library).
+
+It is intended that funds raised by this open collective be used to:
+
+-   Donate to charities and other good causes
+-   Purchase testing-library related merchandise (stickers, T-Shirts, etc).
+-   Pay for hosting/domains/etc.
+
+There are currently no plans to pay people who work on the project, but we reserve the right to do so if it makes sense in the future.
+
+> [Contribute to our open collective](https://opencollective.com/testing-library)
+
+## [Testing Library on Twitter](https://twitter.com/testinglib)[​](#testing-library-on-twitter "Direct link to heading")
+
+A lot of chatter is going on in the Testing Library world on Twitter, so we've created a twitter account you can follow and keep up with what's going on.
+
+> [Follow @TestingLib](https://twitter.com/testinglib)
+
+## [Testing Library on Spectrum](https://spectrum.chat/testing-library)[​](#testing-library-on-spectrum "Direct link to heading")
+
+We've had a pretty active spectrum community for react-testing-library. We're in the process of moving that to a more general Testing Library spectrum so we can have all discussion around the different wrappers in one place. There are over 600 members of our spectrum community (special shout-out to [Giorgio](https://spectrum.chat/users/gpx) who has been SUPER helpful to people there.) Please join us!
+
+> [Join us on Spectrum](https://spectrum.chat/testing-library)
+
+## [Testing Library on React Native](https://callstack.github.io/react-native-testing-library/)[​](#testing-library-on-react-native "Direct link to heading")
+
+I'm really happy to announce a super solution to the React Native testing space. The DOM is quite different from native, as I mentioned before, it's not the code but the concepts that really make the Testing Library great. I'm happy to say that [Brandon Carroll](https://github.com/bcarroll22) has successfully ported those concepts to a solution for React Native and I'm really happy with it. Give it a look if you're building React Native applications and want confidence that they continue to work as you make changes!
+
+> [Checkout native-testing-library](https://callstack.github.io/react-native-testing-library/)
+
+## [Learn Testing Library](/docs/learning)[​](#learn-testing-library "Direct link to heading")
+
+There's been a LOT of activity around the Testing Library principles and tools in the content space. We do have [a page that lists learning materials](/docs/learning), and more gets added to it daily. If you know of blog posts, YouTube videos, courses, or anything else about the Testing Library family of tools, please contribute to the list!
+
+> [Contribute to the learning materials page](https://github.com/testing-library/testing-library-docs/edit/main/docs/learning.mdx)
+
+## Other Exciting news[​](#other-exciting-news "Direct link to heading")
+
+As of a few months ago, [the React team officially recommends](https://reactjs.org/blog/2019/02/06/react-v16.8.0.html) you use react-testing-library to test your react applications. That's kinda neat :)
+
+At the React Amsterdam [Open Source awards](https://osawards.com/react/) ceremony, react-testing-library won the award for the Most impactful contribution to the community!
+
+![Open Source Awards award](/assets/images/award-4ab55893b6382919b43dff3db505287a.jpg)
+
+react-testing-library _also_ received recognition on the [ThoughtWorks Technology Radar](https://www.thoughtworks.com/radar/languages-and-frameworks) as technology they believe is "Worth exploring with the goal of understanding how it will affect your enterprise." We think so too :)
+
+## Special Thank You[​](#special-thank-you "Direct link to heading")
+
+Each of the projects has had many contributors and on most projects in [the org](https://github.com/testing-library), you'll find a table of contributors. We're super grateful for all the contributions people have made to the projects. I'd like to also give a special shout-out to people who have made an especially significant impact on the Testing Library family of tools and community.
+
+[Myself 👋](https://kentcdodds.com), [Alex Krolick](https://alexkrolick.com/), [Brandon Carroll](https://github.com/bcarroll22), [Giorgio](https://twitter.com/Gpx), [Ernesto García](https://twitter.com/gnapse), and [Daniel Cook](https://github.com/dfcook).
+
+As I said, there have been many who have contributed a great deal to the community, but these people stand out to me as individuals who have done especially great work. Thank you!
+
+## Conclusion[​](#conclusion "Direct link to heading")
+
+No matter what platform you're working with, the guiding principles of the Testing Library family can be applied to the tests for that platform. Take a step back and consider how closely your tests are resembling the way your software is used. If you can, consider what lightweight but powerful utilities would enable others to test their software in that way as well and create a library for that! Maybe it can join the Testing Library family of tools!

@@ -1,0 +1,97 @@
+On this page
+
+## Automatic Logging[​](#automatic-logging "Direct link to heading")
+
+When any `get` or `find` calls you use in your test cases fail, the current state of the `container` (DOM) gets printed on the console. For example:
+
+```
+// <div>Hello world</div>getByText(container, 'Goodbye world') // will fail by throwing error
+```
+
+The above test case will fail, however it prints the state of your DOM under test, so you will get to see:
+
+```
+Unable to find an element with the text: Goodbye world. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.Here is the state of your container:<div>  <div>    Hello world  </div></div>
+```
+
+**Note**: Since the DOM size can get really large, you can set the limit of DOM content to be printed via environment variable `DEBUG_PRINT_LIMIT`. The default value is `7000`. You will see `...` in the console, when the DOM content is stripped off, because of the length you have set or due to default size limit. Here's how you might increase this limit when running tests:
+
+-   npm
+-   Yarn
+
+```
+DEBUG_PRINT_LIMIT=10000 npm test
+```
+
+```
+DEBUG_PRINT_LIMIT=10000 yarn test
+```
+
+This works on macOS/Linux, you'll need to do something else for Windows. If you'd like a solution that works for both, see [`cross-env`](https://www.npmjs.com/package/cross-env).
+
+**Note**: The output of the DOM is colorized by default if your tests are running in a node environment. However, you may sometimes want to turn off colors, such as in cases where the output is written to a log file for debugging purposes. You can use the environment variable `COLORS` to explicitly force the colorization off or on. For example:
+
+-   npm
+-   Yarn
+
+```
+COLORS=false npm test
+```
+
+```
+COLORS=false yarn test
+```
+
+This works on macOS/Linux, you'll need to do something else for Windows. If you'd like a solution that works for both, see [`cross-env`](https://www.npmjs.com/package/cross-env).
+
+## `prettyDOM`[​](#prettydom "Direct link to heading")
+
+Built on top of [`pretty-format`](https://github.com/jestjs/jest/tree/main/packages/pretty-format), this helper function can be used to print out readable representation of the DOM tree of a node. This can be helpful for instance when debugging tests.
+
+It is defined as:
+
+```
+interface Options extends prettyFormat.OptionsReceived {  filterNode?: (node: Node) => boolean}function prettyDOM(  node: HTMLElement,  maxLength?: number,  options?: Options,): string
+```
+
+It receives the root node to print out, an optional extra parameter to limit the size of the resulting string, for cases when it becomes too large. It has a last parameter which allows you to configure your formatting. In addition to the options listed you can also pass the [options](https://github.com/jestjs/jest/tree/main/packages/pretty-format#usage-with-options) of `pretty-format`.
+
+By default, `<style />`, `<script />` and comment nodes are ignored. You can configure this behavior by passing a custom `filterNode` function that should return `true` for every node that you wish to include in the output.
+
+This function is usually used alongside `console.log` to temporarily print out DOM trees during tests for debugging purposes:
+
+```
+import {prettyDOM} from '@testing-library/dom'const div = document.createElement('div')div.innerHTML = '<div><h1>Hello World</h1></div>'console.log(prettyDOM(div))// <div>//   <h1>Hello World</h1>// </div>
+```
+
+This function is what also powers [the automatic debugging output described above](#automatic-logging).
+
+## `screen.debug()`[​](#screendebug "Direct link to heading")
+
+For convenience `screen` also exposes a `debug` method. This method is essentially a shortcut for `console.log(prettyDOM())`. It supports debugging the document, a single element, or an array of elements.
+
+```
+import {screen} from '@testing-library/dom'document.body.innerHTML = `  <button>test</button>  <span>multi-test</span>  <div>multi-test</div>`// debug documentscreen.debug()// debug single elementscreen.debug(screen.getByText('test'))// debug multiple elementsscreen.debug(screen.getAllByText('multi-test'))
+```
+
+## `screen.logTestingPlaygroundURL()`[​](#screenlogtestingplaygroundurl "Direct link to heading")
+
+For debugging using [testing-playground](https://testing-playground.com), screen exposes this convenient method which logs and returns a URL that can be opened in a browser.
+
+```
+import {screen} from '@testing-library/dom'document.body.innerHTML = `  <button>test</button>  <span>multi-test</span>  <div>multi-test</div>`// log entire document to testing-playgroundscreen.logTestingPlaygroundURL()// log a single elementscreen.logTestingPlaygroundURL(screen.getByText('test'))
+```
+
+## `logRoles`[​](#logroles "Direct link to heading")
+
+This helper function can be used to print out a list of all the implicit ARIA roles within a tree of DOM nodes, each role containing a list of all of the nodes which match that role. This can be helpful for finding ways to query the DOM under test with [getByRole](/docs/queries/byrole).
+
+```
+import {logRoles} from '@testing-library/dom'const nav = document.createElement('nav')nav.innerHTML = `<ul>  <li>Item 1</li>  <li>Item 2</li></ul>`logRoles(nav)
+```
+
+Result:
+
+```
+navigation:<nav />--------------------------------------------------list:<ul />--------------------------------------------------listitem:<li /><li />--------------------------------------------------
+```

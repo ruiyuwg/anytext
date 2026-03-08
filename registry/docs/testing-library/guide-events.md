@@ -1,0 +1,42 @@
+On this page
+
+## Interactions vs. events[​](#interactions-vs-events "Direct link to heading")
+
+Based on [the Guiding Principles](/docs/guiding-principles), your test should resemble how users interact with your code (component, page, etc.) as much as possible. With this in mind, you should know that `fireEvent` isn't _exactly_ how the user interacts with your application, but it's close enough for most scenarios.
+
+Consider `fireEvent.click`, which creates a click event and dispatches that event on the given DOM node. This works properly for most situations when you simply want to test what happens when your element is clicked, but when the _user_ actually clicks your element, these are the events that are typically fired (in order):
+
+-   fireEvent.mouseOver(element)
+-   fireEvent.mouseMove(element)
+-   fireEvent.mouseDown(element)
+-   element.focus() (if that element is focusable)
+-   fireEvent.mouseUp(element)
+-   fireEvent.click(element)
+
+And then, if that element happens to be a child of a `label`, then it will also move focus to the form control that the label is labeling. So even though all you really are trying to test is the click handler, by simply using `fireEvent.click` you're missing out on several other potentially important events the user is firing along the way.
+
+Again, most of the time this isn't critical for your tests and the trade-off of simply using `fireEvent.click` is worth it.
+
+## Alternatives[​](#alternatives "Direct link to heading")
+
+We will describe a couple of simple adjustments to your tests that will increase your confidence in the interactive behavior of your components. For other interactions you may want to either consider using [`user-event`](/docs/user-event/intro) or testing your components in a real environment (e.g. manually, automatic with cypress, etc.).
+
+### Keydown[​](#keydown "Direct link to heading")
+
+[A keydown is dispatched on the currently focused element, the body element or the document element](https://w3c.github.io/uievents/#events-keyboard-event-order). Following this you should prefer
+
+```
+- fireEvent.keyDown(getByText('click me'));+ getByText('click me').focus();+ fireEvent.keyDown(document.activeElement || document.body);
+```
+
+This will also test that the element in question can even receive keyboard events.
+
+### Focus/Blur[​](#focusblur "Direct link to heading")
+
+If an element is focused, a focus event is dispatched, the active element in the document changes, and the previously focused element is blurred. To simulate this behavior you can simply replace `fireEvent` with imperative focus:
+
+```
+- fireEvent.focus(getByText('focus me'));+ getByText('focus me').focus();
+```
+
+A nice side-effect of this approach is that any assertion on fired focus events will fail if the element is not focusable. This is especially important if you follow-up with a keydown event.

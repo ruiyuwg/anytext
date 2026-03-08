@@ -1,0 +1,99 @@
+On this page
+
+## Introduction[​](#introduction "Direct link to heading")
+
+The library can be configured via the `configure` function, which accepts:
+
+-   a plain JS object; this will be merged into the existing configuration. e.g. `configure({testIdAttribute: 'not-data-testid'})`
+-   a function; the function will be given the existing configuration, and should return a plain JS object which will be merged as above, e.g. `configure(existingConfig => ({something: [...existingConfig.something, 'extra value for the something array']}))`
+
+> **Note**
+> 
+> Framework-specific wrappers like React Testing Library may add more options to the ones shown below.
+
+-   Native
+-   React
+-   Angular
+-   Cypress
+
+setup-tests.js
+
+```
+import {configure} from '@testing-library/dom'import serialize from 'my-custom-dom-serializer'configure({  testIdAttribute: 'data-my-test-id',  getElementError: (message, container) => {    const customMessage = [message, serialize(container.firstChild)].join(      '\n\n',    )    return new Error(customMessage)  },})
+```
+
+setup-tests.js
+
+```
+import {configure} from '@testing-library/react'configure({testIdAttribute: 'data-my-test-id'})
+```
+
+setup-tests.ts
+
+```
+import {configure} from '@testing-library/angular'configure({  dom: {    testIdAttribute: 'data-my-test-id',  },})
+```
+
+setup-tests.js
+
+```
+import {configure} from '@testing-library/cypress'configure({testIdAttribute: 'data-my-test-id'})
+```
+
+## Options[​](#options "Direct link to heading")
+
+### `computedStyleSupportsPseudoElements`[​](#computedstylesupportspseudoelements "Direct link to heading")
+
+Set to `true` if `window.getComputedStyle` supports pseudo-elements i.e. a second argument. If you're using testing-library in a browser you almost always want to set this to `true`. Only very old browser don't support this property (such as IE 8 and earlier). However, `jsdom` does not support the second argument currently. This includes versions of `jsdom` prior to `16.4.0` and any version that logs a `not implemented` warning when calling [`getComputedStyle`](https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle) with a second argument e.g. `window.getComputedStyle(document.createElement('div'), '::after')`. Defaults to `false`
+
+### `defaultHidden`[​](#defaulthidden "Direct link to heading")
+
+The default value for the [`hidden` option](/docs/dom-testing-library/queries/byrole#hidden) used by [`getByRole`](/docs/queries/byrole). Defaults to `false`.
+
+### `defaultIgnore`[​](#defaultignore "Direct link to heading")
+
+The default value for the [`ignore` option](/docs/queries/bytext#ignore) used by [`getByText`](/docs/queries/bytext). Also determines the nodes that are being ignored when errors are printed.
+
+Defaults to `script, style`.
+
+### `showOriginalStackTrace`[​](#showoriginalstacktrace "Direct link to heading")
+
+By default, [`waitFor`](/docs/dom-testing-library/api-async#waitfor) will ensure that the stack trace for errors thrown by Testing Library is cleaned up and shortened so it's easier for you to identify the part of your code that resulted in the error (async stack traces are hard to debug). If you want to disable this, then set`showOriginalStackTrace` to `false`. You can also disable this for a specific call in the options you pass to `waitFor`.
+
+### `throwSuggestions` (experimental)[​](#throwsuggestions-experimental "Direct link to heading")
+
+When enabled, if [better queries](/docs/queries/about#priority) are available, the test will fail and provide a suggested query to use instead. Defaults to `false`.
+
+To disable a suggestion for a single query just add `{suggest:false}` as an option.
+
+```
+screen.getByTestId('foo', {suggest: false}) // will not throw a suggestion
+```
+
+note
+
+When this option is enabled, it may provide suggestions that lack an intuitive implementation. Typically this happens for [roles which cannot be named](https://w3c.github.io/aria/#namefromprohibited), most notably paragraphs. For instance, if you attempt to use [`getByText`](/docs/queries/bytext), you may encounter the following error:
+
+```
+TestingLibraryElementError: A better query is available, try this:    getByRole('paragraph')
+```
+
+However, there is no direct way to query paragraphs using the config object parameter, such as in `getByRole('paragraph', { name: 'Hello World' })`.
+
+To address this issue, you can leverage a custom function to validate the element's structure, as shown in the example below. More information can be found in the [GitHub issue](https://github.com/testing-library/dom-testing-library/issues/1306)
+
+```
+getByRole('paragraph', {  name: (_, element) => element.textContent === 'Hello world',})
+```
+
+### `testIdAttribute`[​](#testidattribute "Direct link to heading")
+
+The attribute used by [`getByTestId`](/docs/queries/bytestid) and related queries. Defaults to `data-testid`.
+
+### `getElementError`[​](#getelementerror "Direct link to heading")
+
+A function that returns the error used when [get or find queries](/docs/queries/about#types-of-queries) fail. Takes the error message and container object as arguments.
+
+### `asyncUtilTimeout`[​](#asyncutiltimeout "Direct link to heading")
+
+The global timeout value in milliseconds used by [`waitFor`](/docs/dom-testing-library/api-async#waitfor) utilities. Defaults to 1000ms.

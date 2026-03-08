@@ -1,0 +1,67 @@
+On this page
+
+Several utilities are provided for dealing with asynchronous code. These can be useful to wait for an element to appear or disappear in response to an event, user action, timeout, or Promise. (See the [guide to testing disappearance](/docs/guide-disappearance).)
+
+The async methods return Promises, so be sure to use `await` or `.then` when calling them.
+
+## `findBy` Queries[​](#findby-queries "Direct link to heading")
+
+`findBy` methods are a combination of `getBy` [queries](/docs/queries/about#types-of-queries) and [`waitFor`](#waitfor). They accept the waitFor options as the last argument (e.g. `await screen.findByText('text', queryOptions, waitForOptions)`).
+
+`findBy` queries work when you expect an element to appear but the change to the DOM might not happen immediately.
+
+```
+const button = screen.getByRole('button', {name: 'Click Me'})fireEvent.click(button)await screen.findByText('Clicked once')fireEvent.click(button)await screen.findByText('Clicked twice')
+```
+
+## `waitFor`[​](#waitfor "Direct link to heading")
+
+```
+function waitFor<T>(  callback: () => T | Promise<T>,  options?: {    container?: HTMLElement    timeout?: number    interval?: number    onTimeout?: (error: Error) => Error    mutationObserverOptions?: MutationObserverInit  },): Promise<T>
+```
+
+When in need to wait for any period of time you can use `waitFor`, to wait for your expectations to pass. Returning _a falsy condition is not sufficient_ to trigger a retry, the callback must throw an error in order to retry the condition. Here's a simple example:
+
+```
+// ...// Wait until the callback does not throw an error. In this case, that means// it'll wait until the mock function has been called once.await waitFor(() => expect(mockAPI).toHaveBeenCalledTimes(1))// ...
+```
+
+`waitFor` may run the callback a number of times until the timeout is reached. Note that the number of calls is constrained by the `timeout` and `interval` options.
+
+This can be useful if you have a unit test that mocks API calls and you need to wait for your mock promises to all resolve.
+
+If you return a promise in the `waitFor` callback (either explicitly or implicitly with the `async` syntax), then the `waitFor` utility does not call your callback again until that promise rejects. This allows you to `waitFor` things that must be checked asynchronously.
+
+The default `container` is the global `document`. Make sure the elements you wait for are descendants of `container`.
+
+The default `interval` is `50ms`. However it runs your callback immediately before starting the intervals.
+
+The default `timeout` is `1000ms`.
+
+The default `onTimeout` takes the error and appends the `container`'s printed state to the error message which should hopefully make it easier to track down what caused the timeout.
+
+The default `mutationObserverOptions` is `{subtree: true, childList: true, attributes: true, characterData: true}` which detects additions and removals of child elements (including text nodes) in the `container` and any of its descendants. It also detects attribute changes. When any of those changes occur, it re-runs the callback.
+
+## `waitForElementToBeRemoved`[​](#waitforelementtoberemoved "Direct link to heading")
+
+```
+function waitForElementToBeRemoved<T>(  callback: (() => T) | T,  options?: {    container?: HTMLElement    timeout?: number    interval?: number    onTimeout?: (error: Error) => Error    mutationObserverOptions?: MutationObserverInit  },): Promise<void>
+```
+
+To wait for the removal of element(s) from the DOM you can use `waitForElementToBeRemoved`. The `waitForElementToBeRemoved` function is a small wrapper around the `waitFor` utility.
+
+The first argument must be an element, array of elements, or a callback which returns an element or array of elements.
+
+Here is an example where the promise resolves because the element is removed:
+
+```
+const el = document.querySelector('div.getOuttaHere')waitForElementToBeRemoved(document.querySelector('div.getOuttaHere')).then(() =>  console.log('Element no longer in DOM'),)el.setAttribute('data-neat', true)// other mutations are ignored...el.parentElement.removeChild(el)// logs 'Element no longer in DOM'
+```
+
+`waitForElementToBeRemoved` throws an error if the first argument is `null` or an empty array:
+
+```
+waitForElementToBeRemoved(null).catch(err => console.log(err))waitForElementToBeRemoved(queryByText(/not here/i)).catch(err =>  console.log(err),)waitForElementToBeRemoved(queryAllByText(/not here/i)).catch(err =>  console.log(err),)waitForElementToBeRemoved(() => getByText(/not here/i)).catch(err =>  console.log(err),)// Error: The element(s) given to waitForElementToBeRemoved are already removed. waitForElementToBeRemoved requires that the element(s) exist(s) before waiting for removal.
+```
+
+The options object is forwarded to `waitFor`.

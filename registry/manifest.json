@@ -1,5 +1,5 @@
 {
-  "version": 72,
+  "version": 73,
   "updatedAt": "2026-03-08",
   "libraries": [
     {
@@ -152410,6 +152410,1617 @@
           ],
           "path": "tanstack/documentation.md",
           "tokens": 3661
+        }
+      ]
+    },
+    {
+      "id": "testing-library",
+      "name": "Testing Library",
+      "description": "Simple and complete testing utilities for React, Vue, Angular, and other UI frameworks with user-centric queries",
+      "version": "16",
+      "topics": [
+        {
+          "id": "blog",
+          "title": "blog",
+          "description": "Hello friends! I'm pleased to announce the recent updates to the testing-library family of tools! As always, we're co...",
+          "tags": [],
+          "path": "testing-library/blog.md",
+          "tokens": 2277
+        },
+        {
+          "id": "new-site",
+          "title": "new-site",
+          "description": "We have a docs site now! It's built with [Docusaurus](https://docusaurus.io).",
+          "tags": [],
+          "path": "testing-library/new-site.md",
+          "tokens": 175
+        },
+        {
+          "id": "code-blocks",
+          "title": "code-blocks",
+          "description": "Many of the code samples have been updated to include tabs to switch between \"plain\" DOM Testing Library syntax and t...",
+          "tags": [],
+          "path": "testing-library/code-blocks.md",
+          "tokens": 120
+        },
+        {
+          "id": "new-org",
+          "title": "new-org",
+          "description": "Hello friends! I'm pleased to announce the recent updates to the testing-library family of tools! As always, we're co...",
+          "tags": [],
+          "path": "testing-library/new-org.md",
+          "tokens": 2277
+        },
+        {
+          "id": "docs",
+          "title": "docs",
+          "description": "On this page",
+          "tags": [
+            "@testing-library",
+            "DOM Testing Library",
+            "JSDOM"
+          ],
+          "path": "testing-library/docs.md",
+          "tokens": 670
+        },
+        {
+          "id": "api",
+          "title": "api",
+          "description": "On this page",
+          "tags": [
+            "Angular Testing Library",
+            "DOM Testing Library",
+            "render",
+            "fireEvent",
+            "findBy",
+            "waitFor",
+            "NoopAnimationsModule",
+            "Type",
+            "template",
+            "imports"
+          ],
+          "path": "testing-library/api.md",
+          "tokens": 3977
+        },
+        {
+          "id": "examples",
+          "title": "examples",
+          "description": "On this page",
+          "tags": [
+            "input",
+            "output"
+          ],
+          "path": "testing-library/examples.md",
+          "tokens": 662
+        },
+        {
+          "id": "faq",
+          "title": "faq",
+          "description": "See also the [main FAQ](/docs/dom-testing-library/faq) for questions not specific to Angular testing.",
+          "tags": [
+            "MockBuilder"
+          ],
+          "path": "testing-library/faq.md",
+          "tokens": 819
+        },
+        {
+          "id": "intro",
+          "title": "intro",
+          "description": "On this page",
+          "tags": [
+            "Angular Testing Library",
+            "DOM Testing Library",
+            "@testing-library/dom",
+            "ng add",
+            "data-testid",
+            "query",
+            "fireEvent",
+            "detectChanges()"
+          ],
+          "path": "testing-library/intro.md",
+          "tokens": 749
+        },
+        {
+          "id": "examples",
+          "title": "examples",
+          "description": "On this page",
+          "tags": [
+            "bs-webapi"
+          ],
+          "path": "testing-library/examples.md",
+          "tokens": 813
+        },
+        {
+          "id": "intro",
+          "title": "intro",
+          "description": "On this page",
+          "tags": [
+            "bs-react-testing-library",
+            "React Testing Library",
+            "bs-dom-testing-library",
+            "DOM Testing Library",
+            "bsconfig.json"
+          ],
+          "path": "testing-library/intro.md",
+          "tokens": 494
+        },
+        {
+          "id": "contributing",
+          "title": "contributing",
+          "description": "On this page",
+          "tags": [
+            "React Testing Library"
+          ],
+          "path": "testing-library/contributing.md",
+          "tokens": 341
+        },
+        {
+          "id": "intro",
+          "title": "intro",
+          "description": "On this page",
+          "tags": [
+            "Cypress Testing Library",
+            "cy",
+            "cypress/support/commands.js",
+            "DOM Testing Library",
+            "findBy",
+            "findAllBy",
+            "About queries",
+            "get*",
+            "find*",
+            "query*"
+          ],
+          "path": "testing-library/intro.md",
+          "tokens": 652
+        },
+        {
+          "id": "api",
+          "title": "api",
+          "description": "DOM Testing Library is the \"core API\" of the Testing Library family, so please refer to the Core API section for deta...",
+          "tags": [],
+          "path": "testing-library/api.md",
+          "tokens": 115
+        },
+        {
+          "id": "api-accessibility",
+          "title": "api-accessibility",
+          "description": "On this page",
+          "tags": [
+            "getRoles",
+            "isInaccessible",
+            "role",
+            "logRoles"
+          ],
+          "path": "testing-library/api-accessibility.md",
+          "tokens": 601
+        },
+        {
+          "id": "api-async",
+          "title": "api-async",
+          "description": "On this page",
+          "tags": [
+            "await",
+            ".then",
+            "findBy",
+            "getBy",
+            "waitFor",
+            "timeout",
+            "interval",
+            "async",
+            "container",
+            "document"
+          ],
+          "path": "testing-library/api-async.md",
+          "tokens": 1206
+        },
+        {
+          "id": "api-configuration",
+          "title": "api-configuration",
+          "description": "On this page",
+          "tags": [
+            "configure",
+            "computedStyleSupportsPseudoElements",
+            "true",
+            "window.getComputedStyle",
+            "jsdom",
+            "16.4.0",
+            "not implemented",
+            "getComputedStyle",
+            "false",
+            "defaultHidden"
+          ],
+          "path": "testing-library/api-configuration.md",
+          "tokens": 1325
+        },
+        {
+          "id": "api-custom-queries",
+          "title": "api-custom-queries",
+          "description": "On this page",
+          "tags": [
+            "DOM Testing Library",
+            "testId",
+            "test-utils.js",
+            "React Testing Library",
+            "render",
+            "queries",
+            "buildQueries",
+            "getNodeText",
+            "getByText",
+            "queryByText"
+          ],
+          "path": "testing-library/api-custom-queries.md",
+          "tokens": 922
+        },
+        {
+          "id": "api-debugging",
+          "title": "api-debugging",
+          "description": "On this page",
+          "tags": [
+            "get",
+            "find",
+            "container",
+            "DEBUG_PRINT_LIMIT",
+            "7000",
+            "...",
+            "cross-env",
+            "COLORS",
+            "prettyDOM",
+            "pretty-format"
+          ],
+          "path": "testing-library/api-debugging.md",
+          "tokens": 1376
+        },
+        {
+          "id": "api-events",
+          "title": "api-events",
+          "description": "On this page",
+          "tags": [
+            "fireEvent",
+            "@testing-library/user-event",
+            "fireEvent[eventName]",
+            "eventProperties",
+            "target",
+            "dataTransfer",
+            "keyPress",
+            "keyDown",
+            "keyUp",
+            "createEvent[eventName]"
+          ],
+          "path": "testing-library/api-events.md",
+          "tokens": 1289
+        },
+        {
+          "id": "api-within",
+          "title": "api-within",
+          "description": "`within` (an alias to `getQueriesForElement`) takes a DOM element and binds it to the raw query functions, allowing t...",
+          "tags": [
+            "within",
+            "getQueriesForElement"
+          ],
+          "path": "testing-library/api-within.md",
+          "tokens": 270
+        },
+        {
+          "id": "cheatsheet",
+          "title": "cheatsheet",
+          "description": "On this page",
+          "tags": [
+            "DOM Testing Library",
+            "await",
+            ".then()",
+            "findBy",
+            "findAllBy",
+            "waitForElement",
+            "fireEvent(node, event)",
+            "fireEvent.click(node)",
+            "React Testing Library",
+            "within(node).getByText(\"hello\")"
+          ],
+          "path": "testing-library/cheatsheet.md",
+          "tokens": 1203
+        },
+        {
+          "id": "example-intro",
+          "title": "example-intro",
+          "description": "src/\\_\\_tests\\_\\_/example.js",
+          "tags": [],
+          "path": "testing-library/example-intro.md",
+          "tokens": 535
+        },
+        {
+          "id": "faq",
+          "title": "faq",
+          "description": "Which get method should I use?",
+          "tags": [
+            "data-testid",
+            "getAllByRole",
+            "listitem"
+          ],
+          "path": "testing-library/faq.md",
+          "tokens": 753
+        },
+        {
+          "id": "install",
+          "title": "install",
+          "description": "On this page",
+          "tags": [
+            "devDependencies",
+            "DOM Testing Library",
+            "bs-react-testing-library",
+            "React Native Testing Library",
+            "React Testing Library",
+            "main",
+            "module",
+            "umd:main",
+            "@testing-library/dom",
+            "dist"
+          ],
+          "path": "testing-library/install.md",
+          "tokens": 812
+        },
+        {
+          "id": "intro",
+          "title": "intro",
+          "description": "On this page",
+          "tags": [
+            "DOM Testing Library",
+            "JSDOM",
+            "data-testid"
+          ],
+          "path": "testing-library/intro.md",
+          "tokens": 546
+        },
+        {
+          "id": "setup",
+          "title": "setup",
+          "description": "On this page",
+          "tags": [
+            "DOM Testing Library",
+            "testEnvironment",
+            "jest-environment-jsdom",
+            "environment",
+            "jsdom"
+          ],
+          "path": "testing-library/setup.md",
+          "tokens": 325
+        },
+        {
+          "id": "ecosystem-bs-jest-dom",
+          "title": "ecosystem-bs-jest-dom",
+          "description": "On this page",
+          "tags": [
+            "bs-jest-dom",
+            "bs-react-testing-library"
+          ],
+          "path": "testing-library/ecosystem-bs-jest-dom.md",
+          "tokens": 344
+        },
+        {
+          "id": "ecosystem-cli-testing-library",
+          "title": "ecosystem-cli-testing-library",
+          "description": "[`CLI Testing Library`](https://github.com/crutchcorn/cli-testing-library) is a companion library to `Testing Library...",
+          "tags": [
+            "CLI Testing Library",
+            "Testing Library"
+          ],
+          "path": "testing-library/ecosystem-cli-testing-library.md",
+          "tokens": 310
+        },
+        {
+          "id": "ecosystem-eslint-plugin-jest-dom",
+          "title": "ecosystem-eslint-plugin-jest-dom",
+          "description": "[`eslint-plugin-jest-dom`](https://github.com/testing-library/eslint-plugin-jest-dom) is an ESLint plugin for Jest DO...",
+          "tags": [
+            "eslint-plugin-jest-dom"
+          ],
+          "path": "testing-library/ecosystem-eslint-plugin-jest-dom.md",
+          "tokens": 131
+        },
+        {
+          "id": "ecosystem-eslint-plugin-testing-library",
+          "title": "ecosystem-eslint-plugin-testing-library",
+          "description": "[`eslint-plugin-testing-library`](https://github.com/testing-library/eslint-plugin-testing-library) is an ESLint plug...",
+          "tags": [
+            "eslint-plugin-testing-library"
+          ],
+          "path": "testing-library/ecosystem-eslint-plugin-testing-library.md",
+          "tokens": 194
+        },
+        {
+          "id": "ecosystem-jasmine-dom",
+          "title": "ecosystem-jasmine-dom",
+          "description": "[`jasmine-dom`](https://github.com/testing-library/jasmine-dom) is a companion library for Testing Library that provi...",
+          "tags": [
+            "jasmine-dom",
+            "queryByTestId",
+            "getByTestId",
+            "get*"
+          ],
+          "path": "testing-library/ecosystem-jasmine-dom.md",
+          "tokens": 285
+        },
+        {
+          "id": "ecosystem-jest-dom",
+          "title": "ecosystem-jest-dom",
+          "description": "[`jest-dom`](https://github.com/testing-library/jest-dom) is a companion library for Testing Library that provides cu...",
+          "tags": [
+            "jest-dom",
+            "queryByTestId",
+            "getByTestId",
+            "get*"
+          ],
+          "path": "testing-library/ecosystem-jest-dom.md",
+          "tokens": 305
+        },
+        {
+          "id": "ecosystem-jest-native",
+          "title": "ecosystem-jest-native",
+          "description": "**This package is deprecated and is no longer actively maintained.**",
+          "tags": [
+            "Jest Native",
+            "React Native Testing Library",
+            "queryByTestId",
+            "getByTestId",
+            "get*"
+          ],
+          "path": "testing-library/ecosystem-jest-native.md",
+          "tokens": 372
+        },
+        {
+          "id": "ecosystem-query-extensions",
+          "title": "ecosystem-query-extensions",
+          "description": "[`query-extensions`](https://github.com/tjefferson08/query-extensions) is an experimental companion library for Testi...",
+          "tags": [
+            "query-extensions",
+            "@testing-library"
+          ],
+          "path": "testing-library/ecosystem-query-extensions.md",
+          "tokens": 110
+        },
+        {
+          "id": "ecosystem-react-select-event",
+          "title": "ecosystem-react-select-event",
+          "description": "[`react-select-event`](https://github.com/romgain/react-select-event) is a companion library for `React Testing Libra...",
+          "tags": [
+            "react-select-event",
+            "React Testing Library",
+            "react-select"
+          ],
+          "path": "testing-library/ecosystem-react-select-event.md",
+          "tokens": 301
+        },
+        {
+          "id": "ecosystem-riot-testing-library",
+          "title": "ecosystem-riot-testing-library",
+          "description": "[`riot-testing-library`](https://github.com/ariesjia/riot-testing-library) builds on top of [DOM Testing Library](htt...",
+          "tags": [
+            "riot-testing-library"
+          ],
+          "path": "testing-library/ecosystem-riot-testing-library.md",
+          "tokens": 244
+        },
+        {
+          "id": "ecosystem-rtl-simple-queries",
+          "title": "ecosystem-rtl-simple-queries",
+          "description": "[`rtl-simple-queries`](https://github.com/balavishnuvj/rtl-simple-queries) is a companion library for `React Testing ...",
+          "tags": [
+            "rtl-simple-queries",
+            "React Testing Library"
+          ],
+          "path": "testing-library/ecosystem-rtl-simple-queries.md",
+          "tokens": 157
+        },
+        {
+          "id": "ecosystem-testing-library-selector",
+          "title": "ecosystem-testing-library-selector",
+          "description": "[`testing-library-selector`](https://github.com/domasx2/testing-library-selector) is a library for `@testing-library`...",
+          "tags": [
+            "testing-library-selector",
+            "@testing-library"
+          ],
+          "path": "testing-library/ecosystem-testing-library-selector.md",
+          "tokens": 325
+        },
+        {
+          "id": "example-codesandbox",
+          "title": "example-codesandbox",
+          "description": "On this page",
+          "tags": [],
+          "path": "testing-library/example-codesandbox.md",
+          "tokens": 117
+        },
+        {
+          "id": "usage",
+          "title": "Usage",
+          "description": "> This example only works with a real browser (not with jsdom, as it does not support `getBoundingClientRect`).",
+          "tags": [
+            "getBoundingClientRect"
+          ],
+          "path": "testing-library/usage.md",
+          "tokens": 513
+        },
+        {
+          "id": "example-external",
+          "title": "example-external",
+          "description": "On this page",
+          "tags": [],
+          "path": "testing-library/example-external.md",
+          "tokens": 111
+        },
+        {
+          "id": "example-findbytext",
+          "title": "example-findByText",
+          "description": "// src/__tests__/example.test.js// This is an example of how to use findByText to query for text that// is not visibl...",
+          "tags": [],
+          "path": "testing-library/example-findbytext.md",
+          "tokens": 900
+        },
+        {
+          "id": "example-input-event",
+          "title": "example-input-event",
+          "description": "> If you want to simulate a more natural typing behaviour while testing your component, consider the companion librar...",
+          "tags": [
+            "user-event"
+          ],
+          "path": "testing-library/example-input-event.md",
+          "tokens": 461
+        },
+        {
+          "id": "example-reach-router",
+          "title": "example-reach-router",
+          "description": "import React from 'react'import {render} from '@testing-library/react'import {  Router,  Link,  createHistory,  creat...",
+          "tags": [],
+          "path": "testing-library/example-reach-router.md",
+          "tokens": 696
+        },
+        {
+          "id": "example-react-context",
+          "title": "example-react-context",
+          "description": "import React from 'react'import {render, screen} from '@testing-library/react'import '@testing-library/jest-dom'impor...",
+          "tags": [],
+          "path": "testing-library/example-react-context.md",
+          "tokens": 484
+        },
+        {
+          "id": "example-react-formik",
+          "title": "example-react-formik",
+          "description": "Example based in this [Async Submission Formik example](https://formik.org/docs/examples/async-submission)",
+          "tags": [],
+          "path": "testing-library/example-react-formik.md",
+          "tokens": 488
+        },
+        {
+          "id": "example-react-hooks-usereducer",
+          "title": "example-react-hooks-useReducer",
+          "description": "Basic example showing how to test the `useReducer` hook. The most important thing is that we aren't testing the reduc...",
+          "tags": [
+            "useReducer",
+            "isConfirmed"
+          ],
+          "path": "testing-library/example-react-hooks-usereducer.md",
+          "tokens": 368
+        },
+        {
+          "id": "example-react-intl",
+          "title": "example-react-intl",
+          "description": "On this page",
+          "tags": [
+            "setup",
+            "full-icu",
+            "small-icu",
+            "NODE_ICU_DATA",
+            "render",
+            "wrapper",
+            "jest --updateSnapshot"
+          ],
+          "path": "testing-library/example-react-intl.md",
+          "tokens": 1493
+        },
+        {
+          "id": "example-react-modal",
+          "title": "example-react-modal",
+          "description": "import React, {useEffect} from 'react'import ReactDOM from 'react-dom'import {render, fireEvent} from '@testing-libra...",
+          "tags": [],
+          "path": "testing-library/example-react-modal.md",
+          "tokens": 255
+        },
+        {
+          "id": "example-react-router",
+          "title": "example-react-router",
+          "description": "On this page",
+          "tags": [
+            "render",
+            "history"
+          ],
+          "path": "testing-library/example-react-router.md",
+          "tokens": 1356
+        },
+        {
+          "id": "example-react-transition-group",
+          "title": "example-react-transition-group",
+          "description": "On this page",
+          "tags": [],
+          "path": "testing-library/example-react-transition-group.md",
+          "tokens": 696
+        },
+        {
+          "id": "example-update-props",
+          "title": "example-update-props",
+          "description": "// This is an example of how to update the props of a rendered component.// the basic idea is to simply call `render`...",
+          "tags": [],
+          "path": "testing-library/example-update-props.md",
+          "tokens": 256
+        },
+        {
+          "id": "guide-disappearance",
+          "title": "guide-disappearance",
+          "description": "On this page",
+          "tags": [
+            "await",
+            ".then(done)",
+            "findBy",
+            "waitFor",
+            "waitForElementToBeRemoved",
+            "true",
+            "MutationObserver",
+            "getBy",
+            "queryBy",
+            "queryAll"
+          ],
+          "path": "testing-library/guide-disappearance.md",
+          "tokens": 858
+        },
+        {
+          "id": "guide-events",
+          "title": "guide-events",
+          "description": "On this page",
+          "tags": [
+            "fireEvent",
+            "fireEvent.click",
+            "label",
+            "user-event"
+          ],
+          "path": "testing-library/guide-events.md",
+          "tokens": 716
+        },
+        {
+          "id": "guiding-principles",
+          "title": "guiding-principles",
+          "description": "> [The more your tests resemble the way your software is used, the more confidence they can give you.](https://twitte...",
+          "tags": [],
+          "path": "testing-library/guiding-principles.md",
+          "tokens": 264
+        },
+        {
+          "id": "learning",
+          "title": "learning",
+          "description": "On this page",
+          "tags": [],
+          "path": "testing-library/learning.md",
+          "tokens": 1301
+        },
+        {
+          "id": "api",
+          "title": "api",
+          "description": "On this page",
+          "tags": [
+            "Marko Testing Library",
+            "DOM Testing Library",
+            "render",
+            "container",
+            "...queries",
+            "debug",
+            "rerender",
+            "emitted",
+            "cleanup",
+            "document.body"
+          ],
+          "path": "testing-library/api.md",
+          "tokens": 2227
+        },
+        {
+          "id": "intro",
+          "title": "intro",
+          "description": "On this page",
+          "tags": [
+            "Marko Testing Library",
+            "DOM Testing Library",
+            "@marko/testing-library",
+            "@testing-library/dom"
+          ],
+          "path": "testing-library/intro.md",
+          "tokens": 609
+        },
+        {
+          "id": "setup",
+          "title": "setup",
+          "description": "On this page",
+          "tags": [
+            "Marko Testing Library",
+            "browser",
+            "@marko/jest/preset/node",
+            "mocha"
+          ],
+          "path": "testing-library/setup.md",
+          "tokens": 754
+        },
+        {
+          "id": "intro",
+          "title": "intro",
+          "description": "On this page",
+          "tags": [
+            "nightwatch-testing-library",
+            "await",
+            "AllBy",
+            "nth",
+            "within",
+            "configure",
+            "document.body"
+          ],
+          "path": "testing-library/intro.md",
+          "tokens": 986
+        },
+        {
+          "id": "intro",
+          "title": "intro",
+          "description": "On this page",
+          "tags": [
+            "pptr-testing-library",
+            "DOM Testing Library",
+            "puppeteer",
+            "ElementHandle",
+            "fireEvent",
+            "waitForElement",
+            "expect"
+          ],
+          "path": "testing-library/intro.md",
+          "tokens": 691
+        },
+        {
+          "id": "api",
+          "title": "api",
+          "description": "On this page",
+          "tags": [
+            "@testing-library/dom",
+            "render",
+            "cleanup",
+            "act",
+            "fireEvent",
+            "container",
+            "baseElement",
+            "queries",
+            "hydrate",
+            "wrapper"
+          ],
+          "path": "testing-library/api.md",
+          "tokens": 1180
+        },
+        {
+          "id": "example",
+          "title": "example",
+          "description": "On this page",
+          "tags": [],
+          "path": "testing-library/example.md",
+          "tokens": 398
+        },
+        {
+          "id": "intro",
+          "title": "intro",
+          "description": "On this page",
+          "tags": [
+            "DOM Testing Library",
+            "preact/test-utils"
+          ],
+          "path": "testing-library/intro.md",
+          "tokens": 376
+        },
+        {
+          "id": "learn",
+          "title": "learn",
+          "description": "Due to the similarities between React and Preact (including the testing libraries), you should be able to comfortably...",
+          "tags": [],
+          "path": "testing-library/learn.md",
+          "tokens": 319
+        },
+        {
+          "id": "about",
+          "title": "about",
+          "description": "On this page",
+          "tags": [
+            "waitFor",
+            "findBy",
+            "within",
+            "getBy...",
+            "getAllBy",
+            "queryBy...",
+            "null",
+            "queryAllBy",
+            "findBy...",
+            "findAllBy"
+          ],
+          "path": "testing-library/about.md",
+          "tokens": 3762
+        },
+        {
+          "id": "byalttext",
+          "title": "byalttext",
+          "description": "On this page",
+          "tags": [
+            "<img>",
+            "alt",
+            "<input>",
+            "<area>",
+            "<applet>"
+          ],
+          "path": "testing-library/byalttext.md",
+          "tokens": 447
+        },
+        {
+          "id": "bydisplayvalue",
+          "title": "bydisplayvalue",
+          "description": "On this page",
+          "tags": [
+            "input",
+            "textarea",
+            "select",
+            "<select>",
+            "<option>",
+            "TextMatch"
+          ],
+          "path": "testing-library/bydisplayvalue.md",
+          "tokens": 716
+        },
+        {
+          "id": "bylabeltext",
+          "title": "bylabeltext",
+          "description": "On this page",
+          "tags": [
+            "TextMatch",
+            "name",
+            "aria-label",
+            "aria-labelledby",
+            "selector",
+            "<input>",
+            "getByLabelText",
+            "for",
+            "<label>",
+            "id"
+          ],
+          "path": "testing-library/bylabeltext.md",
+          "tokens": 748
+        },
+        {
+          "id": "byplaceholdertext",
+          "title": "byplaceholdertext",
+          "description": "On this page",
+          "tags": [
+            "TextMatch",
+            "getByLabelText"
+          ],
+          "path": "testing-library/byplaceholdertext.md",
+          "tokens": 337
+        },
+        {
+          "id": "byrole",
+          "title": "byrole",
+          "description": "On this page",
+          "tags": [
+            "TextMatch",
+            "<button />",
+            "button",
+            "role",
+            "aria-*",
+            "heading",
+            "checkbox",
+            "switch",
+            "aria-label",
+            "getByText('The name')"
+          ],
+          "path": "testing-library/byrole.md",
+          "tokens": 3808
+        },
+        {
+          "id": "bytestid",
+          "title": "bytestid",
+          "description": "On this page",
+          "tags": [
+            "container.querySelector(",
+            ")",
+            "(and it also accepts a [",
+            "data-testid",
+            "...ByTestId",
+            "DOM Testing Library",
+            "testID"
+          ],
+          "path": "testing-library/bytestid.md",
+          "tokens": 574
+        },
+        {
+          "id": "bytext",
+          "title": "bytext",
+          "description": "On this page",
+          "tags": [
+            "textContent",
+            "TextMatch",
+            "input",
+            "type",
+            "submit",
+            "button",
+            "selector",
+            "getByLabelText",
+            "ignore",
+            "node.matches"
+          ],
+          "path": "testing-library/bytext.md",
+          "tokens": 505
+        },
+        {
+          "id": "bytitle",
+          "title": "bytitle",
+          "description": "On this page",
+          "tags": [
+            "title"
+          ],
+          "path": "testing-library/bytitle.md",
+          "tokens": 330
+        },
+        {
+          "id": "api",
+          "title": "api",
+          "description": "On this page",
+          "tags": [
+            "@noma.to/qwik-testing-library",
+            "@testing-library/dom",
+            "render",
+            "cleanup",
+            "<host>",
+            "document.body",
+            "container",
+            "document.createElement('host')",
+            "baseElement",
+            "debug"
+          ],
+          "path": "testing-library/api.md",
+          "tokens": 1384
+        },
+        {
+          "id": "example",
+          "title": "example",
+          "description": "On this page",
+          "tags": [
+            "server$",
+            "Qrl",
+            "$",
+            "getLatestPosts$"
+          ],
+          "path": "testing-library/example.md",
+          "tokens": 770
+        },
+        {
+          "id": "faq",
+          "title": "faq",
+          "description": "On this page",
+          "tags": [
+            "@testing-library/user-event"
+          ],
+          "path": "testing-library/faq.md",
+          "tokens": 189
+        },
+        {
+          "id": "intro",
+          "title": "intro",
+          "description": "On this page",
+          "tags": [
+            "qwik",
+            "@testing-library/dom"
+          ],
+          "path": "testing-library/intro.md",
+          "tokens": 205
+        },
+        {
+          "id": "setup",
+          "title": "setup",
+          "description": "On this page",
+          "tags": [
+            "devDependencies",
+            "qwik",
+            "1.7.2",
+            "@testing-library/dom",
+            "10.1.0",
+            "@testing-library/jest-dom",
+            "@testing-library/user-event",
+            "jsdom",
+            "happy-dom",
+            "@noma.to/qwik-testing-library"
+          ],
+          "path": "testing-library/setup.md",
+          "tokens": 1073
+        },
+        {
+          "id": "example-intro",
+          "title": "example-intro",
+          "description": "import * as React from 'react'import {Button, Text, TextInput, View} from 'react-native'import {render, screen, fireE...",
+          "tags": [],
+          "path": "testing-library/example-intro.md",
+          "tokens": 334
+        },
+        {
+          "id": "intro",
+          "title": "intro",
+          "description": "On this page",
+          "tags": [
+            "React Testing Library",
+            "DOM Testing Library",
+            "react-test-renderer"
+          ],
+          "path": "testing-library/intro.md",
+          "tokens": 566
+        },
+        {
+          "id": "setup",
+          "title": "setup",
+          "description": "On this page",
+          "tags": [
+            "React Native Testing Library",
+            "../../test-utils",
+            "moduleDirectories",
+            ".js",
+            "../"
+          ],
+          "path": "testing-library/setup.md",
+          "tokens": 607
+        },
+        {
+          "id": "api",
+          "title": "api",
+          "description": "On this page",
+          "tags": [
+            "React Testing Library",
+            "DOM Testing Library",
+            "render",
+            "container",
+            "baseElement",
+            "hydrate",
+            "legacyRoot",
+            "onCaughtError",
+            "onRecoverableError",
+            "wrapper"
+          ],
+          "path": "testing-library/api.md",
+          "tokens": 4233
+        },
+        {
+          "id": "cheatsheet",
+          "title": "cheatsheet",
+          "description": "On this page",
+          "tags": [
+            "React Testing Library",
+            "const {/* */} = render(Component)",
+            "unmount",
+            "container",
+            "DOM Testing Library",
+            "screen",
+            "render",
+            "getByText(node, 'text')",
+            "getByText('text')",
+            "fireEvent(node, event)"
+          ],
+          "path": "testing-library/cheatsheet.md",
+          "tokens": 1375
+        },
+        {
+          "id": "example-intro",
+          "title": "example-intro",
+          "description": "On this page",
+          "tags": [
+            "window.fetch",
+            "fetch()",
+            "setupServer",
+            "msw",
+            "render",
+            "fireEvent"
+          ],
+          "path": "testing-library/example-intro.md",
+          "tokens": 1913
+        },
+        {
+          "id": "faq",
+          "title": "faq",
+          "description": "See also the [main FAQ](/docs/dom-testing-library/faq) for questions not specific to React testing.",
+          "tags": [
+            "on-change.js",
+            "value",
+            "input",
+            "change",
+            "render",
+            "console.error",
+            "console.warn",
+            "onCaughtError",
+            "act",
+            "fireEvent"
+          ],
+          "path": "testing-library/faq.md",
+          "tokens": 2829
+        },
+        {
+          "id": "intro",
+          "title": "intro",
+          "description": "On this page",
+          "tags": [
+            "React Testing Library",
+            "DOM Testing Library",
+            "@testing-library/dom",
+            "react",
+            "react-dom",
+            "react-dom/test-utils",
+            "data-testid"
+          ],
+          "path": "testing-library/intro.md",
+          "tokens": 956
+        },
+        {
+          "id": "migrate-from-enzyme",
+          "title": "migrate-from-enzyme",
+          "description": "On this page",
+          "tags": [
+            "jest-dom",
+            "user-event",
+            "userEvent.click(checkbox)",
+            "state",
+            "describe",
+            "it",
+            "test",
+            "wrapper",
+            "wrapper.update()",
+            "Welcome"
+          ],
+          "path": "testing-library/migrate-from-enzyme.md",
+          "tokens": 3836
+        },
+        {
+          "id": "setup",
+          "title": "setup",
+          "description": "On this page",
+          "tags": [
+            "React Testing Library",
+            "wrapper",
+            "render",
+            "buildQueries",
+            "queries",
+            "data-cy",
+            "screen",
+            "within",
+            "../../test-utils",
+            "moduleDirectories"
+          ],
+          "path": "testing-library/setup.md",
+          "tokens": 3711
+        },
+        {
+          "id": "api",
+          "title": "api",
+          "description": "On this page",
+          "tags": [
+            "render",
+            "renderHook",
+            "renderDirective",
+            "Async methods",
+            "Known issues",
+            "rerender",
+            "location",
+            "findBy",
+            "@solidjs/router",
+            "wrapper"
+          ],
+          "path": "testing-library/api.md",
+          "tokens": 1616
+        },
+        {
+          "id": "intro",
+          "title": "intro",
+          "description": "On this page",
+          "tags": [
+            "DOM Testing Library",
+            "@testing-library/jest-dom"
+          ],
+          "path": "testing-library/intro.md",
+          "tokens": 415
+        },
+        {
+          "id": "api",
+          "title": "api",
+          "description": "On this page",
+          "tags": [
+            "@testing-library/svelte",
+            "@testing-library/dom",
+            "render",
+            "act",
+            "cleanup",
+            "fireEvent",
+            "<div>",
+            "document.body",
+            "props",
+            "context"
+          ],
+          "path": "testing-library/api.md",
+          "tokens": 2017
+        },
+        {
+          "id": "example",
+          "title": "example",
+          "description": "See the [svelte-testing-library repository](https://github.com/testing-library/svelte-testing-library/tree/main/examp...",
+          "tags": [
+            "render()",
+            "screen",
+            "@testing-library/user-event",
+            "expect",
+            "@testing-library/jest-dom"
+          ],
+          "path": "testing-library/example.md",
+          "tokens": 478
+        },
+        {
+          "id": "faq",
+          "title": "faq",
+          "description": "On this page",
+          "tags": [
+            "onMount",
+            "@testing-library/user-event",
+            "fireEvent",
+            "requestAnimationFrame"
+          ],
+          "path": "testing-library/faq.md",
+          "tokens": 772
+        },
+        {
+          "id": "intro",
+          "title": "intro",
+          "description": "On this page",
+          "tags": [
+            "dom-testing-library",
+            "svelte"
+          ],
+          "path": "testing-library/intro.md",
+          "tokens": 340
+        },
+        {
+          "id": "setup",
+          "title": "setup",
+          "description": "On this page",
+          "tags": [
+            "@testing-library/svelte",
+            "@testing-library/jest-dom",
+            "@sveltejs/vite-plugin-svelte",
+            "vitest",
+            "jsdom",
+            "happy-dom",
+            "@vitest/ui",
+            "vitest-setup.js",
+            "vitest.config.js",
+            "vite.config.js"
+          ],
+          "path": "testing-library/setup.md",
+          "tokens": 1939
+        },
+        {
+          "id": "intro",
+          "title": "intro",
+          "description": "On this page",
+          "tags": [
+            "testcafe-testing-library",
+            ".testcaferc.json",
+            "screen",
+            "Queries",
+            "queryBy",
+            "findBy",
+            "getBy",
+            "document.body",
+            "within"
+          ],
+          "path": "testing-library/intro.md",
+          "tokens": 1508
+        },
+        {
+          "id": "clipboard",
+          "title": "clipboard",
+          "description": "On this page",
+          "tags": [
+            "userEvent.setup()",
+            "window.navigator.clipboard",
+            "writeToClipboard",
+            "true",
+            "Clipboard",
+            "clipboardData"
+          ],
+          "path": "testing-library/clipboard.md",
+          "tokens": 307
+        },
+        {
+          "id": "convenience",
+          "title": "convenience",
+          "description": "On this page",
+          "tags": [
+            "pointer()",
+            "keyboard()",
+            "skipHover"
+          ],
+          "path": "testing-library/convenience.md",
+          "tokens": 912
+        },
+        {
+          "id": "install",
+          "title": "install",
+          "description": "npm install --save-dev @testing-library/user-event",
+          "tags": [
+            "@testing-library/user-event",
+            "@testing-library/dom"
+          ],
+          "path": "testing-library/install.md",
+          "tokens": 141
+        },
+        {
+          "id": "intro",
+          "title": "intro",
+          "description": "On this page",
+          "tags": [
+            "user-event",
+            "user-event@14",
+            "user-event@13.5.0",
+            "React",
+            "fireEvent",
+            "dispatchEvent",
+            "userEvent",
+            "userEvent.setup()",
+            "before",
+            "after"
+          ],
+          "path": "testing-library/intro.md",
+          "tokens": 1089
+        },
+        {
+          "id": "keyboard",
+          "title": "keyboard",
+          "description": "keyboard(input: KeyboardInput): Promise<void>",
+          "tags": [
+            "keyboard",
+            "string",
+            "{",
+            "[",
+            "Shift",
+            "f",
+            "\\",
+            ">",
+            "keydown",
+            "/"
+          ],
+          "path": "testing-library/keyboard.md",
+          "tokens": 651
+        },
+        {
+          "id": "options",
+          "title": "options",
+          "description": "On this page",
+          "tags": [
+            "user-event",
+            "setup()",
+            "delay: null",
+            "advanceTimers",
+            "default",
+            "() => Promise.resolve()",
+            "upload()",
+            "accept",
+            "true",
+            "A"
+          ],
+          "path": "testing-library/options.md",
+          "tokens": 1206
+        },
+        {
+          "id": "pointer",
+          "title": "pointer",
+          "description": "On this page",
+          "tags": [
+            "pointer",
+            "jest",
+            "jsdom",
+            "keys",
+            ">",
+            "/",
+            "pointerMap",
+            "pointerName",
+            "mouse",
+            "pointerId: 1"
+          ],
+          "path": "testing-library/pointer.md",
+          "tokens": 1087
+        },
+        {
+          "id": "setup",
+          "title": "setup",
+          "description": "On this page",
+          "tags": [
+            "user-event",
+            "setup()",
+            "userEvent.setup()",
+            ".setup()",
+            "window.navigator.clipboard",
+            "setup"
+          ],
+          "path": "testing-library/setup.md",
+          "tokens": 510
+        },
+        {
+          "id": "utility",
+          "title": "utility",
+          "description": "On this page",
+          "tags": [
+            "Promise",
+            "values",
+            "HTMLSelectElement",
+            "keyboard()",
+            "type()",
+            "skipClick",
+            "true",
+            "initialSelectionStart",
+            "initialSelectionEnd",
+            "text"
+          ],
+          "path": "testing-library/utility.md",
+          "tokens": 1331
+        },
+        {
+          "id": "v13",
+          "title": "v13",
+          "description": "On this page",
+          "tags": [
+            "user-event",
+            "fireEvent",
+            "user-event@13.5.0",
+            "user-event@14",
+            "delay",
+            "userEvent.type",
+            "userEvent",
+            "before/after",
+            "click(element, eventInit, options)",
+            "element"
+          ],
+          "path": "testing-library/v13.md",
+          "tokens": 4863
+        },
+        {
+          "id": "using-fake-timers",
+          "title": "using-fake-timers",
+          "description": "In some cases, when your code uses timers (`setTimeout`, `setInterval`, `clearTimeout`, `clearInterval`), your tests ...",
+          "tags": [
+            "setTimeout",
+            "setInterval",
+            "clearTimeout",
+            "clearInterval",
+            "beforeEach",
+            "useRealTimers",
+            "afterEach",
+            "runOnlyPendingTimers",
+            "user-event",
+            "advanceTimers"
+          ],
+          "path": "testing-library/using-fake-timers.md",
+          "tokens": 426
+        },
+        {
+          "id": "api",
+          "title": "api",
+          "description": "On this page",
+          "tags": [
+            "Vue Testing Library",
+            "DOM Testing Library",
+            "render(Component, options)",
+            "render",
+            "...queries",
+            "container",
+            "baseElement",
+            "debug",
+            "unmount",
+            "html"
+          ],
+          "path": "testing-library/api.md",
+          "tokens": 2058
+        },
+        {
+          "id": "cheatsheet",
+          "title": "cheatsheet",
+          "description": "On this page",
+          "tags": [
+            "Vue Testing Library",
+            "render",
+            "DOM Testing Library",
+            "getByText(node, 'text')",
+            "getByText('text')",
+            "null",
+            "[]",
+            "<label for=\"element\" />",
+            "<input placeholder=\"name\" />",
+            "<p>Lorem ipsum</p>"
+          ],
+          "path": "testing-library/cheatsheet.md",
+          "tokens": 1141
+        },
+        {
+          "id": "examples",
+          "title": "examples",
+          "description": "On this page",
+          "tags": [
+            "v-model",
+            "vuex",
+            "vue-router",
+            "vue-validate",
+            "vue-i18n"
+          ],
+          "path": "testing-library/examples.md",
+          "tokens": 1112
+        },
+        {
+          "id": "faq",
+          "title": "faq",
+          "description": "See also the [main FAQ](/docs/dom-testing-library/faq) for questions not specific to Vue testing.",
+          "tags": [
+            "mount",
+            "global.stubs",
+            "hash",
+            "window.location",
+            "render",
+            "abstract",
+            "window"
+          ],
+          "path": "testing-library/faq.md",
+          "tokens": 990
+        },
+        {
+          "id": "intro",
+          "title": "intro",
+          "description": "On this page",
+          "tags": [
+            "DOM Testing Library",
+            "@vue/test-utils",
+            "getBy",
+            "getAllBy",
+            "queryBy",
+            "queryAllBy",
+            "@testing-library/jest-dom",
+            "Vue Testing Library",
+            "data-testid"
+          ],
+          "path": "testing-library/intro.md",
+          "tokens": 647
+        },
+        {
+          "id": "setup",
+          "title": "setup",
+          "description": "On this page",
+          "tags": [
+            "Vue Testing Library",
+            "cleanup"
+          ],
+          "path": "testing-library/setup.md",
+          "tokens": 136
+        },
+        {
+          "id": "intro",
+          "title": "intro",
+          "description": "On this page",
+          "tags": [
+            "webdriverio-testing-library",
+            "setupBrowser",
+            "document.body",
+            "within",
+            "{query}$",
+            "configure",
+            "Browser",
+            "Element",
+            "WebdriverIO",
+            "@wdio/sync"
+          ],
+          "path": "testing-library/intro.md",
+          "tokens": 1634
         }
       ]
     },
