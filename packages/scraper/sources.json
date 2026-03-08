@@ -378,6 +378,20 @@
       "url": "https://ui.shadcn.com/llms.txt"
     },
     {
+      "id": "supabase",
+      "name": "Supabase",
+      "description": "Open-source Firebase alternative with Postgres database, authentication, storage, and edge functions",
+      "version": "2",
+      "adapter": "llms-index",
+      "url": "https://supabase.com/docs/llms.txt",
+      "topicPrefix": "auto",
+      "llmsIndex": {
+        "servicePattern": "(https://supabase\\.com/llms/[\\w.-]+\\.txt)",
+        "contentType": "llms-full",
+        "exclude": ["dart", "swift", "kotlin", "python", "csharp"]
+      }
+    },
+    {
       "id": "azure",
       "name": "Azure",
       "description": "Microsoft Azure cloud platform with compute, storage, databases, AI, and 200+ services",
