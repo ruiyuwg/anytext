@@ -1,0 +1,277 @@
+# Ralph Progress Log
+Started: Sun Mar  8 15:32:48 CST 2026
+---
+
+## Codebase Patterns
+- Types are defined in `packages/scraper/src/types.ts` — all adapter configs, pipeline interfaces, and manifest types live here
+- `types.ts` is excluded from coverage in vitest config (`test.coverage.exclude: ["src/types.ts"]`)
+- Adapter type union in `SourceConfig.adapter` must be updated when adding new adapters
+- New optional config interfaces (like `LlmsIndexConfig`) are added as standalone interfaces and referenced as optional fields on `SourceConfig`
+- Pipeline utilities go in `packages/scraper/src/pipeline/` with tests in `packages/scraper/src/__tests__/pipeline/`
+- Use `vi.useFakeTimers()` + `vi.advanceTimersByTimeAsync()` for time-dependent tests (not `vi.advanceTimersByTime` — the async variant is needed for Promise resolution)
+
+## 2026-03-08 - US-001
+- Added `LlmsIndexConfig` interface with fields: `servicePattern`, `contentType`, `include`, `exclude`, `maxServices`
+- Added `'llms-index'` to the adapter union type
+- Added optional fields to `SourceConfig`: `llmsIndex`, `topicPrefix`, `rateLimit`
+- Added optional `maxPages` field to `CrawlConfig`
+- Added optional `maxFiles` and `subDirs` fields to `GithubConfig`
+- Files changed: `packages/scraper/src/types.ts`
+- **Learnings for future iterations:**
+  - `types.ts` is pure type definitions — no runtime code, excluded from coverage, changes don't affect tests
+  - Build must pass to verify type correctness since there are no dedicated type tests
+  - All 434 tests (204 CLI + 230 scraper) continue to pass with additive type changes
+---
+
+## 2026-03-08 - US-002
+- Created `RateLimiter` class with `acquire()` method that queues and spaces requests by `1000/requestsPerSecond` ms
+- Created `createHostLimiter(rateLimit?)` factory (default 10 req/s)
+- Implementation uses a queue with `setTimeout` for spacing; concurrent `acquire()` calls are queued and processed sequentially
+- Files changed: `packages/scraper/src/pipeline/rate-limiter.ts`, `packages/scraper/src/__tests__/pipeline/rate-limiter.test.ts`
+- **Learnings for future iterations:**
+  - `vi.advanceTimersByTimeAsync()` is required (not the sync variant) when testing code with `Promise` + `setTimeout` combinations
+  - The rate limiter tracks `lastCallTime` and calculates delay dynamically, so it naturally handles the case where enough time has passed between calls (no unnecessary delay)
+  - 8 tests, 100% coverage on rate-limiter.ts
+  - All 442 tests (204 CLI + 238 scraper) pass
+---
+
+## Codebase Patterns (updated)
+- When adding new adapters, register them in `scrape.ts` adapter map AND add mock + test in `scrape.test.ts`
+- `vi.mock()` factory mocks don't get reset by `restoreMocks: true` — use `vi.clearAllMocks()` in `beforeEach` when tests share module-level mocks
+- llms-txt style adapters need content >400 chars for `estimateTokens` to exceed the 100-token threshold in tests
+- GitHub tree API returns `truncated: true` for large repos; Contents API (`/contents/{path}`) returns `type: "file"` with `name` field (different from tree API's `type: "blob"` without `name`)
+
+## 2026-03-08 - US-003 & US-004
+- Created `packages/scraper/src/adapters/llms-index.ts` — new adapter that follows a root llms.txt index to per-service llms-full.txt or llms.txt files
+- Supports both `llms-full` (fetch → clean → split) and `llms-txt` (fetch → parse links → fetch pages → clean) content types
+- Service URLs discovered via configurable `servicePattern` regex with include/exclude/maxServices filtering
+- Concurrent service processing in batches of 4 via `Promise.allSettled`
+- Individual service failures logged and skipped (graceful degradation)
+- Services with <2 topics skipped with warning
+- Topic IDs prefixed with service slug, titles include service context (e.g., "Workers: Routing")
+- Registered adapter in `scrape.ts` adapter map
+- Created `packages/scraper/src/__tests__/adapters/llms-index.test.ts` with 25 tests, 100% coverage
+- Updated `packages/scraper/src/__tests__/scrape.test.ts` with llms-index adapter mock and selection test
+- Files changed: `llms-index.ts`, `llms-index.test.ts`, `scrape.ts`, `scrape.test.ts`
+- **Learnings for future iterations:**
+  - `vi.clearAllMocks()` in `beforeEach` is essential when tests use `mockResolvedValueOnce` with module-level `vi.mock()` factories
+  - Test content for llms-txt paths needs >400 chars to pass the 100-token threshold (`estimateTokens = Math.ceil(length/4)`)
+  - `extractFirstParagraph` and `extractInlineCode` helper functions need explicit coverage for edge cases (no paragraphs, no inline code, non-matching links)
+  - v8 coverage tracks individual branch conditions — each `||` in an `if` statement needs both true/false coverage
+  - All 264 tests pass (204 CLI + 260 scraper), 100% coverage maintained
+---
+
+## 2026-03-08 - US-005
+- Added sitemap index detection: checks for `<sitemapindex` in XML content
+- When sitemap index detected: extracts sub-sitemap URLs from `<loc>` elements, fetches each, combines page URLs into single list
+- Added `maxPages` support for both regular sitemaps and sitemap indexes — limits total URL count with warning
+- Sub-sitemap fetch failures are logged and skipped (graceful degradation)
+- Existing single-sitemap behavior fully preserved (backwards compatible)
+- Added `resolveUrls()` async helper and `isSitemapIndex()` detector functions
+- Added `beforeEach` with `vi.clearAllMocks()` to fix accumulated mock call counts across tests
+- Files changed: `packages/scraper/src/adapters/sitemap.ts`, `packages/scraper/src/__tests__/adapters/sitemap.test.ts`
+- **Learnings for future iterations:**
+  - Existing sitemap tests didn't have `vi.clearAllMocks()` in `beforeEach` — mock call counts accumulated across tests, causing `toHaveBeenCalledTimes` assertions to fail for any test after the first
+  - `parseSitemapUrls` regex works for both regular sitemap `<url><loc>` and sitemap index `<sitemap><loc>` since both use `<loc>` tags
+  - 18 tests total (11 existing + 7 new), 100% coverage on sitemap.ts
+  - All 271 tests pass (204 CLI + 267 scraper → wait, actually the count from turborepo cached CLI), 100% coverage maintained
+---
+
+## 2026-03-08 - US-006
+- Enhanced GitHub adapter with three new capabilities:
+  1. **subDirs filtering**: When `subDirs` is set in GithubConfig, only processes files within those subdirectories of `docsPath`
+  2. **maxFiles limit**: Default 10000, truncates file list with warning when exceeded
+  3. **Truncation fallback**: Detects `truncated: true` in tree API response, falls back to per-directory GitHub Contents API (`/repos/{owner}/{repo}/contents/{path}?ref={branch}`) for each subDir
+- Extracted `buildHeaders()` and `fetchContentsApi()` helper functions for cleaner code organization
+- Files changed: `packages/scraper/src/adapters/github.ts`, `packages/scraper/src/__tests__/adapters/github.test.ts`
+- **Learnings for future iterations:**
+  - The GitHub tree API returns `truncated: true` for very large repos — the Contents API fallback only works when `subDirs` is specified (it lists files in a single directory)
+  - Contents API returns items with `type: "file"` (not "blob" like tree API) and includes a `name` field for filename matching
+  - 18 tests total (11 existing + 7 new), 100% coverage on github.ts
+  - All 276 scraper tests pass, 100% coverage maintained
+---
+
+## 2026-03-08 - US-007
+- Added topic ID prefixing to GitHub adapter based on `topicPrefix` source config
+- When `topicPrefix` is `'directory'` or `'auto'`: extracts immediate subdirectory under `docsPath` from file path, prefixes topic ID with slugified subdir name, and adds capitalized subdir to title (e.g., "Azure Functions: Overview")
+- When `topicPrefix` is `'none'` (default): no prefix, fully backwards compatible
+- Files directly under `docsPath` root (no subdirectory) get no prefix regardless of setting
+- Files changed: `packages/scraper/src/adapters/github.ts`, `packages/scraper/src/__tests__/adapters/github.test.ts`
+- **Learnings for future iterations:**
+  - The `topicPrefix` field lives on `SourceConfig` (not `GithubConfig`), so access it via `source.topicPrefix`
+  - Subdirectory extraction: strip `docsPath + "/"` from the file path, then split on `/` — if >1 segment, first segment is the subDir
+  - Title capitalization: split subDir on `-`, capitalize first char of each word, join with space
+  - 21 tests total (18 existing + 3 new), 100% coverage on github.ts
+  - All 279 scraper tests + 204 CLI tests pass, 100% coverage maintained
+---
+
+## Codebase Patterns (updated)
+- Topic prefix logic follows the same pattern across adapters: check `source.topicPrefix ?? "none"`, if `"directory"` or `"auto"` derive a prefix, prepend to ID with `-`, and format display prefix for title with `:`
+- `deriveUrlPrefix` for sitemap uses DOC_PATH_PREFIXES (`/docs/`, `/documentation/`, `/guide/`) to find the first significant path segment; falls back to first path segment for unknown URL structures
+- Single-segment paths (no subdirectory depth) get no prefix regardless of setting — consistent with GitHub adapter behavior
+- When threading a new parameter through adapters, all mock Response objects in tests need updated properties (e.g., `headers: new Headers()` for `response.headers.get()`)
+- Optional chaining `rateLimiter?.acquire()` creates branches in v8 coverage — need tests with both `undefined` and defined rateLimiter
+- `vi.useFakeTimers()` + `vi.advanceTimersByTimeAsync()` needed for testing timed pauses (e.g., `checkRateLimit`); remember `vi.useRealTimers()` at end
+
+## 2026-03-08 - US-008
+- Added topic ID prefixing to sitemap adapter based on `source.topicPrefix` config
+- When `topicPrefix` is `'directory'` or `'auto'`: derives prefix from URL path segments after common doc path prefixes (`/docs/`, `/documentation/`, `/guide/`)
+- When no known doc prefix: uses first path segment if URL has multiple segments
+- Single-segment paths (e.g., `/overview`) get no prefix regardless of setting
+- Topic titles include capitalized prefix as context (e.g., "Functions: Installation")
+- When `topicPrefix` is `'none'` (default): fully backwards compatible, no change
+- Files changed: `packages/scraper/src/adapters/sitemap.ts`, `packages/scraper/src/__tests__/adapters/sitemap.test.ts`
+- **Learnings for future iterations:**
+  - The prefix pattern is consistent with GitHub adapter (US-007): check mode → derive prefix → prepend to ID → format display title
+  - `deriveUrlPrefix` returns `undefined` when no prefix should be applied (single-segment paths or only one segment after doc prefix)
+  - 8 new tests added (26 total), 100% coverage on sitemap.ts
+  - All 287 scraper tests + 204 CLI tests pass, 100% coverage maintained
+---
+
+## 2026-03-08 - US-009
+- Threaded `RateLimiterLike` interface through all 6 adapters via `Adapter.process()` signature
+- Added `rateLimiter?.acquire()` calls before every fetch in all adapters (github, sitemap, html, llms-index, llms-full, llms-txt)
+- Added HTTP 429 retry handling to `fetchContent` with `Retry-After` header parsing (default 60s)
+- Added `checkRateLimit` to GitHub adapter: pauses 5s when `X-RateLimit-Remaining < 100`
+- Updated `scrape.ts` to create `RateLimiter` via `createHostLimiter(source.rateLimit)` and pass to adapters
+- Files changed: `types.ts`, `scrape.ts`, `pipeline/fetch.ts`, `adapters/github.ts`, `adapters/html.ts`, `adapters/llms-full.ts`, `adapters/llms-index.ts`, `adapters/llms-txt.ts`, `adapters/sitemap.ts`, and corresponding test files
+- **Learnings for future iterations:**
+  - When adding `response.headers.get()` calls, ALL mock Response objects in tests need `headers: new Headers()` — use `replace_all` for bulk updates
+  - Optional chaining `rateLimiter?.acquire()` creates v8 branch coverage requirements — need tests both with and without rateLimiter defined
+  - `if (!prefetchedContent)` around `rateLimiter?.acquire()` also creates a branch — need test with prefetched content to cover the false path
+  - `vi.useFakeTimers()` + `vi.advanceTimersByTimeAsync(ms)` for testing `setTimeout`-based pauses; always call `vi.useRealTimers()` after
+  - 300 scraper tests + 204 CLI tests = 504 total, all passing with 100% coverage
+---
+
+## 2026-03-08 - US-010
+- Added Cloudflare source config to `packages/scraper/sources.json`
+- Config: `id: "cloudflare"`, `adapter: "llms-index"`, `url: "https://developers.cloudflare.com/llms.txt"`
+- Used `contentType: 'llms-txt'` (not `'llms-full'` as PRD assumed) because the root llms.txt links to per-product `llms.txt` index files, not `llms-full.txt` files
+- `servicePattern`: `(https://developers\\.cloudflare\\.com/[\\w-]+/llms\\.txt)` — captures full per-product llms.txt URLs from markdown link format
+- `topicPrefix: "auto"` for service-namespaced topic IDs
+- Files changed: `packages/scraper/sources.json`
+- **Learnings for future iterations:**
+  - Always fetch and examine the actual root llms.txt content before writing the config — PRD assumptions about URL format may not match reality
+  - Cloudflare's root llms.txt uses markdown link format: `- [Product Name](url): description` — the servicePattern regex needs to match URLs within parentheses
+  - Each Cloudflare product has both `/llms.txt` (index) and `/llms-full.txt` (full content) — use `contentType: 'llms-txt'` since root links to the index variant
+  - `sources.json` changes don't affect tests since the scraper config is only read at runtime
+  - All 504 tests pass, build succeeds
+---
+
+## 2026-03-08 - US-011
+- Added AWS source config to `packages/scraper/sources.json`
+- Config: `id: "aws"`, `adapter: "llms-index"`, `url: "https://docs.aws.amazon.com/llms.txt"`
+- Used `contentType: 'llms-txt'` — each per-service link is an llms.txt index of pages
+- `servicePattern`: `(https://docs\\.aws\\.amazon\\.com/[^\\s)]+/llms\\.txt)` — captures full per-service llms.txt URLs from markdown link format `[llms.txt](URL)`
+- `rateLimit: 5` for conservative AWS server usage
+- `topicPrefix: "auto"` for service-namespaced topic IDs
+- Files changed: `packages/scraper/sources.json`
+- **Learnings for future iterations:**
+  - AWS root llms.txt format: `- [Doc Title](page_url): Description. [llms.txt](service_llms_url)` — the servicePattern needs to match the second URL in each line
+  - AWS has ~600-700 per-service llms.txt links with nested paths like `/AWSCloudFormation/latest/UserGuide/llms.txt`
+  - Used `[^\\s)]+` instead of `[\\w-]+` in servicePattern since AWS paths have multiple segments separated by `/`
+  - All 504 tests pass, build succeeds
+---
+
+## 2026-03-08 - US-012
+- Added Azure source config to `packages/scraper/sources.json`
+- Config: `id: "azure"`, `adapter: "github"`, `repo: "MicrosoftDocs/azure-docs"`, `docsPath: "articles"`, `branch: "main"`
+- `topicPrefix: "directory"` — prefixes topic IDs with service directory name (e.g., "azure-functions-overview")
+- `include: [".md"]` to filter for markdown files only
+- `exclude: ["media/", "includes/", "bread/", "zone-pivot-groups.yml", "TOC.yml", "index.yml"]` to skip media files, shared includes, breadcrumb configs, table-of-contents, and index YAML files
+- `maxFiles: 10000` to limit processing of this 26.7GB repo
+- `rateLimit: 10` for GitHub API rate limiting
+- Files changed: `packages/scraper/sources.json`
+- **Learnings for future iterations:**
+  - MicrosoftDocs/azure-docs has 146 service subdirectories under `articles/` — the `topicPrefix: "directory"` setting from US-007 handles namespacing
+  - The repo contains non-doc files (media/, includes/, YAML configs) that should be excluded
+  - `maxFiles: 10000` from US-006 prevents processing the entire 26.7GB repo
+  - All 504 tests pass, build succeeds
+---
+
+## 2026-03-08 - US-013
+- Added Google Cloud source config to `packages/scraper/sources.json`
+- Config: `id: "gcloud"`, `adapter: "sitemap"`, `url: "https://cloud.google.com/sitemap.xml"`
+- `crawl.contentSelector: ".devsite-article-body, article, main"` — targets Google's article body container with fallbacks
+- `crawl.include: ["/docs/"]` to scope to documentation URLs only
+- `crawl.exclude: ["/release-notes", "/changelog", "/versions", "/api/reference", "/apis/", "hl=", "/intl/"]` to skip release notes, changelogs, API reference autogenerated pages, and non-English locales
+- `crawl.maxPages: 10000` — critical safety limit since Google Cloud has 180 sub-sitemaps with 50K+ total URLs
+- `topicPrefix: "auto"` for service-namespaced topic IDs
+- `rateLimit: 5` for conservative Google server usage
+- Files changed: `packages/scraper/sources.json`
+- **Learnings for future iterations:**
+  - Google Cloud uses `.devsite-article-body` as the primary content container; `article` and `main` are reasonable fallbacks
+  - Non-English locale URLs use `hl=` query parameter (e.g., `?hl=ja`) and `/intl/` path prefix — both should be excluded
+  - `sources.json` changes don't affect tests since the scraper config is only read at runtime
+  - All 504 tests pass, build succeeds
+---
+
+## 2026-03-08 - US-014
+- Added Alibaba Cloud source config to `packages/scraper/sources.json`
+- Config: `id: "alibabacloud"`, `adapter: "html"`, `url: "https://www.alibabacloud.com/help/en"`
+- Used `html` adapter because AlibabaCloudDocs GitHub org only has 6 repos (none with comprehensive product docs), and no sitemap.xml or llms.txt exists
+- `startPaths`: 9 top services — ECS, OSS, Function Compute, ApsaraDB RDS, CDN, ACK, API Gateway, SLB, Model Studio
+- `crawl.contentSelector: "article, main"` — no specific CSS classes found on the SSR pages, using semantic HTML elements
+- `crawl.include: ["/help/en/"]` to scope to English documentation only
+- `crawl.exclude: ["/release-notes", "/changelog", "/pricing", "/announcements", "/intl/"]` to skip non-documentation content
+- `topicPrefix: "auto"` for service-namespaced topic IDs
+- `rateLimit: 3` — conservative rate for alibabacloud.com
+- Files changed: `packages/scraper/sources.json`
+- **Learnings for future iterations:**
+  - AlibabaCloudDocs GitHub org has only 6 repos — none contain comprehensive cloud service documentation; the HTML site is the only viable source
+  - alibabacloud.com/help/en/ is server-side rendered with good content on individual topic pages
+  - No sitemap.xml exists on alibabacloud.com (returns 404/redirect)
+  - URL pattern: `/help/en/{product}/{section}/{topic-slug}`
+  - The HTML adapter's `startPaths` are resolved via `new URL(path, source.url)` — use absolute paths (e.g., `/help/en/ecs`) to avoid relative resolution issues
+  - All 504 tests pass, build succeeds
+---
+
+## 2026-03-08 - US-015
+- Added grouped summary view for libraries with >100 topics in `list` command
+- Groups topics by service prefix (first segment before `-` in topic ID)
+- Each group shows: bold service name + dim topic count (e.g., "workers  50 topics")
+- Groups sorted alphabetically via `localeCompare`
+- Total topic count shown at bottom of grouped view
+- Libraries with ≤100 topics retain existing individual topic listing (backwards compatible)
+- Topics without hyphens use their full ID as the group key
+- Files changed: `packages/cli/src/commands/list.ts`, `packages/cli/src/__tests__/commands/list.test.ts`
+- **Learnings for future iterations:**
+  - `const topics = []` infers `never[]` in TypeScript strict mode — must annotate as `const topics: Topic[] = []` in tests
+  - The grouping threshold is >100 topics (checked via `library.topics.length > 100`)
+  - The `listGroupedTopics` function uses `Map<string, number>` for counting, then sorts entries alphabetically
+  - 209 CLI tests (5 new), 100% coverage maintained on list.ts
+  - All tests pass, build succeeds
+---
+
+## 2026-03-08 - US-016
+- Added `listServiceTopics()` function to `list.ts` that filters topics by service prefix (`{service}-`)
+- New command variant: `anytext list {library} {service}` — shows only topics matching the service group
+- When no matches: displays `No topics found for service '{service}' in {library}.`
+- Output format matches existing topic list (ID, title, tokens, tags)
+- Header shows `Library > service — N topics` for clarity
+- Updated help text in `index.ts` to document the new command variant with example
+- Added 4 new tests: service filter, no matches, existing behavior unchanged, tags in filtered view
+- Files changed: `packages/cli/src/commands/list.ts`, `packages/cli/src/__tests__/commands/list.test.ts`, `packages/cli/src/index.ts`
+- **Learnings for future iterations:**
+  - The `list` function already receives the full `args` array from `index.ts`, so `args[1]` is naturally the service filter — no changes to command routing needed
+  - The service filter uses `startsWith(`${service}-`)` to match — this is consistent with how `listGroupedTopics` derives groups (splitting on first `-`)
+  - 213 CLI tests (4 new), 100% coverage maintained on all files
+  - All tests pass, build succeeds
+---
+
+## 2026-03-08 - US-017
+- Updated README.md:
+  - Added cloud provider examples to Usage section (`anytext list aws`, `anytext list aws lambda`, `anytext read aws lambda-creating-functions`)
+  - Added "Cloud Providers" table with AWS, Azure, Cloudflare, Google Cloud, Alibaba Cloud entries
+  - Added `llms-index` to the adapter list in Adding a New Library section
+- Updated CLAUDE.md:
+  - Added `llms-index` adapter description
+  - Updated `github` and `sitemap` adapter descriptions with new capabilities (subDirs, maxFiles, maxPages, sitemap index)
+  - Added source config fields documentation (topicPrefix, rateLimit, llmsIndex)
+  - Added crawl config fields documentation (maxPages, maxFiles, subDirs)
+  - Added `llms-index.test.ts` and `rate-limiter.test.ts` to test structure
+- Files changed: `README.md`, `CLAUDE.md`
+- **Learnings for future iterations:**
+  - Documentation-only stories don't require test changes — just verify build and existing tests still pass
+  - All 504+ tests pass, build succeeds
+---
