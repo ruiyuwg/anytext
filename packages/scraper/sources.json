@@ -155,6 +155,92 @@
       "version": "1",
       "adapter": "llms-full",
       "url": "https://valibot.dev/llms-full.txt"
+    },
+    {
+      "id": "cloudflare",
+      "name": "Cloudflare",
+      "description": "Cloud platform with CDN, DNS, DDoS protection, Workers serverless computing, and developer tools",
+      "version": "2026",
+      "adapter": "llms-index",
+      "url": "https://developers.cloudflare.com/llms.txt",
+      "topicPrefix": "auto",
+      "llmsIndex": {
+        "servicePattern": "(https://developers\\.cloudflare\\.com/[\\w-]+/llms\\.txt)",
+        "contentType": "llms-txt"
+      }
+    },
+    {
+      "id": "aws",
+      "name": "AWS",
+      "description": "Amazon Web Services cloud platform with compute, storage, database, machine learning, and 200+ services",
+      "version": "2026",
+      "adapter": "llms-index",
+      "url": "https://docs.aws.amazon.com/llms.txt",
+      "topicPrefix": "auto",
+      "rateLimit": 5,
+      "llmsIndex": {
+        "servicePattern": "(https://docs\\.aws\\.amazon\\.com/[^\\s)]+/llms\\.txt)",
+        "contentType": "llms-txt"
+      }
+    },
+    {
+      "id": "gcloud",
+      "name": "Google Cloud",
+      "description": "Google Cloud platform with compute, storage, databases, AI/ML, Kubernetes, and 100+ cloud services",
+      "version": "2026",
+      "adapter": "sitemap",
+      "url": "https://cloud.google.com/sitemap.xml",
+      "topicPrefix": "auto",
+      "rateLimit": 5,
+      "crawl": {
+        "contentSelector": ".devsite-article-body, article, main",
+        "include": ["/docs/"],
+        "exclude": ["/release-notes", "/changelog", "/versions", "/api/reference", "/apis/", "hl=", "/intl/"],
+        "maxPages": 10000
+      }
+    },
+    {
+      "id": "alibabacloud",
+      "name": "Alibaba Cloud",
+      "description": "Cloud computing platform with compute, storage, databases, serverless, AI, and 100+ cloud services",
+      "version": "2026",
+      "adapter": "html",
+      "url": "https://www.alibabacloud.com/help/en",
+      "topicPrefix": "auto",
+      "rateLimit": 3,
+      "crawl": {
+        "contentSelector": "article, main",
+        "startPaths": [
+          "/help/en/ecs",
+          "/help/en/oss",
+          "/help/en/function-compute",
+          "/help/en/apsaradb-for-rds",
+          "/help/en/cdn",
+          "/help/en/ack",
+          "/help/en/api-gateway",
+          "/help/en/slb",
+          "/help/en/model-studio"
+        ],
+        "include": ["/help/en/"],
+        "exclude": ["/release-notes", "/changelog", "/pricing", "/announcements", "/intl/"]
+      }
+    },
+    {
+      "id": "azure",
+      "name": "Azure",
+      "description": "Microsoft Azure cloud platform with compute, storage, databases, AI, and 200+ services",
+      "version": "2026",
+      "adapter": "github",
+      "topicPrefix": "directory",
+      "rateLimit": 10,
+      "github": {
+        "repo": "MicrosoftDocs/azure-docs",
+        "branch": "main",
+        "docsPath": "articles",
+        "include": [".md"],
+        "exclude": ["media/", "includes/", "bread/", "zone-pivot-groups.yml", "TOC.yml", "index.yml"],
+        "maxFiles": 10000
+      }
     }
   ]
 }

@@ -1,6 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { list } from "../../commands/list.js";
 import { makeManifest, makeTopic } from "../helpers/fixtures.js";
+import type { Topic } from "../../types.js";
 
 vi.mock("../../registry.js", () => ({
   getManifest: vi.fn(),
@@ -107,5 +108,231 @@ describe("list", () => {
     expect(errorSpy).toHaveBeenCalledWith(
       expect.stringContaining("Unknown library"),
     );
+  });
+
+  it("shows grouped summary when library has > 100 topics", async () => {
+    const topics: Topic[] = [];
+    for (let i = 0; i < 50; i++) {
+      topics.push(
+        makeTopic({ id: `workers-topic-${i}`, title: `Workers Topic ${i}` }),
+      );
+    }
+    for (let i = 0; i < 40; i++) {
+      topics.push(
+        makeTopic({ id: `pages-topic-${i}`, title: `Pages Topic ${i}` }),
+      );
+    }
+    for (let i = 0; i < 15; i++) {
+      topics.push(
+        makeTopic({ id: `r2-topic-${i}`, title: `R2 Topic ${i}` }),
+      );
+    }
+    const registry = await import("../../registry.js");
+    vi.mocked(registry.getManifest).mockResolvedValue(
+      makeManifest({
+        libraries: [
+          {
+            id: "cloudflare",
+            name: "Cloudflare",
+            description: "Cloud platform",
+            version: "2024",
+            topics,
+          },
+        ],
+      }),
+    );
+    const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
+    await list(["cloudflare"]);
+    const output = logSpy.mock.calls[0]![0] as string;
+    expect(output).toContain("Cloudflare");
+    expect(output).toContain("105 topics");
+    expect(output).toContain("pages");
+    expect(output).toContain("40 topics");
+    expect(output).toContain("r2");
+    expect(output).toContain("15 topics");
+    expect(output).toContain("workers");
+    expect(output).toContain("50 topics");
+    expect(output).toContain("Total: 105 topics");
+  });
+
+  it("shows individual topics when library has <= 100 topics", async () => {
+    const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
+    await list(["react"]);
+    const output = logSpy.mock.calls[0]![0] as string;
+    expect(output).toContain("hooks");
+    expect(output).toContain("components");
+    expect(output).not.toContain("Total:");
+  });
+
+  it("groups are sorted alphabetically", async () => {
+    const topics: Topic[] = [];
+    for (let i = 0; i < 60; i++) {
+      topics.push(
+        makeTopic({ id: `zebra-topic-${i}`, title: `Zebra Topic ${i}` }),
+      );
+    }
+    for (let i = 0; i < 50; i++) {
+      topics.push(
+        makeTopic({ id: `alpha-topic-${i}`, title: `Alpha Topic ${i}` }),
+      );
+    }
+    const registry = await import("../../registry.js");
+    vi.mocked(registry.getManifest).mockResolvedValue(
+      makeManifest({
+        libraries: [
+          {
+            id: "large",
+            name: "Large",
+            description: "Large lib",
+            version: "1.0",
+            topics,
+          },
+        ],
+      }),
+    );
+    const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
+    await list(["large"]);
+    const output = logSpy.mock.calls[0]![0] as string;
+    const alphaIdx = output.indexOf("alpha");
+    const zebraIdx = output.indexOf("zebra");
+    expect(alphaIdx).toBeLessThan(zebraIdx);
+  });
+
+  it("shows total count at bottom for grouped view", async () => {
+    const topics: Topic[] = [];
+    for (let i = 0; i < 101; i++) {
+      topics.push(
+        makeTopic({ id: `svc-topic-${i}`, title: `Svc Topic ${i}` }),
+      );
+    }
+    const registry = await import("../../registry.js");
+    vi.mocked(registry.getManifest).mockResolvedValue(
+      makeManifest({
+        libraries: [
+          {
+            id: "big",
+            name: "Big",
+            description: "Big lib",
+            version: "1.0",
+            topics,
+          },
+        ],
+      }),
+    );
+    const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
+    await list(["big"]);
+    const output = logSpy.mock.calls[0]![0] as string;
+    expect(output).toContain("Total: 101 topics");
+  });
+
+  it("lists topics for a specific service filter", async () => {
+    const registry = await import("../../registry.js");
+    vi.mocked(registry.getManifest).mockResolvedValue(
+      makeManifest({
+        libraries: [
+          {
+            id: "aws",
+            name: "AWS",
+            description: "Amazon Web Services",
+            version: "2024",
+            topics: [
+              makeTopic({ id: "lambda-creating-functions", title: "Lambda: Creating Functions" }),
+              makeTopic({ id: "lambda-deploying", title: "Lambda: Deploying" }),
+              makeTopic({ id: "s3-getting-started", title: "S3: Getting Started" }),
+              makeTopic({ id: "s3-buckets", title: "S3: Buckets" }),
+            ],
+          },
+        ],
+      }),
+    );
+    const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
+    await list(["aws", "lambda"]);
+    const output = logSpy.mock.calls[0]![0] as string;
+    expect(output).toContain("AWS");
+    expect(output).toContain("lambda");
+    expect(output).toContain("lambda-creating-functions");
+    expect(output).toContain("lambda-deploying");
+    expect(output).toContain("2 topics");
+    expect(output).not.toContain("s3");
+  });
+
+  it("shows message when service filter has no matches", async () => {
+    const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
+    await list(["react", "nonexistent"]);
+    expect(logSpy).toHaveBeenCalledWith(
+      expect.stringContaining("No topics found for service 'nonexistent' in react"),
+    );
+  });
+
+  it("existing list behavior unchanged with no service filter", async () => {
+    const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
+    await list(["react"]);
+    const output = logSpy.mock.calls[0]![0] as string;
+    expect(output).toContain("React");
+    expect(output).toContain("hooks");
+    expect(output).toContain("components");
+  });
+
+  it("shows tags in service-filtered topic list", async () => {
+    const registry = await import("../../registry.js");
+    vi.mocked(registry.getManifest).mockResolvedValue(
+      makeManifest({
+        libraries: [
+          {
+            id: "lib",
+            name: "Lib",
+            description: "test",
+            version: "1.0",
+            topics: [
+              makeTopic({ id: "svc-a", title: "Svc A", tags: ["tag1", "tag2"] }),
+              makeTopic({ id: "svc-b", title: "Svc B", tags: [] }),
+              makeTopic({ id: "other-x", title: "Other X" }),
+            ],
+          },
+        ],
+      }),
+    );
+    const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
+    await list(["lib", "svc"]);
+    const output = logSpy.mock.calls[0]![0] as string;
+    expect(output).toContain("svc-a");
+    expect(output).toContain("svc-b");
+    expect(output).toContain("tag1, tag2");
+    expect(output).not.toContain("other-x");
+  });
+
+  it("groups topics without hyphens by their full ID", async () => {
+    const topics: Topic[] = [];
+    for (let i = 0; i < 80; i++) {
+      topics.push(
+        makeTopic({ id: `svc-topic-${i}`, title: `Svc Topic ${i}` }),
+      );
+    }
+    for (let i = 0; i < 25; i++) {
+      topics.push(
+        makeTopic({ id: `standalone${i}`, title: `Standalone ${i}` }),
+      );
+    }
+    const registry = await import("../../registry.js");
+    vi.mocked(registry.getManifest).mockResolvedValue(
+      makeManifest({
+        libraries: [
+          {
+            id: "mixed",
+            name: "Mixed",
+            description: "Mixed lib",
+            version: "1.0",
+            topics,
+          },
+        ],
+      }),
+    );
+    const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
+    await list(["mixed"]);
+    const output = logSpy.mock.calls[0]![0] as string;
+    expect(output).toContain("svc");
+    expect(output).toContain("80 topics");
+    // Each standalone topic has unique full ID as its group
+    expect(output).toContain("Total: 105 topics");
   });
 });

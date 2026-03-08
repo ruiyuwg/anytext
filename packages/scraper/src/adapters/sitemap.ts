@@ -1,4 +1,4 @@
-import type { Adapter, SourceConfig, ProcessedTopic } from "../types.js";
+import type { Adapter, SourceConfig, ProcessedTopic, RateLimiterLike } from "../types.js";
 import { fetchContent } from "../pipeline/fetch.js";
 import { extractContent } from "../pipeline/extract.js";
 import { slugify, estimateTokens, truncate } from "../utils.js";
@@ -7,6 +7,7 @@ export const sitemapAdapter: Adapter = {
   async process(
     source: SourceConfig,
     _prefetchedContent?: string,
+    rateLimiter?: RateLimiterLike,
   ): Promise<ProcessedTopic[]> {
     if (!source.url) {
       throw new Error(`Source ${source.id} has no URL configured`);
@@ -14,9 +15,10 @@ export const sitemapAdapter: Adapter = {
 
     const crawlConfig = source.crawl ?? {};
 
-    // Fetch and parse sitemap.xml
+    // Fetch and parse sitemap.xml (or sitemap index)
+    await rateLimiter?.acquire();
     const sitemapXml = await fetchContent(source.url);
-    const urls = parseSitemapUrls(sitemapXml);
+    const urls = await resolveUrls(sitemapXml, crawlConfig.maxPages, rateLimiter);
 
     // Apply include/exclude patterns
     let filtered = urls;
@@ -45,6 +47,7 @@ export const sitemapAdapter: Adapter = {
       const batch = filtered.slice(i, i + batchSize);
       const results = await Promise.allSettled(
         batch.map(async (url) => {
+          await rateLimiter?.acquire();
           const html = await fetchContent(url);
           return { url, html };
         }),
@@ -71,8 +74,24 @@ export const sitemapAdapter: Adapter = {
         }
 
         const titleMatch = markdown.match(/^#\s+(.+)/m);
-        const title = titleMatch?.[1]?.trim() ?? deriveTitle(url);
-        const id = slugify(title);
+        const baseTitle = titleMatch?.[1]?.trim() ?? deriveTitle(url);
+        const baseId = slugify(baseTitle);
+
+        // Apply topic prefix based on URL path
+        const prefixMode = source.topicPrefix ?? "none";
+        let id = baseId;
+        let title = baseTitle;
+        if (prefixMode === "directory" || prefixMode === "auto") {
+          const prefix = deriveUrlPrefix(url);
+          if (prefix) {
+            id = `${prefix}-${baseId}`;
+            const displayPrefix = prefix
+              .split("-")
+              .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+              .join(" ");
+            title = `${displayPrefix}: ${baseTitle}`;
+          }
+        }
 
         const firstParagraph = extractFirstParagraph(markdown);
 
@@ -94,6 +113,62 @@ export const sitemapAdapter: Adapter = {
   },
 };
 
+async function resolveUrls(
+  xml: string,
+  maxPages?: number,
+  rateLimiter?: RateLimiterLike,
+): Promise<string[]> {
+  if (!isSitemapIndex(xml)) {
+    const urls = parseSitemapUrls(xml);
+    if (maxPages && urls.length > maxPages) {
+      console.warn(
+        `  maxPages limit reached: ${urls.length} URLs found, limiting to ${maxPages}`,
+      );
+      return urls.slice(0, maxPages);
+    }
+    return urls;
+  }
+
+  // Sitemap index: extract sub-sitemap URLs and fetch each
+  const subSitemapUrls = parseSitemapUrls(xml);
+  console.log(
+    `  Detected sitemap index with ${subSitemapUrls.length} sub-sitemaps`,
+  );
+
+  const allUrls: string[] = [];
+  for (const subUrl of subSitemapUrls) {
+    if (maxPages && allUrls.length >= maxPages) {
+      console.warn(
+        `  maxPages limit reached (${maxPages}), stopping sub-sitemap fetching`,
+      );
+      break;
+    }
+
+    try {
+      await rateLimiter?.acquire();
+      const subXml = await fetchContent(subUrl);
+      const pageUrls = parseSitemapUrls(subXml);
+
+      if (maxPages) {
+        const remaining = maxPages - allUrls.length;
+        allUrls.push(...pageUrls.slice(0, remaining));
+      } else {
+        allUrls.push(...pageUrls);
+      }
+    } catch (error) {
+      console.warn(
+        `  Failed to fetch sub-sitemap ${subUrl}: ${(error as Error).message}`,
+      );
+    }
+  }
+
+  return allUrls;
+}
+
+function isSitemapIndex(xml: string): boolean {
+  return xml.includes("<sitemapindex");
+}
+
 function parseSitemapUrls(xml: string): string[] {
   const urls: string[] = [];
   const locRegex = /<loc>(.*?)<\/loc>/g;
@@ -102,6 +177,29 @@ function parseSitemapUrls(xml: string): string[] {
     urls.push(match[1]!);
   }
   return urls;
+}
+
+const DOC_PATH_PREFIXES = ["/docs/", "/documentation/", "/guide/"];
+
+function deriveUrlPrefix(url: string): string | undefined {
+  const pathname = new URL(url).pathname;
+  for (const docPrefix of DOC_PATH_PREFIXES) {
+    const idx = pathname.indexOf(docPrefix);
+    if (idx !== -1) {
+      const after = pathname.slice(idx + docPrefix.length);
+      const segments = after.split("/").filter(Boolean);
+      if (segments.length > 1) {
+        return slugify(segments[0]!);
+      }
+      return undefined;
+    }
+  }
+  // No known doc prefix — use first significant path segment if there are enough segments
+  const segments = pathname.split("/").filter(Boolean);
+  if (segments.length > 1) {
+    return slugify(segments[0]!);
+  }
+  return undefined;
 }
 
 function deriveTitle(url: string): string {

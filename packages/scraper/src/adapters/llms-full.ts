@@ -1,4 +1,4 @@
-import type { Adapter, SourceConfig, ProcessedTopic } from "../types.js";
+import type { Adapter, SourceConfig, ProcessedTopic, RateLimiterLike } from "../types.js";
 import { fetchContent } from "../pipeline/fetch.js";
 import { cleanMarkdown } from "../pipeline/clean.js";
 import { splitIntoTopics } from "../pipeline/split.js";
@@ -8,11 +8,15 @@ export const llmsFullAdapter: Adapter = {
   async process(
     source: SourceConfig,
     prefetchedContent?: string,
+    rateLimiter?: RateLimiterLike,
   ): Promise<ProcessedTopic[]> {
     if (!source.url) {
       throw new Error(`Source ${source.id} has no URL configured`);
     }
 
+    if (!prefetchedContent) {
+      await rateLimiter?.acquire();
+    }
     const raw = prefetchedContent ?? (await fetchContent(source.url));
     console.log(`  Fetched ${raw.length} chars`);
 

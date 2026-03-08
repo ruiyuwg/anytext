@@ -6,6 +6,7 @@ const mockLlmsTxtProcess = vi.fn();
 const mockHtmlProcess = vi.fn();
 const mockGithubProcess = vi.fn();
 const mockSitemapProcess = vi.fn();
+const mockLlmsIndexProcess = vi.fn();
 const mockReadManifest = vi.fn();
 const mockWriteManifest = vi.fn();
 const mockMergeLibrary = vi.fn();
@@ -18,6 +19,8 @@ const mockReadHashes = vi.fn();
 const mockWriteHashes = vi.fn();
 const mockHasChanged = vi.fn();
 const mockHashContent = vi.fn();
+const mockCreateHostLimiter = vi.fn();
+const mockRateLimiter = { acquire: vi.fn().mockResolvedValue(undefined) };
 
 vi.mock("node:fs", () => ({
   readFileSync: (...args: unknown[]) => mockReadFileSync(...args),
@@ -47,6 +50,11 @@ vi.mock("../adapters/sitemap.js", () => ({
     process: (...args: unknown[]) => mockSitemapProcess(...args),
   },
 }));
+vi.mock("../adapters/llms-index.js", () => ({
+  llmsIndexAdapter: {
+    process: (...args: unknown[]) => mockLlmsIndexProcess(...args),
+  },
+}));
 vi.mock("../pipeline/manifest.js", () => ({
   readManifest: (...args: unknown[]) => mockReadManifest(...args),
   writeManifest: (...args: unknown[]) => mockWriteManifest(...args),
@@ -64,6 +72,9 @@ vi.mock("../pipeline/hashes.js", () => ({
   readHashes: (...args: unknown[]) => mockReadHashes(...args),
   writeHashes: (...args: unknown[]) => mockWriteHashes(...args),
   hasChanged: (...args: unknown[]) => mockHasChanged(...args),
+}));
+vi.mock("../pipeline/rate-limiter.js", () => ({
+  createHostLimiter: (...args: unknown[]) => mockCreateHostLimiter(...args),
 }));
 vi.mock("../utils.js", () => ({
   hashContent: (...args: unknown[]) => mockHashContent(...args),
@@ -95,6 +106,7 @@ beforeEach(() => {
   mockHtmlProcess.mockReset();
   mockGithubProcess.mockReset();
   mockSitemapProcess.mockReset();
+  mockLlmsIndexProcess.mockReset();
   mockReadManifest.mockReset();
   mockWriteManifest.mockReset();
   mockMergeLibrary.mockReset();
@@ -107,6 +119,8 @@ beforeEach(() => {
   mockWriteHashes.mockReset();
   mockHasChanged.mockReset().mockReturnValue(true);
   mockHashContent.mockReset().mockReturnValue("fakehash");
+  mockCreateHostLimiter.mockReset().mockReturnValue(mockRateLimiter);
+  mockRateLimiter.acquire.mockReset().mockResolvedValue(undefined);
 });
 
 describe("loadSources", () => {
@@ -156,6 +170,25 @@ describe("processSource", () => {
     const source = { ...baseSource, adapter: "llms-txt" as const };
     await processSource(source, false);
     expect(mockLlmsTxtProcess).toHaveBeenCalled();
+  });
+
+  it("selects llms-index adapter", async () => {
+    mockLlmsIndexProcess.mockResolvedValue([topic]);
+    mockReadManifest.mockReturnValue({
+      version: 1,
+      updatedAt: "2025-01-01",
+      libraries: [],
+    });
+    mockMergeLibrary.mockReturnValue({
+      version: 2,
+      updatedAt: "2025-01-01",
+      libraries: [],
+    });
+
+    const { processSource } = await import("../scrape.js");
+    const source = { ...baseSource, adapter: "llms-index" as const };
+    await processSource(source, false);
+    expect(mockLlmsIndexProcess).toHaveBeenCalled();
   });
 
   it("throws on unknown adapter", async () => {
@@ -250,7 +283,52 @@ describe("processSource", () => {
     expect(mockLlmsFullProcess).toHaveBeenCalledWith(
       baseSource,
       "raw content",
+      mockRateLimiter,
     );
+  });
+
+  it("creates RateLimiter with source rateLimit and passes to adapter", async () => {
+    mockLlmsFullProcess.mockResolvedValue([topic]);
+    mockReadManifest.mockReturnValue({
+      version: 1,
+      updatedAt: "2025-01-01",
+      libraries: [],
+    });
+    mockMergeLibrary.mockReturnValue({
+      version: 2,
+      updatedAt: "2025-01-01",
+      libraries: [],
+    });
+
+    const { processSource } = await import("../scrape.js");
+    const source = { ...baseSource, rateLimit: 5 };
+    await processSource(source, false);
+
+    expect(mockCreateHostLimiter).toHaveBeenCalledWith(5);
+    expect(mockLlmsFullProcess).toHaveBeenCalledWith(
+      source,
+      undefined,
+      mockRateLimiter,
+    );
+  });
+
+  it("creates RateLimiter with default when no rateLimit in source", async () => {
+    mockLlmsFullProcess.mockResolvedValue([topic]);
+    mockReadManifest.mockReturnValue({
+      version: 1,
+      updatedAt: "2025-01-01",
+      libraries: [],
+    });
+    mockMergeLibrary.mockReturnValue({
+      version: 2,
+      updatedAt: "2025-01-01",
+      libraries: [],
+    });
+
+    const { processSource } = await import("../scrape.js");
+    await processSource(baseSource, false);
+
+    expect(mockCreateHostLimiter).toHaveBeenCalledWith(undefined);
   });
 
   it("skips hash check with --force", async () => {

@@ -298,6 +298,49 @@ describe("llmsTxtAdapter", () => {
     expect(result.length).toBe(1);
   });
 
+  it("skips rateLimiter.acquire when prefetched content is provided", async () => {
+    vi.spyOn(console, "log").mockImplementation(() => {});
+    vi.spyOn(console, "warn").mockImplementation(() => {});
+    const fetchMod = await import("../../pipeline/fetch.js");
+    const cleanMod = await import("../../pipeline/clean.js");
+
+    const indexContent =
+      "# Docs\n\n[Getting Started](https://example.com/docs/start.md)\n";
+    vi.mocked(fetchMod.fetchContent)
+      .mockResolvedValueOnce("# Getting Started\n\n" + longContent);
+    vi.mocked(cleanMod.cleanMarkdown).mockResolvedValue(
+      "# Getting Started\n\n" + longContent,
+    );
+
+    const rateLimiter = { acquire: vi.fn().mockResolvedValue(undefined) };
+    await llmsTxtAdapter.process(baseSource, indexContent, rateLimiter);
+
+    // Only for the doc link fetch, not for the index (prefetched)
+    expect(rateLimiter.acquire).toHaveBeenCalledTimes(1);
+  });
+
+  it("calls rateLimiter.acquire when provided", async () => {
+    vi.spyOn(console, "log").mockImplementation(() => {});
+    vi.spyOn(console, "warn").mockImplementation(() => {});
+    const fetchMod = await import("../../pipeline/fetch.js");
+    const cleanMod = await import("../../pipeline/clean.js");
+
+    const indexContent =
+      "# Docs\n\n[Getting Started](https://example.com/docs/start.md)\n";
+    vi.mocked(fetchMod.fetchContent)
+      .mockResolvedValueOnce(indexContent)
+      .mockResolvedValueOnce("# Getting Started\n\n" + longContent);
+    vi.mocked(cleanMod.cleanMarkdown).mockResolvedValue(
+      "# Getting Started\n\n" + longContent,
+    );
+
+    const rateLimiter = { acquire: vi.fn().mockResolvedValue(undefined) };
+    await llmsTxtAdapter.process(baseSource, undefined, rateLimiter);
+
+    // Once for index fetch, once for the doc link fetch
+    expect(rateLimiter.acquire).toHaveBeenCalledTimes(2);
+  });
+
   it("returns empty for no links found", async () => {
     vi.spyOn(console, "log").mockImplementation(() => {});
     const fetchMod = await import("../../pipeline/fetch.js");

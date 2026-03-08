@@ -1,10 +1,48 @@
-import type { Adapter, SourceConfig, ProcessedTopic } from "../types.js";
+import type { Adapter, SourceConfig, ProcessedTopic, RateLimiterLike } from "../types.js";
 import { slugify, estimateTokens, truncate } from "../utils.js";
+
+interface FileEntry {
+  path: string;
+  type: string;
+}
+
+function buildHeaders(): Record<string, string> {
+  const headers: Record<string, string> = {
+    Accept: "application/vnd.github.v3+json",
+    "User-Agent": "anytext-scraper",
+  };
+  if (process.env["GITHUB_TOKEN"]) {
+    headers["Authorization"] = `Bearer ${process.env["GITHUB_TOKEN"]}`;
+  }
+  return headers;
+}
+
+async function fetchContentsApi(
+  repo: string,
+  dirPath: string,
+  branch: string,
+  headers: Record<string, string>,
+  rateLimiter?: RateLimiterLike,
+): Promise<FileEntry[]> {
+  const url = `https://api.github.com/repos/${repo}/contents/${dirPath}?ref=${branch}`;
+  console.log(`  Fetching contents for ${dirPath} via Contents API`);
+  await rateLimiter?.acquire();
+  const response = await fetch(url, { headers });
+  if (!response.ok) {
+    console.warn(`  Failed to fetch contents for ${dirPath}: ${response.status}`);
+    return [];
+  }
+  const items = (await response.json()) as Array<{ path: string; type: string; name: string }>;
+  return items
+    .filter((item) => item.type === "file" && (item.name.endsWith(".md") || item.name.endsWith(".mdx")))
+    .map((item) => ({ path: item.path, type: "blob" }));
+}
 
 export const githubAdapter: Adapter = {
   async process(
     source: SourceConfig,
     _prefetchedContent?: string,
+    rateLimiter?: RateLimiterLike,
   ): Promise<ProcessedTopic[]> {
     const config = source.github;
     if (!config) {
@@ -13,19 +51,14 @@ export const githubAdapter: Adapter = {
 
     const branch = config.branch ?? "main";
     const docsPath = config.docsPath ?? "docs";
-
-    const headers: Record<string, string> = {
-      Accept: "application/vnd.github.v3+json",
-      "User-Agent": "anytext-scraper",
-    };
-    if (process.env["GITHUB_TOKEN"]) {
-      headers["Authorization"] = `Bearer ${process.env["GITHUB_TOKEN"]}`;
-    }
+    const maxFiles = config.maxFiles ?? 10000;
+    const headers = buildHeaders();
 
     // Fetch tree listing
     const treeUrl = `https://api.github.com/repos/${config.repo}/git/trees/${branch}?recursive=1`;
     console.log(`  Fetching tree from ${config.repo}`);
 
+    await rateLimiter?.acquire();
     const treeResponse = await fetch(treeUrl, { headers });
     if (!treeResponse.ok) {
       throw new Error(
@@ -33,17 +66,42 @@ export const githubAdapter: Adapter = {
       );
     }
 
+    // Check GitHub API rate limit
+    await checkRateLimit(treeResponse);
+
     const treeData = (await treeResponse.json()) as {
       tree: Array<{ path: string; type: string }>;
+      truncated?: boolean;
     };
 
-    // Filter for .md files in docs path
-    let mdFiles = treeData.tree.filter(
-      (item) =>
-        item.type === "blob" &&
-        item.path.startsWith(docsPath + "/") &&
-        (item.path.endsWith(".md") || item.path.endsWith(".mdx")),
-    );
+    let mdFiles: FileEntry[];
+
+    if (treeData.truncated && config.subDirs?.length) {
+      // Tree is truncated — fall back to Contents API per subDir
+      console.warn(`  Tree response truncated, falling back to Contents API`);
+      mdFiles = [];
+      for (const subDir of config.subDirs) {
+        const dirPath = `${docsPath}/${subDir}`;
+        const files = await fetchContentsApi(config.repo, dirPath, branch, headers, rateLimiter);
+        mdFiles.push(...files);
+      }
+    } else {
+      // Filter for .md files in docs path
+      mdFiles = treeData.tree.filter(
+        (item) =>
+          item.type === "blob" &&
+          item.path.startsWith(docsPath + "/") &&
+          (item.path.endsWith(".md") || item.path.endsWith(".mdx")),
+      );
+
+      // Apply subDirs filter
+      if (config.subDirs?.length) {
+        const prefixes = config.subDirs.map((sub) => `${docsPath}/${sub}/`);
+        mdFiles = mdFiles.filter((f) =>
+          prefixes.some((prefix) => f.path.startsWith(prefix)),
+        );
+      }
+    }
 
     // Apply include/exclude patterns
     if (config.include?.length) {
@@ -58,6 +116,12 @@ export const githubAdapter: Adapter = {
       );
     }
 
+    // Apply maxFiles limit
+    if (mdFiles.length > maxFiles) {
+      console.warn(`  maxFiles limit reached: ${mdFiles.length} files found, processing only ${maxFiles}`);
+      mdFiles = mdFiles.slice(0, maxFiles);
+    }
+
     console.log(`  Found ${mdFiles.length} markdown files`);
 
     const topics: ProcessedTopic[] = [];
@@ -67,6 +131,7 @@ export const githubAdapter: Adapter = {
       const batch = mdFiles.slice(i, i + batchSize);
       const results = await Promise.allSettled(
         batch.map(async (file) => {
+          await rateLimiter?.acquire();
           const rawUrl = `https://raw.githubusercontent.com/${config.repo}/${branch}/${file.path}`;
           const response = await fetch(rawUrl, {
             headers: { "User-Agent": "anytext-scraper" },
@@ -97,8 +162,28 @@ export const githubAdapter: Adapter = {
         // Derive title from first H1, or from filename
         const titleMatch = content.match(/^#\s+(.+)/m);
         const filename = path.split("/").pop()!.replace(/\.mdx?$/, "");
-        const title = titleMatch?.[1]?.trim() ?? filename;
-        const id = slugify(filename);
+        const baseTitle = titleMatch?.[1]?.trim() ?? filename;
+        const baseId = slugify(filename);
+
+        // Apply topic prefix based on subdirectory
+        const prefixMode = source.topicPrefix ?? "none";
+        let id = baseId;
+        let title = baseTitle;
+        if (prefixMode === "directory" || prefixMode === "auto") {
+          const relativePath = path.slice(docsPath.length + 1); // strip "docsPath/"
+          const segments = relativePath.split("/");
+          if (segments.length > 1) {
+            const subDir = segments[0]!;
+            const prefix = slugify(subDir);
+            id = `${prefix}-${baseId}`;
+            // Capitalize subdirectory for display title
+            const displayPrefix = subDir
+              .split("-")
+              .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+              .join(" ");
+            title = `${displayPrefix}: ${baseTitle}`;
+          }
+        }
 
         const firstParagraph = extractFirstParagraph(content);
 
@@ -119,6 +204,14 @@ export const githubAdapter: Adapter = {
     return topics;
   },
 };
+
+async function checkRateLimit(response: Response): Promise<void> {
+  const remaining = parseInt(response.headers.get("X-RateLimit-Remaining") ?? "1000", 10);
+  if (remaining < 100) {
+    console.warn(`  GitHub rate limit low (${remaining} remaining), pausing 5s...`);
+    await new Promise((resolve) => setTimeout(resolve, 5000));
+  }
+}
 
 function extractFirstParagraph(markdown: string): string {
   const lines = markdown.split("\n");

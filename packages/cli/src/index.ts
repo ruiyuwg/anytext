@@ -15,7 +15,7 @@ function buildHelp(): string {
     `${bold("anytext")} — Instant documentation for coding agents`,
     "",
     heading("Usage:"),
-    `  ${bold("anytext list")} [library]          ${dim("List libraries or topics")}`,
+    `  ${bold("anytext list")} [library] [service] ${dim("List libraries, topics, or service group")}`,
     `  ${bold("anytext search")} <query>          ${dim("Search across all docs")}`,
     `  ${bold("anytext read")} <library> <topic>  ${dim("Read a specific topic")}`,
     `  ${bold("anytext cache")} <clear|status>    ${dim("Manage local cache")}`,
@@ -23,6 +23,7 @@ function buildHelp(): string {
     heading("Examples:"),
     `  ${bold("anytext list")}                    ${dim("Show all available libraries")}`,
     `  ${bold("anytext list react")}              ${dim("Show topics for React")}`,
+    `  ${bold("anytext list aws lambda")}          ${dim("Show topics in AWS Lambda service")}`,
     `  ${bold('anytext search "server components"')}`,
     `  ${bold("anytext read react hooks")}`,
   ].join("\n");
