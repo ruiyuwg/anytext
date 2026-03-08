@@ -576,6 +576,19 @@
         "docsPath": "content",
         "include": [".md"]
       }
+    },
+    {
+      "id": "typebox",
+      "name": "TypeBox",
+      "description": "JSON Schema Type Builder with static type resolution for TypeScript",
+      "version": "0.34",
+      "adapter": "github",
+      "github": {
+        "repo": "sinclairzx81/typebox",
+        "branch": "main",
+        "docsPath": "design/website/docs",
+        "include": [".md"]
+      }
     }
   ]
 }

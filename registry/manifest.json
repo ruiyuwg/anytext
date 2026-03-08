@@ -1,5 +1,5 @@
 {
-  "version": 78,
+  "version": 79,
   "updatedAt": "2026-03-08",
   "libraries": [
     {
@@ -164689,6 +164689,908 @@
           ],
           "path": "trpc/websockets.md",
           "tokens": 1873
+        }
+      ]
+    },
+    {
+      "id": "typebox",
+      "name": "TypeBox",
+      "description": "JSON Schema Type Builder with static type resolution for TypeScript",
+      "version": "0.34",
+      "topics": [
+        {
+          "id": "0-compile",
+          "title": "Compile.Compile",
+          "description": "The Compile function returns a new Validator instance.",
+          "tags": [],
+          "path": "typebox/0-compile.md",
+          "tokens": 262
+        },
+        {
+          "id": "1-validator",
+          "title": "Compile.Validator",
+          "description": "Validators provide optimized implementations of the functions available in the Value submodule.",
+          "tags": [],
+          "path": "typebox/1-validator.md",
+          "tokens": 580
+        },
+        {
+          "id": "2-code",
+          "title": "Compile.Code",
+          "description": "The Code function is used to create standalone ESM validation modules that can be written to disk and imported as reg...",
+          "tags": [],
+          "path": "typebox/2-code.md",
+          "tokens": 231
+        },
+        {
+          "id": "3-accelerate",
+          "title": "Compile.Accelerate",
+          "description": "TypeBox achieves high performance by compiling JSON schematics into optimized validation routines. The generated code...",
+          "tags": [
+            "eval()",
+            "new Function()"
+          ],
+          "path": "typebox/3-accelerate.md",
+          "tokens": 311
+        },
+        {
+          "id": "overview",
+          "title": "Compile",
+          "description": "High Performance Runtime Validation",
+          "tags": [],
+          "path": "typebox/overview.md",
+          "tokens": 289
+        },
+        {
+          "id": "1-registry",
+          "title": "Format.Registry",
+          "description": "Custom string formats are supported with Get and Set.",
+          "tags": [
+            "hex-color",
+            "format"
+          ],
+          "path": "typebox/1-registry.md",
+          "tokens": 333
+        },
+        {
+          "id": "overview",
+          "title": "Format",
+          "description": "Functions to Validate String Formats",
+          "tags": [],
+          "path": "typebox/overview.md",
+          "tokens": 135
+        },
+        {
+          "id": "2-setup",
+          "title": "Setup",
+          "description": "The following is general information for setting up TypeBox",
+          "tags": [
+            "tsconfig.json"
+          ],
+          "path": "typebox/2-setup.md",
+          "tokens": 239
+        },
+        {
+          "id": "overview",
+          "title": "TypeBox",
+          "description": "Json Schema Type Builder with Static Type Resolution for TypeScript",
+          "tags": [],
+          "path": "typebox/overview.md",
+          "tokens": 820
+        },
+        {
+          "id": "1-check",
+          "title": "Schema.Check",
+          "description": "The `Check(...)` function returns true if the value matches the schema.",
+          "tags": [
+            "Check(...)"
+          ],
+          "path": "typebox/1-check.md",
+          "tokens": 241
+        },
+        {
+          "id": "2-errors",
+          "title": "Schema.Errors",
+          "description": "The `Errors(...)` function returns a validation result containing a boolean success value, and an array of validation...",
+          "tags": [
+            "Errors(...)"
+          ],
+          "path": "typebox/2-errors.md",
+          "tokens": 552
+        },
+        {
+          "id": "3-parse",
+          "title": "Schema.Parse",
+          "description": "The `Parse(...)` function returns the value if match, otherwise throw.",
+          "tags": [
+            "Parse(...)"
+          ],
+          "path": "typebox/3-parse.md",
+          "tokens": 240
+        },
+        {
+          "id": "4-compile",
+          "title": "Schema.Compile",
+          "description": "The `Compile(...)` function to compile JSON Schema into a high performance Validator.",
+          "tags": [
+            "Compile(...)"
+          ],
+          "path": "typebox/4-compile.md",
+          "tokens": 767
+        },
+        {
+          "id": "5-advanced",
+          "title": "Schema.Advanced",
+          "description": "The Schema submodule enables user-defined JSON Schema layouts and provides type inference beyond the types available ...",
+          "tags": [],
+          "path": "typebox/5-advanced.md",
+          "tokens": 1517
+        },
+        {
+          "id": "overview",
+          "title": "Schema",
+          "description": "Native JSON Schema Validation and Inference",
+          "tags": [],
+          "path": "typebox/overview.md",
+          "tokens": 336
+        },
+        {
+          "id": "1-syntax",
+          "title": "Script.Syntax",
+          "description": "The Script function will transform TypeScript types into Json Schema schematics.",
+          "tags": [
+            "type",
+            "interface"
+          ],
+          "path": "typebox/1-syntax.md",
+          "tokens": 431
+        },
+        {
+          "id": "2-parameters",
+          "title": "Script.Parameters",
+          "description": "Script can accept named type parameters.",
+          "tags": [],
+          "path": "typebox/2-parameters.md",
+          "tokens": 241
+        },
+        {
+          "id": "3-options",
+          "title": "Script.Options",
+          "description": "Script types support options and constraints.",
+          "tags": [
+            "Options<Type, Json>"
+          ],
+          "path": "typebox/3-options.md",
+          "tokens": 469
+        },
+        {
+          "id": "4-advanced",
+          "title": "Script.Advanced",
+          "description": "Script supports advanced schema transformations using programmable constructs of the TypeScript programming language.",
+          "tags": [],
+          "path": "typebox/4-advanced.md",
+          "tokens": 589
+        },
+        {
+          "id": "5-scaling",
+          "title": "Script.Scaling",
+          "description": "This page details type scaling behaviours for Script",
+          "tags": [
+            "as never"
+          ],
+          "path": "typebox/5-scaling.md",
+          "tokens": 540
+        },
+        {
+          "id": "overview",
+          "title": "Script",
+          "description": "TypeScript DSL Engine",
+          "tags": [],
+          "path": "typebox/overview.md",
+          "tokens": 374
+        },
+        {
+          "id": "1-settings",
+          "title": "Settings",
+          "description": "The Settings namespace manages type system configurations.",
+          "tags": [],
+          "path": "typebox/1-settings.md",
+          "tokens": 775
+        },
+        {
+          "id": "2-locale",
+          "title": "Locale",
+          "description": "TypeBox provides error message translation (i18n) support for over 40 languages.",
+          "tags": [],
+          "path": "typebox/2-locale.md",
+          "tokens": 323
+        },
+        {
+          "id": "3-memory",
+          "title": "Memory",
+          "description": "The Memory namespace is used to allocate schematics with enumerable and non-enumerable properties as well as track of...",
+          "tags": [],
+          "path": "typebox/3-memory.md",
+          "tokens": 403
+        },
+        {
+          "id": "overview",
+          "title": "System",
+          "description": "Settings and Core Functions",
+          "tags": [],
+          "path": "typebox/overview.md",
+          "tokens": 104
+        },
+        {
+          "id": "array",
+          "title": "Type.Array",
+          "description": "Creates an Array type.",
+          "tags": [],
+          "path": "typebox/array.md",
+          "tokens": 418
+        },
+        {
+          "id": "async-iterator",
+          "title": "Type.AsyncIterator",
+          "description": "Creates an AsyncIterator type.",
+          "tags": [],
+          "path": "typebox/async-iterator.md",
+          "tokens": 218
+        },
+        {
+          "id": "bigint",
+          "title": "Type.BigInt",
+          "description": "Creates a BigInt type.",
+          "tags": [],
+          "path": "typebox/bigint.md",
+          "tokens": 161
+        },
+        {
+          "id": "boolean",
+          "title": "Type.Boolean",
+          "description": "Create a Boolean type.",
+          "tags": [],
+          "path": "typebox/boolean.md",
+          "tokens": 105
+        },
+        {
+          "id": "call",
+          "title": "Type.Call",
+          "description": "The Call function invokes Generic type.",
+          "tags": [],
+          "path": "typebox/call.md",
+          "tokens": 120
+        },
+        {
+          "id": "codec",
+          "title": "Type.Codec",
+          "description": "The Codec function applies a bi-directional transform codec to a type.",
+          "tags": [],
+          "path": "typebox/codec.md",
+          "tokens": 353
+        },
+        {
+          "id": "constructor-parameters",
+          "title": "Type.ConstructorParameters",
+          "description": "The ConstructorParameters function will extract Parameters from a Constructor type.",
+          "tags": [],
+          "path": "typebox/constructor-parameters.md",
+          "tokens": 129
+        },
+        {
+          "id": "constructor",
+          "title": "Type.Constructor",
+          "description": "Creates a Constructor type.",
+          "tags": [],
+          "path": "typebox/constructor.md",
+          "tokens": 427
+        },
+        {
+          "id": "cyclic",
+          "title": "Type.Cyclic",
+          "description": "Creates a Cyclic type.",
+          "tags": [],
+          "path": "typebox/cyclic.md",
+          "tokens": 396
+        },
+        {
+          "id": "decode",
+          "title": "Type.Decode",
+          "description": "The Decode function applies a uni-directional decoding transform to a type.",
+          "tags": [],
+          "path": "typebox/decode.md",
+          "tokens": 241
+        },
+        {
+          "id": "encode",
+          "title": "Type.Encode",
+          "description": "The Encode function applies a uni-directional encoding transform to a type.",
+          "tags": [
+            "unknown"
+          ],
+          "path": "typebox/encode.md",
+          "tokens": 297
+        },
+        {
+          "id": "enum",
+          "title": "Type.Enum",
+          "description": "Creates an Enum type.",
+          "tags": [],
+          "path": "typebox/enum.md",
+          "tokens": 134
+        },
+        {
+          "id": "evaluate",
+          "title": "Type.Evaluate",
+          "description": "The Evaluate function will evaluate logical type expressions and return the result.",
+          "tags": [],
+          "path": "typebox/evaluate.md",
+          "tokens": 435
+        },
+        {
+          "id": "exclude",
+          "title": "Type.Exclude",
+          "description": "The Exclude function will exclude types from Left that extend Right.",
+          "tags": [],
+          "path": "typebox/exclude.md",
+          "tokens": 139
+        },
+        {
+          "id": "extract",
+          "title": "Type.Extract",
+          "description": "The Extract function will extract types from Left that extend Right.",
+          "tags": [],
+          "path": "typebox/extract.md",
+          "tokens": 142
+        },
+        {
+          "id": "function",
+          "title": "Type.Function",
+          "description": "Creates a Function type.",
+          "tags": [],
+          "path": "typebox/function.md",
+          "tokens": 433
+        },
+        {
+          "id": "generic",
+          "title": "Type.Generic",
+          "description": "Creates a Generic type. Generic types can be instantiated with Call.",
+          "tags": [],
+          "path": "typebox/generic.md",
+          "tokens": 403
+        },
+        {
+          "id": "identifier",
+          "title": "Type.Identifier",
+          "description": "Creates a named Identifier.",
+          "tags": [],
+          "path": "typebox/identifier.md",
+          "tokens": 149
+        },
+        {
+          "id": "immutable",
+          "title": "Type.Immutable",
+          "description": "The Immutable function applies an `~immutable` modifier to an Array or Tuple and is used to infer `readonly T[]` for ...",
+          "tags": [
+            "~immutable",
+            "readonly T[]"
+          ],
+          "path": "typebox/immutable.md",
+          "tokens": 478
+        },
+        {
+          "id": "indexed",
+          "title": "Type.Index",
+          "description": "The Index function performs a indexed access lookup on a type.",
+          "tags": [],
+          "path": "typebox/indexed.md",
+          "tokens": 126
+        },
+        {
+          "id": "infer",
+          "title": "Type.Infer",
+          "description": "Creates an Infer instruction to extract types in conditional type expression.",
+          "tags": [],
+          "path": "typebox/infer.md",
+          "tokens": 198
+        },
+        {
+          "id": "instance-type",
+          "title": "Type.InstanceType",
+          "description": "Extracts the InstanceType from a Constructor type.",
+          "tags": [],
+          "path": "typebox/instance-type.md",
+          "tokens": 104
+        },
+        {
+          "id": "instantiate",
+          "title": "Type.Instantiate",
+          "description": "The Instantiate function will instantiate interior references embedded within a type. This function accepts a context...",
+          "tags": [],
+          "path": "typebox/instantiate.md",
+          "tokens": 201
+        },
+        {
+          "id": "integer",
+          "title": "Type.Integer",
+          "description": "Creates an Integer type.",
+          "tags": [],
+          "path": "typebox/integer.md",
+          "tokens": 559
+        },
+        {
+          "id": "interface",
+          "title": "Type.Interface",
+          "description": "The Interface function creates an Object with Heritage.",
+          "tags": [],
+          "path": "typebox/interface.md",
+          "tokens": 152
+        },
+        {
+          "id": "intersect",
+          "title": "Type.Intersect",
+          "description": "Creates an Intersect type.",
+          "tags": [],
+          "path": "typebox/intersect.md",
+          "tokens": 503
+        },
+        {
+          "id": "iterator",
+          "title": "Type.Iterator",
+          "description": "Creates an Iterator type.",
+          "tags": [],
+          "path": "typebox/iterator.md",
+          "tokens": 203
+        },
+        {
+          "id": "key-of",
+          "title": "Type.KeyOf",
+          "description": "Extracts Keys from an Object or Tuple.",
+          "tags": [],
+          "path": "typebox/key-of.md",
+          "tokens": 137
+        },
+        {
+          "id": "literal",
+          "title": "Type.Literal",
+          "description": "Creates a Literal type. Supported values are BigInt, Boolean, Number and String.",
+          "tags": [],
+          "path": "typebox/literal.md",
+          "tokens": 351
+        },
+        {
+          "id": "mapped",
+          "title": "Type.Mapped",
+          "description": "Applies a Mapped operation to a type.",
+          "tags": [],
+          "path": "typebox/mapped.md",
+          "tokens": 228
+        },
+        {
+          "id": "module",
+          "title": "Type.Module",
+          "description": "The Module function is an advanced compositing system for referential types. It performs several normalization passes...",
+          "tags": [
+            "A",
+            "B",
+            "Access before initialization",
+            "C"
+          ],
+          "path": "typebox/module.md",
+          "tokens": 946
+        },
+        {
+          "id": "never",
+          "title": "Type.Never",
+          "description": "Creates a Never type.",
+          "tags": [],
+          "path": "typebox/never.md",
+          "tokens": 129
+        },
+        {
+          "id": "null",
+          "title": "Type.Null",
+          "description": "Creates a Null type.",
+          "tags": [],
+          "path": "typebox/null.md",
+          "tokens": 101
+        },
+        {
+          "id": "number",
+          "title": "Type.Number",
+          "description": "Creates a Number type.",
+          "tags": [],
+          "path": "typebox/number.md",
+          "tokens": 327
+        },
+        {
+          "id": "object",
+          "title": "Type.Object",
+          "description": "Creates an Object type.",
+          "tags": [],
+          "path": "typebox/object.md",
+          "tokens": 606
+        },
+        {
+          "id": "omit",
+          "title": "Type.Omit",
+          "description": "Omits keys from the given Object type.",
+          "tags": [],
+          "path": "typebox/omit.md",
+          "tokens": 118
+        },
+        {
+          "id": "optional",
+          "title": "Type.Optional",
+          "description": "The Optional function applies an optional `?` modifier to a type.",
+          "tags": [
+            "?"
+          ],
+          "path": "typebox/optional.md",
+          "tokens": 330
+        },
+        {
+          "id": "options",
+          "title": "options",
+          "description": "Options can be passed on the last argument of any given type.",
+          "tags": [],
+          "path": "typebox/options.md",
+          "tokens": 319
+        },
+        {
+          "id": "overview",
+          "title": "Type",
+          "description": "Json Schema Type Builder with Static Type Resolution for TypeScript",
+          "tags": [],
+          "path": "typebox/overview.md",
+          "tokens": 562
+        },
+        {
+          "id": "parameter",
+          "title": "Type.Parameter",
+          "description": "Creates a Generic Parameter type.",
+          "tags": [],
+          "path": "typebox/parameter.md",
+          "tokens": 209
+        },
+        {
+          "id": "parameters",
+          "title": "Type.Parameters",
+          "description": "The Parameters function will extract Parameters from a Function type.",
+          "tags": [],
+          "path": "typebox/parameters.md",
+          "tokens": 122
+        },
+        {
+          "id": "partial",
+          "title": "Type.Partial",
+          "description": "This type is an alias for the `Partial<T>` TypeScript utility type. It makes all properties of an Object optional.",
+          "tags": [
+            "Partial<T>"
+          ],
+          "path": "typebox/partial.md",
+          "tokens": 226
+        },
+        {
+          "id": "pick",
+          "title": "Type.Pick",
+          "description": "Picks property keys from the given Object type.",
+          "tags": [],
+          "path": "typebox/pick.md",
+          "tokens": 120
+        },
+        {
+          "id": "promise",
+          "title": "Type.Promise",
+          "description": "Creates a Promise type.",
+          "tags": [],
+          "path": "typebox/promise.md",
+          "tokens": 177
+        },
+        {
+          "id": "readonly-type",
+          "title": "Type.ReadonlyType",
+          "description": "This type is an alias for the `Readonly<T>` TypeScript utility type. It makes all properties of an Object `readonly` ...",
+          "tags": [
+            "Readonly<T>",
+            "readonly",
+            "readonly T[]",
+            "TReadonly<T>",
+            "TImmutable<T>"
+          ],
+          "path": "typebox/readonly-type.md",
+          "tokens": 440
+        },
+        {
+          "id": "readonly",
+          "title": "Type.Readonly",
+          "description": "The Readonly function applies an `readonly` modifier to an object property. This modifier is used for type inference ...",
+          "tags": [
+            "readonly"
+          ],
+          "path": "typebox/readonly.md",
+          "tokens": 363
+        },
+        {
+          "id": "record",
+          "title": "Type.Record",
+          "description": "Creates a Record type.",
+          "tags": [],
+          "path": "typebox/record.md",
+          "tokens": 240
+        },
+        {
+          "id": "ref",
+          "title": "Type.Ref",
+          "description": "Creates a Ref type.",
+          "tags": [],
+          "path": "typebox/ref.md",
+          "tokens": 128
+        },
+        {
+          "id": "refine",
+          "title": "Type.Refine",
+          "description": "The Refine function applies explicit validation logic to a type.",
+          "tags": [],
+          "path": "typebox/refine.md",
+          "tokens": 422
+        },
+        {
+          "id": "required",
+          "title": "Type.Required",
+          "description": "Makes all properties of an Object required.",
+          "tags": [],
+          "path": "typebox/required.md",
+          "tokens": 259
+        },
+        {
+          "id": "rest",
+          "title": "Type.Rest",
+          "description": "Creates a Rest type.",
+          "tags": [],
+          "path": "typebox/rest.md",
+          "tokens": 301
+        },
+        {
+          "id": "return-type",
+          "title": "Type.ReturnType",
+          "description": "Extracts the ReturnType from a Function.",
+          "tags": [],
+          "path": "typebox/return-type.md",
+          "tokens": 101
+        },
+        {
+          "id": "static",
+          "title": "Type.Static",
+          "description": "The Static type infers TypeBox and Json Schema schematics.",
+          "tags": [],
+          "path": "typebox/static.md",
+          "tokens": 104
+        },
+        {
+          "id": "string",
+          "title": "Type.String",
+          "description": "Creates a String type.",
+          "tags": [],
+          "path": "typebox/string.md",
+          "tokens": 315
+        },
+        {
+          "id": "symbol",
+          "title": "Type.Symbol",
+          "description": "Creates a Symbol type.",
+          "tags": [],
+          "path": "typebox/symbol.md",
+          "tokens": 161
+        },
+        {
+          "id": "template-literal",
+          "title": "Type.TemplateLiteral",
+          "description": "Creates a TemplateLiteral type.",
+          "tags": [],
+          "path": "typebox/template-literal.md",
+          "tokens": 163
+        },
+        {
+          "id": "this",
+          "title": "Type.This",
+          "description": "Creates a This type.",
+          "tags": [
+            "This",
+            "{ $ref: '#' }",
+            "#"
+          ],
+          "path": "typebox/this.md",
+          "tokens": 282
+        },
+        {
+          "id": "tuple",
+          "title": "Type.Tuple",
+          "description": "Creates a Tuple type.",
+          "tags": [],
+          "path": "typebox/tuple.md",
+          "tokens": 244
+        },
+        {
+          "id": "undefined",
+          "title": "Type.Undefined",
+          "description": "Creates an Undefined type.",
+          "tags": [],
+          "path": "typebox/undefined.md",
+          "tokens": 151
+        },
+        {
+          "id": "union",
+          "title": "Type.Union",
+          "description": "Creates a Union type.",
+          "tags": [],
+          "path": "typebox/union.md",
+          "tokens": 186
+        },
+        {
+          "id": "unknown",
+          "title": "Type.Unknown",
+          "description": "Creates an Unknown type.",
+          "tags": [],
+          "path": "typebox/unknown.md",
+          "tokens": 101
+        },
+        {
+          "id": "unsafe",
+          "title": "Type.Unsafe",
+          "description": "The Unsafe type is used to create user defined schematics with user defined inference rules. The type is named so bec...",
+          "tags": [],
+          "path": "typebox/unsafe.md",
+          "tokens": 144
+        },
+        {
+          "id": "void",
+          "title": "Type.Void",
+          "description": "Creates a Void type.",
+          "tags": [],
+          "path": "typebox/void.md",
+          "tokens": 130
+        },
+        {
+          "id": "clean",
+          "title": "Value.Clean",
+          "description": "The Clean function will remove excess properties or elements from a value.",
+          "tags": [
+            "unknown"
+          ],
+          "path": "typebox/clean.md",
+          "tokens": 181
+        },
+        {
+          "id": "convert",
+          "title": "Value.Convert",
+          "description": "The Convert function will convert values to match the given type if a reasonable converion is possible. If no convers...",
+          "tags": [
+            "unknown"
+          ],
+          "path": "typebox/convert.md",
+          "tokens": 184
+        },
+        {
+          "id": "create",
+          "title": "Value.Create",
+          "description": "The Create function will create an instance of the given type.",
+          "tags": [
+            "format",
+            "default"
+          ],
+          "path": "typebox/create.md",
+          "tokens": 321
+        },
+        {
+          "id": "decode",
+          "title": "Value.Decode",
+          "description": "The Decode function will execute Decode callbacks embedded within the provided type.",
+          "tags": [],
+          "path": "typebox/decode.md",
+          "tokens": 616
+        },
+        {
+          "id": "default",
+          "title": "Value.Default",
+          "description": "The Default function automatically generates values for any missing properties or elements whose type includes a defa...",
+          "tags": [
+            "unknown"
+          ],
+          "path": "typebox/default.md",
+          "tokens": 271
+        },
+        {
+          "id": "diff",
+          "title": "Value.Diff",
+          "description": "The Diff function computes a sequence of Edit commands to transform the Left value into the Right value. The resultin...",
+          "tags": [],
+          "path": "typebox/diff.md",
+          "tokens": 346
+        },
+        {
+          "id": "encode",
+          "title": "Value.Encode",
+          "description": "The Encode function will execute Encode callbacks embedded within the provided type.",
+          "tags": [],
+          "path": "typebox/encode.md",
+          "tokens": 626
+        },
+        {
+          "id": "errors",
+          "title": "Value.Errors",
+          "description": "The Errors function returns an array of validation errors for the specified value. If the value contains no errors, a...",
+          "tags": [],
+          "path": "typebox/errors.md",
+          "tokens": 563
+        },
+        {
+          "id": "hash",
+          "title": "Value.Hash",
+          "description": "The Hash function creates a structural hash of a JavaScript value. It returns a padded 64-bit hexadecimal string. Int...",
+          "tags": [
+            "fnv1a-64"
+          ],
+          "path": "typebox/hash.md",
+          "tokens": 236
+        },
+        {
+          "id": "mutate",
+          "title": "Value.Mutate",
+          "description": "The Mutate function mutates a value while preserving interior object and array references.",
+          "tags": [],
+          "path": "typebox/mutate.md",
+          "tokens": 245
+        },
+        {
+          "id": "overview",
+          "title": "Value",
+          "description": "Check and Parse JavaScript Values",
+          "tags": [],
+          "path": "typebox/overview.md",
+          "tokens": 226
+        },
+        {
+          "id": "parse",
+          "title": "Value.Parse",
+          "description": "The Parse function validates and returns a value that conforms to a given type. If the value does not satisfy the typ...",
+          "tags": [],
+          "path": "typebox/parse.md",
+          "tokens": 327
+        },
+        {
+          "id": "patch",
+          "title": "Value.Patch",
+          "description": "The Patch function applies a sequence of Edit commands to a value.",
+          "tags": [],
+          "path": "typebox/patch.md",
+          "tokens": 225
+        },
+        {
+          "id": "pipeline",
+          "title": "Value.Pipeline",
+          "description": "Value functions are commonly used to pre-process data before running Check or Parse operations. When multiple value f...",
+          "tags": [
+            "Value.*"
+          ],
+          "path": "typebox/pipeline.md",
+          "tokens": 514
+        },
+        {
+          "id": "pointer",
+          "title": "Value.Pointer",
+          "description": "The Pointer namespace is an implementation of [RFC 6901](https://datatracker.ietf.org/doc/html/rfc6901) Json Pointer....",
+          "tags": [],
+          "path": "typebox/pointer.md",
+          "tokens": 327
+        },
+        {
+          "id": "repair",
+          "title": "Value.Repair",
+          "description": "The Repair function will repair a value to match the provided type. If the value already matches, no action is taken....",
+          "tags": [],
+          "path": "typebox/repair.md",
+          "tokens": 267
         }
       ]
     },
