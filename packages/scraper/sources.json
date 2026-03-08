@@ -629,6 +629,19 @@
         "include": [".md"],
         "exclude": ["zh/"]
       }
+    },
+    {
+      "id": "mongoose",
+      "name": "Mongoose",
+      "description": "Elegant MongoDB object modeling for Node.js with schemas, validation, and middleware",
+      "version": "8",
+      "adapter": "github",
+      "github": {
+        "repo": "Automattic/mongoose",
+        "branch": "master",
+        "docsPath": "docs",
+        "include": [".md"]
+      }
     }
   ]
 }

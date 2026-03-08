@@ -1,5 +1,5 @@
 {
-  "version": 84,
+  "version": 85,
   "updatedAt": "2026-03-08",
   "libraries": [
     {
@@ -80285,6 +80285,979 @@
           ],
           "path": "mantine/how-can-i-load-fonts-in-vite.md",
           "tokens": 1163
+        }
+      ]
+    },
+    {
+      "id": "mongoose",
+      "name": "Mongoose",
+      "description": "Elegant MongoDB object modeling for Node.js with schemas, validation, and middleware",
+      "version": "8",
+      "topics": [
+        {
+          "id": "advanced-schemas",
+          "title": "Advanced Schemas",
+          "description": "Mongoose allows creating schemas from [ES6 classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference...",
+          "tags": [
+            "loadClass()"
+          ],
+          "path": "mongoose/advanced-schemas.md",
+          "tokens": 121
+        },
+        {
+          "id": "async-await",
+          "title": "Using Async/Await with Mongoose",
+          "description": "* [Basic Use](#basic-use)",
+          "tags": [
+            ".then",
+            "await"
+          ],
+          "path": "mongoose/async-await.md",
+          "tokens": 1346
+        },
+        {
+          "id": "change-streams",
+          "title": "Change Streams",
+          "description": "[Change streams](https://www.mongodb.com/docs/drivers/node/current/monitoring-and-logging/change-streams/) let you li...",
+          "tags": [
+            "watch()",
+            "'data'",
+            "next()",
+            "resumeAfter"
+          ],
+          "path": "mongoose/change-streams.md",
+          "tokens": 949
+        },
+        {
+          "id": "check-version",
+          "title": "How to Check Your Mongoose Version",
+          "description": "To check what version of Mongoose you are using in Node.js, print out the [`mongoose.version` property](./api/mongoos...",
+          "tags": [
+            "mongoose.version",
+            "-e",
+            "npm list",
+            "yarn list --pattern \"mongoose\"",
+            "pnpm list \"mongoose\""
+          ],
+          "path": "mongoose/check-version.md",
+          "tokens": 294
+        },
+        {
+          "id": "compatibility",
+          "title": "MongoDB Server Version Compatibility",
+          "description": "tr > td, tr > th {",
+          "tags": [
+            "8.x",
+            "^8.7.0 \\| ^9.0.0",
+            "7.x",
+            "^7.4.0 \\| ^8.0.0 \\| ^9.0.0",
+            "6.x",
+            "^7.0.0 \\| ^8.0.0 \\| ^9.0.0",
+            "5.x",
+            "^6.0.0 \\| ^7.0.0 \\| ^8.0.0",
+            "4.4.x",
+            "4.2.x"
+          ],
+          "path": "mongoose/compatibility.md",
+          "tokens": 430
+        },
+        {
+          "id": "connections",
+          "title": "Connections",
+          "description": "You can connect to MongoDB with the `mongoose.connect()` method.",
+          "tags": [
+            "mongoose.connect()",
+            "myapp",
+            "127.0.0.1",
+            "localhost",
+            "::1",
+            "uri",
+            "bufferCommands",
+            "autoCreate",
+            "createCollection()",
+            ".catch()"
+          ],
+          "path": "mongoose/connections.md",
+          "tokens": 7993
+        },
+        {
+          "id": "customschematypes",
+          "title": "Custom Schema Types",
+          "description": "*New in Mongoose 4.4.0:* Mongoose supports custom types. Before you",
+          "tags": [
+            "mongoose.SchemaType",
+            "mongoose.Schema.Types",
+            "cast()"
+          ],
+          "path": "mongoose/customschematypes.md",
+          "tokens": 206
+        },
+        {
+          "id": "defaults",
+          "title": "Defaults",
+          "description": "Your schemas can define default values for certain paths. If you create",
+          "tags": [
+            "undefined",
+            "default",
+            "setDefaultsOnInsert",
+            "update()",
+            "findOneAndUpdate()",
+            "upsert",
+            "$setOnInsert",
+            "false",
+            "this"
+          ],
+          "path": "mongoose/defaults.md",
+          "tokens": 323
+        },
+        {
+          "id": "discriminators",
+          "title": "Discriminators",
+          "description": "Discriminators are a schema inheritance mechanism. They enable",
+          "tags": [
+            "model.discriminator()",
+            "SignedUpEvent",
+            "ClickedLinkEvent",
+            "__t",
+            "save()",
+            "findOneAndUpdate()",
+            "updateOne()",
+            "overwriteDiscriminatorKey",
+            "pre()",
+            "post()"
+          ],
+          "path": "mongoose/discriminators.md",
+          "tokens": 750
+        },
+        {
+          "id": "documents",
+          "title": "Documents",
+          "description": "Mongoose [documents](api/document.html) represent a one-to-one mapping",
+          "tags": [
+            "findOne()",
+            "save()",
+            "_id",
+            "DocumentNotFoundError",
+            "set()",
+            "get()",
+            "?.",
+            "??",
+            "??=",
+            "update()"
+          ],
+          "path": "mongoose/documents.md",
+          "tokens": 1818
+        },
+        {
+          "id": "enterprise",
+          "title": "Mongoose for Enterprise",
+          "description": "Tidelift is working with the maintainers of Mongoose and thousands of other",
+          "tags": [],
+          "path": "mongoose/enterprise.md",
+          "tokens": 786
+        },
+        {
+          "id": "faq",
+          "title": "FAQ",
+          "description": "display: block;",
+          "tags": [
+            "connect ECONNREFUSED ::1:27017",
+            "localhost",
+            "127.0.0.1",
+            "::1     localhost",
+            "/etc/hosts",
+            "::1",
+            "...",
+            "0.0.0.0/0",
+            "npm list | grep \"mongoose\"",
+            "peerDependencies"
+          ],
+          "path": "mongoose/faq.md",
+          "tokens": 4744
+        },
+        {
+          "id": "field-level-encryption",
+          "title": "Integrating with MongoDB Client Side Field Level Encryption",
+          "description": "[Client Side Field Level Encryption](https://www.mongodb.com/docs/manual/core/csfle/), or CSFLE for short, is a tool ...",
+          "tags": [
+            "name",
+            "encryptedFieldsMap",
+            "schemaMap",
+            "ssn",
+            "createConnection(uri)",
+            "connect(uri)",
+            "openUri(uri)",
+            "Model.clientEncryption()"
+          ],
+          "path": "mongoose/field-level-encryption.md",
+          "tokens": 2920
+        },
+        {
+          "id": "further-reading",
+          "title": "Further Reading",
+          "description": ".pluralsight-link {",
+          "tags": [],
+          "path": "mongoose/further-reading.md",
+          "tokens": 2323
+        },
+        {
+          "id": "geojson",
+          "title": "Using GeoJSON",
+          "description": "[GeoJSON](http://geojson.org/) is a format for storing geographic points and",
+          "tags": [
+            "location",
+            "pointSchema",
+            "coordinates",
+            "city",
+            "$geoWithin",
+            "within()",
+            "Schema#index()",
+            "$near",
+            "$geoNear"
+          ],
+          "path": "mongoose/geojson.md",
+          "tokens": 991
+        },
+        {
+          "id": "guide",
+          "title": "Schemas",
+          "description": "If you haven't yet done so, please take a minute to read the [quickstart](index.html) to get an idea of how Mongoose ...",
+          "tags": [
+            "blogSchema",
+            "title",
+            "date",
+            "Date",
+            "meta",
+            "type",
+            "meta.votes",
+            "meta.favs",
+            "mongoose.model(modelName, schema)",
+            "_id"
+          ],
+          "path": "mongoose/guide.md",
+          "tokens": 14189
+        },
+        {
+          "id": "guides",
+          "title": "Guides",
+          "description": "Mongoose guides provide detailed tutorials on Mongoose's core concepts and",
+          "tags": [],
+          "path": "mongoose/guides.md",
+          "tokens": 448
+        },
+        {
+          "id": "incompatible-packages",
+          "title": "Incompatible packages",
+          "description": "The following npm packages are known to be incompatible with Mongoose:",
+          "tags": [
+            "collections"
+          ],
+          "path": "mongoose/incompatible-packages.md",
+          "tokens": 137
+        },
+        {
+          "id": "index",
+          "title": "Getting Started",
+          "description": "display: block;",
+          "tags": [
+            "npm",
+            "test",
+            "main()",
+            "name",
+            "String",
+            "methods",
+            "Model"
+          ],
+          "path": "mongoose/index.md",
+          "tokens": 900
+        },
+        {
+          "id": "jest",
+          "title": "Testing Mongoose with [Jest](https://www.npmjs.com/package/jest)",
+          "description": "Jest is a JavaScript runtime developed by Facebook that is usually used for testing.",
+          "tags": [
+            "SUPPRESS_JEST_WARNINGS",
+            "testEnvironment",
+            "<=26",
+            "jsdom",
+            ">=27",
+            "setTimeout()",
+            "jest.config.js",
+            ">=25",
+            "process.nextTick()",
+            "setInterval()"
+          ],
+          "path": "mongoose/jest.md",
+          "tokens": 1152
+        },
+        {
+          "id": "lambda",
+          "title": "Using Mongoose With AWS Lambda",
+          "description": "[AWS Lambda](https://aws.amazon.com/lambda/) is a popular service for running",
+          "tags": [
+            "mongoose.connect()",
+            "mongoose.model()"
+          ],
+          "path": "mongoose/lambda.md",
+          "tokens": 696
+        },
+        {
+          "id": "lodash",
+          "title": "Using Mongoose with Lodash",
+          "description": "For the most part, Mongoose works well with [Lodash](https://lodash.com/).",
+          "tags": [
+            "cloneDeep()",
+            "MyModel"
+          ],
+          "path": "mongoose/lodash.md",
+          "tokens": 369
+        },
+        {
+          "id": "middleware",
+          "title": "Middleware",
+          "description": "Middleware (also called pre and post *hooks*) are functions which are passed",
+          "tags": [
+            "Model",
+            "this",
+            "this.constructor",
+            "exec()",
+            "then()",
+            "await",
+            "MyModel.aggregate()",
+            "pre()",
+            "updateOne",
+            "Query.prototype.updateOne()"
+          ],
+          "path": "mongoose/middleware.md",
+          "tokens": 5604
+        },
+        {
+          "id": "migrating-to-5",
+          "title": "Migrating from 4.x to 5.x",
+          "description": "Please note: we plan to discontinue Mongoose 5 support on March 1, 2024.",
+          "tags": [
+            "mongoose.connect()",
+            "useMongoClient",
+            "remove()",
+            "deleteX()",
+            "toObject()",
+            "$pushAll",
+            "numAffected",
+            "save()",
+            "getPromiseConstructor()",
+            "required"
+          ],
+          "path": "mongoose/migrating-to-5.md",
+          "tokens": 4667
+        },
+        {
+          "id": "migrating-to-6",
+          "title": "Migrating from 5.x to 6.x",
+          "description": "padding: 4px 0px;",
+          "tags": [
+            "asPromise()",
+            "mongoose.connect()",
+            "Model.exists()",
+            "strictQuery",
+            "strict",
+            "isValidObjectId()",
+            "isObjectIdOrHexString()",
+            "sanitizeFilter",
+            "trusted()",
+            "omitUndefined"
+          ],
+          "path": "mongoose/migrating-to-6.md",
+          "tokens": 7028
+        },
+        {
+          "id": "migrating-to-7",
+          "title": "Migrating from 6.x to 7.x",
+          "description": "padding: 4px 0px;",
+          "tags": [
+            "strictQuery",
+            "remove()",
+            "update()",
+            "new",
+            "id",
+            "castForQueryWrapper()",
+            "castForQuery()",
+            "Schema.prototype.add()",
+            "keepAlive",
+            "LeanDocument"
+          ],
+          "path": "mongoose/migrating-to-7.md",
+          "tokens": 3471
+        },
+        {
+          "id": "migrating-to-8",
+          "title": "Migrating from 7.x to 8.x",
+          "description": "padding: 4px 0px;",
+          "tags": [
+            "rawResult",
+            "findOneAndUpdate()",
+            "Document.prototype.deleteOne()",
+            "findOneAndRemove()",
+            "count()",
+            "null",
+            "save()",
+            "overwrite",
+            "orFail()",
+            "create()"
+          ],
+          "path": "mongoose/migrating-to-8.md",
+          "tokens": 3102
+        },
+        {
+          "id": "migrating-to-9",
+          "title": "Migrating from 8.x to 9.x",
+          "description": "padding: 4px 0px;",
+          "tags": [
+            "next()",
+            "async",
+            "Schema.prototype.doValidate()",
+            "doValidate()",
+            "updateOne()",
+            "updateMany()",
+            "findOneAndUpdate()",
+            "updatePipeline: true",
+            "updatePipeline",
+            "background"
+          ],
+          "path": "mongoose/migrating-to-9.md",
+          "tokens": 3906
+        },
+        {
+          "id": "migration",
+          "title": "Migrating from 3.x to 4.x",
+          "description": "There are several [backwards-breaking changes](https://github.com/Automattic/mongoose/wiki/4.0-Release-Notes) to be a...",
+          "tags": [
+            "findOneAndUpdate()",
+            "false",
+            "findOneAndRemove()",
+            "findByIdAndUpdate()",
+            "findByIdAndRemove()",
+            "findAndModify",
+            "new",
+            "$set",
+            "new: true",
+            "kind"
+          ],
+          "path": "mongoose/migration.md",
+          "tokens": 543
+        },
+        {
+          "id": "models",
+          "title": "Models",
+          "description": "[Models](api/model.html) are fancy constructors compiled from",
+          "tags": [
+            "Schema",
+            "mongoose.model()",
+            ".model()",
+            "schema",
+            "model()",
+            "model",
+            "deleteOne()",
+            "deleteMany()",
+            "filter",
+            "update"
+          ],
+          "path": "mongoose/models.md",
+          "tokens": 1812
+        },
+        {
+          "id": "nextjs",
+          "title": "Using Mongoose With [Next.js](https://nextjs.org/)",
+          "description": "Next.js is a popular framework for building full stack applications with React.",
+          "tags": [
+            "mongoose.connect()",
+            "dbConnect()",
+            ".env.local",
+            "next.config.js",
+            "getServerSideProps",
+            "JSON.parse(JSON.stringify())",
+            "net"
+          ],
+          "path": "mongoose/nextjs.md",
+          "tokens": 1463
+        },
+        {
+          "id": "plugins",
+          "title": "Plugins",
+          "description": "Schemas are pluggable, that is, they allow for applying pre-packaged capabilities to extend their functionality. This...",
+          "tags": [
+            "loadedAt",
+            "Schema",
+            "Game",
+            "Player",
+            ".plugin()",
+            "mongoose.model()",
+            "conn.model()",
+            "populate()",
+            ".lean()"
+          ],
+          "path": "mongoose/plugins.md",
+          "tokens": 1065
+        },
+        {
+          "id": "populate",
+          "title": "Populate",
+          "description": "MongoDB has the join-like [$lookup](https://www.mongodb.com/docs/manual/reference/operator/aggregation/lookup/) aggre...",
+          "tags": [
+            "populate()",
+            "Person",
+            "stories",
+            "ObjectId",
+            "ref",
+            "Story",
+            "_id",
+            "Number",
+            "String",
+            "Buffer"
+          ],
+          "path": "mongoose/populate.md",
+          "tokens": 9082
+        },
+        {
+          "id": "promises",
+          "title": "Promises",
+          "description": "Mongoose async operations, like `.save()` and queries, return thenables.",
+          "tags": [
+            ".save()",
+            "MyModel.findOne({}).then()",
+            "await MyModel.findOne({}).exec()",
+            ".then()",
+            ".exec()",
+            "exec()",
+            "await",
+            "await Band.findOne();",
+            "await Band.findOne().exec();"
+          ],
+          "path": "mongoose/promises.md",
+          "tokens": 555
+        },
+        {
+          "id": "queries",
+          "title": "Queries",
+          "description": "Mongoose [models](models.html) provide several static helper functions",
+          "tags": [
+            "Query",
+            "Model.deleteMany()",
+            "Model.deleteOne()",
+            "Model.find()",
+            "Model.findById()",
+            "Model.findByIdAndDelete()",
+            "Model.findByIdAndRemove()",
+            "Model.findByIdAndUpdate()",
+            "Model.findOne()",
+            "Model.findOneAndDelete()"
+          ],
+          "path": "mongoose/queries.md",
+          "tokens": 2543
+        },
+        {
+          "id": "schematypes",
+          "title": "SchemaTypes",
+          "description": "SchemaTypes handle definition of path",
+          "tags": [
+            "type",
+            "schema.path()",
+            "mongoose.ObjectId",
+            "type: String",
+            "asset",
+            "autopopulate: true",
+            "lowercase",
+            "required",
+            "default",
+            "select"
+          ],
+          "path": "mongoose/schematypes.md",
+          "tokens": 8017
+        },
+        {
+          "id": "shared-schemas",
+          "title": "Sharing Schemas Between Mongoose Projects",
+          "description": "In larger organizations, it is common to have a project that contains schemas which are shared between multiple proje...",
+          "tags": [
+            "@initech/shared-schemas",
+            "npm list",
+            "@initech/web-app1",
+            "peerDependencies",
+            "package.json",
+            "@initech/web-app2",
+            "mongoose.model()"
+          ],
+          "path": "mongoose/shared-schemas.md",
+          "tokens": 780
+        },
+        {
+          "id": "subdocs",
+          "title": "Subdocuments",
+          "description": "Subdocuments are documents embedded in other documents. In Mongoose, this",
+          "tags": [
+            "save",
+            "validate",
+            "save()",
+            "validate()",
+            "pre('save')",
+            "pre('validate')",
+            "child",
+            "Nested",
+            "child === undefined",
+            "Subdoc"
+          ],
+          "path": "mongoose/subdocs.md",
+          "tokens": 2399
+        },
+        {
+          "id": "timestamps",
+          "title": "Timestamps",
+          "description": "Mongoose schemas support a `timestamps` option.",
+          "tags": [
+            "timestamps",
+            "timestamps: true",
+            "Date",
+            "createdAt",
+            "updatedAt",
+            "save()",
+            "updateOne()",
+            "updateMany()",
+            "findOneAndUpdate()",
+            "update()"
+          ],
+          "path": "mongoose/timestamps.md",
+          "tokens": 2442
+        },
+        {
+          "id": "transactions",
+          "title": "Transactions in Mongoose",
+          "description": "[Transactions](https://www.mongodb.com/transactions) let you execute multiple operations in isolation and potentially...",
+          "tags": [
+            "Mongoose#startSession",
+            "Connection#startSession()",
+            "session.withTransaction()",
+            "Connection#transaction()",
+            "ClientSession#withTransaction()",
+            "withTransaction()",
+            "save()",
+            "Promise.all",
+            "Promise.allSettled",
+            "Promise.race"
+          ],
+          "path": "mongoose/transactions.md",
+          "tokens": 1804
+        },
+        {
+          "id": "custom-casting",
+          "title": "Custom Casting",
+          "description": "[Mongoose 5.4.0](https://github.com/Automattic/mongoose/blob/master/CHANGELOG.md#540--2018-12-14) introduced [several...",
+          "tags": [
+            "SchemaType.cast()"
+          ],
+          "path": "mongoose/custom-casting.md",
+          "tokens": 211
+        },
+        {
+          "id": "dates",
+          "title": "Working With Dates",
+          "description": "Here's how you declare a path of type `Date` with a Mongoose schema:",
+          "tags": [
+            "Date",
+            "Date()",
+            "CastError",
+            "min",
+            "max",
+            "ValidatorError",
+            "valueOf()",
+            "Date#toString()"
+          ],
+          "path": "mongoose/dates.md",
+          "tokens": 676
+        },
+        {
+          "id": "findoneandupdate",
+          "title": "How to Use `findOneAndUpdate()` in Mongoose",
+          "description": "The [`findOneAndUpdate()` function in Mongoose](../api/query.html#query_Query-findOneAndUpdate) has a wide variety of...",
+          "tags": [
+            "findOneAndUpdate()",
+            "save()",
+            "includeResultMetadata",
+            "filter",
+            "update",
+            "doc",
+            "name",
+            "_id",
+            "age",
+            "returnDocument"
+          ],
+          "path": "mongoose/findoneandupdate.md",
+          "tokens": 1398
+        },
+        {
+          "id": "getters-setters",
+          "title": "Getters/Setters in Mongoose",
+          "description": "Mongoose getters and setters allow you to execute custom logic when getting or setting a property on a [Mongoose docu...",
+          "tags": [
+            "User",
+            "userSchema",
+            "user",
+            "email",
+            "res.json()",
+            "toJSON.getters",
+            "true",
+            "user.get()",
+            "getters",
+            "false"
+          ],
+          "path": "mongoose/getters-setters.md",
+          "tokens": 1028
+        },
+        {
+          "id": "lean",
+          "title": "Faster Mongoose Queries With Lean",
+          "description": "The [lean option](../api/query.html#query_Query-lean) tells Mongoose to skip",
+          "tags": [
+            "lean()",
+            "Document",
+            "lean",
+            "save()",
+            "Person",
+            "populate()",
+            "person",
+            "GET",
+            "PUT",
+            "POST"
+          ],
+          "path": "mongoose/lean.md",
+          "tokens": 1370
+        },
+        {
+          "id": "query-casting",
+          "title": "Query Casting",
+          "description": "The first parameter to [`Model.find()`](../api/model.html#model_Model-find), [`Query#find()`](../api/query.html#query...",
+          "tags": [
+            "Model.find()",
+            "Query#find()",
+            "Model.findOne()",
+            "filter",
+            "query",
+            "conditions",
+            "Query#exec()",
+            "Query#then()",
+            "CastError",
+            "strictQuery"
+          ],
+          "path": "mongoose/query-casting.md",
+          "tokens": 443
+        },
+        {
+          "id": "ssl",
+          "title": "TLS/SSL Connections",
+          "description": "Mongoose supports connecting to [MongoDB clusters that require TLS/SSL connections](https://www.mongodb.com/docs/manu...",
+          "tags": [
+            "tls",
+            "true",
+            "mongoose.connect()",
+            "false",
+            "mongodb://",
+            "mongodb+srv://",
+            "ssl",
+            "tlsAllowInvalidCertificates",
+            "tlsInsecure",
+            "tlsAllowInvalidCertificates: true"
+          ],
+          "path": "mongoose/ssl.md",
+          "tokens": 1377
+        },
+        {
+          "id": "virtuals",
+          "title": "Mongoose Virtuals",
+          "description": "In Mongoose, a virtual is a property that is **not** stored in MongoDB.",
+          "tags": [
+            "User",
+            "email",
+            "domain",
+            "Schema#virtual()",
+            "VirtualType",
+            "firstName",
+            "lastName",
+            "fullName",
+            "this",
+            "res.json()"
+          ],
+          "path": "mongoose/virtuals.md",
+          "tokens": 1181
+        },
+        {
+          "id": "typescript",
+          "title": "TypeScript Support",
+          "description": "Mongoose introduced [officially supported TypeScript bindings in v5.11.0](https://thecodebarbarian.com/working-with-m...",
+          "tags": [
+            "index.d.ts",
+            "@types/mongoose",
+            "new Schema()",
+            "email",
+            "required",
+            "User()",
+            "HydratedDocument<IUser>",
+            "IUser",
+            "ObjectId",
+            "Types.ObjectId"
+          ],
+          "path": "mongoose/typescript.md",
+          "tokens": 1209
+        },
+        {
+          "id": "populate",
+          "title": "Populate with TypeScript",
+          "description": "[Mongoose's TypeScript bindings](https://thecodebarbarian.com/working-with-mongoose-in-typescript.html) add a generic...",
+          "tags": [
+            "Paths",
+            "populate()",
+            "PopulatedParent",
+            "Pick<>",
+            "PopulatedDoc",
+            ".populate<{ child: Child }>",
+            "child instanceof ObjectId",
+            "PopulatedDoc<>",
+            "doc.child",
+            "Parent"
+          ],
+          "path": "mongoose/populate.md",
+          "tokens": 805
+        },
+        {
+          "id": "queries",
+          "title": "Queries in TypeScript",
+          "description": "Mongoose's [Query class](../api/query.html) is a chainable query builder that represents a MongoDB query.",
+          "tags": [
+            "find()",
+            "findOne()",
+            "updateOne()",
+            "findOneAndUpdate()",
+            ".then()",
+            "await",
+            "lean()",
+            "transform()"
+          ],
+          "path": "mongoose/queries.md",
+          "tokens": 487
+        },
+        {
+          "id": "query-helpers",
+          "title": "Query Helpers in TypeScript",
+          "description": "[Query helpers](http://thecodebarbarian.com/mongoose-custom-query-methods.html) let you define custom helper methods ...",
+          "tags": [
+            "Model",
+            "DocType",
+            "TQueryHelpers",
+            "TMethods",
+            "ProjectModel",
+            "byName",
+            "toMap()",
+            "Map",
+            "_id",
+            ".lean()"
+          ],
+          "path": "mongoose/query-helpers.md",
+          "tokens": 1489
+        },
+        {
+          "id": "schemas",
+          "title": "Schemas in TypeScript",
+          "description": "Mongoose [schemas](../guide.html) are how you tell Mongoose what your documents look like.",
+          "tags": [
+            "strictNullChecks: true",
+            "strict: true",
+            "tsconfig.json",
+            "--strictNullChecks",
+            "--strict",
+            "new Schema()",
+            "createdAt",
+            "updatedAt",
+            "timestamps",
+            "required: false"
+          ],
+          "path": "mongoose/schemas.md",
+          "tokens": 2476
+        },
+        {
+          "id": "statics-and-methods",
+          "title": "Statics in TypeScript",
+          "description": "To use Mongoose's automatic type inference to define types for your [statics](../guide.html#statics) and [methods](.....",
+          "tags": [
+            "methods",
+            "statics",
+            "Schema.prototype.method()",
+            "Schema.prototype.static()",
+            "Schema",
+            "Model",
+            "loadClass()",
+            "schema.loadClass()",
+            "this"
+          ],
+          "path": "mongoose/statics-and-methods.md",
+          "tokens": 1717
+        },
+        {
+          "id": "subdocuments",
+          "title": "Handling Subdocuments in TypeScript",
+          "description": "Subdocuments are tricky in TypeScript.",
+          "tags": [
+            "THydratedDocumentType",
+            "mongoose.Model<>",
+            "await UserModel.findOne()",
+            "UserModel.hydrate()",
+            "new UserModel()",
+            "TMethodsAndOverrides"
+          ],
+          "path": "mongoose/subdocuments.md",
+          "tokens": 654
+        },
+        {
+          "id": "virtuals",
+          "title": "Virtuals in TypeScript",
+          "description": "[Virtuals](../tutorials/virtuals.html) are computed properties: you can access virtuals on hydrated Mongoose document...",
+          "tags": [
+            "virtuals",
+            "Schema.prototype.virtual()",
+            "InferSchemaType",
+            "Model",
+            "Schema",
+            "UserDoc",
+            "fullName",
+            "UserVirtuals",
+            "schema.virtual()",
+            "this"
+          ],
+          "path": "mongoose/virtuals.md",
+          "tokens": 872
+        },
+        {
+          "id": "validation",
+          "title": "Validation",
+          "description": "Before we get into the specifics of validation syntax, please keep the following rules in mind:",
+          "tags": [
+            "pre('save')",
+            "doc.validate()",
+            "doc.validateSync()",
+            "doc.invalidate(...)",
+            "required",
+            "unique",
+            "this",
+            "checkRequired()",
+            "min",
+            "max"
+          ],
+          "path": "mongoose/validation.md",
+          "tokens": 2247
+        },
+        {
+          "id": "version-support",
+          "title": "Version Support",
+          "description": "Released on **November 21, 2025**, Mongoose 9 is the latest major version.",
+          "tags": [],
+          "path": "mongoose/version-support.md",
+          "tokens": 460
         }
       ]
     },
