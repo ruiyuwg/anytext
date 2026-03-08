@@ -266,6 +266,14 @@
       "url": "https://docs.langchain.com/llms-full.txt"
     },
     {
+      "id": "zustand",
+      "name": "Zustand",
+      "description": "Lightweight state management for React with a simple hook-based API",
+      "version": "5",
+      "adapter": "llms-full",
+      "url": "https://zustand.docs.pmnd.rs/llms-full.txt"
+    },
+    {
       "id": "azure",
       "name": "Azure",
       "description": "Microsoft Azure cloud platform with compute, storage, databases, AI, and 200+ services",

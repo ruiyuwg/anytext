@@ -1,5 +1,5 @@
 {
-  "version": 46,
+  "version": 47,
   "updatedAt": "2026-03-08",
   "libraries": [
     {
@@ -80743,6 +80743,22 @@
           ],
           "path": "zod/versioning.md",
           "tokens": 1973
+        }
+      ]
+    },
+    {
+      "id": "zustand",
+      "name": "Zustand",
+      "description": "Lightweight state management for React with a simple hook-based API",
+      "version": "5",
+      "topics": [
+        {
+          "id": "introduction",
+          "title": "Introduction",
+          "description": "Full documentation content.",
+          "tags": [],
+          "path": "zustand/introduction.md",
+          "tokens": 91152
         }
       ]
     }
