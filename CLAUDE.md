@@ -63,10 +63,13 @@ node dist/index.js --concurrency 8        # Parallel source processing (default:
 - **Adapters:**
   - `llms-full` — fetch a single llms-full.txt file, clean, and split by headings
   - `llms-txt` — parse an llms.txt index, follow linked .md pages, clean each
+  - `llms-index` — follow a root llms.txt index to per-service llms.txt or llms-full.txt files (used for cloud providers like AWS, Cloudflare)
   - `html` — crawl HTML pages from a URL, extract content via CSS selectors (cheerio + turndown)
-  - `github` — fetch .md files from a GitHub repo via the API (tree listing + raw content)
-  - `sitemap` — parse a sitemap.xml, fetch and extract each listed page
-- **Pipeline:** fetch (with retries) → configurable preprocess → remark parse → offset-based split → staging write → atomic commit → manifest update
+  - `github` — fetch .md files from a GitHub repo via the API (tree listing + raw content); supports `subDirs` scoping, `maxFiles` limit, and truncated-tree fallback to Contents API
+  - `sitemap` — parse a sitemap.xml (or sitemap index), fetch and extract each listed page; supports `maxPages` limit
+- **Pipeline:** fetch (with retries, HTTP 429 retry support) → configurable preprocess → remark parse → offset-based split → staging write → atomic commit → manifest update
+- **Source config fields:** `topicPrefix` ('none' | 'directory' | 'auto') for namespacing topics by service, `rateLimit` (requests/sec) for throttling, `llmsIndex` config for the llms-index adapter
+- **Crawl config fields:** `maxPages` (sitemap safety limit), `maxFiles` (GitHub safety limit), `subDirs` (GitHub subdirectory scoping)
 - **Incremental updates:** Content is hashed per-source; unchanged sources are skipped automatically. Use `--force` to re-process regardless.
 - **Staging writes:** Topics are written to `registry/docs/.staging/{sourceId}/` first, then atomically renamed to the live directory on success.
 - **CI:** `.github/workflows/update-docs.yml` runs weekly, creates a PR with updated docs
@@ -122,12 +125,14 @@ packages/scraper/src/__tests__/
 │   ├── write.test.ts          # Mocks: node:fs, manifest
 │   ├── hashes.test.ts         # Mocks: node:fs, manifest
 │   ├── extract.test.ts        # Uses real cheerio/turndown (no mocking)
+│   ├── rate-limiter.test.ts   # Uses vi.useFakeTimers()
 │   └── validate-completeness.test.ts  # Pure functions
 ├── adapters/
 │   ├── llms-full.test.ts      # Mocks: fetch, clean, split, validate-completeness
 │   ├── llms-txt.test.ts       # Mocks: fetch, clean
 │   ├── html.test.ts           # Mocks: fetch, extract
 │   ├── github.test.ts         # Mocks: globalThis.fetch
+│   ├── llms-index.test.ts     # Mocks: globalThis.fetch
 │   └── sitemap.test.ts        # Mocks: fetch, extract
 ├── scrape.test.ts             # Mocks: adapters, manifest, write, hashes, node:fs
 └── index.test.ts              # IIFE entry point: vi.resetModules() + dynamic import

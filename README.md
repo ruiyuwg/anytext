@@ -47,8 +47,11 @@ npx skills add ruiyuwg/anytext
 ```bash
 anytext list                         # List all available libraries
 anytext list react                   # List topics for React
+anytext list aws                     # List service groups for large libraries
+anytext list aws lambda              # List topics within a service group
 anytext search "server components"   # Search across all docs
 anytext read react hooks             # Read a specific topic
+anytext read aws lambda-creating-functions  # Read a cloud provider topic
 anytext cache clear                  # Clear local cache
 ```
 
@@ -64,6 +67,8 @@ Agent calls `anytext read react hooks`
 The registry is a collection of pre-processed markdown files committed to this repo. No scraping, no parsing, no external API calls happen at runtime — just static file fetches.
 
 ## Supported Libraries
+
+### Frameworks & Libraries
 
 | Library      | Version | Topics | Source        |
 | ------------ | ------- | ------ | ------------- |
@@ -86,13 +91,25 @@ The registry is a collection of pre-processed markdown files committed to this r
 | Vitest       | v3      | 86     | llms-full.txt |
 | Zod          | v3      | 28     | llms-full.txt |
 
+### Cloud Providers
+
+| Provider       | Source     | Adapter    |
+| -------------- | ---------- | ---------- |
+| AWS            | llms.txt   | llms-index |
+| Azure          | GitHub     | github     |
+| Cloudflare     | llms.txt   | llms-index |
+| Google Cloud   | sitemap    | sitemap    |
+| Alibaba Cloud  | HTML       | html       |
+
+Cloud provider libraries group topics by service. Use `anytext list <provider>` to see service groups, and `anytext list <provider> <service>` to drill into a specific service.
+
 Docs are automatically updated weekly via GitHub Actions. Contributions welcome.
 
 ## Contributing
 
 ### Adding a New Library
 
-1. Add an entry to `packages/scraper/sources.json` — pick the right adapter for the docs source (`llms-full`, `llms-txt`, `html`, `github`, or `sitemap`). See [CONTRIBUTING.md](CONTRIBUTING.md) for full config reference.
+1. Add an entry to `packages/scraper/sources.json` — pick the right adapter for the docs source (`llms-full`, `llms-txt`, `llms-index`, `html`, `github`, or `sitemap`). See [CONTRIBUTING.md](CONTRIBUTING.md) for full config reference.
 2. Run the scraper: `cd packages/scraper && pnpm build && node dist/index.js --library <id>`
 3. Verify the output in `registry/docs/<id>/` and `registry/manifest.json`
 4. Submit a PR
