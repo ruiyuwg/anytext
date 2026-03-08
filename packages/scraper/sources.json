@@ -449,6 +449,19 @@
       }
     },
     {
+      "id": "playwright",
+      "name": "Playwright",
+      "description": "End-to-end testing framework for web apps with auto-waiting, selectors, and cross-browser support",
+      "version": "1",
+      "adapter": "sitemap",
+      "url": "https://playwright.dev/sitemap.xml",
+      "crawl": {
+        "contentSelector": "article",
+        "include": ["/docs/"],
+        "exclude": ["/python/", "/java/", "/dotnet/"]
+      }
+    },
+    {
       "id": "azure",
       "name": "Azure",
       "description": "Microsoft Azure cloud platform with compute, storage, databases, AI, and 200+ services",

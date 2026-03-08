@@ -1,5 +1,5 @@
 {
-  "version": 69,
+  "version": 70,
   "updatedAt": "2026-03-08",
   "libraries": [
     {
@@ -98550,6 +98550,4615 @@
           ],
           "path": "payload/performance.md",
           "tokens": 2046
+        }
+      ]
+    },
+    {
+      "id": "playwright",
+      "name": "Playwright",
+      "description": "End-to-end testing framework for web apps with auto-waiting, selectors, and cross-browser support",
+      "version": "1",
+      "topics": [
+        {
+          "id": "accessibility-testing",
+          "title": "accessibility-testing",
+          "description": "Version: Next",
+          "tags": [
+            "@axe-core/playwright",
+            "AxeBuilder.analyze()",
+            "AxeBuilder",
+            "AxeBuilder.include()",
+            "analyze()",
+            "AxeBuilder.withTags()",
+            "wcag2a",
+            "wcag2aa",
+            "wcag21a",
+            "wcag21aa"
+          ],
+          "path": "playwright/accessibility-testing.md",
+          "tokens": 3870
+        },
+        {
+          "id": "actionability",
+          "title": "actionability",
+          "description": "Version: Next",
+          "tags": [
+            "timeout",
+            "TimeoutError",
+            "force",
+            "visibility:hidden",
+            "display:none",
+            "opacity:0",
+            "<button>",
+            "<select>",
+            "<input>",
+            "<textarea>"
+          ],
+          "path": "playwright/actionability.md",
+          "tokens": 2209
+        },
+        {
+          "id": "api-testing",
+          "title": "api-testing",
+          "description": "Version: Next",
+          "tags": [
+            "baseURL",
+            "test.use()",
+            "request",
+            "extraHTTPHeaders",
+            "beforeAll",
+            "afterAll",
+            "Cookie",
+            "Set-Cookie"
+          ],
+          "path": "playwright/api-testing.md",
+          "tokens": 3674
+        },
+        {
+          "id": "class-android",
+          "title": "class-android",
+          "description": "Version: Next",
+          "tags": [
+            "adb devices",
+            "Chrome 87",
+            "chrome://flags",
+            "wsEndpoint",
+            "options",
+            "headers",
+            "slowMo",
+            "0",
+            "timeout",
+            "30000"
+          ],
+          "path": "playwright/class-android.md",
+          "tokens": 2730
+        },
+        {
+          "id": "class-androiddevice",
+          "title": "class-androiddevice",
+          "description": "Version: Next",
+          "tags": [
+            "selector",
+            "dest",
+            "x",
+            "y",
+            "options",
+            "speed",
+            "timeout",
+            "0",
+            "text",
+            "direction"
+          ],
+          "path": "playwright/class-androiddevice.md",
+          "tokens": 13767
+        },
+        {
+          "id": "class-androidinput",
+          "title": "class-androidinput",
+          "description": "Version: Next",
+          "tags": [
+            "from",
+            "x",
+            "y",
+            "to",
+            "steps",
+            "key",
+            "segments",
+            "point",
+            "text"
+          ],
+          "path": "playwright/class-androidinput.md",
+          "tokens": 1531
+        },
+        {
+          "id": "class-androidsocket",
+          "title": "class-androidsocket",
+          "description": "Version: Next",
+          "tags": [
+            "data"
+          ],
+          "path": "playwright/class-androidsocket.md",
+          "tokens": 528
+        },
+        {
+          "id": "class-androidwebview",
+          "title": "class-androidwebview",
+          "description": "Version: Next",
+          "tags": [],
+          "path": "playwright/class-androidwebview.md",
+          "tokens": 440
+        },
+        {
+          "id": "class-apirequest",
+          "title": "class-apirequest",
+          "description": "Version: Next",
+          "tags": [
+            "options",
+            "baseURL",
+            "URL()",
+            "http://localhost:3000",
+            "/bar.html",
+            "http://localhost:3000/bar.html",
+            "http://localhost:3000/foo/",
+            "./bar.html",
+            "http://localhost:3000/foo/bar.html",
+            "http://localhost:3000/foo"
+          ],
+          "path": "playwright/class-apirequest.md",
+          "tokens": 3453
+        },
+        {
+          "id": "class-apirequestcontext",
+          "title": "class-apirequestcontext",
+          "description": "Version: Next",
+          "tags": [
+            "Cookie",
+            "Set-Cookie",
+            "APIRequestContext",
+            "url",
+            "options",
+            "data",
+            "content-type",
+            "application/json",
+            "application/octet-stream",
+            "failOnStatusCode"
+          ],
+          "path": "playwright/class-apirequestcontext.md",
+          "tokens": 16194
+        },
+        {
+          "id": "class-apiresponse",
+          "title": "class-apiresponse",
+          "description": "Version: Next",
+          "tags": [
+            "Set-Cookie",
+            "name",
+            "value",
+            "JSON.parse"
+          ],
+          "path": "playwright/class-apiresponse.md",
+          "tokens": 1328
+        },
+        {
+          "id": "class-apiresponseassertions",
+          "title": "class-apiresponseassertions",
+          "description": "Version: Next",
+          "tags": [
+            "200..299"
+          ],
+          "path": "playwright/class-apiresponseassertions.md",
+          "tokens": 384
+        },
+        {
+          "id": "class-browser",
+          "title": "class-browser",
+          "description": "Version: Next",
+          "tags": [
+            "options",
+            "reason",
+            "context",
+            "acceptDownloads",
+            "true",
+            "baseURL",
+            "URL()",
+            "http://localhost:3000",
+            "/bar.html",
+            "http://localhost:3000/bar.html"
+          ],
+          "path": "playwright/class-browser.md",
+          "tokens": 16590
+        },
+        {
+          "id": "class-browsercontext",
+          "title": "class-browsercontext",
+          "description": "Version: Next",
+          "tags": [
+            "window.open",
+            "cookies",
+            "name",
+            "value",
+            "url",
+            "domain",
+            "path",
+            "expires",
+            "httpOnly",
+            "secure"
+          ],
+          "path": "playwright/class-browsercontext.md",
+          "tokens": 16860
+        },
+        {
+          "id": "class-browserserver",
+          "title": "class-browserserver",
+          "description": "Version: Next",
+          "tags": [
+            "host",
+            "launchServer"
+          ],
+          "path": "playwright/class-browserserver.md",
+          "tokens": 594
+        },
+        {
+          "id": "class-browsertype",
+          "title": "class-browsertype",
+          "description": "Version: Next",
+          "tags": [
+            "BrowserType.launchServer",
+            "wsEndpoint",
+            "BrowserServer.wsEndpoint",
+            "options",
+            "exposeNetwork",
+            "example.com",
+            "*.org:99",
+            "x.*.y.com",
+            "*foo.org",
+            "127.0.0.1"
+          ],
+          "path": "playwright/class-browsertype.md",
+          "tokens": 16287
+        },
+        {
+          "id": "class-cdpsession",
+          "title": "class-cdpsession",
+          "description": "Version: Next",
+          "tags": [
+            "CDPSession",
+            "session.send",
+            "session.on",
+            "method",
+            "params"
+          ],
+          "path": "playwright/class-cdpsession.md",
+          "tokens": 615
+        },
+        {
+          "id": "class-clock",
+          "title": "class-clock",
+          "description": "Version: Next",
+          "tags": [
+            "ticks",
+            "Date",
+            "setTimeout",
+            "clearTimeout",
+            "setInterval",
+            "clearInterval",
+            "requestAnimationFrame",
+            "cancelAnimationFrame",
+            "requestIdleCallback",
+            "cancelIdleCallback"
+          ],
+          "path": "playwright/class-clock.md",
+          "tokens": 2323
+        },
+        {
+          "id": "class-consolemessage",
+          "title": "class-consolemessage",
+          "description": "Version: Next",
+          "tags": [
+            "console",
+            "url",
+            "lineNumber",
+            "columnNumber"
+          ],
+          "path": "playwright/class-consolemessage.md",
+          "tokens": 1109
+        },
+        {
+          "id": "class-coverage",
+          "title": "class-coverage",
+          "description": "Version: Next",
+          "tags": [
+            "options",
+            "resetOnNavigation",
+            "true",
+            "eval",
+            "new Function",
+            "__playwright_evaluation_script__",
+            "reportAnonymousScripts",
+            "false",
+            "url",
+            "text"
+          ],
+          "path": "playwright/class-coverage.md",
+          "tokens": 1973
+        },
+        {
+          "id": "class-dialog",
+          "title": "class-dialog",
+          "description": "Version: Next",
+          "tags": [
+            "Dialog",
+            "promptText",
+            "type",
+            "alert",
+            "beforeunload",
+            "confirm",
+            "prompt"
+          ],
+          "path": "playwright/class-dialog.md",
+          "tokens": 948
+        },
+        {
+          "id": "class-download",
+          "title": "class-download",
+          "description": "Version: Next",
+          "tags": [
+            "download.failure()",
+            "'canceled'",
+            "path",
+            "Content-Disposition",
+            "download"
+          ],
+          "path": "playwright/class-download.md",
+          "tokens": 1537
+        },
+        {
+          "id": "class-electron",
+          "title": "class-electron",
+          "description": "Version: Next",
+          "tags": [
+            "nodeCliInspect",
+            "false",
+            "options",
+            "acceptDownloads",
+            "true",
+            "args",
+            "bypassCSP",
+            "chromiumSandbox",
+            "colorScheme",
+            "'light'"
+          ],
+          "path": "playwright/class-electron.md",
+          "tokens": 3655
+        },
+        {
+          "id": "class-electronapplication",
+          "title": "class-electronapplication",
+          "description": "Version: Next",
+          "tags": [
+            "page",
+            "undefined",
+            "JSON",
+            "-0",
+            "NaN",
+            "Infinity",
+            "-Infinity",
+            "pageFunction",
+            "arg",
+            "options"
+          ],
+          "path": "playwright/class-electronapplication.md",
+          "tokens": 3277
+        },
+        {
+          "id": "class-elementhandle",
+          "title": "class-elementhandle",
+          "description": "Version: Next",
+          "tags": [
+            "element",
+            "null",
+            "x",
+            "y",
+            "width",
+            "height",
+            "\"hidden\"",
+            "\"visible\"",
+            "\"stable\"",
+            "\"enabled\""
+          ],
+          "path": "playwright/class-elementhandle.md",
+          "tokens": 23148
+        },
+        {
+          "id": "class-filechooser",
+          "title": "class-filechooser",
+          "description": "Version: Next",
+          "tags": [
+            "filePaths",
+            "files",
+            "name",
+            "mimeType",
+            "buffer",
+            "options",
+            "noWaitAfter",
+            "timeout",
+            "0",
+            "actionTimeout"
+          ],
+          "path": "playwright/class-filechooser.md",
+          "tokens": 1101
+        },
+        {
+          "id": "class-fixtures",
+          "title": "class-fixtures",
+          "description": "Version: Next",
+          "tags": [
+            "test",
+            "page",
+            "'chromium'"
+          ],
+          "path": "playwright/class-fixtures.md",
+          "tokens": 1217
+        },
+        {
+          "id": "class-frame",
+          "title": "class-frame",
+          "description": "Version: Next",
+          "tags": [
+            "<script>",
+            "options",
+            "content",
+            "path",
+            "type",
+            "url",
+            "<link rel=\"stylesheet\">",
+            "<style type=\"text/css\">",
+            "<link>",
+            "source"
+          ],
+          "path": "playwright/class-frame.md",
+          "tokens": 40185
+        },
+        {
+          "id": "class-framelocator",
+          "title": "class-framelocator",
+          "description": "Version: Next",
+          "tags": [
+            "iframe",
+            "selector",
+            "text",
+            "options",
+            "exact",
+            "<label>",
+            "aria-labelledby",
+            "aria-label",
+            "role",
+            "checked"
+          ],
+          "path": "playwright/class-framelocator.md",
+          "tokens": 6175
+        },
+        {
+          "id": "class-fullconfig",
+          "title": "class-fullconfig",
+          "description": "Version: Next",
+          "tags": [
+            "max",
+            "threshold",
+            "0",
+            "1",
+            "total",
+            "current"
+          ],
+          "path": "playwright/class-fullconfig.md",
+          "tokens": 2913
+        },
+        {
+          "id": "class-fullproject",
+          "title": "class-fullproject",
+          "description": "Version: Next",
+          "tags": [],
+          "path": "playwright/class-fullproject.md",
+          "tokens": 1937
+        },
+        {
+          "id": "class-genericassertions",
+          "title": "class-genericassertions",
+          "description": "Version: Next",
+          "tags": [
+            "expect.any()",
+            "constructor",
+            "ExampleClass",
+            "Number",
+            "expect.anything()",
+            "null",
+            "undefined",
+            "expect.arrayContaining()",
+            "expected",
+            "expect.arrayOf()"
+          ],
+          "path": "playwright/class-genericassertions.md",
+          "tokens": 6700
+        },
+        {
+          "id": "class-inspector",
+          "title": "class-inspector",
+          "description": "Version: Next",
+          "tags": [
+            "options",
+            "size",
+            "width",
+            "height",
+            "data"
+          ],
+          "path": "playwright/class-inspector.md",
+          "tokens": 1281
+        },
+        {
+          "id": "class-jshandle",
+          "title": "class-jshandle",
+          "description": "Version: Next",
+          "tags": [
+            "null",
+            "jsHandle.dispose",
+            "handle.evaluate",
+            "pageFunction",
+            "arg",
+            "jsHandle.evaluate",
+            "jsHandle.evaluateHandle",
+            "propertyName",
+            "toJSON"
+          ],
+          "path": "playwright/class-jshandle.md",
+          "tokens": 1982
+        },
+        {
+          "id": "class-keyboard",
+          "title": "class-keyboard",
+          "description": "Version: Next",
+          "tags": [
+            "keydown",
+            "keypress",
+            "input",
+            "keyup",
+            "Shift",
+            "A",
+            "F1",
+            "F12",
+            "Digit0",
+            "Digit9"
+          ],
+          "path": "playwright/class-keyboard.md",
+          "tokens": 2569
+        },
+        {
+          "id": "class-location",
+          "title": "class-location",
+          "description": "Version: Next",
+          "tags": [],
+          "path": "playwright/class-location.md",
+          "tokens": 269
+        },
+        {
+          "id": "class-locator",
+          "title": "class-locator",
+          "description": "Version: Next",
+          "tags": [
+            "node.innerText",
+            "node.textContent",
+            "locator",
+            "options",
+            "timeout",
+            "0",
+            "actionTimeout",
+            "text",
+            "null",
+            "x"
+          ],
+          "path": "playwright/class-locator.md",
+          "tokens": 35944
+        },
+        {
+          "id": "class-locatorassertions",
+          "title": "class-locatorassertions",
+          "description": "Version: Next",
+          "tags": [
+            "options",
+            "attached",
+            "timeout",
+            "TestConfig.expect",
+            "checked",
+            "indeterminate",
+            "button",
+            "input",
+            "select",
+            "textarea"
+          ],
+          "path": "playwright/class-locatorassertions.md",
+          "tokens": 16994
+        },
+        {
+          "id": "class-logger",
+          "title": "class-logger",
+          "description": "Version: Next",
+          "tags": [
+            "name",
+            "severity",
+            "message",
+            "args",
+            "hints",
+            "color"
+          ],
+          "path": "playwright/class-logger.md",
+          "tokens": 658
+        },
+        {
+          "id": "class-mouse",
+          "title": "class-mouse",
+          "description": "Version: Next",
+          "tags": [
+            "page",
+            "x",
+            "y",
+            "options",
+            "button",
+            "left",
+            "clickCount",
+            "delay",
+            "mousedown",
+            "mouseup"
+          ],
+          "path": "playwright/class-mouse.md",
+          "tokens": 2265
+        },
+        {
+          "id": "class-page",
+          "title": "class-page",
+          "description": "Version: Next",
+          "tags": [
+            "EventEmitter",
+            "on",
+            "once",
+            "removeListener",
+            "load",
+            "Math.random",
+            "script",
+            "path",
+            "content",
+            "arg"
+          ],
+          "path": "playwright/class-page.md",
+          "tokens": 65487
+        },
+        {
+          "id": "class-pageagent",
+          "title": "class-pageagent",
+          "description": "Version: Next",
+          "tags": [
+            "expectation",
+            "options",
+            "cacheKey",
+            "task",
+            "maxActionRetries",
+            "agent",
+            "maxActions",
+            "maxTokens",
+            "timeout",
+            "5000"
+          ],
+          "path": "playwright/class-pageagent.md",
+          "tokens": 3097
+        },
+        {
+          "id": "class-pageassertions",
+          "title": "class-pageassertions",
+          "description": "Version: Next",
+          "tags": [
+            "name",
+            "options",
+            "animations",
+            "\"disabled\"",
+            "transitionend",
+            "caret",
+            "\"hide\"",
+            "\"initial\"",
+            "clip",
+            "x"
+          ],
+          "path": "playwright/class-pageassertions.md",
+          "tokens": 5138
+        },
+        {
+          "id": "class-playwright",
+          "title": "class-playwright",
+          "description": "Version: Next",
+          "tags": [
+            "playwright.errors",
+            "TimeoutError"
+          ],
+          "path": "playwright/class-playwright.md",
+          "tokens": 1025
+        },
+        {
+          "id": "class-playwrightassertions",
+          "title": "class-playwrightassertions",
+          "description": "Version: Next",
+          "tags": [
+            ".status",
+            "\"Submitted\"",
+            "response",
+            "value",
+            "locator",
+            "page"
+          ],
+          "path": "playwright/class-playwrightassertions.md",
+          "tokens": 915
+        },
+        {
+          "id": "class-reporter",
+          "title": "class-reporter",
+          "description": "Version: Next",
+          "tags": [
+            "status",
+            "false",
+            "blob",
+            "merge-reports",
+            "config",
+            "suite",
+            "result",
+            "startTime",
+            "duration",
+            "'passed'"
+          ],
+          "path": "playwright/class-reporter.md",
+          "tokens": 3642
+        },
+        {
+          "id": "class-request",
+          "title": "class-request",
+          "description": "Version: Next",
+          "tags": [
+            "'requestfinished'",
+            "requestfinished",
+            "null",
+            "requestfailed",
+            "errorText",
+            "'net::ERR_FAILED'",
+            "request.serviceWorker()",
+            "name",
+            "cookie",
+            "Set-Cookie"
+          ],
+          "path": "playwright/class-request.md",
+          "tokens": 4775
+        },
+        {
+          "id": "class-response",
+          "title": "class-response",
+          "description": "Version: Next",
+          "tags": [
+            "null",
+            "set-cookie",
+            ",",
+            "\\n",
+            "name",
+            "cookie",
+            "Set-Cookie",
+            "value",
+            "JSON.parse",
+            "issuer"
+          ],
+          "path": "playwright/class-response.md",
+          "tokens": 3154
+        },
+        {
+          "id": "class-route",
+          "title": "class-route",
+          "description": "Version: Next",
+          "tags": [
+            "Route",
+            "errorCode",
+            "failed",
+            "'aborted'",
+            "'accessdenied'",
+            "'addressunreachable'",
+            "'blockedbyclient'",
+            "'blockedbyresponse'",
+            "'connectionaborted'",
+            "'connectionclosed'"
+          ],
+          "path": "playwright/class-route.md",
+          "tokens": 4371
+        },
+        {
+          "id": "class-selectors",
+          "title": "class-selectors",
+          "description": "Version: Next",
+          "tags": [
+            "name",
+            "{name: 'foo'}",
+            "foo=myselectorbody",
+            "[a-zA-Z0-9_]",
+            "script",
+            "path",
+            "content",
+            "options",
+            "contentScript",
+            "false"
+          ],
+          "path": "playwright/class-selectors.md",
+          "tokens": 1113
+        },
+        {
+          "id": "class-snapshotassertions",
+          "title": "class-snapshotassertions",
+          "description": "Version: Next",
+          "tags": [
+            "name",
+            "options",
+            "maxDiffPixelRatio",
+            "0",
+            "1",
+            "TestConfig.expect",
+            "maxDiffPixels",
+            "threshold",
+            "0.2"
+          ],
+          "path": "playwright/class-snapshotassertions.md",
+          "tokens": 1660
+        },
+        {
+          "id": "class-suite",
+          "title": "class-suite",
+          "description": "Version: Next",
+          "tags": [
+            "Suite",
+            "root",
+            "project",
+            "file",
+            "describe",
+            "test"
+          ],
+          "path": "playwright/class-suite.md",
+          "tokens": 1354
+        },
+        {
+          "id": "class-test",
+          "title": "class-test",
+          "description": "Version: Next",
+          "tags": [
+            "test",
+            "expect",
+            "test(title, body)",
+            "test(title, details, body)",
+            "@",
+            "TestCase.tags",
+            "TestCase.annotations",
+            "title",
+            "details",
+            "tag"
+          ],
+          "path": "playwright/class-test.md",
+          "tokens": 19272
+        },
+        {
+          "id": "class-testcase",
+          "title": "class-testcase",
+          "description": "Version: Next",
+          "tags": [
+            "TestCase",
+            "'expected'",
+            "'flaky'",
+            "type",
+            "'skip'",
+            "'fail'",
+            "description",
+            "location",
+            "'skipped'",
+            "'failed'"
+          ],
+          "path": "playwright/class-testcase.md",
+          "tokens": 1862
+        },
+        {
+          "id": "class-testconfig",
+          "title": "class-testconfig",
+          "description": "Version: Next",
+          "tags": [
+            "timeout",
+            "testDir",
+            "external",
+            "commit",
+            "diff",
+            "true",
+            "false",
+            "expect",
+            "toHaveScreenshot",
+            "animations"
+          ],
+          "path": "playwright/class-testconfig.md",
+          "tokens": 12607
+        },
+        {
+          "id": "class-testerror",
+          "title": "class-testerror",
+          "description": "Version: Next",
+          "tags": [
+            "undefined"
+          ],
+          "path": "playwright/class-testerror.md",
+          "tokens": 597
+        },
+        {
+          "id": "class-testinfo",
+          "title": "class-testinfo",
+          "description": "Version: Next",
+          "tags": [
+            "TestInfo",
+            "name",
+            "options",
+            "body",
+            "contentType",
+            "'application/json'",
+            "'image/png'",
+            "text/plain",
+            "application/octet-stream",
+            "path"
+          ],
+          "path": "playwright/class-testinfo.md",
+          "tokens": 7154
+        },
+        {
+          "id": "class-testinfoerror",
+          "title": "class-testinfoerror",
+          "description": "Version: Next",
+          "tags": [
+            "undefined"
+          ],
+          "path": "playwright/class-testinfoerror.md",
+          "tokens": 474
+        },
+        {
+          "id": "class-testoptions",
+          "title": "class-testoptions",
+          "description": "Version: Next",
+          "tags": [
+            "true",
+            "provider",
+            "api",
+            "apiEndpoint",
+            "apiKey",
+            "apiTimeout",
+            "model",
+            "cachePathTemplate",
+            "limits",
+            "maxTokens"
+          ],
+          "path": "playwright/class-testoptions.md",
+          "tokens": 10388
+        },
+        {
+          "id": "class-testproject",
+          "title": "class-testproject",
+          "description": "Version: Next",
+          "tags": [
+            "TestProject",
+            "--no-deps",
+            "expect",
+            "timeout",
+            "toHaveScreenshot",
+            "threshold",
+            "0",
+            "1",
+            "\"pixelmatch\"",
+            "0.2"
+          ],
+          "path": "playwright/class-testproject.md",
+          "tokens": 7533
+        },
+        {
+          "id": "class-testresult",
+          "title": "class-testresult",
+          "description": "Version: Next",
+          "tags": [
+            "type",
+            "'skip'",
+            "'fail'",
+            "description",
+            "location",
+            "name",
+            "contentType",
+            "'application/json'",
+            "'image/png'",
+            "path"
+          ],
+          "path": "playwright/class-testresult.md",
+          "tokens": 1920
+        },
+        {
+          "id": "class-teststep",
+          "title": "class-teststep",
+          "description": "Version: Next",
+          "tags": [
+            "type",
+            "'skip'",
+            "description",
+            "location",
+            "name",
+            "contentType",
+            "'application/json'",
+            "'image/png'",
+            "path",
+            "body"
+          ],
+          "path": "playwright/class-teststep.md",
+          "tokens": 1393
+        },
+        {
+          "id": "class-teststepinfo",
+          "title": "class-teststepinfo",
+          "description": "Version: Next",
+          "tags": [
+            "TestStepInfo",
+            "name",
+            "options",
+            "body",
+            "contentType",
+            "'application/json'",
+            "'image/png'",
+            "text/plain",
+            "application/octet-stream",
+            "path"
+          ],
+          "path": "playwright/class-teststepinfo.md",
+          "tokens": 1650
+        },
+        {
+          "id": "class-timeouterror",
+          "title": "class-timeouterror",
+          "description": "Version: Next",
+          "tags": [],
+          "path": "playwright/class-timeouterror.md",
+          "tokens": 188
+        },
+        {
+          "id": "class-touchscreen",
+          "title": "class-touchscreen",
+          "description": "Version: Next",
+          "tags": [
+            "hasTouch",
+            "touchstart",
+            "touchend",
+            "x",
+            "y"
+          ],
+          "path": "playwright/class-touchscreen.md",
+          "tokens": 445
+        },
+        {
+          "id": "class-tracing",
+          "title": "class-tracing",
+          "description": "Version: Next",
+          "tags": [
+            "context.tracing",
+            "expect",
+            "test.step",
+            "name",
+            "options",
+            "location",
+            "file",
+            "line",
+            "column",
+            "Tracing.start"
+          ],
+          "path": "playwright/class-tracing.md",
+          "tokens": 2769
+        },
+        {
+          "id": "class-video",
+          "title": "class-video",
+          "description": "Version: Next",
+          "tags": [
+            "recordVideo",
+            "path",
+            "options",
+            "size",
+            "width",
+            "height"
+          ],
+          "path": "playwright/class-video.md",
+          "tokens": 1208
+        },
+        {
+          "id": "class-weberror",
+          "title": "class-weberror",
+          "description": "Version: Next",
+          "tags": [],
+          "path": "playwright/class-weberror.md",
+          "tokens": 312
+        },
+        {
+          "id": "class-websocket",
+          "title": "class-websocket",
+          "description": "Version: Next",
+          "tags": [
+            "event",
+            "webSocket.on(event)",
+            "optionsOrPredicate",
+            "predicate",
+            "timeout",
+            "0",
+            "actionTimeout",
+            "options",
+            "payload"
+          ],
+          "path": "playwright/class-websocket.md",
+          "tokens": 1413
+        },
+        {
+          "id": "class-websocketroute",
+          "title": "class-websocketroute",
+          "description": "Version: Next",
+          "tags": [
+            "WebSocket",
+            "WebSocketRoute",
+            "\"request\"",
+            "\"response\"",
+            "options",
+            "code",
+            "reason",
+            "WebSocket.send()",
+            "WebSocket.close",
+            "handler"
+          ],
+          "path": "playwright/class-websocketroute.md",
+          "tokens": 2583
+        },
+        {
+          "id": "class-worker",
+          "title": "class-worker",
+          "description": "Version: Next",
+          "tags": [
+            "worker",
+            "close",
+            "undefined",
+            "JSON",
+            "-0",
+            "NaN",
+            "Infinity",
+            "-Infinity",
+            "pageFunction",
+            "arg"
+          ],
+          "path": "playwright/class-worker.md",
+          "tokens": 2091
+        },
+        {
+          "id": "class-workerinfo",
+          "title": "class-workerinfo",
+          "description": "Version: Next",
+          "tags": [
+            "WorkerInfo",
+            "0",
+            "workers - 1",
+            "parallelIndex",
+            "process.env.TEST_PARALLEL_INDEX",
+            "workerIndex",
+            "process.env.TEST_WORKER_INDEX"
+          ],
+          "path": "playwright/class-workerinfo.md",
+          "tokens": 562
+        },
+        {
+          "id": "aria-snapshots",
+          "title": "aria-snapshots",
+          "description": "Version: Next",
+          "tags": [
+            "heading",
+            "list",
+            "listitem",
+            "button",
+            "/patterns/",
+            "checked",
+            "disabled",
+            "expanded",
+            "level",
+            "pressed"
+          ],
+          "path": "playwright/aria-snapshots.md",
+          "tokens": 4339
+        },
+        {
+          "id": "auth",
+          "title": "auth",
+          "description": "Version: Next",
+          "tags": [
+            "playwright/.auth",
+            ".gitignore",
+            "tests/auth.setup.ts",
+            "setup",
+            "storageState",
+            "auth.setup.ts",
+            "playwright/fixtures.ts",
+            "test",
+            "@playwright/test",
+            "adminStorageState.json"
+          ],
+          "path": "playwright/auth.md",
+          "tokens": 4982
+        },
+        {
+          "id": "instead-of-installing-all-browsersnpx-playwright-install-with-deps-install-only-chromiumnpx-playwright-install-chromium-with-deps",
+          "title": "Instead of installing all browsersnpx playwright install --with-deps# Install only Chromiumnpx playwright install chromium --with-deps",
+          "description": "Version: Next",
+          "tags": [
+            "codegen",
+            "toBeVisible()",
+            "isVisible()",
+            "--debug",
+            "on",
+            "--trace",
+            ".ts",
+            "@typescript-eslint/no-floating-promises",
+            "tsc --noEmit"
+          ],
+          "path": "playwright/instead-of-installing-all-browsersnpx-playwright-install-with-deps-install-only-chromiumnpx-playwright-install-chromium-with-deps.md",
+          "tokens": 4792
+        },
+        {
+          "id": "browser-contexts",
+          "title": "browser-contexts",
+          "description": "Version: Next",
+          "tags": [],
+          "path": "playwright/browser-contexts.md",
+          "tokens": 1067
+        },
+        {
+          "id": "update-playwrightnpm-install-d-playwright-test-latest-install-new-browsersnpx-playwright-install",
+          "title": "Update playwrightnpm install -D @playwright/test@latest# Install new browsersnpx playwright install",
+          "description": "Version: Next",
+          "tags": [
+            "install",
+            "install-deps",
+            "--project",
+            "channel",
+            "--only-shell",
+            "'chromium'",
+            "--no-shell",
+            "chrome",
+            "msedge",
+            "chrome-beta"
+          ],
+          "path": "playwright/update-playwrightnpm-install-d-playwright-test-latest-install-new-browsersnpx-playwright-install.md",
+          "tokens": 4903
+        },
+        {
+          "id": "canary-releases",
+          "title": "canary-releases",
+          "description": "Version: Next",
+          "tags": [
+            "next",
+            "main",
+            "@next",
+            "latest",
+            "beta",
+            "5"
+          ],
+          "path": "playwright/canary-releases.md",
+          "tokens": 389
+        },
+        {
+          "id": "chrome-extensions",
+          "title": "chrome-extensions",
+          "description": "Version: Next",
+          "tags": [
+            "./my-extension",
+            "chromium"
+          ],
+          "path": "playwright/chrome-extensions.md",
+          "tokens": 846
+        },
+        {
+          "id": "ci",
+          "title": "ci",
+          "description": "Version: Next",
+          "tags": [
+            "jobs.<job_id>.container",
+            "success",
+            "--only-changed",
+            "PublishTestResults",
+            "playwright.config.ts",
+            "docker:",
+            "CIRCLE_NODE_INDEX",
+            "--shard",
+            "job_name 1/N",
+            "job_name N/N"
+          ],
+          "path": "playwright/ci.md",
+          "tokens": 4280
+        },
+        {
+          "id": "ci-intro",
+          "title": "ci-intro",
+          "description": "Version: Next",
+          "tags": [
+            "npm init playwright@latest",
+            "playwright.yml",
+            ".github/workflows",
+            "git init",
+            "npx playwright show-report",
+            "AZCOPY_SPA_APPLICATION_ID",
+            "AZCOPY_SPA_CLIENT_SECRET",
+            "AZCOPY_TENANT_ID",
+            "$web"
+          ],
+          "path": "playwright/ci-intro.md",
+          "tokens": 2577
+        },
+        {
+          "id": "clock",
+          "title": "clock",
+          "description": "Version: Next",
+          "tags": [
+            "setFixedTime",
+            "Date.now()",
+            "new Date()",
+            "install",
+            "pauseAt",
+            "fastForward",
+            "runFor",
+            "resume",
+            "setSystemTime",
+            "Date"
+          ],
+          "path": "playwright/clock.md",
+          "tokens": 1789
+        },
+        {
+          "id": "codegen",
+          "title": "codegen",
+          "description": "Version: Next",
+          "tags": [
+            "test-1.spec.ts",
+            "'assert visibility'",
+            "'assert text'",
+            "'assert value'",
+            "codegen",
+            "'Record'",
+            "'Pick Locator'",
+            "--viewport",
+            "--device",
+            "--color-scheme"
+          ],
+          "path": "playwright/codegen.md",
+          "tokens": 3426
+        },
+        {
+          "id": "codegen-intro",
+          "title": "codegen-intro",
+          "description": "Version: Next",
+          "tags": [
+            "codegen",
+            "'assert visibility'",
+            "'assert text'",
+            "'assert value'",
+            "'record'",
+            "'copy'",
+            "'clear'",
+            "'Record'",
+            "'Pick Locator'"
+          ],
+          "path": "playwright/codegen-intro.md",
+          "tokens": 885
+        },
+        {
+          "id": "debug",
+          "title": "debug",
+          "description": "Version: Next",
+          "tags": [
+            "Show Browser",
+            "Debug Test",
+            "Run Test",
+            "--debug",
+            "playwright.config",
+            "--project",
+            "page.pause()",
+            "PWDEBUG=console",
+            "playwright",
+            "playwright.$"
+          ],
+          "path": "playwright/debug.md",
+          "tokens": 3717
+        },
+        {
+          "id": "dialogs",
+          "title": "dialogs",
+          "description": "Version: Next",
+          "tags": [
+            "alert",
+            "confirm",
+            "prompt",
+            "beforeunload",
+            "window.print"
+          ],
+          "path": "playwright/dialogs.md",
+          "tokens": 785
+        },
+        {
+          "id": "docker",
+          "title": "docker",
+          "description": "Version: Next",
+          "tags": [
+            "root",
+            "adduser",
+            "seccomp_profile.json",
+            "--init",
+            "--ipc=host",
+            "docker run --cap-add=SYS_ADMIN",
+            "@playwright/test",
+            "hostmachine",
+            "localhost",
+            "noVNC"
+          ],
+          "path": "playwright/docker.md",
+          "tokens": 2078
+        },
+        {
+          "id": "downloads",
+          "title": "downloads",
+          "description": "Version: Next",
+          "tags": [],
+          "path": "playwright/downloads.md",
+          "tokens": 433
+        },
+        {
+          "id": "emulation",
+          "title": "emulation",
+          "description": "Version: Next",
+          "tags": [
+            "\"userAgent\"",
+            "\"screenSize\"",
+            "\"viewport\"",
+            "\"hasTouch\"",
+            "\"geolocation\"",
+            "\"locale\"",
+            "\"timezone\"",
+            "\"permissions\"",
+            "\"colorScheme\"",
+            "TZ"
+          ],
+          "path": "playwright/emulation.md",
+          "tokens": 2612
+        },
+        {
+          "id": "evaluating",
+          "title": "evaluating",
+          "description": "Version: Next",
+          "tags": [
+            "window",
+            "document",
+            "evaluate",
+            "Math.random()",
+            "preload.js"
+          ],
+          "path": "playwright/evaluating.md",
+          "tokens": 1247
+        },
+        {
+          "id": "events",
+          "title": "events",
+          "description": "Version: Next",
+          "tags": [],
+          "path": "playwright/events.md",
+          "tokens": 536
+        },
+        {
+          "id": "extensibility",
+          "title": "extensibility",
+          "description": "Version: Next",
+          "tags": [
+            "query",
+            "selector",
+            "root",
+            "queryAll",
+            "{contentScript: true}",
+            "Node.prototype"
+          ],
+          "path": "playwright/extensibility.md",
+          "tokens": 640
+        },
+        {
+          "id": "frames",
+          "title": "frames",
+          "description": "Version: Next",
+          "tags": [
+            "click",
+            "iframe"
+          ],
+          "path": "playwright/frames.md",
+          "tokens": 258
+        },
+        {
+          "id": "getting-started-vscode",
+          "title": "getting-started-vscode",
+          "description": "Version: Next",
+          "tags": [
+            "Ctrl+Shift+X",
+            "Cmd+Shift+X",
+            "Ctrl+Shift+P",
+            "Cmd+Shift+P",
+            "playwright.config.ts",
+            "Test: Install Playwright",
+            "Debug Test",
+            "Show Browsers",
+            "Record new",
+            "Pick locator"
+          ],
+          "path": "playwright/getting-started-vscode.md",
+          "tokens": 2694
+        },
+        {
+          "id": "handles",
+          "title": "handles",
+          "description": "Version: Next",
+          "tags": [],
+          "path": "playwright/handles.md",
+          "tokens": 1615
+        },
+        {
+          "id": "input",
+          "title": "input",
+          "description": "Version: Next",
+          "tags": [
+            "input",
+            "<input>",
+            "<textarea>",
+            "[contenteditable]",
+            "input[type=checkbox]",
+            "input[type=radio]",
+            "[role=checkbox]",
+            "<select>",
+            "value",
+            "label"
+          ],
+          "path": "playwright/input.md",
+          "tokens": 2863
+        },
+        {
+          "id": "intro",
+          "title": "intro",
+          "description": "Version: Next",
+          "tags": [
+            "tests",
+            "e2e",
+            "package.json",
+            "tests/",
+            "--headed",
+            "--project=chromium",
+            "--ui"
+          ],
+          "path": "playwright/intro.md",
+          "tokens": 1416
+        },
+        {
+          "id": "languages",
+          "title": "languages",
+          "description": "Version: Next",
+          "tags": [],
+          "path": "playwright/languages.md",
+          "tokens": 483
+        },
+        {
+          "id": "download-the-chromium-firefox-and-webkit-browsernpx-playwright-install-chromium-firefox-webkit-alternatively-add-packages-that-will-download-a-browser-upon-npm-installnpm-i-d-playwright-browser-chromi",
+          "title": "Download the Chromium, Firefox and WebKit browsernpx playwright install chromium firefox webkit# Alternatively, add packages that will download a browser upon npm installnpm i -D @playwright/browser-chromium @playwright/browser-firefox @playwright/browser-webkit",
+          "description": "Version: Next",
+          "tags": [
+            "@playwright/test",
+            "playwright",
+            "node my-script.js",
+            "npx playwright test",
+            "npm install playwright",
+            "npm init playwright@latest",
+            "install",
+            "init",
+            "@playwright/browser-chromium",
+            "@playwright/browser-firefox"
+          ],
+          "path": "playwright/download-the-chromium-firefox-and-webkit-browsernpx-playwright-install-chromium-firefox-webkit-alternatively-add-packages-that-will-download-a-browser-upon-npm-installnpm-i-d-playwright-browser-chromi.md",
+          "tokens": 3088
+        },
+        {
+          "id": "locators",
+          "title": "locators",
+          "description": "Version: Next",
+          "tags": [
+            "data-testid",
+            "button",
+            "<button>",
+            "div",
+            "span",
+            "p",
+            "a",
+            "input",
+            "alt",
+            "img"
+          ],
+          "path": "playwright/locators.md",
+          "tokens": 6970
+        },
+        {
+          "id": "save-api-requests-from-example-com-as-example-har-archive-npx-playwright-open-save-har-example-har-save-har-glob-api-https-example-com",
+          "title": "Save API requests from example.com as \"example.har\" archive.npx playwright open --save-har=example.har --save-har-glob=\"**/api/**\" https://example.com",
+          "description": "Version: Next",
+          "tags": [
+            "*/**/api/v1/fruits",
+            "update",
+            "update: true",
+            ".txt",
+            "hars",
+            ".zip",
+            "--save-har",
+            "--save-har-glob",
+            "zip",
+            "\"request\""
+          ],
+          "path": "playwright/save-api-requests-from-example-com-as-example-har-archive-npx-playwright-open-save-har-example-har-save-har-glob-api-https-example-com.md",
+          "tokens": 2341
+        },
+        {
+          "id": "mock-browser-apis",
+          "title": "mock-browser-apis",
+          "description": "Version: Next",
+          "tags": [],
+          "path": "playwright/mock-browser-apis.md",
+          "tokens": 1499
+        },
+        {
+          "id": "navigations",
+          "title": "navigations",
+          "description": "Version: Next",
+          "tags": [
+            "load",
+            "loaded"
+          ],
+          "path": "playwright/navigations.md",
+          "tokens": 1188
+        },
+        {
+          "id": "network",
+          "title": "network",
+          "description": "Version: Next",
+          "tags": [
+            "*",
+            "/",
+            "**",
+            "?",
+            "{}",
+            ",",
+            "\\",
+            "\\\\",
+            "https://example.com/*.js",
+            "https://example.com/file.js"
+          ],
+          "path": "playwright/network.md",
+          "tokens": 2891
+        },
+        {
+          "id": "other-locators",
+          "title": "other-locators",
+          "description": "Version: Next",
+          "tags": [
+            ":visible",
+            ":has-text()",
+            ":has()",
+            ":is()",
+            ":nth-match()",
+            "article:has-text(\"Playwright\")",
+            "<body>",
+            "#nav-bar :text(\"Home\")",
+            ":text()",
+            "#nav-bar"
+          ],
+          "path": "playwright/other-locators.md",
+          "tokens": 4837
+        },
+        {
+          "id": "pages",
+          "title": "pages",
+          "description": "Version: Next",
+          "tags": [
+            "page",
+            "target=\"_blank\"",
+            "popup",
+            "browserContext.on('page')"
+          ],
+          "path": "playwright/pages.md",
+          "tokens": 736
+        },
+        {
+          "id": "pom",
+          "title": "pom",
+          "description": "Version: Next",
+          "tags": [
+            "PlaywrightDevPage",
+            "playwright.dev",
+            "page"
+          ],
+          "path": "playwright/pom.md",
+          "tokens": 1073
+        },
+        {
+          "id": "protractor",
+          "title": "protractor",
+          "description": "Version: Next",
+          "tags": [
+            "waitForAngular",
+            "element(by.buttonText('...'))",
+            "element(by.css('...'))",
+            "page.locator('...')",
+            "page.locator('..1.. >> text=..2..')",
+            "element(by.id('...'))",
+            "page.locator('#...')",
+            "element(by.model('...'))",
+            "page.locator('[ng-model=\"...\"]')",
+            "element(by.repeater('...'))"
+          ],
+          "path": "playwright/protractor.md",
+          "tokens": 1600
+        },
+        {
+          "id": "puppeteer",
+          "title": "puppeteer",
+          "description": "Version: Next",
+          "tags": [
+            "await puppeteer.launch()",
+            "await playwright.chromium.launch()",
+            "puppeteer.launch({product: 'firefox'})",
+            "await playwright.firefox.launch()",
+            "await playwright.webkit.launch()",
+            "await browser.newContext(...)",
+            "await page.setViewport(...)",
+            "await page.setViewportSize(...)",
+            "await page.waitForXPath(XPathSelector)",
+            "await page.waitForNetworkIdle(...)"
+          ],
+          "path": "playwright/puppeteer.md",
+          "tokens": 2148
+        },
+        {
+          "id": "generate-agent-files-for-each-agentic-loop-visual-studio-codenpx-playwright-init-agents-loop-vscode-claude-codenpx-playwright-init-agents-loop-claude-opencodenpx-playwright-init-agents-loop-opencode",
+          "title": "Generate agent files for each agentic loop# Visual Studio Codenpx playwright init-agents --loop=vscode# Claude Codenpx playwright init-agents --loop=claude# opencodenpx playwright init-agents --loop=opencode",
+          "description": "Version: Next",
+          "tags": [
+            "isLocal",
+            "true",
+            "_react",
+            "_vue",
+            ":light",
+            "devtools",
+            "args: ['--auto-open-devtools-for-tabs']",
+            "chrome",
+            "chrome-headless-shell",
+            "wait"
+          ],
+          "path": "playwright/generate-agent-files-for-each-agentic-loop-visual-studio-codenpx-playwright-init-agents-loop-vscode-claude-codenpx-playwright-init-agents-loop-claude-opencodenpx-playwright-init-agents-loop-opencode.md",
+          "tokens": 38611
+        },
+        {
+          "id": "running-tests",
+          "title": "running-tests",
+          "description": "Version: Next",
+          "tags": [
+            "--project",
+            "--headed",
+            "--ui",
+            "playwright test",
+            "playwright.config",
+            "landing",
+            "login",
+            "-g",
+            "--last-failed",
+            "console.log"
+          ],
+          "path": "playwright/running-tests.md",
+          "tokens": 2261
+        },
+        {
+          "id": "screenshots",
+          "title": "screenshots",
+          "description": "Version: Next",
+          "tags": [],
+          "path": "playwright/screenshots.md",
+          "tokens": 306
+        },
+        {
+          "id": "start-selenium-nodese-node-grid-url-http-selenium-hub-ip-4444-java-jar-selenium-server-version-jar-node",
+          "title": "Start selenium nodeSE_NODE_GRID_URL=\"http://<selenium-hub-ip>:4444\" java -jar selenium-server-<version>.jar node",
+          "description": "Version: Next",
+          "tags": [
+            "SELENIUM_REMOTE_URL",
+            "SE_NODE_GRID_URL",
+            "SELENIUM_REMOTE_CAPABILITIES",
+            "SELENIUM_REMOTE_HEADERS",
+            "DEBUG=pw:browser*",
+            "localhost"
+          ],
+          "path": "playwright/start-selenium-nodese-node-grid-url-http-selenium-hub-ip-4444-java-jar-selenium-server-version-jar-node.md",
+          "tokens": 1532
+        },
+        {
+          "id": "service-workers",
+          "title": "service-workers",
+          "description": "Version: Next",
+          "tags": [
+            "fetch",
+            "'block'",
+            "true",
+            "index.html",
+            "data.json"
+          ],
+          "path": "playwright/service-workers.md",
+          "tokens": 2095
+        },
+        {
+          "id": "todomvc-application-basic-operations-test-plan-application-overviewthe-todomvc-application-is-a-react-based-todo-list-manager-that-demonstrates-standard-todo-application-functionality-the-application",
+          "title": "TodoMVC Application - Basic Operations Test Plan## Application OverviewThe TodoMVC application is a React-based todo list manager that demonstrates standard todo application functionality. The application provides comprehensive task management capabilities with a clean, intuitive interface. Key features include:- **Task Management**: Add, edit, complete, and delete individual todos- **Bulk Operations**: Mark all todos as complete/incomplete and clear all completed todos  - **Filtering System**: View todos by All, Active, or Completed status with URL routing support- **Real-time Counter**: Display of active (incomplete) todo count- **Interactive UI**: Hover states, edit-in-place functionality, and responsive design- **State Persistence**: Maintains state during session navigation## Test Scenarios### 1. Adding New Todos**Seed:** `tests/seed.spec.ts`#### 1.1 Add Valid Todo**Steps:**1. Click in the \"What needs to be done?\" input field2. Type \"Buy groceries\"3. Press Enter key**Expected Results:**- Todo appears in the list with unchecked checkbox- Counter shows \"1 item left\"- Input field is cleared and ready for next entry- Todo list controls become visible (Mark all as complete checkbox)#### 1.2 Add Multiple Todos...",
+          "description": "Version: Next",
+          "tags": [
+            "init-agents",
+            "seed test",
+            "seed.spec.ts",
+            "specs/basic-operations.md",
+            "specs/",
+            "basic-operations.md",
+            "tests/",
+            "page"
+          ],
+          "path": "playwright/todomvc-application-basic-operations-test-plan-application-overviewthe-todomvc-application-is-a-react-based-todo-list-manager-that-demonstrates-standard-todo-application-functionality-the-application.md",
+          "tokens": 1978
+        },
+        {
+          "id": "test-annotations",
+          "title": "test-annotations",
+          "description": "Version: Next",
+          "tags": [
+            "fail",
+            "fixme",
+            "@fast",
+            "@slow",
+            "@",
+            "--grep",
+            "OR",
+            "AND",
+            "type",
+            "description"
+          ],
+          "path": "playwright/test-annotations.md",
+          "tokens": 1788
+        },
+        {
+          "id": "test-assertions",
+          "title": "test-assertions",
+          "description": "Version: Next",
+          "tags": [
+            "expect",
+            "expect(value)",
+            "toEqual",
+            "toContain",
+            "toBeTruthy",
+            "status",
+            "\"Submitted\"",
+            "await",
+            "expect.poll",
+            "expect.toPass"
+          ],
+          "path": "playwright/test-assertions.md",
+          "tokens": 4786
+        },
+        {
+          "id": "run-all-testsnpx-playwright-test-run-a-single-test-filenpx-playwright-test-tests-todo-page-spec-ts-run-a-set-of-test-filesnpx-playwright-test-tests-todo-page-tests-landing-page-run-tests-at-a-specific",
+          "title": "Run all testsnpx playwright test# Run a single test filenpx playwright test tests/todo-page.spec.ts# Run a set of test filesnpx playwright test tests/todo-page/ tests/landing-page/# Run tests at a specific linenpx playwright test my-spec.ts:42# Run tests by titlenpx playwright test -g \"add a todo item\"# Run tests in headed browsersnpx playwright test --headed# Run tests for a specific projectnpx playwright test --project=chromium# Get helpnpx playwright test --help",
+          "description": "Version: Next",
+          "tags": [
+            "npx playwright --help",
+            "--debug",
+            "PWDEBUG=1",
+            "--headed",
+            "-g <grep>",
+            "--grep <grep>",
+            "--project <project-name...>",
+            "--ui",
+            "-j <workers>",
+            "--workers <workers>"
+          ],
+          "path": "playwright/run-all-testsnpx-playwright-test-run-a-single-test-filenpx-playwright-test-tests-todo-page-spec-ts-run-a-set-of-test-filesnpx-playwright-test-tests-todo-page-tests-landing-page-run-tests-at-a-specific.md",
+          "tokens": 3122
+        },
+        {
+          "id": "test-components",
+          "title": "test-components",
+          "description": "Version: Next",
+          "tags": [
+            "id=\"root\"",
+            "playwright/index.{js,ts,jsx,tsx}",
+            ".js",
+            ".ts",
+            ".jsx",
+            ".tsx",
+            "src/App.spec.{ts,tsx}",
+            "vue.d.ts",
+            "mount",
+            "/playwright/index.html"
+          ],
+          "path": "playwright/test-components.md",
+          "tokens": 5595
+        },
+        {
+          "id": "test-configuration",
+          "title": "test-configuration",
+          "description": "Version: Next",
+          "tags": [
+            "use",
+            "test.only",
+            "use{}",
+            "webServer",
+            "'50%'.",
+            "'*test-assets'",
+            "'*todo-tests/*.spec.ts'",
+            ".*(test|spec).(js|ts|mjs)",
+            "expect(locator).toHaveText()",
+            "expect()"
+          ],
+          "path": "playwright/test-configuration.md",
+          "tokens": 1713
+        },
+        {
+          "id": "test-fixtures",
+          "title": "test-fixtures",
+          "description": "Version: Next",
+          "tags": [
+            "{ page }",
+            "page",
+            "chromium",
+            "firefox",
+            "webkit",
+            "TodoPage",
+            "describe",
+            "test",
+            "todoPage",
+            "settingsPage"
+          ],
+          "path": "playwright/test-fixtures.md",
+          "tokens": 7520
+        },
+        {
+          "id": "test-global-setup-teardown",
+          "title": "test-global-setup-teardown",
+          "description": "Version: Next",
+          "tags": [
+            "globalSetup",
+            "browser",
+            "browserType.launch()",
+            "headless",
+            "testIdAttribute",
+            "global.setup.ts",
+            "global.teardown.ts",
+            "--grep",
+            "--grep-invert",
+            "--shard"
+          ],
+          "path": "playwright/test-global-setup-teardown.md",
+          "tokens": 2712
+        },
+        {
+          "id": "test-parallel",
+          "title": "test-parallel",
+          "description": "Version: Next",
+          "tags": [
+            "test.describe.configure",
+            "workers: 1",
+            "--workers=1",
+            "beforeAll",
+            "afterAll",
+            "maxFailures",
+            "--max-failures",
+            "0",
+            "workers - 1",
+            "parallelIndex"
+          ],
+          "path": "playwright/test-parallel.md",
+          "tokens": 2947
+        },
+        {
+          "id": "env-filestaging-0user-name-mepassword-secret",
+          "title": ".env fileSTAGING=0USER_NAME=mePASSWORD=secret",
+          "description": "Version: Next",
+          "tags": [
+            "beforeEach",
+            "beforeAll",
+            "afterEach",
+            "afterAll",
+            "forEach",
+            "describe()",
+            "person",
+            "Alice",
+            "Bob",
+            ".env"
+          ],
+          "path": "playwright/env-filestaging-0user-name-mepassword-secret.md",
+          "tokens": 2256
+        },
+        {
+          "id": "test-projects",
+          "title": "test-projects",
+          "description": "Version: Next",
+          "tags": [
+            "playwright.config.ts",
+            "--project",
+            "--grep",
+            "--grep-invert",
+            "--shard",
+            "test.only()",
+            "--no-deps"
+          ],
+          "path": "playwright/test-projects.md",
+          "tokens": 2328
+        },
+        {
+          "id": "test-reporters",
+          "title": "test-reporters",
+          "description": "Version: Next",
+          "tags": [
+            "--reporter",
+            "'list'",
+            "'json'",
+            "'dot'",
+            "dot",
+            "PLAYWRIGHT_LIST_PRINT_STEPS",
+            "printSteps",
+            "false",
+            "PLAYWRIGHT_FORCE_TTY",
+            "true"
+          ],
+          "path": "playwright/test-reporters.md",
+          "tokens": 4507
+        },
+        {
+          "id": "give-failing-tests-3-retry-attemptsnpx-playwright-test-retries-3",
+          "title": "Give failing tests 3 retry attemptsnpx playwright test --retries=3",
+          "description": "Version: Next",
+          "tags": [
+            "beforeAll",
+            "first good",
+            "second flaky",
+            "third good",
+            "afterAll",
+            "test.describe.serial"
+          ],
+          "path": "playwright/give-failing-tests-3-retry-attemptsnpx-playwright-test-retries-3.md",
+          "tokens": 1752
+        },
+        {
+          "id": "test-sharding",
+          "title": "test-sharding",
+          "description": "Version: Next",
+          "tags": [
+            "--shard=x/y",
+            "fullyParallel: true",
+            "fullyParallel",
+            "blob",
+            "blob-report",
+            "all-blob-reports",
+            "npx playwright merge-reports",
+            "playwright-report",
+            "jobs.<job_id>.strategy.matrix",
+            "matrix"
+          ],
+          "path": "playwright/test-sharding.md",
+          "tokens": 2661
+        },
+        {
+          "id": "test-snapshots",
+          "title": "test-snapshots",
+          "description": "Version: Next",
+          "tags": [
+            "await expect(page).toHaveScreenshot()",
+            "example-test-1-chromium-darwin.png",
+            "example-test-1.png",
+            "toHaveScreenshot()",
+            "chromium-darwin",
+            "chromium",
+            "a.spec.js-snapshots",
+            "--update-snapshots",
+            "my.spec.ts",
+            "my.spec.ts-snapshots"
+          ],
+          "path": "playwright/test-snapshots.md",
+          "tokens": 1435
+        },
+        {
+          "id": "test-timeouts",
+          "title": "test-timeouts",
+          "description": "Version: Next",
+          "tags": [
+            "{ timeout: 60_000 }",
+            "test.setTimeout(120_000)",
+            "{ expect: { timeout: 10_000 } }",
+            "beforeEach",
+            "afterEach",
+            "beforeAll",
+            "afterAll",
+            "{ use: { actionTimeout: 10_000 } }",
+            "locator.click({ timeout: 10_000 })",
+            "{ use: { navigationTimeout: 30_000 } }"
+          ],
+          "path": "playwright/test-timeouts.md",
+          "tokens": 1988
+        },
+        {
+          "id": "playwright-will-choose-tsconfig-automaticallynpx-playwright-test",
+          "title": "Playwright will choose tsconfig automaticallynpx playwright test",
+          "description": "Version: Next",
+          "tags": [
+            "tsc",
+            "tsconfig.json",
+            "allowJs",
+            "baseUrl",
+            "paths",
+            "references",
+            "jsconfig.json",
+            "tests/tsconfig.json",
+            "package.json",
+            "pretest"
+          ],
+          "path": "playwright/playwright-will-choose-tsconfig-automaticallynpx-playwright-test.md",
+          "tokens": 1122
+        },
+        {
+          "id": "test-ui-mode",
+          "title": "test-ui-mode",
+          "description": "Version: Next",
+          "tags": [
+            "playwright.config",
+            "@tag",
+            "0.0.0.0",
+            "--ui-port",
+            "--ui-host=0.0.0.0"
+          ],
+          "path": "playwright/test-ui-mode.md",
+          "tokens": 2344
+        },
+        {
+          "id": "test-use-options",
+          "title": "test-use-options",
+          "description": "Version: Next",
+          "tags": [
+            "use: {}",
+            "page.goto('/settings')",
+            "\"geolocation\"",
+            "\"locale\"",
+            "\"timezone\"",
+            "\"permissions\"",
+            "\"colorScheme\"",
+            "'prefers-colors-scheme'",
+            "'light'",
+            "'dark'"
+          ],
+          "path": "playwright/test-use-options.md",
+          "tokens": 3525
+        },
+        {
+          "id": "test-webserver",
+          "title": "test-webserver",
+          "description": "Version: Next",
+          "tags": [
+            "webServer",
+            "command",
+            "cwd",
+            "env",
+            "process.env",
+            "PLAYWRIGHT_TEST=1",
+            "gracefulShutdown",
+            "SIGKILL",
+            "{ signal: 'SIGTERM', timeout: 500 }",
+            "SIGTERM"
+          ],
+          "path": "playwright/test-webserver.md",
+          "tokens": 1700
+        },
+        {
+          "id": "testing-library",
+          "title": "testing-library",
+          "description": "Version: Next",
+          "tags": [
+            "await mount",
+            "screen.getByLabelText('...')",
+            "component.getByLabel('...')",
+            "screen.queryByPlaceholderText('...')",
+            "component.getByPlaceholder('...')",
+            "screen.findByText('...')",
+            "component.getByText('...')",
+            "screen.getByTestId('...')",
+            "component.getByTestId('...')",
+            "render(<Component />);"
+          ],
+          "path": "playwright/testing-library.md",
+          "tokens": 1930
+        },
+        {
+          "id": "touch-events",
+          "title": "touch-events",
+          "description": "Version: Next",
+          "tags": [
+            "Event.isTrusted",
+            "isTrusted",
+            "clientX/clientY",
+            "pageX/pageY/screenX/screenY"
+          ],
+          "path": "playwright/touch-events.md",
+          "tokens": 1422
+        },
+        {
+          "id": "trace-viewer",
+          "title": "trace-viewer",
+          "description": "Version: Next",
+          "tags": [
+            "trace.zip",
+            "Select file",
+            "--trace",
+            "on",
+            "trace: 'on-first-retry'",
+            "'on-first-retry'",
+            "'on-all-retries'",
+            "'off'",
+            "'on'",
+            "'retain-on-failure'"
+          ],
+          "path": "playwright/trace-viewer.md",
+          "tokens": 2674
+        },
+        {
+          "id": "trace-viewer-intro",
+          "title": "trace-viewer-intro",
+          "description": "Version: Next",
+          "tags": [
+            "trace.zip",
+            "on-first-retry",
+            "retries",
+            "--trace on",
+            "'Traces'"
+          ],
+          "path": "playwright/trace-viewer-intro.md",
+          "tokens": 987
+        },
+        {
+          "id": "videos",
+          "title": "videos",
+          "description": "Version: Next",
+          "tags": [
+            "video",
+            "'off'",
+            "'on'",
+            "'retain-on-failure'",
+            "'on-first-retry'",
+            "test-results"
+          ],
+          "path": "playwright/videos.md",
+          "tokens": 583
+        },
+        {
+          "id": "webview2",
+          "title": "webview2",
+          "description": "Version: Next",
+          "tags": [
+            "WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS",
+            "--remote-debugging-port=9222",
+            "CoreWebView2InitializationCompleted",
+            "WEBVIEW2_USER_DATA_FOLDER"
+          ],
+          "path": "playwright/webview2.md",
+          "tokens": 1407
+        },
+        {
+          "id": "writing-tests",
+          "title": "writing-tests",
+          "description": "Version: Next",
+          "tags": [
+            "// @ts-check",
+            "expect",
+            "expect(value)",
+            "toEqual",
+            "toContain",
+            "toBeTruthy",
+            "await",
+            "test.describe",
+            "test.beforeEach",
+            "test.afterEach"
+          ],
+          "path": "playwright/writing-tests.md",
+          "tokens": 2042
+        },
+        {
+          "id": "accessibility-testing",
+          "title": "accessibility-testing",
+          "description": "On this page",
+          "tags": [
+            "@axe-core/playwright",
+            "AxeBuilder.analyze()",
+            "AxeBuilder",
+            "AxeBuilder.include()",
+            "analyze()",
+            "AxeBuilder.withTags()",
+            "wcag2a",
+            "wcag2aa",
+            "wcag21a",
+            "wcag21aa"
+          ],
+          "path": "playwright/accessibility-testing.md",
+          "tokens": 3858
+        },
+        {
+          "id": "actionability",
+          "title": "actionability",
+          "description": "On this page",
+          "tags": [
+            "timeout",
+            "TimeoutError",
+            "force",
+            "visibility:hidden",
+            "display:none",
+            "opacity:0",
+            "<button>",
+            "<select>",
+            "<input>",
+            "<textarea>"
+          ],
+          "path": "playwright/actionability.md",
+          "tokens": 2144
+        },
+        {
+          "id": "api-testing",
+          "title": "api-testing",
+          "description": "On this page",
+          "tags": [
+            "baseURL",
+            "test.use()",
+            "request",
+            "extraHTTPHeaders",
+            "beforeAll",
+            "afterAll",
+            "Cookie",
+            "Set-Cookie"
+          ],
+          "path": "playwright/api-testing.md",
+          "tokens": 3647
+        },
+        {
+          "id": "class-android",
+          "title": "class-android",
+          "description": "On this page",
+          "tags": [
+            "adb devices",
+            "Chrome 87",
+            "chrome://flags",
+            "wsEndpoint",
+            "options",
+            "headers",
+            "slowMo",
+            "0",
+            "timeout",
+            "30000"
+          ],
+          "path": "playwright/class-android.md",
+          "tokens": 2720
+        },
+        {
+          "id": "class-androiddevice",
+          "title": "class-androiddevice",
+          "description": "On this page",
+          "tags": [
+            "selector",
+            "dest",
+            "x",
+            "y",
+            "options",
+            "speed",
+            "timeout",
+            "0",
+            "text",
+            "direction"
+          ],
+          "path": "playwright/class-androiddevice.md",
+          "tokens": 13672
+        },
+        {
+          "id": "class-androidinput",
+          "title": "class-androidinput",
+          "description": "On this page",
+          "tags": [
+            "from",
+            "x",
+            "y",
+            "to",
+            "steps",
+            "key",
+            "segments",
+            "point",
+            "text"
+          ],
+          "path": "playwright/class-androidinput.md",
+          "tokens": 1518
+        },
+        {
+          "id": "class-androidsocket",
+          "title": "class-androidsocket",
+          "description": "On this page",
+          "tags": [
+            "data"
+          ],
+          "path": "playwright/class-androidsocket.md",
+          "tokens": 519
+        },
+        {
+          "id": "class-androidwebview",
+          "title": "class-androidwebview",
+          "description": "On this page",
+          "tags": [],
+          "path": "playwright/class-androidwebview.md",
+          "tokens": 430
+        },
+        {
+          "id": "class-apirequest",
+          "title": "class-apirequest",
+          "description": "On this page",
+          "tags": [
+            "options",
+            "baseURL",
+            "URL()",
+            "http://localhost:3000",
+            "/bar.html",
+            "http://localhost:3000/bar.html",
+            "http://localhost:3000/foo/",
+            "./bar.html",
+            "http://localhost:3000/foo/bar.html",
+            "http://localhost:3000/foo"
+          ],
+          "path": "playwright/class-apirequest.md",
+          "tokens": 3435
+        },
+        {
+          "id": "class-apirequestcontext",
+          "title": "class-apirequestcontext",
+          "description": "On this page",
+          "tags": [
+            "Cookie",
+            "Set-Cookie",
+            "APIRequestContext",
+            "url",
+            "options",
+            "data",
+            "content-type",
+            "application/json",
+            "application/octet-stream",
+            "failOnStatusCode"
+          ],
+          "path": "playwright/class-apirequestcontext.md",
+          "tokens": 16161
+        },
+        {
+          "id": "class-apiresponse",
+          "title": "class-apiresponse",
+          "description": "On this page",
+          "tags": [
+            "Set-Cookie",
+            "name",
+            "value",
+            "JSON.parse"
+          ],
+          "path": "playwright/class-apiresponse.md",
+          "tokens": 1322
+        },
+        {
+          "id": "class-apiresponseassertions",
+          "title": "class-apiresponseassertions",
+          "description": "On this page",
+          "tags": [
+            "200..299"
+          ],
+          "path": "playwright/class-apiresponseassertions.md",
+          "tokens": 384
+        },
+        {
+          "id": "class-browser",
+          "title": "class-browser",
+          "description": "On this page",
+          "tags": [
+            "options",
+            "reason",
+            "context",
+            "acceptDownloads",
+            "true",
+            "baseURL",
+            "URL()",
+            "http://localhost:3000",
+            "/bar.html",
+            "http://localhost:3000/bar.html"
+          ],
+          "path": "playwright/class-browser.md",
+          "tokens": 16480
+        },
+        {
+          "id": "class-browsercontext",
+          "title": "class-browsercontext",
+          "description": "On this page",
+          "tags": [
+            "window.open",
+            "cookies",
+            "name",
+            "value",
+            "url",
+            "domain",
+            "path",
+            "expires",
+            "httpOnly",
+            "secure"
+          ],
+          "path": "playwright/class-browsercontext.md",
+          "tokens": 15732
+        },
+        {
+          "id": "class-browserserver",
+          "title": "class-browserserver",
+          "description": "On this page",
+          "tags": [
+            "host",
+            "launchServer"
+          ],
+          "path": "playwright/class-browserserver.md",
+          "tokens": 589
+        },
+        {
+          "id": "class-browsertype",
+          "title": "class-browsertype",
+          "description": "On this page",
+          "tags": [
+            "BrowserType.launchServer",
+            "wsEndpoint",
+            "BrowserServer.wsEndpoint",
+            "options",
+            "exposeNetwork",
+            "example.com",
+            "*.org:99",
+            "x.*.y.com",
+            "*foo.org",
+            "127.0.0.1"
+          ],
+          "path": "playwright/class-browsertype.md",
+          "tokens": 15867
+        },
+        {
+          "id": "class-cdpsession",
+          "title": "class-cdpsession",
+          "description": "On this page",
+          "tags": [
+            "CDPSession",
+            "session.send",
+            "session.on",
+            "method",
+            "params"
+          ],
+          "path": "playwright/class-cdpsession.md",
+          "tokens": 612
+        },
+        {
+          "id": "class-clock",
+          "title": "class-clock",
+          "description": "On this page",
+          "tags": [
+            "ticks",
+            "Date",
+            "setTimeout",
+            "clearTimeout",
+            "setInterval",
+            "clearInterval",
+            "requestAnimationFrame",
+            "cancelAnimationFrame",
+            "requestIdleCallback",
+            "cancelIdleCallback"
+          ],
+          "path": "playwright/class-clock.md",
+          "tokens": 2306
+        },
+        {
+          "id": "class-consolemessage",
+          "title": "class-consolemessage",
+          "description": "On this page",
+          "tags": [
+            "console",
+            "url",
+            "lineNumber",
+            "columnNumber"
+          ],
+          "path": "playwright/class-consolemessage.md",
+          "tokens": 996
+        },
+        {
+          "id": "class-coverage",
+          "title": "class-coverage",
+          "description": "On this page",
+          "tags": [
+            "options",
+            "resetOnNavigation",
+            "true",
+            "eval",
+            "new Function",
+            "__playwright_evaluation_script__",
+            "reportAnonymousScripts",
+            "false",
+            "url",
+            "text"
+          ],
+          "path": "playwright/class-coverage.md",
+          "tokens": 1968
+        },
+        {
+          "id": "class-dialog",
+          "title": "class-dialog",
+          "description": "On this page",
+          "tags": [
+            "Dialog",
+            "promptText",
+            "type",
+            "alert",
+            "beforeunload",
+            "confirm",
+            "prompt"
+          ],
+          "path": "playwright/class-dialog.md",
+          "tokens": 937
+        },
+        {
+          "id": "class-download",
+          "title": "class-download",
+          "description": "On this page",
+          "tags": [
+            "download.failure()",
+            "'canceled'",
+            "path",
+            "Content-Disposition",
+            "download"
+          ],
+          "path": "playwright/class-download.md",
+          "tokens": 1527
+        },
+        {
+          "id": "class-electron",
+          "title": "class-electron",
+          "description": "On this page",
+          "tags": [
+            "nodeCliInspect",
+            "false",
+            "options",
+            "acceptDownloads",
+            "true",
+            "args",
+            "bypassCSP",
+            "colorScheme",
+            "'light'",
+            "'dark'"
+          ],
+          "path": "playwright/class-electron.md",
+          "tokens": 3570
+        },
+        {
+          "id": "class-electronapplication",
+          "title": "class-electronapplication",
+          "description": "On this page",
+          "tags": [
+            "page",
+            "undefined",
+            "JSON",
+            "-0",
+            "NaN",
+            "Infinity",
+            "-Infinity",
+            "pageFunction",
+            "arg",
+            "options"
+          ],
+          "path": "playwright/class-electronapplication.md",
+          "tokens": 3234
+        },
+        {
+          "id": "class-elementhandle",
+          "title": "class-elementhandle",
+          "description": "On this page",
+          "tags": [
+            "element",
+            "null",
+            "x",
+            "y",
+            "width",
+            "height",
+            "\"hidden\"",
+            "\"visible\"",
+            "\"stable\"",
+            "\"enabled\""
+          ],
+          "path": "playwright/class-elementhandle.md",
+          "tokens": 22857
+        },
+        {
+          "id": "class-filechooser",
+          "title": "class-filechooser",
+          "description": "On this page",
+          "tags": [
+            "filePaths",
+            "files",
+            "name",
+            "mimeType",
+            "buffer",
+            "options",
+            "noWaitAfter",
+            "timeout",
+            "0",
+            "actionTimeout"
+          ],
+          "path": "playwright/class-filechooser.md",
+          "tokens": 1090
+        },
+        {
+          "id": "class-fixtures",
+          "title": "class-fixtures",
+          "description": "On this page",
+          "tags": [
+            "test",
+            "page",
+            "'chromium'"
+          ],
+          "path": "playwright/class-fixtures.md",
+          "tokens": 1133
+        },
+        {
+          "id": "class-frame",
+          "title": "class-frame",
+          "description": "On this page",
+          "tags": [
+            "<script>",
+            "options",
+            "content",
+            "path",
+            "type",
+            "url",
+            "<link rel=\"stylesheet\">",
+            "<style type=\"text/css\">",
+            "<link>",
+            "source"
+          ],
+          "path": "playwright/class-frame.md",
+          "tokens": 39756
+        },
+        {
+          "id": "class-framelocator",
+          "title": "class-framelocator",
+          "description": "On this page",
+          "tags": [
+            "iframe",
+            "selector",
+            "text",
+            "options",
+            "exact",
+            "<label>",
+            "aria-labelledby",
+            "aria-label",
+            "role",
+            "checked"
+          ],
+          "path": "playwright/class-framelocator.md",
+          "tokens": 6118
+        },
+        {
+          "id": "class-fullconfig",
+          "title": "class-fullconfig",
+          "description": "On this page",
+          "tags": [
+            "max",
+            "threshold",
+            "0",
+            "1",
+            "total",
+            "current"
+          ],
+          "path": "playwright/class-fullconfig.md",
+          "tokens": 2754
+        },
+        {
+          "id": "class-fullproject",
+          "title": "class-fullproject",
+          "description": "On this page",
+          "tags": [],
+          "path": "playwright/class-fullproject.md",
+          "tokens": 1807
+        },
+        {
+          "id": "class-genericassertions",
+          "title": "class-genericassertions",
+          "description": "On this page",
+          "tags": [
+            "expect.any()",
+            "constructor",
+            "ExampleClass",
+            "Number",
+            "expect.anything()",
+            "null",
+            "undefined",
+            "expect.arrayContaining()",
+            "expected",
+            "expect.arrayOf()"
+          ],
+          "path": "playwright/class-genericassertions.md",
+          "tokens": 6648
+        },
+        {
+          "id": "class-jshandle",
+          "title": "class-jshandle",
+          "description": "On this page",
+          "tags": [
+            "null",
+            "jsHandle.dispose",
+            "handle.evaluate",
+            "pageFunction",
+            "arg",
+            "jsHandle.evaluate",
+            "jsHandle.evaluateHandle",
+            "propertyName",
+            "toJSON"
+          ],
+          "path": "playwright/class-jshandle.md",
+          "tokens": 1950
+        },
+        {
+          "id": "class-keyboard",
+          "title": "class-keyboard",
+          "description": "On this page",
+          "tags": [
+            "keydown",
+            "keypress",
+            "input",
+            "keyup",
+            "Shift",
+            "A",
+            "F1",
+            "F12",
+            "Digit0",
+            "Digit9"
+          ],
+          "path": "playwright/class-keyboard.md",
+          "tokens": 2538
+        },
+        {
+          "id": "class-location",
+          "title": "class-location",
+          "description": "On this page",
+          "tags": [],
+          "path": "playwright/class-location.md",
+          "tokens": 262
+        },
+        {
+          "id": "class-locator",
+          "title": "class-locator",
+          "description": "On this page",
+          "tags": [
+            "node.innerText",
+            "node.textContent",
+            "locator",
+            "options",
+            "timeout",
+            "0",
+            "actionTimeout",
+            "text",
+            "null",
+            "x"
+          ],
+          "path": "playwright/class-locator.md",
+          "tokens": 35585
+        },
+        {
+          "id": "class-locatorassertions",
+          "title": "class-locatorassertions",
+          "description": "On this page",
+          "tags": [
+            "options",
+            "attached",
+            "timeout",
+            "TestConfig.expect",
+            "checked",
+            "indeterminate",
+            "button",
+            "input",
+            "select",
+            "textarea"
+          ],
+          "path": "playwright/class-locatorassertions.md",
+          "tokens": 16537
+        },
+        {
+          "id": "class-logger",
+          "title": "class-logger",
+          "description": "On this page",
+          "tags": [
+            "name",
+            "severity",
+            "message",
+            "args",
+            "hints",
+            "color"
+          ],
+          "path": "playwright/class-logger.md",
+          "tokens": 655
+        },
+        {
+          "id": "class-mouse",
+          "title": "class-mouse",
+          "description": "On this page",
+          "tags": [
+            "page",
+            "x",
+            "y",
+            "options",
+            "button",
+            "left",
+            "clickCount",
+            "delay",
+            "mousedown",
+            "mouseup"
+          ],
+          "path": "playwright/class-mouse.md",
+          "tokens": 2246
+        },
+        {
+          "id": "class-page",
+          "title": "class-page",
+          "description": "On this page",
+          "tags": [
+            "EventEmitter",
+            "on",
+            "once",
+            "removeListener",
+            "load",
+            "Math.random",
+            "script",
+            "path",
+            "content",
+            "arg"
+          ],
+          "path": "playwright/class-page.md",
+          "tokens": 63120
+        },
+        {
+          "id": "class-pageassertions",
+          "title": "class-pageassertions",
+          "description": "On this page",
+          "tags": [
+            "name",
+            "options",
+            "animations",
+            "\"disabled\"",
+            "transitionend",
+            "caret",
+            "\"hide\"",
+            "\"initial\"",
+            "clip",
+            "x"
+          ],
+          "path": "playwright/class-pageassertions.md",
+          "tokens": 5092
+        },
+        {
+          "id": "class-playwright",
+          "title": "class-playwright",
+          "description": "On this page",
+          "tags": [
+            "playwright.errors",
+            "TimeoutError"
+          ],
+          "path": "playwright/class-playwright.md",
+          "tokens": 1005
+        },
+        {
+          "id": "class-playwrightassertions",
+          "title": "class-playwrightassertions",
+          "description": "On this page",
+          "tags": [
+            ".status",
+            "\"Submitted\"",
+            "response",
+            "value",
+            "locator",
+            "page"
+          ],
+          "path": "playwright/class-playwrightassertions.md",
+          "tokens": 890
+        },
+        {
+          "id": "class-reporter",
+          "title": "class-reporter",
+          "description": "On this page",
+          "tags": [
+            "status",
+            "false",
+            "blob",
+            "merge-reports",
+            "config",
+            "suite",
+            "result",
+            "startTime",
+            "duration",
+            "'passed'"
+          ],
+          "path": "playwright/class-reporter.md",
+          "tokens": 3584
+        },
+        {
+          "id": "class-request",
+          "title": "class-request",
+          "description": "On this page",
+          "tags": [
+            "'requestfinished'",
+            "requestfinished",
+            "null",
+            "requestfailed",
+            "errorText",
+            "'net::ERR_FAILED'",
+            "request.serviceWorker()",
+            "name",
+            "cookie",
+            "Set-Cookie"
+          ],
+          "path": "playwright/class-request.md",
+          "tokens": 4547
+        },
+        {
+          "id": "class-response",
+          "title": "class-response",
+          "description": "On this page",
+          "tags": [
+            "null",
+            "set-cookie",
+            ",",
+            "\\n",
+            "name",
+            "cookie",
+            "Set-Cookie",
+            "value",
+            "JSON.parse",
+            "issuer"
+          ],
+          "path": "playwright/class-response.md",
+          "tokens": 3021
+        },
+        {
+          "id": "class-route",
+          "title": "class-route",
+          "description": "On this page",
+          "tags": [
+            "Route",
+            "errorCode",
+            "failed",
+            "'aborted'",
+            "'accessdenied'",
+            "'addressunreachable'",
+            "'blockedbyclient'",
+            "'blockedbyresponse'",
+            "'connectionaborted'",
+            "'connectionclosed'"
+          ],
+          "path": "playwright/class-route.md",
+          "tokens": 4343
+        },
+        {
+          "id": "class-selectors",
+          "title": "class-selectors",
+          "description": "On this page",
+          "tags": [
+            "name",
+            "{name: 'foo'}",
+            "foo=myselectorbody",
+            "[a-zA-Z0-9_]",
+            "script",
+            "path",
+            "content",
+            "options",
+            "contentScript",
+            "false"
+          ],
+          "path": "playwright/class-selectors.md",
+          "tokens": 1107
+        },
+        {
+          "id": "class-snapshotassertions",
+          "title": "class-snapshotassertions",
+          "description": "On this page",
+          "tags": [
+            "name",
+            "options",
+            "maxDiffPixelRatio",
+            "0",
+            "1",
+            "TestConfig.expect",
+            "maxDiffPixels",
+            "threshold",
+            "0.2"
+          ],
+          "path": "playwright/class-snapshotassertions.md",
+          "tokens": 1651
+        },
+        {
+          "id": "class-suite",
+          "title": "class-suite",
+          "description": "On this page",
+          "tags": [
+            "Suite",
+            "root",
+            "project",
+            "file",
+            "describe",
+            "test"
+          ],
+          "path": "playwright/class-suite.md",
+          "tokens": 1323
+        },
+        {
+          "id": "class-test",
+          "title": "class-test",
+          "description": "On this page",
+          "tags": [
+            "test",
+            "expect",
+            "test(title, body)",
+            "test(title, details, body)",
+            "@",
+            "TestCase.tags",
+            "TestCase.annotations",
+            "title",
+            "details",
+            "tag"
+          ],
+          "path": "playwright/class-test.md",
+          "tokens": 19125
+        },
+        {
+          "id": "class-testcase",
+          "title": "class-testcase",
+          "description": "On this page",
+          "tags": [
+            "TestCase",
+            "'expected'",
+            "'flaky'",
+            "type",
+            "'skip'",
+            "'fail'",
+            "description",
+            "location",
+            "'skipped'",
+            "'failed'"
+          ],
+          "path": "playwright/class-testcase.md",
+          "tokens": 1828
+        },
+        {
+          "id": "class-testconfig",
+          "title": "class-testconfig",
+          "description": "On this page",
+          "tags": [
+            "timeout",
+            "testDir",
+            "external",
+            "commit",
+            "diff",
+            "true",
+            "false",
+            "expect",
+            "toHaveScreenshot",
+            "animations"
+          ],
+          "path": "playwright/class-testconfig.md",
+          "tokens": 12387
+        },
+        {
+          "id": "class-testerror",
+          "title": "class-testerror",
+          "description": "On this page",
+          "tags": [
+            "undefined"
+          ],
+          "path": "playwright/class-testerror.md",
+          "tokens": 591
+        },
+        {
+          "id": "class-testinfo",
+          "title": "class-testinfo",
+          "description": "On this page",
+          "tags": [
+            "TestInfo",
+            "name",
+            "options",
+            "body",
+            "contentType",
+            "'application/json'",
+            "'image/png'",
+            "text/plain",
+            "application/octet-stream",
+            "path"
+          ],
+          "path": "playwright/class-testinfo.md",
+          "tokens": 7079
+        },
+        {
+          "id": "class-testinfoerror",
+          "title": "class-testinfoerror",
+          "description": "On this page",
+          "tags": [
+            "undefined"
+          ],
+          "path": "playwright/class-testinfoerror.md",
+          "tokens": 469
+        },
+        {
+          "id": "class-testoptions",
+          "title": "class-testoptions",
+          "description": "On this page",
+          "tags": [
+            "true",
+            "URL()",
+            "http://localhost:3000",
+            "/bar.html",
+            "http://localhost:3000/bar.html",
+            "http://localhost:3000/foo/",
+            "./bar.html",
+            "http://localhost:3000/foo/bar.html",
+            "http://localhost:3000/foo",
+            "'chromium'"
+          ],
+          "path": "playwright/class-testoptions.md",
+          "tokens": 9482
+        },
+        {
+          "id": "class-testproject",
+          "title": "class-testproject",
+          "description": "On this page",
+          "tags": [
+            "TestProject",
+            "--no-deps",
+            "expect",
+            "timeout",
+            "toHaveScreenshot",
+            "threshold",
+            "0",
+            "1",
+            "\"pixelmatch\"",
+            "0.2"
+          ],
+          "path": "playwright/class-testproject.md",
+          "tokens": 7453
+        },
+        {
+          "id": "class-testresult",
+          "title": "class-testresult",
+          "description": "On this page",
+          "tags": [
+            "type",
+            "'skip'",
+            "'fail'",
+            "description",
+            "location",
+            "name",
+            "contentType",
+            "'application/json'",
+            "'image/png'",
+            "path"
+          ],
+          "path": "playwright/class-testresult.md",
+          "tokens": 1894
+        },
+        {
+          "id": "class-teststep",
+          "title": "class-teststep",
+          "description": "On this page",
+          "tags": [
+            "type",
+            "'skip'",
+            "description",
+            "location",
+            "name",
+            "contentType",
+            "'application/json'",
+            "'image/png'",
+            "path",
+            "body"
+          ],
+          "path": "playwright/class-teststep.md",
+          "tokens": 1382
+        },
+        {
+          "id": "class-teststepinfo",
+          "title": "class-teststepinfo",
+          "description": "On this page",
+          "tags": [
+            "TestStepInfo",
+            "name",
+            "options",
+            "body",
+            "contentType",
+            "'application/json'",
+            "'image/png'",
+            "text/plain",
+            "application/octet-stream",
+            "path"
+          ],
+          "path": "playwright/class-teststepinfo.md",
+          "tokens": 1636
+        },
+        {
+          "id": "class-timeouterror",
+          "title": "class-timeouterror",
+          "description": "TimeoutError is emitted whenever certain operations are terminated due to timeout, e.g. [locator.waitFor()](/docs/api...",
+          "tags": [],
+          "path": "playwright/class-timeouterror.md",
+          "tokens": 181
+        },
+        {
+          "id": "class-touchscreen",
+          "title": "class-touchscreen",
+          "description": "On this page",
+          "tags": [
+            "hasTouch",
+            "touchstart",
+            "touchend",
+            "x",
+            "y"
+          ],
+          "path": "playwright/class-touchscreen.md",
+          "tokens": 435
+        },
+        {
+          "id": "class-tracing",
+          "title": "class-tracing",
+          "description": "On this page",
+          "tags": [
+            "context.tracing",
+            "expect",
+            "test.step",
+            "name",
+            "options",
+            "location",
+            "file",
+            "line",
+            "column",
+            "Tracing.start"
+          ],
+          "path": "playwright/class-tracing.md",
+          "tokens": 2745
+        },
+        {
+          "id": "class-video",
+          "title": "class-video",
+          "description": "On this page",
+          "tags": [
+            "recordVideo",
+            "path"
+          ],
+          "path": "playwright/class-video.md",
+          "tokens": 524
+        },
+        {
+          "id": "class-weberror",
+          "title": "class-weberror",
+          "description": "On this page",
+          "tags": [],
+          "path": "playwright/class-weberror.md",
+          "tokens": 304
+        },
+        {
+          "id": "class-websocket",
+          "title": "class-websocket",
+          "description": "On this page",
+          "tags": [
+            "event",
+            "webSocket.on(event)",
+            "optionsOrPredicate",
+            "predicate",
+            "timeout",
+            "0",
+            "actionTimeout",
+            "options",
+            "payload"
+          ],
+          "path": "playwright/class-websocket.md",
+          "tokens": 1403
+        },
+        {
+          "id": "class-websocketroute",
+          "title": "class-websocketroute",
+          "description": "On this page",
+          "tags": [
+            "WebSocket",
+            "WebSocketRoute",
+            "\"request\"",
+            "\"response\"",
+            "options",
+            "code",
+            "reason",
+            "WebSocket.send()",
+            "WebSocket.close",
+            "handler"
+          ],
+          "path": "playwright/class-websocketroute.md",
+          "tokens": 2557
+        },
+        {
+          "id": "class-worker",
+          "title": "class-worker",
+          "description": "On this page",
+          "tags": [
+            "worker",
+            "close",
+            "undefined",
+            "JSON",
+            "-0",
+            "NaN",
+            "Infinity",
+            "-Infinity",
+            "pageFunction",
+            "arg"
+          ],
+          "path": "playwright/class-worker.md",
+          "tokens": 2060
+        },
+        {
+          "id": "class-workerinfo",
+          "title": "class-workerinfo",
+          "description": "On this page",
+          "tags": [
+            "WorkerInfo",
+            "0",
+            "workers - 1",
+            "parallelIndex",
+            "process.env.TEST_PARALLEL_INDEX",
+            "workerIndex",
+            "process.env.TEST_WORKER_INDEX"
+          ],
+          "path": "playwright/class-workerinfo.md",
+          "tokens": 549
+        },
+        {
+          "id": "aria-snapshots",
+          "title": "aria-snapshots",
+          "description": "On this page",
+          "tags": [
+            "heading",
+            "list",
+            "listitem",
+            "button",
+            "/patterns/",
+            "checked",
+            "disabled",
+            "expanded",
+            "level",
+            "pressed"
+          ],
+          "path": "playwright/aria-snapshots.md",
+          "tokens": 4238
+        },
+        {
+          "id": "auth",
+          "title": "auth",
+          "description": "On this page",
+          "tags": [
+            "playwright/.auth",
+            ".gitignore",
+            "tests/auth.setup.ts",
+            "setup",
+            "storageState",
+            "auth.setup.ts",
+            "playwright/fixtures.ts",
+            "test",
+            "@playwright/test",
+            "adminStorageState.json"
+          ],
+          "path": "playwright/auth.md",
+          "tokens": 4963
+        },
+        {
+          "id": "instead-of-installing-all-browsersnpx-playwright-install-with-deps-install-only-chromiumnpx-playwright-install-chromium-with-deps",
+          "title": "Instead of installing all browsersnpx playwright install --with-deps# Install only Chromiumnpx playwright install chromium --with-deps",
+          "description": "On this page",
+          "tags": [
+            "codegen",
+            "toBeVisible()",
+            "isVisible()",
+            "--debug",
+            "on",
+            "--trace",
+            ".ts",
+            "@typescript-eslint/no-floating-promises",
+            "tsc --noEmit"
+          ],
+          "path": "playwright/instead-of-installing-all-browsersnpx-playwright-install-with-deps-install-only-chromiumnpx-playwright-install-chromium-with-deps.md",
+          "tokens": 4754
+        },
+        {
+          "id": "browser-contexts",
+          "title": "browser-contexts",
+          "description": "On this page",
+          "tags": [],
+          "path": "playwright/browser-contexts.md",
+          "tokens": 1060
+        },
+        {
+          "id": "update-playwrightnpm-install-d-playwright-test-latest-install-new-browsersnpx-playwright-install",
+          "title": "Update playwrightnpm install -D @playwright/test@latest# Install new browsersnpx playwright install",
+          "description": "On this page",
+          "tags": [
+            "install",
+            "install-deps",
+            "--project",
+            "channel",
+            "--only-shell",
+            "'chromium'",
+            "--no-shell",
+            "chrome",
+            "msedge",
+            "chrome-beta"
+          ],
+          "path": "playwright/update-playwrightnpm-install-d-playwright-test-latest-install-new-browsersnpx-playwright-install.md",
+          "tokens": 4894
+        },
+        {
+          "id": "canary-releases",
+          "title": "canary-releases",
+          "description": "On this page",
+          "tags": [
+            "next",
+            "main",
+            "@next",
+            "latest",
+            "beta",
+            "5"
+          ],
+          "path": "playwright/canary-releases.md",
+          "tokens": 385
+        },
+        {
+          "id": "chrome-extensions",
+          "title": "chrome-extensions",
+          "description": "On this page",
+          "tags": [
+            "./my-extension",
+            "chromium"
+          ],
+          "path": "playwright/chrome-extensions.md",
+          "tokens": 842
+        },
+        {
+          "id": "ci",
+          "title": "ci",
+          "description": "On this page",
+          "tags": [
+            "jobs.<job_id>.container",
+            "success",
+            "--only-changed",
+            "PublishTestResults",
+            "playwright.config.ts",
+            "docker:",
+            "CIRCLE_NODE_INDEX",
+            "--shard",
+            "job_name 1/N",
+            "job_name N/N"
+          ],
+          "path": "playwright/ci.md",
+          "tokens": 4249
+        },
+        {
+          "id": "ci-intro",
+          "title": "ci-intro",
+          "description": "On this page",
+          "tags": [
+            "npm init playwright@latest",
+            "playwright.yml",
+            ".github/workflows",
+            "git init",
+            "npx playwright show-report",
+            "AZCOPY_SPA_APPLICATION_ID",
+            "AZCOPY_SPA_CLIENT_SECRET",
+            "AZCOPY_TENANT_ID",
+            "$web"
+          ],
+          "path": "playwright/ci-intro.md",
+          "tokens": 2554
+        },
+        {
+          "id": "clock",
+          "title": "clock",
+          "description": "On this page",
+          "tags": [
+            "setFixedTime",
+            "Date.now()",
+            "new Date()",
+            "install",
+            "pauseAt",
+            "fastForward",
+            "runFor",
+            "resume",
+            "setSystemTime",
+            "Date"
+          ],
+          "path": "playwright/clock.md",
+          "tokens": 1782
+        },
+        {
+          "id": "codegen",
+          "title": "codegen",
+          "description": "On this page",
+          "tags": [
+            "test-1.spec.ts",
+            "'assert visibility'",
+            "'assert text'",
+            "'assert value'",
+            "codegen",
+            "'Record'",
+            "'Pick Locator'",
+            "--viewport",
+            "--device",
+            "--color-scheme"
+          ],
+          "path": "playwright/codegen.md",
+          "tokens": 3415
+        },
+        {
+          "id": "codegen-intro",
+          "title": "codegen-intro",
+          "description": "On this page",
+          "tags": [
+            "codegen",
+            "'assert visibility'",
+            "'assert text'",
+            "'assert value'",
+            "'record'",
+            "'copy'",
+            "'clear'",
+            "'Record'",
+            "'Pick Locator'"
+          ],
+          "path": "playwright/codegen-intro.md",
+          "tokens": 874
+        },
+        {
+          "id": "debug",
+          "title": "debug",
+          "description": "On this page",
+          "tags": [
+            "Show Browser",
+            "Debug Test",
+            "Run Test",
+            "--debug",
+            "playwright.config",
+            "--project",
+            "page.pause()",
+            "PWDEBUG=console",
+            "playwright",
+            "playwright.$"
+          ],
+          "path": "playwright/debug.md",
+          "tokens": 3696
+        },
+        {
+          "id": "dialogs",
+          "title": "dialogs",
+          "description": "On this page",
+          "tags": [
+            "alert",
+            "confirm",
+            "prompt",
+            "beforeunload",
+            "window.print"
+          ],
+          "path": "playwright/dialogs.md",
+          "tokens": 771
+        },
+        {
+          "id": "docker",
+          "title": "docker",
+          "description": "On this page",
+          "tags": [
+            "root",
+            "adduser",
+            "seccomp_profile.json",
+            "--init",
+            "--ipc=host",
+            "docker run --cap-add=SYS_ADMIN",
+            "@playwright/test",
+            "hostmachine",
+            "localhost",
+            "noVNC"
+          ],
+          "path": "playwright/docker.md",
+          "tokens": 2067
+        },
+        {
+          "id": "downloads",
+          "title": "downloads",
+          "description": "On this page",
+          "tags": [],
+          "path": "playwright/downloads.md",
+          "tokens": 423
+        },
+        {
+          "id": "emulation",
+          "title": "emulation",
+          "description": "On this page",
+          "tags": [
+            "\"userAgent\"",
+            "\"screenSize\"",
+            "\"viewport\"",
+            "\"hasTouch\"",
+            "\"geolocation\"",
+            "\"locale\"",
+            "\"timezone\"",
+            "\"permissions\"",
+            "\"colorScheme\"",
+            "TZ"
+          ],
+          "path": "playwright/emulation.md",
+          "tokens": 2603
+        },
+        {
+          "id": "evaluating",
+          "title": "evaluating",
+          "description": "On this page",
+          "tags": [
+            "window",
+            "document",
+            "evaluate",
+            "Math.random()",
+            "preload.js"
+          ],
+          "path": "playwright/evaluating.md",
+          "tokens": 1237
+        },
+        {
+          "id": "events",
+          "title": "events",
+          "description": "On this page",
+          "tags": [],
+          "path": "playwright/events.md",
+          "tokens": 531
+        },
+        {
+          "id": "extensibility",
+          "title": "extensibility",
+          "description": "On this page",
+          "tags": [
+            "query",
+            "selector",
+            "root",
+            "queryAll",
+            "{contentScript: true}",
+            "Node.prototype"
+          ],
+          "path": "playwright/extensibility.md",
+          "tokens": 635
+        },
+        {
+          "id": "frames",
+          "title": "frames",
+          "description": "On this page",
+          "tags": [
+            "click",
+            "iframe"
+          ],
+          "path": "playwright/frames.md",
+          "tokens": 251
+        },
+        {
+          "id": "getting-started-vscode",
+          "title": "getting-started-vscode",
+          "description": "On this page",
+          "tags": [
+            "Ctrl+Shift+X",
+            "Cmd+Shift+X",
+            "Ctrl+Shift+P",
+            "Cmd+Shift+P",
+            "playwright.config.ts",
+            "Test: Install Playwright",
+            "Debug Test",
+            "Show Browsers",
+            "Record new",
+            "Pick locator"
+          ],
+          "path": "playwright/getting-started-vscode.md",
+          "tokens": 2682
+        },
+        {
+          "id": "handles",
+          "title": "handles",
+          "description": "On this page",
+          "tags": [],
+          "path": "playwright/handles.md",
+          "tokens": 1567
+        },
+        {
+          "id": "input",
+          "title": "input",
+          "description": "On this page",
+          "tags": [
+            "input",
+            "<input>",
+            "<textarea>",
+            "[contenteditable]",
+            "input[type=checkbox]",
+            "input[type=radio]",
+            "[role=checkbox]",
+            "<select>",
+            "value",
+            "label"
+          ],
+          "path": "playwright/input.md",
+          "tokens": 2835
+        },
+        {
+          "id": "intro",
+          "title": "intro",
+          "description": "On this page",
+          "tags": [
+            "tests",
+            "e2e",
+            "package.json",
+            "tests/",
+            "--headed",
+            "--project=chromium",
+            "--ui"
+          ],
+          "path": "playwright/intro.md",
+          "tokens": 1394
+        },
+        {
+          "id": "languages",
+          "title": "languages",
+          "description": "On this page",
+          "tags": [],
+          "path": "playwright/languages.md",
+          "tokens": 480
+        },
+        {
+          "id": "download-the-chromium-firefox-and-webkit-browsernpx-playwright-install-chromium-firefox-webkit-alternatively-add-packages-that-will-download-a-browser-upon-npm-installnpm-i-d-playwright-browser-chromi",
+          "title": "Download the Chromium, Firefox and WebKit browsernpx playwright install chromium firefox webkit# Alternatively, add packages that will download a browser upon npm installnpm i -D @playwright/browser-chromium @playwright/browser-firefox @playwright/browser-webkit",
+          "description": "On this page",
+          "tags": [
+            "@playwright/test",
+            "playwright",
+            "node my-script.js",
+            "npx playwright test",
+            "npm install playwright",
+            "npm init playwright@latest",
+            "install",
+            "init",
+            "@playwright/browser-chromium",
+            "@playwright/browser-firefox"
+          ],
+          "path": "playwright/download-the-chromium-firefox-and-webkit-browsernpx-playwright-install-chromium-firefox-webkit-alternatively-add-packages-that-will-download-a-browser-upon-npm-installnpm-i-d-playwright-browser-chromi.md",
+          "tokens": 3055
+        },
+        {
+          "id": "locators",
+          "title": "locators",
+          "description": "On this page",
+          "tags": [
+            "data-testid",
+            "button",
+            "<button>",
+            "div",
+            "span",
+            "p",
+            "a",
+            "input",
+            "alt",
+            "img"
+          ],
+          "path": "playwright/locators.md",
+          "tokens": 6913
+        },
+        {
+          "id": "save-api-requests-from-example-com-as-example-har-archive-npx-playwright-open-save-har-example-har-save-har-glob-api-https-example-com",
+          "title": "Save API requests from example.com as \"example.har\" archive.npx playwright open --save-har=example.har --save-har-glob=\"**/api/**\" https://example.com",
+          "description": "On this page",
+          "tags": [
+            "*/**/api/v1/fruits",
+            "update",
+            "update: true",
+            ".txt",
+            "hars",
+            ".zip",
+            "--save-har",
+            "--save-har-glob",
+            "zip",
+            "\"request\""
+          ],
+          "path": "playwright/save-api-requests-from-example-com-as-example-har-archive-npx-playwright-open-save-har-example-har-save-har-glob-api-https-example-com.md",
+          "tokens": 2326
+        },
+        {
+          "id": "mock-browser-apis",
+          "title": "mock-browser-apis",
+          "description": "On this page",
+          "tags": [],
+          "path": "playwright/mock-browser-apis.md",
+          "tokens": 1493
+        },
+        {
+          "id": "navigations",
+          "title": "navigations",
+          "description": "On this page",
+          "tags": [
+            "load",
+            "loaded"
+          ],
+          "path": "playwright/navigations.md",
+          "tokens": 1177
+        },
+        {
+          "id": "network",
+          "title": "network",
+          "description": "On this page",
+          "tags": [
+            "*",
+            "/",
+            "**",
+            "?",
+            "{}",
+            ",",
+            "\\",
+            "\\\\",
+            "https://example.com/*.js",
+            "https://example.com/file.js"
+          ],
+          "path": "playwright/network.md",
+          "tokens": 2849
+        },
+        {
+          "id": "other-locators",
+          "title": "other-locators",
+          "description": "On this page",
+          "tags": [
+            ":visible",
+            ":has-text()",
+            ":has()",
+            ":is()",
+            ":nth-match()",
+            "article:has-text(\"Playwright\")",
+            "<body>",
+            "#nav-bar :text(\"Home\")",
+            ":text()",
+            "#nav-bar"
+          ],
+          "path": "playwright/other-locators.md",
+          "tokens": 5765
+        },
+        {
+          "id": "pages",
+          "title": "pages",
+          "description": "On this page",
+          "tags": [
+            "page",
+            "target=\"_blank\"",
+            "popup",
+            "browserContext.on('page')"
+          ],
+          "path": "playwright/pages.md",
+          "tokens": 729
+        },
+        {
+          "id": "pom",
+          "title": "pom",
+          "description": "On this page",
+          "tags": [
+            "PlaywrightDevPage",
+            "playwright.dev",
+            "page"
+          ],
+          "path": "playwright/pom.md",
+          "tokens": 1069
+        },
+        {
+          "id": "protractor",
+          "title": "protractor",
+          "description": "On this page",
+          "tags": [
+            "waitForAngular",
+            "element(by.buttonText('...'))",
+            "element(by.css('...'))",
+            "page.locator('...')",
+            "page.locator('..1.. >> text=..2..')",
+            "element(by.id('...'))",
+            "page.locator('#...')",
+            "element(by.model('...'))",
+            "page.locator('[ng-model=\"...\"]')",
+            "element(by.repeater('...'))"
+          ],
+          "path": "playwright/protractor.md",
+          "tokens": 1577
+        },
+        {
+          "id": "puppeteer",
+          "title": "puppeteer",
+          "description": "On this page",
+          "tags": [
+            "await puppeteer.launch()",
+            "await playwright.chromium.launch()",
+            "puppeteer.launch({product: 'firefox'})",
+            "await playwright.firefox.launch()",
+            "await playwright.webkit.launch()",
+            "await browser.newContext(...)",
+            "await page.setViewport(...)",
+            "await page.setViewportSize(...)",
+            "await page.waitForXPath(XPathSelector)",
+            "await page.waitForNetworkIdle(...)"
+          ],
+          "path": "playwright/puppeteer.md",
+          "tokens": 2099
+        },
+        {
+          "id": "generate-agent-files-for-each-agentic-loop-visual-studio-codenpx-playwright-init-agents-loop-vscode-claude-codenpx-playwright-init-agents-loop-claude-opencodenpx-playwright-init-agents-loop-opencode",
+          "title": "Generate agent files for each agentic loop# Visual Studio Codenpx playwright init-agents --loop=vscode# Claude Codenpx playwright init-agents --loop=claude# opencodenpx playwright init-agents --loop=opencode",
+          "description": "On this page",
+          "tags": [
+            "isLocal",
+            "true",
+            "_react",
+            "_vue",
+            ":light",
+            "devtools",
+            "args: ['--auto-open-devtools-for-tabs']",
+            "chrome",
+            "chrome-headless-shell",
+            "wait"
+          ],
+          "path": "playwright/generate-agent-files-for-each-agentic-loop-visual-studio-codenpx-playwright-init-agents-loop-vscode-claude-codenpx-playwright-init-agents-loop-claude-opencodenpx-playwright-init-agents-loop-opencode.md",
+          "tokens": 37958
+        },
+        {
+          "id": "running-tests",
+          "title": "running-tests",
+          "description": "On this page",
+          "tags": [
+            "--project",
+            "--headed",
+            "--ui",
+            "playwright test",
+            "playwright.config",
+            "landing",
+            "login",
+            "-g",
+            "--last-failed",
+            "console.log"
+          ],
+          "path": "playwright/running-tests.md",
+          "tokens": 2229
+        },
+        {
+          "id": "screenshots",
+          "title": "screenshots",
+          "description": "On this page",
+          "tags": [],
+          "path": "playwright/screenshots.md",
+          "tokens": 301
+        },
+        {
+          "id": "start-selenium-nodese-node-grid-url-http-selenium-hub-ip-4444-java-jar-selenium-server-version-jar-node",
+          "title": "Start selenium nodeSE_NODE_GRID_URL=\"http://<selenium-hub-ip>:4444\" java -jar selenium-server-<version>.jar node",
+          "description": "On this page",
+          "tags": [
+            "SELENIUM_REMOTE_URL",
+            "SE_NODE_GRID_URL",
+            "SELENIUM_REMOTE_CAPABILITIES",
+            "SELENIUM_REMOTE_HEADERS",
+            "DEBUG=pw:browser*",
+            "localhost"
+          ],
+          "path": "playwright/start-selenium-nodese-node-grid-url-http-selenium-hub-ip-4444-java-jar-selenium-server-version-jar-node.md",
+          "tokens": 1527
+        },
+        {
+          "id": "service-workers",
+          "title": "service-workers",
+          "description": "On this page",
+          "tags": [
+            "fetch",
+            "'block'",
+            "true",
+            "index.html",
+            "data.json"
+          ],
+          "path": "playwright/service-workers.md",
+          "tokens": 2040
+        },
+        {
+          "id": "todomvc-application-basic-operations-test-plan-application-overviewthe-todomvc-application-is-a-react-based-todo-list-manager-that-demonstrates-standard-todo-application-functionality-the-application",
+          "title": "TodoMVC Application - Basic Operations Test Plan## Application OverviewThe TodoMVC application is a React-based todo list manager that demonstrates standard todo application functionality. The application provides comprehensive task management capabilities with a clean, intuitive interface. Key features include:- **Task Management**: Add, edit, complete, and delete individual todos- **Bulk Operations**: Mark all todos as complete/incomplete and clear all completed todos  - **Filtering System**: View todos by All, Active, or Completed status with URL routing support- **Real-time Counter**: Display of active (incomplete) todo count- **Interactive UI**: Hover states, edit-in-place functionality, and responsive design- **State Persistence**: Maintains state during session navigation## Test Scenarios### 1. Adding New Todos**Seed:** `tests/seed.spec.ts`#### 1.1 Add Valid Todo**Steps:**1. Click in the \"What needs to be done?\" input field2. Type \"Buy groceries\"3. Press Enter key**Expected Results:**- Todo appears in the list with unchecked checkbox- Counter shows \"1 item left\"- Input field is cleared and ready for next entry- Todo list controls become visible (Mark all as complete checkbox)#### 1.2 Add Multiple Todos...",
+          "description": "On this page",
+          "tags": [
+            "init-agents",
+            "seed test",
+            "seed.spec.ts",
+            "specs/basic-operations.md",
+            "specs/",
+            "basic-operations.md",
+            "tests/",
+            "page"
+          ],
+          "path": "playwright/todomvc-application-basic-operations-test-plan-application-overviewthe-todomvc-application-is-a-react-based-todo-list-manager-that-demonstrates-standard-todo-application-functionality-the-application.md",
+          "tokens": 1974
+        },
+        {
+          "id": "test-annotations",
+          "title": "test-annotations",
+          "description": "On this page",
+          "tags": [
+            "fail",
+            "fixme",
+            "@fast",
+            "@slow",
+            "@",
+            "--grep",
+            "OR",
+            "AND",
+            "type",
+            "description"
+          ],
+          "path": "playwright/test-annotations.md",
+          "tokens": 1774
+        },
+        {
+          "id": "test-assertions",
+          "title": "test-assertions",
+          "description": "On this page",
+          "tags": [
+            "expect",
+            "expect(value)",
+            "toEqual",
+            "toContain",
+            "toBeTruthy",
+            "status",
+            "\"Submitted\"",
+            "await",
+            "expect.poll",
+            "expect.toPass"
+          ],
+          "path": "playwright/test-assertions.md",
+          "tokens": 4699
+        },
+        {
+          "id": "run-all-testsnpx-playwright-test-run-a-single-test-filenpx-playwright-test-tests-todo-page-spec-ts-run-a-set-of-test-filesnpx-playwright-test-tests-todo-page-tests-landing-page-run-tests-at-a-specific",
+          "title": "Run all testsnpx playwright test# Run a single test filenpx playwright test tests/todo-page.spec.ts# Run a set of test filesnpx playwright test tests/todo-page/ tests/landing-page/# Run tests at a specific linenpx playwright test my-spec.ts:42# Run tests by titlenpx playwright test -g \"add a todo item\"# Run tests in headed browsersnpx playwright test --headed# Run tests for a specific projectnpx playwright test --project=chromium# Get helpnpx playwright test --help",
+          "description": "On this page",
+          "tags": [
+            "npx playwright --help",
+            "--debug",
+            "PWDEBUG=1",
+            "--headed",
+            "-g <grep>",
+            "--grep <grep>",
+            "--project <project-name...>",
+            "--ui",
+            "-j <workers>",
+            "--workers <workers>"
+          ],
+          "path": "playwright/run-all-testsnpx-playwright-test-run-a-single-test-filenpx-playwright-test-tests-todo-page-spec-ts-run-a-set-of-test-filesnpx-playwright-test-tests-todo-page-tests-landing-page-run-tests-at-a-specific.md",
+          "tokens": 3098
+        },
+        {
+          "id": "test-components",
+          "title": "test-components",
+          "description": "On this page",
+          "tags": [
+            "id=\"root\"",
+            "playwright/index.{js,ts,jsx,tsx}",
+            ".js",
+            ".ts",
+            ".jsx",
+            ".tsx",
+            "src/App.spec.{ts,tsx}",
+            "vue.d.ts",
+            "mount",
+            "/playwright/index.html"
+          ],
+          "path": "playwright/test-components.md",
+          "tokens": 6040
+        },
+        {
+          "id": "test-configuration",
+          "title": "test-configuration",
+          "description": "On this page",
+          "tags": [
+            "use",
+            "test.only",
+            "use{}",
+            "webServer",
+            "'50%'.",
+            "'*test-assets'",
+            "'*todo-tests/*.spec.ts'",
+            ".*(test|spec).(js|ts|mjs)",
+            "expect(locator).toHaveText()",
+            "expect()"
+          ],
+          "path": "playwright/test-configuration.md",
+          "tokens": 1676
+        },
+        {
+          "id": "test-fixtures",
+          "title": "test-fixtures",
+          "description": "On this page",
+          "tags": [
+            "{ page }",
+            "page",
+            "chromium",
+            "firefox",
+            "webkit",
+            "TodoPage",
+            "describe",
+            "test",
+            "todoPage",
+            "settingsPage"
+          ],
+          "path": "playwright/test-fixtures.md",
+          "tokens": 7485
+        },
+        {
+          "id": "test-global-setup-teardown",
+          "title": "test-global-setup-teardown",
+          "description": "On this page",
+          "tags": [
+            "globalSetup",
+            "browser",
+            "browserType.launch()",
+            "headless",
+            "testIdAttribute",
+            "global.setup.ts",
+            "global.teardown.ts",
+            "--grep",
+            "--grep-invert",
+            "--shard"
+          ],
+          "path": "playwright/test-global-setup-teardown.md",
+          "tokens": 2695
+        },
+        {
+          "id": "test-parallel",
+          "title": "test-parallel",
+          "description": "On this page",
+          "tags": [
+            "test.describe.configure",
+            "workers: 1",
+            "--workers=1",
+            "beforeAll",
+            "afterAll",
+            "maxFailures",
+            "--max-failures",
+            "0",
+            "workers - 1",
+            "parallelIndex"
+          ],
+          "path": "playwright/test-parallel.md",
+          "tokens": 2927
+        },
+        {
+          "id": "env-filestaging-0user-name-mepassword-secret",
+          "title": ".env fileSTAGING=0USER_NAME=mePASSWORD=secret",
+          "description": "On this page",
+          "tags": [
+            "beforeEach",
+            "beforeAll",
+            "afterEach",
+            "afterAll",
+            "forEach",
+            "describe()",
+            "person",
+            "Alice",
+            "Bob",
+            ".env"
+          ],
+          "path": "playwright/env-filestaging-0user-name-mepassword-secret.md",
+          "tokens": 2249
+        },
+        {
+          "id": "test-projects",
+          "title": "test-projects",
+          "description": "On this page",
+          "tags": [
+            "playwright.config.ts",
+            "--project",
+            "--grep",
+            "--grep-invert",
+            "--shard",
+            "test.only()",
+            "--no-deps"
+          ],
+          "path": "playwright/test-projects.md",
+          "tokens": 2314
+        },
+        {
+          "id": "test-reporters",
+          "title": "test-reporters",
+          "description": "On this page",
+          "tags": [
+            "--reporter",
+            "'list'",
+            "'json'",
+            "'dot'",
+            "dot",
+            "PLAYWRIGHT_LIST_PRINT_STEPS",
+            "printSteps",
+            "false",
+            "PLAYWRIGHT_FORCE_TTY",
+            "true"
+          ],
+          "path": "playwright/test-reporters.md",
+          "tokens": 4493
+        },
+        {
+          "id": "give-failing-tests-3-retry-attemptsnpx-playwright-test-retries-3",
+          "title": "Give failing tests 3 retry attemptsnpx playwright test --retries=3",
+          "description": "On this page",
+          "tags": [
+            "beforeAll",
+            "first good",
+            "second flaky",
+            "third good",
+            "afterAll",
+            "test.describe.serial"
+          ],
+          "path": "playwright/give-failing-tests-3-retry-attemptsnpx-playwright-test-retries-3.md",
+          "tokens": 1738
+        },
+        {
+          "id": "test-sharding",
+          "title": "test-sharding",
+          "description": "On this page",
+          "tags": [
+            "--shard=x/y",
+            "fullyParallel: true",
+            "fullyParallel",
+            "blob",
+            "blob-report",
+            "all-blob-reports",
+            "npx playwright merge-reports",
+            "playwright-report",
+            "jobs.<job_id>.strategy.matrix",
+            "matrix"
+          ],
+          "path": "playwright/test-sharding.md",
+          "tokens": 2650
+        },
+        {
+          "id": "test-snapshots",
+          "title": "test-snapshots",
+          "description": "On this page",
+          "tags": [
+            "await expect(page).toHaveScreenshot()",
+            "example-test-1-chromium-darwin.png",
+            "example-test-1.png",
+            "toHaveScreenshot()",
+            "chromium-darwin",
+            "chromium",
+            "a.spec.js-snapshots",
+            "--update-snapshots",
+            "my.spec.ts",
+            "my.spec.ts-snapshots"
+          ],
+          "path": "playwright/test-snapshots.md",
+          "tokens": 1427
+        },
+        {
+          "id": "test-timeouts",
+          "title": "test-timeouts",
+          "description": "On this page",
+          "tags": [
+            "{ timeout: 60_000 }",
+            "test.setTimeout(120_000)",
+            "{ expect: { timeout: 10_000 } }",
+            "beforeEach",
+            "afterEach",
+            "beforeAll",
+            "afterAll",
+            "{ use: { actionTimeout: 10_000 } }",
+            "locator.click({ timeout: 10_000 })",
+            "{ use: { navigationTimeout: 30_000 } }"
+          ],
+          "path": "playwright/test-timeouts.md",
+          "tokens": 1967
+        },
+        {
+          "id": "playwright-will-choose-tsconfig-automaticallynpx-playwright-test",
+          "title": "Playwright will choose tsconfig automaticallynpx playwright test",
+          "description": "On this page",
+          "tags": [
+            "tsc",
+            "tsconfig.json",
+            "allowJs",
+            "baseUrl",
+            "paths",
+            "references",
+            "jsconfig.json",
+            "tests/tsconfig.json",
+            "package.json",
+            "pretest"
+          ],
+          "path": "playwright/playwright-will-choose-tsconfig-automaticallynpx-playwright-test.md",
+          "tokens": 1119
+        },
+        {
+          "id": "test-ui-mode",
+          "title": "test-ui-mode",
+          "description": "On this page",
+          "tags": [
+            "playwright.config",
+            "@tag",
+            "0.0.0.0",
+            "--ui-port",
+            "--ui-host=0.0.0.0"
+          ],
+          "path": "playwright/test-ui-mode.md",
+          "tokens": 2337
+        },
+        {
+          "id": "test-use-options",
+          "title": "test-use-options",
+          "description": "On this page",
+          "tags": [
+            "use: {}",
+            "page.goto('/settings')",
+            "\"geolocation\"",
+            "\"locale\"",
+            "\"timezone\"",
+            "\"permissions\"",
+            "\"colorScheme\"",
+            "'prefers-colors-scheme'",
+            "'light'",
+            "'dark'"
+          ],
+          "path": "playwright/test-use-options.md",
+          "tokens": 3460
+        },
+        {
+          "id": "test-webserver",
+          "title": "test-webserver",
+          "description": "On this page",
+          "tags": [
+            "webServer",
+            "command",
+            "cwd",
+            "env",
+            "process.env",
+            "PLAYWRIGHT_TEST=1",
+            "gracefulShutdown",
+            "SIGKILL",
+            "{ signal: 'SIGTERM', timeout: 500 }",
+            "SIGTERM"
+          ],
+          "path": "playwright/test-webserver.md",
+          "tokens": 1629
+        },
+        {
+          "id": "testing-library",
+          "title": "testing-library",
+          "description": "On this page",
+          "tags": [
+            "await mount",
+            "screen.getByLabelText('...')",
+            "component.getByLabel('...')",
+            "screen.queryByPlaceholderText('...')",
+            "component.getByPlaceholder('...')",
+            "screen.findByText('...')",
+            "component.getByText('...')",
+            "screen.getByTestId('...')",
+            "component.getByTestId('...')",
+            "render(<Component />);"
+          ],
+          "path": "playwright/testing-library.md",
+          "tokens": 1916
+        },
+        {
+          "id": "touch-events",
+          "title": "touch-events",
+          "description": "On this page",
+          "tags": [
+            "Event.isTrusted",
+            "isTrusted",
+            "clientX/clientY",
+            "pageX/pageY/screenX/screenY"
+          ],
+          "path": "playwright/touch-events.md",
+          "tokens": 1416
+        },
+        {
+          "id": "trace-viewer",
+          "title": "trace-viewer",
+          "description": "On this page",
+          "tags": [
+            "trace.zip",
+            "Select file",
+            "--trace",
+            "on",
+            "trace: 'on-first-retry'",
+            "'on-first-retry'",
+            "'on-all-retries'",
+            "'off'",
+            "'on'",
+            "'retain-on-failure'"
+          ],
+          "path": "playwright/trace-viewer.md",
+          "tokens": 2662
+        },
+        {
+          "id": "trace-viewer-intro",
+          "title": "trace-viewer-intro",
+          "description": "On this page",
+          "tags": [
+            "trace.zip",
+            "on-first-retry",
+            "retries",
+            "--trace on",
+            "'Traces'"
+          ],
+          "path": "playwright/trace-viewer-intro.md",
+          "tokens": 969
+        },
+        {
+          "id": "videos",
+          "title": "videos",
+          "description": "On this page",
+          "tags": [
+            "video",
+            "'off'",
+            "'on'",
+            "'retain-on-failure'",
+            "'on-first-retry'",
+            "test-results"
+          ],
+          "path": "playwright/videos.md",
+          "tokens": 574
+        },
+        {
+          "id": "webview2",
+          "title": "webview2",
+          "description": "On this page",
+          "tags": [
+            "WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS",
+            "--remote-debugging-port=9222",
+            "CoreWebView2InitializationCompleted",
+            "WEBVIEW2_USER_DATA_FOLDER"
+          ],
+          "path": "playwright/webview2.md",
+          "tokens": 1400
+        },
+        {
+          "id": "writing-tests",
+          "title": "writing-tests",
+          "description": "On this page",
+          "tags": [
+            "// @ts-check",
+            "expect",
+            "expect(value)",
+            "toEqual",
+            "toContain",
+            "toBeTruthy",
+            "await",
+            "test.describe",
+            "test.beforeEach",
+            "test.afterEach"
+          ],
+          "path": "playwright/writing-tests.md",
+          "tokens": 1987
         }
       ]
     },
