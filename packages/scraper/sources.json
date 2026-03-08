@@ -424,6 +424,19 @@
       "url": "https://docs.docker.com/llms.txt"
     },
     {
+      "id": "express",
+      "name": "Express",
+      "description": "Fast, unopinionated, minimalist web framework for Node.js with routing and middleware",
+      "version": "5",
+      "adapter": "sitemap",
+      "url": "https://expressjs.com/sitemap.xml",
+      "crawl": {
+        "contentSelector": ".content",
+        "include": ["/en/"],
+        "exclude": ["/3x/", "/4x/"]
+      }
+    },
+    {
       "id": "azure",
       "name": "Azure",
       "description": "Microsoft Azure cloud platform with compute, storage, databases, AI, and 200+ services",

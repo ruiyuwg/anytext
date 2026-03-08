@@ -1,5 +1,5 @@
 {
-  "version": 67,
+  "version": 68,
   "updatedAt": "2026-03-08",
   "libraries": [
     {
@@ -47354,6 +47354,839 @@
           ],
           "path": "expo/troubleshooting-proxies.md",
           "tokens": 1921
+        }
+      ]
+    },
+    {
+      "id": "express",
+      "name": "Express",
+      "description": "Fast, unopinionated, minimalist web framework for Node.js with routing and middleware",
+      "version": "5",
+      "topics": [
+        {
+          "id": "5-x-api",
+          "title": "5.x API",
+          "description": "Express 5.0 requires Node.js 18 or higher.",
+          "tags": [
+            "express()",
+            "express",
+            "Content-Type",
+            "type",
+            "gzip",
+            "deflate",
+            "body",
+            "request",
+            "req.body",
+            "undefined"
+          ],
+          "path": "express/5-x-api.md",
+          "tokens": 28059
+        },
+        {
+          "id": "5-x-api",
+          "title": "5.x API",
+          "description": "Creates an Express application. The `express()` function is a top-level function exported by the `express` module.",
+          "tags": [
+            "express()",
+            "express",
+            "Content-Type",
+            "type",
+            "gzip",
+            "deflate",
+            "body",
+            "request",
+            "req.body",
+            "undefined"
+          ],
+          "path": "express/5-x-api.md",
+          "tokens": 28047
+        },
+        {
+          "id": "basic-routing",
+          "title": "Basic routing",
+          "description": "_Routing_ refers to determining how an application responds to a client request to a particular endpoint, which is a ...",
+          "tags": [
+            "app",
+            "express",
+            "METHOD",
+            "PATH",
+            "HANDLER",
+            "Hello World!",
+            "/",
+            "/user"
+          ],
+          "path": "express/basic-routing.md",
+          "tokens": 427
+        },
+        {
+          "id": "express-behind-proxies",
+          "title": "Express behind proxies",
+          "description": "When running an Express app behind a reverse proxy, some of the Express APIs may return different values than expecte...",
+          "tags": [
+            "trust proxy",
+            "true",
+            "X-Forwarded-For",
+            "false",
+            "req.socket.remoteAddress",
+            "X-Forwarded-Host",
+            "X-Forwarded-Proto",
+            "127.0.0.1/8",
+            "::1/128",
+            "169.254.0.0/16"
+          ],
+          "path": "express/express-behind-proxies.md",
+          "tokens": 1059
+        },
+        {
+          "id": "production-best-practices-performance-and-reliability",
+          "title": "Production best practices: performance and reliability",
+          "description": "This article discusses performance and reliability best practices for Express applications deployed to production.",
+          "tags": [
+            "--trace-sync-io",
+            "console.log()",
+            "console.error()",
+            "async",
+            "next(err)",
+            "uncaughtException",
+            "production",
+            "process.env.NODE_ENV",
+            "export",
+            ".bash_profile"
+          ],
+          "path": "express/production-best-practices-performance-and-reliability.md",
+          "tokens": 5009
+        },
+        {
+          "id": "production-best-practices-security",
+          "title": "Production Best Practices: Security",
+          "description": "The term _“production”_ refers to the stage in the software lifecycle when an application or API is generally availab...",
+          "tags": [
+            "?url=https://example.com",
+            "res.redirect",
+            "location",
+            "res.location",
+            "Content-Security-Policy",
+            "Cross-Origin-Opener-Policy",
+            "Cross-Origin-Resource-Policy",
+            "Origin-Agent-Cluster",
+            "Referrer-Policy",
+            "Referer"
+          ],
+          "path": "express/production-best-practices-security.md",
+          "tokens": 3914
+        },
+        {
+          "id": "body-parser",
+          "title": "body-parser",
+          "description": "This page was generated from the [body-parser README](https://github.com/expressjs/body-parser).",
+          "tags": [
+            "req.body",
+            "req.body.foo.toString()",
+            "foo",
+            "toString",
+            "bodyParser",
+            "Content-Type",
+            "type",
+            "json",
+            "gzip",
+            "br"
+          ],
+          "path": "express/body-parser.md",
+          "tokens": 5379
+        },
+        {
+          "id": "community",
+          "title": "Community",
+          "description": "The Express technical committee meets online every two weeks (as needed) to discuss development and maintenance of Ex...",
+          "tags": [],
+          "path": "express/community.md",
+          "tokens": 871
+        },
+        {
+          "id": "compression",
+          "title": "compression",
+          "description": "This page was generated from the [compression README](https://github.com/expressjs/compression).",
+          "tags": [
+            "npm install",
+            "options",
+            "Cache-Control",
+            "no-transform",
+            "compression()",
+            "Number",
+            "zlib.constants.Z_DEFAULT_CHUNK",
+            "16384",
+            "Function",
+            "filter(req, res)"
+          ],
+          "path": "express/compression.md",
+          "tokens": 2410
+        },
+        {
+          "id": "connect-rid",
+          "title": "connect-rid",
+          "description": "This page was generated from the [connect-rid README](https://github.com/expressjs/connect-rid).",
+          "tags": [],
+          "path": "express/connect-rid.md",
+          "tokens": 581
+        },
+        {
+          "id": "contributing-to-express",
+          "title": "Contributing to Express",
+          "description": "Express and the other projects in the [expressjs organization on GitHub](https://github.com/expressjs) are projects o...",
+          "tags": [
+            "expressjs",
+            "pillarjs",
+            "jshttp",
+            "expressjs/express",
+            "npm run lint",
+            "master",
+            "6.x",
+            "npm install",
+            "npm test",
+            "#123"
+          ],
+          "path": "express/contributing-to-express.md",
+          "tokens": 6825
+        },
+        {
+          "id": "cookie-parser",
+          "title": "cookie-parser",
+          "description": "This page was generated from the [cookie-parser README](https://github.com/expressjs/cookie-parser).",
+          "tags": [
+            "Cookie",
+            "req.cookies",
+            "secret",
+            "req.secret",
+            "options",
+            "cookie.parse",
+            "decode",
+            "req.signedCookies",
+            "s:",
+            "false"
+          ],
+          "path": "express/cookie-parser.md",
+          "tokens": 1101
+        },
+        {
+          "id": "cookie-session",
+          "title": "cookie-session",
+          "description": "This page was generated from the [cookie-session README](https://github.com/expressjs/cookie-session).",
+          "tags": [
+            "cookie-session",
+            "req.session",
+            "npm install",
+            "session",
+            "req",
+            "Set-Cookie",
+            "Keygrip",
+            "keys[0]",
+            "keys",
+            "cookies.get()"
+          ],
+          "path": "express/cookie-session.md",
+          "tokens": 2647
+        },
+        {
+          "id": "cors",
+          "title": "cors",
+          "description": "This page was generated from the [cors README](https://github.com/expressjs/cors).",
+          "tags": [
+            "npm install",
+            "origin",
+            "undefined",
+            "callback",
+            "callback(error, origin)",
+            "OPTIONS",
+            "app.use(cors())",
+            "cors",
+            "req",
+            "callback(error, corsOptions)"
+          ],
+          "path": "express/cors.md",
+          "tokens": 2806
+        },
+        {
+          "id": "database-integration",
+          "title": "Database integration",
+          "description": "Adding the capability to connect databases to Express apps is just a matter of loading an appropriate Node.js driver ...",
+          "tags": [],
+          "path": "express/database-integration.md",
+          "tokens": 2262
+        },
+        {
+          "id": "debugging-express",
+          "title": "Debugging Express",
+          "description": "To see all the internal logs used in Express, set the `DEBUG` environment variable to `express:*` when launching your...",
+          "tags": [
+            "DEBUG",
+            "express:*",
+            "express:router",
+            "express:application",
+            "express",
+            "debug",
+            "$ express sample-app",
+            "DEBUG_COLORS",
+            "DEBUG_DEPTH",
+            "DEBUG_FD"
+          ],
+          "path": "express/debugging-express.md",
+          "tokens": 1071
+        },
+        {
+          "id": "developing-template-engines-for-express",
+          "title": "Developing template engines for Express",
+          "description": "Use the `app.engine(ext, callback)` method to create your own template engine. `ext` refers to the file extension, an...",
+          "tags": [
+            "app.engine(ext, callback)",
+            "ext",
+            "callback",
+            ".ntl",
+            "index.ntl",
+            "views"
+          ],
+          "path": "express/developing-template-engines-for-express.md",
+          "tokens": 397
+        },
+        {
+          "id": "error-handling",
+          "title": "Error Handling",
+          "description": "_Error Handling_ refers to how Express catches and processes errors that occur both synchronously and asynchronously....",
+          "tags": [
+            "next()",
+            "next(value)",
+            "getUserById",
+            "next",
+            "'route'",
+            "fs.writeFile",
+            "try...catch",
+            "readFile",
+            "NODE_ENV",
+            "production"
+          ],
+          "path": "express/error-handling.md",
+          "tokens": 2406
+        },
+        {
+          "id": "errorhandler",
+          "title": "errorhandler",
+          "description": "This page was generated from the [errorhandler README](https://github.com/expressjs/errorhandler).",
+          "tags": [
+            "Error",
+            "stack",
+            "npm install",
+            "false",
+            "log(err, str, req, res)",
+            "err",
+            "str",
+            "req",
+            "res",
+            "true"
+          ],
+          "path": "express/errorhandler.md",
+          "tokens": 976
+        },
+        {
+          "id": "express-examples",
+          "title": "Express examples",
+          "description": "This page contains list of examples using Express.",
+          "tags": [
+            "online",
+            "redis"
+          ],
+          "path": "express/express-examples.md",
+          "tokens": 972
+        },
+        {
+          "id": "faq",
+          "title": "FAQ",
+          "description": "There is no definitive answer to this question. The answer depends on the scale of your application and the team that...",
+          "tags": [
+            "(path, locals, callback)",
+            "express.Router()",
+            "(err, req, res, next)",
+            "res.render()",
+            "res.sendFile()",
+            "express.static()"
+          ],
+          "path": "express/faq.md",
+          "tokens": 907
+        },
+        {
+          "id": "express-application-generator",
+          "title": "Express application generator",
+          "description": "Use the application generator tool, `express-generator`, to quickly create an application skeleton.",
+          "tags": [
+            "express-generator",
+            "npx",
+            "-h",
+            "http://localhost:3000/"
+          ],
+          "path": "express/express-application-generator.md",
+          "tokens": 751
+        },
+        {
+          "id": "glossary",
+          "title": "Glossary",
+          "description": "In general, one or more programs that are designed to carry out operations for a specific purpose. In the context of ...",
+          "tags": [
+            "var foo = require('middleware')",
+            "var mw = foo()",
+            "app.use(mw)",
+            "http://foo.com/products/id"
+          ],
+          "path": "express/glossary.md",
+          "tokens": 689
+        },
+        {
+          "id": "health-checks-and-graceful-shutdown",
+          "title": "Health Checks and Graceful Shutdown",
+          "description": "When you deploy a new version of your application, you must replace the previous version. The process manager you’re ...",
+          "tags": [
+            "liveness",
+            "readiness"
+          ],
+          "path": "express/health-checks-and-graceful-shutdown.md",
+          "tokens": 329
+        },
+        {
+          "id": "hello-world-example",
+          "title": "Hello world example",
+          "description": "Embedded below is essentially the simplest Express app you can create. It is a single file app — _not_ what you’d get...",
+          "tags": [
+            "/",
+            "myapp",
+            "npm init",
+            "express",
+            "app.js",
+            "req",
+            "res",
+            "req.pipe()",
+            "req.on('data', callback)",
+            "http://localhost:3000/"
+          ],
+          "path": "express/hello-world-example.md",
+          "tokens": 386
+        },
+        {
+          "id": "version-support",
+          "title": "Version Support",
+          "description": "Only the latest version of any given major release line is supported.",
+          "tags": [],
+          "path": "express/version-support.md",
+          "tokens": 283
+        },
+        {
+          "id": "installing",
+          "title": "Installing",
+          "description": "Assuming you’ve already installed [Node.js](https://nodejs.org/), create a directory to hold your application, and ma...",
+          "tags": [
+            "npm init",
+            "package.json",
+            "app.js",
+            "index.js",
+            "myapp",
+            "npm install",
+            "dependencies",
+            "--save"
+          ],
+          "path": "express/installing.md",
+          "tokens": 415
+        },
+        {
+          "id": "method-override",
+          "title": "method-override",
+          "description": "This page was generated from the [method-override README](https://github.com/expressjs/method-override).",
+          "tags": [
+            "npm install",
+            "csurf",
+            "req.method",
+            "getter",
+            "X-HTTP-Method-Override",
+            "options.methods",
+            "['POST']",
+            "req.originalMethod",
+            "req",
+            "res"
+          ],
+          "path": "express/method-override.md",
+          "tokens": 1586
+        },
+        {
+          "id": "middleware-html",
+          "title": "middleware.html",
+          "description": "The Express middleware modules listed here are maintained by the [Expressjs team](https://github.com/orgs/expressjs/p...",
+          "tags": [
+            "req.cookies"
+          ],
+          "path": "express/middleware-html.md",
+          "tokens": 605
+        },
+        {
+          "id": "moving-to-express-4",
+          "title": "Moving to Express 4",
+          "description": "Express 4 is a breaking change from Express 3. That means an existing Express 3 app will _not_ work if you update the...",
+          "tags": [
+            "express.static",
+            "npm install --save <module-name>",
+            "require('module-name')",
+            "app.use( ... )",
+            "express.bodyParser",
+            "express.compress",
+            "express.cookieSession",
+            "express.cookieParser",
+            "express.logger",
+            "express.session"
+          ],
+          "path": "express/moving-to-express-4.md",
+          "tokens": 3827
+        },
+        {
+          "id": "moving-to-express-5",
+          "title": "Moving to Express 5",
+          "description": "Express 5 is not very different from Express 4; although it maintains the same basic API, there are still changes tha...",
+          "tags": [
+            "app.del()",
+            "app.delete()",
+            "del",
+            "delete",
+            "app.param(fn)",
+            "app.param(name, fn)",
+            "req.acceptsCharset()",
+            "req.acceptsCharsets()",
+            "req.acceptsEncoding()",
+            "req.acceptsEncodings()"
+          ],
+          "path": "express/moving-to-express-5.md",
+          "tokens": 4811
+        },
+        {
+          "id": "morgan",
+          "title": "morgan",
+          "description": "This page was generated from the [morgan README](https://github.com/expressjs/morgan).",
+          "tags": [
+            "npm install",
+            "format",
+            "options",
+            "tokens",
+            "req",
+            "res",
+            "undefined",
+            "null",
+            "false",
+            "skip(req, res)"
+          ],
+          "path": "express/morgan.md",
+          "tokens": 2861
+        },
+        {
+          "id": "multer-npm-version-https-badgen-net-npm-v-multer-https-npmjs-org-package-multer-npm-downloads-https-badgen-net-npm-dm-multer-https-npmjs-org-package-multer-build-status-https-github-com-expressjs-mult",
+          "title": "Multer [![NPM Version](https://badgen.net/npm/v/multer)](https://npmjs.org/package/multer) [![NPM Downloads](https://badgen.net/npm/dm/multer)](https://npmjs.org/package/multer) [![Build Status](https://github.com/expressjs/multer/actions/workflows/ci.yml/badge.svg)](https://github.com/expressjs/multer/actions/workflows/ci.yml) [![Test Coverage](https://badgen.net/coveralls/c/github/expressjs/multer/main)](https://coveralls.io/r/expressjs/multer?branch=main) [![OpenSSF Scorecard Badge](https://api.scorecard.dev/projects/github.com/expressjs/multer/badge)](https://ossf.github.io/scorecard-visualizer/#/projects/github.com/expressjs/multer)",
+          "description": "This page was generated from the [multer README](https://github.com/expressjs/multer).",
+          "tags": [
+            "multipart/form-data",
+            "body",
+            "file",
+            "files",
+            "request",
+            "enctype=\"multipart/form-data\"",
+            ".none()",
+            "name=\"uploaded_file\"",
+            "name",
+            "fieldname"
+          ],
+          "path": "express/multer-npm-version-https-badgen-net-npm-v-multer-https-npmjs-org-package-multer-npm-downloads-https-badgen-net-npm-dm-multer-https-npmjs-org-package-multer-build-status-https-github-com-expressjs-mult.md",
+          "tokens": 3218
+        },
+        {
+          "id": "overriding-the-express-api",
+          "title": "Overriding the Express API",
+          "description": "The Express API consists of various methods and properties on the request and response objects. These are inherited b...",
+          "tags": [
+            "express.request",
+            "express.response",
+            "app.request",
+            "app.response",
+            "res.sendStatus",
+            "req.baseUrl",
+            "req.originalUrl",
+            "req.secure",
+            "req.ip",
+            "request"
+          ],
+          "path": "express/overriding-the-express-api.md",
+          "tokens": 753
+        },
+        {
+          "id": "express-blog-posts",
+          "title": "Express Blog Posts",
+          "description": "Want to write a post? See the submission [guidelines.](/en/blog/write-post.html)",
+          "tags": [
+            "latest"
+          ],
+          "path": "express/express-blog-posts.md",
+          "tokens": 1538
+        },
+        {
+          "id": "response-time",
+          "title": "response-time",
+          "description": "This page was generated from the [response-time README](https://github.com/expressjs/response-time).",
+          "tags": [
+            "npm install",
+            "X-Response-Time",
+            "responseTime(fn)",
+            "responseTime",
+            "options",
+            "3",
+            "2.300ms",
+            "true",
+            "2.300",
+            "fn"
+          ],
+          "path": "express/response-time.md",
+          "tokens": 894
+        },
+        {
+          "id": "routing",
+          "title": "Routing",
+          "description": "_Routing_ refers to how an application’s endpoints (URIs) respond to client requests. For an introduction to routing,...",
+          "tags": [
+            "app",
+            "app.get()",
+            "app.post",
+            "next",
+            "next()",
+            "express",
+            "GET",
+            "POST",
+            "get",
+            "post"
+          ],
+          "path": "express/routing.md",
+          "tokens": 3122
+        },
+        {
+          "id": "security-updates",
+          "title": "Security updates",
+          "description": "Node.js vulnerabilities directly affect Express. Therefore, [keep a watch on Node.js vulnerabilities](https://nodejs....",
+          "tags": [
+            "path-to-regexp",
+            "cookie",
+            "res.cookie",
+            "res.redirect",
+            "serve-static",
+            "send",
+            "body-parser",
+            "res.location",
+            "qs",
+            "req.query"
+          ],
+          "path": "express/security-updates.md",
+          "tokens": 1640
+        },
+        {
+          "id": "serve-favicon",
+          "title": "serve-favicon",
+          "description": "This page was generated from the [serve-favicon README](https://github.com/expressjs/serve-favicon).",
+          "tags": [
+            "favicon.ico",
+            "ETag",
+            "Content-Type",
+            "GET /favicon.ico",
+            "npm install",
+            "path",
+            "Buffer",
+            "cache-control",
+            "max-age",
+            "ms"
+          ],
+          "path": "express/serve-favicon.md",
+          "tokens": 996
+        },
+        {
+          "id": "serve-index",
+          "title": "serve-index",
+          "description": "This page was generated from the [serve-index README](https://github.com/expressjs/serve-index).",
+          "tags": [
+            "npm install",
+            "path",
+            "req.url",
+            "'/some/dir",
+            "'public'",
+            "'public/some/dir'",
+            "express",
+            "app.use",
+            "false",
+            "filter"
+          ],
+          "path": "express/serve-index.md",
+          "tokens": 1199
+        },
+        {
+          "id": "serve-static",
+          "title": "serve-static",
+          "description": "This page was generated from the [serve-static README](https://github.com/expressjs/serve-static).",
+          "tags": [
+            "npm install",
+            "req.url",
+            "next()",
+            "Accept-Ranges",
+            "Range",
+            "Cache-Control",
+            "immutable",
+            "maxAge",
+            "root",
+            "'allow'"
+          ],
+          "path": "express/serve-static.md",
+          "tokens": 1806
+        },
+        {
+          "id": "express-session",
+          "title": "express-session",
+          "description": "This page was generated from the [session README](https://github.com/expressjs/session).",
+          "tags": [
+            "npm install",
+            "options",
+            "cookie-parser",
+            "req",
+            "res",
+            "secret",
+            "MemoryStore",
+            "express-session",
+            "Domain",
+            "Set-Cookie"
+          ],
+          "path": "express/express-session.md",
+          "tokens": 9971
+        },
+        {
+          "id": "serving-static-files-in-express",
+          "title": "Serving static files in Express",
+          "description": "To serve static files such as images, CSS files, and JavaScript files, use the `express.static` built-in middleware f...",
+          "tags": [
+            "express.static",
+            "root",
+            "options",
+            "public",
+            "/static",
+            "node",
+            "serve-static"
+          ],
+          "path": "express/serving-static-files-in-express.md",
+          "tokens": 671
+        },
+        {
+          "id": "connect-timeout",
+          "title": "connect-timeout",
+          "description": "This page was generated from the [timeout README](https://github.com/expressjs/timeout).",
+          "tags": [
+            "npm install",
+            "app.use(timeout('5s'))",
+            "time",
+            "req",
+            "\"timeout\"",
+            "timeout",
+            "options",
+            "true",
+            "next()",
+            ".timeout"
+          ],
+          "path": "express/connect-timeout.md",
+          "tokens": 1185
+        },
+        {
+          "id": "using-middleware",
+          "title": "Using middleware",
+          "description": "Express is a routing and middleware web framework that has minimal functionality of its own: An Express application i...",
+          "tags": [
+            "req",
+            "res",
+            "next",
+            "next()",
+            "app.use()",
+            "app.METHOD()",
+            "METHOD",
+            "/user/:id",
+            "next('route')",
+            "router.METHOD()"
+          ],
+          "path": "express/using-middleware.md",
+          "tokens": 2394
+        },
+        {
+          "id": "using-template-engines-with-express",
+          "title": "Using template engines with Express",
+          "description": "A _template engine_ enables you to use static template files in your application. At runtime, the template engine rep...",
+          "tags": [
+            "app.js",
+            "views",
+            "app.set('views', './views')",
+            "view engine",
+            "app.set('view engine', 'pug')",
+            "__express(filePath, options, callback)",
+            "res.render()",
+            "index.pug",
+            "view"
+          ],
+          "path": "express/using-template-engines-with-express.md",
+          "tokens": 670
+        },
+        {
+          "id": "utils-html",
+          "title": "utils.html",
+          "description": "The [pillarjs](https://github.com/pillarjs) GitHub organization contains a number of modules for utility functions th...",
+          "tags": [
+            "\\"
+          ],
+          "path": "express/utils-html.md",
+          "tokens": 382
+        },
+        {
+          "id": "vhost",
+          "title": "vhost",
+          "description": "This page was generated from the [vhost README](https://github.com/expressjs/vhost).",
+          "tags": [
+            "handle",
+            "hostname",
+            "handle(req, res, next)",
+            "*",
+            "req.vhost"
+          ],
+          "path": "express/vhost.md",
+          "tokens": 1091
+        },
+        {
+          "id": "how-to-write-a-blog-post",
+          "title": "How to write a blog post",
+          "description": "![Blogger](https://expressjs.com/images/blogger.jpg)",
+          "tags": [
+            "Blog post proposal: <your idea>",
+            "_posts",
+            "YYYY-MM-DD-title.md",
+            "github",
+            "draft"
+          ],
+          "path": "express/how-to-write-a-blog-post.md",
+          "tokens": 657
+        },
+        {
+          "id": "writing-middleware-for-use-in-express-apps",
+          "title": "Writing middleware for use in Express apps",
+          "description": "_Middleware_ functions are functions that have access to the [request object](/en/5x/api.html#req) (`req`), the [resp...",
+          "tags": [
+            "req",
+            "res",
+            "next",
+            "next()",
+            "next(value)",
+            "myLogger",
+            "requestTime",
+            "validateCookies",
+            "app.use()",
+            "cookie-parser"
+          ],
+          "path": "express/writing-middleware-for-use-in-express-apps.md",
+          "tokens": 1879
         }
       ]
     },
