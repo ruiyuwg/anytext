@@ -330,6 +330,14 @@
       "url": "https://nitro.build/llms-full.txt"
     },
     {
+      "id": "kysely",
+      "name": "Kysely",
+      "description": "Type-safe SQL query builder for TypeScript with zero dependencies",
+      "version": "0.27",
+      "adapter": "llms-full",
+      "url": "https://kysely.dev/llms-full.txt"
+    },
+    {
       "id": "azure",
       "name": "Azure",
       "description": "Microsoft Azure cloud platform with compute, storage, databases, AI, and 200+ services",

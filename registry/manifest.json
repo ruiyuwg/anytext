@@ -1,5 +1,5 @@
 {
-  "version": 54,
+  "version": 55,
   "updatedAt": "2026-03-08",
   "libraries": [
     {
@@ -35488,6 +35488,702 @@
           ],
           "path": "hono/jwt-auth-middleware.md",
           "tokens": 811
+        }
+      ]
+    },
+    {
+      "id": "kysely",
+      "name": "Kysely",
+      "description": "Type-safe SQL query builder for TypeScript with zero dependencies",
+      "version": "0.27",
+      "topics": [
+        {
+          "id": "kysely",
+          "title": "Kysely",
+          "description": "Kysely is the most powerful type-safe SQL query builder for TypeScript. Get unparalleled autocompletion and compile-t...",
+          "tags": [],
+          "path": "kysely/kysely.md",
+          "tokens": 3944
+        },
+        {
+          "id": "dialects",
+          "title": "Dialects",
+          "description": "A dialect is the glue between Kysely and the underlying database engine. Check the API docs to learn how to build you...",
+          "tags": [],
+          "path": "kysely/dialects.md",
+          "tokens": 983
+        },
+        {
+          "id": "inserts-updates-and-deletions",
+          "title": "Inserts, updates and deletions",
+          "description": "Some databases like postgres also allow you to run other queries than selects in CTEs. On these databases CTEs are ex...",
+          "tags": [],
+          "path": "kysely/inserts-updates-and-deletions.md",
+          "tokens": 770
+        },
+        {
+          "id": "simple-selects",
+          "title": "Simple selects",
+          "description": "Common table expressions (CTE) are a great way to modularize complex queries. Essentially they allow you to run multi...",
+          "tags": [],
+          "path": "kysely/simple-selects.md",
+          "tokens": 831
+        },
+        {
+          "id": "single-row",
+          "title": "Single row",
+          "description": "Delete a single row:",
+          "tags": [],
+          "path": "kysely/single-row.md",
+          "tokens": 753
+        },
+        {
+          "id": "complex-values",
+          "title": "Complex values",
+          "description": "In addition to primitives, the values can also be arbitrary expressions. You can build the expressions by using a cal...",
+          "tags": [],
+          "path": "kysely/complex-values.md",
+          "tokens": 910
+        },
+        {
+          "id": "insert-subquery",
+          "title": "Insert subquery",
+          "description": "You can create an INSERT INTO SELECT FROM query using the expression method. This API doesn't follow our WYSIWYG prin...",
+          "tags": [
+            "INSERT INTO SELECT FROM",
+            "expression"
+          ],
+          "path": "kysely/insert-subquery.md",
+          "tokens": 894
+        },
+        {
+          "id": "multiple-rows",
+          "title": "Multiple rows",
+          "description": "On dialects that support it (for example PostgreSQL) you can insert multiple rows by providing an array. Note that th...",
+          "tags": [
+            "returning"
+          ],
+          "path": "kysely/multiple-rows.md",
+          "tokens": 893
+        },
+        {
+          "id": "returning-data",
+          "title": "Returning data",
+          "description": "On supported dialects like PostgreSQL you need to chain returning to the query to get the inserted row's columns (or ...",
+          "tags": [
+            "returning",
+            "select"
+          ],
+          "path": "kysely/returning-data.md",
+          "tokens": 885
+        },
+        {
+          "id": "single-row-2",
+          "title": "Single row",
+          "description": "Insert a single row:",
+          "tags": [],
+          "path": "kysely/single-row-2.md",
+          "tokens": 884
+        },
+        {
+          "id": "aliased-inner-join",
+          "title": "Aliased inner join",
+          "description": "You can give an alias for the joined table like this:",
+          "tags": [],
+          "path": "kysely/aliased-inner-join.md",
+          "tokens": 823
+        },
+        {
+          "id": "complex-join",
+          "title": "Complex join",
+          "description": "You can provide a function as the second argument to get a join builder for creating more complex joins. The join bui...",
+          "tags": [
+            "on*",
+            "on",
+            "where",
+            "onRef"
+          ],
+          "path": "kysely/complex-join.md",
+          "tokens": 975
+        },
+        {
+          "id": "simple-inner-join",
+          "title": "Simple inner join",
+          "description": "Simple inner joins can be done by providing a table name and two columns to join:",
+          "tags": [
+            "inner join"
+          ],
+          "path": "kysely/simple-inner-join.md",
+          "tokens": 861
+        },
+        {
+          "id": "subquery-join",
+          "title": "Subquery join",
+          "description": "You can join a subquery by providing two callbacks:",
+          "tags": [],
+          "path": "kysely/subquery-join.md",
+          "tokens": 862
+        },
+        {
+          "id": "source-row-existence",
+          "title": "Source row existence",
+          "description": "Update a target column based on the existence of a source row:",
+          "tags": [],
+          "path": "kysely/source-row-existence.md",
+          "tokens": 1009
+        },
+        {
+          "id": "temporary-changes-table",
+          "title": "Temporary changes table",
+          "description": "Merge new entries from a temporary changes table:",
+          "tags": [],
+          "path": "kysely/temporary-changes-table.md",
+          "tokens": 1062
+        },
+        {
+          "id": "a-single-column",
+          "title": "A single column",
+          "description": "Select a single column:",
+          "tags": [],
+          "path": "kysely/a-single-column.md",
+          "tokens": 777
+        },
+        {
+          "id": "aliases",
+          "title": "Aliases",
+          "description": "You can give an alias for selections and tables by appending as the_alias to the name:",
+          "tags": [
+            "as the_alias"
+          ],
+          "path": "kysely/aliases.md",
+          "tokens": 795
+        },
+        {
+          "id": "all-columns",
+          "title": "All columns",
+          "description": "The selectAll method generates SELECT *:",
+          "tags": [
+            "selectAll",
+            "SELECT *"
+          ],
+          "path": "kysely/all-columns.md",
+          "tokens": 771
+        },
+        {
+          "id": "all-columns-of-a-table",
+          "title": "All columns of a table",
+          "description": "Select all columns of a table:",
+          "tags": [],
+          "path": "kysely/all-columns-of-a-table.md",
+          "tokens": 772
+        },
+        {
+          "id": "column-with-a-table",
+          "title": "Column with a table",
+          "description": "Select a single column and specify a table:",
+          "tags": [],
+          "path": "kysely/column-with-a-table.md",
+          "tokens": 777
+        },
+        {
+          "id": "complex-selections",
+          "title": "Complex selections",
+          "description": "You can select arbitrary expression including subqueries and raw sql snippets. When you do that, you need to give a n...",
+          "tags": [
+            "as"
+          ],
+          "path": "kysely/complex-selections.md",
+          "tokens": 982
+        },
+        {
+          "id": "distinct",
+          "title": "Distinct",
+          "description": "More examples",
+          "tags": [],
+          "path": "kysely/distinct.md",
+          "tokens": 764
+        },
+        {
+          "id": "distinct-on",
+          "title": "Distinct on",
+          "description": "More examples",
+          "tags": [],
+          "path": "kysely/distinct-on.md",
+          "tokens": 789
+        },
+        {
+          "id": "function-calls",
+          "title": "Function calls",
+          "description": "This example shows how to create function calls. These examples also work in any other place (where calls, updates, i...",
+          "tags": [
+            "where",
+            "as",
+            "select"
+          ],
+          "path": "kysely/function-calls.md",
+          "tokens": 1102
+        },
+        {
+          "id": "generic-find-query",
+          "title": "Generic find query",
+          "description": "A generic type-safe helper function for finding a row by a column value:",
+          "tags": [],
+          "path": "kysely/generic-find-query.md",
+          "tokens": 908
+        },
+        {
+          "id": "multiple-columns",
+          "title": "Multiple columns",
+          "description": "Select multiple columns:",
+          "tags": [],
+          "path": "kysely/multiple-columns.md",
+          "tokens": 773
+        },
+        {
+          "id": "nested-array",
+          "title": "Nested array",
+          "description": "While kysely is not an ORM and it doesn't have the concept of relations, we do provide helpers for fetching nested ob...",
+          "tags": [
+            "jsonArrayFrom",
+            "kysely/helpers",
+            "json",
+            "ParseJSONResultsPlugin"
+          ],
+          "path": "kysely/nested-array.md",
+          "tokens": 1001
+        },
+        {
+          "id": "nested-object",
+          "title": "Nested object",
+          "description": "While kysely is not an ORM and it doesn't have the concept of relations, we do provide helpers for fetching nested ob...",
+          "tags": [
+            "jsonObjectFrom",
+            "kysely/helpers",
+            "json",
+            "ParseJSONResultsPlugin"
+          ],
+          "path": "kysely/nested-object.md",
+          "tokens": 1010
+        },
+        {
+          "id": "not-null",
+          "title": "Not null",
+          "description": "Sometimes you can be sure something's not null, but Kysely isn't able to infer it. For example calling where('last_na...",
+          "tags": [
+            "where('last_name', 'is not', null)",
+            "last_name",
+            "$notNull()",
+            "$narrowType"
+          ],
+          "path": "kysely/not-null.md",
+          "tokens": 1068
+        },
+        {
+          "id": "controlled-transaction",
+          "title": "Controlled transaction",
+          "description": "A controlled transaction allows you to commit and rollback manually, execute savepoint commands, and queries in general.",
+          "tags": [],
+          "path": "kysely/controlled-transaction.md",
+          "tokens": 903
+        },
+        {
+          "id": "controlled-transaction-w-savepoints",
+          "title": "Controlled transaction /w savepoints",
+          "description": "A controlled transaction allows you to commit and rollback manually, execute savepoint commands, and queries in general.",
+          "tags": [],
+          "path": "kysely/controlled-transaction-w-savepoints.md",
+          "tokens": 1063
+        },
+        {
+          "id": "simple-transaction",
+          "title": "Simple transaction",
+          "description": "This example inserts two rows in a transaction. If an exception is thrown inside the callback passed to the execute m...",
+          "tags": [
+            "execute"
+          ],
+          "path": "kysely/simple-transaction.md",
+          "tokens": 872
+        },
+        {
+          "id": "complex-values-2",
+          "title": "Complex values",
+          "description": "As always, you can provide a callback to the set method to get access to an expression builder:",
+          "tags": [
+            "set"
+          ],
+          "path": "kysely/complex-values-2.md",
+          "tokens": 822
+        },
+        {
+          "id": "mysql-joins",
+          "title": "MySQL joins",
+          "description": "MySQL allows you to join tables directly to the \"main\" table and update rows of all joined tables. This is possible b...",
+          "tags": [
+            "updateTable",
+            "ON",
+            "WHERE",
+            "set(column, value)",
+            "UpdateQueryBuilder",
+            "innerJoin",
+            "update set from join"
+          ],
+          "path": "kysely/mysql-joins.md",
+          "tokens": 940
+        },
+        {
+          "id": "single-row-3",
+          "title": "Single row",
+          "description": "Update a row in person table:",
+          "tags": [
+            "person"
+          ],
+          "path": "kysely/single-row-3.md",
+          "tokens": 786
+        },
+        {
+          "id": "complex-where-clause",
+          "title": "Complex where clause",
+          "description": "For complex where expressions you can pass in a single callback and use the ExpressionBuilder to build your expression:",
+          "tags": [
+            "where",
+            "ExpressionBuilder"
+          ],
+          "path": "kysely/complex-where-clause.md",
+          "tokens": 851
+        },
+        {
+          "id": "conditional-where-calls",
+          "title": "Conditional where calls",
+          "description": "You can add expressions conditionally like this:",
+          "tags": [],
+          "path": "kysely/conditional-where-calls.md",
+          "tokens": 937
+        },
+        {
+          "id": "object-filter",
+          "title": "Object filter",
+          "description": "You can use the and function to create a simple equality filter using an object",
+          "tags": [
+            "and"
+          ],
+          "path": "kysely/object-filter.md",
+          "tokens": 780
+        },
+        {
+          "id": "or-where",
+          "title": "OR where",
+          "description": "To combine conditions using OR, you can use the expression builder. There are two ways to create OR expressions. Both...",
+          "tags": [
+            "OR"
+          ],
+          "path": "kysely/or-where.md",
+          "tokens": 856
+        },
+        {
+          "id": "simple-where-clause",
+          "title": "Simple where clause",
+          "description": "where method calls are combined with AND:",
+          "tags": [
+            "where",
+            "AND"
+          ],
+          "path": "kysely/simple-where-clause.md",
+          "tokens": 766
+        },
+        {
+          "id": "where-in",
+          "title": "Where in",
+          "description": "Find multiple items using a list of identifiers:",
+          "tags": [],
+          "path": "kysely/where-in.md",
+          "tokens": 754
+        },
+        {
+          "id": "execution-flow",
+          "title": "Execution flow",
+          "description": "The following page gives a simplified overview of Kysely's execution flow, from query building to querying the databa...",
+          "tags": [
+            "App",
+            "QueryBuilder",
+            "selectFrom",
+            "where",
+            "QueryAST",
+            ".execute()",
+            "QueryExecutor",
+            "transformQuery",
+            "Dialect",
+            "QueryCompiler"
+          ],
+          "path": "kysely/execution-flow.md",
+          "tokens": 1273
+        },
+        {
+          "id": "getting-started",
+          "title": "Getting started",
+          "description": "Kysely can be installed using any of the following package managers:",
+          "tags": [
+            "strict",
+            "tsconfig.json",
+            "compilerOptions",
+            "package-lock.json",
+            "pnpm-lock.yaml",
+            "yarn.lock",
+            "deno.json",
+            "Database",
+            "pg",
+            "mysql2"
+          ],
+          "path": "kysely/getting-started.md",
+          "tokens": 3510
+        },
+        {
+          "id": "llms",
+          "title": "LLMs",
+          "description": "Kysely provides LLM-friendly documentation to help AI tools like Cursor, Windsurf, GitHub Copilot, ChatGPT, Claude, a...",
+          "tags": [
+            "llms.txt",
+            "@Docs",
+            "https://kysely.dev/llms-full.txt",
+            "@https://kysely.dev/llms-full.txt",
+            ".windsurfrules"
+          ],
+          "path": "kysely/llms.md",
+          "tokens": 663
+        },
+        {
+          "id": "supabase",
+          "title": "Supabase",
+          "description": "Supabase is an open-source Firebase alternative that provides a suite of tools for building applications. At the core...",
+          "tags": [
+            "supabase",
+            "@supabase/supabase-js",
+            "kysely-supabase",
+            "kysely",
+            "pg",
+            "postgres",
+            "kysely-postgres-js",
+            "pet.name",
+            "pet_name",
+            "with"
+          ],
+          "path": "kysely/supabase.md",
+          "tokens": 1052
+        },
+        {
+          "id": "migrations",
+          "title": "Migrations",
+          "description": "Migration files should look like this:",
+          "tags": [
+            "up",
+            "down",
+            "Kysely<any>",
+            "Kysely<YourDatabase>",
+            "Kysely.schema",
+            "allowUnorderedMigrations"
+          ],
+          "path": "kysely/migrations.md",
+          "tokens": 1876
+        },
+        {
+          "id": "playground",
+          "title": "Playground",
+          "description": "@wirekang has created a playground for Kysely. You can use it to quickly test stuff out and for creating code example...",
+          "tags": [
+            "Kysely",
+            "in ()",
+            "not in ()"
+          ],
+          "path": "kysely/playground.md",
+          "tokens": 1058
+        },
+        {
+          "id": "conditional-selects",
+          "title": "Conditional selects",
+          "description": "Sometimes you may want to select some fields based on a runtime condition. Something like this:",
+          "tags": [
+            "withLastName",
+            "last_name",
+            "{ first_name: string, kind: 'person' }",
+            "kind",
+            "query",
+            "A",
+            "B",
+            "if",
+            "where",
+            "groupBy"
+          ],
+          "path": "kysely/conditional-selects.md",
+          "tokens": 846
+        },
+        {
+          "id": "data-types",
+          "title": "Data types",
+          "description": "When talking about data types in Kysely we need to make a distinction between the two kinds of types:",
+          "tags": [
+            "string",
+            "number",
+            "pg",
+            "mysql2",
+            "CamelCasePlugin",
+            "bigint",
+            "numeric",
+            "tinyint(1)"
+          ],
+          "path": "kysely/data-types.md",
+          "tokens": 956
+        },
+        {
+          "id": "deduplicate-joins",
+          "title": "Deduplicate joins",
+          "description": "When building dynamic queries, you sometimes end up in situations where the same join could be added twice. Consider ...",
+          "tags": [
+            "pet_name",
+            "pet_species",
+            "pet",
+            "withPetName",
+            "withPetSpecies",
+            "false",
+            "true",
+            "DeduplicateJoinsPlugin",
+            "$if"
+          ],
+          "path": "kysely/deduplicate-joins.md",
+          "tokens": 634
+        },
+        {
+          "id": "dealing-with-the-type-instantiation-is-excessively-deep-and-possibly-infinite-error",
+          "title": "Dealing with the Type instantiation is excessively deep and possibly infinite error",
+          "description": "Kysely uses complex type magic to achieve its type safety. This complexity is sometimes too much for TypeScript and y...",
+          "tags": [
+            "with",
+            "TS2589",
+            "$assertType",
+            "Simplify"
+          ],
+          "path": "kysely/dealing-with-the-type-instantiation-is-excessively-deep-and-possibly-infinite-error.md",
+          "tokens": 1066
+        },
+        {
+          "id": "expressions",
+          "title": "Expressions",
+          "description": "An Expression<T> is the basic type-safe query building block in Kysely. Pretty much all methods accept expressions as...",
+          "tags": [
+            "Expression<T>",
+            "a + b",
+            "concat(arg1, ' ', arg2, ...)",
+            "T",
+            "ExpressionBuilder<DB, TB>",
+            "DB",
+            "Kysely",
+            "TB",
+            "ExpressionBuilder<DB, 'person' | 'pet'>",
+            "person"
+          ],
+          "path": "kysely/expressions.md",
+          "tokens": 2256
+        },
+        {
+          "id": "extending-kysely",
+          "title": "Extending kysely",
+          "description": "In many cases, Kysely doesn't provide a built-in type-safe method for a feature. It's often because adding that featu...",
+          "tags": [
+            "Expression<T>",
+            "AliasedExpression<T, A>",
+            "RawBuilder<T>",
+            "AliasedRawBuilder<T, A>",
+            "T",
+            "toOperationNode()",
+            "JSON",
+            "JSONB",
+            "JsonValue",
+            "SELECT"
+          ],
+          "path": "kysely/extending-kysely.md",
+          "tokens": 3139
+        },
+        {
+          "id": "logging",
+          "title": "Logging",
+          "description": "It is possible to set up logs for all queries using the log property when instantiating Kysely.",
+          "tags": [
+            "log",
+            "Kysely",
+            "'query'",
+            "'error'",
+            "LogEvent"
+          ],
+          "path": "kysely/logging.md",
+          "tokens": 582
+        },
+        {
+          "id": "relations",
+          "title": "Relations",
+          "description": "Phew, glad we got that out the way..",
+          "tags": [
+            "json",
+            "pg",
+            "mysql2",
+            "SqliteDialect",
+            "PostgreSQL",
+            "MySQL",
+            "ParseJSONResultsPlugin",
+            "helpers",
+            "$notNull()",
+            "$if"
+          ],
+          "path": "kysely/relations.md",
+          "tokens": 1523
+        },
+        {
+          "id": "reusable-helpers",
+          "title": "Reusable helpers",
+          "description": "Here's a playground link containing all the code in this recipe.",
+          "tags": [
+            "upper",
+            "Expression<T>",
+            "T",
+            "string",
+            "round",
+            "Expression<number>",
+            "Expression",
+            "sql",
+            "SelectQueryBuilder",
+            "where"
+          ],
+          "path": "kysely/reusable-helpers.md",
+          "tokens": 1894
+        },
+        {
+          "id": "working-with-schemas",
+          "title": "Working with schemas",
+          "description": "First of all, when we talk about schemas in this document, we mean custom schemas like postgres schemas.",
+          "tags": [
+            "user",
+            "withSchema",
+            "tenant",
+            "'acme'",
+            "permission",
+            "public",
+            "'public.permission': PermissionTable",
+            "public.permission"
+          ],
+          "path": "kysely/working-with-schemas.md",
+          "tokens": 708
+        },
+        {
+          "id": "splitting-query-building-and-execution",
+          "title": "Splitting query building and execution",
+          "description": "Kysely is primarily a type-safe sql query builder.",
+          "tags": [
+            "DummyDriver",
+            ".compile()",
+            "CompiledQuery",
+            "sql",
+            "QueryResult",
+            ".executeQuery()"
+          ],
+          "path": "kysely/splitting-query-building-and-execution.md",
+          "tokens": 1403
         }
       ]
     },
