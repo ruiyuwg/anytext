@@ -1,0 +1,106 @@
+Context
+
+When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
+
+[Share feedback](https://github.com/docker/docs/issues/23966)
+
+Answers are generated based on the documentation.
+
+Back
+
+[Manuals](https://docs.docker.com/manuals/)
+
+- [Get started](/get-started/)
+- [Guides](/guides/)
+- [Reference](/reference/)
+
+# Use the Docker Desktop CLI
+
+Copy as Markdown
+
+Open Markdown Ask Docs AI Claude Open in Claude
+
+Table of contents
+
+***
+
+Requires: Docker Desktop [4.37](https://docs.docker.com/desktop/release-notes/#4370) and later
+
+The Docker Desktop CLI lets you perform key operations such as starting, stopping, restarting, and updating Docker Desktop directly from the command line.
+
+The Docker Desktop CLI provides:
+
+- Simplified automation for local development: Execute Docker Desktop operations more efficiently in scripts and tests.
+- An improved developer experience: Restart, quit, or reset Docker Desktop from the command line, reducing dependency on the Docker Desktop Dashboard and improving flexibility and efficiency.
+
+## [Usage](#usage)
+
+```console
+docker desktop COMMAND [OPTIONS]
+```
+
+## [Commands](#commands)
+
+Command
+
+Description
+
+`start`
+
+Starts Docker Desktop
+
+`stop`
+
+Stops Docker Desktop
+
+`restart`
+
+Restarts Docker Desktop
+
+`status`
+
+Displays whether Docker Desktop is running or stopped.
+
+`engine ls`
+
+Lists available engines (Windows only)
+
+`engine use`
+
+Switch between Linux and Windows containers (Windows only)
+
+`update`
+
+Manage Docker Desktop updates. Available for Mac only with Docker Desktop version 4.38, or all OSs with Docker Desktop version 4.39 and later.
+
+`logs`
+
+Print log entries
+
+`disable`
+
+Disable a feature
+
+`enable`
+
+Enable a feature
+
+`version`
+
+Show the Docker Desktop CLI plugin version information
+
+`kubernetes`
+
+List Kubernetes images used by Docker Desktop or restart the cluster. Available with Docker Desktop version 4.44 and later.
+
+`diagnose`.
+
+Diagnose Docker Desktop and upload the diagnostics. Available with Docker Desktop 4.60 and later.
+
+For more details on each command, see the [Docker Desktop CLI reference](/reference/cli/docker/desktop/).
+
+[Edit this page](https://github.com/docker/docs/edit/main/content/manuals/desktop/features/desktop-cli.md)
+
+[Request changes](https://github.com/docker/docs/issues/new?template=doc_issue.yml\&location=https%3a%2f%2fdocs.docker.com%2fdesktop%2ffeatures%2fdesktop-cli%2f\&labels=status%2Ftriage)
+
+Table of contents

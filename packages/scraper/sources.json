@@ -416,6 +416,14 @@
       "url": "https://angular.dev/llms.txt"
     },
     {
+      "id": "docker",
+      "name": "Docker",
+      "description": "Container platform with Dockerfile syntax, Compose configuration, and CLI commands",
+      "version": "27",
+      "adapter": "llms-txt",
+      "url": "https://docs.docker.com/llms.txt"
+    },
+    {
       "id": "azure",
       "name": "Azure",
       "description": "Microsoft Azure cloud platform with compute, storage, databases, AI, and 200+ services",

@@ -1,0 +1,155 @@
+Context
+
+When enabled, Gordon considers the current page you're viewing to provide more relevant answers.
+
+[Share feedback](https://github.com/docker/docs/issues/23966)
+
+Answers are generated based on the documentation.
+
+Back
+
+[Manuals](https://docs.docker.com/manuals/)
+
+- [Get started](/get-started/)
+- [Guides](/guides/)
+- [Reference](/reference/)
+
+# Invoke host binaries
+
+Copy as Markdown
+
+Open Markdown Ask Docs AI Claude Open in Claude
+
+Table of contents
+
+***
+
+In some cases, your extension may need to invoke some command from the host. For example, you might want to invoke the CLI of your cloud provider to create a new resource, or the CLI of a tool your extension provides, or even a shell script that you want to run on the host.
+
+You could do that by executing the CLI from a container with the extension SDK. But this CLI needs to access the host's filesystem, which isn't easy nor fast if it runs in a container.
+
+This page describes how to run executables on the host (binaries, shell scripts) that are shipped as part of your extension and deployed to the host. As extensions can run on multiple platforms, this means that you need to ship the executables for all the platforms you want to support.
+
+Learn more about extensions [architecture](https://docs.docker.com/extensions/extensions-sdk/architecture/).
+
+> Note
+>
+> Note that extensions run with user access rights, this API is not restricted to binaries listed in the [host section](https://docs.docker.com/extensions/extensions-sdk/architecture/metadata/#host-section) of the extension metadata (some extensions might install software during user interaction, and invoke newly installed binaries even if not listed in the extension metadata).
+
+In this example, the CLI is a simple `Hello world` script that must be invoked with a parameter and returns a string.
+
+## [Add the executables to the extension](#add-the-executables-to-the-extension)
+
+Mac and Linux Windows
+
+Create a `bash` script for macOS and Linux, in the file `binaries/unix/hello.sh` with the following content:
+
+```bash
+#!/bin/sh
+echo "Hello, $1!"
+```
+
+Create a `batch script` for Windows in another file `binaries/windows/hello.cmd` with the following content:
+
+```bash
+@echo off
+echo "Hello, %1!"
+```
+
+Then update the `Dockerfile` to copy the `binaries` folder into the extension's container filesystem and make the files executable.
+
+```dockerfile
+# Copy the binaries into the right folder
+COPY --chmod=0755 binaries/windows/hello.cmd /windows/hello.cmd
+COPY --chmod=0755 binaries/unix/hello.sh /linux/hello.sh
+COPY --chmod=0755 binaries/unix/hello.sh /darwin/hello.sh
+```
+
+## [Invoke the executable from the UI](#invoke-the-executable-from-the-ui)
+
+In your extension, use the Docker Desktop Client object to [invoke the shell script](https://docs.docker.com/extensions/extensions-sdk/dev/api/backend/#invoke-an-extension-binary-on-the-host) provided by the extension with the `ddClient.extension.host.cli.exec()` function. In this example, the binary returns a string as result, obtained by `result?.stdout`, as soon as the extension view is rendered.
+
+React Vue Angular Svelte
+
+```typescript
+export function App() {
+  const ddClient = createDockerDesktopClient();
+  const [hello, setHello] = useState("");
+
+  useEffect(() => {
+    const run = async () => {
+      let binary = "hello.sh";
+      if (ddClient.host.platform === 'win32') {
+        binary = "hello.cmd";
+      }
+
+      const result = await ddClient.extension.host?.cli.exec(binary, ["world"]);
+      setHello(result?.stdout);
+
+    };
+    run();
+  }, [ddClient]);
+    
+  return (
+    <div>
+      {hello}
+    </div>
+  );
+}
+```
+
+> Important
+>
+> We don't have an example for Vue yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url\&entry.1333218187=Vue) and let us know if you'd like a sample with Vue.
+
+> Important
+>
+> We don't have an example for Angular yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url\&entry.1333218187=Angular) and let us know if you'd like a sample with Angular.
+
+> Important
+>
+> We don't have an example for Svelte yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url\&entry.1333218187=Svelte) and let us know if you'd like a sample with Svelte.
+
+## [Configure the metadata file](#configure-the-metadata-file)
+
+The host binaries must be specified in the `metadata.json` file so that Docker Desktop copies them on to the host when installing the extension. Once the extension is uninstalled, the binaries that were copied are removed as well.
+
+```json
+{
+  "vm": {
+    ...
+  },
+  "ui": {
+    ...
+  },
+  "host": {
+    "binaries": [
+      {
+        "darwin": [
+          {
+            "path": "/darwin/hello.sh"
+          }
+        ],
+        "linux": [
+          {
+            "path": "/linux/hello.sh"
+          }
+        ],
+        "windows": [
+          {
+            "path": "/windows/hello.cmd"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+The `path` must reference the path of the binary inside the container.
+
+[Edit this page](https://github.com/docker/docs/edit/main/content/manuals/extensions/extensions-sdk/guides/invoke-host-binaries.md)
+
+[Request changes](https://github.com/docker/docs/issues/new?template=doc_issue.yml\&location=https%3a%2f%2fdocs.docker.com%2fextensions%2fextensions-sdk%2fguides%2finvoke-host-binaries%2f\&labels=status%2Ftriage)
+
+Table of contents
