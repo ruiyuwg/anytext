@@ -155,6 +155,19 @@
       "version": "1",
       "adapter": "llms-full",
       "url": "https://valibot.dev/llms-full.txt"
+    },
+    {
+      "id": "cloudflare",
+      "name": "Cloudflare",
+      "description": "Cloud platform with CDN, DNS, DDoS protection, Workers serverless computing, and developer tools",
+      "version": "2026",
+      "adapter": "llms-index",
+      "url": "https://developers.cloudflare.com/llms.txt",
+      "topicPrefix": "auto",
+      "llmsIndex": {
+        "servicePattern": "(https://developers\\.cloudflare\\.com/[\\w-]+/llms\\.txt)",
+        "contentType": "llms-txt"
+      }
     }
   ]
 }
