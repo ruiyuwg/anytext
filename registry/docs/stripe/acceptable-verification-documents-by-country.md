@@ -1,0 +1,663 @@
+# Acceptable verification documents by country
+
+Learn which documents Stripe accepts for verification of identity, address, and legal entity.
+
+See the following list of documents that Stripe accepts as proof of identity, address, and entity for each country Stripe supports.
+
+## Common requirements
+
+- Identity documents (including but not limited to passports and driver’s licenses) must be no more than one step removed from the original document:
+  - Document copies and scans must be in PDF format and taken directly from the original document; they can’t be processed, converted, or embedded in other files
+  - A picture of a physical document must be the original, unprocessed picture in JPEG or PNG format
+  - Screenshots aren’t acceptable
+- When the back side of a document contains required information, and you submit it using the API, include an image of the back side using the `document_back` parameter
+- Photos and scans of the Photo IDs must be in color
+- Photos of paper documents must be in color, but scans of paper documents (not Photo IDs) may be black and white
+- Images must not be low-quality
+- Identity and legal entity documents must not be expired
+- Documents must be readable and in a valid upload file format
+- Documents must not be cropped or missing pages with crucial information, and all borders must be visible
+- If the country of residence differs from the country of the account, a passport is required for identity verification
+
+## Select a country to view its requirements
+
+#### Item 1
+
+#### Item 1
+
+Required information:
+
+- Full legal name that matches the name in your settings
+- Date of birth (DOB) that matches what’s in your settings
+- Photo of person (except where exclusions apply)
+
+#### Brazil
+
+Required information:
+
+- Personal Tax ID that matches the one in your Stripe profile
+- Full legal name that matches the name in your settings
+- Date of birth (DOB) that matches what’s in your settings
+- Photo of person (except where exclusions apply)
+
+#### Item 2
+
+Required information:
+
+- Full legal name that matches the name in your settings
+- Personal address that matches the personal address in your settings
+- Document that’s dated within the acceptable range, if specified in the above country section
+
+## Cross Border Verification Requirements
+
+If the country either doesn’t have any address verification documents listed or is missing from [the list of documents](https://docs.stripe.com/acceptable-verification-documents.md?country=US\&document-type=address), we accept the following documents:
+
+- A utility bill (issued within the last 6 months)
+- A bank statement (issued within the last 6 months)
+
+Be aware of the following exceptions:
+
+- For cross border situations where a US person is added to a non-US account, a US driver’s license is an acceptable form of proof of address.
+- Credit card statements are acceptable documents for proof of address for China based owners and directors.
+- For Singapore based Stripe accounts, a CN ID Card is acceptable as proof of Address.
+- A Turkish Resident Certificate is an acceptable form of address verification for Turkey based account representatives.
+
+#### Item 3
+
+Required information:
+
+- Full company legal entity name that matches the legal entity name in your settings
+- Tax ID from the local tax authority that matches what’s in your settings (excluding Canada)
+- Company address that matches what’s in your settings unless specified otherwise.
+
+#### Item 1
+
+#### Item 2
+
+- All documents must be issued or notarized in the last 12 months.
+
+#### Item 4
+
+Required information:
+
+- Account holder name
+- Bank account number
+
+#### Item 5
+
+#### Item 6
+
+#### Item 1
+
+Required information:
+
+- Legal entity name
+- Where applicable, all director, shareholder, and beneficial owner names and positions
+
+#### Singapore
+
+Required information:
+
+- Legal entity name and UEN
+- **Issue date**: All documents must be issued or notarized in the last 12 months.
+- **UBO verification**: All beneficial owner names and positions, and where applicable, ownership amount
+- **Representative authority verification**: Representative name and position; and if using a Letter of Authorization, Authorizer name, position, and identity documents are additionally required.
+
+### Support articles
+
+#### Item 1
+
+- [Passport, ID, or driver’s license upload requirement](https://support.stripe.com/questions/passport-id-or-drivers-license-upload-requirement)
+
+#### Item 2
+
+- [Documents for identity and home address verification](https://support.stripe.com/questions/documents-for-identity-and-home-address-verification)
+
+#### Item 3
+
+- [Update tax ID information from the Dashboard](https://support.stripe.com/questions/update-tax-id-information-from-the-dashboard)
+- [What do I need to do to verify my Stripe account?](https://support.stripe.com/questions/what-do-i-need-to-do-to-verify-my-stripe-account)
+
+#### Item 4
+
+- [Bank account ownership verification](https://support.stripe.com/questions/bank-account-ownership-verification)
+
+#### Item 5
+
+- [Beneficial ownership requirements for nonprofit organizations](https://support.stripe.com/questions/beneficial-ownership-requirements-for-nonprofit-organizations)
+
+#### Item 6
+
+- [Company beneficial ownership and director requirement](https://support.stripe.com/questions/company-beneficial-ownership-and-director-requirement)
+
+#### Default
+
+#### Item 1
+
+#### Item 2
+
+#### Item 3
+
+#### Item 4
+
+#### Item 5
+
+#### Item 6
+
+#### Australia
+
+#### Item 1
+
+**Country-specific:**
+
+- [Documents for identity and home address verification](https://support.stripe.com/questions/documents-for-identity-and-home-address-verification)
+
+#### Item 2
+
+**Country-specific:**
+
+- [Connect address validation](https://support.stripe.com/questions/connect-address-validation)
+
+#### Item 3
+
+#### Item 4
+
+#### Item 5
+
+#### Item 6
+
+#### Austria
+
+#### Item 1
+
+#### Item 2
+
+#### Item 3
+
+**Country-specific:**
+
+- [Documents for business verification of Unincorporated Entities, Partnerships, or Non-profits](https://support.stripe.com/questions/documents-for-business-verification-of-unincorporated-entities-partnerships-or-non-profits)
+
+#### Item 4
+
+#### Item 5
+
+#### Item 6
+
+#### Belgium
+
+#### Item 1
+
+#### Item 2
+
+#### Item 3
+
+**Country-specific:**
+
+- [Documents for business verification of Unincorporated Entities, Partnerships, or Non-profits](https://support.stripe.com/questions/documents-for-business-verification-of-unincorporated-entities-partnerships-or-non-profits)
+
+#### Item 4
+
+#### Item 5
+
+#### Item 6
+
+#### Brazil
+
+#### Item 1
+
+#### Item 2
+
+#### Item 3
+
+**Country-specific:**
+
+- [Accepted documents for verification in Brazil](https://support.stripe.com/questions/accepted-documents-for-verification-in-brazil)
+- [Information needed to open a Stripe account in Brazil](https://support.stripe.com/questions/information-needed-to-open-a-stripe-account-in-brazil)
+- [Updating tax information for Stripe accounts in Brazil](https://support.stripe.com/questions/updating-tax-information-for-stripe-accounts-in-brazil)
+
+#### Item 4
+
+**Country-specific:**
+
+- [Supported bank accounts in Brazil](https://support.stripe.com/questions/supported-bank-accounts-in-brazil)
+
+#### Item 5
+
+#### Item 6
+
+#### Canada
+
+#### Item 1
+
+#### Item 2
+
+**Country-specific:**
+
+- [Connect address validation](https://support.stripe.com/questions/connect-address-validation)
+- [Onboarding Requirements Updates](https://support.stripe.com/user/questions/onboarding-requirements-updates)
+
+#### Item 3
+
+**Country-specific:**
+
+- [Documents for business verification of Unincorporated Entities, Partnerships, or Non-profits](https://support.stripe.com/questions/documents-for-business-verification-of-unincorporated-entities-partnerships-or-non-profits)
+- [Onboarding Requirements Updates](https://support.stripe.com/user/questions/onboarding-requirements-updates)
+- [Social Insurance Number (SIN) / Numéro D’Assurance Sociale (NAS) requirement for Canadian businesses](https://support.stripe.com/questions/social-insurance-number-%28sin%29-num%C3%A9ro-dassurance-sociale-%28nas%29-requirement-for-canadian-businesses)
+- [Types of business and structure guidelines in Canada](https://support.stripe.com/questions/types-of-business-and-structure-guidelines-in-canada)
+- [Verifying registered charity status in Canada](https://support.stripe.com/questions/verifying-registered-charity-status-in-canada)
+
+#### Item 4
+
+**Country-specific:**
+
+- [Canada Bank Verification](https://support.stripe.com/questions/canada-bank-verification)
+- [Onboarding Requirements Updates](https://support.stripe.com/user/questions/onboarding-requirements-updates)
+
+#### Item 5
+
+**Country-specific:**
+
+- [Verifying Registered Charity status in Canada](https://support.stripe.com/questions/verifying-registered-charity-status-in-canada)
+
+#### Item 6
+
+**Country-specific:**
+
+- [Beneficial Ownership Requirements: Canada](https://support.stripe.com/questions/beneficial-ownership-requirements-canada)
+- [Onboarding Requirements Updates](https://support.stripe.com/user/questions/onboarding-requirements-updates)
+
+#### Czech Republic
+
+#### Item 1
+
+#### Item 2
+
+#### Item 3
+
+#### Item 4
+
+#### Item 5
+
+#### Item 6
+
+**Country-specific:**
+
+- [Beneficial Ownership Requirements: Czech Republic, Estonia, and Latvia](https://support.stripe.com/questions/beneficial-ownership-requirements-czech-republic-estonia-and-latvia)
+
+#### Estonia
+
+#### Item 1
+
+#### Item 2
+
+**Country-specific:**
+
+- [Supporting companies that registered in Estonia through e-residency](https://support.stripe.com/questions/supporting-companies-that-registered-in-estonia-through-e-residency)
+
+#### Item 3
+
+#### Item 4
+
+#### Item 5
+
+#### Item 6
+
+**Country-specific:**
+
+- [Beneficial Ownership Requirements: Czech Republic, Estonia, and Latvia](https://support.stripe.com/questions/beneficial-ownership-requirements-czech-republic-estonia-and-latvia)
+
+#### France
+
+#### Item 1
+
+#### Item 2
+
+#### Item 3
+
+**Country-specific:**
+
+- [Documents for business verification of Unincorporated Entities, Partnerships, or Non-profits](https://support.stripe.com/questions/documents-for-business-verification-of-unincorporated-entities-partnerships-or-non-profits)
+- [Stripe availability for outlying territories of supported countries](https://support.stripe.com/questions/stripe-availability-for-outlying-territories-of-supported-countries)
+
+#### Item 4
+
+#### Item 5
+
+#### Item 6
+
+#### Germany
+
+#### Item 1
+
+#### Item 2
+
+#### Item 3
+
+**Country-specific:**
+
+- [Documents for business verification of Unincorporated Entities, Partnerships, or Non-profits](https://support.stripe.com/questions/documents-for-business-verification-of-unincorporated-entities-partnerships-or-non-profits)
+
+#### Item 4
+
+#### Item 5
+
+#### Item 6
+
+#### Hong Kong
+
+#### Item 1
+
+#### Item 2
+
+#### Item 3
+
+**Country-specific:**
+
+- [Requirements for Hong Kong-based businesses](https://support.stripe.com/questions/requirements-for-hong-kong-based-businesses)
+
+#### Item 4
+
+#### Item 5
+
+#### Item 6
+
+#### India
+
+#### Item 1
+
+#### Item 2
+
+#### Item 3
+
+**Country-specific:**
+
+- [Onboarding requirements for Stripe Connect in India](https://support.stripe.com/questions/onboarding-requirements-for-stripe-connect-in-india)
+
+#### Item 4
+
+#### Item 5
+
+#### Item 6
+
+#### Indonesia
+
+#### Item 1
+
+#### Item 2
+
+#### Item 3
+
+**Country-specific:**
+
+- [Requirements to open a Stripe account in Indonesia](https://support.stripe.com/questions/requirements-to-open-a-stripe-account-in-indonesia)
+
+#### Item 4
+
+#### Item 5
+
+#### Item 6
+
+#### Ireland
+
+#### Item 1
+
+#### Item 2
+
+#### Item 3
+
+#### Item 4
+
+#### Item 5
+
+#### Item 6
+
+**Country-specific:**
+
+- [Beneficial Ownership Requirements: Ireland](https://support.stripe.com/questions/beneficial-ownership-requirements-ireland)
+- [Irish-registered businesses: how to collect Beneficial Ownership Information from the Register of Beneficial Ownership (RBO)](https://support.stripe.com/questions/irish-registered-businesses-how-to-collect-beneficial-ownership-information-from-the-register-of-beneficial-ownership-%28rbo%29)
+
+#### Italy
+
+#### Item 1
+
+#### Item 2
+
+#### Item 3
+
+**Country-specific:**
+
+- [Documents for business verification of Unincorporated Entities, Partnerships, or Non-profits](https://support.stripe.com/questions/documents-for-business-verification-of-unincorporated-entities-partnerships-or-non-profits)
+
+#### Item 4
+
+#### Item 5
+
+#### Item 6
+
+#### Latvia
+
+#### Item 1
+
+#### Item 2
+
+#### Item 3
+
+#### Item 4
+
+#### Item 5
+
+#### Item 6
+
+**Country-specific:**
+
+- [Beneficial Ownership Requirements: Czech Republic, Estonia, and Latvia](https://support.stripe.com/questions/beneficial-ownership-requirements-czech-republic-estonia-and-latvia)
+
+#### Mexico
+
+#### Item 1
+
+#### Item 2
+
+#### Item 3
+
+**Country-specific:**
+
+- [Accounts from Mexico: Update your tax information](https://support.stripe.com/questions/accounts-from-mexico-update-your-tax-information)
+
+#### Item 4
+
+#### Item 5
+
+#### Item 6
+
+#### Netherlands
+
+#### Item 1
+
+**Country-specific:**
+
+- [Documents for identity and home address verification](https://support.stripe.com/questions/documents-for-identity-and-home-address-verification)
+
+#### Item 2
+
+#### Item 3
+
+#### Item 4
+
+#### Item 5
+
+#### Item 6
+
+#### Portugal
+
+#### Item 1
+
+#### Item 2
+
+#### Item 3
+
+**Country-specific:**
+
+- [Documents for business verification of Unincorporated Entities, Partnerships, or Non-profits](https://support.stripe.com/questions/documents-for-business-verification-of-unincorporated-entities-partnerships-or-non-profits)
+
+#### Item 4
+
+#### Item 5
+
+#### Item 6
+
+#### Singapore
+
+#### Item 1
+
+**Country-specific:**
+
+- [2025 updates to Singapore verification requirements](https://support.stripe.com/questions/2025-updates-to-singapore-verification-requirements)
+- [Singapore verification requirements for Custom connected accounts](https://support.stripe.com/questions/singapore-verification-requirements-for-custom-connected-accounts-faq)
+- [Singapore verification requirements for Standard and Express platforms](https://support.stripe.com/questions/singapore-verification-requirements-for-platforms-updates-and-faq)
+- [Enhanced identity verification for Singapore-based accounts](https://support.stripe.com/questions/enhanced-identity-verification-for-singapore-based-accounts)
+
+#### Item 2
+
+#### Item 3
+
+**Country-specific:**
+
+- [2025 updates to Singapore verification requirements](https://support.stripe.com/questions/2025-updates-to-singapore-verification-requirements)
+- [Singapore verification requirements for Custom connected accounts](https://support.stripe.com/questions/singapore-verification-requirements-for-custom-connected-accounts-faq)
+
+#### Item 4
+
+#### Item 5
+
+#### Item 6
+
+**Country-specific:**
+
+- [2025 updates to Singapore verification requirements](https://support.stripe.com/questions/2025-updates-to-singapore-verification-requirements)
+- [Ultimate Beneficial Ownership Requirements: Singapore](https://support.stripe.com/questions/singapore-ultimate-beneficial-ownership-and-director-requirements)
+- [Representative Authority Verification](https://support.stripe.com/questions/representative-authority-verification)
+
+#### Thailand
+
+#### Item 1
+
+**Country-specific:**
+
+- [What documents are accepted to verify my account in Thailand?](https://support.stripe.com/questions/what-documents-are-accepted-to-verify-my-account-in-thailand)
+
+#### Item 2
+
+#### Item 3
+
+**Country-specific:**
+
+- [What documents are accepted to verify my account in Thailand?](https://support.stripe.com/questions/what-documents-are-accepted-to-verify-my-account-in-thailand)
+- [Why is Stripe requesting evidence of licensing for my business in Thailand?](https://support.stripe.com/questions/why-is-stripe-requesting-evidence-of-licensing-for-my-business-in-thailand)
+
+#### Item 4
+
+#### Item 5
+
+#### Item 6
+
+#### United Arab Emirates
+
+#### Item 1
+
+**Country-specific:**
+
+- [Continuous Verification in the UAE](https://support.stripe.com/questions/continuous-verification-in-the-uae)
+- [Owner verification in the UAE](https://support.stripe.com/questions/owner-verification-in-the-uae)
+- [Troubleshooting UAE Verification Issues](https://support.stripe.com/questions/troubleshooting-uae-verification-issues)
+- [Using the API to upload UAE verification documents](https://support.stripe.com/questions/using-the-api-to-upload-uae-verification-documents)
+
+#### Item 2
+
+#### Item 3
+
+**Country-specific:**
+
+- [Continuous Verification in the UAE](https://support.stripe.com/questions/continuous-verification-in-the-uae)
+- [Troubleshooting UAE Verification Issues](https://support.stripe.com/questions/troubleshooting-uae-verification-issues)
+- [Using the API to upload UAE verification documents](https://support.stripe.com/questions/using-the-api-to-upload-uae-verification-documents)
+- [Verification of businesses in the UAE](https://support.stripe.com/questions/verification-of-businesses-in-the-uae)
+
+#### Item 4
+
+**Country-specific:**
+
+- [Supported banks in the UAE](https://support.stripe.com/questions/supported-banks-in-the-uae)
+
+#### Item 5
+
+#### Item 6
+
+**Country-specific:**
+
+- [Beneficial Ownership Verification for Holding Companies](https://support.stripe.com/questions/beneficial-ownership-verification-for-holding-companies)
+
+#### United Kingdom
+
+#### Item 1
+
+#### Item 2
+
+#### Item 3
+
+#### Item 4
+
+#### Item 5
+
+#### Item 6
+
+**Country-specific:**
+
+- [Beneficial ownership requirements](https://support.stripe.com/questions/beneficial-ownership-requirements-united-kingdom)
+
+#### United States
+
+#### Item 1
+
+**Country-specific:**
+
+- [Verification after name has changed](https://support.stripe.com/questions/verification-after-name-has-changed)
+- [“Verify your tax information” error messages](https://support.stripe.com/questions/verify-your-tax-information-error-messages)
+
+#### Item 2
+
+**Country-specific:**
+
+- [Connect address validation](https://support.stripe.com/questions/connect-address-validation)
+
+#### Item 3
+
+**Country-specific:**
+
+- [2023/2024 US verification requirements updates for Standard and Express Platforms: FAQs](https://support.stripe.com/questions/2023-2024-us-verification-requirements-updates-for-standard-and-express-platforms-faqs)
+- [2024 updates to US verification requirements FAQ](https://support.stripe.com/questions/2024-updates-to-us-verification-requirements-faq)
+- [How to check your EIN status with the IRS](https://support.stripe.com/questions/how-to-check-your-ein-status-with-the-irs)
+- [Newly-issued US tax ID number (TIN) not verifying](https://support.stripe.com/questions/newly-issued-us-tax-id-number-%28tin%29-not-verifying)
+- [Signing up for a US Stripe account without a tax ID or employer ID number](https://support.stripe.com/questions/signing-up-for-a-us-stripe-account-without-a-tax-id-or-employer-id-number)
+- [Tax ID Number (TIN) format is different than Stripe’s suggested TIN format in the dashboard](https://support.stripe.com/questions/tax-id-number-\(tin\)-format-is-different-than-stripe-s-suggested-tin-format-in-the-dashboard)
+- [Tax information to submit when signing up for Stripe as a US-based nonprofit or tax-exempt organization](https://support.stripe.com/questions/tax-information-to-submit-when-signing-up-for-stripe-as-a-us-based-nonprofit-or-tax-exempt-organization)
+- [“This combination of tax ID and legal name was not recognized by the IRS” error when entering tax ID for verification](https://support.stripe.com/questions/this-combination-of-tax-id-and-legal-name-was-not-recognized-by-the-irs-error-when-entering-tax-id-for-verification)
+- [Using IRS documentation as reference when entering business name and tax ID number (TIN) for US-based businesses](https://support.stripe.com/questions/using-irs-documentation-as-reference-when-entering-business-name-and-tax-id-number-%28tin%29-for-us-based-businesses)
+- [“Verify your tax information” error messages](https://support.stripe.com/questions/verify-your-tax-information-error-messages)
+
+#### Item 4
+
+#### Item 5
+
+#### Item 6
+
+**Country-specific:**
+
+- [Beneficial Ownership Requirements: United States](https://support.stripe.com/questions/beneficial-ownership-requirements-united-states)
+
+## Upload your verification documents
+
+Due to the sensitive nature of your verification documents, Stripe can only accept documents that are uploaded through the Dashboard. Don’t send documents by email.
+
+In the [Dashboard](https://dashboard.stripe.com/dashboard), banners direct you to the correct location to upload any required documents.

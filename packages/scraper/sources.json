@@ -392,6 +392,14 @@
       }
     },
     {
+      "id": "stripe",
+      "name": "Stripe",
+      "description": "Payment processing platform with APIs for charges, subscriptions, checkout, and webhooks",
+      "version": "2025",
+      "adapter": "llms-txt",
+      "url": "https://docs.stripe.com/llms.txt"
+    },
+    {
       "id": "azure",
       "name": "Azure",
       "description": "Microsoft Azure cloud platform with compute, storage, databases, AI, and 200+ services",
