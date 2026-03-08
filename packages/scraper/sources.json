@@ -282,6 +282,14 @@
       "url": "https://elysiajs.com/llms-full.txt"
     },
     {
+      "id": "react-native",
+      "name": "React Native",
+      "description": "Framework for building native mobile apps using React and JavaScript",
+      "version": "0.76",
+      "adapter": "llms-full",
+      "url": "https://reactnative.dev/llms-full.txt"
+    },
+    {
       "id": "azure",
       "name": "Azure",
       "description": "Microsoft Azure cloud platform with compute, storage, databases, AI, and 200+ services",

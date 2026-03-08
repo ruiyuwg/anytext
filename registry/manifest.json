@@ -1,5 +1,5 @@
 {
-  "version": 48,
+  "version": 49,
   "updatedAt": "2026-03-08",
   "libraries": [
     {
@@ -69810,6 +69810,1664 @@
           ],
           "path": "react/purecomponent.md",
           "tokens": 1444
+        }
+      ]
+    },
+    {
+      "id": "react-native",
+      "name": "React Native",
+      "description": "Framework for building native mobile apps using React and JavaScript",
+      "version": "0.76",
+      "topics": [
+        {
+          "id": "react-native-learn-once-write-anywhere",
+          "title": "React Native · Learn once, write anywhere",
+          "description": "This helpful guide lays out the prerequisites for learning React Native, using these docs, and setting up your enviro...",
+          "tags": [
+            "component, which has the same props as"
+          ],
+          "path": "react-native/react-native-learn-once-write-anywhere.md",
+          "tokens": 10704
+        },
+        {
+          "id": "legacy",
+          "title": "legacy",
+          "description": "It is sometimes necessary to make changes directly to a component without using state/props to trigger a re-render of...",
+          "tags": [],
+          "path": "react-native/legacy.md",
+          "tokens": 7381
+        },
+        {
+          "id": "the-new-architecture",
+          "title": "the-new-architecture",
+          "description": "This document contains a set of advanced topics to implement more complex functionalities of Native Components. It is...",
+          "tags": [
+            ", android.view"
+          ],
+          "path": "react-native/the-new-architecture.md",
+          "tokens": 4186
+        },
+        {
+          "id": "architecture",
+          "title": "architecture",
+          "description": "This page gives an overview of how Hermes and React Native are built.",
+          "tags": [],
+          "path": "react-native/architecture.md",
+          "tokens": 1063
+        },
+        {
+          "id": "contributing",
+          "title": "contributing",
+          "description": "The changelog entry in your pull request serves as a sort of \"tl;dr do they affect Android? are these breaking change...",
+          "tags": [],
+          "path": "react-native/contributing.md",
+          "tokens": 1163
+        },
+        {
+          "id": "blog",
+          "title": "blog",
+          "description": "February 24, 2026 ·",
+          "tags": [],
+          "path": "react-native/blog.md",
+          "tokens": 1769
+        },
+        {
+          "id": "first-class-support-for-typescript",
+          "title": "First-class Support for TypeScript",
+          "description": "January 3, 2023 ·",
+          "tags": [
+            "App.tsx",
+            "App.js",
+            "tsconfig.json",
+            "@types/react-native",
+            "devDependency",
+            "peerDependency",
+            "peerDependenciesMeta",
+            ".flowconfig",
+            "flow-bin",
+            "react-native-template-typescript"
+          ],
+          "path": "react-native/first-class-support-for-typescript.md",
+          "tokens": 2265
+        },
+        {
+          "id": "react-native-0-71-typescript-by-default-flexbox-gap-and-more",
+          "title": "React Native 0.71: TypeScript by Default, Flexbox Gap, and more...",
+          "description": "January 12, 2023 ·",
+          "tags": [
+            "tsconfig.json",
+            "react-native",
+            "@types/react-native",
+            "devDependencies",
+            "margin: 10",
+            "gap: 10",
+            "src",
+            "source",
+            "aria-label",
+            "aria-labelledby"
+          ],
+          "path": "react-native/react-native-0-71-typescript-by-default-flexbox-gap-and-more.md",
+          "tokens": 4995
+        },
+        {
+          "id": "react-native-0-71-rc0-android-outage-postmortem",
+          "title": "React Native 0.71-RC0 Android outage postmortem",
+          "description": "January 27, 2023 ·",
+          "tags": [
+            "0.71.0-rc0",
+            "0.68.0",
+            "build.gradle",
+            "+",
+            "0.71",
+            "0.71.0-rc.0",
+            "0.63.x",
+            "create-react-native-library"
+          ],
+          "path": "react-native/react-native-0-71-rc0-android-outage-postmortem.md",
+          "tokens": 2737
+        },
+        {
+          "id": "react-native-0-72-symlink-support-better-errors-and-more",
+          "title": "React Native 0.72 - Symlink Support, Better Errors, and more",
+          "description": "June 21, 2023 ·",
+          "tags": [
+            "\"main\"",
+            "metro.config.js",
+            "resolver.unstable_enableSymlinks",
+            "resolver.unstable_enablePackageExports",
+            "metro get-dependencies",
+            "init",
+            "run-android",
+            "run-ios",
+            "prototype.at",
+            "Promise.any()"
+          ],
+          "path": "react-native/react-native-0-72-symlink-support-better-errors-and-more.md",
+          "tokens": 3464
+        },
+        {
+          "id": "package-exports-support-in-react-native",
+          "title": "Package Exports Support in React Native",
+          "description": "June 21, 2023 ·",
+          "tags": [
+            "package.json",
+            "\"exports\"",
+            "\"main\"",
+            "@storybook/addon-actions",
+            "\"node\"",
+            "\"browser\"",
+            "\"react-native\"",
+            "resolver.unstable_enablePackageExports",
+            "unstable_conditionNames",
+            "['require', 'import', 'react-native']"
+          ],
+          "path": "react-native/package-exports-support-in-react-native.md",
+          "tokens": 3964
+        },
+        {
+          "id": "react-native-0-73-debugging-improvements-stable-symlink-support-and-more",
+          "title": "React Native 0.73 - Debugging Improvements, Stable Symlink Support, and more",
+          "description": "December 6, 2023 ·",
+          "tags": [
+            "console.log()",
+            "watchFolders",
+            "npx react-native init",
+            "react-native",
+            "MainActivity.kt",
+            "MainApplication.kt",
+            ".java",
+            ".kt",
+            "Code > Convert Java file to Kotlin File",
+            "Cmd ⌘"
+          ],
+          "path": "react-native/react-native-0-73-debugging-improvements-stable-symlink-support-and-more.md",
+          "tokens": 4909
+        },
+        {
+          "id": "react-native-0-74-yoga-3-0-bridgeless-new-architecture-and-more",
+          "title": "React Native 0.74 - Yoga 3.0, Bridgeless New Architecture, and more",
+          "description": "April 22, 2024 ·",
+          "tags": [
+            "onLayout",
+            "PropTypes",
+            "PushNotificationIOS"
+          ],
+          "path": "react-native/react-native-0-74-yoga-3-0-bridgeless-new-architecture-and-more.md",
+          "tokens": 613
+        },
+        {
+          "id": "yoga-3-0",
+          "title": "Yoga 3.0​",
+          "description": "React Native 0.74 includes Yoga 3.0, the newest version of our layout engine. Yoga 3.0 improves layout by making styl...",
+          "tags": [
+            "left",
+            "right",
+            "start",
+            "end",
+            "margin",
+            "padding",
+            "border",
+            "row-reverse",
+            "getScheduledLocalNotifications",
+            "getDeliveredNotifications"
+          ],
+          "path": "react-native/yoga-3-0.md",
+          "tokens": 69033
+        },
+        {
+          "id": "if-you-are-running-the-app-on-a-physical-device",
+          "title": "If you are running the app on a physical device",
+          "description": "add-dsym /ios/Pods/React-Core-prebuilt/React.xcframework/ios-arm64/React.framework/dSYMs/React.framework.dSYM",
+          "tags": [
+            "targetRect"
+          ],
+          "path": "react-native/if-you-are-running-the-app-on-a-physical-device.md",
+          "tokens": 21223
+        },
+        {
+          "id": "resolve-react-native-pods-rb-with-node-to-allow-for-hoisting",
+          "title": "Resolve react_native_pods.rb with node to allow for hoisting",
+          "description": "require Pod::Executable.execute_command('node', ['-p',\n'require.resolve(",
+          "tags": [
+            "android.view.ViewGroup",
+            "<View>",
+            "android.widget.TextView",
+            "<Text>",
+            "UIView",
+            "NSLayoutManager",
+            "createView",
+            "updateView",
+            "removeView",
+            "deleteView"
+          ],
+          "path": "react-native/resolve-react-native-pods-rb-with-node-to-allow-for-hoisting.md",
+          "tokens": 4779
+        },
+        {
+          "id": "threading-model",
+          "title": "Threading Model",
+          "description": "This document refers to the New Architecture, that is in active roll-out.",
+          "tags": [],
+          "path": "react-native/threading-model.md",
+          "tokens": 887
+        },
+        {
+          "id": "view-flattening",
+          "title": "View Flattening",
+          "description": "This document refers to the New Architecture, that is in active roll-out.",
+          "tags": [
+            "TitleComponent",
+            "ContainerComponent",
+            "margin",
+            "10 px",
+            "padding",
+            "backgroundColor",
+            "opacity"
+          ],
+          "path": "react-native/view-flattening.md",
+          "tokens": 852
+        },
+        {
+          "id": "cross-platform-implementation",
+          "title": "Cross Platform Implementation",
+          "description": "This document refers to the New Architecture, that is in active roll-out.",
+          "tags": [
+            "Text",
+            "TextInput",
+            "ReadableMap",
+            "ByteBuffer",
+            "onLayout",
+            "onKeyPress"
+          ],
+          "path": "react-native/cross-platform-implementation.md",
+          "tokens": 751
+        },
+        {
+          "id": "communities",
+          "title": "Communities",
+          "description": "The React Native ecosystem is far and wide, and people can be part of it in many forms; here you will find but a part...",
+          "tags": [],
+          "path": "react-native/communities.md",
+          "tokens": 796
+        },
+        {
+          "id": "staying-up-to-date",
+          "title": "Staying up to date",
+          "description": "Twitter is one of the main communication channels used by the team to communicate updates, news and request for parti...",
+          "tags": [],
+          "path": "react-native/staying-up-to-date.md",
+          "tokens": 1925
+        },
+        {
+          "id": "bots-reference",
+          "title": "Bots Reference",
+          "description": "This pull request linter bot performs basic sanity checks whenever a pull request is created. It might leave a commen...",
+          "tags": [
+            "main",
+            "dangerfile.js",
+            "analyze_code.sh",
+            ".github/workflows/on-issue-labeled.yml",
+            ".github/workflows",
+            "hramos/react-native-bot"
+          ],
+          "path": "react-native/bots-reference.md",
+          "tokens": 570
+        },
+        {
+          "id": "changelogs-in-pull-requests",
+          "title": "Changelogs in Pull Requests",
+          "description": "The changelog entry in your pull request serves as a sort of \"tl;dr:\" for your changes: do they affect Android? are t...",
+          "tags": [
+            "@rnx-kit/rn-changelog-generator"
+          ],
+          "path": "react-native/changelogs-in-pull-requests.md",
+          "tokens": 1045
+        },
+        {
+          "id": "how-to-build-from-source",
+          "title": "How to Build from Source",
+          "description": "You will need to build React Native from source if you want to work on a new feature/bug fix, try out the latest feat...",
+          "tags": [
+            "android/settings.gradle",
+            "react-native",
+            "~/.gradle/init.gradle"
+          ],
+          "path": "react-native/how-to-build-from-source.md",
+          "tokens": 899
+        },
+        {
+          "id": "how-to-contribute-code",
+          "title": "How to Contribute Code",
+          "description": "Thank you for your interest in contributing to React Native! From commenting on and triaging issues, to reviewing and...",
+          "tags": [
+            "Good first issues",
+            "Help wanted",
+            "yarn",
+            "yarn start",
+            "yarn lint",
+            "yarn format",
+            "yarn test",
+            "yarn test --watch",
+            "yarn test <pattern>",
+            "yarn flow"
+          ],
+          "path": "react-native/how-to-contribute-code.md",
+          "tokens": 1646
+        },
+        {
+          "id": "how-to-open-a-pull-request",
+          "title": "How to Open a Pull Request",
+          "description": "These instructions provide the step-by-step process to set up your machine to make contributions to the core React Na...",
+          "tags": [
+            "git",
+            "react-native",
+            "origin",
+            "fork",
+            "react-native-codegen",
+            "react-native.code-workspace",
+            ".idea",
+            "yarn run prettier",
+            "yarn run lint",
+            "git status"
+          ],
+          "path": "react-native/how-to-open-a-pull-request.md",
+          "tokens": 2168
+        },
+        {
+          "id": "how-to-report-a-bug",
+          "title": "How to Report a Bug",
+          "description": "Reporting a bug for React Native is one of the best way to start contributing to the project. We use GitHub issues as...",
+          "tags": [
+            "npx @react-native-community/cli info",
+            "react-native",
+            "RNTesterPlayground.js",
+            "main"
+          ],
+          "path": "react-native/how-to-report-a-bug.md",
+          "tokens": 1300
+        },
+        {
+          "id": "how-to-run-and-write-tests",
+          "title": "How to Run and Write Tests",
+          "description": "This section is about testing your changes to React Native as a contributor. If you haven't yet, go through the steps...",
+          "tags": [
+            "packages/rn-tester",
+            "yarn",
+            "RNTester/RNTesterPods.xcworkspace",
+            "Command + U",
+            "Product",
+            "Test",
+            "Command + 6",
+            "objc-test.sh",
+            "Podfile",
+            "__test__"
+          ],
+          "path": "react-native/how-to-run-and-write-tests.md",
+          "tokens": 2321
+        },
+        {
+          "id": "labeling-github-issues",
+          "title": "Labeling GitHub Issues",
+          "description": "Most of our labels have a prefix that provides a hint of their purpose.",
+          "tags": [
+            "p:",
+            "DX:",
+            "Tool:",
+            "Resolution:",
+            "Type:",
+            "Platform:",
+            "Needs: Issue Template",
+            "Needs: Environment Info",
+            "Needs: Verify on Latest Version",
+            "Needs: Repro"
+          ],
+          "path": "react-native/labeling-github-issues.md",
+          "tokens": 642
+        },
+        {
+          "id": "managing-pull-requests",
+          "title": "Managing Pull Requests",
+          "description": "Reviewing a pull request can take a considerable amount of time. In some cases, the review might require more time to...",
+          "tags": [
+            "main",
+            "Merged",
+            "Blocked on FB"
+          ],
+          "path": "react-native/managing-pull-requests.md",
+          "tokens": 1862
+        },
+        {
+          "id": "contributing-overview",
+          "title": "Contributing Overview",
+          "description": "Thank you for your interest in contributing to React Native! From commenting on and triaging issues, to reviewing and...",
+          "tags": [
+            "react-native-website"
+          ],
+          "path": "react-native/contributing-overview.md",
+          "tokens": 2290
+        },
+        {
+          "id": "triaging-github-issues",
+          "title": "Triaging GitHub Issues",
+          "description": "Start out by looking at issues that need triage, as identified by the \"Needs: Triage\" label.",
+          "tags": [],
+          "path": "react-native/triaging-github-issues.md",
+          "tokens": 1072
+        },
+        {
+          "id": "accessibility",
+          "title": "Accessibility",
+          "description": "Both Android and iOS provide APIs for integrating apps with assistive technologies like the bundled screen readers Vo...",
+          "tags": [
+            "accessible",
+            "true",
+            "focusable",
+            "isAccessibilityElement",
+            "accessibilityLabel",
+            "accessibilityLabelledBy",
+            "nativeID",
+            "accessibilityHint",
+            "accessibilityLanguage",
+            "accessibilityIgnoresInvertColors"
+          ],
+          "path": "react-native/accessibility.md",
+          "tokens": 8384
+        },
+        {
+          "id": "reference",
+          "title": "Reference",
+          "description": "Add an event handler. Supported events:",
+          "tags": [
+            "addEventListener()",
+            "accessibilityServiceChanged",
+            "true",
+            "false",
+            "announcementFinished",
+            "announcement",
+            "success",
+            "boldTextChanged",
+            "grayscaleChanged",
+            "invertColorsChanged"
+          ],
+          "path": "react-native/reference.md",
+          "tokens": 2670
+        },
+        {
+          "id": "reference-2",
+          "title": "Reference",
+          "description": "Display an iOS action sheet. The options object must contain one or more of:",
+          "tags": [
+            "showActionSheetWithOptions()",
+            "options",
+            "cancelButtonIndex",
+            "cancelButtonTintColor",
+            "destructiveButtonIndex",
+            "title",
+            "message",
+            "anchor",
+            "tintColor",
+            "disabledButtonIndices"
+          ],
+          "path": "react-native/reference-2.md",
+          "tokens": 1610
+        },
+        {
+          "id": "reference-3",
+          "title": "Reference",
+          "description": "Parameters:",
+          "tags": [
+            "alert()",
+            "null",
+            "prompt()",
+            "(text: string) => void",
+            "'default'",
+            "'cancel'",
+            "'destructive'",
+            "'plain-text'",
+            "'secure-text'",
+            "'login-password'"
+          ],
+          "path": "react-native/reference-3.md",
+          "tokens": 1773
+        },
+        {
+          "id": "animated",
+          "title": "Animated",
+          "description": "The Animated library is designed to make animations fluid, powerful, and painless to build and maintain. Animated foc...",
+          "tags": [
+            "Animated",
+            "start",
+            "stop",
+            "Animated.Value",
+            "Animated.timing()",
+            "useRef",
+            "current",
+            "View",
+            "fadeAnim",
+            "Animated.Value()"
+          ],
+          "path": "react-native/animated.md",
+          "tokens": 1771
+        },
+        {
+          "id": "reference-4",
+          "title": "Reference",
+          "description": "When the given value is a ValueXY instead of a Value, each config option may be a vector of the form {x: ..., y: ...}...",
+          "tags": [
+            "{x: ..., y: ...}",
+            "decay()",
+            "velocity",
+            "deceleration",
+            "isInteraction",
+            "InteractionManager",
+            "useNativeDriver",
+            "timing()",
+            "Easing",
+            "duration"
+          ],
+          "path": "react-native/reference-4.md",
+          "tokens": 3045
+        },
+        {
+          "id": "reference-5",
+          "title": "Reference",
+          "description": "Directly set the value. This will stop any animations running on the value and update all the bound properties.",
+          "tags": [
+            "setValue()",
+            "setOffset()",
+            "setValue",
+            "Animated.event",
+            "flattenOffset()",
+            "extractOffset()",
+            "addListener()",
+            "value",
+            "removeListener()",
+            "id"
+          ],
+          "path": "react-native/reference-5.md",
+          "tokens": 1357
+        },
+        {
+          "id": "reference-6",
+          "title": "Reference",
+          "description": "Directly set the value. This will stop any animations running on the value and update all the bound properties.",
+          "tags": [
+            "setValue()",
+            "{x: number; y: number}",
+            "setOffset()",
+            "setValue",
+            "Animated.event",
+            "flattenOffset()",
+            "extractOffset()",
+            "addListener()",
+            "value",
+            "removeListener()"
+          ],
+          "path": "react-native/reference-6.md",
+          "tokens": 1155
+        },
+        {
+          "id": "animations",
+          "title": "Animations",
+          "description": "Animations are very important to create a great user experience. Stationary objects must overcome inertia as they sta...",
+          "tags": [
+            "Animated",
+            "LayoutAnimation",
+            "start",
+            "stop",
+            "View",
+            "Text",
+            "Image",
+            "ScrollView",
+            "FlatList",
+            "SectionList"
+          ],
+          "path": "react-native/animations.md",
+          "tokens": 4857
+        },
+        {
+          "id": "app-extensions",
+          "title": "App Extensions",
+          "description": "App extensions let you provide custom functionality and content outside of your main app. There are different types o...",
+          "tags": [],
+          "path": "react-native/app-extensions.md",
+          "tokens": 740
+        },
+        {
+          "id": "appearance",
+          "title": "Appearance",
+          "description": "The Appearance module exposes information about the user's appearance preferences, such as their preferred color sche...",
+          "tags": [
+            "Appearance",
+            "prefers-color-scheme",
+            "useColorScheme",
+            "StyleSheet",
+            "getColorScheme()",
+            "setColorScheme",
+            "'light'",
+            "'dark'",
+            "null",
+            "light"
+          ],
+          "path": "react-native/appearance.md",
+          "tokens": 973
+        },
+        {
+          "id": "appendix",
+          "title": "Appendix",
+          "description": "You may use the following table as a reference for which types are supported and what they map to in each platform:",
+          "tags": [
+            "string",
+            "?string",
+            "string \\| null",
+            "NSString",
+            "boolean",
+            "?boolean",
+            "boolean \\| null",
+            "Boolean",
+            "NSNumber",
+            "{\\| foo: string, ...\\|}"
+          ],
+          "path": "react-native/appendix.md",
+          "tokens": 1391
+        },
+        {
+          "id": "reference-7",
+          "title": "Reference",
+          "description": "Returns an array of strings.",
+          "tags": [
+            "getAppKeys()",
+            "getRegistry()",
+            "getRunnable()",
+            "getSectionKeys()",
+            "getSections()",
+            "registerCancellableHeadlessTask()",
+            "registerComponent()",
+            "registerConfig()",
+            "registerHeadlessTask()",
+            "registerRunnable()"
+          ],
+          "path": "react-native/reference-7.md",
+          "tokens": 3563
+        },
+        {
+          "id": "backhandler",
+          "title": "BackHandler",
+          "description": "The Backhandler API detects hardware button presses for back navigation, lets you register event listeners for the sy...",
+          "tags": [
+            "Modal",
+            "BackHandler",
+            "BackHandler.addEventListener",
+            "NativeEventSubscription",
+            "NativeEventSubscription.remove",
+            "useBackHandler",
+            "addEventListener()",
+            "exitApp()"
+          ],
+          "path": "react-native/backhandler.md",
+          "tokens": 713
+        },
+        {
+          "id": "boxshadowvalue-object-type",
+          "title": "BoxShadowValue Object Type",
+          "description": "The BoxShadowValue object is taken by the boxShadow style prop. It is comprised of 2-4 lengths, an optional color, an...",
+          "tags": [
+            "BoxShadowValue",
+            "boxShadow",
+            "inset",
+            "offsetX",
+            "offsetY",
+            "blurRadius",
+            "spreadDistance",
+            "color",
+            "black"
+          ],
+          "path": "react-native/boxshadowvalue-object-type.md",
+          "tokens": 589
+        },
+        {
+          "id": "speeding-up-your-build-phase",
+          "title": "Speeding up your Build phase",
+          "description": "Building your React Native app could be expensive and take several minutes of developers time. This can be problemati...",
+          "tags": [
+            "armeabi-v7a",
+            "arm64-v8a",
+            "x86",
+            "x86_64",
+            "--active-arch-only",
+            "run-android",
+            "info Detected architectures arm64-v8a",
+            "reactNativeArchitectures",
+            "gradle.properties",
+            "yarn android"
+          ],
+          "path": "react-native/speeding-up-your-build-phase.md",
+          "tokens": 2709
+        },
+        {
+          "id": "reference-8",
+          "title": "Reference",
+          "description": "Handler to be called when the user taps the button.",
+          "tags": [
+            "onPress",
+            "({nativeEvent: PressEvent})",
+            "title",
+            "accessibilityLabel",
+            "accessibilityLanguage",
+            "accessibilityActions",
+            "onAccessibilityAction",
+            "color",
+            "'#2196F3'",
+            "'#007AFF'"
+          ],
+          "path": "react-native/reference-8.md",
+          "tokens": 1290
+        },
+        {
+          "id": "color-reference",
+          "title": "Color Reference",
+          "description": "Components in React Native are styled using JavaScript. Color properties usually match how CSS works on the web. Gene...",
+          "tags": [
+            "rgb()",
+            "rgba()",
+            "'#f0f'",
+            "'#ff00ff'",
+            "'#f0ff'",
+            "'#ff00ff00'",
+            "'rgb(255, 0, 255)'",
+            "'rgb(255 0 255)'",
+            "'rgba(255, 0, 255, 1.0)'",
+            "'rgba(255 0 255 / 1.0)'"
+          ],
+          "path": "react-native/color-reference.md",
+          "tokens": 1581
+        },
+        {
+          "id": "communication-between-native-and-react-native",
+          "title": "Communication between native and React Native",
+          "description": "In Integrating with Existing Apps guide and Native UI Components guide we learn how to embed React Native in a native...",
+          "tags": [
+            "ReactActivityDelegate",
+            "getLaunchOptions",
+            "Bundle",
+            "ReactRootView",
+            "appProperties",
+            "componentWillUpdateProps",
+            "componentDidMount",
+            "@ReactProp",
+            "reactTag"
+          ],
+          "path": "react-native/communication-between-native-and-react-native.md",
+          "tokens": 2275
+        },
+        {
+          "id": "communication-between-native-and-react-native-2",
+          "title": "Communication between native and React Native",
+          "description": "In Integrating with Existing Apps guide and Native UI Components guide we learn how to embed React Native in a native...",
+          "tags": [
+            "RCTRootView",
+            "UIView",
+            "initialProperties",
+            "NSDictionary",
+            "appProperties",
+            "RCT_CUSTOM_VIEW_PROPERTY",
+            "reactTag",
+            "RCTUIManager",
+            "ScrollView",
+            "RCTRootViewSizeFlexibilityNone"
+          ],
+          "path": "react-native/communication-between-native-and-react-native-2.md",
+          "tokens": 3954
+        },
+        {
+          "id": "core-components-and-apis",
+          "title": "Core Components and APIs",
+          "description": "React Native provides a number of built-in Core Components ready for you to use in your app. You can find them all in...",
+          "tags": [
+            "ScrollView",
+            "FlatList",
+            "DrawerLayout"
+          ],
+          "path": "react-native/core-components-and-apis.md",
+          "tokens": 1318
+        },
+        {
+          "id": "debugging-basics",
+          "title": "Debugging Basics",
+          "description": "Debugging features, such as the Dev Menu, LogBox, and React Native DevTools are disabled in release (production) builds.",
+          "tags": [
+            "Ctrl",
+            "Cmd ⌘",
+            "Z",
+            "M",
+            "adb shell input keyevent 82",
+            "j",
+            "LogBox",
+            "LogBox.ignoreAllLogs()",
+            "LogBox.ignoreLogs()",
+            "LogBoxData.setWarningFilter()"
+          ],
+          "path": "react-native/debugging-basics.md",
+          "tokens": 1192
+        },
+        {
+          "id": "debugging-native-code",
+          "title": "Debugging Native Code",
+          "description": "The following section only applies to projects with native code exposed. If you are using the managed Expo workflow, ...",
+          "tags": [
+            "Log",
+            "YourModuleName",
+            "NSLog"
+          ],
+          "path": "react-native/debugging-native-code.md",
+          "tokens": 679
+        },
+        {
+          "id": "debugging-release-builds",
+          "title": "Debugging Release Builds",
+          "description": "If a React Native app throws an unhandled exception in a release build, the output may be obfuscated and hard to read.",
+          "tags": [
+            "p@1:132161",
+            "AwesomeProject/App.js:54:initializeMap",
+            "metro-symbolicate",
+            "hermesFlags",
+            "android/app/build.gradle",
+            "SOURCEMAP_FILE",
+            "DevSettings",
+            "addMenuItem()",
+            "reload()",
+            "useWindowDimensions"
+          ],
+          "path": "react-native/debugging-release-builds.md",
+          "tokens": 1508
+        },
+        {
+          "id": "reference-9",
+          "title": "Reference",
+          "description": "Add an event handler. Supported events:",
+          "tags": [
+            "addEventListener()",
+            "change",
+            "Dimensions",
+            "DimensionsValue",
+            "get()",
+            "runApplication",
+            "set",
+            "window"
+          ],
+          "path": "react-native/reference-9.md",
+          "tokens": 532
+        },
+        {
+          "id": "document-nodes",
+          "title": "Document nodes",
+          "description": "Document nodes represent a complete native view tree. Apps using native navigation would provide a separate document ...",
+          "tags": [
+            "Document",
+            "childElementCount",
+            "children",
+            "documentElement",
+            "firstElementChild",
+            "lastElementChild",
+            "getElementById()",
+            "Node",
+            "childNodes",
+            "firstChild"
+          ],
+          "path": "react-native/document-nodes.md",
+          "tokens": 815
+        },
+        {
+          "id": "reference-10",
+          "title": "Reference",
+          "description": "Inherits View Props.",
+          "tags": [
+            "drawerBackgroundColor",
+            "white",
+            "drawerLockMode",
+            "openDrawer",
+            "closeDrawer",
+            "drawerPosition",
+            "left",
+            "drawerWidth",
+            "keyboardDismissMode",
+            "onDrawerClose"
+          ],
+          "path": "react-native/reference-10.md",
+          "tokens": 2500
+        },
+        {
+          "id": "reference-11",
+          "title": "Reference",
+          "description": "A stepping function, returns 1 for any positive value of n.",
+          "tags": [
+            "step0()",
+            "n",
+            "step1()",
+            "linear()",
+            "f(t) = t",
+            "ease()",
+            "quad()",
+            "f(t) = t * t",
+            "cubic()",
+            "f(t) = t * t * t"
+          ],
+          "path": "react-native/reference-11.md",
+          "tokens": 862
+        },
+        {
+          "id": "element-nodes",
+          "title": "Element nodes",
+          "description": "Element nodes represent native components in the native view tree (similar to Element nodes on Web).",
+          "tags": [
+            "ScrollView",
+            "getNativeScrollRef()",
+            "getInnerViewRef()",
+            "HTMLElement",
+            "offsetHeight",
+            "offsetLeft",
+            "offsetParent",
+            "offsetTop",
+            "offsetWidth",
+            "blur()"
+          ],
+          "path": "react-native/element-nodes.md",
+          "tokens": 1609
+        },
+        {
+          "id": "get-started-with-react-native",
+          "title": "Get Started with React Native",
+          "description": "React Native allows developers who know React to create native apps. At the same time, native developers can use Reac...",
+          "tags": [],
+          "path": "react-native/get-started-with-react-native.md",
+          "tokens": 793
+        },
+        {
+          "id": "fabric-native-modules-android",
+          "title": "Fabric Native Modules: Android",
+          "description": "Now it's time to write some Android platform code to be able to render the web view. The steps you need to follow are:",
+          "tags": [
+            "ReactWebView",
+            "ReactWebViewManager",
+            "ReactWebViewPackage",
+            "ViewManager",
+            "ReactWebView.java",
+            "ReactWebView.kt",
+            "android/src/main/java/com/webview",
+            "WebView",
+            "configureComponent",
+            "WebClient"
+          ],
+          "path": "react-native/fabric-native-modules-android.md",
+          "tokens": 4468
+        },
+        {
+          "id": "native-components",
+          "title": "Native Components",
+          "description": "If you want to build new React Native Components that wrap around a Host Component like a unique kind of CheckBox on ...",
+          "tags": [
+            "WebView",
+            "WKWebView",
+            "android/app/src/main/java/com/webview",
+            "ios",
+            "specs",
+            "<MODULE_NAME>NativeComponent.{ts|js}",
+            "NativeComponent",
+            "WebViewScriptLoadedEvent",
+            "NativeProps",
+            "codegenNativeComponent"
+          ],
+          "path": "react-native/native-components.md",
+          "tokens": 8206
+        },
+        {
+          "id": "fabric-native-components-ios",
+          "title": "Fabric Native Components: iOS",
+          "description": "Now it's time to write some iOS platform code to be able to render the web view. The steps you need to follow are:",
+          "tags": [
+            "RCTWebView",
+            "New Group",
+            "WebView",
+            "New",
+            "File from Template",
+            "Objective-C File",
+            "RCTWebView.h",
+            "RCTWebView.m",
+            "RCTWebView.mm",
+            "RCTViewComponentView"
+          ],
+          "path": "react-native/fabric-native-components-ios.md",
+          "tokens": 1833
+        },
+        {
+          "id": "fast-refresh",
+          "title": "Fast Refresh",
+          "description": "Fast Refresh is a React Native feature that allows you to get near-instant feedback for changes in your React compone...",
+          "tags": [
+            "Button.js",
+            "Modal.js",
+            "Theme.js",
+            "Style.create",
+            "StyleSheet.create",
+            "createNavigationContainer(MyScreen)",
+            "// @refresh reset",
+            "useState",
+            "useRef",
+            "useEffect"
+          ],
+          "path": "react-native/fast-refresh.md",
+          "tokens": 1309
+        },
+        {
+          "id": "flatlist",
+          "title": "FlatList",
+          "description": "A performant interface for rendering basic, flat lists, supporting the most handy features:",
+          "tags": [
+            "<SectionList>",
+            "numColumns",
+            "flexWrap",
+            "extraData={selectedId}",
+            "FlatList",
+            "PureComponent",
+            "keyExtractor",
+            "id",
+            "key",
+            "<VirtualizedList>"
+          ],
+          "path": "react-native/flatlist.md",
+          "tokens": 602
+        },
+        {
+          "id": "reference-12",
+          "title": "Reference",
+          "description": "Inherits VirtualizedList Props.",
+          "tags": [
+            "renderItem",
+            "data",
+            "index",
+            "separators.updateProps",
+            "highlight",
+            "unhighlight",
+            "highlighted: boolean",
+            "item",
+            "separators",
+            "updateProps"
+          ],
+          "path": "react-native/reference-12.md",
+          "tokens": 3933
+        },
+        {
+          "id": "layout-with-flexbox",
+          "title": "Layout with Flexbox",
+          "description": "A component can specify the layout of its children using the Flexbox algorithm. Flexbox is designed to provide a cons...",
+          "tags": [
+            "flexDirection",
+            "alignItems",
+            "justifyContent",
+            "column",
+            "row",
+            "alignContent",
+            "flex-start",
+            "stretch",
+            "flexShrink",
+            "0"
+          ],
+          "path": "react-native/layout-with-flexbox.md",
+          "tokens": 3624
+        },
+        {
+          "id": "gesture-responder-system",
+          "title": "Gesture Responder System",
+          "description": "The gesture responder system manages the lifecycle of gestures in your app. A touch can go through several phases as ...",
+          "tags": [
+            "Touchable",
+            "TouchableHighlight",
+            "View.props.onResponderGrant: evt => {}",
+            "View.props.onResponderReject: evt => {}",
+            "View.props.onResponderMove: evt => {}",
+            "onResponderTerminationRequest",
+            "evt",
+            "nativeEvent",
+            "changedTouches",
+            "identifier"
+          ],
+          "path": "react-native/gesture-responder-system.md",
+          "tokens": 1256
+        },
+        {
+          "id": "introduction",
+          "title": "Introduction",
+          "description": "Welcome to the very start of your React Native journey! If you're looking for getting started instructions, they've m...",
+          "tags": [],
+          "path": "react-native/introduction.md",
+          "tokens": 839
+        },
+        {
+          "id": "get-started-without-a-framework",
+          "title": "Get Started Without a Framework",
+          "description": "Platform support",
+          "tags": [
+            "react-native-cli",
+            "cd ios",
+            "ios",
+            "bundle install",
+            "bundle exec pod install",
+            "--version",
+            "--template",
+            "App.tsx",
+            "R",
+            "Reload"
+          ],
+          "path": "react-native/get-started-without-a-framework.md",
+          "tokens": 1736
+        },
+        {
+          "id": "console",
+          "title": "console",
+          "description": "🚧 This page is work in progress, so please refer to the MDN documentation for more information.",
+          "tags": [
+            "console",
+            "timeStamp()",
+            "console.timeStamp",
+            "string",
+            "string \\| number",
+            "performance.now()",
+            "DevToolsColor",
+            "EventCounts",
+            "fetch",
+            "File"
+          ],
+          "path": "react-native/console.md",
+          "tokens": 1440
+        },
+        {
+          "id": "reference-13",
+          "title": "Reference",
+          "description": "See documentation in MDN.",
+          "tags": [
+            "IntersectionObserver()",
+            "IntersectionObserver",
+            "threshold",
+            "rnRootThreshold",
+            "callback",
+            "entries",
+            "IntersectionObserverEntry",
+            "observer",
+            "options",
+            "root"
+          ],
+          "path": "react-native/reference-13.md",
+          "tokens": 1561
+        },
+        {
+          "id": "reference-14",
+          "title": "Reference",
+          "description": "See documentation in MDN.",
+          "tags": [
+            "boundingClientRect",
+            "DOMRectReadOnly",
+            "intersectionRatio",
+            "intersectionRect",
+            "isIntersecting",
+            "true",
+            "IntersectionObserverEntry",
+            "false",
+            "rnRootIntersectionRatio",
+            "rootBounds"
+          ],
+          "path": "react-native/reference-14.md",
+          "tokens": 793
+        },
+        {
+          "id": "reference-15",
+          "title": "Reference",
+          "description": "See documentation in MDN.",
+          "tags": [
+            "eventCounts",
+            "memory",
+            "rnStartupTiming",
+            "ReactNativeStartupTiming",
+            "startTime",
+            "executeJavaScriptBundleEntryPointStart",
+            "endTime",
+            "timeOrigin",
+            "clearMarks()",
+            "clearMeasures()"
+          ],
+          "path": "react-native/reference-15.md",
+          "tokens": 2911
+        },
+        {
+          "id": "handling-touches",
+          "title": "Handling Touches",
+          "description": "Users interact with mobile apps mainly through touch. They can use a combination of gestures, such as tapping on a bu...",
+          "tags": [
+            "Button",
+            "onLongPress"
+          ],
+          "path": "react-native/handling-touches.md",
+          "tokens": 902
+        },
+        {
+          "id": "headless-js",
+          "title": "Headless JS",
+          "description": "Headless JS is a way to run tasks in JavaScript while your app is in the background. It can be used, for example, to ...",
+          "tags": [
+            "AppRegistry",
+            "SomeTaskName.js",
+            "HeadlessJsTaskService",
+            "getTaskConfig",
+            "AndroidManifest.xml",
+            "application",
+            "HeadlessJsRetryPolicy",
+            "Error",
+            "LinearCountingRetryPolicy",
+            "HeadlessJsTaskConfig"
+          ],
+          "path": "react-native/headless-js.md",
+          "tokens": 3783
+        },
+        {
+          "id": "using-hermes",
+          "title": "Using Hermes",
+          "description": "Hermes is an open-source JavaScript engine optimized for React Native. For many apps, using Hermes will result in imp...",
+          "tags": [
+            "HermesInternal",
+            ".hbc",
+            "I18nManager",
+            "isRTL"
+          ],
+          "path": "react-native/using-hermes.md",
+          "tokens": 841
+        },
+        {
+          "id": "reference-16",
+          "title": "Reference",
+          "description": "A boolean value indicating whether the app is currently in RTL layout mode.",
+          "tags": [
+            "isRTL",
+            "forceRTL",
+            "true",
+            "allowRTL",
+            "false",
+            "knownRegions = (...)",
+            "AndroidManifest.xml",
+            "android:supportsRTL=\"true\"",
+            "<application>",
+            "doLeftAndRightSwapInRTL"
+          ],
+          "path": "react-native/reference-16.md",
+          "tokens": 1125
+        },
+        {
+          "id": "reference-17",
+          "title": "Reference",
+          "description": "Inherits View Props.",
+          "tags": [
+            "accessible",
+            "false",
+            "accessibilityLabel",
+            "alt",
+            "blurRadius",
+            "5",
+            "capInsets",
+            "crossOrigin",
+            "anonymous",
+            "use-credentials"
+          ],
+          "path": "react-native/reference-17.md",
+          "tokens": 6048
+        },
+        {
+          "id": "reference-18",
+          "title": "Reference",
+          "description": "The property defines whether or not the back face of a rotated image should be visible.",
+          "tags": [
+            "backfaceVisibility",
+            "'visible'",
+            "'hidden'",
+            "backgroundColor",
+            "borderBottomLeftRadius",
+            "borderBottomRightRadius",
+            "borderColor",
+            "borderRadius",
+            "borderTopLeftRadius",
+            "borderTopRightRadius"
+          ],
+          "path": "react-native/reference-18.md",
+          "tokens": 1578
+        },
+        {
+          "id": "images",
+          "title": "Images",
+          "description": "React Native provides a unified way of managing images and other media assets in your Android and iOS apps. To add a ...",
+          "tags": [
+            "my-icon.png",
+            "@2x",
+            "@3x",
+            "button.js",
+            "check@2x.png",
+            "check@3x.png",
+            "require",
+            "{width: undefined, height: undefined}",
+            ".mp3",
+            ".wav"
+          ],
+          "path": "react-native/images.md",
+          "tokens": 4011
+        },
+        {
+          "id": "improving-user-experience",
+          "title": "Improving User Experience",
+          "description": "Entering text on touch phone is a challenge - small screen, software keyboard. But based on what kind of data you nee...",
+          "tags": [
+            "TextInput",
+            "KeyboardAvoidingView",
+            "padding",
+            "minWidth",
+            "minHeight",
+            "hitSlop",
+            "TouchableNativeFeedback",
+            "Dimensions",
+            "'android:screenOrientation=\"portrait\"'",
+            "'android:screenOrientation=\"landscape\"'"
+          ],
+          "path": "react-native/improving-user-experience.md",
+          "tokens": 1290
+        },
+        {
+          "id": "integration-with-an-android-fragment",
+          "title": "Integration with an Android Fragment",
+          "description": "The guide for Integration with Existing Apps details how to integrate a full-screen React Native app into an existing...",
+          "tags": [
+            "FrameLayout",
+            "<FrameLayout>",
+            "main_activity.xml",
+            "res/layouts",
+            "DefaultHardwareBackBtnHandler",
+            "ReactActivity",
+            "Activity.onBackPressed()",
+            "sample_button",
+            "onCreate",
+            "ReactFragment.Builder()"
+          ],
+          "path": "react-native/integration-with-an-android-fragment.md",
+          "tokens": 2676
+        },
+        {
+          "id": "3-adding-react-native-to-your-app",
+          "title": "3. Adding React Native to your app​",
+          "description": "React Native uses the React Native Gradle Plugin to configure your dependencies and project setup.",
+          "tags": [
+            "settings.gradle",
+            "build.gradle",
+            "app",
+            "gradle.properties",
+            "AndroidManifest.xml"
+          ],
+          "path": "react-native/3-adding-react-native-to-your-app.md",
+          "tokens": 1093
+        },
+        {
+          "id": "4-writing-the-typescript-code",
+          "title": "4. Writing the TypeScript Code​",
+          "description": "Now we will actually modify the native Android application to integrate React Native.",
+          "tags": [
+            "index.js",
+            "import",
+            "App.tsx"
+          ],
+          "path": "react-native/4-writing-the-typescript-code.md",
+          "tokens": 812
+        },
+        {
+          "id": "5-integrating-with-your-android-code",
+          "title": "5. Integrating with your Android code​",
+          "description": "We now need to add some native code in order to start the React Native runtime and tell it to render our React compon...",
+          "tags": [
+            "Application",
+            "MainApplication.kt",
+            "ReactActivity",
+            "Activity",
+            "MainActivity.kt",
+            "AndroidManifest.xml",
+            "MyReactActivity",
+            "Theme.AppCompat.Light.NoActionBar"
+          ],
+          "path": "react-native/5-integrating-with-your-android-code.md",
+          "tokens": 1604
+        },
+        {
+          "id": "6-test-your-integration",
+          "title": "6. Test your integration​",
+          "description": "You have completed all the basic steps to integrate React Native with your application. Now we will start the Metro b...",
+          "tags": [
+            "localhost",
+            "metro.config.js",
+            "RCTRootView",
+            "UIViewController",
+            "Podfile",
+            "/ios",
+            "package.json",
+            "node_modules",
+            "node_modules/",
+            ".gitignore"
+          ],
+          "path": "react-native/6-test-your-integration.md",
+          "tokens": 1429
+        },
+        {
+          "id": "4-adding-react-native-to-your-app",
+          "title": "4. Adding React Native to your app​",
+          "description": "To configure CocoaPods, we need two files:",
+          "tags": [
+            "ios"
+          ],
+          "path": "react-native/4-adding-react-native-to-your-app.md",
+          "tokens": 538
+        },
+        {
+          "id": "5-writing-the-typescript-code",
+          "title": "5. Writing the TypeScript Code​",
+          "description": "Now we will actually modify the native iOS application to integrate React Native.",
+          "tags": [
+            "index.js",
+            "import",
+            "App.tsx"
+          ],
+          "path": "react-native/5-writing-the-typescript-code.md",
+          "tokens": 810
+        },
+        {
+          "id": "5-integrating-with-your-ios-code",
+          "title": "5. Integrating with your iOS code​",
+          "description": "We now need to add some native code in order to start the React Native runtime and tell it to render our React compon...",
+          "tags": [
+            "RCTReactNativeFactory",
+            "UIWindow",
+            "UIView",
+            "UIViewController.",
+            "view",
+            "⌘",
+            "N",
+            "UIViewController",
+            "ReactViewController.m",
+            "ReactViewController.swift"
+          ],
+          "path": "react-native/5-integrating-with-your-ios-code.md",
+          "tokens": 1917
+        },
+        {
+          "id": "integration-with-existing-apps-6-test-your-integration",
+          "title": "6. Test your integration​",
+          "description": "You have completed all the basic steps to integrate React Native with your application. Now we will start the Metro b...",
+          "tags": [
+            "localhost",
+            "metro.config.js",
+            ".watchmanconfig",
+            "Build Phases",
+            "+",
+            "New Run Script Phase",
+            "Run Script",
+            "Bundle React Native code and images",
+            "[CP] Embed Pods Frameworks"
+          ],
+          "path": "react-native/integration-with-existing-apps-6-test-your-integration.md",
+          "tokens": 629
+        },
+        {
+          "id": "7-passing-initial-props-to-the-react-native-view",
+          "title": "7. Passing initial props to the React Native view​",
+          "description": "In some case, you'd like to pass some information from the Native app to JavaScript. For example, you might want to p...",
+          "tags": [
+            "initialProperties",
+            "view(withModuleName:initialProperty)",
+            "RCTReactNativeFactory",
+            "App.tsx",
+            "RCTreactNativeFactory",
+            "ReactViewController.mm",
+            "ReactViewController.swift",
+            "ReactViewController"
+          ],
+          "path": "react-native/7-passing-initial-props-to-the-react-native-view.md",
+          "tokens": 1173
+        },
+        {
+          "id": "interactionmanager",
+          "title": "🗑️ InteractionManager",
+          "description": "Avoid long-running work and use requestIdleCallback instead.",
+          "tags": [
+            "requestIdleCallback",
+            "requestAnimationFrame()",
+            "setImmediate/setTimeout()",
+            "runAfterInteractions()",
+            "runAfterInteractions",
+            "PromiseTask",
+            "gen",
+            "Promise",
+            "setImmediate",
+            "setDeadline"
+          ],
+          "path": "react-native/interactionmanager.md",
+          "tokens": 871
+        },
+        {
+          "id": "react-fundamentals",
+          "title": "React Fundamentals",
+          "description": "React Native runs on React, a popular open source library for building user interfaces with JavaScript. To make the m...",
+          "tags": [
+            "Cat",
+            "import",
+            "Text",
+            "<Text>",
+            "export default",
+            "return",
+            "<Text>Hello, I am your cat!</Text>",
+            "name",
+            "{getFullName(\"Rum\", \"Tum\", \"Tugger\")}",
+            "import React from 'react'"
+          ],
+          "path": "react-native/react-fundamentals.md",
+          "tokens": 2472
+        },
+        {
+          "id": "core-components-and-native-components",
+          "title": "Core Components and Native Components",
+          "description": "React Native is an open source framework for building Android and iOS applications using React and the app platform’s...",
+          "tags": [
+            "<View>",
+            "<ViewGroup>",
+            "<UIView>",
+            "<div>",
+            "<Text>",
+            "<TextView>",
+            "<UITextView>",
+            "<p>",
+            "<Image>",
+            "<ImageView>"
+          ],
+          "path": "react-native/core-components-and-native-components.md",
+          "tokens": 1467
+        },
+        {
+          "id": "javascript-syntax-transformers",
+          "title": "JavaScript Syntax Transformers​",
+          "description": "Syntax transformers make writing code more enjoyable by allowing you to use new JavaScript syntax without having to w...",
+          "tags": [
+            "View",
+            "onCreate",
+            "onPause",
+            "onResume",
+            "onDestroy",
+            "region.latitude",
+            "Created a new event with id ${eventId}",
+            "Error found! ${error}",
+            "event id ${eventId} returned"
+          ],
+          "path": "react-native/javascript-syntax-transformers.md",
+          "tokens": 47145
+        },
+        {
+          "id": "ios-app",
+          "title": "iOS app",
+          "description": "yarn example ios",
+          "tags": [
+            "DoNotInlineHere.js"
+          ],
+          "path": "react-native/ios-app.md",
+          "tokens": 83269
+        },
+        {
+          "id": "navigate-to-the-folder",
+          "title": "Navigate to the folder",
+          "description": "open /opt/homebrew/Caskroom/zulu@17/ # or /usr/local/Caskroom/zulu@17/",
+          "tags": [],
+          "path": "react-native/navigate-to-the-folder.md",
+          "tokens": 59979
+        },
+        {
+          "id": "define-where-cmake-can-find-the-additional-header-files-we-need-to-crawl-back-the-jni-main-src-app-android-folders",
+          "title": "Define where CMake can find the additional header files. We need to crawl back the jni, main, src, app, android folders",
+          "description": "target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ../../../../../shared)",
+          "tags": [
+            "NativeCxxModuleExample"
+          ],
+          "path": "react-native/define-where-cmake-can-find-the-additional-header-files-we-need-to-crawl-back-the-jni-main-src-app-android-folders.md",
+          "tokens": 2217
+        },
+        {
+          "id": "from-the-ios-folder",
+          "title": "from the ios folder",
+          "description": "bundle exec pod install\nopen SampleApp.xcworkspace",
+          "tags": [
+            "runAfterInteractions"
+          ],
+          "path": "react-native/from-the-ios-folder.md",
+          "tokens": 24928
+        },
+        {
+          "id": "from-the-ios-folder-2",
+          "title": "from the ios folder",
+          "description": "bundle exec pod install\nopen SampleApp.xcworkspace",
+          "tags": [],
+          "path": "react-native/from-the-ios-folder-2.md",
+          "tokens": 1227
+        },
+        {
+          "id": "from-the-ios-folder-3",
+          "title": "from the ios folder",
+          "description": "bundle exec pod install\nopen SampleApp.xcworkspace",
+          "tags": [],
+          "path": "react-native/from-the-ios-folder-3.md",
+          "tokens": 4587
+        },
+        {
+          "id": "version-and-react-version-are-the-release-versions-showing-in-the-diff",
+          "title": "{{VERSION}} and {{REACT_VERSION}} are the release versions showing in the diff",
+          "description": "yarn add react-native@{{VERSION}}\nyarn add react@{{REACT_VERSION}}",
+          "tags": [],
+          "path": "react-native/version-and-react-version-are-the-release-versions-showing-in-the-diff.md",
+          "tokens": 21089
         }
       ]
     },
