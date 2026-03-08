@@ -1,0 +1,57 @@
+On this page
+
+RTK Query does not include any built-in pagination behavior. However, RTK Query does make it straightforward to integrate with a standard index-based pagination API. This is the most common form of pagination that you'll need to implement.
+
+## Pagination Recipes[​](#pagination-recipes "Direct link to Pagination Recipes")
+
+### Setup an endpoint to accept a page `arg`[​](#setup-an-endpoint-to-accept-a-page-arg "Direct link to setup-an-endpoint-to-accept-a-page-arg")
+
+-   TypeScript
+-   JavaScript
+
+src/app/services/posts.ts
+
+```
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'interface Post {  id: number  name: string}interface ListResponse<T> {  page: number  per_page: number  total: number  total_pages: number  data: T[]}export const api = createApi({  baseQuery: fetchBaseQuery({ baseUrl: '/' }),  endpoints: (build) => ({    listPosts: build.query<ListResponse<Post>, number | void>({      query: (page = 1) => `posts?page=${page}`,    }),  }),})export const { useListPostsQuery } = api
+```
+
+src/app/services/posts.js
+
+```
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'export const api = createApi({  baseQuery: fetchBaseQuery({ baseUrl: '/' }),  endpoints: (build) => ({    listPosts: build.query({      query: (page = 1) => `posts?page=${page}`,    }),  }),})export const { useListPostsQuery } = api
+```
+
+### Trigger the next page by incrementing the `page` state variable[​](#trigger-the-next-page-by-incrementing-the-page-state-variable "Direct link to trigger-the-next-page-by-incrementing-the-page-state-variable")
+
+src/features/posts/PostsManager.tsx
+
+```
+const PostList = () => {  const [page, setPage] = useState(1)  const { data: posts, isLoading, isFetching } = useListPostsQuery(page)  if (isLoading) {    return <div>Loading</div>  }  if (!posts?.data) {    return <div>No posts :(</div>  }  return (    <div>      {posts.data.map(({ id, title, status }) => (        <div key={id}>          {title} - {status}        </div>      ))}      <button onClick={() => setPage(page - 1)} isLoading={isFetching}>        Previous      </button>      <button onClick={() => setPage(page + 1)} isLoading={isFetching}>        Next      </button>    </div>  )}
+```
+
+### Automated Re-fetching of Paginated Queries[​](#automated-re-fetching-of-paginated-queries "Direct link to Automated Re-fetching of Paginated Queries")
+
+It is a common use-case to utilize tag invalidation to perform [automated re-fetching](/rtk-query/usage/automated-refetching) with RTK Query.
+
+A potential pitfall when combining this with pagination is that your paginated query may only provide a _partial_ list at any given time, and hence not `provide` tags for entity IDs that fall on pages which aren't currently shown. If a specific entity is deleted that falls on an earlier page, the paginated query will not be providing a tag for that specific ID, and will not be invalidated to trigger re-fetching data. As a result, items on the current page that should shift one item up will not have done so, and the total count of items and/or pages may be incorrect.
+
+A strategy to overcome this is to ensure that the `delete` mutation always `invalidates` the paginated query, even if the deleted item is not _currently_ provided on that page. We can leverage the concept of [advanced invalidation with abstract tag ids](/rtk-query/usage/automated-refetching#advanced-invalidation-with-abstract-tag-ids) to do this by `providing` a `'Posts'` tag with the `'PARTIAL-LIST'` ID in our paginated query, and `invalidating` that corresponding tag for any mutation that should affect it.
+
+-   TypeScript
+-   JavaScript
+
+Example of invalidating cache for paginated queries
+
+```
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'interface Post {  id: number  name: string}interface ListResponse<T> {  page: number  per_page: number  total: number  total_pages: number  data: T[]}export const postApi = createApi({  reducerPath: 'postsApi',  baseQuery: fetchBaseQuery({ baseUrl: '/' }),  tagTypes: ['Posts'],  endpoints: (build) => ({    listPosts: build.query<ListResponse<Post>, number | void>({      query: (page = 1) => `posts?page=${page}`,      providesTags: (result, error, page) =>        result          ? [              // Provides a tag for each post in the current page,              // as well as the 'PARTIAL-LIST' tag.              ...result.data.map(({ id }) => ({ type: 'Posts' as const, id })),              { type: 'Posts', id: 'PARTIAL-LIST' },            ]          : [{ type: 'Posts', id: 'PARTIAL-LIST' }],    }),    deletePost: build.mutation<{ success: boolean; id: number }, number>({      query(id) {        return {          url: `post/${id}`,          method: 'DELETE',        }      },      // Invalidates the tag for this Post `id`, as well as the `PARTIAL-LIST` tag,      // causing the `listPosts` query to re-fetch if a component is subscribed to the query.      invalidatesTags: (result, error, id) => [        { type: 'Posts', id },        { type: 'Posts', id: 'PARTIAL-LIST' },      ],    }),  }),})
+```
+
+Example of invalidating cache for paginated queries
+
+```
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'export const postApi = createApi({  reducerPath: 'postsApi',  baseQuery: fetchBaseQuery({ baseUrl: '/' }),  tagTypes: ['Posts'],  endpoints: (build) => ({    listPosts: build.query({      query: (page = 1) => `posts?page=${page}`,      providesTags: (result, error, page) =>        result          ? [              // Provides a tag for each post in the current page,              // as well as the 'PARTIAL-LIST' tag.              ...result.data.map(({ id }) => ({ type: 'Posts', id })),              { type: 'Posts', id: 'PARTIAL-LIST' },            ]          : [{ type: 'Posts', id: 'PARTIAL-LIST' }],    }),    deletePost: build.mutation({      query(id) {        return {          url: `post/${id}`,          method: 'DELETE',        }      },      // Invalidates the tag for this Post `id`, as well as the `PARTIAL-LIST` tag,      // causing the `listPosts` query to re-fetch if a component is subscribed to the query.      invalidatesTags: (result, error, id) => [        { type: 'Posts', id },        { type: 'Posts', id: 'PARTIAL-LIST' },      ],    }),  }),})
+```
+
+## General Pagination Example[​](#general-pagination-example "Direct link to General Pagination Example")
+
+In the following example, you'll see `Loading` on the initial query, but then as you move forward we'll use the next/previous buttons as a _fetching_ indicator while any non-cached query is performed. When you go back, the cached data will be served instantaneously.

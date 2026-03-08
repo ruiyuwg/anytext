@@ -462,6 +462,17 @@
       }
     },
     {
+      "id": "redux-toolkit",
+      "name": "Redux Toolkit",
+      "description": "Official toolset for efficient Redux development with createSlice, RTK Query, and store setup",
+      "version": "2",
+      "adapter": "sitemap",
+      "url": "https://redux-toolkit.js.org/sitemap.xml",
+      "crawl": {
+        "contentSelector": "article"
+      }
+    },
+    {
       "id": "azure",
       "name": "Azure",
       "description": "Microsoft Azure cloud platform with compute, storage, databases, AI, and 200+ services",

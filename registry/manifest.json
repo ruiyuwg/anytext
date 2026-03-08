@@ -1,5 +1,5 @@
 {
-  "version": 70,
+  "version": 71,
   "updatedAt": "2026-03-08",
   "libraries": [
     {
@@ -117301,6 +117301,1255 @@
           "tags": [],
           "path": "react-native/version-and-react-version-are-the-release-versions-showing-in-the-diff.md",
           "tokens": 21089
+        }
+      ]
+    },
+    {
+      "id": "redux-toolkit",
+      "name": "Redux Toolkit",
+      "description": "Official toolset for efficient Redux development with createSlice, RTK Query, and store setup",
+      "version": "2",
+      "topics": [
+        {
+          "id": "actioncreatormiddleware",
+          "title": "actionCreatorMiddleware",
+          "description": "On this page",
+          "tags": [
+            "dispatch(actionCreator)",
+            "dispatch(actionCreator())",
+            "type",
+            "createActionCreatorInvariantMiddleware",
+            "getDefaultMiddleware"
+          ],
+          "path": "redux-toolkit/actioncreatormiddleware.md",
+          "tokens": 551
+        },
+        {
+          "id": "autobatchenhancer",
+          "title": "autoBatchEnhancer",
+          "description": "On this page",
+          "tags": [
+            "autoBatchEnhancer",
+            "configureStore",
+            "getDefaultEnhancers",
+            "action.meta[SHOULD_AUTOBATCH] = true",
+            "{type: 'raf'}",
+            "requestAnimationFrame",
+            "{type: 'tick'}",
+            "queueMicrotask",
+            "{type: 'timer', timeout: number}",
+            "setTimeout"
+          ],
+          "path": "redux-toolkit/autobatchenhancer.md",
+          "tokens": 1873
+        },
+        {
+          "id": "codemods",
+          "title": "codemods",
+          "description": "Per [the description in `1.9.0`](https://github.com/reduxjs/redux-toolkit/releases/tag/v1.9.0), we have removed the \"...",
+          "tags": [
+            "1.9.0",
+            "createReducer",
+            "createSlice.extraReducers",
+            "createSlice.reducers",
+            "@reduxjs/rtk-codemods",
+            "createReducerBuilder",
+            "createSliceBuilder",
+            "createSlice",
+            "extraReducers",
+            "createSliceReducerBuilder"
+          ],
+          "path": "redux-toolkit/codemods.md",
+          "tokens": 596
+        },
+        {
+          "id": "combineslices",
+          "title": "combineSlices",
+          "description": "On this page",
+          "tags": [
+            "combineSlices",
+            "createSlice",
+            "reducerPath",
+            "reducer",
+            "{ reducerPath, reducer }",
+            "withLazyLoadedSlices",
+            "WithSlice",
+            "inject",
+            "overrideExisting: true",
+            "null"
+          ],
+          "path": "redux-toolkit/combineslices.md",
+          "tokens": 2792
+        },
+        {
+          "id": "configurestore",
+          "title": "configureStore",
+          "description": "On this page",
+          "tags": [
+            "createStore",
+            "configureStore",
+            "combineReducers",
+            "applyMiddleware",
+            "reducer",
+            "preloadedState",
+            "middleware",
+            "enhancers",
+            "devtools",
+            "getDefaultMiddleware"
+          ],
+          "path": "redux-toolkit/configurestore.md",
+          "tokens": 3063
+        },
+        {
+          "id": "createaction",
+          "title": "createAction",
+          "description": "On this page",
+          "tags": [
+            "createAction",
+            "payload",
+            "action.payload",
+            "undefined",
+            "meta",
+            "error",
+            "addCase",
+            ".match(action)",
+            "match"
+          ],
+          "path": "redux-toolkit/createaction.md",
+          "tokens": 1931
+        },
+        {
+          "id": "createasyncthunk",
+          "title": "createAsyncThunk",
+          "description": "On this page",
+          "tags": [
+            "createAsyncThunk",
+            "type",
+            "payloadCreator",
+            "options",
+            "'users/requestStatus'",
+            "pending",
+            "'users/requestStatus/pending'",
+            "fulfilled",
+            "'users/requestStatus/fulfilled'",
+            "rejected"
+          ],
+          "path": "redux-toolkit/createasyncthunk.md",
+          "tokens": 7298
+        },
+        {
+          "id": "createdynamicmiddleware",
+          "title": "createDynamicMiddleware",
+          "description": "On this page",
+          "tags": [
+            "createDynamicMiddleware",
+            "State",
+            "Dispatch",
+            "withTypes",
+            "addMiddleware",
+            "withMiddleware",
+            "createDispatchWithMiddlewareHook",
+            "createListenerMiddleware",
+            "middleware",
+            "dispatch"
+          ],
+          "path": "redux-toolkit/createdynamicmiddleware.md",
+          "tokens": 1406
+        },
+        {
+          "id": "createentityadapter",
+          "title": "createEntityAdapter",
+          "description": "On this page",
+          "tags": [
+            "createReducer",
+            "createSlice",
+            "@ngrx/entity",
+            "User",
+            "Post",
+            "Comment",
+            "Entity",
+            "entity",
+            "state.users",
+            "state.users.entities[123]"
+          ],
+          "path": "redux-toolkit/createentityadapter.md",
+          "tokens": 5333
+        },
+        {
+          "id": "createlistenermiddleware",
+          "title": "createListenerMiddleware",
+          "description": "On this page",
+          "tags": [
+            "useEffect",
+            "dispatch",
+            "getState",
+            "take",
+            "condition",
+            "pause",
+            "fork",
+            "unsubscribe",
+            "listenerMiddleware.startListening()",
+            "dispatch(addListener())"
+          ],
+          "path": "redux-toolkit/createlistenermiddleware.md",
+          "tokens": 10150
+        },
+        {
+          "id": "createreducer",
+          "title": "createReducer",
+          "description": "On this page",
+          "tags": [
+            "switch",
+            "case",
+            "default",
+            "createReducer",
+            "builder",
+            "addCase",
+            "addMatcher",
+            "addDefaultCase",
+            "State | (() => State)",
+            "undefined"
+          ],
+          "path": "redux-toolkit/createreducer.md",
+          "tokens": 5920
+        },
+        {
+          "id": "createselector",
+          "title": "createSelector",
+          "description": "On this page",
+          "tags": [
+            "createSelector",
+            "selectorator",
+            "createDraftSafeSelector",
+            "createEntityAdapter",
+            "orderedTodos",
+            "createReducer",
+            "createSlice",
+            "entityAdapter.getSelectors",
+            "unsafe1",
+            "unsafe2"
+          ],
+          "path": "redux-toolkit/createselector.md",
+          "tokens": 1397
+        },
+        {
+          "id": "createslice",
+          "title": "createSlice",
+          "description": "On this page",
+          "tags": [
+            "createAction",
+            "createReducer",
+            "createSlice",
+            "initialState",
+            "undefined",
+            "localStorage",
+            "name",
+            "reducers",
+            "prepare callback",
+            "reducer"
+          ],
+          "path": "redux-toolkit/createslice.md",
+          "tokens": 7416
+        },
+        {
+          "id": "getdefaultenhancers",
+          "title": "getDefaultEnhancers",
+          "description": "On this page",
+          "tags": [
+            "configureStore",
+            "enhancer",
+            "getDefaultEnhancers",
+            "applyMiddleware",
+            "middleware",
+            "autoBatchEnhancer",
+            "false"
+          ],
+          "path": "redux-toolkit/getdefaultenhancers.md",
+          "tokens": 911
+        },
+        {
+          "id": "getdefaultmiddleware",
+          "title": "getDefaultMiddleware",
+          "description": "On this page",
+          "tags": [
+            "configureStore",
+            "middleware",
+            "getDefaultMiddleware",
+            ".concat(...)",
+            ".prepend(...)",
+            "Tuple",
+            "redux-immutable-state-invariant",
+            "immutable-state-invariant",
+            "redux-thunk",
+            "false"
+          ],
+          "path": "redux-toolkit/getdefaultmiddleware.md",
+          "tokens": 1505
+        },
+        {
+          "id": "immutabilitymiddleware",
+          "title": "immutabilityMiddleware",
+          "description": "On this page",
+          "tags": [
+            "redux-immutable-state-invariant",
+            "configureStore",
+            "getDefaultMiddleware",
+            "immutableCheck",
+            "createImmutableStateInvariantMiddleware",
+            "isImmutableDefault"
+          ],
+          "path": "redux-toolkit/immutabilitymiddleware.md",
+          "tokens": 1192
+        },
+        {
+          "id": "matching-utilities",
+          "title": "matching-utilities",
+          "description": "On this page",
+          "tags": [
+            "builder.addMatcher()",
+            "createSlice",
+            "createReducer",
+            "isAllOf",
+            "isAnyOf",
+            "createAsyncThunk",
+            "isAsyncThunkAction",
+            "isPending",
+            "isFulfilled",
+            "isRejected"
+          ],
+          "path": "redux-toolkit/matching-utilities.md",
+          "tokens": 3624
+        },
+        {
+          "id": "other-exports",
+          "title": "other-exports",
+          "description": "On this page",
+          "tags": [
+            "nanoid",
+            "nanoid/nonsecure",
+            "createAsyncThunk",
+            "miniSerializeError",
+            "Error",
+            "SerializedError",
+            "{ message: String(value) }",
+            "copyWithStructuralSharing",
+            "createNextState",
+            "immer"
+          ],
+          "path": "redux-toolkit/other-exports.md",
+          "tokens": 1431
+        },
+        {
+          "id": "serializabilitymiddleware",
+          "title": "serializabilityMiddleware",
+          "description": "On this page",
+          "tags": [
+            "redux-immutable-state-invariant",
+            "configureStore",
+            "getDefaultMiddleware",
+            "serializableCheck",
+            "isPlain",
+            "Date",
+            "Map"
+          ],
+          "path": "redux-toolkit/serializabilitymiddleware.md",
+          "tokens": 1174
+        },
+        {
+          "id": "vite-with-our-redux-ts-template-using-the-degit-tool-to-clone-and-extract-the-template-npx-degit-reduxjs-redux-templates-packages-vite-template-redux-my-app-next-js-using-the-with-redux-templatenpx-cr",
+          "title": "Vite with our Redux+TS template# (using the `degit` tool to clone and extract the template)npx degit reduxjs/redux-templates/packages/vite-template-redux my-app# Next.js using the `with-redux` templatenpx create-next-app --example with-redux my-app",
+          "description": "On this page",
+          "tags": [
+            "create-react-app",
+            "with-redux",
+            "<script type=\"module\">",
+            "configureStore()",
+            "createStore",
+            "redux-thunk",
+            "createReducer()",
+            "immer",
+            "state.todos[3].completed = true",
+            "createAction()"
+          ],
+          "path": "redux-toolkit/vite-with-our-redux-ts-template-using-the-degit-tool-to-clone-and-extract-the-template-npx-degit-reduxjs-redux-templates-packages-vite-template-redux-my-app-next-js-using-the-with-redux-templatenpx-cr.md",
+          "tokens": 2536
+        },
+        {
+          "id": "why-rtk-is-redux-today",
+          "title": "why-rtk-is-redux-today",
+          "description": "On this page",
+          "tags": [
+            "@reduxjs/toolkit",
+            "redux",
+            "createStore",
+            "combineReducers",
+            "applyMiddleware",
+            "compose",
+            "switch",
+            "actions/todos.js",
+            "constants/todos.js",
+            "reducers/todos.js"
+          ],
+          "path": "redux-toolkit/why-rtk-is-redux-today.md",
+          "tokens": 3972
+        },
+        {
+          "id": "apiprovider",
+          "title": "ApiProvider",
+          "description": "On this page",
+          "tags": [
+            "Provider"
+          ],
+          "path": "redux-toolkit/apiprovider.md",
+          "tokens": 165
+        },
+        {
+          "id": "createapi",
+          "title": "createApi",
+          "description": "On this page",
+          "tags": [
+            "createApi",
+            "/api/posts",
+            "/api/users",
+            "/api/",
+            "posts",
+            "users",
+            "injectEndpoints",
+            "baseQuery",
+            "queryFn",
+            "fetch"
+          ],
+          "path": "redux-toolkit/createapi.md",
+          "tokens": 15196
+        },
+        {
+          "id": "api-slice-utils",
+          "title": "api-slice-utils",
+          "description": "On this page",
+          "tags": [
+            "api.util",
+            "updateQueryData",
+            "endpointName",
+            "arg",
+            "updateRecipe",
+            "produce",
+            "updateProvided",
+            "false",
+            "'getPost'",
+            "draft"
+          ],
+          "path": "redux-toolkit/api-slice-utils.md",
+          "tokens": 5097
+        },
+        {
+          "id": "code-splitting",
+          "title": "code-splitting",
+          "description": "On this page",
+          "tags": [
+            "injectEndpoints",
+            "enhanceEndpoints",
+            "endpoints",
+            "createApi.endpoints",
+            "overrideExisting",
+            "true",
+            "providesTags",
+            "invalidatesTags",
+            "keepUnusedDataFor"
+          ],
+          "path": "redux-toolkit/code-splitting.md",
+          "tokens": 1135
+        },
+        {
+          "id": "endpoints",
+          "title": "endpoints",
+          "description": "On this page",
+          "tags": [
+            "endpoints",
+            "createApi",
+            "initiate",
+            "select",
+            "createSelector",
+            "Symbol",
+            "skipToken",
+            ".select(someCacheKey)",
+            "pending",
+            "fulfilled"
+          ],
+          "path": "redux-toolkit/endpoints.md",
+          "tokens": 2283
+        },
+        {
+          "id": "hooks",
+          "title": "hooks",
+          "description": "On this page",
+          "tags": [
+            "createApi",
+            "'@reduxjs/toolkit/query'",
+            "api",
+            "api.endpoints[endpointName].useQuery",
+            "api.endpoints[endpointName].useMutation",
+            "getPosts",
+            "updatePost",
+            "use",
+            "Query",
+            "Mutation"
+          ],
+          "path": "redux-toolkit/hooks.md",
+          "tokens": 8776
+        },
+        {
+          "id": "overview",
+          "title": "overview",
+          "description": "On this page",
+          "tags": [
+            "createApi",
+            "/api/posts",
+            "/api/users",
+            "/api/",
+            "posts",
+            "users",
+            "injectEndpoints",
+            "createSlice",
+            "configureStore",
+            "endpoints"
+          ],
+          "path": "redux-toolkit/overview.md",
+          "tokens": 2119
+        },
+        {
+          "id": "redux-integration",
+          "title": "redux-integration",
+          "description": "On this page",
+          "tags": [
+            "createApi",
+            "createSlice",
+            "configureStore",
+            "reducerPath",
+            "reducer",
+            "middleware"
+          ],
+          "path": "redux-toolkit/redux-integration.md",
+          "tokens": 657
+        },
+        {
+          "id": "fetchbasequery",
+          "title": "fetchBaseQuery",
+          "description": "On this page",
+          "tags": [
+            "fetch",
+            "axios",
+            "superagent",
+            "fetchBaseQuery",
+            "baseQuery",
+            "RequestInit",
+            "baseUrl",
+            "prepareHeaders",
+            "paramsSerializer",
+            "timeout"
+          ],
+          "path": "redux-toolkit/fetchbasequery.md",
+          "tokens": 4483
+        },
+        {
+          "id": "setuplisteners",
+          "title": "setupListeners",
+          "description": "A utility used to enable `refetchOnFocus` and `refetchOnReconnect` behaviors. It requires the `dispatch` method from ...",
+          "tags": [
+            "refetchOnFocus",
+            "refetchOnReconnect",
+            "dispatch",
+            "setupListeners(store.dispatch)",
+            "onFocus",
+            "onFocusLost",
+            "onOffline",
+            "onOnline",
+            "api.internalActions"
+          ],
+          "path": "redux-toolkit/setuplisteners.md",
+          "tokens": 589
+        },
+        {
+          "id": "comparison",
+          "title": "comparison",
+          "description": "On this page",
+          "tags": [
+            "util.updateQueryData",
+            "fetchBaseQuery",
+            "axios",
+            "redaxios",
+            "endpoints",
+            "optimisticResponse"
+          ],
+          "path": "redux-toolkit/comparison.md",
+          "tokens": 2001
+        },
+        {
+          "id": "invalidationbytags",
+          "title": "invalidationByTags",
+          "description": "On this page",
+          "tags": [
+            "InvalidationByTagsHandler",
+            "api.util.invalidateTags",
+            "invalidateTags()",
+            "apiSlice.invalidationBehavior",
+            "apiSlice",
+            "removeQueryResult",
+            "refetchQuery",
+            "context.batch()",
+            "createApi",
+            "'delayed'"
+          ],
+          "path": "redux-toolkit/invalidationbytags.md",
+          "tokens": 1073
+        },
+        {
+          "id": "buildslice",
+          "title": "buildSlice",
+          "description": "On this page",
+          "tags": [
+            "removeQueryResult",
+            "queryResultPatched",
+            "queryThunk.pending",
+            "queryThunk.fulfilled",
+            "queryThunk.rejected",
+            "condition()",
+            "queryThunk",
+            "hasRehydrationInfo",
+            "removeMutationResult",
+            "getMutationCacheKey"
+          ],
+          "path": "redux-toolkit/buildslice.md",
+          "tokens": 1639
+        },
+        {
+          "id": "overview",
+          "title": "overview",
+          "description": "On this page",
+          "tags": [
+            "createApi()",
+            "buildCreateApi()",
+            "createApi",
+            "coreModule()",
+            "reactHooksModule()",
+            "api",
+            "api.util",
+            "api.internalActions",
+            "asyncThunk",
+            "queryThunk"
+          ],
+          "path": "redux-toolkit/overview.md",
+          "tokens": 902
+        },
+        {
+          "id": "querythunk",
+          "title": "queryThunk",
+          "description": "On this page",
+          "tags": [
+            "queryThunk",
+            "createAsyncThunk",
+            "getPendingMeta()",
+            "startedTimeStamp",
+            "SHOULD_AUTOBATCH",
+            "condition()",
+            "dispatchConditionRejected: true",
+            "extraReducers",
+            "querySubstate",
+            "buildSlice"
+          ],
+          "path": "redux-toolkit/querythunk.md",
+          "tokens": 765
+        },
+        {
+          "id": "overview",
+          "title": "overview",
+          "description": "On this page",
+          "tags": [
+            "createAsyncThunk",
+            "createSlice",
+            "data",
+            "isLoading",
+            "createApi()",
+            "fetchBaseQuery()",
+            "fetch",
+            "baseQuery",
+            "createApi",
+            "<ApiProvider />"
+          ],
+          "path": "redux-toolkit/overview.md",
+          "tokens": 2603
+        },
+        {
+          "id": "usage-with-typescript",
+          "title": "usage-with-typescript",
+          "description": "On this page",
+          "tags": [
+            "createApi",
+            "endpoints",
+            "baseQuery",
+            "BaseQueryFn",
+            "Args",
+            "query",
+            "Result",
+            "data",
+            "unknown",
+            "Error"
+          ],
+          "path": "redux-toolkit/usage-with-typescript.md",
+          "tokens": 8507
+        },
+        {
+          "id": "automated-refetching",
+          "title": "automated-refetching",
+          "description": "On this page",
+          "tags": [
+            "queryCacheKey",
+            "invalidate",
+            "tagTypes",
+            "Posts",
+            "Users",
+            "tagTypes: ['Post', 'User']",
+            "createApi",
+            "tag",
+            "type",
+            "string"
+          ],
+          "path": "redux-toolkit/automated-refetching.md",
+          "tokens": 9440
+        },
+        {
+          "id": "cache-behavior",
+          "title": "cache-behavior",
+          "description": "On this page",
+          "tags": [
+            "queryCacheKey",
+            "useQuery",
+            "keepUnusedDataFor",
+            "id",
+            "1",
+            "2",
+            "3",
+            "0",
+            "refetch",
+            "initiate"
+          ],
+          "path": "redux-toolkit/cache-behavior.md",
+          "tokens": 5264
+        },
+        {
+          "id": "code-generation",
+          "title": "code-generation",
+          "description": "On this page",
+          "tags": [
+            "@rtk-query/codegen-openapi",
+            "packages/rtk-query-codegen-openapi",
+            "createApi",
+            "tag",
+            "providesTags",
+            "invalidatesTags",
+            "tags",
+            "endpointOverrides",
+            "enhanceEndpoints",
+            "filterEndpoints"
+          ],
+          "path": "redux-toolkit/code-generation.md",
+          "tokens": 2797
+        },
+        {
+          "id": "code-splitting",
+          "title": "code-splitting",
+          "description": "On this page",
+          "tags": [
+            "api.injectEndpoints",
+            "createApi",
+            "overrideExisting",
+            "overrideExisting: true",
+            "false",
+            "'throw'",
+            "api.enhanceEndpoints",
+            "enhanceEndpoints",
+            "providesTags",
+            "invalidatesTags"
+          ],
+          "path": "redux-toolkit/code-splitting.md",
+          "tokens": 1266
+        },
+        {
+          "id": "conditional-fetching",
+          "title": "conditional-fetching",
+          "description": "On this page",
+          "tags": [
+            "skip",
+            "skipToken"
+          ],
+          "path": "redux-toolkit/conditional-fetching.md",
+          "tokens": 189
+        },
+        {
+          "id": "customizing-create-api",
+          "title": "customizing-create-api",
+          "description": "On this page",
+          "tags": [
+            "createApi",
+            "createBaseApi",
+            "useSelector",
+            "useDispatch",
+            "useStore",
+            "createSelector",
+            "coreModule",
+            "reactHooksModule"
+          ],
+          "path": "redux-toolkit/customizing-create-api.md",
+          "tokens": 1097
+        },
+        {
+          "id": "customizing-queries",
+          "title": "customizing-queries",
+          "description": "On this page",
+          "tags": [
+            "baseQuery",
+            "createApi",
+            "query",
+            "fetchBaseQuery",
+            "fetch",
+            "axios",
+            "baseQuery API Reference",
+            "args",
+            "api",
+            "extraOptions"
+          ],
+          "path": "redux-toolkit/customizing-queries.md",
+          "tokens": 11966
+        },
+        {
+          "id": "error-handling",
+          "title": "error-handling",
+          "description": "On this page",
+          "tags": [
+            "error",
+            ".unwrap()",
+            "baseQuery",
+            "data",
+            "fetchBaseQuery"
+          ],
+          "path": "redux-toolkit/error-handling.md",
+          "tokens": 802
+        },
+        {
+          "id": "examples",
+          "title": "examples",
+          "description": "On this page",
+          "tags": [
+            "msw",
+            "Posts",
+            "prepareHeaders",
+            "setCredentials",
+            "extraReducers",
+            "authSlice",
+            "PostDetail"
+          ],
+          "path": "redux-toolkit/examples.md",
+          "tokens": 637
+        },
+        {
+          "id": "infinite-queries",
+          "title": "infinite-queries",
+          "description": "On this page",
+          "tags": [
+            "query",
+            "queryFn",
+            "data",
+            "{queryArg, pageParam}",
+            "queryArg",
+            "\"fire\"",
+            "useGetPokemonInfiniteQuery('fire')",
+            "endpoints",
+            "createApi",
+            "build.infiniteQuery()"
+          ],
+          "path": "redux-toolkit/infinite-queries.md",
+          "tokens": 6996
+        },
+        {
+          "id": "manual-cache-updates",
+          "title": "manual-cache-updates",
+          "description": "On this page",
+          "tags": [
+            "api.utils",
+            "updateQueryData",
+            "upsertQueryData",
+            "dispatch",
+            "endpointName",
+            "args",
+            "recipe",
+            "patches",
+            "inversePatches",
+            "Post"
+          ],
+          "path": "redux-toolkit/manual-cache-updates.md",
+          "tokens": 3137
+        },
+        {
+          "id": "migrating-to-rtk-query",
+          "title": "migrating-to-rtk-query",
+          "description": "On this page",
+          "tags": [
+            "createAsyncThunk",
+            "isUninitialized",
+            "isLoading",
+            "isError",
+            "RTK Query Quick Start",
+            "createSlice",
+            "data",
+            "status",
+            "pokemon",
+            "pending"
+          ],
+          "path": "redux-toolkit/migrating-to-rtk-query.md",
+          "tokens": 4650
+        },
+        {
+          "id": "mutations",
+          "title": "mutations",
+          "description": "On this page",
+          "tags": [
+            "endpoints",
+            "createApi",
+            "build.mutation()",
+            "query",
+            "queryFn",
+            "build.mutation<ReturnType, ArgType>",
+            "void",
+            "onQueryStarted",
+            "useQuery",
+            "useMutation"
+          ],
+          "path": "redux-toolkit/mutations.md",
+          "tokens": 4732
+        },
+        {
+          "id": "pagination",
+          "title": "pagination",
+          "description": "On this page",
+          "tags": [
+            "arg",
+            "page",
+            "provide",
+            "delete",
+            "invalidates",
+            "providing",
+            "'Posts'",
+            "'PARTIAL-LIST'",
+            "invalidating",
+            "Loading"
+          ],
+          "path": "redux-toolkit/pagination.md",
+          "tokens": 1670
+        },
+        {
+          "id": "persistence-and-rehydration",
+          "title": "persistence-and-rehydration",
+          "description": "On this page",
+          "tags": [
+            "extractRehydrationInfo",
+            "createApi",
+            "undefined",
+            "Cache-Control",
+            "REHYDRATE",
+            "redux-persist",
+            "autoMergeLevel1",
+            "autoMergeLevel2"
+          ],
+          "path": "redux-toolkit/persistence-and-rehydration.md",
+          "tokens": 801
+        },
+        {
+          "id": "polling",
+          "title": "polling",
+          "description": "On this page",
+          "tags": [
+            "pollingInterval",
+            "useQuery",
+            "skipPollingIfUnfocused: true",
+            "skipPollingIfUnfocused",
+            "setupListeners",
+            "updateSubscriptionOptions"
+          ],
+          "path": "redux-toolkit/polling.md",
+          "tokens": 491
+        },
+        {
+          "id": "prefetching",
+          "title": "prefetching",
+          "description": "On this page",
+          "tags": [
+            "useQuery",
+            "useQuerySubscription",
+            "useMutation",
+            "usePrefetch",
+            "ifOlderThan",
+            "false",
+            "number",
+            "new Date()",
+            "fulfilledTimeStamp",
+            "force"
+          ],
+          "path": "redux-toolkit/prefetching.md",
+          "tokens": 2042
+        },
+        {
+          "id": "queries",
+          "title": "queries",
+          "description": "On this page",
+          "tags": [
+            "fetchBaseQuery",
+            "fetch",
+            "axios",
+            "node-fetch",
+            "cross-fetch",
+            "useQuery",
+            "endpoints",
+            "createApi",
+            "build.query()",
+            "query"
+          ],
+          "path": "redux-toolkit/queries.md",
+          "tokens": 5626
+        },
+        {
+          "id": "server-side-rendering",
+          "title": "server-side-rendering",
+          "description": "On this page",
+          "tags": [
+            "next-redux-wrapper",
+            "getStaticProps",
+            "getServerSideProps",
+            "initiate",
+            "createApi",
+            "extractRehydrationInfo",
+            "next.js",
+            "refetchOnMountOrArgChange",
+            "unstable__",
+            "getDataFromTree"
+          ],
+          "path": "redux-toolkit/server-side-rendering.md",
+          "tokens": 1054
+        },
+        {
+          "id": "streaming-updates",
+          "title": "streaming-updates",
+          "description": "On this page",
+          "tags": [
+            "onCacheEntryAdded",
+            "polling",
+            "cache invalidation",
+            "refetchOnMountOrArgChange",
+            "arg",
+            "await cacheDataLoaded",
+            "updateCacheData",
+            "draft",
+            "await cacheEntryRemoved",
+            "getMessages"
+          ],
+          "path": "redux-toolkit/streaming-updates.md",
+          "tokens": 3185
+        },
+        {
+          "id": "usage-without-react-hooks",
+          "title": "usage-without-react-hooks",
+          "description": "On this page",
+          "tags": [
+            "createApi",
+            "cache behavior",
+            "initiate",
+            "useQuery",
+            "useQuerySubscription",
+            "useLazyQuery",
+            "useLazyQuerySubscription",
+            "unsubscribe",
+            "select",
+            "endpoint.select(arg)"
+          ],
+          "path": "redux-toolkit/usage-without-react-hooks.md",
+          "tokens": 1551
+        },
+        {
+          "id": "overview",
+          "title": "overview",
+          "description": "On this page",
+          "tags": [],
+          "path": "redux-toolkit/overview.md",
+          "tokens": 1417
+        },
+        {
+          "id": "quick-start",
+          "title": "quick-start",
+          "description": "On this page",
+          "tags": [
+            "src",
+            "src/app/store.js",
+            "configureStore",
+            "<Provider>",
+            "src/index.js",
+            "<App>",
+            "src/features/counter/counterSlice.js",
+            "createSlice",
+            "createReducer",
+            "reducer"
+          ],
+          "path": "redux-toolkit/quick-start.md",
+          "tokens": 3125
+        },
+        {
+          "id": "rtk-query",
+          "title": "rtk-query",
+          "description": "On this page",
+          "tags": [
+            "createSlice",
+            "createAsyncThunk",
+            "@reduxjs/toolkit",
+            "src",
+            "swr",
+            "react-query",
+            "/api/posts",
+            "/api/users",
+            "/api/",
+            "posts"
+          ],
+          "path": "redux-toolkit/rtk-query.md",
+          "tokens": 2853
+        },
+        {
+          "id": "typescript",
+          "title": "typescript",
+          "description": "On this page",
+          "tags": [
+            "@types/react-redux",
+            "react-redux",
+            "npm install @types/react-redux",
+            "RootState",
+            "Dispatch",
+            "app/store.ts",
+            "AppDispatch",
+            "useDispatch",
+            "useSelector",
+            "(state: RootState)"
+          ],
+          "path": "redux-toolkit/typescript.md",
+          "tokens": 1891
+        },
+        {
+          "id": "immer-reducers",
+          "title": "immer-reducers",
+          "description": "On this page",
+          "tags": [
+            "createReducer",
+            "createSlice",
+            "produce",
+            "state",
+            "createSlice/createReducer",
+            "void",
+            "Object.assign",
+            "state = someValue",
+            "console.log(state)",
+            "current"
+          ],
+          "path": "redux-toolkit/immer-reducers.md",
+          "tokens": 8960
+        },
+        {
+          "id": "migrating-rtk-2",
+          "title": "migrating-rtk-2",
+          "description": "On this page",
+          "tags": [
+            "redux",
+            "createReducer",
+            "createSlice.extraReducers",
+            "configureStore.middleware",
+            "Middleware",
+            "action",
+            "next",
+            "unknown",
+            "exports",
+            "package.json"
+          ],
+          "path": "redux-toolkit/migrating-rtk-2.md",
+          "tokens": 13144
+        },
+        {
+          "id": "migrating-to-modern-redux",
+          "title": "migrating-to-modern-redux",
+          "description": "On this page",
+          "tags": [
+            "connect",
+            "createClass",
+            "React.Component",
+            "configureStore",
+            "createSlice",
+            "createAsyncThunk",
+            "createListenerMiddleware",
+            "createEntityAdapter",
+            "createStore",
+            "redux-logger"
+          ],
+          "path": "redux-toolkit/migrating-to-modern-redux.md",
+          "tokens": 10077
+        },
+        {
+          "id": "nextjs",
+          "title": "nextjs",
+          "description": "On this page",
+          "tags": [
+            "next-redux-wrapper",
+            "getServerSideProps",
+            "npx create-next-app my-app",
+            "@reduxjs/toolkit",
+            "react-redux",
+            "async",
+            "/app",
+            "/src/app",
+            "/lib",
+            "RootState"
+          ],
+          "path": "redux-toolkit/nextjs.md",
+          "tokens": 4961
+        },
+        {
+          "id": "usage-guide",
+          "title": "usage-guide",
+          "description": "On this page",
+          "tags": [
+            "createStore",
+            "(rootReducer, preloadedState, enhancer)",
+            "configureStore",
+            "applyMiddleware",
+            "compose",
+            "redux-thunk",
+            "reducer",
+            "combineReducers",
+            "middleware",
+            "getDefaultMiddleware"
+          ],
+          "path": "redux-toolkit/usage-guide.md",
+          "tokens": 12387
+        },
+        {
+          "id": "usage-with-typescript",
+          "title": "usage-with-typescript",
+          "description": "On this page",
+          "tags": [
+            "configureStore",
+            "State",
+            "ReturnType",
+            "RootState",
+            "rootReducer",
+            "configureStore()",
+            "store.getState",
+            "Dispatch",
+            "AppDispatch",
+            "useAppDispatch"
+          ],
+          "path": "redux-toolkit/usage-with-typescript.md",
+          "tokens": 7892
         }
       ]
     },
