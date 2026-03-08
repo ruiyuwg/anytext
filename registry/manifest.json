@@ -1,5 +1,5 @@
 {
-  "version": 44,
+  "version": 45,
   "updatedAt": "2026-03-08",
   "libraries": [
     {
@@ -41364,6 +41364,2079 @@
           ],
           "path": "nuxt/nuxt-2-static-improvements.md",
           "tokens": 2008
+        }
+      ]
+    },
+    {
+      "id": "openai",
+      "name": "OpenAI",
+      "description": "AI platform API for chat completions, embeddings, assistants, and function calling",
+      "version": "2025",
+      "topics": [
+        {
+          "id": "openai-api-docs-full-documentation",
+          "title": "OpenAI API docs — full documentation",
+          "description": "Curated index: https://developers.openai.com/api/docs/llms.txt",
+          "tags": [
+            "file.list",
+            "file.get"
+          ],
+          "path": "openai/openai-api-docs-full-documentation.md",
+          "tokens": 1820
+        },
+        {
+          "id": "getting-started-with-gpt-actions",
+          "title": "Getting started with GPT Actions",
+          "description": "The NSW (National Weather Service) maintains a public API that users can query to receive a weather forecast for any ...",
+          "tags": [],
+          "path": "openai/getting-started-with-gpt-actions.md",
+          "tokens": 3434
+        },
+        {
+          "id": "gpt-action-authentication",
+          "title": "GPT Action authentication",
+          "description": "Actions offer different authentication schemas to accommodate various use cases. To specify the authentication schema...",
+          "tags": [
+            "authorization_url",
+            "authorization_content_type"
+          ],
+          "path": "openai/gpt-action-authentication.md",
+          "tokens": 1049
+        },
+        {
+          "id": "gpt-actions",
+          "title": "GPT Actions",
+          "description": "GPT Actions are stored in Custom GPTs, which enable users to customize ChatGPT for specific use cases by providing in...",
+          "tags": [],
+          "path": "openai/gpt-actions.md",
+          "tokens": 977
+        },
+        {
+          "id": "gpt-actions-library",
+          "title": "GPT Actions library",
+          "description": "While GPT Actions should be significantly less work for an API developer to set up than an entire application using t...",
+          "tags": [],
+          "path": "openai/gpt-actions-library.md",
+          "tokens": 924
+        },
+        {
+          "id": "production-notes-on-gpt-actions",
+          "title": "Production notes on GPT Actions",
+          "description": "Consider implementing rate limiting on the API endpoints you expose. ChatGPT will respect 429 response codes and dyna...",
+          "tags": [
+            "x-openai-isConsequential",
+            "true",
+            "false"
+          ],
+          "path": "openai/production-notes-on-gpt-actions.md",
+          "tokens": 1185
+        },
+        {
+          "id": "sending-and-returning-files-with-gpt-actions",
+          "title": "Sending and returning files with GPT Actions",
+          "description": "POST requests can include up to ten files (including DALL-E generated images) from the conversation. They will be sen...",
+          "tags": [
+            "openaiFileIdRefs",
+            "name",
+            "id",
+            "mime_type",
+            "download_link",
+            "string",
+            "openaiFileResponse",
+            "content",
+            "Content-Disposition",
+            "Content-Type"
+          ],
+          "path": "openai/sending-and-returning-files-with-gpt-actions.md",
+          "tokens": 1722
+        },
+        {
+          "id": "assistants-api-deep-dive",
+          "title": "Assistants API deep dive",
+          "description": "export const snippetFileCreate = {\npython: file = client.files.create(\n  file=open(\"revenue-forecast.csv\", \"rb\"),\n  p...",
+          "tags": [
+            ".trim(),\n  curl:"
+          ],
+          "path": "openai/assistants-api-deep-dive.md",
+          "tokens": 1125
+        },
+        {
+          "id": "upload-a-file-with-an-vision-purpose",
+          "title": "Upload a file with an \"vision\" purpose",
+          "description": "curl https://api.openai.com/v1/files \\\n-H \"Authorization: Bearer $OPENAI_API_KEY\" \\\n-F purpose=\"vision\" \\\n-F file=\"@/...",
+          "tags": [],
+          "path": "openai/upload-a-file-with-an-vision-purpose.md",
+          "tokens": 805
+        },
+        {
+          "id": "add-footnotes-to-the-end-of-the-message-before-displaying-to-user",
+          "title": "Add footnotes to the end of the message before displaying to user",
+          "description": "message_content.value += '\\n' + '\\n'.join(citations)\n`.trim(),\n};",
+          "tags": [
+            "model",
+            "instructions",
+            "tools",
+            "code_interpreter",
+            "file_search",
+            "function",
+            "tool_resources",
+            "File",
+            "purpose",
+            "assistants"
+          ],
+          "path": "openai/add-footnotes-to-the-end-of-the-message-before-displaying-to-user.md",
+          "tokens": 5431
+        },
+        {
+          "id": "create-an-assistant-using-the-file-id",
+          "title": "Create an assistant using the file ID",
+          "description": "curl https://api.openai.com/v1/assistants \\\n-u :$OPENAI_API_KEY \\\n-H 'Content-Type: application/json' \\\n-H 'OpenAI-Be...",
+          "tags": [
+            ".trim(),\n  \"node.js\":",
+            ".trim(),\n  curl:",
+            "code_interpreter",
+            "tools",
+            "instructions",
+            ".csv",
+            ".pdf",
+            ".json",
+            "csv",
+            "file_id"
+          ],
+          "path": "openai/create-an-assistant-using-the-file-id.md",
+          "tokens": 4261
+        },
+        {
+          "id": "the-run-until-it-s-in-a-terminal-state",
+          "title": "the run until it's in a terminal state.",
+          "description": "run = client.beta.threads.runs.create_and_poll(\nthread_id=thread.id, assistant_id=assistant.id\n)",
+          "tags": [
+            ".trim(),\n  \"node.js\":",
+            ".trim(),\n  curl:",
+            "file_search",
+            "tools",
+            "in_progress",
+            "tool_resources",
+            "vector_store",
+            "goog-10k.pdf",
+            "brka-10k.txt",
+            "aapl-10k.pdf"
+          ],
+          "path": "openai/the-run-until-it-s-in-a-terminal-state.md",
+          "tokens": 5856
+        },
+        {
+          "id": "assistants-function-calling",
+          "title": "Assistants Function Calling",
+          "description": "export const snippetDefineFunctions = {\npython: `\nfrom openai import OpenAI\nclient = OpenAI()",
+          "tags": [
+            ".trim(),\n  \"node.js\":",
+            "get_current_temperature",
+            "get_rain_probability",
+            "strict:\n  true",
+            "tools",
+            "pending",
+            "requires_action",
+            "status",
+            "tool_calls",
+            "required_action"
+          ],
+          "path": "openai/assistants-function-calling.md",
+          "tokens": 2229
+        },
+        {
+          "id": "assistants-migration-guide",
+          "title": "Assistants migration guide",
+          "description": "We're moving from the Assistants API to the new Responses API for a simpler and more flexible mental model.",
+          "tags": [
+            "previous_response_id",
+            "Create prompt"
+          ],
+          "path": "openai/assistants-migration-guide.md",
+          "tokens": 2172
+        },
+        {
+          "id": "overview-of-openai-crawlers",
+          "title": "Overview of OpenAI Crawlers",
+          "description": "OpenAI uses web crawlers (“robots”) and user agents to perform actions for its products, either automatically or trig...",
+          "tags": [],
+          "path": "openai/overview-of-openai-crawlers.md",
+          "tokens": 820
+        },
+        {
+          "id": "key-concepts",
+          "title": "Key concepts",
+          "description": "At OpenAI, protecting user data is fundamental to our mission. We do not train\nour models on inputs and outputs throu...",
+          "tags": [],
+          "path": "openai/key-concepts.md",
+          "tokens": 698
+        },
+        {
+          "id": "deprecations",
+          "title": "Deprecations",
+          "description": "As we launch safer and more capable models, we regularly retire older models. Software relying on OpenAI models may n...",
+          "tags": [
+            "chatgpt-4o-latest",
+            "gpt-5.1-chat-latest",
+            "codex-mini-latest",
+            "gpt-5-codex-mini",
+            "dall-e-2",
+            "gpt-image-1",
+            "gpt-image-1-mini",
+            "dall-e-3",
+            "gpt-4-0314",
+            "gpt-5"
+          ],
+          "path": "openai/deprecations.md",
+          "tokens": 5843
+        },
+        {
+          "id": "actions-in-chatkit",
+          "title": "Actions in ChatKit",
+          "description": "Actions are a way for the ChatKit SDK frontend to trigger a streaming response without the user submitting a message....",
+          "tags": [
+            "ActionConfig",
+            "sendAction()",
+            "action",
+            "ChatKitServer",
+            "handler=\"client",
+            "Action",
+            "create",
+            "Form",
+            "payload",
+            "name"
+          ],
+          "path": "openai/actions-in-chatkit.md",
+          "tokens": 2199
+        },
+        {
+          "id": "advanced-integrations-with-chatkit",
+          "title": "Advanced integrations with ChatKit",
+          "description": "When you need full control—custom authentication, data residency, on‑prem deployment, or bespoke agent orchestration—...",
+          "tags": [
+            "ChatKitServer",
+            "respond",
+            "stream_agent_response",
+            "chatkit.store.Store",
+            "FileStore",
+            "ctx.context.client_tool_call",
+            "thread.metadata",
+            "ProgressUpdateEvent",
+            "server.process(body, context)",
+            "stream_widget"
+          ],
+          "path": "openai/advanced-integrations-with-chatkit.md",
+          "tokens": 2362
+        },
+        {
+          "id": "advanced-usage",
+          "title": "Advanced usage",
+          "description": "OpenAI's text generation models (often called generative pre-trained transformers or large language models) have been...",
+          "tags": [
+            "prompt",
+            "temperature",
+            "a",
+            "apple",
+            "\"ChatGPT is great!\"",
+            "gpt-3.5-turbo",
+            "usage",
+            "response['usage']['total_tokens']",
+            "gpt-4-turbo-preview",
+            "gpt-3.5-turbo-0613"
+          ],
+          "path": "openai/advanced-usage.md",
+          "tokens": 2467
+        },
+        {
+          "id": "agent-builder",
+          "title": "Agent Builder",
+          "description": "Agent Builder is a visual canvas for building multi-step agent workflows.",
+          "tags": [],
+          "path": "openai/agent-builder.md",
+          "tokens": 1421
+        },
+        {
+          "id": "agents",
+          "title": "Agents",
+          "description": "Agents are systems that intelligently accomplish tasks—from simple goals to complex, open-ended workflows. OpenAI pro...",
+          "tags": [],
+          "path": "openai/agents.md",
+          "tokens": 2233
+        },
+        {
+          "id": "apply-patch",
+          "title": "Apply Patch",
+          "description": "import {\nCheckCircleFilled,\nXCircle,\n} from \"@components/react/oai/platform/ui/Icon.react\";",
+          "tags": [
+            "apply_patch",
+            "input",
+            "tools=[{\"type\": \"apply_patch\"}]",
+            "apply_patch_call",
+            "operation",
+            "previous_response_id",
+            "apply_patch_call_output",
+            "call_id",
+            "status",
+            "output"
+          ],
+          "path": "openai/apply-patch.md",
+          "tokens": 1899
+        },
+        {
+          "id": "audio-and-speech",
+          "title": "Audio and speech",
+          "description": "The OpenAI API provides a range of audio capabilities. If you know what you want to build, find your use case below t...",
+          "tags": [
+            "audio/speech",
+            "gpt-4o-mini-tts",
+            "tts-1",
+            "tts-1-hd",
+            "audio/transcriptions",
+            "gpt-4o-transcribe",
+            "gpt-4o-mini-transcribe",
+            "whisper-1",
+            "gpt-4o-transcribe-diarize",
+            "gpt-realtime"
+          ],
+          "path": "openai/audio-and-speech.md",
+          "tokens": 2673
+        },
+        {
+          "id": "background-mode",
+          "title": "Background mode",
+          "description": "Agents like Codex and Deep Research show that reasoning models can take several minutes to solve complex problems. Ba...",
+          "tags": [
+            "background",
+            "true",
+            "background=true",
+            "Response",
+            "stream",
+            "sequence_number",
+            "store=true",
+            "stream=true"
+          ],
+          "path": "openai/background-mode.md",
+          "tokens": 1600
+        },
+        {
+          "id": "batch-api",
+          "title": "Batch API",
+          "description": "Learn how to use OpenAI's Batch API to send asynchronous groups of requests with 50% lower costs, a separate pool of ...",
+          "tags": [
+            ".jsonl",
+            "/v1/responses",
+            "/v1/chat/completions",
+            "/v1/embeddings",
+            "/v1/completions",
+            "/v1/moderations",
+            "/v1/images/generations",
+            "/v1/images/edits",
+            "body",
+            "custom_id"
+          ],
+          "path": "openai/batch-api.md",
+          "tokens": 3766
+        },
+        {
+          "id": "chatgpt-developer-mode",
+          "title": "ChatGPT Developer mode",
+          "description": "<a\nhref=\"https://help.openai.com/en/articles/20001062\"\nclass=\"inline-flex items-center gap-1 rounded-full border px-2...",
+          "tags": [
+            "Calendar.create_event",
+            "Reminders.create_task",
+            "Repo.read_file",
+            "{ path: \"…\" }",
+            "Repo.write_file",
+            "CompanyDB",
+            "search",
+            "fetch",
+            "readOnlyHint"
+          ],
+          "path": "openai/chatgpt-developer-mode.md",
+          "tokens": 1470
+        },
+        {
+          "id": "chatkit",
+          "title": "ChatKit",
+          "description": "import {\nBookBookmark,\nCode,\nCube,\nInpaint,\nGlobe,\nPlayground,\nSparkles,\n} from \"@components/react/oai/platform/ui/Ic...",
+          "tags": [
+            "user",
+            "<head>"
+          ],
+          "path": "openai/chatkit.md",
+          "tokens": 1777
+        },
+        {
+          "id": "chatkit-widgets",
+          "title": "ChatKit widgets",
+          "description": "Widgets are the containers and components that come with ChatKit. You can use prebuilt widgets, modify templates, or ...",
+          "tags": [
+            "onAction",
+            "WidgetsOption",
+            "WidgetRoot",
+            "WidgetNode",
+            "status",
+            "confirm",
+            "cancel",
+            "children",
+            "size",
+            "padding"
+          ],
+          "path": "openai/chatkit-widgets.md",
+          "tokens": 3851
+        },
+        {
+          "id": "code-generation",
+          "title": "Code generation",
+          "description": "Writing, reviewing, editing, and answering questions about code is one of the primary use cases for OpenAI models tod...",
+          "tags": [
+            "gpt-5.4",
+            "gpt-5.3-codex"
+          ],
+          "path": "openai/code-generation.md",
+          "tokens": 891
+        },
+        {
+          "id": "code-interpreter",
+          "title": "Code Interpreter",
+          "description": "import {\nCheckCircleFilled,\nXCircle,\n} from \"@components/react/oai/platform/ui/Icon.react\";",
+          "tags": [
+            "code_interpreter_call",
+            "memory_limit",
+            "container_id",
+            "v1/containers",
+            "\"memory_limit\": \"4g\"",
+            "id",
+            "container",
+            "1g",
+            "4g",
+            "16g"
+          ],
+          "path": "openai/code-interpreter.md",
+          "tokens": 3477
+        },
+        {
+          "id": "compaction",
+          "title": "Compaction",
+          "description": "To support long-running interactions, you can use compaction to reduce context\nsize while preserving state needed for...",
+          "tags": [
+            "POST /responses",
+            "client.responses.create",
+            "context_management",
+            "compact_threshold",
+            "/responses/compact",
+            "store=false",
+            "previous_response_id",
+            "/responses"
+          ],
+          "path": "openai/compaction.md",
+          "tokens": 1211
+        },
+        {
+          "id": "completions-api",
+          "title": "Completions API",
+          "description": "export const snippetLegacyCompletions = {\npython: `\nfrom openai import OpenAI\nclient = OpenAI()",
+          "tags": [
+            ".trim(),\n  \"node.js\":",
+            "prompt",
+            "max_tokens",
+            "finish_reason",
+            "response['choices'][0]['text']",
+            "gpt-4o",
+            "gpt-4o-mini"
+          ],
+          "path": "openai/completions-api.md",
+          "tokens": 2167
+        },
+        {
+          "id": "computer-use",
+          "title": "Computer use",
+          "description": "import {\nbatchedComputerTurn,\ncaptureScreenshotDocker,\ncaptureScreenshotPlaywright,\ncodeExecutionHarnessExample,\ncomp...",
+          "tags": [
+            "gpt-5.4",
+            "computer",
+            "env",
+            "pip install playwright",
+            "npm i playwright",
+            "npx playwright install",
+            "x11vnc",
+            "computer_call",
+            "actions[]",
+            "computer_call_output"
+          ],
+          "path": "openai/computer-use.md",
+          "tokens": 4645
+        },
+        {
+          "id": "conversation-state",
+          "title": "Conversation state",
+          "description": "OpenAI provides a few ways to manage conversation state, which is important for preserving information across multipl...",
+          "tags": [
+            "user",
+            "assistant",
+            "conversation",
+            "previous_response_id",
+            "response.create",
+            "null",
+            "gpt-4o-2024-08-06",
+            "input",
+            "/responses",
+            "context_management"
+          ],
+          "path": "openai/conversation-state.md",
+          "tokens": 3474
+        },
+        {
+          "id": "counting-tokens",
+          "title": "Counting tokens",
+          "description": "Token counting lets you determine how many input tokens a request will use before you send it to the model. Use it to:",
+          "tags": [
+            "characters / 4",
+            "responses.create",
+            "file_id",
+            "image_url",
+            "file_url",
+            "file_data",
+            "input_tokens",
+            "object: \"response.input_tokens\""
+          ],
+          "path": "openai/counting-tokens.md",
+          "tokens": 663
+        },
+        {
+          "id": "cybersecurity-checks",
+          "title": "Cybersecurity checks",
+          "description": "GPT-5.3-Codex is the first model we are classifying as having High Cybersecurity Capability under our Preparedness Fr...",
+          "tags": [
+            "cyber_policy"
+          ],
+          "path": "openai/cybersecurity-checks.md",
+          "tokens": 893
+        },
+        {
+          "id": "data-retention-controls-for-abuse-monitoring",
+          "title": "Data retention controls for abuse monitoring",
+          "description": "Abuse monitoring logs may contain certain customer content, such as prompts and responses, as well as metadata derive...",
+          "tags": [
+            "store",
+            "/v1/responses",
+            "v1/chat/completions",
+            "false",
+            "true",
+            "default",
+            "/v1/chat/completions",
+            "/v1/conversations",
+            "/v1/conversations/items",
+            "/v1/chatkit/threads"
+          ],
+          "path": "openai/data-retention-controls-for-abuse-monitoring.md",
+          "tokens": 3033
+        },
+        {
+          "id": "data-residency-controls",
+          "title": "Data residency controls",
+          "description": "Data residency controls are a project configuration option that allow you to configure the location of infrastructure...",
+          "tags": [
+            "gpt-5.4",
+            "gpt-5.4-pro",
+            "/v1/realtime"
+          ],
+          "path": "openai/data-residency-controls.md",
+          "tokens": 7106
+        },
+        {
+          "id": "deep-research",
+          "title": "Deep research",
+          "description": "import {\ndeepResearchBasic,\ndeepResearchClarification,\ndeepResearchPromptEnrichment,\ndeepResearchRemoteMCP,\n} from \"....",
+          "tags": [
+            "o3-deep-research",
+            "o4-mini-deep-research",
+            "background=true",
+            "action",
+            "search",
+            "open_page",
+            "find_in_page",
+            "web_search_call",
+            "message",
+            "max_tool_calls"
+          ],
+          "path": "openai/deep-research.md",
+          "tokens": 4414
+        },
+        {
+          "id": "direct-preference-optimization",
+          "title": "Direct preference optimization",
+          "description": "Direct Preference Optimization (DPO) fine-tuning allows you to fine-tune models based on prompts and pairs of respons...",
+          "tags": [
+            "gpt-4.1-2025-04-14",
+            "gpt-4.1-mini-2025-04-14",
+            "gpt-4.1-nano-2025-04-14",
+            "method",
+            "type",
+            "hyperparameters",
+            "dpo",
+            "beta",
+            "0",
+            "2"
+          ],
+          "path": "openai/direct-preference-optimization.md",
+          "tokens": 2672
+        },
+        {
+          "id": "error-codes",
+          "title": "Error codes",
+          "description": "This guide includes an overview on error codes you might see from both the API and our official Python library. Each ...",
+          "tags": [
+            "previous_response_not_found",
+            "previous_response_id",
+            "null",
+            "websocket_connection_limit_reached",
+            "APIConnectionError",
+            "APITimeoutError",
+            "AuthenticationError",
+            "BadRequestError",
+            "InvalidRequestError",
+            "InternalServerError"
+          ],
+          "path": "openai/error-codes.md",
+          "tokens": 6483
+        },
+        {
+          "id": "evaluate-external-models",
+          "title": "Evaluate external models",
+          "description": "Model selection is an important lever that enables builders to improve their AI applications. When using Evaluations ...",
+          "tags": [
+            "https://"
+          ],
+          "path": "openai/evaluate-external-models.md",
+          "tokens": 1116
+        },
+        {
+          "id": "evaluation-best-practices",
+          "title": "Evaluation best practices",
+          "description": "Generative AI is variable. Models sometimes produce different output from the same input, which makes traditional sof...",
+          "tags": [
+            "order_status",
+            "return_policy",
+            "technical_issue",
+            "cancel_order",
+            "other",
+            "check_order_status(order_id)",
+            "order_id",
+            "\"on: 123\""
+          ],
+          "path": "openai/evaluation-best-practices.md",
+          "tokens": 5412
+        },
+        {
+          "id": "file-inputs",
+          "title": "File inputs",
+          "description": "OpenAI models can accept files as input_file items. In the Responses API, you can send a file as Base64-encoded data,...",
+          "tags": [
+            "input_file",
+            "/v1/files",
+            "gpt-4o",
+            ".docx",
+            ".pptx",
+            ".txt",
+            ".xlsx",
+            ".csv",
+            ".tsv",
+            ".xls"
+          ],
+          "path": "openai/file-inputs.md",
+          "tokens": 7551
+        },
+        {
+          "id": "file-search",
+          "title": "File search",
+          "description": "import {\nCheckCircleFilled,\nXCircle,\n} from \"@components/react/oai/platform/ui/Icon.react\";",
+          "tags": [
+            "vector_stores",
+            "completed",
+            "file_search",
+            "file_search_call",
+            "message",
+            "include",
+            "text/",
+            "utf-8",
+            "utf-16",
+            "ascii"
+          ],
+          "path": "openai/file-search.md",
+          "tokens": 1564
+        },
+        {
+          "id": "fine-tuning-best-practices",
+          "title": "Fine-tuning best practices",
+          "description": "If you're not getting strong results with a fine-tuned model, consider the following iterations on your process.",
+          "tags": [
+            "user",
+            "assistant",
+            "messages",
+            "weight",
+            "gpt-4.1-2025-04-14",
+            "gpt-4.1-mini-2025-04-14",
+            "gpt-4.1-nano-2025-04-14",
+            "gpt-4o-2024-08-06",
+            "gpt-4o-mini-2024-07-18"
+          ],
+          "path": "openai/fine-tuning-best-practices.md",
+          "tokens": 2331
+        },
+        {
+          "id": "flex-processing",
+          "title": "Flex processing",
+          "description": "Flex processing provides lower costs for Responses or Chat Completions requests in exchange for slower response times...",
+          "tags": [
+            "service_tier",
+            "flex",
+            "timeout",
+            "408 Request Timeout",
+            "429 Resource Unavailable",
+            "auto"
+          ],
+          "path": "openai/flex-processing.md",
+          "tokens": 1001
+        },
+        {
+          "id": "function-calling",
+          "title": "Function calling",
+          "description": "Function calling (also known as tool calling) provides a powerful and flexible way for OpenAI models to interface wit...",
+          "tags": [
+            "get_weather",
+            "location",
+            "Paris",
+            "call_id",
+            "{\"temperature\": \"25\", \"unit\": \"C\"}",
+            "get_horoscope",
+            "tools",
+            "type",
+            "function",
+            "name"
+          ],
+          "path": "openai/function-calling.md",
+          "tokens": 8962
+        },
+        {
+          "id": "getting-started-with-datasets",
+          "title": "Getting started with datasets",
+          "description": "Evaluations (often called evals) test model outputs to ensure they meet your specified style and content criteria. Wr...",
+          "tags": [
+            "company",
+            "correct_revenue",
+            "correct_income",
+            "temperature",
+            "top_p"
+          ],
+          "path": "openai/getting-started-with-datasets.md",
+          "tokens": 2839
+        },
+        {
+          "id": "graders",
+          "title": "Graders",
+          "description": "Graders are a way to evaluate your model's performance against reference answers. Our graders API is a way to test yo...",
+          "tags": [
+            "{{ }}",
+            "{{}}",
+            "{{ namespace.variable }}",
+            "item",
+            "sample",
+            "{{ item.reference_answer }}",
+            "output_text",
+            "output_json",
+            "response_format",
+            "output_tools"
+          ],
+          "path": "openai/graders.md",
+          "tokens": 5023
+        },
+        {
+          "id": "overview",
+          "title": "Overview",
+          "description": "The OpenAI API lets you generate and edit images from text prompts, using GPT Image or DALL·E models. You can access ...",
+          "tags": [
+            "gpt-image-1.5",
+            "gpt-image-1",
+            "gpt-image-1-mini",
+            "dall-e-2",
+            "dall-e-3",
+            "chatgpt-image-latest",
+            "action"
+          ],
+          "path": "openai/overview.md",
+          "tokens": 1211
+        },
+        {
+          "id": "generate-images",
+          "title": "Generate Images",
+          "description": "You can use the image generation endpoint to create images based on text prompts, or the image generation tool in the...",
+          "tags": [
+            "n",
+            "previous_response_id",
+            "action",
+            "gpt-image-1.5",
+            "chatgpt-image-latest",
+            "action: \"auto\"",
+            "action: \"generate\"",
+            "action: \"edit\"",
+            "edit",
+            "auto"
+          ],
+          "path": "openai/generate-images.md",
+          "tokens": 4060
+        },
+        {
+          "id": "edit-images",
+          "title": "Edit Images",
+          "description": "The image edits endpoint lets you:",
+          "tags": [
+            "gpt-image-1.5",
+            "gpt-image-1",
+            "gpt-image-1-mini",
+            "input_fidelity",
+            "high",
+            "low"
+          ],
+          "path": "openai/edit-images.md",
+          "tokens": 3579
+        },
+        {
+          "id": "customize-image-output",
+          "title": "Customize Image Output",
+          "description": "You can configure the following output options:",
+          "tags": [
+            "1024x1024",
+            "1024x1536",
+            "low",
+            "medium",
+            "high",
+            "size",
+            "quality",
+            "background",
+            "auto",
+            "png"
+          ],
+          "path": "openai/customize-image-output.md",
+          "tokens": 1884
+        },
+        {
+          "id": "image-generation",
+          "title": "Image generation",
+          "description": "The image generation tool allows you to generate images using a text prompt, and optionally image inputs. It leverage...",
+          "tags": [
+            "gpt-image-1",
+            "gpt-image-1-mini",
+            "gpt-image-1.5",
+            "image_generation",
+            "image_generation_call",
+            "tool_choice",
+            "{\"type\": \"image_generation\"}",
+            "size",
+            "quality",
+            "background"
+          ],
+          "path": "openai/image-generation.md",
+          "tokens": 2884
+        },
+        {
+          "id": "images-and-vision",
+          "title": "Images and vision",
+          "description": "In this guide, you will learn about building applications involving images with the OpenAI API.\nIf you know what you ...",
+          "tags": [
+            "gpt-image-1",
+            "content",
+            "detail",
+            "low",
+            "high",
+            "original",
+            "auto",
+            "\"low\"",
+            "\"high\"",
+            "\"original\""
+          ],
+          "path": "openai/images-and-vision.md",
+          "tokens": 5653
+        },
+        {
+          "id": "latency-optimization",
+          "title": "Latency optimization",
+          "description": "This guide covers the core set of principles you can apply to improve latency across a wide variety of LLM-related us...",
+          "tags": [
+            "max_tokens",
+            "stop_tokens",
+            "response",
+            "enough_information_in_context"
+          ],
+          "path": "openai/latency-optimization.md",
+          "tokens": 5546
+        },
+        {
+          "id": "local-shell",
+          "title": "Local shell",
+          "description": "The local shell tool is outdated. For new use cases, use the\nshell tool with GPT-5.1 instead. Learn\nmore.",
+          "tags": [
+            "shell",
+            "codex-mini-latest",
+            "local_shell_call",
+            "local_shell",
+            "exec",
+            "local_shell_call_output",
+            "timeout_ms",
+            "rm",
+            "curl",
+            "output"
+          ],
+          "path": "openai/local-shell.md",
+          "tokens": 1515
+        },
+        {
+          "id": "manage-permissions-in-the-openai-platform",
+          "title": "Manage permissions in the OpenAI platform",
+          "description": "Role-based access control (RBAC) lets you decide who can do what across your organization and projects—both through t...",
+          "tags": [
+            "/v1/chat/completions",
+            "Read",
+            "Write",
+            "Request"
+          ],
+          "path": "openai/manage-permissions-in-the-openai-platform.md",
+          "tokens": 3076
+        },
+        {
+          "id": "managing-costs",
+          "title": "Managing costs",
+          "description": "This document describes how Realtime API billing works and offer strategies for optimizing costs. Costs are accrued a...",
+          "tags": [
+            "gpt-realtime",
+            "gpt-realtime-mini",
+            "response.done",
+            "whisper-1",
+            "gpt-4o-transcribe",
+            "token_limits.post_instructions",
+            "retention_ratio",
+            "post_instructions",
+            "session.truncation.retention_ratio",
+            "1.0"
+          ],
+          "path": "openai/managing-costs.md",
+          "tokens": 2373
+        },
+        {
+          "id": "mcp-and-connectors",
+          "title": "MCP and Connectors",
+          "description": "import {\nCheckCircleFilled,\nXCircle,\n} from \"@components/react/oai/platform/ui/Icon.react\";",
+          "tags": [
+            "mcp",
+            "output",
+            "mcp_list_tools",
+            "mcp_call",
+            "tools",
+            "allowed_tools",
+            "mcp_approval_request",
+            "mcp_approval_response",
+            "previous_response_id",
+            "require_approval"
+          ],
+          "path": "openai/mcp-and-connectors.md",
+          "tokens": 9768
+        },
+        {
+          "id": "migrate-to-the-responses-api",
+          "title": "Migrate to the Responses API",
+          "description": "import {\nCheckCircleFilled,\nXCircle,\n} from \"@components/react/oai/platform/ui/Icon.react\";",
+          "tags": [
+            "web_search",
+            "image_generation",
+            "file_search",
+            "code_interpreter",
+            "store: true",
+            "message",
+            "function_call",
+            "function_call_output",
+            "choices",
+            "n"
+          ],
+          "path": "openai/migrate-to-the-responses-api.md",
+          "tokens": 6409
+        },
+        {
+          "id": "model-optimization",
+          "title": "Model optimization",
+          "description": "import {\nReport,\nCode,\nTools,\n} from \"@components/react/oai/platform/ui/Icon.react\";\nimport {\nevalsIcon,\npromptIcon,\n...",
+          "tags": [
+            "gpt-4.1",
+            "o4-mini"
+          ],
+          "path": "openai/model-optimization.md",
+          "tokens": 1786
+        },
+        {
+          "id": "model-selection",
+          "title": "Model selection",
+          "description": "Choosing the right model, whether GPT-4o or a smaller option like GPT-4o-mini, requires balancing accuracy, latency, ...",
+          "tags": [
+            "GPT-4o",
+            "GPT-4o-mini",
+            "gpt-4o",
+            "gpt-4o-mini"
+          ],
+          "path": "openai/model-selection.md",
+          "tokens": 1555
+        },
+        {
+          "id": "moderation",
+          "title": "Moderation",
+          "description": "Use the moderations endpoint to check whether text or images are potentially harmful. If harmful content is identifie...",
+          "tags": [
+            "omni-moderation-latest",
+            "text-moderation-latest",
+            "violence",
+            "category_scores"
+          ],
+          "path": "openai/moderation.md",
+          "tokens": 1736
+        },
+        {
+          "id": "node-reference",
+          "title": "Node reference",
+          "description": "Agent Builder is a visual canvas for composing agentic worfklows. Workflows are made up of nodes and connections that...",
+          "tags": [
+            "input_as_text"
+          ],
+          "path": "openai/node-reference.md",
+          "tokens": 1323
+        },
+        {
+          "id": "optimizing-llm-accuracy",
+          "title": "Optimizing LLM Accuracy",
+          "description": "Optimizing LLMs is hard.",
+          "tags": [],
+          "path": "openai/optimizing-llm-accuracy.md",
+          "tokens": 7660
+        },
+        {
+          "id": "predicted-outputs",
+          "title": "Predicted Outputs",
+          "description": "Predicted Outputs enable you to speed up API responses from Chat Completions when many of the output tokens are known...",
+          "tags": [
+            "prediction",
+            "gpt-4o",
+            "gpt-4o-mini",
+            "gpt-4.1",
+            "gpt-4.1-mini",
+            "gpt-4.1-nano",
+            "username",
+            "User",
+            "email",
+            "accepted_prediction_tokens"
+          ],
+          "path": "openai/predicted-outputs.md",
+          "tokens": 2539
+        },
+        {
+          "id": "priority-processing",
+          "title": "Priority processing",
+          "description": "Priority processing delivers significantly lower and more consistent latency compared to Standard processing while ke...",
+          "tags": [
+            "service_tier=priority",
+            "service_tier"
+          ],
+          "path": "openai/priority-processing.md",
+          "tokens": 933
+        },
+        {
+          "id": "production-best-practices",
+          "title": "Production best practices",
+          "description": "This guide provides a comprehensive set of best practices to help you transition from prototype to production. Whethe...",
+          "tags": [
+            "Untracked",
+            "gpt-5",
+            "gpt-5-nano",
+            "max_tokens",
+            "11.",
+            "n",
+            "best_of",
+            "> 1",
+            "[ max_tokens * max (n, best_of) ]",
+            "stream: true"
+          ],
+          "path": "openai/production-best-practices.md",
+          "tokens": 3968
+        },
+        {
+          "id": "prompt-caching",
+          "title": "Prompt caching",
+          "description": "Model prompts often contain repetitive content, like system prompts and common instructions. OpenAI routes API reques...",
+          "tags": [
+            "prompt_cache_key",
+            "prompt_cache_retention",
+            "Responses.create",
+            "chat.completions.create",
+            "in_memory",
+            "24h",
+            "cached_tokens",
+            "usage.prompt_tokens_details",
+            "tools",
+            "store=True"
+          ],
+          "path": "openai/prompt-caching.md",
+          "tokens": 2233
+        },
+        {
+          "id": "prompt-engineering",
+          "title": "Prompt engineering",
+          "description": "With the OpenAI API, you can use a large language model to generate text from a prompt, as you might using ChatGPT. M...",
+          "tags": [
+            "output",
+            "output[0].content[0].text",
+            "output_text",
+            "model",
+            "gpt-4.1",
+            "gpt-4.1-2025-04-14",
+            "instructions",
+            "input",
+            "previous_response_id",
+            "developer"
+          ],
+          "path": "openai/prompt-engineering.md",
+          "tokens": 7026
+        },
+        {
+          "id": "prompt-generation",
+          "title": "Prompt generation",
+          "description": "import {\nFUNCTION_META_SCHEMA,\nFUNCTION_META_SCHEMA_PROMPT,\nGENERAL_META_PROMPT,\nGENERAL_META_PROMPT_EDIT,\nMETA_SCHEM...",
+          "tags": [
+            "+\nGENERAL_META_PROMPT + \"\\n\" +",
+            "+\nREALTIME_META_PROMPT + \"\\n\" +",
+            "+\nGENERAL_META_PROMPT_EDIT + \"\\n\" +",
+            "+\nREALTIME_META_PROMPT_EDIT + \"\\n\" +",
+            "parameters",
+            "strict=true",
+            "strict=false",
+            "additionalProperties",
+            "o1-preview",
+            "gpt-4o"
+          ],
+          "path": "openai/prompt-generation.md",
+          "tokens": 2458
+        },
+        {
+          "id": "prompt-guidance-for-gpt-5-4",
+          "title": "Prompt guidance for GPT-5.4",
+          "description": "GPT-5.4, our newest mainline model, is designed to balance long-running task performance, stronger control over style...",
+          "tags": [
+            "verbosity",
+            "detail",
+            "auto",
+            "high",
+            "original",
+            "gpt-5.4",
+            "low",
+            "phase",
+            "previous_response_id",
+            "encrypted_content"
+          ],
+          "path": "openai/prompt-guidance-for-gpt-5-4.md",
+          "tokens": 7886
+        },
+        {
+          "id": "prompt-optimizer",
+          "title": "Prompt optimizer",
+          "description": "The prompt optimizer is a chat interface in the dashboard, where you enter a prompt, and we optimize it according to ...",
+          "tags": [],
+          "path": "openai/prompt-optimizer.md",
+          "tokens": 782
+        },
+        {
+          "id": "prompting",
+          "title": "Prompting",
+          "description": "Prompting is the process of providing input to a model. The quality of your output often depends on how well you're a...",
+          "tags": [
+            "{{variable}}",
+            "city",
+            "San Francisco",
+            "prompt_id"
+          ],
+          "path": "openai/prompting.md",
+          "tokens": 1236
+        },
+        {
+          "id": "define-a-retry-decorator",
+          "title": "define a retry decorator",
+          "description": "def retry_with_exponential_backoff(\nfunc,\ninitial_delay: float = 1,\nexponential_base: float = 2,\njitter: bool = True,...",
+          "tags": [
+            "tenacity.retry",
+            "tenacity.wait_random_exponential",
+            "max_tokens"
+          ],
+          "path": "openai/define-a-retry-decorator.md",
+          "tokens": 3021
+        },
+        {
+          "id": "realtime-api",
+          "title": "Realtime API",
+          "description": "import {\nBolt,\nPhone,\nCube,\nDesktop,\n} from \"@components/react/oai/platform/ui/Icon.react\";",
+          "tags": [
+            "POST /v1/realtime/client_secrets",
+            "/v1/realtime/calls",
+            "realtime",
+            "transcription",
+            "response.text.delta",
+            "response.output_text.delta",
+            "response.audio.delta",
+            "response.output_audio.delta",
+            "response.audio_transcript.delta",
+            "response.output_audio_transcript.delta"
+          ],
+          "path": "openai/realtime-api.md",
+          "tokens": 2387
+        },
+        {
+          "id": "realtime-api-with-sip",
+          "title": "Realtime API with SIP",
+          "description": "SIP is a\nprotocol used to make phone calls over the internet. With SIP and the\nRealtime API you can direct incoming p...",
+          "tags": [
+            "$PROJECT_ID",
+            "proj_",
+            "realtime.call.incoming",
+            "call_id",
+            "create client secret",
+            "Authorization",
+            "200 OK",
+            "status_code",
+            "486",
+            "603 Decline"
+          ],
+          "path": "openai/realtime-api-with-sip.md",
+          "tokens": 2666
+        },
+        {
+          "id": "realtime-api-with-webrtc",
+          "title": "Realtime API with WebRTC",
+          "description": "WebRTC is a powerful set of standard interfaces for building real-time applications. The OpenAI Realtime API supports...",
+          "tags": [
+            "/v1/realtime/calls"
+          ],
+          "path": "openai/realtime-api-with-webrtc.md",
+          "tokens": 2584
+        },
+        {
+          "id": "realtime-api-with-websocket",
+          "title": "Realtime API with WebSocket",
+          "description": "WebSockets are a broadly supported API for realtime data transfer, and a great choice for connecting to the OpenAI Re...",
+          "tags": [],
+          "path": "openai/realtime-api-with-websocket.md",
+          "tokens": 1774
+        },
+        {
+          "id": "session-lifecycle-events",
+          "title": "Session lifecycle events",
+          "description": "After initiating a session via either WebRTC or WebSockets, the server will send a session.created event indicating t...",
+          "tags": [
+            "session.created",
+            "session.update",
+            "voice",
+            "session.updated"
+          ],
+          "path": "openai/session-lifecycle-events.md",
+          "tokens": 1055
+        },
+        {
+          "id": "text-inputs-and-outputs",
+          "title": "Text inputs and outputs",
+          "description": "To generate text with a Realtime model, you can add text inputs to the current conversation, ask the model to generat...",
+          "tags": [
+            "text",
+            "conversation.item.create",
+            "response.create",
+            "response.done",
+            "response.output_text.delta"
+          ],
+          "path": "openai/text-inputs-and-outputs.md",
+          "tokens": 1394
+        },
+        {
+          "id": "audio-inputs-and-outputs",
+          "title": "Audio inputs and outputs",
+          "description": "One of the most powerful features of the Realtime API is voice-to-voice interaction with the model, without an interm...",
+          "tags": [
+            "voice",
+            "response.create",
+            "alloy",
+            "ash",
+            "ballad",
+            "coral",
+            "echo",
+            "sage",
+            "shimmer",
+            "verse"
+          ],
+          "path": "openai/audio-inputs-and-outputs.md",
+          "tokens": 4024
+        },
+        {
+          "id": "voice-activity-detection",
+          "title": "Voice activity detection",
+          "description": "By default, Realtime sessions have voice activity detection (VAD) enabled, which means the API will determine when th...",
+          "tags": [
+            "turn_detection",
+            "null",
+            "session.update",
+            "input_audio_buffer.commit",
+            "response.create",
+            "input_audio_buffer.clear",
+            "turn_detection.interrupt_response",
+            "turn_detection.create_response",
+            "false"
+          ],
+          "path": "openai/voice-activity-detection.md",
+          "tokens": 562
+        },
+        {
+          "id": "create-responses-outside-the-default-conversation",
+          "title": "Create responses outside the default conversation",
+          "description": "By default, all responses generated during a session are added to the session's conversation state (the \"default conv...",
+          "tags": [
+            "response.conversation",
+            "none",
+            "response.create",
+            "metadata",
+            "response.done",
+            "input"
+          ],
+          "path": "openai/create-responses-outside-the-default-conversation.md",
+          "tokens": 1709
+        },
+        {
+          "id": "realtime-conversations-function-calling",
+          "title": "Function calling",
+          "description": "The Realtime models also support function calling, which enables you to execute custom code to extend the capabilitie...",
+          "tags": [
+            "session.tools",
+            "session.update",
+            "response.tools",
+            "response.create",
+            "description",
+            "sign",
+            "conversation.item.create",
+            "response.function_call_arguments.delta",
+            "response.done",
+            "response.output[0].type"
+          ],
+          "path": "openai/realtime-conversations-function-calling.md",
+          "tokens": 2263
+        },
+        {
+          "id": "interruption-and-truncation",
+          "title": "Interruption and Truncation",
+          "description": "In many voice applications the user can interrupt the model while it's speaking. Realtime API handles interruptions w...",
+          "tags": [
+            "input_audio_buffer.speech_started",
+            "response.cancelled",
+            "conversation.item.truncate"
+          ],
+          "path": "openai/interruption-and-truncation.md",
+          "tokens": 573
+        },
+        {
+          "id": "push-to-talk",
+          "title": "Push-to-talk",
+          "description": "Realtime API defaults to using voice activity detection (VAD), which means model responses will be triggered with aud...",
+          "tags": [
+            "\"turn_detection\": null",
+            "session.update",
+            "response.cancel",
+            "conversation.item.truncate",
+            "input_audio_buffer.append",
+            "input_audio_buffer.commit",
+            "response.create",
+            "input_audio_buffer.clear",
+            "output_audio_buffer.clear"
+          ],
+          "path": "openai/push-to-talk.md",
+          "tokens": 924
+        },
+        {
+          "id": "realtime-transcription",
+          "title": "Realtime transcription",
+          "description": "You can use the Realtime API for transcription-only use cases, either with input from a microphone or from a file. Fo...",
+          "tags": [
+            "type",
+            "\"transcription\"",
+            "transcription",
+            "audio.input.format",
+            "audio/pcm",
+            "rate",
+            "24000",
+            "audio/pcmu",
+            "audio/pcma",
+            "audio.input.noise_reduction"
+          ],
+          "path": "openai/realtime-transcription.md",
+          "tokens": 1602
+        },
+        {
+          "id": "reasoning-best-practices",
+          "title": "Reasoning best practices",
+          "description": "OpenAI offers two types of models: reasoning models (o3 and o4-mini, for example) and GPT models (like GPT-4.1). Thes...",
+          "tags": [
+            "o1-2024-12-17",
+            "Formatting re-enabled",
+            "o3",
+            "o4-mini",
+            "o1",
+            "o3-mini",
+            "o1-mini",
+            "o1-preview",
+            "store",
+            "true"
+          ],
+          "path": "openai/reasoning-best-practices.md",
+          "tokens": 4229
+        },
+        {
+          "id": "reasoning-models",
+          "title": "Reasoning models",
+          "description": "import {\nQuestion,\nStorage,\n} from \"@components/react/oai/platform/ui/Icon.react\";",
+          "tags": [
+            "gpt-5-mini",
+            "gpt-5-nano",
+            "gpt-5",
+            "reasoning.effort",
+            "low",
+            "medium",
+            "high",
+            "output_tokens_details",
+            "max_output_tokens",
+            "status"
+          ],
+          "path": "openai/reasoning-models.md",
+          "tokens": 3787
+        },
+        {
+          "id": "reinforcement-fine-tuning",
+          "title": "Reinforcement fine-tuning",
+          "description": "Reinforcement fine-tuning (RFT) adapts an OpenAI reasoning model with a feedback signal you define. Like supervised f...",
+          "tags": [
+            "o4-mini-2025-04-16",
+            "compliant",
+            "yes",
+            "no",
+            "needs review",
+            "explanation",
+            "string_check",
+            "score_model",
+            "calculate_output",
+            "{{ }}"
+          ],
+          "path": "openai/reinforcement-fine-tuning.md",
+          "tokens": 1968
+        },
+        {
+          "id": "prepare-your-dataset",
+          "title": "Prepare your dataset",
+          "description": "To create an RFT fine-tune, you'll need both a training and test dataset. Both the training and test datasets will sh...",
+          "tags": [
+            "messages",
+            "compliant",
+            "explanation",
+            "fine-tune"
+          ],
+          "path": "openai/prepare-your-dataset.md",
+          "tokens": 1057
+        },
+        {
+          "id": "create-a-fine-tune-job",
+          "title": "Create a fine-tune job",
+          "description": "Create a fine-tune job using either the API or fine-tuning dashboard. To do this, you need:",
+          "tags": [
+            "o4-mini-2025-04-16",
+            "to_strict_json_schema",
+            "type",
+            "name",
+            "strict",
+            "response_format",
+            "id",
+            "shared_with_openai",
+            "true",
+            "train_reward_mean"
+          ],
+          "path": "openai/create-a-fine-tune-job.md",
+          "tokens": 3765
+        },
+        {
+          "id": "safety-checks",
+          "title": "Safety checks",
+          "description": "Before launching in production, review and follow the following safety information.",
+          "tags": [
+            "moderation_checks"
+          ],
+          "path": "openai/safety-checks.md",
+          "tokens": 1542
+        },
+        {
+          "id": "appendix",
+          "title": "Appendix",
+          "description": "Reinforcement fine-tuning jobs publish per-step training metrics as fine-tuning events. Pull these metrics through th...",
+          "tags": [
+            "train_reward_mean",
+            "valid_reward_mean",
+            "event.data.scores",
+            "train_reasoning_tokens_mean",
+            "valid_reasoning_tokens_mean",
+            "event.data.usage.graders",
+            "train_prompt_tokens_mean",
+            "train_prompt_tokens_count",
+            "train_completion_tokens_mean",
+            "train_completion_tokens_count"
+          ],
+          "path": "openai/appendix.md",
+          "tokens": 4038
+        },
+        {
+          "id": "reinforcement-fine-tuning-use-cases",
+          "title": "Reinforcement fine-tuning use cases",
+          "description": "Reinforcement fine-tuning (RFT) provides a way to improve your model's performance at specific tasks. The task must b...",
+          "tags": [],
+          "path": "openai/reinforcement-fine-tuning-use-cases.md",
+          "tokens": 1822
+        },
+        {
+          "id": "retrieval",
+          "title": "Retrieval",
+          "description": "The Retrieval API allows you to perform semantic search over your data, which is a technique that surfaces semantical...",
+          "tags": [
+            "\"When did we go to the moon?\"",
+            "text-embedding-3-small",
+            "search",
+            "query",
+            "max_num_results",
+            "rewrite_query=true",
+            "search_query",
+            "attribute_filter",
+            "key",
+            "attributes"
+          ],
+          "path": "openai/retrieval.md",
+          "tokens": 3057
+        },
+        {
+          "id": "safety-best-practices",
+          "title": "Safety best practices",
+          "description": "export const snippetExampleProvidingUserIdentifier = {\npython: `\nfrom openai import OpenAI\nclient = OpenAI()",
+          "tags": [
+            ".trim(),\n  curl:",
+            "safety_identifier"
+          ],
+          "path": "openai/safety-best-practices.md",
+          "tokens": 1277
+        },
+        {
+          "id": "safety-checks-2",
+          "title": "Safety checks",
+          "description": "export const snippetExampleProvidingUserIdentifier = {\npython: `\nfrom openai import OpenAI\nclient = OpenAI()",
+          "tags": [
+            ".trim(),\n  curl:",
+            "safety_identifier",
+            "identifier blocked"
+          ],
+          "path": "openai/safety-checks-2.md",
+          "tokens": 1458
+        },
+        {
+          "id": "safety-in-building-agents",
+          "title": "Safety in building agents",
+          "description": "As you build and deploy agents with Agent Builder, it's important to understand the risks. Learn about risk types and...",
+          "tags": [],
+          "path": "openai/safety-in-building-agents.md",
+          "tokens": 1328
+        },
+        {
+          "id": "shell",
+          "title": "Shell",
+          "description": "The shell tool gives models the ability to work inside a complete terminal environment. We support shell for local ex...",
+          "tags": [
+            "container_auto",
+            "Debian 12",
+            "/mnt/data",
+            "sudo",
+            "3.11",
+            "22.16",
+            "17.0",
+            "8.2",
+            "3.1",
+            "1.23"
+          ],
+          "path": "openai/shell.md",
+          "tokens": 4106
+        },
+        {
+          "id": "skills",
+          "title": "Skills",
+          "description": "Agent Skills let you upload and reuse versioned bundles of files in hosted and local shell environments.",
+          "tags": [
+            "SKILL.md",
+            ".zip",
+            "files[]",
+            "tools[].environment.skills",
+            "<skill name>",
+            "skill_reference",
+            "name",
+            "description",
+            "path",
+            "skill.md"
+          ],
+          "path": "openai/skills.md",
+          "tokens": 2080
+        },
+        {
+          "id": "speech-to-text",
+          "title": "Speech to text",
+          "description": "The Audio API provides two speech to text endpoints:",
+          "tags": [
+            "transcriptions",
+            "translations",
+            "whisper-1",
+            "gpt-4o-mini-transcribe",
+            "gpt-4o-transcribe",
+            "gpt-4o-transcribe-diarize",
+            "mp3",
+            "mp4",
+            "mpeg",
+            "mpga"
+          ],
+          "path": "openai/speech-to-text.md",
+          "tokens": 6391
+        },
+        {
+          "id": "streaming-api-responses",
+          "title": "Streaming API responses",
+          "description": "By default, when you make a request to the OpenAI API, we generate the model's entire output before sending it back i...",
+          "tags": [
+            "stream=true",
+            "previous_response_id",
+            "stream=True",
+            "type"
+          ],
+          "path": "openai/streaming-api-responses.md",
+          "tokens": 900
+        },
+        {
+          "id": "if-the-model-refuses-to-respond-you-will-get-a-refusal-message",
+          "title": "If the model refuses to respond, you will get a refusal message",
+          "description": "if math_reasoning.refusal:\nprint(math_reasoning.refusal)\nelse:\nprint(math_reasoning.parsed)\n.trim(),\n  \"javascript\": ...",
+          "tags": [
+            ".trim(),\n  \"javascript\":",
+            "gpt-4-turbo",
+            "json_schema",
+            "response_format",
+            "text.format",
+            "gpt-4o-mini",
+            "gpt-4o-mini-2024-07-18",
+            "gpt-4o-2024-08-06",
+            "gpt-3.5-turbo",
+            "gpt-4-*"
+          ],
+          "path": "openai/if-the-model-refuses-to-respond-you-will-get-a-refusal-message.md",
+          "tokens": 3409
+        },
+        {
+          "id": "supervised-fine-tuning",
+          "title": "Supervised fine-tuning",
+          "description": "Supervised fine-tuning (SFT) lets you train an OpenAI model with examples for your specific use case. The result is a...",
+          "tags": [
+            "gpt-4.1-2025-04-14",
+            "gpt-4.1-mini-2025-04-14",
+            "gpt-4.1-nano-2025-04-14",
+            "gpt-4.1",
+            "gpt-4.1-mini",
+            "model",
+            "training_file",
+            "method",
+            "moderation_checks"
+          ],
+          "path": "openai/supervised-fine-tuning.md",
+          "tokens": 3246
+        },
+        {
+          "id": "text-generation",
+          "title": "Text generation",
+          "description": "With the OpenAI API, you can use a large language model to generate text from a prompt, as you might using ChatGPT. M...",
+          "tags": [
+            "output",
+            "output[0].content[0].text",
+            "output_text",
+            "gpt-5-2025-08-07",
+            "instructions",
+            "input",
+            "previous_response_id",
+            "developer",
+            "user",
+            "{{customer_name}}"
+          ],
+          "path": "openai/text-generation.md",
+          "tokens": 3158
+        },
+        {
+          "id": "text-to-speech",
+          "title": "Text to speech",
+          "description": "The Audio API provides a speech endpoint based on our GPT-4o mini TTS (text-to-speech) model. It comes with 11 built-...",
+          "tags": [
+            "speech",
+            "alloy",
+            "gpt-4o-mini-tts",
+            "tts-1",
+            "tts-1-hd",
+            "ash",
+            "ballad",
+            "coral",
+            "echo",
+            "fable"
+          ],
+          "path": "openai/text-to-speech.md",
+          "tokens": 3726
+        },
+        {
+          "id": "theming-and-customization-in-chatkit",
+          "title": "Theming and customization in ChatKit",
+          "description": "import {\nInpaint,\nGlobe,\nPlayground,\nGithub,\nSparkles,\n} from \"@components/react/oai/platform/ui/Icon.react\";",
+          "tags": [
+            "useChatKit({...})",
+            "chatkit.setOptions({...})",
+            "hosted",
+            "onTagSearch",
+            "onClick"
+          ],
+          "path": "openai/theming-and-customization-in-chatkit.md",
+          "tokens": 1640
+        },
+        {
+          "id": "tool-search",
+          "title": "Tool search",
+          "description": "import {\nhostedToolSearchExample,\nhostedToolSearchResponse,\nclientToolSearchExample,\nclientToolSearchFirstResponse,\nc...",
+          "tags": [
+            "tool_search",
+            "tools",
+            "defer_loading: true",
+            "tool_search_call",
+            "tool_search_output",
+            "{\"type\": \"tool_search\"}",
+            "execution",
+            "server",
+            "call_id",
+            "null"
+          ],
+          "path": "openai/tool-search.md",
+          "tokens": 2278
+        },
+        {
+          "id": "under-18-api-guidance",
+          "title": "Under 18 API Guidance",
+          "description": "Young people have unique needs online and offline, so developers should implement additional safeguards when using ou...",
+          "tags": [],
+          "path": "openai/under-18-api-guidance.md",
+          "tokens": 613
+        },
+        {
+          "id": "using-gpt-5-4",
+          "title": "Using GPT-5.4",
+          "description": "import {\nBolt,\nCode,\nSparkles,\n} from \"@components/react/oai/platform/ui/Icon.react\";",
+          "tags": [
+            "none",
+            "gpt-5.4",
+            "tool_search",
+            "gpt-5.2",
+            "gpt-5.3-codex",
+            "gpt-5-chat-latest",
+            "gpt-5.4-pro",
+            "gpt-5-mini",
+            "gpt-5-nano",
+            "reasoning.effort"
+          ],
+          "path": "openai/using-gpt-5-4.md",
+          "tokens": 7130
+        },
+        {
+          "id": "using-realtime-models",
+          "title": "Using realtime models",
+          "description": "Realtime models are post-trained for specific customer use cases. In response to your feedback, the latest speech-to-...",
+          "tags": [
+            "session.update"
+          ],
+          "path": "openai/using-realtime-models.md",
+          "tokens": 4730
+        },
+        {
+          "id": "using-tools",
+          "title": "Using tools",
+          "description": "import {\nFile,\nFunctions,\nImageSquare,\nCode,\n} from \"@components/react/oai/platform/ui/Icon.react\";",
+          "tags": [
+            "tools",
+            "tool_choice"
+          ],
+          "path": "openai/using-tools.md",
+          "tokens": 1480
+        },
+        {
+          "id": "vector-embeddings",
+          "title": "Vector embeddings",
+          "description": "OpenAI’s text embeddings measure the relatedness of text strings. Embeddings are commonly used for:",
+          "tags": [
+            "text-embedding-3-small",
+            "1536",
+            "3072",
+            "text-embedding-3-large",
+            "-3",
+            "ProductId",
+            "UserId",
+            "Score",
+            "Summary",
+            "Text"
+          ],
+          "path": "openai/vector-embeddings.md",
+          "tokens": 5489
+        },
+        {
+          "id": "video-generation-with-sora",
+          "title": "Video generation with Sora",
+          "description": "import {\ncreateVideo,\ncreateAndPollVideo,\ngetVideoResult,\n} from \"./video-generation-examples\";",
+          "tags": [
+            "sora-2",
+            "sora-2-pro",
+            "POST /videos",
+            "id",
+            "status",
+            "GET /videos/{video_id}",
+            "completed",
+            "GET /videos/{video_id}/content",
+            "size",
+            "seconds"
+          ],
+          "path": "openai/video-generation-with-sora.md",
+          "tokens": 3057
+        },
+        {
+          "id": "vision-fine-tuning",
+          "title": "Vision fine-tuning",
+          "description": "Vision fine-tuning uses image inputs for supervised fine-tuning to improve the model's understanding of image inputs....",
+          "tags": [
+            "assistant",
+            "detail",
+            "low",
+            "image_url",
+            "high",
+            "auto",
+            "moderation_checks"
+          ],
+          "path": "openai/vision-fine-tuning.md",
+          "tokens": 2651
+        },
+        {
+          "id": "voice-activity-detection-vad",
+          "title": "Voice activity detection (VAD)",
+          "description": "Voice activity detection (VAD) is a feature available in the Realtime API allowing to automatically detect when the u...",
+          "tags": [
+            "input_audio_buffer.speech_started",
+            "input_audio_buffer.speech_stopped",
+            "turn_detection",
+            "session.update",
+            "server_vad",
+            "semantic_vad",
+            "threshold",
+            "prefix_padding_ms",
+            "silence_duration_ms",
+            "turn_detection.type"
+          ],
+          "path": "openai/voice-activity-detection-vad.md",
+          "tokens": 1084
+        },
+        {
+          "id": "voice-agents",
+          "title": "Voice agents",
+          "description": "import {\nTextToSpeech,\nCaretRight,\nText,\nWave,\nVoice,\n} from \"@components/react/oai/platform/ui/Icon.react\";\nimport {...",
+          "tags": [
+            "gpt-4o-realtime-preview",
+            "gpt-4o-transcribe",
+            "gpt-4.1",
+            "gpt-4o-mini-tts",
+            "session.update",
+            "RealtimeAgent",
+            "tool"
+          ],
+          "path": "openai/voice-agents.md",
+          "tokens": 3937
+        },
+        {
+          "id": "web-search",
+          "title": "Web search",
+          "description": "import {\nCheckCircleFilled,\nXCircle,\n} from \"@components/react/oai/platform/ui/Icon.react\";",
+          "tags": [
+            "o3-deep-research",
+            "o4-mini-deep-research",
+            "gpt-5",
+            "high",
+            "tools",
+            "web_search_call",
+            "web_search_call.action",
+            "search",
+            "queries",
+            "open_page"
+          ],
+          "path": "openai/web-search.md",
+          "tokens": 1943
+        },
+        {
+          "id": "webhooks",
+          "title": "Webhooks",
+          "description": "OpenAI webhooks allow you to receive real-time notifications about events in the API, such as when a batch completes,...",
+          "tags": [
+            "response.completed",
+            "2xx",
+            "3xx",
+            "webhook-id",
+            "unwrap()"
+          ],
+          "path": "openai/webhooks.md",
+          "tokens": 2462
+        },
+        {
+          "id": "webhooks-and-server-side-controls",
+          "title": "Webhooks and server-side controls",
+          "description": "The Realtime API allows clients to connect directly to the API server via WebRTC or SIP. However, you'll most likely ...",
+          "tags": [
+            "Location",
+            "call_id"
+          ],
+          "path": "openai/webhooks-and-server-side-controls.md",
+          "tokens": 1125
+        },
+        {
+          "id": "websocket-mode",
+          "title": "WebSocket Mode",
+          "description": "The Responses API supports a WebSocket mode for long-running, tool-call-heavy workflows. In this mode, you keep a per...",
+          "tags": [
+            "/v1/responses",
+            "previous_response_id",
+            "store=false",
+            "response.create",
+            "stream",
+            "background",
+            "generate: false",
+            "input",
+            "store=true",
+            "previous_response_not_found"
+          ],
+          "path": "openai/websocket-mode.md",
+          "tokens": 2060
+        },
+        {
+          "id": "working-with-evals",
+          "title": "Working with evals",
+          "description": "Evaluations (often called evals) test model outputs to ensure they meet style and content criteria that you specify. ...",
+          "tags": [
+            "Hardware",
+            "Software",
+            "Other",
+            "data_source_config",
+            "testing_criteria",
+            "ticket_text",
+            "correct_label",
+            "include_sample_schema",
+            "true",
+            "string_check"
+          ],
+          "path": "openai/working-with-evals.md",
+          "tokens": 5451
+        },
+        {
+          "id": "libraries",
+          "title": "Libraries",
+          "description": "This page covers setting up your local development environment to use the OpenAI API. You can use one of our official...",
+          "tags": [
+            ".zshrc"
+          ],
+          "path": "openai/libraries.md",
+          "tokens": 1878
+        },
+        {
+          "id": "building-mcp-servers-for-chatgpt-apps-and-api-integrations",
+          "title": "Building MCP servers for ChatGPT Apps and API integrations",
+          "description": "Model Context Protocol (MCP) is an open protocol that's becoming the industry standard for extending AI models with a...",
+          "tags": [
+            "search",
+            "fetch",
+            "results",
+            "id",
+            "title",
+            "url",
+            "text",
+            "image",
+            "resource",
+            "type: \"text\""
+          ],
+          "path": "openai/building-mcp-servers-for-chatgpt-apps-and-api-integrations.md",
+          "tokens": 7661
+        },
+        {
+          "id": "pricing",
+          "title": "Pricing",
+          "description": "Starting March 31, 2026, container usage will be billed per 20-minute session.\nRates by memory tier are unchanged. Se...",
+          "tags": [
+            "gpt-4o-mini",
+            "gpt-4.1-mini",
+            "omni-moderation"
+          ],
+          "path": "openai/pricing.md",
+          "tokens": 4133
+        },
+        {
+          "id": "developer-quickstart",
+          "title": "Developer quickstart",
+          "description": "import {\nAssistant,\nCamera,\nChatTripleDots,\nCode,\nBolt,\nSpeed,\nSquarePlus,\n} from \"@components/react/oai/platform/ui/...",
+          "tags": [],
+          "path": "openai/developer-quickstart.md",
+          "tokens": 3956
+        },
+        {
+          "id": "supported-countries-and-territories",
+          "title": "Supported countries and territories",
+          "description": "Accessing or offering access to our services outside of the countries and territories listed below may result in your...",
+          "tags": [],
+          "path": "openai/supported-countries-and-territories.md",
+          "tokens": 614
+        },
+        {
+          "id": "meeting-minutes",
+          "title": "Meeting minutes",
+          "description": "In this tutorial, we'll harness the power of OpenAI's Whisper and GPT-4 models to develop an automated meeting minute...",
+          "tags": [
+            "audio_file_path",
+            "whisper-1",
+            "openai.Audio.transcribe",
+            "meeting_minutes",
+            "transcription",
+            "abstract_summary_extraction",
+            "key_points_extraction",
+            "action_item_extraction",
+            "sentiment_analysis performs",
+            "sentiment_analysis"
+          ],
+          "path": "openai/meeting-minutes.md",
+          "tokens": 3379
+        },
+        {
+          "id": "getting-started",
+          "title": "Getting started",
+          "description": "Some basic knowledge of Python and GitHub is helpful for this tutorial. Before diving in, make sure to set up an Open...",
+          "tags": [
+            "get_hyperlinks",
+            "crawl",
+            "distances_from_embeddings",
+            "gpt-3.5-turbo-instruct"
+          ],
+          "path": "openai/getting-started.md",
+          "tokens": 5432
         }
       ]
     },

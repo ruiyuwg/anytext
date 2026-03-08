@@ -250,6 +250,14 @@
       "url": "https://vuejs.org/llms-full.txt"
     },
     {
+      "id": "openai",
+      "name": "OpenAI",
+      "description": "AI platform API for chat completions, embeddings, assistants, and function calling",
+      "version": "2025",
+      "adapter": "llms-full",
+      "url": "https://platform.openai.com/docs/llms-full.txt"
+    },
+    {
       "id": "azure",
       "name": "Azure",
       "description": "Microsoft Azure cloud platform with compute, storage, databases, AI, and 200+ services",
