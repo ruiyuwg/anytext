@@ -354,6 +354,14 @@
       "url": "https://www.sanity.io/docs/llms-full.txt"
     },
     {
+      "id": "strapi",
+      "name": "Strapi",
+      "description": "Headless CMS with content types, REST/GraphQL APIs, and plugin development",
+      "version": "5",
+      "adapter": "llms-full",
+      "url": "https://docs.strapi.io/llms-full.txt"
+    },
+    {
       "id": "azure",
       "name": "Azure",
       "description": "Microsoft Azure cloud platform with compute, storage, databases, AI, and 200+ services",

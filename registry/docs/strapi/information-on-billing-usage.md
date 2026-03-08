@@ -1,0 +1,105 @@
+# Information on billing & usage
+
+This page contains general information related to the usage and billing of your Strapi Cloud account and projects.
+
+Strapi Cloud offers 1 Free plan and 3 paid plans: Essential, Pro and Scale (see [Pricing page](https://strapi.io/pricing-cloud)). The table below summarizes Strapi Cloud usage-based pricing plans, for general features and usage:
+
+| Feature                          | Free  | Essential | Pro | Scale |
+| -------------------------------- | ----- | --------- | --- | ----- |
+| **Database Entries**             | 500   | Unlimited\* | Unlimited\* | Unlimited\* |
+| **Asset Storage**               | 10GB  | 50GB      | 250GB | 1,000GB |
+| **Asset Bandwidth (per month)** | 10GB  | 50GB      | 500GB | 1,000GB |
+| **API Requests (per month)**     | 2,500 | 50,000 | 1,000,000 | 10,000,000 |
+|  |  |  |  |  |
+| **Backups**                      | N/A | N/A | Weekly | Daily |
+| **Custom domains**               | N/A | Included | Included | Included |
+| **Environments**                 | N/A | N/A | 0 included (up to 99 extra) | 1 included (up to 99 extra) |
+| **Emails (per month)**           | 100 | Unlimited\* | Unlimited\* | Unlimited\* |
+
+- General features & usage:
+  - Database entries are the number of entries in your database.
+  - Asset storage is the amount of storage used by your assets.
+  - Asset bandwidth is the amount of bandwidth used by your assets.
+  - API requests are the number of requests made to your APIs. This includes requests to the GraphQL and REST APIs, excluding requests for file and media assets counted towards CDN bandwidth and storage. All API requests are counted towards your monthly usage, regardless of the response type.
+- Cloud specific feature:
+  - Backups refers to the automatic backups of Strapi Cloud projects (see [Backups documentation](/cloud/projects/settings#backups) for more information on the feature).
+  - Custom domains refer to the ability to define a custom domain for your Strapi Cloud (see [Custom domains](/cloud/projects/settings#connecting-a-custom-domain)).
+  - Environments refers to the number of environments included in the plan on top of the default production environment (see [Environments](/cloud/projects/settings#environments) documentation for more information on the feature).
+
+Commercial use means any project made for financial gain, including:
+
+- Accepting or processing payments on your site
+- Accepting or receiving payment to create, update, or host the site
+- Advertising, promoting, or selling products or services
+- Hosting or serving advertisements for any 3rd party
+  For more information, visit [Strapi Cloud-Legal](https://strapi.io/cloud-legal)
+
+On the Free plan, projects automatically scale down to zero after a short period of inactivity. When the application is accessed again—either through the frontend or via an API request—it may take a few seconds (up to a minute) before a response is returned.
+Upgrading to a paid plan disables scaling to zero and cold starts, resulting in instant response times at all times.
+
+## Environments management
+
+Environments are isolated instances of your Strapi Cloud project. All projects have a default production environment, but other additional environments can be configured for projects on a Pro or Scale plan, from the *Environments* tab of the project settings (see [Environments](/cloud/projects/settings#environments)). There is no limit to the number of additional environments that can be configured for a Strapi Cloud project.
+
+The usage limits of additional environments are the same as for the project's production environment (e.g. an additional environment on the Pro plan will be limited at 250GB for asset storage, and overages will be charged the same way as for the production environment). Note however that the asset bandwidth and API calls are project-based, not environment-based, so these usage limits do not change even with additional environments.
+
+## Billing
+
+Billing is based on the usage of your Strapi Cloud projects. Project plans and addons are either billed monthly or yearly, depending on your billing cycle, while overages are billed monthly. You can view your usage and billing information in the *Billing & Usage* section of your project settings.
+
+### Overages
+
+Overages are not allowed on the Free plan.
+
+If you exceed the limits of your plan for API Requests, Asset Bandwidth, or Asset Storage, you will be charged for the corresponding overages.
+
+For example, if you exceed the 500GB limit in asset bandwidth of the Pro plan, you will be charged for the excess bandwidth at the end of the current billing period or on project deletion. Overages are not prorated and are charged in full.
+
+Overages are charged monthly, according to the following rates:
+
+| Feature | Rate |
+| --- | --- |
+| **API Requests** | $1.50 / 25k requests |
+| **Asset Bandwidth** | $30.00 / 100GB |
+| **Asset Storage** | $0.60 / GB per month |
+
+### Project suspension
+
+Projects may end up in a **Suspended** state for various reasons, including: unpaid invoices, exceeding the limits of your free plan, or violating Strapi Cloud's .
+
+If your project is suspended, you will no longer be able to access the Strapi admin panel, nor trigger new deployments. A banner will appear in your project's dashboard, indicating the cause of the suspension. You will also be notified by email.
+
+#### Project suspension for exceeding the Free plan limits
+
+When a project hosted with the Free plan exceeds either the API requests or the Asset Bandwidth limits, it will be suspended until the monthly allowance resets at the beginning of the following month.
+
+While the project is suspended:
+
+- Users cannot trigger new deployments
+- Access to the application is blocked
+- Users cannot make changes to the project’s settings
+
+To reactivate the project immediately, users can upgrade to a paid plan.
+
+#### Project suspension due to billing issues
+
+If you have unpaid invoices, the subscription of your project will automatically be canceled and the project suspended.
+
+To reactivate your project's subscription, head to *Settings > Billing & Usage* and click on the **Reactivate subscription** button.
+
+If you do not resolve the issue within 30 days, your suspended project will be deleted and all its data will be permanently lost.
+
+#### Project suspension for other reasons
+
+If your project was suspended for reasons other than unpaid invoice leading to subscription cancellation, you may not have the possibility to reactivate your project yourself. You should receive an email with instructions on how to resolve the issue. If you do not receive the email notification, please contact [Strapi Support](mailto:support@strapi.io).
+
+### Subscription cancellation
+
+If you want to cancel your Strapi Cloud subscription, you have 2 options:
+
+- either change your project's subscription to the free plan (see [Downgrading to another plan](/cloud/projects/settings#downgrading-to-another-plan) documentation),
+- or completely delete your project (see [Deleting Strapi Cloud project](/cloud/projects/settings#deleting-a-strapi-cloud-project) documentation).
+
+# Collaboration
+
+Source: //cloud/projects/collaboration

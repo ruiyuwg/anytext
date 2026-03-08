@@ -1,0 +1,92 @@
+# Database
+
+Strapi Cloud provides a pre-configured PostgreSQL database by default. However, you can also configure it to utilize an external SQL database, if needed.
+
+- A local Strapi project running on `v4.8.2+`.
+- Credentials for an external database.
+- If using an existing database, the schema must match the Strapi project schema.
+
+While it's possible to use an external database with Strapi Cloud, you should do it while keeping in mind the following considerations:
+
+- Strapi Cloud already provides a managed database that is optimized for Strapi.
+- Using an external database may result in unexpected behavior and/or performance issues (e.g., network latency may impact performance). For performance reasons, it's recommended to host your external database close to the region where your Strapi Cloud project is hosted. You can find where your Strapi Cloud project is hosted in your Project Settings (see [Project Settings > General > Selected Region](/cloud/projects/settings#general)).
+- Strapi can't provide security or support with external databases used with Strapi Cloud.
+
+Any environment variable added to your project that starts with `DATABASE_` will cause Strapi Cloud to assume that you will be using an external database and all Strapi Cloud specific database variables will not be injected!
+
+## Configuration
+
+The project `./config/database.js` or `./config/database.ts` file must match the configuration found in the [environment variables in database configurations](https://docs.strapi.io/cms/configurations/database#environment-variables-in-database-configurations) section.
+
+Before pushing changes, add environment variables to the Strapi Cloud project:
+
+1. Log into Strapi Cloud and click on the corresponding project on the Projects page.
+
+2. Click on the **Settings** tab and choose **Variables** in the left menu.
+
+3. Add the following environment variables:
+
+   | Variable                           | Value            | Details  |
+   | ---------------------------------- | ---------------- |----------|
+   | `DATABASE_CLIENT`                  | your\_db          | Should be one of `mysql`, `postgres`, or `sqlite`. |
+   | `DATABASE_HOST`                    | your\_db\_host     | The URL or IP address of your database host |
+   | `DATABASE_PORT`                    | your\_db\_port     | The port to access your database |
+   | `DATABASE_NAME`                    | your\_db\_name     | The name of your database |
+   | `DATABASE_USERNAME`                | your\_db\_username | The username to access your database |
+   | `DATABASE_PASSWORD`                | your\_db\_password | The password associated to this username |
+   | `DATABASE_SSL_REJECT_UNAUTHORIZED` | false            | Whether unauthorized connections should be rejected |
+   | `DATABASE_SCHEMA`                  | public           | - |
+
+4. Click **Save**.
+
+To ensure a smooth deployment, it is recommended to not change the names of the environment variables.
+
+## Deployment
+
+To deploy the project and utilize the external database, push the changes from earlier. This will trigger a rebuild and new deployment of the Strapi Cloud project.
+
+Once the application finishes building, the project will use the external database.
+
+## Reverting to the default database
+
+To revert back to the default database, remove the previously added environment variables related to the external database from the Strapi Cloud project dashboard, and save. For the changes to take effect, you must redeploy the Strapi Cloud project.
+
+# Email Provider
+
+Source: //cloud/advanced/email
+
+# Email Providers configuration for Strapi Cloud
+
+Strapi Cloud comes with a basic email provider out of the box. However, it can also be configured to utilize another email provider, if needed.
+
+Please be advised that Strapi is unable to provide support for third-party email providers.
+
+- A local Strapi project running on `v4.8.2+`.
+- Credentials for another email provider (see
+
+The file structure must match the above path exactly, or the configuration will not be applied to Strapi Cloud.
+
+Each provider will have different configuration settings available. Review the respective entry for that provider in the
+
+Before pushing the above changes to GitHub, add environment variables to the Strapi Cloud project to prevent triggering a rebuild and new deployment of the project before the changes are complete.
+
+### Strapi Cloud Configuration
+
+1. Log into Strapi Cloud and click on the corresponding project on the Projects page.
+2. Click on the **Settings** tab and choose **Variables** in the left menu.
+3. Add the required environment variables specific to the email provider.
+4. Click **Save**.
+
+**Example:**
+
+## Deployment
+
+To deploy the project and utilize another party email provider, push the changes from earlier. This will trigger a rebuild and new deployment of the Strapi Cloud project.
+
+Once the application finishes building, the project will use the new email provider.
+
+If you want to create a custom email provider, please refer to the [Email providers](/cms/features/email#providers) documentation in the CMS Documentation.
+
+# Upload Provider Configuration for Strapi Cloud
+
+Source: //cloud/advanced/upload

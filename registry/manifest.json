@@ -1,5 +1,5 @@
 {
-  "version": 57,
+  "version": 58,
   "updatedAt": "2026-03-08",
   "libraries": [
     {
@@ -93397,6 +93397,818 @@
           "tags": [],
           "path": "sanity/what-is-content-operations.md",
           "tokens": 918
+        }
+      ]
+    },
+    {
+      "id": "strapi",
+      "name": "Strapi",
+      "description": "Headless CMS with content types, REST/GraphQL APIs, and plugin development",
+      "version": "5",
+      "topics": [
+        {
+          "id": "account-billing-details",
+          "title": "Account billing details",
+          "description": "Source: //cloud/account/account-billing",
+          "tags": [],
+          "path": "strapi/account-billing-details.md",
+          "tokens": 591
+        },
+        {
+          "id": "profile-settings",
+          "title": "Profile settings",
+          "description": "The Profile page enables you to manage your account details and preferences. It is accessible by clicking on your pro...",
+          "tags": [
+            "DELETE"
+          ],
+          "path": "strapi/profile-settings.md",
+          "tokens": 542
+        },
+        {
+          "id": "database",
+          "title": "Database",
+          "description": "Strapi Cloud provides a pre-configured PostgreSQL database by default. However, you can also configure it to utilize ...",
+          "tags": [
+            "v4.8.2+",
+            "DATABASE_",
+            "./config/database.js",
+            "./config/database.ts",
+            "DATABASE_CLIENT",
+            "mysql",
+            "postgres",
+            "sqlite",
+            "DATABASE_HOST",
+            "DATABASE_PORT"
+          ],
+          "path": "strapi/database.md",
+          "tokens": 1299
+        },
+        {
+          "id": "upload-provider-configuration-for-strapi-cloud",
+          "title": "Upload Provider Configuration for Strapi Cloud",
+          "description": "Strapi Cloud comes with a local upload provider out of the box. However, it can also be configured to utilize a third...",
+          "tags": [
+            "v4.8.2+",
+            "contentSecurityPolicy",
+            "./config/middleware.js",
+            "./config/middleware.ts",
+            "strapi::security"
+          ],
+          "path": "strapi/upload-provider-configuration-for-strapi-cloud.md",
+          "tokens": 524
+        },
+        {
+          "id": "command-line-interface-cli",
+          "title": "Command Line Interface (CLI)",
+          "description": "Strapi Cloud comes with a Command Line Interface (CLI) which allows you to log in and out, and to deploy a local proj...",
+          "tags": [
+            "yarn",
+            "npm",
+            "strapi",
+            "npm run strapi help",
+            "yarn strapi help",
+            "npx strapi help",
+            "strapi cloud:login",
+            "strapi cloud:deploy",
+            "login",
+            "deploy"
+          ],
+          "path": "strapi/command-line-interface-cli.md",
+          "tokens": 917
+        },
+        {
+          "id": "strapi-cloud-fundamentals",
+          "title": "Strapi Cloud fundamentals",
+          "description": "Before going any further into this Strapi Cloud documentation, we recommend you to acknowledge the main concepts belo...",
+          "tags": [
+            "https://<project>.strapiapp.com/api/...",
+            "<project>.media.strapiapp.com"
+          ],
+          "path": "strapi/strapi-cloud-fundamentals.md",
+          "tokens": 805
+        },
+        {
+          "id": "project-deployment-with-the-cloud-dashboard",
+          "title": "Project deployment with the Cloud dashboard",
+          "description": "This is a step-by-step guide for deploying your project on Strapi Cloud for the first time, using the Cloud dashboard.",
+          "tags": [
+            "4.8.2",
+            "my-strapi-app",
+            ".env",
+            "DATABASE_"
+          ],
+          "path": "strapi/project-deployment-with-the-cloud-dashboard.md",
+          "tokens": 1578
+        },
+        {
+          "id": "project-deployment-with-the-command-line-interface-cli",
+          "title": "Project deployment with the Command Line Interface (CLI)",
+          "description": "This is a step-by-step guide for deploying your project on Strapi Cloud for the first time, using the Command Line In...",
+          "tags": [
+            "deploy"
+          ],
+          "path": "strapi/project-deployment-with-the-command-line-interface-cli.md",
+          "tokens": 1272
+        },
+        {
+          "id": "information-on-billing-usage",
+          "title": "Information on billing & usage",
+          "description": "This page contains general information related to the usage and billing of your Strapi Cloud account and projects.",
+          "tags": [],
+          "path": "strapi/information-on-billing-usage.md",
+          "tokens": 1797
+        },
+        {
+          "id": "collaboration-on-projects",
+          "title": "Collaboration on projects",
+          "description": "Projects are created by a user via their Strapi Cloud account. Strapi Cloud users can share their projects to anyone ...",
+          "tags": [],
+          "path": "strapi/collaboration-on-projects.md",
+          "tokens": 1943
+        },
+        {
+          "id": "projects-overview",
+          "title": "Projects overview",
+          "description": "The Projects page displays a list of all your Strapi Cloud projects. From here you can manage your projects and acces...",
+          "tags": [],
+          "path": "strapi/projects-overview.md",
+          "tokens": 780
+        },
+        {
+          "id": "project-settings",
+          "title": "Project settings",
+          "description": "From a chosen project's dashboard, the  Settings button, located in the header, enables you to manage the configurati...",
+          "tags": [
+            ".sql",
+            "proud-unicorn-123456af.strapiapp.com",
+            "https://my-custom-domain.com",
+            "my-strapi-cloud-instance",
+            "*"
+          ],
+          "path": "strapi/project-settings.md",
+          "tokens": 7780
+        },
+        {
+          "id": "admin-panel-customization",
+          "title": "Admin panel customization",
+          "description": "The front-end part of Strapi  is called the admin panel. The admin panel presents a graphical user interface to help ...",
+          "tags": [
+            "src/admin/app",
+            "src/admin",
+            "app.example.tsx|js",
+            "app.ts|js",
+            "extensions",
+            "/src/admin/",
+            "yarn develop",
+            "npm run develop",
+            "/src/admin/app",
+            "config"
+          ],
+          "path": "strapi/admin-panel-customization.md",
+          "tokens": 1484
+        },
+        {
+          "id": "homepage-customization",
+          "title": "Homepage customization",
+          "description": "The app.widgets.register API only works with Strapi 5.13 and above. Trying to call the API with older versions of Str...",
+          "tags": [
+            "app.widgets.register",
+            "^5.13.0",
+            "@strapi/strapi",
+            "package.json",
+            "app.widgets.register()",
+            "icon",
+            "React.ComponentType",
+            "title",
+            "MessageDescriptor",
+            "component"
+          ],
+          "path": "strapi/homepage-customization.md",
+          "tokens": 2911
+        },
+        {
+          "id": "strapi-client",
+          "title": "Strapi Client",
+          "description": "The Strapi Client library simplifies interactions with your Strapi back end, providing a way to fetch, create, update...",
+          "tags": [
+            "http://localhost:1337/api",
+            "baseURL",
+            "http",
+            "https",
+            "StrapiInitializationError",
+            "StrapiValidationError",
+            "fetch()",
+            "collection()",
+            "single()",
+            "files()"
+          ],
+          "path": "strapi/strapi-client.md",
+          "tokens": 2577
+        },
+        {
+          "id": "documents",
+          "title": "Documents",
+          "description": "A document in Strapi 5 is an API-only concept. A document represents all the different variations of content for a gi...",
+          "tags": [],
+          "path": "strapi/documents.md",
+          "tokens": 613
+        },
+        {
+          "id": "document-service-api",
+          "title": "Document Service API",
+          "description": "The Document Service API is built on top of the Query Engine API  and is used to perform CRUD (create, retrieve, upda...",
+          "tags": [
+            "findOne()",
+            "null",
+            "findFirst()",
+            "locale",
+            "undefined",
+            "status",
+            "'published'",
+            "'draft'",
+            "filters",
+            "fields"
+          ],
+          "path": "strapi/document-service-api.md",
+          "tokens": 3938
+        },
+        {
+          "id": "document-service-api-filters",
+          "title": "Document Service API: Filters",
+          "description": "The Document Service API offers the ability to filter results.",
+          "tags": [
+            "$eq",
+            "$eqi",
+            "$ne",
+            "$nei",
+            "$lt",
+            "$lte",
+            "$gt",
+            "$gte",
+            "$in",
+            "$notIn"
+          ],
+          "path": "strapi/document-service-api-filters.md",
+          "tokens": 2362
+        },
+        {
+          "id": "document-service-api-using-the-locale-parameter",
+          "title": "Document Service API: Using the locale parameter",
+          "description": "By default the Document Service API returns the default locale version of documents (which is 'en', i.e. the English ...",
+          "tags": [
+            "locale",
+            "findOne()",
+            "status",
+            "draft",
+            "findFirst()",
+            "findMany()",
+            "fr",
+            "findMany({ locale: 'fr' })",
+            "‘fr’",
+            "create()"
+          ],
+          "path": "strapi/document-service-api-using-the-locale-parameter.md",
+          "tokens": 1217
+        },
+        {
+          "id": "document-service-api-middlewares",
+          "title": "Document Service API: Middlewares",
+          "description": "The Document Service API offers the ability to extend its behavior thanks to middlewares.",
+          "tags": [
+            "strapi.documents.use(middleware)",
+            "context",
+            "Context",
+            "next",
+            "function",
+            "action",
+            "string",
+            "params",
+            "Object",
+            "uid"
+          ],
+          "path": "strapi/document-service-api-middlewares.md",
+          "tokens": 1587
+        },
+        {
+          "id": "document-service-api-usage-with-draft-publish",
+          "title": "Document Service API: Usage with Draft & Publish",
+          "description": "By default the Document Service API returns the draft version of a document when the Draft & Publish feature is enabl...",
+          "tags": [
+            "status",
+            "{ status: 'draft' }",
+            "findOne()",
+            "status: 'published'",
+            "findFirst()",
+            "findMany()",
+            "count()",
+            "status: 'draft'",
+            "create()",
+            "update()"
+          ],
+          "path": "strapi/document-service-api-usage-with-draft-publish.md",
+          "tokens": 711
+        },
+        {
+          "id": "graphql-api",
+          "title": "GraphQL API",
+          "description": "The GraphQL API allows performing queries and mutations to interact with the content-types through Strapi's GraphQL p...",
+          "tags": [
+            "/graphql",
+            "url",
+            "cover",
+            "label",
+            "start_date",
+            "end_date",
+            "closingPeriod",
+            "locale"
+          ],
+          "path": "strapi/graphql-api.md",
+          "tokens": 873
+        },
+        {
+          "id": "openapi-specification-generation",
+          "title": "OpenAPI specification generation",
+          "description": "Strapi provides a command-line tool to generate",
+          "tags": [
+            "--output",
+            "/config/middlewares.js",
+            "public/openapi.html",
+            "yarn develop",
+            "npm run develop",
+            "/openapi.html"
+          ],
+          "path": "strapi/openapi-specification-generation.md",
+          "tokens": 551
+        },
+        {
+          "id": "rest-api-reference",
+          "title": "REST API reference",
+          "description": "The REST API allows accessing the content-types through API endpoints. Strapi automatically creates API endpoints whe...",
+          "tags": [
+            "populate",
+            ":singularApiId",
+            ":pluralApiId",
+            "article",
+            "articles",
+            "/api/upload",
+            "data.attributes",
+            "data",
+            "data.title",
+            "documentId"
+          ],
+          "path": "strapi/rest-api-reference.md",
+          "tokens": 2099
+        },
+        {
+          "id": "rest-api-locale",
+          "title": "REST API: locale",
+          "description": "The Internationalization (i18n) feature adds new abilities to the REST API.",
+          "tags": [
+            "locale",
+            "GET",
+            "documentId",
+            "POST",
+            "POST /api/content-type-plural-name",
+            "PUT",
+            "locale=your-locale-code",
+            "data",
+            "createLocalization",
+            "403: Forbidden"
+          ],
+          "path": "strapi/rest-api-locale.md",
+          "tokens": 1673
+        },
+        {
+          "id": "rest-api-population-field-selection",
+          "title": "REST API: Population & Field Selection",
+          "description": "The REST API by default does not populate any relations, media fields, components, or dynamic zones. Use the populate...",
+          "tags": [
+            "populate",
+            "fields",
+            "find",
+            "populate=deep",
+            "populate=*",
+            "populate=a-relation-name",
+            "populate[0]=component-name",
+            "populate[0]=dynamic-zone-name",
+            "filters"
+          ],
+          "path": "strapi/rest-api-population-field-selection.md",
+          "tokens": 1074
+        },
+        {
+          "id": "managing-relations-with-api-requests",
+          "title": "Managing relations with API requests",
+          "description": "Defining relations between content-types (that are designated as entities in the database layers) is connecting entit...",
+          "tags": [
+            "connect",
+            "disconnect",
+            "set",
+            "position",
+            "documentId: 'srkvrr77k96o44d9v6ef1vu9'",
+            "position: { end: true }",
+            "id",
+            "after",
+            "before",
+            "start"
+          ],
+          "path": "strapi/managing-relations-with-api-requests.md",
+          "tokens": 1656
+        },
+        {
+          "id": "rest-api-sort-pagination",
+          "title": "REST API: Sort & Pagination",
+          "description": "Entries that are returned by queries to the REST API can be sorted and paginated.",
+          "tags": [
+            "sort",
+            ":asc",
+            ":desc",
+            "pagination",
+            "page",
+            "pageSize",
+            "start",
+            "limit",
+            "pagination[page]",
+            "pagination[pageSize]"
+          ],
+          "path": "strapi/rest-api-sort-pagination.md",
+          "tokens": 802
+        },
+        {
+          "id": "rest-api-upload-files",
+          "title": "REST API: Upload files",
+          "description": "The Media Library feature is powered in the back-end server of Strapi by the upload package. To upload files to Strap...",
+          "tags": [
+            "upload",
+            "/api/upload/files",
+            "/api/upload/files/:id",
+            "/api/upload",
+            "/api/upload?id=x",
+            "files",
+            "fileInfo",
+            "path",
+            "refId",
+            "ref"
+          ],
+          "path": "strapi/rest-api-upload-files.md",
+          "tokens": 1250
+        },
+        {
+          "id": "backend-customization",
+          "title": "Backend customization",
+          "description": "As a headless CMS, the Strapi software as a whole can be considered as the \"back end\" of your website or application....",
+          "tags": [
+            "await next()",
+            "except",
+            "only",
+            "Array",
+            "config",
+            "Object",
+            "GET",
+            "/restaurants",
+            "find",
+            "api::restaurant.restaurant.review"
+          ],
+          "path": "strapi/backend-customization.md",
+          "tokens": 15552
+        },
+        {
+          "id": "custom-content-api-parameters",
+          "title": "Custom Content API parameters",
+          "description": "You can extend the query and body parameters allowed on Content API routes by registering them in the register lifecy...",
+          "tags": [
+            "query",
+            "?search=...",
+            "clientMutationId",
+            "rest.strictParams: true",
+            "./config/api.js",
+            "./config/api.ts",
+            "addQueryParams",
+            "addInputParams",
+            "./src/index.js",
+            "./src/index.ts"
+          ],
+          "path": "strapi/custom-content-api-parameters.md",
+          "tokens": 654
+        },
+        {
+          "id": "services",
+          "title": "Services",
+          "description": "Services are a set of reusable functions. They are particularly useful to respect the \"don’t repeat yourself\" (DRY) p...",
+          "tags": [
+            "createCoreService",
+            "strapi generate",
+            "./src/api/[api-name]/services/",
+            "./src/plugins/[plugin-name]/services/",
+            "strapi",
+            "sendNewsletter",
+            "find",
+            "findOne",
+            "create",
+            "update"
+          ],
+          "path": "strapi/services.md",
+          "tokens": 1586
+        },
+        {
+          "id": "webhooks",
+          "title": "Webhooks",
+          "description": "Webhook is a construct used by an application to notify other applications that an event occurred. More precisely, we...",
+          "tags": [
+            "./src/index.js",
+            "./config/server",
+            "webhooks",
+            "defaultHeaders",
+            "X‑Webhook‑Signature",
+            "X‑Webhook‑Timestamp",
+            "entry.create",
+            "entry.update",
+            "entry.delete",
+            "entry.publish"
+          ],
+          "path": "strapi/webhooks.md",
+          "tokens": 2950
+        },
+        {
+          "id": "command-line-interface-cli-2",
+          "title": "Command Line Interface (CLI)",
+          "description": "Strapi comes with a full featured Command Line Interface (CLI) which lets you scaffold and manage your project in sec...",
+          "tags": [
+            "yarn",
+            "npm",
+            "strapi admin:create-user",
+            "strapi",
+            "npm run strapi help",
+            "yarn strapi help",
+            "npx strapi help",
+            "npm run strapi <command> -- --<option>",
+            "yarn strapi <command> --<option>",
+            "strapi install"
+          ],
+          "path": "strapi/command-line-interface-cli-2.md",
+          "tokens": 2686
+        },
+        {
+          "id": "configuration",
+          "title": "Configuration",
+          "description": "The configuration of a Strapi project lives in the /config folder:",
+          "tags": [
+            "/config",
+            "config/database",
+            "config/server",
+            "config/admin",
+            "config/middlewares",
+            "config/api",
+            "config/plugins",
+            "tsconfig.json",
+            "config/typescript",
+            "/src/index"
+          ],
+          "path": "strapi/configuration.md",
+          "tokens": 809
+        },
+        {
+          "id": "api-configuration",
+          "title": "API configuration",
+          "description": "General settings for API calls can be set in the ./config/api.js (or ./config/api.ts) file. Both rest and documents o...",
+          "tags": [
+            "./config/api.js",
+            "./config/api.ts",
+            "rest",
+            "documents",
+            "responses",
+            "responses.privateAttributes",
+            "[]",
+            "rest.prefix",
+            "/api",
+            "rest.defaultLimit"
+          ],
+          "path": "strapi/api-configuration.md",
+          "tokens": 906
+        },
+        {
+          "id": "cron-jobs",
+          "title": "Cron jobs",
+          "description": "The cron.enabled configuration option should be set to true in the ./config/server.js (or ./config/server.ts for Type...",
+          "tags": [
+            "cron.enabled",
+            "true",
+            "./config/server.js",
+            "./config/server.ts",
+            "cron",
+            "strapi.cron.add",
+            "strapi.cron.remove",
+            "strapi.cron.jobs"
+          ],
+          "path": "strapi/cron-jobs.md",
+          "tokens": 556
+        },
+        {
+          "id": "database-configuration",
+          "title": "Database configuration",
+          "description": "The /config/database.js|ts file is used to define database connections that will be used to store the application con...",
+          "tags": [
+            "/config/database.js|ts",
+            "environment",
+            "type",
+            "api",
+            "plugin",
+            "core",
+            "name",
+            "key",
+            "value",
+            "v4.6.2"
+          ],
+          "path": "strapi/database-configuration.md",
+          "tokens": 1579
+        },
+        {
+          "id": "environment-configuration-and-variables",
+          "title": "Environment configuration and variables",
+          "description": "Strapi provides specific environment variable names. Defining them in an environment file (e.g., .env) will make thes...",
+          "tags": [
+            ".env",
+            "env()",
+            "STRAPI_TELEMETRY_DISABLED",
+            "Boolean",
+            "false",
+            "STRAPI_LICENSE",
+            "String",
+            "undefined",
+            "NODE_ENV",
+            "production"
+          ],
+          "path": "strapi/environment-configuration-and-variables.md",
+          "tokens": 1100
+        },
+        {
+          "id": "functions",
+          "title": "Functions",
+          "description": "The ./src/index.js file (or ./src/index.ts file in a TypeScript-based project) includes global register, bootstrap an...",
+          "tags": [
+            "./src/index.js",
+            "./src/index.ts",
+            "async",
+            "await",
+            "register()",
+            "bootstrap()",
+            "destroy()",
+            "register",
+            "bootstrap",
+            "strapi"
+          ],
+          "path": "strapi/functions.md",
+          "tokens": 1260
+        },
+        {
+          "id": "middlewares-configuration",
+          "title": "Middlewares configuration",
+          "description": "If you aren't sure where to place a middleware in the stack, add it to the end of the list.",
+          "tags": [
+            "strapi::middleware-name",
+            "./src/middlewares",
+            "global::middleware-name",
+            "./src/api/[api-name]/middlewares",
+            "api::api-name.middleware-name",
+            "strapi-server.js",
+            "middlewares",
+            "plugin::plugin-name.middleware-name",
+            "compression",
+            "cors"
+          ],
+          "path": "strapi/middlewares-configuration.md",
+          "tokens": 1268
+        },
+        {
+          "id": "plugins-configuration",
+          "title": "Plugins configuration",
+          "description": "Plugin configurations are stored in /config/plugins.js|ts (see project structure). Each plugin can be configured with...",
+          "tags": [
+            "/config/plugins.js|ts",
+            "enabled",
+            "true",
+            "false",
+            "config",
+            "resolve",
+            "/config/plugins",
+            "'plugin-name': true"
+          ],
+          "path": "strapi/plugins-configuration.md",
+          "tokens": 608
+        },
+        {
+          "id": "server-configuration",
+          "title": "Server configuration",
+          "description": "The /config/server.js file is used to define the server configuration for a Strapi application.",
+          "tags": [
+            "/config/server.js",
+            "server.js",
+            "yarn build",
+            "npm run build",
+            "./config/server.js",
+            "host",
+            "localhost",
+            "port",
+            "1337",
+            "app.keys"
+          ],
+          "path": "strapi/server-configuration.md",
+          "tokens": 655
+        },
+        {
+          "id": "typescript-configuration",
+          "title": "TypeScript configuration",
+          "description": "TypeScript-enabled Strapi projects have a specific project structure and handle TypeScript project configuration thro...",
+          "tags": [
+            "tsconfig.json",
+            "config/typescript.js|ts",
+            "./dist",
+            "build",
+            "yarn build",
+            "npm run build",
+            "./src/admin/",
+            "autogenerate",
+            "Boolean",
+            "false"
+          ],
+          "path": "strapi/typescript-configuration.md",
+          "tokens": 1378
+        },
+        {
+          "id": "database-transactions",
+          "title": "Database transactions",
+          "description": "This is an experimental feature and is subject to change in future versions.",
+          "tags": [
+            "strapi.db.transaction",
+            "strapi.entityService",
+            "strapi.db.query",
+            "trx",
+            "commit",
+            "rollback",
+            "onCommit",
+            "onRollback",
+            ".transacting(trx)"
+          ],
+          "path": "strapi/database-transactions.md",
+          "tokens": 1157
+        },
+        {
+          "id": "deployment",
+          "title": "Deployment",
+          "description": "Strapi provides many deployment options for your project or application. Your Strapi applications can be deployed on ...",
+          "tags": [
+            "pnpm",
+            "mysql2",
+            "npm",
+            "node_modules",
+            "production",
+            "node server.js",
+            "npm run start",
+            "./server.js",
+            "TypeScript",
+            "distDir"
+          ],
+          "path": "strapi/deployment.md",
+          "tokens": 1624
+        },
+        {
+          "id": "default-error-classes",
+          "title": "Default error classes",
+          "description": "The default error classes are available from the @strapi/utils package and can be imported and used in your code. Any...",
+          "tags": [
+            "@strapi/utils"
+          ],
+          "path": "strapi/default-error-classes.md",
+          "tokens": 12392
+        },
+        {
+          "id": "usage",
+          "title": "Usage",
+          "description": "Path to use the feature:  Releases and  Content Manager",
+          "tags": [
+            "Empty",
+            "Blocked",
+            "Ready",
+            "Done"
+          ],
+          "path": "strapi/usage.md",
+          "tokens": 1224
+        },
+        {
+          "id": "review-workflows",
+          "title": "Review Workflows",
+          "description": "The Review Workflows feature allows you to create and manage workflows for your various content-types. Each workflow ...",
+          "tags": [],
+          "path": "strapi/review-workflows.md",
+          "tokens": 1208
+        },
+        {
+          "id": "roles",
+          "title": "Roles",
+          "description": "The Users & Permissions feature allows to create and manage roles for end users, to configure what they can have acce...",
+          "tags": [],
+          "path": "strapi/roles.md",
+          "tokens": 41415
         }
       ]
     },
