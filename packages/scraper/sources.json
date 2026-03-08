@@ -615,6 +615,20 @@
         "docsPath": "docs",
         "include": [".mdx"]
       }
+    },
+    {
+      "id": "pinia",
+      "name": "Pinia",
+      "description": "Intuitive, type-safe store for Vue.js with devtools support",
+      "version": "3",
+      "adapter": "github",
+      "github": {
+        "repo": "vuejs/pinia",
+        "branch": "v3",
+        "docsPath": "packages/docs",
+        "include": [".md"],
+        "exclude": ["zh/"]
+      }
     }
   ]
 }

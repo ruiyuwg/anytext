@@ -1,5 +1,5 @@
 {
-  "version": 82,
+  "version": 84,
   "updatedAt": "2026-03-08",
   "libraries": [
     {
@@ -104887,6 +104887,365 @@
           ],
           "path": "payload/performance.md",
           "tokens": 2046
+        }
+      ]
+    },
+    {
+      "id": "pinia",
+      "name": "Pinia",
+      "description": "Intuitive, type-safe store for Vue.js with devtools support",
+      "version": "3",
+      "topics": [
+        {
+          "id": "composables",
+          "title": "Dealing with Composables",
+          "description": "[Composables](https://vuejs.org/guide/reusability/composables.html#composables) are functions that leverage Vue Compo...",
+          "tags": [
+            "state",
+            "ref()",
+            "ref<HTMLVideoElement>()",
+            "undefined",
+            "hydrate()",
+            "state()",
+            "skipHydrate()"
+          ],
+          "path": "pinia/composables.md",
+          "tokens": 1096
+        },
+        {
+          "id": "composing-stores",
+          "title": "Composing Stores",
+          "description": "<RuleKitLink />",
+          "tags": [
+            "useStore()",
+            "useUserStore()",
+            "await"
+          ],
+          "path": "pinia/composing-stores.md",
+          "tokens": 882
+        },
+        {
+          "id": "hot-module-replacement",
+          "title": "HMR (Hot Module Replacement)",
+          "description": "<RuleKitLink />",
+          "tags": [
+            "import.meta.hot",
+            "import.meta.webpackHot",
+            "auth.js",
+            "cart.js",
+            "chat.js"
+          ],
+          "path": "pinia/hot-module-replacement.md",
+          "tokens": 282
+        },
+        {
+          "id": "cookbook",
+          "title": "Cookbook",
+          "description": "<RuleKitLink />",
+          "tags": [
+            "setup()"
+          ],
+          "path": "pinia/cookbook.md",
+          "tokens": 170
+        },
+        {
+          "id": "migration-0-0-7",
+          "title": "Migrating from 0.0.7",
+          "description": "The versions after `0.0.7`: `0.1.0`, and `0.2.0`, came with a few big breaking changes. This guide helps you migrate ...",
+          "tags": [
+            "0.0.7",
+            "0.1.0",
+            "0.2.0",
+            "store.state",
+            "state",
+            "$state",
+            "id",
+            "patch",
+            "reset",
+            "$"
+          ],
+          "path": "pinia/migration-0-0-7.md",
+          "tokens": 818
+        },
+        {
+          "id": "migration-v1-v2",
+          "title": "Migrating from 0.x (v1) to v2",
+          "description": "<RuleKitLink />",
+          "tags": [
+            "2.0.0-rc.4",
+            "createStore()",
+            "defineStore()",
+            "storeName",
+            "storeId",
+            "PiniaPlugin",
+            "PiniaVuePlugin",
+            "$subscribe()",
+            "detached: true",
+            "id"
+          ],
+          "path": "pinia/migration-v1-v2.md",
+          "tokens": 1454
+        },
+        {
+          "id": "migration-v2-v3",
+          "title": "Migrating from v2 to v3",
+          "description": "<RuleKitLink />",
+          "tags": [
+            "defineStore({ id })",
+            "defineStore()",
+            "id",
+            "PiniaStorePlugin",
+            "PiniaPlugin"
+          ],
+          "path": "pinia/migration-v2-v3.md",
+          "tokens": 287
+        },
+        {
+          "id": "migration-vuex",
+          "title": "Migrating from Vuex ≤4",
+          "description": "Although the structure of Vuex and Pinia stores is different, a lot of the logic can be reused. This guide serves to ...",
+          "tags": [
+            "id",
+            "store/index.js",
+            "root",
+            "stores",
+            "store",
+            "mapStores()",
+            "state",
+            "getters",
+            "firstName: (state) => state.firstName",
+            "this"
+          ],
+          "path": "pinia/migration-vuex.md",
+          "tokens": 2811
+        },
+        {
+          "id": "options-api",
+          "title": "Usage without `setup()`",
+          "description": "Pinia can be used even if you are not using the composition API (if you are using Vue <2.7, you still need to install...",
+          "tags": [
+            "setup()",
+            "@vue/composition-api",
+            "mapState()",
+            "mapStores()",
+            "\"Store\"",
+            "id",
+            "setMapStoreSuffix()",
+            "global.d.ts",
+            "import 'pinia'"
+          ],
+          "path": "pinia/options-api.md",
+          "tokens": 711
+        },
+        {
+          "id": "testing",
+          "title": "Testing stores",
+          "description": "<MasteringPiniaLink",
+          "tags": [
+            "pinia",
+            "actions",
+            "createTestingPinia()",
+            "@pinia/testing",
+            "initialState",
+            "createTestingPinia",
+            "stubActions: false",
+            "stubActions",
+            "[]",
+            "false"
+          ],
+          "path": "pinia/testing.md",
+          "tokens": 2691
+        },
+        {
+          "id": "vscode-snippets",
+          "title": "VS Code Snippets",
+          "description": "<RuleKitLink />",
+          "tags": [
+            "Snippets: Configure User Snippets"
+          ],
+          "path": "pinia/vscode-snippets.md",
+          "tokens": 409
+        },
+        {
+          "id": "actions",
+          "title": "Actions",
+          "description": "<!-- <VueSchoolLink",
+          "tags": [
+            "actions",
+            "defineStore()",
+            "this",
+            "await",
+            "Promise",
+            "fetch",
+            "setup()",
+            "mapActions()",
+            "store.$onAction()",
+            "after"
+          ],
+          "path": "pinia/actions.md",
+          "tokens": 1688
+        },
+        {
+          "id": "getters",
+          "title": "Getters",
+          "description": "<!-- <VueSchoolLink",
+          "tags": [
+            "getters",
+            "defineStore()",
+            "state",
+            "this",
+            "setup()",
+            "mapState()"
+          ],
+          "path": "pinia/getters.md",
+          "tokens": 1723
+        },
+        {
+          "id": "core-concepts",
+          "title": "Defining a Store",
+          "description": "<!-- <VueSchoolLink",
+          "tags": [
+            "defineStore()",
+            "state",
+            "actions",
+            "getters",
+            "data",
+            "computed",
+            "methods",
+            "ref()",
+            "computed()",
+            "function()"
+          ],
+          "path": "pinia/core-concepts.md",
+          "tokens": 1827
+        },
+        {
+          "id": "outside-component-usage",
+          "title": "Using a store outside of a component",
+          "description": "<MasteringPiniaLink",
+          "tags": [
+            "pinia",
+            "useStore()",
+            "setup()",
+            "app",
+            "app.use(pinia)"
+          ],
+          "path": "pinia/outside-component-usage.md",
+          "tokens": 649
+        },
+        {
+          "id": "plugins",
+          "title": "Plugins",
+          "description": "<MasteringPiniaLink",
+          "tags": [
+            "pinia.use()",
+            "pinia",
+            "store",
+            "hello",
+            "store._customProperties",
+            "reactive",
+            "ref()",
+            "computed()",
+            ".value",
+            "store.myState"
+          ],
+          "path": "pinia/plugins.md",
+          "tokens": 3005
+        },
+        {
+          "id": "state",
+          "title": "State",
+          "description": "<!-- <VueSchoolLink",
+          "tags": [
+            "state",
+            "undefined",
+            "strict",
+            "noImplicitThis",
+            "state()",
+            "store",
+            "v-model",
+            "store.secondCount = 2",
+            "secondCount",
+            "$reset()"
+          ],
+          "path": "pinia/state.md",
+          "tokens": 2336
+        },
+        {
+          "id": "getting-started",
+          "title": "Getting Started",
+          "description": "<VueMasteryLogoLink for=\"pinia-cheat-sheet\">",
+          "tags": [
+            "pinia",
+            "@vue/composition-api",
+            "data",
+            "computed",
+            "methods"
+          ],
+          "path": "pinia/getting-started.md",
+          "tokens": 632
+        },
+        {
+          "id": "index",
+          "title": "index",
+          "description": "layout: home",
+          "tags": [],
+          "path": "pinia/index.md",
+          "tokens": 474
+        },
+        {
+          "id": "introduction",
+          "title": "Introduction",
+          "description": "<!-- <VueSchoolLink",
+          "tags": [
+            "export const state = reactive({})",
+            "defineStore()",
+            "setup()",
+            "mapStores()",
+            "mapState()",
+            "mapActions()",
+            "/piːnjʌ/"
+          ],
+          "path": "pinia/introduction.md",
+          "tokens": 3379
+        },
+        {
+          "id": "ssr",
+          "title": "Server Side Rendering (SSR)",
+          "description": "<MasteringPiniaLink",
+          "tags": [
+            "useStore()",
+            "setup",
+            "getters",
+            "actions",
+            "setup()",
+            "pinia",
+            "$pinia",
+            "serverPrefetch()",
+            "onServerPrefetch()",
+            "devalue"
+          ],
+          "path": "pinia/ssr.md",
+          "tokens": 920
+        },
+        {
+          "id": "nuxt",
+          "title": "Nuxt",
+          "description": "<MasteringPiniaLink",
+          "tags": [
+            "@pinia/nuxt",
+            "pinia",
+            "npm i pinia",
+            "package.json",
+            "modules",
+            "nuxt.config.js",
+            "onServerPrefetch()",
+            "callOnce()",
+            "useFetch()",
+            "useAsyncData()"
+          ],
+          "path": "pinia/nuxt.md",
+          "tokens": 855
         }
       ]
     },
