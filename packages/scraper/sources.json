@@ -182,6 +182,23 @@
         "servicePattern": "(https://docs\\.aws\\.amazon\\.com/[^\\s)]+/llms\\.txt)",
         "contentType": "llms-txt"
       }
+    },
+    {
+      "id": "azure",
+      "name": "Azure",
+      "description": "Microsoft Azure cloud platform with compute, storage, databases, AI, and 200+ services",
+      "version": "2026",
+      "adapter": "github",
+      "topicPrefix": "directory",
+      "rateLimit": 10,
+      "github": {
+        "repo": "MicrosoftDocs/azure-docs",
+        "branch": "main",
+        "docsPath": "articles",
+        "include": [".md"],
+        "exclude": ["media/", "includes/", "bread/", "zone-pivot-groups.yml", "TOC.yml", "index.yml"],
+        "maxFiles": 10000
+      }
     }
   ]
 }
