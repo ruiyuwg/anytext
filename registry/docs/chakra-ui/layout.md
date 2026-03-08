@@ -1,0 +1,353 @@
+# Layout
+
+## Aspect Ratio
+
+Use the `aspectRatio` prop to set the desired aspect ratio of an element.
+
+```jsx
+// raw value
+<Box aspectRatio="1.2" />
+
+// token
+<Box aspectRatio="square" />
+```
+
+| Prop          | CSS Property   | Token Category |
+| ------------- | -------------- | -------------- |
+| `aspectRatio` | `aspect-ratio` | `aspectRatios` |
+
+## Break
+
+### Break After
+
+Use the `breakAfter` prop to set how page, column, or region breaks should
+behave after an element.
+
+```jsx
+<Box columns="2">
+  <Box>Item 1</Box>
+  <Box breakAfter="page">Item 2</Box>
+</Box>
+```
+
+| Prop         | CSS Property  | Token Category |
+| ------------ | ------------- | -------------- |
+| `breakAfter` | `break-after` | -              |
+
+### Break Before
+
+Use the `breakBefore` prop to set how page, column, or region breaks should
+behave before an element.
+
+```jsx
+<Box columns="2">
+  <Box>Item 1</Box>
+  <Box breakBefore="page">Item 2</Box>
+</Box>
+```
+
+| Prop          | CSS Property   | Token Category |
+| ------------- | -------------- | -------------- |
+| `breakBefore` | `break-before` | -              |
+
+### Break Inside
+
+Use the `breakInside` prop to set how page, column, or region breaks should
+behave inside an element.
+
+```jsx
+<Box columns="2">
+  <Box>Item 1</Box>
+  <Box breakInside="avoid">Item 2</Box>
+</Box>
+```
+
+| Prop          | CSS Property   | Token Category |
+| ------------- | -------------- | -------------- |
+| `breakInside` | `break-inside` | -              |
+
+## Box Decoration Break
+
+Use the `boxDecorationBreak` prop to set how box decorations should behave when
+the box breaks across multiple lines, columns, or pages.
+
+```jsx /boxDecorationBreak/
+<Box bgImage="linear-gradient(red, blue)" boxDecorationBreak="clone">
+  Chakra is <br /> great!
+</Box>
+```
+
+| Prop                 | CSS Property           | Token Category |
+| -------------------- | ---------------------- | -------------- |
+| `boxDecorationBreak` | `box-decoration-break` | -              |
+
+## Box Sizing
+
+Use the `boxSizing` prop to set the box sizing of an element.
+
+```jsx /boxSizing/
+<Box boxSizing="border-box" padding="4" width="8" height="8" />
+```
+
+| Prop        | CSS Property | Token Category |
+| ----------- | ------------ | -------------- |
+| `boxSizing` | `box-sizing` | -              |
+
+## Columns
+
+Use the `columns` prop to set the number of columns for an element.
+
+```jsx
+<Box columns={2} />
+```
+
+| Prop      | CSS Property | Token Category |
+| --------- | ------------ | -------------- |
+| `columns` | `columns`    | -              |
+
+## Float
+
+Use the `float` prop to set the float of an element.
+
+```jsx /float/
+<Box>
+  <Text>As much mud in the streets...</Text>
+  <Box float="left">Float me</Box>
+</Box>
+```
+
+| Prop    | CSS Property | Token Category |
+| ------- | ------------ | -------------- |
+| `float` | `float`      | -              |
+
+## Clear
+
+Use the `clear` prop to set whether an element must be moved below (cleared)
+floating elements that precede it.
+
+```jsx
+<Box>
+  <Box float="left">Left</Box>
+  <Box float="right">Right</Box>
+  <Box clear="none">
+    As much mud in the streets as if the waters had but newly retired from the
+    face of the earth, and it would not be wonderful to meet a Megalosaurus,
+    forty feet long or so, waddling like an elephantine lizard up Holborn Hill.
+  </Box>
+</Box>
+```
+
+| Prop    | CSS Property | Token Category |
+| ------- | ------------ | -------------- |
+| `clear` | `clear`      | -              |
+
+## Isolation
+
+Use the `isolation` prop to set whether an element should explicitly create a
+new stacking context.
+
+```jsx
+<Box isolation="isolate">
+  <Box bg="red.500" width="10" height="10" />
+</Box>
+```
+
+| Prop        | CSS Property | Token Category |
+| ----------- | ------------ | -------------- |
+| `isolation` | `isolation`  | -              |
+
+## Object Fit
+
+Use the `objectFit` prop to set how an image or video should be resized to fit
+its container.
+
+```jsx
+<Image src="..." objectFit="cover" width="10" height="10" />
+```
+
+| Prop        | CSS Property | Token Category |
+| ----------- | ------------ | -------------- |
+| `objectFit` | `object-fit` | -              |
+
+## Object Position
+
+Use the `objectPosition` prop to set how an element should be positioned within
+its container.
+
+```jsx
+<Image src="..." objectPosition="center" width="10" height="10" />
+```
+
+| Prop             | CSS Property      | Token Category |
+| ---------------- | ----------------- | -------------- |
+| `objectPosition` | `object-position` | -              |
+
+## Overflow
+
+Use the `overflow` prop to control how content that exceeds an element's
+dimensions is handled. This property determines whether to clip the content, add
+scrollbars, or display the overflow content.
+
+```jsx
+<Box overflow="hidden" maxHeight="120px" />
+<Box overflow="auto" maxHeight="120px" />
+```
+
+| Prop       | CSS Property | Token Category |
+| ---------- | ------------ | -------------- |
+| `overflow` | `overflow`   | -              |
+
+## Overscroll Behavior
+
+Use the `overscrollBehavior` prop to control what the browser does when reaching
+the boundary of a scrolling area.
+
+```jsx
+<Box maxHeight="120px" overscrollBehavior="contain" />
+```
+
+| Prop                 | CSS Property          | Token Category |
+| -------------------- | --------------------- | -------------- |
+| `overscrollBehavior` | `overscroll-behavior` | -              |
+
+## Position
+
+Use the `position` utilities to set the position of an element.
+
+```jsx
+<Box position="absolute" />
+<Box pos="absolute" /> // shorthand
+```
+
+| Prop       | CSS Property | Token Category |
+| ---------- | ------------ | -------------- |
+| `position` | `position`   | -              |
+
+## Top / Right / Bottom / Left
+
+Use the `top`, `right`, `bottom` and `left` utilities to set the position of an
+element.
+
+```jsx
+<Box position="absolute" top="0" left="0" />
+
+// using spacing tokens
+<Box position="absolute" top="4" />
+
+// using hardcoded values
+<Box position="absolute" top="100px" />
+```
+
+Use the logical equivalents of `inset{Start|End}` utilities to set the position
+of an element based on the writing mode.
+
+```jsx
+<Box position="absolute" insetStart="0" />
+```
+
+| Prop                                      | CSS Property         | Token Category |
+| ----------------------------------------- | -------------------- | -------------- |
+| `top`                                     | `top`                | `spacing`      |
+| `right`                                   | `right`              | `spacing`      |
+| `bottom`                                  | `bottom`             | `spacing`      |
+| `left`                                    | `left`               | `spacing`      |
+| `start`, `insetStart`, `insetInlineStart` | `inset-inline-start` | `spacing`      |
+| `end` , `insetEnd`, `insetInlineEnd`      | `inset-inline-end`   | `spacing`      |
+| `insetX`, `insetInline`                   | `inset-inline`       | `spacing`      |
+| `insetY`, `insetBlock`                    | `inset-inline`       | `spacing`      |
+
+## Visibility
+
+Use the `visibility` prop to control the visibility of an element.
+
+```jsx
+<Box visibility="hidden" />
+```
+
+| Prop         | CSS Property | Token Category |
+| ------------ | ------------ | -------------- |
+| `visibility` | `visibility` | -              |
+
+## Z-Index
+
+Use the `zIndex` prop to set the z-index of an element.
+
+```jsx
+// using hardcoded values
+<Box zIndex="1" />
+
+// using token
+<Box zIndex="overlay" />
+```
+
+| Prop     | CSS Property | Token Category |
+| -------- | ------------ | -------------- |
+| `zIndex` | `z-index`    | `zIndices`     |
+
+# List
+
+## List Style Type
+
+Use the `listStyleType` property to set the type of the list marker.
+
+```jsx
+<Box as="ul" listStyleType="circle">
+  <li>Item 1</li>
+  <li>Item 2</li>
+  <li>Item 3</li>
+</Box>
+```
+
+| Prop            | CSS Property      | Token Category |
+| --------------- | ----------------- | -------------- |
+| `listStyleType` | `list-style-type` | -              |
+
+## List Style Position
+
+Use the `listStylePosition` property to set the position of the list marker.
+
+```jsx
+<Box as="ul" listStylePosition="inside">
+  <li>Item 1</li>
+  <li>Item 2</li>
+  <li>Item 3</li>
+</Box>
+```
+
+| Prop                | CSS Property          | Token Category |
+| ------------------- | --------------------- | -------------- |
+| `listStylePosition` | `list-style-position` | -              |
+
+## List Style Image
+
+Use the `listStyleImage` property to set the image of the list marker.
+
+```jsx
+<Box as="ul" listStyleImage="url(...)">
+  <li>Item 1</li>
+  <li>Item 2</li>
+  <li>Item 3</li>
+</Box>
+```
+
+| Prop             | CSS Property       | Token Category |
+| ---------------- | ------------------ | -------------- |
+| `listStyleImage` | `list-style-image` | `assets`       |
+
+## Markers
+
+Use the `_marker` property to set the marker of a list item.
+
+```jsx /_marker/
+<ul>
+  <Box as="li" _marker={{ color: "red" }}>
+    Item 1
+  </Box>
+  <Box as="li" _marker={{ color: "blue" }}>
+    Item 2
+  </Box>
+  <Box as="li" _marker={{ color: "green" }}>
+    Item 3
+  </Box>
+</ul>
+```

@@ -1,0 +1,157 @@
+# Contributing to Chakra UI
+
+Thanks for showing interest to contribute to Chakra UI 💖, you rock!
+
+## Overview
+
+Here are a few ways you can help improve Chakra UI
+
+- **Improve the documentation**: Add new demos, fix typos, or add missing
+  information.
+- **Add new demos**: Add new component demos to the website and storybook. Open
+  a PR to `apps/compositions/src/examples`
+- **Fix bugs**: Report bugs, fix bugs, or add missing features.
+- **Contribute to the code**: Propose new features by opening a Github
+  Discussion, or find existing bugs to work on.
+- **Improve the code**: Improve the code, fix bugs, or add missing features.
+
+We welcome all contributions, no matter how big or small.
+
+## Architecture
+
+Chakra v3.x is a composition of two projects in the Chakra ecosystem, Ark UI and
+Zag.js. The goal is to maintain as little code as possible in Chakra UI, and
+delegate the heavy lifting to these projects.
+
+<ResourceCard
+type="github"
+title="Zag.js"
+description="Component logic modelled as a state machine"
+url="https://github.com/chakra-ui/zag"
+/>
+
+<ResourceCard
+type="github"
+title="Ark UI"
+description="State machine from Zag.js converted to headless UI components"
+url="https://github.com/chakra-ui/ark"
+/>
+
+### Security
+
+**Reporting vulnerabilities:** Do not report in public issues. Report privately
+via
+[GitHub Security Advisories](https://github.com/chakra-ui/chakra-ui/security/advisories/new).
+Include the type of issue, affected package and version, steps to reproduce, and
+impact.
+
+See [SECURITY.md](https://github.com/chakra-ui/chakra-ui/blob/main/SECURITY.md)
+for the full policy.
+
+**Supported versions:** We release security updates for the latest major
+version.
+
+**Security posture:**
+
+- We don't use `dangerouslySetInnerHTML` internally—everything renders through
+  React's JSX. If you pass raw HTML (e.g. `Prose` or `CodeBlock` with user
+  content), sanitize it first.
+- **CodeBlock**: When rendering user-provided code, make sure your syntax
+  highlighter escapes HTML.
+- **CSP**: Emotion injects styles via `<style>` tags. With strict CSP, add
+  `style-src 'unsafe-inline'` or use a nonce (Emotion supports it).
+- **Storage**: We don't use `localStorage`, `sessionStorage`, or cookies.
+
+### Filing Issues
+
+The mindset for filing issues on Chakra v3.x works like this:
+
+- If the issue is a logic or accessibility bug, then it's most likely a bug in
+  Zag.js. Consider opening an issue in the Zag.js repository.
+
+- If it's a styling issue, then you can fix it directly in the Chakra UI repo.
+
+### Feature Requests
+
+The mindset for filing feature requests on Chakra v3.x works like this:
+
+- If the feature is a new component without logic, then it can go in Chakra UI
+  or Ark UI. Start a discussion on the
+  [Chakra UI repository](https://github.com/chakra-ui/chakra-ui)
+
+- If the feature is a new component with logic, it belongs in Zag.js. Start a
+  discussion on the [Zag.js repository](https://github.com/chakra-ui/zag).
+
+## Local Setup
+
+- Clone the repository
+
+```bash
+git clone https://github.com/chakra-ui/chakra-ui.git
+```
+
+- Install dependencies with pnpm
+
+```bash
+pnpm install
+```
+
+- Build local version of all packages
+
+```bash
+pnpm build:fast
+```
+
+- Start storybook
+
+```bash
+pnpm storybook
+```
+
+- Start documentation website
+
+```bash
+pnpm www dev
+```
+
+- Run tests
+
+```bash
+pnpm test
+```
+
+## Recommended Extensions
+
+We recommend using the following extensions in your editor:
+
+- [ESLint](https://eslint.org/)
+- [Prettier](https://prettier.io/)
+- [EditorConfig](https://editorconfig.org/)
+- [MDX](https://mdxjs.com/)
+
+# Figma
+
+The official
+[Chakra UI v3 Figma Kit is now available!](https://www.figma.com/community/file/1506648876941130701)
+
+This kit helps you design with the same building blocks that exist in code,
+making it easier for developers and designers to collaborate, stay consistent,
+and move faster.
+
+<Image
+src="/chakra-figma-kit.png"
+alt="Chakra Figma Kit"
+objectFit="contain"
+fill
+height="500px"
+/>
+
+## Get the Kit
+
+You can access the kit for free on Figma Community:
+
+👉🏽
+[Chakra UI v3 Figma Kit](https://www.figma.com/community/file/1506648876941130701)
+
+> Everything in the kit is designed to reflect how Chakra UI works, so your
+> design decisions translate directly into production components.

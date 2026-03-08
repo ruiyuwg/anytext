@@ -1,0 +1,472 @@
+# Overview
+
+## Architecture
+
+The Chakra UI theming system is built around the API of
+[Panda CSS](https://panda-css.com/).
+
+Here's a quick overview of how the system is structured to provide a performant
+and extensible styling system:
+
+- Define the styling system configuration using the `defineConfig` function
+- Create the styling engine using the `createSystem` function
+- Pass the styling engine to the `ChakraProvider` component
+
+```tsx
+import {
+  ChakraProvider,
+  createSystem,
+  defaultConfig,
+  defineConfig,
+} from "@chakra-ui/react"
+
+const config = defineConfig({
+  theme: {
+    tokens: {
+      colors: {},
+    },
+  },
+})
+
+const system = createSystem(defaultConfig, config)
+
+export default function App() {
+  return (
+    <ChakraProvider value={system}>
+      <Box>Hello World</Box>
+    </ChakraProvider>
+  )
+}
+```
+
+## Config
+
+The Chakra UI system is configured using the `defineConfig` function. This
+function accepts a configuration object that allows you to customize the styling
+system's behavior.
+
+After a config is defined, it is passed to the `createSystem` function to create
+the styling engine.
+
+### cssVarsRoot
+
+`cssVarsRoot` is the root element where the token CSS variables will be applied.
+
+```tsx title="theme.ts"
+const config = defineConfig({
+  cssVarsRoot: ":where(:root, :host)",
+})
+
+export default createSystem(defaultConfig, config)
+```
+
+### cssVarsPrefix
+
+`cssVarsPrefix` is the prefix used for the token CSS variables.
+
+```tsx title="theme.ts"
+const config = defineConfig({
+  cssVarsPrefix: "ck",
+})
+
+export default createSystem(defaultConfig, config)
+```
+
+### globalCss
+
+`globalCss` is used to apply global styles to the system.
+
+```tsx title="theme.ts"
+const config = defineConfig({
+  globalCss: {
+    "html, body": {
+      margin: 0,
+      padding: 0,
+    },
+  },
+})
+
+export default createSystem(defaultConfig, config)
+```
+
+### preflight
+
+`preflight` is used to apply css reset styles to the system.
+
+```tsx title="theme.ts"
+const config = defineConfig({
+  preflight: false,
+})
+
+export default createSystem(defaultConfig, config)
+```
+
+Alternatively, you can use the `preflight` config property to apply css reset
+styles to the system. This is useful if you want to apply css reset styles to a
+specific element.
+
+```tsx title="theme.ts"
+const config = defineConfig({
+  preflight: {
+    scope: ".chakra-reset",
+  },
+})
+
+export default createSystem(defaultConfig, config)
+```
+
+### theme
+
+Use the `theme` config property to define the system theme. This property
+accepts the following properties:
+
+- `breakpoints`: for defining breakpoints
+- `keyframes`: for defining css keyframes animations
+- `tokens`: for defining tokens
+- `semanticTokens`: for defining semantic tokens
+- `textStyles`: for defining typography styles
+- `layerStyles`: for defining layer styles
+- `animationStyles`: for defining animation styles
+- `recipes`: for defining component recipes
+- `slotRecipes`: for defining component slot recipes
+
+```tsx title="theme.ts"
+const config = defineConfig({
+  theme: {
+    breakpoints: {
+      sm: "320px",
+      md: "768px",
+      lg: "960px",
+      xl: "1200px",
+    },
+    tokens: {
+      colors: {
+        red: "#EE0F0F",
+      },
+    },
+    semanticTokens: {
+      colors: {
+        danger: { value: "{colors.red}" },
+      },
+    },
+    keyframes: {
+      spin: {
+        from: { transform: "rotate(0deg)" },
+        to: { transform: "rotate(360deg)" },
+      },
+    },
+  },
+})
+
+export default createSystem(defaultConfig, config)
+```
+
+### conditions
+
+Use the `conditions` config property to define custom selectors and media query
+conditions for use in the system.
+
+```tsx title="theme.ts"
+const config = defineConfig({
+  conditions: {
+    cqSm: "@container(min-width: 320px)",
+    child: "& > *",
+  },
+})
+
+export default createSystem(defaultConfig, config)
+```
+
+Sample usage:
+
+```tsx
+<Box mt="40px" _cqSm={{ mt: "0px" }}>
+  <Text>Hello World</Text>
+</Box>
+```
+
+### strictTokens
+
+Use the `strictTokens` config property to enforce the usage of only design
+tokens. This will throw a TS error if you try to use a token that is not defined
+in the theme.
+
+```tsx title="theme.ts"
+const config = defineConfig({
+  strictTokens: true,
+})
+
+export default createSystem(defaultConfig, config)
+```
+
+```tsx
+// ❌ This will throw a TS error
+<Box color="#4f343e">Hello World</Box>
+
+// ✅ This will work
+<Box color="red.400">Hello World</Box>
+```
+
+If you use TypeScript with `strictTokens`, run the
+[CLI `typegen` command](/docs/get-started/cli#chakra-typegen) in local
+development and CI/CD so token typings stay in sync with your theme.
+
+## TypeScript
+
+When you configure the system (colors, space, fonts, etc.), the CLI generates
+type definitions to keep your theme in sync with `@chakra-ui/react`. This
+provides a type-safe API and autocompletion.
+
+See the [CLI docs](/docs/get-started/cli#chakra-typegen) for how to run typegen
+in postinstall, CI, and monorepos.
+
+```bash
+npx @chakra-ui/cli typegen ./theme.ts
+```
+
+## System
+
+After a config is defined, it is passed to the `createSystem` function to create
+the styling engine. The returned `system` is framework-agnostic JavaScript
+styling engine that can be used to style components.
+
+```tsx
+const system = createSystem(defaultConfig, config)
+```
+
+The system includes the following properties:
+
+### token
+
+The token function is used to get a raw token value, or css variable.
+
+```tsx
+const system = createSystem(defaultConfig, config)
+
+// raw token
+system.token("colors.red.200")
+// => "#EE0F0F"
+
+// token with fallback
+system.token("colors.pink.240", "#000")
+// => "#000"
+```
+
+Use the `token.var` function to get the css variable:
+
+```tsx
+// css variable
+system.token.var("colors.red.200")
+// => "var(--chakra-colors-red-200)"
+
+// token with fallback
+system.token.var("colors.pink.240", "colors.red.200")
+// => "var(--chakra-colors-red-200)"
+```
+
+It's important to note that `semanticTokens` always return a css variable,
+regardless of whether you use `token` or `token.var`. This is because semantic
+tokens change based on the theme.
+
+```tsx
+// semantic token
+system.token("colors.danger")
+// => "var(--chakra-colors-danger)"
+
+system.token.var("colors.danger")
+// => "var(--chakra-colors-danger)"
+```
+
+### tokens
+
+```tsx
+const system = createSystem(defaultConfig, config)
+
+system.tokens.getVar("colors.red.200")
+// => "var(--chakra-colors-red-200)"
+
+system.tokens.expandReferenceInValue("3px solid {colors.red.200}")
+// => "3px solid var(--chakra-colors-red-200)"
+
+system.tokens.cssVarMap
+// => Map { "colors": Map { "red.200": "var(--chakra-colors-red-200)" } }
+
+system.tokens.flatMap
+// => Map { "colors.red.200": "var(--chakra-colors-red-200)" }
+```
+
+### css
+
+The `css` function is used to convert chakra style objects to CSS style object
+that can be passed to `emotion` or `styled-components` or any other styling
+library.
+
+```tsx
+const system = createSystem(defaultConfig, config)
+
+system.css({
+  color: "red.200",
+  bg: "blue.200",
+})
+
+// => { color: "var(--chakra-colors-red-200)", background: "var(--chakra-colors-blue-200)" }
+```
+
+### cva
+
+The `cva` function is used to create component recipes. It returns a function
+that, when called with a set of props, returns a style object.
+
+```tsx
+const system = createSystem(defaultConfig, config)
+
+const button = system.cva({
+  base: {
+    color: "white",
+    bg: "blue.500",
+  },
+  variants: {
+    outline: {
+      color: "blue.500",
+      bg: "transparent",
+      border: "1px solid",
+    },
+  },
+})
+
+button({ variant: "outline" })
+// => { color: "blue.500", bg: "transparent", border: "1px solid" }
+```
+
+### sva
+
+The `sva` function is used to create component slot recipes. It returns a
+function that, when called with a set of props, returns a style object for each
+slot.
+
+```tsx
+const system = createSystem(defaultConfig, config)
+
+const alert = system.sva({
+  slots: ["title", "description", "icon"],
+  base: {
+    title: { color: "white" },
+    description: { color: "white" },
+    icon: { color: "white" },
+  },
+  variants: {
+    status: {
+      info: {
+        title: { color: "blue.500" },
+        description: { color: "blue.500" },
+        icon: { color: "blue.500" },
+      },
+    },
+  },
+})
+
+alert({ status: "info" })
+// => { title: { color: "blue.500" }, description: { color: "blue.500" }, icon: { color: "blue.500" } }
+```
+
+### isValidProperty
+
+The `isValidProperty` function is used to check if a property is valid.
+
+```tsx
+const system = createSystem(defaultConfig, config)
+
+system.isValidProperty("color")
+// => true
+
+system.isValidProperty("background")
+// => true
+
+system.isValidProperty("invalid")
+// => false
+```
+
+### splitCssProps
+
+The `splitCssProps` function is used to split the props into css props and
+non-css props.
+
+```tsx
+const system = createSystem(defaultConfig, config)
+
+system.splitCssProps({
+  color: "red.200",
+  bg: "blue.200",
+  "aria-label": "Hello World",
+})
+// => [{ color: "red.200", bg: "blue.200" }, { "aria-label": "Hello World" }]
+```
+
+### breakpoints
+
+The `breakpoints` property is used to query breakpoints.
+
+```tsx
+const system = createSystem(defaultConfig, config)
+
+system.breakpoints.up("sm")
+// => "@media (min-width: 320px)"
+
+system.breakpoints.down("sm")
+// => "@media (max-width: 319px)"
+
+system.breakpoints.only("md")
+// => "@media (min-width: 320px) and (max-width: 768px)"
+
+system.breakpoints.keys()
+// => ["sm", "md", "lg", "xl"]
+```
+
+## Tokens
+
+To learn more about tokens, please refer to the [tokens](/docs/theming/tokens)
+section.
+
+## Recipes
+
+To learn more about recipes, please refer to the
+[recipes](/docs/theming/recipes) section.
+
+# Radii
+
+## Tokens
+
+Chakra UI supports the following border radius tokens out of the box.
+
+| Border Radius Token | Value        | Example                     |
+| ------------------- | ------------ | --------------------------- |
+| `none`              | `0`          |  |
+| `2xs`               | `0.0625rem`  |   |
+| `xs`                | `0.125rem`   |    |
+| `sm`                | `0.25rem`    |    |
+| `md`                | `0.375rem`   |    |
+| `lg`                | `0.5rem`     |    |
+| `xl`                | `0.75rem`    |    |
+| `2xl`               | `1rem`       |   |
+| `3xl`               | `1.5rem`     |   |
+| `4xl`               | `2rem`       |   |
+| `full`              | `9999px`     |  |
+| `l1`                | `{radii.xs}` |    |
+| `l2`                | `{radii.sm}` |    |
+| `l3`                | `{radii.md}` |    |
+
+Here’s the conversion of the given rem values to px, assuming the root font size is 16px (which is the default in most browsers)
+
+| Size  | rem Value  | px Equivalent  |
+|-------|-----------|---------------|
+| none  | 0         | 0px           |
+| 2xs   | 0.0625rem | 1px           |
+| xs    | 0.125rem  | 2px           |
+| sm    | 0.25rem   | 4px           |
+| md    | 0.375rem  | 6px           |
+| lg    | 0.5rem    | 8px           |
+| xl    | 0.75rem   | 12px          |
+| 2xl   | 1rem      | 16px          |
+| 3xl   | 1.5rem    | 24px          |
+| 4xl   | 2rem      | 32px          |
+| full  | 9999px    | 9999px        |

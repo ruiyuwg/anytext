@@ -1,0 +1,158 @@
+# Using Chakra UI in Next.js (App)
+
+## Compatibility
+
+Chakra UI works with Next.js 15 and 16.
+
+Chakra UI doesn't lock you to a specific Next.js major version. If your project
+uses supported React and Emotion versions, this guide applies.
+
+The templates in this repo may pin an older Next.js major for stability. You can
+upgrade `next` to the latest major in your app.
+
+## Templates
+
+Use one of the following templates to get started quickly. The templates are
+configured correctly to use Chakra UI.
+
+<ResourceCard
+type="github"
+title="Next.js app template"
+url="https://github.com/chakra-ui/chakra-ui/tree/main/sandbox/next-app"
+/>
+
+<ResourceCard
+type="github"
+title="Next.js pages template"
+url="https://github.com/chakra-ui/chakra-ui/tree/main/sandbox/next-pages"
+/>
+
+## Installation
+
+> The minimum node version required is Node.20.x
+
+### Install dependencies
+
+```bash
+npm i @chakra-ui/react @emotion/react
+```
+
+### Add snippets
+
+Snippets are pre-built components that you can use to build your UI faster.
+Using the `@chakra-ui/cli` you can add snippets to your project.
+
+```bash
+npx @chakra-ui/cli snippet add
+```
+
+### Update tsconfig
+
+If you're using TypeScript, you need to update the `compilerOptions` in the
+tsconfig file to include the following options:
+
+```json
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "skipLibCheck": true,
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}
+```
+
+> If you're using JavaScript, create a `jsconfig.json` file and add the above
+> code to the file.
+
+### Setup provider
+
+Wrap your application with the `Provider` component generated in the
+`components/ui/provider` component at the root of your application.
+
+This provider composes the following:
+
+- `ChakraProvider` from `@chakra-ui/react` for the styling system
+- `ThemeProvider` from `next-themes` for color mode
+
+```tsx title="app/layout.tsx" {1,6,8}
+import { Provider } from "@/components/ui/provider"
+
+export default function RootLayout(props: { children: React.ReactNode }) {
+  const { children } = props
+  return (
+    <html suppressHydrationWarning>
+      <body>
+        <Provider>{children}</Provider>
+      </body>
+    </html>
+  )
+}
+```
+
+> Adding the `suppressHydrationWarning` prop to the `html` element is required
+> to prevent the warning about the `next-themes` library.
+
+### Optimize Bundle
+
+We recommend using the `experimental.optimizePackageImports` feature in Next.js
+to optimize your bundle size by loading only the modules that you are actually
+using.
+
+```tsx title="next.config.mjs" {3}
+export default {
+  experimental: {
+    optimizePackageImports: ["@chakra-ui/react"],
+  },
+}
+```
+
+This also helps to resolve warnings like:
+
+```sh
+[webpack.cache.PackFileCacheStrategy] Serializing big strings (xxxkiB)
+```
+
+### Hydration errors
+
+If you see an error like this: **Hydration failed because the initial server
+rendered HTML did not match the client**, and the error looks similar to:
+
+```diff
++<div className="chakra-xxx">
+-<style data-emotion="css-global xxx" data-s="">
+```
+
+This is caused by how Next.js hydrates Emotion CSS when running with Turbopack.
+Please add the `--webpack` flag to your `dev` and `build` scripts in your
+`package.json` file instead.
+
+```diff
+- "dev": "next dev"
+- "build": "next build"
++ "dev": "next dev --webpack"
++ "build": "next build --webpack"
+```
+
+When this is fixed by the `Next.js` team, we'll update this guide.
+
+### Enjoy!
+
+With the power of the snippets and the primitive components from Chakra UI, you
+can build your UI faster.
+
+```tsx
+import { Button, HStack } from "@chakra-ui/react"
+
+const Demo = () => {
+  return (
+    <HStack>
+      <Button>Click me</Button>
+      <Button>Click me</Button>
+    </HStack>
+  )
+}
+```

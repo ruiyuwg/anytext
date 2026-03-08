@@ -1,5 +1,5 @@
 {
-  "version": 52,
+  "version": 53,
   "updatedAt": "2026-03-08",
   "libraries": [
     {
@@ -9915,6 +9915,3689 @@
           ],
           "path": "bun/writing-tests.md",
           "tokens": 6426
+        }
+      ]
+    },
+    {
+      "id": "chakra-ui",
+      "name": "Chakra UI",
+      "description": "Accessible React component library with composable style props and theming",
+      "version": "3",
+      "topics": [
+        {
+          "id": "area-chart",
+          "title": "Area Chart",
+          "description": "Use the YAxis component from recharts to display the y-axis.",
+          "tags": [
+            "YAxis",
+            "recharts",
+            "strokeDasharray",
+            "series",
+            "Chart.Gradient",
+            "id",
+            "fill",
+            "Area",
+            "stackId",
+            "stackOffset"
+          ],
+          "path": "chakra-ui/area-chart.md",
+          "tokens": 5975
+        },
+        {
+          "id": "axis",
+          "title": "Axis",
+          "description": "This guide will show you how to customize the x and y axis of the charts\ncomponent.",
+          "tags": [
+            "January",
+            "Jan"
+          ],
+          "path": "chakra-ui/axis.md",
+          "tokens": 528
+        },
+        {
+          "id": "bar-chart",
+          "title": "Bar Chart",
+          "description": "Here's an example of coloring the bars based on the data.",
+          "tags": [
+            "shape",
+            "Bar",
+            "LabelList",
+            "recharts",
+            "useChart",
+            "barCategoryGap",
+            "0",
+            "BarChart",
+            "layout=\"vertical\"",
+            "radius"
+          ],
+          "path": "chakra-ui/bar-chart.md",
+          "tokens": 9100
+        },
+        {
+          "id": "bar-list",
+          "title": "Bar List",
+          "description": "Set the sort key to { by: \"value\", direction: \"asc\" } to sort the bars in\nascending order.",
+          "tags": [
+            "sort",
+            "{ by: \"value\", direction: \"asc\" }",
+            "valueFormatter",
+            "BarList.Value",
+            "BarList.Label",
+            "label",
+            "BarList.Bar",
+            "tooltip"
+          ],
+          "path": "chakra-ui/bar-list.md",
+          "tokens": 1873
+        },
+        {
+          "id": "bar-segment",
+          "title": "Bar Segment",
+          "description": "Pass the barSize prop to the BarSegment.Root component to configure the size\nof the bar.",
+          "tags": [
+            "barSize",
+            "BarSegment.Root",
+            "BarSegment.Legend",
+            "showPercent",
+            "showValue",
+            "tooltip",
+            "BarSegment.Bar",
+            "BarSegment.Reference",
+            "stroke",
+            "strokeDasharray"
+          ],
+          "path": "chakra-ui/bar-segment.md",
+          "tokens": 1494
+        },
+        {
+          "id": "donut-chart",
+          "title": "Donut Chart",
+          "description": "To display a point label on the chart, use the PointLabel component from\nrecharts.",
+          "tags": [
+            "PointLabel",
+            "recharts",
+            "startAngle",
+            "endAngle",
+            "<Pie>",
+            "paddingAngle",
+            "cornerRadius",
+            "activeIndex",
+            "activeShape",
+            "Chart.RadialText"
+          ],
+          "path": "chakra-ui/donut-chart.md",
+          "tokens": 2104
+        },
+        {
+          "id": "charts",
+          "title": "Charts",
+          "description": "Charts are designed to look great out of the box, seamlessly integrating with\nother Chakra UI's theming system. The c...",
+          "tags": [
+            "Chart",
+            "useChart",
+            "@chakra-ui/charts",
+            "recharts",
+            "Chart.Root",
+            "color",
+            "formatDate",
+            "formatNumber",
+            "package.json",
+            "responsive"
+          ],
+          "path": "chakra-ui/charts.md",
+          "tokens": 891
+        },
+        {
+          "id": "line-chart",
+          "title": "Line Chart",
+          "description": "To add labels to the x and y axes, use the Label component from recharts.",
+          "tags": [
+            "Label",
+            "recharts",
+            "dot",
+            "activeDot",
+            "false",
+            "LabelList",
+            "Line",
+            "Chart.Gradient",
+            "id",
+            "stroke"
+          ],
+          "path": "chakra-ui/line-chart.md",
+          "tokens": 9571
+        },
+        {
+          "id": "pie-chart",
+          "title": "Pie Chart",
+          "description": "Render the LabelList from recharts inside the Pie to display the label\ninside the pie chart.",
+          "tags": [
+            "LabelList",
+            "recharts",
+            "Pie",
+            "label",
+            "stroke",
+            "none",
+            "Chart.Legend",
+            "startAngle",
+            "endAngle"
+          ],
+          "path": "chakra-ui/pie-chart.md",
+          "tokens": 2068
+        },
+        {
+          "id": "radar-chart",
+          "title": "Radar Chart",
+          "description": "",
+          "tags": [],
+          "path": "chakra-ui/radar-chart.md",
+          "tokens": 2460
+        },
+        {
+          "id": "scatter-chart",
+          "title": "Scatter Chart",
+          "description": "Here's an example of a scatter chart with multiple series.",
+          "tags": [
+            "Chart.Legend",
+            "Scatter",
+            "recharts",
+            "line"
+          ],
+          "path": "chakra-ui/scatter-chart.md",
+          "tokens": 2415
+        },
+        {
+          "id": "sparkline",
+          "title": "Sparkline",
+          "description": "Sparklines can be made with bar charts.",
+          "tags": [
+            "Chart.Gradient",
+            "Reference",
+            "recharts"
+          ],
+          "path": "chakra-ui/sparkline.md",
+          "tokens": 3909
+        },
+        {
+          "id": "usechart",
+          "title": "useChart",
+          "description": "The useChart hook provides a set of utilities to manage and format data for\ncharts efficiently. It offers various hel...",
+          "tags": [
+            "useChart",
+            "getKey",
+            "getTotal",
+            "getMin",
+            "getMax",
+            "getValuePercent",
+            "formatNumber",
+            "EnvironmentProvider",
+            "Intl.NumberFormatOptions",
+            "formatDate"
+          ],
+          "path": "chakra-ui/usechart.md",
+          "tokens": 1191
+        },
+        {
+          "id": "absolutecenter",
+          "title": "AbsoluteCenter",
+          "description": "The AbsoluteCenter component uses the position: absolute strategy to center\nits child element relative to its parent.",
+          "tags": [
+            "AbsoluteCenter",
+            "position: absolute",
+            "position: relative",
+            "axis",
+            "horizontal",
+            "vertical",
+            "both",
+            "React.ElementType",
+            "boolean"
+          ],
+          "path": "chakra-ui/absolutecenter.md",
+          "tokens": 1184
+        },
+        {
+          "id": "accordion",
+          "title": "Accordion",
+          "description": "Set the accordion that shows up by default.",
+          "tags": [
+            "multiple",
+            "size",
+            "variant",
+            "outline",
+            "subtle",
+            "enclosed",
+            "plain",
+            "disabled",
+            "Accordion.Item",
+            "_open"
+          ],
+          "path": "chakra-ui/accordion.md",
+          "tokens": 4310
+        },
+        {
+          "id": "action-bar",
+          "title": "Action Bar",
+          "description": "The action bar is designed to be controlled by table or checkbox selections. It\nprovides a set of actions that can be...",
+          "tags": [
+            "ActionBar.CloseTrigger",
+            "onOpenChange",
+            "open",
+            "ActionBar",
+            "Dialog",
+            "Delete projects",
+            "placement",
+            "bottom",
+            "bottom-start",
+            "bottom-end"
+          ],
+          "path": "chakra-ui/action-bar.md",
+          "tokens": 2866
+        },
+        {
+          "id": "alert",
+          "title": "Alert",
+          "description": "If you prefer a closed component composition, check out the\nsnippet below.",
+          "tags": [
+            "Alert.Description",
+            "status",
+            "error",
+            "success",
+            "warning",
+            "info",
+            "variant",
+            "subtle",
+            "solid",
+            "outline"
+          ],
+          "path": "chakra-ui/alert.md",
+          "tokens": 1893
+        },
+        {
+          "id": "aspect-ratio",
+          "title": "Aspect Ratio",
+          "description": "The ratio prop overrides the original aspect ratios of AspectRatio's child\ncontent, accepting only numeric values, no...",
+          "tags": [
+            "ratio",
+            "AspectRatio",
+            "square",
+            "landscape",
+            "portrait",
+            "wide",
+            "ultrawide",
+            "golden",
+            "aspectRatio",
+            "ConditionalValue<number> \\| undefined"
+          ],
+          "path": "chakra-ui/aspect-ratio.md",
+          "tokens": 788
+        },
+        {
+          "id": "avatar",
+          "title": "Avatar",
+          "description": "If you prefer a closed component composition, check out the\nsnippet below.",
+          "tags": [
+            "size",
+            "variant",
+            "shape",
+            "rounded",
+            "square",
+            "colorPalette",
+            "Avatar.Icon",
+            "outline*",
+            "Group",
+            "AvatarGroup"
+          ],
+          "path": "chakra-ui/avatar.md",
+          "tokens": 3880
+        },
+        {
+          "id": "badge",
+          "title": "Badge",
+          "description": "Render an icon within the badge directly",
+          "tags": [
+            "'xs' \\| 'sm' \\| 'md' \\| 'lg'",
+            "React.ElementType",
+            "boolean"
+          ],
+          "path": "chakra-ui/badge.md",
+          "tokens": 569
+        },
+        {
+          "id": "bleed",
+          "title": "Bleed",
+          "description": "Use the block prop to make the element bleed vertically.",
+          "tags": [
+            "block",
+            "inlineStart",
+            "inlineEnd",
+            "blockStart",
+            "blockEnd",
+            "React.ElementType",
+            "boolean"
+          ],
+          "path": "chakra-ui/bleed.md",
+          "tokens": 713
+        },
+        {
+          "id": "blockquote",
+          "title": "Blockquote",
+          "description": "If you prefer a closed component composition, check out the\nsnippet below.",
+          "tags": [
+            "cite",
+            "Blockquote.Content",
+            "Blockquote.Caption",
+            "colorPalette",
+            "variant",
+            "Float",
+            "BlockquoteIcon",
+            "justify",
+            "Blockquote",
+            "Avatar"
+          ],
+          "path": "chakra-ui/blockquote.md",
+          "tokens": 2147
+        },
+        {
+          "id": "box",
+          "title": "Box",
+          "description": "The Box component provides an easy way to write styles with ease. It provides\naccess to design tokens and an unmatche...",
+          "tags": [
+            "Box",
+            "bg",
+            "backgroundColor",
+            "m",
+            "margin",
+            "_hover",
+            "_focus",
+            "borderWidth",
+            "borderColor",
+            "borderStyle: solid"
+          ],
+          "path": "chakra-ui/box.md",
+          "tokens": 860
+        },
+        {
+          "id": "breadcrumb",
+          "title": "Breadcrumb",
+          "description": "If you prefer a closed component composition, check out the\nsnippet below.",
+          "tags": [
+            "size",
+            "variant",
+            "Breadcrumb.Separator",
+            "Breadcrumb.Link",
+            "MenuTrigger",
+            "Breadcrumb.Ellipsis",
+            "asChild",
+            "'underline' \\| 'plain'",
+            "'sm' \\| 'md' \\| 'lg'",
+            "React.ElementType"
+          ],
+          "path": "chakra-ui/breadcrumb.md",
+          "tokens": 2219
+        },
+        {
+          "id": "button",
+          "title": "Button",
+          "description": "Use the size prop to change the size of the button.",
+          "tags": [
+            "size",
+            "variant",
+            "colorPalette",
+            "disabled",
+            "data-disabled",
+            "loading",
+            "loadingText",
+            "Button",
+            "spinnerPlacement",
+            "spinner"
+          ],
+          "path": "chakra-ui/button.md",
+          "tokens": 3056
+        },
+        {
+          "id": "calendar",
+          "title": "Calendar",
+          "description": "The calendar is an inline variant of the DatePicker component. Set the\ninline prop on DatePicker.Root to render the c...",
+          "tags": [
+            "DatePicker",
+            "inline",
+            "DatePicker.Root",
+            "size",
+            "hideOutsideDays",
+            "value",
+            "onValueChange",
+            "defaultValue",
+            "selectionMode",
+            "\"range\""
+          ],
+          "path": "chakra-ui/calendar.md",
+          "tokens": 4386
+        },
+        {
+          "id": "card",
+          "title": "Card",
+          "description": "Use the variant prop to change the visual style of the Card.",
+          "tags": [
+            "variant",
+            "size",
+            "'sm' \\| 'md' \\| 'lg'",
+            "'elevated' \\| 'outline' \\| 'subtle'",
+            "React.ElementType",
+            "boolean",
+            "Card",
+            "Carousel",
+            "Carousel.Indicators",
+            "page"
+          ],
+          "path": "chakra-ui/card.md",
+          "tokens": 9384
+        },
+        {
+          "id": "center",
+          "title": "Center",
+          "description": "Center can be used to create frames around icons or numbers.",
+          "tags": [
+            "inline",
+            "Center",
+            "display: inline-flex",
+            "display: flex",
+            "Square",
+            "size",
+            "Circle",
+            "borderRadius=\"9999px\"",
+            "React.ElementType",
+            "boolean"
+          ],
+          "path": "chakra-ui/center.md",
+          "tokens": 728
+        },
+        {
+          "id": "checkbox-card",
+          "title": "Checkbox Card",
+          "description": "If you prefer a closed component composition, check out the\nsnippet below.",
+          "tags": [
+            "CheckboxCard.Description",
+            "CheckboxGroup",
+            "size",
+            "CheckboxCard.Root",
+            "variant",
+            "disabled",
+            "CheckboxCard.Addon",
+            "Field",
+            "Fieldset",
+            "Field.Root"
+          ],
+          "path": "chakra-ui/checkbox-card.md",
+          "tokens": 2629
+        },
+        {
+          "id": "checkbox",
+          "title": "Checkbox",
+          "description": "If you prefer a closed component composition, check out the\nsnippet below.",
+          "tags": [
+            "Checkbox",
+            "Checkbox.Indicator",
+            "variant",
+            "Checkbox.Root",
+            "colorPalette",
+            "size",
+            "disabled",
+            "invalid",
+            "checked",
+            "onCheckedChange"
+          ],
+          "path": "chakra-ui/checkbox.md",
+          "tokens": 4198
+        },
+        {
+          "id": "checkmark",
+          "title": "Checkmark",
+          "description": "Use the indeterminate prop to show an indeterminate state.",
+          "tags": [
+            "indeterminate",
+            "variant",
+            "size",
+            "colorPalette",
+            "filled",
+            "outline",
+            "'xs' \\| 'sm' \\| 'md' \\| 'lg'",
+            "boolean \\| undefined",
+            "React.ElementType",
+            "boolean"
+          ],
+          "path": "chakra-ui/checkmark.md",
+          "tokens": 1089
+        },
+        {
+          "id": "clipboard",
+          "title": "Clipboard",
+          "description": "Use the Clipboard.Trigger component to create a copy button.",
+          "tags": [
+            "Clipboard.Trigger",
+            "Clipboard.Input",
+            "timeout",
+            "Clipboard.ValueText",
+            "useClipboard",
+            "number",
+            "boolean",
+            "string",
+            "(details: CopyStatusDetails) => void",
+            "(details: ValueChangeDetails) => void"
+          ],
+          "path": "chakra-ui/clipboard.md",
+          "tokens": 965
+        },
+        {
+          "id": "close-button",
+          "title": "Close Button",
+          "description": "Use the size prop to change the size of the close button.",
+          "tags": [
+            "size",
+            "variant",
+            "children",
+            "CloseButton",
+            "'start' \\| 'end' \\| undefined",
+            "boolean \\| undefined",
+            "true",
+            "React.ReactNode \\| undefined",
+            "React.ElementType",
+            "boolean"
+          ],
+          "path": "chakra-ui/close-button.md",
+          "tokens": 516
+        },
+        {
+          "id": "code-block",
+          "title": "Code Block",
+          "description": "The CodeBlock component works for Shiki and\nHighlight.js highlighting engines.",
+          "tags": [
+            "CodeBlock.AdapterProvider",
+            "CodeBlock.Root",
+            "shiki",
+            "highlight.js",
+            "size",
+            "CodeBlock.Title",
+            "CodeBlock.Header",
+            "copyButton",
+            "meta.showLineNumbers",
+            "meta.highlightLines"
+          ],
+          "path": "chakra-ui/code-block.md",
+          "tokens": 8639
+        },
+        {
+          "id": "code",
+          "title": "Code",
+          "description": "Use the size prop to change the size of the code component.",
+          "tags": [
+            "size",
+            "variant",
+            "colorPalette",
+            "'xs' \\| 'sm' \\| 'md' \\| 'lg'",
+            "React.ElementType",
+            "boolean"
+          ],
+          "path": "chakra-ui/code.md",
+          "tokens": 556
+        },
+        {
+          "id": "collapsible",
+          "title": "Collapsible",
+          "description": "Use the defaultOpen prop to render the collapsible in an open state by\ndefault.",
+          "tags": [
+            "defaultOpen",
+            "collapsedHeight",
+            "disabled",
+            "open",
+            "onOpenChange",
+            "RootProvider",
+            "useCollapsible",
+            "unmountOnExit",
+            "useCollapsibleContext",
+            "setOpen(false)"
+          ],
+          "path": "chakra-ui/collapsible.md",
+          "tokens": 2301
+        },
+        {
+          "id": "color-picker",
+          "title": "Color Picker",
+          "description": "This component renders the slider track, thumb and transparency grid.",
+          "tags": [
+            "size",
+            "variant",
+            "outline",
+            "subtle",
+            "ColorPicker.ValueSwatch",
+            "ColorPicker.EyeDropper",
+            "InputGroup",
+            "ColorPicker.SwatchGroup",
+            "ColorPicker.SwatchTrigger",
+            "ColorPicker.ValueText"
+          ],
+          "path": "chakra-ui/color-picker.md",
+          "tokens": 9695
+        },
+        {
+          "id": "multiple",
+          "title": "Multiple",
+          "description": "Pass the multiple prop to the Combobox.Root to enable multiple selection.\nThis allows users to select multiple items ...",
+          "tags": [
+            "multiple",
+            "Combobox.Root"
+          ],
+          "path": "chakra-ui/multiple.md",
+          "tokens": 547
+        },
+        {
+          "id": "async-loading",
+          "title": "Async Loading",
+          "description": "Here's an example of loading the collection asynchronously as users type,\nperfect for API-driven search interfaces.",
+          "tags": [
+            "collection"
+          ],
+          "path": "chakra-ui/async-loading.md",
+          "tokens": 560
+        },
+        {
+          "id": "highlight-matching-text",
+          "title": "Highlight Matching Text",
+          "description": "Here's an example of composing the Combobox.Item and Highlight components to\nhighlight matching text in search results.",
+          "tags": [
+            "Combobox.Item",
+            "Highlight",
+            "openOnClick"
+          ],
+          "path": "chakra-ui/highlight-matching-text.md",
+          "tokens": 940
+        },
+        {
+          "id": "custom-objects",
+          "title": "Custom Objects",
+          "description": "By default, the combobox collection expects an array of objects with label and\nvalue properties. In some cases, you m...",
+          "tags": [
+            "label",
+            "value",
+            "itemToString",
+            "itemToValue",
+            "openOnChange",
+            "Combobox",
+            "Field"
+          ],
+          "path": "chakra-ui/custom-objects.md",
+          "tokens": 1654
+        },
+        {
+          "id": "form-custom-object",
+          "title": "Form + Custom Object",
+          "description": "When working with custom objects in forms, you often need to submit the\nprogrammatic value rather than the display va...",
+          "tags": [
+            "itemToValue",
+            "itemToString"
+          ],
+          "path": "chakra-ui/form-custom-object.md",
+          "tokens": 947
+        },
+        {
+          "id": "hook-form",
+          "title": "Hook Form",
+          "description": "This example demonstrates how to integrate the Combobox with React Hook Form\nusing the Controller component. The form...",
+          "tags": [
+            "Controller",
+            "value",
+            "disabled",
+            "Combobox.Root"
+          ],
+          "path": "chakra-ui/hook-form.md",
+          "tokens": 1212
+        },
+        {
+          "id": "disabled-item",
+          "title": "Disabled Item",
+          "description": "Disable specific items in the dropdown, add the disabled prop to the\ncollection item.",
+          "tags": [
+            "disabled",
+            "invalid",
+            "Combobox.Root",
+            "value",
+            "onValueChange",
+            "Combobox.RootProvider",
+            "useCombobox",
+            "open",
+            "onOpenChange"
+          ],
+          "path": "chakra-ui/disabled-item.md",
+          "tokens": 4086
+        },
+        {
+          "id": "limit-large-datasets",
+          "title": "Limit Large Datasets",
+          "description": "The recommended way of managing large lists is to use the limit property on\nthe useListCollection hook. This will lim...",
+          "tags": [
+            "limit",
+            "useListCollection"
+          ],
+          "path": "chakra-ui/limit-large-datasets.md",
+          "tokens": 3906
+        },
+        {
+          "id": "virtualization",
+          "title": "Virtualization",
+          "description": "Alternatively, you can leverage virtualization from the\n@tanstack/react-virtual package to render large datasets effi...",
+          "tags": [
+            "@tanstack/react-virtual"
+          ],
+          "path": "chakra-ui/virtualization.md",
+          "tokens": 4241
+        },
+        {
+          "id": "links",
+          "title": "Links",
+          "description": "Use the asChild prop to render the combobox items as links.",
+          "tags": [
+            "asChild",
+            "navigate",
+            "Combobox.Root"
+          ],
+          "path": "chakra-ui/links.md",
+          "tokens": 628
+        },
+        {
+          "id": "rehydrate-value",
+          "title": "Rehydrate Value",
+          "description": "In some cases, where a combobox has a defaultValue but the collection is not\nloaded yet, here's an example of how to ...",
+          "tags": [
+            "defaultValue"
+          ],
+          "path": "chakra-ui/rehydrate-value.md",
+          "tokens": 632
+        },
+        {
+          "id": "custom-item",
+          "title": "Custom Item",
+          "description": "Customize the appearance of items in the dropdown with your own components.",
+          "tags": [],
+          "path": "chakra-ui/custom-item.md",
+          "tokens": 1482
+        },
+        {
+          "id": "custom-filter",
+          "title": "Custom Filter",
+          "description": "Here's an example of a custom filter that matches multiple properties of an\nitem.",
+          "tags": [
+            "_open",
+            "_closed",
+            "Combobox.Content"
+          ],
+          "path": "chakra-ui/custom-filter.md",
+          "tokens": 1139
+        },
+        {
+          "id": "open-from-dialog",
+          "title": "Open From Dialog",
+          "description": "To use the combobox within a dialog or popover component, avoid wrapping the\nCombobox.Positioner within the Portal.",
+          "tags": [
+            "Combobox.Positioner",
+            "Portal",
+            "Dialog",
+            "scrollBehavior=\"inside\"",
+            "fixed",
+            "hideWhenDetached",
+            "true"
+          ],
+          "path": "chakra-ui/open-from-dialog.md",
+          "tokens": 647
+        },
+        {
+          "id": "creatable",
+          "title": "Creatable",
+          "description": "Here's an example of how to allow users to create new options by typing values\nthat don't exist in the list. It uses ...",
+          "tags": [
+            "useCombobox",
+            "Combobox.RootProvider",
+            "value",
+            "onValueChange",
+            "reset()"
+          ],
+          "path": "chakra-ui/creatable.md",
+          "tokens": 1511
+        },
+        {
+          "id": "props",
+          "title": "Props",
+          "description": "| Prop | Default | Type | Description |\n| --- | --- | --- | --- |\n| collection | undefined | ListCollection<T> | The ...",
+          "tags": [
+            "ListCollection<T>",
+            "boolean",
+            "string",
+            "string[]",
+            "autohighlight",
+            "autocomplete",
+            "PositioningOptions",
+            "'clear' \\| 'replace' \\| 'preserve'",
+            "replace",
+            "clear"
+          ],
+          "path": "chakra-ui/props.md",
+          "tokens": 1935
+        },
+        {
+          "id": "container",
+          "title": "Container",
+          "description": "The default maxWidth is 8xl which maps to 90rem (1440px).",
+          "tags": [
+            "maxWidth",
+            "8xl",
+            "90rem (1440px)",
+            "fluid",
+            "React.ElementType",
+            "boolean",
+            "'true' \\| 'false'"
+          ],
+          "path": "chakra-ui/container.md",
+          "tokens": 512
+        },
+        {
+          "id": "datalist",
+          "title": "DataList",
+          "description": "If you prefer a closed component composition, check out the\nsnippet below.",
+          "tags": [
+            "size",
+            "variant",
+            "v3.1.x",
+            "orientation",
+            "InfoTip",
+            "DataList.Item",
+            "divideY",
+            "DataList.Root",
+            "'horizontal' \\| 'vertical'",
+            "'sm' \\| 'md' \\| 'lg'"
+          ],
+          "path": "chakra-ui/datalist.md",
+          "tokens": 4879
+        },
+        {
+          "id": "multiple-selection",
+          "title": "Multiple Selection",
+          "description": "Set the selectionMode prop to \"multiple\" to allow selecting multiple dates.",
+          "tags": [
+            "selectionMode",
+            "\"multiple\"",
+            "defaultView",
+            "minView",
+            "\"month\"",
+            "\"range\"",
+            "\"year\"",
+            "min",
+            "max",
+            "isDateUnavailable"
+          ],
+          "path": "chakra-ui/multiple-selection.md",
+          "tokens": 2685
+        },
+        {
+          "id": "formatting-parsing",
+          "title": "Formatting & Parsing",
+          "description": "Use the format and parse props to control how dates are displayed and\ninterpreted.",
+          "tags": [
+            "format",
+            "parse",
+            "locale",
+            "positioning",
+            "RangeText",
+            "DatePicker.MonthSelect",
+            "DatePicker.YearSelect",
+            "numOfMonths"
+          ],
+          "path": "chakra-ui/formatting-parsing.md",
+          "tokens": 3066
+        },
+        {
+          "id": "presets",
+          "title": "Presets",
+          "description": "Render the DatePicker.PresetTrigger component to provide quick date selection\noptions.",
+          "tags": [
+            "DatePicker.PresetTrigger"
+          ],
+          "path": "chakra-ui/presets.md",
+          "tokens": 587
+        },
+        {
+          "id": "presets-sidebar",
+          "title": "Presets Sidebar",
+          "description": "Here's an example of a task-management style picker with presets sidebar and\ncalendar side by side.",
+          "tags": [],
+          "path": "chakra-ui/presets-sidebar.md",
+          "tokens": 990
+        },
+        {
+          "id": "with-time",
+          "title": "With Time",
+          "description": "Here's an example of combining date selection with a time input for datetime\npicking.",
+          "tags": [],
+          "path": "chakra-ui/with-time.md",
+          "tokens": 921
+        },
+        {
+          "id": "react-hook-form",
+          "title": "React Hook Form",
+          "description": "Here's an example of integrating with react-hook-form using the Controller\npattern.",
+          "tags": [
+            "react-hook-form",
+            "fixedWeeks",
+            "openOnClick",
+            "DatePicker",
+            "Field",
+            "Field.Context"
+          ],
+          "path": "chakra-ui/react-hook-form.md",
+          "tokens": 1681
+        },
+        {
+          "id": "date-picker-props",
+          "title": "Props",
+          "description": "| Prop | Default | Type | Description |\n| --- | --- | --- | --- |\n| closeOnSelect | true | boolean | Whether the cale...",
+          "tags": [
+            "boolean",
+            "multiple",
+            "DateView",
+            "string",
+            "SelectionMode",
+            "single",
+            "range",
+            "'sm' \\| 'md' \\| 'lg'",
+            "React.ElementType",
+            "DateValue"
+          ],
+          "path": "chakra-ui/date-picker-props.md",
+          "tokens": 1796
+        },
+        {
+          "id": "dialog",
+          "title": "Dialog",
+          "description": "Use the size prop to change the size of the dialog component.",
+          "tags": [
+            "size",
+            "size=\"cover\"",
+            "size=\"full\"",
+            "base",
+            "placement",
+            "open",
+            "onOpenChange",
+            "RootProvider",
+            "useDialog",
+            "DialogContext"
+          ],
+          "path": "chakra-ui/dialog.md",
+          "tokens": 7646
+        },
+        {
+          "id": "download-trigger",
+          "title": "Download Trigger",
+          "description": "Pass the data you want to download to the data prop, and specify the\nfileName and mimeType of the file.",
+          "tags": [
+            "data",
+            "fileName",
+            "mimeType",
+            "Blob",
+            "File",
+            "string",
+            "DownloadTrigger",
+            "FormatByte",
+            "'start' \\| 'end' \\| undefined",
+            "boolean \\| undefined"
+          ],
+          "path": "chakra-ui/download-trigger.md",
+          "tokens": 867
+        },
+        {
+          "id": "drawer",
+          "title": "Drawer",
+          "description": "Use the open and onOpenChange props to control the drawer component.",
+          "tags": [
+            "open",
+            "onOpenChange",
+            "size",
+            "DrawerContext",
+            "padding",
+            "Drawer.Positioner",
+            "placement",
+            "initialFocusEl",
+            "closeOnInteractOutside",
+            "false"
+          ],
+          "path": "chakra-ui/drawer.md",
+          "tokens": 4684
+        },
+        {
+          "id": "editable",
+          "title": "Editable",
+          "description": "Use the activationMode prop to make the content editable when users double\nclick.",
+          "tags": [
+            "activationMode",
+            "disabled",
+            "Editable",
+            "value",
+            "onValueChange",
+            "RootProvider",
+            "useEditable",
+            "ActivationMode",
+            "boolean",
+            "SubmitMode"
+          ],
+          "path": "chakra-ui/editable.md",
+          "tokens": 1902
+        },
+        {
+          "id": "empty-state",
+          "title": "Empty State",
+          "description": "If you prefer a closed component composition, check out the\nsnippet below.",
+          "tags": [
+            "size",
+            "'sm' \\| 'md' \\| 'lg'",
+            "React.ElementType",
+            "boolean",
+            "Empty State",
+            "document.querySelectorAll",
+            "document.getElementById",
+            "EnvironmentProvider",
+            "react-frame-component",
+            "react-shadow"
+          ],
+          "path": "chakra-ui/empty-state.md",
+          "tokens": 1555
+        },
+        {
+          "id": "field",
+          "title": "Field",
+          "description": "If you prefer a closed component composition, check out the\nsnippet below.",
+          "tags": [
+            "invalid",
+            "Field.Root",
+            "Field.ErrorText",
+            "Field.ErrorIcon",
+            "1em",
+            "Field.HelperText",
+            "orientation=\"horizontal\"",
+            "disabled",
+            "required",
+            "Field.RequiredIndicator"
+          ],
+          "path": "chakra-ui/field.md",
+          "tokens": 1861
+        },
+        {
+          "id": "fieldset",
+          "title": "Fieldset",
+          "description": "Use the disabled prop to disable the fieldset to disable all input elements\nwithin the fieldset.",
+          "tags": [
+            "disabled",
+            "invalid",
+            "Field",
+            "'sm' \\| 'md' \\| 'lg'",
+            "React.ElementType",
+            "boolean",
+            "Fieldset"
+          ],
+          "path": "chakra-ui/fieldset.md",
+          "tokens": 1086
+        },
+        {
+          "id": "file-upload",
+          "title": "File Upload",
+          "description": "The FileUpload component also provides a set of shortcuts for common use\ncases.",
+          "tags": [
+            "FileUpload",
+            "FileUploadItems",
+            "FileUploadList",
+            "FileUpload.ItemGroup",
+            "FileUpload.Items",
+            "accept",
+            "maxFiles",
+            "directory",
+            "capture",
+            "useFileUploadContext"
+          ],
+          "path": "chakra-ui/file-upload.md",
+          "tokens": 3233
+        },
+        {
+          "id": "flex",
+          "title": "Flex",
+          "description": "Use the direction or flexDirection prop to change the direction of the flex",
+          "tags": [
+            "direction",
+            "flexDirection",
+            "align",
+            "alignItems",
+            "justify",
+            "justifyContent",
+            "order",
+            "Spacer",
+            "wrap",
+            "flexWrap"
+          ],
+          "path": "chakra-ui/flex.md",
+          "tokens": 809
+        },
+        {
+          "id": "float",
+          "title": "Float",
+          "description": "Float requires a parent element with position: relative style applied.",
+          "tags": [
+            "position: relative",
+            "placement",
+            "offsetX",
+            "offsetY",
+            "offset",
+            "Float",
+            "Avatar",
+            "SystemStyleObject['left'] \\| undefined",
+            "SystemStyleObject['top'] \\| undefined",
+            "React.ElementType"
+          ],
+          "path": "chakra-ui/float.md",
+          "tokens": 1615
+        },
+        {
+          "id": "format-number",
+          "title": "Format Number",
+          "description": "The number formatting logic is handled by the native Intl.NumberFormat API and\nsmartly cached to avoid performance is...",
+          "tags": [
+            "Intl.NumberFormat",
+            "style=percentage",
+            "style=currency",
+            "FormatNumber",
+            "LocaleProvider",
+            "style=unit",
+            "notation=compact",
+            "number"
+          ],
+          "path": "chakra-ui/format-number.md",
+          "tokens": 531
+        },
+        {
+          "id": "grid",
+          "title": "Grid",
+          "description": "Pass colSpan prop to GridItem to span across columns.",
+          "tags": [
+            "colSpan",
+            "GridItem",
+            "boolean \\| undefined",
+            "React.ElementType",
+            "boolean",
+            "Group",
+            "attached",
+            "grow"
+          ],
+          "path": "chakra-ui/grid.md",
+          "tokens": 992
+        },
+        {
+          "id": "heading",
+          "title": "Heading",
+          "description": "Use the size prop to change the size of the heading component.",
+          "tags": [
+            "size",
+            "Heading",
+            "Highlight",
+            "as",
+            "fontWeight",
+            "fontSize",
+            "textStyle",
+            "fonts.heading",
+            "variants.size",
+            "custom"
+          ],
+          "path": "chakra-ui/heading.md",
+          "tokens": 1122
+        },
+        {
+          "id": "highlight",
+          "title": "Highlight",
+          "description": "Pass an array of strings to the query prop to highlight multiple substrings.",
+          "tags": [
+            "query",
+            "styles",
+            "string \\| string[]",
+            "string",
+            "SystemStyleObject \\| undefined",
+            "boolean",
+            "React.ElementType"
+          ],
+          "path": "chakra-ui/highlight.md",
+          "tokens": 894
+        },
+        {
+          "id": "hover-card",
+          "title": "Hover Card",
+          "description": "The HoverCard provides a shortcuts for common use cases.",
+          "tags": [
+            "HoverCard",
+            "HoverCard.Arrow",
+            "HoverCard.ArrowTip",
+            "open",
+            "onOpenChange",
+            "openDelay",
+            "closeDelay",
+            "positioning.placement",
+            "floating-ui",
+            "disabled"
+          ],
+          "path": "chakra-ui/hover-card.md",
+          "tokens": 2010
+        },
+        {
+          "id": "icon-button",
+          "title": "Icon Button",
+          "description": "Use the size prop to change the size of the button.",
+          "tags": [
+            "size",
+            "variant",
+            "colorPalette",
+            "rounded=\"full\"",
+            "'start' \\| 'end' \\| undefined",
+            "React.ReactNode \\| undefined",
+            "React.ElementType",
+            "boolean",
+            "react-icons",
+            "asChild"
+          ],
+          "path": "chakra-ui/icon-button.md",
+          "tokens": 1044
+        },
+        {
+          "id": "image",
+          "title": "Image",
+          "description": "Use the height prop to change the height of the image component.",
+          "tags": [
+            "height",
+            "aspectRatio",
+            "object-fit: cover",
+            "fit",
+            "htmlWidth",
+            "htmlHeight",
+            "asChild",
+            "Image",
+            "img"
+          ],
+          "path": "chakra-ui/image.md",
+          "tokens": 552
+        },
+        {
+          "id": "input",
+          "title": "Input",
+          "description": "Use the variant prop to change the visual style of the input.",
+          "tags": [
+            "variant",
+            "size",
+            "Field",
+            "react-hook-form",
+            "startElement",
+            "endElement",
+            "InputGroup",
+            "InputAddon",
+            "Group",
+            "disabled"
+          ],
+          "path": "chakra-ui/input.md",
+          "tokens": 3004
+        },
+        {
+          "id": "kbd",
+          "title": "Kbd",
+          "description": "Render Kbd to showcase key combinations",
+          "tags": [
+            "Kbd",
+            "variant",
+            "size",
+            "'sm' \\| 'md' \\| 'lg'",
+            "React.ElementType",
+            "boolean",
+            "LinkOverlay",
+            "asChild",
+            "next/link",
+            "Link"
+          ],
+          "path": "chakra-ui/kbd.md",
+          "tokens": 903
+        },
+        {
+          "id": "link",
+          "title": "Link",
+          "description": "Use the variant prop to change the appearance of the Link component",
+          "tags": [
+            "variant",
+            "Link",
+            "asChild",
+            "_currentPage",
+            "aria-current=\"page\"",
+            "aria-current",
+            "'underline' \\| 'plain'",
+            "React.ElementType",
+            "boolean"
+          ],
+          "path": "chakra-ui/link.md",
+          "tokens": 683
+        },
+        {
+          "id": "list",
+          "title": "List",
+          "description": "Pass the as=\"ol\" prop to create an ordered list",
+          "tags": [
+            "as=\"ol\"",
+            "List.Indicator",
+            "_marker",
+            "'marker' \\| 'plain'",
+            "React.ElementType",
+            "boolean",
+            "'center' \\| 'start' \\| 'end'",
+            "List",
+            "useListCollection",
+            "value"
+          ],
+          "path": "chakra-ui/list.md",
+          "tokens": 2640
+        },
+        {
+          "id": "horizontal",
+          "title": "Horizontal",
+          "description": "Display listbox items in a horizontal layout with card-based presentation,\nperfect for media galleries or visual sele...",
+          "tags": [],
+          "path": "chakra-ui/horizontal.md",
+          "tokens": 933
+        },
+        {
+          "id": "select-all",
+          "title": "Select All",
+          "description": "Provide convenient \"Select All\" and \"Select None\" controls for multiple\nselection scenarios, with visual indicators s...",
+          "tags": [],
+          "path": "chakra-ui/select-all.md",
+          "tokens": 2250
+        },
+        {
+          "id": "with-popover",
+          "title": "With Popover",
+          "description": "Use the listbox within a popover to create dropdown-like selection menus that\noverlay other content without taking up...",
+          "tags": [],
+          "path": "chakra-ui/with-popover.md",
+          "tokens": 678
+        },
+        {
+          "id": "with-dialog",
+          "title": "With Dialog",
+          "description": "Present the listbox in a modal dialog for focused selection experiences,\nparticularly useful for important choices th...",
+          "tags": [],
+          "path": "chakra-ui/with-dialog.md",
+          "tokens": 975
+        },
+        {
+          "id": "virtualized",
+          "title": "Virtualized",
+          "description": "Handle large datasets efficiently with virtualization, rendering only visible\nitems to maintain smooth scrolling perf...",
+          "tags": [],
+          "path": "chakra-ui/virtualized.md",
+          "tokens": 3595
+        },
+        {
+          "id": "image-explorer",
+          "title": "Image Explorer",
+          "description": "Create an interactive gallery where the listbox acts as navigation for\ndisplaying different images or media content.",
+          "tags": [],
+          "path": "chakra-ui/image-explorer.md",
+          "tokens": 664
+        },
+        {
+          "id": "transfer-list",
+          "title": "Transfer List",
+          "description": "Create a dual-listbox interface for moving items between available and selected\nstates, commonly used for permission ...",
+          "tags": [],
+          "path": "chakra-ui/transfer-list.md",
+          "tokens": 1133
+        },
+        {
+          "id": "emoji-grid",
+          "title": "Emoji Grid",
+          "description": "Display emojis in a grid layout with filtering capability, perfect for emoji\npickers or icon selection interfaces.",
+          "tags": [],
+          "path": "chakra-ui/emoji-grid.md",
+          "tokens": 561
+        },
+        {
+          "id": "listbox-props",
+          "title": "Props",
+          "description": "| Prop | Default | Type | Description |\n| --- | --- | --- | --- |\n| collection | undefined | ListCollection<T> | The ...",
+          "tags": [
+            "ListCollection<T>",
+            "string[]",
+            "boolean",
+            "'horizontal' \\| 'vertical'",
+            "SelectionMode",
+            "single",
+            "multiple",
+            "extended",
+            "'subtle' \\| 'solid' \\| 'plain'",
+            "React.ElementType"
+          ],
+          "path": "chakra-ui/listbox-props.md",
+          "tokens": 1894
+        },
+        {
+          "id": "marquee",
+          "title": "Marquee",
+          "description": "Use the reverse prop on the Marquee.Root component to reverse the direction of\nthe marquee.",
+          "tags": [
+            "Marquee.Root",
+            "side",
+            "bottom",
+            "speed",
+            "pauseOnInteraction",
+            "Marquee.RootProvider",
+            "useMarquee",
+            "loopCount",
+            "onLoopComplete",
+            "onComplete"
+          ],
+          "path": "chakra-ui/marquee.md",
+          "tokens": 5711
+        },
+        {
+          "id": "menu",
+          "title": "Menu",
+          "description": "Use the open and onOpenChange prop to control the visibility of the menu.",
+          "tags": [
+            "open",
+            "onOpenChange",
+            "RootProvider",
+            "useMenu",
+            "Menu.ItemCommand",
+            "Menu.ContextTrigger",
+            "Menu.ItemGroup",
+            "asChild",
+            "Menu.Item",
+            "navigate"
+          ],
+          "path": "chakra-ui/menu.md",
+          "tokens": 7454
+        },
+        {
+          "id": "select-native",
+          "title": "Select (Native)",
+          "description": "If you prefer a closed component composition, check out the\nsnippet below.",
+          "tags": [
+            "size",
+            "variant",
+            "value",
+            "onChange",
+            "disabled",
+            "NativeSelect.Root",
+            "Field",
+            "invalid",
+            "NativeSelect",
+            "react-hook-form"
+          ],
+          "path": "chakra-ui/select-native.md",
+          "tokens": 1676
+        },
+        {
+          "id": "number-input",
+          "title": "Number Input",
+          "description": "If you prefer a closed component composition, check out the\nsnippet below.",
+          "tags": [
+            "NumberInput",
+            "NumberInput.IncrementTrigger",
+            "NumberInput.DecrementTrigger",
+            "size",
+            "NumberInput.Root",
+            "formatOptions",
+            "Intl.NumberFormatOptions",
+            "min",
+            "max",
+            "step"
+          ],
+          "path": "chakra-ui/number-input.md",
+          "tokens": 3325
+        },
+        {
+          "id": "overlay-manager",
+          "title": "Overlay Manager",
+          "description": "The createOverlay function creates a new overlay component that can be\nprogrammatically controlled.",
+          "tags": [
+            "createOverlay",
+            "Viewport",
+            ".update",
+            ".open()",
+            ".close()",
+            ".waitForExit()",
+            "onOpenChange",
+            "{ open: false }",
+            "open",
+            "onExitComplete"
+          ],
+          "path": "chakra-ui/overlay-manager.md",
+          "tokens": 3095
+        },
+        {
+          "id": "pagination",
+          "title": "Pagination",
+          "description": "The Pagination component also provides a set of shortcuts for common use\ncases.",
+          "tags": [
+            "Pagination",
+            "count",
+            "pageSize",
+            "size",
+            "Button",
+            "variant",
+            "page",
+            "onPageChange",
+            "siblingCount",
+            "Pagination.PageText"
+          ],
+          "path": "chakra-ui/pagination.md",
+          "tokens": 2835
+        },
+        {
+          "id": "password-input",
+          "title": "Password Input",
+          "description": "If you don't already have the snippet, run the following command to add the\npassword-input snippet",
+          "tags": [
+            "password-input",
+            "PasswordInput",
+            "size",
+            "Input",
+            "value",
+            "onChange",
+            "react-hook-form",
+            "visible",
+            "onVisibleChange",
+            "PasswordStrengthMeter"
+          ],
+          "path": "chakra-ui/password-input.md",
+          "tokens": 1150
+        },
+        {
+          "id": "pin-input",
+          "title": "Pin Input",
+          "description": "If you prefer a closed component composition, check out the\nsnippet below.",
+          "tags": [
+            "size",
+            "PinInput.Root",
+            "otp",
+            "mask",
+            "placeholder",
+            "PinInPut.Root",
+            "Field",
+            "PinInput",
+            "react-hook-form",
+            "value"
+          ],
+          "path": "chakra-ui/pin-input.md",
+          "tokens": 2485
+        },
+        {
+          "id": "popover",
+          "title": "Popover",
+          "description": "The Popover provides a shortcuts for common use cases.",
+          "tags": [
+            "Popover",
+            "Popover.Arrow",
+            "Popover.ArrowTip",
+            "open",
+            "onOpenChange",
+            "size",
+            "lazyMounted",
+            "unmountOnExit",
+            "positioning.placement",
+            "floating-ui"
+          ],
+          "path": "chakra-ui/popover.md",
+          "tokens": 4821
+        },
+        {
+          "id": "presence",
+          "title": "Presence",
+          "description": "Think of Presence like the AnimatePresence component from Framer Motion,\nexcept that it's built for CSS animations in...",
+          "tags": [
+            "Presence",
+            "AnimatePresence",
+            "present",
+            "_open",
+            "_closed",
+            "fade-in",
+            "fade-out",
+            "scale-fade-in",
+            "scale-fade-out",
+            "slide-from-bottom"
+          ],
+          "path": "chakra-ui/presence.md",
+          "tokens": 1260
+        },
+        {
+          "id": "progress-circle",
+          "title": "Progress Circle",
+          "description": "Use the strokeLinecap prop on ProgressCircle.Range to make the ends of the\nprogress circle rounded.",
+          "tags": [
+            "strokeLinecap",
+            "ProgressCircle.Range",
+            "size",
+            "colorPalette",
+            "ProgressCircle.ValueText",
+            "--thickness",
+            "ProgressCircleRing",
+            "value",
+            "null",
+            "stroke"
+          ],
+          "path": "chakra-ui/progress-circle.md",
+          "tokens": 1276
+        },
+        {
+          "id": "progress",
+          "title": "Progress",
+          "description": "Use the size prop to change the size of the progress bar.",
+          "tags": [
+            "size",
+            "variant",
+            "colorPalette",
+            "Progress.Label",
+            "Progress.ValueText",
+            "info",
+            "null",
+            "striped",
+            "true",
+            "animated"
+          ],
+          "path": "chakra-ui/progress.md",
+          "tokens": 1666
+        },
+        {
+          "id": "prose",
+          "title": "Prose",
+          "description": "If you don't already have the snippet, run the following command to add the\nprose snippet",
+          "tags": [
+            "prose",
+            "size",
+            "Prose",
+            "Blockquote",
+            "List",
+            "react-markdown",
+            "Table"
+          ],
+          "path": "chakra-ui/prose.md",
+          "tokens": 1277
+        },
+        {
+          "id": "qr-code",
+          "title": "QR Code",
+          "description": "If you prefer a closed component composition, check out the\nsnippet below.",
+          "tags": [
+            "size",
+            "QrCode.Overlay",
+            "fill",
+            "QrCode.DownloadTrigger",
+            "fileName",
+            "mimeType",
+            "encoding.ecc",
+            "encoding.boostEcc",
+            "L",
+            "M"
+          ],
+          "path": "chakra-ui/qr-code.md",
+          "tokens": 2045
+        },
+        {
+          "id": "radio-card",
+          "title": "Radio Card",
+          "description": "If you prefer a closed component composition, check out the\nsnippet below.",
+          "tags": [
+            "size",
+            "RadioCard.Root",
+            "colorPalette",
+            "variant",
+            "RadioCard.ItemContent",
+            "value",
+            "onValueChange",
+            "useBreakpointValue",
+            "orientation",
+            "display"
+          ],
+          "path": "chakra-ui/radio-card.md",
+          "tokens": 4263
+        },
+        {
+          "id": "radio",
+          "title": "Radio",
+          "description": "If you prefer a closed component composition, check out the\nsnippet below.",
+          "tags": [
+            "value",
+            "onValueChange",
+            "RadioGroup.Root",
+            "colorPalette",
+            "size",
+            "variant",
+            "disabled",
+            "RadioGroup.Item",
+            "Controller",
+            "react-hook-form"
+          ],
+          "path": "chakra-ui/radio.md",
+          "tokens": 2233
+        },
+        {
+          "id": "radiomark",
+          "title": "Radiomark",
+          "description": "The Radiomark component supports checked and unchecked states, with optional\ndisabled state.",
+          "tags": [
+            "variant",
+            "size",
+            "colorPalette",
+            "filled",
+            "outline",
+            "'xs' \\| 'sm' \\| 'md' \\| 'lg'",
+            "boolean \\| undefined",
+            "React.ElementType",
+            "boolean",
+            "'true' \\| 'false'"
+          ],
+          "path": "chakra-ui/radiomark.md",
+          "tokens": 620
+        },
+        {
+          "id": "rating",
+          "title": "Rating",
+          "description": "If you prefer a closed component composition, check out the\nsnippet below.",
+          "tags": [
+            "Rating",
+            "count",
+            "size",
+            "value",
+            "onValueChange",
+            "RootProvider",
+            "useRatingGroup",
+            "readOnly",
+            "react-hook-form",
+            "icon"
+          ],
+          "path": "chakra-ui/rating.md",
+          "tokens": 3284
+        },
+        {
+          "id": "examples",
+          "title": "Examples",
+          "description": "In the useEditor hook, assign the editable property to control the editor's\nmode. When set to false, the editor will ...",
+          "tags": [
+            "useEditor",
+            "editable",
+            "false",
+            "content",
+            "onUpdate",
+            "placeholder",
+            "getHTML()",
+            "multicolor",
+            "<Control.Highlight />",
+            "BubbleMenu"
+          ],
+          "path": "chakra-ui/examples.md",
+          "tokens": 9849
+        },
+        {
+          "id": "character-count",
+          "title": "Character Count",
+          "description": "To display live character and word counts, use the\n@tiptap/extensions/character-count\nextension. This is especially u...",
+          "tags": [],
+          "path": "chakra-ui/character-count.md",
+          "tokens": 518
+        },
+        {
+          "id": "live-preview",
+          "title": "Live Preview",
+          "description": "Use the editor's getHTML() method to retrieve content and display it in a\nread-only panel.",
+          "tags": [
+            "getHTML()",
+            "multicolor",
+            "<Control.Highlight />",
+            "BubbleMenu"
+          ],
+          "path": "chakra-ui/live-preview.md",
+          "tokens": 1472
+        },
+        {
+          "id": "autosave",
+          "title": "Autosave",
+          "description": "Implement an autosave feature by using the editor's onUpdate method. This\nallows you to handle content changes and sa...",
+          "tags": [
+            "onUpdate"
+          ],
+          "path": "chakra-ui/autosave.md",
+          "tokens": 993
+        },
+        {
+          "id": "task-list",
+          "title": "Task List",
+          "description": "To add interactive task lists, use the\n@tiptap/extension-task-item\nand\n@tiptap/extension-task-list\nextensions and con...",
+          "tags": [
+            "nested"
+          ],
+          "path": "chakra-ui/task-list.md",
+          "tokens": 635
+        },
+        {
+          "id": "code-blocks",
+          "title": "Code Blocks",
+          "description": "Add syntax-highlighted code blocks using\n@tiptap/extension-code-block-lowlight\nand lowlight to highlight your favorit...",
+          "tags": [
+            "lowlight"
+          ],
+          "path": "chakra-ui/code-blocks.md",
+          "tokens": 573
+        },
+        {
+          "id": "drag-handle",
+          "title": "Drag Handle",
+          "description": "To add drag-and-drop reordering, use the\n@tiptap/extension-drag-handle-react.\nThis extension enables draggable handle...",
+          "tags": [],
+          "path": "chakra-ui/drag-handle.md",
+          "tokens": 540
+        },
+        {
+          "id": "images",
+          "title": "Images",
+          "description": "To add images, use the\n@tiptap/extension-image\nextension. This lets you embed image URLs, upload files, or integrate ...",
+          "tags": [],
+          "path": "chakra-ui/images.md",
+          "tokens": 1240
+        },
+        {
+          "id": "hashtags",
+          "title": "Hashtags",
+          "description": "To support hashtags in the editor, create a custom\nTiptap node. This allows\nhashtags to be parsed, rendered, and hand...",
+          "tags": [
+            "${trigger}([a-zA-Z0-9_]+)",
+            "#${tag}",
+            ":",
+            ":)",
+            "<3"
+          ],
+          "path": "chakra-ui/hashtags.md",
+          "tokens": 1668
+        },
+        {
+          "id": "slash-commands",
+          "title": "Slash Commands",
+          "description": "Enable slash commands in your editor by creating a Tiptap extension that\ntriggers on /.",
+          "tags": [
+            "/"
+          ],
+          "path": "chakra-ui/slash-commands.md",
+          "tokens": 1821
+        },
+        {
+          "id": "composition",
+          "title": "Composition",
+          "description": "A real-world Google Docs–like layout demonstrating a full-page editor with a\ncollapsible document outline, sticky too...",
+          "tags": [],
+          "path": "chakra-ui/composition.md",
+          "tokens": 7198
+        },
+        {
+          "id": "guides",
+          "title": "Guides",
+          "description": "RichTextEditor ships with a set of built-in controls that can be composed\ninside RichTextEditor.ControlGroup.",
+          "tags": [
+            "RichTextEditor",
+            "RichTextEditor.ControlGroup",
+            "createBooleanControl",
+            "createSelectControl",
+            "createSwatchControl"
+          ],
+          "path": "chakra-ui/guides.md",
+          "tokens": 957
+        },
+        {
+          "id": "scroll-area",
+          "title": "Scroll Area",
+          "description": "Use the variant prop to change the scrollbar visibility behavior. Values can\nbe either hover (default) or always.",
+          "tags": [
+            "variant",
+            "hover",
+            "always",
+            "size",
+            "ScrollArea.Corner",
+            "mask-image",
+            "data-overflow-y",
+            "use-stick-to-bottom",
+            "@tanstack/react-virtual",
+            "'hover' \\| 'always'"
+          ],
+          "path": "chakra-ui/scroll-area.md",
+          "tokens": 4947
+        },
+        {
+          "id": "segmented-control",
+          "title": "Segmented Control",
+          "description": "The SegmentGroup component also provides a set of shortcuts for common use\ncases.",
+          "tags": [
+            "SegmentGroup",
+            "SegmentGroupItems",
+            "items",
+            "size",
+            "value",
+            "onValueChange",
+            "SegmentedControl",
+            "react-hook-form",
+            "orientation",
+            "vertical"
+          ],
+          "path": "chakra-ui/segmented-control.md",
+          "tokens": 3349
+        },
+        {
+          "id": "select-examples",
+          "title": "Examples",
+          "description": "Use the size prop to change the size of the select component.",
+          "tags": [
+            "size",
+            "variant",
+            "colorPalette",
+            "Select.ItemGroup",
+            "value",
+            "onValueChange",
+            "collection",
+            "Select",
+            "react-hook-form",
+            "disabled"
+          ],
+          "path": "chakra-ui/select-examples.md",
+          "tokens": 9219
+        },
+        {
+          "id": "select-props",
+          "title": "Props",
+          "description": "| Prop | Default | Type | Description |\n| --- | --- | --- | --- |\n| collection | undefined | ListCollection<T> | The ...",
+          "tags": [
+            "ListCollection<T>",
+            "boolean",
+            "'outline' \\| 'subtle' \\| 'ghost'",
+            "'xs' \\| 'sm' \\| 'md' \\| 'lg'",
+            "React.ElementType",
+            "string",
+            "string[]",
+            "name",
+            "VoidFunction",
+            "(event: FocusOutsideEvent) => void"
+          ],
+          "path": "chakra-ui/select-props.md",
+          "tokens": 1185
+        },
+        {
+          "id": "separator",
+          "title": "Separator",
+          "description": "Use the variant prop to change the appearance of the separator.",
+          "tags": [
+            "variant",
+            "size",
+            "label",
+            "orientation",
+            "aria-orientation",
+            "presentation",
+            "'solid' \\| 'dashed' \\| 'dotted'",
+            "'vertical' \\| 'horizontal'",
+            "'xs' \\| 'sm' \\| 'md' \\| 'lg'",
+            "React.ElementType"
+          ],
+          "path": "chakra-ui/separator.md",
+          "tokens": 850
+        },
+        {
+          "id": "show",
+          "title": "Show",
+          "description": "The Show component renders its children when the when value is truthy,\notherwise it renders the fallback prop.",
+          "tags": [
+            "Show",
+            "when",
+            "fallback",
+            "children",
+            "undefined",
+            "null",
+            "T \\| null \\| undefined",
+            "true",
+            "React.ReactNode \\| undefined",
+            "false"
+          ],
+          "path": "chakra-ui/show.md",
+          "tokens": 544
+        },
+        {
+          "id": "simplegrid",
+          "title": "SimpleGrid",
+          "description": "The SimpleGrid component allows you to create responsive grid layouts with\nease.",
+          "tags": [
+            "SimpleGrid",
+            "columns",
+            "minChildWidth",
+            "colSpan",
+            "rowGap",
+            "columnGap"
+          ],
+          "path": "chakra-ui/simplegrid.md",
+          "tokens": 620
+        },
+        {
+          "id": "skeleton",
+          "title": "Skeleton",
+          "description": "Use the Skeleton component to create a feed skeleton.",
+          "tags": [
+            "Skeleton",
+            "SkeletonText",
+            "loading",
+            "variant",
+            "false",
+            "--start-color",
+            "--end-color",
+            "'true' \\| 'false'",
+            "'pulse' \\| 'shine' \\| 'none'",
+            "React.ElementType"
+          ],
+          "path": "chakra-ui/skeleton.md",
+          "tokens": 972
+        },
+        {
+          "id": "skip-nav",
+          "title": "Skip Nav",
+          "description": "Skip Navigation link and destination container for screen readers and keyboard\nusers.",
+          "tags": [
+            "main",
+            "SkipNavLink",
+            "a",
+            "href",
+            "SkipNavContent",
+            "div",
+            "id",
+            "/skip-nav#usage",
+            "Enter",
+            "Tab"
+          ],
+          "path": "chakra-ui/skip-nav.md",
+          "tokens": 1753
+        },
+        {
+          "id": "slider",
+          "title": "Slider",
+          "description": "If you prefer a closed component composition, check out the\nsnippet below.",
+          "tags": [
+            "Slider.Thumbs",
+            "Slider.Thumb",
+            "Slider.HiddenInput",
+            "Slider.Marks",
+            "Slider.MarkerGroup",
+            "Slider.Marker",
+            "size",
+            "variant",
+            "colorPalette",
+            "label"
+          ],
+          "path": "chakra-ui/slider.md",
+          "tokens": 5184
+        },
+        {
+          "id": "spinner",
+          "title": "Spinner",
+          "description": "Use the size prop to change the size of the spinner.",
+          "tags": [
+            "size",
+            "colorPalette",
+            "color",
+            "--spinner-track-color",
+            "animationDuration",
+            "borderWidth",
+            "AbsoluteCenter",
+            "React.ElementType",
+            "boolean",
+            "Splitter"
+          ],
+          "path": "chakra-ui/spinner.md",
+          "tokens": 1406
+        },
+        {
+          "id": "splitter-examples",
+          "title": "Examples",
+          "description": "Use onResize and size props to manage panel sizes programmatically.",
+          "tags": [
+            "onResize",
+            "size",
+            "RootProvider",
+            "useSplitter",
+            "orientation=\"vertical\"",
+            "Splitter.Root",
+            "useBreakpointValue",
+            "panels",
+            "collapsible",
+            "collapsedSize"
+          ],
+          "path": "chakra-ui/splitter-examples.md",
+          "tokens": 9159
+        },
+        {
+          "id": "splitter-props",
+          "title": "Props",
+          "description": "| Prop | Default | Type | Description |\n| --- | --- | --- | --- |\n| panels | undefined | PanelData[] | The size const...",
+          "tags": [
+            "PanelData[]",
+            "'horizontal' \\| 'vertical'",
+            "horizontal",
+            "vertical",
+            "React.ElementType",
+            "boolean",
+            "number[]",
+            "string",
+            "number",
+            "(details: ResizeDetails) => void"
+          ],
+          "path": "chakra-ui/splitter-props.md",
+          "tokens": 688
+        },
+        {
+          "id": "stack",
+          "title": "Stack",
+          "description": "By default, Stack applies flex-direction: column and gap: 8px to its\nchildren.",
+          "tags": [
+            "flex-direction: column",
+            "gap: 8px",
+            "direction",
+            "HStack",
+            "VStack",
+            "separator"
+          ],
+          "path": "chakra-ui/stack.md",
+          "tokens": 575
+        },
+        {
+          "id": "stat",
+          "title": "Stat",
+          "description": "Use the FormatNumber component within Stat.ValueText to format the value.",
+          "tags": [
+            "FormatNumber",
+            "Stat.ValueText",
+            "InfoTip",
+            "Stat.Label",
+            "'sm' \\| 'md' \\| 'lg'",
+            "React.ElementType",
+            "boolean",
+            "Stat"
+          ],
+          "path": "chakra-ui/stat.md",
+          "tokens": 1205
+        },
+        {
+          "id": "status",
+          "title": "Status",
+          "description": "If you prefer a closed component composition, check out the\nsnippet below.",
+          "tags": [
+            "Status.Root",
+            "size",
+            "'sm' \\| 'md' \\| 'lg'",
+            "React.ElementType",
+            "boolean",
+            "Status"
+          ],
+          "path": "chakra-ui/status.md",
+          "tokens": 812
+        },
+        {
+          "id": "steps",
+          "title": "Steps",
+          "description": "Use the size prop to change the size of the steps component.",
+          "tags": [
+            "size",
+            "variant",
+            "colorPalette",
+            "Steps.Trigger",
+            "orientation",
+            "step",
+            "onStepChange",
+            "isStepValid",
+            "onStepInvalid",
+            "RootProvider"
+          ],
+          "path": "chakra-ui/steps.md",
+          "tokens": 5219
+        },
+        {
+          "id": "switch",
+          "title": "Switch",
+          "description": "If you prefer a closed component composition, check out the\nsnippet below.",
+          "tags": [
+            "Switch",
+            "Switch.Control",
+            "Switch.Thumb",
+            "size",
+            "Switch.Root",
+            "variant",
+            "colorPalette",
+            "checked",
+            "onCheckedChange",
+            "react-hook-form"
+          ],
+          "path": "chakra-ui/switch.md",
+          "tokens": 2449
+        },
+        {
+          "id": "table",
+          "title": "Table",
+          "description": "Use the size prop to change the size of the table.",
+          "tags": [
+            "size",
+            "variant",
+            "striped",
+            "Table.Caption",
+            "side",
+            "showColumnBorder",
+            "Table.ScrollArea",
+            "stickyHeader",
+            "data-sticky",
+            "interactive"
+          ],
+          "path": "chakra-ui/table.md",
+          "tokens": 8915
+        },
+        {
+          "id": "tabs",
+          "title": "Tabs",
+          "description": "Use the variant prop to change the visual style of the tabs.",
+          "tags": [
+            "variant",
+            "lazyMount",
+            "unmountOnExit",
+            "Tabs.Indicator",
+            "--tabs-indicator-bg",
+            "--tabs-indicator-shadow",
+            "asChild",
+            "Tabs.Trigger",
+            "navigate",
+            "Tabs.Root"
+          ],
+          "path": "chakra-ui/tabs.md",
+          "tokens": 5048
+        },
+        {
+          "id": "tag",
+          "title": "Tag",
+          "description": "If you prefer a closed component composition, check out the\nsnippet below.",
+          "tags": [
+            "Tag.StartElement",
+            "Tag.EndElement",
+            "variant",
+            "size",
+            "colorPalette",
+            "Tag.CloseTrigger",
+            "maxWidth",
+            "Avatar",
+            "full",
+            "asChild"
+          ],
+          "path": "chakra-ui/tag.md",
+          "tokens": 2019
+        },
+        {
+          "id": "tags-input",
+          "title": "Tags Input",
+          "description": "The TagsInput component also provides a set of shortcuts for common use cases.",
+          "tags": [
+            "TagsInput",
+            "TagsInputItems",
+            "size",
+            "variant",
+            "value",
+            "onValueChange",
+            "RootProvider",
+            "useTagsInput",
+            "RootProvider + useTagsInput",
+            "Root"
+          ],
+          "path": "chakra-ui/tags-input.md",
+          "tokens": 5612
+        },
+        {
+          "id": "text",
+          "title": "Text",
+          "description": "Use the fontSize or textStyle prop to change the size of the text.",
+          "tags": [
+            "fontSize",
+            "textStyle",
+            "fontWeight",
+            "truncate",
+            "lineClamp"
+          ],
+          "path": "chakra-ui/text.md",
+          "tokens": 667
+        },
+        {
+          "id": "textarea",
+          "title": "Textarea",
+          "description": "Use the variant prop to change the appearance of the textarea.",
+          "tags": [
+            "variant",
+            "size",
+            "Field",
+            "react-hook-form",
+            "resize",
+            "maxHeight",
+            "lh",
+            "autoresize",
+            "'xs' \\| 'sm' \\| 'md' \\| 'lg' \\| 'xl'",
+            "'outline' \\| 'subtle' \\| 'flushed'"
+          ],
+          "path": "chakra-ui/textarea.md",
+          "tokens": 1661
+        },
+        {
+          "id": "theme",
+          "title": "Theme",
+          "description": "The theme can be nested to apply different appearances to different parts of the\ntree. This is useful for applying a ...",
+          "tags": [
+            "asChild",
+            "Theme",
+            "ColorModeProvider",
+            "useColorMode"
+          ],
+          "path": "chakra-ui/theme.md",
+          "tokens": 799
+        },
+        {
+          "id": "timeline",
+          "title": "Timeline",
+          "description": "Use the size prop to change the size of the timeline.",
+          "tags": [
+            "size",
+            "variant",
+            "'sm' \\| 'md' \\| 'lg' \\| 'xl'",
+            "React.ElementType",
+            "boolean",
+            "'true' \\| 'false'",
+            "Timeline"
+          ],
+          "path": "chakra-ui/timeline.md",
+          "tokens": 3264
+        },
+        {
+          "id": "toast",
+          "title": "Toast",
+          "description": "If you don't already have the snippet, run the following command to add the\ntoaster snippet",
+          "tags": [
+            "toaster",
+            "Toast",
+            "Toaster",
+            "closable",
+            "true",
+            "toaster.dismiss",
+            "toaster.dismiss(id)",
+            "toaster.dismiss()",
+            "action",
+            "actionLabel"
+          ],
+          "path": "chakra-ui/toast.md",
+          "tokens": 3156
+        },
+        {
+          "id": "toggle-tip",
+          "title": "Toggle Tip",
+          "description": "For ease of use, create a closed component composition for the ToggleTip\ncomponent.",
+          "tags": [
+            "ToggleTip",
+            "Popover",
+            "InfoTip",
+            "boolean",
+            "true",
+            "'xs' \\| 'sm' \\| 'md' \\| 'lg'",
+            "React.ElementType",
+            "string",
+            "() => HTMLElement \\| null",
+            "(event: KeyboardEvent) => void"
+          ],
+          "path": "chakra-ui/toggle-tip.md",
+          "tokens": 1275
+        },
+        {
+          "id": "tooltip",
+          "title": "Tooltip",
+          "description": "For ease of use, create a closed component composition for the Tooltip\ncomponent.",
+          "tags": [
+            "Tooltip",
+            "showArrow",
+            "positioning.placement",
+            "positioning.offset",
+            "openDelay",
+            "closeDelay",
+            "--tooltip-bg",
+            "open",
+            "onOpenChange",
+            "RootProvider"
+          ],
+          "path": "chakra-ui/tooltip.md",
+          "tokens": 3303
+        },
+        {
+          "id": "treeview",
+          "title": "TreeView",
+          "description": "This component is a helper to manage the recursive rendering of the branch and\nleaf nodes.",
+          "tags": [
+            "TreeView.Node"
+          ],
+          "path": "chakra-ui/treeview.md",
+          "tokens": 1037
+        },
+        {
+          "id": "sizes",
+          "title": "Sizes",
+          "description": "Use the size prop to change the size of the tree view.",
+          "tags": [
+            "size"
+          ],
+          "path": "chakra-ui/sizes.md",
+          "tokens": 620
+        },
+        {
+          "id": "variants",
+          "title": "Variants",
+          "description": "Use the variant prop to change the variant of the tree view.",
+          "tags": [
+            "variant"
+          ],
+          "path": "chakra-ui/variants.md",
+          "tokens": 639
+        },
+        {
+          "id": "colors",
+          "title": "Colors",
+          "description": "Use the colorPalette prop to change the color palette of the tree view.",
+          "tags": [
+            "colorPalette"
+          ],
+          "path": "chakra-ui/colors.md",
+          "tokens": 654
+        },
+        {
+          "id": "disabled-node",
+          "title": "Disabled Node",
+          "description": "Adding the disabled prop to a node's property will disable the node and\nprevent interaction.",
+          "tags": [
+            "disabled"
+          ],
+          "path": "chakra-ui/disabled-node.md",
+          "tokens": 554
+        },
+        {
+          "id": "controlled-expansion",
+          "title": "Controlled Expansion",
+          "description": "Use the expandedValue and onExpandedChange props to programmatically control\nnode expansion behavior.",
+          "tags": [
+            "expandedValue",
+            "onExpandedChange"
+          ],
+          "path": "chakra-ui/controlled-expansion.md",
+          "tokens": 603
+        },
+        {
+          "id": "explicit-expand",
+          "title": "Explicit Expand",
+          "description": "Render the TreeView.BranchTrigger to manually control node expansion behavior.",
+          "tags": [
+            "TreeView.BranchTrigger",
+            "role=\"none\"",
+            "TreeView.BranchControl"
+          ],
+          "path": "chakra-ui/explicit-expand.md",
+          "tokens": 633
+        },
+        {
+          "id": "expand-icon",
+          "title": "Expand Icon",
+          "description": "Use the nodeState.expanded prop to swap the rendered icon on the branch when\nit's expanded or collapsed.",
+          "tags": [
+            "nodeState.expanded"
+          ],
+          "path": "chakra-ui/expand-icon.md",
+          "tokens": 523
+        },
+        {
+          "id": "remove-indentation",
+          "title": "Remove Indentation",
+          "description": "Set the css variable --tree-indentation to 0px to remove the indentation of\nthe tree view.",
+          "tags": [
+            "--tree-indentation",
+            "0px"
+          ],
+          "path": "chakra-ui/remove-indentation.md",
+          "tokens": 543
+        },
+        {
+          "id": "examples-async-loading",
+          "title": "Async Loading",
+          "description": "Lazy loading is a feature that allows the tree view to load children of a node\non demand (or async). This helps to im...",
+          "tags": [
+            "loadChildren",
+            "onLoadChildrenComplete",
+            "childrenCount"
+          ],
+          "path": "chakra-ui/examples-async-loading.md",
+          "tokens": 790
+        },
+        {
+          "id": "filtering",
+          "title": "Filtering",
+          "description": "Filtering is useful when you have a large tree and you want to filter the nodes\nto only show the ones that match the ...",
+          "tags": [
+            "filter",
+            "TreeCollection",
+            "useFilter"
+          ],
+          "path": "chakra-ui/filtering.md",
+          "tokens": 932
+        },
+        {
+          "id": "collapse-animation",
+          "title": "Collapse Animation",
+          "description": "Use the animateContent prop to animate the tree view content expand/collapse\nstate.",
+          "tags": [
+            "animateContent"
+          ],
+          "path": "chakra-ui/collapse-animation.md",
+          "tokens": 549
+        },
+        {
+          "id": "expand-collapse-all",
+          "title": "Expand/Collapse All",
+          "description": "Provide controls to expand or collapse all nodes at once.",
+          "tags": [],
+          "path": "chakra-ui/expand-collapse-all.md",
+          "tokens": 751
+        },
+        {
+          "id": "store",
+          "title": "Store",
+          "description": "Use the useTreeView hook to create the tree view store and pass it to the\nTreeView.RootProvider component. This allow...",
+          "tags": [
+            "useTreeView",
+            "TreeView.RootProvider"
+          ],
+          "path": "chakra-ui/store.md",
+          "tokens": 600
+        },
+        {
+          "id": "examples-links",
+          "title": "Links",
+          "description": "Render the tree items as links by leveraging the asChild prop on the\nTreeView.Item component.",
+          "tags": [
+            "asChild",
+            "TreeView.Item"
+          ],
+          "path": "chakra-ui/examples-links.md",
+          "tokens": 903
+        },
+        {
+          "id": "multi-select",
+          "title": "Multi Select",
+          "description": "Add the selectionMode=\"multiple\" prop to the TreeView.Root component to\nenable multi-select functionality.",
+          "tags": [
+            "selectionMode=\"multiple\"",
+            "TreeView.Root",
+            "Ctrl",
+            "⌘",
+            "Shift"
+          ],
+          "path": "chakra-ui/multi-select.md",
+          "tokens": 598
+        },
+        {
+          "id": "checkbox-tree",
+          "title": "Checkbox Tree",
+          "description": "Add checkboxes to tree nodes for selection functionality.",
+          "tags": [],
+          "path": "chakra-ui/checkbox-tree.md",
+          "tokens": 687
+        },
+        {
+          "id": "mutation",
+          "title": "Mutation",
+          "description": "Here's an example of how to design add/remove nodes in the tree view.",
+          "tags": [],
+          "path": "chakra-ui/mutation.md",
+          "tokens": 1102
+        },
+        {
+          "id": "custom-icon",
+          "title": "Custom Icon",
+          "description": "Here's an example of how to render a custom icon for the tree view based on its\ndata.",
+          "tags": [],
+          "path": "chakra-ui/custom-icon.md",
+          "tokens": 616
+        },
+        {
+          "id": "treeview-props",
+          "title": "Props",
+          "description": "| Prop | Default | Type | Description |\n| --- | --- | --- | --- |\n| collection | undefined | TreeCollection<T> | The ...",
+          "tags": [
+            "TreeCollection<T>",
+            "boolean",
+            "'multiple' \\| 'single'",
+            "'md' \\| 'sm' \\| 'xs'",
+            "'subtle' \\| 'solid'",
+            "React.ElementType",
+            "string[]",
+            "string",
+            "(details: CheckedChangeDetails) => void",
+            "'true' \\| 'false'"
+          ],
+          "path": "chakra-ui/treeview-props.md",
+          "tokens": 1395
+        },
+        {
+          "id": "wrap",
+          "title": "Wrap",
+          "description": "By default, Wrap applies display: flex, flex-wrap: wrap, and gap: 8px to\nits children.",
+          "tags": [
+            "Wrap",
+            "display: flex",
+            "flex-wrap: wrap",
+            "gap: 8px",
+            "gap",
+            "align",
+            "justify",
+            "rowGap",
+            "columnGap"
+          ],
+          "path": "chakra-ui/wrap.md",
+          "tokens": 694
+        },
+        {
+          "id": "cli",
+          "title": "CLI",
+          "description": "The Chakra UI CLI can be used to generate typings for your custom theme tokens,\nlike colors, semantic tokens, recipe ...",
+          "tags": [
+            ">= 20.6.0",
+            "chakra typegen",
+            "typegen",
+            "postinstall",
+            "prepare",
+            "npm install",
+            "pnpm install",
+            "bun install",
+            "npm ci",
+            "@chakra-ui/cli"
+          ],
+          "path": "chakra-ui/cli.md",
+          "tokens": 1736
+        },
+        {
+          "id": "contributing-to-chakra-ui",
+          "title": "Contributing to Chakra UI",
+          "description": "Thanks for showing interest to contribute to Chakra UI 💖, you rock!",
+          "tags": [
+            "apps/compositions/src/examples",
+            "dangerouslySetInnerHTML",
+            "Prose",
+            "CodeBlock",
+            "<style>",
+            "style-src 'unsafe-inline'",
+            "localStorage",
+            "sessionStorage"
+          ],
+          "path": "chakra-ui/contributing-to-chakra-ui.md",
+          "tokens": 1064
+        },
+        {
+          "id": "installation",
+          "title": "Installation",
+          "description": "Chakra UI works in your favorite framework. We've put together step-by-step\nguides for these frameworks",
+          "tags": [
+            "@chakra-ui/react",
+            "@chakra-ui/cli",
+            "Provider",
+            "components/ui/provider",
+            "ChakraProvider",
+            "ThemeProvider",
+            "next-themes",
+            "compilerOptions",
+            "jsconfig.json",
+            "--dry"
+          ],
+          "path": "chakra-ui/installation.md",
+          "tokens": 781
+        },
+        {
+          "id": "manual-steps",
+          "title": "Manual Steps",
+          "description": "Remove the unused packages: @emotion/styled and framer-motion. These\npackages are no longer required in Chakra UI.",
+          "tags": [
+            "@emotion/styled",
+            "framer-motion",
+            "@chakra-ui/react",
+            "@emotion/react",
+            "theme.js",
+            "theme.ts",
+            "createSystem",
+            "defaultConfig",
+            "theme",
+            "value"
+          ],
+          "path": "chakra-ui/manual-steps.md",
+          "tokens": 800
+        },
+        {
+          "id": "removed-features",
+          "title": "Removed Features",
+          "description": "We provide snippets for color mode via the CLI to help you set up color mode\nquickly using next-themes",
+          "tags": [
+            "ColorModeProvider",
+            "useColorMode",
+            "next-themes",
+            "LightMode",
+            "DarkMode",
+            "ColorModeScript",
+            "className=\"light\"",
+            "className=\"dark\"",
+            "useColorModeValue",
+            "useTheme"
+          ],
+          "path": "chakra-ui/removed-features.md",
+          "tokens": 1660
+        },
+        {
+          "id": "prop-changes",
+          "title": "Prop Changes",
+          "description": "Changed naming convention for boolean properties from is<X> to <x>",
+          "tags": [
+            "is<X>",
+            "<x>",
+            "isOpen",
+            "open",
+            "defaultIsOpen",
+            "defaultOpen",
+            "isDisabled",
+            "disabled",
+            "isInvalid",
+            "invalid"
+          ],
+          "path": "chakra-ui/prop-changes.md",
+          "tokens": 3457
+        },
+        {
+          "id": "component-changes-popover",
+          "title": "Popover",
+          "description": "Now uses compound components with an explicit Popover.Positioner wrapper\naround content. PopoverTrigger now requires ...",
+          "tags": [
+            "Popover.Positioner",
+            "PopoverTrigger",
+            "asChild",
+            "Popover",
+            "Popover.Root",
+            "Popover.Trigger",
+            "PopoverContent",
+            "Popover.Content",
+            "PopoverHeader",
+            "Popover.Title"
+          ],
+          "path": "chakra-ui/component-changes-popover.md",
+          "tokens": 2646
+        },
+        {
+          "id": "dialog-drawer",
+          "title": "Dialog, Drawer",
+          "description": "Both Modal and Drawer now use compound components with an explicit\nPositioner and Portal wrapper.",
+          "tags": [
+            "Modal",
+            "Drawer",
+            "Positioner",
+            "Portal",
+            "isOpen",
+            "open",
+            "onClose",
+            "onOpenChange",
+            "{ open }",
+            "blockScrollOnMount"
+          ],
+          "path": "chakra-ui/dialog-drawer.md",
+          "tokens": 868
+        },
+        {
+          "id": "component-changes-editable",
+          "title": "Editable",
+          "description": "Now uses compound components with dot notation. Custom controls use declarative\ntrigger components instead of the use...",
+          "tags": [
+            "useEditableControls",
+            "Editable",
+            "Editable.Root",
+            "EditablePreview",
+            "Editable.Preview",
+            "EditableInput",
+            "Editable.Input",
+            "EditableTextarea",
+            "Editable.Textarea",
+            "useEditableContext"
+          ],
+          "path": "chakra-ui/component-changes-editable.md",
+          "tokens": 617
+        },
+        {
+          "id": "formcontrol",
+          "title": "FormControl",
+          "description": "Replaced by Field for standard form controls and Fieldset for grouped\ncontrols (radio groups, checkbox groups). The a...",
+          "tags": [
+            "Field",
+            "Fieldset",
+            "as='fieldset'",
+            "FormControl",
+            "Field.Root",
+            "FormLabel",
+            "Field.Label",
+            "FormHelperText",
+            "Field.HelperText",
+            "FormErrorMessage"
+          ],
+          "path": "chakra-ui/formcontrol.md",
+          "tokens": 578
+        },
+        {
+          "id": "fade-scalefade-slide-slidefade",
+          "title": "Fade, ScaleFade, Slide, SlideFade",
+          "description": "All transition components have been replaced by a unified Presence component\nthat uses CSS-based animations instead o...",
+          "tags": [
+            "Presence",
+            "Fade",
+            "ScaleFade",
+            "SlideFade",
+            "Slide",
+            "in",
+            "present",
+            "initialScale",
+            "offsetX",
+            "offsetY"
+          ],
+          "path": "chakra-ui/fade-scalefade-slide-slidefade.md",
+          "tokens": 2727
+        },
+        {
+          "id": "component-changes-menu",
+          "title": "Menu",
+          "description": "Now a snippet component imported from @/components/ui/tooltip instead of\n@chakra-ui/react.",
+          "tags": [
+            "Menu.Context",
+            "isLazy",
+            "Menu",
+            "lazyMount",
+            "unmountOnExit",
+            "Menu.Root",
+            "MenuOptionGroup",
+            "Menu.RadioItemGroup",
+            "Menu.CheckboxItemGroup",
+            "@/components/ui/tooltip"
+          ],
+          "path": "chakra-ui/component-changes-menu.md",
+          "tokens": 1041
+        },
+        {
+          "id": "component-changes-accordion",
+          "title": "Accordion",
+          "description": "Now uses compound components with dot notation. All sub-components are\nnamespaced under Accordion.",
+          "tags": [
+            "Accordion",
+            "Accordion.Root",
+            "AccordionItem",
+            "Accordion.Item",
+            "value",
+            "AccordionButton",
+            "Accordion.ItemTrigger",
+            "AccordionIcon",
+            "Accordion.ItemIndicator",
+            "AccordionPanel"
+          ],
+          "path": "chakra-ui/component-changes-accordion.md",
+          "tokens": 3422
+        },
+        {
+          "id": "chakra-factory",
+          "title": "Chakra Factory",
+          "description": "Chakra factory serves as a way to create supercharged JSX component from any\nHTML element to enable them receive JSX ...",
+          "tags": [
+            "chakra.<element>",
+            "chakra",
+            "className",
+            "shouldForwardProp",
+            "$",
+            "isValidProperty",
+            "defaultProps",
+            "as",
+            "asChild",
+            "color-mix"
+          ],
+          "path": "chakra-ui/chakra-factory.md",
+          "tokens": 1162
+        },
+        {
+          "id": "conditional-styles",
+          "title": "Conditional Styles",
+          "description": "Chakra allows you to write styles for pseudo states, media queries, and custom\ndata attributes with the conditional s...",
+          "tags": [
+            "@media",
+            "@layer",
+            "@container",
+            "@supports",
+            "@page",
+            "_even",
+            "_odd",
+            "::before",
+            "::after",
+            "_before"
+          ],
+          "path": "chakra-ui/conditional-styles.md",
+          "tokens": 2020
+        },
+        {
+          "id": "dark-mode",
+          "title": "Dark Mode",
+          "description": "Chakra relies on the next-themes library to provide dark mode support. During\nthe installation process, the snippets ...",
+          "tags": [
+            "next-themes",
+            "bg.subtle",
+            "_dark",
+            "ColorModeProvider",
+            "useColorMode",
+            "useColorModeValue",
+            "ColorModeButton",
+            "dark",
+            "light"
+          ],
+          "path": "chakra-ui/dark-mode.md",
+          "tokens": 849
+        },
+        {
+          "id": "focus-ring",
+          "title": "Focus Ring",
+          "description": "The focus ring is used to identify the currently focused element on your page.\nWhile this is important for accessibil...",
+          "tags": [
+            "focusRing",
+            "focusVisibleRing",
+            "&:is(:focus, [data-focus])",
+            "focusRingColor",
+            "focusRingWidth",
+            "focusRingStyle",
+            "defineLayerStyles",
+            "theme",
+            "layerStyles",
+            "typegen"
+          ],
+          "path": "chakra-ui/focus-ring.md",
+          "tokens": 1329
+        },
+        {
+          "id": "responsive-design",
+          "title": "Responsive Design",
+          "description": "Chakra UI uses a mobile-first breakpoint system with min-width media queries:",
+          "tags": [
+            "undefined",
+            "md",
+            "lg",
+            "To",
+            "xl",
+            "mdToXl",
+            "Only",
+            "lgOnly",
+            "Down",
+            "sm"
+          ],
+          "path": "chakra-ui/responsive-design.md",
+          "tokens": 1200
+        },
+        {
+          "id": "virtual-color",
+          "title": "Virtual Color",
+          "description": "Chakra allows you to create a virtual color or color placeholder in your\nproject. The colorPalette property is how yo...",
+          "tags": [
+            "colorPalette",
+            "blue.100",
+            "blue.200",
+            "50-950",
+            "blue.600",
+            "blue.400"
+          ],
+          "path": "chakra-ui/virtual-color.md",
+          "tokens": 502
+        },
+        {
+          "id": "animations",
+          "title": "Animations",
+          "description": "Chakra UI supports the following keyframes out of the box.",
+          "tags": [
+            "spin",
+            "pulse",
+            "ping",
+            "bounce",
+            "bg-position",
+            "position",
+            "circular-progress",
+            "expand-height",
+            "collapse-height",
+            "expand-width"
+          ],
+          "path": "chakra-ui/animations.md",
+          "tokens": 722
+        },
+        {
+          "id": "colors-2",
+          "title": "Colors",
+          "description": "Chakra UI supports these semantic tokens out of the box.",
+          "tags": [
+            "bg",
+            "bg.subtle",
+            "bg.muted",
+            "bg.emphasized",
+            "bg.inverted",
+            "bg.panel",
+            "bg.error",
+            "bg.warning",
+            "bg.success",
+            "bg.info"
+          ],
+          "path": "chakra-ui/colors-2.md",
+          "tokens": 1736
+        },
+        {
+          "id": "overview",
+          "title": "Overview",
+          "description": "The Chakra UI theming system is built around the API of\nPanda CSS.",
+          "tags": [
+            "defineConfig",
+            "createSystem",
+            "ChakraProvider",
+            "cssVarsRoot",
+            "cssVarsPrefix",
+            "globalCss",
+            "preflight",
+            "theme",
+            "breakpoints",
+            "keyframes"
+          ],
+          "path": "chakra-ui/overview.md",
+          "tokens": 2750
+        },
+        {
+          "id": "recipes",
+          "title": "Recipes",
+          "description": "Chakra provides a way to write CSS-in-JS with better performance, developer\nexperience, and composability. One of its...",
+          "tags": [
+            "className",
+            "base",
+            "variants",
+            "compoundVariants",
+            "defaultVariants",
+            "defineRecipe",
+            "useRecipe",
+            "chakra",
+            "\"use client\"",
+            "useContext"
+          ],
+          "path": "chakra-ui/recipes.md",
+          "tokens": 1888
+        },
+        {
+          "id": "semantic-tokens",
+          "title": "Semantic Tokens",
+          "description": "Semantic tokens are tokens that are designed to be used in a specific context. A\nsemantic token consists of the follo...",
+          "tags": [
+            "value",
+            "description",
+            "{}",
+            "DEFAULT",
+            "bg",
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl"
+          ],
+          "path": "chakra-ui/semantic-tokens.md",
+          "tokens": 1026
+        },
+        {
+          "id": "slot-recipes",
+          "title": "Slot Recipes",
+          "description": "Slot Recipes come in handy when you need to apply style variations to multiple\nparts of a component.",
+          "tags": [
+            "className",
+            "slots",
+            "base",
+            "variants",
+            "defaultVariants",
+            "compoundVariants",
+            "defineSlotRecipe",
+            "useSlotRecipe",
+            "createSlotRecipeContext",
+            "\"use client\""
+          ],
+          "path": "chakra-ui/slot-recipes.md",
+          "tokens": 2517
+        },
+        {
+          "id": "tokens",
+          "title": "Tokens",
+          "description": "Design tokens are the platform-agnostic way to manage design decisions in your\napplication or website. It is a collec...",
+          "tags": [
+            "value",
+            "description",
+            "theme",
+            "border",
+            "padding",
+            "box-shadow",
+            "{path.to.token}",
+            "red.300",
+            "colors.red.300",
+            "DEFAULT"
+          ],
+          "path": "chakra-ui/tokens.md",
+          "tokens": 3084
+        },
+        {
+          "id": "typography",
+          "title": "Typography",
+          "description": "Here's the list of available fonts.",
+          "tags": [
+            "heading",
+            "body",
+            "mono",
+            "2xs",
+            "0.625rem",
+            "xs",
+            "0.75rem",
+            "sm",
+            "0.875rem",
+            "md"
+          ],
+          "path": "chakra-ui/typography.md",
+          "tokens": 1146
+        },
+        {
+          "id": "color-mode",
+          "title": "Color Mode",
+          "description": "Chakra UI relies on next-themes\nto add support for light and dark color mode.",
+          "tags": [
+            "next-themes",
+            "Provider",
+            "useColorMode",
+            "toggleColorMode",
+            "setColorMode",
+            "useColorModeValue",
+            "light",
+            "dark",
+            "ClientOnly",
+            "ColorModeButton"
+          ],
+          "path": "chakra-ui/color-mode.md",
+          "tokens": 2106
+        },
+        {
+          "id": "server-components",
+          "title": "Server Components",
+          "description": "React Server Components is a new feature in React that allows you to build\ncomponents that render on the server and r...",
+          "tags": [
+            "useState",
+            "useRef",
+            "useContext",
+            "chakra()",
+            "use client"
+          ],
+          "path": "chakra-ui/server-components.md",
+          "tokens": 561
+        },
+        {
+          "id": "testing",
+          "title": "Testing",
+          "description": "When writing tests with Vitest or Jest, use the following practices to get the\nbest results.",
+          "tags": [
+            "vite.config.ts",
+            "globals: true",
+            "expect",
+            "test",
+            "describe",
+            "setup-test.ts",
+            "render",
+            "llms-v3-migration.txt",
+            "@Docs",
+            "@"
+          ],
+          "path": "chakra-ui/testing.md",
+          "tokens": 1184
+        },
+        {
+          "id": "mcp-server",
+          "title": "MCP Server",
+          "description": "The Chakra UI MCP Server is a specialized\nModel Context Protocol server\nthat provides AI assistants (like Claude Code...",
+          "tags": [
+            "list_components",
+            "get_component_props",
+            "get_component_example",
+            "list_component_templates",
+            "get_component_templates",
+            "CHAKRA_PRO_API_KEY",
+            "get_theme",
+            "theme_customization",
+            "v2_to_v3_code_review",
+            "@chakra-ui/react-mcp"
+          ],
+          "path": "chakra-ui/mcp-server.md",
+          "tokens": 1293
+        },
+        {
+          "id": "ai-rules",
+          "title": "AI Rules",
+          "description": "Configure your AI coding assistants (like Cursor, GitHub Copilot, or Claude) by\nadding these rules to your project's ...",
+          "tags": [
+            ".cursorrules",
+            ".github/copilot-instructions.md"
+          ],
+          "path": "chakra-ui/ai-rules.md",
+          "tokens": 1469
+        },
+        {
+          "id": "using-chakra-ui-in-iframe",
+          "title": "Using Chakra UI in Iframe",
+          "description": "Iframes are useful for isolating styles and logic in a separate context. For\nexample, you might want to showcase a Ch...",
+          "tags": [
+            "react-frame-component",
+            "@emotion/cache",
+            "@chakra-ui/cli",
+            "compilerOptions",
+            "components/ui/iframe-provider.tsx",
+            "Provider",
+            "components/ui/provider",
+            "ChakraProvider",
+            "@chakra-ui/react",
+            "ThemeProvider"
+          ],
+          "path": "chakra-ui/using-chakra-ui-in-iframe.md",
+          "tokens": 1111
+        },
+        {
+          "id": "using-chakra-ui-in-shadow-dom",
+          "title": "Using Chakra UI in Shadow DOM",
+          "description": "When developing extensions for browsers or using Chakra as part of a large\nproject, leveraging the Shadow DOM is usef...",
+          "tags": [
+            "react-shadow",
+            "@emotion/cache",
+            "@chakra-ui/cli",
+            "compilerOptions",
+            "system.ts",
+            "components/ui/provider",
+            "Provider",
+            "ChakraProvider",
+            "@chakra-ui/react",
+            "EnvironmentProvider"
+          ],
+          "path": "chakra-ui/using-chakra-ui-in-shadow-dom.md",
+          "tokens": 1098
+        },
+        {
+          "id": "using-chakra-ui-in-next-js-app",
+          "title": "Using Chakra UI in Next.js (App)",
+          "description": "Chakra UI works with Next.js 15 and 16.",
+          "tags": [
+            "next",
+            "@chakra-ui/cli",
+            "compilerOptions",
+            "jsconfig.json",
+            "Provider",
+            "components/ui/provider",
+            "ChakraProvider",
+            "@chakra-ui/react",
+            "ThemeProvider",
+            "next-themes"
+          ],
+          "path": "chakra-ui/using-chakra-ui-in-next-js-app.md",
+          "tokens": 936
+        },
+        {
+          "id": "using-chakra-ui-in-next-js-pages",
+          "title": "Using Chakra UI in Next.js (Pages)",
+          "description": "Chakra UI works with Next.js 15 and 16.",
+          "tags": [
+            "next",
+            "@chakra-ui/cli",
+            "compilerOptions",
+            "jsconfig.json",
+            "Provider",
+            "ChakraProvider",
+            "@chakra-ui/react",
+            "ThemeProvider",
+            "next-themes",
+            "pages/_document.tsx"
+          ],
+          "path": "chakra-ui/using-chakra-ui-in-next-js-pages.md",
+          "tokens": 963
+        },
+        {
+          "id": "using-chakra-in-remix",
+          "title": "Using Chakra in Remix",
+          "description": "Use the remix template below to get started quickly.",
+          "tags": [
+            "@chakra-ui/cli",
+            "compilerOptions",
+            "jsconfig.json",
+            "Provider",
+            "ChakraProvider",
+            "@chakra-ui/react",
+            "ThemeProvider",
+            "next-themes",
+            ".storybook/preview.tsx",
+            "withThemeByClassName"
+          ],
+          "path": "chakra-ui/using-chakra-in-remix.md",
+          "tokens": 959
+        },
+        {
+          "id": "using-chakra-in-vite",
+          "title": "Using Chakra in Vite",
+          "description": "Use the vite template below to get started quickly.",
+          "tags": [
+            "@chakra-ui/cli",
+            "tsconfig.app.json",
+            "compilerOptions",
+            "jsconfig.json",
+            "Provider",
+            "ChakraProvider",
+            "@chakra-ui/react",
+            "ThemeProvider",
+            "next-themes",
+            "tsconfig"
+          ],
+          "path": "chakra-ui/using-chakra-in-vite.md",
+          "tokens": 603
+        },
+        {
+          "id": "background",
+          "title": "Background",
+          "description": "Use bgAttachment to control the attachment of a background image.",
+          "tags": [
+            "bgAttachment",
+            "backgroundAttachment",
+            "background-attachment",
+            "bgBlendMode",
+            "bgClip",
+            "backgroundClip",
+            "background-clip",
+            "bg",
+            "bgColor",
+            "backgroundColor"
+          ],
+          "path": "chakra-ui/background.md",
+          "tokens": 1092
+        },
+        {
+          "id": "border",
+          "title": "Border",
+          "description": "Use the rounded or borderRadius props to apply border radius on all sides of\nan element.",
+          "tags": [
+            "rounded",
+            "borderRadius",
+            "border-radius",
+            "radii",
+            "rounded{Left,Right,Top,Bottom}",
+            "border{Left,Right,Top,Bottom}Radius",
+            "roundedLeft",
+            "borderLeftRadius",
+            "border-left-radius",
+            "roundedRight"
+          ],
+          "path": "chakra-ui/border.md",
+          "tokens": 2742
+        },
+        {
+          "id": "filters",
+          "title": "Filters",
+          "description": "Use the filter prop to apply visual effects like blur or color shift to an\nelement.",
+          "tags": [
+            "filter",
+            "blur",
+            "auto",
+            "--blur",
+            "blurs",
+            "contrast",
+            "--contrast",
+            "dropShadow",
+            "--drop-shadow",
+            "grayscale"
+          ],
+          "path": "chakra-ui/filters.md",
+          "tokens": 1825
+        },
+        {
+          "id": "flex-and-grid",
+          "title": "Flex and Grid",
+          "description": "Use the flexBasis prop to set the initial main size of a flex item.",
+          "tags": [
+            "flexBasis",
+            "flex-basis",
+            "flexDir",
+            "flexDirection",
+            "Flex",
+            "direction",
+            "flex-direction",
+            "flexWrap",
+            "wrap",
+            "flex-wrap"
+          ],
+          "path": "chakra-ui/flex-and-grid.md",
+          "tokens": 2456
+        },
+        {
+          "id": "interactivity",
+          "title": "Interactivity",
+          "description": "Use the accentColor prop to set the accent color for browser generated\nuser-interface controls.",
+          "tags": [
+            "accentColor",
+            "accent-color",
+            "colors",
+            "appearance",
+            "caretColor",
+            "caret-color",
+            "cursor",
+            "pointerEvents",
+            "pointer-events",
+            "resize"
+          ],
+          "path": "chakra-ui/interactivity.md",
+          "tokens": 2076
+        },
+        {
+          "id": "layout",
+          "title": "Layout",
+          "description": "Use the aspectRatio prop to set the desired aspect ratio of an element.",
+          "tags": [
+            "aspectRatio",
+            "aspect-ratio",
+            "aspectRatios",
+            "breakAfter",
+            "break-after",
+            "breakBefore",
+            "break-before",
+            "breakInside",
+            "break-inside",
+            "boxDecorationBreak"
+          ],
+          "path": "chakra-ui/layout.md",
+          "tokens": 2264
+        },
+        {
+          "id": "sizing",
+          "title": "Sizing",
+          "description": "Use the width or w property to set the width of an element.",
+          "tags": [
+            "width",
+            "w",
+            "1/3",
+            "2/3",
+            "1/4",
+            "3/4",
+            "1/5",
+            "4/5",
+            "1/6",
+            "5/6"
+          ],
+          "path": "chakra-ui/sizing.md",
+          "tokens": 940
+        },
+        {
+          "id": "spacing",
+          "title": "Spacing",
+          "description": "Use the padding prop to apply padding on all sides of an element",
+          "tags": [
+            "padding",
+            "p",
+            "spacing",
+            "padding{Left,Right,Top,Bottom}",
+            "padding{Start,End}",
+            "pl",
+            "paddingLeft",
+            "padding-left",
+            "pr",
+            "paddingRight"
+          ],
+          "path": "chakra-ui/spacing.md",
+          "tokens": 1959
+        },
+        {
+          "id": "transforms",
+          "title": "Transforms",
+          "description": "Use the scale prop to control the scale of an element.",
+          "tags": [
+            "scale",
+            "auto",
+            "scaleX",
+            "scaleY",
+            "--scale-x",
+            "--scale-y",
+            "rotate",
+            "rotateX",
+            "rotateY",
+            "--rotate-x"
+          ],
+          "path": "chakra-ui/transforms.md",
+          "tokens": 842
+        },
+        {
+          "id": "transitions",
+          "title": "Transitions",
+          "description": "Use the transition prop to control the transition of an element.",
+          "tags": [
+            "transition",
+            "transitionTimingFunction",
+            "transition-timing-function",
+            "easings",
+            "transitionDuration",
+            "transition-duration",
+            "durations",
+            "transitionDelay",
+            "transition-delay",
+            "animation"
+          ],
+          "path": "chakra-ui/transitions.md",
+          "tokens": 937
+        },
+        {
+          "id": "typography-2",
+          "title": "Typography",
+          "description": "Use the fontFamily prop to set the font family of a text element.",
+          "tags": [
+            "fontFamily",
+            "font-family",
+            "fonts",
+            "fontSize",
+            "font-size",
+            "textStyle",
+            "theme.textStyles",
+            "fontStyle",
+            "font-style",
+            "fontWeight"
+          ],
+          "path": "chakra-ui/typography-2.md",
+          "tokens": 2907
+        },
+        {
+          "id": "colors-3",
+          "title": "Colors",
+          "description": "Please read the overview first to learn\nhow to properly customize the styling engine, and get type safety.",
+          "tags": [
+            "50",
+            "950",
+            "brand",
+            "bg",
+            "borderColor",
+            "color",
+            "solid",
+            "contrast",
+            "fg",
+            "muted"
+          ],
+          "path": "chakra-ui/colors-3.md",
+          "tokens": 1287
+        },
+        {
+          "id": "global-css",
+          "title": "Global CSS",
+          "description": "Please read the overview first to learn\nhow to properly customize the styling engine, and get type safety.",
+          "tags": [
+            "html",
+            "globalCss"
+          ],
+          "path": "chakra-ui/global-css.md",
+          "tokens": 525
+        },
+        {
+          "id": "customization",
+          "title": "Customization",
+          "description": "Chakra UI uses a system of configs to define the default styling system.",
+          "tags": [
+            "defaultBaseConfig",
+            "defaultConfig",
+            "defaultSystem",
+            "defineConfig",
+            "createSystem",
+            "ChakraProvider",
+            "typegen"
+          ],
+          "path": "chakra-ui/customization.md",
+          "tokens": 548
+        },
+        {
+          "id": "recipes-2",
+          "title": "Recipes",
+          "description": "Please read the overview first to learn\nhow to properly customize the styling engine, and get type safety.",
+          "tags": [
+            "defineRecipe",
+            "Button",
+            "xl",
+            "raised",
+            "Title",
+            "theme.slotRecipes",
+            "Alert",
+            "shape",
+            "Navbar",
+            "width"
+          ],
+          "path": "chakra-ui/recipes-2.md",
+          "tokens": 1518
+        },
+        {
+          "id": "utilities",
+          "title": "Utilities",
+          "description": "Here are the properties you need to define or customize a utility:",
+          "tags": [
+            "shorthand",
+            "values",
+            "transform",
+            "br",
+            "borderX",
+            "bx"
+          ],
+          "path": "chakra-ui/utilities.md",
+          "tokens": 660
         }
       ]
     },

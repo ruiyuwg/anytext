@@ -1,0 +1,207 @@
+# Responsive Design
+
+## Overview
+
+Chakra UI uses a mobile-first breakpoint system with min-width media queries:
+
+```ts
+const breakpoints = {
+  base: "0rem", // 0px
+  sm: "30rem", // ~480px
+  md: "48rem", // ~768px
+  lg: "62rem", // ~992px
+  xl: "80rem", // ~1280px
+  "2xl": "96rem", // ~1536px
+}
+```
+
+## Object syntax
+
+Here's an example of how to change the font weight of a text on large screens
+
+```jsx
+<Text fontWeight="medium" lg={{ fontWeight: "bold" }}>
+  Text
+</Text>
+```
+
+or use the prop based modifier
+
+```jsx
+<Text fontWeight={{ base: "medium", lg: "bold" }}>Text</Text>
+```
+
+## Array syntax
+
+Chakra also accepts arrays as values for responsive styles. Pass the
+corresponding value for each breakpoint in the array. Using our previous code as
+an example:
+
+```jsx
+<Text fontWeight={["medium", undefined, undefined, "bold"]}>Text</Text>
+```
+
+Notice the use of `undefined` for the breakpoints to skip the `md` and `lg`
+breakpoints.
+
+## Breakpoint targeting
+
+### Breakpoint range
+
+Chakra provides a way to target a range of breakpoints using the `To` notation.
+To apply styles between the `md` and `xl` breakpoints, use the `mdToXl`
+property:
+
+```jsx
+<Text fontWeight={{ mdToXl: "bold" }}>Text</Text>
+```
+
+> This text will only be bold from `md` to `xl` breakpoints.
+
+### Only breakpoint
+
+To target a single breakpoint, use the `Only` notation. Here's an example of how
+to apply styles only in the `lg` breakpoint, using the `lgOnly` property:
+
+```jsx
+<Text fontWeight={{ lgOnly: "bold" }}>Text</Text>
+```
+
+### Down breakpoint
+
+To target a breakpoint and below, use the `Down` notation. This creates clear
+boundaries for responsive variants. Here's an example of how to apply styles
+from the `sm` breakpoint and below:
+
+```jsx
+<Text fontWeight={{ smDown: "bold" }}>Text</Text>
+```
+
+> This text will be bold from `base` up to and including the `sm` breakpoint.
+
+## Hiding elements at breakpoint
+
+Chakra provides the `hideFrom` and `hideBelow` utilities to hide elements at
+specific breakpoints.
+
+To hide an element from the `md` breakpoint, use the `hideFrom` utility:
+
+```jsx
+<Stack hideFrom="md">
+  <Text>This text will be hidden from the `md` breakpoint</Text>
+</Stack>
+```
+
+To hide an element below the `md` breakpoint, use the `hideBelow` utility:
+
+```jsx
+<Stack hideBelow="md">
+  <Text>This text will be hidden below the `md` breakpoint</Text>
+</Stack>
+```
+
+## Customizing Breakpoints
+
+To learn how to customize breakpoints, please refer to the
+[customizing breakpoints](/docs/theming/customization/breakpoints) section.
+
+## Responsive Variants
+
+When applying breakpoints to component variants, we recommend using explicit
+breakpoints instead of using the `base` breakpoint.
+
+This way, you can avoid style leaking from one variant to another.
+
+```jsx
+// okay, but can lead to style leaking ⚠️
+<Button variant={{ base: "solid", md: "outline" }}>Button</Button>
+
+// good ✅
+<Button variant={{ smDown: "solid", md: "outline" }}>Button</Button>
+```
+
+This creates clear boundaries without style accumulation. :::
+
+## FAQs
+
+### Why are breakpoints converted to `rem`?
+
+The conversion to `rem` is intentional and beneficial for accessibility reasons:
+
+- User changed their browser's font setting
+- User zoomed in
+- Font size changed in HTML
+
+# Text Styles
+
+## Overview
+
+Text styles allows you to define textual css properties. The common properties
+are:
+
+- **Font**: font family, weight, size
+- **Line height**
+- **Letter spacing**
+- **Text decoration**
+- **Text transform**
+
+## Defining text styles
+
+Text styles are defined using the `defineTextStyles` function.
+
+```js filename="text-styles.ts"
+import { defineTextStyles } from "@chakra-ui/react"
+
+export const textStyles = defineTextStyles({
+  body: {
+    description: "The body text style - used in paragraphs",
+    value: {
+      fontFamily: "Inter",
+      fontWeight: "500",
+      fontSize: "16px",
+      lineHeight: "24",
+      letterSpacing: "0",
+      textDecoration: "None",
+      textTransform: "None",
+    },
+  },
+})
+```
+
+## Built-in text styles
+
+Chakra UI provides a set of built-in text styles.
+
+## Update the theme
+
+To use the text styles, update the `theme` object with the `textStyles`
+property.
+
+```js filename="theme.ts"
+import { createSystem, defineConfig } from "@chakra-ui/react"
+import { textStyles } from "./text-styles"
+
+const config = defineConfig({
+  theme: {
+    textStyles,
+  },
+})
+
+export default createSystem(defaultConfig, config)
+```
+
+After updating the theme, run the typegen command to generate the typings. See
+the [CLI docs](/docs/get-started/cli#chakra-typegen) for how to run typegen in
+postinstall, CI, and monorepos.
+
+```bash
+npx @chakra-ui/cli typegen
+```
+
+## Using text styles
+
+Now you can use `textStyle` property in your components.
+
+```jsx
+<Box textStyle="body">This is the body text style</Box>
+```

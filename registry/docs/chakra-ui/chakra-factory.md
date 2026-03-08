@@ -1,0 +1,218 @@
+# Chakra Factory
+
+## Overview
+
+Chakra factory serves as a way to create supercharged JSX component from any
+HTML element to enable them receive JSX style props.
+
+```js
+import { chakra } from "@chakra-ui/react"
+```
+
+The chakra factory can be used in two ways: as a JSX element or as a factory
+function.
+
+## JSX Element
+
+Style props are CSS properties that you can pass as props to your components.
+With the JSX factory, you can use `chakra.<element>` syntax to create JSX
+elements that support style props.
+
+```jsx
+import { chakra } from "@chakra-ui/react"
+
+const Button = ({ children }) => (
+  <chakra.button bg="blue.500" color="white" py="2" px="4" rounded="md">
+    {children}
+  </chakra.button>
+)
+```
+
+## Factory function
+
+Use the `chakra` function to convert native elements or custom components. The
+key requirement is that the component **must** accept `className` as props.
+
+```jsx
+const Link = chakra("a")
+
+function Example() {
+  return <Link bg="red.200" href="https://chakra-ui.com" />
+}
+```
+
+Another example with a custom component.
+
+```jsx
+import * as RadixScrollArea from "@radix-ui/react-scroll-area"
+
+const ScrollArea = chakra(RadixScrollArea.Root)
+
+function Example() {
+  return (
+    <ScrollArea>
+      <RadixScrollArea.Viewport>
+        <div>Hello</div>
+      </RadixScrollArea.Viewport>
+    </ScrollArea>
+  )
+}
+```
+
+### Attaching styles
+
+Use the `chakra` function to attach styles or recipes to components.
+
+```jsx
+const Link = chakra("a", {
+  base: {
+    bg: "papayawhip",
+    color: "red.500",
+  },
+})
+
+// usage: <Link href="https://chakra-ui.com" />
+```
+
+### Attaching recipes
+
+Here's an example of attaching a recipe to the component.
+
+```jsx
+const Card = chakra("div", {
+  base: {
+    shadow: "lg",
+    rounded: "lg",
+    bg: "white",
+  },
+  variants: {
+    variant: {
+      outline: {
+        border: "1px solid",
+        borderColor: "red.500",
+      },
+      solid: {
+        bg: "red.500",
+        color: "white",
+      },
+    },
+  },
+})
+
+// usage: <Card variant="outline" />
+```
+
+### Forwarding props
+
+By default, the `chakra` factory only filters chakra related style props from
+getting to the DOM. For more fine-grained control of how props are forwarded,
+pass the `shouldForwardProp` option.
+
+Here's an example that forwards all props that doesn't start with `$`
+
+```tsx
+function shouldForwardProp(prop: string) {
+  return !prop.startsWith("$")
+}
+
+const Component = chakra("div", {}, { shouldForwardProp })
+```
+
+To create custom forward props logic, combine the
+[@emotion/is-prop-valid](https://github.com/emotion-js/emotion/tree/master/packages/is-prop-valid)
+package and the `isValidProperty` from Chakra UI.
+
+```tsx
+import { chakra, defaultSystem } from "@chakra-ui/react"
+import shouldForwardProp from "@emotion/is-prop-valid"
+
+const { isValidProperty } = defaultSystem
+
+function shouldForwardProp(prop: string, variantKeys: string[]) {
+  const chakraSfp = !variantKeys?.includes(prop) && !isValidProperty(prop)
+  return shouldForwardProp(prop) || chakraSfp
+}
+
+const Component = chakra("div", {}, { shouldForwardProp })
+```
+
+## Default Props
+
+Use the `defaultProps` option to pass default props to the component.
+
+```jsx {9}
+const Button = chakra(
+  "button",
+  {
+    base: {
+      bg: "blue.500",
+      color: "white",
+    },
+  },
+  { defaultProps: { type: "button" } },
+)
+```
+
+## Polymorphism
+
+Every component created with the chakra factory can accept the `as` and
+`asChild` props to change the underlying DOM element.
+
+```tsx
+<Button as="a" href="https://chakra-ui.com">
+  Chakra UI
+</Button>
+```
+
+or
+
+```tsx
+<Button asChild>
+  <a href="https://chakra-ui.com">Chakra UI</a>
+</Button>
+```
+
+> Learn more about composition in Chakra UI
+> [here](/docs/components/concepts/composition)
+
+# Color opacity modifier
+
+Every color related style property can use the
+[`color-mix`](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/color-mix)
+shortcut to apply opacity to a color.
+
+## Syntax
+
+The general syntax is `{color}/{opacity}`. For example: `bg="red.300/40"`.
+
+## Usage
+
+```tsx
+<Text bg="red.300/40" color="white">
+  Hello World
+</Text>
+```
+
+This will generate something like this:
+
+```css {2,3}
+.css-sxdf {
+  --mix-background: color-mix(in srgb, var(--colors-red-300) 40%, transparent);
+  background: var(--mix-background, var(--colors-red-300));
+  color: var(--colors-white);
+}
+```
+
+### CSS Variables
+
+This feature can be used in css variables as well. This is useful for creating
+one-off color token in a component.
+
+The token reference syntax `{}` is required for this to work.
+
+```tsx
+<Box css={{ "--bg": "{colors.red.400/40}" }}>
+  <Text>Hello World</Text>
+  <Box bg="var(--bg)" />
+</Box>
+```

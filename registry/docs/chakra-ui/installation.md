@@ -1,0 +1,133 @@
+# Installation
+
+## Framework Guide
+
+Chakra UI works in your favorite framework. We've put together step-by-step
+guides for these frameworks
+
+Easily add Chakra UI with Next.js app
+
+Use Chakra UI with Vite
+
+Try Chakra UI in Stackblitz sandbox
+
+> The minimum node version required is Node.20.x
+
+## Styling roadmap
+
+Today, Chakra UI uses Emotion at runtime.
+
+Our long-term direction is a zero-runtime styling model inspired by Panda CSS,
+rolled out in phases so existing apps can keep upgrading safely.
+
+If you want to help, see the
+[contributing guide](/docs/get-started/contributing) and open discussions or PRs
+for docs, migration tooling, and real-world adoption feedback.
+
+## Installation
+
+To manually set up Chakra UI in your project, follow the steps below.
+
+### Install `@chakra-ui/react`
+
+```bash
+npm i @chakra-ui/react @emotion/react
+```
+
+### Add snippets
+
+Snippets are pre-built components that you can use to build your UI faster.
+Using the `@chakra-ui/cli` you can add snippets to your project.
+
+```bash
+npx @chakra-ui/cli snippet add
+```
+
+### Setup provider
+
+Wrap your application with the `Provider` component generated in the
+`components/ui/provider` component at the root of your application.
+
+This provider composes the following:
+
+- `ChakraProvider` from `@chakra-ui/react` for the styling system
+- `ThemeProvider` from `next-themes` for color mode
+
+```jsx
+import { Provider } from "@/components/ui/provider"
+
+function App({ Component, pageProps }) {
+  return (
+    <Provider>
+      <Component {...pageProps} />
+    </Provider>
+  )
+}
+```
+
+### Update tsconfig
+
+If you're using TypeScript, you need to update the `compilerOptions` in the
+tsconfig file to include the following options:
+
+```json
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "skipLibCheck": true,
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}
+```
+
+> If you're using JavaScript, create a `jsconfig.json` file and add the above
+> code to the file.
+
+### Enjoy!
+
+With the power of the snippets and the primitive components from Chakra UI, you
+can build your UI faster.
+
+```tsx
+import { Button, HStack } from "@chakra-ui/react"
+
+const Demo = () => {
+  return (
+    <HStack>
+      <Button>Click me</Button>
+      <Button>Click me</Button>
+    </HStack>
+  )
+}
+```
+
+## Learn
+
+Watch our official courses and dive into dozens of videos that will teach you
+everything you need to know about Chakra UI, from basics to advanced concepts.
+
+## Contribute
+
+Whether you're a beginner or advanced Chakra UI user, joining our community is
+the best way to connect with like-minded people who build great products with
+the library.
+
+# Migration to v3
+
+We recommend using the [LLMs.txt](/docs/get-started/llms) files to make the
+Chakra UI v3 documentation available to large language models.
+
+## Codemod (Recommended)
+
+The codemod automates the migration from Chakra UI v2 to v3. It handles
+component renames, prop changes, import updates, and compound component
+restructuring. Start here before migrating manually.
+
+```bash
+npx @chakra-ui/codemod upgrade
+```
+
+Use `--dry` to preview changes without modifying files.

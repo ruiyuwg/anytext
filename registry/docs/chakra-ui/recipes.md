@@ -1,0 +1,310 @@
+# Recipes
+
+## Overview
+
+Chakra provides a way to write CSS-in-JS with better performance, developer
+experience, and composability. One of its key features is the ability to create
+multi-variant styles with a type-safe runtime API.
+
+A recipe consists of these properties:
+
+- `className`: The className to attach to the component
+- `base`: The base styles for the component
+- `variants`: The different style variations for the component
+- `compoundVariants`: The different combinations of variants for the component
+- `defaultVariants`: The default variant values for the component
+
+## Defining the recipe
+
+Use the `defineRecipe` identity function to create a recipe.
+
+```tsx title="button.recipe.ts"
+import { defineRecipe } from "@chakra-ui/react"
+
+export const buttonRecipe = defineRecipe({
+  base: {
+    display: "flex",
+  },
+  variants: {
+    variant: {
+      solid: { bg: "red.200", color: "white" },
+      outline: { borderWidth: "1px", borderColor: "red.200" },
+    },
+    size: {
+      sm: { padding: "4", fontSize: "12px" },
+      lg: { padding: "8", fontSize: "24px" },
+    },
+  },
+})
+```
+
+## Using the recipe
+
+There are two ways to use the recipe in a component:
+
+- Directly in the component with `useRecipe`
+- Creating a component (recommended) with the `chakra` factory
+
+**RSC Tip:** Adding the `"use client"` directive is required since it relies on
+react hooks like `useContext` and `useInsertionEffect` under the hood.
+
+### Directly in component
+
+Use the `useRecipe` hook to get the recipe for a component. Then, call the
+recipe with its variant props to get the styles.
+
+```tsx title="button.tsx" {9}
+"use client"
+
+import { chakra, useRecipe } from "@chakra-ui/react"
+import { buttonRecipe } from "./button.recipe"
+
+export const Button = (props) => {
+  const { variant, size, ...restProps } = props
+
+  const recipe = useRecipe({ recipe: buttonRecipe })
+  const styles = recipe({ variant, size })
+
+  return <chakra.button css={styles} {...restProps} />
+}
+```
+
+#### splitVariantProps
+
+Notice how the `variant` and `size` props were destructured from the props to be
+passed to the recipe. A smarter approach would be to automatically split the
+recipe props from the component props.
+
+To do that, use the `recipe.splitVariantProps` function to split the recipe
+props from the component props.
+
+```tsx title="button.tsx" {8}
+"use client"
+
+import { chakra, useRecipe } from "@chakra-ui/react"
+import { buttonRecipe } from "./button.recipe"
+
+export const Button = (props) => {
+  const recipe = useRecipe({ recipe: buttonRecipe })
+  const [recipeProps, restProps] = recipe.splitVariantProps(props)
+  const styles = recipe(recipeProps)
+
+  // ...
+}
+```
+
+#### TypeScript
+
+To infer the recipe variant prop types, use the `RecipeVariantProps` type
+helper.
+
+```tsx title="button.tsx"
+import type { RecipeVariantProps } from "@chakra-ui/react"
+import { buttonRecipe } from "./button.recipe"
+
+type ButtonVariantProps = RecipeVariantProps<typeof buttonRecipe>
+
+export interface ButtonProps extends React.PropsWithChildren<ButtonVariantProps> {}
+```
+
+### Creating a component
+
+Use the `chakra` function to create a component from a recipe.
+
+> **Note:** The recipe can also be inlined into the `chakra` function.
+
+```tsx title="button.tsx"
+"use client"
+
+import { chakra } from "@chakra-ui/react"
+import { buttonRecipe } from "./button.recipe"
+
+export const Button = chakra("button", buttonRecipe)
+```
+
+Next, use the component and pass recipe properties to it.
+
+```tsx title="app.tsx"
+import { Button } from "./button"
+
+const App = () => {
+  return (
+    <Button variant="solid" size="lg">
+      Click Me
+    </Button>
+  )
+}
+```
+
+## Default Variants
+
+The `defaultVariants` property is used to set the default variant values for the
+recipe. This is useful when you want to apply a variant by default.
+
+```tsx title="button.tsx" {19-22}
+"use client"
+
+import { chakra } from "@chakra-ui/react"
+
+const Button = chakra("button", {
+  base: {
+    display: "flex",
+  },
+  variants: {
+    variant: {
+      solid: { bg: "red.200", color: "white" },
+      outline: { borderWidth: "1px", borderColor: "red.200" },
+    },
+    size: {
+      sm: { padding: "4", fontSize: "12px" },
+      lg: { padding: "8", fontSize: "24px" },
+    },
+  },
+  defaultVariants: {
+    variant: "solid",
+    size: "lg",
+  },
+})
+```
+
+## Compound Variants
+
+Use the `compoundVariants` property to define a set of variants that are applied
+based on a combination of other variants.
+
+```tsx title="button.tsx" /compoundVariants/
+"use client"
+
+import { chakra } from "@chakra-ui/react"
+
+const button = cva({
+  base: {
+    display: "flex",
+  },
+  variants: {
+    variant: {
+      solid: { bg: "red.200", color: "white" },
+      outline: { borderWidth: "1px", borderColor: "red.200" },
+    },
+    size: {
+      sm: { padding: "4", fontSize: "12px" },
+      lg: { padding: "8", fontSize: "24px" },
+    },
+  },
+  compoundVariants: [
+    {
+      size: "small",
+      variant: "outline",
+      css: {
+        borderWidth: "2px",
+      },
+    },
+  ],
+})
+```
+
+When you use the `size="small"` and `variant="outline"` variants together, the
+`compoundVariants` will apply the `css` property to the component.
+
+```tsx title="app.tsx"
+<Button size="small" variant="outline">
+  Click Me
+</Button>
+```
+
+### Caveat
+
+Due to the design constraints, using `compoundVariants` with responsive values
+doesn't work.
+
+This means a code like this will not work:
+
+```tsx
+<Button size={{ base: "sm", md: "lg" }} variant="outline">
+  Click Me
+</Button>
+```
+
+For this cases, we recommend rendering multiple versions of the component with
+different breakpoints, then hide/show as needed.
+
+## Using Semantic Tokens
+
+Semantic tokens from your theme are available in recipes. Reference them by
+name.
+
+```tsx title="button.recipe.ts"
+import { defineRecipe } from "@chakra-ui/react"
+
+export const buttonRecipe = defineRecipe({
+  base: {
+    bg: "bg.muted", // semantic token
+    color: "fg", // semantic token
+    borderRadius: "l2", // semantic radius
+  },
+  variants: {
+    variant: {
+      primary: {
+        bg: "colorPalette.solid", // virtual color
+        color: "colorPalette.contrast",
+      },
+    },
+  },
+})
+```
+
+Common tokens: `bg`, `fg`, `border`, `colorPalette.*`
+
+## Theme Usage
+
+To use the recipe in a reusable manner, move it to the system theme and add it
+to `theme.recipes` property.
+
+```tsx title="theme.ts"
+import { createSystem, defaultConfig, defineConfig } from "@chakra-ui/react"
+import { buttonRecipe } from "./button.recipe"
+
+const config = defineConfig({
+  theme: {
+    recipes: {
+      button: buttonRecipe,
+    },
+  },
+})
+
+export default createSystem(defaultConfig, config)
+```
+
+### TypeScript
+
+Use the CLI to generate types for the recipe, then import them in your
+component. See the [CLI docs](/docs/get-started/cli#chakra-typegen) for how to
+run `typegen` in postinstall, CI, and monorepos.
+
+```bash
+npx @chakra-ui/cli typegen ./theme.ts
+```
+
+Then, import the generated types in your component.
+
+```tsx title="button.tsx"
+import type { RecipeVariantProps } from "@chakra-ui/react"
+import { buttonRecipe } from "./button.recipe"
+
+type ButtonVariantProps = RecipeVariantProps<typeof buttonRecipe>
+
+export interface ButtonProps extends React.PropsWithChildren<ButtonVariantProps> {}
+```
+
+### Update code
+
+If you use the recipe directly in your component, update the `useRecipe` to use
+the `key` property to get the recipe from the theme.
+
+```diff title="button.tsx"
+const Button = () => {
+-  const recipe = useRecipe({ recipe: buttonRecipe })
++  const recipe = useRecipe({ key: "button" })
+  // ...
+}
+```

@@ -1,0 +1,81 @@
+# Customization
+
+## Overview
+
+Chakra UI uses a system of configs to define the default styling system.
+
+- `defaultBaseConfig`: contains the conditions and style properties (without
+  tokens and recipes).
+- `defaultConfig`: everything from `defaultBaseConfig` plus the built-in tokens
+  and recipes.
+
+The `defaultSystem` exported from Chakra UI uses the `defaultConfig` by default.
+
+When customizing the theme, it's important to decide if you want to merge your
+config with `defaultConfig` or start from scratch with `defaultBaseConfig`.
+
+## Customization
+
+These are the key functions needed to customize the Chakra UI theme.
+
+- `defineConfig`: used to define the system config
+- `createSystem`: used to create a styling engine from the config
+
+```tsx title="theme.ts"
+import { createSystem, defaultConfig, defineConfig } from "@chakra-ui/react"
+
+const config = defineConfig({
+  theme: {
+    tokens: {
+      colors: {
+        brand: {
+          "500": { value: "tomato" },
+        },
+      },
+    },
+  },
+})
+
+export const system = createSystem(defaultConfig, config)
+```
+
+Next, update the `ChakraProvider` to use the custom system.
+
+```tsx title="provider.tsx"
+import { ChakraProvider } from "@chakra-ui/react"
+import { ThemeProvider } from "next-themes"
+import { system } from "./theme"
+
+export function Provider(props: { children: React.ReactNode }) {
+  return (
+    <ChakraProvider value={system}>
+      <ThemeProvider attribute="class">{props.children}</ThemeProvider>
+    </ChakraProvider>
+  )
+}
+```
+
+## Complete Customization
+
+In most cases, we recommend starting with the default configuration and only
+specify the things you want to customize.
+
+However, if you prefer to start from scratch, scaffold the default tokens and
+recipes using the CLI.
+
+```bash
+npx @chakra-ui/cli eject --outdir ./theme
+```
+
+This will generate a file that includes all the tokens and recipes in Chakra.
+
+## TypeScript
+
+After customizing the default config, you may need to update the types. Run the
+`typegen` command to generate the typings. See the
+[CLI docs](/docs/get-started/cli#chakra-typegen) for how to run typegen in
+postinstall, CI, and monorepos.
+
+```bash
+npx @chakra-ui/cli typegen ./theme.ts
+```

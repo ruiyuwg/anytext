@@ -314,6 +314,14 @@
       "url": "https://mantine.dev/llms-full.txt"
     },
     {
+      "id": "chakra-ui",
+      "name": "Chakra UI",
+      "description": "Accessible React component library with composable style props and theming",
+      "version": "3",
+      "adapter": "llms-full",
+      "url": "https://chakra-ui.com/llms-full.txt"
+    },
+    {
       "id": "azure",
       "name": "Azure",
       "description": "Microsoft Azure cloud platform with compute, storage, databases, AI, and 200+ services",

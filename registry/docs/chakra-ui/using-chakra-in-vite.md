@@ -1,0 +1,117 @@
+# Using Chakra in Vite
+
+## Templates
+
+Use the vite template below to get started quickly.
+
+<ResourceCard
+type="github"
+title="Vite template"
+url="https://github.com/chakra-ui/chakra-ui/tree/main/sandbox/vite-ts"
+/>
+
+## Installation
+
+> The minimum node version required is Node.20.x
+
+### Install dependencies
+
+```bash
+npm i @chakra-ui/react @emotion/react
+```
+
+### Add snippets
+
+Snippets are pre-built components that you can use to build your UI faster.
+Using the `@chakra-ui/cli` you can add snippets to your project.
+
+```bash
+npx @chakra-ui/cli snippet add
+```
+
+### Update tsconfig
+
+If you're using TypeScript, in the `tsconfig.app.json` file, make sure the
+`compilerOptions` includes the following:
+
+```json title="tsconfig.app.json"
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "skipLibCheck": true,
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}
+```
+
+> If you're using JavaScript, create a `jsconfig.json` file and add the above
+> code to the file.
+
+### Setup provider
+
+Wrap your application with the `Provider` component at the root of your
+application.
+
+This provider composes the following:
+
+- `ChakraProvider` from `@chakra-ui/react` for the styling system
+- `ThemeProvider` from `next-themes` for color mode
+
+```tsx title="src/main.tsx" {1,8,10}
+import { Provider } from "@/components/ui/provider"
+import React from "react"
+import ReactDOM from "react-dom/client"
+import App from "./App"
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <React.StrictMode>
+    <Provider>
+      <App />
+    </Provider>
+  </React.StrictMode>,
+)
+```
+
+### Setup Vite Config Paths
+
+In your project, set up a vite config path to automatically sync `tsconfig` with
+vite using the command:
+
+```bash
+npm i -D vite-tsconfig-paths
+```
+
+Update the `vite.config.ts` file:
+
+```ts {3} /tsconfigPaths()/
+import react from "@vitejs/plugin-react"
+import { defineConfig } from "vite"
+import tsconfigPaths from "vite-tsconfig-paths"
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [react(), tsconfigPaths()],
+})
+```
+
+### Enjoy!
+
+With the power of the snippets and the primitive components from Chakra UI, you
+can build your UI faster.
+
+```tsx
+import { Button, HStack } from "@chakra-ui/react"
+
+const Demo = () => {
+  return (
+    <HStack>
+      <Button>Click me</Button>
+      <Button>Click me</Button>
+    </HStack>
+  )
+}
+```

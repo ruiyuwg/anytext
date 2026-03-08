@@ -1,0 +1,377 @@
+# Slot Recipes
+
+## Overview
+
+Slot Recipes come in handy when you need to apply style variations to multiple
+parts of a component.
+
+A slot recipe consists of these properties:
+
+- `className`: The className prefix to attach to the component slot
+- `slots`: An array of component parts to style
+- `base`: The base styles per slot
+- `variants`: The different visual styles for each slot
+- `defaultVariants`: The default variant for the component
+- `compoundVariants`: The compound variant combination and style overrides for
+  each slot.
+
+## Defining the recipe
+
+Use the `defineSlotRecipe` identity function to create a slot recipe.
+
+```tsx title="checkbox.recipe.ts"
+import { defineSlotRecipe } from "@chakra-ui/react"
+
+export const checkboxSlotRecipe = defineSlotRecipe({
+  slots: ["root", "control", "label"],
+  base: {
+    root: { display: "flex", alignItems: "center", gap: "2" },
+    control: { borderWidth: "1px", borderRadius: "sm" },
+    label: { marginStart: "2" },
+  },
+  variants: {
+    size: {
+      sm: {
+        control: { width: "8", height: "8" },
+        label: { fontSize: "sm" },
+      },
+      md: {
+        control: { width: "10", height: "10" },
+        label: { fontSize: "md" },
+      },
+    },
+  },
+})
+```
+
+## Using the recipe
+
+There are two ways to use the recipe in a component:
+
+- Directly in the component with `useSlotRecipe`
+- As a compound component (recommended) with `createSlotRecipeContext`
+
+Adding the `"use client"` directive is required to use the `useSlotRecipe` hook
+or `createSlotRecipeContext` function. This is because they rely on react hooks
+like `useContext` and `useInsertionEffect` under the hood.
+
+### Directly in component
+
+Use the `useSlotRecipe` hook to get the recipe for a component. Then, call the
+recipe with its variant props to get the styles.
+
+```tsx title="checkbox.tsx"
+"use client"
+
+import { chakra, useSlotRecipe } from "@chakra-ui/react"
+import { checkboxSlotRecipe } from "./checkbox.recipe"
+
+export const Checkbox = (props) => {
+  const { size, ...restProps } = props
+
+  const recipe = useSlotRecipe({ recipe: checkboxSlotRecipe })
+  const styles = recipe({ size })
+
+  return (
+    <chakra.label css={styles.root}>
+      <chakra.input type="checkbox" css={styles.control} {...restProps} />
+      <chakra.span css={styles.label}>Checkbox Label</chakra.span>
+    </chakra.label>
+  )
+}
+```
+
+#### splitVariantProps
+
+Notice how the `size` prop was destructured from the props to be passed to the
+recipe. A smarter approach would be to automatically split the recipe props from
+the component props.
+
+To do that, use the `recipe.splitVariantProps` function to split the recipe
+props from the component props.
+
+```tsx title="checkbox.tsx" {8}
+"use client"
+
+import { chakra, useSlotRecipe } from "@chakra-ui/react"
+import { checkboxSlotRecipe } from "./checkbox.recipe"
+
+export const Checkbox = (props) => {
+  const recipe = useSlotRecipe({ recipe: checkboxSlotRecipe })
+  const [recipeProps, restProps] = recipe.splitVariantProps(props)
+  const styles = recipe(recipeProps)
+
+  //...
+}
+```
+
+#### TypeScript
+
+To infer the recipe variant prop types, use the `RecipeVariantProps` type
+helper.
+
+```tsx title="checkbox.tsx"
+import type { RecipeVariantProps } from "@chakra-ui/react"
+import { checkboxSlotRecipe } from "./checkbox.recipe"
+
+type CheckboxVariantProps = RecipeVariantProps<typeof checkboxSlotRecipe>
+
+export interface CheckboxProps extends React.PropsWithChildren<CheckboxVariantProps> {}
+```
+
+### Create compound components
+
+Pass the recipe to the `createSlotRecipeContext` function to create a slot
+recipe context.
+
+Then, use the `withProvider` and `withContext` functions to create the compound
+components that share the same context.
+
+You will need to manually type the generics for `withProvider` and
+`withContext`. This approach is designed to optimize TypeScript performance.
+Auto-inference, while convenient, would slow down TypeScript compilation due to
+the complexity of the types involved.
+
+```tsx title="checkbox.tsx"
+"use client"
+
+import { createSlotRecipeContext } from "@chakra-ui/react"
+import { checkboxSlotRecipe } from "./checkbox.recipe"
+
+const { withProvider, withContext } = createSlotRecipeContext({
+  recipe: checkboxSlotRecipe,
+})
+
+interface CheckboxRootProps extends HTMLChakraProps<
+  "label",
+  RecipeVariantProps<typeof checkboxSlotRecipe>
+> {}
+export const CheckboxRoot = withProvider<HTMLLabelElement, CheckboxRootProps>(
+  "label",
+  "root",
+)
+
+interface CheckboxControlProps extends HTMLChakraProps<"input"> {}
+export const CheckboxControl = withContext<
+  HTMLInputElement,
+  CheckboxControlProps
+>("input", "control")
+
+interface CheckboxLabelProps extends HTMLChakraProps<"span"> {}
+export const CheckboxLabel = withContext<HTMLSpanElement, CheckboxLabelProps>(
+  "span",
+  "label",
+)
+```
+
+Pass the variant props to the "root" component that to apply the styles.
+
+> **Note:** The root component is the one that used the `withProvider` function.
+
+```tsx title="app.tsx"
+const App = () => {
+  return (
+    <CheckboxRoot size="md">
+      <CheckboxControl />
+      <CheckboxLabel />
+    </CheckboxRoot>
+  )
+}
+```
+
+#### unstyled prop
+
+This approach supports the use of the `unstyled` prop to remove the styles
+applied by the recipe.
+
+```tsx title="checkbox.tsx" /unstyled/
+<CheckboxRoot unstyled>
+  <CheckboxControl />
+  <CheckboxLabel />
+</CheckboxRoot>
+```
+
+#### TypeScript
+
+To infer the recipe variant prop types, use the `RecipeVariantProps` type
+helper.
+
+```ts
+import type { RecipeVariantProps, UnstyledProp } from "@chakra-ui/react"
+import { checkboxSlotRecipe } from "./checkbox.recipe"
+
+type CheckboxVariantProps = RecipeVariantProps<typeof checkboxSlotRecipe>
+
+export interface CheckboxProps
+  extends React.PropsWithChildren<CheckboxVariantProps>, UnstyledProp {}
+```
+
+## Compound Variants
+
+Use the `compoundVariants` property to define a set of variants that are applied
+based on a combination of other variants.
+
+```tsx title="checkbox.recipe.ts" /compoundVariants/
+import { defineSlotRecipe } from "@chakra-ui/react"
+
+export const checkboxRecipe = defineSlotRecipe({
+  slots: ["root", "control", "label"],
+  base: {},
+  variants: {
+    size: {
+      sm: {},
+      md: {},
+    },
+    visual: {
+      contained: {},
+      outline: {},
+    },
+  },
+  compoundVariants: [
+    {
+      size: "sm",
+      visual: "outline",
+      css: {
+        control: { borderWidth: "1px" },
+        label: { color: "green.500" },
+      },
+    },
+  ],
+})
+```
+
+## Targeting a slot
+
+In some cases, targeting a slot by className might be needed.
+
+- Set the `className` property in the config
+- The naming convention is `${className}__${slot}`
+
+```tsx title="checkbox.recipe.ts" /& .checkbox__label/
+import { defineSlotRecipe } from "@chakra-ui/react"
+
+export const checkboxRecipe = defineSlotRecipe({
+  className: "checkbox",
+  slots: ["root", "control", "label"],
+  base: {
+    root: {
+      bg: "blue.500",
+      _hover: {
+        "& .checkbox__label": { color: "white" },
+      },
+    },
+  },
+})
+```
+
+## Theme Usage
+
+To use the recipe in a reusable manner, move it to the system theme and add it
+to `theme.slotRecipes` property.
+
+> No need to add the `"use client"` directive when using the recipe in the
+> theme.
+
+```tsx title="theme.ts"
+import { createSystem, defaultConfig, defineConfig } from "@chakra-ui/react"
+import { checkboxSlotRecipe } from "./checkbox.recipe"
+
+const config = defineConfig({
+  theme: {
+    slotRecipes: {
+      checkbox: checkboxSlotRecipe,
+    },
+  },
+})
+
+export default createSystem(defaultConfig, config)
+```
+
+### TypeScript
+
+Use the CLI to generate types for the recipe, then import them in your
+component. See the [CLI docs](/docs/get-started/cli#chakra-typegen) for how to
+run `typegen` in postinstall, CI, and monorepos.
+
+```bash
+npx @chakra-ui/cli typegen ./theme.ts
+```
+
+Then, import the generated types in your component.
+
+```tsx title="checkbox.tsx"
+import type { SlotRecipeProps, UnstyledProp } from "@chakra-ui/react"
+
+export interface CheckboxProps
+  extends SlotRecipeProps<"checkbox">, UnstyledProp {}
+```
+
+### Update code
+
+If you use the recipe directly in your component, update the `useRecipe` to use
+the `key` property to get the recipe from the theme.
+
+```diff title="checkbox.tsx"
+const Checkbox = () => {
+-  const recipe = useRecipe({ recipe: checkboxRecipe })
++  const recipe = useRecipe({ key: "checkbox" })
+  // ...
+}
+```
+
+If you create a compound component, update the `createSlotRecipeContext` to use
+the `key` property.
+
+```diff title="checkbox.tsx"
+const { withProvider, withContext } = createSlotRecipeContext({
+-  recipe: checkboxRecipe,
++  key: "checkbox",
+})
+```
+
+# Spacing
+
+## Tokens
+
+Chakra UI supports the following spacing tokens out of the box.
+
+| Spacing Token | Value      | Example               |
+| ------------- | ---------- | --------------------- |
+| `0.5`         | `0.125rem` |  |
+| `1`           | `0.25rem`  |    |
+| `1.5`         | `0.375rem` |  |
+| `2`           | `0.5rem`   |    |
+| `2.5`         | `0.625rem` |  |
+| `3`           | `0.75rem`  |    |
+| `3.5`         | `0.875rem` |  |
+| `4`           | `1rem`     |    |
+| `4.5`         | `1.125rem` |  |
+| `5`           | `1.25rem`  |    |
+| `6`           | `1.5rem`   |    |
+| `7`           | `1.75rem`  |    |
+| `8`           | `2rem`     |    |
+| `9`           | `2.25rem`  |    |
+| `10`          | `2.5rem`   |   |
+| `11`          | `2.75rem`  |   |
+| `12`          | `3rem`     |   |
+| `14`          | `3.5rem`   |   |
+| `16`          | `4rem`     |   |
+| `20`          | `5rem`     |   |
+| `24`          | `6rem`     |   |
+| `28`          | `7rem`     |   |
+| `32`          | `8rem`     |   |
+| `36`          | `9rem`     |   |
+| `40`          | `10rem`    |   |
+| `44`          | `11rem`    |   |
+| `48`          | `12rem`    |   |
+| `52`          | `13rem`    |   |
+| `56`          | `14rem`    |   |
+| `60`          | `15rem`    |   |
+| `64`          | `16rem`    |   |
+| `72`          | `18rem`    |   |
+| `80`          | `20rem`    |   |
+| `96`          | `24rem`    |   |
+
+# Text Styles
+
+Chakra UI provides these text styles out of the box.

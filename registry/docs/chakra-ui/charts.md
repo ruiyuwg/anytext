@@ -1,0 +1,151 @@
+# Charts
+
+<Iframe
+  title="Chakra UI Charts Dashboard"
+  src="https://www.youtube.com/embed/GYgqlv6DBs8?si=hBuIjDffeXUzZ1Qj?rel=0&modestbranding=1&showinfo=0"
+  allowFullScreen
+/>
+
+Charts are designed to look great out of the box, seamlessly integrating with
+other Chakra UI's theming system. The charts are built on top of
+[recharts](https://recharts.org)
+
+## Installation
+
+Run the following command to install the charts and its peer dependencies.
+
+```bash
+npm i @chakra-ui/charts recharts
+```
+
+## Usage
+
+### Import the charts component
+
+In most cases, you need to import the `Chart` and `useChart` hook from the
+`@chakra-ui/charts` package, then combine them with the components `recharts`
+
+```tsx
+import { Chart, useChart } from "@chakra-ui/charts"
+import { Bar, BarChart, XAxis, YAxis } from "recharts"
+```
+
+### Define chart data
+
+Pass the chart data to the `useChart` hook to create a chart instance.
+
+> Learn more about the [`useChart`](/docs/charts/use-chart) hook.
+
+```tsx
+const chart = useChart({
+  data: [
+    { month: "January", value: 100 },
+    { month: "February", value: 200 },
+  ],
+})
+```
+
+### Render the chart
+
+Depending on the chart type you need from the `recharts` library, wrap the chart
+component within the `Chart.Root` component.
+
+```tsx
+<Chart.Root chart={chart}>
+  <BarChart data={chart.data}>
+    {chart.series.map((item) => (
+      <Bar
+        key={item.name}
+        dataKey={chart.key(item.name)}
+        fill={chart.color(item.color)}
+      />
+    ))}
+  </BarChart>
+</Chart.Root>
+```
+
+## Customization
+
+The charts component is built on top of [Recharts](https://recharts.org), so you
+can use all the customization options that Recharts provides.
+
+### Colors
+
+The `useChart` hook provides a `color` function that you can use to query
+semantic colors for the chart component from `recharts`.
+
+```tsx
+<CartesianGrid stroke={chart.color("border.muted")} />
+```
+
+### Formatters
+
+The `useChart` hook provides a `formatDate` and `formatNumber` function that you
+can use to format the date and number respectively. This is useful for
+formatting the x, y axis labels and tooltips.
+
+```tsx
+// format the x-axis labels
+<XAxis tickFormatter={chart.formatDate({ month: "short", day: "2-digit" })} />
+
+// format the y-axis labels
+<YAxis tickFormatter={chart.formatNumber({ maximumFractionDigits: 1 })} />
+```
+
+## FAQ
+
+### "lanes" is read-only error with React 19
+
+This error occurs when using recharts 3.6+ with React 19 due to a bug in
+[immer](https://github.com/immerjs/immer) 11.0.0, which recharts uses via Redux.
+The fix is to ensure immer is resolved to version 11.0.1 or above.
+
+Add an override to your `package.json`:
+
+```json [pnpm]
+{
+  "pnpm": {
+    "overrides": {
+      "immer": ">=11.0.1"
+    }
+  }
+}
+```
+
+```json [npm]
+{
+  "overrides": {
+    "immer": ">=11.0.1"
+  }
+}
+```
+
+```json [yarn]
+{
+  "resolutions": {
+    "immer": ">=11.0.1"
+  }
+}
+```
+
+Then run your package manager's install command to apply the change.
+
+### ResponsiveContainer vs responsive prop
+
+Use the `responsive` prop on the chart component instead of wrapping it in
+`ResponsiveContainer`. The `responsive` prop (available in recharts 3.3+) is the
+recommended approach and avoids React 19 compatibility issues that
+`ResponsiveContainer` can trigger due to its resize-based state updates.
+
+```tsx
+<Chart.Root chart={chart}>
+  <BarChart data={chart.data} responsive>
+    {/* ... */}
+  </BarChart>
+</Chart.Root>
+```
+
+# Legend
+
+The charts component is built on top of [Recharts](https://recharts.org), so you
+can use all the customization options that Recharts provides.

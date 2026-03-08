@@ -1,0 +1,94 @@
+# Global CSS
+
+Please read the [overview](/docs/theming/customization/overview) first to learn
+how to properly customize the styling engine, and get type safety.
+
+## Customize
+
+### Add global styles
+
+Here's an example of how to customize the global CSS in Chakra UI.
+
+```tsx title="theme.ts"
+import { createSystem, defaultConfig, defineConfig } from "@chakra-ui/react"
+
+const customConfig = defineConfig({
+  globalCss: {
+    "*::placeholder": {
+      opacity: 1,
+      color: "fg.subtle",
+    },
+    "*::selection": {
+      bg: "green.200",
+    },
+  },
+})
+
+export const system = createSystem(defaultConfig, customConfig)
+```
+
+### Change global font family
+
+To change the font family globally, set it on the `html` element in globalCss:
+
+```tsx title="theme.ts"
+const customConfig = defineConfig({
+  globalCss: {
+    html: {
+      fontFamily: "Roboto, sans-serif",
+    },
+  },
+})
+```
+
+Alternatively, define custom font tokens:
+
+```tsx title="theme.ts"
+const customConfig = defineConfig({
+  theme: {
+    tokens: {
+      fonts: {
+        body: { value: "Roboto, sans-serif" },
+        heading: { value: "Poppins, sans-serif" },
+        mono: { value: "Fira Code, monospace" },
+      },
+    },
+  },
+})
+```
+
+### Remove global CSS
+
+If you don't need global CSS, you can remove it by destructuring the `globalCss`
+property from the default config.
+
+```tsx title="theme.ts"
+import { createSystem, defaultConfig } from "@chakra-ui/react"
+
+const { globalCss: _, ...restConfig } = defaultConfig
+export const system = createSystem(restConfig)
+```
+
+## Update provider
+
+After customizing the global CSS, make sure to update your provider component to
+use the new system.
+
+```tsx title="components/ui/provider.tsx" /value={system}/
+"use client"
+
+import { system } from "@/components/theme"
+import {
+  ColorModeProvider,
+  type ColorModeProviderProps,
+} from "@/components/ui/color-mode"
+import { ChakraProvider } from "@chakra-ui/react"
+
+export function Provider(props: ColorModeProviderProps) {
+  return (
+    <ChakraProvider value={system}>
+      <ColorModeProvider {...props} />
+    </ChakraProvider>
+  )
+}
+```

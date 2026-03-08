@@ -1,0 +1,187 @@
+# Using Chakra in Remix
+
+## Templates
+
+Use the remix template below to get started quickly.
+
+<ResourceCard
+type="github"
+title="Remix template"
+url="https://github.com/chakra-ui/chakra-ui/tree/main/sandbox/remix-ts"
+/>
+
+## Installation
+
+### Install dependencies
+
+```bash
+npm i @chakra-ui/react @emotion/react
+```
+
+### Add snippets
+
+Snippets are pre-built components that you can use to build your UI faster.
+Using the `@chakra-ui/cli` you can add snippets to your project.
+
+```bash
+npx @chakra-ui/cli snippet add
+```
+
+### Setup emotion cache
+
+Using snippets from the Remix sandbox, you can add the emotion cache to your
+application.
+
+[Emotion cache snippet](https://github.com/chakra-ui/chakra-ui/blob/main/sandbox/remix-ts/app/emotion)
+
+### Update tsconfig
+
+If you're using TypeScript, you need to update the `compilerOptions` in the
+tsconfig file to include the following options:
+
+```json title="tsconfig.json"
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "skipLibCheck": true
+  }
+}
+```
+
+> If you're using JavaScript, create a `jsconfig.json` file and add the above
+> code to the file.
+
+### Setup provider
+
+Wrap your application with the `Provider` component at the root of your
+application.
+
+This provider composes the following:
+
+- `ChakraProvider` from `@chakra-ui/react` for the styling system
+- `ThemeProvider` from `next-themes` for color mode
+
+```tsx title="app/root.tsx"
+import React from "react"
+import ReactDOM from "react-dom/client"
+import App from "./App"
+import { Provider } from "@/components/ui/provider"
+
+export default function App() {
+  return (
+    <Provider>
+      <Outlet />
+    </Provider>
+  )
+}
+```
+
+### Enjoy!
+
+When the power of the snippets and the primitive components from Chakra UI, you
+can build your UI faster.
+
+```tsx
+import { Button, HStack } from "@chakra-ui/react"
+
+const Demo = () => {
+  return (
+    <HStack>
+      <Button>Click me</Button>
+      <Button>Click me</Button>
+    </HStack>
+  )
+}
+```
+
+## Known issues
+
+You may encounter the following issues when using Chakra UI with Remix:
+
+```bash
+Error: There was an error while hydrating. Because the error happened outside of a Suspense boundary, the entire root will switch to client rendering.
+```
+
+This is a known issue related to extension installed in your browser. We
+recommend testing your application in incognito mode to see if the issue
+persists.
+
+> We welcome contributions to fix this issue.
+
+# Using Chakra UI in Storybook
+
+## Installation
+
+### Install dependencies
+
+Install the required dependencies for Chakra UI and Storybook.
+
+```bash
+npm i @storybook/addon-themes @chakra-ui/react @emotion/react
+```
+
+### Setup Preview
+
+Edit the `.storybook/preview.tsx` file to include the Chakra UI provider.
+
+```tsx
+import { ChakraProvider, defaultSystem } from "@chakra-ui/react"
+import type { Preview } from "@storybook/react"
+
+const preview: Preview = {
+  // ...
+  decorators: [
+    (Story) => (
+      <ChakraProvider value={defaultSystem}>
+        <Story />
+      </ChakraProvider>
+    ),
+  ],
+}
+
+export default preview
+```
+
+### Setup dark mode toggle
+
+Use the `withThemeByClassName` decorator from `@storybook/addon-themes` to add a
+color mode toggle to the Storybook toolbar.
+
+```tsx
+import { withThemeByClassName } from "@storybook/addon-themes"
+import type { Preview, ReactRenderer } from "@storybook/react"
+
+const preview: Preview = {
+  decorators: [
+    // ...
+    withThemeByClassName({
+      defaultTheme: "light",
+      themes: { light: "", dark: "dark" },
+    }),
+  ],
+}
+
+export default preview
+```
+
+### Start the Storybook server
+
+```bash
+npm run storybook
+```
+
+### Enjoy!
+
+Use Chakra UI components in your stories.
+
+```tsx
+import { Button } from "@chakra-ui/react"
+
+export const SampleStory = {
+  render() {
+    return <Button>Click me</Button>
+  },
+}
+```

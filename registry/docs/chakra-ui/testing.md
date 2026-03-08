@@ -1,0 +1,183 @@
+# Testing
+
+When writing tests with Vitest or Jest, use the following practices to get the
+best results.
+
+In general, we recommend using [Vitest](https://vitest.dev/) over
+[Jest](https://jestjs.io/) but the setup are similar.
+
+## Setup
+
+Before writing tests, ensure your project has the necessary dependencies:
+
+```sh
+npm install --save-dev vitest jsdom @testing-library/dom @testing-library/jest-dom @testing-library/react @testing-library/user-event
+```
+
+## Configuration
+
+Create the `vite.config.ts` file to configure Vitest.
+
+```ts
+import { defineConfig } from "vitest/config"
+
+export default defineConfig({
+  // ...
+  test: {
+    globals: true,
+    environment: "jsdom",
+    setupFiles: "./setup-test.ts",
+  },
+})
+```
+
+Setting `globals: true` will automatically import the Vitest globals and removes
+the need to import `expect`, `test`, `describe`, etc.
+
+## Setup Test File
+
+Create the `setup-test.ts` file to configure the testing environment and mock
+unimplemented APIs.
+
+Here's a common example for Chakra v3 projects:
+
+```ts
+import "@testing-library/jest-dom/vitest"
+import { JSDOM } from "jsdom"
+import ResizeObserver from "resize-observer-polyfill"
+import { vi } from "vitest"
+import "vitest-axe/extend-expect"
+
+const { window } = new JSDOM()
+
+// ResizeObserver mock
+vi.stubGlobal("ResizeObserver", ResizeObserver)
+window["ResizeObserver"] = ResizeObserver
+
+// matchMedia mock
+Object.defineProperty(window, "matchMedia", {
+  writable: true,
+  value: vi.fn().mockImplementation((query) => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: vi.fn(), // deprecated
+    removeListener: vi.fn(), // deprecated
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+    dispatchEvent: vi.fn(),
+  })),
+});
+
+// IntersectionObserver mock
+const IntersectionObserverMock = vi.fn(() => ({
+  disconnect: vi.fn(),
+  observe: vi.fn(),
+  takeRecords: vi.fn(),
+  unobserve: vi.fn(),
+}))
+vi.stubGlobal("IntersectionObserver", IntersectionObserverMock)
+window["IntersectionObserver"] = IntersectionObserverMock
+
+// Scroll Methods mock
+window.Element.prototype.scrollTo = () => {}
+window.Element.prototype.scrollIntoView = () => {}
+
+// requestAnimationFrame mock
+window.requestAnimationFrame = (cb) => setTimeout(cb, 1000 / 60)
+
+// URL object mock
+window.URL.createObjectURL = () => "https://i.pravatar.cc/300"
+window.URL.revokeObjectURL = () => {}
+
+// navigator mock
+Object.defineProperty(window, "navigator", {
+  value: {
+    clipboard: {
+      writeText: vi.fn(),
+    },
+  },
+})
+
+// Override globalThis
+Object.assign(global, { window, document: window.document })
+```
+
+## Custom Render
+
+First, you need to create a custom render function to wrap your component in the
+ChakraProvider.
+
+```tsx title="test-utils/render.tsx"
+// ./testing/render.tsx
+import { Provider } from "@/components/ui/provider"
+import { render as rtlRender } from "@testing-library/react"
+
+export function render(ui: React.ReactNode) {
+  return rtlRender(<>{ui}</>, {
+    wrapper: (props: React.PropsWithChildren) => (
+      <Provider>{props.children}</Provider>
+    ),
+  })
+}
+```
+
+## Testing Components
+
+Now, you can use the `render` function to test your components.
+
+```tsx title="testing/render.tsx"
+import { Button } from "@chakra-ui/react"
+import { render } from "./testing/render"
+
+test("renders a button", () => {
+  render(<Button>Click me</Button>)
+  expect(screen.getByText("Click me")).toBeInTheDocument()
+})
+```
+
+# LLMs.txt Documentation
+
+We support [LLMs.txt](https://llmstxt.org/) files for making the Chakra UI v3
+documentation available to large language models.
+
+## Directory Overview
+
+The following files are available.
+
+- [/llms.txt](https://chakra-ui.com/llms.txt): The main LLMs.txt file
+- [/llms-full.txt](https://chakra-ui.com/llms-full.txt): The complete
+  documentation for Chakra UI v3
+
+***
+
+Separate docs are available if you have a limited context window.
+
+- [/llms-components.txt](https://chakra-ui.com/llms-components.txt): Only
+  component documentation
+- [/llms-styling.txt](https://chakra-ui.com/llms-styling.txt): Only styling
+  documentation
+- [/llms-theming.txt](https://chakra-ui.com/llms-theming.txt): Only theming
+  documentation
+
+***
+
+We also have a special `llms-v3-migration.txt` file that contains documentation
+for migrating to Chakra UI v3.
+
+- [/llms-v3-migration.txt](https://chakra-ui.com/llms-v3-migration.txt):
+  Documentation for migrating to Chakra UI v3
+
+## Usage
+
+### Cursor
+
+Use `@Docs` feature in Cursor to include the LLMs.txt files in your project.
+
+[Read more](https://docs.cursor.com/context/@-symbols/@-docs)
+
+### Windstatic
+
+Reference the LLMs.txt files using `@` or in your `.windsurfrules` files.
+
+[Read more](https://docs.codeium.com/windsurf/memories#memories-and-rules)

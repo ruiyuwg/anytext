@@ -1,0 +1,261 @@
+# CLI
+
+The Chakra UI CLI can be used to generate typings for your custom theme tokens,
+like colors, semantic tokens, recipe variants, etc. You can also add community
+snippets and premium Pro blocks to your project.
+
+## Installation
+
+In order to use the CLI, you need to install it as a dev dependency in your
+project:
+
+```bash [npm]
+npm i -D @chakra-ui/cli
+```
+
+```bash [pnpm]
+pnpm add -D @chakra-ui/cli
+```
+
+```bash [bun]
+bun add -d @chakra-ui/cli
+```
+
+To use the CLI tool, please ensure that the version of Node.js is `>= 20.6.0`.
+
+## Usage
+
+Use the Chakra CLI to run any of the commands listed below with your preferred
+package manager.
+
+```bash
+Usage: npx chakra [options] [command]
+
+The official CLI for Chakra UI projects
+
+Options:
+  -V, --version               output the version number
+  -h, --help                  display help for command
+
+Commands:
+  typegen [options] <source>  Generate theme and recipe typings
+  snippet                     Add snippets to your project for better DX
+  blocks                      Add Chakra UI Pro blocks to your project
+  eject [options]             Take control over the default theme tokens and recipes
+  help [command]              display help for command
+```
+
+## `chakra typegen`
+
+Generates theme and recipe typings for your custom theme. This helps to provide
+autocompletion and type safety in your project.
+
+```bash
+# Generate typings
+chakra typegen src/theme.ts
+
+# Watch for changes and rebuild
+chakra typegen src/theme.ts --watch
+
+# Generate strict types for props variant and size
+chakra typegen src/theme.ts --strict
+```
+
+### When to run typegen
+
+The `typegen` command works in both **development** and **CI/CD**. It is not
+limited to local use—run it everywhere your project is built or installed so
+generated types stay up to date.
+
+### Is typegen required?
+
+Run `typegen` if all of these are true:
+
+- You use TypeScript
+- You customize the Chakra system (tokens, semantic tokens, recipes, slot
+  recipes, etc.)
+- You want type-safe autocompletion and strict token validation
+
+If you're using JavaScript only, or TypeScript without custom Chakra theme
+types, `typegen` is optional.
+
+### Workflow integration
+
+Add `typegen` to the `postinstall` or `prepare` script of the frontend
+application that uses Chakra UI. This keeps types generated:
+
+- After `npm install` / `pnpm install` / `bun install` (local development)
+- During CI/CD when dependencies are installed before build
+- In production builds when running `npm ci` or similar
+
+```json
+{
+  "scripts": {
+    "postinstall": "chakra typegen src/theme.ts",
+    "prepare": "chakra typegen src/theme.ts"
+  }
+}
+```
+
+Use `postinstall` if you want types after every install. Use `prepare` if you
+also want it to run when the package is packed (for publishing). Pick one to
+avoid running `typegen` twice.
+
+### CI/CD strategy
+
+Run `typegen` before type-checking and build steps in CI.
+
+```json
+{
+  "scripts": {
+    "typegen": "chakra typegen src/theme.ts",
+    "typecheck": "npm run typegen && tsc --noEmit",
+    "build": "npm run typegen && your-build-command"
+  }
+}
+```
+
+This prevents CI failures caused by stale or missing Chakra types.
+
+### Monorepo setup
+
+In a monorepo (e.g. pnpm workspaces), run `typegen` **in the package that
+depends on Chakra UI**—typically your frontend application—not at the monorepo
+root.
+
+1. Install `@chakra-ui/cli` as a dev dependency in the frontend package.
+2. Add the `postinstall` or `prepare` script to that package's `package.json`.
+
+```json
+// packages/frontend/package.json
+{
+  "scripts": {
+    "postinstall": "chakra typegen src/theme.ts"
+  },
+  "dependencies": {
+    "@chakra-ui/react": "..."
+  },
+  "devDependencies": {
+    "@chakra-ui/cli": "..."
+  }
+}
+```
+
+When you run `pnpm install` at the root, that frontend package's `postinstall`
+runs and generates types in the right place.
+
+### Should generated types be committed?
+
+By default, no. The CLI writes generated files to Chakra's installed package
+types directory (`node_modules/@chakra-ui/react/types/styled-system/generated`),
+which should not be committed.
+
+If you use a custom `--outdir` inside your repository, follow your team's
+codegen policy. In most cases, regenerating in CI is better than committing
+generated files.
+
+## `chakra snippet`
+
+Generates useful component compositions that boost your development speed.
+
+```bash
+# Add all snippets
+chakra snippet add --all
+
+# Add a specific snippet
+chakra snippet add button
+
+# List all available snippets
+chakra snippet list
+
+# Specify a custom directory
+chakra snippet add dialog --outdir ./components/custom
+```
+
+## `chakra blocks`
+
+Add premium blocks from Chakra UI Pro to your project. These are professionally
+designed, fully responsive components that you can customize for your needs.
+
+```bash
+# Interactive block selection
+chakra blocks add
+
+# Add all variants of a specific block
+chakra blocks add hero
+
+# Add a specific variant of a block
+chakra blocks add hero --variant "simple"
+
+# List available blocks
+chakra blocks list
+
+# List blocks in a specific category
+chakra blocks list --category "marketing"
+
+# Preview blocks without downloading
+chakra blocks add --dry-run --category "marketing"
+
+# Specify output directory
+chakra blocks add --outdir ./components/blocks
+```
+
+### Pro API Key Setup
+
+To use Pro blocks, you need a Chakra UI Pro subscription and API key:
+
+1. Get your API key from [Chakra UI Pro](https://pro.chakra-ui.com)
+
+2. Set the environment variable:
+
+   ```bash
+   export CHAKRA_UI_PRO_API_KEY="your-api-key"
+   ```
+
+   Or create a `.env` file in your project root:
+
+   ```env
+   CHAKRA_UI_PRO_API_KEY=your-api-key
+   ```
+
+3. Add it to your shell profile (`.bashrc`, `.zshrc`, etc.) for persistence if
+   using environment variables
+
+### Available Options
+
+- `--variant <variant>`: Add a specific variant instead of all variants
+- `--outdir <dir>`: Specify output directory for blocks
+- `--force`: Overwrite existing files
+- `--dry-run`: Preview what will be downloaded without writing files
+- `--tsx`: Force TypeScript JSX format (auto-detected by default)
+
+## `chakra eject`
+
+Generates the file(s) that contain the default theme tokens and recipes so you
+can have full control over them.
+
+```bash
+# Copy the tokens and recipes to your project
+chakra eject --outdir src/theme
+```
+
+## FAQ
+
+### Is typegen only for local development?
+
+No. The `typegen` command works in both development and CI/CD. Add it to
+`postinstall` or `prepare` so it runs after installs—locally and in your CI
+pipeline.
+
+### Does strictTokens require typegen?
+
+Yes. If you enable `strictTokens`, run `typegen` in local and CI workflows so
+token types stay in sync with your theme.
+
+### Autocomplete for custom tokens not working?
+
+After generating the typings, you need to "Restart TS Server" for the
+autocomplete to show up.
+
+Alternatively, you can install the `@chakra-ui/cli` package locally as a dev
+dependency and run the `chakra typegen` command to generate the typings.
