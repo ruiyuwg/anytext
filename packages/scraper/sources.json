@@ -306,6 +306,14 @@
       "url": "https://resend.com/docs/llms-full.txt"
     },
     {
+      "id": "mantine",
+      "name": "Mantine",
+      "description": "Full-featured React component library with hooks, theming, and 100+ customizable components",
+      "version": "7",
+      "adapter": "llms-full",
+      "url": "https://mantine.dev/llms-full.txt"
+    },
+    {
       "id": "azure",
       "name": "Azure",
       "description": "Microsoft Azure cloud platform with compute, storage, databases, AI, and 200+ services",

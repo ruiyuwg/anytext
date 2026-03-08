@@ -1,0 +1,318 @@
+# Usage with TypeScript
+
+All `@mantine/*` packages are fully compatible with TypeScript. All examples in the documentation
+are written in TypeScript – you can copy-paste them to your project without any changes.
+
+This guide will help you get familiar with types that `@mantine/core` package exports.
+
+## Components props types
+
+Each `@mantine/` package that exports components, exports props types for these components as well.
+You can import component props types by adding `Props` to the component name,
+for example, you can import Button and DatePicker components props like so:
+
+```tsx
+import type { ButtonProps } from '@mantine/core';
+import type { DatePickerProps } from '@mantine/dates';
+```
+
+Note that there are two variations of props types: for polymorphic components and for regular components.
+Regular components props types include `React.ComponentPropsWithoutRef<'X'>`, where `X` is the root element
+type, for example `'div'`.
+
+Example of extending regular component props:
+
+```tsx
+import { Group, GroupProps } from '@mantine/core';
+
+// Interface includes `React.ComponentPropsWithoutRef<'div'>`
+interface MyGroupProps extends GroupProps {
+  spacing: number;
+}
+
+function MyGroup({ spacing, ...others }: MyGroupProps) {
+  return <Group my={spacing} {...others} />;
+}
+```
+
+[Polymorphic components](https://mantine.dev/guides/polymorphic) props types do not include `React.ComponentPropsWithoutRef<'X'>`
+because their root element depends on the `component` prop value.
+
+Example of extending [polymorphic components](https://mantine.dev/guides/polymorphic) props:
+
+```tsx
+import { Button, ButtonProps, ElementProps } from '@mantine/core';
+
+interface MyButtonProps
+  extends ButtonProps,
+    ElementProps<'button', keyof ButtonProps> {
+  height: number;
+}
+
+function MyButton({ height, ...others }: MyButtonProps) {
+  return <Button style={{ height }} {...others} />;
+}
+```
+
+## ElementProps type
+
+`ElementProps` is a utility type similar to `React.ComponentPropsWithoutRef`, but with additional
+features. It replaces native elements `style` prop with Mantine [style prop](https://mantine.dev/styles/style) and
+allows omitting properties that are passed as a second type.
+
+```tsx
+import { ButtonProps, ElementProps } from '@mantine/core';
+
+// Equivalent of `React.ComponentPropsWithoutRef<'button'>`
+type ButtonElementProps = ElementProps<'button'>;
+
+// Equivalent of `Omit<React.ComponentPropsWithoutRef<'button'>, 'color' | 'onClick'>`
+type OmitColor = ElementProps<'button', 'color' | 'onClick'>;
+
+// Removes all Mantine component props from React component props
+// to avoid props types conflicts
+// Equivalent of `Omit<React.ComponentPropsWithoutRef<'button'>, keyof ButtonProps>`
+type OmitButtonProps = ElementProps<'button', keyof ButtonProps>;
+```
+
+## MantineTheme type
+
+`MantineTheme` is a type of [theme object](https://mantine.dev/theming/theme-object). You can use it to add types
+to functions that accept theme object as an argument:
+
+```tsx
+import { MantineTheme, useMantineTheme } from '@mantine/core';
+
+function getPrimaryColor(theme: MantineTheme) {
+  return theme.colors.blue[5];
+}
+
+function Demo() {
+  const theme = useMantineTheme();
+  return <div style={{ color: getPrimaryColor(theme) }} />;
+}
+```
+
+## MantineThemeOverride type
+
+`MantineThemeOverride` type is a deep partial of `MantineTheme`. It can be used in functions
+that accept theme override as an argument:
+
+```tsx
+import {
+  createTheme,
+  MantineThemeOverride,
+  mergeThemeOverrides,
+} from '@mantine/core';
+
+const baseTheme = createTheme({
+  fontFamily: 'Helvetica, sans-serif',
+});
+
+function mergeThemes(themes: MantineThemeOverride[]) {
+  return mergeThemeOverrides(baseTheme, ...themes);
+}
+
+const overrideTheme = createTheme({
+  primaryColor: 'blue',
+});
+
+const overrideTheme2 = createTheme({
+  cursorType: 'pointer',
+});
+
+const mergedTheme = mergeThemes([overrideTheme, overrideTheme2]);
+```
+
+## MantineColorScheme type
+
+`MantineColorScheme` is a union of `'light' | 'dark' | 'auto'` values. You can use to add types
+to function that accept color scheme as an argument:
+
+```tsx
+import {
+  MantineColorScheme,
+  useMantineColorScheme,
+} from '@mantine/core';
+
+function getComputedColorScheme(colorScheme: MantineColorScheme) {
+  return colorScheme === 'auto' ? 'light' : colorScheme;
+}
+
+function Demo() {
+  const { colorScheme } = useMantineColorScheme();
+  const computed = getComputedColorScheme(colorScheme);
+}
+```
+
+## MantineSize type
+
+`MantineSize` type is a union of `'xs' | 'sm' | 'md' | 'lg' | 'xl'` values. You can use to add types
+to various props that accept size as an argument, for example, `radius`, `shadow`, `p`.
+
+```tsx
+import { MantineSize, Paper } from '@mantine/core';
+
+interface DemoProps {
+  size: MantineSize;
+  radius: MantineSize | (string & {}) | number;
+  shadow: MantineSize | string;
+}
+
+function Demo({ size, radius, shadow }: DemoProps) {
+  return <Paper radius={radius} shadow={shadow} p={size} m={size} />;
+}
+```
+
+## Theme object declarations
+
+You can change `theme.other` and `theme.colors` types by extending `MantineTheme` interface
+in `.d.ts` file. Create `mantine.d.ts` anywhere in your project (must be included in `tsconfig.json`)
+to extend theme object types.
+
+To override `theme.other`:
+
+```tsx
+// mantine.d.ts
+declare module '@mantine/core' {
+  export interface MantineThemeOther {
+    myCustomProperty: string;
+    myCustomFunction: () => void;
+  }
+}
+```
+
+To override `theme.colors`:
+
+```tsx
+import {
+  DefaultMantineColor,
+  MantineColorsTuple,
+} from '@mantine/core';
+
+type ExtendedCustomColors =
+  | 'primaryColorName'
+  | 'secondaryColorName'
+  | DefaultMantineColor;
+
+declare module '@mantine/core' {
+  export interface MantineThemeColorsOverride {
+    colors: Record<ExtendedCustomColors, MantineColorsTuple>;
+  }
+}
+```
+
+You can also customize size related types for `theme.spacing`, `theme.radius`,
+`theme.breakpoints`, `theme.fontSizes`, `theme.lineHeights`, and `theme.shadows` similarly.
+
+To override `theme.spacing` and `theme.radius`
+
+```tsx
+import {
+  DefaultMantineSize,
+  MantineThemeSizesOverride,
+} from '@mantine/core';
+
+type ExtendedCustomSpacing =
+  | 'xxl'
+  | 'xxxs'
+  | DefaultMantineSize;
+
+type ExtendedCustomRadius =
+  | 'xxs'
+  | DefaultMantineSize;
+
+declare module '@mantine/core' {
+  export interface MantineThemeSizesOverride {
+    spacing: Record<ExtendedCustomSpacing, string>;
+    radius: Record<ExtendedCustomRadius, string>;
+  }
+}
+```
+
+Note that extending theme type is not required, it is only needed if you want to
+make your theme object types more strict and add autocomplete in your editor.
+
+## Custom variants types
+
+You can define types for custom [variants](https://mantine.dev/styles/variants-sizes) by
+extending `{x}Props` interface with the new variant type in your `mantine.d.ts` file.
+
+Example of adding custom variant type to [Button](https://mantine.dev/core/button) component:
+
+```tsx
+import { ButtonVariant, MantineSize } from '@mantine/core';
+
+type ExtendedButtonVariant = ButtonVariant | 'contrast' | 'radial-gradient';
+
+declare module '@mantine/core' {
+  export interface ButtonProps {
+    variant?: ExtendedButtonVariant;
+  }
+}
+```
+
+### Vite
+
+# Usage with Vite
+
+## Generate new application
+
+Follow [Vite getting started](https://vitejs.dev/guide/) guide to create new Vite application:
+
+## Installation
+
+## PostCSS setup
+
+Install PostCSS plugins and [postcss-preset-mantine](https://mantine.dev/styles/postcss-preset):
+
+```bash
+yarn add postcss postcss-preset-mantine postcss-simple-vars
+```
+
+```bash
+npm install postcss postcss-preset-mantine postcss-simple-vars
+```
+
+Create `postcss.config.cjs` file at the root of your application with the following content:
+
+```js
+module.exports = {
+  plugins: {
+    'postcss-preset-mantine': {},
+    'postcss-simple-vars': {
+      variables: {
+        'mantine-breakpoint-xs': '36em',
+        'mantine-breakpoint-sm': '48em',
+        'mantine-breakpoint-md': '62em',
+        'mantine-breakpoint-lg': '75em',
+        'mantine-breakpoint-xl': '88em',
+      },
+    },
+  },
+};
+```
+
+## Setup
+
+Add styles imports and [MantineProvider](https://mantine.dev/theming/mantine-provider/) to your application root component (usually `App.tsx`):
+
+```tsx
+// Import styles of packages that you've installed.
+// All packages except `@mantine/hooks` require styles imports
+import '@mantine/core/styles.css';
+
+import { MantineProvider } from '@mantine/core';
+
+export default function App() {
+  return <MantineProvider>{/* Your app here */}</MantineProvider>;
+}
+```
+
+All set! Start development server:
+
+```bash
+npm run dev
+```
+
+### Vitest

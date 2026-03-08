@@ -1,5 +1,5 @@
 {
-  "version": 51,
+  "version": 52,
   "updatedAt": "2026-03-08",
   "libraries": [
     {
@@ -41775,6 +41775,4215 @@
           ],
           "path": "langchain/versioning-2.md",
           "tokens": 1460
+        }
+      ]
+    },
+    {
+      "id": "mantine",
+      "name": "Mantine",
+      "description": "Full-featured React component library with hooks, theming, and 100+ customizable components",
+      "version": "7",
+      "topics": [
+        {
+          "id": "mantine-ui-library-complete-documentation",
+          "title": "Mantine UI Library - Complete Documentation",
+          "description": "This file contains comprehensive documentation for the Mantine UI library including:",
+          "tags": [
+            "chevron",
+            "chevronIconSize",
+            "chevron={null}",
+            "disableChevronRotation"
+          ],
+          "path": "mantine/mantine-ui-library-complete-documentation.md",
+          "tokens": 1007
+        },
+        {
+          "id": "custom-control-label",
+          "title": "Custom control label",
+          "description": "You can use any React node as a label for Accordion.Control component.\nWhen you use nested elements in Accordion.Cont...",
+          "tags": [
+            "Accordion.Control",
+            "aria-label",
+            "icon",
+            "transitionDuration",
+            "multiple={false}",
+            "defaultValue",
+            "multiple={true}",
+            "value"
+          ],
+          "path": "mantine/custom-control-label.md",
+          "tokens": 1456
+        },
+        {
+          "id": "compose-controls",
+          "title": "Compose controls",
+          "description": "Putting a button or a link inside Accordion.Control is a common mistake when\nusing Accordion. Accordion.Control root ...",
+          "tags": [
+            "Accordion.Control",
+            "button",
+            "position: absolute",
+            "disabled"
+          ],
+          "path": "mantine/compose-controls.md",
+          "tokens": 923
+        },
+        {
+          "id": "unstyled-accordion",
+          "title": "Unstyled Accordion",
+          "description": "Set the unstyled prop on the Accordion component to remove all non-essential\nlibrary styles. Use unstyled prop to sty...",
+          "tags": [
+            "unstyled",
+            "AccordionProps",
+            "@mantine/core",
+            "multiple"
+          ],
+          "path": "mantine/unstyled-accordion.md",
+          "tokens": 725
+        },
+        {
+          "id": "accessibility",
+          "title": "Accessibility",
+          "description": "Accordion component implement WAI-ARIA accessibility recommendations.",
+          "tags": [
+            "order",
+            "Accordion",
+            "h2",
+            "h6",
+            "h3",
+            "Accordion.Item",
+            "Accordion.Control",
+            "Accordion.Panel",
+            "children",
+            "width"
+          ],
+          "path": "mantine/accessibility.md",
+          "tokens": 2904
+        },
+        {
+          "id": "customize-variants-colors",
+          "title": "Customize variants colors",
+          "description": "You can customize colors for ActionIcon and other components variants by adding\nvariantColorResolver to your theme.",
+          "tags": [
+            "ActionIcon",
+            "--ai-size-{x}",
+            "root",
+            "ActionIcon.GroupSection",
+            "ActionIcon.Group"
+          ],
+          "path": "mantine/customize-variants-colors.md",
+          "tokens": 1825
+        },
+        {
+          "id": "mantine-ui-library-complete-documentation-accessibility",
+          "title": "Accessibility",
+          "description": "To make ActionIcon accessible for screen readers, you need to either set aria-label or\nuse VisuallyHidden component:",
+          "tags": [
+            "ActionIcon",
+            "aria-label",
+            "Loader",
+            "loading",
+            "background",
+            "border",
+            "color",
+            "border-radius",
+            "width",
+            "height"
+          ],
+          "path": "mantine/mantine-ui-library-complete-documentation-accessibility.md",
+          "tokens": 858
+        },
+        {
+          "id": "usage",
+          "title": "Usage",
+          "description": "Affix renders a div element with a fixed position inside the Portal component.\nUse it to display elements fixed at an...",
+          "tags": [
+            "Affix",
+            "z-index",
+            "top",
+            "bottom",
+            "left",
+            "right"
+          ],
+          "path": "mantine/usage.md",
+          "tokens": 816
+        },
+        {
+          "id": "accessibility-2",
+          "title": "Accessibility",
+          "description": "| Prop | Type | Default | Description |\n|------|------|---------|-------------|\n| autoContrast | boolean | - | If set...",
+          "tags": [
+            "alert",
+            "aria-describedby",
+            "aria-labelledby",
+            "title",
+            "closeButtonLabel",
+            "body",
+            "icon",
+            "message",
+            "label",
+            "border"
+          ],
+          "path": "mantine/accessibility-2.md",
+          "tokens": 2551
+        },
+        {
+          "id": "based-on-use-radial-move",
+          "title": "Based on use-radial-move",
+          "description": "AngleSlider is based on the use-radial-move hook.\nYou can build a custom radial slider using this hook if you need mo...",
+          "tags": [
+            "AngleSlider",
+            "AppShell",
+            "position: fixed",
+            "AppShell.Header",
+            "header",
+            "AppShell.Navbar",
+            "navbar",
+            "AppShell.Aside",
+            "aside",
+            "AppShell.Footer"
+          ],
+          "path": "mantine/based-on-use-radial-move.md",
+          "tokens": 4348
+        },
+        {
+          "id": "css-variables",
+          "title": "CSS variables",
+          "description": "Example of using CSS variables in styles:",
+          "tags": [
+            "AppShell",
+            "AppShell.Navbar",
+            "AppShell.Header",
+            "AppShell.Main",
+            "AppShell.Aside",
+            "AppShell.Footer",
+            "AppShell.Section",
+            "AspectRatio",
+            "width",
+            "flex"
+          ],
+          "path": "mantine/css-variables.md",
+          "tokens": 5787
+        },
+        {
+          "id": "accessibility-3",
+          "title": "Accessibility",
+          "description": "Autocomplete provides better accessibility support when used in forms. Make sure to associate the input with a label ...",
+          "tags": [
+            "name",
+            "name=\"John Doe\"",
+            "color=\"initials\"",
+            "allowedInitialsColors",
+            "Avatar",
+            "Avatar.Group"
+          ],
+          "path": "mantine/accessibility-3.md",
+          "tokens": 3072
+        },
+        {
+          "id": "accessibility-4",
+          "title": "Accessibility",
+          "description": "Avatar renders <img /> HTML element. Set alt prop to describe image,\nit is also used as title attribute for avatar pl...",
+          "tags": [
+            "<img />",
+            "alt",
+            "title",
+            "img",
+            "border",
+            "background",
+            "color",
+            "width",
+            "min-width",
+            "height"
+          ],
+          "path": "mantine/accessibility-4.md",
+          "tokens": 2658
+        },
+        {
+          "id": "polymorphic-component",
+          "title": "Polymorphic component",
+          "description": "Badge is a polymorphic component – its default root element is div, but it can be changed to any other element or com...",
+          "tags": [
+            "border",
+            "background",
+            "color",
+            "variant=\"dot\"",
+            "font-size",
+            "height",
+            "padding",
+            "border-radius",
+            "background-color",
+            "width"
+          ],
+          "path": "mantine/polymorphic-component.md",
+          "tokens": 2230
+        },
+        {
+          "id": "accessibility-5",
+          "title": "Accessibility",
+          "description": "To make Burger accessible for screen readers, you need to either set aria-label or\nuse VisuallyHidden component:",
+          "tags": [
+            "Burger",
+            "aria-label",
+            "fullWidth",
+            "Button",
+            "leftSection",
+            "rightSection",
+            "justify",
+            "justify-content",
+            "inner",
+            "justify=\"space-between\""
+          ],
+          "path": "mantine/accessibility-5.md",
+          "tokens": 2417
+        },
+        {
+          "id": "loader-props",
+          "title": "Loader props",
+          "description": "You can customize Loader with loaderProps prop, it accepts all props that\nLoader component has:",
+          "tags": [
+            "loaderProps",
+            "Button",
+            "Button.GroupSection",
+            "Button.Group"
+          ],
+          "path": "mantine/loader-props.md",
+          "tokens": 2236
+        },
+        {
+          "id": "get-element-ref",
+          "title": "Get element ref",
+          "description": "| Prop | Type | Default | Description |\n|------|------|---------|-------------|\n| autoContrast | boolean | - | If set...",
+          "tags": [
+            "loading",
+            "root",
+            "background",
+            "border",
+            "color",
+            "border-radius",
+            "height",
+            "padding",
+            "font-size",
+            "justify-content"
+          ],
+          "path": "mantine/get-element-ref.md",
+          "tokens": 2158
+        },
+        {
+          "id": "withborder-and-inheritpadding-props",
+          "title": "withBorder and inheritPadding props",
+          "description": "| Prop | Type | Default | Description |\n|------|------|---------|-------------|\n| children | React.ReactNode | - | Ca...",
+          "tags": [
+            "withBorder",
+            "Card.Section",
+            "inheritPadding",
+            "Card",
+            "Center",
+            "inline",
+            "iconColor",
+            "theme.colors",
+            "Checkbox",
+            "indeterminate"
+          ],
+          "path": "mantine/withborder-and-inheritpadding-props.md",
+          "tokens": 3635
+        },
+        {
+          "id": "checkbox-card-component",
+          "title": "Checkbox.Card component",
+          "description": "Checkbox.Card component can be used as a replacement for Checkbox to build custom\ncards/buttons/other things that wor...",
+          "tags": [
+            "Checkbox.Card",
+            "Checkbox",
+            "role=\"checkbox\"",
+            "input[type=\"checkbox\"]",
+            "Checkbox.Group"
+          ],
+          "path": "mantine/checkbox-card-component.md",
+          "tokens": 1474
+        },
+        {
+          "id": "accessibility-6",
+          "title": "Accessibility",
+          "description": "Set aria-label or label prop to make the checkbox accessible:",
+          "tags": [
+            "aria-label",
+            "label",
+            "input[type=\"checkbox\"]",
+            "icon",
+            "input",
+            "description",
+            "error",
+            "background-color",
+            "border-radius",
+            "width"
+          ],
+          "path": "mantine/accessibility-6.md",
+          "tokens": 2679
+        },
+        {
+          "id": "accessibility-7",
+          "title": "Accessibility",
+          "description": "Chip and Chip.Group components are accessible by default – they are built with native radio/checkbox inputs,\nall keyb...",
+          "tags": [
+            "Chip",
+            "Chip.Group",
+            "checkIcon",
+            "font-size",
+            "height",
+            "border-radius",
+            "background-color",
+            "color",
+            "CloseButton",
+            "X"
+          ],
+          "path": "mantine/accessibility-7.md",
+          "tokens": 1041
+        },
+        {
+          "id": "accessibility-8",
+          "title": "Accessibility",
+          "description": "To make CloseButton accessible for screen readers, you need to either set aria-label or\nuse VisuallyHidden component:",
+          "tags": [
+            "CloseButton",
+            "aria-label",
+            "width",
+            "X",
+            "border-radius",
+            "height",
+            "code",
+            "pre",
+            "block"
+          ],
+          "path": "mantine/accessibility-8.md",
+          "tokens": 652
+        },
+        {
+          "id": "custom-color",
+          "title": "Custom color",
+          "description": "By default, code color is gray, you can change it to any valid CSS color or to one\nof the theme.colors:",
+          "tags": [
+            "background-color",
+            "transitionDuration",
+            "transitionTimingFunction",
+            "ease",
+            "onTransitionEnd",
+            "ColorInput",
+            "fixOnBlur={false}",
+            "onChangeEnd",
+            "disallowInput",
+            "swatchesPerRow"
+          ],
+          "path": "mantine/custom-color.md",
+          "tokens": 3546
+        },
+        {
+          "id": "accessibility-9",
+          "title": "Accessibility",
+          "description": "ColorInput provides better accessibility support when used in forms. Make sure to associate the input with a label fo...",
+          "tags": [
+            "format",
+            "width",
+            "height",
+            "ColorPicker",
+            "swatches",
+            "swatchesPerRow",
+            "withPicker={false}",
+            "fullWidth",
+            "xs",
+            "sm"
+          ],
+          "path": "mantine/accessibility-9.md",
+          "tokens": 2653
+        },
+        {
+          "id": "accessibility-10",
+          "title": "Accessibility",
+          "description": "ColorPicker component is accessible by default:",
+          "tags": [
+            "saturationLabel",
+            "hueLabel",
+            "alphaLabel",
+            "format",
+            "width",
+            "height",
+            "ColorSwatch",
+            "withShadow={false}"
+          ],
+          "path": "mantine/accessibility-10.md",
+          "tokens": 1112
+        },
+        {
+          "id": "mantine-ui-library-complete-documentation-polymorphic-component",
+          "title": "Polymorphic component",
+          "description": "ColorSwatch is a polymorphic component – its default root element is div, but it can be changed to any other element ...",
+          "tags": [
+            "children",
+            "border-radius",
+            "root",
+            "width",
+            "height",
+            "min-width",
+            "min-height",
+            "Combobox",
+            "useCombobox",
+            "store"
+          ],
+          "path": "mantine/mantine-ui-library-complete-documentation-polymorphic-component.md",
+          "tokens": 1557
+        },
+        {
+          "id": "combobox-store",
+          "title": "Combobox store",
+          "description": "Combobox store is an object with the following properties:",
+          "tags": [
+            "ComboboxStore",
+            "@mantine/core",
+            "Combobox",
+            "openDropdown",
+            "useCombobox",
+            "selectFirstOption",
+            "resetSelectedOption"
+          ],
+          "path": "mantine/combobox-store.md",
+          "tokens": 896
+        },
+        {
+          "id": "combobox-target",
+          "title": "Combobox.Target",
+          "description": "Combobox.Target should be used as a wrapper for the target element or component.\nCombobox.Target marks its child as a...",
+          "tags": [
+            "Combobox.Target",
+            "aria-*",
+            "ref",
+            "...others"
+          ],
+          "path": "mantine/combobox-target.md",
+          "tokens": 935
+        },
+        {
+          "id": "split-events-and-dropdown-targets",
+          "title": "Split events and dropdown targets",
+          "description": "In some cases, you might need to use different elements as an events target and as a dropdown.\nUse Combobox.EventsTar...",
+          "tags": [
+            "Combobox.EventsTarget",
+            "aria-*",
+            "Combobox.DropdownTarget",
+            "Combobox"
+          ],
+          "path": "mantine/split-events-and-dropdown-targets.md",
+          "tokens": 807
+        },
+        {
+          "id": "update-selected-option-index",
+          "title": "Update selected option index",
+          "description": "updateSelectedOptionIndex handler is required to be called when options list changes.\nUsually, the options list chang...",
+          "tags": [
+            "updateSelectedOptionIndex",
+            "onChange"
+          ],
+          "path": "mantine/update-selected-option-index.md",
+          "tokens": 553
+        },
+        {
+          "id": "search-input",
+          "title": "Search input",
+          "description": "If you prefer search input inside the dropdown, use Combobox.Search component.\nTo focus the search input, call combob...",
+          "tags": [
+            "Combobox.Search",
+            "combobox.focusSearchInput",
+            "combobox.focusTarget"
+          ],
+          "path": "mantine/search-input.md",
+          "tokens": 544
+        },
+        {
+          "id": "select-first-option",
+          "title": "Select first option",
+          "description": "Use combobox.selectFirstOption function to select the first option. It is useful\nif you want to select the first opti...",
+          "tags": [
+            "combobox.selectFirstOption"
+          ],
+          "path": "mantine/select-first-option.md",
+          "tokens": 511
+        },
+        {
+          "id": "active-option",
+          "title": "Active option",
+          "description": "Set active prop on Combobox.Option component to mark it as active.\nBy default, an active option does not have any sty...",
+          "tags": [
+            "active",
+            "Combobox.Option",
+            "data-combobox-active",
+            "combobox.selectActiveOption",
+            "Combobox.Group",
+            "max-height",
+            "Combobox.Dropdown",
+            "Combobox.Options",
+            "mah",
+            "hidden"
+          ],
+          "path": "mantine/active-option.md",
+          "tokens": 2999
+        },
+        {
+          "id": "without-dropdown",
+          "title": "Without dropdown",
+          "description": "You can use Combobox without dropdown. To do so, use Combobox.EventsTarget instead\nof Combobox.Target:",
+          "tags": [
+            "Combobox",
+            "Combobox.EventsTarget",
+            "Combobox.Target",
+            "Combobox.Options",
+            "Combobox.Dropdown",
+            "Combobox.Option",
+            "Combobox.Search",
+            "Combobox.Empty",
+            "Combobox.Header",
+            "Combobox.Footer"
+          ],
+          "path": "mantine/without-dropdown.md",
+          "tokens": 2644
+        },
+        {
+          "id": "responsive-max-width",
+          "title": "Responsive max-width",
+          "description": "To make Container max-width responsive, use Styles API to set\nclassNames. For example, you can add responsive size th...",
+          "tags": [
+            "Container",
+            "max-width",
+            "classNames",
+            "responsive",
+            "CopyButton",
+            "copied",
+            "copy",
+            "file://",
+            "http://",
+            "navigator.clipboard"
+          ],
+          "path": "mantine/responsive-max-width.md",
+          "tokens": 1606
+        },
+        {
+          "id": "accessibility-11",
+          "title": "Accessibility",
+          "description": "Dialog is not accessible and most likely will not be announced by screen reader,\nmake sure you do not put any importa...",
+          "tags": [
+            "Dialog",
+            "width"
+          ],
+          "path": "mantine/accessibility-11.md",
+          "tokens": 1213
+        },
+        {
+          "id": "vertical-orientation",
+          "title": "Vertical orientation",
+          "description": "| Prop | Type | Default | Description |\n|------|------|---------|-------------|\n| color | MantineColor | - | Key of t...",
+          "tags": [
+            "border-style",
+            "border-color",
+            "border-width",
+            "left",
+            "top",
+            "right",
+            "bottom",
+            "position",
+            "<Drawer position=\"top\" />",
+            "offset"
+          ],
+          "path": "mantine/vertical-orientation.md",
+          "tokens": 3897
+        },
+        {
+          "id": "drawer-stack",
+          "title": "Drawer.Stack",
+          "description": "Use Drawer.Stack component to render multiple drawers at the same time.\nDrawer.Stack keeps track of opened drawers, m...",
+          "tags": [
+            "Drawer.Stack",
+            "closeOnEscape",
+            "useDrawersStack",
+            "Drawer",
+            "Escape",
+            "opacity: 0",
+            "pointer-events: none",
+            "Drawer.Root",
+            "elements",
+            "className"
+          ],
+          "path": "mantine/drawer-stack.md",
+          "tokens": 1187
+        },
+        {
+          "id": "accessibility-12",
+          "title": "Accessibility",
+          "description": "Drawer component follows WAI-ARIA recommendations on accessibility.",
+          "tags": [
+            "Drawer",
+            "title",
+            "aria-labelledby",
+            "aria-label",
+            "closeButtonProps",
+            "Drawer.Content",
+            "margin",
+            "width",
+            "flex",
+            "align-items"
+          ],
+          "path": "mantine/accessibility-12.md",
+          "tokens": 3869
+        },
+        {
+          "id": "fileinputprops-type",
+          "title": "FileInputProps type",
+          "description": "FileInputProps type is a generic interface which accepts a single type argument:\nmultiple value.",
+          "tags": [
+            "FileInputProps",
+            "multiple",
+            "Flex",
+            "FloatingIndicator",
+            "target",
+            "parent",
+            "className"
+          ],
+          "path": "mantine/fileinputprops-type.md",
+          "tokens": 2498
+        },
+        {
+          "id": "multiple-rows",
+          "title": "Multiple rows",
+          "description": "FloatingIndicator can be used to highlight active element in a group with multiple rows:",
+          "tags": [
+            "FloatingIndicator"
+          ],
+          "path": "mantine/multiple-rows.md",
+          "tokens": 960
+        },
+        {
+          "id": "example-tabs",
+          "title": "Example: Tabs",
+          "description": "| Prop | Type | Default | Description |\n|------|------|---------|-------------|\n| displayAfterTransitionEnd | boolean...",
+          "tags": [
+            "data-autofocus",
+            "FocusTrap.InitialFocus",
+            "active",
+            "true",
+            "false",
+            "ref",
+            "FocusTrap",
+            "Grid.Col",
+            "span",
+            "<Grid.Col span={3} />"
+          ],
+          "path": "mantine/example-tabs.md",
+          "tokens": 3707
+        },
+        {
+          "id": "overflow-hidden",
+          "title": "overflow: hidden",
+          "description": "By default, Grid has overflow: visible style on the root element. In some cases\nyou might want to change it to overfl...",
+          "tags": [
+            "Grid",
+            "overflow: visible",
+            "overflow: hidden",
+            "type=\"container\"",
+            "Grid.Col",
+            "overflow",
+            "align-items",
+            "justify-content",
+            "Group",
+            "preventGrowOverflow"
+          ],
+          "path": "mantine/overflow-hidden.md",
+          "tokens": 2101
+        },
+        {
+          "id": "text-props",
+          "title": "Text props",
+          "description": "Highlight is based on Text component, all its props are available:",
+          "tags": [
+            "openDelay",
+            "closeDelay",
+            "HoverCard.Group",
+            "HoverCard"
+          ],
+          "path": "mantine/text-props.md",
+          "tokens": 1633
+        },
+        {
+          "id": "accessibility-13",
+          "title": "Accessibility",
+          "description": "HoverCard is ignored by screen readers and cannot be activated with keyboard, use it to display only additional infor...",
+          "tags": [
+            "HoverCard",
+            "Image",
+            "img",
+            "w",
+            "h",
+            "object-fit: cover",
+            "w=\"auto\"",
+            "fit=\"contain\"",
+            "fallbackSrc",
+            "component"
+          ],
+          "path": "mantine/accessibility-13.md",
+          "tokens": 2376
+        },
+        {
+          "id": "disabled",
+          "title": "Disabled",
+          "description": "Set disabled to hide the indicator:",
+          "tags": [
+            "disabled",
+            "bottom",
+            "left",
+            "right",
+            "top",
+            "border-radius",
+            "min-width",
+            "height",
+            "translateX",
+            "translateY"
+          ],
+          "path": "mantine/disabled.md",
+          "tokens": 4429
+        },
+        {
+          "id": "accessibility-14",
+          "title": "Accessibility",
+          "description": "If you use Input component without associated label element, set aria-label:",
+          "tags": [
+            "Input",
+            "aria-label",
+            "Input.Wrapper",
+            "id",
+            "font-size",
+            "width",
+            "padding-top",
+            "padding-bottom",
+            "border-radius",
+            "pointer-events"
+          ],
+          "path": "mantine/accessibility-14.md",
+          "tokens": 2039
+        },
+        {
+          "id": "accessibility-15",
+          "title": "Accessibility",
+          "description": "JsonInput provides better accessibility support when used in forms. Make sure to associate the input with a label for...",
+          "tags": [
+            "font-size",
+            "icon",
+            "spacing",
+            "0",
+            "center",
+            "size"
+          ],
+          "path": "mantine/accessibility-15.md",
+          "tokens": 2072
+        },
+        {
+          "id": "nested-lists",
+          "title": "Nested lists",
+          "description": "Set withPadding prop to offset nested lists and listStyleType to control bullet type:",
+          "tags": [
+            "withPadding",
+            "listStyleType",
+            "font-size",
+            "line-height",
+            "Loader",
+            "oval",
+            "bars",
+            "dots",
+            "size",
+            "size={32}"
+          ],
+          "path": "mantine/nested-lists.md",
+          "tokens": 882
+        },
+        {
+          "id": "adding-custom-loaders",
+          "title": "Adding custom loaders",
+          "description": "Loader component is used in other components (Button, ActionIcon, LoadingOverlay, etc.).\nYou can change loader type w...",
+          "tags": [
+            "Loader",
+            "type",
+            "loaders",
+            "size",
+            "color",
+            "--loader-size",
+            "--loader-color",
+            "width",
+            "height",
+            "var(--loader-size)"
+          ],
+          "path": "mantine/adding-custom-loaders.md",
+          "tokens": 542
+        },
+        {
+          "id": "children-prop",
+          "title": "children prop",
+          "description": "Loader supports children prop. If you pass anything to children, it will be rendered\ninstead of the loader. This is u...",
+          "tags": [
+            "Loader",
+            "children",
+            "loaderProps",
+            "LoadingOverlay",
+            "visible"
+          ],
+          "path": "mantine/children-prop.md",
+          "tokens": 1009
+        },
+        {
+          "id": "custom-inline-loaders",
+          "title": "Custom inline loaders",
+          "description": "To replace default loader with any custom content, set loaderProps={{ children: <div>Your content</div> }}.\nYou can p...",
+          "tags": [
+            "loaderProps.children",
+            "Overlay",
+            "Loader",
+            "z-index",
+            "background-color",
+            "opened",
+            "onChange",
+            "trigger=\"hover\"",
+            "closeDelay",
+            "openDelay"
+          ],
+          "path": "mantine/custom-inline-loaders.md",
+          "tokens": 2997
+        },
+        {
+          "id": "accessibility-16",
+          "title": "Accessibility",
+          "description": "Menu follows WAI-ARIA recommendations:",
+          "tags": [
+            "role=\"menu\"",
+            "aria-labelledby=\"target-id\"",
+            "aria-haspopup=\"menu\"",
+            "aria-expanded",
+            "aria-controls=\"dropdown-id\"",
+            "role=\"menuitem\"",
+            "aria-controls",
+            "trigger=\"click\"",
+            "button",
+            "Space"
+          ],
+          "path": "mantine/accessibility-16.md",
+          "tokens": 5670
+        },
+        {
+          "id": "modal-stack",
+          "title": "Modal.Stack",
+          "description": "Use Modal.Stack component to render multiple modals at the same time.\nModal.Stack keeps track of opened modals, manag...",
+          "tags": [
+            "Modal.Stack",
+            "closeOnEscape",
+            "useModalsStack",
+            "Modal",
+            "Escape",
+            "opacity: 0",
+            "pointer-events: none",
+            "Modal.Root",
+            "elements",
+            "className"
+          ],
+          "path": "mantine/modal-stack.md",
+          "tokens": 1174
+        },
+        {
+          "id": "accessibility-17",
+          "title": "Accessibility",
+          "description": "Modal component follows WAI-ARIA recommendations on accessibility.",
+          "tags": [
+            "Modal",
+            "title",
+            "aria-labelledby",
+            "aria-label",
+            "closeButtonProps",
+            "Modal.Content",
+            "border-radius",
+            "width",
+            "MultiSelect",
+            "onChange"
+          ],
+          "path": "mantine/accessibility-17.md",
+          "tokens": 6087
+        },
+        {
+          "id": "accessibility-18",
+          "title": "Accessibility",
+          "description": "MultiSelect provides better accessibility support when used in forms. Make sure to associate the input with a label f...",
+          "tags": [
+            "aria-label",
+            "clearButtonProps",
+            "clearable"
+          ],
+          "path": "mantine/accessibility-18.md",
+          "tokens": 2352
+        },
+        {
+          "id": "adding-options",
+          "title": "Adding options",
+          "description": "NativeSelect allows passing options in two ways:",
+          "tags": [
+            "NativeSelect",
+            "data",
+            "children",
+            "option",
+            "label",
+            "value",
+            "disabled",
+            "optgroup",
+            "hr"
+          ],
+          "path": "mantine/adding-options.md",
+          "tokens": 1407
+        },
+        {
+          "id": "accessibility-19",
+          "title": "Accessibility",
+          "description": "NativeSelect provides better accessibility support when used in forms. Make sure to associate the input with a label ...",
+          "tags": [
+            "active",
+            "NavLink",
+            "renderRoot",
+            "aria-current",
+            "color",
+            "variant"
+          ],
+          "path": "mantine/accessibility-19.md",
+          "tokens": 2652
+        },
+        {
+          "id": "mantine-ui-library-complete-documentation-get-element-ref",
+          "title": "Get element ref",
+          "description": "| Prop | Type | Default | Description |\n|------|------|---------|-------------|\n| active | boolean | - | Determines w...",
+          "tags": [
+            "background-color",
+            "color"
+          ],
+          "path": "mantine/mantine-ui-library-complete-documentation-get-element-ref.md",
+          "tokens": 1096
+        },
+        {
+          "id": "accessibility-20",
+          "title": "Accessibility",
+          "description": "To support screen readers, set close button aria-label or title with closeButtonProps:",
+          "tags": [
+            "closeButtonProps",
+            "loading",
+            "icon",
+            "title",
+            "border-radius",
+            "max-width",
+            "z-index",
+            "NumberFormatter",
+            "prefix",
+            "suffix"
+          ],
+          "path": "mantine/accessibility-20.md",
+          "tokens": 4059
+        },
+        {
+          "id": "accessibility-21",
+          "title": "Accessibility",
+          "description": "NumberInput provides better accessibility support when used in forms. Make sure to associate the input with a label f...",
+          "tags": [
+            "width",
+            "height",
+            "Overlay",
+            "fixed",
+            "color",
+            "backgroundOpacity",
+            "color=\"#000\"",
+            "backgroundOpacity={0.85}",
+            "rgba(0, 0, 0, 0.85)",
+            "gradient"
+          ],
+          "path": "mantine/accessibility-21.md",
+          "tokens": 2625
+        },
+        {
+          "id": "polymorphic-component-2",
+          "title": "Polymorphic component",
+          "description": "Overlay is a polymorphic component – its default root element is div, but it can be changed to any other element or c...",
+          "tags": [
+            "background-color",
+            "backdrop-filter",
+            "border-radius",
+            "z-index",
+            "@mantine/core",
+            "@mantine/*",
+            "value",
+            "onChange",
+            "siblings",
+            "boundaries"
+          ],
+          "path": "mantine/polymorphic-component-2.md",
+          "tokens": 3034
+        },
+        {
+          "id": "use-pagination-hook",
+          "title": "use-pagination hook",
+          "description": "If you need more flexibility @mantine/hooks package exports use-pagination hook,\nyou can use it to create custom pagi...",
+          "tags": [
+            "@mantine/hooks",
+            "background-color",
+            "color",
+            "font-size",
+            "border-radius",
+            "min-width",
+            "height"
+          ],
+          "path": "mantine/use-pagination-hook.md",
+          "tokens": 1101
+        },
+        {
+          "id": "mantine-core-components-polymorphic-component",
+          "title": "Polymorphic component",
+          "description": "Paper is a polymorphic component – its default root element is div, but it can be changed to any other element or com...",
+          "tags": [
+            "border-radius",
+            "box-shadow",
+            "visible",
+            "onVisibilityChange",
+            "reveal",
+            "visibilityToggleIcon"
+          ],
+          "path": "mantine/mantine-core-components-polymorphic-component.md",
+          "tokens": 1189
+        },
+        {
+          "id": "strength-meter-example",
+          "title": "Strength meter example",
+          "description": "Password strength meter example with Progress and Popover components:",
+          "tags": [
+            "rightSection",
+            "disabled"
+          ],
+          "path": "mantine/strength-meter-example.md",
+          "tokens": 1194
+        },
+        {
+          "id": "mantine-core-components-accessibility",
+          "title": "Accessibility",
+          "description": "PasswordInput provides better accessibility support when used in forms. Make sure to associate the input with a label...",
+          "tags": [
+            "aria-label",
+            "visibilityToggleButtonProps",
+            "width",
+            "height"
+          ],
+          "path": "mantine/mantine-core-components-accessibility.md",
+          "tokens": 1359
+        },
+        {
+          "id": "inside-inputs",
+          "title": "Inside inputs",
+          "description": "Pill component is designed to be used inside inputs. It can be used to create custom\nmulti select or tag inputs.",
+          "tags": [
+            "Pill",
+            "height",
+            "font-size",
+            "border-radius",
+            "gap",
+            "PillsInput"
+          ],
+          "path": "mantine/inside-inputs.md",
+          "tokens": 1301
+        },
+        {
+          "id": "searchable-select-example",
+          "title": "Searchable select example",
+          "description": "Combine PillsInput with Combobox to create searchable multiselect:",
+          "tags": [
+            "PillsInput"
+          ],
+          "path": "mantine/searchable-select-example.md",
+          "tokens": 692
+        },
+        {
+          "id": "accessibility-22",
+          "title": "Accessibility",
+          "description": "If PillsInput is used without label prop, it will not be announced properly by screen reader:",
+          "tags": [
+            "PillsInput",
+            "aria-label",
+            "PillsInput.Field",
+            "label",
+            "PinInput",
+            "0",
+            "3",
+            "type={/^[0-3]+/}",
+            "oneTimeCode",
+            "autocomplete=\"one-time-code\""
+          ],
+          "path": "mantine/accessibility-22.md",
+          "tokens": 1638
+        },
+        {
+          "id": "accessibility-23",
+          "title": "Accessibility",
+          "description": "Inputs do not have associated labels, set aria-label to make component visible to the screen reader:",
+          "tags": [
+            "aria-label",
+            "width",
+            "height",
+            "opened",
+            "onChange",
+            "Popover.Dropdown",
+            "trapFocus",
+            "inline",
+            "Popover",
+            "width=\"target\""
+          ],
+          "path": "mantine/accessibility-23.md",
+          "tokens": 4752
+        },
+        {
+          "id": "keyboard-interactions",
+          "title": "Keyboard interactions",
+          "description": "| Prop | Type | Default | Description |\n|------|------|---------|-------------|\n| arrowOffset | number | - | Arrow of...",
+          "tags": [
+            "document.body",
+            "position",
+            "z-index",
+            "opened",
+            "onClose",
+            "reuseTargetNode={true}",
+            "reuseTargetNode={false}",
+            "target",
+            "createPortal",
+            "OptionalPortal"
+          ],
+          "path": "mantine/keyboard-interactions.md",
+          "tokens": 2870
+        },
+        {
+          "id": "example-progress-with-segments",
+          "title": "Example: progress with segments",
+          "description": "",
+          "tags": [],
+          "path": "mantine/example-progress-with-segments.md",
+          "tokens": 550
+        },
+        {
+          "id": "accessibility-24",
+          "title": "Accessibility",
+          "description": "Set aria-label attribute to label progress:",
+          "tags": [
+            "role=\"progressbar\"",
+            "aria-valuenow",
+            "aria-valuemin",
+            "aria-valuemax",
+            "0",
+            "100",
+            "aria-label",
+            "Progress.Section",
+            "Progress.Label",
+            "border-radius"
+          ],
+          "path": "mantine/accessibility-24.md",
+          "tokens": 1914
+        },
+        {
+          "id": "radio-card-component",
+          "title": "Radio.Card component",
+          "description": "Radio.Card component can be used as a replacement for Radio to build custom\ncards/buttons/other things that work as r...",
+          "tags": [
+            "Radio.Card",
+            "Radio",
+            "role=\"radio\"",
+            "input[type=\"radio\"]",
+            "Radio.Group"
+          ],
+          "path": "mantine/radio-card-component.md",
+          "tokens": 730
+        },
+        {
+          "id": "accessibility-25",
+          "title": "Accessibility",
+          "description": "Set aria-label or label prop to make the radio accessible:",
+          "tags": [
+            "aria-label",
+            "label",
+            "input[type=\"radio\"]",
+            "icon",
+            "input",
+            "description",
+            "error",
+            "background-color",
+            "border-radius",
+            "width"
+          ],
+          "path": "mantine/accessibility-25.md",
+          "tokens": 2877
+        },
+        {
+          "id": "mantine-core-components-keyboard-interactions",
+          "title": "Keyboard interactions",
+          "description": "| Prop | Type | Default | Description |\n|------|------|---------|-------------|\n| color | MantineColor | - | Key of t...",
+          "tags": [],
+          "path": "mantine/mantine-core-components-keyboard-interactions.md",
+          "tokens": 1110
+        },
+        {
+          "id": "symbols-for-each-item",
+          "title": "Symbols for each item",
+          "description": "| Prop | Type | Default | Description |\n|------|------|---------|-------------|\n| color | MantineColor | - | Key of t...",
+          "tags": [
+            "sections",
+            "value",
+            "color",
+            "size",
+            "thickness",
+            "roundCaps",
+            "tooltip",
+            "rootColor"
+          ],
+          "path": "mantine/symbols-for-each-item.md",
+          "tokens": 1992
+        },
+        {
+          "id": "filled-segment-transition",
+          "title": "Filled segment transition",
+          "description": "By default, transitions are disabled, to enable them, set transitionDuration prop\nto a number of milliseconds:",
+          "tags": [
+            "transitionDuration",
+            "height",
+            "width",
+            "ScrollArea",
+            "type",
+            "hover",
+            "scroll",
+            "auto",
+            "overflow: auto",
+            "always"
+          ],
+          "path": "mantine/filled-segment-transition.md",
+          "tokens": 1737
+        },
+        {
+          "id": "scroll-element-into-view",
+          "title": "Scroll element into view",
+          "description": "ScrollArea.Autosize component allows to create scrollable containers when given max-height is reached.\nIt also suppor...",
+          "tags": [
+            "ScrollArea.Autosize"
+          ],
+          "path": "mantine/scroll-element-into-view.md",
+          "tokens": 922
+        },
+        {
+          "id": "scrollarea-autosize-with-popover",
+          "title": "ScrollArea.Autosize with Popover",
+          "description": "| Prop | Type | Default | Description |\n|------|------|---------|-------------|\n| offsetScrollbars | boolean | \"x\" | ...",
+          "tags": [
+            "SegmentedControl",
+            "value",
+            "label",
+            "data",
+            "disabled: true",
+            "disabled",
+            "theme.white",
+            "var(--mantine-color-dark-6)",
+            "color",
+            "background-color"
+          ],
+          "path": "mantine/scrollarea-autosize-with-popover.md",
+          "tokens": 2707
+        },
+        {
+          "id": "accessibility-and-usability",
+          "title": "Accessibility and usability",
+          "description": "SegmentedControl uses radio inputs under the hood, it is accessible by default with no extra steps required if you ha...",
+          "tags": [
+            "SegmentedControl",
+            "input[type=\"radio\"]",
+            "background-color",
+            "indicator",
+            "font-size",
+            "padding",
+            "border-radius",
+            "root",
+            "box-shadow",
+            "Select"
+          ],
+          "path": "mantine/accessibility-and-usability.md",
+          "tokens": 6048
+        },
+        {
+          "id": "accessibility-26",
+          "title": "Accessibility",
+          "description": "Select provides better accessibility support when used in forms. Make sure to associate the input with a label for be...",
+          "tags": [
+            "aria-label",
+            "clearButtonProps",
+            "clearable",
+            "emptySegmentColor",
+            "theme.colors",
+            "center",
+            "labelPosition"
+          ],
+          "path": "mantine/accessibility-26.md",
+          "tokens": 2294
+        },
+        {
+          "id": "mantine-core-components-filled-segment-transition",
+          "title": "Filled segment transition",
+          "description": "By default, transitions are disabled, to enable them, set transitionDuration prop\nto a number of milliseconds:",
+          "tags": [
+            "transitionDuration",
+            "strokeWidth",
+            "SimpleGrid",
+            "spacing",
+            "verticalSpacing",
+            "cols",
+            "base",
+            "xs",
+            "sm",
+            "md"
+          ],
+          "path": "mantine/mantine-core-components-filled-segment-transition.md",
+          "tokens": 2142
+        },
+        {
+          "id": "with-content",
+          "title": "With content",
+          "description": "If you want to indicate the loading state of content that is already on page, wrap it with Skeleton\nand control loadi...",
+          "tags": [
+            "visible",
+            "height",
+            "width",
+            "border-radius",
+            "onChangeEnd",
+            "label",
+            "f => f",
+            "labelAlwaysOn",
+            "labelTransitionProps",
+            "min"
+          ],
+          "path": "mantine/with-content.md",
+          "tokens": 2922
+        },
+        {
+          "id": "build-custom-slider",
+          "title": "Build custom slider",
+          "description": "If Slider component does not meet your requirements, you can build a custom slider with use-move hook:",
+          "tags": [
+            "Slider"
+          ],
+          "path": "mantine/build-custom-slider.md",
+          "tokens": 963
+        },
+        {
+          "id": "keyboard-interactions-2",
+          "title": "Keyboard interactions",
+          "description": "| Prop | Type | Default | Description |\n|------|------|---------|-------------|\n| color | MantineColor | - | Key of t...",
+          "tags": [
+            "mark",
+            "markLabel",
+            "height",
+            "background",
+            "width",
+            "border-radius",
+            "Space",
+            "theme.spacing",
+            "Spoiler",
+            "maxHeight"
+          ],
+          "path": "mantine/keyboard-interactions-2.md",
+          "tokens": 1902
+        },
+        {
+          "id": "get-control-ref",
+          "title": "Get control ref",
+          "description": "| Prop | Type | Default | Description |\n|------|------|---------|-------------|\n| controlRef | ForwardedRef | - | Get...",
+          "tags": [
+            "Stack",
+            "align-items",
+            "justify-content",
+            "gap"
+          ],
+          "path": "mantine/get-control-ref.md",
+          "tokens": 1375
+        },
+        {
+          "id": "allow-step-select",
+          "title": "Allow step select",
+          "description": "To disable step selection, set allowStepSelect prop on Stepper.Step component.\nIt can be used to prevent the user fro...",
+          "tags": [
+            "allowStepSelect",
+            "Stepper.Step",
+            "allowNextStepsSelect",
+            "Stepper",
+            "size",
+            "iconSize"
+          ],
+          "path": "mantine/allow-step-select.md",
+          "tokens": 1090
+        },
+        {
+          "id": "with-custom-icons",
+          "title": "With custom icons",
+          "description": "You can replace the step icon by setting icon prop on Stepper.Step component.\nTo change completed check icon set comp...",
+          "tags": [
+            "icon",
+            "Stepper.Step",
+            "completedIcon",
+            "Stepper",
+            "aria-label",
+            "title",
+            "iconPosition=\"right\""
+          ],
+          "path": "mantine/with-custom-icons.md",
+          "tokens": 864
+        },
+        {
+          "id": "loading-state",
+          "title": "Loading state",
+          "description": "To indicate loading state set loading prop on Step component, Loader will replace step icon.\nYou can configure the de...",
+          "tags": [
+            "loading",
+            "Loader",
+            "Stepper",
+            "Stepper.Step"
+          ],
+          "path": "mantine/loading-state.md",
+          "tokens": 1355
+        },
+        {
+          "id": "accessibility-27",
+          "title": "Accessibility",
+          "description": "<Stepper.Step /> components render button element, set aria-label or title props\nto make component visible for screen...",
+          "tags": [
+            "<Stepper.Step />",
+            "aria-label",
+            "title",
+            "label",
+            "description",
+            "color",
+            "width",
+            "height",
+            "padding-top",
+            "border-radius"
+          ],
+          "path": "mantine/accessibility-27.md",
+          "tokens": 2459
+        },
+        {
+          "id": "accessibility-28",
+          "title": "Accessibility",
+          "description": "Switch is a regular input[type=\"checkbox\"]. Set aria-label if the Switch is used without label prop:",
+          "tags": [
+            "Switch",
+            "input[type=\"checkbox\"]",
+            "aria-label",
+            "label",
+            "thumb",
+            "trackLabel",
+            "track",
+            "description",
+            "error",
+            "border-radius"
+          ],
+          "path": "mantine/accessibility-28.md",
+          "tokens": 2320
+        },
+        {
+          "id": "reinitialize",
+          "title": "Reinitialize",
+          "description": "By default, TableOfContents does not track changes in the DOM. If you want\nto update headings data after the parent c...",
+          "tags": [
+            "TableOfContents",
+            "reinitializeRef",
+            "data",
+            "head",
+            "React.ReactNode[]",
+            "Table.Th",
+            "Table.Thead",
+            "foot",
+            "Table.Tfoot",
+            "body"
+          ],
+          "path": "mantine/reinitialize.md",
+          "tokens": 2064
+        },
+        {
+          "id": "scroll-container",
+          "title": "Scroll container",
+          "description": "To prevent viewport overflow wrap Table with Table.ScrollContainer.\nThe component accepts minWidth prop which sets mi...",
+          "tags": [
+            "Table",
+            "Table.ScrollContainer",
+            "minWidth",
+            "type=\"native\"",
+            "maxHeight",
+            "variant=\"vertical\"",
+            "tabularNums",
+            "font-variant-numeric: tabular-nums"
+          ],
+          "path": "mantine/scroll-container.md",
+          "tokens": 1243
+        },
+        {
+          "id": "example-table-with-row-selection",
+          "title": "Example: Table with row selection",
+          "description": "| Prop | Type | Default | Description |\n|------|------|---------|-------------|\n| borderColor | MantineColor | - | Co...",
+          "tags": [
+            "table",
+            "Table",
+            "thead",
+            "Table.Thead",
+            "tbody",
+            "Table.Tbody",
+            "tfoot",
+            "Table.Tfoot",
+            "tr",
+            "Table.Tr"
+          ],
+          "path": "mantine/example-table-with-row-selection.md",
+          "tokens": 2810
+        },
+        {
+          "id": "custom-variants",
+          "title": "Custom variants",
+          "description": "Example of custom variant with FloatingIndicator:",
+          "tags": [
+            "disabled",
+            "Tabs.Tab",
+            "activateTabWithKeyboard={false}",
+            "Tabs",
+            "allowTabDeactivation",
+            "Tabs.Panel",
+            "keepMounted={false}"
+          ],
+          "path": "mantine/custom-variants.md",
+          "tokens": 1372
+        },
+        {
+          "id": "usage-with-next-js-router",
+          "title": "Usage with Next.js router",
+          "description": "Example of Styles API usage to customize tab styles:",
+          "tags": [
+            "Tabs.Tab",
+            "aria-label",
+            "Tabs.List"
+          ],
+          "path": "mantine/usage-with-next-js-router.md",
+          "tokens": 1204
+        },
+        {
+          "id": "keyboard-interactions-3",
+          "title": "Keyboard interactions",
+          "description": "| Prop | Type | Default | Description |\n|------|------|---------|-------------|\n| activateTabWithKeyboard | boolean |...",
+          "tags": [
+            "Tabs",
+            "Tabs.List",
+            "Tabs.Panel",
+            "Tabs.Tab",
+            "border-radius",
+            "TagsInput",
+            "onChange",
+            "searchValue",
+            "onSearchChange",
+            "clearable"
+          ],
+          "path": "mantine/keyboard-interactions-3.md",
+          "tokens": 5346
+        },
+        {
+          "id": "accessibility-29",
+          "title": "Accessibility",
+          "description": "TagsInput provides better accessibility support when used in forms. Make sure to associate the input with a label for...",
+          "tags": [
+            "aria-label",
+            "clearButtonProps",
+            "clearable"
+          ],
+          "path": "mantine/accessibility-29.md",
+          "tokens": 2707
+        },
+        {
+          "id": "accessibility-30",
+          "title": "Accessibility",
+          "description": "TextInput provides better accessibility support when used in forms. Make sure to associate the input with a label for...",
+          "tags": [
+            "truncate",
+            "text-overflow: ellipsis",
+            "lineClamp",
+            "padding-bottom",
+            "inherit"
+          ],
+          "path": "mantine/accessibility-30.md",
+          "tokens": 2131
+        },
+        {
+          "id": "span-prop",
+          "title": "span prop",
+          "description": "Use span prop as a shorthand for component=\"span\":",
+          "tags": [
+            "span",
+            "component=\"span\"",
+            "font-size",
+            "line-height",
+            "none",
+            "resize",
+            "vertical",
+            "both"
+          ],
+          "path": "mantine/span-prop.md",
+          "tokens": 1588
+        },
+        {
+          "id": "accessibility-31",
+          "title": "Accessibility",
+          "description": "Textarea provides better accessibility support when used in forms. Make sure to associate the input with a label for ...",
+          "tags": [],
+          "path": "mantine/accessibility-31.md",
+          "tokens": 1337
+        },
+        {
+          "id": "mantine-core-components-customize-variants-colors",
+          "title": "Customize variants colors",
+          "description": "You can customize colors for ThemeIcon and other components variants by adding\nvariantColorResolver to your theme.",
+          "tags": [
+            "ThemeIcon"
+          ],
+          "path": "mantine/mantine-core-components-customize-variants-colors.md",
+          "tokens": 518
+        },
+        {
+          "id": "autocontrast",
+          "title": "autoContrast",
+          "description": "ThemeIcon supports autoContrast prop and theme.autoContrast. If autoContrast is set either on ThemeIcon or on theme, ...",
+          "tags": [
+            "background",
+            "border",
+            "color",
+            "border-radius",
+            "width",
+            "height",
+            "min-width",
+            "min-height",
+            "active",
+            "theme.primaryColor"
+          ],
+          "path": "mantine/autocontrast.md",
+          "tokens": 1539
+        },
+        {
+          "id": "wrap-timeline-item",
+          "title": "Wrap Timeline.Item",
+          "description": "Timeline component relies on Timeline.Item order. Wrapping Timeline.Item is not supported,\nInstead you will need to u...",
+          "tags": [
+            "Timeline",
+            "Timeline.Item",
+            "width",
+            "height",
+            "border-radius",
+            "Title",
+            "font-size",
+            "font-weight",
+            "line-height",
+            "order"
+          ],
+          "path": "mantine/wrap-timeline-item.md",
+          "tokens": 1359
+        },
+        {
+          "id": "line-clamp",
+          "title": "Line clamp",
+          "description": "Set lineClamp prop to truncate text after specified number of lines:",
+          "tags": [
+            "lineClamp",
+            "font-weight",
+            "theme.headings",
+            "font-size",
+            "line-height",
+            "-webkit-line-clamp",
+            "text-wrap",
+            "target",
+            "children",
+            "Tooltip"
+          ],
+          "path": "mantine/line-clamp.md",
+          "tokens": 3201
+        },
+        {
+          "id": "accessibility-32",
+          "title": "Accessibility",
+          "description": "Tooltip follows WAI-ARIA recommendations:",
+          "tags": [
+            "role=\"tooltip\"",
+            "aria-describedby",
+            "Tooltip.Floating",
+            "events",
+            "background-color",
+            "border-radius",
+            "transition",
+            "in",
+            "out",
+            "common"
+          ],
+          "path": "mantine/accessibility-32.md",
+          "tokens": 1860
+        },
+        {
+          "id": "enter-and-exit-delay",
+          "title": "Enter and exit delay",
+          "description": "Use enterDelay and exitDelay props to delay transition start. Values are in milliseconds:",
+          "tags": [
+            "enterDelay",
+            "exitDelay",
+            "Tree",
+            "data",
+            "value",
+            "label",
+            "children",
+            "TreeNodeData",
+            "renderNode"
+          ],
+          "path": "mantine/enter-and-exit-delay.md",
+          "tokens": 1364
+        },
+        {
+          "id": "usetree-hook",
+          "title": "useTree hook",
+          "description": "useTree hook can be used to control selected and expanded state of the tree.",
+          "tags": [
+            "useTree",
+            "tree",
+            "Tree"
+          ],
+          "path": "mantine/usetree-hook.md",
+          "tokens": 972
+        },
+        {
+          "id": "checked-state",
+          "title": "Checked state",
+          "description": "Tree can be used to display checked state with checkboxes.\nTo implement checked state, you need to render Checkbox.In...",
+          "tags": [
+            "Tree",
+            "Checkbox.Indicator",
+            "renderNode",
+            "checkAllNodes",
+            "uncheckAllNodes",
+            "node.value",
+            "initialExpandedState",
+            "useTree",
+            "getTreeExpandedState",
+            "'*'"
+          ],
+          "path": "mantine/checked-state.md",
+          "tokens": 1020
+        },
+        {
+          "id": "example-files-tree",
+          "title": "Example: files tree",
+          "description": "| Prop | Type | Default | Description |\n|------|------|---------|-------------|\n| allowRangeSelection | boolean | - |...",
+          "tags": [
+            "Typography",
+            "UnstyledButton",
+            "VisuallyHidden",
+            "@mantine/hooks",
+            "@mantine/*"
+          ],
+          "path": "mantine/example-files-tree.md",
+          "tokens": 2114
+        },
+        {
+          "id": "mantine-hooks-usage",
+          "title": "Usage",
+          "description": "@mantine/hooks package can be used in any web React application, state\nmanagement hooks (like use-pagination or use-q...",
+          "tags": [
+            "@mantine/hooks",
+            "use-click-outside",
+            "handler",
+            "events",
+            "['mousedown', 'touchstart']",
+            "nodes",
+            "ref",
+            "mousedown",
+            "touchstart",
+            "use-clipboard"
+          ],
+          "path": "mantine/mantine-hooks-usage.md",
+          "tokens": 16648
+        },
+        {
+          "id": "horizontal-slider-with-styles",
+          "title": "Horizontal slider with styles",
+          "description": "Moving the slider down increases the value, to reverse that set value to 1 - y in your setValue function:",
+          "tags": [
+            "1 - y",
+            "setValue",
+            "clampUseMovePosition",
+            "x",
+            "y",
+            "0-1",
+            "@mantine/hooks",
+            "UseMovePosition",
+            "useState",
+            "UseMoveReturnValue"
+          ],
+          "path": "mantine/horizontal-slider-with-styles.md",
+          "tokens": 11130
+        },
+        {
+          "id": "custom-date-pickers",
+          "title": "Custom date pickers",
+          "description": "Use Calendar as a base for custom date pickers. For example, you can create a date picker\nthat allows user to pick th...",
+          "tags": [
+            "Calendar"
+          ],
+          "path": "mantine/custom-date-pickers.md",
+          "tokens": 598
+        },
+        {
+          "id": "static-prop",
+          "title": "Static prop",
+          "description": "Set static prop to display a calendar that user cannot interact with.\nIt is useful when you want to display data with...",
+          "tags": [
+            "static",
+            "DateInput",
+            "valueFormat",
+            "dateParser",
+            "Date",
+            "clearable",
+            "minDate",
+            "maxDate"
+          ],
+          "path": "mantine/static-prop.md",
+          "tokens": 3317
+        },
+        {
+          "id": "mantine-hooks-accessibility",
+          "title": "Accessibility",
+          "description": "DateInput provides better accessibility support when used in forms. Make sure to associate the input with a label for...",
+          "tags": [
+            "DatePickerInput",
+            "type=\"multiple\"",
+            "type=\"range\""
+          ],
+          "path": "mantine/mantine-hooks-accessibility.md",
+          "tokens": 2934
+        },
+        {
+          "id": "presets",
+          "title": "Presets",
+          "description": "Use presets prop to add custom date presets. Presets are displayed next to the calendar:",
+          "tags": [
+            "presets",
+            "type=\"range\"",
+            "dropdownType=\"modal\"",
+            "valueFormat",
+            "valueFormatter",
+            "default",
+            "multiple",
+            "range",
+            "type=\"multiple\"",
+            "clearable"
+          ],
+          "path": "mantine/presets.md",
+          "tokens": 1072
+        },
+        {
+          "id": "accessibility-33",
+          "title": "Accessibility",
+          "description": "DatePickerInput provides better accessibility support when used in forms. Make sure to associate the input with a lab...",
+          "tags": [
+            "allowDeselect",
+            "type",
+            "range",
+            "multiple",
+            "onChange",
+            "null",
+            "type=\"multiple\"",
+            "type=\"range\"",
+            "allowSingleDateInRange"
+          ],
+          "path": "mantine/accessibility-33.md",
+          "tokens": 3347
+        },
+        {
+          "id": "mantine-hooks-presets",
+          "title": "Presets",
+          "description": "Use presets prop to add custom date presets. Presets are displayed next to the calendar:",
+          "tags": [
+            "presets",
+            "type=\"range\"",
+            "defaultDate",
+            "2015 February",
+            "defaultDate={new Date(2015, 1)}",
+            "new Date()",
+            "date",
+            "onDateChange",
+            "defaultLevel",
+            "hideOutsideDates"
+          ],
+          "path": "mantine/mantine-hooks-presets.md",
+          "tokens": 2937
+        },
+        {
+          "id": "accessibility-34",
+          "title": "Accessibility",
+          "description": "Set ariaLabels prop to specify aria-label attributes for next/previous controls:",
+          "tags": [
+            "ariaLabels",
+            "aria-label",
+            "getYearControlProps",
+            "getMonthControlProps",
+            "getDayProps",
+            "DateTimePicker",
+            "presets",
+            "timePickerProps",
+            "12h",
+            "valueFormat"
+          ],
+          "path": "mantine/accessibility-34.md",
+          "tokens": 4174
+        },
+        {
+          "id": "accessibility-35",
+          "title": "Accessibility",
+          "description": "DateTimePicker provides better accessibility support when used in forms. Make sure to associate the input with a labe...",
+          "tags": [
+            "@mantine/dates",
+            "DatesProvider",
+            "locale",
+            "en",
+            "firstDayOfWeek",
+            "weekendDays",
+            "[0, 6]",
+            "consistentWeeks",
+            "true",
+            "false"
+          ],
+          "path": "mantine/accessibility-35.md",
+          "tokens": 4592
+        },
+        {
+          "id": "accessibility-36",
+          "title": "Accessibility",
+          "description": "Use nextControlProps and previousControlProps to add aria-label and other props to navigation buttons:",
+          "tags": [
+            "nextControlProps",
+            "previousControlProps",
+            "aria-label",
+            "MonthPickerInput",
+            "type=\"multiple\"",
+            "type=\"range\"",
+            "dropdownType=\"modal\"",
+            "valueFormat",
+            "valueFormatter",
+            "default"
+          ],
+          "path": "mantine/accessibility-36.md",
+          "tokens": 1505
+        },
+        {
+          "id": "accessibility-37",
+          "title": "Accessibility",
+          "description": "MonthPickerInput provides better accessibility support when used in forms. Make sure to associate the input with a la...",
+          "tags": [
+            "allowDeselect",
+            "type",
+            "range",
+            "multiple",
+            "onChange",
+            "null",
+            "type=\"multiple\"",
+            "type=\"range\"",
+            "allowSingleDateInRange",
+            "defaultDate"
+          ],
+          "path": "mantine/accessibility-37.md",
+          "tokens": 3844
+        },
+        {
+          "id": "accessibility-38",
+          "title": "Accessibility",
+          "description": "Set ariaLabels prop to specify aria-label attributes for next/previous controls:",
+          "tags": [
+            "ariaLabels",
+            "aria-label",
+            "getYearControlProps",
+            "getMonthControlProps",
+            "TimeGrid",
+            "data",
+            "getTimeRange",
+            "@mantine/dates",
+            "minTime",
+            "maxTime"
+          ],
+          "path": "mantine/accessibility-38.md",
+          "tokens": 2642
+        },
+        {
+          "id": "mantine-hooks-disabled",
+          "title": "Disabled",
+          "description": "Set disabled prop to disable all controls:",
+          "tags": [
+            "disabled",
+            "font-size",
+            "border-radius",
+            "TimeInput",
+            "input[type=\"time\"]",
+            "showPicker"
+          ],
+          "path": "mantine/mantine-hooks-disabled.md",
+          "tokens": 1526
+        },
+        {
+          "id": "accessibility-39",
+          "title": "Accessibility",
+          "description": "TimeInput provides better accessibility support when used in forms. Make sure to associate the input with a label for...",
+          "tags": [
+            "TimePicker",
+            "hh:mm:ss",
+            "hh:mm",
+            "18:34:55",
+            "18:34",
+            "onChange",
+            "withSeconds",
+            "12:34:56",
+            "12:34",
+            "format=\"12h\""
+          ],
+          "path": "mantine/accessibility-39.md",
+          "tokens": 3642
+        },
+        {
+          "id": "accessibility-40",
+          "title": "Accessibility",
+          "description": "Set aria labels for hours, minutes, seconds and am/pm inputs and clear button with corresponding props:",
+          "tags": [
+            "font-size",
+            "TimeValue",
+            "withSeconds",
+            "amPmLabels",
+            "Date",
+            "value",
+            "YearPickerInput",
+            "type=\"multiple\"",
+            "type=\"range\"",
+            "dropdownType=\"modal\""
+          ],
+          "path": "mantine/accessibility-40.md",
+          "tokens": 3477
+        },
+        {
+          "id": "accessibility-41",
+          "title": "Accessibility",
+          "description": "YearPickerInput provides better accessibility support when used in forms. Make sure to associate the input with a lab...",
+          "tags": [
+            "allowDeselect",
+            "type",
+            "range",
+            "multiple",
+            "onChange",
+            "null",
+            "type=\"multiple\"",
+            "type=\"range\"",
+            "allowSingleDateInRange",
+            "defaultDate"
+          ],
+          "path": "mantine/accessibility-41.md",
+          "tokens": 3253
+        },
+        {
+          "id": "accessibility-42",
+          "title": "Accessibility",
+          "description": "Set ariaLabels prop to specify aria-label attributes for next/previous controls:",
+          "tags": [
+            "ariaLabels",
+            "aria-label",
+            "getYearControlProps",
+            "AreaChart",
+            "type",
+            "type=\"stacked\"",
+            "type=\"percent\"",
+            "type=\"split\"",
+            "splitColors",
+            "withLegend"
+          ],
+          "path": "mantine/accessibility-42.md",
+          "tokens": 7150
+        },
+        {
+          "id": "grid-and-text-colors",
+          "title": "Grid and text colors",
+          "description": "Use --chart-grid-color and --chart-text-color to change colors of\ngrid lines and text within the chart. With CSS modu...",
+          "tags": [
+            "--chart-grid-color",
+            "--chart-text-color",
+            "gridColor",
+            "textColor",
+            "tooltipAnimationDuration",
+            "unit",
+            "tooltipProps.content",
+            "getFilteredChartTooltipPayload",
+            "withTooltip={false}",
+            "dotProps"
+          ],
+          "path": "mantine/grid-and-text-colors.md",
+          "tokens": 3731
+        },
+        {
+          "id": "reference-area",
+          "title": "Reference area",
+          "description": "Use ReferenceArea component from recharts to display a reference area:",
+          "tags": [
+            "ReferenceArea",
+            "BarChart",
+            "type",
+            "type=\"stacked\"",
+            "stackId",
+            "type=\"percent\"",
+            "type=\"waterfall\"",
+            "color",
+            "standalone"
+          ],
+          "path": "mantine/reference-area.md",
+          "tokens": 3447
+        },
+        {
+          "id": "svg-pattern-as-bar-fill",
+          "title": "SVG pattern as bar fill",
+          "description": "You can use SVG patterns as bar fill. To do so, set fill property in series object to\na url of the SVG pattern that i...",
+          "tags": [
+            "fill",
+            "defs",
+            "children",
+            "getBarColor",
+            "withLegend",
+            "legendProps",
+            "name",
+            "label",
+            "series",
+            "xAxisProps"
+          ],
+          "path": "mantine/svg-pattern-as-bar-fill.md",
+          "tokens": 4430
+        },
+        {
+          "id": "mantine-hooks-grid-and-text-colors",
+          "title": "Grid and text colors",
+          "description": "Use --chart-grid-color and --chart-text-color to change colors of\ngrid lines and text within the chart. With CSS modu...",
+          "tags": [
+            "--chart-grid-color",
+            "--chart-text-color",
+            "gridColor",
+            "textColor",
+            "tooltipAnimationDuration",
+            "unit",
+            "tooltipProps.content",
+            "getFilteredChartTooltipPayload",
+            "withTooltip={false}",
+            "barChartProps"
+          ],
+          "path": "mantine/mantine-hooks-grid-and-text-colors.md",
+          "tokens": 3632
+        },
+        {
+          "id": "bar-overlays",
+          "title": "Bar overlays",
+          "description": "| Prop | Type | Default | Description |\n|------|------|---------|-------------|\n| barChartProps | Omit, nextState: Re...",
+          "tags": [
+            "blue",
+            "red.5",
+            "orange.7",
+            "color",
+            "withTooltip={false}",
+            "valueFormat"
+          ],
+          "path": "mantine/bar-overlays.md",
+          "tokens": 3178
+        },
+        {
+          "id": "grid-and-text-colors-2",
+          "title": "Grid and text colors",
+          "description": "Use --chart-grid-color and --chart-text-color to change colors of\ngrid lines and text within the chart. With CSS modu...",
+          "tags": [
+            "--chart-grid-color",
+            "--chart-text-color",
+            "gridColor",
+            "textColor",
+            "CompositeChart",
+            "Line",
+            "Area",
+            "Bar",
+            "withLegend",
+            "legendProps"
+          ],
+          "path": "mantine/grid-and-text-colors-2.md",
+          "tokens": 5356
+        },
+        {
+          "id": "grid-and-text-colors-3",
+          "title": "Grid and text colors",
+          "description": "Use --chart-grid-color and --chart-text-color to change colors of\ngrid lines and text within the chart. With CSS modu...",
+          "tags": [
+            "--chart-grid-color",
+            "--chart-text-color",
+            "gridColor",
+            "textColor",
+            "tooltipAnimationDuration",
+            "unit",
+            "tooltipProps.content",
+            "getFilteredChartTooltipPayload",
+            "withTooltip={false}",
+            "dotProps"
+          ],
+          "path": "mantine/grid-and-text-colors-3.md",
+          "tokens": 3152
+        },
+        {
+          "id": "reference-lines",
+          "title": "Reference lines",
+          "description": "Use referenceLines prop to render reference lines. Reference lines are always\nrendered behind the chart.",
+          "tags": [
+            "referenceLines",
+            "DonutChart",
+            "withLabels",
+            "size",
+            "h",
+            "paddingAngle",
+            "blue",
+            "red.5",
+            "orange.7",
+            "tooltipDataSource=\"segment\""
+          ],
+          "path": "mantine/reference-lines.md",
+          "tokens": 3380
+        },
+        {
+          "id": "segments-stroke",
+          "title": "Segments stroke",
+          "description": "Use strokeWidth prop to control the width of the stroke around each segment:",
+          "tags": [
+            "strokeWidth",
+            "strokeColor",
+            "blue",
+            "red.5",
+            "orange.7",
+            "--mantine-color-body",
+            "chartLabel",
+            "FunnelChart",
+            "withLabels",
+            "labelPosition"
+          ],
+          "path": "mantine/segments-stroke.md",
+          "tokens": 2437
+        },
+        {
+          "id": "mantine-hooks-segments-stroke",
+          "title": "Segments stroke",
+          "description": "Use strokeWidth prop to control the width of the stroke around each segment:",
+          "tags": [
+            "strokeWidth",
+            "strokeColor",
+            "blue",
+            "red.5",
+            "orange.7",
+            "--mantine-color-body",
+            "@mantine/charts",
+            "Heatmap",
+            "data",
+            "YYYY-MM-DD"
+          ],
+          "path": "mantine/mantine-hooks-segments-stroke.md",
+          "tokens": 3677
+        },
+        {
+          "id": "split-months",
+          "title": "Split months",
+          "description": "Use splitMonths to separate months visually with a spacer column and show only days that belong to the current month ...",
+          "tags": [
+            "splitMonths",
+            "type=\"gradient\"",
+            "gradientStops",
+            "offset",
+            "color",
+            "theme.colors",
+            "withLegend",
+            "legendProps",
+            "name",
+            "label"
+          ],
+          "path": "mantine/split-months.md",
+          "tokens": 5587
+        },
+        {
+          "id": "grid-and-text-colors-4",
+          "title": "Grid and text colors",
+          "description": "Use --chart-grid-color and --chart-text-color to change colors of\ngrid lines and text within the chart. With CSS modu...",
+          "tags": [
+            "--chart-grid-color",
+            "--chart-text-color",
+            "gridColor",
+            "textColor",
+            "tooltipAnimationDuration",
+            "unit",
+            "tooltipProps.content",
+            "getFilteredChartTooltipPayload",
+            "withTooltip={false}",
+            "dotProps"
+          ],
+          "path": "mantine/grid-and-text-colors-4.md",
+          "tokens": 3421
+        },
+        {
+          "id": "mantine-hooks-reference-area",
+          "title": "Reference area",
+          "description": "Use ReferenceArea component from recharts to display a reference area:",
+          "tags": [
+            "ReferenceArea",
+            "PieChart",
+            "withLabels",
+            "labelPosition",
+            "labelPosition=\"inside\"",
+            "labelPosition=\"outside",
+            "size",
+            "labelPosition=\"outside\"",
+            "h",
+            "w"
+          ],
+          "path": "mantine/mantine-hooks-reference-area.md",
+          "tokens": 3111
+        },
+        {
+          "id": "segments-stroke-2",
+          "title": "Segments stroke",
+          "description": "Use strokeWidth prop to control the width of the stroke around each segment:",
+          "tags": [
+            "strokeWidth",
+            "strokeColor",
+            "blue",
+            "red.5",
+            "orange.7",
+            "--mantine-color-body",
+            "RadarChart",
+            "radarChartProps",
+            "polarGridProps",
+            "polarAngleAxisProps"
+          ],
+          "path": "mantine/segments-stroke-2.md",
+          "tokens": 3858
+        },
+        {
+          "id": "recharts-props",
+          "title": "Recharts props",
+          "description": "To pass props down to the underlying recharts components, use the following props:",
+          "tags": [
+            "radarChartProps",
+            "polarGridProps",
+            "polarAngleAxisProps",
+            "polarRadiusAxisProps",
+            "RadialBarChart",
+            "color",
+            "data",
+            "withLegend",
+            "withLabels"
+          ],
+          "path": "mantine/recharts-props.md",
+          "tokens": 2301
+        },
+        {
+          "id": "hide-tooltip",
+          "title": "Hide tooltip",
+          "description": "To hide tooltip, set withTooltip={false} prop:",
+          "tags": [
+            "withTooltip={false}"
+          ],
+          "path": "mantine/hide-tooltip.md",
+          "tokens": 1105
+        },
+        {
+          "id": "multiple-series",
+          "title": "Multiple series",
+          "description": "",
+          "tags": [],
+          "path": "mantine/multiple-series.md",
+          "tokens": 540
+        },
+        {
+          "id": "legend",
+          "title": "Legend",
+          "description": "To display chart legend, set withLegend prop. When one of the items in the legend\nis hovered, the corresponding data ...",
+          "tags": [
+            "withLegend"
+          ],
+          "path": "mantine/legend.md",
+          "tokens": 579
+        },
+        {
+          "id": "legend-position",
+          "title": "Legend position",
+          "description": "You can pass props down to recharts Legend\ncomponent with legendProps prop. For example, setting legendProps={{ verti...",
+          "tags": [
+            "legendProps",
+            "xAxisProps",
+            "yAxisProps"
+          ],
+          "path": "mantine/legend-position.md",
+          "tokens": 1031
+        },
+        {
+          "id": "value-formatter",
+          "title": "Value formatter",
+          "description": "To format values in the tooltip and axis ticks, use valueFormat prop. It accepts\na function that takes number value a...",
+          "tags": [
+            "valueFormat",
+            "x",
+            "y",
+            "pointLabels"
+          ],
+          "path": "mantine/value-formatter.md",
+          "tokens": 946
+        },
+        {
+          "id": "grid-and-text-colors-5",
+          "title": "Grid and text colors",
+          "description": "Use --chart-grid-color and --chart-text-color to change colors of\ngrid lines and text within the chart. With CSS modu...",
+          "tags": [
+            "--chart-grid-color",
+            "--chart-text-color",
+            "gridColor",
+            "textColor",
+            "strokeDasharray",
+            "strokeDasharray=\"10 5\"",
+            "unit",
+            "tooltipProps.content",
+            "withTooltip={false}",
+            "tooltipAnimationDuration"
+          ],
+          "path": "mantine/grid-and-text-colors-5.md",
+          "tokens": 2945
+        },
+        {
+          "id": "mantine-hooks-reference-lines",
+          "title": "Reference lines",
+          "description": "Use referenceLines prop to render reference lines. Reference lines are always\nrendered behind the chart.",
+          "tags": [
+            "referenceLines",
+            "color"
+          ],
+          "path": "mantine/mantine-hooks-reference-lines.md",
+          "tokens": 2764
+        },
+        {
+          "id": "trend-colors",
+          "title": "Trend colors",
+          "description": "Use trendColors prop instead of color to change chart color depending on the trend.\nThe prop accepts an object with p...",
+          "tags": [
+            "trendColors",
+            "color",
+            "positive",
+            "negative",
+            "neutral",
+            "data"
+          ],
+          "path": "mantine/trend-colors.md",
+          "tokens": 781
+        },
+        {
+          "id": "6-x-7-x-migration-guide",
+          "title": "6.x → 7.x migration guide",
+          "description": "This guide is intended to help you migrate your project styles from 6.x to 7.x.\nIt is not intended to be a comprehens...",
+          "tags": [
+            "@mantine/emotion",
+            "createStyles",
+            "sx",
+            "styles",
+            "Global",
+            "@mantine/core",
+            "colorScheme",
+            "light",
+            "dark",
+            "theme.colorScheme"
+          ],
+          "path": "mantine/6-x-7-x-migration-guide.md",
+          "tokens": 2500
+        },
+        {
+          "id": "7-x-8-x-migration-guide",
+          "title": "7.x → 8.x migration guide",
+          "description": "If you used separate styles imports from @mantine/core/styles/global.css , you need to update imports to use new file...",
+          "tags": [
+            "@mantine/core/styles/global.css",
+            "@mantine/core/styles.css",
+            "styles.css",
+            "reuseTargetNode",
+            "z-index",
+            "false",
+            "withThumbIndicator",
+            "@mantine/dates",
+            "onChange",
+            "Date"
+          ],
+          "path": "mantine/7-x-8-x-migration-guide.md",
+          "tokens": 3348
+        },
+        {
+          "id": "usage-with-gatsby",
+          "title": "Usage with Gatsby",
+          "description": "Follow Gatsby quick start guide to\ncreate new Gatsby application:",
+          "tags": [
+            "PostCSS",
+            "postcss.config.cjs",
+            "src/theme.ts",
+            "gatsby-ssr.tsx",
+            "gatsby-browser.tsx"
+          ],
+          "path": "mantine/usage-with-gatsby.md",
+          "tokens": 625
+        },
+        {
+          "id": "icons-libraries-with-mantine",
+          "title": "Icons libraries with Mantine",
+          "description": "You can use any icons library with Mantine components, most popular options are:",
+          "tags": [
+            "@mantine/",
+            "size",
+            "width",
+            "height",
+            "size={16}",
+            "width=\"16\"",
+            "height=\"16\"",
+            "size=\"1rem\"",
+            "width=\"1rem\"",
+            "height=\"1rem\""
+          ],
+          "path": "mantine/icons-libraries-with-mantine.md",
+          "tokens": 681
+        },
+        {
+          "id": "usage-with-javascript",
+          "title": "Usage with JavaScript",
+          "description": "Yes, it is possible to use all @mantine/* packages (as well as all other npm packages) with JavaScript.\n@mantine/* pa...",
+          "tags": [
+            "@mantine/*"
+          ],
+          "path": "mantine/usage-with-javascript.md",
+          "tokens": 518
+        },
+        {
+          "id": "testing-with-jest",
+          "title": "Testing with Jest",
+          "description": "This guide will help you setup Jest and React Testing Library for your project.\nNote that this guide only covers shar...",
+          "tags": [
+            "@testing-library/*",
+            "./testing-utils/index.ts",
+            "./testing-utils",
+            "@testing-library/react",
+            "window.matchMedia",
+            "ResizeObserver",
+            "jest-environment-jsdom",
+            "jest.setup.js",
+            "jest.config.js"
+          ],
+          "path": "mantine/testing-with-jest.md",
+          "tokens": 999
+        },
+        {
+          "id": "llms-txt",
+          "title": "LLMs.txt",
+          "description": "Mantine provides LLM-friendly documentation to help AI tools like Cursor, Windsurf, GitHub Copilot, ChatGPT, and Clau...",
+          "tags": [
+            "llms.txt",
+            "@Docs",
+            "https://mantine.dev/llms.txt",
+            "@https://mantine.dev/llms.txt",
+            ".windsurfrules",
+            ".md",
+            "/llms",
+            "llms-full.txt"
+          ],
+          "path": "mantine/llms-txt.md",
+          "tokens": 762
+        },
+        {
+          "id": "usage-with-next-js",
+          "title": "Usage with Next.js",
+          "description": "Follow create-next-app guide to\ncreate new Next.js application:",
+          "tags": [
+            "postcss.config.cjs",
+            "pages/_app.tsx",
+            "pages/_document.tsx",
+            "app/layout.tsx",
+            "useContext",
+            "@mantine/*",
+            "index.js",
+            "'use client';",
+            "Component.XXX",
+            "XXX"
+          ],
+          "path": "mantine/usage-with-next-js.md",
+          "tokens": 1487
+        },
+        {
+          "id": "polymorphic-components",
+          "title": "Polymorphic components",
+          "description": "A polymorphic component is a component which root element can be changed with component prop.\nAll polymorphic compone...",
+          "tags": [
+            "component",
+            "button",
+            "a",
+            "renderRoot",
+            "<Link<'/'> />",
+            "props",
+            "Link",
+            "react-router-dom",
+            "href",
+            "className"
+          ],
+          "path": "mantine/polymorphic-components.md",
+          "tokens": 2171
+        },
+        {
+          "id": "usage-with-react-router",
+          "title": "Usage with React Router",
+          "description": "Follow React Router getting started guide guide to create new React Router application:",
+          "tags": [
+            "postcss.config.cjs",
+            "app/root.tsx"
+          ],
+          "path": "mantine/usage-with-react-router.md",
+          "tokens": 526
+        },
+        {
+          "id": "usage-with-redwoodjs",
+          "title": "Usage with RedwoodJS",
+          "description": "Follow Redwood getting started guide guide to\ncreate new Redwood application:",
+          "tags": [
+            "yarn",
+            "npm",
+            "web",
+            "postcss.config.js",
+            "web/src/App.tsx"
+          ],
+          "path": "mantine/usage-with-redwoodjs.md",
+          "tokens": 550
+        },
+        {
+          "id": "setup-mantine-in-storybook",
+          "title": "Setup Mantine in Storybook",
+          "description": "Note that this guide covers only Storybook 10.0+ integration. If you are using older version of Storybook,\nit will no...",
+          "tags": [
+            "@storybook/addon-themes",
+            ".storybook/main.ts",
+            "src/theme.ts",
+            ".storybook/preview.tsx",
+            "shouldRerenderOnTransaction: true",
+            "useEditor",
+            "immediatelyRender: false",
+            "StarterKit"
+          ],
+          "path": "mantine/setup-mantine-in-storybook.md",
+          "tokens": 1146
+        },
+        {
+          "id": "usage-with-typescript",
+          "title": "Usage with TypeScript",
+          "description": "All @mantine/* packages are fully compatible with TypeScript. All examples in the documentation\nare written in TypeSc...",
+          "tags": [
+            "@mantine/*",
+            "@mantine/core",
+            "@mantine/",
+            "Props",
+            "React.ComponentPropsWithoutRef<'X'>",
+            "X",
+            "'div'",
+            "component",
+            "ElementProps",
+            "React.ComponentPropsWithoutRef"
+          ],
+          "path": "mantine/usage-with-typescript.md",
+          "tokens": 2137
+        },
+        {
+          "id": "testing-with-vitest",
+          "title": "Testing with Vitest",
+          "description": "This guide will help you setup Vitest and React Testing Library for your project.\nNote that this guide intended for p...",
+          "tags": [
+            "vitest.setup.mjs",
+            "window.matchMedia",
+            "ResizeObserver",
+            "jsdom",
+            "package.json",
+            "@testing-library/*",
+            "./testing-utils/index.ts",
+            "./testing-utils",
+            "@testing-library/react"
+          ],
+          "path": "mantine/testing-with-vitest.md",
+          "tokens": 1006
+        },
+        {
+          "id": "color-schemes",
+          "title": "Color schemes",
+          "description": "MantineProvider manages color scheme context in your application.\nYou can configure the default color scheme value wi...",
+          "tags": [
+            "defaultColorScheme",
+            "light",
+            "dark",
+            "auto",
+            "data-mantine-color-scheme",
+            "<html />",
+            "useMantineColorScheme",
+            "useComputedColorScheme",
+            "keepTransitions: true",
+            "colorScheme"
+          ],
+          "path": "mantine/color-schemes.md",
+          "tokens": 3223
+        },
+        {
+          "id": "colors",
+          "title": "Colors",
+          "description": "Mantine uses open-color in default theme with some additions.\nEach color has 10 shades.",
+          "tags": [
+            "theme.colors",
+            "color",
+            "color=\"blue.11\"",
+            "virtualColor",
+            "name",
+            "light",
+            "dark",
+            "Ctrl + J",
+            "colorsTuple",
+            "#fff"
+          ],
+          "path": "mantine/colors.md",
+          "tokens": 3991
+        },
+        {
+          "id": "default-props",
+          "title": "Default props",
+          "description": "You can define default props for every Mantine component by setting theme.components.\nThese props will be used by def...",
+          "tags": [
+            "theme.components",
+            "MantineThemeProvider",
+            "Menu.Item",
+            "Tabs.List",
+            "useProps",
+            "defaultProps",
+            "props",
+            "withProps"
+          ],
+          "path": "mantine/default-props.md",
+          "tokens": 1084
+        },
+        {
+          "id": "mantineprovider",
+          "title": "MantineProvider",
+          "description": "MantineProvider provides a theme object context value, manages color scheme\nchanges and injects CSS variables. It mus...",
+          "tags": [
+            "MantineProvider",
+            "theme",
+            "colorSchemeManager",
+            "window.localStorage",
+            "defaultColorScheme",
+            "light",
+            "dark",
+            "auto",
+            "cssVariablesSelector",
+            ":root"
+          ],
+          "path": "mantine/mantineprovider.md",
+          "tokens": 2820
+        },
+        {
+          "id": "theme-object",
+          "title": "Theme object",
+          "description": "Mantine theme is an object where your application's colors, fonts, spacing, border-radius and other design tokens are...",
+          "tags": [
+            "theme",
+            "autoContrast",
+            "color",
+            "variant=\"filled\"",
+            "variant=\"pills\"",
+            "luminanceThreshold",
+            "theme.white",
+            "theme.black",
+            "theme.autoContrast",
+            "true"
+          ],
+          "path": "mantine/theme-object.md",
+          "tokens": 4603
+        },
+        {
+          "id": "typography",
+          "title": "Typography",
+          "description": "You can change fonts and other text styles for headings, code and all other components with the following theme prope...",
+          "tags": [
+            "theme.fontFamily",
+            "theme.fontFamilyMonospace",
+            "theme.headings.fontFamily",
+            "theme.fontSizes",
+            "theme.lineHeights",
+            "theme.lineHeights.md",
+            "theme.headings"
+          ],
+          "path": "mantine/typography.md",
+          "tokens": 1562
+        },
+        {
+          "id": "color-functions",
+          "title": "Color functions",
+          "description": "@mantine/core package exports several functions that can be used to manipulate colors\nor extract information before u...",
+          "tags": [
+            "@mantine/core",
+            "darken",
+            "lighten",
+            "alpha",
+            "color-mix",
+            "parseThemeColor",
+            "theme",
+            "getThemeColor",
+            "getGradient",
+            "MantineGradient"
+          ],
+          "path": "mantine/color-functions.md",
+          "tokens": 1287
+        },
+        {
+          "id": "css-files-list",
+          "title": "CSS files list",
+          "description": "This page contains a list of CSS files that you can import from @mantine/core package\nas a replacement for @mantine/c...",
+          "tags": [
+            "@mantine/core",
+            "@mantine/core/styles.css",
+            "UnstyledButton",
+            "baseline.css",
+            "box-sizing: border-box",
+            "default-css-variables.css",
+            "global.css"
+          ],
+          "path": "mantine/css-files-list.md",
+          "tokens": 773
+        },
+        {
+          "id": "css-modules",
+          "title": "CSS modules",
+          "description": "All Mantine components use CSS modules for styling.\nIt is recommended to use CSS modules in your project as well, but...",
+          "tags": [
+            "*.module.css",
+            ".js",
+            ".ts",
+            ":global",
+            "className",
+            "classNames",
+            "style",
+            "styles",
+            ".mantine-Text-root",
+            "@emotion/styled"
+          ],
+          "path": "mantine/css-modules.md",
+          "tokens": 1443
+        },
+        {
+          "id": "mantine-css-variables",
+          "title": "Mantine CSS variables",
+          "description": "MantineProvider exposes all Mantine CSS variables based on the given theme.\nYou can use these variables in CSS files,...",
+          "tags": [
+            "theme.headings.fontFamily",
+            "--mantine-font-family-headings",
+            "--mantine-font-family",
+            "DEFAULT_THEME",
+            "ff=\"text\"",
+            "ff=\"monospace\"",
+            "--mantine-font-family-monospace",
+            "ff=\"heading\"",
+            "size",
+            "theme.fontSizes"
+          ],
+          "path": "mantine/mantine-css-variables.md",
+          "tokens": 6404
+        },
+        {
+          "id": "data-attributes",
+          "title": "data attributes",
+          "description": "Mantine components use data-* attributes to apply styles. These attributes are used as\na modifier to apply styles bas...",
+          "tags": [
+            "data-*",
+            "disabled",
+            "data-disabled",
+            "<button />",
+            "section",
+            "data-position",
+            "left",
+            "right",
+            "data-position=\"left\"",
+            "data-position=\"right\""
+          ],
+          "path": "mantine/data-attributes.md",
+          "tokens": 1326
+        },
+        {
+          "id": "usage-with-emotion",
+          "title": "Usage with Emotion",
+          "description": "Prior to version 7.0 Mantine used Emotion as a styling solution.\nIt was replaced with CSS modules in version 7.0, but...",
+          "tags": [
+            "createStyles",
+            "sx",
+            "styles",
+            "@mantine/emotion",
+            "@mantine/core",
+            "@mantine/*",
+            "@emotion/react",
+            "emotion.d.ts",
+            "src",
+            "MantineEmotionProvider"
+          ],
+          "path": "mantine/usage-with-emotion.md",
+          "tokens": 5949
+        },
+        {
+          "id": "global-styles",
+          "title": "Global styles",
+          "description": "@mantine/core package includes some global styles that are required for components to work correctly.\nIf you override...",
+          "tags": [
+            "@mantine/core",
+            "body",
+            ":root",
+            "mantine-active",
+            ":active",
+            "mantine-focus-auto",
+            ":focus-visible",
+            "mantine-focus-always",
+            ":focus",
+            "mantine-focus-never"
+          ],
+          "path": "mantine/global-styles.md",
+          "tokens": 882
+        },
+        {
+          "id": "mantine-styles",
+          "title": "Mantine styles",
+          "description": "This guide explains how to import styles of @mantine/* packages in your application\nand how to override them with CSS...",
+          "tags": [
+            "@mantine/*",
+            "@mantine/{package}/styles.css",
+            "@mantine/core",
+            "@layer mantine",
+            "styles.css",
+            "styles.layer.css",
+            "@layer",
+            "base",
+            "components",
+            "package.json"
+          ],
+          "path": "mantine/mantine-styles.md",
+          "tokens": 1283
+        },
+        {
+          "id": "mantine-postcss-preset",
+          "title": "Mantine PostCSS preset",
+          "description": "postcss-preset-mantine provides several CSS functions and mixins to help you write styles.\nIt is not required to use ...",
+          "tags": [
+            "postcss-preset-mantine",
+            "em",
+            "rem",
+            "postcss.config.cjs",
+            "16px = 1rem",
+            "16px = 1em",
+            "autoRem",
+            ".css",
+            "@media",
+            "calc()"
+          ],
+          "path": "mantine/mantine-postcss-preset.md",
+          "tokens": 2467
+        },
+        {
+          "id": "rem-em-and-px-units",
+          "title": "rem, em and px units",
+          "description": "All Mantine components use rem units to apply size styles (margin, padding, width, etc.).\nBy default, 1rem is conside...",
+          "tags": [
+            "rem",
+            "margin",
+            "padding",
+            "width",
+            "1rem",
+            "16px",
+            "html",
+            ":root",
+            "scale",
+            "1 / htmlFontSize"
+          ],
+          "path": "mantine/rem-em-and-px-units.md",
+          "tokens": 955
+        },
+        {
+          "id": "responsive-styles",
+          "title": "Responsive styles",
+          "description": "theme.breakpoints are used in all responsive Mantine components. Breakpoints are expected to be set in em units.\nYou ...",
+          "tags": [
+            "theme.breakpoints",
+            "em",
+            ".css",
+            "postcss-simple-vars",
+            "postcss.config.cjs",
+            "hiddenFrom",
+            "visibleFrom",
+            "xs",
+            "sm",
+            "md"
+          ],
+          "path": "mantine/responsive-styles.md",
+          "tokens": 2498
+        },
+        {
+          "id": "right-to-left-direction",
+          "title": "Right-to-left direction",
+          "description": "All Mantine components support right-to-left direction out of the box.\nYou can preview how components work with RTL d...",
+          "tags": [
+            "Ctrl + Shift + L",
+            "DirectionProvider",
+            "dir",
+            "html",
+            "detectDirection",
+            "true",
+            "useDirection",
+            "setDirection",
+            "toggleDirection",
+            "rtl"
+          ],
+          "path": "mantine/right-to-left-direction.md",
+          "tokens": 799
+        },
+        {
+          "id": "usage-with-sass",
+          "title": "Usage with Sass",
+          "description": "This guide will explain how to use Sass in combination with\npostcss-preset-mantine. Note that examples on mantine.dev...",
+          "tags": [
+            "postcss-preset-mantine",
+            "*.module.scss",
+            "*.module.sass",
+            "*.scss",
+            "*.sass",
+            "sass",
+            "vite.config.js",
+            "src/_mantine.scss",
+            "rem",
+            "hover"
+          ],
+          "path": "mantine/usage-with-sass.md",
+          "tokens": 1210
+        },
+        {
+          "id": "style-props",
+          "title": "Style props",
+          "description": "With style props, you can add inline styles to any Mantine component.\nStyle props add styles to the root element, if ...",
+          "tags": [
+            "mt",
+            "theme.spacing",
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+            "c",
+            "bd",
+            "bg"
+          ],
+          "path": "mantine/style-props.md",
+          "tokens": 872
+        },
+        {
+          "id": "style-prop",
+          "title": "Style prop",
+          "description": "All Mantine components that have root element support style prop.\nIt works similar to React style prop, but with some...",
+          "tags": [
+            "style",
+            "theme.other"
+          ],
+          "path": "mantine/style-prop.md",
+          "tokens": 519
+        },
+        {
+          "id": "styles-api",
+          "title": "Styles API",
+          "description": "The styles API is a set of props and techniques that allows you to customize the style of any element\ninside a Mantin...",
+          "tags": [
+            "Styles API",
+            "classNames",
+            "styles",
+            "theme.components",
+            "vars",
+            "!important",
+            ":hover",
+            ":first-of-type",
+            ".mantine-{ComponentName}-{selector}",
+            "root"
+          ],
+          "path": "mantine/styles-api.md",
+          "tokens": 2666
+        },
+        {
+          "id": "styles-overview",
+          "title": "Styles overview",
+          "description": "This guide will help you understand how to apply styles to Mantine and custom components.",
+          "tags": [
+            "color",
+            "variant",
+            "size",
+            "radius",
+            "background-color",
+            "border",
+            "c",
+            "border-color",
+            "style",
+            "!important"
+          ],
+          "path": "mantine/styles-overview.md",
+          "tokens": 1586
+        },
+        {
+          "id": "styles-performance",
+          "title": "Styles performance",
+          "description": "CSS modules is the most performant way to apply styles –\nthis approach generates static CSS that is never re-evaluate...",
+          "tags": [
+            "className",
+            "classNames",
+            "style",
+            "styles",
+            "!important",
+            "<style />"
+          ],
+          "path": "mantine/styles-performance.md",
+          "tokens": 1344
+        },
+        {
+          "id": "unstyled-components",
+          "title": "Unstyled components",
+          "description": "You can use Mantine as a headless UI library. To do that, simply do not import @mantine/*/styles.css\nin your applicat...",
+          "tags": [
+            "@mantine/*/styles.css",
+            "HeadlessMantineProvider",
+            "style",
+            "color",
+            "radius",
+            "size",
+            "lightHidden",
+            "darkHidden",
+            "visibleFrom",
+            "hiddenFrom"
+          ],
+          "path": "mantine/unstyled-components.md",
+          "tokens": 936
+        },
+        {
+          "id": "vanilla-extract-integration",
+          "title": "Vanilla extract integration",
+          "description": "Vanilla extract is a TypeScript CSS preprocessor that generates static CSS files at build time.\nIt is a great alterna...",
+          "tags": [
+            "light-dark",
+            "hover",
+            "@mantine/vanilla-extract",
+            "themeToVars",
+            ":root",
+            "createTheme",
+            "vars",
+            "*.css.ts",
+            "rem",
+            "em"
+          ],
+          "path": "mantine/vanilla-extract-integration.md",
+          "tokens": 1659
+        },
+        {
+          "id": "adding-custom-variants",
+          "title": "Adding custom variants",
+          "description": "Most of Mantine components support variant prop, it can be used in CSS variables resolver,\nand it is also exposed as ...",
+          "tags": [
+            "variant",
+            "data-variant=\"{value}\"",
+            "[data-variant=\"{value}\"]",
+            "underline",
+            "filled",
+            ".input[data-variant=\"filled\"]",
+            "mantine.d.ts",
+            "{x}Props"
+          ],
+          "path": "mantine/adding-custom-variants.md",
+          "tokens": 634
+        },
+        {
+          "id": "variantcolorresolver",
+          "title": "variantColorResolver",
+          "description": "Button, Badge, ActionIcon and other\ncomponents support custom variants with variantColorResolver\n– it supports both c...",
+          "tags": [
+            "theme.variantColorResolver",
+            "data-variant",
+            "size",
+            "theme.components",
+            "data-size=\"{value}\""
+          ],
+          "path": "mantine/variantcolorresolver.md",
+          "tokens": 1286
+        },
+        {
+          "id": "sizes-with-static-css-variables",
+          "title": "Sizes with static CSS variables",
+          "description": "Mantine components sizes are defined with CSS variables (usually on root element), for example,\nActionIcon component ...",
+          "tags": [
+            "data-size",
+            "vars",
+            "@mantine/carousel",
+            "emblaOptions",
+            "loop",
+            "dragFree",
+            "align",
+            "slideSize",
+            "slideGap",
+            "Carousel"
+          ],
+          "path": "mantine/sizes-with-static-css-variables.md",
+          "tokens": 3701
+        },
+        {
+          "id": "example-cards-carousel",
+          "title": "Example: Cards carousel",
+          "description": "| Prop | Type | Default | Description |\n|------|------|---------|-------------|\n| children | React.ReactNode | - | Ca...",
+          "tags": [
+            "Carousel.Slide",
+            "width",
+            "height",
+            "CodeHighlight",
+            "@mantine/code-highlight",
+            "createShikiAdapter",
+            "createHighlightJsAdapter",
+            "plainTextAdapter"
+          ],
+          "path": "mantine/example-cards-carousel.md",
+          "tokens": 2377
+        },
+        {
+          "id": "usage-with-shiki",
+          "title": "Usage with shiki",
+          "description": "Shiki library provides the most advanced syntax highlighting\nfor TypeScript and CSS/Sass code. It uses textmate gramm...",
+          "tags": [
+            "shiki",
+            "CodeHighlightAdapterProvider",
+            "createShikiAdapter",
+            "adapter",
+            "CodeHighlight",
+            "highlight.js",
+            "createHighlightJsAdapter",
+            "copyLabel",
+            "copiedLabel",
+            "withCopyButton={false}"
+          ],
+          "path": "mantine/usage-with-shiki.md",
+          "tokens": 3259
+        },
+        {
+          "id": "inline-code",
+          "title": "Inline code",
+          "description": "InlineCodeHighlight component allows highlighting inline code snippets:",
+          "tags": [
+            "InlineCodeHighlight",
+            "Dropzone",
+            "Dropzone.Accept",
+            "Dropzone.Reject",
+            "Dropzone.Idle",
+            "loading",
+            "LoadingOverlay",
+            "openRef",
+            "activateOnClick={false}",
+            "pointerEvents: 'all'"
+          ],
+          "path": "mantine/inline-code.md",
+          "tokens": 3510
+        },
+        {
+          "id": "dropzone-fullscreen-component",
+          "title": "Dropzone.FullScreen component",
+          "description": "Dropzone.FullScreen lets you capture files dropped to browser window instead of specific area.\nIt supports the same p...",
+          "tags": [
+            "Dropzone.FullScreen",
+            "Dropzone",
+            "background-color",
+            "color",
+            "border-radius",
+            "@mantine/hooks",
+            "@mantine/core",
+            "@mantine/",
+            "@mantine/dates",
+            "@mantine/carousel"
+          ],
+          "path": "mantine/dropzone-fullscreen-component.md",
+          "tokens": 2161
+        },
+        {
+          "id": "community-extensions",
+          "title": "Community extensions",
+          "description": "Community extensions are built by the community, they are maintained\nby the community members and are updated indepen...",
+          "tags": [
+            "mantine-oklch-color-picker",
+            "@rtivital/mantine-emoji-picker",
+            "ModalsProvider"
+          ],
+          "path": "mantine/community-extensions.md",
+          "tokens": 841
+        },
+        {
+          "id": "confirm-modal",
+          "title": "Confirm modal",
+          "description": "@mantine/modals package includes special modal that can be used for confirmations.\nComponent includes confirm and can...",
+          "tags": [
+            "openConfirmModal",
+            "modalId",
+            "children",
+            "onCancel",
+            "onConfirm",
+            "closeOnConfirm",
+            "true",
+            "closeOnCancel",
+            "cancelProps",
+            "confirmProps"
+          ],
+          "path": "mantine/confirm-modal.md",
+          "tokens": 2104
+        },
+        {
+          "id": "dynamic-content-and-the-modals-manager",
+          "title": "Dynamic Content and the modals manager",
+          "description": "The Modals manager allows you to dynamically update the content and properties of both standard and context modals af...",
+          "tags": [
+            "modals.updateModal",
+            "modals.updateContextModal",
+            "Notifications",
+            "position",
+            "@mantine/notifications",
+            "notifications",
+            "notifications.show",
+            "limit",
+            "notifications.hide",
+            "id"
+          ],
+          "path": "mantine/dynamic-content-and-the-modals-manager.md",
+          "tokens": 3970
+        },
+        {
+          "id": "subscribe-to-notifications-state",
+          "title": "Subscribe to notifications state",
+          "description": "You can subscribe to notifications state changes with useNotifications hook.\nThe hook returns an object with notifica...",
+          "tags": [
+            "useNotifications",
+            "notifications",
+            "queue",
+            "max-width",
+            "z-index",
+            "NavigationProgress",
+            "Spotlight",
+            "Ctrl + K",
+            "@mantine/spotlight",
+            "spotlight"
+          ],
+          "path": "mantine/subscribe-to-notifications-state.md",
+          "tokens": 3295
+        },
+        {
+          "id": "compound-components",
+          "title": "Compound components",
+          "description": "If you need more control over spotlight rendering and logic, use compound components.\nAvailable components:",
+          "tags": [
+            "Spotlight.Root",
+            "Spotlight.Search",
+            "Spotlight.ActionsList",
+            "Spotlight.Action",
+            "Spotlight.ActionsGroup",
+            "Spotlight.Empty"
+          ],
+          "path": "mantine/compound-components.md",
+          "tokens": 954
+        },
+        {
+          "id": "fixed-elements-offset",
+          "title": "Fixed elements offset",
+          "description": "Spotlight component uses react-remove-scroll\npackage to lock scroll. To properly size these elements add a className ...",
+          "tags": [
+            "Spotlight",
+            "elements",
+            "className",
+            "Modal.Content",
+            "Spotlight.Search",
+            "Spotlight.ActionsList",
+            "Spotlight.Empty",
+            "Spotlight.Footer",
+            "Spotlight.Action",
+            "Spotlight.ActionsGroup"
+          ],
+          "path": "mantine/fixed-elements-offset.md",
+          "tokens": 4112
+        },
+        {
+          "id": "labels-and-localization",
+          "title": "Labels and localization",
+          "description": "RichTextEditor supports changing labels for all controls with labels prop:",
+          "tags": [
+            "RichTextEditor",
+            "labels",
+            "aria-label",
+            "title",
+            "@mantine/tiptap"
+          ],
+          "path": "mantine/labels-and-localization.md",
+          "tokens": 1750
+        },
+        {
+          "id": "about-mantine",
+          "title": "About Mantine",
+          "description": "Mantine is a React components library focused on providing great user and developer experience.\nMantine development w...",
+          "tags": [
+            "@mantine/*",
+            "@mantine/hooks",
+            ".svg",
+            "@mantinex/mantine-logo",
+            "MantineLogo",
+            "@mantine/core"
+          ],
+          "path": "mantine/about-mantine.md",
+          "tokens": 567
+        },
+        {
+          "id": "browser-support",
+          "title": "Browser support",
+          "description": "Mantine is tested on real devices in the following browsers before each minor and major release: Chrome, Safari, Fire...",
+          "tags": [
+            "Browser support"
+          ],
+          "path": "mantine/browser-support.md",
+          "tokens": 668
+        },
+        {
+          "id": "contributing-to-mantine",
+          "title": "Contributing to Mantine",
+          "description": "First of all, thank you for showing interest in contributing to Mantine! All your contributions are extremely valuabl...",
+          "tags": [
+            "npm test",
+            "nvm use",
+            ".nvmrc",
+            "yarn",
+            "npm run setup",
+            "npm run build all",
+            "npm run storybook",
+            "npm run docs",
+            "npm run docs:docgen",
+            "storybook"
+          ],
+          "path": "mantine/contributing-to-mantine.md",
+          "tokens": 1364
+        },
+        {
+          "id": "getting-started",
+          "title": "Getting started",
+          "description": "The easiest way to get started is to use one of the templates.\nAll templates include required dependencies and pre-co...",
+          "tags": [
+            "@mantine/core",
+            "@mantine/hooks",
+            "@mantine/*",
+            "postcss.config.cjs",
+            "_app.tsx",
+            "<head />",
+            "mantineHtmlProps",
+            "<html />",
+            "$variable",
+            ".vscode/settings.json"
+          ],
+          "path": "mantine/getting-started.md",
+          "tokens": 2489
+        },
+        {
+          "id": "support",
+          "title": "Support",
+          "description": "This guide will help you understand how to get help, report bugs and connect with the community.\nKeep in mind that Ma...",
+          "tags": [
+            "@mantine/*",
+            "name",
+            "createFormActions",
+            "useForm",
+            "demoFormActions",
+            "setFieldValue",
+            "setValues",
+            "setInitialValues",
+            "setErrors",
+            "setFieldError"
+          ],
+          "path": "mantine/support.md",
+          "tokens": 8146
+        },
+        {
+          "id": "list-items-reordering",
+          "title": "List items reordering",
+          "description": "",
+          "tags": [],
+          "path": "mantine/list-items-reordering.md",
+          "tokens": 733
+        },
+        {
+          "id": "form-with-multiple-steps",
+          "title": "Form with multiple steps",
+          "description": "Package: @mantine/form\nImport: import { FormSchemaValidation } from '@mantine/form';",
+          "tags": [
+            "@mantine/form"
+          ],
+          "path": "mantine/form-with-multiple-steps.md",
+          "tokens": 1010
+        },
+        {
+          "id": "zod",
+          "title": "zod",
+          "description": "Installation:",
+          "tags": [
+            "mantine-form-zod-resolver",
+            "1.2.0",
+            "3.25.0",
+            "zod",
+            "zod/v4",
+            "zod@3",
+            "package.json",
+            "zodResolver",
+            "zod4Resolver"
+          ],
+          "path": "mantine/zod.md",
+          "tokens": 716
+        },
+        {
+          "id": "yup",
+          "title": "yup",
+          "description": "Installation:",
+          "tags": [],
+          "path": "mantine/yup.md",
+          "tokens": 524
+        },
+        {
+          "id": "joi",
+          "title": "joi",
+          "description": "Installation:",
+          "tags": [],
+          "path": "mantine/joi.md",
+          "tokens": 598
+        },
+        {
+          "id": "superstruct",
+          "title": "superstruct",
+          "description": "Installation:",
+          "tags": [],
+          "path": "mantine/superstruct.md",
+          "tokens": 553
+        },
+        {
+          "id": "valibot",
+          "title": "valibot",
+          "description": "Installation:",
+          "tags": [
+            "InferInput",
+            "valibot",
+            "form.isTouched",
+            "form.isDirty",
+            "touched",
+            "form.setFieldValue",
+            "dirty",
+            "initialValues",
+            "touchTrigger",
+            "change"
+          ],
+          "path": "mantine/valibot.md",
+          "tokens": 2926
+        },
+        {
+          "id": "form-getvalues",
+          "title": "form.getValues",
+          "description": "form.getValues function returns current form values. It can be\nused anywhere in the component to get the current form...",
+          "tags": [
+            "form.getValues",
+            "form.values",
+            "form.getValues()",
+            "useEffect",
+            "onValuesChange"
+          ],
+          "path": "mantine/form-getvalues.md",
+          "tokens": 557
+        },
+        {
+          "id": "form-getinputprops",
+          "title": "form.getInputProps",
+          "description": "form.getInputProps returns different props for controlled\nand uncontrolled modes. In controlled mode, the returned ob...",
+          "tags": [
+            "value",
+            "defaultValue",
+            "key",
+            "form.key()",
+            "form.setFieldValue",
+            "form.setValues",
+            "use-field"
+          ],
+          "path": "mantine/form-getinputprops.md",
+          "tokens": 893
+        },
+        {
+          "id": "use-field-api",
+          "title": "use-field API",
+          "description": "use-field hook accepts the following options object as a single argument:",
+          "tags": [
+            "use-field",
+            "validateOnBlur",
+            "true",
+            "validateOnChange",
+            "validate",
+            "null",
+            "isValidating",
+            "isTouched",
+            "isDirty",
+            "clearErrorOnChange"
+          ],
+          "path": "mantine/use-field-api.md",
+          "tokens": 1323
+        },
+        {
+          "id": "api-overview",
+          "title": "API overview",
+          "description": "All examples below use the following example use-form hook.",
+          "tags": [
+            "initialErrors",
+            "onSubmit",
+            "onReset",
+            "event.preventDefault()",
+            "onSubmitPreventDefault",
+            "useForm",
+            "always",
+            "never",
+            "validation-failed",
+            "UseFormReturnType"
+          ],
+          "path": "mantine/api-overview.md",
+          "tokens": 2354
+        },
+        {
+          "id": "formrootrule",
+          "title": "formRootRule",
+          "description": "formRootRule is a special rule path that can be used to validate objects and arrays\nalongside with their nested field...",
+          "tags": [
+            "formRootRule",
+            "validate"
+          ],
+          "path": "mantine/formrootrule.md",
+          "tokens": 1677
+        },
+        {
+          "id": "validate-fields-on-change",
+          "title": "Validate fields on change",
+          "description": "To validate all fields on change set validateInputOnChange option to true:",
+          "tags": [
+            "validateInputOnChange",
+            "true"
+          ],
+          "path": "mantine/validate-fields-on-change.md",
+          "tokens": 944
+        },
+        {
+          "id": "validate-fields-on-blur",
+          "title": "Validate fields on blur",
+          "description": "To validate all fields on blur set validateInputOnBlur option to true:",
+          "tags": [
+            "validateInputOnBlur",
+            "true",
+            "clearInputErrorOnChange",
+            "false",
+            "form.onSubmit",
+            "handleSubmit",
+            "handleErrors",
+            "form.isValid",
+            "form.validate",
+            "form.errors"
+          ],
+          "path": "mantine/validate-fields-on-blur.md",
+          "tokens": 2306
+        },
+        {
+          "id": "mantine-form-usage",
+          "title": "Usage",
+          "description": "@mantine/form package exports several functions that can be used in validation rules object.\nValidation functions are...",
+          "tags": [
+            "@mantine/form",
+            "isNotEmpty",
+            "false",
+            "null",
+            "undefined",
+            "isEmail",
+            "matches",
+            "isInRange",
+            "min",
+            "max"
+          ],
+          "path": "mantine/mantine-form-usage.md",
+          "tokens": 2563
+        },
+        {
+          "id": "initialize-form",
+          "title": "Initialize form",
+          "description": "When called form.initialize handler sets initialValues and values to the same value\nand marks form as initialized. It...",
+          "tags": [
+            "form.initialize",
+            "initialValues",
+            "values",
+            "readOnly",
+            "disabled",
+            "form.setFieldValue",
+            "form.reset",
+            "form.setInitialValues",
+            "transformValues",
+            "onSubmit"
+          ],
+          "path": "mantine/initialize-form.md",
+          "tokens": 4172
+        },
+        {
+          "id": "are-mantine-components-accessible",
+          "title": "Are Mantine components accessible?",
+          "description": "Learn about Mantine components accessibility features",
+          "tags": [
+            "<button>",
+            "<a>",
+            "aria-label"
+          ],
+          "path": "mantine/are-mantine-components-accessible.md",
+          "tokens": 556
+        },
+        {
+          "id": "why-can-i-not-use-value-label-data-structure-with-autocomplete-tagsinput",
+          "title": "Why can I not use value/label data structure with Autocomplete/TagsInput?",
+          "description": "Learn the difference between Autocomplete and Select components",
+          "tags": [
+            "data",
+            "React",
+            "Vue",
+            "Angular",
+            "{ value: string; label: string; }",
+            "18361",
+            "09411",
+            "body",
+            "styles.css",
+            "--mantine-color-body"
+          ],
+          "path": "mantine/why-can-i-not-use-value-label-data-structure-with-autocomplete-tagsinput.md",
+          "tokens": 1281
+        },
+        {
+          "id": "can-i-use-mantine-with-create-react-app-cra",
+          "title": "Can I use Mantine with Create React App (CRA)?",
+          "description": "Learn how to use Mantine without postcss-preset-mantine or how to eject CRA and customize webpack.config.js and use p...",
+          "tags": [
+            "rem",
+            "em",
+            "light-dark",
+            "npm run eject",
+            "postcss.config.js",
+            "postcss-loader",
+            "config/webpack.config.js",
+            "@mantine/core",
+            "@mantine/carousel",
+            "color"
+          ],
+          "path": "mantine/can-i-use-mantine-with-create-react-app-cra.md",
+          "tokens": 1692
+        },
+        {
+          "id": "i-get-hydration-warning-about-data-mantine-color-scheme-attribute-what-does-it-mean",
+          "title": "I get hydration warning about data-mantine-color-scheme attribute, what does it mean?",
+          "description": "Learn how hydration works and how to fix warnings",
+          "tags": [
+            "ColorSchemeScript",
+            "data-mantine-color-scheme",
+            "<html />",
+            "mantineHtmlProps",
+            "suppressHydrationWarning"
+          ],
+          "path": "mantine/i-get-hydration-warning-about-data-mantine-color-scheme-attribute-what-does-it-mean.md",
+          "tokens": 1139
+        },
+        {
+          "id": "how-can-i-test-select-multiselect-components",
+          "title": "How can I test Select/MultiSelect components?",
+          "description": "Learn how to use react-testing-library to test Select and MultiSelect components.",
+          "tags": [
+            "render",
+            "screen",
+            "userEvent",
+            "test-utils",
+            "data",
+            "name",
+            "Select",
+            "Autocomplete",
+            "@mantine/form",
+            "form.getInputProps()"
+          ],
+          "path": "mantine/how-can-i-test-select-multiselect-components.md",
+          "tokens": 2253
+        },
+        {
+          "id": "how-can-i-disable-all-inputs-inputs-group-inside-form",
+          "title": "How can I disable all inputs/inputs group inside form?",
+          "description": "Learn how to disable all inputs/inputs group inside form with unstyled Fieldset component",
+          "tags": [
+            "disabled",
+            "Fieldset",
+            "variant=\"unstyled\"",
+            "enhanceGetInputProps",
+            "data-mantine-color-scheme",
+            "ColorSchemeScript",
+            "MantineProvider",
+            "html",
+            "light",
+            "dark"
+          ],
+          "path": "mantine/how-can-i-disable-all-inputs-inputs-group-inside-form.md",
+          "tokens": 1101
+        },
+        {
+          "id": "how-can-i-add-dynamic-css-styles",
+          "title": "How can I add dynamic CSS styles?",
+          "description": "Use data attributes, CSS variables or inline styles",
+          "tags": [
+            "data-disabled",
+            "disabled",
+            "disabled || undefined",
+            "data-disabled=\"false\"",
+            "false",
+            "&[data-disabled]",
+            "data-orientation",
+            "orientation",
+            "horizontal",
+            "vertical"
+          ],
+          "path": "mantine/how-can-i-add-dynamic-css-styles.md",
+          "tokens": 823
+        },
+        {
+          "id": "why-filebutton-does-not-work-in-menu",
+          "title": "Why FileButton does not work in Menu?",
+          "description": "Learn how to use FileButton in Menu component",
+          "tags": [
+            "onChange",
+            "FileButton",
+            "Menu",
+            "Menu.Item",
+            "input[type=\"file\"]",
+            "keepMounted",
+            "closeOnItemClick={false}",
+            "body",
+            "color-scheme",
+            "form.getInputNode"
+          ],
+          "path": "mantine/why-filebutton-does-not-work-in-menu.md",
+          "tokens": 1349
+        },
+        {
+          "id": "how-can-i-contribute-to-the-library",
+          "title": "How can I contribute to the library?",
+          "description": "There are multiple ways to contribute even without writing code",
+          "tags": [
+            "@mantine/*",
+            "npm test",
+            "nvm use",
+            ".nvmrc",
+            "yarn",
+            "npm run setup",
+            "npm run build all",
+            "npm run storybook",
+            "npm run docs",
+            "npm run docs:docgen"
+          ],
+          "path": "mantine/how-can-i-contribute-to-the-library.md",
+          "tokens": 1621
+        },
+        {
+          "id": "how-can-i-get-current-color-scheme-value-in-javascript",
+          "title": "How can I get current color scheme value in JavaScript?",
+          "description": "How to use useMantineColorScheme and useComputedColorScheme hooks to get current color scheme value in JavaScript",
+          "tags": [
+            "useMantineColorScheme",
+            "useComputedColorScheme",
+            "auto",
+            "dark",
+            "light",
+            "localStorage",
+            "data-mantine-color-scheme",
+            "lightHidden",
+            "darkHidden",
+            "light-dark"
+          ],
+          "path": "mantine/how-can-i-get-current-color-scheme-value-in-javascript.md",
+          "tokens": 1325
+        },
+        {
+          "id": "how-can-i-lint-css-files",
+          "title": "How can I lint CSS files?",
+          "description": "Learn how to setup Stylelint for Mantine postcss syntax",
+          "tags": [
+            "stylelint",
+            "stylelint-config-standard-scss",
+            ".stylelintrc.json",
+            "package.json"
+          ],
+          "path": "mantine/how-can-i-lint-css-files.md",
+          "tokens": 526
+        },
+        {
+          "id": "how-to-update-mantine-dependencies",
+          "title": "How to update Mantine dependencies?",
+          "description": "Learn how to update @mantine/, @mantinex/ and postcss-preset-mantine dependencies manually or with ncu script",
+          "tags": [
+            "package.json",
+            "npx",
+            "@mantine/*",
+            "7.3.0",
+            "postcss-preset-mantine",
+            "1.11.0"
+          ],
+          "path": "mantine/how-to-update-mantine-dependencies.md",
+          "tokens": 706
+        },
+        {
+          "id": "how-to-use-dropzone-with-mantine-form",
+          "title": "How to use Dropzone with @mantine/form?",
+          "description": "Learn how to use Dropzone with @mantine/form to handle file selection state",
+          "tags": [
+            "Dropzone",
+            "use-form",
+            "form.getValues().x",
+            "form.errors.x",
+            "form.setFieldValue('x', value)",
+            ":focus-within",
+            ":focus",
+            "Input",
+            "<input />",
+            "&:placeholder"
+          ],
+          "path": "mantine/how-to-use-dropzone-with-mantine-form.md",
+          "tokens": 1327
+        },
+        {
+          "id": "how-can-i-display-different-elements-in-light-and-dark-color-schemes",
+          "title": "How can I display different elements in light and dark color schemes?",
+          "description": "Learn how to hide/show elements based on color scheme",
+          "tags": [
+            "data-mantine-color-scheme=\"value\"",
+            "html",
+            "light",
+            "dark",
+            "data-mantine-color-scheme",
+            "ColorSchemeScript",
+            "MantineProvider",
+            "useMantineColorScheme",
+            "lightHidden",
+            "darkHidden"
+          ],
+          "path": "mantine/how-can-i-display-different-elements-in-light-and-dark-color-schemes.md",
+          "tokens": 883
+        },
+        {
+          "id": "can-i-use-an-array-of-strings-as-a-list-in-use-form",
+          "title": "Can I use an array of strings as a list in use-form?",
+          "description": "Learn about use-form lists limitations",
+          "tags": [
+            "form.removeListItem",
+            "form.insertListItem",
+            "form.reorderListItem",
+            "use-form",
+            "useEffect",
+            "value",
+            "dark",
+            "light",
+            "getInitialValueInEffect: false",
+            "MantineProvider"
+          ],
+          "path": "mantine/can-i-use-an-array-of-strings-as-a-list-in-use-form.md",
+          "tokens": 1915
+        },
+        {
+          "id": "can-i-use-nested-inline-styles-with-mantine-components",
+          "title": "Can I use nested inline styles with Mantine components?",
+          "description": "Nested styles are supported only in CSS files",
+          "tags": [
+            "style"
+          ],
+          "path": "mantine/can-i-use-nested-inline-styles-with-mantine-components.md",
+          "tokens": 626
+        },
+        {
+          "id": "my-popover-dropdown-closes-when-i-click-on-the-dropdown-of-nested-popover",
+          "title": "My Popover dropdown closes when I click on the dropdown of nested Popover",
+          "description": "Popover dropdown is closed when it detects click outside events",
+          "tags": [
+            "document.body",
+            "overflow: hidden",
+            "withinPortal={false}",
+            "comboboxProps"
+          ],
+          "path": "mantine/my-popover-dropdown-closes-when-i-click-on-the-dropdown-of-nested-popover.md",
+          "tokens": 678
+        },
+        {
+          "id": "how-can-i-load-fonts-in-next-js",
+          "title": "How can I load fonts in Next.js?",
+          "description": "A guide to load custom fonts in Next.js with CSS and next/font package",
+          "tags": [
+            "Roboto.ts",
+            "Roboto.css",
+            "Notifications",
+            "children",
+            "@mantine/notifications",
+            "react-remove-scroll",
+            "removeScrollProps",
+            "Button",
+            "button",
+            "a"
+          ],
+          "path": "mantine/how-can-i-load-fonts-in-next-js.md",
+          "tokens": 2289
+        },
+        {
+          "id": "how-can-i-test-modal-drawer-popover-components",
+          "title": "How can I test Modal/Drawer/Popover components?",
+          "description": "Learn how to use react-testing-library to test components that use portals and transitions.",
+          "tags": [
+            "render",
+            "screen",
+            "userEvent",
+            "test-utils",
+            "AuthModal",
+            "setTimeout",
+            "@testing-library/react",
+            "data-autofocus",
+            "light-dark",
+            ".css"
+          ],
+          "path": "mantine/how-can-i-test-modal-drawer-popover-components.md",
+          "tokens": 2183
+        },
+        {
+          "id": "how-can-i-load-fonts-in-react-router",
+          "title": "How can I load fonts in React Router?",
+          "description": "A guide to load custom fonts in React Router",
+          "tags": [
+            "Roboto.css",
+            "<head />",
+            "root.tsx",
+            "form.onSubmit",
+            "scroll-margin",
+            "overflow: hidden;",
+            "value",
+            "defaultValue",
+            "SegmentedControl",
+            "Radio"
+          ],
+          "path": "mantine/how-can-i-load-fonts-in-react-router.md",
+          "tokens": 2108
+        },
+        {
+          "id": "what-is-the-difference-between-searchable-select-and-autocomplete",
+          "title": "What is the difference between searchable Select and Autocomplete?",
+          "description": "Searchable Select and Autocomplete are similar components, but they serve different purposes.",
+          "tags": [
+            "value",
+            "label",
+            "{ value: 'US', label: 'United States' }",
+            "'United States'",
+            "filter"
+          ],
+          "path": "mantine/what-is-the-difference-between-searchable-select-and-autocomplete.md",
+          "tokens": 1309
+        },
+        {
+          "id": "can-i-use-mantine-components-as-server-components",
+          "title": "Can I use Mantine components as server components?",
+          "description": "Learn about use client directive and server components usage",
+          "tags": [
+            "useState",
+            "useEffect",
+            "useRef",
+            "<Tabs.Tab />",
+            "<Popover.Dropdown />",
+            "window",
+            "'use client';",
+            "useDisclosure",
+            "useReducer",
+            "TabsTab"
+          ],
+          "path": "mantine/can-i-use-mantine-components-as-server-components.md",
+          "tokens": 1504
+        },
+        {
+          "id": "my-styles-are-overridden-by-mantine-components-styles-what-should-i-do",
+          "title": "My styles are overridden by Mantine components styles, what should I do?",
+          "description": "Learn how to use CSS layers to control styles order and prevent Mantine components from overriding your styles",
+          "tags": [
+            "@mantine/*",
+            "@mantine/*/styles.css",
+            "@layer",
+            "@mantine/*/styles.layer.css",
+            "@layer mantine {}",
+            "@mantine/hooks",
+            "@mantine/core",
+            "::before",
+            "list",
+            "yarn"
+          ],
+          "path": "mantine/my-styles-are-overridden-by-mantine-components-styles-what-should-i-do.md",
+          "tokens": 1499
+        },
+        {
+          "id": "why-is-it-required-to-have-10-shades-per-color",
+          "title": "Why is it required to have 10 shades per color?",
+          "description": "Learn how Mantine uses theme colors",
+          "tags": [
+            "theme.colors",
+            "color",
+            "theme.primaryColor",
+            "theme.primaryShade",
+            "theme.colors[color]",
+            "filled",
+            "light",
+            "blue[6]",
+            "blue[7]",
+            "blue[8]"
+          ],
+          "path": "mantine/why-is-it-required-to-have-10-shades-per-color.md",
+          "tokens": 782
+        },
+        {
+          "id": "can-i-use-mantine-with-emotion-styled-components-tailwindcss",
+          "title": "Can I use Mantine with Emotion/styled-components/tailwindcss?",
+          "description": "Learn about limitations of third-party styles",
+          "tags": [
+            "className",
+            "classNames",
+            "style",
+            "styles",
+            ".mantine-Text-root",
+            "@emotion/styled",
+            "styled-components"
+          ],
+          "path": "mantine/can-i-use-mantine-with-emotion-styled-components-tailwindcss.md",
+          "tokens": 736
+        },
+        {
+          "id": "how-can-i-load-fonts-in-vite",
+          "title": "How can I load fonts in Vite?",
+          "description": "A guide to load custom fonts in Vite",
+          "tags": [
+            "Roboto.css",
+            "<head />",
+            "index.html",
+            "Text"
+          ],
+          "path": "mantine/how-can-i-load-fonts-in-vite.md",
+          "tokens": 1163
         }
       ]
     },
