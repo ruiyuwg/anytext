@@ -1,5 +1,5 @@
 {
-  "version": 47,
+  "version": 48,
   "updatedAt": "2026-03-08",
   "libraries": [
     {
@@ -15991,6 +15991,1097 @@
           ],
           "path": "drizzle/zod.md",
           "tokens": 2796
+        }
+      ]
+    },
+    {
+      "id": "elysia",
+      "name": "Elysia",
+      "description": "Ergonomic web framework for building backend servers with Bun",
+      "version": "1",
+      "topics": [
+        {
+          "id": "graphql-apollo-plugin",
+          "title": "GraphQL Apollo Plugin",
+          "description": "Plugin for elysia for using GraphQL Apollo.",
+          "tags": [
+            "/graphql",
+            "HttpRequest",
+            "HttpResponse",
+            "req, res",
+            "context",
+            "ApolloServer",
+            "\"/graphql\"",
+            "process.env.ENV !== 'production'",
+            ":id",
+            "params.id"
+          ],
+          "path": "elysia/graphql-apollo-plugin.md",
+          "tokens": 3738
+        },
+        {
+          "id": "best-practice",
+          "title": "Best Practice",
+          "description": "Elysia is a pattern-agnostic framework, leaving the decision of which coding patterns to use up to you and your team.",
+          "tags": [
+            "cookie.name",
+            "undefined",
+            "cookie",
+            "tsconfig.json",
+            "Context",
+            "handle",
+            "abstract class",
+            "static",
+            "decorate",
+            "requestIP"
+          ],
+          "path": "elysia/best-practice.md",
+          "tokens": 3658
+        },
+        {
+          "id": "better-auth",
+          "title": "Better Auth",
+          "description": "Better Auth is framework-agnostic authentication (and authorization) framework for TypeScript.",
+          "tags": [
+            "http://localhost:3000/api/auth",
+            "http://localhost:3000/auth/api/auth",
+            "/api/auth",
+            "http://localhost:3000/auth/api",
+            "basePath",
+            "/",
+            "openapi",
+            "better-auth/plugins",
+            "@elysiajs/openapi",
+            "cors"
+          ],
+          "path": "elysia/better-auth.md",
+          "tokens": 1313
+        },
+        {
+          "id": "cheat-sheet",
+          "title": "Cheat Sheet",
+          "description": "Here is a quick overview of common Elysia patterns",
+          "tags": [],
+          "path": "elysia/cheat-sheet.md",
+          "tokens": 1768
+        },
+        {
+          "id": "config",
+          "title": "Config",
+          "description": "Elysia comes with a configurable behavior, allowing us to customize various aspects of its functionality.",
+          "tags": [
+            "false",
+            "true",
+            "t.Transform",
+            "Encode",
+            "Bun.serve.static",
+            "typebox",
+            "t.String",
+            "serve.maxRequestBodySize",
+            "serve",
+            "serve.idleTimeout"
+          ],
+          "path": "elysia/config.md",
+          "tokens": 3084
+        },
+        {
+          "id": "cookie",
+          "title": "Cookie",
+          "description": "You interact with cookies by using cookie from context.",
+          "tags": [
+            ".set()",
+            ".remove()",
+            "t.Cookie",
+            "visit.value",
+            "visit.httpOnly = true"
+          ],
+          "path": "elysia/cookie.md",
+          "tokens": 729
+        },
+        {
+          "id": "cors-plugin",
+          "title": "CORS Plugin",
+          "description": "This plugin adds support for customizing Cross-Origin Resource Sharing behavior.",
+          "tags": [
+            "true",
+            "*",
+            "'GET, PUT, POST'",
+            "['GET', 'PUT', 'POST']",
+            "'Content-Type, Authorization'",
+            "['Content-Type', 'Authorization']",
+            "'Content-Type, X-Powered-By'",
+            "['Content-Type', 'X-Powered-By']",
+            "include",
+            "5"
+          ],
+          "path": "elysia/cors-plugin.md",
+          "tokens": 1241
+        },
+        {
+          "id": "cron-plugin",
+          "title": "Cron Plugin",
+          "description": "This plugin adds support for running cron jobs in the Elysia server.",
+          "tags": [
+            "heartbeat",
+            "CronConfig",
+            "store",
+            "@elysiajs/cron/schedule",
+            ".everySeconds(2)",
+            ".everyMinutes(5)",
+            ".everyHours(3)",
+            ".everyHoursAt(3, 15)",
+            ".everyDayAt('04:19')",
+            ".everyWeekOn(Patterns.MONDAY, '19:30')"
+          ],
+          "path": "elysia/cron-plugin.md",
+          "tokens": 2537
+        },
+        {
+          "id": "deploy-to-production",
+          "title": "Deploy to production",
+          "description": "This page provides a guide on how to deploy Elysia to production.",
+          "tags": [
+            "server",
+            "Bun",
+            "--target",
+            "--minify",
+            "AVX2",
+            "node_modules/<library>",
+            "@opentelemetry/instrumentation-pg",
+            "pg",
+            "node_modules/pg",
+            "--external pg"
+          ],
+          "path": "elysia/deploy-to-production.md",
+          "tokens": 2233
+        },
+        {
+          "id": "eden-fetch",
+          "title": "Eden Fetch",
+          "description": "A fetch-like alternative to Eden Treaty.",
+          "tags": [],
+          "path": "elysia/eden-fetch.md",
+          "tokens": 714
+        },
+        {
+          "id": "eden-installation",
+          "title": "Eden Installation",
+          "description": "Start by installing Eden on your frontend:",
+          "tags": [
+            "npm why",
+            "Bun.file",
+            "baseUrl"
+          ],
+          "path": "elysia/eden-installation.md",
+          "tokens": 1968
+        },
+        {
+          "id": "config-2",
+          "title": "Config",
+          "description": "Eden Treaty accepts 2 parameters:",
+          "tags": [
+            "fetch",
+            "config.fetcher",
+            "Request",
+            "Elysia.handle",
+            "options.fetch.headers",
+            "string",
+            "RequestInit",
+            "config.headers",
+            "config.fetch.headers",
+            "value.headers"
+          ],
+          "path": "elysia/config-2.md",
+          "tokens": 2075
+        },
+        {
+          "id": "eden-treaty-legacy",
+          "title": "Eden Treaty Legacy",
+          "description": "This is the documentation for Eden Treaty 1 (edenTreaty).",
+          "tags": [
+            "/",
+            ".",
+            "method",
+            "<anyThing>",
+            "$query",
+            "$fetch",
+            "data",
+            "error",
+            "Error",
+            "Error.value"
+          ],
+          "path": "elysia/eden-treaty-legacy.md",
+          "tokens": 1709
+        },
+        {
+          "id": "parameters",
+          "title": "Parameters",
+          "description": "We need to send a payload to the server eventually.",
+          "tags": [
+            "null",
+            "undefined",
+            "$fetch"
+          ],
+          "path": "elysia/parameters.md",
+          "tokens": 834
+        },
+        {
+          "id": "response",
+          "title": "Response",
+          "description": "Once the fetch method is called, Eden Treaty returns a Promise containing an object with the following properties:",
+          "tags": [
+            "Promise",
+            "Response",
+            "number",
+            "FetchRequestInit['headers']",
+            "error()",
+            "error",
+            "response",
+            "null",
+            "data",
+            "AsyncGenerator"
+          ],
+          "path": "elysia/response.md",
+          "tokens": 1425
+        },
+        {
+          "id": "encapsulation",
+          "title": "Encapsulation",
+          "description": "Elysia hooks are encapsulated to its own instance only.",
+          "tags": [
+            "app",
+            "nameCheck",
+            "ageCheck"
+          ],
+          "path": "elysia/encapsulation.md",
+          "tokens": 982
+        },
+        {
+          "id": "end-to-end-type-safety",
+          "title": "End-to-End Type Safety ",
+          "description": "Imagine you have a toy train set.",
+          "tags": [],
+          "path": "elysia/end-to-end-type-safety.md",
+          "tokens": 744
+        },
+        {
+          "id": "error-handling",
+          "title": "Error Handling",
+          "description": "onError is called when an error is thrown.",
+          "tags": [
+            "toResponse",
+            ".error()"
+          ],
+          "path": "elysia/error-handling.md",
+          "tokens": 656
+        },
+        {
+          "id": "error-handling-2",
+          "title": "Error Handling ",
+          "description": "This page provides a more advanced guide for effectively handling errors with Elysia.",
+          "tags": [
+            "id",
+            "id must be a number",
+            "schema.error",
+            "validationDetail",
+            "onError",
+            "NODE_ENV",
+            "production",
+            "message",
+            "Elysia.allowUnsafeValidationDetails",
+            "true"
+          ],
+          "path": "elysia/error-handling-2.md",
+          "tokens": 1545
+        },
+        {
+          "id": "extend-context",
+          "title": "Extend context ",
+          "description": "Elysia provides a minimal Context by default, allowing us to extend Context for our specific need using state, decora...",
+          "tags": [
+            "wrapper",
+            "store"
+          ],
+          "path": "elysia/extend-context.md",
+          "tokens": 2735
+        },
+        {
+          "id": "extends-context",
+          "title": "Extends Context",
+          "description": "Elysia provides a context with small utilities to help you get started.",
+          "tags": [],
+          "path": "elysia/extends-context.md",
+          "tokens": 740
+        },
+        {
+          "id": "elysia-with-bun-fullstack-dev-server",
+          "title": "Elysia with Bun Fullstack Dev Server",
+          "description": "Bun 1.3 introduces a Fullstack Dev Server with HMR support.",
+          "tags": [
+            "await",
+            "staticPlugin()",
+            "http://localhost:3000/public",
+            "/public",
+            "prefix",
+            "staticPlugin",
+            "/",
+            "bunfig.toml",
+            "paths",
+            "tsconfig.json"
+          ],
+          "path": "elysia/elysia-with-bun-fullstack-dev-server.md",
+          "tokens": 1664
+        },
+        {
+          "id": "guard",
+          "title": "Guard",
+          "description": "When you need to apply multiple hooks to your application, instead of repeating hooks multiple times, you can use gua...",
+          "tags": [
+            "guard",
+            "beforeHandle",
+            "status"
+          ],
+          "path": "elysia/guard.md",
+          "tokens": 714
+        },
+        {
+          "id": "handler",
+          "title": "Handler ",
+          "description": "Handler - a function that accepts an HTTP request and returns a response.",
+          "tags": [
+            "store",
+            "Context.set",
+            "set-cookie",
+            "Set-Cookie",
+            "status",
+            "set.status",
+            "FormData",
+            "form",
+            "file",
+            "yield"
+          ],
+          "path": "elysia/handler.md",
+          "tokens": 3165
+        },
+        {
+          "id": "html-plugin",
+          "title": "HTML Plugin",
+          "description": "Allows you to use JSX and HTML with proper headers and support.",
+          "tags": [
+            "Content-Type: text/html; charset=utf8",
+            "<!doctype html>",
+            "safe",
+            "string",
+            "'text/html; charset=utf8'",
+            "boolean",
+            "true",
+            "boolean | 'full'",
+            "<html>",
+            "full"
+          ],
+          "path": "elysia/html-plugin.md",
+          "tokens": 1007
+        },
+        {
+          "id": "integration-with-ai-sdk",
+          "title": "Integration with AI SDK",
+          "description": "Elysia provides support for response streaming with ease, allowing you to integrate with Vercel AI SDKs seamlessly.",
+          "tags": [
+            "ReadableStream",
+            "Response",
+            "sse",
+            "fetch"
+          ],
+          "path": "elysia/integration-with-ai-sdk.md",
+          "tokens": 994
+        },
+        {
+          "id": "integration-with-astro",
+          "title": "Integration with Astro",
+          "description": "With Astro Endpoint, we can run Elysia on Astro directly.",
+          "tags": [],
+          "path": "elysia/integration-with-astro.md",
+          "tokens": 643
+        },
+        {
+          "id": "cloudflare-worker-experimental",
+          "title": "Cloudflare Worker Experimental",
+          "description": "Elysia now supports Cloudflare Worker with an experimental Cloudflare Worker Adapter.",
+          "tags": [
+            ".compile()",
+            "compatibility_date",
+            "2025-06-01",
+            "http://localhost:8787",
+            "nodejs_compat",
+            "Elysia.file",
+            "fs",
+            "public",
+            "cloudflare:workers",
+            "aot: false"
+          ],
+          "path": "elysia/cloudflare-worker-experimental.md",
+          "tokens": 1503
+        },
+        {
+          "id": "drizzle",
+          "title": "Drizzle",
+          "description": "Drizzle ORM is a headless TypeScript ORM with a focus on type safety and developer experience.",
+          "tags": [
+            "drizzle-typebox",
+            "@sinclair/typebox",
+            "Elysia",
+            "elysia",
+            "overrides",
+            "package.json",
+            "user",
+            "t.Pick",
+            "t.Omit",
+            "createInsertSchema"
+          ],
+          "path": "elysia/drizzle.md",
+          "tokens": 2431
+        },
+        {
+          "id": "integration-with-expo",
+          "title": "Integration with Expo",
+          "description": "Starting from Expo SDK 50, and App Router v3, Expo allows us to create API route directly in an Expo app.",
+          "tags": [
+            "type",
+            "expo export",
+            "netlify/edge-functions/hello.ts",
+            "export default"
+          ],
+          "path": "elysia/integration-with-expo.md",
+          "tokens": 1259
+        },
+        {
+          "id": "integration-with-next-js",
+          "title": "Integration with Next.js",
+          "description": "With Next.js App Router, we can run Elysia on Next.js routes.",
+          "tags": [
+            "typeof process",
+            "typeof window",
+            "window"
+          ],
+          "path": "elysia/integration-with-next-js.md",
+          "tokens": 1100
+        },
+        {
+          "id": "integration-with-node-js",
+          "title": "Integration with Node.js",
+          "description": "Elysia provides a runtime adapter to run Elysia on multiple runtimes, including Node.js.",
+          "tags": [
+            "tsx",
+            "ts-node",
+            "nodemon",
+            "package.json",
+            "tsconfig.json",
+            "compilerOptions.strict",
+            "true",
+            "bun dev"
+          ],
+          "path": "elysia/integration-with-node-js.md",
+          "tokens": 576
+        },
+        {
+          "id": "integration-with-nuxt",
+          "title": "Integration with Nuxt",
+          "description": "We can use nuxt-elysia, a community plugin for Nuxt, to set up Elysia on Nuxt API routes with Eden Treaty.",
+          "tags": [
+            "nuxt-elysia",
+            "nitro.preset: 'Bun'",
+            "api.ts"
+          ],
+          "path": "elysia/integration-with-nuxt.md",
+          "tokens": 503
+        },
+        {
+          "id": "prisma",
+          "title": "Prisma",
+          "description": "Prisma is an ORM that allows us to interact with databases in a type-safe manner.",
+          "tags": [
+            "prismabox",
+            "prisma/schema.prisma",
+            "generated/prismabox",
+            "User",
+            "generated/prismabox/User.ts",
+            "Post",
+            "generated/prismabox/Post.ts",
+            "app.handle"
+          ],
+          "path": "elysia/prisma.md",
+          "tokens": 1563
+        },
+        {
+          "id": "integration-with-tanstack-start",
+          "title": "Integration with TanStack Start",
+          "description": "Elysia can run inside TanStack Start server routes.",
+          "tags": [
+            "getTreaty",
+            "\"Hello Elysia!\"",
+            "\"Hello World!\"",
+            ".get",
+            "'Hello World!'",
+            "'Hello Elysia!'",
+            "/"
+          ],
+          "path": "elysia/integration-with-tanstack-start.md",
+          "tokens": 1421
+        },
+        {
+          "id": "jit-compiler",
+          "title": "JIT \"Compiler\" ",
+          "description": "Elysia is fast and will likely remain one of the fastest web frameworks for JavaScript only limited by the speed of t...",
+          "tags": [
+            "Bun.serve.routes",
+            "new Function(...)",
+            "eval(...)",
+            "Function.toString()",
+            "params",
+            "mapResponse",
+            "mapCompactResponse",
+            "new Response",
+            "status",
+            "headers"
+          ],
+          "path": "elysia/jit-compiler.md",
+          "tokens": 2571
+        },
+        {
+          "id": "jwt-plugin",
+          "title": "JWT Plugin",
+          "description": "This plugin adds support for using JWT in Elysia handlers.",
+          "tags": [
+            "jwt",
+            "HS256",
+            "typ",
+            "JWTPayloadSpec",
+            "setCookie"
+          ],
+          "path": "elysia/jwt-plugin.md",
+          "tokens": 1834
+        },
+        {
+          "id": "key-concept",
+          "title": "Key Concept ",
+          "description": "Elysia has every important concept that you need to understand.",
+          "tags": [
+            "isSignIn",
+            "profile",
+            "app",
+            "build",
+            "name",
+            "seed",
+            "static"
+          ],
+          "path": "elysia/key-concept.md",
+          "tokens": 1974
+        },
+        {
+          "id": "lifecycle",
+          "title": "Lifecycle",
+          "description": "Lifecycle hooks are functions that are executed on a specific event during the request-response cycle.",
+          "tags": [
+            "status(418)",
+            "status(\"I'm a teapot\")",
+            "beforeHandle",
+            "401 Unauthorized",
+            ".on",
+            "status"
+          ],
+          "path": "elysia/lifecycle.md",
+          "tokens": 875
+        },
+        {
+          "id": "lifecycle-2",
+          "title": "Lifecycle ",
+          "description": "Instead of a sequential process, Elysia's request handling is divided into multiple stages called lifecycle events.",
+          "tags": [
+            ".on",
+            "onError",
+            "onRequest",
+            "PreContext",
+            "Context",
+            "Request",
+            "Set",
+            "derived",
+            "onTransform",
+            "Context.body"
+          ],
+          "path": "elysia/lifecycle-2.md",
+          "tokens": 5924
+        },
+        {
+          "id": "macro",
+          "title": "Macro ",
+          "description": "Macro is similar to a function that has control over the lifecycle event, schema, and context with full type safety.",
+          "tags": [
+            "status",
+            "return status",
+            "throw new Error()",
+            "500 Internal Server Error",
+            "throw status"
+          ],
+          "path": "elysia/macro.md",
+          "tokens": 1642
+        },
+        {
+          "id": "from-express-to-elysia",
+          "title": "From Express to Elysia",
+          "description": "This guide is for Express users who want to see the differences from Express including syntax, and how to migrate you...",
+          "tags": [
+            "app.get()",
+            "app.post()",
+            "req",
+            "res",
+            "context",
+            "headers",
+            "query",
+            "params",
+            "body",
+            "express.json()"
+          ],
+          "path": "elysia/from-express-to-elysia.md",
+          "tokens": 5510
+        },
+        {
+          "id": "from-fastify-to-elysia",
+          "title": "From Fastify to Elysia",
+          "description": "This guide is for Fastify users who want to see the differences from Fastify including syntax, and how to migrate you...",
+          "tags": [
+            "app.get()",
+            "app.post()",
+            "request",
+            "reply",
+            "context",
+            "headers",
+            "query",
+            "params",
+            "body",
+            "@fastify/type-provider-typebox"
+          ],
+          "path": "elysia/from-fastify-to-elysia.md",
+          "tokens": 6138
+        },
+        {
+          "id": "from-hono-to-elysia",
+          "title": "From Hono to Elysia",
+          "description": "This guide is for Hono users who want to see the differences from Elysia including syntax, and how to migrate your ap...",
+          "tags": [
+            "app.get()",
+            "app.post()",
+            "Context",
+            "c.text",
+            "c.json",
+            "context",
+            "listen",
+            "file-type",
+            "content-type",
+            "next"
+          ],
+          "path": "elysia/from-hono-to-elysia.md",
+          "tokens": 6676
+        },
+        {
+          "id": "from-trpc-to-elysia",
+          "title": "From tRPC to Elysia",
+          "description": "This guide is for tRPC users who want to see the differences from Elysia including syntax, and how to migrate your ap...",
+          "tags": [
+            "app.get()",
+            "app.post()",
+            "procedure",
+            "query",
+            "mutation",
+            "get",
+            "post",
+            "put",
+            "delete",
+            "input"
+          ],
+          "path": "elysia/from-trpc-to-elysia.md",
+          "tokens": 6213
+        },
+        {
+          "id": "openapi",
+          "title": "OpenAPI",
+          "description": "Elysia is built around OpenAPI, and supports OpenAPI documentation out of the box.",
+          "tags": [
+            "detail",
+            "fromTypes",
+            "openapi"
+          ],
+          "path": "elysia/openapi.md",
+          "tokens": 814
+        },
+        {
+          "id": "openapi-2",
+          "title": "OpenAPI ",
+          "description": "Elysia has first-class support and follows OpenAPI schema by default.",
+          "tags": [
+            "/openapi",
+            "src/index.ts",
+            "Prettify",
+            "tsconfig.json",
+            "mapJsonSchema",
+            "toJSONSchema",
+            "@valibot/to-json-schema",
+            "withHeader",
+            "detail.hide",
+            "true"
+          ],
+          "path": "elysia/openapi-2.md",
+          "tokens": 3192
+        },
+        {
+          "id": "openapi-plugin",
+          "title": "OpenAPI Plugin ",
+          "description": "Plugin for elysia to auto-generate API documentation page.",
+          "tags": [
+            "/openapi",
+            "/openapi/json",
+            "detail",
+            "detail.hide",
+            "true",
+            "false",
+            "cdn"
+          ],
+          "path": "elysia/openapi-plugin.md",
+          "tokens": 987
+        },
+        {
+          "id": "opentelemetry",
+          "title": "OpenTelemetry",
+          "description": "This page is a config reference for OpenTelemetry. If you're looking to set up and integrate with OpenTelemetry, we r...",
+          "tags": [
+            "@elysiajs/opentelemetry",
+            "true",
+            "AsyncHooksContextManager",
+            "CompositePropagator",
+            "getNodeAutoInstrumentations",
+            "getNodeAutoInstrumentations()",
+            "BatchSpanProcessor"
+          ],
+          "path": "elysia/opentelemetry.md",
+          "tokens": 910
+        },
+        {
+          "id": "opentelemetry-2",
+          "title": "OpenTelemetry",
+          "description": "To start using OpenTelemetry, install @elysiajs/opentelemetry and apply plugin to any instance.",
+          "tags": [
+            "@elysiajs/opentelemetry",
+            "getTracer",
+            "record",
+            "startActiveSpan",
+            "anonymous",
+            "getCurrentSpan",
+            "AsyncLocalStorage",
+            "setAttributes",
+            "getCurrentSpan().setAttributes",
+            "PgInstrumentation"
+          ],
+          "path": "elysia/opentelemetry-2.md",
+          "tokens": 1668
+        },
+        {
+          "id": "eden-treaty",
+          "title": "Eden Treaty",
+          "description": "Eden Treaty is an object representation used to interact with a server and features type safety, auto-completion, and...",
+          "tags": [
+            "use",
+            "user",
+            "app"
+          ],
+          "path": "elysia/eden-treaty.md",
+          "tokens": 1249
+        },
+        {
+          "id": "plugin",
+          "title": "Plugin ",
+          "description": "A plugin is a part that is decoupled from the main instance.",
+          "tags": [
+            "state",
+            "decorate",
+            "name",
+            "seed",
+            "isSignIn",
+            "profile",
+            "app",
+            "type",
+            "Elysia.use",
+            "body"
+          ],
+          "path": "elysia/plugin.md",
+          "tokens": 4267
+        },
+        {
+          "id": "overview",
+          "title": "Overview",
+          "description": "Elysia is designed to be modular and lightweight.",
+          "tags": [
+            "vite",
+            "development",
+            "production",
+            "HMR",
+            "express",
+            "connect",
+            "/llms.txt",
+            "Bun.build",
+            "request",
+            "X-Request-ID"
+          ],
+          "path": "elysia/overview.md",
+          "tokens": 3603
+        },
+        {
+          "id": "quick-start",
+          "title": "Quick Start",
+          "description": "Elysia is a TypeScript backend framework with multiple runtime support but optimized for Bun.",
+          "tags": [
+            "bun create elysia",
+            "app",
+            "dev",
+            "src/index.ts",
+            "package.json",
+            "tsconfig.json",
+            "compilerOptions.strict",
+            "true",
+            "tsx",
+            "src/index.js"
+          ],
+          "path": "elysia/quick-start.md",
+          "tokens": 1753
+        },
+        {
+          "id": "react-email",
+          "title": "React Email",
+          "description": "React Email is a library that allows you to use React components to create emails.",
+          "tags": [
+            "package.json",
+            "src/emails",
+            "tsconfig.json",
+            "src/emails/otp.tsx",
+            "@react-email/components",
+            "PreviewProps",
+            "OTPEmail",
+            "react-dom/server"
+          ],
+          "path": "elysia/react-email.md",
+          "tokens": 1833
+        },
+        {
+          "id": "cookie-2",
+          "title": "Cookie ",
+          "description": "Elysia provides a mutable signal for interacting with Cookie.",
+          "tags": [
+            "undefined",
+            "cookie",
+            "tsconfig.json",
+            "Cookie<unknown>",
+            "set",
+            "add",
+            "t.Cookie",
+            "t.Optional",
+            "sign",
+            "secret"
+          ],
+          "path": "elysia/cookie-2.md",
+          "tokens": 2916
+        },
+        {
+          "id": "routing",
+          "title": "Routing ",
+          "description": "Web servers use the request's path and method to look up the correct resource, known as \"routing\".",
+          "tags": [
+            ":",
+            "/id/:id",
+            ":id",
+            "params",
+            "?",
+            "*",
+            "Elysia.get",
+            "Elysia.route",
+            "Elysia.all",
+            "Elysia.handle"
+          ],
+          "path": "elysia/routing.md",
+          "tokens": 3608
+        },
+        {
+          "id": "status",
+          "title": "Status",
+          "description": "A status code is an indicator of how the server handles the request.",
+          "tags": [
+            "status",
+            "redirect",
+            "headers",
+            "set.headers",
+            "418 I'm a teapot",
+            "/docs",
+            "https://elysiajs.com",
+            "x-powered-by",
+            "Elysia"
+          ],
+          "path": "elysia/status.md",
+          "tokens": 617
+        },
+        {
+          "id": "swagger-plugin",
+          "title": "Swagger Plugin",
+          "description": "This plugin generates a Swagger endpoint for an Elysia server",
+          "tags": [
+            "/swagger",
+            "/swagger/json",
+            "scalar",
+            "true",
+            "/address"
+          ],
+          "path": "elysia/swagger-plugin.md",
+          "tokens": 991
+        },
+        {
+          "id": "unit-test",
+          "title": "Unit Test ",
+          "description": "Being WinterTC compliant, we can use Request / Response classes to test an Elysia server.",
+          "tags": [
+            "bun:test"
+          ],
+          "path": "elysia/unit-test.md",
+          "tokens": 525
+        },
+        {
+          "id": "trace",
+          "title": "Trace",
+          "description": "Performance is an important aspect for Elysia.",
+          "tags": [
+            "aot: false",
+            "trace",
+            "on",
+            "onHandle",
+            "handle",
+            "onEvent",
+            "2",
+            "beforeHandle",
+            "number",
+            "Context"
+          ],
+          "path": "elysia/trace.md",
+          "tokens": 1425
+        },
+        {
+          "id": "typebox-elysia-t",
+          "title": "TypeBox (Elysia.t)",
+          "description": "Here's common patterns for writing validation types using Elysia.t.",
+          "tags": [
+            "Elysia.t",
+            "t.Object",
+            "elysia/type-system",
+            "UnionEnum",
+            "Uint8Array",
+            "arrayBuffer",
+            "ArrayBuffer",
+            "t.Optional",
+            "body",
+            "headers"
+          ],
+          "path": "elysia/typebox-elysia-t.md",
+          "tokens": 2522
+        },
+        {
+          "id": "typescript",
+          "title": "TypeScript",
+          "description": "Elysia has first-class support for TypeScript out of the box.",
+          "tags": [
+            "trace",
+            "trace/trace.json"
+          ],
+          "path": "elysia/typescript.md",
+          "tokens": 1324
+        },
+        {
+          "id": "validation",
+          "title": "Validation",
+          "description": "Elysia offers data validation out of the box.",
+          "tags": [
+            "Elysia.t",
+            "body",
+            "query",
+            "params",
+            "headers",
+            "cookie",
+            "response",
+            "t.Object"
+          ],
+          "path": "elysia/validation.md",
+          "tokens": 529
+        },
+        {
+          "id": "validation-2",
+          "title": "Validation ",
+          "description": "Elysia provides a schema to validate data out of the box to ensure that the data is in the correct format.",
+          "tags": [
+            "schema",
+            "undefined",
+            "body",
+            "fetch",
+            "multipart/form-data",
+            "t.File",
+            "fileType",
+            "?key=value",
+            "query",
+            "/key"
+          ],
+          "path": "elysia/validation-2.md",
+          "tokens": 5782
+        },
+        {
+          "id": "validation-error",
+          "title": "Validation Error",
+          "description": "If you use Elysia.t for validation, you can provide a custom error message based on the field that fails the validation.",
+          "tags": [
+            "Elysia.t",
+            "error"
+          ],
+          "path": "elysia/validation-error.md",
+          "tokens": 571
+        },
+        {
+          "id": "websocket",
+          "title": "WebSocket",
+          "description": "WebSocket is a real-time protocol for communication between your client and server.",
+          "tags": [
+            "Elysia.ws()",
+            "false",
+            "120",
+            "16777216",
+            "ws",
+            "Message",
+            "schema.message",
+            "string",
+            "Parse",
+            "Before Handle"
+          ],
+          "path": "elysia/websocket.md",
+          "tokens": 1527
+        },
+        {
+          "id": "your-first-route",
+          "title": "Your First Route",
+          "description": "When we enter a website, it takes",
+          "tags": [
+            "/",
+            "/about",
+            "/contact",
+            "GET",
+            "POST",
+            "DELETE",
+            ":",
+            "/id/:id",
+            ":id",
+            "?"
+          ],
+          "path": "elysia/your-first-route.md",
+          "tokens": 640
         }
       ]
     },

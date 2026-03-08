@@ -1,0 +1,279 @@
+# WebSocket
+
+WebSocket is a real-time protocol for communication between your client and server.
+
+Unlike HTTP where our client repeatedly asks the website for information and waits for a reply each time, WebSocket sets up a direct line where our client and server can send messages back and forth directly, making the conversation quicker and smoother without having to start over with each message.
+
+SocketIO is a popular library for WebSocket, but it is not the only one. Elysia uses [uWebSocket](https://github.com/uNetworking/uWebSockets) which Bun uses under the hood with the same API.
+
+To use WebSocket, simply call `Elysia.ws()`:
+
+```typescript
+import { Elysia } from 'elysia'
+
+new Elysia()
+    .ws('/ws', {
+        message(ws, message) {
+            ws.send(message)
+        }
+    })
+    .listen(3000)
+```
+
+## WebSocket message validation:
+
+Same as normal routes, WebSockets also accept a **schema** object to strictly type and validate requests.
+
+```typescript
+import { Elysia, t } from 'elysia'
+
+const app = new Elysia()
+    .ws('/ws', {
+        // validate incoming message
+        body: t.Object({
+            message: t.String()
+        }),
+        query: t.Object({
+            id: t.String()
+        }),
+        message(ws, { message }) {
+            // Get schema from `ws.data`
+            const { id } = ws.data.query
+            ws.send({
+                id,
+                message,
+                time: Date.now()
+            })
+        }
+    })
+    .listen(3000)
+```
+
+WebSocket schema can validate the following:
+
+- **message** - An incoming message.
+- **query** - Query string or URL parameters.
+- **params** - Path parameters.
+- **header** - Request's headers.
+- **cookie** - Request's cookie
+- **response** - Value returned from handler
+
+By default Elysia will parse incoming stringified JSON message as Object for validation.
+
+## Configuration
+
+You can set Elysia constructor to set the Web Socket value.
+
+```ts
+import { Elysia } from 'elysia'
+
+new Elysia({
+    websocket: {
+        idleTimeout: 30
+    }
+})
+```
+
+Elysia's WebSocket implementation extends Bun's WebSocket configuration, please refer to [Bun's WebSocket documentation](https://bun.sh/docs/api/websockets) for more information.
+
+The following is a brief configuration from [Bun WebSocket](https://bun.sh/docs/api/websockets#create-a-websocket-server)
+
+### perMessageDeflate
+
+@default `false`
+
+Enable compression for clients that support it.
+
+By default, compression is disabled.
+
+### maxPayloadLength
+
+The maximum size of a message.
+
+### idleTimeout
+
+@default `120`
+
+After a connection has not received a message for this many seconds, it will be closed.
+
+### backpressureLimit
+
+@default `16777216` (16MB)
+
+The maximum number of bytes that can be buffered for a single connection.
+
+### closeOnBackpressureLimit
+
+@default `false`
+
+Close the connection if the backpressure limit is reached.
+
+## Methods
+
+Below are the new methods that are available to the WebSocket route
+
+## ws
+
+Create a websocket handler
+
+Example:
+
+```typescript
+import { Elysia } from 'elysia'
+
+const app = new Elysia()
+    .ws('/ws', {
+        message(ws, message) {
+            ws.send(message)
+        }
+    })
+    .listen(3000)
+```
+
+Type:
+
+```typescript
+.ws(endpoint: path, options: Partial<WebSocketHandler<Context>>): this
+```
+
+- **endpoint** - A path to be exposed as websocket handler
+- **options** - Customize WebSocket handler behavior
+
+## WebSocketHandler
+
+WebSocketHandler extends config from [config](#configuration).
+
+Below is a config which is accepted by `ws`.
+
+## open
+
+Callback function for new websocket connection.
+
+Type:
+
+```typescript
+open(ws: ServerWebSocket<{
+    // uid for each connection
+    id: string
+    data: Context
+}>): this
+```
+
+## message
+
+Callback function for incoming websocket message.
+
+Type:
+
+```typescript
+message(
+    ws: ServerWebSocket<{
+        // uid for each connection
+        id: string
+        data: Context
+    }>,
+    message: Message
+): this
+```
+
+`Message` type based on `schema.message`. Default is `string`.
+
+## close
+
+Callback function for closing websocket connection.
+
+Type:
+
+```typescript
+close(ws: ServerWebSocket<{
+    // uid for each connection
+    id: string
+    data: Context
+}>): this
+```
+
+## drain
+
+Callback function for the server is ready to accept more data.
+
+Type:
+
+```typescript
+drain(
+    ws: ServerWebSocket<{
+        // uid for each connection
+        id: string
+        data: Context
+    }>,
+    code: number,
+    reason: string
+): this
+```
+
+## parse
+
+`Parse` middleware to parse the request before upgrading the HTTP connection to WebSocket.
+
+## beforeHandle
+
+`Before Handle` middleware which execute before upgrading the HTTP connection to WebSocket.
+
+Ideal place for validation.
+
+## transform
+
+`Transform` middleware which execute before validation.
+
+## transformMessage
+
+Like `transform`, but execute before validation of WebSocket message
+
+## header
+
+Additional headers to add before upgrading connection to WebSocket.
+
+***
+
+# Congratulations!
+
+You have completed the tutorial.
+
+Now you're ready to build your own application with Elysia!
+
+## First up
+
+We highly recommend that you check out these 2 pages first before getting started with Elysia:
+
+### llms.txt
+
+Alternatively, you can download llms.txt or llms-full.txt and feed it to your favorite LLMs like ChatGPT, Claude or Gemini to get a more interactive experience.
+
+### If you are stuck
+
+Feel free to ask our community on GitHub Discussions, Discord, and Twitter.
+
+## From another Framework?
+
+If you have used other popular frameworks like Express, Fastify, or Hono, you will find Elysia right at home with just a few differences.
+
+## Essential Chapter
+
+Here are the foundations of Elysia, we highly recommend that you go through these pages before jumping to other topics:
+
+## More Patterns
+
+If you feel like exploring more Elysia features, check out:
+
+## Integration with Meta Framework
+
+We can also use Elysia with Meta Framework like Nextjs, Nuxt, Astro, etc.
+
+## Integration with your favorite tool
+
+We have some integration with popular tools:
+
+***
+
+We hope you will love Elysia as much as we do!
+
+***
