@@ -184,6 +184,22 @@
       }
     },
     {
+      "id": "gcloud",
+      "name": "Google Cloud",
+      "description": "Google Cloud platform with compute, storage, databases, AI/ML, Kubernetes, and 100+ cloud services",
+      "version": "2026",
+      "adapter": "sitemap",
+      "url": "https://cloud.google.com/sitemap.xml",
+      "topicPrefix": "auto",
+      "rateLimit": 5,
+      "crawl": {
+        "contentSelector": ".devsite-article-body, article, main",
+        "include": ["/docs/"],
+        "exclude": ["/release-notes", "/changelog", "/versions", "/api/reference", "/apis/", "hl=", "/intl/"],
+        "maxPages": 10000
+      }
+    },
+    {
       "id": "azure",
       "name": "Azure",
       "description": "Microsoft Azure cloud platform with compute, storage, databases, AI, and 200+ services",
