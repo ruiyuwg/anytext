@@ -1,5 +1,5 @@
 {
-  "version": 50,
+  "version": 51,
   "updatedAt": "2026-03-08",
   "libraries": [
     {
@@ -75301,6 +75301,2412 @@
           "tags": [],
           "path": "react-native/version-and-react-version-are-the-release-versions-showing-in-the-diff.md",
           "tokens": 21089
+        }
+      ]
+    },
+    {
+      "id": "resend",
+      "name": "Resend",
+      "description": "Email API for developers with React Email components and transactional email sending",
+      "version": "1",
+      "topics": [
+        {
+          "id": "ai-onboarding",
+          "title": "AI Onboarding",
+          "description": "Source: https://resend.com/docs/ai-onboarding",
+          "tags": [
+            "md",
+            "npx skills add resend/resend-skills",
+            "npx skills add resend/react-email",
+            "POST /emails",
+            "POST /emails/batch",
+            "<event-type>/<entity-id>",
+            "welcome-email/user-123",
+            "batch-<event-type>/<batch-id>",
+            "batch-orders/batch-456",
+            "from"
+          ],
+          "path": "resend/ai-onboarding.md",
+          "tokens": 3212
+        },
+        {
+          "id": "create-api-key",
+          "title": "Create API key",
+          "description": "Source: https://resend.com/docs/api-reference/api-keys/create-api-key",
+          "tags": [
+            "full_access",
+            "sending_access",
+            "permission"
+          ],
+          "path": "resend/create-api-key.md",
+          "tokens": 784
+        },
+        {
+          "id": "delete-api-key",
+          "title": "Delete API key",
+          "description": "Source: https://resend.com/docs/api-reference/api-keys/delete-api-key",
+          "tags": [],
+          "path": "resend/delete-api-key.md",
+          "tokens": 600
+        },
+        {
+          "id": "list-api-keys",
+          "title": "List API keys",
+          "description": "Source: https://resend.com/docs/api-reference/api-keys/list-api-keys",
+          "tags": [],
+          "path": "resend/list-api-keys.md",
+          "tokens": 573
+        },
+        {
+          "id": "create-broadcast",
+          "title": "Create Broadcast",
+          "description": "Source: https://resend.com/docs/api-reference/broadcasts/create-broadcast",
+          "tags": [
+            "\"Your Name <sender@domain.com>\"",
+            "false",
+            "in 1 min",
+            "2024-08-05T11:52:01.858Z"
+          ],
+          "path": "resend/create-broadcast.md",
+          "tokens": 3195
+        },
+        {
+          "id": "delete-broadcast",
+          "title": "Delete Broadcast",
+          "description": "Source: https://resend.com/docs/api-reference/broadcasts/delete-broadcast",
+          "tags": [
+            "draft"
+          ],
+          "path": "resend/delete-broadcast.md",
+          "tokens": 669
+        },
+        {
+          "id": "retrieve-broadcast",
+          "title": "Retrieve Broadcast",
+          "description": "Source: https://resend.com/docs/api-reference/broadcasts/get-broadcast",
+          "tags": [
+            "status"
+          ],
+          "path": "resend/retrieve-broadcast.md",
+          "tokens": 814
+        },
+        {
+          "id": "list-broadcasts",
+          "title": "List Broadcasts",
+          "description": "Source: https://resend.com/docs/api-reference/broadcasts/list-broadcasts",
+          "tags": [
+            "status"
+          ],
+          "path": "resend/list-broadcasts.md",
+          "tokens": 760
+        },
+        {
+          "id": "send-broadcast",
+          "title": "Send Broadcast",
+          "description": "Source: https://resend.com/docs/api-reference/broadcasts/send-broadcast",
+          "tags": [
+            "in 1 min",
+            "2024-08-05T11:52:01.858Z"
+          ],
+          "path": "resend/send-broadcast.md",
+          "tokens": 866
+        },
+        {
+          "id": "update-broadcast",
+          "title": "Update Broadcast",
+          "description": "Source: https://resend.com/docs/api-reference/broadcasts/update-broadcast",
+          "tags": [
+            "\"Your Name <sender@domain.com>\""
+          ],
+          "path": "resend/update-broadcast.md",
+          "tokens": 1152
+        },
+        {
+          "id": "create-contact-property",
+          "title": "Create Contact Property",
+          "description": "Source: https://resend.com/docs/api-reference/contact-properties/create-contact-property",
+          "tags": [
+            "50",
+            "string",
+            "number",
+            "type"
+          ],
+          "path": "resend/create-contact-property.md",
+          "tokens": 967
+        },
+        {
+          "id": "delete-contact-property",
+          "title": "Delete Contact Property",
+          "description": "Source: https://resend.com/docs/api-reference/contact-properties/delete-contact-property",
+          "tags": [],
+          "path": "resend/delete-contact-property.md",
+          "tokens": 700
+        },
+        {
+          "id": "retrieve-contact-property",
+          "title": "Retrieve Contact Property",
+          "description": "Source: https://resend.com/docs/api-reference/contact-properties/get-contact-property",
+          "tags": [],
+          "path": "resend/retrieve-contact-property.md",
+          "tokens": 738
+        },
+        {
+          "id": "list-contact-properties",
+          "title": "List Contact Properties",
+          "description": "Source: https://resend.com/docs/api-reference/contact-properties/list-contact-properties",
+          "tags": [],
+          "path": "resend/list-contact-properties.md",
+          "tokens": 664
+        },
+        {
+          "id": "update-contact-property",
+          "title": "Update Contact Property",
+          "description": "Source: https://resend.com/docs/api-reference/contact-properties/update-contact-property",
+          "tags": [
+            "key",
+            "type"
+          ],
+          "path": "resend/update-contact-property.md",
+          "tokens": 957
+        },
+        {
+          "id": "add-contact-to-segment",
+          "title": "Add Contact to Segment",
+          "description": "Source: https://resend.com/docs/api-reference/contacts/add-contact-to-segment",
+          "tags": [
+            "id",
+            "email"
+          ],
+          "path": "resend/add-contact-to-segment.md",
+          "tokens": 1316
+        },
+        {
+          "id": "create-contact",
+          "title": "Create Contact",
+          "description": "Source: https://resend.com/docs/api-reference/contacts/create-contact",
+          "tags": [
+            "true"
+          ],
+          "path": "resend/create-contact.md",
+          "tokens": 1062
+        },
+        {
+          "id": "delete-contact",
+          "title": "Delete Contact",
+          "description": "Source: https://resend.com/docs/api-reference/contacts/delete-contact",
+          "tags": [
+            "id",
+            "email"
+          ],
+          "path": "resend/delete-contact.md",
+          "tokens": 966
+        },
+        {
+          "id": "delete-contact-segment",
+          "title": "Delete Contact Segment",
+          "description": "Source: https://resend.com/docs/api-reference/contacts/delete-contact-segment",
+          "tags": [
+            "id",
+            "email"
+          ],
+          "path": "resend/delete-contact-segment.md",
+          "tokens": 1351
+        },
+        {
+          "id": "retrieve-contact",
+          "title": "Retrieve Contact",
+          "description": "Source: https://resend.com/docs/api-reference/contacts/get-contact",
+          "tags": [
+            "id",
+            "email"
+          ],
+          "path": "resend/retrieve-contact.md",
+          "tokens": 1065
+        },
+        {
+          "id": "retrieve-contact-topics",
+          "title": "Retrieve Contact Topics",
+          "description": "Source: https://resend.com/docs/api-reference/contacts/get-contact-topics",
+          "tags": [
+            "id",
+            "email"
+          ],
+          "path": "resend/retrieve-contact-topics.md",
+          "tokens": 1045
+        },
+        {
+          "id": "list-contact-segments",
+          "title": "List Contact Segments",
+          "description": "Source: https://resend.com/docs/api-reference/contacts/list-contact-segments",
+          "tags": [
+            "id",
+            "email"
+          ],
+          "path": "resend/list-contact-segments.md",
+          "tokens": 779
+        },
+        {
+          "id": "list-contacts",
+          "title": "List Contacts",
+          "description": "Source: https://resend.com/docs/api-reference/contacts/list-contacts",
+          "tags": [],
+          "path": "resend/list-contacts.md",
+          "tokens": 638
+        },
+        {
+          "id": "update-contact",
+          "title": "Update Contact",
+          "description": "Source: https://resend.com/docs/api-reference/contacts/update-contact",
+          "tags": [
+            "id",
+            "email",
+            "true"
+          ],
+          "path": "resend/update-contact.md",
+          "tokens": 1342
+        },
+        {
+          "id": "update-contact-topics",
+          "title": "Update Contact Topics",
+          "description": "Source: https://resend.com/docs/api-reference/contacts/update-contact-topics",
+          "tags": [
+            "id",
+            "email"
+          ],
+          "path": "resend/update-contact-topics.md",
+          "tokens": 2106
+        },
+        {
+          "id": "create-domain",
+          "title": "Create Domain",
+          "description": "Source: https://resend.com/docs/api-reference/domains/create-domain",
+          "tags": [
+            "send",
+            "send.yourdomain.tld",
+            "testing",
+            "status"
+          ],
+          "path": "resend/create-domain.md",
+          "tokens": 1396
+        },
+        {
+          "id": "delete-domain",
+          "title": "Delete Domain",
+          "description": "Source: https://resend.com/docs/api-reference/domains/delete-domain",
+          "tags": [],
+          "path": "resend/delete-domain.md",
+          "tokens": 627
+        },
+        {
+          "id": "retrieve-domain",
+          "title": "Retrieve Domain",
+          "description": "Source: https://resend.com/docs/api-reference/domains/get-domain",
+          "tags": [
+            "status"
+          ],
+          "path": "resend/retrieve-domain.md",
+          "tokens": 918
+        },
+        {
+          "id": "list-domains",
+          "title": "List Domains",
+          "description": "Source: https://resend.com/docs/api-reference/domains/list-domains",
+          "tags": [
+            "status"
+          ],
+          "path": "resend/list-domains.md",
+          "tokens": 646
+        },
+        {
+          "id": "update-domain",
+          "title": "Update Domain",
+          "description": "Source: https://resend.com/docs/api-reference/domains/update-domain",
+          "tags": [],
+          "path": "resend/update-domain.md",
+          "tokens": 1108
+        },
+        {
+          "id": "verify-domain",
+          "title": "Verify Domain",
+          "description": "Source: https://resend.com/docs/api-reference/domains/verify-domain",
+          "tags": [
+            "pending",
+            "domain.updated"
+          ],
+          "path": "resend/verify-domain.md",
+          "tokens": 731
+        },
+        {
+          "id": "cancel-email",
+          "title": "Cancel Email",
+          "description": "Source: https://resend.com/docs/api-reference/emails/cancel-email",
+          "tags": [],
+          "path": "resend/cancel-email.md",
+          "tokens": 661
+        },
+        {
+          "id": "list-attachments",
+          "title": "List Attachments",
+          "description": "Source: https://resend.com/docs/api-reference/emails/list-email-attachments",
+          "tags": [],
+          "path": "resend/list-attachments.md",
+          "tokens": 823
+        },
+        {
+          "id": "list-sent-emails",
+          "title": "List Sent Emails",
+          "description": "Source: https://resend.com/docs/api-reference/emails/list-emails",
+          "tags": [
+            "id"
+          ],
+          "path": "resend/list-sent-emails.md",
+          "tokens": 929
+        },
+        {
+          "id": "list-attachments-2",
+          "title": "List Attachments",
+          "description": "Source: https://resend.com/docs/api-reference/emails/list-received-email-attachments",
+          "tags": [],
+          "path": "resend/list-attachments-2.md",
+          "tokens": 851
+        },
+        {
+          "id": "list-received-emails",
+          "title": "List Received Emails",
+          "description": "Source: https://resend.com/docs/api-reference/emails/list-received-emails",
+          "tags": [
+            "id"
+          ],
+          "path": "resend/list-received-emails.md",
+          "tokens": 878
+        },
+        {
+          "id": "retrieve-email",
+          "title": "Retrieve Email",
+          "description": "Source: https://resend.com/docs/api-reference/emails/retrieve-email",
+          "tags": [
+            "last_event"
+          ],
+          "path": "resend/retrieve-email.md",
+          "tokens": 760
+        },
+        {
+          "id": "retrieve-attachment",
+          "title": "Retrieve Attachment",
+          "description": "Source: https://resend.com/docs/api-reference/emails/retrieve-email-attachment",
+          "tags": [],
+          "path": "resend/retrieve-attachment.md",
+          "tokens": 907
+        },
+        {
+          "id": "retrieve-received-email",
+          "title": "Retrieve Received Email",
+          "description": "Source: https://resend.com/docs/api-reference/emails/retrieve-received-email",
+          "tags": [],
+          "path": "resend/retrieve-received-email.md",
+          "tokens": 988
+        },
+        {
+          "id": "retrieve-attachment-2",
+          "title": "Retrieve Attachment",
+          "description": "Source: https://resend.com/docs/api-reference/emails/retrieve-received-email-attachment",
+          "tags": [],
+          "path": "resend/retrieve-attachment-2.md",
+          "tokens": 935
+        },
+        {
+          "id": "send-batch-emails",
+          "title": "Send Batch Emails",
+          "description": "Source: https://resend.com/docs/api-reference/emails/send-batch-emails",
+          "tags": [
+            "\"Your Name <sender@domain.com>\"",
+            "opt-in",
+            "template",
+            "id",
+            "variables",
+            "html",
+            "text",
+            "react",
+            "from",
+            "subject"
+          ],
+          "path": "resend/send-batch-emails.md",
+          "tokens": 2347
+        },
+        {
+          "id": "send-email",
+          "title": "Send Email",
+          "description": "Source: https://resend.com/docs/api-reference/emails/send-email",
+          "tags": [
+            "\"Your Name <sender@domain.com>\"",
+            "in 1 min",
+            "2024-08-05T11:52:01.858Z",
+            "opt-in",
+            "template",
+            "id",
+            "variables",
+            "html",
+            "text",
+            "react"
+          ],
+          "path": "resend/send-email.md",
+          "tokens": 2191
+        },
+        {
+          "id": "update-email",
+          "title": "Update Email",
+          "description": "Source: https://resend.com/docs/api-reference/emails/update-email",
+          "tags": [],
+          "path": "resend/update-email.md",
+          "tokens": 1057
+        },
+        {
+          "id": "errors",
+          "title": "Errors",
+          "description": "Source: https://resend.com/docs/api-reference/errors",
+          "tags": [
+            "invalid_idempotency_key",
+            "validation_error",
+            "missing_api_key",
+            "Authorization: Bearer YOUR_API_KEY",
+            "restricted_api_key",
+            "Full access",
+            "invalid_api_key",
+            "youremail@domain.com",
+            "from",
+            "domain.com"
+          ],
+          "path": "resend/errors.md",
+          "tokens": 1542
+        },
+        {
+          "id": "introduction",
+          "title": "Introduction",
+          "description": "Source: https://resend.com/docs/api-reference/introduction",
+          "tags": [
+            "Bearer re_xxxxxxxxx",
+            "re_xxxxxxxxx",
+            "User-Agent",
+            "403",
+            "1010",
+            "2xx",
+            "4xx",
+            "5xx",
+            "200",
+            "400"
+          ],
+          "path": "resend/introduction.md",
+          "tokens": 711
+        },
+        {
+          "id": "pagination",
+          "title": "Pagination",
+          "description": "Source: https://resend.com/docs/api-reference/pagination",
+          "tags": [
+            "object",
+            "list",
+            "has_more",
+            "data",
+            "limit",
+            "after",
+            "before",
+            "id",
+            "20",
+            "100"
+          ],
+          "path": "resend/pagination.md",
+          "tokens": 3249
+        },
+        {
+          "id": "usage-limits",
+          "title": "Usage Limits",
+          "description": "Source: https://resend.com/docs/api-reference/rate-limit",
+          "tags": [
+            "ratelimit-limit",
+            "ratelimit-remaining",
+            "ratelimit-reset",
+            "retry-after",
+            "429",
+            "x-resend-daily-quota",
+            "x-resend-monthly-quota",
+            "daily_quota_exceeded",
+            "monthly_quota_exceeded",
+            "403"
+          ],
+          "path": "resend/usage-limits.md",
+          "tokens": 965
+        },
+        {
+          "id": "create-segment",
+          "title": "Create Segment",
+          "description": "Source: https://resend.com/docs/api-reference/segments/create-segment",
+          "tags": [],
+          "path": "resend/create-segment.md",
+          "tokens": 741
+        },
+        {
+          "id": "delete-segment",
+          "title": "Delete Segment",
+          "description": "Source: https://resend.com/docs/api-reference/segments/delete-segment",
+          "tags": [],
+          "path": "resend/delete-segment.md",
+          "tokens": 673
+        },
+        {
+          "id": "retrieve-segment",
+          "title": "Retrieve Segment",
+          "description": "Source: https://resend.com/docs/api-reference/segments/get-segment",
+          "tags": [],
+          "path": "resend/retrieve-segment.md",
+          "tokens": 695
+        },
+        {
+          "id": "list-segments",
+          "title": "List Segments",
+          "description": "Source: https://resend.com/docs/api-reference/segments/list-segments",
+          "tags": [],
+          "path": "resend/list-segments.md",
+          "tokens": 619
+        },
+        {
+          "id": "create-template",
+          "title": "Create Template",
+          "description": "Source: https://resend.com/docs/api-reference/templates/create-template",
+          "tags": [
+            "\"Your Name <sender@domain.com>\""
+          ],
+          "path": "resend/create-template.md",
+          "tokens": 1809
+        },
+        {
+          "id": "delete-template",
+          "title": "Delete Template",
+          "description": "Source: https://resend.com/docs/api-reference/templates/delete-template",
+          "tags": [],
+          "path": "resend/delete-template.md",
+          "tokens": 660
+        },
+        {
+          "id": "duplicate-template",
+          "title": "Duplicate Template",
+          "description": "Source: https://resend.com/docs/api-reference/templates/duplicate-template",
+          "tags": [],
+          "path": "resend/duplicate-template.md",
+          "tokens": 670
+        },
+        {
+          "id": "get-template",
+          "title": "Get Template",
+          "description": "Source: https://resend.com/docs/api-reference/templates/get-template",
+          "tags": [],
+          "path": "resend/get-template.md",
+          "tokens": 848
+        },
+        {
+          "id": "list-templates",
+          "title": "List Templates",
+          "description": "Source: https://resend.com/docs/api-reference/templates/list-templates",
+          "tags": [
+            "limit",
+            "after",
+            "before"
+          ],
+          "path": "resend/list-templates.md",
+          "tokens": 931
+        },
+        {
+          "id": "publish-template",
+          "title": "Publish Template",
+          "description": "Source: https://resend.com/docs/api-reference/templates/publish-template",
+          "tags": [],
+          "path": "resend/publish-template.md",
+          "tokens": 662
+        },
+        {
+          "id": "update-template",
+          "title": "Update Template",
+          "description": "Source: https://resend.com/docs/api-reference/templates/update-template",
+          "tags": [
+            "\"Your Name <sender@domain.com>\""
+          ],
+          "path": "resend/update-template.md",
+          "tokens": 1377
+        },
+        {
+          "id": "create-topic",
+          "title": "Create Topic",
+          "description": "Source: https://resend.com/docs/api-reference/topics/create-topic",
+          "tags": [
+            "50",
+            "opt_in",
+            "opt_out",
+            "200",
+            "public",
+            "private"
+          ],
+          "path": "resend/create-topic.md",
+          "tokens": 949
+        },
+        {
+          "id": "delete-topic",
+          "title": "Delete Topic",
+          "description": "Source: https://resend.com/docs/api-reference/topics/delete-topic",
+          "tags": [],
+          "path": "resend/delete-topic.md",
+          "tokens": 623
+        },
+        {
+          "id": "retrieve-topic",
+          "title": "Retrieve Topic",
+          "description": "Source: https://resend.com/docs/api-reference/topics/get-topic",
+          "tags": [],
+          "path": "resend/retrieve-topic.md",
+          "tokens": 685
+        },
+        {
+          "id": "list-topics",
+          "title": "List Topics",
+          "description": "Source: https://resend.com/docs/api-reference/topics/list-topics",
+          "tags": [],
+          "path": "resend/list-topics.md",
+          "tokens": 619
+        },
+        {
+          "id": "update-topic",
+          "title": "Update Topic",
+          "description": "Source: https://resend.com/docs/api-reference/topics/update-topic",
+          "tags": [
+            "50",
+            "200",
+            "public",
+            "private"
+          ],
+          "path": "resend/update-topic.md",
+          "tokens": 1034
+        },
+        {
+          "id": "create-webhook",
+          "title": "Create Webhook",
+          "description": "Source: https://resend.com/docs/api-reference/webhooks/create-webhook",
+          "tags": [],
+          "path": "resend/create-webhook.md",
+          "tokens": 936
+        },
+        {
+          "id": "delete-webhook",
+          "title": "Delete Webhook",
+          "description": "Source: https://resend.com/docs/api-reference/webhooks/delete-webhook",
+          "tags": [],
+          "path": "resend/delete-webhook.md",
+          "tokens": 641
+        },
+        {
+          "id": "retrieve-webhook",
+          "title": "Retrieve Webhook",
+          "description": "Source: https://resend.com/docs/api-reference/webhooks/get-webhook",
+          "tags": [],
+          "path": "resend/retrieve-webhook.md",
+          "tokens": 699
+        },
+        {
+          "id": "list-webhooks",
+          "title": "List Webhooks",
+          "description": "Source: https://resend.com/docs/api-reference/webhooks/list-webhooks",
+          "tags": [],
+          "path": "resend/list-webhooks.md",
+          "tokens": 674
+        },
+        {
+          "id": "update-webhook",
+          "title": "Update Webhook",
+          "description": "Source: https://resend.com/docs/api-reference/webhooks/update-webhook",
+          "tags": [
+            "enabled",
+            "disabled",
+            "from",
+            "resend",
+            ".env"
+          ],
+          "path": "resend/update-webhook.md",
+          "tokens": 1946
+        },
+        {
+          "id": "introduction-2",
+          "title": "Introduction",
+          "description": "Source: https://resend.com/docs/dashboard/api-keys/introduction",
+          "tags": [],
+          "path": "resend/introduction-2.md",
+          "tokens": 792
+        },
+        {
+          "id": "managing-contacts",
+          "title": "Managing Contacts",
+          "description": "Source: https://resend.com/docs/dashboard/audiences/contacts",
+          "tags": [
+            "first_name",
+            "last_name",
+            "unsubscribed",
+            "properties",
+            "email",
+            "id"
+          ],
+          "path": "resend/managing-contacts.md",
+          "tokens": 3944
+        },
+        {
+          "id": "your-resend-audience",
+          "title": "Your Resend Audience",
+          "description": "Source: https://resend.com/docs/dashboard/audiences/introduction",
+          "tags": [
+            "first_name",
+            "last_name",
+            "unsubscribed",
+            "email"
+          ],
+          "path": "resend/your-resend-audience.md",
+          "tokens": 649
+        },
+        {
+          "id": "managing-unsubscribed-contacts",
+          "title": "Managing Unsubscribed Contacts",
+          "description": "Source: https://resend.com/docs/dashboard/audiences/managing-unsubscribe-list",
+          "tags": [],
+          "path": "resend/managing-unsubscribed-contacts.md",
+          "tokens": 548
+        },
+        {
+          "id": "contact-properties",
+          "title": "Contact Properties",
+          "description": "Source: https://resend.com/docs/dashboard/audiences/properties",
+          "tags": [
+            "first_name",
+            "last_name",
+            "unsubscribed",
+            "email",
+            "key",
+            "50",
+            "value",
+            "string",
+            "number",
+            "fallback_value"
+          ],
+          "path": "resend/contact-properties.md",
+          "tokens": 3942
+        },
+        {
+          "id": "managing-broadcasts",
+          "title": "Managing Broadcasts",
+          "description": "Source: https://resend.com/docs/dashboard/broadcasts/introduction",
+          "tags": [
+            "{{{FIRST_NAME|fallback}}}",
+            "{{{LAST_NAME|fallback}}}",
+            "{{{EMAIL}}}",
+            "{{{RESEND_UNSUBSCRIBE_URL}}}",
+            "DELETE N BROADCASTS",
+            "CANCEL",
+            "draft",
+            "scheduled",
+            "sent",
+            "queued"
+          ],
+          "path": "resend/managing-broadcasts.md",
+          "tokens": 1676
+        },
+        {
+          "id": "implementing-bimi",
+          "title": "Implementing BIMI",
+          "description": "Source: https://resend.com/docs/dashboard/domains/bimi",
+          "tags": [
+            "p=quarantine;",
+            "p=reject;",
+            "p",
+            "pct",
+            "pct=100;",
+            "p=quarantine",
+            "p=reject",
+            "v",
+            "v=BIMI1",
+            "l"
+          ],
+          "path": "resend/implementing-bimi.md",
+          "tokens": 1707
+        },
+        {
+          "id": "implementing-dmarc",
+          "title": "Implementing DMARC",
+          "description": "Source: https://resend.com/docs/dashboard/domains/dmarc",
+          "tags": [
+            "_dmarc",
+            "v",
+            "p",
+            "none",
+            "quarantine",
+            "reject",
+            "rua",
+            ".xml",
+            "p=none;",
+            "dmarc=pass"
+          ],
+          "path": "resend/implementing-dmarc.md",
+          "tokens": 1393
+        },
+        {
+          "id": "managing-domains",
+          "title": "Managing Domains",
+          "description": "Source: https://resend.com/docs/dashboard/domains/introduction",
+          "tags": [
+            "updates.yourdomain.com",
+            "send",
+            "custom_return_path",
+            "testing",
+            "not_started",
+            "Verify DNS Records",
+            "pending",
+            "verified",
+            "partially_verified",
+            "partially_failed"
+          ],
+          "path": "resend/managing-domains.md",
+          "tokens": 2083
+        },
+        {
+          "id": "choosing-a-region",
+          "title": "Choosing a Region",
+          "description": "Source: https://resend.com/docs/dashboard/domains/regions",
+          "tags": [
+            "eu-west-1"
+          ],
+          "path": "resend/choosing-a-region.md",
+          "tokens": 768
+        },
+        {
+          "id": "add-an-unsubscribe-link-to-transactional-emails",
+          "title": "Add an unsubscribe link to transactional emails",
+          "description": "Source: https://resend.com/docs/dashboard/emails/add-unsubscribe-to-transactional-emails",
+          "tags": [
+            "POST",
+            "200 (OK)",
+            "202 (Accepted)",
+            "GET"
+          ],
+          "path": "resend/add-an-unsubscribe-link-to-transactional-emails.md",
+          "tokens": 521
+        },
+        {
+          "id": "attachments",
+          "title": "Attachments",
+          "description": "Source: https://resend.com/docs/dashboard/emails/attachments",
+          "tags": [
+            "path",
+            "filename",
+            "content",
+            "cid:",
+            "src"
+          ],
+          "path": "resend/attachments.md",
+          "tokens": 4939
+        },
+        {
+          "id": "batch-sending",
+          "title": "Batch Sending",
+          "description": "Source: https://resend.com/docs/dashboard/emails/batch-sending",
+          "tags": [
+            "error",
+            "message",
+            "attachments",
+            "scheduled_at",
+            "queued"
+          ],
+          "path": "resend/batch-sending.md",
+          "tokens": 1961
+        },
+        {
+          "id": "custom-headers",
+          "title": "Custom Headers",
+          "description": "Source: https://resend.com/docs/dashboard/emails/custom-headers",
+          "tags": [
+            "X-Entity-Ref-ID",
+            "List-Unsubscribe"
+          ],
+          "path": "resend/custom-headers.md",
+          "tokens": 1285
+        },
+        {
+          "id": "deliverability-insights",
+          "title": "Deliverability Insights",
+          "description": "Source: https://resend.com/docs/dashboard/emails/deliverability-insights",
+          "tags": [
+            "@widgets.com",
+            "https://widgets.com",
+            "text",
+            "youtu.be",
+            "youtube.com/watch?v=...",
+            "https://youtu.be/abc123",
+            "https://www.youtube.com/watch?v=abc123"
+          ],
+          "path": "resend/deliverability-insights.md",
+          "tokens": 996
+        },
+        {
+          "id": "email-bounces",
+          "title": "Email Bounces",
+          "description": "Source: https://resend.com/docs/dashboard/emails/email-bounces",
+          "tags": [
+            "Permanent",
+            "General",
+            "NoEmail",
+            "Transient",
+            "MailboxFull",
+            "MessageTooLarge",
+            "ContentRejected",
+            "AttachmentRejected",
+            "transient",
+            "Undetermined"
+          ],
+          "path": "resend/email-bounces.md",
+          "tokens": 846
+        },
+        {
+          "id": "email-suppressions",
+          "title": "Email Suppressions",
+          "description": "Source: https://resend.com/docs/dashboard/emails/email-suppressions",
+          "tags": [
+            "suppressed",
+            "Bounced",
+            "bounced",
+            "Complained",
+            "complained",
+            "mail.yourdomain.com",
+            "news.yourdomain.com",
+            "Suppressed"
+          ],
+          "path": "resend/email-suppressions.md",
+          "tokens": 510
+        },
+        {
+          "id": "embed-inline-images",
+          "title": "Embed Inline Images",
+          "description": "Source: https://resend.com/docs/dashboard/emails/embed-inline-images",
+          "tags": [
+            "content_type",
+            "image/png",
+            "filename",
+            "logo.png"
+          ],
+          "path": "resend/embed-inline-images.md",
+          "tokens": 3436
+        },
+        {
+          "id": "idempotency-keys",
+          "title": "Idempotency Keys",
+          "description": "Source: https://resend.com/docs/dashboard/emails/idempotency-keys",
+          "tags": [
+            "POST /emails",
+            "POST\n      /emails/batch",
+            "<event-type>/<entity-id>",
+            "welcome-user/123456789",
+            "Idempotency-Key",
+            "Resend-Idempotency-Key",
+            "POST /emails/batch",
+            "team-quota/123456789",
+            "400",
+            "invalid_idempotency_key"
+          ],
+          "path": "resend/idempotency-keys.md",
+          "tokens": 3232
+        },
+        {
+          "id": "managing-emails",
+          "title": "Managing Emails",
+          "description": "Source: https://resend.com/docs/dashboard/emails/introduction",
+          "tags": [
+            "bounced",
+            "canceled",
+            "clicked",
+            "complained",
+            "delivered",
+            "delivery_delayed",
+            "failed",
+            "opened",
+            "queued",
+            "scheduled"
+          ],
+          "path": "resend/managing-emails.md",
+          "tokens": 864
+        },
+        {
+          "id": "schedule-email",
+          "title": "Schedule Email",
+          "description": "Source: https://resend.com/docs/dashboard/emails/schedule-email",
+          "tags": [
+            "\"in 1 hour\"",
+            "\"tomorrow at 9am\"",
+            "\"Friday at 3pm ET\"",
+            "2024-08-05T11:52:01.858Z"
+          ],
+          "path": "resend/schedule-email.md",
+          "tokens": 3858
+        },
+        {
+          "id": "send-test-emails",
+          "title": "Send Test Emails",
+          "description": "Source: https://resend.com/docs/dashboard/emails/send-test-emails",
+          "tags": [
+            "+",
+            "delivered+label1@resend.dev",
+            "delivered+signup@resend.dev",
+            "delivered+password-reset@resend.dev"
+          ],
+          "path": "resend/send-test-emails.md",
+          "tokens": 712
+        },
+        {
+          "id": "managing-tags",
+          "title": "Managing Tags",
+          "description": "Source: https://resend.com/docs/dashboard/emails/tags",
+          "tags": [
+            "POST /emails",
+            "POST /emails/batch"
+          ],
+          "path": "resend/managing-tags.md",
+          "tokens": 3059
+        },
+        {
+          "id": "introduction-3",
+          "title": "Introduction",
+          "description": "Source: https://resend.com/docs/dashboard/logs/introduction",
+          "tags": [
+            "/domains",
+            "/api-keys",
+            "/contacts"
+          ],
+          "path": "resend/introduction-3.md",
+          "tokens": 1026
+        },
+        {
+          "id": "process-receiving-attachments",
+          "title": "Process Receiving Attachments",
+          "description": "Source: https://resend.com/docs/dashboard/receiving/attachments",
+          "tags": [
+            "download_url",
+            "expires_at"
+          ],
+          "path": "resend/process-receiving-attachments.md",
+          "tokens": 1266
+        },
+        {
+          "id": "custom-receiving-domains",
+          "title": "Custom Receiving Domains",
+          "description": "Source: https://resend.com/docs/dashboard/receiving/custom-domains",
+          "tags": [
+            "yourdomain.tld",
+            "subdomain.yourdomain.tld",
+            "MX",
+            "email.received",
+            "POST"
+          ],
+          "path": "resend/custom-receiving-domains.md",
+          "tokens": 1473
+        },
+        {
+          "id": "forward-received-emails",
+          "title": "Forward Received Emails",
+          "description": "Source: https://resend.com/docs/dashboard/receiving/forward-emails",
+          "tags": [
+            "forward",
+            "forward()",
+            "forwarded message",
+            "passthrough: false",
+            "mailparser",
+            "npm install mailparser"
+          ],
+          "path": "resend/forward-received-emails.md",
+          "tokens": 1297
+        },
+        {
+          "id": "get-email-content",
+          "title": "Get Email Content",
+          "description": "Source: https://resend.com/docs/dashboard/receiving/get-email-content",
+          "tags": [],
+          "path": "resend/get-email-content.md",
+          "tokens": 703
+        },
+        {
+          "id": "receiving-emails",
+          "title": "Receiving Emails",
+          "description": "Source: https://resend.com/docs/dashboard/receiving/introduction",
+          "tags": [
+            "POST",
+            "to",
+            "cool-hedgehog.resend.app",
+            "anything@cool-hedgehog.resend.app",
+            "yourdomain.tld",
+            "anything@yourdomain.tld",
+            ".resend.app",
+            "<anything>@<id>.resend.app",
+            "Add Webhook",
+            "email.received"
+          ],
+          "path": "resend/receiving-emails.md",
+          "tokens": 2052
+        },
+        {
+          "id": "reply-to-receiving-emails",
+          "title": "Reply to Receiving Emails",
+          "description": "Source: https://resend.com/docs/dashboard/receiving/reply-to-emails",
+          "tags": [
+            "message_id",
+            "In-Reply-To",
+            "Re:",
+            "References"
+          ],
+          "path": "resend/reply-to-receiving-emails.md",
+          "tokens": 1347
+        },
+        {
+          "id": "managing-segments",
+          "title": "Managing Segments",
+          "description": "Source: https://resend.com/docs/dashboard/segments/introduction",
+          "tags": [
+            "{{{RESEND_UNSUBSCRIBE_URL}}}",
+            "public"
+          ],
+          "path": "resend/managing-segments.md",
+          "tokens": 1866
+        },
+        {
+          "id": "migrating-from-audiences-to-segments",
+          "title": "Migrating from Audiences to Segments",
+          "description": "Source: https://resend.com/docs/dashboard/segments/migrating-from-audiences-to-segments",
+          "tags": [
+            "audience_id"
+          ],
+          "path": "resend/migrating-from-audiences-to-segments.md",
+          "tokens": 876
+        },
+        {
+          "id": "managing-teams",
+          "title": "Managing Teams",
+          "description": "Source: https://resend.com/docs/dashboard/settings/team",
+          "tags": [],
+          "path": "resend/managing-teams.md",
+          "tokens": 786
+        },
+        {
+          "id": "using-templates",
+          "title": "Using Templates",
+          "description": "Source: https://resend.com/docs/dashboard/templates/introduction",
+          "tags": [
+            "id",
+            "variables",
+            "@react-email/components",
+            "react",
+            "./components/Logo",
+            "{{",
+            "name",
+            "type",
+            "fallback_value",
+            "FIRST_NAME"
+          ],
+          "path": "resend/using-templates.md",
+          "tokens": 4786
+        },
+        {
+          "id": "working-with-variables",
+          "title": "Working with Variables",
+          "description": "Source: https://resend.com/docs/dashboard/templates/template-variables",
+          "tags": [
+            "{{",
+            "name",
+            "type",
+            "fallback_value",
+            "FIRST_NAME",
+            "LAST_NAME",
+            "EMAIL",
+            "UNSUBSCRIBE_URL",
+            "contact",
+            "this"
+          ],
+          "path": "resend/working-with-variables.md",
+          "tokens": 3188
+        },
+        {
+          "id": "version-history",
+          "title": "Version History",
+          "description": "Source: https://resend.com/docs/dashboard/templates/version-history",
+          "tags": [],
+          "path": "resend/version-history.md",
+          "tokens": 2274
+        },
+        {
+          "id": "topics",
+          "title": "Topics",
+          "description": "Source: https://resend.com/docs/dashboard/topics/introduction",
+          "tags": [],
+          "path": "resend/topics.md",
+          "tokens": 985
+        },
+        {
+          "id": "how-to-store-webhooks-data",
+          "title": "How to Store Webhooks Data",
+          "description": "Source: https://resend.com/docs/dashboard/webhooks/how-to-store-webhooks-data",
+          "tags": [
+            "svix-id"
+          ],
+          "path": "resend/how-to-store-webhooks-data.md",
+          "tokens": 1660
+        },
+        {
+          "id": "using-workflows",
+          "title": "Using Workflows",
+          "description": "Source: https://resend.com/docs/dashboard/workflows/introduction",
+          "tags": [
+            "user.created",
+            "invite.sent",
+            "payment.failed",
+            "cart.abandoned",
+            "trial.ended",
+            "Send email",
+            "Time delay",
+            "True/false branch",
+            "published"
+          ],
+          "path": "resend/using-workflows.md",
+          "tokens": 2033
+        },
+        {
+          "id": "examples",
+          "title": "Examples",
+          "description": "Source: https://resend.com/docs/examples",
+          "tags": [],
+          "path": "resend/examples.md",
+          "tokens": 2524
+        },
+        {
+          "id": "integrations",
+          "title": "Integrations",
+          "description": "Source: https://resend.com/docs/integrations",
+          "tags": [],
+          "path": "resend/integrations.md",
+          "tokens": 577
+        },
+        {
+          "id": "introduction-4",
+          "title": "Introduction",
+          "description": "Source: https://resend.com/docs/introduction",
+          "tags": [],
+          "path": "resend/introduction-4.md",
+          "tokens": 5881
+        },
+        {
+          "id": "403-error-with-error-code-1010",
+          "title": "403 Error with Error Code 1010",
+          "description": "Source: https://resend.com/docs/knowledge-base/403-error-1010",
+          "tags": [
+            "Access denied",
+            "User-Agent",
+            "curl",
+            "1010",
+            "fetch"
+          ],
+          "path": "resend/403-error-with-error-code-1010.md",
+          "tokens": 569
+        },
+        {
+          "id": "403-error-using-verified-domain",
+          "title": "403 Error Using Verified Domain",
+          "description": "Source: https://resend.com/docs/knowledge-base/403-error-domain-mismatch",
+          "tags": [
+            "sending.domain.com",
+            "domain.com",
+            "sending",
+            "from"
+          ],
+          "path": "resend/403-error-using-verified-domain.md",
+          "tokens": 532
+        },
+        {
+          "id": "403-error-using-resend-dev-domain",
+          "title": "403 Error Using resend.dev Domain",
+          "description": "Source: https://resend.com/docs/knowledge-base/403-error-resend-dev-domain",
+          "tags": [
+            "resend.dev",
+            "from: 'onboarding@resend.dev'",
+            "from"
+          ],
+          "path": "resend/403-error-using-resend-dev-domain.md",
+          "tokens": 540
+        },
+        {
+          "id": "what-are-resend-account-quotas-and-limits",
+          "title": "What are Resend account quotas and limits?",
+          "description": "Source: https://resend.com/docs/knowledge-base/account-quotas-and-limits",
+          "tags": [
+            "To",
+            "CC",
+            "BCC",
+            "429"
+          ],
+          "path": "resend/what-are-resend-account-quotas-and-limits.md",
+          "tokens": 1581
+        },
+        {
+          "id": "how-to-ensure-emails-are-valid",
+          "title": "How to ensure emails are valid?",
+          "description": "To keep your list healthy, it's essential to ensure that the email addresses you collect are valid, accurate, and bel...",
+          "tags": [],
+          "path": "resend/how-to-ensure-emails-are-valid.md",
+          "tokens": 826
+        },
+        {
+          "id": "how-to-proactively-remove-emails-from-your-segments",
+          "title": "How to proactively remove emails from your Segments",
+          "description": "Over time, certain recipients may become disengaged with your content. It's important to manage your segments by remo...",
+          "tags": [],
+          "path": "resend/how-to-proactively-remove-emails-from-your-segments.md",
+          "tokens": 654
+        },
+        {
+          "id": "cloudflare",
+          "title": "Cloudflare",
+          "description": "Source: https://resend.com/docs/knowledge-base/cloudflare",
+          "tags": [
+            "Manual setup",
+            "MX",
+            "send",
+            "Name",
+            "Mail Server",
+            "Auto",
+            "TTL",
+            "10",
+            "Priority",
+            "Save"
+          ],
+          "path": "resend/cloudflare.md",
+          "tokens": 2085
+        },
+        {
+          "id": "dreamhost",
+          "title": "DreamHost",
+          "description": "Source: https://resend.com/docs/knowledge-base/dreamhost",
+          "tags": [
+            "send",
+            "v=spf1 include:amazonses.com ~all",
+            "TXT Record",
+            "resend._domainkey",
+            "p=example_domain_key_value",
+            "MX Record",
+            "feedback-smtp.us-east-1.amazonses.com",
+            "10",
+            "20",
+            "30"
+          ],
+          "path": "resend/dreamhost.md",
+          "tokens": 1286
+        },
+        {
+          "id": "how-to-set-up-e2e-testing-with-playwright",
+          "title": "How to set up E2E testing with Playwright",
+          "description": "Source: https://resend.com/docs/knowledge-base/end-to-end-testing-with-playwright",
+          "tags": [
+            "delivered@resend.dev",
+            "e2e/app.spec.ts",
+            "testDir",
+            "outputDir",
+            "webServer",
+            "projects"
+          ],
+          "path": "resend/how-to-set-up-e2e-testing-with-playwright.md",
+          "tokens": 1200
+        },
+        {
+          "id": "forward-emails-with-resend-inbound",
+          "title": "Forward emails with Resend Inbound",
+          "description": "Source: https://resend.com/docs/knowledge-base/forward-emails-with-resend-inbound",
+          "tags": [],
+          "path": "resend/forward-emails-with-resend-inbound.md",
+          "tokens": 2328
+        },
+        {
+          "id": "gandi",
+          "title": "Gandi",
+          "description": "Source: https://resend.com/docs/knowledge-base/gandi",
+          "tags": [
+            "Domain",
+            "DNS Records",
+            "Type",
+            "MX",
+            "10800",
+            "send",
+            "Name",
+            "Priority",
+            "10",
+            "Hostname"
+          ],
+          "path": "resend/gandi.md",
+          "tokens": 1468
+        },
+        {
+          "id": "get-started-with-resend-and-supabase",
+          "title": "Get Started with Resend and Supabase",
+          "description": "Source: https://resend.com/docs/knowledge-base/getting-started-with-resend-and-supabase",
+          "tags": [
+            "updates.yourdomain.com",
+            "index.ts"
+          ],
+          "path": "resend/get-started-with-resend-and-supabase.md",
+          "tokens": 1395
+        },
+        {
+          "id": "godaddy",
+          "title": "GoDaddy",
+          "description": "Source: https://resend.com/docs/knowledge-base/godaddy",
+          "tags": [
+            "DNS",
+            "Add New Record",
+            "MX",
+            "send",
+            "Name",
+            "Value",
+            "10",
+            "Priority",
+            "600",
+            "Save"
+          ],
+          "path": "resend/godaddy.md",
+          "tokens": 1508
+        },
+        {
+          "id": "hetzner",
+          "title": "Hetzner",
+          "description": "Source: https://resend.com/docs/knowledge-base/hetzner",
+          "tags": [
+            "Your Zones",
+            "Records",
+            "Create Record",
+            "Type",
+            "MX",
+            "send",
+            "Name",
+            "Value",
+            "Priority",
+            "10"
+          ],
+          "path": "resend/hetzner.md",
+          "tokens": 1482
+        },
+        {
+          "id": "hostinger",
+          "title": "Hostinger",
+          "description": "Source: https://resend.com/docs/knowledge-base/hostinger",
+          "tags": [
+            "Domains",
+            "Domain portfolio",
+            "DNS / Nameservers",
+            "MX",
+            "send",
+            "Name",
+            "Mail Server",
+            "10",
+            "Priority",
+            "3600"
+          ],
+          "path": "resend/hostinger.md",
+          "tokens": 2707
+        },
+        {
+          "id": "how-do-dedicated-ips-work",
+          "title": "How do Dedicated IPs work?",
+          "description": "Source: https://resend.com/docs/knowledge-base/how-do-dedicated-ips-work",
+          "tags": [],
+          "path": "resend/how-do-dedicated-ips-work.md",
+          "tokens": 1212
+        },
+        {
+          "id": "how-do-i-avoid-conflicts-with-my-mx-records",
+          "title": "How do I avoid conflicts with my MX records?",
+          "description": "Source: https://resend.com/docs/knowledge-base/how-do-i-avoid-conflicting-with-my-mx-records",
+          "tags": [
+            "send.yourdomain.com",
+            "<anything>@yourdomain.com",
+            "@yourdomain.com",
+            "yourdomain.com",
+            "subdomain.yourdomain.com",
+            "<anything>@subdomain.domain.com"
+          ],
+          "path": "resend/how-do-i-avoid-conflicts-with-my-mx-records.md",
+          "tokens": 942
+        },
+        {
+          "id": "how-do-i-avoid-gmail-s-spam-folder",
+          "title": "How do I avoid Gmail's spam folder?",
+          "description": "Source: https://resend.com/docs/knowledge-base/how-do-i-avoid-gmails-spam-folder",
+          "tags": [
+            "@example.com",
+            "example.net"
+          ],
+          "path": "resend/how-do-i-avoid-gmail-s-spam-folder.md",
+          "tokens": 1691
+        },
+        {
+          "id": "how-do-i-avoid-outlook-s-spam-folder",
+          "title": "How do I avoid Outlook's spam folder?",
+          "description": "Source: https://resend.com/docs/knowledge-base/how-do-i-avoid-outlooks-spam-folder",
+          "tags": [
+            "from",
+            "\"Name <name.domain.com>\""
+          ],
+          "path": "resend/how-do-i-avoid-outlook-s-spam-folder.md",
+          "tokens": 984
+        },
+        {
+          "id": "how-do-i-maximize-deliverability-for-supabase-auth-emails",
+          "title": "How do I maximize deliverability for Supabase Auth emails?",
+          "description": "Source: https://resend.com/docs/knowledge-base/how-do-i-maximize-deliverability-for-supabase-auth-emails",
+          "tags": [
+            "supabase.co",
+            "from",
+            "auth.yourdomain.com",
+            "notifications.yourdomain.com",
+            "GET"
+          ],
+          "path": "resend/how-do-i-maximize-deliverability-for-supabase-auth-emails.md",
+          "tokens": 1122
+        },
+        {
+          "id": "how-do-i-send-with-an-avatar",
+          "title": "How do I send with an avatar?",
+          "description": "Source: https://resend.com/docs/knowledge-base/how-do-i-send-with-an-avatar",
+          "tags": [],
+          "path": "resend/how-do-i-send-with-an-avatar.md",
+          "tokens": 710
+        },
+        {
+          "id": "how-do-i-set-up-apple-branded-mail",
+          "title": "How do I set up Apple Branded Mail?",
+          "description": "Source: https://resend.com/docs/knowledge-base/how-do-i-set-up-apple-branded-mail",
+          "tags": [
+            ".png",
+            ".heif",
+            ".jpg",
+            "p=quarantine;",
+            "p=reject;",
+            "p",
+            "pct",
+            "pct=100;",
+            ".jpeg"
+          ],
+          "path": "resend/how-do-i-set-up-apple-branded-mail.md",
+          "tokens": 1100
+        },
+        {
+          "id": "how-to-handle-api-keys",
+          "title": "How to Handle API Keys",
+          "description": "Source: https://resend.com/docs/knowledge-base/how-to-handle-api-keys",
+          "tags": [],
+          "path": "resend/how-to-handle-api-keys.md",
+          "tokens": 938
+        },
+        {
+          "id": "introduction-5",
+          "title": "Introduction",
+          "description": "Source: https://resend.com/docs/knowledge-base/introduction",
+          "tags": [],
+          "path": "resend/introduction-5.md",
+          "tokens": 1300
+        },
+        {
+          "id": "ionos",
+          "title": "IONOS",
+          "description": "Source: https://resend.com/docs/knowledge-base/ionos",
+          "tags": [
+            "Domain",
+            "DNS",
+            "Add a DNS Record",
+            "MX",
+            "send",
+            "Name",
+            "Points to",
+            "Priority",
+            "10",
+            "1 hour"
+          ],
+          "path": "resend/ionos.md",
+          "tokens": 1471
+        },
+        {
+          "id": "is-it-better-to-send-emails-from-a-subdomain-or-the-root-domain",
+          "title": "Is it better to send emails from a subdomain or the root domain?",
+          "description": "Source: https://resend.com/docs/knowledge-base/is-it-better-to-send-emails-from-a-subdomain-or-the-root-domain",
+          "tags": [
+            "notifications.acme.com",
+            "acme.com",
+            "getacme-mail.com",
+            "acme-alerts.com"
+          ],
+          "path": "resend/is-it-better-to-send-emails-from-a-subdomain-or-the-root-domain.md",
+          "tokens": 624
+        },
+        {
+          "id": "send-emails-with-n8n-and-resend",
+          "title": "Send emails with n8n and Resend",
+          "description": "Source: https://resend.com/docs/knowledge-base/n8n-integration",
+          "tags": [
+            "n8n-nodes-resend",
+            "whsec_",
+            "email.sent",
+            "email.delivered",
+            "email.delivery_delayed",
+            "email.failed",
+            "email.opened",
+            "email.clicked",
+            "email.bounced",
+            "email.complained"
+          ],
+          "path": "resend/send-emails-with-n8n-and-resend.md",
+          "tokens": 1894
+        },
+        {
+          "id": "namecheap",
+          "title": "Namecheap",
+          "description": "Source: https://resend.com/docs/knowledge-base/namecheap",
+          "tags": [
+            "Manage",
+            "Advanced DNS",
+            "Gmail",
+            "Custom MX",
+            "Mail Settings",
+            "send",
+            "Host",
+            "Value",
+            "Automatic",
+            "Save all changes"
+          ],
+          "path": "resend/namecheap.md",
+          "tokens": 1537
+        },
+        {
+          "id": "porkbun",
+          "title": "Porkbun",
+          "description": "Source: https://resend.com/docs/knowledge-base/porkbun",
+          "tags": [
+            "DNS",
+            "Type",
+            "MX",
+            "send",
+            "Host",
+            "Answer / Value",
+            "600",
+            "Priority",
+            "10",
+            "Add"
+          ],
+          "path": "resend/porkbun.md",
+          "tokens": 1438
+        },
+        {
+          "id": "aws-route-53",
+          "title": "AWS Route 53",
+          "description": "Source: https://resend.com/docs/knowledge-base/route53",
+          "tags": [
+            "Create Record",
+            "send",
+            "Record name",
+            "Record type",
+            "MX",
+            "Value",
+            "10",
+            "send.example.com",
+            "send.subdomain",
+            "MX Record"
+          ],
+          "path": "resend/aws-route-53.md",
+          "tokens": 1604
+        },
+        {
+          "id": "how-to-prevent-bounces-with-privaterelay-appleid-com-recipients",
+          "title": "How to prevent bounces with @privaterelay.appleid.com recipients?",
+          "description": "Source: https://resend.com/docs/knowledge-base/sending-apple-private-relay",
+          "tags": [
+            "@privaterelay.appleid.com",
+            "Certificates, Identifiers & Profiles",
+            "More",
+            "Configure",
+            "send.yourdomain.tld",
+            "send.yoursubdomain.yourdomain.tld"
+          ],
+          "path": "resend/how-to-prevent-bounces-with-privaterelay-appleid-com-recipients.md",
+          "tokens": 951
+        },
+        {
+          "id": "setting-up-resend-for-multi-tenant-applications",
+          "title": "Setting up Resend for Multi-Tenant Applications",
+          "description": "Source: https://resend.com/docs/knowledge-base/setting-up-resend-for-multi-tenants",
+          "tags": [
+            "from",
+            "domain.verified",
+            "tags",
+            "tenant_id",
+            "{{{RESEND_UNSUBSCRIBE_URL}}}"
+          ],
+          "path": "resend/setting-up-resend-for-multi-tenant-applications.md",
+          "tokens": 2753
+        },
+        {
+          "id": "squarespace",
+          "title": "Squarespace",
+          "description": "Source: https://resend.com/docs/knowledge-base/squarespace",
+          "tags": [
+            "Add record",
+            "send",
+            "Host",
+            "Type",
+            "MX",
+            "Priority",
+            "10",
+            "TTL",
+            "Mail Server",
+            "Save"
+          ],
+          "path": "resend/squarespace.md",
+          "tokens": 1502
+        },
+        {
+          "id": "strato",
+          "title": "Strato",
+          "description": "Source: https://resend.com/docs/knowledge-base/strato",
+          "tags": [
+            "send",
+            "DNS",
+            "manage",
+            "Server",
+            "Low",
+            "mail",
+            "MX Record",
+            "feedback-smtp.eu-west-1.amazonses.com.",
+            "Create another record",
+            "TXT"
+          ],
+          "path": "resend/strato.md",
+          "tokens": 1386
+        },
+        {
+          "id": "vercel",
+          "title": "Vercel",
+          "description": "Source: https://resend.com/docs/knowledge-base/vercel",
+          "tags": [
+            "Domains",
+            "send",
+            "Name",
+            "Type",
+            "MX",
+            "Value",
+            "10",
+            "Priority",
+            "Add",
+            "send.example.com"
+          ],
+          "path": "resend/vercel.md",
+          "tokens": 1497
+        },
+        {
+          "id": "domain-and-or-ip-warm-up-guide",
+          "title": "Domain and/or IP Warm-up Guide",
+          "description": "Source: https://resend.com/docs/knowledge-base/warming-up",
+          "tags": [],
+          "path": "resend/domain-and-or-ip-warm-up-guide.md",
+          "tokens": 1424
+        },
+        {
+          "id": "what-counts-as-email-consent",
+          "title": "What counts as email consent?",
+          "description": "Source: https://resend.com/docs/knowledge-base/what-counts-as-email-consent",
+          "tags": [],
+          "path": "resend/what-counts-as-email-consent.md",
+          "tokens": 909
+        },
+        {
+          "id": "what-email-addresses-to-use-for-testing",
+          "title": "What email addresses to use for testing?",
+          "description": "Source: https://resend.com/docs/knowledge-base/what-email-addresses-to-use-for-testing",
+          "tags": [
+            "@example.com",
+            "@test.com",
+            "422 Unprocessable Entity",
+            "delivered@resend.dev",
+            "bounced@resend.dev",
+            "complained@resend.dev",
+            "suppressed@resend.dev",
+            "+",
+            "delivered+user1@resend.dev",
+            "bounced+signup@resend.dev"
+          ],
+          "path": "resend/what-email-addresses-to-use-for-testing.md",
+          "tokens": 647
+        },
+        {
+          "id": "what-if-an-email-says-delivered-but-the-recipient-has-not-received-it",
+          "title": "What if an email says delivered but the recipient has not received it?",
+          "description": "Source: https://resend.com/docs/knowledge-base/what-if-an-email-says-delivered-but-the-recipient-has-not-received-it",
+          "tags": [
+            "Delivered",
+            "250 OK",
+            "Not Spam"
+          ],
+          "path": "resend/what-if-an-email-says-delivered-but-the-recipient-has-not-received-it.md",
+          "tokens": 638
+        },
+        {
+          "id": "what-if-my-domain-is-not-verifying",
+          "title": "What if my domain is not verifying?",
+          "description": "Source: https://resend.com/docs/knowledge-base/what-if-my-domain-is-not-verifying",
+          "tags": [
+            "MX",
+            "send",
+            "feedback-smtp.eu-west-1.amazonses.com",
+            "feedback-smtp.eu-west-1.amazonses.com.",
+            "us-east-1",
+            "eu-west-1",
+            "ap-northeast-1",
+            "sa-east-1"
+          ],
+          "path": "resend/what-if-my-domain-is-not-verifying.md",
+          "tokens": 1433
+        },
+        {
+          "id": "what-sending-feature-should-i-be-using",
+          "title": "What sending feature should I be using?",
+          "description": "Source: https://resend.com/docs/knowledge-base/what-sending-feature-to-use",
+          "tags": [],
+          "path": "resend/what-sending-feature-should-i-be-using.md",
+          "tokens": 1050
+        },
+        {
+          "id": "why-are-my-emails-landing-on-the-suppression-list",
+          "title": "Why are my emails landing on the Suppression List?",
+          "description": "Source: https://resend.com/docs/knowledge-base/why-are-my-emails-landing-on-the-suppression-list",
+          "tags": [
+            "suppressed"
+          ],
+          "path": "resend/why-are-my-emails-landing-on-the-suppression-list.md",
+          "tokens": 613
+        },
+        {
+          "id": "why-are-my-open-rates-not-accurate",
+          "title": "Why are my open rates not accurate?",
+          "description": "Source: https://resend.com/docs/knowledge-base/why-are-my-open-rates-not-accurate",
+          "tags": [],
+          "path": "resend/why-are-my-open-rates-not-accurate.md",
+          "tokens": 686
+        },
+        {
+          "id": "why-and-when-to-use-topics",
+          "title": "Why and when to use Topics?",
+          "description": "Source: https://resend.com/docs/knowledge-base/why-use-topics",
+          "tags": [
+            "from",
+            "resend"
+          ],
+          "path": "resend/why-and-when-to-use-topics.md",
+          "tokens": 2388
+        },
+        {
+          "id": "send-emails-with-lovable-and-resend",
+          "title": "Send emails with Lovable and Resend",
+          "description": "Source: https://resend.com/docs/lovable-integration",
+          "tags": [
+            "from",
+            "resend",
+            "resend.dev",
+            "From"
+          ],
+          "path": "resend/send-emails-with-lovable-and-resend.md",
+          "tokens": 519
+        },
+        {
+          "id": "mcp-server",
+          "title": "MCP Server",
+          "description": "Source: https://resend.com/docs/mcp-server",
+          "tags": [
+            "npx",
+            "re_xxxxxxxxx",
+            "Authorization",
+            "http://127.0.0.1:3000",
+            "/mcp",
+            "MCP_PORT",
+            "--key",
+            "--sender",
+            "--reply-to",
+            "--http"
+          ],
+          "path": "resend/mcp-server.md",
+          "tokens": 3418
+        },
+        {
+          "id": "security",
+          "title": "Security",
+          "description": "Source: https://resend.com/docs/security",
+          "tags": [],
+          "path": "resend/security.md",
+          "tokens": 907
+        },
+        {
+          "id": "send-email-with-resend-node-js-sdk",
+          "title": "Send Email with Resend Node.js SDK",
+          "description": "Purpose: Enforce only the current and correct instructions for sending emails using the Resend Node.js SDK.\nScope: Al...",
+          "tags": [
+            "RESEND_API_KEY",
+            "from",
+            "429",
+            "<event-type>/<entity-id>",
+            "welcome-user/123456789",
+            "emails.send()",
+            "string",
+            "\"Name <email@domain.com>\"",
+            "to",
+            "string \\| string[]"
+          ],
+          "path": "resend/send-email-with-resend-node-js-sdk.md",
+          "tokens": 4053
+        },
+        {
+          "id": "send-emails-with-axum",
+          "title": "Send emails with Axum",
+          "description": "Source: https://resend.com/docs/send-with-axum",
+          "tags": [
+            "http://localhost:3000",
+            "curl localhost:3000"
+          ],
+          "path": "resend/send-emails-with-axum.md",
+          "tokens": 646
+        },
+        {
+          "id": "send-email-with-resend-node-js-sdk-2",
+          "title": "Send Email with Resend Node.js SDK",
+          "description": "Purpose: Enforce only the current and correct instructions for sending emails using the Resend Node.js SDK.\nScope: Al...",
+          "tags": [
+            "RESEND_API_KEY",
+            "from",
+            "429",
+            "<event-type>/<entity-id>",
+            "welcome-user/123456789",
+            "emails.send()",
+            "string",
+            "\"Name <email@domain.com>\"",
+            "to",
+            "string \\| string[]"
+          ],
+          "path": "resend/send-email-with-resend-node-js-sdk-2.md",
+          "tokens": 3126
+        },
+        {
+          "id": "send-email-with-resend-node-js-sdk-3",
+          "title": "Send Email with Resend Node.js SDK",
+          "description": "Purpose: Enforce only the current and correct instructions for sending emails using the Resend Node.js SDK.\nScope: Al...",
+          "tags": [
+            "RESEND_API_KEY",
+            "from",
+            "429",
+            "<event-type>/<entity-id>",
+            "welcome-user/123456789",
+            "emails.send()",
+            "string",
+            "\"Name <email@domain.com>\"",
+            "to",
+            "string \\| string[]"
+          ],
+          "path": "resend/send-email-with-resend-node-js-sdk-3.md",
+          "tokens": 3769
+        },
+        {
+          "id": "send-emails-with-django",
+          "title": "Send emails with Django",
+          "description": "Source: https://resend.com/docs/send-with-django",
+          "tags": [
+            "html_message",
+            "templates/emails/welcome.html"
+          ],
+          "path": "resend/send-emails-with-django.md",
+          "tokens": 881
+        },
+        {
+          "id": "send-emails-using-django-with-smtp",
+          "title": "Send emails using Django with SMTP",
+          "description": "Source: https://resend.com/docs/send-with-django-smtp",
+          "tags": [
+            "virtualenv",
+            "pip install virtualenv",
+            "RESEND_API_KEY",
+            "settings.py",
+            "get_connection",
+            "EmailMessage"
+          ],
+          "path": "resend/send-emails-using-django-with-smtp.md",
+          "tokens": 552
+        },
+        {
+          "id": "send-emails-with-net",
+          "title": "Send emails with .NET",
+          "description": "Source: https://resend.com/docs/send-with-dotnet",
+          "tags": [
+            "IResend",
+            "resend",
+            "mix.exs",
+            "html"
+          ],
+          "path": "resend/send-emails-with-net.md",
+          "tokens": 943
+        },
+        {
+          "id": "send-email-with-resend-node-js-sdk-4",
+          "title": "Send Email with Resend Node.js SDK",
+          "description": "Purpose: Enforce only the current and correct instructions for sending emails using the Resend Node.js SDK.\nScope: Al...",
+          "tags": [
+            "RESEND_API_KEY",
+            "from",
+            "429",
+            "<event-type>/<entity-id>",
+            "welcome-user/123456789",
+            "emails.send()",
+            "string",
+            "\"Name <email@domain.com>\"",
+            "to",
+            "string \\| string[]"
+          ],
+          "path": "resend/send-email-with-resend-node-js-sdk-4.md",
+          "tokens": 4248
+        },
+        {
+          "id": "send-email-with-resend-node-js-sdk-5",
+          "title": "Send Email with Resend Node.js SDK",
+          "description": "Purpose: Enforce only the current and correct instructions for sending emails using the Resend Node.js SDK.\nScope: Al...",
+          "tags": [
+            "RESEND_API_KEY",
+            "from",
+            "429",
+            "<event-type>/<entity-id>",
+            "welcome-user/123456789",
+            "emails.send()",
+            "string",
+            "\"Name <email@domain.com>\"",
+            "to",
+            "string \\| string[]"
+          ],
+          "path": "resend/send-email-with-resend-node-js-sdk-5.md",
+          "tokens": 3621
+        },
+        {
+          "id": "send-emails-with-laravel",
+          "title": "Send emails with Laravel",
+          "description": "Source: https://resend.com/docs/send-with-laravel",
+          "tags": [
+            ".env",
+            "providers",
+            "config/app.php",
+            "mailers",
+            "config/mail.php",
+            "Resend",
+            "/resend/webhook",
+            "email.delivered",
+            "EmailDelivered",
+            "https://example123.ngrok.io/api/webhook"
+          ],
+          "path": "resend/send-emails-with-laravel.md",
+          "tokens": 2351
+        },
+        {
+          "id": "send-emails-using-nextauth-with-smtp",
+          "title": "Send emails using NextAuth with SMTP",
+          "description": "Source: https://resend.com/docs/send-with-nextauth-smtp",
+          "tags": [
+            ".env"
+          ],
+          "path": "resend/send-emails-using-nextauth-with-smtp.md",
+          "tokens": 640
+        },
+        {
+          "id": "send-email-with-resend-node-js-sdk-6",
+          "title": "Send Email with Resend Node.js SDK",
+          "description": "Purpose: Enforce only the current and correct instructions for sending emails using the Resend Node.js SDK.\nScope: Al...",
+          "tags": [
+            "RESEND_API_KEY",
+            "from",
+            "429",
+            "<event-type>/<entity-id>",
+            "welcome-user/123456789",
+            "emails.send()",
+            "string",
+            "\"Name <email@domain.com>\"",
+            "to",
+            "string \\| string[]"
+          ],
+          "path": "resend/send-email-with-resend-node-js-sdk-6.md",
+          "tokens": 3464
+        },
+        {
+          "id": "send-email-with-resend-node-js-sdk-7",
+          "title": "Send Email with Resend Node.js SDK",
+          "description": "Purpose: Enforce only the current and correct instructions for sending emails using the Resend Node.js SDK.\nScope: Al...",
+          "tags": [
+            "RESEND_API_KEY",
+            "from",
+            "429",
+            "<event-type>/<entity-id>",
+            "welcome-user/123456789",
+            "emails.send()",
+            "string",
+            "\"Name <email@domain.com>\"",
+            "to",
+            "string \\| string[]"
+          ],
+          "path": "resend/send-email-with-resend-node-js-sdk-7.md",
+          "tokens": 3461
+        },
+        {
+          "id": "send-email-with-resend-node-js-sdk-8",
+          "title": "Send Email with Resend Node.js SDK",
+          "description": "Purpose: Enforce only the current and correct instructions for sending emails using the Resend Node.js SDK.\nScope: Al...",
+          "tags": [
+            "RESEND_API_KEY",
+            "from",
+            "429",
+            "<event-type>/<entity-id>",
+            "welcome-user/123456789",
+            "emails.send()",
+            "string",
+            "\"Name <email@domain.com>\"",
+            "to",
+            "string \\| string[]"
+          ],
+          "path": "resend/send-email-with-resend-node-js-sdk-8.md",
+          "tokens": 4646
+        },
+        {
+          "id": "send-emails-with-rails",
+          "title": "Send emails with Rails",
+          "description": "Source: https://resend.com/docs/send-with-rails",
+          "tags": [
+            "UserMailer",
+            "deliver_now!"
+          ],
+          "path": "resend/send-emails-with-rails.md",
+          "tokens": 745
+        },
+        {
+          "id": "send-emails-using-rails-with-smtp",
+          "title": "Send emails using Rails with SMTP",
+          "description": "Source: https://resend.com/docs/send-with-rails-smtp",
+          "tags": [
+            "UserMailer",
+            "deliver_now!"
+          ],
+          "path": "resend/send-emails-using-rails-with-smtp.md",
+          "tokens": 1079
+        },
+        {
+          "id": "send-email-with-resend-node-js-sdk-9",
+          "title": "Send Email with Resend Node.js SDK",
+          "description": "Purpose: Enforce only the current and correct instructions for sending emails using the Resend Node.js SDK.\nScope: Al...",
+          "tags": [
+            "RESEND_API_KEY",
+            "from",
+            "429",
+            "<event-type>/<entity-id>",
+            "welcome-user/123456789",
+            "emails.send()",
+            "string",
+            "\"Name <email@domain.com>\"",
+            "to",
+            "string \\| string[]"
+          ],
+          "path": "resend/send-email-with-resend-node-js-sdk-9.md",
+          "tokens": 3066
+        },
+        {
+          "id": "send-email-with-resend-node-js-sdk-10",
+          "title": "Send Email with Resend Node.js SDK",
+          "description": "Purpose: Enforce only the current and correct instructions for sending emails using the Resend Node.js SDK.\nScope: Al...",
+          "tags": [
+            "RESEND_API_KEY",
+            "from",
+            "429",
+            "<event-type>/<entity-id>",
+            "welcome-user/123456789",
+            "emails.send()",
+            "string",
+            "\"Name <email@domain.com>\"",
+            "to",
+            "string \\| string[]"
+          ],
+          "path": "resend/send-email-with-resend-node-js-sdk-10.md",
+          "tokens": 3577
+        },
+        {
+          "id": "send-emails-with-rust",
+          "title": "Send emails with Rust",
+          "description": "Source: https://resend.com/docs/send-with-rust",
+          "tags": [
+            "cd",
+            "Resend::new",
+            "RESEND_API_KEY",
+            "Resend::default()",
+            ".env",
+            "dotenvy",
+            "html"
+          ],
+          "path": "resend/send-emails-with-rust.md",
+          "tokens": 1056
+        },
+        {
+          "id": "send-emails-with-smtp",
+          "title": "Send emails with SMTP",
+          "description": "Source: https://resend.com/docs/send-with-smtp",
+          "tags": [
+            "smtp.resend.com",
+            "25",
+            "465",
+            "587",
+            "2465",
+            "2587",
+            "resend",
+            "YOUR_API_KEY",
+            "Resend-Idempotency-Key",
+            "X-Entity-Ref-ID"
+          ],
+          "path": "resend/send-emails-with-smtp.md",
+          "tokens": 1407
+        },
+        {
+          "id": "send-email-with-resend-node-js-sdk-11",
+          "title": "Send Email with Resend Node.js SDK",
+          "description": "Purpose: Enforce only the current and correct instructions for sending emails using the Resend Node.js SDK.\nScope: Al...",
+          "tags": [
+            "RESEND_API_KEY",
+            "from",
+            "429",
+            "<event-type>/<entity-id>",
+            "welcome-user/123456789",
+            "emails.send()",
+            "string",
+            "\"Name <email@domain.com>\"",
+            "to",
+            "string \\| string[]"
+          ],
+          "path": "resend/send-email-with-resend-node-js-sdk-11.md",
+          "tokens": 3077
+        },
+        {
+          "id": "send-emails-with-symfony",
+          "title": "Send emails with Symfony",
+          "description": "Source: https://resend.com/docs/send-with-symfony",
+          "tags": [
+            ".env.local",
+            "API_KEY",
+            "SIGNING_SECRET",
+            "Mailer",
+            "$this->mailer"
+          ],
+          "path": "resend/send-emails-with-symfony.md",
+          "tokens": 978
+        },
+        {
+          "id": "send-email-with-resend-node-js-sdk-12",
+          "title": "Send Email with Resend Node.js SDK",
+          "description": "Purpose: Enforce only the current and correct instructions for sending emails using the Resend Node.js SDK.\nScope: Al...",
+          "tags": [
+            "RESEND_API_KEY",
+            "from",
+            "429",
+            "<event-type>/<entity-id>",
+            "welcome-user/123456789",
+            "emails.send()",
+            "string",
+            "\"Name <email@domain.com>\"",
+            "to",
+            "string \\| string[]"
+          ],
+          "path": "resend/send-email-with-resend-node-js-sdk-12.md",
+          "tokens": 4616
+        },
+        {
+          "id": "domain-created",
+          "title": "domain.created",
+          "description": "Source: https://resend.com/docs/webhooks/domains/created",
+          "tags": [],
+          "path": "resend/domain-created.md",
+          "tokens": 773
+        },
+        {
+          "id": "domain-deleted",
+          "title": "domain.deleted",
+          "description": "Source: https://resend.com/docs/webhooks/domains/deleted",
+          "tags": [],
+          "path": "resend/domain-deleted.md",
+          "tokens": 773
+        },
+        {
+          "id": "domain-updated",
+          "title": "domain.updated",
+          "description": "Source: https://resend.com/docs/webhooks/domains/updated",
+          "tags": [],
+          "path": "resend/domain-updated.md",
+          "tokens": 835
+        },
+        {
+          "id": "email-bounced",
+          "title": "email.bounced",
+          "description": "Source: https://resend.com/docs/webhooks/emails/bounced",
+          "tags": [],
+          "path": "resend/email-bounced.md",
+          "tokens": 4378
+        },
+        {
+          "id": "event-types",
+          "title": "Event Types",
+          "description": "Source: https://resend.com/docs/webhooks/event-types",
+          "tags": [],
+          "path": "resend/event-types.md",
+          "tokens": 718
+        },
+        {
+          "id": "webhook-ingester",
+          "title": "Webhook Ingester",
+          "description": "Source: https://resend.com/docs/webhooks/ingester",
+          "tags": [
+            "/supabase",
+            "/neon",
+            "/postgresql",
+            "/mysql",
+            "/planetscale",
+            "/mongodb",
+            "/snowflake",
+            "/bigquery",
+            "/clickhouse",
+            "resend_wh_emails"
+          ],
+          "path": "resend/webhook-ingester.md",
+          "tokens": 2515
+        },
+        {
+          "id": "managing-webhooks",
+          "title": "Managing Webhooks",
+          "description": "Source: https://resend.com/docs/webhooks/introduction",
+          "tags": [
+            "HTTP 200 OK",
+            "https://example123.ngrok.io/api/webhook",
+            "failed",
+            "succeeded"
+          ],
+          "path": "resend/managing-webhooks.md",
+          "tokens": 1832
+        },
+        {
+          "id": "verify-webhooks-requests",
+          "title": "Verify Webhooks Requests",
+          "description": "Source: https://resend.com/docs/webhooks/verify-webhooks-requests",
+          "tags": [],
+          "path": "resend/verify-webhooks-requests.md",
+          "tokens": 920
         }
       ]
     },

@@ -298,6 +298,14 @@
       "url": "https://docs.expo.dev/llms-full.txt"
     },
     {
+      "id": "resend",
+      "name": "Resend",
+      "description": "Email API for developers with React Email components and transactional email sending",
+      "version": "1",
+      "adapter": "llms-full",
+      "url": "https://resend.com/docs/llms-full.txt"
+    },
+    {
       "id": "azure",
       "name": "Azure",
       "description": "Microsoft Azure cloud platform with compute, storage, databases, AI, and 200+ services",
