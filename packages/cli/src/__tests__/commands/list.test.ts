@@ -225,6 +225,82 @@ describe("list", () => {
     expect(output).toContain("Total: 101 topics");
   });
 
+  it("lists topics for a specific service filter", async () => {
+    const registry = await import("../../registry.js");
+    vi.mocked(registry.getManifest).mockResolvedValue(
+      makeManifest({
+        libraries: [
+          {
+            id: "aws",
+            name: "AWS",
+            description: "Amazon Web Services",
+            version: "2024",
+            topics: [
+              makeTopic({ id: "lambda-creating-functions", title: "Lambda: Creating Functions" }),
+              makeTopic({ id: "lambda-deploying", title: "Lambda: Deploying" }),
+              makeTopic({ id: "s3-getting-started", title: "S3: Getting Started" }),
+              makeTopic({ id: "s3-buckets", title: "S3: Buckets" }),
+            ],
+          },
+        ],
+      }),
+    );
+    const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
+    await list(["aws", "lambda"]);
+    const output = logSpy.mock.calls[0]![0] as string;
+    expect(output).toContain("AWS");
+    expect(output).toContain("lambda");
+    expect(output).toContain("lambda-creating-functions");
+    expect(output).toContain("lambda-deploying");
+    expect(output).toContain("2 topics");
+    expect(output).not.toContain("s3");
+  });
+
+  it("shows message when service filter has no matches", async () => {
+    const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
+    await list(["react", "nonexistent"]);
+    expect(logSpy).toHaveBeenCalledWith(
+      expect.stringContaining("No topics found for service 'nonexistent' in react"),
+    );
+  });
+
+  it("existing list behavior unchanged with no service filter", async () => {
+    const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
+    await list(["react"]);
+    const output = logSpy.mock.calls[0]![0] as string;
+    expect(output).toContain("React");
+    expect(output).toContain("hooks");
+    expect(output).toContain("components");
+  });
+
+  it("shows tags in service-filtered topic list", async () => {
+    const registry = await import("../../registry.js");
+    vi.mocked(registry.getManifest).mockResolvedValue(
+      makeManifest({
+        libraries: [
+          {
+            id: "lib",
+            name: "Lib",
+            description: "test",
+            version: "1.0",
+            topics: [
+              makeTopic({ id: "svc-a", title: "Svc A", tags: ["tag1", "tag2"] }),
+              makeTopic({ id: "svc-b", title: "Svc B", tags: [] }),
+              makeTopic({ id: "other-x", title: "Other X" }),
+            ],
+          },
+        ],
+      }),
+    );
+    const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
+    await list(["lib", "svc"]);
+    const output = logSpy.mock.calls[0]![0] as string;
+    expect(output).toContain("svc-a");
+    expect(output).toContain("svc-b");
+    expect(output).toContain("tag1, tag2");
+    expect(output).not.toContain("other-x");
+  });
+
   it("groups topics without hyphens by their full ID", async () => {
     const topics: Topic[] = [];
     for (let i = 0; i < 80; i++) {

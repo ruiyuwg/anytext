@@ -20,6 +20,12 @@ export async function list(args: string[]): Promise<void> {
     process.exit(1);
   }
 
+  const serviceFilter = args[1];
+  if (serviceFilter) {
+    listServiceTopics(library, serviceFilter);
+    return;
+  }
+
   listTopics(library);
 }
 
@@ -62,6 +68,34 @@ function listTopics(library: Library): void {
     "",
   ];
   for (const topic of library.topics) {
+    const id = padEnd(bold(topic.id), maxId + 2);
+    const tokens = dim(`~${topic.tokens.toLocaleString()} tokens`);
+    lines.push(`  ${id} ${topic.title}  ${tokens}`);
+    if (topic.tags.length > 0) {
+      const indent = " ".repeat(maxId + 4);
+      lines.push(`${indent}${dim(topic.tags.join(", "))}`);
+    }
+  }
+  console.log(lines.join("\n"));
+}
+
+function listServiceTopics(library: Library, service: string): void {
+  const filtered = library.topics.filter((t) => t.id.startsWith(`${service}-`));
+
+  if (filtered.length === 0) {
+    console.log(
+      dim(`No topics found for service '${service}' in ${library.id}.`),
+    );
+    return;
+  }
+
+  const maxId = Math.max(...filtered.map((t) => t.id.length));
+
+  const lines = [
+    `${heading(library.name)} ${dim(">")} ${bold(service)} ${dim("—")} ${dim(`${filtered.length} topics`)}`,
+    "",
+  ];
+  for (const topic of filtered) {
     const id = padEnd(bold(topic.id), maxId + 2);
     const tokens = dim(`~${topic.tokens.toLocaleString()} tokens`);
     lines.push(`  ${id} ${topic.title}  ${tokens}`);
