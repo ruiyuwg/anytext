@@ -124,7 +124,7 @@ export function splitIntoTopics(
   const subDepth = primaryDepth === 1 ? 2 : 3;
 
   // Build initial sections
-  let sections = buildSections(
+  const sections = buildSections(
     allHeadings,
     markdown.length,
     primaryDepth,
