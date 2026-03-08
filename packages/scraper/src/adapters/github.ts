@@ -1,6 +1,41 @@
 import type { Adapter, SourceConfig, ProcessedTopic } from "../types.js";
 import { slugify, estimateTokens, truncate } from "../utils.js";
 
+interface FileEntry {
+  path: string;
+  type: string;
+}
+
+function buildHeaders(): Record<string, string> {
+  const headers: Record<string, string> = {
+    Accept: "application/vnd.github.v3+json",
+    "User-Agent": "anytext-scraper",
+  };
+  if (process.env["GITHUB_TOKEN"]) {
+    headers["Authorization"] = `Bearer ${process.env["GITHUB_TOKEN"]}`;
+  }
+  return headers;
+}
+
+async function fetchContentsApi(
+  repo: string,
+  dirPath: string,
+  branch: string,
+  headers: Record<string, string>,
+): Promise<FileEntry[]> {
+  const url = `https://api.github.com/repos/${repo}/contents/${dirPath}?ref=${branch}`;
+  console.log(`  Fetching contents for ${dirPath} via Contents API`);
+  const response = await fetch(url, { headers });
+  if (!response.ok) {
+    console.warn(`  Failed to fetch contents for ${dirPath}: ${response.status}`);
+    return [];
+  }
+  const items = (await response.json()) as Array<{ path: string; type: string; name: string }>;
+  return items
+    .filter((item) => item.type === "file" && (item.name.endsWith(".md") || item.name.endsWith(".mdx")))
+    .map((item) => ({ path: item.path, type: "blob" }));
+}
+
 export const githubAdapter: Adapter = {
   async process(
     source: SourceConfig,
@@ -13,14 +48,8 @@ export const githubAdapter: Adapter = {
 
     const branch = config.branch ?? "main";
     const docsPath = config.docsPath ?? "docs";
-
-    const headers: Record<string, string> = {
-      Accept: "application/vnd.github.v3+json",
-      "User-Agent": "anytext-scraper",
-    };
-    if (process.env["GITHUB_TOKEN"]) {
-      headers["Authorization"] = `Bearer ${process.env["GITHUB_TOKEN"]}`;
-    }
+    const maxFiles = config.maxFiles ?? 10000;
+    const headers = buildHeaders();
 
     // Fetch tree listing
     const treeUrl = `https://api.github.com/repos/${config.repo}/git/trees/${branch}?recursive=1`;
@@ -35,15 +64,37 @@ export const githubAdapter: Adapter = {
 
     const treeData = (await treeResponse.json()) as {
       tree: Array<{ path: string; type: string }>;
+      truncated?: boolean;
     };
 
-    // Filter for .md files in docs path
-    let mdFiles = treeData.tree.filter(
-      (item) =>
-        item.type === "blob" &&
-        item.path.startsWith(docsPath + "/") &&
-        (item.path.endsWith(".md") || item.path.endsWith(".mdx")),
-    );
+    let mdFiles: FileEntry[];
+
+    if (treeData.truncated && config.subDirs?.length) {
+      // Tree is truncated — fall back to Contents API per subDir
+      console.warn(`  Tree response truncated, falling back to Contents API`);
+      mdFiles = [];
+      for (const subDir of config.subDirs) {
+        const dirPath = `${docsPath}/${subDir}`;
+        const files = await fetchContentsApi(config.repo, dirPath, branch, headers);
+        mdFiles.push(...files);
+      }
+    } else {
+      // Filter for .md files in docs path
+      mdFiles = treeData.tree.filter(
+        (item) =>
+          item.type === "blob" &&
+          item.path.startsWith(docsPath + "/") &&
+          (item.path.endsWith(".md") || item.path.endsWith(".mdx")),
+      );
+
+      // Apply subDirs filter
+      if (config.subDirs?.length) {
+        const prefixes = config.subDirs.map((sub) => `${docsPath}/${sub}/`);
+        mdFiles = mdFiles.filter((f) =>
+          prefixes.some((prefix) => f.path.startsWith(prefix)),
+        );
+      }
+    }
 
     // Apply include/exclude patterns
     if (config.include?.length) {
@@ -56,6 +107,12 @@ export const githubAdapter: Adapter = {
         (f) =>
           !config.exclude!.some((pattern) => new RegExp(pattern).test(f.path)),
       );
+    }
+
+    // Apply maxFiles limit
+    if (mdFiles.length > maxFiles) {
+      console.warn(`  maxFiles limit reached: ${mdFiles.length} files found, processing only ${maxFiles}`);
+      mdFiles = mdFiles.slice(0, maxFiles);
     }
 
     console.log(`  Found ${mdFiles.length} markdown files`);

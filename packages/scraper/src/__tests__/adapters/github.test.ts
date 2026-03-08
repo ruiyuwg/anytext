@@ -29,6 +29,16 @@ const treeResponse = {
   ],
 };
 
+const treeWithSubDirs = {
+  tree: [
+    { path: "articles/azure-functions/overview.md", type: "blob" },
+    { path: "articles/azure-functions/triggers.md", type: "blob" },
+    { path: "articles/cosmos-db/intro.md", type: "blob" },
+    { path: "articles/app-service/deploy.md", type: "blob" },
+    { path: "articles/top-level.md", type: "blob" },
+  ],
+};
+
 beforeEach(() => {
   vi.spyOn(console, "log").mockImplementation(() => {});
   vi.spyOn(console, "warn").mockImplementation(() => {});
@@ -290,5 +300,183 @@ describe("githubAdapter", () => {
 
     const result = await githubAdapter.process(baseSource);
     expect(result[0]!.description).toBe("");
+  });
+
+  it("filters to specified subDirs only", async () => {
+    const source: SourceConfig = {
+      ...baseSource,
+      github: {
+        repo: "owner/repo",
+        docsPath: "articles",
+        subDirs: ["azure-functions", "cosmos-db"],
+      },
+    };
+
+    vi.spyOn(globalThis, "fetch")
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => treeWithSubDirs,
+      } as Response)
+      .mockResolvedValue({
+        ok: true,
+        text: async () => longContent,
+      } as Response);
+
+    const result = await githubAdapter.process(source);
+    // Only azure-functions/overview.md, azure-functions/triggers.md, cosmos-db/intro.md
+    // Not app-service/deploy.md or top-level.md
+    expect(result.length).toBe(3);
+    const ids = result.map((t) => t.id);
+    expect(ids).toContain("overview");
+    expect(ids).toContain("triggers");
+    expect(ids).toContain("intro");
+  });
+
+  it("without subDirs, all files under docsPath are included", async () => {
+    const source: SourceConfig = {
+      ...baseSource,
+      github: {
+        repo: "owner/repo",
+        docsPath: "articles",
+      },
+    };
+
+    vi.spyOn(globalThis, "fetch")
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => treeWithSubDirs,
+      } as Response)
+      .mockResolvedValue({
+        ok: true,
+        text: async () => longContent,
+      } as Response);
+
+    const result = await githubAdapter.process(source);
+    // All 5 md files under articles/
+    expect(result.length).toBe(5);
+  });
+
+  it("maxFiles limits file count", async () => {
+    const source: SourceConfig = {
+      ...baseSource,
+      github: {
+        repo: "owner/repo",
+        maxFiles: 2,
+      },
+    };
+
+    vi.spyOn(globalThis, "fetch")
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => treeResponse,
+      } as Response)
+      .mockResolvedValue({
+        ok: true,
+        text: async () => longContent,
+      } as Response);
+
+    const warnSpy = vi.spyOn(console, "warn");
+    const result = await githubAdapter.process(source);
+
+    expect(result.length).toBe(2);
+    expect(warnSpy).toHaveBeenCalledWith(
+      expect.stringContaining("maxFiles limit reached"),
+    );
+  });
+
+  it("truncated tree triggers Contents API fallback", async () => {
+    const source: SourceConfig = {
+      ...baseSource,
+      github: {
+        repo: "owner/repo",
+        docsPath: "articles",
+        subDirs: ["azure-functions"],
+      },
+    };
+
+    const fetchSpy = vi.spyOn(globalThis, "fetch")
+      // Tree response (truncated)
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({
+          tree: [],
+          truncated: true,
+        }),
+      } as Response)
+      // Contents API for articles/azure-functions
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => [
+          { path: "articles/azure-functions/overview.md", type: "file", name: "overview.md" },
+          { path: "articles/azure-functions/triggers.mdx", type: "file", name: "triggers.mdx" },
+          { path: "articles/azure-functions/logo.png", type: "file", name: "logo.png" },
+        ],
+      } as Response)
+      // Raw content fetches
+      .mockResolvedValue({
+        ok: true,
+        text: async () => longContent,
+      } as Response);
+
+    const warnSpy = vi.spyOn(console, "warn");
+    const result = await githubAdapter.process(source);
+
+    expect(warnSpy).toHaveBeenCalledWith(
+      expect.stringContaining("truncated, falling back"),
+    );
+    // Contents API returns 2 md files (not the .png)
+    expect(result.length).toBe(2);
+    // Should have called: tree + contents API + 2 raw fetches = 4
+    expect(fetchSpy).toHaveBeenCalledTimes(4);
+    expect(fetchSpy).toHaveBeenCalledWith(
+      expect.stringContaining("/contents/articles/azure-functions?ref=main"),
+      expect.any(Object),
+    );
+  });
+
+  it("Contents API fallback handles fetch failure per subDir", async () => {
+    const source: SourceConfig = {
+      ...baseSource,
+      github: {
+        repo: "owner/repo",
+        docsPath: "articles",
+        subDirs: ["good-dir", "bad-dir"],
+      },
+    };
+
+    vi.spyOn(globalThis, "fetch")
+      // Tree (truncated)
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({
+          tree: [],
+          truncated: true,
+        }),
+      } as Response)
+      // Contents API for good-dir
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => [
+          { path: "articles/good-dir/doc.md", type: "file", name: "doc.md" },
+        ],
+      } as Response)
+      // Contents API for bad-dir (fails)
+      .mockResolvedValueOnce({
+        ok: false,
+        status: 404,
+      } as Response)
+      // Raw content fetch for the one good file
+      .mockResolvedValue({
+        ok: true,
+        text: async () => longContent,
+      } as Response);
+
+    const warnSpy = vi.spyOn(console, "warn");
+    const result = await githubAdapter.process(source);
+
+    expect(result.length).toBe(1);
+    expect(warnSpy).toHaveBeenCalledWith(
+      expect.stringContaining("Failed to fetch contents for articles/bad-dir"),
+    );
   });
 });
