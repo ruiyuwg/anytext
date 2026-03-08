@@ -1,5 +1,5 @@
 {
-  "version": 43,
+  "version": 44,
   "updatedAt": "2026-03-08",
   "libraries": [
     {
@@ -66576,6 +66576,1604 @@
           ],
           "path": "vitest/why-vitest.md",
           "tokens": 679
+        }
+      ]
+    },
+    {
+      "id": "vue",
+      "name": "Vue.js",
+      "description": "Progressive JavaScript framework for building user interfaces with Composition API and reactivity",
+      "version": "3",
+      "topics": [
+        {
+          "id": "",
+          "title": "\\",
+          "description": "<script setup> is a compile-time syntactic sugar for using Composition API inside Single-File Components (SFCs). It i...",
+          "tags": [
+            "<script setup>",
+            "<script>",
+            "setup",
+            "setup()",
+            "methods",
+            "MyComponent",
+            "<my-component>",
+            ":is",
+            "FooBar.vue",
+            "<FooBar/>"
+          ],
+          "path": "vue/.md",
+          "tokens": 4961
+        },
+        {
+          "id": "accessibility",
+          "title": "Accessibility",
+          "description": "Web accessibility (also known as a11y) refers to the practice of creating websites that can be used by anyone — be th...",
+          "tags": [
+            "App.vue",
+            "backToTop",
+            "vue-router",
+            "<h1>",
+            "<h6>",
+            "<form>",
+            "<label>",
+            "<input>",
+            "<textarea>",
+            "<button>"
+          ],
+          "path": "vue/accessibility.md",
+          "tokens": 5156
+        },
+        {
+          "id": "animation-techniques",
+          "title": "Animation Techniques",
+          "description": "Vue provides the <Transition> and <TransitionGroup> components for handling enter / leave and list transitions. Howev...",
+          "tags": [
+            "<Transition>",
+            "<TransitionGroup>"
+          ],
+          "path": "vue/animation-techniques.md",
+          "tokens": 1141
+        },
+        {
+          "id": "application-api",
+          "title": "Application API",
+          "description": "Creates an application instance.",
+          "tags": [
+            "createApp()",
+            "innerHTML",
+            "mount()",
+            "install()",
+            "app.use()",
+            "inject()",
+            "config",
+            "setup()",
+            "info",
+            "true"
+          ],
+          "path": "vue/application-api.md",
+          "tokens": 4436
+        },
+        {
+          "id": "async-components",
+          "title": "Async Components",
+          "description": "In large applications, we may need to divide the app into smaller chunks and only load a component from the server wh...",
+          "tags": [
+            "defineAsyncComponent",
+            "resolve",
+            "reject(reason)",
+            "AsyncComp",
+            "app.component()",
+            "defineAsyncComponent()",
+            "requestIdleCallback",
+            "IntersectionObserver",
+            "<Suspense>"
+          ],
+          "path": "vue/async-components.md",
+          "tokens": 1652
+        },
+        {
+          "id": "built-in-components",
+          "title": "Built-in Components",
+          "description": "Built-in components can be used directly in templates without needing to be registered. They are also tree-shakeable:...",
+          "tags": [
+            "<Transition>",
+            "@before-enter",
+            "@before-leave",
+            "@enter",
+            "@leave",
+            "@appear",
+            "@after-enter",
+            "@after-leave",
+            "@after-appear",
+            "@enter-cancelled"
+          ],
+          "path": "vue/built-in-components.md",
+          "tokens": 1930
+        },
+        {
+          "id": "built-in-directives",
+          "title": "Built-in Directives",
+          "description": "Update the element's text content.",
+          "tags": [
+            "string",
+            "v-text",
+            "textContent",
+            "v-html",
+            "scoped",
+            "<style>",
+            "any",
+            "v-show",
+            "display",
+            "v-if"
+          ],
+          "path": "vue/built-in-directives.md",
+          "tokens": 3619
+        },
+        {
+          "id": "built-in-special-attributes",
+          "title": "Built-in Special Attributes",
+          "description": "The key special attribute is primarily used as a hint for Vue's virtual DOM algorithm to identify vnodes when diffing...",
+          "tags": [
+            "key",
+            "number | string | symbol",
+            "v-for",
+            "text",
+            "<span>",
+            "string | Function",
+            "ref",
+            "this.$refs",
+            "string | Component",
+            "is"
+          ],
+          "path": "vue/built-in-special-attributes.md",
+          "tokens": 924
+        },
+        {
+          "id": "built-in-special-elements",
+          "title": "Built-in Special Elements",
+          "description": "<component>, <slot> and <template> are component-like features and part of the template syntax. They are not true com...",
+          "tags": [
+            "<component>",
+            "<slot>",
+            "<template>",
+            "is",
+            "<script setup>",
+            "v-model",
+            "modelValue",
+            "update:modelValue",
+            "<input>",
+            "<select>"
+          ],
+          "path": "vue/built-in-special-elements.md",
+          "tokens": 1172
+        },
+        {
+          "id": "class-and-style-bindings",
+          "title": "Class and Style Bindings",
+          "description": "A common need for data binding is manipulating an element's class list and inline styles. Since class and style are b...",
+          "tags": [
+            "class",
+            "style",
+            "v-bind",
+            ":class",
+            "v-bind:class",
+            "active",
+            "isActive",
+            "hasError",
+            "true",
+            "\"static active text-danger\""
+          ],
+          "path": "vue/class-and-style-bindings.md",
+          "tokens": 1866
+        },
+        {
+          "id": "community-guide",
+          "title": "Community Guide",
+          "description": "Vue's community is growing incredibly fast and if you're reading this, there's a good chance you're ready to join it....",
+          "tags": [],
+          "path": "vue/community-guide.md",
+          "tokens": 1590
+        },
+        {
+          "id": "compile-time-flags",
+          "title": "Compile-Time Flags",
+          "description": "Compile-time flags only apply when using the esm-bundler build of Vue (i.e. vue/dist/vue.esm-bundler.js).",
+          "tags": [
+            "esm-bundler",
+            "vue/dist/vue.esm-bundler.js",
+            "__VUE_OPTIONS_API__",
+            "true",
+            "__VUE_PROD_DEVTOOLS__",
+            "false",
+            "__VUE_PROD_HYDRATION_MISMATCH_DETAILS__",
+            "@vitejs/plugin-vue",
+            "define",
+            "@vue/cli-service"
+          ],
+          "path": "vue/compile-time-flags.md",
+          "tokens": 881
+        },
+        {
+          "id": "component-events",
+          "title": "Component Events",
+          "description": "A component can emit custom events directly in template expressions (e.g. in a v-on handler) using the built-in $emit...",
+          "tags": [
+            "v-on",
+            "$emit",
+            "$emit()",
+            "this.$emit()",
+            ".once",
+            "<BlogPost>",
+            "$emit('foo', 1, 2, 3)",
+            "defineEmits()",
+            "emits",
+            "<template>"
+          ],
+          "path": "vue/component-events.md",
+          "tokens": 1653
+        },
+        {
+          "id": "component-instance",
+          "title": "Component Instance",
+          "description": "This page documents the built-in properties and methods exposed on the component public instance, i.e. this.",
+          "tags": [
+            "this",
+            "$data",
+            "data",
+            "props",
+            "$el",
+            "undefined",
+            "$options",
+            "extends",
+            "app.config.optionMergeStrategies",
+            "null"
+          ],
+          "path": "vue/component-instance.md",
+          "tokens": 2174
+        },
+        {
+          "id": "component-registration",
+          "title": "Component Registration",
+          "description": "A Vue component needs to be \"registered\" so that Vue knows where to locate its implementation when it is encountered ...",
+          "tags": [
+            ".component()",
+            ".vue",
+            "<script setup>",
+            "components",
+            "ComponentA",
+            "<PascalCase />",
+            "MyComponent",
+            "<MyComponent>",
+            "<my-component>"
+          ],
+          "path": "vue/component-registration.md",
+          "tokens": 1125
+        },
+        {
+          "id": "component-v-model",
+          "title": "Component v-model",
+          "description": "Watch an interactive video lesson on Scrimba",
+          "tags": [
+            "v-model",
+            "defineModel()",
+            ".value",
+            "defineModel",
+            "modelValue",
+            "update:modelValue",
+            "v-model=\"foo\"",
+            "default",
+            "myRef",
+            "model"
+          ],
+          "path": "vue/component-v-model.md",
+          "tokens": 4608
+        },
+        {
+          "id": "components-basics",
+          "title": "Components Basics",
+          "description": "Watch an interactive video lesson on Scrimba",
+          "tags": [
+            ".vue",
+            "<template>",
+            ".js",
+            "ButtonCounter.vue",
+            "components",
+            "<script setup>",
+            "count",
+            "PascalCase",
+            "/>",
+            "kebab-case"
+          ],
+          "path": "vue/components-basics.md",
+          "tokens": 5659
+        },
+        {
+          "id": "composables",
+          "title": "Composables",
+          "description": "import { useMouse } from './mouse'\nconst { x, y } = useMouse()",
+          "tags": [
+            "useMouse()",
+            "x",
+            "y",
+            "useFetch()",
+            "watchEffect()",
+            "toValue()",
+            "unref()",
+            "toValue(url)",
+            "watchEffect",
+            "watch()"
+          ],
+          "path": "vue/composables.md",
+          "tokens": 4631
+        },
+        {
+          "id": "composition-api-faq",
+          "title": "Composition API FAQ",
+          "description": "This FAQ assumes prior experience with Vue - in particular, experience with Vue 2 while primarily using Options API.",
+          "tags": [
+            "ref()",
+            "reactive()",
+            "onMounted()",
+            "onUnmounted()",
+            "provide()",
+            "inject()",
+            "@vue/composition-api",
+            "<script setup>",
+            "vue-class-component",
+            "this"
+          ],
+          "path": "vue/composition-api-faq.md",
+          "tokens": 3299
+        },
+        {
+          "id": "composition-api-dependency-injection",
+          "title": "Composition API: Dependency Injection",
+          "description": "Provides a value that can be injected by descendant components.",
+          "tags": [
+            "provide()",
+            "InjectionKey",
+            "Symbol",
+            "inject()",
+            "setup()",
+            "app.provide()",
+            "undefined",
+            "true"
+          ],
+          "path": "vue/composition-api-dependency-injection.md",
+          "tokens": 989
+        },
+        {
+          "id": "composition-api-helpers",
+          "title": "Composition API: Helpers",
+          "description": "Returns the attrs object from the Setup Context, which includes the fallthrough attributes of the current component. ...",
+          "tags": [
+            "attrs",
+            "<script setup>",
+            "slots",
+            "defineSlots()",
+            "defineModel()",
+            "useModel()",
+            "setup()",
+            "props",
+            "useId()",
+            "app.config.idPrefix"
+          ],
+          "path": "vue/composition-api-helpers.md",
+          "tokens": 996
+        },
+        {
+          "id": "composition-api-lifecycle-hooks",
+          "title": "Composition API: Lifecycle Hooks",
+          "description": "All APIs listed on this page must be called synchronously during the setup() phase of a component. See Guide - Lifecy...",
+          "tags": [
+            "setup()",
+            "<Suspense>",
+            "info",
+            "onErrorCaptured()",
+            "false",
+            "app.config.errorHandler",
+            "errorCaptured",
+            "<KeepAlive>"
+          ],
+          "path": "vue/composition-api-lifecycle-hooks.md",
+          "tokens": 2570
+        },
+        {
+          "id": "composition-api-setup",
+          "title": "Composition API: setup()",
+          "description": "The setup() hook serves as the entry point for Composition API usage in components in the following cases:",
+          "tags": [
+            "setup()",
+            "<script setup>",
+            "setup",
+            ".value",
+            "this",
+            "undefined",
+            "async setup()",
+            "props",
+            "props.xxx",
+            "attrs"
+          ],
+          "path": "vue/composition-api-setup.md",
+          "tokens": 1401
+        },
+        {
+          "id": "computed-properties",
+          "title": "Computed Properties",
+          "description": "In-template expressions are very convenient, but they are meant for simple operations. Putting too much logic in your...",
+          "tags": [
+            "author",
+            "author.books",
+            "publishedBooksMessage",
+            "books",
+            "data",
+            "this.publishedBooksMessage",
+            "this.author.books",
+            "computed()",
+            "publishedBooksMessage.value",
+            ".value"
+          ],
+          "path": "vue/computed-properties.md",
+          "tokens": 2609
+        },
+        {
+          "id": "conditional-rendering",
+          "title": "Conditional Rendering",
+          "description": "import { ref } from 'vue'\nconst awesome = ref(true)",
+          "tags": [
+            "v-if",
+            "v-else",
+            "v-else-if",
+            "<template>",
+            "v-show",
+            "display",
+            "v-for"
+          ],
+          "path": "vue/conditional-rendering.md",
+          "tokens": 928
+        },
+        {
+          "id": "creating-a-vue-application",
+          "title": "Creating a Vue Application",
+          "description": "Every Vue application starts by creating a new application instance with the createApp function:",
+          "tags": [
+            "createApp",
+            ".mount()",
+            "innerHTML",
+            "template",
+            ".config",
+            "TodoDeleteButton"
+          ],
+          "path": "vue/creating-a-vue-application.md",
+          "tokens": 1089
+        },
+        {
+          "id": "custom-directives",
+          "title": "Custom Directives",
+          "description": "const vHighlight = {\nmounted: el => {\nel.classList.add('is-highlight')\n}\n}",
+          "tags": [
+            "v-model",
+            "v-show",
+            "<script setup>",
+            "v",
+            "vHighlight",
+            "v-highlight",
+            "directives",
+            "GlobalDirectives",
+            "vue",
+            "v-focus"
+          ],
+          "path": "vue/custom-directives.md",
+          "tokens": 1966
+        },
+        {
+          "id": "custom-elements-api",
+          "title": "Custom Elements API",
+          "description": "This method accepts the same argument as defineComponent, but instead returns a native Custom Element class constructor.",
+          "tags": [
+            "defineComponent",
+            "defineCustomElement()",
+            "styles",
+            "configureApp",
+            "shadowRoot",
+            "boolean",
+            "true",
+            "false",
+            "<style>",
+            "nonce"
+          ],
+          "path": "vue/custom-elements-api.md",
+          "tokens": 693
+        },
+        {
+          "id": "custom-renderer-api",
+          "title": "Custom Renderer API",
+          "description": "Creates a custom renderer. By providing platform-specific node creation and manipulation APIs, you can leverage Vue's...",
+          "tags": [
+            "@vue/runtime-dom",
+            "@vue/runtime-test"
+          ],
+          "path": "vue/custom-renderer-api.md",
+          "tokens": 600
+        },
+        {
+          "id": "event-handling",
+          "title": "Event Handling",
+          "description": "We can use the v-on directive, which we typically shorten to the @ symbol, to listen to DOM events and run some JavaS...",
+          "tags": [
+            "v-on",
+            "@",
+            "v-on:click=\"handler\"",
+            "@click=\"handler\"",
+            "onclick",
+            "event.target",
+            "foo",
+            "foo.bar",
+            "foo['bar']",
+            "foo()"
+          ],
+          "path": "vue/event-handling.md",
+          "tokens": 2801
+        },
+        {
+          "id": "fallthrough-attributes",
+          "title": "Fallthrough Attributes",
+          "description": "A \"fallthrough attribute\" is an attribute or v-on event listener that is passed to a component, but is not explicitly...",
+          "tags": [
+            "v-on",
+            "class",
+            "style",
+            "id",
+            "<MyButton>",
+            "click",
+            "<button>",
+            "onClick",
+            "<BaseButton>",
+            "inheritAttrs: false"
+          ],
+          "path": "vue/fallthrough-attributes.md",
+          "tokens": 1727
+        },
+        {
+          "id": "form-input-bindings",
+          "title": "Form Input Bindings",
+          "description": "When dealing with forms on the frontend, we often need to sync the state of form input elements with corresponding st...",
+          "tags": [
+            "v-model",
+            "<textarea>",
+            "<select>",
+            "<input>",
+            "value",
+            "input",
+            "<input type=\"checkbox\">",
+            "<input type=\"radio\">",
+            "checked",
+            "change"
+          ],
+          "path": "vue/form-input-bindings.md",
+          "tokens": 3578
+        },
+        {
+          "id": "frequently-asked-questions",
+          "title": "Frequently Asked Questions",
+          "description": "Vue is an independent, community-driven project. It was created by Evan You in 2014 as a personal side project. Today...",
+          "tags": [
+            "<Transition>"
+          ],
+          "path": "vue/frequently-asked-questions.md",
+          "tokens": 2336
+        },
+        {
+          "id": "global-api-general",
+          "title": "Global API: General",
+          "description": "Exposes the current version of Vue.",
+          "tags": [
+            "string",
+            "nextTick()",
+            "this.$nextTick()",
+            "this",
+            "defineComponent()",
+            "setup()",
+            "h()",
+            "defineProps",
+            "/*#__PURE__*/"
+          ],
+          "path": "vue/global-api-general.md",
+          "tokens": 1507
+        },
+        {
+          "id": "glossary",
+          "title": "Glossary",
+          "description": "This glossary is intended to provide some guidance about the meanings of technical terms that are in common usage whe...",
+          "tags": [
+            ".js",
+            "defineProps()",
+            "defineEmits()",
+            "defineExpose()",
+            "const dp = defineProps",
+            "defineProps",
+            "<script setup>",
+            ".vue",
+            "use",
+            "setup()"
+          ],
+          "path": "vue/glossary.md",
+          "tokens": 6570
+        },
+        {
+          "id": "introduction",
+          "title": "Introduction",
+          "description": "Vue (pronounced /vjuː/, like view) is a JavaScript framework for building user interfaces. It builds on top of standa...",
+          "tags": [
+            "*.vue",
+            "data",
+            "methods",
+            "mounted",
+            "this",
+            "<script setup>",
+            "setup"
+          ],
+          "path": "vue/introduction.md",
+          "tokens": 2611
+        },
+        {
+          "id": "keepalive",
+          "title": "KeepAlive",
+          "description": "<KeepAlive> is a built-in component that allows us to conditionally cache component instances when dynamically switch...",
+          "tags": [
+            "<KeepAlive>",
+            "<component>",
+            "v-model",
+            "<keep-alive>",
+            "include",
+            "exclude",
+            "RegExp",
+            "name",
+            "KeepAlive",
+            "<script setup>"
+          ],
+          "path": "vue/keepalive.md",
+          "tokens": 1435
+        },
+        {
+          "id": "lifecycle-hooks",
+          "title": "Lifecycle Hooks",
+          "description": "Each Vue component instance goes through a series of initialization steps when it's created - for example, it needs t...",
+          "tags": [
+            "onMounted``mounted",
+            "onMounted",
+            "onUpdated",
+            "onUnmounted",
+            "mounted",
+            "updated",
+            "unmounted",
+            "this",
+            "setup()",
+            "<script setup>"
+          ],
+          "path": "vue/lifecycle-hooks.md",
+          "tokens": 641
+        },
+        {
+          "id": "list-rendering",
+          "title": "List Rendering",
+          "description": "We can use the v-for directive to render a list of items based on an array. The v-for directive requires a special sy...",
+          "tags": [
+            "v-for",
+            "item in items",
+            "items",
+            "item",
+            "forEach",
+            "of",
+            "in",
+            "Object.values()",
+            "1...n",
+            "n"
+          ],
+          "path": "vue/list-rendering.md",
+          "tokens": 3316
+        },
+        {
+          "id": "options-composition",
+          "title": "Options: Composition",
+          "description": "Provide values that can be injected by descendant components.",
+          "tags": [
+            "provide",
+            "inject",
+            "msg",
+            "from",
+            "default",
+            "undefined",
+            "mixins",
+            "created",
+            "extends",
+            "setup()"
+          ],
+          "path": "vue/options-composition.md",
+          "tokens": 1656
+        },
+        {
+          "id": "options-lifecycle",
+          "title": "Options: Lifecycle",
+          "description": "For shared usage of lifecycle hooks, see Guide - Lifecycle Hooks",
+          "tags": [
+            "data()",
+            "computed",
+            "setup()",
+            "beforeCreate()",
+            "$el",
+            "<Suspense>",
+            "info",
+            "errorCaptured()",
+            "false",
+            "app.config.errorHandler"
+          ],
+          "path": "vue/options-lifecycle.md",
+          "tokens": 2718
+        },
+        {
+          "id": "options-misc",
+          "title": "Options: Misc",
+          "description": "Explicitly declare a display name for the component.",
+          "tags": [
+            "MyComponent.vue",
+            "app.component",
+            "name",
+            "<KeepAlive>",
+            "include / exclude",
+            "<script setup>",
+            "inheritAttrs",
+            "false",
+            "$attrs",
+            "v-bind"
+          ],
+          "path": "vue/options-misc.md",
+          "tokens": 1024
+        },
+        {
+          "id": "options-rendering",
+          "title": "Options: Rendering",
+          "description": "A string template for the component.",
+          "tags": [
+            "template",
+            "runtime",
+            "vue.runtime.esm-bundler.js",
+            "#",
+            "querySelector",
+            "innerHTML",
+            "<template>",
+            "render",
+            "vue.js",
+            "SlotsType"
+          ],
+          "path": "vue/options-rendering.md",
+          "tokens": 961
+        },
+        {
+          "id": "options-state",
+          "title": "Options: State",
+          "description": "A function that returns the initial reactive state for the component instance.",
+          "tags": [
+            "this.$data",
+            "this.a",
+            "this.$data.a",
+            "undefined",
+            "null",
+            "_",
+            "$",
+            "this.$data._property",
+            "data",
+            "this"
+          ],
+          "path": "vue/options-state.md",
+          "tokens": 3592
+        },
+        {
+          "id": "performance",
+          "title": "Performance",
+          "description": "Vue is designed to be performant for most common use cases without much need for manual optimizations. However, there...",
+          "tags": [
+            "app.config.performance",
+            "<Transition>",
+            "lodash-es",
+            "lodash",
+            "defineAsyncComponent",
+            "<ListItem>",
+            "id",
+            "activeId",
+            "active",
+            "v-once"
+          ],
+          "path": "vue/performance.md",
+          "tokens": 3527
+        },
+        {
+          "id": "priority-a-rules-essential",
+          "title": "Priority A Rules: Essential",
+          "description": "This Vue.js Style Guide is outdated and needs to be reviewed. If you have any questions or suggestions, please open a...",
+          "tags": [
+            "App",
+            "v-for",
+            "key",
+            "<transition-group>",
+            "<input>",
+            ":key=\"todo.id\"",
+            "v-if",
+            "users",
+            "activeUsers",
+            "ul"
+          ],
+          "path": "vue/priority-a-rules-essential.md",
+          "tokens": 2046
+        },
+        {
+          "id": "priority-b-rules-strongly-recommended",
+          "title": "Priority B Rules: Strongly Recommended",
+          "description": "This Vue.js Style Guide is outdated and needs to be reviewed. If you have any questions or suggestions, please open a...",
+          "tags": [
+            "Base",
+            "App",
+            "V",
+            "BaseButton",
+            "BaseTable",
+            "BaseIcon",
+            "ButtonSubmit",
+            "MyButton",
+            "VueButton",
+            "components"
+          ],
+          "path": "vue/priority-b-rules-strongly-recommended.md",
+          "tokens": 4648
+        },
+        {
+          "id": "priority-c-rules-recommended",
+          "title": "Priority C Rules: Recommended",
+          "description": "This Vue.js Style Guide is outdated and needs to be reviewed. If you have any questions or suggestions, please open a...",
+          "tags": [
+            "name",
+            "compilerOptions",
+            "components",
+            "directives",
+            "extends",
+            "mixins",
+            "provide",
+            "inject",
+            "inheritAttrs",
+            "props"
+          ],
+          "path": "vue/priority-c-rules-recommended.md",
+          "tokens": 1535
+        },
+        {
+          "id": "priority-d-rules-use-with-caution",
+          "title": "Priority D Rules: Use with Caution",
+          "description": "This Vue.js Style Guide is outdated and needs to be reviewed. If you have any questions or suggestions, please open a...",
+          "tags": [
+            "scoped",
+            "data-v-f3f3eg9",
+            "button[data-v-f3f3eg9]",
+            ".btn-close[data-v-f3f3eg9]",
+            "this.$parent"
+          ],
+          "path": "vue/priority-d-rules-use-with-caution.md",
+          "tokens": 1101
+        },
+        {
+          "id": "production-deployment",
+          "title": "Production Deployment",
+          "description": "During development, Vue provides a number of features to improve the development experience:",
+          "tags": [
+            ".prod.js",
+            "Vue",
+            "vue.global.prod.js",
+            "vue.esm-browser.prod.js",
+            "create-vue",
+            "vue",
+            "vue.runtime.esm-bundler.js",
+            "\"production\"",
+            "app.config.errorHandler",
+            "onErrorCaptured"
+          ],
+          "path": "vue/production-deployment.md",
+          "tokens": 803
+        },
+        {
+          "id": "props",
+          "title": "Props",
+          "description": "Vue components require explicit props declaration so that Vue knows what external props passed to the component shoul...",
+          "tags": [
+            "<script setup>",
+            "defineProps()",
+            "props",
+            "props.foo",
+            "foo",
+            "props.",
+            "defineProps",
+            "watch(props.foo, ...)",
+            "watch",
+            "watch(() => props.foo, ...)"
+          ],
+          "path": "vue/props.md",
+          "tokens": 4639
+        },
+        {
+          "id": "provide-inject",
+          "title": "Provide / Inject",
+          "description": "Usually, when we need to pass data from the parent to a child component, we use props. However, imagine the case wher...",
+          "tags": [
+            "<Footer>",
+            "<DeepChild>",
+            "provide",
+            "inject",
+            "provide()",
+            "<script setup>",
+            "setup()",
+            "Symbol",
+            "data()",
+            "inject()"
+          ],
+          "path": "vue/provide-inject.md",
+          "tokens": 3005
+        },
+        {
+          "id": "quick-start",
+          "title": "Quick Start",
+          "description": "In this section we will introduce how to scaffold a Vue Single Page Application on your local machine. The created pr...",
+          "tags": [
+            "^20.19.0 || >=22.12.0",
+            "$",
+            "No",
+            "<script setup>",
+            "./dist",
+            "Vue",
+            "setup()",
+            "<script type=\"module\">",
+            "vue",
+            "vuejs/petite-vue"
+          ],
+          "path": "vue/quick-start.md",
+          "tokens": 2982
+        },
+        {
+          "id": "reactivity-api-advanced",
+          "title": "Reactivity API: Advanced",
+          "description": "Shallow version of ref().",
+          "tags": [
+            "ref()",
+            ".value",
+            "shallowRef()",
+            "customRef()",
+            "track",
+            "trigger",
+            "get",
+            "set",
+            "track()",
+            "get()"
+          ],
+          "path": "vue/reactivity-api-advanced.md",
+          "tokens": 2925
+        },
+        {
+          "id": "reactivity-api-core",
+          "title": "Reactivity API: Core",
+          "description": "To better understand the Reactivity APIs, it is recommended to read the following chapters in the guide:",
+          "tags": [
+            ".value",
+            "shallowRef()",
+            "ref()",
+            "get",
+            "set",
+            "computed()",
+            "Map",
+            "reactive",
+            "reactive()",
+            "flush: 'post'"
+          ],
+          "path": "vue/reactivity-api-core.md",
+          "tokens": 4041
+        },
+        {
+          "id": "reactivity-api-utilities",
+          "title": "Reactivity API: Utilities",
+          "description": "Checks if a value is a ref object.",
+          "tags": [
+            "isRef",
+            "val = isRef(val) ? val.value : val",
+            "state.foo",
+            "ref()",
+            "toRef()",
+            "toRef",
+            "computed",
+            "get",
+            "set",
+            "v-model"
+          ],
+          "path": "vue/reactivity-api-utilities.md",
+          "tokens": 1692
+        },
+        {
+          "id": "reactivity-fundamentals",
+          "title": "Reactivity Fundamentals",
+          "description": "This page and many other chapters later in the guide contain different content for the Options API and the Compositio...",
+          "tags": [
+            "data",
+            "this",
+            "null",
+            "undefined",
+            "$",
+            "_",
+            "this.someObject",
+            "newObject",
+            "ref()",
+            ".value"
+          ],
+          "path": "vue/reactivity-fundamentals.md",
+          "tokens": 4828
+        },
+        {
+          "id": "reactivity-in-depth",
+          "title": "Reactivity in Depth",
+          "description": "One of Vue’s most distinctive features is the unobtrusive reactivity system. Component state consists of reactive Jav...",
+          "tags": [
+            "= A0 + A1",
+            "A0",
+            "A2",
+            "update()",
+            "A1",
+            "whenDepsChange()",
+            "A0 + A1",
+            "reactive()",
+            "===",
+            "track()"
+          ],
+          "path": "vue/reactivity-in-depth.md",
+          "tokens": 5659
+        },
+        {
+          "id": "reactivity-transform",
+          "title": "Reactivity Transform",
+          "description": "Reactivity Transform was an experimental feature, and has been removed in the latest 3.4 release. Please read about t...",
+          "tags": [
+            ".value",
+            "$ref()",
+            "count",
+            "<script>",
+            "$",
+            "ref",
+            "$ref",
+            "computed",
+            "$computed",
+            "shallowRef"
+          ],
+          "path": "vue/reactivity-transform.md",
+          "tokens": 2473
+        },
+        {
+          "id": "releases",
+          "title": "Releases",
+          "description": "The current latest stable version of Vue is {{ version }}.",
+          "tags": [
+            "main",
+            "minor",
+            "npx install-vue@canary",
+            "npx install-vue@canary-minor"
+          ],
+          "path": "vue/releases.md",
+          "tokens": 1032
+        },
+        {
+          "id": "render-function-apis",
+          "title": "Render Function APIs",
+          "description": "Creates virtual DOM nodes (vnodes).",
+          "tags": [
+            "mergeProps()",
+            "class",
+            "style",
+            "onXxx",
+            "cloneVNode()",
+            "resolveComponent()",
+            "setup()",
+            "resolveDirective()",
+            "undefined",
+            "[Directive, value, argument, modifiers]"
+          ],
+          "path": "vue/render-function-apis.md",
+          "tokens": 1879
+        },
+        {
+          "id": "render-functions-jsx",
+          "title": "Render Functions & JSX",
+          "description": "Vue recommends using templates to build applications in the vast majority of cases. However, there are situations whe...",
+          "tags": [
+            "h()",
+            "createVNode()",
+            "VNode",
+            "setup()",
+            "render",
+            "render()",
+            "this",
+            "<template>",
+            "create-vue",
+            "@vue/babel-plugin-jsx"
+          ],
+          "path": "vue/render-functions-jsx.md",
+          "tokens": 5227
+        },
+        {
+          "id": "rendering-mechanism",
+          "title": "Rendering Mechanism",
+          "description": "How does Vue take a template and turn it into actual DOM nodes? How does Vue update those DOM nodes efficiently? We w...",
+          "tags": [
+            "vnode",
+            "<div>",
+            "foo",
+            "bar",
+            "innerHTML",
+            "2",
+            "createElementBlock()",
+            "v-if",
+            "v-for"
+          ],
+          "path": "vue/rendering-mechanism.md",
+          "tokens": 2717
+        },
+        {
+          "id": "routing",
+          "title": "Routing",
+          "description": "Routing on the server side means the server is sending a response based on the URL path that the user is visiting. Wh...",
+          "tags": [
+            "hashchange"
+          ],
+          "path": "vue/routing.md",
+          "tokens": 1102
+        },
+        {
+          "id": "security",
+          "title": "Security",
+          "description": "When a vulnerability is reported, it immediately becomes our top concern, with a full-time contributor dropping every...",
+          "tags": [
+            "userProvidedString",
+            "textContent",
+            "title",
+            "setAttribute",
+            "javascript:",
+            "sanitizedUrl",
+            "userProvidedStyles",
+            "https://user-controlled-website.com/",
+            "<style>",
+            "<script>"
+          ],
+          "path": "vue/security.md",
+          "tokens": 2351
+        },
+        {
+          "id": "server-side-rendering-ssr",
+          "title": "Server-Side Rendering (SSR)",
+          "description": "Vue.js is a framework for building client-side applications. By default, Vue components produce and manipulate DOM in...",
+          "tags": [
+            "/",
+            "/about",
+            "/contact",
+            "cd",
+            "npm init -y",
+            "\"type\": \"module\"",
+            "package.json",
+            "npm install vue",
+            "example.js",
+            "renderToString()"
+          ],
+          "path": "vue/server-side-rendering-ssr.md",
+          "tokens": 5159
+        },
+        {
+          "id": "server-side-rendering-api",
+          "title": "Server-Side Rendering API",
+          "description": "Renders input as a Node.js Readable stream.",
+          "tags": [
+            "vue/server-renderer",
+            "pipeToNodeWritable",
+            "ReadableStream",
+            "pipeToWebWritable()",
+            "TransformStream",
+            "renderToString()",
+            "text",
+            "children",
+            "class",
+            "style"
+          ],
+          "path": "vue/server-side-rendering-api.md",
+          "tokens": 1346
+        },
+        {
+          "id": "sfc-css-features",
+          "title": "SFC CSS Features",
+          "description": "When a <style> tag has the scoped attribute, its CSS will apply to elements of the current component only. This is si...",
+          "tags": [
+            "<style>",
+            "scoped",
+            ":deep()",
+            "v-html",
+            "<slot/>",
+            ":slotted",
+            ":global",
+            "p { color: red }",
+            ".example { color: red }",
+            ".a .b"
+          ],
+          "path": "vue/sfc-css-features.md",
+          "tokens": 1351
+        },
+        {
+          "id": "sfc-syntax-specification",
+          "title": "SFC Syntax Specification",
+          "description": "A Vue Single-File Component (SFC), conventionally using the *.vue file extension, is a custom file format that uses a...",
+          "tags": [
+            "*.vue",
+            "<template>",
+            "<script>",
+            "<style>",
+            "@vue/compiler-dom",
+            "render",
+            "<script setup>",
+            "setup()",
+            "scoped",
+            "module"
+          ],
+          "path": "vue/sfc-syntax-specification.md",
+          "tokens": 1315
+        },
+        {
+          "id": "single-file-components",
+          "title": "Single-File Components",
+          "description": "Vue Single-File Components (a.k.a. *.vue files, abbreviated as SFC) is a special file format that allows us to encaps...",
+          "tags": [
+            "*.vue",
+            "<template>",
+            "<script>",
+            "<style>"
+          ],
+          "path": "vue/single-file-components.md",
+          "tokens": 1199
+        },
+        {
+          "id": "slots",
+          "title": "Slots",
+          "description": "We have learned that components can accept props, which can be JavaScript values of any type. But how about template ...",
+          "tags": [
+            "<FancyButton>",
+            "<slot>",
+            "<button>",
+            "{{ message }}",
+            "<SubmitButton>",
+            "<BaseLayout>",
+            "name",
+            "<template>",
+            "v-slot",
+            "#"
+          ],
+          "path": "vue/slots.md",
+          "tokens": 5707
+        },
+        {
+          "id": "state-management",
+          "title": "State Management",
+          "description": "Technically, every Vue component instance already \"manages\" its own reactive state. Take a simple counter component a...",
+          "tags": [
+            "data()",
+            "reactive()",
+            "store",
+            "<ComponentA>",
+            "<ComponentB>",
+            "store.increment()",
+            "this",
+            "ref()",
+            "computed()"
+          ],
+          "path": "vue/state-management.md",
+          "tokens": 1914
+        },
+        {
+          "id": "style-guide",
+          "title": "Style Guide",
+          "description": "This Vue.js Style Guide is outdated and needs to be reviewed. If you have any questions or suggestions, please open a...",
+          "tags": [],
+          "path": "vue/style-guide.md",
+          "tokens": 675
+        },
+        {
+          "id": "suspense",
+          "title": "Suspense",
+          "description": "<Suspense> is an experimental feature. It is not guaranteed to reach stable status and the API may change before it d...",
+          "tags": [
+            "<Suspense>",
+            "setup()",
+            "<script setup>",
+            "await",
+            "async setup()",
+            "Suspense",
+            "suspensible: false",
+            "#default",
+            "#fallback",
+            "timeout"
+          ],
+          "path": "vue/suspense.md",
+          "tokens": 2011
+        },
+        {
+          "id": "teleport",
+          "title": "Teleport",
+          "description": "<Teleport> is a built-in component that allows us to \"teleport\" a part of a component's template into a DOM node that...",
+          "tags": [
+            "<Teleport>",
+            "<MyModal>",
+            "<button>",
+            "<div>",
+            ".modal",
+            "position: fixed",
+            "transform",
+            "perspective",
+            "filter",
+            "<div class=\"outer\">"
+          ],
+          "path": "vue/teleport.md",
+          "tokens": 1627
+        },
+        {
+          "id": "template-refs",
+          "title": "Template Refs",
+          "description": "While Vue's declarative rendering model abstracts away most of the direct DOM operations for you, there may still be ...",
+          "tags": [
+            "ref",
+            "key",
+            "v-for",
+            "useTemplateRef()",
+            "vue-tsc",
+            "input.value",
+            "<script setup>",
+            "setup()",
+            "this.$refs",
+            "$refs.input``input"
+          ],
+          "path": "vue/template-refs.md",
+          "tokens": 2197
+        },
+        {
+          "id": "template-syntax",
+          "title": "Template Syntax",
+          "description": "Watch an interactive video lesson on Scrimba",
+          "tags": [
+            "msg",
+            "v-html",
+            "v-",
+            "rawHtml",
+            "span",
+            "v-bind",
+            "id",
+            "dynamicId",
+            "null",
+            "undefined"
+          ],
+          "path": "vue/template-syntax.md",
+          "tokens": 3163
+        },
+        {
+          "id": "testing",
+          "title": "Testing",
+          "description": "Automated tests help you and your team build complex Vue applications quickly and confidently by preventing regressio...",
+          "tags": [
+            "increment",
+            "create-vue",
+            "max",
+            "2",
+            "useFavicon",
+            "@vue/test-utils",
+            "@testing-library/vue",
+            "test",
+            "vitest/globals",
+            "types"
+          ],
+          "path": "vue/testing.md",
+          "tokens": 5421
+        },
+        {
+          "id": "tooling",
+          "title": "Tooling",
+          "description": "You don't need to install anything on your machine to try out Vue SFCs - there are online playgrounds that allow you ...",
+          "tags": [
+            "vue.runtime.*",
+            ".runtime",
+            "vue",
+            "vue/dist/vue.esm-bundler.js",
+            "<script lang=\"ts\">",
+            "vue-tsc",
+            "d.ts",
+            "npm install -D eslint eslint-plugin-vue",
+            "eslint-plugin-vue",
+            "@vue/compiler-sfc"
+          ],
+          "path": "vue/tooling.md",
+          "tokens": 2595
+        },
+        {
+          "id": "transition",
+          "title": "Transition",
+          "description": "Vue offers two built-in components that can help work with transitions and animations in response to changing state:",
+          "tags": [
+            "<Transition>",
+            "<TransitionGroup>",
+            "v-for",
+            "v-if",
+            "v-show",
+            "<component>",
+            "key",
+            "v-enter-from",
+            "v-enter-active",
+            "v-enter-to"
+          ],
+          "path": "vue/transition.md",
+          "tokens": 6983
+        },
+        {
+          "id": "transitiongroup",
+          "title": "TransitionGroup",
+          "description": "<TransitionGroup> is a built-in component designed for animating the insertion, removal, and order change of elements...",
+          "tags": [
+            "<TransitionGroup>",
+            "<Transition>",
+            "tag",
+            "key",
+            "<transition-group>",
+            "v-for",
+            "moveClass"
+          ],
+          "path": "vue/transitiongroup.md",
+          "tokens": 1276
+        },
+        {
+          "id": "translations",
+          "title": "Translations",
+          "description": "The Vue documentation has recently undergone a major revision, so translations in other languages are still missing o...",
+          "tags": [],
+          "path": "vue/translations.md",
+          "tokens": 657
+        },
+        {
+          "id": "typescript-with-composition-api",
+          "title": "TypeScript with Composition API",
+          "description": "Watch an interactive video lesson on Scrimba",
+          "tags": [
+            "<script setup>",
+            "defineProps()",
+            "props",
+            "Props",
+            "@/types",
+            "node_modules",
+            "withDefaults",
+            "default",
+            "defineComponent()",
+            "setup()"
+          ],
+          "path": "vue/typescript-with-composition-api.md",
+          "tokens": 3924
+        },
+        {
+          "id": "typescript-with-options-api",
+          "title": "TypeScript with Options API",
+          "description": "While Vue does support TypeScript usage with Options API, it is recommended to use Vue with TypeScript via Compositio...",
+          "tags": [
+            "defineComponent()",
+            "props",
+            "required: true",
+            "default",
+            "PropType",
+            "4.7",
+            "validator",
+            "this",
+            "emits",
+            "event"
+          ],
+          "path": "vue/typescript-with-options-api.md",
+          "tokens": 2261
+        },
+        {
+          "id": "plugins",
+          "title": "Plugins",
+          "description": "Plugins are self-contained code that usually add app-level functionality to Vue. This is how we install a plugin:",
+          "tags": [
+            "install()",
+            "app.use()",
+            "app.component()",
+            "app.directive()",
+            "app.provide()",
+            "app.config.globalProperties",
+            "i18n",
+            "key",
+            "$translate",
+            "greetings.hello"
+          ],
+          "path": "vue/plugins.md",
+          "tokens": 1095
+        },
+        {
+          "id": "using-vue-with-typescript",
+          "title": "Using Vue with TypeScript",
+          "description": "A type system like TypeScript can detect many common errors via static analysis at build time. This reduces the chanc...",
+          "tags": [
+            "create-vue",
+            "vue-tsc",
+            "tsc",
+            "tsconfig.json",
+            "@vue/tsconfig",
+            "compilerOptions.isolatedModules",
+            "true",
+            "compilerOptions.verbatimModuleSyntax",
+            "isolatedModules",
+            "compilerOptions.strict"
+          ],
+          "path": "vue/using-vue-with-typescript.md",
+          "tokens": 2404
+        },
+        {
+          "id": "utility-types",
+          "title": "Utility Types",
+          "description": "This page only lists a few commonly used utility types that may need explanation for their usage. For a full list of ...",
+          "tags": [
+            "T | Ref<T>",
+            "T | Ref<T> | (() => T)",
+            "ExtractPublicPropTypes",
+            ".ts",
+            ".d.ts",
+            "<style>",
+            "v-bind"
+          ],
+          "path": "vue/utility-types.md",
+          "tokens": 1215
+        },
+        {
+          "id": "vue-and-web-components",
+          "title": "Vue and Web Components",
+          "description": "Web Components is an umbrella term for a set of web native APIs that allows developers to create reusable custom elem...",
+          "tags": [
+            "compilerOptions.isCustomElement",
+            "in",
+            "v-bind",
+            ".prop",
+            "defineCustomElement",
+            "defineComponent",
+            "HTMLElement",
+            "connectedCallback",
+            "disconnectedCallback",
+            "props"
+          ],
+          "path": "vue/vue-and-web-components.md",
+          "tokens": 5750
+        },
+        {
+          "id": "watchers",
+          "title": "Watchers",
+          "description": "Computed properties allow us to declaratively compute derived values. However, there are cases where we need to perfo...",
+          "tags": [
+            "watch",
+            "watch()",
+            "deep",
+            "handler",
+            "immediate: true",
+            "created",
+            "data",
+            "computed",
+            "methods",
+            "once: true"
+          ],
+          "path": "vue/watchers.md",
+          "tokens": 4597
+        },
+        {
+          "id": "ways-of-using-vue",
+          "title": "Ways of Using Vue",
+          "description": "We believe there is no \"one size fits all\" story for the web. This is why Vue is designed to be flexible and incremen...",
+          "tags": [],
+          "path": "vue/ways-of-using-vue.md",
+          "tokens": 1435
         }
       ]
     },

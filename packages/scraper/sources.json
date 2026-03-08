@@ -242,6 +242,14 @@
       "url": "https://fastify.dev/llms-full.txt"
     },
     {
+      "id": "vue",
+      "name": "Vue.js",
+      "description": "Progressive JavaScript framework for building user interfaces with Composition API and reactivity",
+      "version": "3",
+      "adapter": "llms-full",
+      "url": "https://vuejs.org/llms-full.txt"
+    },
+    {
       "id": "azure",
       "name": "Azure",
       "description": "Microsoft Azure cloud platform with compute, storage, databases, AI, and 200+ services",
