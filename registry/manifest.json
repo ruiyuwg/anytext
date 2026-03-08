@@ -1,5 +1,5 @@
 {
-  "version": 79,
+  "version": 81,
   "updatedAt": "2026-03-08",
   "libraries": [
     {
@@ -118290,6 +118290,2103 @@
           ],
           "path": "prisma/special-rules-for-referential-actions-in-sql-server-and-mongodb-docs-v6-orm-prisma-schema-data-model-relations-referential-actions-special-rules-for-referential-actions.md",
           "tokens": 2768
+        }
+      ]
+    },
+    {
+      "id": "qwik",
+      "name": "Qwik",
+      "description": "Resumable JavaScript framework for instant-loading web applications",
+      "version": "2",
+      "topics": [
+        {
+          "id": "qwik-advanced-containers",
+          "title": "Containers",
+          "description": "title: Containers | Advanced",
+          "tags": [
+            "<html>",
+            "renderToString",
+            "renderToStream",
+            "containerAttributes",
+            "lang",
+            "q:container",
+            "q:version",
+            "q:render",
+            "q:base",
+            "paused"
+          ],
+          "path": "qwik/qwik-advanced-containers.md",
+          "tokens": 1720
+        },
+        {
+          "id": "qwik-advanced-custom-build-dir",
+          "title": "Custom Build Output Directory",
+          "description": "title: Custom Build Output Directory | Advanced",
+          "tags": [
+            "dist",
+            "resources"
+          ],
+          "path": "qwik/qwik-advanced-custom-build-dir.md",
+          "tokens": 533
+        },
+        {
+          "id": "qwik-advanced-dollar",
+          "title": "The dollar `$` sign",
+          "description": "title: The $ dollar sign | Advanced",
+          "tags": [
+            "$",
+            "myCustomFunction$()",
+            "const",
+            "$()",
+            "onScroll",
+            "QRL",
+            "QRL.resolve()",
+            "implicit$FirstArg()",
+            "Qrl",
+            "MyComp"
+          ],
+          "path": "qwik/qwik-advanced-dollar.md",
+          "tokens": 2765
+        },
+        {
+          "id": "qwik-advanced-eslint",
+          "title": "(qwik)-advanced-eslint",
+          "description": "contributors:",
+          "tags": [
+            "className",
+            "htmlFor",
+            "{ [class: string]: boolean }",
+            "key",
+            "use*",
+            "component$",
+            "useCounter",
+            "$( ... )",
+            "${ ... }",
+            "src/routes"
+          ],
+          "path": "qwik/qwik-advanced-eslint.md",
+          "tokens": 8022
+        },
+        {
+          "id": "qwik-advanced-library",
+          "title": "Library",
+          "description": "title: Component library | Advanced",
+          "tags": [
+            "library",
+            "my-library",
+            "package.json",
+            "vite.config.ts",
+            "qwik",
+            "index.qwik.mjs",
+            ".qwik.mjs",
+            "lib",
+            "build.lib",
+            "src/index.ts"
+          ],
+          "path": "qwik/qwik-advanced-library.md",
+          "tokens": 1063
+        },
+        {
+          "id": "qwik-advanced-modules-prefetching",
+          "title": "Prefetching Modules",
+          "description": "title: Prefetching | Advanced",
+          "tags": [
+            "onClick",
+            "beforePrint",
+            "<link rel=\"modulepreload\">",
+            "<link>",
+            "rel=\"modulepreload\"",
+            "rel=\"preload\""
+          ],
+          "path": "qwik/qwik-advanced-modules-prefetching.md",
+          "tokens": 1776
+        },
+        {
+          "id": "qwik-advanced-optimizer",
+          "title": "Optimizer",
+          "description": "title: Optimizer Rules | Advanced",
+          "tags": [
+            "$",
+            "Counter"
+          ],
+          "path": "qwik/qwik-advanced-optimizer.md",
+          "tokens": 435
+        },
+        {
+          "id": "qwik-advanced-qrl",
+          "title": "QRL",
+          "description": "title: QRL | Advanced",
+          "tags": [
+            "q:base",
+            "./path/to/chunk.js",
+            "SymbolName",
+            "document.baseURI",
+            "q:obj",
+            "useLexicalScope()",
+            "http://localhost/index.html",
+            "on:click",
+            "click",
+            "<button>"
+          ],
+          "path": "qwik/qwik-advanced-qrl.md",
+          "tokens": 1729
+        },
+        {
+          "id": "qwik-advanced-qwikloader",
+          "title": "Qwikloader",
+          "description": "title: Qwikloader | Advanced",
+          "tags": [
+            "<script>",
+            "<button>",
+            "click",
+            "on:click",
+            "q:base",
+            "document.baseURI",
+            "http://localhost/",
+            "http://localhost/build/myHandler.js",
+            "clickHandler",
+            "./chunk-a.js#Counter_button_onClick[0]"
+          ],
+          "path": "qwik/qwik-advanced-qwikloader.md",
+          "tokens": 886
+        },
+        {
+          "id": "qwik-advanced-vite",
+          "title": "Vite",
+          "description": "title: Vite | Advanced",
+          "tags": [
+            "vite.config.js",
+            "qwikVite()",
+            "qwikVite",
+            "debug",
+            "entryStrategy",
+            "srcDir",
+            "tsconfigFileNames",
+            "vendorRoots",
+            "client",
+            "ssr"
+          ],
+          "path": "qwik/qwik-advanced-vite.md",
+          "tokens": 1596
+        },
+        {
+          "id": "qwik-concepts-progressive",
+          "title": "Progressive",
+          "description": "title: Progressive | Concepts",
+          "tags": [
+            "$"
+          ],
+          "path": "qwik/qwik-concepts-progressive.md",
+          "tokens": 1266
+        },
+        {
+          "id": "qwik-concepts-reactivity",
+          "title": "Reactivity",
+          "description": "title: Reactivity | Concepts",
+          "tags": [
+            ".subscribe()",
+            "useStore()",
+            "store",
+            "count",
+            "Counter",
+            "store.count",
+            "state.count",
+            "requestAnimationFrame",
+            "increment",
+            "show"
+          ],
+          "path": "qwik/qwik-concepts-reactivity.md",
+          "tokens": 2425
+        },
+        {
+          "id": "qwik-concepts-resumable",
+          "title": "Resumable vs. Hydration",
+          "description": "title: Resumable | Concepts",
+          "tags": [
+            "store",
+            "on:click",
+            "JSON.stringify",
+            "URL",
+            "Map",
+            "Set",
+            "instanceof"
+          ],
+          "path": "qwik/qwik-concepts-resumable.md",
+          "tokens": 2548
+        },
+        {
+          "id": "qwik-concepts-think-qwik",
+          "title": "Think Qwik",
+          "description": "title: Think Qwik | Concepts",
+          "tags": [
+            "<script>"
+          ],
+          "path": "qwik/qwik-concepts-think-qwik.md",
+          "tokens": 2476
+        },
+        {
+          "id": "qwik-core-context",
+          "title": "Context",
+          "description": "title: Context | Components",
+          "tags": [
+            "useContext()",
+            "@builder.io/qwik",
+            "useContext(ctx: ContextId): VALUE",
+            "ContextId",
+            "docs.theme-context",
+            "useSignal",
+            "default",
+            "Child",
+            "useContext",
+            "createContextId()"
+          ],
+          "path": "qwik/qwik-core-context.md",
+          "tokens": 1240
+        },
+        {
+          "id": "qwik-core-events",
+          "title": "Events",
+          "description": "title: Events | Components",
+          "tags": [
+            "on{EventName}$",
+            "onClick$",
+            "click",
+            "<button>",
+            "() => store.count++",
+            "bind:propertyName",
+            "$",
+            "$()",
+            "@builder.io/qwik",
+            "QRL"
+          ],
+          "path": "qwik/qwik-core-events.md",
+          "tokens": 3236
+        },
+        {
+          "id": "qwik-core-overview",
+          "title": "Components",
+          "description": "title: Overview | Components",
+          "tags": [
+            "component$()",
+            "component$",
+            "$",
+            "Scene.Title = Title",
+            "index.ts",
+            "props",
+            "Item",
+            "name",
+            "quantity",
+            "description"
+          ],
+          "path": "qwik/qwik-core-overview.md",
+          "tokens": 4711
+        },
+        {
+          "id": "qwik-core-rendering",
+          "title": "Rendering",
+          "description": "title: Rendering | Components",
+          "tags": [
+            "component$",
+            "useSignal",
+            "$",
+            "<input>",
+            "onChange",
+            "onInput$",
+            "class",
+            "className",
+            "for",
+            "htmlFor"
+          ],
+          "path": "qwik/qwik-core-rendering.md",
+          "tokens": 2046
+        },
+        {
+          "id": "qwik-core-slots",
+          "title": "Slots",
+          "description": "title: Slots | Components",
+          "tags": [
+            "children",
+            "<slot>",
+            "<Slot>",
+            "@builder.io/qwik",
+            "Slot",
+            "name",
+            "<Tab>",
+            "q:slot",
+            "q:slot=\"footer\"",
+            "<q:template>"
+          ],
+          "path": "qwik/qwik-core-slots.md",
+          "tokens": 2373
+        },
+        {
+          "id": "qwik-core-state",
+          "title": "State",
+          "description": "title: State | Components",
+          "tags": [
+            "useSignal()",
+            "useStore()",
+            ".value",
+            "value",
+            "count.value",
+            "useStore(initialStateObject)",
+            "let { count } = useStore({ count: 0 })",
+            "count",
+            "deep: false",
+            "this"
+          ],
+          "path": "qwik/qwik-core-state.md",
+          "tokens": 5065
+        },
+        {
+          "id": "qwik-core-styles",
+          "title": "Styles",
+          "description": "title: Styles | Components",
+          "tags": [
+            ".module.css",
+            "MyComponent.module.css",
+            "class",
+            "className",
+            "useStylesScoped$()",
+            "@builder.io/qwik",
+            "?inline",
+            "useStyleScoped$()",
+            ":global()",
+            "useStylesScoped$"
+          ],
+          "path": "qwik/qwik-core-styles.md",
+          "tokens": 3076
+        },
+        {
+          "id": "qwik-core-tasks",
+          "title": "Tasks",
+          "description": "title: Tasks and Lifecycle | Components",
+          "tags": [
+            "useEffect()",
+            "useTask$()",
+            "useVisibleTask$()",
+            "useResource$()",
+            "track()",
+            "Task",
+            "Tasks",
+            "Render",
+            "TASK",
+            "VisibleTask"
+          ],
+          "path": "qwik/qwik-core-tasks.md",
+          "tokens": 5581
+        },
+        {
+          "id": "qwik-deprecated-features",
+          "title": "Deprecated features",
+          "description": "title: Deprecated Features | Guides",
+          "tags": [
+            "useWatch$",
+            "useMount$",
+            "useServerMount",
+            "useClientMount",
+            "useClientEffect",
+            "useClientEffectQrl",
+            "useBrowserVisibleTask",
+            "useBrowserVisibleTaskQrl",
+            "useEnvData",
+            "useRef"
+          ],
+          "path": "qwik/qwik-deprecated-features.md",
+          "tokens": 485
+        },
+        {
+          "id": "qwik-faq",
+          "title": "FAQ",
+          "description": "title: Frequently Asked Questions | Introduction",
+          "tags": [
+            "$",
+            "component$()",
+            "useTask$()",
+            "jQuery",
+            "<h1>",
+            "<button>",
+            "<Component/>",
+            "<Link>",
+            "<Scripts>",
+            "Qwik React"
+          ],
+          "path": "qwik/qwik-faq.md",
+          "tokens": 4812
+        },
+        {
+          "id": "qwik-getting-started",
+          "title": "Getting Started Qwikly",
+          "description": "title: Getting Started | Introduction",
+          "tags": [
+            "/joke/",
+            "joke",
+            "routes",
+            "index.tsx",
+            "export default component$(...)",
+            "src/routes/joke/index.tsx",
+            "localhost:5173/joke/",
+            "http://localhost:5173/joke/",
+            "routeLoader$",
+            "useDadJoke()"
+          ],
+          "path": "qwik/qwik-getting-started.md",
+          "tokens": 5123
+        },
+        {
+          "id": "qwik",
+          "title": "Welcome to Qwik",
+          "description": "title: Overview | Introduction",
+          "tags": [],
+          "path": "qwik/qwik.md",
+          "tokens": 745
+        },
+        {
+          "id": "qwikcity-action",
+          "title": "`routeAction$()`",
+          "description": "title: RouteAction$ | QwikCity",
+          "tags": [
+            "routeAction$()",
+            "globalAction$()",
+            "@builder.io/qwik-city",
+            "<Form/>",
+            "<form>",
+            "action.submit()",
+            "addUser",
+            "Promise",
+            "<Form>",
+            "multipart/form-data"
+          ],
+          "path": "qwik/qwikcity-action.md",
+          "tokens": 3978
+        },
+        {
+          "id": "qwikcity-advanced-complex-forms",
+          "title": "Complex Forms",
+          "description": "title: Complex Forms | Advanced",
+          "tags": [
+            ".",
+            "person.name",
+            "{ person: { name: 'sam' } }",
+            "person.pets.0",
+            "{ person: { pets: [ 'cat' ] } }",
+            "fieldErrors",
+            "fieldErrors[\"person[]\"]"
+          ],
+          "path": "qwik/qwikcity-advanced-complex-forms.md",
+          "tokens": 1773
+        },
+        {
+          "id": "qwikcity-advanced-content-security-policy",
+          "title": "Content Security Policy",
+          "description": "title: Content Security Policy | Advanced",
+          "tags": [
+            "useServerData"
+          ],
+          "path": "qwik/qwikcity-advanced-content-security-policy.md",
+          "tokens": 875
+        },
+        {
+          "id": "qwikcity-advanced-menu",
+          "title": "Menu",
+          "description": "title: Menu | Advanced",
+          "tags": [
+            "menu.md",
+            "useContent()",
+            "https://example.com/some/path",
+            "src/routes/some/path/index.tsx",
+            "src/routes/some/layout.tsx",
+            "src/routes/some/menu.md",
+            "#",
+            "##",
+            "-",
+            "ContentMenu"
+          ],
+          "path": "qwik/qwikcity-advanced-menu.md",
+          "tokens": 914
+        },
+        {
+          "id": "qwikcity-advanced-plugins",
+          "title": "Qwik Plugins",
+          "description": "title: Qwik Plugins | Qwik City",
+          "tags": [
+            "plugin.ts",
+            "plugin@<name>.ts",
+            "src/routes",
+            "onRequest",
+            "onGet",
+            "onPost",
+            "server$",
+            "plugin@auth.ts",
+            "plugin@security.ts",
+            "auth"
+          ],
+          "path": "qwik/qwikcity-advanced-plugins.md",
+          "tokens": 483
+        },
+        {
+          "id": "qwikcity-advanced-request-handling",
+          "title": "Request Handling",
+          "description": "title: Request Handling | Advanced",
+          "tags": [
+            "layout.ts",
+            "index.ts",
+            "src/routes",
+            "onGet",
+            "onPost",
+            "onPut",
+            "onRequest",
+            "GET",
+            "POST",
+            "RequestEvent"
+          ],
+          "path": "qwik/qwikcity-advanced-request-handling.md",
+          "tokens": 1481
+        },
+        {
+          "id": "qwikcity-advanced-routing",
+          "title": "Advanced Routing",
+          "description": "title: Advanced Routing | Qwik City",
+          "tags": [
+            "https://example.com/does-not-exist",
+            "404.tsx",
+            "src/routes",
+            "layout.tsx",
+            "src/routes/account/404.tsx",
+            "/account/*",
+            "404.html",
+            "https://example.com/product/abc",
+            "src/routes/product/[id]/index.tsx",
+            "[id]"
+          ],
+          "path": "qwik/qwikcity-advanced-routing.md",
+          "tokens": 2834
+        },
+        {
+          "id": "qwikcity-advanced-sitemaps",
+          "title": "Generating Sitemaps",
+          "description": "title: Generating Sitemaps | Advanced",
+          "tags": [
+            "sitemap.xml",
+            "sitemapOutFile",
+            "include",
+            "exclude",
+            "origin",
+            "robots.txt",
+            "public",
+            "public/robots.txt",
+            "Sitemap",
+            "<YOUR_HOSTNAME>"
+          ],
+          "path": "qwik/qwikcity-advanced-sitemaps.md",
+          "tokens": 1314
+        },
+        {
+          "id": "qwikcity-advanced-speculative-module-fetching",
+          "title": "Speculative Module Fetching",
+          "description": "title: Speculative Module Fetching | Advanced",
+          "tags": [
+            "A",
+            "B",
+            "C",
+            "q-manifest.json",
+            "build/q-bundle-graph-xyz.json",
+            "_preload",
+            "<link rel=\"modulepreload\">"
+          ],
+          "path": "qwik/qwikcity-advanced-speculative-module-fetching.md",
+          "tokens": 1172
+        },
+        {
+          "id": "qwikcity-advanced-static-assets",
+          "title": "Static Assets",
+          "description": "title: Static Assets | Advanced",
+          "tags": [
+            "/public",
+            "/",
+            "https://example.com/"
+          ],
+          "path": "qwik/qwikcity-advanced-static-assets.md",
+          "tokens": 178
+        },
+        {
+          "id": "qwikcity-api",
+          "title": "API reference",
+          "description": "title: API Reference | Qwik City",
+          "tags": [
+            "useContent()",
+            "headings",
+            "<h1>",
+            "<h6>",
+            "menu.md",
+            "useDocumentHead()",
+            "DocumentHead",
+            "<RouterHead>",
+            "<head>",
+            "<meta>"
+          ],
+          "path": "qwik/qwikcity-api.md",
+          "tokens": 4824
+        },
+        {
+          "id": "qwikcity-caching",
+          "title": "Caching Responses",
+          "description": "title: Caching | Qwik City",
+          "tags": [
+            "onGet",
+            "src/routes/layout.tsx",
+            "cacheControl",
+            "request.cacheControl",
+            "\"Cache-Control\""
+          ],
+          "path": "qwik/qwikcity-caching.md",
+          "tokens": 1559
+        },
+        {
+          "id": "qwikcity-endpoints",
+          "title": "Endpoints",
+          "description": "title: Endpoints | Qwik City",
+          "tags": [
+            "json",
+            "RequestEvent",
+            "/greet/",
+            "{\"hello\":\"world\"}",
+            "src/routes/greet/index.tsx",
+            "json()",
+            "fetch()",
+            "send()",
+            "getWritableStream()",
+            "server$"
+          ],
+          "path": "qwik/qwikcity-endpoints.md",
+          "tokens": 934
+        },
+        {
+          "id": "qwikcity-error-handling",
+          "title": "Error handling",
+          "description": "title: Error handling | Qwik City",
+          "tags": [
+            "server$",
+            "ServerError",
+            "plugin"
+          ],
+          "path": "qwik/qwikcity-error-handling.md",
+          "tokens": 669
+        },
+        {
+          "id": "qwikcity-guides-best-practices",
+          "title": "Best Practices",
+          "description": "title: Best Practices | Guides",
+          "tags": [
+            "isBiggerThanZero",
+            "useTask$",
+            "useComputed$",
+            "count.value",
+            "useVisibleTask$()",
+            "useTask$()",
+            "useOn()",
+            "the current component",
+            "useOnWindow()",
+            "window"
+          ],
+          "path": "qwik/qwikcity-guides-best-practices.md",
+          "tokens": 2590
+        },
+        {
+          "id": "qwikcity-guides-bundle",
+          "title": "Bundle Optimization",
+          "description": "title: Bundle Optimization | Guides",
+          "tags": [
+            "__$(__)",
+            "component$",
+            "onClick$",
+            "chunk-1.js",
+            "sABC123",
+            "s_XYZ432",
+            "./chunk-1.js",
+            "$()",
+            "qwikVite()",
+            "vite.config.ts"
+          ],
+          "path": "qwik/qwikcity-guides-bundle.md",
+          "tokens": 2189
+        },
+        {
+          "id": "qwikcity-guides-capacitor",
+          "title": "Qwik for iOS and Android",
+          "description": "title: Qwik Hybrid Native App Overview | Guides",
+          "tags": [
+            "capacitor.config.ts",
+            "index.tsx",
+            "YOUR_IP",
+            "1.0.1.zip",
+            "vite.config.ts"
+          ],
+          "path": "qwik/qwikcity-guides-capacitor.md",
+          "tokens": 4811
+        },
+        {
+          "id": "qwikcity-guides-debugging",
+          "title": "Debugging",
+          "description": "title: Debugging | Introduction",
+          "tags": [
+            "LAUNCH_EDITOR",
+            "export LAUNCH_EDITOR=code",
+            "console.log",
+            "Ctrl+Shift+F",
+            "Cmd+Shift+F",
+            "console\\.log",
+            "console.error",
+            "console.warn",
+            "entry.express.tsx",
+            "entry.dev.tsx"
+          ],
+          "path": "qwik/qwikcity-guides-debugging.md",
+          "tokens": 921
+        },
+        {
+          "id": "qwikcity-guides-env-variables",
+          "title": "Environment Variables",
+          "description": "title: Environment variables | Qwik City",
+          "tags": [
+            "PUBLIC_",
+            "client",
+            "server",
+            "build-time",
+            "BASE_URL",
+            "string",
+            "MODE",
+            "DEV",
+            "boolean",
+            "PROD"
+          ],
+          "path": "qwik/qwikcity-guides-env-variables.md",
+          "tokens": 1795
+        },
+        {
+          "id": "qwikcity-guides-mdx",
+          "title": "MDX",
+          "description": "title: Markdown and MDX | Guides",
+          "tags": [
+            ".mdx",
+            "https://example.com/some/path",
+            "about.mdx",
+            "http://example.com/about",
+            "about/index.mdx",
+            "og",
+            "opengraph",
+            "og:title",
+            "og:description",
+            "true"
+          ],
+          "path": "qwik/qwikcity-guides-mdx.md",
+          "tokens": 2814
+        },
+        {
+          "id": "qwikcity-guides-qwik-nutshell",
+          "title": "Qwik in a nutshell",
+          "description": "title: Qwik in a nutshell | Introduction",
+          "tags": [
+            "component$(...)",
+            "$",
+            "useSignal()",
+            "class",
+            "className",
+            "map",
+            "key",
+            "$(...handler...)",
+            "<Slot/>",
+            "@builder.io/qwik"
+          ],
+          "path": "qwik/qwikcity-guides-qwik-nutshell.md",
+          "tokens": 6849
+        },
+        {
+          "id": "qwikcity-guides-react-cheat-sheet",
+          "title": "React Vs Qwik",
+          "description": "title: Qwik for React developers",
+          "tags": [
+            "input"
+          ],
+          "path": "qwik/qwikcity-guides-react-cheat-sheet.md",
+          "tokens": 3325
+        },
+        {
+          "id": "qwikcity-guides-redirects",
+          "title": "Redirects",
+          "description": "title: Redirects | Guides",
+          "tags": [
+            "redirect()",
+            "301",
+            "302",
+            "307",
+            "308",
+            "Location"
+          ],
+          "path": "qwik/qwikcity-guides-redirects.md",
+          "tokens": 1263
+        },
+        {
+          "id": "qwikcity-guides-rewrites",
+          "title": "Rewrites",
+          "description": "title: Rewrites | Guides",
+          "tags": [
+            "/articles/qwik-is-very-quick",
+            "rewrite()"
+          ],
+          "path": "qwik/qwikcity-guides-rewrites.md",
+          "tokens": 314
+        },
+        {
+          "id": "qwikcity-guides-serialization",
+          "title": "`$` Boundaries",
+          "description": "title: Serialization and Serialization Boundaries | Guides",
+          "tags": [
+            "$",
+            "$(...)",
+            "____$(...)"
+          ],
+          "path": "qwik/qwikcity-guides-serialization.md",
+          "tokens": 560
+        },
+        {
+          "id": "qwikcity-guides-static-site-generation",
+          "title": "Static Site Generation (SSG) Overview",
+          "description": "title: Static Site Generation (SSG) Overview | Guides",
+          "tags": [
+            "index.html",
+            "Adapter: Static site (.html files)",
+            "build.server",
+            "package.json",
+            "adapters/static/vite.config.ts",
+            "dist",
+            "origin",
+            "https://qwik.dev",
+            "https://",
+            "qwik.dev"
+          ],
+          "path": "qwik/qwikcity-guides-static-site-generation.md",
+          "tokens": 2078
+        },
+        {
+          "id": "qwikcity-html-attributes",
+          "title": "HTML attributes",
+          "description": "title: HTML attributes | QwikCity",
+          "tags": [
+            "dir",
+            "lang",
+            "containerAttributes",
+            "src/entry.ssr.tsx",
+            "opts.serverData",
+            "request headers",
+            "url",
+            "route params"
+          ],
+          "path": "qwik/qwikcity-html-attributes.md",
+          "tokens": 420
+        },
+        {
+          "id": "qwikcity-layout",
+          "title": "Nested Layouts",
+          "description": "title: Layout & Middleware | Guides",
+          "tags": [
+            "onRequest",
+            "export default",
+            "https://example.com",
+            "https://example.com/about",
+            "<Header>",
+            "<Footer>",
+            "<Menu>",
+            "src/routes/layout.tsx",
+            "src/routes",
+            "Header"
+          ],
+          "path": "qwik/qwikcity-layout.md",
+          "tokens": 934
+        },
+        {
+          "id": "qwikcity-middleware",
+          "title": "Middleware",
+          "description": "title: Middleware | Guides",
+          "tags": [
+            "onRequest",
+            "onGet",
+            "onPost",
+            "onPut",
+            "onPatch",
+            "onDelete",
+            "layout.tsx",
+            "index.tsx",
+            "src/routes",
+            "src/routes/layout.tsx"
+          ],
+          "path": "qwik/qwikcity-middleware.md",
+          "tokens": 5078
+        },
+        {
+          "id": "qwikcity-pages",
+          "title": "Pages",
+          "description": "title: Pages | Qwik City",
+          "tags": [
+            "index.tsx",
+            "src/routes",
+            "default",
+            "onRequest",
+            "onGet",
+            "onPost",
+            "onPut",
+            "onDelete",
+            "onPatch",
+            "onHead"
+          ],
+          "path": "qwik/qwikcity-pages.md",
+          "tokens": 1599
+        },
+        {
+          "id": "qwikcity-project-structure",
+          "title": "Project Structure",
+          "description": "title: Project Structure | Qwik City",
+          "tags": [
+            "src/routes/",
+            "src/routes/index.tsx",
+            "src/routes/layout.tsx",
+            "src/components/",
+            "Button",
+            "src/components/button/button.tsx",
+            "public/",
+            "dist/",
+            "src/entry.ssr.tsx",
+            "start"
+          ],
+          "path": "qwik/qwikcity-project-structure.md",
+          "tokens": 1387
+        },
+        {
+          "id": "qwikcity-qwikcity-deprecated-features",
+          "title": "Deprecated Features for Qwik City",
+          "description": "title: Deprecated Features | Qwik City",
+          "tags": [
+            "useEndpoint",
+            "loader$",
+            "loaderQrl",
+            "action$",
+            "actionQrl"
+          ],
+          "path": "qwik/qwikcity-qwikcity-deprecated-features.md",
+          "tokens": 205
+        },
+        {
+          "id": "qwikcity-qwikcity",
+          "title": "Qwik City",
+          "description": "title: Overview | Qwik City",
+          "tags": [
+            "vite",
+            "index.tsx",
+            "layout.tsx"
+          ],
+          "path": "qwik/qwikcity-qwikcity.md",
+          "tokens": 1067
+        },
+        {
+          "id": "qwikcity-re-exporting-loaders",
+          "title": "Re-exporting loaders",
+          "description": "title: Cookbook | Re-exporting loaders",
+          "tags": [
+            "routeAction$",
+            "routeLoader$",
+            "./shared/loaders.ts",
+            "./src/routes/index.tsx"
+          ],
+          "path": "qwik/qwikcity-re-exporting-loaders.md",
+          "tokens": 1641
+        },
+        {
+          "id": "qwikcity-route-loader",
+          "title": "`routeLoader$()`",
+          "description": "title: RouteLoader$ | Qwik City",
+          "tags": [
+            "routeLoader$()",
+            "layout.tsx",
+            "index.tsx",
+            "re-export",
+            "routeLoader$",
+            "useProductData()",
+            "useLoginStatus",
+            "useCurrentUser",
+            "onRequest",
+            "onGet"
+          ],
+          "path": "qwik/qwikcity-route-loader.md",
+          "tokens": 2340
+        },
+        {
+          "id": "qwikcity-routing",
+          "title": "Routing",
+          "description": "title: Routing | Qwik City",
+          "tags": [
+            "src/routes",
+            "index.tsx/mdx",
+            "index.ts",
+            "layout.tsx",
+            "src/routes/some/path/index.tsx",
+            "https://example.com/some/path",
+            "[id]",
+            "id",
+            "useLocation().params.id",
+            "[...catchall]"
+          ],
+          "path": "qwik/qwikcity-routing.md",
+          "tokens": 5438
+        },
+        {
+          "id": "qwikcity-server",
+          "title": "`server$()`",
+          "description": "title: server$ | Qwik City",
+          "tags": [
+            "server$()",
+            "server$",
+            "AbortSignal",
+            "RequestEvent",
+            "this",
+            "this.env.get()",
+            "this.cookie.get()",
+            "this.cookie.set()",
+            "handleCookies",
+            "useTask$"
+          ],
+          "path": "qwik/qwikcity-server.md",
+          "tokens": 2226
+        },
+        {
+          "id": "qwikcity-validator",
+          "title": "Data Validators",
+          "description": "title: Validators | QwikCity",
+          "tags": [
+            "zod$()",
+            "validator$()",
+            "routeAction()",
+            "routeAction.value",
+            "validator3",
+            "validator2",
+            "validator1",
+            "data",
+            "success",
+            "fail()"
+          ],
+          "path": "qwik/qwikcity-validator.md",
+          "tokens": 1166
+        },
+        {
+          "id": "cookbook-algolia-search",
+          "title": "Algolia Search",
+          "description": "title: Cookbook | Algolia Search",
+          "tags": [
+            ".env",
+            ".env.local"
+          ],
+          "path": "qwik/cookbook-algolia-search.md",
+          "tokens": 1588
+        },
+        {
+          "id": "cookbook-combine-request-handlers",
+          "title": "Combine Request Handlers",
+          "description": "title: Cookbook | Combine Request Handlers",
+          "tags": [],
+          "path": "qwik/cookbook-combine-request-handlers.md",
+          "tokens": 493
+        },
+        {
+          "id": "cookbook-debouncer",
+          "title": "What is a debouncer and why it's important",
+          "description": "title: Cookbook | Debouncer",
+          "tags": [
+            "useSignal",
+            "$",
+            "timeoutID",
+            "useDebouncer",
+            "debouncedValue",
+            "useDebouncer$",
+            "implicit$FirstArg",
+            "$()"
+          ],
+          "path": "qwik/cookbook-debouncer.md",
+          "tokens": 1206
+        },
+        {
+          "id": "cookbook-detect-img-tag-onload",
+          "title": "Detect img tag onLoad even if it's cached",
+          "description": "title: Cookbook | Detect img tag onLoad",
+          "tags": [],
+          "path": "qwik/cookbook-detect-img-tag-onload.md",
+          "tokens": 329
+        },
+        {
+          "id": "cookbook-drag-drop",
+          "title": "Drag & Drop",
+          "description": "title: Cookbook | Drag & Drop",
+          "tags": [
+            "onDragStart$",
+            "onDragOver$",
+            "onDragLeave$",
+            "onDrop$",
+            "event.preventDefault()",
+            "e.dataTransfer.getData()",
+            "e.dataTransfer.setData()",
+            "preventdefault:dragover",
+            "preventdefault:drop"
+          ],
+          "path": "qwik/cookbook-drag-drop.md",
+          "tokens": 3428
+        },
+        {
+          "id": "cookbook-fonts",
+          "title": "Fonts",
+          "description": "title: Cookbook | Font optimization",
+          "tags": [
+            "font-display",
+            "swap",
+            "fallback",
+            "ttf",
+            "otf",
+            "woff",
+            "woff2",
+            "@font-face",
+            "network",
+            "unicode-range"
+          ],
+          "path": "qwik/cookbook-fonts.md",
+          "tokens": 1779
+        },
+        {
+          "id": "cookbook-glob-import",
+          "title": "Glob Import & Dynamic Import",
+          "description": "title: Cookbook | Glob Import with import.meta.glob",
+          "tags": [
+            "import.meta.glob",
+            "import",
+            "query"
+          ],
+          "path": "qwik/cookbook-glob-import.md",
+          "tokens": 677
+        },
+        {
+          "id": "cookbook",
+          "title": "Cookbook",
+          "description": "title: Cookbook | Overview",
+          "tags": [],
+          "path": "qwik/cookbook.md",
+          "tokens": 240
+        },
+        {
+          "id": "cookbook-mediacontroller",
+          "title": "Media Controller",
+          "description": "title: Cookbook | Media Controller with iOS Support",
+          "tags": [
+            "onClick$",
+            "playsinline",
+            "<video>",
+            ".play()",
+            "click",
+            "useVisibleTask$"
+          ],
+          "path": "qwik/cookbook-mediacontroller.md",
+          "tokens": 1955
+        },
+        {
+          "id": "cookbook-nav-link",
+          "title": "NavLink Component",
+          "description": "title: Cookbook | Navbar link",
+          "tags": [
+            "active",
+            "<Link>",
+            "useLocation",
+            "activeClass",
+            "important=true",
+            "!",
+            "activeClass=\"!text-green-600\""
+          ],
+          "path": "qwik/cookbook-nav-link.md",
+          "tokens": 714
+        },
+        {
+          "id": "cookbook-node-docker-deploy",
+          "title": "Deploy with Node using Docker",
+          "description": "title: Cookbook | Deploy with Node using Docker",
+          "tags": [
+            "yarn.lock",
+            "package.json",
+            "yarn serve",
+            "src/entry.express.tsx"
+          ],
+          "path": "qwik/cookbook-node-docker-deploy.md",
+          "tokens": 904
+        },
+        {
+          "id": "cookbook-portals",
+          "title": "Portals",
+          "description": "title: Cookbook | Portals",
+          "tags": [
+            "createPortal()",
+            "floating={true}"
+          ],
+          "path": "qwik/cookbook-portals.md",
+          "tokens": 816
+        },
+        {
+          "id": "cookbook-streaming-deferred-loaders",
+          "title": "Streaming/deferred loaders",
+          "description": "title: Cookbook | Streaming/deferred loaders",
+          "tags": [
+            "routeLoader$"
+          ],
+          "path": "qwik/cookbook-streaming-deferred-loaders.md",
+          "tokens": 355
+        },
+        {
+          "id": "cookbook-sync-events",
+          "title": "`sync$()` Synchronous Events (BETA)",
+          "description": "title: Cookbook | Synchronous Events with State",
+          "tags": [
+            "sync$()",
+            "event.preventDefault()",
+            "event.stopPropagation()",
+            "$()",
+            "preventDefault:{eventName}",
+            "data-should-prevent-default"
+          ],
+          "path": "qwik/cookbook-sync-events.md",
+          "tokens": 797
+        },
+        {
+          "id": "cookbook-theme-management",
+          "title": "Theme management",
+          "description": "title: Cookbook | Dark and Light Theme",
+          "tags": [
+            "global.css",
+            "<head>",
+            "root.tsx",
+            "plugin@csp.ts",
+            "useVisibleTask$",
+            "useTask$",
+            "dangerouslySetInnerHTML",
+            "_headers",
+            "public/",
+            "'unsafe-inline'"
+          ],
+          "path": "qwik/cookbook-theme-management.md",
+          "tokens": 1791
+        },
+        {
+          "id": "cookbook-view-transition",
+          "title": "View Transition API",
+          "description": "title: Cookbook | View Transition API",
+          "tags": [
+            "view-transition-name: root",
+            ":root",
+            "view-transition-name: none",
+            "<html>",
+            "transition",
+            "root",
+            "! important",
+            "qviewTransition",
+            "ViewTransition",
+            "transition.ready"
+          ],
+          "path": "qwik/cookbook-view-transition.md",
+          "tokens": 1170
+        },
+        {
+          "id": "deployments-aws-lambda",
+          "title": "AWS Adapter",
+          "description": "title: AWS Lambda | Deployments",
+          "tags": [
+            "aws-lambda",
+            "add",
+            "vite.config.ts",
+            "adapters/",
+            "package.json",
+            "build.server",
+            "serverless:preview",
+            "build",
+            "build.client"
+          ],
+          "path": "qwik/deployments-aws-lambda.md",
+          "tokens": 467
+        },
+        {
+          "id": "deployments-azion",
+          "title": "Azion Web Platform",
+          "description": "title: Azion Web Platform | Deployments",
+          "tags": [
+            "static-site",
+            "add",
+            "adapters/static/vite.config.ts",
+            "origin",
+            "Qwik",
+            "https://xxxxxxx.map.azionedge.net"
+          ],
+          "path": "qwik/deployments-azion.md",
+          "tokens": 911
+        },
+        {
+          "id": "deployments-azure-swa",
+          "title": "Azure Static Web Apps Middleware",
+          "description": "title: Azure Static Web Apps | Deployments",
+          "tags": [
+            "azure-swa",
+            "add",
+            "vite.config.ts",
+            "adapters/",
+            "package.json",
+            "build.server",
+            "deploy",
+            "build",
+            "build.client",
+            "SWA_CLI_DEPLOYMENT_TOKEN"
+          ],
+          "path": "qwik/deployments-azure-swa.md",
+          "tokens": 964
+        },
+        {
+          "id": "deployments-bun",
+          "title": "Bun Middleware",
+          "description": "title: Bun Middleware | Deployments",
+          "tags": [
+            "bun",
+            "add",
+            "build",
+            "bun run build.server",
+            "bun run build.client",
+            "bun run build",
+            "dist",
+            "server"
+          ],
+          "path": "qwik/deployments-bun.md",
+          "tokens": 322
+        },
+        {
+          "id": "deployments-cloudflare-pages",
+          "title": "Cloudflare Pages Adapter",
+          "description": "title: Cloudflare Pages Adapter and Middleware | Deployments",
+          "tags": [
+            "cloudflare-pages",
+            "add",
+            "vite.config.ts",
+            "adapters/",
+            "package.json",
+            "build.server",
+            "deploy",
+            "node -v",
+            "build",
+            "build.client"
+          ],
+          "path": "qwik/deployments-cloudflare-pages.md",
+          "tokens": 2167
+        },
+        {
+          "id": "deployments-cloudflare-workers",
+          "title": "Cloudflare Workers Adapter",
+          "description": "title: Cloudflare Workers Adapter and Middleware | Deployments",
+          "tags": [
+            "cloudflare-workers",
+            "add",
+            "vite.config.ts",
+            "adapters/",
+            "wrangler.jsonc",
+            "package.json",
+            "\"cf-typegen\": \"wrangler types\"",
+            "\"serve\": \"wrangler dev\"",
+            "\"deploy\": \"wrangler deploy\"",
+            "tsconfig.json"
+          ],
+          "path": "qwik/deployments-cloudflare-workers.md",
+          "tokens": 2551
+        },
+        {
+          "id": "deployments-deno",
+          "title": "Deno Middleware",
+          "description": "title: Deno Middleware | Deployments",
+          "tags": [
+            "deno",
+            "add",
+            "build",
+            "build.server",
+            "build.client",
+            "dist",
+            "server",
+            "SSG",
+            "vite.config.ts",
+            "adapters/deno"
+          ],
+          "path": "qwik/deployments-deno.md",
+          "tokens": 579
+        },
+        {
+          "id": "deployments-firebase",
+          "title": "Firebase Adapter",
+          "description": "title: Firebase | Deployments",
+          "tags": [
+            "firebase",
+            "add",
+            "vite.config.ts",
+            "adapters/",
+            "package.json",
+            "build.server",
+            "serve",
+            "build",
+            "build.client"
+          ],
+          "path": "qwik/deployments-firebase.md",
+          "tokens": 522
+        },
+        {
+          "id": "deployments-gcp-cloud-run",
+          "title": "Google Cloud Run Middleware",
+          "description": "title: Cloud Run Middleware | Deployments",
+          "tags": [
+            "Cloud Run",
+            "add",
+            "gcloud"
+          ],
+          "path": "qwik/deployments-gcp-cloud-run.md",
+          "tokens": 472
+        },
+        {
+          "id": "deployments-github-pages",
+          "title": "GitHub Pages With Static Site Adapter",
+          "description": "title: GitHub Pages",
+          "tags": [
+            "static-site",
+            "add",
+            "adapters/static/vite.config.ts",
+            "origin",
+            "vite.config.ts"
+          ],
+          "path": "qwik/deployments-github-pages.md",
+          "tokens": 977
+        },
+        {
+          "id": "deployments",
+          "title": "Deployments",
+          "description": "title: Deployments | Guides",
+          "tags": [
+            "build.server",
+            "package.json",
+            "build",
+            "build.client",
+            "requestHandler()",
+            "dist/build",
+            "dist/assets",
+            "npx qwik add",
+            "304 Not Modified",
+            "compiled-i18n"
+          ],
+          "path": "qwik/deployments.md",
+          "tokens": 2075
+        },
+        {
+          "id": "deployments-netlify-edge",
+          "title": "Netlify Edge Adapter",
+          "description": "title: Netlify Edge Adapter and Middleware | Deployments",
+          "tags": [
+            "netlify-edge",
+            "add",
+            "vite.config.ts",
+            "adapters/",
+            "package.json",
+            "build.server",
+            "deploy",
+            "build",
+            "build.client",
+            "src/entry.netlify-edge.tsx"
+          ],
+          "path": "qwik/deployments-netlify-edge.md",
+          "tokens": 1285
+        },
+        {
+          "id": "deployments-node",
+          "title": "Node Middleware",
+          "description": "title: Node Middleware | Deployments",
+          "tags": [
+            "node",
+            "add",
+            "build",
+            "build.server",
+            "build.client",
+            "dist",
+            "server",
+            "server/entry.[server].js",
+            "[server]",
+            "ORIGIN"
+          ],
+          "path": "qwik/deployments-node.md",
+          "tokens": 978
+        },
+        {
+          "id": "deployments-self-hosting",
+          "title": "Self-Hosting Qwik Applications",
+          "description": "title: Self-Hosting",
+          "tags": [
+            "adapters/static/vite.config.ts",
+            "dist/",
+            "dist/build/",
+            "dist/assets/",
+            "public/",
+            ".html",
+            "q-data.json",
+            "manifest.json",
+            "q-manifest.json",
+            "server/"
+          ],
+          "path": "qwik/deployments-self-hosting.md",
+          "tokens": 5133
+        },
+        {
+          "id": "deployments-static",
+          "title": "Static Site Adapter",
+          "description": "title: Static Site",
+          "tags": [
+            "static-site",
+            "add",
+            "adapters/static/vite.config.ts",
+            "origin",
+            "Qwik"
+          ],
+          "path": "qwik/deployments-static.md",
+          "tokens": 384
+        },
+        {
+          "id": "deployments-vercel-edge",
+          "title": "Vercel Edge Adapter",
+          "description": "title: Vercel Edge Adapter and Middleware | Deployments",
+          "tags": [
+            "vercel-edge",
+            "add",
+            "vite.config.ts",
+            "adapters/",
+            "package.json",
+            "build.server",
+            "deploy",
+            "build",
+            "build.client",
+            "process.env['MY_ENV_VAR']"
+          ],
+          "path": "qwik/deployments-vercel-edge.md",
+          "tokens": 1153
+        },
+        {
+          "id": "integrations-astro",
+          "title": "Astro",
+          "description": "title: Astro | Integrations",
+          "tags": [
+            "@qwikdev/astro",
+            "astro add",
+            "astro.config.*",
+            "tsconfig.json",
+            "Cannot find package '@builder.io/qwik'",
+            "integrations"
+          ],
+          "path": "qwik/integrations-astro.md",
+          "tokens": 1184
+        },
+        {
+          "id": "integrations-authjs",
+          "title": "Auth.js",
+          "description": "title: Auth.js | Integrations",
+          "tags": [
+            "@auth/qwik",
+            "plugin@auth.ts",
+            "@builder.io/qwik-auth",
+            "/api",
+            "useAuthSession",
+            "useAuthSignin",
+            "useAuthSignout",
+            "vite.config.ts",
+            "\"@auth/qwik\"",
+            "useSignIn"
+          ],
+          "path": "qwik/integrations-authjs.md",
+          "tokens": 3803
+        },
+        {
+          "id": "integrations-bootstrap",
+          "title": "Bootstrap",
+          "description": "title: Bootstrap | Integrations",
+          "tags": [
+            "bootstrap@5",
+            "@types/bootstrap@5",
+            "src/models/bootstrap.ts",
+            "src/constants/data.ts",
+            "src/components/bootstrap/button.tsx",
+            "src/components/bootstrap/alert.tsx",
+            "src/components/bootstrap/spinner.tsx",
+            "src/components/bootstrap/index.ts",
+            "src/components/bootstrap/navbar.tsx",
+            "src/routes/bootstrap/layout.tsx"
+          ],
+          "path": "qwik/integrations-bootstrap.md",
+          "tokens": 791
+        },
+        {
+          "id": "integrations-builderio",
+          "title": "Builder.io",
+          "description": "title: Builder.io | Integrations",
+          "tags": [
+            "add",
+            "@builder.io/sdk-qwik",
+            "src/components",
+            "src/routes",
+            ".env",
+            "http://localhost:5173/",
+            "page",
+            "save",
+            "+ New",
+            "Page"
+          ],
+          "path": "qwik/integrations-builderio.md",
+          "tokens": 902
+        },
+        {
+          "id": "integrations-cypress",
+          "title": "Cypress",
+          "description": "title: Cypress | Integrations",
+          "tags": [
+            "cypress",
+            "cypress-ct-qwik",
+            "package.json"
+          ],
+          "path": "qwik/integrations-cypress.md",
+          "tokens": 370
+        },
+        {
+          "id": "integrations-drizzle",
+          "title": "Drizzle",
+          "description": "title: Drizzle | Integrations",
+          "tags": [
+            "routeLoader$",
+            "routeAction$",
+            "server$",
+            "db",
+            "db.query.users.findMany()",
+            "userId",
+            "Form",
+            "db.insert(schema.users).values(data)"
+          ],
+          "path": "qwik/integrations-drizzle.md",
+          "tokens": 1325
+        },
+        {
+          "id": "integrations-i18n",
+          "title": "Internationalization",
+          "description": "title: Internationalization | Integrations",
+          "tags": [
+            "npx qwik add compiled-i18n"
+          ],
+          "path": "qwik/integrations-i18n.md",
+          "tokens": 2150
+        },
+        {
+          "id": "integrations-icons",
+          "title": "Icons",
+          "description": "title: Icons | Integrations",
+          "tags": [
+            "qwikest/icons",
+            "Bs",
+            "Go",
+            "Hi",
+            "In",
+            "Io",
+            "Lu",
+            "Mo",
+            "Si",
+            "Tb"
+          ],
+          "path": "qwik/integrations-icons.md",
+          "tokens": 707
+        },
+        {
+          "id": "integrations-image-optimization",
+          "title": "Image Optimization",
+          "description": "title: Image Optimization | Integrations",
+          "tags": [
+            "vite-imagetools",
+            "src",
+            "<img>",
+            "srcset",
+            ".webp",
+            ".avif",
+            "srcSet",
+            "?jsx",
+            "jsx",
+            "decoding=\"async\""
+          ],
+          "path": "qwik/integrations-image-optimization.md",
+          "tokens": 2530
+        },
+        {
+          "id": "integrations",
+          "title": "Integrations",
+          "description": "title: Qwik City Integrations | Guides",
+          "tags": [
+            "--projectDir=some/subDir"
+          ],
+          "path": "qwik/integrations.md",
+          "tokens": 443
+        },
+        {
+          "id": "integrations-leaflet-map",
+          "title": "LeafletJS Map",
+          "description": "title: LeafletJS Map | Integrations",
+          "tags": [
+            "leaflet@1.9.4",
+            "@types/leaflet@1.9.4",
+            "src/helpers/boundary-box.tsx",
+            "src/models/location.ts",
+            "src/models/map.ts",
+            "src/components/leaflet-map/index.tsx",
+            "src/routes/basic-map/index.tsx",
+            "Tutorials",
+            "Docs"
+          ],
+          "path": "qwik/integrations-leaflet-map.md",
+          "tokens": 2123
+        },
+        {
+          "id": "integrations-modular-forms",
+          "title": "Modular Forms",
+          "description": "title: Modular Forms | Integrations",
+          "tags": [
+            "@modular-forms/qwik",
+            "routeLoader$",
+            "useForm",
+            "Form",
+            "Field",
+            "FieldArray",
+            "loginForm",
+            "reset",
+            "setValue",
+            "<input />"
+          ],
+          "path": "qwik/integrations-modular-forms.md",
+          "tokens": 2567
+        },
+        {
+          "id": "integrations-nx",
+          "title": "Nx and enterprise scale monorepos",
+          "description": "title: Nx Monorepos | Integrations",
+          "tags": [],
+          "path": "qwik/integrations-nx.md",
+          "tokens": 520
+        },
+        {
+          "id": "integrations-og-img",
+          "title": "OG Image (og-img)",
+          "description": "title: OG Image (og-img) | Integrations",
+          "tags": [
+            "og-img",
+            "ImageResponse",
+            "onGet",
+            "html",
+            "head"
+          ],
+          "path": "qwik/integrations-og-img.md",
+          "tokens": 880
+        },
+        {
+          "id": "integrations-orama",
+          "title": "Orama",
+          "description": "title: Qwik City and Orama",
+          "tags": [
+            "routeLoader$",
+            "routeAction$",
+            "server$",
+            "/src/routes/orama"
+          ],
+          "path": "qwik/integrations-orama.md",
+          "tokens": 317
+        },
+        {
+          "id": "integrations-panda-css",
+          "title": "Panda CSS",
+          "description": "title: Panda CSS | Integrations",
+          "tags": [
+            "postcss.config.js",
+            "panda.config.js",
+            ".vscode/settings.json",
+            "src/global.css"
+          ],
+          "path": "qwik/integrations-panda-css.md",
+          "tokens": 307
+        },
+        {
+          "id": "integrations-partytown",
+          "title": "Partytown",
+          "description": "title: Partytown | Integrations",
+          "tags": [
+            "vite.config.ts",
+            "components"
+          ],
+          "path": "qwik/integrations-partytown.md",
+          "tokens": 583
+        },
+        {
+          "id": "integrations-playwright",
+          "title": "Playwright",
+          "description": "title: Playwright | Integrations",
+          "tags": [
+            "test.e2e",
+            "package.json",
+            "playwright.config.ts",
+            "tests",
+            "example.spec.ts"
+          ],
+          "path": "qwik/integrations-playwright.md",
+          "tokens": 348
+        },
+        {
+          "id": "integrations-postcss",
+          "title": "PostCSS",
+          "description": "title: PostCSS | Integrations",
+          "tags": [
+            "postcss.config.js"
+          ],
+          "path": "qwik/integrations-postcss.md",
+          "tokens": 543
+        },
+        {
+          "id": "integrations-prisma",
+          "title": "Prisma",
+          "description": "title: Prisma | Integrations",
+          "tags": [
+            ".prisma",
+            "routeLoader$",
+            "routeAction$",
+            "server$",
+            "prisma",
+            "prisma.user.findMany()",
+            "userId",
+            "prisma.user.findUnique()",
+            "Form",
+            "prisma.user.create()"
+          ],
+          "path": "qwik/integrations-prisma.md",
+          "tokens": 1181
+        },
+        {
+          "id": "integrations-react",
+          "title": "Qwik React ⚛️",
+          "description": "title: React | Integrations",
+          "tags": [
+            "qwikify$",
+            "package.json",
+            "@builder.io/qwik-react",
+            "qwik add react",
+            "dependencies",
+            "@emotion/react 11.10.6",
+            "@emotion/styled 11.10.6",
+            "@mui/material 5.11.9",
+            "@mui/x-data-grid 5.17.24",
+            "src/route"
+          ],
+          "path": "qwik/integrations-react.md",
+          "tokens": 7802
+        },
+        {
+          "id": "integrations-storybook",
+          "title": "Storybook",
+          "description": "title: Storybook | Integrations",
+          "tags": [
+            "<QwikCityMockProvider>"
+          ],
+          "path": "qwik/integrations-storybook.md",
+          "tokens": 808
+        },
+        {
+          "id": "integrations-styled-vanilla-extract",
+          "title": "Styled Vanilla Extract",
+          "description": "title: Styled Vanilla Extract | Integrations",
+          "tags": [
+            "styled-vanilla-extract",
+            "styled"
+          ],
+          "path": "qwik/integrations-styled-vanilla-extract.md",
+          "tokens": 799
+        },
+        {
+          "id": "integrations-supabase",
+          "title": "Supabase",
+          "description": "title: Supabase | Integrations",
+          "tags": [
+            "Supabase",
+            "routeLoader$",
+            "routeAction$",
+            "server$",
+            "PUBLIC_SUPABASE_URL",
+            "PUBLIC_SUPABASE_ANON_KEY",
+            ".env",
+            ".env.local",
+            "routeLoader",
+            "routeAction"
+          ],
+          "path": "qwik/integrations-supabase.md",
+          "tokens": 574
+        },
+        {
+          "id": "integrations-tailwind-v3",
+          "title": "Tailwind",
+          "description": "title: Tailwind | Integrations",
+          "tags": [
+            ".js/.jsx/.ts/.tsx/.mdx",
+            "postcss.config.js",
+            "tailwind.config.js",
+            ".vscode/settings.json",
+            "src/global.css"
+          ],
+          "path": "qwik/integrations-tailwind-v3.md",
+          "tokens": 368
+        },
+        {
+          "id": "integrations-tailwind",
+          "title": "Tailwind",
+          "description": "title: Tailwind | Integrations",
+          "tags": [
+            ".js/.jsx/.ts/.tsx/.mdx"
+          ],
+          "path": "qwik/integrations-tailwind.md",
+          "tokens": 540
+        },
+        {
+          "id": "integrations-tauri",
+          "title": "Tauri",
+          "description": "title: Tauri | Integrations",
+          "tags": [
+            "package.json",
+            "<current dir>/src-tauri/tauri.conf.json",
+            "../dist",
+            "http://localhost:5173",
+            "dev",
+            "build"
+          ],
+          "path": "qwik/integrations-tauri.md",
+          "tokens": 805
+        },
+        {
+          "id": "integrations-turso",
+          "title": "Turso",
+          "description": "title: Turso | Integrations",
+          "tags": [
+            "src/lib/turso.ts",
+            ".env.local",
+            ".quit",
+            "PRIVATE_TURSO_DATABASE_URL",
+            "createClient",
+            "@libsql/client",
+            "@libsql/client/web",
+            "db shell",
+            "PRIVATE_TURSO_AUTH_TOKEN",
+            "tursoClient"
+          ],
+          "path": "qwik/integrations-turso.md",
+          "tokens": 1129
+        },
+        {
+          "id": "integrations-vitest",
+          "title": "Vitest",
+          "description": "title: Vitest | Integrations",
+          "tags": [
+            "src/components/example",
+            "example.spec.tsx"
+          ],
+          "path": "qwik/integrations-vitest.md",
+          "tokens": 633
+        },
+        {
+          "id": "labs-devtools",
+          "title": "🧪 Devtools",
+          "description": "title: \"\\U0001F9EA Devtools\"",
+          "tags": [
+            "prototyping",
+            "qwik/json",
+            "<script type=\"qwik/json\">",
+            "Console",
+            "objs",
+            "ctx",
+            "QContext",
+            "refs",
+            "QRef",
+            "sub"
+          ],
+          "path": "qwik/labs-devtools.md",
+          "tokens": 665
+        },
+        {
+          "id": "labs",
+          "title": "🧪 Qwik Labs Overview",
+          "description": "title: \"\\U0001F9EA Qwik Labs | Overview\"",
+          "tags": [
+            "proposal",
+            "prototyping",
+            "implementation",
+            "alpha",
+            "beta",
+            "experimental",
+            "qwikVite",
+            "experimental[]",
+            "package.json"
+          ],
+          "path": "qwik/labs.md",
+          "tokens": 805
+        },
+        {
+          "id": "labs-insights",
+          "title": "🧪 Insights",
+          "description": "title: \"\\U0001F9EA Insights | Qwik Labs\"",
+          "tags": [
+            "prototyping",
+            "<Insights>",
+            "qwikInsights",
+            "root.tsx",
+            "PUBLIC_QWIK_INSIGHTS_KEY",
+            "pathname",
+            "vite.config.js"
+          ],
+          "path": "qwik/labs-insights.md",
+          "tokens": 959
+        },
+        {
+          "id": "labs-typed-routes",
+          "title": "🧪 Typed Routes",
+          "description": "title: \"\\U0001F9EA Typed Routes\"",
+          "tags": [
+            "prototyping",
+            "vite.config.ts",
+            "~/routes.gen.d.ts",
+            "~/routes.config.tsx",
+            "makeRoute.ts",
+            "index.ts",
+            "hooks.ts",
+            "useParams",
+            "useSearchParams",
+            "zod"
+          ],
+          "path": "qwik/labs-typed-routes.md",
+          "tokens": 1228
+        },
+        {
+          "id": "labs-usepreventnavigate",
+          "title": "Preventing navigation",
+          "description": "title: \"\\U0001F9EA usePreventNavigate | Qwik Labs\"",
+          "tags": [
+            "experimental: ['preventNavigate']",
+            "qwikVite",
+            "usePreventNavigate(callback)",
+            "true",
+            "<a/>",
+            "<Link />",
+            "undefined"
+          ],
+          "path": "qwik/labs-usepreventnavigate.md",
+          "tokens": 827
         }
       ]
     },

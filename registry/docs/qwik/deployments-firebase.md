@@ -1,0 +1,119 @@
+---
+title: Firebase | Deployments
+contributors:
+  - leifermendez
+  - mhevery
+updated_at: '2023-08-23T19:46:10Z'
+created_at: '2023-08-23T19:46:10Z'
+---
+
+import PackageManagerTabs from '~/components/package-manager-tabs/index.tsx';
+
+# Firebase Adapter
+
+Qwik City Firebase Adapter allows you to connect Qwik City to [Firebase](https://firebase.google.com/docs/hosting).
+
+## Installation
+
+To integrate the `firebase` adapter, use the `add` command:
+
+
+<PackageManagerTabs>
+<span q:slot="pnpm">
+```shell
+pnpm run qwik add firebase
+```
+</span>
+<span q:slot="npm">
+```shell
+npm run qwik add firebase
+```
+</span>
+<span q:slot="yarn">
+```shell
+yarn run qwik add firebase
+```
+</span>
+<span q:slot="bun">
+```shell
+bun run qwik add firebase
+```
+</span>
+</PackageManagerTabs>
+
+The adapter will add a new `vite.config.ts` within the `adapters/` directory, and a new entry file will be created, such as:
+
+```shell
+└── adapters/
+    └── firebase
+        └── vite.config.ts
+└── src/
+    └── entry-firebase.tsx
+```
+
+Additionally, within the `package.json`, the `build.server` and `serve` scripts will be updated.
+
+## Production build
+
+To build the application for production, use the `build` command, this command will automatically run `build.server` and `build.client`:
+
+<PackageManagerTabs>
+<span q:slot="pnpm">
+```shell
+pnpm run build
+```
+</span>
+<span q:slot="npm">
+```shell
+npm run build
+```
+</span>
+<span q:slot="yarn">
+```shell
+yarn run build
+```
+</span>
+<span q:slot="bun">
+```shell
+bun run build
+```
+</span>
+</PackageManagerTabs>
+
+## Deploy to Firebase
+
+Before deploy you need to setup your Firebase Credentials and add a Firebase project to the repository using these commands.
+
+<PackageManagerTabs>
+<span q:slot="pnpm">
+```shell
+firebase login
+firebase use --add
+pnpm run deploy
+```
+</span>
+<span q:slot="npm">
+```shell
+firebase login
+firebase use --add
+npm run deploy
+```
+</span>
+<span q:slot="yarn">
+```shell
+firebase login
+firebase use --add
+yarn run deploy
+```
+</span>
+<span q:slot="bun">
+```shell
+firebase login
+firebase use --add
+bun run deploy
+```
+</span>
+</PackageManagerTabs>
+
+Done!
+

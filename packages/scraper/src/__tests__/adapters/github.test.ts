@@ -676,6 +676,79 @@ describe("githubAdapter", () => {
     expect(rateLimiter.acquire).toHaveBeenCalledTimes(3);
   });
 
+  it("uses parent directory path as slug for index files", async () => {
+    const routeTree = {
+      tree: [
+        { path: "docs/guides/deploy/index.mdx", type: "blob" },
+        { path: "docs/guides/routing/index.mdx", type: "blob" },
+        { path: "docs/api/index.mdx", type: "blob" },
+        { path: "docs/getting-started.md", type: "blob" },
+      ],
+    };
+
+    vi.spyOn(globalThis, "fetch")
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => routeTree,
+        headers: new Headers(),
+      } as Response)
+      .mockResolvedValue({
+        ok: true,
+        text: async () => longContent,
+        headers: new Headers(),
+      } as Response);
+
+    const result = await githubAdapter.process(baseSource);
+    expect(result.length).toBe(4);
+    const ids = result.map((t) => t.id);
+    expect(ids).toContain("guides-deploy");
+    expect(ids).toContain("guides-routing");
+    expect(ids).toContain("api");
+    expect(ids).toContain("getting-started");
+  });
+
+  it("falls back to 'index' slug when index file is at docsPath root", async () => {
+    vi.spyOn(globalThis, "fetch")
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({
+          tree: [{ path: "docs/index.mdx", type: "blob" }],
+        }),
+        headers: new Headers(),
+      } as Response)
+      .mockResolvedValueOnce({
+        ok: true,
+        text: async () => longContent,
+        headers: new Headers(),
+      } as Response);
+
+    const result = await githubAdapter.process(baseSource);
+    expect(result[0]!.id).toBe("index");
+  });
+
+  it("uses parent directory as fallback title for index files without H1", async () => {
+    const noH1Content =
+      "This is content without any heading but long enough to pass the token threshold. ".repeat(8);
+
+    vi.spyOn(globalThis, "fetch")
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({
+          tree: [{ path: "docs/guides/deploy/index.mdx", type: "blob" }],
+        }),
+        headers: new Headers(),
+      } as Response)
+      .mockResolvedValueOnce({
+        ok: true,
+        text: async () => noH1Content,
+        headers: new Headers(),
+      } as Response);
+
+    const result = await githubAdapter.process(baseSource);
+    expect(result[0]!.title).toBe("guides-deploy");
+    expect(result[0]!.id).toBe("guides-deploy");
+  });
+
   it("files at docsPath root get no prefix even with directory mode", async () => {
     const source: SourceConfig = {
       ...baseSource,

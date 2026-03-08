@@ -1,0 +1,95 @@
+---
+title: Tailwind | Integrations
+keywords: 'styles, styling'
+contributors:
+  - manucorporat
+  - leifermendez
+  - reemardelarosa
+  - mhevery
+  - nickclark
+  - igorbabko
+  - Benny-Nottonson
+  - mrhoodz
+  - NickClark
+  - adamdbradley
+  - sreeisalso
+  - maiieul
+updated_at: '2025-03-08T18:53:23Z'
+created_at: '2023-04-06T21:28:28Z'
+---
+
+import PackageManagerTabs from '~/components/package-manager-tabs/index.tsx';
+
+# Tailwind
+
+Tailwind is a CSS framework that provides us with single-purpose utility classes which are
+opinionated for the most part, and which help us design our web pages from right inside our
+markup or `.js/.jsx/.ts/.tsx/.mdx` files. [Tailwindcss Website](https://tailwindcss.com/)
+
+> This page contains updated instructions for tailwind v4. If you need to use tailwind v3, you can find the relevant documentation [here](/docs/integrations/tailwind-v3).
+
+## Usage
+
+You can add Tailwind v4 easily by using the following Qwik starter script:
+
+<PackageManagerTabs>
+<span q:slot="pnpm">
+```shell
+pnpm run qwik add tailwind
+```
+</span>
+<span q:slot="npm">
+```shell
+npm run qwik add tailwind
+```
+</span>
+<span q:slot="yarn">
+```shell
+yarn run qwik add tailwind
+```
+</span>
+<span q:slot="bun">
+```shell
+bun run qwik add tailwind
+```
+</span>
+</PackageManagerTabs>
+
+The previous command updates your app with the necessary dependencies,
+and modifies the following files
+
+```css title="src/global.css"
+
+@import "tailwindcss";
+
+/* ... other css stuff ... */
+
+/* ... to customize tailwind follow guidelines at https://tailwindcss.com/docs/theme ... */
+
+/* Explicitly registering sources */
+/* @source "../node_modules/@your/ui-lib"; */
+
+/* Setting your base path */
+/* @import "tailwindcss" source("../src"); */
+
+/* Disabling automatic detection of source file */
+/* @import "tailwindcss" source(none); */
+
+```
+
+```ts title="vite.config.ts"
+import { defineConfig , type UserConfig} from 'vite'
+import tailwindcss from '@tailwindcss/vite'
+// … other imports ...
+
+export default defineConfig(({ command, mode }): UserConfig => {
+  return {
+    plugins: [
+      tailwindcss(),
+      // ... other plugins ...
+      ]
+    // ... other stuff ...
+    }
+  }
+)
+```

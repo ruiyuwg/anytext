@@ -1,0 +1,58 @@
+---
+title: Optimizer Rules | Advanced
+contributors:
+  - the-r3aper7
+  - manucorporat
+  - adamdbradley
+  - mhevery
+  - mrhoodz
+  - thejackshelton
+  - wtlin1228
+updated_at: '2023-06-25T19:43:33Z'
+created_at: '2023-03-20T23:45:13Z'
+---
+
+# Optimizer
+
+Qwik's philosophy is to delay loading code for as long as possible. To do that, Qwik relies on an Optimizer to re-arrange the code for lazy loading. The Optimizer is a code level transformation that runs as part of the rollup.
+
+> The Optimizer is written in Rust (and available as WASM) for instant performance.
+
+The Optimizer looks for `$` and applies a transformation that extracts the expression following the `$` and turns it into a lazy-loadable and importable symbol.
+
+Let's start by looking at a simple `Counter` example:
+
+```tsx
+export const Counter = component$(() => {
+  const count = useSignal(0);
+
+  return <button onClick$={() => count.value++}>{count.value}</button>;
+});
+```
+
+The above code represents what a developer would write to describe the component. Below are the transformations that the Optimizer applies to the code to make the code lazy-loadable.
+
+```tsx
+const Counter = component(qrl('./chunk-a.js', 'Counter_onMount'));
+```
+
+```tsx title="chunk-a.js"
+export const Counter_onMount = () => {
+  const count = useSignal(0);
+  return <button onClick$={qrl('./chunk-b.js', 'Counter_onClick', [count])}>{count.value}</button>;
+};
+```
+
+```tsx title="chunk-b.js"
+const Counter_onClick = () => {
+  const [count] = useLexicalScope();
+  return count.value++;
+};
+```
+
+Notice that every occurrence of `$` results in a new lazy loadable symbol.
+
+## Serialization
+
+See [serialization](../../concepts/resumable/index.mdx#serialization) for a discussion of what is serializable.
+

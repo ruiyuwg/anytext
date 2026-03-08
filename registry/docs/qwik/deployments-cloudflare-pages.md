@@ -1,0 +1,275 @@
+---
+title: Cloudflare Pages Adapter and Middleware | Deployments
+contributors:
+  - adamdbradley
+  - manucorporat
+  - OzzieOrca
+  - himorishige
+  - reemardelarosa
+  - mhevery
+  - igorbabko
+  - mrhoodz
+  - dario-piotrowicz
+  - matthewlal
+  - shairez
+updated_at: '2023-10-03T18:53:23Z'
+created_at: '2023-04-06T21:28:28Z'
+---
+
+import PackageManagerTabs from '~/components/package-manager-tabs/index.tsx';
+
+# Cloudflare Pages Adapter
+
+Qwik City Cloudflare Pages adapter allows you to connect Qwik City to [Cloudflare Pages](https://pages.cloudflare.com/).
+
+## Installation
+
+To integrate the `cloudflare-pages` adapter, use the `add` command:
+
+
+<PackageManagerTabs>
+<span q:slot="pnpm">
+```shell
+pnpm run qwik add cloudflare-pages
+```
+</span>
+<span q:slot="npm">
+```shell
+npm run qwik add cloudflare-pages
+```
+</span>
+<span q:slot="yarn">
+```shell
+yarn run qwik add cloudflare-pages
+```
+</span>
+<span q:slot="bun">
+```shell
+bun run qwik add cloudflare-pages
+```
+</span>
+</PackageManagerTabs>
+
+The adapter will add a new `vite.config.ts` within the `adapters/` directory, and a new entry file will be created, such as:
+
+```shell
+└── adapters/
+    └── cloudflare-pages/
+        └── vite.config.ts
+└── src/
+    └── entry.cloudflare-pages.tsx
+```
+
+Additionally, within the `package.json`, the `build.server` and `deploy` scripts will be updated.
+
+Take note of your nodejs version in your local environment by running the `node -v` command:
+```shell
+node -v
+v20.11.1
+```
+
+When using 
+
+<PackageManagerTabs>
+<span q:slot="pnpm">
+```shell
+pnpm create qwik@latest
+```
+</span>
+<span q:slot="npm">
+```shell
+npm create qwik@latest
+```
+</span>
+<span q:slot="yarn">
+```shell
+yarn create qwik
+```
+</span>
+<span q:slot="bun">
+```shell
+bun create qwik@latest
+```
+</span>
+</PackageManagerTabs>
+
+to setup your Qwik app it will likely use a different nodejs version than what Cloudflare Pages uses by default (v16.20.2).
+
+## Production build
+
+To build the application for production, use the `build` command, this command will automatically run `build.server` and `build.client`:
+
+<PackageManagerTabs>
+<span q:slot="pnpm">
+```shell
+pnpm run build
+```
+</span>
+<span q:slot="npm">
+```shell
+npm run build
+```
+</span>
+<span q:slot="yarn">
+```shell
+yarn run build
+```
+</span>
+<span q:slot="bun">
+```shell
+bun run build
+```
+</span>
+</PackageManagerTabs>
+
+[Read the full guide here](https://github.com/QwikDev/qwik/tree/main/starters/adapters/cloudflare-pages/README.md)
+
+## Deploy to Cloudflare Pages
+
+After installing the integration the project is ready to be deployed to Cloudflare Pages.
+
+If the nodejs version is different in your environment than Cloudflare Pages (v16.20.2) you'll need to add a `NODE_VERSION` environment variable and set the value to the version that you got from running the `node -v` command in your environment:
+
+```shell
+node -v
+v20.11.1
+```
+
+To do this in Cloudflare go to **Workers & Pages > YOUR_PROJECT > Settings > Environment variables > Production (and Preview) > Add variables > Save **
+
+Please refer to the [Cloudflare Pages docs](https://developers.cloudflare.com/pages/framework-guides/deploy-a-qwik-site/) for more information on how to deploy your site.
+
+Note that you will need a [Cloudflare account](https://dash.cloudflare.com/sign-up?lang=en-US) in order to complete this step.
+
+## Static Site Generation (SSG)
+
+The Cloudflare Pages adapter also supports Static Site Generation (SSG) by using the `ssg` property. 
+This allows you to generate static HTML files for your application at build time, instead of rendering them at runtime.
+
+```ts title="adapters/cloudflare-pages/vite.config.ts"
+export default extendConfig(baseConfig, () => {
+  return {
+    build: {
+      ssr: true,
+      rollupOptions: {
+        input: ['src/entry.cloudflare-pages.tsx', '@qwik-city-plan'],
+      }
+    },
+    plugins: [
+      cloudflarePagesAdapter(
+       // 👇 THIS IS WHAT YOU NEED TO ADD 👇
+       {
+         ssg: {
+           include: ['/*'],
+           exclude: ['/shop/*'],
+           origin: 'https://example.com',
+       },
+      }),
+    ],
+  };
+});
+
+```
+
+
+#### `include`
+
+The `include` array is used to specify which paths should be statically generated. It accepts wildcard behavior. 
+
+#### `exclude`
+
+The `exclude` array defines routes that should not be static generated and accepts wildcard behavior. 
+`exclude` always take priority over include.
+
+#### `origin`
+
+The URL `origin`, which is a combination of the scheme (protocol) and hostname (domain). For example, `https://qwik.dev` has the protocol `https://` and domain `qwik.dev`. However, the `origin` does _not_ include a `pathname`.
+
+The `origin` is used to provide a full URL during Static Site Generation (SSG), and to simulate a complete URL rather than just the `pathname`. 
+For example, in order to render a correct canonical tag URL or URLs within the `sitemap.xml`, the `origin` must be provided too.
+
+This is important because if you don't set it, cloudflare will use the specific deployment url instead.
+
+
+
+
+## Advanced
+
+### Cloudflare Pages Entry Middleware
+
+When the `cloudflare-pages` adapter is added, a new entry file will be created at `src/entry.cloudflare-pages.tsx`. Below is an example of using the built-in middleware within the entry file.
+
+```tsx title="src/entry.cloudflare-pages.tsx"
+import {
+  createQwikCity,
+  type PlatformCloudflarePages,
+} from '@builder.io/qwik-city/middleware/cloudflare-pages';
+import qwikCityPlan from '@qwik-city-plan';
+import render from './entry.ssr';
+
+const fetch = createQwikCity({ render, qwikCityPlan });
+
+export { fetch };
+```
+
+The compiled middleware will be built in the `server/` directory. Such directory also contains a `_worker.js` file which implements the application's request handling as per the [Cloudflare Pages Advanced Mode](https://developers.cloudflare.com/pages/platform/functions/advanced-mode/#advanced-mode).
+The file simply re-exports the produced `fetch` handler as shown below.
+
+```tsx title="/dist/_worker.js"
+import { fetch } from "../server/entry.cloudflare-pages";
+export default { fetch };
+```
+
+- [Cloudflare Pages Middleware Source](https://github.com/QwikDev/qwik/tree/main/packages/qwik-city/src/middleware/cloudflare-pages/index.ts)
+- [Cloudflare Pages Advanced Mode](https://developers.cloudflare.com/pages/platform/functions/advanced-mode/)
+- [Function Invocation Route Config](https://developers.cloudflare.com/pages/platform/functions/routing/#functions-invocation-routes)
+
+### Cloudflare Pages Function Invocation Routes
+
+Cloudflare Page's [function-invocation-routes config](https://developers.cloudflare.com/pages/platform/functions/routing/#functions-invocation-routes) can be used to include, or exclude, certain paths to be used by the worker functions. Having a `_routes.json` file gives developers more granular control over when your Function is invoked.
+
+This is useful to determine if a page response should be Server-Side Rendered (SSR) or if the response should use a static-site generated (SSG) `index.html` file instead.
+
+By default, the Cloudflare Pages adapter _does not_ include a `public/_routes.json` config, but rather it is auto-generated from the build by the Cloudflare adapter. An example of an auto-generated `dist/_routes.json` would be:
+
+```json
+{
+  "include": ["/*"],
+  "exclude": [
+    "/_headers",
+    "/_redirects",
+    "/build/*",
+    "/favicon.ico",
+    "/manifest.json",
+    "/service-worker.js",
+    "/about"
+  ],
+  "version": 1
+}
+```
+
+In the above example, it's saying _all_ pages should be SSR'd. However, the root static files such as `/favicon.ico` and any static assets in `/build/*` should be excluded from the Functions, and instead treated as a static file.
+
+In most cases the generated `dist/_routes.json` file is ideal. However, if you need more granular control over each path, you can instead provide your own `public/_routes.json` file. When the project provides its own `public/_routes.json` file, then the Cloudflare adapter will not auto-generate the routes config and instead use the committed one within the `public` directory.
+
+### Context
+
+You may access Cloudflare Page's environment variables in the endpoint method's `platform` param:
+
+```ts
+export const onRequest = async ({ platform }) => {
+  const secret = platform.env['SUPER_SECRET_TOKEN'];
+};
+```
+
+Additionally, you may import the `RequestHandler` and `PlatformCloudflarePages` types to have type completions in your editor.
+
+```tsx
+import { type RequestHandler } from '@builder.io/qwik-city';
+import { type PlatformCloudflarePages } from '@builder.io/qwik-city/middleware/cloudflare-pages';
+
+export const onGet: RequestHandler<PlatformCloudflarePages> = ({ platform }) => {
+  //...
+};
+```
+

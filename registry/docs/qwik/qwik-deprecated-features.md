@@ -1,0 +1,47 @@
+---
+title: Deprecated Features | Guides
+contributors:
+  - nsdonato
+  - mrhoodz
+  - manucorporat
+  - patrickjs
+  - gioboa
+updated_at: '2024-04-21T00:20:00Z'
+created_at: '2023-06-14T10:39:06Z'
+---
+
+# Deprecated features
+
+These features were deprecated in the preparation of Qwik for its stable release.
+
+If you happened to come across one of them and don't know what its replacement is, we quickly mention them in this table with the link to their new documentation ✨.
+
+## Qwik
+
+### Deprecated functions and their replacements
+
+----
+
+| Deprecated   | Replacements     |
+| :-------- | :-------
+| `useWatch$` | [useTask$](https://qwik.dev/docs/core/tasks/#usetask) |
+| `useMount$` | [useTask$](https://qwik.dev/docs/core/tasks/#usetask) |
+| `useServerMount` | [useTask$](https://qwik.dev/docs/core/tasks/#usetask) + [isServer](https://qwik.dev/docs/guides/qwik-nutshell/#isbrowser-&-isserver-conditionals)
+| `useClientMount` | [useTask$](https://qwik.dev/docs/core/tasks/#usetask) + [isBrowser](https://qwik.dev/docs/guides/qwik-nutshell/#isbrowser-&-isserver-conditionals)
+| `useClientEffect` - `useClientEffectQrl` | [useVisibleTask$](https://qwik.dev/docs/core/tasks/#usevisibletask) |
+| `useBrowserVisibleTask` - `useBrowserVisibleTaskQrl` | [useVisibleTask$](https://qwik.dev/docs/core/tasks/#usevisibletask) |
+| `useEnvData` | [useServerData](https://qwik.dev/api/qwik/#useserverdata) |
+| `useRef` | [useSignal](https://qwik.dev/docs/core/state/#usesignal) |
+| `createContext` | [createContextId](https://qwik.dev/docs/core/context/#createcontextid) |
+
+## Qwik City
+
+### Deprecated functions and their replacements
+----
+
+| Deprecated   | Replacements
+| :-------- | :-------
+| `useEndpoint ` | [routeLoader$](https://qwik.dev/docs/route-loader/#routeloader)
+| `loader$` - `loaderQrl` | [routeLoader$](https://qwik.dev/docs/route-loader/#routeloader)
+| `action$` - `actionQrl`  | [routeAction$](https://qwik.dev/docs/action/#routeaction)
+

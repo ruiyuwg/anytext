@@ -1,0 +1,36 @@
+---
+title: Cookbook | Overview
+contributors:
+  - mhevery
+  - fabiobiondi
+  - n8sabes
+  - Craiqser
+  - Inaam-Ur-Rehman
+  - maiieul
+  - Adbib
+  - gioboa
+  - aendel
+  - shairez
+---
+
+# Cookbook
+
+A cookbook contains a collection of useful patterns for solving common problems in front-end development.
+
+Examples:
+
+- [Algolia search](./algolia-search/)
+- [Combine Request Handlers](./combine-request-handlers/)
+- [Debouncer](./debouncer/)
+- [Deploy with Node using Docker](./node-docker-deploy/)
+- [Font optimization](./fonts/)
+- [Glob Import with import.meta.glob](./glob-import/)
+- [Media Controller with iOS Support](./mediaController/)
+- [NavLink](./nav-link/)
+- [Portals](./portals/)
+- [Streaming/deferred loaders](./streaming-deferred-loaders)
+- [Synchronous Events with State](./sync-events/)
+- [Theme Management](./theme-management/)
+- [Drag & Drop](./drag&drop/)
+- [View Transition](./view-transition/)
+- [Detect img tag onLoad](./detect-img-tag-onload/)

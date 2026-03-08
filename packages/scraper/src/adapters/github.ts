@@ -162,8 +162,17 @@ export const githubAdapter: Adapter = {
         // Derive title from first H1, or from filename
         const titleMatch = content.match(/^#\s+(.+)/m);
         const filename = path.split("/").pop()!.replace(/\.mdx?$/, "");
-        const baseTitle = titleMatch?.[1]?.trim() ?? filename;
-        const baseId = slugify(filename);
+        // For route-based directories where files are named "index", use parent directory path
+        let derivedName: string;
+        if (filename === "index") {
+          const relativePath = path.slice(docsPath.length + 1);
+          const dirParts = relativePath.split("/").slice(0, -1);
+          derivedName = dirParts.join("-") || filename;
+        } else {
+          derivedName = filename;
+        }
+        const baseTitle = titleMatch?.[1]?.trim() ?? derivedName;
+        const baseId = slugify(derivedName);
 
         // Apply topic prefix based on subdirectory
         const prefixMode = source.topicPrefix ?? "none";

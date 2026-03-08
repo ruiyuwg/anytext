@@ -1,0 +1,104 @@
+---
+title: Cloud Run Middleware | Deployments
+contributors:
+  - DustinJSilk
+  - reemardelarosa
+  - mhevery
+  - WilliamEspegren
+  - gioboa
+  - igorbabko
+  - mrhoodz
+  - adamdbradley
+updated_at: '2023-10-03T18:53:23Z'
+created_at: '2023-04-06T21:28:28Z'
+---
+
+import PackageManagerTabs from '~/components/package-manager-tabs/index.tsx';
+
+# Google Cloud Run Middleware
+
+Qwik City Cloud Run middleware allows you to run a Qwik City app on [Google Cloud Run](https://cloud.google.com/run)
+
+## Installation
+
+To integrate the `Cloud Run` adapter, use the `add` command:
+
+
+<PackageManagerTabs>
+<span q:slot="pnpm">
+```shell
+pnpm run qwik add cloud-run
+```
+</span>
+<span q:slot="npm">
+```shell
+npm run qwik add cloud-run
+```
+</span>
+<span q:slot="yarn">
+```shell
+yarn run qwik add cloud-run
+```
+</span>
+<span q:slot="bun">
+```shell
+bun run qwik add cloud-run
+```
+</span>
+</PackageManagerTabs>
+
+## Production deploy
+
+To deploy your app, you need to:
+
+1. Have a [Google Cloud](https://cloud.google.com/) account
+
+2. Install the `gcloud` CLI
+
+   If you don't have gcloud, follow [Google Cloud's official documentation](https://cloud.google.com/sdk/docs/install).
+
+3. Authenticate with the `gcloud` CLI
+
+   To authenticate the `gcloud` CLI, run this command:
+
+   ```shell
+   gcloud auth login
+   ```
+
+   Grant the SDK access to the account you created in step 1.
+
+4. Change the name of the deploy script
+
+   Update the name of your Cloud Run app in the deploy script in your package.json.
+
+   ```json
+   "deploy": "gcloud run deploy my-cloud-run-app --source ."
+   ```
+
+5. Run deploy script
+
+   Deploy to Google Cloud Run with:
+
+<PackageManagerTabs>
+<span q:slot="pnpm">
+```shell
+pnpm run deploy
+```
+</span>
+<span q:slot="npm">
+```shell
+npm run deploy
+```
+</span>
+<span q:slot="yarn">
+```shell
+yarn run deploy
+```
+</span>
+<span q:slot="bun">
+```shell
+bun run deploy
+```
+</span>
+</PackageManagerTabs>
+

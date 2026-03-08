@@ -1,0 +1,95 @@
+---
+title: Partytown | Integrations
+keywords: 'third party scripts, google analytics, 3rd party, scripts, performance'
+contributors:
+  - manucorporat
+  - leifermendez
+  - shairez
+  - pamenary
+  - reemardelarosa
+  - mhevery
+  - igorbabko
+  - Benny-Nottonson
+  - mrhoodz
+  - adamdbradley
+updated_at: '2023-10-03T18:53:23Z'
+created_at: '2023-04-06T21:28:28Z'
+---
+
+import PackageManagerTabs from '~/components/package-manager-tabs/index.tsx';
+
+# Partytown
+
+Third party scripts slow down your initial page load substantially by blocking the main thread.
+
+Partytown is a tool that allows you to defer third party scripts like Google Analytics, Facebook Pixel, etc off the main thread by using a web worker.
+For more information about this tool visit the [Partytown docs](https://partytown.qwik.dev/).
+
+## Usage
+
+You can add Partytown easily by using the following Qwik starter script:
+
+
+<PackageManagerTabs>
+<span q:slot="pnpm">
+```shell
+pnpm run qwik add partytown
+```
+</span>
+<span q:slot="npm">
+```shell
+npm run qwik add partytown
+```
+</span>
+<span q:slot="yarn">
+```shell
+yarn run qwik add partytown
+```
+</span>
+<span q:slot="bun">
+```shell
+bun run qwik add partytown
+```
+</span>
+</PackageManagerTabs>
+
+The previous command updates your app and sets the correct configuration in `vite.config.ts`.
+
+It also adds new files to your `components` folder.
+
+```tsx title="src/root.tsx"
+import { QwikPartytown } from './components/partytown/partytown';
+
+export default component$(() => {
+  return (
+    <QwikCityProvider>
+      <head>
+        <meta charSet="utf-8" />
+        <QwikPartytown forward={['gtag','dataLayer.push']} />
+        <script
+          async
+          type="text/partytown"
+          src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"
+        />
+        <script
+          type="text/partytown"
+          dangerouslySetInnerHTML={`
+            window.dataLayer = window.dataLayer || [];
+            window.gtag = function() {
+              dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+            gtag('config', 'G-XXXXXX');
+          `}
+        />
+      </head>
+      <body lang="en"></body>
+    </QwikCityProvider>
+  );
+});
+```
+
+## Advanced
+
+To further configure Partytown with more options, please visit the [Partytown Documentation](https://partytown.qwik.dev/configuration)
+

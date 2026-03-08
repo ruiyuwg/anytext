@@ -1,0 +1,83 @@
+---
+title: Cookbook | Glob Import with import.meta.glob
+contributors:
+  - maiieul
+  - gioboa
+---
+
+import CodeSandbox from '../../../../components/code-sandbox/index.tsx';
+
+# Glob Import & Dynamic Import
+
+As you probably know, Qwik takes care of lazy-loading for you in order to make your app performant and scalable by default.
+
+As a consequence of this automatic optimization, you don't need to and shouldn't use vite's [dynamic imports](https://vitejs.dev/guide/features#dynamic-import) feature as it conflicts with the [optimizer](<../../(qwik)/advanced/optimizer/index.mdx>).
+
+But there are still some cases where you may need to import a lot of files from a directory and you may not want to type out all the file paths. For that kind of situation, you can use [`import.meta.glob`](https://vitejs.dev/guide/features#glob-import).
+
+## import.meta.glob
+
+The goal of using `import.meta.glob` is to allow you to create a wrapper component to which you can pass a name prop to chose which component you want to import:
+
+```tsx
+<MetaGlobComponent name="file-name" />
+<MetaGlobComponent name="another-file-name" />
+<MetaGlobComponent name="etc." />
+```
+
+As written in the Vite documentation, `import.meta.glob` comes with a few features that allow you to specify how to import your files.
+
+By default you can simply use pattern matching to specify which files should be imported from which folder:
+
+```tsx
+const metaGlobComponents: Record<string, any> = await import.meta.glob('/src/components/*');
+```
+
+But you can also pass in additional options like [`import`](https://vitejs.dev/guide/features#named-imports), [`query`](https://vite.dev/guide/features.html#custom-queries):
+
+```tsx
+const metaGlobComponents: Record<string, any> = await import.meta.glob('/src/components/*', {
+  import: 'default',
+  query: '?raw',
+});
+```
+
+## How to
+
+<CodeSandbox src="/src/routes/demo/cookbook/glob-import/">
+```tsx
+import {
+  type Component,
+  component$,
+  useSignal,
+  useTask$,
+} from '@builder.io/qwik';
+
+const metaGlobComponents: Record<string, any> = await import.meta.glob(
+  '/src/examples/*',
+  { import: 'default' }
+);
+
+export default component$(() => {
+  return (
+    <div>
+      <MetaGlobExample name="example1" />
+      <MetaGlobExample name="example2" />
+      <MetaGlobExample name="example3" />
+    </div>
+  );
+});
+
+export const MetaGlobExample = component$<{ name: string }>(({ name }) => {
+  const MetaGlobComponent = useSignal<Component<any>>();
+  const componentPath = `/src/examples/${name}.tsx`;
+
+  useTask$(async () => {
+    MetaGlobComponent.value = await metaGlobComponents[componentPath]();
+  });
+
+  return <>{MetaGlobComponent.value && <MetaGlobComponent.value />}</>;
+});
+```
+</CodeSandbox>
+

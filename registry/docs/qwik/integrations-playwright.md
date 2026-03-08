@@ -1,0 +1,53 @@
+---
+title: Playwright | Integrations
+keywords: 'e2e, testing'
+contributors:
+  - manucorporat
+  - zanettin
+  - mhevery
+  - Benny-Nottonson
+  - mrhoodz
+  - adamdbradley
+updated_at: '2023-07-18T17:49:53Z'
+created_at: '2023-04-06T21:28:28Z'
+---
+
+import PackageManagerTabs from '~/components/package-manager-tabs/index.tsx';
+
+# Playwright
+
+Playwright enables reliable end-to-end testing for modern web apps supporting all modern rendering engines and works cross-platform. [Playwright Website](https://playwright.dev/).
+
+## Usage
+
+You can add Playwright easily by using the following Qwik starter script:
+
+
+<PackageManagerTabs>
+<span q:slot="pnpm">
+```shell
+pnpm run qwik add playwright
+```
+</span>
+<span q:slot="npm">
+```shell
+npm run qwik add playwright
+```
+</span>
+<span q:slot="yarn">
+```shell
+yarn run qwik add playwright
+```
+</span>
+<span q:slot="bun">
+```shell
+bun run qwik add playwright
+```
+</span>
+</PackageManagerTabs>
+
+The previous command adds playwright to your dependencies, appends a `test.e2e` command in your `package.json` scripts section and creates a default configuration within the `playwright.config.ts` file on the application root level.
+It also adds a new file within a newly created `tests` folder called `example.spec.ts` which contains some simple test cases.
+
+For further reference, please check the [Playwright documentation](https://playwright.dev/docs/intro).
+

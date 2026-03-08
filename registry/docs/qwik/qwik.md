@@ -1,0 +1,91 @@
+---
+title: Overview | Introduction
+contributors:
+  - adamdbradley
+  - steve8708
+  - manucorporat
+  - gabrielgrant
+  - zanettin
+  - mhevery
+  - the-r3aper7
+  - EdinK1
+  - mrhoodz
+  - moinulmoin
+  - LoganAffleck
+  - erikras
+  - ahevery
+updated_at: '2023-06-25T19:43:33Z'
+created_at: '2023-03-20T23:45:13Z'
+---
+import ImgSeeMoreMedia from '~/media/icons/see_more_media.svg?jsx';
+import ImgShowcase from '~/media/icons/showcase.svg?jsx';
+import ImgQwikcityAndRouting from '~/media/icons/qwikCity_and_routing.svg?jsx';
+import ImgCommunityChat from '~/media/icons/community_chat.svg?jsx';
+import ImgCoursesBook from '~/media/icons/courses_book.svg?jsx';
+import ImgApiServer from '~/media/icons/api_server.svg?jsx';
+import ImgWhyQwikLogo from '~/media/icons/why_qwik_logo.svg?jsx';
+import ImgGettingStartedRocket from '~/media/icons/getting_started_rocket.svg?jsx';
+
+# Welcome to Qwik
+
+Qwik is a new kind of web framework that can deliver instant loading web applications at any size or complexity. Your sites and apps can boot with about 1kb of JS (regardless of application complexity), and achieve consistent performance at scale.
+
+## Getting Started with Qwik
+
+<div class="card-grid">
+  <a class="card card-center" href="/docs/getting-started/">
+    <ImgGettingStartedRocket class="intro-icon" style="margin-bottom:-7px"/>
+    <h3>Getting Started</h3>
+  </a>
+  <a class="card card-center" href="/docs/concepts/think-qwik/">
+    <ImgWhyQwikLogo class="intro-icon" />
+    <h3>Why Qwik?</h3>
+  </a>
+  <a class="card card-center" href="/api/">
+    <ImgApiServer class="intro-icon" style="margin-bottom:15px"/>
+    <h3>API</h3>
+  </a>
+  <a class="card card-center" href="/ecosystem/#courses">
+    <ImgCoursesBook class="intro-icon" style="margin-bottom:15px"/>
+    <h3>Courses</h3>
+  </a>
+  <a class="card card-center" href="https://qwik.dev/chat">
+     <ImgCommunityChat class="intro-icon" />
+    <h3>Community</h3>
+  </a>
+  <a class="card card-center" href="/docs/qwikcity/">
+    <ImgQwikcityAndRouting class="intro-icon" />
+    <h3>Qwik City & Routing</h3>
+  </a>
+</div>
+
+## Explore More
+
+<div class="card-grid">
+  <a class="card card-center" href="/media/">
+    <ImgSeeMoreMedia class="intro-icon" />
+    <h3>See more presentations, videos, and podcasts</h3>
+  </a>
+  <a class="card card-center" href="/showcase/">
+    <ImgShowcase class="intro-icon" />
+    <h3>Check out websites built with Qwik</h3>
+  </a>
+</div>
+
+## Why Qwik?
+
+<div class="card-grid">
+  <div class="card">
+    <h3>General-purpose</h3>
+    <p>Qwik can be used to build any type of website or application.</p>
+  </div>
+  <div class="card">
+    <h3>Instant Interactivity</h3>
+    <p>Qwik apps work instantly without any delay because they don't need hydration, regardless of their size or complexity.</p>
+  </div>
+  <div class="card">
+    <h3>JS Streaming</h3>
+    <p>Qwik delivers sub-second full page loads, even on mobile, by serving pure HTML and executing JavaScript when your users opt-in.</p>
+  </div>
+</div>
+

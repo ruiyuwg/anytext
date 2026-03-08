@@ -1,0 +1,186 @@
+---
+title: Internationalization | Integrations
+contributors:
+  - mhevery
+  - manucorporat
+  - gioboa
+  - tzdesign
+  - Benny-Nottonson
+  - mrhoodz
+  - wmertens
+updated_at: '2025-11-23T00:00:00Z'
+created_at: '2023-04-19T22:13:46Z'
+---
+
+import PackageManagerTabs from '~/components/package-manager-tabs/index.tsx';
+
+# Internationalization
+
+Internationalization is a complex problem. Qwik does not solve the internationalization problem directly instead it only provides low-level APIs to allow other libraries to solve it.
+
+## Runtime vs compile time translation
+
+At a high level there are two ways in which the translation problem can be solved:
+
+- Runtime: load a translation map and look up the translations at runtime.
+- Compile time: Have a compile step inline the translations into the output string.
+
+Both of the above approaches have trade-offs that one should take into consideration.
+
+The advantages of runtime approaches are:
+
+- Simplicity. Does not require an additional build step.
+
+Disadvantages of the runtime approach are:
+
+- Each string is present in triplicate:
+  1. Once as the original string in the code.
+  2. Once as a key in a translation map.
+  3. Once as a translated value in the translation map.
+- The tools currently lack the capability to break up the translation map. The whole translation map must be loaded eagerly on application startup. This is a less than ideal situation because it works against Qwik's effort to break up and lazy load your codebase. Additionally, because translation maps are not broken up, the browser will download unnecessary translations. For example, translations for static components that will never re-render on the client.
+- There is a runtime cost to translation lookups.
+
+The advantages of compile-time approaches are:
+
+- Qwik's lazy loading of code now extends to the lazy loading of translation strings. (No unnecessary translation text is loaded)
+- No runtime translation map means strings are not in triplicate.
+
+Disadvantages of compile time approaches are:
+
+- Extra build step.
+- Changing languages requires a page reload.
+
+## Recommendation
+
+With the above in mind, Qwik recommends that you use a tool that best fits your constraints. To help you make a decision there are three different considerations: Browser, Server, and Development.
+
+### Browser
+
+Qwik's goal is to deliver the best possible user experience. It achieves this by deferring the loading of code to later so that the initial startup performance is not overwhelmed. Because the runtime approach requires eager loading of all translations, we don't recommend this approach. We think that the compile-time approach is best for the browser.
+
+### Server
+
+The server does not have the constraint of lazy loading. For this reason, the server can use either the runtime or compiled approach. The disadvantage of compile time approach on the server is that we need to have a separate deployment for each translation. This complicates the deployment process as well as puts greater demand on the number of servers. For this reason, we think the runtime approach is preferable on the server.
+
+### Development
+
+During development, fewer build steps will result in a faster turnaround. For this reason, runtime translation should result in a simpler development workflow.
+
+### Our Recommendation
+
+Our recommendation is to use a tool that would provide a runtime approach on the server, and runtime or compile time on the client depending on whether we are in development or production. This way it is possible to prove the best user experience and development experience, and use the least server resources.
+
+## Internationalization Libraries
+
+### Paraglide JS
+
+[Paraglide JS](https://inlang.com/m/gerre34r/library-inlang-paraglideJs) is a compile-time translation library that generates type-safe translation functions from standard message format messages.
+
+#### Advantages
+- **Tiny Runtime Overhead**: Translations are compiled to trivial functions.
+- **Framework Agnostic**: Can be used with various frameworks, even within the same project.
+- **Type-Safe Translations**: Generates type-safe functions for translations, reducing runtime errors
+- **Lazy Loading**: Only the translations used by the application are bundled, optimizing bundle size.
+- **Standard Message Format**: Supports complex message formatting using the widely adopted ICU message format.
+- **Developed ecosystem**: Part of the inlang ecosystem, which provides additional tools and integrations for managing translations.
+#### Disadvantages
+- **Ships all languages**: The translations for all languages are included in the single build output, which may increase the overall bundle size.
+- **No runtime features**: Lacks the possibility to add messages at runtime.
+
+#### Installation
+The easiest way to add Paraglide JS to Qwik is by following the [official guide for Vite](https://inlang.com/m/gerre34r/library-inlang-paraglideJs/vite).
+
+For further features like language switching and automatic translations, check the [documentation](https://inlang.com/m/gerre34r/library-inlang-paraglideJs).
+
+#### Usage
+Use the generated functions in your code:
+
+```tsx
+import * as m from './src/paraglide/messages'
+import { component$ } from '@builder.io/qwik';
+
+export default component$(() => {
+  return <p>{m.hello({name: 'World'})}</p>
+})
+```
+
+### compiled-i18n
+
+[compiled-i18n](https://github.com/wmertens/compiled-i18n) is inspired by the $localize system from Angular. It only requires a plugin to be added to the Vite configuration.
+
+It supports both runtime and compile-time translations.
+
+#### Advantages
+- **Zero Runtime Overhead (Compile-time mode)**: Translations are inlined at build time, resulting in no runtime cost for lookups.
+- **Simplicity**: Minimal setup. Simple template string function API.
+- **Framework Agnostic**: Can be used with various frameworks, even within the same project.
+- **Flexible Approach**: Supports both runtime and compile-time modes, allowing developers to choose based on their needs.
+- **Per-locale builds**: Compile-time mode inlines translations, eliminating runtime lookups. Server code includes all languages, simplifying deployment.
+- **Automatic extraction**: Automatically adds new keys to translation files during build, and warns about missing and/or unused translations.
+
+#### Disadvantages
+- **Per-locale builds**: Compile-time mode requires separate builds for each locale, complicating deployment.
+
+#### Installation
+Run `npx qwik add compiled-i18n` to add compiled-i18n to your Qwik app.
+
+See the [Qwik-specific instructions](https://github.com/wmertens/compiled-i18n/blob/main/docs/qwik.md) for more details.
+
+Automatic translation is supported via [deepl-localize](https://github.com/tzdesign/deepl-localize).
+
+For further explanation of the API and features like pluralization, check the [documentation](https://github.com/wmertens/compiled-i18n/blob/main/Readme.md).
+
+#### Usage
+Use the template string function anywhere in your code:
+
+```tsx
+import {_} from 'compiled-i18n'
+
+console.log(_`Logenv ${process.env.NODE_ENV}`)
+
+export const Count = ({count}) => (
+	<div title={_`countTitle`}>{_`${count} items`}</div>
+)
+```
+
+### qwik-speak
+
+[qwik-speak](https://github.com/robisim74/qwik-speak) library to translate texts, dates and numbers in Qwik apps.
+
+#### Advantages
+- **Runtime Flexibility**: Allows dynamic language switching without page reloads, improving user experience.
+- **Qwik-Optimized**: Deep integration with Qwik's reactivity system and serialization.
+- **Rich Features**: Supports advanced formatting including dates, numbers, Pluralization, and ICU message format.
+
+#### Disadvantages
+- **Runtime Overhead**: Requires loading translation maps at runtime, which can increase bundle size and initial load time.
+- **Limited Compiler Benefits**: Doesn't provide the same compile-time optimizations and tree-shaking as pure compile-time solutions.
+
+#### Installation
+
+The easiest way to add qwik-speak to Qwik is following the official [guide](https://github.com/robisim74/qwik-speak/blob/main/docs/quick-start.md).
+
+#### Usage
+
+```tsx
+import { component$, useStore } from '@builder.io/qwik';
+import { Speak, useSpeakContext } from 'qwik-speak';
+
+export default component$(() => {
+  const speak = useSpeakContext();
+  const state = useStore({ count: 0 });
+
+  return (
+    <Speak>
+      <div>
+        <h1>{speak.t('helloWorld')}</h1>
+        <p>{speak.t('itemCount', { count: state.count })}</p>
+        <button onClick$={() => state.count++}>
+          {speak.t('increment')}
+        </button>
+      </div>
+    </Speak>
+  );
+});
+```
+

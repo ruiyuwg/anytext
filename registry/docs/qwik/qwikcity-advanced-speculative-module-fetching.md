@@ -1,0 +1,79 @@
+---
+title: Speculative Module Fetching | Advanced
+description: Learn how Qwik handles loading bundles in the background and filling the cache with Speculative Module Fetching.
+contributors:
+  - ulic75
+  - mhevery
+  - adamdbradley
+  - hamatoyogi
+  - manucorporat
+  - mrhoodz
+  - thejackshelton
+  - zanettin
+  - wtlin1228
+  - aendel
+  - jemsco
+  - wmertens
+updated_at: '2025-03-25T12:00:00Z'
+created_at: '2023-03-20T23:45:13Z'
+---
+
+# Speculative Module Fetching
+
+Qwik is able to load a page and become interactive extremely fast due to its ability to startup _without_ JavaScript. In addition to this, Speculative Module Fetching is a powerful feature that allows Qwik to pre-populate the browser's cache in a background thread.
+
+Qwik's goal is to optimize loading by caching only the necessary parts of the application based on potential user interactions. It avoids loading unnecessary bundles by understanding which interactions are not possible.
+
+### Pre-populating the Cache
+
+Each page load will pre-populate the cache with bundles that _could_ be executed on the page by the user at that moment. For example, let's say that the page has a click listener on a button. When the page loads, the Qwik's first job is to ensure the code for that click listener is already in the [browser's cache](https://developer.mozilla.org/en-US/docs/Web/API/Cache). When the user clicks the button, Qwik makes a request to the event listener's function and any code dependencies to execute that function. This might include importing other modules.
+
+The initial page load prepares the cache for the next probable interaction and also downloads other necessary code incrementally. When a follow-up interaction happens, such as opening a modal or menu, Qwik will ask the browser to preload the code for that interaction. Pre-populating the cache happens continuously as users interact with the application.
+
+### Reducing Network Waterfalls
+
+A network waterfall occurs when multiple requests are made sequentially, one after another. This sequential process can degrade performance significantly since the time to download all necessary modules is extended, compared to a scenario where all modules begin downloading at the same time in parallel.
+
+Below is an example with three modules: A, B and C. Module A imports B, and B imports C. The HTML document is what starts the waterfall by first requesting Module A.
+
+```ts
+import './b.js';
+console.log('Module A');
+```
+
+```ts
+import './c.js';
+console.log('Module B');
+```
+
+```ts
+console.log('Module C');
+```
+
+```html
+<script type="module" src="./a.js"></script>
+```
+
+In this example, when Module `A` is first requested, the browser has no idea that it should also start requesting Module `B` and `C`. It doesn't even know it needs to start requesting Module `B`, until AFTER Module `A` has finished downloading. It's a common problem in that the browser doesn't know ahead of time what it should start to request, until after each module has finished downloading.
+
+However, Qwik knows the module graph and controls QRL segment loading, we do know all of the modules which _will_ be requested next. So when Qwik sees that it will require a module, it will tell the browser to preload it and all of its dependencies.
+
+### Details
+
+The Qwik build process generates a `q-manifest.json` file. The `q-manifest.json` includes a detailed module graph of how bundles are associated and which symbols are within each bundle.
+
+This is then further used to generate the `build/q-bundle-graph-xyz.json` file, which is a compact representation of the module graph, including probabilities of which bundlers are more likely to be requested next given a certain bundle has loaded, and is loaded by Qwik to preload QRL segment loading.
+
+Qwik-City also injects all routes with their dependencies into this bundlegraph file.
+
+When a container resumes, it will fetch the bundlegraph file (probably from the cache) and use it to prefetch modules needed for event handlers and routes.
+
+Static imports are preloaded with high priority, and dynamic imports are preloaded with low priority. The browser will decide when to download the modules.
+
+The preloading happens with the `_preload` function, which is an internal Qwik API. It works by traversing the bundlegraph and adding `<link rel="modulepreload">` tags for each bundle that is likely to be requested next.
+
+## During Development
+
+Speculative module fetching only really works in preview or on a production build. In development, we don't have the bundle graph available, so we can't prevent waterfalls from happening. However, we do ask the browser to preload the bundles that are most likely to be requested after SSR.
+
+

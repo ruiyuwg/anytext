@@ -1,0 +1,189 @@
+---
+title: Cookbook | Dark and Light Theme
+contributors:
+  - Inaam-Ur-Rehman
+  - gioboa
+  - aendel
+  - chindris-mihai-alexandru
+  - forresst
+updated_at: '2026-02-05T00:00:00Z'
+created_at: '2023-10-10T16:59:26Z'
+---
+
+import PackageManagerTabs from '~/components/package-manager-tabs/index.tsx';
+
+# Theme management
+
+In modern websites, dark and light theme support creates a better user experience. Users can change the theme according to their preferences or system settings.
+
+This guide covers theme management with Tailwind CSS, including solutions for Static Site Generation (SSG) and Content Security Policy (CSP) considerations.
+
+## Setup Tailwind CSS
+
+First, install Tailwind CSS in your Qwik project:
+
+<PackageManagerTabs>
+<span q:slot="pnpm">
+```shell
+pnpm run qwik add tailwind
+```
+</span>
+<span q:slot="npm">
+```shell
+npm run qwik add tailwind
+```
+</span>
+<span q:slot="yarn">
+```shell
+yarn run qwik add tailwind
+```
+</span>
+<span q:slot="bun">
+```shell
+bun run qwik add tailwind
+```
+</span>
+</PackageManagerTabs>
+
+Enable dark mode in your `global.css`:
+
+```css
+@import "tailwindcss";
+
+/* Add the line below to enable dark mode */
+@custom-variant dark (&:where(.dark, .dark *));
+```
+
+## Basic Implementation
+
+### Step 1: Add the theme initialization script
+
+Add this script to the `<head>` in your `root.tsx` file. This script runs before the page renders, preventing a flash of the wrong theme:
+
+```tsx
+// In root.tsx, inside the <head> tag
+<script
+  dangerouslySetInnerHTML={`
+    (function() {
+      function setTheme(theme) {
+        document.documentElement.classList.remove('light', 'dark');
+        document.documentElement.classList.add(theme);
+        localStorage.setItem('theme', theme);
+      }
+      const stored = localStorage.getItem('theme');
+      if (stored) {
+        setTheme(stored);
+      } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        setTheme('dark');
+      } else {
+        setTheme('light');
+      }
+    })();
+  `}
+/>
+```
+
+### Step 2: Create the theme toggle component
+
+```tsx
+import { component$ } from "@builder.io/qwik";
+
+export const ThemeToggle = component$(() => {
+  return (
+    <button
+      type="button"
+      aria-label="Toggle dark mode"
+      onClick$={() => {
+        const isDark = document.documentElement.classList.contains('dark');
+        const newTheme = isDark ? 'light' : 'dark';
+        document.documentElement.classList.remove('light', 'dark');
+        document.documentElement.classList.add(newTheme);
+        localStorage.setItem("theme", newTheme);
+      }}
+      class="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700"
+    >
+      {/* Sun icon for dark mode, Moon icon for light mode */}
+      <svg class="w-5 h-5 hidden dark:block" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+        <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" />
+      </svg>
+      <svg class="w-5 h-5 block dark:hidden" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+      </svg>
+    </button>
+  );
+});
+```
+
+## SSG (Static Site Generation) Considerations
+
+When using Static Site Generation with adapters like Cloudflare Pages, Netlify, or the static adapter, your pages are pre-rendered at build time. This means:
+
+1. **No server-side request handling** - The `plugin@csp.ts` middleware won't run for static pages
+2. **Theme must be set before first paint** - To avoid the "flash of wrong theme" problem
+
+### Why the inline script approach works for SSG
+
+The inline script in `<head>` executes synchronously before the browser renders any content. This is critical for SSG because:
+
+- `useVisibleTask$` runs **after** the component mounts (too late - causes flicker)
+- `useTask$` runs on the server during SSR, but for SSG the HTML is already static
+- The inline script runs immediately when the HTML is parsed, before any rendering
+
+## Content Security Policy (CSP) Considerations
+
+The inline script approach using `dangerouslySetInnerHTML` requires CSP configuration. You have two options:
+
+### Option 1: Allow unsafe-inline (simpler, less secure)
+
+For static sites deployed to platforms like Cloudflare Pages, add a `_headers` file in your `public/` folder:
+
+```
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; frame-ancestors 'none'; object-src 'none'
+```
+
+> **Security note:** Using `'unsafe-inline'` reduces CSP's protection against XSS attacks. CSP is often the last line of defense, and using `'unsafe-inline'` explicitly disables this protection for scripts. For production sites with sensitive data, consider Option 3 (script hashes) instead. You can consider this option if you are building a low-risk static site with no user input such as a portfolio or a blog and you prefer convenience over security.
+
+### Option 2: Use nonces (SSR only)
+
+For SSR applications, you can use nonces as described in the [CSP documentation](/docs/advanced/content-security-policy/). Note that nonces **do not work with SSG** because the nonce must be generated per-request.
+
+### Option 3: Use script hashes (advanced)
+
+You can calculate a SHA-256 hash of your inline script and add it to CSP:
+
+```
+script-src 'self' 'sha256-YOUR_SCRIPT_HASH_HERE'
+```
+
+Generate the hash using:
+```shell
+echo -n 'your inline script content' | openssl dgst -sha256 -binary | openssl base64
+```
+
+## Troubleshooting
+
+### Theme flickers on page load
+
+If you see a flash of the wrong theme:
+1. Ensure the inline script is in `<head>`, not `<body>`
+2. Check that the script runs synchronously (no `async` or `defer`)
+3. Verify the script is setting the class on `document.documentElement`
+
+### Toggle button shows wrong state initially
+
+The basic implementation uses CSS classes (`dark:hidden` and `dark:block`) to show the correct icon based on the theme. This approach avoids the need to sync state with JavaScript. If you need to conditionally render based on theme value (e.g., showing different content), you can use `useVisibleTask$` with `{ strategy: 'document-ready' }` to read the current theme after hydration.
+
+### CSP errors in console
+
+Check your browser's console for CSP violation messages. You'll need to either:
+- Add `'unsafe-inline'` to `script-src` 
+- Calculate and add the script's hash
+- Use nonces (SSR only)
+
+## Related
+
+- [Content Security Policy](/docs/advanced/content-security-policy/) - For SSR applications using nonces
+- [Static Site Generation](/docs/guides/static-site-generation/) - SSG configuration
+- [useVisibleTask$](/docs/components/tasks/#usevisibletask) - Client-side tasks
+

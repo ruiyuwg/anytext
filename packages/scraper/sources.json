@@ -589,6 +589,19 @@
         "docsPath": "design/website/docs",
         "include": [".md"]
       }
+    },
+    {
+      "id": "qwik",
+      "name": "Qwik",
+      "description": "Resumable JavaScript framework for instant-loading web applications",
+      "version": "2",
+      "adapter": "github",
+      "github": {
+        "repo": "QwikDev/qwik",
+        "branch": "main",
+        "docsPath": "packages/docs/src/routes/docs",
+        "include": [".mdx"]
+      }
     }
   ]
 }

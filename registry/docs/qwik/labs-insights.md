@@ -1,0 +1,90 @@
+---
+title: "\U0001F9EA Insights | Qwik Labs"
+contributors:
+  - mhevery
+  - gioboa
+  - mrhoodz
+  - thejackshelton
+  - maiieul
+updated_at: '2025-09-29T22:12:12Z'
+created_at: '2023-06-22T22:13:24Z'
+---
+
+# 🧪 Insights 
+**Stage:** `prototyping`
+
+Insights allow your application to collect real user usage information to optimize the creation of bundles. By observing real user behavior, the Qwik build system can then do a better job prefetching bundles for your application. There are two benefits of this:
+1. By noticing which symbols are used together, the bundler can colocate the symbols in the same bundle minimizing the waterfall that could occur if there are too many small files needing to be downloaded.
+2. By observing in which order the symbols are used, the prefetcher can then fetch bundles in priority order ensuring that the bundles that are used more often are loaded first.
+
+## Architecture
+
+The optimization consists of these parts:
+- A `<Insights>` component which collects time based bundle execution data.
+- A `qwikInsights` Vite Plugin to apply the usage data during the build process.
+- A registered application inside the builder.io database.
+
+> Currently Insights info is hosted in the Builder database. This information is about the execution of symbols/chunks in the application.
+> The implementation of the service is open-source and you have the choice to use ours or host your own.
+
+## `<Insights>` component
+
+The `<Insights>` component should be added to your `root.tsx` file.
+
+```typescript
+// ...
+import { Insights } from '@builder.io/qwik-labs';
+
+export default component$(() => {
+  // ...
+  return (
+    <QwikCityProvider>
+      <head>
+        // ...
+        <Insights
+          publicApiKey={import.meta.env.PUBLIC_QWIK_INSIGHTS_KEY}
+        />
+      </head>
+      <body lang="en">
+        // ...
+      </body>
+    </QwikCityProvider>
+  );
+});
+```
+
+You can get `PUBLIC_QWIK_INSIGHTS_KEY` by visiting [Qwik Insight](https://insights.qwik.dev/app/add/).
+
+The `<Insights>` component collects this data:
+- Timing information of symbols.
+- The `pathname` part of the URL.
+- Random sessionID which identifies which symbol loads came from the same browser session.
+
+> The `<Insights>` component does not collect any user-identifiable information.
+
+The data collected being based on the frequency bundles are being grouped together at the same time, it is **not** advised to share the same API key between your preview and production environments. During preview, developers might use the application in 3G throttling and click around, which can put unrelated bundles together. After that the import graph would be wrong, leading to over-preloading, and Insights would then base its future data collection based on those corrupted bundles. If that happened to you, we recommend creating a new API key for your production environment. In normal usage, you will release a new version of your application and there will be a long enough window for Insights to collect the data. In case you face over-preloading in your app, you can always re-create a new API key. Drop us a message in the [Qwik Discord server](https://qwik.dev/chat) if this becomes a recurrent issue for you.
+
+
+## Vite integration
+
+Once the application is running for a while and it collects sufficient information on symbol usage, the stats can be used to improve the bundles of the future version of the application. This is done by connecting the vite build with Insights like so:
+
+file: `vite.config.js`
+```typescript
+//..
+import { defineConfig, loadEnv } from 'vite';
+import { qwikInsights } from '@builder.io/qwik-labs/vite';
+
+export default defineConfig(async () => {
+  return {
+    plugins: [
+      qwikInsights({
+        publicApiKey: loadEnv('', '.', '').PUBLIC_QWIK_INSIGHTS_KEY,
+      }),
+      //...
+    ],
+    // ...
+  };
+});
+```
+

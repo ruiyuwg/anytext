@@ -1,0 +1,86 @@
+---
+title: Vitest | Integrations
+keywords: 'testing, unit test, jest'
+contributors:
+  - manucorporat
+  - reemardelarosa
+  - mhevery
+  - Benny-Nottonson
+  - mrhoodz
+  - adamdbradley
+updated_at: '2023-07-18T17:51:35Z'
+created_at: '2023-04-06T21:28:28Z'
+---
+
+import PackageManagerTabs from '~/components/package-manager-tabs/index.tsx';
+
+# Vitest
+
+[Vitest](https://vitest.dev/) is a blazing-fast unit test framework powered by Vite. Because Qwik City uses [Vite](https://vitejs.dev/) by default, Vitest is our defacto unit test framework.
+
+## Usage
+
+You can add vitest easily by using the following Qwik starter script:
+
+
+<PackageManagerTabs>
+<span q:slot="pnpm">
+```shell
+pnpm run qwik add vitest
+```
+</span>
+<span q:slot="npm">
+```shell
+npm run qwik add vitest
+```
+</span>
+<span q:slot="yarn">
+```shell
+yarn run qwik add vitest
+```
+</span>
+<span q:slot="bun">
+```shell
+bun run qwik add vitest
+```
+</span>
+</PackageManagerTabs>
+
+After running the command, vitest will be installed and a new component will be added to your project. The component will be added to the `src/components/example` directory as well as a new unit test named `example.spec.tsx`.
+If you are looking for an example for a Component with QwikCity checkout [QwikCityMockProvider](/docs/(qwikcity)/api/index.mdx#qwikcitymockprovider).
+
+```tsx title="example.spec.tsx"
+import { createDOM } from '@builder.io/qwik/testing';
+import { test, expect } from 'vitest';
+import { ExampleTest } from './example';
+
+test(`[ExampleTest Component]: Should render ⭐`, async () => {
+  const { screen, render } = await createDOM();
+  await render(<ExampleTest flag={true} />);
+  expect(screen.outerHTML).toContain('⭐');
+  const div = screen.querySelector('.icon') as HTMLElement;
+  expect(div.outerHTML).toContain('⭐');
+});
+
+test(`[ExampleTest Component]: Should render 💣`, async () => {
+  const { screen, render } = await createDOM();
+  await render(<ExampleTest flag={false} />);
+  expect(screen.outerHTML).toContain('💣');
+});
+
+test(`[ExampleTest Component]: Click counter +1`, async () => {
+  const { screen, render, userEvent } = await createDOM();
+  await render(<ExampleTest flag={true} />);
+
+  expect(screen.outerHTML).toContain('Count:0');
+
+  const spanBefore = screen.querySelector('span') as HTMLDivElement;
+  await userEvent('.btn-counter', 'click');
+  expect(spanBefore.innerHTML).toEqual('Count:1');
+
+  const spanAfter = screen.querySelector('span') as HTMLDivElement;
+  await userEvent('button', 'click');
+  expect(spanAfter.innerHTML).toEqual('Count:2');
+});
+```
+

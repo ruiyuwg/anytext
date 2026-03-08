@@ -1,0 +1,182 @@
+---
+title: Deployments | Guides
+contributors:
+  - adamdbradley
+  - samijaber
+  - reemardelarosa
+  - mhevery
+  - igorbabko
+  - mrhoodz
+updated_at: '2023-10-03T18:53:23Z'
+created_at: '2023-04-06T21:28:28Z'
+---
+
+import PackageManagerTabs from '~/components/package-manager-tabs/index.tsx';
+
+# Deployments
+
+When it's time to deploy your application, Qwik comes with ready-to-use integration that make this so easy!
+
+
+<PackageManagerTabs>
+<span q:slot="pnpm">
+```shell
+pnpm run qwik add
+```
+</span>
+<span q:slot="npm">
+```shell
+npm run qwik add
+```
+</span>
+<span q:slot="yarn">
+```shell
+yarn run qwik add
+```
+</span>
+<span q:slot="bun">
+```shell
+bun run qwik add
+```
+</span>
+</PackageManagerTabs>
+
+## Adapters and Middleware
+
+Qwik City middleware is a glue code that connects server rendering framework (such as Cloudflare, Netlify, Vercel, Express etc.) with the Qwik City meta-framework.
+
+## Production build
+
+When a new integration is added to the project, a `build.server` script is added to the `package.json` file. This script is used to build the project for production.
+
+The only thing you need to do is to run the following command:
+
+<PackageManagerTabs>
+<span q:slot="pnpm">
+```shell
+pnpm run build
+```
+</span>
+<span q:slot="npm">
+```shell
+npm run build
+```
+</span>
+<span q:slot="yarn">
+```shell
+yarn run build
+```
+</span>
+<span q:slot="bun">
+```shell
+bun run build
+```
+</span>
+</PackageManagerTabs>
+
+> Under the hood, the `build` script will execute, `build.server` and `build.client` scripts.
+
+## Advanced
+
+The `requestHandler()` utility is what each of the above middleware bundles uses in order to translate their request/response to a standard format for Qwik City to use. This function can be used to provide middleware for specific server frameworks.
+
+If there's middleware missing and you'd like it added, take a look at how the `requestHandler()` utility is used to handle requests for each of the middleware source-code above. Better yet, we'd love to have your middleware contributions! [PR's are welcome](https://github.com/QwikDev/qwik/tree/main/packages/qwik-city/middleware)!
+
+## Add A New Deployment
+
+Thanks for your interest in adding a deployment integration to Qwik! We're more than happy to help you get started. Before we get too far, if there's already a deployment for what you're looking for, we'd [love to have you contribute to it](https://github.com/QwikDev/qwik/tree/main/packages/qwik-city/adapters). If the deployment is not already available, let's add it!
+
+To start it's probably best to copy an existing adapters and middleware and modify it to fit your needs. A deployment is made up of a few different parts:
+
+### Add An Adapter
+
+An adapter is the term used to summarize the Vite config that needed for the special build configuration. Each server, whether it's a cloud-service or a custom server, has its own unique build configuration for a specific output the server uses. For example, [Cloudflare](/docs/deployments/cloudflare-pages/index.mdx), [Netlify](/docs/deployments/netlify-edge/index.mdx) and [Node.js Server](/docs/deployments/node/index.mdx) each have their own build configurations.
+
+The adapter is really a Vite config, that's extending the base config. The base config is the same for all adapters, and the adapter config is the unique part for each server.
+
+- [Adapters Source](https://github.com/QwikDev/qwik/tree/main/packages/qwik-city/adapters)
+
+### Add Middleware
+
+Middleware is the glue code that connects the server rendering framework (such as Cloudflare, Netlify, Vercel, Express etc.) with the Qwik City meta-framework. Each middleware is responsible for handling the request and response from the server and translating it to a standard format for Qwik City to use. 
+
+Luckily Qwik City uses the standardized [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request) and [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response) interfaces, so the middleware is usually pretty minimal.
+
+For middleware, you'll notice that each one calls the common `@builder.io/qwik-city/middleware/request-handler` package. The job of each middleware is to translate the request and response to the standardized format that Qwik City request handler package uses.
+
+- [Middleware Source](https://github.com/QwikDev/qwik/tree/main/packages/qwik-city/middleware)
+
+### Add To The Starter CLI
+
+The next step is to add the new adapter to the Starter CLI. For this step it's probably best to ping the core team on [Discord](https://qwik.dev/chat) to help you get started. The CLI is a great place to add the new adapter, because it's a great way to test the new adapter and make sure it's working as expected.
+
+## Cache Headers
+
+To assure proper caching of your built files, you need to serve them with the correct cache headers.
+
+By default, files are generated under `dist/build` and `dist/assets`, and they get a content hash in the filename. This means that the name is unique for the contents of those files, and they can be cached indefinitely.
+
+Therefore, we recommend that you serve these files with the following header:
+
+```
+Cache-Control: public, max-age=31536000, immutable
+```
+
+The various deployment platforms have different ways of configuring this, and the starters should have the correct configuration already set (you can `npx qwik add` again to update the configuration). However, there is no one-size-fits-all solution, so verify that caching is working as expected.
+
+To verify proper caching, you can visit your site and open the developer tools to inspect the network requests. When you reload the page, you should see that all requests for assets are coming from the browser cache and are not contacting the server. Even a `304 Not Modified` response is not good enough, because it means that the browser is still unsure that the content is cached.
+
+ ⚠️ **Note**: If your app uses [`compiled-i18n`](https://github.com/wmertens/compiled-i18n) or [`qwik-speak`](https://github.com/robisim74/qwik-speak), then translated bundles (`build/[locale]/*.js`) can retain identical filenames between builds even when translations change. Consider how long you want to cache these files for so users get the latest translations.
+
+## Origin
+
+We recommend setting the `ORIGIN` environment variable to the origin of your site (e.g. `https://example.com/`). This is used to resolve relative URLs and to validate the request origin when performing CSRF checks.
+
+However, if the origin of your application is not static because you're hosting multiple sites, the Node.js based middleware provides a `getOrigin()` callback option to reliably reconstruct the origin (scheme + host + optional port).
+
+
+### Examples
+
+1) Simple static origin from environment (recommended for production if you know the origin):
+
+```ts
+// Provide ORIGIN=https://example.com in your environment
+createQwikCity({
+  origin: process.env.ORIGIN,
+});
+```
+
+2) Compute origin using forwarded headers (common when behind proxies). Use the headers your proxy provides, e.g. `X-Forwarded-Proto` and `X-Forwarded-Host`:
+
+```ts
+createQwikCity({
+  getOrigin(req) {
+    const proto = req.headers['x-forwarded-proto'] as string | undefined;
+    const host = req.headers['x-forwarded-host'] as string | undefined || (req.headers.host as string | undefined);
+    if (!host) return null;
+    return `${proto ?? 'https'}://${host}`;
+  }
+});
+```
+
+3) Example: Cloud Run adapter (reconstructs the origin from forwarded headers)
+
+```ts
+// starters/adapters/cloud-run entry (illustrative)
+createQwikCity({
+  getOrigin(req) {
+    // Cloud Run sets X-Forwarded-Proto and Host headers
+    const proto = req.headers['x-forwarded-proto'] as string | undefined;
+    const host = (req.headers['host'] || req.headers['x-forwarded-host']) as string | undefined;
+    if (!host) return null;
+    return `${proto ?? 'https'}://${host}`;
+  }
+});
+```
+
+### Notes and best practices
+
+- Prefer a static `ORIGIN` environment variable for production whenever possible. It is the most reliable and secure option.
+- When relying on forwarded headers, ensure your proxy/ALB sets them and consider locking the trusted proxy list so attackers cannot spoof them.
+- Return `null` from `getOrigin` when the origin cannot be determined; the middleware will fall back to deriving it from the request.
+

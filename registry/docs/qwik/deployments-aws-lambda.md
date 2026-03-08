@@ -1,0 +1,91 @@
+---
+title: AWS Lambda | Deployments
+contributors:
+  - leifermendez
+  - WilliamEspegren
+updated_at: '2023-09-11T11:03:36Z'
+created_at: '2023-06-30T06:00:35Z'
+---
+
+import PackageManagerTabs from '~/components/package-manager-tabs/index.tsx';
+
+# AWS Adapter
+
+Qwik City AWS Adapter allows you to connect Qwik City to [AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/nodejs-handler.html?icmpid=docs_lambda_hel).
+
+## Installation
+
+To integrate the `aws-lambda` adapter, use the `add` command:
+
+<PackageManagerTabs>
+<span q:slot="pnpm">
+```shell
+pnpm run qwik add aws-lambda
+```
+</span>
+<span q:slot="npm">
+```shell
+npm run qwik add aws-lambda
+```
+</span>
+<span q:slot="yarn">
+```shell
+yarn run qwik add aws-lambda
+```
+</span>
+<span q:slot="bun">
+```shell
+bun run qwik add aws-lambda
+```
+</span>
+</PackageManagerTabs>
+
+The adapter will add a new `vite.config.ts` within the `adapters/` directory, and a new entry file will be created, such as:
+
+```shell
+└── adapters/
+    └── aws-lambda
+        └── vite.config.ts
+└── src/
+    └── entry_aws-lambda.tsx
+```
+
+Additionally, within the `package.json`, the `build.server` and `serverless:preview` scripts will be updated.
+
+## Production build
+
+To build the application for production, use the `build` command, this command will automatically run `build.server` and `build.client`:
+
+<PackageManagerTabs>
+<span q:slot="pnpm">
+```shell
+pnpm run build
+```
+</span>
+<span q:slot="npm">
+```shell
+npm run build
+```
+</span>
+<span q:slot="yarn">
+```shell
+yarn run build
+```
+</span>
+<span q:slot="bun">
+```shell
+bun run build
+```
+</span>
+</PackageManagerTabs>
+
+## Deploy to AWS
+
+Before deployment, you need to set up your [AWS Credentials](https://www.serverless.com/framework/docs/providers/aws/guide/credentials). Under the hood, 
+the adapter uses [serverless](https://www.serverless.com/).
+
+```shell
+serverless deploy
+```
+Done!
+

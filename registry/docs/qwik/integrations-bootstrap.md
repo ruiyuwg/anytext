@@ -1,0 +1,78 @@
+---
+title: Bootstrap | Integrations
+keywords: 'bootstrap, spinners, alerts, buttons'
+contributors:
+  - mugan86
+  - mhevery
+  - aendel
+  - jemsco
+updated_at: '2023-09-26T19:56:54Z'
+created_at: '2023-09-26T19:56:54Z'
+---
+
+import PackageManagerTabs from '~/components/package-manager-tabs/index.tsx';
+
+# Bootstrap
+
+Bootstrap is a robust, expandable, and feature-rich frontend toolkit that includes HTML, CSS, and JavaScript. You can build and customize using Sass, benefit from a predefined grid system and components, and enhance your projects with powerful JavaScript plugins.
+
+More information at [https://getbootstrap.com/](https://getbootstrap.com/)
+
+## Usage
+
+You can add Bootstrap easily by using the following Qwik starter script:
+
+<PackageManagerTabs>
+<span q:slot="pnpm">
+```shell
+pnpm run qwik add bootstrap
+```
+</span>
+<span q:slot="npm">
+```shell
+npm run qwik add bootstrap
+```
+</span>
+<span q:slot="yarn">
+```shell
+yarn run qwik add bootstrap
+```
+</span>
+<span q:slot="bun">
+```shell
+bun run qwik add bootstrap
+```
+</span>
+</PackageManagerTabs>
+
+The previous command updates your app with the necessary dependencies.
+
+- `bootstrap@5`
+- `@types/bootstrap@5`
+
+It also adds new files inside to your project folder:
+
+- `src/models/bootstrap.ts`: Model to define Bootstrap components info to use in props.
+- `src/constants/data.ts`: Constant values information that we will use in the example to be created with this integration.
+- `src/components/bootstrap/button.tsx`: Button component feature with Bootstrap.
+- `src/components/bootstrap/alert.tsx`: Alert component feature with Bootstrap.
+- `src/components/bootstrap/spinner.tsx`: Spinner component feature with Bootstrap.
+- `src/components/bootstrap/index.ts`: Entry point where we will add the components of the elements that will be used, for easier and cleaner access to them.
+- `src/components/bootstrap/navbar.tsx`: Navbar component functionality with Bootstrap to demonstrate how to add and use JavaScript functionalities without encountering the 'document is not defined' error due to improper import declaration in the Qwik lifecycle.
+- `src/routes/bootstrap/layout.tsx`: Layout where we add Bootstrap styling configuration to ensure styles are applied to all routes nested within the main Bootstrap route.
+- `src/routes/bootstrap/index.tsx`: Bootstrap components option home page.
+- `src/routes/bootstrap/buttons/index.tsx`: Example to consume Button component with demo data.
+- `src/routes/bootstrap/alerts/index.tsx`: Example to consume Alert component with demo data.
+- `src/routes/bootstrap/spinners/index.tsx`: Example to consume Spinner component with demo data.
+
+## After integrating Bootstrap
+
+After integrating Bootstrap, you can access the ﻿/bootstrap/ route where you will find all the examples available for this integration.
+
+## Interesting info about Bootstrap
+
+### Official
+
+- `Examples`: Examples that we can use as inspiration and learn how to create interesting websites using Bootstrap. [Reference](https://getbootstrap.com/docs/5.3/examples/).
+- `Docs`: All necessary info to work with Bootstrap. [Reference](https://getbootstrap.com/docs/5.3/getting-started/introduction/)
+

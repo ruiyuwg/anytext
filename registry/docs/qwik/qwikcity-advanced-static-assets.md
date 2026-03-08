@@ -1,0 +1,29 @@
+---
+title: Static Assets | Advanced
+description: How to serve static assets in your Qwik app.
+contributors:
+  - manucorporat
+  - Oyemade
+  - mhevery
+  - adamdbradley
+  - the-r3aper7
+  - mrhoodz
+  - thejackshelton
+  - hamatoyogi
+updated_at: '2023-06-25T19:43:33Z'
+created_at: '2023-03-20T23:45:13Z'
+---
+
+# Static Assets
+
+Use the `/public` folder to store all static assets such as images, fonts, etc.
+
+All static assets are served from your server's root (`/` as in `https://example.com/`) folder and superimposed under your routes (routes have priority).
+
+```bash
+public/
+├── favicon.ico           # https://example.com/favicon.ico
+└── images/
+    └── logo.png          # https://example.com/images/logo.png
+```
+

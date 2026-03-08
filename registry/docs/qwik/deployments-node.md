@@ -1,0 +1,173 @@
+---
+title: Node Middleware | Deployments
+contributors:
+  - adamdbradley
+  - manucorporat
+  - mousaAM
+  - reemardelarosa
+  - mhevery
+  - Craiqser
+  - mrhoodz
+updated_at: '2023-10-11T13:38:53Z'
+created_at: '2023-04-06T21:28:28Z'
+---
+
+import PackageManagerTabs from '~/components/package-manager-tabs/index.tsx';
+
+# Node Middleware
+
+Qwik City Node middleware allows you to connect Qwik City to a Node.js server which uses the common middleware functionality. Some Node servers include:
+
+- [Express](https://expressjs.com/)
+- [Fastify](https://fastify.dev/)
+- [Connect](https://www.npmjs.com/package/connect)
+- [Polka](https://www.npmjs.com/package/polka)
+
+## Installation
+
+To integrate the `node` adapter, use the `add` command:
+
+- For [Express](https://expressjs.com/):
+
+
+<PackageManagerTabs>
+<span q:slot="pnpm">
+```shell
+pnpm run qwik add express
+```
+</span>
+<span q:slot="npm">
+```shell
+npm run qwik add express
+```
+</span>
+<span q:slot="yarn">
+```shell
+yarn run qwik add express
+```
+</span>
+<span q:slot="bun">
+```shell
+bun run qwik add express
+```
+</span>
+</PackageManagerTabs>
+
+- For [Fastify](https://fastify.dev/)
+
+
+<PackageManagerTabs>
+<span q:slot="pnpm">
+```shell
+pnpm run qwik add fastify
+```
+</span>
+<span q:slot="npm">
+```shell
+npm run qwik add fastify
+```
+</span>
+<span q:slot="yarn">
+```shell
+yarn run qwik add fastify
+```
+</span>
+<span q:slot="bun">
+```shell
+bun run qwik add fastify
+```
+</span>
+</PackageManagerTabs>
+
+## Production build
+
+To build the application for production, use the `build` command, this command will automatically run `build.server` and `build.client`:
+
+<PackageManagerTabs>
+<span q:slot="pnpm">
+```shell
+pnpm run build
+```
+</span>
+<span q:slot="npm">
+```shell
+npm run build
+```
+</span>
+<span q:slot="yarn">
+```shell
+yarn run build
+```
+</span>
+<span q:slot="bun">
+```shell
+bun run build
+```
+</span>
+</PackageManagerTabs>
+
+## Dev serve
+
+To deploy the application for development:
+
+<PackageManagerTabs>
+<span q:slot="pnpm">
+```shell
+pnpm run serve
+```
+</span>
+<span q:slot="npm">
+```shell
+npm run serve
+```
+</span>
+<span q:slot="yarn">
+```shell
+yarn run serve
+```
+</span>
+<span q:slot="bun">
+```shell
+bun run serve
+```
+</span>
+</PackageManagerTabs>
+
+## Production deploy
+
+Since you are choosing Node, here you are in your own, after running the `build` command:
+
+- The `dist` folder will be created including all the static files.
+- The `server` folder will be created including all node server files.
+
+In order to deploy the server, you need to run the `server/entry.[server].js` file in the server of your choice, where `[server]` can be [express](https://expressjs.com/) or [fastify](https://fastify.dev/).
+
+It's **very important to correctly configure the `ORIGIN` env variable**, which is used to check against [CSRF attacks](https://owasp.org/www-community/attacks/csrf). The origin must match the origin of the client application.
+
+> For example, if you plan to deploy your application to `https://example.com/app`, then you need to set the `ORIGIN` environment variable to `https://example.com`.
+>
+> ```shell
+> ORIGIN=https://example.com node server/entry.express
+> ```
+
+You can check [how to deploy with Docker here](/docs/cookbook/node-docker-deploy/index.mdx).
+
+### CSRF Protection
+
+By default, all Qwik City applications are protected against [CSRF attacks](https://owasp.org/www-community/attacks/csrf) for all POST, PATCH, DELETE form submits.
+
+This protection is enabled by default and it's the reason why you need to set the `ORIGIN` environment variable when deploying your application for production.
+
+If you want to disable CSRF protection, you can set `checkOrigin: false` in the `createQwikCity()` options in `src/entry.preview.tsx` or `src/entry.[server].tsx`:
+
+```tsx {6} /checkOrigin/ title="entry.preview.tsx"
+// ...
+const { router, notFound, staticFile } = createQwikCity({
+  render,
+  qwikCityPlan,
+  manifest,
+  checkOrigin: false,
+});
+// ...
+```
+
