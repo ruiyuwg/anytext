@@ -1,5 +1,5 @@
 {
-  "version": 77,
+  "version": 78,
   "updatedAt": "2026-03-08",
   "libraries": [
     {
@@ -81687,6 +81687,2431 @@
           ],
           "path": "mui/upgrade-to-v9.md",
           "tokens": 1149
+        }
+      ]
+    },
+    {
+      "id": "nestjs",
+      "name": "NestJS",
+      "description": "Progressive Node.js framework for building scalable server-side applications with decorators, modules, and dependency injection",
+      "version": "10",
+      "topics": [
+        {
+          "id": "application-context",
+          "title": "application-context",
+          "description": "There are several ways of mounting a Nest application. You can create a web app, a microservice or just a bare Nest *...",
+          "tags": [
+            "TasksService",
+            "TasksModule",
+            "AppModule",
+            "get()",
+            "strict: true",
+            "app.get()",
+            "app.select",
+            "app.close()",
+            "bootstrap"
+          ],
+          "path": "nestjs/application-context.md",
+          "tokens": 1073
+        },
+        {
+          "id": "libraries",
+          "title": "libraries",
+          "description": "Many applications need to solve the same general problems, or re-use a modular component in several different context...",
+          "tags": [
+            "AuthModule",
+            "library",
+            "my-library",
+            "libs",
+            "nest-cli.json",
+            "\"projects\"",
+            "\"type\"",
+            "\"library\"",
+            "\"application\"",
+            "\"entryFile\""
+          ],
+          "path": "nestjs/libraries.md",
+          "tokens": 1869
+        },
+        {
+          "id": "overview",
+          "title": "overview",
+          "description": "The [Nest CLI](https://github.com/nestjs/nest-cli) is a command-line interface tool that helps you to initialize, dev...",
+          "tags": [
+            "nest",
+            "-g",
+            "npm",
+            "npm install -g",
+            "npx @nestjs/cli@latest",
+            "new",
+            "add",
+            "generate",
+            "nest new",
+            "node_modules"
+          ],
+          "path": "nestjs/overview.md",
+          "tokens": 2102
+        },
+        {
+          "id": "scripts",
+          "title": "scripts",
+          "description": "This section provides additional background on how the `nest` command interacts with compilers and scripts to help De...",
+          "tags": [
+            "nest",
+            "package.json",
+            "nest build",
+            "nest start",
+            "nest new",
+            "tsc",
+            "swc",
+            "ts-loader",
+            "tsconfig-paths",
+            "tsconfig.json"
+          ],
+          "path": "nestjs/scripts.md",
+          "tokens": 1580
+        },
+        {
+          "id": "usages",
+          "title": "usages",
+          "description": "Creates a new (standard mode) Nest project.",
+          "tags": [
+            "<name>",
+            "/src",
+            "/test",
+            "--dry-run",
+            "-d",
+            "--skip-git",
+            "-g",
+            "--skip-install",
+            "-s",
+            "--package-manager [package-manager]"
+          ],
+          "path": "nestjs/usages.md",
+          "tokens": 3717
+        },
+        {
+          "id": "workspaces",
+          "title": "workspaces",
+          "description": "Nest has two modes for organizing code:",
+          "tags": [
+            "eslint",
+            "nest-cli.json",
+            "nest new",
+            "name",
+            "package.json",
+            "tsconfig.json",
+            "npm install",
+            "nest generate app",
+            "nest generate library",
+            "nest"
+          ],
+          "path": "nestjs/workspaces.md",
+          "tokens": 5355
+        },
+        {
+          "id": "components",
+          "title": "components",
+          "description": "Providers are a core concept in Nest. Many of the basic Nest classes, such as services, repositories, factories, and ...",
+          "tags": [
+            "CatsController",
+            "providers",
+            "CatsService",
+            "$ nest g service cats",
+            "@Injectable()",
+            "Cat",
+            "private",
+            "catsService",
+            "@Optional()",
+            "HTTP_OPTIONS"
+          ],
+          "path": "nestjs/components.md",
+          "tokens": 2426
+        },
+        {
+          "id": "controllers",
+          "title": "controllers",
+          "description": "Controllers are responsible for handling incoming **requests** and sending **responses** back to the client.",
+          "tags": [
+            "nest g resource [name]",
+            "@Controller()",
+            "cats",
+            "/cats",
+            "$ nest g controller [name]",
+            "@Get()",
+            "findAll()",
+            "GET /cats",
+            "@Get('breed')",
+            "GET /cats/breed"
+          ],
+          "path": "nestjs/controllers.md",
+          "tokens": 6670
+        },
+        {
+          "id": "custom-decorators",
+          "title": "custom-decorators",
+          "description": "Nest is built around a language feature called **decorators**. Decorators are a well-known concept in a lot of common...",
+          "tags": [
+            "@User()",
+            "data",
+            "user",
+            "createParamDecorator<T>()",
+            "any",
+            "@Body()",
+            "@Param()",
+            "@Query()",
+            "validateCustomDecorators",
+            "ValidationPipe"
+          ],
+          "path": "nestjs/custom-decorators.md",
+          "tokens": 1903
+        },
+        {
+          "id": "deployment",
+          "title": "Use the official Node.js image as the base image",
+          "description": "When you're ready to deploy your NestJS application to production, there are key steps you can take to ensure it runs...",
+          "tags": [
+            "dist",
+            "nest build",
+            "npm run build my-app",
+            "main.js",
+            ".ts",
+            "tsconfig.json",
+            "dist/main.js",
+            "dist/src/main.js",
+            "NODE_ENV",
+            "production"
+          ],
+          "path": "nestjs/deployment.md",
+          "tokens": 4519
+        },
+        {
+          "id": "ci-cd",
+          "title": "ci-cd",
+          "description": "> info **Hint** This chapter covers the Nest Devtools integration with the Nest framework. If you are looking for the...",
+          "tags": [
+            "main.ts",
+            "GraphPublisher",
+            "@nestjs/devtools-integration",
+            "PUBLISH_GRAPH",
+            "preview",
+            "true",
+            "publishOptions",
+            "master",
+            ".github/workflows",
+            "publish-graph.yml"
+          ],
+          "path": "nestjs/ci-cd.md",
+          "tokens": 2917
+        },
+        {
+          "id": "overview",
+          "title": "overview",
+          "description": "> info **Hint** This chapter covers the Nest Devtools integration with the Nest framework. If you are looking for the...",
+          "tags": [
+            "main.ts",
+            "snapshot",
+            "true",
+            "@nestjs/graphql",
+            "npm i @nestjs/graphql@11",
+            "app.module.ts",
+            "DevtoolsModule",
+            "NODE_ENV",
+            "npm run start:dev",
+            "InternalCoreModule"
+          ],
+          "path": "nestjs/overview.md",
+          "tokens": 2440
+        },
+        {
+          "id": "enterprise",
+          "title": "enterprise",
+          "description": "Our goal is to ensure that your developers are successful and productive with NestJS as well as other modern technolo...",
+          "tags": [],
+          "path": "nestjs/enterprise.md",
+          "tokens": 575
+        },
+        {
+          "id": "exception-filters",
+          "title": "exception-filters",
+          "description": "Nest comes with a built-in **exceptions layer** which is responsible for processing all unhandled exceptions across a...",
+          "tags": [
+            "HttpException",
+            "http-errors",
+            "statusCode",
+            "message",
+            "InternalServerErrorException",
+            "@nestjs/common",
+            "CatsController",
+            "findAll()",
+            "GET",
+            "HttpStatus"
+          ],
+          "path": "nestjs/exception-filters.md",
+          "tokens": 4543
+        },
+        {
+          "id": "errors",
+          "title": "example chain AppModule -> FooModule",
+          "description": "During your development with NestJS, you may encounter various errors as you learn the framework.",
+          "tags": [
+            "<provider>",
+            "providers",
+            "imports",
+            "<module>",
+            "<unknown_token>",
+            "dependency",
+            "Object",
+            "@Inject()",
+            "import type ...",
+            "ModuleRef"
+          ],
+          "path": "nestjs/errors.md",
+          "tokens": 1958
+        },
+        {
+          "id": "global-prefix",
+          "title": "global-prefix",
+          "description": "To set a prefix for **every route** registered in an HTTP application, use the `setGlobalPrefix()` method of the `INe...",
+          "tags": [
+            "setGlobalPrefix()",
+            "INestApplication",
+            "path",
+            "*",
+            ":param",
+            "*splat"
+          ],
+          "path": "nestjs/global-prefix.md",
+          "tokens": 223
+        },
+        {
+          "id": "http-adapter",
+          "title": "http-adapter",
+          "description": "Occasionally, you may want to access the underlying HTTP server, either within the Nest application context or from t...",
+          "tags": [
+            "HttpAdapter",
+            "getHttpAdapter()",
+            "HttpAdapterHost",
+            "@nestjs/core",
+            "httpAdapter",
+            "ExpressAdapter",
+            "FastifyAdapter",
+            "AbstractHttpAdapter",
+            "getInstance()",
+            "listen$"
+          ],
+          "path": "nestjs/http-adapter.md",
+          "tokens": 626
+        },
+        {
+          "id": "hybrid-application",
+          "title": "hybrid-application",
+          "description": "A hybrid application is one that listens for requests from two or more different sources. This can combine an HTTP se...",
+          "tags": [
+            "createMicroservice",
+            "INestApplication",
+            "INestMicroservice",
+            "connectMicroservice()",
+            "app.listen(port)",
+            "app.init()",
+            "@MessagePattern()",
+            "Transport",
+            "@Payload()",
+            "@Ctx()"
+          ],
+          "path": "nestjs/hybrid-application.md",
+          "tokens": 804
+        },
+        {
+          "id": "keep-alive-connections",
+          "title": "keep-alive-connections",
+          "description": "By default, the HTTP adapters of NestJS will wait until the response is finished before closing the application. But ...",
+          "tags": [
+            "Connection: Keep-Alive",
+            "forceCloseConnections",
+            "app.enableShutdownHooks()",
+            "--watch",
+            "main.ts"
+          ],
+          "path": "nestjs/keep-alive-connections.md",
+          "tokens": 311
+        },
+        {
+          "id": "multiple-servers",
+          "title": "multiple-servers",
+          "description": "To create an application that uses the HTTPS protocol, set the `httpsOptions` property in the options object passed t...",
+          "tags": [
+            "httpsOptions",
+            "create()",
+            "NestFactory",
+            "FastifyAdapter",
+            "http.createServer",
+            "https.createServer",
+            "app.close",
+            "ExpressAdapter",
+            "@nestjs/platform-express",
+            "http"
+          ],
+          "path": "nestjs/multiple-servers.md",
+          "tokens": 620
+        },
+        {
+          "id": "raw-body",
+          "title": "raw-body",
+          "description": "One of the most common use-case for having access to the raw request body is performing webhook signature verificatio...",
+          "tags": [
+            "bodyParser: false",
+            "RawBodyRequest",
+            "rawBody",
+            "json",
+            "urlencoded",
+            "text",
+            "NestFactory.create",
+            "NestExpressApplication",
+            ".useBodyParser",
+            "100kb"
+          ],
+          "path": "nestjs/raw-body.md",
+          "tokens": 1036
+        },
+        {
+          "id": "request-lifecycle",
+          "title": "request-lifecycle",
+          "description": "Nest applications handle requests and produce responses in a sequence we refer to as the **request lifecycle**. With ...",
+          "tags": [
+            "app.use",
+            "Guard1",
+            "Guard2",
+            "Guard3",
+            "app.useGlobalGuard()",
+            "catchError",
+            "@UsePipes()",
+            "GeneralValidationPipe",
+            "query",
+            "params"
+          ],
+          "path": "nestjs/request-lifecycle.md",
+          "tokens": 1356
+        },
+        {
+          "id": "serverless",
+          "title": "serverless",
+          "description": "Serverless computing is a cloud computing execution model in which the cloud provider allocates machine resources on-...",
+          "tags": [
+            "express",
+            "tsc",
+            "webpack",
+            "@nestjs/platform-express",
+            "nest build --webpack",
+            "node_modules",
+            "webpack.config.js",
+            "$ nest g resource",
+            "AppModule",
+            "LazyModuleLoader"
+          ],
+          "path": "nestjs/serverless.md",
+          "tokens": 4044
+        },
+        {
+          "id": "first-steps",
+          "title": "Lint and autofix with eslint",
+          "description": "In this set of articles, you'll learn the **core fundamentals** of Nest. To get familiar with the essential building ...",
+          "tags": [
+            "--strict",
+            "nest new",
+            "project-name",
+            "src/",
+            "app.controller.ts",
+            "app.controller.spec.ts",
+            "app.module.ts",
+            "app.service.ts",
+            "main.ts",
+            "NestFactory"
+          ],
+          "path": "nestjs/first-steps.md",
+          "tokens": 2220
+        },
+        {
+          "id": "async-components",
+          "title": "async-components",
+          "description": "At times, the application start should be delayed until one or more **asynchronous tasks** are completed. For example...",
+          "tags": [
+            "async/await",
+            "useFactory",
+            "Promise",
+            "await",
+            "@Inject('ASYNC_CONNECTION')"
+          ],
+          "path": "nestjs/async-components.md",
+          "tokens": 291
+        },
+        {
+          "id": "circular-dependency",
+          "title": "circular-dependency",
+          "description": "A circular dependency occurs when two classes depend on each other. For example, class A needs class B, and class B a...",
+          "tags": [
+            "cats/cats.controller",
+            "cats",
+            "cats/cats.service",
+            "forwardRef()",
+            "CatsService",
+            "CommonService",
+            "@Inject()",
+            "@nestjs/common",
+            "Scope.REQUEST",
+            "ModuleRef"
+          ],
+          "path": "nestjs/circular-dependency.md",
+          "tokens": 925
+        },
+        {
+          "id": "dependency-injection",
+          "title": "dependency-injection",
+          "description": "In earlier chapters, we touched on various aspects of **Dependency Injection (DI)** and how it is used in Nest. One e...",
+          "tags": [
+            "@Injectable()",
+            "CatsService",
+            "cats.service.ts",
+            "cats.controller.ts",
+            "CatsController",
+            "app.module.ts",
+            "SINGLETON",
+            "@Module()",
+            "app.module",
+            "providers"
+          ],
+          "path": "nestjs/dependency-injection.md",
+          "tokens": 4066
+        },
+        {
+          "id": "discovery-service",
+          "title": "discovery-service",
+          "description": "The `DiscoveryService` provided by the `@nestjs/core` package is a powerful utility that allows developers to dynamic...",
+          "tags": [
+            "DiscoveryService",
+            "@nestjs/core",
+            "DiscoveryModule"
+          ],
+          "path": "nestjs/discovery-service.md",
+          "tokens": 1067
+        },
+        {
+          "id": "dynamic-modules",
+          "title": "dynamic-modules",
+          "description": "The [Modules chapter](/modules) covers the basics of Nest modules, and includes a brief introduction to [dynamic modu...",
+          "tags": [
+            "UsersModule",
+            "UsersService",
+            "AuthModule",
+            "AuthService",
+            "ConfigModule",
+            "options",
+            ".env",
+            "config",
+            "src",
+            "imports"
+          ],
+          "path": "nestjs/dynamic-modules.md",
+          "tokens": 7196
+        },
+        {
+          "id": "execution-context",
+          "title": "execution-context",
+          "description": "Nest provides several utility classes that help make it easy to write applications that function across multiple appl...",
+          "tags": [
+            "ArgumentsHost",
+            "ExecutionContext",
+            "host",
+            "catch()",
+            "@nestjs/platform-express",
+            "[request, response, next]",
+            "request",
+            "response",
+            "next",
+            "[root, args, context, info]"
+          ],
+          "path": "nestjs/execution-context.md",
+          "tokens": 3545
+        },
+        {
+          "id": "lazy-loading-modules",
+          "title": "lazy-loading-modules",
+          "description": "By default, modules are eagerly loaded, which means that as soon as the application loads, so do all the modules, whe...",
+          "tags": [
+            "LazyModuleLoader",
+            "@nestjs/core",
+            "main.ts",
+            "LazyModuleLoader#load",
+            "LazyModule",
+            "lazy.module.ts",
+            "LazyService",
+            "tsconfig.json",
+            "compilerOptions.module",
+            "\"esnext\""
+          ],
+          "path": "nestjs/lazy-loading-modules.md",
+          "tokens": 1659
+        },
+        {
+          "id": "lifecycle-events",
+          "title": "lifecycle-events",
+          "description": "A Nest application, as well as every application element, has a lifecycle managed by Nest. Nest provides **lifecycle ...",
+          "tags": [
+            "onModuleInit",
+            "onApplicationBootstrap",
+            "app.init()",
+            "app.listen()",
+            "onModuleDestroy",
+            "beforeApplicationShutdown",
+            "onApplicationShutdown",
+            "app.close()",
+            "enableShutdownHooks",
+            "onModuleInit()"
+          ],
+          "path": "nestjs/lifecycle-events.md",
+          "tokens": 2213
+        },
+        {
+          "id": "module-reference",
+          "title": "module-reference",
+          "description": "Nest provides the `ModuleRef` class to navigate the internal list of providers and obtain a reference to any provider...",
+          "tags": [
+            "ModuleRef",
+            "@nestjs/core",
+            "get()",
+            "{{ '{' }} strict: false {{ '}' }}",
+            "resolve()",
+            "ContextIdFactory",
+            "create()",
+            "REQUEST",
+            "ContextIdFactory.create()",
+            "undefined"
+          ],
+          "path": "nestjs/module-reference.md",
+          "tokens": 2041
+        },
+        {
+          "id": "platform-agnosticism",
+          "title": "platform-agnosticism",
+          "description": "Nest is a platform-agnostic framework. This means you can develop **reusable logical parts** that can be used across ...",
+          "tags": [],
+          "path": "nestjs/platform-agnosticism.md",
+          "tokens": 342
+        },
+        {
+          "id": "provider-scopes",
+          "title": "provider-scopes",
+          "description": "For people coming from different programming language backgrounds, it might be unexpected to learn that in Nest, almo...",
+          "tags": [
+            "scope",
+            "@Injectable()",
+            "Scope",
+            "@nestjs/common",
+            "Scope.DEFAULT",
+            "ControllerOptions",
+            "REQUEST",
+            "CatsService",
+            "CatsController",
+            "CatsRepository"
+          ],
+          "path": "nestjs/provider-scopes.md",
+          "tokens": 3397
+        },
+        {
+          "id": "unit-testing",
+          "title": "unit-testing",
+          "description": "Automated testing is considered an essential part of any serious software development effort. Automation makes it eas...",
+          "tags": [
+            "CatsController",
+            "CatsService",
+            ".spec",
+            ".test",
+            "catsController",
+            "@nestjs/testing",
+            "Test",
+            "createTestingModule()",
+            "@Module()",
+            "TestingModule"
+          ],
+          "path": "nestjs/unit-testing.md",
+          "tokens": 5354
+        },
+        {
+          "id": "cli-plugin",
+          "title": "OR npx ts-node apps/{YOUR_APP}/src/generate-metadata.ts",
+          "description": "> warning **Warning** This chapter applies only to the code first approach.",
+          "tags": [
+            "@Field",
+            "@HideField",
+            "nullable",
+            "name?: string",
+            "nullable: true",
+            "type",
+            "introspectComments",
+            "true",
+            "author.entity.ts",
+            "typeFileNameSuffix"
+          ],
+          "path": "nestjs/cli-plugin.md",
+          "tokens": 1816
+        },
+        {
+          "id": "complexity",
+          "title": "complexity",
+          "description": "> warning **Warning** This chapter applies only to the code first approach.",
+          "tags": [
+            "1",
+            "@nestjs/graphql",
+            "ComplexityPlugin",
+            "20",
+            "simpleEstimator",
+            "fieldExtensionsEstimator",
+            "complexity",
+            "@Field()",
+            "@Query()",
+            "@Mutation()"
+          ],
+          "path": "nestjs/complexity.md",
+          "tokens": 969
+        },
+        {
+          "id": "directives",
+          "title": "directives",
+          "description": "A directive can be attached to a field or fragment inclusion, and can affect execution of the query in any way the se...",
+          "tags": [
+            "@include(if: Boolean)",
+            "@skip(if: Boolean)",
+            "@deprecated(reason: String)",
+            "@",
+            "mapSchema",
+            "upperDirectiveTransformer",
+            "GraphQLModule#forRoot",
+            "transformSchema",
+            "@upper",
+            "@Directive()"
+          ],
+          "path": "nestjs/directives.md",
+          "tokens": 1012
+        },
+        {
+          "id": "extensions",
+          "title": "extensions",
+          "description": "> warning **Warning** This chapter applies only to the code first approach.",
+          "tags": [
+            "@Extensions()",
+            "@nestjs/graphql",
+            "role",
+            "Role.ADMIN",
+            "Role",
+            "checkRoleMiddleware",
+            "password"
+          ],
+          "path": "nestjs/extensions.md",
+          "tokens": 615
+        },
+        {
+          "id": "federation",
+          "title": "federation",
+          "description": "Federation offers a means of splitting your monolithic GraphQL server into independent microservices. It consists of ...",
+          "tags": [
+            "@key",
+            "User",
+            "id",
+            "extend",
+            "Query",
+            "resolveReference()",
+            "@ResolveReference()",
+            "GraphQLModule",
+            "ApolloFederationDriver",
+            "getPosts"
+          ],
+          "path": "nestjs/federation.md",
+          "tokens": 6485
+        },
+        {
+          "id": "field-middleware",
+          "title": "field-middleware",
+          "description": "> warning **Warning** This chapter applies only to the code first approach.",
+          "tags": [
+            "middleware",
+            "graphql-middleware",
+            "MiddlewareContext",
+            "NextFn",
+            "context",
+            "FieldMiddleware",
+            "next()",
+            "@Field()",
+            "title",
+            "Recipe"
+          ],
+          "path": "nestjs/field-middleware.md",
+          "tokens": 1209
+        },
+        {
+          "id": "guards-interceptors",
+          "title": "guards-interceptors",
+          "description": "In the GraphQL world, there is a lot of debate about handling issues like **authentication**, or **side-effects** of ...",
+          "tags": [
+            "root",
+            "args",
+            "context",
+            "info",
+            "ExecutionContext",
+            "GqlExecutionContext",
+            "GqlExecutionContext.create()",
+            "getArgs()",
+            "getContext()",
+            "ArgumentsHost"
+          ],
+          "path": "nestjs/guards-interceptors.md",
+          "tokens": 1672
+        },
+        {
+          "id": "interfaces",
+          "title": "interfaces",
+          "description": "Like many type systems, GraphQL supports interfaces. An **Interface** is an abstract type that includes a certain set...",
+          "tags": [
+            "@InterfaceType()",
+            "@nestjs/graphql",
+            "Character",
+            "implements",
+            "@ObjectType()",
+            "resolveType()",
+            "resolveType",
+            "friends",
+            "inheritResolversFromInterfaces",
+            "GraphQLModule"
+          ],
+          "path": "nestjs/interfaces.md",
+          "tokens": 938
+        },
+        {
+          "id": "mapped-types",
+          "title": "mapped-types",
+          "description": "> warning **Warning** This chapter applies only to the code first approach.",
+          "tags": [
+            "PartialType()",
+            "CreateUserInput",
+            "@nestjs/graphql",
+            "@InputType()",
+            "UpdateUserInput",
+            "InputType",
+            "@ObjectType",
+            "PickType()",
+            "OmitType()",
+            "email"
+          ],
+          "path": "nestjs/mapped-types.md",
+          "tokens": 1189
+        },
+        {
+          "id": "mutations",
+          "title": "mutations",
+          "description": "Most discussions of GraphQL focus on data fetching, but any complete data platform needs a way to modify server-side ...",
+          "tags": [
+            "upvotePost()",
+            "votes",
+            "@Mutation()",
+            "AuthorResolver",
+            "@Resolver",
+            "@ResolveField",
+            "@Args",
+            "@nestjs/graphql",
+            "postId",
+            "Int"
+          ],
+          "path": "nestjs/mutations.md",
+          "tokens": 924
+        },
+        {
+          "id": "plugins",
+          "title": "plugins",
+          "description": "Plugins enable you to extend Apollo Server's core functionality by performing custom operations in response to certai...",
+          "tags": [
+            "@Plugin",
+            "@nestjs/apollo",
+            "ApolloServerPlugin",
+            "@apollo/server",
+            "LoggingPlugin",
+            "plugins",
+            "ApolloServerOperationRegistry",
+            "MercuriusDriver",
+            "plugin",
+            "options"
+          ],
+          "path": "nestjs/plugins.md",
+          "tokens": 683
+        },
+        {
+          "id": "quick-start",
+          "title": "For Express and Apollo (default)",
+          "description": "[GraphQL](https://graphql.org/) is a powerful query language for APIs and a runtime for fulfilling those queries with...",
+          "tags": [
+            "@nestjs/graphql",
+            "GraphQLModule",
+            "@nestjs/apollo",
+            "@nestjs/mercurius",
+            "@nestjs/graphql@>=9",
+            "@nestjs/apollo^10",
+            "@nestjs/graphql@^8",
+            "apollo-server-express@2.x.x",
+            "mercurius",
+            "forRoot()"
+          ],
+          "path": "nestjs/quick-start.md",
+          "tokens": 4190
+        },
+        {
+          "id": "resolvers-map",
+          "title": "resolvers-map",
+          "description": "Resolvers provide the instructions for turning a [GraphQL](https://graphql.org/) operation (a query, mutation, or sub...",
+          "tags": [
+            "@nestjs/graphql",
+            "Author",
+            "Post",
+            "@Field()",
+            "ID",
+            "String",
+            "Boolean",
+            "Int",
+            "type => Int",
+            "string"
+          ],
+          "path": "nestjs/resolvers-map.md",
+          "tokens": 7251
+        },
+        {
+          "id": "scalars",
+          "title": "scalars",
+          "description": "A GraphQL object type has a name and fields, but at some point those fields have to resolve to some concrete data. Th...",
+          "tags": [
+            "Int",
+            "Float",
+            "String",
+            "Boolean",
+            "ID",
+            "Date",
+            "GraphQLID",
+            "GraphQLInt",
+            "GraphQLFloat",
+            "GraphQLISODateTime"
+          ],
+          "path": "nestjs/scalars.md",
+          "tokens": 2124
+        },
+        {
+          "id": "schema-generator",
+          "title": "schema-generator",
+          "description": "> warning **Warning** This chapter applies only to the code first approach.",
+          "tags": [
+            "GraphQLSchemaBuilderModule",
+            "GraphQLSchemaFactory",
+            "@nestjs/graphql",
+            "printSchema",
+            "graphql",
+            "gqlSchemaFactory.create()",
+            "skipCheck",
+            "false",
+            "orphanedTypes"
+          ],
+          "path": "nestjs/schema-generator.md",
+          "tokens": 435
+        },
+        {
+          "id": "sharing-models",
+          "title": "sharing-models",
+          "description": "> warning **Warning** This chapter applies only to the code first approach.",
+          "tags": [
+            "webpack",
+            "@nestjs/graphql"
+          ],
+          "path": "nestjs/sharing-models.md",
+          "tokens": 318
+        },
+        {
+          "id": "subscriptions",
+          "title": "subscriptions",
+          "description": "In addition to fetching data using queries and modifying data using mutations, the GraphQL spec supports a third oper...",
+          "tags": [
+            "subscription",
+            "installSubscriptionHandlers",
+            "true",
+            "subscriptions-transport-ws",
+            "graphql-ws",
+            "@Subscription()",
+            "@nestjs/graphql",
+            "PubSub",
+            "graphql-subscriptions",
+            "PubSub#asyncIterableIterator"
+          ],
+          "path": "nestjs/subscriptions.md",
+          "tokens": 5351
+        },
+        {
+          "id": "unions-and-enums",
+          "title": "unions-and-enums",
+          "description": "Union types are very similar to interfaces, but they don't get to specify any common fields between the types (read m...",
+          "tags": [
+            "Book",
+            "Author",
+            "ResultUnion",
+            "createUnionType",
+            "@nestjs/graphql",
+            "types",
+            "resolveType()",
+            "resolveType",
+            "createUnionType()",
+            "__resolveType"
+          ],
+          "path": "nestjs/unions-and-enums.md",
+          "tokens": 1681
+        },
+        {
+          "id": "guards",
+          "title": "guards",
+          "description": "A guard is a class annotated with the `@Injectable()` decorator, which implements the `CanActivate` interface.",
+          "tags": [
+            "@Injectable()",
+            "CanActivate",
+            "request",
+            "next()",
+            "ExecutionContext",
+            "AuthGuard",
+            "validateRequest()",
+            "canActivate()",
+            "Promise",
+            "Observable"
+          ],
+          "path": "nestjs/guards.md",
+          "tokens": 3358
+        },
+        {
+          "id": "interceptors",
+          "title": "interceptors",
+          "description": "An interceptor is a class annotated with the `@Injectable()` decorator and implements the `NestInterceptor` interface.",
+          "tags": [
+            "@Injectable()",
+            "NestInterceptor",
+            "intercept()",
+            "ExecutionContext",
+            "ArgumentsHost",
+            "CallHandler",
+            "handle()",
+            "Observable",
+            "POST /cats",
+            "create()"
+          ],
+          "path": "nestjs/interceptors.md",
+          "tokens": 3897
+        },
+        {
+          "id": "introduction",
+          "title": "introduction",
+          "description": "Nest (NestJS) is a framework for building efficient, scalable [Node.js](https://nodejs.org/) server-side applications...",
+          "tags": [
+            "--strict",
+            "nest new",
+            "http://localhost:3000/",
+            "javascript-starter.git",
+            "@nestjs/core",
+            "@nestjs/common",
+            "rxjs",
+            "reflect-metadata"
+          ],
+          "path": "nestjs/introduction.md",
+          "tokens": 903
+        },
+        {
+          "id": "basics",
+          "title": "basics",
+          "description": "In addition to traditional (sometimes called monolithic) application architectures, Nest natively supports the micros...",
+          "tags": [
+            "createMicroservice()",
+            "NestFactory",
+            "options",
+            "@MessagePattern()",
+            "@nestjs/microservices",
+            "accumulate()",
+            "{{ '{' }} cmd: 'sum' {{ '}' }}",
+            "data",
+            "async",
+            "Observable"
+          ],
+          "path": "nestjs/basics.md",
+          "tokens": 6219
+        },
+        {
+          "id": "custom-transport",
+          "title": "custom-transport",
+          "description": "Nest provides a variety of **transporters** out-of-the-box, as well as an API allowing developers to build new custom...",
+          "tags": [
+            "@nestjs/microservices",
+            "@nestjs/microservice",
+            "@EventPattern",
+            "@MessagePattern",
+            "GoogleCloudPubSubServer",
+            "listen()",
+            "close()",
+            "CustomTransportStrategy",
+            "Server",
+            "ServerRedis"
+          ],
+          "path": "nestjs/custom-transport.md",
+          "tokens": 3263
+        },
+        {
+          "id": "exception-filters",
+          "title": "exception-filters",
+          "description": "The only difference between the HTTP [exception filter](/exception-filters) layer and the corresponding microservices...",
+          "tags": [
+            "HttpException",
+            "RpcException",
+            "@nestjs/microservices",
+            "error",
+            "catch()",
+            "Observable",
+            "@UseFilters()",
+            "BaseExceptionFilter"
+          ],
+          "path": "nestjs/exception-filters.md",
+          "tokens": 837
+        },
+        {
+          "id": "grpc",
+          "title": "grpc",
+          "description": "[gRPC](https://github.com/grpc/grpc-node) is a modern, open source, high performance RPC framework that can run in an...",
+          "tags": [
+            ".proto",
+            "transport",
+            "createMicroservice()",
+            "options",
+            "join()",
+            "path",
+            "Transport",
+            "@nestjs/microservices",
+            "nest-cli.json",
+            "assets"
+          ],
+          "path": "nestjs/grpc.md",
+          "tokens": 5985
+        },
+        {
+          "id": "guards",
+          "title": "guards",
+          "description": "There is no fundamental difference between microservices guards and [regular HTTP application guards](/guards).",
+          "tags": [
+            "HttpException",
+            "RpcException",
+            "@nestjs/microservices",
+            "@UseGuards()"
+          ],
+          "path": "nestjs/guards.md",
+          "tokens": 209
+        },
+        {
+          "id": "interceptors",
+          "title": "interceptors",
+          "description": "There is no difference between [regular interceptors](/interceptors) and microservices interceptors. The following ex...",
+          "tags": [
+            "@UseInterceptors()"
+          ],
+          "path": "nestjs/interceptors.md",
+          "tokens": 177
+        },
+        {
+          "id": "kafka",
+          "title": "kafka",
+          "description": "[Kafka](https://kafka.apache.org/) is an open source, distributed streaming platform which has three key capabilities:",
+          "tags": [
+            "transport",
+            "createMicroservice()",
+            "options",
+            "Transport",
+            "@nestjs/microservices",
+            "ClientProxy",
+            "ClientKafkaProxy",
+            "ClientsModule",
+            "register()",
+            "name"
+          ],
+          "path": "nestjs/kafka.md",
+          "tokens": 5836
+        },
+        {
+          "id": "mqtt",
+          "title": "mqtt",
+          "description": "[MQTT](https://mqtt.org/) (Message Queuing Telemetry Transport) is an open source, lightweight messaging protocol, op...",
+          "tags": [
+            "createMicroservice()",
+            "Transport",
+            "@nestjs/microservices",
+            "options",
+            "ClientProxy",
+            "ClientsModule",
+            "register()",
+            "name",
+            "ClientProxyFactory",
+            "@Client()"
+          ],
+          "path": "nestjs/mqtt.md",
+          "tokens": 2432
+        },
+        {
+          "id": "nats",
+          "title": "nats",
+          "description": "[NATS](https://nats.io) is a simple, secure and high performance open source messaging system for cloud native applic...",
+          "tags": [
+            "createMicroservice()",
+            "Transport",
+            "@nestjs/microservices",
+            "options",
+            "ClientProxy",
+            "ClientsModule",
+            "register()",
+            "name",
+            "ClientProxyFactory",
+            "@Client()"
+          ],
+          "path": "nestjs/nats.md",
+          "tokens": 2466
+        },
+        {
+          "id": "pipes",
+          "title": "pipes",
+          "description": "There is no fundamental difference between [regular pipes](/pipes) and microservices pipes. The only difference is th...",
+          "tags": [
+            "HttpException",
+            "RpcException",
+            "@nestjs/microservices",
+            "@UsePipes()"
+          ],
+          "path": "nestjs/pipes.md",
+          "tokens": 242
+        },
+        {
+          "id": "rabbitmq",
+          "title": "rabbitmq",
+          "description": "[RabbitMQ](https://www.rabbitmq.com/) is an open-source and lightweight message broker which supports multiple messag...",
+          "tags": [
+            "createMicroservice()",
+            "Transport",
+            "@nestjs/microservices",
+            "options",
+            "ClientProxy",
+            "ClientsModule",
+            "register()",
+            "name",
+            "ClientProxyFactory",
+            "@Client()"
+          ],
+          "path": "nestjs/rabbitmq.md",
+          "tokens": 3314
+        },
+        {
+          "id": "redis",
+          "title": "redis",
+          "description": "The [Redis](https://redis.io/) transporter implements the publish/subscribe messaging paradigm and leverages the [Pub...",
+          "tags": [
+            "createMicroservice()",
+            "Transport",
+            "@nestjs/microservices",
+            "options",
+            "ClientProxy",
+            "ClientsModule",
+            "register()",
+            "name",
+            "ClientProxyFactory",
+            "@Client()"
+          ],
+          "path": "nestjs/redis.md",
+          "tokens": 1847
+        },
+        {
+          "id": "middlewares",
+          "title": "middlewares",
+          "description": "Middleware is a function which is called **before** the route handler. Middleware functions have access to the [reque...",
+          "tags": [
+            "next()",
+            "next",
+            "@Injectable()",
+            "NestMiddleware",
+            "Express",
+            "fastify",
+            "constructor",
+            "@Module()",
+            "configure()",
+            "NestModule"
+          ],
+          "path": "nestjs/middlewares.md",
+          "tokens": 2760
+        },
+        {
+          "id": "migration",
+          "title": "migration",
+          "description": "This article offers a comprehensive guide for migrating from NestJS version 10 to version 11. To explore the new feat...",
+          "tags": [
+            "*",
+            "/*splat",
+            "/{{ '{' }}*splat&#125;",
+            "/*",
+            "splat",
+            "*wildcard",
+            "?",
+            "/:file{{ '{' }}.:ext&#125;",
+            "(()[]?+!)",
+            "\\"
+          ],
+          "path": "nestjs/migration.md",
+          "tokens": 4735
+        },
+        {
+          "id": "modules",
+          "title": "modules",
+          "description": "A module is a class that is annotated with the `@Module()` decorator. This decorator provides metadata that **Nest** ...",
+          "tags": [
+            "@Module()",
+            "providers",
+            "controllers",
+            "imports",
+            "exports",
+            "provide",
+            "CatsController",
+            "CatsService",
+            "CatsModule",
+            "$ nest g module cats"
+          ],
+          "path": "nestjs/modules.md",
+          "tokens": 3324
+        },
+        {
+          "id": "cli-plugin",
+          "title": "OR npx ts-node apps/{YOUR_APP}/src/generate-metadata.ts",
+          "description": "[TypeScript](https://www.typescriptlang.org/docs/handbook/decorators.html)'s metadata reflection system has several l...",
+          "tags": [
+            "@ApiProperty",
+            "@ApiHideProperty",
+            "required",
+            "name?: string",
+            "required: false",
+            "type",
+            "enum",
+            "default",
+            "class-validator",
+            "classValidatorShim"
+          ],
+          "path": "nestjs/cli-plugin.md",
+          "tokens": 2982
+        },
+        {
+          "id": "decorators",
+          "title": "decorators",
+          "description": "All of the available OpenAPI decorators have an `Api` prefix to distinguish them from the core decorators. Below is a...",
+          "tags": [
+            "Api",
+            "@ApiBasicAuth()",
+            "@ApiBearerAuth()",
+            "@ApiBody()",
+            "@ApiConsumes()",
+            "@ApiCookieAuth()",
+            "@ApiExcludeController()",
+            "@ApiExcludeEndpoint()",
+            "@ApiExtension()",
+            "@ApiExtraModels()"
+          ],
+          "path": "nestjs/decorators.md",
+          "tokens": 388
+        },
+        {
+          "id": "introduction",
+          "title": "introduction",
+          "description": "The [OpenAPI](https://swagger.io/specification/) specification is a language-agnostic definition format used to descr...",
+          "tags": [
+            "main.ts",
+            "SwaggerModule",
+            "SwaggerModule.createDocument()",
+            "DocumentBuilder",
+            "createDocument()",
+            "SwaggerDocumentOptions",
+            "setup()",
+            "http://localhost:3000/api",
+            "http://localhost:3000/api-json",
+            "@nestjs/swagger"
+          ],
+          "path": "nestjs/introduction.md",
+          "tokens": 2597
+        },
+        {
+          "id": "mapped-types",
+          "title": "mapped-types",
+          "description": "As you build out features like **CRUD** (Create/Read/Update/Delete) it's often useful to construct variants on a base...",
+          "tags": [
+            "PartialType()",
+            "CreateCatDto",
+            "@nestjs/swagger",
+            "PickType()",
+            "OmitType()",
+            "name",
+            "OmitType",
+            "IntersectionType()"
+          ],
+          "path": "nestjs/mapped-types.md",
+          "tokens": 952
+        },
+        {
+          "id": "operations",
+          "title": "operations",
+          "description": "In OpenAPI terms, paths are endpoints (resources), such as `/users` or `/reports/summary`, that your API exposes, and...",
+          "tags": [
+            "/users",
+            "/reports/summary",
+            "GET",
+            "POST",
+            "DELETE",
+            "@ApiTags(...tags)",
+            "@ApiHeader()",
+            "@ApiResponse()",
+            "@ApiResponse",
+            "@ApiOkResponse()"
+          ],
+          "path": "nestjs/operations.md",
+          "tokens": 2256
+        },
+        {
+          "id": "other-features",
+          "title": "other-features",
+          "description": "This page lists all the other available features that you may find useful.",
+          "tags": [
+            "setGlobalPrefix()",
+            "ignoreGlobalPrefix",
+            "DocumentBuilder",
+            "401 Unauthorized",
+            "500 Internal Server Error",
+            "SwaggerModule",
+            "createDocument()",
+            "extraOptions",
+            "include",
+            "http://localhost:3000/api/cats"
+          ],
+          "path": "nestjs/other-features.md",
+          "tokens": 1606
+        },
+        {
+          "id": "security",
+          "title": "security",
+          "description": "To define which security mechanisms should be used for a specific operation, use the `@ApiSecurity()` decorator.",
+          "tags": [
+            "@ApiSecurity()",
+            "DocumentBuilder",
+            "basic",
+            "bearer",
+            "@ApiBasicAuth()",
+            "@ApiBearerAuth()",
+            "@ApiOAuth2()",
+            "@ApiCookieAuth()"
+          ],
+          "path": "nestjs/security.md",
+          "tokens": 528
+        },
+        {
+          "id": "types-and-parameters",
+          "title": "types-and-parameters",
+          "description": "The `SwaggerModule` searches for all `@Body()`, `@Query()`, and `@Param()` decorators in route handlers to generate t...",
+          "tags": [
+            "SwaggerModule",
+            "@Body()",
+            "@Query()",
+            "@Param()",
+            "@ApiBody()",
+            "@nestjs/swagger",
+            "CreateCatDto",
+            "@ApiProperty()",
+            "{{\"@ApiProperty({ required: false })\"}}",
+            "@ApiPropertyOptional()"
+          ],
+          "path": "nestjs/types-and-parameters.md",
+          "tokens": 2527
+        },
+        {
+          "id": "pipes",
+          "title": "pipes",
+          "description": "A pipe is a class annotated with the `@Injectable()` decorator, which implements the `PipeTransform` interface.",
+          "tags": [
+            "@Injectable()",
+            "PipeTransform",
+            "arguments",
+            "ValidationPipe",
+            "ParseIntPipe",
+            "ParseFloatPipe",
+            "ParseBoolPipe",
+            "ParseArrayPipe",
+            "ParseUUIDPipe",
+            "ParseEnumPipe"
+          ],
+          "path": "nestjs/pipes.md",
+          "tokens": 6100
+        },
+        {
+          "id": "async-local-storage",
+          "title": "async-local-storage",
+          "description": "`AsyncLocalStorage` is a [Node.js API](https://nodejs.org/api/async_context.html#async_context_class_asynclocalstorag...",
+          "tags": [
+            "AsyncLocalStorage",
+            "async_hooks",
+            "AsyncLocalStorage#run",
+            "store",
+            "next",
+            "REQUEST",
+            "CLS",
+            "ClsModule",
+            "ClsService",
+            "nestjs-cls"
+          ],
+          "path": "nestjs/async-local-storage.md",
+          "tokens": 2545
+        },
+        {
+          "id": "cqrs",
+          "title": "cqrs",
+          "description": "The flow of simple [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) (Create, Read, Update and De...",
+          "tags": [
+            "AppModule",
+            "CqrsModule.forRoot()",
+            "commandPublisher",
+            "DefaultCommandPubSub",
+            "eventPublisher",
+            "DefaultPubSub",
+            "queryPublisher",
+            "DefaultQueryPubSub",
+            "unhandledExceptionPublisher",
+            "DefaultUnhandledExceptionPubSub"
+          ],
+          "path": "nestjs/cqrs.md",
+          "tokens": 5952
+        },
+        {
+          "id": "crud-generator",
+          "title": "crud-generator",
+          "description": "Throughout the life span of a project, when we build new features, we often need to add new resources to our applicat...",
+          "tags": [
+            "nest g mo",
+            "nest g co",
+            "nest g s",
+            "nest g resource",
+            ".spec",
+            "GraphQL (code first)",
+            "GraphQL (schema first)",
+            "--no-spec",
+            "nest g resource users --no-spec",
+            "UsersService"
+          ],
+          "path": "nestjs/crud-generator.md",
+          "tokens": 1359
+        },
+        {
+          "id": "documentation",
+          "title": "documentation",
+          "description": "**Compodoc** is a documentation tool for Angular applications. Since Nest and Angular share similar project and code ...",
+          "tags": [
+            "npx"
+          ],
+          "path": "nestjs/documentation.md",
+          "tokens": 265
+        },
+        {
+          "id": "hot-reload",
+          "title": "hot-reload",
+          "description": "The highest impact on your application's bootstrapping process is **TypeScript compilation**. Fortunately, with [webp...",
+          "tags": [
+            "webpack",
+            "graphql",
+            "dist",
+            "entities",
+            "TypeOrmModule",
+            "HotModuleReplacementPlugin",
+            "webpack-pnp-externals",
+            "webpack-node-externals",
+            "webpack-hmr.config.js",
+            "nodeExternals"
+          ],
+          "path": "nestjs/hot-reload.md",
+          "tokens": 1538
+        },
+        {
+          "id": "mikroorm",
+          "title": "mikroorm",
+          "description": "This recipe is here to help users get started with MikroORM in Nest. MikroORM is the TypeScript ORM for Node.js based...",
+          "tags": [
+            "@mikro-orm/nestjs",
+            "postgres",
+            "sqlite",
+            "mongo",
+            "MikroOrmModule",
+            "AppModule",
+            "forRoot()",
+            "init()",
+            "mikro-orm.config.ts",
+            "EntityManager"
+          ],
+          "path": "nestjs/mikroorm.md",
+          "tokens": 2305
+        },
+        {
+          "id": "mongodb",
+          "title": "mongodb",
+          "description": "> **Warning** In this article, you'll learn how to create a `DatabaseModule` based on the **Mongoose** package from s...",
+          "tags": [
+            "DatabaseModule",
+            "@nestjs/mongoose",
+            "connect()",
+            "Promise",
+            "*.providers.ts",
+            "Connection",
+            "@Inject()",
+            "CatSchema",
+            "CatsSchema",
+            "cats"
+          ],
+          "path": "nestjs/mongodb.md",
+          "tokens": 1404
+        },
+        {
+          "id": "necord",
+          "title": "necord",
+          "description": "Necord is a powerful module that simplifies the creation of [Discord](https://discord.com) bots, allowing for seamles...",
+          "tags": [
+            "Discord.js",
+            "NecordModule",
+            "AppService",
+            "@Context",
+            "ContextOf<type: string>",
+            "@Context()",
+            "@TextCommand",
+            "SlashCommand",
+            "development",
+            "TextDto"
+          ],
+          "path": "nestjs/necord.md",
+          "tokens": 2903
+        },
+        {
+          "id": "nest-commander",
+          "title": "nest-commander",
+          "description": "Expanding on the [standalone application](/standalone-applications) docs there's also the [nest-commander](https://jm...",
+          "tags": [
+            "nest-commander",
+            "@Command()",
+            "@Option()",
+            "CommandRunner",
+            "@Injectable()",
+            "run",
+            "Promise<void>",
+            "string[], Record<string, any>",
+            "Record<string, any>",
+            "name"
+          ],
+          "path": "nestjs/nest-commander.md",
+          "tokens": 1745
+        },
+        {
+          "id": "passport",
+          "title": "passport",
+          "description": "[Passport](https://github.com/jaredhanson/passport) is the most popular node.js authentication library, well-known by...",
+          "tags": [
+            "@nestjs/passport",
+            "Request",
+            "passport",
+            "passport-jwt",
+            "passport-local",
+            "@types/passport-local",
+            "PassportStrategy",
+            "super()",
+            "validate()",
+            "AuthModule"
+          ],
+          "path": "nestjs/passport.md",
+          "tokens": 11302
+        },
+        {
+          "id": "prisma",
+          "title": "prisma",
+          "description": "[Prisma](https://www.prisma.io) is an [open-source](https://github.com/prisma/prisma) ORM for Node.js and TypeScript....",
+          "tags": [
+            "prisma-examples",
+            "npm start",
+            "http://localhost:3000/",
+            "src/app.controller.ts",
+            "npx",
+            "yarn",
+            "init",
+            "prisma",
+            "schema.prisma",
+            "prisma.config.ts"
+          ],
+          "path": "nestjs/prisma.md",
+          "tokens": 5151
+        },
+        {
+          "id": "repl",
+          "title": "repl",
+          "description": "REPL is a simple interactive environment that takes single user inputs, executes them, and returns the result to the ...",
+          "tags": [
+            "repl.ts",
+            "main.ts",
+            "repl",
+            "AppService",
+            "getHello()",
+            "AppController",
+            "await",
+            "methods()",
+            "debug()",
+            "help()"
+          ],
+          "path": "nestjs/repl.md",
+          "tokens": 1291
+        },
+        {
+          "id": "router-module",
+          "title": "router-module",
+          "description": "> info **Hint** This chapter is only relevant to HTTP-based applications.",
+          "tags": [
+            "@Controller",
+            "@Get('users')",
+            "/dashboard",
+            "RouterModule",
+            "@nestjs/core",
+            "children",
+            "AdminModule",
+            "DashboardModule",
+            "MetricsModule",
+            "/admin/dashboard"
+          ],
+          "path": "nestjs/router-module.md",
+          "tokens": 627
+        },
+        {
+          "id": "sentry",
+          "title": "sentry",
+          "description": "[Sentry](https://sentry.io) is an error tracking and performance monitoring platform that helps developers identify a...",
+          "tags": [
+            "@sentry/profiling-node",
+            "instrument.ts",
+            "main.ts",
+            "SentryModule",
+            "app.useGlobalFilters()",
+            "@Catch()",
+            "@SentryExceptionCaptured()",
+            "catch()",
+            "HttpExceptions",
+            "SentryGlobalFilter"
+          ],
+          "path": "nestjs/sentry.md",
+          "tokens": 1254
+        },
+        {
+          "id": "serve-static",
+          "title": "serve-static",
+          "description": "In order to serve static content like a Single Page Application (SPA) we can use the `ServeStaticModule` from the [`@...",
+          "tags": [
+            "ServeStaticModule",
+            "@nestjs/serve-static",
+            "AppModule",
+            "forRoot()",
+            "rootPath",
+            "renderPath",
+            "*",
+            "serveRoot",
+            "serveStaticOptions.fallthrough",
+            "true"
+          ],
+          "path": "nestjs/serve-static.md",
+          "tokens": 565
+        },
+        {
+          "id": "sql-sequelize",
+          "title": "sql-sequelize",
+          "description": "> **Warning** In this article, you'll learn how to create a `DatabaseModule` based on the **Sequelize** package from ...",
+          "tags": [
+            "DatabaseModule",
+            "@nestjs/sequelize",
+            "modelPaths",
+            "sync()",
+            "*.providers.ts",
+            "Sequelize",
+            "@Inject()",
+            "Promise",
+            "Cat",
+            "cats"
+          ],
+          "path": "nestjs/sql-sequelize.md",
+          "tokens": 1211
+        },
+        {
+          "id": "sql-typeorm",
+          "title": "sql-typeorm",
+          "description": "> **Warning** In this article, you'll learn how to create a `DatabaseModule` based on the **TypeORM** package from sc...",
+          "tags": [
+            "DatabaseModule",
+            "@nestjs/typeorm",
+            "new DataSource().initialize()",
+            "typeorm",
+            "initialize()",
+            "Promise",
+            "synchronize: true",
+            "*.providers.ts",
+            "DATA_SOURCE",
+            "@Inject()"
+          ],
+          "path": "nestjs/sql-typeorm.md",
+          "tokens": 1279
+        },
+        {
+          "id": "suites",
+          "title": "suites",
+          "description": "[Suites](https://suites.dev) is an [open-source](https://github.com/suites-dev/suites) unit-testing framework for Typ...",
+          "tags": [
+            "Test.createTestingModule()",
+            "Suites",
+            "@suites/doubles.jest",
+            "mock()",
+            "stub()",
+            "global.d.ts",
+            "UserService",
+            "TestBed.solitary()",
+            "Mocked<T>",
+            ".mock().impl()"
+          ],
+          "path": "nestjs/suites.md",
+          "tokens": 2471
+        },
+        {
+          "id": "swc",
+          "title": "OR nest start --builder swc",
+          "description": "[SWC](https://swc.rs/) (Speedy Web Compiler) is an extensible Rust-based platform that can be used for both compilati...",
+          "tags": [
+            "swc",
+            "-b",
+            "compilerOptions.builder",
+            "\"swc\"",
+            "nest-cli.json",
+            "type",
+            "options",
+            ".jsx",
+            ".tsx",
+            "--type-check"
+          ],
+          "path": "nestjs/swc.md",
+          "tokens": 2925
+        },
+        {
+          "id": "terminus",
+          "title": "terminus",
+          "description": "Terminus integration provides you with **readiness/liveness** health checks. Healthchecks are crucial when it comes t...",
+          "tags": [
+            "https://my-website.com/health/readiness",
+            "GET",
+            "MongooseHealthIndicator",
+            "@nestjs/terminus",
+            "HttpHealthIndicator",
+            "TypeOrmHealthIndicator",
+            "SequelizeHealthIndicator",
+            "MikroOrmHealthIndicator",
+            "PrismaHealthIndicator",
+            "MicroserviceHealthIndicator"
+          ],
+          "path": "nestjs/terminus.md",
+          "tokens": 5343
+        },
+        {
+          "id": "authentication",
+          "title": "authentication",
+          "description": "Authentication is an **essential** part of most applications. There are many different approaches and strategies to h...",
+          "tags": [
+            "AuthModule",
+            "AuthService",
+            "AuthController",
+            "UsersService",
+            "UsersModule",
+            "@Module",
+            "signIn()",
+            "Record<string, any>",
+            "@nestjs/jwt",
+            "authService"
+          ],
+          "path": "nestjs/authentication.md",
+          "tokens": 5216
+        },
+        {
+          "id": "authorization",
+          "title": "authorization",
+          "description": "**Authorization** refers to the process that determines what a user is able to do. For example, an administrative use...",
+          "tags": [
+            "Role",
+            "@Roles()",
+            "RolesGuard",
+            "Reflector",
+            "@nestjs/core",
+            "request.user",
+            "roles",
+            "User",
+            "@RequirePermissions()",
+            "Permission"
+          ],
+          "path": "nestjs/authorization.md",
+          "tokens": 4567
+        },
+        {
+          "id": "cors",
+          "title": "cors",
+          "description": "Cross-origin resource sharing (CORS) is a mechanism that allows resources to be requested from another domain. Under ...",
+          "tags": [
+            "enableCors()",
+            "create()",
+            "cors",
+            "true"
+          ],
+          "path": "nestjs/cors.md",
+          "tokens": 399
+        },
+        {
+          "id": "csrf",
+          "title": "csrf",
+          "description": "Cross-site request forgery (CSRF or XSRF) is a type of attack where **unauthorized** commands are sent from a trusted...",
+          "tags": [
+            "cookie-parser",
+            "csrf-csrf",
+            "@fastify/csrf-protection"
+          ],
+          "path": "nestjs/csrf.md",
+          "tokens": 499
+        },
+        {
+          "id": "encryption-hashing",
+          "title": "encryption-hashing",
+          "description": "**Encryption** is the process of encoding information. This process converts the original representation of the infor...",
+          "tags": [
+            "'aes-256-ctr'",
+            "encryptedText",
+            "bcrypt",
+            "hash",
+            "genSalt",
+            "compare"
+          ],
+          "path": "nestjs/encryption-hashing.md",
+          "tokens": 765
+        },
+        {
+          "id": "helmet",
+          "title": "helmet",
+          "description": "[Helmet](https://github.com/helmetjs/helmet) can help protect your app from some well-known web vulnerabilities by se...",
+          "tags": [
+            "helmet",
+            "app.use()",
+            "cors",
+            "@apollo/server",
+            "'self'",
+            "'unsafe-inline'",
+            "https: 'unsafe-inline'",
+            "cdn.jsdelivr.net",
+            "'unsafe-eval'"
+          ],
+          "path": "nestjs/helmet.md",
+          "tokens": 857
+        },
+        {
+          "id": "rate-limiting",
+          "title": "rate-limiting",
+          "description": "A common technique to protect applications from brute-force attacks is **rate-limiting**. To get started, you'll need...",
+          "tags": [
+            "@nestjs/throttler",
+            "ThrottlerModule",
+            "forRoot",
+            "forRootAsync",
+            "ttl",
+            "limit",
+            "ThrottlerGuard",
+            "@SkipThrottle()",
+            "@Throttle()",
+            "{{ '{' }} default: true {{ '}' }}"
+          ],
+          "path": "nestjs/rate-limiting.md",
+          "tokens": 3577
+        },
+        {
+          "id": "support",
+          "title": "support",
+          "description": "Nest is an MIT-licensed open source project with its ongoing development made possible thanks to the support by the c...",
+          "tags": [],
+          "path": "nestjs/support.md",
+          "tokens": 315
+        },
+        {
+          "id": "caching",
+          "title": "caching",
+          "description": "Caching is a powerful and straightforward **technique** for enhancing your application's performance. By acting as a ...",
+          "tags": [
+            "@nestjs/cache-manager",
+            "cache-manager",
+            "CacheModule",
+            "register()",
+            "CACHE_MANAGER",
+            "Cache",
+            "get",
+            "null",
+            "set",
+            "1000"
+          ],
+          "path": "nestjs/caching.md",
+          "tokens": 3132
+        },
+        {
+          "id": "compression",
+          "title": "compression",
+          "description": "Compression can greatly decrease the size of the response body, thereby increasing the speed of a web app.",
+          "tags": [
+            "FastifyAdapter",
+            "@fastify/compress",
+            "NestFastifyApplication",
+            "register",
+            "BROTLI_PARAM_QUALITY",
+            "fastify-compress",
+            "app.register"
+          ],
+          "path": "nestjs/compression.md",
+          "tokens": 704
+        },
+        {
+          "id": "configuration",
+          "title": "configuration",
+          "description": "Applications often run in different **environments**. Depending on the environment, different configuration settings ...",
+          "tags": [
+            "process.env",
+            ".env",
+            "ConfigModule",
+            "ConfigService",
+            "@nestjs/config",
+            "AppModule",
+            ".forRoot()",
+            "forRoot()",
+            "get()",
+            "export DATABASE_USER=test"
+          ],
+          "path": "nestjs/configuration.md",
+          "tokens": 7251
+        },
+        {
+          "id": "cookies",
+          "title": "cookies",
+          "description": "An **HTTP cookie** is a small piece of data stored by the user's browser. Cookies were designed to be a reliable mech...",
+          "tags": [
+            "cookie-parser",
+            "main.ts",
+            "cookieParser",
+            "secret",
+            "options",
+            "cookie.parse",
+            "Cookie",
+            "req.cookies",
+            "req.signedCookies",
+            "s:"
+          ],
+          "path": "nestjs/cookies.md",
+          "tokens": 1270
+        },
+        {
+          "id": "events",
+          "title": "events",
+          "description": "[Event Emitter](https://www.npmjs.com/package/@nestjs/event-emitter) package (`@nestjs/event-emitter`) provides a sim...",
+          "tags": [
+            "@nestjs/event-emitter",
+            "EventEmitterModule",
+            "AppModule",
+            "forRoot()",
+            ".forRoot()",
+            "onApplicationBootstrap",
+            "EventEmitter",
+            "EventEmitter2",
+            "@OnEvent()",
+            "string"
+          ],
+          "path": "nestjs/events.md",
+          "tokens": 1610
+        },
+        {
+          "id": "file-upload",
+          "title": "file-upload",
+          "description": "To handle file uploading, Nest provides a built-in module based on the [multer](https://github.com/expressjs/multer) ...",
+          "tags": [
+            "multipart/form-data",
+            "POST",
+            "FastifyAdapter",
+            "Express.Multer.File",
+            "FileInterceptor()",
+            "file",
+            "request",
+            "@UploadedFile()",
+            "@nestjs/platform-express",
+            "@nestjs/common"
+          ],
+          "path": "nestjs/file-upload.md",
+          "tokens": 3210
+        },
+        {
+          "id": "http-module",
+          "title": "http-module",
+          "description": "[Axios](https://github.com/axios/axios) is a richly featured HTTP client package that is widely used. Nest wraps Axio...",
+          "tags": [
+            "HttpModule",
+            "HttpService",
+            "Observables",
+            "@nestjs/axios",
+            "AxiosResponse",
+            "axios",
+            "$ npm i axios",
+            "Observable",
+            "register()",
+            "registerAsync()"
+          ],
+          "path": "nestjs/http-module.md",
+          "tokens": 1544
+        },
+        {
+          "id": "logger",
+          "title": "logger",
+          "description": "Nest comes with a built-in text-based logger which is used during application bootstrapping and several other circums...",
+          "tags": [
+            "Logger",
+            "@nestjs/common",
+            "logger",
+            "false",
+            "NestFactory.create()",
+            "'log'",
+            "'fatal'",
+            "'error'",
+            "'warn'",
+            "'debug'"
+          ],
+          "path": "nestjs/logger.md",
+          "tokens": 5811
+        },
+        {
+          "id": "mongo",
+          "title": "mongo",
+          "description": "Nest supports two methods for integrating with the [MongoDB](https://www.mongodb.com/) database. You can either use t...",
+          "tags": [
+            "@nestjs/mongoose",
+            "MongooseModule",
+            "AppModule",
+            "forRoot()",
+            "mongoose.connect()",
+            "CatSchema",
+            "DefinitionsFactory",
+            "nestjs/mongoose",
+            "@Schema()",
+            "Cat"
+          ],
+          "path": "nestjs/mongo.md",
+          "tokens": 6267
+        },
+        {
+          "id": "mvc",
+          "title": "mvc",
+          "description": "Nest, by default, makes use of the [Express](https://github.com/expressjs/express) library under the hood. Hence, eve...",
+          "tags": [
+            "hbs",
+            "public",
+            "views",
+            "index.hbs",
+            "message",
+            "app.controller",
+            "root()",
+            "@Render()",
+            "http://localhost:3000",
+            "Hello world!"
+          ],
+          "path": "nestjs/mvc.md",
+          "tokens": 1776
+        },
+        {
+          "id": "performance",
+          "title": "performance",
+          "description": "By default, Nest makes use of the [Express](https://expressjs.com/) framework. As mentioned earlier, Nest also provid...",
+          "tags": [
+            "FastifyAdapter",
+            "localhost 127.0.0.1",
+            "'0.0.0.0'",
+            "listen()",
+            "req",
+            "res",
+            "middie",
+            "fastify",
+            "@RouteConfig()",
+            "@nestjs/platform-fastify"
+          ],
+          "path": "nestjs/performance.md",
+          "tokens": 1213
+        },
+        {
+          "id": "queues",
+          "title": "queues",
+          "description": "Queues are a powerful design pattern that help you deal with common application scaling and performance challenges. S...",
+          "tags": [
+            "@nestjs/bullmq",
+            "@nestjs/bull",
+            "BullModule",
+            "AppModule",
+            "forRoot()",
+            "bullmq",
+            "connection: ConnectionOptions",
+            "prefix: string",
+            "defaultJobOptions: JobOpts",
+            "settings: AdvancedSettings"
+          ],
+          "path": "nestjs/queues.md",
+          "tokens": 11213
+        },
+        {
+          "id": "serialization",
+          "title": "serialization",
+          "description": "Serialization is a process that happens before objects are returned in a network response. This is an appropriate pla...",
+          "tags": [
+            "ClassSerializerInterceptor",
+            "instanceToPlain()",
+            "class-transformer",
+            "password",
+            "@nestjs/common",
+            "UserEntity",
+            "@Expose()",
+            "@Transform()",
+            "RoleEntity",
+            "options"
+          ],
+          "path": "nestjs/serialization.md",
+          "tokens": 1543
+        },
+        {
+          "id": "server-sent-events",
+          "title": "server-sent-events",
+          "description": "Server-Sent Events (SSE) is a server push technology enabling a client to receive automatic updates from a server via...",
+          "tags": [
+            "@Sse()",
+            "MessageEvent",
+            "@nestjs/common",
+            "Observable",
+            "interval",
+            "map",
+            "rxjs",
+            "sse",
+            "EventSource",
+            "/sse"
+          ],
+          "path": "nestjs/server-sent-events.md",
+          "tokens": 642
+        },
+        {
+          "id": "sessions",
+          "title": "sessions",
+          "description": "**HTTP sessions** provide a way to store information about the user across multiple requests, which is particularly u...",
+          "tags": [
+            "express-session",
+            "main.ts",
+            "secret",
+            "resave",
+            "true",
+            "saveUninitialized",
+            "false",
+            "session",
+            "secure: true",
+            "\"trust proxy\""
+          ],
+          "path": "nestjs/sessions.md",
+          "tokens": 1296
+        },
+        {
+          "id": "sql",
+          "title": "sql",
+          "description": "Nest is database agnostic, allowing you to easily integrate with any SQL or NoSQL database. You have a number of opti...",
+          "tags": [
+            "@nestjs/typeorm",
+            "@nestjs/sequelize",
+            "@nestjs/mongoose",
+            "TypeOrmModule",
+            "AppModule",
+            "synchronize: true",
+            "forRoot()",
+            "DataSource",
+            "EntityManager",
+            "User"
+          ],
+          "path": "nestjs/sql.md",
+          "tokens": 11127
+        },
+        {
+          "id": "streaming-files",
+          "title": "streaming-files",
+          "description": "> info **Note** This chapter shows how you can stream files from your **HTTP application**. The examples presented be...",
+          "tags": [
+            "StreamableFile",
+            "Buffer",
+            "Stream",
+            "@nestjs/common",
+            "stream.pipe(res)",
+            "package.json",
+            "Content-Type",
+            "application/octet-stream",
+            "type",
+            "res.set"
+          ],
+          "path": "nestjs/streaming-files.md",
+          "tokens": 916
+        },
+        {
+          "id": "task-scheduling",
+          "title": "task-scheduling",
+          "description": "Task scheduling allows you to schedule arbitrary code (methods/functions) to execute at a fixed date/time, at recurri...",
+          "tags": [
+            "@nestjs/schedule",
+            "ScheduleModule",
+            "AppModule",
+            "forRoot()",
+            ".forRoot()",
+            "onApplicationBootstrap",
+            "@Cron()",
+            "handleCron()",
+            "45",
+            "*"
+          ],
+          "path": "nestjs/task-scheduling.md",
+          "tokens": 4033
+        },
+        {
+          "id": "validation",
+          "title": "validation",
+          "description": "It is best practice to validate the correctness of any data sent into a web application. To automatically validate in...",
+          "tags": [
+            "ValidationPipe",
+            "ParseIntPipe",
+            "ParseBoolPipe",
+            "ParseArrayPipe",
+            "ParseUUIDPipe",
+            "@nestjs/common",
+            "class-validator",
+            "class-transformer",
+            "ValidatorOptions",
+            "CreateUserDto"
+          ],
+          "path": "nestjs/validation.md",
+          "tokens": 4391
+        },
+        {
+          "id": "versioning",
+          "title": "versioning",
+          "description": "> info **Hint** This chapter is only relevant to HTTP-based applications.",
+          "tags": [
+            "https://example.com/v1/route",
+            "https://example.com/v2/route",
+            "v",
+            "prefix",
+            "false",
+            "VersioningType",
+            "type",
+            "@nestjs/common",
+            "header",
+            "Accept"
+          ],
+          "path": "nestjs/versioning.md",
+          "tokens": 2913
+        },
+        {
+          "id": "adapter",
+          "title": "adapter",
+          "description": "The WebSockets module is platform-agnostic, hence, you can bring your own library (or even a native implementation) b...",
+          "tags": [
+            "WebSocketAdapter",
+            "IoAdapter",
+            "transports: ['websocket']",
+            "RedisIoAdapter",
+            "WsAdapter",
+            "ws",
+            "socket.io",
+            "@nestjs/platform-ws",
+            "wsAdapter",
+            "setMessageParser"
+          ],
+          "path": "nestjs/adapter.md",
+          "tokens": 1755
+        },
+        {
+          "id": "exception-filters",
+          "title": "exception-filters",
+          "description": "The only difference between the HTTP [exception filter](/exception-filters) layer and the corresponding web sockets l...",
+          "tags": [
+            "HttpException",
+            "WsException",
+            "@nestjs/websockets",
+            "exception",
+            "@UseFilters()",
+            "BaseWsExceptionFilter",
+            "catch()"
+          ],
+          "path": "nestjs/exception-filters.md",
+          "tokens": 569
+        },
+        {
+          "id": "gateways",
+          "title": "gateways",
+          "description": "Most of the concepts discussed elsewhere in this documentation, such as dependency injection, decorators, exception f...",
+          "tags": [
+            "@WebSocketGateway()",
+            "@WebSocketGateway(80)",
+            "80",
+            "events",
+            "@SubscribeMessage()",
+            "@MessageBody()",
+            "@nestjs/websockets",
+            "handleEvent()",
+            "socket",
+            "client.emit()"
+          ],
+          "path": "nestjs/gateways.md",
+          "tokens": 2635
+        },
+        {
+          "id": "guards",
+          "title": "guards",
+          "description": "There is no fundamental difference between web sockets guards and [regular HTTP application guards](/guards). The onl...",
+          "tags": [
+            "HttpException",
+            "WsException",
+            "@nestjs/websockets",
+            "@UseGuards()"
+          ],
+          "path": "nestjs/guards.md",
+          "tokens": 216
+        },
+        {
+          "id": "interceptors",
+          "title": "interceptors",
+          "description": "There is no difference between [regular interceptors](/interceptors) and web sockets interceptors. The following exam...",
+          "tags": [
+            "@UseInterceptors()"
+          ],
+          "path": "nestjs/interceptors.md",
+          "tokens": 185
+        },
+        {
+          "id": "pipes",
+          "title": "pipes",
+          "description": "There is no fundamental difference between [regular pipes](/pipes) and web sockets pipes. The only difference is that...",
+          "tags": [
+            "HttpException",
+            "WsException",
+            "data",
+            "client",
+            "@nestjs/websockets",
+            "@UsePipes()"
+          ],
+          "path": "nestjs/pipes.md",
+          "tokens": 282
         }
       ]
     },

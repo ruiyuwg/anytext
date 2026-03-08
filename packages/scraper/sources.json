@@ -563,6 +563,19 @@
         "docsPath": "docs/data/material",
         "include": [".md"]
       }
+    },
+    {
+      "id": "nestjs",
+      "name": "NestJS",
+      "description": "Progressive Node.js framework for building scalable server-side applications with decorators, modules, and dependency injection",
+      "version": "10",
+      "adapter": "github",
+      "github": {
+        "repo": "nestjs/docs.nestjs.com",
+        "branch": "master",
+        "docsPath": "content",
+        "include": [".md"]
+      }
     }
   ]
 }
