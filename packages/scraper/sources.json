@@ -362,6 +362,14 @@
       "url": "https://docs.strapi.io/llms-full.txt"
     },
     {
+      "id": "effect",
+      "name": "Effect",
+      "description": "TypeScript library for building type-safe, composable programs with managed effects, services, and error handling",
+      "version": "3",
+      "adapter": "llms-full",
+      "url": "https://effect.website/llms-full.txt"
+    },
+    {
       "id": "azure",
       "name": "Azure",
       "description": "Microsoft Azure cloud platform with compute, storage, databases, AI, and 200+ services",

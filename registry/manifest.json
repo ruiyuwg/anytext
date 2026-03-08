@@ -1,5 +1,5 @@
 {
-  "version": 58,
+  "version": 59,
   "updatedAt": "2026-03-08",
   "libraries": [
     {
@@ -19674,6 +19674,2895 @@
           ],
           "path": "drizzle/zod.md",
           "tokens": 2796
+        }
+      ]
+    },
+    {
+      "id": "effect",
+      "name": "Effect",
+      "description": "TypeScript library for building type-safe, composable programs with managed effects, services, and error handling",
+      "version": "3",
+      "topics": [
+        {
+          "id": "configuration",
+          "title": "Configuration",
+          "description": "import { Aside, Badge } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "ConfigProvider",
+            "Config<A>",
+            "string",
+            "number",
+            "boolean",
+            "Config",
+            "Effect.withConfigProvider",
+            "true",
+            "false",
+            "integer"
+          ],
+          "path": "effect/configuration.md",
+          "tokens": 7348
+        },
+        {
+          "id": "introduction-to-runtime",
+          "title": "Introduction to Runtime",
+          "description": "The Runtime<R> data type represents a runtime system that can execute effects. To run an effect, Effect<A, E, R>, we ...",
+          "tags": [
+            "Runtime<R>",
+            "Effect<A, E, R>",
+            "R",
+            "Context<R>",
+            "FiberRefs",
+            "RuntimeFlags",
+            "Effect",
+            "Runtime.run*",
+            "Runtime.runPromise",
+            "Runtime.runFork"
+          ],
+          "path": "effect/introduction-to-runtime.md",
+          "tokens": 3598
+        },
+        {
+          "id": "coming-from-zio",
+          "title": "Coming From ZIO",
+          "description": "If you are coming to Effect from ZIO, there are a few differences to be aware of.",
+          "tags": [
+            "Effect",
+            "Has",
+            "A & B",
+            "A",
+            "B",
+            "never",
+            "Has<A> & Has<B>",
+            "R",
+            "ZIO",
+            "&"
+          ],
+          "path": "effect/coming-from-zio.md",
+          "tokens": 1016
+        },
+        {
+          "id": "effect-vs-fp-ts",
+          "title": "Effect vs fp-ts",
+          "description": "Q: I compared the bundle sizes of two simple programs using Effect and fp-ts. Why does Effect have a larger bundle size?",
+          "tags": [
+            "Effect",
+            "Layer",
+            "Ref",
+            "Queue",
+            "Deferred",
+            "Option",
+            "Either",
+            "Array",
+            "Promise",
+            "ReaderTaskEither<R, E, A>"
+          ],
+          "path": "effect/effect-vs-fp-ts.md",
+          "tokens": 4813
+        },
+        {
+          "id": "effect-vs-neverthrow",
+          "title": "Effect vs neverthrow",
+          "description": "import { Tabs, TabItem } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "map",
+            "mapErr",
+            "mapLeft",
+            "result.map(...)",
+            "Either",
+            "Either.map(result, ...)",
+            "pipe",
+            "asyncMap",
+            "Effect.andThen",
+            "Effect"
+          ],
+          "path": "effect/effect-vs-neverthrow.md",
+          "tokens": 5996
+        },
+        {
+          "id": "myths-about-effect",
+          "title": "Myths About Effect",
+          "description": "Effect's internals are not built on generators, we only use generators to provide an API which closely mimics async-a...",
+          "tags": [],
+          "path": "effect/myths-about-effect.md",
+          "tokens": 2010
+        },
+        {
+          "id": "getting-started",
+          "title": "Getting Started",
+          "description": "import { Aside, Steps, Tabs, TabItem } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "@effect/ai",
+            "@effect/ai-openai",
+            "LanguageModel",
+            "Model",
+            "EmbeddingsModel",
+            "ProviderName",
+            "\"gpt-4o\"",
+            "OpenAiClient",
+            "Effect.provide",
+            "AnthropicClient"
+          ],
+          "path": "effect/getting-started.md",
+          "tokens": 3694
+        },
+        {
+          "id": "effect-vs-promise",
+          "title": "Effect vs Promise",
+          "description": "import { Tabs, TabItem } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "Promise",
+            "Effect",
+            "A",
+            "Error",
+            "Context",
+            "async",
+            "await",
+            "Effect.fork",
+            "Fiber.join"
+          ],
+          "path": "effect/effect-vs-promise.md",
+          "tokens": 3416
+        },
+        {
+          "id": "introduction-to-effect-ai",
+          "title": "Introduction to Effect AI",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "@effect/ai",
+            "@effect/ai-openai",
+            "LanguageModel",
+            "EmbeddingsModel",
+            "@effect/ai-anthropic",
+            "@effect/ai-amazon-bedrock",
+            "@effect/ai-google"
+          ],
+          "path": "effect/introduction-to-effect-ai.md",
+          "tokens": 1509
+        },
+        {
+          "id": "execution-planning",
+          "title": "Execution Planning",
+          "description": "Imagine that we've refactored our generateDadJoke program from our Getting Started guide. Now, instead of handling al...",
+          "tags": [
+            "generateDadJoke",
+            "NetworkError",
+            "ExecutionPlan",
+            "ExecutionPlan.make",
+            "\"gpt-4o\"",
+            "LanguageModel",
+            "100ms",
+            "\"claude-4-sonnet-20250514\"",
+            "ProviderOutage"
+          ],
+          "path": "effect/execution-planning.md",
+          "tokens": 1870
+        },
+        {
+          "id": "tool-use",
+          "title": "Tool Use",
+          "description": "Language models are great at generating text, but often we need them to take real-world actions, such as querying an ...",
+          "tags": [
+            "Toolkit",
+            "Tool.make",
+            "description",
+            "success",
+            "failure",
+            "parameters",
+            "GetDadJoke",
+            "searchTerm",
+            ".toLayer(...)",
+            "Effect"
+          ],
+          "path": "effect/tool-use.md",
+          "tokens": 2605
+        },
+        {
+          "id": "equivalence",
+          "title": "Equivalence",
+          "description": "The Equivalence module provides a way to define equivalence relations between values in TypeScript. An equivalence re...",
+          "tags": [
+            "Equivalence<A>",
+            "A",
+            "===",
+            "Equivalence",
+            "string",
+            "number",
+            "boolean",
+            "symbol",
+            "bigint",
+            "Date"
+          ],
+          "path": "effect/equivalence.md",
+          "tokens": 719
+        },
+        {
+          "id": "order",
+          "title": "Order",
+          "description": "The Order module provides a way to compare values and determine their order.\nIt defines an interface Order<A> which r...",
+          "tags": [
+            "Order<A>",
+            "A",
+            "-1",
+            "0",
+            "1",
+            "Order",
+            "string",
+            "number",
+            "bigint",
+            "Date"
+          ],
+          "path": "effect/order.md",
+          "tokens": 2201
+        },
+        {
+          "id": "cache",
+          "title": "Cache",
+          "description": "In many applications, handling overlapping work is common. For example, in services that process incoming requests, i...",
+          "tags": [
+            "Key",
+            "Effect",
+            "Value",
+            "Requirements",
+            "Error",
+            "get",
+            "timeConsumingEffect",
+            "refresh",
+            "size",
+            "contains"
+          ],
+          "path": "effect/cache.md",
+          "tokens": 1701
+        },
+        {
+          "id": "caching-effects",
+          "title": "Caching Effects",
+          "description": "This section covers several functions from the library that help manage caching and memoization in your application.",
+          "tags": [
+            "timeToLive",
+            "Effect.cachedWithTTL"
+          ],
+          "path": "effect/caching-effects.md",
+          "tokens": 1345
+        },
+        {
+          "id": "branded-types",
+          "title": "Branded Types",
+          "description": "In this guide, we will explore the concept of branded types in TypeScript and learn how to create and work with them ...",
+          "tags": [
+            "UserId",
+            "ProductId",
+            "number",
+            "getProductById",
+            "BrandTypeId",
+            "\"ProductId\"",
+            "\"UserId\"",
+            "Brand",
+            "nominal",
+            "refined"
+          ],
+          "path": "effect/branded-types.md",
+          "tokens": 2686
+        },
+        {
+          "id": "simplifying-excessive-nesting",
+          "title": "Simplifying Excessive Nesting",
+          "description": "import { Steps } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "elapsed",
+            "pipe",
+            "Effect.bind",
+            "Effect.let",
+            "Effect.Do",
+            "Effect",
+            "variableName",
+            "effectValue",
+            "simpleValue",
+            "number"
+          ],
+          "path": "effect/simplifying-excessive-nesting.md",
+          "tokens": 1682
+        },
+        {
+          "id": "dual-apis",
+          "title": "Dual APIs",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "Effect.map",
+            "self",
+            "pipe",
+            "Effect"
+          ],
+          "path": "effect/dual-apis.md",
+          "tokens": 604
+        },
+        {
+          "id": "guidelines",
+          "title": "Guidelines",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "runMain",
+            "sigint",
+            "NodeRuntime.runMain",
+            "@effect/platform-node",
+            "BunRuntime.runMain",
+            "@effect/platform-bun",
+            "BrowserRuntime.runMain",
+            "@effect/platform-browser",
+            "Effect.map(fn)",
+            "flow"
+          ],
+          "path": "effect/guidelines.md",
+          "tokens": 764
+        },
+        {
+          "id": "pattern-matching",
+          "title": "Pattern Matching",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "effect/Match",
+            "Matcher",
+            "Match.when",
+            "Match.not",
+            "Match.tag",
+            "Match.exhaustive",
+            "Match.orElse",
+            "Match.option",
+            "Match.type<T>()",
+            "Match.value(value)"
+          ],
+          "path": "effect/pattern-matching.md",
+          "tokens": 3334
+        },
+        {
+          "id": "basic-concurrency",
+          "title": "Basic Concurrency",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "concurrency",
+            "Effect.all",
+            "number",
+            "concurrency: 2",
+            "concurrency: \"unbounded\"",
+            "concurrency: \"inherit\"",
+            "\"unbounded\"",
+            "Effect.withConcurrency",
+            "Effect",
+            "Effect.interrupt"
+          ],
+          "path": "effect/basic-concurrency.md",
+          "tokens": 5944
+        },
+        {
+          "id": "deferred",
+          "title": "Deferred",
+          "description": "A Deferred<Success, Error> is a specialized subtype of Effect that acts like a one-time variable with some unique cha...",
+          "tags": [
+            "Deferred<Success, Error>",
+            "Effect",
+            "Success",
+            "Error",
+            "Deferred.await",
+            "Promise",
+            "Deferred.make",
+            "Deferred.succeed",
+            "Deferred.done",
+            "Deferred.complete"
+          ],
+          "path": "effect/deferred.md",
+          "tokens": 2285
+        },
+        {
+          "id": "fibers",
+          "title": "Fibers",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "Effect",
+            "Fiber",
+            "Success",
+            "Error",
+            "Requirements",
+            "fib10Fiber",
+            "Fiber.join",
+            "join",
+            "Fiber.await",
+            "Fiber.interrupt"
+          ],
+          "path": "effect/fibers.md",
+          "tokens": 6002
+        },
+        {
+          "id": "latch",
+          "title": "Latch",
+          "description": "A Latch is a synchronization tool that works like a gate, letting fibers wait until the latch is opened before they c...",
+          "tags": [
+            "latch.open",
+            "Latch",
+            "whenOpen",
+            "open",
+            "close",
+            "await",
+            "release",
+            "Effect.makeLatch",
+            "false"
+          ],
+          "path": "effect/latch.md",
+          "tokens": 944
+        },
+        {
+          "id": "pubsub",
+          "title": "PubSub",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "PubSub",
+            "PubSub<A>",
+            "A",
+            "PubSub.publish",
+            "PubSub.subscribe",
+            "false",
+            "PubSub.publishAll",
+            "PubSub.capacity",
+            "PubSub.size",
+            "number"
+          ],
+          "path": "effect/pubsub.md",
+          "tokens": 1824
+        },
+        {
+          "id": "queue",
+          "title": "Queue",
+          "description": "A Queue is a lightweight in-memory queue with built-in back-pressure, enabling asynchronous, purely-functional, and t...",
+          "tags": [
+            "Queue",
+            "Queue<A>",
+            "A",
+            "Queue.offer",
+            "Queue.take",
+            "Effect.fork",
+            "Queue.offerAll",
+            "Queue.poll",
+            "None",
+            "Some"
+          ],
+          "path": "effect/queue.md",
+          "tokens": 3233
+        },
+        {
+          "id": "semaphore",
+          "title": "Semaphore",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "Effect.makeSemaphore",
+            "withPermits",
+            "withPermits(n)"
+          ],
+          "path": "effect/semaphore.md",
+          "tokens": 929
+        },
+        {
+          "id": "bigdecimal",
+          "title": "BigDecimal",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "BigDecimal",
+            "value",
+            "BigInt",
+            "scale",
+            "value = 12345n",
+            "scale = 2",
+            "123.45",
+            "scale = -2",
+            "1234500",
+            "make"
+          ],
+          "path": "effect/bigdecimal.md",
+          "tokens": 2941
+        },
+        {
+          "id": "cause",
+          "title": "Cause",
+          "description": "The Effect<A, E, R> type is polymorphic in error type E, allowing flexibility in handling any desired error type. How...",
+          "tags": [
+            "Effect<A, E, R>",
+            "E",
+            "Cause<E>",
+            "Cause",
+            "Effect.failCause",
+            "never",
+            "Cause.die",
+            "Cause.fail",
+            "Empty",
+            "Fail<E>"
+          ],
+          "path": "effect/cause.md",
+          "tokens": 2071
+        },
+        {
+          "id": "chunk",
+          "title": "Chunk",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "Chunk<A>",
+            "A",
+            "Chunk",
+            "Chunk.empty",
+            "Chunk.make(...values)",
+            "Chunk.fromIterable",
+            "Chunk.unsafeFromArray",
+            "Chunk.appendAll",
+            "Chunk.drop",
+            "Equal.equals"
+          ],
+          "path": "effect/chunk.md",
+          "tokens": 1182
+        },
+        {
+          "id": "data",
+          "title": "Data",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "Data.struct",
+            "Equal.equals",
+            "Data.tuple",
+            "Data",
+            "Data.array",
+            "case",
+            "tagged",
+            "Class",
+            "TaggedClass",
+            "Data.case"
+          ],
+          "path": "effect/data.md",
+          "tokens": 4752
+        },
+        {
+          "id": "duration",
+          "title": "Duration",
+          "description": "The Duration data type data type is used to represent specific non-negative spans of time. It is commonly used to rep...",
+          "tags": [
+            "Duration",
+            "Duration.infinity",
+            "Duration.decode",
+            "number",
+            "bigint",
+            "\"${number} ${unit}\"",
+            "Duration.toMillis",
+            "Duration.toNanos",
+            "toNanos",
+            "Option<bigint>"
+          ],
+          "path": "effect/duration.md",
+          "tokens": 1293
+        },
+        {
+          "id": "datetime",
+          "title": "DateTime",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "Date",
+            "DateTime",
+            "epochMillis",
+            "TimeZone",
+            "DateTime.Parts",
+            "DateTime.Input",
+            "{ year: 2024, month: 1, day: 1 }",
+            "Utc",
+            "IllegalArgumentException",
+            "None"
+          ],
+          "path": "effect/datetime.md",
+          "tokens": 6159
+        },
+        {
+          "id": "either",
+          "title": "Either",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "Either",
+            "Either<R, L>",
+            "Right",
+            "Left",
+            "R",
+            "L",
+            "Either.right",
+            "Either.left",
+            "Either.isLeft",
+            "Either.isRight"
+          ],
+          "path": "effect/either.md",
+          "tokens": 2650
+        },
+        {
+          "id": "exit",
+          "title": "Exit",
+          "description": "An Exit<A, E> describes the result of running an Effect workflow.",
+          "tags": [
+            "Exit<A, E>",
+            "Effect",
+            "Exit.Success",
+            "A",
+            "Exit.Failure",
+            "E",
+            "Exit.succeed",
+            "Exit.failCause",
+            "Exit",
+            "Exit.match"
+          ],
+          "path": "effect/exit.md",
+          "tokens": 892
+        },
+        {
+          "id": "hashset",
+          "title": "HashSet",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "List",
+            "Array",
+            "HashMap",
+            "MutableHashMap",
+            "HashSet",
+            "HashSet.mutate",
+            "MutableHashSet",
+            "Equal",
+            "===",
+            "Data"
+          ],
+          "path": "effect/hashset.md",
+          "tokens": 4470
+        },
+        {
+          "id": "option",
+          "title": "Option",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "Option",
+            "Option<A>",
+            "Some<A>",
+            "A",
+            "None",
+            "Option.some",
+            "Option.none",
+            "Option.liftPredicate",
+            "User",
+            "\"email\""
+          ],
+          "path": "effect/option.md",
+          "tokens": 5241
+        },
+        {
+          "id": "redacted",
+          "title": "Redacted",
+          "description": "The Redacted module provides functionality for handling sensitive information securely within your application.\nBy us...",
+          "tags": [
+            "Redacted",
+            "Redacted.make",
+            "Redacted<A>",
+            "A",
+            "Redacted.value",
+            "Redacted.unsafeWipe",
+            "Redacted.getEquivalence"
+          ],
+          "path": "effect/redacted.md",
+          "tokens": 680
+        },
+        {
+          "id": "error-accumulation",
+          "title": "Error Accumulation",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "Effect.zip",
+            "Effect.forEach",
+            "Effect.validate",
+            "Effect.validateAll",
+            "Effect.validateFirst",
+            "number",
+            "Effect.partition",
+            "never"
+          ],
+          "path": "effect/error-accumulation.md",
+          "tokens": 1386
+        },
+        {
+          "id": "error-channel-operations",
+          "title": "Error Channel Operations",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "Effect.mapError",
+            "string",
+            "Error",
+            "Effect.mapBoth",
+            "filterOrFail",
+            "filterOrDie",
+            "filterOrDieMessage",
+            "filterOrElse",
+            "user",
+            "User"
+          ],
+          "path": "effect/error-channel-operations.md",
+          "tokens": 3459
+        },
+        {
+          "id": "expected-errors",
+          "title": "Expected Errors",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "Effect",
+            "HttpError",
+            "program",
+            "string",
+            "Data.TaggedError",
+            "_tag",
+            "ValidationError",
+            "task3",
+            "task2",
+            "Effect.either"
+          ],
+          "path": "effect/expected-errors.md",
+          "tokens": 7660
+        },
+        {
+          "id": "fallback",
+          "title": "Fallback",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "Effect.orElse",
+            "Effect.orElseFail",
+            "Effect.orElseSucceed",
+            "Effect.firstSuccessOf",
+            "Effect",
+            "IllegalArgumentException"
+          ],
+          "path": "effect/fallback.md",
+          "tokens": 1367
+        },
+        {
+          "id": "matching",
+          "title": "Matching",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "Effect.match",
+            "Effect.ignore",
+            "Effect.matchEffect",
+            "Effect.matchCause",
+            "Effect.matchCauseEffect"
+          ],
+          "path": "effect/matching.md",
+          "tokens": 1555
+        },
+        {
+          "id": "parallel-and-sequential-errors",
+          "title": "Parallel and Sequential Errors",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "\"Oh uh!\"",
+            "fail",
+            "die",
+            "Effect.parallelErrors",
+            "fail1",
+            "fail2",
+            "Effect.ensuring"
+          ],
+          "path": "effect/parallel-and-sequential-errors.md",
+          "tokens": 918
+        },
+        {
+          "id": "retrying",
+          "title": "Retrying",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "retry",
+            "retryOrElse",
+            "Effect.retry",
+            "until",
+            "while",
+            "Effect.retryOrElse"
+          ],
+          "path": "effect/retrying.md",
+          "tokens": 1340
+        },
+        {
+          "id": "sandboxing",
+          "title": "Sandboxing",
+          "description": "Errors are an inevitable part of programming, and they can arise from various sources like failures, defects, fiber i...",
+          "tags": [
+            "Effect.sandbox",
+            "Effect<A, E, R>",
+            "Effect<A, Cause<E>, R>",
+            "Cause<E>",
+            "Effect",
+            "Effect.unsandbox"
+          ],
+          "path": "effect/sandboxing.md",
+          "tokens": 636
+        },
+        {
+          "id": "timing-out",
+          "title": "Timing Out",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "Effect.timeout",
+            "TimeoutException",
+            "Effect.timeoutOption",
+            "None",
+            "Option",
+            "Effect.disconnect",
+            "Effect.timeoutFail",
+            "Effect.timeoutFailCause",
+            "Effect.timeoutTo"
+          ],
+          "path": "effect/timing-out.md",
+          "tokens": 2623
+        },
+        {
+          "id": "two-types-of-errors",
+          "title": "Two Types of Errors",
+          "description": "Just like any other program, Effect programs may fail for expected or unexpected reasons.\nThe difference between a no...",
+          "tags": [
+            "Effect",
+            "HttpError"
+          ],
+          "path": "effect/two-types-of-errors.md",
+          "tokens": 500
+        },
+        {
+          "id": "unexpected-errors",
+          "title": "Unexpected Errors",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "Effect<never, E, never>",
+            "Effect<A, E, R>",
+            "Effect<A, never, R>",
+            "Effect.die",
+            "never",
+            "RuntimeException",
+            "Effect.dieMessage",
+            "Effect.orDie",
+            "Effect.orDieWith",
+            "Effect.exit"
+          ],
+          "path": "effect/unexpected-errors.md",
+          "tokens": 2733
+        },
+        {
+          "id": "yieldable-errors",
+          "title": "Yieldable Errors",
+          "description": "Yieldable Errors are special types of errors that can be yielded directly within a generator function using Effect.ge...",
+          "tags": [
+            "Data.Error",
+            "Data.TaggedError",
+            "_tag"
+          ],
+          "path": "effect/yieldable-errors.md",
+          "tokens": 610
+        },
+        {
+          "id": "building-pipelines",
+          "title": "Building Pipelines",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "pipe",
+            "input",
+            "func1",
+            "func2",
+            "funcN",
+            "5",
+            "increment",
+            "1",
+            "6",
+            "double"
+          ],
+          "path": "effect/building-pipelines.md",
+          "tokens": 5442
+        },
+        {
+          "id": "control-flow-operators",
+          "title": "Control Flow Operators",
+          "description": "Even though JavaScript provides built-in control flow structures, Effect offers additional control flow functions tha...",
+          "tags": [
+            "Effect.if",
+            "true",
+            "false",
+            "onTrue",
+            "onFalse",
+            "Random.nextBoolean",
+            "Effect.when",
+            "if (condition)",
+            "Option<A>",
+            "Some"
+          ],
+          "path": "effect/control-flow-operators.md",
+          "tokens": 4895
+        },
+        {
+          "id": "creating-effects",
+          "title": "Creating Effects",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "Effect.succeed",
+            "Effect.fail",
+            "Effect",
+            "success",
+            "Effect<number, never, never>",
+            "number",
+            "never",
+            "failure",
+            "Effect<never, Error, never>",
+            "Error"
+          ],
+          "path": "effect/creating-effects.md",
+          "tokens": 6156
+        },
+        {
+          "id": "devtools",
+          "title": "Devtools",
+          "description": "import { Aside, Steps, Tabs, TabItem } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "tsconfig.json",
+            "yield*",
+            "Effect.gen",
+            "pipe()",
+            "Effect.Service",
+            "Data.TaggedError",
+            "Self",
+            "gen",
+            "fn",
+            "package.json"
+          ],
+          "path": "effect/devtools.md",
+          "tokens": 2104
+        },
+        {
+          "id": "importing-effect",
+          "title": "Importing Effect",
+          "description": "import { Aside, Tabs, TabItem } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "effect",
+            "import",
+            "Effect"
+          ],
+          "path": "effect/importing-effect.md",
+          "tokens": 1245
+        },
+        {
+          "id": "introduction",
+          "title": "Introduction",
+          "description": "Welcome to the Effect documentation!",
+          "tags": [],
+          "path": "effect/introduction.md",
+          "tokens": 708
+        },
+        {
+          "id": "running-effects",
+          "title": "Running Effects",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "run",
+            "Effect",
+            "run*",
+            "Effect.runSync",
+            "Effect.runSyncExit",
+            "Exit",
+            "Success",
+            "Failure",
+            "Die",
+            "Promise"
+          ],
+          "path": "effect/running-effects.md",
+          "tokens": 2250
+        },
+        {
+          "id": "installation",
+          "title": "Installation",
+          "description": "import { Steps, Tabs, TabItem } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "package.json",
+            "tsconfig.json",
+            "strict",
+            "true",
+            "index.ts",
+            "\"Hello, World!\"",
+            "main.ts",
+            "src/App.tsx"
+          ],
+          "path": "effect/installation.md",
+          "tokens": 2179
+        },
+        {
+          "id": "the-effect-type",
+          "title": "The Effect Type",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "Effect",
+            "Success",
+            "Error",
+            "Requirements",
+            "void",
+            "never",
+            "Context",
+            "A",
+            "E",
+            "R"
+          ],
+          "path": "effect/the-effect-type.md",
+          "tokens": 1071
+        },
+        {
+          "id": "using-generators",
+          "title": "Using Generators",
+          "description": "import {\nAside,\nTabs,\nTabItem,\nBadge\n} from \"@astrojs/starlight/components\"",
+          "tags": [
+            "async",
+            "await",
+            "Effect.gen",
+            "yield*",
+            "downlevelIteration",
+            "target",
+            "\"es2015\"",
+            "tsconfig.json",
+            "if",
+            "else"
+          ],
+          "path": "effect/using-generators.md",
+          "tokens": 2920
+        },
+        {
+          "id": "why-effect",
+          "title": "Why Effect?",
+          "description": "Programming is challenging. When we build libraries and apps, we look to many tools to handle the complexity and make...",
+          "tags": [
+            "try/catch",
+            "number",
+            "Error",
+            "never"
+          ],
+          "path": "effect/why-effect.md",
+          "tokens": 1410
+        },
+        {
+          "id": "micro-for-effect-users",
+          "title": "Micro for Effect Users",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "Promise",
+            "Option",
+            "Either",
+            "Array",
+            "Micro",
+            "Effect",
+            "MicroExit",
+            "A",
+            "E",
+            "MicroCause"
+          ],
+          "path": "effect/micro-for-effect-users.md",
+          "tokens": 4826
+        },
+        {
+          "id": "wrapping-a-promise-based-api-with-micro",
+          "title": "Wrapping a Promise-based API with Micro",
+          "description": "This guide shows how to wrap a Promise-based API using the Micro library from Effect. We'll create a simple example t...",
+          "tags": [
+            "Promise",
+            "Micro",
+            "fetchWeather",
+            "Micro.promise",
+            "Micro<string, never, never>",
+            "Micro.runPromise",
+            "weatherEffect",
+            "Micro.runPromiseExit",
+            "Micro.tryPromise"
+          ],
+          "path": "effect/wrapping-a-promise-based-api-with-micro.md",
+          "tokens": 1346
+        },
+        {
+          "id": "getting-started-with-micro-expected-errors",
+          "title": "Expected Errors",
+          "description": "These errors, also referred to as failures, typed errors\nor recoverable errors, are errors that developers anticipate...",
+          "tags": [
+            "Micro",
+            "Micro.either",
+            "Micro<A, E, R>",
+            "Either",
+            "Left",
+            "never",
+            "recovered",
+            "Micro.catchAll",
+            "_tag",
+            "Effect.catchTag"
+          ],
+          "path": "effect/getting-started-with-micro-expected-errors.md",
+          "tokens": 1429
+        },
+        {
+          "id": "getting-started-with-micro-unexpected-errors",
+          "title": "Unexpected Errors",
+          "description": "Unexpected errors, also referred to as defects, untyped errors, or unrecoverable errors, are errors that developers\nd...",
+          "tags": [
+            "Micro.die",
+            "Effect.die",
+            "Micro.orDie",
+            "Micro.catchAllDefect",
+            "Micro.fail",
+            "Micro.interrupt",
+            "Effect.orElseSucceed",
+            "Micro.orElseSucceed"
+          ],
+          "path": "effect/getting-started-with-micro-unexpected-errors.md",
+          "tokens": 1063
+        },
+        {
+          "id": "getting-started-with-micro-matching",
+          "title": "Matching",
+          "description": "The Micro.match function lets you handle both success and failure cases without performing side effects. You provide ...",
+          "tags": [
+            "Micro.match",
+            "Micro.matchEffect",
+            "Micro.matchCause",
+            "Micro.matchCauseEffect",
+            "Micro.retry"
+          ],
+          "path": "effect/getting-started-with-micro-matching.md",
+          "tokens": 1022
+        },
+        {
+          "id": "getting-started-with-micro-timing-out",
+          "title": "Timing out",
+          "description": "When an operation does not finish within the specified duration, the behavior of the Micro.timeout depends on whether...",
+          "tags": [
+            "Micro.timeout",
+            "TimeoutException",
+            "Micro.sandbox",
+            "Micro<A, E, R>",
+            "Micro<A, MicroCause<E>, R>"
+          ],
+          "path": "effect/getting-started-with-micro-timing-out.md",
+          "tokens": 913
+        },
+        {
+          "id": "inspecting-errors",
+          "title": "Inspecting Errors",
+          "description": "Executes an effectful operation to inspect the failure of an effect without altering it.",
+          "tags": [],
+          "path": "effect/inspecting-errors.md",
+          "tokens": 628
+        },
+        {
+          "id": "getting-started-with-micro-yieldable-errors",
+          "title": "Yieldable Errors",
+          "description": "Yieldable Errors are special types of errors that can be yielded directly within a generator function using Micro.gen...",
+          "tags": [
+            "Micro.gen",
+            "Micro.fail",
+            "Error",
+            "TaggedError",
+            "_tag",
+            "Micro.catchTag"
+          ],
+          "path": "effect/getting-started-with-micro-yieldable-errors.md",
+          "tokens": 550
+        },
+        {
+          "id": "requirements-management",
+          "title": "Requirements Management",
+          "description": "In the context of programming, a service refers to a reusable component or functionality that can be used by differen...",
+          "tags": [
+            "program",
+            "Random",
+            "Requirements"
+          ],
+          "path": "effect/requirements-management.md",
+          "tokens": 779
+        },
+        {
+          "id": "resource-management",
+          "title": "Resource Management",
+          "description": "In simple terms, a MicroScope represents the lifetime of one or more resources. When a scope is closed, the resources...",
+          "tags": [
+            "MicroScope",
+            "Micro.addFinalizer",
+            "MicroExit",
+            "Micro.acquireRelease(acquire, release)",
+            "acquire",
+            "release",
+            "Micro.acquireRelease",
+            "Scope",
+            "Micro.scoped",
+            "acquireUseRelease"
+          ],
+          "path": "effect/resource-management.md",
+          "tokens": 1898
+        },
+        {
+          "id": "scheduling",
+          "title": "Scheduling",
+          "description": "The MicroSchedule type represents a function that can be used to calculate the delay between\nrepeats.",
+          "tags": [
+            "MicroSchedule",
+            "None",
+            "Micro.repeat",
+            "action",
+            "dryRun"
+          ],
+          "path": "effect/scheduling.md",
+          "tokens": 1830
+        },
+        {
+          "id": "concurrency",
+          "title": "Concurrency",
+          "description": "One of the fundamental ways to create a fiber is by forking an existing effect.\nWhen you fork an effect, it starts ex...",
+          "tags": [
+            "Micro.fork",
+            "fib(100)",
+            "Micro.fiberJoin",
+            "Micro",
+            "Micro.fiberAwait",
+            "MicroExit"
+          ],
+          "path": "effect/concurrency.md",
+          "tokens": 603
+        },
+        {
+          "id": "interruptions",
+          "title": "Interruptions",
+          "description": "All effects in Effect are executed by fibers. If you didn't create the fiber yourself, it was created by an operation...",
+          "tags": [
+            "Micro",
+            ".await",
+            ".interrupt",
+            "MicroExit",
+            "Micro.interrupt",
+            "\"start\"",
+            "\"done\"",
+            "Effect.interrupt",
+            "Micro.forEach",
+            "Effect.race"
+          ],
+          "path": "effect/interruptions.md",
+          "tokens": 1283
+        },
+        {
+          "id": "logging",
+          "title": "Logging",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "Effect.log",
+            "INFO",
+            "timestamp",
+            "level",
+            "ERROR",
+            "fiber",
+            "message",
+            "span",
+            "cause",
+            "DEBUG"
+          ],
+          "path": "effect/logging.md",
+          "tokens": 6764
+        },
+        {
+          "id": "metrics-in-effect",
+          "title": "Metrics in Effect",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "Metric.counter",
+            "number",
+            "bigint",
+            "incremental: true",
+            "Metric.gauge",
+            "0",
+            "100",
+            "10",
+            "1",
+            "120"
+          ],
+          "path": "effect/metrics-in-effect.md",
+          "tokens": 6130
+        },
+        {
+          "id": "supervisor",
+          "title": "Supervisor",
+          "description": "A Supervisor<A> is a utility for managing fibers in Effect, allowing you to track their lifecycle (creation and termi...",
+          "tags": [
+            "Supervisor<A>",
+            "A",
+            "Supervisor.track",
+            "Effect.supervised"
+          ],
+          "path": "effect/supervisor.md",
+          "tokens": 1009
+        },
+        {
+          "id": "tracing-in-effect",
+          "title": "Tracing in Effect",
+          "description": "import {\nTabs,\nTabItem,\nSteps,\nAside\n} from \"@astrojs/starlight/components\"",
+          "tags": [
+            "Effect.withSpan",
+            "Effect<A, E, R>",
+            "@opentelemetry/api",
+            "@effect/opentelemetry",
+            "traceId",
+            "parentId",
+            "undefined",
+            "name",
+            "id",
+            "timestamp"
+          ],
+          "path": "effect/tracing-in-effect.md",
+          "tokens": 6837
+        },
+        {
+          "id": "command",
+          "title": "Command",
+          "description": "The @effect/platform/Command module provides a way to create and run commands with the specified process name and an ...",
+          "tags": [
+            "@effect/platform/Command",
+            "Command.make",
+            "CommandExecutor",
+            "string",
+            "lines",
+            "stream",
+            "Uint8Array",
+            "streamLines",
+            "Command.exitCode",
+            "Command.env"
+          ],
+          "path": "effect/command.md",
+          "tokens": 1642
+        },
+        {
+          "id": "filesystem",
+          "title": "FileSystem",
+          "description": "The @effect/platform/FileSystem module provides a set of operations for reading and writing from/to the file system.",
+          "tags": [
+            "@effect/platform/FileSystem",
+            "FileSystem",
+            "fromPath",
+            "toPath",
+            "cp -r",
+            "path",
+            "makeTempDirectory",
+            "makeTempFile",
+            "options",
+            "recursive"
+          ],
+          "path": "effect/filesystem.md",
+          "tokens": 2226
+        },
+        {
+          "id": "introduction-to-effect-platform",
+          "title": "Introduction to Effect Platform",
+          "description": "import {\nAside,\nTabs,\nTabItem,\nBadge\n} from \"@astrojs/starlight/components\"",
+          "tags": [
+            "@effect/platform",
+            "@effect/platform-node",
+            "@effect/platform-bun",
+            "@effect/platform-browser",
+            "Path",
+            "tsx"
+          ],
+          "path": "effect/introduction-to-effect-platform.md",
+          "tokens": 1680
+        },
+        {
+          "id": "keyvaluestore",
+          "title": "KeyValueStore",
+          "description": "The @effect/platform/KeyValueStore module provides a robust and effectful interface for managing key-value pairs.\nIt ...",
+          "tags": [
+            "@effect/platform/KeyValueStore",
+            "KeyValueStore",
+            "string",
+            "Uint8Array",
+            "SchemaStore",
+            "layerMemory",
+            "layerFileSystem",
+            "forSchema",
+            "JSON.stringify",
+            "JSON.parse"
+          ],
+          "path": "effect/keyvaluestore.md",
+          "tokens": 1235
+        },
+        {
+          "id": "path",
+          "title": "Path",
+          "description": "The @effect/platform/Path module provides a set of operations for working with file paths.",
+          "tags": [
+            "@effect/platform/Path",
+            "Path",
+            ".",
+            "..",
+            "/"
+          ],
+          "path": "effect/path.md",
+          "tokens": 677
+        },
+        {
+          "id": "platformlogger",
+          "title": "PlatformLogger",
+          "description": "Effect's logging system generally writes messages to the console by default. However, you might prefer to store logs ...",
+          "tags": [
+            "PlatformLogger.toFile",
+            "batchWindow",
+            "toFile",
+            "Effect",
+            "PlatformError",
+            "FileSystem",
+            "NodeFileSystem.layer"
+          ],
+          "path": "effect/platformlogger.md",
+          "tokens": 728
+        },
+        {
+          "id": "runtime",
+          "title": "Runtime",
+          "description": "runMain helps you execute a main effect with built-in error handling, logging, and signal management. You can concent...",
+          "tags": [
+            "runMain",
+            "1",
+            "0",
+            "SIGINT",
+            "disableErrorReporting",
+            "true",
+            "disablePrettyLogger",
+            "teardown"
+          ],
+          "path": "effect/runtime.md",
+          "tokens": 787
+        },
+        {
+          "id": "terminal",
+          "title": "Terminal",
+          "description": "The @effect/platform/Terminal module provides an abstraction for interacting with standard input and output, includin...",
+          "tags": [
+            "@effect/platform/Terminal",
+            "Terminal"
+          ],
+          "path": "effect/terminal.md",
+          "tokens": 1141
+        },
+        {
+          "id": "default-services",
+          "title": "Default Services",
+          "description": "Effect comes equipped with five pre-built services:",
+          "tags": [
+            "Clock",
+            "Console",
+            "Requirements",
+            "never",
+            "Effect.with<service>",
+            "Effect.with<service>Scoped",
+            "Effect.withClock",
+            "Effect.withClockScoped",
+            "Effect.withConfigProvider",
+            "ConfigProvider"
+          ],
+          "path": "effect/default-services.md",
+          "tokens": 874
+        },
+        {
+          "id": "layer-memoization",
+          "title": "Layer Memoization",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "L1",
+            "f()",
+            "f",
+            "A",
+            "B",
+            "C",
+            "BLive",
+            "CLive",
+            "ALive",
+            "Layer.fresh"
+          ],
+          "path": "effect/layer-memoization.md",
+          "tokens": 1285
+        },
+        {
+          "id": "managing-services",
+          "title": "Managing Services",
+          "description": "import { Aside, Tabs, TabItem } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "Requirements",
+            "Effect",
+            "Effect.provideService",
+            "never",
+            "Context",
+            "\"MyRandomService\"",
+            "next",
+            "Random",
+            "Map",
+            "Effect.andThen"
+          ],
+          "path": "effect/managing-services.md",
+          "tokens": 5375
+        },
+        {
+          "id": "avoiding-requirement-leakage",
+          "title": "Avoiding Requirement Leakage",
+          "description": "When constructing the Database service, it's important to avoid exposing the dependencies on Config and Logger within...",
+          "tags": [
+            "Database",
+            "Config",
+            "Logger",
+            "query",
+            "Requirements",
+            "never"
+          ],
+          "path": "effect/avoiding-requirement-leakage.md",
+          "tokens": 886
+        },
+        {
+          "id": "creating-layers",
+          "title": "Creating Layers",
+          "description": "The Layer type is structured as follows:",
+          "tags": [
+            "Layer",
+            "RequirementsOut",
+            "RequirementsIn",
+            "Error",
+            "Error = never",
+            "ConfigLive",
+            "Config",
+            "Layer<Config>",
+            "LoggerLive",
+            "Logger"
+          ],
+          "path": "effect/creating-layers.md",
+          "tokens": 2121
+        },
+        {
+          "id": "combining-layers",
+          "title": "Combining Layers",
+          "description": "Layers can be combined in two primary ways: merging and composing.",
+          "tags": [
+            "Layer.merge",
+            "\"In1\" | \"In2\"",
+            "\"Out1\" | \"Out2\"",
+            "ConfigLive",
+            "LoggerLive",
+            "AppConfigLive",
+            "never | Config = Config",
+            "Config | Logger",
+            "Layer.provide",
+            "DatabaseLive"
+          ],
+          "path": "effect/combining-layers.md",
+          "tokens": 1705
+        },
+        {
+          "id": "providing-a-layer-to-an-effect",
+          "title": "Providing a Layer to an Effect",
+          "description": "Now that we have assembled the fully resolved MainLive for our application,\nwe can provide it to our program to satis...",
+          "tags": [
+            "MainLive",
+            "Effect.provide",
+            "runnable",
+            "never",
+            "Layer.launch",
+            "Layer.tap",
+            "Layer.tapError"
+          ],
+          "path": "effect/providing-a-layer-to-an-effect.md",
+          "tokens": 1125
+        },
+        {
+          "id": "error-handling",
+          "title": "Error Handling",
+          "description": "When constructing layers, it is important to handle potential errors. The Effect library provides tools like Layer.ca...",
+          "tags": [
+            "Layer.catchAll",
+            "Layer.orElse"
+          ],
+          "path": "effect/error-handling.md",
+          "tokens": 656
+        },
+        {
+          "id": "simplifying-service-definitions-with-effect-service",
+          "title": "Simplifying Service Definitions with Effect.Service",
+          "description": "The Effect.Service API provides a way to define a service in a single step, including its tag and layer.\nIt also allo...",
+          "tags": [
+            "Effect.Service",
+            "Cache",
+            "Cache.Default",
+            "Cache.DefaultWithoutDependencies",
+            "succeed",
+            "sync",
+            "effect",
+            "scoped",
+            "Scoped.Default",
+            "Scope"
+          ],
+          "path": "effect/simplifying-service-definitions-with-effect-service.md",
+          "tokens": 3104
+        },
+        {
+          "id": "introduction-2",
+          "title": "Introduction",
+          "description": "In long-running applications, managing resources efficiently is essential, particularly when building large-scale sys...",
+          "tags": [
+            "try",
+            "finally",
+            "Effect.ensuring",
+            "Effect.onExit",
+            "Effect.onError",
+            "Exit",
+            "Effect.acquireUseRelease"
+          ],
+          "path": "effect/introduction-2.md",
+          "tokens": 1697
+        },
+        {
+          "id": "scope",
+          "title": "Scope",
+          "description": "import { Aside, Tabs, TabItem } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "Scope",
+            "Effect.addFinalizer",
+            "Effect.scoped",
+            "task1",
+            "task2",
+            "scope1",
+            "scope2",
+            "Scope.extend",
+            "Effect.acquireRelease(acquire, release)",
+            "Effect.acquireRelease"
+          ],
+          "path": "effect/scope.md",
+          "tokens": 7323
+        },
+        {
+          "id": "built-in-schedules",
+          "title": "Built-In Schedules",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "spaced",
+            "fixed"
+          ],
+          "path": "effect/built-in-schedules.md",
+          "tokens": 2332
+        },
+        {
+          "id": "cron",
+          "title": "Cron",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "Cron",
+            "Schedule",
+            "make",
+            "seconds",
+            "minutes",
+            "hours",
+            "days",
+            "months",
+            "weekdays",
+            "tz"
+          ],
+          "path": "effect/cron.md",
+          "tokens": 2120
+        },
+        {
+          "id": "examples",
+          "title": "Examples",
+          "description": "These examples demonstrate different approaches to handling timeouts, retries, and periodic execution using Effect. E...",
+          "tags": [
+            "401 Unauthorized",
+            "404 Not Found",
+            "429 Too Many Requests",
+            "Retry-After"
+          ],
+          "path": "effect/examples.md",
+          "tokens": 1515
+        },
+        {
+          "id": "scheduling-2",
+          "title": "Scheduling",
+          "description": "Scheduling is an important concept in Effect that allows you to define recurring effectful operations. It involves th...",
+          "tags": [
+            "Schedule",
+            "In",
+            "retry",
+            "repeat",
+            "Out",
+            "Requirements",
+            "Schedule.union",
+            "Schedule.intersect"
+          ],
+          "path": "effect/scheduling-2.md",
+          "tokens": 534
+        },
+        {
+          "id": "repetition",
+          "title": "Repetition",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "Effect.repeat",
+            "Effect.repeat(action, Schedule.once)",
+            "action",
+            "Effect.schedule",
+            "repeatN",
+            "Effect.repeatN(action, 1)",
+            "repeatOrElse",
+            "while",
+            "until"
+          ],
+          "path": "effect/repetition.md",
+          "tokens": 1434
+        },
+        {
+          "id": "schedule-combinators",
+          "title": "Schedule Combinators",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "Schedule.union",
+            "Schedule.intersect",
+            "Schedule.recurs(5)",
+            "Schedule.jittered",
+            "Schedule.jittered(0.0, 1.0)",
+            "Schedule.whileInput",
+            "Schedule.whileOutput",
+            "2",
+            "Schedule.modifyDelay",
+            "1-second"
+          ],
+          "path": "effect/schedule-combinators.md",
+          "tokens": 2959
+        },
+        {
+          "id": "sink-concurrency",
+          "title": "Sink Concurrency",
+          "description": "This section covers concurrent operations that allow multiple sinks to run simultaneously. These can be valuable for ...",
+          "tags": [
+            "Sink.zip",
+            "Sink.race"
+          ],
+          "path": "effect/sink-concurrency.md",
+          "tokens": 532
+        },
+        {
+          "id": "creating-sinks",
+          "title": "Creating Sinks",
+          "description": "In stream processing, sinks are used to consume and handle elements from a stream. Here, we'll explore various sink c...",
+          "tags": [
+            "Sink.head",
+            "Some",
+            "None",
+            "Sink.last",
+            "Sink.count",
+            "Sink.sum",
+            "Sink.take",
+            "Sink.drain",
+            "Sink.timed",
+            "Sink.forEach"
+          ],
+          "path": "effect/creating-sinks.md",
+          "tokens": 3081
+        },
+        {
+          "id": "introduction-3",
+          "title": "Introduction",
+          "description": "In stream processing, a Sink is a construct designed to consume elements generated by a Stream.",
+          "tags": [
+            "Sink",
+            "Stream",
+            "In",
+            "E",
+            "A",
+            "L",
+            "Stream.run",
+            "sink",
+            "Chunk<number>",
+            "number"
+          ],
+          "path": "effect/introduction-3.md",
+          "tokens": 625
+        },
+        {
+          "id": "leftovers",
+          "title": "Leftovers",
+          "description": "In this section, we'll look at handling elements left unconsumed by sinks. Sinks may process only a portion of the el...",
+          "tags": [
+            "Sink.collectLeftover",
+            "Sink.ignoreLeftover"
+          ],
+          "path": "effect/leftovers.md",
+          "tokens": 501
+        },
+        {
+          "id": "sink-operations",
+          "title": "Sink Operations",
+          "description": "In previous sections, we learned how to create and use sinks. Now, let's explore some operations that let you transfo...",
+          "tags": [
+            "Sink.mapInput",
+            "Sink.map",
+            "Sink.sum",
+            "Sink.dimap",
+            "mapInput",
+            "Sink.filterInput"
+          ],
+          "path": "effect/sink-operations.md",
+          "tokens": 880
+        },
+        {
+          "id": "declaring-new-data-types",
+          "title": "Declaring New Data Types",
+          "description": "To declare a schema for a primitive data type, such as File, you can use the Schema.declare function along with a typ...",
+          "tags": [
+            "File",
+            "Schema.declare",
+            "identifier",
+            "description",
+            "title",
+            "ReadonlySet<A>",
+            "Requirements",
+            "FileFromSelf"
+          ],
+          "path": "effect/declaring-new-data-types.md",
+          "tokens": 1746
+        },
+        {
+          "id": "advanced-usage-branded-types",
+          "title": "Branded types",
+          "description": "TypeScript's type system is structural, which means that any two types that are structurally equivalent are considere...",
+          "tags": [
+            "UserId",
+            "Username",
+            "string",
+            "getUser",
+            "effect/Brand",
+            "Schema.brand",
+            "unique symbol",
+            "Schema.fromBrand"
+          ],
+          "path": "effect/advanced-usage-branded-types.md",
+          "tokens": 842
+        },
+        {
+          "id": "property-signatures",
+          "title": "Property Signatures",
+          "description": "A PropertySignature represents a transformation from a \"From\" field to a \"To\" field. This allows you to define mappin...",
+          "tags": [
+            "PropertySignature",
+            "age",
+            "ToToken",
+            "\"?:\"",
+            "\":\"",
+            "ToType",
+            "FromKey",
+            "never",
+            "FromToken",
+            "FromType"
+          ],
+          "path": "effect/property-signatures.md",
+          "tokens": 8130
+        },
+        {
+          "id": "optional-fields-primitives",
+          "title": "Optional Fields Primitives",
+          "description": "The Schema.optionalToOptional API allows you to manage transformations from an optional field in the input to an opti...",
+          "tags": [
+            "Schema.optionalToOptional",
+            "optionalToOptional",
+            "from",
+            "to",
+            "decode",
+            "encode",
+            "Option.none()",
+            "string",
+            "Option.filter",
+            "Schema.optionalToRequired"
+          ],
+          "path": "effect/optional-fields-primitives.md",
+          "tokens": 2333
+        },
+        {
+          "id": "extending-schemas",
+          "title": "Extending Schemas",
+          "description": "Schemas in effect can be extended in multiple ways, allowing you to combine or enhance existing types with additional...",
+          "tags": [
+            "effect",
+            "fields",
+            "Struct",
+            "Schema.extend",
+            "...Struct.fields",
+            "Schema.String",
+            "Schema.Number",
+            "Schema.Boolean",
+            "suspend",
+            "Integer"
+          ],
+          "path": "effect/extending-schemas.md",
+          "tokens": 1458
+        },
+        {
+          "id": "renaming-properties",
+          "title": "Renaming Properties",
+          "description": "To rename a property directly during schema creation, you can utilize the Schema.fromKey function.",
+          "tags": [
+            "Schema.fromKey",
+            "Schema.optional",
+            "PropertySignature",
+            "Schema.propertySignature",
+            "Schema.rename"
+          ],
+          "path": "effect/renaming-properties.md",
+          "tokens": 762
+        },
+        {
+          "id": "recursive-schemas",
+          "title": "Recursive Schemas",
+          "description": "The Schema.suspend function is designed for defining schemas that reference themselves, such as in recursive data str...",
+          "tags": [
+            "Schema.suspend",
+            "Category",
+            "subcategories",
+            "Type",
+            "Expression",
+            "Operation",
+            "Encoded",
+            "id",
+            "NumberFromString",
+            "number"
+          ],
+          "path": "effect/recursive-schemas.md",
+          "tokens": 1233
+        },
+        {
+          "id": "schema-annotations",
+          "title": "Schema Annotations",
+          "description": "One of the key features of the Schema design is its flexibility and ability to be customized.\nThis is achieved throug...",
+          "tags": [
+            "ast",
+            "annotations",
+            "Schema.annotations",
+            "identifier",
+            "\"Person\"",
+            "\"Product\"",
+            "title",
+            "description",
+            "documentation",
+            "examples"
+          ],
+          "path": "effect/schema-annotations.md",
+          "tokens": 3536
+        },
+        {
+          "id": "schema-to-arbitrary",
+          "title": "Schema to Arbitrary",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "Arbitrary.make",
+            "Schema<A, I, R>",
+            "Arbitrary<A>",
+            "fast-check",
+            "FastCheck",
+            "Arbitrary",
+            "age",
+            "Schema.pattern",
+            "FastCheck.stringMatching(regexp)",
+            "FastCheck.stringMatching"
+          ],
+          "path": "effect/schema-to-arbitrary.md",
+          "tokens": 2454
+        },
+        {
+          "id": "literals",
+          "title": "Literals",
+          "description": "Literal schemas represent a literal type.\nYou can use them to specify exact values that a type must have.",
+          "tags": [
+            "string",
+            "number",
+            "boolean",
+            "null",
+            "bigint",
+            "\"a\"",
+            "Schema.Literal",
+            "override: true",
+            "literals",
+            "Schema.pickLiteral"
+          ],
+          "path": "effect/literals.md",
+          "tokens": 1087
+        },
+        {
+          "id": "template-literals",
+          "title": "Template literals",
+          "description": "In TypeScript, template literals types allow you to embed expressions within string literals.\nThe Schema.TemplateLite...",
+          "tags": [
+            "Schema.TemplateLiteral",
+            "Schema.String",
+            "Schema.Number",
+            "Schema.Literal",
+            "Schema.pattern",
+            "Schema.TemplateLiteralParser",
+            "Schema.Enums",
+            "enums"
+          ],
+          "path": "effect/template-literals.md",
+          "tokens": 1136
+        },
+        {
+          "id": "unions",
+          "title": "Unions",
+          "description": "The Schema module includes a built-in Schema.Union constructor for creating \"OR\" types, allowing you to define schema...",
+          "tags": [
+            "Schema.Union",
+            "Schema.Literal",
+            "override: true",
+            "null",
+            "undefined",
+            "Schema",
+            "kind",
+            "Circle",
+            "Square",
+            "Shape"
+          ],
+          "path": "effect/unions.md",
+          "tokens": 2471
+        },
+        {
+          "id": "tuples",
+          "title": "Tuples",
+          "description": "The Schema module allows you to define tuples, which are ordered collections of elements that may have different type...",
+          "tags": [
+            "Schema.Tuple",
+            "Schema.optionalElement",
+            "elements",
+            "rest",
+            "Schema.Array",
+            "readonly",
+            "Schema.mutable",
+            "value"
+          ],
+          "path": "effect/tuples.md",
+          "tokens": 1768
+        },
+        {
+          "id": "records",
+          "title": "Records",
+          "description": "The Schema module provides support for defining record types, which are collections of key-value pairs where the key ...",
+          "tags": [
+            "onExcessProperty",
+            "\"error\"",
+            "Schema.Record",
+            "Unsupported key schema",
+            "readonly",
+            "Schema.mutable",
+            "key",
+            "value"
+          ],
+          "path": "effect/records.md",
+          "tokens": 1596
+        },
+        {
+          "id": "structs",
+          "title": "Structs",
+          "description": "The Schema.Struct constructor defines a schema for an object with specific properties.",
+          "tags": [
+            "Schema.Struct",
+            "name",
+            "age",
+            "Schema.Struct({})",
+            "{}",
+            "unknown",
+            "Schema.Record",
+            "string",
+            "symbol",
+            "\"a\""
+          ],
+          "path": "effect/structs.md",
+          "tokens": 2229
+        },
+        {
+          "id": "tagged-structs",
+          "title": "Tagged Structs",
+          "description": "In TypeScript tags help to enhance type discrimination and pattern matching by providing a simple yet powerful way to...",
+          "tags": [
+            "Schema.tag",
+            "Schema.tag(\"User\")",
+            "_tag",
+            "User",
+            "make",
+            "Schema.TaggedStruct",
+            "TaggedStruct",
+            "\"Product\"",
+            "\"Electronics\""
+          ],
+          "path": "effect/tagged-structs.md",
+          "tokens": 1163
+        },
+        {
+          "id": "instanceof",
+          "title": "instanceOf",
+          "description": "When you need to define a schema for your custom data type defined through a class, the most convenient and fast way ...",
+          "tags": [
+            "class",
+            "Schema.instanceOf",
+            "instanceOf",
+            "effect/Schema",
+            "private",
+            "Schema.declare",
+            "pick",
+            "Struct",
+            "Schema.pick",
+            "SchemaClass"
+          ],
+          "path": "effect/instanceof.md",
+          "tokens": 2108
+        },
+        {
+          "id": "class-apis",
+          "title": "Class APIs",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "Schema.Class",
+            "Class",
+            "Person",
+            "instanceof",
+            "Schema.Struct",
+            "id",
+            "name",
+            "NonEmptyString",
+            "Equal",
+            "Schema.Data"
+          ],
+          "path": "effect/class-apis.md",
+          "tokens": 6611
+        },
+        {
+          "id": "default-constructors",
+          "title": "Default Constructors",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "Structs",
+            "Records",
+            "filters",
+            "brands",
+            "Schema<A, I, R>",
+            "A",
+            "I",
+            "make",
+            "BrandedNumberSchema",
+            "number & Brand<\"MyNumber\">"
+          ],
+          "path": "effect/default-constructors.md",
+          "tokens": 3090
+        },
+        {
+          "id": "schema-to-equivalence",
+          "title": "Schema to Equivalence",
+          "description": "The Schema.equivalence function allows you to generate an Equivalence based on a schema definition.\nThis function is ...",
+          "tags": [
+            "Schema.equivalence",
+            "Schema.Any",
+            "Schema.Unknown",
+            "Schema.Object",
+            "Schema.Struct({})",
+            "{}",
+            "Equal.equals",
+            "===",
+            "equivalence",
+            "typeParameters"
+          ],
+          "path": "effect/schema-to-equivalence.md",
+          "tokens": 1143
+        },
+        {
+          "id": "config",
+          "title": "Config",
+          "description": "The Schema.Config function allows you to decode and manage application configuration settings using structured schema...",
+          "tags": [
+            "Schema.Config",
+            "name",
+            "schema",
+            "I",
+            "string",
+            "Schema.String",
+            "Schema.Literal(\"...\")",
+            "Schema.NumberFromString"
+          ],
+          "path": "effect/config.md",
+          "tokens": 574
+        },
+        {
+          "id": "effect-data-types-option",
+          "title": "Option",
+          "description": "The Schema.Option function is useful for converting an Option into a JSON-serializable format.",
+          "tags": [
+            "Schema.Option",
+            "Option",
+            "{ _tag: \"None\" }",
+            "Option.none()",
+            "{ _tag: \"Some\", value: I }",
+            "Option.some(a)",
+            "I",
+            "A",
+            "Option.some(A)",
+            "Schema.OptionFromSelf"
+          ],
+          "path": "effect/effect-data-types-option.md",
+          "tokens": 2850
+        },
+        {
+          "id": "effect-data-types-either",
+          "title": "Either",
+          "description": "The Schema.Either function is useful for converting an Either into a JSON-serializable format.",
+          "tags": [
+            "Schema.Either",
+            "Either",
+            "{ _tag: \"Left\", left: LI }",
+            "Either.left(LA)",
+            "LI",
+            "LA",
+            "left",
+            "{ _tag: \"Right\", right: RI }",
+            "Either.right(RA)",
+            "RI"
+          ],
+          "path": "effect/effect-data-types-either.md",
+          "tokens": 1608
+        },
+        {
+          "id": "effect-data-types-exit",
+          "title": "Exit",
+          "description": "The Schema.Exit function is useful for converting an Exit into a JSON-serializable format.",
+          "tags": [
+            "Schema.Exit",
+            "Exit",
+            "Exit.failCause(Cause<FA>)",
+            "CauseEncoded<FI, DI>",
+            "Cause<FA>",
+            "failure",
+            "defect",
+            "{ _tag: \"Success\", value: SI }",
+            "Exit.succeed(SA)",
+            "SI"
+          ],
+          "path": "effect/effect-data-types-exit.md",
+          "tokens": 1749
+        },
+        {
+          "id": "readonlyset",
+          "title": "ReadonlySet",
+          "description": "The Schema.ReadonlySet function is useful for converting a ReadonlySet into a JSON-serializable format.",
+          "tags": [
+            "Schema.ReadonlySet",
+            "ReadonlySet",
+            "ReadonlyArray<I>",
+            "ReadonlySet<A>",
+            "I",
+            "A",
+            "Schema.ReadonlySetFromSelf",
+            "ReadonlySet<I>"
+          ],
+          "path": "effect/readonlyset.md",
+          "tokens": 750
+        },
+        {
+          "id": "readonlymap",
+          "title": "ReadonlyMap",
+          "description": "The Schema.ReadonlyMap function is useful for converting a ReadonlyMap into a JSON-serializable format.",
+          "tags": [
+            "Schema.ReadonlyMap",
+            "ReadonlyMap",
+            "ReadonlyArray<readonly [KI, VI]>",
+            "ReadonlyMap<KA, VA>",
+            "KI",
+            "KA",
+            "key",
+            "VI",
+            "VA",
+            "value"
+          ],
+          "path": "effect/readonlymap.md",
+          "tokens": 1682
+        },
+        {
+          "id": "effect-data-types-hashset",
+          "title": "HashSet",
+          "description": "The Schema.HashSet function provides a way to map between HashSet and an array representation, allowing for JSON seri...",
+          "tags": [
+            "Schema.HashSet",
+            "HashSet",
+            "ReadonlyArray<I>",
+            "HashSet<A>",
+            "A",
+            "I",
+            "Schema.HashSetFromSelf",
+            "HashSet<I>"
+          ],
+          "path": "effect/effect-data-types-hashset.md",
+          "tokens": 840
+        },
+        {
+          "id": "hashmap",
+          "title": "HashMap",
+          "description": "The Schema.HashMap function is useful for converting a HashMap into a JSON-serializable format.",
+          "tags": [
+            "Schema.HashMap",
+            "HashMap",
+            "ReadonlyArray<readonly [KI, VI]>",
+            "HashMap<KA, VA>",
+            "KI",
+            "KA",
+            "VI",
+            "VA",
+            "Schema.HashMapFromSelf",
+            "HashMap<KI, VI>"
+          ],
+          "path": "effect/hashmap.md",
+          "tokens": 1059
+        },
+        {
+          "id": "sortedset",
+          "title": "SortedSet",
+          "description": "The Schema.SortedSet function provides a way to map between SortedSet and an array representation, allowing for JSON ...",
+          "tags": [
+            "Schema.SortedSet",
+            "SortedSet",
+            "ReadonlyArray<I>",
+            "SortedSet<A>",
+            "A",
+            "I",
+            "Schema.SortedSetFromSelf",
+            "SortedSet<I>"
+          ],
+          "path": "effect/sortedset.md",
+          "tokens": 908
+        },
+        {
+          "id": "effect-data-types-duration",
+          "title": "Duration",
+          "description": "The Duration schema family enables the transformation and validation of duration values across various formats, inclu...",
+          "tags": [
+            "Duration",
+            "hrtime",
+            "[seconds: number, nanos: number]",
+            "DurationFromSelf",
+            "number",
+            "BigInt"
+          ],
+          "path": "effect/effect-data-types-duration.md",
+          "tokens": 855
+        },
+        {
+          "id": "effect-data-types-redacted",
+          "title": "Redacted",
+          "description": "The Schema.Redacted function is specifically designed to handle sensitive information by converting a string into a R...",
+          "tags": [
+            "Schema.Redacted",
+            "string",
+            "Redacted",
+            "<redacted>",
+            "Schema.RedactedFromSelf",
+            "effect"
+          ],
+          "path": "effect/effect-data-types-redacted.md",
+          "tokens": 1085
+        },
+        {
+          "id": "error-formatters",
+          "title": "Error Formatters",
+          "description": "When working with Effect Schema, errors encountered during decoding or encoding operations can be formatted using two...",
+          "tags": [
+            "TreeFormatter",
+            "ArrayFormatter",
+            "[\"name\"]",
+            "is missing",
+            "\"name\"",
+            "identifier",
+            "title",
+            "description",
+            "Schema.decodeUnknownEither",
+            "{ errors: \"all\" }"
+          ],
+          "path": "effect/error-formatters.md",
+          "tokens": 1985
+        },
+        {
+          "id": "error-messages",
+          "title": "Error Messages",
+          "description": "By default, when a parsing error occurs, the system automatically generates an informative message based on the schem...",
+          "tags": [
+            "identifier",
+            "title",
+            "description",
+            "name",
+            "null",
+            "string",
+            "message",
+            "MessageAnnotation",
+            "Effect<string>",
+            "override"
+          ],
+          "path": "effect/error-messages.md",
+          "tokens": 5194
+        },
+        {
+          "id": "filters",
+          "title": "Filters",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "Schema.filter",
+            "Type",
+            "true",
+            "undefined",
+            "false",
+            "string",
+            "ParseResult.ParseIssue",
+            "FilterIssue",
+            "ReadonlyArray<FilterOutput>",
+            "MyForm"
+          ],
+          "path": "effect/filters.md",
+          "tokens": 4305
+        },
+        {
+          "id": "getting-started-2",
+          "title": "Getting Started",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "effect/Schema",
+            "Schema",
+            "Struct",
+            "Person",
+            "name",
+            "age",
+            "Schema<Type, Encoded, Context>",
+            "Type",
+            "Schema.Type",
+            "interface"
+          ],
+          "path": "effect/getting-started-2.md",
+          "tokens": 7873
+        },
+        {
+          "id": "introduction-to-effect-schema",
+          "title": "Introduction to Effect Schema",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "effect/Schema",
+            "Schema<Type, Encoded, Requirements>",
+            "Encoded",
+            "Type",
+            "strict",
+            "tsconfig.json",
+            "exactOptionalPropertyTypes",
+            "name",
+            "string",
+            "undefined"
+          ],
+          "path": "effect/introduction-to-effect-schema.md",
+          "tokens": 2962
+        },
+        {
+          "id": "schema-to-json-schema",
+          "title": "Schema to JSON Schema",
+          "description": "The JSONSchema.make function allows you to generate a JSON Schema from a schema.",
+          "tags": [
+            "JSONSchema.make",
+            "Person",
+            "name",
+            "age",
+            "target",
+            "\"jsonSchema7\"",
+            "\"jsonSchema2019-09\"",
+            "\"jsonSchema2020-12\"",
+            "\"openApi3.1\"",
+            "items"
+          ],
+          "path": "effect/schema-to-json-schema.md",
+          "tokens": 5822
+        },
+        {
+          "id": "schema-projections",
+          "title": "Schema Projections",
+          "description": "Sometimes, you may want to create a new schema based on an existing one, focusing specifically on either its Type or ...",
+          "tags": [
+            "Type",
+            "Encoded",
+            "Schema.typeSchema",
+            "Schema.encodedSchema",
+            "Schema.encodedBoundSchema"
+          ],
+          "path": "effect/schema-projections.md",
+          "tokens": 810
+        },
+        {
+          "id": "schema-to-standard-schema",
+          "title": "Schema to Standard Schema",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "Schema.standardSchemaV1",
+            "Schema",
+            "R = never",
+            "validate",
+            "Promise",
+            "path"
+          ],
+          "path": "effect/schema-to-standard-schema.md",
+          "tokens": 830
+        },
+        {
+          "id": "schema-transformations",
+          "title": "Schema Transformations",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "Date",
+            "Schema.transform",
+            "Schema<SourceType, SourceEncoded>",
+            "SourceType",
+            "Schema<TargetType, TargetEncoded>",
+            "TargetEncoded",
+            "SourceEncoded",
+            "TargetType",
+            "decode",
+            "encode"
+          ],
+          "path": "effect/schema-transformations.md",
+          "tokens": 9374
+        },
+        {
+          "id": "ref",
+          "title": "Ref",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "Ref",
+            "Effect.provideServiceEffect",
+            "Effect.provideService",
+            "MyState",
+            "Ref.make(0)",
+            "\"q\"",
+            "readLine",
+            "@types/node"
+          ],
+          "path": "effect/ref.md",
+          "tokens": 2776
+        },
+        {
+          "id": "subscriptionref",
+          "title": "SubscriptionRef",
+          "description": "A SubscriptionRef<A> is a specialized form of a SynchronizedRef. It allows us to subscribe and receive updates on the...",
+          "tags": [
+            "SubscriptionRef<A>",
+            "SubscriptionRef",
+            "get",
+            "set",
+            "modify",
+            "changes",
+            "SubscriptionRef.make",
+            "server",
+            "Ref",
+            "client"
+          ],
+          "path": "effect/subscriptionref.md",
+          "tokens": 1215
+        },
+        {
+          "id": "synchronizedref",
+          "title": "SynchronizedRef",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "SynchronizedRef<A>",
+            "A",
+            "SynchronizedRef",
+            "Ref",
+            "updateEffect"
+          ],
+          "path": "effect/synchronizedref.md",
+          "tokens": 670
+        },
+        {
+          "id": "consuming-streams",
+          "title": "Consuming Streams",
+          "description": "When working with streams, it's essential to understand how to consume the data they produce.\nIn this guide, we'll wa...",
+          "tags": [
+            "Chunk",
+            "Stream.runCollect",
+            "Stream.runForEach",
+            "Stream.fold",
+            "foldedStream",
+            "Stream.runFold",
+            "foldedWhileStream",
+            "Stream.runFoldWhile",
+            "Sink",
+            "Stream.run"
+          ],
+          "path": "effect/consuming-streams.md",
+          "tokens": 613
+        },
+        {
+          "id": "creating-streams",
+          "title": "Creating Streams",
+          "description": "In this section, we'll explore various methods for creating Effect Streams. These methods will help you generate stre...",
+          "tags": [
+            "Stream",
+            "Stream.make",
+            "Stream.empty",
+            "void",
+            "Stream.void",
+            "[min, max]",
+            "min",
+            "max",
+            "Stream.range",
+            "Stream.iterate"
+          ],
+          "path": "effect/creating-streams.md",
+          "tokens": 5313
+        },
+        {
+          "id": "error-handling-in-streams",
+          "title": "Error Handling in Streams",
+          "description": "When working with streams that may encounter errors, it's crucial to know how to handle these errors gracefully. The ...",
+          "tags": [
+            "Stream.orElse",
+            "s1",
+            "s2",
+            "Stream.orElseEither",
+            "Stream.catchAll",
+            "Stream.catchAllCause",
+            "Stream.catchSome",
+            "Stream.catchSomeCause",
+            "Stream.onError",
+            "Stream.retry"
+          ],
+          "path": "effect/error-handling-in-streams.md",
+          "tokens": 2789
+        },
+        {
+          "id": "introduction-to-streams",
+          "title": "Introduction to Streams",
+          "description": "In this guide, we'll explore the concept of a Stream<A, E, R>. A Stream is a program description that, when executed,...",
+          "tags": [
+            "Stream<A, E, R>",
+            "Stream",
+            "A",
+            "E",
+            "R",
+            "Effect",
+            "Effect<A, E, R>",
+            "Stream.tap",
+            "take",
+            "takeWhile"
+          ],
+          "path": "effect/introduction-to-streams.md",
+          "tokens": 1926
+        },
+        {
+          "id": "mapping",
+          "title": "Mapping",
+          "description": "The Stream.map operation applies a specified function to each element in a stream, creating a new stream with the tra...",
+          "tags": [
+            "Stream.map",
+            "Stream.as",
+            "null",
+            "Stream.mapEffect",
+            "Stream.mapAccum",
+            "Stream.mapConcat",
+            "Iterable",
+            "Stream.filter",
+            "reduce",
+            "scan"
+          ],
+          "path": "effect/mapping.md",
+          "tokens": 1834
+        },
+        {
+          "id": "zipping",
+          "title": "Zipping",
+          "description": "Zipping combines elements from two streams into a new stream, pairing elements from each input stream. This can be ac...",
+          "tags": [
+            "Stream.zip",
+            "Stream.zipWith",
+            "Stream.zipAll",
+            "Stream.zipAllWith",
+            "Stream.zipLatest",
+            "Stream.zipLatestWith",
+            "zipWithPrevious",
+            "zipWithNext",
+            "zipWithPreviousAndNext",
+            "Stream.zipWithIndex"
+          ],
+          "path": "effect/zipping.md",
+          "tokens": 1851
+        },
+        {
+          "id": "partitioning",
+          "title": "Partitioning",
+          "description": "Partitioning a stream involves dividing it into two distinct streams based on a specified condition. The Stream modul...",
+          "tags": [
+            "Stream.partition",
+            "Stream.partitionEither",
+            "Scope",
+            "Either.left",
+            "Either.right"
+          ],
+          "path": "effect/partitioning.md",
+          "tokens": 587
+        },
+        {
+          "id": "grouping",
+          "title": "Grouping",
+          "description": "When processing streams of data, you may need to group elements based on specific criteria. The Stream module provide...",
+          "tags": [
+            "groupByKey",
+            "groupBy",
+            "grouped",
+            "groupedWithin",
+            "Stream.groupByKey",
+            "(a: A) => K",
+            "A",
+            "K",
+            "GroupBy",
+            "GroupBy.evaluate"
+          ],
+          "path": "effect/grouping.md",
+          "tokens": 1379
+        },
+        {
+          "id": "concatenation",
+          "title": "Concatenation",
+          "description": "In stream processing, you may need to combine the contents of multiple streams. The Stream module offers several oper...",
+          "tags": [
+            "Stream.concat",
+            "Stream.concatAll",
+            "Stream.flatMap",
+            "(a: A) => Stream<...>",
+            "flatMap",
+            "switch"
+          ],
+          "path": "effect/concatenation.md",
+          "tokens": 1304
+        },
+        {
+          "id": "merging",
+          "title": "Merging",
+          "description": "Sometimes, you may want to interleave elements from two streams and create a single output stream. In such cases, Str...",
+          "tags": [
+            "Stream.concat",
+            "Stream.merge",
+            "haltStrategy",
+            "\"left\"",
+            "\"right\"",
+            "\"both\"",
+            "\"either\"",
+            "haltStrategy: \"left\"",
+            "Stream.mergeWith",
+            "Stream.interleave"
+          ],
+          "path": "effect/merging.md",
+          "tokens": 1623
+        },
+        {
+          "id": "broadcasting",
+          "title": "Broadcasting",
+          "description": "Broadcasting a stream creates multiple downstream streams that each receive the same elements from the source stream....",
+          "tags": [
+            "maximumLag"
+          ],
+          "path": "effect/broadcasting.md",
+          "tokens": 809
+        },
+        {
+          "id": "buffering",
+          "title": "Buffering",
+          "description": "Effect streams use a pull-based model, allowing downstream consumers to control the rate at which they request elemen...",
+          "tags": [
+            "Stream.buffer",
+            "capacity",
+            "{ capacity: number }",
+            "{ capacity: \"unbounded\" }",
+            "Stream.debounce"
+          ],
+          "path": "effect/buffering.md",
+          "tokens": 1085
+        },
+        {
+          "id": "throttling",
+          "title": "Throttling",
+          "description": "Throttling is a technique for regulating the rate at which elements are emitted from a stream. It helps maintain a st...",
+          "tags": [
+            "Stream.throttle",
+            "cost = () => 1",
+            "units: 1",
+            "duration: \"100 millis\"",
+            "cost",
+            "Stream.schedule",
+            "Schedule.spaced(\"1 second\")"
+          ],
+          "path": "effect/throttling.md",
+          "tokens": 1632
+        },
+        {
+          "id": "resourceful-streams",
+          "title": "Resourceful Streams",
+          "description": "In the Stream module, you'll find that most of the constructors offer a special variant designed for lifting a scoped...",
+          "tags": [
+            "Stream",
+            "Stream.acquireRelease",
+            "Stream.finalizer",
+            "Effect.acquireRelease",
+            "Effect.addFinalizer",
+            "open",
+            "application",
+            "Stream.ensuring",
+            "Application Logic.",
+            "Finalizing the stream"
+          ],
+          "path": "effect/resourceful-streams.md",
+          "tokens": 1173
+        },
+        {
+          "id": "testclock",
+          "title": "TestClock",
+          "description": "import { Aside } from \"@astrojs/starlight/components\"",
+          "tags": [
+            "TestClock",
+            "TestClock.adjust",
+            "TestClock.setTime",
+            "Effect.sleep",
+            "Clock"
+          ],
+          "path": "effect/testclock.md",
+          "tokens": 1504
+        },
+        {
+          "id": "equal",
+          "title": "Equal",
+          "description": "The Equal module provides a simple and convenient way to define and check for equality between two values in TypeScript.",
+          "tags": [
+            "===",
+            "==",
+            "Equal",
+            "Equal.equals",
+            "a",
+            "b",
+            "Hash",
+            "[Equal.symbol]",
+            "[Hash.symbol]",
+            "Person"
+          ],
+          "path": "effect/equal.md",
+          "tokens": 2879
+        },
+        {
+          "id": "hash",
+          "title": "Hash",
+          "description": "The Hash interface is closely tied to the Equal interface and serves a supportive role in optimizing equality checks ...",
+          "tags": [
+            "Hash",
+            "Person",
+            "Equal",
+            "[Equal.symbol]",
+            "id",
+            "name",
+            "age",
+            "[Hash.symbol]",
+            "true",
+            "alice"
+          ],
+          "path": "effect/hash.md",
+          "tokens": 823
         }
       ]
     },
