@@ -154,8 +154,28 @@ export const githubAdapter: Adapter = {
         // Derive title from first H1, or from filename
         const titleMatch = content.match(/^#\s+(.+)/m);
         const filename = path.split("/").pop()!.replace(/\.mdx?$/, "");
-        const title = titleMatch?.[1]?.trim() ?? filename;
-        const id = slugify(filename);
+        const baseTitle = titleMatch?.[1]?.trim() ?? filename;
+        const baseId = slugify(filename);
+
+        // Apply topic prefix based on subdirectory
+        const prefixMode = source.topicPrefix ?? "none";
+        let id = baseId;
+        let title = baseTitle;
+        if (prefixMode === "directory" || prefixMode === "auto") {
+          const relativePath = path.slice(docsPath.length + 1); // strip "docsPath/"
+          const segments = relativePath.split("/");
+          if (segments.length > 1) {
+            const subDir = segments[0]!;
+            const prefix = slugify(subDir);
+            id = `${prefix}-${baseId}`;
+            // Capitalize subdirectory for display title
+            const displayPrefix = subDir
+              .split("-")
+              .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+              .join(" ");
+            title = `${displayPrefix}: ${baseTitle}`;
+          }
+        }
 
         const firstParagraph = extractFirstParagraph(content);
 

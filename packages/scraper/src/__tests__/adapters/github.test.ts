@@ -479,4 +479,103 @@ describe("githubAdapter", () => {
       expect.stringContaining("Failed to fetch contents for articles/bad-dir"),
     );
   });
+
+  it("directory prefix mode prefixes IDs and titles correctly", async () => {
+    const source: SourceConfig = {
+      ...baseSource,
+      topicPrefix: "directory",
+      github: {
+        repo: "owner/repo",
+        docsPath: "articles",
+        subDirs: ["azure-functions", "cosmos-db"],
+      },
+    };
+
+    vi.spyOn(globalThis, "fetch")
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => treeWithSubDirs,
+      } as Response)
+      .mockResolvedValue({
+        ok: true,
+        text: async () => longContent,
+      } as Response);
+
+    const result = await githubAdapter.process(source);
+    // Only azure-functions and cosmos-db files (3 total)
+    expect(result.length).toBe(3);
+    const ids = result.map((t) => t.id);
+    expect(ids).toContain("azure-functions-overview");
+    expect(ids).toContain("azure-functions-triggers");
+    expect(ids).toContain("cosmos-db-intro");
+    // Title should include service context
+    const overview = result.find((t) => t.id === "azure-functions-overview");
+    expect(overview!.title).toBe("Azure Functions: Getting Started");
+  });
+
+  it("none prefix mode has no prefix (backwards compat)", async () => {
+    const source: SourceConfig = {
+      ...baseSource,
+      topicPrefix: "none",
+      github: {
+        repo: "owner/repo",
+        docsPath: "articles",
+        subDirs: ["azure-functions"],
+      },
+    };
+
+    vi.spyOn(globalThis, "fetch")
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => treeWithSubDirs,
+      } as Response)
+      .mockResolvedValue({
+        ok: true,
+        text: async () => longContent,
+      } as Response);
+
+    const result = await githubAdapter.process(source);
+    expect(result.length).toBe(2);
+    const ids = result.map((t) => t.id);
+    expect(ids).toContain("overview");
+    expect(ids).toContain("triggers");
+  });
+
+  it("files at docsPath root get no prefix even with directory mode", async () => {
+    const source: SourceConfig = {
+      ...baseSource,
+      topicPrefix: "auto",
+      github: {
+        repo: "owner/repo",
+        docsPath: "articles",
+      },
+    };
+
+    // Include a file directly at docsPath root (articles/top-level.md)
+    vi.spyOn(globalThis, "fetch")
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({
+          tree: [
+            { path: "articles/top-level.md", type: "blob" },
+            { path: "articles/azure-functions/overview.md", type: "blob" },
+          ],
+        }),
+      } as Response)
+      .mockResolvedValue({
+        ok: true,
+        text: async () => longContent,
+      } as Response);
+
+    const result = await githubAdapter.process(source);
+    expect(result.length).toBe(2);
+    // Root file has no prefix
+    const topLevel = result.find((t) => t.id === "top-level");
+    expect(topLevel).toBeDefined();
+    expect(topLevel!.title).toBe("Getting Started");
+    // Nested file has prefix
+    const overview = result.find((t) => t.id === "azure-functions-overview");
+    expect(overview).toBeDefined();
+    expect(overview!.title).toBe("Azure Functions: Getting Started");
+  });
 });
