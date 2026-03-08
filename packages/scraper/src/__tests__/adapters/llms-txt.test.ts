@@ -8,6 +8,9 @@ vi.mock("../../pipeline/fetch.js", () => ({
 vi.mock("../../pipeline/clean.js", () => ({
   cleanMarkdown: vi.fn(),
 }));
+vi.mock("../../pipeline/extract.js", () => ({
+  extractContent: vi.fn(),
+}));
 
 const baseSource: SourceConfig = {
   id: "hono",
@@ -351,5 +354,124 @@ describe("llmsTxtAdapter", () => {
 
     const result = await llmsTxtAdapter.process(baseSource);
     expect(result).toEqual([]);
+  });
+
+  it("falls back to all links when no .md or /docs/ links found", async () => {
+    vi.spyOn(console, "log").mockImplementation(() => {});
+    const fetchMod = await import("../../pipeline/fetch.js");
+    const cleanMod = await import("../../pipeline/clean.js");
+
+    // Links without .md or /docs/ — should be accepted via fallback
+    const indexContent = [
+      "[Intro](https://example.com/concepts/intro)",
+      "[Signals](https://example.com/reference/signals)",
+    ].join("\n\n");
+    vi.mocked(fetchMod.fetchContent)
+      .mockResolvedValueOnce(indexContent)
+      .mockResolvedValue("# Title\n\n" + longContent);
+    vi.mocked(cleanMod.cleanMarkdown).mockResolvedValue(
+      "# Title\n\n" + longContent,
+    );
+
+    const result = await llmsTxtAdapter.process(baseSource);
+    expect(result.length).toBe(2);
+  });
+
+  it("does not fall back when .md links exist", async () => {
+    vi.spyOn(console, "log").mockImplementation(() => {});
+    const fetchMod = await import("../../pipeline/fetch.js");
+    const cleanMod = await import("../../pipeline/clean.js");
+
+    // Mix of .md and non-.md links — should only follow .md
+    const indexContent = [
+      "[A](https://example.com/a.md)",
+      "[B](https://example.com/b)",
+    ].join("\n\n");
+    vi.mocked(fetchMod.fetchContent)
+      .mockResolvedValueOnce(indexContent)
+      .mockResolvedValue("# Title\n\n" + longContent);
+    vi.mocked(cleanMod.cleanMarkdown).mockResolvedValue(
+      "# Title\n\n" + longContent,
+    );
+
+    const result = await llmsTxtAdapter.process(baseSource);
+    expect(result.length).toBe(1);
+    expect(result[0]!.id).toBe("a");
+  });
+
+  it("detects HTML content and uses extractContent", async () => {
+    vi.spyOn(console, "log").mockImplementation(() => {});
+    const fetchMod = await import("../../pipeline/fetch.js");
+    const cleanMod = await import("../../pipeline/clean.js");
+    const extractMod = await import("../../pipeline/extract.js");
+
+    const indexContent = "[Page](https://example.com/page)\n";
+    const htmlContent =
+      "<!DOCTYPE html><html><body><main><h1>Title</h1><p>" +
+      longContent +
+      "</p></main></body></html>";
+    vi.mocked(fetchMod.fetchContent)
+      .mockResolvedValueOnce(indexContent)
+      .mockResolvedValueOnce(htmlContent);
+    vi.mocked(extractMod.extractContent).mockReturnValue(
+      "# Title\n\n" + longContent,
+    );
+    vi.mocked(cleanMod.cleanMarkdown).mockResolvedValue(
+      "# Title\n\n" + longContent,
+    );
+
+    const result = await llmsTxtAdapter.process(baseSource);
+    expect(result.length).toBe(1);
+    expect(extractMod.extractContent).toHaveBeenCalledWith(htmlContent, {
+      contentSelector: undefined,
+      removeSelectors: undefined,
+    });
+  });
+
+  it("passes crawl config to extractContent for HTML pages", async () => {
+    vi.spyOn(console, "log").mockImplementation(() => {});
+    const fetchMod = await import("../../pipeline/fetch.js");
+    const cleanMod = await import("../../pipeline/clean.js");
+    const extractMod = await import("../../pipeline/extract.js");
+
+    const indexContent = "[Page](https://example.com/page)\n";
+    const htmlContent = "<html><body><article>" + longContent + "</article></body></html>";
+    vi.mocked(fetchMod.fetchContent)
+      .mockResolvedValueOnce(indexContent)
+      .mockResolvedValueOnce(htmlContent);
+    vi.mocked(extractMod.extractContent).mockReturnValue(longContent);
+    vi.mocked(cleanMod.cleanMarkdown).mockResolvedValue(longContent);
+
+    const source: SourceConfig = {
+      ...baseSource,
+      crawl: { contentSelector: "article", removeSelectors: [".ad"] },
+    };
+    const result = await llmsTxtAdapter.process(source);
+    expect(result.length).toBe(1);
+    expect(extractMod.extractContent).toHaveBeenCalledWith(htmlContent, {
+      contentSelector: "article",
+      removeSelectors: [".ad"],
+    });
+  });
+
+  it("does not use extractContent for non-HTML content", async () => {
+    vi.spyOn(console, "log").mockImplementation(() => {});
+    const fetchMod = await import("../../pipeline/fetch.js");
+    const cleanMod = await import("../../pipeline/clean.js");
+    const extractMod = await import("../../pipeline/extract.js");
+
+    // Clear any calls from previous tests
+    vi.mocked(extractMod.extractContent).mockClear();
+
+    const indexContent = "[Doc](https://example.com/doc.md)\n";
+    vi.mocked(fetchMod.fetchContent)
+      .mockResolvedValueOnce(indexContent)
+      .mockResolvedValueOnce("# Markdown\n\n" + longContent);
+    vi.mocked(cleanMod.cleanMarkdown).mockResolvedValue(
+      "# Markdown\n\n" + longContent,
+    );
+
+    await llmsTxtAdapter.process(baseSource);
+    expect(extractMod.extractContent).not.toHaveBeenCalled();
   });
 });

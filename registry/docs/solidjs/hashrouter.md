@@ -1,0 +1,72 @@
+Components
+
+# HashRouter
+
+[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-router/reference/components/hash-router.mdx)
+
+The `HashRouter` is a top level component that manages the routing of your application. It is a client side router that uses hash-values in the URL - providing a single-page application a way to replicate the experience of a multi-page application.
+
+Since hash-routing provides a way for an application to run from a single HTML file, it can be used when hosting on a static file server.
+
+Compared to a browser-router, such as [`Router`](/solid-router/reference/components/router), is that this approach is not SEO friendly. Because most search engines do not index the hash portion of a URL, they are only able to see the index page of your application when using this approach.
+
+The `root` property is used for components that wrap a matched route and require access to the router context, relevant with navigation components that use [`<A>`](/solid-router/reference/components/a) links.
+
+```
+import { render } from "solid-js/web";import { HashRouter, Route } from "@solidjs/router";
+const App = (props) => (  <>    <h1>Root header</h1>    {props.children}  </>);
+render(  () => <HashRouter root={App}>{/*... routes */}</HashRouter>,  document.getElementById("app"));
+```
+
+prop
+
+type
+
+description
+
+children
+
+`JSX.Element`, `RouteDefinition`, or `RouteDefinition[]`
+
+The route definitions
+
+root
+
+Component
+
+Top level layout component
+
+base
+
+string
+
+Base url to use for matching routes
+
+actionBase
+
+string
+
+Root url for server actions, default: `/_server`
+
+preload
+
+boolean
+
+Enables/disables preloads globally, default: `true`
+
+explicitLinks
+
+boolean
+
+Disables all anchors being intercepted and instead requires [`<A>`](/solid-router/reference/components/a). default: `false`
+
+[Report an issue with this page](https://github.com/solidjs/solid-docs-next/issues/new?assignees=ladybluenotes\&labels=improve+documentation%2Cpending+review\&projects=\&template=CONTENT.yml\&title=[Content]:\&subject=/solid-router/reference/components/hash-router.mdx\&page=https://docs.solidjs.com/solid-router/reference/components/hash-router)
+
+On this page
+
+1. [Overview](#_top)
+
+Contribute
+
+1. [Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-router/reference/components/hash-router.mdx)
+2. [Report an issue with this page](https://github.com/solidjs/solid-docs-next/issues/new?assignees=ladybluenotes\&labels=improve+documentation%2Cpending+review\&projects=\&template=CONTENT.yml\&title=[Content]:\&subject=/solid-router/reference/components/hash-router.mdx\&page=https://docs.solidjs.com/solid-router/reference/components/hash-router)

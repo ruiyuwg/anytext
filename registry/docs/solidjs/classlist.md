@@ -1,0 +1,49 @@
+JSX attributes
+
+# classList
+
+[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/reference/jsx-attributes/classlist.mdx)
+
+Solid offers two attributes to set the class of an element: `class` and `classList`.
+
+First, `class` can be set like other attributes. For example:
+
+```
+// Two static classes<div class="active editing" />
+// One dynamic class, deleting class attribute if it's not needed<div class={state.active ? 'active' : undefined} />
+// Two dynamic classes<div class={`${state.active ? 'active' : ''} ${state.currentId === row.id ? 'editing' : ''}`} />
+```
+
+note
+
+Note that `className` was deprecated in Solid 1.4 in favor of `class`.
+
+Alternatively, the `classList` pseudo-attribute lets you specify an object, where each key is a class and the value is treated as a boolean representing whether to include that class. For example (matching the last example):
+
+```
+<div  classList={{    active: state.active,    editing: state.currentId === row.id,  }}/>
+```
+
+This example compiles to a render effect that dynamically calls [element.classList.toggle](https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/toggle) to turn each class on or off, only when the corresponding boolean changes. For example, when `state.active` becomes true \[false], the element gains \[loses] the `active` class.
+
+The value passed into `classList` can be any expression (including a signal getter) that evaluates to an appropriate object. Some examples:
+
+```
+// Dynamic class name and value<div classList={{ [className()]: classOn() }} />
+// Signal class listconst [classes, setClasses] = createSignal({})setClasses((c) => ({ ...c, active: true }))<div classList={classes()} />
+```
+
+While possible, mixing `class` and `classList` in Solid can lead to unexpected behavior. The safest approach is to use a static string (or nothing) for `class` and keep `classList` reactive. You can also use a static computed value for class, such as `class={baseClass()}`, however you must make sure it comes before any `classList` pseudo-attributes. If both `class` and `classList` are reactive, changes to `class` will overwrite the entire `class` attribute, potentially undoing any updates made by `classList`.
+
+Because classList is a compile-time pseudo-attribute, it does not work in a prop spread like `<div {...props} />` or in `<Dynamic>`.
+
+[Report an issue with this page](https://github.com/solidjs/solid-docs-next/issues/new?assignees=ladybluenotes\&labels=improve+documentation%2Cpending+review\&projects=\&template=CONTENT.yml\&title=[Content]:\&subject=/reference/jsx-attributes/classlist.mdx\&page=https://docs.solidjs.com/reference/jsx-attributes/classlist)
+
+On this page
+
+1. [Overview](#_top)
+
+Contribute
+
+1. [Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/reference/jsx-attributes/classlist.mdx)
+2. [Report an issue with this page](https://github.com/solidjs/solid-docs-next/issues/new?assignees=ladybluenotes\&labels=improve+documentation%2Cpending+review\&projects=\&template=CONTENT.yml\&title=[Content]:\&subject=/reference/jsx-attributes/classlist.mdx\&page=https://docs.solidjs.com/reference/jsx-attributes/classlist)

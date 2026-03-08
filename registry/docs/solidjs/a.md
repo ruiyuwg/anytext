@@ -1,0 +1,92 @@
+Components
+
+# A
+
+[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-router/reference/components/a.mdx)
+
+Solid Router exposes the `<A />` component as a wrapper around the [native anchor tag](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a) . It relies on the routing context provided by the [`<Router>` component](/solid-router/reference/components/router) and if used outside, will triggers a runtime error..
+
+`<A />` supports relative and base paths. `<a />` doesn't. But `<a />` gets augmented when JS is present via a top-level listener to the DOM, so you get the soft-navigation experience nonetheless.
+
+The `<A />` supports the [`<Router />`](/solid-router/reference/components/router) base property (`<Router base="/subpath">`) and prepend it to the received `href` automatically and the `<a />`does not. The same happens with relative paths passed to `<A />`.
+
+The `<A>` tag has an `active` class if its href matches the current location, and `inactive` otherwise. By default matching includes locations that are descendants (e.g.: href `/users` matches locations `/users` and `/users/123`).
+
+tip
+
+Use the boolean `end` prop to prevent matching these. This is particularly useful for links to the root route `/` which would match everything.
+
+***
+
+## [Soft Navigation](/solid-router/reference/components/a#soft-navigation)
+
+When JavaScript is present at the runtime, both components behave in a very similar fashion. This is because Solid Router adds a listener at the top level of the DOM and will augment the native `<a />` tag to a more performant experience (with soft navigation).
+
+note
+
+To prevent, both `<A />` and `<a />` tags from soft navigating when JavaScript is present, pass a `target="_self"` attribute.
+
+***
+
+## [Props Reference](/solid-router/reference/components/a#props-reference)
+
+prop
+
+type
+
+description
+
+href
+
+string
+
+The path of the route to navigate to. This will be resolved relative to the route that the link is in, but you can preface it with `/` to refer back to the root.
+
+noScroll
+
+boolean
+
+If true, turn off the default behavior of scrolling to the top of the new page
+
+replace
+
+boolean
+
+If true, don't add a new entry to the browser history. (By default, the new page will be added to the browser history, so pressing the back button will take you to the previous route.)
+
+state
+
+unknown
+
+[Push this value](https://developer.mozilla.org/en-US/docs/Web/API/History/pushState) to the history stack when navigating
+
+inactiveClass
+
+string
+
+The class to show when the link is inactive (when the current location doesn't match the link)
+
+activeClass
+
+string
+
+The class to show when the link is active
+
+end
+
+boolean
+
+If `true`, only considers the link to be active when the current location matches the `href` exactly; if `false`, check if the current location *starts with* `href`
+
+[Report an issue with this page](https://github.com/solidjs/solid-docs-next/issues/new?assignees=ladybluenotes\&labels=improve+documentation%2Cpending+review\&projects=\&template=CONTENT.yml\&title=[Content]:\&subject=/solid-router/reference/components/a.mdx\&page=https://docs.solidjs.com/solid-router/reference/components/a)
+
+On this page
+
+1. [Overview](#_top)
+2. [Soft Navigation](#soft-navigation)
+3. [Props Reference](#props-reference)
+
+Contribute
+
+1. [Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-router/reference/components/a.mdx)
+2. [Report an issue with this page](https://github.com/solidjs/solid-docs-next/issues/new?assignees=ladybluenotes\&labels=improve+documentation%2Cpending+review\&projects=\&template=CONTENT.yml\&title=[Content]:\&subject=/solid-router/reference/components/a.mdx\&page=https://docs.solidjs.com/solid-router/reference/components/a)

@@ -1,0 +1,72 @@
+Components
+
+# Router
+
+[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-router/reference/components/router.mdx)
+
+The `Router` component is a top level component that manages the routing of your application. There is an optional `root` prop that can be used to wrap the entire application in a layout component, which will not be updated when the page changes.
+
+```
+import { render } from "solid-js/web";import { Router, Route } from "@solidjs/router";
+const App = (props) => (  <>    <h1>Root header</h1>    {props.children}  </>);
+render(  () => <Router root={App}>{/*... routes */}</Router>,  document.getElementById("root"));
+```
+
+prop
+
+type
+
+description
+
+children
+
+`JSX.Element`, `RouteDefinition`, or `RouteDefinition[]`
+
+The route definitions
+
+root
+
+Component
+
+Top level layout component
+
+base
+
+string
+
+Base url to use for matching routes
+
+actionBase
+
+string
+
+Root url for server actions, default: `/_server`
+
+preload
+
+boolean
+
+Enables/disables preloads globally, default: `true`
+
+explicitLinks
+
+boolean
+
+Disables all anchors being intercepted and instead requires `<A>`. default: `false`. (To disable interception for a specific link, set `target` to any value, e.g. `<a target="_self">`.)
+
+url
+
+string
+
+The initial route to render
+
+[Report an issue with this page](https://github.com/solidjs/solid-docs-next/issues/new?assignees=ladybluenotes\&labels=improve+documentation%2Cpending+review\&projects=\&template=CONTENT.yml\&title=[Content]:\&subject=/solid-router/reference/components/router.mdx\&page=https://docs.solidjs.com/solid-router/reference/components/router)
+
+On this page
+
+1. [Overview](#_top)
+
+Contribute
+
+1. [Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-router/reference/components/router.mdx)
+2. [Report an issue with this page](https://github.com/solidjs/solid-docs-next/issues/new?assignees=ladybluenotes\&labels=improve+documentation%2Cpending+review\&projects=\&template=CONTENT.yml\&title=[Content]:\&subject=/solid-router/reference/components/router.mdx\&page=https://docs.solidjs.com/solid-router/reference/components/router)

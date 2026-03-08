@@ -1,6 +1,7 @@
 import type { Adapter, SourceConfig, ProcessedTopic, RateLimiterLike } from "../types.js";
 import { fetchContent } from "../pipeline/fetch.js";
 import { cleanMarkdown } from "../pipeline/clean.js";
+import { extractContent } from "../pipeline/extract.js";
 import { slugify, estimateTokens, truncate } from "../utils.js";
 import { visit } from "unist-util-visit";
 import { unified } from "unified";
@@ -34,7 +35,19 @@ export const llmsTxtAdapter: Adapter = {
       try {
         await rateLimiter?.acquire();
         const raw = await fetchContent(link.url);
-        const cleaned = await cleanMarkdown(raw, source.preprocess);
+
+        // Detect HTML content and extract markdown using cheerio/turndown
+        const isHtml = raw.trimStart().startsWith("<!") || raw.trimStart().toLowerCase().startsWith("<html");
+        let cleaned: string;
+        if (isHtml) {
+          const extracted = extractContent(raw, {
+            contentSelector: source.crawl?.contentSelector,
+            removeSelectors: source.crawl?.removeSelectors,
+          });
+          cleaned = await cleanMarkdown(extracted, source.preprocess);
+        } else {
+          cleaned = await cleanMarkdown(raw, source.preprocess);
+        }
         const tokens = estimateTokens(cleaned);
 
         if (tokens < 100) {
@@ -96,20 +109,24 @@ function extractMarkdownLinks(
   baseUrl: string,
 ): DocLink[] {
   const tree = unified().use(remarkParse).parse(indexContent);
-  const links: DocLink[] = [];
+  const filteredLinks: DocLink[] = [];
+  const allLinks: DocLink[] = [];
 
   visit(tree, "link", (node: Link) => {
     const url = node.url;
+    const title = extractTextContent(node);
+    if (!title) return;
+
+    const resolvedUrl = new URL(url, baseUrl).href;
+    allLinks.push({ title, url: resolvedUrl });
+
     if (url.endsWith(".md") || url.includes(".md?") || url.includes("/docs/")) {
-      const title = extractTextContent(node);
-      if (title) {
-        const resolvedUrl = new URL(url, baseUrl).href;
-        links.push({ title, url: resolvedUrl });
-      }
+      filteredLinks.push({ title, url: resolvedUrl });
     }
   });
 
-  return links;
+  // Fall back to all links when no .md or /docs/ links found (e.g., HTML doc pages)
+  return filteredLinks.length > 0 ? filteredLinks : allLinks;
 }
 
 function extractTextContent(node: Link): string {

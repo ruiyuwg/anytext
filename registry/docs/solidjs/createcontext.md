@@ -1,0 +1,78 @@
+Component APIs
+
+# createContext
+
+[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/reference/component-apis/create-context.mdx)
+
+Context provides a form of dependency injection in Solid. It is used to save from needing to pass data as props through intermediate components (aka **prop drilling**). This function creates a new context object that can be used with [useContext](/reference/component-apis/use-context) and offers the Provider control flow. The default value is used when no Provider is found above in the hierarchy.
+
+***
+
+## [Usage](/reference/component-apis/create-context#usage)
+
+To avoid reinstatiating a new context when Hot-Module Replacement (HMR) occurs, it is recommended to use `createContext` in its own module (file).
+
+Hot-Module Replacement
+
+When using HMR, the context is lost when the module is reloaded. Which will cause an error to be thrown as `useContext` will try to access it while it is still reloading.
+
+For example:
+
+```
+import { createContext } from "solid-js";
+export const INITIAL_COUNT = 0;
+const INITIAL_STORE_SETTER = {  increment: () => {},  decrement: () => {}};
+export const CounterContext = createContext([  { count: INITIAL_COUNT },  INITIAL_STORE_SETTER]);
+```
+
+With the context created in its own module, you can use to instantiate the context provider.
+
+```
+import { createStore } from 'solid-js/store';import { CounterContext, INITIAL_COUNT } from "./counter.ts";
+export function CounterProvider(props) {    const [value, setValue] = createStore({ count: props.initialCount || INITIAL_COUNT })
+    const counter = [        value,        {            increment() {                setValue("count", currentCount => currentCount + 1)            },            decrement() {                setValue("count", currentCount => currentCount - 1)            },        },    ]
+    return (        <CounterContext.Provider value={counter}>            {props.children}        </CounterContext.Provider>    )}
+```
+
+A few imporant notes on how to pass data through the context API:
+
+- The value passed to provider is passed to `useContext` as is.
+- Wrapping as a reactive expression will not work.
+- You should pass in Signals and Stores directly instead of accessing them in the JSX.
+
+To learn how to consume the context, see the [useContext](/reference/component-apis/use-context) documentation and the [Context concepts entry](/concepts/context).
+
+***
+
+## [Default Values](/reference/component-apis/create-context#default-values)
+
+`createContext()` takes an optional "default value" as an argument. If `useContext` is called and there is no corresponding context provider above it in the component hierarchy, then the value passed as `defaultValue` is returned.
+
+However, if no `defaultValue` was passed, then `undefined` is returned in this case. Also, `defaultValue` (or `undefined`) is returned if `useContext` is called inside an event callback, as it is then outside of the component hierarchy.
+
+This has implications for TS. If no `defaultValue` is passed, then it is possible that `useContext()` will return `undefined`, and the types reflect this.
+
+Another (used in the example in the previous section) is provide a default value to `createContext()`. In that case, `useContext()` will always return a value, and therefore TS will not complain either. The pitfall with this approach is that if you *unintentionally* use `useContext` outside of a provider, it may not be immediately apparent, because the context is still providing a valid value. Therefore, if you expect to always use `useContext` within a provider, it is best to use the error based approach described above.
+
+***
+
+## [Type signature](/reference/component-apis/create-context#type-signature)
+
+```
+interface Context<T> {  id: symbol  Provider: (props: { value: T; children: any }) => any  defaultValue: T}
+function createContext<T>(defaultValue?: T): Context<T | undefined>
+```
+
+[Report an issue with this page](https://github.com/solidjs/solid-docs-next/issues/new?assignees=ladybluenotes\&labels=improve+documentation%2Cpending+review\&projects=\&template=CONTENT.yml\&title=[Content]:\&subject=/reference/component-apis/create-context.mdx\&page=https://docs.solidjs.com/reference/component-apis/create-context)
+
+On this page
+
+1. [Overview](#_top)
+2. [Usage](#usage)
+3. [Default Values](#default-values)
+4. [Type signature](#type-signature)
+
+Contribute
+
+1. [Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/reference/component-apis/create-context.mdx)
+2. [Report an issue with this page](https://github.com/solidjs/solid-docs-next/issues/new?assignees=ladybluenotes\&labels=improve+documentation%2Cpending+review\&projects=\&template=CONTENT.yml\&title=[Content]:\&subject=/reference/component-apis/create-context.mdx\&page=https://docs.solidjs.com/reference/component-apis/create-context)

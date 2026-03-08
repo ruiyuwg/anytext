@@ -1,5 +1,5 @@
 {
-  "version": 63,
+  "version": 64,
   "updatedAt": "2026-03-08",
   "libraries": [
     {
@@ -97735,6 +97735,2995 @@
           ],
           "path": "shadcn-ui/registry-mcp.md",
           "tokens": 68202
+        }
+      ]
+    },
+    {
+      "id": "solidjs",
+      "name": "SolidJS",
+      "description": "Reactive JavaScript framework with fine-grained reactivity, signals, and compiled templates",
+      "version": "1",
+      "topics": [
+        {
+          "id": "overview",
+          "title": "Overview",
+          "description": "Solid is a modern JavaScript framework for today's web.",
+          "tags": [],
+          "path": "solidjs/overview.md",
+          "tokens": 998
+        },
+        {
+          "id": "quick-start",
+          "title": "Quick start",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/quick-start.mdx)",
+          "tags": [],
+          "path": "solidjs/quick-start.md",
+          "tokens": 763
+        },
+        {
+          "id": "intro-to-reactivity",
+          "title": "Intro to reactivity",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/concepts/intro-to-reactivity.mdx)",
+          "tags": [
+            "Counter",
+            "increment",
+            "count",
+            "double",
+            "batch"
+          ],
+          "path": "solidjs/intro-to-reactivity.md",
+          "tokens": 2871
+        },
+        {
+          "id": "understanding-jsx",
+          "title": "Understanding JSX",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/concepts/understanding-jsx.mdx)",
+          "tags": [
+            "{ }",
+            "<input>",
+            "<img>",
+            "<br>",
+            "onClick",
+            "\"",
+            "{{ }}",
+            "value={value()}",
+            "createResource",
+            "type='range'"
+          ],
+          "path": "solidjs/understanding-jsx.md",
+          "tokens": 1699
+        },
+        {
+          "id": "basics",
+          "title": "Basics",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/concepts/components/basics.mdx)",
+          "tags": [
+            "count",
+            "console.log(count())",
+            "console.log",
+            "\"Count limit reached\"",
+            "Show",
+            "export",
+            "{}",
+            "default"
+          ],
+          "path": "solidjs/basics.md",
+          "tokens": 2792
+        },
+        {
+          "id": "class-and-style",
+          "title": "Class and style",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/concepts/components/class-style.mdx)",
+          "tags": [
+            "class",
+            "style",
+            "import",
+            "classList",
+            "true",
+            "false",
+            "class={baseClass()}",
+            "<div {...props} />",
+            "<Dynamic>"
+          ],
+          "path": "solidjs/class-and-style.md",
+          "tokens": 1397
+        },
+        {
+          "id": "event-handlers",
+          "title": "Event handlers",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/concepts/components/event-handlers.mdx)",
+          "tags": [
+            "on:__",
+            "element",
+            "on__",
+            "document",
+            "on",
+            "on:",
+            "Hello!",
+            "data",
+            "handler",
+            "handleClick"
+          ],
+          "path": "solidjs/event-handlers.md",
+          "tokens": 2738
+        },
+        {
+          "id": "props",
+          "title": "Props",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/concepts/components/props.mdx)",
+          "tags": [
+            "props",
+            "mergeProps",
+            "Object.assign",
+            "splitProps",
+            "props.children",
+            "children"
+          ],
+          "path": "solidjs/props.md",
+          "tokens": 1610
+        },
+        {
+          "id": "signals",
+          "title": "Signals",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/concepts/signals.mdx)",
+          "tags": [
+            "createSignal",
+            "solid-js",
+            "[",
+            "]",
+            "createEffect",
+            "createMemo"
+          ],
+          "path": "solidjs/signals.md",
+          "tokens": 1084
+        },
+        {
+          "id": "conditional-rendering",
+          "title": "Conditional rendering",
+          "description": "Control flow",
+          "tags": [
+            "<Show>",
+            "when",
+            "fallback",
+            "<Switch>",
+            "<Match>"
+          ],
+          "path": "solidjs/conditional-rendering.md",
+          "tokens": 1022
+        },
+        {
+          "id": "dynamic",
+          "title": "Dynamic",
+          "description": "Control flow",
+          "tags": [
+            "<Dynamic>",
+            "component",
+            "<select>",
+            "<Switch>",
+            "<Match>"
+          ],
+          "path": "solidjs/dynamic.md",
+          "tokens": 978
+        },
+        {
+          "id": "list-rendering",
+          "title": "List rendering",
+          "description": "Control flow",
+          "tags": [
+            "<For>",
+            "<Index>",
+            "each",
+            "Object.entries",
+            "Object.values",
+            "map",
+            "item",
+            "index",
+            "Index"
+          ],
+          "path": "solidjs/list-rendering.md",
+          "tokens": 1730
+        },
+        {
+          "id": "portal",
+          "title": "Portal",
+          "description": "Control flow",
+          "tags": [
+            "<Portal>",
+            "mount",
+            "document.head",
+            "<div>",
+            "isSVG",
+            "<g>"
+          ],
+          "path": "solidjs/portal.md",
+          "tokens": 777
+        },
+        {
+          "id": "error-boundary",
+          "title": "Error boundary",
+          "description": "Control flow",
+          "tags": [
+            "<ErrorBoundary>",
+            "setTimeout",
+            "fallback",
+            "reset",
+            "ErrorProne"
+          ],
+          "path": "solidjs/error-boundary.md",
+          "tokens": 657
+        },
+        {
+          "id": "effects",
+          "title": "Effects",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/concepts/effects.mdx)",
+          "tags": [
+            "createEffect",
+            "count",
+            "onMount",
+            "onCleanup"
+          ],
+          "path": "solidjs/effects.md",
+          "tokens": 2267
+        },
+        {
+          "id": "derived-signals",
+          "title": "Derived signals",
+          "description": "Derived values",
+          "tags": [
+            "double",
+            "count",
+            "createMemo"
+          ],
+          "path": "solidjs/derived-signals.md",
+          "tokens": 621
+        },
+        {
+          "id": "memos",
+          "title": "Memos",
+          "description": "Derived values",
+          "tags": [
+            "createMemo",
+            "===",
+            "createEffect",
+            "isEven"
+          ],
+          "path": "solidjs/memos.md",
+          "tokens": 1845
+        },
+        {
+          "id": "context",
+          "title": "Context",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/concepts/context.mdx)",
+          "tags": [
+            "createContext",
+            "Provider",
+            "value",
+            "array",
+            "object",
+            "useContext",
+            "CounterProvider",
+            "useCounter()",
+            "undefined",
+            "useMyContext"
+          ],
+          "path": "solidjs/context.md",
+          "tokens": 2524
+        },
+        {
+          "id": "stores",
+          "title": "Stores",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/concepts/stores.mdx)",
+          "tags": [
+            "createSignal",
+            "createEffect",
+            "createStore",
+            "setStore(key, newValue)",
+            "userCount",
+            "setUsers",
+            "store.users",
+            "users",
+            "...",
+            "store.users.length"
+          ],
+          "path": "solidjs/stores.md",
+          "tokens": 4594
+        },
+        {
+          "id": "refs",
+          "title": "Refs",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/concepts/refs.mdx)",
+          "tags": [
+            "document.querySelector",
+            "document.getElementById",
+            "onMount",
+            "document.createElement",
+            "ref",
+            "show",
+            "true",
+            "element",
+            "canvas",
+            "props.ref"
+          ],
+          "path": "solidjs/refs.md",
+          "tokens": 2058
+        },
+        {
+          "id": "fine-grained-reactivity",
+          "title": "Fine-grained reactivity",
+          "description": "Advanced concepts",
+          "tags": [
+            "createSignal",
+            "count",
+            "setCount",
+            "0",
+            "createEffect",
+            "getter",
+            "setter",
+            "createMemo",
+            "displayTemperature",
+            "displayTemp"
+          ],
+          "path": "solidjs/fine-grained-reactivity.md",
+          "tokens": 3483
+        },
+        {
+          "id": "styling-your-components",
+          "title": "Styling your components",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/guides/styling-your-components.mdx)",
+          "tags": [
+            "class",
+            "style"
+          ],
+          "path": "solidjs/styling-your-components.md",
+          "tokens": 785
+        },
+        {
+          "id": "sass",
+          "title": "SASS",
+          "description": "Styling your Components",
+          "tags": [
+            ".css",
+            ".scss",
+            ".sass"
+          ],
+          "path": "solidjs/sass.md",
+          "tokens": 669
+        },
+        {
+          "id": "less",
+          "title": "LESS",
+          "description": "Styling your Components",
+          "tags": [
+            ".less",
+            "src"
+          ],
+          "path": "solidjs/less.md",
+          "tokens": 585
+        },
+        {
+          "id": "css-modules",
+          "title": "CSS modules",
+          "description": "Styling your Components",
+          "tags": [
+            ".module.css",
+            "style.module.css",
+            ".scss",
+            ".sass",
+            "Component.jsx"
+          ],
+          "path": "solidjs/css-modules.md",
+          "tokens": 805
+        },
+        {
+          "id": "macaron",
+          "title": "Macaron",
+          "description": "Styling your Components",
+          "tags": [
+            "vite.config.js",
+            "styled",
+            "@macaron-css/solid",
+            "variants",
+            "defaultVariants"
+          ],
+          "path": "solidjs/macaron.md",
+          "tokens": 831
+        },
+        {
+          "id": "tailwind-css",
+          "title": "Tailwind CSS",
+          "description": "Styling your Components",
+          "tags": [
+            "@tailwind/postcss",
+            "plugins",
+            "postcss.config.mjs",
+            "@import",
+            "src/index.css",
+            "index.css",
+            "index.jsx",
+            "index.tsx",
+            "Card.css"
+          ],
+          "path": "solidjs/tailwind-css.md",
+          "tokens": 905
+        },
+        {
+          "id": "unocss",
+          "title": "UnoCSS",
+          "description": "Styling your Components",
+          "tags": [
+            "vite.config.js",
+            "vite.config.ts",
+            "unocssPlugin",
+            "solidPlugin",
+            "index.jsx",
+            "index.tsx",
+            "import \"virtual:uno.css\""
+          ],
+          "path": "solidjs/unocss.md",
+          "tokens": 781
+        },
+        {
+          "id": "state-management",
+          "title": "State management",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/guides/state-management.mdx)",
+          "tags": [
+            "count",
+            "<div>{count()}</div>",
+            "increment",
+            "createSignal",
+            "Counter",
+            "{count()}",
+            "createEffect",
+            "doubleCount",
+            "doubleCount()",
+            "createMemo"
+          ],
+          "path": "solidjs/state-management.md",
+          "tokens": 3534
+        },
+        {
+          "id": "routing-navigation",
+          "title": "Routing & navigation",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/guides/routing-and-navigation.mdx)",
+          "tags": [
+            "<Router>",
+            "Router",
+            "Route",
+            "*",
+            "<A>",
+            "inactiveClass",
+            "activeClass",
+            "lazy",
+            "id",
+            "<User>"
+          ],
+          "path": "solidjs/routing-navigation.md",
+          "tokens": 4031
+        },
+        {
+          "id": "complex-state-management",
+          "title": "Complex state management",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/guides/complex-state-management.mdx)",
+          "tags": [
+            "createSignal",
+            "tasks",
+            "numberOfTasks",
+            "createMemo",
+            "completedTasks",
+            "createStore",
+            "state.numberOfTasks",
+            "createEffect",
+            "state.tasks.length",
+            "setStore(\"key\", value)"
+          ],
+          "path": "solidjs/complex-state-management.md",
+          "tokens": 2926
+        },
+        {
+          "id": "fetching-data",
+          "title": "Fetching data",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/guides/fetching-data.mdx)",
+          "tags": [
+            "createResource",
+            "state",
+            "unresolved",
+            "pending",
+            "ready",
+            "refreshing",
+            "errored",
+            "loading",
+            "boolean",
+            "error"
+          ],
+          "path": "solidjs/fetching-data.md",
+          "tokens": 2122
+        },
+        {
+          "id": "testing",
+          "title": "Testing",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/guides/testing.mdx)",
+          "tags": [
+            "vitest",
+            "jsdom",
+            "@solidjs/testing-library",
+            "@testing-library/user-event",
+            "@testing-library/jest-dom",
+            "package.json",
+            "test",
+            "vite.config",
+            "vite-plugin-solid",
+            "tsconfig.json#compilerOptions.types"
+          ],
+          "path": "solidjs/testing.md",
+          "tokens": 5875
+        },
+        {
+          "id": "deploy-your-app",
+          "title": "Deploy your app",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/guides/deploying-your-app.mdx)",
+          "tags": [],
+          "path": "solidjs/deploy-your-app.md",
+          "tokens": 453
+        },
+        {
+          "id": "aws-via-flightcontrol",
+          "title": "AWS via Flightcontrol",
+          "description": "Deploying your App",
+          "tags": [
+            "package.json",
+            "dist",
+            "flightcontrol.json"
+          ],
+          "path": "solidjs/aws-via-flightcontrol.md",
+          "tokens": 1176
+        },
+        {
+          "id": "aws-via-sst",
+          "title": "AWS via SST",
+          "description": "Deploying your App",
+          "tags": [
+            "app.config.ts"
+          ],
+          "path": "solidjs/aws-via-sst.md",
+          "tokens": 603
+        },
+        {
+          "id": "cloudflare",
+          "title": "Cloudflare",
+          "description": "Deploying your App",
+          "tags": [
+            "npm run build",
+            "dist",
+            "NODE_VERSION",
+            "project_name.pages.dev",
+            "project-name.pages.dev"
+          ],
+          "path": "solidjs/cloudflare.md",
+          "tokens": 1128
+        },
+        {
+          "id": "firebase",
+          "title": "Firebase",
+          "description": "Deploying your App",
+          "tags": [
+            "firebase login",
+            "firebase.json",
+            ".firebaserc",
+            "<YOUR_FIREBASE_PROJECT_ID>",
+            "npm run build",
+            "firebase deploy",
+            "Hosting URL"
+          ],
+          "path": "solidjs/firebase.md",
+          "tokens": 737
+        },
+        {
+          "id": "netlify",
+          "title": "Netlify",
+          "description": "Deploying your App",
+          "tags": [
+            "New site from Git",
+            "netlify",
+            "dist",
+            "netlify init"
+          ],
+          "path": "solidjs/netlify.md",
+          "tokens": 979
+        },
+        {
+          "id": "railway",
+          "title": "Railway",
+          "description": "Deploying your App",
+          "tags": [
+            "package.json",
+            "npx http-server ./dist",
+            "vite",
+            "dist",
+            "dev",
+            "railway init"
+          ],
+          "path": "solidjs/railway.md",
+          "tokens": 1172
+        },
+        {
+          "id": "vercel",
+          "title": "Vercel",
+          "description": "Deploying your App",
+          "tags": [],
+          "path": "solidjs/vercel.md",
+          "tokens": 937
+        },
+        {
+          "id": "stormkit",
+          "title": "Stormkit",
+          "description": "Deploying your App",
+          "tags": [
+            "npm run build"
+          ],
+          "path": "solidjs/stormkit.md",
+          "tokens": 458
+        },
+        {
+          "id": "zerops",
+          "title": "Zerops",
+          "description": "Deploying your App",
+          "tags": [
+            "Node.js",
+            "version 20",
+            "Import Project",
+            "zerops.yml"
+          ],
+          "path": "solidjs/zerops.md",
+          "tokens": 1858
+        },
+        {
+          "id": "environment-variables",
+          "title": "Environment variables",
+          "description": "Configuration",
+          "tags": [
+            "VITE_",
+            ".env",
+            "key = value",
+            "env.d.ts",
+            "VITE_SECRET_KEY",
+            "DB_PASSWORD",
+            "process.env"
+          ],
+          "path": "solidjs/environment-variables.md",
+          "tokens": 932
+        },
+        {
+          "id": "typescript",
+          "title": "TypeScript",
+          "description": "Configuration",
+          "tags": [
+            "\"jsx\": \"preserve\"",
+            "tsconfig.json",
+            "\"jsxImportSource\": \"solid-js\"",
+            "jsxImportSource",
+            ".tsx",
+            "index.jsx",
+            "index.tsx",
+            "src",
+            "<script>",
+            "createSignal<T>"
+          ],
+          "path": "solidjs/typescript.md",
+          "tokens": 7236
+        },
+        {
+          "id": "createeffect",
+          "title": "createEffect",
+          "description": "Basic reactivity",
+          "tags": [
+            "createEffect",
+            "children",
+            "fn",
+            "value",
+            "Init",
+            "options",
+            "{ name?: string }",
+            "name",
+            "string",
+            "createRenderEffect"
+          ],
+          "path": "solidjs/createeffect.md",
+          "tokens": 1657
+        },
+        {
+          "id": "creatememo",
+          "title": "createMemo",
+          "description": "Basic reactivity",
+          "tags": [
+            "createMemo",
+            "equals",
+            "fn",
+            "(v: T) => T",
+            "value",
+            "undefined",
+            "T",
+            "options",
+            "false | ((prev: T, next: T) => boolean)",
+            "true"
+          ],
+          "path": "solidjs/creatememo.md",
+          "tokens": 1854
+        },
+        {
+          "id": "createresource",
+          "title": "createResource",
+          "description": "Basic reactivity",
+          "tags": [
+            "source",
+            "ResourceSource<S>",
+            "undefined",
+            "null",
+            "false",
+            "fetcher",
+            "ResourceFetcher<S, T, R>",
+            "true",
+            "options",
+            "ResourceOptions<T, S>"
+          ],
+          "path": "solidjs/createresource.md",
+          "tokens": 2252
+        },
+        {
+          "id": "createsignal",
+          "title": "createSignal",
+          "description": "Basic reactivity",
+          "tags": [
+            "value",
+            "T",
+            "undefined",
+            "options",
+            "SignalOptions<T>",
+            "name",
+            "string",
+            "equals",
+            "false | ((prev: T, next: T) => boolean)",
+            "false"
+          ],
+          "path": "solidjs/createsignal.md",
+          "tokens": 1226
+        },
+        {
+          "id": "children",
+          "title": "children",
+          "description": "Component APIs",
+          "tags": [
+            "children",
+            "fn",
+            "() => JSX.Element",
+            "props.children",
+            "ChildrenReturn",
+            "toArray()",
+            "() => ResolvedChildren[]",
+            ".toArray()"
+          ],
+          "path": "solidjs/children.md",
+          "tokens": 949
+        },
+        {
+          "id": "createcontext",
+          "title": "createContext",
+          "description": "Component APIs",
+          "tags": [
+            "createContext",
+            "useContext",
+            "createContext()",
+            "defaultValue",
+            "undefined",
+            "useContext()"
+          ],
+          "path": "solidjs/createcontext.md",
+          "tokens": 1215
+        },
+        {
+          "id": "createuniqueid",
+          "title": "createUniqueId",
+          "description": "Component APIs",
+          "tags": [
+            "createUniqueId",
+            "id",
+            "for",
+            "isServer",
+            "<NoHydration>",
+            "string"
+          ],
+          "path": "solidjs/createuniqueid.md",
+          "tokens": 699
+        },
+        {
+          "id": "lazy",
+          "title": "lazy",
+          "description": "Component APIs",
+          "tags": [
+            "lazy",
+            "<Suspense>",
+            "fn",
+            "() => Promise<{ default: T }>",
+            "default",
+            "T",
+            "preload()",
+            "preload",
+            "() => Promise<T>",
+            "Suspense"
+          ],
+          "path": "solidjs/lazy.md",
+          "tokens": 842
+        },
+        {
+          "id": "usecontext",
+          "title": "useContext",
+          "description": "Component APIs",
+          "tags": [
+            "createContext",
+            "useContext"
+          ],
+          "path": "solidjs/usecontext.md",
+          "tokens": 568
+        },
+        {
+          "id": "",
+          "title": " / ",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/reference/components/switch-and-match.mdx)",
+          "tags": [
+            "fallback",
+            "JSX.Element",
+            "undefined",
+            "Match",
+            "when",
+            "T | undefined | null | false",
+            "children"
+          ],
+          "path": "solidjs/.md",
+          "tokens": 662
+        },
+        {
+          "id": "once",
+          "title": "@once",
+          "description": "JSX attributes",
+          "tags": [
+            "/* @once */"
+          ],
+          "path": "solidjs/once.md",
+          "tokens": 411
+        },
+        {
+          "id": "attr",
+          "title": "attr:*",
+          "description": "JSX attributes",
+          "tags": [],
+          "path": "solidjs/attr.md",
+          "tokens": 328
+        },
+        {
+          "id": "bool",
+          "title": "bool:*",
+          "description": "JSX attributes",
+          "tags": [
+            "bool:*",
+            "truthy",
+            "attribute",
+            "falsy"
+          ],
+          "path": "solidjs/bool.md",
+          "tokens": 397
+        },
+        {
+          "id": "classlist",
+          "title": "classList",
+          "description": "JSX attributes",
+          "tags": [
+            "class",
+            "classList",
+            "className",
+            "state.active",
+            "active",
+            "class={baseClass()}",
+            "<div {...props} />",
+            "<Dynamic>"
+          ],
+          "path": "solidjs/classlist.md",
+          "tokens": 794
+        },
+        {
+          "id": "innerhtml",
+          "title": "innerHTML",
+          "description": "JSX attributes",
+          "tags": [
+            "innerHTML"
+          ],
+          "path": "solidjs/innerhtml.md",
+          "tokens": 335
+        },
+        {
+          "id": "on",
+          "title": "on:*",
+          "description": "JSX attributes",
+          "tags": [
+            "on:*",
+            "on*",
+            "addEventListener",
+            "div",
+            "capture",
+            "passive",
+            "once",
+            "signal",
+            "EventListenerObject",
+            "AddEventListenerOptions"
+          ],
+          "path": "solidjs/on.md",
+          "tokens": 568
+        },
+        {
+          "id": "on",
+          "title": "on*",
+          "description": "JSX attributes",
+          "tags": [
+            "onclick",
+            "onClick",
+            "click",
+            "addEventListener",
+            "div",
+            "on:",
+            "bind",
+            "onChange",
+            "onInput",
+            "<input>"
+          ],
+          "path": "solidjs/on.md",
+          "tokens": 798
+        },
+        {
+          "id": "prop",
+          "title": "prop:*",
+          "description": "JSX attributes",
+          "tags": [],
+          "path": "solidjs/prop.md",
+          "tokens": 314
+        },
+        {
+          "id": "ref",
+          "title": "ref",
+          "description": "JSX attributes",
+          "tags": [],
+          "path": "solidjs/ref.md",
+          "tokens": 441
+        },
+        {
+          "id": "style",
+          "title": "style",
+          "description": "JSX attributes",
+          "tags": [
+            "background-color",
+            "backgroundColor"
+          ],
+          "path": "solidjs/style.md",
+          "tokens": 492
+        },
+        {
+          "id": "textcontent",
+          "title": "textContent",
+          "description": "JSX attributes",
+          "tags": [
+            "textContent"
+          ],
+          "path": "solidjs/textcontent.md",
+          "tokens": 350
+        },
+        {
+          "id": "use",
+          "title": "use:*",
+          "description": "JSX attributes",
+          "tags": [
+            "ref",
+            "model",
+            "DirectiveFunctions",
+            "Directives",
+            "d",
+            "use:d",
+            "onlyRemoveTypeImports: true",
+            "babel-preset-typescript",
+            "vite-plugin-solid",
+            "vite.config.ts"
+          ],
+          "path": "solidjs/use.md",
+          "tokens": 976
+        },
+        {
+          "id": "oncleanup",
+          "title": "onCleanup",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/reference/lifecycle/on-cleanup.mdx)",
+          "tags": [
+            "onCleanup",
+            "createEffect",
+            "createMemo",
+            "createRoot",
+            "document"
+          ],
+          "path": "solidjs/oncleanup.md",
+          "tokens": 559
+        },
+        {
+          "id": "onmount",
+          "title": "onMount",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/reference/lifecycle/on-mount.mdx)",
+          "tags": [
+            "createEffect"
+          ],
+          "path": "solidjs/onmount.md",
+          "tokens": 424
+        },
+        {
+          "id": "batch",
+          "title": "batch",
+          "description": "Reactive utilities",
+          "tags": [
+            "batch",
+            "batch(fn)",
+            "fn",
+            "down",
+            "up1",
+            "up2",
+            "up3",
+            "createEffect",
+            "onMount",
+            "Array.prototype.splice"
+          ],
+          "path": "solidjs/batch.md",
+          "tokens": 1133
+        },
+        {
+          "id": "catcherror",
+          "title": "catchError",
+          "description": "Reactive utilities",
+          "tags": [
+            "tryFn"
+          ],
+          "path": "solidjs/catcherror.md",
+          "tokens": 328
+        },
+        {
+          "id": "createroot",
+          "title": "createRoot",
+          "description": "Reactive utilities",
+          "tags": [
+            "createRoot",
+            "fn",
+            "(dispose: () => void) => T",
+            "dispose",
+            "detachedOwner",
+            "Owner",
+            "render"
+          ],
+          "path": "solidjs/createroot.md",
+          "tokens": 1063
+        },
+        {
+          "id": "from",
+          "title": "from",
+          "description": "Reactive utilities",
+          "tags": [],
+          "path": "solidjs/from.md",
+          "tokens": 515
+        },
+        {
+          "id": "getowner",
+          "title": "getOwner",
+          "description": "Reactive utilities",
+          "tags": [
+            "runWithOwner",
+            "createRoot",
+            "render",
+            "onCleanup",
+            "getOwner",
+            "createEffect",
+            "<Component ...>"
+          ],
+          "path": "solidjs/getowner.md",
+          "tokens": 610
+        },
+        {
+          "id": "indexarray",
+          "title": "indexArray",
+          "description": "Reactive utilities",
+          "tags": [
+            "mapArray",
+            "<Index>",
+            "() => readonly T[]",
+            "(v: () => T, i: number) => U"
+          ],
+          "path": "solidjs/indexarray.md",
+          "tokens": 452
+        },
+        {
+          "id": "maparray",
+          "title": "mapArray",
+          "description": "Reactive utilities",
+          "tags": [
+            "<For>",
+            "() => readonly T[]",
+            "(v: T, i: () => number) => U"
+          ],
+          "path": "solidjs/maparray.md",
+          "tokens": 506
+        },
+        {
+          "id": "mergeprops",
+          "title": "mergeProps",
+          "description": "Reactive utilities",
+          "tags": [],
+          "path": "solidjs/mergeprops.md",
+          "tokens": 407
+        },
+        {
+          "id": "observable",
+          "title": "observable",
+          "description": "Reactive utilities",
+          "tags": [
+            "from"
+          ],
+          "path": "solidjs/observable.md",
+          "tokens": 396
+        },
+        {
+          "id": "on",
+          "title": "on",
+          "description": "Reactive utilities",
+          "tags": [
+            "on",
+            "input",
+            "prevInput",
+            "createMutable",
+            "T",
+            "{ defer?: boolean }"
+          ],
+          "path": "solidjs/on.md",
+          "tokens": 698
+        },
+        {
+          "id": "runwithowner",
+          "title": "runWithOwner",
+          "description": "Reactive utilities",
+          "tags": [
+            "createEffect",
+            "createMemo",
+            "getOwner",
+            "runWithOwner",
+            "useContext",
+            "async",
+            "setTimeout",
+            "await"
+          ],
+          "path": "solidjs/runwithowner.md",
+          "tokens": 792
+        },
+        {
+          "id": "splitprops",
+          "title": "splitProps",
+          "description": "Reactive utilities",
+          "tags": [
+            "splitProps"
+          ],
+          "path": "solidjs/splitprops.md",
+          "tokens": 588
+        },
+        {
+          "id": "starttransition",
+          "title": "startTransition",
+          "description": "Reactive utilities",
+          "tags": [
+            "useTransition"
+          ],
+          "path": "solidjs/starttransition.md",
+          "tokens": 322
+        },
+        {
+          "id": "untrack",
+          "title": "untrack",
+          "description": "Reactive utilities",
+          "tags": [
+            "prop",
+            "default",
+            "initial"
+          ],
+          "path": "solidjs/untrack.md",
+          "tokens": 559
+        },
+        {
+          "id": "usetransition",
+          "title": "useTransition",
+          "description": "Reactive utilities",
+          "tags": [],
+          "path": "solidjs/usetransition.md",
+          "tokens": 388
+        },
+        {
+          "id": "dev",
+          "title": "DEV",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/reference/rendering/dev.mdx)",
+          "tags": [],
+          "path": "solidjs/dev.md",
+          "tokens": 421
+        },
+        {
+          "id": "hydrate",
+          "title": "hydrate",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/reference/rendering/hydrate.mdx)",
+          "tags": [
+            "render",
+            "() => JSX.Element"
+          ],
+          "path": "solidjs/hydrate.md",
+          "tokens": 435
+        },
+        {
+          "id": "hydrationscript",
+          "title": "hydrationScript",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/reference/rendering/hydration-script.mdx)",
+          "tags": [
+            "<html>"
+          ],
+          "path": "solidjs/hydrationscript.md",
+          "tokens": 472
+        },
+        {
+          "id": "isserver",
+          "title": "isServer",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/reference/rendering/is-server.mdx)",
+          "tags": [],
+          "path": "solidjs/isserver.md",
+          "tokens": 347
+        },
+        {
+          "id": "render",
+          "title": "render",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/reference/rendering/render.mdx)",
+          "tags": [
+            "render",
+            "render(<App/>, ...)",
+            "() => JSX.Element"
+          ],
+          "path": "solidjs/render.md",
+          "tokens": 497
+        },
+        {
+          "id": "rendertostream",
+          "title": "renderToStream",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/reference/rendering/render-to-stream.mdx)",
+          "tags": [
+            "onCompleteShell",
+            "onCompleteAll",
+            "renderId"
+          ],
+          "path": "solidjs/rendertostream.md",
+          "tokens": 602
+        },
+        {
+          "id": "rendertostring",
+          "title": "renderToString",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/reference/rendering/render-to-string.mdx)",
+          "tags": [
+            "renderId",
+            "nonce",
+            "string"
+          ],
+          "path": "solidjs/rendertostring.md",
+          "tokens": 430
+        },
+        {
+          "id": "rendertostringasync",
+          "title": "renderToStringAsync",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/reference/rendering/render-to-string-asyn...",
+          "tags": [
+            "renderToString",
+            "<Suspense>",
+            "renderId",
+            "timeoutMs",
+            "number",
+            "string",
+            "nonce"
+          ],
+          "path": "solidjs/rendertostringasync.md",
+          "tokens": 481
+        },
+        {
+          "id": "createcomputed",
+          "title": "createComputed",
+          "description": "Secondary primitives",
+          "tags": [
+            "createComputed",
+            "fn",
+            "value",
+            "undefined",
+            "Init",
+            "options",
+            "{ name?: string }",
+            "name",
+            "string",
+            "void"
+          ],
+          "path": "solidjs/createcomputed.md",
+          "tokens": 1109
+        },
+        {
+          "id": "createdeferred",
+          "title": "createDeferred",
+          "description": "Secondary primitives",
+          "tags": [
+            "timeoutMs",
+            "number",
+            "string"
+          ],
+          "path": "solidjs/createdeferred.md",
+          "tokens": 441
+        },
+        {
+          "id": "createreaction",
+          "title": "createReaction",
+          "description": "Secondary primitives",
+          "tags": [],
+          "path": "solidjs/createreaction.md",
+          "tokens": 421
+        },
+        {
+          "id": "createrendereffect",
+          "title": "createRenderEffect",
+          "description": "Secondary primitives",
+          "tags": [
+            "createRenderEffect",
+            "fn",
+            "value",
+            "Init",
+            "options",
+            "{ name?: string }",
+            "name",
+            "string",
+            "createEffect",
+            "onCleanup"
+          ],
+          "path": "solidjs/createrendereffect.md",
+          "tokens": 1740
+        },
+        {
+          "id": "createselector",
+          "title": "createSelector",
+          "description": "Secondary primitives",
+          "tags": [
+            "selector(key)",
+            "key",
+            "source",
+            "a",
+            "b",
+            "false",
+            "true",
+            "li",
+            "active",
+            "item.id"
+          ],
+          "path": "solidjs/createselector.md",
+          "tokens": 814
+        },
+        {
+          "id": "createmutable",
+          "title": "createMutable",
+          "description": "Store utilities",
+          "tags": [
+            "createMutable",
+            "createStore",
+            "produce"
+          ],
+          "path": "solidjs/createmutable.md",
+          "tokens": 616
+        },
+        {
+          "id": "createstore",
+          "title": "createStore",
+          "description": "Store utilities",
+          "tags": [
+            "undefined!"
+          ],
+          "path": "solidjs/createstore.md",
+          "tokens": 833
+        },
+        {
+          "id": "modifymutable",
+          "title": "modifyMutable",
+          "description": "Store utilities",
+          "tags": [
+            "modifyMutable",
+            "createMutable",
+            "batch",
+            "reconcile",
+            "produce"
+          ],
+          "path": "solidjs/modifymutable.md",
+          "tokens": 790
+        },
+        {
+          "id": "produce",
+          "title": "produce",
+          "description": "Store utilities",
+          "tags": [
+            "produce",
+            "createStore"
+          ],
+          "path": "solidjs/produce.md",
+          "tokens": 414
+        },
+        {
+          "id": "reconcile",
+          "title": "reconcile",
+          "description": "Store utilities",
+          "tags": [
+            "reconcile",
+            "key",
+            "value",
+            "T",
+            "merge"
+          ],
+          "path": "solidjs/reconcile.md",
+          "tokens": 663
+        },
+        {
+          "id": "unwrap",
+          "title": "unwrap",
+          "description": "Store utilities",
+          "tags": [
+            "unwrap"
+          ],
+          "path": "solidjs/unwrap.md",
+          "tokens": 287
+        },
+        {
+          "id": "getrequestevent",
+          "title": "getRequestEvent",
+          "description": "Server utilities",
+          "tags": [
+            "RequestEvent",
+            "getRequestEvent",
+            ".request",
+            "url",
+            "headers",
+            "body",
+            "Response constructor",
+            "event.response"
+          ],
+          "path": "solidjs/getrequestevent.md",
+          "tokens": 929
+        },
+        {
+          "id": "overview",
+          "title": "Overview",
+          "description": "Fine-grained reactivity goes fullstack.",
+          "tags": [],
+          "path": "solidjs/overview.md",
+          "tokens": 1055
+        },
+        {
+          "id": "getting-started",
+          "title": "Getting started",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-start/getting-started.mdx)",
+          "tags": [
+            "vinxi dev",
+            ".jsx",
+            ".tsx",
+            "public/",
+            "src/",
+            "~/",
+            "src/routes/",
+            "routes",
+            "src/entry-client.tsx",
+            "src/entry-server.tsx"
+          ],
+          "path": "solidjs/getting-started.md",
+          "tokens": 1326
+        },
+        {
+          "id": "routing",
+          "title": "Routing",
+          "description": "Building your application",
+          "tags": [
+            "routes",
+            "<FileRoutes />",
+            "Route",
+            "Router",
+            "solid-router",
+            "<Router />",
+            "root",
+            "props.children",
+            "<Suspense />",
+            "example.com/blog"
+          ],
+          "path": "solidjs/routing.md",
+          "tokens": 2873
+        },
+        {
+          "id": "api-routes",
+          "title": "API routes",
+          "description": "Building your application",
+          "tags": [
+            "Accept",
+            "GET",
+            "api",
+            "APIEvent",
+            "request",
+            "Request",
+            "params",
+            "/api/users/:id",
+            "/api/users/123",
+            "{ id: 123 }"
+          ],
+          "path": "solidjs/api-routes.md",
+          "tokens": 2194
+        },
+        {
+          "id": "css-and-styling",
+          "title": "CSS and styling",
+          "description": "Building your application",
+          "tags": [
+            "<style>",
+            "Card.css",
+            "Card.tsx",
+            ".css",
+            ".module.css",
+            ".scss",
+            ".sass",
+            ".module.scss",
+            ".module.sass",
+            "class=\"card\""
+          ],
+          "path": "solidjs/css-and-styling.md",
+          "tokens": 1070
+        },
+        {
+          "id": "data-fetching",
+          "title": "Data fetching",
+          "description": "Building your application",
+          "tags": [
+            "createResource",
+            "getCurrentUserQuery",
+            "useSession",
+            "deferStream"
+          ],
+          "path": "solidjs/data-fetching.md",
+          "tokens": 936
+        },
+        {
+          "id": "data-mutation",
+          "title": "Data mutation",
+          "description": "Building your application",
+          "tags": [
+            "logoutAction",
+            "sessionId",
+            "redirect",
+            "updateProductAction",
+            "getProductQuery"
+          ],
+          "path": "solidjs/data-mutation.md",
+          "tokens": 1277
+        },
+        {
+          "id": "head-and-metadata",
+          "title": "Head and metadata",
+          "description": "Building your application",
+          "tags": [
+            "head",
+            "document",
+            "@solidjs/meta",
+            "title",
+            "meta",
+            "name",
+            "link",
+            "style",
+            "Title",
+            "document.head"
+          ],
+          "path": "solidjs/head-and-metadata.md",
+          "tokens": 1409
+        },
+        {
+          "id": "route-pre-rendering",
+          "title": "Route Pre-rendering",
+          "description": "Building your application",
+          "tags": [
+            "routes",
+            "true",
+            "crawlLinks"
+          ],
+          "path": "solidjs/route-pre-rendering.md",
+          "tokens": 539
+        },
+        {
+          "id": "static-assets",
+          "title": "Static assets",
+          "description": "Building your application",
+          "tags": [
+            "/public",
+            "robots.txt",
+            "solid.png",
+            "solid.2d8efhg.png"
+          ],
+          "path": "solidjs/static-assets.md",
+          "tokens": 947
+        },
+        {
+          "id": "middleware",
+          "title": "Middleware",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-start/advanced/middleware.mdx)",
+          "tags": [
+            "event.locals",
+            "Cache-Control",
+            "Content-Security-Policy",
+            "src/middleware/index.ts",
+            "createMiddleware",
+            "app.config.ts",
+            "onRequest",
+            "onBeforeResponse",
+            "getRequestEvent",
+            "event.request.headers"
+          ],
+          "path": "solidjs/middleware.md",
+          "tokens": 3267
+        },
+        {
+          "id": "sessions",
+          "title": "Sessions",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-start/advanced/session.mdx)",
+          "tags": [
+            "Set-Cookie",
+            "Cookie",
+            "Max-Age",
+            "useSession",
+            "getSession",
+            "updateSession",
+            "clearSession",
+            "useThemeSession",
+            "h3",
+            "name"
+          ],
+          "path": "solidjs/sessions.md",
+          "tokens": 1800
+        },
+        {
+          "id": "request-events",
+          "title": "Request events",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-start/advanced/request-events.mdx)",
+          "tags": [
+            "getRequestEvent",
+            "@solidjs/web",
+            "event.locals",
+            ".nativeEvent"
+          ],
+          "path": "solidjs/request-events.md",
+          "tokens": 533
+        },
+        {
+          "id": "returning-responses",
+          "title": "Returning responses",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-start/advanced/return-responses.mdx)",
+          "tags": [
+            "solid-router",
+            "query",
+            "action",
+            "redirect",
+            "reload",
+            "json",
+            "hello",
+            "Promise<{ hello: string }>",
+            "never",
+            "getUser"
+          ],
+          "path": "solidjs/returning-responses.md",
+          "tokens": 654
+        },
+        {
+          "id": "serialization",
+          "title": "Serialization",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-start/advanced/serialization.mdx)",
+          "tags": [
+            "app.config.ts",
+            "defineConfig",
+            "json",
+            "JSON.parse",
+            "eval",
+            "js",
+            "unsafe-eval",
+            "AbortSignal",
+            "CustomEvent",
+            "DOMException"
+          ],
+          "path": "solidjs/serialization.md",
+          "tokens": 900
+        },
+        {
+          "id": "auth",
+          "title": "Auth",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-start/advanced/auth.mdx)",
+          "tags": [
+            "getUser",
+            "getPrivatePosts",
+            "deferStream: true"
+          ],
+          "path": "solidjs/auth.md",
+          "tokens": 561
+        },
+        {
+          "id": "websocket-endpoint",
+          "title": "WebSocket endpoint",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-start/advanced/websocket.mdx)",
+          "tags": [],
+          "path": "solidjs/websocket-endpoint.md",
+          "tokens": 528
+        },
+        {
+          "id": "security",
+          "title": "Security",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-start/guides/security.mdx)",
+          "tags": [
+            "innerHTML",
+            "<noscript>",
+            "origin",
+            "protocol",
+            "javascript:",
+            "Content-Security-Policy",
+            "unsafe-eval",
+            "serialization.mode: \"js\"",
+            "onRequest",
+            "randomBytes"
+          ],
+          "path": "solidjs/security.md",
+          "tokens": 2309
+        },
+        {
+          "id": "data-fetching",
+          "title": "Data fetching",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-start/guides/data-fetching.mdx)",
+          "tags": [
+            "query",
+            "createAsync",
+            "Suspense",
+            "solid-js",
+            "<Suspense>",
+            "fallback",
+            "ErrorBoundary",
+            "<ErrorBoundary>",
+            "route",
+            "preload"
+          ],
+          "path": "solidjs/data-fetching.md",
+          "tokens": 2850
+        },
+        {
+          "id": "data-mutation",
+          "title": "Data mutation",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-start/guides/data-mutation.mdx)",
+          "tags": [
+            "<form>",
+            "action",
+            "post",
+            "FormData",
+            "with",
+            "useSubmission",
+            "@solidjs/router",
+            "pending",
+            "error",
+            "result"
+          ],
+          "path": "solidjs/data-mutation.md",
+          "tokens": 4002
+        },
+        {
+          "id": "service-workers",
+          "title": "Service workers",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-start/guides/service-workers.mdx)",
+          "tags": [
+            "public",
+            "public/sw.js",
+            "/sw.js",
+            "entry-client.tsx"
+          ],
+          "path": "solidjs/service-workers.md",
+          "tokens": 373
+        },
+        {
+          "id": "app-config-ts",
+          "title": "app.config.ts",
+          "description": "Entrypoints",
+          "tags": [
+            "app.config.ts",
+            "defineConfig"
+          ],
+          "path": "solidjs/app-config-ts.md",
+          "tokens": 433
+        },
+        {
+          "id": "app-tsx",
+          "title": "app.tsx",
+          "description": "Entrypoints",
+          "tags": [
+            "App",
+            "FileRouter"
+          ],
+          "path": "solidjs/app-tsx.md",
+          "tokens": 637
+        },
+        {
+          "id": "entry-client-tsx",
+          "title": "entry-client.tsx",
+          "description": "Entrypoints",
+          "tags": [
+            "entry-client.tsx",
+            "<StartClient>",
+            "mount"
+          ],
+          "path": "solidjs/entry-client-tsx.md",
+          "tokens": 417
+        },
+        {
+          "id": "entry-server-tsx",
+          "title": "entry-server.tsx",
+          "description": "Entrypoints",
+          "tags": [
+            "entry-server.tsx",
+            "<StartServer>",
+            "createHandler"
+          ],
+          "path": "solidjs/entry-server-tsx.md",
+          "tokens": 517
+        },
+        {
+          "id": "defineconfig",
+          "title": "defineConfig",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-start/reference/config/define-confi...",
+          "tags": [
+            "defineConfig",
+            "@solidjs/start/config",
+            "app.config.ts",
+            "vite",
+            "server",
+            "client",
+            "server-function",
+            "json",
+            "JSON.parse",
+            "eval"
+          ],
+          "path": "solidjs/defineconfig.md",
+          "tokens": 1844
+        },
+        {
+          "id": "fileroutes",
+          "title": "FileRoutes",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-start/reference/routing/file-routes...",
+          "tags": [
+            "FileRoutes",
+            "Route",
+            "/src/routes",
+            "route",
+            "solid-router",
+            "app.tsx"
+          ],
+          "path": "solidjs/fileroutes.md",
+          "tokens": 494
+        },
+        {
+          "id": "clientonly",
+          "title": "clientOnly",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-start/reference/client/client-only....",
+          "tags": [
+            "clientOnly",
+            "window",
+            "document",
+            "fallback",
+            "fn",
+            "options",
+            "{ lazy?: boolean }",
+            "lazy: false",
+            "props"
+          ],
+          "path": "solidjs/clientonly.md",
+          "tokens": 831
+        },
+        {
+          "id": "mount",
+          "title": "mount",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-start/reference/client/mount.mdx)",
+          "tags": [
+            "mount",
+            "hydrate",
+            "render",
+            "entry-client.tsx",
+            "{ ssr: false }",
+            "defineConfig"
+          ],
+          "path": "solidjs/mount.md",
+          "tokens": 465
+        },
+        {
+          "id": "startclient",
+          "title": "StartClient",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-start/reference/client/start-client...",
+          "tags": [
+            "StartClient",
+            "mount",
+            "entry-client.tsx"
+          ],
+          "path": "solidjs/startclient.md",
+          "tokens": 320
+        },
+        {
+          "id": "use-server",
+          "title": "\"use server\"",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-start/reference/server/use-server.mdx)",
+          "tags": [
+            "\"use server\"",
+            "logHello",
+            "getUser",
+            "updateUser",
+            "defineConfig",
+            "getServerFunctionMeta"
+          ],
+          "path": "solidjs/use-server.md",
+          "tokens": 1124
+        },
+        {
+          "id": "createhandler",
+          "title": "createHandler",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-start/reference/server/create-handl...",
+          "tags": [
+            "createHandler",
+            "entry-server.tsx",
+            "<StartServer>",
+            "renderToString",
+            "renderToStringAsync",
+            "renderToStream",
+            "mode"
+          ],
+          "path": "solidjs/createhandler.md",
+          "tokens": 540
+        },
+        {
+          "id": "createmiddleware",
+          "title": "createMiddleware",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-start/reference/server/create-middl...",
+          "tags": [
+            "createMiddleware",
+            "onRequest",
+            "onBeforeResponse",
+            "app.config.ts",
+            "middleware",
+            "export default"
+          ],
+          "path": "solidjs/createmiddleware.md",
+          "tokens": 760
+        },
+        {
+          "id": "get",
+          "title": "GET",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-start/reference/server/get.mdx)",
+          "tags": [
+            "GET"
+          ],
+          "path": "solidjs/get.md",
+          "tokens": 464
+        },
+        {
+          "id": "getserverfunctionmeta",
+          "title": "getServerFunctionMeta",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-start/reference/server/get-server-f...",
+          "tags": [
+            "getServerFunctionMeta",
+            "id",
+            "getServerFunctionMeta(): { id: string }"
+          ],
+          "path": "solidjs/getserverfunctionmeta.md",
+          "tokens": 453
+        },
+        {
+          "id": "httpheader",
+          "title": "HttpHeader",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-start/reference/server/http-header....",
+          "tags": [
+            "HttpHeader",
+            "name",
+            "value",
+            "Response",
+            "renderToStream",
+            "deferStream"
+          ],
+          "path": "solidjs/httpheader.md",
+          "tokens": 588
+        },
+        {
+          "id": "httpstatuscode",
+          "title": "HttpStatusCode",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-start/reference/server/http-status-...",
+          "tags": [
+            "HttpStatusCode",
+            "Response",
+            "code",
+            "ErrorBoundary",
+            "Show",
+            "Switch",
+            "NotFound",
+            "404",
+            "<ErrorBoundary>",
+            "<HttpStatusCode>"
+          ],
+          "path": "solidjs/httpstatuscode.md",
+          "tokens": 1152
+        },
+        {
+          "id": "startserver",
+          "title": "StartServer",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-start/reference/server/start-server...",
+          "tags": [
+            "StartServer",
+            "createHandler"
+          ],
+          "path": "solidjs/startserver.md",
+          "tokens": 374
+        },
+        {
+          "id": "overview",
+          "title": "Overview",
+          "description": "Solid is a modern JavaScript framework for today's web.",
+          "tags": [],
+          "path": "solidjs/overview.md",
+          "tokens": 426
+        },
+        {
+          "id": "installation-and-setup",
+          "title": "Installation and setup",
+          "description": "Getting started",
+          "tags": [
+            "Router",
+            "Route"
+          ],
+          "path": "solidjs/installation-and-setup.md",
+          "tokens": 724
+        },
+        {
+          "id": "component-routing",
+          "title": "Component routing",
+          "description": "Getting started",
+          "tags": [
+            "Route",
+            "<Router>",
+            "path",
+            "component",
+            "Home",
+            "/",
+            "Router",
+            "/hello-world",
+            "h1",
+            "/about"
+          ],
+          "path": "solidjs/component-routing.md",
+          "tokens": 658
+        },
+        {
+          "id": "config-based-routing",
+          "title": "Config-based routing",
+          "description": "Getting started",
+          "tags": [
+            "<Router>",
+            "path",
+            "component",
+            "/",
+            "Home",
+            "/hello-world",
+            "h1",
+            "/about",
+            "About",
+            "lazy"
+          ],
+          "path": "solidjs/config-based-routing.md",
+          "tokens": 915
+        },
+        {
+          "id": "navigation",
+          "title": "Navigation",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-router/concepts/navigation.mdx)",
+          "tags": [
+            "<a>",
+            "<A>",
+            "useNavigate",
+            "redirect",
+            "activeClass",
+            "inactiveClass",
+            "active",
+            "inactive",
+            "href",
+            "href=\"/dashboard\""
+          ],
+          "path": "solidjs/navigation.md",
+          "tokens": 1206
+        },
+        {
+          "id": "path-parameters",
+          "title": "Path parameters",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-router/concepts/path-parameters.mdx)",
+          "tags": [
+            ":id",
+            "/users/",
+            ":",
+            "id",
+            "User",
+            "Show",
+            "useParams",
+            "MatchFilter",
+            "Route",
+            "matchFilter"
+          ],
+          "path": "solidjs/path-parameters.md",
+          "tokens": 1296
+        },
+        {
+          "id": "search-parameters",
+          "title": "Search parameters",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-router/concepts/search-parameters.mdx)",
+          "tags": [
+            "?",
+            "useSearchParams",
+            "searchParams",
+            "setSearchParams",
+            "undefined",
+            "null",
+            "\"\"",
+            "useLocation",
+            "Query String: ?username=john&page=1"
+          ],
+          "path": "solidjs/search-parameters.md",
+          "tokens": 795
+        },
+        {
+          "id": "catch-all-routes",
+          "title": "Catch-all routes",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-router/concepts/catch-all.mdx)",
+          "tags": [
+            "*",
+            "/home",
+            "/about",
+            "NotFound"
+          ],
+          "path": "solidjs/catch-all-routes.md",
+          "tokens": 448
+        },
+        {
+          "id": "nesting-routes",
+          "title": "Nesting routes",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-router/concepts/nesting.mdx)",
+          "tags": [
+            "User",
+            "/users/:id",
+            "/users",
+            "Route",
+            "Users",
+            "children"
+          ],
+          "path": "solidjs/nesting-routes.md",
+          "tokens": 977
+        },
+        {
+          "id": "layouts",
+          "title": "Layouts",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-router/concepts/layouts.mdx)",
+          "tags": [
+            "root",
+            "Router",
+            "props.children",
+            "/hello-world",
+            "PageWrapper",
+            "/users",
+            "Users",
+            "/users/1",
+            "User"
+          ],
+          "path": "solidjs/layouts.md",
+          "tokens": 894
+        },
+        {
+          "id": "alternative-routers",
+          "title": "Alternative routers",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-router/concepts/alternative-routers...",
+          "tags": [
+            "location.pathname",
+            "<Router />",
+            "<HashRouter />",
+            "<MemoryRouter />"
+          ],
+          "path": "solidjs/alternative-routers.md",
+          "tokens": 836
+        },
+        {
+          "id": "actions",
+          "title": "Actions",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-router/concepts/actions.mdx)",
+          "tags": [
+            "queries",
+            "action",
+            "<form>",
+            "useAction",
+            "method=\"post\"",
+            "FormData",
+            "submitFeedbackAction",
+            "enctype=\"multipart/form-data\"",
+            "with",
+            "updateProductAction"
+          ],
+          "path": "solidjs/actions.md",
+          "tokens": 4861
+        },
+        {
+          "id": "single-page-applications",
+          "title": "Single page applications",
+          "description": "Rendering modes",
+          "tags": [
+            "_redirects",
+            "vercel.json"
+          ],
+          "path": "solidjs/single-page-applications.md",
+          "tokens": 399
+        },
+        {
+          "id": "server-side-rendering",
+          "title": "Server side rendering",
+          "description": "Rendering modes",
+          "tags": [
+            "preload"
+          ],
+          "path": "solidjs/server-side-rendering.md",
+          "tokens": 427
+        },
+        {
+          "id": "queries",
+          "title": "Queries",
+          "description": "Data fetching",
+          "tags": [
+            "query",
+            "<ErrorBoundary>",
+            "createAsync",
+            "articles",
+            "createAsyncStore"
+          ],
+          "path": "solidjs/queries.md",
+          "tokens": 1184
+        },
+        {
+          "id": "streaming",
+          "title": "Streaming",
+          "description": "Data fetching",
+          "tags": [
+            "<Suspense>",
+            "<h1>Dashboard</h1>",
+            "stats",
+            "transactions",
+            "deferStream",
+            "createAsync",
+            "true"
+          ],
+          "path": "solidjs/streaming.md",
+          "tokens": 1117
+        },
+        {
+          "id": "revalidation",
+          "title": "Revalidation",
+          "description": "Data fetching",
+          "tags": [
+            "revalidate",
+            "key",
+            "keyFor",
+            "query.key",
+            "query.keyFor(arguments)"
+          ],
+          "path": "solidjs/revalidation.md",
+          "tokens": 768
+        },
+        {
+          "id": "preload-data",
+          "title": "Preload data",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-router/data-fetching/how-to/preload...",
+          "tags": [
+            "preload",
+            "Route",
+            "createAsync",
+            "/products/:id",
+            "preloadProduct",
+            "ProductDetails"
+          ],
+          "path": "solidjs/preload-data.md",
+          "tokens": 725
+        },
+        {
+          "id": "handle-pending-and-error-states",
+          "title": "Handle pending and error states",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-router/data-fetching/how-to/handle-...",
+          "tags": [
+            "createAsync",
+            "<Suspense>",
+            "<ErrorBoundary>"
+          ],
+          "path": "solidjs/handle-pending-and-error-states.md",
+          "tokens": 521
+        },
+        {
+          "id": "preloading",
+          "title": "Preloading",
+          "description": "Advanced concepts",
+          "tags": [
+            "preload",
+            "usePreloadRoute",
+            "lazy()",
+            "preload()"
+          ],
+          "path": "solidjs/preloading.md",
+          "tokens": 1089
+        },
+        {
+          "id": "lazy-loading",
+          "title": "Lazy loading",
+          "description": "Advanced concepts",
+          "tags": [
+            "lazy",
+            "Users"
+          ],
+          "path": "solidjs/lazy-loading.md",
+          "tokens": 476
+        },
+        {
+          "id": "migration-from-v0-9-x",
+          "title": "Migration from v0.9.x",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-router/guides/migration.mdx)",
+          "tags": [
+            "<Outlet>",
+            "<Routes>",
+            "useRoutes",
+            "props.children",
+            "<Outlets>",
+            "<Router>",
+            "<Route>",
+            "element",
+            "Route",
+            "data"
+          ],
+          "path": "solidjs/migration-from-v0-9-x.md",
+          "tokens": 1000
+        },
+        {
+          "id": "a",
+          "title": "A",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-router/reference/components/a.mdx)",
+          "tags": [
+            "<A />",
+            "<Router>",
+            "<a />",
+            "<Router />",
+            "<Router base=\"/subpath\">",
+            "href",
+            "<A>",
+            "active",
+            "inactive",
+            "/users"
+          ],
+          "path": "solidjs/a.md",
+          "tokens": 941
+        },
+        {
+          "id": "hashrouter",
+          "title": "HashRouter",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-router/reference/components/hash-ro...",
+          "tags": [
+            "HashRouter",
+            "Router",
+            "root",
+            "<A>",
+            "JSX.Element",
+            "RouteDefinition",
+            "RouteDefinition[]",
+            "/_server",
+            "true",
+            "false"
+          ],
+          "path": "solidjs/hashrouter.md",
+          "tokens": 677
+        },
+        {
+          "id": "memoryrouter",
+          "title": "MemoryRouter",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-router/reference/components/memory-...",
+          "tags": [
+            "MemoryRouter",
+            "<HashRouter>",
+            "<Router>",
+            "MemoryHistory",
+            "/about",
+            "get",
+            "set",
+            "back",
+            "forward",
+            "go"
+          ],
+          "path": "solidjs/memoryrouter.md",
+          "tokens": 1196
+        },
+        {
+          "id": "navigate",
+          "title": "Navigate",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-router/reference/components/navigat...",
+          "tags": [
+            "Navigate",
+            "<A>",
+            "href"
+          ],
+          "path": "solidjs/navigate.md",
+          "tokens": 435
+        },
+        {
+          "id": "route",
+          "title": "Route",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-router/reference/components/route.mdx)",
+          "tags": [
+            "Route",
+            "/login",
+            "/register",
+            "Login",
+            "string | string[]",
+            "Component",
+            "MatchFilters",
+            "JSX.Element",
+            "<Route>",
+            "RoutePreloadFunc"
+          ],
+          "path": "solidjs/route.md",
+          "tokens": 497
+        },
+        {
+          "id": "router",
+          "title": "Router",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-router/reference/components/router....",
+          "tags": [
+            "Router",
+            "root",
+            "JSX.Element",
+            "RouteDefinition",
+            "RouteDefinition[]",
+            "/_server",
+            "true",
+            "<A>",
+            "false",
+            "target"
+          ],
+          "path": "solidjs/router.md",
+          "tokens": 531
+        },
+        {
+          "id": "action",
+          "title": "action",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-router/reference/data-apis/action.mdx)",
+          "tags": [
+            "action",
+            "useSubmission",
+            "useSubmissions",
+            "handler",
+            "(...args: T) => Promise<U>",
+            "<form>",
+            "FormData",
+            "options",
+            "name",
+            "string"
+          ],
+          "path": "solidjs/action.md",
+          "tokens": 1487
+        },
+        {
+          "id": "cache",
+          "title": "cache",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-router/reference/data-apis/cache.mdx)",
+          "tags": [
+            "v0.15.0",
+            "cache",
+            "createAsync",
+            "createResource",
+            "{ name: 'Ryan', awesome: true }",
+            "{ awesome: true, name: 'Ryan' }",
+            "CachedFunction",
+            "fn",
+            "(...args: any) => any",
+            "name"
+          ],
+          "path": "solidjs/cache.md",
+          "tokens": 1724
+        },
+        {
+          "id": "createasync",
+          "title": "createAsync",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-router/reference/data-apis/create-a...",
+          "tags": [
+            "createAsync",
+            "createResource",
+            "fetcher",
+            "(prev: T | undefined) => Promise<T>",
+            "Promise",
+            "options",
+            "name",
+            "string",
+            "initialValue",
+            "T"
+          ],
+          "path": "solidjs/createasync.md",
+          "tokens": 1523
+        },
+        {
+          "id": "createasyncstore",
+          "title": "createAsyncStore",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-router/reference/data-apis/create-a...",
+          "tags": [
+            "createAsyncStore",
+            "fetcher",
+            "(prev: T | undefined) => Promise<T>",
+            "Promise",
+            "options",
+            "name",
+            "string",
+            "initialValue",
+            "T",
+            "deferStream"
+          ],
+          "path": "solidjs/createasyncstore.md",
+          "tokens": 1342
+        },
+        {
+          "id": "query",
+          "title": "query",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-router/reference/data-apis/query.mdx)",
+          "tags": [
+            "query",
+            "createAsync",
+            "fetcher",
+            "T extends (...args: any) => any",
+            "name",
+            "string",
+            "key",
+            "keyFor"
+          ],
+          "path": "solidjs/query.md",
+          "tokens": 1073
+        },
+        {
+          "id": "revalidate",
+          "title": "revalidate",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-router/reference/data-apis/revalida...",
+          "tags": [
+            "revalidate",
+            "key",
+            "string | string[] | void",
+            "force",
+            "boolean",
+            "true",
+            "false",
+            "Promise",
+            "query",
+            "createAsync"
+          ],
+          "path": "solidjs/revalidate.md",
+          "tokens": 951
+        },
+        {
+          "id": "useaction",
+          "title": "useAction",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-router/reference/data-apis/use-acti...",
+          "tags": [
+            "useAction",
+            "action",
+            "Action<T, U, V>",
+            "Promise"
+          ],
+          "path": "solidjs/useaction.md",
+          "tokens": 670
+        },
+        {
+          "id": "usesubmission",
+          "title": "useSubmission",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-router/reference/data-apis/use-subm...",
+          "tags": [
+            "useSubmission",
+            "action",
+            "Action<T, U, V>",
+            "filter",
+            "(input: V) => boolean",
+            "true",
+            "false",
+            "input",
+            "result",
+            "error"
+          ],
+          "path": "solidjs/usesubmission.md",
+          "tokens": 1306
+        },
+        {
+          "id": "usesubmissions",
+          "title": "useSubmissions",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-router/reference/data-apis/use-subm...",
+          "tags": [
+            "useSubmissions",
+            "action",
+            "Action<T, U, V>",
+            "filter",
+            "(input: V) => boolean",
+            "true",
+            "false",
+            "input",
+            "result",
+            "error"
+          ],
+          "path": "solidjs/usesubmissions.md",
+          "tokens": 1414
+        },
+        {
+          "id": "preload",
+          "title": "preload",
+          "description": "Preload functions",
+          "tags": [
+            "preload",
+            "params",
+            "Params",
+            "useParams",
+            "location",
+            "Location",
+            "useLocation",
+            "intent",
+            "\"preload\"",
+            "\"navigate\""
+          ],
+          "path": "solidjs/preload.md",
+          "tokens": 1030
+        },
+        {
+          "id": "usebeforeleave",
+          "title": "useBeforeLeave",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-router/reference/primitives/use-bef...",
+          "tags": [
+            "useBeforeLeave",
+            "navigate.",
+            "true",
+            "preventDefault()"
+          ],
+          "path": "solidjs/usebeforeleave.md",
+          "tokens": 528
+        },
+        {
+          "id": "usecurrentmatches",
+          "title": "useCurrentMatches",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-router/reference/primitives/use-cur...",
+          "tags": [
+            "useCurrentMatches"
+          ],
+          "path": "solidjs/usecurrentmatches.md",
+          "tokens": 359
+        },
+        {
+          "id": "useisrouting",
+          "title": "useIsRouting",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-router/reference/primitives/use-is-...",
+          "tags": [
+            "useIsRouting",
+            "() => boolean",
+            "true",
+            "false",
+            "<Router>",
+            "useNavigate"
+          ],
+          "path": "solidjs/useisrouting.md",
+          "tokens": 631
+        },
+        {
+          "id": "uselocation",
+          "title": "useLocation",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-router/reference/primitives/use-loc...",
+          "tags": [
+            "useLocation",
+            "Location",
+            "pathname",
+            "string",
+            "/",
+            "search",
+            "?",
+            "hash",
+            "#",
+            "state"
+          ],
+          "path": "solidjs/uselocation.md",
+          "tokens": 974
+        },
+        {
+          "id": "usematch",
+          "title": "useMatch",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-router/reference/primitives/use-mat...",
+          "tags": [
+            "useMatch",
+            "path",
+            "() => S",
+            "<Route>",
+            "filters",
+            "MatchFilters<S>",
+            "PathMatch",
+            "undefined",
+            "params",
+            "Record<string, string>"
+          ],
+          "path": "solidjs/usematch.md",
+          "tokens": 1306
+        },
+        {
+          "id": "usenavigate",
+          "title": "useNavigate",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-router/reference/primitives/use-nav...",
+          "tags": [
+            "useNavigate",
+            "to",
+            "string | number",
+            "string",
+            "number",
+            "-1",
+            "1",
+            "options",
+            "NavigateOptions",
+            "resolve"
+          ],
+          "path": "solidjs/usenavigate.md",
+          "tokens": 1323
+        },
+        {
+          "id": "useparams",
+          "title": "useParams",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-router/reference/primitives/use-par...",
+          "tags": [
+            "useParams",
+            "T"
+          ],
+          "path": "solidjs/useparams.md",
+          "tokens": 679
+        },
+        {
+          "id": "usepreloadroute",
+          "title": "usePreloadRoute",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-router/reference/primitives/use-pre...",
+          "tags": [
+            "usePreloadRoute",
+            "url",
+            "string | URL",
+            "string",
+            "options",
+            "{ preloadData?: boolean }",
+            "preloadData",
+            "boolean",
+            "false",
+            "true"
+          ],
+          "path": "solidjs/usepreloadroute.md",
+          "tokens": 790
+        },
+        {
+          "id": "usesearchparams",
+          "title": "useSearchParams",
+          "description": "[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-router/reference/primitives/use-sea...",
+          "tags": [
+            "useSearchParams",
+            "\"\"",
+            "[]",
+            "undefined",
+            "null",
+            "useNavigate",
+            "resolve",
+            "scroll",
+            "false",
+            "useParams"
+          ],
+          "path": "solidjs/usesearchparams.md",
+          "tokens": 898
+        },
+        {
+          "id": "json",
+          "title": "json",
+          "description": "Response helpers",
+          "tags": [
+            "json",
+            "Response",
+            "data",
+            "T",
+            "JSON.stringify",
+            "init",
+            "revalidate",
+            "string | string[]",
+            "[]",
+            "headers"
+          ],
+          "path": "solidjs/json.md",
+          "tokens": 1278
+        },
+        {
+          "id": "redirect",
+          "title": "redirect",
+          "description": "Response helpers",
+          "tags": [
+            "redirect",
+            "Response",
+            "url",
+            "string",
+            "init",
+            "revalidate",
+            "string | string[]",
+            "status",
+            "number",
+            "302 Found"
+          ],
+          "path": "solidjs/redirect.md",
+          "tokens": 1085
+        },
+        {
+          "id": "reload",
+          "title": "reload",
+          "description": "Response helpers",
+          "tags": [
+            "reload",
+            "Response",
+            "init",
+            "revalidate",
+            "string | string[]",
+            "headers",
+            "HeadersInit",
+            "status",
+            "number",
+            "200 OK"
+          ],
+          "path": "solidjs/reload.md",
+          "tokens": 849
+        },
+        {
+          "id": "overview",
+          "title": "Overview",
+          "description": "Solid is a modern JavaScript framework for today's web.",
+          "tags": [
+            "document.head"
+          ],
+          "path": "solidjs/overview.md",
+          "tokens": 365
+        },
+        {
+          "id": "install-and-configure",
+          "title": "Install and configure",
+          "description": "Getting started",
+          "tags": [
+            "v1.0",
+            "0.27.x",
+            "v0.x",
+            "v0.26.x",
+            "<MetaProvider />",
+            "<Title />",
+            "title",
+            "<Meta />",
+            "<Style />",
+            "style"
+          ],
+          "path": "solidjs/install-and-configure.md",
+          "tokens": 837
+        },
+        {
+          "id": "client-setup",
+          "title": "Client setup",
+          "description": "Getting started",
+          "tags": [
+            "<head />"
+          ],
+          "path": "solidjs/client-setup.md",
+          "tokens": 368
+        },
+        {
+          "id": "server-setup",
+          "title": "Server setup",
+          "description": "Getting started",
+          "tags": [
+            "MetaProvider",
+            "tags[]"
+          ],
+          "path": "solidjs/server-setup.md",
+          "tokens": 428
+        },
+        {
+          "id": "base",
+          "title": "Base",
+          "description": "Meta reference",
+          "tags": [
+            "Base",
+            "base",
+            "head"
+          ],
+          "path": "solidjs/base.md",
+          "tokens": 419
+        },
+        {
+          "id": "link",
+          "title": "Link",
+          "description": "Meta reference",
+          "tags": [
+            "link",
+            "<head>",
+            "<Link>",
+            "href"
+          ],
+          "path": "solidjs/link.md",
+          "tokens": 645
+        },
+        {
+          "id": "meta",
+          "title": "Meta",
+          "description": "Meta reference",
+          "tags": [
+            "<Meta>",
+            "meta",
+            "Meta",
+            "MetaProvider",
+            "name"
+          ],
+          "path": "solidjs/meta.md",
+          "tokens": 517
+        },
+        {
+          "id": "metaprovider",
+          "title": "MetaProvider",
+          "description": "Meta reference",
+          "tags": [
+            "MetaProvider",
+            "<head/>"
+          ],
+          "path": "solidjs/metaprovider.md",
+          "tokens": 321
+        },
+        {
+          "id": "style",
+          "title": "Style",
+          "description": "Meta reference",
+          "tags": [
+            "Style",
+            "style",
+            "head",
+            "Link"
+          ],
+          "path": "solidjs/style.md",
+          "tokens": 476
+        },
+        {
+          "id": "title",
+          "title": "Title",
+          "description": "Meta reference",
+          "tags": [
+            "Title",
+            "title"
+          ],
+          "path": "solidjs/title.md",
+          "tokens": 412
+        },
+        {
+          "id": "usehead",
+          "title": "useHead",
+          "description": "Meta reference",
+          "tags": [
+            "useHead",
+            "<head>",
+            "MetaProvider",
+            "tag",
+            "string",
+            "<script>",
+            "<meta>",
+            "<title>",
+            "props",
+            "Record<string, unknown>"
+          ],
+          "path": "solidjs/usehead.md",
+          "tokens": 1411
         }
       ]
     },

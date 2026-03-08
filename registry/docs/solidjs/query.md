@@ -1,0 +1,97 @@
+Data APIs
+
+# query
+
+[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-router/reference/data-apis/query.mdx)
+
+The `query` function wraps an asynchronous function (the fetcher) and returns a query.
+
+The primary purpose of a query is to prevent redundant data fetching. When a query is called, a key is generated from its name and arguments. This key is used to internally cache the result of the fetcher. If a query with the same key is called, the cached result is used in these scenarios:
+
+- **For preloading:** After a route's data is preloaded, a subsequent call to the same query within a 5-second window uses the preloaded data.
+- **For active subscriptions:** When a query is actively being used by a component (e.g., via [`createAsync`](/solid-router/reference/data-apis/create-async)), its data is reused without expiration.
+- **On native history navigation:** When navigating with the browser's back or forward buttons, the data is reused instead of being re-fetched.
+- **For server-side deduplication:** Within a single server-side rendering (SSR) request, repeated calls to the same query reuse the same value.
+- **During client hydration:** If SSR has provided data for a key, that data is used immediately on the client without a new network request.
+
+***
+
+## [Import](/solid-router/reference/data-apis/query#import)
+
+```
+import { query } from "@solidjs/router";
+```
+
+***
+
+## [Type](/solid-router/reference/data-apis/query#type)
+
+```
+function query<T extends (...args: any) => any>(  fn: T,  name: string): CachedFunction<T>;
+```
+
+***
+
+## [Parameters](/solid-router/reference/data-apis/query#parameters)
+
+### [`fetcher`](/solid-router/reference/data-apis/query#fetcher)
+
+- **Type:** `T extends (...args: any) => any`
+- **Required:** Yes
+
+An asynchronous function that handles the logic for fetching data. All arguments passed to this function must be JSON-serializable.
+
+### [`name`](/solid-router/reference/data-apis/query#name)
+
+- **Type:** `string`
+- **Required:** Yes
+
+A string used as a namespace for the query. Solid Router combines this with the query's arguments to generate a unique key for deduplication.
+
+***
+
+## [Return value](/solid-router/reference/data-apis/query#return-value)
+
+`query` returns a new function with the same call signature as the fetcher. This returned function has the following properties attached to it:
+
+### [`key`](/solid-router/reference/data-apis/query#key)
+
+The base key for the query, derived from its name.
+
+### [`keyFor`](/solid-router/reference/data-apis/query#keyfor)
+
+A function that takes the same arguments as the fetcher and returns a string representing a specific key for that set of arguments.
+
+***
+
+## [Example](/solid-router/reference/data-apis/query#example)
+
+### [Basic usage](/solid-router/reference/data-apis/query#basic-usage)
+
+```
+import { query } from "@solidjs/router";
+const getUserProfileQuery = query(async (userId: string) => {  const response = await fetch(    `https://api.example.com/users/${encodeURIComponent(userId)}`  );  const json = await response.json();
+  if (!response.ok) {    throw new Error(json?.message ?? "Failed to load user profile.");  }
+  return json;}, "userProfile");
+```
+
+[Report an issue with this page](https://github.com/solidjs/solid-docs-next/issues/new?assignees=ladybluenotes\&labels=improve+documentation%2Cpending+review\&projects=\&template=CONTENT.yml\&title=[Content]:\&subject=/solid-router/reference/data-apis/query.mdx\&page=https://docs.solidjs.com/solid-router/reference/data-apis/query)
+
+On this page
+
+1. [Overview](#_top)
+2. [Import](#import)
+3. [Type](#type)
+4. [Parameters](#parameters)
+   1. [fetcher](#fetcher)
+   2. [name](#name)
+5. [Return value](#return-value)
+   1. [key](#key)
+   2. [keyFor](#keyfor)
+6. [Example](#example)
+   1. [Basic usage](#basic-usage)
+
+Contribute
+
+1. [Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/solid-router/reference/data-apis/query.mdx)
+2. [Report an issue with this page](https://github.com/solidjs/solid-docs-next/issues/new?assignees=ladybluenotes\&labels=improve+documentation%2Cpending+review\&projects=\&template=CONTENT.yml\&title=[Content]:\&subject=/solid-router/reference/data-apis/query.mdx\&page=https://docs.solidjs.com/solid-router/reference/data-apis/query)

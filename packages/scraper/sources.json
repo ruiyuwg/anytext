@@ -400,6 +400,14 @@
       "url": "https://docs.stripe.com/llms.txt"
     },
     {
+      "id": "solidjs",
+      "name": "SolidJS",
+      "description": "Reactive JavaScript framework with fine-grained reactivity, signals, and compiled templates",
+      "version": "1",
+      "adapter": "llms-txt",
+      "url": "https://docs.solidjs.com/llms.txt"
+    },
+    {
       "id": "azure",
       "name": "Azure",
       "description": "Microsoft Azure cloud platform with compute, storage, databases, AI, and 200+ services",

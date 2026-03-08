@@ -1,0 +1,52 @@
+Rendering
+
+# render
+
+[Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/reference/rendering/render.mdx)
+
+```
+import { render } from "solid-js/web"import type { JSX } from "solid-js"import type { MountableElement } from "solid-js/web"
+function render(  code: () => JSX.Element,  element: MountableElement): () => void
+```
+
+This is the browser app entry point. Provide a top-level component function and an element to mount to. It is recommended this element be empty: while `render` will just append children, the returned dispose function will remove all children.
+
+```
+const dispose = render(App, document.getElementById("app"))// orconst dispose = render(() => <App />, document.getElementById("app"))
+```
+
+It's important that the first argument is a function: do not pass JSX directly (as in `render(<App/>, ...)`), because this will call App before render can set up a root to track signal dependencies within App.
+
+***
+
+## [Parameters](/reference/rendering/render#parameters)
+
+Argument
+
+Type
+
+Description
+
+code
+
+`() => JSX.Element`
+
+Function that returns the application code.
+
+element
+
+MountableElement
+
+DOM Element to mount the application to
+
+[Report an issue with this page](https://github.com/solidjs/solid-docs-next/issues/new?assignees=ladybluenotes\&labels=improve+documentation%2Cpending+review\&projects=\&template=CONTENT.yml\&title=[Content]:\&subject=/reference/rendering/render.mdx\&page=https://docs.solidjs.com/reference/rendering/render)
+
+On this page
+
+1. [Overview](#_top)
+2. [Parameters](#parameters)
+
+Contribute
+
+1. [Edit this page](https://github.com/solidjs/solid-docs/edit/main/src/routes/reference/rendering/render.mdx)
+2. [Report an issue with this page](https://github.com/solidjs/solid-docs-next/issues/new?assignees=ladybluenotes\&labels=improve+documentation%2Cpending+review\&projects=\&template=CONTENT.yml\&title=[Content]:\&subject=/reference/rendering/render.mdx\&page=https://docs.solidjs.com/reference/rendering/render)
