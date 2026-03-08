@@ -1,0 +1,338 @@
+# Navigating between pages in Expo Router
+
+Learn the different ways to link to and navigate to pages in Expo Router.
+
+Once you have a few pages in your app and their layouts setup, it's time to start navigating between them. Navigation in Expo Router works a lot like React Navigation, but with all pages having a URL by default, we can create links and use these URLs to move about our app using familiar web patterns.
+
+## Native navigation basics with `useRouter`
+
+Like in React Navigation, you can call a function from an `onPress` handler to navigate to another page. In Expo Router, you can use the `useRouter` hook to access navigation functions:
+
+```tsx
+import { useRouter } from 'expo-router';
+import { Button } from 'react-native';
+
+export default function Home() {
+  const router = useRouter();
+
+  return <Button title="Go to About" onPress={() => router.navigate('/about')} />;
+}
+```
+
+Expo Router apps default to stack navigation, where navigating to a new route pushes a screen onto a stack, and backing out of that route pops it off the stack. Usually, you would want to use the `router.navigate` function. This will either push a new page onto the stack or unwind to an existing route on the stack. However, you can also call `router.push` to explicitly push a new page onto the stack, `router.back` to go back to the previous page, or `router.replace` to replace the current page on the stack.
+
+With Expo Router, you refer to pages by their URL, or their position relative to the **src/app** directory. Check out the following file structure and how you would navigate to each page:
+
+`src`
+
+ `app`
+
+  `index.tsx``router.navigate("/")`
+
+  `about.tsx``router.navigate("/about")`
+
+  `profile`
+
+   `index.tsx``router.navigate("/profile")`
+
+   `friends.tsx``router.navigate("/profile/friends")`
+
+[Router imperative navigation API reference](/versions/latest/sdk/router#router) — Learn how to use all the functions available for imperative navigation.
+
+## Links and buttons
+
+The typical way to link to a page in Expo Router is to use links like web apps. Expo Router has a `Link` component for navigating between pages, where the `href` is the same route you would use in `router.navigate`:
+
+```tsx
+import { View } from 'react-native';
+import { Link } from 'expo-router';
+
+export default function Page() {
+  return (
+    <View>
+      <Link href="/about">About</Link>
+    </View>
+  );
+}
+```
+
+By default, Links can only wrap `Text` components. You can use `Pressable` or other components that support `onPress` and `onClick` props inside a link with the `asChild` prop:
+
+```tsx
+import { Pressable, Text } from 'react-native';
+import { Link } from 'expo-router';
+
+export default function Page() {
+  return (
+    <Link href="/other" asChild>
+      <Pressable>
+        <Text>Home</Text>
+      </Pressable>
+    </Link>
+  );
+}
+```
+
+[Link API reference](/versions/latest/sdk/router#link) — Learn the options available when using Links for navigation.
+
+[Link preview](/router/reference/link-preview) — Learn how to add a preview to your link on iOS when using Expo Router.
+
+## Relative routes
+
+You don't always have to use the absolute path to a route. Using paths that start with `./` (for the current directory) or `../` (for the parent directory) will navigate relative to the current route.
+
+A relative URL is a URL prefix with `./`, such as `./article`, or `./article/`. Relative URLs are resolved relative to the current rendered screen.
+
+```tsx
+<Link href="./article">Go to article</Link>
+```
+
+```ts
+router.navigate('./article');
+```
+
+## Dynamic routes and URL parameters
+
+[Using dynamic routes with Expo Router](https://www.youtube.com/watch?v=izZv6a99Roo\&t=350) — Learn how to make a segment of a route dynamic.
+
+Dynamic routes can be linked to with their full URL, or by passing a `params` object.
+
+Consider the following file structure:
+
+`src`
+
+ `app`
+
+  `user`
+
+   `[id].tsx`
+
+Each of these links will navigate to the same page:
+
+```tsx
+import { Link, router } from 'expo-router';
+import { View, Pressable, Text } from 'react-native';
+
+export default function Page() {
+  return (
+    <View>
+      <Link
+        href="/user/bacon">
+        View user (id inline)
+      </Link>
+      <Link
+        href={{
+          pathname: '/user/[id]',
+          params: { id: 'bacon' }
+        }}
+      >
+        View user (id in params in href)
+      </Link>
+      <Pressable
+        onPress={() =>
+          router.navigate({
+            pathname: '/user/[id]',
+            params: { id: 'bacon' }
+          })
+        }
+      >
+        <Text>View user (imperative)</Text>
+      </Pressable>
+    </View>
+  );
+}
+```
+
+> Some parameters are reserved for internal use by Expo Router and React Navigation. You can find them in the [Using URL parameters guide](/router/reference/url-parameters#reserved-parameters).
+
+### Passing query parameters
+
+You can specify query parameters in the link URL itself, or as additional parameters in the `params` object. Any parameters that don't match the name of the dynamic route variable are equivalent to query parameters.
+
+```tsx
+<Link href="/users?limit=20">View users</Link>
+
+<Link
+  href={{
+    pathname: '/users',
+    params: { limit: 20 }
+  }}>
+  View users
+</Link>
+```
+
+### Using dynamic route variables and query parameters in the destination page
+
+All variables in the link URL are accessible to the receiving page via the `useLocalSearchParams` hook. This hook returns an object with all the URL parameters, including those passed as `params`.
+
+For example, if you have a link like this:
+
+```tsx
+<Link href="/users?limit=20">View users</Link>
+```
+
+Then you can read the parameters on the other end like this:
+
+```tsx
+import { useLocalSearchParams } from 'expo-router';
+import { View, Text } from 'react-native';
+
+export default function Users() {
+  const { id, limit } = useLocalSearchParams();
+
+  return (
+    <View>
+      <Text>User ID: {id}</Text>
+      <Text>Limit: {limit}</Text>
+    </View>
+  );
+}
+```
+
+### Updating query parameters without navigating
+
+Query parameters can be updated without navigating to a new page. This can be done with a `Link` that uses the same URL as the current page, but with updated query parameters, or imperatively.
+
+```tsx
+<Link href="/users?limit=50">View more users</Link>
+
+<Pressable onPress={() => router.setParams({ limit: 50 })}>
+  <Text>View more users</Text>
+</Pressable>
+```
+
+[Using URL parameters](/router/reference/url-parameters) — Learn more about how to set and use URL parameters in Expo Router.
+
+## Redirects
+
+You can immediately redirect to another route from a page or layout with the `Redirect` component. This functions like the `replace` imperative navigation function. A redirect will navigate to the new route without rendering the current page.
+
+```tsx
+import { Redirect } from 'expo-router';
+
+export default function Page() {
+  return <Redirect href="/about" />;
+}
+```
+
+## Prefetching
+
+The `prefetch` prop on a `<Link />` component enables prefetching of the target screen when the component is rendered. This allows for faster navigation by preparing the screen in advance.
+
+```tsx
+import { Link } from 'expo-router';
+
+export default function Page() {
+  return <Link href="/about" prefetch />;
+}
+```
+
+When `prefetch` is set, Expo Router will attempt to render the target screen off-screen. The exact behavior depends on the type of navigator used:
+
+- **Expo Router Navigators**: Render the target screen off-screen to enable preloading.
+- **Custom Navigators**: May implement prefetching differently or not support it at all.
+
+When a screen is preloaded in a stack navigator, it will have a few limitations:
+
+- It cannot use the imperative `router` API.
+- It cannot update options with `useNavigation().setOptions()`
+- It cannot listen to events from the navigator (for example focus, tabPress, and so on).
+
+The navigation object will be updated once you navigate to the screen. So if you have an event listener in a useEffect hook, and have a dependency on navigation, it will add any listeners when the screen is navigated to:
+
+```tsx
+const navigation = useNavigation();
+
+useEffect(() => {
+  const unsubscribe = navigation.addListener('tabPress', () => {
+    // do something
+  });
+
+  return () => {
+    unsubscribe();
+  };
+}, [navigation]);
+```
+
+Similarly, for dispatching actions or updating options, you can check if the screen is focused before doing so:
+
+```tsx
+const navigation = useNavigation();
+
+if (navigation.isFocused()) {
+  navigation.setOptions({ title: 'Updated title' });
+}
+```
+
+For more information, refer to the [React Navigation preload docs](https://reactnavigation.org/docs/navigation-object/#preload)
+
+## Deep links
+
+Deep linking is when a URL opens a specific page in your app. Expo Router supports deep linking by default, so you can link to any page in your app with a URL from outside of your app, as you would inside your app with `Link`. This is especially useful for sharing links to specific pages in your app.
+
+On web, deep linking is as simple as navigating to that specific URL in your web browser. On mobile, you define a `scheme` in your [app config](/workflow/configuration) file, and this becomes the prefix for deep links into your app.
+
+Assuming your `scheme` is `myapp`, here are some examples of how you would link to a page in your app from a web page or another app:
+
+`src`
+
+ `app`
+
+  `about.tsx``myapp://about`
+
+  `profile`
+
+   `index.tsx``myapp://profile`
+
+  `users`
+
+   `[username].tsx``myapp://users/evanbacon`
+
+With app links and universal links, you can also link to your app with an `https` URL. For more information, see [Universal linking](/linking/overview#universal-linking).
+
+## Initial routes
+
+When opening a deep link to a page in your app, you will likely want back navigation to work as if the user navigated to the page from your home page. To do this, you can specify an `initialRouteName` configuration, which defines the page in a layout that should be loaded before the deep linked page.
+
+Consider the following file structure:
+
+`src`
+
+ `app`
+
+  `index.tsx`
+
+  `stack`
+
+   `index.tsx`
+
+   `second.tsx`
+
+   `_layout.tsx`
+
+`stack` is a stack navigator, and `/stack/index` is always the first route in the stack.
+
+To ensure that `/stack/index` is always loaded first, even if the user deep links to `/stack/second`, you can set the `initialRouteName` in **src/app/stack/\_layout.tsx**:
+
+```tsx
+export const unstable_settings = {
+  // Ensure any route can link back to `/`
+  initialRouteName: 'index',
+};
+```
+
+By default, the `initialRouteName` is only considered when deep linking and not during navigation within your app. However, you can use the `withAnchor` prop on `Link` to force the initial route to be loaded when navigating directly into another stack inside your app.
+
+So, if **src/app/index.tsx** contained a link to `/stack/second`, add the `withAnchor` prop to ensure that `/stack/index` is loaded first, which will cause the user to go back to `/stack/index` when they press the back button from `/stack/second`:
+
+```tsx
+<Link href="/stack/second" withAnchor>
+  Go to second
+</Link>
+```
+
+> If you are missing a back button when testing deep links, this can often be fixed by setting an `initialRouteName`.
+
+***
+
+# Common navigation patterns in Expo Router

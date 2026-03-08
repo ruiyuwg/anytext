@@ -1,5 +1,5 @@
 {
-  "version": 49,
+  "version": 50,
   "updatedAt": "2026-03-08",
   "libraries": [
     {
@@ -17082,6 +17082,3839 @@
           ],
           "path": "elysia/your-first-route.md",
           "tokens": 640
+        }
+      ]
+    },
+    {
+      "id": "expo",
+      "name": "Expo",
+      "description": "Platform for building universal React Native apps with SDK modules, EAS Build, and file-based routing",
+      "version": "52",
+      "topics": [
+        {
+          "id": "expo-documentation",
+          "title": "Expo Documentation",
+          "description": "Expo is an open-source React Native framework for apps that run natively on Android, iOS, and the web. Expo brings to...",
+          "tags": [
+            "create-expo-app",
+            "create-expo-app@latest",
+            "--template",
+            "--template default@sdk-55"
+          ],
+          "path": "expo/expo-documentation.md",
+          "tokens": 1039
+        },
+        {
+          "id": "android-device-with-a-development-build-local",
+          "title": "Android device with a development build (local)",
+          "description": "Use a package manager such as Homebrew to install the following dependency.",
+          "tags": [
+            "JAVA_HOME",
+            "VanillaIceCream",
+            "adb",
+            ".gradle",
+            "ANDROID_HOME",
+            "adb --version",
+            "Build number",
+            "adb devices",
+            "device",
+            "npx expo start"
+          ],
+          "path": "expo/android-device-with-a-development-build-local.md",
+          "tokens": 1928
+        },
+        {
+          "id": "android-emulator-with-expo-go",
+          "title": "Android Emulator with Expo Go",
+          "description": "Download and install Android Studio.",
+          "tags": [
+            "VanillaIceCream",
+            "adb",
+            ".gradle",
+            "ANDROID_HOME",
+            "adb --version",
+            "npx expo start"
+          ],
+          "path": "expo/android-emulator-with-expo-go.md",
+          "tokens": 1466
+        },
+        {
+          "id": "android-emulator-with-a-development-build-eas",
+          "title": "Android Emulator with a development build (EAS)",
+          "description": "Download and install Android Studio.",
+          "tags": [
+            "VanillaIceCream",
+            "adb",
+            ".gradle",
+            "ANDROID_HOME",
+            "adb --version"
+          ],
+          "path": "expo/android-emulator-with-a-development-build-eas.md",
+          "tokens": 1703
+        },
+        {
+          "id": "android-emulator-with-a-development-build-local",
+          "title": "Android Emulator with a development build (local)",
+          "description": "Use a package manager such as Homebrew to install the following dependency.",
+          "tags": [
+            "JAVA_HOME",
+            "VanillaIceCream",
+            "adb",
+            ".gradle",
+            "ANDROID_HOME",
+            "adb --version",
+            "npx expo start"
+          ],
+          "path": "expo/android-emulator-with-a-development-build-local.md",
+          "tokens": 2131
+        },
+        {
+          "id": "ios-device-with-a-development-build-eas",
+          "title": "iOS device with a development build (EAS)",
+          "description": "To install a development build on your iOS device, you will need an active subscription to the Apple Developer Progra...",
+          "tags": [],
+          "path": "expo/ios-device-with-a-development-build-eas.md",
+          "tokens": 598
+        },
+        {
+          "id": "ios-device-with-a-development-build-local",
+          "title": "iOS device with a development build (local)",
+          "description": "Open up the Mac App Store, search for Xcode, and click Install (or Update if you have it already).",
+          "tags": [
+            "ios.bundleIdentifier",
+            "npx expo start"
+          ],
+          "path": "expo/ios-device-with-a-development-build-local.md",
+          "tokens": 917
+        },
+        {
+          "id": "ios-simulator-with-a-development-build-eas",
+          "title": "iOS Simulator with a development build (EAS)",
+          "description": "Open up the Mac App Store, search for Xcode, and click Install (or Update if you have it already).",
+          "tags": [
+            "ios.simulator",
+            "true",
+            "npx expo start"
+          ],
+          "path": "expo/ios-simulator-with-a-development-build-eas.md",
+          "tokens": 1000
+        },
+        {
+          "id": "start-developing",
+          "title": "Start developing",
+          "description": "Make your first change to an Expo project and see it live on your device.",
+          "tags": [],
+          "path": "expo/start-developing.md",
+          "tokens": 988
+        },
+        {
+          "id": "expo-skills-for-ai-agents",
+          "title": "Expo Skills for AI agents",
+          "description": "A list of official AI agent skills provided by Expo for building, deploying, and debugging Expo and React Native apps.",
+          "tags": [
+            "building-native-ui",
+            "expo-app-design",
+            "native-data-fetching",
+            "expo-api-routes",
+            "expo-dev-client",
+            "expo-tailwind-setup",
+            "react-native-css",
+            "use-dom",
+            "expo-ui-jetpack-compose",
+            "expo-ui-swift-ui"
+          ],
+          "path": "expo/expo-skills-for-ai-agents.md",
+          "tokens": 1172
+        },
+        {
+          "id": "documentation-for-ai-agents-and-llms",
+          "title": "Documentation for AI agents and LLMs",
+          "description": "Efficient ways for AI agents and LLMs to access and consume Expo documentation.",
+          "tags": [
+            "/index.md",
+            "llms-*.txt",
+            "/llms.txt"
+          ],
+          "path": "expo/documentation-for-ai-agents-and-llms.md",
+          "tokens": 622
+        },
+        {
+          "id": "tools-for-development",
+          "title": "Tools for development",
+          "description": "An overview of Expo tools and websites that will help you during various aspects of your project-building journey.",
+          "tags": [
+            "expo",
+            "npx",
+            "npx expo start",
+            "npx expo prebuild",
+            "npx expo run:android",
+            "npx expo run:ios",
+            "npx expo install package-name",
+            "--fix",
+            "npx expo lint",
+            "eas --help"
+          ],
+          "path": "expo/tools-for-development.md",
+          "tokens": 2018
+        },
+        {
+          "id": "navigation-in-expo-and-react-native-apps",
+          "title": "Navigation in Expo and React Native apps",
+          "description": "Learn about the recommended approach for integrating navigation in an Expo and React Native project.",
+          "tags": [],
+          "path": "expo/navigation-in-expo-and-react-native-apps.md",
+          "tokens": 645
+        },
+        {
+          "id": "splash-screen-and-app-icon",
+          "title": "Splash screen and app icon",
+          "description": "Learn how to add a splash screen and app icon to your Expo project.",
+          "tags": [
+            "expo-splash-screen",
+            "expo-dev-client",
+            "android",
+            "ios",
+            "icon",
+            "android.adaptiveIcon",
+            "android.adaptiveIcon.foregroundImage",
+            "android.adaptiveIcon.monochromeImage",
+            "android.adaptiveIcon.backgroundColor",
+            "android.adaptiveIcon.backgroundImage"
+          ],
+          "path": "expo/splash-screen-and-app-icon.md",
+          "tokens": 2411
+        },
+        {
+          "id": "safe-areas",
+          "title": "Safe areas",
+          "description": "Learn how to add safe areas for screen components inside your Expo project.",
+          "tags": [
+            "react-native-safe-area-context",
+            "SafeAreaView",
+            "<View>",
+            "SafeAreaProvider",
+            "useSafeAreaInsets",
+            "insets.top"
+          ],
+          "path": "expo/safe-areas.md",
+          "tokens": 1185
+        },
+        {
+          "id": "system-bars",
+          "title": "System bars",
+          "description": "Learn how to handle and customize system bars for safe areas and edge-to-edge layout in your Expo project.",
+          "tags": [
+            "SafeAreaView",
+            "expo-status-bar",
+            "expo-navigation-bar",
+            "StatusBar",
+            "style",
+            "setStatusBarStyle",
+            "auto",
+            "hidden",
+            "true",
+            "setStatusBarHidden"
+          ],
+          "path": "expo/system-bars.md",
+          "tokens": 1363
+        },
+        {
+          "id": "fonts",
+          "title": "Fonts",
+          "description": "Learn how to integrate custom fonts in your app using local files or Google Font packages",
+          "tags": [
+            "@expo-google-fonts/inter",
+            "expo-font",
+            "useFonts",
+            "ttf",
+            "otf",
+            "woff",
+            "woff2",
+            "fonts",
+            "android",
+            "ios"
+          ],
+          "path": "expo/fonts.md",
+          "tokens": 4298
+        },
+        {
+          "id": "assets",
+          "title": "Assets",
+          "description": "Learn about using static assets in your project, including images, videos, sounds, database files, and fonts.",
+          "tags": [
+            "require",
+            "import",
+            "<Image>",
+            "expo-image",
+            "expo-file-system",
+            "expo-asset",
+            "assets",
+            "useAssets",
+            "guetzli",
+            "pngcrush"
+          ],
+          "path": "expo/assets.md",
+          "tokens": 1745
+        },
+        {
+          "id": "color-themes",
+          "title": "Color themes",
+          "description": "Learn how to support light and dark modes in your app.",
+          "tags": [
+            "userInterfaceStyle",
+            "automatic",
+            "android.userInterfaceStyle",
+            "ios.userInterfaceStyle",
+            "light",
+            "expo-system-ui",
+            "uiMode",
+            "MainActivity",
+            "onConfigurationChanged",
+            "UIUserInterfaceStyle"
+          ],
+          "path": "expo/color-themes.md",
+          "tokens": 1362
+        },
+        {
+          "id": "animation",
+          "title": "Animation",
+          "description": "Learn how to integrate React Native animations and use it in your Expo project.",
+          "tags": [
+            "react-native-reanimated"
+          ],
+          "path": "expo/animation.md",
+          "tokens": 588
+        },
+        {
+          "id": "store-data",
+          "title": "Store data",
+          "description": "Learn about different libraries available to store data in your Expo project.",
+          "tags": [
+            "expo-secure-store",
+            "expo-file-system",
+            "expo-sqlite"
+          ],
+          "path": "expo/store-data.md",
+          "tokens": 820
+        },
+        {
+          "id": "introduction-to-development-builds",
+          "title": "Introduction to development builds",
+          "description": "Why use development builds and how to get started.",
+          "tags": [
+            "expo-dev-client",
+            "npx expo start",
+            "react-native-webview",
+            "npx expo install react-native-webview",
+            "react-native-firebase",
+            "SplashScreen.setOptions"
+          ],
+          "path": "expo/introduction-to-development-builds.md",
+          "tokens": 1557
+        },
+        {
+          "id": "switch-from-expo-go-to-a-development-build",
+          "title": "Switch from Expo Go to a development build",
+          "description": "How to switch from your Expo Go project to use development builds.",
+          "tags": [
+            "expo-dev-client",
+            "--dev-client",
+            "--device",
+            "npx expo run:android|ios",
+            "app.json",
+            "eas build"
+          ],
+          "path": "expo/switch-from-expo-go-to-a-development-build.md",
+          "tokens": 1304
+        },
+        {
+          "id": "create-a-development-build-on-eas",
+          "title": "Create a development build on EAS",
+          "description": "Learn how to create development builds for a project.",
+          "tags": [
+            "npx create-expo-app",
+            "--local",
+            "npx react-native",
+            "expo-dev-client",
+            "development",
+            "simulator",
+            "true"
+          ],
+          "path": "expo/create-a-development-build-on-eas.md",
+          "tokens": 1990
+        },
+        {
+          "id": "use-a-development-build",
+          "title": "Use a development build",
+          "description": "Learn how to use development builds for a project.",
+          "tags": [
+            "expo-secure-store"
+          ],
+          "path": "expo/use-a-development-build.md",
+          "tokens": 538
+        },
+        {
+          "id": "share-a-development-build-with-your-team",
+          "title": "Share a development build with your team",
+          "description": "Learn how to install and share the development with your team or run it on multiple devices.",
+          "tags": [
+            "development",
+            "--profile",
+            "eas build:resign"
+          ],
+          "path": "expo/share-a-development-build-with-your-team.md",
+          "tokens": 721
+        },
+        {
+          "id": "tools-workflows-and-extensions",
+          "title": "Tools, workflows and extensions",
+          "description": "Learn more about different tools, workflows and extensions available when working with development builds.",
+          "tags": [
+            "npx expo start",
+            "--tunnel",
+            "eas update",
+            "expo.updates.url",
+            "eas channel:list",
+            "scheme",
+            "exp+{slug}",
+            "slug",
+            "manifestUrl",
+            "exp+app-slug"
+          ],
+          "path": "expo/tools-workflows-and-extensions.md",
+          "tokens": 2078
+        },
+        {
+          "id": "introduction-to-config-plugins",
+          "title": "Introduction to config plugins",
+          "description": "An introduction to Expo config plugins.",
+          "tags": [
+            "plugins",
+            "with<Plugin Name>",
+            "withMyPlugin",
+            "expo/config-plugins",
+            "mods",
+            "mods.android.manifest",
+            "mods.ios.infoplist",
+            "npx expo prebuild",
+            "ExpoConfig",
+            "with<Plugin Functionality>"
+          ],
+          "path": "expo/introduction-to-config-plugins.md",
+          "tokens": 1287
+        },
+        {
+          "id": "create-and-use-config-plugins",
+          "title": "Create and use config plugins",
+          "description": "Learn how to create and use a config plugins in your Expo project.",
+          "tags": [
+            "HelloWorldMessage",
+            "plugins",
+            "ConfigPlugin",
+            "withAndroidManifest",
+            "expo/config-plugins",
+            "withInfoPlist",
+            "tsx",
+            "options",
+            "message",
+            "options.message"
+          ],
+          "path": "expo/create-and-use-config-plugins.md",
+          "tokens": 2983
+        },
+        {
+          "id": "mods",
+          "title": "Mods",
+          "description": "Learn about mods and how to use them when creating a config plugin.",
+          "tags": [
+            "expo/config-plugins",
+            "mods.android.manifest",
+            "withAndroidManifest",
+            "xml2js",
+            "mods.android.strings",
+            "withStringsXml",
+            "mods.android.colors",
+            "withAndroidColors",
+            "mods.android.colorsNight",
+            "withAndroidColorsNight"
+          ],
+          "path": "expo/mods.md",
+          "tokens": 4137
+        },
+        {
+          "id": "using-a-dangerous-mod",
+          "title": "Using a dangerous mod",
+          "description": "Learn about dangerous mods and how to use them when creating a config plugin.",
+          "tags": [
+            "withAndroidManifest",
+            "withPodfile",
+            "npx expo prebuild",
+            "withDangerousMod",
+            "addCustomMod",
+            "use_expo_modules!",
+            "config",
+            "config.modRequest.projectRoot",
+            "string",
+            "config.modRequest.platformProjectRoot"
+          ],
+          "path": "expo/using-a-dangerous-mod.md",
+          "tokens": 2507
+        },
+        {
+          "id": "plugin-development-for-libraries",
+          "title": "Plugin development for libraries",
+          "description": "Learn how to develop config plugins for Expo and React Native libraries.",
+          "tags": [
+            ".",
+            "android``Android native module code",
+            "src",
+            "main",
+            "java",
+            "com",
+            "your-awesome-library",
+            "build.gradle",
+            "ios``iOS native module code",
+            "YourAwesomeLibrary"
+          ],
+          "path": "expo/plugin-development-for-libraries.md",
+          "tokens": 3171
+        },
+        {
+          "id": "developing-and-debugging-a-plugin",
+          "title": "Developing and debugging a plugin",
+          "description": "Learn about development best practices and debugging techniques for Expo config plugins.",
+          "tags": [
+            "expo-module-scripts",
+            "expo",
+            "expo/config-plugins",
+            "expo/config",
+            "expo/config-types",
+            "gradle.properties",
+            "withXcodeProject",
+            "npx expo prebuild",
+            "expo install",
+            "packages/"
+          ],
+          "path": "expo/developing-and-debugging-a-plugin.md",
+          "tokens": 7626
+        },
+        {
+          "id": "using-patch-project",
+          "title": "Using patch-project",
+          "description": "Learn about how to use patch-project to create generate, apply, and preserve native changes in your Expo project.",
+          "tags": [
+            "patch-project",
+            "npx expo prebuild",
+            "--platform",
+            "npx patch-project --platform android",
+            "npx patch-project --platform ios",
+            ".",
+            "app.json``with patch-project plugin",
+            "cng-patches",
+            "package.json",
+            "...``other project files"
+          ],
+          "path": "expo/using-patch-project.md",
+          "tokens": 1160
+        },
+        {
+          "id": "errors-and-warnings",
+          "title": "Errors and warnings",
+          "description": "Learn about Redbox errors and stack traces in your Expo project.",
+          "tags": [
+            "console.warn(\"Warning message\")",
+            "console.error(\"Error message\")",
+            "throw Error(\"Error message\")",
+            "renderDescription"
+          ],
+          "path": "expo/errors-and-warnings.md",
+          "tokens": 590
+        },
+        {
+          "id": "debugging-runtime-issues",
+          "title": "Debugging runtime issues",
+          "description": "Learn about different techniques available to debug your Expo project.",
+          "tags": [
+            "npx create-expo-app",
+            "console.log",
+            "npx expo prebuild",
+            ".xcworkspace",
+            "adb",
+            "adb logcat",
+            "npx expo start --no-dev --minify",
+            "--no-dev",
+            "--minify"
+          ],
+          "path": "expo/debugging-runtime-issues.md",
+          "tokens": 2571
+        },
+        {
+          "id": "debugging-and-profiling-tools",
+          "title": "Debugging and profiling tools",
+          "description": "Learn about different tools available to inspect your Expo project at runtime.",
+          "tags": [
+            "exp://",
+            "debugger",
+            "expo",
+            "fetch",
+            "8081",
+            "npx expo start",
+            "Debug remote JS",
+            "$r",
+            "AsyncStorage",
+            "Enable Network Inspect"
+          ],
+          "path": "expo/debugging-and-profiling-tools.md",
+          "tokens": 2932
+        },
+        {
+          "id": "dev-tools-plugins",
+          "title": "Dev tools plugins",
+          "description": "Learn about using dev tools plugins to inspect and debug your Expo project.",
+          "tags": [
+            "expo/devtools",
+            "useDevToolsPluginClient",
+            "npx expo start",
+            "@react-navigation/devtools",
+            "react-native-apollo-devtools",
+            "ApolloProvider",
+            "react-query-native-devtools",
+            "QueryClientProvider",
+            "redux-devtools-expo-dev-plugin",
+            "@reduxjs/toolkit"
+          ],
+          "path": "expo/dev-tools-plugins.md",
+          "tokens": 2534
+        },
+        {
+          "id": "create-a-dev-tools-plugin",
+          "title": "Create a dev tools plugin",
+          "description": "Learn how to create a dev tools plugin to enhance your development experience.",
+          "tags": [
+            "expo/devtools",
+            "create-dev-plugin",
+            "useDevToolsPluginClient",
+            "addMessageListener",
+            "sendMessage",
+            "npx expo start"
+          ],
+          "path": "expo/create-a-dev-tools-plugin.md",
+          "tokens": 1680
+        },
+        {
+          "id": "authentication-in-expo-and-react-native-apps",
+          "title": "Authentication in Expo and React Native apps",
+          "description": "Learn about setting up authentication in your Expo project.",
+          "tags": [
+            "isAuthenticated = true",
+            "expo-apple-authentication",
+            "expo-secure-store",
+            "react-native-firebase",
+            "expo-local-authentication",
+            "react-native-biometrics",
+            "react-native-passkeys"
+          ],
+          "path": "expo/authentication-in-expo-and-react-native-apps.md",
+          "tokens": 4452
+        },
+        {
+          "id": "unit-testing-with-jest",
+          "title": "Unit testing with Jest",
+          "description": "Learn how to set up and configure the jest-expo library to write unit and snapshot tests for a project with Jest.",
+          "tags": [
+            "jest-expo",
+            "@types/jest",
+            "transformIgnorePatterns",
+            "@testing-library/react-native",
+            "react-test-renderer",
+            "getByText",
+            "__tests__",
+            "themed-text-test.tsx",
+            "src",
+            "components"
+          ],
+          "path": "expo/unit-testing-with-jest.md",
+          "tokens": 2215
+        },
+        {
+          "id": "overview-of-distributing-apps-for-review",
+          "title": "Overview of distributing apps for review",
+          "description": "Learn about how to distribute your app for review using app stores, internal distribution, and EAS Update.",
+          "tags": [
+            "eas update"
+          ],
+          "path": "expo/overview-of-distributing-apps-for-review.md",
+          "tokens": 1360
+        },
+        {
+          "id": "share-previews-with-your-team",
+          "title": "Share previews with your team",
+          "description": "Share previews of your app with your team by publishing updates on branches.",
+          "tags": [],
+          "path": "expo/share-previews-with-your-team.md",
+          "tokens": 567
+        },
+        {
+          "id": "how-to-launch-an-update-using-expo-orbit",
+          "title": "How to launch an update using Expo Orbit",
+          "description": "Learn how to open updates with Expo Orbit as part of a review workflow.",
+          "tags": [],
+          "path": "expo/how-to-launch-an-update-using-expo-orbit.md",
+          "tokens": 617
+        },
+        {
+          "id": "build-your-project-for-app-stores",
+          "title": "Build your project for app stores",
+          "description": "Learn how to create a production build for your app that is ready to be submitted to app stores from the command line...",
+          "tags": [
+            "\"buildType\": \"apk\"",
+            "eas.json",
+            "--message",
+            "--platform all",
+            "Generate new keystore",
+            "eas build",
+            "main",
+            "./gradlew app:bundleRelease"
+          ],
+          "path": "expo/build-your-project-for-app-stores.md",
+          "tokens": 1681
+        },
+        {
+          "id": "submit-to-app-stores",
+          "title": "Submit to app stores",
+          "description": "Learn how to submit your app to Google Play Store and Apple App Store from the command line with EAS Submit.",
+          "tags": [
+            "main"
+          ],
+          "path": "expo/submit-to-app-stores.md",
+          "tokens": 1484
+        },
+        {
+          "id": "app-stores-metadata",
+          "title": "App stores metadata",
+          "description": "A brief overview of how to use EAS Metadata to automate and maintain your app store presence.",
+          "tags": [
+            "title",
+            "subtitle",
+            "description",
+            "keywords",
+            "marketingUrl",
+            "configVersion"
+          ],
+          "path": "expo/app-stores-metadata.md",
+          "tokens": 888
+        },
+        {
+          "id": "send-over-the-air-updates",
+          "title": "Send over-the-air updates",
+          "description": "Learn how to send over-the-air updates to push critical bug fixes and improvements to your users.",
+          "tags": [
+            "production",
+            "main"
+          ],
+          "path": "expo/send-over-the-air-updates.md",
+          "tokens": 552
+        },
+        {
+          "id": "publish-your-web-app",
+          "title": "Publish your web app",
+          "description": "Learn how to deploy your web app using EAS Hosting.",
+          "tags": [
+            "expo.web.output",
+            "static",
+            "server",
+            "https://test-app--1234.expo.app",
+            "test-app",
+            "main"
+          ],
+          "path": "expo/publish-your-web-app.md",
+          "tokens": 663
+        },
+        {
+          "id": "monitoring-services",
+          "title": "Monitoring services",
+          "description": "Learn how to monitor the usage of your Expo and React Native app after its release.",
+          "tags": [
+            "expo-insights"
+          ],
+          "path": "expo/monitoring-services.md",
+          "tokens": 723
+        },
+        {
+          "id": "core-concepts",
+          "title": "Core concepts",
+          "description": "An overview of Expo tools, features and services.",
+          "tags": [
+            "expo"
+          ],
+          "path": "expo/core-concepts.md",
+          "tokens": 636
+        },
+        {
+          "id": "faq",
+          "title": "FAQ",
+          "description": "A list of common questions and limitations about Expo and related services.",
+          "tags": [
+            "expo",
+            "expo-dev-client",
+            "react-dom",
+            "<View />",
+            "<div />",
+            "navigator.geolocation",
+            "expo-location",
+            "npx expo prebuild",
+            "expo eject"
+          ],
+          "path": "expo/faq.md",
+          "tokens": 3604
+        },
+        {
+          "id": "tutorial-using-react-native-and-expo",
+          "title": "Tutorial: Using React Native and Expo",
+          "description": "An introduction to a React Native tutorial on how to build a universal app that runs on Android, iOS and the web usin...",
+          "tags": [
+            "<Modal>",
+            "<FlatList>"
+          ],
+          "path": "expo/tutorial-using-react-native-and-expo.md",
+          "tokens": 742
+        },
+        {
+          "id": "create-your-first-app",
+          "title": "Create your first app",
+          "description": "In this chapter, learn how to create a new Expo project.",
+          "tags": [
+            "create-expo-app",
+            "create-expo-app@latest",
+            "--template",
+            "expo",
+            "reset-project",
+            "<View>",
+            "<Text>",
+            "style",
+            "StyleSheet",
+            "react-native"
+          ],
+          "path": "expo/create-your-first-app.md",
+          "tokens": 1570
+        },
+        {
+          "id": "add-navigation",
+          "title": "Add navigation",
+          "description": "In this chapter, learn how to add navigation to the Expo app.",
+          "tags": [
+            "/",
+            ".js",
+            ".jsx",
+            ".ts",
+            ".tsx",
+            "/about",
+            "<Stack.Screen />",
+            "options",
+            "/index",
+            "Home"
+          ],
+          "path": "expo/add-navigation.md",
+          "tokens": 2513
+        },
+        {
+          "id": "build-a-screen",
+          "title": "Build a screen",
+          "description": "In this tutorial, learn how to use components such as React Native's Pressable and Expo Image to build a screen.",
+          "tags": [
+            "expo-image",
+            "<Image>",
+            "uri",
+            "Image",
+            "PlaceholderImage",
+            "source",
+            "image",
+            "ImageViewer",
+            "@",
+            "<Pressable>"
+          ],
+          "path": "expo/build-a-screen.md",
+          "tokens": 2828
+        },
+        {
+          "id": "use-an-image-picker",
+          "title": "Use an image picker",
+          "description": "In this tutorial, learn how to use Expo Image Picker.",
+          "tags": [
+            "<View>",
+            "<Text>",
+            "<Pressable>",
+            "expo-image-picker",
+            "npx expo install",
+            "npx expo start",
+            "launchImageLibraryAsync()",
+            "pickImageAsync()",
+            "Index",
+            "ImagePickerOptions"
+          ],
+          "path": "expo/use-an-image-picker.md",
+          "tokens": 2601
+        },
+        {
+          "id": "create-a-modal",
+          "title": "Create a modal",
+          "description": "In this tutorial, learn how to create a React Native modal to select an image.",
+          "tags": [
+            "<Modal>",
+            "alert()",
+            "showAppOptions",
+            "false",
+            "true",
+            "pickImageAsync()",
+            "onPress",
+            "Button",
+            "<View>",
+            "alert"
+          ],
+          "path": "expo/create-a-modal.md",
+          "tokens": 6204
+        },
+        {
+          "id": "add-gestures",
+          "title": "Add gestures",
+          "description": "In this tutorial, learn how to implement gestures from React Native Gesture Handler and Reanimated libraries.",
+          "tags": [
+            "<GestureHandlerRootView>",
+            "react-native-gesture-handler",
+            "Index",
+            "<View>",
+            "Animated",
+            "style",
+            "<Animated.View>",
+            "<Animated.Text>",
+            "<Animated.ScrollView>",
+            "<Animated.Image>"
+          ],
+          "path": "expo/add-gestures.md",
+          "tokens": 2956
+        },
+        {
+          "id": "take-a-screenshot",
+          "title": "Take a screenshot",
+          "description": "In this tutorial, learn how to capture a screenshot using a third-party library and Expo Media Library.",
+          "tags": [
+            "react-native-view-shot",
+            "expo-media-library",
+            "react-native-gesture-handler",
+            "react-native-reanimated",
+            "usePermissions()",
+            "permissionResponse",
+            "requestPermission()",
+            "null",
+            "granted",
+            "<View>"
+          ],
+          "path": "expo/take-a-screenshot.md",
+          "tokens": 2232
+        },
+        {
+          "id": "handle-platform-differences",
+          "title": "Handle platform differences",
+          "description": "In this tutorial, learn how to handle platform differences between native and web when creating a universal app.",
+          "tags": [
+            "react-native-view-shot",
+            "dom-to-image",
+            "Platform",
+            "react-native",
+            "domtoimage",
+            "onSaveImageAsync()",
+            "'web'",
+            "Platform.OS",
+            "domtoimage.toJpeg()",
+            "<View>"
+          ],
+          "path": "expo/handle-platform-differences.md",
+          "tokens": 1734
+        },
+        {
+          "id": "configure-status-bar-splash-screen-and-app-icon",
+          "title": "Configure status bar, splash screen and app icon",
+          "description": "In this tutorial, learn the basics of how to configure a status bar, app icon, and splash screen.",
+          "tags": [
+            "expo-status-bar",
+            "create-expo-app",
+            "StatusBar",
+            "Stack",
+            "\"icon\"",
+            "\"./assets/images/icon.png\"",
+            "expo-splash-screen"
+          ],
+          "path": "expo/configure-status-bar-splash-screen-and-app-icon.md",
+          "tokens": 994
+        },
+        {
+          "id": "learning-resources",
+          "title": "Learning resources",
+          "description": "Explore a curated list of resources to learn about Expo and React Native.",
+          "tags": [
+            "create-expo-app@latest",
+            "--template",
+            "--template default@sdk-55"
+          ],
+          "path": "expo/learning-resources.md",
+          "tokens": 970
+        },
+        {
+          "id": "eas-tutorial-introduction",
+          "title": "EAS Tutorial: Introduction",
+          "description": "An introduction to the tutorial for building apps for Android and iOS using Expo Application Services (EAS) that cove...",
+          "tags": [
+            "npx create-expo-app",
+            "expo"
+          ],
+          "path": "expo/eas-tutorial-introduction.md",
+          "tokens": 684
+        },
+        {
+          "id": "configure-a-development-build-in-cloud",
+          "title": "Configure a development build in cloud",
+          "description": "Learn how to configure a development build for a project using EAS Build.",
+          "tags": [
+            "expo-dev-client",
+            "cd",
+            "npx expo start",
+            "Metro waiting on...",
+            "expo-development-client",
+            "projectId",
+            "extra.eas.projectId",
+            "eas init",
+            "development",
+            "preview"
+          ],
+          "path": "expo/configure-a-development-build-in-cloud.md",
+          "tokens": 1948
+        },
+        {
+          "id": "create-and-run-a-cloud-build-for-android",
+          "title": "Create and run a cloud build for Android",
+          "description": "Learn how to configure a development build for Android devices and emulators using EAS Build.",
+          "tags": [
+            "developmentClient",
+            "true",
+            "build.development",
+            "eas build",
+            "android",
+            "development",
+            "-p",
+            "--platform",
+            "android.package",
+            "com.owner.appname"
+          ],
+          "path": "expo/create-and-run-a-cloud-build-for-android.md",
+          "tokens": 1346
+        },
+        {
+          "id": "create-and-run-a-cloud-build-for-ios-simulator",
+          "title": "Create and run a cloud build for iOS Simulator",
+          "description": "Learn how to configure a development build for iOS Simulators using EAS Build.",
+          "tags": [
+            "ios-simulator",
+            "ios.simulator",
+            "true",
+            "developmentClient",
+            "distribution",
+            "development",
+            "eas build",
+            "ios",
+            "ios.bundleIdentifier",
+            "ITSAppUsesNonExemptEncryption"
+          ],
+          "path": "expo/create-and-run-a-cloud-build-for-ios-simulator.md",
+          "tokens": 1072
+        },
+        {
+          "id": "create-and-run-a-cloud-build-for-ios-device",
+          "title": "Create and run a cloud build for iOS device",
+          "description": "Learn how to configure a development build for iOS devices using EAS Build.",
+          "tags": [
+            "build.development",
+            "developmentClient",
+            "true",
+            "eas build",
+            "ios",
+            "development",
+            "-p",
+            "--platform",
+            "ios.bundleIdentifier",
+            "ITSAppUsesNonExemptEncryption"
+          ],
+          "path": "expo/create-and-run-a-cloud-build-for-ios-device.md",
+          "tokens": 1865
+        },
+        {
+          "id": "configure-multiple-app-variants",
+          "title": "Configure multiple app variants",
+          "description": "Learn how to configure dynamic app config to install multiple app variants on a single device.",
+          "tags": [
+            "config",
+            "IS_DEV",
+            "IS_PREVIEW",
+            "development",
+            "preview",
+            "getAppName()",
+            "name",
+            "getUniqueIdentifier()",
+            "android.package",
+            "ios.bundleIdentifier"
+          ],
+          "path": "expo/configure-multiple-app-variants.md",
+          "tokens": 1389
+        },
+        {
+          "id": "create-and-share-internal-distribution-build",
+          "title": "Create and share internal distribution build",
+          "description": "Learn about internal distribution builds, why we need them, and how to create them.",
+          "tags": [
+            "preview",
+            "distribution",
+            "internal"
+          ],
+          "path": "expo/create-and-share-internal-distribution-build.md",
+          "tokens": 1293
+        },
+        {
+          "id": "manage-different-app-versions",
+          "title": "Manage different app versions",
+          "description": "Learn about developer-facing and user-facing app versions and how EAS Build automatically manages developer-facing ve...",
+          "tags": [
+            "versionCode",
+            "buildNumber",
+            "version",
+            "1.0.0 (1)",
+            "android.versionCode",
+            "ios.buildNumber",
+            "eas init",
+            "cli.appVersionSource",
+            "remote",
+            "build.production.autoIncrement"
+          ],
+          "path": "expo/manage-different-app-versions.md",
+          "tokens": 1061
+        },
+        {
+          "id": "create-a-production-build-for-android",
+          "title": "Create a production build for Android",
+          "description": "Learn about the process of creating a production build for Android and automating the release process.",
+          "tags": [
+            "production",
+            "--profile",
+            "internal",
+            "submit.production",
+            "track",
+            "eas submit",
+            "--auto-submit",
+            "eas build"
+          ],
+          "path": "expo/create-a-production-build-for-android.md",
+          "tokens": 1988
+        },
+        {
+          "id": "create-a-production-build-for-ios",
+          "title": "Create a production build for iOS",
+          "description": "Learn about the process of creating a production build for iOS and automating the release process.",
+          "tags": [
+            "production",
+            "eas credentials",
+            "--profile",
+            "eas submit",
+            "ITSAppUsesNonExemptEncryption",
+            "NO",
+            "N",
+            "--auto-submit",
+            "eas build"
+          ],
+          "path": "expo/create-a-production-build-for-ios.md",
+          "tokens": 1594
+        },
+        {
+          "id": "share-previews-with-your-team-2",
+          "title": "Share previews with your team",
+          "description": "Learn how to use EAS Update to send OTA updates and share previews with a team.",
+          "tags": [
+            "expo-updates",
+            "updates",
+            "runtimeVersion",
+            "eas update:configure",
+            "channel",
+            "ios-simulator",
+            "development",
+            "ios-simulator.channel",
+            "--platform all",
+            "--platform ios"
+          ],
+          "path": "expo/share-previews-with-your-team-2.md",
+          "tokens": 1497
+        },
+        {
+          "id": "trigger-builds-from-a-github-repository",
+          "title": "Trigger builds from a GitHub repository",
+          "description": "Learn about the process of triggering builds from a GitHub repository.",
+          "tags": [
+            "git",
+            "/",
+            "development",
+            "android.image",
+            "ios.image",
+            "latest",
+            "dev",
+            "eas-build-all:development"
+          ],
+          "path": "expo/trigger-builds-from-a-github-repository.md",
+          "tokens": 1008
+        },
+        {
+          "id": "next-steps",
+          "title": "Next steps",
+          "description": "Learn about the next steps in your journey with EAS.",
+          "tags": [],
+          "path": "expo/next-steps.md",
+          "tokens": 671
+        },
+        {
+          "id": "additional-resources",
+          "title": "Additional resources",
+          "description": "A reference of resources that are useful to learn about Expo tooling and services.",
+          "tags": [],
+          "path": "expo/additional-resources.md",
+          "tokens": 2653
+        },
+        {
+          "id": "develop-an-app-with-expo",
+          "title": "Develop an app with Expo",
+          "description": "An overview of the development process of building an Expo app to help build a mental model of the core development l...",
+          "tags": [
+            "expo-dev-client",
+            "npx create-expo-app",
+            "npx expo prebuild",
+            "npx expo prebuild --clean",
+            "npx expo run:[android|ios]",
+            "create-expo-app",
+            "npx expo run android|ios",
+            "npx expo run",
+            "expo-updates"
+          ],
+          "path": "expo/develop-an-app-with-expo.md",
+          "tokens": 4351
+        },
+        {
+          "id": "configure-with-app-config",
+          "title": "Configure with app config",
+          "description": "Learn about what app.json/app.config.js/app.config.ts files are and how you can customize and use them dynamically.",
+          "tags": [
+            "expo: {}",
+            "Constants.expoConfig",
+            "npx expo config --type public",
+            "hooks",
+            "ios.config",
+            "android.config",
+            "updates.codeSigningCertificate",
+            "updates.codeSigningMetadata",
+            "npx expo prebuild",
+            "import"
+          ],
+          "path": "expo/configure-with-app-config.md",
+          "tokens": 2041
+        },
+        {
+          "id": "continuous-native-generation-cng",
+          "title": "Continuous Native Generation (CNG)",
+          "description": "Learn about managing your native projects with Continuous Native Generation (CNG) and Prebuild.",
+          "tags": [
+            "npx expo prebuild",
+            "expo",
+            "npx expo prebuild --clean",
+            "npx create-expo-app",
+            "npx expo run:android",
+            "npx expo run:ios",
+            "run",
+            "--platform",
+            "dependencies",
+            "--skip-dependency-update"
+          ],
+          "path": "expo/continuous-native-generation-cng.md",
+          "tokens": 5755
+        },
+        {
+          "id": "using-expo-sdk-react-native-and-third-party-libraries",
+          "title": "Using Expo SDK, React Native, and third-party libraries",
+          "description": "Learn how to use Expo SDK, React Native libraries, and other third-party npm packages in your project.",
+          "tags": [
+            "<ActivityIndicator>",
+            "<TextInput>",
+            "<Text>",
+            "<ScrollView>",
+            "<View>",
+            "react-native",
+            "expo",
+            "expo-device",
+            "npx expo install",
+            "npx npm-home --github <package-name>"
+          ],
+          "path": "expo/using-expo-sdk-react-native-and-third-party-libraries.md",
+          "tokens": 2075
+        },
+        {
+          "id": "privacy-manifests",
+          "title": "Privacy manifests",
+          "description": "Learn about configuring iOS privacy manifests for your mobile app.",
+          "tags": [
+            "privacyManifests",
+            "expo.ios",
+            "npx expo install --fix",
+            "NSPrivacyAccessedAPITypes",
+            "NSPrivacyAccessedAPITypeReasons",
+            "expo-application"
+          ],
+          "path": "expo/privacy-manifests.md",
+          "tokens": 1052
+        },
+        {
+          "id": "permissions",
+          "title": "Permissions",
+          "description": "Learn about configuring and adding permissions in an app config file.",
+          "tags": [
+            "MediaLibrary.requestPermissionsAsync()",
+            "android.permissions",
+            "android.blockedPermissions",
+            "expo-camera",
+            "Manifest.permissions",
+            "tools:node=\"remove\"",
+            "<use-permission>",
+            "xmlns:tools",
+            "<manifest>",
+            "tools:node"
+          ],
+          "path": "expo/permissions.md",
+          "tokens": 1589
+        },
+        {
+          "id": "environment-variables-in-expo",
+          "title": "Environment variables in Expo",
+          "description": "Learn how to use environment variables in an Expo project.",
+          "tags": [
+            "EXPO_PUBLIC_",
+            "npx expo start",
+            "EXPO_PUBLIC_[NAME]=VALUE",
+            "process.env.EXPO_PUBLIC_API_URL",
+            "https://staging.example.com",
+            "process.env.EXPO_PUBLIC_[VARNAME]",
+            "process.env",
+            "process.env.EXPO_PUBLIC_KEY",
+            "process.env['EXPO_PUBLIC_KEY']",
+            "const {EXPO_PUBLIC_X} = process.env"
+          ],
+          "path": "expo/environment-variables-in-expo.md",
+          "tokens": 2345
+        },
+        {
+          "id": "overview-of-linking-deep-links-android-app-links-and-ios-universal-links",
+          "title": "Overview of Linking, Deep Links, Android App Links, and iOS Universal Links",
+          "description": "An overview of available resources to implement Linking and Deep Links in your Expo apps.",
+          "tags": [
+            "https",
+            "http",
+            "window.location.href",
+            "myapp://",
+            "web-app.com",
+            "/product",
+            "Link"
+          ],
+          "path": "expo/overview-of-linking-deep-links-android-app-links-and-ios-universal-links.md",
+          "tokens": 1369
+        },
+        {
+          "id": "linking-into-other-apps",
+          "title": "Linking into other apps",
+          "description": "Learn how to handle and open a URL from your app based on the URL scheme of another app.",
+          "tags": [
+            "expo-linking",
+            "Link",
+            "window.history",
+            "Linking.openURL",
+            "<Text>",
+            "<a>",
+            "https",
+            "http",
+            "https://expo.dev",
+            "mailto"
+          ],
+          "path": "expo/linking-into-other-apps.md",
+          "tokens": 2455
+        },
+        {
+          "id": "linking-into-your-app",
+          "title": "Linking into your app",
+          "description": "Learn how to handle an incoming URL in your React Native and Expo app by creating a deep link.",
+          "tags": [
+            "scheme",
+            "myapp://",
+            "android.package",
+            "ios.bundleIdentifier",
+            "npx uri-scheme",
+            "/details",
+            "android",
+            "ios",
+            "<a href=\"scheme://\">Click me</a>",
+            "exp://"
+          ],
+          "path": "expo/linking-into-your-app.md",
+          "tokens": 1322
+        },
+        {
+          "id": "android-app-links",
+          "title": "Android App Links",
+          "description": "Learn how to configure Android App Links to open your Expo app from a standard web URL.",
+          "tags": [
+            "intentFilters",
+            "autoVerify",
+            "android.intentFilters",
+            "true",
+            "webapp.io",
+            "https",
+            "package_name",
+            "android.package",
+            "sha256_cert_fingerprints",
+            "eas credentials -p android"
+          ],
+          "path": "expo/android-app-links.md",
+          "tokens": 1660
+        },
+        {
+          "id": "ios-universal-links",
+          "title": "iOS Universal Links",
+          "description": "Learn how to configure iOS Universal Links to open your Expo app from a standard web URL.",
+          "tags": [
+            "npx setup-safari",
+            "https://www.myapp.io/records/*",
+            "*",
+            "activitycontinuation",
+            "webcredentials",
+            "details",
+            "appIDs",
+            "appID",
+            "components",
+            "ios.associatedDomains"
+          ],
+          "path": "expo/ios-universal-links.md",
+          "tokens": 2734
+        },
+        {
+          "id": "add-custom-native-code",
+          "title": "Add custom native code",
+          "description": "Learn how to add custom native code to your Expo project.",
+          "tags": [
+            "expo-camera",
+            "react-native-safe-area-context",
+            "react-native",
+            "@sentry/react-native",
+            "npx expo install react-native-localize",
+            "modules",
+            "npx create-expo-module@latest,",
+            "--local",
+            "create-expo-app",
+            "npx expo prebuild"
+          ],
+          "path": "expo/add-custom-native-code.md",
+          "tokens": 1760
+        },
+        {
+          "id": "adopt-prebuild",
+          "title": "Adopt Prebuild",
+          "description": "Learn how to adopt Expo Prebuild in a project that was bootstrapped with React Native CLI.",
+          "tags": [
+            "expo-modules-core",
+            "react-native",
+            "expo",
+            "npx expo prebuild",
+            "registerRootComponent",
+            "AppRegistry.registerComponent",
+            "npx expo start",
+            "expo.icon",
+            "npx expo install",
+            "expo/config-plugins"
+          ],
+          "path": "expo/adopt-prebuild.md",
+          "tokens": 1496
+        },
+        {
+          "id": "build-locally-overview",
+          "title": "Build locally: Overview",
+          "description": "An overview of how to build your app locally using your own machine for Expo projects.",
+          "tags": [
+            "npx expo run:[android|ios]"
+          ],
+          "path": "expo/build-locally-overview.md",
+          "tokens": 889
+        },
+        {
+          "id": "create-a-debug-build-locally",
+          "title": "Create a debug build locally",
+          "description": "Learn how to create a debug build for your Expo app locally.",
+          "tags": [
+            "npx expo prebuild",
+            "--device",
+            "--variant release",
+            "--configuration Release",
+            "--variant debugOptimized",
+            "npx expo start",
+            "npx expo run:android",
+            "npx expo run:ios",
+            "npx expo run:android|ios",
+            "npx expo prebuild --clean"
+          ],
+          "path": "expo/create-a-debug-build-locally.md",
+          "tokens": 1695
+        },
+        {
+          "id": "create-a-release-build-locally",
+          "title": "Create a release build locally",
+          "description": "Learn how to create a release (production) build for your Expo app locally.",
+          "tags": [
+            "keytool",
+            "npx expo prebuild",
+            "eas credentials -p android",
+            "*****",
+            "bundleRelease",
+            "your-project.xcworkspace"
+          ],
+          "path": "expo/create-a-release-build-locally.md",
+          "tokens": 1624
+        },
+        {
+          "id": "use-build-cache-providers",
+          "title": "Use build cache providers",
+          "description": "Accelerate local development by caching and reusing builds from a provider.",
+          "tags": [
+            "npx expo run:[android|ios]",
+            "eas-build-cache-provider",
+            "buildCacheProvider",
+            "provider/tsconfig.json",
+            "provider/src/index.ts",
+            "provider.plugin.js",
+            "npm run build provider",
+            "example/app.json",
+            "npx expo run",
+            "options"
+          ],
+          "path": "expo/use-build-cache-providers.md",
+          "tokens": 1124
+        },
+        {
+          "id": "prebuilt-expo-modules-for-android",
+          "title": "Prebuilt Expo Modules for Android",
+          "description": "Learn how prebuilt Expo Modules reduce Android build times by up to 25% on your machine.",
+          "tags": [
+            "[📦]",
+            "npx expo run:android",
+            "[📦 package-name",
+            "buildFromSource",
+            "\".*\""
+          ],
+          "path": "expo/prebuilt-expo-modules-for-android.md",
+          "tokens": 700
+        },
+        {
+          "id": "develop-websites-with-expo",
+          "title": "Develop websites with Expo",
+          "description": "Learn how to develop your app for the web so you can build a universal app.",
+          "tags": [
+            "<Text>",
+            "<View>",
+            "react-dom",
+            "<div>",
+            "<p>",
+            "<img>",
+            "expo",
+            "registerRootComponent",
+            "AppRegistry.registerComponent"
+          ],
+          "path": "expo/develop-websites-with-expo.md",
+          "tokens": 832
+        },
+        {
+          "id": "publish-websites",
+          "title": "Publish websites",
+          "description": "Learn how to deploy Expo websites for production.",
+          "tags": [
+            "webpack",
+            "web.output",
+            "single",
+            "server",
+            "static",
+            "expo-router",
+            "/assets",
+            "npx expo serve",
+            "http://localhost:8081",
+            "expo.web.output: 'single'"
+          ],
+          "path": "expo/publish-websites.md",
+          "tokens": 3094
+        },
+        {
+          "id": "using-react-dom-in-expo-native-apps",
+          "title": "Using React DOM in Expo native apps",
+          "description": "Learn about rendering React DOM components in Expo native apps using the 'use dom' directive.",
+          "tags": [
+            "'use dom'",
+            "<div>",
+            "<img>",
+            "npx expo [command]",
+            "npx create-expo-app",
+            "expo",
+            "react-native-webview",
+            "dom",
+            "WebView",
+            "number"
+          ],
+          "path": "expo/using-react-dom-in-expo-native-apps.md",
+          "tokens": 4707
+        },
+        {
+          "id": "progressive-web-apps",
+          "title": "Progressive web apps",
+          "description": "Learn how to add progressive web app support to Expo websites.",
+          "tags": [
+            "web.favicon",
+            "public",
+            "manifest.json``PWA Manifest",
+            "logo192.png``192x192 icon",
+            "logo512.png``512x512 icon",
+            "web.output",
+            "single",
+            "<head>",
+            "npx expo export -p web",
+            "dist"
+          ],
+          "path": "expo/progressive-web-apps.md",
+          "tokens": 1333
+        },
+        {
+          "id": "tailwind-css",
+          "title": "Tailwind CSS",
+          "description": "Learn how to configure and use Tailwind CSS in your Expo project.",
+          "tags": [
+            "app.json",
+            "package.json",
+            "global.css",
+            "index.js",
+            "web.bundler",
+            "metro",
+            "tailwindcss",
+            "\"use dom\"",
+            "{ $$css: true }",
+            "WebView"
+          ],
+          "path": "expo/tailwind-css.md",
+          "tokens": 1165
+        },
+        {
+          "id": "using-local-https-development",
+          "title": "Using local HTTPS development",
+          "description": "Learn how to set up local HTTPS for Expo web apps.",
+          "tags": [
+            "mkcert",
+            "http://localhost:8081",
+            "mkcert -install",
+            "localhost.pem",
+            "localhost-key.pem",
+            "local-ssl-proxy",
+            "https://localhost"
+          ],
+          "path": "expo/using-local-https-development.md",
+          "tokens": 555
+        },
+        {
+          "id": "metro-bundler",
+          "title": "Metro bundler",
+          "description": "Learn about different Metro bundler configurations that can be customized.",
+          "tags": [
+            "npx expo start",
+            "npx expo export",
+            "expo/metro-config",
+            "@expo/metro-config",
+            "resolver.sourceExts",
+            "resolver.assetExts",
+            "assetExts",
+            ".",
+            "old-module",
+            "new-module"
+          ],
+          "path": "expo/metro-bundler.md",
+          "tokens": 1898
+        },
+        {
+          "id": "analyzing-javascript-bundles-with-expo-atlas-and-lighthouse",
+          "title": "Analyzing JavaScript bundles with Expo Atlas and Lighthouse",
+          "description": "Learn about improving the production JavaScript bundle size of Expo apps and websites with Expo Atlas and Lighthouse.",
+          "tags": [
+            "npx expo start",
+            "npx expo export",
+            "--platform",
+            "source-map-explorer",
+            "server",
+            "--source-maps",
+            "--no-bytecode",
+            "NODE_OPTIONS=--no-experimental-fetch",
+            "Unable to map 809/13787 bytes (5.87%)",
+            "__d(() => {}, [])"
+          ],
+          "path": "expo/analyzing-javascript-bundles-with-expo-atlas-and-lighthouse.md",
+          "tokens": 1470
+        },
+        {
+          "id": "tree-shaking-and-code-removal",
+          "title": "Tree shaking and code removal",
+          "description": "Learn about how Expo CLI optimizes production JavaScript bundles.\nAndroid, iOS, tvOS, Web",
+          "tags": [
+            "Platform",
+            "react-native",
+            "Platform.select",
+            "Platform.OS",
+            "process.env.EXPO_OS",
+            "process.env.NODE_ENV",
+            "__DEV__",
+            "EXPO_PUBLIC_",
+            "babel-preset-expo",
+            "typeof window === 'undefined'"
+          ],
+          "path": "expo/tree-shaking-and-code-removal.md",
+          "tokens": 3269
+        },
+        {
+          "id": "minifying-javascript",
+          "title": "Minifying JavaScript",
+          "description": "Learn about customizing the JavaScript minification process in Expo CLI with Metro bundler.",
+          "tags": [
+            "npx expo export",
+            "npx expo export:embed",
+            "eas build",
+            "/** @preserve */",
+            "drop_console",
+            "drop_console: ['log', 'info']",
+            "console.log",
+            "console.info",
+            "console.warn",
+            "console.error"
+          ],
+          "path": "expo/minifying-javascript.md",
+          "tokens": 1116
+        },
+        {
+          "id": "why-metro",
+          "title": "Why Metro?",
+          "description": "Learn why Metro is the future of universal bundling in React Native and how it benefits developers.",
+          "tags": [
+            "xcassets"
+          ],
+          "path": "expo/why-metro.md",
+          "tokens": 1658
+        },
+        {
+          "id": "overview-of-using-expo-with-existing-react-native-apps",
+          "title": "Overview of using Expo with existing React Native apps",
+          "description": "Learn how to use Expo tools and services with existing React Native apps.",
+          "tags": [
+            "expo",
+            "expo-updates",
+            "create-expo-app",
+            "npx expo run:[android|ios]",
+            "@react-native-community/cli"
+          ],
+          "path": "expo/overview-of-using-expo-with-existing-react-native-apps.md",
+          "tokens": 2004
+        },
+        {
+          "id": "install-expo-modules-in-an-existing-react-native-project",
+          "title": "Install Expo modules in an existing React Native project",
+          "description": "Learn how to prepare your existing React Native project to install and use any Expo module.",
+          "tags": [
+            "expo",
+            "npx expo install",
+            "install-expo-modules",
+            "iOS 15.1",
+            "use_expo_modules!",
+            "\"main\"",
+            "expo-constants",
+            "npx expo install expo-constants",
+            "npx expo run",
+            "expo-asset"
+          ],
+          "path": "expo/install-expo-modules-in-an-existing-react-native-project.md",
+          "tokens": 1841
+        },
+        {
+          "id": "migrate-from-react-native-cli-to-expo-cli",
+          "title": "Migrate from React Native CLI to Expo CLI",
+          "description": "Learn how to migrate from React Native CLI (@react-native-community/cli) to Expo CLI for any React Native project.",
+          "tags": [
+            "expo",
+            "@react-native-community/cli",
+            "expo prebuild",
+            "expo-router",
+            "xcpretty",
+            "paths",
+            "baseUrl",
+            "expo-dev-client",
+            "pod install",
+            "npx expo run:ios"
+          ],
+          "path": "expo/migrate-from-react-native-cli-to-expo-cli.md",
+          "tokens": 1633
+        },
+        {
+          "id": "install-expo-updates-in-an-existing-react-native-project",
+          "title": "Install expo-updates in an existing React Native project",
+          "description": "Learn how to install and configure expo-updates in your existing React Native project.",
+          "tags": [
+            "expo-updates",
+            "expo",
+            "eas update:configure",
+            "updates",
+            "projectId",
+            "updates.url",
+            "usesCleartextTraffic",
+            "custom-expo-updates-server"
+          ],
+          "path": "expo/install-expo-updates-in-an-existing-react-native-project.md",
+          "tokens": 1115
+        },
+        {
+          "id": "install-expo-dev-client-in-an-existing-react-native-project",
+          "title": "Install expo-dev-client in an existing React Native project",
+          "description": "Learn how to install and configure expo-dev-client in your existing React Native project.",
+          "tags": [
+            "expo-dev-client",
+            "with-dev-client",
+            "expo",
+            "scheme",
+            "uri-scheme"
+          ],
+          "path": "expo/install-expo-dev-client-in-an-existing-react-native-project.md",
+          "tokens": 548
+        },
+        {
+          "id": "native-project-upgrade-helper",
+          "title": "Native project upgrade helper",
+          "description": "View file-by-file diffs of all the changes you need to make to your native projects to upgrade them to the next Expo ...",
+          "tags": [
+            "expo"
+          ],
+          "path": "expo/native-project-upgrade-helper.md",
+          "tokens": 2018
+        },
+        {
+          "id": "integrating-expo-tools-into-existing-native-apps",
+          "title": "Integrating Expo tools into existing native apps",
+          "description": "An overview of how you can integrate Expo tools into existing native apps (\"brownfield\" apps).",
+          "tags": [
+            "android",
+            "ios"
+          ],
+          "path": "expo/integrating-expo-tools-into-existing-native-apps.md",
+          "tokens": 1254
+        },
+        {
+          "id": "how-to-add-expo-to-a-native-app-using-the-isolated-approach",
+          "title": "How to add Expo to a native app using the isolated approach",
+          "description": "A guide for adding Expo and React Native as a native library and integrating it into an existing (brownfield) native ...",
+          "tags": [
+            "expo-brownfield",
+            "plugins",
+            "~/.m2",
+            "com.username.myproject:brownfield:1.0.0",
+            "npx expo prebuild",
+            "ReactNativeHostManager",
+            "BrownfieldActivity",
+            "ReactNativeFragment",
+            "ReactNativeViewFactory",
+            "BrownfieldMessaging"
+          ],
+          "path": "expo/how-to-add-expo-to-a-native-app-using-the-isolated-approach.md",
+          "tokens": 2006
+        },
+        {
+          "id": "how-to-add-expo-to-a-native-app-using-the-integrated-approach",
+          "title": "How to add Expo to a native app using the integrated approach",
+          "description": "A guide for adding Expo and React Native to existing native (brownfield) apps using the integrated approach.",
+          "tags": [
+            "yarn install",
+            "[\"my-project\"]",
+            "projectRoot",
+            "INTERNET",
+            "Application",
+            "ReactActivity",
+            "Activity",
+            "MyReactActivity",
+            "Theme.AppCompat.Light.NoActionBar",
+            "ActionBar"
+          ],
+          "path": "expo/how-to-add-expo-to-a-native-app-using-the-integrated-approach.md",
+          "tokens": 2766
+        },
+        {
+          "id": "configuring-lifecycle-listeners",
+          "title": "Configuring lifecycle listeners",
+          "description": "Learn about the mechanism that allows the Expo Modules API to hook into the lifecycle of your app.",
+          "tags": [
+            "Activity",
+            "Application",
+            "AppDelegate",
+            "ApplicationLifecycleDispatcher",
+            "ReactActivityHandler",
+            "ReactActivityLifecycleListener",
+            "ApplicationLifecycleListener",
+            "Package",
+            "ExpoAppDelegate",
+            "ExpoAppDelegateSubscriber"
+          ],
+          "path": "expo/configuring-lifecycle-listeners.md",
+          "tokens": 666
+        },
+        {
+          "id": "work-with-monorepos",
+          "title": "Work with monorepos",
+          "description": "Learn about setting up Expo projects in a monorepo with workspaces.",
+          "tags": [
+            "expo/metro-config",
+            "watchFolders",
+            "resolver.nodeModulesPath",
+            "resolver.extraNodeModules",
+            "resolver.disableHierarchicalLookup",
+            "npx expo start --clear",
+            "node_modules",
+            "workspaces",
+            "\"cool-package\": \"*\"",
+            "\"workspace:*\""
+          ],
+          "path": "expo/work-with-monorepos.md",
+          "tokens": 4499
+        },
+        {
+          "id": "development-and-production-modes",
+          "title": "Development and production modes",
+          "description": "Learn how to run a project in development mode or production mode.",
+          "tags": [
+            "npx expo start",
+            "eas update",
+            "__DEV__",
+            "false",
+            "--minify"
+          ],
+          "path": "expo/development-and-production-modes.md",
+          "tokens": 743
+        },
+        {
+          "id": "common-development-errors",
+          "title": "Common development errors",
+          "description": "A list of common development errors that are encountered by developers using Expo.",
+          "tags": [
+            "rm -rf .expo",
+            "npx expo start --no-dev --minify",
+            "$PATH"
+          ],
+          "path": "expo/common-development-errors.md",
+          "tokens": 757
+        },
+        {
+          "id": "android-studio-emulator",
+          "title": "Android Studio Emulator",
+          "description": "Learn how to set up the Android Emulator to test your app on a virtual Android device.",
+          "tags": [
+            "JAVA_HOME",
+            "VanillaIceCream",
+            "adb",
+            ".gradle",
+            "usr/bin"
+          ],
+          "path": "expo/android-studio-emulator.md",
+          "tokens": 1159
+        },
+        {
+          "id": "ios-simulator",
+          "title": "iOS Simulator",
+          "description": "Learn how you can install the iOS Simulator on your Mac and use it to develop your app.",
+          "tags": [
+            "npx expo start",
+            "open -a Simulator",
+            "xcrun"
+          ],
+          "path": "expo/ios-simulator.md",
+          "tokens": 1102
+        },
+        {
+          "id": "react-native-s-new-architecture",
+          "title": "React Native's New Architecture",
+          "description": "Learn about React Native's \"New Architecture\" and how and why to migrate to it.",
+          "tags": [
+            "newArchEnabled",
+            "false",
+            "expo-*",
+            "npx expo-doctor",
+            "true",
+            "EXPO_DOCTOR_ENABLE_DIRECTORY_CHECK",
+            "[\"exact-package\", \"/or-a-regex-.*/\"]",
+            "newArchEnabled: false",
+            "newArchEnabled=true",
+            "npx create-expo-app"
+          ],
+          "path": "expo/react-native-s-new-architecture.md",
+          "tokens": 3204
+        },
+        {
+          "id": "react-compiler",
+          "title": "React Compiler",
+          "description": "Learn how to enable and use the React Compiler in Expo apps.",
+          "tags": [
+            "babel-plugin-react-compiler",
+            "npx expo lint",
+            "npx expo customize babel.config.js",
+            "\"use no memo\"",
+            "useCallback",
+            "useMemo",
+            "React.memo",
+            "react-compiler"
+          ],
+          "path": "expo/react-compiler.md",
+          "tokens": 1040
+        },
+        {
+          "id": "introduction-to-expo-router",
+          "title": "Introduction to Expo Router",
+          "description": "Expo Router is an open-source routing library for Universal React Native applications built with Expo.",
+          "tags": [
+            "create-expo-app",
+            "create-expo-app@latest",
+            "--template",
+            "--template default@sdk-55",
+            "expo-dev-client",
+            "createNativeStackNavigator"
+          ],
+          "path": "expo/introduction-to-expo-router.md",
+          "tokens": 2328
+        },
+        {
+          "id": "manual-installation",
+          "title": "Manual installation",
+          "description": "Learn how to add Expo Router to an existing project with these detailed instructions.",
+          "tags": [
+            "main",
+            "expo-router/entry",
+            "LogBox",
+            "react-native",
+            "src",
+            "app",
+            "_layout.tsx",
+            "index.js",
+            "package.json",
+            "Other project files"
+          ],
+          "path": "expo/manual-installation.md",
+          "tokens": 1066
+        },
+        {
+          "id": "core-concepts-of-file-based-routing-in-expo-router",
+          "title": "Core concepts of file-based routing in Expo Router",
+          "description": "Learn the ground rules of Expo Router and how it relates to the rest of your code.",
+          "tags": [
+            "/",
+            "ThemeProvider",
+            "AppTabs",
+            "expo-router/ui",
+            "src",
+            "app",
+            "index.tsx",
+            "home.tsx",
+            "_layout.tsx",
+            "profile"
+          ],
+          "path": "expo/core-concepts-of-file-based-routing-in-expo-router.md",
+          "tokens": 1574
+        },
+        {
+          "id": "expo-router-notation",
+          "title": "Expo Router notation",
+          "description": "Learn how to use special filenames and notation to expressively define your app's navigation tree within your project...",
+          "tags": [
+            "src",
+            "app",
+            "home.tsx",
+            "feed",
+            "favorites.tsx",
+            "/feed/favorites",
+            "[userName].tsx",
+            "products",
+            "[productId]",
+            "index.tsx"
+          ],
+          "path": "expo/expo-router-notation.md",
+          "tokens": 1301
+        },
+        {
+          "id": "navigation-layouts-in-expo-router",
+          "title": "Navigation layouts in Expo Router",
+          "description": "Learn how to construct different relationships between pages by using directories and layout files.",
+          "tags": [
+            "src",
+            "app",
+            "products",
+            "_layout.tsx",
+            "index.tsx",
+            "[productId].tsx",
+            "accessories",
+            "Stack",
+            "/products",
+            "/products/123"
+          ],
+          "path": "expo/navigation-layouts-in-expo-router.md",
+          "tokens": 2733
+        },
+        {
+          "id": "navigating-between-pages-in-expo-router",
+          "title": "Navigating between pages in Expo Router",
+          "description": "Learn the different ways to link to and navigate to pages in Expo Router.",
+          "tags": [
+            "useRouter",
+            "onPress",
+            "router.navigate",
+            "router.push",
+            "router.back",
+            "router.replace",
+            "src",
+            "app",
+            "index.tsx``router.navigate(\"/\")",
+            "about.tsx``router.navigate(\"/about\")"
+          ],
+          "path": "expo/navigating-between-pages-in-expo-router.md",
+          "tokens": 2810
+        },
+        {
+          "id": "common-navigation-patterns-in-expo-router",
+          "title": "Common navigation patterns in Expo Router",
+          "description": "Apply Expo Router basics to real-life navigation patterns you could use in your app.",
+          "tags": [
+            "src",
+            "app",
+            "(tabs)",
+            "_layout.tsx",
+            "index.tsx``single page tab",
+            "feed",
+            "_layout.tsx``tab with a stack inside",
+            "index.tsx",
+            "[postId].tsx",
+            "settings.tsx``single page tab"
+          ],
+          "path": "expo/common-navigation-patterns-in-expo-router.md",
+          "tokens": 2339
+        },
+        {
+          "id": "stack",
+          "title": "Stack",
+          "description": "Learn how to use the Stack navigator in Expo Router.",
+          "tags": [
+            "Stack",
+            "src",
+            "app",
+            "_layout.tsx",
+            "index.tsx",
+            "details.tsx",
+            "index",
+            "details",
+            "<Stack.Screen name={routeName} />",
+            "screenOptions"
+          ],
+          "path": "expo/stack.md",
+          "tokens": 9581
+        },
+        {
+          "id": "javascript-tabs",
+          "title": "JavaScript tabs",
+          "description": "Learn how to use the JavaScript tabs layout (React Navigation bottom tabs) in Expo Router.",
+          "tags": [
+            "expo-router/ui",
+            "src",
+            "app",
+            "_layout.tsx",
+            "(tabs)",
+            "index.tsx",
+            "settings.tsx",
+            "Tabs",
+            "tabBarAccessibilityLabel",
+            "tabBarActiveBackgroundColor"
+          ],
+          "path": "expo/javascript-tabs.md",
+          "tokens": 2625
+        },
+        {
+          "id": "native-tabs",
+          "title": "Native tabs",
+          "description": "Learn how to use the native tabs layout in Expo Router.",
+          "tags": [
+            "src",
+            "app",
+            "_layout.tsx",
+            "index.tsx",
+            "settings.tsx",
+            "NativeTabs.Trigger",
+            "NativeTabs.Trigger.Icon",
+            "Icon",
+            "expo-router/unstable-native-tabs",
+            "md"
+          ],
+          "path": "expo/native-tabs.md",
+          "tokens": 9096
+        },
+        {
+          "id": "authentication-in-expo-router",
+          "title": "Authentication in Expo Router",
+          "description": "How to implement authentication and protect routes with Expo Router.",
+          "tags": [
+            "/sign-in",
+            "(app)",
+            "src",
+            "app",
+            "_layout.tsx``Controls what is protected",
+            "sign-in.tsx``Always accessible",
+            "_layout.tsx``Requires authorization",
+            "expo-secure-store",
+            "SessionProvider",
+            "SplashScreenController"
+          ],
+          "path": "expo/authentication-in-expo-router.md",
+          "tokens": 2558
+        },
+        {
+          "id": "authentication-in-expo-router-using-redirects",
+          "title": "Authentication in Expo Router using redirects",
+          "description": "How to implement authentication and protect routes with Expo Router.",
+          "tags": [
+            "/sign-in",
+            "(app)",
+            "app",
+            "_layout.tsx",
+            "sign-in.tsx``Always accessible",
+            "_layout.tsx``Protects child routes",
+            "index.tsx``Requires authorization",
+            "expo-secure-store",
+            "SessionProvider",
+            "<Slot />"
+          ],
+          "path": "expo/authentication-in-expo-router-using-redirects.md",
+          "tokens": 2761
+        },
+        {
+          "id": "nesting-navigators",
+          "title": "Nesting navigators",
+          "description": "Learn how to nest navigators in Expo Router.",
+          "tags": [
+            "src",
+            "app",
+            "_layout.tsx",
+            "index.tsx",
+            "home",
+            "feed.tsx",
+            "messages.tsx",
+            "/home/feed",
+            "/home/messages",
+            "<Stack />"
+          ],
+          "path": "expo/nesting-navigators.md",
+          "tokens": 747
+        },
+        {
+          "id": "modals",
+          "title": "Modals",
+          "description": "Learn how to use modals in Expo Router.",
+          "tags": [
+            "Modal",
+            "src",
+            "app",
+            "_layout.tsx",
+            "index.tsx",
+            "modal.tsx",
+            "index",
+            "modal",
+            "presentation",
+            "Link"
+          ],
+          "path": "expo/modals.md",
+          "tokens": 3060
+        },
+        {
+          "id": "web-modals",
+          "title": "Web modals",
+          "description": "Learn how to implement and customize the behavior of a modal in your web app using Expo Router.",
+          "tags": [
+            "EXPO_UNSTABLE_WEB_MODAL=1",
+            "presentation",
+            "modal",
+            "formSheet",
+            "transparentModal",
+            "containedTransparentModal",
+            "webModalStyle",
+            "Stack.Screen",
+            "Stack",
+            "src"
+          ],
+          "path": "expo/web-modals.md",
+          "tokens": 4240
+        },
+        {
+          "id": "shared-routes",
+          "title": "Shared routes",
+          "description": "Learn how to define shared routes or use arrays to use the same route multiple times with different layouts using Exp...",
+          "tags": [
+            "src",
+            "app",
+            "_layout.tsx",
+            "(home)",
+            "[user].tsx",
+            "(search)",
+            "(profile)",
+            "/(search)/baconbrix",
+            "/baconbrix",
+            "(,)"
+          ],
+          "path": "expo/shared-routes.md",
+          "tokens": 649
+        },
+        {
+          "id": "protected-routes",
+          "title": "Protected routes",
+          "description": "Learn how to make screens inaccessible to client-side navigation.",
+          "tags": [
+            "src",
+            "app",
+            "_layout.tsx",
+            "index.tsx",
+            "about.tsx",
+            "private",
+            "page.tsx",
+            "/private",
+            "guard",
+            "/private/page"
+          ],
+          "path": "expo/protected-routes.md",
+          "tokens": 1306
+        },
+        {
+          "id": "platform-specific-extensions-and-module",
+          "title": "Platform-specific extensions and module",
+          "description": "Learn how to switch modules based on the platform in Expo Router using platform-specific extensions and Platform modu...",
+          "tags": [
+            "Platform",
+            "3.5.x",
+            "src",
+            "app",
+            "_layout.tsx",
+            "_layout.web.tsx",
+            "index.tsx",
+            "about.tsx",
+            "about.web.tsx",
+            "components"
+          ],
+          "path": "expo/platform-specific-extensions-and-module.md",
+          "tokens": 867
+        },
+        {
+          "id": "customizing-links",
+          "title": "Customizing links",
+          "description": "Learn how to perform link redirection and utilize third-party deep links with +native-intent when using Expo Router.",
+          "tags": [
+            "redirectSystemPath",
+            "options",
+            "path",
+            "initial",
+            "src",
+            "app",
+            "+native-intent.tsx",
+            "+native-intent",
+            "_layout",
+            "usePathname()"
+          ],
+          "path": "expo/customizing-links.md",
+          "tokens": 2383
+        },
+        {
+          "id": "apple-handoff",
+          "title": "Apple Handoff",
+          "description": "Learn how to seamlessly continue app navigation across Apple devices with Expo Router and Apple Handoff.\niOS (device ...",
+          "tags": [
+            "NSUserActivity",
+            "webpageUrl",
+            "expo-router/head",
+            "activitycontinuation",
+            "apps",
+            "<APPLE_TEAM_ID>.<IOS_BUNDLE_ID>",
+            "QQ57RJ5UTD.app.expo.acme",
+            "QQ57RJ5UTD",
+            "app.expo.acme",
+            "webcredentials"
+          ],
+          "path": "expo/apple-handoff.md",
+          "tokens": 2629
+        },
+        {
+          "id": "custom-tab-layouts",
+          "title": "Custom tab layouts",
+          "description": "Learn how to use headless tab components to create custom tab layouts in Expo Router.",
+          "tags": [
+            "expo-router/ui",
+            "Tabs",
+            "<View>",
+            "TabList",
+            "TabTrigger",
+            "href",
+            "name",
+            "TabSlot",
+            "string",
+            "_layout.tsx"
+          ],
+          "path": "expo/custom-tab-layouts.md",
+          "tokens": 2874
+        },
+        {
+          "id": "stack-toolbar",
+          "title": "Stack Toolbar",
+          "description": "Learn how to use the iOS toolbar in Stack navigation with Expo Router.",
+          "tags": [
+            "Stack.Toolbar",
+            "Stack.Toolbar.Button",
+            "placement=\"right\"",
+            "placement=\"left\"",
+            "icon",
+            "useImage",
+            "expo-image",
+            "image",
+            "Stack.Toolbar.Menu",
+            "isOn"
+          ],
+          "path": "expo/stack-toolbar.md",
+          "tokens": 3388
+        },
+        {
+          "id": "zoom-transition",
+          "title": "Zoom transition",
+          "description": "Learn how to use the zoom transition to create fluid animations between screens when using Expo Router for iOS.",
+          "tags": [
+            "Link.AppleZoom",
+            "Link.AppleZoomTarget",
+            "Image",
+            "View",
+            "alignmentRect",
+            "alignmentRectProvider",
+            "usePreventZoomTransitionDismissal",
+            "unstable_dismissalBoundsRect",
+            "interactiveDismissShouldBegin",
+            "Link.Preview"
+          ],
+          "path": "expo/zoom-transition.md",
+          "tokens": 3145
+        },
+        {
+          "id": "api-routes",
+          "title": "API Routes",
+          "description": "Learn how to create server endpoints with Expo Router.",
+          "tags": [
+            "+api.ts",
+            "/hello",
+            "src",
+            "app",
+            "index.tsx",
+            "hello+api.ts``API Route",
+            "GET",
+            "POST",
+            "PUT",
+            "PATCH"
+          ],
+          "path": "expo/api-routes.md",
+          "tokens": 6456
+        },
+        {
+          "id": "data-loaders",
+          "title": "Data loaders",
+          "description": "Learn how to fetch data on the server using data loaders in Expo Router.",
+          "tags": [
+            "loader",
+            "useLoaderData",
+            "unstable_useServerDataLoaders",
+            "expo-router",
+            "web.output: 'static'",
+            "web.output: 'server'",
+            "typeof loader",
+            "<Suspense>",
+            "<Home>",
+            "ErrorBoundary"
+          ],
+          "path": "expo/data-loaders.md",
+          "tokens": 2903
+        },
+        {
+          "id": "server-middleware",
+          "title": "Server middleware",
+          "description": "Learn how to create middleware that runs for every request to the server in Expo Router.",
+          "tags": [
+            "<Link />",
+            "Response",
+            "unstable_settings",
+            "/api",
+            "/api/users",
+            "[postId]",
+            "/posts/[postId]",
+            "/posts/123",
+            "/posts/my-post",
+            "[...slug]"
+          ],
+          "path": "expo/server-middleware.md",
+          "tokens": 2657
+        },
+        {
+          "id": "server-headers",
+          "title": "Server headers",
+          "description": "Learn how to set custom HTTP headers for all server route responses in Expo Router.",
+          "tags": [
+            "expo-server",
+            "expo-router",
+            "SharedArrayBuffer",
+            "expo-sqlite",
+            "static",
+            "server",
+            "Cache-Control: public, max-age=3600",
+            "Cache-Control: no-store"
+          ],
+          "path": "expo/server-headers.md",
+          "tokens": 1082
+        },
+        {
+          "id": "static-rendering",
+          "title": "Static rendering",
+          "description": "Learn how to render routes to static HTML and CSS files with Expo Router.",
+          "tags": [
+            "static",
+            "generateStaticParams",
+            "[{ id: \"alpha\" }, { id: \"beta\" }]",
+            "dist",
+            "blog",
+            "alpha.html",
+            "beta.html",
+            "__dirname",
+            "process.cwd()",
+            "process.env"
+          ],
+          "path": "expo/static-rendering.md",
+          "tokens": 2858
+        },
+        {
+          "id": "server-rendering",
+          "title": "Server rendering",
+          "description": "Learn how to render Expo Router routes dynamically at request time using server-side rendering (SSR).",
+          "tags": [
+            "dist",
+            "client",
+            "_expo",
+            "static",
+            "js",
+            "web",
+            "entry-[hash].js",
+            "css",
+            "[name]-[hash].css",
+            "server"
+          ],
+          "path": "expo/server-rendering.md",
+          "tokens": 1832
+        },
+        {
+          "id": "async-routes",
+          "title": "Async routes",
+          "description": "Learn how to speed up development with async bundling in Expo Router.",
+          "tags": [
+            "ErrorBoundary",
+            "asyncRoutes",
+            "true",
+            "default",
+            "android",
+            "ios",
+            "web",
+            "--clear"
+          ],
+          "path": "expo/async-routes.md",
+          "tokens": 1102
+        },
+        {
+          "id": "error-handling",
+          "title": "Error handling",
+          "description": "Learn how to handle unmatched routes and errors in your app when using Expo Router.",
+          "tags": [
+            "Unmatched",
+            "/",
+            "ErrorBoundary",
+            "error",
+            "retry",
+            "console.error",
+            "console.warn"
+          ],
+          "path": "expo/error-handling.md",
+          "tokens": 633
+        },
+        {
+          "id": "using-url-parameters",
+          "title": "Using URL parameters",
+          "description": "Learn how to access and modify route and search parameters in your app.",
+          "tags": [
+            "/profile/[user]",
+            "user",
+            "/profile?extra=info",
+            "extra",
+            "useGlobalSearchParams",
+            "useLocalSearchParams",
+            "src",
+            "app",
+            "_layout.tsx",
+            "index.tsx"
+          ],
+          "path": "expo/using-url-parameters.md",
+          "tokens": 2521
+        },
+        {
+          "id": "color",
+          "title": "Color",
+          "description": "Access platform-specific colors with type safety in Expo Router.",
+          "tags": [
+            "Color",
+            "PlatformColor",
+            "Color.android.*",
+            "Color.ios.*",
+            "Color.android",
+            "@android:color/",
+            "Color.android.attr.*",
+            "?attr/",
+            "Color.android.material.*",
+            "Color.android.dynamic.*"
+          ],
+          "path": "expo/color.md",
+          "tokens": 1888
+        },
+        {
+          "id": "link-preview",
+          "title": "Link preview",
+          "description": "Learn how to add a preview to your link on iOS when using Expo Router.",
+          "tags": [
+            "Link.Trigger",
+            "Link.Preview",
+            "width",
+            "height",
+            "Link.Menu",
+            "Link.MenuAction",
+            "useIsPreview()",
+            "replace",
+            "push",
+            "Slot"
+          ],
+          "path": "expo/link-preview.md",
+          "tokens": 1531
+        },
+        {
+          "id": "typed-routes",
+          "title": "Typed routes",
+          "description": "Learn how to use statically typed links and routes in Expo Router.",
+          "tags": [
+            "<Link>",
+            "npx expo start",
+            "href",
+            "experiments.typedRoutes",
+            "true",
+            "npx expo customize tsconfig.json",
+            "includes",
+            "Href<T>",
+            "Route",
+            "expo-router"
+          ],
+          "path": "expo/typed-routes.md",
+          "tokens": 2296
+        },
+        {
+          "id": "top-level-src-directory",
+          "title": "Top-level src directory",
+          "description": "Learn how to use a top-level src directory in your Expo Router project.",
+          "tags": [
+            "src",
+            "app",
+            "_layout.tsx",
+            "index.tsx",
+            "components",
+            "button.tsx",
+            "package.json",
+            "@/*",
+            "@/"
+          ],
+          "path": "expo/top-level-src-directory.md",
+          "tokens": 617
+        },
+        {
+          "id": "testing-configuration-for-expo-router",
+          "title": "Testing configuration for Expo Router",
+          "description": "Learn how to create integration tests for your app when using Expo Router.",
+          "tags": [
+            "expo-router/testing-library",
+            "@testing-library/react-native",
+            "jest-expo",
+            "renderRouter",
+            "render",
+            "screen",
+            "initialUrl",
+            "Inline file system",
+            "./",
+            "/"
+          ],
+          "path": "expo/testing-configuration-for-expo-router.md",
+          "tokens": 1639
+        },
+        {
+          "id": "troubleshooting",
+          "title": "Troubleshooting",
+          "description": "Fixing common issues with Expo Router setup.",
+          "tags": [
+            "/node_modules/",
+            "EXPO_ROUTER_APP_ROOT",
+            "process.env.EXPO_ROUTER_APP_ROOT",
+            "expo-router/babel",
+            "require.context",
+            "@expo/metro-config",
+            "expo-router/metro",
+            "expo/metro-config",
+            "unstable_settings"
+          ],
+          "path": "expo/troubleshooting.md",
+          "tokens": 635
+        },
+        {
+          "id": "reserved-paths",
+          "title": "Reserved paths",
+          "description": "URL paths reserved by Metro and Expo Router that you should avoid using for routes or static files.",
+          "tags": [
+            "/assets/*",
+            "app",
+            "assets.tsx``Conflicts with Metro",
+            "assets",
+            "index.tsx``Conflicts with Metro",
+            "public",
+            "logo.png``Conflicts with Metro",
+            "media.tsx``Works",
+            "images",
+            "logo.png``Works"
+          ],
+          "path": "expo/reserved-paths.md",
+          "tokens": 664
+        },
+        {
+          "id": "migrate-from-react-navigation",
+          "title": "Migrate from React Navigation",
+          "description": "Learn how to migrate a project using React Navigation to Expo Router.",
+          "tags": [
+            "getPathFromState",
+            "getStateFromPath",
+            "<Stack.Screen component={HomeScreen} />",
+            "HomeScreen",
+            "../../components/button.tsx",
+            "@/components/button",
+            "resetRoot",
+            "index",
+            "/",
+            "number"
+          ],
+          "path": "expo/migrate-from-react-navigation.md",
+          "tokens": 5200
+        },
+        {
+          "id": "migrate-from-expo-webpack",
+          "title": "Migrate from Expo Webpack",
+          "description": "Learn how to migrate a website using Expo Webpack to Expo Router.",
+          "tags": [
+            "@expo/webpack-config",
+            "npx expo start",
+            "npx expo export",
+            "npx expo export:web",
+            "@expo/metro-config",
+            "tsconfig.json",
+            "web/index.html",
+            "web.output: \"static\"",
+            "web.output: \"single\"",
+            "public/index.html"
+          ],
+          "path": "expo/migrate-from-expo-webpack.md",
+          "tokens": 3651
+        },
+        {
+          "id": "expo-modules-api-overview",
+          "title": "Expo Modules API: Overview",
+          "description": "An overview of the APIs and utilities provided by Expo to develop native modules.",
+          "tags": [
+            "expo",
+            "react-native-widget-extension",
+            "burnt",
+            "expo-video-metadata",
+            "swiftui-react-native",
+            "react-native-ios-context-menu",
+            "react-native-mlkit",
+            "react-native-passkeys",
+            "expo-drag-drop-content-view"
+          ],
+          "path": "expo/expo-modules-api-overview.md",
+          "tokens": 1562
+        },
+        {
+          "id": "expo-modules-api-get-started",
+          "title": "Expo Modules API: Get started",
+          "description": "Learn about getting started with Expo modules API.",
+          "tags": [
+            "modules",
+            "my-module",
+            "android",
+            "ios",
+            "src",
+            "expo-module.config.json",
+            "index.ts",
+            "npx expo prebuild",
+            "hello",
+            "xed ios"
+          ],
+          "path": "expo/expo-modules-api-get-started.md",
+          "tokens": 1751
+        },
+        {
+          "id": "tutorial-create-a-native-module",
+          "title": "Tutorial: Create a native module",
+          "description": "A tutorial on creating a native module that persists settings with Expo Modules API.",
+          "tags": [
+            "SharedPreferences",
+            "UserDefaults",
+            "localStorage",
+            "expo-settings",
+            "ExpoSettings",
+            "\"system\"",
+            "getTheme()",
+            "\"theme\"",
+            "reactContext",
+            "getSharedPreferences()"
+          ],
+          "path": "expo/tutorial-create-a-native-module.md",
+          "tokens": 3848
+        },
+        {
+          "id": "tutorial-create-a-native-view",
+          "title": "Tutorial: Create a native view",
+          "description": "A tutorial on creating a native view that renders a WebView with Expo Modules API.",
+          "tags": [
+            "WebView",
+            "WKWebView",
+            "iframe",
+            "expo-web-view",
+            "ExpoWebView",
+            "ExpoView",
+            "RCTView",
+            "View",
+            "UIView",
+            "LayoutParams"
+          ],
+          "path": "expo/tutorial-create-a-native-view.md",
+          "tokens": 3449
+        },
+        {
+          "id": "tutorial-create-a-module-with-a-config-plugin",
+          "title": "Tutorial: Create a module with a config plugin",
+          "description": "A tutorial on creating a native module with a config plugin using Expo Modules API.",
+          "tags": [
+            "npx expo prebuild",
+            "create-expo-module",
+            "expo-native-configuration",
+            "ExpoNativeConfiguration",
+            "ExpoConfig",
+            "with",
+            "withMyApiKey",
+            "mods",
+            "plugins",
+            "getConfig"
+          ],
+          "path": "expo/tutorial-create-a-module-with-a-config-plugin.md",
+          "tokens": 3116
+        },
+        {
+          "id": "how-to-use-a-standalone-expo-module",
+          "title": "How to use a standalone Expo module",
+          "description": "Learn how to use a standalone module created with create-expo-module in your project by using a monorepo or publishin...",
+          "tags": [
+            "create-expo-module",
+            "--no-example",
+            "prebuild",
+            "--clean",
+            "expo-settings",
+            "npm install",
+            "npm pack",
+            "npm install /path/to/tarball"
+          ],
+          "path": "expo/how-to-use-a-standalone-expo-module.md",
+          "tokens": 1581
+        },
+        {
+          "id": "wrap-third-party-native-libraries",
+          "title": "Wrap third-party native libraries",
+          "description": "Learn how to create a simple wrapper around two separate native libraries using Expo Modules API.",
+          "tags": [
+            "modules/expo-radial-chart",
+            ".aar",
+            "dependencies",
+            "${project.name}$",
+            ".xcframework",
+            ".framework",
+            "vendored_frameworks",
+            "..",
+            "source_files",
+            "ExpoRadialChartView.swift"
+          ],
+          "path": "expo/wrap-third-party-native-libraries.md",
+          "tokens": 2460
+        },
+        {
+          "id": "integrate-in-an-existing-library",
+          "title": "Integrate in an existing library",
+          "description": "Learn how to integrate Expo Modules API into an existing React Native library.",
+          "tags": [
+            "{}",
+            "expo-modules-core",
+            "expo",
+            "*",
+            "modules",
+            "pod install",
+            "requireNativeModule"
+          ],
+          "path": "expo/integrate-in-an-existing-library.md",
+          "tokens": 948
+        },
+        {
+          "id": "additional-platform-support",
+          "title": "Additional platform support",
+          "description": "Learn how to add support for macOS and tvOS platforms.",
+          "tags": [
+            "\"apple\"",
+            "expo-module.config.json",
+            "\"ios\"",
+            "pod install",
+            "react-native-macos",
+            "react-native-tvos",
+            "UIKit",
+            "AppKit",
+            "expo-modules-core",
+            "UIView"
+          ],
+          "path": "expo/additional-platform-support.md",
+          "tokens": 1007
+        },
+        {
+          "id": "definition-components",
+          "title": "Definition components",
+          "description": "As you might have noticed in the snippets on the Get Started page, each module class must implement the definition fu...",
+          "tags": [
+            "definition",
+            "Name",
+            "Constant",
+            "Constants",
+            "Function",
+            "String",
+            "(args...) -> ReturnType",
+            "AsyncFunction",
+            "Promise",
+            ".runOnQueue"
+          ],
+          "path": "expo/definition-components.md",
+          "tokens": 4120
+        },
+        {
+          "id": "view-definition-components",
+          "title": "View definition components",
+          "description": "The view definition consists of the DSL components that describe the view's functionality and behavior. Those compone...",
+          "tags": [
+            "View",
+            "Name",
+            "Prop",
+            "String",
+            "ValueType",
+            "null",
+            "PropGroup",
+            "Pair<String, CustomValueType>",
+            "OnViewDidUpdateProps",
+            "OnViewDestroys"
+          ],
+          "path": "expo/view-definition-components.md",
+          "tokens": 1873
+        },
+        {
+          "id": "argument-types",
+          "title": "Argument types",
+          "description": "Fundamentally, only primitive and serializable data can be passed back and forth between the runtimes. However, usual...",
+          "tags": [
+            "Any",
+            "Primitives",
+            "Bool",
+            "Int",
+            "Int8",
+            "Int16",
+            "Int32",
+            "Int64",
+            "UInt",
+            "UInt8"
+          ],
+          "path": "expo/argument-types.md",
+          "tokens": 4034
+        },
+        {
+          "id": "native-classes",
+          "title": "Native classes",
+          "description": "A base class for a native module.",
+          "tags": [
+            "Module",
+            "appContext",
+            "AppContext",
+            "sendEvent(eventName, payload)",
+            "eventName",
+            "string",
+            "payload",
+            "Sending events",
+            "void",
+            "constants"
+          ],
+          "path": "expo/native-classes.md",
+          "tokens": 655
+        },
+        {
+          "id": "guides",
+          "title": "Guides",
+          "description": "While JavaScript/TypeScript to Native communication is mostly covered by native functions, you might also want to let...",
+          "tags": [
+            "sendEvent(eventName, payload)",
+            "addListener",
+            "requireNativeModule",
+            "EventEmitter",
+            "useEvent",
+            "useEventListener",
+            "sendEvent",
+            "Sending events",
+            "expo-modules-core",
+            "EventDispatcher"
+          ],
+          "path": "expo/guides.md",
+          "tokens": 1409
+        },
+        {
+          "id": "examples",
+          "title": "Examples",
+          "description": "For more examples from real modules, you can refer to Expo modules that already use this API on GitHub:",
+          "tags": [
+            "expo-battery",
+            "expo-cellular",
+            "expo-clipboard",
+            "expo-crypto",
+            "expo-device",
+            "expo-haptics",
+            "expo-image-manipulator",
+            "expo-image-picker",
+            "expo-linear-gradient",
+            "expo-localization"
+          ],
+          "path": "expo/examples.md",
+          "tokens": 697
+        },
+        {
+          "id": "android-lifecycle-listeners",
+          "title": "Android lifecycle listeners",
+          "description": "Learn about the mechanism that allows your library to hook into Android Activity and Application functions using Expo...",
+          "tags": [
+            "Activity",
+            "Application",
+            "Package",
+            "createReactActivityLifecycleListeners",
+            "createApplicationLifecycleListeners",
+            "ReactActivityLifecycleListener",
+            "ReactActivity",
+            "ReactActivityDelegate",
+            "onCreate",
+            "onResume"
+          ],
+          "path": "expo/android-lifecycle-listeners.md",
+          "tokens": 3756
+        },
+        {
+          "id": "ios-appdelegate-subscribers",
+          "title": "iOS AppDelegate subscribers",
+          "description": "Learn how to subscribe to iOS system events relevant to an app, such as inbound links and notifications using Expo mo...",
+          "tags": [
+            "AppDelegate",
+            "ExpoAppDelegate",
+            "UIApplicationDelegate",
+            "ExpoAppDelegateSubscriber",
+            "ExpoModulesCore",
+            "apple.appDelegateSubscribers",
+            "pod install",
+            "ExpoAppDelegate.swift",
+            "false",
+            "true"
+          ],
+          "path": "expo/ios-appdelegate-subscribers.md",
+          "tokens": 1290
+        },
+        {
+          "id": "autolinking",
+          "title": "Autolinking",
+          "description": "Learn how to use Expo Autolinking to automatically link native dependencies in your Expo project.",
+          "tags": [
+            "npm",
+            "pod install",
+            "expo-modules-autolinking",
+            "dependencies",
+            "root",
+            "searchPaths",
+            "nativeModulesDir",
+            "./modules/",
+            "expo.autolinking",
+            "expo.autolinking.ios"
+          ],
+          "path": "expo/autolinking.md",
+          "tokens": 3325
+        },
+        {
+          "id": "using-shared-objects",
+          "title": "Using shared objects",
+          "description": "Learn how to use a shared object from the Expo Modules API.",
+          "tags": [
+            "SharedObject",
+            "Class()",
+            "ImagePicker",
+            "\"file:///path/to/image.jpg\"",
+            "rotate()",
+            "Image",
+            "saveAsync",
+            "flipX()",
+            "renderAsync()",
+            "sharedObjectDidRelease()"
+          ],
+          "path": "expo/using-shared-objects.md",
+          "tokens": 4921
+        },
+        {
+          "id": "mocking-native-calls-in-expo-modules",
+          "title": "Mocking native calls in Expo modules",
+          "description": "Learn about mocking native calls in Expo modules.",
+          "tags": [
+            "jest-expo",
+            "requireNativeModule",
+            "expo-clipboard",
+            "ExpoClipboard",
+            "ExpoClipboard.hasStringAsync()",
+            "false",
+            "generate-ts-mocks",
+            "generate-js-mocks",
+            "expo-screen-capture",
+            "expo-app-integrity"
+          ],
+          "path": "expo/mocking-native-calls-in-expo-modules.md",
+          "tokens": 1796
+        },
+        {
+          "id": "expo-modules-api-design-considerations",
+          "title": "Expo Modules API: Design considerations",
+          "description": "An overview of the design considerations behind the Expo Modules API.",
+          "tags": [
+            "NSDictionary",
+            "ReadableMap",
+            "{ x: number, y: number }",
+            "[number, number]",
+            "CGPoint",
+            "Bool",
+            "Int",
+            "UInt",
+            "Float32",
+            "Double"
+          ],
+          "path": "expo/expo-modules-api-design-considerations.md",
+          "tokens": 1886
+        },
+        {
+          "id": "what-you-need-to-know-about-notifications",
+          "title": "What you need to know about notifications",
+          "description": "Learn about notification types and their behavior before you get started.",
+          "tags": [
+            "expo-notifications",
+            "NotificationHandler",
+            "NotificationReceivedListener",
+            "NotificationResponseReceivedListener",
+            "useLastNotificationResponse",
+            "getLastNotificationResponse",
+            "AndroidNotification",
+            "aps.alert",
+            "apns-push-type",
+            "alert"
+          ],
+          "path": "expo/what-you-need-to-know-about-notifications.md",
+          "tokens": 2637
+        },
+        {
+          "id": "expo-push-notifications-setup",
+          "title": "Expo push notifications setup",
+          "description": "Learn how to set up push notifications, get credentials for development and production, and send a testing push notif...",
+          "tags": [
+            "ExpoPushToken",
+            "expo-notifications",
+            "expo-device",
+            "expo-constants",
+            "projectId",
+            "plugins",
+            "eas credentials"
+          ],
+          "path": "expo/expo-push-notifications-setup.md",
+          "tokens": 2306
+        },
+        {
+          "id": "send-notifications-with-the-expo-push-service",
+          "title": "Send notifications with the Expo Push Service",
+          "description": "Learn how to call Expo Push Service API to send push notifications from your server.",
+          "tags": [
+            "expo-notifications",
+            "ExpoPushToken",
+            "getExpoPushTokenAsync",
+            "details",
+            "error",
+            "DeviceNotRegistered",
+            "https://exp.host/--/api/v2/push/send",
+            "data",
+            "errors",
+            "status"
+          ],
+          "path": "expo/send-notifications-with-the-expo-push-service.md",
+          "tokens": 7701
+        },
+        {
+          "id": "handle-incoming-notifications",
+          "title": "Handle incoming notifications",
+          "description": "Learn how to respond to a notification received by your app and take action based on the event.",
+          "tags": [
+            "expo-notifications",
+            "addNotificationReceivedListener",
+            "addNotificationResponseReceivedListener",
+            "notification",
+            "notification.request.content.data",
+            "Notification",
+            "Notifications.setNotificationHandler",
+            "handleNotification()",
+            "shouldPlaySound",
+            "shouldSetBadge"
+          ],
+          "path": "expo/handle-incoming-notifications.md",
+          "tokens": 1916
+        },
+        {
+          "id": "obtain-google-service-account-keys-using-fcm-v1",
+          "title": "Obtain Google Service Account Keys using FCM V1",
+          "description": "Learn how to create or use a Google Service Account Key for sending Android Notifications using FCM.",
+          "tags": [
+            "eas credentials",
+            "Android",
+            "production",
+            "Google Service Account",
+            "Upload a new service account key",
+            "expo.android.googleServicesFile"
+          ],
+          "path": "expo/obtain-google-service-account-keys-using-fcm-v1.md",
+          "tokens": 1129
+        },
+        {
+          "id": "send-notifications-with-fcm-and-apns",
+          "title": "Send notifications with FCM and APNs",
+          "description": "Learn how to send notifications with FCM and APNs.",
+          "tags": [
+            "expo-notifications",
+            "ExpoPushToken",
+            "getExpoPushTokenAsync",
+            "getDevicePushTokenAsync",
+            "FCM-SERVER-KEY",
+            "getAccessTokenAsync()",
+            "experienceId",
+            "scopeKey",
+            "fetch",
+            "node-apn"
+          ],
+          "path": "expo/send-notifications-with-fcm-and-apns.md",
+          "tokens": 2393
+        },
+        {
+          "id": "push-notifications-troubleshooting-and-faq",
+          "title": "Push notifications troubleshooting and FAQ",
+          "description": "A collection of common questions about Expo push notification service.",
+          "tags": [
+            "expo-notifications",
+            "expo-server-sdk-node",
+            "getDevicePushTokenAsync",
+            "ExpoPushToken",
+            "applicationId",
+            "experienceId",
+            "@expoUsername/projectSlug",
+            "DeviceNotRegistered",
+            "id",
+            "eas credentials"
+          ],
+          "path": "expo/push-notifications-troubleshooting-and-faq.md",
+          "tokens": 3266
+        },
+        {
+          "id": "using-sentry",
+          "title": "Using Sentry",
+          "description": "A guide on installing and configuring Sentry for crash reporting.\nAndroid, iOS, Web",
+          "tags": [
+            "SENTRY_AUTH_TOKEN",
+            "eas update",
+            "&&"
+          ],
+          "path": "expo/using-sentry.md",
+          "tokens": 2356
+        },
+        {
+          "id": "using-logrocket",
+          "title": "Using LogRocket",
+          "description": "A guide on installing and configuring LogRocket for session replays and error monitoring.",
+          "tags": [
+            "<App ID>"
+          ],
+          "path": "expo/using-logrocket.md",
+          "tokens": 600
+        },
+        {
+          "id": "using-vexo",
+          "title": "Using Vexo",
+          "description": "A guide on installing and configuring Vexo for real-time user analytics.",
+          "tags": [
+            "vexo-analytics",
+            "expo-secure-store"
+          ],
+          "path": "expo/using-vexo.md",
+          "tokens": 1355
+        },
+        {
+          "id": "using-facebook-authentication",
+          "title": "Using Facebook authentication",
+          "description": "A guide on using react-native-fbsdk-next library to integrate Facebook authentication in your Expo project.",
+          "tags": [
+            "react-native-fbsdk-next",
+            "package",
+            "android.package",
+            "MainActivity",
+            "package.MainActivity",
+            "com.myapp.example.MainActivity",
+            "com.myapp.example"
+          ],
+          "path": "expo/using-facebook-authentication.md",
+          "tokens": 713
+        },
+        {
+          "id": "using-google-authentication",
+          "title": "Using Google authentication",
+          "description": "A guide on using @react-native-google-signin/google-signin library to integrate Google authentication in your Expo pr...",
+          "tags": [],
+          "path": "expo/using-google-authentication.md",
+          "tokens": 1362
+        },
+        {
+          "id": "using-convex",
+          "title": "Using Convex",
+          "description": "Add a database to your app with Convex.",
+          "tags": [
+            "convex",
+            "npx convex dev",
+            "EXPO_PUBLIC_CONVEX_URL",
+            "ConvexReactClient",
+            "ConvexProvider",
+            "useQuery",
+            "api.tasks.get"
+          ],
+          "path": "expo/using-convex.md",
+          "tokens": 900
+        },
+        {
+          "id": "using-firebase",
+          "title": "Using Firebase",
+          "description": "A guide on getting started and using Firebase JS SDK and React Native Firebase library.",
+          "tags": [
+            "firebase@^12.0.0",
+            "initializeApp()",
+            "firebase/app",
+            "firebase",
+            "auth",
+            "firebase/auth",
+            "expo-firebase-analytics",
+            "expo-firebase-recaptcha",
+            "expo-dev-client",
+            "@react-native-firebase/app"
+          ],
+          "path": "expo/using-firebase.md",
+          "tokens": 2516
+        },
+        {
+          "id": "using-supabase",
+          "title": "Using Supabase",
+          "description": "Add a Postgres Database and user authentication to your React Native app with Supabase.",
+          "tags": [
+            "supabase-js",
+            "URL",
+            "service_role",
+            "@supabase/supabase-js",
+            "Publishable"
+          ],
+          "path": "expo/using-supabase.md",
+          "tokens": 1386
+        },
+        {
+          "id": "using-resend",
+          "title": "Using Resend",
+          "description": "Learn how to integrate Resend in your Expo and React Native app to programmatically send emails with Expo Router's AP...",
+          "tags": [
+            "npm install -g eas-cli",
+            "+api.ts",
+            "POST",
+            "/api/audience",
+            "Request",
+            "email",
+            "EXPO_PUBLIC_BASE_URL_LOCAL",
+            "npx expo start",
+            "EXPO_PUBLIC_BASE_URL",
+            "EXPO_PUBLIC_"
+          ],
+          "path": "expo/using-resend.md",
+          "tokens": 1953
+        },
+        {
+          "id": "react-native-feature-flag-services",
+          "title": "React Native feature flag services",
+          "description": "An overview of feature flag services available in the Expo and React Native ecosystem.",
+          "tags": [],
+          "path": "expo/react-native-feature-flag-services.md",
+          "tokens": 1499
+        },
+        {
+          "id": "using-push-notifications",
+          "title": "Using push notifications",
+          "description": "Learn about push notification services that are compatible with Expo and React Native apps.",
+          "tags": [
+            "expo-notifications"
+          ],
+          "path": "expo/using-push-notifications.md",
+          "tokens": 1953
+        },
+        {
+          "id": "using-eslint-and-prettier",
+          "title": "Using ESLint and Prettier",
+          "description": "A guide on configuring ESLint and Prettier to format Expo apps.",
+          "tags": [
+            "eslint-config-expo",
+            "npx expo lint",
+            "lint",
+            "__dirname",
+            "path",
+            "languageOptions.globals",
+            "ESLint: Restart ESLint Server"
+          ],
+          "path": "expo/using-eslint-and-prettier.md",
+          "tokens": 1418
+        },
+        {
+          "id": "using-typescript",
+          "title": "Using TypeScript",
+          "description": "An in-depth guide on configuring an Expo project with TypeScript.",
+          "tags": [
+            "devDependencies",
+            "typescript",
+            "@types/react",
+            "npx expo start",
+            "tsc",
+            "expo/tsconfig.base",
+            "strict",
+            "compilerOptions",
+            "Button",
+            "@/*"
+          ],
+          "path": "expo/using-typescript.md",
+          "tokens": 2175
+        },
+        {
+          "id": "build-expo-apps-for-tv",
+          "title": "Build Expo apps for TV",
+          "description": "A guide for building an Expo app for an Android TV or Apple TV target.",
+          "tags": [
+            "react-native",
+            "xcodebuild -downloadAllPlatforms",
+            "npx expo install",
+            "react-native-tvos",
+            "react-native-tvos@0.81-stable",
+            "EXPO_TV",
+            "1",
+            "isTV",
+            "true",
+            "--clean"
+          ],
+          "path": "expo/build-expo-apps-for-tv.md",
+          "tokens": 2495
+        },
+        {
+          "id": "using-next-js-with-expo-for-web",
+          "title": "Using Next.js with Expo for Web",
+          "description": "A guide for integrating Next.js with Expo for the web.",
+          "tags": [
+            "@expo/next-adapter",
+            "npx expo start",
+            "npx next dev",
+            "expo",
+            "next",
+            "next/babel",
+            "react-native-web",
+            "transpilePackages",
+            "build"
+          ],
+          "path": "expo/using-next-js-with-expo-for-web.md",
+          "tokens": 1956
+        },
+        {
+          "id": "upgrade-expo-sdk",
+          "title": "Upgrade Expo SDK",
+          "description": "Learn how to incrementally upgrade the Expo SDK version in your project.",
+          "tags": [
+            "expo@^55.0.0",
+            "expo-doctor",
+            "npx expo run:ios",
+            "npx expo prebuild",
+            "npx pod-install"
+          ],
+          "path": "expo/upgrade-expo-sdk.md",
+          "tokens": 1285
+        },
+        {
+          "id": "authentication-with-oauth-or-openid-providers",
+          "title": "Authentication with OAuth or OpenID providers",
+          "description": "Learn how to utilize the expo-auth-session library to implement authentication with OAuth or OpenID providers.",
+          "tags": [
+            "expo-auth-session",
+            "AuthSession",
+            "WebBrowser.maybeCompleteAuthSession()",
+            "AuthSession.makeRedirectUri()",
+            "expo-linking",
+            "AuthSession.useAuthRequest()",
+            "request",
+            "promptAsync",
+            "com.your.app://*",
+            "https://yourwebsite.com/*"
+          ],
+          "path": "expo/authentication-with-oauth-or-openid-providers.md",
+          "tokens": 2644
+        },
+        {
+          "id": "using-hermes-engine",
+          "title": "Using Hermes Engine",
+          "description": "A guide on configuring Hermes for both Android and iOS in an Expo project.",
+          "tags": [
+            "\"jsEngine\"",
+            "\"hermes\"",
+            "\"jsc\"",
+            "\"ios\"",
+            "\"android\"",
+            "eas update",
+            "npx expo export",
+            "react-native",
+            "runtimeVersion",
+            "npx expo start"
+          ],
+          "path": "expo/using-hermes-engine.md",
+          "tokens": 1303
+        },
+        {
+          "id": "ios-developer-mode",
+          "title": "iOS Developer Mode",
+          "description": "Learn how to enable iOS Developer Mode setting on iOS 16 and above to run internal distribution builds and local deve...",
+          "tags": [],
+          "path": "expo/ios-developer-mode.md",
+          "tokens": 752
+        },
+        {
+          "id": "expo-vector-icons",
+          "title": "Expo Vector Icons",
+          "description": "Learn how to use various types of icons in your Expo app, including react native vector icons, custom icon fonts, ico...",
+          "tags": [
+            "@expo/vector-icons",
+            "npx create-expo-app",
+            "expo",
+            "react-native-vector-icons",
+            "Ionicons",
+            "Ionicons.font",
+            "createIconSet",
+            "glyphMap",
+            "fontFamily",
+            "createIconSetFromIcoMoon"
+          ],
+          "path": "expo/expo-vector-icons.md",
+          "tokens": 1802
+        },
+        {
+          "id": "localization",
+          "title": "Localization",
+          "description": "Learn about getting started and configuring localization in an Expo project using expo-localization.",
+          "tags": [
+            "expo-localization",
+            "i18n-js",
+            "getLocales",
+            "supportedLocales",
+            "supportedLocales.ios",
+            "supportedLocales.android",
+            "i18n.t",
+            "i18n.enableFallback = true;",
+            "AppState",
+            "getLocales()"
+          ],
+          "path": "expo/localization.md",
+          "tokens": 4243
+        },
+        {
+          "id": "configure-js-engines",
+          "title": "Configure JS engines",
+          "description": "A guide on configuring JS engines for both Android and iOS in an Expo project.",
+          "tags": [
+            "jsEngine",
+            "hermes",
+            "expo.jsEngine",
+            "eas build",
+            "react-native-v8",
+            "npx expo prebuild -p android --clean",
+            "\"jsEngine\"",
+            "\"android\"",
+            "\"ios\""
+          ],
+          "path": "expo/configure-js-engines.md",
+          "tokens": 651
+        },
+        {
+          "id": "using-bun",
+          "title": "Using Bun",
+          "description": "A guide on using Bun with Expo and EAS.",
+          "tags": [
+            "bun create expo",
+            "bun expo prebuild",
+            "npm pack",
+            "bun run",
+            "bun expo install",
+            "bun install",
+            "1.0.0",
+            "development",
+            "postinstall",
+            "trustedDependencies"
+          ],
+          "path": "expo/using-bun.md",
+          "tokens": 910
+        },
+        {
+          "id": "edit-rich-text",
+          "title": "Edit rich text",
+          "description": "Learn about current approaches to preview and edit rich text in React Native.",
+          "tags": [
+            "<TextInput>",
+            "react-native-markdown-display",
+            "@expo/html-elements",
+            "react-native-webview",
+            "<Text>",
+            "AttributedString",
+            "react-native-rich-editor",
+            "react-native-cn-quill",
+            "@10play/tentap-editor",
+            "onChange"
+          ],
+          "path": "expo/edit-rich-text.md",
+          "tokens": 2033
+        },
+        {
+          "id": "create-app-store-assets",
+          "title": "Create app store assets",
+          "description": "Learn how to create screenshots and previews for your app's store pages.",
+          "tags": [],
+          "path": "expo/create-app-store-assets.md",
+          "tokens": 1498
+        },
+        {
+          "id": "local-first-architecture-with-expo",
+          "title": "Local-first architecture with Expo",
+          "description": "An introduction to the emerging local-first software movement, including links to relevant learning resources and tools.",
+          "tags": [
+            "react-native-async-storage",
+            "expo-sqlite",
+            "localStorage",
+            "y-expo-sqlite",
+            "Y.Array",
+            "Y.Map",
+            "Array",
+            "Object"
+          ],
+          "path": "expo/local-first-architecture-with-expo.md",
+          "tokens": 3087
+        },
+        {
+          "id": "keyboard-handling",
+          "title": "Keyboard handling",
+          "description": "A guide for handling common keyboard interactions on an Android or iOS device.",
+          "tags": [
+            "Keyboard",
+            "KeyboardAvoidingView",
+            "react-native-keyboard-controller",
+            "behavior",
+            "padding",
+            "undefined",
+            "softwareKeyboardLayoutMode",
+            "pan",
+            "tabBarHideOnKeyboard",
+            "true"
+          ],
+          "path": "expo/keyboard-handling.md",
+          "tokens": 3155
+        },
+        {
+          "id": "building-swiftui-apps-with-expo-ui",
+          "title": "Building SwiftUI apps with Expo UI",
+          "description": "Learn how to use Expo UI to integrate SwiftUI into your Expo apps.\niOS, macOS, tvOS",
+          "tags": [
+            "react-native-skia",
+            "@expo/ui",
+            "@expo/ui/swift-ui",
+            "Host",
+            "<svg>",
+            "<Canvas>",
+            "UIHostingController",
+            "HStack",
+            "VStack",
+            "@expo/ui/swift-ui/modifiers"
+          ],
+          "path": "expo/building-swiftui-apps-with-expo-ui.md",
+          "tokens": 3974
+        },
+        {
+          "id": "extending-with-swiftui",
+          "title": "Extending with SwiftUI",
+          "description": "Learn how to create custom SwiftUI components and modifiers that integrate with Expo UI.\niOS, tvOS",
+          "tags": [
+            "@expo/ui",
+            "ExpoUI",
+            "UIBaseViewProps",
+            "modifiers",
+            "ExpoSwiftUI.View",
+            "@ObservedObject",
+            "body",
+            "ExpoUIView",
+            "createViewModifierEventListener",
+            "onTapGesture"
+          ],
+          "path": "expo/extending-with-swiftui.md",
+          "tokens": 1694
+        },
+        {
+          "id": "troubleshooting-overview",
+          "title": "Troubleshooting overview",
+          "description": "An overview of troubleshooting guides for app development with Expo and EAS.",
+          "tags": [],
+          "path": "expo/troubleshooting-overview.md",
+          "tokens": 755
+        },
+        {
+          "id": "application-has-not-been-registered-error",
+          "title": "\"Application has not been registered\" error",
+          "description": "Learn about what the Application has not been registered error means and how to resolve it in an Expo or React Native...",
+          "tags": [
+            "\"main\"",
+            "react-native-safe-area-context",
+            "AppKey",
+            "AppRegistry.registerComponent",
+            "registerRootComponent",
+            "ps -A | grep \"expo\\|react-native\"",
+            "npx expo start --no-dev --minify"
+          ],
+          "path": "expo/application-has-not-been-registered-error.md",
+          "tokens": 1036
+        },
+        {
+          "id": "clear-bundler-caches-on-macos-and-linux",
+          "title": "Clear bundler caches on macOS and Linux",
+          "description": "Learn how to clear the bundler cache when using Yarn or npm with Expo CLI or React Native CLI on macOS and Linux.",
+          "tags": [
+            "rm -rf node_modules",
+            "yarn cache clean",
+            "npm cache clean --force",
+            "yarn",
+            "npm install",
+            "watchman watch-del-all",
+            "watchman",
+            "rm -rf $TMPDIR/<cache>",
+            "npx expo start --clear"
+          ],
+          "path": "expo/clear-bundler-caches-on-macos-and-linux.md",
+          "tokens": 544
+        },
+        {
+          "id": "clear-bundler-caches-on-windows",
+          "title": "Clear bundler caches on Windows",
+          "description": "Learn how to clear the bundler cache when using Yarn or npm with Expo CLI or React Native CLI on Windows.",
+          "tags": [
+            "del node_modules",
+            "yarn cache clean",
+            "npm cache clean --force",
+            "yarn",
+            "npm install",
+            "watchman watch-del-all",
+            "watchman",
+            "del %localappdata%\\Temp/<cache>",
+            "npx expo start --clear"
+          ],
+          "path": "expo/clear-bundler-caches-on-windows.md",
+          "tokens": 551
+        },
+        {
+          "id": "react-native-version-mismatch-errors",
+          "title": "\"React Native version mismatch\" errors",
+          "description": "Learn about what React Native version mismatch means and how to resolve it in an Expo or React Native app.",
+          "tags": [
+            "npx expo start",
+            "react-native",
+            "ps",
+            "ps -A | grep \"expo\\|react-native\"",
+            "sdkVersion",
+            "expo",
+            "npx expo-doctor",
+            "npx expo install --fix",
+            "npx pod-install",
+            "yarn android"
+          ],
+          "path": "expo/react-native-version-mismatch-errors.md",
+          "tokens": 598
+        },
+        {
+          "id": "troubleshooting-proxies",
+          "title": "Troubleshooting Proxies",
+          "description": "Learn about troubleshooting proxies with a set of recommended tools.",
+          "tags": [
+            "System Preferences",
+            "Location",
+            "Advanced...",
+            "Charles",
+            "Proxy > External Proxy Settings",
+            "Use external proxy servers",
+            "Web Proxy (HTTP)",
+            "your-corporate-proxy-uri:port-number",
+            "Proxy server requires a password",
+            "~/.npmrc"
+          ],
+          "path": "expo/troubleshooting-proxies.md",
+          "tokens": 1921
         }
       ]
     },

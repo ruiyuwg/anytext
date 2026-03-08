@@ -290,6 +290,14 @@
       "url": "https://reactnative.dev/llms-full.txt"
     },
     {
+      "id": "expo",
+      "name": "Expo",
+      "description": "Platform for building universal React Native apps with SDK modules, EAS Build, and file-based routing",
+      "version": "52",
+      "adapter": "llms-full",
+      "url": "https://docs.expo.dev/llms-full.txt"
+    },
+    {
       "id": "azure",
       "name": "Azure",
       "description": "Microsoft Azure cloud platform with compute, storage, databases, AI, and 200+ services",

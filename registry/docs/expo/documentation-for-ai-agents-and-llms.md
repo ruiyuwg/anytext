@@ -1,0 +1,57 @@
+# Documentation for AI agents and LLMs
+
+Efficient ways for AI agents and LLMs to access and consume Expo documentation.
+
+Use the following endpoints and tools to give AI agents and LLMs access to Expo documentation at lower token cost than fetching full web pages.
+
+## Quick start
+
+Pick the method that matches your tool:
+
+| Method | Best for | How |
+| --- | --- | --- |
+| Per-page markdown | Chat interfaces (ChatGPT, Claude.ai) and coding agents | Append `/index.md` to any documentation page URL. |
+| Copy Markdown dropdown | Quick prompts with a single page | Click **Copy page** > **Copy Markdown** at the top of any documentation page. |
+| Section bundles | Project rules and coding agents | Add a section-level `llms-*.txt` URL to your AI tool configuration or the general-purpose index (`/llms.txt`). |
+
+## Per-page markdown
+
+Every documentation page has a lightweight markdown version accessible by appending `/index.md` to the page URL. For example:
+
+```text
+https://documentation.expo.dev/develop/development-builds/create-a-build/index.md
+```
+
+The above method is useful when you want to give an AI agent context about a specific topic or page without overwhelming it with the full HTML of that page.
+
+## Documentation bundles
+
+At Expo, we support the [llms.txt](https://llmstxt.org/) initiative to provide documentation for large language models (LLMs) and apps that use them. Below is a list of documentation files available.
+
+### Site-wide bundles
+
+| Endpoint | Description | Size |
+| --- | --- | --- |
+| [/llms.txt](/llms.txt) | Index page with a list of all available documentation files. | ~94 kB |
+| [/llms-full.txt](/llms-full.txt) | Complete documentation for Expo, including Expo Router, Expo Modules API, development process, and more. | ~1.9 MB |
+
+### Section-wide bundles
+
+| Endpoint | Description | Size |
+| --- | --- | --- |
+| [/llms-eas.txt](/llms-eas.txt) | Complete documentation for Expo Application Services (EAS). | ~974 kB |
+| [/llms-sdk.txt](/llms-sdk.txt) | Complete documentation for the latest Expo SDK. | ~2.6 MB |
+
+Looking for deprecated Expo SDK versions?
+
+- [/llms-sdk-v54.0.0.txt](/llms-sdk-v54.0.0.txt): Documentation for the Expo SDK v54.0.0
+
+- [/llms-sdk-v53.0.0.txt](/llms-sdk-v53.0.0.txt): Documentation for the Expo SDK v53.0.0
+
+- [/llms-sdk-v52.0.0.txt](/llms-sdk-v52.0.0.txt): Documentation for the Expo SDK v52.0.0
+
+- [/llms-sdk-v51.0.0.txt](/llms-sdk-v51.0.0.txt): Documentation for the Expo SDK v51.0.0
+
+***
+
+# Tools for development
