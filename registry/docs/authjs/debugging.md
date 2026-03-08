@@ -1,0 +1,48 @@
+GuidesDebugging
+
+# Debugging
+
+Debugging Auth.js starts with enabling the `debug` option in your main Auth.js configuration.
+
+./auth.ts
+
+```
+import NextAuth from "next-auth"
+ 
+export const { handlers, auth } = NextAuth({
+  debug: true,
+})
+```
+
+This will use the `console` methods to log out many details about the authentication process, including requests, responses, errors, and database requests and responses.
+
+## Logging[](#logging)
+
+You can customize the logging output by providing your own logger. This is useful if you want to send logs to a logging service, or if you want to customize the format of the logs.
+
+./auth.ts
+
+```
+import log from "logging-service"
+export const { handlers, auth } = NextAuth({
+  logger: {
+    error(code, ...message) {
+      log.error(code, message)
+    },
+    warn(code, ...message) {
+      log.warn(code, message)
+    },
+    debug(code, ...message) {
+      log.debug(code, message)
+    },
+  },
+})
+```
+
+⚠️
+
+Enabling the `debug` option in production can lead to sensitive information being saved in your logs. Make sure to sanitize any sensitive information.
+
+When `logger` options are set, the `debug` option is ignored
+
+[Testing](/guides/testing "Testing")

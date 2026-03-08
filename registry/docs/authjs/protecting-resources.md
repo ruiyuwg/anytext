@@ -1,0 +1,286 @@
+[Getting Started](/getting-started "Getting Started")[Session Management](/getting-started/session-management/login "Session Management")Protecting Resources
+
+# Protecting Resources
+
+Protecting routes can be done generally by checking for the session and taking an action if an active session is not found, like redirecting the user to the login page or simply returning a `401: Unauthenticated` response.
+
+### Pages[](#pages)
+
+Next.jsNext.js (Client)QwikSvelteKitExpress
+
+You can use the `auth` function returned from `NextAuth()` and exported from your `auth.ts` or `auth.js` configuration file to get the session object.
+
+app/server/page.tsx
+
+```
+import { auth } from "@/auth"
+ 
+export default async function Page() {
+  const session = await auth()
+  if (!session) return <div>Not authenticated</div>
+ 
+  return (
+    <div>
+      <pre>{JSON.stringify(session, null, 2)}</pre>
+    </div>
+  )
+}
+```
+
+To protect a page in the Next.js Pages router, we can use `auth` in `getServerSideProps` to return the `session` to the page as props.
+
+./pages/dashboard.tsx
+
+```
+import { auth } from "../auth"
+ 
+export default function Dashboard({ session }) {
+  if (!session.user) return <div>Not authenticated</div>
+ 
+  return <div>{JSON.stringify(session, null, 2)}</div>
+}
+ 
+export async function getServerSideProps(ctx) {
+  const session = await auth(ctx)
+ 
+  return {
+    props: {
+      session,
+    },
+  }
+}
+```
+
+To access the session client-side using `useSession()`. Make sure `<SessionProvider />` is wrapping your application.
+
+./pages/\_app.tsx
+
+```
+import type { AppProps } from "next/app"
+import { SessionProvider } from "next-auth/react"
+ 
+export default function MyApp({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppProps) {
+  return (
+    <SessionProvider session={session}>
+      <Component {...pageProps} />;
+    </SessionProvider>
+  )
+}
+```
+
+Inside component$ you can use `useSession` loader to retrieve the current sessionStorage.
+
+```
+import { component$ } from '@builder.io/qwik';
+import { useSession } from '~/routes/plugin@auth';
+ 
+export default component$(() => {
+  const session = useSession();
+  return <p>{session.value?.user?.email}</p>;
+});
+```
+
+In SvelteKit, you can leverage the `event.locals.auth()` function that is put there by the Auth.js `handle` function we’re importing and using in `hooks.server.ts`.
+
+By calling `event.locals.auth()` server-side, we can check for the session in any `+page.server.ts` or `+layout.server.ts` file and either allow the request on, or redirect to the `/login` page, for example.
+
+src/routes/dashboard/+page.server.ts
+
+```
+import { fail, redirect } from "@sveltejs/kit"
+import type { PageServerLoad } from "./$types"
+ 
+export const load: PageServerLoad = async (event) => {
+  const session = await event.locals.auth()
+ 
+  if (!session?.user?.userId) {
+    return fail(401, { type: "error", error: "Unauthenticated" })
+  }
+ 
+  return {
+    session,
+  }
+}
+```
+
+You can protect routes by checking for the presence of a session and then redirect to a login page if the session is not present. This can either be done per route, or for a group of routes using a middleware such as the following:
+
+lib.ts
+
+```
+import { getSession } from "@auth/express"
+ 
+export async function authenticatedUser(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  const session = res.locals.session ?? (await getSession(req, authConfig))
+  if (!session?.user) {
+    res.redirect("/login")
+  } else {
+    next()
+  }
+}
+```
+
+app.ts
+
+```
+import { authenticatedUser } from "./lib.ts"
+ 
+// This route is protected
+app.get("/profile", authenticatedUser, (req, res) => {
+  const { session } = res.locals
+  res.render("profile", { user: session?.user })
+})
+ 
+// This route is not protected
+app.get("/", (req, res) => {
+  res.render("index")
+})
+ 
+app.use("/", root)
+```
+
+### API Routes[](#api-routes)
+
+Protecting API routes in the various frameworks can also be done with the `auth` export.
+
+Next.jsNext.js (Client)QwikSvelteKitExpress
+
+In Next.js, you can use the `auth` function to wrap an API route handler. The request parameter will then have an `auth` key on it which you can check for a valid session.
+
+./app/api/admin/route.ts
+
+```
+import { auth } from "@/auth"
+import { NextResponse } from "next/server"
+ 
+export const GET = auth(function GET(req) {
+  if (req.auth) return NextResponse.json(req.auth)
+  return NextResponse.json({ message: "Not authenticated" }, { status: 401 })
+})
+```
+
+./pages/api/admin.ts
+
+```
+// TODO: Update once server-side API methods are implemented for pages router again
+ 
+// import { auth } from "../../auth"
+// import { getSession } from "next-auth/react"
+import { NextApiRequest, NextApiResponse } from "next"
+ 
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  // const session = await auth(req, res)
+  // const session = await getSession(req, res)
+  const url = `${req.headers["x-forwarded-proto"]}://${req.headers.host}/api/auth/session`
+ 
+  const sessionRes = await fetch(url)
+  const session = await sessionRes.json()
+ 
+  if (!session.user) {
+    return res.status(401).json({ message: "Not authenticated" })
+  }
+ 
+  return res.json({ data: "Protected data" })
+}
+```
+
+Session data can be accessed via the route event.sharedMap. So a route can be protected and redirect using something like this located in a layout.tsx or page index.tsx:
+
+```
+export const onRequest: RequestHandler = (event) => {
+  const session = event.sharedMap.get("session")
+  if (!session || new Date(session.expires) < new Date()) {
+    throw event.redirect(302, `/`)
+  }
+}
+```
+
+API Routes in SvelteKit work like any other server-side file in Auth.js in SvelteKit, you can access the session by calling `event.locals.auth()` in the `+server.ts` files as well.
+
+src/routes/api/users/+server.ts
+
+```
+import type { RequestHandler } from "./$types"
+ 
+export const GET: RequestHandler = async (event) => {
+  const session = await event.locals.auth()
+ 
+  if (!session?.user?.userId) {
+    return new Response(null, { status: 401, statusText: "Unauthorized" })
+  }
+}
+```
+
+API Routes are protected in the same way as any other route in Express, see [the examples above](/getting-started/session-management/protecting?framework=express#pages).
+
+### Next.js Proxy[](#nextjs-proxy)
+
+With Next.js 16+, the easiest way to protect a set of pages is using the proxy file. You can create a `proxy.ts` file in your root pages directory with the following contents.
+
+As of Next.js 16, `middleware.ts` has been renamed to `proxy.ts` and the exported function has been renamed from `middleware` to `proxy`. If you are using an older version of Next.js, use `middleware.ts` and export `auth` as `middleware` instead.
+
+proxy.ts
+
+```
+export { auth as proxy } from "@/auth"
+```
+
+Then define `authorized` callback in your `auth.ts` file. For more details check out the [reference docs](/reference/nextjs#authorized).
+
+auth.ts
+
+```
+import NextAuth from "next-auth"
+ 
+export const { auth, handlers } = NextAuth({
+  callbacks: {
+    authorized: async ({ auth }) => {
+      // Logged in users are authenticated, otherwise redirect to login page
+      return !!auth
+    },
+  },
+})
+```
+
+You can also use the `auth` method as a wrapper if you’d like to implement more logic inside the proxy.
+
+proxy.ts
+
+```
+import { auth } from "@/auth"
+ 
+export const proxy = auth((req) => {
+  if (!req.auth && req.nextUrl.pathname !== "/login") {
+    const newUrl = new URL("/login", req.nextUrl.origin)
+    return Response.redirect(newUrl)
+  }
+})
+```
+
+You can also use a regex to match multiple routes or you can negate certain routes in order to protect all remaining routes. The following example avoids running the proxy on paths such as the favicon or static images.
+
+proxy.ts
+
+```
+export const config = {
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+}
+```
+
+The proxy will protect pages as defined by the `matcher` config export. For more details about the matcher, check out the [Next.js docs](https://nextjs.org/docs/app/api-reference/file-conventions/proxy).
+
+💡
+
+You should not rely on the proxy exclusively for authorization. Always ensure that the session is verified as close to your data fetching as possible.
+
+[Get Session](/getting-started/session-management/get-session "Get Session")[Custom Pages](/getting-started/session-management/custom-pages "Custom Pages")

@@ -1,5 +1,5 @@
 {
-  "version": 68,
+  "version": 69,
   "updatedAt": "2026-03-08",
   "libraries": [
     {
@@ -7943,6 +7943,4771 @@
           ],
           "path": "astro/upgrade-astro.md",
           "tokens": 2877
+        }
+      ]
+    },
+    {
+      "id": "authjs",
+      "name": "Auth.js",
+      "description": "Authentication library for Next.js, SvelteKit, Express, and other frameworks with OAuth, credentials, and database adapters",
+      "version": "5",
+      "topics": [
+        {
+          "id": "about-auth-js",
+          "title": "About Auth.js",
+          "description": "ConceptsOverview",
+          "tags": [],
+          "path": "authjs/about-auth-js.md",
+          "tokens": 316
+        },
+        {
+          "id": "database-models",
+          "title": "Database models",
+          "description": "[Concepts](/concepts \"Concepts\")Database models",
+          "tags": [
+            "camelCase",
+            "snake_case",
+            "User",
+            "id",
+            "name",
+            "email",
+            "image",
+            "profile()",
+            "emailVerified",
+            "Account"
+          ],
+          "path": "authjs/database-models.md",
+          "tokens": 1145
+        },
+        {
+          "id": "oauth",
+          "title": "OAuth",
+          "description": "[Concepts](/concepts \"Concepts\")How OAuth works",
+          "tags": [],
+          "path": "authjs/oauth.md",
+          "tokens": 648
+        },
+        {
+          "id": "session-strategies",
+          "title": "Session strategies",
+          "description": "[Concepts](/concepts \"Concepts\")Session strategies",
+          "tags": [
+            "session.strategy",
+            "HttpOnly",
+            "document.cookie"
+          ],
+          "path": "authjs/session-strategies.md",
+          "tokens": 1480
+        },
+        {
+          "id": "contributors",
+          "title": "Contributors",
+          "description": "Maintaining Auth.js as an open source project is very hard work. All the core team members have regular jobs and the ...",
+          "tags": [
+            "@next-auth/*-adapter",
+            "@auth/core",
+            "next-auth@experimental",
+            "next-auth@beta",
+            "@auth/*-adapter",
+            "@auth",
+            "next-auth"
+          ],
+          "path": "authjs/contributors.md",
+          "tokens": 1435
+        },
+        {
+          "id": "what-is-auth-js",
+          "title": "What is Auth.js?",
+          "description": "Getting StartedIntroduction",
+          "tags": [
+            "next-auth@5.0.0-beta",
+            "@auth/*",
+            "next-auth@4.x.y"
+          ],
+          "path": "authjs/what-is-auth-js.md",
+          "tokens": 1006
+        },
+        {
+          "id": "azure-table-storage-adapter",
+          "title": "Azure Table Storage Adapter",
+          "description": "[Getting Started](/getting-started \"Getting Started\")AdaptersAzure Tables",
+          "tags": [
+            "auth"
+          ],
+          "path": "authjs/azure-table-storage-adapter.md",
+          "tokens": 895
+        },
+        {
+          "id": "cloudflare-d1-adapter",
+          "title": "Cloudflare D1 Adapter",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Adapters](/getting-started/adapters/azure-tables \"Adapters\")Clo...",
+          "tags": [
+            "wrangler.toml",
+            "up(env.db)",
+            "accounts",
+            "sessions",
+            "users",
+            "verification_tokens",
+            "\"\"",
+            "up()"
+          ],
+          "path": "authjs/cloudflare-d1-adapter.md",
+          "tokens": 822
+        },
+        {
+          "id": "dgraph-adapter",
+          "title": "Dgraph Adapter",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Adapters](/getting-started/adapters/azure-tables \"Adapters\")Dgraph",
+          "tags": [
+            "jwtSecret",
+            "@auth",
+            "Dgraph.Authorization",
+            "authHeader",
+            "process.env.SECRET",
+            "process.env.APP_SECRET",
+            "Header",
+            "DgraphClient",
+            "$nextAuth",
+            "ie. login, register"
+          ],
+          "path": "authjs/dgraph-adapter.md",
+          "tokens": 2458
+        },
+        {
+          "id": "drizzle-orm-adapter",
+          "title": "Drizzle ORM Adapter",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Adapters](/getting-started/adapters/azure-tables \"Adapters\")Dri...",
+          "tags": [
+            "@libsql/client",
+            "mysql2",
+            "postgres",
+            "drizzle.config.ts",
+            "drizzle-kit generate",
+            "migrate()",
+            "drizzle-kit push",
+            "DrizzleAdapter",
+            "sessionsTable",
+            "verificationTokensTable"
+          ],
+          "path": "authjs/drizzle-orm-adapter.md",
+          "tokens": 1260
+        },
+        {
+          "id": "dynamodb-adapter",
+          "title": "DynamoDB Adapter",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Adapters](/getting-started/adapters/azure-tables \"Adapters\")Dyn...",
+          "tags": [
+            "DynamoDBDocument",
+            "aws-sdk",
+            "next-auth",
+            "{ tableName: 'your-table-name' }",
+            ".env",
+            ".env.local",
+            "region",
+            "account_id",
+            "table_name",
+            "pk"
+          ],
+          "path": "authjs/dynamodb-adapter.md",
+          "tokens": 1910
+        },
+        {
+          "id": "edgedb-adapter",
+          "title": "EdgeDB Adapter",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Adapters](/getting-started/adapters/azure-tables \"Adapters\")EdgeDB",
+          "tags": [
+            "edgedb --version",
+            "Command not found",
+            "edgedb",
+            "dbschema/default.esdl",
+            "prebuild",
+            "package.json",
+            "npx @edgedb/generate edgeql-js",
+            "EDGEDB_DSN"
+          ],
+          "path": "authjs/edgedb-adapter.md",
+          "tokens": 2108
+        },
+        {
+          "id": "fauna-adapter",
+          "title": "Fauna Adapter",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Adapters](/getting-started/adapters/azure-tables \"Adapters\")Fau...",
+          "tags": [
+            "@auth/adapter-fauna@2.0.0",
+            "account_by_user_id",
+            "Account.byUserId",
+            "Shell"
+          ],
+          "path": "authjs/fauna-adapter.md",
+          "tokens": 1169
+        },
+        {
+          "id": "firebase-adapter",
+          "title": "Firebase Adapter",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Adapters](/getting-started/adapters/azure-tables \"Adapters\")Fir...",
+          "tags": [
+            "{project-id}",
+            ".gitignore",
+            "GOOGLE_APPLICATION_CREDENTIALS",
+            "AUTH_FIREBASE_PROJECT_ID",
+            "AUTH_FIREBASE_CLIENT_EMAIL",
+            "AUTH_FIREBASE_PRIVATE_KEY",
+            "initFirestore"
+          ],
+          "path": "authjs/firebase-adapter.md",
+          "tokens": 1255
+        },
+        {
+          "id": "hasura-adapter",
+          "title": "Hasura Adapter",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Adapters](/getting-started/adapters/azure-tables \"Adapters\")Hasura",
+          "tags": [],
+          "path": "authjs/hasura-adapter.md",
+          "tokens": 1105
+        },
+        {
+          "id": "kysely-adapter",
+          "title": "Kysely Adapter",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Adapters](/getting-started/adapters/azure-tables \"Adapters\")Kysely",
+          "tags": [
+            "kysely-codegen",
+            "prisma-kysely",
+            "KyselyAuth",
+            "Codegen",
+            "CamelCasePlugin"
+          ],
+          "path": "authjs/kysely-adapter.md",
+          "tokens": 1943
+        },
+        {
+          "id": "mikroorm-adapter",
+          "title": "MikroORM Adapter",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Adapters](/getting-started/adapters/azure-tables \"Adapters\")Mik...",
+          "tags": [],
+          "path": "authjs/mikroorm-adapter.md",
+          "tokens": 1176
+        },
+        {
+          "id": "mongodb-adapter",
+          "title": "MongoDB Adapter",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Adapters](/getting-started/adapters/azure-tables \"Adapters\")Mon...",
+          "tags": [
+            "MongoClient"
+          ],
+          "path": "authjs/mongodb-adapter.md",
+          "tokens": 826
+        },
+        {
+          "id": "neo4j-adapter",
+          "title": "Neo4j Adapter",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Adapters](/getting-started/adapters/azure-tables \"Adapters\")Neo4j",
+          "tags": [
+            "(:User)-[:HAS_ACCOUNT]->(:Account)",
+            "(:User)-[:HAS_SESSION]->(:Session)"
+          ],
+          "path": "authjs/neo4j-adapter.md",
+          "tokens": 1277
+        },
+        {
+          "id": "neon-adapter",
+          "title": "Neon Adapter",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Adapters](/getting-started/adapters/azure-tables \"Adapters\")Neon",
+          "tags": [],
+          "path": "authjs/neon-adapter.md",
+          "tokens": 925
+        },
+        {
+          "id": "postgresql-adapter",
+          "title": "PostgreSQL Adapter",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Adapters](/getting-started/adapters/azure-tables \"Adapters\")Pos...",
+          "tags": [
+            "@neondatabase/serverless"
+          ],
+          "path": "authjs/postgresql-adapter.md",
+          "tokens": 1552
+        },
+        {
+          "id": "pouchdb-adapter",
+          "title": "PouchDB Adapter",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Adapters](/getting-started/adapters/azure-tables \"Adapters\")Pou...",
+          "tags": [
+            "pouchdb-find"
+          ],
+          "path": "authjs/pouchdb-adapter.md",
+          "tokens": 1031
+        },
+        {
+          "id": "prisma-adapter",
+          "title": "Prisma Adapter",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Adapters](/getting-started/adapters/azure-tables \"Adapters\")Prisma",
+          "tags": [
+            "DATABASE_URL",
+            ".env",
+            "Prisma ORM",
+            "auth.ts",
+            "withAccelerate()",
+            ".$extends(withAccelerate())",
+            "@prisma/client@5.12.0",
+            "proxy.ts",
+            "5.12.0",
+            "next-auth"
+          ],
+          "path": "authjs/prisma-adapter.md",
+          "tokens": 2432
+        },
+        {
+          "id": "sequelize-adapter",
+          "title": "Sequelize Adapter",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Adapters](/getting-started/adapters/azure-tables \"Adapters\")Seq...",
+          "tags": [
+            "sequelize.sync()"
+          ],
+          "path": "authjs/sequelize-adapter.md",
+          "tokens": 1059
+        },
+        {
+          "id": "supabase-adapter",
+          "title": "Supabase Adapter",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Adapters](/getting-started/adapters/azure-tables \"Adapters\")Sup...",
+          "tags": [
+            "next_auth",
+            "schemas",
+            "config.toml",
+            "supabase",
+            "access_token",
+            "jsonwebtoken",
+            "session",
+            "supabaseAccessToken",
+            "types/next-auth.d.ts"
+          ],
+          "path": "authjs/supabase-adapter.md",
+          "tokens": 3128
+        },
+        {
+          "id": "surrealdb-adapter",
+          "title": "SurrealDB Adapter",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Adapters](/getting-started/adapters/azure-tables \"Adapters\")Sur...",
+          "tags": [
+            "SurrealDBClient",
+            "AUTH_SURREAL_URL",
+            "http",
+            "https",
+            "ws",
+            "wss"
+          ],
+          "path": "authjs/surrealdb-adapter.md",
+          "tokens": 1820
+        },
+        {
+          "id": "typeorm-adapter",
+          "title": "TypeORM Adapter",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Adapters](/getting-started/adapters/azure-tables \"Adapters\")Typ...",
+          "tags": [
+            "TypeORMAdapter",
+            "ConnectionOptions",
+            "Entity",
+            "synchronize: true",
+            "typeorm-naming-strategies",
+            "snake_case"
+          ],
+          "path": "authjs/typeorm-adapter.md",
+          "tokens": 1832
+        },
+        {
+          "id": "unstorage-adapter",
+          "title": "Unstorage Adapter",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Adapters](/getting-started/adapters/azure-tables \"Adapters\")Uns...",
+          "tags": [
+            "options",
+            "baseKeyPrefix",
+            "getItemRaw",
+            "setItemRaw",
+            "getItem",
+            "setItem",
+            "getItemRaw/setItemRaw",
+            "getItem/setItem",
+            "useItemRaw: true"
+          ],
+          "path": "authjs/unstorage-adapter.md",
+          "tokens": 1003
+        },
+        {
+          "id": "upstash-redis-adapter",
+          "title": "Upstash Redis Adapter",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Adapters](/getting-started/adapters/azure-tables \"Adapters\")Ups...",
+          "tags": [
+            "options",
+            "baseKeyPrefix"
+          ],
+          "path": "authjs/upstash-redis-adapter.md",
+          "tokens": 931
+        },
+        {
+          "id": "xata-adapter",
+          "title": "Xata Adapter",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Adapters](/getting-started/adapters/azure-tables \"Adapters\")Xata",
+          "tags": [
+            "XataClient"
+          ],
+          "path": "authjs/xata-adapter.md",
+          "tokens": 1550
+        },
+        {
+          "id": "authentication",
+          "title": "Authentication",
+          "description": "[Getting Started](/getting-started \"Getting Started\")Authentication",
+          "tags": [],
+          "path": "authjs/authentication.md",
+          "tokens": 170
+        },
+        {
+          "id": "credentials",
+          "title": "Credentials",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Authentication](/getting-started/authentication \"Authentication...",
+          "tags": [
+            "Credentials",
+            "Credentials Provider",
+            "Auth.js",
+            "providers",
+            "credentials",
+            "authorize",
+            "/api/auth/signin",
+            "/auth/signin",
+            "label",
+            "type"
+          ],
+          "path": "authjs/credentials.md",
+          "tokens": 4167
+        },
+        {
+          "id": "email-provider",
+          "title": "Email Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Authentication](/getting-started/authentication \"Authentication...",
+          "tags": [
+            "ForwardEmail",
+            "Resend",
+            "Sendgrid",
+            "nodemailer",
+            "Postmark",
+            "url",
+            "TRANSACTIONAL ID",
+            "Loops",
+            "Mailgun"
+          ],
+          "path": "authjs/email-provider.md",
+          "tokens": 8017
+        },
+        {
+          "id": "oauth",
+          "title": "OAuth",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Authentication](/getting-started/authentication \"Authentication...",
+          "tags": [],
+          "path": "authjs/oauth.md",
+          "tokens": 1070
+        },
+        {
+          "id": "webauthn-passkeys",
+          "title": "WebAuthn (Passkeys)",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Authentication](/getting-started/authentication \"Authentication...",
+          "tags": [
+            "next-auth@5.0.0-beta.8",
+            "@auth/prisma-adapter@1.3.0",
+            "node@20.0.0",
+            "@simplewebauthn/browser",
+            "@auth/prisma-adapter",
+            "Authenticator",
+            "Passkeys",
+            "/signin",
+            "next-auth",
+            "signIn"
+          ],
+          "path": "authjs/webauthn-passkeys.md",
+          "tokens": 992
+        },
+        {
+          "id": "database-adapters",
+          "title": "Database Adapters",
+          "description": "[Getting Started](/getting-started \"Getting Started\")Database",
+          "tags": [
+            "@auth/",
+            "nextauthjs/next-auth"
+          ],
+          "path": "authjs/database-adapters.md",
+          "tokens": 1030
+        },
+        {
+          "id": "deployment",
+          "title": "Deployment",
+          "description": "[Getting Started](/getting-started \"Getting Started\")Deployment",
+          "tags": [
+            "AUTH_",
+            "AUTH_SECRET",
+            "issuer",
+            "AUTH_[PROVIDER]_ID",
+            "AUTH_[PROVIDER]_SECRET",
+            "AUTH_[PROVIDER]_ISSUER",
+            "npm exec auth secret",
+            "openssl rand -base64 33",
+            "AUTH_TRUST_HOST",
+            "true"
+          ],
+          "path": "authjs/deployment.md",
+          "tokens": 2626
+        },
+        {
+          "id": "installation",
+          "title": "installation",
+          "description": "[Getting Started](/getting-started \"Getting Started\")Installation",
+          "tags": [
+            "@auth/core",
+            "AUTH_SECRET",
+            ".env",
+            ".env.local",
+            "auth.ts",
+            "/app/api/auth/[...nextauth]/route.ts",
+            "page/",
+            "middleware.ts",
+            "proxy.ts",
+            "export { auth as middleware }"
+          ],
+          "path": "authjs/installation.md",
+          "tokens": 1243
+        },
+        {
+          "id": "integrations",
+          "title": "Integrations",
+          "description": "[Getting Started](/getting-started \"Getting Started\")Integrations",
+          "tags": [
+            "@auth/*",
+            "@next-auth/*",
+            "next-auth",
+            "@auth/astro",
+            "@auth/express",
+            "@auth/fastify",
+            "@auth/nuxt",
+            "@auth/qwik",
+            "@auth/remix",
+            "@auth/solid-start"
+          ],
+          "path": "authjs/integrations.md",
+          "tokens": 848
+        },
+        {
+          "id": "migrate-to-better-auth",
+          "title": "migrate-to-better-auth",
+          "description": "[Getting Started](/getting-started \"Getting Started\")Migrate to Better Auth",
+          "tags": [
+            "auth.ts",
+            "/app/api/auth/[...nextauth]",
+            "/app/api/auth/[...all]",
+            "route.ts",
+            "name",
+            "email",
+            "emailVerified",
+            "createdAt",
+            "updatedAt",
+            "token"
+          ],
+          "path": "authjs/migrate-to-better-auth.md",
+          "tokens": 2530
+        },
+        {
+          "id": "upgrade-guide-nextauth-js-v5",
+          "title": "Upgrade Guide (NextAuth.js v5)",
+          "description": "[Getting Started](/getting-started \"Getting Started\")Migrating to v5",
+          "tags": [
+            "next-auth",
+            "next-auth@5",
+            "beta",
+            "pages/",
+            "account()",
+            "auth()",
+            "getServerSession",
+            "getSession",
+            "withAuth",
+            "getToken"
+          ],
+          "path": "authjs/upgrade-guide-nextauth-js-v5.md",
+          "tokens": 4244
+        },
+        {
+          "id": "42school-provider",
+          "title": "42School Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")Providers42 School",
+          "tags": [
+            "Account",
+            "created_at"
+          ],
+          "path": "authjs/42school-provider.md",
+          "tokens": 553
+        },
+        {
+          "id": "apple-provider",
+          "title": "Apple Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Apple",
+          "tags": [],
+          "path": "authjs/apple-provider.md",
+          "tokens": 581
+        },
+        {
+          "id": "asgardeo-provider",
+          "title": "Asgardeo Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Asg...",
+          "tags": [
+            "code"
+          ],
+          "path": "authjs/asgardeo-provider.md",
+          "tokens": 653
+        },
+        {
+          "id": "auth0-provider",
+          "title": "Auth0 Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Auth0",
+          "tags": [],
+          "path": "authjs/auth0-provider.md",
+          "tokens": 437
+        },
+        {
+          "id": "authentik-provider",
+          "title": "Authentik Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Aut...",
+          "tags": [],
+          "path": "authjs/authentik-provider.md",
+          "tokens": 659
+        },
+        {
+          "id": "azure-ad-provider",
+          "title": "Azure AD Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Azu...",
+          "tags": [
+            ".env.local",
+            "common",
+            "pages/api/auth/[...nextauth].js",
+            "AzureAD"
+          ],
+          "path": "authjs/azure-ad-provider.md",
+          "tokens": 1230
+        },
+        {
+          "id": "azure-ad-b2c-provider",
+          "title": "Azure AD B2C Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Azu...",
+          "tags": [],
+          "path": "authjs/azure-ad-b2c-provider.md",
+          "tokens": 787
+        },
+        {
+          "id": "azure-devops-provider",
+          "title": "Azure DevOps Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Azu...",
+          "tags": [
+            ".env.local",
+            "User profile (read)"
+          ],
+          "path": "authjs/azure-devops-provider.md",
+          "tokens": 1294
+        },
+        {
+          "id": "bankid-norway-provider",
+          "title": "BankID Norway Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Ban...",
+          "tags": [],
+          "path": "authjs/bankid-norway-provider.md",
+          "tokens": 577
+        },
+        {
+          "id": "battle-net-provider",
+          "title": "Battle.net Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Bat...",
+          "tags": [],
+          "path": "authjs/battle-net-provider.md",
+          "tokens": 689
+        },
+        {
+          "id": "beyond-identity-provider",
+          "title": "Beyond Identity Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Bey...",
+          "tags": [],
+          "path": "authjs/beyond-identity-provider.md",
+          "tokens": 502
+        },
+        {
+          "id": "bitbucket-provider",
+          "title": "Bitbucket Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Bit...",
+          "tags": [],
+          "path": "authjs/bitbucket-provider.md",
+          "tokens": 582
+        },
+        {
+          "id": "box-provider",
+          "title": "Box Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Box",
+          "tags": [],
+          "path": "authjs/box-provider.md",
+          "tokens": 468
+        },
+        {
+          "id": "boxyhq-saml-provider",
+          "title": "BoxyHQ SAML Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Box...",
+          "tags": [
+            "tenant",
+            "product",
+            "signIn"
+          ],
+          "path": "authjs/boxyhq-saml-provider.md",
+          "tokens": 1091
+        },
+        {
+          "id": "bungie-provider",
+          "title": "Bungie Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Bungie",
+          "tags": [
+            "localhost",
+            "127.0.0.1"
+          ],
+          "path": "authjs/bungie-provider.md",
+          "tokens": 795
+        },
+        {
+          "id": "click-up-provider",
+          "title": "Click-Up Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Cli...",
+          "tags": [],
+          "path": "authjs/click-up-provider.md",
+          "tokens": 461
+        },
+        {
+          "id": "cognito-provider",
+          "title": "Cognito Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Cog...",
+          "tags": [
+            "PoolId",
+            "App Client/Edit Hosted UI"
+          ],
+          "path": "authjs/cognito-provider.md",
+          "tokens": 654
+        },
+        {
+          "id": "coinbase-provider",
+          "title": "Coinbase Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Coi...",
+          "tags": [],
+          "path": "authjs/coinbase-provider.md",
+          "tokens": 486
+        },
+        {
+          "id": "credentials-provider",
+          "title": "Credentials Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Cre...",
+          "tags": [
+            "authorize"
+          ],
+          "path": "authjs/credentials-provider.md",
+          "tokens": 1158
+        },
+        {
+          "id": "descope-provider",
+          "title": "Descope Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Des...",
+          "tags": [
+            ".env.local",
+            "<AuthProvider>"
+          ],
+          "path": "authjs/descope-provider.md",
+          "tokens": 632
+        },
+        {
+          "id": "discord-provider",
+          "title": "Discord Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Dis...",
+          "tags": [],
+          "path": "authjs/discord-provider.md",
+          "tokens": 469
+        },
+        {
+          "id": "dribbble-provider",
+          "title": "Dribbble Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Dri...",
+          "tags": [
+            "public upload",
+            "public"
+          ],
+          "path": "authjs/dribbble-provider.md",
+          "tokens": 529
+        },
+        {
+          "id": "dropbox-provider",
+          "title": "Dropbox Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Dro...",
+          "tags": [],
+          "path": "authjs/dropbox-provider.md",
+          "tokens": 462
+        },
+        {
+          "id": "duende-identity-server-provider",
+          "title": "Duende Identity Server Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Due...",
+          "tags": [
+            "bob",
+            "alice"
+          ],
+          "path": "authjs/duende-identity-server-provider.md",
+          "tokens": 686
+        },
+        {
+          "id": "eveonline-provider",
+          "title": "EVEOnline Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Eve...",
+          "tags": [
+            "Authentication & API Access",
+            "publicData",
+            "CharacterID"
+          ],
+          "path": "authjs/eveonline-provider.md",
+          "tokens": 630
+        },
+        {
+          "id": "facebook-provider",
+          "title": "Facebook Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Fac...",
+          "tags": [
+            "clientId",
+            "clientSecret"
+          ],
+          "path": "authjs/facebook-provider.md",
+          "tokens": 570
+        },
+        {
+          "id": "faceit-provider",
+          "title": "Faceit Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Faceit",
+          "tags": [
+            "Authorization Code",
+            "openid, email, profile"
+          ],
+          "path": "authjs/faceit-provider.md",
+          "tokens": 488
+        },
+        {
+          "id": "figma-provider",
+          "title": "Figma Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Figma",
+          "tags": [],
+          "path": "authjs/figma-provider.md",
+          "tokens": 597
+        },
+        {
+          "id": "forward-email-provider",
+          "title": "Forward Email Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")For...",
+          "tags": [
+            "from",
+            "AUTH_FORWARDEMAIL_KEY",
+            "/api/auth/signin",
+            "Users",
+            "sendVerificationRequest",
+            "ForwardEmail()",
+            "sendVerificationRequest()",
+            "html()",
+            "fetch()",
+            "generateVerificationToken"
+          ],
+          "path": "authjs/forward-email-provider.md",
+          "tokens": 2571
+        },
+        {
+          "id": "foursquare-provider",
+          "title": "Foursquare Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Fou...",
+          "tags": [],
+          "path": "authjs/foursquare-provider.md",
+          "tokens": 531
+        },
+        {
+          "id": "freshbooks-provider",
+          "title": "Freshbooks Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Fre...",
+          "tags": [],
+          "path": "authjs/freshbooks-provider.md",
+          "tokens": 522
+        },
+        {
+          "id": "frontegg-provider",
+          "title": "Frontegg Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Fro...",
+          "tags": [
+            ".env.local"
+          ],
+          "path": "authjs/frontegg-provider.md",
+          "tokens": 583
+        },
+        {
+          "id": "fusion-auth",
+          "title": "Fusion Auth",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Fus...",
+          "tags": [],
+          "path": "authjs/fusion-auth.md",
+          "tokens": 968
+        },
+        {
+          "id": "github-provider",
+          "title": "GitHub Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")GitHub",
+          "tags": [],
+          "path": "authjs/github-provider.md",
+          "tokens": 553
+        },
+        {
+          "id": "gitlab-provider",
+          "title": "GitLab Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")GitLab",
+          "tags": [
+            "read_user"
+          ],
+          "path": "authjs/gitlab-provider.md",
+          "tokens": 577
+        },
+        {
+          "id": "google-provider",
+          "title": "Google Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Google",
+          "tags": [
+            "params",
+            "authorization",
+            "email_verified"
+          ],
+          "path": "authjs/google-provider.md",
+          "tokens": 952
+        },
+        {
+          "id": "hubspot-provider",
+          "title": "Hubspot Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Hub...",
+          "tags": [],
+          "path": "authjs/hubspot-provider.md",
+          "tokens": 561
+        },
+        {
+          "id": "identity-server-provider",
+          "title": "Identity Server Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Ide...",
+          "tags": [],
+          "path": "authjs/identity-server-provider.md",
+          "tokens": 541
+        },
+        {
+          "id": "instagram-provider",
+          "title": "Instagram Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Ins...",
+          "tags": [],
+          "path": "authjs/instagram-provider.md",
+          "tokens": 609
+        },
+        {
+          "id": "kakao-provider",
+          "title": "Kakao Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Kakao",
+          "tags": [],
+          "path": "authjs/kakao-provider.md",
+          "tokens": 801
+        },
+        {
+          "id": "keycloak-provider",
+          "title": "Keycloak Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Key...",
+          "tags": [
+            "openid-connect"
+          ],
+          "path": "authjs/keycloak-provider.md",
+          "tokens": 535
+        },
+        {
+          "id": "line-provider",
+          "title": "Line Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Line",
+          "tags": [],
+          "path": "authjs/line-provider.md",
+          "tokens": 596
+        },
+        {
+          "id": "linkedin-provider",
+          "title": "LinkedIn Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Lin...",
+          "tags": [],
+          "path": "authjs/linkedin-provider.md",
+          "tokens": 480
+        },
+        {
+          "id": "logto-provider",
+          "title": "Logto Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Logto",
+          "tags": [],
+          "path": "authjs/logto-provider.md",
+          "tokens": 477
+        },
+        {
+          "id": "loops-provider",
+          "title": "Loops Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Loops",
+          "tags": [
+            "AUTH_LOOPS_KEY",
+            "AUTH_LOOPS_TRANSACTIONAL_ID",
+            "url"
+          ],
+          "path": "authjs/loops-provider.md",
+          "tokens": 1068
+        },
+        {
+          "id": "mailchip-provider",
+          "title": "Mailchip Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Mai...",
+          "tags": [],
+          "path": "authjs/mailchip-provider.md",
+          "tokens": 491
+        },
+        {
+          "id": "mailgun-provider",
+          "title": "Mailgun Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Mai...",
+          "tags": [
+            "from",
+            "AUTH_MAILGUN_KEY",
+            "region: \"EU\"",
+            "/api/auth/signin",
+            "Users",
+            "sendVerificationRequest",
+            "Mailgun()",
+            "sendVerificationRequest()",
+            "html()",
+            "fetch()"
+          ],
+          "path": "authjs/mailgun-provider.md",
+          "tokens": 2662
+        },
+        {
+          "id": "mailru-provider",
+          "title": "Mailru Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Mailru",
+          "tags": [],
+          "path": "authjs/mailru-provider.md",
+          "tokens": 452
+        },
+        {
+          "id": "mastodon-provider",
+          "title": "Mastodon Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Mas...",
+          "tags": [
+            "issuer"
+          ],
+          "path": "authjs/mastodon-provider.md",
+          "tokens": 522
+        },
+        {
+          "id": "mattermost-provider",
+          "title": "Mattermost Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Mat...",
+          "tags": [
+            "issuer"
+          ],
+          "path": "authjs/mattermost-provider.md",
+          "tokens": 544
+        },
+        {
+          "id": "medium-provider",
+          "title": "Medium Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Medium",
+          "tags": [],
+          "path": "authjs/medium-provider.md",
+          "tokens": 467
+        },
+        {
+          "id": "microsoft-entra-id",
+          "title": "Microsoft Entra ID",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Mic...",
+          "tags": [
+            "AUTH_MICROSOFT_ENTRA_ID_ISSUER",
+            "web",
+            "AUTH_MICROSOFT_ENTRA_ID_ID",
+            "AUTH_MICROSOFT_ENTRA_ID_SECRET"
+          ],
+          "path": "authjs/microsoft-entra-id.md",
+          "tokens": 1432
+        },
+        {
+          "id": "naver-provider",
+          "title": "Naver Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Naver",
+          "tags": [],
+          "path": "authjs/naver-provider.md",
+          "tokens": 472
+        },
+        {
+          "id": "netlify-provider",
+          "title": "Netlify Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Net...",
+          "tags": [],
+          "path": "authjs/netlify-provider.md",
+          "tokens": 473
+        },
+        {
+          "id": "netsuite",
+          "title": "NetSuite",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Net...",
+          "tags": [
+            "next-auth@5.0.0-beta.18",
+            "http://",
+            "https",
+            "Callback URL",
+            "Redirect URI",
+            "rest_webservices",
+            "restlets",
+            "suiteanalytics_connect",
+            "clientId",
+            "clientSecret"
+          ],
+          "path": "authjs/netsuite.md",
+          "tokens": 2369
+        },
+        {
+          "id": "nextcloud-provider",
+          "title": "Nextcloud Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Nex...",
+          "tags": [],
+          "path": "authjs/nextcloud-provider.md",
+          "tokens": 735
+        },
+        {
+          "id": "nodemailer-provider",
+          "title": "Nodemailer Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Nod...",
+          "tags": [
+            "nodemailer",
+            "/api/auth/signin",
+            "Users",
+            "sendVerificationRequest",
+            "Nodemailer()",
+            "sendVerificationRequest()",
+            "html()",
+            "transport.sendMail()",
+            "generateVerificationToken",
+            "normalizeIdentifier"
+          ],
+          "path": "authjs/nodemailer-provider.md",
+          "tokens": 2977
+        },
+        {
+          "id": "notion-provider",
+          "title": "Notion Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Notion",
+          "tags": [
+            "oauth_id",
+            "oauth_secret",
+            "clientId",
+            "clientSecret"
+          ],
+          "path": "authjs/notion-provider.md",
+          "tokens": 773
+        },
+        {
+          "id": "okta-provider",
+          "title": "Okta Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Okta",
+          "tags": [],
+          "path": "authjs/okta-provider.md",
+          "tokens": 439
+        },
+        {
+          "id": "onelogin-provider",
+          "title": "OneLogin Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")One...",
+          "tags": [],
+          "path": "authjs/onelogin-provider.md",
+          "tokens": 444
+        },
+        {
+          "id": "osso-provider",
+          "title": "Osso Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Osso",
+          "tags": [
+            "issuer",
+            "demo.ossoapp.com"
+          ],
+          "path": "authjs/osso-provider.md",
+          "tokens": 641
+        },
+        {
+          "id": "osu-provider",
+          "title": "Osu Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Osu",
+          "tags": [],
+          "path": "authjs/osu-provider.md",
+          "tokens": 463
+        },
+        {
+          "id": "passage-provider",
+          "title": "Passage Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Pas...",
+          "tags": [],
+          "path": "authjs/passage-provider.md",
+          "tokens": 456
+        },
+        {
+          "id": "passkey",
+          "title": "Passkey",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Pas...",
+          "tags": [
+            "next-auth",
+            "5.0.0-beta.17",
+            "@auth/sveltekit",
+            "1.0.2",
+            "@auth/prisma-adapter",
+            "1.3.3",
+            "@auth/unstorage-adapter",
+            "2.1.0",
+            "@auth/drizzle-adapter",
+            "1.1.1"
+          ],
+          "path": "authjs/passkey.md",
+          "tokens": 1069
+        },
+        {
+          "id": "patreon-provider",
+          "title": "Patreon Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Pat...",
+          "tags": [],
+          "path": "authjs/patreon-provider.md",
+          "tokens": 484
+        },
+        {
+          "id": "pinterest-provider",
+          "title": "Pinterest Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Pin...",
+          "tags": [],
+          "path": "authjs/pinterest-provider.md",
+          "tokens": 513
+        },
+        {
+          "id": "pipedrive-provider",
+          "title": "Pipedrive Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Pip...",
+          "tags": [],
+          "path": "authjs/pipedrive-provider.md",
+          "tokens": 468
+        },
+        {
+          "id": "postmark-provider",
+          "title": "Postmark Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Pos...",
+          "tags": [
+            "from",
+            "AUTH_POSTMARK_KEY",
+            "/api/auth/signin",
+            "Users",
+            "sendVerificationRequest",
+            "Postmark()",
+            "sendVerificationRequest()",
+            "html()",
+            "fetch()",
+            "generateVerificationToken"
+          ],
+          "path": "authjs/postmark-provider.md",
+          "tokens": 2527
+        },
+        {
+          "id": "reddit-provider",
+          "title": "Reddit Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Reddit",
+          "tags": [],
+          "path": "authjs/reddit-provider.md",
+          "tokens": 622
+        },
+        {
+          "id": "resend-provider",
+          "title": "Resend Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Resend",
+          "tags": [
+            "from",
+            "AUTH_RESEND_KEY",
+            "/api/auth/signin",
+            "Users",
+            "sendVerificationRequest",
+            "Resend()",
+            "sendVerificationRequest()",
+            "html()",
+            "fetch()",
+            "generateVerificationToken"
+          ],
+          "path": "authjs/resend-provider.md",
+          "tokens": 2500
+        },
+        {
+          "id": "sailpoint-isc-provider",
+          "title": "SailPoint ISC Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Sai...",
+          "tags": [
+            "clientId",
+            "clientSecret",
+            "AUTHORIZATION_TOKEN",
+            "REFRESH_TOKEN",
+            "sp:scope:all",
+            "providers",
+            "userprofile",
+            "id",
+            "name",
+            "email"
+          ],
+          "path": "authjs/sailpoint-isc-provider.md",
+          "tokens": 1868
+        },
+        {
+          "id": "salesforce-provider",
+          "title": "Salesforce Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Sal...",
+          "tags": [],
+          "path": "authjs/salesforce-provider.md",
+          "tokens": 477
+        },
+        {
+          "id": "sendgrid-provider",
+          "title": "Sendgrid Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Sen...",
+          "tags": [
+            "from",
+            "AUTH_SENDGRID_KEY",
+            "/api/auth/signin",
+            "Users",
+            "sendVerificationRequest",
+            "Sendgrid()",
+            "sendVerificationRequest()",
+            "html()",
+            "fetch()",
+            "generateVerificationToken"
+          ],
+          "path": "authjs/sendgrid-provider.md",
+          "tokens": 2564
+        },
+        {
+          "id": "simplelogin-provider",
+          "title": "SimpleLogin Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Sim...",
+          "tags": [
+            "http[s]://localhost:*",
+            "localhost"
+          ],
+          "path": "authjs/simplelogin-provider.md",
+          "tokens": 637
+        },
+        {
+          "id": "slack-provider",
+          "title": "Slack Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Slack",
+          "tags": [
+            "AUTH_URL"
+          ],
+          "path": "authjs/slack-provider.md",
+          "tokens": 547
+        },
+        {
+          "id": "spotify-provider",
+          "title": "Spotify Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Spo...",
+          "tags": [],
+          "path": "authjs/spotify-provider.md",
+          "tokens": 476
+        },
+        {
+          "id": "strava-provider",
+          "title": "Strava Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Strava",
+          "tags": [],
+          "path": "authjs/strava-provider.md",
+          "tokens": 444
+        },
+        {
+          "id": "threads-provider",
+          "title": "Threads Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Thr...",
+          "tags": [],
+          "path": "authjs/threads-provider.md",
+          "tokens": 580
+        },
+        {
+          "id": "tiktok-provider",
+          "title": "TikTok Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Tiktok",
+          "tags": [],
+          "path": "authjs/tiktok-provider.md",
+          "tokens": 563
+        },
+        {
+          "id": "todoist-provider",
+          "title": "Todoist Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Tod...",
+          "tags": [],
+          "path": "authjs/todoist-provider.md",
+          "tokens": 466
+        },
+        {
+          "id": "trakt-provider",
+          "title": "Trakt Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Trakt",
+          "tags": [
+            "api.trakt.tv",
+            "api-staging.trakt.tv"
+          ],
+          "path": "authjs/trakt-provider.md",
+          "tokens": 533
+        },
+        {
+          "id": "twitch-provider",
+          "title": "Twitch Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Twitch",
+          "tags": [],
+          "path": "authjs/twitch-provider.md",
+          "tokens": 462
+        },
+        {
+          "id": "twitter-x-provider",
+          "title": "Twitter/X Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Twi...",
+          "tags": [
+            "version"
+          ],
+          "path": "authjs/twitter-x-provider.md",
+          "tokens": 497
+        },
+        {
+          "id": "united-effects-provider",
+          "title": "United Effects Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Uni...",
+          "tags": [
+            "issuer"
+          ],
+          "path": "authjs/united-effects-provider.md",
+          "tokens": 535
+        },
+        {
+          "id": "vipps-mobilepay-provider",
+          "title": "Vipps MobilePay Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Vip...",
+          "tags": [],
+          "path": "authjs/vipps-mobilepay-provider.md",
+          "tokens": 679
+        },
+        {
+          "id": "vk-provider",
+          "title": "VK Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Vk",
+          "tags": [],
+          "path": "authjs/vk-provider.md",
+          "tokens": 620
+        },
+        {
+          "id": "webex-provider",
+          "title": "Webex Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Webex",
+          "tags": [],
+          "path": "authjs/webex-provider.md",
+          "tokens": 557
+        },
+        {
+          "id": "wikimedia-provider",
+          "title": "Wikimedia Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Wik...",
+          "tags": [
+            "clientId",
+            "clientSecret"
+          ],
+          "path": "authjs/wikimedia-provider.md",
+          "tokens": 795
+        },
+        {
+          "id": "wordpress-provider",
+          "title": "WordPress Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Wor...",
+          "tags": [],
+          "path": "authjs/wordpress-provider.md",
+          "tokens": 461
+        },
+        {
+          "id": "workos-provider",
+          "title": "WorkOS Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")WorkOS",
+          "tags": [
+            "connection"
+          ],
+          "path": "authjs/workos-provider.md",
+          "tokens": 495
+        },
+        {
+          "id": "yandex-provider",
+          "title": "Yandex Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Yandex",
+          "tags": [],
+          "path": "authjs/yandex-provider.md",
+          "tokens": 522
+        },
+        {
+          "id": "zitadel-provider",
+          "title": "Zitadel Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Zit...",
+          "tags": [],
+          "path": "authjs/zitadel-provider.md",
+          "tokens": 682
+        },
+        {
+          "id": "zoho-provider",
+          "title": "Zoho Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Zoho",
+          "tags": [],
+          "path": "authjs/zoho-provider.md",
+          "tokens": 453
+        },
+        {
+          "id": "zoom-provider",
+          "title": "Zoom Provider",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Providers](/getting-started/providers/42-school \"Providers\")Zoom",
+          "tags": [],
+          "path": "authjs/zoom-provider.md",
+          "tokens": 438
+        },
+        {
+          "id": "custom-pages",
+          "title": "Custom Pages",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Session Management](/getting-started/session-management/login \"...",
+          "tags": [
+            "pages"
+          ],
+          "path": "authjs/custom-pages.md",
+          "tokens": 573
+        },
+        {
+          "id": "get-session",
+          "title": "Get Session",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Session Management](/getting-started/session-management/login \"...",
+          "tags": [
+            "next-auth",
+            "useSession",
+            "SessionProvider",
+            "session",
+            "useSession()",
+            "<SessionProvider />",
+            "event.sharedMap.get(\"session\")",
+            "+page.server.ts",
+            "+layout.server.ts",
+            "$page.data"
+          ],
+          "path": "authjs/get-session.md",
+          "tokens": 1274
+        },
+        {
+          "id": "handling-signin-and-signout",
+          "title": "Handling Signin and Signout",
+          "description": "[Getting Started](/getting-started \"Getting Started\")Session ManagementSignin and Signout",
+          "tags": [
+            "SignIn",
+            "@auth/sveltekit/components",
+            "/signin",
+            "signInPage",
+            "on:click",
+            "@auth/sveltekit/client",
+            "signIn",
+            "/auth/signin",
+            "/auth/signout",
+            "/[basePath]/signin"
+          ],
+          "path": "authjs/handling-signin-and-signout.md",
+          "tokens": 2790
+        },
+        {
+          "id": "protecting-resources",
+          "title": "Protecting Resources",
+          "description": "[Getting Started](/getting-started \"Getting Started\")[Session Management](/getting-started/session-management/login \"...",
+          "tags": [
+            "401: Unauthenticated",
+            "auth",
+            "NextAuth()",
+            "auth.ts",
+            "auth.js",
+            "getServerSideProps",
+            "session",
+            "useSession()",
+            "<SessionProvider />",
+            "useSession"
+          ],
+          "path": "authjs/protecting-resources.md",
+          "tokens": 2090
+        },
+        {
+          "id": "typescript",
+          "title": "TypeScript",
+          "description": "[Getting Started](/getting-started \"Getting Started\")TypeScript",
+          "tags": [
+            "next-auth",
+            "@auth/prisma-adapter",
+            "@auth/core",
+            "Session",
+            "User",
+            "interface",
+            "tsconfig.json"
+          ],
+          "path": "authjs/typescript.md",
+          "tokens": 2010
+        },
+        {
+          "id": "oauth-with-github",
+          "title": "OAuth with GitHub",
+          "description": "[Guides](/guides/debugging \"Guides\")Configuring GitHub for OAuth",
+          "tags": [
+            ".env.local",
+            "AUTH_GITHUB_ID",
+            "AUTH_GITHUB_SECRET",
+            "[origin]/api/auth/callback/[provider]",
+            "/api",
+            "http://localhost:3000"
+          ],
+          "path": "authjs/oauth-with-github.md",
+          "tokens": 1917
+        },
+        {
+          "id": "http-email",
+          "title": "HTTP Email",
+          "description": "[Guides](/guides/debugging \"Guides\")Configuring Custom HTTP Email Provider",
+          "tags": [
+            "sendVerificationRequest",
+            "email"
+          ],
+          "path": "authjs/http-email.md",
+          "tokens": 1607
+        },
+        {
+          "id": "configuring-an-oauth-provider",
+          "title": "Configuring an OAuth provider",
+          "description": "[Guides](/guides/debugging \"Guides\")Configuring OAuth providers",
+          "tags": [
+            "authorization.params.scope",
+            "authorization",
+            "scope",
+            "profile",
+            "name",
+            "email",
+            "picture",
+            "providers",
+            "basePath",
+            "/api/auth"
+          ],
+          "path": "authjs/configuring-an-oauth-provider.md",
+          "tokens": 2181
+        },
+        {
+          "id": "magic-links-with-resend",
+          "title": "Magic links with Resend",
+          "description": "[Guides](/guides/debugging \"Guides\")Configuring Resend for magic links",
+          "tags": [
+            ".env.local",
+            "AUTH_RESEND_KEY",
+            "from",
+            "http://localhost:3000"
+          ],
+          "path": "authjs/magic-links-with-resend.md",
+          "tokens": 1402
+        },
+        {
+          "id": "supporting-corporate-proxies",
+          "title": "Supporting corporate proxies",
+          "description": "[Guides](/guides/debugging \"Guides\")Supporting Corporate Proxies",
+          "tags": [
+            "fetch",
+            "undici",
+            "dispatcher",
+            "proxyAgent"
+          ],
+          "path": "authjs/supporting-corporate-proxies.md",
+          "tokens": 792
+        },
+        {
+          "id": "creating-a-database-adapter",
+          "title": "Creating a database adapter",
+          "description": "[Guides](/guides/debugging \"Guides\")Creating a Database Adapter",
+          "tags": [
+            "Adapter",
+            "profile()",
+            "createUser",
+            "getUser",
+            "getUserByAccount",
+            "updateUser",
+            "linkAccount",
+            "deleteUser",
+            "unlinkAccount",
+            "User"
+          ],
+          "path": "authjs/creating-a-database-adapter.md",
+          "tokens": 2324
+        },
+        {
+          "id": "creating-a-framework-integration",
+          "title": "Creating a Framework Integration",
+          "description": "[Guides](/guides/debugging \"Guides\")Creating a Framework Integration",
+          "tags": [
+            "@auth/core",
+            "@auth/",
+            "./packages/frameworks-template",
+            "packages/",
+            "export function ExpressAuth()",
+            "apps/examples/<framework-name>",
+            "apps/examples/express"
+          ],
+          "path": "authjs/creating-a-framework-integration.md",
+          "tokens": 781
+        },
+        {
+          "id": "debugging",
+          "title": "Debugging",
+          "description": "GuidesDebugging",
+          "tags": [
+            "debug",
+            "console",
+            "logger"
+          ],
+          "path": "authjs/debugging.md",
+          "tokens": 299
+        },
+        {
+          "id": "edge-compatibility",
+          "title": "edge-compatibility",
+          "description": "[Guides](/guides/debugging \"Guides\")Edge Compatibility",
+          "tags": [
+            "next-auth",
+            "fs",
+            "fetch",
+            "middleware.ts",
+            "proxy.ts",
+            "sessionToken",
+            "auth()",
+            "jwt",
+            "auth.ts",
+            "/app/protected/page.tsx"
+          ],
+          "path": "authjs/edge-compatibility.md",
+          "tokens": 2657
+        },
+        {
+          "id": "environment-variables",
+          "title": "Environment variables",
+          "description": "[Guides](/guides/debugging \"Guides\")Environment Variables",
+          "tags": [
+            "AUTH_SECRET",
+            "clientId",
+            "clientSecret",
+            ".env",
+            "provider"
+          ],
+          "path": "authjs/environment-variables.md",
+          "tokens": 1082
+        },
+        {
+          "id": "extending-the-session",
+          "title": "Extending the Session",
+          "description": "[Guides](/guides/debugging \"Guides\")Extending the Session",
+          "tags": [
+            "name",
+            "email",
+            "image",
+            "jwt",
+            "token.id",
+            "session",
+            "session.user.id",
+            "auth()",
+            "useSession()",
+            "user"
+          ],
+          "path": "authjs/extending-the-session.md",
+          "tokens": 952
+        },
+        {
+          "id": "integrating-with-third-party-backends",
+          "title": "Integrating with third-party backends",
+          "description": "[Guides](/guides/debugging \"Guides\")Integrating Third Party Backends",
+          "tags": [
+            "access_token",
+            "oidc-provider",
+            "account",
+            "Authorization: Bearer <>"
+          ],
+          "path": "authjs/integrating-with-third-party-backends.md",
+          "tokens": 853
+        },
+        {
+          "id": "built-in-pages",
+          "title": "Built-in Pages",
+          "description": "[Guides](/guides/debugging \"Guides\")PagesBuilt-in pages",
+          "tags": [
+            "providerId",
+            "signIn",
+            "./auth.ts"
+          ],
+          "path": "authjs/built-in-pages.md",
+          "tokens": 285
+        },
+        {
+          "id": "custom-error-page",
+          "title": "Custom error page",
+          "description": "[Guides](/guides/debugging \"Guides\")[Pages](/guides/pages/built-in-pages \"Pages\")Custom Error",
+          "tags": [
+            "/api/auth/error",
+            "app/error/page.tsx",
+            "Configuration",
+            "/auth/error?error=Configuration",
+            "AccessDenied",
+            "/auth/error?error=AccessDenied",
+            "Verification",
+            "/auth/error?error=Verification",
+            "Default",
+            "/auth/error?error=Default"
+          ],
+          "path": "authjs/custom-error-page.md",
+          "tokens": 1095
+        },
+        {
+          "id": "custom-sign-in-page",
+          "title": "Custom Sign-in Page",
+          "description": "[Guides](/guides/debugging \"Guides\")[Pages](/guides/pages/built-in-pages \"Pages\")Custom Signin",
+          "tags": [
+            "pages",
+            "provider.id",
+            "provider.name",
+            "auth.ts",
+            "providers",
+            "providerMap",
+            "/signin",
+            "signInPage",
+            "SignIn",
+            "signIn"
+          ],
+          "path": "authjs/custom-sign-in-page.md",
+          "tokens": 2027
+        },
+        {
+          "id": "custom-sign-out-page",
+          "title": "Custom sign out page",
+          "description": "[Guides](/guides/debugging \"Guides\")[Pages](/guides/pages/built-in-pages \"Pages\")Custom Signout",
+          "tags": [
+            "/signout",
+            "signOutPage",
+            "SignOut"
+          ],
+          "path": "authjs/custom-sign-out-page.md",
+          "tokens": 884
+        },
+        {
+          "id": "refresh-token-rotation",
+          "title": "refresh-token-rotation",
+          "description": "[Guides](/guides/debugging \"Guides\")Refresh Token Rotation",
+          "tags": [
+            "access_token",
+            "refresh_token",
+            "strategy: \"jwt\"",
+            "HttpOnly",
+            "expires_at",
+            "account"
+          ],
+          "path": "authjs/refresh-token-rotation.md",
+          "tokens": 2823
+        },
+        {
+          "id": "restricting-user-access-to-the-app",
+          "title": "Restricting user access to the app",
+          "description": "[Guides](/guides/debugging \"Guides\")Restricting users accessing to the app",
+          "tags": [
+            "signIn",
+            "@yourdomain.com"
+          ],
+          "path": "authjs/restricting-user-access-to-the-app.md",
+          "tokens": 279
+        },
+        {
+          "id": "role-based-access-control",
+          "title": "Role-based access control",
+          "description": "[Guides](/guides/debugging \"Guides\")Role-Based Access Control",
+          "tags": [
+            "profile()",
+            "jwt()",
+            "role",
+            "profile",
+            "user",
+            "user.role",
+            "token.role",
+            "session",
+            "jwt",
+            "auth"
+          ],
+          "path": "authjs/role-based-access-control.md",
+          "tokens": 2516
+        },
+        {
+          "id": "testing",
+          "title": "Testing",
+          "description": "[Guides](/guides/debugging \"Guides\")Testing",
+          "tags": [
+            "@playwright/test",
+            "null",
+            "Credentials",
+            "password"
+          ],
+          "path": "authjs/testing.md",
+          "tokens": 1467
+        },
+        {
+          "id": "auth-azure-tables-adapter",
+          "title": "@auth/azure-tables-adapter",
+          "description": "[API reference](/reference/overview \"API reference\")@auth/azure-tables-adapter",
+          "tags": [
+            "client",
+            "TableClient",
+            "Adapter",
+            "T",
+            "entity",
+            "GetTableEntityResponse",
+            "TableEntityResult"
+          ],
+          "path": "authjs/auth-azure-tables-adapter.md",
+          "tokens": 516
+        },
+        {
+          "id": "auth-core",
+          "title": "@auth/core",
+          "description": "[API reference](/reference/overview \"API reference\")@auth/core",
+          "tags": [
+            "@auth/core",
+            "SolidAuthConfig",
+            "session",
+            "params",
+            "account",
+            "null",
+            "Account",
+            "isNewUser",
+            "boolean",
+            "profile"
+          ],
+          "path": "authjs/auth-core.md",
+          "tokens": 7009
+        },
+        {
+          "id": "adapters",
+          "title": "adapters",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")adapters",
+          "tags": [
+            "strategy: \"jwt\"",
+            "@auth/core",
+            "@auth/core/adapters",
+            "adapter",
+            "camelCase",
+            "snake_case",
+            "access\\_token\\",
+            "refresh_token",
+            "authenticator",
+            "AdapterAuthenticator"
+          ],
+          "path": "authjs/adapters.md",
+          "tokens": 6793
+        },
+        {
+          "id": "errors",
+          "title": "errors",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")errors",
+          "tags": [
+            "signIn",
+            "false",
+            "AuthError",
+            "SignInError",
+            "Adapter",
+            "debug: true",
+            "[auth][debug]",
+            "logger.error",
+            "Error",
+            "AdapterError"
+          ],
+          "path": "authjs/errors.md",
+          "tokens": 5620
+        },
+        {
+          "id": "jwt",
+          "title": "jwt",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")jwt",
+          "tags": [
+            "AUTH_SECRET",
+            "secret",
+            "@auth/core/jwt",
+            "Record",
+            "string",
+            "unknown",
+            "JWT",
+            "key",
+            "GetTokenParamsBase",
+            "R"
+          ],
+          "path": "authjs/jwt.md",
+          "tokens": 2305
+        },
+        {
+          "id": "providers",
+          "title": "providers",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")providers",
+          "tags": [
+            "CommonProviderOptions",
+            "id",
+            "name",
+            "type",
+            "CredentialsConfig",
+            "EmailConfig",
+            "AppProvider",
+            "WebAuthnConfig",
+            "OAuth2Config",
+            "PartialIssuer"
+          ],
+          "path": "authjs/providers.md",
+          "tokens": 5727
+        },
+        {
+          "id": "providers-42-school",
+          "title": "providers/42-school",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "UserData",
+            "Record",
+            "string",
+            "any",
+            "key",
+            "alumni",
+            "anonymize_date",
+            "correction_point",
+            "created_at",
+            "displayname"
+          ],
+          "path": "authjs/providers-42-school.md",
+          "tokens": 4056
+        },
+        {
+          "id": "providers-apple",
+          "title": "providers/apple",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "user",
+            "Record",
+            "string",
+            "any",
+            "key",
+            "client_id",
+            "\"true\"",
+            "true",
+            "\"false\"",
+            "false"
+          ],
+          "path": "authjs/providers-apple.md",
+          "tokens": 2045
+        },
+        {
+          "id": "providers-asgardeo",
+          "title": "providers/asgardeo",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Record",
+            "string",
+            "any",
+            "key",
+            "code",
+            ".env",
+            "config",
+            "OIDCUserConfig",
+            "AsgardeoProfile",
+            "OIDCConfig"
+          ],
+          "path": "authjs/providers-asgardeo.md",
+          "tokens": 1004
+        },
+        {
+          "id": "providers-atlassian",
+          "title": "providers/atlassian",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Record",
+            "string",
+            "any",
+            "key",
+            ".env",
+            "options",
+            "OAuthUserConfig",
+            "AtlassianProfile",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-atlassian.md",
+          "tokens": 916
+        },
+        {
+          "id": "providers-auth0",
+          "title": "providers/auth0",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Record",
+            "string",
+            "any",
+            "key",
+            "config",
+            "OIDCUserConfig",
+            "Auth0Profile",
+            "OIDCConfig"
+          ],
+          "path": "authjs/providers-auth0.md",
+          "tokens": 1828
+        },
+        {
+          "id": "providers-authentik",
+          "title": "providers/authentik",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Record",
+            "string",
+            "any",
+            "key",
+            "P",
+            "AuthentikProfile",
+            "options",
+            "OAuthUserConfig",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-authentik.md",
+          "tokens": 946
+        },
+        {
+          "id": "providers-azure-ad",
+          "title": "providers/azure-ad",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "config",
+            "OIDCUserConfig",
+            "MicrosoftEntraIDProfile",
+            "profilePhotoSize",
+            "64",
+            "48",
+            "96",
+            "120",
+            "240",
+            "360"
+          ],
+          "path": "authjs/providers-azure-ad.md",
+          "tokens": 332
+        },
+        {
+          "id": "providers-azure-ad-b2c",
+          "title": "providers/azure-ad-b2c",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "options",
+            "OIDCUserConfig",
+            "AzureADB2CProfile",
+            "OIDCConfig"
+          ],
+          "path": "authjs/providers-azure-ad-b2c.md",
+          "tokens": 1055
+        },
+        {
+          "id": "providers-azure-devops",
+          "title": "providers/azure-devops",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Record",
+            "string",
+            "any",
+            "key",
+            "P",
+            "AzureDevOpsProfile",
+            "options",
+            "OAuthUserConfig",
+            "scope",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-azure-devops.md",
+          "tokens": 1258
+        },
+        {
+          "id": "providers-bankid-no",
+          "title": "providers/bankid-no",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "amr",
+            "login_hint",
+            "userinfo_endpoint",
+            "sub",
+            "nnin_altsub",
+            "config",
+            "OIDCUserConfig",
+            "BankIDNorwayProfile",
+            "OIDCConfig"
+          ],
+          "path": "authjs/providers-bankid-no.md",
+          "tokens": 1619
+        },
+        {
+          "id": "providers-battlenet",
+          "title": "providers/battlenet",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Record",
+            "string",
+            "any",
+            "key",
+            "P",
+            "BattleNetProfile",
+            "options",
+            "OAuthUserConfig",
+            "issuer",
+            "BattleNetIssuer"
+          ],
+          "path": "authjs/providers-battlenet.md",
+          "tokens": 890
+        },
+        {
+          "id": "providers-beyondidentity",
+          "title": "providers/beyondidentity",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "config",
+            "OIDCUserConfig",
+            "BeyondIdentityProfile",
+            "OIDCConfig"
+          ],
+          "path": "authjs/providers-beyondidentity.md",
+          "tokens": 750
+        },
+        {
+          "id": "providers-bitbucket",
+          "title": "providers/bitbucket",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "options",
+            "OAuthUserConfig",
+            "BitbucketProfile",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-bitbucket.md",
+          "tokens": 923
+        },
+        {
+          "id": "providers-box",
+          "title": "providers/box",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "options",
+            "OAuthUserConfig",
+            "Record",
+            "string",
+            "any",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-box.md",
+          "tokens": 623
+        },
+        {
+          "id": "providers-boxyhq-saml",
+          "title": "providers/boxyhq-saml",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Record",
+            "string",
+            "any",
+            "key",
+            "tenant",
+            "product",
+            "signIn",
+            "P",
+            "BoxyHQSAMLProfile",
+            "options"
+          ],
+          "path": "authjs/providers-boxyhq-saml.md",
+          "tokens": 1187
+        },
+        {
+          "id": "providers-bungie",
+          "title": "providers/bungie",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "127.0.0.1",
+            "C:/Program Files/Git/mingw64/bin",
+            "certificates",
+            "localhost.key",
+            "localhost.crt",
+            "server.js",
+            "node server.js",
+            "options",
+            "OAuthUserConfig",
+            "Record"
+          ],
+          "path": "authjs/providers-bungie.md",
+          "tokens": 1430
+        },
+        {
+          "id": "providers-click-up",
+          "title": "providers/click-up",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "config",
+            "OAuthUserConfig",
+            "ClickUpProfile",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-click-up.md",
+          "tokens": 753
+        },
+        {
+          "id": "providers-cognito",
+          "title": "providers/cognito",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Record",
+            "string",
+            "any",
+            "key",
+            "PoolId",
+            "P",
+            "CognitoProfile",
+            "options",
+            "OAuthUserConfig",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-cognito.md",
+          "tokens": 829
+        },
+        {
+          "id": "providers-coinbase",
+          "title": "providers/coinbase",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "options",
+            "OAuthUserConfig",
+            "Record",
+            "string",
+            "any",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-coinbase.md",
+          "tokens": 633
+        },
+        {
+          "id": "providers-concept2",
+          "title": "providers/concept2",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Record",
+            "string",
+            "any",
+            "key",
+            "options",
+            "OAuthUserConfig",
+            "Concept2Profile",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-concept2.md",
+          "tokens": 872
+        },
+        {
+          "id": "providers-credentials",
+          "title": "providers/credentials",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Partial",
+            "JSX.IntrinsicElements",
+            "\"input\"",
+            "Partial.about",
+            "Partial.accept",
+            "Partial.accept-charset",
+            "Partial.acceptCharset",
+            "Partial.accesskey",
+            "Partial.accessKey",
+            "Partial.action"
+          ],
+          "path": "authjs/providers-credentials.md",
+          "tokens": 23815
+        },
+        {
+          "id": "providers-descope",
+          "title": "providers/descope",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "claim",
+            "string",
+            "unknown",
+            ".env.local",
+            "config",
+            "OIDCUserConfig",
+            "DescopeProfile",
+            "OIDCConfig"
+          ],
+          "path": "authjs/providers-descope.md",
+          "tokens": 986
+        },
+        {
+          "id": "providers-discord",
+          "title": "providers/discord",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Record",
+            "string",
+            "any",
+            "key",
+            "P",
+            "DiscordProfile",
+            "options",
+            "OAuthUserConfig",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-discord.md",
+          "tokens": 1500
+        },
+        {
+          "id": "providers-dribbble",
+          "title": "providers/dribbble",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Record",
+            "string",
+            "any",
+            "key",
+            "public upload",
+            "public",
+            "P",
+            "DribbbleProfile",
+            "options",
+            "OAuthUserConfig"
+          ],
+          "path": "authjs/providers-dribbble.md",
+          "tokens": 778
+        },
+        {
+          "id": "providers-dropbox",
+          "title": "providers/dropbox",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "options",
+            "OAuthUserConfig",
+            "Record",
+            "string",
+            "any",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-dropbox.md",
+          "tokens": 618
+        },
+        {
+          "id": "providers-duende-identity-server6",
+          "title": "providers/duende-identity-server6",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Record",
+            "string",
+            "any",
+            "key",
+            "P",
+            "DuendeISUser",
+            "options",
+            "OAuthUserConfig",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-duende-identity-server6.md",
+          "tokens": 902
+        },
+        {
+          "id": "providers-email",
+          "title": "providers/email",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "CommonProviderOptions",
+            "NodemailerConfig",
+            "Awaitable",
+            "string",
+            "id",
+            "name",
+            "identifier",
+            "params",
+            "void",
+            "type"
+          ],
+          "path": "authjs/providers-email.md",
+          "tokens": 1055
+        },
+        {
+          "id": "providers-eventbrite",
+          "title": "providers/eventbrite",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Record",
+            "string",
+            "any",
+            "key",
+            "P",
+            "EventbriteProfile",
+            "config",
+            "OAuthUserConfig",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-eventbrite.md",
+          "tokens": 929
+        },
+        {
+          "id": "providers-eveonline",
+          "title": "providers/eveonline",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Record",
+            "string",
+            "any",
+            "key",
+            "Authentication Only",
+            "CharacterID",
+            "P",
+            "EVEOnlineProfile",
+            "options",
+            "OAuthUserConfig"
+          ],
+          "path": "authjs/providers-eveonline.md",
+          "tokens": 885
+        },
+        {
+          "id": "providers-facebook",
+          "title": "providers/facebook",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Record",
+            "string",
+            "any",
+            "key",
+            "P",
+            "FacebookProfile",
+            "options",
+            "OAuthUserConfig",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-facebook.md",
+          "tokens": 748
+        },
+        {
+          "id": "providers-faceit",
+          "title": "providers/faceit",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "options",
+            "OAuthUserConfig",
+            "Record",
+            "string",
+            "any",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-faceit.md",
+          "tokens": 630
+        },
+        {
+          "id": "providers-figma",
+          "title": "providers/figma",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "options",
+            "OAuthUserConfig",
+            "FigmaProfile",
+            "OAuth2Config"
+          ],
+          "path": "authjs/providers-figma.md",
+          "tokens": 567
+        },
+        {
+          "id": "providers-forwardemail",
+          "title": "providers/forwardemail",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "config",
+            "EmailUserConfig",
+            "EmailConfig"
+          ],
+          "path": "authjs/providers-forwardemail.md",
+          "tokens": 142
+        },
+        {
+          "id": "providers-foursquare",
+          "title": "providers/foursquare",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "options",
+            "OAuthUserConfig",
+            "Record",
+            "string",
+            "any",
+            "apiVersion",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-foursquare.md",
+          "tokens": 674
+        },
+        {
+          "id": "providers-freshbooks",
+          "title": "providers/freshbooks",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "options",
+            "OAuthUserConfig",
+            "Record",
+            "string",
+            "any",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-freshbooks.md",
+          "tokens": 631
+        },
+        {
+          "id": "providers-frontegg",
+          "title": "providers/frontegg",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "claim",
+            "string",
+            "unknown",
+            ".env.local",
+            "options",
+            "OIDCUserConfig",
+            "FronteggProfile",
+            "OIDCConfig"
+          ],
+          "path": "authjs/providers-frontegg.md",
+          "tokens": 933
+        },
+        {
+          "id": "providers-fusionauth",
+          "title": "providers/fusionauth",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Record",
+            "string",
+            "any",
+            "key",
+            "P",
+            "FusionAuthProfile",
+            "options",
+            "OAuthUserConfig",
+            "tenantId",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-fusionauth.md",
+          "tokens": 2478
+        },
+        {
+          "id": "providers-github",
+          "title": "providers/github",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "claim",
+            "string",
+            "unknown",
+            "config",
+            "OAuthUserConfig",
+            "GitHubProfile",
+            "enterprise",
+            "baseUrl",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-github.md",
+          "tokens": 1580
+        },
+        {
+          "id": "providers-gitlab",
+          "title": "providers/gitlab",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Record",
+            "string",
+            "any",
+            "key",
+            "read_user",
+            "P",
+            "GitLabProfile",
+            "options",
+            "OAuthUserConfig",
+            "baseUrl"
+          ],
+          "path": "authjs/providers-gitlab.md",
+          "tokens": 1367
+        },
+        {
+          "id": "providers-google",
+          "title": "providers/google",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Record",
+            "string",
+            "any",
+            "key",
+            "params",
+            "authorization",
+            "email_verified",
+            "P",
+            "GoogleProfile",
+            "options"
+          ],
+          "path": "authjs/providers-google.md",
+          "tokens": 1329
+        },
+        {
+          "id": "providers-hubspot",
+          "title": "providers/hubspot",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "P",
+            "HubSpotProfile",
+            "options",
+            "OAuthUserConfig",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-hubspot.md",
+          "tokens": 722
+        },
+        {
+          "id": "providers-huggingface",
+          "title": "providers/huggingface",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "read-billing",
+            "openid",
+            "profile",
+            "email",
+            "read-repos",
+            "write-repos",
+            "manage-repos",
+            "write-discussions",
+            "inference-api",
+            "webhooks"
+          ],
+          "path": "authjs/providers-huggingface.md",
+          "tokens": 1806
+        },
+        {
+          "id": "providers-identity-server4",
+          "title": "providers/identity-server4",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "options",
+            "OAuthUserConfig",
+            "Record",
+            "string",
+            "any",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-identity-server4.md",
+          "tokens": 697
+        },
+        {
+          "id": "providers-instagram",
+          "title": "providers/instagram",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "config",
+            "OAuthUserConfig",
+            "Record",
+            "string",
+            "any",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-instagram.md",
+          "tokens": 760
+        },
+        {
+          "id": "providers-kakao",
+          "title": "providers/kakao",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Record",
+            "string",
+            "any",
+            "key",
+            "P",
+            "KakaoProfile",
+            "options",
+            "OAuthUserConfig",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-kakao.md",
+          "tokens": 2345
+        },
+        {
+          "id": "providers-keycloak",
+          "title": "providers/keycloak",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Record",
+            "string",
+            "any",
+            "key",
+            "P",
+            "KeycloakProfile",
+            "options",
+            "OIDCUserConfig",
+            "OIDCConfig"
+          ],
+          "path": "authjs/providers-keycloak.md",
+          "tokens": 984
+        },
+        {
+          "id": "providers-kinde",
+          "title": "providers/kinde",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Record",
+            "string",
+            "any",
+            "key",
+            "config",
+            "OIDCUserConfig",
+            "KindeProfile",
+            "OIDCConfig"
+          ],
+          "path": "authjs/providers-kinde.md",
+          "tokens": 771
+        },
+        {
+          "id": "providers-line",
+          "title": "providers/line",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Record",
+            "string",
+            "any",
+            "key",
+            "P",
+            "LineProfile",
+            "options",
+            "OAuthUserConfig",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-line.md",
+          "tokens": 899
+        },
+        {
+          "id": "providers-linkedin",
+          "title": "providers/linkedin",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Record",
+            "string",
+            "any",
+            "key",
+            "P",
+            "LinkedInProfile",
+            "options",
+            "OIDCUserConfig",
+            "OIDCConfig"
+          ],
+          "path": "authjs/providers-linkedin.md",
+          "tokens": 851
+        },
+        {
+          "id": "providers-logto",
+          "title": "providers/logto",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "claim",
+            "string",
+            "unknown",
+            "options",
+            "OIDCUserConfig",
+            "LogtoProfile",
+            "OIDCConfig"
+          ],
+          "path": "authjs/providers-logto.md",
+          "tokens": 1030
+        },
+        {
+          "id": "providers-loops",
+          "title": "providers/loops",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Omit",
+            "EmailConfig",
+            "\"sendVerificationRequest\"",
+            "\"options\"",
+            "Omit.apiKey",
+            "Omit.from",
+            "Awaitable",
+            "string",
+            "Omit.generateVerificationToken",
+            "Omit.id"
+          ],
+          "path": "authjs/providers-loops.md",
+          "tokens": 858
+        },
+        {
+          "id": "providers-mailchimp",
+          "title": "providers/mailchimp",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "config",
+            "OAuthUserConfig",
+            "Record",
+            "string",
+            "any",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-mailchimp.md",
+          "tokens": 644
+        },
+        {
+          "id": "providers-mailgun",
+          "title": "providers/mailgun",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "config",
+            "EmailUserConfig",
+            "region",
+            "\"US\"",
+            "\"EU\"",
+            "EmailConfig"
+          ],
+          "path": "authjs/providers-mailgun.md",
+          "tokens": 403
+        },
+        {
+          "id": "providers-mailru",
+          "title": "providers/mailru",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "config",
+            "OAuthUserConfig",
+            "Record",
+            "string",
+            "any",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-mailru.md",
+          "tokens": 603
+        },
+        {
+          "id": "providers-mastodon",
+          "title": "providers/mastodon",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Record",
+            "string",
+            "any",
+            "key",
+            "issuer",
+            "P",
+            "MastodonProfile",
+            "options",
+            "OAuthUserConfig",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-mastodon.md",
+          "tokens": 962
+        },
+        {
+          "id": "providers-mattermost",
+          "title": "providers/mattermost",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "issuer",
+            "P",
+            "MattermostProfile",
+            "config",
+            "OAuthUserConfig",
+            "string",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-mattermost.md",
+          "tokens": 1761
+        },
+        {
+          "id": "providers-medium",
+          "title": "providers/medium",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "config",
+            "OAuthUserConfig",
+            "Record",
+            "string",
+            "any",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-medium.md",
+          "tokens": 614
+        },
+        {
+          "id": "providers-microsoft-entra-id",
+          "title": "providers/microsoft-entra-id",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "0",
+            "1",
+            "xms_cc",
+            "/authorize",
+            "/token",
+            "id_tokens",
+            "email",
+            "\"family_name\":\"Miller\"",
+            "profile",
+            "\"given_name\": \"Frank\""
+          ],
+          "path": "authjs/providers-microsoft-entra-id.md",
+          "tokens": 4933
+        },
+        {
+          "id": "providers-naver",
+          "title": "providers/naver",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Record",
+            "string",
+            "any",
+            "key",
+            "P",
+            "NaverProfile",
+            "options",
+            "OAuthUserConfig",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-naver.md",
+          "tokens": 938
+        },
+        {
+          "id": "providers-netlify",
+          "title": "providers/netlify",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "config",
+            "OAuthUserConfig",
+            "Record",
+            "string",
+            "any",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-netlify.md",
+          "tokens": 629
+        },
+        {
+          "id": "providers-netsuite",
+          "title": "providers/netsuite",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Callback URL",
+            "Redirect URI",
+            "rest_webservices",
+            "restlets",
+            "suiteanalytics_connect",
+            "clientId",
+            "clientSecret",
+            "https",
+            "userinfo",
+            "N/runtime"
+          ],
+          "path": "authjs/providers-netsuite.md",
+          "tokens": 2416
+        },
+        {
+          "id": "providers-nextcloud",
+          "title": "providers/nextcloud",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "/ocs/v1.php/cloud/users/",
+            "Record",
+            "string",
+            "any",
+            "key",
+            "options",
+            "OAuthUserConfig",
+            "NextcloudProfile",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-nextcloud.md",
+          "tokens": 1359
+        },
+        {
+          "id": "providers-nodemailer",
+          "title": "providers/nodemailer",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "EmailConfig",
+            "apiKey",
+            "from",
+            "Awaitable",
+            "string",
+            "generateVerificationToken",
+            "id",
+            "maxAge",
+            "name",
+            "identifier"
+          ],
+          "path": "authjs/providers-nodemailer.md",
+          "tokens": 1136
+        },
+        {
+          "id": "providers-notion",
+          "title": "providers/notion",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Record",
+            "string",
+            "any",
+            "key",
+            "oauth_id",
+            "oauth_secret",
+            "clientId",
+            "clientSecret",
+            "P",
+            "NotionProfile"
+          ],
+          "path": "authjs/providers-notion.md",
+          "tokens": 1189
+        },
+        {
+          "id": "providers-okta",
+          "title": "providers/okta",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Record",
+            "string",
+            "any",
+            "key",
+            "P",
+            "OktaProfile",
+            "options",
+            "OAuthUserConfig",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-okta.md",
+          "tokens": 1047
+        },
+        {
+          "id": "providers-onelogin",
+          "title": "providers/onelogin",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "config",
+            "OAuthUserConfig",
+            "Record",
+            "string",
+            "any",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-onelogin.md",
+          "tokens": 607
+        },
+        {
+          "id": "providers-ory-hydra",
+          "title": "providers/ory-hydra",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Record",
+            "string",
+            "any",
+            "key",
+            "P",
+            "OryHydraProfile",
+            "options",
+            "OIDCUserConfig",
+            "OIDCConfig"
+          ],
+          "path": "authjs/providers-ory-hydra.md",
+          "tokens": 781
+        },
+        {
+          "id": "providers-osso",
+          "title": "providers/osso",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "issuer",
+            "demo.ossoapp.com",
+            "config",
+            "OAuthUserConfig",
+            "Record",
+            "string",
+            "any",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-osso.md",
+          "tokens": 965
+        },
+        {
+          "id": "providers-osu",
+          "title": "providers/osu",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "OsuUserCompact",
+            "Record",
+            "string",
+            "any",
+            "key",
+            "avatar_url",
+            "country_code",
+            "default_group",
+            "id",
+            "is_active"
+          ],
+          "path": "authjs/providers-osu.md",
+          "tokens": 1922
+        },
+        {
+          "id": "providers-passage",
+          "title": "providers/passage",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "config",
+            "OAuthUserConfig",
+            "PassageProfile",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-passage.md",
+          "tokens": 865
+        },
+        {
+          "id": "providers-passkey",
+          "title": "providers/passkey",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "config",
+            "Partial",
+            "WebAuthnConfig"
+          ],
+          "path": "authjs/providers-passkey.md",
+          "tokens": 695
+        },
+        {
+          "id": "providers-patreon",
+          "title": "providers/patreon",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Record",
+            "string",
+            "any",
+            "key",
+            "P",
+            "PatreonProfile",
+            "options",
+            "OAuthUserConfig",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-patreon.md",
+          "tokens": 728
+        },
+        {
+          "id": "providers-ping-id",
+          "title": "providers/ping-id",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Record",
+            "string",
+            "any",
+            "key",
+            "options",
+            "OIDCUserConfig",
+            "PingProfile",
+            "OIDCConfig"
+          ],
+          "path": "authjs/providers-ping-id.md",
+          "tokens": 689
+        },
+        {
+          "id": "providers-pinterest",
+          "title": "providers/pinterest",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Record",
+            "string",
+            "any",
+            "key",
+            "P",
+            "PinterestProfile",
+            "options",
+            "OAuthUserConfig",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-pinterest.md",
+          "tokens": 774
+        },
+        {
+          "id": "providers-pipedrive",
+          "title": "providers/pipedrive",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Record",
+            "string",
+            "any",
+            "key",
+            "P",
+            "PipedriveProfile",
+            "options",
+            "OAuthUserConfig",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-pipedrive.md",
+          "tokens": 1374
+        },
+        {
+          "id": "providers-postmark",
+          "title": "providers/postmark",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "config",
+            "EmailUserConfig",
+            "EmailConfig"
+          ],
+          "path": "authjs/providers-postmark.md",
+          "tokens": 146
+        },
+        {
+          "id": "providers-provider-types",
+          "title": "providers/provider-types",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [],
+          "path": "authjs/providers-provider-types.md",
+          "tokens": 488
+        },
+        {
+          "id": "providers-reddit",
+          "title": "providers/reddit",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "config",
+            "OAuthUserConfig",
+            "Record",
+            "string",
+            "any",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-reddit.md",
+          "tokens": 742
+        },
+        {
+          "id": "providers-resend",
+          "title": "providers/resend",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "config",
+            "EmailUserConfig",
+            "EmailConfig"
+          ],
+          "path": "authjs/providers-resend.md",
+          "tokens": 136
+        },
+        {
+          "id": "providers-roblox",
+          "title": "providers/roblox",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Record",
+            "string",
+            "any",
+            "key",
+            "options",
+            "OIDCUserConfig",
+            "RobloxProfile",
+            "OIDCConfig"
+          ],
+          "path": "authjs/providers-roblox.md",
+          "tokens": 692
+        },
+        {
+          "id": "providers-salesforce",
+          "title": "providers/salesforce",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Record",
+            "string",
+            "any",
+            "key",
+            "options",
+            "OIDCUserConfig",
+            "SalesforceProfile",
+            "OIDCConfig"
+          ],
+          "path": "authjs/providers-salesforce.md",
+          "tokens": 654
+        },
+        {
+          "id": "providers-sendgrid",
+          "title": "providers/sendgrid",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "config",
+            "EmailUserConfig",
+            "EmailConfig"
+          ],
+          "path": "authjs/providers-sendgrid.md",
+          "tokens": 144
+        },
+        {
+          "id": "providers-simplelogin",
+          "title": "providers/simplelogin",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "http[s]://localhost:*",
+            "localhost",
+            "P",
+            "SimpleLoginProfile",
+            "options",
+            "OAuthUserConfig",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-simplelogin.md",
+          "tokens": 859
+        },
+        {
+          "id": "providers-slack",
+          "title": "providers/slack",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Record",
+            "string",
+            "any",
+            "key",
+            "NEXTAUTH_URL",
+            "P",
+            "SlackProfile",
+            "options",
+            "OAuthUserConfig",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-slack.md",
+          "tokens": 1658
+        },
+        {
+          "id": "providers-spotify",
+          "title": "providers/spotify",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Record",
+            "string",
+            "any",
+            "key",
+            "P",
+            "SpotifyProfile",
+            "options",
+            "OAuthUserConfig",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-spotify.md",
+          "tokens": 754
+        },
+        {
+          "id": "providers-strava",
+          "title": "providers/strava",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Record",
+            "string",
+            "any",
+            "key",
+            "P",
+            "StravaProfile",
+            "options",
+            "OAuthUserConfig",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-strava.md",
+          "tokens": 688
+        },
+        {
+          "id": "providers-threads",
+          "title": "providers/threads",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "fields=threads_biography",
+            "fields=threads_profile_picture_url",
+            "fields=username",
+            "config",
+            "OAuthUserConfig",
+            "ThreadsProfile",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-threads.md",
+          "tokens": 1018
+        },
+        {
+          "id": "providers-tiktok",
+          "title": "providers/tiktok",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "fields=avatar_url_100",
+            "fields=avatar_url",
+            "fields=bio_description",
+            "fields=display_name",
+            "fields=follower_count",
+            "fields=following_count",
+            "fields=is_verified",
+            "fields=likes_count",
+            "fields=open_id",
+            "fields=profile_deep_link"
+          ],
+          "path": "authjs/providers-tiktok.md",
+          "tokens": 2449
+        },
+        {
+          "id": "providers-todoist",
+          "title": "providers/todoist",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "P",
+            "TodoistProfile",
+            "options",
+            "OAuthUserConfig",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-todoist.md",
+          "tokens": 589
+        },
+        {
+          "id": "providers-trakt",
+          "title": "providers/trakt",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Record",
+            "string",
+            "any",
+            "key",
+            "api.trakt.tv",
+            "api-staging.trakt.tv",
+            "P",
+            "TraktUser",
+            "options",
+            "OAuthUserConfig"
+          ],
+          "path": "authjs/providers-trakt.md",
+          "tokens": 965
+        },
+        {
+          "id": "providers-twitch",
+          "title": "providers/twitch",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Record",
+            "string",
+            "any",
+            "key",
+            "config",
+            "OIDCUserConfig",
+            "TwitchProfile",
+            "OIDCConfig"
+          ],
+          "path": "authjs/providers-twitch.md",
+          "tokens": 710
+        },
+        {
+          "id": "providers-twitter",
+          "title": "providers/twitter",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "claims",
+            "string",
+            "unknown",
+            "user.fields=description",
+            "user.fields=entities",
+            "user.fields=location",
+            "includes.tweets",
+            "expansions=pinned_tweet_id",
+            "user.fields=url",
+            "user.fields=verified"
+          ],
+          "path": "authjs/providers-twitter.md",
+          "tokens": 2010
+        },
+        {
+          "id": "providers-united-effects",
+          "title": "providers/united-effects",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Record",
+            "string",
+            "any",
+            "key",
+            "issuer",
+            "P",
+            "UnitedEffectsProfile",
+            "options",
+            "OAuthUserConfig",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-united-effects.md",
+          "tokens": 810
+        },
+        {
+          "id": "providers-vipps",
+          "title": "providers/vipps",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Record",
+            "string",
+            "any",
+            "key",
+            "options",
+            "OIDCUserConfig",
+            "VippsProfile",
+            "OIDCConfig"
+          ],
+          "path": "authjs/providers-vipps.md",
+          "tokens": 1001
+        },
+        {
+          "id": "providers-vk",
+          "title": "providers/vk",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "P",
+            "Record",
+            "string",
+            "any",
+            "VkProfile",
+            "options",
+            "OAuthUserConfig",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-vk.md",
+          "tokens": 5741
+        },
+        {
+          "id": "providers-webauthn",
+          "title": "providers/webauthn",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "CommonProviderOptions",
+            "true",
+            "options",
+            "InternalOptions",
+            "\"webauthn\"",
+            "request",
+            "RequestInternal",
+            "RelayingParty",
+            "exists",
+            "false"
+          ],
+          "path": "authjs/providers-webauthn.md",
+          "tokens": 2652
+        },
+        {
+          "id": "providers-webex",
+          "title": "providers/webex",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Record",
+            "string",
+            "any",
+            "key",
+            "P",
+            "WebexProfile",
+            "config",
+            "OAuthUserConfig",
+            "apiBaseUrl",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-webex.md",
+          "tokens": 808
+        },
+        {
+          "id": "providers-wechat",
+          "title": "providers/wechat",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "claim",
+            "string",
+            "unknown",
+            "options",
+            "OAuthUserConfig",
+            "WeChatProfile",
+            "platformType",
+            "\"OfficialAccount\"",
+            "\"WebsiteApp\"",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-wechat.md",
+          "tokens": 904
+        },
+        {
+          "id": "providers-wikimedia",
+          "title": "providers/wikimedia",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Record",
+            "string",
+            "any",
+            "key",
+            "clientId",
+            "clientSecret",
+            "P",
+            "WikimediaProfile",
+            "options",
+            "OAuthUserConfig"
+          ],
+          "path": "authjs/providers-wikimedia.md",
+          "tokens": 1798
+        },
+        {
+          "id": "providers-wordpress",
+          "title": "providers/wordpress",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "config",
+            "OAuthUserConfig",
+            "Record",
+            "string",
+            "any",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-wordpress.md",
+          "tokens": 614
+        },
+        {
+          "id": "providers-workos",
+          "title": "providers/workos",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Record",
+            "string",
+            "any",
+            "key",
+            "pages",
+            "authorizationParams",
+            "signIn",
+            "P",
+            "WorkOSProfile",
+            "options"
+          ],
+          "path": "authjs/providers-workos.md",
+          "tokens": 1417
+        },
+        {
+          "id": "providers-yandex",
+          "title": "providers/yandex",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "0000-12-23",
+            "null",
+            "default_avatar_id",
+            "client_id",
+            "user_id",
+            "undefined",
+            "options",
+            "OAuthUserConfig",
+            "YandexProfile",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-yandex.md",
+          "tokens": 1530
+        },
+        {
+          "id": "providers-zitadel",
+          "title": "providers/zitadel",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Record",
+            "string",
+            "any",
+            "key",
+            "P",
+            "ZitadelProfile",
+            "options",
+            "OAuthUserConfig",
+            "OIDCConfig"
+          ],
+          "path": "authjs/providers-zitadel.md",
+          "tokens": 1218
+        },
+        {
+          "id": "providers-zoho",
+          "title": "providers/zoho",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "config",
+            "OAuthUserConfig",
+            "Record",
+            "string",
+            "any",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-zoho.md",
+          "tokens": 609
+        },
+        {
+          "id": "providers-zoom",
+          "title": "providers/zoom",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")[providers](/reference/...",
+          "tags": [
+            "Record",
+            "string",
+            "any",
+            "key",
+            "config",
+            "OAuthUserConfig",
+            "ZoomProfile",
+            "OAuthConfig"
+          ],
+          "path": "authjs/providers-zoom.md",
+          "tokens": 1034
+        },
+        {
+          "id": "types",
+          "title": "types",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/core](/reference/core \"@auth/core\")types",
+          "tags": [
+            "@auth/core/types",
+            "Auth",
+            "AuthConfig",
+            "TokenSet",
+            "Partial",
+            "TokenEndpointResponse",
+            "AdapterAccount",
+            "key",
+            "string",
+            "undefined"
+          ],
+          "path": "authjs/types.md",
+          "tokens": 5263
+        },
+        {
+          "id": "auth-d1-adapter",
+          "title": "@auth/d1-adapter",
+          "description": "[API reference](/reference/overview \"API reference\")@auth/d1-adapter",
+          "tags": [
+            "RecordType",
+            "db",
+            "D1Database",
+            "CREATE_SQL",
+            "string",
+            "bindings",
+            "any",
+            "GET_SQL",
+            "getBindings",
+            "Promise"
+          ],
+          "path": "authjs/auth-d1-adapter.md",
+          "tokens": 862
+        },
+        {
+          "id": "auth-dgraph-adapter",
+          "title": "@auth/dgraph-adapter",
+          "description": "[API reference](/reference/overview \"API reference\")@auth/dgraph-adapter",
+          "tags": [
+            "user",
+            "account",
+            "session",
+            "verificationToken",
+            "T",
+            "object",
+            "Record",
+            "string",
+            "any",
+            "null"
+          ],
+          "path": "authjs/auth-dgraph-adapter.md",
+          "tokens": 656
+        },
+        {
+          "id": "lib-client",
+          "title": "lib/client",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/dgraph-adapter](/reference/dgraph-adapter \"@auth/dgraph-ad...",
+          "tags": [
+            "Error",
+            "errors",
+            "any",
+            "query",
+            "string",
+            "variables",
+            "DgraphClientError",
+            "Error.constructor",
+            "Error.message",
+            "Error.name"
+          ],
+          "path": "authjs/lib-client.md",
+          "tokens": 1068
+        },
+        {
+          "id": "lib-graphql-fragments",
+          "title": "lib/graphql/fragments",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/dgraph-adapter](/reference/dgraph-adapter \"@auth/dgraph-ad...",
+          "tags": [],
+          "path": "authjs/lib-graphql-fragments.md",
+          "tokens": 278
+        },
+        {
+          "id": "auth-drizzle-adapter",
+          "title": "@auth/drizzle-adapter",
+          "description": "[API reference](/reference/overview \"API reference\")@auth/drizzle-adapter",
+          "tags": [
+            "SqlFlavor",
+            "SqlFlavorOptions",
+            "db",
+            "schema",
+            "DefaultSchema",
+            "Adapter"
+          ],
+          "path": "authjs/auth-drizzle-adapter.md",
+          "tokens": 305
+        },
+        {
+          "id": "lib-mysql",
+          "title": "lib/mysql",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/drizzle-adapter](/reference/drizzle-adapter \"@auth/drizzle...",
+          "tags": [
+            "schema",
+            "Partial",
+            "DefaultMySqlSchema",
+            "Required",
+            "client",
+            "MySqlDatabase",
+            "MySqlQueryResultHKT",
+            "PreparedQueryHKTBase",
+            "any",
+            "Adapter"
+          ],
+          "path": "authjs/lib-mysql.md",
+          "tokens": 2083
+        },
+        {
+          "id": "lib-pg",
+          "title": "lib/pg",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/drizzle-adapter](/reference/drizzle-adapter \"@auth/drizzle...",
+          "tags": [
+            "schema",
+            "Partial",
+            "DefaultPostgresSchema",
+            "Required",
+            "client",
+            "PgDatabase",
+            "PgQueryResultHKT",
+            "any",
+            "Adapter"
+          ],
+          "path": "authjs/lib-pg.md",
+          "tokens": 2095
+        },
+        {
+          "id": "lib-sqlite",
+          "title": "lib/sqlite",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/drizzle-adapter](/reference/drizzle-adapter \"@auth/drizzle...",
+          "tags": [
+            "schema",
+            "Partial",
+            "DefaultSQLiteSchema",
+            "Required",
+            "client",
+            "BaseSQLiteDatabase",
+            "\"sync\"",
+            "\"async\"",
+            "any",
+            "Adapter"
+          ],
+          "path": "authjs/lib-sqlite.md",
+          "tokens": 2012
+        },
+        {
+          "id": "lib-utils",
+          "title": "lib/utils",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/drizzle-adapter](/reference/drizzle-adapter \"@auth/drizzle...",
+          "tags": [
+            "Flavor",
+            "SqlFlavorOptions"
+          ],
+          "path": "authjs/lib-utils.md",
+          "tokens": 219
+        },
+        {
+          "id": "auth-dynamodb-adapter",
+          "title": "@auth/dynamodb-adapter",
+          "description": "[API reference](/reference/overview \"API reference\")@auth/dynamodb-adapter",
+          "tags": [
+            "T",
+            "Record",
+            "string",
+            "unknown",
+            "object",
+            "any",
+            "null",
+            "client",
+            "DynamoDBDocument",
+            "options"
+          ],
+          "path": "authjs/auth-dynamodb-adapter.md",
+          "tokens": 895
+        },
+        {
+          "id": "auth-edgedb-adapter",
+          "title": "@auth/edgedb-adapter",
+          "description": "[API reference](/reference/overview \"API reference\")@auth/edgedb-adapter",
+          "tags": [
+            "client",
+            "Client",
+            "Adapter"
+          ],
+          "path": "authjs/auth-edgedb-adapter.md",
+          "tokens": 244
+        },
+        {
+          "id": "auth-express",
+          "title": "@auth/express",
+          "description": "[API reference](/reference/overview \"API reference\")@auth/express",
+          "tags": [
+            "@auth/express",
+            "AUTH_SECRET",
+            "openssl rand -hex 32",
+            "https://generate-secret.vercel.app/32",
+            "dotenv",
+            "Deno.env",
+            "ExpressAuth",
+            "csrfToken",
+            "\"type\": \"module\"",
+            "\"module\": \"NodeNext\""
+          ],
+          "path": "authjs/auth-express.md",
+          "tokens": 4040
+        },
+        {
+          "id": "adapters",
+          "title": "adapters",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/express](/reference/express \"@auth/express\")adapters",
+          "tags": [
+            "authenticator",
+            "AdapterAuthenticator",
+            "Awaitable",
+            "session",
+            "expires",
+            "Date",
+            "sessionToken",
+            "string",
+            "userId",
+            "session.expires"
+          ],
+          "path": "authjs/adapters.md",
+          "tokens": 5644
+        },
+        {
+          "id": "lib",
+          "title": "lib",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/express](/reference/express \"@auth/express\")lib",
+          "tags": [],
+          "path": "authjs/lib.md",
+          "tokens": 144
+        },
+        {
+          "id": "lib-http-api-adapters",
+          "title": "lib/http-api-adapters",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/express](/reference/express \"@auth/express\")[lib](/referen...",
+          "tags": [
+            "object",
+            "Record",
+            "string",
+            "any",
+            "response",
+            "Response",
+            "res",
+            "Promise",
+            "void",
+            "req"
+          ],
+          "path": "authjs/lib-http-api-adapters.md",
+          "tokens": 360
+        },
+        {
+          "id": "auth-fauna-adapter",
+          "title": "@auth/fauna-adapter",
+          "description": "[API reference](/reference/overview \"API reference\")@auth/fauna-adapter",
+          "tags": [
+            "T",
+            "object",
+            "Record",
+            "string",
+            "any",
+            "client",
+            "Client",
+            "config",
+            "AdapterConfig",
+            "Adapter"
+          ],
+          "path": "authjs/auth-fauna-adapter.md",
+          "tokens": 570
+        },
+        {
+          "id": "auth-firebase-adapter",
+          "title": "@auth/firebase-adapter",
+          "description": "[API reference](/reference/overview \"API reference\")@auth/firebase-adapter",
+          "tags": [
+            "AppOptions",
+            "AppOptions.credential",
+            "null",
+            "AppOptions.databaseAuthVariableOverride",
+            "AppOptions.databaseURL",
+            "auth",
+            "messaging",
+            "projectManagement",
+            "Credential",
+            "AppOptions.httpAgent"
+          ],
+          "path": "authjs/auth-firebase-adapter.md",
+          "tokens": 1614
+        },
+        {
+          "id": "auth-hasura-adapter",
+          "title": "@auth/hasura-adapter",
+          "description": "[API reference](/reference/overview \"API reference\")@auth/hasura-adapter",
+          "tags": [
+            "T",
+            "B",
+            "boolean",
+            "false",
+            "object",
+            "null",
+            "Record",
+            "string",
+            "any",
+            "throwIfNullish"
+          ],
+          "path": "authjs/auth-hasura-adapter.md",
+          "tokens": 426
+        },
+        {
+          "id": "lib-client",
+          "title": "lib/client",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/hasura-adapter](/reference/hasura-adapter \"@auth/hasura-ad...",
+          "tags": [
+            "Error",
+            "errors",
+            "any",
+            "query",
+            "TypedDocumentString",
+            "variables",
+            "HasuraClientError",
+            "Error.constructor",
+            "Error.message",
+            "Error.name"
+          ],
+          "path": "authjs/lib-client.md",
+          "tokens": 878
+        },
+        {
+          "id": "auth-kysely-adapter",
+          "title": "@auth/kysely-adapter",
+          "description": "[API reference](/reference/overview \"API reference\")@auth/kysely-adapter",
+          "tags": [
+            "Kysely",
+            "kysely-codegen",
+            "Codegen",
+            "KyselyAuth",
+            "DB",
+            "T",
+            "Database",
+            "object",
+            "Record",
+            "string"
+          ],
+          "path": "authjs/auth-kysely-adapter.md",
+          "tokens": 671
+        },
+        {
+          "id": "auth-mikro-orm-adapter",
+          "title": "@auth/mikro-orm-adapter",
+          "description": "[API reference](/reference/overview \"API reference\")@auth/mikro-orm-adapter",
+          "tags": [
+            "D",
+            "IDatabaseDriver",
+            "Connection",
+            "ormOptions",
+            "Options",
+            "options",
+            "entities",
+            "Partial",
+            "lib/entities",
+            "options.entities"
+          ],
+          "path": "authjs/auth-mikro-orm-adapter.md",
+          "tokens": 388
+        },
+        {
+          "id": "lib-entities",
+          "title": "lib/entities",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/mikro-orm-adapter](/reference/mikro-orm-adapter \"@auth/mik...",
+          "tags": [
+            "RemoveIndex",
+            "AdapterAccount",
+            "Account",
+            "RemoveIndex.access_token",
+            "RemoveIndex.expires_at",
+            "RemoveIndex.id_token",
+            "RemoveIndex.provider",
+            "profile()",
+            "id",
+            "authorize()"
+          ],
+          "path": "authjs/lib-entities.md",
+          "tokens": 2034
+        },
+        {
+          "id": "auth-mongodb-adapter",
+          "title": "@auth/mongodb-adapter",
+          "description": "[API reference](/reference/overview \"API reference\")@auth/mongodb-adapter",
+          "tags": [
+            "client",
+            "MongoClient",
+            "Promise",
+            "void",
+            "T",
+            "Record",
+            "string",
+            "unknown",
+            "object",
+            "any"
+          ],
+          "path": "authjs/auth-mongodb-adapter.md",
+          "tokens": 1125
+        },
+        {
+          "id": "auth-neo4j-adapter",
+          "title": "@auth/neo4j-adapter",
+          "description": "[API reference](/reference/overview \"API reference\")@auth/neo4j-adapter",
+          "tags": [
+            "Session",
+            "accessMode",
+            "SessionMode",
+            "txConfig",
+            "TxConfig",
+            "apiTelemetryConfig",
+            "NonAutoCommitApiTelemetryConfig",
+            "TransactionPromise",
+            "Session._beginTransaction",
+            "mode"
+          ],
+          "path": "authjs/auth-neo4j-adapter.md",
+          "tokens": 2950
+        },
+        {
+          "id": "auth-neon-adapter",
+          "title": "@auth/neon-adapter",
+          "description": "[API reference](/reference/overview \"API reference\")@auth/neon-adapter",
+          "tags": [
+            "client",
+            "Pool",
+            "Adapter"
+          ],
+          "path": "authjs/auth-neon-adapter.md",
+          "tokens": 203
+        },
+        {
+          "id": "next-auth",
+          "title": "next-auth",
+          "description": "[API reference](/reference/overview \"API reference\")next-auth",
+          "tags": [
+            "NEXTAUTH_URL",
+            "NEXTAUTH_SECRET",
+            "AUTH_",
+            "AUTH_GITHUB_ID",
+            "AUTH_GITHUB_SECRET",
+            "clientId",
+            "clientSecret",
+            "AUTH_{PROVIDER}_{ID|SECRET}",
+            "PROVIDER",
+            "ID"
+          ],
+          "path": "authjs/next-auth.md",
+          "tokens": 11429
+        },
+        {
+          "id": "adapters",
+          "title": "adapters",
+          "description": "[API reference](/reference/overview \"API reference\")[next-auth](/reference/nextjs \"next-auth\")adapters",
+          "tags": [
+            "authenticator",
+            "AdapterAuthenticator",
+            "Awaitable",
+            "session",
+            "expires",
+            "Date",
+            "sessionToken",
+            "string",
+            "userId",
+            "session.expires"
+          ],
+          "path": "authjs/adapters.md",
+          "tokens": 5631
+        },
+        {
+          "id": "jwt",
+          "title": "jwt",
+          "description": "[API reference](/reference/overview \"API reference\")[next-auth](/reference/nextjs \"next-auth\")jwt",
+          "tags": [
+            "Record",
+            "string",
+            "unknown",
+            "JWT",
+            "key",
+            "GetTokenParamsBase",
+            "R",
+            "boolean",
+            "false",
+            "getToken()"
+          ],
+          "path": "authjs/jwt.md",
+          "tokens": 2092
+        },
+        {
+          "id": "middleware",
+          "title": "middleware",
+          "description": "[API reference](/reference/overview \"API reference\")[next-auth](/reference/nextjs \"next-auth\")middleware",
+          "tags": [],
+          "path": "authjs/middleware.md",
+          "tokens": 104
+        },
+        {
+          "id": "next",
+          "title": "next",
+          "description": "[API reference](/reference/overview \"API reference\")[next-auth](/reference/nextjs \"next-auth\")next",
+          "tags": [],
+          "path": "authjs/next.md",
+          "tokens": 107
+        },
+        {
+          "id": "react",
+          "title": "react",
+          "description": "[API reference](/reference/overview \"API reference\")[next-auth](/reference/nextjs \"next-auth\")react",
+          "tags": [
+            "0",
+            "SessionProvider",
+            "true",
+            "false",
+            "navigator.onLine",
+            "Record",
+            "string",
+            "unknown",
+            "Redirect",
+            "boolean"
+          ],
+          "path": "authjs/react.md",
+          "tokens": 3031
+        },
+        {
+          "id": "webauthn",
+          "title": "webauthn",
+          "description": "[API reference](/reference/overview \"API reference\")[next-auth](/reference/nextjs \"next-auth\")webauthn",
+          "tags": [
+            "provider",
+            "ProviderId",
+            "options",
+            "SignInOptions",
+            "true",
+            "authorizationParams",
+            "SignInAuthorizationParams",
+            "Promise",
+            "void",
+            "false"
+          ],
+          "path": "authjs/webauthn.md",
+          "tokens": 406
+        },
+        {
+          "id": "api-reference",
+          "title": "API Reference",
+          "description": "API referenceOverview",
+          "tags": [],
+          "path": "authjs/api-reference.md",
+          "tokens": 616
+        },
+        {
+          "id": "auth-pg-adapter",
+          "title": "@auth/pg-adapter",
+          "description": "[API reference](/reference/overview \"API reference\")@auth/pg-adapter",
+          "tags": [
+            "client",
+            "Pool",
+            "Adapter",
+            "account",
+            "any"
+          ],
+          "path": "authjs/auth-pg-adapter.md",
+          "tokens": 253
+        },
+        {
+          "id": "auth-pouchdb-adapter",
+          "title": "@auth/pouchdb-adapter",
+          "description": "[API reference](/reference/overview \"API reference\")@auth/pouchdb-adapter",
+          "tags": [
+            "pouchdb-find",
+            "options",
+            "PouchDBAdapterOptions",
+            "Adapter"
+          ],
+          "path": "authjs/auth-pouchdb-adapter.md",
+          "tokens": 605
+        },
+        {
+          "id": "auth-prisma-adapter",
+          "title": "@auth/prisma-adapter",
+          "description": "[API reference](/reference/overview \"API reference\")@auth/prisma-adapter",
+          "tags": [
+            "prisma",
+            "PrismaClient",
+            "PrismaClientOptions",
+            "never",
+            "DefaultArgs",
+            "DynamicClientExtensionThis",
+            "TypeMap",
+            "InternalArgs",
+            "TypeMapCb",
+            "Adapter"
+          ],
+          "path": "authjs/auth-prisma-adapter.md",
+          "tokens": 296
+        },
+        {
+          "id": "auth-qwik",
+          "title": "@auth/qwik",
+          "description": "[API reference](/reference/overview \"API reference\")@auth/qwik",
+          "tags": [
+            "logger.error",
+            "Error",
+            "Error.cause",
+            "authorize",
+            "code",
+            "SignInError",
+            "TokenSet",
+            "Partial",
+            "TokenEndpointResponse",
+            "key"
+          ],
+          "path": "authjs/auth-qwik.md",
+          "tokens": 8933
+        },
+        {
+          "id": "auth-sequelize-adapter",
+          "title": "@auth/sequelize-adapter",
+          "description": "[API reference](/reference/overview \"API reference\")@auth/sequelize-adapter",
+          "tags": [
+            "client",
+            "Sequelize",
+            "options",
+            "SequelizeAdapterOptions",
+            "Adapter"
+          ],
+          "path": "authjs/auth-sequelize-adapter.md",
+          "tokens": 455
+        },
+        {
+          "id": "models",
+          "title": "models",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/sequelize-adapter](/reference/sequelize-adapter \"@auth/seq...",
+          "tags": [],
+          "path": "authjs/models.md",
+          "tokens": 2311
+        },
+        {
+          "id": "auth-solid-start",
+          "title": "@auth/solid-start",
+          "description": "[API reference](/reference/overview \"API reference\")@auth/solid-start",
+          "tags": [
+            "@auth/solid-start",
+            "logger.error",
+            "Error",
+            "authorize",
+            "code",
+            "SignInError",
+            "TokenSet",
+            "Partial",
+            "TokenEndpointResponse",
+            "AdapterAccount"
+          ],
+          "path": "authjs/auth-solid-start.md",
+          "tokens": 10223
+        },
+        {
+          "id": "adapters",
+          "title": "adapters",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/solid-start](/reference/solid-start \"@auth/solid-start\")ad...",
+          "tags": [
+            "authenticator",
+            "AdapterAuthenticator",
+            "Awaitable",
+            "session",
+            "expires",
+            "Date",
+            "sessionToken",
+            "string",
+            "userId",
+            "session.expires"
+          ],
+          "path": "authjs/adapters.md",
+          "tokens": 5687
+        },
+        {
+          "id": "client",
+          "title": "client",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/solid-start](/reference/solid-start \"@auth/solid-start\")cl...",
+          "tags": [
+            "inputType",
+            "new URLSearchParams(inputType)",
+            "provider",
+            "ProviderId",
+            "options",
+            "SignInOptions",
+            "true",
+            "authorizationParams",
+            "SignInAuthorizationParams",
+            "Promise"
+          ],
+          "path": "authjs/client.md",
+          "tokens": 744
+        },
+        {
+          "id": "auth-supabase-adapter",
+          "title": "@auth/supabase-adapter",
+          "description": "[API reference](/reference/overview \"API reference\")@auth/supabase-adapter",
+          "tags": [
+            "T",
+            "obj",
+            "Record",
+            "string",
+            "any",
+            "options",
+            "SupabaseAdapterOptions",
+            "Adapter"
+          ],
+          "path": "authjs/auth-supabase-adapter.md",
+          "tokens": 407
+        },
+        {
+          "id": "auth-surrealdb-adapter",
+          "title": "@auth/surrealdb-adapter",
+          "description": "[API reference](/reference/overview \"API reference\")@auth/surrealdb-adapter",
+          "tags": [
+            "T",
+            "RecordId",
+            "\"user\"",
+            "client",
+            "Promise",
+            "Surreal",
+            "Adapter"
+          ],
+          "path": "authjs/auth-surrealdb-adapter.md",
+          "tokens": 896
+        },
+        {
+          "id": "auth-sveltekit",
+          "title": "@auth/sveltekit",
+          "description": "[API reference](/reference/overview \"API reference\")@auth/sveltekit",
+          "tags": [
+            "@auth/sveltekit",
+            "event",
+            "event.platform",
+            "src/hooks.server.ts",
+            "AUTH_SECRET",
+            "openssl rand -hex 32",
+            "https://generate-secret.vercel.app/32",
+            "AUTH_TRUST_HOST",
+            "true",
+            "<SignIn />"
+          ],
+          "path": "authjs/auth-sveltekit.md",
+          "tokens": 5481
+        },
+        {
+          "id": "actions",
+          "title": "actions",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/sveltekit](/reference/sveltekit \"@auth/sveltekit\")actions",
+          "tags": [
+            "event",
+            "RequestEvent",
+            "config",
+            "SvelteKitAuthConfig",
+            "Promise",
+            "null",
+            "Session",
+            "provider",
+            "undefined",
+            "ProviderId"
+          ],
+          "path": "authjs/actions.md",
+          "tokens": 520
+        },
+        {
+          "id": "client",
+          "title": "client",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/sveltekit](/reference/sveltekit \"@auth/sveltekit\")client",
+          "tags": [
+            "Record",
+            "string",
+            "unknown",
+            "Redirect",
+            "boolean",
+            "true",
+            "key",
+            "redirectTo",
+            "redirect: false",
+            "useSession"
+          ],
+          "path": "authjs/client.md",
+          "tokens": 1498
+        },
+        {
+          "id": "env",
+          "title": "env",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/sveltekit](/reference/sveltekit \"@auth/sveltekit\")env",
+          "tags": [
+            "envObject",
+            "Record",
+            "string",
+            "undefined",
+            "config",
+            "SvelteKitAuthConfig",
+            "void"
+          ],
+          "path": "authjs/env.md",
+          "tokens": 148
+        },
+        {
+          "id": "types",
+          "title": "types",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/sveltekit](/reference/sveltekit \"@auth/sveltekit\")types",
+          "tags": [
+            "Omit",
+            "AuthConfig",
+            "\"raw\"",
+            "Omit.adapter",
+            "Omit.basePath",
+            "session",
+            "params",
+            "account",
+            "null",
+            "Account"
+          ],
+          "path": "authjs/types.md",
+          "tokens": 5819
+        },
+        {
+          "id": "auth-typeorm-adapter",
+          "title": "@auth/typeorm-adapter",
+          "description": "[API reference](/reference/overview \"API reference\")@auth/typeorm-adapter",
+          "tags": [
+            "options",
+            "dataSource",
+            "string",
+            "DataSourceOptions",
+            "entities",
+            "options.dataSource",
+            "options.entities",
+            "Promise",
+            "EntityManager",
+            "TypeORMAdapterOptions"
+          ],
+          "path": "authjs/auth-typeorm-adapter.md",
+          "tokens": 490
+        },
+        {
+          "id": "entities",
+          "title": "entities",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/typeorm-adapter](/reference/typeorm-adapter \"@auth/typeorm...",
+          "tags": [
+            "AccountEntity",
+            "SessionEntity",
+            "UserEntity",
+            "VerificationTokenEntity"
+          ],
+          "path": "authjs/entities.md",
+          "tokens": 770
+        },
+        {
+          "id": "utils",
+          "title": "utils",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/typeorm-adapter](/reference/typeorm-adapter \"@auth/typeorm...",
+          "tags": [
+            "configOrString",
+            "string",
+            "DataSourceOptions",
+            "dataSource",
+            "DataSource",
+            "entities",
+            "any",
+            "Promise",
+            "void"
+          ],
+          "path": "authjs/utils.md",
+          "tokens": 247
+        },
+        {
+          "id": "auth-unstorage-adapter",
+          "title": "@auth/unstorage-adapter",
+          "description": "[API reference](/reference/overview \"API reference\")@auth/unstorage-adapter",
+          "tags": [
+            "accountByUserId",
+            "account",
+            "authenticator",
+            "authenticator-by-user-id",
+            "emailKey",
+            "sessionByUserId",
+            "sessionKey",
+            "getItemRaw/setItemRaw",
+            "getItem/setItem",
+            "user"
+          ],
+          "path": "authjs/auth-unstorage-adapter.md",
+          "tokens": 1173
+        },
+        {
+          "id": "auth-upstash-redis-adapter",
+          "title": "@auth/upstash-redis-adapter",
+          "description": "[API reference](/reference/overview \"API reference\")@auth/upstash-redis-adapter",
+          "tags": [
+            "accountByUserId",
+            "account",
+            "emailKey",
+            "sessionByUserId",
+            "sessionKey",
+            "user",
+            "verificationToken",
+            "json",
+            "object",
+            "any"
+          ],
+          "path": "authjs/auth-upstash-redis-adapter.md",
+          "tokens": 918
+        },
+        {
+          "id": "auth-xata-adapter",
+          "title": "@auth/xata-adapter",
+          "description": "[API reference](/reference/overview \"API reference\")@auth/xata-adapter",
+          "tags": [
+            "client",
+            "XataClient",
+            "Adapter"
+          ],
+          "path": "authjs/auth-xata-adapter.md",
+          "tokens": 283
+        },
+        {
+          "id": "xata",
+          "title": "xata",
+          "description": "[API reference](/reference/overview \"API reference\")[@auth/xata-adapter](/reference/xata-adapter \"@auth/xata-adapter\"...",
+          "tags": [
+            "DatabaseClient",
+            "DatabaseSchema",
+            "key",
+            "string",
+            "any",
+            "options",
+            "BaseClientOptions",
+            "XataClient",
+            "Promise",
+            "branch"
+          ],
+          "path": "authjs/xata.md",
+          "tokens": 1357
+        },
+        {
+          "id": "security",
+          "title": "security",
+          "description": "`@auth/*` packages (other than the database adapters) are currently under development and - unless stated otherwise -...",
+          "tags": [
+            "latest",
+            "@auth/*"
+          ],
+          "path": "authjs/security.md",
+          "tokens": 482
         }
       ]
     },

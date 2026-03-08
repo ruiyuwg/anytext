@@ -437,6 +437,18 @@
       }
     },
     {
+      "id": "authjs",
+      "name": "Auth.js",
+      "description": "Authentication library for Next.js, SvelteKit, Express, and other frameworks with OAuth, credentials, and database adapters",
+      "version": "5",
+      "adapter": "sitemap",
+      "url": "https://authjs.dev/sitemap.xml",
+      "crawl": {
+        "contentSelector": "article, main",
+        "maxPages": 500
+      }
+    },
+    {
       "id": "azure",
       "name": "Azure",
       "description": "Microsoft Azure cloud platform with compute, storage, databases, AI, and 200+ services",

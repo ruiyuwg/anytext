@@ -1,0 +1,17 @@
+[Guides](/guides/debugging "Guides")PagesBuilt-in pages
+
+# Built-in Pages
+
+Auth.js comes by default with a set of pages that are presented to the user as they go through their authentication journey (sign up, sign in, sign out, error, etc…). This is helpful so that you don’t need to write those from scratch when using the library first time. The UI created is based on the providers specified in your configuration file.
+
+If you do not pass a `providerId`, the `signIn` function will redirect the user to the signin page.
+
+![Sign-in Page](/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fsign-in-page.50ed6845.webp&w=3840&q=75)
+
+In this case the app has been configured with [GitHub](/getting-started/providers/github) and [Credentials](/getting-started/providers/credentials) providers.
+
+If we added the [Google](/getting-started/providers/google) provider to our Auth.js config file (`./auth.ts`), then a 3rd option to sign in with Google would be available.
+
+If you’d like to build your own sign in page, checkout our guide on custom sign-in pages.
+
+[Testing](/guides/testing "Testing")[Custom Signin](/guides/pages/signin "Custom Signin")
