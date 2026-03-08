@@ -21,8 +21,8 @@ export function HowItWorks() {
           <div className="space-y-4 p-6 font-mono text-sm">
             <div>
               <span className="text-muted-foreground">$</span>{" "}
-              <span className="text-green-400">anytext</span>{" "}
-              <span className="text-sky-400">list</span>
+              <span className="text-[#FF0080]">anytext</span>{" "}
+              <span className="text-[#0070F3]">list</span>
             </div>
             <div className="text-muted-foreground leading-relaxed">
               {libraries.map((lib) => (
@@ -43,10 +43,10 @@ export function HowItWorks() {
             </div>
             <div>
               <span className="text-muted-foreground">$</span>{" "}
-              <span className="text-green-400">anytext</span>{" "}
-              <span className="text-sky-400">read</span>{" "}
-              <span className="text-amber-300">react</span>{" "}
-              <span className="text-amber-300">hooks</span>
+              <span className="text-[#FF0080]">anytext</span>{" "}
+              <span className="text-[#0070F3]">read</span>{" "}
+              <span className="text-[#79FFE1]">react</span>{" "}
+              <span className="text-[#79FFE1]">hooks</span>
             </div>
             <div className="text-muted-foreground">
               <div className="text-foreground font-bold"># React Hooks</div>

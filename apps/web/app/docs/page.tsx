@@ -37,10 +37,10 @@ function Hl({
   children: React.ReactNode;
 }) {
   const styles = {
-    green: "text-green-400",
-    sky: "text-sky-400",
-    amber: "text-amber-300",
-    muted: "text-muted-foreground",
+    green: "text-[#FF0080]",
+    sky: "text-[#0070F3]",
+    amber: "text-[#79FFE1]",
+    muted: "text-[#666]",
   };
   return <span className={styles[color]}>{children}</span>;
 }
