@@ -1,15 +1,17 @@
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { Github, ArrowRight } from "lucide-react";
 import { libraries } from "@/lib/data";
 
 export function Hero() {
   return (
     <section className="mx-auto max-w-5xl px-6 pb-20 pt-24 md:pt-32">
       <div className="mb-6 flex gap-2">
-        <Badge variant="secondary">Open Source</Badge>
-        <Badge variant="outline">Beta</Badge>
+        <span className="inline-flex items-center rounded-lg border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium">
+          Open Source
+        </span>
+        <span className="inline-flex items-center rounded-lg border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium">
+          Beta
+        </span>
       </div>
       <h1 className="max-w-2xl text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl">
         Instant docs for
@@ -22,10 +24,7 @@ export function Hero() {
       </p>
       <div className="mt-8 flex flex-wrap gap-3">
         <Button size="lg" asChild>
-          <a href="#install">
-            Get Started
-            <ArrowRight className="ml-1.5 h-4 w-4" />
-          </a>
+          <a href="#install">Get Started</a>
         </Button>
         <Button variant="outline" size="lg" asChild>
           <a
@@ -33,7 +32,6 @@ export function Hero() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Github className="mr-1.5 h-4 w-4" />
             View on GitHub
           </a>
         </Button>
