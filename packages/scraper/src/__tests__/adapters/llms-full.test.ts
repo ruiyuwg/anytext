@@ -187,6 +187,54 @@ describe("llmsFullAdapter", () => {
     );
   });
 
+  it("calls rateLimiter.acquire when provided and no prefetched content", async () => {
+    vi.spyOn(console, "log").mockImplementation(() => {});
+    const fetchMod = await import("../../pipeline/fetch.js");
+    const cleanMod = await import("../../pipeline/clean.js");
+    const splitMod = await import("../../pipeline/split.js");
+
+    vi.mocked(fetchMod.fetchContent).mockResolvedValue("raw content");
+    vi.mocked(cleanMod.cleanMarkdown).mockResolvedValue("clean content");
+    vi.mocked(splitMod.splitIntoTopics).mockReturnValue([
+      {
+        id: "hooks",
+        title: "Hooks",
+        description: "desc",
+        tags: [],
+        tokens: 100,
+        content: "content",
+      },
+    ]);
+
+    const rateLimiter = { acquire: vi.fn().mockResolvedValue(undefined) };
+    await llmsFullAdapter.process(baseSource, undefined, rateLimiter);
+
+    expect(rateLimiter.acquire).toHaveBeenCalledTimes(1);
+  });
+
+  it("skips rateLimiter.acquire when prefetched content is provided", async () => {
+    vi.spyOn(console, "log").mockImplementation(() => {});
+    const cleanMod = await import("../../pipeline/clean.js");
+    const splitMod = await import("../../pipeline/split.js");
+
+    vi.mocked(cleanMod.cleanMarkdown).mockResolvedValue("clean content");
+    vi.mocked(splitMod.splitIntoTopics).mockReturnValue([
+      {
+        id: "hooks",
+        title: "Hooks",
+        description: "desc",
+        tags: [],
+        tokens: 100,
+        content: "content",
+      },
+    ]);
+
+    const rateLimiter = { acquire: vi.fn().mockResolvedValue(undefined) };
+    await llmsFullAdapter.process(baseSource, "prefetched", rateLimiter);
+
+    expect(rateLimiter.acquire).not.toHaveBeenCalled();
+  });
+
   it("returns empty topics when split produces none", async () => {
     vi.spyOn(console, "log").mockImplementation(() => {});
     const fetchMod = await import("../../pipeline/fetch.js");

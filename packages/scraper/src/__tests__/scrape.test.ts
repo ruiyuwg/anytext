@@ -19,6 +19,8 @@ const mockReadHashes = vi.fn();
 const mockWriteHashes = vi.fn();
 const mockHasChanged = vi.fn();
 const mockHashContent = vi.fn();
+const mockCreateHostLimiter = vi.fn();
+const mockRateLimiter = { acquire: vi.fn().mockResolvedValue(undefined) };
 
 vi.mock("node:fs", () => ({
   readFileSync: (...args: unknown[]) => mockReadFileSync(...args),
@@ -71,6 +73,9 @@ vi.mock("../pipeline/hashes.js", () => ({
   writeHashes: (...args: unknown[]) => mockWriteHashes(...args),
   hasChanged: (...args: unknown[]) => mockHasChanged(...args),
 }));
+vi.mock("../pipeline/rate-limiter.js", () => ({
+  createHostLimiter: (...args: unknown[]) => mockCreateHostLimiter(...args),
+}));
 vi.mock("../utils.js", () => ({
   hashContent: (...args: unknown[]) => mockHashContent(...args),
 }));
@@ -114,6 +119,8 @@ beforeEach(() => {
   mockWriteHashes.mockReset();
   mockHasChanged.mockReset().mockReturnValue(true);
   mockHashContent.mockReset().mockReturnValue("fakehash");
+  mockCreateHostLimiter.mockReset().mockReturnValue(mockRateLimiter);
+  mockRateLimiter.acquire.mockReset().mockResolvedValue(undefined);
 });
 
 describe("loadSources", () => {
@@ -276,7 +283,52 @@ describe("processSource", () => {
     expect(mockLlmsFullProcess).toHaveBeenCalledWith(
       baseSource,
       "raw content",
+      mockRateLimiter,
     );
+  });
+
+  it("creates RateLimiter with source rateLimit and passes to adapter", async () => {
+    mockLlmsFullProcess.mockResolvedValue([topic]);
+    mockReadManifest.mockReturnValue({
+      version: 1,
+      updatedAt: "2025-01-01",
+      libraries: [],
+    });
+    mockMergeLibrary.mockReturnValue({
+      version: 2,
+      updatedAt: "2025-01-01",
+      libraries: [],
+    });
+
+    const { processSource } = await import("../scrape.js");
+    const source = { ...baseSource, rateLimit: 5 };
+    await processSource(source, false);
+
+    expect(mockCreateHostLimiter).toHaveBeenCalledWith(5);
+    expect(mockLlmsFullProcess).toHaveBeenCalledWith(
+      source,
+      undefined,
+      mockRateLimiter,
+    );
+  });
+
+  it("creates RateLimiter with default when no rateLimit in source", async () => {
+    mockLlmsFullProcess.mockResolvedValue([topic]);
+    mockReadManifest.mockReturnValue({
+      version: 1,
+      updatedAt: "2025-01-01",
+      libraries: [],
+    });
+    mockMergeLibrary.mockReturnValue({
+      version: 2,
+      updatedAt: "2025-01-01",
+      libraries: [],
+    });
+
+    const { processSource } = await import("../scrape.js");
+    await processSource(baseSource, false);
+
+    expect(mockCreateHostLimiter).toHaveBeenCalledWith(undefined);
   });
 
   it("skips hash check with --force", async () => {

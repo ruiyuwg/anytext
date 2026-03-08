@@ -1,4 +1,4 @@
-import type { Adapter, SourceConfig, ProcessedTopic } from "../types.js";
+import type { Adapter, SourceConfig, ProcessedTopic, RateLimiterLike } from "../types.js";
 import { fetchContent } from "../pipeline/fetch.js";
 import { cleanMarkdown } from "../pipeline/clean.js";
 import { splitIntoTopics } from "../pipeline/split.js";
@@ -9,7 +9,11 @@ import remarkParse from "remark-parse";
 import type { Link, Text } from "mdast";
 
 export const llmsIndexAdapter: Adapter = {
-  async process(source: SourceConfig): Promise<ProcessedTopic[]> {
+  async process(
+    source: SourceConfig,
+    _prefetchedContent?: string,
+    rateLimiter?: RateLimiterLike,
+  ): Promise<ProcessedTopic[]> {
     const config = source.llmsIndex;
     if (!config) {
       throw new Error(
@@ -20,6 +24,7 @@ export const llmsIndexAdapter: Adapter = {
       throw new Error(`Source ${source.id} has no URL configured`);
     }
 
+    await rateLimiter?.acquire();
     const rootContent = await fetchContent(source.url);
     console.log(`  Fetched root index (${rootContent.length} chars)`);
 
@@ -69,6 +74,7 @@ export const llmsIndexAdapter: Adapter = {
             serviceUrls.length,
             config.contentType,
             source,
+            rateLimiter,
           );
         }),
       );
@@ -112,17 +118,19 @@ async function processService(
   total: number,
   contentType: "llms-txt" | "llms-full",
   source: SourceConfig,
+  rateLimiter?: RateLimiterLike,
 ): Promise<ProcessedTopic[]> {
   const serviceSlug = extractServiceSlug(serviceUrl);
   const serviceName = formatServiceName(serviceSlug);
   console.log(`  Processing service ${index}/${total}: ${serviceName}`);
 
+  await rateLimiter?.acquire();
   const raw = await fetchContent(serviceUrl);
 
   if (contentType === "llms-full") {
     return processLlmsFull(raw, serviceSlug, serviceName, source);
   } else {
-    return processLlmsTxt(raw, serviceUrl, serviceSlug, serviceName, source);
+    return processLlmsTxt(raw, serviceUrl, serviceSlug, serviceName, source, rateLimiter);
   }
 }
 
@@ -158,6 +166,7 @@ async function processLlmsTxt(
   serviceSlug: string,
   serviceName: string,
   source: SourceConfig,
+  rateLimiter?: RateLimiterLike,
 ): Promise<ProcessedTopic[]> {
   const links = extractMarkdownLinks(indexContent, serviceUrl);
 
@@ -165,6 +174,7 @@ async function processLlmsTxt(
 
   for (const link of links) {
     try {
+      await rateLimiter?.acquire();
       const raw = await fetchContent(link.url);
       const cleaned = await cleanMarkdown(raw, source.preprocess);
       const tokens = estimateTokens(cleaned);

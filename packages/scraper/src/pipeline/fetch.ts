@@ -21,6 +21,12 @@ export async function fetchContent(
       const response = await fetch(url, {
         signal: AbortSignal.timeout(timeoutMs),
       });
+      if (response.status === 429 && attempt < retries) {
+        const retryAfter = parseRetryAfter(response.headers.get("Retry-After"));
+        console.warn(`  Rate limited (429) on ${url}, retrying after ${retryAfter}s`);
+        await new Promise((resolve) => setTimeout(resolve, retryAfter * 1000));
+        continue;
+      }
       if (!response.ok) {
         throw new Error(
           `Failed to fetch ${url}: ${response.status} ${response.statusText}`,
@@ -37,4 +43,11 @@ export async function fetchContent(
   }
 
   throw lastError!;
+}
+
+function parseRetryAfter(header: string | null): number {
+  if (!header) return 60;
+  const seconds = Number(header);
+  if (!Number.isNaN(seconds) && seconds > 0) return seconds;
+  return 60;
 }

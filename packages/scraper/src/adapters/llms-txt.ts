@@ -1,4 +1,4 @@
-import type { Adapter, SourceConfig, ProcessedTopic } from "../types.js";
+import type { Adapter, SourceConfig, ProcessedTopic, RateLimiterLike } from "../types.js";
 import { fetchContent } from "../pipeline/fetch.js";
 import { cleanMarkdown } from "../pipeline/clean.js";
 import { slugify, estimateTokens, truncate } from "../utils.js";
@@ -11,11 +11,15 @@ export const llmsTxtAdapter: Adapter = {
   async process(
     source: SourceConfig,
     prefetchedContent?: string,
+    rateLimiter?: RateLimiterLike,
   ): Promise<ProcessedTopic[]> {
     if (!source.url) {
       throw new Error(`Source ${source.id} has no URL configured`);
     }
 
+    if (!prefetchedContent) {
+      await rateLimiter?.acquire();
+    }
     const index = prefetchedContent ?? (await fetchContent(source.url));
     console.log(`  Fetched index (${index.length} chars)`);
 
@@ -28,6 +32,7 @@ export const llmsTxtAdapter: Adapter = {
 
     for (const link of links) {
       try {
+        await rateLimiter?.acquire();
         const raw = await fetchContent(link.url);
         const cleaned = await cleanMarkdown(raw, source.preprocess);
         const tokens = estimateTokens(cleaned);

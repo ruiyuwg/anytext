@@ -73,10 +73,12 @@ describe("githubAdapter", () => {
       .mockResolvedValueOnce({
         ok: true,
         json: async () => treeResponse,
+      headers: new Headers(),
       } as Response)
       .mockResolvedValue({
         ok: true,
         text: async () => longContent,
+      headers: new Headers(),
       } as Response);
 
     const result = await githubAdapter.process(baseSource);
@@ -102,10 +104,12 @@ describe("githubAdapter", () => {
       .mockResolvedValueOnce({
         ok: true,
         json: async () => customTree,
+      headers: new Headers(),
       } as Response)
       .mockResolvedValue({
         ok: true,
         text: async () => longContent,
+      headers: new Headers(),
       } as Response);
 
     await githubAdapter.process(source);
@@ -126,10 +130,12 @@ describe("githubAdapter", () => {
       .mockResolvedValueOnce({
         ok: true,
         json: async () => treeResponse,
+      headers: new Headers(),
       } as Response)
       .mockResolvedValue({
         ok: true,
         text: async () => longContent,
+      headers: new Headers(),
       } as Response);
 
     const result = await githubAdapter.process(source);
@@ -148,10 +154,12 @@ describe("githubAdapter", () => {
       .mockResolvedValueOnce({
         ok: true,
         json: async () => treeResponse,
+      headers: new Headers(),
       } as Response)
       .mockResolvedValue({
         ok: true,
         text: async () => longContent,
+      headers: new Headers(),
       } as Response);
 
     const result = await githubAdapter.process(source);
@@ -164,10 +172,12 @@ describe("githubAdapter", () => {
       .mockResolvedValueOnce({
         ok: true,
         json: async () => treeResponse,
+      headers: new Headers(),
       } as Response)
       .mockResolvedValue({
         ok: true,
         text: async () => "Short",
+      headers: new Headers(),
       } as Response);
 
     const result = await githubAdapter.process(baseSource);
@@ -181,10 +191,12 @@ describe("githubAdapter", () => {
         json: async () => ({
           tree: [{ path: "docs/fail.md", type: "blob" }],
         }),
+      headers: new Headers(),
       } as Response)
       .mockResolvedValueOnce({
         ok: false,
         status: 500,
+      headers: new Headers(),
       } as Response);
 
     const result = await githubAdapter.process(baseSource);
@@ -203,10 +215,12 @@ describe("githubAdapter", () => {
         json: async () => ({
           tree: [{ path: "docs/my-guide.md", type: "blob" }],
         }),
+      headers: new Headers(),
       } as Response)
       .mockResolvedValueOnce({
         ok: true,
         text: async () => noH1Content,
+      headers: new Headers(),
       } as Response);
 
     const result = await githubAdapter.process(baseSource);
@@ -222,6 +236,7 @@ describe("githubAdapter", () => {
       .mockResolvedValueOnce({
         ok: true,
         json: async () => ({ tree: [] }),
+      headers: new Headers(),
       } as Response);
 
     await githubAdapter.process(baseSource);
@@ -254,10 +269,12 @@ describe("githubAdapter", () => {
         json: async () => ({
           tree: [{ path: "docs/hooks.md", type: "blob" }],
         }),
+      headers: new Headers(),
       } as Response)
       .mockResolvedValueOnce({
         ok: true,
         text: async () => contentWithCode,
+      headers: new Headers(),
       } as Response);
 
     const result = await githubAdapter.process(baseSource);
@@ -272,10 +289,12 @@ describe("githubAdapter", () => {
         json: async () => ({
           tree: [{ path: "docs/setup.mdx", type: "blob" }],
         }),
+      headers: new Headers(),
       } as Response)
       .mockResolvedValueOnce({
         ok: true,
         text: async () => longContent,
+      headers: new Headers(),
       } as Response);
 
     const result = await githubAdapter.process(baseSource);
@@ -292,10 +311,12 @@ describe("githubAdapter", () => {
         json: async () => ({
           tree: [{ path: "docs/ref.md", type: "blob" }],
         }),
+      headers: new Headers(),
       } as Response)
       .mockResolvedValueOnce({
         ok: true,
         text: async () => headingsOnly,
+      headers: new Headers(),
       } as Response);
 
     const result = await githubAdapter.process(baseSource);
@@ -316,10 +337,12 @@ describe("githubAdapter", () => {
       .mockResolvedValueOnce({
         ok: true,
         json: async () => treeWithSubDirs,
+      headers: new Headers(),
       } as Response)
       .mockResolvedValue({
         ok: true,
         text: async () => longContent,
+      headers: new Headers(),
       } as Response);
 
     const result = await githubAdapter.process(source);
@@ -345,10 +368,12 @@ describe("githubAdapter", () => {
       .mockResolvedValueOnce({
         ok: true,
         json: async () => treeWithSubDirs,
+      headers: new Headers(),
       } as Response)
       .mockResolvedValue({
         ok: true,
         text: async () => longContent,
+      headers: new Headers(),
       } as Response);
 
     const result = await githubAdapter.process(source);
@@ -369,10 +394,12 @@ describe("githubAdapter", () => {
       .mockResolvedValueOnce({
         ok: true,
         json: async () => treeResponse,
+      headers: new Headers(),
       } as Response)
       .mockResolvedValue({
         ok: true,
         text: async () => longContent,
+      headers: new Headers(),
       } as Response);
 
     const warnSpy = vi.spyOn(console, "warn");
@@ -402,6 +429,7 @@ describe("githubAdapter", () => {
           tree: [],
           truncated: true,
         }),
+      headers: new Headers(),
       } as Response)
       // Contents API for articles/azure-functions
       .mockResolvedValueOnce({
@@ -411,11 +439,13 @@ describe("githubAdapter", () => {
           { path: "articles/azure-functions/triggers.mdx", type: "file", name: "triggers.mdx" },
           { path: "articles/azure-functions/logo.png", type: "file", name: "logo.png" },
         ],
+      headers: new Headers(),
       } as Response)
       // Raw content fetches
       .mockResolvedValue({
         ok: true,
         text: async () => longContent,
+      headers: new Headers(),
       } as Response);
 
     const warnSpy = vi.spyOn(console, "warn");
@@ -452,6 +482,7 @@ describe("githubAdapter", () => {
           tree: [],
           truncated: true,
         }),
+      headers: new Headers(),
       } as Response)
       // Contents API for good-dir
       .mockResolvedValueOnce({
@@ -459,16 +490,19 @@ describe("githubAdapter", () => {
         json: async () => [
           { path: "articles/good-dir/doc.md", type: "file", name: "doc.md" },
         ],
+      headers: new Headers(),
       } as Response)
       // Contents API for bad-dir (fails)
       .mockResolvedValueOnce({
         ok: false,
         status: 404,
+      headers: new Headers(),
       } as Response)
       // Raw content fetch for the one good file
       .mockResolvedValue({
         ok: true,
         text: async () => longContent,
+      headers: new Headers(),
       } as Response);
 
     const warnSpy = vi.spyOn(console, "warn");
@@ -495,10 +529,12 @@ describe("githubAdapter", () => {
       .mockResolvedValueOnce({
         ok: true,
         json: async () => treeWithSubDirs,
+      headers: new Headers(),
       } as Response)
       .mockResolvedValue({
         ok: true,
         text: async () => longContent,
+      headers: new Headers(),
       } as Response);
 
     const result = await githubAdapter.process(source);
@@ -528,10 +564,12 @@ describe("githubAdapter", () => {
       .mockResolvedValueOnce({
         ok: true,
         json: async () => treeWithSubDirs,
+      headers: new Headers(),
       } as Response)
       .mockResolvedValue({
         ok: true,
         text: async () => longContent,
+      headers: new Headers(),
       } as Response);
 
     const result = await githubAdapter.process(source);
@@ -539,6 +577,103 @@ describe("githubAdapter", () => {
     const ids = result.map((t) => t.id);
     expect(ids).toContain("overview");
     expect(ids).toContain("triggers");
+  });
+
+  it("pauses when GitHub rate limit is low", async () => {
+    vi.useFakeTimers();
+
+    const lowRateLimitHeaders = new Headers({
+      "X-RateLimit-Remaining": "50",
+    });
+
+    vi.spyOn(globalThis, "fetch")
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({
+          tree: [{ path: "docs/intro.md", type: "blob" }],
+        }),
+        headers: lowRateLimitHeaders,
+      } as Response)
+      .mockResolvedValue({
+        ok: true,
+        text: async () => longContent,
+        headers: new Headers(),
+      } as Response);
+
+    const warnSpy = vi.spyOn(console, "warn");
+    const resultPromise = githubAdapter.process(baseSource);
+    await vi.advanceTimersByTimeAsync(5000);
+    const result = await resultPromise;
+
+    expect(warnSpy).toHaveBeenCalledWith(
+      expect.stringContaining("rate limit low (50 remaining)"),
+    );
+    expect(result.length).toBe(1);
+
+    vi.useRealTimers();
+  });
+
+  it("calls rateLimiter.acquire before each fetch", async () => {
+    const rateLimiter = { acquire: vi.fn().mockResolvedValue(undefined) };
+
+    vi.spyOn(globalThis, "fetch")
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({
+          tree: [{ path: "docs/intro.md", type: "blob" }],
+        }),
+        headers: new Headers(),
+      } as Response)
+      .mockResolvedValue({
+        ok: true,
+        text: async () => longContent,
+        headers: new Headers(),
+      } as Response);
+
+    await githubAdapter.process(baseSource, undefined, rateLimiter);
+
+    // Once for tree fetch, once for the file fetch
+    expect(rateLimiter.acquire).toHaveBeenCalledTimes(2);
+  });
+
+  it("calls rateLimiter.acquire in Contents API fallback", async () => {
+    const rateLimiter = { acquire: vi.fn().mockResolvedValue(undefined) };
+
+    const source: SourceConfig = {
+      ...baseSource,
+      github: {
+        repo: "owner/repo",
+        docsPath: "articles",
+        subDirs: ["azure-functions"],
+      },
+    };
+
+    vi.spyOn(globalThis, "fetch")
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({
+          tree: [],
+          truncated: true,
+        }),
+        headers: new Headers(),
+      } as Response)
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => [
+          { path: "articles/azure-functions/overview.md", type: "file", name: "overview.md" },
+        ],
+        headers: new Headers(),
+      } as Response)
+      .mockResolvedValue({
+        ok: true,
+        text: async () => longContent,
+        headers: new Headers(),
+      } as Response);
+
+    await githubAdapter.process(source, undefined, rateLimiter);
+
+    // tree fetch + contents API fetch + raw file fetch = 3
+    expect(rateLimiter.acquire).toHaveBeenCalledTimes(3);
   });
 
   it("files at docsPath root get no prefix even with directory mode", async () => {
@@ -561,10 +696,12 @@ describe("githubAdapter", () => {
             { path: "articles/azure-functions/overview.md", type: "blob" },
           ],
         }),
+      headers: new Headers(),
       } as Response)
       .mockResolvedValue({
         ok: true,
         text: async () => longContent,
+      headers: new Headers(),
       } as Response);
 
     const result = await githubAdapter.process(source);

@@ -1,4 +1,4 @@
-import type { Adapter, SourceConfig, ProcessedTopic } from "../types.js";
+import type { Adapter, SourceConfig, ProcessedTopic, RateLimiterLike } from "../types.js";
 import { fetchContent } from "../pipeline/fetch.js";
 import { extractContent, extractLinks } from "../pipeline/extract.js";
 import { slugify, estimateTokens, truncate } from "../utils.js";
@@ -7,6 +7,7 @@ export const htmlAdapter: Adapter = {
   async process(
     source: SourceConfig,
     _prefetchedContent?: string,
+    rateLimiter?: RateLimiterLike,
   ): Promise<ProcessedTopic[]> {
     if (!source.url) {
       throw new Error(`Source ${source.id} has no URL configured`);
@@ -30,6 +31,7 @@ export const htmlAdapter: Adapter = {
           .filter((url) => !visited.has(url))
           .map(async (url) => {
             visited.add(url);
+            await rateLimiter?.acquire();
             const html = await fetchContent(url);
             return { url, html };
           }),

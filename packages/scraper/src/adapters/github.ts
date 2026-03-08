@@ -1,4 +1,4 @@
-import type { Adapter, SourceConfig, ProcessedTopic } from "../types.js";
+import type { Adapter, SourceConfig, ProcessedTopic, RateLimiterLike } from "../types.js";
 import { slugify, estimateTokens, truncate } from "../utils.js";
 
 interface FileEntry {
@@ -22,9 +22,11 @@ async function fetchContentsApi(
   dirPath: string,
   branch: string,
   headers: Record<string, string>,
+  rateLimiter?: RateLimiterLike,
 ): Promise<FileEntry[]> {
   const url = `https://api.github.com/repos/${repo}/contents/${dirPath}?ref=${branch}`;
   console.log(`  Fetching contents for ${dirPath} via Contents API`);
+  await rateLimiter?.acquire();
   const response = await fetch(url, { headers });
   if (!response.ok) {
     console.warn(`  Failed to fetch contents for ${dirPath}: ${response.status}`);
@@ -40,6 +42,7 @@ export const githubAdapter: Adapter = {
   async process(
     source: SourceConfig,
     _prefetchedContent?: string,
+    rateLimiter?: RateLimiterLike,
   ): Promise<ProcessedTopic[]> {
     const config = source.github;
     if (!config) {
@@ -55,12 +58,16 @@ export const githubAdapter: Adapter = {
     const treeUrl = `https://api.github.com/repos/${config.repo}/git/trees/${branch}?recursive=1`;
     console.log(`  Fetching tree from ${config.repo}`);
 
+    await rateLimiter?.acquire();
     const treeResponse = await fetch(treeUrl, { headers });
     if (!treeResponse.ok) {
       throw new Error(
         `Failed to fetch tree: ${treeResponse.status} ${treeResponse.statusText}`,
       );
     }
+
+    // Check GitHub API rate limit
+    await checkRateLimit(treeResponse);
 
     const treeData = (await treeResponse.json()) as {
       tree: Array<{ path: string; type: string }>;
@@ -75,7 +82,7 @@ export const githubAdapter: Adapter = {
       mdFiles = [];
       for (const subDir of config.subDirs) {
         const dirPath = `${docsPath}/${subDir}`;
-        const files = await fetchContentsApi(config.repo, dirPath, branch, headers);
+        const files = await fetchContentsApi(config.repo, dirPath, branch, headers, rateLimiter);
         mdFiles.push(...files);
       }
     } else {
@@ -124,6 +131,7 @@ export const githubAdapter: Adapter = {
       const batch = mdFiles.slice(i, i + batchSize);
       const results = await Promise.allSettled(
         batch.map(async (file) => {
+          await rateLimiter?.acquire();
           const rawUrl = `https://raw.githubusercontent.com/${config.repo}/${branch}/${file.path}`;
           const response = await fetch(rawUrl, {
             headers: { "User-Agent": "anytext-scraper" },
@@ -196,6 +204,14 @@ export const githubAdapter: Adapter = {
     return topics;
   },
 };
+
+async function checkRateLimit(response: Response): Promise<void> {
+  const remaining = parseInt(response.headers.get("X-RateLimit-Remaining") ?? "1000", 10);
+  if (remaining < 100) {
+    console.warn(`  GitHub rate limit low (${remaining} remaining), pausing 5s...`);
+    await new Promise((resolve) => setTimeout(resolve, 5000));
+  }
+}
 
 function extractFirstParagraph(markdown: string): string {
   const lines = markdown.split("\n");

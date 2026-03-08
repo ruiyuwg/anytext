@@ -24,6 +24,7 @@ import {
 } from "./pipeline/write.js";
 import { fetchContent } from "./pipeline/fetch.js";
 import { readHashes, writeHashes, hasChanged } from "./pipeline/hashes.js";
+import { createHostLimiter } from "./pipeline/rate-limiter.js";
 import { hashContent } from "./utils.js";
 
 const adapters: Record<string, import("./types.js").Adapter> = {
@@ -64,7 +65,8 @@ export async function processSource(
     }
   }
 
-  const topics = await adapter.process(source, prefetchedContent);
+  const rateLimiter = createHostLimiter(source.rateLimit);
+  const topics = await adapter.process(source, prefetchedContent, rateLimiter);
 
   if (topics.length === 0) {
     console.log(`  No topics generated for ${source.id}`);

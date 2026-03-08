@@ -67,10 +67,15 @@ export interface ProcessedTopic {
   content: string;
 }
 
+export interface RateLimiterLike {
+  acquire(): Promise<void>;
+}
+
 export interface Adapter {
   process(
     source: SourceConfig,
     prefetchedContent?: string,
+    rateLimiter?: RateLimiterLike,
   ): Promise<ProcessedTopic[]>;
 }
 

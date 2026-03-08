@@ -1,4 +1,4 @@
-import type { Adapter, SourceConfig, ProcessedTopic } from "../types.js";
+import type { Adapter, SourceConfig, ProcessedTopic, RateLimiterLike } from "../types.js";
 import { fetchContent } from "../pipeline/fetch.js";
 import { extractContent } from "../pipeline/extract.js";
 import { slugify, estimateTokens, truncate } from "../utils.js";
@@ -7,6 +7,7 @@ export const sitemapAdapter: Adapter = {
   async process(
     source: SourceConfig,
     _prefetchedContent?: string,
+    rateLimiter?: RateLimiterLike,
   ): Promise<ProcessedTopic[]> {
     if (!source.url) {
       throw new Error(`Source ${source.id} has no URL configured`);
@@ -15,8 +16,9 @@ export const sitemapAdapter: Adapter = {
     const crawlConfig = source.crawl ?? {};
 
     // Fetch and parse sitemap.xml (or sitemap index)
+    await rateLimiter?.acquire();
     const sitemapXml = await fetchContent(source.url);
-    const urls = await resolveUrls(sitemapXml, crawlConfig.maxPages);
+    const urls = await resolveUrls(sitemapXml, crawlConfig.maxPages, rateLimiter);
 
     // Apply include/exclude patterns
     let filtered = urls;
@@ -45,6 +47,7 @@ export const sitemapAdapter: Adapter = {
       const batch = filtered.slice(i, i + batchSize);
       const results = await Promise.allSettled(
         batch.map(async (url) => {
+          await rateLimiter?.acquire();
           const html = await fetchContent(url);
           return { url, html };
         }),
@@ -113,6 +116,7 @@ export const sitemapAdapter: Adapter = {
 async function resolveUrls(
   xml: string,
   maxPages?: number,
+  rateLimiter?: RateLimiterLike,
 ): Promise<string[]> {
   if (!isSitemapIndex(xml)) {
     const urls = parseSitemapUrls(xml);
@@ -141,6 +145,7 @@ async function resolveUrls(
     }
 
     try {
+      await rateLimiter?.acquire();
       const subXml = await fetchContent(subUrl);
       const pageUrls = parseSitemapUrls(subXml);
 
