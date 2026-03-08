@@ -1,0 +1,48 @@
+Version: 30.0
+
+On this page
+
+With the [Global Setup/Teardown](/docs/configuration#globalsetup-string) and [Async Test Environment](/docs/configuration#testenvironment-string) APIs, Jest can work smoothly with [MongoDB](https://www.mongodb.com/).
+
+## Use jest-mongodb Preset[​](#use-jest-mongodb-preset "Direct link to Use jest-mongodb Preset")
+
+[Jest MongoDB](https://github.com/shelfio/jest-mongodb) provides all required configuration to run your tests using MongoDB.
+
+1.  First install `@shelf/jest-mongodb`
+
+-   npm
+-   Yarn
+-   pnpm
+-   Bun
+
+```
+npm install --save-dev @shelf/jest-mongodb
+```
+
+```
+yarn add --dev @shelf/jest-mongodb
+```
+
+```
+pnpm add --save-dev @shelf/jest-mongodb
+```
+
+```
+bun add --dev @shelf/jest-mongodb
+```
+
+2.  Specify preset in your Jest configuration:
+
+```
+{  "preset": "@shelf/jest-mongodb"}
+```
+
+3.  Write your test
+
+```
+const {MongoClient} = require('mongodb');describe('insert', () => {  let connection;  let db;  beforeAll(async () => {    connection = await MongoClient.connect(globalThis.__MONGO_URI__, {      useNewUrlParser: true,      useUnifiedTopology: true,    });    db = await connection.db(globalThis.__MONGO_DB_NAME__);  });  afterAll(async () => {    await connection.close();  });  it('should insert a doc into collection', async () => {    const users = db.collection('users');    const mockUser = {_id: 'some-user-id', name: 'John'};    await users.insertOne(mockUser);    const insertedUser = await users.findOne({_id: 'some-user-id'});    expect(insertedUser).toEqual(mockUser);  });});
+```
+
+There's no need to load any dependencies.
+
+See [documentation](https://github.com/shelfio/jest-mongodb) for details (configuring MongoDB version, etc).

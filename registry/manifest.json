@@ -1,5 +1,5 @@
 {
-  "version": 71,
+  "version": 72,
   "updatedAt": "2026-03-08",
   "libraries": [
     {
@@ -63842,6 +63842,632 @@
           ],
           "path": "hono/jwt-auth-middleware.md",
           "tokens": 811
+        }
+      ]
+    },
+    {
+      "id": "jest",
+      "name": "Jest",
+      "description": "JavaScript testing framework with matchers, mocking, snapshots, and code coverage",
+      "version": "30",
+      "topics": [
+        {
+          "id": "api",
+          "title": "api",
+          "description": "Version: 30.0",
+          "tags": [
+            "afterAll(fn, timeout)",
+            "afterEach(fn, timeout)",
+            "beforeAll(fn, timeout)",
+            "beforeEach(fn, timeout)",
+            "describe(name, fn)",
+            "describe.each(table)(name, fn, timeout)",
+            "describe.only(name, fn)",
+            "describe.only.each(table)(name, fn)",
+            "describe.skip(name, fn)",
+            "describe.skip.each(table)(name, fn)"
+          ],
+          "path": "jest/api.md",
+          "tokens": 10432
+        },
+        {
+          "id": "architecture",
+          "title": "architecture",
+          "description": "Version: 30.0",
+          "tags": [],
+          "path": "jest/architecture.md",
+          "tokens": 135
+        },
+        {
+          "id": "asynchronous",
+          "title": "asynchronous",
+          "description": "Version: 30.0",
+          "tags": [
+            "fetchData",
+            "'peanut butter'",
+            "async",
+            "await",
+            "test",
+            ".resolves",
+            ".rejects",
+            "return",
+            ".catch",
+            "expect.assertions"
+          ],
+          "path": "jest/asynchronous.md",
+          "tokens": 1318
+        },
+        {
+          "id": "bypassing-module-mocks",
+          "title": "bypassing-module-mocks",
+          "description": "Version: 30.0",
+          "tags": [
+            "createUser",
+            "fetch",
+            "Response",
+            "Promise",
+            "node-fetch",
+            "jest.mock",
+            "jest.requireActual"
+          ],
+          "path": "jest/bypassing-module-mocks.md",
+          "tokens": 584
+        },
+        {
+          "id": "cli",
+          "title": "cli",
+          "description": "Version: 30.0",
+          "tags": [
+            "jest",
+            "jest --help",
+            "path/to/fileA.js",
+            "path/to/fileB.js",
+            "describe",
+            "test",
+            "jest <regexForTestFiles>",
+            "--bail[=<n>]",
+            "--cache",
+            "--changedFilesWithAncestor"
+          ],
+          "path": "jest/cli.md",
+          "tokens": 7160
+        },
+        {
+          "id": "code-transformation",
+          "title": "code-transformation",
+          "description": "Version: 30.0",
+          "tags": [
+            "transform",
+            "babel-jest",
+            "/\\.[jt]sx?$/",
+            ".js",
+            ".jsx",
+            ".ts",
+            ".tsx",
+            "babel-preset-jest",
+            "excludeJestPreset: true",
+            "jest.mock"
+          ],
+          "path": "jest/code-transformation.md",
+          "tokens": 2312
+        },
+        {
+          "id": "configuration",
+          "title": "configuration",
+          "description": "Version: 30.0",
+          "tags": [
+            "jest.config.js|ts|mjs|cjs|cts|json",
+            "--config",
+            "ts-node",
+            "@jest-config-loader",
+            "esbuild-register",
+            "transpileOnly",
+            "\"jest\"",
+            "package.json",
+            "jest-config",
+            "automock"
+          ],
+          "path": "jest/configuration.md",
+          "tokens": 23312
+        },
+        {
+          "id": "dynamodb",
+          "title": "dynamodb",
+          "description": "Version: 30.0",
+          "tags": [
+            "@shelf/jest-dynamodb",
+            "jest-dynamodb-config.js"
+          ],
+          "path": "jest/dynamodb.md",
+          "tokens": 520
+        },
+        {
+          "id": "ecmascript-modules",
+          "title": "ecmascript-modules",
+          "description": "Version: 30.0",
+          "tags": [
+            "18.8.0",
+            "transform: {}",
+            "node",
+            "--experimental-vm-modules",
+            "cross-env",
+            "*.wasm",
+            "--experimental-wasm-modules",
+            "type",
+            "package.json",
+            ".mjs"
+          ],
+          "path": "jest/ecmascript-modules.md",
+          "tokens": 1464
+        },
+        {
+          "id": "environment-variables",
+          "title": "environment-variables",
+          "description": "Version: 30.0",
+          "tags": [
+            "NODE_ENV",
+            "'test'",
+            "JEST_WORKER_ID",
+            "1",
+            "runInBand"
+          ],
+          "path": "jest/environment-variables.md",
+          "tokens": 110
+        },
+        {
+          "id": "es6-class-mocks",
+          "title": "es6-class-mocks",
+          "description": "Version: 30.0",
+          "tags": [
+            "SoundPlayer",
+            "SoundPlayerConsumer",
+            "jest.mock('./sound-player')",
+            "undefined",
+            "__mocks__",
+            "jest.mock()",
+            "jest.mock(path, moduleFactory)",
+            "mock",
+            "fake",
+            "ReferenceError"
+          ],
+          "path": "jest/es6-class-mocks.md",
+          "tokens": 4378
+        },
+        {
+          "id": "expect",
+          "title": "expect",
+          "description": "Version: 30.0",
+          "tags": [
+            "expect",
+            "jest-extended",
+            "expect(value)",
+            ".not",
+            ".resolves",
+            ".rejects",
+            ".toBe(value)",
+            ".toHaveBeenCalled()",
+            ".toHaveBeenCalledTimes(number)",
+            ".toHaveBeenCalledWith(arg1, arg2, ...)"
+          ],
+          "path": "jest/expect.md",
+          "tokens": 18247
+        },
+        {
+          "id": "getting-started",
+          "title": "getting-started",
+          "description": "Version: 30.0",
+          "tags": [
+            "sum.js",
+            "sum.test.js",
+            "package.json",
+            "yarn test",
+            "npm test",
+            "expect",
+            "toBe",
+            "PATH",
+            "yarn global add jest",
+            "npm install jest --global"
+          ],
+          "path": "jest/getting-started.md",
+          "tokens": 2469
+        },
+        {
+          "id": "jest-community",
+          "title": "jest-community",
+          "description": "Version: 30.0",
+          "tags": [],
+          "path": "jest/jest-community.md",
+          "tokens": 346
+        },
+        {
+          "id": "jest-object",
+          "title": "jest-object",
+          "description": "Version: 30.0",
+          "tags": [
+            "jest",
+            "import {jest} from '@jest/globals'",
+            "jest.disableAutomock()",
+            "jest.enableAutomock()",
+            "jest.createMockFromModule(moduleName)",
+            "jest.mock(moduleName, factory, options)",
+            "jest.Mocked<Source>",
+            "jest.mocked(source, options?)",
+            "jest.unmock(moduleName)",
+            "jest.deepUnmock(moduleName)"
+          ],
+          "path": "jest/jest-object.md",
+          "tokens": 11269
+        },
+        {
+          "id": "jest-platform",
+          "title": "jest-platform",
+          "description": "Version: 30.0",
+          "tags": [
+            "getChangedFilesForRoots",
+            "findRepos",
+            "jest-changed-files",
+            "jest-docblock",
+            "hasDeprecationWarnings",
+            "isValid",
+            "jest-validate",
+            "JestWorker",
+            "jest-worker",
+            "pretty-format"
+          ],
+          "path": "jest/jest-platform.md",
+          "tokens": 1345
+        },
+        {
+          "id": "manual-mocks",
+          "title": "manual-mocks",
+          "description": "Version: 30.0",
+          "tags": [
+            "__mocks__/",
+            "user",
+            "models",
+            "user.js",
+            "models/__mocks__",
+            "__mocks__",
+            "__MOCKS__",
+            "jest.mock('./moduleName')",
+            "lodash",
+            "node_modules"
+          ],
+          "path": "jest/manual-mocks.md",
+          "tokens": 2101
+        },
+        {
+          "id": "migration-guide",
+          "title": "migration-guide",
+          "description": "Version: 30.0",
+          "tags": [],
+          "path": "jest/migration-guide.md",
+          "tokens": 417
+        },
+        {
+          "id": "mock-function-api",
+          "title": "mock-function-api",
+          "description": "Version: 30.0",
+          "tags": [
+            "jest.fn()",
+            "undefined",
+            "mockFn.getMockName()",
+            "mockFn.mock.calls",
+            "mockFn.mock.results",
+            "mockFn.mock.instances",
+            "mockFn.mock.contexts",
+            "mockFn.mock.lastCall",
+            "mockFn.mockClear()",
+            "mockFn.mockReset()"
+          ],
+          "path": "jest/mock-function-api.md",
+          "tokens": 6196
+        },
+        {
+          "id": "mock-functions",
+          "title": "mock-functions",
+          "description": "Version: 30.0",
+          "tags": [
+            "new",
+            "manual mock",
+            "forEach",
+            ".mock",
+            "this",
+            "data",
+            "jest.mock(...)",
+            "mockResolvedValue",
+            ".get",
+            "axios.get('/users.json')"
+          ],
+          "path": "jest/mock-functions.md",
+          "tokens": 2787
+        },
+        {
+          "id": "mongodb",
+          "title": "mongodb",
+          "description": "Version: 30.0",
+          "tags": [
+            "@shelf/jest-mongodb"
+          ],
+          "path": "jest/mongodb.md",
+          "tokens": 424
+        },
+        {
+          "id": "more-resources",
+          "title": "more-resources",
+          "description": "Version: 30.0",
+          "tags": [
+            "examples",
+            "#testing"
+          ],
+          "path": "jest/more-resources.md",
+          "tokens": 417
+        },
+        {
+          "id": "puppeteer",
+          "title": "puppeteer",
+          "description": "Version: 30.0",
+          "tags": [
+            "page.$eval",
+            "page.$$eval",
+            "page.evaluate",
+            "jest-puppeteer",
+            "page",
+            "browser",
+            "jest.config.js"
+          ],
+          "path": "jest/puppeteer.md",
+          "tokens": 1266
+        },
+        {
+          "id": "setup-teardown",
+          "title": "setup-teardown",
+          "description": "Version: 30.0",
+          "tags": [
+            "beforeEach",
+            "afterEach",
+            "initializeCityDatabase()",
+            "clearCityDatabase()",
+            "done",
+            "beforeAll",
+            "afterAll",
+            "before*",
+            "after*",
+            "describe"
+          ],
+          "path": "jest/setup-teardown.md",
+          "tokens": 1874
+        },
+        {
+          "id": "snapshot-testing",
+          "title": "snapshot-testing",
+          "description": "Version: 30.0",
+          "tags": [
+            "<Link>",
+            "page",
+            "App.js",
+            "Link.js",
+            "-u",
+            "--testNamePattern",
+            "Link",
+            ".snap",
+            ".toMatchInlineSnapshot()",
+            "tree"
+          ],
+          "path": "jest/snapshot-testing.md",
+          "tokens": 4800
+        },
+        {
+          "id": "testing-frameworks",
+          "title": "testing-frameworks",
+          "description": "Version: 30.0",
+          "tags": [],
+          "path": "jest/testing-frameworks.md",
+          "tokens": 767
+        },
+        {
+          "id": "timer-mocks",
+          "title": "timer-mocks",
+          "description": "Version: 30.0",
+          "tags": [
+            "setTimeout()",
+            "setInterval()",
+            "clearTimeout()",
+            "clearInterval()",
+            "jest.useFakeTimers()",
+            "jest.useRealTimers()",
+            "jest.runOnlyPendingTimers()",
+            "jest.advanceTimersByTime(msToRun)",
+            "msToRun",
+            "jest.clearAllTimers()"
+          ],
+          "path": "jest/timer-mocks.md",
+          "tokens": 1936
+        },
+        {
+          "id": "using-jest-clijest-runinband-using-your-package-manager-s-test-script-e-g-with-create-react-app-npm-test-runinband",
+          "title": "Using Jest CLIjest --runInBand# Using your package manager's `test` script (e.g. with create-react-app)npm test -- --runInBand",
+          "description": "Version: 30.0",
+          "tags": [
+            "debugger;",
+            "chrome://inspect",
+            "localhost:9229",
+            "debugger",
+            "--runInBand",
+            "launch.json",
+            "create-react-app",
+            "--no-cache",
+            "getCacheKey",
+            "jest.setTimeout"
+          ],
+          "path": "jest/using-jest-clijest-runinband-using-your-package-manager-s-test-script-e-g-with-create-react-app-npm-test-runinband.md",
+          "tokens": 2542
+        },
+        {
+          "id": "tutorial-async",
+          "title": "tutorial-async",
+          "description": "Version: 30.0",
+          "tags": [
+            "request.js",
+            "then",
+            "__mocks__",
+            "__MOCKS__",
+            "jest.mock('../request')",
+            "it",
+            "expect",
+            ".resolves",
+            "resolves",
+            "async"
+          ],
+          "path": "jest/tutorial-async.md",
+          "tokens": 1304
+        },
+        {
+          "id": "tutorial-jquery",
+          "title": "tutorial-jquery",
+          "description": "Version: 30.0",
+          "tags": [
+            "__tests__/",
+            "fetchCurrentUser.js",
+            "#button",
+            "jsdom",
+            "jest-environment-jsdom"
+          ],
+          "path": "jest/tutorial-jquery.md",
+          "tokens": 692
+        },
+        {
+          "id": "tutorial-react",
+          "title": "tutorial-react",
+          "description": "Version: 30.0",
+          "tags": [
+            "babel-jest",
+            "react",
+            "package.json",
+            "<current-version>",
+            "yarn test",
+            "jest",
+            "jest -u",
+            "react-test-renderer",
+            "SomeComponent",
+            "@testing-library/react"
+          ],
+          "path": "jest/tutorial-react.md",
+          "tokens": 2427
+        },
+        {
+          "id": "tutorial-react-native",
+          "title": "tutorial-react-native",
+          "description": "Version: 30.0",
+          "tags": [
+            "react-native init",
+            "yarn test",
+            "jest-react-native",
+            "package.json",
+            "react-native",
+            "jest",
+            "jest -u",
+            "jest.preset",
+            "transformIgnorePatterns",
+            "|"
+          ],
+          "path": "jest/tutorial-react-native.md",
+          "tokens": 2161
+        },
+        {
+          "id": "upgrading-to-jest29",
+          "title": "upgrading-to-jest29",
+          "description": "Version: 30.0",
+          "tags": [
+            "snapshotFormat",
+            "jest-environment-jsdom",
+            "jsdom",
+            "4.5",
+            "jsdom@20",
+            "crypto.getRandomValues()",
+            "uuid",
+            "nanoid",
+            "pretty-format",
+            "ConvertAnsi"
+          ],
+          "path": "jest/upgrading-to-jest29.md",
+          "tokens": 722
+        },
+        {
+          "id": "old-jest-29-jest-testpathpattern-unit-new-jest-30-jest-testpathpatterns-unit-integration",
+          "title": "Old (Jest 29)jest --testPathPattern=\"unit/.*\"# New (Jest 30)jest --testPathPatterns \"unit/.*\" \"integration/.*\"",
+          "description": "Version: 30.0",
+          "tags": [
+            "jest-environment-jsdom",
+            "expect(fn).toBeCalled()",
+            "expect(fn).toHaveBeenCalled()",
+            "expect(fn).toBeCalledTimes(n)",
+            "expect(fn).toHaveBeenCalledTimes(n)",
+            "expect(fn).toBeCalledWith(arg)",
+            "expect(fn).toHaveBeenCalledWith(arg)",
+            "expect(fn).lastCalledWith(arg)",
+            "expect(fn).nthCalledWith(n, arg)",
+            "expect(fn).toReturn()"
+          ],
+          "path": "jest/old-jest-29-jest-testpathpattern-unit-new-jest-30-jest-testpathpatterns-unit-integration.md",
+          "tokens": 3935
+        },
+        {
+          "id": "using-matchers",
+          "title": "using-matchers",
+          "description": "Version: 30.0",
+          "tags": [
+            "expect",
+            "expect(2 + 2)",
+            ".toBe(4)",
+            "toBe",
+            "Object.is",
+            "toEqual",
+            "undefined",
+            "toStrictEqual",
+            "not",
+            "null"
+          ],
+          "path": "jest/using-matchers.md",
+          "tokens": 1315
+        },
+        {
+          "id": "watch-plugins",
+          "title": "watch-plugins",
+          "description": "Version: 30.0",
+          "tags": [
+            "watchPlugins",
+            "apply(jestHooks)",
+            "apply",
+            "jestHooks",
+            "Promise<boolean>",
+            "jestHooks.onTestRunComplete(results)",
+            "jestHooks.onFileChange({projects})",
+            "getUsageInfo",
+            "run",
+            "getUsageInfo(globalConfig)"
+          ],
+          "path": "jest/watch-plugins.md",
+          "tokens": 2098
+        },
+        {
+          "id": "webpack",
+          "title": "webpack",
+          "description": "Version: 30.0",
+          "tags": [
+            "babel-jest",
+            "transform",
+            "styles.foobar === 'foobar'",
+            "moduleNameMapper",
+            "require('logo.jpg');",
+            "'logo'",
+            "modules",
+            "extensions",
+            "moduleDirectories",
+            "moduleFileExtensions"
+          ],
+          "path": "jest/webpack.md",
+          "tokens": 2032
         }
       ]
     },

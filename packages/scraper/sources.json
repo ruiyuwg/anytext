@@ -473,6 +473,19 @@
       }
     },
     {
+      "id": "jest",
+      "name": "Jest",
+      "description": "JavaScript testing framework with matchers, mocking, snapshots, and code coverage",
+      "version": "30",
+      "adapter": "sitemap",
+      "url": "https://jestjs.io/sitemap.xml",
+      "crawl": {
+        "contentSelector": "article",
+        "include": ["/docs/"],
+        "exclude": ["/docs/29.7/", "/docs/next/"]
+      }
+    },
+    {
       "id": "azure",
       "name": "Azure",
       "description": "Microsoft Azure cloud platform with compute, storage, databases, AI, and 200+ services",
