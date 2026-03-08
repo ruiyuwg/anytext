@@ -550,6 +550,19 @@
         "docsPath": "data/primitives/docs",
         "include": [".mdx"]
       }
+    },
+    {
+      "id": "mui",
+      "name": "Material UI",
+      "description": "React component library implementing Google's Material Design with theming and customization",
+      "version": "6",
+      "adapter": "github",
+      "github": {
+        "repo": "mui/material-ui",
+        "branch": "master",
+        "docsPath": "docs/data/material",
+        "include": [".md"]
+      }
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "version": 76,
+  "version": 77,
   "updatedAt": "2026-03-08",
   "libraries": [
     {
@@ -79343,6 +79343,2350 @@
           ],
           "path": "mantine/how-can-i-load-fonts-in-vite.md",
           "tokens": 1163
+        }
+      ]
+    },
+    {
+      "id": "mui",
+      "name": "Material UI",
+      "description": "React component library implementing Google's Material Design with theming and customization",
+      "version": "6",
+      "topics": [
+        {
+          "id": "all-components",
+          "title": "Material UI components",
+          "description": "<p class=\"description\">Every Material UI component available so far.</p>",
+          "tags": [],
+          "path": "mui/all-components.md",
+          "tokens": 331
+        },
+        {
+          "id": "about-the-lab",
+          "title": "About the lab",
+          "description": "<p class=\"description\">This package hosts the incubator components that are not yet ready to move to the core.</p>",
+          "tags": [
+            "package.json"
+          ],
+          "path": "mui/about-the-lab.md",
+          "tokens": 771
+        },
+        {
+          "id": "accordion",
+          "title": "Accordion",
+          "description": "productId: material-ui",
+          "tags": [
+            "expandIcon",
+            "defaultExpanded",
+            "slots.transition",
+            "slotProps.transition",
+            "disabled",
+            "expanded",
+            "useState",
+            "h3",
+            "slotProps.heading.component",
+            "unmountOnExit"
+          ],
+          "path": "mui/accordion.md",
+          "tokens": 1278
+        },
+        {
+          "id": "alert",
+          "title": "Alert",
+          "description": "productId: material-ui",
+          "tags": [
+            "severity",
+            "success",
+            "info",
+            "warning",
+            "error",
+            "filled",
+            "outlined",
+            "variant",
+            "bgcolor: 'background.paper'",
+            "sx"
+          ],
+          "path": "mui/alert.md",
+          "tokens": 1455
+        },
+        {
+          "id": "app-bar",
+          "title": "App Bar",
+          "description": "productId: material-ui",
+          "tags": [
+            "position=\"sticky\"",
+            "<Toolbar />",
+            "theme.mixins.toolbar",
+            "useScrollTrigger()",
+            "useScrollTrigger([options]) => trigger",
+            "options",
+            "options.disableHysteresis",
+            "false",
+            "trigger",
+            "options.target"
+          ],
+          "path": "mui/app-bar.md",
+          "tokens": 990
+        },
+        {
+          "id": "autocomplete",
+          "title": "Autocomplete",
+          "description": "productId: material-ui",
+          "tags": [
+            "getOptionLabel",
+            "isOptionEqualToValue",
+            "getOptionKey",
+            "value",
+            "onChange",
+            "inputValue",
+            "onInputChange",
+            "allValues.filter",
+            "freeSolo",
+            "selectOnFocus"
+          ],
+          "path": "mui/autocomplete.md",
+          "tokens": 4004
+        },
+        {
+          "id": "avatars",
+          "title": "Avatar",
+          "description": "productId: material-ui",
+          "tags": [
+            "img",
+            "src",
+            "srcSet",
+            "children",
+            "height",
+            "width",
+            "variant",
+            "alt",
+            "AvatarGroup",
+            "max"
+          ],
+          "path": "mui/avatars.md",
+          "tokens": 598
+        },
+        {
+          "id": "backdrop",
+          "title": "Backdrop",
+          "description": "productId: material-ui",
+          "tags": [],
+          "path": "mui/backdrop.md",
+          "tokens": 200
+        },
+        {
+          "id": "badges",
+          "title": "Badge",
+          "description": "productId: material-ui",
+          "tags": [
+            "color",
+            "invisible",
+            "badgeContent",
+            "showZero",
+            "max",
+            "dot",
+            "overlap",
+            "anchorOrigin",
+            "aria-label"
+          ],
+          "path": "mui/badges.md",
+          "tokens": 460
+        },
+        {
+          "id": "bottom-navigation",
+          "title": "Bottom Navigation",
+          "description": "productId: material-ui",
+          "tags": [
+            "BottomNavigationAction",
+            "component"
+          ],
+          "path": "mui/bottom-navigation.md",
+          "tokens": 400
+        },
+        {
+          "id": "box",
+          "title": "Box",
+          "description": "productId: material-ui",
+          "tags": [
+            "<div>",
+            "sx",
+            "component",
+            "<section>"
+          ],
+          "path": "mui/box.md",
+          "tokens": 606
+        },
+        {
+          "id": "breadcrumbs",
+          "title": "Breadcrumbs",
+          "description": "productId: material-ui",
+          "tags": [
+            "aria-label",
+            "Breadcrumbs",
+            "<ol>",
+            "aria-hidden"
+          ],
+          "path": "mui/breadcrumbs.md",
+          "tokens": 488
+        },
+        {
+          "id": "button-group",
+          "title": "Button Group",
+          "description": "productId: material-ui",
+          "tags": [
+            "ButtonGroup",
+            "size",
+            "color",
+            "orientation",
+            "disableElevation",
+            "loading",
+            "Button"
+          ],
+          "path": "mui/button-group.md",
+          "tokens": 348
+        },
+        {
+          "id": "buttons",
+          "title": "Button",
+          "description": "productId: material-ui",
+          "tags": [
+            "Button",
+            "disableElevation",
+            "onClick",
+            "size",
+            "color",
+            "loading",
+            "Badge",
+            "IconButton",
+            "component=\"label\"",
+            "file"
+          ],
+          "path": "mui/buttons.md",
+          "tokens": 1586
+        },
+        {
+          "id": "cards",
+          "title": "Card",
+          "description": "productId: material-ui",
+          "tags": [
+            "variant=\"outlined\"",
+            "<div>",
+            "component",
+            "CardActionArea",
+            "data-active",
+            "&[data-active]"
+          ],
+          "path": "mui/cards.md",
+          "tokens": 824
+        },
+        {
+          "id": "checkboxes",
+          "title": "Checkbox",
+          "description": "productId: material-ui",
+          "tags": [
+            "Checkbox",
+            "FormControlLabel",
+            "size",
+            "checked",
+            "onChange",
+            "indeterminateIcon",
+            "FormGroup",
+            "<label>",
+            "aria-label",
+            "aria-labelledby"
+          ],
+          "path": "mui/checkboxes.md",
+          "tokens": 820
+        },
+        {
+          "id": "chips",
+          "title": "Chip",
+          "description": "productId: material-ui",
+          "tags": [
+            "Chip",
+            "onClick",
+            "onDelete",
+            "avatar",
+            "icon",
+            "color",
+            "size",
+            "sx",
+            "height:auto",
+            "whiteSpace: normal"
+          ],
+          "path": "mui/chips.md",
+          "tokens": 650
+        },
+        {
+          "id": "click-away-listener",
+          "title": "Click-Away Listener",
+          "description": "productId: material-ui",
+          "tags": [
+            "mouseEvent",
+            "touchEvent",
+            "onClick",
+            "role=\"presentation\""
+          ],
+          "path": "mui/click-away-listener.md",
+          "tokens": 580
+        },
+        {
+          "id": "container",
+          "title": "Container",
+          "description": "productId: material-ui",
+          "tags": [
+            "maxWidth",
+            "fixed"
+          ],
+          "path": "mui/container.md",
+          "tokens": 243
+        },
+        {
+          "id": "css-baseline",
+          "title": "CSS Baseline",
+          "description": "productId: material-ui",
+          "tags": [
+            "ScopedCssBaseline",
+            "<html>",
+            "<body>",
+            "theme.palette.background.default",
+            "enableColorScheme",
+            "CssBaseline",
+            "color-scheme",
+            "theme.palette.mode",
+            "box-sizing",
+            "border-box"
+          ],
+          "path": "mui/css-baseline.md",
+          "tokens": 1049
+        },
+        {
+          "id": "dialogs",
+          "title": "Dialog",
+          "description": "productId: material-ui",
+          "tags": [
+            "<DialogContent />",
+            "Slide",
+            "maxWidth",
+            "fullWidth",
+            "useMediaQuery",
+            "Draggable",
+            "PaperComponent",
+            "Dialog",
+            "scroll=paper",
+            "scroll=body"
+          ],
+          "path": "mui/dialogs.md",
+          "tokens": 1486
+        },
+        {
+          "id": "dividers",
+          "title": "Divider",
+          "description": "productId: material-ui",
+          "tags": [
+            "<hr>",
+            "fullWidth",
+            "inset",
+            "middle",
+            "orientation",
+            "<div>",
+            "flexItem",
+            "textAlign",
+            "component",
+            "<li>"
+          ],
+          "path": "mui/dividers.md",
+          "tokens": 712
+        },
+        {
+          "id": "drawers",
+          "title": "Drawer",
+          "description": "productId: material-ui",
+          "tags": [
+            "open",
+            "anchor",
+            "left",
+            "SwipeableDrawer",
+            "disableBackdropTransition",
+            "keepMounted",
+            "ModalProps",
+            "keepMounted: false",
+            "temporary",
+            "permanent"
+          ],
+          "path": "mui/drawers.md",
+          "tokens": 1228
+        },
+        {
+          "id": "floating-action-button",
+          "title": "Floating Action Button",
+          "description": "productId: material-ui",
+          "tags": [
+            "large",
+            "size",
+            "enterDelay"
+          ],
+          "path": "mui/floating-action-button.md",
+          "tokens": 402
+        },
+        {
+          "id": "grid-legacy",
+          "title": "GridLegacy",
+          "description": "productId: material-ui",
+          "tags": [
+            "GridLegacy",
+            "DataGrid",
+            "xs={12}",
+            "xs={12} sm={6}",
+            "spacing",
+            "theme.spacing()",
+            "rowSpacing",
+            "columnSpacing",
+            "row-gap",
+            "column-gap"
+          ],
+          "path": "mui/grid-legacy.md",
+          "tokens": 1959
+        },
+        {
+          "id": "grid",
+          "title": "Grid",
+          "description": "productId: material-ui",
+          "tags": [
+            "Grid",
+            "container",
+            "gap",
+            "DataGrid",
+            "size={6}",
+            "size={{ xs: 12, sm: 6 }}",
+            "spacing",
+            "theme.spacing()",
+            "rowSpacing",
+            "columnSpacing"
+          ],
+          "path": "mui/grid.md",
+          "tokens": 2279
+        },
+        {
+          "id": "icons",
+          "title": "Icons",
+          "description": "productId: material-ui",
+          "tags": [
+            "@mui/icons-material",
+            "package.json",
+            "SvgIcon",
+            "@mui/material",
+            "@mui/icons-material/Delete",
+            "@mui/icons-material/DeleteOutlined",
+            "@mui/icons-material/DeleteRounded",
+            "@mui/icons-material/DeleteTwoTone",
+            "@mui/icons-material/DeleteSharp",
+            "delete_forever"
+          ],
+          "path": "mui/icons.md",
+          "tokens": 2811
+        },
+        {
+          "id": "image-list",
+          "title": "Image List",
+          "description": "productId: material-ui",
+          "tags": [
+            "ImageListItemBar",
+            "title",
+            "subtitle",
+            "IconButton",
+            "titleBackground",
+            "gap"
+          ],
+          "path": "mui/image-list.md",
+          "tokens": 539
+        },
+        {
+          "id": "init-color-scheme-script",
+          "title": "InitColorSchemeScript",
+          "description": "productId: material-ui",
+          "tags": [
+            "InitColorSchemeScript",
+            "colorSchemeSelector: 'data'",
+            "<body>",
+            "layout",
+            "_document",
+            "attribute",
+            "\"class\"",
+            "<html>",
+            "%s",
+            "defaultMode"
+          ],
+          "path": "mui/init-color-scheme-script.md",
+          "tokens": 920
+        },
+        {
+          "id": "links",
+          "title": "Links",
+          "description": "productId: material-ui",
+          "tags": [
+            "color=\"primary\"",
+            "variant=\"inherit\"",
+            "underline",
+            "always",
+            "target=\"_blank\"",
+            "rel=\"noopener\"",
+            "rel=\"noreferrer\"",
+            "window.opener",
+            "Link",
+            "component"
+          ],
+          "path": "mui/links.md",
+          "tokens": 798
+        },
+        {
+          "id": "lists",
+          "title": "Lists",
+          "description": "productId: material-ui",
+          "tags": [
+            "<ul>",
+            "<li>",
+            "alignItems=\"flex-start\"",
+            "inset",
+            "ListItem",
+            "disableGutters",
+            "List"
+          ],
+          "path": "mui/lists.md",
+          "tokens": 1083
+        },
+        {
+          "id": "masonry",
+          "title": "Masonry",
+          "description": "productId: material-ui",
+          "tags": [
+            "Masonry",
+            "<div />",
+            "<img />",
+            "columns",
+            "spacing",
+            "sequential",
+            "defaultHeight",
+            "defaultColumns",
+            "defaultSpacing"
+          ],
+          "path": "mui/masonry.md",
+          "tokens": 672
+        },
+        {
+          "id": "material-icons",
+          "title": "Material Icons",
+          "description": "productId: material-ui",
+          "tags": [
+            "SvgIcon",
+            "@mui/material",
+            "@mui/icons-material"
+          ],
+          "path": "mui/material-icons.md",
+          "tokens": 436
+        },
+        {
+          "id": "menus",
+          "title": "Menu",
+          "description": "productId: material-ui",
+          "tags": [
+            "dense",
+            "selected",
+            "variant",
+            "Menu",
+            "Popover",
+            "Avatar",
+            "MenuItem",
+            "ListItem",
+            "text-overflow: ellipsis",
+            "Typography"
+          ],
+          "path": "mui/menus.md",
+          "tokens": 1166
+        },
+        {
+          "id": "modal",
+          "title": "Modal",
+          "description": "productId: material-ui",
+          "tags": [
+            "children",
+            "Modal",
+            "outline: 0",
+            "in",
+            "onEnter",
+            "onExited",
+            "keepMounted",
+            "createPortal()",
+            "disablePortal",
+            "aria-labelledby=\"id...\""
+          ],
+          "path": "mui/modal.md",
+          "tokens": 1220
+        },
+        {
+          "id": "no-ssr",
+          "title": "No SSR",
+          "description": "productId: material-ui",
+          "tags": [
+            "defer"
+          ],
+          "path": "mui/no-ssr.md",
+          "tokens": 399
+        },
+        {
+          "id": "number-field",
+          "title": "Number Field",
+          "description": "productId: material-ui",
+          "tags": [
+            "NumberField",
+            "./components/",
+            "TextField",
+            "FormControl",
+            "OutlinedInput",
+            "InputLabel",
+            "FormHelperText"
+          ],
+          "path": "mui/number-field.md",
+          "tokens": 537
+        },
+        {
+          "id": "pagination",
+          "title": "Pagination",
+          "description": "productId: material-ui",
+          "tags": [
+            "siblingCount",
+            "boundaryCount",
+            "usePagination",
+            "usePagination()",
+            "Pagination",
+            "TablePagination",
+            "getItemAriaLabel"
+          ],
+          "path": "mui/pagination.md",
+          "tokens": 696
+        },
+        {
+          "id": "paper",
+          "title": "Paper",
+          "description": "productId: material-ui",
+          "tags": [
+            "elevation",
+            "1",
+            "0",
+            "24",
+            "background-image",
+            "background-color",
+            "variant",
+            "\"outlined\"",
+            "square",
+            "<div>"
+          ],
+          "path": "mui/paper.md",
+          "tokens": 644
+        },
+        {
+          "id": "popover",
+          "title": "Popover",
+          "description": "productId: material-ui",
+          "tags": [
+            "Popover",
+            "Modal",
+            "Popper",
+            "anchorOrigin",
+            "transformOrigin",
+            "anchorReference",
+            "anchorPosition",
+            "anchorEl",
+            "mouseenter",
+            "mouseleave"
+          ],
+          "path": "mui/popover.md",
+          "tokens": 685
+        },
+        {
+          "id": "popper",
+          "title": "Popper",
+          "description": "productId: material-ui",
+          "tags": [
+            "disablePortal",
+            "anchorEl",
+            "Popper.js",
+            "onEnter",
+            "onExited",
+            "VirtualElement",
+            "material-ui-popup-state"
+          ],
+          "path": "mui/popper.md",
+          "tokens": 754
+        },
+        {
+          "id": "portal",
+          "title": "Portal",
+          "description": "productId: material-ui",
+          "tags": [
+            "createPortal()",
+            "container",
+            "ref",
+            "<span>"
+          ],
+          "path": "mui/portal.md",
+          "tokens": 543
+        },
+        {
+          "id": "progress",
+          "title": "Progress",
+          "description": "productId: material-ui",
+          "tags": [
+            "ButtonBase",
+            "CircularProgress",
+            "disableShrink",
+            "LinearProgress",
+            "value"
+          ],
+          "path": "mui/progress.md",
+          "tokens": 1109
+        },
+        {
+          "id": "radio-buttons",
+          "title": "Radio Group",
+          "description": "productId: material-ui",
+          "tags": [
+            "RadioGroup",
+            "Radio",
+            "row",
+            "value",
+            "onChange",
+            "size",
+            "FormControlLabel",
+            "labelPlacement",
+            "useRadioGroup",
+            "useRadioGroup()"
+          ],
+          "path": "mui/radio-buttons.md",
+          "tokens": 876
+        },
+        {
+          "id": "rating",
+          "title": "Rating",
+          "description": "productId: material-ui",
+          "tags": [
+            "value",
+            "precision",
+            "onChangeActive",
+            "size",
+            "highlightSelectedOnly",
+            "name",
+            "getLabelText",
+            "getBoundingClientRect()",
+            "0",
+            "NaN"
+          ],
+          "path": "mui/rating.md",
+          "tokens": 1019
+        },
+        {
+          "id": "selects",
+          "title": "Select",
+          "description": "productId: material-ui",
+          "tags": [
+            "<select>",
+            "Autocomplete",
+            "<input>",
+            "placeholder",
+            "label",
+            "TextField",
+            "InputBase",
+            "input",
+            "select",
+            "\"standard\""
+          ],
+          "path": "mui/selects.md",
+          "tokens": 1955
+        },
+        {
+          "id": "skeleton",
+          "title": "Skeleton",
+          "description": "productId: material-ui",
+          "tags": [
+            "text",
+            "circular",
+            "rectangular",
+            "rounded",
+            "width",
+            "height",
+            "em",
+            "children",
+            "background-color"
+          ],
+          "path": "mui/skeleton.md",
+          "tokens": 755
+        },
+        {
+          "id": "slider",
+          "title": "Slider",
+          "description": "productId: material-ui",
+          "tags": [
+            "size=\"small\"",
+            "marks={true}",
+            "shiftStep",
+            "step",
+            "marks",
+            "step={null}",
+            "valueLabelDisplay=\"on\"",
+            "value",
+            "onChange",
+            "disableSwap"
+          ],
+          "path": "mui/slider.md",
+          "tokens": 1184
+        },
+        {
+          "id": "snackbars",
+          "title": "Snackbar",
+          "description": "productId: material-ui",
+          "tags": [
+            "anchorOrigin",
+            "autoHideDuration",
+            "onClose",
+            "TransitionComponent",
+            "defaultMuiPrevented",
+            "true",
+            "event.preventDefault",
+            "<div>"
+          ],
+          "path": "mui/snackbars.md",
+          "tokens": 1337
+        },
+        {
+          "id": "speed-dial",
+          "title": "Speed Dial",
+          "description": "productId: material-ui",
+          "tags": [
+            "open",
+            "onOpen",
+            "onClose",
+            "icon",
+            "openIcon",
+            "SpeedDialIcon",
+            "isTouch",
+            "ariaLabel",
+            "slotProps.tooltip.title",
+            "aria-haspopup"
+          ],
+          "path": "mui/speed-dial.md",
+          "tokens": 665
+        },
+        {
+          "id": "stack",
+          "title": "Stack",
+          "description": "productId: material-ui",
+          "tags": [
+            "spacing",
+            "theme.spacing()",
+            "Stack",
+            "column",
+            "direction",
+            "divider",
+            "gap",
+            "useFlexGap",
+            "sx",
+            "Button"
+          ],
+          "path": "mui/stack.md",
+          "tokens": 1098
+        },
+        {
+          "id": "steppers",
+          "title": "Stepper",
+          "description": "productId: material-ui",
+          "tags": [
+            "Stepper",
+            "activeStep",
+            "orientation",
+            "optional",
+            "Step",
+            "completed={false}",
+            "disabled={true}",
+            "StepButton",
+            "completed",
+            "alternativeLabel"
+          ],
+          "path": "mui/steppers.md",
+          "tokens": 1249
+        },
+        {
+          "id": "switches",
+          "title": "Switch",
+          "description": "productId: material-ui",
+          "tags": [
+            "Switch",
+            "FormControlLabel",
+            "size",
+            "checked",
+            "onChange",
+            "FormGroup",
+            "<label>",
+            "aria-label",
+            "aria-labelledby",
+            "title"
+          ],
+          "path": "mui/switches.md",
+          "tokens": 635
+        },
+        {
+          "id": "table",
+          "title": "Table",
+          "description": "productId: material-ui",
+          "tags": [
+            "<TableContainer />",
+            "<Table />",
+            "<table>",
+            "<TableHead />",
+            "<thead>",
+            "<TableBody />",
+            "<tbody>",
+            "<TableRow />",
+            "<TableFooter />",
+            "<tr>"
+          ],
+          "path": "mui/table.md",
+          "tokens": 1423
+        },
+        {
+          "id": "tabs",
+          "title": "Tabs",
+          "description": "productId: material-ui",
+          "tags": [
+            "<Tab />",
+            "<Tabs />",
+            "@mui/lab",
+            "<TabList />",
+            "<TabPanel />",
+            "<TabContext />",
+            "disabled",
+            "variant=\"fullWidth\"",
+            "centered",
+            "variant=\"scrollable\""
+          ],
+          "path": "mui/tabs.md",
+          "tokens": 1530
+        },
+        {
+          "id": "text-fields",
+          "title": "Text Field",
+          "description": "productId: material-ui",
+          "tags": [
+            "TextField",
+            "required",
+            "disabled",
+            "type",
+            "helperText",
+            "slotProps.htmlInput",
+            "<input>",
+            "slotProps.input",
+            "<Input />",
+            "error"
+          ],
+          "path": "mui/text-fields.md",
+          "tokens": 3604
+        },
+        {
+          "id": "textarea-autosize",
+          "title": "Textarea Autosize",
+          "description": "productId: material-ui",
+          "tags": [
+            "<textarea>",
+            "minRows",
+            "maxRows"
+          ],
+          "path": "mui/textarea-autosize.md",
+          "tokens": 271
+        },
+        {
+          "id": "timeline",
+          "title": "Timeline",
+          "description": "productId: material-ui",
+          "tags": [
+            "TimelineDot"
+          ],
+          "path": "mui/timeline.md",
+          "tokens": 514
+        },
+        {
+          "id": "toggle-button",
+          "title": "Toggle Button",
+          "description": "productId: material-ui",
+          "tags": [
+            "ToggleButtonGroup",
+            "value",
+            "size",
+            "orientation",
+            "role=\"group\"",
+            "aria-label=\"label\"",
+            "aria-labelledby=\"id\"",
+            "<label>",
+            "aria-pressed=\"<bool>\"",
+            "aria-label"
+          ],
+          "path": "mui/toggle-button.md",
+          "tokens": 744
+        },
+        {
+          "id": "tooltips",
+          "title": "Tooltip",
+          "description": "productId: material-ui",
+          "tags": [
+            "title",
+            "describeChild",
+            "aria-label",
+            "Tooltip",
+            "arrow",
+            "slotProps",
+            "enterTouchDelay",
+            "700",
+            "open",
+            "onOpen"
+          ],
+          "path": "mui/tooltips.md",
+          "tokens": 1756
+        },
+        {
+          "id": "transfer-list",
+          "title": "Transfer List",
+          "description": "productId: material-ui",
+          "tags": [],
+          "path": "mui/transfer-list.md",
+          "tokens": 313
+        },
+        {
+          "id": "transitions",
+          "title": "Transitions",
+          "description": "productId: material-ui",
+          "tags": [
+            "orientation",
+            "collapsedSize",
+            "transform-origin",
+            "timeout",
+            "direction",
+            "mountOnEnter",
+            "in",
+            "true",
+            "unmountOnExit",
+            "container"
+          ],
+          "path": "mui/transitions.md",
+          "tokens": 1271
+        },
+        {
+          "id": "typography",
+          "title": "Typography",
+          "description": "productId: material-ui",
+          "tags": [
+            "<head />",
+            "typography",
+            "variantMapping",
+            "h1",
+            "component",
+            "sx"
+          ],
+          "path": "mui/typography.md",
+          "tokens": 1083
+        },
+        {
+          "id": "use-media-query",
+          "title": "useMediaQuery",
+          "description": "productId: material-ui",
+          "tags": [
+            "'(prefers-color-scheme: dark)'",
+            "'print'",
+            "sx",
+            "displayPrint",
+            "defaultMatches",
+            "noSsr",
+            "true",
+            "createRoot()",
+            "<Box display>",
+            "themes.breakpoints.up(x)"
+          ],
+          "path": "mui/use-media-query.md",
+          "tokens": 2104
+        },
+        {
+          "id": "breakpoints",
+          "title": "Breakpoints",
+          "description": "<p class=\"description\">API that enables the use of breakpoints in a wide variety of contexts.</p>",
+          "tags": [
+            "theme.breakpoints",
+            "theme.breakpoints.values",
+            "theme.breakpoints.unit",
+            "'px'",
+            "theme.breakpoints.step",
+            "5",
+            "{ step: 5 }",
+            "down(500)",
+            "'(max-width: 499.95px)'",
+            "key"
+          ],
+          "path": "mui/breakpoints.md",
+          "tokens": 2036
+        },
+        {
+          "id": "color",
+          "title": "Color",
+          "description": "<p class=\"description\">Convey meaning through color. Out of the box you get access to all colors in the Material Desi...",
+          "tags": [
+            "createTheme()",
+            "ThemeProvider",
+            "main",
+            "light",
+            "dark",
+            "contrastText",
+            "A"
+          ],
+          "path": "mui/color.md",
+          "tokens": 1273
+        },
+        {
+          "id": "container-queries",
+          "title": "Container queries",
+          "description": "<p class=\"description\">Material UI provides a utility function for creating CSS container queries based on theme brea...",
+          "tags": [
+            "theme.containerQueries",
+            "theme.breakpoints",
+            "containerQueries",
+            "sx",
+            "@<size>",
+            "@<size>/<name>",
+            "<size>",
+            "<name>",
+            "@",
+            "px"
+          ],
+          "path": "mui/container-queries.md",
+          "tokens": 666
+        },
+        {
+          "id": "creating-themed-components",
+          "title": "Creating themed components",
+          "description": "<p class=\"description\">Learn how to create fully custom components that accept your app's theme.</p>",
+          "tags": [
+            "root",
+            "value",
+            "unit",
+            "styled",
+            "name",
+            "slot",
+            "Stat",
+            "ownerState",
+            "variant",
+            "useThemeProps"
+          ],
+          "path": "mui/creating-themed-components.md",
+          "tokens": 2231
+        },
+        {
+          "id": "css-layers",
+          "title": "CSS Layers",
+          "description": "<p class=\"description\">Learn how to generate Material UI styles with cascade layers.</p>",
+          "tags": [
+            "!important",
+            "@layer mui",
+            "@layer",
+            "_document",
+            "GlobalStyles",
+            "AppCacheProvider",
+            "src/main.tsx",
+            "enableCssLayer",
+            "StyledEngineProvider",
+            "sx"
+          ],
+          "path": "mui/css-layers.md",
+          "tokens": 2413
+        },
+        {
+          "id": "configuration",
+          "title": "CSS theme variables - Configuration",
+          "description": "<p class=\"description\">A guide for configuring CSS theme variables in Material UI.</p>",
+          "tags": [
+            "--mui",
+            "cssVarPrefix",
+            "colorSchemeSelector",
+            "class",
+            "<html>",
+            "data",
+            "string",
+            "useColorScheme",
+            "system",
+            "light"
+          ],
+          "path": "mui/configuration.md",
+          "tokens": 2058
+        },
+        {
+          "id": "native-color",
+          "title": "CSS theme variables - Native color",
+          "description": "<p class=\"description\">Learn how to use native color with CSS theme variables.</p>",
+          "tags": [
+            "oklch",
+            "oklab",
+            "display-p3",
+            "cssVariables",
+            "nativeColor: true",
+            "alpha()",
+            "lighten()",
+            "darken()",
+            "color-mix()",
+            "theme.palette.getContrastText()"
+          ],
+          "path": "mui/native-color.md",
+          "tokens": 816
+        },
+        {
+          "id": "overview",
+          "title": "CSS theme variables",
+          "description": "<p class=\"description\">An overview of adopting CSS theme variables in Material UI.</p>",
+          "tags": [
+            "light",
+            "dark"
+          ],
+          "path": "mui/overview.md",
+          "tokens": 796
+        },
+        {
+          "id": "usage",
+          "title": "CSS theme variables - Usage",
+          "description": "<p class=\"description\">Learn how to adopt CSS theme variables.</p>",
+          "tags": [
+            "cssVariables: true",
+            "ThemeProvider",
+            ":root",
+            "--mui",
+            "CssVarsProvider",
+            "cssVariables",
+            "prefers-color-scheme",
+            "theme.applyStyles()",
+            "theme.palette.mode",
+            "vars"
+          ],
+          "path": "mui/usage.md",
+          "tokens": 1899
+        },
+        {
+          "id": "dark-mode",
+          "title": "Dark mode",
+          "description": "<p class=\"description\">Material UI comes with two palette modes: light (the default) and dark.</p>",
+          "tags": [
+            "mode: 'dark'",
+            "createTheme()",
+            "<CssBaseline />",
+            "<ThemeProvider>",
+            "mode",
+            "colorSchemes",
+            "light",
+            "dark",
+            "true",
+            "palette"
+          ],
+          "path": "mui/dark-mode.md",
+          "tokens": 3496
+        },
+        {
+          "id": "default-theme",
+          "title": "Default theme viewer",
+          "description": "<p class=\"description\">This tree view allows you to explore how the theme object looks like with the default values.</p>",
+          "tags": [
+            "material-ui/style/createTheme.ts",
+            "createTheme()",
+            "theme"
+          ],
+          "path": "mui/default-theme.md",
+          "tokens": 185
+        },
+        {
+          "id": "density",
+          "title": "Density",
+          "description": "<p class=\"description\">How to apply density to Material UI components.</p>",
+          "tags": [],
+          "path": "mui/density.md",
+          "tokens": 780
+        },
+        {
+          "id": "how-to-customize",
+          "title": "How to customize",
+          "description": "productId: material-ui",
+          "tags": [
+            "sx",
+            "Slider",
+            ".css-ae2u5c-MuiSlider-thumb",
+            ".MuiSlider-thumb",
+            "thumb",
+            "& .MuiSlider-thumb",
+            "className",
+            "Button",
+            ":disabled",
+            "MenuItem"
+          ],
+          "path": "mui/how-to-customize.md",
+          "tokens": 2034
+        },
+        {
+          "id": "overriding-component-structure",
+          "title": "Overriding component structure",
+          "description": "<p class=\"description\">Learn how to override the default DOM structure of Material UI components.</p>",
+          "tags": [
+            "*Props",
+            "slots",
+            "slotProps",
+            "component",
+            "<button>",
+            "<a>",
+            "href",
+            "target",
+            "rel",
+            "<div>"
+          ],
+          "path": "mui/overriding-component-structure.md",
+          "tokens": 1523
+        },
+        {
+          "id": "palette",
+          "title": "Palette",
+          "description": "<p class=\"description\">The palette enables you to modify the color of the components to suit your brand.</p>",
+          "tags": [
+            "main",
+            "light",
+            "dark",
+            "contrastText",
+            "theme.palette.*",
+            "primary",
+            "secondary",
+            "error",
+            "warning",
+            "info"
+          ],
+          "path": "mui/palette.md",
+          "tokens": 3122
+        },
+        {
+          "id": "right-to-left",
+          "title": "Right-to-left support",
+          "description": "<p class=\"description\">Learn how to implement right-to-left (RTL) text with Material UI to support languages such as ...",
+          "tags": [
+            "dir=\"rtl\"",
+            "<html>",
+            "dir",
+            "createTheme()",
+            "'rtl'",
+            "@mui/stylis-plugin-rtl",
+            "rtlPlugin",
+            "stylisPlugins",
+            "/* @noflip */"
+          ],
+          "path": "mui/right-to-left.md",
+          "tokens": 882
+        },
+        {
+          "id": "shadow-dom",
+          "title": "Shadow DOM",
+          "description": "<p class=\"description\">The shadow DOM lets you encapsulate parts of an app to keep them separate from global styles t...",
+          "tags": [
+            "document.body",
+            "colorSchemeNode",
+            "shadowRootElement"
+          ],
+          "path": "mui/shadow-dom.md",
+          "tokens": 735
+        },
+        {
+          "id": "shape",
+          "title": "Shape",
+          "description": "<p class=\"description\">The shape is a design token that helps control the border radius of components.</p>",
+          "tags": [
+            "shape",
+            "borderRadius",
+            "4px"
+          ],
+          "path": "mui/shape.md",
+          "tokens": 296
+        },
+        {
+          "id": "spacing",
+          "title": "Spacing",
+          "description": "<p class=\"description\">Use the theme.spacing() helper to create consistent spacing between the elements of your UI.</p>",
+          "tags": [
+            "theme.spacing()",
+            "theme.spacing(0.5)",
+            "theme.spacing(-1)",
+            "theme.spacing(1, 'auto')"
+          ],
+          "path": "mui/spacing.md",
+          "tokens": 591
+        },
+        {
+          "id": "theme-components",
+          "title": "Themed components",
+          "description": "<p class=\"description\">You can customize a component's styles, default props, and more by using its component key ins...",
+          "tags": [
+            "components",
+            "defaultProps",
+            "styleOverrides",
+            "root",
+            "variant",
+            "outlined",
+            "variants",
+            "props",
+            "style",
+            "dashed"
+          ],
+          "path": "mui/theme-components.md",
+          "tokens": 1816
+        },
+        {
+          "id": "theming",
+          "title": "Theming",
+          "description": "<p class=\"description\">Customize Material UI with your theme. You can change the colors, the typography and much more...",
+          "tags": [
+            "ThemeProvider",
+            ".palette",
+            ".typography",
+            ".spacing",
+            ".breakpoints",
+            ".zIndex",
+            ".transitions",
+            ".components",
+            "vars",
+            "Theme"
+          ],
+          "path": "mui/theming.md",
+          "tokens": 3132
+        },
+        {
+          "id": "transitions",
+          "title": "Transitions",
+          "description": "<p class=\"description\">These theme helpers allow you to create custom CSS transitions, you can customize the duration...",
+          "tags": [
+            "props",
+            "['all']",
+            "options",
+            "options.duration",
+            "theme.transitions.duration.standard",
+            "options.easing",
+            "theme.transitions.easing.easeInOut",
+            "options.delay",
+            "0",
+            "transition"
+          ],
+          "path": "mui/transitions.md",
+          "tokens": 766
+        },
+        {
+          "id": "typography",
+          "title": "Typography",
+          "description": "<p class=\"description\">The theme provides a set of type sizes that work well together, and also with the layout grid....",
+          "tags": [
+            "theme.typography.fontFamily",
+            "ttf",
+            "woff",
+            "woff2",
+            "CssBaseline",
+            "@font-face",
+            "rem",
+            "<html>",
+            "16px",
+            "fontSize"
+          ],
+          "path": "mui/typography.md",
+          "tokens": 2347
+        },
+        {
+          "id": "z-index",
+          "title": "z-index",
+          "description": "<p class=\"description\">z-index is the CSS property that helps control layout by providing a third axis to arrange con...",
+          "tags": [
+            "z-index",
+            "zIndex"
+          ],
+          "path": "mui/z-index.md",
+          "tokens": 209
+        },
+        {
+          "id": "material-ui-for-figma",
+          "title": "Material UI for Figma",
+          "description": "<p class=\"description\">Enhance designer-developer collaboration between Material UI and Figma.</p>",
+          "tags": [
+            ".zip",
+            ".fig"
+          ],
+          "path": "mui/material-ui-for-figma.md",
+          "tokens": 1785
+        },
+        {
+          "id": "material-ui-sync",
+          "title": "Material UI Sync plugin 🧪",
+          "description": "<p class=\"description\">Sync is a Figma plugin that generates Material UI themes directly from design to code.</p>",
+          "tags": [
+            "has()"
+          ],
+          "path": "mui/material-ui-sync.md",
+          "tokens": 3387
+        },
+        {
+          "id": "backers",
+          "title": "Sponsors and Backers",
+          "description": "<p class=\"description\">Support the development of the open-source projects of the MUI organization through crowdfundi...",
+          "tags": [],
+          "path": "mui/backers.md",
+          "tokens": 3117
+        },
+        {
+          "id": "related-projects",
+          "title": "Related projects",
+          "description": "<p class=\"description\">A carefully curated list of tools that expand or build on top of Material UI.</p>",
+          "tags": [],
+          "path": "mui/related-projects.md",
+          "tokens": 835
+        },
+        {
+          "id": "roadmap",
+          "title": "Roadmap",
+          "description": "<p class=\"description\">Keep up with ongoing projects and help shape the future of Material UI.</p>",
+          "tags": [],
+          "path": "mui/roadmap.md",
+          "tokens": 421
+        },
+        {
+          "id": "showcase",
+          "title": "Showcase",
+          "description": "<p class=\"description\">Check out these public apps using Material UI to get inspired for your next project.</p>",
+          "tags": [],
+          "path": "mui/showcase.md",
+          "tokens": 106
+        },
+        {
+          "id": "vision",
+          "title": "Vision",
+          "description": "<p class=\"description\">Our vision is to provide an elegant React implementation of the Material Design guidelines tha...",
+          "tags": [],
+          "path": "mui/vision.md",
+          "tokens": 422
+        },
+        {
+          "id": "classname-generator",
+          "title": "ClassName generator",
+          "description": "<p class=\"description\">Configure classname generation at build time.</p>",
+          "tags": [
+            "@mui/material",
+            "createGenerateClassName",
+            "<Button>Text</Button>",
+            "ClassNameGenerator",
+            "@mui/*",
+            "${componentName}-${slot}",
+            "Chip",
+            "MuiChip",
+            "<Chip />",
+            "Mui"
+          ],
+          "path": "mui/classname-generator.md",
+          "tokens": 1291
+        },
+        {
+          "id": "pigment-css",
+          "title": "Getting started with Pigment CSS",
+          "description": "<p class=\"description\">Learn how to get started customizing your components using Pigment CSS.</p>",
+          "tags": [
+            "withPigment",
+            "layout.tsx",
+            "main.tsx",
+            "css",
+            "globalCss",
+            "keyframes",
+            "styled",
+            "variants",
+            "props",
+            "style"
+          ],
+          "path": "mui/pigment-css.md",
+          "tokens": 2441
+        },
+        {
+          "id": "design-resources",
+          "title": "Design resources",
+          "description": "<p class=\"description\">Be more efficient designing and developing with the same library.</p>",
+          "tags": [],
+          "path": "mui/design-resources.md",
+          "tokens": 422
+        },
+        {
+          "id": "example-projects",
+          "title": "Example projects",
+          "description": "<p class=\"description\">A collection of examples and scaffolds integrating Material UI with popular libraries and fram...",
+          "tags": [
+            "/examples"
+          ],
+          "path": "mui/example-projects.md",
+          "tokens": 353
+        },
+        {
+          "id": "faq",
+          "title": "Frequently Asked Questions",
+          "description": "<p class=\"description\">Stuck on a particular problem? Check some of these common gotchas first in the FAQ.</p>",
+          "tags": [
+            ".mui-fixed",
+            "BaseButton",
+            "CssBaseline",
+            "@mui/styled-engine",
+            "container",
+            "anchorEl",
+            "Portal",
+            "container.current",
+            "ref.current",
+            "null"
+          ],
+          "path": "mui/faq.md",
+          "tokens": 4864
+        },
+        {
+          "id": "installation",
+          "title": "Installation",
+          "description": "<p class=\"description\">Install Material UI, the world's most popular React UI framework.</p>",
+          "tags": [
+            "react-is",
+            "react",
+            "react@18.3.1",
+            "react-is@18.3.1",
+            "package.json",
+            "react-is@19",
+            "@mui/styled-engine-sc",
+            "babel-plugin-styled-components",
+            "styled()",
+            "@mui"
+          ],
+          "path": "mui/installation.md",
+          "tokens": 1493
+        },
+        {
+          "id": "learn",
+          "title": "Learning resources",
+          "description": "<p class=\"description\">New to Material UI? Get up to speed quickly with our curated list of learning resources.</p>",
+          "tags": [
+            "<Button>",
+            "variant",
+            "outlined"
+          ],
+          "path": "mui/learn.md",
+          "tokens": 639
+        },
+        {
+          "id": "mcp",
+          "title": "Model Context Protocol (MCP) for MUI",
+          "description": "<p class=\"description\">Access the official Material UI docs and code examples in your AI client.</p>",
+          "tags": [
+            "settings.json",
+            "npx",
+            "-y @mui/mcp@latest",
+            "cmd-shift-x",
+            "ctrl-shift-x",
+            "zed: extensions",
+            "preferred_theme",
+            "component_filter",
+            "agent: add context server",
+            ".github/instructions/mui.md"
+          ],
+          "path": "mui/mcp.md",
+          "tokens": 1320
+        },
+        {
+          "id": "overview",
+          "title": "Material UI - Overview",
+          "description": "title: Overview",
+          "tags": [],
+          "path": "mui/overview.md",
+          "tokens": 617
+        },
+        {
+          "id": "support",
+          "title": "Support",
+          "description": "<p class=\"description\">Learn how to get support for Material UI components, including feature requests, bug fixes, an...",
+          "tags": [],
+          "path": "mui/support.md",
+          "tokens": 1636
+        },
+        {
+          "id": "supported-components",
+          "title": "Supported components",
+          "description": "<p class=\"description\">The following is a list of Material Design components & features.</p>",
+          "tags": [],
+          "path": "mui/supported-components.md",
+          "tokens": 209
+        },
+        {
+          "id": "supported-platforms",
+          "title": "Supported platforms",
+          "description": "<p class=\"description\">Learn about the platforms, from modern to old, that are supported by Material UI.</p>",
+          "tags": [
+            "stable",
+            "??",
+            "?."
+          ],
+          "path": "mui/supported-platforms.md",
+          "tokens": 585
+        },
+        {
+          "id": "readme",
+          "title": "Blog template",
+          "description": "<!-- #target-branch-reference -->",
+          "tags": [
+            "blog",
+            "shared-theme",
+            "Blog"
+          ],
+          "path": "mui/readme.md",
+          "tokens": 131
+        },
+        {
+          "id": "readme",
+          "title": "Checkout template",
+          "description": "<!-- #target-branch-reference -->",
+          "tags": [
+            "checkout",
+            "shared-theme",
+            "Checkout"
+          ],
+          "path": "mui/readme.md",
+          "tokens": 126
+        },
+        {
+          "id": "readme",
+          "title": "CRUD dashboard template",
+          "description": "<!-- #target-branch-reference -->",
+          "tags": [
+            "crud-dashboard",
+            "CrudDashboard"
+          ],
+          "path": "mui/readme.md",
+          "tokens": 135
+        },
+        {
+          "id": "readme",
+          "title": "Dashboard template",
+          "description": "<!-- #target-branch-reference -->",
+          "tags": [
+            "dashboard",
+            "shared-theme",
+            "Dashboard"
+          ],
+          "path": "mui/readme.md",
+          "tokens": 152
+        },
+        {
+          "id": "readme",
+          "title": "Marketing page template",
+          "description": "<!-- #target-branch-reference -->",
+          "tags": [
+            "marketing-page",
+            "shared-theme",
+            "MarketingPage"
+          ],
+          "path": "mui/readme.md",
+          "tokens": 137
+        },
+        {
+          "id": "readme",
+          "title": "Sign-in side template",
+          "description": "<!-- #target-branch-reference -->",
+          "tags": [
+            "sign-in-side",
+            "shared-theme",
+            "SignInSide"
+          ],
+          "path": "mui/readme.md",
+          "tokens": 135
+        },
+        {
+          "id": "readme",
+          "title": "Sign-in template",
+          "description": "<!-- #target-branch-reference -->",
+          "tags": [
+            "sign-in",
+            "shared-theme",
+            "SignIn"
+          ],
+          "path": "mui/readme.md",
+          "tokens": 130
+        },
+        {
+          "id": "readme",
+          "title": "Sign-up template",
+          "description": "<!-- #target-branch-reference -->",
+          "tags": [
+            "sign-up",
+            "shared-theme",
+            "SignUp"
+          ],
+          "path": "mui/readme.md",
+          "tokens": 130
+        },
+        {
+          "id": "templates",
+          "title": "React templates",
+          "description": "productId: material-ui",
+          "tags": [],
+          "path": "mui/templates.md",
+          "tokens": 548
+        },
+        {
+          "id": "usage",
+          "title": "Usage",
+          "description": "<p class=\"description\">Learn the basics of working with Material UI components.</p>",
+          "tags": [
+            "variant",
+            "outlined",
+            "<head>"
+          ],
+          "path": "mui/usage.md",
+          "tokens": 394
+        },
+        {
+          "id": "api",
+          "title": "API design approach",
+          "description": "<p class=\"description\">We have learned a great deal regarding how Material UI is used, and the v1 rewrite allowed us ...",
+          "tags": [
+            "children",
+            "Tab",
+            "icon",
+            "label",
+            "className",
+            "MenuItem",
+            "disableRipple",
+            "ListItem",
+            "ButtonBase",
+            "classes"
+          ],
+          "path": "mui/api.md",
+          "tokens": 1957
+        },
+        {
+          "id": "building-extensible-themes",
+          "title": "Building extensible themes",
+          "description": "<p class=\"description\">Learn how to build extensible themes with Material UI.</p>",
+          "tags": [],
+          "path": "mui/building-extensible-themes.md",
+          "tokens": 983
+        },
+        {
+          "id": "composition",
+          "title": "Composition",
+          "description": "<p class=\"description\">Material UI tries to make composition as easy as possible.</p>",
+          "tags": [
+            "muiName",
+            "mergeSlotProps",
+            "className",
+            "custom-tooltip-popper",
+            "slotProps",
+            "\"[…] custom-tooltip-popper foo\"",
+            "style",
+            "sx",
+            "^on[A-Z]",
+            "component"
+          ],
+          "path": "mui/composition.md",
+          "tokens": 2271
+        },
+        {
+          "id": "content-security-policy",
+          "title": "Content Security Policy (CSP)",
+          "description": "<p class=\"description\">This section covers the details of setting up a CSP.</p>",
+          "tags": [
+            "https://example.com",
+            "default-src: 'self';",
+            "https://example.com/*",
+            "<style>",
+            "StyledEngineProvider",
+            "injectFirst",
+            "CacheProvider",
+            "prepend: true",
+            "_document.tsx",
+            "_app.tsx"
+          ],
+          "path": "mui/content-security-policy.md",
+          "tokens": 1355
+        },
+        {
+          "id": "localization",
+          "title": "Localization",
+          "description": "<p class=\"description\">Localization (also referred to as \"l10n\") is the process of adapting a product or content to a...",
+          "tags": [
+            "amET",
+            "arEG",
+            "arSA",
+            "arSD",
+            "hyAM",
+            "azAZ",
+            "bnBD",
+            "bgBG",
+            "caES",
+            "zhHK"
+          ],
+          "path": "mui/localization.md",
+          "tokens": 1400
+        },
+        {
+          "id": "minimizing-bundle-size",
+          "title": "Minimizing bundle size",
+          "description": "<p class=\"description\">Learn how to reduce your bundle size and improve development performance by avoiding costly im...",
+          "tags": [
+            "@mui/material",
+            "@mui/icons-material",
+            "path-imports",
+            "no-restricted-imports",
+            "optimizePackageImports",
+            "\"exports\"",
+            "packageExports"
+          ],
+          "path": "mui/minimizing-bundle-size.md",
+          "tokens": 800
+        },
+        {
+          "id": "responsive-ui",
+          "title": "Responsive UI",
+          "description": "<p class=\"description\">Material Design layouts encourage consistency across platforms, environments, and screen sizes...",
+          "tags": [],
+          "path": "mui/responsive-ui.md",
+          "tokens": 235
+        },
+        {
+          "id": "server-rendering",
+          "title": "Server rendering",
+          "description": "<p class=\"description\">The most common use case for server-side rendering is to handle the initial render when a user...",
+          "tags": [
+            "emotion cache",
+            "handleRender",
+            "App",
+            "CacheProvider",
+            "ThemeProvider",
+            "theme",
+            "renderFullPage",
+            "/examples"
+          ],
+          "path": "mui/server-rendering.md",
+          "tokens": 1819
+        },
+        {
+          "id": "testing",
+          "title": "Testing",
+          "description": "<p class=\"description\">Write tests to prevent regressions and write better code.</p>",
+          "tags": [
+            "@testing-library/react",
+            "TextField",
+            "input",
+            "[role=\"textbox\"]"
+          ],
+          "path": "mui/testing.md",
+          "tokens": 359
+        },
+        {
+          "id": "typescript",
+          "title": "TypeScript",
+          "description": "<p class=\"description\">You can add static typing to JavaScript to improve developer productivity and code quality, th...",
+          "tags": [
+            "tsconfig.json",
+            "@types/",
+            "\"strict\": true",
+            "value",
+            "Select",
+            "RadioGroup",
+            "unknown",
+            "event.target",
+            "Theme",
+            "component"
+          ],
+          "path": "mui/typescript.md",
+          "tokens": 794
+        },
+        {
+          "id": "interoperability",
+          "title": "Style library interoperability",
+          "description": "<p class=\"description\">While you can use the Emotion-based styling solution provided by Material UI, you can also use...",
+          "tags": [
+            "<head>",
+            "StyleSheetManager",
+            "target",
+            "StyledEngineProvider",
+            "@mui/styled-engine-sc",
+            ".parent .child {}",
+            "thumb",
+            "className",
+            "slotProps",
+            "styled()"
+          ],
+          "path": "mui/interoperability.md",
+          "tokens": 7148
+        },
+        {
+          "id": "nextjs",
+          "title": "Next.js integration",
+          "description": "<p class=\"description\">Learn how to use Material UI with Next.js.</p>",
+          "tags": [
+            "@mui/material",
+            "next",
+            "app/layout.tsx",
+            "AppRouterCacheProvider",
+            "<body>",
+            "<head>",
+            "options",
+            "css",
+            "mui",
+            "'use client';"
+          ],
+          "path": "mui/nextjs.md",
+          "tokens": 3411
+        },
+        {
+          "id": "routing",
+          "title": "Routing libraries",
+          "description": "<p class=\"description\">By default, the navigation is performed with a native &lt;a&gt; element. You can customize it,...",
+          "tags": [
+            "Link",
+            "<a>",
+            "href",
+            "ButtonBase",
+            "Button",
+            "component",
+            "role=\"button\"",
+            "<button>",
+            "to",
+            "component=\"a\""
+          ],
+          "path": "mui/routing.md",
+          "tokens": 1313
+        },
+        {
+          "id": "styled-components",
+          "title": "Using styled-components",
+          "description": "<p class=\"description\">Learn how to use styled-components instead of Emotion with Material UI.</p>",
+          "tags": [
+            "babel-plugin-styled-components",
+            "styled()",
+            "@mui",
+            "@mui/styled-engine",
+            "<GlobalStyles />",
+            "css",
+            "keyframe",
+            "@mui/styled-engine-sc",
+            "@mui/material",
+            "tsconfig.json"
+          ],
+          "path": "mui/styled-components.md",
+          "tokens": 887
+        },
+        {
+          "id": "tailwindcss-v4",
+          "title": "Tailwind CSS v4 integration",
+          "description": "<p class=\"description\">Learn how to use Material UI with Tailwind CSS v4.</p>",
+          "tags": [
+            "@layer",
+            "mui",
+            "utilities",
+            "enableCssLayer: true",
+            "@layer mui",
+            "_document",
+            "GlobalStyles",
+            "AppCacheProvider",
+            "src/main.tsx",
+            "enableCssLayer"
+          ],
+          "path": "mui/tailwindcss-v4.md",
+          "tokens": 4713
+        },
+        {
+          "id": "theme-scoping",
+          "title": "Theme scoping",
+          "description": "<p class=\"description\">Learn how to use multiple styling solutions in a single Material UI app.</p>",
+          "tags": [
+            "ThemeProvider",
+            "THEME_ID",
+            "styled",
+            "sx",
+            "useTheme",
+            "materialTheme"
+          ],
+          "path": "mui/theme-scoping.md",
+          "tokens": 750
+        },
+        {
+          "id": "migrating-from-deprecated-apis",
+          "title": "Migrating from deprecated APIs",
+          "description": "<p class=\"description\">Learn how to migrate away from recently deprecated APIs before they become breaking changes.</p>",
+          "tags": [
+            "deprecations/all",
+            "slots",
+            "slotProps",
+            "components",
+            "componentsProps",
+            "<SlotName>Component",
+            "<SlotName>Props",
+            ".MuiAccordionSummary-contentGutters",
+            ".MuiAccordionSummary-gutters",
+            ".MuiAccordionSummary-content"
+          ],
+          "path": "mui/migrating-from-deprecated-apis.md",
+          "tokens": 20434
+        },
+        {
+          "id": "migration-v0x",
+          "title": "Migration from v0.x to v1",
+          "description": "<p class=\"description\">Yeah, v1 has been released! Take advantage of 2 years worth of effort.</p>",
+          "tags": [
+            "MuiThemeProvider"
+          ],
+          "path": "mui/migration-v0x.md",
+          "tokens": 1323
+        },
+        {
+          "id": "migration-v3",
+          "title": "Migration from v3 to v4",
+          "description": "<p class=\"description\">Yeah, v4 has been released!</p>",
+          "tags": [
+            "package.json",
+            "react@^16.3.0",
+            "react@^16.8.0",
+            "@material-ui/styles",
+            "React.forwardRef()",
+            "innerRef",
+            "react-jss",
+            "withTheme()",
+            "convertHexToRGB",
+            "hexToRgb"
+          ],
+          "path": "mui/migration-v3.md",
+          "tokens": 3739
+        },
+        {
+          "id": "migrating-from-jss",
+          "title": "Migrating from JSS (optional)",
+          "description": "<p class=\"description\">This guide explains how to migrate from JSS to Emotion when updating from Material UI v4 to v5...",
+          "tags": [
+            "makeStyles",
+            "withStyles",
+            "styled",
+            "sx",
+            "styled-components",
+            "@emotion",
+            "@emotion/react",
+            "tss-react",
+            "$",
+            "clsx"
+          ],
+          "path": "mui/migrating-from-jss.md",
+          "tokens": 3723
+        },
+        {
+          "id": "migration-v4",
+          "title": "Migrating to v5: getting started",
+          "description": "<p class=\"description\">This guide explains how and why to migrate from Material UI v4 to v5.</p>",
+          "tags": [
+            "makeStyles",
+            "withStyles",
+            "stable",
+            "@types",
+            "react-scripts",
+            "@types/react",
+            "@types/react-dom",
+            "ThemeProvider",
+            "useStyles",
+            "@mui/styles"
+          ],
+          "path": "mui/migration-v4.md",
+          "tokens": 3172
+        },
+        {
+          "id": "troubleshooting",
+          "title": "Troubleshooting",
+          "description": "<p class=\"description\">This document covers known issues and common problems encountered when migrating from Material...",
+          "tags": [
+            "StyledEngineProvider",
+            "@material-ui/core",
+            "npm ls @material-ui/core",
+            "yarn why @material-ui/core",
+            "@mui/x-data-grid",
+            "@mui/material",
+            ".storybook/main.js",
+            ".storybook/preview.js",
+            "Fade",
+            "Grow"
+          ],
+          "path": "mui/troubleshooting.md",
+          "tokens": 2174
+        },
+        {
+          "id": "v5-component-changes",
+          "title": "Breaking changes in v5, part two: core components",
+          "description": "<p class=\"description\">This is a reference guide to the breaking changes introduced in Material UI v5, and how to mig...",
+          "tags": [
+            "as",
+            "SomeOtherComponent",
+            "expandIcon",
+            "expandIconWrapper",
+            "color",
+            "enableColorOnDark",
+            "debug",
+            "open={true}",
+            "renderOption",
+            "closeIcon"
+          ],
+          "path": "mui/v5-component-changes.md",
+          "tokens": 13468
+        },
+        {
+          "id": "v5-style-changes",
+          "title": "Breaking changes in v5, part one: styles and themes",
+          "description": "<p class=\"description\">This is a reference guide to the breaking changes introduced in Material UI v5, and how to mig...",
+          "tags": [
+            "$",
+            "[component]Classes",
+            "component",
+            "children",
+            "unstable_createStrictModeTheme",
+            "findDOMNode",
+            "React.StrictMode",
+            "<MenuList><CustomMenuItem /></MenuList>",
+            "ref",
+            "Card"
+          ],
+          "path": "mui/v5-style-changes.md",
+          "tokens": 5980
+        },
+        {
+          "id": "pickers-migration",
+          "title": "Migration from @material-ui/pickers",
+          "description": "<p class=\"description\"><code>@material-ui/pickers</code> was moved to the <code>@mui/lab</code>.</p>",
+          "tags": [
+            "@mui/lab",
+            "v5.0.0-alpha.30",
+            "v5.0.0-alpha.89",
+            "@mui/x-date-pickers",
+            "@mui/x-date-pickers-pro",
+            "v5.0.0-alpha.90",
+            "keyboard",
+            "variant",
+            "Dialog",
+            "<DesktopDatePicker />"
+          ],
+          "path": "mui/pickers-migration.md",
+          "tokens": 1318
+        },
+        {
+          "id": "upgrade-to-grid-v2",
+          "title": "Upgrade to Grid v2",
+          "description": "<p class=\"description\">This guide explains how and why to migrate from the GridLegacy component to the Grid component...",
+          "tags": [
+            "sx",
+            "item",
+            "zeroMinWidth",
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+            "size",
+            "true"
+          ],
+          "path": "mui/upgrade-to-grid-v2.md",
+          "tokens": 1416
+        },
+        {
+          "id": "migrating-to-pigment-css",
+          "title": "Migrating to Pigment CSS",
+          "description": "<p class=\"description\">This guide helps you integrate Pigment CSS with Material UI.</p>",
+          "tags": [
+            "vite.config.mjs",
+            "vite.config.js",
+            "next/font",
+            "variable",
+            "typography.fontFamily",
+            "Theme",
+            "tsconfig.json",
+            "variants",
+            "DefaultPropsProvider",
+            "sx"
+          ],
+          "path": "mui/migrating-to-pigment-css.md",
+          "tokens": 4606
+        },
+        {
+          "id": "upgrade-to-v6",
+          "title": "Upgrade to v6",
+          "description": "<p class=\"description\">This guide explains why and how to upgrade from Material UI v5 to v6.</p>",
+          "tags": [
+            "ThemeProvider",
+            "CssVarsProvider",
+            "\"6.0.0\"",
+            "@mui/icons-material",
+            "@mui/system",
+            "@mui/lab",
+            "@mui/material-nextjs",
+            "@mui/styled-engine-sc",
+            "@mui/utils",
+            "@mui/x-data-grid"
+          ],
+          "path": "mui/upgrade-to-v6.md",
+          "tokens": 4928
+        },
+        {
+          "id": "upgrade-to-native-color",
+          "title": "Upgrade to native color",
+          "description": "<p class=\"description\">This guide explains how to upgrade from JavaScript color manipulation to native color.</p>",
+          "tags": [
+            "color-mix()",
+            "cssVariables.nativeColor",
+            "true",
+            "createTheme()",
+            "alpha",
+            "lighten",
+            "darken",
+            "@mui/*",
+            "contrastText",
+            "theme.alpha()"
+          ],
+          "path": "mui/upgrade-to-native-color.md",
+          "tokens": 911
+        },
+        {
+          "id": "upgrade-to-v7",
+          "title": "Upgrade to v7",
+          "description": "<p class=\"description\">This guide explains how to upgrade from Material UI v6 to v7.</p>",
+          "tags": [
+            "exports",
+            "package.json",
+            "enableCssLayer",
+            "StyledEngineProvider",
+            "AppRouterCacheProvider",
+            "\"7.0.0\"",
+            "@mui/icons-material",
+            "@mui/system",
+            "@mui/lab",
+            "@mui/material-nextjs"
+          ],
+          "path": "mui/upgrade-to-v7.md",
+          "tokens": 4095
+        },
+        {
+          "id": "upgrade-to-v9",
+          "title": "Upgrade to v9",
+          "description": "<p class=\"description\">This guide explains how to upgrade from Material UI v7 to v9.</p>",
+          "tags": [
+            "package.json",
+            "latest",
+            "next",
+            "9.0.0-alpha.0",
+            "aria-hidden=\"true\"",
+            "disableEscapeKeyDown",
+            "reason",
+            "onClose",
+            "Modal",
+            "event"
+          ],
+          "path": "mui/upgrade-to-v9.md",
+          "tokens": 1149
         }
       ]
     },
