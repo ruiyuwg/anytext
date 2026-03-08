@@ -1,0 +1,83 @@
+---
+page_title: Encrypt your state and plan files for HCP Terraform
+description: >-
+  The hold your own key (HYOK) feature lets you authenticate a key management system with HCP Terraform to encrypt HCP Terraform state and plan data with a key that you control.
+tfc_only: true
+# START AUTO GENERATED METADATA, DO NOT EDIT
+created_at: 2025-07-31T10:38:43-05:00
+last_modified: 2025-10-28T09:23:57-07:00
+# END AUTO GENERATED METADATA
+---
+
+# Encrypt your state and plan files
+
+The hold your own key (HYOK) feature lets you authenticate a key management system with HCP Terraform to encrypt HCP Terraform state and plan data with a key that you provide and control.
+
+## Introduction
+
+@include 'tfc-package-callouts/hyok.mdx'
+
+Terraform artifacts can contain sensitive information, such as resource IDs, IP addresses, credentials, and other configuration details that Terraform uses to manage infrastructure. HCP Terraform uses a HashiCorp-managed key to encrypt sensitive data such as state and plan files before storage.
+
+For most users, the default level of security that HCP Terraform provides is  sufficient. However, the side effect of default encryption is that HCP Terraform maintains access to your Terraform artifacts. You cannot monitor or revoke HCP Terraform's access to your artifacts, which might be insufficient for your compliance requirements.
+
+The hold your own key (HYOK) feature gives you control over your sensitive data by letting you provide your own encryption key to safeguard that data. HYOK lets you configure HCP Terraform artifact encryption using a key from a key management system (KMS) that you control. Use HYOK to retain control of the keys HCP Terraform uses to encrypt data in state and plan files, enhance your security, and meet your compliance requirements.
+
+When you enable HYOK, the [HCP Terraform agent](/terraform/cloud-docs/agents) secures certain Terraform artifacts using your key before uploading those artifacts to HCP Terraform storage. To accomplish this, the HCP Terraform agent authenticates with your key management service, then encrypts the necessary artifacts. You can run the HCP Terraform agent on your own infrastructure, meaning that neither your key nor unencrypted secrets are ever uploaded to HCP Terraform, and no out-of-network traffic needs to connect to your key management service.
+
+The artifacts that HCP Terraform agents encrypt with HYOK are:
+
+- [State files](/terraform/language/state) and [JSON state files](/terraform/internals/json-format)
+- [Plan files](/terraform/cli/commands/plan#out-filename) and [JSON plan files](/terraform/internals/json-format#plan-representation)
+
+The hold your own key feature supports the following key management services:
+
+- AWS Key Management Service
+- Azure Key Vault
+- Google Cloud Key Management
+- Vault transit secrets engine
+
+To learn how to configure HYOK for your organization, refer to [Configure and manage keys](/terraform/cloud-docs/hold-your-own-key/configure).
+
+The hold your own key feature also produces sanitized versions of artifacts which redact secrets from the artifacts it encrypts. Sanitized state and plan files let HCP Terraform continue running policy checks, run tasks, cost estimation, and assessments without accessing sensitive data.
+
+Refer to [How hold your own key concepts](/terraform/cloud-docs/hold-your-own-key/concepts) to learn more about the details of how HYOK encryption and decryption works.
+
+## Workflow
+
+To create a key configuration for HYOK, you must perform the following steps:
+
+1. Configure your key management system to accept OIDC requests from HCP Terraform, and create a key that your KMS will use to encrypt and decrypt the keys HYOK uses to secure your data.
+1. Configure your key in HCP Terraform.
+1. Enable HYOK on one or more workspaces.
+
+### Configure your KMS and create a key
+
+Begin by [configuring your KMS](/terraform/cloud-docs/hold-your-own-key/configure#create-key-configuration) to accept OIDC requests from HCP Terraform. Then, set up your key and grant the necessary roles and permissions in your KMS. Specific configuration instructions differ between cloud providers.
+
+### Configure the key in HCP Terraform
+
+After configuring your KMS with the trust relationship and creating a key, you can [create an HYOK configuration](/terraform/cloud-docs/hold-your-own-key/configure#configure-hyok-in-hcp-terraform) for your HCP Terraform organization.
+
+An HYOK configuration in HCP Terraform configures the following:
+
+- How to authenticate to your KMS using OIDC.
+- Which key HCP Terraform uses for this configuration.
+- The name to identify of the configuration within HCP Terraform.
+
+After configuring a key, HCP Terraform will automatically test the connection to your KMS to ensure it can use the key to secure your data.
+
+### Enable HYOK on your workspaces
+
+<Note>
+
+  If you enable hold your own key encryption for a workspace, you cannot disable that encryption.
+
+</Note>
+
+After setting up a key configuration in HCP Terraform, you can enable hold your own key encryption on your workspaces.
+
+Choose one configuration to act as your primary configuration. HCP Terraform automatically uses the primary HYOK configuration to encrypt all sensitive Terraform artifacts for that workspace.
+
+Refer to [How hold your own key concepts](/terraform/cloud-docs/hold-your-own-key/concepts) to learn more about the details of encryption and decryption.
+

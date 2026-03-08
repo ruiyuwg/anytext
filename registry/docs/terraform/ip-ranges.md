@@ -1,0 +1,23 @@
+---
+page_title: HCP Terraform IP ranges
+description: >-
+  Learn how HCP Terraform uses static IP ranges to support features such as notifications and VCS connections. HCP Terraform IP ranges may change.
+tfc_only: true
+# START AUTO GENERATED METADATA, DO NOT EDIT
+created_at: 2025-05-27T14:28:51-04:00
+last_modified: 2025-09-09T13:19:22-07:00
+# END AUTO GENERATED METADATA
+---
+
+# IP ranges
+
+HCP Terraform uses static IP ranges for certain features, such as notifications and VCS connections, and you can retrieve these IP ranges through the [IP ranges API](/terraform/cloud-docs/api-docs/ip-ranges).
+
+The IP ranges API does not publish the ranges for workspaces or Stacks doing Terraform operations in [remote execution mode](/terraform/cloud-docs/workspaces/settings#execution-mode). If you want to limit access to specific CIDRs when connecting to your infrastructure, configure your HCP Terraform [workspace](/terraform/cloud-docs/workspaces/settings#execution-mode) or [Stack](/terraform/cloud-docs/stacks/configure) to run Terraform operations on **Agent** execution mode using an [HCP Terraform agent](/terraform/cloud-docs/agents).
+
+-> **Note:** The IP ranges for each feature returned by the IP Ranges API may overlap. Additionally, these published ranges do not currently allow for execution of Terraform runs against local resources, such as for CLI-driven runs.
+
+Since HCP Terraform is a shared service, the use of these IP ranges to permit access to restricted resources and you should carefully consider their impact on your security posture. Additionally, these IP ranges may change. While changes are unlikely to be frequent, we strongly recommend checking the IP Ranges API every 24 hours for the most up-to-date information if you do choose to make use of these ranges.
+
+-> **Note:** Under normal circumstances, HashiCorp will publish any expected changes to HCP Terraform's IP ranges at least 24 hours in advance of implementing them. This should allow sufficient time for users to update any connected systems to reflect the changes. In the event of an emergency outage or failover operation, it may not be possible to pre-publish these changes.
+

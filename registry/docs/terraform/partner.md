@@ -1,0 +1,28 @@
+---
+page_title: Partner modules in the Terraform registry
+description: >-
+  Learn how partner modules in the Terraform registry are reviewed by HashiCorp and actively maintained by contributors.
+# START AUTO GENERATED METADATA, DO NOT EDIT
+created_at: 2025-05-27T14:28:51-04:00
+last_modified: 2025-05-27T14:28:51-04:00
+# END AUTO GENERATED METADATA
+---
+
+# Partner modules
+
+Partner modules are reviewed by HashiCorp and actively maintained by contributors to stay up-to-date and compatible with both Terraform and their respective providers.
+
+The partner badge appears next to modules that are published by a partner source.
+
+![Partner module listing](/img/docs/registry-partner.png)
+
+Partner modules are expected to be actively maintained by HashiCorp partners.
+The partner badge isn’t indicative of a module's flexibility or feature support. We can mark simple modules as partner modules because they are great module examples.
+Likewise, an non-partner module could be extremely high quality and actively
+maintained. An non-partner module shouldn't be assumed to be poor quality, it
+only means it hasn't been created by a HashiCorp partner.
+
+When [using registry modules](/terraform/registry/modules/use), there is no
+difference between a partner and non-partner module, you can use them the same
+way.
+

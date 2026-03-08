@@ -1,0 +1,23 @@
+---
+page_title: Test single sign-on in HCP Terraform
+tfc_only: true
+description: >-
+  Use a single sign-on test to finalize your integration with HCP Terraform.
+# START AUTO GENERATED METADATA, DO NOT EDIT
+created_at: 2025-05-27T14:28:51-04:00
+last_modified: 2025-05-27T14:28:51-04:00
+# END AUTO GENERATED METADATA
+---
+
+# Test single sign-on
+
+-> **NOTE:** In an effort to protect users from enabling faulty SAML configurations, HCP Terraform requires a successful test attempt before enabling is possible.
+
+To test a completed SSO configuration, click "Test" on the SSO settings page.
+
+- This will attempt to initiate SSO sign-in with your IdP.
+- You will be redirected briefly to your IdP. You may need to reauthenticate depending on your session context.
+- Finally you should be redirected back to the HCP Terraform settings SSO page with a message about a successful test and the "Enable" action should now be accessible.
+
+If a successfully tested SSO configuration is changed in ways that may impact its ability to work correctly, the configuration will revert to an untested state.
+

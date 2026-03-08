@@ -1,5 +1,5 @@
 {
-  "version": 86,
+  "version": 87,
   "updatedAt": "2026-03-08",
   "libraries": [
     {
@@ -167930,6 +167930,4622 @@
           ],
           "path": "tanstack/documentation.md",
           "tokens": 3661
+        }
+      ]
+    },
+    {
+      "id": "terraform",
+      "name": "Terraform",
+      "description": "Infrastructure as code tool for building, changing, and versioning cloud resources with HCL",
+      "version": "1",
+      "topics": [
+        {
+          "id": "template",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /example-endpoint API reference for HCP Terraform",
+          "tags": [
+            "/endpoint-name",
+            "/api/v2",
+            ":organization_name",
+            "type: \"somethings\"",
+            "include",
+            "type",
+            "[",
+            "%5B",
+            "]",
+            "%5D"
+          ],
+          "path": "terraform/template.md",
+          "tokens": 2824
+        },
+        {
+          "id": "account",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /account API reference for HCP Terraform",
+          "tags": [
+            "/account",
+            "authenticated-resource",
+            "GET /account/details",
+            "type: \"users\"",
+            "PATCH /account/update",
+            "data.type",
+            "\"users\"",
+            "data.attributes.username",
+            "data.attributes.email",
+            "PATCH /account/password"
+          ],
+          "path": "terraform/account.md",
+          "tokens": 2320
+        },
+        {
+          "id": "agent-tokens",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /authentication-tokens API reference for HCP Terraform",
+          "tags": [
+            "/authentication-tokens",
+            ":agent_pool_id",
+            "type: \"authentication-tokens\"",
+            "[",
+            "%5B",
+            "]",
+            "%5D",
+            "page[number]",
+            "page[size]",
+            "GET /authentication-tokens/:id"
+          ],
+          "path": "terraform/agent-tokens.md",
+          "tokens": 2498
+        },
+        {
+          "id": "agents",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /agents and /agent-pools API reference for HCP Terraform",
+          "tags": [
+            "/agents",
+            "/agent-pools",
+            ":organization_name",
+            "type: \"agent-pools\"",
+            "[",
+            "%5B",
+            "]",
+            "%5D",
+            "q",
+            "sort"
+          ],
+          "path": "terraform/agents.md",
+          "tokens": 9981
+        },
+        {
+          "id": "applies",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /applies API reference for HCP Terraform",
+          "tags": [
+            "/applies",
+            "data.attributes.status",
+            "pending",
+            "managed_queued",
+            "queued",
+            "running",
+            "errored",
+            "canceled",
+            "finished",
+            "unreachable"
+          ],
+          "path": "terraform/applies.md",
+          "tokens": 2256
+        },
+        {
+          "id": "assessment-results",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /assessment-results API reference for HCP Terraform",
+          "tags": [
+            "/assessment-results",
+            ":assessment_result_id"
+          ],
+          "path": "terraform/assessment-results.md",
+          "tokens": 1182
+        },
+        {
+          "id": "audit-trails-tokens",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Audit trail tokens API reference for HCP Terraform",
+          "tags": [
+            "/authentication-token",
+            "token",
+            ":organization_name",
+            "type: \"authentication-tokens\"",
+            "data.type",
+            "\"authentication-token\"",
+            "data.attributes.expired-at",
+            "null"
+          ],
+          "path": "terraform/audit-trails-tokens.md",
+          "tokens": 1534
+        },
+        {
+          "id": "audit-trails",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /organization/audit-trail API reference for HCP Terraform",
+          "tags": [
+            "/organization/audit-trail",
+            "GET /organization/audit-trail",
+            "[",
+            "%5B",
+            "]",
+            "%5D",
+            "since",
+            "page[number]",
+            "page[size]",
+            "id"
+          ],
+          "path": "terraform/audit-trails.md",
+          "tokens": 7786
+        },
+        {
+          "id": "change-requests",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /change_requests API reference for HCP Terraform",
+          "tags": [
+            "/change_requests",
+            ":workspace_name",
+            "[",
+            "%5B",
+            "]",
+            "%5D",
+            "page[number]",
+            "page[size]",
+            ":change_request_id",
+            "\"archived\""
+          ],
+          "path": "terraform/change-requests.md",
+          "tokens": 2780
+        },
+        {
+          "id": "changelog",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: API Changelog for HCP Terraform",
+          "tags": [
+            "/registry-components",
+            "listing projects",
+            "project-team-access",
+            "team-tokens",
+            "team-access",
+            "team-members",
+            "teams",
+            "default-execution-mode",
+            "default-agent-pool",
+            "settings-overwrites"
+          ],
+          "path": "terraform/changelog.md",
+          "tokens": 9372
+        },
+        {
+          "id": "comments",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /comments API reference for HCP Terraform",
+          "tags": [
+            "/comments",
+            "GET /runs/:id/comments",
+            "id",
+            "GET /comments/:id",
+            "POST /runs/:id/comments",
+            "data.type",
+            "\"comments\"",
+            "data.attributes.body"
+          ],
+          "path": "terraform/comments.md",
+          "tokens": 1336
+        },
+        {
+          "id": "configuration-versions",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /configuration-versions API reference for HCP Terraform",
+          "tags": [
+            "/configuration-versions",
+            "configuration-version",
+            "/configuration-version",
+            "data.attributes.status",
+            "uploaded",
+            "archived",
+            "pending",
+            "fetching",
+            "errored",
+            "backing_data_soft_deleted"
+          ],
+          "path": "terraform/configuration-versions.md",
+          "tokens": 7652
+        },
+        {
+          "id": "cost-estimates",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /cost-estimates API reference for HCP Terraform",
+          "tags": [
+            "/cost-estimates",
+            "resources",
+            "GET /cost-estimates/:id",
+            "id",
+            "relationships.cost-estimate",
+            "type: \"cost-estimates\""
+          ],
+          "path": "terraform/cost-estimates.md",
+          "tokens": 874
+        },
+        {
+          "id": "explorer",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /explorer API reference for HCP Terraform",
+          "tags": [
+            "/explorer",
+            ":organization_name",
+            "type",
+            "workspaces",
+            "tf_versions",
+            "providers",
+            "modules",
+            "sort",
+            "-",
+            "filter"
+          ],
+          "path": "terraform/explorer.md",
+          "tokens": 9594
+        },
+        {
+          "id": "feature-sets",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /feature-sets API reference for HCP Terraform",
+          "tags": [
+            "/feature-sets",
+            "GET /feature-sets",
+            "[",
+            "%5B",
+            "]",
+            "%5D",
+            "page[number]",
+            "page[size]",
+            "organization_name"
+          ],
+          "path": "terraform/feature-sets.md",
+          "tokens": 3122
+        },
+        {
+          "id": "github-app-installations",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /github-app/installations API reference for HCP Terraform",
+          "tags": [
+            "/github-app/installations",
+            "GET /github-app/installations",
+            "filter[name]",
+            "filter[installation_id]",
+            ":gh_app_installation_id"
+          ],
+          "path": "terraform/github-app-installations.md",
+          "tokens": 1195
+        },
+        {
+          "id": "group-member-roles",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /member-roles API reference for HCP Terraform",
+          "tags": [
+            "/member-roles",
+            "portal.cloud.eu.hashicorp",
+            "app.eu.terraform.io",
+            ":resource_type",
+            ":resource_id",
+            "[",
+            "%5B",
+            "]",
+            "%5D",
+            "q"
+          ],
+          "path": "terraform/group-member-roles.md",
+          "tokens": 2521
+        },
+        {
+          "id": "configurations",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /hyok-configurations API reference for HCP Terraform",
+          "tags": [
+            "/hyok-configurations",
+            "name",
+            "kek-id",
+            "kms-options",
+            "key_region",
+            "key_location",
+            "key_ring_id",
+            "primary",
+            "status",
+            "active"
+          ],
+          "path": "terraform/configurations.md",
+          "tokens": 7290
+        },
+        {
+          "id": "encrypted-data-keys",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /hyok-encrypted-data-key API reference for HCP Terraform",
+          "tags": [
+            "/hyok-encrypted-data-key",
+            "id",
+            "data.attributes.key-version",
+            "data.attributes.created-at",
+            "data.attributes.encrypted-dek",
+            "data.attributes.customer-key-name"
+          ],
+          "path": "terraform/encrypted-data-keys.md",
+          "tokens": 1128
+        },
+        {
+          "id": "key-versions",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /hyok-customer-key-versions API reference for HCP Terraform",
+          "tags": [
+            "/hyok-customer-key-versions",
+            "hyok_configuration_id",
+            "[",
+            "%5B",
+            "]",
+            "%5D",
+            "page[number]",
+            "page[size]",
+            "id",
+            "data.attributes.key-version"
+          ],
+          "path": "terraform/key-versions.md",
+          "tokens": 2665
+        },
+        {
+          "id": "aws",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: AWS specific /oidc-configuration API reference for HCP Terraform",
+          "tags": [
+            "/oidc-configuration",
+            ":organization_id",
+            "data.type",
+            "\"aws-oidc-configurations\"",
+            "data.attributes.role-arn",
+            "GET /api/v2/oidc-configurations/:id",
+            "id"
+          ],
+          "path": "terraform/aws.md",
+          "tokens": 1562
+        },
+        {
+          "id": "azure",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Azure specific /oidc-configuration API reference for HCP Terraform",
+          "tags": [
+            "/oidc-configuration",
+            ":organization_id",
+            "data.type",
+            "\"azure-oidc-configurations\"",
+            "data.attributes.client-id",
+            "data.attributes.subscription-id",
+            "data.attributes.tenant-id",
+            "GET /api/v2/oidc-configurations/:id",
+            "id"
+          ],
+          "path": "terraform/azure.md",
+          "tokens": 1609
+        },
+        {
+          "id": "gcp",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: GCP specific /oidc-configuration API reference for HCP Terraform",
+          "tags": [
+            "/oidc-configuration",
+            ":organization_id",
+            "data.type",
+            "\"gcp-oidc-configurations\"",
+            "data.attributes.service-account-email",
+            "data.attributes.workload-provider-name",
+            "data.attributes.project-number",
+            "GET /api/v2/oidc-configurations/:id",
+            "id"
+          ],
+          "path": "terraform/gcp.md",
+          "tokens": 1728
+        },
+        {
+          "id": "vault",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Vault specific /oidc-configuration API reference for HCP Terraform",
+          "tags": [
+            "/oidc-configuration",
+            ":organization_id",
+            "data.type",
+            "\"vault-oidc-configurations\"",
+            "data.attributes.address",
+            "data.attributes.role",
+            "data.attributes.namespace",
+            "data.attributes.auth-path",
+            "\"jwt\"",
+            "data.attributes.encoded-cacert"
+          ],
+          "path": "terraform/vault.md",
+          "tokens": 1818
+        },
+        {
+          "id": "cloud-docs-api-docs",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: API documentation for HCP Terraform",
+          "tags": [
+            "/api/v1/ping",
+            "/api/v1/usage/bundle",
+            "Authorization",
+            "Bearer <token>",
+            "hosted-state-download",
+            "404",
+            "agents",
+            "audit-logging",
+            "configuration-designer",
+            "cost-estimation"
+          ],
+          "path": "terraform/cloud-docs-api-docs.md",
+          "tokens": 6178
+        },
+        {
+          "id": "invoices",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /invoices API reference for HCP Terraform",
+          "tags": [
+            "/invoices",
+            "meta.continuation",
+            "cursor",
+            ":organization_name",
+            ":cursor",
+            "organization_name"
+          ],
+          "path": "terraform/invoices.md",
+          "tokens": 1175
+        },
+        {
+          "id": "ip-ranges",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /meta/ip-ranges API reference for HCP Terraform",
+          "tags": [
+            "/meta/ip-ranges",
+            "api",
+            "notifications",
+            "sentinel",
+            "vcs",
+            "GET /meta/ip-ranges",
+            "application/json",
+            "If-Modified-Since"
+          ],
+          "path": "terraform/ip-ranges.md",
+          "tokens": 1227
+        },
+        {
+          "id": "no-code-provisioning",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /no-code-modules API reference for HCP Terraform",
+          "tags": [
+            "/no-code-modules",
+            ":organization_name",
+            "POST",
+            "type: \"no-code-modules\"",
+            "data.type",
+            "\"no-code-modules\"",
+            "data.attributes.version-pin",
+            "data.attributes.enabled",
+            "false",
+            "true"
+          ],
+          "path": "terraform/no-code-provisioning.md",
+          "tokens": 9147
+        },
+        {
+          "id": "notification-configurations",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /notification-configurations API reference for HCP Terraform",
+          "tags": [
+            "/notification-configurations",
+            "Local",
+            "triggers",
+            "\"run:created\"",
+            "\"run:planning\"",
+            "\"run:needs_attention\"",
+            "\"run:applying\"",
+            "\"run:completed\"",
+            "\"run:errored\"",
+            "\"assessment:drifted\""
+          ],
+          "path": "terraform/notification-configurations.md",
+          "tokens": 18543
+        },
+        {
+          "id": "oauth-clients",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /oauth-clients API reference for HCP Terraform",
+          "tags": [
+            "/oauth-clients",
+            ":organization_name",
+            "type: \"oauth-clients\"",
+            "[",
+            "%5B",
+            "]",
+            "%5D",
+            "page[number]",
+            "page[size]",
+            "show_affected_workspaces"
+          ],
+          "path": "terraform/oauth-clients.md",
+          "tokens": 7784
+        },
+        {
+          "id": "oauth-tokens",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /oauth-tokens API reference for HCP Terraform",
+          "tags": [
+            "/oauth-tokens",
+            "oauth-token",
+            ":oauth_client_id",
+            "type: \"oauth-tokens\"",
+            "[",
+            "%5B",
+            "]",
+            "%5D",
+            "page[number]",
+            "page[size]"
+          ],
+          "path": "terraform/oauth-tokens.md",
+          "tokens": 2213
+        },
+        {
+          "id": "organization-memberships",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /organization-memberships API reference for HCP Terraform",
+          "tags": [
+            "/organization-memberships",
+            ":organization_name",
+            "data.type",
+            "\"organization-memberships\"",
+            "data.attributes.email",
+            "data.relationships.teams.data[]",
+            "id",
+            "type",
+            "teams",
+            "["
+          ],
+          "path": "terraform/organization-memberships.md",
+          "tokens": 4602
+        },
+        {
+          "id": "organization-tags",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /tags API reference for HCP Terraform",
+          "tags": [
+            "/tags",
+            ":organization_name",
+            "[",
+            "%5B",
+            "]",
+            "%5D",
+            "q",
+            "filter[exclude][taggable][id]",
+            "page[number]",
+            "page[size]"
+          ],
+          "path": "terraform/organization-tags.md",
+          "tokens": 1951
+        },
+        {
+          "id": "organization-tokens",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /organizations/authentication-token API reference for HCP Terraform",
+          "tags": [
+            "/organizations/authentication-token",
+            ":organization_name",
+            "type: \"authentication-tokens\"",
+            "data.type",
+            "\"authentication-token\"",
+            "data.attributes.expired-at",
+            "null"
+          ],
+          "path": "terraform/organization-tokens.md",
+          "tokens": 1471
+        },
+        {
+          "id": "organizations",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /organizations API reference for HCP Terraform",
+          "tags": [
+            "/organizations",
+            "GET /organizations",
+            "type: \"organizations\"",
+            "[",
+            "%5B",
+            "]",
+            "%5D",
+            "q",
+            "q[email]",
+            "q[name]"
+          ],
+          "path": "terraform/organizations.md",
+          "tokens": 13271
+        },
+        {
+          "id": "plan-exports",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /plan-exports API reference for HCP Terraform",
+          "tags": [
+            "/plan-exports",
+            "POST /plan-exports",
+            "\"finished\"",
+            "type: \"plan-exports\"",
+            "data-type",
+            "data.type",
+            "\"plan-exports\"",
+            "data.attributes.data-type",
+            "\"sentinel-mock-bundle-v0\"",
+            "data.relationships.plan.data"
+          ],
+          "path": "terraform/plan-exports.md",
+          "tokens": 2409
+        },
+        {
+          "id": "plans",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /plans API reference for HCP Terraform",
+          "tags": [
+            "/plans",
+            "data.attributes.status",
+            "pending",
+            "managed_queued",
+            "queued",
+            "running",
+            "errored",
+            "canceled",
+            "finished",
+            "unreachable"
+          ],
+          "path": "terraform/plans.md",
+          "tokens": 2722
+        },
+        {
+          "id": "policies",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /policies API reference for HCP Terraform",
+          "tags": [
+            "/policies",
+            ":organization_name",
+            "links.upload",
+            "type: \"policies\"",
+            "data.type",
+            "\"policies\"",
+            "data.attributes.name",
+            "-",
+            "_",
+            "data.attributes.description"
+          ],
+          "path": "terraform/policies.md",
+          "tokens": 7750
+        },
+        {
+          "id": "policy-checks",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /policy-checks API reference for HCP Terraform",
+          "tags": [
+            "/policy-checks",
+            "sentinel",
+            "result",
+            "GET /runs/:run_id/policy-checks",
+            "run_id",
+            "[",
+            "%5B",
+            "]",
+            "%5D",
+            "page[number]"
+          ],
+          "path": "terraform/policy-checks.md",
+          "tokens": 2052
+        },
+        {
+          "id": "policy-evaluations",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /policy-evaluations API reference for HCP Terraform",
+          "tags": [
+            "/policy-evaluations",
+            ":task_stage_id",
+            "[",
+            "%5B",
+            "]",
+            "%5D",
+            "page[number]",
+            "page[size]",
+            ":policy_evaluation_id",
+            "filter[n][status]"
+          ],
+          "path": "terraform/policy-evaluations.md",
+          "tokens": 3043
+        },
+        {
+          "id": "policy-set-params",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /parameters API reference for HCP Terraform",
+          "tags": [
+            "/parameters",
+            ":policy_set_id",
+            "data.type",
+            "\"vars\"",
+            "data.attributes.key",
+            "data.attributes.value",
+            "\"\"",
+            "data.attributes.category",
+            "\"policy-set\"",
+            "data.attributes.sensitive"
+          ],
+          "path": "terraform/policy-set-params.md",
+          "tokens": 2623
+        },
+        {
+          "id": "policy-sets",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /policy-sets API reference for HCP Terraform",
+          "tags": [
+            "/policy-sets",
+            "tar.gz",
+            ":organization_name",
+            "type: \"policy-sets\"",
+            "data.type",
+            "\"policy-sets\"",
+            "data.attributes.name",
+            "-",
+            "_",
+            "data.attributes.description"
+          ],
+          "path": "terraform/policy-sets.md",
+          "tokens": 20228
+        },
+        {
+          "id": "gpg-keys",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /gpg-keys API reference for HCP Terraform",
+          "tags": [
+            "/gpg-keys",
+            ":registry_name",
+            "private",
+            "[",
+            "%5B",
+            "]",
+            "%5D",
+            "filter[namespace]",
+            "page[number]",
+            "page[size]"
+          ],
+          "path": "terraform/gpg-keys.md",
+          "tokens": 4003
+        },
+        {
+          "id": "manage-module-versions",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Manage module versions API reference for HCP Terraform",
+          "tags": [
+            ":organization_name",
+            ":module_name",
+            ":module_provider",
+            ":module_version",
+            "GET",
+            "aws",
+            "consul",
+            "my-cloud-org",
+            "deprecation",
+            "null"
+          ],
+          "path": "terraform/manage-module-versions.md",
+          "tokens": 4894
+        },
+        {
+          "id": "modules",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /registry-modules API reference for HCP Terraform",
+          "tags": [
+            "/registry-modules",
+            "registry_name",
+            "private",
+            ":namespace",
+            "/api/registry/v1",
+            "/api/registry/public/v1",
+            "consul",
+            "aws",
+            "my-gh-repo-org",
+            "my-cloud-org"
+          ],
+          "path": "terraform/modules.md",
+          "tokens": 11897
+        },
+        {
+          "id": "provider-versions-platforms",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /registry-providers API reference for HCP Terraform",
+          "tags": [
+            "/registry-providers",
+            ":organization_name",
+            ":registry_name",
+            "private",
+            ":namespace",
+            ":name",
+            "type: \"registry-provider-versions\"",
+            "data.type",
+            "\"registry-provider-versions\"",
+            "data.attributes.version"
+          ],
+          "path": "terraform/provider-versions-platforms.md",
+          "tokens": 8988
+        },
+        {
+          "id": "providers",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /registry-providers API reference for HCP Terraform",
+          "tags": [
+            "/registry-providers",
+            "/api/registry/public/v1",
+            ":organization_name",
+            "type: \"registry-providers\"",
+            "[",
+            "%5B",
+            "]",
+            "%5D",
+            "q",
+            "filter[field name]"
+          ],
+          "path": "terraform/providers.md",
+          "tokens": 5063
+        },
+        {
+          "id": "stack-component-configurations",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Stack component configurations API reference for HCP Terraform",
+          "tags": [
+            "/registry-components",
+            "stack",
+            "<NAME>.tfcomponent.hcl",
+            ":organization_name",
+            "[",
+            "%5B",
+            "]",
+            "%5D",
+            "q",
+            "page[number]"
+          ],
+          "path": "terraform/stack-component-configurations.md",
+          "tokens": 8612
+        },
+        {
+          "id": "test-configuration",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Test Configuration - API Docs - Private Registry",
+          "tags": [
+            "/test-configuration",
+            "PATCH",
+            "registry_name",
+            "private",
+            "namespace",
+            "name",
+            "provider",
+            "aws",
+            "gcp",
+            "azurerm"
+          ],
+          "path": "terraform/test-configuration.md",
+          "tokens": 2733
+        },
+        {
+          "id": "tests",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /tests API reference for HCP Terraform",
+          "tags": [
+            "/tests",
+            "tests",
+            "data.attributes.status",
+            "pending",
+            "queued",
+            "running",
+            "errored",
+            "canceled",
+            "finished",
+            "data.attributes.test-status"
+          ],
+          "path": "terraform/tests.md",
+          "tokens": 10668
+        },
+        {
+          "id": "project-team-access",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /team-projects API reference for HCP Terraform",
+          "tags": [
+            "/team-projects",
+            "team-project",
+            "read",
+            "write",
+            "maintain",
+            "admin",
+            "custom",
+            "GET /team-projects",
+            "type: \"team-projects\"",
+            "["
+          ],
+          "path": "terraform/project-team-access.md",
+          "tokens": 6269
+        },
+        {
+          "id": "projects",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /projects API reference for HCP Terraform",
+          "tags": [
+            "/projects",
+            "POST",
+            "PATCH",
+            "/projects/:project_id",
+            "GET",
+            "DELETE",
+            "/projects/:project_id/tag-bindings",
+            "effective-tag-bindings",
+            "tag-bindings",
+            ":organization_name"
+          ],
+          "path": "terraform/projects.md",
+          "tokens": 7646
+        },
+        {
+          "id": "cloud-docs-api-docs-queries",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /queries API reference for HCP Terraform",
+          "tags": [
+            "/queries",
+            "POST",
+            "GET",
+            "/workspaces/:workspace_id/queries",
+            "/queries/:query_id",
+            "/queries/:query_id/actions/cancel",
+            "POST /queries",
+            "data.type",
+            "\"queries\"",
+            "data.attributes.source"
+          ],
+          "path": "terraform/cloud-docs-api-docs-queries.md",
+          "tokens": 3863
+        },
+        {
+          "id": "reserved-tag-keys",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /reserved-tag-keys API reference for HCP Terraform",
+          "tags": [
+            "/reserved-tag-keys",
+            "GET",
+            "POST",
+            "PATCH",
+            "/reserved-tags/:reserved_tag_key_id",
+            "DELETE",
+            "/reserved-tag-keys/",
+            ":reserved_tag_key_id",
+            ":organization_name",
+            "data.type"
+          ],
+          "path": "terraform/reserved-tag-keys.md",
+          "tokens": 2018
+        },
+        {
+          "id": "run-task-stages-and-results",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /task-stages API reference for HCP Terraform",
+          "tags": [
+            "/task-stages",
+            "alpha",
+            "beta",
+            "post-plan",
+            "data.attributes.status",
+            "pending",
+            "running",
+            "passed",
+            "failed",
+            "awaiting_override"
+          ],
+          "path": "terraform/run-task-stages-and-results.md",
+          "tokens": 3579
+        },
+        {
+          "id": "run-tasks-integration",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Run tasks integration API for HCP Terraform",
+          "tags": [
+            "private-run-tasks",
+            "200 OK",
+            "POST :url",
+            ":url",
+            "payload_version",
+            "1",
+            "stage",
+            "pre_plan",
+            "post_plan",
+            "pre_apply"
+          ],
+          "path": "terraform/run-tasks-integration.md",
+          "tokens": 5934
+        },
+        {
+          "id": "run-tasks",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /tasks API reference for HCP Terraform",
+          "tags": [
+            "/tasks",
+            ":organization_name",
+            "type: \"tasks\"",
+            "data.type",
+            "\"tasks\"",
+            "data.attributes.name",
+            "-",
+            "_",
+            "data.attributes.url",
+            "data.attributes.description"
+          ],
+          "path": "terraform/run-tasks.md",
+          "tokens": 9493
+        },
+        {
+          "id": "run-triggers",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /run-triggers API reference for HCP Terraform",
+          "tags": [
+            "/run-triggers",
+            "run-triggers",
+            ":workspace_id",
+            "type: \"run-triggers\"",
+            "data.relationships.sourceable.data",
+            "id",
+            "type",
+            "workspaces",
+            "filter[run-trigger][type]",
+            "["
+          ],
+          "path": "terraform/run-triggers.md",
+          "tokens": 4002
+        },
+        {
+          "id": "run",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /runs API reference for HCP Terraform",
+          "tags": [
+            "/runs",
+            "data.attributes.status",
+            "pending",
+            "fetching",
+            "fetching_completed",
+            "pre_plan_running",
+            "pre_plan_completed",
+            "queuing",
+            "plan_queued",
+            "planning"
+          ],
+          "path": "terraform/run.md",
+          "tokens": 16658
+        },
+        {
+          "id": "ssh-keys",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /ssh-keys API reference for HCP Terraform",
+          "tags": [
+            "/ssh-keys",
+            "ssh-key",
+            "oauth-tokens",
+            ":organization_name",
+            "type: \"ssh-keys\"",
+            "[",
+            "%5B",
+            "]",
+            "%5D",
+            "page[number]"
+          ],
+          "path": "terraform/ssh-keys.md",
+          "tokens": 3463
+        },
+        {
+          "id": "stability-policy",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: API stability policy for HCP Terraform",
+          "tags": [],
+          "path": "terraform/stability-policy.md",
+          "tokens": 471
+        },
+        {
+          "id": "configurations",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /stack-configurations API reference for HCP Terraform",
+          "tags": [
+            "/stack-configurations",
+            "POST",
+            "/stacks/:stack_id/stack-configurations",
+            "/stacks/:stack_id/fetch-latest-from-vcs",
+            "GET",
+            ":stack_id",
+            "data.attributes.speculative",
+            "false",
+            "[",
+            "%5B"
+          ],
+          "path": "terraform/configurations.md",
+          "tokens": 6234
+        },
+        {
+          "id": "deployments",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /stack-deployments API reference for HCP Terraform",
+          "tags": [
+            "/stack-deployments",
+            "deployment.tfdeploy.hcl",
+            "GET",
+            "/stacks/:stack_id/stack-deployments",
+            "/stack-approvals/:stack_approval_id",
+            "POST",
+            "GET /stacks/:stack_id/stack-deployments",
+            ":stack_id",
+            "[",
+            "%5B"
+          ],
+          "path": "terraform/deployments.md",
+          "tokens": 13207
+        },
+        {
+          "id": "cloud-docs-api-docs-stacks",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /stacks API reference for HCP Terraform",
+          "tags": [
+            "/stacks",
+            "POST",
+            "GET",
+            "/stacks/:stack_id",
+            "PATCH",
+            "DELETE",
+            "POST /stacks",
+            "data.attributes.name",
+            "-",
+            "_"
+          ],
+          "path": "terraform/cloud-docs-api-docs-stacks.md",
+          "tokens": 8349
+        },
+        {
+          "id": "states",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /stack-states API reference for HCP Terraform",
+          "tags": [
+            "/stack-states",
+            "GET",
+            "/stacks/:stack_id/stack-states",
+            "/stack-states/:stack_state_id",
+            "GET /stacks/:stack_id/stack-states",
+            ":stack_id",
+            "[",
+            "%5B",
+            "]",
+            "%5D"
+          ],
+          "path": "terraform/states.md",
+          "tokens": 2371
+        },
+        {
+          "id": "state-version-outputs",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /state-version-outputs API reference for HCP Terraform",
+          "tags": [
+            "/state-version-outputs",
+            "resources-processed",
+            "true",
+            ":state_version_id",
+            "[",
+            "%5B",
+            "]",
+            "%5D",
+            "page[number]",
+            "page[size]"
+          ],
+          "path": "terraform/state-version-outputs.md",
+          "tokens": 2369
+        },
+        {
+          "id": "state-versions",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /state-versions API reference for HCP Terraform",
+          "tags": [
+            "/state-versions",
+            "resources-processed",
+            "true",
+            "billable-rum-count",
+            "hosted-json-state-download-url",
+            "hosted-state-download-url",
+            "sanitized-state-download-url",
+            "hosted-json-state-upload-url",
+            "hosted-state-upload-url",
+            "hyok-encrypted-data-key"
+          ],
+          "path": "terraform/state-versions.md",
+          "tokens": 15904
+        },
+        {
+          "id": "subscriptions",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /subscriptions API reference for HCP Terraform",
+          "tags": [
+            "/subscriptions",
+            ":organization_name",
+            "GET /subscriptions/:id",
+            ":id"
+          ],
+          "path": "terraform/subscriptions.md",
+          "tokens": 1911
+        },
+        {
+          "id": "team-access",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /team-workspaces API reference for HCP Terraform",
+          "tags": [
+            "/team-workspaces",
+            "team-workspace",
+            "GET /team-workspaces",
+            "type: \"team-workspaces\"",
+            "[",
+            "%5B",
+            "]",
+            "%5D",
+            "filter[workspace][id]",
+            "page[number]"
+          ],
+          "path": "terraform/team-access.md",
+          "tokens": 5284
+        },
+        {
+          "id": "team-members",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /relationships API reference for HCP Terraform",
+          "tags": [
+            "/relationships",
+            ":team_id",
+            "data[].type",
+            "\"users\"",
+            "data[].id",
+            "\"organization-memberships\""
+          ],
+          "path": "terraform/team-members.md",
+          "tokens": 2055
+        },
+        {
+          "id": "team-tokens",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /teams/:team_id/authentication-tokens API reference for HCP Terraform",
+          "tags": [
+            "/teams/:team_id/authentication-tokens",
+            "/teams/:team_id/authentication-token",
+            "team_id",
+            "group_id",
+            ":team_id",
+            "string: <required>",
+            "data.type",
+            "\"authentication-tokens\"",
+            "data.attributes.description",
+            "data.attributes.expired-at"
+          ],
+          "path": "terraform/team-tokens.md",
+          "tokens": 5273
+        },
+        {
+          "id": "teams",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /teams API reference for HCP Terraform",
+          "tags": [
+            "/teams",
+            ":organization_name",
+            "api-team_XXXXXX",
+            "0",
+            "1",
+            "[",
+            "%5B",
+            "]",
+            "%5D",
+            "q"
+          ],
+          "path": "terraform/teams.md",
+          "tokens": 5684
+        },
+        {
+          "id": "user-tokens",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /users/authentication-tokens API reference for HCP Terraform",
+          "tags": [
+            "/users/authentication-tokens",
+            ":user_id",
+            "type: \"authentication-tokens\"",
+            "[",
+            "%5B",
+            "]",
+            "%5D",
+            "page[number]",
+            "page[size]",
+            "GET /authentication-tokens/:id"
+          ],
+          "path": "terraform/user-tokens.md",
+          "tokens": 2811
+        },
+        {
+          "id": "users",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /users API reference for HCP Terraform",
+          "tags": [
+            "/users",
+            "?include",
+            "GET /users/:user_id",
+            ":user_id",
+            "?include=users",
+            "type: \"users\""
+          ],
+          "path": "terraform/users.md",
+          "tokens": 961
+        },
+        {
+          "id": "variable-sets",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /varsets API reference for HCP Terraform",
+          "tags": [
+            "/varsets",
+            ":organization_name",
+            "data.attributes.name",
+            "data.attributes.description",
+            "\"\"",
+            "data.attributes.global",
+            "false",
+            "data.attributes.priority",
+            "data.relationships.workspaces",
+            "[]"
+          ],
+          "path": "terraform/variable-sets.md",
+          "tokens": 10201
+        },
+        {
+          "id": "variables",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /vars API reference for HCP Terraform",
+          "tags": [
+            "/vars",
+            "POST /vars",
+            "data.type",
+            "\"vars\"",
+            "data.attributes.key",
+            "data.attributes.value",
+            "\"\"",
+            "data.attributes.description",
+            "data.attributes.category",
+            "\"terraform\""
+          ],
+          "path": "terraform/variables.md",
+          "tokens": 3194
+        },
+        {
+          "id": "vcs-events",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /vcs-events API reference for HCP Terraform",
+          "tags": [
+            "/vcs-events",
+            ":organization_name",
+            "[",
+            "%5B",
+            "]",
+            "%5D",
+            "page[number]",
+            "page[size]",
+            "filter[from]",
+            "filter[to]"
+          ],
+          "path": "terraform/vcs-events.md",
+          "tokens": 1994
+        },
+        {
+          "id": "workspace-resources",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /workspaces/resources API reference for HCP Terraform",
+          "tags": [
+            "/workspaces/resources",
+            "GET /workspaces/:workspace_id/resources",
+            ":workspace_id",
+            "type: \"resources\"",
+            "[",
+            "%5B",
+            "]",
+            "%5D",
+            "page[number]",
+            "page[size]"
+          ],
+          "path": "terraform/workspace-resources.md",
+          "tokens": 1326
+        },
+        {
+          "id": "workspace-variables",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /workspaces/vars API reference for HCP Terraform",
+          "tags": [
+            "/workspaces/vars",
+            "POST /workspaces/:workspace_id/vars",
+            ":workspace_id",
+            "data.type",
+            "\"vars\"",
+            "data.attributes.key",
+            "data.attributes.value",
+            "\"\"",
+            "data.attributes.description",
+            "data.attributes.category"
+          ],
+          "path": "terraform/workspace-variables.md",
+          "tokens": 2776
+        },
+        {
+          "id": "workspaces",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: /workspaces API reference for HCP Terraform",
+          "tags": [
+            "/workspaces",
+            "POST",
+            "/workspaces/:workspace_id/actions/lock",
+            "GET",
+            "effective-tag-bindings",
+            "tag-bindings",
+            "/workspaces/:workspace_id",
+            "/workspaces/:workspace_id/tag-bindings",
+            "PATCH",
+            "DELETE"
+          ],
+          "path": "terraform/workspaces.md",
+          "tokens": 25720
+        },
+        {
+          "id": "data-security",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Data security for HCP Terraform",
+          "tags": [
+            "context"
+          ],
+          "path": "terraform/data-security.md",
+          "tokens": 1211
+        },
+        {
+          "id": "cloud-docs-architectural-details",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: HCP Terraform architecture",
+          "tags": [],
+          "path": "terraform/cloud-docs-architectural-details.md",
+          "tokens": 174
+        },
+        {
+          "id": "ip-ranges",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: HCP Terraform IP ranges",
+          "tags": [],
+          "path": "terraform/ip-ranges.md",
+          "tokens": 541
+        },
+        {
+          "id": "security-model",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: HCP Terraform security model",
+          "tags": [
+            "plan",
+            "apply",
+            "https://archivist.terraform.io"
+          ],
+          "path": "terraform/security-model.md",
+          "tokens": 6386
+        },
+        {
+          "id": "aws-configuration",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Use dynamic credentials with the AWS provider in HCP Terraform",
+          "tags": [
+            "provider URL",
+            "audience",
+            "aws.workload.identity",
+            "TFC_AWS_WORKLOAD_IDENTITY_AUDIENCE",
+            "https://",
+            "app.terraform.io",
+            "my-org-name",
+            "my-project-name",
+            "my-workspace-name",
+            "plan"
+          ],
+          "path": "terraform/aws-configuration.md",
+          "tokens": 3158
+        },
+        {
+          "id": "azure-configuration",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Use dynamic credentials with the Azure provider in HCP Terraform",
+          "tags": [
+            "client_id",
+            "Other issuer",
+            "run_phase",
+            "plan",
+            "apply",
+            "tfc-plan-credential",
+            "api://AzureADTokenExchange",
+            "TFC_AZURE_WORKLOAD_IDENTITY_AUDIENCE",
+            "Subject identifier",
+            "run_phase:plan"
+          ],
+          "path": "terraform/azure-configuration.md",
+          "tokens": 3717
+        },
+        {
+          "id": "gcp-configuration",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Use dynamic credentials with the GCP provider in HCP Terraform",
+          "tags": [
+            "my-tfc-pool",
+            "Enabled Pool",
+            "OpenID Connect (OIDC)",
+            "my-tfc-provider",
+            "Default audience",
+            "Allowed audiences",
+            "TFC_GCP_WORKLOAD_IDENTITY_AUDIENCE",
+            "assertion.sub",
+            "google.subject",
+            "attribute.[claim name]"
+          ],
+          "path": "terraform/gcp-configuration.md",
+          "tokens": 4663
+        },
+        {
+          "id": "hcp-configuration",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Dynamic Credentials with the HCP Provider - Workspaces - HCP Terraform",
+          "tags": [
+            "HCP_PROJECT_ID",
+            "ORG_NAME",
+            "PROJECT_NAME",
+            "WORKSPACE_NAME",
+            "identity_token",
+            "TFC_HCP_PROVIDER_AUTH",
+            "TFC_HCP_PROVIDER_AUTH[_TAG]",
+            "true",
+            "TFC_HCP_RUN_PROVIDER_RESOURCE_NAME",
+            "PLAN_PROVIDER_RESOURCE_NAME"
+          ],
+          "path": "terraform/hcp-configuration.md",
+          "tokens": 2858
+        },
+        {
+          "id": "aws-configuration",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: HCP Vault Secrets-Backed Dynamic Credentials with the AWS Provider - Workspaces - HCP Terraform",
+          "tags": [
+            "identity_token",
+            "TFC_HVS_BACKED_AWS_AUTH",
+            "TFC_HVS_BACKED_AWS_AUTH[_TAG]",
+            "true",
+            "TFC_HVS_BACKED_AWS_HCP_CONFIG",
+            "TFC_HVS_BACKED_AWS_HCP_CONFIG[_TAG]",
+            "TFC_DEFAULT_HVS_BACKED_AWS_HCP_CONFIG",
+            "region",
+            "AWS_REGION",
+            "TFC_DEFAULT_"
+          ],
+          "path": "terraform/aws-configuration.md",
+          "tokens": 2577
+        },
+        {
+          "id": "gcp-configuration",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: HCP Vault Secrets-Backed Dynamic Credentials with the GCP Provider - Workspaces - HCP Terraform",
+          "tags": [
+            "identity_token",
+            "TFC_HVS_BACKED_GCP_AUTH",
+            "TFC_HVS_BACKED_GCP_AUTH[_TAG]",
+            "true",
+            "TFC_HVS_BACKED_GCP_HCP_CONFIG",
+            "TFC_HVS_BACKED_GCP_HCP_CONFIG[_TAG]",
+            "TFC_DEFAULT_HVS_BACKED_GCP_HCP_CONFIG",
+            "project",
+            "region",
+            "GOOGLE_CREDENTIALS"
+          ],
+          "path": "terraform/gcp-configuration.md",
+          "tokens": 2600
+        },
+        {
+          "id": "cloud-docs-dynamic-provider-credentials-hcp-vault-secrets-backed",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: >-",
+          "tags": [
+            "/.well-known/openid-configuration",
+            "/.well-known/jwks"
+          ],
+          "path": "terraform/cloud-docs-dynamic-provider-credentials-hcp-vault-secrets-backed.md",
+          "tokens": 939
+        },
+        {
+          "id": "cloud-docs-dynamic-provider-credentials",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Dynamic provider credentials in HCP Terraform",
+          "tags": [
+            "TFC_AWS_RUN_ROLE_ARN",
+            "TFC_AZURE_RUN_CLIENT_ID",
+            "TFC_GCP_RUN_SERVICE_ACCOUNT_EMAIL",
+            "TFC_HCP_RUN_PROVIDER_RESOURCE_NAME",
+            "TFC_VAULT_RUN_ROLE",
+            "/.well-known/openid-configuration",
+            "/.well-known/jwks"
+          ],
+          "path": "terraform/cloud-docs-dynamic-provider-credentials.md",
+          "tokens": 1829
+        },
+        {
+          "id": "kubernetes-configuration",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Use dynamic credentials with the Kubernetes and Helm providers in HCP Terraform",
+          "tags": [
+            "https://app.terraform.io",
+            "RoleBinding",
+            "identity_token",
+            "TFC_KUBERNETES_PROVIDER_AUTH",
+            "TFC_KUBERNETES_PROVIDER_AUTH[_TAG]",
+            "true",
+            "kubernetes",
+            "host",
+            "cluster_ca_certificate",
+            "KUBE_TOKEN"
+          ],
+          "path": "terraform/kubernetes-configuration.md",
+          "tokens": 2926
+        },
+        {
+          "id": "manual-generation",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Manually generate workload identity tokens in HCP Terraform",
+          "tags": [
+            "TFC_WORKLOAD_IDENTITY_AUDIENCE",
+            "TYPE",
+            "TFC_WORKLOAD_IDENTITY_TOKEN"
+          ],
+          "path": "terraform/manual-generation.md",
+          "tokens": 1057
+        },
+        {
+          "id": "specifying-multiple-configurations",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Specify multiple dynamic credential configurations in HCP Terraform",
+          "tags": [
+            "TYPE",
+            "ALIAS1",
+            "TFC_VAULT_PROVIDER_AUTH_ALIAS1",
+            "TFC_VAULT_ADDR_ALIAS1",
+            "TFC_VAULT_RUN_ROLE_ALIAS1",
+            "TFC_DEFAULT_VAULT_ADDR",
+            "TFC_VAULT_ADDR",
+            "ALIAS2",
+            "TFC_VAULT_ADDR_ALIAS2",
+            "default"
+          ],
+          "path": "terraform/specifying-multiple-configurations.md",
+          "tokens": 1657
+        },
+        {
+          "id": "aws-configuration",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Use Vault-backed dynamic credentials with the AWS provider in HCP Terraform",
+          "tags": [
+            "identity_token",
+            "TFC_VAULT_BACKED_AWS_AUTH",
+            "TFC_VAULT_BACKED_AWS_AUTH[_TAG]",
+            "true",
+            "TFC_VAULT_BACKED_AWS_AUTH_TYPE",
+            "TFC_VAULT_BACKED_AWS_AUTH_TYPE[_TAG]",
+            "TFC_DEFAULT_VAULT_BACKED_AWS_AUTH_TYPE",
+            "iam_user",
+            "assumed_role",
+            "federation_token"
+          ],
+          "path": "terraform/aws-configuration.md",
+          "tokens": 4241
+        },
+        {
+          "id": "azure-configuration",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Use Vault-backed dynamic credentials with the Azure provider in HCP Terraform",
+          "tags": [
+            "identity_token",
+            "TFC_VAULT_BACKED_AZURE_AUTH",
+            "TFC_VAULT_BACKED_AZURE_AUTH[_TAG]",
+            "true",
+            "TFC_VAULT_BACKED_AZURE_RUN_VAULT_ROLE",
+            "TFC_VAULT_BACKED_AZURE_PLAN_VAULT_ROLE",
+            "TFC_VAULT_BACKED_AZURE_APPLY_VAULT_ROLE",
+            "TFC_VAULT_BACKED_AZURE_MOUNT_PATH",
+            "TFC_VAULT_BACKED_AZURE_MOUNT_PATH[_TAG]",
+            "azure"
+          ],
+          "path": "terraform/azure-configuration.md",
+          "tokens": 3726
+        },
+        {
+          "id": "gcp-configuration",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Use Vault-backed dynamic credentials with the GCP provider in HCP Terraform",
+          "tags": [
+            "identity_token",
+            "TFC_VAULT_BACKED_GCP_AUTH",
+            "TFC_VAULT_BACKED_GCP_AUTH[_TAG]",
+            "true",
+            "TFC_VAULT_BACKED_GCP_AUTH_TYPE",
+            "TFC_VAULT_BACKED_GCP_AUTH_TYPE[_TAG]",
+            "TFC_DEFAULT_VAULT_BACKED_GCP_AUTH_TYPE",
+            "roleset/access_token",
+            "roleset/service_account_key",
+            "static_account/access_token"
+          ],
+          "path": "terraform/gcp-configuration.md",
+          "tokens": 4533
+        },
+        {
+          "id": "cloud-docs-dynamic-provider-credentials-vault-backed",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Use Vault-backed dynamic credentials in HCP Terraform",
+          "tags": [
+            "/.well-known/openid-configuration",
+            "/.well-known/jwks"
+          ],
+          "path": "terraform/cloud-docs-dynamic-provider-credentials-vault-backed.md",
+          "tokens": 1194
+        },
+        {
+          "id": "vault-configuration",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Use dynamic credentials with the Vault provider in HCP Terraform",
+          "tags": [
+            "jwt",
+            "oidc_discovery_url",
+            "bound_issuer",
+            "oidc_discovery_ca_pem",
+            "my-cert.pem",
+            "user_claim",
+            "tfc-role",
+            "vault-jwt-auth-role.json",
+            "token_ttl",
+            "identity_token"
+          ],
+          "path": "terraform/vault-configuration.md",
+          "tokens": 4625
+        },
+        {
+          "id": "workload-identity-tokens",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Workload identity in HCP Terraform",
+          "tags": [
+            "jti",
+            "iss",
+            "iat",
+            "nbf",
+            "aud",
+            "aws.workload.identity",
+            "exp",
+            "plan",
+            "apply",
+            "sub"
+          ],
+          "path": "terraform/workload-identity-tokens.md",
+          "tokens": 3012
+        },
+        {
+          "id": "cloud-docs-europe",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: HCP Terraform in Europe",
+          "tags": [
+            "portal.cloud.eu.hashicorp",
+            "app.eu.terraform.io",
+            "tf-migrate"
+          ],
+          "path": "terraform/cloud-docs-europe.md",
+          "tokens": 1008
+        },
+        {
+          "id": "concepts",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Hold your own key concepts for HCP Terraform",
+          "tags": [
+            "json-state",
+            "json-plan",
+            "iss",
+            "https://app.terraform.io",
+            "sub",
+            "aud",
+            "vault.workload.identity",
+            "aws.workload.identity",
+            "api://AzureADTokenExchange",
+            "HMAC-SHA256"
+          ],
+          "path": "terraform/concepts.md",
+          "tokens": 3155
+        },
+        {
+          "id": "configure",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Configure and manage keys for HCP Terraform",
+          "tags": [
+            "client_id",
+            "tenant_id",
+            "https://app.terraform.io",
+            "api://AzureADTokenExchange",
+            "aws.workload.identity",
+            "organization:<ORG_NAME>:hyok_config:*",
+            "google.subject",
+            "assertion.sub",
+            "tfc-agent",
+            "unique-prod"
+          ],
+          "path": "terraform/configure.md",
+          "tokens": 6579
+        },
+        {
+          "id": "cloud-docs-hold-your-own-key",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Encrypt your state and plan files for HCP Terraform",
+          "tags": [],
+          "path": "terraform/cloud-docs-hold-your-own-key.md",
+          "tokens": 1353
+        },
+        {
+          "id": "cloud-docs",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: What is HCP Terraform?",
+          "tags": [],
+          "path": "terraform/cloud-docs.md",
+          "tokens": 739
+        },
+        {
+          "id": "cloud-docs-integrations-aws-service-catalog",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: HCP Terraform for AWS Service Catalog overview",
+          "tags": [
+            "tfc_hostname",
+            "app.eu.terraform.io"
+          ],
+          "path": "terraform/cloud-docs-integrations-aws-service-catalog.md",
+          "tokens": 739
+        },
+        {
+          "id": "cloud-docs-integrations",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Integrations overview for HCP Terraform",
+          "tags": [],
+          "path": "terraform/cloud-docs-integrations.md",
+          "tokens": 511
+        },
+        {
+          "id": "annotations-and-labels",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: HCP Terraform Operator for Kubernetes annotations and labels",
+          "tags": [
+            "workspace.app.terraform.io/run-new",
+            "\"true\"",
+            "workspace.app.terraform.io/run-type",
+            "plan",
+            "apply",
+            "refresh",
+            "\"plan\"",
+            "app.terraform.io/paused",
+            "\"false\"",
+            "agentpool.app.terraform.io/pool-name"
+          ],
+          "path": "terraform/annotations-and-labels.md",
+          "tokens": 585
+        },
+        {
+          "id": "api-reference",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: HCP Terraform Operator for Kubernetes API reference",
+          "tags": [
+            "name",
+            "id",
+            "createdAt",
+            "lastUsedAt",
+            "replicas",
+            "spec",
+            "annotations",
+            "labels",
+            "maxReplicas",
+            "minReplicas"
+          ],
+          "path": "terraform/api-reference.md",
+          "tokens": 12799
+        },
+        {
+          "id": "cloud-docs-integrations-kubernetes",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: HCP Terraform Operator for Kubernetes overview",
+          "tags": [
+            "--namespace",
+            "--sync-period",
+            "agent-pool-development",
+            "token-red",
+            "my-agent-pool-token-red",
+            ".spec.autoscaling",
+            "AgentPool",
+            "name",
+            "id",
+            "wildcardName"
+          ],
+          "path": "terraform/cloud-docs-integrations-kubernetes.md",
+          "tokens": 2244
+        },
+        {
+          "id": "metrics",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: HCP Terraform Operator for Kubernetes Metrics",
+          "tags": [
+            "2.10.0",
+            "hcp_tf_*",
+            "Controller",
+            "/metrics",
+            "8443",
+            "hcpt-operator"
+          ],
+          "path": "terraform/metrics.md",
+          "tokens": 821
+        },
+        {
+          "id": "ops-v2-migration",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Migrate to HCP Terraform Operator for Kubernetes v2",
+          "tags": [
+            "RELEASE_NAMESPACE",
+            "RELEASE_NAME",
+            "Workspace",
+            "apiVersion: app.terraform.io/v1alpha1",
+            "apiVersion: app.terraform.io/v1alpha2",
+            "apiVersion",
+            "v1alpha2",
+            "kind: Workspace",
+            "metadata",
+            "spec.organization"
+          ],
+          "path": "terraform/ops-v2-migration.md",
+          "tokens": 3688
+        },
+        {
+          "id": "setup",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Set up the HCP Terraform Operator for Kubernetes",
+          "tags": [
+            "app.terraform.io",
+            "credentials",
+            "NAMESPACE",
+            "operator.tfeAddress",
+            "tfeAddress"
+          ],
+          "path": "terraform/setup.md",
+          "tokens": 1318
+        },
+        {
+          "id": "cloud-docs-integrations-run-tasks",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Set up HCP Terraform run task integrations",
+          "tags": [
+            "200 OK",
+            "task_result_callback_url",
+            "access_token",
+            "running",
+            "passed",
+            "failed",
+            "X-Tfc-Task-Signature"
+          ],
+          "path": "terraform/cloud-docs-integrations-run-tasks.md",
+          "tokens": 1712
+        },
+        {
+          "id": "admin-guide",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Configure the ServiceNow Service Catalog integration",
+          "tags": [
+            "is_destroyable"
+          ],
+          "path": "terraform/admin-guide.md",
+          "tokens": 587
+        },
+        {
+          "id": "developer-reference",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: ServiceNow Service Catalog integration developer reference",
+          "tags": [
+            "tf_variable.createVariablesFromSet()",
+            "tf_var_hcl_VARIABLE_NAME",
+            "VARIABLE_NAME",
+            "tf_env_ENV_NAME",
+            "ENV_NAME",
+            "sensitive_tf_var_hcl_VARIABLE_NAME",
+            "sensitive_tf_env_ENV_NAME",
+            "tf_config",
+            "tf_get_workspace",
+            "tf_http"
+          ],
+          "path": "terraform/developer-reference.md",
+          "tokens": 2484
+        },
+        {
+          "id": "example-customizations",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: ServiceNow Service Catalog integration example configurations",
+          "tags": [],
+          "path": "terraform/example-customizations.md",
+          "tokens": 3278
+        },
+        {
+          "id": "cloud-docs-integrations-service-now-service-catalog-terraform",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Set up ServiceNow Service Catalog integration for HCP Terraform",
+          "tags": [
+            "com.glide.hub.action_step.script",
+            "com.glide.hub.action_step.rest",
+            "app.terraform.io",
+            "<ORGANIZATION>/<REPO_NAME>",
+            "<PROJECT_KEY>/<REPO_NAME>",
+            "exampleorg/examplerepo",
+            "admin",
+            "x_terraform.config_user",
+            "https://app.terraform.io",
+            "name"
+          ],
+          "path": "terraform/cloud-docs-integrations-service-now-service-catalog-terraform.md",
+          "tokens": 3961
+        },
+        {
+          "id": "service-catalog-config",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Create and manage ServiceNow Service Catalog items with HCP Terraform",
+          "tags": [
+            "admin",
+            "x_terraform.vcs_repositories_user",
+            "<ORGANIZATION>/<REPO_NAME>",
+            "<PROJECT KEY>/<REPO_NAME>",
+            "tf_var_VARIABLE_NAME",
+            "VARIABLE_NAME",
+            "tf_env_ENV_NAME",
+            "ENV_NAME",
+            "sensitive_tf_var_VARIABLE_NAME",
+            "sensitive_tf_env_ENV_NAME"
+          ],
+          "path": "terraform/service-catalog-config.md",
+          "tokens": 3616
+        },
+        {
+          "id": "troubleshoot",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Troubleshoot the ServiceNow Service Catalog Integration for HCP Terraform",
+          "tags": [
+            "x_325709_terraform",
+            "username/repo_name"
+          ],
+          "path": "terraform/troubleshoot.md",
+          "tokens": 1610
+        },
+        {
+          "id": "customizations",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Customize the ServiceNow Service Graph Connector for HCP Terraform",
+          "tags": [
+            "admin",
+            "IntegrationHub ETL",
+            "cmdb_ci_network",
+            "type",
+            "u_",
+            "arn",
+            "aws_vpc"
+          ],
+          "path": "terraform/customizations.md",
+          "tokens": 2108
+        },
+        {
+          "id": "cloud-docs-integrations-service-now-service-graph",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: ServiceNow Service Graph Connector for HCP Terraform overview",
+          "tags": [],
+          "path": "terraform/cloud-docs-integrations-service-now-service-graph.md",
+          "tokens": 1927
+        },
+        {
+          "id": "aws",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: ServiceNow Service Graph Connector AWS resource coverage",
+          "tags": [
+            "cmdb_ci_cloud_service_account",
+            "cmdb_ci_aws_datacenter",
+            "aws_instance",
+            "cmdb_ci_vm_instance",
+            "aws_s3_bucket",
+            "cmdb_ci_cloud_object_storage",
+            "aws_ecs_cluster",
+            "cmdb_ci_cloud_ecs_cluster",
+            "aws_eks_cluster",
+            "cmdb_ci_kubernetes_cluster"
+          ],
+          "path": "terraform/aws.md",
+          "tokens": 4565
+        },
+        {
+          "id": "azure",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: ServiceNow Service Graph Connector Microsoft Azure resource coverage",
+          "tags": [
+            "cmdb_ci_cloud_service_account",
+            "cmdb_ci_azure_datacenter",
+            "azurerm_resource_group",
+            "cmdb_ci_resource_group",
+            "azurerm_windows_virtual_machine",
+            "cmdb_ci_vm_instance",
+            "azurerm_linux_virtual_machine",
+            "azurerm_kubernetes_cluster",
+            "cmdb_ci_kubernetes_cluster",
+            "azurerm_storage_container"
+          ],
+          "path": "terraform/azure.md",
+          "tokens": 3191
+        },
+        {
+          "id": "gcp",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: ServiceNow Service Graph Connector Google Cloud resource coverage",
+          "tags": [
+            "cmdb_ci_cloud_service_account",
+            "cmdb_ci_google_datacenter",
+            "google_compute_instance",
+            "cmdb_ci_vm_instance",
+            "google_container_cluster",
+            "cmdb_ci_kubernetes_cluster",
+            "google_storage_bucket",
+            "cmdb_ci_cloud_storage_account",
+            "google_bigquery_table",
+            "cmdb_ci_cloud_database"
+          ],
+          "path": "terraform/gcp.md",
+          "tokens": 3251
+        },
+        {
+          "id": "cloud-docs-integrations-service-now-service-graph-resource-coverage",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: ServiceNow Service Graph Connector for HCP Terraform resource coverage overview",
+          "tags": [
+            "tf_organization",
+            "tf_workspace",
+            "cmdb_ci_cloud_ecs_cluster.list"
+          ],
+          "path": "terraform/cloud-docs-integrations-service-now-service-graph-resource-coverage.md",
+          "tokens": 727
+        },
+        {
+          "id": "vsphere",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: ServiceNow Service Graph Connector VMware vSphere resource coverage",
+          "tags": [
+            "cmdb_ci_cloud_service_account",
+            "vsphere_datacenter",
+            "cmdb_ci_vcenter_datacenter",
+            "vsphere_virtual_machine",
+            "cmdb_ci_vmware_instance",
+            "vsphere_datastore_cluster",
+            "cmdb_ci_vcenter_datastore",
+            "vsphere_network",
+            "cmdb_ci_vcenter_network",
+            "cmdb_key_value"
+          ],
+          "path": "terraform/vsphere.md",
+          "tokens": 1576
+        },
+        {
+          "id": "service-graph-setup",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Set up the ServiceNow Service Graph Connector for HCP Terraform",
+          "tags": [
+            "admin",
+            "x_hashi_service_gr.terraform_user",
+            "https://app.terraform.io",
+            "<SERVICENOW_HOSTNAME>"
+          ],
+          "path": "terraform/service-graph-setup.md",
+          "tokens": 2857
+        },
+        {
+          "id": "cloud-docs-integrations-splunk",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Set up HCP Terraform for Splunk",
+          "tags": [],
+          "path": "terraform/cloud-docs-integrations-splunk.md",
+          "tokens": 951
+        },
+        {
+          "id": "migrate",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Migrate Terraform state to HCP Terraform or Terraform Enterprise",
+          "tags": [
+            "tf-migrate",
+            "cloud",
+            "remote",
+            "hostname",
+            "app.terraform.io",
+            "organization",
+            "workspaces",
+            "tags",
+            "name",
+            "networking"
+          ],
+          "path": "terraform/migrate.md",
+          "tokens": 1824
+        },
+        {
+          "id": "activate-flex",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Activate HashiCorp Flex for HCP Terraform",
+          "tags": [
+            "admin",
+            "owner"
+          ],
+          "path": "terraform/activate-flex.md",
+          "tokens": 1572
+        },
+        {
+          "id": "activate-payg",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Activate pay-as-you-go for HCP Terraform",
+          "tags": [],
+          "path": "terraform/activate-payg.md",
+          "tokens": 763
+        },
+        {
+          "id": "estimate-hcp-terraform-cost",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Estimate HCP Terraform cost",
+          "tags": [
+            "mode = \"managed\"",
+            "terraform plan",
+            "terraform apply",
+            "null_resource",
+            "terraform_data"
+          ],
+          "path": "terraform/estimate-hcp-terraform-cost.md",
+          "tokens": 1387
+        },
+        {
+          "id": "cloud-docs-overview",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Plans and Features - HCP Terraform",
+          "tags": [
+            "terraform_remote_state",
+            "terraform plan",
+            "terraform apply",
+            "terraform import",
+            "terraform taint",
+            "terraform stacks"
+          ],
+          "path": "terraform/cloud-docs-overview.md",
+          "tokens": 4214
+        },
+        {
+          "id": "best-practices",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Best Practices - Projects - HCP Terraform",
+          "tags": [],
+          "path": "terraform/best-practices.md",
+          "tokens": 1172
+        },
+        {
+          "id": "cloud-docs-projects",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Projects - HCP Terraform",
+          "tags": [],
+          "path": "terraform/cloud-docs-projects.md",
+          "tokens": 1035
+        },
+        {
+          "id": "manage",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Manage projects in HCP Terraform",
+          "tags": [
+            "hcp",
+            "hc",
+            "ibm"
+          ],
+          "path": "terraform/manage.md",
+          "tokens": 2371
+        },
+        {
+          "id": "cloud-docs-recommended-practices",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Learn Terraform recommended practices",
+          "tags": [],
+          "path": "terraform/cloud-docs-recommended-practices.md",
+          "tokens": 830
+        },
+        {
+          "id": "part1",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: 'Part 1: Overview of our recommended workflow'",
+          "tags": [],
+          "path": "terraform/part1.md",
+          "tokens": 2345
+        },
+        {
+          "id": "part2",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: >-",
+          "tags": [],
+          "path": "terraform/part2.md",
+          "tokens": 3504
+        },
+        {
+          "id": "part3-1",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: >-",
+          "tags": [],
+          "path": "terraform/part3-1.md",
+          "tokens": 923
+        },
+        {
+          "id": "part3-2",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: >-",
+          "tags": [],
+          "path": "terraform/part3-2.md",
+          "tokens": 2071
+        },
+        {
+          "id": "part3-3",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: >-",
+          "tags": [],
+          "path": "terraform/part3-3.md",
+          "tokens": 2546
+        },
+        {
+          "id": "part3-4",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: 'Part 3.4: Learn advanced workflow improvements'",
+          "tags": [],
+          "path": "terraform/part3-4.md",
+          "tokens": 590
+        },
+        {
+          "id": "part3",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: >-",
+          "tags": [],
+          "path": "terraform/part3.md",
+          "tokens": 370
+        },
+        {
+          "id": "add",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Add public providers and modules to the HCP Terraform private registry",
+          "tags": [
+            "registry.terraform.io",
+            "https://yy0ffni7mf-dsn.algolia.net/"
+          ],
+          "path": "terraform/add.md",
+          "tokens": 1506
+        },
+        {
+          "id": "design",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Use the configuration designer in HCP Terraform",
+          "tags": [
+            "main.tf",
+            "${"
+          ],
+          "path": "terraform/design.md",
+          "tokens": 996
+        },
+        {
+          "id": "cloud-docs-registry",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: HCP Terraform private registry overview",
+          "tags": [
+            "registry.terraform.io",
+            "https://yy0ffni7mf-dsn.algolia.net/",
+            "github.com"
+          ],
+          "path": "terraform/cloud-docs-registry.md",
+          "tokens": 721
+        },
+        {
+          "id": "manage-module-versions",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Manage module versions in HCP Terraform",
+          "tags": [],
+          "path": "terraform/manage-module-versions.md",
+          "tokens": 2881
+        },
+        {
+          "id": "publish-modules",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Publish private modules to the HCP Terraform private registry",
+          "tags": [
+            "v1.0.0",
+            "app-v1.0.0",
+            "app-",
+            "v1.0.1",
+            "app-v1.0.1",
+            "<NAMESPACE>/<REPO NAME>",
+            "INFRA",
+            "x.y.z",
+            "v",
+            "v1.0.4"
+          ],
+          "path": "terraform/publish-modules.md",
+          "tokens": 3751
+        },
+        {
+          "id": "publish-providers",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Publish private providers to the HCP Terraform private registry",
+          "tags": [
+            "SHA256SUMS",
+            "SHA256SUMS.sig",
+            "provider.json",
+            "PROVIDER_NAME",
+            "ORG_NAME",
+            "TOKEN",
+            "Authorization",
+            "34365D9472D7468F",
+            "key.json",
+            "ascii-armor"
+          ],
+          "path": "terraform/publish-providers.md",
+          "tokens": 3444
+        },
+        {
+          "id": "publish-stack-configuration",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Publish Stack component configurations to the HCP Terraform private registry",
+          "tags": [
+            "component",
+            "<NAME>.tfcomponent.hcl",
+            "stack",
+            "1.2.3",
+            "database-v1.0.0",
+            "network-v1.0.0",
+            "database-",
+            "network-",
+            "README"
+          ],
+          "path": "terraform/publish-stack-configuration.md",
+          "tokens": 1433
+        },
+        {
+          "id": "aws",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Use dynamic credentials with the AWS provider in module testing",
+          "tags": [
+            "https://app.terraform.io",
+            "aws.workload.identity",
+            "terraform-module-test-role",
+            "123456789012",
+            "app.terraform.io",
+            "my-org",
+            ":operation:test_run",
+            "payload.json",
+            "TFC_AWS_PROVIDER_AUTH",
+            "true"
+          ],
+          "path": "terraform/aws.md",
+          "tokens": 3536
+        },
+        {
+          "id": "azure",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Use dynamic credentials with the Azure provider in module testing",
+          "tags": [
+            "az",
+            "terraform-module-tests",
+            "<APPLICATION_CLIENT_ID>",
+            "https://app.terraform.io",
+            "https://<TFE_HOSTNAME>",
+            "azure.workload.identity",
+            "*",
+            "<SERVICE_PRINCIPAL_OBJECT_ID>",
+            "<SUBSCRIPTION_ID>",
+            "payload.json"
+          ],
+          "path": "terraform/azure.md",
+          "tokens": 3694
+        },
+        {
+          "id": "gcp",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Use dynamic credentials with the GCP provider in module testing",
+          "tags": [
+            "gcloud",
+            "terraform-module-tests",
+            "terraform-cloud",
+            "https://app.terraform.io",
+            "https://<TFE_HOSTNAME>",
+            "gcp.workload.identity",
+            "google.subject",
+            "assertion.sub",
+            "attribute.terraform_run_id",
+            "assertion.terraform_run_id"
+          ],
+          "path": "terraform/gcp.md",
+          "tokens": 3657
+        },
+        {
+          "id": "cloud-docs-registry-test-dynamic-credentials",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Use dynamic credentials with module testing in HCP Terraform",
+          "tags": [
+            "terraform_run_phase",
+            "\"plan\"",
+            "terraform_organization_id",
+            "terraform_organization_name",
+            "terraform_run_id",
+            "operation:test_run",
+            "plan",
+            "apply",
+            "/test-configuration",
+            "module_test_token_ttl"
+          ],
+          "path": "terraform/cloud-docs-registry-test-dynamic-credentials.md",
+          "tokens": 3258
+        },
+        {
+          "id": "vault",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Use dynamic credentials with Vault in module testing",
+          "tags": [
+            "vault",
+            "app.terraform.io",
+            "oidc_discovery_url",
+            "vault.workload.identity",
+            "terraform_run_phase",
+            "plan",
+            "bound_subject",
+            "module-test-policy",
+            "https://vault.example.com:8200",
+            "module-tests"
+          ],
+          "path": "terraform/vault.md",
+          "tokens": 3859
+        },
+        {
+          "id": "cloud-docs-registry-test",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Test private modules in the HCP Terraform private registry",
+          "tags": [
+            "-cloud-run",
+            "TF_VAR_x",
+            "tests"
+          ],
+          "path": "terraform/cloud-docs-registry-test.md",
+          "tokens": 1362
+        },
+        {
+          "id": "using",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Use artifacts from the HCP Terraform private registry",
+          "tags": [
+            "source",
+            "README",
+            "<NAMESPACE>/<PROVIDER_NAME>",
+            "<HOSTNAME>/<NAMESPACE>/<PROVIDER_NAME>",
+            "app.terraform.io",
+            "localterraform.com",
+            "tar.gz",
+            "kubernetes",
+            "my-random",
+            "provider"
+          ],
+          "path": "terraform/using.md",
+          "tokens": 4243
+        },
+        {
+          "id": "stack-workspace",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Comparing Stacks and workspaces in HCP Terraform",
+          "tags": [
+            "publish_output",
+            "upstream_input"
+          ],
+          "path": "terraform/stack-workspace.md",
+          "tokens": 1688
+        },
+        {
+          "id": "configure",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Configure a Stack",
+          "tags": [],
+          "path": "terraform/configure.md",
+          "tokens": 1095
+        },
+        {
+          "id": "create",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Create a Stack",
+          "tags": [
+            "-",
+            "_",
+            "terraform login",
+            "terraform stacks create",
+            "terraform stacks list",
+            "terraform stacks configuration upload",
+            "terraform stacks configuration watch",
+            "terraform stacks"
+          ],
+          "path": "terraform/create.md",
+          "tokens": 1839
+        },
+        {
+          "id": "configuration-versions",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Create and review configuration versions",
+          "tags": [
+            "tfcomponent.hcl",
+            "tfdeploy.hcl",
+            "upstream_input",
+            "terraform stacks configuration upload"
+          ],
+          "path": "terraform/configuration-versions.md",
+          "tokens": 1591
+        },
+        {
+          "id": "runs",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Review deployment plans",
+          "tags": [
+            "terraform stacks deployment-run",
+            "auto_approve",
+            "empty_plan",
+            "<NAME>.tfcomponent.hcl",
+            "<NAME>.tfdeploy.hcl"
+          ],
+          "path": "terraform/runs.md",
+          "tokens": 2032
+        },
+        {
+          "id": "destroy",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Destroy a Stack",
+          "tags": [
+            "destroy",
+            "deployment",
+            "production",
+            "delete"
+          ],
+          "path": "terraform/destroy.md",
+          "tokens": 746
+        },
+        {
+          "id": "cloud-docs-stacks",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Stacks overview - HCP Terraform",
+          "tags": [
+            "component",
+            "deployment",
+            "store"
+          ],
+          "path": "terraform/cloud-docs-stacks.md",
+          "tokens": 1773
+        },
+        {
+          "id": "runs",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Stack runs in HCP Terraform",
+          "tags": [
+            "tfcomponent.hcl",
+            "tfdeploy.hcl",
+            "upstream_input"
+          ],
+          "path": "terraform/runs.md",
+          "tokens": 2141
+        },
+        {
+          "id": "state",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: State in Stacks for HCP Terraform",
+          "tags": [
+            "component",
+            "deployment",
+            "destroy=true",
+            "mode = \"managed\""
+          ],
+          "path": "terraform/state.md",
+          "tokens": 1011
+        },
+        {
+          "id": "2fa",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Configure two-factor authentication",
+          "tags": [],
+          "path": "terraform/2fa.md",
+          "tokens": 1283
+        },
+        {
+          "id": "api-tokens",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Manage API tokens for HCP Terraform",
+          "tags": [
+            "atlas",
+            "portal.cloud.eu.hashicorp",
+            "app.eu.terraform.io"
+          ],
+          "path": "terraform/api-tokens.md",
+          "tokens": 3557
+        },
+        {
+          "id": "cloud-docs-users-teams-organizations-organizations",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Organizations overview",
+          "tags": [
+            "tfe",
+            "tfe_organization",
+            "_",
+            "-",
+            "count",
+            "for_each",
+            "cloud",
+            "owners"
+          ],
+          "path": "terraform/cloud-docs-users-teams-organizations-organizations.md",
+          "tokens": 5923
+        },
+        {
+          "id": "manage-reserved-tags",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Create and manage reserved tag keys",
+          "tags": [
+            ".",
+            "=",
+            "+",
+            "-",
+            "@",
+            ":",
+            "_"
+          ],
+          "path": "terraform/manage-reserved-tags.md",
+          "tokens": 923
+        },
+        {
+          "id": "artifacts",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Manage namespace artifacts",
+          "tags": [
+            "https://registry.terraform.io",
+            "delete"
+          ],
+          "path": "terraform/artifacts.md",
+          "tokens": 1948
+        },
+        {
+          "id": "create-or-claim",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Create or claim namespaces in HCP Terraform",
+          "tags": [
+            "write"
+          ],
+          "path": "terraform/create-or-claim.md",
+          "tokens": 1069
+        },
+        {
+          "id": "cloud-docs-users-teams-organizations-organizations-public-namespace",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Namespace overview for HCP Terraform",
+          "tags": [
+            "iam",
+            "terraform-aws-modules"
+          ],
+          "path": "terraform/cloud-docs-users-teams-organizations-organizations-public-namespace.md",
+          "tokens": 1090
+        },
+        {
+          "id": "manage",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Manage namespaces",
+          "tags": [
+            "-----BEGIN PGP PUBLIC KEY BLOCK-----",
+            "-----END PGP PUBLIC KEY BLOCK-----"
+          ],
+          "path": "terraform/manage.md",
+          "tokens": 734
+        },
+        {
+          "id": "vcs-speculative-plan-management",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Automatically cancel plan-only runs triggered by outdated commits",
+          "tags": [
+            "terraform plan"
+          ],
+          "path": "terraform/vcs-speculative-plan-management.md",
+          "tokens": 775
+        },
+        {
+          "id": "vcs-status-checks",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Configure VCS status checks",
+          "tags": [],
+          "path": "terraform/vcs-status-checks.md",
+          "tokens": 992
+        },
+        {
+          "id": "cloud-docs-users-teams-organizations-permissions",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Permission model in HCP Terraform",
+          "tags": [],
+          "path": "terraform/cloud-docs-users-teams-organizations-permissions.md",
+          "tokens": 1518
+        },
+        {
+          "id": "organization",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Organization permissions",
+          "tags": [
+            "true"
+          ],
+          "path": "terraform/organization.md",
+          "tokens": 5447
+        },
+        {
+          "id": "project",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Project permissions",
+          "tags": [],
+          "path": "terraform/project.md",
+          "tokens": 5454
+        },
+        {
+          "id": "set-permissions",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Set permissions in HCP Terraform",
+          "tags": [
+            "portal.cloud.eu.hashicorp",
+            "app.eu.terraform.io"
+          ],
+          "path": "terraform/set-permissions.md",
+          "tokens": 3004
+        },
+        {
+          "id": "workspace",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Workspace Permissions",
+          "tags": [
+            "/state-version-outputs",
+            "terraform output",
+            "terraform_remote_state",
+            "terraform import",
+            "terraform taint",
+            "terraform state"
+          ],
+          "path": "terraform/workspace.md",
+          "tokens": 3521
+        },
+        {
+          "id": "entra-id",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Configure single sign-on with Microsoft Entra ID",
+          "tags": [
+            "https://app.terraform.io/session",
+            "Certificate (Base64)",
+            "user.displayname",
+            "user.mailnickname",
+            "user.mail",
+            "user.userprincipalname",
+            "<claim_namespace/claim_name>"
+          ],
+          "path": "terraform/entra-id.md",
+          "tokens": 1628
+        },
+        {
+          "id": "cloud-docs-users-teams-organizations-single-sign-on",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Configure and manage single sign-on in HCP Terraform",
+          "tags": [
+            "sso",
+            "owners",
+            "MemberOf",
+            "AttributeValue"
+          ],
+          "path": "terraform/cloud-docs-users-teams-organizations-single-sign-on.md",
+          "tokens": 2742
+        },
+        {
+          "id": "linking-user-account",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Link a user account for single sign-on in HCP Terraform",
+          "tags": [],
+          "path": "terraform/linking-user-account.md",
+          "tokens": 862
+        },
+        {
+          "id": "okta",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Use single sign-on with Okta for HCP Terraform",
+          "tags": [
+            "MemberOf",
+            "AttributeStatement",
+            "AttributeValue",
+            "Basic",
+            "Matches regex",
+            ".*",
+            "Everyone",
+            "ops",
+            "test"
+          ],
+          "path": "terraform/okta.md",
+          "tokens": 1220
+        },
+        {
+          "id": "saml",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Use single sign-on with SAML for HCP Terraform",
+          "tags": [],
+          "path": "terraform/saml.md",
+          "tokens": 462
+        },
+        {
+          "id": "testing",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Test single sign-on in HCP Terraform",
+          "tags": [],
+          "path": "terraform/testing.md",
+          "tokens": 272
+        },
+        {
+          "id": "cloud-docs-users-teams-organizations-teams",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Teams overview",
+          "tags": [
+            "tfe",
+            "tfe_team",
+            "tfe_team_members",
+            "tfe_team_access"
+          ],
+          "path": "terraform/cloud-docs-users-teams-organizations-teams.md",
+          "tokens": 1078
+        },
+        {
+          "id": "manage",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Manage teams",
+          "tags": [
+            "_",
+            "-"
+          ],
+          "path": "terraform/manage.md",
+          "tokens": 2039
+        },
+        {
+          "id": "notifications",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Manage team notifications",
+          "tags": [
+            "POST",
+            "2xx",
+            "X-TFE-Notification-Signature"
+          ],
+          "path": "terraform/notifications.md",
+          "tokens": 2450
+        },
+        {
+          "id": "users",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Create and manage users in HCP Terraform",
+          "tags": [
+            "Authorization: Bearer <TOKEN>",
+            "remote"
+          ],
+          "path": "terraform/users.md",
+          "tokens": 3993
+        },
+        {
+          "id": "cloud-docs-variables",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Variables in HCP Terraform",
+          "tags": [
+            "export",
+            "TF_LOG",
+            "TFE_PARALLELISM",
+            "-parallelism=<N>",
+            "terraform plan",
+            "terraform apply",
+            "parallelism",
+            "10",
+            "TF_CLI_ARGS_name",
+            "TF_CLI_ARGS_plan=\"-parallelism=<N>\""
+          ],
+          "path": "terraform/cloud-docs-variables.md",
+          "tokens": 5466
+        },
+        {
+          "id": "managing-variables",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Manage variables and variable sets in HCP Terraform",
+          "tags": [
+            "tfe",
+            "tfe_variable",
+            "-var",
+            "-var-file",
+            "TF_VAR_",
+            "replicas",
+            "TF_VAR_replicas",
+            "Local",
+            ".auto.tfvars",
+            "auto.tfvars"
+          ],
+          "path": "terraform/managing-variables.md",
+          "tokens": 5095
+        },
+        {
+          "id": "azure-devops-server",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Set up the Azure DevOps Server VCS provider",
+          "tags": [
+            "service_terraform",
+            "service_terraform.pub",
+            ".pub"
+          ],
+          "path": "terraform/azure-devops-server.md",
+          "tokens": 1853
+        },
+        {
+          "id": "azure-devops-services-pat",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Set up the Azure DevOps Services VCS provider using personal access tokens",
+          "tags": [
+            "dev.azure.com",
+            "ssh-keygen",
+            "service_terraform",
+            "service_terraform.pub"
+          ],
+          "path": "terraform/azure-devops-services-pat.md",
+          "tokens": 2037
+        },
+        {
+          "id": "azure-devops-services",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Set up the Azure DevOps Services VCS provider using OAuth",
+          "tags": [
+            "dev.azure.com",
+            "visualstudio.com",
+            "<YOUR ORGANIZATION NAME>",
+            "ssh-keygen",
+            "service_terraform",
+            "service_terraform.pub"
+          ],
+          "path": "terraform/azure-devops-services.md",
+          "tokens": 2567
+        },
+        {
+          "id": "bitbucket-cloud",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Set up the Bitbucket Cloud VCS provider",
+          "tags": [
+            "<YOUR ORGANIZATION NAME>",
+            "https://app.terraform.io",
+            "service_terraform",
+            "service_terraform.pub"
+          ],
+          "path": "terraform/bitbucket-cloud.md",
+          "tokens": 2282
+        },
+        {
+          "id": "bitbucket-data-center",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Set up the Bitbucket Data Center VCS provider",
+          "tags": [
+            "7999",
+            "7990",
+            "https://<BITBUCKET INSTANCE HOSTNAME>",
+            "80",
+            "443",
+            "https://app.terraform.io",
+            "/app/<ORG NAME>",
+            "HCP Terraform <ORG NAME>",
+            "HCP Terraform (<ORG NAME>)",
+            "service_terraform"
+          ],
+          "path": "terraform/bitbucket-data-center.md",
+          "tokens": 2442
+        },
+        {
+          "id": "github-app",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Set up the GitHub.com (GitHub App) VCS provider",
+          "tags": [
+            "go_tfe",
+            "tfe_provider"
+          ],
+          "path": "terraform/github-app.md",
+          "tokens": 2604
+        },
+        {
+          "id": "github-enterprise",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Set up the GitHub Enterprise VCS provider",
+          "tags": [
+            "https://<GITHUB INSTANCE HOSTNAME>",
+            "<YOUR ORGANIZATION NAME>",
+            "https://app.terraform.io",
+            "<GITHUB USER>",
+            "service_terraform",
+            "service_terraform.pub"
+          ],
+          "path": "terraform/github-enterprise.md",
+          "tokens": 2859
+        },
+        {
+          "id": "github",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Set up the GitHub.com OAuth VCS provider",
+          "tags": [
+            "<YOUR ORGANIZATION NAME>",
+            "https://app.terraform.io",
+            "<GITHUB USER>",
+            "service_terraform",
+            "service_terraform.pub"
+          ],
+          "path": "terraform/github.md",
+          "tokens": 2832
+        },
+        {
+          "id": "gitlab-com",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Set up the GitLab.com VCS provider",
+          "tags": [
+            "<YOUR ORGANIZATION NAME>",
+            "api",
+            "service_terraform",
+            "service_terraform.pub"
+          ],
+          "path": "terraform/gitlab-com.md",
+          "tokens": 1919
+        },
+        {
+          "id": "gitlab-eece",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Set up the GitLab EE and CE VCS provider",
+          "tags": [
+            "https://<GITLAB INSTANCE HOSTNAME>",
+            "/admin/application_settings/network",
+            "<YOUR ORGANIZATION NAME>",
+            "Expire access tokens",
+            "service_terraform",
+            "service_terraform.pub"
+          ],
+          "path": "terraform/gitlab-eece.md",
+          "tokens": 2786
+        },
+        {
+          "id": "cloud-docs-vcs",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Connect to VCS providers",
+          "tags": [
+            "TFE_VCS_HOSTNAME_CHOICE"
+          ],
+          "path": "terraform/cloud-docs-vcs.md",
+          "tokens": 3321
+        },
+        {
+          "id": "private",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Connecting to Private VCS Providers - HCP Terraform",
+          "tags": [
+            "_TFC_AGENT_REQUEST_FORWARDING_ENABLED",
+            "true",
+            "TFC_AGENT_REQUEST_FORWARDING",
+            "-request-forwarding",
+            "TFC_AGENT_ACCEPT",
+            "ingress",
+            "source_bundle",
+            "-accept",
+            "debug",
+            "trace"
+          ],
+          "path": "terraform/private.md",
+          "tokens": 1249
+        },
+        {
+          "id": "troubleshooting",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Troubleshoot VCS providers in HCP Terraform",
+          "tags": [
+            "Terraform Cloud/paul-hcp/gianni-test-1",
+            "Terraform Cloud",
+            "paul-hcp/gianni-test-1",
+            "<X>",
+            "curl",
+            "terraform init",
+            "redirect_uri_mismatch",
+            "atlas.hashicorp.com",
+            "app.terraform.io",
+            "jq"
+          ],
+          "path": "terraform/troubleshooting.md",
+          "tokens": 3833
+        },
+        {
+          "id": "best-practices",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Best Practices - Workspaces - HCP Terraform",
+          "tags": [
+            "<business-unit>",
+            "<app-name>",
+            "<layer>",
+            "<env>",
+            "layer",
+            "main",
+            "app",
+            "terraform apply"
+          ],
+          "path": "terraform/best-practices.md",
+          "tokens": 2150
+        },
+        {
+          "id": "browse",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Browse workspaces",
+          "tags": [],
+          "path": "terraform/browse.md",
+          "tokens": 895
+        },
+        {
+          "id": "cloud-docs-workspaces-change-requests",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Change requests overview",
+          "tags": [],
+          "path": "terraform/cloud-docs-workspaces-change-requests.md",
+          "tokens": 699
+        },
+        {
+          "id": "manage",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Manage change requests",
+          "tags": [],
+          "path": "terraform/manage.md",
+          "tokens": 1271
+        },
+        {
+          "id": "configurations",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Manage Terraform configurations",
+          "tags": [
+            "terraform plan",
+            "terraform apply",
+            ".tar.gz"
+          ],
+          "path": "terraform/configurations.md",
+          "tokens": 1673
+        },
+        {
+          "id": "aws",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: AWS resources included in cost estimation in HCP Terraform",
+          "tags": [
+            "aws_alb",
+            "aws_cloudhsm_v2_hsm",
+            "aws_cloudwatch_dashboard",
+            "aws_cloudwatch_metric_alarm",
+            "aws_db_instance",
+            "aws_dynamodb_table",
+            "aws_ebs_volume",
+            "aws_elasticache_cluster",
+            "aws_elasticsearch_domain",
+            "aws_elb"
+          ],
+          "path": "terraform/aws.md",
+          "tokens": 1359
+        },
+        {
+          "id": "azure",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Azure resources included in cost estimation in HCP Terraform",
+          "tags": [
+            "azurerm_app_service_environment",
+            "azurerm_app_service_plan",
+            "azurerm_cosmosdb_sql_database",
+            "azurerm_databricks_workspace",
+            "azurerm_firewall",
+            "azurerm_hdinsight_hadoop_cluster",
+            "azurerm_hdinsight_hbase_cluster",
+            "azurerm_hdinsight_kafka_cluster",
+            "azurerm_hdinsight_spark_cluster",
+            "azurerm_integration_service_environment"
+          ],
+          "path": "terraform/azure.md",
+          "tokens": 614
+        },
+        {
+          "id": "gcp",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: GCP resources included in cost estimation in HCP Terraform",
+          "tags": [
+            "google_compute_disk",
+            "google_compute_instance",
+            "google_sql_database_instance",
+            "google_billing_account_iam_member",
+            "google_compute_address",
+            "google_compute_subnetwork_iam_member",
+            "google_folder_iam_member",
+            "google_folder_iam_policy",
+            "google_kms_crypto_key_iam_member",
+            "google_kms_key_ring_iam_member"
+          ],
+          "path": "terraform/gcp.md",
+          "tokens": 463
+        },
+        {
+          "id": "cloud-docs-workspaces-cost-estimation",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Cost estimation overview for HCP Terraform",
+          "tags": [
+            "tfrun",
+            "t3.nano",
+            "decimal"
+          ],
+          "path": "terraform/cloud-docs-workspaces-cost-estimation.md",
+          "tokens": 741
+        },
+        {
+          "id": "create",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Create workspaces in HCP Terraform",
+          "tags": [
+            "POST",
+            "tfe",
+            "tfe_workspace",
+            "auto.tfvars"
+          ],
+          "path": "terraform/create.md",
+          "tokens": 2218
+        },
+        {
+          "id": "explorer",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: HCP Terraform explorer for workspace visibility",
+          "tags": [],
+          "path": "terraform/explorer.md",
+          "tokens": 1905
+        },
+        {
+          "id": "health",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Health assessments in HCP Terraform",
+          "tags": [
+            "check",
+            "200"
+          ],
+          "path": "terraform/health.md",
+          "tokens": 4245
+        },
+        {
+          "id": "import",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Use search to find and import existing resources to state",
+          "tags": [
+            "list",
+            "import",
+            "resource",
+            "query",
+            "terraform fmt",
+            "terraform apply"
+          ],
+          "path": "terraform/import.md",
+          "tokens": 1505
+        },
+        {
+          "id": "cloud-docs-workspaces",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: HCP Terraform workspaces",
+          "tags": [
+            ".tfvars"
+          ],
+          "path": "terraform/cloud-docs-workspaces.md",
+          "tokens": 2083
+        },
+        {
+          "id": "json-filtering",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: JSON data filtering in HCP Terraform",
+          "tags": [
+            ".KEY.SUBKEY",
+            "{\"foo\": {\"bar\": \"baz\"}}",
+            ".foo.bar",
+            "\"baz\"",
+            ".",
+            "[0]",
+            "[\"foo-bar\"]",
+            "{\"foo-bar\": [\"baz\", \"qux\"]}",
+            ".[\"foo-bar\"][0]",
+            "[LOW:HIGH]"
+          ],
+          "path": "terraform/json-filtering.md",
+          "tokens": 1166
+        },
+        {
+          "id": "module-design",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Design no-code ready modules for HCP Terraform",
+          "tags": [],
+          "path": "terraform/module-design.md",
+          "tokens": 1827
+        },
+        {
+          "id": "provisioning",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Provision no-code infrastructure in HCP Terraform",
+          "tags": [],
+          "path": "terraform/provisioning.md",
+          "tokens": 1758
+        },
+        {
+          "id": "custom-sentinel",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Define Sentinel policies in HCP Terraform",
+          "tags": [
+            "import",
+            "terraform plan",
+            ".tf",
+            "tfplan",
+            "tfconfig",
+            "tfstate",
+            "module_paths",
+            "resources",
+            "tfplan.module(path).resources[type]",
+            "else"
+          ],
+          "path": "terraform/custom-sentinel.md",
+          "tokens": 3073
+        },
+        {
+          "id": "cloud-docs-workspaces-policy-enforcement-define-policies",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Define policies overview",
+          "tags": [],
+          "path": "terraform/cloud-docs-workspaces-policy-enforcement-define-policies.md",
+          "tokens": 356
+        },
+        {
+          "id": "opa",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title:  Define Open Policy Agent policies for HCP Terraform",
+          "tags": [
+            "data.terraform.deny",
+            "input.plan",
+            "input.run",
+            "0.0.0.0/0",
+            "block_auto_apply_runs",
+            "opa test",
+            "run",
+            "id",
+            "created_at",
+            "created_by"
+          ],
+          "path": "terraform/opa.md",
+          "tokens": 3027
+        },
+        {
+          "id": "cloud-docs-workspaces-policy-enforcement-import-reference",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Sentinel import function reference",
+          "tags": [
+            "import",
+            "tfplan",
+            "terraform plan",
+            "tfplanv/2",
+            "tfplan/v2",
+            "tfconfig",
+            ".tf",
+            "tfconfig/v2",
+            "tfstate",
+            "tfstate/v2"
+          ],
+          "path": "terraform/cloud-docs-workspaces-policy-enforcement-import-reference.md",
+          "tokens": 748
+        },
+        {
+          "id": "tfconfig-v2",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: tfconfig/v2 Sentinel import",
+          "tags": [
+            "tfconfig",
+            "import \"tfconfig/v2\" as tfconfig",
+            "tfconfig/v2",
+            "*.tf",
+            "terraform show -json",
+            "providers",
+            "resources",
+            "variables",
+            "outputs",
+            "module_calls"
+          ],
+          "path": "terraform/tfconfig-v2.md",
+          "tokens": 4645
+        },
+        {
+          "id": "tfconfig",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: tfconfig Sentinel import",
+          "tags": [
+            "tfconfig",
+            "tfconfig/v2",
+            "*.tf",
+            "tfplan",
+            "data",
+            "modules",
+            "providers",
+            "resources",
+            "variables",
+            "references"
+          ],
+          "path": "terraform/tfconfig.md",
+          "tokens": 7596
+        },
+        {
+          "id": "tfplan-v2",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: tfplan/v2 Sentinel import",
+          "tags": [
+            "tfplan",
+            "import \"tfplan/v2\" as tfplan",
+            "tfplan/v2",
+            "terraform plan",
+            "terraform apply",
+            "planned_values",
+            "terraform show -json",
+            "raw",
+            "variables",
+            "resource_changes"
+          ],
+          "path": "terraform/tfplan-v2.md",
+          "tokens": 4280
+        },
+        {
+          "id": "tfplan",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: tfplan Sentinel import reference",
+          "tags": [
+            "tfplan",
+            "tfplan/v2",
+            "terraform plan",
+            "applied",
+            "data",
+            "path",
+            "resources",
+            "config",
+            "state",
+            "tfconfig"
+          ],
+          "path": "terraform/tfplan.md",
+          "tokens": 5023
+        },
+        {
+          "id": "tfrun",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: tfrun Sentinel import reference",
+          "tags": [
+            "tfrun",
+            "organization",
+            "workspace",
+            "cost-estimate",
+            "-dev",
+            "id",
+            "created_at",
+            "time",
+            "created_by",
+            "message"
+          ],
+          "path": "terraform/tfrun.md",
+          "tokens": 2624
+        },
+        {
+          "id": "tfstate-v2",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: tfstate/v2 Sentinel import",
+          "tags": [
+            "tfstate",
+            "import \"tfstate/v2\" as tfstate",
+            "tfstate/v2",
+            "planned_values",
+            "tfplan/v2",
+            "terraform show -json",
+            "resources",
+            "outputs",
+            "filter",
+            "aws_instance"
+          ],
+          "path": "terraform/tfstate-v2.md",
+          "tokens": 1846
+        },
+        {
+          "id": "tfstate",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: tfstate Sentinel import",
+          "tags": [
+            "tfstate",
+            "tfstate/v2",
+            "applied",
+            "tfplan",
+            "data",
+            "outputs",
+            "path",
+            "resources",
+            "module()",
+            "."
+          ],
+          "path": "terraform/tfstate.md",
+          "tokens": 4197
+        },
+        {
+          "id": "cloud-docs-workspaces-policy-enforcement",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: HCP Terraform policy enforcement overview",
+          "tags": [],
+          "path": "terraform/cloud-docs-workspaces-policy-enforcement.md",
+          "tokens": 845
+        },
+        {
+          "id": "configure",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Configure connections to policy sets",
+          "tags": [
+            "/policy-sets",
+            "tfe",
+            "-",
+            "_",
+            "sentinel.hcl",
+            "policies.hcl",
+            "latest",
+            "Failed"
+          ],
+          "path": "terraform/configure.md",
+          "tokens": 3169
+        },
+        {
+          "id": "cloud-docs-workspaces-policy-enforcement-manage-policy-sets",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Manage policies and policy sets in HCP Terraform",
+          "tags": [
+            "Agent",
+            "policy",
+            "tfe",
+            "tfe_policy_set",
+            "-",
+            "_",
+            "terraform.deny"
+          ],
+          "path": "terraform/cloud-docs-workspaces-policy-enforcement-manage-policy-sets.md",
+          "tokens": 2446
+        },
+        {
+          "id": "opa-vcs",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Configure an OPA policy set with a VCS repository",
+          "tags": [
+            "policies.hcl",
+            "policies.json",
+            "policy",
+            "policy1",
+            "description",
+            "enforcement_level",
+            "advisory",
+            ".rego"
+          ],
+          "path": "terraform/opa-vcs.md",
+          "tokens": 671
+        },
+        {
+          "id": "sentinel-vcs",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Configure a Sentinel policy set with a VCS repository",
+          "tags": [
+            "sentinel.hcl",
+            "terraform-maintenance-windows",
+            "hard-mandatory",
+            "module",
+            "timezone",
+            ".sentinel",
+            "source",
+            "./",
+            "../",
+            "terraform-maintenance-windows.sentinel"
+          ],
+          "path": "terraform/sentinel-vcs.md",
+          "tokens": 1736
+        },
+        {
+          "id": "prewritten-library",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Pre-written policy library",
+          "tags": [],
+          "path": "terraform/prewritten-library.md",
+          "tokens": 960
+        },
+        {
+          "id": "prewritten-sentinel",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Run pre-written Sentinel policies",
+          "tags": [
+            "sentinel.hcl"
+          ],
+          "path": "terraform/prewritten-sentinel.md",
+          "tokens": 1739
+        },
+        {
+          "id": "test-sentinel",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Generate mock Sentinel data with HCP Terraform",
+          "tags": [
+            "id",
+            "plan",
+            "relationships",
+            "sentinel-mock-bundle-v0",
+            "finished",
+            "sentinel.hcl",
+            "sentinel apply",
+            "sentinel test",
+            "mock",
+            "pass.hcl"
+          ],
+          "path": "terraform/test-sentinel.md",
+          "tokens": 2097
+        },
+        {
+          "id": "cloud-docs-workspaces-policy-enforcement-view-results",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: View policy enforcement results in HCP Terraform",
+          "tags": [
+            "soft-mandatory",
+            "terraform apply",
+            "override",
+            "advisory",
+            "hard-mandatory",
+            "mandatory"
+          ],
+          "path": "terraform/cloud-docs-workspaces-policy-enforcement-view-results.md",
+          "tokens": 1168
+        },
+        {
+          "id": "json",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: View and filter Sentinel JSON data",
+          "tags": [
+            "sentinel",
+            "main"
+          ],
+          "path": "terraform/json.md",
+          "tokens": 643
+        },
+        {
+          "id": "api",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: The API-driven run workflow in HCP Terraform",
+          "tags": [
+            "runs",
+            "configuration-versions",
+            ".tar.gz",
+            ".tf",
+            "path_to_content_directory",
+            "organization",
+            "workspace",
+            "$TOKEN",
+            "tar.gz",
+            "./main.tf"
+          ],
+          "path": "terraform/api.md",
+          "tokens": 2376
+        },
+        {
+          "id": "cli",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: The CLI-driven remote run workflow for HCP Terraform",
+          "tags": [
+            "terraform plan",
+            "terraform apply",
+            "terraform plan -out <FILE>",
+            "terraform apply <FILE>",
+            "terraform show <FILE>",
+            "terraform login",
+            "cloud",
+            "remote",
+            "terraform init",
+            "*.auto.tfvars"
+          ],
+          "path": "terraform/cli.md",
+          "tokens": 4648
+        },
+        {
+          "id": "install-software",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Install software in the HCP Terraform run environment",
+          "tags": [
+            "terraform init",
+            "registry.terraform.io",
+            "terraform-bundle",
+            "linux_amd64",
+            "required_providers",
+            "provider_installation",
+            "releases.hashicorp.com",
+            "terraform.d/plugins/",
+            "local-exec",
+            "sudo"
+          ],
+          "path": "terraform/install-software.md",
+          "tokens": 2184
+        },
+        {
+          "id": "manage",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Manage and view runs in HCP Terraform",
+          "tags": [
+            "terraform plan",
+            "terraform apply",
+            "-invoke",
+            "ctrl+c"
+          ],
+          "path": "terraform/manage.md",
+          "tokens": 2026
+        },
+        {
+          "id": "modes-and-options",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Run modes and options in HCP Terraform",
+          "tags": [
+            "terraform apply",
+            "terraform plan -destroy",
+            "terraform destroy",
+            "is-destroy",
+            "plan-only",
+            "true",
+            "terraform-version",
+            "terraform plan -out <FILE>",
+            "terraform apply <FILE>",
+            "terraform show <FILE>"
+          ],
+          "path": "terraform/modes-and-options.md",
+          "tokens": 2472
+        },
+        {
+          "id": "remote-operations",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Remote operations in HCP Terraform",
+          "tags": [
+            "terraform apply",
+            "terraform plan",
+            "configuration-versions",
+            "terraform plan -out <FILE>",
+            "terraform apply <FILE>",
+            "terraform show <FILE>",
+            "save-plan",
+            "import",
+            "terraform import"
+          ],
+          "path": "terraform/remote-operations.md",
+          "tokens": 3072
+        },
+        {
+          "id": "run-environment",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: HCP Terraform's run environment",
+          "tags": [
+            "local-exec",
+            "cloud",
+            "remote",
+            "TFC_RUN_ID",
+            "run-CKuwsxMGgMd4W7Ui",
+            "TFC_WORKSPACE_ID",
+            "ws-YN6FoUBQciKyfi4b",
+            "TFC_WORKSPACE_NAME",
+            "prod-load-balancers",
+            "TFC_WORKSPACE_SLUG"
+          ],
+          "path": "terraform/run-environment.md",
+          "tokens": 2600
+        },
+        {
+          "id": "states",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Run states and stages in HCP Terraform",
+          "tags": [
+            "passed",
+            "failed",
+            "200 OK",
+            "running",
+            "terraform plan",
+            "terraform apply"
+          ],
+          "path": "terraform/states.md",
+          "tokens": 4240
+        },
+        {
+          "id": "ui",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: UI and VCS-driven run workflow in HCP Terraform",
+          "tags": [
+            "TF_LOG",
+            "TRACE"
+          ],
+          "path": "terraform/ui.md",
+          "tokens": 2981
+        },
+        {
+          "id": "access",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Manage access to workspaces in HCP Terraform",
+          "tags": [
+            "tfe",
+            "tfe_team_access"
+          ],
+          "path": "terraform/access.md",
+          "tokens": 958
+        },
+        {
+          "id": "deletion",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Destroy infrastructure resources and delete workspaces in HCP Terraform",
+          "tags": [
+            "auto-destroy-at"
+          ],
+          "path": "terraform/deletion.md",
+          "tokens": 2193
+        },
+        {
+          "id": "cloud-docs-workspaces-settings",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Workspaces settings in HCP Terraform",
+          "tags": [
+            "-auto-approve",
+            "production",
+            "consul/production",
+            "terraform_remote_state",
+            "<WORKSPACE NAME>"
+          ],
+          "path": "terraform/cloud-docs-workspaces-settings.md",
+          "tokens": 4376
+        },
+        {
+          "id": "notifications",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Workspace notifications in HCP Terraform",
+          "tags": [
+            "Local",
+            "POST",
+            "2xx",
+            "X-TFE-Notification-Signature"
+          ],
+          "path": "terraform/notifications.md",
+          "tokens": 2196
+        },
+        {
+          "id": "run-tasks",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: HCP Terraform run tasks",
+          "tags": [
+            "global-run-task"
+          ],
+          "path": "terraform/run-tasks.md",
+          "tokens": 2186
+        },
+        {
+          "id": "run-triggers",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: HCP Terraform run triggers",
+          "tags": [
+            "terraform_remote_state",
+            "tfe_outputs"
+          ],
+          "path": "terraform/run-triggers.md",
+          "tokens": 1084
+        },
+        {
+          "id": "ssh-keys",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Use SSH Keys to clone modules in HCP Terraform",
+          "tags": [
+            "tfe",
+            "tfe_ssh_key",
+            "service_terraform",
+            "service_terraform.pub"
+          ],
+          "path": "terraform/ssh-keys.md",
+          "tokens": 1157
+        },
+        {
+          "id": "vcs",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Configure workspace VCS connections in HCP Terraform",
+          "tags": [
+            "staging",
+            "production",
+            "/submodule/**/*.tf",
+            ".tf",
+            "submodule",
+            "/**/networking/**/*",
+            "networking",
+            ".",
+            "modules",
+            "0.4.2"
+          ],
+          "path": "terraform/vcs.md",
+          "tokens": 2553
+        },
+        {
+          "id": "state",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Manage workspace state in HCP Terraform",
+          "tags": [
+            "mode",
+            "managed",
+            "resource",
+            "count",
+            "for_each",
+            "\"aws_instance\" \"servers\" { count = 10 }",
+            "data",
+            "random",
+            "aws_subnet",
+            "aws_availability_zones"
+          ],
+          "path": "terraform/state.md",
+          "tokens": 3938
+        },
+        {
+          "id": "tags",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Create workspace tags",
+          "tags": [
+            "cost-center",
+            "terraform{}.cloud{}.workspaces",
+            "GET",
+            "/organizations/:organization_name/tags",
+            "tag-names",
+            "PATCH",
+            "/workspaces/:workspace_id",
+            "tag-binding",
+            "DELETE"
+          ],
+          "path": "terraform/tags.md",
+          "tokens": 1582
+        },
+        {
+          "id": "glossary",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Terraform glossary",
+          "tags": [
+            "tfe",
+            "terraform apply",
+            "<IDENTIFIER> = <EXPRESSION>",
+            "aws_instance.example.id",
+            "master",
+            "terraform",
+            "terraform plan",
+            "deposed",
+            "lifecycle",
+            "create_before_destroy"
+          ],
+          "path": "terraform/glossary.md",
+          "tokens": 13481
+        },
+        {
+          "id": "docs",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Terraform overview",
+          "tags": [],
+          "path": "terraform/docs.md",
+          "tokens": 546
+        },
+        {
+          "id": "partnerships",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Terraform integration program",
+          "tags": [],
+          "path": "terraform/partnerships.md",
+          "tokens": 5753
+        },
+        {
+          "id": "tools",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Terraform tools",
+          "tags": [
+            "terraform-exec",
+            "terraform-json",
+            "terraform-plugin-testing",
+            "terraform-plugin-mux",
+            "terraform-plugin-log",
+            "ghaction-terraform-provider-release"
+          ],
+          "path": "terraform/tools.md",
+          "tokens": 2334
+        },
+        {
+          "id": "workspace-with-vcs",
+          "title": "workspace-with-vcs",
+          "description": "<!-- BEGIN: TFC:only -->",
+          "tags": [],
+          "path": "terraform/workspace-with-vcs.md",
+          "tokens": 2954
+        },
+        {
+          "id": "workspace",
+          "title": "workspace",
+          "description": "<!-- BEGIN: TFC:only -->",
+          "tags": [],
+          "path": "terraform/workspace.md",
+          "tokens": 2930
+        },
+        {
+          "id": "workspaces-list",
+          "title": "workspaces-list",
+          "description": "<!-- BEGIN: TFC:only -->",
+          "tags": [],
+          "path": "terraform/workspaces-list.md",
+          "tokens": 3326
+        },
+        {
+          "id": "explorer-limitations",
+          "title": "explorer-limitations",
+          "description": "",
+          "tags": [],
+          "path": "terraform/explorer-limitations.md",
+          "tokens": 112
+        },
+        {
+          "id": "group",
+          "title": "group",
+          "description": "In HashiCorp Cloud Platform (HCP) Europe organizations, you manage user access through HCP groups. HCP Terraform inhe...",
+          "tags": [],
+          "path": "terraform/group.md",
+          "tokens": 128
+        },
+        {
+          "id": "organization",
+          "title": "organization",
+          "description": "If you are in an HashiCorp Cloud Platform (HCP) Europe organization, you create and administer an organization throug...",
+          "tags": [],
+          "path": "terraform/organization.md",
+          "tokens": 121
+        },
+        {
+          "id": "permissions",
+          "title": "permissions",
+          "description": "In HashiCorp Cloud Platform (HCP) Europe organizations, you manage user access through HCP groups. HCP roles automati...",
+          "tags": [],
+          "path": "terraform/permissions.md",
+          "tokens": 104
+        },
+        {
+          "id": "hashicorp-provider-design-principles",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Provider design principles",
+          "tags": [
+            "terraform import"
+          ],
+          "path": "terraform/hashicorp-provider-design-principles.md",
+          "tokens": 1737
+        },
+        {
+          "id": "plugin-best-practices",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Best practices",
+          "tags": [],
+          "path": "terraform/plugin-best-practices.md",
+          "tokens": 830
+        },
+        {
+          "id": "interacting-with-providers",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Interacting with providers",
+          "tags": [
+            "/vX",
+            "terraform providers schema -json"
+          ],
+          "path": "terraform/interacting-with-providers.md",
+          "tokens": 733
+        },
+        {
+          "id": "naming",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Naming conventions",
+          "tags": [
+            "postgresql",
+            "postgresql_database",
+            "aws_availability_zones",
+            "time",
+            "parse_rfc3339",
+            "provider::time::parse_rfc3339",
+            "ami",
+            "instance_type",
+            "monitoring",
+            "delete_on_termination"
+          ],
+          "path": "terraform/naming.md",
+          "tokens": 1308
+        },
+        {
+          "id": "provider-code",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Provider code",
+          "tags": [
+            "terraform init"
+          ],
+          "path": "terraform/provider-code.md",
+          "tokens": 805
+        },
+        {
+          "id": "sensitive-state",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Sensitive state best practices",
+          "tags": [
+            "Sensitive",
+            "terraform apply"
+          ],
+          "path": "terraform/sensitive-state.md",
+          "tokens": 945
+        },
+        {
+          "id": "versioning",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Versioning and changelogs",
+          "tags": [
+            "MAJOR",
+            "MINOR",
+            "PATCH",
+            "1.0.0",
+            "Removed",
+            "TypeSet",
+            "TypeList",
+            "Default: \"one\"",
+            "Default: \"two\"",
+            "TypeInt"
+          ],
+          "path": "terraform/versioning.md",
+          "tokens": 1803
+        },
+        {
+          "id": "design",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Code generation design",
+          "tags": [
+            "aws_s3_bucket",
+            "unauthorized",
+            "not found"
+          ],
+          "path": "terraform/design.md",
+          "tokens": 2859
+        },
+        {
+          "id": "framework-generator",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Framework code generator",
+          "tags": [
+            "generate",
+            "scaffold",
+            "_gen.go",
+            "go install",
+            "all",
+            "data-sources",
+            "provider",
+            "resources",
+            "input",
+            "stdin"
+          ],
+          "path": "terraform/framework-generator.md",
+          "tokens": 9479
+        },
+        {
+          "id": "plugin-code-generation",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Code generation",
+          "tags": [],
+          "path": "terraform/plugin-code-generation.md",
+          "tokens": 565
+        },
+        {
+          "id": "openapi-generator",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: OpenAPI provider spec generator",
+          "tags": [
+            "go install",
+            "generate",
+            "config",
+            "./generator_config.yml",
+            "output",
+            "./provider_code_spec.json",
+            "provider",
+            "name",
+            "examplecloud",
+            "schema_ref"
+          ],
+          "path": "terraform/openapi-generator.md",
+          "tokens": 5387
+        },
+        {
+          "id": "specification",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Specification",
+          "tags": [
+            "provider",
+            "examplecloud",
+            "datasources",
+            "thing",
+            "resources",
+            "schema",
+            "attributes",
+            "blocks",
+            "bool",
+            "float64"
+          ],
+          "path": "terraform/specification.md",
+          "tokens": 10780
+        },
+        {
+          "id": "workflow-example",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Workflow example",
+          "tags": [
+            "go install .",
+            "GOBIN",
+            "$GOPATH/bin",
+            "main.go",
+            "scaffold",
+            "petstore",
+            "/internal/provider/provider.go",
+            "New()",
+            ".terraformrc",
+            "hashicorp.com/edu/petstore"
+          ],
+          "path": "terraform/workflow-example.md",
+          "tokens": 6589
+        },
+        {
+          "id": "debugging",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Debugging providers",
+          "tags": [
+            "tflog",
+            "provider_installation",
+            "dev_overrides",
+            ".terraformrc",
+            "TF_CLI_CONFIG_FILE",
+            "hashicorp/example",
+            "terraform apply",
+            "terraform init",
+            "go build -gcflags=\"all=-N -l\"",
+            "main"
+          ],
+          "path": "terraform/debugging.md",
+          "tokens": 2461
+        },
+        {
+          "id": "framework-benefits",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Plugin framework benefits",
+          "tags": [
+            "terraform-plugin-mux",
+            "datasource",
+            "provider",
+            "helper/schema.Resource",
+            "helper/schema.Schema",
+            "schema.Resource",
+            "helper/schema.ResourceData",
+            "\"\"",
+            "schema.TypeString",
+            "Computed: true"
+          ],
+          "path": "terraform/framework-benefits.md",
+          "tokens": 4160
+        },
+        {
+          "id": "how-terraform-works",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: How Terraform works with plugins",
+          "tags": [
+            "terraform",
+            "terraform init",
+            ".terraform/providers/",
+            "-upgrade",
+            "terraform init -upgrade"
+          ],
+          "path": "terraform/how-terraform-works.md",
+          "tokens": 1407
+        },
+        {
+          "id": "plugin",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Plugin development",
+          "tags": [],
+          "path": "terraform/plugin.md",
+          "tokens": 713
+        },
+        {
+          "id": "terraform-plugin-protocol",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Terraform plugin protocol",
+          "tags": [
+            "SchemaAttribute",
+            "NestedType",
+            "Computed"
+          ],
+          "path": "terraform/terraform-plugin-protocol.md",
+          "tokens": 1050
+        },
+        {
+          "id": "api-docs",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Registry API for the Terraform registry",
+          "tags": [
+            "modules.v1",
+            "https://modules.example.com/v1/",
+            "registry.terraform.io",
+            "<base_url>",
+            "Path",
+            "GET",
+            "application/json",
+            "<base_url>/:namespace",
+            "namespace",
+            "(string: <optional>)"
+          ],
+          "path": "terraform/api-docs.md",
+          "tokens": 6471
+        },
+        {
+          "id": "faq",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Terraform registry FAQ",
+          "tags": [
+            "1.2.0",
+            "1.2.1",
+            "https://registry.terraform.io",
+            "1.2.3",
+            "plan",
+            "apply"
+          ],
+          "path": "terraform/faq.md",
+          "tokens": 3089
+        },
+        {
+          "id": "registry",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Publish to the Terraform registry",
+          "tags": [],
+          "path": "terraform/registry.md",
+          "tokens": 998
+        },
+        {
+          "id": "partner",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Partner modules in the Terraform registry",
+          "tags": [],
+          "path": "terraform/partner.md",
+          "tokens": 326
+        },
+        {
+          "id": "publish",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Publish modules to the Terraform registry",
+          "tags": [
+            "terraform-<PROVIDER>-<NAME>",
+            "<NAME>",
+            "<PROVIDER>",
+            "terraform-google-vault",
+            "terraform-aws-ec2-instance",
+            "x.y.z",
+            "v",
+            "v1.0.4",
+            "0.9.2",
+            "v1.0.1"
+          ],
+          "path": "terraform/publish.md",
+          "tokens": 1249
+        },
+        {
+          "id": "use",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Find and use modules in the Terraform registry",
+          "tags": [
+            "<NAMESPACE>/<NAME>/<PROVIDER>",
+            "hashicorp/consul/aws",
+            "terraform init"
+          ],
+          "path": "terraform/use.md",
+          "tokens": 827
+        },
+        {
+          "id": "publishing",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Publish policy libraries to the Terraform registry",
+          "tags": [
+            "policy-library-<NAME>",
+            "<NAME>",
+            "sentinel.hcl",
+            "enforcement_level",
+            "v",
+            "v1.0.4",
+            "0.9.2",
+            "/",
+            "README.md",
+            "docs/policies/"
+          ],
+          "path": "terraform/publishing.md",
+          "tokens": 1670
+        },
+        {
+          "id": "using-policies",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Use policies from the Terraform registry",
+          "tags": [
+            "sentinel.hcl",
+            "advisory"
+          ],
+          "path": "terraform/using-policies.md",
+          "tokens": 734
+        },
+        {
+          "id": "private",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Private registry in HCP Terraform",
+          "tags": [],
+          "path": "terraform/private.md",
+          "tokens": 548
+        },
+        {
+          "id": "docs",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Publishing provider documentation in the Terraform registry",
+          "tags": [
+            "tfplugindocs",
+            "go generate",
+            "docs/",
+            "index.md",
+            "docs/guides/",
+            "<guide>.md",
+            "docs/resources/",
+            "<resource>.md",
+            "<PROVIDER NAME>_",
+            "docs/data-sources/"
+          ],
+          "path": "terraform/docs.md",
+          "tokens": 3443
+        },
+        {
+          "id": "registry-providers",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Providers overview for the Terraform registry",
+          "tags": [
+            "Partner"
+          ],
+          "path": "terraform/registry-providers.md",
+          "tokens": 561
+        },
+        {
+          "id": "os-arch",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: >-",
+          "tags": [],
+          "path": "terraform/os-arch.md",
+          "tokens": 391
+        },
+        {
+          "id": "publishing",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Publish providers to the Terraform registry",
+          "tags": [
+            "terraform-provider-{NAME}",
+            "terraform-registry-manifest.json",
+            "metadata",
+            "metadata.protocol_versions",
+            "[\"5.0\"]",
+            "[\"6.0\"]",
+            "version",
+            "1",
+            "v",
+            "v1.2.3"
+          ],
+          "path": "terraform/publishing.md",
+          "tokens": 3581
+        },
+        {
+          "id": "run-tasks",
+          "title": "START AUTO GENERATED METADATA, DO NOT EDIT",
+          "description": "page_title: Run tasks in the Terraform registry",
+          "tags": [],
+          "path": "terraform/run-tasks.md",
+          "tokens": 787
         }
       ]
     },

@@ -1,0 +1,62 @@
+---
+page_title: Destroy a Stack
+description: Learn how to destroy a Stack, a Stack deployment, and a Stack deployment’s infrastructure in HCP Terraform.
+tfc_only: true
+# START AUTO GENERATED METADATA, DO NOT EDIT
+created_at: 2025-05-27T14:28:51-04:00
+last_modified: 2025-09-22T14:37:52-07:00
+# END AUTO GENERATED METADATA
+---
+
+# Destroy a Stack
+
+We recommend destroying a Stack in phases to ensure HCP Terraform destroys your infrastructure safely. Destroy your Stack deployments before destroying the Stack itself to ensure you do not leave any unmanaged infrastructure behind.
+
+##  Requirements
+
+To destroy a Stack and delete or destroy a deployment in HCP Terraform, you must also be a member of a team with one of the following permissions:
+
+* [Organization-level **Manage all projects**](/terraform/cloud-docs/users-teams-organizations/permissions/organization#manage-all-projects)
+* [Project-level **Maintain**](/terraform/cloud-docs/users-teams-organizations/permissions/project#project-maintain) or higher
+
+## Delete deployments
+
+Before destroying a Stack, we recommend destroying your deployments to remove the resources that those deployments manage. Otherwise, the infrastructure managed by your Stack’s deployments can continue without destruction, and you will have to clean them up manually.
+
+To destroy a deployment’s infrastructure, add the `destroy` argument to every `deployment` block in your deployment configuration file. The following example destroys the `production` deployment using the `destroy` argument:
+
+<CodeBlockConfig filename="deployments.tfdeploy.hcl" highlight="6">
+
+```hcl
+deployment "production" {
+  inputs = {
+    region          = "us-west-2"
+    instances       = 2
+  }
+  destroy = true
+}
+```
+
+</CodeBlockConfig>
+
+
+After uploading the updated deployment configuration file and approving the subsequent plan, HCP Terraform destroys any infrastructure for the `production` deployment.
+
+After deleting all of a Stack's deployments, you can safely delete that Stack.
+
+## Delete a Stack
+
+Before destroying a Stack in HCP Terraform, we strongly recommend [deleting all of that Stack’s deployments](#delete-deployments). Once your Stack contains no deployments, you can delete a Stack by performing the following steps:
+
+Begin by navigating to the Stack you want to interact with:
+
+1. Sign in to [HCP Terraform](https://app.terraform.io), and select the organization that contains your Stack.
+1. In the navigation menu, click **Projects** under **Manage**.
+1. Select the project containing your Stack.
+1. Select **Settings** in the navigation menu.
+1. Select **Destruction and Deletion**.
+1. Click **Delete stack <STACK_NAME>**.
+1. Enter `delete` in the confirmation modal, then click **Delete Stack**.
+
+By following the steps above, you can forcefully delete a Stack without removing its deployments first. However, your Stack’s deletion does not affect Stack’s resources, so they continue without management, and you have to clean them up manually.
+

@@ -1,0 +1,264 @@
+---
+page_title: Terraform integration program
+description: >-
+  The Terraform integration program enables users to create and publish HashiCorp-verified Terraform integrations. Learn how to integrate with Terraform, HCP Terraform, and Terraform Enterprise.
+# START AUTO GENERATED METADATA, DO NOT EDIT
+created_at: 2025-05-27T14:28:51-04:00
+last_modified: 2025-10-08T18:32:44-06:00
+# END AUTO GENERATED METADATA
+---
+
+# Terraform integration program
+
+The Terraform integration program helps prospective and existing partners create and publish  integrations for Terraform. HashiCorp validates all integrations published through the program.
+
+## Types of integrations
+
+The Terraform ecosystem enables users to apply Terraform across different use cases and environments. The Terraform Integration Program currently supports the following use cases. The majority of the use cases below, save for partner providers, are use cases with commercial Terraform (HCP Terraform and Terraform Enterprise). Partners may integrate across different use cases, as applicable:
+
+- **AI/MCP Server Integrations:** Integrations for managing multi-cloud platforms and leveraging AI for design and operational tasks or tools that automate the creation of Terraform code.
+- **Audit:** Partners that help manage infrastructure resources to prevent service disruptions, improve governance, and record or analyze changes for compliance and security.
+- **CI/CD:** Partners focused on continuous integration and continuous delivery/deployment of IaC resources.
+- **Code Scanning/Policies/Security:** Tools that scan IaC configurations for errors or security issues before deployment or for defining and enforcing policies on IaC configurations.
+- **Cost Management:** Partners that analyze the impact of new infrastructure to cost and apply cost governance to new and existing infrastructure.
+- **No Code/Low Code/Visual Cloud Design:** Tools that simplify or visualize the implementation and deployment of IaC workflows.
+- **Observability/Monitoring:** Partners that provide visibility into performance, usage, and health of Terraform deployments.
+- **SSO (Single Sign On):** Partners for secure user authentication.
+- **Terraform Providers:** Infrastructure partners build Terraform providers (plugins) to empower customers and end users to leverage Terraform to manage resources exposed by their platform APIs. These providers are accessible to users of all Terraform editions.
+- **VCS (Version Control Systems):** Partners for tracking and managing changes to IaC code.
+
+Run tasks allow HCP Terraform to execute tasks in external systems at specific points in the HCP Terraform run lifecycle. Workflow partners create run tasks that let them integrate their services directly into the Terraform workflow. Most workflow partners integrate with the Terraform workflow itself. This integration offers much more extensibility to HCP Terraform and Terraform Enterprise customers, enabling them to integrate your services into the HCP Terraform workflow. This feature allows users to add and execute these tasks during the pre-plan, post-plan, pre-apply, and post-apply stages. Refer to the [HCP Terraform Integrations](#hcp-terraform-integrations) or [Terraform Enterprise Integrations](#terraform-enterprise-integrations) documentation for more details.
+
+![Integration program diagram](/img/docs/terraform-integration-program-diagram-updated.png)
+
+## Terraform Provider Integrations
+
+Infrastructure partners integrate by building and publishing a plugin called a Terraform [provider](https://developer.hashicorp.com/terraform/language/providers). Providers are executable binaries written in Go that communicate with Terraform Core over an RPC interface. The provider acts as a translation layer for transactions with external APIs, such as a public cloud service (AWS, GCP, Azure), a PaaS service (Heroku, Confluent, UpCloud), a SaaS service (DNSimple, CloudFlare), or on-prem resources (vSphere). Providers work across Terraform CE, HCP Terraform, and Terraform Enterprise. Refer to the [Terraform Provider Integrations documentation](#terraform-provider-integrations) for more detail.
+
+Our Terraform Provider partners typically have the following use cases, as listed on the [Terraform Registry](https://registry.terraform.io/browse/providers):
+
+- **Asset Management:** These partners offer asset management of key organization and IT resources, including software licenses, hardware assets, and cloud resources.
+- **CI/CD:** These partners focus on continuous integration and continuous delivery/deployment.
+- **Cloud Automation:** These partners offer specialized cloud infrastructure automation management capabilities such as configuration management.
+- **Communication & Messaging:** These partners integrate with communication, email, and messaging platforms
+- **Container Orchestration:** These partners help with container provisioning and deployment.
+- **Database:** These partners offer capabilities to provision and configure your database resources.
+- **Data Management:** These partners focus on data center storage, backup, and recovery solutions.
+- **IaaS (Infrastructure-as-a-Service):** These are infrastructure and IaaS providers that offer solutions such as storage, networking, and virtualization.
+- **Infrastructure Management:** These providers enable Terraform to provision, configure, and manage resources on specific managed platforms and other services such as virtual networks and databases
+- **Logging & Monitoring:** These partners offer the capability to configure and manage services such as loggers, metric tools, and monitoring services.
+- **Networking:** These partners integrate with network-specific hardware and virtualized products such as routing, switching, firewalls, and SD-WAN solutions.
+- **PaaS (Platform-as-a-Service):** These are platform and PaaS providers that offer a range of hardware, software, and application development tools. This category includes smaller-scale providers and those with more specialized offerings.
+- **Public Cloud:** These are large-scale, global cloud providers that offer a range of services including IaaS, SaaS, and PaaS.
+- **Security & Authentication:** These are partners with authentication and security monitoring platforms.
+- **Utility:** These partners offer helper functionality, such as random value generation, file creation, http interactions, and time-based resources.
+- **VCS (Version Control Systems):** These partners focus on VCS (Version Control System) projects, teams, and repositories from within Terraform.
+- **Web Services:** These partners focus on web hosting, web performance, CDN and DNS services.
+
+You can follow the five steps below to develop your provider alongside HashiCorp. This ensures that you can publish new versions with Terraform quickly and efficiently.
+
+![Provider Development Process](/img/docs/provider-program-steps.png)
+
+1. **Prepare**: Develop integration using included resources
+1. **Publish**: Publish provider to the Registry or plugin documentation
+1. **Apply**: Apply to Technology Partnership Program
+1. **Verify**: Verify integration with HashiCorp Alliances team
+1. **Support**: Vendor provides ongoing maintenance and support
+
+We encourage you to follow the tasks associated with each step fully to streamline the development process and minimize rework.
+
+All providers integrate into and operate with Terraform exactly the same way. The table below is intended to help users understand who develops, and maintains a particular provider.
+
+<ProviderTable />
+<p></p>
+
+### 1. Prepare
+
+To get started with the Terraform provider development, we recommend reviewing and following the resources listed below.
+
+#### Provider Development Kit
+
+a) Write your own custom provider with our [tutorials](/terraform/tutorials/providers-plugin-framework).
+
+b) Get started with the plugin framework [repository](https://github.com/hashicorp/terraform-provider-scaffolding-framework), and reference the [documentation](/terraform/plugin/framework).
+
+c) Follow the below video to create a Terraform provider with the plugin framework:
+<VideoEmbed url="https://www.youtube.com/watch?v=16qs7LJSyps"/>
+
+d) Watch our overview of the new plugin framework and its improvements to the Terraform provider ecosystem:
+<VideoEmbed url="https://www.youtube.com/watch?v=pAeQC0fC3Xw"/>
+
+e) Reference our example [Random provider](https://github.com/hashicorp/terraform-provider-random)
+
+f) Discuss providers in the HashiCorp developer discussion [forum](https://discuss.hashicorp.com/c/terraform-providers/tf-plugin-sdk/43).
+
+Please submit questions or suggestions about the provider tooling and development to the [HashiCorp Terraform providers forum](https://discuss.hashicorp.com/c/terraform-providers/tf-plugin-sdk/43). If you do not have expertise in provider development, please reach out and we may be able to recommend a few third-party partners with whom we have worked on this in the past.
+
+#### Provider License
+
+All Terraform providers listed as Partner must contain one of the following open source licenses:
+
+- CDDL 1.0, 2.0
+- CPL 1.0
+- Eclipse Public License (EPL) 1.0
+- MPL 1.0, 1.1, 2.0
+- PSL 2.0
+- Ruby's Licensing
+- AFL 2.1, 3.0
+- Apache License 2.0
+- Artistic License 1.0, 2.0
+- Apache Software License (ASL) 1.1
+- Boost Software License
+- BSD, BSD 3-clause, "BSD-new"
+- CC-BY
+- Microsoft Public License (MS-PL)
+- MIT
+
+#### Requirements for the Partner Premier Tag - COMING SOON
+
+In order to qualify for the Partner Premier tag on the Terraform Registry, in addition to all of the requirements for the Partner Tag listed below, one technical **and** one feature requirement listed below must be met:
+
+**Technical:**
+- Include a Software Bill of Materials (SBOM) for the provider using [Syft](https://github.com/anchore/syft), the [CycloneDX Generator](https://github.com/CycloneDX/cdxgen), or other SBOM generation tool.
+
+**Feature:**
+- [Ephemeral Resources](https://developer.hashicorp.com/terraform/plugin/framework/ephemeral-resources) if applicable as a security best practice
+- [Terraform Search](https://developer.hashicorp.com/terraform/language/v1.14.x/import/bulk)
+- [Terraform Actions](https://developer.hashicorp.com/terraform/language/v1.14.x/invoke-actions)
+
+Technology partners that qualify for the Partner Premier tag enjoy additional partner benefits, such as co-marketing support and opportunities, technical support and resources, roadmap sharing, access to provider development workshops, and exclusive design input into the future of Terraform as a product, in addition to other perks.
+
+#### Requirements for the Partner Tag
+
+Moving forward, in order to qualify for the Partner tag on the Terraform Registry, the following must be met and verified by a HashiCorp Alliances Manager:
+1. Participate in the HashiCorp Technology Partner Program.
+2. The new provider is built on Terraform’s most recent [Plugin Framework](https://developer.hashicorp.com/terraform/plugin/framework).
+3. Pass and require [Terraform Plugin testing](https://developer.hashicorp.com/terraform/plugin/testing) as part of the provider.
+4. Commit to updating the provider and fix issues.
+5. Collaboratively engage on joint customer escalations.
+6. Testing on the provider is created and run nightly as a GitHub Action.
+
+### 2. Publish
+
+After your provider is complete and ready to release, you can publish it to the [Terraform Registry](https://registry.terraform.io/). This makes it publicly available for all Terraform users.
+
+Follow the [Terraform Registry publishing documentation](/terraform/registry/providers/publishing) and review the [provider publishing learn guide](/terraform/tutorials/providers/provider-release-publish). If your company has multiple products with separate providers, we recommend publishing them under the same Github organization to help with discoverability as well as setting your company up with a free HCP Terraform account under public namespaces. Benefits of team collaboration on public artifacts include:
+
+- Uninterrupted access to resync artifact versions
+- All management features are free
+- Authenticate with SSO or GitHub
+- Claim many namespaces under organization ownership
+
+We strongly encourage all partners to begin managing artifacts with HCP Terraform as a best practice moving forward. [Read the documentation](https://docs.hashicorp.com/terraform/cloud-docs/public-namespace) to get started today.
+
+Once completed, your provider will be visible in the Terraform Registry and available to use in Terraform. Please confirm that everything looks correct and that documentation is rendering properly.
+
+### 3. Apply
+
+After your provider is published, connect with HashiCorp Alliances to onboard your integration to the HashiCorp technology ecosystem or [apply to become a technology partner](https://www.hashicorp.com/ecosystem/become-a-partner/#technology).
+
+### 4. Verify
+
+Work with your HashiCorp Alliances representative to verify the plugin within the Registry and become listed as an HashiCorp technology partner integration on HashiCorp website.
+
+### 5. Support
+
+Building and publishing a new provider to the Terraform Registry is just the first step toward a quality Terraform integration. Integrations require consistent maintenance throughout their lifecycle.
+
+HashiCorp Terraform has an extremely wide community of users and contributors, and we encourage the community to report issues and help resolve them. However, we expect that all partner provider publishers continue maintaining the provider and that they address user-reported issues in a timely manner. This includes resolving all critical issues within 48 hours and all other issues within 5 business days. HashiCorp reserves the right to remove partner status from any integration that does not meet our maintenance requirements.
+
+If a vendor chooses not to support their provider, the provider's tag may change to Community, rather than Partner or Partner Premier.
+
+### Terraform Partner Modules
+
+Modules published by a HashiCorp technology partner can also be tagged with the Partner tag, similar to the Partner tag for Terraform providers. Please note that requirements for obtaining the Partner tag on Terraform modules vary slightly from Providers:
+- Successfully passing [TFLint](https://github.com/terraform-linters/tflint), Checkov, or another static code analysis and traditional unit and integration testing via [terraform test](https://developer.hashicorp.com/terraform/cli/commands/test).
+- Adhere to [Terraform’s naming conventions](https://developer.hashicorp.com/terraform/plugin/best-practices/naming) for resources, variables, and outputs.
+- Module format should be checked using terraform fmt to ensure code follows standard format.
+- Include the following files in your module:
+  - main.tf: The core configuration file where resources are defined. 
+  - variables.tf: Stores input variable, allowing operators to parameterize Terraform configurations.
+  - outputs.tf: Defines output values, making data from infrastructure available to other configurations or users.
+  - README.md: Provides a project overview, instructions, and documentation. 
+  - Changelog: Documents changes and updates to the module over time.
+- The module’s documentation should also clearly describe the module’s purpose, usage, inputs, outputs, and any prerequisites or dependencies listed in the README.md file. We recommend automating this process through [terraform-docs.io](https://terraform-docs.io/). Any resources used in the module should also adopt ephemeral resources, as applicable to the use case.
+
+## HCP Terraform and Terraform Enterprise Integrations
+
+Our partnerships with leading technology providers offer a comprehensive suite of integrations for Terraform workflows. Our ecosystem is designed to enhance every stage of the infrastructure lifecycle, including: 
+
+- Ensuring infrastructure security with code scanning and policy tools 
+- Automating deployments using CI/CD pipelines
+- Managing code changes with version control systems 
+- Simplifying design through no-code and low-code platforms
+
+The Terraform integration program also provides solutions for auditing and cost management to maintain compliance and financial efficiency, streamline user access with SSO, and gain deep visibility into your deployment through observability and monitoring. Lastly, our advanced integrations with AI and multi-cloud platform tools automate complex tasks and simplify multi-cloud management, making infrastructure operations smarter and increasingly efficient.
+
+![Terraform Run Phases](/img/docs/terraform-run-phases.png)
+
+[Run tasks](/terraform/cloud-docs/workspaces/settings/run-tasks) allow HCP Terraform and Terraform Enterprise to execute tasks in external systems at certain points in the HCP Terraform run lifecycle. Specifically, HCP Terraform and Terraform Enterprise users can add and execute these tasks during the pre-plan, post-plan, pre-apply, and post-apply run stages. To execute a run task, Terraform sends an API payload to the external system. This payload contains a collection of run-related information and a callback URL that the external system can use to send updates back to HCP Terraform or Terraform Enterprise.
+
+The external system can then use this run information and respond back to Terraform with a passed or failed status. Terraform uses this status response to determine if a run should proceed, based on the task's enforcement settings within a workspace.
+
+Beyond run tasks, HCP Terraform and Terraform Enterprise offer powerful API-driven workflows for direct integrations. These direct integrations are ideal for creating custom automation, building integrations with third-party systems such as service catalogs or customer portals, or integrating with CI/CD pipelines to control the entire infrastructure provisioning lifecycle. The API-first design ensures comprehensive control and flexibility, enabling a wide range of integration use cases.
+
+Partners who successfully complete an integration with either HCP Terraform or Terraform Enterprise obtain an HCP Terraform or Terraform Enterprise badge. This badge signifies HashiCorp validated the integration under ideal conditions, and that the partner is a member of the HashiCorp Technology Partner Program.
+
+<span style={{display:'block', textAlign:'center'}}>
+<ImageConfig inline height={192} width={192}>
+
+![HCP Terraform](/img/docs/tfc-badge.png)
+
+</ImageConfig>
+<ImageConfig inline height={192} width={192}>
+
+![Terraform Enterprise](/img/docs/tfe-badge.png)
+
+</ImageConfig>
+</span>
+
+The Terraform Enterprise and Terraform Cloud badges can help drive visibility and differentiate joint partners and customers. These badges are available for partners to use on their digital properties, as per the outlined guidelines in the technology partner guide you receive when becoming a partner. 
+
+
+HCP Terraform and Terraform Enterprise integrations development have the following five steps:
+
+![RunTask Program Process](/img/docs/runtask-program-steps.png)
+
+1. **Engage**: Sign up for the Technology Partner Program
+1. **Develop & Test**: Understand and build using the API integration for Run Tasks
+1. **Review**: Review integration with HashiCorp Alliances team
+1. **Release**: Provide documentation for your Integration
+1. **Support**: Vendor provides ongoing maintenance and support
+
+### 1. Engage
+
+For partners who are new to working with Hashicorp, we recommend [signing up for our Technology Partner Program](https://www.hashicorp.com/go/tech-partner). To understand more about the program, check out our “[Become a Partner](https://www.hashicorp.com/partners/become-a-partner)” page.
+
+### 2. Develop and Test
+
+Partners should build an integration using the [run tasks APIs in HCP Terraform](/terraform/cloud-docs/api-docs/run-tasks/run-tasks). To learn more about how post-plan run tasks can enhance the HCP Terraform workflow, refer to the following diagram and read our [run tasks announcement](https://www.hashicorp.com/blog/terraform-cloud-run-tasks-beta-now-available). For a more hands-on experience with run tasks follow the [HCP Packer run tasks learn guide here](/terraform/tutorials/cloud/setup-hcp-terraform-run-task).
+
+Beyond run tasks, partners should leverage the [APIs in HCP Terraform](/terraform/cloud-docs/api-docs) or [APIs in Terraform Enterprise](/terraform/enterprise/api-docs) to programmatically manage most aspects of the platform and their accompanying integrations.
+
+You should consider network access configuration when integrating with Terraform Enterprise, specifically around configuring [secondary hostnames](/terraform/enterprise/deploy/reference/configuration#tfe_hostname_secondary), that allow Terraform Enterprise to connect to and integrate with external systems when deployed in a private environment.
+
+### 3. Review
+
+Schedule time with your Partner Alliance manager to review your integration. The review should include enabling the integration on the partner’s platform and HCP Terraform or Terraform Enterprise, explaining the use case for the integration, and a live demonstration of the functionality. If you are unable to engage with your Partner Alliances manager, you can also reach out to <technologypartners@hashicorp.com>.
+
+### 4. Release
+
+We add new run task partners to the [Terraform Run Task page](https://registry.terraform.io/browse/run-tasks) after the integration review and documentation is complete. On this page, you will provide a two-line summary about your integration(s). If you have multiple integrations, we highly recommend creating a summary that highlights all potential integration options.
+
+Other HCP Terraform or Terraform Enterprise integrations will be added to the [HashiCorp Partner page](https://www.hashicorp.com/en/partners/find-a-partner).
+
+You must provide documentation that helps users get started with your integration. You also need to provide documentation for our support team, including points of contact, email address, FAQ and/or best practices. We want to ensure end users are able to reach the right contacts for internal HashiCorp support when working with customers.
+
+### 5. Support
+
+At HashiCorp, we view the release step to be the beginning of the journey. Getting the integration built is just the first step in enabling users to leverage it against their infrastructure. On-going effort is required to support and maintain it after you complete the initial development.
+
+We expect that partners will create a mechanism to track and resolve all critical issues as soon as possible (ideally within 48 hours) and all other issues within 5 business days. This is a requirement given the critical nature of HCP Terraform to a customer’s operation. If you choose not to support your integration, we cannot consider it verified and will not list it on the Terraform Registry website.
+
+-> Contact us at [technologypartners@hashicorp.com](mailto:technologypartners@hashicorp.com) with any questions or feedback.
+

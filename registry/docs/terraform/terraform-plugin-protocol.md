@@ -1,0 +1,54 @@
+---
+page_title: Terraform plugin protocol
+description: >-
+  Learn how the Terraform plugin protocol enables Terraform to communicate with
+  provider plugins.
+# START AUTO GENERATED METADATA, DO NOT EDIT
+created_at: 2025-05-27T14:28:51-04:00
+last_modified: 2025-09-30T15:12:43-04:00
+# END AUTO GENERATED METADATA
+---
+
+# Terraform plugin protocol
+
+The Terraform plugin protocol is a versioned interface between Terraform CLI and Terraform Plugins.
+
+During [discovery](/terraform/plugin/how-terraform-works#discovery), the Terraform Registry uses the protocol version as additional compatibility metadata when deciding which plugin versions Terraform CLI can select. You can configure this metadata in the [Terraform Registry manifest file](/terraform/registry/providers/publishing#terraform-registry-manifest-file) when you create a plugin release.
+
+Major versions of the protocol delineate Terraform CLI and Terraform Plugin compatibility. Minor versions of the protocol are additive. The protocol is implemented in [Protocol Buffers](https://developers.google.com/protocol-buffers) and [gRPC](https://grpc.io/), with the canonical source for protocol definitions located in the [Terraform CLI repository](https://github.com/hashicorp/terraform/tree/main/docs/plugin-protocol).
+
+For more detail about how the protocol RPCs are used, refer to the following topics:
+- [Framework documentation about RPCs](/terraform/plugin/framework/internals/rpcs)
+- [Terraform Resource Instance Change Lifecycle documentation](https://github.com/hashicorp/terraform/blob/main/docs/resource-instance-change-lifecycle.md)
+
+## Protocol Version 6
+
+Protocol version 6 is compatible with Terraform CLI version 1.0 and later. Protocol version 6 includes all version 5 functionality for providers, plus:
+
+* **Nested Attributes**: Define `SchemaAttribute` with the `NestedType` field.
+  * Enable practitioners to use easier [argument syntax](/terraform/language/syntax/configuration#arguments) instead of [block syntax](/terraform/language/syntax/configuration#blocks).
+  * Configure value sensitivity on individual nested attributes, rather than an entire read-only (`Computed` only) attribute.
+
+Implementations include:
+
+* [terraform-plugin-framework](/terraform/plugin/framework): A higher-level SDK that makes Terraform provider development easier by abstracting implementation details.
+* [terraform-plugin-go tf6server](https://pkg.go.dev/github.com/hashicorp/terraform-plugin-go/tfprotov6/tf6server): A lower-level SDK to develop Terraform providers for more advanced use cases.
+* [tf5to6server](/terraform/plugin/mux/translating-protocol-version-5-to-6): A package to translate protocol version 5 providers into protocol version 6.
+* [tf6muxserver](/terraform/plugin/mux/combining-protocol-version-6-providers): A package to combine multiple protocol version 6 providers.
+
+Refer to [Terraform Plugin RPC protocol version 6.10](https://github.com/hashicorp/terraform/blob/main/docs/plugin-protocol/tfplugin6.proto) in the Terraform repository for the protocol v6 definition.
+
+## Protocol Version 5
+
+Protocol version 5 is compatible with Terraform CLI version 0.12 and later.
+
+Implementations include:
+
+* [terraform-plugin-framework](/terraform/plugin/framework): A higher-level SDK that makes Terraform provider development easier by abstracting implementation details.
+* [terraform-plugin-sdk/v2](/terraform/plugin/sdkv2): A higher-level SDK that makes Terraform provider development easier by abstracting implementation details.
+* [terraform-plugin-go tf5server](https://pkg.go.dev/github.com/hashicorp/terraform-plugin-go/tfprotov5/tf5server): A lower-level SDK to develop Terraform providers for more advanced use cases.
+* [tf6to5server](/terraform/plugin/mux/translating-protocol-version-6-to-5): A package to translate protocol version 6 providers into protocol version 5.
+* [tf5muxserver](/terraform/plugin/mux/combining-protocol-version-5-providers): A package to combine multiple protocol version 5 providers.
+
+Refer to [Terraform Plugin RPC protocol version 5.10](https://github.com/hashicorp/terraform/blob/main/docs/plugin-protocol/tfplugin5.proto) in the Terraform repository for the protocol v5 definition.
+

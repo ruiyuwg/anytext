@@ -655,6 +655,20 @@
         "docsPath": "docs/source",
         "include": [".mdx"]
       }
+    },
+    {
+      "id": "terraform",
+      "name": "Terraform",
+      "description": "Infrastructure as code tool for building, changing, and versioning cloud resources with HCL",
+      "version": "1",
+      "adapter": "github",
+      "github": {
+        "repo": "hashicorp/web-unified-docs",
+        "branch": "main",
+        "docsPath": "content/terraform-docs-common/docs",
+        "include": [".md"],
+        "maxFiles": 5000
+      }
     }
   ]
 }

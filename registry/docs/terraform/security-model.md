@@ -1,0 +1,281 @@
+---
+page_title: HCP Terraform security model
+description: >-
+ Learn about HCP Terraform's security and authorization model to identify potential security threats and follow our recommendations for using HCP Terraform securely.
+tfc_only: true
+# START AUTO GENERATED METADATA, DO NOT EDIT
+created_at: 2025-05-27T14:28:51-04:00
+last_modified: 2025-11-19T09:33:54-08:00
+# END AUTO GENERATED METADATA
+---
+
+# Security model
+
+Learn about the essential concepts of HCP Terraform to understand how each piece affects the security model of HCP Terraform.
+
+## HCP Europe
+
+In HashiCorp Cloud Platform (HCP) Europe organizations, your resources are hosted, managed, and billed separately to meet [European data residency requirements](https://www.hashicorp.com/en/trust/privacy/hcp-data-privacy). To learn more, refer to [HCP EU region and data governance](https://www.hashicorp.com/en/trust/eu).
+
+To learn more about HCP Europe, refer to [Use HCP Terraform in Europe](/terraform/cloud-docs/europe).
+
+## Organize infrastructure
+
+HCP Terraform organizes infrastructure using either workspaces or Stacks. The choice between these two models depends on the complexity, scale, and organizational structure of your infrastructure. To learn more about the differences between workspaces and Stacks, refer to [Compare Stacks and workspaces](/terraform/cloud-docs/stack-workspace).
+
+Workspaces represent a logical security boundary within the organization. Variables, state, SSH keys, and log output are local to a workspace. You can grant teams [read, plan, write, admin, or a customized set of permissions](/terraform/cloud-docs/users-teams-organizations/permissions) within a workspace.
+
+Stacks are a new container for infrastructure built to solve the scaling challenges of multi-workspace setups. While a totally separate construct, Stack deployments offer a similar logical security boundary to workspaces. Each deployment runs in its own isolated environment with its own state, variables, and identity tokens. To learn more about the differences between workspaces and Stacks, refer to [Compare Stacks and workspaces](/terraform/cloud-docs//stack-workspace).
+
+You can use projects to assign [read, write, maintain, or admin permissions](/terraform/cloud-docs/users-teams-organizations/permissions#project-permissions) to all Stacks within a project.
+
+Projects let you group related workspaces or Stacks in your organization. You can use projects to assign [read, write, maintain, admin, or a customized set of permissions](/terraform/cloud-docs/users-teams-organizations/permissions/project) to a particular team which grants specific permissions to all workspaces in the project.
+
+## Terraform runs
+
+HCP Terraform is designed as an execution platform for Terraform, and can perform Terraform runs on its own disposable virtual machines. HCP Terraform's virtual machines provides a consistent and reliable run environment. HCP Terraform provisions infrastructure according to your Terraform configuration which you can upload through the VCS-driven, API-driven, or CLI-driven workflows.
+
+### Workspace runs
+
+Workspaces in HCP Terraform have several different run modes and ways of starting runs, [learn more about workspace runs](/terraform/cloud-docs/run/remote-operations#starting-runs). It’s important to note that HCP Terraform performs all Terraform operations within the same privilege context. Both the plan and apply operations have access to the full workspace variables, state versions, and Terraform configuration.
+
+### Stack deployment runs
+
+Each Stack in HCP Terraform maintains its own configuration versions, and each version has a queue of deployment runs. HCP Terraform executes deployment runs in the order that you approve them. To learn more about runs and their execution environment, refer to [Stack runs](/terraform/cloud-docs/stacks/runs).
+
+## Terraform state file
+
+When developing locally, Terraform stores its state in a plaintext file on your machine. HCP Terraform adds additional security by storing your state file remotely, encrypting it at rest, and protecting your state with TLS in transit.
+
+### Workspace state
+
+HCP Terraform retains the current and all historical [state](/terraform/language/state) versions for each workspace. Depending on the resources that are used in your Terraform configuration, these state versions may contain sensitive data such as database passwords, resource IDs, etc.
+
+### Stack state
+
+Each Stack deployment stores a state file in HCP Terraform. Stack deployment state files are not directly exposed to users. Instead, a sanitized version is available from the UI and API.
+
+The state file for each deployment stores the state of all the components in that deployment. To modify the state of a Stack, you change a Stack’s configuration file, creating a new version and setting off new deployment runs. To learn more, refer to [State in Stacks](/terraform/cloud-docs/stacks/state).
+
+## Personas
+
+HCP Terraform can accommodate the different levels of access and responsibilities of various personas through assigned roles. Understanding these roles is essential for enforcing the principle of least privilege and maintaining a secure environment.
+
+### Organization owners
+
+<Note>
+
+If you are using an HCP Europe organization, there is no organization owners team because you manage users with HCP groups. To learn more about HCP Europe, refer to [Use HCP Terraform in Europe](/terraform/cloud-docs/europe).
+
+</Note>
+
+Members of the [owners team](/terraform/cloud-docs/users-teams-organizations/teams#the-owners-team) have administrator-level privileges within an organization. Members of this team will have access to workspaces, Stacks, projects, and settings within the organization. This role is intended for users who will perform administrative tasks in your organization.
+
+### Team members and permissions
+
+<Note>
+
+@include 'eu/group.mdx'
+
+</Note>
+
+The HCP Terraform permissions model is split into three levels. You can set permissions at the following scopes:
+- [Organization permissions](/terraform/cloud-docs/users-teams-organizations/permissions/organization)
+- [Project permissions](/terraform/cloud-docs/users-teams-organizations/permissions/project)
+- [Workspace permissions](/terraform/cloud-docs/users-teams-organizations/permissions/workspace)
+
+Each permission level is additive, granting a user the highest level of permissions possible, regardless of which scope set that permission. A team's **effective permissions** is the sum of the permissions that team has from every permission level.
+
+To learn how to assign permissions at different scopes, refer to [Set permissions](/terraform/cloud-docs/users-teams-organizations/permissions/set-permissions).
+
+
+### Contributors to connected VCS repositories
+
+HCP Terraform executes Terraform configuration from connected VCS repositories. Depending on the configuration, HCP Terraform may automatically trigger Terraform operations when the connected repositories receive new contributions.
+
+## Authorization model
+
+<Note>
+
+If you are using an HCP Europe organization, there is no organization owners team because you manage users with HCP groups. To learn more about HCP Europe, refer to [Use HCP Terraform in Europe](/terraform/cloud-docs/europe).
+
+</Note>
+
+This section covers a useful subset of HCP Terraform's authorization model, but is not comprehensive. For more information, refer to [Permissions](/terraform/cloud-docs/users-teams-organizations/permissions).
+
+HCP Terraform organizations contain an **owners** team, which grants admin-level access to the organization and all its projects, workspaces, and Stacks along with implicit access to:
+- **Manage Projects Permission**
+- **Manage Workspace Permission**
+- **Manage Team Permission and Membership**
+- **Manage Organization Access**
+- **Manage Policy Permission and Overrides** including modifying Policy enforcement mode and overriding soft-mandatory policy checks.
+- **Manage Run Task Permission**
+- **Manage VCS Permission** including modifying organization wide VCS Settings and SSH Keys.
+- **Manage Agent Pools Permission**
+- **Manage Private and Public Registry Permission**
+
+Alternatively, you can create your own teams and customize member access using organization, project, or workspace permissions.
+
+~> **Note:** Teams are not available to free-tier users on HCP Terraform. Organizations at the free-level will only have an owners team.
+
+### Project authorization
+
+All workspaces and Stacks in an organization belong to a project. You can grant teams [read, write, maintain, admin, or a customized set of permissions for the project](/terraform/cloud-docs/users-teams-organizations/permissions/project), which grants specific permissions on all workspaces and Stacks within the project.
+
+### Workspace authorization
+
+Workspaces provide a logical security boundary within the organization. Environment variables and Terraform configurations are isolated within a workspace, and access to a workspace is granted on a per-team basis.
+
+All workspaces in an organization belong to a project. You can grant teams permissions [for a project](/terraform/cloud-docs/users-teams-organizations/permissions/project), which grants specific permissions on all workspaces within the project. You can also grant teams [read, plan, write, admin, or a customized set of permissions](/terraform/cloud-docs/users-teams-organizations/permissions/workspace) for a specific workspace.
+
+It’s important to note that, from a security perspective, the plan permission is equivalent to the write permission. The plan permission is provided to protect against accidental Terraform runs but is not intended to stop malicious actors from accessing sensitive data within a workspace or Stack. Terraform `plan` and `apply` operations can execute arbitrary code within the ephemeral build environment. Both of these operations happen in the same security context with access to the full set of workspace variables, Terraform configuration, and Terraform state.
+
+By default, teams with read privileges within a workspace can view the workspace's state. You can remove this access by using [customized workspace permissions](/terraform/cloud-docs/users-teams-organizations/permissions/workspace). However, customized workspace permissions only apply to state file access through the API or UI. Terraform must access the state file in order to perform plan and apply operations, so any user with the ability to upload Terraform configurations and initiate runs will transitively have access to the workspace's state.
+
+State may be shared across workspaces via the [remote state access workspace setting](/terraform/cloud-docs/workspaces/state#accessing-state-from-other-workspaces).
+
+### Stack authorization
+
+Stacks provide a logical security boundary within the organization. Each Stack deployment runs in an isolated environment with its own state, variables, and identity tokens. Access to a Stack is granted on a per-team basis.
+
+You can use projects to assign [permissions](/terraform/cloud-docs/users-teams-organizations/permissions/project) to all Stacks within a project.
+
+You cannot directly access the state of each of your Stack deployments. A sanitized version is available from the UI and API to users with a minimum of read permissions in the containing project. However, Terraform must access the state file in order to perform plan and apply operations, so any user that can upload Terraform configurations and initiate runs can have access to your Stack's state.
+
+### VCS authorization
+
+Terraform configuration files in connected VCS repositories are inherently trusted. Commits to connected repositories will automatically queue a plan within the corresponding workspace or Stack. Pull requests to connected repositories will initiate a speculative plan, though this behavior may be disabled via the [workspace speculative plan setting](/terraform/cloud-docs/workspaces/settings/vcs#automatic-speculative-plans) or [stack speculative plan setting](terraform/cloud-docs/stacks/configure) on the respective settings page. HCP Terraform has no knowledge of your VCS's authorization controls and does not associate HCP Terraform user accounts with VCS user accounts — the two should be considered separate identities.
+
+### Agent pool authorization
+
+HCP Terraform Agents let HCP Terraform communicate with isolated, private, or on-premises infrastructure. You can configure agent pool settings from **Settings** > **Security** > **Agents** to limit access to specific projects, workspaces, and Stacks.
+
+You can grant agents access to read data between workspaces using the same agent, including: state files, sensitive data, and request forwarding payloads with VCS data, and agent API tokens.
+
+## Threat model
+
+HCP Terraform is designed to execute Terraform operations and manage the state file to ensure that infrastructure is reliably created, updated, and destroyed by multiple users of an organization.
+
+The following are part of the HCP Terraform threat model:
+
+### Confidentiality and integrity of communication between Terraform clients and HCP Terraform
+
+All communication between clients and HCP Terraform is encrypted end-to-end using TLS. HCP Terraform currently supports TLS version 1.2. HCP Terraform communicates with linked VCS repositories using the Oauth2 authorization protocol. HCP Terraform can also be configured to fetch Terraform modules from private repositories using the SSH protocol with a customer-provided private key.
+
+### Confidentiality of state versions, Terraform configurations, and stored variables
+
+As a user, you will entrust HCP Terraform with information that is very sensitive to your organization such as API tokens, your Terraform configurations, and your Terraform state file. HCP Terraform is designed to ensure the confidentiality of this information, it relies on [Vault Transit](/vault/docs/secrets/transit) for encrypting variables. Terraform configurations and state are encrypted at rest with uniquely derived encryption keys backed by Vault. You can view how all customer data is encrypted and stored on our [data security page](/terraform/cloud-docs/architectural-details/data-security).
+
+### Enforcement of authentication and authorization policies for data access and actions taken through the UI or API
+
+HCP Terraform enforces authorization checks for all actions taken within the API or through the UI. Learn more about [permissions](/terraform/cloud-docs/users-teams-organizations/permissions).
+
+### Isolation of Terraform executions
+
+Each Terraform operation (plan and apply) happens in an ephemeral environment that is created immediately before the run and destroyed after it is completed. The build environment is designed to provide isolation between Terraform executions and between HCP Terraform tenants.
+
+### Reliability and availability of HCP Terraform
+
+HCP Terraform is spread across multiple availability zones for reliability, we perform regular backups of our production data stores and have a process for recovering in case of a major outage.
+
+## What isn’t part of the threat model
+
+The following are not covered by the HCP Terraform security threat model.
+
+### Malicious contributions to Terraform configuration in VCS repositories
+
+Commits and pull requests to connected VCS repositories will trigger a plan operation within the associated workspace or Stack. HCP Terraform does not perform any authentication or authorization checks against commits in linked VCS repositories, and cannot prevent malicious Terraform configuration from exfiltrating sensitive data during plan operations. For this reason, it is important to restrict access to connected VCS repositories. Speculative plans for pull requests may be disabled on the [workspace settings page](/terraform/cloud-docs/workspaces/settings/vcs#automatic-speculative-plans) or [Stack settings page](terraform/cloud-docs/stacks/configure).
+
+-> **Note:** HCP Terraform will not automatically trigger plans for pull requests from forked repositories.
+
+### Malicious Terraform providers or modules
+
+Terraform providers and modules used in your Terraform configuration will have full access to the variables and Terraform state within a workspace or Stack. HCP Terraform cannot prevent malicious providers and modules from exfiltrating this sensitive data. We recommend only using trusted modules and providers within your Terraform configuration.
+
+### Malicious bypasses of Terraform policies
+The policy-as-code frameworks used by the Terraform [Policy Enforcement](/terraform/cloud-docs/policy-enforcement) feature are embedded within HCP Terraform and can be used to ensure the infrastructure provisioned using Terraform complies with defined organizational policies. The goal of this feature is to enforce compliance with organizational policies and best practices when provisioning infrastructure using Terraform.
+
+It is important to note that the policy-as-code integration in HCP Terraform should be viewed as a guide or set of guardrails, not a security boundary. It is not designed to prevent malicious actors from executing malicious Terraform configurations or modifying infrastructure.
+
+### Malicious or insecure third-party run tasks
+Terraform [Run Tasks](/terraform/cloud-docs/integrations/run-tasks) are provided with access to all Terraform configuration and plan data. HCP Terraform does not have the capability to prevent malicious Run Tasks from potentially exfiltrating sensitive data that may be present in either the Terraform configuration or plan.
+
+In order to minimize potential security risks, it is highly recommended to only utilize trusted technology partners for Run Tasks within your Terraform organization and limit the number of users who have been assigned the [Manage Run Tasks](/terraform/cloud-docs/users-teams-organizations/permissions/workspace#manage-workspace-run-tasks) permission.
+
+### Access to sensitive variables or state from Terraform operations
+
+Marking a variable as “sensitive” will prevent it from being displayed in the UI, but will not prevent it from being read by Terraform during plan or apply operations. Similarly, customized workspace permissions allow you to restrict access to workspace state via the UI and API, but will not prevent it from being read during Terraform operations.
+
+### Redaction of sensitive variables in Terraform logs
+
+The logs from a Terraform plan or apply operation are visible to any user with at least “read” level access in the associated workspace or Stack. While Terraform tries to avoid writing sensitive information to logs, redactions are best-effort. This feature should not be treated as a security boundary, but instead as a mechanism to mitigate accidental exposure. Additionally, HCP Terraform is unable to protect against malicious users who attempt to use Terraform logs to exfiltrate sensitive data.
+
+### Redact ephemeral values from Terraform logs
+
+The logs from a Terraform plan or apply operation are visible to any workspace's or Stack's users with **Read** permissions. Terraform attempts to avoid writing [ephemeral values](/terraform/language/resources/ephemeral) to logs, but Terraform cannot guarantee that all providers will not log ephemeral values.
+You can reduce the risk of ephemeral values being potentially logged by malicious providers by only [using trusted modules and providers within Terraform configuration](#malicious-terraform-providers-or-modules).
+
+### Redact ephemeral values in memory
+
+Terraform does not persist ephemeral values to plan or state files. However, Terraform does not protect ephemeral values from a memory analysis of Terraform while its running.
+
+## Recommendations for securely using HCP Terraform
+
+### Enforce strong authentication
+
+HCP Terraform supports [two factor authentication](/terraform/cloud-docs/users-teams-organizations/2fa) via SMS or TOTP. Organizations can configure mandatory 2FA for all members in the [organization settings](/terraform/cloud-docs/users-teams-organizations/organizations#authentication). Organizations may choose to configure [SSO for their organization](/terraform/cloud-docs/users-teams-organizations/single-sign-on).
+
+### Minimize the number of users in the owners team
+
+<Note>
+
+If you are using an HCP Europe organization, there is no organization owners team because you manage users with HCP groups. To learn more about HCP Europe, refer to [Use HCP Terraform in Europe](/terraform/cloud-docs/europe).
+
+</Note>
+
+Users of the [owners team](/terraform/cloud-docs/users-teams-organizations/teams#the-owners-team) will have full access to all workspaces within the organization. If SSO is enabled, members of the “Owners” team will still be able to authenticate with their username and password. This group should be reserved for only a small number of administrators, and membership should be audited periodically.
+
+### Apply the principle of least privilege to project and workspace membership
+
+<Note>
+
+@include 'eu/group.mdx'
+
+</Note>
+
+[Teams](/terraform/cloud-docs/users-teams-organizations/teams) allow you to group users and assign them various privileges within projects and workspaces. We recommend applying the [principle of least privilege](https://en.wikipedia.org/wiki/Principle_of_least_privilege) when creating teams and assigning permissions so that each user within your organization has the minimum required privileges.
+
+### Protect API keys
+
+HCP Terraform allows you to create [user, team, and organization API tokens](/terraform/cloud-docs/api-docs#authentication). You should take care to store these tokens securely, and rotate them periodically.
+Vault users can leverage the [Terraform Cloud secret backend](/vault/docs/secrets/terraform), which allows you to generate ephemeral tokens.
+
+### Control access to source code
+
+By default, commits and pull requests to connected VCS repositories will automatically trigger a plan operation in an HCP Terraform workspace or Stack. HCP Terraform cannot protect against malicious code in linked repositories, so you should take care to only grant trusted operators access to these repositories.
+Workspaces may be configured to [enable or disable speculative plans for pull requests](/terraform/cloud-docs/workspaces/settings/vcs#automatic-speculative-plans) to linked repositories. You should disable this setting if you allow untrusted users to open pull requests in connected VCS repositories.
+
+-> **Note:** HCP Terraform will not automatically trigger plans for pull requests from forked repositories.
+
+### Restrict access to workspace state
+
+Workspaces may be configured to share their state with other workspaces within the organization or globally with the entire organization via the [remote state setting](/terraform/cloud-docs/workspaces/state#accessing-state-from-other-workspaces). Because workspace state may contain sensitive information, we recommend that you follow the principle of least privilege and only enable state access between workspaces that specifically need information from each other.
+
+### Restrict access to Stack outputs
+
+Stacks within the same project have access to published outputs of other Stacks in the same project. To restrict access to these published outputs we recommend using separate projects to isolate your Stacks. To learn more, refer to [Pass data from one Stack to another](/terraform/language/stacks/deploy/pass-data).
+
+### Use separate agent pools for sensitive workspaces and Stacks
+
+You can share [HCP Terraform Agents](/terraform/cloud-docs/agents) across all workspaces or Stacks within an organization or scope them to specific [workspaces or Stacks](/terraform/cloud-docs/agents#scope-an-agent-pool). If multiple workspaces or Stacks share agent pools, a malicious actor in one could exfiltrate the agent’s API token, access private resources from the perspective of the agent, or modify the agent’s environment, potentially impacting other workspaces or Stacks. For this reason, we recommend creating separate agent pools for sensitive workspaces or Stacks and using the agent scoping setting to restrict which workspaces and Stacks can target each agent pool.
+
+### Treat Archivist URLs as secrets
+
+HCP Terraform uses a blob storage service called Archivist for storing various pieces of customer data. Archivist URLs have the origin `https://archivist.terraform.io` and are returned by various HCP Terraform APIs, such as the [state versions API](/terraform/cloud-docs/api-docs/state-versions#fetch-the-current-state-version-for-a-workspace). You do not need to submit a bearer token with each request to call the Archivist API. Instead, Archivist URLs contain a short-term signed authorization token that performs authorization checks. The expiry time depends on the API endpoints you used to generate the Archivist link. As a result, you must treat Archivist URLs as secrets and avoid logging or sharing them.
+
+### Use dynamic credentials
+
+Storing static credentials in HCP Terraform increases the inherent risk of a malicious user or a compromised plan or apply operation exposing your credentials. Because static credentials are usually long-lived and exposed in many locations, they are troublesome to revoke and replace.
+
+Using [dynamic provider credentials](/terraform/cloud-docs/dynamic-provider-credentials/) eliminates the need to store static credentials in HCP Terraform, reducing the risk of exposure. Dynamic provider credentials generate new temporary credentials for each operation and expire after that operation completes.
+

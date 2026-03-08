@@ -1,0 +1,41 @@
+---
+page_title: Integrations overview for HCP Terraform
+description: >-
+ Use HCP Terraform integrations to connect HCP Terraform with third-party platforms and systems.
+# START AUTO GENERATED METADATA, DO NOT EDIT
+created_at: 2025-05-27T14:28:51-04:00
+last_modified: 2025-09-24T16:49:15-07:00
+# END AUTO GENERATED METADATA
+---
+
+# Overview
+
+The HCP Terraform ecosystem features a variety of integrations to let HCP
+Terraform connect with third-party systems and platforms.
+
+<!-- BEGIN: TFC:only name:hcp-eu -->
+
+<Note>
+
+@include 'eu/integrations.mdx'
+
+</Note>
+
+<!-- END: TFC:only name:hcp-eu -->
+
+The following list contains HashiCorp's official HCP Terraform integrations, which use HCP Terraform's native APIs:
+
+- The [HCP Terraform Operator for Kubernetes](/terraform/cloud-docs/integrations/kubernetes) integration can manage HCP Terraform resources with Kubernetes custom resources.
+- The [ServiceNow Service Catalog for Terraform](/terraform/cloud-docs/integrations/service-now/service-catalog-terraform) lets you provision self-serve infrastructure using ServiceNow.
+- The [ServiceNow Service Graph Connector for Terraform](/terraform/cloud-docs/integrations/service-now/service-graph) integration lets you securely import HCP Terraform resources into your ServiceNow instance.
+- The [HCP Terraform for AWS Service Catalog](/terraform/cloud-docs/integrations/aws-service-catalog) integration lets you create pre-approved Terraform configurations on the AWS Service Catalog.
+<!-- BEGIN: TFC:only name:splunk -->
+- The [HCP Terraform for Splunk](/terraform/cloud-docs/integrations/splunk) integration lets you pull HCP Terraform logs into Splunk.
+<!-- END: TFC:only name:splunk -->
+
+If the platform you want to integrate HCP Terraform with does not have an
+official integration, you can build a custom run task to integrate with a tool
+of your choice. Run tasks can access plan details, display custom messages in
+the run pipeline, and prevent runs from applying. Learn more about [Run
+tasks](/terraform/cloud-docs/integrations/run-tasks).
+
