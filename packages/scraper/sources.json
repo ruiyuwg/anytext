@@ -682,6 +682,19 @@
         "docsPath": "docs",
         "include": [".md"]
       }
+    },
+    {
+      "id": "nx",
+      "name": "Nx",
+      "description": "Smart monorepo build system with generators, executors, and dependency graph",
+      "version": "20",
+      "adapter": "github",
+      "github": {
+        "repo": "nrwl/nx",
+        "branch": "master",
+        "docsPath": "docs",
+        "include": [".md"]
+      }
     }
   ]
 }

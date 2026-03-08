@@ -1,5 +1,5 @@
 {
-  "version": 88,
+  "version": 89,
   "updatedAt": "2026-03-08",
   "libraries": [
     {
@@ -102536,6 +102536,3229 @@
           ],
           "path": "nuxt/nuxt-2-static-improvements.md",
           "tokens": 2008
+        }
+      ]
+    },
+    {
+      "id": "nx",
+      "name": "Nx",
+      "description": "Smart monorepo build system with generators, executors, and dependency graph",
+      "version": "20",
+      "topics": [
+        {
+          "id": "readme",
+          "title": "Documentation",
+          "description": "When writing documentation, it is important to know the audience you are writing for and what kind of document you ar...",
+          "tags": [
+            "title",
+            "description",
+            "---",
+            "YAML",
+            "mediaImage",
+            "map.json",
+            "/docs",
+            "nx.dev",
+            "slug",
+            "authors"
+          ],
+          "path": "nx/readme.md",
+          "tokens": 4156
+        },
+        {
+          "id": "2021-06-15-distributing-ci-binning-and-distributed-task-execution",
+          "title": "2021-06-15-distributing-ci-binning-and-distributed-task-execution",
+          "description": "title: 'Distributing CI: Binning and Distributed Task Execution'",
+          "tags": [
+            "NX_CLOUD_DISTRIBUTED_EXECUTION",
+            "nx affected --build",
+            "npx nx-cloud start-agent",
+            "app1",
+            "dist",
+            "--max-parallel"
+          ],
+          "path": "nx/2021-06-15-distributing-ci-binning-and-distributed-task-execution.md",
+          "tokens": 2728
+        },
+        {
+          "id": "2021-10-14-step-by-step-guide-on-creating-a-monorepo-for-react-native-apps-using-nx",
+          "title": "npm",
+          "description": "title: 'Step by Step Guide on Creating a Monorepo for React Native Apps using Nx'",
+          "tags": [
+            "daily-horoscope-app",
+            "nx run-ios daily-horoscope-app",
+            "nx run-android daily-horoscope-app",
+            "apps/daily-horoscope-app/package.json",
+            "apps/daily-horoscope-app/ios/Podfile",
+            "post_install",
+            "</dict>",
+            "apps/daily-horoscope-app/ios",
+            "Pod install",
+            "Podfile.lock"
+          ],
+          "path": "nx/2021-10-14-step-by-step-guide-on-creating-a-monorepo-for-react-native-apps-using-nx.md",
+          "tokens": 10499
+        },
+        {
+          "id": "2021-12-17-mastering-the-project-boundaries-in-nx",
+          "title": "2021-12-17-mastering-the-project-boundaries-in-nx",
+          "description": "title: 'Taming Code Organization with Module Boundaries in Nx'",
+          "tags": [
+            "enforce-module-boundaries",
+            "allow",
+            "depConstraints",
+            "sourceTag",
+            "onlyDependOnLibsWithTags",
+            "*",
+            "lib A -> lib B -> lib C -> lib A",
+            "allowCircularSelfDependency",
+            "enforceBuildableLibDependency",
+            "tags"
+          ],
+          "path": "nx/2021-12-17-mastering-the-project-boundaries-in-nx.md",
+          "tokens": 3605
+        },
+        {
+          "id": "2021-12-23-single-file-monorepo-config-custom-workspace-presets-improved-tailwind-support-and-more-in-nx-13",
+          "title": "2021-12-23-single-file-monorepo-config-custom-workspace-presets-improved-tailwind-support-and-more-in-nx-13",
+          "description": "title: 'Single File Monorepo Config, Custom Workspace Presets, Improved Tailwind Support, and more in Nx 13.4!'",
+          "tags": [
+            "@nrwl/js"
+          ],
+          "path": "nx/2021-12-23-single-file-monorepo-config-custom-workspace-presets-improved-tailwind-support-and-more-in-nx-13.md",
+          "tokens": 1554
+        },
+        {
+          "id": "2022-01-25-new-terminal-output-performance-improvements-in-nx-13-5",
+          "title": "2022-01-25-new-terminal-output-performance-improvements-in-nx-13-5",
+          "description": "title: 'New Terminal Output & Performance Improvements in Nx 13.5'",
+          "tags": [
+            "NX_PROFILE=<filename>",
+            ".env",
+            "nx dep-graph",
+            "@nrwl/angular",
+            "--skipModule",
+            "angular.json"
+          ],
+          "path": "nx/2022-01-25-new-terminal-output-performance-improvements-in-nx-13-5.md",
+          "tokens": 1728
+        },
+        {
+          "id": "2022-01-28-set-up-tailwind-css-with-angular-in-an-nx-workspace",
+          "title": "2022-01-28-set-up-tailwind-css-with-angular-in-an-nx-workspace",
+          "description": "title: 'Set up Tailwind CSS with Angular in an Nx workspace'",
+          "tags": [
+            "--packageManager",
+            "--pm",
+            "npm",
+            "angular-tailwind-nx",
+            "angular",
+            "app1",
+            "css",
+            "@nrwl/angular:setup-tailwind",
+            "tailwindcss",
+            "postcss"
+          ],
+          "path": "nx/2022-01-28-set-up-tailwind-css-with-angular-in-an-nx-workspace.md",
+          "tokens": 13789
+        },
+        {
+          "id": "2022-02-01-share-code-between-react-web-react-native-mobile-with-nx",
+          "title": "npm",
+          "description": "title: 'Share code between React Web & React Native Mobile with Nx'",
+          "tags": [
+            "nx graph",
+            "apps",
+            "studio-ghibli-search-engine-mobile",
+            "studio-ghibli-search-engine-mobile-e2e",
+            "nx dep-graph",
+            "studio-ghibli-search-engine-web",
+            "localstorage",
+            "persistConfig",
+            "createMemoryHistory",
+            "history"
+          ],
+          "path": "nx/2022-02-01-share-code-between-react-web-react-native-mobile-with-nx.md",
+          "tokens": 4731
+        },
+        {
+          "id": "2022-03-23-introducing-expo-support-for-nx",
+          "title": "npm",
+          "description": "title: 'Introducing Expo Support for Nx'",
+          "tags": [
+            "@nrwl/expo",
+            "src",
+            "android",
+            "ios",
+            "expo eject",
+            "peotry-app",
+            "poetry-app-e2e:",
+            "App.tsx",
+            "poem-of-the-day.tsx",
+            "nx start poetry-app"
+          ],
+          "path": "nx/2022-03-23-introducing-expo-support-for-nx.md",
+          "tokens": 2688
+        },
+        {
+          "id": "2022-03-29-the-react-cli-you-always-wanted-but-didnt-know-about",
+          "title": "2022-03-29-the-react-cli-you-always-wanted-but-didnt-know-about",
+          "description": "title: \"The React CLI you always wanted but didn't know about\"",
+          "tags": [
+            "_npx_",
+            "_npm i nx -g_",
+            "myorg",
+            "happynrwl",
+            "apps/",
+            "_nx_",
+            "_node_modules_",
+            "_npm install -g nx_",
+            "apps/happynrwl",
+            "dist/apps/happynrwl"
+          ],
+          "path": "nx/2022-03-29-the-react-cli-you-always-wanted-but-didnt-know-about.md",
+          "tokens": 6965
+        },
+        {
+          "id": "2022-04-08-what-is-new-in-nx-13-10",
+          "title": "2022-04-08-what-is-new-in-nx-13-10",
+          "description": "title: 'What is new in Nx 13.10?'",
+          "tags": [
+            "nx",
+            "@nrwl/cli",
+            "@nrwl/tao",
+            "add-nx-to-monorepo",
+            "@nrwl/*",
+            "create-nx-workspace",
+            "@nrwl/react",
+            "@nrwl/js",
+            "@nrwl/nx-plugin",
+            "executor"
+          ],
+          "path": "nx/2022-04-08-what-is-new-in-nx-13-10.md",
+          "tokens": 3604
+        },
+        {
+          "id": "2022-04-25-use-storybook-with-nx-react-native",
+          "title": "npm",
+          "description": "title: 'Use Storybook with Nx React Native'",
+          "tags": [
+            "@nrwl/storybook",
+            ".storybook",
+            "storybook",
+            "*.stories",
+            "storybook/toggle-storybook",
+            "d",
+            ".storybook/story-loader.js",
+            "@react-navigation/native",
+            "useNavigtion",
+            "useRoute"
+          ],
+          "path": "nx/2022-04-25-use-storybook-with-nx-react-native.md",
+          "tokens": 2872
+        },
+        {
+          "id": "2022-05-02-nx-v14-is-out-here-is-all-you-need-to-know",
+          "title": "React",
+          "description": "title: 'Nx v14 is out — Here is all you need to know!'",
+          "tags": [
+            "_NX_PERF_LOGGING=true_",
+            "_NX_PERF_LOGGING=true nx build crew_",
+            "_profile.json_",
+            "nx",
+            "package.json",
+            "react",
+            "NX_TASKS_RUNNER_DYNAMIC_OUTPUT",
+            "--ci",
+            "--all",
+            "nx-cloud record"
+          ],
+          "path": "nx/2022-05-02-nx-v14-is-out-here-is-all-you-need-to-know.md",
+          "tokens": 4959
+        },
+        {
+          "id": "2022-05-11-lerna-is-dead-long-live-lerna",
+          "title": "2022-05-11-lerna-is-dead-long-live-lerna",
+          "description": "title: 'Lerna is dead — Long Live Lerna'",
+          "tags": [],
+          "path": "nx/2022-05-11-lerna-is-dead-long-live-lerna.md",
+          "tokens": 1403
+        },
+        {
+          "id": "2022-05-25-lerna-used-to-walk-now-it-can-fly",
+          "title": "2022-05-25-lerna-used-to-walk-now-it-can-fly",
+          "description": "title: 'How Lerna just got 10x faster!'",
+          "tags": [
+            "useNx",
+            "npm i nx --save-dev",
+            "lerna.json",
+            "nx.json",
+            "npx nx@latest init",
+            "false",
+            "lerna run",
+            "p-map",
+            "p-queue",
+            "nx"
+          ],
+          "path": "nx/2022-05-25-lerna-used-to-walk-now-it-can-fly.md",
+          "tokens": 1996
+        },
+        {
+          "id": "2022-06-09-nx-14-2-angular-v14-storybook-update-lightweight-nx-and-more",
+          "title": "2022-06-09-nx-14-2-angular-v14-storybook-update-lightweight-nx-and-more",
+          "description": "title: 'Nx 14.2 — Angular v14, Storybook update, lightweight Nx and more!'",
+          "tags": [
+            "nx.json",
+            "npx nx migrate latest",
+            "@storybook/angular:start-storybook",
+            "@storybook/angular:build-storybook",
+            "project.json",
+            "workspace.json",
+            "angular.json",
+            "main.ts",
+            "preview.ts",
+            "nx"
+          ],
+          "path": "nx/2022-06-09-nx-14-2-angular-v14-storybook-update-lightweight-nx-and-more.md",
+          "tokens": 2475
+        },
+        {
+          "id": "2022-07-05-nx-14-4-inputs-optional-npm-scope-project-graph-cache-directory-and-more",
+          "title": "2022-07-05-nx-14-4-inputs-optional-npm-scope-project-graph-cache-directory-and-more",
+          "description": "title: 'Nx 14.4 — Inputs, optional npm scope, project graph cache directory and more!'",
+          "tags": [
+            "targetDependencies",
+            "targetDefaults",
+            "build",
+            "nx migrate",
+            "proj-a",
+            "proj-b",
+            "nx build proj-a",
+            "nx.json",
+            "project.json",
+            "package.json"
+          ],
+          "path": "nx/2022-07-05-nx-14-4-inputs-optional-npm-scope-project-graph-cache-directory-and-more.md",
+          "tokens": 1987
+        },
+        {
+          "id": "2022-07-14-setup-a-monorepo-with-pnpm-workspaces-and-speed-it-up-with-nx",
+          "title": "2022-07-14-setup-a-monorepo-with-pnpm-workspaces-and-speed-it-up-with-nx",
+          "description": "title: 'Setup a Monorepo with PNPM workspaces and speed it up with Nx!'",
+          "tags": [
+            "pnpm-mono",
+            "pnpm init",
+            "package.json",
+            ".gitignore",
+            "node_modules",
+            "packages",
+            "apps",
+            "libs",
+            "pnpm-workspace.yaml",
+            "cd"
+          ],
+          "path": "nx/2022-07-14-setup-a-monorepo-with-pnpm-workspaces-and-speed-it-up-with-nx.md",
+          "tokens": 7946
+        },
+        {
+          "id": "2022-08-02-nx-14-5-cypess-v10-output-globs-linter-perf-react-tailwind-support",
+          "title": "2022-08-02-nx-14-5-cypess-v10-output-globs-linter-perf-react-tailwind-support",
+          "description": "title: 'Nx 14.5 — Cypress v10, output globs, linter perf, React Tailwind support'",
+          "tags": [
+            "--generate-tests",
+            "my-react-project",
+            "outputs",
+            "build-js",
+            "build-css",
+            "dist/libs/mylib",
+            "project-a",
+            "project-b",
+            "nx.json",
+            "^"
+          ],
+          "path": "nx/2022-08-02-nx-14-5-cypess-v10-output-globs-linter-perf-react-tailwind-support.md",
+          "tokens": 3317
+        },
+        {
+          "id": "2022-08-18-helping-the-environment-by-saving-two-centuries-of-compute-time",
+          "title": "2022-08-18-helping-the-environment-by-saving-two-centuries-of-compute-time",
+          "description": "title: 'Helping the Environment by Saving Two Centuries of Compute time'",
+          "tags": [
+            "main",
+            "master",
+            "node_modules/.cache/nx"
+          ],
+          "path": "nx/2022-08-18-helping-the-environment-by-saving-two-centuries-of-compute-time.md",
+          "tokens": 1384
+        },
+        {
+          "id": "2022-10-12-lerna-reborn-whats-new-in-v6",
+          "title": "2022-10-12-lerna-reborn-whats-new-in-v6",
+          "description": "title: \"Lerna reborn — What's new in v6?\"",
+          "tags": [
+            "p-map",
+            "p-queue",
+            "nx",
+            "useNx",
+            "lerna.json",
+            "**true**",
+            "nx.json"
+          ],
+          "path": "nx/2022-10-12-lerna-reborn-whats-new-in-v6.md",
+          "tokens": 910
+        },
+        {
+          "id": "2022-10-14-whats-new-in-nx-15",
+          "title": "2022-10-14-whats-new-in-nx-15",
+          "description": "title: What's new in Nx 15?",
+          "tags": [
+            "package.json",
+            "shared-ui",
+            "nx.json",
+            "targetDefaults",
+            "inputs",
+            "build",
+            "namedInputs",
+            "@nrwl/webpack",
+            "@nrwl/rollup",
+            "@nrwl/esbuild"
+          ],
+          "path": "nx/2022-10-14-whats-new-in-nx-15.md",
+          "tokens": 2955
+        },
+        {
+          "id": "2022-11-17-from-bootstrapped-to-venture-backed-nx-raises-8-6m",
+          "title": "2022-11-17-from-bootstrapped-to-venture-backed-nx-raises-8-6m",
+          "description": "title: 'From Bootstrapped to Venture-Backed: Nx Raises $8.6M'",
+          "tags": [],
+          "path": "nx/2022-11-17-from-bootstrapped-to-venture-backed-nx-raises-8-6m.md",
+          "tokens": 1545
+        },
+        {
+          "id": "2022-12-06-nx-15-3-standalone-projects-vite-task-graph-and-more",
+          "title": "2022-12-06-nx-15-3-standalone-projects-vite-task-graph-and-more",
+          "description": "title: 'Nx 15.3 — Standalone Projects, Vite, Task Graph and more!'",
+          "tags": [
+            "prebuild",
+            "build",
+            "nx.json",
+            "nx graph",
+            "nx run-many",
+            "nx affected",
+            "Group by project",
+            "npx create-nx-workspace",
+            "apps",
+            "libs"
+          ],
+          "path": "nx/2022-12-06-nx-15-3-standalone-projects-vite-task-graph-and-more.md",
+          "tokens": 4453
+        },
+        {
+          "id": "2022-12-22-nx-15-4-vite-4-support-a-new-nx-watch-command-and-more",
+          "title": "2022-12-22-nx-15-4-vite-4-support-a-new-nx-watch-command-and-more",
+          "description": "title: 'Nx 15.4 — Vite 4 Support, a new Nx Watch Command, and more!'",
+          "tags": [
+            "nx migrate",
+            "vite.config.ts",
+            "--all",
+            "--includeDependentProjects",
+            "nx watch",
+            "$NX_PROJECT_NAME",
+            "$NX_CHANGED_FILES",
+            "nx affected",
+            "npx nx e2e e2e",
+            "host"
+          ],
+          "path": "nx/2022-12-22-nx-15-4-vite-4-support-a-new-nx-watch-command-and-more.md",
+          "tokens": 2165
+        },
+        {
+          "id": "2023-01-10-setting-up-module-federation-with-server-side-rendering-for-angular",
+          "title": "2023-01-10-setting-up-module-federation-with-server-side-rendering-for-angular",
+          "description": "title: 'Setting up Module Federation with Server-Side Rendering for Angular'",
+          "tags": [
+            "cd myorg",
+            "login",
+            "devRemotes"
+          ],
+          "path": "nx/2023-01-10-setting-up-module-federation-with-server-side-rendering-for-angular.md",
+          "tokens": 1927
+        },
+        {
+          "id": "2023-01-12-react-vite-and-typescript-get-started-in-under-2-minutes",
+          "title": "2023-01-12-react-vite-and-typescript-get-started-in-under-2-minutes",
+          "description": "title: 'React, Vite and TypeScript: Get started in under 2 minutes'",
+          "tags": [
+            "awesomereactapp",
+            "--preset=react-standalone",
+            "npm start",
+            "package.json",
+            "nx serve",
+            "serve",
+            "project.json",
+            "executor",
+            "dev-server",
+            "@nrwl/vite"
+          ],
+          "path": "nx/2023-01-12-react-vite-and-typescript-get-started-in-under-2-minutes.md",
+          "tokens": 5380
+        },
+        {
+          "id": "2023-01-18-nx-console-meets-nx-cloud",
+          "title": "2023-01-18-nx-console-meets-nx-cloud",
+          "description": "title: 'Nx Console meets Nx Cloud'",
+          "tags": [
+            "nx.json",
+            "nx affected — -target=build"
+          ],
+          "path": "nx/2023-01-18-nx-console-meets-nx-cloud.md",
+          "tokens": 2155
+        },
+        {
+          "id": "2023-01-31-configuration-files-and-potholes-in-your-codebase",
+          "title": "2023-01-31-configuration-files-and-potholes-in-your-codebase",
+          "description": "title: 'Configuration Files and Potholes in Your Codebase'",
+          "tags": [],
+          "path": "nx/2023-01-31-configuration-files-and-potholes-in-your-codebase.md",
+          "tokens": 2004
+        },
+        {
+          "id": "2023-02-09-setup-react-and-tailwind-the-easy-way",
+          "title": "2023-02-09-setup-react-and-tailwind-the-easy-way",
+          "description": "title: 'Setup React and Tailwind — The Easy Way'",
+          "tags": [
+            "tailwindcss",
+            "postcss",
+            "autoprefixer",
+            "tailwind.config.js",
+            "html",
+            "[j|t]sx",
+            "[t|j]s",
+            "--vite=false",
+            "--integrated",
+            "styles.css"
+          ],
+          "path": "nx/2023-02-09-setup-react-and-tailwind-the-easy-way.md",
+          "tokens": 1210
+        },
+        {
+          "id": "2023-02-16-nx-15-7-node-support-angular-lts-lockfile-pruning",
+          "title": "2023-02-16-nx-15-7-node-support-angular-lts-lockfile-pruning",
+          "description": "title: 'Nx 15.7 — Node Support, Angular LTS, Lockfile Pruning'",
+          "tags": [
+            "ng update",
+            "@nrwl/angular",
+            "NgModules",
+            "package.json",
+            "build",
+            "generatePackageJson",
+            "@nrwl/webpack:webpack",
+            "@nrwl/node:webpack",
+            "generateLockfile",
+            "@nrwl/js:swc"
+          ],
+          "path": "nx/2023-02-16-nx-15-7-node-support-angular-lts-lockfile-pruning.md",
+          "tokens": 3013
+        },
+        {
+          "id": "2023-02-21-using-ngrx-standalone-apis-with-nx",
+          "title": "2023-02-21-using-ngrx-standalone-apis-with-nx",
+          "description": "title: 'Using NgRx Standalone APIs with Nx'",
+          "tags": [
+            "@nrwl/angular:ngrx",
+            "Routes",
+            "_*.routes.ts_",
+            "npx create-nx-workspace myorg",
+            "cd myorg",
+            "src/main.ts",
+            "providers",
+            "bootstrapApplication",
+            "main.ts",
+            "provideEffects()"
+          ],
+          "path": "nx/2023-02-21-using-ngrx-standalone-apis-with-nx.md",
+          "tokens": 1781
+        },
+        {
+          "id": "2023-02-22-whats-new-with-lerna-6-5",
+          "title": "2023-02-22-whats-new-with-lerna-6-5",
+          "description": "title: \"What's New With Lerna 6.5?\"",
+          "tags": [
+            "lerna publish from-git",
+            "lerna run",
+            "lerna add-caching",
+            "lerna publish",
+            "lerna publish from-package",
+            "package.json",
+            "--include-private",
+            "[\"private\": true]",
+            "\"private\": true",
+            "--dry-run"
+          ],
+          "path": "nx/2023-02-22-whats-new-with-lerna-6-5.md",
+          "tokens": 1940
+        },
+        {
+          "id": "2023-02-28-bundling-a-node-api-with-fastify-esbuild-and-nx",
+          "title": "This file is generated by Nx.",
+          "description": "title: 'Bundling a Node API with Fastify, esbuild, and Nx'",
+          "tags": [
+            "npx nx serve",
+            "npm start",
+            "src/main.ts",
+            "src/app/app.ts",
+            "/",
+            "{\"message\": \"Hello API\"}",
+            "--no-watch",
+            "npx nx test",
+            "npm run test",
+            "npx nx e2e e2e"
+          ],
+          "path": "nx/2023-02-28-bundling-a-node-api-with-fastify-esbuild-and-nx.md",
+          "tokens": 2410
+        },
+        {
+          "id": "2023-03-02-expanding-nx-console-to-jetbrains-ides",
+          "title": "2023-03-02-expanding-nx-console-to-jetbrains-ides",
+          "description": "title: 'Expanding Nx Console to JetBrains IDEs'",
+          "tags": [
+            "project.json",
+            "nx.json",
+            "nxls",
+            "textDocument/completion",
+            "nx/workspace",
+            "nx graph --file=output.json",
+            "ide-communication.service.ts",
+            "acquireVsCodeApi()",
+            "window.addEventListener",
+            "webview.postMessage"
+          ],
+          "path": "nx/2023-03-02-expanding-nx-console-to-jetbrains-ides.md",
+          "tokens": 3743
+        },
+        {
+          "id": "2023-03-08-nx-15-8-rust-hasher-nx-console-for-intellij-deno-node-and-storybook",
+          "title": "2023-03-08-nx-15-8-rust-hasher-nx-console-for-intellij-deno-node-and-storybook",
+          "description": "title: 'Nx 15.8 — Rust Hasher, Nx Console for IntelliJ, Deno, Node and Storybook'",
+          "tags": [
+            "execSync",
+            "NX_NON_NATIVE_HASHER=true",
+            "@nrwl/deno",
+            "--help",
+            "x-priority",
+            "important",
+            "internal",
+            "schema.json",
+            "x-priority: important",
+            "@nrwl/react:storybook-configuration"
+          ],
+          "path": "nx/2023-03-08-nx-15-8-rust-hasher-nx-console-for-intellij-deno-node-and-storybook.md",
+          "tokens": 3137
+        },
+        {
+          "id": "2023-03-10-rspack-getting-up-to-speed-with-nx",
+          "title": "2023-03-10-rspack-getting-up-to-speed-with-nx",
+          "description": "title: 'Rspack — Getting up to speed with Nx'",
+          "tags": [],
+          "path": "nx/2023-03-10-rspack-getting-up-to-speed-with-nx.md",
+          "tokens": 1111
+        },
+        {
+          "id": "2023-04-19-nx-cloud-3",
+          "title": "2023-04-19-nx-cloud-3",
+          "description": "title: Nx Cloud 3.0 — Faster Cache, More Powerful DTE, Better Ergonomics",
+          "tags": [],
+          "path": "nx/2023-04-19-nx-cloud-3.md",
+          "tokens": 2514
+        },
+        {
+          "id": "2023-05-02-nx-16-is-here",
+          "title": "2023-05-02-nx-16-is-here",
+          "description": "title: 'Nx 16 is Here!'",
+          "tags": [
+            "nx migrate",
+            "package.json",
+            "migrations.json",
+            "Tanstack/query",
+            "interactive",
+            "nx migrate --interactive",
+            "@nrwl",
+            "@nx",
+            "@nrwl/react",
+            "@nx/react"
+          ],
+          "path": "nx/2023-05-02-nx-16-is-here.md",
+          "tokens": 2444
+        },
+        {
+          "id": "2023-05-16-introducing-the-nx-champions-program",
+          "title": "2023-05-16-introducing-the-nx-champions-program",
+          "description": "title: 'Introducing the Nx Champions Program'",
+          "tags": [],
+          "path": "nx/2023-05-16-introducing-the-nx-champions-program.md",
+          "tokens": 484
+        },
+        {
+          "id": "2023-05-26-determine-your-user-location-with-netlify-edge-functions",
+          "title": "2023-05-26-determine-your-user-location-with-netlify-edge-functions",
+          "description": "title: 'Determine your User Location with Netlify Edge Functions'",
+          "tags": [
+            "@nx/netlify",
+            "src/functions/hello/hello.ts",
+            "request.headers",
+            "x-forwarded-for",
+            "node-fetch",
+            "user-location.ts",
+            "project.json",
+            ".netlify",
+            "user-location"
+          ],
+          "path": "nx/2023-05-26-determine-your-user-location-with-netlify-edge-functions.md",
+          "tokens": 1185
+        },
+        {
+          "id": "2023-06-20-introducing-nx-ecosystem-ci",
+          "title": "2023-06-20-introducing-nx-ecosystem-ci",
+          "description": "title: 'Introducing Nx Ecosystem CI'",
+          "tags": [
+            "test",
+            "build",
+            "e2e",
+            "next",
+            "nx migrate next",
+            "#ecosystem-ci",
+            "next\\",
+            "nx-rspack.ts",
+            "utils.ts",
+            "types.ts"
+          ],
+          "path": "nx/2023-06-20-introducing-nx-ecosystem-ci.md",
+          "tokens": 3043
+        },
+        {
+          "id": "2023-06-29-nx-console-gets-lit",
+          "title": "2023-06-29-nx-console-gets-lit",
+          "description": "title: Nx Console gets Lit",
+          "tags": [
+            "tsconfig.json",
+            "index.html",
+            "main.ts",
+            "project.json",
+            "@nx/esbuild",
+            "@vscode/webview-ui-toolkit",
+            "generate-ui-v2:_build",
+            "main.js",
+            "generate-ui-v2:extract-dependencies",
+            ".css"
+          ],
+          "path": "nx/2023-06-29-nx-console-gets-lit.md",
+          "tokens": 10397
+        },
+        {
+          "id": "2023-07-06-nx-16-5-release",
+          "title": "2023-07-06-nx-16-5-release",
+          "description": "title: 'Nx 16.5 Release!!!'",
+          "tags": [
+            "--tag",
+            "nx affected",
+            "nx run-many",
+            "withNx",
+            "next dev",
+            "--turbo",
+            "nx serve webapp --turbo",
+            "npx create-nx-workpace",
+            "--interactive",
+            "nx migrate latest --interactive"
+          ],
+          "path": "nx/2023-07-06-nx-16-5-release.md",
+          "tokens": 3098
+        },
+        {
+          "id": "2023-07-26-evergreen-tooling-more-than-just-codemods",
+          "title": "2023-07-26-evergreen-tooling-more-than-just-codemods",
+          "description": "title: 'Evergreen Tooling — More than Just CodeMods'",
+          "tags": [
+            "nx",
+            "@nx/react",
+            "@nx/webpack",
+            "migrations.json",
+            "version",
+            "description",
+            "factory",
+            "nx migrate latest",
+            "webpack-config-setup",
+            "add-babelUpwardRootMode-flag"
+          ],
+          "path": "nx/2023-07-26-evergreen-tooling-more-than-just-codemods.md",
+          "tokens": 2753
+        },
+        {
+          "id": "2023-08-03-storybook-interaction-tests-in-nx",
+          "title": "2023-08-03-storybook-interaction-tests-in-nx",
+          "description": "title: 'Storybook Interaction Tests in Nx'",
+          "tags": [],
+          "path": "nx/2023-08-03-storybook-interaction-tests-in-nx.md",
+          "tokens": 1514
+        },
+        {
+          "id": "2023-08-10-create-your-own-create-react-app-cli",
+          "title": "2023-08-10-create-your-own-create-react-app-cli",
+          "description": "title: 'Create Your Own create-react-app CLI'",
+          "tags": [
+            "create-nx-workspace",
+            "--preset",
+            "npx create-my-own-app",
+            "my-own-react",
+            "npx create-my-own-react-app",
+            "create-my-own-react-app",
+            "index.ts",
+            "createWorkspace(",
+            ")",
+            "createWorkspace"
+          ],
+          "path": "nx/2023-08-10-create-your-own-create-react-app-cli.md",
+          "tokens": 6373
+        },
+        {
+          "id": "2023-08-15-qwikify-your-dev",
+          "title": "2023-08-15-qwikify-your-dev",
+          "description": "title: Qwikify your Development with Nx",
+          "tags": [
+            "qwik-nx",
+            "routeLoader$",
+            "preset",
+            "npx create-qwik-nx",
+            "create-qwik-nx",
+            "nx",
+            "nx serve todo",
+            "nx build todo",
+            "http://localhost:4200/todo",
+            "apps/todo/src/routes/todo/index.tsx"
+          ],
+          "path": "nx/2023-08-15-qwikify-your-dev.md",
+          "tokens": 5583
+        },
+        {
+          "id": "2023-08-24-step-by-step-guide-to-creating-an-expo-monorepo-with-nx",
+          "title": "2023-08-24-step-by-step-guide-to-creating-an-expo-monorepo-with-nx",
+          "description": "title: 'Step-by-Step Guide to Creating an Expo Monorepo with Nx'",
+          "tags": [
+            "@nx/expo",
+            "nx-expo-monorepo",
+            "apps",
+            "libs",
+            "ui",
+            "carousel",
+            "libs/ui/src/lib",
+            "apps/cats/src/app/App.tsx",
+            "nx start cats",
+            "Cats"
+          ],
+          "path": "nx/2023-08-24-step-by-step-guide-to-creating-an-expo-monorepo-with-nx.md",
+          "tokens": 3214
+        },
+        {
+          "id": "2023-09-06-nx-16-8-release",
+          "title": "2023-09-06-nx-16-8-release",
+          "description": "title: 'Nx 16.8 Release!!!'",
+          "tags": [
+            "apps/",
+            "libs/",
+            "workspaceLayout",
+            "nx.json",
+            "appDir",
+            "libDir",
+            "project.json",
+            "projectNameAndRootFormat",
+            "as-provided",
+            "derived"
+          ],
+          "path": "nx/2023-09-06-nx-16-8-release.md",
+          "tokens": 5019
+        },
+        {
+          "id": "2023-09-18-introducing-playwright-support-for-nx",
+          "title": "2023-09-18-introducing-playwright-support-for-nx",
+          "description": "title: 'Introducing Playwright Support for Nx'",
+          "tags": [
+            "@nx/playwright",
+            "nx-react-playwright",
+            "e2e/src/example.spec.ts",
+            "h1",
+            "Welcome",
+            "src/app/nx-welcome.tsx",
+            "npx nx e2e e2e",
+            "npx nx serve cart",
+            "apps/cart/project.json",
+            "apps/cart/e2e"
+          ],
+          "path": "nx/2023-09-18-introducing-playwright-support-for-nx.md",
+          "tokens": 2567
+        },
+        {
+          "id": "2023-09-25-nx-raises",
+          "title": "2023-09-25-nx-raises",
+          "description": "title: Nx Raises $16M Series A",
+          "tags": [],
+          "path": "nx/2023-09-25-nx-raises.md",
+          "tokens": 251
+        },
+        {
+          "id": "2023-10-13-nx-conf-2023-recap",
+          "title": "2023-10-13-nx-conf-2023-recap",
+          "description": "title: Nx Conf 2023 — Recap",
+          "tags": [
+            "node_modules",
+            "project.json",
+            "projectFilePatterns",
+            "registerProjectTargets",
+            "createNodes",
+            "createDependencies",
+            "projectFilePattern",
+            "CreateNodesFunction",
+            "package.json",
+            "processProjectGraph"
+          ],
+          "path": "nx/2023-10-13-nx-conf-2023-recap.md",
+          "tokens": 8557
+        },
+        {
+          "id": "2023-10-20-nx-17-release",
+          "title": "2023-10-20-nx-17-release",
+          "description": "title: 'Nx 17 has Landed'",
+          "tags": [
+            "nx.json",
+            "@nx/linter",
+            "@nx/eslint",
+            "@nx/vite",
+            "create-nx-workspace",
+            "module-federation.config.ts",
+            ".js",
+            "ModuleFederationConfig",
+            "@nx/webpack",
+            "@nx/react"
+          ],
+          "path": "nx/2023-10-20-nx-17-release.md",
+          "tokens": 3599
+        },
+        {
+          "id": "2023-11-08-state-management",
+          "title": "expo workspace",
+          "description": "title: State Management Nx React Native/Expo Apps with TanStack Query and Redux",
+          "tags": [
+            "App.tsx",
+            "nx start cats",
+            "Press w │ open web",
+            "npx nx serve cats",
+            "lib/queries",
+            "use-cat-fact",
+            "libs/queries",
+            "npx nx test queries-use-cat-fact",
+            "@testing-library/react-native",
+            "fetch"
+          ],
+          "path": "nx/2023-11-08-state-management.md",
+          "tokens": 5674
+        },
+        {
+          "id": "2023-11-21-ai-assistant",
+          "title": "2023-11-21-ai-assistant",
+          "description": "title: Nx Docs AI Assistant",
+          "tags": [
+            "openai.embeddings.create",
+            "openai.chat.completions.create"
+          ],
+          "path": "nx/2023-11-21-ai-assistant.md",
+          "tokens": 6283
+        },
+        {
+          "id": "2023-11-22-unit-testing-expo",
+          "title": "2023-11-22-unit-testing-expo",
+          "description": "title: Unit Testing Expo Apps With Jest",
+          "tags": [
+            "testID",
+            "getByTestId",
+            "NativeModule",
+            "useQuery",
+            "@tanstack/react-query",
+            "@react-navigation",
+            "useNavigation",
+            "useRoute",
+            "@react-nativgation/native",
+            "udid"
+          ],
+          "path": "nx/2023-11-22-unit-testing-expo.md",
+          "tokens": 3218
+        },
+        {
+          "id": "2023-12-20-nx-17-2-release",
+          "title": "2023-12-20-nx-17-2-release",
+          "description": "title: Nx 17.2 Update",
+          "tags": [
+            "nx",
+            "nx init",
+            "package.json",
+            "--devRemotes",
+            "--parallel={number}",
+            "--dynamic",
+            "@nx/react/mf",
+            "nx release",
+            "--projects",
+            "--interactive"
+          ],
+          "path": "nx/2023-12-20-nx-17-2-release.md",
+          "tokens": 2951
+        },
+        {
+          "id": "2023-12-28-highlights-2023",
+          "title": "2023-12-28-highlights-2023",
+          "description": "title: Nx — Highlights of 2023",
+          "tags": [
+            "@nx/vite",
+            "package.json",
+            "additionalEntryPoints",
+            "generateExportsField",
+            "@nx/js",
+            "@nx/rollup",
+            "format",
+            "create-nx-workspace",
+            "@nx/vue",
+            "@nx/angular"
+          ],
+          "path": "nx/2023-12-28-highlights-2023.md",
+          "tokens": 7917
+        },
+        {
+          "id": "2024-01-24-monorepos-the-benefits-challenges-and-importance-of-tooling-support",
+          "title": "2024-01-24-monorepos-the-benefits-challenges-and-importance-of-tooling-support",
+          "description": "title: 'Monorepos: the Benefits, Challenges, and Importance of Tooling Support '",
+          "tags": [],
+          "path": "nx/2024-01-24-monorepos-the-benefits-challenges-and-importance-of-tooling-support.md",
+          "tokens": 213
+        },
+        {
+          "id": "2024-02-05-nx-18-project-crystal",
+          "title": "2024-02-05-nx-18-project-crystal",
+          "description": "title: What if Nx Plugins Were More Like VSCode Extensions",
+          "tags": [
+            "nx",
+            "nx.json",
+            "nx build <your project>",
+            "run-many -t build test",
+            "build",
+            "test",
+            "package.json",
+            "create-nx-workspace",
+            "project.json",
+            "plugins"
+          ],
+          "path": "nx/2024-02-05-nx-18-project-crystal.md",
+          "tokens": 2507
+        },
+        {
+          "id": "2024-02-06-nuxt-js-support-in-nx",
+          "title": "2024-02-06-nuxt-js-support-in-nx",
+          "description": "title: Introducing @nx/nuxt Enhanced Nuxt.js Support in Nx",
+          "tags": [
+            "@nx/nuxt",
+            "nx init",
+            "nx.json",
+            "nuxt.config.ts",
+            "serve",
+            "build",
+            "nuxt",
+            "--web",
+            "nx show project"
+          ],
+          "path": "nx/2024-02-06-nuxt-js-support-in-nx.md",
+          "tokens": 2725
+        },
+        {
+          "id": "2024-02-07-fast-effortless-ci",
+          "title": "2024-02-07-fast-effortless-ci",
+          "description": "title: Fast, Effortless CI",
+          "tags": [
+            "linux-medium-js",
+            "e2e-ci",
+            "--no-agents"
+          ],
+          "path": "nx/2024-02-07-fast-effortless-ci.md",
+          "tokens": 2046
+        },
+        {
+          "id": "2024-02-09-versioning-and-releasing-packages",
+          "title": "2024-02-09-versioning-and-releasing-packages",
+          "description": "title: Versioning and Releasing Packages in a Monorepo",
+          "tags": [
+            "@tuskdesign/forms",
+            "@tuskdesign/buttons",
+            "npx nx@latest init",
+            "@nx/js",
+            "-w",
+            "--dry-run",
+            "--first-release",
+            "CHANGELOG.md",
+            "package.json",
+            "--verbose"
+          ],
+          "path": "nx/2024-02-09-versioning-and-releasing-packages.md",
+          "tokens": 3380
+        },
+        {
+          "id": "2024-02-15-launch-week-recap",
+          "title": "2024-02-15-launch-week-recap",
+          "description": "title: Launch Nx Week Recap",
+          "tags": [],
+          "path": "nx/2024-02-15-launch-week-recap.md",
+          "tokens": 2338
+        },
+        {
+          "id": "2024-03-11-nx-agents-walkthrough-effortlessly-fast-ci-built-for-monorepos",
+          "title": "2024-03-11-nx-agents-walkthrough-effortlessly-fast-ci-built-for-monorepos",
+          "description": "title: 'Nx Agents Walkthrough: Effortlessly Fast CI Built for Monorepos'",
+          "tags": [],
+          "path": "nx/2024-03-11-nx-agents-walkthrough-effortlessly-fast-ci-built-for-monorepos.md",
+          "tokens": 201
+        },
+        {
+          "id": "2024-03-20-why-speed-matters",
+          "title": "2024-03-20-why-speed-matters",
+          "description": "title: Monorepos - Why Speed Matters",
+          "tags": [
+            ".nx/cache",
+            "nx run project:target",
+            "@nx/playwright"
+          ],
+          "path": "nx/2024-03-20-why-speed-matters.md",
+          "tokens": 2187
+        },
+        {
+          "id": "2024-03-21-reliable-ci",
+          "title": "2024-03-21-reliable-ci",
+          "description": "title: Reliable CI. A new execution model fixing both flakiness and slowness",
+          "tags": [
+            "npm install"
+          ],
+          "path": "nx/2024-03-21-reliable-ci.md",
+          "tokens": 3288
+        },
+        {
+          "id": "2024-04-17-making-the-argument-for-monorepos",
+          "title": "2024-04-17-making-the-argument-for-monorepos",
+          "description": "title: 'Making the Argument for Monorepos'",
+          "tags": [],
+          "path": "nx/2024-04-17-making-the-argument-for-monorepos.md",
+          "tokens": 234
+        },
+        {
+          "id": "2024-04-19-manage-your-gradle",
+          "title": "macos/linux",
+          "description": "title: Manage Your Gradle Project using Nx",
+          "tags": [
+            "@nx/gradle",
+            "npx nx@latest init",
+            "./gradlew :app:build",
+            "gradlew.bat :app:build",
+            "./nx build app",
+            "nx.bat build app",
+            "nx affected -t build",
+            "nx show project my-project --web",
+            "nx build app",
+            "gradle.build"
+          ],
+          "path": "nx/2024-04-19-manage-your-gradle.md",
+          "tokens": 2026
+        },
+        {
+          "id": "2024-05-08-nx-19-release",
+          "title": "2024-05-08-nx-19-release",
+          "description": "title: Nx 19.0 Release!!",
+          "tags": [
+            "NX_",
+            "NX_PUBLIC_",
+            "E2E (CI)",
+            "project.json",
+            "e2e-ci"
+          ],
+          "path": "nx/2024-05-08-nx-19-release.md",
+          "tokens": 3667
+        },
+        {
+          "id": "2024-06-18-podcast-episode-1-hicham-el-hammouchi",
+          "title": "2024-06-18-podcast-episode-1-hicham-el-hammouchi",
+          "description": "title: 'Nx Enterprise Podcast Episode 1: Hicham El Hammouchi'",
+          "tags": [],
+          "path": "nx/2024-06-18-podcast-episode-1-hicham-el-hammouchi.md",
+          "tokens": 473
+        },
+        {
+          "id": "2024-06-26-monorepos-and-ci-can-be-a-mess-heres-how-nx-and-nx-cloud-fixed-it",
+          "title": "2024-06-26-monorepos-and-ci-can-be-a-mess-heres-how-nx-and-nx-cloud-fixed-it",
+          "description": "title: \"Monorepos and CI can be a Mess - Here's How Nx and Nx Cloud Fixed It\"",
+          "tags": [],
+          "path": "nx/2024-06-26-monorepos-and-ci-can-be-a-mess-heres-how-nx-and-nx-cloud-fixed-it.md",
+          "tokens": 260
+        },
+        {
+          "id": "2024-07-19-podcast-episode-2-tine-kondo",
+          "title": "2024-07-19-podcast-episode-2-tine-kondo",
+          "description": "title: 'Nx Enterprise Podcast Episode 2: Tine Kondo'",
+          "tags": [],
+          "path": "nx/2024-07-19-podcast-episode-2-tine-kondo.md",
+          "tokens": 403
+        },
+        {
+          "id": "2024-07-29-explain-with-ai",
+          "title": "2024-07-29-explain-with-ai",
+          "description": "title: Introducing Explain with AI",
+          "tags": [],
+          "path": "nx/2024-07-29-explain-with-ai.md",
+          "tokens": 855
+        },
+        {
+          "id": "2024-08-01-nx-19-5-update",
+          "title": "2024-08-01-nx-19-5-update",
+          "description": "title: 'Nx 19.5 is here! Stackblitz, Bun, Incremental Builds for Vite, Gradle Test Atomizer'",
+          "tags": [
+            "targetDefaults",
+            "externalNodes",
+            "pnpm",
+            "project.json",
+            "Nx Atomizer",
+            "@nx/playwright",
+            "@nx/cypress",
+            "e2e-ci--src/example.spec.ts",
+            "e2e-ci--src/test.spec.ts",
+            "build"
+          ],
+          "path": "nx/2024-08-01-nx-19-5-update.md",
+          "tokens": 4923
+        },
+        {
+          "id": "2024-08-14-podcast-episode-3-ahmed-elsakaan",
+          "title": "2024-08-14-podcast-episode-3-ahmed-elsakaan",
+          "description": "title: 'Nx Enterprise Podcast Episode 3: Ahmed Elsakaan'",
+          "tags": [],
+          "path": "nx/2024-08-14-podcast-episode-3-ahmed-elsakaan.md",
+          "tokens": 336
+        },
+        {
+          "id": "2024-08-21-podcast-epsiode-4-cvent",
+          "title": "2024-08-21-podcast-epsiode-4-cvent",
+          "description": "title: 'Nx Enterprise Podcast Episode 4: Cvent Platform Architecture Panel'",
+          "tags": [],
+          "path": "nx/2024-08-21-podcast-epsiode-4-cvent.md",
+          "tokens": 341
+        },
+        {
+          "id": "2024-08-28-nxcloud-improved-ci-log",
+          "title": "2024-08-28-nxcloud-improved-ci-log",
+          "description": "title: New Table Log View on CI with Nx Cloud",
+          "tags": [],
+          "path": "nx/2024-08-28-nxcloud-improved-ci-log.md",
+          "tokens": 700
+        },
+        {
+          "id": "2024-08-29-nx-live-with-trunk",
+          "title": "2024-08-29-nx-live-with-trunk",
+          "description": "title: How to Fast-Track Your PRs with Trunk.io | Nx Live",
+          "tags": [],
+          "path": "nx/2024-08-29-nx-live-with-trunk.md",
+          "tokens": 199
+        },
+        {
+          "id": "2024-08-30-announcing-your-monorepo-world-speakers",
+          "title": "2024-08-30-announcing-your-monorepo-world-speakers",
+          "description": "title: Announcing your Monorepo World Speakers",
+          "tags": [],
+          "path": "nx/2024-08-30-announcing-your-monorepo-world-speakers.md",
+          "tokens": 616
+        },
+        {
+          "id": "2024-09-05-nx-live-introduction-to-nx",
+          "title": "2024-09-05-nx-live-introduction-to-nx",
+          "description": "title: Introduction to Nx! | Nx Live",
+          "tags": [],
+          "path": "nx/2024-09-05-nx-live-introduction-to-nx.md",
+          "tokens": 189
+        },
+        {
+          "id": "2024-09-10-personal-access-tokens",
+          "title": "2024-09-10-personal-access-tokens",
+          "description": "title: Better security with Personal Access Tokens",
+          "tags": [
+            "nx.json",
+            "nxCloudId",
+            "npx nx-cloud convert-to-nx-cloud-id",
+            "nxCloudAccessToken",
+            "npx nx login",
+            "NX_CLOUD_ACCESS_TOKEN"
+          ],
+          "path": "nx/2024-09-10-personal-access-tokens.md",
+          "tokens": 1511
+        },
+        {
+          "id": "2024-09-12-next-gen-module-federation-deployments",
+          "title": "2024-09-12-next-gen-module-federation-deployments",
+          "description": "title: Next-Gen Module Federation Deployments with Nx and Zephyr Cloud",
+          "tags": [
+            "@nx/react",
+            "host",
+            "remote",
+            "shell",
+            "build",
+            "serve",
+            "test",
+            "lint",
+            "--bundler=rspack",
+            "shell/rspack.config.ts"
+          ],
+          "path": "nx/2024-09-12-next-gen-module-federation-deployments.md",
+          "tokens": 4600
+        },
+        {
+          "id": "2024-09-16-announcing-your-monorepo-world-speakers-pt-2",
+          "title": "2024-09-16-announcing-your-monorepo-world-speakers-pt-2",
+          "description": "title: Announcing your Monorepo World Speakers Part 2",
+          "tags": [],
+          "path": "nx/2024-09-16-announcing-your-monorepo-world-speakers-pt-2.md",
+          "tokens": 771
+        },
+        {
+          "id": "2024-09-18-podcast-episode-5-ruben-casas-postman",
+          "title": "2024-09-18-podcast-episode-5-ruben-casas-postman",
+          "description": "title: '\"The Pit of Success\" w/ Ruben Casas of Postman | Nx Enterprise Podcast Episode 5'",
+          "tags": [],
+          "path": "nx/2024-09-18-podcast-episode-5-ruben-casas-postman.md",
+          "tokens": 311
+        },
+        {
+          "id": "2024-09-20-nx-19-8",
+          "title": "2024-09-20-nx-19-8",
+          "description": "title: Nx 19.8 Update!!",
+          "tags": [
+            "nx import",
+            "targetDefaults",
+            "nx.json",
+            "project.json",
+            "angular.json",
+            "nx init",
+            "convert-to-inferred",
+            "infer-targets",
+            "--project",
+            "npx create-nx-workspace"
+          ],
+          "path": "nx/2024-09-20-nx-19-8.md",
+          "tokens": 1742
+        },
+        {
+          "id": "2024-09-25-introducing-nx-powerpack",
+          "title": "CI configuration",
+          "description": "title: Introducing Nx Powerpack",
+          "tags": [
+            "nx.json",
+            "nx sync",
+            "CODEOWNERS",
+            "@nx/conformance",
+            "package.json",
+            "@nx/owners",
+            "nx conformance"
+          ],
+          "path": "nx/2024-09-25-introducing-nx-powerpack.md",
+          "tokens": 2079
+        },
+        {
+          "id": "2024-10-03-nx-20-release",
+          "title": "In an Nx Workspace (npx create-nx-workspace)",
+          "description": "title: Announcing Nx 20",
+          "tags": [
+            "nx import",
+            "@nx",
+            "@nrwl",
+            "create-nx-workspace --preset=ts",
+            "build",
+            "typecheck",
+            "nx sync",
+            "tsconfig.json",
+            "nx sync:check",
+            "workspace"
+          ],
+          "path": "nx/2024-10-03-nx-20-release.md",
+          "tokens": 3007
+        },
+        {
+          "id": "2024-10-25-sports-retailer-success",
+          "title": "2024-10-25-sports-retailer-success",
+          "description": "title: Improve your architecture and CI pipeline times with Nx projects",
+          "tags": [
+            "date-time-utils"
+          ],
+          "path": "nx/2024-10-25-sports-retailer-success.md",
+          "tokens": 1741
+        },
+        {
+          "id": "2024-10-29-nx-import",
+          "title": "2024-10-29-nx-import",
+          "description": "title: Import External Projects to Your Nx Monorepo With `nx import`",
+          "tags": [
+            "nx import",
+            "git",
+            "promise-pool",
+            "/my-side-project/projects/promise-pool",
+            "my-side-project"
+          ],
+          "path": "nx/2024-10-29-nx-import.md",
+          "tokens": 1328
+        },
+        {
+          "id": "2024-11-14-handling-cors",
+          "title": "2024-11-14-handling-cors",
+          "description": "title: Handling CORS In Your Workspace",
+          "tags": [
+            "http://site1.com",
+            "http://site2.com",
+            "Access-Control-Allow-Origin",
+            "localhost:4200",
+            "@nx/express",
+            "cors",
+            "use",
+            "cors()",
+            "proxy.conf.json",
+            "project.json"
+          ],
+          "path": "nx/2024-11-14-handling-cors.md",
+          "tokens": 1555
+        },
+        {
+          "id": "2024-11-19-ci-affected-graph",
+          "title": "2024-11-19-ci-affected-graph",
+          "description": "title: See your affected project graph in Nx Cloud",
+          "tags": [
+            "affected"
+          ],
+          "path": "nx/2024-11-19-ci-affected-graph.md",
+          "tokens": 905
+        },
+        {
+          "id": "2024-11-30-advent-of-code-crystal",
+          "title": "2024-11-30-advent-of-code-crystal",
+          "description": "title: Advent of Code Gets The Crystal Treatment!",
+          "tags": [
+            "Advent of Code Starter Repo",
+            "2.0.0",
+            "create-ts-aoc-starter",
+            "ts-aoc-starter",
+            "dynamic-tasks",
+            "plugins",
+            "nx.json",
+            "a.data.sample.txt",
+            "a.data.txt",
+            "a.ts"
+          ],
+          "path": "nx/2024-11-30-advent-of-code-crystal.md",
+          "tokens": 1334
+        },
+        {
+          "id": "2024-12-03-define-the-relationship-with-monorepos",
+          "title": "2024-12-03-define-the-relationship-with-monorepos",
+          "description": "title: Define the relationship with monorepos",
+          "tags": [
+            "api/v1/contact/create",
+            "contactName",
+            "contact/init",
+            "fullName"
+          ],
+          "path": "nx/2024-12-03-define-the-relationship-with-monorepos.md",
+          "tokens": 1690
+        },
+        {
+          "id": "2024-12-06-nx-cloud-pipelines-in-nx-console",
+          "title": "2024-12-06-nx-cloud-pipelines-in-nx-console",
+          "description": "title: Nx Cloud Pipelines Come To Nx Console",
+          "tags": [
+            "nx",
+            "nx-console"
+          ],
+          "path": "nx/2024-12-06-nx-cloud-pipelines-in-nx-console.md",
+          "tokens": 608
+        },
+        {
+          "id": "2024-12-10-tailoring-nx-for-your-organization",
+          "title": "2024-12-10-tailoring-nx-for-your-organization",
+          "description": "title: Tailoring Nx for Your Organization",
+          "tags": [
+            "nx add",
+            "@nx/devkit",
+            "@nx/plugin",
+            "nx release",
+            "create-org-workspace",
+            "create-nx-workspace:"
+          ],
+          "path": "nx/2024-12-10-tailoring-nx-for-your-organization.md",
+          "tokens": 2590
+        },
+        {
+          "id": "2024-12-16-angular-state-management-2025",
+          "title": "2024-12-16-angular-state-management-2025",
+          "description": "title: Angular State Management for 2025",
+          "tags": [
+            "signal",
+            "effect",
+            "signalState",
+            "patchState",
+            "items",
+            "filter",
+            "map",
+            "signalStore",
+            "withState",
+            "withMethods"
+          ],
+          "path": "nx/2024-12-16-angular-state-management-2025.md",
+          "tokens": 2064
+        },
+        {
+          "id": "2024-12-18-dynamic-targets-with-inference",
+          "title": "2024-12-18-dynamic-targets-with-inference",
+          "description": "title: 'Avoiding Port Conflicts with Multiple Storybook Instances'",
+          "tags": [
+            "test-storybook",
+            "tools/storybook.ts",
+            "createNodesV2",
+            ".storybook/main.{js,ts,mjs,mts,cjs,cts}",
+            "configFiles",
+            "nx.json",
+            ".nx/workspace-data/d/daemon.log",
+            "tsconfig.json",
+            "--port 3000",
+            "index"
+          ],
+          "path": "nx/2024-12-18-dynamic-targets-with-inference.md",
+          "tokens": 2837
+        },
+        {
+          "id": "2024-12-22-nx-highlights-2024",
+          "title": "2024-12-22-nx-highlights-2024",
+          "description": "title: 'Nx Highlights 2024'",
+          "tags": [
+            "@nx/vite",
+            "vite.config.ts",
+            "@nx/js",
+            "nx build myproject",
+            "nx import",
+            "@nx/gradle",
+            "nx show project my-project --web"
+          ],
+          "path": "nx/2024-12-22-nx-highlights-2024.md",
+          "tokens": 5453
+        },
+        {
+          "id": "2025-01-06-nx-update-20-3",
+          "title": "2025-01-06-nx-update-20-3",
+          "description": "title: 'Nx Update: 20.3!'",
+          "tags": [
+            "path",
+            "tsconfig.base.json",
+            "npm",
+            "yarn",
+            "pnpm",
+            "bun",
+            "references",
+            "tsconfig.json",
+            "workspaces",
+            "package.json"
+          ],
+          "path": "nx/2025-01-06-nx-update-20-3.md",
+          "tokens": 2927
+        },
+        {
+          "id": "2025-01-09-who-gave-js-a-build-step",
+          "title": "2025-01-09-who-gave-js-a-build-step",
+          "description": "title: 'Who Gave JavaScript a Build Step?!?'",
+          "tags": [
+            "node_modules",
+            "import",
+            "require",
+            "script",
+            "main.js",
+            "index.html",
+            "import()",
+            "react-router",
+            "main-[hash].js",
+            "\"type\": \"module\""
+          ],
+          "path": "nx/2025-01-09-who-gave-js-a-build-step.md",
+          "tokens": 3621
+        },
+        {
+          "id": "2025-01-22-nx-cloud-scale-your-ci-and-team-with-ease",
+          "title": "2025-01-22-nx-cloud-scale-your-ci-and-team-with-ease",
+          "description": "title: 'Nx Cloud: Scale Your CI and Team with Ease'",
+          "tags": [],
+          "path": "nx/2025-01-22-nx-cloud-scale-your-ci-and-team-with-ease.md",
+          "tokens": 233
+        },
+        {
+          "id": "2025-01-27-project-references",
+          "title": "2025-01-27-project-references",
+          "description": "title: Everything You Need to Know About TypeScript Project References",
+          "tags": [
+            "is-odd",
+            "tsc",
+            "is-even",
+            "paths",
+            "tsconfig.json",
+            "extend",
+            "references",
+            "is-even/tsconfig.json",
+            "workspaces",
+            "-b"
+          ],
+          "path": "nx/2025-01-27-project-references.md",
+          "tokens": 2194
+        },
+        {
+          "id": "2025-01-28-managing-ts-pkgs-in-monorepos",
+          "title": "2025-01-28-managing-ts-pkgs-in-monorepos",
+          "description": "title: 'Managing TypeScript Packages in Monorepos'",
+          "tags": [
+            "@tsmono/mypackage",
+            "tsc",
+            "tsconfig.base.json",
+            "lib-a",
+            "package.json",
+            "@ts-monorepo-linking/lib-a",
+            "references",
+            "tsconfig.json",
+            "composite: true",
+            "compilerOptions"
+          ],
+          "path": "nx/2025-01-28-managing-ts-pkgs-in-monorepos.md",
+          "tokens": 7867
+        },
+        {
+          "id": "2025-01-29-new-nx-experience",
+          "title": "2025-01-29-new-nx-experience",
+          "description": "title: 'A New Nx Experience for TypeScript Monorepos and Beyond'",
+          "tags": [
+            "--workspaces",
+            "--preset=ts",
+            "nx init",
+            "nx.json",
+            "nx",
+            "package.json",
+            "@nx/js",
+            "--pm",
+            "tsconfig",
+            "tsc"
+          ],
+          "path": "nx/2025-01-29-new-nx-experience.md",
+          "tokens": 5552
+        },
+        {
+          "id": "2025-01-31-over-the-air-updates-with-zephyr",
+          "title": "2025-01-31-over-the-air-updates-with-zephyr",
+          "description": "title: 'Over-The-Air Updates for Super Apps with React Native, Re.Pack and Zephyr Cloud'",
+          "tags": [
+            "create-zephyr-apps",
+            "pnpm nx graph"
+          ],
+          "path": "nx/2025-01-31-over-the-air-updates-with-zephyr.md",
+          "tokens": 2526
+        },
+        {
+          "id": "2025-02-03-workspace-structure",
+          "title": "2025-02-03-workspace-structure",
+          "description": "title: 'The virtuous cycle of workspace structure'",
+          "tags": [
+            "util",
+            "components",
+            "shared",
+            "scope-type-",
+            "products-feature-details",
+            "checkout-feature-cart",
+            "checkout-data-access-taxes",
+            "shared-ui-forms",
+            "shared-util-dates",
+            "@org/products/feature-details"
+          ],
+          "path": "nx/2025-02-03-workspace-structure.md",
+          "tokens": 4523
+        },
+        {
+          "id": "2025-02-06-hetzner-cloud-success-story",
+          "title": "2025-02-06-hetzner-cloud-success-story",
+          "description": "title: 'Hetzner Cloud gets More Features to Market with Faster, More Reliable CI'",
+          "tags": [],
+          "path": "nx/2025-02-06-hetzner-cloud-success-story.md",
+          "tokens": 1999
+        },
+        {
+          "id": "2025-02-12-nx-agents-changes-the-math",
+          "title": "2025-02-12-nx-agents-changes-the-math",
+          "description": "title: 'Vattenfall changes the math on concurrent PRs with Nx Agents'",
+          "tags": [],
+          "path": "nx/2025-02-12-nx-agents-changes-the-math.md",
+          "tokens": 1850
+        },
+        {
+          "id": "2025-02-17-monorepos-are-ai-future-proof",
+          "title": "2025-02-17-monorepos-are-ai-future-proof",
+          "description": "title: 'Nx Just Made Your LLM Way Smarter'",
+          "tags": [
+            "src/app/app.tsx",
+            "@aishop/feat-create-order",
+            "packages/products",
+            "nx init"
+          ],
+          "path": "nx/2025-02-17-monorepos-are-ai-future-proof.md",
+          "tokens": 2988
+        },
+        {
+          "id": "2025-02-21-using-apollo-graphql-with-react-in-an-nx-workspace",
+          "title": "2025-02-21-using-apollo-graphql-with-react-in-an-nx-workspace",
+          "description": "title: 'Using Apollo GraphQL in an Nx Workspace'",
+          "tags": [
+            "schema.graphql",
+            "models-graphql",
+            "codegen.ts",
+            "project.json",
+            "codegen",
+            "__generated__",
+            "index.ts",
+            "tsconfig.app.json",
+            "build",
+            "api"
+          ],
+          "path": "nx/2025-02-21-using-apollo-graphql-with-react-in-an-nx-workspace.md",
+          "tokens": 5874
+        },
+        {
+          "id": "2025-02-26-react-development-for-2025",
+          "title": "2025-02-26-react-development-for-2025",
+          "description": "title: \"React Development for 2025\"",
+          "tags": [],
+          "path": "nx/2025-02-26-react-development-for-2025.md",
+          "tokens": 330
+        },
+        {
+          "id": "2025-03-06-making-cursor-smarter",
+          "title": "2025-03-06-making-cursor-smarter",
+          "description": "title: 'Making Cursor Smarter with an MCP Server For Nx Monorepos'",
+          "tags": [
+            ".cursor/mcp.json",
+            ".gitignore",
+            "nx.configureMcpServer",
+            "Ctrl/Cmd",
+            "Shift",
+            "P",
+            "Cursor Settings -> MCP",
+            "nx_workspace",
+            "nx_project_details",
+            "nx_docs"
+          ],
+          "path": "nx/2025-03-06-making-cursor-smarter.md",
+          "tokens": 2681
+        },
+        {
+          "id": "2025-03-07-nx-update-20-5",
+          "title": "2025-03-07-nx-update-20-5",
+          "description": "title: 'Nx Update: 20.5'",
+          "tags": [
+            "lint",
+            "@org/foo",
+            "nx lint foo",
+            "nx build @org/foo",
+            "name",
+            "package.json",
+            "nx",
+            "@nx/js",
+            "build",
+            "typecheck"
+          ],
+          "path": "nx/2025-03-07-nx-update-20-5.md",
+          "tokens": 1768
+        },
+        {
+          "id": "2025-03-17-modern-angular-testing-with-nx",
+          "title": "...",
+          "description": "title: 'Modern Angular Testing with Nx'",
+          "tags": [
+            "--e2eTestRunner=cypress",
+            "playwright test",
+            "@nx/playwright",
+            "nx.json",
+            "e2e",
+            "README.md",
+            "dist/.playwright",
+            "dist",
+            "nx show project",
+            "my-app-e2e"
+          ],
+          "path": "nx/2025-03-17-modern-angular-testing-with-nx.md",
+          "tokens": 4364
+        },
+        {
+          "id": "2025-03-18-architecting-angular-applications",
+          "title": "2025-03-18-architecting-angular-applications",
+          "description": "title: 'Angular Architecture Guide To Building Maintainable Applications at Scale'",
+          "tags": [
+            "--preset=angular-standalone",
+            "src",
+            "project.json",
+            "--integrated",
+            "nx init",
+            "feat-*",
+            "ui-*",
+            "tsconfig.base.json",
+            "products",
+            "data-access"
+          ],
+          "path": "nx/2025-03-18-architecting-angular-applications.md",
+          "tokens": 6922
+        },
+        {
+          "id": "2025-03-19-are-monorepos-the-answer-to-better-aiassisted-development",
+          "title": "2025-03-19-are-monorepos-the-answer-to-better-aiassisted-development",
+          "description": "title: 'Are Monorepos the Answer to Better AI-Assisted Development?'",
+          "tags": [],
+          "path": "nx/2025-03-19-are-monorepos-the-answer-to-better-aiassisted-development.md",
+          "tokens": 318
+        },
+        {
+          "id": "2025-03-19-using-angular-with-rspack",
+          "title": "2025-03-19-using-angular-with-rspack",
+          "description": "title: 'Using Rspack with Angular'",
+          "tags": [
+            "builders",
+            "ng build",
+            "nx build",
+            "AngularIvyPlugin",
+            "@nx/angular",
+            "convert-to-rspack",
+            "nx migrate latest",
+            "nx g @nx/angular:convert-to-rspack",
+            "npx nx@latest init",
+            "npx nx g convert-to-rspack"
+          ],
+          "path": "nx/2025-03-19-using-angular-with-rspack.md",
+          "tokens": 3273
+        },
+        {
+          "id": "2025-03-20-enterprise-angular-book",
+          "title": "2025-03-20-enterprise-angular-book",
+          "description": "title: 'Enterprise Angular Monorepo Patterns'",
+          "tags": [],
+          "path": "nx/2025-03-20-enterprise-angular-book.md",
+          "tokens": 363
+        },
+        {
+          "id": "2025-03-31-custom-runners-and-self-hosted-caching",
+          "title": "2025-03-31-custom-runners-and-self-hosted-caching",
+          "description": "title: 'Custom Task Runners and Self-Hosted Caching Changes'",
+          "tags": [],
+          "path": "nx/2025-03-31-custom-runners-and-self-hosted-caching.md",
+          "tokens": 1593
+        },
+        {
+          "id": "2025-04-10-exploring-nx-console-with-mcp",
+          "title": "2025-04-10-exploring-nx-console-with-mcp",
+          "description": "title: 'Vibe Exploring a Codebase with LLMs'",
+          "tags": [
+            ".vsix",
+            "nx.configureMcpServer",
+            "Ctrl/Cmd + Shift + P",
+            "nx_workspace",
+            "project.json",
+            "apps",
+            "build",
+            "package",
+            "nx_project_details",
+            "dependsOn"
+          ],
+          "path": "nx/2025-04-10-exploring-nx-console-with-mcp.md",
+          "tokens": 1806
+        },
+        {
+          "id": "2025-04-14-scaffold-angular-rspack-applications",
+          "title": "2025-04-14-scaffold-angular-rspack-applications",
+          "description": "title: 'Scaffolding New Apps With Angular Rspack'",
+          "tags": [
+            "20.8.0",
+            "@nx/angular:convert-to-rspack"
+          ],
+          "path": "nx/2025-04-14-scaffold-angular-rspack-applications.md",
+          "tokens": 2344
+        },
+        {
+          "id": "2025-04-15-nx-mcp-vscode-copilot",
+          "title": "2025-04-15-nx-mcp-vscode-copilot",
+          "description": "title: 'Nx MCP Now Available for VS Code Copilot'",
+          "tags": [
+            ".vscode/mcp.json",
+            "nx.configureMcpServer",
+            "Ctrl/Cmd + Shift + P",
+            "nx_workspace",
+            "nx_visualize_graph",
+            "nx_generators",
+            "nx.json"
+          ],
+          "path": "nx/2025-04-15-nx-mcp-vscode-copilot.md",
+          "tokens": 1867
+        },
+        {
+          "id": "2025-04-17-nx-and-ai-why-they-work-together",
+          "title": "2025-04-17-nx-and-ai-why-they-work-together",
+          "description": "title: 'Nx and AI - Why They Work so Well Together'",
+          "tags": [],
+          "path": "nx/2025-04-17-nx-and-ai-why-they-work-together.md",
+          "tokens": 3743
+        },
+        {
+          "id": "2025-04-21-nx-cloud-update-april-2025",
+          "title": "Create five agents using the `linux-medium-js` launch template and five agents using `linux-large-js`",
+          "description": "title: 'Nx Cloud Update - Assignment rules come out of beta and more!'",
+          "tags": [],
+          "path": "nx/2025-04-21-nx-cloud-update-april-2025.md",
+          "tokens": 1394
+        },
+        {
+          "id": "2025-04-23-test-splitting-techniques",
+          "title": "2025-04-23-test-splitting-techniques",
+          "description": "title: '3 Test Splitting Techniques that Cut E2E Times up to 90%'",
+          "tags": [
+            "--shard",
+            "nx-e2e",
+            "test-ci",
+            "e2e-ci",
+            "e2e-ci--path/to/test/file",
+            "test-ci--path/to/test/file",
+            "{ciTargetName}--{path/to/test/file}",
+            "products",
+            "orders",
+            "checkout"
+          ],
+          "path": "nx/2025-04-23-test-splitting-techniques.md",
+          "tokens": 2305
+        },
+        {
+          "id": "2025-04-30-are-monorepos-the-answer-to-better-aiassisted-development",
+          "title": "2025-04-30-are-monorepos-the-answer-to-better-aiassisted-development",
+          "description": "title: 'Are Monorepos the Answer to Better AI-Assisted Development?'",
+          "tags": [],
+          "path": "nx/2025-04-30-are-monorepos-the-answer-to-better-aiassisted-development.md",
+          "tokens": 321
+        },
+        {
+          "id": "2025-05-01-nx-mcp-ci-fixes",
+          "title": "2025-05-01-nx-mcp-ci-fixes",
+          "description": "title: 'Save Time: Connecting Your Editor, CI and LLMs'",
+          "tags": [],
+          "path": "nx/2025-05-01-nx-mcp-ci-fixes.md",
+          "tokens": 2112
+        },
+        {
+          "id": "2025-05-05-nx-21-release",
+          "title": "2025-05-05-nx-21-release",
+          "description": "title: 'Nx 21 Release: Continuous tasks and Terminal UI lead the way'",
+          "tags": [
+            "@nx/rspack",
+            "dev",
+            "frontend",
+            "serve",
+            "api",
+            "frontend:dev",
+            "api:serve",
+            "continuous: true",
+            "nx serve frontend",
+            "backend"
+          ],
+          "path": "nx/2025-05-05-nx-21-release.md",
+          "tokens": 3352
+        },
+        {
+          "id": "2025-05-07-migrate-ui",
+          "title": "Check the latest version of Nx and update package.json",
+          "description": "title: 'A New UI for Nx Migration'",
+          "tags": [
+            "migrate",
+            "package.json",
+            "nx migrate",
+            "migrations.json",
+            "Accept",
+            "Undo"
+          ],
+          "path": "nx/2025-05-07-migrate-ui.md",
+          "tokens": 1699
+        },
+        {
+          "id": "2025-05-08-improved-module-federation",
+          "title": "2025-05-08-improved-module-federation",
+          "description": "title: 'New and Improved Module Federation Experience with Nx'",
+          "tags": [
+            "rspack.ModuleFederationPlugin",
+            "plugins: []",
+            "rspack.config",
+            "withModuleFederation",
+            "module-federation-dev-server",
+            "@nx/rspack/plugin",
+            "rspack build",
+            "rspack serve",
+            "nx serve shell --devRemotes=remote1",
+            "shell"
+          ],
+          "path": "nx/2025-05-08-improved-module-federation.md",
+          "tokens": 1641
+        },
+        {
+          "id": "2025-05-09-continuous-tasks",
+          "title": "2025-05-09-continuous-tasks",
+          "description": "title: 'Continuous tasks are a huge DX improvement'",
+          "tags": [
+            "build",
+            "nx.json",
+            "targetDefaults",
+            "^",
+            "dev",
+            "frontend",
+            "serve",
+            "api",
+            "frontend:dev",
+            "api:serve"
+          ],
+          "path": "nx/2025-05-09-continuous-tasks.md",
+          "tokens": 2431
+        },
+        {
+          "id": "2025-05-09-terminal-ui",
+          "title": "2025-05-09-terminal-ui",
+          "description": "title: 'A New UI For The Humble Terminal'",
+          "tags": [
+            "nx run-many",
+            "btop",
+            "ratatui",
+            "h",
+            "j",
+            "Space",
+            "Tab",
+            "/",
+            "1",
+            "2"
+          ],
+          "path": "nx/2025-05-09-terminal-ui.md",
+          "tokens": 1412
+        },
+        {
+          "id": "2025-05-13-nx-generators-ai-integration",
+          "title": "2025-05-13-nx-generators-ai-integration",
+          "description": "title: 'Combining Predictability and Intelligence With Nx Generators and AI'",
+          "tags": [
+            "@nx/react",
+            "nx_generators",
+            "nx_generator_schema"
+          ],
+          "path": "nx/2025-05-13-nx-generators-ai-integration.md",
+          "tokens": 2324
+        },
+        {
+          "id": "2025-05-27-practical-guide-effective-ai-coding",
+          "title": "2025-05-27-practical-guide-effective-ai-coding",
+          "description": "title: 'A Practical Guide on Effective AI Use - AI as Your Peer Programmer'",
+          "tags": [
+            "STANDARDS.md",
+            "PR.md"
+          ],
+          "path": "nx/2025-05-27-practical-guide-effective-ai-coding.md",
+          "tokens": 4948
+        },
+        {
+          "id": "2025-05-28-build-better-shipfaster-monorepos-apps-component-libraries-with-nx-cloud",
+          "title": "2025-05-28-build-better-shipfaster-monorepos-apps-component-libraries-with-nx-cloud",
+          "description": "title: \"Build Better, Ship Faster: Monorepos, Apps, & Component Libraries with Nx Cloud\"",
+          "tags": [],
+          "path": "nx/2025-05-28-build-better-shipfaster-monorepos-apps-component-libraries-with-nx-cloud.md",
+          "tokens": 341
+        },
+        {
+          "id": "2025-05-28-nx-terminal-integration-ai",
+          "title": "2025-05-28-nx-terminal-integration-ai",
+          "description": "title: 'Your AI Assistant Can Now Read Your Terminal: Real-Time Development Error Fixing'",
+          "tags": [
+            "What's currently running in my terminal",
+            "Help me fix my broken dev server"
+          ],
+          "path": "nx/2025-05-28-nx-terminal-integration-ai.md",
+          "tokens": 2207
+        },
+        {
+          "id": "2025-05-29-mcp-server-with-nx",
+          "title": "2025-05-29-mcp-server-with-nx",
+          "description": "title: 'Building an MCP Server with Nx'",
+          "tags": [
+            "@nx/node",
+            "package.json",
+            "webpack",
+            "McpServer",
+            "serve",
+            "apps/mcp-server/package.json",
+            "\"dependsOn\": [\"build\"]",
+            "\"continuous\": true",
+            "npx nx serve mcp-server",
+            "http://localhost:6274"
+          ],
+          "path": "nx/2025-05-29-mcp-server-with-nx.md",
+          "tokens": 4576
+        },
+        {
+          "id": "2025-06-12-cve-2025-36852-critical-cache-poisoning-vulnerability-creep",
+          "title": "2025-06-12-cve-2025-36852-critical-cache-poisoning-vulnerability-creep",
+          "description": "title: 'CVE-2025-36852: Critical Cache Poisoning Vulnerability Affects Multiple Build Systems'",
+          "tags": [],
+          "path": "nx/2025-06-12-cve-2025-36852-critical-cache-poisoning-vulnerability-creep.md",
+          "tokens": 1422
+        },
+        {
+          "id": "2025-06-13-nx-21-2-release",
+          "title": "2025-06-13-nx-21-2-release",
+          "description": "title: 'Nx 21.2 Release: Big upgrades to Angular 20, NestJS 11, and Storybook 9'",
+          "tags": [
+            "*ngIf",
+            "*ngFor",
+            "@if",
+            "@for",
+            "@nx/storybook:cypress-project",
+            "@nx/react-native:stories",
+            "@nx/react-native:component-story",
+            "@nx/storybook:configuration",
+            "migrate"
+          ],
+          "path": "nx/2025-06-13-nx-21-2-release.md",
+          "tokens": 1299
+        },
+        {
+          "id": "2025-06-18-polygraph-launch-preview-conformance-workspace-graph-and-custom-workflows",
+          "title": "2025-06-18-polygraph-launch-preview-conformance-workspace-graph-and-custom-workflows",
+          "description": "title: \"Polygraph Launch Preview: Conformance, Workspace Graph, and Custom Workflows\"",
+          "tags": [],
+          "path": "nx/2025-06-18-polygraph-launch-preview-conformance-workspace-graph-and-custom-workflows.md",
+          "tokens": 408
+        },
+        {
+          "id": "2025-06-19-setup-tailwind4-npm-workspace",
+          "title": "2025-06-19-setup-tailwind4-npm-workspace",
+          "description": "title: 'Configure Tailwind 4 with Vite in an NPM Workspace: The Complete Guide'",
+          "tags": [
+            "@juristr/nx-tailwind-sync",
+            "tailwind.config.js",
+            "tailwindcss",
+            "@tailwindcss/vite",
+            "@import \"tailwindcss\"",
+            "packages/",
+            "shop",
+            "@source",
+            "styles.css",
+            "tools/"
+          ],
+          "path": "nx/2025-06-19-setup-tailwind4-npm-workspace.md",
+          "tokens": 2544
+        },
+        {
+          "id": "2025-06-23-nx-self-healing-ci",
+          "title": "2025-06-23-nx-self-healing-ci",
+          "description": "title: 'Introducing Self-Healing CI for Nx and Nx Cloud'",
+          "tags": [
+            "fix-ci",
+            "if: always()",
+            "npx nx@latest connect"
+          ],
+          "path": "nx/2025-06-23-nx-self-healing-ci.md",
+          "tokens": 2490
+        },
+        {
+          "id": "2025-06-24-nx-cloud-introducing-polygraph",
+          "title": "2025-06-24-nx-cloud-introducing-polygraph",
+          "description": "title: 'Nx Cloud Release: Introducing Polygraph'",
+          "tags": [],
+          "path": "nx/2025-06-24-nx-cloud-introducing-polygraph.md",
+          "tokens": 2538
+        },
+        {
+          "id": "2025-06-25-cache-poisoning",
+          "title": "Modified .github/workflows/build.yml",
+          "description": "title: 'Is Your Build Cache Giving Every Developer Production Access?'",
+          "tags": [],
+          "path": "nx/2025-06-25-cache-poisoning.md",
+          "tokens": 3416
+        },
+        {
+          "id": "2025-06-25-nx-cloud-mcp-ci-optimization",
+          "title": "2025-06-25-nx-cloud-mcp-ci-optimization",
+          "description": "title: 'Analyze Your Nx Cloud Runs With Your AI Assistant'",
+          "tags": [
+            "cwd"
+          ],
+          "path": "nx/2025-06-25-nx-cloud-mcp-ci-optimization.md",
+          "tokens": 2673
+        },
+        {
+          "id": "2025-06-26-jetbrains-ci-notifications",
+          "title": "2025-06-26-jetbrains-ci-notifications",
+          "description": "title: 'Automatically Fix your CI Failures with JetBrains AI Assistant'",
+          "tags": [],
+          "path": "nx/2025-06-26-jetbrains-ci-notifications.md",
+          "tokens": 964
+        },
+        {
+          "id": "2025-07-16-securing-your-build-pipeline-critical-vulnerabilities-and-modern-security-practices",
+          "title": "2025-07-16-securing-your-build-pipeline-critical-vulnerabilities-and-modern-security-practices",
+          "description": "title: 'Critical Exploit Discovered: Protecting Your Build Infrastructure from Emerging Threats'",
+          "tags": [],
+          "path": "nx/2025-07-16-securing-your-build-pipeline-critical-vulnerabilities-and-modern-security-practices.md",
+          "tokens": 406
+        },
+        {
+          "id": "2025-07-17-polygraph-conformance",
+          "title": "2025-07-17-polygraph-conformance",
+          "description": "title: 'Nx Cloud Conformance: Automate Consistency Across Your Organization'",
+          "tags": [
+            "@nx/conformance",
+            "create-nx-workspace",
+            "npx nx login",
+            "publish-conformance-rules",
+            "conformance-rules",
+            "npx nx publish-conformance-rules",
+            "npx nx add @nx/conformance",
+            "@nx/conformance:bundle-rules",
+            "nx-cloud",
+            "stellar-conformance"
+          ],
+          "path": "nx/2025-07-17-polygraph-conformance.md",
+          "tokens": 3727
+        },
+        {
+          "id": "2025-07-23-july-workshop",
+          "title": "2025-07-23-july-workshop",
+          "description": "title: 'The More the Merrier - Groups Save 50% on Nx Essentials Workshop'",
+          "tags": [],
+          "path": "nx/2025-07-23-july-workshop.md",
+          "tokens": 605
+        },
+        {
+          "id": "2025-07-24-payfit-success-story",
+          "title": "2025-07-24-payfit-success-story",
+          "description": "title: 'From 5 Days to 20 Minutes: How PayFit Accelerated Time to Market with Strategic Nx Implementation'",
+          "tags": [],
+          "path": "nx/2025-07-24-payfit-success-story.md",
+          "tokens": 1851
+        },
+        {
+          "id": "2025-07-28-the-journey-of-the-nx-plugin-for-gradle",
+          "title": "2025-07-28-the-journey-of-the-nx-plugin-for-gradle",
+          "description": "title: 'The Journey of the Nx Plugin for Gradle: From Prototype to Production'",
+          "tags": [
+            "@nx/gradle",
+            "vite.config.js",
+            "project-report",
+            "dev.nx.gradle",
+            "dependsOn"
+          ],
+          "path": "nx/2025-07-28-the-journey-of-the-nx-plugin-for-gradle.md",
+          "tokens": 1607
+        },
+        {
+          "id": "2025-07-29-spring-boot-with-nx",
+          "title": "2025-07-29-spring-boot-with-nx",
+          "description": "title: 'Polyglot Projects Made Easy: Integrating Spring Boot into an Nx Workspace'",
+          "tags": [
+            "@nx/gradle",
+            "nx import",
+            "import",
+            "nx graph",
+            "nx show project java-backend",
+            "nx",
+            "build.gradle",
+            "dependsOn",
+            "package.json",
+            "dev"
+          ],
+          "path": "nx/2025-07-29-spring-boot-with-nx.md",
+          "tokens": 1867
+        },
+        {
+          "id": "2025-07-30-android-and-nx",
+          "title": "2025-07-30-android-and-nx",
+          "description": "title: 'Getting Mobile Into Your Monorepo: Android + Nx'",
+          "tags": [
+            "apk",
+            "app",
+            "project.json",
+            "build.gradle.kt",
+            "nx",
+            "installDebug"
+          ],
+          "path": "nx/2025-07-30-android-and-nx.md",
+          "tokens": 1697
+        },
+        {
+          "id": "2025-07-31-seamless-deploys-with-docker",
+          "title": "2025-07-31-seamless-deploys-with-docker",
+          "description": "title: 'Seamless Java Deployment in Nx Using Docker'",
+          "tags": [
+            "nx release",
+            "@nx/docker",
+            "Dockerfile",
+            "openjdk:26",
+            "3000",
+            ".jar",
+            "app.jar",
+            "java -jar app.jar",
+            "localhost:3000",
+            "docker:build"
+          ],
+          "path": "nx/2025-07-31-seamless-deploys-with-docker.md",
+          "tokens": 1742
+        },
+        {
+          "id": "2025-08-05-polygraph-workspace-graph",
+          "title": "2025-08-05-polygraph-workspace-graph",
+          "description": "title: \"Nx Cloud Workspace Graph: See Your Organization's Code Structure Like Never Before\"",
+          "tags": [
+            "graph"
+          ],
+          "path": "nx/2025-08-05-polygraph-workspace-graph.md",
+          "tokens": 2216
+        },
+        {
+          "id": "2025-08-07-git-worktrees-ai-agents",
+          "title": "2025-08-07-git-worktrees-ai-agents",
+          "description": "title: 'How Git Worktrees Changed My AI Agent Workflow'",
+          "tags": [
+            "@johnlindquist/worktree",
+            "issue-123",
+            "../nx-issue-123",
+            "../nx-feature-a",
+            "feature-a",
+            "-b",
+            "main",
+            "wt",
+            "{reponame}-{branch-name}",
+            "gh pr checkout <pr-number>"
+          ],
+          "path": "nx/2025-08-07-git-worktrees-ai-agents.md",
+          "tokens": 1759
+        },
+        {
+          "id": "2025-08-12-ukg-success-story",
+          "title": "2025-08-12-ukg-success-story",
+          "description": "title: 'UKG Unifies Their Codebase and Eliminates CI Overhead to Focus on Customer Value'",
+          "tags": [],
+          "path": "nx/2025-08-12-ukg-success-story.md",
+          "tokens": 1741
+        },
+        {
+          "id": "2025-08-26-stop-babysitting-your-prs-selfhealing-ci-cuts-time-to-green-by-50",
+          "title": "2025-08-26-stop-babysitting-your-prs-selfhealing-ci-cuts-time-to-green-by-50",
+          "description": "title: 'Stop Babysitting Your PRs: Self-Healing CI Cuts Time to Green by 50%'",
+          "tags": [],
+          "path": "nx/2025-08-26-stop-babysitting-your-prs-selfhealing-ci-cuts-time-to-green-by-50.md",
+          "tokens": 524
+        },
+        {
+          "id": "2025-09-05-s1ngularity-postmortem",
+          "title": "2025-09-05-s1ngularity-postmortem",
+          "description": "title: 'S1ngularity - What Happened, How We Responded, What We Learned'",
+          "tags": [
+            "pull_request_target",
+            "/settings/actions",
+            "publish.yml",
+            "workflow_dispatch",
+            "NPM_TOKEN",
+            "~/.bashrc",
+            "~/.zshrc",
+            "sudo shutdown -h 0",
+            "npm cache clean --force",
+            "yarn cache clean --all"
+          ],
+          "path": "nx/2025-09-05-s1ngularity-postmortem.md",
+          "tokens": 2526
+        },
+        {
+          "id": "2025-09-16-creating-an-nx-plugin-for-biome",
+          "title": "2025-09-16-creating-an-nx-plugin-for-biome",
+          "description": "title: 'Integrating Biome in 20 Minutes'",
+          "tags": [
+            "biome.json",
+            "package.json",
+            "npm run biome-lint",
+            "biome lint",
+            "biome-lint",
+            "project.json",
+            "{projectRoot}",
+            "nx biome-lint biome-example",
+            "nx.json",
+            "eslint.config.mjs"
+          ],
+          "path": "nx/2025-09-16-creating-an-nx-plugin-for-biome.md",
+          "tokens": 4248
+        },
+        {
+          "id": "2025-09-24-making-the-case-for-smarter-monorepos-and-how-to-not-get-fooled-by-myths",
+          "title": "2025-09-24-making-the-case-for-smarter-monorepos-and-how-to-not-get-fooled-by-myths",
+          "description": "title: \"Making the Case for Smarter Monorepos, and How to Not Get Fooled by Myths",
+          "tags": [],
+          "path": "nx/2025-09-24-making-the-case-for-smarter-monorepos-and-how-to-not-get-fooled-by-myths.md",
+          "tokens": 444
+        },
+        {
+          "id": "2025-10-10-nx-october-2025-highlights",
+          "title": "2025-10-10-nx-october-2025-highlights",
+          "description": "title: 'Nx Highlights: Smarter AI integration, all-new graph UI, and big new versions of your favorite tools'",
+          "tags": [
+            "configure-ai-agents",
+            "create-nx-workspace",
+            "e2e-ci--merge-reports",
+            "svgr",
+            "withReact",
+            "withSvgr",
+            "@nx/rspack",
+            "--interactive",
+            "@nx/vite",
+            "@nx/gradle"
+          ],
+          "path": "nx/2025-10-10-nx-october-2025-highlights.md",
+          "tokens": 2230
+        },
+        {
+          "id": "2025-10-14-what-is-the-point-of-generating-code-if-you-cannot-merge-it",
+          "title": "2025-10-14-what-is-the-point-of-generating-code-if-you-cannot-merge-it",
+          "description": "title: \"What's the Point of Generating All This Code If You Can't Merge It?\"",
+          "tags": [],
+          "path": "nx/2025-10-14-what-is-the-point-of-generating-code-if-you-cannot-merge-it.md",
+          "tokens": 1873
+        },
+        {
+          "id": "2025-10-14-whats-new-in-nx-self-healing-ci",
+          "title": "2025-10-14-whats-new-in-nx-self-healing-ci",
+          "description": "title: \"What's New in Nx Self-Healing CI\"",
+          "tags": [
+            "--fix-tasks",
+            "<project>:<task>:<configuration>",
+            "nx-cloud record --",
+            "nx-cloud record -- nx format",
+            "--auto-apply-fixes",
+            "main",
+            "npx nx@latest connect"
+          ],
+          "path": "nx/2025-10-14-whats-new-in-nx-self-healing-ci.md",
+          "tokens": 1701
+        },
+        {
+          "id": "2025-10-23-nx-22-release",
+          "title": "Install Nx",
+          "description": "title: 'Nx 22 Release: Expanding the build platform'",
+          "tags": [
+            "nx graph",
+            "nx.json",
+            "nx",
+            "dev.nx.maven.nx-maven-plugin",
+            "pom.xml",
+            "@nx/maven",
+            "@nx/dotnet",
+            "build",
+            "test",
+            "watch"
+          ],
+          "path": "nx/2025-10-23-nx-22-release.md",
+          "tokens": 6904
+        },
+        {
+          "id": "2025-10-27-beyond-remote-cache-unlock-the-full-70-of-your-ci-performance-gains",
+          "title": "2025-10-27-beyond-remote-cache-unlock-the-full-70-of-your-ci-performance-gains",
+          "description": "title: 'Beyond Remote Cache: Unlock 70% More CI Performance'",
+          "tags": [],
+          "path": "nx/2025-10-27-beyond-remote-cache-unlock-the-full-70-of-your-ci-performance-gains.md",
+          "tokens": 448
+        },
+        {
+          "id": "2025-10-28-react-enterprise-book",
+          "title": "2025-10-28-react-enterprise-book",
+          "description": "title: 'Book - React for Enterprise: Timeless Architecture for Enterprise Apps'",
+          "tags": [],
+          "path": "nx/2025-10-28-react-enterprise-book.md",
+          "tokens": 1082
+        },
+        {
+          "id": "2025-10-29-storybook-watch-dependencies-nx",
+          "title": "2025-10-29-storybook-watch-dependencies-nx",
+          "description": "title: 'Watch and Rebuild Storybook Dependencies with Nx'",
+          "tags": [
+            "feat-create-orders",
+            "ui",
+            "dist",
+            "package.json",
+            "*.js",
+            "nx watch",
+            "--includeDependentProjects",
+            "build-deps",
+            "dependsOn",
+            "^build"
+          ],
+          "path": "nx/2025-10-29-storybook-watch-dependencies-nx.md",
+          "tokens": 2245
+        },
+        {
+          "id": "2025-11-07-nx-cloud-release-enterprise-task-analytics",
+          "title": "2025-11-07-nx-cloud-release-enterprise-task-analytics",
+          "description": "title: 'Nx Cloud Release: Enterprise Task Analytics'",
+          "tags": [],
+          "path": "nx/2025-11-07-nx-cloud-release-enterprise-task-analytics.md",
+          "tokens": 2696
+        },
+        {
+          "id": "2025-11-14-monorepo-myths",
+          "title": "2025-11-14-monorepo-myths",
+          "description": "title: '10 Monorepo Myths Debunked: Separating Fact from Fiction'",
+          "tags": [],
+          "path": "nx/2025-11-14-monorepo-myths.md",
+          "tokens": 3252
+        },
+        {
+          "id": "2025-11-19-the-compounding-effect-how-nx-features-multiply-performance-gains",
+          "title": "2025-11-19-the-compounding-effect-how-nx-features-multiply-performance-gains",
+          "description": "title: 'The Compounding Effect: How Nx Features Multiply Performance Gains'",
+          "tags": [],
+          "path": "nx/2025-11-19-the-compounding-effect-how-nx-features-multiply-performance-gains.md",
+          "tokens": 421
+        },
+        {
+          "id": "2025-11-26-nx-22-1",
+          "title": "2025-11-26-nx-22-1",
+          "description": "title: 'Nx 22.1 Release: Terminal UI on Windows, Storybook 10, Vitest 4, and more!'",
+          "tags": [
+            "@nx/storybook",
+            "nx migrate latest",
+            "@nx/vitest",
+            "@nx/vite"
+          ],
+          "path": "nx/2025-11-26-nx-22-1.md",
+          "tokens": 1606
+        },
+        {
+          "id": "2025-12-04-nx-vs-diy",
+          "title": "2025-12-04-nx-vs-diy",
+          "description": "title: 'Nx Platform Outperforms DIY Cache by 5x'",
+          "tags": [],
+          "path": "nx/2025-12-04-nx-vs-diy.md",
+          "tokens": 2557
+        },
+        {
+          "id": "2025-12-05-nx-cloud-release-agent-resource-usage",
+          "title": "2025-12-05-nx-cloud-release-agent-resource-usage",
+          "description": "title: 'Nx Cloud Release: Agent Resource Usage'",
+          "tags": [
+            "node"
+          ],
+          "path": "nx/2025-12-05-nx-cloud-release-agent-resource-usage.md",
+          "tokens": 2339
+        },
+        {
+          "id": "2025-12-17-an-nx-carol-past-present-and-future-of-your-monorepo",
+          "title": "2025-12-17-an-nx-carol-past-present-and-future-of-your-monorepo",
+          "description": "title: 'An Nx Carol: Past, Present, and Future of Your Monorepo'",
+          "tags": [],
+          "path": "nx/2025-12-17-an-nx-carol-past-present-and-future-of-your-monorepo.md",
+          "tokens": 328
+        },
+        {
+          "id": "2025-12-19-nx-22-3-release",
+          "title": "2025-12-19-nx-22-3-release",
+          "description": "title: 'Nx 22.3 Release: Angular 21 Support, tsgo Compiler, and Prettier v3'",
+          "tags": [
+            "vitest-angular",
+            "@angular/build:unit-test",
+            "vitest-analog",
+            "@nx/angular:application",
+            "@nx/angular:library",
+            "unitTestRunner",
+            "@typescript/native-preview",
+            "compiler: \"tsgo\"",
+            "@nx/js/typescript"
+          ],
+          "path": "nx/2025-12-19-nx-22-3-release.md",
+          "tokens": 1568
+        },
+        {
+          "id": "2025-12-22-2025-highlights",
+          "title": "2025-12-22-2025-highlights",
+          "description": "title: 'Wrapping Up 2025'",
+          "tags": [
+            "migrate"
+          ],
+          "path": "nx/2025-12-22-2025-highlights.md",
+          "tokens": 2499
+        },
+        {
+          "id": "2025-12-29-a-year-of-webinars",
+          "title": "2025-12-29-a-year-of-webinars",
+          "description": "title: 'A Year of Nx Webinars'",
+          "tags": [],
+          "path": "nx/2025-12-29-a-year-of-webinars.md",
+          "tokens": 907
+        },
+        {
+          "id": "2026-01-09-the-missing-multiplier",
+          "title": "2026-01-09-the-missing-multiplier",
+          "description": "title: 'The Missing Multiplier for AI Agent Productivity'",
+          "tags": [],
+          "path": "nx/2026-01-09-the-missing-multiplier.md",
+          "tokens": 1761
+        },
+        {
+          "id": "2026-01-14-setup-tailwind-4-angular-nx-workspace",
+          "title": "2026-01-14-setup-tailwind-4-angular-nx-workspace",
+          "description": "title: 'Configure Tailwind v4 with Angular in an Nx Monorepo'",
+          "tags": [
+            "tailwind.config.js",
+            "@source",
+            "nx build demoapp",
+            "demoapp",
+            "ui-design-system",
+            "another-ui",
+            "text-red-500",
+            "@tailwindcss/postcss",
+            "process.cwd()",
+            ".html"
+          ],
+          "path": "nx/2026-01-14-setup-tailwind-4-angular-nx-workspace.md",
+          "tokens": 2460
+        },
+        {
+          "id": "2026-01-16-caseware-success-story",
+          "title": "2026-01-16-caseware-success-story",
+          "description": "title: \"Scaling 700+ Projects: How Nx Became a 'No-Brainer' for Caseware\"",
+          "tags": [
+            "nx.json"
+          ],
+          "path": "nx/2026-01-16-caseware-success-story.md",
+          "tokens": 1853
+        },
+        {
+          "id": "2026-01-21-ai-agents-and-continuity",
+          "title": "2026-01-21-ai-agents-and-continuity",
+          "description": "title: 'Autonomous Agents at Scale'",
+          "tags": [],
+          "path": "nx/2026-01-21-ai-agents-and-continuity.md",
+          "tokens": 1133
+        },
+        {
+          "id": "2026-02-03-autonomous-ai-workflows-with-nx",
+          "title": "2026-02-03-autonomous-ai-workflows-with-nx",
+          "description": "title: 'End to End Autonomous AI Agent Workflows with Nx'",
+          "tags": [
+            "ci-monitor"
+          ],
+          "path": "nx/2026-02-03-autonomous-ai-workflows-with-nx.md",
+          "tokens": 1572
+        },
+        {
+          "id": "2026-02-04-nx-2026-roadmap",
+          "title": "2026-02-04-nx-2026-roadmap",
+          "description": "title: 'Nx 2026 Roadmap: Expanding Agent Autonomy, Improving Performance, Better Polyglot and More'",
+          "tags": [
+            "nx migrate",
+            "@nx/dotnet"
+          ],
+          "path": "nx/2026-02-04-nx-2026-roadmap.md",
+          "tokens": 2500
+        },
+        {
+          "id": "2026-02-10-broadcom-success-story",
+          "title": "2026-02-10-broadcom-success-story",
+          "description": "title: 'How Broadcom stays efficient and nimble with monorepos'",
+          "tags": [],
+          "path": "nx/2026-02-10-broadcom-success-story.md",
+          "tokens": 1446
+        },
+        {
+          "id": "2026-02-12-nx-ai-agent-skills",
+          "title": "2026-02-12-nx-ai-agent-skills",
+          "description": "title: 'Teach Your AI Agent How to Work in a Monorepo'",
+          "tags": [
+            "CLAUDE.md",
+            "AGENTS.md",
+            "npx skills add nrwl/nx-ai-agents-config",
+            "configure-ai-agents",
+            "nx-workspace",
+            "nx show projects",
+            "nx graph",
+            "monitor-ci",
+            "nx-generate",
+            "nx-run-tasks"
+          ],
+          "path": "nx/2026-02-12-nx-ai-agent-skills.md",
+          "tokens": 1873
+        },
+        {
+          "id": "2026-02-17-why-we-deleted-most-of-our-mcp-tools",
+          "title": "2026-02-17-why-we-deleted-most-of-our-mcp-tools",
+          "description": "title: 'Why we deleted (most of) our MCP tools'",
+          "tags": [
+            "nx show project myapp",
+            "jq",
+            "nx generate",
+            "curl"
+          ],
+          "path": "nx/2026-02-17-why-we-deleted-most-of-our-mcp-tools.md",
+          "tokens": 2200
+        },
+        {
+          "id": "2026-02-18-why-monorepos-are-king-in-the-age-of-ai",
+          "title": "2026-02-18-why-monorepos-are-king-in-the-age-of-ai",
+          "description": "title: \"Why Monorepos are King in the Age of AI\"",
+          "tags": [],
+          "path": "nx/2026-02-18-why-monorepos-are-king-in-the-age-of-ai.md",
+          "tokens": 564
+        },
+        {
+          "id": "2026-02-24-monorepo-is-not-monolith",
+          "title": "2026-02-24-monorepo-is-not-monolith",
+          "description": "title: 'A Monorepo Is NOT a Monolith'",
+          "tags": [
+            "@nx/owners",
+            "nx.json",
+            "package.json",
+            "project.json",
+            "nx sync",
+            "nx graph",
+            "scope:client",
+            "scope:shared",
+            "@nx/enforce-module-boundaries"
+          ],
+          "path": "nx/2026-02-24-monorepo-is-not-monolith.md",
+          "tokens": 3807
+        },
+        {
+          "id": "2026-02-25-nx-joins-linux-foundation-and-aaif",
+          "title": "2026-02-25-nx-joins-linux-foundation-and-aaif",
+          "description": "title: 'Nx Joins the Linux Foundation and the Agentic AI Foundation'",
+          "tags": [],
+          "path": "nx/2026-02-25-nx-joins-linux-foundation-and-aaif.md",
+          "tokens": 888
+        },
+        {
+          "id": "2026-03-05-making-nx-agent-ready",
+          "title": "2026-03-05-making-nx-agent-ready",
+          "description": "title: 'Agentic Experience Is the New Developer Experience'",
+          "tags": [
+            "create-nx-workspace",
+            "nx init",
+            "nx import",
+            "--help",
+            "nx connect"
+          ],
+          "path": "nx/2026-03-05-making-nx-agent-ready.md",
+          "tokens": 2456
+        },
+        {
+          "id": "2026-03-06-siriusxm-success-story",
+          "title": "2026-03-06-siriusxm-success-story",
+          "description": "title: 'How SiriusXM Stays Competitive by Iterating and Getting to Market Fast'",
+          "tags": [],
+          "path": "nx/2026-03-06-siriusxm-success-story.md",
+          "tokens": 1730
+        },
+        {
+          "id": "15-0-0",
+          "title": "Nx 15.0",
+          "description": "[Read the 15.0 release blog post](/blog/whats-new-in-nx-15)",
+          "tags": [
+            "nx migrate"
+          ],
+          "path": "nx/15-0-0.md",
+          "tokens": 242
+        },
+        {
+          "id": "15-3-0",
+          "title": "Nx 15.3",
+          "description": "[Read the 15.3 release blog post](/blog/nx-15-3-standalone-projects-vite-task-graph-and-more)",
+          "tags": [],
+          "path": "nx/15-3-0.md",
+          "tokens": 208
+        },
+        {
+          "id": "15-4-0",
+          "title": "Nx 15.4",
+          "description": "[Read the 15.4 release blog post](/blog/nx-15-4-vite-4-support-a-new-nx-watch-command-and-more)",
+          "tags": [],
+          "path": "nx/15-4-0.md",
+          "tokens": 113
+        },
+        {
+          "id": "15-7-0",
+          "title": "Nx 15.7",
+          "description": "[Read the 15.7 release blog post](/blog/nx-15-7-node-support-angular-lts-lockfile-pruning)",
+          "tags": [],
+          "path": "nx/15-7-0.md",
+          "tokens": 173
+        },
+        {
+          "id": "15-8-0",
+          "title": "Nx 15.8",
+          "description": "[Read the 15.8 release blog post](/blog/nx-15-8-rust-hasher-nx-console-for-intellij-deno-node-and-storybook)",
+          "tags": [],
+          "path": "nx/15-8-0.md",
+          "tokens": 173
+        },
+        {
+          "id": "16-0-0",
+          "title": "Nx 16 is out 🔥",
+          "description": "We’re proud to announce the release of Nx version 16!",
+          "tags": [
+            "nx migrate"
+          ],
+          "path": "nx/16-0-0.md",
+          "tokens": 606
+        },
+        {
+          "id": "16-5-0",
+          "title": "Nx 16.5",
+          "description": "[Read the 16.5 release blog post](/blog/nx-16-5-release)",
+          "tags": [],
+          "path": "nx/16-5-0.md",
+          "tokens": 148
+        },
+        {
+          "id": "17-0-0",
+          "title": "Nx 17",
+          "description": "Nx 17.0 is here!! From a brand new Vue plugin, enhancements to Module Federation Support ensuring better type safety ...",
+          "tags": [
+            "nx migrate"
+          ],
+          "path": "nx/17-0-0.md",
+          "tokens": 555
+        },
+        {
+          "id": "17-2-0",
+          "title": "Nx 17.2",
+          "description": "[Read the 17.2 release blog post](/blog/nx-17-2-release)",
+          "tags": [],
+          "path": "nx/17-2-0.md",
+          "tokens": 165
+        },
+        {
+          "id": "18-0-0",
+          "title": "Nx 18",
+          "description": "We were so excited about the features in Nx 18 that we created a whole [Launch Nx Week](/blog/launch-nx-week-recap) t...",
+          "tags": [
+            "@nx/nuxt",
+            "nx release"
+          ],
+          "path": "nx/18-0-0.md",
+          "tokens": 399
+        },
+        {
+          "id": "19-0-0",
+          "title": "Nx 19",
+          "description": "Nx 19.0 has landed, and it's ALL about reinforcing 💎Project Crystal💎!!!",
+          "tags": [
+            "NX_",
+            "NX_PUBLIC_"
+          ],
+          "path": "nx/19-0-0.md",
+          "tokens": 357
+        },
+        {
+          "id": "19-5-0",
+          "title": "Nx 19.5 Adds StackBlitz, New Features, And More!!",
+          "description": "[![Nx 19.5 Adds StackBlitz, New Features, And More!!](/blog/images/2024-08-01/nx-19-5-thumbnail.png)](/blog/nx-19-5-a...",
+          "tags": [
+            "targetDefaults"
+          ],
+          "path": "nx/19-5-0.md",
+          "tokens": 623
+        },
+        {
+          "id": "19-6-0",
+          "title": "Nx 19.6",
+          "description": "{% cards cols=\"2\" %}",
+          "tags": [
+            "webpack-dev-server",
+            "@nx/webpack"
+          ],
+          "path": "nx/19-6-0.md",
+          "tokens": 228
+        },
+        {
+          "id": "19-7-0",
+          "title": "Nx 19.7",
+          "description": "Two new top-level commands: [`nx login`](/docs/reference/nx-commands) (an alias for [`nx-cloud login`](/docs/referenc...",
+          "tags": [
+            "nx login",
+            "nx-cloud login",
+            "nx logout",
+            "nx-cloud logout"
+          ],
+          "path": "nx/19-7-0.md",
+          "tokens": 258
+        },
+        {
+          "id": "19-8-0",
+          "title": "Nx 19.8",
+          "description": "[Read the Nx 19.8 Blogpost](/blog/nx-19-8-update)",
+          "tags": [],
+          "path": "nx/19-8-0.md",
+          "tokens": 236
+        },
+        {
+          "id": "20-0-0",
+          "title": "Nx 20.0",
+          "description": "[Read the 20.0 release blog post](/blog/announcing-nx-20)",
+          "tags": [
+            "as-provided"
+          ],
+          "path": "nx/20-0-0.md",
+          "tokens": 299
+        },
+        {
+          "id": "20-1-0",
+          "title": "Nx 20.1",
+          "description": "{% cards cols=\"2\" %}",
+          "tags": [],
+          "path": "nx/20-1-0.md",
+          "tokens": 288
+        },
+        {
+          "id": "20-2-0",
+          "title": "Nx 20.2",
+          "description": "{% cards cols=\"2\" %}",
+          "tags": [],
+          "path": "nx/20-2-0.md",
+          "tokens": 264
+        },
+        {
+          "id": "20-3-0",
+          "title": "Nx 20.3",
+          "description": "[Read the 20.3 release blog post](/blog/nx-update-20-3)",
+          "tags": [],
+          "path": "nx/20-3-0.md",
+          "tokens": 314
+        },
+        {
+          "id": "20-4-0",
+          "title": "Nx 20.4",
+          "description": "{% cards cols=\"2\" %}",
+          "tags": [],
+          "path": "nx/20-4-0.md",
+          "tokens": 298
+        },
+        {
+          "id": "20-5-0",
+          "title": "Nx 20.5",
+          "description": "[Read the 20.5 release blog post](/blog/nx-update-20-5)",
+          "tags": [
+            "--eslint-legacy-config"
+          ],
+          "path": "nx/20-5-0.md",
+          "tokens": 315
+        },
+        {
+          "id": "20-6-0",
+          "title": "Nx 20.6",
+          "description": "{% cards cols=\"2\" %}",
+          "tags": [],
+          "path": "nx/20-6-0.md",
+          "tokens": 215
+        },
+        {
+          "id": "20-7-0",
+          "title": "Nx 20.7",
+          "description": "{% cards cols=\"2\" %}",
+          "tags": [],
+          "path": "nx/20-7-0.md",
+          "tokens": 286
+        },
+        {
+          "id": "20-8-0",
+          "title": "Nx 20.8",
+          "description": "{% cards cols=\"2\" %}",
+          "tags": [],
+          "path": "nx/20-8-0.md",
+          "tokens": 279
+        },
+        {
+          "id": "21-0-0",
+          "title": "Nx 21.0",
+          "description": "[Read the 21.0 release blog post](/blog/nx-21-release)",
+          "tags": [],
+          "path": "nx/21-0-0.md",
+          "tokens": 559
+        },
+        {
+          "id": "21-1-0",
+          "title": "Nx 21.1",
+          "description": "{% cards cols=\"2\" %}",
+          "tags": [],
+          "path": "nx/21-1-0.md",
+          "tokens": 224
+        },
+        {
+          "id": "21-2-0",
+          "title": "Nx 21.2",
+          "description": "[Read the 21.2 release blog post](/blog/nx-21-2-release)",
+          "tags": [
+            "@nx/storybook:cypress-project",
+            "@nx/react-native:stories",
+            "@nx/react-native:component-story",
+            "@nx/storybook:configuration"
+          ],
+          "path": "nx/21-2-0.md",
+          "tokens": 415
+        },
+        {
+          "id": "21-3-0",
+          "title": "Nx 21.3",
+          "description": "{% cards cols=\"2\" %}",
+          "tags": [],
+          "path": "nx/21-3-0.md",
+          "tokens": 261
+        },
+        {
+          "id": "21-4-0",
+          "title": "Nx 21.4",
+          "description": "{% cards cols=\"2\" %}",
+          "tags": [],
+          "path": "nx/21-4-0.md",
+          "tokens": 336
+        },
+        {
+          "id": "21-5-0",
+          "title": "Nx 21.5",
+          "description": "{% callout type=\"warning\" title=\"Note about 21.5.0\" %}",
+          "tags": [],
+          "path": "nx/21-5-0.md",
+          "tokens": 383
+        },
+        {
+          "id": "21-6-0",
+          "title": "Nx 21.6",
+          "description": "{% callout type=\"warning\" title=\"Note about 21.6.0\" %}",
+          "tags": [],
+          "path": "nx/21-6-0.md",
+          "tokens": 397
+        },
+        {
+          "id": "22-0-0",
+          "title": "Nx 22.0",
+          "description": "[Read the 22.0 release blog post](/blog/nx-22-release)",
+          "tags": [],
+          "path": "nx/22-0-0.md",
+          "tokens": 1016
+        },
+        {
+          "id": "22-1-0",
+          "title": "Nx 22.1",
+          "description": "[Read the 22.1 release blog post](/blog/nx-22-1-release)",
+          "tags": [],
+          "path": "nx/22-1-0.md",
+          "tokens": 396
+        },
+        {
+          "id": "22-2-0",
+          "title": "Nx 22.2",
+          "description": "{% cards cols=\"2\" %}",
+          "tags": [],
+          "path": "nx/22-2-0.md",
+          "tokens": 341
+        },
+        {
+          "id": "22-3-0",
+          "title": "Nx 22.3",
+          "description": "[Read the 22.3 release blog post](/blog/nx-22-3-release)",
+          "tags": [],
+          "path": "nx/22-3-0.md",
+          "tokens": 331
+        },
+        {
+          "id": "course",
+          "title": "course",
+          "description": "title: 'Introduction to Nx'",
+          "tags": [
+            "nx migrate"
+          ],
+          "path": "nx/course.md",
+          "tokens": 101
+        },
+        {
+          "id": "01-why-nx",
+          "title": "01-why-nx",
+          "description": "title: 'Soo..what is Nx?'",
+          "tags": [],
+          "path": "nx/01-why-nx.md",
+          "tokens": 119
+        },
+        {
+          "id": "02-run-tasks",
+          "title": "02-run-tasks",
+          "description": "title: 'Run Tasks with Nx'",
+          "tags": [],
+          "path": "nx/02-run-tasks.md",
+          "tokens": 108
+        },
+        {
+          "id": "03-cache-task-results",
+          "title": "03-cache-task-results",
+          "description": "title: 'Cache Task Results'",
+          "tags": [],
+          "path": "nx/03-cache-task-results.md",
+          "tokens": 105
+        },
+        {
+          "id": "04-generate-code",
+          "title": "04-generate-code",
+          "description": "title: 'Generate Code'",
+          "tags": [],
+          "path": "nx/04-generate-code.md",
+          "tokens": 105
+        },
+        {
+          "id": "05-automate-updating-dependencies",
+          "title": "05-automate-updating-dependencies",
+          "description": "title: 'Automate Updating Dependencies'",
+          "tags": [],
+          "path": "nx/05-automate-updating-dependencies.md",
+          "tokens": 103
+        },
+        {
+          "id": "course",
+          "title": "course",
+          "description": "title: 'From PNPM Workspaces to Distributed CI'",
+          "tags": [],
+          "path": "nx/course.md",
+          "tokens": 263
+        },
+        {
+          "id": "00-overview",
+          "title": "00-overview",
+          "description": "title: 'Course Intro'",
+          "tags": [],
+          "path": "nx/00-overview.md",
+          "tokens": 207
+        },
+        {
+          "id": "01-nx-init",
+          "title": "01-nx-init",
+          "description": "title: 'Initialize Nx in Your Project with nx init'",
+          "tags": [
+            "nx",
+            "package.json",
+            "nx.json"
+          ],
+          "path": "nx/01-nx-init.md",
+          "tokens": 171
+        },
+        {
+          "id": "02-run-tasks",
+          "title": "02-run-tasks",
+          "description": "title: 'Run and Manage Tasks Efficiently Using Nx'",
+          "tags": [
+            "package.json"
+          ],
+          "path": "nx/02-run-tasks.md",
+          "tokens": 139
+        },
+        {
+          "id": "03-configure-cache",
+          "title": "03-configure-cache",
+          "description": "title: 'Configure Cache Outputs to Handle the .next Folder'",
+          "tags": [
+            "dist",
+            "build",
+            ".next"
+          ],
+          "path": "nx/03-configure-cache.md",
+          "tokens": 153
+        },
+        {
+          "id": "04-task-pipelines",
+          "title": "04-task-pipelines",
+          "description": "title: 'Create a Task Pipeline to Build Your Next app Before Serving it'",
+          "tags": [
+            "package.json",
+            "next start",
+            ".next",
+            "next build"
+          ],
+          "path": "nx/04-task-pipelines.md",
+          "tokens": 229
+        },
+        {
+          "id": "05-implicit-dependencies",
+          "title": "05-implicit-dependencies",
+          "description": "title: 'Link an e2e Project with Its Web App Through Implicit Dependencies'",
+          "tags": [
+            "package.json",
+            "implicitDependencies"
+          ],
+          "path": "nx/05-implicit-dependencies.md",
+          "tokens": 351
+        },
+        {
+          "id": "06-nx-cloud-setup",
+          "title": "06-nx-cloud-setup",
+          "description": "title: 'Connect Your Workspace to Nx Cloud'",
+          "tags": [],
+          "path": "nx/06-nx-cloud-setup.md",
+          "tokens": 170
+        },
+        {
+          "id": "07-optimize-ci",
+          "title": "07-optimize-ci",
+          "description": "title: 'Use Nx Commands on CI'",
+          "tags": [
+            "pnpm --filter",
+            "namedInputs",
+            "nx.json"
+          ],
+          "path": "nx/07-optimize-ci.md",
+          "tokens": 179
+        },
+        {
+          "id": "08-remote-caching",
+          "title": "08-remote-caching",
+          "description": "title: 'Enable Read/Write Access to your Nx Remote Cache from CI'",
+          "tags": [],
+          "path": "nx/08-remote-caching.md",
+          "tokens": 168
+        },
+        {
+          "id": "09-debug-cache",
+          "title": "09-debug-cache",
+          "description": "title: 'Debug Remote Cache misses with Nx Cloud'",
+          "tags": [],
+          "path": "nx/09-debug-cache.md",
+          "tokens": 133
+        },
+        {
+          "id": "10-nx-login",
+          "title": "10-nx-login",
+          "description": "title: 'Enable Remote Caching for your Developer Machine with Nx Login'",
+          "tags": [],
+          "path": "nx/10-nx-login.md",
+          "tokens": 224
+        },
+        {
+          "id": "11-nx-agents",
+          "title": "11-nx-agents",
+          "description": "title: 'Speed Up CI by Running Tasks in Parallel on Different Machines'",
+          "tags": [],
+          "path": "nx/11-nx-agents.md",
+          "tokens": 201
+        },
+        {
+          "id": "12-playwright-split",
+          "title": "12-playwright-split",
+          "description": "title: 'Run Playwright E2E Tests Faster by Parallelizing Them on CI'",
+          "tags": [],
+          "path": "nx/12-playwright-split.md",
+          "tokens": 197
         }
       ]
     },
