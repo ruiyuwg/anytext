@@ -234,6 +234,14 @@
       "url": "https://prisma.io/docs/llms-full.txt"
     },
     {
+      "id": "fastify",
+      "name": "Fastify",
+      "description": "Fast and low overhead web framework for Node.js with plugin architecture",
+      "version": "5",
+      "adapter": "llms-full",
+      "url": "https://fastify.dev/llms-full.txt"
+    },
+    {
       "id": "azure",
       "name": "Azure",
       "description": "Microsoft Azure cloud platform with compute, storage, databases, AI, and 200+ services",
