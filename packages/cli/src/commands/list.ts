@@ -50,6 +50,11 @@ function listTopics(library: Library): void {
     return;
   }
 
+  if (library.topics.length > 100) {
+    listGroupedTopics(library);
+    return;
+  }
+
   const maxId = Math.max(...library.topics.map((t) => t.id.length));
 
   const lines = [
@@ -65,5 +70,29 @@ function listTopics(library: Library): void {
       lines.push(`${indent}${dim(topic.tags.join(", "))}`);
     }
   }
+  console.log(lines.join("\n"));
+}
+
+function listGroupedTopics(library: Library): void {
+  const groups = new Map<string, number>();
+  for (const topic of library.topics) {
+    const hyphenIdx = topic.id.indexOf("-");
+    const prefix = hyphenIdx === -1 ? topic.id : topic.id.slice(0, hyphenIdx);
+    groups.set(prefix, (groups.get(prefix) ?? 0) + 1);
+  }
+
+  const sorted = [...groups.entries()].sort((a, b) => a[0].localeCompare(b[0]));
+  const maxName = Math.max(...sorted.map(([name]) => name.length));
+
+  const lines = [
+    `${heading(library.name)} ${dim(`v${library.version}`)} ${dim("—")} ${dim(`${library.topics.length} topics`)}`,
+    "",
+  ];
+  for (const [name, count] of sorted) {
+    const label = padEnd(bold(name), maxName + 2);
+    lines.push(`  ${label} ${dim(`${count} topics`)}`);
+  }
+  lines.push("");
+  lines.push(dim(`Total: ${library.topics.length} topics`));
   console.log(lines.join("\n"));
 }
