@@ -524,6 +524,19 @@
         "exclude": ["media/", "includes/", "bread/", "zone-pivot-groups.yml", "TOC.yml", "index.yml"],
         "maxFiles": 10000
       }
+    },
+    {
+      "id": "react-router",
+      "name": "React Router",
+      "description": "Declarative routing for React with loaders, actions, and nested routes",
+      "version": "7",
+      "adapter": "github",
+      "github": {
+        "repo": "remix-run/react-router",
+        "branch": "main",
+        "docsPath": "docs",
+        "include": [".md"]
+      }
     }
   ]
 }

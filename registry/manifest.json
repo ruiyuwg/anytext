@@ -1,5 +1,5 @@
 {
-  "version": 74,
+  "version": 75,
   "updatedAt": "2026-03-08",
   "libraries": [
     {
@@ -117927,6 +117927,2554 @@
           "tags": [],
           "path": "react-native/version-and-react-version-are-the-release-versions-showing-in-the-diff.md",
           "tokens": 21089
+        }
+      ]
+    },
+    {
+      "id": "react-router",
+      "name": "React Router",
+      "description": "Declarative routing for React with loaders, actions, and nested routes",
+      "version": "7",
+      "topics": [
+        {
+          "id": "await",
+          "title": "Await",
+          "description": "title: Await",
+          "tags": [
+            "<Await>",
+            "<React.Suspense>",
+            "useAsyncValue",
+            "children",
+            "Promise",
+            "useAsyncError",
+            "errorElement",
+            "ErrorBoundary",
+            "useRouteError",
+            "loader"
+          ],
+          "path": "react-router/await.md",
+          "tokens": 964
+        },
+        {
+          "id": "form",
+          "title": "Form",
+          "description": "title: Form",
+          "tags": [
+            "<form>",
+            "fetch",
+            "useNavigation",
+            "action",
+            "Form",
+            "History",
+            "<fetcher.Form>",
+            "undefined",
+            "navigate={false}",
+            "useFetcher"
+          ],
+          "path": "react-router/form.md",
+          "tokens": 1359
+        },
+        {
+          "id": "link",
+          "title": "Link",
+          "description": "title: Link",
+          "tags": [
+            "<a href>",
+            "<link rel=\"prefetch\">",
+            "nav :last-child",
+            "nav :last-of-type",
+            "ScrollRestoration",
+            "\"blog\"",
+            "\"blog/:slug/edit\"",
+            "\"...\"",
+            ":slug/edit",
+            "\"/blog\""
+          ],
+          "path": "react-router/link.md",
+          "tokens": 1807
+        },
+        {
+          "id": "links",
+          "title": "Links",
+          "description": "title: Links",
+          "tags": [
+            "<link>",
+            "links",
+            "<head>",
+            "nonce",
+            "crossOrigin"
+          ],
+          "path": "react-router/links.md",
+          "tokens": 396
+        },
+        {
+          "id": "meta",
+          "title": "Meta",
+          "description": "title: Meta",
+          "tags": [
+            "<meta>",
+            "meta",
+            "<head>"
+          ],
+          "path": "react-router/meta.md",
+          "tokens": 268
+        },
+        {
+          "id": "navlink",
+          "title": "NavLink",
+          "description": "title: NavLink",
+          "tags": [
+            "<Link>",
+            "active",
+            "pending",
+            "NavLinkProps.className",
+            "aria-current=\"page\"",
+            "aria-current",
+            "NavLinkRenderProps",
+            "<NavLink to=\"/SpOnGe-bOB\" />",
+            "/sponge-bob",
+            "NavLink"
+          ],
+          "path": "react-router/navlink.md",
+          "tokens": 2110
+        },
+        {
+          "id": "navigate",
+          "title": "Navigate",
+          "description": "title: Navigate",
+          "tags": [
+            "useNavigate",
+            "React.Component",
+            "to",
+            "RelativeRoutingType",
+            "History",
+            "Location",
+            "history.state",
+            "Path"
+          ],
+          "path": "react-router/navigate.md",
+          "tokens": 411
+        },
+        {
+          "id": "outlet",
+          "title": "Outlet",
+          "description": "title: Outlet",
+          "tags": [
+            "useOutletContext"
+          ],
+          "path": "react-router/outlet.md",
+          "tokens": 295
+        },
+        {
+          "id": "prefetchpagelinks",
+          "title": "PrefetchPageLinks",
+          "description": "title: PrefetchPageLinks",
+          "tags": [
+            "<link rel=prefetch|modulepreload>",
+            "<Link prefetch>",
+            "/absolute/path",
+            "<link>",
+            "crossOrigin",
+            "integrity",
+            "rel"
+          ],
+          "path": "react-router/prefetchpagelinks.md",
+          "tokens": 438
+        },
+        {
+          "id": "route",
+          "title": "Route",
+          "description": "title: Route",
+          "tags": [
+            "Routes",
+            "action",
+            "false",
+            "element",
+            "Component",
+            "errorElement",
+            "ErrorBoundary",
+            "hydrateFallbackElement",
+            "HydrateFallback",
+            "DataRouter"
+          ],
+          "path": "react-router/route.md",
+          "tokens": 827
+        },
+        {
+          "id": "routes",
+          "title": "Routes",
+          "description": "title: Routes",
+          "tags": [
+            "<Route>",
+            "action",
+            "Route",
+            "Location"
+          ],
+          "path": "react-router/routes.md",
+          "tokens": 362
+        },
+        {
+          "id": "scripts",
+          "title": "Scripts",
+          "description": "title: Scripts",
+          "tags": [
+            "<body>",
+            "<Scripts/>",
+            "<script>",
+            "crossOrigin",
+            "nonce"
+          ],
+          "path": "react-router/scripts.md",
+          "tokens": 377
+        },
+        {
+          "id": "scrollrestoration",
+          "title": "ScrollRestoration",
+          "description": "title: ScrollRestoration",
+          "tags": [
+            "Scripts",
+            "<script>",
+            "nonce",
+            "location.key",
+            "GetScrollRestorationKeyFunction",
+            "sessionStorage",
+            "\"react-router-scroll-positions\""
+          ],
+          "path": "react-router/scrollrestoration.md",
+          "tokens": 579
+        },
+        {
+          "id": "routerprovider",
+          "title": "RouterProvider",
+          "description": "title: RouterProvider",
+          "tags": [
+            "DataRouter",
+            "react-router",
+            "react-router/dom",
+            "react-dom",
+            "flushSync",
+            "ReactDOM.flushSync",
+            "RouterProvider",
+            "ErrorBoundary",
+            "errorInfo",
+            "componentDidCatch"
+          ],
+          "path": "react-router/routerprovider.md",
+          "tokens": 963
+        },
+        {
+          "id": "staticrouterprovider",
+          "title": "StaticRouterProvider",
+          "description": "title: StaticRouterProvider",
+          "tags": [
+            "DataRouter",
+            "Location",
+            "StaticHandlerContext",
+            "StaticHandler",
+            "query",
+            "true",
+            "nonce",
+            "<script>",
+            "createStaticRouter"
+          ],
+          "path": "react-router/staticrouterprovider.md",
+          "tokens": 531
+        },
+        {
+          "id": "createbrowserrouter",
+          "title": "createBrowserRouter",
+          "description": "title: createBrowserRouter",
+          "tags": [
+            "history.pushState",
+            "history.replaceState",
+            "RouterContextProvider",
+            "context",
+            "action",
+            "loader",
+            "hydrationData",
+            "StaticHandlerContext",
+            "StaticHandler",
+            "query"
+          ],
+          "path": "react-router/createbrowserrouter.md",
+          "tokens": 4153
+        },
+        {
+          "id": "createhashrouter",
+          "title": "createHashRouter",
+          "description": "title: createHashRouter",
+          "tags": [
+            "hash",
+            "RouterContextProvider",
+            "context",
+            "action",
+            "loader",
+            "hydrationData",
+            "StaticHandlerContext",
+            "StaticHandler",
+            "query",
+            "loaderData"
+          ],
+          "path": "react-router/createhashrouter.md",
+          "tokens": 4122
+        },
+        {
+          "id": "creatememoryrouter",
+          "title": "createMemoryRouter",
+          "description": "title: createMemoryRouter",
+          "tags": [
+            "DataRouter",
+            "History",
+            "RouterContextProvider",
+            "context",
+            "action",
+            "loader",
+            "initialEntries",
+            "route.lazy",
+            "patchRoutesOnNavigation",
+            "<RouterProvider>"
+          ],
+          "path": "react-router/creatememoryrouter.md",
+          "tokens": 1057
+        },
+        {
+          "id": "createstatichandler",
+          "title": "createStaticHandler",
+          "description": "title: createStaticHandler",
+          "tags": [
+            "/"
+          ],
+          "path": "react-router/createstatichandler.md",
+          "tokens": 382
+        },
+        {
+          "id": "createstaticrouter",
+          "title": "createStaticRouter",
+          "description": "title: createStaticRouter",
+          "tags": [
+            "DataRouter",
+            "StaticHandlerContext",
+            "StaticHandler",
+            "query"
+          ],
+          "path": "react-router/createstaticrouter.md",
+          "tokens": 497
+        },
+        {
+          "id": "browserrouter",
+          "title": "BrowserRouter",
+          "description": "title: BrowserRouter",
+          "tags": [
+            "<Router>",
+            "History",
+            "<Route>",
+            "React.startTransition",
+            "undefined",
+            "true",
+            "Link",
+            "Form",
+            "false",
+            "Window"
+          ],
+          "path": "react-router/browserrouter.md",
+          "tokens": 453
+        },
+        {
+          "id": "hashrouter",
+          "title": "HashRouter",
+          "description": "title: HashRouter",
+          "tags": [
+            "<Router>",
+            "hash",
+            "<Route>",
+            "React.startTransition",
+            "undefined",
+            "true",
+            "Link",
+            "Form",
+            "false",
+            "Window"
+          ],
+          "path": "react-router/hashrouter.md",
+          "tokens": 458
+        },
+        {
+          "id": "historyrouter",
+          "title": "unstable_HistoryRouter",
+          "description": "title: HistoryRouter",
+          "tags": [
+            "<Router>",
+            "history",
+            "<Route>",
+            "History",
+            "React.startTransition",
+            "undefined",
+            "true",
+            "Link",
+            "Form",
+            "false"
+          ],
+          "path": "react-router/historyrouter.md",
+          "tokens": 542
+        },
+        {
+          "id": "memoryrouter",
+          "title": "MemoryRouter",
+          "description": "title: MemoryRouter",
+          "tags": [
+            "<Router>",
+            "Route",
+            "initialEntries",
+            "React.startTransition",
+            "undefined",
+            "true",
+            "Link",
+            "Form",
+            "false"
+          ],
+          "path": "react-router/memoryrouter.md",
+          "tokens": 449
+        },
+        {
+          "id": "router",
+          "title": "Router",
+          "description": "title: Router",
+          "tags": [
+            "<Router>",
+            "BrowserRouter",
+            "ServerRouter",
+            "Route",
+            "Location",
+            "location",
+            "NavigationType.Pop",
+            "Navigator",
+            "true",
+            "React.startTransition"
+          ],
+          "path": "react-router/router.md",
+          "tokens": 672
+        },
+        {
+          "id": "staticrouter",
+          "title": "StaticRouter",
+          "description": "title: StaticRouter",
+          "tags": [
+            "<Router>",
+            "Location",
+            "/"
+          ],
+          "path": "react-router/staticrouter.md",
+          "tokens": 299
+        },
+        {
+          "id": "client-modules",
+          "title": "`.client` modules",
+          "description": "title: .client modules",
+          "tags": [
+            ".client",
+            "*.client.ts",
+            "undefined",
+            "useEffect",
+            "vite-env-only"
+          ],
+          "path": "react-router/client-modules.md",
+          "tokens": 709
+        },
+        {
+          "id": "entry-client-tsx",
+          "title": "entry.client.tsx",
+          "description": "title: entry.client.tsx",
+          "tags": [
+            "entry.client.tsx"
+          ],
+          "path": "react-router/entry-client-tsx.md",
+          "tokens": 265
+        },
+        {
+          "id": "entry-server-tsx",
+          "title": "entry.server.tsx",
+          "description": "title: entry.server.tsx",
+          "tags": [
+            "<ServerRouter>",
+            "context",
+            "url",
+            "entry.server.tsx",
+            "default",
+            "streamTimeout",
+            "handleDataRequest",
+            "loader",
+            "action",
+            "handleError"
+          ],
+          "path": "react-router/entry-server-tsx.md",
+          "tokens": 1690
+        },
+        {
+          "id": "react-router-config-ts",
+          "title": "react-router.config.ts",
+          "description": "title: react-router.config.ts",
+          "tags": [
+            "allowedActionOrigins",
+            "*",
+            "**",
+            "express",
+            "appDirectory",
+            "app",
+            "\"app\"",
+            "basename",
+            "\"/\"",
+            "buildDirectory"
+          ],
+          "path": "react-router/react-router-config-ts.md",
+          "tokens": 1592
+        },
+        {
+          "id": "root-tsx",
+          "title": "root.tsx",
+          "description": "title: root.tsx",
+          "tags": [
+            "app/root.tsx",
+            "<html>",
+            "<link>",
+            "<title>",
+            "<meta>",
+            "links",
+            "meta",
+            "Layout",
+            "HydrateFallback",
+            "ErrorBoundary"
+          ],
+          "path": "react-router/root-tsx.md",
+          "tokens": 1618
+        },
+        {
+          "id": "routes-ts",
+          "title": "routes.ts",
+          "description": "title: routes.ts",
+          "tags": [
+            "route",
+            "index",
+            "layout",
+            "prefix",
+            "relative",
+            "@react-router/fs-routes"
+          ],
+          "path": "react-router/routes-ts.md",
+          "tokens": 584
+        },
+        {
+          "id": "server-modules",
+          "title": "`.server` modules",
+          "description": "title: .server modules",
+          "tags": [
+            ".server",
+            ".client",
+            "vite-env-only"
+          ],
+          "path": "react-router/server-modules.md",
+          "tokens": 901
+        },
+        {
+          "id": "hydratedrouter",
+          "title": "HydratedRouter",
+          "description": "title: HydratedRouter",
+          "tags": [
+            "ServerRouter",
+            "entry.client.tsx",
+            "createBrowserRouter",
+            "context",
+            "clientAction",
+            "clientLoader",
+            "ErrorBoundary",
+            "errorInfo",
+            "componentDidCatch"
+          ],
+          "path": "react-router/hydratedrouter.md",
+          "tokens": 460
+        },
+        {
+          "id": "serverrouter",
+          "title": "ServerRouter",
+          "description": "title: ServerRouter",
+          "tags": [
+            "entry.server.tsx",
+            "nonce"
+          ],
+          "path": "react-router/serverrouter.md",
+          "tokens": 308
+        },
+        {
+          "id": "useactiondata",
+          "title": "useActionData",
+          "description": "title: useActionData",
+          "tags": [
+            "action",
+            "POST",
+            "undefined"
+          ],
+          "path": "react-router/useactiondata.md",
+          "tokens": 366
+        },
+        {
+          "id": "useasyncerror",
+          "title": "useAsyncError",
+          "description": "title: useAsyncError",
+          "tags": [
+            "<Await>",
+            "Await"
+          ],
+          "path": "react-router/useasyncerror.md",
+          "tokens": 272
+        },
+        {
+          "id": "useasyncvalue",
+          "title": "useAsyncValue",
+          "description": "title: useAsyncValue",
+          "tags": [
+            "<Await>",
+            "Await"
+          ],
+          "path": "react-router/useasyncvalue.md",
+          "tokens": 240
+        },
+        {
+          "id": "usebeforeunload",
+          "title": "useBeforeUnload",
+          "description": "title: useBeforeUnload",
+          "tags": [
+            "beforeunload",
+            "true",
+            "false"
+          ],
+          "path": "react-router/usebeforeunload.md",
+          "tokens": 293
+        },
+        {
+          "id": "useblocker",
+          "title": "useBlocker",
+          "description": "title: useBlocker",
+          "tags": [
+            "Blocker",
+            "state",
+            "unblocked",
+            "blocked",
+            "proceeding",
+            "location",
+            "Location",
+            "blocker.proceed()",
+            "proceed()",
+            "reset()"
+          ],
+          "path": "react-router/useblocker.md",
+          "tokens": 987
+        },
+        {
+          "id": "usefetcher",
+          "title": "useFetcher",
+          "description": "title: useFetcher",
+          "tags": [
+            "action",
+            "loader",
+            "useFetcher",
+            "key",
+            "FetcherWithComponents"
+          ],
+          "path": "react-router/usefetcher.md",
+          "tokens": 599
+        },
+        {
+          "id": "usefetchers",
+          "title": "useFetchers",
+          "description": "title: useFetchers",
+          "tags": [
+            "Fetcher",
+            "key"
+          ],
+          "path": "react-router/usefetchers.md",
+          "tokens": 310
+        },
+        {
+          "id": "useformaction",
+          "title": "useFormAction",
+          "description": "title: useFormAction",
+          "tags": [
+            "Form",
+            "action",
+            "\"route\""
+          ],
+          "path": "react-router/useformaction.md",
+          "tokens": 357
+        },
+        {
+          "id": "usehref",
+          "title": "useHref",
+          "description": "title: useHref",
+          "tags": [
+            "Location",
+            "\"route\"",
+            "\"path\""
+          ],
+          "path": "react-router/usehref.md",
+          "tokens": 297
+        },
+        {
+          "id": "useinroutercontext",
+          "title": "useInRouterContext",
+          "description": "title: useInRouterContext",
+          "tags": [
+            "true",
+            "Router"
+          ],
+          "path": "react-router/useinroutercontext.md",
+          "tokens": 229
+        },
+        {
+          "id": "uselinkclickhandler",
+          "title": "useLinkClickHandler",
+          "description": "title: useLinkClickHandler",
+          "tags": [
+            "<Link>",
+            "Path",
+            "ScrollRestoration",
+            "false",
+            "\"route\"",
+            "History",
+            "undefined",
+            "useViewTransitionState",
+            "true",
+            "React.startTransition"
+          ],
+          "path": "react-router/uselinkclickhandler.md",
+          "tokens": 834
+        },
+        {
+          "id": "useloaderdata",
+          "title": "useLoaderData",
+          "description": "title: useLoaderData",
+          "tags": [
+            "loader",
+            "clientLoader"
+          ],
+          "path": "react-router/useloaderdata.md",
+          "tokens": 302
+        },
+        {
+          "id": "uselocation",
+          "title": "useLocation",
+          "description": "title: useLocation",
+          "tags": [
+            "Location"
+          ],
+          "path": "react-router/uselocation.md",
+          "tokens": 298
+        },
+        {
+          "id": "usematch",
+          "title": "useMatch",
+          "description": "title: useMatch",
+          "tags": [
+            "PathMatch",
+            "<NavLink>",
+            "Location",
+            "null"
+          ],
+          "path": "react-router/usematch.md",
+          "tokens": 301
+        },
+        {
+          "id": "usematches",
+          "title": "useMatches",
+          "description": "title: useMatches",
+          "tags": [
+            "loaderData",
+            "handle"
+          ],
+          "path": "react-router/usematches.md",
+          "tokens": 228
+        },
+        {
+          "id": "usenavigate",
+          "title": "useNavigate",
+          "description": "title: useNavigate",
+          "tags": [
+            "redirect",
+            "action",
+            "loader",
+            "navigate(to, options?)",
+            "navigate(delta)",
+            "to",
+            "To",
+            "options",
+            "relative",
+            "\"route\""
+          ],
+          "path": "react-router/usenavigate.md",
+          "tokens": 1470
+        },
+        {
+          "id": "usenavigation",
+          "title": "useNavigation",
+          "description": "title: useNavigation",
+          "tags": [
+            "Navigation",
+            "FormData"
+          ],
+          "path": "react-router/usenavigation.md",
+          "tokens": 312
+        },
+        {
+          "id": "usenavigationtype",
+          "title": "useNavigationType",
+          "description": "title: useNavigationType",
+          "tags": [
+            "Navigation",
+            "Location",
+            "History",
+            "NavigationType",
+            "\"POP\"",
+            "\"PUSH\"",
+            "\"REPLACE\""
+          ],
+          "path": "react-router/usenavigationtype.md",
+          "tokens": 291
+        },
+        {
+          "id": "useoutlet",
+          "title": "useOutlet",
+          "description": "title: useOutlet",
+          "tags": [
+            "<Outlet>",
+            "null"
+          ],
+          "path": "react-router/useoutlet.md",
+          "tokens": 233
+        },
+        {
+          "id": "useoutletcontext",
+          "title": "useOutletContext",
+          "description": "title: useOutletContext",
+          "tags": [
+            "<Outlet context>",
+            "<Outlet>",
+            "Outlet"
+          ],
+          "path": "react-router/useoutletcontext.md",
+          "tokens": 646
+        },
+        {
+          "id": "useparams",
+          "title": "useParams",
+          "description": "title: useParams",
+          "tags": [
+            "/posts/:postId",
+            "/posts/123",
+            "params.postId",
+            "\"123\"",
+            "*"
+          ],
+          "path": "react-router/useparams.md",
+          "tokens": 650
+        },
+        {
+          "id": "useprompt",
+          "title": "unstable_usePrompt",
+          "description": "title: usePrompt",
+          "tags": [
+            "useBlocker",
+            "window.confirm",
+            "unstable_",
+            "currentLocation",
+            "nextLocation"
+          ],
+          "path": "react-router/useprompt.md",
+          "tokens": 600
+        },
+        {
+          "id": "useresolvedpath",
+          "title": "useResolvedPath",
+          "description": "title: useResolvedPath",
+          "tags": [
+            "to",
+            "Location",
+            "useHref",
+            "Path",
+            "\"route\"",
+            "\"path\"",
+            "pathname",
+            "search",
+            "hash"
+          ],
+          "path": "react-router/useresolvedpath.md",
+          "tokens": 411
+        },
+        {
+          "id": "userevalidator",
+          "title": "useRevalidator",
+          "description": "title: useRevalidator",
+          "tags": [
+            "Window",
+            "useFetcher",
+            "Form",
+            "useSubmit",
+            "revalidate",
+            "state"
+          ],
+          "path": "react-router/userevalidator.md",
+          "tokens": 412
+        },
+        {
+          "id": "userouteerror",
+          "title": "useRouteError",
+          "description": "title: useRouteError",
+          "tags": [
+            "action",
+            "loader",
+            "ErrorBoundary"
+          ],
+          "path": "react-router/userouteerror.md",
+          "tokens": 295
+        },
+        {
+          "id": "userouteloaderdata",
+          "title": "useRouteLoaderData",
+          "description": "title: useRouteLoaderData",
+          "tags": [
+            "loader",
+            "app/root.tsx",
+            "\"root\"",
+            "app/routes/teams.tsx",
+            "\"routes/teams\"",
+            "app/whatever/teams.$id.tsx",
+            "\"whatever/teams.$id\"",
+            "undefined"
+          ],
+          "path": "react-router/userouteloaderdata.md",
+          "tokens": 431
+        },
+        {
+          "id": "useroutes",
+          "title": "useRoutes",
+          "description": "title: useRoutes",
+          "tags": [
+            "<Routes>",
+            "useRoutes",
+            "null",
+            "RouteObject",
+            "Location"
+          ],
+          "path": "react-router/useroutes.md",
+          "tokens": 472
+        },
+        {
+          "id": "usesearchparams",
+          "title": "useSearchParams",
+          "description": "title: useSearchParams",
+          "tags": [
+            "URLSearchParams",
+            "setSearchParams",
+            "defaultInit",
+            "setState",
+            "searchParams",
+            "useEffect"
+          ],
+          "path": "react-router/usesearchparams.md",
+          "tokens": 865
+        },
+        {
+          "id": "usesubmit",
+          "title": "useSubmit",
+          "description": "title: useSubmit",
+          "tags": [
+            "<Form>",
+            "Form"
+          ],
+          "path": "react-router/usesubmit.md",
+          "tokens": 256
+        },
+        {
+          "id": "useviewtransitionstate",
+          "title": "useViewTransitionState",
+          "description": "title: useViewTransitionState",
+          "tags": [
+            "true",
+            "LinkProps.viewTransition",
+            "Form",
+            "submit",
+            "navigate",
+            "To",
+            "to",
+            "\"route\"",
+            "RelativeRoutingType",
+            "Location"
+          ],
+          "path": "react-router/useviewtransitionstate.md",
+          "tokens": 483
+        },
+        {
+          "id": "adapter",
+          "title": "Server Adapters",
+          "description": "title: \"@react-router/{adapter}\"",
+          "tags": [
+            "@react-router/architect",
+            "@react-router/cloudflare",
+            "@react-router/express",
+            "npx create-react-router@latest",
+            "@react-router/serve",
+            "server/index.js",
+            "server/app.ts",
+            "server.js",
+            "node server.js",
+            "vite.config.ts"
+          ],
+          "path": "react-router/adapter.md",
+          "tokens": 1383
+        },
+        {
+          "id": "dev",
+          "title": "React Router CLI",
+          "description": "title: \"@react-router/dev (CLI)\"",
+          "tags": [
+            "@react-router/dev",
+            "package.json",
+            "devDependencies",
+            "react-router build",
+            "process.env.NODE_ENV",
+            "production",
+            "--assetsInlineLimit",
+            "number",
+            "4096",
+            "--clearScreen"
+          ],
+          "path": "react-router/dev.md",
+          "tokens": 1889
+        },
+        {
+          "id": "serve",
+          "title": "React Router App Server",
+          "description": "title: \"@react-router/serve\"",
+          "tags": [
+            "express",
+            "@react-router/express",
+            "compression",
+            "express.static",
+            "serve-static",
+            "morgan",
+            "HOST",
+            "process.env.HOST",
+            "app.listen",
+            "PORT"
+          ],
+          "path": "react-router/serve.md",
+          "tokens": 1084
+        },
+        {
+          "id": "rschydratedrouter",
+          "title": "unstable_RSCHydratedRouter",
+          "description": "title: RSCHydratedRouter",
+          "tags": [
+            "unstable_RSCPayload",
+            "react-server-dom-xyz/client",
+            "createFromReadableStream",
+            "fetch",
+            "RouterContextProvider",
+            "context",
+            "action",
+            "loader",
+            "\"eager\"",
+            "\"lazy\""
+          ],
+          "path": "react-router/rschydratedrouter.md",
+          "tokens": 665
+        },
+        {
+          "id": "rscstaticrouter",
+          "title": "unstable_RSCStaticRouter",
+          "description": "title: RSCStaticRouter",
+          "tags": [
+            "unstable_RSCPayload",
+            "unstable_routeRSCServerRequest",
+            "renderHTML"
+          ],
+          "path": "react-router/rscstaticrouter.md",
+          "tokens": 510
+        },
+        {
+          "id": "createcallserver",
+          "title": "unstable_createCallServer",
+          "description": "title: createCallServer",
+          "tags": [
+            "callServer",
+            "react-server-dom-xyz/client",
+            "createFromReadableStream",
+            "encodeReply",
+            "fetch"
+          ],
+          "path": "react-router/createcallserver.md",
+          "tokens": 549
+        },
+        {
+          "id": "getrscstream",
+          "title": "unstable_getRSCStream",
+          "description": "title: getRSCStream",
+          "tags": [
+            "react-server-dom-xyz/client",
+            "createFromReadableStream",
+            "ReadableStream"
+          ],
+          "path": "react-router/getrscstream.md",
+          "tokens": 442
+        },
+        {
+          "id": "matchrscserverrequest",
+          "title": "unstable_matchRSCServerRequest",
+          "description": "title: matchRSCServerRequest",
+          "tags": [
+            "Request",
+            "Response",
+            "unstable_RSCPayload",
+            "react-server-dom-xyz/server",
+            "decodeAction",
+            "useActionState",
+            "decodeFormState",
+            "decodeReply",
+            "renderToReadableStream",
+            "loadServerAction"
+          ],
+          "path": "react-router/matchrscserverrequest.md",
+          "tokens": 1255
+        },
+        {
+          "id": "routerscserverrequest",
+          "title": "unstable_routeRSCServerRequest",
+          "description": "title: routeRSCServerRequest",
+          "tags": [
+            "Request",
+            "react-server-dom-xyz/client",
+            "createFromReadableStream",
+            "unstable_RSCPayload",
+            "true",
+            "<RSCStaticRouter>",
+            "Response"
+          ],
+          "path": "react-router/routerscserverrequest.md",
+          "tokens": 831
+        },
+        {
+          "id": "routercontextprovider",
+          "title": "RouterContextProvider",
+          "description": "title: RouterContextProvider",
+          "tags": [],
+          "path": "react-router/routercontextprovider.md",
+          "tokens": 269
+        },
+        {
+          "id": "createcontext",
+          "title": "createContext",
+          "description": "title: createContext",
+          "tags": [
+            "RouterContext",
+            "action",
+            "loader",
+            "createContext",
+            "defaultValue",
+            "context.get()",
+            "context.set()"
+          ],
+          "path": "react-router/createcontext.md",
+          "tokens": 645
+        },
+        {
+          "id": "createcookiesessionstorage",
+          "title": "createCookieSessionStorage",
+          "description": "title: createCookieSessionStorage",
+          "tags": [],
+          "path": "react-router/createcookiesessionstorage.md",
+          "tokens": 150
+        },
+        {
+          "id": "creatememorysessionstorage",
+          "title": "createMemorySessionStorage",
+          "description": "title: createMemorySessionStorage",
+          "tags": [],
+          "path": "react-router/creatememorysessionstorage.md",
+          "tokens": 116
+        },
+        {
+          "id": "createpath",
+          "title": "createPath",
+          "description": "title: createPath",
+          "tags": [],
+          "path": "react-router/createpath.md",
+          "tokens": 108
+        },
+        {
+          "id": "createroutesfromelements",
+          "title": "createRoutesFromElements",
+          "description": "title: createRoutesFromElements",
+          "tags": [
+            "RouteObject",
+            "DataRouter"
+          ],
+          "path": "react-router/createroutesfromelements.md",
+          "tokens": 374
+        },
+        {
+          "id": "createsearchparams",
+          "title": "createSearchParams",
+          "description": "title: createSearchParams",
+          "tags": [
+            "new URLSearchParams(init)"
+          ],
+          "path": "react-router/createsearchparams.md",
+          "tokens": 227
+        },
+        {
+          "id": "createsessionstorage",
+          "title": "createSessionStorage",
+          "description": "title: createSessionStorage",
+          "tags": [],
+          "path": "react-router/createsessionstorage.md",
+          "tokens": 108
+        },
+        {
+          "id": "data",
+          "title": "data",
+          "description": "title: data",
+          "tags": [
+            "headers",
+            "status",
+            "Response",
+            "ResponseInit",
+            "DataWithResponseInit"
+          ],
+          "path": "react-router/data.md",
+          "tokens": 326
+        },
+        {
+          "id": "generatepath",
+          "title": "generatePath",
+          "description": "title: generatePath",
+          "tags": [],
+          "path": "react-router/generatepath.md",
+          "tokens": 271
+        },
+        {
+          "id": "isrouteerrorresponse",
+          "title": "isRouteErrorResponse",
+          "description": "title: isRouteErrorResponse",
+          "tags": [
+            "ErrorResponse",
+            "Response",
+            "action",
+            "loader",
+            "true",
+            "false"
+          ],
+          "path": "react-router/isrouteerrorresponse.md",
+          "tokens": 404
+        },
+        {
+          "id": "matchpath",
+          "title": "matchPath",
+          "description": "title: matchPath",
+          "tags": [
+            "PathPattern",
+            "caseSensitive",
+            "false",
+            "end",
+            "true",
+            "null"
+          ],
+          "path": "react-router/matchpath.md",
+          "tokens": 329
+        },
+        {
+          "id": "matchroutes",
+          "title": "matchRoutes",
+          "description": "title: matchRoutes",
+          "tags": [
+            "Location",
+            "/",
+            "null"
+          ],
+          "path": "react-router/matchroutes.md",
+          "tokens": 390
+        },
+        {
+          "id": "parsepath",
+          "title": "parsePath",
+          "description": "title: parsePath",
+          "tags": [],
+          "path": "react-router/parsepath.md",
+          "tokens": 101
+        },
+        {
+          "id": "redirect",
+          "title": "redirect",
+          "description": "title: redirect",
+          "tags": [
+            "Response",
+            "Location",
+            "302 Found",
+            "ResponseInit"
+          ],
+          "path": "react-router/redirect.md",
+          "tokens": 342
+        },
+        {
+          "id": "redirectdocument",
+          "title": "redirectDocument",
+          "description": "title: redirectDocument",
+          "tags": [
+            "Response",
+            "Location",
+            "302 Found",
+            "ResponseInit"
+          ],
+          "path": "react-router/redirectdocument.md",
+          "tokens": 407
+        },
+        {
+          "id": "rendermatches",
+          "title": "renderMatches",
+          "description": "title: renderMatches",
+          "tags": [
+            "matchRoutes",
+            "null"
+          ],
+          "path": "react-router/rendermatches.md",
+          "tokens": 246
+        },
+        {
+          "id": "replace",
+          "title": "replace",
+          "description": "title: replace",
+          "tags": [
+            "Response",
+            "history.replaceState",
+            "history.pushState",
+            "Location",
+            "302 Found",
+            "ResponseInit"
+          ],
+          "path": "react-router/replace.md",
+          "tokens": 389
+        },
+        {
+          "id": "resolvepath",
+          "title": "resolvePath",
+          "description": "title: resolvePath",
+          "tags": [
+            "Path",
+            "/"
+          ],
+          "path": "react-router/resolvepath.md",
+          "tokens": 288
+        },
+        {
+          "id": "api-development-strategy",
+          "title": "API Development Strategy",
+          "description": "title: API Development Strategy",
+          "tags": [],
+          "path": "react-router/api-development-strategy.md",
+          "tokens": 568
+        },
+        {
+          "id": "contributing",
+          "title": "Contributing to React Router",
+          "description": "title: Contributing",
+          "tags": [
+            "react-router",
+            "dev",
+            "main",
+            "npm",
+            "package-lock.json",
+            "docs",
+            "react-router-website",
+            "README.md",
+            "packages",
+            "pnpm install"
+          ],
+          "path": "react-router/contributing.md",
+          "tokens": 1627
+        },
+        {
+          "id": "elements",
+          "title": "Markdown Elements",
+          "description": "title: Markdown Elements",
+          "tags": [
+            "<docs-*>",
+            "<docs-info>",
+            "<docs-warning>",
+            "<docs-error>",
+            "<Link to>",
+            "..",
+            "<a href>",
+            "/",
+            "useMatches",
+            "createBrowserRouter"
+          ],
+          "path": "react-router/elements.md",
+          "tokens": 1387
+        },
+        {
+          "id": "backend-for-frontend",
+          "title": "Backend For Frontend",
+          "description": "title: Backend For Frontend",
+          "tags": [
+            "fetch",
+            "escapeHtml"
+          ],
+          "path": "react-router/backend-for-frontend.md",
+          "tokens": 584
+        },
+        {
+          "id": "code-splitting",
+          "title": "Automatic Code Splitting",
+          "description": "title: Automatic Code Splitting",
+          "tags": [
+            "contact.tsx",
+            "about.tsx",
+            "\"/about\"",
+            "Component"
+          ],
+          "path": "react-router/code-splitting.md",
+          "tokens": 443
+        },
+        {
+          "id": "concurrency",
+          "title": "Network Concurrency Management",
+          "description": "title: Network Concurrency Management",
+          "tags": [
+            "form",
+            "loader",
+            "action",
+            "useFetcher",
+            "|"
+          ],
+          "path": "react-router/concurrency.md",
+          "tokens": 1891
+        },
+        {
+          "id": "form-vs-fetcher",
+          "title": "Form vs. fetcher",
+          "description": "title: Form vs. fetcher",
+          "tags": [
+            "<Form>",
+            "useFetcher",
+            "useNavigation",
+            "<fetcher.Form>",
+            "actionData",
+            "fetcher.data",
+            "navigation.state",
+            "fetcher.state",
+            "navigation.formAction",
+            "fetcher.formAction"
+          ],
+          "path": "react-router/form-vs-fetcher.md",
+          "tokens": 2908
+        },
+        {
+          "id": "hot-module-replacement",
+          "title": "Hot Module Replacement",
+          "description": "title: Hot Module Replacement",
+          "tags": [
+            "action",
+            "headers",
+            "links",
+            "loader",
+            "meta",
+            "useState",
+            "pet",
+            "dog",
+            "<input />",
+            "key"
+          ],
+          "path": "react-router/hot-module-replacement.md",
+          "tokens": 1220
+        },
+        {
+          "id": "hydration",
+          "title": "hydration",
+          "description": "title: Hydration",
+          "tags": [
+            "HydrateFallback",
+            "clientLoader.hydrate=true",
+            "clientLoader",
+            "loader",
+            "useLoaderData",
+            "undefined",
+            "<Outlet/>",
+            "useRouteLoaderData()",
+            "useMatches()"
+          ],
+          "path": "react-router/hydration.md",
+          "tokens": 304
+        },
+        {
+          "id": "index-query-param",
+          "title": "Index Query Param",
+          "description": "title: Index Query Param",
+          "tags": [
+            "?index",
+            "loader",
+            "form",
+            "/projects",
+            "./pages/projects.tsx",
+            "./pages/projects/index.tsx",
+            "<Form>",
+            "action",
+            "/projects?index",
+            "projects"
+          ],
+          "path": "react-router/index-query-param.md",
+          "tokens": 661
+        },
+        {
+          "id": "lazy-route-discovery",
+          "title": "Lazy Route Discovery",
+          "description": "title: Lazy Route Discovery",
+          "tags": [
+            "loaders",
+            "actions",
+            "/__manifest",
+            "<Link>",
+            "<NavLink>",
+            "react-router.config.ts",
+            "version",
+            "paths",
+            "manifestPath"
+          ],
+          "path": "react-router/lazy-route-discovery.md",
+          "tokens": 831
+        },
+        {
+          "id": "progressive-enhancement",
+          "title": "Progressive Enhancement",
+          "description": "title: Progressive Enhancement",
+          "tags": [
+            "<Link to=\"/account\">",
+            "<a href=\"/account\">",
+            "useFetcher",
+            "<Form>",
+            "/search"
+          ],
+          "path": "react-router/progressive-enhancement.md",
+          "tokens": 1574
+        },
+        {
+          "id": "race-conditions",
+          "title": "Race Conditions",
+          "description": "title: Race Conditions",
+          "tags": [
+            "<forms>",
+            "fetcher.submit"
+          ],
+          "path": "react-router/race-conditions.md",
+          "tokens": 950
+        },
+        {
+          "id": "react-transitions",
+          "title": "React Transitions",
+          "description": "title: React Transitions",
+          "tags": [
+            "unstable_useTransitions",
+            "React.useTransition",
+            "React.startTransition",
+            "React.useOptimistic",
+            "future.v7_startTransition",
+            "startTransition",
+            "React.useSyncExternalStore",
+            "useSyncExternalStore",
+            "flushSync",
+            "React.flushSync"
+          ],
+          "path": "react-router/react-transitions.md",
+          "tokens": 2268
+        },
+        {
+          "id": "sessions-and-cookies",
+          "title": "Sessions and Cookies",
+          "description": "title: Sessions and Cookies",
+          "tags": [
+            "loader",
+            "action",
+            "SessionStorage",
+            "app/sessions.server.ts",
+            "getSession()",
+            "Cookie",
+            "commitSession()",
+            "destroySession()",
+            "Set-Cookie",
+            "getSession"
+          ],
+          "path": "react-router/sessions-and-cookies.md",
+          "tokens": 4025
+        },
+        {
+          "id": "special-files",
+          "title": "Special Files",
+          "description": "title: Special Files",
+          "tags": [
+            "react-router.config.ts",
+            "root.tsx",
+            "routes.ts",
+            "entry.client.tsx",
+            "entry.server.tsx",
+            ".server",
+            ".client"
+          ],
+          "path": "react-router/special-files.md",
+          "tokens": 235
+        },
+        {
+          "id": "state-management",
+          "title": "State Management",
+          "description": "title: State Management",
+          "tags": [
+            "useNavigation",
+            "navigation.state",
+            "navigation.formData",
+            "navigation.location",
+            "useFetcher",
+            "fetcher.state",
+            "fetcher.formData",
+            "fetcher.data",
+            "loaderData",
+            "actionData"
+          ],
+          "path": "react-router/state-management.md",
+          "tokens": 4616
+        },
+        {
+          "id": "type-safety",
+          "title": "Type Safety",
+          "description": "title: Type Safety",
+          "tags": [
+            "products/:id",
+            "app/routes.ts",
+            "+types/<route file>.d.ts",
+            ".react-router/types/",
+            "rootDirs",
+            "typegen",
+            "LoaderArgs",
+            "ClientLoaderArgs",
+            "ActionArgs",
+            "ClientActionArgs"
+          ],
+          "path": "react-router/type-safety.md",
+          "tokens": 602
+        },
+        {
+          "id": "accessibility",
+          "title": "Accessibility",
+          "description": "title: Accessibility",
+          "tags": [
+            "<Link>",
+            "<NavLink/>",
+            "<Scripts>"
+          ],
+          "path": "react-router/accessibility.md",
+          "tokens": 631
+        },
+        {
+          "id": "client-data",
+          "title": "Client Data",
+          "description": "title: Client Data",
+          "tags": [
+            "clientLoader",
+            "clientAction",
+            "loader",
+            "HydrateFallback",
+            "clientLoader.hydrate = true"
+          ],
+          "path": "react-router/client-data.md",
+          "tokens": 1453
+        },
+        {
+          "id": "data-strategy",
+          "title": "Data Strategy",
+          "description": "title: Data Strategy",
+          "tags": [
+            "action",
+            "loader",
+            "dataStrategy",
+            "request",
+            "params",
+            "context",
+            "matches",
+            "DataStrategyMatch",
+            "runClientMiddleware",
+            "fetcherKey"
+          ],
+          "path": "react-router/data-strategy.md",
+          "tokens": 2817
+        },
+        {
+          "id": "error-boundary",
+          "title": "Error Boundaries",
+          "description": "title: Error Boundaries",
+          "tags": [
+            "ErrorBoundary",
+            "data",
+            "Route.ErrorBoundaryProps",
+            "useRouteError",
+            "instanceof Error",
+            "throw data()",
+            "isRouteErrorResponse",
+            "App",
+            "AppErrorBoundary",
+            "Invoices"
+          ],
+          "path": "react-router/error-boundary.md",
+          "tokens": 1496
+        },
+        {
+          "id": "error-reporting",
+          "title": "Error Reporting",
+          "description": "title: Error Reporting",
+          "tags": [
+            "ErrorBoundary",
+            "handleError",
+            "entry.server.tsx",
+            "onError",
+            "HydratedRouter",
+            "RouterProvider",
+            "entry.client.tsx",
+            "<HydratedRouter onError>",
+            "<RouterProvider onError>"
+          ],
+          "path": "react-router/error-reporting.md",
+          "tokens": 859
+        },
+        {
+          "id": "fetchers",
+          "title": "Using Fetchers",
+          "description": "title: Using Fetchers",
+          "tags": [
+            "fetcher.formData",
+            "data",
+            "import type",
+            "fetcher.submit"
+          ],
+          "path": "react-router/fetchers.md",
+          "tokens": 1809
+        },
+        {
+          "id": "file-route-conventions",
+          "title": "File Route Conventions",
+          "description": "title: File Route Conventions",
+          "tags": [
+            "@react-router/fs-routes",
+            "app/routes.ts",
+            "app/routes",
+            "ignoredRouteFiles",
+            "rootDirectory",
+            "_index.tsx",
+            ".js",
+            ".jsx",
+            ".ts",
+            ".tsx"
+          ],
+          "path": "react-router/file-route-conventions.md",
+          "tokens": 3958
+        },
+        {
+          "id": "file-uploads",
+          "title": "File Uploads",
+          "description": "title: File Uploads",
+          "tags": [
+            "form-data-parser",
+            "request.formData()",
+            "parseFormData",
+            "uploadHandler",
+            "enctype",
+            "multipart/form-data",
+            "file-storage",
+            "localStorage",
+            "LocalFileStorage",
+            "action"
+          ],
+          "path": "react-router/file-uploads.md",
+          "tokens": 1398
+        },
+        {
+          "id": "form-validation",
+          "title": "Form Validation",
+          "description": "title: Form Validation",
+          "tags": [
+            "action",
+            "Signup",
+            "data({ errors }, { status: 400 })",
+            "fetcher.data"
+          ],
+          "path": "react-router/form-validation.md",
+          "tokens": 877
+        },
+        {
+          "id": "headers",
+          "title": "HTTP Headers",
+          "description": "title: HTTP Headers",
+          "tags": [
+            "headers",
+            "entry.server.tsx",
+            "Headers",
+            "HeadersInit",
+            "data",
+            "Set-Cookie",
+            "loader",
+            "action",
+            "set",
+            "append"
+          ],
+          "path": "react-router/headers.md",
+          "tokens": 884
+        },
+        {
+          "id": "instrumentation",
+          "title": "Instrumentation",
+          "description": "title: Instrumentation",
+          "tags": [
+            "entry.server.tsx",
+            "entry.client.tsx",
+            "callHandler"
+          ],
+          "path": "react-router/instrumentation.md",
+          "tokens": 3844
+        },
+        {
+          "id": "meta",
+          "title": "meta",
+          "description": "title: Meta Tags and SEO",
+          "tags": [
+            "<meta>",
+            "{ title }",
+            "<title>",
+            "{ \"script:ld+json\" }",
+            "<script type=\"application/ld+json\">",
+            "<link>",
+            "tagName",
+            "\"link\"",
+            "canonical",
+            "links"
+          ],
+          "path": "react-router/meta.md",
+          "tokens": 274
+        },
+        {
+          "id": "middleware",
+          "title": "Middleware",
+          "description": "title: Middleware",
+          "tags": [
+            "future.v8_middleware",
+            "getLoadContext",
+            "context",
+            "Response",
+            "GET /parent/child",
+            "action",
+            "loader",
+            "createContext",
+            "RouterContextProvider",
+            "getContext"
+          ],
+          "path": "react-router/middleware.md",
+          "tokens": 6929
+        },
+        {
+          "id": "navigation-blocking",
+          "title": "Navigation Blocking",
+          "description": "title: Navigation Blocking",
+          "tags": [
+            "blocker.proceed()",
+            "blocker.reset()"
+          ],
+          "path": "react-router/navigation-blocking.md",
+          "tokens": 1437
+        },
+        {
+          "id": "optimize-revalidation",
+          "title": "optimize-revalidation",
+          "description": "title: Revalidation Optimization",
+          "tags": [
+            "false",
+            "fetcher.load",
+            "useRevalidator"
+          ],
+          "path": "react-router/optimize-revalidation.md",
+          "tokens": 286
+        },
+        {
+          "id": "pre-rendering",
+          "title": "Pre-Rendering",
+          "description": "title: Pre-Rendering",
+          "tags": [
+            "prerender",
+            "react-router.config.ts",
+            "true",
+            "routes.ts",
+            "/blog/:slug",
+            "getStaticPaths",
+            "prerender.paths",
+            "prerender.unstable_concurrency",
+            "ssr",
+            "ssr:true"
+          ],
+          "path": "react-router/pre-rendering.md",
+          "tokens": 2280
+        },
+        {
+          "id": "presets",
+          "title": "Presets",
+          "description": "title: Presets",
+          "tags": [
+            "presets",
+            "serverBundles",
+            "reactRouterConfigResolved"
+          ],
+          "path": "react-router/presets.md",
+          "tokens": 763
+        },
+        {
+          "id": "react-server-components",
+          "title": "React Server Components",
+          "description": "title: React Server Components",
+          "tags": [
+            "\"use client\"",
+            "\"use server\"",
+            "@vitejs/plugin-rsc",
+            "unstable_reactRouterRSC",
+            "build/server/index.js",
+            "default",
+            "(request: Request) => Promise<Response>",
+            "http.createServer",
+            "createRequestListener",
+            "ServerComponent"
+          ],
+          "path": "react-router/react-server-components.md",
+          "tokens": 6960
+        },
+        {
+          "id": "resource-routes",
+          "title": "Resource Routes",
+          "description": "title: Resource Routes",
+          "tags": [
+            "<a>",
+            "<Link reloadDocument>",
+            "loader",
+            "action",
+            "Response",
+            "data()",
+            "data() -> Response",
+            "<Form>",
+            "Await",
+            "Error"
+          ],
+          "path": "react-router/resource-routes.md",
+          "tokens": 1076
+        },
+        {
+          "id": "route-module-type-safety",
+          "title": "Route Module Type Safety",
+          "description": "title: Route Module Type Safety",
+          "tags": [
+            ".react-router/",
+            ".gitignore",
+            "rootDirs",
+            "tsconfig",
+            "include",
+            "node-custom-server",
+            "tsconfig.json",
+            "tsconfig.node.json",
+            "tsconfig.vite.json",
+            ".react-router/types"
+          ],
+          "path": "react-router/route-module-type-safety.md",
+          "tokens": 862
+        },
+        {
+          "id": "security",
+          "title": "Security",
+          "description": "title: Security",
+          "tags": [
+            "Content-Security-Policy",
+            "unsafe-inline",
+            "nonce",
+            "<script>",
+            "<Scripts nonce>",
+            "root.tsx",
+            "<ScrollRestoration nonce>",
+            "<ServerRouter nonce>",
+            "entry.server.tsx",
+            "renderToPipeableStream(..., { nonce })"
+          ],
+          "path": "react-router/security.md",
+          "tokens": 355
+        },
+        {
+          "id": "server-bundles",
+          "title": "Server Bundles",
+          "description": "title: Server Bundles",
+          "tags": [
+            "react-router.config.ts",
+            "serverBundles",
+            "branch",
+            "route",
+            "id",
+            "file",
+            "app/routes/gists.$username.tsx",
+            "routes/gists.$username",
+            "path",
+            "index"
+          ],
+          "path": "react-router/server-bundles.md",
+          "tokens": 854
+        },
+        {
+          "id": "spa",
+          "title": "Single Page App (SPA)",
+          "description": "title: Single Page App (SPA)",
+          "tags": [
+            "ssr:false",
+            "react-router.config.ts",
+            "index.html",
+            "<div id=\"root\"></div>",
+            "react-router build",
+            "<div>",
+            "loader",
+            "HydrateFallback",
+            "ssr",
+            "false"
+          ],
+          "path": "react-router/spa.md",
+          "tokens": 1218
+        },
+        {
+          "id": "status",
+          "title": "Status Codes",
+          "description": "title: Status Codes",
+          "tags": [
+            "data"
+          ],
+          "path": "react-router/status.md",
+          "tokens": 380
+        },
+        {
+          "id": "suspense",
+          "title": "Streaming with Suspense",
+          "description": "title: Streaming with Suspense",
+          "tags": [
+            "loaderData",
+            "<Await>",
+            "<Suspense>",
+            "React.use",
+            "Await",
+            "streamTimeout",
+            "entry.server.tsx"
+          ],
+          "path": "react-router/suspense.md",
+          "tokens": 633
+        },
+        {
+          "id": "using-handle",
+          "title": "Using `handle`",
+          "description": "title: Using handle",
+          "tags": [
+            "handle",
+            "useMatches",
+            "breadcrumb",
+            "match",
+            "match.data"
+          ],
+          "path": "react-router/using-handle.md",
+          "tokens": 793
+        },
+        {
+          "id": "view-transitions",
+          "title": "View Transitions",
+          "description": "title: View Transitions",
+          "tags": [
+            "viewTransition",
+            "Link",
+            "NavLink",
+            "Form",
+            "document.startViewTransition()",
+            "useNavigate",
+            "viewTransition: true",
+            "useViewTransitionState"
+          ],
+          "path": "react-router/view-transitions.md",
+          "tokens": 1445
+        },
+        {
+          "id": "webhook",
+          "title": "can make a quick how-to on creating a webhook, this was copy/pasted from another doc, needs to be reviewed first",
+          "description": "title: Webhooks",
+          "tags": [],
+          "path": "react-router/webhook.md",
+          "tokens": 306
+        },
+        {
+          "id": "index",
+          "title": "React Router Home",
+          "description": "title: React Router Home",
+          "tags": [],
+          "path": "react-router/index.md",
+          "tokens": 286
+        },
+        {
+          "id": "actions",
+          "title": "Actions",
+          "description": "title: Actions",
+          "tags": [
+            "action",
+            "<Form>",
+            "useSubmit",
+            "<fetcher.Form>",
+            "fetcher.submit",
+            "submit",
+            "useActionData",
+            "fetcher.data"
+          ],
+          "path": "react-router/actions.md",
+          "tokens": 800
+        },
+        {
+          "id": "custom",
+          "title": "Custom Framework",
+          "description": "title: Custom Framework",
+          "tags": [
+            "@react-router/dev",
+            "createBrowserRouter",
+            "routes.ts",
+            "<RouterProvider>",
+            "lazy",
+            "createStaticHandler",
+            "Request",
+            "window.__staticRouterHydrationData"
+          ],
+          "path": "react-router/custom.md",
+          "tokens": 1276
+        },
+        {
+          "id": "data-loading",
+          "title": "Data Loading",
+          "description": "title: Data Loading",
+          "tags": [
+            "useLoaderData"
+          ],
+          "path": "react-router/data-loading.md",
+          "tokens": 181
+        },
+        {
+          "id": "installation",
+          "title": "Installation",
+          "description": "title: Installation",
+          "tags": [
+            "RouterProvider"
+          ],
+          "path": "react-router/installation.md",
+          "tokens": 240
+        },
+        {
+          "id": "route-object",
+          "title": "Route Object",
+          "description": "title: Route Object",
+          "tags": [
+            "createBrowserRouter",
+            "Component",
+            "middleware",
+            "next",
+            "loader",
+            "action",
+            "<Form>",
+            "useFetcher",
+            "useSubmit",
+            "shouldRevalidate"
+          ],
+          "path": "react-router/route-object.md",
+          "tokens": 1341
+        },
+        {
+          "id": "routing",
+          "title": "Routing",
+          "description": "title: Routing",
+          "tags": [
+            "createBrowserRouter",
+            "children",
+            "\"/dashboard\"",
+            "\"/dashboard/settings\"",
+            "<Outlet/>",
+            "path",
+            "Home",
+            "Contact",
+            "MarketingLayout",
+            "Project"
+          ],
+          "path": "react-router/routing.md",
+          "tokens": 1550
+        },
+        {
+          "id": "installation",
+          "title": "Installation",
+          "description": "title: Installation",
+          "tags": [
+            "<BrowserRouter>"
+          ],
+          "path": "react-router/installation.md",
+          "tokens": 188
+        },
+        {
+          "id": "navigating",
+          "title": "Navigating",
+          "description": "title: Navigating",
+          "tags": [
+            "<Link>",
+            "<NavLink>",
+            "useNavigate",
+            "NavLink",
+            ".active",
+            "className",
+            "style",
+            "children",
+            "Link"
+          ],
+          "path": "react-router/navigating.md",
+          "tokens": 631
+        },
+        {
+          "id": "routing",
+          "title": "Routing",
+          "description": "title: Routing",
+          "tags": [
+            "<Routes>",
+            "<Route>",
+            "\"/dashboard\"",
+            "\"/dashboard/settings\"",
+            "<Outlet/>",
+            "path",
+            "index",
+            "<Route path>",
+            "element",
+            ":"
+          ],
+          "path": "react-router/routing.md",
+          "tokens": 1426
+        },
+        {
+          "id": "url-values",
+          "title": "URL Values",
+          "description": "title: URL Values",
+          "tags": [
+            ":city",
+            "useParams",
+            "?",
+            "useSearchParams",
+            "URLSearchParams",
+            "location",
+            "useLocation"
+          ],
+          "path": "react-router/url-values.md",
+          "tokens": 345
+        },
+        {
+          "id": "actions",
+          "title": "Actions",
+          "description": "title: Actions",
+          "tags": [
+            "action",
+            "clientAction",
+            "<Form>",
+            "useSubmit",
+            "<fetcher.Form>",
+            "fetcher.submit",
+            "submit"
+          ],
+          "path": "react-router/actions.md",
+          "tokens": 1046
+        },
+        {
+          "id": "data-loading",
+          "title": "Data Loading",
+          "description": "title: Data Loading",
+          "tags": [
+            "loader",
+            "clientLoader",
+            "loaderData",
+            "fetch",
+            "react-router.config.ts",
+            "hydrate",
+            "HydrateFallback"
+          ],
+          "path": "react-router/data-loading.md",
+          "tokens": 1401
+        },
+        {
+          "id": "deploying",
+          "title": "Deploying",
+          "description": "title: Deploying",
+          "tags": [
+            "create-react-router"
+          ],
+          "path": "react-router/deploying.md",
+          "tokens": 647
+        },
+        {
+          "id": "installation",
+          "title": "Installation",
+          "description": "title: Installation",
+          "tags": [
+            "http://localhost:5173"
+          ],
+          "path": "react-router/installation.md",
+          "tokens": 256
+        },
+        {
+          "id": "navigating",
+          "title": "Navigating",
+          "description": "title: Navigating",
+          "tags": [
+            "<Link>",
+            "<NavLink>",
+            "<Form>",
+            "redirect",
+            "useNavigate",
+            "NavLink",
+            "className",
+            "style",
+            "children",
+            "URLSearchParams"
+          ],
+          "path": "react-router/navigating.md",
+          "tokens": 954
+        },
+        {
+          "id": "pending-ui",
+          "title": "Pending UI",
+          "description": "title: Pending UI",
+          "tags": [
+            "useNavigation"
+          ],
+          "path": "react-router/pending-ui.md",
+          "tokens": 855
+        },
+        {
+          "id": "rendering",
+          "title": "Rendering Strategies",
+          "description": "title: Rendering Strategies",
+          "tags": [
+            "clientLoader"
+          ],
+          "path": "react-router/rendering.md",
+          "tokens": 408
+        },
+        {
+          "id": "route-module",
+          "title": "Route Module",
+          "description": "title: Route Module",
+          "tags": [
+            "routes.ts",
+            "default",
+            "Route.ComponentProps",
+            "loaderData",
+            "loader",
+            "actionData",
+            "action",
+            "params",
+            "matches",
+            "useLoaderData"
+          ],
+          "path": "react-router/route-module.md",
+          "tokens": 3506
+        },
+        {
+          "id": "routing",
+          "title": "Routing",
+          "description": "title: Routing",
+          "tags": [
+            "app/routes.ts",
+            "@react-router/fs-routes",
+            "routes.ts",
+            "\"/dashboard\"",
+            "\"/dashboard/settings\"",
+            "<Outlet/>",
+            "app/root.tsx",
+            "layout",
+            "home.tsx",
+            "contact.tsx"
+          ],
+          "path": "react-router/routing.md",
+          "tokens": 2261
+        },
+        {
+          "id": "testing",
+          "title": "Testing",
+          "description": "title: Testing",
+          "tags": [
+            "useLoaderData",
+            "<Link>",
+            "createRoutesStub",
+            "useActionData",
+            "loaderData",
+            "actionData",
+            "matches",
+            "useMatches",
+            "Route.\\*",
+            "Route.*"
+          ],
+          "path": "react-router/testing.md",
+          "tokens": 1255
+        },
+        {
+          "id": "modes",
+          "title": "Picking a Mode",
+          "description": "title: Picking a Mode",
+          "tags": [
+            "<Link>",
+            "useNavigate",
+            "useLocation",
+            "loader",
+            "action",
+            "useFetcher",
+            "href",
+            "<BrowserRouter>",
+            "<Link discover>",
+            "<Link prefetch>"
+          ],
+          "path": "react-router/modes.md",
+          "tokens": 2171
+        },
+        {
+          "id": "address-book",
+          "title": "Address Book",
+          "description": "title: Address Book",
+          "tags": [
+            "app/root.tsx",
+            "/contacts/1",
+            "app/routes",
+            "routes.ts",
+            ":",
+            "routes/contact.tsx",
+            "/contacts/123",
+            "/contacts/abc",
+            "Outlet",
+            "<Outlet />"
+          ],
+          "path": "react-router/address-book.md",
+          "tokens": 15855
+        },
+        {
+          "id": "quickstart",
+          "title": "Quick Start",
+          "description": "title: Quick Start",
+          "tags": [
+            "create-react-router",
+            "app/root.jsx",
+            "app/routes.js",
+            "routes.js",
+            "module",
+            "package.json",
+            "react-router",
+            "build",
+            "server",
+            "client"
+          ],
+          "path": "react-router/quickstart.md",
+          "tokens": 2326
+        },
+        {
+          "id": "component-routes",
+          "title": "Framework Adoption from Component Routes",
+          "description": "title: Framework Adoption from Component Routes",
+          "tags": [
+            "<RouterProvider>",
+            "<Routes>",
+            "react-router.config.ts",
+            "index.html",
+            "root.tsx",
+            "src/root.tsx",
+            "src/main.tsx",
+            "src/entry.client.tsx",
+            "entry.client.tsx",
+            "hydrateRoot"
+          ],
+          "path": "react-router/component-routes.md",
+          "tokens": 2387
+        },
+        {
+          "id": "future",
+          "title": "Future Flags and Deprecations",
+          "description": "title: Future Flags",
+          "tags": [
+            "future.v8_middleware",
+            "Response",
+            "react-router-serve",
+            "context",
+            "loader",
+            "action",
+            "getLoadContext",
+            "future.v8_splitRouteModules",
+            "clientLoader",
+            "clientAction"
+          ],
+          "path": "react-router/future.md",
+          "tokens": 941
+        },
+        {
+          "id": "remix",
+          "title": "Upgrading from Remix",
+          "description": "title: Upgrading from Remix",
+          "tags": [
+            "node@20",
+            "react@18",
+            "react-dom@18",
+            "@remix-run/node",
+            "@remix-run/cloudflare",
+            "react-router",
+            "@react-router/node",
+            "@react-router/cloudflare",
+            "createFileSessionStorage",
+            "createWorkersKVSessionStorage"
+          ],
+          "path": "react-router/remix.md",
+          "tokens": 3537
+        },
+        {
+          "id": "router-provider",
+          "title": "Framework Adoption from RouterProvider",
+          "description": "title: Framework Adoption from RouterProvider",
+          "tags": [
+            "<RouterProvider>",
+            "RouterProvider",
+            "react-router.config.ts",
+            "index.html",
+            "root.tsx",
+            "src/root.tsx",
+            "App.tsx",
+            "src/main.tsx",
+            "src/entry.client.tsx",
+            "entry.client.tsx"
+          ],
+          "path": "react-router/router-provider.md",
+          "tokens": 2886
+        },
+        {
+          "id": "v6",
+          "title": "Upgrading from v6",
+          "description": "title: Upgrading from v6",
+          "tags": [
+            "node@20",
+            "react@18",
+            "react-dom@18",
+            "dashboard/*",
+            "*",
+            "<Route path=\"dashboard/*\">",
+            "<Link to=\"relative\">",
+            "<Link to=\"../relative\">",
+            "<Route>",
+            "<Link>"
+          ],
+          "path": "react-router/v6.md",
+          "tokens": 2668
         }
       ]
     },
