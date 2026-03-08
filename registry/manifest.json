@@ -1,5 +1,5 @@
 {
-  "version": 64,
+  "version": 66,
   "updatedAt": "2026-03-08",
   "libraries": [
     {
@@ -2315,6 +2315,1436 @@
           ],
           "path": "ai-sdk/openai-compatible-providers.md",
           "tokens": 8679
+        }
+      ]
+    },
+    {
+      "id": "angular",
+      "name": "Angular",
+      "description": "TypeScript-based web application framework with components, services, and dependency injection",
+      "version": "19",
+      "topics": [
+        {
+          "id": "what-is-angular",
+          "title": "What is Angular",
+          "description": "Skip to main content",
+          "tags": [
+            "ng update",
+            "NgOptimizedImage"
+          ],
+          "path": "angular/what-is-angular.md",
+          "tokens": 2443
+        },
+        {
+          "id": "installation-guide",
+          "title": "Installation guide",
+          "description": "Skip to main content",
+          "tags": [
+            "ng new",
+            "my-first-angular-app",
+            "node_modules",
+            "Local",
+            "http://localhost:4200"
+          ],
+          "path": "angular/installation-guide.md",
+          "tokens": 1395
+        },
+        {
+          "id": "style-guide",
+          "title": "Style Guide",
+          "description": "Skip to main content",
+          "tags": [
+            "-",
+            "UserProfile",
+            "user-profile.ts",
+            ".spec",
+            ".spec.ts",
+            "user-profile.spec.ts",
+            "helpers.ts",
+            "utils.ts",
+            "common.ts",
+            "user-profile.html"
+          ],
+          "path": "angular/style-guide.md",
+          "tokens": 4043
+        },
+        {
+          "id": "what-is-a-component",
+          "title": "What is a component",
+          "description": "Skip to main content",
+          "tags": [
+            "@Component",
+            "selector",
+            "template",
+            "templateUrl",
+            "styleUrl",
+            "imports",
+            "standalone: false",
+            "NgModule",
+            "standalone",
+            "false"
+          ],
+          "path": "angular/what-is-a-component.md",
+          "tokens": 1888
+        },
+        {
+          "id": "component-selectors",
+          "title": "Component selectors",
+          "description": "Skip to main content",
+          "tags": [
+            "profile-photo",
+            "[dropzone]",
+            "[type=\"reset\"]",
+            ".menu-item",
+            "=",
+            ":not",
+            "textarea",
+            "<button>",
+            "type=\"reset\"",
+            "yt-"
+          ],
+          "path": "angular/component-selectors.md",
+          "tokens": 2097
+        },
+        {
+          "id": "styling-components",
+          "title": "Styling components",
+          "description": "Skip to main content",
+          "tags": [
+            "Emulated",
+            "ShadowDom",
+            "ExperimentalIsolatedShadowDom",
+            "None",
+            "@Component",
+            ":host",
+            ":host-context()",
+            "::shadow",
+            "::part",
+            "::ng-deep"
+          ],
+          "path": "angular/styling-components.md",
+          "tokens": 2401
+        },
+        {
+          "id": "accepting-data-with-input-properties",
+          "title": "Accepting data with input properties",
+          "description": "Skip to main content",
+          "tags": [
+            "undefined",
+            "input",
+            "InputSignal",
+            "required",
+            "input.required",
+            "transform",
+            "systemVolume",
+            "trimString",
+            "label",
+            "null"
+          ],
+          "path": "angular/accepting-data-with-input-properties.md",
+          "tokens": 4229
+        },
+        {
+          "id": "custom-events-with-output",
+          "title": "Custom events with output",
+          "description": "Skip to main content",
+          "tags": [
+            "output",
+            "OutputEmitterRef",
+            "emit",
+            "click",
+            "$event",
+            "OutputRef",
+            "subscribe",
+            "OutputRefSubscription",
+            "unsubscribe",
+            "@Output"
+          ],
+          "path": "angular/custom-events-with-output.md",
+          "tokens": 2228
+        },
+        {
+          "id": "content-projection",
+          "title": "Content projection",
+          "description": "Skip to main content",
+          "tags": [
+            "<ng-content>",
+            "<slot>",
+            "@if",
+            "@for",
+            "@switch",
+            "select",
+            "ngProjectAs"
+          ],
+          "path": "angular/content-projection.md",
+          "tokens": 2335
+        },
+        {
+          "id": "component-lifecycle",
+          "title": "Component lifecycle",
+          "description": "Skip to main content",
+          "tags": [
+            "constructor",
+            "ngOnInit",
+            "ngOnChanges",
+            "ngDoCheck",
+            "ngAfterContentInit",
+            "ngAfterContentChecked",
+            "ngAfterViewInit",
+            "ngAfterViewChecked",
+            "afterNextRender",
+            "afterEveryRender"
+          ],
+          "path": "angular/component-lifecycle.md",
+          "tokens": 3959
+        },
+        {
+          "id": "template-overview",
+          "title": "Template Overview",
+          "description": "Skip to main content",
+          "tags": [
+            "template",
+            "*.ts",
+            "*.html",
+            "<UserProfile />",
+            "[]",
+            "()",
+            "@",
+            "&commat;",
+            "&#64;",
+            "<script>"
+          ],
+          "path": "angular/template-overview.md",
+          "tokens": 1640
+        },
+        {
+          "id": "adding-event-listeners",
+          "title": "Adding event listeners",
+          "description": "Skip to main content",
+          "tags": [
+            "()",
+            "updateField",
+            "<input>",
+            "keyup",
+            "click",
+            "keydown",
+            "mouseover",
+            "$event",
+            ".",
+            "alt"
+          ],
+          "path": "angular/adding-event-listeners.md",
+          "tokens": 2482
+        },
+        {
+          "id": "binding-text-properties-and-attributes",
+          "title": "Binding text, properties and attributes",
+          "description": "Skip to main content",
+          "tags": [
+            "{{ theme }}",
+            "dark",
+            "theme",
+            "'light'",
+            "toString",
+            "<button>",
+            "HTMLButtonElement",
+            "isFormValid",
+            "disabled",
+            "mySelection"
+          ],
+          "path": "angular/binding-text-properties-and-attributes.md",
+          "tokens": 3147
+        },
+        {
+          "id": "control-flow",
+          "title": "Control Flow",
+          "description": "Skip to main content",
+          "tags": [
+            "@if",
+            "@else if",
+            "@else",
+            "@for",
+            "Array",
+            "continue",
+            "break",
+            "track",
+            "id",
+            "uuid"
+          ],
+          "path": "angular/control-flow.md",
+          "tokens": 2270
+        },
+        {
+          "id": "template-variable-declaration",
+          "title": "Template variable declaration",
+          "description": "Skip to main content",
+          "tags": [
+            "@let",
+            "let",
+            "@defer",
+            ";",
+            "#",
+            "<ng-template>",
+            "HTMLElement",
+            "exportAs"
+          ],
+          "path": "angular/template-variable-declaration.md",
+          "tokens": 2419
+        },
+        {
+          "id": "deferred-loading-of-components",
+          "title": "Deferred loading of components",
+          "description": "Skip to main content",
+          "tags": [
+            "@defer",
+            "NgModule",
+            "when",
+            "@placeholder",
+            "minimum",
+            "@loading",
+            "after",
+            "@error",
+            ";",
+            "on"
+          ],
+          "path": "angular/deferred-loading-of-components.md",
+          "tokens": 4907
+        },
+        {
+          "id": "expression-syntax",
+          "title": "Expression syntax",
+          "description": "Skip to main content",
+          "tags": [
+            "'Hello'",
+            "\"World\"",
+            "true",
+            "false",
+            "123",
+            "3.14",
+            "{name: 'Alice'}",
+            "['Onion', 'Cheese', 'Garlic']",
+            "null",
+            "/\\d+/"
+          ],
+          "path": "angular/expression-syntax.md",
+          "tokens": 1919
+        },
+        {
+          "id": "directives-overview",
+          "title": "Directives overview",
+          "description": "Skip to main content",
+          "tags": [
+            "NgClass",
+            "NgStyle",
+            "NgModel",
+            "ngClass",
+            "imports",
+            "[ngClass]",
+            "isSpecial",
+            "true",
+            "app.component.ts",
+            "special"
+          ],
+          "path": "angular/directives-overview.md",
+          "tokens": 2432
+        },
+        {
+          "id": "attribute-directives",
+          "title": "Attribute directives",
+          "description": "Skip to main content",
+          "tags": [
+            "ng generate directive",
+            "src/app/highlight.directive.ts",
+            "src/app/highlight.directive.spec.ts",
+            "@Directive()",
+            "[appHighlight]",
+            "ElementRef",
+            "@angular/core",
+            "nativeElement",
+            "constructor()",
+            "appHighlight"
+          ],
+          "path": "angular/attribute-directives.md",
+          "tokens": 2907
+        },
+        {
+          "id": "structural-directives",
+          "title": "Structural directives",
+          "description": "Skip to main content",
+          "tags": [
+            "<ng-template>",
+            "SelectDirective",
+            "SELECT",
+            "[select]",
+            "selectFrom",
+            "select",
+            "*",
+            "*select",
+            "<p>",
+            "let data"
+          ],
+          "path": "angular/structural-directives.md",
+          "tokens": 3487
+        },
+        {
+          "id": "directive-composition",
+          "title": "Directive composition",
+          "description": "Skip to main content",
+          "tags": [
+            "hostDirectives",
+            "MenuBehavior",
+            "AdminMenu",
+            "<admin-menu>",
+            "standalone: false",
+            "selector",
+            "hostDirective",
+            "Menu",
+            "Tooltip",
+            "MenuWithTooltip"
+          ],
+          "path": "angular/directive-composition.md",
+          "tokens": 2076
+        },
+        {
+          "id": "optimizing-images",
+          "title": "Optimizing images",
+          "description": "Skip to main content",
+          "tags": [
+            "NgOptimizedImage",
+            "fetchpriority",
+            "<img>",
+            "srcset",
+            "width",
+            "height",
+            "@angular/common",
+            "imports",
+            "src",
+            "ngSrc"
+          ],
+          "path": "angular/optimizing-images.md",
+          "tokens": 7965
+        },
+        {
+          "id": "signals-overview",
+          "title": "Signals overview",
+          "description": "Skip to main content",
+          "tags": [
+            "signal",
+            ".set()",
+            ".update()",
+            "WritableSignal",
+            "asReadonly()",
+            "set()",
+            "update()",
+            "computed",
+            "doubleCount",
+            "count"
+          ],
+          "path": "angular/signals-overview.md",
+          "tokens": 3649
+        },
+        {
+          "id": "dependent-state-with-linkedsignal",
+          "title": "Dependent state with linkedSignal",
+          "description": "Skip to main content",
+          "tags": [
+            "signal",
+            "selectedOption",
+            "shippingOptions",
+            "linkedSignal",
+            "computed",
+            "source",
+            "computation",
+            "input",
+            "previous",
+            "previous.source"
+          ],
+          "path": "angular/dependent-state-with-linkedsignal.md",
+          "tokens": 2062
+        },
+        {
+          "id": "async-reactivity-with-resources",
+          "title": "Async reactivity with resources",
+          "description": "Skip to main content",
+          "tags": [
+            "resource",
+            "signal",
+            "computed",
+            "input",
+            "Resource",
+            "ResourceOptions",
+            "params",
+            "loader",
+            "ResourceLoader",
+            "value"
+          ],
+          "path": "angular/async-reactivity-with-resources.md",
+          "tokens": 2648
+        },
+        {
+          "id": "dependency-injection-overview",
+          "title": "Dependency Injection overview",
+          "description": "Skip to main content",
+          "tags": [
+            "@Injectable",
+            "AnalyticsLogger",
+            "providedIn: 'root'",
+            "inject()",
+            "Router",
+            "inject",
+            "constructor"
+          ],
+          "path": "angular/dependency-injection-overview.md",
+          "tokens": 2300
+        },
+        {
+          "id": "injection-context",
+          "title": "Injection context",
+          "description": "Skip to main content",
+          "tags": [
+            "constructor",
+            "@Injectable",
+            "@Component",
+            "useFactory",
+            "Provider",
+            "factory",
+            "InjectionToken",
+            "inject",
+            "inject()",
+            "CanActivateFn"
+          ],
+          "path": "angular/injection-context.md",
+          "tokens": 1599
+        },
+        {
+          "id": "hierarchical-injectors",
+          "title": "Hierarchical injectors",
+          "description": "Skip to main content",
+          "tags": [
+            "EnvironmentInjector",
+            "@Injectable()",
+            "providers",
+            "ApplicationConfig",
+            "ElementInjector",
+            "@Directive()",
+            "@Component()",
+            "NgModule",
+            "ModuleInjector",
+            "@NgModule()"
+          ],
+          "path": "angular/hierarchical-injectors.md",
+          "tokens": 11788
+        },
+        {
+          "id": "optimizing-injection-tokens",
+          "title": "Optimizing Injection tokens",
+          "description": "Skip to main content",
+          "tags": [
+            "<lib-card>",
+            "contentChild",
+            "contentChildren",
+            "<lib-header>",
+            "<lib-body>",
+            "<lib-card />",
+            "LibCard",
+            "LibHeader",
+            "contentChild(LibHeader)",
+            "inject"
+          ],
+          "path": "angular/optimizing-injection-tokens.md",
+          "tokens": 2910
+        },
+        {
+          "id": "rxjs-interop-with-angular-signals",
+          "title": "RxJS interop with Angular signals",
+          "description": "Skip to main content",
+          "tags": [
+            "@angular/core/rxjs-interop",
+            "toSignal",
+            "async",
+            "Injector",
+            "initialValue",
+            "undefined",
+            "null",
+            "requireSync",
+            "BehaviorSubject",
+            "requireSync: true"
+          ],
+          "path": "angular/rxjs-interop-with-angular-signals.md",
+          "tokens": 2702
+        },
+        {
+          "id": "component-output-interop",
+          "title": "Component output interop",
+          "description": "Skip to main content",
+          "tags": [
+            "@angular/rxjs-interop",
+            "outputFromObservable",
+            "subscribe",
+            "output()",
+            "outputToObservable",
+            "OutputRef"
+          ],
+          "path": "angular/component-output-interop.md",
+          "tokens": 1076
+        },
+        {
+          "id": "httpclient-overview",
+          "title": "HttpClient overview",
+          "description": "Skip to main content",
+          "tags": [
+            "HttpClient",
+            "@angular/common/http"
+          ],
+          "path": "angular/httpclient-overview.md",
+          "tokens": 754
+        },
+        {
+          "id": "setting-up-the-httpclient",
+          "title": "Setting up the HttpClient",
+          "description": "Skip to main content",
+          "tags": [
+            "HttpClient",
+            "provideHttpClient",
+            "providers",
+            "app.config.ts",
+            "withFetch",
+            "XMLHttpRequest",
+            "fetch",
+            "withInterceptors(...)",
+            "withInterceptors",
+            "withInterceptorsFromDi()"
+          ],
+          "path": "angular/setting-up-the-httpclient.md",
+          "tokens": 2157
+        },
+        {
+          "id": "making-requests",
+          "title": "Making requests",
+          "description": "Skip to main content",
+          "tags": [
+            "HttpClient",
+            "Observable",
+            "HttpClient.get()",
+            "Config",
+            "Object",
+            "undefined",
+            "null",
+            "unknown",
+            "responseType",
+            "'json'"
+          ],
+          "path": "angular/making-requests.md",
+          "tokens": 7439
+        },
+        {
+          "id": "intercepting-requests",
+          "title": "Intercepting requests",
+          "description": "Skip to main content",
+          "tags": [
+            "HttpClient",
+            "HttpRequest",
+            "next",
+            "loggingInterceptor",
+            "console.log",
+            "withInterceptors",
+            "cachingInterceptor",
+            "Observable",
+            "HttpEvent",
+            ".type"
+          ],
+          "path": "angular/intercepting-requests.md",
+          "tokens": 3963
+        },
+        {
+          "id": "testing",
+          "title": "Testing",
+          "description": "Skip to main content",
+          "tags": [
+            "@angular/common/http/testing",
+            "HttpClient",
+            "TestBed",
+            "provideHttpClient()",
+            "provideHttpClientTesting()",
+            "HttpTestingController",
+            "httpTesting",
+            "expectOne",
+            "req.method",
+            "afterEach()"
+          ],
+          "path": "angular/testing.md",
+          "tokens": 2710
+        },
+        {
+          "id": "forms-overview",
+          "title": "Forms overview",
+          "description": "Skip to main content",
+          "tags": [
+            "FormControl",
+            "FormGroup",
+            "FormArray",
+            "ControlValueAccessor",
+            "[formControl]",
+            "<input>",
+            "NgModel",
+            "valueChanges",
+            "favoriteColorControl.setValue()",
+            "setValue()"
+          ],
+          "path": "angular/forms-overview.md",
+          "tokens": 5458
+        },
+        {
+          "id": "reactive-forms",
+          "title": "Reactive Forms",
+          "description": "Skip to main content",
+          "tags": [
+            "FormControl",
+            "ng generate component",
+            "ReactiveFormsModule",
+            "@angular/forms",
+            "imports",
+            "formControl",
+            "FormControlDirective",
+            "name",
+            "<app-name-editor>",
+            "valueChanges"
+          ],
+          "path": "angular/reactive-forms.md",
+          "tokens": 11479
+        },
+        {
+          "id": "strictly-types-forms",
+          "title": "Strictly types forms",
+          "description": "Skip to main content",
+          "tags": [
+            "FormGroup",
+            "login.value",
+            "login.controls",
+            "login.patchValue",
+            "any",
+            "domain",
+            "email",
+            "Untyped",
+            "@angular/forms",
+            "FormControl"
+          ],
+          "path": "angular/strictly-types-forms.md",
+          "tokens": 2896
+        },
+        {
+          "id": "template-driven-forms",
+          "title": "Template driven forms",
+          "description": "Skip to main content",
+          "tags": [
+            "ngModel",
+            "FormsModule",
+            "NgModel",
+            "NgForm",
+            "FormGroup",
+            "<form>",
+            "NgModelGroup",
+            "ngSubmit",
+            "Actor",
+            "ActorFormComponent"
+          ],
+          "path": "angular/template-driven-forms.md",
+          "tokens": 7688
+        },
+        {
+          "id": "validate-forms-input",
+          "title": "Validate forms input",
+          "description": "Skip to main content",
+          "tags": [
+            "INVALID",
+            "ngModel",
+            "NgModel",
+            "name",
+            "<input>",
+            "required",
+            "minlength",
+            "forbiddenName",
+            "#name=\"ngModel\"",
+            "FormControl"
+          ],
+          "path": "angular/validate-forms-input.md",
+          "tokens": 7553
+        },
+        {
+          "id": "building-dynamic-forms",
+          "title": "Building dynamic forms",
+          "description": "Skip to main content",
+          "tags": [
+            "ReactiveFormsModule",
+            "@angular/forms",
+            "DynamicFormQuestionComponent",
+            "QuestionBase",
+            "TextboxQuestion",
+            "DropdownQuestion",
+            "<input>",
+            "type",
+            "options",
+            "text"
+          ],
+          "path": "angular/building-dynamic-forms.md",
+          "tokens": 4471
+        },
+        {
+          "id": "routing-overview",
+          "title": "Routing overview",
+          "description": "Skip to main content",
+          "tags": [
+            "@angular/router",
+            "index.html",
+            "ActivatedRoute"
+          ],
+          "path": "angular/routing-overview.md",
+          "tokens": 1241
+        },
+        {
+          "id": "define-routes",
+          "title": "Define routes",
+          "description": "Skip to main content",
+          "tags": [
+            "/admin",
+            "AdminPage",
+            "routes",
+            "src/app/app.routes.ts",
+            "providers",
+            "provideRouter",
+            "path",
+            ":",
+            "/user/leeroy",
+            "/user/jenkins"
+          ],
+          "path": "angular/define-routes.md",
+          "tokens": 3990
+        },
+        {
+          "id": "route-loading-strategies",
+          "title": "Route loading strategies",
+          "description": "Skip to main content",
+          "tags": [
+            "component",
+            "loadComponent",
+            "loadChildren",
+            "default",
+            "import()",
+            ".then",
+            "inject"
+          ],
+          "path": "angular/route-loading-strategies.md",
+          "tokens": 1959
+        },
+        {
+          "id": "show-routes-with-outlets",
+          "title": "Show routes with outlets",
+          "description": "Skip to main content",
+          "tags": [
+            "RouterOutlet",
+            "/products",
+            "<router-outlet>",
+            "Settings",
+            "<nav>",
+            "path",
+            "component",
+            "routes",
+            "'primary'",
+            "outlet"
+          ],
+          "path": "angular/show-routes-with-outlets.md",
+          "tokens": 2317
+        },
+        {
+          "id": "navigate-to-routes",
+          "title": "Navigate to routes",
+          "description": "Skip to main content",
+          "tags": [
+            "<a>",
+            "href",
+            "http://",
+            "google.com",
+            "https://",
+            "angular.dev",
+            "/essentials",
+            "/",
+            "example.com/settings",
+            "RouterLink"
+          ],
+          "path": "angular/navigate-to-routes.md",
+          "tokens": 2820
+        },
+        {
+          "id": "read-route-state",
+          "title": "Read route state",
+          "description": "Skip to main content",
+          "tags": [
+            "ActivatedRoute",
+            "@angular/router",
+            "url",
+            "Observable",
+            "data",
+            "params",
+            "queryParams",
+            "ActivatedRouteSnapshot",
+            ":",
+            "route.params"
+          ],
+          "path": "angular/read-route-state.md",
+          "tokens": 3790
+        },
+        {
+          "id": "common-routing-tasks",
+          "title": "Common routing tasks",
+          "description": "Skip to main content",
+          "tags": [
+            "id",
+            "EditGroceryItem",
+            "withComponentInputBinding",
+            "provideRouter",
+            "bindToComponentInputs",
+            "RouterModule.forRoot",
+            "input",
+            "input()",
+            "undefined",
+            "transform"
+          ],
+          "path": "angular/common-routing-tasks.md",
+          "tokens": 2844
+        },
+        {
+          "id": "creating-custom-route-matches",
+          "title": "Creating custom route matches",
+          "description": "Skip to main content",
+          "tags": [
+            "UrlMatcher",
+            "Would you like to add Angular routing?",
+            "Y",
+            "CSS",
+            "angular-custom-route-match",
+            "profile.html",
+            "app.html",
+            "app.config.ts",
+            "@",
+            "import"
+          ],
+          "path": "angular/creating-custom-route-matches.md",
+          "tokens": 2039
+        },
+        {
+          "id": "ssr-overview",
+          "title": "SSR Overview",
+          "description": "Skip to main content",
+          "tags": [],
+          "path": "angular/ssr-overview.md",
+          "tokens": 788
+        },
+        {
+          "id": "server-and-hybrid-rendering",
+          "title": "Server and hybrid rendering",
+          "description": "Skip to main content",
+          "tags": [
+            "--ssr",
+            "ng new",
+            "ng add",
+            "outputMode",
+            "static",
+            "RenderMode.Server",
+            "Server routing",
+            "Generate a fully static application",
+            "ServerRoute",
+            "app.routes.server.ts"
+          ],
+          "path": "angular/server-and-hybrid-rendering.md",
+          "tokens": 7958
+        },
+        {
+          "id": "rendering-strategies-in-angular",
+          "title": "Rendering strategies in Angular",
+          "description": "Skip to main content",
+          "tags": [
+            "@defer"
+          ],
+          "path": "angular/rendering-strategies-in-angular.md",
+          "tokens": 2086
+        },
+        {
+          "id": "hydration",
+          "title": "Hydration",
+          "description": "Skip to main content",
+          "tags": [
+            "ng add @angular/ssr",
+            "provideClientHydration",
+            "@angular/platform-browser",
+            "provideClientHydration()",
+            "ng new",
+            "AppModule",
+            "ngSkipHydration",
+            "withEventReplay()",
+            "click",
+            "mouseover"
+          ],
+          "path": "angular/hydration.md",
+          "tokens": 5127
+        },
+        {
+          "id": "incremental-hydration",
+          "title": "Incremental Hydration",
+          "description": "Skip to main content",
+          "tags": [
+            "@defer",
+            "withIncrementalHydration()",
+            "provideClientHydration",
+            "withEventReplay()",
+            "hydrate",
+            "@placeholder",
+            ";",
+            "hydrate on",
+            "hydrate when",
+            "hydrate never"
+          ],
+          "path": "angular/incremental-hydration.md",
+          "tokens": 3286
+        },
+        {
+          "id": "angular-cli-overview",
+          "title": "Angular CLI Overview",
+          "description": "Skip to main content",
+          "tags": [
+            "@angular/cli",
+            "ng",
+            "--this-option",
+            "true",
+            "--no-this-option",
+            "false",
+            "--this-option=false",
+            "--this-option=true",
+            "--option value1 value2",
+            "--option value1 --option value2"
+          ],
+          "path": "angular/angular-cli-overview.md",
+          "tokens": 1301
+        },
+        {
+          "id": "testing-overview",
+          "title": "Testing overview",
+          "description": "Skip to main content",
+          "tags": [
+            "vitest",
+            "jsdom",
+            "happy-dom",
+            "ng test",
+            "test",
+            "angular.json",
+            "include",
+            "['**/*.spec.ts', '**/*.test.ts']",
+            "exclude",
+            "setupFiles"
+          ],
+          "path": "angular/testing-overview.md",
+          "tokens": 3310
+        },
+        {
+          "id": "testing-coverage",
+          "title": "Testing coverage",
+          "description": "Skip to main content",
+          "tags": [
+            "@vitest/coverage-v8",
+            "--coverage",
+            "ng test",
+            "coverage/",
+            "index.html",
+            "coverage",
+            "true",
+            "angular.json",
+            "coverageThresholds",
+            "coverageInclude"
+          ],
+          "path": "angular/testing-coverage.md",
+          "tokens": 1517
+        },
+        {
+          "id": "testing-services",
+          "title": "Testing services",
+          "description": "Skip to main content",
+          "tags": [
+            "Calculator",
+            "TestBed",
+            "beforeEach",
+            "OrderTotal",
+            "TaxCalculator",
+            "inject()",
+            "taxCalculatorStub",
+            "vi.fn()",
+            "TaxCalculator.calculate",
+            "HttpClient"
+          ],
+          "path": "angular/testing-services.md",
+          "tokens": 2524
+        },
+        {
+          "id": "basics-of-component-testing",
+          "title": "Basics of component testing",
+          "description": "Skip to main content",
+          "tags": [
+            "TestBed",
+            "Lightswitch.clicked()",
+            "Lightswitch.message",
+            "DashboardHero",
+            "Welcome",
+            "Banner",
+            "app/banner",
+            "banner.spec.ts",
+            "TestBed.configureTestingModule()",
+            "override"
+          ],
+          "path": "angular/basics-of-component-testing.md",
+          "tokens": 3931
+        },
+        {
+          "id": "component-testing-scenarios",
+          "title": "Component testing scenarios",
+          "description": "Skip to main content",
+          "tags": [
+            "Banner",
+            "title",
+            "<h1>",
+            "beforeEach",
+            "querySelector",
+            "h1",
+            "createComponent()",
+            "TestBed.createComponent",
+            "whenStable()",
+            "TestBed"
+          ],
+          "path": "angular/component-testing-scenarios.md",
+          "tokens": 12599
+        },
+        {
+          "id": "testing-attribute-directives",
+          "title": "Testing attribute directives",
+          "description": "Skip to main content",
+          "tags": [
+            "Highlight",
+            "customProperty",
+            "true",
+            "About",
+            "<input>",
+            "By.directive",
+            ":not",
+            "By.css('h2:not([highlight])')",
+            "<h2>",
+            "By.css('*:not([highlight])')"
+          ],
+          "path": "angular/testing-attribute-directives.md",
+          "tokens": 2237
+        },
+        {
+          "id": "testing-pipes",
+          "title": "Testing pipes",
+          "description": "Skip to main content",
+          "tags": [
+            "TitleCasePipe",
+            "transform",
+            "@Pipe"
+          ],
+          "path": "angular/testing-pipes.md",
+          "tokens": 1414
+        },
+        {
+          "id": "debugging-tests",
+          "title": "Debugging tests",
+          "description": "Skip to main content",
+          "tags": [
+            "ng test",
+            "--debug"
+          ],
+          "path": "angular/debugging-tests.md",
+          "tokens": 1026
+        },
+        {
+          "id": "testing-utility-apis",
+          "title": "Testing utility apis",
+          "description": "Skip to main content",
+          "tags": [
+            "TestBed",
+            "ComponentFixture",
+            "inject",
+            "getTestBed",
+            "configureTestingModule",
+            "@NgModule",
+            "MetadataOverride<T>",
+            "T",
+            "@Component",
+            "@Directive"
+          ],
+          "path": "angular/testing-utility-apis.md",
+          "tokens": 4272
+        },
+        {
+          "id": "component-harness-overview",
+          "title": "Component harness overview",
+          "description": "Skip to main content",
+          "tags": [],
+          "path": "angular/component-harness-overview.md",
+          "tokens": 1566
+        },
+        {
+          "id": "using-component-harness-in-tests",
+          "title": "Using component harness in tests",
+          "description": "Skip to main content",
+          "tags": [
+            "@angular/cdk",
+            "TestBed",
+            "TestbedHarnessEnvironment",
+            "loader()",
+            "documentRootLoader()",
+            "Overlay",
+            "harnessForFixture()",
+            "SeleniumWebDriverHarnessEnvironment",
+            "ComponentHarness",
+            "getHarness()"
+          ],
+          "path": "angular/using-component-harness-in-tests.md",
+          "tokens": 3773
+        },
+        {
+          "id": "creating-a-component-harness-for-your-components",
+          "title": "Creating a component harness for your components",
+          "description": "Skip to main content",
+          "tags": [
+            "@angular/cdk",
+            "ComponentHarness",
+            "hostSelector",
+            "Component",
+            "Directive",
+            "with",
+            "HarnessPredicate",
+            "host()",
+            "locatorFor()",
+            "locatorForOptional()"
+          ],
+          "path": "angular/creating-a-component-harness-for-your-components.md",
+          "tokens": 4867
+        },
+        {
+          "id": "animations-your-content",
+          "title": "Animations your content",
+          "description": "Skip to main content",
+          "tags": [
+            "@keyframes",
+            "animated-class",
+            "open",
+            "closed",
+            "animation-duration",
+            "animation-delay",
+            "animation-timing-function",
+            "animation",
+            "transition-duration",
+            "transition-delay"
+          ],
+          "path": "angular/animations-your-content.md",
+          "tokens": 5390
+        },
+        {
+          "id": "route-transition-animation",
+          "title": "Route transition animation",
+          "description": "Skip to main content",
+          "tags": [
+            "document.startViewTransition",
+            "startViewTransition",
+            "withViewTransitions",
+            "::view-transition-old()",
+            "::view-transition-new()",
+            "onViewTransitionCreated",
+            "ViewTransitionInfo",
+            "ViewTransition",
+            "ActivatedRouteSnapshot",
+            "skipTransition()"
+          ],
+          "path": "angular/route-transition-animation.md",
+          "tokens": 3479
+        },
+        {
+          "id": "migrating-to-native-css-animations",
+          "title": "Migrating to native CSS animations",
+          "description": "Skip to main content",
+          "tags": [
+            "@angular/animations",
+            "animate.enter",
+            "animate.leave",
+            "animation()",
+            "animated-class",
+            "state()",
+            "open",
+            "closed",
+            "animate()",
+            "animation-duration"
+          ],
+          "path": "angular/migrating-to-native-css-animations.md",
+          "tokens": 8510
+        },
+        {
+          "id": "api-reference",
+          "title": "API reference",
+          "description": "Skip to main content",
+          "tags": [],
+          "path": "angular/api-reference.md",
+          "tokens": 13234
+        },
+        {
+          "id": "cli-command-reference",
+          "title": "CLI command reference",
+          "description": "Skip to main content",
+          "tags": [
+            "add",
+            "analytics",
+            "build",
+            "b",
+            "cache",
+            "completion",
+            "config",
+            "deploy",
+            "e2e",
+            "e"
+          ],
+          "path": "angular/cli-command-reference.md",
+          "tokens": 609
+        },
+        {
+          "id": "zoneless",
+          "title": "Zoneless",
+          "description": "Skip to main content",
+          "tags": [
+            "async",
+            "await",
+            "provideZoneChangeDetection",
+            "provideZonelessChangeDetection()",
+            "polyfills",
+            "angular.json",
+            "build",
+            "test",
+            "zone.js",
+            "zone.js/testing"
+          ],
+          "path": "angular/zoneless.md",
+          "tokens": 3338
+        },
+        {
+          "id": "error-encyclopedia",
+          "title": "Error encyclopedia",
+          "description": "Skip to main content",
+          "tags": [
+            "inject()\\",
+            "NG0100",
+            "NG0200",
+            "NG0201",
+            "NG0203",
+            "inject()",
+            "NG0204",
+            "NG0205",
+            "NG0207",
+            "NG0209"
+          ],
+          "path": "angular/error-encyclopedia.md",
+          "tokens": 1621
+        },
+        {
+          "id": "extended-diagnostics",
+          "title": "Extended diagnostics",
+          "description": "Skip to main content",
+          "tags": [
+            "let\\",
+            "\\*ngFor\\",
+            "ngSkipHydration\\",
+            "NG8101",
+            "invalidBananaInBox",
+            "NG8102",
+            "nullishCoalescingNotNullable",
+            "NG8103",
+            "missingControlFlowDirective",
+            "NG8104"
+          ],
+          "path": "angular/extended-diagnostics.md",
+          "tokens": 1679
+        },
+        {
+          "id": "update-guide",
+          "title": "Update guide",
+          "description": "Skip to main content",
+          "tags": [],
+          "path": "angular/update-guide.md",
+          "tokens": 226
+        },
+        {
+          "id": "contribute-to-angular",
+          "title": "Contribute to Angular",
+          "description": "[Skip to content](#start-of-content)",
+          "tags": [
+            "angular",
+            "--all",
+            "angular:main",
+            "git rebase",
+            "main"
+          ],
+          "path": "angular/contribute-to-angular.md",
+          "tokens": 3301
+        },
+        {
+          "id": "angular-s-roadmap",
+          "title": "Angular's Roadmap",
+          "description": "Skip to main content",
+          "tags": [
+            "@defer",
+            "@let",
+            "*ngIf",
+            "*ngFor",
+            "*ngSwitch",
+            "ng build",
+            "ng serve",
+            "ng new --standalone"
+          ],
+          "path": "angular/angular-s-roadmap.md",
+          "tokens": 7937
+        },
+        {
+          "id": "keeping-your-projects-up-to-date",
+          "title": "Keeping your projects up-to-date",
+          "description": "Skip to main content",
+          "tags": [
+            "ng version",
+            "16.2.4",
+            "ng update"
+          ],
+          "path": "angular/keeping-your-projects-up-to-date.md",
+          "tokens": 1462
+        },
+        {
+          "id": "security",
+          "title": "Security",
+          "description": "Skip to main content",
+          "tags": [
+            "<script>",
+            "<img alt=\"\" onerror=\"...\">",
+            "<a href=\"javascript:...\">",
+            "innerHtml",
+            "style",
+            "<a href>",
+            "<script src>",
+            "htmlSnippet",
+            "innerHTML",
+            "script"
+          ],
+          "path": "angular/security.md",
+          "tokens": 7938
+        },
+        {
+          "id": "internationalization-i18n",
+          "title": "Internationalization (i18n)",
+          "description": "Skip to main content",
+          "tags": [],
+          "path": "angular/internationalization-i18n.md",
+          "tokens": 1239
         }
       ]
     },

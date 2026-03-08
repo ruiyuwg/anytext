@@ -408,6 +408,14 @@
       "url": "https://docs.solidjs.com/llms.txt"
     },
     {
+      "id": "angular",
+      "name": "Angular",
+      "description": "TypeScript-based web application framework with components, services, and dependency injection",
+      "version": "19",
+      "adapter": "llms-txt",
+      "url": "https://angular.dev/llms.txt"
+    },
+    {
       "id": "azure",
       "name": "Azure",
       "description": "Microsoft Azure cloud platform with compute, storage, databases, AI, and 200+ services",

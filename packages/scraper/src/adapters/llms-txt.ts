@@ -125,8 +125,12 @@ function extractMarkdownLinks(
     }
   });
 
-  // Fall back to all links when no .md or /docs/ links found (e.g., HTML doc pages)
-  return filteredLinks.length > 0 ? filteredLinks : allLinks;
+  // Fall back to all links when filtered links are absent or a tiny outlier
+  // fraction of total (e.g., 1 .md link among 85 HTML doc pages like Angular)
+  const useFiltered =
+    filteredLinks.length > 0 &&
+    (allLinks.length < 5 || filteredLinks.length / allLinks.length >= 0.2);
+  return useFiltered ? filteredLinks : allLinks;
 }
 
 function extractTextContent(node: Link): string {

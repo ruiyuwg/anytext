@@ -377,12 +377,12 @@ describe("llmsTxtAdapter", () => {
     expect(result.length).toBe(2);
   });
 
-  it("does not fall back when .md links exist", async () => {
+  it("does not fall back when .md links are a significant fraction", async () => {
     vi.spyOn(console, "log").mockImplementation(() => {});
     const fetchMod = await import("../../pipeline/fetch.js");
     const cleanMod = await import("../../pipeline/clean.js");
 
-    // Mix of .md and non-.md links — should only follow .md
+    // Mix of .md and non-.md links where .md is ≥20% — should only follow .md
     const indexContent = [
       "[A](https://example.com/a.md)",
       "[B](https://example.com/b)",
@@ -397,6 +397,32 @@ describe("llmsTxtAdapter", () => {
     const result = await llmsTxtAdapter.process(baseSource);
     expect(result.length).toBe(1);
     expect(result[0]!.id).toBe("a");
+  });
+
+  it("falls back to all links when .md links are an outlier fraction", async () => {
+    vi.spyOn(console, "log").mockImplementation(() => {});
+    const fetchMod = await import("../../pipeline/fetch.js");
+    const cleanMod = await import("../../pipeline/clean.js");
+
+    // 1 .md link among 6 non-.md links (<20%) — should fall back to all links
+    const indexContent = [
+      "[Contributing](https://github.com/org/repo/CONTRIBUTING.md)",
+      "[Overview](https://example.com/overview)",
+      "[Guide A](https://example.com/guide/a)",
+      "[Guide B](https://example.com/guide/b)",
+      "[Guide C](https://example.com/guide/c)",
+      "[API](https://example.com/api/ref)",
+      "[FAQ](https://example.com/faq)",
+    ].join("\n\n");
+    vi.mocked(fetchMod.fetchContent)
+      .mockResolvedValueOnce(indexContent)
+      .mockResolvedValue("# Title\n\n" + longContent);
+    vi.mocked(cleanMod.cleanMarkdown).mockResolvedValue(
+      "# Title\n\n" + longContent,
+    );
+
+    const result = await llmsTxtAdapter.process(baseSource);
+    expect(result.length).toBe(7);
   });
 
   it("detects HTML content and uses extractContent", async () => {
