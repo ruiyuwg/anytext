@@ -370,6 +370,14 @@
       "url": "https://effect.website/llms-full.txt"
     },
     {
+      "id": "shadcn-ui",
+      "name": "shadcn/ui",
+      "description": "Beautifully designed, accessible React components built with Radix UI and Tailwind CSS",
+      "version": "2",
+      "adapter": "llms-txt",
+      "url": "https://ui.shadcn.com/llms.txt"
+    },
+    {
       "id": "azure",
       "name": "Azure",
       "description": "Microsoft Azure cloud platform with compute, storage, databases, AI, and 200+ services",

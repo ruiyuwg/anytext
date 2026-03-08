@@ -1,5 +1,5 @@
 {
-  "version": 59,
+  "version": 60,
   "updatedAt": "2026-03-08",
   "libraries": [
     {
@@ -96286,6 +96286,1455 @@
           "tags": [],
           "path": "sanity/what-is-content-operations.md",
           "tokens": 918
+        }
+      ]
+    },
+    {
+      "id": "shadcn-ui",
+      "name": "shadcn/ui",
+      "description": "Beautifully designed, accessible React components built with Radix UI and Tailwind CSS",
+      "version": "2",
+      "topics": [
+        {
+          "id": "cli",
+          "title": "CLI",
+          "description": "<!DOCTYPE html>shadcn - shadcn/ui",
+          "tags": [
+            "init",
+            "cn",
+            "bash\\nnpx shadcn@latest init\\n",
+            "create",
+            "bash\\nnpx shadcn@latest create\\n",
+            "add",
+            "view",
+            "bash\\nnpx shadcn@latest view [item]\\n",
+            "search",
+            "list"
+          ],
+          "path": "shadcn-ui/cli.md",
+          "tokens": 86892
+        },
+        {
+          "id": "components-json",
+          "title": "components.json",
+          "description": "<!DOCTYPE html>components.json - shadcn/ui",
+          "tags": [
+            "components.json",
+            "bash\\nnpx shadcn@latest init\\n",
+            "default",
+            "new-york",
+            "tailwind.config.js",
+            "tailwind.cssVariables",
+            "false",
+            "true",
+            "|",
+            "\\n  }\\n}\\n"
+          ],
+          "path": "shadcn-ui/components-json.md",
+          "tokens": 85221
+        },
+        {
+          "id": "theming",
+          "title": "Theming",
+          "description": "<!DOCTYPE html>Theming - shadcn/ui",
+          "tags": [
+            "tailwind.cssVariables",
+            "true",
+            "components.json",
+            "background",
+            "foreground",
+            "var(--primary)",
+            "var(--primary-foreground)",
+            ":root",
+            "dark",
+            "@theme inline"
+          ],
+          "path": "shadcn-ui/theming.md",
+          "tokens": 77293
+        },
+        {
+          "id": "changelog",
+          "title": "Changelog",
+          "description": "<!DOCTYPE html>Changelog - shadcn/ui",
+          "tags": [
+            "and add",
+            "data-[side=top]",
+            "data-[side=bottom]",
+            "data-[side=left]",
+            "data-[side=right]"
+          ],
+          "path": "shadcn-ui/changelog.md",
+          "tokens": 93080
+        },
+        {
+          "id": "next-js",
+          "title": "Next.js",
+          "description": "<!DOCTYPE html>Next.js - shadcn/ui",
+          "tags": [
+            "init",
+            "bash\\nnpx shadcn@latest init -t next\\n",
+            "--monorepo",
+            "bash\\nnpx shadcn@latest add button\\n",
+            "Button"
+          ],
+          "path": "shadcn-ui/next-js.md",
+          "tokens": 54224
+        },
+        {
+          "id": "vite",
+          "title": "Vite",
+          "description": "<!DOCTYPE html>Vite - shadcn/ui",
+          "tags": [
+            "init",
+            "bash\\nnpx shadcn@latest init -t vite\\n",
+            "--monorepo",
+            "bash\\nnpx shadcn@latest add button\\n",
+            "Button"
+          ],
+          "path": "shadcn-ui/vite.md",
+          "tokens": 54200
+        },
+        {
+          "id": "remix",
+          "title": "Remix",
+          "description": "<!DOCTYPE html>Remix - shadcn/ui",
+          "tags": [
+            "create-remix",
+            "shadcn",
+            "bash\\\\nnpx shadcn@latest init\\\\n",
+            "bash\\\\nnpx shadcn@latest add button\\\\n",
+            "Button"
+          ],
+          "path": "shadcn-ui/remix.md",
+          "tokens": 54158
+        },
+        {
+          "id": "astro",
+          "title": "Astro",
+          "description": "<!DOCTYPE html>Astro - shadcn/ui",
+          "tags": [
+            "bash\\nnpx shadcn@latest init -t astro\\n",
+            "--monorepo",
+            "bash\\nnpx shadcn@latest add button\\n",
+            "Button"
+          ],
+          "path": "shadcn-ui/astro.md",
+          "tokens": 55979
+        },
+        {
+          "id": "laravel",
+          "title": "Laravel",
+          "description": "<!DOCTYPE html>Laravel - shadcn/ui",
+          "tags": [
+            "bash\\nlaravel new my-app --react\\n",
+            "init",
+            "bash\\nnpx shadcn@latest init --force\\n",
+            "y",
+            "bash\\nnpx shadcn@latest add switch\\n",
+            "Switch",
+            "resources/js/components/ui/switch.tsx"
+          ],
+          "path": "shadcn-ui/laravel.md",
+          "tokens": 54633
+        },
+        {
+          "id": "gatsby",
+          "title": "Gatsby",
+          "description": "<!DOCTYPE html>Gatsby - shadcn/ui",
+          "tags": [
+            "create-gatsby",
+            "bash\\nnpm init gatsby\\n",
+            "tsconfig.json",
+            "gatsby-node.ts",
+            "gatsby-node",
+            "shadcn",
+            "bash\\nnpx shadcn@latest init\\n",
+            "bash\\nnpx shadcn@latest add button\\n",
+            "Button"
+          ],
+          "path": "shadcn-ui/gatsby.md",
+          "tokens": 58125
+        },
+        {
+          "id": "react-router",
+          "title": "React Router",
+          "description": "<!DOCTYPE html>React Router - shadcn/ui",
+          "tags": [
+            "--monorepo",
+            "bash\\nnpx shadcn@latest add button\\n",
+            "Button"
+          ],
+          "path": "shadcn-ui/react-router.md",
+          "tokens": 55298
+        },
+        {
+          "id": "tanstack-router",
+          "title": "TanStack Router",
+          "description": "<!DOCTYPE html>TanStack Router - shadcn/ui",
+          "tags": [
+            "bash\\\\nnpx shadcn@latest add button\\\\n",
+            "Button"
+          ],
+          "path": "shadcn-ui/tanstack-router.md",
+          "tokens": 54020
+        },
+        {
+          "id": "tanstack-start",
+          "title": "TanStack Start",
+          "description": "<!DOCTYPE html>TanStack Start - shadcn/ui",
+          "tags": [
+            "--monorepo",
+            "bash\\nnpx shadcn@latest add button\\n",
+            "Button"
+          ],
+          "path": "shadcn-ui/tanstack-start.md",
+          "tokens": 54161
+        },
+        {
+          "id": "manual-installation",
+          "title": "Manual Installation",
+          "description": "<!DOCTYPE html>Manual Installation - shadcn/ui",
+          "tags": [
+            "tsconfig.json",
+            "@",
+            "components.json"
+          ],
+          "path": "shadcn-ui/manual-installation.md",
+          "tokens": 82113
+        },
+        {
+          "id": "form",
+          "title": "Form",
+          "description": "<!DOCTYPE html>Forms - shadcn/ui",
+          "tags": [],
+          "path": "shadcn-ui/form.md",
+          "tokens": 53151
+        },
+        {
+          "id": "field",
+          "title": "Field",
+          "description": "<!DOCTYPE html>Field - shadcn/ui",
+          "tags": [
+            "bash\\nnpx shadcn@latest add field\\n",
+            "Field",
+            "FieldContent",
+            "FieldGroup",
+            "FieldSet",
+            "FieldLegend",
+            "FieldLabel",
+            "RadioItem",
+            "Checkbox",
+            "Switch"
+          ],
+          "path": "shadcn-ui/field.md",
+          "tokens": 229469
+        },
+        {
+          "id": "button",
+          "title": "Button",
+          "description": "<!DOCTYPE html>Button - shadcn/ui",
+          "tags": [
+            "bash\\nnpx shadcn@latest add button\\n",
+            "bash\\nnpm install radix-ui\\n",
+            "cursor: pointer",
+            "cursor: default",
+            "size",
+            "data-icon=\\\"inline-start\\\"",
+            "data-icon=\\\"inline-end\\\"",
+            "rounded-full",
+            "\\u003cSpinner /\\u003e",
+            "ButtonGroup"
+          ],
+          "path": "shadcn-ui/button.md",
+          "tokens": 121509
+        },
+        {
+          "id": "button-group",
+          "title": "Button Group",
+          "description": "<!DOCTYPE html>Button Group - shadcn/ui",
+          "tags": [
+            "bash\\nnpm install radix-ui\\n",
+            "ButtonGroup",
+            "role",
+            "group",
+            "aria-label",
+            "aria-labelledby",
+            "ToggleGroup",
+            "orientation",
+            "size",
+            "\\u003cButtonGroup\\u003e"
+          ],
+          "path": "shadcn-ui/button-group.md",
+          "tokens": 180688
+        },
+        {
+          "id": "input",
+          "title": "Input",
+          "description": "<!DOCTYPE html>Input - shadcn/ui",
+          "tags": [
+            "bash\\nnpx shadcn@latest add input\\n",
+            "tsx\\n\\u003cInput /\\u003e\\n",
+            "Field",
+            "FieldLabel",
+            "FieldDescription",
+            "FieldGroup",
+            "disabled",
+            "data-disabled",
+            "aria-invalid",
+            "data-invalid"
+          ],
+          "path": "shadcn-ui/input.md",
+          "tokens": 130608
+        },
+        {
+          "id": "input-group",
+          "title": "Input Group",
+          "description": "<!DOCTYPE html>Input Group - shadcn/ui",
+          "tags": [
+            "align",
+            "InputGroupAddon",
+            "InputGroupInput",
+            "InputGroupTextarea",
+            "align=\\\"inline-start\\\"",
+            "align=\\\"inline-end\\\"",
+            "align=\\\"block-start\\\"",
+            "align=\\\"block-end\\\"",
+            "data-slot=\\\"input-group-control\\\"",
+            "className"
+          ],
+          "path": "shadcn-ui/input-group.md",
+          "tokens": 182989
+        },
+        {
+          "id": "input-otp",
+          "title": "Input OTP",
+          "description": "<!DOCTYPE html>Input OTP - shadcn/ui",
+          "tags": [
+            "bash\\nnpx shadcn@latest add input-otp\\n",
+            "bash\\nnpm install input-otp\\n",
+            "pattern",
+            "\\u003cInputOTPSeparator /\\u003e",
+            "disabled",
+            "value",
+            "onChange",
+            "aria-invalid",
+            "pattern={REGEXP_ONLY_DIGITS}",
+            "REGEXP_ONLY_DIGITS_AND_CHARS"
+          ],
+          "path": "shadcn-ui/input-otp.md",
+          "tokens": 130522
+        },
+        {
+          "id": "textarea",
+          "title": "Textarea",
+          "description": "<!DOCTYPE html>Textarea - shadcn/ui",
+          "tags": [
+            "bash\\nnpx shadcn@latest add textarea\\n",
+            "tsx\\n\\u003cTextarea /\\u003e\\n",
+            "Field",
+            "FieldLabel",
+            "FieldDescription",
+            "disabled",
+            "data-disabled",
+            "aria-invalid",
+            "data-invalid",
+            "Button"
+          ],
+          "path": "shadcn-ui/textarea.md",
+          "tokens": 82528
+        },
+        {
+          "id": "checkbox",
+          "title": "Checkbox",
+          "description": "<!DOCTYPE html>Checkbox - shadcn/ui",
+          "tags": [
+            "bash\\nnpx shadcn@latest add checkbox\\n",
+            "bash\\nnpm install radix-ui\\n",
+            "tsx\\n\\u003cCheckbox /\\u003e\\n",
+            "defaultChecked",
+            "checked",
+            "onCheckedChange",
+            "aria-invalid",
+            "data-invalid",
+            "Field",
+            "FieldLabel"
+          ],
+          "path": "shadcn-ui/checkbox.md",
+          "tokens": 120605
+        },
+        {
+          "id": "radio-group",
+          "title": "Radio Group",
+          "description": "<!DOCTYPE html>Radio Group - shadcn/ui",
+          "tags": [
+            "bash\\nnpm install radix-ui\\n",
+            "Field",
+            "FieldLabel",
+            "FieldSet",
+            "FieldLegend",
+            "disabled",
+            "RadioGroupItem",
+            "aria-invalid",
+            "data-invalid"
+          ],
+          "path": "shadcn-ui/radio-group.md",
+          "tokens": 117452
+        },
+        {
+          "id": "select",
+          "title": "Select",
+          "description": "<!DOCTYPE html>Select - shadcn/ui",
+          "tags": [
+            "bash\\nnpx shadcn@latest add select\\n",
+            "bash\\nnpm install radix-ui\\n",
+            "position",
+            "SelectContent",
+            "position=\\\"item-aligned\\\"",
+            "position=\\\"popper\\\"",
+            "SelectGroup",
+            "SelectLabel",
+            "SelectSeparator",
+            "data-invalid"
+          ],
+          "path": "shadcn-ui/select.md",
+          "tokens": 136921
+        },
+        {
+          "id": "switch",
+          "title": "Switch",
+          "description": "<!DOCTYPE html>Switch - shadcn/ui",
+          "tags": [
+            "bash\\nnpx shadcn@latest add switch\\n",
+            "bash\\nnpm install radix-ui\\n",
+            "tsx\\n\\u003cSwitch /\\u003e\\n",
+            "FieldLabel",
+            "Field",
+            "disabled",
+            "Switch",
+            "data-disabled",
+            "aria-invalid",
+            "data-invalid"
+          ],
+          "path": "shadcn-ui/switch.md",
+          "tokens": 95775
+        },
+        {
+          "id": "slider",
+          "title": "Slider",
+          "description": "<!DOCTYPE html>Slider - shadcn/ui",
+          "tags": [
+            "bash\\nnpx shadcn@latest add slider\\n",
+            "bash\\nnpm install radix-ui\\n",
+            "orientation=\\\"vertical\\\"",
+            "disabled"
+          ],
+          "path": "shadcn-ui/slider.md",
+          "tokens": 86107
+        },
+        {
+          "id": "calendar",
+          "title": "Calendar",
+          "description": "<!DOCTYPE html>Calendar - shadcn/ui",
+          "tags": [
+            "bash\\nnpx shadcn@latest add calendar\\n",
+            "Button",
+            "Calendar",
+            "\\u003cCalendar\\u003e",
+            "components/ui/calendar.tsx",
+            "react-day-picker",
+            "react-day-picker/persian",
+            "timeZone",
+            "useEffect",
+            "className=\\\"rounded-lg border\\\""
+          ],
+          "path": "shadcn-ui/calendar.md",
+          "tokens": 174305
+        },
+        {
+          "id": "date-picker",
+          "title": "Date Picker",
+          "description": "<!DOCTYPE html>Date Picker - shadcn/ui",
+          "tags": [
+            "\\u003cPopover /\\u003e",
+            "\\u003cCalendar /\\u003e",
+            "chrono-node"
+          ],
+          "path": "shadcn-ui/date-picker.md",
+          "tokens": 123597
+        },
+        {
+          "id": "combobox",
+          "title": "Combobox",
+          "description": "<!DOCTYPE html>Combobox - shadcn/ui",
+          "tags": [
+            "bash\\nnpx shadcn@latest add combobox\\n",
+            "bash\\nnpm install @base-ui/react\\n",
+            "itemToStringValue",
+            "multiple",
+            "ComboboxChips",
+            "showClear",
+            "ComboboxGroup",
+            "ComboboxSeparator",
+            "ComboboxItem",
+            "aria-invalid"
+          ],
+          "path": "shadcn-ui/combobox.md",
+          "tokens": 183384
+        },
+        {
+          "id": "label",
+          "title": "Label",
+          "description": "<!DOCTYPE html>Label - shadcn/ui",
+          "tags": [
+            "bash\\nnpx shadcn@latest add label\\n",
+            "bash\\nnpm install radix-ui\\n",
+            "FieldLabel",
+            "FieldDescription",
+            "FieldError"
+          ],
+          "path": "shadcn-ui/label.md",
+          "tokens": 105763
+        },
+        {
+          "id": "accordion",
+          "title": "Accordion",
+          "description": "<!DOCTYPE html>Accordion - shadcn/ui",
+          "tags": [
+            "bash\\nnpx shadcn@latest add accordion\\n",
+            "bash\\nnpm install radix-ui\\n",
+            "type=\\\"multiple\\\"",
+            "disabled",
+            "AccordionItem",
+            "border",
+            "Accordion",
+            "border-b last:border-b-0",
+            "Card"
+          ],
+          "path": "shadcn-ui/accordion.md",
+          "tokens": 110746
+        },
+        {
+          "id": "breadcrumb",
+          "title": "Breadcrumb",
+          "description": "<!DOCTYPE html>Breadcrumb - shadcn/ui",
+          "tags": [
+            "children",
+            "\\u003cBreadcrumbSeparator /\\u003e",
+            "\\u003cBreadcrumbItem /\\u003e",
+            "\\u003cDropdownMenu /\\u003e",
+            "\\u003cBreadcrumbEllipsis /\\u003e",
+            "asChild",
+            "\\u003cBreadcrumbLink /\\u003e",
+            "Breadcrumb",
+            "className",
+            "string"
+          ],
+          "path": "shadcn-ui/breadcrumb.md",
+          "tokens": 124581
+        },
+        {
+          "id": "navigation-menu",
+          "title": "Navigation Menu",
+          "description": "<!DOCTYPE html>Navigation Menu - shadcn/ui",
+          "tags": [
+            "bash\\nnpm install radix-ui\\n",
+            "asChild",
+            "Link"
+          ],
+          "path": "shadcn-ui/navigation-menu.md",
+          "tokens": 113047
+        },
+        {
+          "id": "sidebar",
+          "title": "Sidebar",
+          "description": "<!DOCTYPE html>Sidebar - shadcn/ui",
+          "tags": [
+            "bash\\nnpx shadcn@latest add sidebar\\n",
+            "Sidebar",
+            "SidebarProvider",
+            "SidebarHeader",
+            "SidebarFooter",
+            "SidebarContent",
+            "SidebarGroup",
+            "SidebarTrigger",
+            "defaultOpen",
+            "boolean"
+          ],
+          "path": "shadcn-ui/sidebar.md",
+          "tokens": 179578
+        },
+        {
+          "id": "tabs",
+          "title": "Tabs",
+          "description": "<!DOCTYPE html>Tabs - shadcn/ui",
+          "tags": [
+            "bash\\nnpx shadcn@latest add tabs\\n",
+            "bash\\nnpm install radix-ui\\n",
+            "variant=\\\"line\\\"",
+            "TabsList",
+            "orientation=\\\"vertical\\\""
+          ],
+          "path": "shadcn-ui/tabs.md",
+          "tokens": 109857
+        },
+        {
+          "id": "separator",
+          "title": "Separator",
+          "description": "<!DOCTYPE html>Separator - shadcn/ui",
+          "tags": [
+            "bash\\nnpx shadcn@latest add separator\\n",
+            "bash\\nnpm install radix-ui\\n",
+            "orientation=\\\"vertical\\\""
+          ],
+          "path": "shadcn-ui/separator.md",
+          "tokens": 82739
+        },
+        {
+          "id": "scroll-area",
+          "title": "Scroll Area",
+          "description": "<!DOCTYPE html>Scroll Area - shadcn/ui",
+          "tags": [
+            "bash\\nnpm install radix-ui\\n",
+            "ScrollBar",
+            "orientation=\\\"horizontal\\\"",
+            "v1.2.0-beta.${a.length - i}",
+            "Photo by ${artwork.artist}"
+          ],
+          "path": "shadcn-ui/scroll-area.md",
+          "tokens": 88815
+        },
+        {
+          "id": "resizable",
+          "title": "Resizable",
+          "description": "<!DOCTYPE html>Resizable - shadcn/ui",
+          "tags": [
+            "Resizable",
+            "bash\\nnpx shadcn@latest add resizable\\n",
+            "orientation=\\\"vertical\\\"",
+            "withHandle",
+            "ResizableHandle",
+            "react-resizable-panels",
+            "PanelGroup",
+            "Group",
+            "PanelResizeHandle",
+            "Separator"
+          ],
+          "path": "shadcn-ui/resizable.md",
+          "tokens": 91642
+        },
+        {
+          "id": "dialog",
+          "title": "Dialog",
+          "description": "<!DOCTYPE html>Dialog - shadcn/ui",
+          "tags": [
+            "bash\\nnpx shadcn@latest add dialog\\n",
+            "bash\\nnpm install radix-ui\\n",
+            "showCloseButton={false}"
+          ],
+          "path": "shadcn-ui/dialog.md",
+          "tokens": 127546
+        },
+        {
+          "id": "alert-dialog",
+          "title": "Alert Dialog",
+          "description": "<!DOCTYPE html>Alert Dialog - shadcn/ui",
+          "tags": [
+            "bash\\nnpm install radix-ui\\n",
+            "size=\\\"sm\\\"",
+            "AlertDialogMedia",
+            "AlertDialogAction",
+            "size",
+            "AlertDialogContent",
+            "\\\"default\\\" \\\\| \\\"sm\\\"",
+            "\\\"default\\\""
+          ],
+          "path": "shadcn-ui/alert-dialog.md",
+          "tokens": 129587
+        },
+        {
+          "id": "sheet",
+          "title": "Sheet",
+          "description": "<!DOCTYPE html>Sheet - shadcn/ui",
+          "tags": [
+            "bash\\nnpx shadcn@latest add sheet\\n",
+            "bash\\nnpm install radix-ui\\n",
+            "side",
+            "SheetContent",
+            "top",
+            "right",
+            "bottom",
+            "left",
+            "showCloseButton={false}"
+          ],
+          "path": "shadcn-ui/sheet.md",
+          "tokens": 120650
+        },
+        {
+          "id": "drawer",
+          "title": "Drawer",
+          "description": "<!DOCTYPE html>Drawer - shadcn/ui",
+          "tags": [
+            "bash\\nnpx shadcn@latest add drawer\\n",
+            "bash\\nnpm install vaul\\n",
+            "direction",
+            "top",
+            "right",
+            "bottom",
+            "left",
+            "Dialog",
+            "Drawer"
+          ],
+          "path": "shadcn-ui/drawer.md",
+          "tokens": 149289
+        },
+        {
+          "id": "popover",
+          "title": "Popover",
+          "description": "<!DOCTYPE html>Popover - shadcn/ui",
+          "tags": [
+            "bash\\nnpx shadcn@latest add popover\\n",
+            "bash\\nnpm install radix-ui\\n",
+            "align",
+            "PopoverContent"
+          ],
+          "path": "shadcn-ui/popover.md",
+          "tokens": 112162
+        },
+        {
+          "id": "tooltip",
+          "title": "Tooltip",
+          "description": "<!DOCTYPE html>Tooltip - shadcn/ui",
+          "tags": [
+            "bash\\nnpx shadcn@latest add tooltip\\n",
+            "TooltipProvider",
+            "bash\\nnpm install radix-ui\\n",
+            "side"
+          ],
+          "path": "shadcn-ui/tooltip.md",
+          "tokens": 94720
+        },
+        {
+          "id": "hover-card",
+          "title": "Hover Card",
+          "description": "<!DOCTYPE html>Hover Card - shadcn/ui",
+          "tags": [
+            "bash\\nnpm install radix-ui\\n",
+            "openDelay",
+            "closeDelay",
+            "HoverCard",
+            "side",
+            "align",
+            "HoverCardContent"
+          ],
+          "path": "shadcn-ui/hover-card.md",
+          "tokens": 92289
+        },
+        {
+          "id": "context-menu",
+          "title": "Context Menu",
+          "description": "<!DOCTYPE html>Context Menu - shadcn/ui",
+          "tags": [
+            "bash\\nnpm install radix-ui\\n",
+            "ContextMenuSub",
+            "ContextMenuShortcut",
+            "ContextMenuCheckboxItem",
+            "ContextMenuRadioItem",
+            "variant=\\\"destructive\\\""
+          ],
+          "path": "shadcn-ui/context-menu.md",
+          "tokens": 169698
+        },
+        {
+          "id": "dropdown-menu",
+          "title": "Dropdown Menu",
+          "description": "<!DOCTYPE html>Dropdown Menu - shadcn/ui",
+          "tags": [
+            "bash\\nnpm install radix-ui\\n",
+            "DropdownMenuSub",
+            "DropdownMenuShortcut",
+            "DropdownMenuCheckboxItem",
+            "DropdownMenuRadioGroup",
+            "variant=\\\"destructive\\\""
+          ],
+          "path": "shadcn-ui/dropdown-menu.md",
+          "tokens": 216630
+        },
+        {
+          "id": "menubar",
+          "title": "Menubar",
+          "description": "<!DOCTYPE html>Menubar - shadcn/ui",
+          "tags": [
+            "bash\\nnpx shadcn@latest add menubar\\n",
+            "bash\\nnpm install radix-ui\\n",
+            "MenubarCheckboxItem",
+            "MenubarRadioGroup",
+            "MenubarRadioItem",
+            "MenubarSub",
+            "MenubarSubTrigger",
+            "MenubarSubContent"
+          ],
+          "path": "shadcn-ui/menubar.md",
+          "tokens": 169172
+        },
+        {
+          "id": "command",
+          "title": "Command",
+          "description": "<!DOCTYPE html>Command - shadcn/ui",
+          "tags": [
+            "\\u003cCommand /\\u003e",
+            "cmdk",
+            "bash\\nnpx shadcn@latest add command\\n",
+            "bash\\nnpm install cmdk\\n"
+          ],
+          "path": "shadcn-ui/command.md",
+          "tokens": 146903
+        },
+        {
+          "id": "alert",
+          "title": "Alert",
+          "description": "<!DOCTYPE html>Alert - shadcn/ui",
+          "tags": [
+            "bash\\nnpx shadcn@latest add alert\\n",
+            "variant=\\\"destructive\\\"",
+            "AlertAction",
+            "bg-amber-50 dark:bg-amber-950",
+            "Alert",
+            "variant",
+            "\\\"default\\\" \\\\| \\\"destructive\\\"",
+            "\\\"default\\\"",
+            "AlertTitle",
+            "className"
+          ],
+          "path": "shadcn-ui/alert.md",
+          "tokens": 93530
+        },
+        {
+          "id": "toast",
+          "title": "Toast",
+          "description": "<!DOCTYPE html>Toast - shadcn/ui",
+          "tags": [],
+          "path": "shadcn-ui/toast.md",
+          "tokens": 53170
+        },
+        {
+          "id": "progress",
+          "title": "Progress",
+          "description": "<!DOCTYPE html>Progress - shadcn/ui",
+          "tags": [
+            "bash\\nnpx shadcn@latest add progress\\n",
+            "bash\\nnpm install radix-ui\\n",
+            "Field",
+            "translateX(-${100 - (value || 0)}%)"
+          ],
+          "path": "shadcn-ui/progress.md",
+          "tokens": 84030
+        },
+        {
+          "id": "spinner",
+          "title": "Spinner",
+          "description": "<!DOCTYPE html>Spinner - shadcn/ui",
+          "tags": [
+            "bash\\nnpx shadcn@latest add spinner\\n",
+            "tsx\\n\\u003cSpinner /\\u003e\\n",
+            "Spinner",
+            "size-*",
+            "data-icon=\\\"inline-start\\\"",
+            "data-icon=\\\"inline-end\\\""
+          ],
+          "path": "shadcn-ui/spinner.md",
+          "tokens": 101190
+        },
+        {
+          "id": "skeleton",
+          "title": "Skeleton",
+          "description": "<!DOCTYPE html>Skeleton - shadcn/ui",
+          "tags": [
+            "bash\\nnpx shadcn@latest add skeleton\\n"
+          ],
+          "path": "shadcn-ui/skeleton.md",
+          "tokens": 81078
+        },
+        {
+          "id": "badge",
+          "title": "Badge",
+          "description": "<!DOCTYPE html>Badge - shadcn/ui",
+          "tags": [
+            "bash\\nnpx shadcn@latest add badge\\n",
+            "variant",
+            "data-icon=\\\"inline-start\\\"",
+            "data-icon=\\\"inline-end\\\"",
+            "asChild",
+            "bg-green-50 dark:bg-green-800",
+            "Badge",
+            "\\\"default\\\"",
+            "className",
+            "string"
+          ],
+          "path": "shadcn-ui/badge.md",
+          "tokens": 92102
+        },
+        {
+          "id": "empty",
+          "title": "Empty",
+          "description": "<!DOCTYPE html>Empty - shadcn/ui",
+          "tags": [
+            "bash\\nnpx shadcn@latest add empty\\n",
+            "border",
+            "bg-*",
+            "bg-gradient-*",
+            "EmptyMedia",
+            "InputGroup",
+            "EmptyContent",
+            "EmptyHeader",
+            "className",
+            "string"
+          ],
+          "path": "shadcn-ui/empty.md",
+          "tokens": 124384
+        },
+        {
+          "id": "avatar",
+          "title": "Avatar",
+          "description": "<!DOCTYPE html>Avatar - shadcn/ui",
+          "tags": [
+            "bash\\nnpx shadcn@latest add avatar\\n",
+            "bash\\nnpm install radix-ui\\n",
+            "AvatarBadge",
+            "className",
+            "\\u003cAvatarBadge\\u003e",
+            "AvatarGroup",
+            "\\u003cAvatarGroupCount\\u003e",
+            "size",
+            "Avatar",
+            "\\\"default\\\" \\\\| \\\"sm\\\" \\\\| \\\"lg\\\""
+          ],
+          "path": "shadcn-ui/avatar.md",
+          "tokens": 128395
+        },
+        {
+          "id": "card",
+          "title": "Card",
+          "description": "<!DOCTYPE html>Card - shadcn/ui",
+          "tags": [
+            "bash\\nnpx shadcn@latest add card\\n",
+            "size=\\\"sm\\\"",
+            "Card",
+            "size",
+            "\\\"default\\\" \\\\| \\\"sm\\\"",
+            "\\\"default\\\"",
+            "className",
+            "string",
+            "CardHeader",
+            "CardTitle"
+          ],
+          "path": "shadcn-ui/card.md",
+          "tokens": 106309
+        },
+        {
+          "id": "table",
+          "title": "Table",
+          "description": "<!DOCTYPE html>Table - shadcn/ui",
+          "tags": [
+            "bash\\nnpx shadcn@latest add table\\n",
+            "\\u003cTableFooter /\\u003e",
+            "\\u003cDropdownMenu /\\u003e",
+            "\\u003cTable /\\u003e"
+          ],
+          "path": "shadcn-ui/table.md",
+          "tokens": 131586
+        },
+        {
+          "id": "data-table",
+          "title": "Data Table",
+          "description": "<!DOCTYPE html>Data Table - shadcn/ui",
+          "tags": [
+            "\\u003cTable /\\u003e",
+            "bash\\nnpx shadcn@latest add table\\n",
+            "tanstack/react-table",
+            "columns.tsx",
+            "data-table.tsx",
+            "\\u003cDataTable /\\u003e",
+            "page.tsx",
+            "components/ui/data-table.tsx",
+            "header",
+            "cell"
+          ],
+          "path": "shadcn-ui/data-table.md",
+          "tokens": 240314
+        },
+        {
+          "id": "chart",
+          "title": "Chart",
+          "description": "<!DOCTYPE html>Chart - shadcn/ui",
+          "tags": [
+            "chart",
+            "ChartTooltip",
+            "bash\\nnpx shadcn@latest add chart\\n",
+            "bash\\nnpm install recharts\\n",
+            "components/ui/chart.tsx",
+            "dataKey",
+            "min-h-[VALUE]",
+            "ChartContainer",
+            "CartesianGrid",
+            "XAxis"
+          ],
+          "path": "shadcn-ui/chart.md",
+          "tokens": 234782
+        },
+        {
+          "id": "carousel",
+          "title": "Carousel",
+          "description": "<!DOCTYPE html>Carousel - shadcn/ui",
+          "tags": [
+            "bash\\nnpx shadcn@latest add carousel\\n",
+            "basis",
+            "\\u003cCarouselItem /\\u003e",
+            "pl-[VALUE]",
+            "-ml-[VALUE]",
+            "\\u003cCarouselContent /\\u003e",
+            "orientation",
+            "opts",
+            "setApi",
+            "plugins"
+          ],
+          "path": "shadcn-ui/carousel.md",
+          "tokens": 154749
+        },
+        {
+          "id": "aspect-ratio",
+          "title": "Aspect Ratio",
+          "description": "<!DOCTYPE html>Aspect Ratio - shadcn/ui",
+          "tags": [
+            "bash\\nnpm install radix-ui\\n",
+            "ratio={1 / 1}",
+            "ratio={9 / 16}",
+            "AspectRatio",
+            "ratio",
+            "number",
+            "className",
+            "string"
+          ],
+          "path": "shadcn-ui/aspect-ratio.md",
+          "tokens": 78590
+        },
+        {
+          "id": "typography",
+          "title": "Typography",
+          "description": "<!DOCTYPE html>Typography - shadcn/ui",
+          "tags": [],
+          "path": "shadcn-ui/typography.md",
+          "tokens": 115466
+        },
+        {
+          "id": "item",
+          "title": "Item",
+          "description": "<!DOCTYPE html>Item - shadcn/ui",
+          "tags": [
+            "Item",
+            "ItemGroup",
+            "bash\\nnpx shadcn@latest add item\\n",
+            "Field",
+            "variant",
+            "size",
+            "default",
+            "sm",
+            "xs",
+            "ItemMedia"
+          ],
+          "path": "shadcn-ui/item.md",
+          "tokens": 174329
+        },
+        {
+          "id": "kbd",
+          "title": "Kbd",
+          "description": "<!DOCTYPE html>Kbd - shadcn/ui",
+          "tags": [
+            "bash\\nnpx shadcn@latest add kbd\\n",
+            "KbdGroup",
+            "Kbd",
+            "Button",
+            "Tooltip",
+            "InputGroupAddon",
+            "className",
+            "string",
+            "|\\n\\n\\n\\n### KbdGroup\\n\\nUse the",
+            "component to group"
+          ],
+          "path": "shadcn-ui/kbd.md",
+          "tokens": 94383
+        },
+        {
+          "id": "collapsible",
+          "title": "Collapsible",
+          "description": "<!DOCTYPE html>Collapsible - shadcn/ui",
+          "tags": [
+            "bash\\nnpm install radix-ui\\n",
+            "open",
+            "onOpenChange"
+          ],
+          "path": "shadcn-ui/collapsible.md",
+          "tokens": 129259
+        },
+        {
+          "id": "toggle",
+          "title": "Toggle",
+          "description": "<!DOCTYPE html>Toggle - shadcn/ui",
+          "tags": [
+            "bash\\nnpx shadcn@latest add toggle\\n",
+            "bash\\nnpm install radix-ui\\n",
+            "variant=\\\"outline\\\"",
+            "size"
+          ],
+          "path": "shadcn-ui/toggle.md",
+          "tokens": 81808
+        },
+        {
+          "id": "toggle-group",
+          "title": "Toggle Group",
+          "description": "<!DOCTYPE html>Toggle Group - shadcn/ui",
+          "tags": [
+            "bash\\nnpm install radix-ui\\n",
+            "variant=\\\"outline\\\"",
+            "size",
+            "spacing",
+            "orientation=\\\"vertical\\\""
+          ],
+          "path": "shadcn-ui/toggle-group.md",
+          "tokens": 107474
+        },
+        {
+          "id": "pagination",
+          "title": "Pagination",
+          "description": "<!DOCTYPE html>Pagination - shadcn/ui",
+          "tags": [
+            "\\u003cPaginationLink /\\u003e",
+            "\\u003ca /\\u003e",
+            "\\u003cLink /\\u003e",
+            "pagination.tsx",
+            "Pagination",
+            "text",
+            "PaginationPrevious",
+            "PaginationNext"
+          ],
+          "path": "shadcn-ui/pagination.md",
+          "tokens": 116733
+        },
+        {
+          "id": "dark-mode",
+          "title": "Dark Mode",
+          "description": "<!DOCTYPE html>Dark Mode - shadcn/ui",
+          "tags": [],
+          "path": "shadcn-ui/dark-mode.md",
+          "tokens": 55541
+        },
+        {
+          "id": "dark-mode-next-js",
+          "title": "Dark Mode - Next.js",
+          "description": "<!DOCTYPE html>Next.js - shadcn/ui",
+          "tags": [
+            "next-themes",
+            "bash\\nnpm install next-themes\\n",
+            "ThemeProvider",
+            "suppressHydrationWarning",
+            "html"
+          ],
+          "path": "shadcn-ui/dark-mode-next-js.md",
+          "tokens": 63966
+        },
+        {
+          "id": "dark-mode-vite",
+          "title": "Dark Mode - Vite",
+          "description": "<!DOCTYPE html>Vite - shadcn/ui",
+          "tags": [
+            "ThemeProvider"
+          ],
+          "path": "shadcn-ui/dark-mode-vite.md",
+          "tokens": 67048
+        },
+        {
+          "id": "dark-mode-astro",
+          "title": "Dark Mode - Astro",
+          "description": "<!DOCTYPE html>Astro - shadcn/ui",
+          "tags": [],
+          "path": "shadcn-ui/dark-mode-astro.md",
+          "tokens": 65208
+        },
+        {
+          "id": "dark-mode-remix",
+          "title": "Dark Mode - Remix",
+          "description": "<!DOCTYPE html>Remix - shadcn/ui",
+          "tags": [
+            "specifiedTheme",
+            "themeAction",
+            ":root[class~=\\\"dark\\\"]",
+            "dark",
+            "remix-themes",
+            "bash\\nnpm install remix-themes\\n",
+            "ThemeProvider"
+          ],
+          "path": "shadcn-ui/dark-mode-remix.md",
+          "tokens": 70271
+        },
+        {
+          "id": "forms-overview",
+          "title": "Forms Overview",
+          "description": "<!DOCTYPE html>Forms - shadcn/ui",
+          "tags": [],
+          "path": "shadcn-ui/forms-overview.md",
+          "tokens": 53151
+        },
+        {
+          "id": "react-hook-form",
+          "title": "React Hook Form",
+          "description": "<!DOCTYPE html>React Hook Form - shadcn/ui",
+          "tags": [
+            "\\u003cField /\\u003e",
+            "useForm",
+            "\\u003cController /\\u003e",
+            "zodResolver",
+            "zod v3",
+            "onSubmit",
+            "resolver",
+            "\\\"onChange\\\"",
+            "\\\"onBlur\\\"",
+            "\\\"onSubmit\\\""
+          ],
+          "path": "shadcn-ui/react-hook-form.md",
+          "tokens": 294625
+        },
+        {
+          "id": "tanstack-form",
+          "title": "TanStack Form",
+          "description": "<!DOCTYPE html>TanStack Form - shadcn/ui",
+          "tags": [
+            "\\u003cField /\\u003e",
+            "useForm",
+            "form.Field",
+            "zod v3",
+            "onSubmit",
+            "validators",
+            "\\\"onChange\\\"",
+            "\\\"onBlur\\\"",
+            "\\\"onSubmit\\\"",
+            "\\u003cFieldError /\\u003e"
+          ],
+          "path": "shadcn-ui/tanstack-form.md",
+          "tokens": 306251
+        },
+        {
+          "id": "forms-next-js",
+          "title": "Forms - Next.js",
+          "description": "<!DOCTYPE html>Next.js - shadcn/ui",
+          "tags": [
+            "useActionState",
+            "\\u003cField /\\u003e",
+            "\\u003cForm /\\u003e",
+            "schema.ts",
+            "zod v3",
+            "FormState",
+            "values",
+            "formAction",
+            "pending",
+            "disabled"
+          ],
+          "path": "shadcn-ui/forms-next-js.md",
+          "tokens": 136770
+        },
+        {
+          "id": "monorepo",
+          "title": "Monorepo",
+          "description": "<!DOCTYPE html>Monorepo - shadcn/ui",
+          "tags": [
+            "init",
+            "--monorepo",
+            "web",
+            "ui",
+            "add",
+            "bash\\ncd apps/web\\n",
+            "npx shadcn@latest add button",
+            "packages/ui",
+            "apps/web",
+            "npx shadcn@latest add login-01"
+          ],
+          "path": "shadcn-ui/monorepo.md",
+          "tokens": 65009
+        },
+        {
+          "id": "react-19",
+          "title": "React 19",
+          "description": "<!DOCTYPE html>Next.js 15 + React 19 - shadcn/ui",
+          "tags": [
+            "latest",
+            "npm",
+            "shadcn",
+            "--force",
+            "--legacy-peer-deps",
+            "react",
+            "react-dom",
+            "bash\\nnpm i react@18 react-dom@18\\n",
+            "npx shadcn@latest init -d",
+            "react-is"
+          ],
+          "path": "shadcn-ui/react-19.md",
+          "tokens": 68997
+        },
+        {
+          "id": "tailwind-css-v4",
+          "title": "Tailwind CSS v4",
+          "description": "<!DOCTYPE html>Tailwind v4 - shadcn/ui",
+          "tags": [
+            "@theme",
+            "@theme inline",
+            "data-slot",
+            "toast",
+            "sonner",
+            "default",
+            "new-york",
+            "shadcn/ui",
+            "@tailwindcss/upgrade@next",
+            "hsl"
+          ],
+          "path": "shadcn-ui/tailwind-css-v4.md",
+          "tokens": 78492
+        },
+        {
+          "id": "javascript",
+          "title": "JavaScript",
+          "description": "<!DOCTYPE html>JavaScript - shadcn/ui",
+          "tags": [
+            "tsx",
+            "components.json",
+            "jsconfig.json"
+          ],
+          "path": "shadcn-ui/javascript.md",
+          "tokens": 53854
+        },
+        {
+          "id": "figma",
+          "title": "Figma",
+          "description": "<!DOCTYPE html>Figma - shadcn/ui",
+          "tags": [],
+          "path": "shadcn-ui/figma.md",
+          "tokens": 51017
+        },
+        {
+          "id": "v0",
+          "title": "v0",
+          "description": "<!DOCTYPE html>Open in v0 - shadcn/ui",
+          "tags": [],
+          "path": "shadcn-ui/v0.md",
+          "tokens": 49853
+        },
+        {
+          "id": "mcp-server",
+          "title": "MCP Server",
+          "description": "<!DOCTYPE html>MCP Server - shadcn/ui",
+          "tags": [
+            "components.json",
+            "/mcp",
+            ".vscode/mcp.json",
+            "shadcn",
+            "~/.codex/config.toml",
+            "@namespace",
+            ".mcp.json",
+            "Connected",
+            ".cursor/mcp.json",
+            ".env.local"
+          ],
+          "path": "shadcn-ui/mcp-server.md",
+          "tokens": 80027
+        },
+        {
+          "id": "registry-overview",
+          "title": "Registry Overview",
+          "description": "<!DOCTYPE html>Introduction - shadcn/ui",
+          "tags": [
+            "shadcn"
+          ],
+          "path": "shadcn-ui/registry-overview.md",
+          "tokens": 51014
+        },
+        {
+          "id": "getting-started",
+          "title": "Getting Started",
+          "description": "<!DOCTYPE html>Getting Started - shadcn/ui",
+          "tags": [
+            "registry.json",
+            "shadcn",
+            "build",
+            "\\u003cHelloWorld /\\u003e",
+            "registry/new-york",
+            "registry/[NAME]",
+            "name",
+            "type",
+            "title",
+            "description"
+          ],
+          "path": "shadcn-ui/getting-started.md",
+          "tokens": 67525
+        },
+        {
+          "id": "examples",
+          "title": "Examples",
+          "description": "<!DOCTYPE html>Examples - shadcn/ui",
+          "tags": [
+            "npx shadcn init",
+            "@tabler/icons-react",
+            "login-01",
+            "calendar",
+            "editor",
+            "font-sans",
+            "Inter, sans-serif",
+            "brand",
+            "extends: none",
+            "npx shadcn add"
+          ],
+          "path": "shadcn-ui/examples.md",
+          "tokens": 172384
+        },
+        {
+          "id": "faq",
+          "title": "FAQ",
+          "description": "<!DOCTYPE html>FAQ - shadcn/ui",
+          "tags": [
+            "cssVars",
+            "light",
+            "dark",
+            "bg-brand",
+            "text-brand-accent",
+            "cssVars.theme"
+          ],
+          "path": "shadcn-ui/faq.md",
+          "tokens": 58723
+        },
+        {
+          "id": "authentication",
+          "title": "Authentication",
+          "description": "<!DOCTYPE html>Authentication - shadcn/ui",
+          "tags": [
+            "components.json"
+          ],
+          "path": "shadcn-ui/authentication.md",
+          "tokens": 88280
+        },
+        {
+          "id": "registry-mcp",
+          "title": "Registry MCP",
+          "description": "<!DOCTYPE html>MCP Server - shadcn/ui",
+          "tags": [
+            "registry",
+            "https://acme.com/r/[name].json",
+            "https://acme.com/r/registry.json",
+            "https://acme.com/r/registry",
+            "components.json",
+            "/mcp",
+            ".vscode/mcp.json",
+            "~/.codex/config.toml",
+            "dependencies",
+            "registryDependencies"
+          ],
+          "path": "shadcn-ui/registry-mcp.md",
+          "tokens": 68202
         }
       ]
     },
