@@ -14,9 +14,9 @@ export const sitemapAdapter: Adapter = {
 
     const crawlConfig = source.crawl ?? {};
 
-    // Fetch and parse sitemap.xml
+    // Fetch and parse sitemap.xml (or sitemap index)
     const sitemapXml = await fetchContent(source.url);
-    const urls = parseSitemapUrls(sitemapXml);
+    const urls = await resolveUrls(sitemapXml, crawlConfig.maxPages);
 
     // Apply include/exclude patterns
     let filtered = urls;
@@ -93,6 +93,60 @@ export const sitemapAdapter: Adapter = {
     return topics;
   },
 };
+
+async function resolveUrls(
+  xml: string,
+  maxPages?: number,
+): Promise<string[]> {
+  if (!isSitemapIndex(xml)) {
+    const urls = parseSitemapUrls(xml);
+    if (maxPages && urls.length > maxPages) {
+      console.warn(
+        `  maxPages limit reached: ${urls.length} URLs found, limiting to ${maxPages}`,
+      );
+      return urls.slice(0, maxPages);
+    }
+    return urls;
+  }
+
+  // Sitemap index: extract sub-sitemap URLs and fetch each
+  const subSitemapUrls = parseSitemapUrls(xml);
+  console.log(
+    `  Detected sitemap index with ${subSitemapUrls.length} sub-sitemaps`,
+  );
+
+  const allUrls: string[] = [];
+  for (const subUrl of subSitemapUrls) {
+    if (maxPages && allUrls.length >= maxPages) {
+      console.warn(
+        `  maxPages limit reached (${maxPages}), stopping sub-sitemap fetching`,
+      );
+      break;
+    }
+
+    try {
+      const subXml = await fetchContent(subUrl);
+      const pageUrls = parseSitemapUrls(subXml);
+
+      if (maxPages) {
+        const remaining = maxPages - allUrls.length;
+        allUrls.push(...pageUrls.slice(0, remaining));
+      } else {
+        allUrls.push(...pageUrls);
+      }
+    } catch (error) {
+      console.warn(
+        `  Failed to fetch sub-sitemap ${subUrl}: ${(error as Error).message}`,
+      );
+    }
+  }
+
+  return allUrls;
+}
+
+function isSitemapIndex(xml: string): boolean {
+  return xml.includes("<sitemapindex");
+}
 
 function parseSitemapUrls(xml: string): string[] {
   const urls: string[] = [];

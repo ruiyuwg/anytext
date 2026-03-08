@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, vi, beforeEach } from "vitest";
 import type { SourceConfig } from "../../types.js";
 import { sitemapAdapter } from "../../adapters/sitemap.js";
 
@@ -30,7 +30,29 @@ const longContent =
     8,
   );
 
+const sitemapIndexXml = `<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap><loc>https://example.com/sitemap-docs.xml</loc></sitemap>
+  <sitemap><loc>https://example.com/sitemap-api.xml</loc></sitemap>
+</sitemapindex>`;
+
+const subSitemap1 = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset>
+  <url><loc>https://example.com/docs/intro</loc></url>
+  <url><loc>https://example.com/docs/guide</loc></url>
+</urlset>`;
+
+const subSitemap2 = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset>
+  <url><loc>https://example.com/api/overview</loc></url>
+  <url><loc>https://example.com/api/reference</loc></url>
+</urlset>`;
+
 describe("sitemapAdapter", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
   it("throws when no source.url", async () => {
     const source = { ...baseSource, url: undefined };
     await expect(sitemapAdapter.process(source)).rejects.toThrow(
@@ -223,5 +245,150 @@ describe("sitemapAdapter", () => {
 
     const result = await sitemapAdapter.process(baseSource);
     expect(result[0]!.title).toBe("index");
+  });
+
+  it("detects sitemap index and fetches sub-sitemaps", async () => {
+    vi.spyOn(console, "log").mockImplementation(() => {});
+    const fetchMod = await import("../../pipeline/fetch.js");
+    const extractMod = await import("../../pipeline/extract.js");
+
+    vi.mocked(fetchMod.fetchContent)
+      .mockResolvedValueOnce(sitemapIndexXml) // root sitemap index
+      .mockResolvedValueOnce(subSitemap1) // first sub-sitemap
+      .mockResolvedValueOnce(subSitemap2) // second sub-sitemap
+      .mockResolvedValue("<html>page</html>"); // all page fetches
+    vi.mocked(extractMod.extractContent).mockReturnValue(longContent);
+
+    const result = await sitemapAdapter.process(baseSource);
+    // 2 sub-sitemaps, 2 URLs each = 4 pages
+    expect(result.length).toBe(4);
+    // 1 root + 2 sub-sitemaps + 4 pages = 7 fetch calls
+    expect(fetchMod.fetchContent).toHaveBeenCalledTimes(7);
+  });
+
+  it("combines URLs from multiple sub-sitemaps", async () => {
+    vi.spyOn(console, "log").mockImplementation(() => {});
+    const fetchMod = await import("../../pipeline/fetch.js");
+    const extractMod = await import("../../pipeline/extract.js");
+
+    vi.mocked(fetchMod.fetchContent)
+      .mockResolvedValueOnce(sitemapIndexXml)
+      .mockResolvedValueOnce(subSitemap1)
+      .mockResolvedValueOnce(subSitemap2)
+      .mockResolvedValue("<html>page</html>");
+    vi.mocked(extractMod.extractContent).mockReturnValue(longContent);
+
+    const source: SourceConfig = {
+      ...baseSource,
+      crawl: { include: ["/api/"] },
+    };
+    const result = await sitemapAdapter.process(source);
+    // Only /api/ URLs should match (2 from subSitemap2)
+    expect(result.length).toBe(2);
+  });
+
+  it("maxPages limit stops URL collection from sub-sitemaps", async () => {
+    vi.spyOn(console, "log").mockImplementation(() => {});
+    vi.spyOn(console, "warn").mockImplementation(() => {});
+    const fetchMod = await import("../../pipeline/fetch.js");
+    const extractMod = await import("../../pipeline/extract.js");
+
+    vi.mocked(fetchMod.fetchContent)
+      .mockResolvedValueOnce(sitemapIndexXml)
+      .mockResolvedValueOnce(subSitemap1) // 2 URLs
+      .mockResolvedValueOnce(subSitemap2) // 2 URLs
+      .mockResolvedValue("<html>page</html>");
+    vi.mocked(extractMod.extractContent).mockReturnValue(longContent);
+
+    const source: SourceConfig = {
+      ...baseSource,
+      crawl: { maxPages: 3 },
+    };
+    const result = await sitemapAdapter.process(source);
+    // maxPages=3: 2 from first sub-sitemap + 1 from second = 3
+    expect(result.length).toBe(3);
+  });
+
+  it("maxPages stops fetching more sub-sitemaps when limit reached", async () => {
+    vi.spyOn(console, "log").mockImplementation(() => {});
+    vi.spyOn(console, "warn").mockImplementation(() => {});
+    const fetchMod = await import("../../pipeline/fetch.js");
+    const extractMod = await import("../../pipeline/extract.js");
+
+    vi.mocked(fetchMod.fetchContent)
+      .mockResolvedValueOnce(sitemapIndexXml)
+      .mockResolvedValueOnce(subSitemap1) // 2 URLs — fills limit
+      .mockResolvedValue("<html>page</html>");
+    vi.mocked(extractMod.extractContent).mockReturnValue(longContent);
+
+    const source: SourceConfig = {
+      ...baseSource,
+      crawl: { maxPages: 2 },
+    };
+    const result = await sitemapAdapter.process(source);
+    expect(result.length).toBe(2);
+    // Should NOT fetch second sub-sitemap since limit already reached
+    // 1 root + 1 sub-sitemap + 2 pages = 4
+    expect(fetchMod.fetchContent).toHaveBeenCalledTimes(4);
+  });
+
+  it("backwards compatible with regular sitemaps (no sitemapindex)", async () => {
+    vi.spyOn(console, "log").mockImplementation(() => {});
+    const fetchMod = await import("../../pipeline/fetch.js");
+    const extractMod = await import("../../pipeline/extract.js");
+
+    vi.mocked(fetchMod.fetchContent)
+      .mockResolvedValueOnce(sitemapXml)
+      .mockResolvedValue("<html>page</html>");
+    vi.mocked(extractMod.extractContent).mockReturnValue(longContent);
+
+    const result = await sitemapAdapter.process(baseSource);
+    expect(result.length).toBe(3);
+    // 1 sitemap + 3 pages = 4 (no sub-sitemap fetches)
+    expect(fetchMod.fetchContent).toHaveBeenCalledTimes(4);
+  });
+
+  it("sub-sitemap fetch failure is skipped gracefully", async () => {
+    vi.spyOn(console, "log").mockImplementation(() => {});
+    vi.spyOn(console, "warn").mockImplementation(() => {});
+    const fetchMod = await import("../../pipeline/fetch.js");
+    const extractMod = await import("../../pipeline/extract.js");
+
+    vi.mocked(fetchMod.fetchContent)
+      .mockResolvedValueOnce(sitemapIndexXml) // root index
+      .mockRejectedValueOnce(new Error("sub-sitemap 1 failed")) // first sub-sitemap fails
+      .mockResolvedValueOnce(subSitemap2) // second sub-sitemap succeeds
+      .mockResolvedValue("<html>page</html>"); // page fetches
+    vi.mocked(extractMod.extractContent).mockReturnValue(longContent);
+
+    const result = await sitemapAdapter.process(baseSource);
+    // Only 2 URLs from second sub-sitemap should be processed
+    expect(result.length).toBe(2);
+    expect(console.warn).toHaveBeenCalledWith(
+      expect.stringContaining("Failed to fetch sub-sitemap"),
+    );
+  });
+
+  it("maxPages limits regular sitemap URLs", async () => {
+    vi.spyOn(console, "log").mockImplementation(() => {});
+    vi.spyOn(console, "warn").mockImplementation(() => {});
+    const fetchMod = await import("../../pipeline/fetch.js");
+    const extractMod = await import("../../pipeline/extract.js");
+
+    vi.mocked(fetchMod.fetchContent)
+      .mockResolvedValueOnce(sitemapXml) // regular sitemap with 3 URLs
+      .mockResolvedValue("<html>page</html>");
+    vi.mocked(extractMod.extractContent).mockReturnValue(longContent);
+
+    const source: SourceConfig = {
+      ...baseSource,
+      crawl: { maxPages: 2 },
+    };
+    const result = await sitemapAdapter.process(source);
+    // maxPages=2 should limit to 2 even for regular sitemaps
+    expect(result.length).toBe(2);
+    expect(console.warn).toHaveBeenCalledWith(
+      expect.stringContaining("maxPages limit reached"),
+    );
   });
 });
