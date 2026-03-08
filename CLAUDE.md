@@ -52,14 +52,23 @@ The scraper (`packages/scraper/`) auto-generates registry docs from upstream sou
 ```sh
 cd packages/scraper
 pnpm build
-node dist/index.js                    # Process all libraries
-node dist/index.js --library hono     # Process single library
-node dist/index.js --dry-run          # Preview without writing manifest
+node dist/index.js                        # Process all libraries
+node dist/index.js --library hono         # Process single library
+node dist/index.js --dry-run              # Preview without writing
+node dist/index.js --force                # Skip incremental hash check
+node dist/index.js --concurrency 8        # Parallel source processing (default: 4)
 ```
 
 - **Config:** `packages/scraper/sources.json` — add new libraries here
-- **Adapters:** `llms-full` (fetch llms-full.txt, split), `llms-txt` (follow .md links), `manual` (read existing docs)
-- **Pipeline:** fetch → preprocess (strip frontmatter, HTML, MDX) → parse → split by headings → write to `registry/docs/`
+- **Adapters:**
+  - `llms-full` — fetch a single llms-full.txt file, clean, and split by headings
+  - `llms-txt` — parse an llms.txt index, follow linked .md pages, clean each
+  - `html` — crawl HTML pages from a URL, extract content via CSS selectors (cheerio + turndown)
+  - `github` — fetch .md files from a GitHub repo via the API (tree listing + raw content)
+  - `sitemap` — parse a sitemap.xml, fetch and extract each listed page
+- **Pipeline:** fetch (with retries) → configurable preprocess → remark parse → offset-based split → staging write → atomic commit → manifest update
+- **Incremental updates:** Content is hashed per-source; unchanged sources are skipped automatically. Use `--force` to re-process regardless.
+- **Staging writes:** Topics are written to `registry/docs/.staging/{sourceId}/` first, then atomically renamed to the live directory on success.
 - **CI:** `.github/workflows/update-docs.yml` runs weekly, creates a PR with updated docs
 
 ## Registry Format
@@ -109,12 +118,18 @@ packages/scraper/src/__tests__/
 │   ├── fetch.test.ts          # Mocks: globalThis.fetch
 │   ├── clean.test.ts          # Uses real remark (no mocking)
 │   ├── split.test.ts          # Uses real remark (no mocking)
-│   └── manifest.test.ts       # Mocks: node:fs, fake timers
+│   ├── manifest.test.ts       # Mocks: node:fs, fake timers
+│   ├── write.test.ts          # Mocks: node:fs, manifest
+│   ├── hashes.test.ts         # Mocks: node:fs, manifest
+│   ├── extract.test.ts        # Uses real cheerio/turndown (no mocking)
+│   └── validate-completeness.test.ts  # Pure functions
 ├── adapters/
-│   ├── llms-full.test.ts      # Mocks: fetch, clean, split, manifest, node:fs
-│   ├── llms-txt.test.ts       # Mocks: fetch, clean, manifest, node:fs
-│   └── manual.test.ts         # Mocks: node:fs, manifest
-├── scrape.test.ts             # Mocks: adapters, manifest, node:fs
+│   ├── llms-full.test.ts      # Mocks: fetch, clean, split, validate-completeness
+│   ├── llms-txt.test.ts       # Mocks: fetch, clean
+│   ├── html.test.ts           # Mocks: fetch, extract
+│   ├── github.test.ts         # Mocks: globalThis.fetch
+│   └── sitemap.test.ts        # Mocks: fetch, extract
+├── scrape.test.ts             # Mocks: adapters, manifest, write, hashes, node:fs
 └── index.test.ts              # IIFE entry point: vi.resetModules() + dynamic import
 ```
 

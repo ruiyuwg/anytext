@@ -38,12 +38,17 @@ async function runScraper(args: string[]) {
 describe("parseArgs", () => {
   it("--library flag sets library", async () => {
     await runScraper(["--library", "react"]);
-    expect(mockProcessSource).toHaveBeenCalledWith(testSource, false);
+    expect(mockProcessSource).toHaveBeenCalledWith(testSource, false, {
+      force: false,
+    });
   });
 
   it("--dry-run flag", async () => {
     await runScraper(["--dry-run"]);
-    expect(mockProcessAll).toHaveBeenCalledWith([testSource], true);
+    expect(mockProcessAll).toHaveBeenCalledWith([testSource], true, {
+      force: false,
+      concurrency: 4,
+    });
   });
 
   it("--library at end without value falls through", async () => {
@@ -53,7 +58,49 @@ describe("parseArgs", () => {
 
   it("no args calls processAll", async () => {
     await runScraper([]);
-    expect(mockProcessAll).toHaveBeenCalledWith([testSource], false);
+    expect(mockProcessAll).toHaveBeenCalledWith([testSource], false, {
+      force: false,
+      concurrency: 4,
+    });
+  });
+
+  it("--force flag", async () => {
+    await runScraper(["--force"]);
+    expect(mockProcessAll).toHaveBeenCalledWith([testSource], false, {
+      force: true,
+      concurrency: 4,
+    });
+  });
+
+  it("--force with --library", async () => {
+    await runScraper(["--library", "react", "--force"]);
+    expect(mockProcessSource).toHaveBeenCalledWith(testSource, false, {
+      force: true,
+    });
+  });
+
+  it("--concurrency flag", async () => {
+    await runScraper(["--concurrency", "8"]);
+    expect(mockProcessAll).toHaveBeenCalledWith([testSource], false, {
+      force: false,
+      concurrency: 8,
+    });
+  });
+
+  it("--concurrency at end without value falls through to default", async () => {
+    await runScraper(["--concurrency"]);
+    expect(mockProcessAll).toHaveBeenCalledWith([testSource], false, {
+      force: false,
+      concurrency: 4,
+    });
+  });
+
+  it("--concurrency with invalid value falls back to default", async () => {
+    await runScraper(["--concurrency", "abc"]);
+    expect(mockProcessAll).toHaveBeenCalledWith([testSource], false, {
+      force: false,
+      concurrency: 4,
+    });
   });
 });
 
@@ -65,7 +112,9 @@ describe("main", () => {
 
   it("calls processSource when --library matches", async () => {
     await runScraper(["--library", "react"]);
-    expect(mockProcessSource).toHaveBeenCalledWith(testSource, false);
+    expect(mockProcessSource).toHaveBeenCalledWith(testSource, false, {
+      force: false,
+    });
   });
 
   it("errors on unknown library", async () => {

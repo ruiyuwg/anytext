@@ -14,7 +14,13 @@
       "description": "TypeScript ORM with SQL-like query builder and schema declarations",
       "version": "0.36",
       "adapter": "llms-full",
-      "url": "https://orm.drizzle.team/llms-full.txt"
+      "url": "https://orm.drizzle.team/llms-full.txt",
+      "preprocess": {
+        "stripPatterns": ["^#{1,6}\\s+-{3,}\\s*$"],
+        "replacePatterns": [
+          { "match": "\\\\<\\\\>", "replace": " + ", "scope": "headings" }
+        ]
+      }
     },
     {
       "id": "hono",
@@ -45,7 +51,14 @@
       "name": "Tailwind CSS",
       "description": "Utility-first CSS framework for rapid UI development",
       "version": "4",
-      "adapter": "manual"
+      "adapter": "html",
+      "url": "https://tailwindcss.com/docs",
+      "crawl": {
+        "contentSelector": "main",
+        "removeSelectors": [".header", ".footer", "nav"],
+        "startPaths": ["/docs/installation", "/docs/utility-first"],
+        "include": ["/docs/"]
+      }
     },
     {
       "id": "trpc",

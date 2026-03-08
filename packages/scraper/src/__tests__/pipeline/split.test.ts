@@ -221,6 +221,46 @@ describe("splitIntoTopics", () => {
     expect(topics.some((t) => t.title === "Routing")).toBe(true);
   });
 
+  it("uses explicit splitDepth when set", () => {
+    // Normally with 1 H1, H2 is primary. But with splitDepth=1, H1 is primary.
+    const md = "# Section A\n\nContent A\n\n## Sub\n\nSub content";
+    const topics = splitIntoTopics(md, {
+      minTokens: 0,
+      maxTokens: 100000,
+      splitDepth: 1,
+    });
+    expect(topics.some((t) => t.title === "Section A")).toBe(true);
+  });
+
+  it("uses splitDepth=3 to split by H3", () => {
+    const md =
+      "## A\n\n### Sub A\n\nContent A\n\n### Sub B\n\nContent B\n\n## B\n\nContent";
+    const topics = splitIntoTopics(md, {
+      minTokens: 0,
+      maxTokens: 100000,
+      splitDepth: 3,
+    });
+    expect(topics.some((t) => t.title === "Sub A")).toBe(true);
+    expect(topics.some((t) => t.title === "Sub B")).toBe(true);
+  });
+
+  it("preserves content as exact substrings of input (fidelity)", () => {
+    const md =
+      "## Section A\n\nContent A with *special* formatting\n\n## Section B\n\nContent B";
+    const topics = splitIntoTopics(md, { minTokens: 0, maxTokens: 100000 });
+    for (const topic of topics) {
+      expect(md).toContain(topic.content);
+    }
+  });
+
+  it("preserves unusual whitespace and formatting", () => {
+    const md =
+      "## Section\n\n-  item with  double spaces\n   continuation\n\n1)  numbered";
+    const topics = splitIntoTopics(md, { minTokens: 0, maxTokens: 100000 });
+    // Content should preserve the exact formatting
+    expect(topics[0]!.content).toContain("-  item with  double spaces");
+  });
+
   it("keeps preamble when it is the only section", () => {
     // Two H1s triggers primaryDepth=1, so single "Start of" H1 is the only section
     const md = "# Start of Docs\n\nSome content here.\n\n# Start of Docs";

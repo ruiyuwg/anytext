@@ -4,6 +4,7 @@ import remarkFrontmatter from "remark-frontmatter";
 import remarkStringify from "remark-stringify";
 import { remove } from "unist-util-remove";
 import type { Node } from "unist";
+import type { PreprocessConfig } from "../types.js";
 
 const stringifyOptions = {
   bullet: "-" as const,
@@ -12,9 +13,12 @@ const stringifyOptions = {
   listItemIndent: "one" as const,
 };
 
-export async function cleanMarkdown(raw: string): Promise<string> {
+export async function cleanMarkdown(
+  raw: string,
+  config?: PreprocessConfig,
+): Promise<string> {
   // Phase 1: Text-level preprocessing to strip non-markdown syntax
-  const stripped = preprocess(raw);
+  const stripped = preprocess(raw, config);
 
   // Phase 2: Parse as standard markdown, remove remaining HTML/YAML nodes
   const processor = unified()
@@ -27,7 +31,9 @@ export async function cleanMarkdown(raw: string): Promise<string> {
   return String(processor.stringify(tree)).trim();
 }
 
-function preprocess(raw: string): string {
+function preprocess(raw: string, config?: PreprocessConfig): string {
+  const stripHtml = config?.stripHtml !== false;
+
   // Work line by line to respect code fences
   const lines = raw.split("\n");
   const result: string[] = [];
@@ -51,54 +57,73 @@ function preprocess(raw: string): string {
     if (/<SYSTEM>/.test(line)) continue;
     if (/<\/SYSTEM>/.test(line)) continue;
 
-    // Skip YAML frontmatter blocks (--- delimited with key: value content)
-    // Handled by remark-frontmatter for the first block; others are stripped below
-
     // Skip section separator lines (long dashes)
     if (/^-{10,}$/.test(line)) continue;
-
-    // Skip heading-style separators (## --- etc.)
-    if (/^#{1,6}\s+-{3,}\s*$/.test(line)) continue;
 
     // Skip admonition syntax (:::tip, :::info, etc.)
     if (/^:::\w*/.test(line)) continue;
 
-    // Strip HTML tags (but not inside code blocks or inline code spans)
+    // Apply custom strip patterns from config
+    if (config?.stripPatterns) {
+      let skip = false;
+      for (const pattern of config.stripPatterns) {
+        if (new RegExp(pattern).test(line)) {
+          skip = true;
+          break;
+        }
+      }
+      if (skip) continue;
+    }
+
     let cleaned = line;
 
-    // Protect inline code spans: replace with placeholders, strip HTML, restore
-    const inlineCodeSpans: string[] = [];
-    cleaned = cleaned.replace(/`[^`]+`/g, (match) => {
-      inlineCodeSpans.push(match);
-      return `\x00IC${inlineCodeSpans.length - 1}\x00`;
-    });
+    // Apply custom replace patterns from config
+    if (config?.replacePatterns) {
+      for (const { match, replace, scope } of config.replacePatterns) {
+        if (scope === "headings") {
+          if (/^#{1,6}\s/.test(cleaned)) {
+            cleaned = cleaned.replace(new RegExp(match, "g"), replace);
+          }
+        } else {
+          cleaned = cleaned.replace(new RegExp(match, "g"), replace);
+        }
+      }
+    }
 
-    // Remove self-closing HTML/JSX tags: <Component />, <br/>, etc.
-    cleaned = cleaned.replace(/<[A-Za-z][^>]*\/>/g, "");
+    // Strip HTML tags (but not inside code blocks or inline code spans)
+    if (stripHtml) {
+      // Protect inline code spans: replace with placeholders, strip HTML, restore
+      const inlineCodeSpans: string[] = [];
+      cleaned = cleaned.replace(/`[^`]+`/g, (match) => {
+        inlineCodeSpans.push(match);
+        return `\x00IC${inlineCodeSpans.length - 1}\x00`;
+      });
 
-    // Remove opening HTML/JSX tags: <Component prop="value">
-    cleaned = cleaned.replace(/<[A-Za-z][A-Za-z0-9]*(?:\s[^>]*)?>(?!`)/g, "");
+      // Remove self-closing HTML/JSX tags: <Component />, <br/>, etc.
+      cleaned = cleaned.replace(/<[A-Za-z][^>]*\/>/g, "");
 
-    // Remove closing HTML/JSX tags: </Component>
-    cleaned = cleaned.replace(/<\/[A-Za-z][A-Za-z0-9]*\s*>/g, "");
+      // Remove opening HTML/JSX tags: <Component prop="value">
+      cleaned = cleaned.replace(
+        /<[A-Za-z][A-Za-z0-9]*(?:\s[^>]*)?>(?!`)/g,
+        "",
+      );
 
-    // Restore inline code spans
-    // eslint-disable-next-line no-control-regex
-    cleaned = cleaned.replace(
-      /\x00IC(\d+)\x00/g,
-      (_, idx) => inlineCodeSpans[Number(idx)]!,
-    );
+      // Remove closing HTML/JSX tags: </Component>
+      cleaned = cleaned.replace(/<\/[A-Za-z][A-Za-z0-9]*\s*>/g, "");
 
-    // Remove HTML comments: <!-- ... -->
-    cleaned = cleaned.replace(/<!--[\s\S]*?-->/g, "");
+      // Restore inline code spans
+      // eslint-disable-next-line no-control-regex
+      cleaned = cleaned.replace(
+        /\x00IC(\d+)\x00/g,
+        (_, idx) => inlineCodeSpans[Number(idx)]!,
+      );
+
+      // Remove HTML comments: <!-- ... -->
+      cleaned = cleaned.replace(/<!--[\s\S]*?-->/g, "");
+    }
 
     // Strip heading ID attributes: {#tracked}
     cleaned = cleaned.replace(/\s*\{#[^}]+\}\s*$/, "");
-
-    // Normalize escaped angle brackets in headings: \<\> → +
-    if (/^#{1,6}\s/.test(cleaned)) {
-      cleaned = cleaned.replace(/\s*\\?<\\?>\s*/g, " + ");
-    }
 
     result.push(cleaned);
   }

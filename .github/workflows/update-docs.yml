@@ -33,6 +33,8 @@ jobs:
 
       - name: Run scraper
         working-directory: packages/scraper
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           if [ -n "${{ inputs.library }}" ]; then
             node dist/index.js --library "${{ inputs.library }}"

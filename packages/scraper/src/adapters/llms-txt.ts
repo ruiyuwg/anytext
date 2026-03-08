@@ -1,26 +1,26 @@
-import { mkdirSync, rmSync, writeFileSync } from "node:fs";
-import path from "node:path";
 import type { Adapter, SourceConfig, ProcessedTopic } from "../types.js";
 import { fetchContent } from "../pipeline/fetch.js";
 import { cleanMarkdown } from "../pipeline/clean.js";
 import { slugify, estimateTokens, truncate } from "../utils.js";
-import { getRegistryDir } from "../pipeline/manifest.js";
 import { visit } from "unist-util-visit";
 import { unified } from "unified";
 import remarkParse from "remark-parse";
 import type { Link, Text } from "mdast";
 
 export const llmsTxtAdapter: Adapter = {
-  async process(source: SourceConfig): Promise<ProcessedTopic[]> {
+  async process(
+    source: SourceConfig,
+    prefetchedContent?: string,
+  ): Promise<ProcessedTopic[]> {
     if (!source.url) {
       throw new Error(`Source ${source.id} has no URL configured`);
     }
 
-    const index = await fetchContent(source.url);
+    const index = prefetchedContent ?? (await fetchContent(source.url));
     console.log(`  Fetched index (${index.length} chars)`);
 
     // Parse out .md links from the index
-    const links = extractMarkdownLinks(index);
+    const links = extractMarkdownLinks(index, source.url);
     console.log(`  Found ${links.length} doc links`);
 
     const topics: ProcessedTopic[] = [];
@@ -29,7 +29,7 @@ export const llmsTxtAdapter: Adapter = {
     for (const link of links) {
       try {
         const raw = await fetchContent(link.url);
-        const cleaned = await cleanMarkdown(raw);
+        const cleaned = await cleanMarkdown(raw, source.preprocess);
         const tokens = estimateTokens(cleaned);
 
         if (tokens < 100) {
@@ -77,17 +77,6 @@ export const llmsTxtAdapter: Adapter = {
       return topic;
     });
 
-    // Write doc files
-    const docsDir = path.join(getRegistryDir(), "docs", source.id);
-    rmSync(docsDir, { recursive: true, force: true });
-    mkdirSync(docsDir, { recursive: true });
-
-    for (const topic of finalTopics) {
-      const filePath = path.join(docsDir, `${topic.id}.md`);
-      writeFileSync(filePath, topic.content + "\n", "utf-8");
-      console.log(`  Wrote ${topic.id}.md (${topic.tokens} tokens)`);
-    }
-
     return finalTopics;
   },
 };
@@ -97,7 +86,10 @@ interface DocLink {
   url: string;
 }
 
-function extractMarkdownLinks(indexContent: string): DocLink[] {
+function extractMarkdownLinks(
+  indexContent: string,
+  baseUrl: string,
+): DocLink[] {
   const tree = unified().use(remarkParse).parse(indexContent);
   const links: DocLink[] = [];
 
@@ -106,8 +98,7 @@ function extractMarkdownLinks(indexContent: string): DocLink[] {
     if (url.endsWith(".md") || url.includes(".md?") || url.includes("/docs/")) {
       const title = extractTextContent(node);
       if (title) {
-        // Resolve relative URLs
-        const resolvedUrl = url.startsWith("http") ? url : url;
+        const resolvedUrl = new URL(url, baseUrl).href;
         links.push({ title, url: resolvedUrl });
       }
     }

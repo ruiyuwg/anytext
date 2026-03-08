@@ -3,11 +3,21 @@ import type { SourceConfig, ProcessedTopic } from "../types.js";
 
 const mockLlmsFullProcess = vi.fn();
 const mockLlmsTxtProcess = vi.fn();
-const mockManualProcess = vi.fn();
+const mockHtmlProcess = vi.fn();
+const mockGithubProcess = vi.fn();
+const mockSitemapProcess = vi.fn();
 const mockReadManifest = vi.fn();
 const mockWriteManifest = vi.fn();
 const mockMergeLibrary = vi.fn();
 const mockReadFileSync = vi.fn();
+const mockWriteTopics = vi.fn();
+const mockCommitStaged = vi.fn();
+const mockCleanupStaging = vi.fn();
+const mockFetchContent = vi.fn();
+const mockReadHashes = vi.fn();
+const mockWriteHashes = vi.fn();
+const mockHasChanged = vi.fn();
+const mockHashContent = vi.fn();
 
 vi.mock("node:fs", () => ({
   readFileSync: (...args: unknown[]) => mockReadFileSync(...args),
@@ -22,15 +32,41 @@ vi.mock("../adapters/llms-txt.js", () => ({
     process: (...args: unknown[]) => mockLlmsTxtProcess(...args),
   },
 }));
-vi.mock("../adapters/manual.js", () => ({
-  manualAdapter: {
-    process: (...args: unknown[]) => mockManualProcess(...args),
+vi.mock("../adapters/html.js", () => ({
+  htmlAdapter: {
+    process: (...args: unknown[]) => mockHtmlProcess(...args),
+  },
+}));
+vi.mock("../adapters/github.js", () => ({
+  githubAdapter: {
+    process: (...args: unknown[]) => mockGithubProcess(...args),
+  },
+}));
+vi.mock("../adapters/sitemap.js", () => ({
+  sitemapAdapter: {
+    process: (...args: unknown[]) => mockSitemapProcess(...args),
   },
 }));
 vi.mock("../pipeline/manifest.js", () => ({
   readManifest: (...args: unknown[]) => mockReadManifest(...args),
   writeManifest: (...args: unknown[]) => mockWriteManifest(...args),
   mergeLibrary: (...args: unknown[]) => mockMergeLibrary(...args),
+}));
+vi.mock("../pipeline/write.js", () => ({
+  writeTopics: (...args: unknown[]) => mockWriteTopics(...args),
+  commitStaged: (...args: unknown[]) => mockCommitStaged(...args),
+  cleanupStaging: (...args: unknown[]) => mockCleanupStaging(...args),
+}));
+vi.mock("../pipeline/fetch.js", () => ({
+  fetchContent: (...args: unknown[]) => mockFetchContent(...args),
+}));
+vi.mock("../pipeline/hashes.js", () => ({
+  readHashes: (...args: unknown[]) => mockReadHashes(...args),
+  writeHashes: (...args: unknown[]) => mockWriteHashes(...args),
+  hasChanged: (...args: unknown[]) => mockHasChanged(...args),
+}));
+vi.mock("../utils.js", () => ({
+  hashContent: (...args: unknown[]) => mockHashContent(...args),
 }));
 
 const topic: ProcessedTopic = {
@@ -56,11 +92,21 @@ beforeEach(() => {
   vi.spyOn(console, "error").mockImplementation(() => {});
   mockLlmsFullProcess.mockReset();
   mockLlmsTxtProcess.mockReset();
-  mockManualProcess.mockReset();
+  mockHtmlProcess.mockReset();
+  mockGithubProcess.mockReset();
+  mockSitemapProcess.mockReset();
   mockReadManifest.mockReset();
   mockWriteManifest.mockReset();
   mockMergeLibrary.mockReset();
   mockReadFileSync.mockReset();
+  mockWriteTopics.mockReset();
+  mockCommitStaged.mockReset();
+  mockCleanupStaging.mockReset();
+  mockFetchContent.mockReset();
+  mockReadHashes.mockReset().mockReturnValue({});
+  mockWriteHashes.mockReset();
+  mockHasChanged.mockReset().mockReturnValue(true);
+  mockHashContent.mockReset().mockReturnValue("fakehash");
 });
 
 describe("loadSources", () => {
@@ -90,7 +136,7 @@ describe("processSource", () => {
 
     const { processSource } = await import("../scrape.js");
     await processSource(baseSource, false);
-    expect(mockLlmsFullProcess).toHaveBeenCalledWith(baseSource);
+    expect(mockLlmsFullProcess).toHaveBeenCalled();
   });
 
   it("selects llms-txt adapter", async () => {
@@ -112,25 +158,6 @@ describe("processSource", () => {
     expect(mockLlmsTxtProcess).toHaveBeenCalled();
   });
 
-  it("selects manual adapter", async () => {
-    mockManualProcess.mockResolvedValue([topic]);
-    mockReadManifest.mockReturnValue({
-      version: 1,
-      updatedAt: "2025-01-01",
-      libraries: [],
-    });
-    mockMergeLibrary.mockReturnValue({
-      version: 2,
-      updatedAt: "2025-01-01",
-      libraries: [],
-    });
-
-    const { processSource } = await import("../scrape.js");
-    const source = { ...baseSource, adapter: "manual" as const };
-    await processSource(source, false);
-    expect(mockManualProcess).toHaveBeenCalled();
-  });
-
   it("throws on unknown adapter", async () => {
     const { processSource } = await import("../scrape.js");
     const source = { ...baseSource, adapter: "unknown" as "llms-full" };
@@ -147,9 +174,10 @@ describe("processSource", () => {
 
     expect(result).toEqual([]);
     expect(mockWriteManifest).not.toHaveBeenCalled();
+    expect(mockWriteTopics).not.toHaveBeenCalled();
   });
 
-  it("updates manifest when not dry-run", async () => {
+  it("calls writeTopics, commitStaged, and updates manifest when not dry-run", async () => {
     mockLlmsFullProcess.mockResolvedValue([topic]);
     mockReadManifest.mockReturnValue({
       version: 1,
@@ -166,16 +194,84 @@ describe("processSource", () => {
     const { processSource } = await import("../scrape.js");
     await processSource(baseSource, false);
 
+    expect(mockWriteTopics).toHaveBeenCalledWith("react", [topic]);
+    expect(mockCommitStaged).toHaveBeenCalledWith("react");
     expect(mockWriteManifest).toHaveBeenCalledWith(updatedManifest);
+
+    // writeTopics before commitStaged
+    const writeOrder = mockWriteTopics.mock.invocationCallOrder[0]!;
+    const commitOrder = mockCommitStaged.mock.invocationCallOrder[0]!;
+    expect(writeOrder).toBeLessThan(commitOrder);
   });
 
-  it("does not write manifest in dry-run mode", async () => {
+  it("does not write manifest or topics in dry-run mode", async () => {
     mockLlmsFullProcess.mockResolvedValue([topic]);
 
     const { processSource } = await import("../scrape.js");
     await processSource(baseSource, true);
 
     expect(mockWriteManifest).not.toHaveBeenCalled();
+    expect(mockWriteTopics).not.toHaveBeenCalled();
+    expect(mockCommitStaged).not.toHaveBeenCalled();
+  });
+
+  it("skips processing when content unchanged", async () => {
+    mockFetchContent.mockResolvedValue("raw content");
+    mockHasChanged.mockReturnValue(false);
+
+    const { processSource } = await import("../scrape.js");
+    const hashes = { react: "oldhash" };
+    const result = await processSource(baseSource, false, { hashes });
+
+    expect(result).toEqual([]);
+    expect(mockLlmsFullProcess).not.toHaveBeenCalled();
+  });
+
+  it("processes when content changed", async () => {
+    mockFetchContent.mockResolvedValue("raw content");
+    mockHasChanged.mockReturnValue(true);
+    mockLlmsFullProcess.mockResolvedValue([topic]);
+    mockReadManifest.mockReturnValue({
+      version: 1,
+      updatedAt: "2025-01-01",
+      libraries: [],
+    });
+    mockMergeLibrary.mockReturnValue({
+      version: 2,
+      updatedAt: "2025-01-01",
+      libraries: [],
+    });
+
+    const { processSource } = await import("../scrape.js");
+    const hashes = { react: "oldhash" };
+    const result = await processSource(baseSource, false, { hashes });
+
+    expect(result).toEqual([topic]);
+    expect(mockLlmsFullProcess).toHaveBeenCalledWith(
+      baseSource,
+      "raw content",
+    );
+  });
+
+  it("skips hash check with --force", async () => {
+    mockLlmsFullProcess.mockResolvedValue([topic]);
+    mockReadManifest.mockReturnValue({
+      version: 1,
+      updatedAt: "2025-01-01",
+      libraries: [],
+    });
+    mockMergeLibrary.mockReturnValue({
+      version: 2,
+      updatedAt: "2025-01-01",
+      libraries: [],
+    });
+
+    const { processSource } = await import("../scrape.js");
+    const hashes = { react: "oldhash" };
+    await processSource(baseSource, false, { force: true, hashes });
+
+    expect(mockFetchContent).not.toHaveBeenCalled();
+    expect(mockLlmsFullProcess).toHaveBeenCalled();
   });
 });
 
@@ -240,5 +336,68 @@ describe("processAll", () => {
     expect(logSpy).toHaveBeenCalledWith(
       expect.stringContaining("1/1 sources processed successfully"),
     );
+  });
+
+  it("calls cleanupStaging in finally block", async () => {
+    mockLlmsFullProcess.mockResolvedValue([topic]);
+    mockReadManifest.mockReturnValue({
+      version: 1,
+      updatedAt: "2025-01-01",
+      libraries: [],
+    });
+    mockMergeLibrary.mockReturnValue({
+      version: 2,
+      updatedAt: "2025-01-01",
+      libraries: [],
+    });
+
+    const { processAll } = await import("../scrape.js");
+    await processAll([baseSource], false);
+    expect(mockCleanupStaging).toHaveBeenCalled();
+  });
+
+  it("calls cleanupStaging even on error", async () => {
+    mockLlmsFullProcess.mockRejectedValue(new Error("fail"));
+
+    const { processAll } = await import("../scrape.js");
+    await processAll([baseSource], false);
+    expect(mockCleanupStaging).toHaveBeenCalled();
+  });
+
+  it("does not cleanup staging in dry-run mode", async () => {
+    mockLlmsFullProcess.mockResolvedValue([topic]);
+
+    const { processAll } = await import("../scrape.js");
+    await processAll([baseSource], true);
+    expect(mockCleanupStaging).not.toHaveBeenCalled();
+  });
+
+  it("reads and writes hashes around processing", async () => {
+    mockLlmsFullProcess.mockResolvedValue([topic]);
+    mockReadManifest.mockReturnValue({
+      version: 1,
+      updatedAt: "2025-01-01",
+      libraries: [],
+    });
+    mockMergeLibrary.mockReturnValue({
+      version: 2,
+      updatedAt: "2025-01-01",
+      libraries: [],
+    });
+
+    const { processAll } = await import("../scrape.js");
+    await processAll([baseSource], false);
+
+    expect(mockReadHashes).toHaveBeenCalled();
+    expect(mockWriteHashes).toHaveBeenCalled();
+  });
+
+  it("does not write hashes in dry-run mode", async () => {
+    mockLlmsFullProcess.mockResolvedValue([topic]);
+
+    const { processAll } = await import("../scrape.js");
+    await processAll([baseSource], true);
+
+    expect(mockWriteHashes).not.toHaveBeenCalled();
   });
 });

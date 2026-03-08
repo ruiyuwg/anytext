@@ -72,7 +72,7 @@ The registry is a collection of pre-processed markdown files committed to this r
 | Hono         | v4      | 63     | llms-full.txt |
 | Next.js      | v15     | 287    | llms-full.txt |
 | React        | v19     | 161    | llms.txt      |
-| Tailwind CSS | v4      | 6      | manual        |
+| Tailwind CSS | v4      | —      | html          |
 | tRPC         | v11     | 62     | llms-full.txt |
 | Zod          | v3      | 28     | llms-full.txt |
 
@@ -80,22 +80,11 @@ Docs are automatically updated weekly via GitHub Actions. Contributions welcome.
 
 ## Contributing
 
-### Adding a New Library (Automated)
+### Adding a New Library
 
-1. Add an entry to `packages/scraper/sources.json`
+1. Add an entry to `packages/scraper/sources.json` — pick the right adapter for the docs source (`llms-full`, `llms-txt`, `html`, `github`, or `sitemap`). See [CONTRIBUTING.md](CONTRIBUTING.md) for full config reference.
 2. Run the scraper: `cd packages/scraper && pnpm build && node dist/index.js --library <id>`
 3. Verify the output in `registry/docs/<id>/` and `registry/manifest.json`
-4. Submit a PR
-
-### Adding Documentation (Manual)
-
-1. Create markdown files in `registry/docs/{library}/`
-2. Run the manual adapter to update the manifest: `node dist/index.js --library <id>`
-3. Follow the doc quality guidelines:
-   - Pure markdown — no MDX, no JSX, no HTML
-   - Self-contained — understandable without other topics
-   - Right-sized — 2K–10K tokens per topic
-   - API-focused — signatures, parameters, examples
 4. Submit a PR
 
 ### Development

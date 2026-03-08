@@ -22,9 +22,10 @@ describe("cleanMarkdown", () => {
     expect(result).toContain("Content");
   });
 
-  it("removes heading-style separators (## ---)", async () => {
+  it("removes heading-style separators (## ---) via config stripPatterns", async () => {
     const input = "# Title\n\n## ---\n\nContent";
-    const result = await cleanMarkdown(input);
+    const config = { stripPatterns: ["^#{1,6}\\s+-{3,}\\s*$"] };
+    const result = await cleanMarkdown(input, config);
     expect(result).not.toContain("## ---");
   });
 
@@ -64,18 +65,25 @@ describe("cleanMarkdown", () => {
     expect(result).not.toContain("{#my-section}");
   });
 
-  it("normalizes escaped angle brackets in headings", async () => {
+  it("normalizes escaped angle brackets in headings via config replacePatterns", async () => {
     const input = "## Select\\<\\>";
-    const result = await cleanMarkdown(input);
+    const config = {
+      replacePatterns: [
+        { match: "\\\\<\\\\>", replace: " + ", scope: "headings" as const },
+      ],
+    };
+    const result = await cleanMarkdown(input, config);
     expect(result).not.toContain("\\<\\>");
   });
 
-  it("does not normalize angle brackets on non-heading lines", async () => {
-    // The preprocess step only applies angle bracket normalization to heading lines
-    // On non-heading lines, escaped brackets pass through preprocess then remark handles them
+  it("does not apply heading-scoped replacements to non-heading lines", async () => {
     const input = "## Heading\\<\\>\n\nNormal paragraph text";
-    const result = await cleanMarkdown(input);
-    // Heading should have normalization applied
+    const config = {
+      replacePatterns: [
+        { match: "\\\\<\\\\>", replace: " + ", scope: "headings" as const },
+      ],
+    };
+    const result = await cleanMarkdown(input, config);
     expect(result).not.toContain("\\<\\>");
     expect(result).toContain("Normal paragraph text");
   });
@@ -150,5 +158,36 @@ describe("cleanMarkdown", () => {
     const result = await cleanMarkdown(input);
     expect(result).not.toContain("slug:");
     expect(result).toContain("## Section");
+  });
+
+  it("applies custom stripPatterns from config", async () => {
+    const input = "# Title\n\nREMOVE_ME line\n\nKeep this";
+    const config = { stripPatterns: ["^REMOVE_ME"] };
+    const result = await cleanMarkdown(input, config);
+    expect(result).not.toContain("REMOVE_ME");
+    expect(result).toContain("Keep this");
+  });
+
+  it("applies custom replacePatterns with scope all", async () => {
+    const input = "Replace FOO here\n\n# Also FOO in heading";
+    const config = {
+      replacePatterns: [{ match: "FOO", replace: "BAR" }],
+    };
+    const result = await cleanMarkdown(input, config);
+    expect(result).toContain("BAR");
+    expect(result).not.toContain("FOO");
+  });
+
+  it("preserves HTML when stripHtml is false", async () => {
+    const input = "Before <div>content</div> after";
+    const config = { stripHtml: false };
+    const result = await cleanMarkdown(input, config);
+    expect(result).toContain("<div>");
+  });
+
+  it("strips HTML by default (no config)", async () => {
+    const input = "Before <div>content</div> after";
+    const result = await cleanMarkdown(input);
+    expect(result).not.toContain("<div");
   });
 });

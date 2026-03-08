@@ -1,8 +1,15 @@
 import { loadSources, processSource, processAll } from "./scrape.js";
 
-function parseArgs(args: string[]): { library?: string; dryRun: boolean } {
+function parseArgs(args: string[]): {
+  library?: string;
+  dryRun: boolean;
+  force: boolean;
+  concurrency: number;
+} {
   let library: string | undefined;
   let dryRun = false;
+  let force = false;
+  let concurrency = 4;
 
   for (let i = 0; i < args.length; i++) {
     const arg = args[i];
@@ -10,14 +17,20 @@ function parseArgs(args: string[]): { library?: string; dryRun: boolean } {
       library = args[++i];
     } else if (arg === "--dry-run") {
       dryRun = true;
+    } else if (arg === "--force") {
+      force = true;
+    } else if (arg === "--concurrency" && i + 1 < args.length) {
+      concurrency = parseInt(args[++i]!, 10) || 4;
     }
   }
 
-  return { library, dryRun };
+  return { library, dryRun, force, concurrency };
 }
 
 async function main(): Promise<void> {
-  const { library, dryRun } = parseArgs(process.argv.slice(2));
+  const { library, dryRun, force, concurrency } = parseArgs(
+    process.argv.slice(2),
+  );
   const sources = loadSources();
 
   if (dryRun) {
@@ -31,9 +44,9 @@ async function main(): Promise<void> {
       console.error(`Available: ${sources.map((s) => s.id).join(", ")}`);
       process.exit(1);
     }
-    await processSource(source, dryRun);
+    await processSource(source, dryRun, { force });
   } else {
-    const result = await processAll(sources, dryRun);
+    const result = await processAll(sources, dryRun, { force, concurrency });
     if (result.failed > 0) {
       process.exit(1);
     }

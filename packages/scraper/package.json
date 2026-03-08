@@ -12,10 +12,12 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "cheerio": "^1.2.0",
     "remark-frontmatter": "^5.0.0",
     "remark-mdx": "^3.1.0",
     "remark-parse": "^11.0.0",
     "remark-stringify": "^11.0.0",
+    "turndown": "^7.2.2",
     "unified": "^11.0.5",
     "unist-util-remove": "^4.0.0",
     "unist-util-visit": "^5.0.0"
@@ -25,6 +27,7 @@
     "@repo/typescript-config": "workspace:*",
     "@types/mdast": "^4.0.4",
     "@types/node": "^22.15.3",
+    "@types/turndown": "^5.0.6",
     "@types/unist": "^3.0.3",
     "@vitest/coverage-v8": "^4.0.18",
     "typescript": "5.9.2",

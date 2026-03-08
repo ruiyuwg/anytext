@@ -1,17 +1,47 @@
+export interface PreprocessConfig {
+  stripPatterns?: string[];
+  replacePatterns?: Array<{
+    match: string;
+    replace: string;
+    scope?: "all" | "headings";
+  }>;
+  stripHtml?: boolean;
+}
+
 export interface SourceConfig {
   id: string;
   name: string;
   description: string;
   version: string;
-  adapter: "llms-full" | "llms-txt" | "manual";
+  adapter: "llms-full" | "llms-txt" | "html" | "github" | "sitemap";
   url?: string;
   splitConfig?: SplitConfig;
   topicOverrides?: Record<string, Partial<ProcessedTopic>>;
+  preprocess?: PreprocessConfig;
+  crawl?: CrawlConfig;
+  github?: GithubConfig;
+}
+
+export interface CrawlConfig {
+  contentSelector?: string;
+  removeSelectors?: string[];
+  startPaths?: string[];
+  include?: string[];
+  exclude?: string[];
+}
+
+export interface GithubConfig {
+  repo: string;
+  branch?: string;
+  docsPath?: string;
+  include?: string[];
+  exclude?: string[];
 }
 
 export interface SplitConfig {
   minTokens?: number;
   maxTokens?: number;
+  splitDepth?: number;
 }
 
 export interface ProcessedTopic {
@@ -24,7 +54,10 @@ export interface ProcessedTopic {
 }
 
 export interface Adapter {
-  process(source: SourceConfig): Promise<ProcessedTopic[]>;
+  process(
+    source: SourceConfig,
+    prefetchedContent?: string,
+  ): Promise<ProcessedTopic[]>;
 }
 
 export interface SourcesFile {

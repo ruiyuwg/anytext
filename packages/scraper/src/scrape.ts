@@ -8,17 +8,29 @@ import type {
 } from "./types.js";
 import { llmsFullAdapter } from "./adapters/llms-full.js";
 import { llmsTxtAdapter } from "./adapters/llms-txt.js";
-import { manualAdapter } from "./adapters/manual.js";
+import { htmlAdapter } from "./adapters/html.js";
+import { githubAdapter } from "./adapters/github.js";
+import { sitemapAdapter } from "./adapters/sitemap.js";
 import {
   readManifest,
   writeManifest,
   mergeLibrary,
 } from "./pipeline/manifest.js";
+import {
+  writeTopics,
+  commitStaged,
+  cleanupStaging,
+} from "./pipeline/write.js";
+import { fetchContent } from "./pipeline/fetch.js";
+import { readHashes, writeHashes, hasChanged } from "./pipeline/hashes.js";
+import { hashContent } from "./utils.js";
 
-const adapters = {
+const adapters: Record<string, import("./types.js").Adapter> = {
   "llms-full": llmsFullAdapter,
   "llms-txt": llmsTxtAdapter,
-  manual: manualAdapter,
+  html: htmlAdapter,
+  github: githubAdapter,
+  sitemap: sitemapAdapter,
 };
 
 export function loadSources(): SourceConfig[] {
@@ -31,6 +43,7 @@ export function loadSources(): SourceConfig[] {
 export async function processSource(
   source: SourceConfig,
   dryRun: boolean,
+  options?: { force?: boolean; hashes?: Record<string, string> },
 ): Promise<ProcessedTopic[]> {
   console.log(`\nProcessing ${source.name} (${source.adapter})...`);
 
@@ -39,7 +52,17 @@ export async function processSource(
     throw new Error(`Unknown adapter: ${source.adapter}`);
   }
 
-  const topics = await adapter.process(source);
+  // Incremental update check: fetch content and compare hash
+  let prefetchedContent: string | undefined;
+  if (source.url && options?.hashes && !options.force) {
+    prefetchedContent = await fetchContent(source.url);
+    if (!hasChanged(source.id, prefetchedContent, options.hashes)) {
+      console.log(`  Skipping ${source.id} (unchanged)`);
+      return [];
+    }
+  }
+
+  const topics = await adapter.process(source, prefetchedContent);
 
   if (topics.length === 0) {
     console.log(`  No topics generated for ${source.id}`);
@@ -47,6 +70,9 @@ export async function processSource(
   }
 
   if (!dryRun) {
+    writeTopics(source.id, topics);
+    commitStaged(source.id);
+
     const library: ManifestLibrary = {
       id: source.id,
       name: source.name,
@@ -66,6 +92,11 @@ export async function processSource(
     const updated = mergeLibrary(manifest, library);
     writeManifest(updated);
     console.log(`  Updated manifest (v${updated.version})`);
+
+    // Update hash for this source
+    if (prefetchedContent && options?.hashes) {
+      options.hashes[source.id] = hashContent(prefetchedContent);
+    }
   } else {
     console.log(`  [dry-run] Would write ${topics.length} topics to manifest`);
     for (const t of topics) {
@@ -79,20 +110,45 @@ export async function processSource(
 export async function processAll(
   sources: SourceConfig[],
   dryRun: boolean,
+  options?: { force?: boolean; concurrency?: number },
 ): Promise<{ total: number; failed: number }> {
+  const hashes = dryRun ? {} : readHashes();
+  const concurrency = options?.concurrency ?? 4;
   let failed = 0;
-  for (const source of sources) {
-    try {
-      await processSource(source, dryRun);
-    } catch (err) {
-      failed++;
-      console.error(
-        `  ERROR processing ${source.id}: ${(err as Error).message}`,
+  try {
+    // Process sources in batches for concurrency
+    for (let i = 0; i < sources.length; i += concurrency) {
+      const batch = sources.slice(i, i + concurrency);
+      const results = await Promise.allSettled(
+        batch.map((source) =>
+          processSource(source, dryRun, {
+            force: options?.force,
+            hashes,
+          }),
+        ),
       );
+      for (let j = 0; j < results.length; j++) {
+        const result = results[j]!;
+        if (result.status === "rejected") {
+          failed++;
+          console.error(
+            `  ERROR processing ${batch[j]!.id}: ${(result.reason as Error).message}`,
+          );
+        }
+      }
+    }
+    console.log(
+      `\nSummary: ${sources.length - failed}/${sources.length} sources processed successfully`,
+    );
+
+    if (!dryRun) {
+      writeHashes(hashes);
+    }
+
+    return { total: sources.length, failed };
+  } finally {
+    if (!dryRun) {
+      cleanupStaging();
     }
   }
-  console.log(
-    `\nSummary: ${sources.length - failed}/${sources.length} sources processed successfully`,
-  );
-  return { total: sources.length, failed };
 }
